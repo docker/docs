@@ -1,0 +1,2116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Installations on Docker Docs</title>
+    <link>http://localhost/installation/</link>
+    <description>Recent content in Installations on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/installation/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Amazon EC2 Installation</title>
+      <link>http://localhost/installation/amazon/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/amazon/</guid>
+      <description>
+
+&lt;h2 id=&#34;amazon-ec2&#34;&gt;Amazon EC2&lt;/h2&gt;
+
+&lt;p&gt;You can install Docker on any AWS EC2 Amazon Machine Image (AMI) which runs an
+operating system that Docker supports. Amazon&amp;rsquo;s website includes specific
+instructions for &lt;a href=&#34;http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html#install_docker&#34;&gt;installing on Amazon
+Linux&lt;/a&gt;. To install on
+another AMI, follow the instructions for its specific operating
+system in this installation guide.&lt;/p&gt;
+
+&lt;p&gt;For detailed information on Amazon AWS support for Docker, refer to &lt;a href=&#34;http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html&#34;&gt;Amazon&amp;rsquo;s
+documentation&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install on Joyent Public Cloud</title>
+      <link>http://localhost/installation/joyent/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/joyent/</guid>
+      <description>
+
+&lt;h2 id=&#34;install-on-joyent-public-cloud&#34;&gt;Install on Joyent Public Cloud&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Sign in to the &lt;a href=&#34;https://my.joyent.com/&#34;&gt;Joyent customer portal&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.joyent.com/jpc/managing-docker-containers/creating-a-docker-host&#34;&gt;Create a Docker host&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;start-and-manage-containers&#34;&gt;Start and manage containers&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.joyent.com/jpc/managing-docker-containers/starting-a-container&#34;&gt;Start containers in the web UI&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://docs.joyent.com/jpc/managing-docker-containers/access-your-jpc-docker-hosts-from-the-docker-cli&#34;&gt;Configure the Docker CLI on your laptop&lt;/a&gt; to connect to the remote host to launch and manage containers.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;SSH into the Docker host.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Launch containers using the Docker CLI.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;Continue with the &lt;a href=&#34;http://localhost/installation/installation/userguide/&#34;&gt;Docker user guide&lt;/a&gt;, read Joyent&amp;rsquo;s &lt;a href=&#34;https://www.joyent.com/blog/first-steps-with-joyents-container-service&#34;&gt;getting started blog post&lt;/a&gt;, and &lt;a href=&#34;https://docs.joyent.com/jpc/managing-docker-containers&#34;&gt;full documentation&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation from binaries</title>
+      <link>http://localhost/installation/binaries/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/binaries/</guid>
+      <description>
+
+&lt;h1 id=&#34;binaries&#34;&gt;Binaries&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;This instruction set is meant for hackers who want to try out Docker
+on a variety of environments.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Before following these directions, you should really check if a packaged
+version of Docker is already available for your distribution. We have
+packages for many distributions, and more keep showing up all the time!&lt;/p&gt;
+
+&lt;h2 id=&#34;check-runtime-dependencies&#34;&gt;Check runtime dependencies&lt;/h2&gt;
+
+&lt;p&gt;To run properly, docker needs the following software to be installed at
+runtime:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;iptables version 1.4 or later&lt;/li&gt;
+&lt;li&gt;Git version 1.7 or later&lt;/li&gt;
+&lt;li&gt;procps (or similar provider of a &amp;ldquo;ps&amp;rdquo; executable)&lt;/li&gt;
+&lt;li&gt;XZ Utils 4.9 or later&lt;/li&gt;
+&lt;li&gt;a &lt;a href=&#34;https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount&#34;&gt;properly mounted&lt;/a&gt;
+cgroupfs hierarchy (having a single, all-encompassing &amp;ldquo;cgroup&amp;rdquo; mount
+point &lt;a href=&#34;https://github.com/docker/docker/issues/2683&#34;&gt;is&lt;/a&gt;
+&lt;a href=&#34;https://github.com/docker/docker/issues/3485&#34;&gt;not&lt;/a&gt;
+&lt;a href=&#34;https://github.com/docker/docker/issues/4568&#34;&gt;sufficient&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;check-kernel-dependencies&#34;&gt;Check kernel dependencies&lt;/h2&gt;
+
+&lt;p&gt;Docker in daemon mode has specific kernel requirements. For details,
+check your distribution in &lt;a href=&#34;http://localhost/installation/installation/#installation-list&#34;&gt;&lt;em&gt;Installation&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A 3.10 Linux kernel is the minimum requirement for Docker.
+Kernels older than 3.10 lack some of the features required to run Docker
+containers. These older versions are known to have bugs which cause data loss
+and frequently panic under certain conditions.&lt;/p&gt;
+
+&lt;p&gt;The latest minor version (3.x.y) of the 3.10 (or a newer maintained version)
+Linux kernel is recommended. Keeping the kernel up to date with the latest
+minor version will ensure critical kernel bugs get fixed.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;:
+Installing custom kernels and kernel packages is probably not
+supported by your Linux distribution&amp;rsquo;s vendor. Please make sure to
+ask your vendor about Docker support first before attempting to
+install custom kernels on your distribution.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;:
+Installing a newer kernel might not be enough for some distributions
+which provide packages which are too old or incompatible with
+newer kernels.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Note that Docker also has a client mode, which can run on virtually any
+Linux kernel (it even builds on OS X!).&lt;/p&gt;
+
+&lt;h2 id=&#34;enable-apparmor-and-selinux-when-possible&#34;&gt;Enable AppArmor and SELinux when possible&lt;/h2&gt;
+
+&lt;p&gt;Please use AppArmor or SELinux if your Linux distribution supports
+either of the two. This helps improve security and blocks certain
+types of exploits. Your distribution&amp;rsquo;s documentation should provide
+detailed steps on how to enable the recommended security mechanism.&lt;/p&gt;
+
+&lt;p&gt;Some Linux distributions enable AppArmor or SELinux by default and
+they run a kernel which doesn&amp;rsquo;t meet the minimum requirements (3.10
+or newer). Updating the kernel to 3.10 or newer on such a system
+might not be enough to start Docker and run containers.
+Incompatibilities between the version of AppArmor/SELinux user
+space utilities provided by the system and the kernel could prevent
+Docker from running, from starting containers or, cause containers to
+exhibit unexpected behaviour.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;:
+If either of the security mechanisms is enabled, it should not be
+disabled to make Docker or its containers run. This will reduce
+security in that environment, lose support from the distribution&amp;rsquo;s
+vendor for the system, and might break regulations and security
+policies in heavily regulated environments.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;get-the-docker-binary&#34;&gt;Get the Docker binary&lt;/h2&gt;
+
+&lt;p&gt;You can download either the latest release binary or a specific version.
+After downloading a binary file, you must set the file&amp;rsquo;s execute bit to run it.&lt;/p&gt;
+
+&lt;p&gt;To set the file&amp;rsquo;s execute bit on Linux and OS X:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ chmod +x docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To get the list of stable release version numbers from Github, view the
+&lt;code&gt;docker/docker&lt;/code&gt; &lt;a href=&#34;https://github.com/docker/docker/releases&#34;&gt;releases page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;1) You can get the MD5 and SHA256 hashes by appending .md5 and .sha256 to the URLs respectively&lt;/p&gt;
+
+&lt;p&gt;2) You can get the compressed binaries by appending .tgz to the URLs&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;get-the-linux-binary&#34;&gt;Get the Linux binary&lt;/h3&gt;
+
+&lt;p&gt;To download the latest version for Linux, use the
+following URLs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://get.docker.com/builds/Linux/i386/docker-latest
+
+https://get.docker.com/builds/Linux/x86_64/docker-latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To download a specific version for Linux, use the
+following URL patterns:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://get.docker.com/builds/Linux/i386/docker-&amp;lt;version&amp;gt;
+
+https://get.docker.com/builds/Linux/x86_64/docker-&amp;lt;version&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://get.docker.com/builds/Linux/i386/docker-1.6.0
+
+https://get.docker.com/builds/Linux/x86_64/docker-1.6.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;get-the-mac-os-x-binary&#34;&gt;Get the Mac OS X binary&lt;/h3&gt;
+
+&lt;p&gt;The Mac OS X binary is only a client. You cannot use it to run the &lt;code&gt;docker&lt;/code&gt;
+daemon. To download the latest version for Mac OS X, use the following URLs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://get.docker.com/builds/Darwin/i386/docker-latest
+
+https://get.docker.com/builds/Darwin/x86_64/docker-latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To download a specific version for Mac OS X, use the
+following URL patterns:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://get.docker.com/builds/Darwin/i386/docker-&amp;lt;version&amp;gt;
+
+https://get.docker.com/builds/Darwin/x86_64/docker-&amp;lt;version&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://get.docker.com/builds/Darwin/i386/docker-1.6.0
+
+https://get.docker.com/builds/Darwin/x86_64/docker-1.6.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;get-the-windows-binary&#34;&gt;Get the Windows binary&lt;/h3&gt;
+
+&lt;p&gt;You can only download the Windows client binary for version &lt;code&gt;1.6.0&lt;/code&gt; onwards.
+Moreover, the binary is only a client, you cannot use it to run the &lt;code&gt;docker&lt;/code&gt; daemon.
+To download the latest version for Windows, use the following URLs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://get.docker.com/builds/Windows/i386/docker-latest.exe
+
+https://get.docker.com/builds/Windows/x86_64/docker-latest.exe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To download a specific version for Windows, use the following URL pattern:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://get.docker.com/builds/Windows/i386/docker-&amp;lt;version&amp;gt;.exe
+
+https://get.docker.com/builds/Windows/x86_64/docker-&amp;lt;version&amp;gt;.exe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://get.docker.com/builds/Windows/i386/docker-1.6.0.exe
+
+https://get.docker.com/builds/Windows/x86_64/docker-1.6.0.exe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;run-the-docker-daemon&#34;&gt;Run the Docker daemon&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;# start the docker in daemon mode from the directory you unpacked
+$ sudo ./docker -d &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;giving-non-root-access&#34;&gt;Giving non-root access&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;docker&lt;/code&gt; daemon always runs as the root user, and the &lt;code&gt;docker&lt;/code&gt;
+daemon binds to a Unix socket instead of a TCP port. By default that
+Unix socket is owned by the user &lt;em&gt;root&lt;/em&gt;, and so, by default, you can
+access it with &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you (or your Docker installer) create a Unix group called &lt;em&gt;docker&lt;/em&gt;
+and add users to it, then the &lt;code&gt;docker&lt;/code&gt; daemon will make the ownership of
+the Unix socket read/writable by the &lt;em&gt;docker&lt;/em&gt; group when the daemon
+starts. The &lt;code&gt;docker&lt;/code&gt; daemon must always run as the root user, but if you
+run the &lt;code&gt;docker&lt;/code&gt; client as a user in the &lt;em&gt;docker&lt;/em&gt; group then you don&amp;rsquo;t
+need to add &lt;code&gt;sudo&lt;/code&gt; to all the client commands.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;:
+The &lt;em&gt;docker&lt;/em&gt; group (or the group specified with &lt;code&gt;-G&lt;/code&gt;) is root-equivalent;
+see &lt;a href=&#34;http://localhost/articles/security/#docker-daemon-attack-surface&#34;&gt;&lt;em&gt;Docker Daemon Attack Surface&lt;/em&gt;&lt;/a&gt; details.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;upgrades&#34;&gt;Upgrades&lt;/h2&gt;
+
+&lt;p&gt;To upgrade your manual installation of Docker, first kill the docker
+daemon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ killall docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then follow the regular installation steps.&lt;/p&gt;
+
+&lt;h2 id=&#34;run-your-first-container&#34;&gt;Run your first container!&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;# check your docker version
+$ sudo ./docker version
+
+# run a container and open an interactive shell in the container
+$ sudo ./docker run -i -t ubuntu /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Continue with the &lt;a href=&#34;http://localhost/installation/installation/userguide/&#34;&gt;User Guide&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation on Arch Linux</title>
+      <link>http://localhost/installation/archlinux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/archlinux/</guid>
+      <description>
+
+&lt;h1 id=&#34;arch-linux&#34;&gt;Arch Linux&lt;/h1&gt;
+
+&lt;p&gt;Installing on Arch Linux can be handled via the package in community:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.archlinux.org/packages/community/x86_64/docker/&#34;&gt;docker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;or the following AUR package:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://aur.archlinux.org/packages/docker-git/&#34;&gt;docker-git&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The docker package will install the latest tagged version of docker. The
+docker-git package will build from the current master branch.&lt;/p&gt;
+
+&lt;h2 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h2&gt;
+
+&lt;p&gt;Docker depends on several packages which are specified as dependencies
+in the packages. The core dependencies are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;bridge-utils&lt;/li&gt;
+&lt;li&gt;device-mapper&lt;/li&gt;
+&lt;li&gt;iproute2&lt;/li&gt;
+&lt;li&gt;lxc&lt;/li&gt;
+&lt;li&gt;sqlite&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;For the normal package a simple&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo pacman -S docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;is all that is needed.&lt;/p&gt;
+
+&lt;p&gt;For the AUR package execute:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yaourt -S docker-git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The instructions here assume &lt;strong&gt;yaourt&lt;/strong&gt; is installed. See &lt;a href=&#34;https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_packages&#34;&gt;Arch User
+Repository&lt;/a&gt;
+for information on building and installing packages from the AUR if you
+have not done so before.&lt;/p&gt;
+
+&lt;h2 id=&#34;starting-docker&#34;&gt;Starting Docker&lt;/h2&gt;
+
+&lt;p&gt;There is a systemd service unit created for docker. To start the docker
+service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl start docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To start on system boot:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl enable docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;custom-daemon-options&#34;&gt;Custom daemon options&lt;/h2&gt;
+
+&lt;p&gt;If you need to add an HTTP Proxy, set a different directory or partition for the
+Docker runtime files, or make other customizations, read our systemd article to
+learn how to &lt;a href=&#34;http://localhost/installation/installation/articles/systemd/&#34;&gt;customize your systemd Docker daemon options&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;uninstallation&#34;&gt;Uninstallation&lt;/h2&gt;
+
+&lt;p&gt;To uninstall the Docker package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo pacman -R docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To uninstall the Docker package and dependencies that are no longer needed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo pacman -Rns docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above commands will not remove images, containers, volumes, or user created
+configuration files on your host. If you wish to delete all images, containers,
+and volumes run the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm -rf /var/lib/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You must delete the user created configuration files manually.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation on CRUX Linux</title>
+      <link>http://localhost/installation/cruxlinux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/cruxlinux/</guid>
+      <description>
+
+&lt;h1 id=&#34;crux-linux&#34;&gt;CRUX Linux&lt;/h1&gt;
+
+&lt;p&gt;Installing on CRUX Linux can be handled via the contrib ports from
+&lt;a href=&#34;http://prologic.shortcircuit.net.au/&#34;&gt;James Mills&lt;/a&gt; and are included in the
+official &lt;a href=&#34;http://crux.nu/portdb/?a=repo&amp;amp;q=contrib&#34;&gt;contrib&lt;/a&gt; ports:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;docker&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;code&gt;docker&lt;/code&gt; port will build and install the latest tagged version of Docker.&lt;/p&gt;
+
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Assuming you have contrib enabled, update your ports tree and install docker:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo prt-get depinst docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;kernel-requirements&#34;&gt;Kernel requirements&lt;/h2&gt;
+
+&lt;p&gt;To have a working &lt;strong&gt;CRUX+Docker&lt;/strong&gt; Host you must ensure your Kernel has
+the necessary modules enabled for the Docker Daemon to function correctly.&lt;/p&gt;
+
+&lt;p&gt;Please read the &lt;code&gt;README&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo prt-get readme docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;docker&lt;/code&gt; port installs the &lt;code&gt;contrib/check-config.sh&lt;/code&gt; script
+provided by the Docker contributors for checking your kernel
+configuration as a suitable Docker host.&lt;/p&gt;
+
+&lt;p&gt;To check your Kernel configuration run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ /usr/share/docker/check-config.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;starting-docker&#34;&gt;Starting Docker&lt;/h2&gt;
+
+&lt;p&gt;There is a rc script created for Docker. To start the Docker service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo /etc/rc.d/docker start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To start on system boot:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Edit &lt;code&gt;/etc/rc.conf&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Put &lt;code&gt;docker&lt;/code&gt; into the &lt;code&gt;SERVICES=(...)&lt;/code&gt; array after &lt;code&gt;net&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;images&#34;&gt;Images&lt;/h2&gt;
+
+&lt;p&gt;There is a CRUX image maintained by &lt;a href=&#34;http://prologic.shortcircuit.net.au/&#34;&gt;James Mills&lt;/a&gt;
+as part of the Docker &amp;ldquo;Official Library&amp;rdquo; of images. To use this image simply pull it
+or use it as part of your &lt;code&gt;FROM&lt;/code&gt; line in your &lt;code&gt;Dockerfile(s)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull crux
+$ docker run -i -t crux
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are also user contributed &lt;a href=&#34;https://registry.hub.docker.com/repos/crux/&#34;&gt;CRUX based image(s)&lt;/a&gt; on the Docker Hub.&lt;/p&gt;
+
+&lt;h2 id=&#34;uninstallation&#34;&gt;Uninstallation&lt;/h2&gt;
+
+&lt;p&gt;To uninstall the Docker package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo prt-get remove docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above command will not remove images, containers, volumes, or user created
+configuration files on your host. If you wish to delete all images, containers,
+and volumes run the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm -rf /var/lib/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You must delete the user created configuration files manually.&lt;/p&gt;
+
+&lt;h2 id=&#34;issues&#34;&gt;Issues&lt;/h2&gt;
+
+&lt;p&gt;If you have any issues please file a bug with the
+&lt;a href=&#34;http://crux.nu/bugs/&#34;&gt;CRUX Bug Tracker&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;support&#34;&gt;Support&lt;/h2&gt;
+
+&lt;p&gt;For support contact the &lt;a href=&#34;http://crux.nu/Main/MailingLists&#34;&gt;CRUX Mailing List&lt;/a&gt;
+or join CRUX&amp;rsquo;s &lt;a href=&#34;http://crux.nu/Main/IrcChannels&#34;&gt;IRC Channels&lt;/a&gt;. on the
+&lt;a href=&#34;http://freenode.net/&#34;&gt;FreeNode&lt;/a&gt; IRC Network.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation on CentOS</title>
+      <link>http://localhost/installation/centos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/centos/</guid>
+      <description>
+
+&lt;h1 id=&#34;centos&#34;&gt;CentOS&lt;/h1&gt;
+
+&lt;p&gt;Docker is supported on the following versions of CentOS:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;CentOS 7.X&lt;/li&gt;
+&lt;li&gt;CentOS 6.5 or higher&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Installation on other binary compatible EL6/EL7 distributions such as Scientific
+Linux might succeed, but Docker does not test or support Docker on these
+distributions.&lt;/p&gt;
+
+&lt;p&gt;This page instructs you to install using Docker-managed release packages and
+installation mechanisms. Using these packages ensures you get the latest release
+of Docker. If you wish to install using CentOS-managed packages, consult your
+CentOS documentation.&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;Docker requires a 64-bit installation regardless of your CentOS version. Also,
+your kernel must be 3.10 at minimum. CentOS 7 runs the 3.10 kernel, 6.5 does
+not. We make an exception for CentOS 6.5. To run Docker on
+&lt;a href=&#34;https://www.centos.org&#34;&gt;CentOS-6.5&lt;/a&gt; or later, you need kernel 2.6.32-431 or
+higher.&lt;/p&gt;
+
+&lt;p&gt;To check your current kernel version, open a terminal and use &lt;code&gt;uname -r&lt;/code&gt; to
+display your kernel version:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ uname -r 
+2.6.32-431.el6.x86_64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, is it recommended that you fully update your system. Please keep in
+mind that CentOS 6 should be fully patched to fix any potential kernel bugs. Any
+reported kernel bugs may have already been fixed on the latest kernel packages&lt;/p&gt;
+
+&lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
+
+&lt;p&gt;You use the same installation procedure for all versions of CentOS,
+only the package you install differs. There are two packages to choose from:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Version&lt;/th&gt;
+    &lt;th&gt;Package name&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;6.5 and  higher&lt;/td&gt;
+    &lt;td&gt;
+    &lt;p&gt;
+    &lt;a href=&#34;https://get.docker.com/rpm/1.7.0/centos-6/RPMS/x86_64/docker-engine-1.7.0-1.el6.x86_64.rpm&#34;&gt;
+    https://get.docker.com/rpm/1.7.0/centos-6/RPMS/x86_64/docker-engine-1.7.0-1.el6.x86_64.rpm&lt;/a&gt;
+    &lt;p&gt;
+    &lt;a href=&#34;https://get.docker.com/rpm/1.7.0/centos-6/SRPMS/docker-engine-1.7.0-1.el6.src.rpm&#34;&gt;
+   https://get.docker.com/rpm/1.7.0/centos-6/SRPMS/docker-engine-1.7.0-1.el6.src.rpm&lt;/a&gt;
+    &lt;p&gt;
+    &lt;/p&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;7.X&lt;/td&gt;
+    &lt;td&gt;
+    &lt;p&gt;
+     &lt;a href=&#34;https://get.docker.com/rpm/1.7.0/centos-7/RPMS/x86_64/docker-engine-1.7.0-1.el7.centos.x86_64.rpm&#34;&gt;
+    https://get.docker.com/rpm/1.7.0/centos-7/RPMS/x86_64/docker-engine-1.7.0-1.el7.centos.x86_64.rpm&lt;/a&gt;   
+    &lt;/p&gt;
+    &lt;p&gt;
+     &lt;a href=&#34;https://get.docker.com/rpm/1.7.0/centos-7/SRPMS/docker-engine-1.7.0-1.el7.centos.src.rpm&#34;&gt;
+    https://get.docker.com/rpm/1.7.0/centos-7/SRPMS/docker-engine-1.7.0-1.el7.centos.src.rpm&lt;/a&gt;   
+    &lt;/p&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;This procedure depicts an installation on version 6.5. If you are installing on
+7.X, substitute that package for your installation.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into your machine as a user with &lt;code&gt;sudo&lt;/code&gt; or &lt;code&gt;root&lt;/code&gt; privileges.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure your existing packages are up-to-date.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum update
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Download the Docker RPM to the current directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -O -sSL https://get.docker.com/rpm/1.7.0/centos-6/RPMS/x86_64/docker-engine-1.7.0-1.el6.x86_64.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use &lt;code&gt;yum&lt;/code&gt; to install the package.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum localinstall --nogpgcheck docker-engine-1.7.0-1.el6.x86_64.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start the Docker daemon.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo service docker start
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify &lt;code&gt;docker&lt;/code&gt; is installed correctly by running a test image in a container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker run hello-world
+Unable to find image &#39;hello-world:latest&#39; locally
+latest: Pulling from hello-world
+a8219747be10: Pull complete 
+91c95931e552: Already exists 
+hello-world:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+Digest: sha256:aa03e5d0d5553b4c3473e89c8619cf79df368babd1.7.0cf5daeb82aab55838d
+Status: Downloaded newer image for hello-world:latest
+Hello from Docker.
+This message shows that your installation appears to be working correctly.
+
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the &amp;quot;hello-world&amp;quot; image from the Docker Hub.
+        (Assuming it was not already locally available.)
+ 3. The Docker daemon created a new container from that image which runs the
+        executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+        to your terminal.
+
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+
+For more examples and ideas, visit:
+ http://docs.docker.com/userguide/
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;create-a-docker-group&#34;&gt;Create a docker group&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;docker&lt;/code&gt; daemon binds to a Unix socket instead of a TCP port. By default
+that Unix socket is owned by the user &lt;code&gt;root&lt;/code&gt; and other users can access it with
+&lt;code&gt;sudo&lt;/code&gt;. For this reason, &lt;code&gt;docker&lt;/code&gt; daemon always runs as the &lt;code&gt;root&lt;/code&gt; user.&lt;/p&gt;
+
+&lt;p&gt;To avoid having to use &lt;code&gt;sudo&lt;/code&gt; when you use the &lt;code&gt;docker&lt;/code&gt; command, create a Unix
+group called &lt;code&gt;docker&lt;/code&gt; and add users to it. When the &lt;code&gt;docker&lt;/code&gt; daemon starts, it
+makes the ownership of the Unix socket read/writable by the &lt;code&gt;docker&lt;/code&gt; group.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;: The &lt;code&gt;docker&lt;/code&gt; group is equivalent to the &lt;code&gt;root&lt;/code&gt; user; For details
+on how this impacts security in your system, see &lt;a href=&#34;http://localhost/installation/installation/articles/security/#docker-daemon-attack-surface&#34;&gt;&lt;em&gt;Docker Daemon Attack
+Surface&lt;/em&gt;&lt;/a&gt; for details.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To create the &lt;code&gt;docker&lt;/code&gt; group and add your user:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into Centos as a user with &lt;code&gt;sudo&lt;/code&gt; privileges.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create the &lt;code&gt;docker&lt;/code&gt; group and add your user.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sudo usermod -aG docker your_username&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Log out and log back in.&lt;/p&gt;
+
+&lt;p&gt;This ensures your user is running with the correct permissions.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify your work by running &lt;code&gt;docker&lt;/code&gt; without &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run hello-world
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;start-the-docker-daemon-at-boot&#34;&gt;Start the docker daemon at boot&lt;/h2&gt;
+
+&lt;p&gt;To ensure Docker starts when you boot your system, do the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ sudo chkconfig docker on
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you need to add an HTTP Proxy, set a different directory or partition for the
+Docker runtime files, or make other customizations, read our Systemd article to
+learn how to &lt;a href=&#34;http://localhost/installation/installation/articles/systemd/&#34;&gt;customize your Systemd Docker daemon options&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;uninstall&#34;&gt;Uninstall&lt;/h2&gt;
+
+&lt;p&gt;You can uninstall the Docker software with &lt;code&gt;yum&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;List the package you have installed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ yum list installed | grep docker
+yum list installed | grep docker
+docker-engine.x86_64                1.7.0-1.el6
+                                                                                                                                                         @/docker-engine-1.7.0-1.el6.x86_64.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Remove the package.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum -y remove docker-engine.x86_64 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command does not remove images, containers, volumes, or user-created
+configuration files on your host.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;To delete all images, containers, and volumes, run the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm -rf /var/lib/docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Locate and delete any user-created configuration files.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation on Debian</title>
+      <link>http://localhost/installation/debian/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/debian/</guid>
+      <description>
+
+&lt;h1 id=&#34;debian&#34;&gt;Debian&lt;/h1&gt;
+
+&lt;p&gt;Docker is supported on the following versions of Debian:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#debian-jessie-80-64-bit&#34;&gt;&lt;em&gt;Debian 8.0 Jessie (64-bit)&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#debian-wheezy-stable-7-x-64-bit&#34;&gt;&lt;em&gt;Debian 7.7 Wheezy (64-bit)&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;debian-jessie-8-0-64-bit&#34;&gt;Debian Jessie 8.0 (64-bit)&lt;/h2&gt;
+
+&lt;p&gt;Debian 8 comes with a 3.16.0 Linux kernel, the &lt;code&gt;docker.io&lt;/code&gt; package can be found in the &lt;code&gt;jessie-backports&lt;/code&gt; repository. Reasoning behind this can be found &lt;a href=&#34;https://lists.debian.org/debian-release/2015/03/msg00685.html&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. Instructions how to enable the backports repository can be found &lt;a href=&#34;http://backports.debian.org/Instructions/&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
+Debian contains a much older KDE3/GNOME2 package called &lt;code&gt;docker&lt;/code&gt;, so the
+package and the executable are called &lt;code&gt;docker.io&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+
+&lt;p&gt;Make sure you enabled the &lt;code&gt;jessie-backports&lt;/code&gt; repository, as stated above.&lt;/p&gt;
+
+&lt;p&gt;To install the latest Debian package (may not be the latest Docker release):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get update
+$ sudo apt-get install docker.io
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To verify that everything has worked as expected:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker run --rm hello-world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command downloads and runs the &lt;code&gt;hello-world&lt;/code&gt; image in a container. When the
+container runs, it prints an informational message. Then, it exits.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
+If you want to enable memory and swap accounting see
+&lt;a href=&#34;http://localhost/installation/installation/installation/ubuntulinux/#memory-and-swap-accounting&#34;&gt;this&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;uninstallation&#34;&gt;Uninstallation&lt;/h3&gt;
+
+&lt;p&gt;To uninstall the Docker package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get purge docker-io
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To uninstall the Docker package and dependencies that are no longer needed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get autoremove --purge docker-io
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above commands will not remove images, containers, volumes, or user created
+configuration files on your host. If you wish to delete all images, containers,
+and volumes run the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm -rf /var/lib/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You must delete the user created configuration files manually.&lt;/p&gt;
+
+&lt;h2 id=&#34;debian-wheezy-stable-7-x-64-bit&#34;&gt;Debian Wheezy/Stable 7.x (64-bit)&lt;/h2&gt;
+
+&lt;p&gt;Docker requires Kernel 3.8+, while Wheezy ships with Kernel 3.2 (for more details
+on why 3.8 is required, see discussion on
+&lt;a href=&#34;https://github.com/docker/docker/issues/407&#34;&gt;bug #407&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Fortunately, wheezy-backports currently has &lt;a href=&#34;https://packages.debian.org/search?suite=wheezy-backports&amp;amp;section=all&amp;amp;arch=any&amp;amp;searchon=names&amp;amp;keywords=linux-image-amd64&#34;&gt;Kernel 3.16
+&lt;/a&gt;,
+which is officially supported by Docker.&lt;/p&gt;
+
+&lt;h3 id=&#34;installation-1&#34;&gt;Installation&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Install Kernel from wheezy-backports&lt;/p&gt;
+
+&lt;p&gt;Add the following line to your &lt;code&gt;/etc/apt/sources.list&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;deb http://http.debian.net/debian wheezy-backports main&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;then install the &lt;code&gt;linux-image-amd64&lt;/code&gt; package (note the use of
+&lt;code&gt;-t wheezy-backports&lt;/code&gt;)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get update
+$ sudo apt-get install -t wheezy-backports linux-image-amd64
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Restart your system. This is necessary for Debian to use your new kernel.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install Docker using the get.docker.com script:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;curl -sSL https://get.docker.com/ | sh&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If your company is behind a filtering proxy, you may find that the
+&lt;code&gt;apt-key&lt;/code&gt;
+command fails for the Docker repo during installation. To work around this,
+add the key directly using the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ wget -qO- https://get.docker.com/gpg | sudo apt-key add -
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;uninstallation-1&#34;&gt;Uninstallation&lt;/h3&gt;
+
+&lt;p&gt;To uninstall the Docker package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get purge lxc-docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To uninstall the Docker package and dependencies that are no longer needed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get autoremove --purge lxc-docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above commands will not remove images, containers, volumes, or user created
+configuration files on your host. If you wish to delete all images, containers,
+and volumes run the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm -rf /var/lib/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You must delete the user created configuration files manually.&lt;/p&gt;
+
+&lt;h2 id=&#34;giving-non-root-access&#34;&gt;Giving non-root access&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;docker&lt;/code&gt; daemon always runs as the &lt;code&gt;root&lt;/code&gt; user and the &lt;code&gt;docker&lt;/code&gt;
+daemon binds to a Unix socket instead of a TCP port. By default that
+Unix socket is owned by the user &lt;code&gt;root&lt;/code&gt;, and so, by default, you can
+access it with &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you (or your Docker installer) create a Unix group called &lt;code&gt;docker&lt;/code&gt;
+and add users to it, then the &lt;code&gt;docker&lt;/code&gt; daemon will make the ownership of
+the Unix socket read/writable by the &lt;code&gt;docker&lt;/code&gt; group when the daemon
+starts. The &lt;code&gt;docker&lt;/code&gt; daemon must always run as the root user, but if you
+run the &lt;code&gt;docker&lt;/code&gt; client as a user in the &lt;code&gt;docker&lt;/code&gt; group then you don&amp;rsquo;t
+need to add &lt;code&gt;sudo&lt;/code&gt; to all the client commands. From Docker 0.9.0 you can
+use the &lt;code&gt;-G&lt;/code&gt; flag to specify an alternative group.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;:
+The &lt;code&gt;docker&lt;/code&gt; group (or the group specified with the &lt;code&gt;-G&lt;/code&gt; flag) is
+&lt;code&gt;root&lt;/code&gt;-equivalent; see &lt;a href=&#34;http://localhost/articles/security/#docker-daemon-attack-surface&#34;&gt;&lt;em&gt;Docker Daemon Attack Surface&lt;/em&gt;&lt;/a&gt; details.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Add the docker group if it doesn&#39;t already exist.
+$ sudo groupadd docker
+
+# Add the connected user &amp;quot;${USER}&amp;quot; to the docker group.
+# Change the user name to match your preferred user.
+# You may have to logout and log back in again for
+# this to take effect.
+$ sudo gpasswd -a ${USER} docker
+
+# Restart the Docker daemon.
+$ sudo service docker restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;what-next&#34;&gt;What next?&lt;/h2&gt;
+
+&lt;p&gt;Continue with the &lt;a href=&#34;http://localhost/installation/installation/userguide/&#34;&gt;User Guide&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation on Fedora</title>
+      <link>http://localhost/installation/fedora/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/fedora/</guid>
+      <description>
+
+&lt;h1 id=&#34;fedora&#34;&gt;Fedora&lt;/h1&gt;
+
+&lt;p&gt;Docker is supported on the following versions of Fedora:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fedora 20&lt;/li&gt;
+&lt;li&gt;Fedora 21&lt;/li&gt;
+&lt;li&gt;Fedora 22&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This page instructs you to install using Docker-managed release packages and
+installation mechanisms. Using these packages ensures you get the latest release
+of Docker. If you wish to install using Fedora-managed packages, consult your
+Fedora release documentation for information on Fedora&amp;rsquo;s Docker support.&lt;/p&gt;
+
+&lt;p&gt;##Prerequisites&lt;/p&gt;
+
+&lt;p&gt;Docker requires a 64-bit installation regardless of your Fedora version. Also, your kernel must be 3.10 at minimum. To check your current kernel
+version, open a terminal and use &lt;code&gt;uname -r&lt;/code&gt; to display your kernel version:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ uname -r 
+3.19.5-100.fc20.x86_64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If your kernel is at a older version, you must update it.&lt;/p&gt;
+
+&lt;p&gt;Finally, is it recommended that you fully update your system. Please keep in
+mind that your system should be fully patched to fix any potential kernel bugs. Any
+reported kernel bugs may have already been fixed on the latest kernel packages&lt;/p&gt;
+
+&lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
+
+&lt;p&gt;You use the same installation procedure for all versions of Fedora,
+only the package you install differs. Choose from these packages:&lt;/p&gt;
+
+&lt;p&gt;&lt;style type=&#34;text/css&#34;&gt;
+  .tg  {border-collapse:collapse;border-spacing:0;}
+   td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;vertical-align: top;}
+   th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;vertical-align: top;}
+&lt;/style&gt;
+&lt;table class=&#34;tg&#34;&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Version&lt;/th&gt;
+    &lt;th&gt;Package name&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Fedora 20&lt;/td&gt;
+    &lt;td&gt;
+        &lt;p&gt;
+    &lt;a href=&#34;https://get.docker.com/rpm/1.7.0/fedora-20/RPMS/x86_64/docker-engine-1.7.0-1.fc20.x86_64.rpm&#34;&gt;
+    docker-engine-1.7.0-1.fc20.x86_64.rpm&lt;/a&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+    &lt;a href=&#34;https://get.docker.com/rpm/1.7.0/fedora-20/SRPMS/docker-engine-1.7.0-1.fc20.src.rpm&#34;&gt;
+   docker-engine-1.7.0-1.fc20.src.rpm&lt;/a&gt;
+        &lt;/p&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Fedora 21&lt;/td&gt;
+    &lt;td&gt;
+    &lt;p&gt;
+    &lt;a href=&#34;https://get.docker.com/rpm/1.7.0/fedora-21/RPMS/x86_64/docker-engine-1.7.0-1.fc21.x86_64.rpm&#34;&gt;
+    docker-engine-1.7.0-1.fc21.x86_64.rpm&lt;/a&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+    &lt;a href=&#34;https://get.docker.com/rpm/1.7.0/fedora-21/SRPMS/docker-engine-1.7.0-1.fc21.src.rpm&#34;&gt;
+  docker-engine-1.7.0-1.fc21.src.rpm&lt;/a&gt;
+        &lt;/p&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;Fedora 22&lt;/td&gt;
+    &lt;td&gt;
+    &lt;p&gt;
+    &lt;a href=&#34;https://get.docker.com/rpm/1.7.0/fedora-22/RPMS/x86_64/docker-engine-1.7.0-1.fc22.x86_64.rpm&#34;&gt;
+    docker-engine-1.7.0-1.fc22.x86_64.rpm&lt;/a&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+    &lt;a href=&#34;https://get.docker.com/rpm/1.7.0/fedora-22/SRPMS/docker-engine-1.7.0-1.fc22.src.rpm&#34;&gt;
+    docker-engine-1.7.0-1.fc22.src.rpm&lt;/a&gt;
+        &lt;/p&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;&lt;/p&gt;
+
+&lt;p&gt;This procedure depicts an installation on version 21. If you are installing on
+20 or 22, substitute that package for your installation.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into your machine as a user with &lt;code&gt;sudo&lt;/code&gt; or &lt;code&gt;root&lt;/code&gt; privileges.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure you don&amp;rsquo;t have an older version of Docker installed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ yum list installed | grep docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you have an older version, remove it using the &lt;code&gt;yum -y remove &amp;lt;packagename&amp;gt;&lt;/code&gt; command.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Download the Docker RPM to the current directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -O -sSL https://url_to_package/docker-engine-1.7.0-0.1.fc21.x86_64.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use &lt;code&gt;yum&lt;/code&gt; to install the package.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum localinstall --nogpgcheck docker-engine-1.7.0-0.1.fc21.x86_64.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start the Docker daemon.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo service docker start
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify &lt;code&gt;docker&lt;/code&gt; is installed correctly by running a test image in a container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker run hello-world
+Unable to find image &#39;hello-world:latest&#39; locally
+latest: Pulling from hello-world
+a8219747be10: Pull complete 
+91c95931e552: Already exists 
+hello-world:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+Digest: sha256:aa03e5d0d5553b4c3473e89c8619cf79df368babd18681cf5daeb82aab55838d
+Status: Downloaded newer image for hello-world:latest
+Hello from Docker.
+This message shows that your installation appears to be working correctly.
+
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the &amp;quot;hello-world&amp;quot; image from the Docker Hub.
+        (Assuming it was not already locally available.)
+ 3. The Docker daemon created a new container from that image which runs the
+        executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+        to your terminal.
+
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+
+For more examples and ideas, visit:
+ http://docs.docker.com/userguide/
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;create-a-docker-group&#34;&gt;Create a docker group&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;docker&lt;/code&gt; daemon binds to a Unix socket instead of a TCP port. By default
+that Unix socket is owned by the user &lt;code&gt;root&lt;/code&gt; and other users can access it with
+&lt;code&gt;sudo&lt;/code&gt;. For this reason, &lt;code&gt;docker&lt;/code&gt; daemon always runs as the &lt;code&gt;root&lt;/code&gt; user.&lt;/p&gt;
+
+&lt;p&gt;To avoid having to use &lt;code&gt;sudo&lt;/code&gt; when you use the &lt;code&gt;docker&lt;/code&gt; command, create a Unix
+group called &lt;code&gt;docker&lt;/code&gt; and add users to it. When the &lt;code&gt;docker&lt;/code&gt; daemon starts, it
+makes the ownership of the Unix socket read/writable by the &lt;code&gt;docker&lt;/code&gt; group.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;: The &lt;code&gt;docker&lt;/code&gt; group is equivalent to the &lt;code&gt;root&lt;/code&gt; user; For details
+on how this impacts security in your system, see &lt;a href=&#34;http://localhost/installation/installation/articles/security/#docker-daemon-attack-surface&#34;&gt;&lt;em&gt;Docker Daemon Attack
+Surface&lt;/em&gt;&lt;/a&gt; for details.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To create the &lt;code&gt;docker&lt;/code&gt; group and add your user:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into your system as a user with &lt;code&gt;sudo&lt;/code&gt; privileges.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create the &lt;code&gt;docker&lt;/code&gt; group and add your user.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sudo usermod -aG docker your_username&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Log out and log back in.&lt;/p&gt;
+
+&lt;p&gt;This ensures your user is running with the correct permissions.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify your work by running &lt;code&gt;docker&lt;/code&gt; without &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run hello-world
+        Unable to find image &#39;hello-world:latest&#39; locally
+        latest: Pulling from hello-world
+        a8219747be10: Pull complete 
+        91c95931e552: Already exists 
+        hello-world:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+        Digest: sha256:aa03e5d0d5553b4c3473e89c8619cf79df368babd18681cf5daeb82aab55838d
+        Status: Downloaded newer image for hello-world:latest
+        Hello from Docker.
+        This message shows that your installation appears to be working correctly.
+
+
+        To generate this message, Docker took the following steps:
+         1. The Docker client contacted the Docker daemon.
+         2. The Docker daemon pulled the &amp;quot;hello-world&amp;quot; image from the Docker Hub.
+                (Assuming it was not already locally available.)
+         3. The Docker daemon created a new container from that image which runs the
+                executable that produces the output you are currently reading.
+         4. The Docker daemon streamed that output to the Docker client, which sent it
+                to your terminal.
+
+
+        To try something more ambitious, you can run an Ubuntu container with:
+         $ docker run -it ubuntu bash
+
+
+        For more examples and ideas, visit:
+         http://docs.docker.com/userguide/
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;start-the-docker-daemon-at-boot&#34;&gt;Start the docker daemon at boot&lt;/h2&gt;
+
+&lt;p&gt;To ensure Docker starts when you boot your system, do the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo chkconfig docker on
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you need to add an HTTP Proxy, set a different directory or partition for the
+Docker runtime files, or make other customizations, read our Systemd article to
+learn how to &lt;a href=&#34;http://localhost/installation/installation/articles/systemd/&#34;&gt;customize your Systemd Docker daemon options&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;uninstall&#34;&gt;Uninstall&lt;/h2&gt;
+
+&lt;p&gt;You can uninstall the Docker software with &lt;code&gt;yum&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;List the package you have installed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ yum list installed | grep docker
+yum list installed | grep docker
+docker-engine.x86_64                1.7.0-0.1.fc20
+                                                                                                                                                         @/docker-engine-1.7.0-0.1.fc20.el6.x86_64
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Remove the package.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum -y remove docker-engine.x86_64 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command does not remove images, containers, volumes, or user-created
+configuration files on your host.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;To delete all images, containers, and volumes, run the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm -rf /var/lib/docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Locate and delete any user-created configuration files.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation on FrugalWare</title>
+      <link>http://localhost/installation/frugalware/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/frugalware/</guid>
+      <description>
+
+&lt;h1 id=&#34;frugalware&#34;&gt;FrugalWare&lt;/h1&gt;
+
+&lt;p&gt;Installing on FrugalWare is handled via the official packages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.frugalware.org/packages/200141&#34;&gt;lxc-docker i686&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.frugalware.org/packages/200130&#34;&gt;lxc-docker x86_64&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The lxc-docker package will install the latest tagged version of Docker.&lt;/p&gt;
+
+&lt;h2 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h2&gt;
+
+&lt;p&gt;Docker depends on several packages which are specified as dependencies
+in the packages. The core dependencies are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;systemd&lt;/li&gt;
+&lt;li&gt;lvm2&lt;/li&gt;
+&lt;li&gt;sqlite3&lt;/li&gt;
+&lt;li&gt;libguestfs&lt;/li&gt;
+&lt;li&gt;lxc&lt;/li&gt;
+&lt;li&gt;iproute2&lt;/li&gt;
+&lt;li&gt;bridge-utils&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;A simple&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo pacman -S lxc-docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;is all that is needed.&lt;/p&gt;
+
+&lt;h2 id=&#34;starting-docker&#34;&gt;Starting Docker&lt;/h2&gt;
+
+&lt;p&gt;There is a systemd service unit created for Docker. To start Docker as
+service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl start lxc-docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To start on system boot:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl enable lxc-docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;custom-daemon-options&#34;&gt;Custom daemon options&lt;/h2&gt;
+
+&lt;p&gt;If you need to add an HTTP Proxy, set a different directory or partition for the
+Docker runtime files, or make other customizations, read our systemd article to
+learn how to &lt;a href=&#34;http://localhost/installation/installation/articles/systemd/&#34;&gt;customize your systemd Docker daemon options&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;uninstallation&#34;&gt;Uninstallation&lt;/h2&gt;
+
+&lt;p&gt;To uninstall the Docker package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo pacman -R lxc-docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To uninstall the Docker package and dependencies that are no longer needed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo pacman -Rns lxc-docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above commands will not remove images, containers, volumes, or user created
+configuration files on your host. If you wish to delete all images, containers,
+and volumes run the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm -rf /var/lib/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You must delete the user created configuration files manually.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation on Gentoo</title>
+      <link>http://localhost/installation/gentoolinux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/gentoolinux/</guid>
+      <description>
+
+&lt;h1 id=&#34;gentoo&#34;&gt;Gentoo&lt;/h1&gt;
+
+&lt;p&gt;Installing Docker on Gentoo Linux can be accomplished using one of two ways: the &lt;strong&gt;official&lt;/strong&gt; way and the &lt;code&gt;docker-overlay&lt;/code&gt; way.&lt;/p&gt;
+
+&lt;p&gt;Official project page of &lt;a href=&#34;https://wiki.gentoo.org/wiki/Project:Docker&#34;&gt;Gentoo Docker&lt;/a&gt; team.&lt;/p&gt;
+
+&lt;h2 id=&#34;official-way&#34;&gt;Official way&lt;/h2&gt;
+
+&lt;p&gt;The first and recommended way if you are looking for a stable&lt;br /&gt;
+experience is to use the official &lt;code&gt;app-emulation/docker&lt;/code&gt; package directly&lt;br /&gt;
+from the tree.&lt;/p&gt;
+
+&lt;p&gt;If any issues arise from this ebuild including, missing kernel
+configuration flags or dependencies, open a bug
+on the Gentoo &lt;a href=&#34;https://bugs.gentoo.org&#34;&gt;Bugzilla&lt;/a&gt; assigned to &lt;code&gt;docker AT gentoo DOT org&lt;/code&gt;
+or join and ask in the official
+&lt;a href=&#34;http://webchat.freenode.net?channels=%23gentoo-containers&amp;amp;uio=d4&#34;&gt;IRC&lt;/a&gt; channel on the Freenode network.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-overlay-way&#34;&gt;docker-overlay way&lt;/h2&gt;
+
+&lt;p&gt;If you&amp;rsquo;re looking for a &lt;code&gt;-bin&lt;/code&gt; ebuild, a live ebuild, or a bleeding edge
+ebuild, use the provided overlay, &lt;a href=&#34;https://github.com/tianon/docker-overlay&#34;&gt;docker-overlay&lt;/a&gt;
+which can be added using &lt;code&gt;app-portage/layman&lt;/code&gt;. The most accurate and
+up-to-date documentation for properly installing and using the overlay
+can be found in the &lt;a href=&#34;http://localhost/installation/installation/https://github.com/tianon/docker-overlay/blob/master/README#using-this-overlay&#34;&gt;overlay&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If any issues arise from this ebuild or the resulting binary, including
+and especially missing kernel configuration flags or dependencies,
+open an &lt;a href=&#34;https://github.com/tianon/docker-overlay/issues&#34;&gt;issue&lt;/a&gt; on
+the &lt;code&gt;docker-overlay&lt;/code&gt; repository or ping &lt;code&gt;tianon&lt;/code&gt; directly in the &lt;code&gt;#docker&lt;/code&gt;
+IRC channel on the Freenode network.&lt;/p&gt;
+
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;h3 id=&#34;available-use-flags&#34;&gt;Available USE flags&lt;/h3&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;USE Flag&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Default&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;aufs&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Enables dependencies for the &amp;ldquo;aufs&amp;rdquo; graph driver, including necessary kernel flags.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;btrfs&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Enables dependencies for the &amp;ldquo;btrfs&amp;rdquo; graph driver, including necessary kernel flags.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;contrib&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Yes&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Install additional contributed scripts and components.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;device-mapper&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Yes&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Enables dependencies for the &amp;ldquo;devicemapper&amp;rdquo; graph driver, including necessary kernel flags.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;doc&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Add extra documentation (API, Javadoc, etc). It is recommended to enable per package instead of globally.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;lxc&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Enables dependencies for the &amp;ldquo;lxc&amp;rdquo; execution driver.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;vim-syntax&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pulls in related vim syntax scripts.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;zsh-completion&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Enable zsh completion support.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;USE flags are described in detail on &lt;a href=&#34;https://tianon.github.io/post/2014/05/17/docker-on-gentoo.html&#34;&gt;tianon&amp;rsquo;s
+blog&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The package should properly pull in all the necessary dependencies and
+prompt for all necessary kernel options.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo emerge -av app-emulation/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: Sometimes there is a disparity between the latest versions
+in the official &lt;strong&gt;Gentoo tree&lt;/strong&gt; and the &lt;strong&gt;docker-overlay&lt;/strong&gt;.&lt;br /&gt;
+Please be patient, and the latest version should propagate shortly.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;starting-docker&#34;&gt;Starting Docker&lt;/h2&gt;
+
+&lt;p&gt;Ensure that you are running a kernel that includes all the necessary
+modules and configuration (and optionally for device-mapper
+and AUFS or Btrfs, depending on the storage driver you&amp;rsquo;ve decided to use).&lt;/p&gt;
+
+&lt;p&gt;To use Docker, the &lt;code&gt;docker&lt;/code&gt; daemon must be running as &lt;strong&gt;root&lt;/strong&gt;.&lt;br /&gt;
+To use Docker as a &lt;strong&gt;non-root&lt;/strong&gt; user, add yourself to the &lt;strong&gt;docker&lt;/strong&gt;
+group by running the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo usermod -a -G docker user
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;openrc&#34;&gt;OpenRC&lt;/h3&gt;
+
+&lt;p&gt;To start the &lt;code&gt;docker&lt;/code&gt; daemon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo /etc/init.d/docker start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To start on system boot:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo rc-update add docker default
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;systemd&#34;&gt;systemd&lt;/h3&gt;
+
+&lt;p&gt;To start the &lt;code&gt;docker&lt;/code&gt; daemon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl start docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To start on system boot:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl enable docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you need to add an HTTP Proxy, set a different directory or partition for the
+Docker runtime files, or make other customizations, read our systemd article to
+learn how to &lt;a href=&#34;http://localhost/installation/installation/articles/systemd/&#34;&gt;customize your systemd Docker daemon options&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;uninstallation&#34;&gt;Uninstallation&lt;/h2&gt;
+
+&lt;p&gt;To uninstall the Docker package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo emerge -cav app-emulation/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To uninstall the Docker package and dependencies that are no longer needed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo emerge -C app-emulation/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above commands will not remove images, containers, volumes, or user created
+configuration files on your host. If you wish to delete all images, containers,
+and volumes run the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm -rf /var/lib/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You must delete the user created configuration files manually.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation on Google Cloud Platform</title>
+      <link>http://localhost/installation/google/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/google/</guid>
+      <description>
+
+&lt;h1 id=&#34;google-cloud-platform&#34;&gt;Google Cloud Platform&lt;/h1&gt;
+
+&lt;h2 id=&#34;quickstart-with-container-optimized-google-compute-engine-images&#34;&gt;QuickStart with Container-optimized Google Compute Engine images&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Go to &lt;a href=&#34;https://cloud.google.com/console&#34;&gt;Google Cloud Console&lt;/a&gt; and create a new Cloud Project with
+&lt;a href=&#34;https://developers.google.com/compute/docs/signup&#34;&gt;Compute Engine enabled&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Download and configure the &lt;a href=&#34;https://developers.google.com/cloud/sdk&#34;&gt;Google Cloud SDK&lt;/a&gt; to use your
+project with the following commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -sSL https://sdk.cloud.google.com | bash
+$ gcloud auth login
+$ gcloud config set project &amp;lt;google-cloud-project-id&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start a new instance using the latest &lt;a href=&#34;https://developers.google.com/compute/docs/containers#container-optimized_google_compute_engine_images&#34;&gt;Container-optimized image&lt;/a&gt;:
+(select a zone close to you and the desired instance size)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gcloud compute instances create docker-playground \
+  --image container-vm \
+  --zone us-central1-a \
+  --machine-type f1-micro
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Connect to the instance using SSH:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ gcloud compute ssh --zone us-central1-a docker-playground
+docker-playground:~$ sudo docker run hello-world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hello from Docker.
+This message shows that your installation appears to be working correctly.
+&amp;hellip;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Read more about &lt;a href=&#34;https://developers.google.com/compute/docs/containers&#34;&gt;deploying Containers on Google Cloud Platform&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation on IBM SoftLayer </title>
+      <link>http://localhost/installation/softlayer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/softlayer/</guid>
+      <description>
+
+&lt;h1 id=&#34;ibm-softlayer&#34;&gt;IBM SoftLayer&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Create an &lt;a href=&#34;https://www.softlayer.com/cloud-servers/&#34;&gt;IBM SoftLayer account&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Log in to the &lt;a href=&#34;https://control.softlayer.com/&#34;&gt;SoftLayer Customer Portal&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;From the &lt;em&gt;Devices&lt;/em&gt; menu select &lt;a href=&#34;https://control.softlayer.com/devices&#34;&gt;&lt;em&gt;Device List&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Click &lt;em&gt;Order Devices&lt;/em&gt; on the top right of the window below the menu bar.&lt;/li&gt;
+&lt;li&gt;Under &lt;em&gt;Virtual Server&lt;/em&gt; click &lt;a href=&#34;https://manage.softlayer.com/Sales/orderHourlyComputingInstance&#34;&gt;&lt;em&gt;Hourly&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new &lt;em&gt;SoftLayer Virtual Server Instance&lt;/em&gt; (VSI) using the default
+values for all the fields and choose:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The desired location for &lt;em&gt;Datacenter&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Ubuntu Linux 12.04 LTS Precise Pangolin - Minimal Install (64 bit)&lt;/em&gt;
+for &lt;em&gt;Operating System&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the &lt;em&gt;Continue Your Order&lt;/em&gt; button at the bottom right.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fill out VSI &lt;em&gt;hostname&lt;/em&gt; and &lt;em&gt;domain&lt;/em&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Insert the required &lt;em&gt;User Metadata&lt;/em&gt; and place the order.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Then continue with the &lt;a href=&#34;http://localhost/installation/installation/ubuntulinux/#ubuntu-linux&#34;&gt;&lt;em&gt;Ubuntu&lt;/em&gt;&lt;/a&gt;
+instructions.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;what-next&#34;&gt;What next?&lt;/h2&gt;
+
+&lt;p&gt;Continue with the &lt;a href=&#34;http://localhost/installation/installation/userguide/&#34;&gt;User Guide&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation on Mac OS X</title>
+      <link>http://localhost/installation/mac/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/mac/</guid>
+      <description>
+
+&lt;h1 id=&#34;mac-os-x&#34;&gt;Mac OS X&lt;/h1&gt;
+
+&lt;p&gt;You can install Docker using Boot2Docker to run &lt;code&gt;docker&lt;/code&gt; commands at your command-line.
+Choose this installation if you are familiar with the command-line or plan to
+contribute to the Docker project on GitHub.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://kitematic.com/download&#34;&gt;&lt;img src=&#34;http://localhost/installation/images/kitematic.png&#34; alt=&#34;Download Kitematic&#34;
+style=&#34;float:right;&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Alternatively, you may want to try &lt;a id=&#34;inlinelink&#34; href=&#34;https://kitematic.com/&#34;
+target=&#34;_blank&#34;&gt;Kitematic&lt;/a&gt;, an application that lets you set up Docker and
+run containers using a graphical user interface (GUI).&lt;/p&gt;
+
+&lt;h2 id=&#34;command-line-docker-with-boot2docker&#34;&gt;Command-line Docker with Boot2Docker&lt;/h2&gt;
+
+&lt;p&gt;Because the Docker daemon uses Linux-specific kernel features, you can&amp;rsquo;t run
+Docker natively in OS X. Instead, you must install the Boot2Docker application.
+The application includes a VirtualBox Virtual Machine (VM), Docker itself, and the
+Boot2Docker management tool.&lt;/p&gt;
+
+&lt;p&gt;The Boot2Docker management tool is a lightweight Linux virtual machine made
+specifically to run the Docker daemon on Mac OS X. The VirtualBox VM runs
+completely from RAM, is a small ~24MB download, and boots in approximately 5s.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Requirements&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Your Mac must be running OS X 10.6 &amp;ldquo;Snow Leopard&amp;rdquo; or newer to run Boot2Docker.&lt;/p&gt;
+
+&lt;h3 id=&#34;learn-the-key-concepts-before-installing&#34;&gt;Learn the key concepts before installing&lt;/h3&gt;
+
+&lt;p&gt;In a Docker installation on Linux, your machine is both the localhost and the
+Docker host. In networking, localhost means your computer. The Docker host is
+the machine on which the containers run.&lt;/p&gt;
+
+&lt;p&gt;On a typical Linux installation, the Docker client, the Docker daemon, and any
+containers run directly on your localhost. This means you can address ports on a
+Docker container using standard localhost addressing such as &lt;code&gt;localhost:8000&lt;/code&gt; or
+&lt;code&gt;0.0.0.0:8376&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/installation/installation/installation/images/linux_docker_host.svg&#34; alt=&#34;Linux Architecture Diagram&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;In an OS X installation, the &lt;code&gt;docker&lt;/code&gt; daemon is running inside a Linux virtual
+machine provided by Boot2Docker.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/installation/installation/installation/images/mac_docker_host.svg&#34; alt=&#34;OSX Architecture Diagram&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;In OS X, the Docker host address is the address of the Linux VM.
+When you start the &lt;code&gt;boot2docker&lt;/code&gt; process, the VM is assigned an IP address. Under
+&lt;code&gt;boot2docker&lt;/code&gt; ports on a container map to ports on the VM. To see this in
+practice, work through the exercises on this page.&lt;/p&gt;
+
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Go to the &lt;a href=&#34;https://github.com/boot2docker/osx-installer/releases/latest&#34;&gt;boot2docker/osx-installer &lt;/a&gt; release page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Download Boot2Docker by clicking &lt;code&gt;Boot2Docker-x.x.x.pkg&lt;/code&gt; in the &amp;ldquo;Downloads&amp;rdquo;
+section.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install Boot2Docker by double-clicking the package.&lt;/p&gt;
+
+&lt;p&gt;The installer places Boot2Docker and VirtualBox in your &amp;ldquo;Applications&amp;rdquo; folder.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The installation places the &lt;code&gt;docker&lt;/code&gt; and &lt;code&gt;boot2docker&lt;/code&gt; binaries in your
+&lt;code&gt;/usr/local/bin&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;h2 id=&#34;start-the-boot2docker-application&#34;&gt;Start the Boot2Docker Application&lt;/h2&gt;
+
+&lt;p&gt;To run a Docker container, you first start the &lt;code&gt;boot2docker&lt;/code&gt; VM and then issue
+&lt;code&gt;docker&lt;/code&gt; commands to create, load, and manage containers. You can launch
+&lt;code&gt;boot2docker&lt;/code&gt; from your Applications folder or from the command line.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: Boot2Docker is designed as a development tool. You should not use
+ it in production environments.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;from-the-applications-folder&#34;&gt;From the Applications folder&lt;/h3&gt;
+
+&lt;p&gt;When you launch the &amp;ldquo;Boot2Docker&amp;rdquo; application from your &amp;ldquo;Applications&amp;rdquo; folder, the
+application:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;opens a terminal window&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;creates a $HOME/.boot2docker directory&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;creates a VirtualBox ISO and certs&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;starts a VirtualBox VM running the &lt;code&gt;docker&lt;/code&gt; daemon&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once the launch completes, you can run &lt;code&gt;docker&lt;/code&gt; commands. A good way to verify
+your setup succeeded is to run the &lt;code&gt;hello-world&lt;/code&gt; container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run hello-world
+Unable to find image &#39;hello-world:latest&#39; locally
+511136ea3c5a: Pull complete
+31cbccb51277: Pull complete
+e45a5af57b00: Pull complete
+hello-world:latest: The image you are pulling has been verified.
+Important: image verification is a tech preview feature and should not be
+relied on to provide security.
+Status: Downloaded newer image for hello-world:latest
+Hello from Docker.
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+1. The Docker client contacted the Docker daemon.
+2. The Docker daemon pulled the &amp;quot;hello-world&amp;quot; image from the Docker Hub.
+   (Assuming it was not already locally available.)
+3. The Docker daemon created a new container from that image which runs the
+   executable that produces the output you are currently reading.
+4. The Docker daemon streamed that output to the Docker client, which sent it
+   to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+$ docker run -it ubuntu bash
+
+For more examples and ideas, visit:
+http://docs.docker.com/userguide/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A more typical way to start and stop &lt;code&gt;boot2docker&lt;/code&gt; is using the command line.&lt;/p&gt;
+
+&lt;h3 id=&#34;from-your-command-line&#34;&gt;From your command line&lt;/h3&gt;
+
+&lt;p&gt;Initialize and run &lt;code&gt;boot2docker&lt;/code&gt; from the command line, do the following:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Create a new Boot2Docker VM.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker init
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This creates a new virtual machine. You only need to run this command once.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start the &lt;code&gt;boot2docker&lt;/code&gt; VM.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker start
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Display the environment variables for the Docker client.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker shellinit
+Writing /Users/mary/.boot2docker/certs/boot2docker-vm/ca.pem
+Writing /Users/mary/.boot2docker/certs/boot2docker-vm/cert.pem
+Writing /Users/mary/.boot2docker/certs/boot2docker-vm/key.pem
+    export DOCKER_HOST=tcp://192.168.59.103:2376
+    export DOCKER_CERT_PATH=/Users/mary/.boot2docker/certs/boot2docker-vm
+    export DOCKER_TLS_VERIFY=1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The specific paths and address on your machine will be different.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;To set the environment variables in your shell do the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ eval &amp;quot;$(boot2docker shellinit)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also set them manually by using the &lt;code&gt;export&lt;/code&gt; commands &lt;code&gt;boot2docker&lt;/code&gt;
+returns.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the &lt;code&gt;hello-world&lt;/code&gt; container to verify your setup.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run hello-world
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;basic-boot2docker-exercises&#34;&gt;Basic Boot2Docker exercises&lt;/h2&gt;
+
+&lt;p&gt;At this point, you should have &lt;code&gt;boot2docker&lt;/code&gt; running and the &lt;code&gt;docker&lt;/code&gt; client
+environment initialized. To verify this, run the following commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker status
+$ docker version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Work through this section to try some practical container tasks using &lt;code&gt;boot2docker&lt;/code&gt; VM.&lt;/p&gt;
+
+&lt;h3 id=&#34;access-container-ports&#34;&gt;Access container ports&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Start an NGINX container on the DOCKER_HOST.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -P --name web nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Normally, the &lt;code&gt;docker run&lt;/code&gt; commands starts a container, runs it, and then
+exits. The &lt;code&gt;-d&lt;/code&gt; flag keeps the container running in the background
+after the &lt;code&gt;docker run&lt;/code&gt; command completes. The &lt;code&gt;-P&lt;/code&gt; flag publishes exposed ports from the
+container to your local host; this lets you access them from your Mac.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Display your running container with &lt;code&gt;docker ps&lt;/code&gt; command&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                           NAMES
+5fb65ff765e9        nginx:latest        &amp;quot;nginx -g &#39;daemon of   3 minutes ago       Up 3 minutes        0.0.0.0:49156-&amp;gt;443/tcp, 0.0.0.0:49157-&amp;gt;80/tcp   web  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point, you can see &lt;code&gt;nginx&lt;/code&gt; is running as a daemon.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;View just the container&amp;rsquo;s ports.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker port web
+443/tcp -&amp;gt; 0.0.0.0:49156
+80/tcp -&amp;gt; 0.0.0.0:49157
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This tells you that the &lt;code&gt;web&lt;/code&gt; container&amp;rsquo;s port &lt;code&gt;80&lt;/code&gt; is mapped to port
+&lt;code&gt;49157&lt;/code&gt; on your Docker host.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter the &lt;code&gt;http://localhost:49157&lt;/code&gt; address (&lt;code&gt;localhost&lt;/code&gt; is &lt;code&gt;0.0.0.0&lt;/code&gt;) in your browser:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/installation/installation/installation/images/bad_host.png&#34; alt=&#34;Bad Address&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;This didn&amp;rsquo;t work. The reason it doesn&amp;rsquo;t work is your &lt;code&gt;DOCKER_HOST&lt;/code&gt; address is
+not the localhost address (0.0.0.0) but is instead the address of the
+&lt;code&gt;boot2docker&lt;/code&gt; VM.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Get the address of the &lt;code&gt;boot2docker&lt;/code&gt; VM.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker ip
+192.168.59.103
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter the &lt;code&gt;http://192.168.59.103:49157&lt;/code&gt; address in your browser:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/installation/installation/installation/images/good_host.png&#34; alt=&#34;Correct Addressing&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Success!&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;To stop and then remove your running &lt;code&gt;nginx&lt;/code&gt; container, do the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker stop web
+$ docker rm web
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;mount-a-volume-on-the-container&#34;&gt;Mount a volume on the container&lt;/h3&gt;
+
+&lt;p&gt;When you start &lt;code&gt;boot2docker&lt;/code&gt;, it automatically shares your &lt;code&gt;/Users&lt;/code&gt; directory
+with the VM. You can use this share point to mount directories onto your container.
+The next exercise demonstrates how to do this.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Change to your user &lt;code&gt;$HOME&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd $HOME
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make a new &lt;code&gt;site&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir site
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change into the &lt;code&gt;site&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd site
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new &lt;code&gt;index.html&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ echo &amp;quot;my new site&amp;quot; &amp;gt; index.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start a new &lt;code&gt;nginx&lt;/code&gt; container and replace the &lt;code&gt;html&lt;/code&gt; folder with your &lt;code&gt;site&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -P -v $HOME/site:/usr/share/nginx/html --name mysite nginx
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Get the &lt;code&gt;mysite&lt;/code&gt; container&amp;rsquo;s port.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker port mysite
+80/tcp -&amp;gt; 0.0.0.0:49166
+443/tcp -&amp;gt; 0.0.0.0:49165
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open the site in a browser:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/installation/installation/installation/images/newsite_view.png&#34; alt=&#34;My site page&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Try adding a page to your &lt;code&gt;$HOME/site&lt;/code&gt; in real time.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ echo &amp;quot;This is cool&amp;quot; &amp;gt; cool.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open the new page in the browser.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/installation/installation/installation/images/cool_view.png&#34; alt=&#34;Cool page&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Stop and then remove your running &lt;code&gt;mysite&lt;/code&gt; container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker stop mysite
+$ docker rm mysite
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;upgrade-boot2docker&#34;&gt;Upgrade Boot2Docker&lt;/h2&gt;
+
+&lt;p&gt;If you running Boot2Docker 1.4.1 or greater, you can upgrade Boot2Docker from
+the command line. If you are running an older version, you should use the
+package provided by the &lt;code&gt;boot2docker&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;h3 id=&#34;from-the-command-line&#34;&gt;From the command line&lt;/h3&gt;
+
+&lt;p&gt;To upgrade from 1.4.1 or greater, you can do this:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a terminal on your local machine.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Stop the &lt;code&gt;boot2docker&lt;/code&gt; application.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker stop
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the upgrade command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker upgrade
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;use-the-installer&#34;&gt;Use the installer&lt;/h3&gt;
+
+&lt;p&gt;To upgrade any version of Boot2Docker, do this:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a terminal on your local machine.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Stop the &lt;code&gt;boot2docker&lt;/code&gt; application.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker stop
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to the &lt;a href=&#34;https://github.com/boot2docker/osx-installer/releases/latest&#34;&gt;boot2docker/osx-installer &lt;/a&gt; release page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Download Boot2Docker by clicking &lt;code&gt;Boot2Docker-x.x.x.pkg&lt;/code&gt; in the &amp;ldquo;Downloads&amp;rdquo;
+section.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install Boot2Docker by double-clicking the package.&lt;/p&gt;
+
+&lt;p&gt;The installer places Boot2Docker in your &amp;ldquo;Applications&amp;rdquo; folder.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;uninstallation&#34;&gt;Uninstallation&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Go to the &lt;a href=&#34;https://github.com/boot2docker/osx-installer/releases/latest&#34;&gt;boot2docker/osx-installer &lt;/a&gt; release page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Download the source code by clicking &lt;code&gt;Source code (zip)&lt;/code&gt; or
+&lt;code&gt;Source code (tar.gz)&lt;/code&gt; in the &amp;ldquo;Downloads&amp;rdquo; section.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Extract the source code.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open a terminal on your local machine.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change to the directory where you extracted the source code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd &amp;lt;path to extracted source code&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure the uninstall.sh script is executable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ chmod +x uninstall.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the uninstall.sh script:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ./uninstall.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;learning-more-and-acknowledgement&#34;&gt;Learning more and acknowledgement&lt;/h2&gt;
+
+&lt;p&gt;Use &lt;code&gt;boot2docker help&lt;/code&gt; to list the full command line reference. For more
+information about using SSH or SCP to access the Boot2Docker VM, see the README
+at  &lt;a href=&#34;https://github.com/boot2docker/boot2docker&#34;&gt;Boot2Docker repository&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Thanks to Chris Jones whose &lt;a href=&#34;http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide&#34;&gt;blog&lt;/a&gt;&lt;br /&gt;
+inspired me to redo this page.&lt;/p&gt;
+
+&lt;p&gt;Continue with the &lt;a href=&#34;http://localhost/installation/installation/userguide&#34;&gt;Docker User Guide&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation on Microsoft Azure platform</title>
+      <link>http://localhost/installation/azure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/azure/</guid>
+      <description>
+
+&lt;h1 id=&#34;microsoft-azure&#34;&gt;Microsoft Azure&lt;/h1&gt;
+
+&lt;h2 id=&#34;creating-a-docker-host-machine-on-azure&#34;&gt;Creating a Docker host machine on Azure&lt;/h2&gt;
+
+&lt;p&gt;Please check out to the following detailed tutorials on &lt;a href=&#34;http://azure.microsoft.com/&#34;&gt;Microsoft Azure&lt;/a&gt;
+website to find out different ways to create a Docker-ready Linux virtual
+machines on Azure:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-docker-vm-extension/&#34;&gt;Docker Virtual Machine Extensions on Azure&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://azure.microsoft.com/documentation/articles/virtual-machines-docker-with-xplat-cli/&#34;&gt;How to use the Docker VM Extension from Azure Cross-Platform Interface&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://azure.microsoft.com/documentation/articles/virtual-machines-docker-with-portal/&#34;&gt;How to use the Docker VM Extension with the Azure Portal&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://azure.microsoft.com/en-us/documentation/articles/virtual-machines-docker-machine/&#34;&gt;Using Docker Machine with Azure&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;what-next&#34;&gt;What next?&lt;/h2&gt;
+
+&lt;p&gt;Continue with the &lt;a href=&#34;http://localhost/installation/installation/userguide/&#34;&gt;User Guide&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation on Oracle Linux</title>
+      <link>http://localhost/installation/oracle/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/installation/oracle/</guid>
+      <description>
+
+&lt;h1 id=&#34;oracle-linux-6-and-7&#34;&gt;Oracle Linux 6 and 7&lt;/h1&gt;
+
+&lt;p&gt;You do not require an Oracle Linux Support subscription to install Docker on
+Oracle Linux.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;For Oracle Linux customers with an active support subscription:&lt;/em&gt;
+Docker is available in either the &lt;code&gt;ol6_x86_64_addons&lt;/code&gt; or &lt;code&gt;ol7_x86_64_addons&lt;/code&gt;
+channel for Oracle Linux 6 and Oracle Linux 7 on the &lt;a href=&#34;https://linux.oracle.com&#34;&gt;Unbreakable Linux Network
+(ULN)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;For Oracle Linux users without an active support subscription:&lt;/em&gt;
+Docker is available in the appropriate &lt;code&gt;ol6_addons&lt;/code&gt; or &lt;code&gt;ol7_addons&lt;/code&gt; repository
+on &lt;a href=&#34;http://public-yum.oracle.com&#34;&gt;Oracle Public Yum&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Docker requires the use of the Unbreakable Enterprise Kernel Release 3 (3.8.13)
+or higher on Oracle Linux. This kernel supports the Docker btrfs storage engine
+on both Oracle Linux 6 and 7.&lt;/p&gt;
+
+&lt;p&gt;Due to current Docker limitations, Docker is only able to run only on the x86_64
+architecture.&lt;/p&gt;
+
+&lt;h2 id=&#34;to-enable-the-addons-channel-via-the-unbreakable-linux-network&#34;&gt;To enable the &lt;em&gt;addons&lt;/em&gt; channel via the Unbreakable Linux Network:&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Enable either the &lt;em&gt;ol6_x86_64_addons&lt;/em&gt; or &lt;em&gt;ol7_x86_64_addons&lt;/em&gt; channel
+via the ULN web interface.
+Consult the &lt;a href=&#34;http://docs.oracle.com/cd/E52668_01/E39381/html/index.html&#34;&gt;Unbreakable Linux Network User&amp;rsquo;s
+Guide&lt;/a&gt; for
+documentation on subscribing to channels.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;to-enable-the-addons-repository-via-oracle-public-yum&#34;&gt;To enable the &lt;em&gt;addons&lt;/em&gt; repository via Oracle Public Yum:&lt;/h2&gt;
+
+&lt;p&gt;The latest release of Oracle Linux 6 and 7 are automatically configured to use
+the Oracle Public Yum repositories during installation. However, the &lt;em&gt;addons&lt;/em&gt;
+repository is not enabled by default.&lt;/p&gt;
+
+&lt;p&gt;To enable the &lt;em&gt;addons&lt;/em&gt; repository:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Edit either &lt;code&gt;/etc/yum.repos.d/public-yum-ol6.repo&lt;/code&gt; or
+&lt;code&gt;/etc/yum.repos.d/public-yum-ol7.repo&lt;/code&gt;
+and set &lt;code&gt;enabled=1&lt;/code&gt; in the &lt;code&gt;[ol6_addons]&lt;/code&gt; or the &lt;code&gt;[ol7_addons]&lt;/code&gt; stanza.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Ensure the appropriate &lt;em&gt;addons&lt;/em&gt; channel or repository has been enabled.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use yum to install the Docker package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum install docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;starting-docker&#34;&gt;Starting Docker&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Now that it&amp;rsquo;s installed, start the Docker daemon:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;On Oracle Linux 6:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo service docker start
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On Oracle Linux 7:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl start docker.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you want the Docker daemon to start automatically at boot:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;On Oracle Linux 6:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo chkconfig docker on
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On Oracle Linux 7:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl enable docker.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Done!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;custom-daemon-options&#34;&gt;Custom daemon options&lt;/h2&gt;
+
+&lt;p&gt;If you need to add an HTTP Proxy, set a different directory or partition for the
+Docker runtime files, or make other customizations, read our systemd article to
+learn how to &lt;a href=&#34;http://localhost/installation/installation/articles/systemd/&#34;&gt;customize your systemd Docker daemon options&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;using-the-btrfs-storage-engine&#34;&gt;Using the btrfs storage engine&lt;/h2&gt;
+
+&lt;p&gt;Docker on Oracle Linux 6 and 7 supports the use of the btrfs storage engine.
+Before enabling btrfs support, ensure that &lt;code&gt;/var/lib/docker&lt;/code&gt; is stored on a
+btrfs-based filesystem. Review &lt;a href=&#34;http://docs.oracle.com/cd/E37670_01/E37355/html/ol_btrfs.html&#34;&gt;Chapter
+5&lt;/a&gt; of the &lt;a href=&#34;http://docs.oracle.com/cd/E37670_01/E37355/html/index.html&#34;&gt;Oracle
+Linux Administrator&amp;rsquo;s Solution
+Guide&lt;/a&gt; for details
+on how to create and mount btrfs filesystems.&lt;/p&gt;
+
+&lt;p&gt;To enable btrfs support on Oracle Linux:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Ensure that &lt;code&gt;/var/lib/docker&lt;/code&gt; is on a btrfs filesystem.&lt;/li&gt;
+&lt;li&gt;Edit &lt;code&gt;/etc/sysconfig/docker&lt;/code&gt; and add &lt;code&gt;-s btrfs&lt;/code&gt; to the &lt;code&gt;OTHER_ARGS&lt;/code&gt; field.&lt;/li&gt;
+&lt;li&gt;Restart the Docker daemon:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can now continue with the &lt;a href=&#34;http://localhost/installation/installation/userguide/&#34;&gt;Docker User Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;uninstallation&#34;&gt;Uninstallation&lt;/h2&gt;
+
+&lt;p&gt;To uninstall the Docker package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum -y remove docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above command will not remove images, containers, volumes, or user created
+configuration files on your host. If you wish to delete all images, containers,
+and volumes run the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rm -rf /var/lib/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You must delete the user created configuration files manually.&lt;/p&gt;
+
+&lt;h2 id=&#34;known-issues&#34;&gt;Known issues&lt;/h2&gt;
+
+&lt;h3 id=&#34;docker-unmounts-btrfs-filesystem-on-shutdown&#34;&gt;Docker unmounts btrfs filesystem on shutdown&lt;/h3&gt;
+
+&lt;p&gt;If you&amp;rsquo;re running Docker using the btrfs storage engine and you stop the Docker
+service, it will unmount the btrfs filesystem during the shutdown process. You
+should ensure the filesystem is mounted properly prior to restarting the Docker
+service.&lt;/p&gt;
+
+&lt;p&gt;On Oracle Linux 7, you can use a &lt;code&gt;systemd.mount&lt;/code&gt; definition and modify the
+Docker &lt;code&gt;systemd.service&lt;/code&gt; to depend on the btrfs mount defined in systemd.&lt;/p&gt;
+
+&lt;h3 id=&#34;selinux-support-on-oracle-linux-7&#34;&gt;SElinux support on Oracle Linux 7&lt;/h3&gt;
+
+&lt;p&gt;SElinux must be set to &lt;code&gt;Permissive&lt;/code&gt; or &lt;code&gt;Disabled&lt;/code&gt; in &lt;code&gt;/etc/sysconfig/selinux&lt;/code&gt; to
+use the btrfs storage engine on Oracle Linux 7.&lt;/p&gt;
+
+&lt;h2 id=&#34;further-issues&#34;&gt;Further issues?&lt;/h2&gt;
+
+&lt;p&gt;If you have a current Basic or Premier Support Subscription for Oracle Linux,
+you can report any issues you have with the installation of Docker via a Service
+Request at &lt;a href=&#34;http://support.oracle.com&#34;&gt;My Oracle Support&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you do not have an Oracle Linux Support Subscription, you can use the &lt;a href=&#34;https://community.oracle.com/community/server_%26_storage_systems/linux/oracle_linux&#34;&gt;Oracle
+Linux
+Forum&lt;/a&gt; for community-based support.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

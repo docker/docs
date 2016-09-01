@@ -1,0 +1,2669 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machines on Docker Docs</title>
+    <link>http://localhost/machine/</link>
+    <description>Recent content in Machines on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/machine/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Docker Machine</title>
+      <link>http://localhost/machine/install-machine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/machine/install-machine/</guid>
+      <description>
+
+&lt;h2 id=&#34;install-docker-machine&#34;&gt;Install Docker Machine&lt;/h2&gt;
+
+&lt;p&gt;Docker Machine is supported on Windows, OS X, and Linux and is installable as one
+standalone binary.  The links to the binaries for the various platforms and
+architectures are below:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-386.exe&#34;&gt;Windows - 32bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-amd64.exe&#34;&gt;Windows - 64bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64&#34;&gt;OSX - x86_64&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-386&#34;&gt;OSX - (old macs)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-amd64&#34;&gt;Linux - x86_64&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-386&#34;&gt;Linux - i386&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;osx-and-linux&#34;&gt;OSX and Linux&lt;/h3&gt;
+
+&lt;p&gt;To install on OSX or Linux, download the proper binary to somewhere in your
+&lt;code&gt;PATH&lt;/code&gt; (e.g. &lt;code&gt;/usr/local/bin&lt;/code&gt;) and make it executable.  For instance, to install on
+most OSX machines these commands should suffice:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64 &amp;gt; /usr/local/bin/docker-machine
+$ chmod +x /usr/local/bin/docker-machine
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For Linux, just substitute &amp;ldquo;linux&amp;rdquo; for &amp;ldquo;darwin&amp;rdquo; in the binary name above.&lt;/p&gt;
+
+&lt;p&gt;Now you should be able to check the version with &lt;code&gt;docker-machine -v&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine -v
+machine version 0.3.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In order to run Docker commands on your machines without having to use SSH, make
+sure to install the Docker client as well, e.g.:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -L https://get.docker.com/builds/Darwin/x86_64/docker-latest &amp;gt; /usr/local/bin/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;windows&#34;&gt;Windows&lt;/h3&gt;
+
+&lt;p&gt;Currently, Docker recommends that you install and use Docker Machine on Windows
+with &lt;a href=&#34;https://msysgit.github.io/&#34;&gt;msysgit&lt;/a&gt;.  This will provide you with some
+programs that Docker Machine relies on such as &lt;code&gt;ssh&lt;/code&gt;, as well as a functioning
+shell.&lt;/p&gt;
+
+&lt;p&gt;When you have installed msysgit, start up the terminal prompt and run the
+following commands.  Here it is assumed that you are on a 64-bit Windows
+installation.  If you are on a 32-bit installation, please substitute &amp;ldquo;i386&amp;rdquo; for
+&amp;ldquo;x86_64&amp;rdquo; in the URLs mentioned.&lt;/p&gt;
+
+&lt;p&gt;First, install the Docker client binary:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -L https://get.docker.com/builds/Windows/x86_64/docker-latest.exe &amp;gt; /bin/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, install the Docker Machine binary:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-amd64.exe &amp;gt; /bin/docker-machine
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now running &lt;code&gt;docker-machine&lt;/code&gt; should work.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine -v
+machine version 0.3.0
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Overview of Docker Machine</title>
+      <link>http://localhost/machine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/machine/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-machine&#34;&gt;Docker Machine&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Machine is currently in beta, so things are likely to change. We
+don&amp;rsquo;t recommend you use it in production yet.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Machine lets you create Docker hosts on your computer, on cloud providers, and
+inside your own data center. It creates servers, installs Docker on them, then
+configures the Docker client to talk to them.&lt;/p&gt;
+
+&lt;p&gt;Once your Docker host has been created, it then has a number of commands for
+managing them:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Starting, stopping, restarting&lt;/li&gt;
+&lt;li&gt;Upgrading Docker&lt;/li&gt;
+&lt;li&gt;Configuring the Docker client to talk to your host&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;getting-help&#34;&gt;Getting help&lt;/h2&gt;
+
+&lt;p&gt;Docker Machine is still in its infancy and under active development. If you need
+help, would like to contribute, or simply want to talk about to the project with
+like-minded individuals, we have a number of open channels for communication.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To report bugs or file feature requests: please use the &lt;a href=&#34;https://github.com/docker/machine/issues&#34;&gt;issue tracker on
+Github&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To talk about the project with people in real time: please join the
+&lt;code&gt;#docker-machine&lt;/code&gt; channel on IRC.&lt;/li&gt;
+&lt;li&gt;To contribute code or documentation changes: please &lt;a href=&#34;https://github.com/docker/machine/pulls&#34;&gt;submit a pull request on
+Github&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For more information and resources, please visit
+&lt;a href=&#34;https://docs.docker.com/project/get-help/&#34;&gt;https://docs.docker.com/project/get-help/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Docker Machine is supported on Windows, OS X, and Linux and is installable as one
+standalone binary. The links to the binaries for the various platforms and
+architectures are below:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-386.exe&#34;&gt;Windows - 32bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-amd64.exe&#34;&gt;Windows - 64bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64&#34;&gt;OSX - x86_64&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-386&#34;&gt;OSX - (old macs)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-amd64&#34;&gt;Linux - x86_64&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-386&#34;&gt;Linux - i386&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;os-x-and-linux&#34;&gt;OS X and Linux&lt;/h3&gt;
+
+&lt;p&gt;To install on OS X or Linux, download the proper binary to somewhere in your
+&lt;code&gt;PATH&lt;/code&gt; (e.g. &lt;code&gt;/usr/local/bin&lt;/code&gt;) and make it executable. For instance, to install on
+most OS X machines these commands should suffice:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64 &amp;gt; /usr/local/bin/docker-machine
+$ chmod +x /usr/local/bin/docker-machine
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For Linux, just substitute &amp;ldquo;linux&amp;rdquo; for &amp;ldquo;darwin&amp;rdquo; in the binary name above.&lt;/p&gt;
+
+&lt;p&gt;Now you should be able to check the version with &lt;code&gt;docker-machine -v&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine -v
+machine version 0.3.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In order to run Docker commands on your machines without having to use SSH, make
+sure to install the Docker client as well, e.g.:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -L https://get.docker.com/builds/Darwin/x86_64/docker-latest &amp;gt; /usr/local/bin/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;windows&#34;&gt;Windows&lt;/h3&gt;
+
+&lt;p&gt;Currently, Docker recommends that you install and use Docker Machine on Windows
+with &lt;a href=&#34;https://msysgit.github.io/&#34;&gt;msysgit&lt;/a&gt;. This will provide you with some
+programs that Docker Machine relies on such as &lt;code&gt;ssh&lt;/code&gt;, as well as a functioning
+shell.&lt;/p&gt;
+
+&lt;p&gt;When you have installed msysgit, start up the terminal prompt and run the
+following commands. Here it is assumed that you are on a 64-bit Windows
+installation. If you are on a 32-bit installation, please substitute &amp;ldquo;i386&amp;rdquo; for
+&amp;ldquo;x86_64&amp;rdquo; in the URLs mentioned.&lt;/p&gt;
+
+&lt;p&gt;First, install the Docker client binary:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -L https://get.docker.com/builds/Windows/x86_64/docker-latest.exe &amp;gt; /bin/docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, install the Docker Machine binary:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-amd64.exe &amp;gt; /bin/docker-machine
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now running &lt;code&gt;docker-machine&lt;/code&gt; should work.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine -v
+machine version 0.3.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;getting-started-with-docker-machine-using-a-local-vm&#34;&gt;Getting started with Docker Machine using a local VM&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s take a look at using &lt;code&gt;docker-machine&lt;/code&gt; for creating, using, and managing a
+Docker host inside of &lt;a href=&#34;https://www.virtualbox.org/&#34;&gt;VirtualBox&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;First, ensure that
+&lt;a href=&#34;https://www.virtualbox.org/wiki/Downloads&#34;&gt;VirtualBox 4.3.28&lt;/a&gt; is correctly
+installed on your system.&lt;/p&gt;
+
+&lt;p&gt;If you run the &lt;code&gt;docker-machine ls&lt;/code&gt; command to show all available machines, you will see
+that none have been created so far.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME   ACTIVE   DRIVER   STATE   URL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To create one, we run the &lt;code&gt;docker-machine create&lt;/code&gt; command, passing the string
+&lt;code&gt;virtualbox&lt;/code&gt; to the &lt;code&gt;--driver&lt;/code&gt; flag. The final argument we pass is the name of
+the machine - in this case, we will name our machine &amp;ldquo;dev&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;This command will download a lightweight Linux distribution
+(&lt;a href=&#34;https://github.com/boot2docker/boot2docker&#34;&gt;boot2docker&lt;/a&gt;) with the Docker
+daemon installed, and will create and start a VirtualBox VM with Docker running.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create --driver virtualbox dev
+Creating CA: /home/username/.docker/machine/certs/ca.pem
+Creating client certificate: /home/username/.docker/machine/certs/cert.pem
+Image cache does not exist, creating it at /home/username/.docker/machine/cache...
+No default boot2docker iso found locally, downloading the latest release...
+Downloading https://github.com/boot2docker/boot2docker/releases/download/v1.6.2/boot2docker.iso to /home/username/.docker/machine/cache/boot2docker.iso...
+Creating VirtualBox VM...
+Creating SSH key...
+Starting VirtualBox VM...
+Starting VM...
+To see how to connect Docker to this machine, run: docker-machine env dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see the machine you have created by running the &lt;code&gt;docker-machine ls&lt;/code&gt;
+command again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL                         SWARM
+dev             virtualbox   Running   tcp://192.168.99.100:2376
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, as noted in the output of the &lt;code&gt;docker-machine create&lt;/code&gt; command, we have to
+tell Docker to talk to that machine. You can do this with the &lt;code&gt;docker-machine
+env&lt;/code&gt; command. For example,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ eval &amp;quot;$(docker-machine env dev)&amp;quot;
+$ docker ps
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are using &lt;code&gt;fish&lt;/code&gt;, or a Windows shell such as
+Powershell/&lt;code&gt;cmd.exe&lt;/code&gt; the above method will not work as described. Instead,
+see &lt;a href=&#34;https://docs.docker.com/machine/#env&#34;&gt;the &lt;code&gt;env&lt;/code&gt; command&amp;rsquo;s documentation&lt;/a&gt;
+to learn how to set the environment variables for your shell.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This will set environment variables that the Docker client will read which specify
+the TLS settings. Note that you will need to do that every time you open a new tab or
+restart your machine.&lt;/p&gt;
+
+&lt;p&gt;To see what will be set, run &lt;code&gt;docker-machine env dev&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine env dev
+export DOCKER_TLS_VERIFY=&amp;quot;1&amp;quot;
+export DOCKER_HOST=&amp;quot;tcp://172.16.62.130:2376&amp;quot;
+export DOCKER_CERT_PATH=&amp;quot;/Users/&amp;lt;your username&amp;gt;/.docker/machine/machines/dev&amp;quot;
+export DOCKER_MACHINE_NAME=&amp;quot;dev&amp;quot;
+# Run this command to configure your shell:
+# eval &amp;quot;$(docker-machine env dev)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can now run Docker commands on this host:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run busybox echo hello world
+Unable to find image &#39;busybox&#39; locally
+Pulling repository busybox
+e72ac664f4f0: Download complete
+511136ea3c5a: Download complete
+df7546f9f060: Download complete
+e433a6c5b276: Download complete
+hello world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Any exposed ports are available on the Docker host’s IP address, which you can
+get using the &lt;code&gt;docker-machine ip&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ip dev
+192.168.99.100
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For instance, you can try running a webserver (&lt;a href=&#34;https://nginx.org&#34;&gt;nginx&lt;/a&gt;) in a
+container with the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -p 8000:80 nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When the image is finished pulling, you can hit the server at port 8000 on the
+IP address given to you by &lt;code&gt;docker-machine ip&lt;/code&gt;. For instance:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl $(docker-machine ip dev):8000
+&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html&amp;gt;
+&amp;lt;head&amp;gt;
+&amp;lt;title&amp;gt;Welcome to nginx!&amp;lt;/title&amp;gt;
+&amp;lt;style&amp;gt;
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+&amp;lt;/style&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;h1&amp;gt;Welcome to nginx!&amp;lt;/h1&amp;gt;
+&amp;lt;p&amp;gt;If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.&amp;lt;/p&amp;gt;
+
+&amp;lt;p&amp;gt;For online documentation and support please refer to
+&amp;lt;a href=&amp;quot;http://nginx.org/&amp;quot;&amp;gt;nginx.org&amp;lt;/a&amp;gt;.&amp;lt;br/&amp;gt;
+Commercial support is available at
+&amp;lt;a href=&amp;quot;http://nginx.com/&amp;quot;&amp;gt;nginx.com&amp;lt;/a&amp;gt;.&amp;lt;/p&amp;gt;
+
+&amp;lt;p&amp;gt;&amp;lt;em&amp;gt;Thank you for using nginx.&amp;lt;/em&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can create and manage as many local VMs running Docker as you please- just
+run &lt;code&gt;docker-machine create&lt;/code&gt; again. All created machines will appear in the
+output of &lt;code&gt;docker-machine ls&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you are finished using a host for the time being, you can stop it with
+&lt;code&gt;docker-machine stop&lt;/code&gt; and later start it again with &lt;code&gt;docker-machine start&lt;/code&gt;.
+Make sure to specify the machine name as an argument:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine stop dev
+$ docker-machine start dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;using-docker-machine-with-a-cloud-provider&#34;&gt;Using Docker Machine with a cloud provider&lt;/h2&gt;
+
+&lt;p&gt;Creating a local virtual machine running Docker is useful and fun, but it is not
+the only thing Docker Machine is capable of. Docker Machine supports several
+“drivers” which let you use the same interface to create hosts on many different
+cloud or local virtualization platforms. This is accomplished by using the
+&lt;code&gt;docker-machine create&lt;/code&gt; command with the &lt;code&gt;--driver&lt;/code&gt; flag. Here we will be
+demonstrating the &lt;a href=&#34;https://digitalocean.com&#34;&gt;Digital Ocean&lt;/a&gt; driver (called
+&lt;code&gt;digitalocean&lt;/code&gt;), but there are drivers included for several providers including
+Amazon Web Services, Google Compute Engine, and Microsoft Azure.&lt;/p&gt;
+
+&lt;p&gt;Usually it is required that you pass account verification credentials for these
+providers as flags to &lt;code&gt;docker-machine create&lt;/code&gt;. These flags are unique for each driver.
+For instance, to pass a Digital Ocean access token you use the
+&lt;code&gt;--digitalocean-access-token&lt;/code&gt; flag.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s take a look at how to do this.&lt;/p&gt;
+
+&lt;p&gt;To generate your access token:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Go to the Digital Ocean administrator console and click on &amp;ldquo;API&amp;rdquo; in the header.&lt;/li&gt;
+&lt;li&gt;Click on &amp;ldquo;Generate New Token&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;Give the token a clever name (e.g. &amp;ldquo;machine&amp;rdquo;), make sure the &amp;ldquo;Write&amp;rdquo; checkbox
+is checked, and click on &amp;ldquo;Generate Token&amp;rdquo;.&lt;/li&gt;
+&lt;li&gt;Grab the big long hex string that is generated (this is your token) and store
+it somewhere safe.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now, run &lt;code&gt;docker-machine create&lt;/code&gt; with the &lt;code&gt;digitalocean&lt;/code&gt; driver and pass your key to
+the &lt;code&gt;--digitalocean-access-token&lt;/code&gt; flag.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create \
+    --driver digitalocean \
+    --digitalocean-access-token 0ab77166d407f479c6701652cee3a46830fef88b8199722b87821621736ab2d4 \
+    staging
+Creating SSH key...
+Creating Digital Ocean droplet...
+To see how to connect Docker to this machine, run: docker-machine env staging
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For convenience, &lt;code&gt;docker-machine&lt;/code&gt; will use sensible defaults for choosing
+settings such as the image that the VPS is based on, but they can also be
+overridden using their respective flags (e.g. &lt;code&gt;--digitalocean-image&lt;/code&gt;). This is
+useful if, for instance, you want to create a nice large instance with a lot of
+memory and CPUs (by default &lt;code&gt;docker-machine&lt;/code&gt; creates a small VPS). For a full
+list of the flags/settings available and their defaults, see the output of
+&lt;code&gt;docker-machine create -h&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;When the creation of a host is initiated, a unique SSH key for accessing the
+host (initially for provisioning, then directly later if the user runs the
+&lt;code&gt;docker-machine ssh&lt;/code&gt; command) will be created automatically and stored in the
+client&amp;rsquo;s directory in &lt;code&gt;~/.docker/machines&lt;/code&gt;. After the creation of the SSH key,
+Docker will be installed on the remote machine and the daemon will be configured
+to accept remote connections over TCP using TLS for authentication. Once this
+is finished, the host is ready for connection.&lt;/p&gt;
+
+&lt;p&gt;To prepare the Docker client to send commands to the remote server we have
+created, we can use the subshell method again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ eval &amp;quot;$(docker-machine env staging)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From this point, the remote host behaves much like the local host we created in
+the last section. If we look at &lt;code&gt;docker-machine ls&lt;/code&gt;, we&amp;rsquo;ll see it is now the
+&amp;ldquo;active&amp;rdquo; host, indicated by an asterisk (&lt;code&gt;*&lt;/code&gt;) in that column:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME      ACTIVE   DRIVER         STATE     URL
+dev                virtualbox     Running   tcp://192.168.99.103:2376
+staging   *        digitalocean   Running   tcp://104.236.50.118:2376
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To remove a host and all of its containers and images, use &lt;code&gt;docker-machine rm&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine rm dev staging
+$ docker-machine ls
+NAME      ACTIVE   DRIVER       STATE     URL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;adding-a-host-without-a-driver&#34;&gt;Adding a host without a driver&lt;/h2&gt;
+
+&lt;p&gt;You can add a host to Docker which only has a URL and no driver. Therefore it
+can be used an alias for an existing host so you don’t have to type out the URL
+every time you run a Docker command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create --url=tcp://50.134.234.20:2376 custombox
+$ docker-machine ls
+NAME        ACTIVE   DRIVER    STATE     URL
+custombox   *        none      Running   tcp://50.134.234.20:2376
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;using-docker-machine-with-docker-swarm&#34;&gt;Using Docker Machine with Docker Swarm&lt;/h2&gt;
+
+&lt;p&gt;Docker Machine can also provision &lt;a href=&#34;https://github.com/docker/swarm&#34;&gt;Swarm&lt;/a&gt;
+clusters. This can be used with any driver and will be secured with TLS.&lt;/p&gt;
+
+&lt;p&gt;First, create a Swarm token. Optionally, you can use another discovery service.
+See the Swarm docs for details.&lt;/p&gt;
+
+&lt;p&gt;To create the token, first create a Machine. This example will use VirtualBox.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create -d virtualbox local
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Load the Machine configuration into your shell:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ eval &amp;quot;$(docker-machine env local)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then run generate the token using the Swarm Docker image:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run swarm create
+1257e0f0bbb499b5cd04b4c9bdb2dab3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once you have the token, you can create the cluster.&lt;/p&gt;
+
+&lt;h3 id=&#34;swarm-master&#34;&gt;Swarm master&lt;/h3&gt;
+
+&lt;p&gt;Create the Swarm master:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker-machine create \
+    -d virtualbox \
+    --swarm \
+    --swarm-master \
+    --swarm-discovery token://&amp;lt;TOKEN-FROM-ABOVE&amp;gt; \
+    swarm-master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Replace &lt;code&gt;&amp;lt;TOKEN-FROM-ABOVE&amp;gt;&lt;/code&gt; with your random token.
+This will create the Swarm master and add itself as a Swarm node.&lt;/p&gt;
+
+&lt;h3 id=&#34;swarm-nodes&#34;&gt;Swarm nodes&lt;/h3&gt;
+
+&lt;p&gt;Now, create more Swarm nodes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker-machine create \
+    -d virtualbox \
+    --swarm \
+    --swarm-discovery token://&amp;lt;TOKEN-FROM-ABOVE&amp;gt; \
+    swarm-node-00
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You now have a Swarm cluster across two nodes.
+To connect to the Swarm master, use &lt;code&gt;eval $(docker-machine env --swarm swarm-master)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine env --swarm swarm-master
+export DOCKER_TLS_VERIFY=1
+export DOCKER_CERT_PATH=&amp;quot;/home/ehazlett/.docker/machines/.client&amp;quot;
+export DOCKER_HOST=tcp://192.168.99.100:3376
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can load this into your environment using
+&lt;code&gt;eval &amp;quot;$(docker-machine env --swarm swarm-master)&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now you can use the Docker CLI to query:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker info
+Containers: 1
+Nodes: 1
+ swarm-master: 192.168.99.100:2376
+  └ Containers: 2
+  └ Reserved CPUs: 0 / 4
+  └ Reserved Memory: 0 B / 999.9 MiB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;subcommands&#34;&gt;Subcommands&lt;/h2&gt;
+
+&lt;h4 id=&#34;active&#34;&gt;active&lt;/h4&gt;
+
+&lt;p&gt;See which machine is &amp;ldquo;active&amp;rdquo; (a machine is considered active if the
+&lt;code&gt;DOCKER_HOST&lt;/code&gt; environment variable points to it).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME      ACTIVE   DRIVER         STATE     URL
+dev                virtualbox     Running   tcp://192.168.99.103:2376
+staging   *        digitalocean   Running   tcp://104.236.50.118:2376
+$ echo $DOCKER_HOST
+tcp://104.236.50.118:2376
+$ docker-machine active
+staging
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;create&#34;&gt;create&lt;/h4&gt;
+
+&lt;p&gt;Create a machine.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create --driver virtualbox dev
+Creating CA: /home/username/.docker/machine/certs/ca.pem
+Creating client certificate: /home/username/.docker/machine/certs/cert.pem
+Image cache does not exist, creating it at /home/username/.docker/machine/cache...
+No default boot2docker iso found locally, downloading the latest release...
+Downloading https://github.com/boot2docker/boot2docker/releases/download/v1.6.2/boot2docker.iso to /home/username/.docker/machine/cache/boot2docker.iso...
+Creating VirtualBox VM...
+Creating SSH key...
+Starting VirtualBox VM...
+Starting VM...
+To see how to connect Docker to this machine, run: docker-machine env dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;filtering-create-flags-by-driver-in-the-help-text&#34;&gt;Filtering create flags by driver in the help text&lt;/h5&gt;
+
+&lt;p&gt;You may notice that the &lt;code&gt;docker-machine create&lt;/code&gt; command has a lot of flags due
+to the huge plethora of provider-specific options which are available.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create -h | wc -l
+145
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While it is great to have access to all this information, sometimes you simply
+want to get a peek at the subset of flags which are applicable to the driver you
+are working with. To that extent, specifying an argument to the &lt;code&gt;-d&lt;/code&gt; flag will
+filter the create flags displayed in the help text to only what is applicable to
+that provider:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create -d virtualbox
+Usage: docker-machine create [OPTIONS] [arg...]
+
+Create a machine
+
+Options:
+   --virtualbox-boot2docker-url                                                                         The URL of the boot2docker image. Defaults to the latest available version [$VIRTUALBOX_BOOT2DOCKER_URL]
+   --virtualbox-cpu-count &amp;quot;1&amp;quot;                                                                           number of CPUs for the machine (-1 to use the number of CPUs available) [$VIRTUALBOX_CPU_COUNT]
+   --virtualbox-disk-size &amp;quot;20000&amp;quot;                                                                       Size of disk for host in MB [$VIRTUALBOX_DISK_SIZE]
+   --virtualbox-import-boot2docker-vm                                                                   The name of a Boot2Docker VM to import
+   --virtualbox-memory &amp;quot;1024&amp;quot;                                                                           Size of memory for host in MB [$VIRTUALBOX_MEMORY_SIZE]
+   --driver, -d &amp;quot;none&amp;quot;                                                                                  Driver to create machine with. Available drivers: amazonec2, azure, digitalocean, exoscale, google, none, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere
+   --engine-opt [--engine-opt option --engine-opt option]                                               Specify arbitrary opts to include with the created engine in the form opt=value
+   --engine-insecure-registry [--engine-insecure-registry option --engine-insecure-registry option]     Specify insecure registries to allow with the created engine
+   --engine-registry-mirror [--engine-registry-mirror option --engine-registry-mirror option]           Specify registry mirrors to use
+   --engine-label [--engine-label option --engine-label option]                                         Specify labels for the created engine
+   --engine-storage-driver &amp;quot;aufs&amp;quot;                                                                       Specify a storage driver to use with the engine
+   --swarm                                                                                              Configure Machine with Swarm
+   --swarm-master                                                                                       Configure Machine to be a Swarm master
+   --swarm-discovery                                                                                    Discovery service to use with Swarm
+   --swarm-host &amp;quot;tcp://0.0.0.0:3376&amp;quot;                                                                    ip/socket to listen on for Swarm master
+   --swarm-addr                                                                                         addr to advertise for Swarm (default: detect and use the machine IP)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;specifying-configuration-options-for-the-created-docker-engine&#34;&gt;Specifying configuration options for the created Docker engine&lt;/h5&gt;
+
+&lt;p&gt;As part of the process of creation, Docker Machine installs Docker and
+configures it with some sensible defaults. For instance, it allows connection
+from the outside world over TCP with TLS-based encryption and defaults to AUFS
+as the &lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#daemon-storage-driver-option&#34;&gt;storage
+driver&lt;/a&gt;
+when available.&lt;/p&gt;
+
+&lt;p&gt;There are several cases where the user might want to set options for the created
+Docker engine (also known as the Docker &lt;em&gt;daemon&lt;/em&gt;) themselves. For example, they
+may want to allow connection to a &lt;a href=&#34;https://docs.docker.com/registry/&#34;&gt;registry&lt;/a&gt;
+that they are running themselves using the &lt;code&gt;--insecure-registry&lt;/code&gt; flag for the
+daemon. Docker Machine supports the configuration of such options for the
+created engines via the &lt;code&gt;create&lt;/code&gt; command flags which begin with &lt;code&gt;--engine&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Note that Docker Machine simply sets the configured parameters on the daemon
+and does not set up any of the &amp;ldquo;dependencies&amp;rdquo; for you. For instance, if you
+specify that the created daemon should use &lt;code&gt;btrfs&lt;/code&gt; as a storage driver, you
+still must ensure that the proper dependencies are installed, the BTRFS
+filesystem has been created, and so on.&lt;/p&gt;
+
+&lt;p&gt;The following is an example usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create -d virtualbox \
+    --engine-label foo=bar \
+    --engine-label spam=eggs \
+    --engine-storage-driver devicemapper \
+    --engine-insecure-registry registry.myco.com \
+    foobarmachine
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will create a virtual machine running locally in Virtualbox which uses the
+&lt;code&gt;devicemapper&lt;/code&gt; storage backend, has the key-value pairs &lt;code&gt;foo=bar&lt;/code&gt; and
+&lt;code&gt;spam=eggs&lt;/code&gt; as labels on the engine, and allows pushing / pulling from the
+insecure registry located at &lt;code&gt;registry.myco.com&lt;/code&gt;. You can verify much of this
+by inspecting the output of &lt;code&gt;docker info&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ eval $(docker-machine env foobarmachine)
+$ docker version
+Containers: 0
+Images: 0
+Storage Driver: devicemapper
+...
+Name: foobarmachine
+...
+Labels:
+ foo=bar
+ spam=eggs
+ provider=virtualbox
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The supported flags are as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--engine-insecure-registry&lt;/code&gt;: Specify &lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#insecure-registries&#34;&gt;insecure registries&lt;/a&gt; to allow with the created engine&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--engine-registry-mirror&lt;/code&gt;: Specify &lt;a href=&#34;http://localhost/machine/https://github.com/docker/docker/blob/master/docs/sources/articles/registry_mirror&#34;&gt;registry mirrors&lt;/a&gt; to use&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--engine-label&lt;/code&gt;: Specify &lt;a href=&#34;https://docs.docker.com/userguide/labels-custom-metadata/#daemon-labels&#34;&gt;labels&lt;/a&gt; for the created engine&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--engine-storage-driver&lt;/code&gt;: Specify a &lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#daemon-storage-driver-option&#34;&gt;storage driver&lt;/a&gt; to use with the engine&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If the engine supports specifying the flag multiple times (such as with
+&lt;code&gt;--label&lt;/code&gt;), then so does Docker Machine.&lt;/p&gt;
+
+&lt;p&gt;In addition to this subset of daemon flags which are directly supported, Docker
+Machine also supports an additional flag, &lt;code&gt;--engine-opt&lt;/code&gt;, which can be used to
+specify arbitrary daemon options with the syntax &lt;code&gt;--engine-opt flagname=value&lt;/code&gt;.
+For example, to specify that the daemon should use &lt;code&gt;8.8.8.8&lt;/code&gt; as the DNS server
+for all containers, and always use the &lt;code&gt;syslog&lt;/code&gt; &lt;a href=&#34;https://docs.docker.com/reference/run/#logging-drivers-log-driver&#34;&gt;log
+driver&lt;/a&gt; you
+could run the following create command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create -d virtualbox \
+    --engine-opt dns=8.8.8.8 \
+    --engine-opt log-driver=syslog \
+    gdns
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;specifying-docker-swarm-options-for-the-created-machine&#34;&gt;Specifying Docker Swarm options for the created machine&lt;/h5&gt;
+
+&lt;p&gt;In addition to being able to configure Docker Engine options as listed above,
+you can use Machine to specify how the created Swarm master should be
+configured). There is a &lt;code&gt;--swarm-strategy&lt;/code&gt; flag, which you can use to specify
+the &lt;a href=&#34;https://docs.docker.com/swarm/scheduler/strategy/&#34;&gt;scheduling strategy&lt;/a&gt;
+which Docker Swarm should use (Machine defaults to the &lt;code&gt;spread&lt;/code&gt; strategy).
+There is also a general purpose &lt;code&gt;--swarm-opt&lt;/code&gt; option which works similar to how
+the aforementioned &lt;code&gt;--engine-opt&lt;/code&gt; option does, except that it specifies options
+for the &lt;code&gt;swarm manage&lt;/code&gt; command (used to boot a master node) instead of the base
+command. You can use this to configure features that power users might be
+interested in, such as configuring the heartbeat interval or Swarm&amp;rsquo;s willingness
+to over-commit resources.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re not sure how to configure these options, it is best to not specify
+configuration at all. Docker Machine will choose sensible defaults for you and
+you won&amp;rsquo;t have to worry about it.&lt;/p&gt;
+
+&lt;p&gt;Example create:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create -d virtualbox \
+    --swarm \
+    --swarm-master \
+    --swarm-discovery token://&amp;lt;token&amp;gt; \
+    --swarm-strategy binpack \
+    --swarm-opt heartbeat=5 \
+    upbeat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will set the swarm scheduling strategy to &amp;ldquo;binpack&amp;rdquo; (pack in containers as
+tightly as possible per host instead of spreading them out), and the &amp;ldquo;heartbeat&amp;rdquo;
+interval to 5 seconds.&lt;/p&gt;
+
+&lt;h4 id=&#34;config&#34;&gt;config&lt;/h4&gt;
+
+&lt;p&gt;Show the Docker client configuration for a machine.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine config dev
+--tlsverify --tlscacert=&amp;quot;/Users/ehazlett/.docker/machines/dev/ca.pem&amp;quot; --tlscert=&amp;quot;/Users/ehazlett/.docker/machines/dev/cert.pem&amp;quot; --tlskey=&amp;quot;/Users/ehazlett/.docker/machines/dev/key.pem&amp;quot; -H tcp://192.168.99.103:2376
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;env&#34;&gt;env&lt;/h4&gt;
+
+&lt;p&gt;Set environment variables to dictate that &lt;code&gt;docker&lt;/code&gt; should run a command against
+a particular machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;docker-machine env machinename&lt;/code&gt; will print out &lt;code&gt;export&lt;/code&gt; commands which can be
+run in a subshell. Running &lt;code&gt;docker-machine env -u&lt;/code&gt; will print &lt;code&gt;unset&lt;/code&gt; commands
+which reverse this effect.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ env | grep DOCKER
+$ eval &amp;quot;$(docker-machine env dev)&amp;quot;
+$ env | grep DOCKER
+DOCKER_HOST=tcp://192.168.99.101:2376
+DOCKER_CERT_PATH=/Users/nathanleclaire/.docker/machines/.client
+DOCKER_TLS_VERIFY=1
+DOCKER_MACHINE_NAME=dev
+$ # If you run a docker command, now it will run against that host.
+$ eval &amp;quot;$(docker-machine env -u)&amp;quot;
+$ env | grep DOCKER
+$ # The environment variables have been unset.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output described above is intended for the shells &lt;code&gt;bash&lt;/code&gt; and &lt;code&gt;zsh&lt;/code&gt; (if
+you&amp;rsquo;re not sure which shell you&amp;rsquo;re using, there&amp;rsquo;s a very good possibility that
+it&amp;rsquo;s &lt;code&gt;bash&lt;/code&gt;). However, these are not the only shells which Docker Machine
+supports.&lt;/p&gt;
+
+&lt;p&gt;If you are using &lt;code&gt;fish&lt;/code&gt; and the &lt;code&gt;SHELL&lt;/code&gt; environment variable is correctly set to
+the path where &lt;code&gt;fish&lt;/code&gt; is located, &lt;code&gt;docker-machine env name&lt;/code&gt; will print out the
+values in the format which &lt;code&gt;fish&lt;/code&gt; expects:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set -x DOCKER_TLS_VERIFY 1;
+set -x DOCKER_CERT_PATH &amp;quot;/Users/nathanleclaire/.docker/machine/machines/overlay&amp;quot;;
+set -x DOCKER_HOST tcp://192.168.99.102:2376;
+set -x DOCKER_MACHINE_NAME overlay
+# Run this command to configure your shell:
+# eval &amp;quot;$(docker-machine env overlay)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are on Windows and using Powershell or &lt;code&gt;cmd.exe&lt;/code&gt;, &lt;code&gt;docker-machine env&lt;/code&gt;
+cannot detect your shell automatically, but it does have support for these
+shells. In order to use them, specify which shell you would like to print the
+options for using the &lt;code&gt;--shell&lt;/code&gt; flag for &lt;code&gt;docker-machine env&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;For Powershell:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine.exe env --shell powershell dev
+$Env:DOCKER_TLS_VERIFY = &amp;quot;1&amp;quot;
+$Env:DOCKER_HOST = &amp;quot;tcp://192.168.99.101:2376&amp;quot;
+$Env:DOCKER_CERT_PATH = &amp;quot;C:\Users\captain\.docker\machine\machines\dev&amp;quot;
+$Env:DOCKER_MACHINE_NAME = &amp;quot;dev&amp;quot;
+# Run this command to configure your shell:
+# docker-machine.exe env --shell=powershell | Invoke-Expression
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For &lt;code&gt;cmd.exe&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine.exe env --shell cmd dev
+set DOCKER_TLS_VERIFY=1
+set DOCKER_HOST=tcp://192.168.99.101:2376
+set DOCKER_CERT_PATH=C:\Users\captain\.docker\machine\machines\dev
+set DOCKER_MACHINE_NAME=dev
+# Run this command to configure your shell: copy and paste the above values into your command prompt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;inspect&#34;&gt;inspect&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;Usage: docker-machine inspect [OPTIONS] [arg...]
+
+Inspect information about a machine
+
+Description:
+   Argument is a machine name.
+
+Options:
+   --format, -f 	Format the output using the given go template.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By default, this will render information about a machine as JSON. If a format is
+specified, the given template will be executed for each result.&lt;/p&gt;
+
+&lt;p&gt;Go&amp;rsquo;s &lt;a href=&#34;http://golang.org/pkg/text/template/&#34;&gt;text/template&lt;/a&gt; package
+describes all the details of the format.&lt;/p&gt;
+
+&lt;p&gt;In addition to the &lt;code&gt;text/template&lt;/code&gt; syntax, there are some additional functions,
+&lt;code&gt;json&lt;/code&gt; and &lt;code&gt;prettyjson&lt;/code&gt;, which can be used to format the output as JSON (documented below).&lt;/p&gt;
+
+&lt;h5 id=&#34;examples&#34;&gt;Examples&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;List all the details of a machine:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This is the default usage of &lt;code&gt;inspect&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine inspect dev
+{
+    &amp;quot;DriverName&amp;quot;: &amp;quot;virtualbox&amp;quot;,
+    &amp;quot;Driver&amp;quot;: {
+        &amp;quot;MachineName&amp;quot;: &amp;quot;docker-host-128be8d287b2028316c0ad5714b90bcfc11f998056f2f790f7c1f43f3d1e6eda&amp;quot;,
+        &amp;quot;SSHPort&amp;quot;: 55834,
+        &amp;quot;Memory&amp;quot;: 1024,
+        &amp;quot;DiskSize&amp;quot;: 20000,
+        &amp;quot;Boot2DockerURL&amp;quot;: &amp;quot;&amp;quot;,
+        &amp;quot;IPAddress&amp;quot;: &amp;quot;192.168.5.99&amp;quot;
+    },
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Get a machine&amp;rsquo;s IP address:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For the most part, you can pick out any field from the JSON in a fairly
+straightforward manner.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine inspect --format=&#39;{{.Driver.IPAddress}}&#39; dev
+192.168.5.99
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Formatting details:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you want a subset of information formatted as JSON, you can use the &lt;code&gt;json&lt;/code&gt;
+function in the template.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine inspect --format=&#39;{{json .Driver}}&#39; dev-fusion
+{&amp;quot;Boot2DockerURL&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;CPUS&amp;quot;:8,&amp;quot;CPUs&amp;quot;:8,&amp;quot;CaCertPath&amp;quot;:&amp;quot;/Users/hairyhenderson/.docker/machine/certs/ca.pem&amp;quot;,&amp;quot;DiskSize&amp;quot;:20000,&amp;quot;IPAddress&amp;quot;:&amp;quot;172.16.62.129&amp;quot;,&amp;quot;ISO&amp;quot;:&amp;quot;/Users/hairyhenderson/.docker/machine/machines/dev-fusion/boot2docker-1.5.0-GH747.iso&amp;quot;,&amp;quot;MachineName&amp;quot;:&amp;quot;dev-fusion&amp;quot;,&amp;quot;Memory&amp;quot;:1024,&amp;quot;PrivateKeyPath&amp;quot;:&amp;quot;/Users/hairyhenderson/.docker/machine/certs/ca-key.pem&amp;quot;,&amp;quot;SSHPort&amp;quot;:22,&amp;quot;SSHUser&amp;quot;:&amp;quot;docker&amp;quot;,&amp;quot;SwarmDiscovery&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;SwarmHost&amp;quot;:&amp;quot;tcp://0.0.0.0:3376&amp;quot;,&amp;quot;SwarmMaster&amp;quot;:false}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While this is usable, it&amp;rsquo;s not very human-readable. For this reason, there is
+&lt;code&gt;prettyjson&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine inspect --format=&#39;{{prettyjson .Driver}}&#39; dev-fusion
+{
+    &amp;quot;Boot2DockerURL&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;CPUS&amp;quot;: 8,
+    &amp;quot;CPUs&amp;quot;: 8,
+    &amp;quot;CaCertPath&amp;quot;: &amp;quot;/Users/hairyhenderson/.docker/machine/certs/ca.pem&amp;quot;,
+    &amp;quot;DiskSize&amp;quot;: 20000,
+    &amp;quot;IPAddress&amp;quot;: &amp;quot;172.16.62.129&amp;quot;,
+    &amp;quot;ISO&amp;quot;: &amp;quot;/Users/hairyhenderson/.docker/machine/machines/dev-fusion/boot2docker-1.5.0-GH747.iso&amp;quot;,
+    &amp;quot;MachineName&amp;quot;: &amp;quot;dev-fusion&amp;quot;,
+    &amp;quot;Memory&amp;quot;: 1024,
+    &amp;quot;PrivateKeyPath&amp;quot;: &amp;quot;/Users/hairyhenderson/.docker/machine/certs/ca-key.pem&amp;quot;,
+    &amp;quot;SSHPort&amp;quot;: 22,
+    &amp;quot;SSHUser&amp;quot;: &amp;quot;docker&amp;quot;,
+    &amp;quot;SwarmDiscovery&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;SwarmHost&amp;quot;: &amp;quot;tcp://0.0.0.0:3376&amp;quot;,
+    &amp;quot;SwarmMaster&amp;quot;: false
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;help&#34;&gt;help&lt;/h4&gt;
+
+&lt;p&gt;Show help text.&lt;/p&gt;
+
+&lt;h4 id=&#34;ip&#34;&gt;ip&lt;/h4&gt;
+
+&lt;p&gt;Get the IP address of one or more machines.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ip dev
+192.168.99.104
+$ docker-machine ip dev dev2
+192.168.99.104
+192.168.99.105
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;kill&#34;&gt;kill&lt;/h4&gt;
+
+&lt;p&gt;Kill (abruptly force stop) a machine.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+dev    *        virtualbox   Running   tcp://192.168.99.104:2376
+$ docker-machine kill dev
+$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+dev    *        virtualbox   Stopped
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;ls&#34;&gt;ls&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;Usage: docker-machine ls [OPTIONS] [arg...]
+
+List machines
+
+Options:
+
+   --quiet, -q					Enable quiet mode
+   --filter [--filter option --filter option]	Filter output based on conditions provided
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;filtering&#34;&gt;Filtering&lt;/h5&gt;
+
+&lt;p&gt;The filtering flag (&lt;code&gt;-f&lt;/code&gt; or &lt;code&gt;--filter)&lt;/code&gt; format is a &lt;code&gt;key=value&lt;/code&gt; pair. If there is more
+than one filter, then pass multiple flags (e.g. &lt;code&gt;--filter &amp;quot;foo=bar&amp;quot; --filter &amp;quot;bif=baz&amp;quot;&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;The currently supported filters are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;driver (driver name)&lt;/li&gt;
+&lt;li&gt;swarm (swarm master&amp;rsquo;s name)&lt;/li&gt;
+&lt;li&gt;state (&lt;code&gt;Running|Paused|Saved|Stopped|Stopping|Starting|Error&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&#34;examples-1&#34;&gt;Examples&lt;/h5&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+dev             virtualbox   Stopped
+foo0            virtualbox   Running   tcp://192.168.99.105:2376
+foo1            virtualbox   Running   tcp://192.168.99.106:2376
+foo2   *        virtualbox   Running   tcp://192.168.99.107:2376
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls --filter driver=virtualbox --filter state=Stopped
+NAME   ACTIVE   DRIVER       STATE     URL   SWARM
+dev             virtualbox   Stopped
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;regenerate-certs&#34;&gt;regenerate-certs&lt;/h4&gt;
+
+&lt;p&gt;Regenerate TLS certificates and update the machine with new certs.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine regenerate-certs dev
+Regenerate TLS machine certs?  Warning: this is irreversible. (y/n): y
+Regenerating TLS certificates
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;restart&#34;&gt;restart&lt;/h4&gt;
+
+&lt;p&gt;Restart a machine. Oftentimes this is equivalent to
+&lt;code&gt;docker-machine stop; machine start&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine restart dev
+Waiting for VM to start...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;rm&#34;&gt;rm&lt;/h4&gt;
+
+&lt;p&gt;Remove a machine. This will remove the local reference as well as delete it
+on the cloud provider or virtualization management platform.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+foo0            virtualbox   Running   tcp://192.168.99.105:2376
+foo1            virtualbox   Running   tcp://192.168.99.106:2376
+$ docker-machine rm foo1
+$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+foo0            virtualbox   Running   tcp://192.168.99.105:2376
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;ssh&#34;&gt;ssh&lt;/h4&gt;
+
+&lt;p&gt;Log into or run a command on a machine using SSH.&lt;/p&gt;
+
+&lt;p&gt;To login, just run &lt;code&gt;docker-machine ssh machinename&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ssh dev
+                        ##        .
+                  ## ## ##       ==
+               ## ## ## ##      ===
+           /&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;\___/ ===
+      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+           \______ o          __/
+             \    \        __/
+              \____\______/
+ _                 _   ____     _            _
+| |__   ___   ___ | |_|___ \ __| | ___   ___| | _____ _ __
+| &#39;_ \ / _ \ / _ \| __| __) / _` |/ _ \ / __| |/ / _ \ &#39;__|
+| |_) | (_) | (_) | |_ / __/ (_| | (_) | (__|   &amp;lt;  __/ |
+|_.__/ \___/ \___/ \__|_____\__,_|\___/ \___|_|\_\___|_|
+Boot2Docker version 1.4.0, build master : 69cf398 - Fri Dec 12 01:39:42 UTC 2014
+docker@boot2docker:~$ ls /
+Users/   dev/     home/    lib/     mnt/     proc/    run/     sys/     usr/
+bin/     etc/     init     linuxrc  opt/     root/    sbin/    tmp      var/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also specify commands to run remotely by appending them directly to the
+&lt;code&gt;docker-machine ssh&lt;/code&gt; command, much like the regular &lt;code&gt;ssh&lt;/code&gt; program works:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ssh dev free
+             total         used         free       shared      buffers
+Mem:       1023556       183136       840420            0        30920
+-/+ buffers:             152216       871340
+Swap:      1212036            0      1212036
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the command you are appending has flags, e.g. &lt;code&gt;df -h&lt;/code&gt;, you can use the flag
+parsing terminator (&lt;code&gt;--&lt;/code&gt;) to avoid confusing the &lt;code&gt;docker-machine&lt;/code&gt; client, which
+will otherwise interpret them as flags you intended to pass to it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ssh dev -- df -h
+Filesystem                Size      Used Available Use% Mounted on
+rootfs                  899.6M     85.9M    813.7M  10% /
+tmpfs                   899.6M     85.9M    813.7M  10% /
+tmpfs                   499.8M         0    499.8M   0% /dev/shm
+/dev/sda1                18.2G     58.2M     17.2G   0% /mnt/sda1
+cgroup                  499.8M         0    499.8M   0% /sys/fs/cgroup
+/dev/sda1                18.2G     58.2M     17.2G   0%
+/mnt/sda1/var/lib/docker/aufs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&#34;different-types-of-ssh&#34;&gt;Different types of SSH&lt;/h5&gt;
+
+&lt;p&gt;When Docker Machine is invoked, it will check to see if you have the venerable
+&lt;code&gt;ssh&lt;/code&gt; binary around locally and will attempt to use that for the SSH commands it
+needs to run, whether they are a part of an operation such as creation or have
+been requested by the user directly. If it does not find an external &lt;code&gt;ssh&lt;/code&gt;
+binary locally, it will default to using a native Go implementation from
+&lt;a href=&#34;https://godoc.org/golang.org/x/crypto/ssh&#34;&gt;crypto/ssh&lt;/a&gt;. This is useful in
+situations where you may not have access to traditional UNIX tools, such as if
+you are using Docker Machine on Windows without having msysgit installed
+alongside of it.&lt;/p&gt;
+
+&lt;p&gt;In most situations, you will not have to worry about this implementation detail
+and Docker Machine will act sensibly out of the box. However, if you
+deliberately want to use the Go native version, you can do so with a global
+command line flag / environment variable like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine --native-ssh ssh dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are some variations in behavior between the two methods, so please report
+any issues or inconsistencies if you come across them.&lt;/p&gt;
+
+&lt;h4 id=&#34;scp&#34;&gt;scp&lt;/h4&gt;
+
+&lt;p&gt;Copy files from your local host to a machine, from machine to machine, or from a
+machine to your local host using &lt;code&gt;scp&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The notation is &lt;code&gt;machinename:/path/to/files&lt;/code&gt; for the arguments; in the host
+machine&amp;rsquo;s case, you don&amp;rsquo;t have to specify the name, just the path.&lt;/p&gt;
+
+&lt;p&gt;Consider the following example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cat foo.txt
+cat: foo.txt: No such file or directory
+$ docker-machine ssh dev pwd
+/home/docker
+$ docker-machine ssh dev &#39;echo A file created remotely! &amp;gt;foo.txt&#39;
+$ docker-machine scp dev:/home/docker/foo.txt .
+foo.txt                                                           100%   28     0.0KB/s   00:00
+$ cat foo.txt
+A file created remotely!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Files are copied recursively by default (&lt;code&gt;scp&lt;/code&gt;&amp;rsquo;s &lt;code&gt;-r&lt;/code&gt; flag).&lt;/p&gt;
+
+&lt;p&gt;In the case of transferring files from machine to machine, they go through the
+local host&amp;rsquo;s filesystem first (using &lt;code&gt;scp&lt;/code&gt;&amp;rsquo;s &lt;code&gt;-3&lt;/code&gt; flag).&lt;/p&gt;
+
+&lt;h4 id=&#34;start&#34;&gt;start&lt;/h4&gt;
+
+&lt;p&gt;Start a machine.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine start dev
+Starting VM...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;stop&#34;&gt;stop&lt;/h4&gt;
+
+&lt;p&gt;Gracefully stop a machine.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+dev    *        virtualbox   Running   tcp://192.168.99.104:2376
+$ docker-machine stop dev
+$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+dev    *        virtualbox   Stopped
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;upgrade&#34;&gt;upgrade&lt;/h4&gt;
+
+&lt;p&gt;Upgrade a machine to the latest version of Docker. If the machine uses Ubuntu
+as the underlying operating system, it will upgrade the package &lt;code&gt;lxc-docker&lt;/code&gt;
+(our recommended install method). If the machine uses boot2docker, this command
+will download the latest boot2docker ISO and replace the machine&amp;rsquo;s existing ISO
+with the latest.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine upgrade dev
+Stopping machine to do the upgrade...
+Upgrading machine dev...
+Downloading latest boot2docker release to /home/username/.docker/machine/cache/boot2docker.iso...
+Starting machine back up...
+Waiting for VM to start...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are using a custom boot2docker ISO specified using
+&lt;code&gt;--virtualbox-boot2docker-url&lt;/code&gt; or an equivalent flag, running an upgrade on
+that machine will completely replace the specified ISO with the latest
+&amp;ldquo;vanilla&amp;rdquo; boot2docker ISO available.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;url&#34;&gt;url&lt;/h4&gt;
+
+&lt;p&gt;Get the URL of a host&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine url dev
+tcp://192.168.99.109:2376
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;drivers&#34;&gt;Drivers&lt;/h2&gt;
+
+&lt;h4 id=&#34;amazon-web-services&#34;&gt;Amazon Web Services&lt;/h4&gt;
+
+&lt;p&gt;Create machines on &lt;a href=&#34;http://aws.amazon.com&#34;&gt;Amazon Web Services&lt;/a&gt;. You will need an Access Key ID, Secret Access Key and a VPC ID. To find the VPC ID, login to the AWS console and go to Services -&amp;gt; VPC -&amp;gt; Your VPCs. Select the one where you would like to launch the instance.&lt;/p&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-access-key&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Your access key id for the Amazon Web Services API.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-secret-key&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Your secret access key for the Amazon Web Services API.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-session-token&lt;/code&gt;: Your session token for the Amazon Web Services API.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-ami&lt;/code&gt;: The AMI ID of the instance to use.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-region&lt;/code&gt;: The region to use when launching the instance.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-vpc-id&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Your VPC ID to launch the instance in.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-zone&lt;/code&gt;: The AWS zone to launch the instance in (i.e. one of a,b,c,d,e).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-subnet-id&lt;/code&gt;: AWS VPC subnet id.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-security-group&lt;/code&gt;: AWS VPC security group name.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-instance-type&lt;/code&gt;: The instance type to run.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-root-size&lt;/code&gt;: The root disk size of the instance (in GB).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-iam-instance-profile&lt;/code&gt;: The AWS IAM role name to be used as the instance profile.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-ssh-user&lt;/code&gt;: SSH Login user name.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-request-spot-instance&lt;/code&gt;: Use spot instances.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-spot-price&lt;/code&gt;: Spot instance bid price (in dollars). Require the &lt;code&gt;--amazonec2-request-spot-instance&lt;/code&gt; flag.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-private-address-only&lt;/code&gt;: Use the private IP address only.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--amazonec2-monitoring&lt;/code&gt;: Enable CloudWatch Monitoring.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;By default, the Amazon EC2 driver will use a daily image of Ubuntu 14.04 LTS.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Region&lt;/th&gt;
+&lt;th&gt;AMI ID&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;ap-northeast-1&lt;/td&gt;
+&lt;td&gt;ami-f4b06cf4&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;ap-southeast-1&lt;/td&gt;
+&lt;td&gt;ami-b899a2ea&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;ap-southeast-2&lt;/td&gt;
+&lt;td&gt;ami-b59ce48f&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;cn-north-1&lt;/td&gt;
+&lt;td&gt;ami-da930ee3&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;eu-west-1&lt;/td&gt;
+&lt;td&gt;ami-45d8a532&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;eu-central-1&lt;/td&gt;
+&lt;td&gt;ami-b6e0d9ab&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;sa-east-1&lt;/td&gt;
+&lt;td&gt;ami-1199190c&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;us-east-1&lt;/td&gt;
+&lt;td&gt;ami-5f709f34&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;us-west-1&lt;/td&gt;
+&lt;td&gt;ami-615cb725&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;us-west-2&lt;/td&gt;
+&lt;td&gt;ami-7f675e4f&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;us-gov-west-1&lt;/td&gt;
+&lt;td&gt;ami-99a9c9ba&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--amazonec2-access-key&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_ACCESS_KEY_ID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--amazonec2-secret-key&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_SECRET_ACCESS_KEY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-session-token&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_SESSION_TOKEN&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-ami&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_AMI&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ami-5f709f34&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-region&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_DEFAULT_REGION&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;us-east-1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--amazonec2-vpc-id&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_VPC_ID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-zone&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_ZONE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;a&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-subnet-id&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_SUBNET_ID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-security-group&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_SECURITY_GROUP&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker-machine&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-instance-type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_INSTANCE_TYPE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;t2.micro&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-root-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_ROOT_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;16&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-iam-instance-profile&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_INSTANCE_PROFILE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-ssh-user&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AWS_SSH_USER&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ubuntu&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-request-spot-instance&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-spot-price&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0.50&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-private-address-only&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--amazonec2-monitoring&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;digital-ocean&#34;&gt;Digital Ocean&lt;/h4&gt;
+
+&lt;p&gt;Create Docker machines on &lt;a href=&#34;https://www.digitalocean.com/&#34;&gt;Digital Ocean&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You need to create a personal access token under &amp;ldquo;Apps &amp;amp; API&amp;rdquo; in the Digital Ocean
+Control Panel and pass that to &lt;code&gt;docker-machine create&lt;/code&gt; with the &lt;code&gt;--digitalocean-access-token&lt;/code&gt; option.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create --driver digitalocean --digitalocean-access-token=aa9399a2175a93b17b1c86c807e08d3fc4b79876545432a629602f61cf6ccd6b test-this
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--digitalocean-access-token&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Your personal access token for the Digital Ocean API.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--digitalocean-image&lt;/code&gt;: The name of the Digital Ocean image to use.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--digitalocean-region&lt;/code&gt;: The region to create the droplet in, see &lt;a href=&#34;https://developers.digitalocean.com/documentation/v2/#regions&#34;&gt;Regions API&lt;/a&gt; for how to get a list.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--digitalocean-size&lt;/code&gt;: The size of the Digital Ocean droplet (larger than default options are of the form &lt;code&gt;2gb&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--digitalocean-ipv6&lt;/code&gt;: Enable IPv6 support for the droplet.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--digitalocean-private-networking&lt;/code&gt;: Enable private networking support for the droplet.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--digitalocean-backups&lt;/code&gt;: Enable Digital Oceans backups for the droplet.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The DigitalOcean driver will use &lt;code&gt;ubuntu-14-04-x64&lt;/code&gt; as the default image.&lt;/p&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--digitalocean-access-token&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;DIGITALOCEAN_ACCESS_TOKEN&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--digitalocean-image&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;DIGITALOCEAN_IMAGE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--digitalocean-region&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;DIGITALOCEAN_REGION&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;nyc3&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--digitalocean-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;DIGITALOCEAN_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;512mb&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--digitalocean-ipv6&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;DIGITALOCEAN_IPV6&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--digitalocean-private-networking&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;DIGITALOCEAN_PRIVATE_NETWORKING&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--digitalocean-backups&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;DIGITALOCEAN_BACKUPS&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;exoscale&#34;&gt;exoscale&lt;/h4&gt;
+
+&lt;p&gt;Create machines on &lt;a href=&#34;https://www.exoscale.ch/&#34;&gt;exoscale&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Get your API key and API secret key from &lt;a href=&#34;https://portal.exoscale.ch/account/api&#34;&gt;API details&lt;/a&gt; and pass them to &lt;code&gt;machine create&lt;/code&gt; with the &lt;code&gt;--exoscale-api-key&lt;/code&gt; and &lt;code&gt;--exoscale-api-secret-key&lt;/code&gt; options.&lt;/p&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--exoscale-url&lt;/code&gt;: Your API endpoint.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--exoscale-api-key&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Your API key.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--exoscale-api-secret-key&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Your API secret key.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--exoscale-instance-profile&lt;/code&gt;: Instance profile.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--exoscale-disk-size&lt;/code&gt;: Disk size for the host in GB.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--exoscale-image&lt;/code&gt;: exoscale disk size. (10, 50, 100, 200, 400)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--exoscale-security-group&lt;/code&gt;: Security group. It will be created if it doesn&amp;rsquo;t exist.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--exoscale-availability-zone&lt;/code&gt;: exoscale availability zone.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If a custom security group is provided, you need to ensure that you allow TCP ports 22 and 2376 in an ingress rule. Moreover, if you want to use Swarm, also add TCP port 3376.&lt;/p&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--exoscale-url&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;EXOSCALE_ENDPOINT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://api.exoscale.ch/compute&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--exoscale-api-key&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;EXOSCALE_API_KEY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--exoscale-api-secret-key&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;EXOSCALE_API_SECRET&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--exoscale-instance-profile&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;EXOSCALE_INSTANCE_PROFILE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;small&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--exoscale-disk-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;EXOSCALE_DISK_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;50&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--exoscale-image&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;EXSOCALE_IMAGE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ubuntu-14.04&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--exoscale-security-group&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;EXOSCALE_SECURITY_GROUP&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker-machine&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--exoscale-availability-zone&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;EXOSCALE_AVAILABILITY_ZONE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ch-gva-2&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;generic&#34;&gt;Generic&lt;/h4&gt;
+
+&lt;p&gt;Create machines using an existing VM/Host with SSH.&lt;/p&gt;
+
+&lt;p&gt;This is useful if you are using a provider that Machine does not support
+directly or if you would like to import an existing host to allow Docker
+Machine to manage.&lt;/p&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--generic-ip-address&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; IP Address of host.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--generic-ssh-user&lt;/code&gt;: SSH username used to connect.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--generic-ssh-key&lt;/code&gt;: Path to the SSH user private key.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--generic-ssh-port&lt;/code&gt;: Port to use for SSH.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: You must use a base operating system supported by Machine.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--generic-ip-address&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--generic-ssh-user&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;root&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--generic-ssh-key&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;$HOME/.ssh/id_rsa&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--generic-ssh-port&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;22&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;google-compute-engine&#34;&gt;Google Compute Engine&lt;/h4&gt;
+
+&lt;p&gt;Create machines on &lt;a href=&#34;https://cloud.google.com/compute/&#34;&gt;Google Compute Engine&lt;/a&gt;. You will need a Google account and project name. See &lt;a href=&#34;https://cloud.google.com/compute/docs/projects&#34;&gt;https://cloud.google.com/compute/docs/projects&lt;/a&gt; for details on projects.&lt;/p&gt;
+
+&lt;p&gt;The Google driver uses oAuth. When creating the machine, you will have your browser opened to authorize. Once authorized, paste the code given in the prompt to launch the instance.&lt;/p&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--google-zone&lt;/code&gt;: The zone to launch the instance.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--google-machine-type&lt;/code&gt;: The type of instance.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--google-username&lt;/code&gt;: The username to use for the instance.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--google-project&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; The name of your project to use when launching the instance.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--google-auth-token&lt;/code&gt;: Your oAuth token for the Google Cloud API.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--google-scopes&lt;/code&gt;: The scopes for OAuth 2.0 to Access Google APIs. See &lt;a href=&#34;https://cloud.google.com/storage/docs/authentication&#34;&gt;Google Compute Engine Doc&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--google-disk-size&lt;/code&gt;: The disk size of instance.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--google-disk-type&lt;/code&gt;: The disk type of instance.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The GCE driver will use the &lt;code&gt;ubuntu-1404-trusty-v20150316&lt;/code&gt; instance type unless otherwise specified.&lt;/p&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--google-zone&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GOOGLE_ZONE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;us-central1-a&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--google-machine-type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GOOGLE_MACHINE_TYPE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;f1-micro&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--google-username&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GOOGLE_USERNAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker-user&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--google-project&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GOOGLE_PROJECT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--google-auth-token&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GOOGLE_AUTH_TOKEN&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--google-scopes&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GOOGLE_SCOPES&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;devstorage.read_only,logging.write&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--google-disk-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GOOGLE_DISK_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;10&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--google-disk-type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;GOOGLE_DISK_TYPE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;pd-standard&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;ibm-softlayer&#34;&gt;IBM Softlayer&lt;/h4&gt;
+
+&lt;p&gt;Create machines on &lt;a href=&#34;http://softlayer.com&#34;&gt;Softlayer&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You need to generate an API key in the softlayer control panel.
+&lt;a href=&#34;http://knowledgelayer.softlayer.com/procedure/retrieve-your-api-key&#34;&gt;Retrieve your API key&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-memory&lt;/code&gt;: Memory for host in MB.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-disk-size&lt;/code&gt;: A value of &lt;code&gt;0&lt;/code&gt; will set the SoftLayer default.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-user&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Username for your SoftLayer account, api key needs to match this user.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-api-key&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; API key for your user account.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-region&lt;/code&gt;: SoftLayer region.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-cpu&lt;/code&gt;: Number of CPUs for the machine.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-hostname&lt;/code&gt;: Hostname for the machine.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-domain&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Domain name for the machine.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-api-endpoint&lt;/code&gt;: Change SoftLayer API endpoint.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-hourly-billing&lt;/code&gt;: Specifies that hourly billing should be used (default), otherwise monthly billing is used.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-local-disk&lt;/code&gt;: Use local machine disk instead of SoftLayer SAN.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-private-net-only&lt;/code&gt;: Disable public networking.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-image&lt;/code&gt;: OS Image to use.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-public-vlan-id&lt;/code&gt;: Your public VLAN ID.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--softlayer-private-vlan-id&lt;/code&gt;: Your private VLAN ID.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The SoftLayer driver will use &lt;code&gt;UBUNTU_LATEST&lt;/code&gt; as the image type by default.&lt;/p&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--softlayer-memory&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_MEMORY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1024&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--softlayer-disk-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_DISK_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--softlayer-user&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_USER&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--softlayer-api-key&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_API_KEY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--softlayer-region&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_REGION&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;dal01&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--softlayer-cpu&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_CPU&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--softlayer-hostname&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_HOSTNAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;docker&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--softlayer-domain&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_DOMAIN&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--softlayer-api-endpoint&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_API_ENDPOINT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;api.softlayer.com/rest/v3&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--softlayer-hourly-billing&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_HOURLY_BILLING&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--softlayer-local-disk&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_LOCAL_DISK&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--softlayer-private-net-only&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_PRIVATE_NET&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--softlayer-image&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_IMAGE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;UBUNTU_LATEST&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--softlayer-public-vlan-id&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_PUBLIC_VLAN_ID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--softlayer-private-vlan-id&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SOFTLAYER_PRIVATE_VLAN_ID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;microsoft-azure&#34;&gt;Microsoft Azure&lt;/h4&gt;
+
+&lt;p&gt;Create machines on &lt;a href=&#34;http://azure.microsoft.com/&#34;&gt;Microsoft Azure&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You need to create a subscription with a cert. Run these commands and answer the questions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+$ openssl pkcs12 -export -out mycert.pfx -in mycert.pem -name &amp;quot;My Certificate&amp;quot;
+$ openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Go to the Azure portal, go to the &amp;ldquo;Settings&amp;rdquo; page (you can find the link at the bottom of the
+left sidebar - you need to scroll), then &amp;ldquo;Management Certificates&amp;rdquo; and upload &lt;code&gt;mycert.cer&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Grab your subscription ID from the portal, then run &lt;code&gt;docker-machine create&lt;/code&gt; with these details:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create -d azure --azure-subscription-id=&amp;quot;SUB_ID&amp;quot; --azure-subscription-cert=&amp;quot;mycert.pem&amp;quot; A-VERY-UNIQUE-NAME
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The Azure driver uses the &lt;code&gt;b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-14_04_1-LTS-amd64-server-20140927-en-us-30GB&lt;/code&gt;
+image by default. Note, this image is not available in the Chinese regions. In China you should
+ specify &lt;code&gt;b549f4301d0b4295b8e76ceb65df47d4__Ubuntu-14_04_1-LTS-amd64-server-20140927-en-us-30GB&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You may need to &lt;code&gt;machine ssh&lt;/code&gt; in to the virtual machine and reboot to ensure that the OS is updated.&lt;/p&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--azure-docker-port&lt;/code&gt;: Port for Docker daemon.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--azure-image&lt;/code&gt;: Azure image name. See &lt;a href=&#34;https://msdn.microsoft.com/en-us/library/dn135249%28v=nav.70%29.aspx&#34;&gt;How to: Get the Windows Azure Image Name&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--azure-location&lt;/code&gt;: Machine instance location.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--azure-password&lt;/code&gt;: Your Azure password.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--azure-publish-settings-file&lt;/code&gt;: Azure setting file. See &lt;a href=&#34;https://msdn.microsoft.com/en-us/library/dn385850%28v=nav.70%29.aspx&#34;&gt;How to: Download and Import Publish Settings and Subscription Information&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--azure-size&lt;/code&gt;: Azure disk size.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--azure-ssh-port&lt;/code&gt;: Azure SSH port.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--azure-subscription-id&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Your Azure subscription ID (A GUID like &lt;code&gt;d255d8d7-5af0-4f5c-8a3e-1545044b861e&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--azure-subscription-cert&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Your Azure subscription cert.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--azure-username&lt;/code&gt;: Azure login user name.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--azure-docker-port&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;2376&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--azure-image&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AZURE_IMAGE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;Ubuntu 14.04 LTS x64&lt;/em&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--azure-location&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AZURE_LOCATION&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;West US&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--azure-password&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--azure-publish-settings-file&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AZURE_PUBLISH_SETTINGS_FILE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--azure-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AZURE_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Small&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--azure-ssh-port&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;22&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--azure-subscription-cert&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AZURE_SUBSCRIPTION_CERT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--azure-subscription-id&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;AZURE_SUBSCRIPTION_ID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--azure-username&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ubuntu&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;microsoft-hyper-v&#34;&gt;Microsoft Hyper-V&lt;/h4&gt;
+
+&lt;p&gt;Creates a Boot2Docker virtual machine locally on your Windows machine
+using Hyper-V. &lt;a href=&#34;http://windows.microsoft.com/en-us/windows-8/hyper-v-run-virtual-machines&#34;&gt;See here&lt;/a&gt;
+for instructions to enable Hyper-V. You will need to use an
+Administrator level account to create and manage Hyper-V machines.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: You will need an existing virtual switch to use the
+driver. Hyper-V can share an external network interface (aka
+bridging), see &lt;a href=&#34;http://blogs.technet.com/b/canitpro/archive/2014/03/11/step-by-step-enabling-hyper-v-for-use-on-windows-8-1.aspx&#34;&gt;this blog&lt;/a&gt;.
+If you would like to use NAT, create an internal network, and use
+&lt;a href=&#34;http://www.packet6.com/allowing-windows-8-1-hyper-v-vm-to-work-with-wifi/&#34;&gt;Internet Connection
+Sharing&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--hyper-v-boot2docker-url&lt;/code&gt;: The URL of the boot2docker ISO. Defaults to the latest available version.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--hyper-v-boot2docker-location&lt;/code&gt;: Location of a local boot2docker iso to use. Overrides the URL option below.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--hyper-v-virtual-switch&lt;/code&gt;: Name of the virtual switch to use. Defaults to first found.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--hyper-v-disk-size&lt;/code&gt;: Size of disk for the host in MB.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--hyper-v-memory&lt;/code&gt;: Size of memory for the host in MB. By default, the machine is setup to use dynamic memory.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--hyper-v-boot2docker-url&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;Latest boot2docker url&lt;/em&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--hyper-v-boot2docker-location&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--hyper-v-virtual-switch&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;first found&lt;/em&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--hyper-v-disk-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;20000&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--hyper-v-memory&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1024&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;openstack&#34;&gt;OpenStack&lt;/h4&gt;
+
+&lt;p&gt;Create machines on &lt;a href=&#34;http://www.openstack.org/software/&#34;&gt;OpenStack&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Mandatory:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--openstack-auth-url&lt;/code&gt;: Keystone service base URL.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-flavor-id&lt;/code&gt; or &lt;code&gt;--openstack-flavor-name&lt;/code&gt;: Identify the flavor that will be used for the machine.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-image-id&lt;/code&gt; or &lt;code&gt;--openstack-image-name&lt;/code&gt;: Identify the image that will be used for the machine.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--openstack-insecure&lt;/code&gt;: Explicitly allow openstack driver to perform &amp;ldquo;insecure&amp;rdquo; SSL (https) requests. The server&amp;rsquo;s certificate will not be verified against any certificate authorities. This option should be used with caution.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-domain-name&lt;/code&gt; or &lt;code&gt;--openstack-domain-id&lt;/code&gt;: Domain to use for authentication (Keystone v3 only)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-username&lt;/code&gt;: User identifier to authenticate with.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-password&lt;/code&gt;: User password. It can be omitted if the standard environment variable &lt;code&gt;OS_PASSWORD&lt;/code&gt; is set.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-tenant-name&lt;/code&gt; or &lt;code&gt;--openstack-tenant-id&lt;/code&gt;: Identify the tenant in which the machine will be created.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-region&lt;/code&gt;: The region to work on. Can be omitted if there is only one region on the OpenStack.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-availability-zone&lt;/code&gt;: The availability zone in which to launch the server.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-endpoint-type&lt;/code&gt;: Endpoint type can be &lt;code&gt;internalURL&lt;/code&gt;, &lt;code&gt;adminURL&lt;/code&gt; on &lt;code&gt;publicURL&lt;/code&gt;. If is a helper for the driver
+to choose the right URL in the OpenStack service catalog. If not provided the default id &lt;code&gt;publicURL&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-net-name&lt;/code&gt; or &lt;code&gt;--openstack-net-id&lt;/code&gt;: Identify the private network the machine will be connected on. If your OpenStack project project contains only one private network it will be use automatically.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-sec-groups&lt;/code&gt;: If security groups are available on your OpenStack you can specify a comma separated list
+to use for the machine (e.g. &lt;code&gt;secgrp001,secgrp002&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-floatingip-pool&lt;/code&gt;: The IP pool that will be used to get a public IP can assign it to the machine. If there is an
+IP address already allocated but not assigned to any machine, this IP will be chosen and assigned to the machine. If
+there is no IP address already allocated a new IP will be allocated and assigned to the machine.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-ssh-user&lt;/code&gt;: The username to use for SSH into the machine. If not provided &lt;code&gt;root&lt;/code&gt; will be used.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--openstack-ssh-port&lt;/code&gt;: Customize the SSH port if the SSH server on the machine does not listen on the default port.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-auth-url&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_AUTH_URL&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-flavor-name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-flavor-id&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-image-name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-image-id&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-insecure&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-domain-name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_DOMAIN_NAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-domain-id&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_DOMAIN_ID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-username&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_USERNAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-password&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_PASSWORD&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-tenant-name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_TENANT_NAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-tenant-id&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_TENANT_ID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-region&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_REGION_NAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-availability-zone&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_AVAILABILITY_ZONE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-endpoint-type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_ENDPOINT_TYPE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-net-name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-net-id&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-sec-groups&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-floatingip-pool&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-ssh-user&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;root&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--openstack-ssh-port&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;22&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;rackspace&#34;&gt;Rackspace&lt;/h4&gt;
+
+&lt;p&gt;Create machines on &lt;a href=&#34;http://www.rackspace.com/cloud&#34;&gt;Rackspace cloud&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--rackspace-username&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Rackspace account username.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--rackspace-api-key&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Rackspace API key.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--rackspace-region&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; Rackspace region name.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--rackspace-endpoint-type&lt;/code&gt;: Rackspace endpoint type (&lt;code&gt;adminURL&lt;/code&gt;, &lt;code&gt;internalURL&lt;/code&gt; or the default &lt;code&gt;publicURL&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--rackspace-image-id&lt;/code&gt;: Rackspace image ID. Default: Ubuntu 14.10 (Utopic Unicorn) (PVHVM).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--rackspace-flavor-id&lt;/code&gt;: Rackspace flavor ID. Default: General Purpose 1GB.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--rackspace-ssh-user&lt;/code&gt;: SSH user for the newly booted machine.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--rackspace-ssh-port&lt;/code&gt;: SSH port for the newly booted machine.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--rackspace-docker-install&lt;/code&gt;: Set if Docker has to be installed on the machine.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Rackspace driver will use &lt;code&gt;598a4282-f14b-4e50-af4c-b3e52749d9f9&lt;/code&gt; (Ubuntu 14.04 LTS) by default.&lt;/p&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--rackspace-username&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_USERNAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--rackspace-api-key&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_API_KEY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--rackspace-region&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_REGION_NAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--rackspace-endpoint-type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_ENDPOINT_TYPE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;publicURL&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--rackspace-image-id&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;598a4282-f14b-4e50-af4c-b3e52749d9f9&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--rackspace-flavor-id&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;OS_FLAVOR_ID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;general1-1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--rackspace-ssh-user&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;root&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--rackspace-ssh-port&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;22&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--rackspace-docker-install&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;oracle-virtualbox&#34;&gt;Oracle VirtualBox&lt;/h4&gt;
+
+&lt;p&gt;Create machines locally using &lt;a href=&#34;https://www.virtualbox.org/&#34;&gt;VirtualBox&lt;/a&gt;.
+This driver requires VirtualBox to be installed on your host.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create --driver=virtualbox vbox-test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can create an entirely new machine or you can convert a Boot2Docker VM into
+a machine by importing the VM. To convert a Boot2Docker VM, you&amp;rsquo;d use the following
+command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine create -d virtualbox --virtualbox-import-boot2docker-vm boot2docker-vm b2d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--virtualbox-memory&lt;/code&gt;: Size of memory for the host in MB.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--virtualbox-cpu-count&lt;/code&gt;: Number of CPUs to use to create the VM. Defaults to single CPU.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--virtualbox-disk-size&lt;/code&gt;: Size of disk for the host in MB.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--virtualbox-boot2docker-url&lt;/code&gt;: The URL of the boot2docker image. Defaults to the latest available version.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--virtualbox-import-boot2docker-vm&lt;/code&gt;: The name of a Boot2Docker VM to import.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--virtualbox-hostonly-cidr&lt;/code&gt;: The CIDR of the host only adapter.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;code&gt;--virtualbox-boot2docker-url&lt;/code&gt; flag takes a few different forms. By
+default, if no value is specified for this flag, Machine will check locally for
+a boot2docker ISO. If one is found, that will be used as the ISO for the
+created machine. If one is not found, the latest ISO release available on
+&lt;a href=&#34;https://github.com/boot2docker/boot2docker&#34;&gt;boot2docker/boot2docker&lt;/a&gt; will be
+downloaded and stored locally for future use. Note that this means you must run
+&lt;code&gt;docker-machine upgrade&lt;/code&gt; deliberately on a machine if you wish to update the &amp;ldquo;cached&amp;rdquo;
+boot2docker ISO.&lt;/p&gt;
+
+&lt;p&gt;This is the default behavior (when &lt;code&gt;--virtualbox-boot2docker-url=&amp;quot;&amp;quot;&lt;/code&gt;), but the
+option also supports specifying ISOs by the &lt;code&gt;http://&lt;/code&gt; and &lt;code&gt;file://&lt;/code&gt; protocols.
+&lt;code&gt;file://&lt;/code&gt; will look at the path specified locally to locate the ISO: for
+instance, you could specify &lt;code&gt;--virtualbox-boot2docker-url
+file://$HOME/Downloads/rc.iso&lt;/code&gt; to test out a release candidate ISO that you have
+downloaded already. You could also just get an ISO straight from the Internet
+using the &lt;code&gt;http://&lt;/code&gt; form.&lt;/p&gt;
+
+&lt;p&gt;To customize the host only adapter, you can use the &lt;code&gt;--virtualbox-hostonly-cidr&lt;/code&gt;
+flag.  This will specify the host IP and Machine will calculate the VirtualBox
+DHCP server address (a random IP on the subnet between &lt;code&gt;.1&lt;/code&gt; and &lt;code&gt;.25&lt;/code&gt;) so
+it does not clash with the specified host IP.
+Machine will also specify the DHCP lower bound to &lt;code&gt;.100&lt;/code&gt; and the upper bound
+to &lt;code&gt;.254&lt;/code&gt;.  For example, a specified CIDR of &lt;code&gt;192.168.24.1/24&lt;/code&gt; would have a
+DHCP server between &lt;code&gt;192.168.24.2-25&lt;/code&gt;, a lower bound of &lt;code&gt;192.168.24.100&lt;/code&gt; and
+upper bound of &lt;code&gt;192.168.24.254&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--virtualbox-memory&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VIRTUALBOX_MEMORY_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1024&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--virtualbox-cpu-count&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VIRTUALBOX_CPU_COUNT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--virtualbox-disk-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VIRTUALBOX_DISK_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;20000&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--virtualbox-boot2docker-url&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VIRTUALBOX_BOOT2DOCKER_URL&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;Latest boot2docker url&lt;/em&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--virtualbox-import-boot2docker-vm&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;boot2docker-vm&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--virtualbox-hostonly-cidr&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VIRTUALBOX_HOSTONLY_CIDR&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;192.168.99.1/24&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;vmware-fusion&#34;&gt;VMware Fusion&lt;/h4&gt;
+
+&lt;p&gt;Creates machines locally on &lt;a href=&#34;http://www.vmware.com/products/fusion&#34;&gt;VMware Fusion&lt;/a&gt;. Requires VMware Fusion to be installed.&lt;/p&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--vmwarefusion-boot2docker-url&lt;/code&gt;: URL for boot2docker image.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarefusion-cpu-count&lt;/code&gt;: Number of CPUs for the machine (-1 to use the number of CPUs available)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarefusion-disk-size&lt;/code&gt;: Size of disk for host VM (in MB).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarefusion-memory-size&lt;/code&gt;: Size of memory for host VM (in MB).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The VMware Fusion driver uses the latest boot2docker image.
+See &lt;a href=&#34;https://github.com/frapposelli/boot2docker/tree/vmware-64bit&#34;&gt;frapposelli/boot2docker&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarefusion-boot2docker-url&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;FUSION_BOOT2DOCKER_URL&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;Latest boot2docker url&lt;/em&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarefusion-cpu-count&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;FUSION_CPU_COUNT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarefusion-disk-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;FUSION_MEMORY_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;20000&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarefusion-memory-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;FUSION_DISK_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1024&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;vmware-vcloud-air&#34;&gt;VMware vCloud Air&lt;/h4&gt;
+
+&lt;p&gt;Creates machines on &lt;a href=&#34;http://vcloud.vmware.com&#34;&gt;vCloud Air&lt;/a&gt; subscription service. You need an account within an existing subscription of vCloud Air VPC or Dedicated Cloud.&lt;/p&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-username&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; vCloud Air Username.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-password&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; vCloud Air Password.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-computeid&lt;/code&gt;: Compute ID (if using Dedicated Cloud).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-vdcid&lt;/code&gt;: Virtual Data Center ID.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-orgvdcnetwork&lt;/code&gt;: Organization VDC Network to attach.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-edgegateway&lt;/code&gt;: Organization Edge Gateway.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-publicip&lt;/code&gt;: Org Public IP to use.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-catalog&lt;/code&gt;: Catalog.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-catalogitem&lt;/code&gt;: Catalog Item.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-provision&lt;/code&gt;: Install Docker binaries.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-cpu-count&lt;/code&gt;: VM CPU Count.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-memory-size&lt;/code&gt;: VM Memory Size in MB.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-ssh-port&lt;/code&gt;: SSH port.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevcloudair-docker-port&lt;/code&gt;: Docker port.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The VMware vCloud Air driver will use the &lt;code&gt;Ubuntu Server 12.04 LTS (amd64 20140927)&lt;/code&gt; image by default.&lt;/p&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--vmwarevcloudair-username&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_USERNAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--vmwarevcloudair-password&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_PASSWORD&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevcloudair-computeid&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_COMPUTEID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevcloudair-vdcid&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_VDCID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevcloudair-orgvdcnetwork&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_ORGVDCNETWORK&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;lt;vdcid&amp;gt;-default-routed&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevcloudair-edgegateway&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_EDGEGATEWAY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;lt;vdcid&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevcloudair-publicip&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_PUBLICIP&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevcloudair-catalog&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_CATALOG&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Public Catalog&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevcloudair-catalogitem&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_CATALOGITEM&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Ubuntu Server 12.04 LTS (amd64 20140927)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevcloudair-provision&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_PROVISION&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevcloudair-cpu-count&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_CPU_COUNT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevcloudair-memory-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_MEMORY_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;2048&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevcloudair-ssh-port&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_SSH_PORT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;22&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevcloudair-docker-port&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VCLOUDAIR_DOCKER_PORT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;2376&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;vmware-vsphere&#34;&gt;VMware vSphere&lt;/h4&gt;
+
+&lt;p&gt;Creates machines on a &lt;a href=&#34;http://www.vmware.com/products/vsphere&#34;&gt;VMware vSphere&lt;/a&gt; Virtual Infrastructure. Requires a working vSphere (ESXi and optionally vCenter) installation. The vSphere driver depends on &lt;a href=&#34;https://github.com/vmware/govmomi/tree/master/govc&#34;&gt;&lt;code&gt;govc&lt;/code&gt;&lt;/a&gt; (must be in path) and has been tested with &lt;a href=&#34;https://github.com/vmware/govmomi/commit/c8486300bfe19427e4f3226e3b3eac067717ef17&#34;&gt;vmware/govmomi@&lt;code&gt;c848630&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Options:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevsphere-cpu-count&lt;/code&gt;: CPU number for Docker VM.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevsphere-memory-size&lt;/code&gt;: Size of memory for Docker VM (in MB).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevsphere-boot2docker-url&lt;/code&gt;: URL for boot2docker image.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevsphere-vcenter&lt;/code&gt;: IP/hostname for vCenter (or ESXi if connecting directly to a single host).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevsphere-disk-size&lt;/code&gt;: Size of disk for Docker VM (in MB).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevsphere-username&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; vSphere Username.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevsphere-password&lt;/code&gt;: &lt;strong&gt;required&lt;/strong&gt; vSphere Password.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevsphere-network&lt;/code&gt;: Network where the Docker VM will be attached.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevsphere-datastore&lt;/code&gt;: Datastore for Docker VM.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevsphere-datacenter&lt;/code&gt;: Datacenter for Docker VM (must be set to &lt;code&gt;ha-datacenter&lt;/code&gt; when connecting to a single host).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevsphere-pool&lt;/code&gt;: Resource pool for Docker VM.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--vmwarevsphere-compute-ip&lt;/code&gt;: Compute host IP where the Docker VM will be instantiated.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The VMware vSphere driver uses the latest boot2docker image.&lt;/p&gt;
+
+&lt;p&gt;Environment variables and default values:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;CLI option&lt;/th&gt;
+&lt;th&gt;Environment variable&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevsphere-cpu-count&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VSPHERE_CPU_COUNT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;2&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevsphere-memory-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VSPHERE_MEMORY_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;2048&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevsphere-disk-size&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VSPHERE_DISK_SIZE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;20000&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevsphere-boot2docker-url&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VSPHERE_BOOT2DOCKER_URL&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;Latest boot2docker url&lt;/em&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevsphere-vcenter&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VSPHERE_VCENTER&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--vmwarevsphere-username&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VSPHERE_USERNAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;&lt;code&gt;--vmwarevsphere-password&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VSPHERE_PASSWORD&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevsphere-network&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VSPHERE_NETWORK&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevsphere-datastore&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VSPHERE_DATASTORE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevsphere-datacenter&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VSPHERE_DATACENTER&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevsphere-pool&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VSPHERE_POOL&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--vmwarevsphere-compute-ip&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VSPHERE_COMPUTE_IP&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;specify-a-base-operating-systems&#34;&gt;Specify a base operating systems&lt;/h2&gt;
+
+&lt;p&gt;The Machine provisioning system supports several base operating systems. For
+local providers such as VirtualBox, Fusion, Hyper-V, and so forth, the default
+base operating system is Boot2Docker. For cloud providers, the base operating
+system is the latest Ubuntu LTS the provider supports.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Operating System&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Notes&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Boot2Docker&lt;/td&gt;
+&lt;td&gt;1.5+&lt;/td&gt;
+&lt;td&gt;default for local&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Ubuntu&lt;/td&gt;
+&lt;td&gt;12.04+&lt;/td&gt;
+&lt;td&gt;default for remote&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;RancherOS&lt;/td&gt;
+&lt;td&gt;0.3+&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Debian&lt;/td&gt;
+&lt;td&gt;8.0+&lt;/td&gt;
+&lt;td&gt;experimental&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;RedHat Enterprise Linux&lt;/td&gt;
+&lt;td&gt;7.0+&lt;/td&gt;
+&lt;td&gt;experimental&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;CentOS&lt;/td&gt;
+&lt;td&gt;7+&lt;/td&gt;
+&lt;td&gt;experimental&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;Fedora&lt;/td&gt;
+&lt;td&gt;21+&lt;/td&gt;
+&lt;td&gt;experimental&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;To use a different base operating system on a remote provider, specify the
+provider&amp;rsquo;s image flag and one of its available images. For example, to
+select a &lt;code&gt;debian-8-x64&lt;/code&gt; image on DigitalOcean you would supply the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;--digitalocean-image=debian-8-x64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you change the base image for a provider, you may also need to change
+the SSH user. For example, the default Red Hat AMI on EC2 expects the
+SSH user to be &lt;code&gt;ec2-user&lt;/code&gt;, so you would have to specify this with
+&lt;code&gt;--amazonec2-ssh-user ec2-user&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

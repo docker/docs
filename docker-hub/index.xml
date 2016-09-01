@@ -1,0 +1,1040 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker-Hubs on Docker Docs</title>
+    <link>http://localhost/docker-hub/</link>
+    <description>Recent content in Docker-Hubs on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/docker-hub/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Accounts on Docker Hub</title>
+      <link>http://localhost/docker-hub/accounts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/accounts/</guid>
+      <description>
+
+&lt;h1 id=&#34;accounts-on-docker-hub&#34;&gt;Accounts on Docker Hub&lt;/h1&gt;
+
+&lt;h2 id=&#34;docker-hub-accounts&#34;&gt;Docker Hub accounts&lt;/h2&gt;
+
+&lt;p&gt;You can &lt;code&gt;search&lt;/code&gt; for Docker images and &lt;code&gt;pull&lt;/code&gt; them from &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker
+Hub&lt;/a&gt; without signing in or even having an
+account. However, in order to &lt;code&gt;push&lt;/code&gt; images, leave comments or to &lt;em&gt;star&lt;/em&gt;
+a repository, you are going to need a &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker
+Hub&lt;/a&gt; account.&lt;/p&gt;
+
+&lt;h3 id=&#34;registration-for-a-docker-hub-account&#34;&gt;Registration for a Docker Hub account&lt;/h3&gt;
+
+&lt;p&gt;You can get a &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; account by
+&lt;a href=&#34;https://hub.docker.com/account/signup/&#34;&gt;signing up for one here&lt;/a&gt;. A valid
+email address is required to register, which you will need to verify for
+account activation.&lt;/p&gt;
+
+&lt;h3 id=&#34;email-activation-process&#34;&gt;Email activation process&lt;/h3&gt;
+
+&lt;p&gt;You need to have at least one verified email address to be able to use your
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; account. If you can&amp;rsquo;t find the validation email,
+you can request another by visiting the &lt;a href=&#34;https://hub.docker.com/account/resend-email-confirmation/&#34;&gt;Resend Email Confirmation&lt;/a&gt; page.&lt;/p&gt;
+
+&lt;h3 id=&#34;password-reset-process&#34;&gt;Password reset process&lt;/h3&gt;
+
+&lt;p&gt;If you can&amp;rsquo;t access your account for some reason, you can reset your password
+from the &lt;a href=&#34;https://hub.docker.com/account/forgot-password/&#34;&gt;&lt;em&gt;Password Reset&lt;/em&gt;&lt;/a&gt;
+page.&lt;/p&gt;
+
+&lt;h2 id=&#34;organizations-and-groups&#34;&gt;Organizations and groups&lt;/h2&gt;
+
+&lt;p&gt;A Docker Hub organization contains public and private repositories just like
+a user account. Access to push, pull or create these organisation owned repositories
+is allocated by defining groups of users and then assigning group rights to
+specific repositories. This allows you to distribute limited access
+Docker images, and to select which Docker Hub users can publish new images.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-and-viewing-organizations&#34;&gt;Creating and viewing organizations&lt;/h3&gt;
+
+&lt;p&gt;You can see what organizations &lt;a href=&#34;https://hub.docker.com/account/organizations/&#34;&gt;you belong to and add new organizations&lt;/a&gt; from the Account Settings
+tab. They are also listed below your user name on your repositories page
+and in your account profile.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/docker-hub/docker-hub/hub-images/orgs.png&#34; alt=&#34;organizations&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;organization-groups&#34;&gt;Organization groups&lt;/h3&gt;
+
+&lt;p&gt;Users in the &lt;code&gt;Owners&lt;/code&gt; group of an organization can create and modify the
+membership of groups.&lt;/p&gt;
+
+&lt;p&gt;Unless they are the organization&amp;rsquo;s &lt;code&gt;Owner&lt;/code&gt;, users can only see groups of which they
+are members.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/docker-hub/docker-hub/hub-images/groups.png&#34; alt=&#34;groups&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;repository-group-permissions&#34;&gt;Repository group permissions&lt;/h3&gt;
+
+&lt;p&gt;Use organization groups to manage the users that can interact with your repositories.&lt;/p&gt;
+
+&lt;p&gt;You must be in an organization&amp;rsquo;s &lt;code&gt;Owners&lt;/code&gt; group to create a new group, Hub
+repository, or automated build. As an &lt;code&gt;Owner&lt;/code&gt;, you then delegate the following
+repository access rights to groups:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Access Right&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Read&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Users with this right can view, search, and pull a private repository.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Write&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Users with this right can push to non-automated repositories on the Docker Hub.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Admin&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Users with this right can modify a repository&amp;rsquo;s &amp;ldquo;Description&amp;rdquo;, &amp;ldquo;Collaborators&amp;rdquo; rights. They can also mark a repository as unlisted, change its  &amp;ldquo;Public/Private&amp;rdquo; status and &amp;ldquo;Delete&amp;rdquo; the repository. Finally, &lt;code&gt;Admin&lt;/code&gt; rights are required to read the build log on a repo.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Regardless of their actual access rights, users with unverified email addresses
+have &lt;code&gt;Read&lt;/code&gt; access to the repository. Once they have verified their address,
+they have their full access rights as granted on the organization.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automated Builds on Docker Hub</title>
+      <link>http://localhost/docker-hub/builds/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/builds/</guid>
+      <description>
+
+&lt;h1 id=&#34;automated-builds-on-docker-hub&#34;&gt;Automated Builds on Docker Hub&lt;/h1&gt;
+
+&lt;h2 id=&#34;about-automated-builds&#34;&gt;About Automated Builds&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Automated Builds&lt;/em&gt; are a special feature of Docker Hub which allow you to
+use &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&amp;rsquo;s&lt;/a&gt; build clusters to automatically
+create images from a GitHub or Bitbucket repository containing a &lt;code&gt;Dockerfile&lt;/code&gt;
+The system will clone your repository and build the image described by the
+&lt;code&gt;Dockerfile&lt;/code&gt; using the directory the &lt;code&gt;Dockerfile&lt;/code&gt; is in (and subdirectories)
+as the build context. The resulting automated image will then be uploaded
+to the Docker Hub registry and marked as an &lt;em&gt;Automated Build&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Automated Builds have several advantages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Users of &lt;em&gt;your&lt;/em&gt; Automated Build can trust that the resulting
+image was built exactly as specified.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;Dockerfile&lt;/code&gt; will be available to anyone with access to
+your repository on the Docker Hub registry.&lt;/li&gt;
+&lt;li&gt;Because the process is automated, Automated Builds help to
+make sure that your repository is always up to date.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Automated Builds are supported for both public and private repositories
+on both &lt;a href=&#34;http://github.com&#34;&gt;GitHub&lt;/a&gt; and &lt;a href=&#34;https://bitbucket.org/&#34;&gt;Bitbucket&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To use Automated Builds, you must have an &lt;a href=&#34;https://docs.docker.com/userguide/dockerhub/#creating-a-docker-hub-account&#34;&gt;account on Docker Hub&lt;/a&gt;
+and on GitHub and/or Bitbucket. In either case, the account needs
+to be properly validated and activated before you can link to it.&lt;/p&gt;
+
+&lt;p&gt;The first time you to set up an Automated Build, your
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; account will need to be linked to
+a GitHub or Bitbucket account.
+This will allow the registry to see your repositories.&lt;/p&gt;
+
+&lt;p&gt;If you have previously linked your Docker Hub account, and want to view or modify
+that link, click on the &amp;ldquo;Manage - Settings&amp;rdquo; link in the sidebar, and then
+&amp;ldquo;Linked Accounts&amp;rdquo; in your Settings sidebar.&lt;/p&gt;
+
+&lt;h2 id=&#34;automated-builds-from-github&#34;&gt;Automated Builds from GitHub&lt;/h2&gt;
+
+&lt;p&gt;If you&amp;rsquo;ve previously linked your Docker Hub account to your GitHub account,
+you&amp;rsquo;ll be able to skip to the &lt;a href=&#34;#creating-an-automated-build&#34;&gt;Creating an Automated Build&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;linking-your-docker-hub-account-to-a-github-account&#34;&gt;Linking your Docker Hub account to a GitHub account&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt;
+Automated Builds currently require &lt;em&gt;read&lt;/em&gt; and &lt;em&gt;write&lt;/em&gt; access since
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; needs to setup a GitHub service
+hook. We have no choice here, this is how GitHub manages permissions, sorry!
+We do guarantee nothing else will be touched in your account.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To get started, log into your Docker Hub account and click the
+&amp;ldquo;+ Add Repository&amp;rdquo; button at the upper right of the screen. Then select
+&lt;a href=&#34;https://registry.hub.docker.com/builds/add/&#34;&gt;Automated Build&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Select the &lt;a href=&#34;https://registry.hub.docker.com/associate/github/&#34;&gt;GitHub service&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When linking to GitHub, you&amp;rsquo;ll need to select either &amp;ldquo;Public and Private&amp;rdquo;,
+or &amp;ldquo;Limited&amp;rdquo; linking.&lt;/p&gt;
+
+&lt;p&gt;The &amp;ldquo;Public and Private&amp;rdquo; option is the easiest to use,
+as it grants the Docker Hub full access to all of your repositories. GitHub
+also allows you to grant access to repositories belonging to your GitHub
+organizations.&lt;/p&gt;
+
+&lt;p&gt;By choosing the &amp;ldquo;Limited&amp;rdquo; linking, your Docker Hub account only gets permission
+to access your public data and public repositories.&lt;/p&gt;
+
+&lt;p&gt;Follow the onscreen instructions to authorize and link your
+GitHub account to Docker Hub. Once it is linked, you&amp;rsquo;ll be able to
+choose a source repository from which to create the Automatic Build.&lt;/p&gt;
+
+&lt;p&gt;You will be able to review and revoke Docker Hub&amp;rsquo;s access by visiting the
+&lt;a href=&#34;https://github.com/settings/applications&#34;&gt;GitHub User&amp;rsquo;s Applications settings&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you delete the GitHub account linkage that is used for one of your
+automated build repositories, the previously built images will still be available.
+If you re-link to that GitHub account later, the automated build can be started
+using the &amp;ldquo;Start Build&amp;rdquo; button on the Hub, or if the webhook on the GitHub repository
+still exists, will be triggered by any subsequent commits.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;auto-builds-and-limited-linked-github-accounts&#34;&gt;Auto builds and limited linked GitHub accounts.&lt;/h3&gt;
+
+&lt;p&gt;If you selected to link your GitHub account with only a &amp;ldquo;Limited&amp;rdquo; link, then
+after creating your automated build, you will need to either manually trigger a
+Docker Hub build using the &amp;ldquo;Start a Build&amp;rdquo; button, or add the GitHub webhook
+manually, as described in &lt;a href=&#34;#github-service-hooks&#34;&gt;GitHub Service Hooks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;changing-the-github-user-link&#34;&gt;Changing the GitHub user link&lt;/h3&gt;
+
+&lt;p&gt;If you want to remove, or change the level of linking between your GitHub account
+and the Docker Hub, you need to do this in two places.&lt;/p&gt;
+
+&lt;p&gt;First, remove the &amp;ldquo;Linked Account&amp;rdquo; from your Docker Hub &amp;ldquo;Settings&amp;rdquo;.
+Then go to your GitHub account&amp;rsquo;s Personal settings, and in the &amp;ldquo;Applications&amp;rdquo;
+section, &amp;ldquo;Revoke access&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;You can now re-link your account at any time.&lt;/p&gt;
+
+&lt;h3 id=&#34;github-organizations&#34;&gt;GitHub organizations&lt;/h3&gt;
+
+&lt;p&gt;GitHub organizations and private repositories forked from organizations will be
+made available to auto build using the &amp;ldquo;Docker Hub Registry&amp;rdquo; application, which
+needs to be added to the organization - and then will apply to all users.&lt;/p&gt;
+
+&lt;p&gt;To check, or request access, go to your GitHub user&amp;rsquo;s &amp;ldquo;Setting&amp;rdquo; page, select the
+&amp;ldquo;Applications&amp;rdquo; section from the left side bar, then click the &amp;ldquo;View&amp;rdquo; button for
+&amp;ldquo;Docker Hub Registry&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/docker-hub/docker-hub/hub-images/gh-check-user-org-dh-app-access.png&#34; alt=&#34;Check User access to GitHub&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The organization&amp;rsquo;s administrators may need to go to the Organization&amp;rsquo;s &amp;ldquo;Third
+party access&amp;rdquo; screen in &amp;ldquo;Settings&amp;rdquo; to Grant or Deny access to the Docker Hub
+Registry application. This change will apply to all organization members.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/docker-hub/docker-hub/hub-images/gh-check-admin-org-dh-app-access.png&#34; alt=&#34;Check Docker Hub application access to Organization&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;More detailed access controls to specific users and GitHub repositories would be
+managed using the GitHub People and Teams interfaces.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-an-automated-build&#34;&gt;Creating an Automated Build&lt;/h3&gt;
+
+&lt;p&gt;You can &lt;a href=&#34;https://registry.hub.docker.com/builds/github/select/&#34;&gt;create an Automated Build&lt;/a&gt; from any of your
+public or private GitHub repositories that have a &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve selected the source repository, you can then configure:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The Hub user/org the repository is built to - either your Hub account name,
+or the name of any Hub organizations your account is in&lt;/li&gt;
+&lt;li&gt;The Docker repository name the image is built to&lt;/li&gt;
+&lt;li&gt;If the Docker repository should be &amp;ldquo;Public&amp;rdquo; or &amp;ldquo;Private&amp;rdquo;
+You can change the accessibility options after the repository has been created.
+If you add a Private repository to a Hub user, then you can only add other users
+as collaborators, and those users will be able to view and pull all images in that
+repository. To configure more granular access permissions, such as using groups of
+users or allow different users access to different image tags, then you need
+to add the Private repository to a Hub organization that your user has Administrator
+privilege on.&lt;/li&gt;
+&lt;li&gt;If you want the GitHub to notify the Docker Hub when a commit is made, and thus trigger
+a rebuild of all the images in this automated build.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can also select one or more
+- The git branch/tag, which repository sub-directory to use as the context
+- The Docker image tag name&lt;/p&gt;
+
+&lt;p&gt;You can set a description for the repository by clicking &amp;ldquo;Description&amp;rdquo; link in the righthand side bar after the automated build - note that the &amp;ldquo;Full Description&amp;rdquo; will be over-written next build from the README.md file.
+has been created.&lt;/p&gt;
+
+&lt;h3 id=&#34;github-private-submodules&#34;&gt;GitHub private submodules&lt;/h3&gt;
+
+&lt;p&gt;If your GitHub repository contains links to private submodules, you&amp;rsquo;ll get an
+error message in your build.&lt;/p&gt;
+
+&lt;p&gt;Normally, the Docker Hub sets up a deploy key in your GitHub repository.
+Unfortunately, GitHub only allows a repository deploy key to access a single repository.&lt;/p&gt;
+
+&lt;p&gt;To work around this, you need to create a dedicated user account in GitHub and attach
+the automated build&amp;rsquo;s deploy key that account. This dedicated build account
+can be limited to read-only access to just the repositories required to build.&lt;/p&gt;
+
+&lt;table class=&#34;table table-bordered&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Step&lt;/th&gt;
+      &lt;th&gt;Screenshot&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_org_members.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;First, create the new account in GitHub. It should be given read-only
+      access to the main repository and all submodules that are needed.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_team_members.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;This can be accomplished by adding the account to a read-only team in
+      the organization(s) where the main GitHub repository and all submodule
+      repositories are kept.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_repo_deploy_key.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Next, remove the deploy key from the main GitHub repository. This can be done in the GitHub repository&#39;s &#34;Deploy keys&#34; Settings section.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/deploy_key.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Your automated build&#39;s deploy key is in the &#34;Build Details&#34; menu
+      under &#34;Deploy keys&#34;.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_add_ssh_user_key.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;In your dedicated GitHub User account, add the deploy key from your
+      Docker Hub Automated Build.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;github-service-hooks&#34;&gt;GitHub service hooks&lt;/h3&gt;
+
+&lt;p&gt;The GitHub Service hook allows GitHub to notify the Docker Hub when something has
+been committed to that git repository. You will need to add the Service Hook manually
+if your GitHub account is &amp;ldquo;Limited&amp;rdquo; linked to the Docker Hub.&lt;/p&gt;
+
+&lt;p&gt;Follow the steps below to configure the GitHub Service hooks for your Automated Build:&lt;/p&gt;
+
+&lt;table class=&#34;table table-bordered&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Step&lt;/th&gt;
+      &lt;th&gt;Screenshot&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_settings.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Log in to Github.com, and go to your Repository page. Click on &#34;Settings&#34; on
+      the right side of the page. You must have admin privileges to the repository in order to do this.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_menu.png&#34; alt=&#34;Webhooks &amp; Services&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Click on &#34;Webhooks &amp; Services&#34; on the left side of the page.&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;3.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_service_hook.png&#34; alt=&#34;Find the service labeled Docker&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Find the service labeled &#34;Docker&#34; (or click on &#34;Add service&#34;) and click on it.&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;4.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_docker-service.png&#34; alt=&#34;Activate Service Hooks&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Make sure the &#34;Active&#34; checkbox is selected and click the &#34;Update service&#34; button to save your changes.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;automated-builds-with-bitbucket&#34;&gt;Automated Builds with Bitbucket&lt;/h2&gt;
+
+&lt;p&gt;In order to setup an Automated Build, you need to first link your
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; account with a Bitbucket account.
+This will allow the registry to see your repositories.&lt;/p&gt;
+
+&lt;p&gt;To get started, log into your Docker Hub account and click the
+&amp;ldquo;+ Add Repository&amp;rdquo; button at the upper right of the screen. Then
+select &lt;a href=&#34;https://registry.hub.docker.com/builds/add/&#34;&gt;Automated Build&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Select the &lt;a href=&#34;https://registry.hub.docker.com/associate/bitbucket/&#34;&gt;Bitbucket source&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Then follow the onscreen instructions to authorize and link your
+Bitbucket account to Docker Hub. Once it is linked, you&amp;rsquo;ll be able
+to choose a repository from which to create the Automatic Build.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-an-automated-build-1&#34;&gt;Creating an Automated Build&lt;/h3&gt;
+
+&lt;p&gt;You can &lt;a href=&#34;https://registry.hub.docker.com/builds/bitbucket/select/&#34;&gt;create an Automated Build&lt;/a&gt; from any of your
+public or private Bitbucket repositories with a &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;adding-a-hook&#34;&gt;Adding a Hook&lt;/h3&gt;
+
+&lt;p&gt;When you link your Docker Hub account, a &lt;code&gt;POST&lt;/code&gt; hook should get automatically
+added to your Bitbucket repository. Follow the steps below to confirm or modify the
+Bitbucket hooks for your Automated Build:&lt;/p&gt;
+
+&lt;table class=&#34;table table-bordered&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Step&lt;/th&gt;
+      &lt;th&gt;Screenshot&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/bb_menu.png&#34; alt=&#34;Settings&#34; width=&#34;180&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Log in to Bitbucket.org and go to your Repository page. Click on &#34;Settings&#34; on
+      the far left side of the page, under &#34;Navigation&#34;. You must have admin privileges
+      to the repository in order to do this.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/bb_hooks.png&#34; alt=&#34;Hooks&#34; width=&#34;180&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Click on &#34;Hooks&#34; on the near left side of the page, under &#34;Settings&#34;.&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/bb_post-hook.png&#34; alt=&#34;Docker Post Hook&#34;&gt;&lt;/td&gt;&lt;td&gt;You should now see a list of hooks associated with the repo, including a &lt;code&gt;POST&lt;/code&gt; hook that points at
+      registry.hub.docker.com/hooks/bitbucket.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;the-dockerfile-and-automated-builds&#34;&gt;The Dockerfile and Automated Builds&lt;/h2&gt;
+
+&lt;p&gt;During the build process, Docker will copy the contents of your &lt;code&gt;Dockerfile&lt;/code&gt;.
+It will also add it to the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; for the Docker
+community (for public repositories) or approved team members/orgs (for private
+repositories) to see on the repository page.&lt;/p&gt;
+
+&lt;h3 id=&#34;readme-md&#34;&gt;README.md&lt;/h3&gt;
+
+&lt;p&gt;If you have a &lt;code&gt;README.md&lt;/code&gt; file in your repository, it will be used as the
+repository&amp;rsquo;s full description.The build process will look for a
+&lt;code&gt;README.md&lt;/code&gt; in the same directory as your &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt;
+If you change the full description after a build, it will be
+rewritten the next time the Automated Build has been built. To make changes,
+modify the &lt;code&gt;README.md&lt;/code&gt; from the Git repository.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;remote-build-triggers&#34;&gt;Remote Build triggers&lt;/h2&gt;
+
+&lt;p&gt;If you need a way to trigger Automated Builds outside of GitHub or Bitbucket,
+you can set up a build trigger. When you turn on the build trigger for an
+Automated Build, it will give you a URL to which you can send POST requests.
+This will trigger the Automated Build, much as with a GitHub webhook.&lt;/p&gt;
+
+&lt;p&gt;Build triggers are available under the Settings menu of each Automated Build
+repository on the Docker Hub.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/docker-hub/docker-hub/hub-images/build-trigger.png&#34; alt=&#34;Build trigger screen&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;You can use &lt;code&gt;curl&lt;/code&gt; to trigger a build:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl --data &amp;quot;build=true&amp;quot; -X POST https://registry.hub.docker.com/u/svendowideit/testhook/trigger/be579c
+82-7c0e-11e4-81c4-0242ac110020/
+OK
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+You can only trigger one build at a time and no more than one
+every five minutes. If you already have a build pending, or if you
+recently submitted a build request, those requests &lt;em&gt;will be ignored&lt;/em&gt;.
+To verify everything is working correctly, check the logs of last
+ten triggers on the settings page .&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;webhooks&#34;&gt;Webhooks&lt;/h2&gt;
+
+&lt;p&gt;Automated Builds also include a Webhooks feature. Webhooks can be called
+after a successful repository push is made. This includes when a new tag is added
+to an existing image.&lt;/p&gt;
+
+&lt;p&gt;The webhook call will generate a HTTP POST with the following JSON
+payload:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;callback_url&amp;quot;: &amp;quot;https://registry.hub.docker.com/u/svendowideit/testhook/hook/2141b5bi5i5b02bec211i4eeih0242eg11000a/&amp;quot;,
+  &amp;quot;push_data&amp;quot;: {
+    &amp;quot;images&amp;quot;: [
+        &amp;quot;27d47432a69bca5f2700e4dff7de0388ed65f9d3fb1ec645e2bc24c223dc1cc3&amp;quot;,
+        &amp;quot;51a9c7c1f8bb2fa19bcd09789a34e63f35abb80044bc10196e304f6634cc582c&amp;quot;,
+        ...
+    ],
+    &amp;quot;pushed_at&amp;quot;: 1.417566161e+09,
+    &amp;quot;pusher&amp;quot;: &amp;quot;trustedbuilder&amp;quot;
+  },
+  &amp;quot;repository&amp;quot;: {
+    &amp;quot;comment_count&amp;quot;: 0,
+    &amp;quot;date_created&amp;quot;: 1.417494799e+09,
+    &amp;quot;description&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;dockerfile&amp;quot;: &amp;quot;#\n# BUILD\u0009\u0009docker build -t svendowideit/apt-cacher .\n# RUN\u0009\u0009docker run -d -p 3142:3142 -name apt-cacher-run apt-cacher\n#\n# and then you can run containers with:\n# \u0009\u0009docker run -t -i -rm -e http_proxy http://192.168.1.2:3142/ debian bash\n#\nFROM\u0009\u0009ubuntu\nMAINTAINER\u0009SvenDowideit@home.org.au\n\n\nVOLUME\u0009\u0009[\&amp;quot;/var/cache/apt-cacher-ng\&amp;quot;]\nRUN\u0009\u0009apt-get update ; apt-get install -yq apt-cacher-ng\n\nEXPOSE \u0009\u00093142\nCMD\u0009\u0009chmod 777 /var/cache/apt-cacher-ng ; /etc/init.d/apt-cacher-ng start ; tail -f /var/log/apt-cacher-ng/*\n&amp;quot;,
+    &amp;quot;full_description&amp;quot;: &amp;quot;Docker Hub based automated build from a GitHub repo&amp;quot;,
+    &amp;quot;is_official&amp;quot;: false,
+    &amp;quot;is_private&amp;quot;: true,
+    &amp;quot;is_trusted&amp;quot;: true,
+    &amp;quot;name&amp;quot;: &amp;quot;testhook&amp;quot;,
+    &amp;quot;namespace&amp;quot;: &amp;quot;svendowideit&amp;quot;,
+    &amp;quot;owner&amp;quot;: &amp;quot;svendowideit&amp;quot;,
+    &amp;quot;repo_name&amp;quot;: &amp;quot;svendowideit/testhook&amp;quot;,
+    &amp;quot;repo_url&amp;quot;: &amp;quot;https://registry.hub.docker.com/u/svendowideit/testhook/&amp;quot;,
+    &amp;quot;star_count&amp;quot;: 0,
+    &amp;quot;status&amp;quot;: &amp;quot;Active&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Webhooks are available under the Settings menu of each Repository.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you want to test your webhook out we recommend using
+a tool like &lt;a href=&#34;http://requestb.in/&#34;&gt;requestb.in&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The Docker Hub servers are currently in the IP range
+&lt;code&gt;162.242.195.64 - 162.242.195.127&lt;/code&gt;, so you can restrict your webhooks to
+accept webhook requests from that set of IP addresses.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;webhook-chains&#34;&gt;Webhook chains&lt;/h3&gt;
+
+&lt;p&gt;Webhook chains allow you to chain calls to multiple services. For example,
+you can use this to trigger a deployment of your container only after
+it has been successfully tested, then update a separate Changelog once the
+deployment is complete.
+After clicking the &amp;ldquo;Add webhook&amp;rdquo; button, simply add as many URLs as necessary
+in your chain.&lt;/p&gt;
+
+&lt;p&gt;The first webhook in a chain will be called after a successful push. Subsequent
+URLs will be contacted after the callback has been validated.&lt;/p&gt;
+
+&lt;h3 id=&#34;validating-a-callback&#34;&gt;Validating a callback&lt;/h3&gt;
+
+&lt;p&gt;In order to validate a callback in a webhook chain, you need to&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Retrieve the &lt;code&gt;callback_url&lt;/code&gt; value in the request&amp;rsquo;s JSON payload.&lt;/li&gt;
+&lt;li&gt;Send a POST request to this URL containing a valid JSON body.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: A chain request will only be considered complete once the last
+callback has been validated.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To help you debug or simply view the results of your webhook(s),
+view the &amp;ldquo;History&amp;rdquo; of the webhook available on its settings page.&lt;/p&gt;
+
+&lt;h3 id=&#34;callback-json-data&#34;&gt;Callback JSON data&lt;/h3&gt;
+
+&lt;p&gt;The following parameters are recognized in callback data:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;state&lt;/code&gt; (required): Accepted values are &lt;code&gt;success&lt;/code&gt;, &lt;code&gt;failure&lt;/code&gt; and &lt;code&gt;error&lt;/code&gt;.
+If the state isn&amp;rsquo;t &lt;code&gt;success&lt;/code&gt;, the webhook chain will be interrupted.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;description&lt;/code&gt;: A string containing miscellaneous information that will be
+available on the Docker Hub. Maximum 255 characters.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;context&lt;/code&gt;: A string containing the context of the operation. Can be retrieved
+from the Docker Hub. Maximum 100 characters.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;target_url&lt;/code&gt;: The URL where the results of the operation can be found. Can be
+retrieved on the Docker Hub.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Example callback payload:&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;state&amp;quot;: &amp;quot;success&amp;quot;,
+  &amp;quot;description&amp;quot;: &amp;quot;387 tests PASSED&amp;quot;,
+  &amp;quot;context&amp;quot;: &amp;quot;Continuous integration by Acme CI&amp;quot;,
+  &amp;quot;target_url&amp;quot;: &amp;quot;http://ci.acme.com/results/afd339c1c3d27&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;repository-links&#34;&gt;Repository links&lt;/h2&gt;
+
+&lt;p&gt;Repository links are a way to associate one Automated Build with
+another. If one gets updated,the linking system triggers a rebuild
+for the other Automated Build. This makes it easy to keep all your
+Automated Builds up to date.&lt;/p&gt;
+
+&lt;p&gt;To add a link, go to the repository for the Automated Build you want to
+link to and click on &lt;em&gt;Repository Links&lt;/em&gt; under the Settings menu at
+right. Then, enter the name of the repository that you want have linked.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt;
+You can add more than one repository link, however, you should
+do so very carefully. Creating a two way relationship between Automated Builds will
+cause an endless build loop.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker Hub user guide</title>
+      <link>http://localhost/docker-hub/userguide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/userguide/</guid>
+      <description>
+
+&lt;h1 id=&#34;using-the-docker-hub&#34;&gt;Using the Docker Hub&lt;/h1&gt;
+
+&lt;p&gt;Docker Hub is used to find and pull Docker images to run or build upon, and to
+distribute and build images for other users to use.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/docker-hub/docker-hub/hub-images/dashboard.png&#34; alt=&#34;your profile&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;finding-repositories-and-images&#34;&gt;Finding repositories and images&lt;/h2&gt;
+
+&lt;p&gt;There are two ways you can search for public repositories and images available
+on the Docker Hub. You can use the &amp;ldquo;Search&amp;rdquo; tool on the Docker Hub website, or
+you can &lt;code&gt;search&lt;/code&gt; for all the repositories and images using the Docker commandline
+tool:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker search ubuntu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Both will show you a list of the currently available public repositories on the
+Docker Hub which match the provided keyword.&lt;/p&gt;
+
+&lt;p&gt;If a repository is private or marked as unlisted, it won&amp;rsquo;t be in the repository
+search results. To see all the repositories you have access to and their statuses,
+you can look at your profile page on &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;pulling-running-and-building-images&#34;&gt;Pulling, running and building images&lt;/h2&gt;
+
+&lt;p&gt;You can find more information on &lt;a href=&#34;http://localhost/docker-hub/docker-hub/userguide/dockerimages&#34;&gt;working with Docker images&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;official-repositories&#34;&gt;Official Repositories&lt;/h2&gt;
+
+&lt;p&gt;The Docker Hub contains a number of &lt;a href=&#34;http://registry.hub.docker.com/official&#34;&gt;Official
+Repositories&lt;/a&gt;. These are
+certified repositories from vendors and contributors to Docker. They
+contain Docker images from vendors like Canonical, Oracle, and Red Hat
+that you can use to build applications and services.&lt;/p&gt;
+
+&lt;p&gt;If you use Official Repositories you know you&amp;rsquo;re using an optimized and
+up-to-date image to power your applications.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+If you would like to contribute an Official Repository for your
+organization, see &lt;a href=&#34;http://localhost/docker-hub/docker-hub/docker-hub/official_repos&#34;&gt;Official Repositories on Docker
+Hub&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;building-and-shipping-your-own-repositories-and-images&#34;&gt;Building and shipping your own repositories and images&lt;/h2&gt;
+
+&lt;p&gt;The Docker Hub provides you and your team with a place to build and ship Docker images.&lt;/p&gt;
+
+&lt;p&gt;Collections of Docker images are managed using repositories -&lt;/p&gt;
+
+&lt;p&gt;You can configure two types of repositories to manage on the Docker Hub:
+&lt;a href=&#34;http://localhost/docker-hub/docker-hub/repos&#34;&gt;Repositories&lt;/a&gt;, which allow you to push images to the Hub from your local Docker daemon,
+and &lt;a href=&#34;http://localhost/docker-hub/docker-hub/builds&#34;&gt;Automated Builds&lt;/a&gt;, which allow you to configure GitHub or Bitbucket to
+trigger the Hub to rebuild repositories when changes are made to the repository.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Official Repositories on Docker Hub</title>
+      <link>http://localhost/docker-hub/official_repos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/official_repos/</guid>
+      <description>
+
+&lt;h1 id=&#34;official-repositories-on-docker-hub&#34;&gt;Official Repositories on Docker Hub&lt;/h1&gt;
+
+&lt;p&gt;The Docker &lt;a href=&#34;http://registry.hub.docker.com/official&#34;&gt;Official Repositories&lt;/a&gt; are
+a curated set of Docker repositories that are promoted on Docker Hub. They are
+designed to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Provide essential base OS repositories (for example,
+&lt;a href=&#34;https://registry.hub.docker.com/_/ubuntu/&#34;&gt;&lt;code&gt;ubuntu&lt;/code&gt;&lt;/a&gt;,
+&lt;a href=&#34;https://registry.hub.docker.com/_/centos/&#34;&gt;&lt;code&gt;centos&lt;/code&gt;&lt;/a&gt;) that serve as the
+starting point for the majority of users.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Provide drop-in solutions for popular programming language runtimes, data
+stores, and other services, similar to what a Platform-as-a-Service (PAAS)
+would offer.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Exemplify &lt;a href=&#34;http://localhost/docker-hub/docker-hub/articles/dockerfile_best-practices&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt; best practices&lt;/a&gt;
+and provide clear documentation to serve as a reference for other &lt;code&gt;Dockerfile&lt;/code&gt;
+authors.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ensure that security updates are applied in a timely manner. This is
+particularly important as many Official Repositories are some of the most
+popular on Docker Hub.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Provide a channel for software vendors to redistribute up-to-date and
+supported versions of their products. Organization accounts on Docker Hub can
+also serve this purpose, without the careful review or restrictions on what
+can be published.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Docker, Inc. sponsors a dedicated team that is responsible for reviewing and
+publishing all Official Repositories content. This team works in collaboration
+with upstream software maintainers, security experts, and the broader Docker
+community.&lt;/p&gt;
+
+&lt;p&gt;While it is preferrable to have upstream software authors maintaining their
+corresponding Official Repositories, this is not a strict requirement. Creating
+and maintaining images for Official Repositories is a public process. It takes
+place openly on GitHub where participation is encouraged. Anyone can provide
+feedback, contribute code, suggest process changes, or even propose a new
+Official Repository.&lt;/p&gt;
+
+&lt;h2 id=&#34;should-i-use-official-repositories&#34;&gt;Should I use Official Repositories?&lt;/h2&gt;
+
+&lt;p&gt;New Docker users are encouraged to use the Official Repositories in their
+projects. These repositories have clear documentation, promote best practices,
+and are designed for the most common use cases. Advanced users are encouraged to
+review the Official Repositories as part of their &lt;code&gt;Dockerfile&lt;/code&gt; learning process.&lt;/p&gt;
+
+&lt;p&gt;A common rationale for diverging from Official Repositories is to optimize for
+image size. For instance, many of the programming language stack images contain
+a complete build toolchain to support installation of modules that depend on
+optimized code. An advanced user could build a custom image with just the
+necessary pre-compiled libraries to save space.&lt;/p&gt;
+
+&lt;p&gt;A number of language stacks such as
+&lt;a href=&#34;https://registry.hub.docker.com/_/python/&#34;&gt;&lt;code&gt;python&lt;/code&gt;&lt;/a&gt; and
+&lt;a href=&#34;https://registry.hub.docker.com/_/ruby/&#34;&gt;&lt;code&gt;ruby&lt;/code&gt;&lt;/a&gt; have &lt;code&gt;-slim&lt;/code&gt; tag variants
+designed to fill the need for optimization.  Even when these &amp;ldquo;slim&amp;rdquo; variants are
+insufficient, it is still recommended to inherit from an Official Repository
+base OS image to leverage the ongoing maintenance work, rather than duplicating
+these efforts.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-can-i-get-involved&#34;&gt;How can I get involved?&lt;/h2&gt;
+
+&lt;p&gt;All Official Repositories contain a &lt;strong&gt;User Feedback&lt;/strong&gt; section in their
+documentation which covers the details for that specific repository. In most
+cases, the GitHub repository which contains the Dockerfiles for an Official
+Repository also has an active issue tracker. General feedback and support
+questions should be directed to &lt;code&gt;#docker-library&lt;/code&gt; on Freenode IRC.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-do-i-create-a-new-official-repository&#34;&gt;How do I create a new Official Repository?&lt;/h2&gt;
+
+&lt;p&gt;From a high level, an Official Repository starts out as a proposal in the form
+of a set of GitHub pull requests.  You&amp;rsquo;ll find detailed and objective proposal
+requirements in the following GitHub repositories:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/docker-library/official-images&#34;&gt;docker-library/official-images&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/docker-library/docs&#34;&gt;docker-library/docs&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Official Repositories team, with help from community contributors, formally
+review each proposal and provide feedback to the author. This initial review
+process may require a bit of back and forth before the proposal is accepted.&lt;/p&gt;
+
+&lt;p&gt;There are also subjective considerations during the review process. These
+subjective concerns boil down to the basic question: &amp;ldquo;is this image generally
+useful?&amp;rdquo;  For example, the &lt;a href=&#34;https://registry.hub.docker.com/_/python/&#34;&gt;&lt;code&gt;python&lt;/code&gt;&lt;/a&gt;
+Official Repository is &amp;ldquo;generally useful&amp;rdquo; to the large Python developer
+community, whereas an obscure text adventure game written in Python last week is
+not.&lt;/p&gt;
+
+&lt;p&gt;When a new proposal is accepted, the author becomes responsibile for keeping
+their images up-to-date and responding to user feedback.  The Official
+Repositories team becomes responsibile for publishing the images and
+documentation on Docker Hub.  Updates to the Official Repository follow the same
+pull request process, though with less review. The Official Repositories team
+ultimately acts as a gatekeeper for all changes, which helps mitigate the risk
+of quality and security issues from being introduced.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are interested in proposing an Official Repository, but would
+like to discuss it with Docker, Inc. privately first, please send your
+inquiries to partners@docker.com.  There is no fast-track or pay-for-status
+option.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Docker Hub</title>
+      <link>http://localhost/docker-hub/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-hub&#34;&gt;Docker Hub&lt;/h1&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; provides a cloud-based platform service
+for distributed applications, including container image distribution and change
+management, user and team collaboration, and lifecycle workflow automation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/docker-hub/docker-hub/hub-images/hub.png&#34; alt=&#34;DockerHub&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;finding-and-pulling-images-docker-hub-docker-hub-userguide&#34;&gt;&lt;a href=&#34;http://localhost/docker-hub/docker-hub/userguide&#34;&gt;Finding and pulling images&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Find out how to &lt;a href=&#34;http://localhost/docker-hub/docker-hub/userguide&#34;&gt;use the Docker Hub&lt;/a&gt; to find and pull Docker
+images to run or build upon.&lt;/p&gt;
+
+&lt;h2 id=&#34;accounts-docker-hub-docker-hub-accounts&#34;&gt;&lt;a href=&#34;http://localhost/docker-hub/docker-hub/accounts&#34;&gt;Accounts&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://localhost/docker-hub/docker-hub/accounts&#34;&gt;Learn how to create&lt;/a&gt; a Docker Hub
+account and manage your organizations and groups.&lt;/p&gt;
+
+&lt;h2 id=&#34;your-repositories-docker-hub-docker-hub-repos&#34;&gt;&lt;a href=&#34;http://localhost/docker-hub/docker-hub/repos&#34;&gt;Your Repositories&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Find out how to share your Docker images in &lt;a href=&#34;http://localhost/docker-hub/docker-hub/repos&#34;&gt;Docker Hub
+repositories&lt;/a&gt; and how to store and manage private images.&lt;/p&gt;
+
+&lt;h2 id=&#34;automated-builds-docker-hub-docker-hub-builds&#34;&gt;&lt;a href=&#34;http://localhost/docker-hub/docker-hub/builds&#34;&gt;Automated builds&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Learn how to automate your build and deploy pipeline with &lt;a href=&#34;http://localhost/docker-hub/docker-hub/builds&#34;&gt;Automated
+Builds&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Your Repositories on Docker Hub</title>
+      <link>http://localhost/docker-hub/repos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/repos/</guid>
+      <description>
+
+&lt;h1 id=&#34;your-hub-repositories&#34;&gt;Your Hub repositories&lt;/h1&gt;
+
+&lt;p&gt;Docker Hub repositories make it possible for you to share images with co-workers,
+customers or the Docker community at large. If you&amp;rsquo;re building your images internally,
+either on your own Docker daemon, or using your own Continuous integration services,
+you can push them to a Docker Hub repository that you add to your Docker Hub user or
+organization account.&lt;/p&gt;
+
+&lt;p&gt;Alternatively, if the source code for your Docker image is on GitHub or Bitbucket,
+you can use an &amp;ldquo;Automated build&amp;rdquo; repository, which is built by the Docker Hub
+services. See the &lt;a href=&#34;http://localhost/docker-hub/docker-hub/builds&#34;&gt;automated builds documentation&lt;/a&gt; to read about
+the extra functionality provided by those services.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/docker-hub/docker-hub/hub-images/repos.png&#34; alt=&#34;repositories&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Your Docker Hub repositories have a number of useful features.&lt;/p&gt;
+
+&lt;h2 id=&#34;stars&#34;&gt;Stars&lt;/h2&gt;
+
+&lt;p&gt;Your repositories can be starred and you can star repositories in
+return. Stars are a way to show that you like a repository. They are
+also an easy way of bookmarking your favorites.&lt;/p&gt;
+
+&lt;h2 id=&#34;comments&#34;&gt;Comments&lt;/h2&gt;
+
+&lt;p&gt;You can interact with other members of the Docker community and maintainers by
+leaving comments on repositories. If you find any comments that are not
+appropriate, you can flag them for review.&lt;/p&gt;
+
+&lt;h2 id=&#34;collaborators-and-their-role&#34;&gt;Collaborators and their role&lt;/h2&gt;
+
+&lt;p&gt;A collaborator is someone you want to give access to a private
+repository. Once designated, they can &lt;code&gt;push&lt;/code&gt; and &lt;code&gt;pull&lt;/code&gt; to your
+repositories. They will not be allowed to perform any administrative
+tasks such as deleting the repository or changing its status from
+private to public.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+A collaborator cannot add other collaborators. Only the owner of
+the repository has administrative access.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can also assign more granular collaborator rights (&amp;ldquo;Read&amp;rdquo;, &amp;ldquo;Write&amp;rdquo;, or &amp;ldquo;Admin&amp;rdquo;)
+on Docker Hub by using organizations and groups. For more information
+see the &lt;a href=&#34;accounts/&#34;&gt;accounts documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;private-repositories&#34;&gt;Private repositories&lt;/h2&gt;
+
+&lt;p&gt;Private repositories allow you to have repositories that contain images
+that you want to keep private, either to your own account or within an
+organization or group.&lt;/p&gt;
+
+&lt;p&gt;To work with a private repository on &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker
+Hub&lt;/a&gt;, you will need to add one via the &lt;a href=&#34;https://registry.hub.docker.com/account/repositories/add/&#34;&gt;Add
+Repository&lt;/a&gt;
+link. You get one private repository for free with your Docker Hub
+account. If you need more accounts you can upgrade your &lt;a href=&#34;https://registry.hub.docker.com/plans/&#34;&gt;Docker
+Hub&lt;/a&gt; plan.&lt;/p&gt;
+
+&lt;p&gt;Once the private repository is created, you can &lt;code&gt;push&lt;/code&gt; and &lt;code&gt;pull&lt;/code&gt; images
+to and from it using Docker.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; You need to be signed in and have access to work with a
+private repository.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Private repositories are just like public ones. However, it isn&amp;rsquo;t
+possible to browse them or search their content on the public registry.
+They do not get cached the same way as a public repository either.&lt;/p&gt;
+
+&lt;p&gt;It is possible to give access to a private repository to those whom you
+designate (i.e., collaborators) from its Settings page. From there, you
+can also switch repository status (&lt;em&gt;public&lt;/em&gt; to &lt;em&gt;private&lt;/em&gt;, or
+vice-versa). You will need to have an available private repository slot
+open before you can do such a switch. If you don&amp;rsquo;t have any available,
+you can always upgrade your &lt;a href=&#34;https://registry.hub.docker.com/plans/&#34;&gt;Docker
+Hub&lt;/a&gt; plan.&lt;/p&gt;
+
+&lt;h2 id=&#34;webhooks&#34;&gt;Webhooks&lt;/h2&gt;
+
+&lt;p&gt;A webhook is an HTTP call-back triggered by a specific event.
+You can use a Hub repository webhook to notify people, services, and other
+applications after a new image is pushed to your repository (this also happens
+for Automated builds). For example, you can trigger an automated test or
+deployment to happen as soon as the image is available.&lt;/p&gt;
+
+&lt;p&gt;To get started adding webhooks, go to the desired repository in the Hub,
+and click &amp;ldquo;Webhooks&amp;rdquo; under the &amp;ldquo;Settings&amp;rdquo; box.
+A webhook is called only after a successful &lt;code&gt;push&lt;/code&gt; is
+made. The webhook calls are HTTP POST requests with a JSON payload
+similar to the example shown below.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Example webhook JSON payload:&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;callback_url&amp;quot;: &amp;quot;https://registry.hub.docker.com/u/svendowideit/busybox/hook/2141bc0cdec4hebec411i4c1g40242eg110020/&amp;quot;,
+  &amp;quot;push_data&amp;quot;: {
+    &amp;quot;images&amp;quot;: [
+        &amp;quot;27d47432a69bca5f2700e4dff7de0388ed65f9d3fb1ec645e2bc24c223dc1cc3&amp;quot;,
+        &amp;quot;51a9c7c1f8bb2fa19bcd09789a34e63f35abb80044bc10196e304f6634cc582c&amp;quot;,
+        ...
+    ],
+    &amp;quot;pushed_at&amp;quot;: 1.417566822e+09,
+    &amp;quot;pusher&amp;quot;: &amp;quot;svendowideit&amp;quot;
+  },
+  &amp;quot;repository&amp;quot;: {
+    &amp;quot;comment_count&amp;quot;: 0,
+    &amp;quot;date_created&amp;quot;: 1.417566665e+09,
+    &amp;quot;description&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;full_description&amp;quot;: &amp;quot;webhook triggered from a &#39;docker push&#39;&amp;quot;,
+    &amp;quot;is_official&amp;quot;: false,
+    &amp;quot;is_private&amp;quot;: false,
+    &amp;quot;is_trusted&amp;quot;: false,
+    &amp;quot;name&amp;quot;: &amp;quot;busybox&amp;quot;,
+    &amp;quot;namespace&amp;quot;: &amp;quot;svendowideit&amp;quot;,
+    &amp;quot;owner&amp;quot;: &amp;quot;svendowideit&amp;quot;,
+    &amp;quot;repo_name&amp;quot;: &amp;quot;svendowideit/busybox&amp;quot;,
+    &amp;quot;repo_url&amp;quot;: &amp;quot;https://registry.hub.docker.com/u/svendowideit/busybox/&amp;quot;,
+    &amp;quot;star_count&amp;quot;: 0,
+    &amp;quot;status&amp;quot;: &amp;quot;Active&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;TODO: does it tell you what tag was updated?&gt;&lt;/p&gt;
+
+&lt;p&gt;For testing, you can try an HTTP request tool like &lt;a href=&#34;http://requestb.in/&#34;&gt;requestb.in&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The Docker Hub servers are currently in the IP range
+&lt;code&gt;162.242.195.64 - 162.242.195.127&lt;/code&gt;, so you can restrict your webhooks to
+accept webhook requests from that set of IP addresses.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;webhook-chains&#34;&gt;Webhook chains&lt;/h3&gt;
+
+&lt;p&gt;Webhook chains allow you to chain calls to multiple services. For example,
+you can use this to trigger a deployment of your container only after
+it has been successfully tested, then update a separate Changelog once the
+deployment is complete.
+After clicking the &amp;ldquo;Add webhook&amp;rdquo; button, simply add as many URLs as necessary
+in your chain.&lt;/p&gt;
+
+&lt;p&gt;The first webhook in a chain will be called after a successful push. Subsequent
+URLs will be contacted after the callback has been validated.&lt;/p&gt;
+
+&lt;h3 id=&#34;validating-a-callback&#34;&gt;Validating a callback&lt;/h3&gt;
+
+&lt;p&gt;In order to validate a callback in a webhook chain, you need to&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Retrieve the &lt;code&gt;callback_url&lt;/code&gt; value in the request&amp;rsquo;s JSON payload.&lt;/li&gt;
+&lt;li&gt;Send a POST request to this URL containing a valid JSON body.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: A chain request will only be considered complete once the last
+callback has been validated.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To help you debug or simply view the results of your webhook(s),
+view the &amp;ldquo;History&amp;rdquo; of the webhook available on its settings page.&lt;/p&gt;
+
+&lt;h4 id=&#34;callback-json-data&#34;&gt;Callback JSON data&lt;/h4&gt;
+
+&lt;p&gt;The following parameters are recognized in callback data:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;state&lt;/code&gt; (required): Accepted values are &lt;code&gt;success&lt;/code&gt;, &lt;code&gt;failure&lt;/code&gt; and &lt;code&gt;error&lt;/code&gt;.
+If the state isn&amp;rsquo;t &lt;code&gt;success&lt;/code&gt;, the webhook chain will be interrupted.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;description&lt;/code&gt;: A string containing miscellaneous information that will be
+available on the Docker Hub. Maximum 255 characters.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;context&lt;/code&gt;: A string containing the context of the operation. Can be retrieved
+from the Docker Hub. Maximum 100 characters.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;target_url&lt;/code&gt;: The URL where the results of the operation can be found. Can be
+retrieved on the Docker Hub.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Example callback payload:&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;state&amp;quot;: &amp;quot;success&amp;quot;,
+  &amp;quot;description&amp;quot;: &amp;quot;387 tests PASSED&amp;quot;,
+  &amp;quot;context&amp;quot;: &amp;quot;Continuous integration by Acme CI&amp;quot;,
+  &amp;quot;target_url&amp;quot;: &amp;quot;http://ci.acme.com/results/afd339c1c3d27&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;mark-as-unlisted&#34;&gt;Mark as unlisted&lt;/h2&gt;
+
+&lt;p&gt;By marking a repository as unlisted, you can create a publicly pullable repository
+which will not be in the Hub or commandline search. This allows you to have a limited
+release, but does not restrict access to anyone that is told, or guesses the repository
+name.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

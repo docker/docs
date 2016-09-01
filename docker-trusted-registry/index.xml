@@ -1,0 +1,2176 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker-Trusted-Registries on Docker Docs</title>
+    <link>http://localhost/docker-trusted-registry/</link>
+    <description>Recent content in Docker-Trusted-Registries on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/docker-trusted-registry/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Admin guide</title>
+      <link>http://localhost/docker-trusted-registry/adminguide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/adminguide/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-trusted-registry-administrator-s-guide&#34;&gt;Docker Trusted Registry Administrator&amp;rsquo;s Guide&lt;/h1&gt;
+
+&lt;p&gt;This guide covers tasks and functions an administrator of Docker Trusted Registry
+(DTR) will need to know about, such as reporting, logging, system management,
+performance metrics, etc.
+For tasks DTR users need to accomplish, such as using DTR to push and pull
+images, please visit the &lt;a href=&#34;http://localhost/docker-trusted-registry/userguide&#34;&gt;User&amp;rsquo;s Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;reporting&#34;&gt;Reporting&lt;/h2&gt;
+
+&lt;h3 id=&#34;system-health&#34;&gt;System Health&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/admin-metrics.png&#34; alt=&#34;System Health page&amp;lt;/admin/metrics/&amp;gt;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The &amp;ldquo;System Health&amp;rdquo; tab displays &amp;ldquo;hardware&amp;rdquo; resource utilization and network traffic metrics for the DTR host as well as for each of its contained services. The CPU and RAM usage meters at the top indicate overall resource usage for the host, while detailed time-series charts are provided below for each service.&lt;/p&gt;
+
+&lt;p&gt;In addition, if your registry is using a filesystem storage driver, you will see a usage meter indicating used and available space on the storage volume. Third-party storage back-ends are not supported, so if you are using one, this meter will not be displayed.&lt;/p&gt;
+
+&lt;p&gt;You can mouse-over the charts or meters to see detailed data points.&lt;/p&gt;
+
+&lt;p&gt;Clicking on a service name (i.e., &amp;ldquo;load_balancer&amp;rdquo;, &amp;ldquo;admin_server&amp;rdquo;, etc.) will
+display the network, CPU, and memory (RAM) utilization data for the specified
+service. See below for a
+&lt;a href=&#34;#services&#34;&gt;detailed explanation of the available services&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;logs&#34;&gt;Logs&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/admin-logs.png&#34; alt=&#34;System Logs page&amp;lt;/admin/logs/&amp;gt;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Click the &amp;ldquo;Logs&amp;rdquo; tab to view all logs related to your DTR instance. You will see
+log sections on this page for each service in your DTR instance. Older or newer
+logs can be loaded by scrolling up or down. See below for a
+&lt;a href=&#34;#services&#34;&gt;detailed explanation of the available services&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;DTR&amp;rsquo;s log files can be found on the host in &lt;code&gt;/usr/local/etc/dtr/logs/&lt;/code&gt;. The
+files are limited to a maximum size of 64mb. They are rotated every two weeks,
+when the aggregator sends logs to the collection server, or they are rotated if
+a logfile would exceed 64mb without rotation. Log files are named &lt;code&gt;&amp;lt;component
+name&amp;gt;-&amp;lt;timestamp at rotation&amp;gt;&lt;/code&gt;, where the &amp;ldquo;component name&amp;rdquo; is the service it
+provides (&lt;code&gt;manager&lt;/code&gt;, &lt;code&gt;admin-server&lt;/code&gt;, etc.).&lt;/p&gt;
+
+&lt;h3 id=&#34;usage-statistics-and-crash-reports&#34;&gt;Usage statistics and crash reports&lt;/h3&gt;
+
+&lt;p&gt;During normal use, DTR generates usage statistics and crash reports. This
+information is collected by Docker, Inc. to help us prioritize features, fix
+bugs, and improve our products. Specifically, Docker, Inc. collects the
+following information:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Error logs&lt;/li&gt;
+&lt;li&gt;Crash logs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;emergency-access-to-dtr&#34;&gt;Emergency access to DTR&lt;/h2&gt;
+
+&lt;p&gt;If your authenticated or public access to the DTR web interface has stopped
+working, but your DTR admin container is still running, you can add an
+&lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador container&lt;/a&gt;
+to get temporary unsecure access to it by running:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -it --link docker_trusted_registry_admin_server:admin -p 9999:80 svendowideit/ambassador
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This guide assumes that you are a member of the &lt;code&gt;docker&lt;/code&gt; group,
+or have root privileges. Otherwise, you may need to add &lt;code&gt;sudo&lt;/code&gt; to the example
+command above.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This will give you access on port &lt;code&gt;9999&lt;/code&gt; on your DTR server - &lt;code&gt;http://&amp;lt;dtr-host-ip&amp;gt;:9999/admin/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;services&#34;&gt;Services&lt;/h2&gt;
+
+&lt;p&gt;DTR runs several Docker services which are essential to its reliability and
+usability. The following services are included; you can see their details by
+running queries on the &lt;a href=&#34;#system-health&#34;&gt;System Health&lt;/a&gt; and &lt;a href=&#34;#logs&#34;&gt;Logs&lt;/a&gt; pages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;admin_server&lt;/code&gt;: Used for displaying system health, performing upgrades,
+configuring settings, and viewing logs.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;load_balancer&lt;/code&gt;: Used for maintaining high availability by distributing load
+to each image storage service (&lt;code&gt;image_storage_X&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;log_aggregator&lt;/code&gt;: A microservice used for aggregating logs from each of the
+other services. Handles log persistence and rotation on disk.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;image_storage_X&lt;/code&gt;: Stores Docker images using the &lt;a href=&#34;http://docs.docker.com/registry/spec/api/&#34;&gt;Docker Registry HTTP API V2&lt;/a&gt;. Typically,
+multiple image storage services are used in order to provide greater uptime and
+faster, more efficient resource utilization.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;postgres&lt;/code&gt;: A database service used to host authentication (LDAP) data and other datasets as needed by DTR.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;dtr-system-management&#34;&gt;DTR system management&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;docker/trusted-registry&lt;/code&gt; image is used to control the DTR system. This
+image uses the Docker socket to orchestrate the multiple services that comprise
+DTR.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; $ sudo bash -c &amp;quot;$(sudo docker run docker/trusted-registry [COMMAND])&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Supported commands are: &lt;code&gt;install&lt;/code&gt;, &lt;code&gt;start&lt;/code&gt;, &lt;code&gt;stop&lt;/code&gt;, &lt;code&gt;restart&lt;/code&gt;, &lt;code&gt;pull&lt;/code&gt;, &lt;code&gt;info&lt;/code&gt;,
+&lt;code&gt;export-settings&lt;/code&gt;, &lt;code&gt;diagnostics&lt;/code&gt;, &lt;code&gt;status&lt;/code&gt;, &lt;code&gt;upgrade&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: &lt;code&gt;sudo&lt;/code&gt; is needed for &lt;code&gt;docker/trusted-registry&lt;/code&gt; commands to
+ensure that the Bash script is run with full access to the Docker host.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;install&#34;&gt;&lt;code&gt;install&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Install DTR.&lt;/p&gt;
+
+&lt;h3 id=&#34;start&#34;&gt;&lt;code&gt;start&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Start DTR containers that are not running.&lt;/p&gt;
+
+&lt;h3 id=&#34;stop&#34;&gt;&lt;code&gt;stop&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Stop DTR containers that are running.&lt;/p&gt;
+
+&lt;h3 id=&#34;restart&#34;&gt;&lt;code&gt;restart&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Stop and then start the DTR containers.&lt;/p&gt;
+
+&lt;h3 id=&#34;status&#34;&gt;&lt;code&gt;status&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Display the current running status of only the DTR containers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(docker run docker/trusted-registry status)&amp;quot;
+INFO  [1.1.0-alpha-001472_g8a9ddb4] Attempting to connect to docker engine dockerHost=&amp;quot;unix:///var/run/docker.sock&amp;quot;
+INFO  [1.1.0-alpha-001472_g8a9ddb4] Running status command
+docker_trusted_registry_load_balancer
+    Daemon [default (unix:///var/run/docker.sock)]
+        Id: 4d6abd5c39acda25e3d3ccf7cc2acf00f32c7786a7e86fb56daf7fd67584ce9f
+        Created: 2015-06-16 21:52:53+00:00
+        Status: Up 4 minutes
+        Image: docker/trusted-registry-nginx:1.1.0-alpha-001472_g8a9ddb4
+        Ports:
+            tcp://0.0.0.0:443 -&amp;gt; 443
+            tcp://0.0.0.0:80 -&amp;gt; 80
+        Command:
+            nginxWatcher
+        Linked To:
+            None
+
+docker_trusted_registry_auth_server
+    Daemon [default (unix:///var/run/docker.sock)]
+        Id: 22d5c1cf988338638dd810bc8111295f71713e81338d16298028122d33eed64a
+        Created: 2015-06-16 21:52:46+00:00
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;info&#34;&gt;&lt;code&gt;info&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Display the version and info for the Docker daemon, and version and image ID&amp;rsquo;s
+of DTR.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(docker run docker/trusted-registry info)&amp;quot;
+INFO  [1.1.0-alpha-001472_g8a9ddb4] Attempting to connect to docker engine dockerHost=&amp;quot;unix:///var/run/docker.sock&amp;quot;
+{
+  &amp;quot;DockerEngine&amp;quot;: {
+    &amp;quot;Version&amp;quot;: {
+      &amp;quot;ApiVersion&amp;quot;: &amp;quot;1.20&amp;quot;,
+      &amp;quot;Arch&amp;quot;: &amp;quot;amd64&amp;quot;,
+      &amp;quot;GitCommit&amp;quot;: &amp;quot;55bdb51&amp;quot;,
+      &amp;quot;GoVersion&amp;quot;: &amp;quot;go1.4.2&amp;quot;,
+      &amp;quot;KernelVersion&amp;quot;: &amp;quot;3.16.0-4-amd64&amp;quot;,
+      &amp;quot;Os&amp;quot;: &amp;quot;linux&amp;quot;,
+      &amp;quot;Version&amp;quot;: &amp;quot;1.6.0&amp;quot;
+    },
+    &amp;quot;Info&amp;quot;: {
+      &amp;quot;ID&amp;quot;: &amp;quot;QUMM:6SGD:6ZK4:TLJD:LTX7:64Z5:WP4Y:NE3N:TY7P:Y2RR:KVGO:IWRX&amp;quot;,
+      &amp;quot;Containers&amp;quot;: 15,
+      &amp;quot;Driver&amp;quot;: &amp;quot;btrfs&amp;quot;,
+      &amp;quot;DriverStatus&amp;quot;: [],
+      &amp;quot;ExecutionDriver&amp;quot;: &amp;quot;native-0.2&amp;quot;,
+      &amp;quot;Images&amp;quot;: 2793,
+      &amp;quot;KernelVersion&amp;quot;: &amp;quot;3.16.0-4-amd64&amp;quot;,
+      &amp;quot;OperatingSystem&amp;quot;: &amp;quot;Debian GNU/Linux stretch/sid&amp;quot;,
+      &amp;quot;NCPU&amp;quot;: 4,
+      &amp;quot;MemTotal&amp;quot;: 12305711104,
+      &amp;quot;Name&amp;quot;: &amp;quot;t440s&amp;quot;,
+      &amp;quot;Labels&amp;quot;: null,
+      &amp;quot;Debug&amp;quot;: true,
+      &amp;quot;NFd&amp;quot;: 43,
+      &amp;quot;NGoroutines&amp;quot;: 85,
+      &amp;quot;SystemTime&amp;quot;: &amp;quot;2015-06-17T04:24:54.634746915+10:00&amp;quot;,
+      &amp;quot;NEventsListener&amp;quot;: 1,
+      &amp;quot;InitPath&amp;quot;: &amp;quot;/usr/bin/docker&amp;quot;,
+      &amp;quot;InitSha1&amp;quot;: &amp;quot;&amp;quot;,
+      &amp;quot;IndexServerAddress&amp;quot;: &amp;quot;https://index.docker.io/v1/&amp;quot;,
+      &amp;quot;MemoryLimit&amp;quot;: false,
+      &amp;quot;SwapLimit&amp;quot;: false,
+      &amp;quot;IPv4Forwarding&amp;quot;: true,
+      &amp;quot;DockerRootDir&amp;quot;: &amp;quot;/data/docker&amp;quot;,
+      &amp;quot;HttpProxy&amp;quot;: &amp;quot;&amp;quot;,
+      &amp;quot;HttpsProxy&amp;quot;: &amp;quot;&amp;quot;,
+      &amp;quot;NoProxy&amp;quot;: &amp;quot;&amp;quot;
+    }
+  },
+  &amp;quot;DTR&amp;quot;: {
+    &amp;quot;Version&amp;quot;: &amp;quot;1.1.0-alpha-001472_g8a9ddb4&amp;quot;,
+    &amp;quot;GitSHA&amp;quot;: &amp;quot;8a9ddb4595c3&amp;quot;,
+    &amp;quot;StorageDriver&amp;quot;: &amp;quot;filesystem&amp;quot;,
+    &amp;quot;AuthDriver&amp;quot;: &amp;quot;dtr&amp;quot;,
+    &amp;quot;ImageIDs&amp;quot;: {
+      &amp;quot;Garant&amp;quot;: &amp;quot;59bc135c362ad7e44743800b037061976210a9cc6aec323c3ea6eb93ebb513ca&amp;quot;,
+      &amp;quot;Registry&amp;quot;: &amp;quot;6aba58d8bbe71b14edd538a20ac98e1279577bbef461ca25fd2794dcb017c1dc&amp;quot;,
+      &amp;quot;AdminServer&amp;quot;: &amp;quot;af4dfb1f386e3e07b612f5f59f08166ce499ef1dfc619d499a42c53c5e424acf&amp;quot;,
+      &amp;quot;Manager&amp;quot;: &amp;quot;3abc65af8385e63d61af40a1393438d0d720e6bf2a60c1b15b7a17a2a0d8965b&amp;quot;,
+      &amp;quot;LogAggregator&amp;quot;: &amp;quot;01da5d7ef561a251c0c63b860a95d55b602cc70347192ef34acd3b1c5bcd317f&amp;quot;,
+      &amp;quot;Nginx&amp;quot;: &amp;quot;631537f98c8876050fae00106c8db424d03e408b27cc14b5eb1fc11abbaba03b&amp;quot;
+    },
+    &amp;quot;LicenseKeyID&amp;quot;: &amp;quot;2Y6QPUBxoYEms6pIysneyum6SZY_QxE9v4zLF8i1wBNZ&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;diagnostics&#34;&gt;&lt;code&gt;diagnostics&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;The &lt;code&gt;diagnostics&lt;/code&gt; command is used to extract configuration and run time data
+about your containers for support purposes.&lt;/p&gt;
+
+&lt;p&gt;The output includes the &lt;code&gt;docker inspect&lt;/code&gt; output for all
+containers, running and not, so please check the resulting files for passwords
+and other proprietary information before sending it.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(docker run docker/trusted-registry diagnostics)&amp;quot; &amp;gt; diagnostics.zip&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; These diagnostics files may contain secrets that you need to remove
+before passing on - such as raw container log files, azure storage credentials, or passwords that may be
+sent to non-DTR containers using the &lt;code&gt;docker run -e PASSWORD=asdf&lt;/code&gt; environment variable
+options.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Stream to STDOUT a zip file containing CSDE and DTR configuration, state, and log
+files to help the Docker Enterprise support team:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;your Docker host&amp;rsquo;s &lt;code&gt;ca-certificates.crt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;containers/&lt;/code&gt;: the first 20 running, stopped and paused containers &lt;code&gt;docker inspect&lt;/code&gt;
+information and log files.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dockerEngine/&lt;/code&gt;: the Docker daemon&amp;rsquo;s &lt;code&gt;info&lt;/code&gt; and &lt;code&gt;version&lt;/code&gt; output&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dockerState/&lt;/code&gt;: the Docker daemon&amp;rsquo;s container states, image states, daemon log file, and daemon configuration file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dtrlogs/&lt;/code&gt;: the DTR container log files&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;manager/&lt;/code&gt;: the DTR &lt;code&gt;/usr/local/etc/dtr&lt;/code&gt; DTR configuration directory and DTR manager &lt;code&gt;info&lt;/code&gt; output. See the &lt;a href=&#34;#export-settings&#34;&gt;export settings section&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sysinfo/&lt;/code&gt;: Host information&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;errors.txt&lt;/code&gt;: errors and warnings encountered while running diagnostics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;export-settings&#34;&gt;&lt;code&gt;export-settings&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Export the DTR configuration files for backup or diagnostics use.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(docker run docker/trusted-registry export-settings)&amp;quot; &amp;gt; export-settings.tar.gz&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; These diagnostics files may contain secrets that you need to remove
+before passing on - such as azure storage credentials.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Stream to STDOUT a gzipped tar file containing the DTR configuration files from &lt;code&gt;/usr/local/etc/dtr/&lt;/code&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;garant.yml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;generatedConfigs/nginx.conf&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;generatedConfigs/stacker.yml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hub.yml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;license.json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ssl/server.pem&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;storage.yml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;client-docker-daemon-diagnostics&#34;&gt;Client Docker Daemon diagnostics&lt;/h2&gt;
+
+&lt;p&gt;To debug client Docker daemon communication issues with DTR, we also provide
+a diagnostics tool to be run on the client Docker daemon.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; These diagnostics files may contain secrets that you need to remove
+before passing on - such as raw container log files, azure storage credentials, or passwords that may be
+sent to non-DTR containers using the &lt;code&gt;docker run -e PASSWORD=asdf&lt;/code&gt; environment variable
+options.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can download and run this tool using the following command:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you supply an administrator username and password, then the
+&lt;code&gt;diagnostics&lt;/code&gt; tool will also download some logs and configuration data
+from the remote DTR server.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;$ wget https://dhe.mycompany.com/admin/bin/diagnostics &amp;amp;&amp;amp; chmod +x diagnostics
+$ sudo ./diagnostics dhe.mycompany.com &amp;gt; enduserDiagnostics.zip
+DTR administrator username (provide empty string if there is no admin server authentication): 
+DTR administrator password (provide empty string if there is no admin server authentication): 
+WARN  [1.1.0-alpha-001472_g8a9ddb4] Encountered errors running diagnostics errors=[Failed to copy DTR Adminserver&#39;s exported settings into ZIP output: &amp;quot;Failed to read next tar header: \&amp;quot;archive/tar: invalid tar header\&amp;quot;&amp;quot; Failed to copy logs from DTR Adminserver into ZIP output: &amp;quot;Failed to read next tar header: \&amp;quot;archive/tar: invalid tar header\&amp;quot;&amp;quot; error running &amp;quot;sestatus&amp;quot;: &amp;quot;exit status 127&amp;quot; error running &amp;quot;dmidecode&amp;quot;: &amp;quot;exit status 127&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The zip file will contain the following information:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;your local Docker host&amp;rsquo;s &lt;code&gt;ca-certificates.crt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;containers/&lt;/code&gt;: the first 20 running, stopped and paused containers &lt;code&gt;docker inspect&lt;/code&gt;
+information and log files.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dockerEngine/&lt;/code&gt;: the local Docker daemon&amp;rsquo;s &lt;code&gt;info&lt;/code&gt; and &lt;code&gt;version&lt;/code&gt; output&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dockerState/&lt;/code&gt;: the local Docker daemon&amp;rsquo;s container states, image states, log file, and daemon configuration file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dtr/&lt;/code&gt;: Remote DTR services information. This directory will only be populated if the user enters a DTR &amp;ldquo;admin&amp;rdquo; username and password.&lt;/li&gt;
+&lt;li&gt;- &lt;code&gt;dtr/logs/&lt;/code&gt;: the remote DTR container log files. This directory will only be populated if the user enters a DTR &amp;ldquo;admin&amp;rdquo; username and password.&lt;/li&gt;
+&lt;li&gt;- &lt;code&gt;dtr/exportedSettings/&lt;/code&gt;: the DTR manager container&amp;rsquo;s log files and a backup of the &lt;code&gt;/usr/local/etc/dtr&lt;/code&gt; DTR configuration directory. See the &lt;a href=&#34;#export-settings&#34;&gt;export settings section&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sysinfo/&lt;/code&gt;: local Host information&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;errors.txt&lt;/code&gt;: errors and warnings encountered while running diagnostics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;starting-and-stopping-dtr&#34;&gt;Starting and stopping DTR&lt;/h3&gt;
+
+&lt;p&gt;If you need to stop and/or start DTR (for upgrading, troubleshooting, etc.), use the following commands:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sudo bash -d &amp;quot;$(docker run docker/trusted-registry stop)&amp;quot;&lt;/code&gt;
+&lt;code&gt;sudo bash -d &amp;quot;$(docker run docker/trusted-registry start)&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For information on installing DTR, take a look at the &lt;a href=&#34;http://localhost/docker-trusted-registry/install&#34;&gt;Installation instructions&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Configuration options</title>
+      <link>http://localhost/docker-trusted-registry/configuration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/configuration/</guid>
+      <description>
+
+&lt;h1 id=&#34;configuring-dtr&#34;&gt;Configuring DTR&lt;/h1&gt;
+
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;This page will help you properly configure Docker Trusted Registry (DTR) so it can
+run in your environment.&lt;/p&gt;
+
+&lt;p&gt;Start with DTR loaded in your browser and click  the &amp;ldquo;Settings&amp;rdquo; tab to view
+configuration options. You&amp;rsquo;ll see options for configuring:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Domains and ports&lt;/li&gt;
+&lt;li&gt;Security settings&lt;/li&gt;
+&lt;li&gt;Storage settings&lt;/li&gt;
+&lt;li&gt;Authentication settings&lt;/li&gt;
+&lt;li&gt;Your DTR license&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;domains-and-ports&#34;&gt;Domains and Ports&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/admin-settings-http.png&#34; alt=&#34;Domain and Ports page&amp;lt;/admin/settings#http&amp;gt;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Domain Name&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to an empty string, the fully qualified domain name assigned to the DTR host.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Load Balancer HTTP Port&lt;/em&gt;: defaults to 80, used as the entry point for the image storage service. To see load balancer status, you can query
+http://&amp;lt;dtr-host&amp;gt;/load_balancer_status.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Load Balancer HTTPS Port&lt;/em&gt;: defaults to 443, used as the secure entry point
+for the image storage service.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;HTTP_PROXY&lt;/em&gt;: defaults to an empty string, proxy server for HTTP requests.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;HTTPS_PROXY&lt;/em&gt;: defaults to an empty string, proxy server for HTTPS requests.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;NO_PROXY&lt;/em&gt;: defaults to an empty string, proxy bypass for HTTP and HTTPS requests.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you need DTR to re-generate a self-signed certificate at some
+point, you&amp;rsquo;ll need to first delete &lt;code&gt;/usr/local/etc/dtr/ssl/server.pem&lt;/code&gt;, and
+then restart the DTR containers, either by changing and saving the &amp;ldquo;Domain Name&amp;rdquo;,
+or using &lt;code&gt;bash -c &amp;quot;$(docker run docker/trusted-registry restart)&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;security&#34;&gt;Security&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/admin-settings-security.png&#34; alt=&#34;Security settings page&amp;lt;/admin/settings#security&amp;gt;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;SSL Certificate&lt;/em&gt;: Used to enter the hash (string) from the SSL Certificate.
+This cert must be accompanied by its private key, entered below.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Private Key&lt;/em&gt;: The hash from the private key associated with the provided
+SSL Certificate (as a standard x509 key pair).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In order to run, DTR requires encrypted communications via HTTPS/SSL between (a) the DTR registry and your Docker Engine(s), and (b) between your web browser and the DTR admin server. There are a few options for setting this up:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You can use the self-signed certificate DTR generates by default.&lt;/li&gt;
+&lt;li&gt;You can generate your own certificates using a public service or your enterprise&amp;rsquo;s infrastructure. See the &lt;a href=&#34;#generating-ssl-certificates&#34;&gt;Generating SSL certificates&lt;/a&gt; section for the options available.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you are generating your own certificates, you can install them by following the instructions for
+&lt;a href=&#34;#adding-your-own-registry-certificates-to-dtr&#34;&gt;Adding your own registry certificates to DTR&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, if you choose to use the DTR-generated certificates, or the
+certificates you generate yourself are not trusted by your client Docker hosts,
+you will need to do one of the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#installing-registry-certificates-on-client-docker-daemons&#34;&gt;Install a registry certificate on all of your client Docker daemons&lt;/a&gt;,&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;a href=&#34;#if-you-cant-install-the-certificates&#34;&gt;client Docker daemons to run with an unconfirmed connection to the registry&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;generating-ssl-certificates&#34;&gt;Generating SSL certificates&lt;/h3&gt;
+
+&lt;p&gt;There are three basic approaches to generating certificates:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Most enterprises will have private key infrastructure (PKI) in place to
+generate keys. Consult with your security team or whomever manages your private
+key infrastructure. If you have this resource available, Docker recommends you
+use it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If your enterprise can&amp;rsquo;t provide keys, you can use a public Certificate
+Authority (CA) like &amp;ldquo;InstantSSL.com&amp;rdquo; or &amp;ldquo;RapidSSL.com&amp;rdquo; to generate a
+certificate. If your certificates are generated using a globally trusted
+Certificate Authority, you won&amp;rsquo;t need to install them on all of your
+client Docker daemons.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use the self-signed registry certificate generated by DTR, and install it
+onto the client Docker daemon hosts as shown below.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;adding-your-own-registry-certificates-to-dtr&#34;&gt;Adding your own Registry certificates to DTR&lt;/h3&gt;
+
+&lt;p&gt;Whichever method you use to generate certificates, once you have them
+you can set up your DTR server to use them by navigating to the &amp;ldquo;Settings&amp;rdquo; page,
+going to &amp;ldquo;Security,&amp;rdquo; and putting the SSL Certificate text (including all
+intermediate Certificates, starting with the host) into the
+&amp;ldquo;SSL Certificate&amp;rdquo; edit box, and the previously generated Private key into
+the &amp;ldquo;SSL Private Key&amp;rdquo; edit box.&lt;/p&gt;
+
+&lt;p&gt;Click the &amp;ldquo;Save&amp;rdquo; button, and then wait for the DTR Admin site to restart and
+reload. It should now be using the new certificate.&lt;/p&gt;
+
+&lt;p&gt;Once the &amp;ldquo;Security&amp;rdquo; page has reloaded, it will show &lt;code&gt;#&lt;/code&gt; hashes instead of the
+certificate text you pasted in.&lt;/p&gt;
+
+&lt;p&gt;If your certificate is signed by a chain of Certificate Authorities that are
+already trusted by your Docker daemon servers, you can skip the &amp;ldquo;Installing
+registry certificates&amp;rdquo; step below.&lt;/p&gt;
+
+&lt;h3 id=&#34;installing-registry-certificates-on-client-docker-daemons&#34;&gt;Installing Registry certificates on client Docker daemons&lt;/h3&gt;
+
+&lt;p&gt;If your certificates do not have a trusted Certificate Authority, you will need
+to install them on each client Docker daemon host.&lt;/p&gt;
+
+&lt;p&gt;The procedure for installing the DTR certificates on each Linux distribution has
+slightly different steps, as shown below.&lt;/p&gt;
+
+&lt;p&gt;You can test this certificate using &lt;code&gt;curl&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl https://dtr.yourdomain.com/v2/
+curl: (60) SSL certificate problem: self signed certificate
+More details here: http://curl.haxx.se/docs/sslcerts.html
+
+curl performs SSL certificate verification by default, using a &amp;quot;bundle&amp;quot;
+ of Certificate Authority (CA) public keys (CA certs). If the default
+ bundle file isn&#39;t adequate, you can specify an alternate file
+ using the --cacert option.
+If this HTTPS server uses a certificate signed by a CA represented in
+ the bundle, the certificate verification probably failed due to a
+ problem with the certificate (it might be expired, or the name might
+ not match the domain name in the URL).
+If you&#39;d like to turn off curl&#39;s verification of the certificate, use
+ the -k (or --insecure) option.
+
+$ curl --cacert /usr/local/etc/dtr/ssl/server.pem https://dtr.yourdomain.com/v2/
+{&amp;quot;errors&amp;quot;:[{&amp;quot;code&amp;quot;:&amp;quot;UNAUTHORIZED&amp;quot;,&amp;quot;message&amp;quot;:&amp;quot;access to the requested resource is not authorized&amp;quot;,&amp;quot;detail&amp;quot;:null}]}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Continue by following the steps corresponding to your chosen OS.&lt;/p&gt;
+
+&lt;h4 id=&#34;ubuntu-debian&#34;&gt;Ubuntu/Debian&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ export DOMAIN_NAME=dtr.yourdomain.com
+    $ openssl s_client -connect $DOMAIN_NAME:443 -showcerts &amp;lt;/dev/null 2&amp;gt;/dev/null | openssl x509 -outform PEM | sudo tee /usr/local/share/ca-certificates/$DOMAIN_NAME.crt
+    $ sudo update-ca-certificates
+    Updating certificates in /etc/ssl/certs... 1 added, 0 removed; done.
+    Running hooks in /etc/ca-certificates/update.d....done.
+    $ sudo service docker restart
+    docker stop/waiting
+    docker start/running, process 29291
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;rhel&#34;&gt;RHEL&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ export DOMAIN_NAME=dtr.yourdomain.com
+    $ openssl s_client -connect $DOMAIN_NAME:443 -showcerts &amp;lt;/dev/null 2&amp;gt;/dev/null | openssl x509 -outform PEM | sudo tee /etc/pki/ca-trust/source/anchors/$DOMAIN_NAME.crt
+    $ sudo update-ca-trust
+    $ sudo /bin/systemctl restart docker.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;boot2docker-1-6-0&#34;&gt;Boot2Docker 1.6.0&lt;/h4&gt;
+
+&lt;p&gt;Install the CA cert (or the auto-generated cert) by adding the following to
+your &lt;code&gt;/var/lib/boot2docker/bootsync.sh&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/sh
+
+cat /var/lib/boot2docker/server.pem &amp;gt;&amp;gt; /etc/ssl/certs/ca-certificates.crt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then get the certificate from the new DTR server using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ openssl s_client -connect dtr.yourdomain.com:443 -showcerts &amp;lt;/dev/null 2&amp;gt;/dev/null | openssl x509 -outform PEM | sudo tee -a /var/lib/boot2docker/server.pem
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If your certificate chain is complicated, you may want to use the changes in
+&lt;a href=&#34;https://github.com/boot2docker/boot2docker/pull/807/files&#34;&gt;Pull request 807&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Now you can either reboot your Boot2Docker virtual machine, or run the following to
+install the server certificate, and then restart the Docker daemon.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo chmod 755 /var/lib/boot2docker/bootsync.sh
+$ sudo /var/lib/boot2docker/bootsync.sh
+$ sudo /etc/init.d/docker restart`.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;if-you-can-t-install-the-certificates&#34;&gt;If you can&amp;rsquo;t install the certificates&lt;/h3&gt;
+
+&lt;p&gt;If for some reason you can&amp;rsquo;t install the certificate chain on a client Docker host,
+or your certificates do not have a global CA, you can configure your Docker daemon to run in &amp;ldquo;insecure&amp;rdquo; mode. This is done by adding an extra flag,
+&lt;code&gt;--insecure-registry host-ip|domain-name&lt;/code&gt;, to your client Docker daemon startup flags.
+You&amp;rsquo;ll need to restart the Docker daemon for the change to take effect.&lt;/p&gt;
+
+&lt;p&gt;This flag means that the communications between your Docker client and the DTR
+Registry server are still encrypted, but the client Docker daemon is not
+confirming that the Registry connection is not being hijacked or diverted.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you enter a &amp;ldquo;Domain Name&amp;rdquo; into the &amp;ldquo;Security&amp;rdquo; settings, it needs
+to be DNS resolvable on any client Docker daemons that are running in
+&amp;ldquo;insecure-registry&amp;rdquo; mode.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To set the flag, follow the directions below for your operating system.&lt;/p&gt;
+
+&lt;h4 id=&#34;ubuntu&#34;&gt;Ubuntu&lt;/h4&gt;
+
+&lt;p&gt;On Ubuntu 14.04 LTS, you customize the Docker daemon configuration with the
+&lt;code&gt;/etc/defaults/docker&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Open or create the &lt;code&gt;/etc/defaults/docker&lt;/code&gt; file, and add the
+&lt;code&gt;--insecure-registry&lt;/code&gt; flag to the &lt;code&gt;DOCKER_OPTS&lt;/code&gt; setting (which may need to be
+added or uncommented) as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DOCKER_OPTS=&amp;quot;--insecure-registry dtr.yourdomain.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then restart the Docker daemon with &lt;code&gt;sudo service docker restart&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;rhel-1&#34;&gt;RHEL&lt;/h4&gt;
+
+&lt;p&gt;On RHEL, you customize the Docker daemon configuration with the
+&lt;code&gt;/etc/sysconfig/docker&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Open or create the &lt;code&gt;/etc/sysconfig/docker&lt;/code&gt; file, and add the
+&lt;code&gt;--insecure-registry&lt;/code&gt; flag to the &lt;code&gt;OPTIONS&lt;/code&gt; setting (which may need to be
+added or uncommented) as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;OPTIONS=&amp;quot;--insecure-registry dtr.yourdomain.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then restart the Docker daemon with &lt;code&gt;sudo service docker restart&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;boot2docker&#34;&gt;Boot2Docker&lt;/h3&gt;
+
+&lt;p&gt;On Boot2Docker, you customize the Docker daemon configuration with the
+&lt;code&gt;/var/lib/boot2docker/profile&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Open or create the &lt;code&gt;/var/lib/boot2docker/profile&lt;/code&gt; file, and add an &lt;code&gt;EXTRA_ARGS&lt;/code&gt;
+setting as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;EXTRA_ARGS=&amp;quot;--insecure-registry dtr.yourdomain.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then restart the Docker daemon with &lt;code&gt;sudo /etc/init.d/docker restart&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;image-storage-configuration&#34;&gt;Image Storage Configuration&lt;/h2&gt;
+
+&lt;p&gt;DTR image storage can be configured to use the local filesystem, or a cloud service
+such as S3 or Azure. See the &lt;a href=&#34;http://docs.docker.com/registry/configuration/&#34;&gt;Registry 2.0
+configuration&lt;/a&gt;
+documentation for the options specific to each driver.
+Storage drivers can be added or customized via the &lt;a href=&#34;http://docs.docker.com/registry/storagedrivers/#storage-driver-api&#34;&gt;Docker Registry storage driver
+API&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/admin-settings-storage.png&#34; alt=&#34;Storage settings page&amp;lt;/admin/settings#storage&amp;gt;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Yaml configuration file&lt;/em&gt;: This file (&lt;code&gt;/usr/local/etc/dtr/storage.yml&lt;/code&gt;) is
+used to configure the image storage services. The editable text of the file is
+displayed in the dialog box. The schema of this file is identical to that used
+by the &lt;a href=&#34;http://docs.docker.com/registry/configuration/&#34;&gt;Registry 2.0&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;If you are using the file system driver to provide local image storage, you will need to specify a root directory which will get mounted as a sub-path of
+&lt;code&gt;/var/local/dtr/image-storage&lt;/code&gt;. The default value of this root directory is
+&lt;code&gt;/local&lt;/code&gt;, so the full path to it is &lt;code&gt;/var/local/dtr/image-storage/local&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Saving changes you&amp;rsquo;ve made to settings will restart the Docker Trusted Registry
+instance. The restart may cause a brief interruption for users of the image
+storage system.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;authentication&#34;&gt;Authentication&lt;/h2&gt;
+
+&lt;p&gt;The &amp;ldquo;Authentication&amp;rdquo; settings tab lets DTR administrators control access
+to the DTR web admin tool and to the DTR Registry.&lt;/p&gt;
+
+&lt;p&gt;The current authentication methods are &lt;code&gt;None&lt;/code&gt;, &lt;code&gt;Managed&lt;/code&gt; and &lt;code&gt;LDAP&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: if you have issues logging into the DTR admin web interface after changing the authentication
+settings, you may need to use the &lt;a href=&#34;http://localhost/docker-trusted-registry/adminguide#Emergency-access-to-the-dtr-admin-web-interface&#34;&gt;emergency access to the DTR admin web interface&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;no-authentication&#34;&gt;No authentication&lt;/h3&gt;
+
+&lt;p&gt;No authentication means that everyone that can access your DTR web administration
+site. This is not recommended for any use other than testing.&lt;/p&gt;
+
+&lt;h3 id=&#34;managed-authentication&#34;&gt;Managed authentication&lt;/h3&gt;
+
+&lt;p&gt;With &lt;code&gt;Managed&lt;/code&gt; authentication, the DTR admin can control users&amp;rsquo; access by setting
+username/password pairs.
+These users must then be given &amp;ldquo;admin&amp;rdquo;, &amp;ldquo;read-write&amp;rdquo; or &amp;ldquo;read-only&amp;rdquo; roles.
+The &amp;ldquo;read-only&amp;rdquo; role can only pull images from the registry, &amp;ldquo;read-write&amp;rdquo; can
+push and pull images, and the &amp;ldquo;admin&amp;rdquo; role can push and pull and also access
+the web administration UI and metrics dashboard.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/admin-settings-authentication-basic.png&#34; alt=&#34;Managed authentication settings page&amp;lt;/admin/settings#auth&amp;gt;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A button to add one user, or to upload a CSV file containing username,
+password pairs, and selection boxes for &amp;ldquo;admin&amp;rdquo;, &amp;ldquo;read-write&amp;rdquo;, and &amp;ldquo;read-only&amp;rdquo; roles.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;ldap-authentication&#34;&gt;LDAP authentication&lt;/h3&gt;
+
+&lt;p&gt;Using LDAP authentication allows you to integrate your DTR registry into your
+organization&amp;rsquo;s existing user and authentication database.&lt;/p&gt;
+
+&lt;p&gt;You can configure the &amp;ldquo;userFilter&amp;rdquo; to select the set of users that are candidates
+for each of the &amp;ldquo;admin&amp;rdquo;, &amp;ldquo;read-write&amp;rdquo;, and &amp;ldquo;read-only&amp;rdquo; roles. Unlike &amp;ldquo;Managed&amp;rdquo;
+authentication, the &amp;ldquo;admin&amp;rdquo; role is separate to the registry access roles, so
+LDAP users in the &amp;ldquo;admin&amp;rdquo; role won&amp;rsquo;t have access to DTR images unless they also
+are given the &amp;ldquo;read-write&amp;rdquo; or &amp;ldquo;read-only&amp;rdquo; role.&lt;/p&gt;
+
+&lt;p&gt;As connecting to LDAP involves existing infrastructure external to DTR and Docker, you will need to
+gather the details required to configure DTR for your organization&amp;rsquo;s particular LDAP
+implementation.&lt;/p&gt;
+
+&lt;p&gt;You can test that you have the necessary LDAP server information by connecting to
+the LDAP server from inside a Docker container running on the same server as your DTR:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: if the LDAP server is configured to use &lt;em&gt;StartTLS&lt;/em&gt;, then you need to add &lt;code&gt;-Z&lt;/code&gt; to the
+&lt;code&gt;ldapsearch&lt;/code&gt; command examples below.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --rm -it svendowideit/ldapsearch -h &amp;lt;LDAP Server hostname&amp;gt; -b &amp;lt;User Base DN&amp;gt; -D &amp;lt;Search User DN&amp;gt; -w &amp;lt;Search User Password&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or if the LDAP server is set up to allow anonymous access (which means your
+&lt;em&gt;Search User DN&lt;/em&gt; and &lt;em&gt;Search User Password&lt;/em&gt; settings will remain empty):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --rm -it svendowideit/ldapsearch -h &amp;lt;LDAP Server hostname&amp;gt; -b &amp;lt;User Base DN&amp;gt; -x
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The result of these queries should be a (very) long list - if you get an authentication error,
+then the details you have are not sufficient.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;User Login Attribute&lt;/em&gt; key setting must match the field used in the LDAP server
+for the user&amp;rsquo;s login-name. On OpenLDAP, it&amp;rsquo;s generally &lt;code&gt;uid&lt;/code&gt;, and on Microsoft Active Directory
+servers, it&amp;rsquo;s &lt;code&gt;sAMAccountName&lt;/code&gt;. The &lt;code&gt;ldapsearch&lt;/code&gt; output above should allow you to
+confirm which setting you need.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/admin-settings-authentication-ldap.png&#34; alt=&#34;LDAP authentication settings page&amp;lt;/admin/settings#auth&amp;gt;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Use StartTLS&lt;/em&gt;: defaults to unchecked, check to enable StartTLS&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;LDAP Server URL&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to null, LDAP server URL (e.g., - ldap://example.com)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;User Base DN&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to null, user base DN in the form (e.g., - dc=example,dc=com)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;User Login Attribute&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to null, user login attribute (e.g., - uid or sAMAccountName)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Search User DN&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to null, search user DN (e.g., - domain\username)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Search User Password&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to null, search user password&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;User Search filters&lt;/em&gt;: allowing you to configure LDAP queries to limit the users that have the roles:&lt;/li&gt;
+&lt;li&gt;* &lt;em&gt;User Filter&lt;/em&gt;: This filter is used to select the objects to use as candidates for the role filters&lt;/li&gt;
+&lt;li&gt;* &lt;em&gt;Admin Role Filter&lt;/em&gt;: Combined with the &amp;ldquo;User Filter&amp;rdquo; to specify users with the
+&amp;ldquo;Admin&amp;rdquo; role - permitted to access the DTR web UI&lt;/li&gt;
+&lt;li&gt;* &lt;em&gt;Read-Write Role Filter&lt;/em&gt;: Combined with the &amp;ldquo;User Filter&amp;rdquo; to specify users permitted to
+push images to, and pull images from DTR&lt;/li&gt;
+&lt;li&gt;* &lt;em&gt;Read-Only Role Filter&lt;/em&gt;: Combined with the &amp;ldquo;User Filter&amp;rdquo; to specify users permitted to
+pull images from DTR&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For information on getting support for DTR, take a look at the
+&lt;a href=&#34;http://localhost/docker-trusted-registry/support&#34;&gt;Support information&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installation</title>
+      <link>http://localhost/docker-trusted-registry/install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/install/</guid>
+      <description>
+
+&lt;h1 id=&#34;install-docker-trusted-registry&#34;&gt;Install Docker Trusted Registry&lt;/h1&gt;
+
+&lt;p&gt;This document describes the process of obtaining, installing, and securing
+Docker Trusted Registry (DTR). DTR is installed from Docker containers. Once
+installed, you will need to select a method of securing it. This doc will
+explain the options you have for security and help you find the resources needed
+to configure it according to your chosen method. More configuration details can
+be found in the &lt;a href=&#34;http://localhost/docker-trusted-registry/configuration&#34;&gt;DTR Configuration page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Specifically, installation requires completion of these steps, in order:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Acquire a license by purchasing DTR or signing up for a trial license.&lt;/li&gt;
+&lt;li&gt;Install the commercially supported Docker Engine.&lt;/li&gt;
+&lt;li&gt;Install DTR&lt;/li&gt;
+&lt;li&gt;Add your license to your DTR instance&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;To get your copy of DTR, including a free trial, visit the &lt;a href=&#34;http://hub-beta.docker.com/enterprise/&#34;&gt;Docker Subscription page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;licensing&#34;&gt;Licensing&lt;/h2&gt;
+
+&lt;p&gt;In order to run DTR, you will need to get a license, either by purchasing
+DTR or acquiring a trial license. The license will be associated with your free
+Docker Hub account or Docker Hub organization (so if you don&amp;rsquo;t have an account,
+you&amp;rsquo;ll need to set one up, which can be done at the same time as your license
+request). To get your license, visit the &lt;a href=&#34;http://hub-beta.docker.com/enterprise/&#34;&gt;Docker Subscription page&lt;/a&gt; and select the edition you would like acquire. After completing a brief registration process, follow the steps to acquire a license.&lt;/p&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve acquired your license, you can view or download it by logging in to Docker Hub, going to your account settings (gear icon at upper right), and then selecting &lt;a href=&#34;https://hub-beta.docker.com/account/licenses/&#34;&gt;&amp;ldquo;Licenses&amp;rdquo;&lt;/a&gt; from the top nav bar.&lt;/p&gt;
+
+&lt;p&gt;The Licenses page will display your currently available licenses. Click the cloud icon to download your desired license. You may need to disable any pop-up blocker installed on your browser in order to complete the download.&lt;/p&gt;
+
+&lt;p&gt;You can also download the commercially supported Docker Engine packages from this page by clicking the download buttons at upper right (see below for details).&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;DTR 1.1 requires the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Commercially supported Docker Engine 1.6.1 or later running on an
+Ubuntu 14.04 LTS, RHEL 7.1 or RHEL 7.0 host. (See below for instructions on how
+to install the commercially supported Docker Engine.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; In order to remain in compliance with your DTR support agreement,
+you &lt;strong&gt;must&lt;/strong&gt; use the current version of commercially supported Docker Engine.
+Running the regular, open source version of Engine is &lt;strong&gt;not&lt;/strong&gt; supported.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Your Docker daemon needs to be listening to the Unix socket (the default) so
+that it can be bind-mounted into the DTR management containers, allowing
+DTR to manage itself and its updates. For this reason, your DTR host will also
+need internet connectivity so it can access the updates.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Your host also needs to have TCP ports &lt;code&gt;80&lt;/code&gt; and &lt;code&gt;443&lt;/code&gt; available for the DTR
+container port mapping.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You will also need the Docker Hub user-name and password used when obtaining
+the DTR license (or the user-name of an administrator of the Hub organization
+that obtained an Enterprise license).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;installing-the-commercially-supported-docker-engine&#34;&gt;Installing the commercially supported Docker Engine&lt;/h2&gt;
+
+&lt;p&gt;Since DTR is installed using Docker, the commercially supported Docker Engine
+&lt;strong&gt;must be&lt;/strong&gt; installed first. This is done with an RPM or DEB package, which you access using a script you download from your
+&lt;a href=&#34;https://hub-beta.docker.com/account/licenses/&#34;&gt;Docker Hub Licenses page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;download-the-commercially-supported-docker-engine-installation-script&#34;&gt;Download the commercially supported Docker Engine installation script&lt;/h3&gt;
+
+&lt;p&gt;To download the commercially supported Docker Engine Bash installation script,
+log in to the &lt;a href=&#34;https://hub-beta.docker.com&#34;&gt;Docker Hub&lt;/a&gt; with the user-name used to
+obtain your license . Once you&amp;rsquo;re logged in, go to the
+&lt;a href=&#34;https://hub-beta.docker.com/account/licenses/&#34;&gt;&amp;ldquo;Licenses&amp;rdquo;&lt;/a&gt; page in your Hub account&amp;rsquo;s &amp;ldquo;Settings&amp;rdquo; section (accessed via the gear icon at upper right).&lt;/p&gt;
+
+&lt;p&gt;Click the button at the top right of the page that corresponds to your intended host operating system. and then, once the Bash setup script is
+downloaded, follow the steps below appropriate for your chosen OS.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/docker-hub-org-enterprise-license.png&#34; alt=&#34;Docker Hub Docker engine install dropdown&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;rhel-7-0-7-1-installation&#34;&gt;RHEL 7.0/7.1 installation&lt;/h3&gt;
+
+&lt;p&gt;First, copy the downloaded Bash setup script to your RHEL host. Next, run the
+following to install commercially supported Docker Engine and its dependencies,
+and then start the Docker daemon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum update &amp;amp;&amp;amp; sudo yum upgrade
+$ chmod 755 docker-cs-engine-rpm.sh
+$ sudo ./docker-cs-engine-rpm.sh
+$ sudo yum install docker-engine-cs
+$ sudo systemctl enable docker.service
+$ sudo systemctl start docker.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In order to simplify using Docker, you can get non-sudo access to the Docker
+socket by adding your user to the &lt;code&gt;docker&lt;/code&gt; group, then logging out and back in
+again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo usermod -a -G docker $USER
+$ exit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: you may need to reboot your server to update its RHEL kernel.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;ubuntu-14-04-lts-installation&#34;&gt;Ubuntu 14.04 LTS installation&lt;/h3&gt;
+
+&lt;p&gt;First, copy the downloaded Bash setup script to your Ubuntu host. Next, run the
+following to install commercially supported Docker Engine and its dependencies:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade
+$ sudo apt-get install -y linux-image-extra-virtual
+$ sudo reboot
+$ chmod 755 docker-cs-engine-deb.sh
+$ sudo ./docker-cs-engine-deb.sh
+$ sudo apt-get install docker-engine-cs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lastly, confirm Docker is running with &lt;code&gt;sudo service docker start&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In order to simplify using Docker, you can get non-sudo access to the Docker
+socket by adding your user to the &lt;code&gt;docker&lt;/code&gt; group, then logging out and back in
+again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo usermod -a -G docker $USER
+$ exit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: you may need to reboot your server to update its LTS kernel.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;upgrading-the-commercially-supported-docker-engine&#34;&gt;Upgrading the Commercially Supported Docker Engine&lt;/h2&gt;
+
+&lt;p&gt;CS Docker Engine 1.6.1 contains fixes to security vulnerabilities,
+  and customers should upgrade to it immediately.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you have CS Docker Engine 1.6.0 installed, it must be upgraded;
+  however, due to compatibility issues, &lt;a href=&#34;#upgrading-docker-hub-enterprise&#34;&gt;DTR must be upgraded&lt;/a&gt;
+  first.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The CS Docker Engine installation script set up the RHEL/Ubuntu package repositories,
+so upgrading the Engine only requires you to run the update commands on your server.&lt;/p&gt;
+
+&lt;h3 id=&#34;rhel-7-0-7-1-upgrade&#34;&gt;RHEL 7.0/7.1 upgrade&lt;/h3&gt;
+
+&lt;p&gt;The following commands will stop the running DTR, upgrade CS Docker Engine,
+and then start DTR again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ sudo bash -c &amp;quot;$(sudo docker run docker/trusted-registry stop)&amp;quot;
+    $ sudo yum update
+    $ sudo systemctl daemon-reload &amp;amp;&amp;amp; sudo systemctl restart docker
+    $ sudo bash -c &amp;quot;$(sudo docker run docker/trusted-registry start)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;ubuntu-14-04-lts-upgrade&#34;&gt;Ubuntu 14.04 LTS upgrade&lt;/h3&gt;
+
+&lt;p&gt;The following commands will stop the running DTR, upgrade CS Docker Engine,
+and then start DTR again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ sudo bash -c &amp;quot;$(sudo docker run docker/trusted-registry stop)&amp;quot;
+    $ sudo apt-get update &amp;amp;&amp;amp; sudo apt-get dist-upgrade docker-engine-cs
+    $ sudo bash -c &amp;quot;$(sudo docker run docker/trusted-registry start)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;installing-docker-trusted-registry&#34;&gt;Installing Docker Trusted Registry&lt;/h2&gt;
+
+&lt;p&gt;Once the commercially supported Docker Engine is installed, you can install DTR
+itself. DTR is a self-installing application built and distributed using Docker
+and the &lt;a href=&#34;https://hub-beta.docker.com/&#34;&gt;Docker Hub&lt;/a&gt;. It is able to restart
+and reconfigure itself using the Docker socket that is bind-mounted to its
+container.&lt;/p&gt;
+
+&lt;p&gt;Start installing DTR by running the &amp;ldquo;docker/trusted-registry&amp;rdquo; container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;	$ sudo bash -c &amp;quot;$(sudo docker run docker/trusted-registry install)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: &lt;code&gt;sudo&lt;/code&gt; is needed for &lt;code&gt;docker/trusted-registry&lt;/code&gt; commands to
+ensure that the Bash script is run with full access to the Docker host.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The command will execute a shell script that creates the needed
+directories and then runs Docker to pull DTR&amp;rsquo;s images and run its containers.&lt;/p&gt;
+
+&lt;p&gt;Depending on your internet connection, this process may take several minutes to
+complete.&lt;/p&gt;
+
+&lt;p&gt;A successful installation will pull a large number of Docker images and should
+display output similar to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(sudo docker run docker/trusted-registry install)&amp;quot;
+Unable to find image &#39;docker/trusted-registry:latest&#39; locally
+Pulling repository docker/trusted-registry
+c46d58daad7d: Pulling image (latest) from docker/trusted-registry
+c46d58daad7d: Pulling image (latest) from docker/trusted-registry
+c46d58daad7d: Pulling dependent layers
+511136ea3c5a: Download complete
+fa4fd76b09ce: Pulling metadata
+fa4fd76b09ce: Pulling fs layer
+ff2996b1faed: Download complete
+...
+fd7612809d57: Pulling metadata
+fd7612809d57: Pulling fs layer
+fd7612809d57: Download complete
+c46d58daad7d: Pulling metadata
+c46d58daad7d: Pulling fs layer
+c46d58daad7d: Download complete
+c46d58daad7d: Download complete
+Status: Downloaded newer image for docker/trusted-registry:latest
+Unable to find image &#39;docker/trusted-registry:1.1.0&#39; locally
+Pulling repository docker/trusted-registry
+c46d58daad7d: Download complete
+511136ea3c5a: Download complete
+fa4fd76b09ce: Download complete
+1c8294cc5160: Download complete
+117ee323aaa9: Download complete
+2d24f826cb16: Download complete
+33bfc1956932: Download complete
+48f0dd6c9414: Download complete
+65c30f72ecb2: Download complete
+d4b29764d0d3: Download complete
+5654f4fe5384: Download complete
+9b9faa6ecd11: Download complete
+0c275f56ca5c: Download complete
+ff2996b1faed: Download complete
+fd7612809d57: Download complete
+Status: Image is up to date for docker/trusted-registry:1.1.0
+INFO  [1.0.0_8ce62a61e058] Attempting to connect to docker engine dockerHost=&amp;quot;unix:///var/run/docker.sock&amp;quot;
+INFO  [1.0.0_8ce62a61e058] Running install command
+&amp;lt;...output truncated...&amp;gt;
+Creating container docker_trusted_registry_load_balancer with docker daemon unix:///var/run/docker.sock
+Starting container docker_trusted_registry_load_balancer with docker daemon unix:///var/run/docker.sock
+Bringing up docker_trusted_registry_log_aggregator.
+Creating container docker_trusted_registry_log_aggregator with docker daemon unix:///var/run/docker.sock
+Starting container docker_trusted_registry_log_aggregator with docker daemon unix:///var/run/docker.sock
+$ docker ps
+CONTAINER ID        IMAGE                                          COMMAND                CREATED             STATUS              PORTS                                      NAMES
+963ec2a4b047        docker/trusted-registry-nginx:1.1.0            &amp;quot;nginxWatcher&amp;quot;         5 minutes ago       Up 5 minutes        0.0.0.0:80-&amp;gt;80/tcp, 0.0.0.0:443-&amp;gt;443/tcp   docker_trusted_registry_load_balancer     
+7eade5529049        docker/trusted-registry-distribution:v2.0.1    &amp;quot;registry /config/st   5 minutes ago       Up 5 minutes        5000/tcp                                   docker_trusted_registry_image_storage_0   
+b968a8a986f9        docker/trusted-registry-distribution:v2.0.1    &amp;quot;registry /config/st   5 minutes ago       Up 5 minutes        5000/tcp                                   docker_trusted_registry_image_storage_1   
+390d9d68a33a        docker/trusted-registry-admin-server:1.1.0     &amp;quot;server&amp;quot;               5 minutes ago       Up 5 minutes        80/tcp                                     docker_trusted_registry_admin_server      
+3f8a53dc5f35        docker/trusted-registry-log-aggregator:1.1.0   &amp;quot;log-aggregator&amp;quot;       5 minutes ago       Up 5 minutes                                                   docker_trusted_registry_log_aggregator    
+44083421fa16        docker/trusted-registry-garant:1.1.0           &amp;quot;garant /config/gara   5 minutes ago       Up 5 minutes                                                   docker_trusted_registry_auth_server       
+c4102adf73dc        postgres:9.4.1                                 &amp;quot;/docker-entrypoint.   5 minutes ago       Up 5 minutes        5432/tcp                                   docker_trusted_registry_postgres      
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once this process completes, you should be able to manage and configure your DTR
+instance by pointing your browser to &lt;code&gt;https://&amp;lt;host-ip&amp;gt;/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Your browser will warn you that this is an unsafe site, with a self-signed,
+untrusted certificate. This is normal and expected; allow this connection
+temporarily.&lt;/p&gt;
+
+&lt;h3 id=&#34;setting-the-dtr-domain-name&#34;&gt;Setting the DTR Domain Name&lt;/h3&gt;
+
+&lt;p&gt;The DTR Administrator site will also warn that the &amp;ldquo;Domain Name&amp;rdquo; is not set. Go
+to the &amp;ldquo;Settings&amp;rdquo; tab, and set the &amp;ldquo;Domain Name&amp;rdquo; to the full host-name of your
+DTR server.
+Hitting the &amp;ldquo;Save and Restart DTR Server&amp;rdquo; button will generate a new certificate, which will be used
+by both the DTR Administrator web interface and the DTR Registry server.&lt;/p&gt;
+
+&lt;p&gt;After the server restarts, you will again need to allow the connection to the untrusted DTR web admin site.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/admin-settings-http-unlicensed.png&#34; alt=&#34;http settings page&amp;lt;/admin/settings#http&amp;gt;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Lastly, you will see a warning notifying you that this instance of DTR is
+unlicensed. You&amp;rsquo;ll correct this in the next step.&lt;/p&gt;
+
+&lt;h3 id=&#34;add-your-license&#34;&gt;Add your license&lt;/h3&gt;
+
+&lt;p&gt;The DTR registry services will not start until you add your license.
+To do that, you&amp;rsquo;ll first download your license from the Docker Hub and then
+upload it to your DTR web admin server. Follow these steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If needed, log back into the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;
+using the user-name you used when obtaining your license. Go to &amp;ldquo;Settings&amp;rdquo;   (gear icon, top right) to get to your account settings, and then click on &amp;ldquo;Licenses&amp;rdquo; in the top nav bar.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You&amp;rsquo;ll see a list of available licenses. Click on the download button to
+obtain the license file you&amp;rsquo;d like to use.
+&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/docker-hub-org-enterprise-license.png&#34; alt=&#34;Download DTR license&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Next, go to your DTR instance in your browser and click on the Settings tab
+and then the &amp;ldquo;License&amp;rdquo; tab. Click on the &amp;ldquo;Upload license file&amp;rdquo; button, which
+will open a standard file browser. Locate and select the license file you
+downloaded in step 2, above. Approve the selection to close the dialog.
+&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/admin-settings-license.png&#34; alt=&#34;http settings page&amp;lt;/admin/settings#license&amp;gt;&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the &amp;ldquo;Save and Restart DTR&amp;rdquo; button, which will quit DTR and then restart it, registering
+the new license.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify the acceptance of the license by confirming that the &amp;ldquo;unlicensed copy&amp;rdquo;
+warning is no longer present.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;securing-dtr&#34;&gt;Securing DTR&lt;/h3&gt;
+
+&lt;p&gt;Securing DTR is &lt;strong&gt;required&lt;/strong&gt;. You will not be able to push or pull from DTR until you secure it.&lt;/p&gt;
+
+&lt;p&gt;There are several options and methods for securing DTR. For more information,
+see the &lt;a href=&#34;http://localhost/docker-trusted-registry/configuration#security&#34;&gt;configuration documentation&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;using-dtr-to-push-and-pull-images&#34;&gt;Using DTR to push and pull images&lt;/h3&gt;
+
+&lt;p&gt;Now that you have DTR configured with a &amp;ldquo;Domain Name&amp;rdquo; and have your client
+Docker daemons configured with the required security settings, you can test your
+setup by following the instructions for
+&lt;a href=&#34;http://localhost/docker-trusted-registry/userguide#using-dtr-to-push-and-pull-images&#34;&gt;Using DTR to Push and pull images&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;dtr-web-interface-and-registry-authentication&#34;&gt;DTR web interface and registry authentication&lt;/h3&gt;
+
+&lt;p&gt;By default, there is no authentication set on either the DTR web admin
+interface or the DTR registry. You can restrict access using an in-DTR
+configured set of users (and passwords), or you can configure DTR to use LDAP-
+based authentication.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&#34;http://localhost/docker-trusted-registry/configuration#authentication&#34;&gt;DTR Authentication settings&lt;/a&gt; for more
+details.&lt;/p&gt;
+
+&lt;h2 id=&#34;upgrading-docker-trusted-registry&#34;&gt;Upgrading Docker Trusted Registry&lt;/h2&gt;
+
+&lt;p&gt;DTR has been designed to allow on-the-fly software upgrades. Start by
+clicking on the &amp;ldquo;System Health&amp;rdquo; tab. In the upper, right-hand side of the
+dashboard, below the navigation bar, you&amp;rsquo;ll see the currently installed version
+(e.g., &lt;code&gt;Current Version: 0.1.12345&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;If your DTR instance is the latest available, you will also see the message:
+&amp;ldquo;System Up to Date.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;If there is an upgrade available, you will see the message &amp;ldquo;System Update
+Available!&amp;rdquo; alongside a button labeled &amp;ldquo;Update to Version X.XX&amp;rdquo;. To upgrade, DTR
+will pull new DTR container images from the Docker Hub. If you have not already
+connected to Docker Hub, DTR will prompt you to log in.&lt;/p&gt;
+
+&lt;p&gt;The upgrade process requires a small amount of downtime to complete. To complete
+the upgrade, DTR will:
+* Connect to the Docker Hub to pull new container images with the new version of
+DTR.
+* Deploy those containers
+* Shut down the old containers
+* Resolve any necessary links/urls.&lt;/p&gt;
+
+&lt;p&gt;Assuming you have a decent internet connection, the entire upgrade process
+should complete within a few minutes.&lt;/p&gt;
+
+&lt;p&gt;You should now &lt;a href=&#34;#upgrading-the-commercially-supported-docker-engine&#34;&gt;upgrade CS Docker Engine&lt;/a&gt; if needed.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If Docker engine is upgraded first (DTR 1.1 on CS Docker Engine 1.6.1),
+DTR can still be upgraded from the command line by running:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sudo bash -c &amp;quot;$(sudo docker run docker/trusted-registry:1.1.0 upgrade 1.1.1)&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For information on configuring DTR for your environment, take a look at the
+&lt;a href=&#34;http://localhost/docker-trusted-registry/configuration&#34;&gt;Configuration instructions&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Overview</title>
+      <link>http://localhost/docker-trusted-registry/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/</guid>
+      <description>
+
+&lt;h1 id=&#34;welcome-to-docker-trusted-registry&#34;&gt;Welcome to Docker Trusted Registry&lt;/h1&gt;
+
+&lt;p&gt;Docker Trusted Registry (DTR) lets you run and manage your own Docker image
+storage service, securely on your own infrastructure behind your company
+firewall. This allows you to securely store, push, and pull the images used by
+your enterprise to build, ship, and run applications. DTR also provides
+monitoring and usage information to help you understand the workloads being
+placed on it.&lt;/p&gt;
+
+&lt;p&gt;Specifically, DTR provides:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;An image registry to store, manage, and collaborate on Docker images&lt;/li&gt;
+&lt;li&gt;Pluggable storage drivers&lt;/li&gt;
+&lt;li&gt;Configuration options to let you run DTR in your particular enterprise
+environment.&lt;/li&gt;
+&lt;li&gt;Easy, transparent upgrades&lt;/li&gt;
+&lt;li&gt;Logging, usage and system health metrics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;DTR is perfect for:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Providing a secure, on-premise development environment&lt;/li&gt;
+&lt;li&gt;Creating a streamlined build pipeline&lt;/li&gt;
+&lt;li&gt;Building a consistent, high-performance test/QA environment&lt;/li&gt;
+&lt;li&gt;Managing image deployment&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;DTR is built on &lt;a href=&#34;https://github.com/docker/distribution&#34;&gt;version 2 of the Docker registry&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To get your copy of DTR, including a free trial, visit &lt;a href=&#34;http://hub-beta.docker.com/enterprise/&#34;&gt;the Docker Subscription page&lt;/a&gt;. For more information on acquiring DTR, see the &lt;a href=&#34;http://docs.docker.com/docker-hub-enterprise/install/&#34;&gt;install page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Important&lt;/strong&gt;: DTR must be used with the current version of the commercially
+  supported Docker Engine. You must install this version of Docker before
+  installing DTR. For instructions on accessing and installing commercially
+  supported Docker Engine, visit the &lt;a href=&#34;http://docs.docker.com/docker-hub-enterprise/install/#download-the-commercially-supported-docker-engine-installation-script&#34;&gt;install page&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;available-documentation&#34;&gt;Available Documentation&lt;/h2&gt;
+
+&lt;p&gt;The following documentation for DTR is available:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Overview&lt;/strong&gt; This page.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost/docker-trusted-registry/quick-start&#34;&gt;&lt;strong&gt;Quick Start: Basic User Workflow&lt;/strong&gt;&lt;/a&gt; Go here to learn the
+fundamentals of how DTR works and how you can set up a simple, but useful
+workflow.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost/docker-trusted-registry/userguide&#34;&gt;&lt;strong&gt;User Guide&lt;/strong&gt;&lt;/a&gt; Go here to learn about using DTR from day to
+day.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost/docker-trusted-registry/adminguide&#34;&gt;&lt;strong&gt;Administrator Guide&lt;/strong&gt;&lt;/a&gt; Go here if you are an administrator
+responsible for running and maintaining DTR.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost/docker-trusted-registry/install&#34;&gt;&lt;strong&gt;Installation&lt;/strong&gt;&lt;/a&gt; Go here for the steps you&amp;rsquo;ll need to install
+DTR and get it working.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost/docker-trusted-registry/configuration&#34;&gt;&lt;strong&gt;Configuration&lt;/strong&gt;&lt;/a&gt; Go here to find out details about
+setting up and configuring DTR for your particular environment.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost/docker-trusted-registry/support&#34;&gt;&lt;strong&gt;Support&lt;/strong&gt;&lt;/a&gt; Go here for information on getting support for
+DTR.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note: DTR requires that you use the commercially supported Docker Engine.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Prior release notes archive</title>
+      <link>http://localhost/docker-trusted-registry/prior-release-notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/prior-release-notes/</guid>
+      <description>
+
+&lt;h1 id=&#34;release-notes&#34;&gt;Release Notes&lt;/h1&gt;
+
+&lt;h2 id=&#34;docker-trusted-registry-dtr&#34;&gt;Docker Trusted Registry (DTR)&lt;/h2&gt;
+
+&lt;p&gt;Formerly known as Docker Hub Enterprise (DHE).&lt;/p&gt;
+
+&lt;h3 id=&#34;dtr-1-0-1&#34;&gt;DTR 1.0.1&lt;/h3&gt;
+
+&lt;p&gt;(11 May 2015)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Addresses compatibility issue with 1.6.1 CS Docker Engine&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;dtr-1-0-0&#34;&gt;DTR 1.0.0&lt;/h3&gt;
+
+&lt;p&gt;(23 Apr 2015)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;First release&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;commercially-supported-docker-engine&#34;&gt;Commercially Supported Docker Engine&lt;/h2&gt;
+
+&lt;h3 id=&#34;cs-docker-engine-1-6-2-cs5&#34;&gt;CS Docker Engine 1.6.2-cs5&lt;/h3&gt;
+
+&lt;p&gt;(21 May 2015)&lt;/p&gt;
+
+&lt;p&gt;For customers running Docker Engine on &lt;a href=&#34;https://www.docker.com/enterprise/support/&#34;&gt;supported versions of RedHat Enterprise
+Linux&lt;/a&gt; with &lt;a href=&#34;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/
+6/html/Security-Enhanced_Linux/sect-Security-Enhanced_Linux-Working_with_SELinux
+-Enabling_and_Disabling_SELinux.html&#34;&gt;SELinux
+enabled&lt;/a&gt;, the &lt;code&gt;docker build&lt;/code&gt; and &lt;code&gt;docker run&lt;/code&gt;
+commands will not have DNS host name resolution and bind-mounted volumes may
+not be accessible.
+As a result, customers with SELinux will be unable to use hostname-based network
+access in either &lt;code&gt;docker build&lt;/code&gt; or &lt;code&gt;docker run&lt;/code&gt;, nor will they be able to
+&lt;code&gt;docker run&lt;/code&gt; containers
+that use &lt;code&gt;--volume&lt;/code&gt; or &lt;code&gt;-v&lt;/code&gt; bind-mounts (with an incorrect SELinux label) in
+their environment. By installing Docker
+Engine 1.6.2-cs5, customers can use Docker as intended on RHEL with SELinux enabled.&lt;/p&gt;
+
+&lt;p&gt;For example, you see will failures like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@dtr ~]# docker -v
+Docker version 1.6.0-cs2, build b8dd430
+[root@dtr ~]# ping dtr.home.org.au
+PING dtr.home.org.au (10.10.10.104) 56(84) bytes of data.
+64 bytes from dtr.home.gateway (10.10.10.104): icmp_seq=1 ttl=64 time=0.663 ms
+^C
+--- dtr.home.org.au ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 0.078/0.370/0.663/0.293 ms
+[root@dtr ~]# docker run --rm -it debian ping dtr.home.org.au
+ping: unknown host
+[root@dtr ~]# docker run --rm -it debian cat /etc/resolv.conf
+cat: /etc/resolv.conf: Permission denied
+[root@dtr ~]# docker run --rm -it debian apt-get update
+Err http://httpredir.debian.org jessie InRelease
+
+Err http://security.debian.org jessie/updates InRelease
+
+Err http://httpredir.debian.org jessie-updates InRelease
+
+Err http://security.debian.org jessie/updates Release.gpg
+  Could not resolve &#39;security.debian.org&#39;
+Err http://httpredir.debian.org jessie Release.gpg
+  Could not resolve &#39;httpredir.debian.org&#39;
+Err http://httpredir.debian.org jessie-updates Release.gpg
+  Could not resolve &#39;httpredir.debian.org&#39;
+[output truncated]
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or when running a &lt;code&gt;docker build&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@dtr ~]# docker build .
+Sending build context to Docker daemon 11.26 kB
+Sending build context to Docker daemon
+Step 0 : FROM fedora
+ ---&amp;gt; e26efd418c48
+Step 1 : RUN yum install httpd
+ ---&amp;gt; Running in cf274900ea35
+
+One of the configured repositories failed (Fedora 21 - x86_64),
+and yum doesn&#39;t have enough cached data to continue. At this point the only
+safe thing yum can do is fail. There are a few ways to work &amp;quot;fix&amp;quot; this:
+
+[output truncated]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Affected Versions&lt;/strong&gt;: All previous versions of Docker Engine when SELinux
+is enabled.&lt;/p&gt;
+
+&lt;p&gt;Docker &lt;strong&gt;highly recommends&lt;/strong&gt; that all customers running previous versions of
+Docker Engine update to this release.&lt;/p&gt;
+
+&lt;h4 id=&#34;how-to-workaround-this-issue&#34;&gt;&lt;strong&gt;How to workaround this issue&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Customers who choose not to install this update have two options. The
+first option is to disable SELinux. This is &lt;em&gt;not recommended&lt;/em&gt; for production
+systems where SELinux is typically required.&lt;/p&gt;
+
+&lt;p&gt;The second option is to pass the following parameter in to &lt;code&gt;docker run&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     --security-opt=label:type:docker_t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This parameter cannot be passed to the &lt;code&gt;docker build&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;h4 id=&#34;upgrade-notes&#34;&gt;&lt;strong&gt;Upgrade notes&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;When upgrading, make sure you stop DTR first, perform the Engine upgrade, and
+then restart DTR.&lt;/p&gt;
+
+&lt;p&gt;If you are running with SELinux enabled, previous Docker Engine releases allowed
+you to bind-mount additional volumes or files inside the container as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ docker run -it -v /home/user/foo.txt:/foobar.txt:ro &amp;lt;imagename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the 1.6.2-cs5 release, you must ensure additional bind-mounts have the correct
+SELinux context. For example, if you want to mount &lt;code&gt;foobar.txt&lt;/code&gt; as read-only
+into the container, do the following to create and test your bind-mount:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Add the &lt;code&gt;z&lt;/code&gt; option to the bind mount when you specify &lt;code&gt;docker run&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -it -v /home/user/foo.txt:/foobar.txt:ro,z &amp;lt;imagename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Exec into your new container.&lt;/p&gt;
+
+&lt;p&gt;For example, if your container is &lt;code&gt;bashful_curie&lt;/code&gt;, open a shell on the
+container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker exec -it bashful_curie bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use &lt;code&gt;cat&lt;/code&gt; to check the permissions on the mounted file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cat /foobar.txt
+the contents of foobar appear
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you see the file&amp;rsquo;s contents, your mount succeeded. If you receive a
+&lt;code&gt;Permission denied&lt;/code&gt; message and/or the &lt;code&gt;/var/log/audit/audit.log&lt;/code&gt; file on
+your Docker host contains an AVC Denial message, the mount did not succeed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;type=AVC msg=audit(1432145409.197:7570): avc:  denied  { read } for  pid=21167 comm=&amp;quot;cat&amp;quot; name=&amp;quot;foobar.txt&amp;quot; dev=&amp;quot;xvda2&amp;quot; ino=17704136 scontext=system_u:system_r:svirt_lxc_net_t:s0:c909,c965 tcontext=unconfined_u:object_r:user_home_t:s0 tclass=file
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Recheck your command line to make sure you passed in the &lt;code&gt;z&lt;/code&gt; option.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;cs-docker-engine-1-6-2-cs4&#34;&gt;CS Docker Engine 1.6.2-cs4&lt;/h3&gt;
+
+&lt;p&gt;(13 May 2015)&lt;/p&gt;
+
+&lt;p&gt;Fix mount regression for &lt;code&gt;/sys&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;cs-docker-engine-1-6-1-cs3&#34;&gt;CS Docker Engine 1.6.1-cs3&lt;/h3&gt;
+
+&lt;p&gt;(11 May 2015)&lt;/p&gt;
+
+&lt;p&gt;Docker Engine version 1.6.1 has been released to address several vulnerabilities
+and is immediately available for all supported platforms. Users are advised to
+upgrade existing installations of the Docker Engine and use 1.6.1 for new installations.&lt;/p&gt;
+
+&lt;p&gt;It should be noted that each of the vulnerabilities allowing privilege escalation
+may only be exploited by a malicious Dockerfile or image.  Users are advised to
+run their own images and/or images built by trusted parties, such as those in
+the official images library.&lt;/p&gt;
+
+&lt;p&gt;Please send any questions to security@docker.com.&lt;/p&gt;
+
+&lt;h4 id=&#34;cve-2015-3629-https-cve-mitre-org-cgi-bin-cvename-cgi-name-cve-2015-3629-symlink-traversal-on-container-respawn-allows-local-privilege-escalation&#34;&gt;&lt;strong&gt;&lt;a href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3629&#34;&gt;CVE-2015-3629&lt;/a&gt; Symlink traversal on container respawn allows local privilege escalation&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Libcontainer version 1.6.0 introduced changes which facilitated a mount namespace
+breakout upon respawn of a container. This allowed malicious images to write
+files to the host system and escape containerization.&lt;/p&gt;
+
+&lt;p&gt;Libcontainer and Docker Engine 1.6.1 have been released to address this
+vulnerability. Users running untrusted images are encouraged to upgrade Docker Engine.&lt;/p&gt;
+
+&lt;p&gt;Discovered by Tõnis Tiigi.&lt;/p&gt;
+
+&lt;h4 id=&#34;cve-2015-3627-https-cve-mitre-org-cgi-bin-cvename-cgi-name-cve-2015-3627-insecure-opening-of-file-descriptor-1-leading-to-privilege-escalation&#34;&gt;&lt;strong&gt;&lt;a href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3627&#34;&gt;CVE-2015-3627&lt;/a&gt; Insecure opening of file-descriptor 1 leading to privilege escalation&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;The file-descriptor passed by libcontainer to the pid-1 process of a container
+has been found to be opened prior to performing the chroot, allowing insecure
+open and symlink traversal. This allows malicious container images to trigger
+a local privilege escalation.&lt;/p&gt;
+
+&lt;p&gt;Libcontainer and Docker Engine 1.6.1 have been released to address this
+vulnerability. Users running untrusted images are encouraged to upgrade
+Docker Engine.&lt;/p&gt;
+
+&lt;p&gt;Discovered by Tõnis Tiigi.&lt;/p&gt;
+
+&lt;h4 id=&#34;cve-2015-3630-https-cve-mitre-org-cgi-bin-cvename-cgi-name-cve-2015-3630-read-write-proc-paths-allow-host-modification-information-disclosure&#34;&gt;&lt;strong&gt;&lt;a href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3630&#34;&gt;CVE-2015-3630&lt;/a&gt; Read/write proc paths allow host modification &amp;amp; information disclosure&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Several paths underneath /proc were writable from containers, allowing global
+system manipulation and configuration. These paths included &lt;code&gt;/proc/asound&lt;/code&gt;,
+&lt;code&gt;/proc/timer_stats&lt;/code&gt;, &lt;code&gt;/proc/latency_stats&lt;/code&gt;, and &lt;code&gt;/proc/fs&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;By allowing writes to &lt;code&gt;/proc/fs&lt;/code&gt;, it has been noted that CIFS volumes could be
+forced into a protocol downgrade attack by a root user operating inside of a
+container. Machines having loaded the timer_stats module were vulnerable to
+having this mechanism enabled and consumed by a container.&lt;/p&gt;
+
+&lt;p&gt;We are releasing Docker Engine 1.6.1 to address this vulnerability. All
+versions up to 1.6.1 are believed vulnerable. Users running untrusted
+images are encouraged to upgrade.&lt;/p&gt;
+
+&lt;p&gt;Discovered by Eric Windisch of the Docker Security Team.&lt;/p&gt;
+
+&lt;h4 id=&#34;cve-2015-3631-https-cve-mitre-org-cgi-bin-cvename-cgi-name-cve-2015-3631-volume-mounts-allow-lsm-profile-escalation&#34;&gt;&lt;strong&gt;&lt;a href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3631&#34;&gt;CVE-2015-3631&lt;/a&gt; Volume mounts allow LSM profile escalation&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;By allowing volumes to override files of &lt;code&gt;/proc&lt;/code&gt; within a mount namespace, a user
+could specify arbitrary policies for Linux Security Modules, including setting
+an unconfined policy underneath AppArmor, or a &lt;code&gt;docker_t&lt;/code&gt; policy for processes
+managed by SELinux. In all versions of Docker up until 1.6.1, it is possible for
+malicious images to configure volume mounts such that files of proc may be overridden.&lt;/p&gt;
+
+&lt;p&gt;We are releasing Docker Engine 1.6.1 to address this vulnerability. All versions
+up to 1.6.1 are believed vulnerable. Users running untrusted images are encouraged
+to upgrade.&lt;/p&gt;
+
+&lt;p&gt;Discovered by Eric Windisch of the Docker Security Team.&lt;/p&gt;
+
+&lt;h4 id=&#34;apparmor-policy-improvements&#34;&gt;&lt;strong&gt;AppArmor policy improvements&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;The 1.6.1 release also marks preventative additions to the AppArmor policy.
+Recently, several CVEs against the kernel have been reported whereby mount
+namespaces could be circumvented through the use of the sys_mount syscall from
+inside of an unprivileged Docker container. In all reported cases, the
+AppArmor policy included in libcontainer and shipped with Docker has been
+sufficient to deflect these attacks. However, we have deemed it prudent to
+proactively tighten the policy further by outright denying the use of the
+&lt;code&gt;sys_mount&lt;/code&gt; syscall.&lt;/p&gt;
+
+&lt;p&gt;Because this addition is preventative, no CVE-ID is requested.&lt;/p&gt;
+
+&lt;h3 id=&#34;cs-docker-engine-1-6-0-cs2&#34;&gt;CS Docker Engine 1.6.0-cs2&lt;/h3&gt;
+
+&lt;p&gt;(23 Apr 2015)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;First release, please see the &lt;a href=&#34;https://docs.docker.com/docker/misc/release-notes/&#34;&gt;Docker Engine 1.6.0 Release notes&lt;/a&gt;
+for more details.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Quick-start: Basic Workflow</title>
+      <link>http://localhost/docker-trusted-registry/quick-start/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/quick-start/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-trusted-registry-quick-start-basic-user-workflow&#34;&gt;Docker Trusted Registry Quick Start: Basic User Workflow&lt;/h1&gt;
+
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;This Quick Start Guide will give you a hands-on look at the basics of using
+Docker Trusted Registry (DTR), Docker’s on-premise image storage application.
+This guide will walk you through using DTR to complete a typical, and critical,
+part of building a development pipeline: setting up a Jenkins instance. Once you
+complete the task, you should have a good idea of how DTR works and how it might
+be useful to you.&lt;/p&gt;
+
+&lt;p&gt;Specifically, this guide demonstrates the process of retrieving the
+&lt;a href=&#34;https://registry.hub.docker.com/_/jenkins/&#34;&gt;official Docker image for Jenkins&lt;/a&gt;,
+customizing it to suit your needs, and then hosting it on your private instance
+of DTR located inside your enterprise’s firewalled environment. Your developers
+will then be able to retrieve the custom Jenkins image in order to use it to
+build CI/CD infrastructure for their projects, no matter the platform they&amp;rsquo;re
+working from, be it a laptop, a VM, or a cloud provider.&lt;/p&gt;
+
+&lt;p&gt;The guide will walk you through the following steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Pulling the official Jenkins image from the public Docker Hub&lt;/li&gt;
+&lt;li&gt;Customizing the Jenkins image to suit your needs&lt;/li&gt;
+&lt;li&gt;Pushing the customized image to DTR&lt;/li&gt;
+&lt;li&gt;Pulling the customized image from DTR&lt;/li&gt;
+&lt;li&gt;Launching a container from the custom image&lt;/li&gt;
+&lt;li&gt;Using the new Jenkins container&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You should be able to complete this guide in about thirty minutes.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This guide assumes you have installed a working instance of DTR
+reachable at dtr.yourdomain.com. If you need help installing and configuring
+DTR, please consult the
+&lt;a href=&#34;http://localhost/docker-trusted-registry/install&#34;&gt;installation instructions&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;pulling-the-official-jenkins-image&#34;&gt;Pulling the official Jenkins image&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This guide assumes you are familiar with basic Docker concepts such
+as images, containers, and registries. If you need to learn more about Docker
+fundamentals, please consult the
+&lt;a href=&#34;http://docs.docker.com/userguide/&#34;&gt;Docker user guide&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;First, you will retrieve a copy of the official Jenkins image from the Docker Hub. By default, if
+Docker can&amp;rsquo;t find an image locally, it will attempt to pull the image from the
+Docker Hub. From the CLI of a machine running the Docker Engine on your network, use
+the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#pull&#34;&gt;&lt;code&gt;docker pull&lt;/code&gt;&lt;/a&gt;
+command to pull the public Jenkins image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull jenkins
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This guide assumes you can run Docker commands from a machine where
+you are a member of the &lt;code&gt;docker&lt;/code&gt; group, or have root privileges. Otherwise, you may
+need to add &lt;code&gt;sudo&lt;/code&gt; to the example commands below.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Docker will start the process of pulling the image from the Hub. Once it has completed, the Jenkins image should be visible in the output of a &lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#images&#34;&gt;&lt;code&gt;docker images&lt;/code&gt;&lt;/a&gt; command, which lists your available images:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY  TAG     IMAGE ID      CREATED      VIRTUAL SIZE
+jenkins     latest  1a7cc22b0ee9  6 days ago   662 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Because the &lt;code&gt;pull&lt;/code&gt; command did not specify any tags, it will pull
+the latest version of the public Jenkins image. If your enterprise environment
+requires you to use a specific version, add the tag for the version you need
+(e.g., &lt;code&gt;jenkins:1.565&lt;/code&gt;).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;customizing-the-jenkins-image&#34;&gt;Customizing the Jenkins image&lt;/h2&gt;
+
+&lt;p&gt;Now that you have a local copy of the Jenkins image, you&amp;rsquo;ll customize it so that
+the containers it builds will integrate with your infrastructure. To do this,
+you&amp;rsquo;ll create a custom Docker image that adds a Jenkins plugin that provides
+fine grained user management. You&amp;rsquo;ll also configure Jenkins to be more secure by
+disabling HTTP access and forcing it to use HTTPS.
+You&amp;rsquo;ll do this by using a &lt;code&gt;Dockerfile&lt;/code&gt; and the &lt;code&gt;docker build&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; These are obviously just a couple of examples of the many ways you
+can modify and configure Jenkins. Feel free to add or substitute whatever
+customization is necessary to run Jenkins in your environment.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;creating-a-build-context&#34;&gt;Creating a &lt;code&gt;build&lt;/code&gt; context&lt;/h3&gt;
+
+&lt;p&gt;In order to add the new plugin and configure HTTPS access to the custom Jenkins
+image, you need to:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Create text file that defines the new plugin&lt;/li&gt;
+&lt;li&gt;Create copies of the private key and certificate&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;All of the above files need to be in the same directory as the Dockerfile you
+will create in the next step.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Create a build directory called &lt;code&gt;build&lt;/code&gt;, and change to that new directory:&lt;/p&gt;
+
+&lt;p&gt;$ mkdir build &amp;amp;&amp;amp; cd build&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In this directory, create a new file called &lt;code&gt;plugins&lt;/code&gt; and add the following
+line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;role-strategy:2.2.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(The plugin version used above was the latest version at the time of writing.)&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You will also need to make copies of the server&amp;rsquo;s private key and certificate. Give the copies the following names - &lt;code&gt;https.key&lt;/code&gt; and &lt;code&gt;https.pem&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Because creating new keys varies widely by platform and
+implementation, this guide won&amp;rsquo;t cover key generation. We assume you have
+access to existing keys. If you don&amp;rsquo;t have access, or can&amp;rsquo;t generate keys
+yourself, feel free to skip the steps involving them and HTTPS config. The
+guide will still walk you through building a custom Jenkins image and pushing
+and pulling that image using DTR.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;creating-a-dockerfile&#34;&gt;Creating a Dockerfile&lt;/h3&gt;
+
+&lt;p&gt;In the same directory as the &lt;code&gt;plugins&lt;/code&gt; file and the private key and certificate,
+create a new &lt;a href=&#34;https://docs.docker.com/reference/builder/&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt;&lt;/a&gt; with the
+following contents:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; FROM jenkins
+
+ #New plugins must be placed in the plugins file
+ COPY plugins /usr/share/jenkins/plugins
+
+ #The plugins.sh script will install new plugins
+ RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins
+
+ #Copy private key and cert to image
+ COPY https.pem /var/lib/jenkins/cert
+ COPY https.key /var/lib/jenkins/pk
+
+ #Configure HTTP off and HTTPS on, using port 1973
+ENV JENKINS_OPTS --httpPort=-1 --httpsPort=1973 --httpsCertificate=/var/lib/jenkins/cert --httpsPrivateKey=/var/lib/jenkins/pk
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first &lt;code&gt;COPY&lt;/code&gt; instruction in the above will copy the &lt;code&gt;plugin&lt;/code&gt; file created
+earlier into the &lt;code&gt;/usr/share/jenkins&lt;/code&gt; directory within the custom image you are
+defining with the &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;RUN&lt;/code&gt; instruction will execute the &lt;code&gt;/usr/local/bin/plugins.sh&lt;/code&gt; script with
+the newly copied &lt;code&gt;plugins&lt;/code&gt; file, which will install the listed plugin.&lt;/p&gt;
+
+&lt;p&gt;The next two &lt;code&gt;COPY&lt;/code&gt; instructions copy the server&amp;rsquo;s private key and certificate
+into the required directories within the new image.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;ENV&lt;/code&gt; instruction creates an environment variable called &lt;code&gt;JENKINS_OPT&lt;/code&gt; in
+the image you are about to create. This environment variable will be present in
+any containers launched form the image and contains the required settings to
+tell Jenkins to disable HTTP and operate over HTTPS.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; You can specify any valid port number as part of the &lt;code&gt;JENKINS_OPT&lt;/code&gt;
+environment variable declared above. The value &lt;code&gt;1973&lt;/code&gt; used in the example is
+arbitrary.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The &lt;code&gt;Dockerfile&lt;/code&gt;, the &lt;code&gt;plugins&lt;/code&gt; file, as well as the private key and
+certificate, must all be in the same directory because the &lt;code&gt;docker build&lt;/code&gt;
+command uses the directory that contains the &lt;code&gt;Dockerfile&lt;/code&gt; as its &amp;ldquo;build
+context&amp;rdquo;. Only files contained within that &amp;ldquo;build context&amp;rdquo; will be included in
+the image being built.&lt;/p&gt;
+
+&lt;h3 id=&#34;building-your-custom-image&#34;&gt;Building your custom image&lt;/h3&gt;
+
+&lt;p&gt;Now that the &lt;code&gt;Dockerfile&lt;/code&gt;, the &lt;code&gt;plugins&lt;/code&gt; file, and the files required for HTTPS
+operation are created in your current working directory, you can build your
+custom image using the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#build&#34;&gt;&lt;code&gt;docker build&lt;/code&gt; command&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker build -t dtr.yourdomain.com/ci-infrastructure/jnkns-img .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Don&amp;rsquo;t miss the period (&lt;code&gt;.&lt;/code&gt;) at the end of the command above. This
+tells the &lt;code&gt;docker build&lt;/code&gt; command to use the current working directory as the
+&amp;ldquo;build context&amp;rdquo;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This command will build a new Docker image called &lt;code&gt;jnkns-img&lt;/code&gt; which is based on
+the public Jenkins image you pulled earlier, but contains all of your
+customization.&lt;/p&gt;
+
+&lt;p&gt;Please note the use of the &lt;code&gt;-t&lt;/code&gt; flag in the &lt;code&gt;docker build&lt;/code&gt; command above. The
+&lt;code&gt;-t&lt;/code&gt; flag lets you  tag an image so it can be pushed to a custom repository. In
+the example above, the new image is tagged so it can be pushed to the
+&lt;code&gt;ci-infrastructure&lt;/code&gt; Repository within the &lt;code&gt;dtr.yourdomain.com&lt;/code&gt; registry (your
+local DTR instance). This will be important when you need to &lt;code&gt;push&lt;/code&gt; the
+customized image to DTR later.&lt;/p&gt;
+
+&lt;p&gt;A &lt;code&gt;docker images&lt;/code&gt; command will now show the custom image alongside the Jenkins
+image pulled earlier:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker images
+REPOSITORY   TAG    IMAGE ID    CREATED    VIRTUAL SIZE
+dtr.yourdomain.com/ci-infrastructure/jnkns-img    latest    fc0ab3008d40    2 minutes ago    674.5 MB
+jenkins    latest    1a7cc22b0ee9    6 days ago    662 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;pushing-to-docker-trusted-registry&#34;&gt;Pushing to Docker Trusted Registry&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If your DTR instance has authentication enabled, you will need to
+use your command line to &lt;code&gt;docker login &amp;lt;dtr-hostname&amp;gt;&lt;/code&gt; (e.g., &lt;code&gt;docker login
+dtr.yourdomain.com&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Failures due to unauthenticated &lt;code&gt;docker push&lt;/code&gt; and &lt;code&gt;docker pull&lt;/code&gt; commands will
+look like :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull dtr.yourdomain.com/hello-world
+Pulling repository dtr.yourdomain.com/hello-world
+FATA[0001] Error: image hello-world:latest not found
+
+$ docker push dtr.yourdomain.com/hello-world
+The push refers to a repository [dtr.yourdomain.com/hello-world] (len: 1)
+e45a5af57b00: Image push failed
+FATA[0001] Error pushing to registry: token auth attempt for registry
+https://dtr.yourdomain.com/v2/:
+https://dtr.yourdomain.com/auth/v2/token/
+?scope=repository%3Ahello-world%3Apull%2Cpush&amp;amp;service=dtr.yourdomain.com
+request failed with status: 401 Unauthorized
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now that you’ve created the custom image, it can be pushed to DTR using the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#push&#34;&gt;&lt;code&gt;docker push&lt;/code&gt;command&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker push dtr.yourdomain.com/ci-infrastructure/jnkns-img
+511136ea3c5a: Image successfully pushed
+848d84b4b2ab: Image successfully pushed
+71d9d77ae89e: Image already exists
+&amp;lt;truncated ouput...&amp;gt;
+492ed3875e3e: Image successfully pushed
+fc0ab3008d40: Image successfully pushed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can view the traffic throughput while the custom image is being pushed from
+the &lt;code&gt;System Health&lt;/code&gt; tab in DTR:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/console-push.png&#34; alt=&#34;DTR console push throughput&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Once the image is successfully pushed, it can be downloaded, or pulled, by any
+Docker host that has access to DTR.&lt;/p&gt;
+
+&lt;h2 id=&#34;pulling-from-docker-trusted-registry&#34;&gt;Pulling from Docker Trusted Registry&lt;/h2&gt;
+
+&lt;p&gt;To pull the &lt;code&gt;jnkns-img&lt;/code&gt; image from DTR, run the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#pull&#34;&gt;&lt;code&gt;docker pull&lt;/code&gt;&lt;/a&gt;
+command from any Docker Host that has access to your DTR instance:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull dtr.yourdomain.com/ci-infrastructure/jnkns-img
+latest: Pulling from dtr.yourdomain.com/ci-infrastructure/jnkns-img
+511136ea3c5a: Pull complete
+848d84b4b2ab: Pull complete
+71d9d77ae89e: Pull complete
+&amp;lt;truncated ouput...&amp;gt;
+492ed3875e3e: Pull complete
+fc0ab3008d40: Pull complete
+dtr.yourdomain.com/ci-infrastructure/jnkns-img:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+Status: Downloaded newer image for dtr.yourdomain.com/ci-infrastructure/jnkns-img:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can view the traffic throughput while the custom image is being pulled from
+the &lt;code&gt;System Health&lt;/code&gt; tab in DTR:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/console-pull.png&#34; alt=&#34;DTR console pull throughput&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Now that the &lt;code&gt;jnkns-img&lt;/code&gt; image has been pulled locally from DTR, you can view it
+in the output of the &lt;code&gt;docker images&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; $ docker images
+REPOSITORY     TAG    IMAGE ID    CREATED    VIRTUAL SIZE
+dtr.yourdomain.com/ci-infrastructure/jnkns-img    latest  fc0ab3008d40    8 minutes ago    674.5 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;launching-a-custom-jenkins-container&#34;&gt;Launching a custom Jenkins container&lt;/h2&gt;
+
+&lt;p&gt;Now that you’ve successfully pulled the customized Jenkins image from DTR, you
+can create a container from it with the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#run&#34;&gt;&lt;code&gt;docker run&lt;/code&gt; command&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -p 1973:1973 --name jenkins01 dtr.yourdomain.com/ci-infrastructure/jnkns-img
+/usr/share/jenkins/ref/init.groovy.d/tcp-slave-angent-port.groovy
+ /usr/share/jenkins/ref/init.groovy.d/tcp-slave-angent-port.groovy -&amp;gt; init.groovy.d/tcp-slave-angent-port.groovy
+copy init.groovy.d/tcp-slave-angent-port.groovy to JENKINS_HOME
+/usr/share/jenkins/ref/plugins/role-strategy.hpi
+ /usr/share/jenkins/ref/plugins/role-strategy.hpi -&amp;gt; plugins/role-strategy.hpi
+copy plugins/role-strategy.hpi to JENKINS_HOME
+/usr/share/jenkins/ref/plugins/dockerhub.hpi
+ /usr/share/jenkins/ref/plugins/dockerhub.hpi -&amp;gt; plugins/dockerhub.hpi
+copy plugins/dockerhub.hpi to JENKINS_HOME
+&amp;lt;truncated output...&amp;gt;
+INFO: Jenkins is fully up and running
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The &lt;code&gt;docker run&lt;/code&gt; command above maps port 1973 in the container
+through to port 1973 on the host. This is the HTTPS port you specified in the
+Dockerfile earlier. If you specified a different HTTPS port in your
+Dockerfile, you will need to substitute this with the correct port numbers for
+your environment.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can view the newly launched a container, called &lt;code&gt;jenkins01&lt;/code&gt;, using the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#ps&#34;&gt;&lt;code&gt;docker ps&lt;/code&gt; command&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps
+CONTAINER ID     IMAGE     COMMAND     CREATED      STATUS  ...PORTS     NAMES
+2e5d2f068504    dtr.yourdomain.com/ci-infrastructure/jnkns-img:latest    &amp;quot;/usr/local/bin/jenk     About a minute ago     Up About a minute     50000/tcp, 0.0.0.0:1973-&amp;gt;1973/tcp     jenkins01
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;accessing-the-new-jenkins-container&#34;&gt;Accessing the new Jenkins container&lt;/h2&gt;
+
+&lt;p&gt;The previous &lt;code&gt;docker run&lt;/code&gt; command mapped port &lt;code&gt;1973&lt;/code&gt; on the container to port
+&lt;code&gt;1973&lt;/code&gt; on the Docker host, so the Jenkins Web UI can be accessed at
+&lt;code&gt;https://&amp;lt;docker-host&amp;gt;:1973&lt;/code&gt; (Don&amp;rsquo;t forget the &lt;code&gt;s&lt;/code&gt; at the end of &lt;code&gt;https&lt;/code&gt;.)&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you are using a self-signed certificate, you may get a security
+warning from your browser telling you that the certificate is self-signed and
+not trusted. You may wish to add the certificate to the trusted store in order
+to prevent further warnings in the future.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/jenkins-ui.png&#34; alt=&#34;Jenkins landing page&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;From within the Jenkins Web UI, navigate to &lt;code&gt;Manage Jenkins&lt;/code&gt; (on the left-hand
+pane) &amp;gt; &lt;code&gt;Manage Plugins&lt;/code&gt; &amp;gt; &lt;code&gt;Installed&lt;/code&gt;. The  &lt;code&gt;Role-based Authorization Strategy&lt;/code&gt;
+plugin should be present with the &lt;code&gt;Uninstall&lt;/code&gt; button available to the right.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-trusted-registry/assets/jenkins-plugins.png&#34; alt=&#34;Jenkins plugin manager&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;In another browser session, try to access Jenkins via the default HTTP port 8080
+ &lt;code&gt;http://&amp;lt;docker-host&amp;gt;:8080&lt;/code&gt;. This should result in a &amp;ldquo;connection timeout&amp;rdquo;,
+showing that Jenkins is not available on its default port 8080 over HTTP.&lt;/p&gt;
+
+&lt;p&gt;This demonstration shows your Jenkins image has been configured correctly for
+HTTPS access, your new plugin was added and is ready for use, and HTTP access
+has been disabled. At this point, any member of your team can use &lt;code&gt;docker pull&lt;/code&gt;
+to access the image from your DTR instance, allowing them to access a
+configured, secured Jenkins instance that can run on any infrastructure.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For more information on using DTR, take a look at the
+&lt;a href=&#34;http://localhost/docker-trusted-registry/userguide&#34;&gt;User&amp;rsquo;s Guide&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Release notes</title>
+      <link>http://localhost/docker-trusted-registry/release-notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/release-notes/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-trusted-registry-release-notes&#34;&gt;Docker Trusted Registry: Release Notes&lt;/h1&gt;
+
+&lt;h2 id=&#34;prior-versions&#34;&gt;Prior Versions&lt;/h2&gt;
+
+&lt;p&gt;These notes refer to the current release of Docker Trusted Registry and the commercially supported Docker Engine. For notes on older versions of these, see the &lt;a href=&#34;http://localhost/docker-trusted-registry/prior-release-notes&#34;&gt;prior release notes archive&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-trusted-registry-dtr&#34;&gt;Docker Trusted Registry (DTR)&lt;/h2&gt;
+
+&lt;h3 id=&#34;dtr-1-1-0&#34;&gt;DTR 1.1.0&lt;/h3&gt;
+
+&lt;p&gt;(23 June 2015)&lt;/p&gt;
+
+&lt;p&gt;This release of DTR (formerly DHE) adds major integration with the AWS and Azure marketplaces, giving customers a smoother installation path. DTR 1.1 also adds finer-grained permissions and improvements and additions to the UI and logging. Bugs in LDAP/AD integration have also been remediated, improving the stability and usability of DTR. See below for specifics.&lt;/p&gt;
+
+&lt;h4 id=&#34;new-features&#34;&gt;New Features&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;New, more granular, &lt;a href=&#34;http://localhost/docker-trusted-registry/configuration#authentication&#34;&gt;roles for users&lt;/a&gt;. DTR users can now be assigned different levels of access (admin, r/w, r/o) to the repositories. &lt;strong&gt;Important:&lt;/strong&gt; Existing DTR users should make sure to see the note &lt;a href=&#34;#upgrade-warning&#34;&gt;below&lt;/a&gt; regarding migrating users before upgrading.&lt;/li&gt;
+&lt;li&gt;A new storage status indicator for storage space. The dashboard now shows used and available storage space for supported storage drivers.&lt;/li&gt;
+&lt;li&gt;A new &lt;a href=&#34;http://localhost/docker-trusted-registry/adminguide#Client-Docker-Daemon-diagnostics&#34;&gt;diagnostics tool&lt;/a&gt; gathers and bundles DTR logs, system information, container information, and other configuration settings for use by Docker support or as a backup.&lt;/li&gt;
+&lt;li&gt;Performance and reliability improvements to the S3 storage backend.&lt;/li&gt;
+&lt;li&gt;DTR images are now available on the Amazon AWS and Microsoft Azure marketplaces.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;fixes&#34;&gt;Fixes&lt;/h4&gt;
+
+&lt;p&gt;The following notable issues have been remediated:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fixed an issue that caused DTR logins to fail if some LDAP servers were unreachable.&lt;/li&gt;
+&lt;li&gt;Fixed a resource leak in DTR storage.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;upgrade-warning&#34;&gt;Upgrade Warning&lt;/h3&gt;
+
+&lt;p&gt;Customers who are currently using DHE 1.0 &lt;strong&gt;must&lt;/strong&gt; follow the &lt;a href=&#34;https://forums.docker.com/t/upgrading-docker-hub-enterprise-to-docker-trusted-registry/1925&#34;&gt;upgrading instructions&lt;/a&gt; in our support Knowledge Base. These instructions will show you how to modify existing authentication data and storage volume settings to move to DTR. Note that automatic upgrading has been disabled for DHE users because of these issues.&lt;/p&gt;
+
+&lt;h2 id=&#34;commercially-supported-docker-engine&#34;&gt;Commercially Supported Docker Engine&lt;/h2&gt;
+
+&lt;h3 id=&#34;cs-docker-engine-1-6-2-cs5&#34;&gt;CS Docker Engine 1.6.2-cs5&lt;/h3&gt;
+
+&lt;p&gt;(21 May 2015)&lt;/p&gt;
+
+&lt;p&gt;For customers running Docker Engine on &lt;a href=&#34;https://www.docker.com/enterprise/support/&#34;&gt;supported versions of RedHat Enterprise
+Linux&lt;/a&gt; with &lt;a href=&#34;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/
+6/html/Security-Enhanced_Linux/sect-Security-Enhanced_Linux-Working_with_SELinux
+-Enabling_and_Disabling_SELinux.html&#34;&gt;SELinux
+enabled&lt;/a&gt;, the &lt;code&gt;docker build&lt;/code&gt; and &lt;code&gt;docker run&lt;/code&gt;
+commands will not have DNS host name resolution and bind-mounted volumes may
+not be accessible.
+As a result, customers with SELinux will be unable to use hostname-based network
+access in either &lt;code&gt;docker build&lt;/code&gt; or &lt;code&gt;docker run&lt;/code&gt;, nor will they be able to
+&lt;code&gt;docker run&lt;/code&gt; containers
+that use &lt;code&gt;--volume&lt;/code&gt; or &lt;code&gt;-v&lt;/code&gt; bind-mounts (with an incorrect SELinux label) in
+their environment. By installing Docker Engine 1.6.2-cs5, customers can use Docker as intended on RHEL with SELinux enabled.&lt;/p&gt;
+
+&lt;p&gt;For example, you see will failures like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@dtr ~]# docker -v
+Docker version 1.6.0-cs2, build b8dd430
+[root@dtr ~]# ping dtr.home.org.au
+PING dtr.home.org.au (10.10.10.104) 56(84) bytes of data.
+64 bytes from dtr.home.gateway (10.10.10.104): icmp_seq=1 ttl=64 time=0.663 ms
+^C
+--- dtr.home.org.au ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 0.078/0.370/0.663/0.293 ms
+[root@dtr ~]# docker run --rm -it debian ping dtr.home.org.au
+ping: unknown host
+[root@dtr ~]# docker run --rm -it debian cat /etc/resolv.conf
+cat: /etc/resolv.conf: Permission denied
+[root@dtr ~]# docker run --rm -it debian apt-get update
+Err http://httpredir.debian.org jessie InRelease
+
+Err http://security.debian.org jessie/updates InRelease
+
+Err http://httpredir.debian.org jessie-updates InRelease
+
+Err http://security.debian.org jessie/updates Release.gpg
+  Could not resolve &#39;security.debian.org&#39;
+Err http://httpredir.debian.org jessie Release.gpg
+  Could not resolve &#39;httpredir.debian.org&#39;
+Err http://httpredir.debian.org jessie-updates Release.gpg
+  Could not resolve &#39;httpredir.debian.org&#39;
+[output truncated]
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or when running a &lt;code&gt;docker build&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@dtr ~]# docker build .
+Sending build context to Docker daemon 11.26 kB
+Sending build context to Docker daemon
+Step 0 : FROM fedora
+ ---&amp;gt; e26efd418c48
+Step 1 : RUN yum install httpd
+ ---&amp;gt; Running in cf274900ea35
+
+One of the configured repositories failed (Fedora 21 - x86_64),
+and yum doesn&#39;t have enough cached data to continue. At this point the only
+safe thing yum can do is fail. There are a few ways to work &amp;quot;fix&amp;quot; this:
+
+[output truncated]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Affected Versions&lt;/strong&gt;: All previous versions of Docker Engine when SELinux
+is enabled.&lt;/p&gt;
+
+&lt;p&gt;Docker &lt;strong&gt;highly recommends&lt;/strong&gt; that all customers running previous versions of
+Docker Engine update to this release.&lt;/p&gt;
+
+&lt;h4 id=&#34;how-to-workaround-this-issue&#34;&gt;&lt;strong&gt;How to workaround this issue&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Customers who choose not to install this update have two options. The
+first option is to disable SELinux. This is &lt;em&gt;not recommended&lt;/em&gt; for production
+systems where SELinux is typically required.&lt;/p&gt;
+
+&lt;p&gt;The second option is to pass the following parameter in to &lt;code&gt;docker run&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     --security-opt=label:type:docker_t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This parameter cannot be passed to the &lt;code&gt;docker build&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;h4 id=&#34;upgrade-notes&#34;&gt;&lt;strong&gt;Upgrade notes&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;When upgrading, make sure you stop DTR first, perform the Engine upgrade, and
+then restart DTR.&lt;/p&gt;
+
+&lt;p&gt;If you are running with SELinux enabled, previous Docker Engine releases allowed
+you to bind-mount additional volumes or files inside the container as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ docker run -it -v /home/user/foo.txt:/foobar.txt:ro &amp;lt;imagename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the 1.6.2-cs5 release, you must ensure additional bind-mounts have the correct
+SELinux context. For example, if you want to mount &lt;code&gt;foobar.txt&lt;/code&gt; as read-only
+into the container, do the following to create and test your bind-mount:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Add the &lt;code&gt;z&lt;/code&gt; option to the bind mount when you specify &lt;code&gt;docker run&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -it -v /home/user/foo.txt:/foobar.txt:ro,z &amp;lt;imagename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Exec into your new container.&lt;/p&gt;
+
+&lt;p&gt;For example, if your container is &lt;code&gt;bashful_curie&lt;/code&gt;, open a shell on the
+container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker exec -it bashful_curie bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use &lt;code&gt;cat&lt;/code&gt; to check the permissions on the mounted file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cat /foobar.txt
+the contents of foobar appear
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you see the file&amp;rsquo;s contents, your mount succeeded. If you receive a
+&lt;code&gt;Permission denied&lt;/code&gt; message and/or the &lt;code&gt;/var/log/audit/audit.log&lt;/code&gt; file on
+your Docker host contains an AVC Denial message, the mount did not succeed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;type=AVC msg=audit(1432145409.197:7570): avc:  denied  { read } for  pid=21167 comm=&amp;quot;cat&amp;quot; name=&amp;quot;foobar.txt&amp;quot; dev=&amp;quot;xvda2&amp;quot; ino=17704136 scontext=system_u:system_r:svirt_lxc_net_t:s0:c909,c965 tcontext=unconfined_u:object_r:user_home_t:s0 tclass=file
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Recheck your command line to make sure you passed in the &lt;code&gt;z&lt;/code&gt; option.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Support</title>
+      <link>http://localhost/docker-trusted-registry/support/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/support/</guid>
+      <description>
+
+&lt;h1 id=&#34;commercial-support-options&#34;&gt;Commercial Support Options&lt;/h1&gt;
+
+&lt;h2 id=&#34;how-to-get-support&#34;&gt;How to get support&lt;/h2&gt;
+
+&lt;p&gt;Purchasing a DTR License or Commercial Support subscription means your questions
+and issues about DTR will receive prioritized support.
+You can file a ticket through &lt;a href=&#34;mailto:support@docker.com&#34;&gt;email&lt;/a&gt; from your
+company email address, or visit our &lt;a href=&#34;https://support.docker.com&#34;&gt;support site&lt;/a&gt;.
+In either case, you&amp;rsquo;ll need to verify your email address, and then you can
+communicate with the support team either by email or web interface.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The availability of support depends on your &lt;a href=&#34;https://www.docker.com/enterprise/support/&#34;&gt;support subscription&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>User guide</title>
+      <link>http://localhost/docker-trusted-registry/userguide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/userguide/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-trusted-registry-user-s-guide&#34;&gt;Docker Trusted Registry User&amp;rsquo;s Guide&lt;/h1&gt;
+
+&lt;p&gt;This guide covers tasks and functions a user of Docker Trusted Registry (DTR) will
+need to know about, such as pushing or pulling images, etc. For tasks DTR
+administrators need to accomplish, such as configuring or monitoring DTR, please
+visit the &lt;a href=&#34;http://localhost/docker-trusted-registry/adminguide&#34;&gt;Administrator&amp;rsquo;s Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;The primary use case for DTR users is to push and pull images to and from the
+DTR image storage service. For example, you might pull an Official Image for
+Ubuntu from the Docker Hub, customize it with configuration settings for your
+infrastructure and then push it to your DTR image storage for other developers
+to pull and use for their development environments.&lt;/p&gt;
+
+&lt;p&gt;Pushing and pulling images with DTR works very much like any other Docker
+registry: you use the &lt;code&gt;docker pull&lt;/code&gt; command to retrieve images and the &lt;code&gt;docker
+push&lt;/code&gt; command to add an image to a DTR repository. To learn more about Docker
+images, see
+&lt;a href=&#34;https://docs.docker.com/userguide/dockerimages/&#34;&gt;User Guide: Working with Docker Images&lt;/a&gt;. For a step-by-step
+example of the entire process, see the
+&lt;a href=&#34;http://localhost/docker-trusted-registry/quick-start&#34;&gt;Quick Start: Basic Workflow Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If your DTR instance has authentication enabled, you will need to
+use your command line to &lt;code&gt;docker login &amp;lt;dtr-hostname&amp;gt;&lt;/code&gt; (e.g., &lt;code&gt;docker login
+dtr.yourdomain.com&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Failures due to unauthenticated &lt;code&gt;docker push&lt;/code&gt; and &lt;code&gt;docker pull&lt;/code&gt; commands will
+look like :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull dtr.yourdomain.com/hello-world
+Pulling repository dtr.yourdomain.com/hello-world
+FATA[0001] Error: image hello-world:latest not found
+
+$ docker push dtr.yourdomain.com/hello-world
+The push refers to a repository [dtr.yourdomain.com/hello-world] (len: 1)
+e45a5af57b00: Image push failed
+FATA[0001] Error pushing to registry: token auth attempt for registry
+https://dtr.yourdomain.com/v2/:
+https://dtr.yourdomain.com/auth/v2/token/?scope=
+repository%3Ahello-world%3Apull%2Cpush&amp;amp;service=dtr.yourdomain.com
+request failed with status: 401 Unauthorized
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;pushing-images&#34;&gt;Pushing Images&lt;/h2&gt;
+
+&lt;p&gt;You push an image up to a DTR repository by using the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#push&#34;&gt;&lt;code&gt;docker push&lt;/code&gt; command&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can add a &lt;code&gt;tag&lt;/code&gt; to your image so that you can more easily identify it
+amongst other variants and so that it refers to your DTR server.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;`$ docker tag hello-world:latest dtr.yourdomain.com/yourusername/hello-mine:latest`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The command labels a &lt;code&gt;hello-world:latest&lt;/code&gt; image using a new tag in the
+&lt;code&gt;[REGISTRYHOST/][USERNAME/]NAME[:TAG]&lt;/code&gt; format.  The &lt;code&gt;REGISTRYHOST&lt;/code&gt; in this
+case is your DTR server, &lt;code&gt;dtr.yourdomain.com&lt;/code&gt;, and the &lt;code&gt;USERNAME&lt;/code&gt; is
+&lt;code&gt;yourusername&lt;/code&gt;. Lastly, the image tag is set to &lt;code&gt;hello-mine:latest&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Once an image is tagged, you can push it to DTR with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;`$ docker push dtr.yourdomain.com/demouser/hello-mine:latest`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If the Docker daemon on which you are running &lt;code&gt;docker push&lt;/code&gt; doesn&amp;rsquo;t
+have the right certificates set up, you will get an error similar to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker push dtr.yourdomain.com/demouser/hello-world
+FATA[0000] Error response from daemon: v1 ping attempt failed with error:
+Get https://dtr.yourdomain.com/v1/_ping: x509: certificate signed by
+unknown authority. If this private registry supports only HTTP or HTTPS
+with an unknown CA certificate, please add `--insecure-registry
+dtr.yourdomain.com` to the daemon&#39;s arguments. In the case of HTTPS, if
+you have access to the registry&#39;s CA certificate, no need for the flag;
+simply place the CA certificate at
+/etc/docker/certs.d/dtr.yourdomain.com/ca.crt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;pulling-images&#34;&gt;Pulling images&lt;/h2&gt;
+
+&lt;p&gt;You can retrieve an image with the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#run&#34;&gt;&lt;code&gt;docker pull&lt;/code&gt; command&lt;/a&gt;,
+or you can retrieve an image and run Docker to build the container with the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/cli/#run&#34;&gt;&lt;code&gt;docker run&lt;/code&gt;command&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To retrieve an image from DTR and then run Docker to build the container, add
+the needed info to &lt;code&gt;docker run&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ docker run dtr.yourdomain.com/yourusername/hello-mine
+    latest: Pulling from dtr.yourdomain.com/yourusername/hello-mine
+    511136ea3c5a: Pull complete
+    31cbccb51277: Pull complete
+    e45a5af57b00: Already exists
+    Digest: sha256:45f0de377f861694517a1440c74aa32eecc3295ea803261d62f950b1b757bed1
+    Status: Downloaded newer image for dtr.yourdomain.com/demouser/hello-mine:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that if you don&amp;rsquo;t specify a version, by default the &lt;code&gt;latest&lt;/code&gt; version of an
+image will be pulled.&lt;/p&gt;
+
+&lt;p&gt;If you run &lt;code&gt;docker images&lt;/code&gt; after this you&amp;rsquo;ll see a &lt;code&gt;hello-mine&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ docker images
+    REPOSITORY                           TAG     IMAGE ID      CREATED       VIRTUAL SIZE
+    dtr.yourdomain.com/yourusername/hello-mine  latest  e45a5af57b00  3 months ago  910 B
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To pull an image without building the container, use &lt;code&gt;docker pull&lt;/code&gt; and specify
+your DTR registry by adding it to the command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; $ docker pull dtr.yourdomain.com/yourusername/hello-mine
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For information on administering DTR, take a look at the
+&lt;a href=&#34;http://localhost/docker-trusted-registry/adminguide&#34;&gt;Administrator&amp;rsquo;s Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;!--TODO:
+
+* mention that image aliases that are not in the same repository are not updated - either on push or pull
+* but that multiple tags in one repo are pushed if you don&#39;t specify the `:tag` (ie, `imagename` does not always mean `imagename:latest`)
+* show what happens for non-latest, and when there are more than one tag in a repo
+* explain the fully-qualified repo/image name
+* explain how to remove an image from DTR --&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

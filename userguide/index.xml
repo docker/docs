@@ -1,0 +1,2658 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Userguides on Docker Docs</title>
+    <link>http://localhost/userguide/</link>
+    <description>Recent content in Userguides on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/userguide/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Apply custom metadata</title>
+      <link>http://localhost/userguide/labels-custom-metadata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/userguide/labels-custom-metadata/</guid>
+      <description>
+
+&lt;h1 id=&#34;apply-custom-metadata&#34;&gt;Apply custom metadata&lt;/h1&gt;
+
+&lt;p&gt;You can apply metadata to your images, containers, or daemons via
+labels. Metadata can serve a wide range of uses. Use labels to add notes or
+licensing information to an image or to identify a host.&lt;/p&gt;
+
+&lt;p&gt;A label is a &lt;code&gt;&amp;lt;key&amp;gt;&lt;/code&gt; / &lt;code&gt;&amp;lt;value&amp;gt;&lt;/code&gt; pair. Docker stores the label values as
+&lt;em&gt;strings&lt;/em&gt;. You can specify multiple labels but each &lt;code&gt;&amp;lt;key&amp;gt;&lt;/code&gt; / &lt;code&gt;&amp;lt;value&amp;gt;&lt;/code&gt; must be
+unique to avoid overwriting. If you specify the same &lt;code&gt;key&lt;/code&gt; several times but with
+different values, newer labels overwrite previous labels. Docker uses
+the last &lt;code&gt;key=value&lt;/code&gt; you supply.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Support for daemon-labels was added in Docker 1.4.1. Labels on
+containers and images are new in Docker 1.6.0&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;label-keys-namespaces&#34;&gt;Label keys (namespaces)&lt;/h2&gt;
+
+&lt;p&gt;Docker puts no hard restrictions on the label &lt;code&gt;key&lt;/code&gt; you. However, labels with
+simple keys can conflict. For example, you can categorize your images by using a
+chip &amp;ldquo;architecture&amp;rdquo; label:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL architecture=&amp;quot;amd64&amp;quot;
+
+LABEL architecture=&amp;quot;ARMv7&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But a user can label images by building architectural style:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL architecture=&amp;quot;Art Nouveau&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To prevent naming conflicts, Docker namespaces label keys using a reverse domain
+notation. Use the following guidelines to name your keys:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;All (third-party) tools should prefix their keys with the
+reverse DNS notation of a domain controlled by the author. For
+example, &lt;code&gt;com.example.some-label&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The &lt;code&gt;com.docker.*&lt;/code&gt;, &lt;code&gt;io.docker.*&lt;/code&gt; and &lt;code&gt;org.dockerproject.*&lt;/code&gt; namespaces are
+reserved for Docker&amp;rsquo;s internal use.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Keys should only consist of lower-cased alphanumeric characters,
+dots and dashes (for example, &lt;code&gt;[a-z0-9-.]&lt;/code&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Keys should start &lt;em&gt;and&lt;/em&gt; end with an alpha numeric character&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Keys may not contain consecutive dots or dashes.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Keys &lt;em&gt;without&lt;/em&gt; namespace (dots) are reserved for CLI use. This allows end-
+users to add metadata to their containers and images without having to type
+cumbersome namespaces on the command-line.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These are guidelines and Docker does not &lt;em&gt;enforce&lt;/em&gt; them. Failing following these
+guidelines can result in conflicting labels. If you&amp;rsquo;re building a tool that uses
+labels, you &lt;em&gt;should&lt;/em&gt; use namespaces for your label keys.&lt;/p&gt;
+
+&lt;h2 id=&#34;store-structured-data-in-labels&#34;&gt;Store structured data in labels&lt;/h2&gt;
+
+&lt;p&gt;Label values can contain any data type that can be stored as a string. For
+example, consider this JSON:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    &amp;quot;Description&amp;quot;: &amp;quot;A containerized foobar&amp;quot;,
+    &amp;quot;Usage&amp;quot;: &amp;quot;docker run --rm example/foobar [args]&amp;quot;,
+    &amp;quot;License&amp;quot;: &amp;quot;GPL&amp;quot;,
+    &amp;quot;Version&amp;quot;: &amp;quot;0.0.1-beta&amp;quot;,
+    &amp;quot;aBoolean&amp;quot;: true,
+    &amp;quot;aNumber&amp;quot; : 0.01234,
+    &amp;quot;aNestedArray&amp;quot;: [&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can store this struct in a label by serializing it to a string first:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL com.example.image-specs=&amp;quot;{\&amp;quot;Description\&amp;quot;:\&amp;quot;A containerized foobar\&amp;quot;,\&amp;quot;Usage\&amp;quot;:\&amp;quot;docker run --rm example\\/foobar [args]\&amp;quot;,\&amp;quot;License\&amp;quot;:\&amp;quot;GPL\&amp;quot;,\&amp;quot;Version\&amp;quot;:\&amp;quot;0.0.1-beta\&amp;quot;,\&amp;quot;aBoolean\&amp;quot;:true,\&amp;quot;aNumber\&amp;quot;:0.01234,\&amp;quot;aNestedArray\&amp;quot;:[\&amp;quot;a\&amp;quot;,\&amp;quot;b\&amp;quot;,\&amp;quot;c\&amp;quot;]}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While it is &lt;em&gt;possible&lt;/em&gt; to store structured data in label values, Docker treats
+this data as a &amp;lsquo;regular&amp;rsquo; string. This means that Docker doesn&amp;rsquo;t offer ways to
+query (filter) based on nested properties. If your tool needs to filter on
+nested properties, the tool itself should implement this.&lt;/p&gt;
+
+&lt;h2 id=&#34;add-labels-to-images-the-label-instruction&#34;&gt;Add labels to images; the &lt;code&gt;LABEL&lt;/code&gt; instruction&lt;/h2&gt;
+
+&lt;p&gt;Adding labels to an image:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL [&amp;lt;namespace&amp;gt;.]&amp;lt;key&amp;gt;[=&amp;lt;value&amp;gt;] ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;LABEL&lt;/code&gt; instruction adds a label to your image, optionally setting its value.
+Use surrounding quotes or backslashes for labels that contain
+white space character:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL vendor=ACME\ Incorporated
+LABEL com.example.version.is-beta
+LABEL com.example.version=&amp;quot;0.0.1-beta&amp;quot;
+LABEL com.example.release-date=&amp;quot;2015-02-12&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;LABEL&lt;/code&gt; instruction supports setting multiple labels in a single instruction
+using this notation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL com.example.version=&amp;quot;0.0.1-beta&amp;quot; com.example.release-date=&amp;quot;2015-02-12&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Wrapping is allowed by using a backslash (&lt;code&gt;\&lt;/code&gt;) as continuation marker:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL vendor=ACME\ Incorporated \
+      com.example.is-beta \
+      com.example.version=&amp;quot;0.0.1-beta&amp;quot; \
+      com.example.release-date=&amp;quot;2015-02-12&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker recommends you add multiple labels in a single &lt;code&gt;LABEL&lt;/code&gt; instruction. Using
+individual instructions for each label can result in an inefficient image. This
+is because each &lt;code&gt;LABEL&lt;/code&gt; instruction in a Dockerfile produces a new IMAGE layer.&lt;/p&gt;
+
+&lt;p&gt;You can view the labels via the &lt;code&gt;docker inspect&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker inspect 4fa6e0f0c678
+
+...
+&amp;quot;Labels&amp;quot;: {
+    &amp;quot;vendor&amp;quot;: &amp;quot;ACME Incorporated&amp;quot;,
+    &amp;quot;com.example.is-beta&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;com.example.version&amp;quot;: &amp;quot;0.0.1-beta&amp;quot;,
+    &amp;quot;com.example.release-date&amp;quot;: &amp;quot;2015-02-12&amp;quot;
+}
+...
+
+# Inspect labels on container
+$ docker inspect -f &amp;quot;{{json .Config.Labels }}&amp;quot; 4fa6e0f0c678
+
+{&amp;quot;Vendor&amp;quot;:&amp;quot;ACME Incorporated&amp;quot;,&amp;quot;com.example.is-beta&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;com.example.version&amp;quot;:&amp;quot;0.0.1-beta&amp;quot;,&amp;quot;com.example.release-date&amp;quot;:&amp;quot;2015-02-12&amp;quot;}
+
+# Inspect labels on images
+$ docker inspect -f &amp;quot;{{json .ContainerConfig.Labels }}&amp;quot; myimage
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;query-labels&#34;&gt;Query labels&lt;/h2&gt;
+
+&lt;p&gt;Besides storing metadata, you can filter images and containers by label. To list all
+running containers that the &lt;code&gt;com.example.is-beta&lt;/code&gt; label:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# List all running containers that have a `com.example.is-beta` label
+$ docker ps --filter &amp;quot;label=com.example.is-beta&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;List all running containers with a &lt;code&gt;color&lt;/code&gt; label of &lt;code&gt;blue&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps --filter &amp;quot;label=color=blue&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;List all images with &lt;code&gt;vendor&lt;/code&gt; &lt;code&gt;ACME&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images --filter &amp;quot;label=vendor=ACME&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;daemon-labels&#34;&gt;Daemon labels&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;docker -d \
+  --dns 8.8.8.8 \
+  --dns 8.8.4.4 \
+  -H unix:///var/run/docker.sock \
+  --label com.example.environment=&amp;quot;production&amp;quot; \
+  --label com.example.storage=&amp;quot;ssd&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These labels appear as part of the &lt;code&gt;docker info&lt;/code&gt; output for the daemon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker -D info
+Containers: 12
+Images: 672
+Storage Driver: aufs
+ Root Dir: /var/lib/docker/aufs
+ Backing Filesystem: extfs
+ Dirs: 697
+Execution Driver: native-0.2
+Logging Driver: json-file
+Kernel Version: 3.13.0-32-generic
+Operating System: Ubuntu 14.04.1 LTS
+CPUs: 1
+Total Memory: 994.1 MiB
+Name: docker.example.com
+ID: RC3P:JTCT:32YS:XYSB:YUBG:VFED:AAJZ:W3YW:76XO:D7NN:TEVU:UCRW
+Debug mode (server): false
+Debug mode (client): true
+File Descriptors: 11
+Goroutines: 14
+EventsListeners: 0
+Init Path: /usr/bin/docker
+Docker Root Dir: /var/lib/docker
+WARNING: No swap limit support
+Labels:
+ com.example.environment=production
+ com.example.storage=ssd
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker images test</title>
+      <link>http://localhost/userguide/level1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/userguide/level1/</guid>
+      <description>
+
+&lt;p&gt;&lt;a title=&#34;back&#34; class=&#34;dockerfile back&#34; href=&#34;http://localhost/userguide/dockerimages/#creating-our-own-images&#34;&gt;Back&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;dockerfile-tutorial&#34;&gt;Dockerfile tutorial&lt;/h1&gt;
+
+&lt;h2 id=&#34;test-your-dockerfile-knowledge-level-1&#34;&gt;Test your Dockerfile knowledge - Level 1&lt;/h2&gt;
+
+&lt;h3 id=&#34;questions&#34;&gt;Questions&lt;/h3&gt;
+
+&lt;div name=&#34;level1_questions&#34;&gt;
+    What is the Dockerfile instruction to specify the base image ?&lt;br /&gt;
+    &lt;input type=&#34;text&#34; class=&#34;level&#34; id=&#34;level1_q0&#34;/&gt;
+    &lt;div class=&#34;alert alert-error level_error&#34; id=&#34;level1_error0&#34; style=&#34;display:none;&#34;&gt;The right answer was &lt;code&gt;FROM&lt;/code&gt;&lt;/div&gt;
+    &lt;br&gt;
+    What is the Dockerfile instruction to execute any commands on the current image and commit the results?&lt;br /&gt;
+    &lt;input type=&#34;text&#34; class=&#34;level&#34; id=&#34;level1_q1&#34;/&gt;
+    &lt;div class=&#34;alert alert-error level_error&#34; id=&#34;level1_error1&#34; style=&#34;display:none;&#34;&gt;The right answer was &lt;code&gt;RUN&lt;/code&gt;&lt;/div&gt;
+    &lt;br&gt;
+    What is the Dockerfile instruction to specify the maintainer of the Dockerfile?&lt;br /&gt;
+    &lt;input type=&#34;text&#34; class=&#34;level&#34; id=&#34;level1_q2&#34;/&gt;
+    &lt;div class=&#34;alert alert-error level_error&#34; id=&#34;level1_error2&#34; style=&#34;display:none;&#34;&gt;The right answer was &lt;code&gt;MAINTAINER&lt;/code&gt;&lt;/div&gt;
+    &lt;br&gt;
+    What is the character used to add comment in Dockerfiles?&lt;br /&gt;
+    &lt;input type=&#34;text&#34; class=&#34;level&#34; id=&#34;level1_q3&#34;/&gt;
+    &lt;div class=&#34;alert alert-error level_error&#34; id=&#34;level1_error3&#34; style=&#34;display:none;&#34;&gt;The right answer was &lt;code&gt;#&lt;/code&gt;&lt;/div&gt;
+    &lt;p&gt;
+    &lt;div class=&#34;alert alert-success&#34; id=&#34;all_good&#34; style=&#34;display:none;&#34;&gt;Congratulations, you made no mistake!&lt;br /&gt;
+    Tell the world &lt;a href=&#34;https://twitter.com/share&#34; class=&#34;twitter-share-button&#34; data-url=&#34;http://www.docker.io/learn/dockerfile/level1/&#34; data-text=&#34;I just successfully answered questions of the #Dockerfile tutorial Level 1. What&#39;s your score?&#34; data-via=&#34;docker&#34; &gt;Tweet&lt;/a&gt;&lt;br /&gt;
+    And try the next challenge: &lt;a href=&#34;#fill-the-dockerfile&#34;&gt;Fill the Dockerfile&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert alert-error&#34; id=&#34;no_good&#34; style=&#34;display:none;&#34;&gt;Your Dockerfile skills are not yet perfect, try to take the time to read this tutorial again.&lt;/div&gt;
+    &lt;div class=&#34;alert alert-block&#34; id=&#34;some_good&#34; style=&#34;display:none;&#34;&gt;You&#39;re almost there! Read carefully the sections corresponding to your errors, and take the test again!&lt;/div&gt;
+    &lt;/p&gt;
+    &lt;button class=&#34;btn btn-primary&#34; id=&#34;check_level1_questions&#34;&gt;Check your answers&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&#34;fill-the-dockerfile&#34;&gt;Fill the Dockerfile&lt;/h3&gt;
+
+&lt;p&gt;Your best friend Eric Bardin sent you a Dockerfile, but some parts were lost in the ocean. Can you find the missing parts?
+&lt;div class=&#34;form-inline&#34;&gt;
+&lt;pre&gt;
+&amp;#35; This is a Dockerfile to create an image with Memcached and Emacs installed. &lt;br&gt;
+&amp;#35; VERSION       1.0&lt;br&gt;
+&amp;#35; use the ubuntu base image provided by dotCloud
+&lt;input type=&#34;text&#34; class=&#34;l_fill&#34; id=&#34;from&#34; /&gt; ub&lt;input type=&#34;text&#34; class=&#34;l_fill&#34; id=&#34;ubuntu&#34; /&gt;&lt;br&gt;
+&lt;input type=&#34;text&#34; class=&#34;l_fill&#34; id=&#34;maintainer&#34; /&gt; E&lt;input type=&#34;text&#34; class=&#34;l_fill&#34; id=&#34;eric&#34; /&gt; B&lt;input type=&#34;text&#34; class=&#34;l_fill&#34; id=&#34;bardin&#34; /&gt;, eric.bardin@dotcloud.com&lt;br&gt;
+&amp;#35; make sure the package repository is up to date
+&lt;input type=&#34;text&#34; class=&#34;l_fill&#34; id=&#34;run0&#34;/&gt; echo &amp;ldquo;deb &lt;a href=&#34;http://archive.ubuntu.com/ubuntu&#34;&gt;http://archive.ubuntu.com/ubuntu&lt;/a&gt; precise main universe&amp;rdquo; &amp;gt; /etc/apt/sources.list
+&lt;input type=&#34;text&#34; class=&#34;l_fill&#34; id=&#34;run1&#34; /&gt; apt-get update&lt;br&gt;
+&amp;#35; install memcached
+RUN apt-get install -y &lt;input type=&#34;text&#34; class=&#34;l_fill&#34; id=&#34;memcached&#34; /&gt;&lt;br&gt;
+&amp;#35; install emacs
+&lt;input type=&#34;text&#34; class=&#34;l_fill&#34; id=&#34;run2&#34;/&gt; apt-get install -y emacs23
+&lt;/pre&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;alert alert-success&#34; id=&#34;dockerfile_ok&#34; style=&#34;display:none;&#34;&gt;Congratulations, you successfully restored Eric&amp;rsquo;s Dockerfile! You are ready to containerize the world!.&lt;br /&gt;
+Tell the world! &lt;a href=&#34;https://twitter.com/share&#34; class=&#34;twitter-share-button&#34; data-url=&#34;https://www.docker.io/learn/dockerfile/level1/&#34; data-text=&#34;I just successfully completed the &#39;Fill the Dockerfile&#39; challenge of the #Dockerfile tutorial Level 1&#34; data-via=&#34;docker&#34; &gt;Tweet&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&#34;alert alert-error&#34; id=&#34;dockerfile_ko&#34; style=&#34;display:none;&#34;&gt;Wooops, there are one or more errors in the Dockerfile. Try again.&lt;/div&gt;
+&lt;br&gt;
+&lt;button class=&#34;btn btn-primary&#34; id=&#34;check_level1_fill&#34;&gt;Check the Dockerfile&lt;/button&gt;&lt;/p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;what-s-next&#34;&gt;What&amp;rsquo;s next?&lt;/h2&gt;
+
+&lt;p&gt;In the next level, we will go into more detail about how to specify which command should be executed when the container starts,
+which user to use, and how expose a particular port.&lt;/p&gt;
+
+&lt;p&gt;&lt;a title=&#34;back&#34; class=&#34;btn btn-primary back&#34; href=&#34;http://localhost/userguide/dockerimages/#creating-our-own-images&#34;&gt;Back&lt;/a&gt;
+&lt;a title=&#34;next level&#34; class=&#34;btn btn-primary&#34; href=&#34;http://localhost/userguide/level2&#34;&gt;Go to the next level&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker images test</title>
+      <link>http://localhost/userguide/level2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/userguide/level2/</guid>
+      <description>
+
+&lt;p&gt;&lt;a title=&#34;back&#34; class=&#34;dockerfile back&#34; href=&#34;http://localhost/userguide/dockerimages/#creating-our-own-images&#34;&gt;Back&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;#Dockerfile tutorial&lt;/p&gt;
+
+&lt;h2 id=&#34;test-your-dockerfile-knowledge-level-2&#34;&gt;Test your Dockerfile knowledge - Level 2&lt;/h2&gt;
+
+&lt;h3 id=&#34;questions&#34;&gt;Questions:&lt;/h3&gt;
+
+&lt;div class=&#34;level_questions&#34;&gt;
+What is the Dockerfile instruction to specify the base image?&lt;br&gt;
+    &lt;input type=&#34;text&#34; class=&#34;level&#34;&gt;
+    &lt;div style=&#34;display:none;&#34; id=&#34;level2_error0&#34; class=&#34;alert alert-error level_error&#34;&gt;The right answer was &lt;code&gt;FROM&lt;/code&gt;&lt;/div&gt;&lt;br&gt;
+    Which Dockerfile instruction sets the default command for your image?&lt;br&gt;
+    &lt;input type=&#34;text&#34; class=&#34;level&#34;&gt;
+    &lt;div style=&#34;display:none;&#34; id=&#34;level2_error4&#34; class=&#34;alert alert-error level_error&#34;&gt;The right answer was &lt;code&gt;ENTRYPOINT&lt;/code&gt; or &lt;code&gt;CMD&lt;/code&gt;&lt;/div&gt;&lt;br&gt;
+    What is the character used to add comments in Dockerfiles?&lt;br&gt;
+    &lt;input type=&#34;text&#34; class=&#34;level&#34;&gt;
+    &lt;div style=&#34;display:none;&#34; id=&#34;level2_error3&#34; class=&#34;alert alert-error level_error&#34;&gt;The right answer was &lt;code&gt;#&lt;/code&gt;&lt;/div&gt;&lt;br&gt;
+    Which Dockerfile instruction sets the username to use when running the image?&lt;br&gt;
+    &lt;input type=&#34;text&#34; class=&#34;level&#34;&gt;
+    &lt;div style=&#34;display:none;&#34; id=&#34;level2_error5&#34; class=&#34;alert alert-error level_error&#34;&gt;The right answer was &lt;code&gt;USER&lt;/code&gt;&lt;/div&gt;&lt;br&gt;
+    What is the Dockerfile instruction to execute any command on the current image and commit the results?&lt;br&gt;
+    &lt;input type=&#34;text&#34; class=&#34;level&#34;&gt;
+    &lt;div style=&#34;display:none;&#34; id=&#34;level2_error1&#34; class=&#34;alert alert-error level_error&#34;&gt;The right answer was &lt;code&gt;RUN&lt;/code&gt;&lt;/div&gt;&lt;br&gt;
+    Which Dockerfile instruction sets ports to be exposed when running the image?&lt;br&gt;
+    &lt;input type=&#34;text&#34; class=&#34;level&#34;&gt;
+    &lt;div style=&#34;display:none;&#34; id=&#34;level2_error6&#34; class=&#34;alert alert-error level_error&#34;&gt;The right answer was &lt;code&gt;EXPOSE&lt;/code&gt;&lt;/div&gt;&lt;br&gt;
+    What is the Dockerfile instruction to specify the maintainer of the Dockerfile?&lt;br&gt;
+    &lt;input type=&#34;text&#34; class=&#34;level&#34;&gt;
+    &lt;div style=&#34;display:none;&#34; id=&#34;level2_error2&#34; class=&#34;alert alert-error level_error&#34;&gt;The right answer was &lt;code&gt;MAINTAINER&lt;/code&gt;&lt;/div&gt;&lt;br&gt;
+    Which Dockerfile instruction lets you trigger a command as soon as the container starts?&lt;br&gt;
+    &lt;input type=&#34;text&#34; class=&#34;level&#34;&gt;
+    &lt;div style=&#34;display:none;&#34; id=&#34;level2_error7&#34; class=&#34;alert alert-error level_error&#34;&gt;The right answer was &lt;code&gt;ENTRYPOINT&lt;/code&gt; or &lt;code&gt;CMD&lt;/code&gt;&lt;/div&gt;&lt;br&gt;
+    &lt;p&gt;
+    
+    &lt;div class=&#34;alert alert-success&#34; id=&#34;all_good&#34; style=&#34;display:none;&#34;&gt;Congratulations, you made no mistake!&lt;br /&gt;
+    Tell the world &lt;a href=&#34;https://twitter.com/share&#34; class=&#34;twitter-share-button&#34; data-url=&#34;http://www.docker.io/learn/dockerfile/level1/&#34; data-text=&#34;I just successfully answered questions of the #Dockerfile tutorial Level 1. What&#39;s your score?&#34; data-via=&#34;docker&#34; &gt;Tweet&lt;/a&gt;&lt;br /&gt;
+    And try the next challenge: &lt;a href=&#34;#fill-the-dockerfile&#34;&gt;Fill the Dockerfile&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;alert alert-error&#34; id=&#34;no_good&#34; style=&#34;display:none;&#34;&gt;Your Dockerfile skills are not yet perfect, try to take the time to read this tutorial again.&lt;/div&gt;
+    &lt;div class=&#34;alert alert-block&#34; id=&#34;some_good&#34; style=&#34;display:none;&#34;&gt;You&#39;re almost there! Read carefully the sections corresponding to your errors, and take the test again!&lt;/div&gt;
+    &lt;/p&gt;
+    &lt;button class=&#34;btn btn-primary&#34; id=&#34;check_level2_questions&#34;&gt;Check your answers&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&#34;fill-the-dockerfile&#34;&gt;Fill the Dockerfile&lt;/h3&gt;
+
+&lt;p&gt;&lt;br&gt;
+Your best friend Roberto Hashioka sent you a Dockerfile, but some parts were lost in the ocean. Can you find the missing parts?
+&lt;div class=&#34;form-inline&#34;&gt;
+&lt;pre&gt;
+&amp;#35; Redis
+&amp;#35;
+&amp;#35; VERSION       0.42
+&amp;#35;
+&amp;#35; use the ubuntu base image provided by dotCloud
+&lt;input id=&#34;from&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt;  ub&lt;input id=&#34;ubuntu&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt;&lt;br&gt;
+MAINT&lt;input id=&#34;maintainer&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt; Ro&lt;input id=&#34;roberto&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt; Ha&lt;input id=&#34;hashioka&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt; roberto.hashioka@dotcloud.com&lt;br&gt;
+&amp;#35; make sure the package repository is up to date
+&lt;input id=&#34;run0&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt; echo &amp;ldquo;deb &lt;a href=&#34;http://archive.ubuntu.com/ubuntu&#34;&gt;http://archive.ubuntu.com/ubuntu&lt;/a&gt; precise main universe&amp;rdquo; &amp;gt; /etc/apt/sources.list
+&lt;input id=&#34;run1&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt; apt-get update&lt;br&gt;
+&amp;#35; install wget (required for redis installation)
+&lt;input id=&#34;run2&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt; apt-get install -y wget&lt;br&gt;
+&amp;#35; install make (required for redis installation)
+&lt;input id=&#34;run3&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt; apt-get install -y make&lt;br&gt;
+&amp;#35; install gcc (required for redis installation)
+RUN apt-get install -y &lt;input id=&#34;gcc&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt;&lt;br&gt;
+&amp;#35; install apache2
+&lt;input id=&#34;run4&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt; wget &lt;a href=&#34;http://download.redis.io/redis-stable.tar.gz&#34;&gt;http://download.redis.io/redis-stable.tar.gz&lt;/a&gt;
+&lt;input id=&#34;run5&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt;tar xvzf redis-stable.tar.gz
+&lt;input id=&#34;run6&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt;cd redis-stable &amp;amp;&amp;amp; make &amp;amp;&amp;amp; make install&lt;br&gt;
+&amp;#35; launch redis when starting the image
+&lt;input id=&#34;entrypoint&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt; [&amp;ldquo;redis-server&amp;rdquo;]&lt;br&gt;
+&amp;#35; run as user dameon
+&lt;input id=&#34;user&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt; daemon&lt;br&gt;
+&amp;#35; expose port 6379
+&lt;input id=&#34;expose&#34; class=&#34;l_fill&#34; type=&#34;text&#34;&gt; 6379
+&lt;/pre&gt;
+&lt;div class=&#34;alert alert-success&#34; id=&#34;dockerfile_ok&#34; style=&#34;display:none;&#34;&gt;Congratulations, you successfully restored Roberto&amp;rsquo;s Dockerfile! You are ready to containerize the world!.&lt;br /&gt;
+    Tell the world! &lt;a href=&#34;https://twitter.com/share&#34; class=&#34;twitter-share-button&#34; data-url=&#34;http://www.docker.io/learn/dockerfile/level2/&#34; data-text=&#34;I just successfully completed the &#39;Dockerfill&#39; challenge of the #Dockerfile tutorial Level 2&#34; data-via=&#34;docker&#34; &gt;Tweet&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&#34;alert alert-error&#34; id=&#34;dockerfile_ko&#34; style=&#34;display:none;&#34;&gt;Wooops, there are one or more errors in the Dockerfile. Try again.&lt;/div&gt;
+&lt;br&gt;
+&lt;button class=&#34;btn btn-primary&#34; id=&#34;check_level2_fill&#34;&gt;Check the Dockerfile&lt;/button&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;what-s-next&#34;&gt;What&amp;rsquo;s next?&lt;/h2&gt;
+
+&lt;p&gt;&lt;p&gt;
+Thanks for going through our tutorial! We will be posting Level 3 in the future.&lt;/p&gt;
+
+&lt;p&gt;To improve your Dockerfile writing skills even further, visit the &lt;a href=&#34;https://docs.docker.com/articles/dockerfile_best-practices/&#34;&gt;Dockerfile best practices page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a title=&#34;creating our own images&#34; class=&#34;btn btn-primary&#34; href=&#34;http://localhost/userguide/dockerimages/#creating-our-own-images&#34;&gt;Back to the Docs!&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dockerizing applications: A &#39;Hello world&#39;</title>
+      <link>http://localhost/userguide/dockerizing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/userguide/dockerizing/</guid>
+      <description>
+
+&lt;h1 id=&#34;dockerizing-applications-a-hello-world&#34;&gt;Dockerizing applications: A &amp;ldquo;Hello world&amp;rdquo;&lt;/h1&gt;
+
+&lt;p&gt;&lt;em&gt;So what&amp;rsquo;s this Docker thing all about?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker allows you to run applications inside containers. Running an
+application inside a container takes a single command: &lt;code&gt;docker run&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; if you are using a remote Docker daemon, such as Boot2Docker,
+then &lt;em&gt;do not&lt;/em&gt; type the &lt;code&gt;sudo&lt;/code&gt; before the &lt;code&gt;docker&lt;/code&gt; commands shown in the
+documentation&amp;rsquo;s examples.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;hello-world&#34;&gt;Hello world&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s try it now.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run ubuntu:14.04 /bin/echo &#39;Hello world&#39;
+Hello world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And you just launched your first container!&lt;/p&gt;
+
+&lt;p&gt;So what just happened? Let&amp;rsquo;s step through what the &lt;code&gt;docker run&lt;/code&gt; command
+did.&lt;/p&gt;
+
+&lt;p&gt;First we specified the &lt;code&gt;docker&lt;/code&gt; binary and the command we wanted to
+execute, &lt;code&gt;run&lt;/code&gt;. The &lt;code&gt;docker run&lt;/code&gt; combination &lt;em&gt;runs&lt;/em&gt; containers.&lt;/p&gt;
+
+&lt;p&gt;Next we specified an image: &lt;code&gt;ubuntu:14.04&lt;/code&gt;. This is the source of the container
+we ran. Docker calls this an image. In this case we used an Ubuntu 14.04
+operating system image.&lt;/p&gt;
+
+&lt;p&gt;When you specify an image, Docker looks first for the image on your
+Docker host. If it can&amp;rsquo;t find it then it downloads the image from the public
+image registry: &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Next we told Docker what command to run inside our new container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/bin/echo &#39;Hello world&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When our container was launched Docker created a new Ubuntu 14.04
+environment and then executed the &lt;code&gt;/bin/echo&lt;/code&gt; command inside it. We saw
+the result on the command line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Hello world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So what happened to our container after that? Well Docker containers
+only run as long as the command you specify is active. Here, as soon as
+&lt;code&gt;Hello world&lt;/code&gt; was echoed, the container stopped.&lt;/p&gt;
+
+&lt;h2 id=&#34;an-interactive-container&#34;&gt;An interactive container&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s try the &lt;code&gt;docker run&lt;/code&gt; command again, this time specifying a new
+command to run in our container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -t -i ubuntu:14.04 /bin/bash
+root@af8bae53bdd3:/#
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we&amp;rsquo;ve again specified the &lt;code&gt;docker run&lt;/code&gt; command and launched an
+&lt;code&gt;ubuntu:14.04&lt;/code&gt; image. But we&amp;rsquo;ve also passed in two flags: &lt;code&gt;-t&lt;/code&gt; and &lt;code&gt;-i&lt;/code&gt;.
+The &lt;code&gt;-t&lt;/code&gt; flag assigns a pseudo-tty or terminal inside our new container
+and the &lt;code&gt;-i&lt;/code&gt; flag allows us to make an interactive connection by
+grabbing the standard in (&lt;code&gt;STDIN&lt;/code&gt;) of the container.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve also specified a new command for our container to run:
+&lt;code&gt;/bin/bash&lt;/code&gt;. This will launch a Bash shell inside our container.&lt;/p&gt;
+
+&lt;p&gt;So now when our container is launched we can see that we&amp;rsquo;ve got a
+command prompt inside it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@af8bae53bdd3:/#
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s try running some commands inside our container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@af8bae53bdd3:/# pwd
+/
+root@af8bae53bdd3:/# ls
+bin boot dev etc home lib lib64 media mnt opt proc root run sbin srv sys tmp usr var
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see we&amp;rsquo;ve run the &lt;code&gt;pwd&lt;/code&gt; to show our current directory and can
+see we&amp;rsquo;re in the &lt;code&gt;/&lt;/code&gt; root directory. We&amp;rsquo;ve also done a directory listing
+of the root directory which shows us what looks like a typical Linux
+file system.&lt;/p&gt;
+
+&lt;p&gt;You can play around inside this container and when you&amp;rsquo;re done you can
+use the &lt;code&gt;exit&lt;/code&gt; command or enter Ctrl-D to finish.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@af8bae53bdd3:/# exit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As with our previous container, once the Bash shell process has
+finished, the container is stopped.&lt;/p&gt;
+
+&lt;h2 id=&#34;a-daemonized-hello-world&#34;&gt;A daemonized Hello world&lt;/h2&gt;
+
+&lt;p&gt;Now a container that runs a command and then exits has some uses but
+it&amp;rsquo;s not overly helpful. Let&amp;rsquo;s create a container that runs as a daemon,
+like most of the applications we&amp;rsquo;re probably going to run with Docker.&lt;/p&gt;
+
+&lt;p&gt;Again we can do this with the &lt;code&gt;docker run&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d ubuntu:14.04 /bin/sh -c &amp;quot;while true; do echo hello world; sleep 1; done&amp;quot;
+1e5535038e285177d5214659a068137486f96ee5c2e85a4ac52dc83f2ebe4147
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Wait, what? Where&amp;rsquo;s our &amp;ldquo;hello world&amp;rdquo; output? Let&amp;rsquo;s look at what we&amp;rsquo;ve run here.
+It should look pretty familiar. We ran &lt;code&gt;docker run&lt;/code&gt; but this time we
+specified a flag: &lt;code&gt;-d&lt;/code&gt;. The &lt;code&gt;-d&lt;/code&gt; flag tells Docker to run the container
+and put it in the background, to daemonize it.&lt;/p&gt;
+
+&lt;p&gt;We also specified the same image: &lt;code&gt;ubuntu:14.04&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Finally, we specified a command to run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/bin/sh -c &amp;quot;while true; do echo hello world; sleep 1; done&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is the (hello) world&amp;rsquo;s silliest daemon: a shell script that echoes
+&lt;code&gt;hello world&lt;/code&gt; forever.&lt;/p&gt;
+
+&lt;p&gt;So why aren&amp;rsquo;t we seeing any &lt;code&gt;hello world&lt;/code&gt;&amp;rsquo;s? Instead Docker has returned
+a really long string:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1e5535038e285177d5214659a068137486f96ee5c2e85a4ac52dc83f2ebe4147
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This really long string is called a &lt;em&gt;container ID&lt;/em&gt;. It uniquely
+identifies a container so we can work with it.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+The container ID is a bit long and unwieldy and a bit later
+on we&amp;rsquo;ll see a shorter ID and some ways to name our containers to make
+working with them easier.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We can use this container ID to see what&amp;rsquo;s happening with our &lt;code&gt;hello world&lt;/code&gt; daemon.&lt;/p&gt;
+
+&lt;p&gt;Firstly let&amp;rsquo;s make sure our container is running. We can
+do that with the &lt;code&gt;docker ps&lt;/code&gt; command. The &lt;code&gt;docker ps&lt;/code&gt; command queries
+the Docker daemon for information about all the containers it knows
+about.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps
+CONTAINER ID  IMAGE         COMMAND               CREATED        STATUS       PORTS NAMES
+1e5535038e28  ubuntu:14.04  /bin/sh -c &#39;while tr  2 minutes ago  Up 1 minute        insane_babbage
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we can see our daemonized container. The &lt;code&gt;docker ps&lt;/code&gt; has returned some useful
+information about it, starting with a shorter variant of its container ID:
+&lt;code&gt;1e5535038e28&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We can also see the image we used to build it, &lt;code&gt;ubuntu:14.04&lt;/code&gt;, the command it
+is running, its status and an automatically assigned name,
+&lt;code&gt;insane_babbage&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Docker automatically names any containers you start, a
+little later on we&amp;rsquo;ll see how you can specify your own names.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Okay, so we now know it&amp;rsquo;s running. But is it doing what we asked it to do? To see this
+we&amp;rsquo;re going to look inside the container using the &lt;code&gt;docker logs&lt;/code&gt;
+command. Let&amp;rsquo;s use the container name Docker assigned.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker logs insane_babbage
+hello world
+hello world
+hello world
+. . .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;docker logs&lt;/code&gt; command looks inside the container and returns its standard
+output: in this case the output of our command &lt;code&gt;hello world&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Awesome! Our daemon is working and we&amp;rsquo;ve just created our first
+Dockerized application!&lt;/p&gt;
+
+&lt;p&gt;Now we&amp;rsquo;ve established we can create our own containers let&amp;rsquo;s tidy up
+after ourselves and stop our daemonized container. To do this we use the
+&lt;code&gt;docker stop&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker stop insane_babbage
+insane_babbage
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;docker stop&lt;/code&gt; command tells Docker to politely stop the running
+container. If it succeeds it will return the name of the container it
+has just stopped.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s check it worked with the &lt;code&gt;docker ps&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps
+CONTAINER ID  IMAGE         COMMAND               CREATED        STATUS       PORTS NAMES
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Excellent. Our container has been stopped.&lt;/p&gt;
+
+&lt;h1 id=&#34;next-steps&#34;&gt;Next steps&lt;/h1&gt;
+
+&lt;p&gt;Now we&amp;rsquo;ve seen how simple it is to get started with Docker. Let&amp;rsquo;s learn how to
+do some more advanced tasks.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/usingdocker&#34;&gt;Working With Containers&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Get started with Docker Hub</title>
+      <link>http://localhost/userguide/dockerrepos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/userguide/dockerrepos/</guid>
+      <description>
+
+&lt;h1 id=&#34;get-started-with-docker-hub&#34;&gt;Get started with Docker Hub&lt;/h1&gt;
+
+&lt;p&gt;So far you&amp;rsquo;ve learned how to use the command line to run Docker on your local host.
+You&amp;rsquo;ve learned how to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/usingdocker/&#34;&gt;pull down images&lt;/a&gt; to build containers
+from existing images and you&amp;rsquo;ve learned how to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerimages&#34;&gt;create your own images&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Next, you&amp;rsquo;re going to learn how to use the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; to
+simplify and enhance your Docker workflows.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; is a public registry maintained by Docker,
+Inc. It contains over 15,000 images you can download and use to build containers. It also
+provides authentication, work group structure, workflow tools like webhooks and build
+triggers, and privacy tools like private repositories for storing images you don&amp;rsquo;t want
+to share publicly.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-commands-and-docker-hub&#34;&gt;Docker commands and Docker Hub&lt;/h2&gt;
+
+&lt;p&gt;Docker itself provides access to Docker Hub services via the &lt;code&gt;docker search&lt;/code&gt;,
+&lt;code&gt;pull&lt;/code&gt;, &lt;code&gt;login&lt;/code&gt;, and &lt;code&gt;push&lt;/code&gt; commands. This page will show you how these commands work.&lt;/p&gt;
+
+&lt;h3 id=&#34;account-creation-and-login&#34;&gt;Account creation and login&lt;/h3&gt;
+
+&lt;p&gt;Typically, you&amp;rsquo;ll want to start by creating an account on Docker Hub (if you haven&amp;rsquo;t
+already) and logging in. You can create your account directly on
+&lt;a href=&#34;https://hub.docker.com/account/signup/&#34;&gt;Docker Hub&lt;/a&gt;, or by running:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker login
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will prompt you for a user name, which will become the public namespace for your
+public repositories.
+If your user name is available, Docker will prompt you to enter a password and your
+e-mail address. It will then automatically log you in. You can now commit and
+push your own images up to your repos on Docker Hub.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Your authentication credentials will be stored in the &lt;code&gt;.dockercfg&lt;/code&gt;
+authentication file in your home directory.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;searching-for-images&#34;&gt;Searching for images&lt;/h2&gt;
+
+&lt;p&gt;You can search the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; registry via its search
+interface or by using the command line interface. Searching can find images by image
+name, user name, or description:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker search centos
+NAME           DESCRIPTION                                     STARS     OFFICIAL   TRUSTED
+centos         Official CentOS 6 Image as of 12 April 2014     88
+tianon/centos  CentOS 5 and 6, created using rinse instea...   21
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There you can see two example results: &lt;code&gt;centos&lt;/code&gt; and &lt;code&gt;tianon/centos&lt;/code&gt;. The second
+result shows that it comes from the public repository of a user, named
+&lt;code&gt;tianon/&lt;/code&gt;, while the first result, &lt;code&gt;centos&lt;/code&gt;, doesn&amp;rsquo;t explicitly list a
+repository which means that it comes from the trusted top-level namespace for
+&lt;a href=&#34;http://localhost/userguide/userguide/docker-hub/official_repos&#34;&gt;Official Repositories&lt;/a&gt;. The &lt;code&gt;/&lt;/code&gt; character separates
+a user&amp;rsquo;s repository from the image name.&lt;/p&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve found the image you want, you can download it with &lt;code&gt;docker pull &amp;lt;imagename&amp;gt;&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull centos
+Pulling repository centos
+0b443ba03958: Download complete
+539c0211cd76: Download complete
+511136ea3c5a: Download complete
+7064731afe90: Download complete
+
+Status: Downloaded newer image for centos
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You now have an image from which you can run containers.&lt;/p&gt;
+
+&lt;h2 id=&#34;contributing-to-docker-hub&#34;&gt;Contributing to Docker Hub&lt;/h2&gt;
+
+&lt;p&gt;Anyone can pull public images from the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;
+registry, but if you would like to share your own images, then you must
+register first, as we saw in the &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerhub/&#34;&gt;first section of the Docker User
+Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;pushing-a-repository-to-docker-hub&#34;&gt;Pushing a repository to Docker Hub&lt;/h2&gt;
+
+&lt;p&gt;In order to push a repository to its registry, you need to have named an image
+or committed your container to a named image as we saw
+&lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerimages&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now you can push this repository to the registry designated by its name or tag.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker push yourname/newimage
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The image will then be uploaded and available for use by your team-mates and/or the
+community.&lt;/p&gt;
+
+&lt;h2 id=&#34;features-of-docker-hub&#34;&gt;Features of Docker Hub&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s take a closer look at some of the features of Docker Hub. You can find more
+information &lt;a href=&#34;https://docs.docker.com/docker-hub/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Private repositories&lt;/li&gt;
+&lt;li&gt;Organizations and teams&lt;/li&gt;
+&lt;li&gt;Automated Builds&lt;/li&gt;
+&lt;li&gt;Webhooks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;private-repositories&#34;&gt;Private repositories&lt;/h3&gt;
+
+&lt;p&gt;Sometimes you have images you don&amp;rsquo;t want to make public and share with
+everyone. So Docker Hub allows you to have private repositories. You can
+sign up for a plan &lt;a href=&#34;https://registry.hub.docker.com/plans/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;organizations-and-teams&#34;&gt;Organizations and teams&lt;/h3&gt;
+
+&lt;p&gt;One of the useful aspects of private repositories is that you can share
+them only with members of your organization or team. Docker Hub lets you
+create organizations where you can collaborate with your colleagues and
+manage private repositories. You can learn how to create and manage an organization
+&lt;a href=&#34;https://registry.hub.docker.com/account/organizations/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;automated-builds&#34;&gt;Automated Builds&lt;/h3&gt;
+
+&lt;p&gt;Automated Builds automate the building and updating of images from
+&lt;a href=&#34;https://www.github.com&#34;&gt;GitHub&lt;/a&gt; or &lt;a href=&#34;http://bitbucket.com&#34;&gt;BitBucket&lt;/a&gt;, directly on Docker
+Hub. It works by adding a commit hook to your selected GitHub or BitBucket repository,
+triggering a build and update when you push a commit.&lt;/p&gt;
+
+&lt;h4 id=&#34;to-setup-an-automated-build&#34;&gt;To setup an Automated Build&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Create a &lt;a href=&#34;https://hub.docker.com/&#34;&gt;Docker Hub account&lt;/a&gt; and login.&lt;/li&gt;
+&lt;li&gt;Link your GitHub or BitBucket account through the &lt;a href=&#34;https://registry.hub.docker.com/account/accounts/&#34;&gt;&amp;ldquo;Link Accounts&amp;rdquo;&lt;/a&gt; menu.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://registry.hub.docker.com/builds/add/&#34;&gt;Configure an Automated Build&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Pick a GitHub or BitBucket project that has a &lt;code&gt;Dockerfile&lt;/code&gt; that you want to build.&lt;/li&gt;
+&lt;li&gt;Pick the branch you want to build (the default is the &lt;code&gt;master&lt;/code&gt; branch).&lt;/li&gt;
+&lt;li&gt;Give the Automated Build a name.&lt;/li&gt;
+&lt;li&gt;Assign an optional Docker tag to the Build.&lt;/li&gt;
+&lt;li&gt;Specify where the &lt;code&gt;Dockerfile&lt;/code&gt; is located. The default is &lt;code&gt;/&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Once the Automated Build is configured it will automatically trigger a
+build and, in a few minutes, you should see your new Automated Build on the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;
+Registry. It will stay in sync with your GitHub and BitBucket repository until you
+deactivate the Automated Build.&lt;/p&gt;
+
+&lt;p&gt;If you want to see the status of your Automated Builds, you can go to your
+&lt;a href=&#34;https://registry.hub.docker.com/builds/&#34;&gt;Automated Builds page&lt;/a&gt; on the Docker Hub,
+and it will show you the status of your builds and their build history.&lt;/p&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve created an Automated Build you can deactivate or delete it. You
+cannot, however, push to an Automated Build with the &lt;code&gt;docker push&lt;/code&gt; command.
+You can only manage it by committing code to your GitHub or BitBucket
+repository.&lt;/p&gt;
+
+&lt;p&gt;You can create multiple Automated Builds per repository and configure them
+to point to specific &lt;code&gt;Dockerfile&lt;/code&gt;&amp;rsquo;s or Git branches.&lt;/p&gt;
+
+&lt;h4 id=&#34;build-triggers&#34;&gt;Build triggers&lt;/h4&gt;
+
+&lt;p&gt;Automated Builds can also be triggered via a URL on Docker Hub. This
+allows you to rebuild an Automated build image on demand.&lt;/p&gt;
+
+&lt;h3 id=&#34;webhooks&#34;&gt;Webhooks&lt;/h3&gt;
+
+&lt;p&gt;Webhooks are attached to your repositories and allow you to trigger an
+event when an image or updated image is pushed to the repository. With
+a webhook you can specify a target URL and a JSON payload that will be
+delivered when the image is pushed.&lt;/p&gt;
+
+&lt;p&gt;See the Docker Hub documentation for &lt;a href=&#34;https://docs.docker.com/docker-hub/repos/#webhooks&#34;&gt;more information on
+webhooks&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next steps&lt;/h2&gt;
+
+&lt;p&gt;Go and use Docker!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Get started with images</title>
+      <link>http://localhost/userguide/dockerimages/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/userguide/dockerimages/</guid>
+      <description>
+
+&lt;h1 id=&#34;get-started-with-images&#34;&gt;Get started with images&lt;/h1&gt;
+
+&lt;p&gt;In the &lt;a href=&#34;http://localhost/userguide/userguide/introduction/understanding-docker/&#34;&gt;introduction&lt;/a&gt; we&amp;rsquo;ve discovered that Docker
+images are the basis of containers. In the
+&lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerizing/&#34;&gt;previous&lt;/a&gt; &lt;a href=&#34;http://localhost/userguide/userguide/userguide/usingdocker/&#34;&gt;sections&lt;/a&gt;
+we&amp;rsquo;ve used Docker images that already exist, for example the &lt;code&gt;ubuntu&lt;/code&gt;
+image and the &lt;code&gt;training/webapp&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve also discovered that Docker stores downloaded images on the Docker
+host. If an image isn&amp;rsquo;t already present on the host then it&amp;rsquo;ll be
+downloaded from a registry: by default the
+&lt;a href=&#34;https://registry.hub.docker.com&#34;&gt;Docker Hub Registry&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In this section we&amp;rsquo;re going to explore Docker images a bit more
+including:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Managing and working with images locally on your Docker host;&lt;/li&gt;
+&lt;li&gt;Creating basic images;&lt;/li&gt;
+&lt;li&gt;Uploading images to &lt;a href=&#34;https://registry.hub.docker.com&#34;&gt;Docker Hub Registry&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;listing-images-on-the-host&#34;&gt;Listing images on the host&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s start with listing the images we have locally on our host. You can
+do this using the &lt;code&gt;docker images&lt;/code&gt; command like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY       TAG      IMAGE ID      CREATED      VIRTUAL SIZE
+training/webapp  latest   fc77f57ad303  3 weeks ago  280.5 MB
+ubuntu           13.10    5e019ab7bf6d  4 weeks ago  180 MB
+ubuntu           saucy    5e019ab7bf6d  4 weeks ago  180 MB
+ubuntu           12.04    74fe38d11401  4 weeks ago  209.6 MB
+ubuntu           precise  74fe38d11401  4 weeks ago  209.6 MB
+ubuntu           12.10    a7cf8ae4e998  4 weeks ago  171.3 MB
+ubuntu           quantal  a7cf8ae4e998  4 weeks ago  171.3 MB
+ubuntu           14.04    99ec81b80c55  4 weeks ago  266 MB
+ubuntu           latest   99ec81b80c55  4 weeks ago  266 MB
+ubuntu           trusty   99ec81b80c55  4 weeks ago  266 MB
+ubuntu           13.04    316b678ddf48  4 weeks ago  169.4 MB
+ubuntu           raring   316b678ddf48  4 weeks ago  169.4 MB
+ubuntu           10.04    3db9c44f4520  4 weeks ago  183 MB
+ubuntu           lucid    3db9c44f4520  4 weeks ago  183 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can see the images we&amp;rsquo;ve previously used in our &lt;a href=&#34;http://localhost/userguide/userguide/userguide/&#34;&gt;user guide&lt;/a&gt;.
+Each has been downloaded from &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; when we
+launched a container using that image.&lt;/p&gt;
+
+&lt;p&gt;We can see three crucial pieces of information about our images in the listing.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;What repository they came from, for example &lt;code&gt;ubuntu&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The tags for each image, for example &lt;code&gt;14.04&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The image ID of each image.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Previously, the &lt;code&gt;docker images&lt;/code&gt; command supported the &lt;code&gt;--tree&lt;/code&gt; and &lt;code&gt;--dot&lt;/code&gt;
+arguments, which displayed different visualizations of the image data. Docker
+core removed this functionality in the 1.7 version. If you liked this
+functionality, you can still find it in
+&lt;a href=&#34;https://github.com/justone/dockviz&#34;&gt;the third-party dockviz tool&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A repository potentially holds multiple variants of an image. In the case of
+our &lt;code&gt;ubuntu&lt;/code&gt; image we can see multiple variants covering Ubuntu 10.04, 12.04,
+12.10, 13.04, 13.10 and 14.04. Each variant is identified by a tag and you can
+refer to a tagged image like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ubuntu:14.04
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So when we run a container we refer to a tagged image like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -t -i ubuntu:14.04 /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If instead we wanted to run an Ubuntu 12.04 image we&amp;rsquo;d use:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -t -i ubuntu:12.04 /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t specify a variant, for example you just use &lt;code&gt;ubuntu&lt;/code&gt;, then Docker
+will default to using the &lt;code&gt;ubuntu:latest&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt;
+We recommend you always use a specific tagged image, for example
+&lt;code&gt;ubuntu:12.04&lt;/code&gt;. That way you always know exactly what variant of an image is
+being used.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;getting-a-new-image&#34;&gt;Getting a new image&lt;/h2&gt;
+
+&lt;p&gt;So how do we get new images? Well Docker will automatically download any image
+we use that isn&amp;rsquo;t already present on the Docker host. But this can potentially
+add some time to the launch of a container. If we want to pre-load an image we
+can download it using the &lt;code&gt;docker pull&lt;/code&gt; command. Let&amp;rsquo;s say we&amp;rsquo;d like to
+download the &lt;code&gt;centos&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull centos
+Pulling repository centos
+b7de3133ff98: Pulling dependent layers
+5cc9e91966f7: Pulling fs layer
+511136ea3c5a: Download complete
+ef52fb1fe610: Download complete
+. . .
+
+Status: Downloaded newer image for centos
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can see that each layer of the image has been pulled down and now we
+can run a container from this image and we won&amp;rsquo;t have to wait to
+download the image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -t -i centos /bin/bash
+bash-4.1#
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;finding-images&#34;&gt;Finding images&lt;/h2&gt;
+
+&lt;p&gt;One of the features of Docker is that a lot of people have created Docker
+images for a variety of purposes. Many of these have been uploaded to
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;. We can search these images on the
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; website.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/userguide/userguide/userguide/search.png&#34; alt=&#34;indexsearch&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;We can also search for images on the command line using the &lt;code&gt;docker search&lt;/code&gt;
+command. Let&amp;rsquo;s say our team wants an image with Ruby and Sinatra installed on
+which to do our web application development. We can search for a suitable image
+by using the &lt;code&gt;docker search&lt;/code&gt; command to find all the images that contain the
+term &lt;code&gt;sinatra&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker search sinatra
+NAME                                   DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+training/sinatra                       Sinatra training image                          0                    [OK]
+marceldegraaf/sinatra                  Sinatra test app                                0
+mattwarren/docker-sinatra-demo                                                         0                    [OK]
+luisbebop/docker-sinatra-hello-world                                                   0                    [OK]
+bmorearty/handson-sinatra              handson-ruby + Sinatra for Hands on with D...   0
+subwiz/sinatra                                                                         0
+bmorearty/sinatra                                                                      0
+. . .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can see we&amp;rsquo;ve returned a lot of images that use the term &lt;code&gt;sinatra&lt;/code&gt;. We&amp;rsquo;ve
+returned a list of image names, descriptions, Stars (which measure the social
+popularity of images - if a user likes an image then they can &amp;ldquo;star&amp;rdquo; it), and
+the Official and Automated build statuses.
+&lt;a href=&#34;http://localhost/userguide/userguide/docker-hub/official_repos&#34;&gt;Official Repositories&lt;/a&gt; are a carefully curated set
+of Docker repositories supported by Docker, Inc.  Automated repositories are
+&lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerrepos/#automated-builds&#34;&gt;Automated Builds&lt;/a&gt; that allow you to
+validate the source and content of an image.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve reviewed the images available to use and we decided to use the
+&lt;code&gt;training/sinatra&lt;/code&gt; image. So far we&amp;rsquo;ve seen two types of images repositories,
+images like &lt;code&gt;ubuntu&lt;/code&gt;, which are called base or root images. These base images
+are provided by Docker Inc and are built, validated and supported. These can be
+identified by their single word names.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve also seen user images, for example the &lt;code&gt;training/sinatra&lt;/code&gt; image we&amp;rsquo;ve
+chosen. A user image belongs to a member of the Docker community and is built
+and maintained by them.  You can identify user images as they are always
+prefixed with the user name, here &lt;code&gt;training&lt;/code&gt;, of the user that created them.&lt;/p&gt;
+
+&lt;h2 id=&#34;pulling-our-image&#34;&gt;Pulling our image&lt;/h2&gt;
+
+&lt;p&gt;We&amp;rsquo;ve identified a suitable image, &lt;code&gt;training/sinatra&lt;/code&gt;, and now we can download it using the &lt;code&gt;docker pull&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull training/sinatra
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The team can now use this image by running their own containers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -t -i training/sinatra /bin/bash
+root@a8cb6ce02d85:/#
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;creating-our-own-images&#34;&gt;Creating our own images&lt;/h2&gt;
+
+&lt;p&gt;The team has found the &lt;code&gt;training/sinatra&lt;/code&gt; image pretty useful but it&amp;rsquo;s not quite what
+they need and we need to make some changes to it. There are two ways we can
+update and create images.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;We can update a container created from an image and commit the results to an image.&lt;/li&gt;
+&lt;li&gt;We can use a &lt;code&gt;Dockerfile&lt;/code&gt; to specify instructions to create an image.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;updating-and-committing-an-image&#34;&gt;Updating and committing an image&lt;/h3&gt;
+
+&lt;p&gt;To update an image we first need to create a container from the image
+we&amp;rsquo;d like to update.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -t -i training/sinatra /bin/bash
+root@0b2616b0e5a8:/#
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Take note of the container ID that has been created, &lt;code&gt;0b2616b0e5a8&lt;/code&gt;, as we&amp;rsquo;ll
+need it in a moment.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Inside our running container let&amp;rsquo;s add the &lt;code&gt;json&lt;/code&gt; gem.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@0b2616b0e5a8:/# gem install json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once this has completed let&amp;rsquo;s exit our container using the &lt;code&gt;exit&lt;/code&gt;
+command.&lt;/p&gt;
+
+&lt;p&gt;Now we have a container with the change we want to make. We can then
+commit a copy of this container to an image using the &lt;code&gt;docker commit&lt;/code&gt;
+command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker commit -m &amp;quot;Added json gem&amp;quot; -a &amp;quot;Kate Smith&amp;quot; \
+0b2616b0e5a8 ouruser/sinatra:v2
+4f177bd27a9ff0f6dc2a830403925b5360bfe0b93d476f7fc3231110e7f71b1c
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we&amp;rsquo;ve used the &lt;code&gt;docker commit&lt;/code&gt; command. We&amp;rsquo;ve specified two flags: &lt;code&gt;-m&lt;/code&gt;
+and &lt;code&gt;-a&lt;/code&gt;. The &lt;code&gt;-m&lt;/code&gt; flag allows us to specify a commit message, much like you
+would with a commit on a version control system. The &lt;code&gt;-a&lt;/code&gt; flag allows us to
+specify an author for our update.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve also specified the container we want to create this new image from,
+&lt;code&gt;0b2616b0e5a8&lt;/code&gt; (the ID we recorded earlier) and we&amp;rsquo;ve specified a target for
+the image:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ouruser/sinatra:v2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s break this target down. It consists of a new user, &lt;code&gt;ouruser&lt;/code&gt;, that we&amp;rsquo;re
+writing this image to. We&amp;rsquo;ve also specified the name of the image, here we&amp;rsquo;re
+keeping the original image name &lt;code&gt;sinatra&lt;/code&gt;. Finally we&amp;rsquo;re specifying a tag for
+the image: &lt;code&gt;v2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We can then look at our new &lt;code&gt;ouruser/sinatra&lt;/code&gt; image using the &lt;code&gt;docker images&lt;/code&gt;
+command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY          TAG     IMAGE ID       CREATED       VIRTUAL SIZE
+training/sinatra    latest  5bc342fa0b91   10 hours ago  446.7 MB
+ouruser/sinatra     v2      3c59e02ddd1a   10 hours ago  446.7 MB
+ouruser/sinatra     latest  5db5f8471261   10 hours ago  446.7 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To use our new image to create a container we can then:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -t -i ouruser/sinatra:v2 /bin/bash
+root@78e82f680994:/#
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;building-an-image-from-a-dockerfile&#34;&gt;Building an image from a &lt;code&gt;Dockerfile&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Using the &lt;code&gt;docker commit&lt;/code&gt; command is a pretty simple way of extending an image
+but it&amp;rsquo;s a bit cumbersome and it&amp;rsquo;s not easy to share a development process for
+images amongst a team. Instead we can use a new command, &lt;code&gt;docker build&lt;/code&gt;, to
+build new images from scratch.&lt;/p&gt;
+
+&lt;p&gt;To do this we create a &lt;code&gt;Dockerfile&lt;/code&gt; that contains a set of instructions that
+tell Docker how to build our image.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s create a directory and a &lt;code&gt;Dockerfile&lt;/code&gt; first.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir sinatra
+$ cd sinatra
+$ touch Dockerfile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are using Boot2Docker on Windows, you may access your host
+directory by &lt;code&gt;cd&lt;/code&gt; to &lt;code&gt;/c/Users/your_user_name&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Each instruction creates a new layer of the image. Let&amp;rsquo;s look at a simple
+example now for building our own Sinatra image for our development team.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# This is a comment
+FROM ubuntu:14.04
+MAINTAINER Kate Smith &amp;lt;ksmith@example.com&amp;gt;
+RUN apt-get update &amp;amp;&amp;amp; apt-get install -y ruby ruby-dev
+RUN gem install sinatra
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s look at what our &lt;code&gt;Dockerfile&lt;/code&gt; does. Each instruction prefixes a statement and is capitalized.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;INSTRUCTION statement
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+We use &lt;code&gt;#&lt;/code&gt; to indicate a comment&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The first instruction &lt;code&gt;FROM&lt;/code&gt; tells Docker what the source of our image is, in
+this case we&amp;rsquo;re basing our new image on an Ubuntu 14.04 image.&lt;/p&gt;
+
+&lt;p&gt;Next we use the &lt;code&gt;MAINTAINER&lt;/code&gt; instruction to specify who maintains our new image.&lt;/p&gt;
+
+&lt;p&gt;Lastly, we&amp;rsquo;ve specified two &lt;code&gt;RUN&lt;/code&gt; instructions. A &lt;code&gt;RUN&lt;/code&gt; instruction executes
+a command inside the image, for example installing a package. Here we&amp;rsquo;re
+updating our APT cache, installing Ruby and RubyGems and then installing the
+Sinatra gem.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+There are &lt;a href=&#34;http://localhost/userguide/userguide/reference/builder&#34;&gt;a lot more instructions available to us in a Dockerfile&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s take our &lt;code&gt;Dockerfile&lt;/code&gt; and use the &lt;code&gt;docker build&lt;/code&gt; command to build an image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker build -t ouruser/sinatra:v2 .
+Sending build context to Docker daemon 2.048 kB
+Sending build context to Docker daemon 
+Step 0 : FROM ubuntu:14.04
+ ---&amp;gt; e54ca5efa2e9
+Step 1 : MAINTAINER Kate Smith &amp;lt;ksmith@example.com&amp;gt;
+ ---&amp;gt; Using cache
+ ---&amp;gt; 851baf55332b
+Step 2 : RUN apt-get update &amp;amp;&amp;amp; apt-get install -y ruby ruby-dev
+ ---&amp;gt; Running in 3a2558904e9b
+Selecting previously unselected package libasan0:amd64.
+(Reading database ... 11518 files and directories currently installed.)
+Preparing to unpack .../libasan0_4.8.2-19ubuntu1_amd64.deb ...
+Unpacking libasan0:amd64 (4.8.2-19ubuntu1) ...
+Selecting previously unselected package libatomic1:amd64.
+Preparing to unpack .../libatomic1_4.8.2-19ubuntu1_amd64.deb ...
+Unpacking libatomic1:amd64 (4.8.2-19ubuntu1) ...
+Selecting previously unselected package libgmp10:amd64.
+Preparing to unpack .../libgmp10_2%3a5.1.3+dfsg-1ubuntu1_amd64.deb ...
+Unpacking libgmp10:amd64 (2:5.1.3+dfsg-1ubuntu1) ...
+Selecting previously unselected package libisl10:amd64.
+Preparing to unpack .../libisl10_0.12.2-1_amd64.deb ...
+Unpacking libisl10:amd64 (0.12.2-1) ...
+Selecting previously unselected package libcloog-isl4:amd64.
+Preparing to unpack .../libcloog-isl4_0.18.2-1_amd64.deb ...
+Unpacking libcloog-isl4:amd64 (0.18.2-1) ...
+Selecting previously unselected package libgomp1:amd64.
+Preparing to unpack .../libgomp1_4.8.2-19ubuntu1_amd64.deb ...
+Unpacking libgomp1:amd64 (4.8.2-19ubuntu1) ...
+Selecting previously unselected package libitm1:amd64.
+Preparing to unpack .../libitm1_4.8.2-19ubuntu1_amd64.deb ...
+Unpacking libitm1:amd64 (4.8.2-19ubuntu1) ...
+Selecting previously unselected package libmpfr4:amd64.
+Preparing to unpack .../libmpfr4_3.1.2-1_amd64.deb ...
+Unpacking libmpfr4:amd64 (3.1.2-1) ...
+Selecting previously unselected package libquadmath0:amd64.
+Preparing to unpack .../libquadmath0_4.8.2-19ubuntu1_amd64.deb ...
+Unpacking libquadmath0:amd64 (4.8.2-19ubuntu1) ...
+Selecting previously unselected package libtsan0:amd64.
+Preparing to unpack .../libtsan0_4.8.2-19ubuntu1_amd64.deb ...
+Unpacking libtsan0:amd64 (4.8.2-19ubuntu1) ...
+Selecting previously unselected package libyaml-0-2:amd64.
+Preparing to unpack .../libyaml-0-2_0.1.4-3ubuntu3_amd64.deb ...
+Unpacking libyaml-0-2:amd64 (0.1.4-3ubuntu3) ...
+Selecting previously unselected package libmpc3:amd64.
+Preparing to unpack .../libmpc3_1.0.1-1ubuntu1_amd64.deb ...
+Unpacking libmpc3:amd64 (1.0.1-1ubuntu1) ...
+Selecting previously unselected package openssl.
+Preparing to unpack .../openssl_1.0.1f-1ubuntu2.4_amd64.deb ...
+Unpacking openssl (1.0.1f-1ubuntu2.4) ...
+Selecting previously unselected package ca-certificates.
+Preparing to unpack .../ca-certificates_20130906ubuntu2_all.deb ...
+Unpacking ca-certificates (20130906ubuntu2) ...
+Selecting previously unselected package manpages.
+Preparing to unpack .../manpages_3.54-1ubuntu1_all.deb ...
+Unpacking manpages (3.54-1ubuntu1) ...
+Selecting previously unselected package binutils.
+Preparing to unpack .../binutils_2.24-5ubuntu3_amd64.deb ...
+Unpacking binutils (2.24-5ubuntu3) ...
+Selecting previously unselected package cpp-4.8.
+Preparing to unpack .../cpp-4.8_4.8.2-19ubuntu1_amd64.deb ...
+Unpacking cpp-4.8 (4.8.2-19ubuntu1) ...
+Selecting previously unselected package cpp.
+Preparing to unpack .../cpp_4%3a4.8.2-1ubuntu6_amd64.deb ...
+Unpacking cpp (4:4.8.2-1ubuntu6) ...
+Selecting previously unselected package libgcc-4.8-dev:amd64.
+Preparing to unpack .../libgcc-4.8-dev_4.8.2-19ubuntu1_amd64.deb ...
+Unpacking libgcc-4.8-dev:amd64 (4.8.2-19ubuntu1) ...
+Selecting previously unselected package gcc-4.8.
+Preparing to unpack .../gcc-4.8_4.8.2-19ubuntu1_amd64.deb ...
+Unpacking gcc-4.8 (4.8.2-19ubuntu1) ...
+Selecting previously unselected package gcc.
+Preparing to unpack .../gcc_4%3a4.8.2-1ubuntu6_amd64.deb ...
+Unpacking gcc (4:4.8.2-1ubuntu6) ...
+Selecting previously unselected package libc-dev-bin.
+Preparing to unpack .../libc-dev-bin_2.19-0ubuntu6_amd64.deb ...
+Unpacking libc-dev-bin (2.19-0ubuntu6) ...
+Selecting previously unselected package linux-libc-dev:amd64.
+Preparing to unpack .../linux-libc-dev_3.13.0-30.55_amd64.deb ...
+Unpacking linux-libc-dev:amd64 (3.13.0-30.55) ...
+Selecting previously unselected package libc6-dev:amd64.
+Preparing to unpack .../libc6-dev_2.19-0ubuntu6_amd64.deb ...
+Unpacking libc6-dev:amd64 (2.19-0ubuntu6) ...
+Selecting previously unselected package ruby.
+Preparing to unpack .../ruby_1%3a1.9.3.4_all.deb ...
+Unpacking ruby (1:1.9.3.4) ...
+Selecting previously unselected package ruby1.9.1.
+Preparing to unpack .../ruby1.9.1_1.9.3.484-2ubuntu1_amd64.deb ...
+Unpacking ruby1.9.1 (1.9.3.484-2ubuntu1) ...
+Selecting previously unselected package libruby1.9.1.
+Preparing to unpack .../libruby1.9.1_1.9.3.484-2ubuntu1_amd64.deb ...
+Unpacking libruby1.9.1 (1.9.3.484-2ubuntu1) ...
+Selecting previously unselected package manpages-dev.
+Preparing to unpack .../manpages-dev_3.54-1ubuntu1_all.deb ...
+Unpacking manpages-dev (3.54-1ubuntu1) ...
+Selecting previously unselected package ruby1.9.1-dev.
+Preparing to unpack .../ruby1.9.1-dev_1.9.3.484-2ubuntu1_amd64.deb ...
+Unpacking ruby1.9.1-dev (1.9.3.484-2ubuntu1) ...
+Selecting previously unselected package ruby-dev.
+Preparing to unpack .../ruby-dev_1%3a1.9.3.4_all.deb ...
+Unpacking ruby-dev (1:1.9.3.4) ...
+Setting up libasan0:amd64 (4.8.2-19ubuntu1) ...
+Setting up libatomic1:amd64 (4.8.2-19ubuntu1) ...
+Setting up libgmp10:amd64 (2:5.1.3+dfsg-1ubuntu1) ...
+Setting up libisl10:amd64 (0.12.2-1) ...
+Setting up libcloog-isl4:amd64 (0.18.2-1) ...
+Setting up libgomp1:amd64 (4.8.2-19ubuntu1) ...
+Setting up libitm1:amd64 (4.8.2-19ubuntu1) ...
+Setting up libmpfr4:amd64 (3.1.2-1) ...
+Setting up libquadmath0:amd64 (4.8.2-19ubuntu1) ...
+Setting up libtsan0:amd64 (4.8.2-19ubuntu1) ...
+Setting up libyaml-0-2:amd64 (0.1.4-3ubuntu3) ...
+Setting up libmpc3:amd64 (1.0.1-1ubuntu1) ...
+Setting up openssl (1.0.1f-1ubuntu2.4) ...
+Setting up ca-certificates (20130906ubuntu2) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+Setting up manpages (3.54-1ubuntu1) ...
+Setting up binutils (2.24-5ubuntu3) ...
+Setting up cpp-4.8 (4.8.2-19ubuntu1) ...
+Setting up cpp (4:4.8.2-1ubuntu6) ...
+Setting up libgcc-4.8-dev:amd64 (4.8.2-19ubuntu1) ...
+Setting up gcc-4.8 (4.8.2-19ubuntu1) ...
+Setting up gcc (4:4.8.2-1ubuntu6) ...
+Setting up libc-dev-bin (2.19-0ubuntu6) ...
+Setting up linux-libc-dev:amd64 (3.13.0-30.55) ...
+Setting up libc6-dev:amd64 (2.19-0ubuntu6) ...
+Setting up manpages-dev (3.54-1ubuntu1) ...
+Setting up libruby1.9.1 (1.9.3.484-2ubuntu1) ...
+Setting up ruby1.9.1-dev (1.9.3.484-2ubuntu1) ...
+Setting up ruby-dev (1:1.9.3.4) ...
+Setting up ruby (1:1.9.3.4) ...
+Setting up ruby1.9.1 (1.9.3.484-2ubuntu1) ...
+Processing triggers for libc-bin (2.19-0ubuntu6) ...
+Processing triggers for ca-certificates (20130906ubuntu2) ...
+Updating certificates in /etc/ssl/certs... 164 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d....done.
+ ---&amp;gt; c55c31703134
+Removing intermediate container 3a2558904e9b
+Step 3 : RUN gem install sinatra
+ ---&amp;gt; Running in 6b81cb6313e5
+unable to convert &amp;quot;\xC3&amp;quot; to UTF-8 in conversion from ASCII-8BIT to UTF-8 to US-ASCII for README.rdoc, skipping
+unable to convert &amp;quot;\xC3&amp;quot; to UTF-8 in conversion from ASCII-8BIT to UTF-8 to US-ASCII for README.rdoc, skipping
+Successfully installed rack-1.5.2
+Successfully installed tilt-1.4.1
+Successfully installed rack-protection-1.5.3
+Successfully installed sinatra-1.4.5
+4 gems installed
+Installing ri documentation for rack-1.5.2...
+Installing ri documentation for tilt-1.4.1...
+Installing ri documentation for rack-protection-1.5.3...
+Installing ri documentation for sinatra-1.4.5...
+Installing RDoc documentation for rack-1.5.2...
+Installing RDoc documentation for tilt-1.4.1...
+Installing RDoc documentation for rack-protection-1.5.3...
+Installing RDoc documentation for sinatra-1.4.5...
+ ---&amp;gt; 97feabe5d2ed
+Removing intermediate container 6b81cb6313e5
+Successfully built 97feabe5d2ed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We&amp;rsquo;ve specified our &lt;code&gt;docker build&lt;/code&gt; command and used the &lt;code&gt;-t&lt;/code&gt; flag to identify
+our new image as belonging to the user &lt;code&gt;ouruser&lt;/code&gt;, the repository name &lt;code&gt;sinatra&lt;/code&gt;
+and given it the tag &lt;code&gt;v2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve also specified the location of our &lt;code&gt;Dockerfile&lt;/code&gt; using the &lt;code&gt;.&lt;/code&gt; to
+indicate a &lt;code&gt;Dockerfile&lt;/code&gt; in the current directory.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+You can also specify a path to a &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now we can see the build process at work. The first thing Docker does is
+upload the build context: basically the contents of the directory you&amp;rsquo;re
+building in. This is done because the Docker daemon does the actual
+build of the image and it needs the local context to do it.&lt;/p&gt;
+
+&lt;p&gt;Next we can see each instruction in the &lt;code&gt;Dockerfile&lt;/code&gt; being executed
+step-by-step. We can see that each step creates a new container, runs
+the instruction inside that container and then commits that change -
+just like the &lt;code&gt;docker commit&lt;/code&gt; work flow we saw earlier. When all the
+instructions have executed we&amp;rsquo;re left with the &lt;code&gt;97feabe5d2ed&lt;/code&gt; image
+(also helpfully tagged as &lt;code&gt;ouruser/sinatra:v2&lt;/code&gt;) and all intermediate
+containers will get removed to clean things up.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+An image can&amp;rsquo;t have more than 127 layers regardless of the storage driver.
+This limitation is set globally to encourage optimization of the overall
+size of images.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We can then create a container from our new image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -t -i ouruser/sinatra:v2 /bin/bash
+root@8196968dac35:/#
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+This is just a brief introduction to creating images. We&amp;rsquo;ve
+skipped a whole bunch of other instructions that you can use. We&amp;rsquo;ll see more of
+those instructions in later sections of the Guide or you can refer to the
+&lt;a href=&#34;http://localhost/userguide/userguide/reference/builder/&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt;&lt;/a&gt; reference for a
+detailed description and examples of every instruction.
+To help you write a clear, readable, maintainable &lt;code&gt;Dockerfile&lt;/code&gt;, we&amp;rsquo;ve also
+written a &lt;a href=&#34;http://localhost/userguide/userguide/articles/dockerfile_best-practices&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt; Best Practices guide&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;more&#34;&gt;More&lt;/h3&gt;
+
+&lt;p&gt;To learn more, check out the &lt;a href=&#34;http://localhost/userguide/userguide/userguide/level1&#34;&gt;Dockerfile tutorial&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;setting-tags-on-an-image&#34;&gt;Setting tags on an image&lt;/h2&gt;
+
+&lt;p&gt;You can also add a tag to an existing image after you commit or build it. We
+can do this using the &lt;code&gt;docker tag&lt;/code&gt; command. Let&amp;rsquo;s add a new tag to our
+&lt;code&gt;ouruser/sinatra&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker tag 5db5f8471261 ouruser/sinatra:devel
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;docker tag&lt;/code&gt; command takes the ID of the image, here &lt;code&gt;5db5f8471261&lt;/code&gt;, and our
+user name, the repository name and the new tag.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s see our new tag using the &lt;code&gt;docker images&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images ouruser/sinatra
+REPOSITORY          TAG     IMAGE ID      CREATED        VIRTUAL SIZE
+ouruser/sinatra     latest  5db5f8471261  11 hours ago   446.7 MB
+ouruser/sinatra     devel   5db5f8471261  11 hours ago   446.7 MB
+ouruser/sinatra     v2      5db5f8471261  11 hours ago   446.7 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;image-digests&#34;&gt;Image Digests&lt;/h2&gt;
+
+&lt;p&gt;Images that use the v2 or later format have a content-addressable identifier
+called a &lt;code&gt;digest&lt;/code&gt;. As long as the input used to generate the image is
+unchanged, the digest value is predictable. To list image digest values, use
+the &lt;code&gt;--digests&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images --digests | head
+REPOSITORY                         TAG                 DIGEST                                                                     IMAGE ID            CREATED             VIRTUAL SIZE
+ouruser/sinatra                    latest              sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf    5db5f8471261        11 hours ago        446.7 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When pushing or pulling to a 2.0 registry, the &lt;code&gt;push&lt;/code&gt; or &lt;code&gt;pull&lt;/code&gt; command
+output includes the image digest. You can &lt;code&gt;pull&lt;/code&gt; using a digest value.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull ouruser/sinatra@cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also reference by digest in &lt;code&gt;create&lt;/code&gt;, &lt;code&gt;run&lt;/code&gt;, and &lt;code&gt;rmi&lt;/code&gt; commands, as well as the
+&lt;code&gt;FROM&lt;/code&gt; image reference in a Dockerfile.&lt;/p&gt;
+
+&lt;h2 id=&#34;push-an-image-to-docker-hub&#34;&gt;Push an image to Docker Hub&lt;/h2&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve built or created a new image you can push it to &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker
+Hub&lt;/a&gt; using the &lt;code&gt;docker push&lt;/code&gt; command. This
+allows you to share it with others, either publicly, or push it into &lt;a href=&#34;https://registry.hub.docker.com/plans/&#34;&gt;a
+private repository&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker push ouruser/sinatra
+The push refers to a repository [ouruser/sinatra] (len: 1)
+Sending image list
+Pushing repository ouruser/sinatra (3 tags)
+. . .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;remove-an-image-from-the-host&#34;&gt;Remove an image from the host&lt;/h2&gt;
+
+&lt;p&gt;You can also remove images on your Docker host in a way &lt;a href=&#34;http://localhost/userguide/usingdocker&#34;&gt;similar to
+containers&lt;/a&gt; using the &lt;code&gt;docker rmi&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s delete the &lt;code&gt;training/sinatra&lt;/code&gt; image as we don&amp;rsquo;t need it anymore.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker rmi training/sinatra
+Untagged: training/sinatra:latest
+Deleted: 5bc342fa0b91cabf65246837015197eecfa24b2213ed6a51a8974ae250fedd8d
+Deleted: ed0fffdcdae5eb2c3a55549857a8be7fc8bc4241fb19ad714364cbfd7a56b22f
+Deleted: 5c58979d73ae448df5af1d8142436d81116187a7633082650549c52c3a2418f0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; In order to remove an image from the host, please make sure
+that there are no containers actively based on it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;next-steps&#34;&gt;Next steps&lt;/h1&gt;
+
+&lt;p&gt;Until now we&amp;rsquo;ve seen how to build individual applications inside Docker
+containers. Now learn how to build whole application stacks with Docker
+by linking together multiple Docker containers.&lt;/p&gt;
+
+&lt;p&gt;Test your Dockerfile knowledge with the
+&lt;a href=&#34;http://localhost/userguide/userguide/userguide/level1&#34;&gt;Dockerfile tutorial&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerlinks&#34;&gt;Linking Containers Together&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Getting started with Docker Hub</title>
+      <link>http://localhost/userguide/dockerhub/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/userguide/dockerhub/</guid>
+      <description>
+
+&lt;h1 id=&#34;getting-started-with-docker-hub&#34;&gt;Getting started with Docker Hub&lt;/h1&gt;
+
+&lt;p&gt;This section provides a quick introduction to the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;,
+including how to create an account.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; is a centralized resource for working with
+Docker and its components. Docker Hub helps you collaborate with colleagues and get the
+most out of Docker. To do this, it provides services such as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker image hosting.&lt;/li&gt;
+&lt;li&gt;User authentication.&lt;/li&gt;
+&lt;li&gt;Automated image builds and work-flow tools such as build triggers and web
+hooks.&lt;/li&gt;
+&lt;li&gt;Integration with GitHub and BitBucket.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In order to use Docker Hub, you will first need to register and create an account. Don&amp;rsquo;t
+worry, creating an account is simple and free.&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-a-docker-hub-account&#34;&gt;Creating a Docker Hub account&lt;/h2&gt;
+
+&lt;p&gt;There are two ways for you to register and create an account:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Via the web, or&lt;/li&gt;
+&lt;li&gt;Via the command line.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;register-via-the-web&#34;&gt;Register via the web&lt;/h3&gt;
+
+&lt;p&gt;Fill in the &lt;a href=&#34;https://hub.docker.com/account/signup/&#34;&gt;sign-up form&lt;/a&gt; by
+choosing your user name and password and entering a valid email address. You can also
+sign up for the Docker Weekly mailing list, which has lots of information about what&amp;rsquo;s
+going on in the world of Docker.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/userguide/userguide/userguide/register-web.png&#34; alt=&#34;Register using the sign-up page&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;register-via-the-command-line&#34;&gt;Register via the command line&lt;/h3&gt;
+
+&lt;p&gt;You can also create a Docker Hub account via the command line with the
+&lt;code&gt;docker login&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker login
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;confirm-your-email&#34;&gt;Confirm your email&lt;/h3&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve filled in the form, check your email for a welcome message asking for
+confirmation so we can activate your account.&lt;/p&gt;
+
+&lt;h3 id=&#34;login&#34;&gt;Login&lt;/h3&gt;
+
+&lt;p&gt;After you complete the confirmation process, you can login using the web console:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/userguide/userguide/userguide/login-web.png&#34; alt=&#34;Login using the web console&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Or via the command line with the &lt;code&gt;docker login&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker login
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your Docker Hub account is now active and ready to use.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next steps&lt;/h2&gt;
+
+&lt;p&gt;Next, let&amp;rsquo;s start learning how to Dockerize applications with our &amp;ldquo;Hello world&amp;rdquo;
+exercise.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerizing&#34;&gt;Dockerizing Applications&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linking containers together</title>
+      <link>http://localhost/userguide/dockerlinks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/userguide/dockerlinks/</guid>
+      <description>
+
+&lt;h1 id=&#34;linking-containers-together&#34;&gt;Linking containers together&lt;/h1&gt;
+
+&lt;p&gt;In &lt;a href=&#34;http://localhost/userguide/userguide/userguide/usingdocker&#34;&gt;the Using Docker section&lt;/a&gt;, you saw how you can
+connect to a service running inside a Docker container via a network
+port. But a port connection is only one way you can interact with services and
+applications running inside Docker containers. In this section, we&amp;rsquo;ll briefly revisit
+connecting via a network port and then we&amp;rsquo;ll introduce you to another method of access:
+container linking.&lt;/p&gt;
+
+&lt;h2 id=&#34;connect-using-network-port-mapping&#34;&gt;Connect using network port mapping&lt;/h2&gt;
+
+&lt;p&gt;In &lt;a href=&#34;http://localhost/userguide/userguide/userguide/usingdocker&#34;&gt;the Using Docker section&lt;/a&gt;, you created a
+container that ran a Python Flask application:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -P training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Containers have an internal network and an IP address
+(as we saw when we used the &lt;code&gt;docker inspect&lt;/code&gt; command to show the container&amp;rsquo;s
+IP address in the &lt;a href=&#34;http://localhost/userguide/userguide/userguide/usingdocker/&#34;&gt;Using Docker&lt;/a&gt; section).
+Docker can have a variety of network configurations. You can see more
+information on Docker networking &lt;a href=&#34;http://localhost/userguide/userguide/articles/networking/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;When that container was created, the &lt;code&gt;-P&lt;/code&gt; flag was used to automatically map
+any network port inside it to a random high port within an &lt;em&gt;ephemeral port
+range&lt;/em&gt; on your Docker host. Next, when &lt;code&gt;docker ps&lt;/code&gt; was run, you saw that port
+5000 in the container was bound to port 49155 on the host.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps nostalgic_morse
+CONTAINER ID  IMAGE                   COMMAND       CREATED        STATUS        PORTS                    NAMES
+bc533791f3f5  training/webapp:latest  python app.py 5 seconds ago  Up 2 seconds  0.0.0.0:49155-&amp;gt;5000/tcp  nostalgic_morse
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You also saw how you can bind a container&amp;rsquo;s ports to a specific port using
+the &lt;code&gt;-p&lt;/code&gt; flag. Here port 80 of the host is mapped to port 5000 of the
+container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -p 80:5000 training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And you saw why this isn&amp;rsquo;t such a great idea because it constrains you to
+only one container on that specific port.&lt;/p&gt;
+
+&lt;p&gt;There are also a few other ways you can configure the &lt;code&gt;-p&lt;/code&gt; flag. By
+default the &lt;code&gt;-p&lt;/code&gt; flag will bind the specified port to all interfaces on
+the host machine. But you can also specify a binding to a specific
+interface, for example only to the &lt;code&gt;localhost&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -p 127.0.0.1:80:5000 training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This would bind port 5000 inside the container to port 80 on the
+&lt;code&gt;localhost&lt;/code&gt; or &lt;code&gt;127.0.0.1&lt;/code&gt; interface on the host machine.&lt;/p&gt;
+
+&lt;p&gt;Or, to bind port 5000 of the container to a dynamic port but only on the
+&lt;code&gt;localhost&lt;/code&gt;, you could use:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -p 127.0.0.1::5000 training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also bind UDP ports by adding a trailing &lt;code&gt;/udp&lt;/code&gt;. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -p 127.0.0.1:80:5000/udp training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You also learned about the useful &lt;code&gt;docker port&lt;/code&gt; shortcut which showed us the
+current port bindings. This is also useful for showing you specific port
+configurations. For example, if you&amp;rsquo;ve bound the container port to the
+&lt;code&gt;localhost&lt;/code&gt; on the host machine, then the &lt;code&gt;docker port&lt;/code&gt; output will reflect that.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker port nostalgic_morse 5000
+127.0.0.1:49155
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+The &lt;code&gt;-p&lt;/code&gt; flag can be used multiple times to configure multiple ports.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;connect-with-the-linking-system&#34;&gt;Connect with the linking system&lt;/h2&gt;
+
+&lt;p&gt;Network port mappings are not the only way Docker containers can connect
+to one another. Docker also has a linking system that allows you to link
+multiple containers together and send connection information from one to another.
+When containers are linked, information about a source container can be sent to a
+recipient container. This allows the recipient to see selected data describing
+aspects of the source container.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-importance-of-naming&#34;&gt;The importance of naming&lt;/h3&gt;
+
+&lt;p&gt;To establish links, Docker relies on the names of your containers.
+You&amp;rsquo;ve already seen that each container you create has an automatically
+created name; indeed you&amp;rsquo;ve become familiar with our old friend
+&lt;code&gt;nostalgic_morse&lt;/code&gt; during this guide. You can also name containers
+yourself. This naming provides two useful functions:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;It can be useful to name containers that do specific functions in a way
+that makes it easier for you to remember them, for example naming a
+container containing a web application &lt;code&gt;web&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;It provides Docker with a reference point that allows it to refer to other
+containers, for example, you can specify to link the container &lt;code&gt;web&lt;/code&gt; to container &lt;code&gt;db&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can name your container by using the &lt;code&gt;--name&lt;/code&gt; flag, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -P --name web training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This launches a new container and uses the &lt;code&gt;--name&lt;/code&gt; flag to
+name the container &lt;code&gt;web&lt;/code&gt;. You can see the container&amp;rsquo;s name using the
+&lt;code&gt;docker ps&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps -l
+CONTAINER ID  IMAGE                  COMMAND        CREATED       STATUS       PORTS                    NAMES
+aed84ee21bde  training/webapp:latest python app.py  12 hours ago  Up 2 seconds 0.0.0.0:49154-&amp;gt;5000/tcp  web
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also use &lt;code&gt;docker inspect&lt;/code&gt; to return the container&amp;rsquo;s name.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Container names have to be unique. That means you can only call
+one container &lt;code&gt;web&lt;/code&gt;. If you want to re-use a container name you must delete
+the old container (with &lt;code&gt;docker rm&lt;/code&gt;) before you can create a new
+container with the same name. As an alternative you can use the &lt;code&gt;--rm&lt;/code&gt;
+flag with the &lt;code&gt;docker run&lt;/code&gt; command. This will delete the container
+immediately after it is stopped.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;communication-across-links&#34;&gt;Communication across links&lt;/h2&gt;
+
+&lt;p&gt;Links allow containers to discover each other and securely transfer information about one
+container to another container. When you set up a link, you create a conduit between a
+source container and a recipient container. The recipient can then access select data
+about the source. To create a link, you use the &lt;code&gt;--link&lt;/code&gt; flag. First, create a new
+container, this time one containing a database.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d --name db training/postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This creates a new container called &lt;code&gt;db&lt;/code&gt; from the &lt;code&gt;training/postgres&lt;/code&gt;
+image, which contains a PostgreSQL database.&lt;/p&gt;
+
+&lt;p&gt;Now, you need to delete the &lt;code&gt;web&lt;/code&gt; container you created previously so you can replace it
+with a linked one:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker rm -f web
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, create a new &lt;code&gt;web&lt;/code&gt; container and link it with your &lt;code&gt;db&lt;/code&gt; container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -P --name web --link db:db training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will link the new &lt;code&gt;web&lt;/code&gt; container with the &lt;code&gt;db&lt;/code&gt; container you created
+earlier. The &lt;code&gt;--link&lt;/code&gt; flag takes the form:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;--link &amp;lt;name or id&amp;gt;:alias
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Where &lt;code&gt;name&lt;/code&gt; is the name of the container we&amp;rsquo;re linking to and &lt;code&gt;alias&lt;/code&gt; is an
+alias for the link name. You&amp;rsquo;ll see how that alias gets used shortly.
+The &lt;code&gt;--link&lt;/code&gt; flag also takes the form:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;--link &amp;lt;name or id&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In which case the alias will match the name. You could have written the previous
+example as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -P --name web --link db training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, inspect your linked containers with &lt;code&gt;docker inspect&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker inspect -f &amp;quot;{{ .HostConfig.Links }}&amp;quot; web
+[/db:/web/db]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see that the &lt;code&gt;web&lt;/code&gt; container is now linked to the &lt;code&gt;db&lt;/code&gt; container
+&lt;code&gt;web/db&lt;/code&gt;. Which allows it to access information about the &lt;code&gt;db&lt;/code&gt; container.&lt;/p&gt;
+
+&lt;p&gt;So what does linking the containers actually do? You&amp;rsquo;ve learned that a link allows a
+source container to provide information about itself to a recipient container. In
+our example, the recipient, &lt;code&gt;web&lt;/code&gt;, can access information about the source &lt;code&gt;db&lt;/code&gt;. To do
+this, Docker creates a secure tunnel between the containers that doesn&amp;rsquo;t need to
+expose any ports externally on the container; you&amp;rsquo;ll note when we started the
+&lt;code&gt;db&lt;/code&gt; container we did not use either the &lt;code&gt;-P&lt;/code&gt; or &lt;code&gt;-p&lt;/code&gt; flags. That&amp;rsquo;s a big benefit of
+linking: we don&amp;rsquo;t need to expose the source container, here the PostgreSQL database, to
+the network.&lt;/p&gt;
+
+&lt;p&gt;Docker exposes connectivity information for the source container to the
+recipient container in two ways:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Environment variables,&lt;/li&gt;
+&lt;li&gt;Updating the &lt;code&gt;/etc/hosts&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;environment-variables&#34;&gt;Environment variables&lt;/h3&gt;
+
+&lt;p&gt;Docker creates several environment variables when you link containers. Docker
+automatically creates environment variables in the target container based on
+the &lt;code&gt;--link&lt;/code&gt; parameters.  It will also expose all environment variables
+originating from Docker from the source container. These include variables from:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the &lt;code&gt;ENV&lt;/code&gt; commands in the source container&amp;rsquo;s Dockerfile&lt;/li&gt;
+&lt;li&gt;the &lt;code&gt;-e&lt;/code&gt;, &lt;code&gt;--env&lt;/code&gt; and &lt;code&gt;--env-file&lt;/code&gt; options on the &lt;code&gt;docker run&lt;/code&gt;
+command when the source container is started&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These environment variables enable programmatic discovery from within the
+target container of information related to the source container.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;:
+It is important to understand that &lt;em&gt;all&lt;/em&gt; environment variables originating
+from Docker within a container are made available to &lt;em&gt;any&lt;/em&gt; container
+that links to it. This could have serious security implications if sensitive
+data is stored in them.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Docker sets an &lt;code&gt;&amp;lt;alias&amp;gt;_NAME&lt;/code&gt; environment variable for each target container
+listed in the &lt;code&gt;--link&lt;/code&gt; parameter. For example, if a new container called
+&lt;code&gt;web&lt;/code&gt; is linked to a database container called &lt;code&gt;db&lt;/code&gt; via &lt;code&gt;--link db:webdb&lt;/code&gt;,
+then Docker creates a &lt;code&gt;WEBDB_NAME=/web/webdb&lt;/code&gt; variable in the &lt;code&gt;web&lt;/code&gt; container.&lt;/p&gt;
+
+&lt;p&gt;Docker also defines a set of environment variables for each port exposed by the
+source container.  Each variable has a unique prefix in the form:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;name&amp;gt;_PORT_&amp;lt;port&amp;gt;_&amp;lt;protocol&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The components in this prefix are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the alias &lt;code&gt;&amp;lt;name&amp;gt;&lt;/code&gt; specified in the &lt;code&gt;--link&lt;/code&gt; parameter (for example, &lt;code&gt;webdb&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;the &lt;code&gt;&amp;lt;port&amp;gt;&lt;/code&gt; number exposed&lt;/li&gt;
+&lt;li&gt;a &lt;code&gt;&amp;lt;protocol&amp;gt;&lt;/code&gt; which is either TCP or UDP&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Docker uses this prefix format to define three distinct environment variables:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The &lt;code&gt;prefix_ADDR&lt;/code&gt; variable contains the IP Address from the URL, for
+example &lt;code&gt;WEBDB_PORT_8080_TCP_ADDR=172.17.0.82&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;prefix_PORT&lt;/code&gt; variable contains just the port number from the URL for
+example &lt;code&gt;WEBDB_PORT_8080_TCP_PORT=8080&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;prefix_PROTO&lt;/code&gt; variable contains just the protocol from the URL for
+example &lt;code&gt;WEBDB_PORT_8080_TCP_PROTO=tcp&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If the container exposes multiple ports, an environment variable set is
+defined for each one. This means, for example, if a container exposes 4 ports
+that Docker creates 12 environment variables, 3 for each port.&lt;/p&gt;
+
+&lt;p&gt;Additionally, Docker creates an environment variable called &lt;code&gt;&amp;lt;alias&amp;gt;_PORT&lt;/code&gt;.
+This variable contains the URL of the source container&amp;rsquo;s first exposed port.
+The  &amp;lsquo;first&amp;rsquo; port is defined as the exposed port with the lowest number.
+For example, consider the &lt;code&gt;WEBDB_PORT=tcp://172.17.0.82:8080&lt;/code&gt; variable.  If
+that port is used for both tcp and udp, then the tcp one is specified.&lt;/p&gt;
+
+&lt;p&gt;Finally, Docker also exposes each Docker originated environment variable
+from the source container as an environment variable in the target. For each
+variable Docker creates an &lt;code&gt;&amp;lt;alias&amp;gt;_ENV_&amp;lt;name&amp;gt;&lt;/code&gt; variable in the target
+container. The variable&amp;rsquo;s value is set to the value Docker used when it
+started the source container.&lt;/p&gt;
+
+&lt;p&gt;Returning back to our database example, you can run the &lt;code&gt;env&lt;/code&gt;
+command to list the specified container&amp;rsquo;s environment variables.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ docker run --rm --name web2 --link db:db training/webapp env
+    . . .
+    DB_NAME=/web2/db
+    DB_PORT=tcp://172.17.0.5:5432
+    DB_PORT_5432_TCP=tcp://172.17.0.5:5432
+    DB_PORT_5432_TCP_PROTO=tcp
+    DB_PORT_5432_TCP_PORT=5432
+    DB_PORT_5432_TCP_ADDR=172.17.0.5
+    . . .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see that Docker has created a series of environment variables with
+useful information about the source &lt;code&gt;db&lt;/code&gt; container. Each variable is prefixed
+with
+&lt;code&gt;DB_&lt;/code&gt;, which is populated from the &lt;code&gt;alias&lt;/code&gt; you specified above. If the &lt;code&gt;alias&lt;/code&gt;
+were &lt;code&gt;db1&lt;/code&gt;, the variables would be prefixed with &lt;code&gt;DB1_&lt;/code&gt;. You can use these
+environment variables to configure your applications to connect to the database
+on the &lt;code&gt;db&lt;/code&gt; container. The connection will be secure and private; only the
+linked &lt;code&gt;web&lt;/code&gt; container will be able to talk to the &lt;code&gt;db&lt;/code&gt; container.&lt;/p&gt;
+
+&lt;h3 id=&#34;important-notes-on-docker-environment-variables&#34;&gt;Important notes on Docker environment variables&lt;/h3&gt;
+
+&lt;p&gt;Unlike host entries in the &lt;a href=&#34;#updating-the-etchosts-file&#34;&gt;&lt;code&gt;/etc/hosts&lt;/code&gt; file&lt;/a&gt;,
+IP addresses stored in the environment variables are not automatically updated
+if the source container is restarted. We recommend using the host entries in
+&lt;code&gt;/etc/hosts&lt;/code&gt; to resolve the IP address of linked containers.&lt;/p&gt;
+
+&lt;p&gt;These environment variables are only set for the first process in the
+container. Some daemons, such as &lt;code&gt;sshd&lt;/code&gt;, will scrub them when spawning shells
+for connection.&lt;/p&gt;
+
+&lt;h3 id=&#34;updating-the-etc-hosts-file&#34;&gt;Updating the &lt;code&gt;/etc/hosts&lt;/code&gt; file&lt;/h3&gt;
+
+&lt;p&gt;In addition to the environment variables, Docker adds a host entry for the
+source container to the &lt;code&gt;/etc/hosts&lt;/code&gt; file. Here&amp;rsquo;s an entry for the &lt;code&gt;web&lt;/code&gt;
+container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -t -i --rm --link db:webdb training/webapp /bin/bash
+root@aed84ee21bde:/opt/webapp# cat /etc/hosts
+172.17.0.7  aed84ee21bde
+. . .
+172.17.0.5  webdb 6e5cdeb2d300 db
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see two relevant host entries. The first is an entry for the &lt;code&gt;web&lt;/code&gt;
+container that uses the Container ID as a host name. The second entry uses the
+link alias to reference the IP address of the &lt;code&gt;db&lt;/code&gt; container. In addition to
+the alias you provide, the linked container&amp;rsquo;s name&amp;ndash;if unique from the alias
+provided to the &lt;code&gt;--link&lt;/code&gt; parameter&amp;ndash;and the linked container&amp;rsquo;s hostname will
+also be added in &lt;code&gt;/etc/hosts&lt;/code&gt; for the linked container&amp;rsquo;s IP address. You can ping
+that host now via any of these entries:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@aed84ee21bde:/opt/webapp# apt-get install -yqq inetutils-ping
+root@aed84ee21bde:/opt/webapp# ping webdb
+PING webdb (172.17.0.5): 48 data bytes
+56 bytes from 172.17.0.5: icmp_seq=0 ttl=64 time=0.267 ms
+56 bytes from 172.17.0.5: icmp_seq=1 ttl=64 time=0.250 ms
+56 bytes from 172.17.0.5: icmp_seq=2 ttl=64 time=0.256 ms
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+In the example, you&amp;rsquo;ll note you had to install &lt;code&gt;ping&lt;/code&gt; because it was not included
+in the container initially.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Here, you used the &lt;code&gt;ping&lt;/code&gt; command to ping the &lt;code&gt;db&lt;/code&gt; container using its host entry,
+which resolves to &lt;code&gt;172.17.0.5&lt;/code&gt;. You can use this host entry to configure an application
+to make use of your &lt;code&gt;db&lt;/code&gt; container.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+You can link multiple recipient containers to a single source. For
+example, you could have multiple (differently named) web containers attached to your
+&lt;code&gt;db&lt;/code&gt; container.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you restart the source container, the linked containers &lt;code&gt;/etc/hosts&lt;/code&gt; files
+will be automatically updated with the source container&amp;rsquo;s new IP address,
+allowing linked communication to continue.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker restart db
+db
+$ docker run -t -i --rm --link db:db training/webapp /bin/bash
+root@aed84ee21bde:/opt/webapp# cat /etc/hosts
+172.17.0.7  aed84ee21bde
+. . .
+172.17.0.9  db
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;next-step&#34;&gt;Next step&lt;/h1&gt;
+
+&lt;p&gt;Now that you know how to link Docker containers together, the next step is
+learning how to manage data, volumes and mounts inside your containers.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockervolumes&#34;&gt;Managing Data in Containers&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Managing data in containers</title>
+      <link>http://localhost/userguide/dockervolumes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/userguide/dockervolumes/</guid>
+      <description>
+
+&lt;h1 id=&#34;managing-data-in-containers&#34;&gt;Managing data in containers&lt;/h1&gt;
+
+&lt;p&gt;So far we&amp;rsquo;ve been introduced to some &lt;a href=&#34;http://localhost/userguide/userguide/userguide/usingdocker/&#34;&gt;basic Docker
+concepts&lt;/a&gt;, seen how to work with &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerimages/&#34;&gt;Docker
+images&lt;/a&gt; as well as learned about &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerlinks/&#34;&gt;networking
+and links between containers&lt;/a&gt;. In this section
+we&amp;rsquo;re going to discuss how you can manage data inside and between your
+Docker containers.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;re going to look at the two primary ways you can manage data in
+Docker.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Data volumes, and&lt;/li&gt;
+&lt;li&gt;Data volume containers.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;data-volumes&#34;&gt;Data volumes&lt;/h2&gt;
+
+&lt;p&gt;A &lt;em&gt;data volume&lt;/em&gt; is a specially-designated directory within one or more
+containers that bypasses the &lt;a href=&#34;http://localhost/userguide/userguide/terms/layer/#union-file-system&#34;&gt;&lt;em&gt;Union File
+System&lt;/em&gt;&lt;/a&gt;. Data volumes provide several
+useful features for persistent or shared data:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Volumes are initialized when a container is created. If the container&amp;rsquo;s
+base image contains data at the specified mount point, that existing data is
+copied into the new volume upon volume initialization.&lt;/li&gt;
+&lt;li&gt;Data volumes can be shared and reused among containers.&lt;/li&gt;
+&lt;li&gt;Changes to a data volume are made directly.&lt;/li&gt;
+&lt;li&gt;Changes to a data volume will not be included when you update an image.&lt;/li&gt;
+&lt;li&gt;Data volumes persist even if the container itself is deleted.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Data volumes are designed to persist data, independent of the container&amp;rsquo;s life
+cycle. Docker therefore &lt;em&gt;never&lt;/em&gt; automatically delete volumes when you remove
+a container, nor will it &amp;ldquo;garbage collect&amp;rdquo; volumes that are no longer
+referenced by a container.&lt;/p&gt;
+
+&lt;h3 id=&#34;adding-a-data-volume&#34;&gt;Adding a data volume&lt;/h3&gt;
+
+&lt;p&gt;You can add a data volume to a container using the &lt;code&gt;-v&lt;/code&gt; flag with the
+&lt;code&gt;docker create&lt;/code&gt; and &lt;code&gt;docker run&lt;/code&gt; command. You can use the &lt;code&gt;-v&lt;/code&gt; multiple times
+to mount multiple data volumes. Let&amp;rsquo;s mount a single volume now in our web
+application container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -P --name web -v /webapp training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will create a new volume inside a container at &lt;code&gt;/webapp&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+You can also use the &lt;code&gt;VOLUME&lt;/code&gt; instruction in a &lt;code&gt;Dockerfile&lt;/code&gt; to add one or
+more new volumes to any container created from that image.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;locating-a-volume&#34;&gt;Locating a volume&lt;/h3&gt;
+
+&lt;p&gt;You can locate the volume on the host by utilizing the &amp;lsquo;docker inspect&amp;rsquo; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker inspect web
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output will provide details on the container configurations including the
+volumes. The output should look something similar to the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+&amp;quot;Volumes&amp;quot;: {
+    &amp;quot;/webapp&amp;quot;: &amp;quot;/var/lib/docker/volumes/fac362...80535&amp;quot;
+},
+&amp;quot;VolumesRW&amp;quot;: {
+    &amp;quot;/webapp&amp;quot;: true
+}
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will notice in the above &amp;lsquo;Volumes&amp;rsquo; is specifying the location on the host and
+&amp;lsquo;VolumesRW&amp;rsquo; is specifying that the volume is read/write.&lt;/p&gt;
+
+&lt;h3 id=&#34;mount-a-host-directory-as-a-data-volume&#34;&gt;Mount a host directory as a data volume&lt;/h3&gt;
+
+&lt;p&gt;In addition to creating a volume using the &lt;code&gt;-v&lt;/code&gt; flag you can also mount a
+directory from your Docker daemon&amp;rsquo;s host into a container.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+If you are using Boot2Docker, your Docker daemon only has limited access to
+your OSX/Windows filesystem. Boot2Docker tries to auto-share your &lt;code&gt;/Users&lt;/code&gt;
+(OSX) or &lt;code&gt;C:\Users&lt;/code&gt; (Windows) directory - and so you can mount files or directories
+using &lt;code&gt;docker run -v /Users/&amp;lt;path&amp;gt;:/&amp;lt;container path&amp;gt; ...&lt;/code&gt; (OSX) or
+&lt;code&gt;docker run -v /c/Users/&amp;lt;path&amp;gt;:/&amp;lt;container path ...&lt;/code&gt; (Windows). All other paths
+come from the Boot2Docker virtual machine&amp;rsquo;s filesystem.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -P --name web -v /src/webapp:/opt/webapp training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will mount the host directory, &lt;code&gt;/src/webapp&lt;/code&gt;, into the container at
+&lt;code&gt;/opt/webapp&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+If the path &lt;code&gt;/opt/webapp&lt;/code&gt; already exists inside the container&amp;rsquo;s image, its
+contents will be replaced by the contents of &lt;code&gt;/src/webapp&lt;/code&gt; on the host to stay
+consistent with the expected behavior of &lt;code&gt;mount&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;When using Boot2Docker on Windows through git bash, there might be an issue with the
+way the source directory name is parsed. You can fix it by using a double slash at
+the beginning of the source directory name as explained in &lt;a href=&#34;https://github.com/docker/docker/issues/12751&#34;&gt;issue #12751&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is very useful for testing, for example we can
+mount our source code inside the container and see our application at work as
+we change the source code. The directory on the host must be specified as an
+absolute path and if the directory doesn&amp;rsquo;t exist Docker will automatically
+create it for you.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+This is not available from a &lt;code&gt;Dockerfile&lt;/code&gt; due to the portability
+and sharing purpose of built images. The host directory is, by its nature,
+host-dependent, so a host directory specified in a &lt;code&gt;Dockerfile&lt;/code&gt; probably
+wouldn&amp;rsquo;t work on all hosts.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Docker defaults to a read-write volume but we can also mount a directory
+read-only.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -P --name web -v /src/webapp:/opt/webapp:ro training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we&amp;rsquo;ve mounted the same &lt;code&gt;/src/webapp&lt;/code&gt; directory but we&amp;rsquo;ve added the &lt;code&gt;ro&lt;/code&gt;
+option to specify that the mount should be read-only.&lt;/p&gt;
+
+&lt;h3 id=&#34;mount-a-host-file-as-a-data-volume&#34;&gt;Mount a host file as a data volume&lt;/h3&gt;
+
+&lt;p&gt;The &lt;code&gt;-v&lt;/code&gt; flag can also be used to mount a single file  - instead of &lt;em&gt;just&lt;/em&gt;
+directories - from the host machine.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -it -v ~/.bash_history:/.bash_history ubuntu /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will drop you into a bash shell in a new container, you will have your bash
+history from the host and when you exit the container, the host will have the
+history of the commands typed while in the container.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Many tools used to edit files including &lt;code&gt;vi&lt;/code&gt; and &lt;code&gt;sed --in-place&lt;/code&gt; may result
+in an inode change. Since Docker v1.1.0, this will produce an error such as
+&amp;ldquo;&lt;em&gt;sed: cannot rename ./sedKdJ9Dy: Device or resource busy&lt;/em&gt;&amp;rdquo;. In the case where
+you want to edit the mounted file, it is often easiest to instead mount the
+parent directory.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;creating-and-mounting-a-data-volume-container&#34;&gt;Creating and mounting a data volume container&lt;/h2&gt;
+
+&lt;p&gt;If you have some persistent data that you want to share between
+containers, or want to use from non-persistent containers, it&amp;rsquo;s best to
+create a named Data Volume Container, and then to mount the data from
+it.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s create a new named container with a volume to share.
+While this container doesn&amp;rsquo;t run an application, it reuses the &lt;code&gt;training/postgres&lt;/code&gt;
+image so that all containers are using layers in common, saving disk space.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker create -v /dbdata --name dbdata training/postgres /bin/true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can then use the &lt;code&gt;--volumes-from&lt;/code&gt; flag to mount the &lt;code&gt;/dbdata&lt;/code&gt; volume in another container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d --volumes-from dbdata --name db1 training/postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And another:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d --volumes-from dbdata --name db2 training/postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case, if the &lt;code&gt;postgres&lt;/code&gt; image contained a directory called &lt;code&gt;/dbdata&lt;/code&gt;
+then mounting the volumes from the &lt;code&gt;dbdata&lt;/code&gt; container hides the
+&lt;code&gt;/dbdata&lt;/code&gt; files from the &lt;code&gt;postgres&lt;/code&gt; image. The result is only the files
+from the &lt;code&gt;dbdata&lt;/code&gt; container are visible.&lt;/p&gt;
+
+&lt;p&gt;You can use multiple &lt;code&gt;--volumes-from&lt;/code&gt; parameters to bring together multiple data
+volumes from multiple containers.&lt;/p&gt;
+
+&lt;p&gt;You can also extend the chain by mounting the volume that came from the
+&lt;code&gt;dbdata&lt;/code&gt; container in yet another container via the &lt;code&gt;db1&lt;/code&gt; or &lt;code&gt;db2&lt;/code&gt; containers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d --name db3 --volumes-from db1 training/postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you remove containers that mount volumes, including the initial &lt;code&gt;dbdata&lt;/code&gt;
+container, or the subsequent containers &lt;code&gt;db1&lt;/code&gt; and &lt;code&gt;db2&lt;/code&gt;, the volumes will not
+be deleted.  To delete the volume from disk, you must explicitly call
+&lt;code&gt;docker rm -v&lt;/code&gt; against the last container with a reference to the volume. This
+allows you to upgrade, or effectively migrate data volumes between containers.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Docker will not warn you when removing a container &lt;em&gt;without&lt;/em&gt;
+providing the &lt;code&gt;-v&lt;/code&gt; option to delete its volumes. If you remove containers
+without using the &lt;code&gt;-v&lt;/code&gt; option, you may end up with &amp;ldquo;dangling&amp;rdquo; volumes;
+volumes that are no longer referenced by a container.
+Dangling volumes are difficult to get rid of and can take up a large amount
+of disk space. We&amp;rsquo;re working on improving volume management and you can check
+progress on this in &lt;a href=&#34;https://github.com/docker/docker/pull/8484&#34;&gt;pull request #8484&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;backup-restore-or-migrate-data-volumes&#34;&gt;Backup, restore, or migrate data volumes&lt;/h2&gt;
+
+&lt;p&gt;Another useful function we can perform with volumes is use them for
+backups, restores or migrations.  We do this by using the
+&lt;code&gt;--volumes-from&lt;/code&gt; flag to create a new container that mounts that volume,
+like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --volumes-from dbdata -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we&amp;rsquo;ve launched a new container and mounted the volume from the
+&lt;code&gt;dbdata&lt;/code&gt; container. We&amp;rsquo;ve then mounted a local host directory as
+&lt;code&gt;/backup&lt;/code&gt;. Finally, we&amp;rsquo;ve passed a command that uses &lt;code&gt;tar&lt;/code&gt; to backup the
+contents of the &lt;code&gt;dbdata&lt;/code&gt; volume to a &lt;code&gt;backup.tar&lt;/code&gt; file inside our
+&lt;code&gt;/backup&lt;/code&gt; directory. When the command completes and the container stops
+we&amp;rsquo;ll be left with a backup of our &lt;code&gt;dbdata&lt;/code&gt; volume.&lt;/p&gt;
+
+&lt;p&gt;You could then restore it to the same container, or another that you&amp;rsquo;ve made
+elsewhere. Create a new container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -v /dbdata --name dbdata2 ubuntu /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then un-tar the backup file in the new container&amp;rsquo;s data volume.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --volumes-from dbdata2 -v $(pwd):/backup ubuntu cd /dbdata &amp;amp;&amp;amp; tar xvf /backup/backup.tar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can use the techniques above to automate backup, migration and
+restore testing using your preferred tools.&lt;/p&gt;
+
+&lt;h1 id=&#34;next-steps&#34;&gt;Next steps&lt;/h1&gt;
+
+&lt;p&gt;Now we&amp;rsquo;ve learned a bit more about how to use Docker we&amp;rsquo;re going to see how to
+combine Docker with the services available on
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; including Automated Builds and private
+repositories.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerrepos&#34;&gt;Working with Docker Hub&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Docker user guide</title>
+      <link>http://localhost/userguide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/userguide/</guid>
+      <description>
+
+&lt;h1 id=&#34;welcome-to-the-docker-user-guide&#34;&gt;Welcome to the Docker user guide&lt;/h1&gt;
+
+&lt;p&gt;In the &lt;a href=&#34;http://localhost/userguide/userguide/&#34;&gt;Introduction&lt;/a&gt; you got a taste of what Docker is and how it
+works. In this guide we&amp;rsquo;re going to take you through the fundamentals of
+using Docker and integrating it into your environment.&lt;/p&gt;
+
+&lt;p&gt;We’ll teach you how to use Docker to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Dockerize your applications.&lt;/li&gt;
+&lt;li&gt;Run your own containers.&lt;/li&gt;
+&lt;li&gt;Build Docker images.&lt;/li&gt;
+&lt;li&gt;Share your Docker images with others.&lt;/li&gt;
+&lt;li&gt;And a whole lot more!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We&amp;rsquo;ve broken this guide into major sections that take you through
+the Docker life cycle:&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-started-with-docker-hub&#34;&gt;Getting started with Docker Hub&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;How do I use Docker Hub?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker Hub is the central hub for Docker. It hosts public Docker images
+and provides services to help you build and manage your Docker
+environment. To learn more:&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerhub&#34;&gt;Using Docker Hub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;dockerizing-applications-a-hello-world&#34;&gt;Dockerizing applications: A &amp;ldquo;Hello world&amp;rdquo;&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;How do I run applications inside containers?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Docker offers a &lt;em&gt;container-based&lt;/em&gt; virtualization platform to power your
+applications. To learn how to Dockerize applications and run them:&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerizing&#34;&gt;Dockerizing Applications&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;working-with-containers&#34;&gt;Working with containers&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;How do I manage my containers?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you get a grip on running your applications in Docker containers
+we&amp;rsquo;re going to show you how to manage those containers. To find out
+about how to inspect, monitor and manage containers:&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/usingdocker&#34;&gt;Working With Containers&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;working-with-docker-images&#34;&gt;Working with Docker images&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;How can I access, share and build my own images?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve learnt how to use Docker it&amp;rsquo;s time to take the next step and
+learn how to build your own application images with Docker.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerimages&#34;&gt;Working with Docker Images&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;linking-containers-together&#34;&gt;Linking containers together&lt;/h2&gt;
+
+&lt;p&gt;Until now we&amp;rsquo;ve seen how to build individual applications inside Docker
+containers. Now learn how to build whole application stacks with Docker
+by linking together multiple Docker containers.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerlinks&#34;&gt;Linking Containers Together&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;managing-data-in-containers&#34;&gt;Managing data in containers&lt;/h2&gt;
+
+&lt;p&gt;Now we know how to link Docker containers together the next step is
+learning how to manage data, volumes and mounts inside our containers.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockervolumes&#34;&gt;Managing Data in Containers&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;working-with-docker-hub&#34;&gt;Working with Docker Hub&lt;/h2&gt;
+
+&lt;p&gt;Now we&amp;rsquo;ve learned a bit more about how to use Docker we&amp;rsquo;re going to see
+how to combine Docker with the services available on Docker Hub including
+Trusted Builds and private repositories.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerrepos&#34;&gt;Working with Docker Hub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-compose&#34;&gt;Docker Compose&lt;/h2&gt;
+
+&lt;p&gt;Docker Compose allows you to define a application&amp;rsquo;s components &amp;ndash; their containers,
+configuration, links and volumes &amp;ndash; in a single file. Then a single command
+will set everything up and start your application running.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/compose/&#34;&gt;Docker Compose user guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-machine&#34;&gt;Docker Machine&lt;/h2&gt;
+
+&lt;p&gt;Docker Machine helps you get Docker Engines up and running quickly. Machine
+can set up hosts for Docker Engines on your computer, on cloud providers,
+and/or in your data center, and then configure your Docker client to securely
+talk to them.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/machine/&#34;&gt;Docker Machine user guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-swarm&#34;&gt;Docker Swarm&lt;/h2&gt;
+
+&lt;p&gt;Docker Swarm pools several Docker Engines together and exposes them as a single
+virtual Docker Engine. It serves the standard Docker API, so any tool that already
+works with Docker can now transparently scale up to multiple hosts.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/swarm/&#34;&gt;Docker Swarm user guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-help&#34;&gt;Getting help&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.docker.com/&#34;&gt;Docker homepage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.docker.com/&#34;&gt;Docker blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/&#34;&gt;Docker documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.docker.com/gettingstarted/&#34;&gt;Docker Getting Started Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker&#34;&gt;Docker code on GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://groups.google.com/forum/#!forum/docker-user&#34;&gt;Docker mailing
+list&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Docker on IRC: irc.freenode.net and channel #docker&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://twitter.com/docker&#34;&gt;Docker on Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Get &lt;a href=&#34;http://stackoverflow.com/search?q=docker&#34;&gt;Docker help&lt;/a&gt; on
+StackOverflow&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.docker.com/&#34;&gt;Docker.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Working with containers</title>
+      <link>http://localhost/userguide/usingdocker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/userguide/usingdocker/</guid>
+      <description>
+
+&lt;h1 id=&#34;working-with-containers&#34;&gt;Working with containers&lt;/h1&gt;
+
+&lt;p&gt;In the &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerizing&#34;&gt;last section of the Docker User Guide&lt;/a&gt;
+we launched our first containers. We launched two containers using the
+&lt;code&gt;docker run&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Containers we ran interactively in the foreground.&lt;/li&gt;
+&lt;li&gt;One container we ran daemonized in the background.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In the process we learned about several Docker commands:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;docker ps&lt;/code&gt; - Lists containers.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker logs&lt;/code&gt; - Shows us the standard output of a container.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker stop&lt;/code&gt; - Stops running containers.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt;
+Another way to learn about &lt;code&gt;docker&lt;/code&gt; commands is our
+&lt;a href=&#34;https://www.docker.com/tryit/&#34;&gt;interactive tutorial&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The &lt;code&gt;docker&lt;/code&gt; client is pretty simple. Each action you can take
+with Docker is a command and each command can take a series of
+flags and arguments.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Usage:  [sudo] docker [command] [flags] [arguments] ..
+# Example:
+$ docker run -i -t ubuntu /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s see this in action by using the &lt;code&gt;docker version&lt;/code&gt; command to return
+version information on the currently installed Docker client and daemon.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command will not only provide you the version of Docker client and
+daemon you are using, but also the version of Go (the programming
+language powering Docker).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Client version: 0.8.0
+Go version (client): go1.2
+
+Git commit (client): cc3a8c8
+Server version: 0.8.0
+
+Git commit (server): cc3a8c8
+Go version (server): go1.2
+
+Last stable version: 0.8.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;get-docker-command-help&#34;&gt;Get Docker command help&lt;/h2&gt;
+
+&lt;p&gt;You can display the help for specific Docker commands. The help details the
+options and their usage. To see a list of all the possible commands, use the
+following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker --help
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To see usage for a specific command, specify the command with the &lt;code&gt;--help&lt;/code&gt; flag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker attach --help
+
+Usage: docker attach [OPTIONS] CONTAINER
+
+Attach to a running container
+
+  --help=false        Print usage
+  --no-stdin=false    Do not attach stdin
+  --sig-proxy=true    Proxy all received signals to the process
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+For further details and examples of each command, see the
+&lt;a href=&#34;http://localhost/userguide/userguide/reference/commandline/cli/&#34;&gt;command reference&lt;/a&gt; in this guide.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;running-a-web-application-in-docker&#34;&gt;Running a web application in Docker&lt;/h2&gt;
+
+&lt;p&gt;So now we&amp;rsquo;ve learnt a bit more about the &lt;code&gt;docker&lt;/code&gt; client let&amp;rsquo;s move onto
+the important stuff: running more containers. So far none of the
+containers we&amp;rsquo;ve run did anything particularly useful, so let&amp;rsquo;s
+change that by running an example web application in Docker.&lt;/p&gt;
+
+&lt;p&gt;For our web application we&amp;rsquo;re going to run a Python Flask application.
+Let&amp;rsquo;s start with a &lt;code&gt;docker run&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -P training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s review what our command did. We&amp;rsquo;ve specified two flags: &lt;code&gt;-d&lt;/code&gt; and
+&lt;code&gt;-P&lt;/code&gt;. We&amp;rsquo;ve already seen the &lt;code&gt;-d&lt;/code&gt; flag which tells Docker to run the
+container in the background. The &lt;code&gt;-P&lt;/code&gt; flag is new and tells Docker to
+map any required network ports inside our container to our host. This
+lets us view our web application.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ve specified an image: &lt;code&gt;training/webapp&lt;/code&gt;. This image is a
+pre-built image we&amp;rsquo;ve created that contains a simple Python Flask web
+application.&lt;/p&gt;
+
+&lt;p&gt;Lastly, we&amp;rsquo;ve specified a command for our container to run: &lt;code&gt;python app.py&lt;/code&gt;. This launches our web application.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+You can see more detail on the &lt;code&gt;docker run&lt;/code&gt; command in the &lt;a href=&#34;http://localhost/userguide/userguide/reference/commandline/cli/#run&#34;&gt;command
+reference&lt;/a&gt; and the &lt;a href=&#34;http://localhost/userguide/userguide/reference/run/&#34;&gt;Docker Run
+Reference&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;viewing-our-web-application-container&#34;&gt;Viewing our web application container&lt;/h2&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s see our running container using the &lt;code&gt;docker ps&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps -l
+CONTAINER ID  IMAGE                   COMMAND       CREATED        STATUS        PORTS                    NAMES
+bc533791f3f5  training/webapp:latest  python app.py 5 seconds ago  Up 2 seconds  0.0.0.0:49155-&amp;gt;5000/tcp  nostalgic_morse
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can see we&amp;rsquo;ve specified a new flag, &lt;code&gt;-l&lt;/code&gt;, for the &lt;code&gt;docker ps&lt;/code&gt;
+command. This tells the &lt;code&gt;docker ps&lt;/code&gt; command to return the details of the
+&lt;em&gt;last&lt;/em&gt; container started.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+By default, the &lt;code&gt;docker ps&lt;/code&gt; command only shows information about running
+containers. If you want to see stopped containers too use the &lt;code&gt;-a&lt;/code&gt; flag.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We can see the same details we saw &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerizing&#34;&gt;when we first Dockerized a
+container&lt;/a&gt; with one important addition in the &lt;code&gt;PORTS&lt;/code&gt;
+column.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;PORTS
+0.0.0.0:49155-&amp;gt;5000/tcp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When we passed the &lt;code&gt;-P&lt;/code&gt; flag to the &lt;code&gt;docker run&lt;/code&gt; command Docker mapped any
+ports exposed in our image to our host.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+We&amp;rsquo;ll learn more about how to expose ports in Docker images when
+&lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerimages&#34;&gt;we learn how to build images&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In this case Docker has exposed port 5000 (the default Python Flask
+port) on port 49155.&lt;/p&gt;
+
+&lt;p&gt;Network port bindings are very configurable in Docker. In our last example the
+&lt;code&gt;-P&lt;/code&gt; flag is a shortcut for &lt;code&gt;-p 5000&lt;/code&gt; that maps port 5000 inside the container
+to a high port (from &lt;em&gt;ephemeral port range&lt;/em&gt; which typically ranges from 32768
+to 61000) on the local Docker host. We can also bind Docker containers to
+specific ports using the &lt;code&gt;-p&lt;/code&gt; flag, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -p 80:5000 training/webapp python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This would map port 5000 inside our container to port 80 on our local
+host. You might be asking about now: why wouldn&amp;rsquo;t we just want to always
+use 1:1 port mappings in Docker containers rather than mapping to high
+ports? Well 1:1 mappings have the constraint of only being able to map
+one of each port on your local host. Let&amp;rsquo;s say you want to test two
+Python applications: both bound to port 5000 inside their own containers.
+Without Docker&amp;rsquo;s port mapping you could only access one at a time on the
+Docker host.&lt;/p&gt;
+
+&lt;p&gt;So let&amp;rsquo;s now browse to port 49155 in a web browser to
+see the application.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/userguide/userguide/userguide/webapp1.png&#34; alt=&#34;Viewing the web application&#34; /&gt;
+.&lt;/p&gt;
+
+&lt;p&gt;Our Python application is live!&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+If you have used the &lt;code&gt;boot2docker&lt;/code&gt; virtual machine on OS X, Windows or Linux,
+you&amp;rsquo;ll need to get the IP of the virtual host instead of using localhost.
+You can do this by running the following outside of the &lt;code&gt;boot2docker&lt;/code&gt; shell
+(i.e., from your comment line or terminal application).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker ip
+The VM&#39;s Host only interface IP address is: 192.168.59.103
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case you&amp;rsquo;d browse to &lt;a href=&#34;http://192.168.59.103:49155&#34;&gt;http://192.168.59.103:49155&lt;/a&gt; for the above example.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;a-network-port-shortcut&#34;&gt;A network port shortcut&lt;/h2&gt;
+
+&lt;p&gt;Using the &lt;code&gt;docker ps&lt;/code&gt; command to return the mapped port is a bit clumsy so
+Docker has a useful shortcut we can use: &lt;code&gt;docker port&lt;/code&gt;. To use &lt;code&gt;docker port&lt;/code&gt; we
+specify the ID or name of our container and then the port for which we need the
+corresponding public-facing port.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker port nostalgic_morse 5000
+0.0.0.0:49155
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case we&amp;rsquo;ve looked up what port is mapped externally to port 5000 inside
+the container.&lt;/p&gt;
+
+&lt;h2 id=&#34;viewing-the-web-application-s-logs&#34;&gt;Viewing the web application&amp;rsquo;s logs&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s also find out a bit more about what&amp;rsquo;s happening with our application and
+use another of the commands we&amp;rsquo;ve learnt, &lt;code&gt;docker logs&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker logs -f nostalgic_morse
+* Running on http://0.0.0.0:5000/
+10.0.2.2 - - [23/May/2014 20:16:31] &amp;quot;GET / HTTP/1.1&amp;quot; 200 -
+10.0.2.2 - - [23/May/2014 20:16:31] &amp;quot;GET /favicon.ico HTTP/1.1&amp;quot; 404 -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This time though we&amp;rsquo;ve added a new flag, &lt;code&gt;-f&lt;/code&gt;. This causes the &lt;code&gt;docker
+logs&lt;/code&gt; command to act like the &lt;code&gt;tail -f&lt;/code&gt; command and watch the
+container&amp;rsquo;s standard out. We can see here the logs from Flask showing
+the application running on port 5000 and the access log entries for it.&lt;/p&gt;
+
+&lt;h2 id=&#34;looking-at-our-web-application-container-s-processes&#34;&gt;Looking at our web application container&amp;rsquo;s processes&lt;/h2&gt;
+
+&lt;p&gt;In addition to the container&amp;rsquo;s logs we can also examine the processes
+running inside it using the &lt;code&gt;docker top&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker top nostalgic_morse
+PID                 USER                COMMAND
+854                 root                python app.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we can see our &lt;code&gt;python app.py&lt;/code&gt; command is the only process running inside
+the container.&lt;/p&gt;
+
+&lt;h2 id=&#34;inspecting-our-web-application-container&#34;&gt;Inspecting our web application container&lt;/h2&gt;
+
+&lt;p&gt;Lastly, we can take a low-level dive into our Docker container using the
+&lt;code&gt;docker inspect&lt;/code&gt; command. It returns a JSON hash of useful configuration
+and status information about Docker containers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker inspect nostalgic_morse
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s see a sample of that JSON output.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[{
+    &amp;quot;ID&amp;quot;: &amp;quot;bc533791f3f500b280a9626688bc79e342e3ea0d528efe3a86a51ecb28ea20&amp;quot;,
+    &amp;quot;Created&amp;quot;: &amp;quot;2014-05-26T05:52:40.808952951Z&amp;quot;,
+    &amp;quot;Path&amp;quot;: &amp;quot;python&amp;quot;,
+    &amp;quot;Args&amp;quot;: [
+       &amp;quot;app.py&amp;quot;
+    ],
+    &amp;quot;Config&amp;quot;: {
+       &amp;quot;Hostname&amp;quot;: &amp;quot;bc533791f3f5&amp;quot;,
+       &amp;quot;Domainname&amp;quot;: &amp;quot;&amp;quot;,
+       &amp;quot;User&amp;quot;: &amp;quot;&amp;quot;,
+. . .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can also narrow down the information we want to return by requesting a
+specific element, for example to return the container&amp;rsquo;s IP address we would:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker inspect -f &#39;{{ .NetworkSettings.IPAddress }}&#39; nostalgic_morse
+172.17.0.5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;stopping-our-web-application-container&#34;&gt;Stopping our web application container&lt;/h2&gt;
+
+&lt;p&gt;Okay we&amp;rsquo;ve seen web application working. Now let&amp;rsquo;s stop it using the
+&lt;code&gt;docker stop&lt;/code&gt; command and the name of our container: &lt;code&gt;nostalgic_morse&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker stop nostalgic_morse
+nostalgic_morse
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can now use the &lt;code&gt;docker ps&lt;/code&gt; command to check if the container has
+been stopped.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps -l
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;restarting-our-web-application-container&#34;&gt;Restarting our web application container&lt;/h2&gt;
+
+&lt;p&gt;Oops! Just after you stopped the container you get a call to say another
+developer needs the container back. From here you have two choices: you
+can create a new container or restart the old one. Let&amp;rsquo;s look at
+starting our previous container back up.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker start nostalgic_morse
+nostalgic_morse
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now quickly run &lt;code&gt;docker ps -l&lt;/code&gt; again to see the running container is
+back up or browse to the container&amp;rsquo;s URL to see if the application
+responds.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Also available is the &lt;code&gt;docker restart&lt;/code&gt; command that runs a stop and
+then start on the container.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;removing-our-web-application-container&#34;&gt;Removing our web application container&lt;/h2&gt;
+
+&lt;p&gt;Your colleague has let you know that they&amp;rsquo;ve now finished with the container
+and won&amp;rsquo;t need it again. So let&amp;rsquo;s remove it using the &lt;code&gt;docker rm&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker rm nostalgic_morse
+Error: Impossible to remove a running container, please stop it first or use -f
+2014/05/24 08:12:56 Error: failed to remove one or more containers
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What happened? We can&amp;rsquo;t actually remove a running container. This protects
+you from accidentally removing a running container you might need. Let&amp;rsquo;s try
+this again by stopping the container first.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker stop nostalgic_morse
+nostalgic_morse
+$ docker rm nostalgic_morse
+nostalgic_morse
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And now our container is stopped and deleted.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Always remember that deleting a container is final!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;next-steps&#34;&gt;Next steps&lt;/h1&gt;
+
+&lt;p&gt;Until now we&amp;rsquo;ve only used images that we&amp;rsquo;ve downloaded from
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;. Next, let&amp;rsquo;s get introduced to
+building and sharing our own images.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;http://localhost/userguide/userguide/userguide/dockerimages&#34;&gt;Working with Docker Images&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

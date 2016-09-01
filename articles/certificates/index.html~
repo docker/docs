@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Using certificates for repository client verification </title>
+     <link rel="shortcut icon" href="https://docs.docker.com/v1.7/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/dist/assets/css/app.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.6/animate.min.css">
+    <link rel="stylesheet" href="/v1.7/css/custom.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/dist/assets/js/modernizr.js"></script> 
+</head>
+<body>
+  <div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+
+      <a class="left-off-canvas-toggle" href="#" >
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve">
+          <path fill="#3597D4" d="M30.583,9.328c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,7.966,30.583,8.576,30.583,9.328L30.583,9.328z"/>
+          <path fill="#3597D4" d="M30.583,17.09c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,15.728,30.583,16.338,30.583,17.09L30.583,17.09z"/>
+          <path fill="#3597D4" d="M30.583,24.387c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,23.025,30.583,23.635,30.583,24.387L30.583,24.387z"/>
+        </svg>
+      </a>
+      <a class="button secondary small get-started-cta">Get Started</a>
+      <header class="main-header">
+        <div class="row">
+          <div class="large-3 columns">
+            <a href="http://docs.docker.com/v1.7/"><img class="logo" src="/dist/assets/images/logo.png"></a>
+          </div>
+          <div class="large-9 columns">
+            <ul class="nav-global">
+              <li><a href="https://www.docker.com/support">Support</a></li>
+              <li><a href="https://training.docker.com/">Training</a></li>
+              <li><a href="https://docs.docker.com/v1.7/">Docs</a></li>
+              <li><a href="http://blog.docker.com/">Blog</a></li>
+              <li><a href="https://hub.docker.com/account/signup/">Docker Hub</a></li>
+              <li><a class="button" href="/mac/started/">Get Started</a></li>
+            </ul>
+            <ul class="nav-main">
+              <li><a href="https://www.docker.com/products">Products</a>
+                <ul>
+                  <li><a href="https://www.docker.com/pricing">Pricing</a></li>
+                  <li><a href="https://www.docker.com/whatisdocker">What is Docker?</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/customers">Customers</a></li>
+              <li><a href="https://www.docker.com/community">Community</a>
+                <ul>
+                  <li><a href="https://www.docker.com/community/meetups">Meetups</a></li>
+                  <li><a href="https://www.docker.com/community/events">Events</a></li>
+                  <li><a href="https://forums.docker.com">Forums</a></li>
+                  <li><a href="http://www.scoop.it/t/docker-by-docker">Community News</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/partners">Partners</a>
+                <ul>
+                  <li><a href="https://www.docker.com/partners/partner-programs">Partner Programs</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/company">Company</a>
+                <ul>
+                  <li><a href="https://www.docker.com/news-and-press">News &amp; Press</a></li>
+                  <li><a href="https://www.docker.com/work-docker">Work at Docker</a></li>
+                  <li><a href="https://www.docker.com/company/management">Management</a></li>
+                  <li><a href="https://www.docker.com/company/contact">Contact</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/open-source">Open Source</a>
+                <ul>
+                  <li><a href="https://www.docker.com/contribute">Contribute</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      
+      <aside class="left-off-canvas-menu">
+        <ul class="off-canvas-list">
+          <li class="has-submenu"><a href="#">Products</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">What Is Docker</a></li>
+              <li><a href="#">Products</a></li>
+              <li><a href="#">Docker Engine</a></li>
+              <li><a href="#">Docker Hub</a></li>
+              <li><a href="#">Docker Registry</a></li>
+              <li><a href="#">Docker Machine</a></li>
+              <li><a href="#">Docker Swarm</a></li>
+              <li><a href="#">Docker Compose</a></li>
+              <li><a href="#">Kitematic</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Customers</a></li>
+          <li class="has-submenu"><a href="#">Community</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#">Meetups</a></li>
+              <li><a href="https://www.docker.com/community/events">Events</a></li>
+              <li><a href="#">Forum</a></li>
+              <li><a href="#">Scoop.it</a></li>
+            </ul>
+          </li>
+          <li class="has-submenu"><a href="#">Partners</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Partners</a></li>
+              <li><a href="https://www.docker.com/partners/partner-programs">Partners Programs</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Company</a></li>
+          <li class="has-submenu"><a href="#">Open Source</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Open Source</a></li>
+              <li><a href="#">Contribute</a></li>
+              <li><a href="#">Governance</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav-global-off-canvas">
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Training</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Sign in</a></li>
+          <li><a href="#">Sign up</a></li>
+        </ul>
+      </aside>
+      
+      <a class="exit-off-canvas"></a>
+<div id="docs" class="row">
+    <div class="large-3 columns">
+        <section id="multiple" data-accordion-group>
+  
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Install</button>
+          <div data-content>
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Engine</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/installation/mac/" class=""> Installation on Mac OS X</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/installation/windows/" class=""> Installation on Windows</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Linux</button>
+                          <div data-content>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/archlinux/" class=""> Installation on Arch Linux</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/cruxlinux/" class=""> Installation on CRUX Linux</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/centos/" class=""> Installation on CentOS</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/debian/" class=""> Installation on Debian</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/fedora/" class=""> Installation on Fedora</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/frugalware/" class=""> Installation on FrugalWare</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/gentoolinux/" class=""> Installation on Gentoo</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/oracle/" class=""> Installation on Oracle Linux</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/rhel/" class=""> Installation on Red Hat Enterprise Linux</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/ubuntulinux/" class=""> Installation on Ubuntu </a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/SUSE/" class=""> Installation on openSUSE and SUSE Linux Enterprise</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Cloud</button>
+                          <div data-content>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/amazon/" class=""> Amazon EC2 Installation</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/joyent/" class=""> Install on Joyent Public Cloud</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/google/" class=""> Installation on Google Cloud Platform</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/softlayer/" class=""> Installation on IBM SoftLayer </a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/azure/" class=""> Installation on Microsoft Azure platform</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/installation/rackspace/" class=""> Installation on Rackspace Cloud</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/installation/binaries/" class=""> Installation from binaries</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/kitematic/" class=""> Kitematic</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/machine/install-machine/" class=""> Docker Machine</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/compose/install/" class=""> Docker Compose</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/swarm/install-w-machine/" class=""> Docker Swarm</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Docker Fundamentals</button>
+          <div data-content>
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/docker/userguide/" class=""> The Docker user guide</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Work with Docker Images</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/dockerfile_best-practices/" class=""> Best practices for writing Dockerfiles</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/baseimages/" class=""> Create a base image</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/userguide/dockerimages/" class=""> Get started with images</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/userguide/dockerrepos/" class=""> Get started with Docker Hub</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Work with Docker Containers</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/basics/" class=""> Get started with containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/userguide/usingdocker/" class=""> Working with containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/userguide/dockervolumes/" class=""> Managing data in containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/userguide/dockerlinks/" class=""> Linking containers together</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/host_integration/" class=""> Automatically start containers</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker on Windows &amp; OSX</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/dsc/" class=""> PowerShell DSC Usage</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/b2d_volume_resize/" class=""> Resizing a Boot2Docker volume	</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Use the Kitematic GUI</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/kitematic/userguide/" class=""> Kitematic User Guide: Intro &amp; Overview</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/kitematic/nginx-web-server/" class=""> Set up an Nginx web server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/kitematic/minecraft-server/" class=""> Set up a Minecraft Server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/kitematic/rethinkdb-dev-database/" class=""> Creating a Local RethinkDB Database for Development</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/kitematic/faq/" class=""> Frequently Asked Questions</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/kitematic/known-issues/" class=""> Known Issues</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Use Docker</button>
+          <div data-content>
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/docker/misc/" class=""> About Docker</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/docker/userguide/labels-custom-metadata/" class=""> Apply custom metadata</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/docker/introduction/understanding-docker/" class=""> Understand the architecture</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Provision &amp; set up Docker hosts</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/machine/" class=""> Overview of Docker Machine</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Create multi-container applications</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/compose/" class=""> Overview of Docker Compose</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/compose/production/" class=""> Using Compose in production</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/compose/extends/" class=""> Extending services in Compose</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/compose/completion/" class=""> Command Completion</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/compose/django/" class=""> Quickstart Guide: Compose and Django</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/compose/rails/" class=""> Quickstart Guide: Compose and Rails</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/compose/wordpress/" class=""> Quickstart Guide: Compose and Wordpress</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Cluster Docker containers</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/swarm/" class=""> Docker Swarm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/swarm/install-manual/" class=""> Create a swarm for development</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/swarm/discovery/" class=""> Docker Swarm discovery</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/swarm/scheduler/filter/" class=""> Docker Swarm filters</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/swarm/scheduler/strategy/" class=""> Docker Swarm strategies</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Adminstrate Docker</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/networking/" class=""> Network configuration</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/security/" class=""> Docker security</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/configuring/" class=""> Configuring and running Docker</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/runmetrics/" class=""> Runtime metrics</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/https/" class=""> Protect the Docker daemon socket</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/ambassador_pattern_linking/" class=""> Link via an ambassador container</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/articles/systemd/" class=""> Control and configure Docker with systemd</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Applications and Services</button>
+                          <div data-content>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/examples/running_riak_service/" class=""> Dockerizing a Riak service</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/docker/examples/running_ssh_service/" class=""> Dockerizing an SSH service</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Integrate with Third-party Tools</button>
+                          <div data-content>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/articles/cfengine_process_management/" class=""> Process management with CFEngine</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/articles/chef/" class=""> Using Chef</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/articles/puppet/" class=""> Using Puppet</a>
+                            
+                                <a data-link href="http://docs.docker.com/v1.7/articles/using_supervisord/" class=""> Using Supervisor with Docker</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Applied Docker</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/examples/mongodb/" class=""> Dockerizing MongoDB</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/examples/postgresql_service/" class=""> Dockerizing PostgreSQL</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/examples/couchdb_data_volumes/" class=""> Dockerizing a CouchDB service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/examples/nodejs_web_app/" class=""> Dockerizing a Node.js web app</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/examples/running_redis_service/" class=""> Dockerizing a Redis service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/examples/apt-cacher-ng/" class=""> Dockerizing an apt-cacher-ng service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/userguide/dockerizing/" class=""> Dockerizing applications: A &#39;Hello world&#39;</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Manage image repositories</button>
+          <div data-content>
+            
+              
+                <article data-accordion>
+                  <button data-control> The Public Hub</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/docker-hub/userguide/" class=""> Docker Hub user guide</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/docker-hub/" class=""> The Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/docker-hub/accounts/" class=""> Accounts on Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/userguide/dockerhub/" class=""> Getting started with Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/docker-hub/repos/" class=""> Your Repositories on Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/docker-hub/builds/" class=""> Automated Builds on Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/docker-hub/official_repos/" class=""> Official Repositories on Docker Hub</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Trusted Registry</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker-trusted-registry/" class=""> Overview</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker-trusted-registry/quick-start/" class=""> Quick-start: Basic Workflow</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker-trusted-registry/userguide/" class=""> User guide</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker-trusted-registry/adminguide/" class=""> Admin guide</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker-trusted-registry/install/" class=""> Installation</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker-trusted-registry/configuration/" class=""> Configuration options</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker-trusted-registry/support/" class=""> Support</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker-trusted-registry/release-notes/" class=""> Release notes</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker-trusted-registry/prior-release-notes/" class=""> Prior release notes archive</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Registry</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/registry/" class=""> Docker Registry 2.0</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/registry/introduction/" class=""> Understanding the Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/registry/deploying/" class=""> Deploying a registry server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/registry/configuration/" class=""> Configure a Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/registry/notifications/" class=""> Work with Notifications</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/registry/authentication/" class=""> Authentication for the Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/registry/help/" class=""> Getting help</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/articles/certificates/" class=" active"> Using certificates for repository client verification</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/articles/registry_mirror/" class=""> Run a local registry mirror</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Command and API references</button>
+          <div data-content>
+            
+              
+                <article data-accordion>
+                  <button data-control> Command line reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/cli/" class=""> Using the command line</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/daemon/" class=""> daemon</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/attach/" class=""> attach</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/build/" class=""> build</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/commit/" class=""> commit</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/cp/" class=""> cp</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/create/" class=""> create</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/diff/" class=""> diff</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/events/" class=""> events</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/exec/" class=""> exec</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/export/" class=""> export</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/history/" class=""> history</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/images/" class=""> images</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/import/" class=""> import</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/info/" class=""> info</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/inspect/" class=""> inspect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/kill/" class=""> kill</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/load/" class=""> load</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/login/" class=""> login</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/logout/" class=""> logout</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/logs/" class=""> logs</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/pause/" class=""> pause</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/port/" class=""> port</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/ps/" class=""> ps</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/pull/" class=""> pull</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/push/" class=""> push</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/rename/" class=""> rename</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/restart/" class=""> restart</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/rm/" class=""> rm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/rmi/" class=""> rmi</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/run/" class=""> run</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/save/" class=""> save</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/search/" class=""> search</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/start/" class=""> start</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/stats/" class=""> stats</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/stop/" class=""> stop</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/tag/" class=""> tag</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/top/" class=""> top</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/unpause/" class=""> unpause</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/version/" class=""> version</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/commandline/wait/" class=""> wait</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/docker/reference/run/" class=""> Docker run reference</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/docker/reference/builder/" class=""> Dockerfile reference</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/docker/reference/api/remote_api_client_libraries/" class=""> Remote API client libraries</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/docker/reference/api/docker_io_accounts_api/" class=""> docker.io accounts API</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Remote API</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/api/docker-io_api/" class=""> Docker Hub API</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/api/docker_remote_api/" class=""> Remote API</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/api/docker_remote_api_v1.19/" class=""> Remote API v1.19</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/api/docker_remote_api_v1.18/" class=""> Remote API v1.18</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/api/docker_remote_api_v1.17/" class=""> Remote API v1.17</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/api/docker_remote_api_v1.16/" class=""> Remote API v1.16</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/api/docker_remote_api_v1.15/" class=""> Remote API v1.15</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/api/docker_remote_api_v1.14/" class=""> Remote API v1.14</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Hub</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/reference/api/hub_registry_spec/" class=""> The Docker Hub and the Registry v1</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Compose Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/compose/cli/" class=""> Compose CLI reference</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/compose/yml/" class=""> docker-compose.yml reference</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/compose/env/" class=""> Compose environment variables reference</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="" class=""> Docker Machine Reference</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Swarm Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/swarm/api/swarm-api/" class=""> Docker Swarm API</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Registry Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/registry/spec/api/" class=""> Docker Registry HTTP API V2</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/registry/storagedrivers/" class=""> Docker Registry Storage Driver</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/registry/spec/auth/token/" class=""> Docker Registry v2 Authentication</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Open Source at Docker</button>
+          <div data-content>
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/opensource/how-to-contribute/" class=""> Overview of contributing</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/docker/project/get-help/" class=""> Where to chat or get help</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Configure Development Environment</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/who-written-for/" class=""> README first</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/software-required/" class=""> Get the required software</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/software-req-win/" class=""> Set up for development on Windows</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/set-up-git/" class=""> Configure Git for contributing</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/set-up-dev-env/" class=""> Work with a development container</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/test-and-docs/" class=""> Run tests and test documentation</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Contribution Workflow</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/make-a-contribution/" class=""> Understand how to contribute</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/find-an-issue/" class=""> Find and claim an issue</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/work-issue/" class=""> Work on your issue</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/create-pr/" class=""> Create a pull request (PR)</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/review-pr/" class=""> Participate in the PR review</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/advanced-contributing/" class=""> Advanced contributing</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/docker/project/coding-style/" class=""> Coding style checklist</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/opensource/code/" class=""> Contribute code overview</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/opensource/community/" class=""> Support the community</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/opensource/issues/" class=""> Organize our issues</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/opensource/meetups/" class=""> Organize a Docker Meetup</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/opensource/test/" class=""> Testing contributions</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Governance</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/opensource/governance/dgab-info/" class=""> Docker Governance Advisory Board</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/opensource/governance/board-profiles/" class=""> Board member profiles</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="http://docs.docker.com/v1.7/opensource/governance/conduct-code/" class=""> Code of conduct</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/docker/project/doc-style/" class=""> Style guide for Docker documentation</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> About</button>
+          <div data-content>
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/release-notes/" class=""> Docker Release Notes</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/swarm/release-notes/" class=""> Docker Swarm Release Notes</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/docker/misc/faq/" class=""> FAQ</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/docker/reference/glossary/" class=""> Docker Glossary</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Get older docs</button>
+          <div data-content>
+            
+              
+                <a data-link href="http://beta-docs.docker.io/v1.6/" class=""> Version 1.6</a>
+              
+            
+              
+                <a data-link href="http://beta-docs.docker.io/v1.5/" class=""> Version 1.5</a>
+              
+            
+              
+                <a data-link href="http://beta-docs.docker.io/v1.4/" class=""> Version 1.4</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+</section>
+
+<script>
+$(document).ready(function () {
+  var $activeLink = $('#multiple [data-link].active');
+  var $accordions = $activeLink.parents('article[data-accordion]');
+  $($accordions.get().reverse()).each(function (index, accordion) {
+    var $accordion = $(accordion);
+    var $content = $accordion.find('[data-content]');
+    $accordion.addClass('open');
+    $content.css({'max-height': '100%'});
+  });
+});
+</script>
+    </div>
+    <div class="large-6 columns">
+      <section id="main">
+        <article id="content">
+          
+
+<h1 id="using-certificates-for-repository-client-verification">Using certificates for repository client verification</h1>
+
+<p>In <a href="http://docs.docker.com/v1.7/articles/articles/articles/https">Running Docker with HTTPS</a>, you learned that, by default,
+Docker runs via a non-networked Unix socket and TLS must be enabled in order
+to have the Docker client and the daemon communicate securely over HTTPS.</p>
+
+<p>Now, you will see how to allow the Docker registry (i.e., <em>a server</em>) to
+verify that the Docker daemon (i.e., <em>a client</em>) has the right to access the
+images being hosted with <em>certificate-based client-server authentication</em>.</p>
+
+<p>We will show you how to install a Certificate Authority (CA) root certificate
+for the registry and how to set the client TLS certificate for verification.</p>
+
+<h2 id="understanding-the-configuration">Understanding the configuration</h2>
+
+<p>A custom certificate is configured by creating a directory under
+<code>/etc/docker/certs.d</code> using the same name as the registry&rsquo;s hostname (e.g.,
+<code>localhost</code>). All <code>*.crt</code> files are added to this directory as CA roots.</p>
+
+<blockquote>
+<p><strong>Note:</strong>
+In the absence of any root certificate authorities, Docker
+will use the system default (i.e., host&rsquo;s root CA set).</p>
+</blockquote>
+
+<p>The presence of one or more <code>&lt;filename&gt;.key/cert</code> pairs indicates to Docker
+that there are custom certificates required for access to the desired
+repository.</p>
+
+<blockquote>
+<p><strong>Note:</strong>
+If there are multiple certificates, each will be tried in alphabetical
+order. If there is an authentication error (e.g., 403, 404, 5xx, etc.), Docker
+will continue to try with the next certificate.</p>
+</blockquote>
+
+<p>Our example is set up like this:</p>
+
+<pre><code>/etc/docker/certs.d/        &lt;-- Certificate directory
+└── localhost               &lt;-- Hostname
+   ├── client.cert          &lt;-- Client certificate
+   ├── client.key           &lt;-- Client key
+   └── localhost.crt        &lt;-- Registry certificate
+</code></pre>
+
+<h2 id="creating-the-client-certificates">Creating the client certificates</h2>
+
+<p>You will use OpenSSL&rsquo;s <code>genrsa</code> and <code>req</code> commands to first generate an RSA
+key and then use the key to create the certificate.</p>
+
+<pre><code>$ openssl genrsa -out client.key 1024
+$ openssl req -new -x509 -text -key client.key -out client.cert
+</code></pre>
+
+<blockquote>
+<p><strong>Warning:</strong>:
+Using TLS and managing a CA is an advanced topic.
+You should be familiar with OpenSSL, x509, and TLS before
+attempting to use them in production.</p>
+
+<p><strong>Warning:</strong>
+These TLS commands will only generate a working set of certificates on Linux.
+The version of OpenSSL in Mac OS X is incompatible with the type of
+certificate Docker requires.</p>
+</blockquote>
+
+<h2 id="testing-the-verification-setup">Testing the verification setup</h2>
+
+<p>You can test this setup by using Apache to host a Docker registry.
+For this purpose, you can copy a registry tree (containing images) inside
+the Apache root.</p>
+
+<blockquote>
+<p><strong>Note:</strong>
+You can find such an example <a href="http://people.gnome.org/~alexl/v1.tar.gz">here</a> - which contains the busybox image.</p>
+</blockquote>
+
+<p>Once you set up the registry, you can use the following Apache configuration
+to implement certificate-based protection.</p>
+
+<pre><code># This must be in the root context, otherwise it causes a re-negotiation
+# which is not supported by the TLS implementation in go
+SSLVerifyClient optional_no_ca
+
+&lt;Location /v1&gt;
+Action cert-protected /cgi-bin/cert.cgi
+SetHandler cert-protected
+
+Header set x-docker-registry-version &quot;0.6.2&quot;
+SetEnvIf Host (.*) custom_host=$1
+Header set X-Docker-Endpoints &quot;%{custom_host}e&quot;
+&lt;/Location&gt;
+</code></pre>
+
+<p>Save the above content as <code>/etc/httpd/conf.d/registry.conf</code>, and
+continue with creating a <code>cert.cgi</code> file under <code>/var/www/cgi-bin/</code>.</p>
+
+<pre><code>#!/bin/bash
+if [ &quot;$HTTPS&quot; != &quot;on&quot; ]; then
+    echo &quot;Status: 403 Not using SSL&quot;
+    echo &quot;x-docker-registry-version: 0.6.2&quot;
+    echo
+    exit 0
+fi
+if [ &quot;$SSL_CLIENT_VERIFY&quot; == &quot;NONE&quot; ]; then
+    echo &quot;Status: 403 Client certificate invalid&quot;
+    echo &quot;x-docker-registry-version: 0.6.2&quot;
+    echo
+    exit 0
+fi
+echo &quot;Content-length: $(stat --printf='%s' $PATH_TRANSLATED)&quot;
+echo &quot;x-docker-registry-version: 0.6.2&quot;
+echo &quot;X-Docker-Endpoints: $SERVER_NAME&quot;
+echo &quot;X-Docker-Size: 0&quot;
+echo
+
+cat $PATH_TRANSLATED
+</code></pre>
+
+<p>This CGI script will ensure that all requests to <code>/v1</code> <em>without</em> a valid
+certificate will be returned with a <code>403</code> (i.e., HTTP forbidden) error.</p>
+
+        </article>
+		  </section>
+    </div>
+    <div id="toc" class="large-3 columns toc ">
+     On this page:
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#using-certificates-for-repository-client-verification">Using certificates for repository client verification</a>
+<ul>
+<li><a href="#understanding-the-configuration">Understanding the configuration</a></li>
+<li><a href="#creating-the-client-certificates">Creating the client certificates</a></li>
+<li><a href="#testing-the-verification-setup">Testing the verification setup</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+<footer class="main-footer">
+  <div class="row">
+  </div>
+  <div class="row">
+  </div>
+  <div id="buildinfo">
+    Jul 8, 2015 at 6:45pm (PST)
+        BUILD_DATA
+   </div>
+</footer>
+<link rel="stylesheet" href="/v1.7/highlight/styles/github.css">
+<script src="/v1.7/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="/dist/assets/js/all.js"></script>
+<script>
+  $( 'nav li:has(ul)' ).doubleTapToGo();
+</script>
+<script>
+
+;(function ( $, window, document, undefined ) {
+
+    var pluginName = 'accordion',
+        defaults = {
+            transitionSpeed: 300,
+            transitionEasing: 'ease',
+            controlElement: '[data-control]',
+            contentElement: '[data-content]',
+            groupElement: '[data-accordion-group]',
+            singleOpen: true
+        };
+
+    function Accordion(element, options) {
+        this.element = element;
+        this.options = $.extend({}, defaults, options);
+        this._defaults = defaults;
+        this._name = pluginName;
+        this.init();
+    }
+
+    Accordion.prototype.init = function () {
+        var self = this,
+            opts = self.options;
+
+        var $accordion = $(self.element),
+            $controls = $accordion.find('> ' + opts.controlElement),
+            $content =  $accordion.find('> ' + opts.contentElement);
+
+        var accordionParentsQty = $accordion.parents('[data-accordion]').length,
+            accordionHasParent = accordionParentsQty > 0;
+
+        var closedCSS = { 'max-height': 0, 'overflow': 'hidden' };
+
+        var CSStransitions = supportsTransitions();
+
+        function debounce(func, threshold, execAsap) {
+            var timeout;
+
+            return function debounced() {
+                var obj = this,
+                    args = arguments;
+
+                function delayed() {
+                    if (!execAsap) func.apply(obj, args);
+                    timeout = null;
+                };
+
+                if (timeout) clearTimeout(timeout);
+                else if (execAsap) func.apply(obj, args);
+
+                timeout = setTimeout(delayed, threshold || 100);
+            };
+        }
+
+        function supportsTransitions() {
+            var b = document.body || document.documentElement,
+                s = b.style,
+                p = 'transition';
+
+            if (typeof s[p] == 'string') {
+                return true;
+            }
+
+            var v = ['Moz', 'webkit', 'Webkit', 'Khtml', 'O', 'ms'];
+
+            p = 'Transition';
+
+            for (var i=0; i<v.length; i++) {
+                if (typeof s[v[i] + p] == 'string') {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function requestAnimFrame(cb) {
+            if(window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame) {
+                return  requestAnimationFrame(cb) ||
+                        webkitRequestAnimationFrame(cb) ||
+                        mozRequestAnimationFrame(cb);
+            } else {
+                return setTimeout(cb, 1000 / 60);
+            }
+        }
+
+        function toggleTransition($el, remove) {
+            if(!remove) {
+                $content.css({
+                    '-webkit-transition': 'max-height ' + opts.transitionSpeed + 'ms ' + opts.transitionEasing,
+                    'transition': 'max-height ' + opts.transitionSpeed + 'ms ' + opts.transitionEasing
+                });
+            } else {
+                $content.css({
+                    '-webkit-transition': '',
+                    'transition': ''
+                });
+            }
+        }
+
+        function calculateHeight($el) {
+            var height = 0;
+
+            $el.children().each(function() {
+                height = height + $(this).outerHeight(true);
+            });
+
+            $el.data('oHeight', height);
+        }
+
+        function updateParentHeight($parentAccordion, $currentAccordion, qty, operation) {
+            var $content = $parentAccordion.filter('.open').find('> [data-content]'),
+                $childs = $content.find('[data-accordion].open > [data-content]'),
+                $matched;
+
+            if(!opts.singleOpen) {
+                $childs = $childs.not($currentAccordion.siblings('[data-accordion].open').find('> [data-content]'));
+            }
+
+            $matched = $content.add($childs);
+
+            if($parentAccordion.hasClass('open')) {
+                $matched.each(function() {
+                    var currentHeight = $(this).data('oHeight');
+
+                    switch (operation) {
+                        case '+':
+                            $(this).data('oHeight', currentHeight + qty);
+                            break;
+                        case '-':
+                            $(this).data('oHeight', currentHeight - qty);
+                            break;
+                        default:
+                            throw 'updateParentHeight method needs an operation';
+                    }
+
+                    $(this).css('max-height', $(this).data('oHeight'));
+                });
+            }
+        }
+
+        function refreshHeight($accordion) {
+            if($accordion.hasClass('open')) {
+                var $content = $accordion.find('> [data-content]'),
+                    $childs = $content.find('[data-accordion].open > [data-content]'),
+                    $matched = $content.add($childs);
+
+                calculateHeight($matched);
+
+                $matched.css('max-height', $matched.data('oHeight'));
+            }
+        }
+
+        function closeAccordion($accordion, $content) {
+            $accordion.trigger('accordion.close');
+            
+            if(CSStransitions) {
+                if(accordionHasParent) {
+                    var $parentAccordions = $accordion.parents('[data-accordion]');
+
+                    updateParentHeight($parentAccordions, $accordion, $content.data('oHeight'), '-');
+                }
+
+                $content.css(closedCSS);
+
+                $accordion.removeClass('open');
+            } else {
+                $content.css('max-height', $content.data('oHeight'));
+
+                $content.animate(closedCSS, opts.transitionSpeed);
+
+                $accordion.removeClass('open');
+            }
+        }
+
+        function openAccordion($accordion, $content) {
+            $accordion.trigger('accordion.open');
+            if(CSStransitions) {
+                toggleTransition($content);
+
+                if(accordionHasParent) {
+                    var $parentAccordions = $accordion.parents('[data-accordion]');
+
+                    updateParentHeight($parentAccordions, $accordion, $content.data('oHeight'), '+');
+                }
+
+                requestAnimFrame(function() {
+                    $content.css('max-height', $content.data('oHeight'));
+                });
+
+                $accordion.addClass('open');
+            } else {
+                $content.animate({
+                    'max-height': $content.data('oHeight')
+                }, opts.transitionSpeed, function() {
+                    $content.css({'max-height': 'none'});
+                });
+
+                $accordion.addClass('open');
+            }
+        }
+
+        function closeSiblingAccordions($accordion) {
+            var $accordionGroup = $accordion.closest(opts.groupElement);
+
+            var $siblings = $accordion.siblings('[data-accordion]').filter('.open'),
+                $siblingsChildren = $siblings.find('[data-accordion]').filter('.open');
+
+            var $otherAccordions = $siblings.add($siblingsChildren);
+
+            $otherAccordions.each(function() {
+                var $accordion = $(this),
+                    $content = $accordion.find(opts.contentElement);
+
+                closeAccordion($accordion, $content);
+            });
+
+            $otherAccordions.removeClass('open');
+        }
+
+        function toggleAccordion() {
+            var isAccordionGroup = (opts.singleOpen) ? $accordion.parents(opts.groupElement).length > 0 : false;
+
+            calculateHeight($content);
+
+            if(isAccordionGroup) {
+                closeSiblingAccordions($accordion);
+            }
+
+            if($accordion.hasClass('open')) {
+                closeAccordion($accordion, $content);
+            } else {
+                openAccordion($accordion, $content);
+            }
+        }
+
+        function addEventListeners() {
+            $controls.on('click', toggleAccordion);
+            
+            $controls.on('accordion.toggle', function() {
+                if(opts.singleOpen && $controls.length > 1) {
+                    return false;
+                }
+                
+                toggleAccordion();
+            });
+
+            $(window).on('resize', debounce(function() {
+                refreshHeight($accordion);
+            }));
+        }
+
+        function setup() {
+            $content.each(function() {
+                var $curr = $(this);
+
+                if($curr.css('max-height') != 0) {
+                    if(!$curr.closest('[data-accordion]').hasClass('open')) {
+                        $curr.css({ 'max-height': 0, 'overflow': 'hidden' });
+                    } else {
+                        toggleTransition($curr);
+                        calculateHeight($curr);
+
+                        $curr.css('max-height', $curr.data('oHeight'));
+                    }
+                }
+            });
+
+
+            if(!$accordion.attr('data-accordion')) {
+                $accordion.attr('data-accordion', '');
+                $accordion.find(opts.controlElement).attr('data-control', '');
+                $accordion.find(opts.contentElement).attr('data-content', '');
+            }
+        }
+
+        setup();
+        addEventListeners();
+    };
+
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName,
+                new Accordion( this, options ));
+            }
+        });
+    }
+
+})( jQuery, window, document );
+
+$(document).ready(function() {
+  $('#multiple [data-accordion]').accordion({
+    singleOpen: false
+  });
+});
+
+</script>
+
+
+  <noscript>
+  <iframe src="//www.googletagmanager.com/ns.html?id=GTM-PSVHG8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PSVHG8');
+</script>
+

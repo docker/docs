@@ -1,0 +1,2534 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dockers on Docker Docs</title>
+    <link>http://localhost/docker/</link>
+    <description>Recent content in Dockers on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker/articles/https/README/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/articles/https/README/</guid>
+      <description>&lt;p&gt;This is an initial attempt to make it easier to test the examples in the https.md
+doc&lt;/p&gt;
+
+&lt;p&gt;at this point, it has to be a manual thing, and I&amp;rsquo;ve been running it in boot2docker&lt;/p&gt;
+
+&lt;p&gt;so my process is&lt;/p&gt;
+
+&lt;p&gt;$ boot2docker ssh
+$$ git clone &lt;a href=&#34;https://github.com/docker/docker&#34;&gt;https://github.com/docker/docker&lt;/a&gt;
+$$ cd docker/docs/articles/https
+$$ make cert
+lots of things to see and manually answer, as openssl wants to be interactive
+&lt;strong&gt;NOTE:&lt;/strong&gt; make sure you enter the hostname (&lt;code&gt;boot2docker&lt;/code&gt; in my case) when prompted for &lt;code&gt;Computer Name&lt;/code&gt;)
+$$ sudo make run&lt;/p&gt;
+
+&lt;p&gt;start another terminal&lt;/p&gt;
+
+&lt;p&gt;$ boot2docker ssh
+$$ cd docker/docs/articles/https
+$$ make client&lt;/p&gt;
+
+&lt;p&gt;the last will connect first with &lt;code&gt;--tls&lt;/code&gt; and then with &lt;code&gt;--tlsverify&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;both should succeed&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker/reference/api/README/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/reference/api/README/</guid>
+      <description>&lt;p&gt;This directory holds the authoritative specifications of APIs defined and implemented by Docker. Currently this includes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The remote API by which a docker node can be queried over HTTP&lt;/li&gt;
+&lt;li&gt;The registry API by which a docker node can download and upload
+images for storage and sharing&lt;/li&gt;
+&lt;li&gt;The index search API by which a docker node can search the public
+index for images to download&lt;/li&gt;
+&lt;li&gt;The docker.io OAuth and accounts API which 3rd party services can
+use to access account information&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker/reference/logging/journald/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/reference/logging/journald/</guid>
+      <description>
+
+&lt;h1 id=&#34;journald-logging-driver&#34;&gt;Journald logging driver&lt;/h1&gt;
+
+&lt;p&gt;The &lt;code&gt;journald&lt;/code&gt; logging driver sends container logs to the &lt;a href=&#34;http://www.freedesktop.org/software/systemd/man/systemd-journald.service.html&#34;&gt;systemd
+journal&lt;/a&gt;.  Log entries can be retrieved using the &lt;code&gt;journalctl&lt;/code&gt;
+command or through use of the journal API.&lt;/p&gt;
+
+&lt;p&gt;In addition to the text of the log message itself, the &lt;code&gt;journald&lt;/code&gt; log
+driver stores the following metadata in the journal with each message:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Field&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CONTAINER_ID&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The container ID truncated to 12 characters.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CONTAINER_ID_FULL&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The full 64-character container ID.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CONTAINER_NAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The container name at the time it was started. If you use &lt;code&gt;docker rename&lt;/code&gt; to rename a container, the new name is not reflected in the journal entries.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;You can configure the default logging driver by passing the
+&lt;code&gt;--log-driver&lt;/code&gt; option to the Docker daemon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker --log-driver=journald
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can set the logging driver for a specific container by using the
+&lt;code&gt;--log-driver&lt;/code&gt; option to &lt;code&gt;docker run&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --log-driver=journald ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;note-regarding-container-names&#34;&gt;Note regarding container names&lt;/h2&gt;
+
+&lt;p&gt;The value logged in the &lt;code&gt;CONTAINER_NAME&lt;/code&gt; field is the container name
+that was set at startup.  If you use &lt;code&gt;docker rename&lt;/code&gt; to rename a
+container, the new name will not be reflected in the journal entries.
+Journal entries will continue to use the original name.&lt;/p&gt;
+
+&lt;h2 id=&#34;retrieving-log-messages-with-journalctl&#34;&gt;Retrieving log messages with journalctl&lt;/h2&gt;
+
+&lt;p&gt;You can use the &lt;code&gt;journalctl&lt;/code&gt; command to retrieve log messages.  You
+can apply filter expressions to limit the retrieved messages to a
+specific container.  For example, to retrieve all log messages from a
+container referenced by name:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# journalctl CONTAINER_NAME=webserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can make use of additional filters to further limit the messages
+retrieved.  For example, to see just those messages generated since
+the system last booted:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# journalctl -b CONTAINER_NAME=webserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or to retrieve log messages in JSON format with complete metadata:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# journalctl -o json CONTAINER_NAME=webserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;retrieving-log-messages-with-the-journal-api&#34;&gt;Retrieving log messages with the journal API&lt;/h2&gt;
+
+&lt;p&gt;This example uses the &lt;code&gt;systemd&lt;/code&gt; Python module to retrieve container
+logs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import systemd.journal
+
+reader = systemd.journal.Reader()
+reader.add_match(&#39;CONTAINER_NAME=web&#39;)
+
+for msg in reader:
+  print &#39;{CONTAINER_ID_FULL}: {MESSAGE}&#39;.format(**msg)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker/static_files/README/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/static_files/README/</guid>
+      <description>
+
+&lt;h1 id=&#34;static-files-dir&#34;&gt;Static files dir&lt;/h1&gt;
+
+&lt;p&gt;Files you put in /static_files/ will be copied to the web visible /_static/&lt;/p&gt;
+
+&lt;p&gt;Be careful not to override pre-existing static files from the template.&lt;/p&gt;
+
+&lt;p&gt;Generally, layout related files should go in the /theme directory.&lt;/p&gt;
+
+&lt;p&gt;If you want to add images to your particular documentation page. Just put them next to
+your .rst source file and reference them relatively.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>About Docker</title>
+      <link>http://localhost/docker/misc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/misc/</guid>
+      <description>
+
+&lt;h1 id=&#34;about-docker&#34;&gt;About Docker&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Develop, Ship and Run Any Application, Anywhere&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.docker.com&#34;&gt;&lt;strong&gt;Docker&lt;/strong&gt;&lt;/a&gt; is a platform for developers and sysadmins
+to develop, ship, and run applications.  Docker lets you quickly assemble
+applications from components and eliminates the friction that can come when
+shipping code. Docker lets you get your code tested and deployed into production
+as fast as possible.&lt;/p&gt;
+
+&lt;p&gt;Docker consists of:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The Docker Engine - our lightweight and powerful open source container
+virtualization technology combined with a work flow for building
+and containerizing your applications.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; - our SaaS service for
+sharing and managing your application stacks.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;why-docker&#34;&gt;Why Docker?&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Faster delivery of your applications&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We want your environment to work better. Docker containers,
+  and the work flow that comes with them, help your developers,
+  sysadmins, QA folks, and release engineers work together to get your code
+  into production and make it useful. We&amp;rsquo;ve created a standard
+  container format that lets developers care about their applications
+  inside containers while sysadmins and operators can work on running the
+  container in your deployment. This separation of duties streamlines and
+  simplifies the management and deployment of code.&lt;/li&gt;
+&lt;li&gt;We make it easy to build new containers, enable rapid iteration of
+  your applications, and increase the visibility of changes. This
+  helps everyone in your organization understand how an application works
+  and how it is built.&lt;/li&gt;
+&lt;li&gt;Docker containers are lightweight and fast! Containers have
+  sub-second launch times, reducing the cycle
+  time of development, testing, and deployment.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Deploy and scale more easily&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker containers run (almost) everywhere. You can deploy
+  containers on desktops, physical servers, virtual machines, into
+  data centers, and up to public and private clouds.&lt;/li&gt;
+&lt;li&gt;Since Docker runs on so many platforms, it&amp;rsquo;s easy to move your
+  applications around. You can easily move an application from a
+  testing environment into the cloud and back whenever you need.&lt;/li&gt;
+&lt;li&gt;Docker&amp;rsquo;s lightweight containers also make scaling up and
+  down fast and easy. You can quickly launch more containers when
+  needed and then shut them down easily when they&amp;rsquo;re no longer needed.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Get higher density and run more workloads&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker containers don&amp;rsquo;t need a hypervisor, so you can pack more of
+  them onto your hosts. This means you get more value out of every
+  server and can potentially reduce what you spend on equipment and
+  licenses.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Faster deployment makes for easier management&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;As Docker speeds up your work flow, it gets easier to make lots
+  of small changes instead of huge, big bang updates. Smaller
+  changes mean reduced risk and more uptime.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;about-this-guide&#34;&gt;About this guide&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&#34;introduction/understanding-docker.md&#34;&gt;Understanding Docker section&lt;/a&gt; will help you:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;See how Docker works at a high level&lt;/li&gt;
+&lt;li&gt;Understand the architecture of Docker&lt;/li&gt;
+&lt;li&gt;Discover Docker&amp;rsquo;s features;&lt;/li&gt;
+&lt;li&gt;See how Docker compares to virtual machines&lt;/li&gt;
+&lt;li&gt;See some common use cases.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;installation-guides&#34;&gt;Installation guides&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href=&#34;http://localhost/installation/#installation&#34;&gt;installation section&lt;/a&gt; will show you how to
+install Docker on a variety of platforms.&lt;/p&gt;
+
+&lt;h3 id=&#34;docker-user-guide&#34;&gt;Docker user guide&lt;/h3&gt;
+
+&lt;p&gt;To learn about Docker in more detail and to answer questions about usage and
+implementation, check out the &lt;a href=&#34;http://localhost/userguide/&#34;&gt;Docker User Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;release-notes&#34;&gt;Release notes&lt;/h2&gt;
+
+&lt;p&gt;A summary of the changes in each release in the current series can now be found
+on the separate &lt;a href=&#34;http://localhost/release-notes/&#34;&gt;Release Notes page&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;licensing&#34;&gt;Licensing&lt;/h2&gt;
+
+&lt;p&gt;Docker is licensed under the Apache License, Version 2.0. See
+&lt;a href=&#34;https://github.com/docker/docker/blob/master/LICENSE&#34;&gt;LICENSE&lt;/a&gt; for the full
+license text.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Accounts on Docker Hub</title>
+      <link>http://localhost/docker/docker-hub/accounts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/docker-hub/accounts/</guid>
+      <description>
+
+&lt;h1 id=&#34;accounts-on-docker-hub&#34;&gt;Accounts on Docker Hub&lt;/h1&gt;
+
+&lt;h2 id=&#34;docker-hub-accounts&#34;&gt;Docker Hub accounts&lt;/h2&gt;
+
+&lt;p&gt;You can &lt;code&gt;search&lt;/code&gt; for Docker images and &lt;code&gt;pull&lt;/code&gt; them from &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker
+Hub&lt;/a&gt; without signing in or even having an
+account. However, in order to &lt;code&gt;push&lt;/code&gt; images, leave comments or to &lt;em&gt;star&lt;/em&gt;
+a repository, you are going to need a &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker
+Hub&lt;/a&gt; account.&lt;/p&gt;
+
+&lt;h3 id=&#34;registration-for-a-docker-hub-account&#34;&gt;Registration for a Docker Hub account&lt;/h3&gt;
+
+&lt;p&gt;You can get a &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; account by
+&lt;a href=&#34;https://hub.docker.com/account/signup/&#34;&gt;signing up for one here&lt;/a&gt;. A valid
+email address is required to register, which you will need to verify for
+account activation.&lt;/p&gt;
+
+&lt;h3 id=&#34;email-activation-process&#34;&gt;Email activation process&lt;/h3&gt;
+
+&lt;p&gt;You need to have at least one verified email address to be able to use your
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; account. If you can&amp;rsquo;t find the validation email,
+you can request another by visiting the &lt;a href=&#34;https://hub.docker.com/account/resend-email-confirmation/&#34;&gt;Resend Email Confirmation&lt;/a&gt; page.&lt;/p&gt;
+
+&lt;h3 id=&#34;password-reset-process&#34;&gt;Password reset process&lt;/h3&gt;
+
+&lt;p&gt;If you can&amp;rsquo;t access your account for some reason, you can reset your password
+from the &lt;a href=&#34;https://hub.docker.com/account/forgot-password/&#34;&gt;&lt;em&gt;Password Reset&lt;/em&gt;&lt;/a&gt;
+page.&lt;/p&gt;
+
+&lt;h2 id=&#34;organizations-and-groups&#34;&gt;Organizations and groups&lt;/h2&gt;
+
+&lt;p&gt;A Docker Hub organization contains public and private repositories just like
+a user account. Access to push, pull or create these organisation owned repositories
+is allocated by defining groups of users and then assigning group rights to
+specific repositories. This allows you to distribute limited access
+Docker images, and to select which Docker Hub users can publish new images.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-and-viewing-organizations&#34;&gt;Creating and viewing organizations&lt;/h3&gt;
+
+&lt;p&gt;You can see what organizations &lt;a href=&#34;https://hub.docker.com/account/organizations/&#34;&gt;you belong to and add new organizations&lt;/a&gt; from the Account Settings
+tab. They are also listed below your user name on your repositories page
+and in your account profile.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/orgs.png&#34; alt=&#34;organizations&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;organization-groups&#34;&gt;Organization groups&lt;/h3&gt;
+
+&lt;p&gt;Users in the &lt;code&gt;Owners&lt;/code&gt; group of an organization can create and modify the
+membership of groups.&lt;/p&gt;
+
+&lt;p&gt;Unless they are the organization&amp;rsquo;s &lt;code&gt;Owner&lt;/code&gt;, users can only see groups of which they
+are members.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/groups.png&#34; alt=&#34;groups&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;repository-group-permissions&#34;&gt;Repository group permissions&lt;/h3&gt;
+
+&lt;p&gt;Use organization groups to manage the users that can interact with your repositories.&lt;/p&gt;
+
+&lt;p&gt;You must be in an organization&amp;rsquo;s &lt;code&gt;Owners&lt;/code&gt; group to create a new group, Hub
+repository, or automated build. As an &lt;code&gt;Owner&lt;/code&gt;, you then delegate the following
+repository access rights to groups:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Access Right&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Read&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Users with this right can view, search, and pull a private repository.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Write&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Users with this right can push to non-automated repositories on the Docker Hub.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Admin&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Users with this right can modify a repository&amp;rsquo;s &amp;ldquo;Description&amp;rdquo;, &amp;ldquo;Collaborators&amp;rdquo; rights. They can also mark a repository as unlisted, change its  &amp;ldquo;Public/Private&amp;rdquo; status and &amp;ldquo;Delete&amp;rdquo; the repository. Finally, &lt;code&gt;Admin&lt;/code&gt; rights are required to read the build log on a repo.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Regardless of their actual access rights, users with unverified email addresses
+have &lt;code&gt;Read&lt;/code&gt; access to the repository. Once they have verified their address,
+they have their full access rights as granted on the organization.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Advanced contributing</title>
+      <link>http://localhost/docker/project/advanced-contributing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/project/advanced-contributing/</guid>
+      <description>
+
+&lt;h1 id=&#34;advanced-contributing&#34;&gt;Advanced contributing&lt;/h1&gt;
+
+&lt;p&gt;In this section, you learn about the more advanced contributions you can make.
+They are advanced because they have a more involved workflow or require greater
+programming experience. Don&amp;rsquo;t be scared off though, if you like to stretch and
+challenge yourself, this is the place for you.&lt;/p&gt;
+
+&lt;p&gt;This section gives generalized instructions for advanced contributions. You&amp;rsquo;ll
+read about the workflow but there are not specific descriptions of commands.
+Your goal should be to understand the processes described.&lt;/p&gt;
+
+&lt;p&gt;At this point, you should have read and worked through the earlier parts of
+the project contributor guide. You should also have
+&lt;a href=&#34;../make-a-contribution/&#34; target=&#34;_blank&#34;&gt; made at least one project contribution&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;refactor-or-cleanup-proposal&#34;&gt;Refactor or cleanup proposal&lt;/h2&gt;
+
+&lt;p&gt;A refactor or cleanup proposal changes Docker&amp;rsquo;s internal structure without
+altering the external behavior. To make this type of proposal:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Fork &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make your changes in a feature branch.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Sync and rebase with &lt;code&gt;master&lt;/code&gt; as you work.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the full test suite.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Submit your code through a pull request (PR).&lt;/p&gt;
+
+&lt;p&gt;The PR&amp;rsquo;s title should have the format:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cleanup:&lt;/strong&gt; &lt;em&gt;short title&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;If your changes required logic changes, note that in your request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Work through Docker&amp;rsquo;s review process until merge.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;design-proposal&#34;&gt;Design proposal&lt;/h2&gt;
+
+&lt;p&gt;A design proposal solves a problem or adds a feature to the Docker software.
+The process for submitting design proposals requires two pull requests, one
+for the design and one for the implementation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/images/proposal.png&#34; alt=&#34;Simple process&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The important thing to notice is that both the design pull request and the
+implementation pull request go through a review. In other words, there is
+considerable time commitment in a design proposal; so, you might want to pair
+with someone on design work.&lt;/p&gt;
+
+&lt;p&gt;The following provides greater detail on the process:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Come up with an idea.&lt;/p&gt;
+
+&lt;p&gt;Ideas usually come from limitations users feel working with a product. So,
+take some time to really use Docker. Try it on different platforms; explore
+how it works with different web applications. Go to some community events
+and find out what other users want.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review existing issues and proposals to make sure no other user is proposing a similar idea.&lt;/p&gt;
+
+&lt;p&gt;The design proposals are &lt;a
+href=&#34;https://github.com/docker/docker/pulls?q=is%3Aopen+is%3Apr+label%
+3Akind%2Fproposal&#34; target=&#34;_blank&#34;&gt;all online in our GitHub pull requests&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Talk to the community about your idea.&lt;/p&gt;
+
+&lt;p&gt;We have lots of &lt;a href=&#34;../get-help/&#34; target=&#34;_blank&#34;&gt;community forums&lt;/a&gt;
+where you can get feedback on your idea. Float your idea in a forum or two
+to get some commentary going on it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fork &lt;code&gt;docker/docker&lt;/code&gt; and clone the repo to your local host.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new Markdown file in the area you wish to change.&lt;/p&gt;
+
+&lt;p&gt;For example, if you want to redesign our daemon create a new file under the
+&lt;code&gt;daemon/&lt;/code&gt; folder.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Name the file descriptively, for example &lt;code&gt;redesign-daemon-proposal.md&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Write a proposal for your change into the file.&lt;/p&gt;
+
+&lt;p&gt;This is a Markdown file that describes your idea. Your proposal
+should include information like:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Why is this change needed or what are the use cases?&lt;/li&gt;
+&lt;li&gt;What are the requirements this change should meet?&lt;/li&gt;
+&lt;li&gt;What are some ways to design/implement this feature?&lt;/li&gt;
+&lt;li&gt;Which design/implementation do you think is best and why?&lt;/li&gt;
+&lt;li&gt;What are the risks or limitations of your proposal?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is your chance to convince people your idea is sound.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Submit your proposal in a pull request to &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The title should have the format:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Proposal:&lt;/strong&gt; &lt;em&gt;short title&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The body of the pull request should include a brief summary of your change
+and then say something like &amp;ldquo;&lt;em&gt;See the file for a complete description&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Refine your proposal through review.&lt;/p&gt;
+
+&lt;p&gt;The maintainers and the community review your proposal. You&amp;rsquo;ll need to
+answer questions and sometimes explain or defend your approach. This is
+chance for everyone to both teach and learn.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Pull request accepted.&lt;/p&gt;
+
+&lt;p&gt;Your request may also be rejected. Not every idea is a good fit for Docker.
+Let&amp;rsquo;s assume though your proposal succeeded.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Implement your idea.&lt;/p&gt;
+
+&lt;p&gt;Implementation uses all the standard practices of any contribution.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;fork &lt;code&gt;docker/docker&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;create a feature branch&lt;/li&gt;
+&lt;li&gt;sync frequently back to master&lt;/li&gt;
+&lt;li&gt;test as you go and full test before a PR&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you run into issues, the community is there to help.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;When you have a complete implementation, submit a pull request back to &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review and iterate on your code.&lt;/p&gt;
+
+&lt;p&gt;If you are making a large code change, you can expect greater scrutiny
+during this phase.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Acceptance and merge!&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;about-the-advanced-process&#34;&gt;About the advanced process&lt;/h2&gt;
+
+&lt;p&gt;Docker is a large project. Our core team gets a great many design proposals.
+Design proposal discussions can span days, weeks, and longer. The number of comments can reach the 100s.
+In that situation, following the discussion flow and the decisions reached is crucial.&lt;/p&gt;
+
+&lt;p&gt;Making a pull request with a design proposal simplifies this process:
+* you can leave comments on specific design proposal line
+* replies around line are easy to track
+* as a proposal changes and is updated, pages reset as line items resolve
+* Github maintains the entire history&lt;/p&gt;
+
+&lt;p&gt;While proposals in pull requests do not end up merged into a master repository, they provide a convenient tool for managing the design process.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Amazon EC2 Installation</title>
+      <link>http://localhost/docker/installation/amazon/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/installation/amazon/</guid>
+      <description>
+
+&lt;h2 id=&#34;amazon-ec2&#34;&gt;Amazon EC2&lt;/h2&gt;
+
+&lt;p&gt;You can install Docker on any AWS EC2 Amazon Machine Image (AMI) which runs an
+operating system that Docker supports. Amazon&amp;rsquo;s website includes specific
+instructions for &lt;a href=&#34;http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html#install_docker&#34;&gt;installing on Amazon
+Linux&lt;/a&gt;. To install on
+another AMI, follow the instructions for its specific operating
+system in this installation guide.&lt;/p&gt;
+
+&lt;p&gt;For detailed information on Amazon AWS support for Docker, refer to &lt;a href=&#34;http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html&#34;&gt;Amazon&amp;rsquo;s
+documentation&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Apply custom metadata</title>
+      <link>http://localhost/docker/userguide/labels-custom-metadata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/userguide/labels-custom-metadata/</guid>
+      <description>
+
+&lt;h1 id=&#34;apply-custom-metadata&#34;&gt;Apply custom metadata&lt;/h1&gt;
+
+&lt;p&gt;You can apply metadata to your images, containers, or daemons via
+labels. Metadata can serve a wide range of uses. Use labels to add notes or
+licensing information to an image or to identify a host.&lt;/p&gt;
+
+&lt;p&gt;A label is a &lt;code&gt;&amp;lt;key&amp;gt;&lt;/code&gt; / &lt;code&gt;&amp;lt;value&amp;gt;&lt;/code&gt; pair. Docker stores the label values as
+&lt;em&gt;strings&lt;/em&gt;. You can specify multiple labels but each &lt;code&gt;&amp;lt;key&amp;gt;&lt;/code&gt; / &lt;code&gt;&amp;lt;value&amp;gt;&lt;/code&gt; must be
+unique to avoid overwriting. If you specify the same &lt;code&gt;key&lt;/code&gt; several times but with
+different values, newer labels overwrite previous labels. Docker uses
+the last &lt;code&gt;key=value&lt;/code&gt; you supply.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Support for daemon-labels was added in Docker 1.4.1. Labels on
+containers and images are new in Docker 1.6.0&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;label-keys-namespaces&#34;&gt;Label keys (namespaces)&lt;/h2&gt;
+
+&lt;p&gt;Docker puts no hard restrictions on the label &lt;code&gt;key&lt;/code&gt; you. However, labels with
+simple keys can conflict. For example, you can categorize your images by using a
+chip &amp;ldquo;architecture&amp;rdquo; label:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL architecture=&amp;quot;amd64&amp;quot;
+
+LABEL architecture=&amp;quot;ARMv7&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But a user can label images by building architectural style:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL architecture=&amp;quot;Art Nouveau&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To prevent naming conflicts, Docker namespaces label keys using a reverse domain
+notation. Use the following guidelines to name your keys:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;All (third-party) tools should prefix their keys with the
+reverse DNS notation of a domain controlled by the author. For
+example, &lt;code&gt;com.example.some-label&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The &lt;code&gt;com.docker.*&lt;/code&gt;, &lt;code&gt;io.docker.*&lt;/code&gt; and &lt;code&gt;org.dockerproject.*&lt;/code&gt; namespaces are
+reserved for Docker&amp;rsquo;s internal use.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Keys should only consist of lower-cased alphanumeric characters,
+dots and dashes (for example, &lt;code&gt;[a-z0-9-.]&lt;/code&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Keys should start &lt;em&gt;and&lt;/em&gt; end with an alpha numeric character&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Keys may not contain consecutive dots or dashes.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Keys &lt;em&gt;without&lt;/em&gt; namespace (dots) are reserved for CLI use. This allows end-
+users to add metadata to their containers and images without having to type
+cumbersome namespaces on the command-line.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These are guidelines and Docker does not &lt;em&gt;enforce&lt;/em&gt; them. Failing following these
+guidelines can result in conflicting labels. If you&amp;rsquo;re building a tool that uses
+labels, you &lt;em&gt;should&lt;/em&gt; use namespaces for your label keys.&lt;/p&gt;
+
+&lt;h2 id=&#34;store-structured-data-in-labels&#34;&gt;Store structured data in labels&lt;/h2&gt;
+
+&lt;p&gt;Label values can contain any data type that can be stored as a string. For
+example, consider this JSON:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+    &amp;quot;Description&amp;quot;: &amp;quot;A containerized foobar&amp;quot;,
+    &amp;quot;Usage&amp;quot;: &amp;quot;docker run --rm example/foobar [args]&amp;quot;,
+    &amp;quot;License&amp;quot;: &amp;quot;GPL&amp;quot;,
+    &amp;quot;Version&amp;quot;: &amp;quot;0.0.1-beta&amp;quot;,
+    &amp;quot;aBoolean&amp;quot;: true,
+    &amp;quot;aNumber&amp;quot; : 0.01234,
+    &amp;quot;aNestedArray&amp;quot;: [&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can store this struct in a label by serializing it to a string first:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL com.example.image-specs=&amp;quot;{\&amp;quot;Description\&amp;quot;:\&amp;quot;A containerized foobar\&amp;quot;,\&amp;quot;Usage\&amp;quot;:\&amp;quot;docker run --rm example\\/foobar [args]\&amp;quot;,\&amp;quot;License\&amp;quot;:\&amp;quot;GPL\&amp;quot;,\&amp;quot;Version\&amp;quot;:\&amp;quot;0.0.1-beta\&amp;quot;,\&amp;quot;aBoolean\&amp;quot;:true,\&amp;quot;aNumber\&amp;quot;:0.01234,\&amp;quot;aNestedArray\&amp;quot;:[\&amp;quot;a\&amp;quot;,\&amp;quot;b\&amp;quot;,\&amp;quot;c\&amp;quot;]}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While it is &lt;em&gt;possible&lt;/em&gt; to store structured data in label values, Docker treats
+this data as a &amp;lsquo;regular&amp;rsquo; string. This means that Docker doesn&amp;rsquo;t offer ways to
+query (filter) based on nested properties. If your tool needs to filter on
+nested properties, the tool itself should implement this.&lt;/p&gt;
+
+&lt;h2 id=&#34;add-labels-to-images-the-label-instruction&#34;&gt;Add labels to images; the &lt;code&gt;LABEL&lt;/code&gt; instruction&lt;/h2&gt;
+
+&lt;p&gt;Adding labels to an image:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL [&amp;lt;namespace&amp;gt;.]&amp;lt;key&amp;gt;[=&amp;lt;value&amp;gt;] ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;LABEL&lt;/code&gt; instruction adds a label to your image, optionally setting its value.
+Use surrounding quotes or backslashes for labels that contain
+white space character:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL vendor=ACME\ Incorporated
+LABEL com.example.version.is-beta
+LABEL com.example.version=&amp;quot;0.0.1-beta&amp;quot;
+LABEL com.example.release-date=&amp;quot;2015-02-12&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;LABEL&lt;/code&gt; instruction supports setting multiple labels in a single instruction
+using this notation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL com.example.version=&amp;quot;0.0.1-beta&amp;quot; com.example.release-date=&amp;quot;2015-02-12&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Wrapping is allowed by using a backslash (&lt;code&gt;\&lt;/code&gt;) as continuation marker:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LABEL vendor=ACME\ Incorporated \
+      com.example.is-beta \
+      com.example.version=&amp;quot;0.0.1-beta&amp;quot; \
+      com.example.release-date=&amp;quot;2015-02-12&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker recommends you add multiple labels in a single &lt;code&gt;LABEL&lt;/code&gt; instruction. Using
+individual instructions for each label can result in an inefficient image. This
+is because each &lt;code&gt;LABEL&lt;/code&gt; instruction in a Dockerfile produces a new IMAGE layer.&lt;/p&gt;
+
+&lt;p&gt;You can view the labels via the &lt;code&gt;docker inspect&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker inspect 4fa6e0f0c678
+
+...
+&amp;quot;Labels&amp;quot;: {
+    &amp;quot;vendor&amp;quot;: &amp;quot;ACME Incorporated&amp;quot;,
+    &amp;quot;com.example.is-beta&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;com.example.version&amp;quot;: &amp;quot;0.0.1-beta&amp;quot;,
+    &amp;quot;com.example.release-date&amp;quot;: &amp;quot;2015-02-12&amp;quot;
+}
+...
+
+# Inspect labels on container
+$ docker inspect -f &amp;quot;{{json .Config.Labels }}&amp;quot; 4fa6e0f0c678
+
+{&amp;quot;Vendor&amp;quot;:&amp;quot;ACME Incorporated&amp;quot;,&amp;quot;com.example.is-beta&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;com.example.version&amp;quot;:&amp;quot;0.0.1-beta&amp;quot;,&amp;quot;com.example.release-date&amp;quot;:&amp;quot;2015-02-12&amp;quot;}
+
+# Inspect labels on images
+$ docker inspect -f &amp;quot;{{json .ContainerConfig.Labels }}&amp;quot; myimage
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;query-labels&#34;&gt;Query labels&lt;/h2&gt;
+
+&lt;p&gt;Besides storing metadata, you can filter images and containers by label. To list all
+running containers that the &lt;code&gt;com.example.is-beta&lt;/code&gt; label:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# List all running containers that have a `com.example.is-beta` label
+$ docker ps --filter &amp;quot;label=com.example.is-beta&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;List all running containers with a &lt;code&gt;color&lt;/code&gt; label of &lt;code&gt;blue&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps --filter &amp;quot;label=color=blue&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;List all images with &lt;code&gt;vendor&lt;/code&gt; &lt;code&gt;ACME&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images --filter &amp;quot;label=vendor=ACME&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;daemon-labels&#34;&gt;Daemon labels&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;docker -d \
+  --dns 8.8.8.8 \
+  --dns 8.8.4.4 \
+  -H unix:///var/run/docker.sock \
+  --label com.example.environment=&amp;quot;production&amp;quot; \
+  --label com.example.storage=&amp;quot;ssd&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These labels appear as part of the &lt;code&gt;docker info&lt;/code&gt; output for the daemon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker -D info
+Containers: 12
+Images: 672
+Storage Driver: aufs
+ Root Dir: /var/lib/docker/aufs
+ Backing Filesystem: extfs
+ Dirs: 697
+Execution Driver: native-0.2
+Logging Driver: json-file
+Kernel Version: 3.13.0-32-generic
+Operating System: Ubuntu 14.04.1 LTS
+CPUs: 1
+Total Memory: 994.1 MiB
+Name: docker.example.com
+ID: RC3P:JTCT:32YS:XYSB:YUBG:VFED:AAJZ:W3YW:76XO:D7NN:TEVU:UCRW
+Debug mode (server): false
+Debug mode (client): true
+File Descriptors: 11
+Goroutines: 14
+EventsListeners: 0
+Init Path: /usr/bin/docker
+Docker Root Dir: /var/lib/docker
+WARNING: No swap limit support
+Labels:
+ com.example.environment=production
+ com.example.storage=ssd
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automated Builds on Docker Hub</title>
+      <link>http://localhost/docker/docker-hub/builds/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/docker-hub/builds/</guid>
+      <description>
+
+&lt;h1 id=&#34;automated-builds-on-docker-hub&#34;&gt;Automated Builds on Docker Hub&lt;/h1&gt;
+
+&lt;h2 id=&#34;about-automated-builds&#34;&gt;About Automated Builds&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Automated Builds&lt;/em&gt; are a special feature of Docker Hub which allow you to
+use &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&amp;rsquo;s&lt;/a&gt; build clusters to automatically
+create images from a GitHub or Bitbucket repository containing a &lt;code&gt;Dockerfile&lt;/code&gt;
+The system will clone your repository and build the image described by the
+&lt;code&gt;Dockerfile&lt;/code&gt; using the directory the &lt;code&gt;Dockerfile&lt;/code&gt; is in (and subdirectories)
+as the build context. The resulting automated image will then be uploaded
+to the Docker Hub registry and marked as an &lt;em&gt;Automated Build&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Automated Builds have several advantages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Users of &lt;em&gt;your&lt;/em&gt; Automated Build can trust that the resulting
+image was built exactly as specified.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;Dockerfile&lt;/code&gt; will be available to anyone with access to
+your repository on the Docker Hub registry.&lt;/li&gt;
+&lt;li&gt;Because the process is automated, Automated Builds help to
+make sure that your repository is always up to date.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Automated Builds are supported for both public and private repositories
+on both &lt;a href=&#34;http://github.com&#34;&gt;GitHub&lt;/a&gt; and &lt;a href=&#34;https://bitbucket.org/&#34;&gt;Bitbucket&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To use Automated Builds, you must have an &lt;a href=&#34;https://docs.docker.com/userguide/dockerhub/#creating-a-docker-hub-account&#34;&gt;account on Docker Hub&lt;/a&gt;
+and on GitHub and/or Bitbucket. In either case, the account needs
+to be properly validated and activated before you can link to it.&lt;/p&gt;
+
+&lt;p&gt;The first time you to set up an Automated Build, your
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; account will need to be linked to
+a GitHub or Bitbucket account.
+This will allow the registry to see your repositories.&lt;/p&gt;
+
+&lt;p&gt;If you have previously linked your Docker Hub account, and want to view or modify
+that link, click on the &amp;ldquo;Manage - Settings&amp;rdquo; link in the sidebar, and then
+&amp;ldquo;Linked Accounts&amp;rdquo; in your Settings sidebar.&lt;/p&gt;
+
+&lt;h2 id=&#34;automated-builds-from-github&#34;&gt;Automated Builds from GitHub&lt;/h2&gt;
+
+&lt;p&gt;If you&amp;rsquo;ve previously linked your Docker Hub account to your GitHub account,
+you&amp;rsquo;ll be able to skip to the &lt;a href=&#34;#creating-an-automated-build&#34;&gt;Creating an Automated Build&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;linking-your-docker-hub-account-to-a-github-account&#34;&gt;Linking your Docker Hub account to a GitHub account&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt;
+Automated Builds currently require &lt;em&gt;read&lt;/em&gt; and &lt;em&gt;write&lt;/em&gt; access since
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; needs to setup a GitHub service
+hook. We have no choice here, this is how GitHub manages permissions, sorry!
+We do guarantee nothing else will be touched in your account.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To get started, log into your Docker Hub account and click the
+&amp;ldquo;+ Add Repository&amp;rdquo; button at the upper right of the screen. Then select
+&lt;a href=&#34;https://registry.hub.docker.com/builds/add/&#34;&gt;Automated Build&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Select the &lt;a href=&#34;https://registry.hub.docker.com/associate/github/&#34;&gt;GitHub service&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When linking to GitHub, you&amp;rsquo;ll need to select either &amp;ldquo;Public and Private&amp;rdquo;,
+or &amp;ldquo;Limited&amp;rdquo; linking.&lt;/p&gt;
+
+&lt;p&gt;The &amp;ldquo;Public and Private&amp;rdquo; option is the easiest to use,
+as it grants the Docker Hub full access to all of your repositories. GitHub
+also allows you to grant access to repositories belonging to your GitHub
+organizations.&lt;/p&gt;
+
+&lt;p&gt;By choosing the &amp;ldquo;Limited&amp;rdquo; linking, your Docker Hub account only gets permission
+to access your public data and public repositories.&lt;/p&gt;
+
+&lt;p&gt;Follow the onscreen instructions to authorize and link your
+GitHub account to Docker Hub. Once it is linked, you&amp;rsquo;ll be able to
+choose a source repository from which to create the Automatic Build.&lt;/p&gt;
+
+&lt;p&gt;You will be able to review and revoke Docker Hub&amp;rsquo;s access by visiting the
+&lt;a href=&#34;https://github.com/settings/applications&#34;&gt;GitHub User&amp;rsquo;s Applications settings&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you delete the GitHub account linkage that is used for one of your
+automated build repositories, the previously built images will still be available.
+If you re-link to that GitHub account later, the automated build can be started
+using the &amp;ldquo;Start Build&amp;rdquo; button on the Hub, or if the webhook on the GitHub repository
+still exists, will be triggered by any subsequent commits.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;auto-builds-and-limited-linked-github-accounts&#34;&gt;Auto builds and limited linked GitHub accounts.&lt;/h3&gt;
+
+&lt;p&gt;If you selected to link your GitHub account with only a &amp;ldquo;Limited&amp;rdquo; link, then
+after creating your automated build, you will need to either manually trigger a
+Docker Hub build using the &amp;ldquo;Start a Build&amp;rdquo; button, or add the GitHub webhook
+manually, as described in &lt;a href=&#34;#github-service-hooks&#34;&gt;GitHub Service Hooks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;changing-the-github-user-link&#34;&gt;Changing the GitHub user link&lt;/h3&gt;
+
+&lt;p&gt;If you want to remove, or change the level of linking between your GitHub account
+and the Docker Hub, you need to do this in two places.&lt;/p&gt;
+
+&lt;p&gt;First, remove the &amp;ldquo;Linked Account&amp;rdquo; from your Docker Hub &amp;ldquo;Settings&amp;rdquo;.
+Then go to your GitHub account&amp;rsquo;s Personal settings, and in the &amp;ldquo;Applications&amp;rdquo;
+section, &amp;ldquo;Revoke access&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;You can now re-link your account at any time.&lt;/p&gt;
+
+&lt;h3 id=&#34;github-organizations&#34;&gt;GitHub organizations&lt;/h3&gt;
+
+&lt;p&gt;GitHub organizations and private repositories forked from organizations will be
+made available to auto build using the &amp;ldquo;Docker Hub Registry&amp;rdquo; application, which
+needs to be added to the organization - and then will apply to all users.&lt;/p&gt;
+
+&lt;p&gt;To check, or request access, go to your GitHub user&amp;rsquo;s &amp;ldquo;Setting&amp;rdquo; page, select the
+&amp;ldquo;Applications&amp;rdquo; section from the left side bar, then click the &amp;ldquo;View&amp;rdquo; button for
+&amp;ldquo;Docker Hub Registry&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh-check-user-org-dh-app-access.png&#34; alt=&#34;Check User access to GitHub&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The organization&amp;rsquo;s administrators may need to go to the Organization&amp;rsquo;s &amp;ldquo;Third
+party access&amp;rdquo; screen in &amp;ldquo;Settings&amp;rdquo; to Grant or Deny access to the Docker Hub
+Registry application. This change will apply to all organization members.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh-check-admin-org-dh-app-access.png&#34; alt=&#34;Check Docker Hub application access to Organization&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;More detailed access controls to specific users and GitHub repositories would be
+managed using the GitHub People and Teams interfaces.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-an-automated-build&#34;&gt;Creating an Automated Build&lt;/h3&gt;
+
+&lt;p&gt;You can &lt;a href=&#34;https://registry.hub.docker.com/builds/github/select/&#34;&gt;create an Automated Build&lt;/a&gt; from any of your
+public or private GitHub repositories that have a &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve selected the source repository, you can then configure:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The Hub user/org the repository is built to - either your Hub account name,
+or the name of any Hub organizations your account is in&lt;/li&gt;
+&lt;li&gt;The Docker repository name the image is built to&lt;/li&gt;
+&lt;li&gt;If the Docker repository should be &amp;ldquo;Public&amp;rdquo; or &amp;ldquo;Private&amp;rdquo;
+You can change the accessibility options after the repository has been created.
+If you add a Private repository to a Hub user, then you can only add other users
+as collaborators, and those users will be able to view and pull all images in that
+repository. To configure more granular access permissions, such as using groups of
+users or allow different users access to different image tags, then you need
+to add the Private repository to a Hub organization that your user has Administrator
+privilege on.&lt;/li&gt;
+&lt;li&gt;If you want the GitHub to notify the Docker Hub when a commit is made, and thus trigger
+a rebuild of all the images in this automated build.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can also select one or more
+- The git branch/tag, which repository sub-directory to use as the context
+- The Docker image tag name&lt;/p&gt;
+
+&lt;p&gt;You can set a description for the repository by clicking &amp;ldquo;Description&amp;rdquo; link in the righthand side bar after the automated build - note that the &amp;ldquo;Full Description&amp;rdquo; will be over-written next build from the README.md file.
+has been created.&lt;/p&gt;
+
+&lt;h3 id=&#34;github-private-submodules&#34;&gt;GitHub private submodules&lt;/h3&gt;
+
+&lt;p&gt;If your GitHub repository contains links to private submodules, you&amp;rsquo;ll get an
+error message in your build.&lt;/p&gt;
+
+&lt;p&gt;Normally, the Docker Hub sets up a deploy key in your GitHub repository.
+Unfortunately, GitHub only allows a repository deploy key to access a single repository.&lt;/p&gt;
+
+&lt;p&gt;To work around this, you need to create a dedicated user account in GitHub and attach
+the automated build&amp;rsquo;s deploy key that account. This dedicated build account
+can be limited to read-only access to just the repositories required to build.&lt;/p&gt;
+
+&lt;table class=&#34;table table-bordered&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Step&lt;/th&gt;
+      &lt;th&gt;Screenshot&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_org_members.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;First, create the new account in GitHub. It should be given read-only
+      access to the main repository and all submodules that are needed.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_team_members.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;This can be accomplished by adding the account to a read-only team in
+      the organization(s) where the main GitHub repository and all submodule
+      repositories are kept.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_repo_deploy_key.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Next, remove the deploy key from the main GitHub repository. This can be done in the GitHub repository&#39;s &#34;Deploy keys&#34; Settings section.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/deploy_key.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Your automated build&#39;s deploy key is in the &#34;Build Details&#34; menu
+      under &#34;Deploy keys&#34;.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_add_ssh_user_key.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;In your dedicated GitHub User account, add the deploy key from your
+      Docker Hub Automated Build.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;github-service-hooks&#34;&gt;GitHub service hooks&lt;/h3&gt;
+
+&lt;p&gt;The GitHub Service hook allows GitHub to notify the Docker Hub when something has
+been committed to that git repository. You will need to add the Service Hook manually
+if your GitHub account is &amp;ldquo;Limited&amp;rdquo; linked to the Docker Hub.&lt;/p&gt;
+
+&lt;p&gt;Follow the steps below to configure the GitHub Service hooks for your Automated Build:&lt;/p&gt;
+
+&lt;table class=&#34;table table-bordered&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Step&lt;/th&gt;
+      &lt;th&gt;Screenshot&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_settings.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Log in to Github.com, and go to your Repository page. Click on &#34;Settings&#34; on
+      the right side of the page. You must have admin privileges to the repository in order to do this.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_menu.png&#34; alt=&#34;Webhooks &amp; Services&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Click on &#34;Webhooks &amp; Services&#34; on the left side of the page.&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;3.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_service_hook.png&#34; alt=&#34;Find the service labeled Docker&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Find the service labeled &#34;Docker&#34; (or click on &#34;Add service&#34;) and click on it.&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;4.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/gh_docker-service.png&#34; alt=&#34;Activate Service Hooks&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Make sure the &#34;Active&#34; checkbox is selected and click the &#34;Update service&#34; button to save your changes.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;automated-builds-with-bitbucket&#34;&gt;Automated Builds with Bitbucket&lt;/h2&gt;
+
+&lt;p&gt;In order to setup an Automated Build, you need to first link your
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; account with a Bitbucket account.
+This will allow the registry to see your repositories.&lt;/p&gt;
+
+&lt;p&gt;To get started, log into your Docker Hub account and click the
+&amp;ldquo;+ Add Repository&amp;rdquo; button at the upper right of the screen. Then
+select &lt;a href=&#34;https://registry.hub.docker.com/builds/add/&#34;&gt;Automated Build&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Select the &lt;a href=&#34;https://registry.hub.docker.com/associate/bitbucket/&#34;&gt;Bitbucket source&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Then follow the onscreen instructions to authorize and link your
+Bitbucket account to Docker Hub. Once it is linked, you&amp;rsquo;ll be able
+to choose a repository from which to create the Automatic Build.&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-an-automated-build-1&#34;&gt;Creating an Automated Build&lt;/h3&gt;
+
+&lt;p&gt;You can &lt;a href=&#34;https://registry.hub.docker.com/builds/bitbucket/select/&#34;&gt;create an Automated Build&lt;/a&gt; from any of your
+public or private Bitbucket repositories with a &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;adding-a-hook&#34;&gt;Adding a Hook&lt;/h3&gt;
+
+&lt;p&gt;When you link your Docker Hub account, a &lt;code&gt;POST&lt;/code&gt; hook should get automatically
+added to your Bitbucket repository. Follow the steps below to confirm or modify the
+Bitbucket hooks for your Automated Build:&lt;/p&gt;
+
+&lt;table class=&#34;table table-bordered&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Step&lt;/th&gt;
+      &lt;th&gt;Screenshot&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/bb_menu.png&#34; alt=&#34;Settings&#34; width=&#34;180&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Log in to Bitbucket.org and go to your Repository page. Click on &#34;Settings&#34; on
+      the far left side of the page, under &#34;Navigation&#34;. You must have admin privileges
+      to the repository in order to do this.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/bb_hooks.png&#34; alt=&#34;Hooks&#34; width=&#34;180&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Click on &#34;Hooks&#34; on the near left side of the page, under &#34;Settings&#34;.&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/bb_post-hook.png&#34; alt=&#34;Docker Post Hook&#34;&gt;&lt;/td&gt;&lt;td&gt;You should now see a list of hooks associated with the repo, including a &lt;code&gt;POST&lt;/code&gt; hook that points at
+      registry.hub.docker.com/hooks/bitbucket.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;the-dockerfile-and-automated-builds&#34;&gt;The Dockerfile and Automated Builds&lt;/h2&gt;
+
+&lt;p&gt;During the build process, Docker will copy the contents of your &lt;code&gt;Dockerfile&lt;/code&gt;.
+It will also add it to the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; for the Docker
+community (for public repositories) or approved team members/orgs (for private
+repositories) to see on the repository page.&lt;/p&gt;
+
+&lt;h3 id=&#34;readme-md&#34;&gt;README.md&lt;/h3&gt;
+
+&lt;p&gt;If you have a &lt;code&gt;README.md&lt;/code&gt; file in your repository, it will be used as the
+repository&amp;rsquo;s full description.The build process will look for a
+&lt;code&gt;README.md&lt;/code&gt; in the same directory as your &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt;
+If you change the full description after a build, it will be
+rewritten the next time the Automated Build has been built. To make changes,
+modify the &lt;code&gt;README.md&lt;/code&gt; from the Git repository.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;remote-build-triggers&#34;&gt;Remote Build triggers&lt;/h2&gt;
+
+&lt;p&gt;If you need a way to trigger Automated Builds outside of GitHub or Bitbucket,
+you can set up a build trigger. When you turn on the build trigger for an
+Automated Build, it will give you a URL to which you can send POST requests.
+This will trigger the Automated Build, much as with a GitHub webhook.&lt;/p&gt;
+
+&lt;p&gt;Build triggers are available under the Settings menu of each Automated Build
+repository on the Docker Hub.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/docker-hub/hub-images/build-trigger.png&#34; alt=&#34;Build trigger screen&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;You can use &lt;code&gt;curl&lt;/code&gt; to trigger a build:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl --data &amp;quot;build=true&amp;quot; -X POST https://registry.hub.docker.com/u/svendowideit/testhook/trigger/be579c
+82-7c0e-11e4-81c4-0242ac110020/
+OK
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+You can only trigger one build at a time and no more than one
+every five minutes. If you already have a build pending, or if you
+recently submitted a build request, those requests &lt;em&gt;will be ignored&lt;/em&gt;.
+To verify everything is working correctly, check the logs of last
+ten triggers on the settings page .&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;webhooks&#34;&gt;Webhooks&lt;/h2&gt;
+
+&lt;p&gt;Automated Builds also include a Webhooks feature. Webhooks can be called
+after a successful repository push is made. This includes when a new tag is added
+to an existing image.&lt;/p&gt;
+
+&lt;p&gt;The webhook call will generate a HTTP POST with the following JSON
+payload:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;callback_url&amp;quot;: &amp;quot;https://registry.hub.docker.com/u/svendowideit/testhook/hook/2141b5bi5i5b02bec211i4eeih0242eg11000a/&amp;quot;,
+  &amp;quot;push_data&amp;quot;: {
+    &amp;quot;images&amp;quot;: [
+        &amp;quot;27d47432a69bca5f2700e4dff7de0388ed65f9d3fb1ec645e2bc24c223dc1cc3&amp;quot;,
+        &amp;quot;51a9c7c1f8bb2fa19bcd09789a34e63f35abb80044bc10196e304f6634cc582c&amp;quot;,
+        ...
+    ],
+    &amp;quot;pushed_at&amp;quot;: 1.417566161e+09,
+    &amp;quot;pusher&amp;quot;: &amp;quot;trustedbuilder&amp;quot;
+  },
+  &amp;quot;repository&amp;quot;: {
+    &amp;quot;comment_count&amp;quot;: 0,
+    &amp;quot;date_created&amp;quot;: 1.417494799e+09,
+    &amp;quot;description&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;dockerfile&amp;quot;: &amp;quot;#\n# BUILD\u0009\u0009docker build -t svendowideit/apt-cacher .\n# RUN\u0009\u0009docker run -d -p 3142:3142 -name apt-cacher-run apt-cacher\n#\n# and then you can run containers with:\n# \u0009\u0009docker run -t -i -rm -e http_proxy http://192.168.1.2:3142/ debian bash\n#\nFROM\u0009\u0009ubuntu\nMAINTAINER\u0009SvenDowideit@home.org.au\n\n\nVOLUME\u0009\u0009[\&amp;quot;/var/cache/apt-cacher-ng\&amp;quot;]\nRUN\u0009\u0009apt-get update ; apt-get install -yq apt-cacher-ng\n\nEXPOSE \u0009\u00093142\nCMD\u0009\u0009chmod 777 /var/cache/apt-cacher-ng ; /etc/init.d/apt-cacher-ng start ; tail -f /var/log/apt-cacher-ng/*\n&amp;quot;,
+    &amp;quot;full_description&amp;quot;: &amp;quot;Docker Hub based automated build from a GitHub repo&amp;quot;,
+    &amp;quot;is_official&amp;quot;: false,
+    &amp;quot;is_private&amp;quot;: true,
+    &amp;quot;is_trusted&amp;quot;: true,
+    &amp;quot;name&amp;quot;: &amp;quot;testhook&amp;quot;,
+    &amp;quot;namespace&amp;quot;: &amp;quot;svendowideit&amp;quot;,
+    &amp;quot;owner&amp;quot;: &amp;quot;svendowideit&amp;quot;,
+    &amp;quot;repo_name&amp;quot;: &amp;quot;svendowideit/testhook&amp;quot;,
+    &amp;quot;repo_url&amp;quot;: &amp;quot;https://registry.hub.docker.com/u/svendowideit/testhook/&amp;quot;,
+    &amp;quot;star_count&amp;quot;: 0,
+    &amp;quot;status&amp;quot;: &amp;quot;Active&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Webhooks are available under the Settings menu of each Repository.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you want to test your webhook out we recommend using
+a tool like &lt;a href=&#34;http://requestb.in/&#34;&gt;requestb.in&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The Docker Hub servers are currently in the IP range
+&lt;code&gt;162.242.195.64 - 162.242.195.127&lt;/code&gt;, so you can restrict your webhooks to
+accept webhook requests from that set of IP addresses.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;webhook-chains&#34;&gt;Webhook chains&lt;/h3&gt;
+
+&lt;p&gt;Webhook chains allow you to chain calls to multiple services. For example,
+you can use this to trigger a deployment of your container only after
+it has been successfully tested, then update a separate Changelog once the
+deployment is complete.
+After clicking the &amp;ldquo;Add webhook&amp;rdquo; button, simply add as many URLs as necessary
+in your chain.&lt;/p&gt;
+
+&lt;p&gt;The first webhook in a chain will be called after a successful push. Subsequent
+URLs will be contacted after the callback has been validated.&lt;/p&gt;
+
+&lt;h3 id=&#34;validating-a-callback&#34;&gt;Validating a callback&lt;/h3&gt;
+
+&lt;p&gt;In order to validate a callback in a webhook chain, you need to&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Retrieve the &lt;code&gt;callback_url&lt;/code&gt; value in the request&amp;rsquo;s JSON payload.&lt;/li&gt;
+&lt;li&gt;Send a POST request to this URL containing a valid JSON body.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: A chain request will only be considered complete once the last
+callback has been validated.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To help you debug or simply view the results of your webhook(s),
+view the &amp;ldquo;History&amp;rdquo; of the webhook available on its settings page.&lt;/p&gt;
+
+&lt;h3 id=&#34;callback-json-data&#34;&gt;Callback JSON data&lt;/h3&gt;
+
+&lt;p&gt;The following parameters are recognized in callback data:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;state&lt;/code&gt; (required): Accepted values are &lt;code&gt;success&lt;/code&gt;, &lt;code&gt;failure&lt;/code&gt; and &lt;code&gt;error&lt;/code&gt;.
+If the state isn&amp;rsquo;t &lt;code&gt;success&lt;/code&gt;, the webhook chain will be interrupted.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;description&lt;/code&gt;: A string containing miscellaneous information that will be
+available on the Docker Hub. Maximum 255 characters.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;context&lt;/code&gt;: A string containing the context of the operation. Can be retrieved
+from the Docker Hub. Maximum 100 characters.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;target_url&lt;/code&gt;: The URL where the results of the operation can be found. Can be
+retrieved on the Docker Hub.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Example callback payload:&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;state&amp;quot;: &amp;quot;success&amp;quot;,
+  &amp;quot;description&amp;quot;: &amp;quot;387 tests PASSED&amp;quot;,
+  &amp;quot;context&amp;quot;: &amp;quot;Continuous integration by Acme CI&amp;quot;,
+  &amp;quot;target_url&amp;quot;: &amp;quot;http://ci.acme.com/results/afd339c1c3d27&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;repository-links&#34;&gt;Repository links&lt;/h2&gt;
+
+&lt;p&gt;Repository links are a way to associate one Automated Build with
+another. If one gets updated,the linking system triggers a rebuild
+for the other Automated Build. This makes it easy to keep all your
+Automated Builds up to date.&lt;/p&gt;
+
+&lt;p&gt;To add a link, go to the repository for the Automated Build you want to
+link to and click on &lt;em&gt;Repository Links&lt;/em&gt; under the Settings menu at
+right. Then, enter the name of the repository that you want have linked.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt;
+You can add more than one repository link, however, you should
+do so very carefully. Creating a two way relationship between Automated Builds will
+cause an endless build loop.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automatically start containers</title>
+      <link>http://localhost/docker/articles/host_integration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/articles/host_integration/</guid>
+      <description>
+
+&lt;h1 id=&#34;automatically-start-containers&#34;&gt;Automatically start containers&lt;/h1&gt;
+
+&lt;p&gt;As of Docker 1.2,
+&lt;a href=&#34;http://localhost/reference/commandline/cli/#restart-policies&#34;&gt;restart policies&lt;/a&gt; are the
+built-in Docker mechanism for restarting containers when they exit. If set,
+restart policies will be used when the Docker daemon starts up, as typically
+happens after a system boot. Restart policies will ensure that linked containers
+are started in the correct order.&lt;/p&gt;
+
+&lt;p&gt;If restart policies don&amp;rsquo;t suit your needs (i.e., you have non-Docker processes
+that depend on Docker containers), you can use a process manager like
+&lt;a href=&#34;http://upstart.ubuntu.com/&#34;&gt;upstart&lt;/a&gt;,
+&lt;a href=&#34;http://freedesktop.org/wiki/Software/systemd/&#34;&gt;systemd&lt;/a&gt; or
+&lt;a href=&#34;http://supervisord.org/&#34;&gt;supervisor&lt;/a&gt; instead.&lt;/p&gt;
+
+&lt;h2 id=&#34;using-a-process-manager&#34;&gt;Using a process manager&lt;/h2&gt;
+
+&lt;p&gt;Docker does not set any restart policies by default, but be aware that they will
+conflict with most process managers. So don&amp;rsquo;t set restart policies if you are
+using a process manager.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; Prior to Docker 1.2, restarting of Docker containers had to be
+explicitly disabled. Refer to the
+&lt;a href=&#34;http://localhost/v1.1/articles/host_integration/&#34;&gt;previous version&lt;/a&gt; of this article for the
+details on how to do that.&lt;/p&gt;
+
+&lt;p&gt;When you have finished setting up your image and are happy with your
+running container, you can then attach a process manager to manage it.
+When you run &lt;code&gt;docker start -a&lt;/code&gt;, Docker will automatically attach to the
+running container, or start it if needed and forward all signals so that
+the process manager can detect when a container stops and correctly
+restart it.&lt;/p&gt;
+
+&lt;p&gt;Here are a few sample scripts for systemd and upstart to integrate with
+Docker.&lt;/p&gt;
+
+&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
+
+&lt;p&gt;The examples below show configuration files for two popular process managers,
+upstart and systemd. In these examples, we&amp;rsquo;ll assume that we have already
+created a container to run Redis with &lt;code&gt;--name=redis_server&lt;/code&gt;. These files define
+a new service that will be started after the docker daemon service has started.&lt;/p&gt;
+
+&lt;h3 id=&#34;upstart&#34;&gt;upstart&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;description &amp;quot;Redis container&amp;quot;
+author &amp;quot;Me&amp;quot;
+start on filesystem and started docker
+stop on runlevel [!2345]
+respawn
+script
+  /usr/bin/docker start -a redis_server
+end script
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;systemd&#34;&gt;systemd&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;[Unit]
+Description=Redis container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a redis_server
+ExecStop=/usr/bin/docker stop -t 2 redis_server
+
+[Install]
+WantedBy=local.target
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you need to pass options to the redis container (such as &lt;code&gt;--env&lt;/code&gt;),
+then you&amp;rsquo;ll need to use &lt;code&gt;docker run&lt;/code&gt; rather than &lt;code&gt;docker start&lt;/code&gt;. This will
+create a new container every time the service is started, which will be stopped
+and removed when the service is stopped.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[Service]
+...
+ExecStart=/usr/bin/docker run --env foo=bar --name redis_server redis
+ExecStop=/usr/bin/docker stop -t 2 redis_server ; /usr/bin/docker rm -f redis_server
+...
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Best practices for writing Dockerfiles</title>
+      <link>http://localhost/docker/articles/dockerfile_best-practices/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/articles/dockerfile_best-practices/</guid>
+      <description>
+
+&lt;h1 id=&#34;best-practices-for-writing-dockerfiles&#34;&gt;Best practices for writing Dockerfiles&lt;/h1&gt;
+
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;Docker can build images automatically by reading the instructions from a
+&lt;code&gt;Dockerfile&lt;/code&gt;, a text file that contains all the commands, in order, needed to
+build a given image. &lt;code&gt;Dockerfile&lt;/code&gt;s adhere to a specific format and use a
+specific set of instructions. You can learn the basics on the
+&lt;a href=&#34;https://docs.docker.com/reference/builder/&#34;&gt;Dockerfile Reference&lt;/a&gt; page. If
+you’re new to writing &lt;code&gt;Dockerfile&lt;/code&gt;s, you should start there.&lt;/p&gt;
+
+&lt;p&gt;This document covers the best practices and methods recommended by Docker,
+Inc. and the Docker community for creating easy-to-use, effective
+&lt;code&gt;Dockerfile&lt;/code&gt;s. We strongly suggest you follow these recommendations (in fact,
+if you’re creating an Official Image, you &lt;em&gt;must&lt;/em&gt; adhere to these practices).&lt;/p&gt;
+
+&lt;p&gt;You can see many of these practices and recommendations in action in the &lt;a href=&#34;https://github.com/docker-library/buildpack-deps/blob/master/jessie/Dockerfile&#34;&gt;buildpack-deps &lt;code&gt;Dockerfile&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Note: for more detailed explanations of any of the Dockerfile commands
+mentioned here, visit the &lt;a href=&#34;https://docs.docker.com/reference/builder/&#34;&gt;Dockerfile Reference&lt;/a&gt; page.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;general-guidelines-and-recommendations&#34;&gt;General guidelines and recommendations&lt;/h2&gt;
+
+&lt;h3 id=&#34;containers-should-be-ephemeral&#34;&gt;Containers should be ephemeral&lt;/h3&gt;
+
+&lt;p&gt;The container produced by the image your &lt;code&gt;Dockerfile&lt;/code&gt; defines should be as
+ephemeral as possible. By “ephemeral,” we mean that it can be stopped and
+destroyed and a new one built and put in place with an absolute minimum of
+set-up and configuration.&lt;/p&gt;
+
+&lt;h3 id=&#34;use-a-dockerignore-file&#34;&gt;Use a .dockerignore file&lt;/h3&gt;
+
+&lt;p&gt;In most cases, it&amp;rsquo;s best to put each Dockerfile in an empty directory. Then,
+add to that directory only the files needed for building the Dockerfile. To
+increase the build&amp;rsquo;s performance, you can exclude files and directories by
+adding a &lt;code&gt;.dockerignore&lt;/code&gt; file to that directory as well. This file supports
+exclusion patterns similar to &lt;code&gt;.gitignore&lt;/code&gt; files. For information on creating one,
+see the &lt;a href=&#34;../../reference/builder/#dockerignore-file&#34;&gt;.dockerignore file&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;avoid-installing-unnecessary-packages&#34;&gt;Avoid installing unnecessary packages&lt;/h3&gt;
+
+&lt;p&gt;In order to reduce complexity, dependencies, file sizes, and build times, you
+should avoid installing extra or unnecessary packages just because they
+might be “nice to have.” For example, you don’t need to include a text editor
+in a database image.&lt;/p&gt;
+
+&lt;h3 id=&#34;run-only-one-process-per-container&#34;&gt;Run only one process per container&lt;/h3&gt;
+
+&lt;p&gt;In almost all cases, you should only run a single process in a single
+container. Decoupling applications into multiple containers makes it much
+easier to scale horizontally and reuse containers. If that service depends on
+another service, make use of &lt;a href=&#34;https://docs.docker.com/userguide/dockerlinks/&#34;&gt;container linking&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;minimize-the-number-of-layers&#34;&gt;Minimize the number of layers&lt;/h3&gt;
+
+&lt;p&gt;You need to find the balance between readability (and thus long-term
+maintainability) of the &lt;code&gt;Dockerfile&lt;/code&gt; and minimizing the number of layers it
+uses. Be strategic and cautious about the number of layers you use.&lt;/p&gt;
+
+&lt;h3 id=&#34;sort-multi-line-arguments&#34;&gt;Sort multi-line arguments&lt;/h3&gt;
+
+&lt;p&gt;Whenever possible, ease later changes by sorting multi-line arguments
+alphanumerically. This will help you avoid duplication of packages and make the
+list much easier to update. This also makes PRs a lot easier to read and
+review. Adding a space before a backslash (&lt;code&gt;\&lt;/code&gt;) helps as well.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example from the &lt;a href=&#34;https://github.com/docker-library/buildpack-deps&#34;&gt;&lt;code&gt;buildpack-deps&lt;/code&gt; image&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;RUN apt-get update &amp;amp;&amp;amp; apt-get install -y \
+  bzr \
+  cvs \
+  git \
+  mercurial \
+  subversion
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;build-cache&#34;&gt;Build cache&lt;/h3&gt;
+
+&lt;p&gt;During the process of building an image Docker will step through the
+instructions in your &lt;code&gt;Dockerfile&lt;/code&gt; executing each in the order specified.
+As each instruction is examined Docker will look for an existing image in its
+cache that it can reuse, rather than creating a new (duplicate) image.
+If you do not want to use the cache at all you can use the &lt;code&gt;--no-cache=true&lt;/code&gt;
+option on the &lt;code&gt;docker build&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;However, if you do let Docker use its cache then it is very important to
+understand when it will, and will not, find a matching image. The basic rules
+that Docker will follow are outlined below:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Starting with a base image that is already in the cache, the next
+instruction is compared against all child images derived from that base
+image to see if one of them was built using the exact same instruction. If
+not, the cache is invalidated.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In most cases simply comparing the instruction in the &lt;code&gt;Dockerfile&lt;/code&gt; with one
+of the child images is sufficient.  However, certain instructions require
+a little more examination and explanation.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In the case of the &lt;code&gt;ADD&lt;/code&gt; and &lt;code&gt;COPY&lt;/code&gt; instructions, the contents of the file(s)
+being put into the image are examined. Specifically, a checksum is done
+of the file(s) and then that checksum is used during the cache lookup.
+If anything has changed in the file(s), including its metadata,
+then the cache is invalidated.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Aside from the &lt;code&gt;ADD&lt;/code&gt; and &lt;code&gt;COPY&lt;/code&gt; commands cache checking will not look at the
+files in the container to determine a cache match. For example, when processing
+a &lt;code&gt;RUN apt-get -y update&lt;/code&gt; command the files updated in the container
+will not be examined to determine if a cache hit exists.  In that case just
+the command string itself will be used to find a match.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once the cache is invalidated, all subsequent &lt;code&gt;Dockerfile&lt;/code&gt; commands will
+generate new images and the cache will not be used.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-dockerfile-instructions&#34;&gt;The Dockerfile instructions&lt;/h2&gt;
+
+&lt;p&gt;Below you&amp;rsquo;ll find recommendations for the best way to write the
+various instructions available for use in a &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;from-https-docs-docker-com-reference-builder-from&#34;&gt;&lt;a href=&#34;https://docs.docker.com/reference/builder/#from&#34;&gt;&lt;code&gt;FROM&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Whenever possible, use current Official Repositories as the basis for your
+image. We recommend the &lt;a href=&#34;https://registry.hub.docker.com/_/debian/&#34;&gt;Debian image&lt;/a&gt;
+since it’s very tightly controlled and kept extremely minimal (currently under
+100 mb), while still being a full distribution.&lt;/p&gt;
+
+&lt;h3 id=&#34;run-https-docs-docker-com-reference-builder-run&#34;&gt;&lt;a href=&#34;https://docs.docker.com/reference/builder/#run&#34;&gt;&lt;code&gt;RUN&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;As always, to make your &lt;code&gt;Dockerfile&lt;/code&gt; more readable, understandable, and
+maintainable, put long or complex &lt;code&gt;RUN&lt;/code&gt; statements on multiple lines separated
+with backslashes.&lt;/p&gt;
+
+&lt;p&gt;Probably the most common use-case for &lt;code&gt;RUN&lt;/code&gt; is an application of &lt;code&gt;apt-get&lt;/code&gt;.
+When using &lt;code&gt;apt-get&lt;/code&gt;, here are a few things to keep in mind:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Don’t do &lt;code&gt;RUN apt-get update&lt;/code&gt; on a single line. This will cause
+caching issues if the referenced archive gets updated, which will make your
+subsequent &lt;code&gt;apt-get install&lt;/code&gt; fail without comment.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Avoid &lt;code&gt;RUN apt-get upgrade&lt;/code&gt; or &lt;code&gt;dist-upgrade&lt;/code&gt;, since many of the “essential”
+packages from the base images will fail to upgrade inside an unprivileged
+container. If a base package is out of date, you should contact its
+maintainers. If you know there’s a particular package, &lt;code&gt;foo&lt;/code&gt;, that needs to be
+updated, use &lt;code&gt;apt-get install -y foo&lt;/code&gt; and it will update automatically.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Do write instructions like:&lt;/p&gt;
+
+&lt;p&gt;RUN apt-get update &amp;amp;&amp;amp; apt-get install -y package-bar package-foo package-baz&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Writing the instruction this way not only makes it easier to read
+and maintain, but also, by including &lt;code&gt;apt-get update&lt;/code&gt;, ensures that the cache
+will naturally be busted and the latest versions will be installed with no
+further coding or manual intervention required.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Further natural cache-busting can be realized by version-pinning packages
+(e.g., &lt;code&gt;package-foo=1.3.*&lt;/code&gt;). This will force retrieval of that version
+regardless of what’s in the cache.
+Writing your &lt;code&gt;apt-get&lt;/code&gt; code this way will greatly ease maintenance and reduce
+failures due to unanticipated changes in required packages.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;example&#34;&gt;Example&lt;/h4&gt;
+
+&lt;p&gt;Below is a well-formed &lt;code&gt;RUN&lt;/code&gt; instruction that demonstrates the above
+recommendations. Note that the last package, &lt;code&gt;s3cmd&lt;/code&gt;, specifies a version
+&lt;code&gt;1.1.0*&lt;/code&gt;. If the image previously used an older version, specifying the new one
+will cause a cache bust of &lt;code&gt;apt-get update&lt;/code&gt; and ensure the installation of
+the new version (which in this case had a new, required feature).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;RUN apt-get update &amp;amp;&amp;amp; apt-get install -y \
+    aufs-tools \
+    automake \
+    btrfs-tools \
+    build-essential \
+    curl \
+    dpkg-sig \
+    git \
+    iptables \
+    libapparmor-dev \
+    libcap-dev \
+    libsqlite3-dev \
+    lxc=1.0* \
+    mercurial \
+    parallel \
+    reprepro \
+    ruby1.9.1 \
+    ruby1.9.1-dev \
+    s3cmd=1.1.0*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Writing the instruction this way also helps you avoid potential duplication of
+a given package because it is much easier to read than an instruction like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;RUN apt-get install -y package-foo &amp;amp;&amp;amp; apt-get install -y package-bar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;cmd-https-docs-docker-com-reference-builder-cmd&#34;&gt;&lt;a href=&#34;https://docs.docker.com/reference/builder/#cmd&#34;&gt;&lt;code&gt;CMD&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;The &lt;code&gt;CMD&lt;/code&gt; instruction should be used to run the software contained by your
+image, along with any arguments. &lt;code&gt;CMD&lt;/code&gt; should almost always be used in the
+form of &lt;code&gt;CMD [“executable”, “param1”, “param2”…]&lt;/code&gt;. Thus, if the image is for a
+service (Apache, Rails, etc.), you would run something like
+&lt;code&gt;CMD [&amp;quot;apache2&amp;quot;,&amp;quot;-DFOREGROUND&amp;quot;]&lt;/code&gt;. Indeed, this form of the instruction is
+recommended for any service-based image.&lt;/p&gt;
+
+&lt;p&gt;In most other cases, &lt;code&gt;CMD&lt;/code&gt; should be given an interactive shell (bash, python,
+perl, etc), for example, &lt;code&gt;CMD [&amp;quot;perl&amp;quot;, &amp;quot;-de0&amp;quot;]&lt;/code&gt;, &lt;code&gt;CMD [&amp;quot;python&amp;quot;]&lt;/code&gt;, or
+&lt;code&gt;CMD [“php”, “-a”]&lt;/code&gt;. Using this form means that when you execute something like
+&lt;code&gt;docker run -it python&lt;/code&gt;, you’ll get dropped into a usable shell, ready to go.
+&lt;code&gt;CMD&lt;/code&gt; should rarely be used in the manner of &lt;code&gt;CMD [“param”, “param”]&lt;/code&gt; in
+conjunction with &lt;a href=&#34;https://docs.docker.com/reference/builder/#entrypoint&#34;&gt;&lt;code&gt;ENTRYPOINT&lt;/code&gt;&lt;/a&gt;, unless
+you and your expected users are already quite familiar with how &lt;code&gt;ENTRYPOINT&lt;/code&gt;
+works.&lt;/p&gt;
+
+&lt;h3 id=&#34;expose-https-docs-docker-com-reference-builder-expose&#34;&gt;&lt;a href=&#34;https://docs.docker.com/reference/builder/#expose&#34;&gt;&lt;code&gt;EXPOSE&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;The &lt;code&gt;EXPOSE&lt;/code&gt; instruction indicates the ports on which a container will listen
+for connections. Consequently, you should use the common, traditional port for
+your application. For example, an image containing the Apache web server would
+use &lt;code&gt;EXPOSE 80&lt;/code&gt;, while an image containing MongoDB would use &lt;code&gt;EXPOSE 27017&lt;/code&gt; and
+so on.&lt;/p&gt;
+
+&lt;p&gt;For external access, your users can execute &lt;code&gt;docker run&lt;/code&gt; with a flag indicating
+how to map the specified port to the port of their choice.
+For container linking, Docker provides environment variables for the path from
+the recipient container back to the source (ie, &lt;code&gt;MYSQL_PORT_3306_TCP&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&#34;env-https-docs-docker-com-reference-builder-env&#34;&gt;&lt;a href=&#34;https://docs.docker.com/reference/builder/#env&#34;&gt;&lt;code&gt;ENV&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;In order to make new software easier to run, you can use &lt;code&gt;ENV&lt;/code&gt; to update the
+&lt;code&gt;PATH&lt;/code&gt; environment variable for the software your container installs. For
+example, &lt;code&gt;ENV PATH /usr/local/nginx/bin:$PATH&lt;/code&gt; will ensure that &lt;code&gt;CMD [“nginx”]&lt;/code&gt;
+just works.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;ENV&lt;/code&gt; instruction is also useful for providing required environment
+variables specific to services you wish to containerize, such as Postgres’s
+&lt;code&gt;PGDATA&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Lastly, &lt;code&gt;ENV&lt;/code&gt; can also be used to set commonly used version numbers so that
+version bumps are easier to maintain, as seen in the following example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ENV PG_MAJOR 9.3
+ENV PG_VERSION 9.3.4
+RUN curl -SL http://example.com/postgres-$PG_VERSION.tar.xz | tar -xJC /usr/src/postgress &amp;amp;&amp;amp; …
+ENV PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Similar to having constant variables in a program (as opposed to hard-coding
+values), this approach lets you change a single &lt;code&gt;ENV&lt;/code&gt; instruction to
+auto-magically bump the version of the software in your container.&lt;/p&gt;
+
+&lt;h3 id=&#34;add-https-docs-docker-com-reference-builder-add-or-copy-https-docs-docker-com-reference-builder-copy&#34;&gt;&lt;a href=&#34;https://docs.docker.com/reference/builder/#add&#34;&gt;&lt;code&gt;ADD&lt;/code&gt;&lt;/a&gt; or &lt;a href=&#34;https://docs.docker.com/reference/builder/#copy&#34;&gt;&lt;code&gt;COPY&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Although &lt;code&gt;ADD&lt;/code&gt; and &lt;code&gt;COPY&lt;/code&gt; are functionally similar, generally speaking, &lt;code&gt;COPY&lt;/code&gt;
+is preferred. That’s because it’s more transparent than &lt;code&gt;ADD&lt;/code&gt;. &lt;code&gt;COPY&lt;/code&gt; only
+supports the basic copying of local files into the container, while &lt;code&gt;ADD&lt;/code&gt; has
+some features (like local-only tar extraction and remote URL support) that are
+not immediately obvious. Consequently, the best use for &lt;code&gt;ADD&lt;/code&gt; is local tar file
+auto-extraction into the image, as in &lt;code&gt;ADD rootfs.tar.xz /&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you have multiple &lt;code&gt;Dockerfile&lt;/code&gt; steps that use different files from your
+context, &lt;code&gt;COPY&lt;/code&gt; them individually, rather than all at once. This will ensure that
+each step&amp;rsquo;s build cache is only invalidated (forcing the step to be re-run) if the
+specifically required files change.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;COPY requirements.txt /tmp/
+RUN pip install /tmp/requirements.txt
+COPY . /tmp/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Results in fewer cache invalidations for the &lt;code&gt;RUN&lt;/code&gt; step, than if you put the
+&lt;code&gt;COPY . /tmp/&lt;/code&gt; before it.&lt;/p&gt;
+
+&lt;p&gt;Because image size matters, using &lt;code&gt;ADD&lt;/code&gt; to fetch packages from remote URLs is
+strongly discouraged; you should use &lt;code&gt;curl&lt;/code&gt; or &lt;code&gt;wget&lt;/code&gt; instead. That way you can
+delete the files you no longer need after they&amp;rsquo;ve been extracted and you won&amp;rsquo;t
+have to add another layer in your image. For example, you should avoid doing
+things like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ADD http://example.com/big.tar.xz /usr/src/things/
+RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
+RUN make -C /usr/src/things all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And instead, do something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;RUN mkdir -p /usr/src/things \
+    &amp;amp;&amp;amp; curl -SL http://example.com/big.tar.gz \
+    | tar -xJC /usr/src/things \
+    &amp;amp;&amp;amp; make -C /usr/src/things all
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For other items (files, directories) that do not require &lt;code&gt;ADD&lt;/code&gt;’s tar
+auto-extraction capability, you should always use &lt;code&gt;COPY&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;entrypoint-https-docs-docker-com-reference-builder-entrypoint&#34;&gt;&lt;a href=&#34;https://docs.docker.com/reference/builder/#entrypoint&#34;&gt;&lt;code&gt;ENTRYPOINT&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;The best use for &lt;code&gt;ENTRYPOINT&lt;/code&gt; is to set the image&amp;rsquo;s main command, allowing that
+image to be run as though it was that command (and then use &lt;code&gt;CMD&lt;/code&gt; as the
+default flags).&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s start with an example of an image for the command line tool &lt;code&gt;s3cmd&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ENTRYPOINT [&amp;quot;s3cmd&amp;quot;]
+CMD [&amp;quot;--help&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now the image can be run like this to show the command&amp;rsquo;s help:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run s3cmd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or using the right parameters to execute a command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run s3cmd ls s3://mybucket
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is useful because the image name can double as a reference to the binary as
+shown in the command above.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;ENTRYPOINT&lt;/code&gt; instruction can also be used in combination with a helper
+script, allowing it to function in a similar way to the command above, even
+when starting the tool may require more than one step.&lt;/p&gt;
+
+&lt;p&gt;For example, the &lt;a href=&#34;https://registry.hub.docker.com/_/postgres/&#34;&gt;Postgres Official Image&lt;/a&gt;
+uses the following script as its &lt;code&gt;ENTRYPOINT&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash
+set -e
+
+if [ &amp;quot;$1&amp;quot; = &#39;postgres&#39; ]; then
+    chown -R postgres &amp;quot;$PGDATA&amp;quot;
+
+    if [ -z &amp;quot;$(ls -A &amp;quot;$PGDATA&amp;quot;)&amp;quot; ]; then
+        gosu postgres initdb
+    fi
+
+    exec gosu postgres &amp;quot;$@&amp;quot;
+fi
+
+exec &amp;quot;$@&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
+This script uses &lt;a href=&#34;http://wiki.bash-hackers.org/commands/builtin/exec&#34;&gt;the &lt;code&gt;exec&lt;/code&gt; Bash command&lt;/a&gt;
+so that the final running application becomes the container&amp;rsquo;s PID 1. This allows
+the application to receive any Unix signals sent to the container.
+See the &lt;a href=&#34;https://docs.docker.com/reference/builder/#ENTRYPOINT&#34;&gt;&lt;code&gt;ENTRYPOINT&lt;/code&gt;&lt;/a&gt;
+help for more details.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The helper script is copied into the container and run via &lt;code&gt;ENTRYPOINT&lt;/code&gt; on
+container start:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;COPY ./docker-entrypoint.sh /
+ENTRYPOINT [&amp;quot;/docker-entrypoint.sh&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This script allows the user to interact with Postgres in several ways.&lt;/p&gt;
+
+&lt;p&gt;It can simply start Postgres:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run postgres
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or, it can be used to run Postgres and pass parameters to the server:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run postgres postgres --help
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lastly, it could also be used to start a totally different tool, such Bash:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -it postgres bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;volume-https-docs-docker-com-reference-builder-volume&#34;&gt;&lt;a href=&#34;https://docs.docker.com/reference/builder/#volume&#34;&gt;&lt;code&gt;VOLUME&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;The &lt;code&gt;VOLUME&lt;/code&gt; instruction should be used to expose any database storage area,
+configuration storage, or files/folders created by your docker container. You
+are strongly encouraged to use &lt;code&gt;VOLUME&lt;/code&gt; for any mutable and/or user-serviceable
+parts of your image.&lt;/p&gt;
+
+&lt;h3 id=&#34;user-https-docs-docker-com-reference-builder-user&#34;&gt;&lt;a href=&#34;https://docs.docker.com/reference/builder/#user&#34;&gt;&lt;code&gt;USER&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;If a service can run without privileges, use &lt;code&gt;USER&lt;/code&gt; to change to a non-root
+user. Start by creating the user and group in the &lt;code&gt;Dockerfile&lt;/code&gt; with something
+like &lt;code&gt;RUN groupadd -r postgres &amp;amp;&amp;amp; useradd -r -g postgres postgres&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Users and groups in an image get a non-deterministic
+UID/GID in that the “next” UID/GID gets assigned regardless of image
+rebuilds. So, if it’s critical, you should assign an explicit UID/GID.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You should avoid installing or using &lt;code&gt;sudo&lt;/code&gt; since it has unpredictable TTY and
+signal-forwarding behavior that can cause more problems than it solves. If
+you absolutely need functionality similar to &lt;code&gt;sudo&lt;/code&gt; (e.g., initializing the
+daemon as root but running it as non-root), you may be able to use
+&lt;a href=&#34;https://github.com/tianon/gosu&#34;&gt;“gosu”&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Lastly, to reduce layers and complexity, avoid switching &lt;code&gt;USER&lt;/code&gt; back
+and forth frequently.&lt;/p&gt;
+
+&lt;h3 id=&#34;workdir-https-docs-docker-com-reference-builder-workdir&#34;&gt;&lt;a href=&#34;https://docs.docker.com/reference/builder/#workdir&#34;&gt;&lt;code&gt;WORKDIR&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;For clarity and reliability, you should always use absolute paths for your
+&lt;code&gt;WORKDIR&lt;/code&gt;. Also, you should use &lt;code&gt;WORKDIR&lt;/code&gt; instead of  proliferating
+instructions like &lt;code&gt;RUN cd … &amp;amp;&amp;amp; do-something&lt;/code&gt;, which are hard to read,
+troubleshoot, and maintain.&lt;/p&gt;
+
+&lt;h3 id=&#34;onbuild-https-docs-docker-com-reference-builder-onbuild&#34;&gt;&lt;a href=&#34;https://docs.docker.com/reference/builder/#onbuild&#34;&gt;&lt;code&gt;ONBUILD&lt;/code&gt;&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;An &lt;code&gt;ONBUILD&lt;/code&gt; command executes after the current &lt;code&gt;Dockerfile&lt;/code&gt; build completes.
+&lt;code&gt;ONBUILD&lt;/code&gt; executes in any child image derived &lt;code&gt;FROM&lt;/code&gt; the current image.  Think
+of the &lt;code&gt;ONBUILD&lt;/code&gt; command as an instruction the parent &lt;code&gt;Dockerfile&lt;/code&gt; gives
+to the child &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;A Docker build executes &lt;code&gt;ONBUILD&lt;/code&gt; commands before any command in a child
+&lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ONBUILD&lt;/code&gt; is useful for images that are going to be built &lt;code&gt;FROM&lt;/code&gt; a given
+image. For example, you would use &lt;code&gt;ONBUILD&lt;/code&gt; for a language stack image that
+builds arbitrary user software written in that language within the
+&lt;code&gt;Dockerfile&lt;/code&gt;, as you can see in &lt;a href=&#34;https://github.com/docker-library/ruby/blob/master/2.1/onbuild/Dockerfile&#34;&gt;Ruby’s &lt;code&gt;ONBUILD&lt;/code&gt; variants&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Images built from &lt;code&gt;ONBUILD&lt;/code&gt; should get a separate tag, for example:
+&lt;code&gt;ruby:1.9-onbuild&lt;/code&gt; or &lt;code&gt;ruby:2.0-onbuild&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Be careful when putting &lt;code&gt;ADD&lt;/code&gt; or &lt;code&gt;COPY&lt;/code&gt; in &lt;code&gt;ONBUILD&lt;/code&gt;. The “onbuild” image will
+fail catastrophically if the new build&amp;rsquo;s context is missing the resource being
+added. Adding a separate tag, as recommended above, will help mitigate this by
+allowing the &lt;code&gt;Dockerfile&lt;/code&gt; author to make a choice.&lt;/p&gt;
+
+&lt;h2 id=&#34;examples-for-official-repositories&#34;&gt;Examples for Official Repositories&lt;/h2&gt;
+
+&lt;p&gt;These Official Repositories have exemplary &lt;code&gt;Dockerfile&lt;/code&gt;s:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://registry.hub.docker.com/_/golang/&#34;&gt;Go&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://registry.hub.docker.com/_/perl/&#34;&gt;Perl&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://registry.hub.docker.com/_/hylang/&#34;&gt;Hy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://registry.hub.docker.com/_/rails&#34;&gt;Rails&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;additional-resources&#34;&gt;Additional resources:&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/reference/builder/#onbuild&#34;&gt;Dockerfile Reference&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/articles/baseimages/&#34;&gt;More about Base Images&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/docker-hub/builds/&#34;&gt;More about Automated Builds&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.docker.com/docker-hub/official_repos/&#34;&gt;Guidelines for Creating Official
+Repositories&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Coding style checklist</title>
+      <link>http://localhost/docker/project/coding-style/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/project/coding-style/</guid>
+      <description>
+
+&lt;h1 id=&#34;coding-style-checklist&#34;&gt;Coding style checklist&lt;/h1&gt;
+
+&lt;p&gt;This checklist summarizes the material you experienced working through &lt;a href=&#34;http://localhost/project/make-a-contribution&#34;&gt;make a
+code contribution&lt;/a&gt; and &lt;a href=&#34;http://localhost/project/advanced-contributing&#34;&gt;advanced
+contributing&lt;/a&gt;. The checklist applies to both
+program code and documentation code.&lt;/p&gt;
+
+&lt;h2 id=&#34;change-and-commit-code&#34;&gt;Change and commit code&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Fork the &lt;code&gt;docker/docker&lt;/code&gt; repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make changes on your fork in a feature branch. Name your branch &lt;code&gt;XXXX-something&lt;/code&gt;
+where &lt;code&gt;XXXX&lt;/code&gt; is the issue number you are working on.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run &lt;code&gt;gofmt -s -w file.go&lt;/code&gt; on each changed file before
+committing your changes. Most editors have plug-ins that do this automatically.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Update the documentation when creating or modifying features.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Commits that fix or close an issue should reference them in the commit message
+&lt;code&gt;Closes #XXXX&lt;/code&gt; or &lt;code&gt;Fixes #XXXX&lt;/code&gt;. Mentions help by automatically closing the
+issue on a merge.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;After every commit, run the test suite and ensure it is passing.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Sync and rebase frequently as you code to keep up with &lt;code&gt;docker&lt;/code&gt; master.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;git&lt;/code&gt; signature and make sure you sign each commit.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Do not add yourself to the &lt;code&gt;AUTHORS&lt;/code&gt; file. This file is autogenerated from the
+Git history.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;tests-and-testing&#34;&gt;Tests and testing&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Submit unit tests for your changes.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make use of the builtin Go test framework built.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use existing Docker test files (&lt;code&gt;name_test.go&lt;/code&gt;) for inspiration.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run &lt;a href=&#34;../test-and-docs&#34; target=&#34;_blank&#34;&gt;the full test suite&lt;/a&gt; on your
+branch before submitting a pull request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run &lt;code&gt;make docs&lt;/code&gt; to build the documentation and then check it locally.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use an &lt;a href=&#34;http://www.hemingwayapp.com&#34; target=&#34;_blank&#34;&gt;online grammar
+checker&lt;/a&gt; or similar to test you documentation changes for clarity,
+concision, and correctness.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;pull-requests&#34;&gt;Pull requests&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Sync and cleanly rebase on top of Docker&amp;rsquo;s &lt;code&gt;master&lt;/code&gt; without multiple branches
+mixed into the PR.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Before the pull request, squash your commits into logical units of work using
+&lt;code&gt;git rebase -i&lt;/code&gt; and &lt;code&gt;git push -f&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Include documentation changes in the same commit so that a revert would
+remove all traces of the feature or fix.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Reference each issue in your pull request description (&lt;code&gt;#XXXX&lt;/code&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;respond-to-pull-requests-reviews&#34;&gt;Respond to pull requests reviews&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Docker maintainers use LGTM (&lt;strong&gt;l&lt;/strong&gt;ooks-&lt;strong&gt;g&lt;/strong&gt;ood-&lt;strong&gt;t&lt;/strong&gt;o-&lt;strong&gt;m&lt;/strong&gt;e) in PR comments
+to indicate acceptance.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Code review comments may be added to your pull request. Discuss, then make
+the suggested modifications and push additional commits to your feature
+branch.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Incorporate changes on your feature branch and push to your fork. This
+automatically updates your open pull request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Post a comment after pushing to alert reviewers to PR changes; pushing a
+change does not send notifications.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;A change requires LGTMs from an absolute majority maintainers of an
+affected component. For example, if you change &lt;code&gt;docs/&lt;/code&gt; and &lt;code&gt;registry/&lt;/code&gt; code,
+an absolute majority of the &lt;code&gt;docs/&lt;/code&gt; and the &lt;code&gt;registry/&lt;/code&gt; maintainers must
+approve your PR.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;merges-after-pull-requests&#34;&gt;Merges after pull requests&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;After a merge, &lt;a href=&#34;https://master.dockerproject.org/&#34;&gt;a master build&lt;/a&gt; is
+available almost immediately.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you made a documentation change, you can see it at
+&lt;a href=&#34;http://docs.master.dockerproject.org/&#34;&gt;docs.master.dockerproject.org&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Configure Git for contributing</title>
+      <link>http://localhost/docker/project/set-up-git/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/project/set-up-git/</guid>
+      <description>
+
+&lt;h1 id=&#34;configure-git-for-contributing&#34;&gt;Configure Git for contributing&lt;/h1&gt;
+
+&lt;p&gt;Work through this page to configure Git and a repository you&amp;rsquo;ll use throughout
+the Contributor Guide. The work you do further in the guide, depends on the work
+you do here.&lt;/p&gt;
+
+&lt;h2 id=&#34;fork-and-clone-the-docker-code&#34;&gt;Fork and clone the Docker code&lt;/h2&gt;
+
+&lt;p&gt;Before contributing, you first fork the Docker code repository. A fork copies
+a repository at a particular point in time. GitHub tracks for you where a fork
+originates.&lt;/p&gt;
+
+&lt;p&gt;As you make contributions, you change your fork&amp;rsquo;s code. When you are ready,
+you make a pull request back to the original Docker repository. If you aren&amp;rsquo;t
+familiar with this workflow, don&amp;rsquo;t worry, this guide walks you through all the
+steps.&lt;/p&gt;
+
+&lt;p&gt;To fork and clone Docker:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a browser and log into GitHub with your account.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to the &lt;a href=&#34;https://github.com/docker/docker&#34;
+target=&#34;_blank&#34;&gt;docker/docker repository&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the &amp;ldquo;Fork&amp;rdquo; button in the upper right corner of the GitHub interface.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/images/fork_docker.png&#34; alt=&#34;Branch Signature&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;GitHub forks the repository to your GitHub account. The original
+&lt;code&gt;docker/docker&lt;/code&gt; repository becomes a new fork &lt;code&gt;YOUR_ACCOUNT/docker&lt;/code&gt; under
+your account.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy your fork&amp;rsquo;s clone URL from GitHub.&lt;/p&gt;
+
+&lt;p&gt;GitHub allows you to use HTTPS or SSH protocols for clones. You can use the
+&lt;code&gt;git&lt;/code&gt; command line or clients like Subversion to clone a repository.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/images/copy_url.png&#34; alt=&#34;Copy clone URL&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;This guide assume you are using the HTTPS protocol and the &lt;code&gt;git&lt;/code&gt; command
+line. If you are comfortable with SSH and some other tool, feel free to use
+that instead. You&amp;rsquo;ll need to convert what you see in the guide to what is
+appropriate to your tool.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open a terminal window on your local host and change to your home directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd ~
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In Windows, you&amp;rsquo;ll work in your Boot2Docker window instead of Powershell or
+  a &lt;code&gt;cmd&lt;/code&gt; window.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Create a &lt;code&gt;repos&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir repos
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change into your &lt;code&gt;repos&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd repos
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Clone the fork to your local host into a repository called &lt;code&gt;docker-fork&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/moxiegirl/docker.git docker-fork
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Naming your local repo &lt;code&gt;docker-fork&lt;/code&gt; should help make these instructions
+easier to follow; experienced coders don&amp;rsquo;t typically change the name.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change directory into your new &lt;code&gt;docker-fork&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Take a moment to familiarize yourself with the repository&amp;rsquo;s contents. List
+the contents.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;set-your-signature-and-an-upstream-remote&#34;&gt;Set your signature and an upstream remote&lt;/h2&gt;
+
+&lt;p&gt;When you contribute to Docker, you must certify you agree with the
+&lt;a href=&#34;http://developercertificate.org/&#34; target=&#34;_blank&#34;&gt;Developer Certificate of Origin&lt;/a&gt;.
+You indicate your agreement by signing your &lt;code&gt;git&lt;/code&gt; commits like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Signed-off-by: Pat Smith &amp;lt;pat.smith@email.com&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To create a signature, you configure your username and email address in Git.
+You can set these globally or locally on just your &lt;code&gt;docker-fork&lt;/code&gt; repository.
+You must sign with your real name. We don&amp;rsquo;t accept anonymous contributions or
+contributions through pseudonyms.&lt;/p&gt;
+
+&lt;p&gt;As you change code in your fork, you&amp;rsquo;ll want to keep it in sync with the changes
+others make in the &lt;code&gt;docker/docker&lt;/code&gt; repository. To make syncing easier, you&amp;rsquo;ll
+also add a &lt;em&gt;remote&lt;/em&gt; called &lt;code&gt;upstream&lt;/code&gt; that points to &lt;code&gt;docker/docker&lt;/code&gt;. A remote
+is just another project version hosted on the internet or network.&lt;/p&gt;
+
+&lt;p&gt;To configure your username, email, and add a remote:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Change to the root of your &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;user.name&lt;/code&gt; for the repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local user.name &amp;quot;FirstName LastName&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;user.email&lt;/code&gt; for the repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local user.email &amp;quot;emailname@mycompany.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your local repo to track changes upstream, on the &lt;code&gt;docker&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote add upstream https://github.com/docker/docker.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check the result in your &lt;code&gt;git&lt;/code&gt; configuration.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local -l
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/moxiegirl/docker.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+user.name=Mary Anthony
+user.email=mary@docker.com
+remote.upstream.url=https://github.com/docker/docker.git
+remote.upstream.fetch=+refs/heads/*:refs/remotes/upstream/*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To list just the remotes use:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote -v
+origin  https://github.com/moxiegirl/docker.git (fetch)
+origin  https://github.com/moxiegirl/docker.git (push)
+upstream    https://github.com/docker/docker.git (fetch)
+upstream    https://github.com/docker/docker.git (push)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;create-and-push-a-branch&#34;&gt;Create and push a branch&lt;/h2&gt;
+
+&lt;p&gt;As you change code in your fork, make your changes on a repository branch.
+The branch name should reflect what you are working on. In this section, you
+create a branch, make a change, and push it up to your fork.&lt;/p&gt;
+
+&lt;p&gt;This branch is just for testing your config for this guide. The changes are part
+of a dry run, so the branch name will be dry-run-test. To create and push
+the branch to your fork on GitHub:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a terminal and go to the root of your &lt;code&gt;docker-fork&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a &lt;code&gt;dry-run-test&lt;/code&gt; branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git checkout -b dry-run-test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command creates the branch and switches the repository to it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify you are in your new branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git branch
+* dry-run-test
+  master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The current branch has an * (asterisk) marker. So, these results shows you
+are on the right branch.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a &lt;code&gt;TEST.md&lt;/code&gt; file in the repository&amp;rsquo;s root.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ touch TEST.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Edit the file and add your email and location.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/images/contributor-edit.png&#34; alt=&#34;Add your information&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;You can use any text editor you are comfortable with.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Save and close the file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check the status of your branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git status
+On branch dry-run-test
+Untracked files:
+  (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to include in what will be committed)
+
+
+    TEST.md
+
+
+nothing added to commit but untracked files present (use &amp;quot;git add&amp;quot; to track)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You&amp;rsquo;ve only changed the one file. It is untracked so far by git.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add your file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git add TEST.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That is the only &lt;em&gt;staged&lt;/em&gt; file. Stage is fancy word for work that Git is
+tracking.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Sign and commit your change.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git commit -s -m &amp;quot;Making a dry run test.&amp;quot;
+[dry-run-test 6e728fb] Making a dry run test
+ 1 file changed, 1 insertion(+)
+ create mode 100644 TEST.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Commit messages should have a short summary sentence of no more than 50
+characters. Optionally, you can also include a more detailed explanation
+after the summary. Separate the summary from any explanation with an empty
+line.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Push your changes to GitHub.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git push --set-upstream origin dry-run-test
+Username for &#39;https://github.com&#39;: moxiegirl
+Password for &#39;https://moxiegirl@github.com&#39;: 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Git prompts you for your GitHub username and password. Then, the command
+returns a result.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Counting objects: 13, done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 320 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To https://github.com/moxiegirl/docker.git
+ * [new branch]      dry-run-test -&amp;gt; dry-run-test
+Branch dry-run-test set up to track remote branch dry-run-test from origin.
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open your browser to Github.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Navigate to your Docker fork.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure the &lt;code&gt;dry-run-test&lt;/code&gt; branch exists, that it has your commit, and the
+commit is signed.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/images/branch-sig.png&#34; alt=&#34;Branch Signature&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;Congratulations, you have finished configuring both your local host environment
+and Git for contributing. In the next section you&amp;rsquo;ll &lt;a href=&#34;http://localhost/project/set-up-dev-env/&#34;&gt;learn how to set up and
+work in a Docker development container&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Configuring and running Docker</title>
+      <link>http://localhost/docker/articles/configuring/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker/articles/configuring/</guid>
+      <description>
+
+&lt;h1 id=&#34;configuring-and-running-docker-on-various-distributions&#34;&gt;Configuring and running Docker on various distributions&lt;/h1&gt;
+
+&lt;p&gt;After successfully installing Docker, the &lt;code&gt;docker&lt;/code&gt; daemon runs with its default
+configuration.&lt;/p&gt;
+
+&lt;p&gt;In a production environment, system administrators typically configure the
+&lt;code&gt;docker&lt;/code&gt; daemon to start and stop according to an organization&amp;rsquo;s requirements. In most
+cases, the system administrator configures a process manager such as &lt;code&gt;SysVinit&lt;/code&gt;, &lt;code&gt;Upstart&lt;/code&gt;,
+or &lt;code&gt;systemd&lt;/code&gt; to manage the &lt;code&gt;docker&lt;/code&gt; daemon&amp;rsquo;s start and stop.&lt;/p&gt;
+
+&lt;h3 id=&#34;running-the-docker-daemon-directly&#34;&gt;Running the docker daemon directly&lt;/h3&gt;
+
+&lt;p&gt;The &lt;code&gt;docker&lt;/code&gt; daemon can be run directly using the &lt;code&gt;-d&lt;/code&gt; option. By default it listens on
+the Unix socket &lt;code&gt;unix:///var/run/docker.sock&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker -d
+
+INFO[0000] +job init_networkdriver()
+INFO[0000] +job serveapi(unix:///var/run/docker.sock)
+INFO[0000] Listening for HTTP on unix (/var/run/docker.sock)
+...
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;configuring-the-docker-daemon-directly&#34;&gt;Configuring the docker daemon directly&lt;/h3&gt;
+
+&lt;p&gt;If you&amp;rsquo;re running the &lt;code&gt;docker&lt;/code&gt; daemon directly by running &lt;code&gt;docker -d&lt;/code&gt; instead
+of using a process manager, you can append the configuration options to the &lt;code&gt;docker&lt;/code&gt; run
+command directly. Just like the &lt;code&gt;-d&lt;/code&gt; option, other options can be passed to the &lt;code&gt;docker&lt;/code&gt;
+daemon to configure it.&lt;/p&gt;
+
+&lt;p&gt;Some of the daemon&amp;rsquo;s options are:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Flag&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-D&lt;/code&gt;, &lt;code&gt;--debug=false&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable or disable debug mode. By default, this is false.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-H&lt;/code&gt;,&lt;code&gt;--host=[]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Daemon socket(s) to connect to.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--tls=false&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable or disable TLS. By default, this is false.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Here is a an example of running the &lt;code&gt;docker&lt;/code&gt; daemon with configuration options:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker -d -D --tls=true --tlscert=/var/docker/server.pem --tlskey=/var/docker/serverkey.pem -H tcp://192.168.59.3:2376
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These options :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Enable &lt;code&gt;-D&lt;/code&gt; (debug) mode&lt;/li&gt;
+&lt;li&gt;Set &lt;code&gt;tls&lt;/code&gt; to true with the server certificate and key specified using &lt;code&gt;--tlscert&lt;/code&gt; and &lt;code&gt;--tlskey&lt;/code&gt; respectively&lt;/li&gt;
+&lt;li&gt;Listen for connections on &lt;code&gt;tcp://192.168.59.3:2376&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The command line reference has the &lt;a href=&#34;http://localhost/reference/commandline/cli/#daemon&#34;&gt;complete list of daemon flags&lt;/a&gt;
+with explanations.&lt;/p&gt;
+
+&lt;h2 id=&#34;ubuntu&#34;&gt;Ubuntu&lt;/h2&gt;
+
+&lt;p&gt;As of &lt;code&gt;14.04&lt;/code&gt;, Ubuntu uses Upstart as a process manager. By default, Upstart jobs
+are located in  &lt;code&gt;/etc/init&lt;/code&gt; and the &lt;code&gt;docker&lt;/code&gt; Upstart job can be found at &lt;code&gt;/etc/init/docker.conf&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;After successfully &lt;a href=&#34;http://localhost/installation/ubuntulinux/&#34;&gt;installing Docker for Ubuntu&lt;/a&gt;,
+you can check the running status using Upstart in this way:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo status docker
+
+docker start/running, process 989
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;running-docker&#34;&gt;Running Docker&lt;/h3&gt;
+
+&lt;p&gt;You can start/stop/restart the &lt;code&gt;docker&lt;/code&gt; daemon using&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo start docker
+
+$ sudo stop docker
+
+$ sudo restart docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;configuring-docker&#34;&gt;Configuring Docker&lt;/h3&gt;
+
+&lt;p&gt;You configure the &lt;code&gt;docker&lt;/code&gt; daemon in the &lt;code&gt;/etc/default/docker&lt;/code&gt; file on your
+system. You do this by specifying values in a &lt;code&gt;DOCKER_OPTS&lt;/code&gt; variable.&lt;/p&gt;
+
+&lt;p&gt;To configure Docker options:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into your host as a user with &lt;code&gt;sudo&lt;/code&gt; or &lt;code&gt;root&lt;/code&gt; privileges.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you don&amp;rsquo;t have one, create the &lt;code&gt;/etc/default/docker&lt;/code&gt; file on your host. Depending on how
+you installed Docker, you may already have this file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open the file with your favorite editor.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo vi /etc/default/docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add a &lt;code&gt;DOCKER_OPTS&lt;/code&gt; variable with the following options. These options are appended to the
+&lt;code&gt;docker&lt;/code&gt; daemon&amp;rsquo;s run command.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code&gt;    DOCKER_OPTS=&amp;quot;-D --tls=true --tlscert=/var/docker/server.pem --tlskey=/var/docker/serverkey.pem -H tcp://192.168.59.3:2376&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These options :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Enable &lt;code&gt;-D&lt;/code&gt; (debug) mode&lt;/li&gt;
+&lt;li&gt;Set &lt;code&gt;tls&lt;/code&gt; to true with the server certificate and key specified using &lt;code&gt;--tlscert&lt;/code&gt; and &lt;code&gt;--tlskey&lt;/code&gt; respectively&lt;/li&gt;
+&lt;li&gt;Listen for connections on &lt;code&gt;tcp://192.168.59.3:2376&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The command line reference has the &lt;a href=&#34;http://localhost/reference/commandline/cli/#daemon&#34;&gt;complete list of daemon flags&lt;/a&gt;
+with explanations.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Save and close the file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Restart the &lt;code&gt;docker&lt;/code&gt; daemon.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo restart docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify that the &lt;code&gt;docker&lt;/code&gt; daemon is running as specified with the &lt;code&gt;ps&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ps aux | grep docker | grep -v grep
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;logs&#34;&gt;Logs&lt;/h3&gt;
+
+&lt;p&gt;By default logs for Upstart jobs are located in &lt;code&gt;/var/log/upstart&lt;/code&gt; and the logs for &lt;code&gt;docker&lt;/code&gt; daemon
+can be located at &lt;code&gt;/var/log/upstart/docker.log&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ tail -f /var/log/upstart/docker.log
+INFO[0000] Loading containers: done.
+INFO[0000] docker daemon: 1.6.0 4749651; execdriver: native-0.2; graphdriver: aufs
+INFO[0000] +job acceptconnections()
+INFO[0000] -job acceptconnections() = OK (0)
+INFO[0000] Daemon has completed initialization
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;centos-red-hat-enterprise-linux-fedora&#34;&gt;CentOS / Red Hat Enterprise Linux / Fedora&lt;/h2&gt;
+
+&lt;p&gt;As of &lt;code&gt;7.x&lt;/code&gt;, CentOS and RHEL use &lt;code&gt;systemd&lt;/code&gt; as the process manager. As of &lt;code&gt;21&lt;/code&gt;, Fedora uses
+&lt;code&gt;systemd&lt;/code&gt; as its process manager.&lt;/p&gt;
+
+&lt;p&gt;After successfully installing Docker for &lt;a href=&#34;http://localhost/installation/centos/&#34;&gt;CentOS&lt;/a&gt;/&lt;a href=&#34;http://localhost/installation/rhel/&#34;&gt;Red Hat Enterprise Linux&lt;/a&gt;/&lt;a href=&#34;http://localhost/installation/fedora&#34;&gt;Fedora&lt;/a&gt;, you can check the running status in this way:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl status docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;running-docker-1&#34;&gt;Running Docker&lt;/h3&gt;
+
+&lt;p&gt;You can start/stop/restart the &lt;code&gt;docker&lt;/code&gt; daemon using&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl start docker
+
+$ sudo systemctl stop docker
+
+$ sudo systemctl restart docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you want Docker to start at boot, you should also:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl enable docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;configuring-docker-1&#34;&gt;Configuring Docker&lt;/h3&gt;
+
+&lt;p&gt;You configure the &lt;code&gt;docker&lt;/code&gt; daemon in the &lt;code&gt;/etc/sysconfig/docker&lt;/code&gt; file on your
+host. You do this by specifying values in a variable. For CentOS 7.x and RHEL 7.x, the name
+of the variable is &lt;code&gt;OPTIONS&lt;/code&gt; and for CentOS 6.x and RHEL 6.x, the name of the variable is
+&lt;code&gt;other_args&lt;/code&gt;. For this section, we will use CentOS 7.x as an example to configure the &lt;code&gt;docker&lt;/code&gt;
+daemon.&lt;/p&gt;
+
+&lt;p&gt;By default, systemd services are located either in &lt;code&gt;/etc/systemd/service&lt;/code&gt;, &lt;code&gt;/lib/systemd/system&lt;/code&gt;
+or &lt;code&gt;/usr/lib/systemd/system&lt;/code&gt;. The &lt;code&gt;docker.service&lt;/code&gt; file can be found in either of these three
+directories depending on your host.&lt;/p&gt;
+
+&lt;p&gt;To configure Docker options:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into your host as a user with &lt;code&gt;sudo&lt;/code&gt; or &lt;code&gt;root&lt;/code&gt; privileges.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you don&amp;rsquo;t have one, create the &lt;code&gt;/etc/sysconfig/docker&lt;/code&gt; file on your host. Depending on how
+you installed Docker, you may already have this file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open the file with your favorite editor.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo vi /etc/sysconfig/docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add a &lt;code&gt;OPTIONS&lt;/code&gt; variable with the following options. These options are appended to the
+command that starts the &lt;code&gt;docker&lt;/code&gt; daemon.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code&gt;    OPTIONS=&amp;quot;-D --tls=true --tlscert=/var/docker/server.pem --tlskey=/var/docker/serverkey.pem -H tcp://192.168.59.3:2376&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These options :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Enable &lt;code&gt;-D&lt;/code&gt; (debug) mode&lt;/li&gt;
+&lt;li&gt;Set &lt;code&gt;tls&lt;/code&gt; to true with the server certificate and key specified using &lt;code&gt;--tlscert&lt;/code&gt; and &lt;code&gt;--tlskey&lt;/code&gt; respectively&lt;/li&gt;
+&lt;li&gt;Listen for connections on &lt;code&gt;tcp://192.168.59.3:2376&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The command line reference has the &lt;a href=&#34;http://localhost/reference/commandline/cli/#daemon&#34;&gt;complete list of daemon flags&lt;/a&gt;
+with explanations.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Save and close the file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Restart the &lt;code&gt;docker&lt;/code&gt; daemon.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo service docker restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify that the &lt;code&gt;docker&lt;/code&gt; daemon is running as specified with the &lt;code&gt;ps&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ps aux | grep docker | grep -v grep
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;logs-1&#34;&gt;Logs&lt;/h3&gt;
+
+&lt;p&gt;systemd has its own logging system called the journal. The logs for the &lt;code&gt;docker&lt;/code&gt; daemon can
+be viewed using &lt;code&gt;journalctl -u docker&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo journalctl -u docker
+May 06 00:22:05 localhost.localdomain systemd[1]: Starting Docker Application Container Engine...
+May 06 00:22:05 localhost.localdomain docker[2495]: time=&amp;quot;2015-05-06T00:22:05Z&amp;quot; level=&amp;quot;info&amp;quot; msg=&amp;quot;+job serveapi(unix:///var/run/docker.sock)&amp;quot;
+May 06 00:22:05 localhost.localdomain docker[2495]: time=&amp;quot;2015-05-06T00:22:05Z&amp;quot; level=&amp;quot;info&amp;quot; msg=&amp;quot;Listening for HTTP on unix (/var/run/docker.sock)&amp;quot;
+May 06 00:22:06 localhost.localdomain docker[2495]: time=&amp;quot;2015-05-06T00:22:06Z&amp;quot; level=&amp;quot;info&amp;quot; msg=&amp;quot;+job init_networkdriver()&amp;quot;
+May 06 00:22:06 localhost.localdomain docker[2495]: time=&amp;quot;2015-05-06T00:22:06Z&amp;quot; level=&amp;quot;info&amp;quot; msg=&amp;quot;-job init_networkdriver() = OK (0)&amp;quot;
+May 06 00:22:06 localhost.localdomain docker[2495]: time=&amp;quot;2015-05-06T00:22:06Z&amp;quot; level=&amp;quot;info&amp;quot; msg=&amp;quot;Loading containers: start.&amp;quot;
+May 06 00:22:06 localhost.localdomain docker[2495]: time=&amp;quot;2015-05-06T00:22:06Z&amp;quot; level=&amp;quot;info&amp;quot; msg=&amp;quot;Loading containers: done.&amp;quot;
+May 06 00:22:06 localhost.localdomain docker[2495]: time=&amp;quot;2015-05-06T00:22:06Z&amp;quot; level=&amp;quot;info&amp;quot; msg=&amp;quot;docker daemon: 1.5.0-dev fc0329b/1.5.0; execdriver: native-0.2; graphdriver: devicemapper&amp;quot;
+May 06 00:22:06 localhost.localdomain docker[2495]: time=&amp;quot;2015-05-06T00:22:06Z&amp;quot; level=&amp;quot;info&amp;quot; msg=&amp;quot;+job acceptconnections()&amp;quot;
+May 06 00:22:06 localhost.localdomain docker[2495]: time=&amp;quot;2015-05-06T00:22:06Z&amp;quot; level=&amp;quot;info&amp;quot; msg=&amp;quot;-job acceptconnections() = OK (0)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;Note: Using and configuring journal is an advanced topic and is beyond the scope of this article.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

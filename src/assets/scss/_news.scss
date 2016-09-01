@@ -1,0 +1,19 @@
+.customer-and-news {
+  padding: 1rem 0;
+}
+
+.news-item {
+  padding-left: 2rem;
+  margin-bottom: 3rem;
+  &.divider {
+    border-left: 1px solid #eee;
+  }
+  .news-item-title {
+    font-size: 1.5rem;
+    color: $primary-color;
+  }
+  .news-item-description {
+    font-size: 0.9rem;
+    color: $body-font-color;
+  }
+}

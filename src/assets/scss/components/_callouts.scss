@@ -1,0 +1,17 @@
+.callout {
+	background: $dark-blue;
+	padding: rem-calc(25) 0;
+	margin: 4rem 0;
+	position: relative;
+	@media #{$medium-up} {
+		padding: rem-calc(75) 0;
+	}
+
+	h1,h2,h3,h4, p, a {
+		color: #fff;
+	}
+
+	&::after {
+		@extend %wave;
+	}
+}

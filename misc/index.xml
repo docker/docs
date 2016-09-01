@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Miscs on Docker Docs</title>
+    <link>http://localhost/misc/</link>
+    <description>Recent content in Miscs on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/misc/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About Docker</title>
+      <link>http://localhost/misc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/misc/</guid>
+      <description>
+
+&lt;h1 id=&#34;about-docker&#34;&gt;About Docker&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Develop, Ship and Run Any Application, Anywhere&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.docker.com&#34;&gt;&lt;strong&gt;Docker&lt;/strong&gt;&lt;/a&gt; is a platform for developers and sysadmins
+to develop, ship, and run applications.  Docker lets you quickly assemble
+applications from components and eliminates the friction that can come when
+shipping code. Docker lets you get your code tested and deployed into production
+as fast as possible.&lt;/p&gt;
+
+&lt;p&gt;Docker consists of:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The Docker Engine - our lightweight and powerful open source container
+virtualization technology combined with a work flow for building
+and containerizing your applications.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; - our SaaS service for
+sharing and managing your application stacks.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;why-docker&#34;&gt;Why Docker?&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Faster delivery of your applications&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We want your environment to work better. Docker containers,
+  and the work flow that comes with them, help your developers,
+  sysadmins, QA folks, and release engineers work together to get your code
+  into production and make it useful. We&amp;rsquo;ve created a standard
+  container format that lets developers care about their applications
+  inside containers while sysadmins and operators can work on running the
+  container in your deployment. This separation of duties streamlines and
+  simplifies the management and deployment of code.&lt;/li&gt;
+&lt;li&gt;We make it easy to build new containers, enable rapid iteration of
+  your applications, and increase the visibility of changes. This
+  helps everyone in your organization understand how an application works
+  and how it is built.&lt;/li&gt;
+&lt;li&gt;Docker containers are lightweight and fast! Containers have
+  sub-second launch times, reducing the cycle
+  time of development, testing, and deployment.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Deploy and scale more easily&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker containers run (almost) everywhere. You can deploy
+  containers on desktops, physical servers, virtual machines, into
+  data centers, and up to public and private clouds.&lt;/li&gt;
+&lt;li&gt;Since Docker runs on so many platforms, it&amp;rsquo;s easy to move your
+  applications around. You can easily move an application from a
+  testing environment into the cloud and back whenever you need.&lt;/li&gt;
+&lt;li&gt;Docker&amp;rsquo;s lightweight containers also make scaling up and
+  down fast and easy. You can quickly launch more containers when
+  needed and then shut them down easily when they&amp;rsquo;re no longer needed.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Get higher density and run more workloads&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker containers don&amp;rsquo;t need a hypervisor, so you can pack more of
+  them onto your hosts. This means you get more value out of every
+  server and can potentially reduce what you spend on equipment and
+  licenses.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Faster deployment makes for easier management&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;As Docker speeds up your work flow, it gets easier to make lots
+  of small changes instead of huge, big bang updates. Smaller
+  changes mean reduced risk and more uptime.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;about-this-guide&#34;&gt;About this guide&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&#34;http://localhost/misc/misc/introduction/understanding-docker&#34;&gt;Understanding Docker section&lt;/a&gt; will help you:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;See how Docker works at a high level&lt;/li&gt;
+&lt;li&gt;Understand the architecture of Docker&lt;/li&gt;
+&lt;li&gt;Discover Docker&amp;rsquo;s features;&lt;/li&gt;
+&lt;li&gt;See how Docker compares to virtual machines&lt;/li&gt;
+&lt;li&gt;See some common use cases.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;installation-guides&#34;&gt;Installation guides&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href=&#34;http://localhost/misc/misc/installation/#installation&#34;&gt;installation section&lt;/a&gt; will show you how to
+install Docker on a variety of platforms.&lt;/p&gt;
+
+&lt;h3 id=&#34;docker-user-guide&#34;&gt;Docker user guide&lt;/h3&gt;
+
+&lt;p&gt;To learn about Docker in more detail and to answer questions about usage and
+implementation, check out the &lt;a href=&#34;http://localhost/misc/misc/userguide/&#34;&gt;Docker User Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;release-notes&#34;&gt;Release notes&lt;/h2&gt;
+
+&lt;p&gt;A summary of the changes in each release in the current series can now be found
+on the separate &lt;a href=&#34;http://localhost/misc/misc/release-notes/&#34;&gt;Release Notes page&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;licensing&#34;&gt;Licensing&lt;/h2&gt;
+
+&lt;p&gt;Docker is licensed under the Apache License, Version 2.0. See
+&lt;a href=&#34;https://github.com/docker/docker/blob/master/LICENSE&#34;&gt;LICENSE&lt;/a&gt; for the full
+license text.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>FAQ</title>
+      <link>http://localhost/misc/faq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/misc/faq/</guid>
+      <description>
+
+&lt;h1 id=&#34;frequently-asked-questions-faq&#34;&gt;Frequently Asked Questions (FAQ)&lt;/h1&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t see your question here, feel free to submit new ones to
+&lt;a href=&#34;mailto:docs@docker.com&#34;&gt;docs@docker.com&lt;/a&gt;.  Or, you can fork &lt;a href=&#34;https://github.com/docker/docker&#34;&gt;the
+repo&lt;/a&gt; and contribute them yourself by editing
+the documentation sources.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-much-does-docker-cost&#34;&gt;How much does Docker cost?&lt;/h3&gt;
+
+&lt;p&gt;Docker is 100% free. It is open source, so you can use it without paying.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-open-source-license-are-you-using&#34;&gt;What open source license are you using?&lt;/h3&gt;
+
+&lt;p&gt;We are using the Apache License Version 2.0, see it here:
+&lt;a href=&#34;https://github.com/docker/docker/blob/master/LICENSE&#34;&gt;https://github.com/docker/docker/blob/master/LICENSE&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;does-docker-run-on-mac-os-x-or-windows&#34;&gt;Does Docker run on Mac OS X or Windows?&lt;/h3&gt;
+
+&lt;p&gt;Docker currently runs only on Linux, but you can use VirtualBox to run Docker in
+a virtual machine on your box, and get the best of both worlds. Check out the
+&lt;a href=&#34;http://localhost/misc/misc/installation/mac/#macosx&#34;&gt;&lt;em&gt;Mac OS X&lt;/em&gt;&lt;/a&gt; and &lt;a href=&#34;http://localhost/misc/misc/installation/windows/#windows&#34;&gt;&lt;em&gt;Microsoft
+Windows&lt;/em&gt;&lt;/a&gt; installation guides. The small Linux
+distribution boot2docker can be run inside virtual machines on these two
+operating systems.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; if you are using a remote Docker daemon, such as Boot2Docker,
+then &lt;em&gt;do not&lt;/em&gt; type the &lt;code&gt;sudo&lt;/code&gt; before the &lt;code&gt;docker&lt;/code&gt; commands shown in the
+documentation&amp;rsquo;s examples.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;how-do-containers-compare-to-virtual-machines&#34;&gt;How do containers compare to virtual machines?&lt;/h3&gt;
+
+&lt;p&gt;They are complementary. VMs are best used to allocate chunks of hardware
+resources. Containers operate at the process level, which makes them very
+lightweight and perfect as a unit of software delivery.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-does-docker-add-to-just-plain-lxc&#34;&gt;What does Docker add to just plain LXC?&lt;/h3&gt;
+
+&lt;p&gt;Docker is not a replacement for LXC. &amp;ldquo;LXC&amp;rdquo; refers to capabilities of the Linux
+kernel (specifically namespaces and control groups) which allow sandboxing
+processes from one another, and controlling their resource allocations. On top
+of this low-level foundation of kernel features, Docker offers a high-level tool
+with several powerful functionalities:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Portable deployment across machines.&lt;/em&gt; Docker defines a format for bundling
+an application and all its dependencies into a single object which can be
+transferred to any Docker-enabled machine, and executed there with the
+guarantee that the execution environment exposed to the application will be the
+same. LXC implements process sandboxing, which is an important pre-requisite
+for portable deployment, but that alone is not enough for portable deployment.
+If you sent me a copy of your application installed in a custom LXC
+configuration, it would almost certainly not run on my machine the way it does
+on yours, because it is tied to your machine&amp;rsquo;s specific configuration:
+networking, storage, logging, distro, etc. Docker defines an abstraction for
+these machine-specific settings, so that the exact same Docker container can
+run - unchanged - on many different machines, with many different
+configurations.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Application-centric.&lt;/em&gt; Docker is optimized for the deployment of
+applications, as opposed to machines. This is reflected in its API, user
+interface, design philosophy and documentation. By contrast, the &lt;code&gt;lxc&lt;/code&gt; helper
+scripts focus on containers as lightweight machines - basically servers that
+boot faster and need less RAM. We think there&amp;rsquo;s more to containers than just
+that.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Automatic build.&lt;/em&gt; Docker includes &lt;a href=&#34;http://localhost/misc/misc/reference/builder/#dockerbuilder&#34;&gt;&lt;em&gt;a tool for developers to automatically
+assemble a container from their source
+code&lt;/em&gt;&lt;/a&gt;, with full control over application
+dependencies, build tools, packaging etc. They are free to use &lt;code&gt;make&lt;/code&gt;, &lt;code&gt;maven&lt;/code&gt;,
+&lt;code&gt;chef&lt;/code&gt;, &lt;code&gt;puppet&lt;/code&gt;, &lt;code&gt;salt,&lt;/code&gt; Debian packages, RPMs, source tarballs, or any
+combination of the above, regardless of the configuration of the machines.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Versioning.&lt;/em&gt; Docker includes git-like capabilities for tracking successive
+versions of a container, inspecting the diff between versions, committing new
+versions, rolling back etc. The history also includes how a container was
+assembled and by whom, so you get full traceability from the production server
+all the way back to the upstream developer. Docker also implements incremental
+uploads and downloads, similar to &lt;code&gt;git pull&lt;/code&gt;, so new versions of a container
+can be transferred by only sending diffs.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Component re-use.&lt;/em&gt; Any container can be used as a &lt;a href=&#34;../terms/image/#base-image-def&#34;&gt;&lt;em&gt;&amp;ldquo;base image&amp;rdquo;&lt;/em&gt;&lt;/a&gt; to create more specialized components. This can
+be done manually or as part of an automated build. For example you can prepare
+the ideal Python environment, and use it as a base for 10 different
+applications. Your ideal Postgresql setup can be re-used for all your future
+projects. And so on.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Sharing.&lt;/em&gt; Docker has access to a &lt;a href=&#34;https://hub.docker.com&#34;&gt;public registry&lt;/a&gt;
+where thousands of people have uploaded useful containers: anything from Redis,
+CouchDB, Postgres to IRC bouncers to Rails app servers to Hadoop to base images
+for various Linux distros. The
+&lt;a href=&#34;http://localhost/misc/misc/reference/api/registry_index_spec/#registryindexspec&#34;&gt;&lt;em&gt;registry&lt;/em&gt;&lt;/a&gt; also
+includes an official &amp;ldquo;standard library&amp;rdquo; of useful containers maintained by the
+Docker team. The registry itself is open-source, so anyone can deploy their own
+registry to store and transfer private containers, for internal server
+deployments for example.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;em&gt;Tool ecosystem.&lt;/em&gt; Docker defines an API for automating and customizing the
+creation and deployment of containers. There are a huge number of tools
+integrating with Docker to extend its capabilities. PaaS-like deployment
+(Dokku, Deis, Flynn), multi-node orchestration (Maestro, Salt, Mesos, Openstack
+Nova), management dashboards (docker-ui, Openstack Horizon, Shipyard),
+configuration management (Chef, Puppet), continuous integration (Jenkins,
+Strider, Travis), etc. Docker is rapidly establishing itself as the standard
+for container-based tooling.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;what-is-different-between-a-docker-container-and-a-vm&#34;&gt;What is different between a Docker container and a VM?&lt;/h3&gt;
+
+&lt;p&gt;There&amp;rsquo;s a great StackOverflow answer &lt;a href=&#34;http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine&#34;&gt;showing the differences&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;do-i-lose-my-data-when-the-container-exits&#34;&gt;Do I lose my data when the container exits?&lt;/h3&gt;
+
+&lt;p&gt;Not at all! Any data that your application writes to disk gets preserved in its
+container until you explicitly delete the container. The file system for the
+container persists even after the container halts.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-far-do-docker-containers-scale&#34;&gt;How far do Docker containers scale?&lt;/h3&gt;
+
+&lt;p&gt;Some of the largest server farms in the world today are based on containers.
+Large web deployments like Google and Twitter, and platform providers such as
+Heroku and dotCloud all run on container technology, at a scale of hundreds of
+thousands or even millions of containers running in parallel.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-do-i-connect-docker-containers&#34;&gt;How do I connect Docker containers?&lt;/h3&gt;
+
+&lt;p&gt;Currently the recommended way to link containers is via the link primitive. You
+can see details of how to &lt;a href=&#34;http://localhost/misc/misc/userguide/dockerlinks&#34;&gt;work with links here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Also useful for more flexible service portability is the &lt;a href=&#34;http://localhost/misc/misc/articles/ambassador_pattern_linking/&#34;&gt;Ambassador linking
+pattern&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-do-i-run-more-than-one-process-in-a-docker-container&#34;&gt;How do I run more than one process in a Docker container?&lt;/h3&gt;
+
+&lt;p&gt;Any capable process supervisor such as &lt;a href=&#34;http://supervisord.org/&#34;&gt;http://supervisord.org/&lt;/a&gt;, runit, s6, or daemontools can do the trick. Docker
+will start up the process management daemon which will then fork to run
+additional processes. As long as the processor manager daemon continues to run,
+the container will continue to as well. You can see a more substantial example
+&lt;a href=&#34;http://localhost/misc/misc/articles/using_supervisord/&#34;&gt;that uses supervisord here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-platforms-does-docker-run-on&#34;&gt;What platforms does Docker run on?&lt;/h3&gt;
+
+&lt;p&gt;Linux:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ubuntu 12.04, 13.04 et al&lt;/li&gt;
+&lt;li&gt;Fedora 19/20+&lt;/li&gt;
+&lt;li&gt;RHEL 6.5+&lt;/li&gt;
+&lt;li&gt;CentOS 6+&lt;/li&gt;
+&lt;li&gt;Gentoo&lt;/li&gt;
+&lt;li&gt;ArchLinux&lt;/li&gt;
+&lt;li&gt;openSUSE 12.3+&lt;/li&gt;
+&lt;li&gt;CRUX 3.0+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Cloud:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Amazon EC2&lt;/li&gt;
+&lt;li&gt;Google Compute Engine&lt;/li&gt;
+&lt;li&gt;Rackspace&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;how-do-i-report-a-security-issue-with-docker&#34;&gt;How do I report a security issue with Docker?&lt;/h3&gt;
+
+&lt;p&gt;You can learn about the project&amp;rsquo;s security policy
+&lt;a href=&#34;https://www.docker.com/security/&#34;&gt;here&lt;/a&gt; and report security issues to this
+&lt;a href=&#34;mailto:security@docker.com&#34;&gt;mailbox&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;why-do-i-need-to-sign-my-commits-to-docker-with-the-dco&#34;&gt;Why do I need to sign my commits to Docker with the DCO?&lt;/h3&gt;
+
+&lt;p&gt;Please read &lt;a href=&#34;http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/&#34;&gt;our blog post&lt;/a&gt; on the introduction of the DCO.&lt;/p&gt;
+
+&lt;h3 id=&#34;when-building-an-image-should-i-prefer-system-libraries-or-bundled-ones&#34;&gt;When building an image, should I prefer system libraries or bundled ones?&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;This is a summary of a discussion on the &lt;a href=&#34;https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0&#34;&gt;docker-dev mailing list&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Virtually all programs depend on third-party libraries. Most frequently, they
+will use dynamic linking and some kind of package dependency, so that when
+multiple programs need the same library, it is installed only once.&lt;/p&gt;
+
+&lt;p&gt;Some programs, however, will bundle their third-party libraries, because they
+rely on very specific versions of those libraries. For instance, Node.js bundles
+OpenSSL; MongoDB bundles V8 and Boost (among others).&lt;/p&gt;
+
+&lt;p&gt;When creating a Docker image, is it better to use the bundled libraries, or
+should you build those programs so that they use the default system libraries
+instead?&lt;/p&gt;
+
+&lt;p&gt;The key point about system libraries is not about saving disk or memory space.
+It is about security. All major distributions handle security seriously, by
+having dedicated security teams, following up closely with published
+vulnerabilities, and disclosing advisories themselves. (Look at the &lt;a href=&#34;https://www.debian.org/security/&#34;&gt;Debian
+Security Information&lt;/a&gt; for an example of those
+procedures.) Upstream developers, however, do not always implement similar
+practices.&lt;/p&gt;
+
+&lt;p&gt;Before setting up a Docker image to compile a program from source, if you want
+to use bundled libraries, you should check if the upstream authors provide a
+convenient way to announce security vulnerabilities, and if they update their
+bundled libraries in a timely manner. If they don&amp;rsquo;t, you are exposing yourself
+(and the users of your image) to security vulnerabilities.&lt;/p&gt;
+
+&lt;p&gt;Likewise, before using packages built by others, you should check if the
+channels providing those packages implement similar security best practices.
+Downloading and installing an &amp;ldquo;all-in-one&amp;rdquo; .deb or .rpm sounds great at first,
+except if you have no way to figure out that it contains a copy of the OpenSSL
+library vulnerable to the &lt;a href=&#34;http://heartbleed.com/&#34;&gt;Heartbleed&lt;/a&gt; bug.&lt;/p&gt;
+
+&lt;h3 id=&#34;why-is-debian-frontend-noninteractive-discouraged-in-dockerfiles&#34;&gt;Why is &lt;code&gt;DEBIAN_FRONTEND=noninteractive&lt;/code&gt; discouraged in Dockerfiles?&lt;/h3&gt;
+
+&lt;p&gt;When building Docker images on Debian and Ubuntu you may have seen errors like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;unable to initialize frontend: Dialog
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These errors don&amp;rsquo;t stop the image from being built but inform you that the
+installation process tried to open a dialog box, but was unable to. Generally,
+these errors are safe to ignore.&lt;/p&gt;
+
+&lt;p&gt;Some people circumvent these errors by changing the &lt;code&gt;DEBIAN_FRONTEND&lt;/code&gt;
+environment variable inside the Dockerfile using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ENV DEBIAN_FRONTEND=noninteractive
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This prevents the installer from opening dialog boxes during installation which
+stops the errors.&lt;/p&gt;
+
+&lt;p&gt;While this may sound like a good idea, it &lt;em&gt;may&lt;/em&gt; have side effects. The
+&lt;code&gt;DEBIAN_FRONTEND&lt;/code&gt; environment variable will be inherited by all images and
+containers built from your image, effectively changing their behavior. People
+using those images will run into problems when installing software
+interactively, because installers will not show any dialog boxes.&lt;/p&gt;
+
+&lt;p&gt;Because of this, and because setting &lt;code&gt;DEBIAN_FRONTEND&lt;/code&gt; to &lt;code&gt;noninteractive&lt;/code&gt; is
+mainly a &amp;lsquo;cosmetic&amp;rsquo; change, we &lt;em&gt;discourage&lt;/em&gt; changing it.&lt;/p&gt;
+
+&lt;p&gt;If you &lt;em&gt;really&lt;/em&gt; need to change its setting, make sure to change it back to its
+&lt;a href=&#34;https://www.debian.org/releases/stable/i386/ch05s03.html.en&#34;&gt;default value&lt;/a&gt;
+afterwards.&lt;/p&gt;
+
+&lt;h3 id=&#34;why-do-i-get-connection-reset-by-peer-when-making-a-request-to-a-service-running-in-a-container&#34;&gt;Why do I get &lt;code&gt;Connection reset by peer&lt;/code&gt; when making a request to a service running in a container?&lt;/h3&gt;
+
+&lt;p&gt;Typically, this message is returned if the service is already bound to your
+localhost. As a result, requests coming to the container from outside are
+dropped. To correct this problem, change the service&amp;rsquo;s configuration on your
+localhost so that the service accepts requests from all IPs.  If you aren&amp;rsquo;t sure
+how to do this, check the documentation for your OS.&lt;/p&gt;
+
+&lt;h3 id=&#34;where-can-i-find-more-answers&#34;&gt;Where can I find more answers?&lt;/h3&gt;
+
+&lt;p&gt;You can find more answers on:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://groups.google.com/d/forum/docker-user&#34;&gt;Docker user mailinglist&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://groups.google.com/d/forum/docker-dev&#34;&gt;Docker developer mailinglist&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;irc://chat.freenode.net#docker&#34;&gt;IRC, docker on freenode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker&#34;&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://stackoverflow.com/search?q=docker&#34;&gt;Ask questions on Stackoverflow&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://twitter.com/docker&#34;&gt;Join the conversation on Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Looking for something else to read? Checkout the &lt;a href=&#34;http://localhost/misc/misc/userguide/&#34;&gt;User Guide&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

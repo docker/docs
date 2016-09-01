@@ -1,0 +1,406 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docker</title>
+    <link rel="stylesheet" href="assets/css/app.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.6/animate.min.css">
+    <script src="assets/js/modernizr.js"></script> 
+  </head>
+  <body>
+    <div class="off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+        <a class="left-off-canvas-toggle" href="#" >
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve">
+          <path fill="#3597D4" d="M30.583,9.328c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+            c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,7.966,30.583,8.576,30.583,9.328L30.583,9.328z"/>
+          <path fill="#3597D4" d="M30.583,17.09c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+            c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,15.728,30.583,16.338,30.583,17.09L30.583,17.09z"/>
+          <path fill="#3597D4" d="M30.583,24.387c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+            c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,23.025,30.583,23.635,30.583,24.387L30.583,24.387z"/>
+          </svg>
+        </a>
+        <a class="button secondary small get-started-cta">Get Started</a>
+        <header class="main-header">
+          <div class="row">
+            <div class="large-3 columns">
+              <a href="index.html"><img class="logo" src="assets/images/logo.png"></a>
+            </div>
+            <div class="large-9 columns">
+              <ul class="nav-global">
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Training</a></li>
+                <li><a href="#">Docs</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Sign-in</a></li>
+                <li><a class="button" href="#">Get Started</a></li>
+              </ul>
+              <ul class="nav-main">
+                <li><a href="products.html">Products</a>
+                  <ul>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="what-is-docker.html">What is Docker?</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Customers</a></li>
+                <li><a href="#">Community</a>
+                  <ul>
+                    <li><a href="#">Meetups</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Forums</a></li>
+                    <li><a href="#">Scoop.it</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Partners</a>
+                  <ul>
+                    <li><a href="#">Partner Programs</a></li>
+                  </ul>
+                </li>
+                <li><a href="company.html">Company</a>
+                  <ul>
+                    <li><a href="#">News &amp; Press</a></li>
+                    <li><a href="#">Work at Docker</a></li>
+                    <li><a href="#">Management</a></li>
+                    <li><a href="#">Contact</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Open Source</a>
+                  <ul>
+                    <li><a href="#">Contribute</a></li>
+                    <li><a href="#">Governance</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </header>
+
+        <!-- Off Canvas Menu -->
+        <aside class="left-off-canvas-menu">
+  <ul class="off-canvas-list">
+    <li class="has-submenu"><a href="#">Products</a>
+        <ul class="left-submenu">
+            <li class="back"><a href="#">Back</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">What Is Docker</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Docker Engine</a></li>
+            <li><a href="#">Docker Hub</a></li>
+            <li><a href="#">Docker Registry</a></li>
+            <li><a href="#">Docker Machine</a></li>
+            <li><a href="#">Docker Swarm</a></li>
+            <li><a href="#">Docker Compose</a></li>
+            <li><a href="#">Kitematic</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Customers</a></li>
+    <li class="has-submenu"><a href="#">Community</a>
+        <ul class="left-submenu">
+            <li class="back"><a href="#">Back</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Meetups</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Forum</a></li>
+            <li><a href="#">Scoop.it</a></li>
+        </ul>
+    </li>
+    <li class="has-submenu"><a href="#">Partners</a>
+        <ul class="left-submenu">
+            <li class="back"><a href="#">Back</a></li>
+            <li><a href="#">Partners</a></li>
+            <li><a href="#">Partners Programs</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Company</a></li>
+    <li class="has-submenu"><a href="#">Open Source</a>
+        <ul class="left-submenu">
+            <li class="back"><a href="#">Back</a></li>
+            <li><a href="#">Open Source</a></li>
+            <li><a href="#">Contribute</a></li>
+            <li><a href="#">Governance</a></li>
+        </ul>
+    </li>
+  </ul>
+  <ul class="nav-global-off-canvas">
+    <li><a href="#">Support</a></li>
+    <li><a href="#">Training</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Sign in</a></li>
+    <li><a href="#">Sign up</a></li>
+  </ul>
+</aside>
+        <!-- close the off-canvas menu -->
+        <a class="exit-off-canvas"></a>
+        
+        <!-- Start Body -->
+        
+
+<section class="hero-sub">
+	<div class="row">
+    <div class="columns">
+		  <div class="landing-hero-des">
+		  	<h1>Products</h1>
+		  	<p class="lead">Docker is the open platform to build, ship and run any app, anywhere.</p>
+			</div>
+		  <ul class="nav-sub">
+		    <li><a class="is-active" href="#">Products</a></li>
+		    <li><a href="#">Pricing</a></li>
+		    <li><a href="#">What is Docker?</a></li>
+		  </ul>
+		</div>
+	</div>
+</section>
+<section class="row">
+  <div class="medium-4 large-3 columns">
+    <ul class="side-nav hide-for-small-only">
+      <li class="heading">Products</li>
+      <li class="divider"></li>
+      <li><a href="#">Docker Engine</a></li>
+      <li><a href="#">Docker Hub</a></li>
+      <li><a href="#">Docker Registry</a></li>
+      <li><a href="#">Docker Machine</a></li>
+      <li><a href="#">Docker Swarm</a></li>
+      <li class="active"><a href="#">Docker Compose</a></li>
+      <li><a href="#">Kitematic</a></li>
+    </ul>
+  </div>
+  <article class="medium-8 large-7 end columns">
+    <h2>Docker Compose</h2>
+    <p><a href="#">Get Compose</a> | <a href="#">Read Docs</a> | <a href="#">Contribute to Compose</a></p>
+    <p class="lead">Define and run multi-container applications</p>
+    <div class="terminal-window">
+  <header>
+    <div class="btn green"></div>
+    <div class="btn yellow"></div>
+    <div class="btn red"></div>
+  </header>
+  <section class="terminal">
+    <div class="terminal-data">
+      $ docker-compose up<br>
+      &nbsp;&nbsp;<span class="green">Pulling</span> <span class="gray">image redis...</span><br>
+      &nbsp;&nbsp;<span class="green">Building</span> <span class="gray">web...</span><br>
+      &nbsp;&nbsp;<span class="green">Starting</span> <span class="gray">composetest_redis_1...</span><br>
+      &nbsp;&nbsp;<span class="green">Starting</span> <span class="gray">composetest_web_1...</span><br>
+      &nbsp;&nbsp;<span class="gray">redis_1 | [8] 02 Jan 18:43:35.576 # Server started,<br>&nbsp; Redis version 2.8.3</span><br>
+      &nbsp;&nbsp;web_1   |  * Running on http://0.0.0.0:5000/<br>
+      $<span class="prompt"></span>
+      <span class="typed-cursor">|</span>
+    </div>
+  </section>
+</div>
+
+    <p>Distributed applications are made up of many small applications that work together.  Docker turns these applications into individual containers that are linked together. Instead of having to build, run and manage each individual container, Docker Compose is a tool that allows you to define your multi-container application and all of its dependencies in single file, then spin your application up in a single command.  Changes to your application can be managed from the file and files are easily shared with others for collaboration.</p>
+  </article>
+</section>
+<hr>
+<section class="row">
+  <div class="columns">
+    <ul class="product-features">
+      <li class="product-features-items">
+        <h3><a href="#">Save Time</a></h3>
+        <p>Simply define your application with Docker and everything will spin up super-fast in containers.</p>
+      </li>
+      <li>
+        <h3><a href="#">Completely self-contained</a></h3>
+        <p>Compose defines your entire application with all of its dependencies. No more installing Postgres on your computer.</p>
+      </li>
+      <li>
+        <h3><a href="#">Portability across environments</a></h3>
+        <p>Define your application with Compose once in development but use the same configuration to run the application on other developer machines and in Test and Continuous Integration.</p>
+      </li>
+      <li>
+        <h3><a href="#">Easily collaborate with others</a></h3>
+        <p>Compose applications can be easily shared with other members of your team and other teams. Just run “docker-compose up” and your application’s running.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+<hr>
+<div class="row">
+  <div class="medium-12 columns">
+    <h3>Get started in 3 steps:</h3>
+  </div>
+  <div class="medium-4 columns">
+  <h5>1. Write your Docker file</h5>
+  <div class="terminal-window">
+    <section class="terminal terminal-small">
+      <div class="terminal-data">
+        <span class="green">WORKDIR</span> <span class="gray"> /code<br>
+        <span class="green">ADD</span> <span class="gray"> requirements.txt /code/<br>
+        <span class="green">RUN</span> <span class="gray"> pip install -r requirements.txt<br>
+        <span class="green">ADD</span> <span class="gray"> . /code<br>
+        <span class="green">CMD</span> <span class="gray"> python app.py
+      </div>
+    </section>
+  </div>
+</div>
+<div class="medium-4 columns">
+  <h5>2. Write your docker-compose.yml file</h5>
+  <div class="terminal-window">
+    <section class="terminal terminal-small">
+      <div class="terminal-data">
+        web:<br>
+        &nbsp;&nbsp;<span class="gray">build: .<br>
+        &nbsp;&nbsp;links:<br>
+        &nbsp;&nbsp;- db<br>
+        &nbsp;&nbsp;ports:<br>
+        &nbsp;&nbsp;- "8000:8000"</span><br>
+        db:<br>
+        &nbsp;&nbsp;<span class="gray">image: postgres</span>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="medium-4 columns">
+  <h5>3. Run your app</h5>
+  <div class="terminal-window">
+    <section class="terminal terminal-small">
+      <div class="terminal-data">
+        $ docker-compose up<br>
+      </div>
+    </section>
+  </div>
+</div>
+</div>
+<section class="cta-illustration">
+  <div class="row">
+    <div class="medium-8 large-6 small-centered columns">
+      <a href="#" class="button secondary expand wow pulse">Get Compose</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-8 large-6 small-centered columns">
+      <div class="row">
+        <div class="medium-6 columns">
+          <a href="#" class="button white small expand">Read Docs</a>
+        </div>
+        <div class="medium-6 columns">
+          <a href="#" class="button white small expand">Contribute to Compose</a>
+        </div>
+      </div>
+      <div class="normal-links">
+        <p><a href="#">Get the Datasheet</a> | <a href="#">Watch Video</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+        <!-- Start Footer -->
+        <footer class="main-footer">
+          <div class="row">
+            <div class="small-6 medium-4 large-2 columns">
+              <h6><a href="#">Products</a></h6>
+              <ul>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">What is Docker?</a></li>
+              </ul>
+            </div>
+            <div class="small-6 medium-4 large-2 columns">
+              <h6><a href="#">Customers</a></h6>
+              <ul>
+                <li></a></li>
+              </ul>
+            </div>
+            <div class="small-6 medium-4 large-2 columns">
+              <h6><a href="#">Community</a></h6>
+              <ul>
+                <li><a href="#">Meet Ups</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Forumns</a></li>
+                <li><a href="#">Scoop.it</a></li>
+              </ul>
+            </div>
+            <div class="small-6 medium-4 large-2 columns">
+              <h6><a href="#">Partners</a></h6>
+              <ul>
+                <li><a href="#">Partner Programs</a></li>
+              </ul>
+            </div>
+            <div class="small-6 medium-4 large-2 columns">
+              <h6><a href="#">Company</a></h6>
+              <ul>
+                <li><a href="#">News & Press</a></li>
+                <li><a href="#">Work at Docker</a></li>
+                <li><a href="#">Management</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+            <div class="small-6 medium-4 large-2 columns">
+              <h6><a href="#">Open Source</a></h6>
+              <ul>
+                <li><a href="#">Contribute</a></li>
+                <li><a href="#">Governance</a></li>
+              </ul>
+            </div>
+          </div>
+        <hr class="dark-bg">
+          <div class="row">
+            <div class="nav-global-footer small-6 medium-4 large-2 columns">
+              <ul>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Training</a></li>
+                <li><a href="#">Docs</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Sign-in</a></li>
+              </ul>
+            </div>
+            <div class="nav-global-footer small-6 medium-4 large-2 columns">
+              <ul>
+                <li><a href="#">Status</a></li>
+                <li><a href="#">Security</a></li>
+                <li><a href="#">Swag</a></li>
+                <li><a href="#">Legal Terms</a></li>
+              </ul>
+            </div>
+            <div class="small-12 medium-4 large-2 columns">
+              <h6><a href="#">View Products</a></h6>
+              <ul>
+                <li><a href="#">Docker Engine</a></li>
+                <li><a href="#">Docker Hub</a></li>
+                <li><a href="#">Docker Registry</a></li>
+                <li><a href="#">Docker Machine</a></li>
+                <li><a href="#">Docker Swarm</a></li>
+                <li><a href="#">Docker Compose</a></li>
+                <li><a href="#">Kitematic</a></li>
+              </ul>
+            </div>
+            <div class="medium-8 large-4 columns">
+              <h6>Connect</h6>
+              <p>Subscribe to our newsletter</p>
+              <div class="row collapse">
+                <div class="small-9 columns">
+                  <input class="with-postfix" type="text" placeholder="Email address" />
+                </div>
+                <div class="small-3 columns">
+                  <span class="postfix">Submit</span>
+                </div>
+              </div>
+              <ul class="social-icons">
+                <li><a href="#"><img src="assets/images/social/docker-blog-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/facebook-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/googleplus-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/slideshare-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/twitter-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/youtube-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/linkedin-24.png"></a></li>
+                <li><a href="#"><img src="assets/images/social/reddit.png"></a></li>
+              </ul>
+            </div>
+            <div class="medium-4 large-2 hide-for-small-only columns">
+              <img class="wow fadeIn" src="http://placehold.it/200x300">
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+    <script src="assets/js/all.js"></script>
+  </body>
+</html>

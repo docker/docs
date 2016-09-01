@@ -1,0 +1,22 @@
+blockquote {
+	color: lighten($primary-color, 25%);
+}
+
+blockquote.large {
+	font-weight: 100;
+	color:$primary-color;
+	font-size: rem-calc(30);
+	text-align: center;
+	padding: rem-calc(25) 10%;
+	@media #{$large-up} {
+		padding: rem-calc(75) 20% rem-calc(50) 20%;
+	}
+	cite{
+		color: #666666;
+		font-style: normal;
+		font-size: rem-calc(14);
+		@media #{$medium-up} {
+			padding-left: 75px;
+		}
+	}
+}

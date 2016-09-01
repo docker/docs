@@ -1,0 +1,4361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overview of Docker Machine </title>
+     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/dist/assets/css/app.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.6/animate.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script href="/dist/assets/js/modernizr.js"></script> 
+</head>
+<body>
+  <div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+
+      <a class="left-off-canvas-toggle" href="#" >
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve">
+          <path fill="#3597D4" d="M30.583,9.328c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,7.966,30.583,8.576,30.583,9.328L30.583,9.328z"/>
+          <path fill="#3597D4" d="M30.583,17.09c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,15.728,30.583,16.338,30.583,17.09L30.583,17.09z"/>
+          <path fill="#3597D4" d="M30.583,24.387c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,23.025,30.583,23.635,30.583,24.387L30.583,24.387z"/>
+        </svg>
+      </a>
+      <a class="button secondary small get-started-cta">Get Started</a>
+      <header class="main-header">
+        <div class="row">
+          <div class="large-3 columns">
+            <a href="/"><img class="logo" href="/dist/assets/images/logo.png"></a>
+          </div>
+          <div class="large-9 columns">
+            <ul class="nav-global">
+              <li><a href="https://www.docker.com/support">Support</a></li>
+              <li><a href="https://training.docker.com/">Training</a></li>
+              <li><a href="/">Docs</a></li>
+              <li><a href="http://blog.docker.com/">Blog</a></li>
+              <li><a href="https://hub.docker.com/account/signup/">Docker Hub</a></li>
+              <li><a class="button" href="/mac/started/">Get Started</a></li>
+            </ul>
+            <ul class="nav-main">
+              <li><a href="https://www.docker.com/products">Products</a>
+                <ul>
+                  <li><a href="https://www.docker.com/pricing">Pricing</a></li>
+                  <li><a href="https://www.docker.com/whatisdocker">What is Docker?</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/customers">Customers</a></li>
+              <li><a href="https://www.docker.com/community">Community</a>
+                <ul>
+                  <li><a href="https://www.docker.com/community/meetups">Meetups</a></li>
+                  <li><a href="https://www.docker.com/community/events">Events</a></li>
+                  <li><a href="https://forums.docker.com">Forums</a></li>
+                  <li><a href="http://www.scoop.it/t/docker-by-docker">Community News</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/partners">Partners</a>
+                <ul>
+                  <li><a href="https://www.docker.com/partners/partner-programs">Partner Programs</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/company">Company</a>
+                <ul>
+                  <li><a href="https://www.docker.com/news-and-press">News &amp; Press</a></li>
+                  <li><a href="https://www.docker.com/work-docker">Work at Docker</a></li>
+                  <li><a href="https://www.docker.com/company/management">Management</a></li>
+                  <li><a href="https://www.docker.com/company/contact">Contact</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/open-source">Open Source</a>
+                <ul>
+                  <li><a href="https://www.docker.com/contribute">Contribute</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      
+      <aside class="left-off-canvas-menu">
+        <ul class="off-canvas-list">
+          <li class="has-submenu"><a href="#">Products</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">What Is Docker</a></li>
+              <li><a href="#">Products</a></li>
+              <li><a href="#">Docker Engine</a></li>
+              <li><a href="#">Docker Hub</a></li>
+              <li><a href="#">Docker Registry</a></li>
+              <li><a href="#">Docker Machine</a></li>
+              <li><a href="#">Docker Swarm</a></li>
+              <li><a href="#">Docker Compose</a></li>
+              <li><a href="#">Kitematic</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Customers</a></li>
+          <li class="has-submenu"><a href="#">Community</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#">Meetups</a></li>
+              <li><a href="https://www.docker.com/community/events">Events</a></li>
+              <li><a href="#">Forum</a></li>
+              <li><a href="#">Scoop.it</a></li>
+            </ul>
+          </li>
+          <li class="has-submenu"><a href="#">Partners</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Partners</a></li>
+              <li><a href="https://www.docker.com/partners/partner-programs">Partners Programs</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Company</a></li>
+          <li class="has-submenu"><a href="#">Open Source</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Open Source</a></li>
+              <li><a href="#">Contribute</a></li>
+              <li><a href="#">Governance</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav-global-off-canvas">
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Training</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Sign in</a></li>
+          <li><a href="#">Sign up</a></li>
+        </ul>
+      </aside>
+      
+      <a class="exit-off-canvas"></a>
+<div id="docs" class="row">
+    <div class="large-3 columns">
+        <section id="multiple" data-accordion-group>
+  
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Install</button>
+          <div data-content>
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Engine</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/installation/mac/" class=""> Installation on Mac OS X</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/installation/windows/" class=""> Installation on Windows</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Linux</button>
+                          <div data-content>
+                            
+                                <a data-link href="/docker/installation/archlinux/" class=""> Installation on Arch Linux</a>
+                            
+                                <a data-link href="/docker/installation/cruxlinux/" class=""> Installation on CRUX Linux</a>
+                            
+                                <a data-link href="/docker/installation/centos/" class=""> Installation on CentOS</a>
+                            
+                                <a data-link href="/docker/installation/debian/" class=""> Installation on Debian</a>
+                            
+                                <a data-link href="/docker/installation/fedora/" class=""> Installation on Fedora</a>
+                            
+                                <a data-link href="/docker/installation/frugalware/" class=""> Installation on FrugalWare</a>
+                            
+                                <a data-link href="/docker/installation/gentoolinux/" class=""> Installation on Gentoo</a>
+                            
+                                <a data-link href="/docker/installation/oracle/" class=""> Installation on Oracle Linux</a>
+                            
+                                <a data-link href="/docker/installation/rhel/" class=""> Installation on Red Hat Enterprise Linux</a>
+                            
+                                <a data-link href="/docker/installation/ubuntulinux/" class=""> Installation on Ubuntu </a>
+                            
+                                <a data-link href="/docker/installation/SUSE/" class=""> Installation on openSUSE and SUSE Linux Enterprise</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Cloud</button>
+                          <div data-content>
+                            
+                                <a data-link href="/docker/installation/amazon/" class=""> Amazon EC2 Installation</a>
+                            
+                                <a data-link href="/docker/installation/joyent/" class=""> Install on Joyent Public Cloud</a>
+                            
+                                <a data-link href="/docker/installation/google/" class=""> Installation on Google Cloud Platform</a>
+                            
+                                <a data-link href="/docker/installation/softlayer/" class=""> Installation on IBM SoftLayer </a>
+                            
+                                <a data-link href="/docker/installation/azure/" class=""> Installation on Microsoft Azure platform</a>
+                            
+                                <a data-link href="/docker/installation/rackspace/" class=""> Installation on Rackspace Cloud</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/installation/binaries/" class=""> Installation from binaries</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="/kitematic/" class=""> Kitematic</a>
+              
+            
+              
+                <a data-link href="/machine/install-machine/" class=""> Docker Machine</a>
+              
+            
+              
+                <a data-link href="/compose/install/" class=""> Docker Compose</a>
+              
+            
+              
+                <a data-link href="/swarm/install-w-machine/" class=""> Docker Swarm</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Docker Fundamentals</button>
+          <div data-content>
+            
+              
+                <a data-link href="/docker/userguide/" class=""> The Docker user guide</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Work with Docker Images</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/articles/dockerfile_best-practices/" class=""> Best practices for writing Dockerfiles</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/baseimages/" class=""> Create a base image</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/dockerimages/" class=""> Get started with images</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/dockerrepos/" class=""> Get started with Docker Hub</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Work with Docker Containers</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/articles/basics/" class=""> Get started with containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/usingdocker/" class=""> Working with containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/dockervolumes/" class=""> Managing data in containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/dockerlinks/" class=""> Linking containers together</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/host_integration/" class=""> Automatically start containers</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker on Windows &amp; OSX</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/articles/dsc/" class=""> PowerShell DSC Usage</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/b2d_volume_resize/" class=""> Resizing a Boot2Docker volume	</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Use the Kitematic GUI</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/kitematic/userguide/" class=""> Kitematic User Guide: Intro &amp; Overview</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/kitematic/nginx-web-server/" class=""> Set up an Nginx web server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/kitematic/minecraft-server/" class=""> Set up a Minecraft Server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/kitematic/rethinkdb-dev-database/" class=""> Creating a Local RethinkDB Database for Development</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/kitematic/faq/" class=""> Frequently Asked Questions</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/kitematic/known-issues/" class=""> Known Issues</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Use Docker</button>
+          <div data-content>
+            
+              
+                <a data-link href="/docker/misc/" class=""> About Docker</a>
+              
+            
+              
+                <a data-link href="/docker/userguide/labels-custom-metadata/" class=""> Apply custom metadata</a>
+              
+            
+              
+                <a data-link href="/docker/introduction/understanding-docker/" class=""> Understand the architecture</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Provision &amp; set up Docker hosts</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/machine/" class=" active"> Overview of Docker Machine</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Create multi-container applications</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/compose/" class=""> Overview of Docker Compose</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/production/" class=""> Using Compose in production</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/extends/" class=""> Extending services in Compose</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/completion/" class=""> Command Completion</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/django/" class=""> Quickstart Guide: Compose and Django</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/rails/" class=""> Quickstart Guide: Compose and Rails</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/wordpress/" class=""> Quickstart Guide: Compose and Wordpress</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Cluster Docker containers</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/swarm/" class=""> Docker Swarm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/swarm/install-manual/" class=""> Create a swarm for development</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/swarm/discovery/" class=""> Docker Swarm discovery</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/swarm/scheduler/filter/" class=""> Docker Swarm filters</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/swarm/scheduler/strategy/" class=""> Docker Swarm strategies</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Adminstrate Docker</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/articles/networking/" class=""> Network configuration</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/security/" class=""> Docker security</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/configuring/" class=""> Configuring and running Docker</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/runmetrics/" class=""> Runtime metrics</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/https/" class=""> Protect the Docker daemon socket</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/ambassador_pattern_linking/" class=""> Link via an ambassador container</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/systemd/" class=""> Control and configure Docker with systemd</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Applications and Services</button>
+                          <div data-content>
+                            
+                                <a data-link href="/docker/examples/running_riak_service/" class=""> Dockerizing a Riak service</a>
+                            
+                                <a data-link href="/docker/examples/running_ssh_service/" class=""> Dockerizing an SSH service</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Integrate with Third-party Tools</button>
+                          <div data-content>
+                            
+                                <a data-link href="/articles/cfengine_process_management/" class=""> Process management with CFEngine</a>
+                            
+                                <a data-link href="/articles/chef/" class=""> Using Chef</a>
+                            
+                                <a data-link href="/articles/puppet/" class=""> Using Puppet</a>
+                            
+                                <a data-link href="/articles/using_supervisord/" class=""> Using Supervisor with Docker</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Applied Docker</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/examples/mongodb/" class=""> Dockerizing MongoDB</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/examples/postgresql_service/" class=""> Dockerizing PostgreSQL</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/examples/couchdb_data_volumes/" class=""> Dockerizing a CouchDB service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/examples/nodejs_web_app/" class=""> Dockerizing a Node.js web app</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/examples/running_redis_service/" class=""> Dockerizing a Redis service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/examples/apt-cacher-ng/" class=""> Dockerizing an apt-cacher-ng service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/dockerizing/" class=""> Dockerizing applications: A &#39;Hello world&#39;</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Manage image repositories</button>
+          <div data-content>
+            
+              
+                <article data-accordion>
+                  <button data-control> The Public Hub</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/docker-hub/userguide/" class=""> Docker Hub user guide</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/docker-hub/" class=""> The Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/docker-hub/accounts/" class=""> Accounts on Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/dockerhub/" class=""> Getting started with Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/docker-hub/repos/" class=""> Your Repositories on Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/docker-hub/builds/" class=""> Automated Builds on Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/docker-hub/official_repos/" class=""> Official Repositories on Docker Hub</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Trusted Registry</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/" class=""> Overview</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/quick-start/" class=""> Quick-start: Basic Workflow</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/userguide/" class=""> User guide</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/adminguide/" class=""> Admin guide</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/install/" class=""> Installation</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/configuration/" class=""> Configuration options</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/support/" class=""> Support</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/release-notes/" class=""> Release notes</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/prior-release-notes/" class=""> Prior release notes archive</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Registry</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/registry/" class=""> Docker Registry 2.0</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/introduction/" class=""> Understanding the Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/deploying/" class=""> Deploying a registry server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/configuration/" class=""> Configure a Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/notifications/" class=""> Work with Notifications</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/authentication/" class=""> Authentication for the Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/help/" class=""> Getting help</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="/articles/certificates/" class=""> Using certificates for repository client verification</a>
+              
+            
+              
+                <a data-link href="/articles/registry_mirror/" class=""> Run a local registry mirror</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Command and API references</button>
+          <div data-content>
+            
+              
+                <article data-accordion>
+                  <button data-control> Command line reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/cli/" class=""> Using the command line</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/daemon/" class=""> daemon</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/attach/" class=""> attach</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/build/" class=""> build</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/commit/" class=""> commit</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/cp/" class=""> cp</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/create/" class=""> create</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/diff/" class=""> diff</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/events/" class=""> events</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/exec/" class=""> exec</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/export/" class=""> export</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/history/" class=""> history</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/images/" class=""> images</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/import/" class=""> import</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/info/" class=""> info</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/inspect/" class=""> inspect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/kill/" class=""> kill</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/load/" class=""> load</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/login/" class=""> login</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/logout/" class=""> logout</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/logs/" class=""> logs</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/pause/" class=""> pause</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/port/" class=""> port</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/ps/" class=""> ps</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/pull/" class=""> pull</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/push/" class=""> push</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/rename/" class=""> rename</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/restart/" class=""> restart</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/rm/" class=""> rm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/rmi/" class=""> rmi</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/run/" class=""> run</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/save/" class=""> save</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/search/" class=""> search</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/start/" class=""> start</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/stats/" class=""> stats</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/stop/" class=""> stop</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/tag/" class=""> tag</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/top/" class=""> top</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/unpause/" class=""> unpause</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/version/" class=""> version</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/wait/" class=""> wait</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="/docker/reference/run/" class=""> Docker run reference</a>
+              
+            
+              
+                <a data-link href="/docker/reference/builder/" class=""> Dockerfile reference</a>
+              
+            
+              
+                <a data-link href="/docker/reference/api/remote_api_client_libraries/" class=""> Remote API client libraries</a>
+              
+            
+              
+                <a data-link href="/docker/reference/api/docker_io_accounts_api/" class=""> docker.io accounts API</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Remote API</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker-io_api/" class=""> Docker Hub API</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api/" class=""> Remote API</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api_v1.19/" class=""> Remote API v1.19</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api_v1.18/" class=""> Remote API v1.18</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api_v1.17/" class=""> Remote API v1.17</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api_v1.16/" class=""> Remote API v1.16</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api_v1.15/" class=""> Remote API v1.15</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api_v1.14/" class=""> Remote API v1.14</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Hub</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/reference/api/hub_registry_spec/" class=""> The Docker Hub and the Registry v1</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Compose Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/compose/cli/" class=""> Compose CLI reference</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/yml/" class=""> docker-compose.yml reference</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/env/" class=""> Compose environment variables reference</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="" class=""> Docker Machine Reference</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Swarm Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/swarm/api/swarm-api/" class=""> Docker Swarm API</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Registry Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/registry/spec/api/" class=""> Docker Registry HTTP API V2</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/storagedrivers/" class=""> Docker Registry Storage Driver</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/spec/auth/token/" class=""> Docker Registry v2 Authentication</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Open Source at Docker</button>
+          <div data-content>
+            
+              
+                <a data-link href="/opensource/how-to-contribute/" class=""> Overview of contributing</a>
+              
+            
+              
+                <a data-link href="/docker/project/get-help/" class=""> Where to chat or get help</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Configure Development Environment</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/project/who-written-for/" class=""> README first</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/software-required/" class=""> Get the required software</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/software-req-win/" class=""> Set up for development on Windows</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/set-up-git/" class=""> Configure Git for contributing</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/set-up-dev-env/" class=""> Work with a development container</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/test-and-docs/" class=""> Run tests and test documentation</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Contribution Workflow</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/project/make-a-contribution/" class=""> Understand how to contribute</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/find-an-issue/" class=""> Find and claim an issue</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/work-issue/" class=""> Work on your issue</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/create-pr/" class=""> Create a pull request (PR)</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/review-pr/" class=""> Participate in the PR review</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/advanced-contributing/" class=""> Advanced contributing</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/coding-style/" class=""> Coding style checklist</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="/opensource/code/" class=""> Contribute code overview</a>
+              
+            
+              
+                <a data-link href="/opensource/community/" class=""> Support the community</a>
+              
+            
+              
+                <a data-link href="/opensource/issues/" class=""> Organize our issues</a>
+              
+            
+              
+                <a data-link href="/opensource/meetups/" class=""> Organize a Docker Meetup</a>
+              
+            
+              
+                <a data-link href="/opensource/test/" class=""> Testing contributions</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Governance</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/opensource/governance/dgab-info/" class=""> Docker Governance Advisory Board</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/opensource/governance/board-profiles/" class=""> Board member profiles</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/opensource/governance/conduct-code/" class=""> Code of conduct</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="/docker/project/doc-style/" class=""> Style guide for Docker documentation</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> About</button>
+          <div data-content>
+            
+              
+                <a data-link href="/release-notes/" class=""> Docker Release Notes</a>
+              
+            
+              
+                <a data-link href="/swarm/release-notes/" class=""> Docker Swarm Release Notes</a>
+              
+            
+              
+                <a data-link href="/docker/misc/faq/" class=""> FAQ</a>
+              
+            
+              
+                <a data-link href="/docker/reference/glossary/" class=""> Docker Glossary</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Get older docs</button>
+          <div data-content>
+            
+              
+                <a data-link href="https://docs.docker.com/v1.6/" class=""> Version 1.6</a>
+              
+            
+              
+                <a data-link href="https://docs.docker.com/v1.5/" class=""> Version 1.5</a>
+              
+            
+              
+                <a data-link href="https://docs.docker.com/v1.4/" class=""> Version 1.4</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+</section>
+
+<script>
+$(document).ready(function () {
+  var $activeLink = $('#multiple [data-link].active');
+  var $accordions = $activeLink.parents('article[data-accordion]');
+  $($accordions.get().reverse()).each(function (index, accordion) {
+    var $accordion = $(accordion);
+    var $content = $accordion.find('[data-content]');
+    $accordion.addClass('open');
+    $content.css({'max-height': '100%'});
+  });
+});
+</script>
+    </div>
+    <div class="large-6 columns">
+      <section id="main">
+        <article id="content">
+          
+
+<h1 id="docker-machine">Docker Machine</h1>
+
+<blockquote>
+<p><strong>Note</strong>: Machine is currently in beta, so things are likely to change. We
+don&rsquo;t recommend you use it in production yet.</p>
+</blockquote>
+
+<p>Machine lets you create Docker hosts on your computer, on cloud providers, and
+inside your own data center. It creates servers, installs Docker on them, then
+configures the Docker client to talk to them.</p>
+
+<p>Once your Docker host has been created, it then has a number of commands for
+managing them:</p>
+
+<ul>
+<li>Starting, stopping, restarting</li>
+<li>Upgrading Docker</li>
+<li>Configuring the Docker client to talk to your host</li>
+</ul>
+
+<h2 id="getting-help">Getting help</h2>
+
+<p>Docker Machine is still in its infancy and under active development. If you need
+help, would like to contribute, or simply want to talk about to the project with
+like-minded individuals, we have a number of open channels for communication.</p>
+
+<ul>
+<li>To report bugs or file feature requests: please use the <a href="https://github.com/docker/machine/issues">issue tracker on
+Github</a>.</li>
+<li>To talk about the project with people in real time: please join the
+<code>#docker-machine</code> channel on IRC.</li>
+<li>To contribute code or documentation changes: please <a href="https://github.com/docker/machine/pulls">submit a pull request on
+Github</a>.</li>
+</ul>
+
+<p>For more information and resources, please visit
+<a href="/project/get-help/">https://docs.docker.com/project/get-help/</a>.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Docker Machine is supported on Windows, OS X, and Linux and is installable as one
+standalone binary. The links to the binaries for the various platforms and
+architectures are below:</p>
+
+<ul>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-386.exe">Windows - 32bit</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-amd64.exe">Windows - 64bit</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64">OSX - x86_64</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-386">OSX - (old macs)</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-amd64">Linux - x86_64</a></li>
+<li><a href="https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-386">Linux - i386</a></li>
+</ul>
+
+<h3 id="os-x-and-linux">OS X and Linux</h3>
+
+<p>To install on OS X or Linux, download the proper binary to somewhere in your
+<code>PATH</code> (e.g. <code>/usr/local/bin</code>) and make it executable. For instance, to install on
+most OS X machines these commands should suffice:</p>
+
+<pre><code>$ curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64 &gt; /usr/local/bin/docker-machine
+$ chmod +x /usr/local/bin/docker-machine
+</code></pre>
+
+<p>For Linux, just substitute &ldquo;linux&rdquo; for &ldquo;darwin&rdquo; in the binary name above.</p>
+
+<p>Now you should be able to check the version with <code>docker-machine -v</code>:</p>
+
+<pre><code>$ docker-machine -v
+machine version 0.3.0
+</code></pre>
+
+<p>In order to run Docker commands on your machines without having to use SSH, make
+sure to install the Docker client as well, e.g.:</p>
+
+<pre><code>$ curl -L https://get.docker.com/builds/Darwin/x86_64/docker-latest &gt; /usr/local/bin/docker
+</code></pre>
+
+<h3 id="windows">Windows</h3>
+
+<p>Currently, Docker recommends that you install and use Docker Machine on Windows
+with <a href="https://msysgit.github.io/">msysgit</a>. This will provide you with some
+programs that Docker Machine relies on such as <code>ssh</code>, as well as a functioning
+shell.</p>
+
+<p>When you have installed msysgit, start up the terminal prompt and run the
+following commands. Here it is assumed that you are on a 64-bit Windows
+installation. If you are on a 32-bit installation, please substitute &ldquo;i386&rdquo; for
+&ldquo;x86_64&rdquo; in the URLs mentioned.</p>
+
+<p>First, install the Docker client binary:</p>
+
+<pre><code>$ curl -L https://get.docker.com/builds/Windows/x86_64/docker-latest.exe &gt; /bin/docker
+</code></pre>
+
+<p>Next, install the Docker Machine binary:</p>
+
+<pre><code>$ curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_windows-amd64.exe &gt; /bin/docker-machine
+</code></pre>
+
+<p>Now running <code>docker-machine</code> should work.</p>
+
+<pre><code>$ docker-machine -v
+machine version 0.3.0
+</code></pre>
+
+<h2 id="getting-started-with-docker-machine-using-a-local-vm">Getting started with Docker Machine using a local VM</h2>
+
+<p>Let&rsquo;s take a look at using <code>docker-machine</code> for creating, using, and managing a
+Docker host inside of <a href="https://www.virtualbox.org/">VirtualBox</a>.</p>
+
+<p>First, ensure that
+<a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox 4.3.28</a> is correctly
+installed on your system.</p>
+
+<p>If you run the <code>docker-machine ls</code> command to show all available machines, you will see
+that none have been created so far.</p>
+
+<pre><code>$ docker-machine ls
+NAME   ACTIVE   DRIVER   STATE   URL
+</code></pre>
+
+<p>To create one, we run the <code>docker-machine create</code> command, passing the string
+<code>virtualbox</code> to the <code>--driver</code> flag. The final argument we pass is the name of
+the machine - in this case, we will name our machine &ldquo;dev&rdquo;.</p>
+
+<p>This command will download a lightweight Linux distribution
+(<a href="https://github.com/boot2docker/boot2docker">boot2docker</a>) with the Docker
+daemon installed, and will create and start a VirtualBox VM with Docker running.</p>
+
+<pre><code>$ docker-machine create --driver virtualbox dev
+Creating CA: /home/username/.docker/machine/certs/ca.pem
+Creating client certificate: /home/username/.docker/machine/certs/cert.pem
+Image cache does not exist, creating it at /home/username/.docker/machine/cache...
+No default boot2docker iso found locally, downloading the latest release...
+Downloading https://github.com/boot2docker/boot2docker/releases/download/v1.6.2/boot2docker.iso to /home/username/.docker/machine/cache/boot2docker.iso...
+Creating VirtualBox VM...
+Creating SSH key...
+Starting VirtualBox VM...
+Starting VM...
+To see how to connect Docker to this machine, run: docker-machine env dev
+</code></pre>
+
+<p>You can see the machine you have created by running the <code>docker-machine ls</code>
+command again:</p>
+
+<pre><code>$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL                         SWARM
+dev             virtualbox   Running   tcp://192.168.99.100:2376
+</code></pre>
+
+<p>Next, as noted in the output of the <code>docker-machine create</code> command, we have to
+tell Docker to talk to that machine. You can do this with the <code>docker-machine
+env</code> command. For example,</p>
+
+<pre><code>$ eval &quot;$(docker-machine env dev)&quot;
+$ docker ps
+</code></pre>
+
+<blockquote>
+<p><strong>Note</strong>: If you are using <code>fish</code>, or a Windows shell such as
+Powershell/<code>cmd.exe</code> the above method will not work as described. Instead,
+see <a href="/machine/#env">the <code>env</code> command&rsquo;s documentation</a>
+to learn how to set the environment variables for your shell.</p>
+</blockquote>
+
+<p>This will set environment variables that the Docker client will read which specify
+the TLS settings. Note that you will need to do that every time you open a new tab or
+restart your machine.</p>
+
+<p>To see what will be set, run <code>docker-machine env dev</code>.</p>
+
+<pre><code>$ docker-machine env dev
+export DOCKER_TLS_VERIFY=&quot;1&quot;
+export DOCKER_HOST=&quot;tcp://172.16.62.130:2376&quot;
+export DOCKER_CERT_PATH=&quot;/Users/&lt;your username&gt;/.docker/machine/machines/dev&quot;
+export DOCKER_MACHINE_NAME=&quot;dev&quot;
+# Run this command to configure your shell:
+# eval &quot;$(docker-machine env dev)&quot;
+</code></pre>
+
+<p>You can now run Docker commands on this host:</p>
+
+<pre><code>$ docker run busybox echo hello world
+Unable to find image 'busybox' locally
+Pulling repository busybox
+e72ac664f4f0: Download complete
+511136ea3c5a: Download complete
+df7546f9f060: Download complete
+e433a6c5b276: Download complete
+hello world
+</code></pre>
+
+<p>Any exposed ports are available on the Docker host’s IP address, which you can
+get using the <code>docker-machine ip</code> command:</p>
+
+<pre><code>$ docker-machine ip dev
+192.168.99.100
+</code></pre>
+
+<p>For instance, you can try running a webserver (<a href="https://nginx.org">nginx</a>) in a
+container with the following command:</p>
+
+<pre><code>$ docker run -d -p 8000:80 nginx
+</code></pre>
+
+<p>When the image is finished pulling, you can hit the server at port 8000 on the
+IP address given to you by <code>docker-machine ip</code>. For instance:</p>
+
+<pre><code>$ curl $(docker-machine ip dev):8000
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;style&gt;
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.&lt;/p&gt;
+
+&lt;p&gt;For online documentation and support please refer to
+&lt;a href=&quot;http://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+Commercial support is available at
+&lt;a href=&quot;http://nginx.com/&quot;&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>You can create and manage as many local VMs running Docker as you please- just
+run <code>docker-machine create</code> again. All created machines will appear in the
+output of <code>docker-machine ls</code>.</p>
+
+<p>If you are finished using a host for the time being, you can stop it with
+<code>docker-machine stop</code> and later start it again with <code>docker-machine start</code>.
+Make sure to specify the machine name as an argument:</p>
+
+<pre><code>$ docker-machine stop dev
+$ docker-machine start dev
+</code></pre>
+
+<h2 id="using-docker-machine-with-a-cloud-provider">Using Docker Machine with a cloud provider</h2>
+
+<p>Creating a local virtual machine running Docker is useful and fun, but it is not
+the only thing Docker Machine is capable of. Docker Machine supports several
+“drivers” which let you use the same interface to create hosts on many different
+cloud or local virtualization platforms. This is accomplished by using the
+<code>docker-machine create</code> command with the <code>--driver</code> flag. Here we will be
+demonstrating the <a href="https://digitalocean.com">Digital Ocean</a> driver (called
+<code>digitalocean</code>), but there are drivers included for several providers including
+Amazon Web Services, Google Compute Engine, and Microsoft Azure.</p>
+
+<p>Usually it is required that you pass account verification credentials for these
+providers as flags to <code>docker-machine create</code>. These flags are unique for each driver.
+For instance, to pass a Digital Ocean access token you use the
+<code>--digitalocean-access-token</code> flag.</p>
+
+<p>Let&rsquo;s take a look at how to do this.</p>
+
+<p>To generate your access token:</p>
+
+<ol>
+<li>Go to the Digital Ocean administrator console and click on &ldquo;API&rdquo; in the header.</li>
+<li>Click on &ldquo;Generate New Token&rdquo;.</li>
+<li>Give the token a clever name (e.g. &ldquo;machine&rdquo;), make sure the &ldquo;Write&rdquo; checkbox
+is checked, and click on &ldquo;Generate Token&rdquo;.</li>
+<li>Grab the big long hex string that is generated (this is your token) and store
+it somewhere safe.</li>
+</ol>
+
+<p>Now, run <code>docker-machine create</code> with the <code>digitalocean</code> driver and pass your key to
+the <code>--digitalocean-access-token</code> flag.</p>
+
+<p>Example:</p>
+
+<pre><code>$ docker-machine create \
+    --driver digitalocean \
+    --digitalocean-access-token 0ab77166d407f479c6701652cee3a46830fef88b8199722b87821621736ab2d4 \
+    staging
+Creating SSH key...
+Creating Digital Ocean droplet...
+To see how to connect Docker to this machine, run: docker-machine env staging
+</code></pre>
+
+<p>For convenience, <code>docker-machine</code> will use sensible defaults for choosing
+settings such as the image that the VPS is based on, but they can also be
+overridden using their respective flags (e.g. <code>--digitalocean-image</code>). This is
+useful if, for instance, you want to create a nice large instance with a lot of
+memory and CPUs (by default <code>docker-machine</code> creates a small VPS). For a full
+list of the flags/settings available and their defaults, see the output of
+<code>docker-machine create -h</code>.</p>
+
+<p>When the creation of a host is initiated, a unique SSH key for accessing the
+host (initially for provisioning, then directly later if the user runs the
+<code>docker-machine ssh</code> command) will be created automatically and stored in the
+client&rsquo;s directory in <code>~/.docker/machines</code>. After the creation of the SSH key,
+Docker will be installed on the remote machine and the daemon will be configured
+to accept remote connections over TCP using TLS for authentication. Once this
+is finished, the host is ready for connection.</p>
+
+<p>To prepare the Docker client to send commands to the remote server we have
+created, we can use the subshell method again:</p>
+
+<pre><code>$ eval &quot;$(docker-machine env staging)&quot;
+</code></pre>
+
+<p>From this point, the remote host behaves much like the local host we created in
+the last section. If we look at <code>docker-machine ls</code>, we&rsquo;ll see it is now the
+&ldquo;active&rdquo; host, indicated by an asterisk (<code>*</code>) in that column:</p>
+
+<pre><code>$ docker-machine ls
+NAME      ACTIVE   DRIVER         STATE     URL
+dev                virtualbox     Running   tcp://192.168.99.103:2376
+staging   *        digitalocean   Running   tcp://104.236.50.118:2376
+</code></pre>
+
+<p>To remove a host and all of its containers and images, use <code>docker-machine rm</code>:</p>
+
+<pre><code>$ docker-machine rm dev staging
+$ docker-machine ls
+NAME      ACTIVE   DRIVER       STATE     URL
+</code></pre>
+
+<h2 id="adding-a-host-without-a-driver">Adding a host without a driver</h2>
+
+<p>You can add a host to Docker which only has a URL and no driver. Therefore it
+can be used an alias for an existing host so you don’t have to type out the URL
+every time you run a Docker command.</p>
+
+<pre><code>$ docker-machine create --url=tcp://50.134.234.20:2376 custombox
+$ docker-machine ls
+NAME        ACTIVE   DRIVER    STATE     URL
+custombox   *        none      Running   tcp://50.134.234.20:2376
+</code></pre>
+
+<h2 id="using-docker-machine-with-docker-swarm">Using Docker Machine with Docker Swarm</h2>
+
+<p>Docker Machine can also provision <a href="https://github.com/docker/swarm">Swarm</a>
+clusters. This can be used with any driver and will be secured with TLS.</p>
+
+<p>First, create a Swarm token. Optionally, you can use another discovery service.
+See the Swarm docs for details.</p>
+
+<p>To create the token, first create a Machine. This example will use VirtualBox.</p>
+
+<pre><code>$ docker-machine create -d virtualbox local
+</code></pre>
+
+<p>Load the Machine configuration into your shell:</p>
+
+<pre><code>$ eval &quot;$(docker-machine env local)&quot;
+</code></pre>
+
+<p>Then run generate the token using the Swarm Docker image:</p>
+
+<pre><code>$ docker run swarm create
+1257e0f0bbb499b5cd04b4c9bdb2dab3
+</code></pre>
+
+<p>Once you have the token, you can create the cluster.</p>
+
+<h3 id="swarm-master">Swarm master</h3>
+
+<p>Create the Swarm master:</p>
+
+<pre><code>docker-machine create \
+    -d virtualbox \
+    --swarm \
+    --swarm-master \
+    --swarm-discovery token://&lt;TOKEN-FROM-ABOVE&gt; \
+    swarm-master
+</code></pre>
+
+<p>Replace <code>&lt;TOKEN-FROM-ABOVE&gt;</code> with your random token.
+This will create the Swarm master and add itself as a Swarm node.</p>
+
+<h3 id="swarm-nodes">Swarm nodes</h3>
+
+<p>Now, create more Swarm nodes:</p>
+
+<pre><code>docker-machine create \
+    -d virtualbox \
+    --swarm \
+    --swarm-discovery token://&lt;TOKEN-FROM-ABOVE&gt; \
+    swarm-node-00
+</code></pre>
+
+<p>You now have a Swarm cluster across two nodes.
+To connect to the Swarm master, use <code>eval $(docker-machine env --swarm swarm-master)</code></p>
+
+<p>For example:</p>
+
+<pre><code>$ docker-machine env --swarm swarm-master
+export DOCKER_TLS_VERIFY=1
+export DOCKER_CERT_PATH=&quot;/home/ehazlett/.docker/machines/.client&quot;
+export DOCKER_HOST=tcp://192.168.99.100:3376
+</code></pre>
+
+<p>You can load this into your environment using
+<code>eval &quot;$(docker-machine env --swarm swarm-master)&quot;</code>.</p>
+
+<p>Now you can use the Docker CLI to query:</p>
+
+<pre><code>$ docker info
+Containers: 1
+Nodes: 1
+ swarm-master: 192.168.99.100:2376
+  └ Containers: 2
+  └ Reserved CPUs: 0 / 4
+  └ Reserved Memory: 0 B / 999.9 MiB
+</code></pre>
+
+<h2 id="subcommands">Subcommands</h2>
+
+<h4 id="active">active</h4>
+
+<p>See which machine is &ldquo;active&rdquo; (a machine is considered active if the
+<code>DOCKER_HOST</code> environment variable points to it).</p>
+
+<pre><code>$ docker-machine ls
+NAME      ACTIVE   DRIVER         STATE     URL
+dev                virtualbox     Running   tcp://192.168.99.103:2376
+staging   *        digitalocean   Running   tcp://104.236.50.118:2376
+$ echo $DOCKER_HOST
+tcp://104.236.50.118:2376
+$ docker-machine active
+staging
+</code></pre>
+
+<h4 id="create">create</h4>
+
+<p>Create a machine.</p>
+
+<pre><code>$ docker-machine create --driver virtualbox dev
+Creating CA: /home/username/.docker/machine/certs/ca.pem
+Creating client certificate: /home/username/.docker/machine/certs/cert.pem
+Image cache does not exist, creating it at /home/username/.docker/machine/cache...
+No default boot2docker iso found locally, downloading the latest release...
+Downloading https://github.com/boot2docker/boot2docker/releases/download/v1.6.2/boot2docker.iso to /home/username/.docker/machine/cache/boot2docker.iso...
+Creating VirtualBox VM...
+Creating SSH key...
+Starting VirtualBox VM...
+Starting VM...
+To see how to connect Docker to this machine, run: docker-machine env dev
+</code></pre>
+
+<h5 id="filtering-create-flags-by-driver-in-the-help-text">Filtering create flags by driver in the help text</h5>
+
+<p>You may notice that the <code>docker-machine create</code> command has a lot of flags due
+to the huge plethora of provider-specific options which are available.</p>
+
+<pre><code>$ docker-machine create -h | wc -l
+145
+</code></pre>
+
+<p>While it is great to have access to all this information, sometimes you simply
+want to get a peek at the subset of flags which are applicable to the driver you
+are working with. To that extent, specifying an argument to the <code>-d</code> flag will
+filter the create flags displayed in the help text to only what is applicable to
+that provider:</p>
+
+<pre><code>$ docker-machine create -d virtualbox
+Usage: docker-machine create [OPTIONS] [arg...]
+
+Create a machine
+
+Options:
+   --virtualbox-boot2docker-url                                                                         The URL of the boot2docker image. Defaults to the latest available version [$VIRTUALBOX_BOOT2DOCKER_URL]
+   --virtualbox-cpu-count &quot;1&quot;                                                                           number of CPUs for the machine (-1 to use the number of CPUs available) [$VIRTUALBOX_CPU_COUNT]
+   --virtualbox-disk-size &quot;20000&quot;                                                                       Size of disk for host in MB [$VIRTUALBOX_DISK_SIZE]
+   --virtualbox-import-boot2docker-vm                                                                   The name of a Boot2Docker VM to import
+   --virtualbox-memory &quot;1024&quot;                                                                           Size of memory for host in MB [$VIRTUALBOX_MEMORY_SIZE]
+   --driver, -d &quot;none&quot;                                                                                  Driver to create machine with. Available drivers: amazonec2, azure, digitalocean, exoscale, google, none, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere
+   --engine-opt [--engine-opt option --engine-opt option]                                               Specify arbitrary opts to include with the created engine in the form opt=value
+   --engine-insecure-registry [--engine-insecure-registry option --engine-insecure-registry option]     Specify insecure registries to allow with the created engine
+   --engine-registry-mirror [--engine-registry-mirror option --engine-registry-mirror option]           Specify registry mirrors to use
+   --engine-label [--engine-label option --engine-label option]                                         Specify labels for the created engine
+   --engine-storage-driver &quot;aufs&quot;                                                                       Specify a storage driver to use with the engine
+   --swarm                                                                                              Configure Machine with Swarm
+   --swarm-master                                                                                       Configure Machine to be a Swarm master
+   --swarm-discovery                                                                                    Discovery service to use with Swarm
+   --swarm-host &quot;tcp://0.0.0.0:3376&quot;                                                                    ip/socket to listen on for Swarm master
+   --swarm-addr                                                                                         addr to advertise for Swarm (default: detect and use the machine IP)
+</code></pre>
+
+<h5 id="specifying-configuration-options-for-the-created-docker-engine">Specifying configuration options for the created Docker engine</h5>
+
+<p>As part of the process of creation, Docker Machine installs Docker and
+configures it with some sensible defaults. For instance, it allows connection
+from the outside world over TCP with TLS-based encryption and defaults to AUFS
+as the <a href="/reference/commandline/cli/#daemon-storage-driver-option">storage
+driver</a>
+when available.</p>
+
+<p>There are several cases where the user might want to set options for the created
+Docker engine (also known as the Docker <em>daemon</em>) themselves. For example, they
+may want to allow connection to a <a href="/registry/">registry</a>
+that they are running themselves using the <code>--insecure-registry</code> flag for the
+daemon. Docker Machine supports the configuration of such options for the
+created engines via the <code>create</code> command flags which begin with <code>--engine</code>.</p>
+
+<p>Note that Docker Machine simply sets the configured parameters on the daemon
+and does not set up any of the &ldquo;dependencies&rdquo; for you. For instance, if you
+specify that the created daemon should use <code>btrfs</code> as a storage driver, you
+still must ensure that the proper dependencies are installed, the BTRFS
+filesystem has been created, and so on.</p>
+
+<p>The following is an example usage:</p>
+
+<pre><code>$ docker-machine create -d virtualbox \
+    --engine-label foo=bar \
+    --engine-label spam=eggs \
+    --engine-storage-driver devicemapper \
+    --engine-insecure-registry registry.myco.com \
+    foobarmachine
+</code></pre>
+
+<p>This will create a virtual machine running locally in Virtualbox which uses the
+<code>devicemapper</code> storage backend, has the key-value pairs <code>foo=bar</code> and
+<code>spam=eggs</code> as labels on the engine, and allows pushing / pulling from the
+insecure registry located at <code>registry.myco.com</code>. You can verify much of this
+by inspecting the output of <code>docker info</code>:</p>
+
+<pre><code>$ eval $(docker-machine env foobarmachine)
+$ docker version
+Containers: 0
+Images: 0
+Storage Driver: devicemapper
+...
+Name: foobarmachine
+...
+Labels:
+ foo=bar
+ spam=eggs
+ provider=virtualbox
+</code></pre>
+
+<p>The supported flags are as follows:</p>
+
+<ul>
+<li><code>--engine-insecure-registry</code>: Specify <a href="/reference/commandline/cli/#insecure-registries">insecure registries</a> to allow with the created engine</li>
+<li><code>--engine-registry-mirror</code>: Specify <a href="/machine/https://github.com/docker/docker/blob/master/docs/sources/articles/registry_mirror">registry mirrors</a> to use</li>
+<li><code>--engine-label</code>: Specify <a href="/userguide/labels-custom-metadata/#daemon-labels">labels</a> for the created engine</li>
+<li><code>--engine-storage-driver</code>: Specify a <a href="/reference/commandline/cli/#daemon-storage-driver-option">storage driver</a> to use with the engine</li>
+</ul>
+
+<p>If the engine supports specifying the flag multiple times (such as with
+<code>--label</code>), then so does Docker Machine.</p>
+
+<p>In addition to this subset of daemon flags which are directly supported, Docker
+Machine also supports an additional flag, <code>--engine-opt</code>, which can be used to
+specify arbitrary daemon options with the syntax <code>--engine-opt flagname=value</code>.
+For example, to specify that the daemon should use <code>8.8.8.8</code> as the DNS server
+for all containers, and always use the <code>syslog</code> <a href="/reference/run/#logging-drivers-log-driver">log
+driver</a> you
+could run the following create command:</p>
+
+<pre><code>$ docker-machine create -d virtualbox \
+    --engine-opt dns=8.8.8.8 \
+    --engine-opt log-driver=syslog \
+    gdns
+</code></pre>
+
+<h5 id="specifying-docker-swarm-options-for-the-created-machine">Specifying Docker Swarm options for the created machine</h5>
+
+<p>In addition to being able to configure Docker Engine options as listed above,
+you can use Machine to specify how the created Swarm master should be
+configured). There is a <code>--swarm-strategy</code> flag, which you can use to specify
+the <a href="/swarm/scheduler/strategy/">scheduling strategy</a>
+which Docker Swarm should use (Machine defaults to the <code>spread</code> strategy).
+There is also a general purpose <code>--swarm-opt</code> option which works similar to how
+the aforementioned <code>--engine-opt</code> option does, except that it specifies options
+for the <code>swarm manage</code> command (used to boot a master node) instead of the base
+command. You can use this to configure features that power users might be
+interested in, such as configuring the heartbeat interval or Swarm&rsquo;s willingness
+to over-commit resources.</p>
+
+<p>If you&rsquo;re not sure how to configure these options, it is best to not specify
+configuration at all. Docker Machine will choose sensible defaults for you and
+you won&rsquo;t have to worry about it.</p>
+
+<p>Example create:</p>
+
+<pre><code>$ docker-machine create -d virtualbox \
+    --swarm \
+    --swarm-master \
+    --swarm-discovery token://&lt;token&gt; \
+    --swarm-strategy binpack \
+    --swarm-opt heartbeat=5 \
+    upbeat
+</code></pre>
+
+<p>This will set the swarm scheduling strategy to &ldquo;binpack&rdquo; (pack in containers as
+tightly as possible per host instead of spreading them out), and the &ldquo;heartbeat&rdquo;
+interval to 5 seconds.</p>
+
+<h4 id="config">config</h4>
+
+<p>Show the Docker client configuration for a machine.</p>
+
+<pre><code>$ docker-machine config dev
+--tlsverify --tlscacert=&quot;/Users/ehazlett/.docker/machines/dev/ca.pem&quot; --tlscert=&quot;/Users/ehazlett/.docker/machines/dev/cert.pem&quot; --tlskey=&quot;/Users/ehazlett/.docker/machines/dev/key.pem&quot; -H tcp://192.168.99.103:2376
+</code></pre>
+
+<h4 id="env">env</h4>
+
+<p>Set environment variables to dictate that <code>docker</code> should run a command against
+a particular machine.</p>
+
+<p><code>docker-machine env machinename</code> will print out <code>export</code> commands which can be
+run in a subshell. Running <code>docker-machine env -u</code> will print <code>unset</code> commands
+which reverse this effect.</p>
+
+<pre><code>$ env | grep DOCKER
+$ eval &quot;$(docker-machine env dev)&quot;
+$ env | grep DOCKER
+DOCKER_HOST=tcp://192.168.99.101:2376
+DOCKER_CERT_PATH=/Users/nathanleclaire/.docker/machines/.client
+DOCKER_TLS_VERIFY=1
+DOCKER_MACHINE_NAME=dev
+$ # If you run a docker command, now it will run against that host.
+$ eval &quot;$(docker-machine env -u)&quot;
+$ env | grep DOCKER
+$ # The environment variables have been unset.
+</code></pre>
+
+<p>The output described above is intended for the shells <code>bash</code> and <code>zsh</code> (if
+you&rsquo;re not sure which shell you&rsquo;re using, there&rsquo;s a very good possibility that
+it&rsquo;s <code>bash</code>). However, these are not the only shells which Docker Machine
+supports.</p>
+
+<p>If you are using <code>fish</code> and the <code>SHELL</code> environment variable is correctly set to
+the path where <code>fish</code> is located, <code>docker-machine env name</code> will print out the
+values in the format which <code>fish</code> expects:</p>
+
+<pre><code>set -x DOCKER_TLS_VERIFY 1;
+set -x DOCKER_CERT_PATH &quot;/Users/nathanleclaire/.docker/machine/machines/overlay&quot;;
+set -x DOCKER_HOST tcp://192.168.99.102:2376;
+set -x DOCKER_MACHINE_NAME overlay
+# Run this command to configure your shell:
+# eval &quot;$(docker-machine env overlay)&quot;
+</code></pre>
+
+<p>If you are on Windows and using Powershell or <code>cmd.exe</code>, <code>docker-machine env</code>
+cannot detect your shell automatically, but it does have support for these
+shells. In order to use them, specify which shell you would like to print the
+options for using the <code>--shell</code> flag for <code>docker-machine env</code>.</p>
+
+<p>For Powershell:</p>
+
+<pre><code>$ docker-machine.exe env --shell powershell dev
+$Env:DOCKER_TLS_VERIFY = &quot;1&quot;
+$Env:DOCKER_HOST = &quot;tcp://192.168.99.101:2376&quot;
+$Env:DOCKER_CERT_PATH = &quot;C:\Users\captain\.docker\machine\machines\dev&quot;
+$Env:DOCKER_MACHINE_NAME = &quot;dev&quot;
+# Run this command to configure your shell:
+# docker-machine.exe env --shell=powershell | Invoke-Expression
+</code></pre>
+
+<p>For <code>cmd.exe</code>:</p>
+
+<pre><code>$ docker-machine.exe env --shell cmd dev
+set DOCKER_TLS_VERIFY=1
+set DOCKER_HOST=tcp://192.168.99.101:2376
+set DOCKER_CERT_PATH=C:\Users\captain\.docker\machine\machines\dev
+set DOCKER_MACHINE_NAME=dev
+# Run this command to configure your shell: copy and paste the above values into your command prompt
+</code></pre>
+
+<h4 id="inspect">inspect</h4>
+
+<pre><code>Usage: docker-machine inspect [OPTIONS] [arg...]
+
+Inspect information about a machine
+
+Description:
+   Argument is a machine name.
+
+Options:
+   --format, -f 	Format the output using the given go template.
+</code></pre>
+
+<p>By default, this will render information about a machine as JSON. If a format is
+specified, the given template will be executed for each result.</p>
+
+<p>Go&rsquo;s <a href="http://golang.org/pkg/text/template/">text/template</a> package
+describes all the details of the format.</p>
+
+<p>In addition to the <code>text/template</code> syntax, there are some additional functions,
+<code>json</code> and <code>prettyjson</code>, which can be used to format the output as JSON (documented below).</p>
+
+<h5 id="examples">Examples</h5>
+
+<p><strong>List all the details of a machine:</strong></p>
+
+<p>This is the default usage of <code>inspect</code>.</p>
+
+<pre><code>$ docker-machine inspect dev
+{
+    &quot;DriverName&quot;: &quot;virtualbox&quot;,
+    &quot;Driver&quot;: {
+        &quot;MachineName&quot;: &quot;docker-host-128be8d287b2028316c0ad5714b90bcfc11f998056f2f790f7c1f43f3d1e6eda&quot;,
+        &quot;SSHPort&quot;: 55834,
+        &quot;Memory&quot;: 1024,
+        &quot;DiskSize&quot;: 20000,
+        &quot;Boot2DockerURL&quot;: &quot;&quot;,
+        &quot;IPAddress&quot;: &quot;192.168.5.99&quot;
+    },
+    ...
+}
+</code></pre>
+
+<p><strong>Get a machine&rsquo;s IP address:</strong></p>
+
+<p>For the most part, you can pick out any field from the JSON in a fairly
+straightforward manner.</p>
+
+<pre><code>$ docker-machine inspect --format='{{.Driver.IPAddress}}' dev
+192.168.5.99
+</code></pre>
+
+<p><strong>Formatting details:</strong></p>
+
+<p>If you want a subset of information formatted as JSON, you can use the <code>json</code>
+function in the template.</p>
+
+<pre><code>$ docker-machine inspect --format='{{json .Driver}}' dev-fusion
+{&quot;Boot2DockerURL&quot;:&quot;&quot;,&quot;CPUS&quot;:8,&quot;CPUs&quot;:8,&quot;CaCertPath&quot;:&quot;/Users/hairyhenderson/.docker/machine/certs/ca.pem&quot;,&quot;DiskSize&quot;:20000,&quot;IPAddress&quot;:&quot;172.16.62.129&quot;,&quot;ISO&quot;:&quot;/Users/hairyhenderson/.docker/machine/machines/dev-fusion/boot2docker-1.5.0-GH747.iso&quot;,&quot;MachineName&quot;:&quot;dev-fusion&quot;,&quot;Memory&quot;:1024,&quot;PrivateKeyPath&quot;:&quot;/Users/hairyhenderson/.docker/machine/certs/ca-key.pem&quot;,&quot;SSHPort&quot;:22,&quot;SSHUser&quot;:&quot;docker&quot;,&quot;SwarmDiscovery&quot;:&quot;&quot;,&quot;SwarmHost&quot;:&quot;tcp://0.0.0.0:3376&quot;,&quot;SwarmMaster&quot;:false}
+</code></pre>
+
+<p>While this is usable, it&rsquo;s not very human-readable. For this reason, there is
+<code>prettyjson</code>:</p>
+
+<pre><code>$ docker-machine inspect --format='{{prettyjson .Driver}}' dev-fusion
+{
+    &quot;Boot2DockerURL&quot;: &quot;&quot;,
+    &quot;CPUS&quot;: 8,
+    &quot;CPUs&quot;: 8,
+    &quot;CaCertPath&quot;: &quot;/Users/hairyhenderson/.docker/machine/certs/ca.pem&quot;,
+    &quot;DiskSize&quot;: 20000,
+    &quot;IPAddress&quot;: &quot;172.16.62.129&quot;,
+    &quot;ISO&quot;: &quot;/Users/hairyhenderson/.docker/machine/machines/dev-fusion/boot2docker-1.5.0-GH747.iso&quot;,
+    &quot;MachineName&quot;: &quot;dev-fusion&quot;,
+    &quot;Memory&quot;: 1024,
+    &quot;PrivateKeyPath&quot;: &quot;/Users/hairyhenderson/.docker/machine/certs/ca-key.pem&quot;,
+    &quot;SSHPort&quot;: 22,
+    &quot;SSHUser&quot;: &quot;docker&quot;,
+    &quot;SwarmDiscovery&quot;: &quot;&quot;,
+    &quot;SwarmHost&quot;: &quot;tcp://0.0.0.0:3376&quot;,
+    &quot;SwarmMaster&quot;: false
+}
+</code></pre>
+
+<h4 id="help">help</h4>
+
+<p>Show help text.</p>
+
+<h4 id="ip">ip</h4>
+
+<p>Get the IP address of one or more machines.</p>
+
+<pre><code>$ docker-machine ip dev
+192.168.99.104
+$ docker-machine ip dev dev2
+192.168.99.104
+192.168.99.105
+</code></pre>
+
+<h4 id="kill">kill</h4>
+
+<p>Kill (abruptly force stop) a machine.</p>
+
+<pre><code>$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+dev    *        virtualbox   Running   tcp://192.168.99.104:2376
+$ docker-machine kill dev
+$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+dev    *        virtualbox   Stopped
+</code></pre>
+
+<h4 id="ls">ls</h4>
+
+<pre><code>Usage: docker-machine ls [OPTIONS] [arg...]
+
+List machines
+
+Options:
+
+   --quiet, -q					Enable quiet mode
+   --filter [--filter option --filter option]	Filter output based on conditions provided
+</code></pre>
+
+<h5 id="filtering">Filtering</h5>
+
+<p>The filtering flag (<code>-f</code> or <code>--filter)</code> format is a <code>key=value</code> pair. If there is more
+than one filter, then pass multiple flags (e.g. <code>--filter &quot;foo=bar&quot; --filter &quot;bif=baz&quot;</code>)</p>
+
+<p>The currently supported filters are:</p>
+
+<ul>
+<li>driver (driver name)</li>
+<li>swarm (swarm master&rsquo;s name)</li>
+<li>state (<code>Running|Paused|Saved|Stopped|Stopping|Starting|Error</code>)</li>
+</ul>
+
+<h5 id="examples-1">Examples</h5>
+
+<pre><code>$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+dev             virtualbox   Stopped
+foo0            virtualbox   Running   tcp://192.168.99.105:2376
+foo1            virtualbox   Running   tcp://192.168.99.106:2376
+foo2   *        virtualbox   Running   tcp://192.168.99.107:2376
+</code></pre>
+
+<pre><code>$ docker-machine ls --filter driver=virtualbox --filter state=Stopped
+NAME   ACTIVE   DRIVER       STATE     URL   SWARM
+dev             virtualbox   Stopped
+</code></pre>
+
+<h4 id="regenerate-certs">regenerate-certs</h4>
+
+<p>Regenerate TLS certificates and update the machine with new certs.</p>
+
+<pre><code>$ docker-machine regenerate-certs dev
+Regenerate TLS machine certs?  Warning: this is irreversible. (y/n): y
+Regenerating TLS certificates
+</code></pre>
+
+<h4 id="restart">restart</h4>
+
+<p>Restart a machine. Oftentimes this is equivalent to
+<code>docker-machine stop; machine start</code>.</p>
+
+<pre><code>$ docker-machine restart dev
+Waiting for VM to start...
+</code></pre>
+
+<h4 id="rm">rm</h4>
+
+<p>Remove a machine. This will remove the local reference as well as delete it
+on the cloud provider or virtualization management platform.</p>
+
+<pre><code>$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+foo0            virtualbox   Running   tcp://192.168.99.105:2376
+foo1            virtualbox   Running   tcp://192.168.99.106:2376
+$ docker-machine rm foo1
+$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+foo0            virtualbox   Running   tcp://192.168.99.105:2376
+</code></pre>
+
+<h4 id="ssh">ssh</h4>
+
+<p>Log into or run a command on a machine using SSH.</p>
+
+<p>To login, just run <code>docker-machine ssh machinename</code>:</p>
+
+<pre><code>$ docker-machine ssh dev
+                        ##        .
+                  ## ## ##       ==
+               ## ## ## ##      ===
+           /&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;\___/ ===
+      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+           \______ o          __/
+             \    \        __/
+              \____\______/
+ _                 _   ____     _            _
+| |__   ___   ___ | |_|___ \ __| | ___   ___| | _____ _ __
+| '_ \ / _ \ / _ \| __| __) / _` |/ _ \ / __| |/ / _ \ '__|
+| |_) | (_) | (_) | |_ / __/ (_| | (_) | (__|   &lt;  __/ |
+|_.__/ \___/ \___/ \__|_____\__,_|\___/ \___|_|\_\___|_|
+Boot2Docker version 1.4.0, build master : 69cf398 - Fri Dec 12 01:39:42 UTC 2014
+docker@boot2docker:~$ ls /
+Users/   dev/     home/    lib/     mnt/     proc/    run/     sys/     usr/
+bin/     etc/     init     linuxrc  opt/     root/    sbin/    tmp      var/
+</code></pre>
+
+<p>You can also specify commands to run remotely by appending them directly to the
+<code>docker-machine ssh</code> command, much like the regular <code>ssh</code> program works:</p>
+
+<pre><code>$ docker-machine ssh dev free
+             total         used         free       shared      buffers
+Mem:       1023556       183136       840420            0        30920
+-/+ buffers:             152216       871340
+Swap:      1212036            0      1212036
+</code></pre>
+
+<p>If the command you are appending has flags, e.g. <code>df -h</code>, you can use the flag
+parsing terminator (<code>--</code>) to avoid confusing the <code>docker-machine</code> client, which
+will otherwise interpret them as flags you intended to pass to it:</p>
+
+<pre><code>$ docker-machine ssh dev -- df -h
+Filesystem                Size      Used Available Use% Mounted on
+rootfs                  899.6M     85.9M    813.7M  10% /
+tmpfs                   899.6M     85.9M    813.7M  10% /
+tmpfs                   499.8M         0    499.8M   0% /dev/shm
+/dev/sda1                18.2G     58.2M     17.2G   0% /mnt/sda1
+cgroup                  499.8M         0    499.8M   0% /sys/fs/cgroup
+/dev/sda1                18.2G     58.2M     17.2G   0%
+/mnt/sda1/var/lib/docker/aufs
+</code></pre>
+
+<h5 id="different-types-of-ssh">Different types of SSH</h5>
+
+<p>When Docker Machine is invoked, it will check to see if you have the venerable
+<code>ssh</code> binary around locally and will attempt to use that for the SSH commands it
+needs to run, whether they are a part of an operation such as creation or have
+been requested by the user directly. If it does not find an external <code>ssh</code>
+binary locally, it will default to using a native Go implementation from
+<a href="https://godoc.org/golang.org/x/crypto/ssh">crypto/ssh</a>. This is useful in
+situations where you may not have access to traditional UNIX tools, such as if
+you are using Docker Machine on Windows without having msysgit installed
+alongside of it.</p>
+
+<p>In most situations, you will not have to worry about this implementation detail
+and Docker Machine will act sensibly out of the box. However, if you
+deliberately want to use the Go native version, you can do so with a global
+command line flag / environment variable like so:</p>
+
+<pre><code>$ docker-machine --native-ssh ssh dev
+</code></pre>
+
+<p>There are some variations in behavior between the two methods, so please report
+any issues or inconsistencies if you come across them.</p>
+
+<h4 id="scp">scp</h4>
+
+<p>Copy files from your local host to a machine, from machine to machine, or from a
+machine to your local host using <code>scp</code>.</p>
+
+<p>The notation is <code>machinename:/path/to/files</code> for the arguments; in the host
+machine&rsquo;s case, you don&rsquo;t have to specify the name, just the path.</p>
+
+<p>Consider the following example:</p>
+
+<pre><code>$ cat foo.txt
+cat: foo.txt: No such file or directory
+$ docker-machine ssh dev pwd
+/home/docker
+$ docker-machine ssh dev 'echo A file created remotely! &gt;foo.txt'
+$ docker-machine scp dev:/home/docker/foo.txt .
+foo.txt                                                           100%   28     0.0KB/s   00:00
+$ cat foo.txt
+A file created remotely!
+</code></pre>
+
+<p>Files are copied recursively by default (<code>scp</code>&rsquo;s <code>-r</code> flag).</p>
+
+<p>In the case of transferring files from machine to machine, they go through the
+local host&rsquo;s filesystem first (using <code>scp</code>&rsquo;s <code>-3</code> flag).</p>
+
+<h4 id="start">start</h4>
+
+<p>Start a machine.</p>
+
+<pre><code>$ docker-machine start dev
+Starting VM...
+</code></pre>
+
+<h4 id="stop">stop</h4>
+
+<p>Gracefully stop a machine.</p>
+
+<pre><code>$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+dev    *        virtualbox   Running   tcp://192.168.99.104:2376
+$ docker-machine stop dev
+$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+dev    *        virtualbox   Stopped
+</code></pre>
+
+<h4 id="upgrade">upgrade</h4>
+
+<p>Upgrade a machine to the latest version of Docker. If the machine uses Ubuntu
+as the underlying operating system, it will upgrade the package <code>lxc-docker</code>
+(our recommended install method). If the machine uses boot2docker, this command
+will download the latest boot2docker ISO and replace the machine&rsquo;s existing ISO
+with the latest.</p>
+
+<pre><code>$ docker-machine upgrade dev
+Stopping machine to do the upgrade...
+Upgrading machine dev...
+Downloading latest boot2docker release to /home/username/.docker/machine/cache/boot2docker.iso...
+Starting machine back up...
+Waiting for VM to start...
+</code></pre>
+
+<blockquote>
+<p><strong>Note</strong>: If you are using a custom boot2docker ISO specified using
+<code>--virtualbox-boot2docker-url</code> or an equivalent flag, running an upgrade on
+that machine will completely replace the specified ISO with the latest
+&ldquo;vanilla&rdquo; boot2docker ISO available.</p>
+</blockquote>
+
+<h4 id="url">url</h4>
+
+<p>Get the URL of a host</p>
+
+<pre><code>$ docker-machine url dev
+tcp://192.168.99.109:2376
+</code></pre>
+
+<h2 id="drivers">Drivers</h2>
+
+<h4 id="amazon-web-services">Amazon Web Services</h4>
+
+<p>Create machines on <a href="http://aws.amazon.com">Amazon Web Services</a>. You will need an Access Key ID, Secret Access Key and a VPC ID. To find the VPC ID, login to the AWS console and go to Services -&gt; VPC -&gt; Your VPCs. Select the one where you would like to launch the instance.</p>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--amazonec2-access-key</code>: <strong>required</strong> Your access key id for the Amazon Web Services API.</li>
+<li><code>--amazonec2-secret-key</code>: <strong>required</strong> Your secret access key for the Amazon Web Services API.</li>
+<li><code>--amazonec2-session-token</code>: Your session token for the Amazon Web Services API.</li>
+<li><code>--amazonec2-ami</code>: The AMI ID of the instance to use.</li>
+<li><code>--amazonec2-region</code>: The region to use when launching the instance.</li>
+<li><code>--amazonec2-vpc-id</code>: <strong>required</strong> Your VPC ID to launch the instance in.</li>
+<li><code>--amazonec2-zone</code>: The AWS zone to launch the instance in (i.e. one of a,b,c,d,e).</li>
+<li><code>--amazonec2-subnet-id</code>: AWS VPC subnet id.</li>
+<li><code>--amazonec2-security-group</code>: AWS VPC security group name.</li>
+<li><code>--amazonec2-instance-type</code>: The instance type to run.</li>
+<li><code>--amazonec2-root-size</code>: The root disk size of the instance (in GB).</li>
+<li><code>--amazonec2-iam-instance-profile</code>: The AWS IAM role name to be used as the instance profile.</li>
+<li><code>--amazonec2-ssh-user</code>: SSH Login user name.</li>
+<li><code>--amazonec2-request-spot-instance</code>: Use spot instances.</li>
+<li><code>--amazonec2-spot-price</code>: Spot instance bid price (in dollars). Require the <code>--amazonec2-request-spot-instance</code> flag.</li>
+<li><code>--amazonec2-private-address-only</code>: Use the private IP address only.</li>
+<li><code>--amazonec2-monitoring</code>: Enable CloudWatch Monitoring.</li>
+</ul>
+
+<p>By default, the Amazon EC2 driver will use a daily image of Ubuntu 14.04 LTS.</p>
+
+<table>
+<thead>
+<tr>
+<th>Region</th>
+<th>AMI ID</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>ap-northeast-1</td>
+<td>ami-f4b06cf4</td>
+</tr>
+
+<tr>
+<td>ap-southeast-1</td>
+<td>ami-b899a2ea</td>
+</tr>
+
+<tr>
+<td>ap-southeast-2</td>
+<td>ami-b59ce48f</td>
+</tr>
+
+<tr>
+<td>cn-north-1</td>
+<td>ami-da930ee3</td>
+</tr>
+
+<tr>
+<td>eu-west-1</td>
+<td>ami-45d8a532</td>
+</tr>
+
+<tr>
+<td>eu-central-1</td>
+<td>ami-b6e0d9ab</td>
+</tr>
+
+<tr>
+<td>sa-east-1</td>
+<td>ami-1199190c</td>
+</tr>
+
+<tr>
+<td>us-east-1</td>
+<td>ami-5f709f34</td>
+</tr>
+
+<tr>
+<td>us-west-1</td>
+<td>ami-615cb725</td>
+</tr>
+
+<tr>
+<td>us-west-2</td>
+<td>ami-7f675e4f</td>
+</tr>
+
+<tr>
+<td>us-gov-west-1</td>
+<td>ami-99a9c9ba</td>
+</tr>
+</tbody>
+</table>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong><code>--amazonec2-access-key</code></strong></td>
+<td><code>AWS_ACCESS_KEY_ID</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><strong><code>--amazonec2-secret-key</code></strong></td>
+<td><code>AWS_SECRET_ACCESS_KEY</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-session-token</code></td>
+<td><code>AWS_SESSION_TOKEN</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-ami</code></td>
+<td><code>AWS_AMI</code></td>
+<td><code>ami-5f709f34</code></td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-region</code></td>
+<td><code>AWS_DEFAULT_REGION</code></td>
+<td><code>us-east-1</code></td>
+</tr>
+
+<tr>
+<td><strong><code>--amazonec2-vpc-id</code></strong></td>
+<td><code>AWS_VPC_ID</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-zone</code></td>
+<td><code>AWS_ZONE</code></td>
+<td><code>a</code></td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-subnet-id</code></td>
+<td><code>AWS_SUBNET_ID</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-security-group</code></td>
+<td><code>AWS_SECURITY_GROUP</code></td>
+<td><code>docker-machine</code></td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-instance-type</code></td>
+<td><code>AWS_INSTANCE_TYPE</code></td>
+<td><code>t2.micro</code></td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-root-size</code></td>
+<td><code>AWS_ROOT_SIZE</code></td>
+<td><code>16</code></td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-iam-instance-profile</code></td>
+<td><code>AWS_INSTANCE_PROFILE</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-ssh-user</code></td>
+<td><code>AWS_SSH_USER</code></td>
+<td><code>ubuntu</code></td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-request-spot-instance</code></td>
+<td>-</td>
+<td><code>false</code></td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-spot-price</code></td>
+<td>-</td>
+<td><code>0.50</code></td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-private-address-only</code></td>
+<td>-</td>
+<td><code>false</code></td>
+</tr>
+
+<tr>
+<td><code>--amazonec2-monitoring</code></td>
+<td>-</td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="digital-ocean">Digital Ocean</h4>
+
+<p>Create Docker machines on <a href="https://www.digitalocean.com/">Digital Ocean</a>.</p>
+
+<p>You need to create a personal access token under &ldquo;Apps &amp; API&rdquo; in the Digital Ocean
+Control Panel and pass that to <code>docker-machine create</code> with the <code>--digitalocean-access-token</code> option.</p>
+
+<pre><code>$ docker-machine create --driver digitalocean --digitalocean-access-token=aa9399a2175a93b17b1c86c807e08d3fc4b79876545432a629602f61cf6ccd6b test-this
+</code></pre>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--digitalocean-access-token</code>: <strong>required</strong> Your personal access token for the Digital Ocean API.</li>
+<li><code>--digitalocean-image</code>: The name of the Digital Ocean image to use.</li>
+<li><code>--digitalocean-region</code>: The region to create the droplet in, see <a href="https://developers.digitalocean.com/documentation/v2/#regions">Regions API</a> for how to get a list.</li>
+<li><code>--digitalocean-size</code>: The size of the Digital Ocean droplet (larger than default options are of the form <code>2gb</code>).</li>
+<li><code>--digitalocean-ipv6</code>: Enable IPv6 support for the droplet.</li>
+<li><code>--digitalocean-private-networking</code>: Enable private networking support for the droplet.</li>
+<li><code>--digitalocean-backups</code>: Enable Digital Oceans backups for the droplet.</li>
+</ul>
+
+<p>The DigitalOcean driver will use <code>ubuntu-14-04-x64</code> as the default image.</p>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong><code>--digitalocean-access-token</code></strong></td>
+<td><code>DIGITALOCEAN_ACCESS_TOKEN</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--digitalocean-image</code></td>
+<td><code>DIGITALOCEAN_IMAGE</code></td>
+<td><code>docker</code></td>
+</tr>
+
+<tr>
+<td><code>--digitalocean-region</code></td>
+<td><code>DIGITALOCEAN_REGION</code></td>
+<td><code>nyc3</code></td>
+</tr>
+
+<tr>
+<td><code>--digitalocean-size</code></td>
+<td><code>DIGITALOCEAN_SIZE</code></td>
+<td><code>512mb</code></td>
+</tr>
+
+<tr>
+<td><code>--digitalocean-ipv6</code></td>
+<td><code>DIGITALOCEAN_IPV6</code></td>
+<td><code>false</code></td>
+</tr>
+
+<tr>
+<td><code>--digitalocean-private-networking</code></td>
+<td><code>DIGITALOCEAN_PRIVATE_NETWORKING</code></td>
+<td><code>false</code></td>
+</tr>
+
+<tr>
+<td><code>--digitalocean-backups</code></td>
+<td><code>DIGITALOCEAN_BACKUPS</code></td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="exoscale">exoscale</h4>
+
+<p>Create machines on <a href="https://www.exoscale.ch/">exoscale</a>.</p>
+
+<p>Get your API key and API secret key from <a href="https://portal.exoscale.ch/account/api">API details</a> and pass them to <code>machine create</code> with the <code>--exoscale-api-key</code> and <code>--exoscale-api-secret-key</code> options.</p>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--exoscale-url</code>: Your API endpoint.</li>
+<li><code>--exoscale-api-key</code>: <strong>required</strong> Your API key.</li>
+<li><code>--exoscale-api-secret-key</code>: <strong>required</strong> Your API secret key.</li>
+<li><code>--exoscale-instance-profile</code>: Instance profile.</li>
+<li><code>--exoscale-disk-size</code>: Disk size for the host in GB.</li>
+<li><code>--exoscale-image</code>: exoscale disk size. (10, 50, 100, 200, 400)</li>
+<li><code>--exoscale-security-group</code>: Security group. It will be created if it doesn&rsquo;t exist.</li>
+<li><code>--exoscale-availability-zone</code>: exoscale availability zone.</li>
+</ul>
+
+<p>If a custom security group is provided, you need to ensure that you allow TCP ports 22 and 2376 in an ingress rule. Moreover, if you want to use Swarm, also add TCP port 3376.</p>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--exoscale-url</code></td>
+<td><code>EXOSCALE_ENDPOINT</code></td>
+<td><code>https://api.exoscale.ch/compute</code></td>
+</tr>
+
+<tr>
+<td><strong><code>--exoscale-api-key</code></strong></td>
+<td><code>EXOSCALE_API_KEY</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><strong><code>--exoscale-api-secret-key</code></strong></td>
+<td><code>EXOSCALE_API_SECRET</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--exoscale-instance-profile</code></td>
+<td><code>EXOSCALE_INSTANCE_PROFILE</code></td>
+<td><code>small</code></td>
+</tr>
+
+<tr>
+<td><code>--exoscale-disk-size</code></td>
+<td><code>EXOSCALE_DISK_SIZE</code></td>
+<td><code>50</code></td>
+</tr>
+
+<tr>
+<td><code>--exoscale-image</code></td>
+<td><code>EXSOCALE_IMAGE</code></td>
+<td><code>ubuntu-14.04</code></td>
+</tr>
+
+<tr>
+<td><code>--exoscale-security-group</code></td>
+<td><code>EXOSCALE_SECURITY_GROUP</code></td>
+<td><code>docker-machine</code></td>
+</tr>
+
+<tr>
+<td><code>--exoscale-availability-zone</code></td>
+<td><code>EXOSCALE_AVAILABILITY_ZONE</code></td>
+<td><code>ch-gva-2</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="generic">Generic</h4>
+
+<p>Create machines using an existing VM/Host with SSH.</p>
+
+<p>This is useful if you are using a provider that Machine does not support
+directly or if you would like to import an existing host to allow Docker
+Machine to manage.</p>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--generic-ip-address</code>: <strong>required</strong> IP Address of host.</li>
+<li><code>--generic-ssh-user</code>: SSH username used to connect.</li>
+<li><code>--generic-ssh-key</code>: Path to the SSH user private key.</li>
+<li><code>--generic-ssh-port</code>: Port to use for SSH.</li>
+</ul>
+
+<blockquote>
+<p><strong>Note</strong>: You must use a base operating system supported by Machine.</p>
+</blockquote>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong><code>--generic-ip-address</code></strong></td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--generic-ssh-user</code></td>
+<td>-</td>
+<td><code>root</code></td>
+</tr>
+
+<tr>
+<td><code>--generic-ssh-key</code></td>
+<td>-</td>
+<td><code>$HOME/.ssh/id_rsa</code></td>
+</tr>
+
+<tr>
+<td><code>--generic-ssh-port</code></td>
+<td>-</td>
+<td><code>22</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="google-compute-engine">Google Compute Engine</h4>
+
+<p>Create machines on <a href="https://cloud.google.com/compute/">Google Compute Engine</a>. You will need a Google account and project name. See <a href="https://cloud.google.com/compute/docs/projects">https://cloud.google.com/compute/docs/projects</a> for details on projects.</p>
+
+<p>The Google driver uses oAuth. When creating the machine, you will have your browser opened to authorize. Once authorized, paste the code given in the prompt to launch the instance.</p>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--google-zone</code>: The zone to launch the instance.</li>
+<li><code>--google-machine-type</code>: The type of instance.</li>
+<li><code>--google-username</code>: The username to use for the instance.</li>
+<li><code>--google-project</code>: <strong>required</strong> The name of your project to use when launching the instance.</li>
+<li><code>--google-auth-token</code>: Your oAuth token for the Google Cloud API.</li>
+<li><code>--google-scopes</code>: The scopes for OAuth 2.0 to Access Google APIs. See <a href="https://cloud.google.com/storage/docs/authentication">Google Compute Engine Doc</a>.</li>
+<li><code>--google-disk-size</code>: The disk size of instance.</li>
+<li><code>--google-disk-type</code>: The disk type of instance.</li>
+</ul>
+
+<p>The GCE driver will use the <code>ubuntu-1404-trusty-v20150316</code> instance type unless otherwise specified.</p>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--google-zone</code></td>
+<td><code>GOOGLE_ZONE</code></td>
+<td><code>us-central1-a</code></td>
+</tr>
+
+<tr>
+<td><code>--google-machine-type</code></td>
+<td><code>GOOGLE_MACHINE_TYPE</code></td>
+<td><code>f1-micro</code></td>
+</tr>
+
+<tr>
+<td><code>--google-username</code></td>
+<td><code>GOOGLE_USERNAME</code></td>
+<td><code>docker-user</code></td>
+</tr>
+
+<tr>
+<td><strong><code>--google-project</code></strong></td>
+<td><code>GOOGLE_PROJECT</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--google-auth-token</code></td>
+<td><code>GOOGLE_AUTH_TOKEN</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--google-scopes</code></td>
+<td><code>GOOGLE_SCOPES</code></td>
+<td><code>devstorage.read_only,logging.write</code></td>
+</tr>
+
+<tr>
+<td><code>--google-disk-size</code></td>
+<td><code>GOOGLE_DISK_SIZE</code></td>
+<td><code>10</code></td>
+</tr>
+
+<tr>
+<td><code>--google-disk-type</code></td>
+<td><code>GOOGLE_DISK_TYPE</code></td>
+<td><code>pd-standard</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="ibm-softlayer">IBM Softlayer</h4>
+
+<p>Create machines on <a href="http://softlayer.com">Softlayer</a>.</p>
+
+<p>You need to generate an API key in the softlayer control panel.
+<a href="http://knowledgelayer.softlayer.com/procedure/retrieve-your-api-key">Retrieve your API key</a></p>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--softlayer-memory</code>: Memory for host in MB.</li>
+<li><code>--softlayer-disk-size</code>: A value of <code>0</code> will set the SoftLayer default.</li>
+<li><code>--softlayer-user</code>: <strong>required</strong> Username for your SoftLayer account, api key needs to match this user.</li>
+<li><code>--softlayer-api-key</code>: <strong>required</strong> API key for your user account.</li>
+<li><code>--softlayer-region</code>: SoftLayer region.</li>
+<li><code>--softlayer-cpu</code>: Number of CPUs for the machine.</li>
+<li><code>--softlayer-hostname</code>: Hostname for the machine.</li>
+<li><code>--softlayer-domain</code>: <strong>required</strong> Domain name for the machine.</li>
+<li><code>--softlayer-api-endpoint</code>: Change SoftLayer API endpoint.</li>
+<li><code>--softlayer-hourly-billing</code>: Specifies that hourly billing should be used (default), otherwise monthly billing is used.</li>
+<li><code>--softlayer-local-disk</code>: Use local machine disk instead of SoftLayer SAN.</li>
+<li><code>--softlayer-private-net-only</code>: Disable public networking.</li>
+<li><code>--softlayer-image</code>: OS Image to use.</li>
+<li><code>--softlayer-public-vlan-id</code>: Your public VLAN ID.</li>
+<li><code>--softlayer-private-vlan-id</code>: Your private VLAN ID.</li>
+</ul>
+
+<p>The SoftLayer driver will use <code>UBUNTU_LATEST</code> as the image type by default.</p>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--softlayer-memory</code></td>
+<td><code>SOFTLAYER_MEMORY</code></td>
+<td><code>1024</code></td>
+</tr>
+
+<tr>
+<td><code>--softlayer-disk-size</code></td>
+<td><code>SOFTLAYER_DISK_SIZE</code></td>
+<td><code>0</code></td>
+</tr>
+
+<tr>
+<td><strong><code>--softlayer-user</code></strong></td>
+<td><code>SOFTLAYER_USER</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><strong><code>--softlayer-api-key</code></strong></td>
+<td><code>SOFTLAYER_API_KEY</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--softlayer-region</code></td>
+<td><code>SOFTLAYER_REGION</code></td>
+<td><code>dal01</code></td>
+</tr>
+
+<tr>
+<td><code>--softlayer-cpu</code></td>
+<td><code>SOFTLAYER_CPU</code></td>
+<td><code>1</code></td>
+</tr>
+
+<tr>
+<td><code>--softlayer-hostname</code></td>
+<td><code>SOFTLAYER_HOSTNAME</code></td>
+<td><code>docker</code></td>
+</tr>
+
+<tr>
+<td><strong><code>--softlayer-domain</code></strong></td>
+<td><code>SOFTLAYER_DOMAIN</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--softlayer-api-endpoint</code></td>
+<td><code>SOFTLAYER_API_ENDPOINT</code></td>
+<td><code>api.softlayer.com/rest/v3</code></td>
+</tr>
+
+<tr>
+<td><code>--softlayer-hourly-billing</code></td>
+<td><code>SOFTLAYER_HOURLY_BILLING</code></td>
+<td><code>false</code></td>
+</tr>
+
+<tr>
+<td><code>--softlayer-local-disk</code></td>
+<td><code>SOFTLAYER_LOCAL_DISK</code></td>
+<td><code>false</code></td>
+</tr>
+
+<tr>
+<td><code>--softlayer-private-net-only</code></td>
+<td><code>SOFTLAYER_PRIVATE_NET</code></td>
+<td><code>false</code></td>
+</tr>
+
+<tr>
+<td><code>--softlayer-image</code></td>
+<td><code>SOFTLAYER_IMAGE</code></td>
+<td><code>UBUNTU_LATEST</code></td>
+</tr>
+
+<tr>
+<td><code>--softlayer-public-vlan-id</code></td>
+<td><code>SOFTLAYER_PUBLIC_VLAN_ID</code></td>
+<td><code>0</code></td>
+</tr>
+
+<tr>
+<td><code>--softlayer-private-vlan-id</code></td>
+<td><code>SOFTLAYER_PRIVATE_VLAN_ID</code></td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="microsoft-azure">Microsoft Azure</h4>
+
+<p>Create machines on <a href="http://azure.microsoft.com/">Microsoft Azure</a>.</p>
+
+<p>You need to create a subscription with a cert. Run these commands and answer the questions:</p>
+
+<pre><code>$ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+$ openssl pkcs12 -export -out mycert.pfx -in mycert.pem -name &quot;My Certificate&quot;
+$ openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer
+</code></pre>
+
+<p>Go to the Azure portal, go to the &ldquo;Settings&rdquo; page (you can find the link at the bottom of the
+left sidebar - you need to scroll), then &ldquo;Management Certificates&rdquo; and upload <code>mycert.cer</code>.</p>
+
+<p>Grab your subscription ID from the portal, then run <code>docker-machine create</code> with these details:</p>
+
+<pre><code>$ docker-machine create -d azure --azure-subscription-id=&quot;SUB_ID&quot; --azure-subscription-cert=&quot;mycert.pem&quot; A-VERY-UNIQUE-NAME
+</code></pre>
+
+<p>The Azure driver uses the <code>b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-14_04_1-LTS-amd64-server-20140927-en-us-30GB</code>
+image by default. Note, this image is not available in the Chinese regions. In China you should
+ specify <code>b549f4301d0b4295b8e76ceb65df47d4__Ubuntu-14_04_1-LTS-amd64-server-20140927-en-us-30GB</code>.</p>
+
+<p>You may need to <code>machine ssh</code> in to the virtual machine and reboot to ensure that the OS is updated.</p>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--azure-docker-port</code>: Port for Docker daemon.</li>
+<li><code>--azure-image</code>: Azure image name. See <a href="https://msdn.microsoft.com/en-us/library/dn135249%28v=nav.70%29.aspx">How to: Get the Windows Azure Image Name</a></li>
+<li><code>--azure-location</code>: Machine instance location.</li>
+<li><code>--azure-password</code>: Your Azure password.</li>
+<li><code>--azure-publish-settings-file</code>: Azure setting file. See <a href="https://msdn.microsoft.com/en-us/library/dn385850%28v=nav.70%29.aspx">How to: Download and Import Publish Settings and Subscription Information</a></li>
+<li><code>--azure-size</code>: Azure disk size.</li>
+<li><code>--azure-ssh-port</code>: Azure SSH port.</li>
+<li><code>--azure-subscription-id</code>: <strong>required</strong> Your Azure subscription ID (A GUID like <code>d255d8d7-5af0-4f5c-8a3e-1545044b861e</code>).</li>
+<li><code>--azure-subscription-cert</code>: <strong>required</strong> Your Azure subscription cert.</li>
+<li><code>--azure-username</code>: Azure login user name.</li>
+</ul>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--azure-docker-port</code></td>
+<td>-</td>
+<td><code>2376</code></td>
+</tr>
+
+<tr>
+<td><code>--azure-image</code></td>
+<td><code>AZURE_IMAGE</code></td>
+<td><em>Ubuntu 14.04 LTS x64</em></td>
+</tr>
+
+<tr>
+<td><code>--azure-location</code></td>
+<td><code>AZURE_LOCATION</code></td>
+<td><code>West US</code></td>
+</tr>
+
+<tr>
+<td><code>--azure-password</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--azure-publish-settings-file</code></td>
+<td><code>AZURE_PUBLISH_SETTINGS_FILE</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--azure-size</code></td>
+<td><code>AZURE_SIZE</code></td>
+<td><code>Small</code></td>
+</tr>
+
+<tr>
+<td><code>--azure-ssh-port</code></td>
+<td>-</td>
+<td><code>22</code></td>
+</tr>
+
+<tr>
+<td><strong><code>--azure-subscription-cert</code></strong></td>
+<td><code>AZURE_SUBSCRIPTION_CERT</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><strong><code>--azure-subscription-id</code></strong></td>
+<td><code>AZURE_SUBSCRIPTION_ID</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--azure-username</code></td>
+<td>-</td>
+<td><code>ubuntu</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="microsoft-hyper-v">Microsoft Hyper-V</h4>
+
+<p>Creates a Boot2Docker virtual machine locally on your Windows machine
+using Hyper-V. <a href="http://windows.microsoft.com/en-us/windows-8/hyper-v-run-virtual-machines">See here</a>
+for instructions to enable Hyper-V. You will need to use an
+Administrator level account to create and manage Hyper-V machines.</p>
+
+<blockquote>
+<p><strong>Note</strong>: You will need an existing virtual switch to use the
+driver. Hyper-V can share an external network interface (aka
+bridging), see <a href="http://blogs.technet.com/b/canitpro/archive/2014/03/11/step-by-step-enabling-hyper-v-for-use-on-windows-8-1.aspx">this blog</a>.
+If you would like to use NAT, create an internal network, and use
+<a href="http://www.packet6.com/allowing-windows-8-1-hyper-v-vm-to-work-with-wifi/">Internet Connection
+Sharing</a>.</p>
+</blockquote>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--hyper-v-boot2docker-url</code>: The URL of the boot2docker ISO. Defaults to the latest available version.</li>
+<li><code>--hyper-v-boot2docker-location</code>: Location of a local boot2docker iso to use. Overrides the URL option below.</li>
+<li><code>--hyper-v-virtual-switch</code>: Name of the virtual switch to use. Defaults to first found.</li>
+<li><code>--hyper-v-disk-size</code>: Size of disk for the host in MB.</li>
+<li><code>--hyper-v-memory</code>: Size of memory for the host in MB. By default, the machine is setup to use dynamic memory.</li>
+</ul>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--hyper-v-boot2docker-url</code></td>
+<td>-</td>
+<td><em>Latest boot2docker url</em></td>
+</tr>
+
+<tr>
+<td><code>--hyper-v-boot2docker-location</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--hyper-v-virtual-switch</code></td>
+<td>-</td>
+<td><em>first found</em></td>
+</tr>
+
+<tr>
+<td><code>--hyper-v-disk-size</code></td>
+<td>-</td>
+<td><code>20000</code></td>
+</tr>
+
+<tr>
+<td><code>--hyper-v-memory</code></td>
+<td>-</td>
+<td><code>1024</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="openstack">OpenStack</h4>
+
+<p>Create machines on <a href="http://www.openstack.org/software/">OpenStack</a></p>
+
+<p>Mandatory:</p>
+
+<ul>
+<li><code>--openstack-auth-url</code>: Keystone service base URL.</li>
+<li><code>--openstack-flavor-id</code> or <code>--openstack-flavor-name</code>: Identify the flavor that will be used for the machine.</li>
+<li><code>--openstack-image-id</code> or <code>--openstack-image-name</code>: Identify the image that will be used for the machine.</li>
+</ul>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--openstack-insecure</code>: Explicitly allow openstack driver to perform &ldquo;insecure&rdquo; SSL (https) requests. The server&rsquo;s certificate will not be verified against any certificate authorities. This option should be used with caution.</li>
+<li><code>--openstack-domain-name</code> or <code>--openstack-domain-id</code>: Domain to use for authentication (Keystone v3 only)</li>
+<li><code>--openstack-username</code>: User identifier to authenticate with.</li>
+<li><code>--openstack-password</code>: User password. It can be omitted if the standard environment variable <code>OS_PASSWORD</code> is set.</li>
+<li><code>--openstack-tenant-name</code> or <code>--openstack-tenant-id</code>: Identify the tenant in which the machine will be created.</li>
+<li><code>--openstack-region</code>: The region to work on. Can be omitted if there is only one region on the OpenStack.</li>
+<li><code>--openstack-availability-zone</code>: The availability zone in which to launch the server.</li>
+<li><code>--openstack-endpoint-type</code>: Endpoint type can be <code>internalURL</code>, <code>adminURL</code> on <code>publicURL</code>. If is a helper for the driver
+to choose the right URL in the OpenStack service catalog. If not provided the default id <code>publicURL</code></li>
+<li><code>--openstack-net-name</code> or <code>--openstack-net-id</code>: Identify the private network the machine will be connected on. If your OpenStack project project contains only one private network it will be use automatically.</li>
+<li><code>--openstack-sec-groups</code>: If security groups are available on your OpenStack you can specify a comma separated list
+to use for the machine (e.g. <code>secgrp001,secgrp002</code>).</li>
+<li><code>--openstack-floatingip-pool</code>: The IP pool that will be used to get a public IP can assign it to the machine. If there is an
+IP address already allocated but not assigned to any machine, this IP will be chosen and assigned to the machine. If
+there is no IP address already allocated a new IP will be allocated and assigned to the machine.</li>
+<li><code>--openstack-ssh-user</code>: The username to use for SSH into the machine. If not provided <code>root</code> will be used.</li>
+<li><code>--openstack-ssh-port</code>: Customize the SSH port if the SSH server on the machine does not listen on the default port.</li>
+</ul>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--openstack-auth-url</code></td>
+<td><code>OS_AUTH_URL</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-flavor-name</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-flavor-id</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-image-name</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-image-id</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-insecure</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-domain-name</code></td>
+<td><code>OS_DOMAIN_NAME</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-domain-id</code></td>
+<td><code>OS_DOMAIN_ID</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-username</code></td>
+<td><code>OS_USERNAME</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-password</code></td>
+<td><code>OS_PASSWORD</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-tenant-name</code></td>
+<td><code>OS_TENANT_NAME</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-tenant-id</code></td>
+<td><code>OS_TENANT_ID</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-region</code></td>
+<td><code>OS_REGION_NAME</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-availability-zone</code></td>
+<td><code>OS_AVAILABILITY_ZONE</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-endpoint-type</code></td>
+<td><code>OS_ENDPOINT_TYPE</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-net-name</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-net-id</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-sec-groups</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-floatingip-pool</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--openstack-ssh-user</code></td>
+<td>-</td>
+<td><code>root</code></td>
+</tr>
+
+<tr>
+<td><code>--openstack-ssh-port</code></td>
+<td>-</td>
+<td><code>22</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="rackspace">Rackspace</h4>
+
+<p>Create machines on <a href="http://www.rackspace.com/cloud">Rackspace cloud</a></p>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--rackspace-username</code>: <strong>required</strong> Rackspace account username.</li>
+<li><code>--rackspace-api-key</code>: <strong>required</strong> Rackspace API key.</li>
+<li><code>--rackspace-region</code>: <strong>required</strong> Rackspace region name.</li>
+<li><code>--rackspace-endpoint-type</code>: Rackspace endpoint type (<code>adminURL</code>, <code>internalURL</code> or the default <code>publicURL</code>).</li>
+<li><code>--rackspace-image-id</code>: Rackspace image ID. Default: Ubuntu 14.10 (Utopic Unicorn) (PVHVM).</li>
+<li><code>--rackspace-flavor-id</code>: Rackspace flavor ID. Default: General Purpose 1GB.</li>
+<li><code>--rackspace-ssh-user</code>: SSH user for the newly booted machine.</li>
+<li><code>--rackspace-ssh-port</code>: SSH port for the newly booted machine.</li>
+<li><code>--rackspace-docker-install</code>: Set if Docker has to be installed on the machine.</li>
+</ul>
+
+<p>The Rackspace driver will use <code>598a4282-f14b-4e50-af4c-b3e52749d9f9</code> (Ubuntu 14.04 LTS) by default.</p>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong><code>--rackspace-username</code></strong></td>
+<td><code>OS_USERNAME</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><strong><code>--rackspace-api-key</code></strong></td>
+<td><code>OS_API_KEY</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><strong><code>--rackspace-region</code></strong></td>
+<td><code>OS_REGION_NAME</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--rackspace-endpoint-type</code></td>
+<td><code>OS_ENDPOINT_TYPE</code></td>
+<td><code>publicURL</code></td>
+</tr>
+
+<tr>
+<td><code>--rackspace-image-id</code></td>
+<td>-</td>
+<td><code>598a4282-f14b-4e50-af4c-b3e52749d9f9</code></td>
+</tr>
+
+<tr>
+<td><code>--rackspace-flavor-id</code></td>
+<td><code>OS_FLAVOR_ID</code></td>
+<td><code>general1-1</code></td>
+</tr>
+
+<tr>
+<td><code>--rackspace-ssh-user</code></td>
+<td>-</td>
+<td><code>root</code></td>
+</tr>
+
+<tr>
+<td><code>--rackspace-ssh-port</code></td>
+<td>-</td>
+<td><code>22</code></td>
+</tr>
+
+<tr>
+<td><code>--rackspace-docker-install</code></td>
+<td>-</td>
+<td><code>true</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="oracle-virtualbox">Oracle VirtualBox</h4>
+
+<p>Create machines locally using <a href="https://www.virtualbox.org/">VirtualBox</a>.
+This driver requires VirtualBox to be installed on your host.</p>
+
+<pre><code>$ docker-machine create --driver=virtualbox vbox-test
+</code></pre>
+
+<p>You can create an entirely new machine or you can convert a Boot2Docker VM into
+a machine by importing the VM. To convert a Boot2Docker VM, you&rsquo;d use the following
+command:</p>
+
+<pre><code>$ docker-machine create -d virtualbox --virtualbox-import-boot2docker-vm boot2docker-vm b2d
+</code></pre>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--virtualbox-memory</code>: Size of memory for the host in MB.</li>
+<li><code>--virtualbox-cpu-count</code>: Number of CPUs to use to create the VM. Defaults to single CPU.</li>
+<li><code>--virtualbox-disk-size</code>: Size of disk for the host in MB.</li>
+<li><code>--virtualbox-boot2docker-url</code>: The URL of the boot2docker image. Defaults to the latest available version.</li>
+<li><code>--virtualbox-import-boot2docker-vm</code>: The name of a Boot2Docker VM to import.</li>
+<li><code>--virtualbox-hostonly-cidr</code>: The CIDR of the host only adapter.</li>
+</ul>
+
+<p>The <code>--virtualbox-boot2docker-url</code> flag takes a few different forms. By
+default, if no value is specified for this flag, Machine will check locally for
+a boot2docker ISO. If one is found, that will be used as the ISO for the
+created machine. If one is not found, the latest ISO release available on
+<a href="https://github.com/boot2docker/boot2docker">boot2docker/boot2docker</a> will be
+downloaded and stored locally for future use. Note that this means you must run
+<code>docker-machine upgrade</code> deliberately on a machine if you wish to update the &ldquo;cached&rdquo;
+boot2docker ISO.</p>
+
+<p>This is the default behavior (when <code>--virtualbox-boot2docker-url=&quot;&quot;</code>), but the
+option also supports specifying ISOs by the <code>http://</code> and <code>file://</code> protocols.
+<code>file://</code> will look at the path specified locally to locate the ISO: for
+instance, you could specify <code>--virtualbox-boot2docker-url
+file://$HOME/Downloads/rc.iso</code> to test out a release candidate ISO that you have
+downloaded already. You could also just get an ISO straight from the Internet
+using the <code>http://</code> form.</p>
+
+<p>To customize the host only adapter, you can use the <code>--virtualbox-hostonly-cidr</code>
+flag.  This will specify the host IP and Machine will calculate the VirtualBox
+DHCP server address (a random IP on the subnet between <code>.1</code> and <code>.25</code>) so
+it does not clash with the specified host IP.
+Machine will also specify the DHCP lower bound to <code>.100</code> and the upper bound
+to <code>.254</code>.  For example, a specified CIDR of <code>192.168.24.1/24</code> would have a
+DHCP server between <code>192.168.24.2-25</code>, a lower bound of <code>192.168.24.100</code> and
+upper bound of <code>192.168.24.254</code>.</p>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--virtualbox-memory</code></td>
+<td><code>VIRTUALBOX_MEMORY_SIZE</code></td>
+<td><code>1024</code></td>
+</tr>
+
+<tr>
+<td><code>--virtualbox-cpu-count</code></td>
+<td><code>VIRTUALBOX_CPU_COUNT</code></td>
+<td><code>1</code></td>
+</tr>
+
+<tr>
+<td><code>--virtualbox-disk-size</code></td>
+<td><code>VIRTUALBOX_DISK_SIZE</code></td>
+<td><code>20000</code></td>
+</tr>
+
+<tr>
+<td><code>--virtualbox-boot2docker-url</code></td>
+<td><code>VIRTUALBOX_BOOT2DOCKER_URL</code></td>
+<td><em>Latest boot2docker url</em></td>
+</tr>
+
+<tr>
+<td><code>--virtualbox-import-boot2docker-vm</code></td>
+<td>-</td>
+<td><code>boot2docker-vm</code></td>
+</tr>
+
+<tr>
+<td><code>--virtualbox-hostonly-cidr</code></td>
+<td><code>VIRTUALBOX_HOSTONLY_CIDR</code></td>
+<td><code>192.168.99.1/24</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="vmware-fusion">VMware Fusion</h4>
+
+<p>Creates machines locally on <a href="http://www.vmware.com/products/fusion">VMware Fusion</a>. Requires VMware Fusion to be installed.</p>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--vmwarefusion-boot2docker-url</code>: URL for boot2docker image.</li>
+<li><code>--vmwarefusion-cpu-count</code>: Number of CPUs for the machine (-1 to use the number of CPUs available)</li>
+<li><code>--vmwarefusion-disk-size</code>: Size of disk for host VM (in MB).</li>
+<li><code>--vmwarefusion-memory-size</code>: Size of memory for host VM (in MB).</li>
+</ul>
+
+<p>The VMware Fusion driver uses the latest boot2docker image.
+See <a href="https://github.com/frapposelli/boot2docker/tree/vmware-64bit">frapposelli/boot2docker</a></p>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--vmwarefusion-boot2docker-url</code></td>
+<td><code>FUSION_BOOT2DOCKER_URL</code></td>
+<td><em>Latest boot2docker url</em></td>
+</tr>
+
+<tr>
+<td><code>--vmwarefusion-cpu-count</code></td>
+<td><code>FUSION_CPU_COUNT</code></td>
+<td><code>1</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarefusion-disk-size</code></td>
+<td><code>FUSION_MEMORY_SIZE</code></td>
+<td><code>20000</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarefusion-memory-size</code></td>
+<td><code>FUSION_DISK_SIZE</code></td>
+<td><code>1024</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="vmware-vcloud-air">VMware vCloud Air</h4>
+
+<p>Creates machines on <a href="http://vcloud.vmware.com">vCloud Air</a> subscription service. You need an account within an existing subscription of vCloud Air VPC or Dedicated Cloud.</p>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--vmwarevcloudair-username</code>: <strong>required</strong> vCloud Air Username.</li>
+<li><code>--vmwarevcloudair-password</code>: <strong>required</strong> vCloud Air Password.</li>
+<li><code>--vmwarevcloudair-computeid</code>: Compute ID (if using Dedicated Cloud).</li>
+<li><code>--vmwarevcloudair-vdcid</code>: Virtual Data Center ID.</li>
+<li><code>--vmwarevcloudair-orgvdcnetwork</code>: Organization VDC Network to attach.</li>
+<li><code>--vmwarevcloudair-edgegateway</code>: Organization Edge Gateway.</li>
+<li><code>--vmwarevcloudair-publicip</code>: Org Public IP to use.</li>
+<li><code>--vmwarevcloudair-catalog</code>: Catalog.</li>
+<li><code>--vmwarevcloudair-catalogitem</code>: Catalog Item.</li>
+<li><code>--vmwarevcloudair-provision</code>: Install Docker binaries.</li>
+<li><code>--vmwarevcloudair-cpu-count</code>: VM CPU Count.</li>
+<li><code>--vmwarevcloudair-memory-size</code>: VM Memory Size in MB.</li>
+<li><code>--vmwarevcloudair-ssh-port</code>: SSH port.</li>
+<li><code>--vmwarevcloudair-docker-port</code>: Docker port.</li>
+</ul>
+
+<p>The VMware vCloud Air driver will use the <code>Ubuntu Server 12.04 LTS (amd64 20140927)</code> image by default.</p>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong><code>--vmwarevcloudair-username</code></strong></td>
+<td><code>VCLOUDAIR_USERNAME</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><strong><code>--vmwarevcloudair-password</code></strong></td>
+<td><code>VCLOUDAIR_PASSWORD</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--vmwarevcloudair-computeid</code></td>
+<td><code>VCLOUDAIR_COMPUTEID</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--vmwarevcloudair-vdcid</code></td>
+<td><code>VCLOUDAIR_VDCID</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--vmwarevcloudair-orgvdcnetwork</code></td>
+<td><code>VCLOUDAIR_ORGVDCNETWORK</code></td>
+<td><code>&lt;vdcid&gt;-default-routed</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarevcloudair-edgegateway</code></td>
+<td><code>VCLOUDAIR_EDGEGATEWAY</code></td>
+<td><code>&lt;vdcid&gt;</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarevcloudair-publicip</code></td>
+<td><code>VCLOUDAIR_PUBLICIP</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--vmwarevcloudair-catalog</code></td>
+<td><code>VCLOUDAIR_CATALOG</code></td>
+<td><code>Public Catalog</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarevcloudair-catalogitem</code></td>
+<td><code>VCLOUDAIR_CATALOGITEM</code></td>
+<td><code>Ubuntu Server 12.04 LTS (amd64 20140927)</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarevcloudair-provision</code></td>
+<td><code>VCLOUDAIR_PROVISION</code></td>
+<td><code>true</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarevcloudair-cpu-count</code></td>
+<td><code>VCLOUDAIR_CPU_COUNT</code></td>
+<td><code>1</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarevcloudair-memory-size</code></td>
+<td><code>VCLOUDAIR_MEMORY_SIZE</code></td>
+<td><code>2048</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarevcloudair-ssh-port</code></td>
+<td><code>VCLOUDAIR_SSH_PORT</code></td>
+<td><code>22</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarevcloudair-docker-port</code></td>
+<td><code>VCLOUDAIR_DOCKER_PORT</code></td>
+<td><code>2376</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="vmware-vsphere">VMware vSphere</h4>
+
+<p>Creates machines on a <a href="http://www.vmware.com/products/vsphere">VMware vSphere</a> Virtual Infrastructure. Requires a working vSphere (ESXi and optionally vCenter) installation. The vSphere driver depends on <a href="https://github.com/vmware/govmomi/tree/master/govc"><code>govc</code></a> (must be in path) and has been tested with <a href="https://github.com/vmware/govmomi/commit/c8486300bfe19427e4f3226e3b3eac067717ef17">vmware/govmomi@<code>c848630</code></a>.</p>
+
+<p>Options:</p>
+
+<ul>
+<li><code>--vmwarevsphere-cpu-count</code>: CPU number for Docker VM.</li>
+<li><code>--vmwarevsphere-memory-size</code>: Size of memory for Docker VM (in MB).</li>
+<li><code>--vmwarevsphere-boot2docker-url</code>: URL for boot2docker image.</li>
+<li><code>--vmwarevsphere-vcenter</code>: IP/hostname for vCenter (or ESXi if connecting directly to a single host).</li>
+<li><code>--vmwarevsphere-disk-size</code>: Size of disk for Docker VM (in MB).</li>
+<li><code>--vmwarevsphere-username</code>: <strong>required</strong> vSphere Username.</li>
+<li><code>--vmwarevsphere-password</code>: <strong>required</strong> vSphere Password.</li>
+<li><code>--vmwarevsphere-network</code>: Network where the Docker VM will be attached.</li>
+<li><code>--vmwarevsphere-datastore</code>: Datastore for Docker VM.</li>
+<li><code>--vmwarevsphere-datacenter</code>: Datacenter for Docker VM (must be set to <code>ha-datacenter</code> when connecting to a single host).</li>
+<li><code>--vmwarevsphere-pool</code>: Resource pool for Docker VM.</li>
+<li><code>--vmwarevsphere-compute-ip</code>: Compute host IP where the Docker VM will be instantiated.</li>
+</ul>
+
+<p>The VMware vSphere driver uses the latest boot2docker image.</p>
+
+<p>Environment variables and default values:</p>
+
+<table>
+<thead>
+<tr>
+<th>CLI option</th>
+<th>Environment variable</th>
+<th>Default</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--vmwarevsphere-cpu-count</code></td>
+<td><code>VSPHERE_CPU_COUNT</code></td>
+<td><code>2</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarevsphere-memory-size</code></td>
+<td><code>VSPHERE_MEMORY_SIZE</code></td>
+<td><code>2048</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarevsphere-disk-size</code></td>
+<td><code>VSPHERE_DISK_SIZE</code></td>
+<td><code>20000</code></td>
+</tr>
+
+<tr>
+<td><code>--vmwarevsphere-boot2docker-url</code></td>
+<td><code>VSPHERE_BOOT2DOCKER_URL</code></td>
+<td><em>Latest boot2docker url</em></td>
+</tr>
+
+<tr>
+<td><code>--vmwarevsphere-vcenter</code></td>
+<td><code>VSPHERE_VCENTER</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><strong><code>--vmwarevsphere-username</code></strong></td>
+<td><code>VSPHERE_USERNAME</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><strong><code>--vmwarevsphere-password</code></strong></td>
+<td><code>VSPHERE_PASSWORD</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--vmwarevsphere-network</code></td>
+<td><code>VSPHERE_NETWORK</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--vmwarevsphere-datastore</code></td>
+<td><code>VSPHERE_DATASTORE</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--vmwarevsphere-datacenter</code></td>
+<td><code>VSPHERE_DATACENTER</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--vmwarevsphere-pool</code></td>
+<td><code>VSPHERE_POOL</code></td>
+<td>-</td>
+</tr>
+
+<tr>
+<td><code>--vmwarevsphere-compute-ip</code></td>
+<td><code>VSPHERE_COMPUTE_IP</code></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="specify-a-base-operating-systems">Specify a base operating systems</h2>
+
+<p>The Machine provisioning system supports several base operating systems. For
+local providers such as VirtualBox, Fusion, Hyper-V, and so forth, the default
+base operating system is Boot2Docker. For cloud providers, the base operating
+system is the latest Ubuntu LTS the provider supports.</p>
+
+<table>
+<thead>
+<tr>
+<th>Operating System</th>
+<th>Version</th>
+<th>Notes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Boot2Docker</td>
+<td>1.5+</td>
+<td>default for local</td>
+</tr>
+
+<tr>
+<td>Ubuntu</td>
+<td>12.04+</td>
+<td>default for remote</td>
+</tr>
+
+<tr>
+<td>RancherOS</td>
+<td>0.3+</td>
+<td></td>
+</tr>
+
+<tr>
+<td>Debian</td>
+<td>8.0+</td>
+<td>experimental</td>
+</tr>
+
+<tr>
+<td>RedHat Enterprise Linux</td>
+<td>7.0+</td>
+<td>experimental</td>
+</tr>
+
+<tr>
+<td>CentOS</td>
+<td>7+</td>
+<td>experimental</td>
+</tr>
+
+<tr>
+<td>Fedora</td>
+<td>21+</td>
+<td>experimental</td>
+</tr>
+</tbody>
+</table>
+
+<p>To use a different base operating system on a remote provider, specify the
+provider&rsquo;s image flag and one of its available images. For example, to
+select a <code>debian-8-x64</code> image on DigitalOcean you would supply the following:</p>
+
+<pre><code>--digitalocean-image=debian-8-x64
+</code></pre>
+
+<p>If you change the base image for a provider, you may also need to change
+the SSH user. For example, the default Red Hat AMI on EC2 expects the
+SSH user to be <code>ec2-user</code>, so you would have to specify this with
+<code>--amazonec2-ssh-user ec2-user</code>.</p>
+
+        </article>
+		  </section>
+    </div>
+    <div id="toc" class="large-3 columns toc compact">
+     On this page:
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#docker-machine">Docker Machine</a>
+<ul>
+<li><a href="#getting-help">Getting help</a></li>
+<li><a href="#installation">Installation</a>
+<ul>
+<li><a href="#os-x-and-linux">OS X and Linux</a></li>
+<li><a href="#windows">Windows</a></li>
+</ul></li>
+<li><a href="#getting-started-with-docker-machine-using-a-local-vm">Getting started with Docker Machine using a local VM</a></li>
+<li><a href="#using-docker-machine-with-a-cloud-provider">Using Docker Machine with a cloud provider</a></li>
+<li><a href="#adding-a-host-without-a-driver">Adding a host without a driver</a></li>
+<li><a href="#using-docker-machine-with-docker-swarm">Using Docker Machine with Docker Swarm</a>
+<ul>
+<li><a href="#swarm-master">Swarm master</a></li>
+<li><a href="#swarm-nodes">Swarm nodes</a></li>
+</ul></li>
+<li><a href="#subcommands">Subcommands</a>
+<ul>
+<li>
+<ul>
+<li><a href="#active">active</a></li>
+<li><a href="#create">create</a>
+<ul>
+<li><a href="#filtering-create-flags-by-driver-in-the-help-text">Filtering create flags by driver in the help text</a></li>
+<li><a href="#specifying-configuration-options-for-the-created-docker-engine">Specifying configuration options for the created Docker engine</a></li>
+<li><a href="#specifying-docker-swarm-options-for-the-created-machine">Specifying Docker Swarm options for the created machine</a></li>
+</ul></li>
+<li><a href="#config">config</a></li>
+<li><a href="#env">env</a></li>
+<li><a href="#inspect">inspect</a>
+<ul>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+<li><a href="#help">help</a></li>
+<li><a href="#ip">ip</a></li>
+<li><a href="#kill">kill</a></li>
+<li><a href="#ls">ls</a>
+<ul>
+<li><a href="#filtering">Filtering</a></li>
+<li><a href="#examples-1">Examples</a></li>
+</ul></li>
+<li><a href="#regenerate-certs">regenerate-certs</a></li>
+<li><a href="#restart">restart</a></li>
+<li><a href="#rm">rm</a></li>
+<li><a href="#ssh">ssh</a>
+<ul>
+<li><a href="#different-types-of-ssh">Different types of SSH</a></li>
+</ul></li>
+<li><a href="#scp">scp</a></li>
+<li><a href="#start">start</a></li>
+<li><a href="#stop">stop</a></li>
+<li><a href="#upgrade">upgrade</a></li>
+<li><a href="#url">url</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#drivers">Drivers</a>
+<ul>
+<li>
+<ul>
+<li><a href="#amazon-web-services">Amazon Web Services</a></li>
+<li><a href="#digital-ocean">Digital Ocean</a></li>
+<li><a href="#exoscale">exoscale</a></li>
+<li><a href="#generic">Generic</a></li>
+<li><a href="#google-compute-engine">Google Compute Engine</a></li>
+<li><a href="#ibm-softlayer">IBM Softlayer</a></li>
+<li><a href="#microsoft-azure">Microsoft Azure</a></li>
+<li><a href="#microsoft-hyper-v">Microsoft Hyper-V</a></li>
+<li><a href="#openstack">OpenStack</a></li>
+<li><a href="#rackspace">Rackspace</a></li>
+<li><a href="#oracle-virtualbox">Oracle VirtualBox</a></li>
+<li><a href="#vmware-fusion">VMware Fusion</a></li>
+<li><a href="#vmware-vcloud-air">VMware vCloud Air</a></li>
+<li><a href="#vmware-vsphere">VMware vSphere</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#specify-a-base-operating-systems">Specify a base operating systems</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+<footer class="main-footer">
+  <div class="row">
+  </div>
+  <div class="row">
+  </div>
+  <div id="buildinfo">
+    Jul 8, 2015 at 6:45pm (PST)
+        BUILD_DATA
+   </div>
+</footer>
+<link rel="stylesheet" href="/highlight/styles/github.css">
+<script href="/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script href="/dist/assets/js/all.js"></script>
+<script>
+  $( 'nav li:has(ul)' ).doubleTapToGo();
+</script>
+<script>
+
+;(function ( $, window, document, undefined ) {
+
+    var pluginName = 'accordion',
+        defaults = {
+            transitionSpeed: 300,
+            transitionEasing: 'ease',
+            controlElement: '[data-control]',
+            contentElement: '[data-content]',
+            groupElement: '[data-accordion-group]',
+            singleOpen: true
+        };
+
+    function Accordion(element, options) {
+        this.element = element;
+        this.options = $.extend({}, defaults, options);
+        this._defaults = defaults;
+        this._name = pluginName;
+        this.init();
+    }
+
+    Accordion.prototype.init = function () {
+        var self = this,
+            opts = self.options;
+
+        var $accordion = $(self.element),
+            $controls = $accordion.find('> ' + opts.controlElement),
+            $content =  $accordion.find('> ' + opts.contentElement);
+
+        var accordionParentsQty = $accordion.parents('[data-accordion]').length,
+            accordionHasParent = accordionParentsQty > 0;
+
+        var closedCSS = { 'max-height': 0, 'overflow': 'hidden' };
+
+        var CSStransitions = supportsTransitions();
+
+        function debounce(func, threshold, execAsap) {
+            var timeout;
+
+            return function debounced() {
+                var obj = this,
+                    args = arguments;
+
+                function delayed() {
+                    if (!execAsap) func.apply(obj, args);
+                    timeout = null;
+                };
+
+                if (timeout) clearTimeout(timeout);
+                else if (execAsap) func.apply(obj, args);
+
+                timeout = setTimeout(delayed, threshold || 100);
+            };
+        }
+
+        function supportsTransitions() {
+            var b = document.body || document.documentElement,
+                s = b.style,
+                p = 'transition';
+
+            if (typeof s[p] == 'string') {
+                return true;
+            }
+
+            var v = ['Moz', 'webkit', 'Webkit', 'Khtml', 'O', 'ms'];
+
+            p = 'Transition';
+
+            for (var i=0; i<v.length; i++) {
+                if (typeof s[v[i] + p] == 'string') {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function requestAnimFrame(cb) {
+            if(window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame) {
+                return  requestAnimationFrame(cb) ||
+                        webkitRequestAnimationFrame(cb) ||
+                        mozRequestAnimationFrame(cb);
+            } else {
+                return setTimeout(cb, 1000 / 60);
+            }
+        }
+
+        function toggleTransition($el, remove) {
+            if(!remove) {
+                $content.css({
+                    '-webkit-transition': 'max-height ' + opts.transitionSpeed + 'ms ' + opts.transitionEasing,
+                    'transition': 'max-height ' + opts.transitionSpeed + 'ms ' + opts.transitionEasing
+                });
+            } else {
+                $content.css({
+                    '-webkit-transition': '',
+                    'transition': ''
+                });
+            }
+        }
+
+        function calculateHeight($el) {
+            var height = 0;
+
+            $el.children().each(function() {
+                height = height + $(this).outerHeight(true);
+            });
+
+            $el.data('oHeight', height);
+        }
+
+        function updateParentHeight($parentAccordion, $currentAccordion, qty, operation) {
+            var $content = $parentAccordion.filter('.open').find('> [data-content]'),
+                $childs = $content.find('[data-accordion].open > [data-content]'),
+                $matched;
+
+            if(!opts.singleOpen) {
+                $childs = $childs.not($currentAccordion.siblings('[data-accordion].open').find('> [data-content]'));
+            }
+
+            $matched = $content.add($childs);
+
+            if($parentAccordion.hasClass('open')) {
+                $matched.each(function() {
+                    var currentHeight = $(this).data('oHeight');
+
+                    switch (operation) {
+                        case '+':
+                            $(this).data('oHeight', currentHeight + qty);
+                            break;
+                        case '-':
+                            $(this).data('oHeight', currentHeight - qty);
+                            break;
+                        default:
+                            throw 'updateParentHeight method needs an operation';
+                    }
+
+                    $(this).css('max-height', $(this).data('oHeight'));
+                });
+            }
+        }
+
+        function refreshHeight($accordion) {
+            if($accordion.hasClass('open')) {
+                var $content = $accordion.find('> [data-content]'),
+                    $childs = $content.find('[data-accordion].open > [data-content]'),
+                    $matched = $content.add($childs);
+
+                calculateHeight($matched);
+
+                $matched.css('max-height', $matched.data('oHeight'));
+            }
+        }
+
+        function closeAccordion($accordion, $content) {
+            $accordion.trigger('accordion.close');
+            
+            if(CSStransitions) {
+                if(accordionHasParent) {
+                    var $parentAccordions = $accordion.parents('[data-accordion]');
+
+                    updateParentHeight($parentAccordions, $accordion, $content.data('oHeight'), '-');
+                }
+
+                $content.css(closedCSS);
+
+                $accordion.removeClass('open');
+            } else {
+                $content.css('max-height', $content.data('oHeight'));
+
+                $content.animate(closedCSS, opts.transitionSpeed);
+
+                $accordion.removeClass('open');
+            }
+        }
+
+        function openAccordion($accordion, $content) {
+            $accordion.trigger('accordion.open');
+            if(CSStransitions) {
+                toggleTransition($content);
+
+                if(accordionHasParent) {
+                    var $parentAccordions = $accordion.parents('[data-accordion]');
+
+                    updateParentHeight($parentAccordions, $accordion, $content.data('oHeight'), '+');
+                }
+
+                requestAnimFrame(function() {
+                    $content.css('max-height', $content.data('oHeight'));
+                });
+
+                $accordion.addClass('open');
+            } else {
+                $content.animate({
+                    'max-height': $content.data('oHeight')
+                }, opts.transitionSpeed, function() {
+                    $content.css({'max-height': 'none'});
+                });
+
+                $accordion.addClass('open');
+            }
+        }
+
+        function closeSiblingAccordions($accordion) {
+            var $accordionGroup = $accordion.closest(opts.groupElement);
+
+            var $siblings = $accordion.siblings('[data-accordion]').filter('.open'),
+                $siblingsChildren = $siblings.find('[data-accordion]').filter('.open');
+
+            var $otherAccordions = $siblings.add($siblingsChildren);
+
+            $otherAccordions.each(function() {
+                var $accordion = $(this),
+                    $content = $accordion.find(opts.contentElement);
+
+                closeAccordion($accordion, $content);
+            });
+
+            $otherAccordions.removeClass('open');
+        }
+
+        function toggleAccordion() {
+            var isAccordionGroup = (opts.singleOpen) ? $accordion.parents(opts.groupElement).length > 0 : false;
+
+            calculateHeight($content);
+
+            if(isAccordionGroup) {
+                closeSiblingAccordions($accordion);
+            }
+
+            if($accordion.hasClass('open')) {
+                closeAccordion($accordion, $content);
+            } else {
+                openAccordion($accordion, $content);
+            }
+        }
+
+        function addEventListeners() {
+            $controls.on('click', toggleAccordion);
+            
+            $controls.on('accordion.toggle', function() {
+                if(opts.singleOpen && $controls.length > 1) {
+                    return false;
+                }
+                
+                toggleAccordion();
+            });
+
+            $(window).on('resize', debounce(function() {
+                refreshHeight($accordion);
+            }));
+        }
+
+        function setup() {
+            $content.each(function() {
+                var $curr = $(this);
+
+                if($curr.css('max-height') != 0) {
+                    if(!$curr.closest('[data-accordion]').hasClass('open')) {
+                        $curr.css({ 'max-height': 0, 'overflow': 'hidden' });
+                    } else {
+                        toggleTransition($curr);
+                        calculateHeight($curr);
+
+                        $curr.css('max-height', $curr.data('oHeight'));
+                    }
+                }
+            });
+
+
+            if(!$accordion.attr('data-accordion')) {
+                $accordion.attr('data-accordion', '');
+                $accordion.find(opts.controlElement).attr('data-control', '');
+                $accordion.find(opts.contentElement).attr('data-content', '');
+            }
+        }
+
+        setup();
+        addEventListeners();
+    };
+
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName,
+                new Accordion( this, options ));
+            }
+        });
+    }
+
+})( jQuery, window, document );
+
+$(document).ready(function() {
+  $('#multiple [data-accordion]').accordion({
+    singleOpen: false
+  });
+});
+
+</script>
+
+
+  <noscript>
+  <iframe src="//www.googletagmanager.com/ns.html?id=GTM-PSVHG8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PSVHG8');
+</script>
+

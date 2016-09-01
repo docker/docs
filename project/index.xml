@@ -1,0 +1,3131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Docker Docs</title>
+    <link>http://localhost/project/</link>
+    <description>Recent content in Projects on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/project/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Advanced contributing</title>
+      <link>http://localhost/project/advanced-contributing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/advanced-contributing/</guid>
+      <description>
+
+&lt;h1 id=&#34;advanced-contributing&#34;&gt;Advanced contributing&lt;/h1&gt;
+
+&lt;p&gt;In this section, you learn about the more advanced contributions you can make.
+They are advanced because they have a more involved workflow or require greater
+programming experience. Don&amp;rsquo;t be scared off though, if you like to stretch and
+challenge yourself, this is the place for you.&lt;/p&gt;
+
+&lt;p&gt;This section gives generalized instructions for advanced contributions. You&amp;rsquo;ll
+read about the workflow but there are not specific descriptions of commands.
+Your goal should be to understand the processes described.&lt;/p&gt;
+
+&lt;p&gt;At this point, you should have read and worked through the earlier parts of
+the project contributor guide. You should also have
+&lt;a href=&#34;../make-a-contribution/&#34; target=&#34;_blank&#34;&gt; made at least one project contribution&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;refactor-or-cleanup-proposal&#34;&gt;Refactor or cleanup proposal&lt;/h2&gt;
+
+&lt;p&gt;A refactor or cleanup proposal changes Docker&amp;rsquo;s internal structure without
+altering the external behavior. To make this type of proposal:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Fork &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make your changes in a feature branch.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Sync and rebase with &lt;code&gt;master&lt;/code&gt; as you work.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the full test suite.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Submit your code through a pull request (PR).&lt;/p&gt;
+
+&lt;p&gt;The PR&amp;rsquo;s title should have the format:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cleanup:&lt;/strong&gt; &lt;em&gt;short title&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;If your changes required logic changes, note that in your request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Work through Docker&amp;rsquo;s review process until merge.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;design-proposal&#34;&gt;Design proposal&lt;/h2&gt;
+
+&lt;p&gt;A design proposal solves a problem or adds a feature to the Docker software.
+The process for submitting design proposals requires two pull requests, one
+for the design and one for the implementation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/proposal.png&#34; alt=&#34;Simple process&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The important thing to notice is that both the design pull request and the
+implementation pull request go through a review. In other words, there is
+considerable time commitment in a design proposal; so, you might want to pair
+with someone on design work.&lt;/p&gt;
+
+&lt;p&gt;The following provides greater detail on the process:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Come up with an idea.&lt;/p&gt;
+
+&lt;p&gt;Ideas usually come from limitations users feel working with a product. So,
+take some time to really use Docker. Try it on different platforms; explore
+how it works with different web applications. Go to some community events
+and find out what other users want.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review existing issues and proposals to make sure no other user is proposing a similar idea.&lt;/p&gt;
+
+&lt;p&gt;The design proposals are &lt;a
+href=&#34;https://github.com/docker/docker/pulls?q=is%3Aopen+is%3Apr+label%
+3Akind%2Fproposal&#34; target=&#34;_blank&#34;&gt;all online in our GitHub pull requests&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Talk to the community about your idea.&lt;/p&gt;
+
+&lt;p&gt;We have lots of &lt;a href=&#34;../get-help/&#34; target=&#34;_blank&#34;&gt;community forums&lt;/a&gt;
+where you can get feedback on your idea. Float your idea in a forum or two
+to get some commentary going on it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fork &lt;code&gt;docker/docker&lt;/code&gt; and clone the repo to your local host.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new Markdown file in the area you wish to change.&lt;/p&gt;
+
+&lt;p&gt;For example, if you want to redesign our daemon create a new file under the
+&lt;code&gt;daemon/&lt;/code&gt; folder.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Name the file descriptively, for example &lt;code&gt;redesign-daemon-proposal.md&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Write a proposal for your change into the file.&lt;/p&gt;
+
+&lt;p&gt;This is a Markdown file that describes your idea. Your proposal
+should include information like:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Why is this change needed or what are the use cases?&lt;/li&gt;
+&lt;li&gt;What are the requirements this change should meet?&lt;/li&gt;
+&lt;li&gt;What are some ways to design/implement this feature?&lt;/li&gt;
+&lt;li&gt;Which design/implementation do you think is best and why?&lt;/li&gt;
+&lt;li&gt;What are the risks or limitations of your proposal?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is your chance to convince people your idea is sound.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Submit your proposal in a pull request to &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The title should have the format:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Proposal:&lt;/strong&gt; &lt;em&gt;short title&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The body of the pull request should include a brief summary of your change
+and then say something like &amp;ldquo;&lt;em&gt;See the file for a complete description&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Refine your proposal through review.&lt;/p&gt;
+
+&lt;p&gt;The maintainers and the community review your proposal. You&amp;rsquo;ll need to
+answer questions and sometimes explain or defend your approach. This is
+chance for everyone to both teach and learn.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Pull request accepted.&lt;/p&gt;
+
+&lt;p&gt;Your request may also be rejected. Not every idea is a good fit for Docker.
+Let&amp;rsquo;s assume though your proposal succeeded.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Implement your idea.&lt;/p&gt;
+
+&lt;p&gt;Implementation uses all the standard practices of any contribution.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;fork &lt;code&gt;docker/docker&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;create a feature branch&lt;/li&gt;
+&lt;li&gt;sync frequently back to master&lt;/li&gt;
+&lt;li&gt;test as you go and full test before a PR&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you run into issues, the community is there to help.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;When you have a complete implementation, submit a pull request back to &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review and iterate on your code.&lt;/p&gt;
+
+&lt;p&gt;If you are making a large code change, you can expect greater scrutiny
+during this phase.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Acceptance and merge!&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;about-the-advanced-process&#34;&gt;About the advanced process&lt;/h2&gt;
+
+&lt;p&gt;Docker is a large project. Our core team gets a great many design proposals.
+Design proposal discussions can span days, weeks, and longer. The number of comments can reach the 100s.
+In that situation, following the discussion flow and the decisions reached is crucial.&lt;/p&gt;
+
+&lt;p&gt;Making a pull request with a design proposal simplifies this process:
+* you can leave comments on specific design proposal line
+* replies around line are easy to track
+* as a proposal changes and is updated, pages reset as line items resolve
+* Github maintains the entire history&lt;/p&gt;
+
+&lt;p&gt;While proposals in pull requests do not end up merged into a master repository, they provide a convenient tool for managing the design process.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Coding style checklist</title>
+      <link>http://localhost/project/coding-style/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/coding-style/</guid>
+      <description>
+
+&lt;h1 id=&#34;coding-style-checklist&#34;&gt;Coding style checklist&lt;/h1&gt;
+
+&lt;p&gt;This checklist summarizes the material you experienced working through &lt;a href=&#34;http://localhost/project/project/project/make-a-contribution&#34;&gt;make a
+code contribution&lt;/a&gt; and &lt;a href=&#34;http://localhost/project/project/project/advanced-contributing&#34;&gt;advanced
+contributing&lt;/a&gt;. The checklist applies to both
+program code and documentation code.&lt;/p&gt;
+
+&lt;h2 id=&#34;change-and-commit-code&#34;&gt;Change and commit code&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Fork the &lt;code&gt;docker/docker&lt;/code&gt; repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make changes on your fork in a feature branch. Name your branch &lt;code&gt;XXXX-something&lt;/code&gt;
+where &lt;code&gt;XXXX&lt;/code&gt; is the issue number you are working on.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run &lt;code&gt;gofmt -s -w file.go&lt;/code&gt; on each changed file before
+committing your changes. Most editors have plug-ins that do this automatically.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Update the documentation when creating or modifying features.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Commits that fix or close an issue should reference them in the commit message
+&lt;code&gt;Closes #XXXX&lt;/code&gt; or &lt;code&gt;Fixes #XXXX&lt;/code&gt;. Mentions help by automatically closing the
+issue on a merge.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;After every commit, run the test suite and ensure it is passing.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Sync and rebase frequently as you code to keep up with &lt;code&gt;docker&lt;/code&gt; master.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;git&lt;/code&gt; signature and make sure you sign each commit.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Do not add yourself to the &lt;code&gt;AUTHORS&lt;/code&gt; file. This file is autogenerated from the
+Git history.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;tests-and-testing&#34;&gt;Tests and testing&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Submit unit tests for your changes.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make use of the builtin Go test framework built.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use existing Docker test files (&lt;code&gt;name_test.go&lt;/code&gt;) for inspiration.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run &lt;a href=&#34;../test-and-docs&#34; target=&#34;_blank&#34;&gt;the full test suite&lt;/a&gt; on your
+branch before submitting a pull request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run &lt;code&gt;make docs&lt;/code&gt; to build the documentation and then check it locally.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use an &lt;a href=&#34;http://www.hemingwayapp.com&#34; target=&#34;_blank&#34;&gt;online grammar
+checker&lt;/a&gt; or similar to test you documentation changes for clarity,
+concision, and correctness.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;pull-requests&#34;&gt;Pull requests&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Sync and cleanly rebase on top of Docker&amp;rsquo;s &lt;code&gt;master&lt;/code&gt; without multiple branches
+mixed into the PR.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Before the pull request, squash your commits into logical units of work using
+&lt;code&gt;git rebase -i&lt;/code&gt; and &lt;code&gt;git push -f&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Include documentation changes in the same commit so that a revert would
+remove all traces of the feature or fix.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Reference each issue in your pull request description (&lt;code&gt;#XXXX&lt;/code&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;respond-to-pull-requests-reviews&#34;&gt;Respond to pull requests reviews&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Docker maintainers use LGTM (&lt;strong&gt;l&lt;/strong&gt;ooks-&lt;strong&gt;g&lt;/strong&gt;ood-&lt;strong&gt;t&lt;/strong&gt;o-&lt;strong&gt;m&lt;/strong&gt;e) in PR comments
+to indicate acceptance.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Code review comments may be added to your pull request. Discuss, then make
+the suggested modifications and push additional commits to your feature
+branch.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Incorporate changes on your feature branch and push to your fork. This
+automatically updates your open pull request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Post a comment after pushing to alert reviewers to PR changes; pushing a
+change does not send notifications.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;A change requires LGTMs from an absolute majority maintainers of an
+affected component. For example, if you change &lt;code&gt;docs/&lt;/code&gt; and &lt;code&gt;registry/&lt;/code&gt; code,
+an absolute majority of the &lt;code&gt;docs/&lt;/code&gt; and the &lt;code&gt;registry/&lt;/code&gt; maintainers must
+approve your PR.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;merges-after-pull-requests&#34;&gt;Merges after pull requests&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;After a merge, &lt;a href=&#34;https://master.dockerproject.org/&#34;&gt;a master build&lt;/a&gt; is
+available almost immediately.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you made a documentation change, you can see it at
+&lt;a href=&#34;http://docs.master.dockerproject.org/&#34;&gt;docs.master.dockerproject.org&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Configure Git for contributing</title>
+      <link>http://localhost/project/set-up-git/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/set-up-git/</guid>
+      <description>
+
+&lt;h1 id=&#34;configure-git-for-contributing&#34;&gt;Configure Git for contributing&lt;/h1&gt;
+
+&lt;p&gt;Work through this page to configure Git and a repository you&amp;rsquo;ll use throughout
+the Contributor Guide. The work you do further in the guide, depends on the work
+you do here.&lt;/p&gt;
+
+&lt;h2 id=&#34;fork-and-clone-the-docker-code&#34;&gt;Fork and clone the Docker code&lt;/h2&gt;
+
+&lt;p&gt;Before contributing, you first fork the Docker code repository. A fork copies
+a repository at a particular point in time. GitHub tracks for you where a fork
+originates.&lt;/p&gt;
+
+&lt;p&gt;As you make contributions, you change your fork&amp;rsquo;s code. When you are ready,
+you make a pull request back to the original Docker repository. If you aren&amp;rsquo;t
+familiar with this workflow, don&amp;rsquo;t worry, this guide walks you through all the
+steps.&lt;/p&gt;
+
+&lt;p&gt;To fork and clone Docker:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a browser and log into GitHub with your account.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to the &lt;a href=&#34;https://github.com/docker/docker&#34;
+target=&#34;_blank&#34;&gt;docker/docker repository&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the &amp;ldquo;Fork&amp;rdquo; button in the upper right corner of the GitHub interface.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/fork_docker.png&#34; alt=&#34;Branch Signature&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;GitHub forks the repository to your GitHub account. The original
+&lt;code&gt;docker/docker&lt;/code&gt; repository becomes a new fork &lt;code&gt;YOUR_ACCOUNT/docker&lt;/code&gt; under
+your account.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy your fork&amp;rsquo;s clone URL from GitHub.&lt;/p&gt;
+
+&lt;p&gt;GitHub allows you to use HTTPS or SSH protocols for clones. You can use the
+&lt;code&gt;git&lt;/code&gt; command line or clients like Subversion to clone a repository.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/copy_url.png&#34; alt=&#34;Copy clone URL&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;This guide assume you are using the HTTPS protocol and the &lt;code&gt;git&lt;/code&gt; command
+line. If you are comfortable with SSH and some other tool, feel free to use
+that instead. You&amp;rsquo;ll need to convert what you see in the guide to what is
+appropriate to your tool.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open a terminal window on your local host and change to your home directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd ~
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In Windows, you&amp;rsquo;ll work in your Boot2Docker window instead of Powershell or
+  a &lt;code&gt;cmd&lt;/code&gt; window.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Create a &lt;code&gt;repos&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir repos
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change into your &lt;code&gt;repos&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd repos
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Clone the fork to your local host into a repository called &lt;code&gt;docker-fork&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/moxiegirl/docker.git docker-fork
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Naming your local repo &lt;code&gt;docker-fork&lt;/code&gt; should help make these instructions
+easier to follow; experienced coders don&amp;rsquo;t typically change the name.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change directory into your new &lt;code&gt;docker-fork&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Take a moment to familiarize yourself with the repository&amp;rsquo;s contents. List
+the contents.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;set-your-signature-and-an-upstream-remote&#34;&gt;Set your signature and an upstream remote&lt;/h2&gt;
+
+&lt;p&gt;When you contribute to Docker, you must certify you agree with the
+&lt;a href=&#34;http://developercertificate.org/&#34; target=&#34;_blank&#34;&gt;Developer Certificate of Origin&lt;/a&gt;.
+You indicate your agreement by signing your &lt;code&gt;git&lt;/code&gt; commits like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Signed-off-by: Pat Smith &amp;lt;pat.smith@email.com&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To create a signature, you configure your username and email address in Git.
+You can set these globally or locally on just your &lt;code&gt;docker-fork&lt;/code&gt; repository.
+You must sign with your real name. We don&amp;rsquo;t accept anonymous contributions or
+contributions through pseudonyms.&lt;/p&gt;
+
+&lt;p&gt;As you change code in your fork, you&amp;rsquo;ll want to keep it in sync with the changes
+others make in the &lt;code&gt;docker/docker&lt;/code&gt; repository. To make syncing easier, you&amp;rsquo;ll
+also add a &lt;em&gt;remote&lt;/em&gt; called &lt;code&gt;upstream&lt;/code&gt; that points to &lt;code&gt;docker/docker&lt;/code&gt;. A remote
+is just another project version hosted on the internet or network.&lt;/p&gt;
+
+&lt;p&gt;To configure your username, email, and add a remote:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Change to the root of your &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;user.name&lt;/code&gt; for the repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local user.name &amp;quot;FirstName LastName&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;user.email&lt;/code&gt; for the repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local user.email &amp;quot;emailname@mycompany.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your local repo to track changes upstream, on the &lt;code&gt;docker&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote add upstream https://github.com/docker/docker.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check the result in your &lt;code&gt;git&lt;/code&gt; configuration.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local -l
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/moxiegirl/docker.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+user.name=Mary Anthony
+user.email=mary@docker.com
+remote.upstream.url=https://github.com/docker/docker.git
+remote.upstream.fetch=+refs/heads/*:refs/remotes/upstream/*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To list just the remotes use:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote -v
+origin  https://github.com/moxiegirl/docker.git (fetch)
+origin  https://github.com/moxiegirl/docker.git (push)
+upstream    https://github.com/docker/docker.git (fetch)
+upstream    https://github.com/docker/docker.git (push)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;create-and-push-a-branch&#34;&gt;Create and push a branch&lt;/h2&gt;
+
+&lt;p&gt;As you change code in your fork, make your changes on a repository branch.
+The branch name should reflect what you are working on. In this section, you
+create a branch, make a change, and push it up to your fork.&lt;/p&gt;
+
+&lt;p&gt;This branch is just for testing your config for this guide. The changes are part
+of a dry run, so the branch name will be dry-run-test. To create and push
+the branch to your fork on GitHub:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a terminal and go to the root of your &lt;code&gt;docker-fork&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a &lt;code&gt;dry-run-test&lt;/code&gt; branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git checkout -b dry-run-test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command creates the branch and switches the repository to it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify you are in your new branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git branch
+* dry-run-test
+  master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The current branch has an * (asterisk) marker. So, these results shows you
+are on the right branch.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a &lt;code&gt;TEST.md&lt;/code&gt; file in the repository&amp;rsquo;s root.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ touch TEST.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Edit the file and add your email and location.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/contributor-edit.png&#34; alt=&#34;Add your information&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;You can use any text editor you are comfortable with.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Save and close the file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check the status of your branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git status
+On branch dry-run-test
+Untracked files:
+  (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to include in what will be committed)
+
+
+    TEST.md
+
+
+nothing added to commit but untracked files present (use &amp;quot;git add&amp;quot; to track)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You&amp;rsquo;ve only changed the one file. It is untracked so far by git.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add your file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git add TEST.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That is the only &lt;em&gt;staged&lt;/em&gt; file. Stage is fancy word for work that Git is
+tracking.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Sign and commit your change.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git commit -s -m &amp;quot;Making a dry run test.&amp;quot;
+[dry-run-test 6e728fb] Making a dry run test
+ 1 file changed, 1 insertion(+)
+ create mode 100644 TEST.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Commit messages should have a short summary sentence of no more than 50
+characters. Optionally, you can also include a more detailed explanation
+after the summary. Separate the summary from any explanation with an empty
+line.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Push your changes to GitHub.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git push --set-upstream origin dry-run-test
+Username for &#39;https://github.com&#39;: moxiegirl
+Password for &#39;https://moxiegirl@github.com&#39;: 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Git prompts you for your GitHub username and password. Then, the command
+returns a result.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Counting objects: 13, done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 320 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To https://github.com/moxiegirl/docker.git
+ * [new branch]      dry-run-test -&amp;gt; dry-run-test
+Branch dry-run-test set up to track remote branch dry-run-test from origin.
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open your browser to Github.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Navigate to your Docker fork.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure the &lt;code&gt;dry-run-test&lt;/code&gt; branch exists, that it has your commit, and the
+commit is signed.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/branch-sig.png&#34; alt=&#34;Branch Signature&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;Congratulations, you have finished configuring both your local host environment
+and Git for contributing. In the next section you&amp;rsquo;ll &lt;a href=&#34;http://localhost/project/project/project/set-up-dev-env/&#34;&gt;learn how to set up and
+work in a Docker development container&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Create a pull request (PR)</title>
+      <link>http://localhost/project/create-pr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/create-pr/</guid>
+      <description>
+
+&lt;h1 id=&#34;create-a-pull-request-pr&#34;&gt;Create a pull request (PR)&lt;/h1&gt;
+
+&lt;p&gt;A pull request (PR) sends your changes to the Docker maintainers for review. You
+create a pull request on GitHub. A pull request &amp;ldquo;pulls&amp;rdquo; changes from your forked
+repository into the &lt;code&gt;docker/docker&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;p&gt;You can see &lt;a href=&#34;https://github.com/docker/docker/pulls&#34; target=&#34;_blank&#34;&gt;the
+list of active pull requests to Docker&lt;/a&gt; on GitHub.&lt;/p&gt;
+
+&lt;h2 id=&#34;check-your-work&#34;&gt;Check your work&lt;/h2&gt;
+
+&lt;p&gt;Before you create a pull request, check your work.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;In a terminal window, go to the root of your &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd ~/repos/docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Checkout your feature branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git checkout 11038-fix-rhel-link
+Switched to branch &#39;11038-fix-rhel-link&#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the full test suite on your branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ make test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All the tests should pass. If they don&amp;rsquo;t, find out why and correct the
+situation.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Optionally, if modified the documentation, build the documentation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ make docs
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Commit and push any changes that result from your checks.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;rebase-your-branch&#34;&gt;Rebase your branch&lt;/h2&gt;
+
+&lt;p&gt;Always rebase and squash your commits before making a pull request.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Checkout your feature branch in your local &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;p&gt;This is the branch associated with your request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fetch any last minute changes from &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git fetch upstream master
+From github.com:docker/docker
+ * branch            master     -&amp;gt; FETCH_HEAD
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start an interactive rebase.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git rebase -i upstream/master
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rebase opens an editor with a list of commits.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pick 1a79f55 Tweak some of the other text for grammar
+pick 53e4983 Fix a link
+pick 3ce07bb Add a new line about RHEL
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Replace the &lt;code&gt;pick&lt;/code&gt; keyword with &lt;code&gt;squash&lt;/code&gt; on all but the first commit.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pick 1a79f55 Tweak some of the other text for grammar
+squash 53e4983 Fix a link
+squash 3ce07bb Add a new line about RHEL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After you save the changes and quit from the editor, git starts
+the rebase, reporting the progress along the way. Sometimes
+your changes can conflict with the work of others. If git
+encounters a conflict, it stops the rebase, and prints guidance
+for how to correct the conflict.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Edit and save your commit message.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git commit -s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure your message includes &lt;a href=&#34;../set-up-git&#34; target=&#34;_blank&#34;&gt;your signature&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Force push any changes to your fork on GitHub.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git push -f origin 11038-fix-rhel-link
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;create-a-pr-on-github&#34;&gt;Create a PR on GitHub&lt;/h2&gt;
+
+&lt;p&gt;You create and manage PRs on GitHub:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open your browser to your fork on GitHub.&lt;/p&gt;
+
+&lt;p&gt;You should see the latest activity from your branch.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/latest_commits.png&#34; alt=&#34;Latest commits&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &amp;ldquo;Compare &amp;amp; pull request.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;The system displays the pull request dialog.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/to_from_pr.png&#34; alt=&#34;PR dialog&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The pull request compares your changes to the &lt;code&gt;master&lt;/code&gt; branch on the
+&lt;code&gt;docker/docker&lt;/code&gt; repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Edit the dialog&amp;rsquo;s description and add a reference to the issue you are fixing.&lt;/p&gt;
+
+&lt;p&gt;GitHub helps you out by searching for the issue as you type.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/fixes_num.png&#34; alt=&#34;Fixes issue&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Scroll down and verify the PR contains the commits and changes you expect.&lt;/p&gt;
+
+&lt;p&gt;For example, is the file count correct? Are the changes in the files what
+you expect?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/commits_expected.png&#34; alt=&#34;Commits&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &amp;ldquo;Create pull request&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;The system creates the request and opens it for you in the &lt;code&gt;docker/docker&lt;/code&gt;
+repository.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/pull_request_made.png&#34; alt=&#34;Pull request made&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;Congratulations, you&amp;rsquo;ve created your first pull request to Docker. The next
+step is for you learn how to &lt;a href=&#34;http://localhost/project/project/project/review-pr/&#34;&gt;participate in your PR&amp;rsquo;s
+review&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Find and claim an issue</title>
+      <link>http://localhost/project/find-an-issue/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/find-an-issue/</guid>
+      <description>
+
+&lt;p&gt;&lt;style type=&#34;text/css&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;/* GitHub label styles */
+.gh-label {
+    display: inline-block;
+    padding: 3px 4px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    border-radius: 2px;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.12);
+}&lt;/p&gt;
+
+&lt;p&gt;/* Experience */
+.gh-label.beginner  { background-color: #B5E0B5; color: #333333; }
+.gh-label.expert  { background-color: #599898; color: #ffffff; }
+.gh-label.master { background-color: #306481; color: #ffffff; }
+.gh-label.novice { background-color: #D6F2AC; color: #333333; }
+.gh-label.proficient { background-color: #8DC7A9; color: #333333; }&lt;/p&gt;
+
+&lt;p&gt;/* Kind */
+.gh-label.bug { background-color: #FF9DA4; color: #333333; }
+.gh-label.cleanup { background-color: #FFB7B3; color: #333333; }
+.gh-label.content { background-color: #CDD3C2; color: #333333; }
+.gh-label.feature { background-color: #B7BEB7; color: #333333; }
+.gh-label.graphics { background-color: #E1EFCB; color: #333333; }
+.gh-label.improvement { background-color: #EBD2BB; color: #333333; }
+.gh-label.proposal { background-color: #FFD9C0; color: #333333; }
+.gh-label.question { background-color: #EEF1D1; color: #333333; }
+.gh-label.usecase { background-color: #F0E4C2; color: #333333; }
+.gh-label.writing { background-color: #B5E9D5; color: #333333; }&lt;/p&gt;
+
+&lt;p&gt;&lt;/style&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;find-and-claim-an-issue&#34;&gt;Find and claim an issue&lt;/h1&gt;
+
+&lt;p&gt;On this page, you choose what you want to work on. As a contributor you can work
+on whatever you want. If you are new to contributing, you should start by
+working with our known issues.&lt;/p&gt;
+
+&lt;h2 id=&#34;understand-the-issue-types&#34;&gt;Understand the issue types&lt;/h2&gt;
+
+&lt;p&gt;An existing issue is something reported by a Docker user. As issues come in,
+our maintainers triage them. Triage is its own topic. For now, it is important
+for you to know that triage includes ranking issues according to difficulty.&lt;/p&gt;
+
+&lt;p&gt;Triaged issues have one of these labels:&lt;/p&gt;
+
+&lt;table class=&#34;tg&#34;&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;Level&lt;/td&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;Experience level guideline&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;&lt;strong class=&#34;gh-label beginner&#34;&gt;exp/beginner&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;You have made less than 10 contributions in your life time to any open source project.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;&lt;strong class=&#34;gh-label novice&#34;&gt;exp/novice&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;You have made more than 10 contributions to an open source project or at least 5 contributions to Docker.  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;&lt;strong class=&#34;gh-label proficient&#34;&gt;exp/proficient&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;You have made more than 5 contributions to Docker which amount to at least 200 code lines or 1000 documentation lines. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;&lt;strong class=&#34;gh-label expert&#34;&gt;exp/expert&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;You have made less than 20 commits to Docker which amount to 500-1000 code lines or 1000-3000 documentation lines. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;&lt;strong class=&#34;gh-label master&#34;&gt;exp/master&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;You have made more than 20 commits to Docker and greater than 1000 code lines or 3000 documentation lines.&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;As the table states, these labels are meant as guidelines. You might have
+written a whole plugin for Docker in a personal project and never contributed to
+Docker. With that kind of experience, you could take on an &lt;strong
+class=&#34;gh-label expert&#34;&gt;exp/expert&lt;/strong&gt; or &lt;strong class=&#34;gh-label
+master&#34;&gt;exp/master&lt;/strong&gt; level task.&lt;/p&gt;
+
+&lt;h2 id=&#34;claim-a-beginner-or-novice-issue&#34;&gt;Claim a beginner or novice issue&lt;/h2&gt;
+
+&lt;p&gt;In this section, you find and claim an open documentation lines issue.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Go to the &lt;code&gt;docker/docker&lt;/code&gt; &lt;a
+href=&#34;https://github.com/docker/docker&#34; target=&#34;_blank&#34;&gt;repository&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click on the &amp;ldquo;Issues&amp;rdquo; link.&lt;/p&gt;
+
+&lt;p&gt;A list of the open issues appears.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/issue_list.png&#34; alt=&#34;Open issues&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Look for the &lt;strong class=&#34;gh-label beginner&#34;&gt;exp/beginner&lt;/strong&gt; items on the list.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click on the &amp;ldquo;labels&amp;rdquo; dropdown and select  &lt;strong class=&#34;gh-label beginner&#34;&gt;exp/beginner&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The system filters to show only open &lt;strong class=&#34;gh-label beginner&#34;&gt;exp/beginner&lt;/strong&gt; issues.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open an issue that interests you.&lt;/p&gt;
+
+&lt;p&gt;The comments on the issues can tell you both the problem and the potential
+solution.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure that no other user has chosen to work on the issue.&lt;/p&gt;
+
+&lt;p&gt;We don&amp;rsquo;t allow external contributors to assign issues to themselves. So, you
+need to read the comments to find if a user claimed the issue by leaving a
+&lt;code&gt;#dibs&lt;/code&gt; comment on the issue.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;When you find an open issue that both interests you and is unclaimed, add a
+&lt;code&gt;#dibs&lt;/code&gt; comment.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/easy_issue.png&#34; alt=&#34;Easy issue&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;This example uses issue 11038. Your issue # will be different depending on
+what you claimed.  After a moment, Gordon the Docker bot, changes the issue
+status to claimed.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make a note of the issue number; you&amp;rsquo;ll need it later.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;sync-your-fork-and-create-a-new-branch&#34;&gt;Sync your fork and create a new branch&lt;/h2&gt;
+
+&lt;p&gt;If you have followed along in this guide, you forked the &lt;code&gt;docker/docker&lt;/code&gt;
+repository. Maybe that was an hour ago or a few days ago. In any case, before
+you start working on your issue, sync your repository with the upstream
+&lt;code&gt;docker/docker&lt;/code&gt; master. Syncing ensures your repository has the latest
+changes.&lt;/p&gt;
+
+&lt;p&gt;To sync your repository:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a terminal on your local host.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change directory to the &lt;code&gt;docker-fork&lt;/code&gt; root.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd ~/repos/docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Checkout the master branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git checkout master
+Switched to branch &#39;master&#39;
+Your branch is up-to-date with &#39;origin/master&#39;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Recall that &lt;code&gt;origin/master&lt;/code&gt; is a branch on your remote GitHub repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure you have the upstream remote &lt;code&gt;docker/docker&lt;/code&gt; by listing them.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote -v
+origin  https://github.com/moxiegirl/docker.git (fetch)
+origin  https://github.com/moxiegirl/docker.git (push)
+upstream    https://github.com/docker/docker.git (fetch)
+upstream    https://github.com/docker/docker.git (push)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the &lt;code&gt;upstream&lt;/code&gt; is missing, add it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote add upstream https://github.com/docker/docker.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fetch all the changes from the &lt;code&gt;upstream master&lt;/code&gt; branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git fetch upstream master
+remote: Counting objects: 141, done.
+remote: Compressing objects: 100% (29/29), done.
+remote: Total 141 (delta 52), reused 46 (delta 46), pack-reused 66
+Receiving objects: 100% (141/141), 112.43 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (79/79), done.
+From github.com:docker/docker
+ * branch            master     -&amp;gt; FETCH_HEAD
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command says get all the changes from the &lt;code&gt;master&lt;/code&gt; branch belonging to
+the &lt;code&gt;upstream&lt;/code&gt; remote.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rebase your local master with the &lt;code&gt;upstream/master&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git rebase upstream/master
+First, rewinding head to replay your work on top of it...
+Fast-forwarded master to upstream/master.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command applies all the commits from the upstream master to your local
+master.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check the status of your local branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git status
+On branch master
+Your branch is ahead of &#39;origin/master&#39; by 38 commits.
+  (use &amp;quot;git push&amp;quot; to publish your local commits)
+nothing to commit, working directory clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your local repository now has all the changes from the &lt;code&gt;upstream&lt;/code&gt; remote. You
+need to push the changes to your own remote fork which is &lt;code&gt;origin master&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Push the rebased master to &lt;code&gt;origin master&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git push origin master
+Username for &#39;https://github.com&#39;: moxiegirl
+Password for &#39;https://moxiegirl@github.com&#39;: 
+Counting objects: 223, done.
+Compressing objects: 100% (38/38), done.
+Writing objects: 100% (69/69), 8.76 KiB | 0 bytes/s, done.
+Total 69 (delta 53), reused 47 (delta 31)
+To https://github.com/moxiegirl/docker.git
+   8e107a9..5035fa1  master -&amp;gt; master
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new feature branch to work on your issue.&lt;/p&gt;
+
+&lt;p&gt;Your branch name should have the format &lt;code&gt;XXXX-descriptive&lt;/code&gt; where &lt;code&gt;XXXX&lt;/code&gt; is
+the issue number you are working on. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git checkout -b 11038-fix-rhel-link
+Switched to a new branch &#39;11038-fix-rhel-link&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your branch should be up-to-date with the &lt;code&gt;upstream/master&lt;/code&gt;. Why? Because you
+branched off a freshly synced master.  Let&amp;rsquo;s check this anyway in the next
+step.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rebase your branch from upstream/master.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git rebase upstream/master
+Current branch 11038-fix-rhel-link is up to date.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point, your local branch, your remote repository, and the Docker
+repository all have identical code. You are ready to make changes for your
+issue.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;At this point, you know what you want to work on and you have a branch to do
+your work in.  Go onto the next section to learn &lt;a href=&#34;http://localhost/project/project/project/work-issue/&#34;&gt;how to work on your
+changes&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Get the required software</title>
+      <link>http://localhost/project/software-required/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/software-required/</guid>
+      <description>
+
+&lt;h1 id=&#34;get-the-required-software-for-linux-or-os-x&#34;&gt;Get the required software for Linux or OS X&lt;/h1&gt;
+
+&lt;p&gt;This page explains how to get the software you need to use a Linux or OS X
+machine for Docker development. Before you begin contributing you must have:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a GitHub account&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You&amp;rsquo;ll notice that &lt;code&gt;go&lt;/code&gt;, the language that Docker is written in, is not listed.
+That&amp;rsquo;s because you don&amp;rsquo;t need it installed; Docker&amp;rsquo;s development environment
+provides it for you. You&amp;rsquo;ll learn more about the development environment later.&lt;/p&gt;
+
+&lt;h3 id=&#34;get-a-github-account&#34;&gt;Get a GitHub account&lt;/h3&gt;
+
+&lt;p&gt;To contribute to the Docker project, you will need a &lt;a
+href=&#34;https://github.com&#34; target=&#34;_blank&#34;&gt;GitHub account&lt;/a&gt;. A free account is
+fine. All the Docker project repositories are public and visible to everyone.&lt;/p&gt;
+
+&lt;p&gt;You should also have some experience using both the GitHub application and &lt;code&gt;git&lt;/code&gt;
+on the command line.&lt;/p&gt;
+
+&lt;h3 id=&#34;install-git&#34;&gt;Install git&lt;/h3&gt;
+
+&lt;p&gt;Install &lt;code&gt;git&lt;/code&gt; on your local system. You can check if &lt;code&gt;git&lt;/code&gt; is on already on your
+system and properly installed with the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git --version 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This documentation is written using &lt;code&gt;git&lt;/code&gt; version 2.2.2. Your version may be
+different depending on your OS.&lt;/p&gt;
+
+&lt;h3 id=&#34;install-make&#34;&gt;Install make&lt;/h3&gt;
+
+&lt;p&gt;Install &lt;code&gt;make&lt;/code&gt;. You can check if &lt;code&gt;make&lt;/code&gt; is on your system with the following
+command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ make -v 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This documentation is written using GNU Make 3.81. Your version may be different
+depending on your OS.&lt;/p&gt;
+
+&lt;h3 id=&#34;install-or-upgrade-docker&#34;&gt;Install or upgrade Docker&lt;/h3&gt;
+
+&lt;p&gt;If you haven&amp;rsquo;t already, install the Docker software using the
+&lt;a href=&#34;http://localhost/installation&#34; target=&#34;_blank&#34;&gt;instructions for your operating system&lt;/a&gt;.
+If you have an existing installation, check your version and make sure you have
+the latest Docker.&lt;/p&gt;
+
+&lt;p&gt;To check if &lt;code&gt;docker&lt;/code&gt; is already installed on Linux:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker --version
+Docker version 1.5.0, build a8a31ef
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On Mac OS X or Windows, you should have installed Boot2Docker which includes
+Docker. You&amp;rsquo;ll need to verify both Boot2Docker and then Docker. This
+documentation was written on OS X using the following versions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker version
+Boot2Docker-cli version: v1.5.0
+Git commit: ccd9032
+
+$ docker --version
+Docker version 1.5.0, build a8a31ef
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;linux-users-and-sudo&#34;&gt;Linux users and sudo&lt;/h2&gt;
+
+&lt;p&gt;This guide assumes you have added your user to the &lt;code&gt;docker&lt;/code&gt; group on your system.
+To check, list the group&amp;rsquo;s contents:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ getent group docker
+docker:x:999:ubuntu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the command returns no matches, you have two choices. You can preface this
+guide&amp;rsquo;s &lt;code&gt;docker&lt;/code&gt; commands with &lt;code&gt;sudo&lt;/code&gt; as you work. Alternatively, you can add
+your user to the &lt;code&gt;docker&lt;/code&gt; group as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo usermod -aG docker ubuntu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You must log out and log back in for this modification to take effect.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;In the next section, you&amp;rsquo;ll &lt;a href=&#34;http://localhost/project/project/project/set-up-git/&#34;&gt;learn how to set up and configure Git for
+contributing to Docker&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Participate in the PR review</title>
+      <link>http://localhost/project/review-pr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/review-pr/</guid>
+      <description>
+
+&lt;h1 id=&#34;participate-in-the-pr-review&#34;&gt;Participate in the PR review&lt;/h1&gt;
+
+&lt;p&gt;Creating a pull request is nearly the end of the contribution process. At this
+point, your code is reviewed both by our continuous integration (CI) systems and
+by our maintainers.&lt;/p&gt;
+
+&lt;p&gt;The CI system is an automated system. The maintainers are human beings that also
+work on Docker.  You need to understand and work with both the &amp;ldquo;bots&amp;rdquo; and the
+&amp;ldquo;beings&amp;rdquo; to review your contribution.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-we-process-your-review&#34;&gt;How we process your review&lt;/h2&gt;
+
+&lt;p&gt;First to review your pull request is Gordon. Gordon is fast. He checks your
+pull request (PR) for common problems like a missing signature. If Gordon finds a
+problem, he&amp;rsquo;ll send an email through your GitHub user account:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/gordon.jpeg&#34; alt=&#34;Gordon&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Our build bot system starts building your changes while Gordon sends any emails.&lt;/p&gt;
+
+&lt;p&gt;The build system double-checks your work by compiling your code with Docker&amp;rsquo;s master
+code. Building includes running the same tests you ran locally. If you forgot
+to run tests or missed something in fixing problems, the automated build is our
+safety check.&lt;/p&gt;
+
+&lt;p&gt;After Gordon and the bots, the &amp;ldquo;beings&amp;rdquo; review your work. Docker maintainers look
+at your pull request and comment on it. The shortest comment you might see is
+&lt;code&gt;LGTM&lt;/code&gt; which means &lt;strong&gt;l&lt;/strong&gt;ooks-&lt;strong&gt;g&lt;/strong&gt;ood-&lt;strong&gt;t&lt;/strong&gt;o-&lt;strong&gt;m&lt;/strong&gt;e. If you get an &lt;code&gt;LGTM&lt;/code&gt;, that
+is a good thing, you passed that review.&lt;/p&gt;
+
+&lt;p&gt;For complex changes, maintainers may ask you questions or ask you to change
+something about your submission. All maintainer comments on a PR go to the
+email address associated with your GitHub account. Any GitHub user who
+&amp;ldquo;participates&amp;rdquo; in a PR receives an email to. Participating means creating or
+commenting on a PR.&lt;/p&gt;
+
+&lt;p&gt;Our maintainers are very experienced Docker users and open source contributors.
+So, they value your time and will try to work efficiently with you by keeping
+their comments specific and brief. If they ask you to make a change, you&amp;rsquo;ll
+need to update your pull request with additional changes.&lt;/p&gt;
+
+&lt;h2 id=&#34;update-an-existing-pull-request&#34;&gt;Update an existing pull request&lt;/h2&gt;
+
+&lt;p&gt;To update your existing pull request:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Checkout the PR branch in your local &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;p&gt;This is the branch associated with your request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change one or more files and then stage your changes.&lt;/p&gt;
+
+&lt;p&gt;The command syntax is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git add &amp;lt;path_or_filename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Commit the change.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git commit --amend 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Git opens an editor containing your last commit message.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Adjust your last comment to reflect this new change.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Added a new sentence per Anaud&#39;s suggestion 
+
+
+Signed-off-by: Mary Anthony &amp;lt;mary@docker.com&amp;gt;
+
+
+# Please enter the commit message for your changes. Lines starting
+# with &#39;#&#39; will be ignored, and an empty message aborts the commit.
+# On branch 11038-fix-rhel-link
+# Your branch is up-to-date with &#39;origin/11038-fix-rhel-link&#39;.
+#
+# Changes to be committed:
+#       modified:   docs/installation/mac.md
+#       modified:   docs/installation/rhel.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Force push the change to your origin.&lt;/p&gt;
+
+&lt;p&gt;The command syntax is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git push -f origin &amp;lt;branch_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open your browser to your pull request on GitHub.&lt;/p&gt;
+
+&lt;p&gt;You should see your pull request now contains your newly pushed code.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add a comment to your pull request.&lt;/p&gt;
+
+&lt;p&gt;GitHub only notifies PR participants when you comment. For example, you can
+mention that you updated your PR. Your comment alerts the maintainers that
+you made an update.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;A change requires LGTMs from an absolute majority of an affected component&amp;rsquo;s
+maintainers. For example, if you change &lt;code&gt;docs/&lt;/code&gt; and &lt;code&gt;registry/&lt;/code&gt; code, an
+absolute majority of the &lt;code&gt;docs/&lt;/code&gt; and the &lt;code&gt;registry/&lt;/code&gt; maintainers must approve
+your PR. Once you get approval, we merge your pull request into Docker&amp;rsquo;s
+&lt;code&gt;master&lt;/code&gt; code branch.&lt;/p&gt;
+
+&lt;h2 id=&#34;after-the-merge&#34;&gt;After the merge&lt;/h2&gt;
+
+&lt;p&gt;It can take time to see a merged pull request in Docker&amp;rsquo;s official release.
+A master build is available almost immediately though. Docker builds and
+updates its development binaries after each merge to &lt;code&gt;master&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Browse to &lt;a href=&#34;https://master.dockerproject.org/&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;https://master.dockerproject.org/&#34;&gt;https://master.dockerproject.org/&lt;/a&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Look for the binary appropriate to your system.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Download and run the binary.&lt;/p&gt;
+
+&lt;p&gt;You might want to run the binary in a container though. This
+will keep your local host environment clean.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;View any documentation changes at &lt;a href=&#34;http://docs.master.dockerproject.org/&#34; target=&#34;_blank&#34;&gt;docs.master.dockerproject.org&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve verified everything merged, feel free to delete your feature branch
+from your fork. For information on how to do this,
+&lt;a href=&#34;https://help.github.com/articles/deleting-unused-branches/&#34; target=&#34;_blank&#34;&gt;
+see the GitHub help on deleting branches&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;At this point, you have completed all the basic tasks in our contributors guide.
+If you enjoyed contributing, let us know by completing another beginner
+issue or two. We really appreciate the help.&lt;/p&gt;
+
+&lt;p&gt;If you are very experienced and want to make a major change, go on to
+&lt;a href=&#34;http://localhost/project/project/project/advanced-contributing&#34;&gt;learn about advanced contributing&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>README first</title>
+      <link>http://localhost/project/who-written-for/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/who-written-for/</guid>
+      <description>
+
+&lt;h1 id=&#34;readme-first&#34;&gt;README first&lt;/h1&gt;
+
+&lt;p&gt;This section of the documentation contains a guide for Docker users who want to
+contribute code or documentation to the Docker project. As a community, we
+share rules of behavior and interaction. Make sure you are familiar with the &lt;a
+href=&#34;https://github.com/docker/docker/blob/master/CONTRIBUTING.md#docker-community-guidelines&#34;
+target=&#34;_blank&#34;&gt;community guidelines&lt;/a&gt; before continuing.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-and-what-you-can-contribute&#34;&gt;Where and what you can contribute&lt;/h2&gt;
+
+&lt;p&gt;The Docker project consists of not just one but several repositories on GitHub.
+So, in addition to the &lt;code&gt;docker/docker&lt;/code&gt; repository, there is the
+&lt;code&gt;docker/libcontainer&lt;/code&gt; repo, the &lt;code&gt;docker/machine&lt;/code&gt; repo, and several more.
+Contribute to any of these and you contribute to the Docker project.&lt;/p&gt;
+
+&lt;p&gt;Not all Docker repositories use the Go language. Also, each repository has its
+own focus area. So, if you are an experienced contributor, think about
+contributing to a Docker repository that has a language or a focus area you are
+familiar with.&lt;/p&gt;
+
+&lt;p&gt;If you are new to the open source community, to Docker, or to formal
+programming, you should start out contributing to the &lt;code&gt;docker/docker&lt;/code&gt;
+repository. Why? Because this guide is written for that repository specifically.&lt;/p&gt;
+
+&lt;p&gt;Finally, code or documentation isn&amp;rsquo;t the only way to contribute. You can report
+an issue, add to discussions in our community channel, write a blog post, or
+take a usability test. You can even propose your own type of contribution.
+Right now we don&amp;rsquo;t have a lot written about this yet, so just email
+&lt;a href=&#34;mailto:feedback@docker.com&#34;&gt;feedback@docker.com&lt;/a&gt; if this type of contributing interests you.&lt;/p&gt;
+
+&lt;h2 id=&#34;a-turtle-is-involved&#34;&gt;A turtle is involved&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/gordon.jpeg&#34; alt=&#34;Gordon&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Enough said.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-use-this-guide&#34;&gt;How to use this guide&lt;/h2&gt;
+
+&lt;p&gt;This is written for the distracted, the overworked, the sloppy reader with fair
+&lt;code&gt;git&lt;/code&gt; skills and a failing memory for the GitHub GUI. The guide attempts to
+explain how to use the Docker environment as precisely, predictably, and
+procedurally as possible.&lt;/p&gt;
+
+&lt;p&gt;Users who are new to the Docker development environment should start by setting
+up their environment. Then, they should try a simple code change. After that,
+you should find something to work on or propose at totally new change.&lt;/p&gt;
+
+&lt;p&gt;If you are a programming prodigy, you still may find this documentation useful.
+Please feel free to skim past information you find obvious or boring.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-get-started&#34;&gt;How to get started&lt;/h2&gt;
+
+&lt;p&gt;Start by &lt;a href=&#34;http://localhost/project/project/project/software-required/&#34;&gt;getting the software you need to contribute&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Run tests and test documentation</title>
+      <link>http://localhost/project/test-and-docs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/test-and-docs/</guid>
+      <description>
+
+&lt;h1 id=&#34;run-tests-and-test-documentation&#34;&gt;Run tests and test documentation&lt;/h1&gt;
+
+&lt;p&gt;Contributing includes testing your changes. If you change the Docker code, you
+may need to add a new test or modify an existing one. Your contribution could
+even be adding tests to Docker. For this reason, you need to know a little
+about Docker&amp;rsquo;s test infrastructure.&lt;/p&gt;
+
+&lt;p&gt;Many contributors contribute documentation only. Or, a contributor makes a code
+contribution that changes how Docker behaves and that change needs
+documentation. For these reasons, you also need to know how to build, view, and
+test the Docker documentation.&lt;/p&gt;
+
+&lt;p&gt;In this section, you run tests in the &lt;code&gt;dry-run-test&lt;/code&gt; branch of your Docker
+fork. If you have followed along in this guide, you already have this branch.
+If you don&amp;rsquo;t have this branch, you can create it or simply use another of your
+branches.&lt;/p&gt;
+
+&lt;h2 id=&#34;understand-testing-at-docker&#34;&gt;Understand testing at Docker&lt;/h2&gt;
+
+&lt;p&gt;Docker tests use the Go language&amp;rsquo;s test framework. In this framework, files
+whose names end in &lt;code&gt;_test.go&lt;/code&gt; contain test code; you&amp;rsquo;ll find test files like
+this throughout the Docker repo. Use these files for inspiration when writing
+your own tests. For information on Go&amp;rsquo;s test framework, see &lt;a
+href=&#34;http://golang.org/pkg/testing/&#34; target=&#34;_blank&#34;&gt;Go&amp;rsquo;s testing package
+documentation&lt;/a&gt; and the &lt;a href=&#34;http://golang.org/cmd/go/#hdr-Test_packages&#34;
+target=&#34;_blank&#34;&gt;go test help&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You are responsible for &lt;em&gt;unit testing&lt;/em&gt; your contribution when you add new or
+change existing Docker code. A unit test is a piece of code that invokes a
+single, small piece of code ( &lt;em&gt;unit of work&lt;/em&gt; ) to verify the unit works as
+expected.&lt;/p&gt;
+
+&lt;p&gt;Depending on your contribution, you may need to add &lt;em&gt;integration tests&lt;/em&gt;. These
+are tests that combine two or more work units into one component. These work
+units each have unit tests and then, together, integration tests that test the
+interface between the components. The &lt;code&gt;integration&lt;/code&gt; and &lt;code&gt;integration-cli&lt;/code&gt;
+directories in the Docker repository contain integration test code.&lt;/p&gt;
+
+&lt;p&gt;Testing is its own specialty. If you aren&amp;rsquo;t familiar with testing techniques,
+there is a lot of information available to you on the Web. For now, you should
+understand that, the Docker maintainers may ask you to write a new test or
+change an existing one.&lt;/p&gt;
+
+&lt;h3 id=&#34;run-tests-on-your-local-host&#34;&gt;Run tests on your local host&lt;/h3&gt;
+
+&lt;p&gt;Before submitting any code change, you should run the entire Docker test suite.
+The &lt;code&gt;Makefile&lt;/code&gt; contains a target for the entire test suite. The target&amp;rsquo;s name
+is simply &lt;code&gt;test&lt;/code&gt;. The make file contains several targets for testing:&lt;/p&gt;
+
+&lt;p&gt;&lt;style type=&#34;text/css&#34;&gt;
+.monospaced {font-family: Monaco, Consolas, &amp;ldquo;Lucida Console&amp;rdquo;, monospace !important;}
+&lt;/style&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Target&lt;/th&gt;
+    &lt;th&gt;What this target does&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;monospaced&#34;&gt;test&lt;/td&gt;
+    &lt;td&gt;Run all the tests.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;monospaced&#34;&gt;test-unit&lt;/td&gt;
+    &lt;td&gt;Run just the unit tests.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;monospaced&#34;&gt;test-integration-cli&lt;/td&gt;
+    &lt;td&gt;Run the test for the integration command line interface.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;monospaced&#34;&gt;test-docker-py&lt;/td&gt;
+    &lt;td&gt;Run the tests for Docker API client.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;monospaced&#34;&gt;docs-test&lt;/td&gt;
+    &lt;td&gt;Runs the documentation test build.&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;&lt;/p&gt;
+
+&lt;p&gt;Run the entire test suite on your current repository:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a terminal on your local host.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change to the root your Docker repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure you are in your development branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git checkout dry-run-test
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the &lt;code&gt;make test&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ make test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command does several things, it creates a container temporarily for
+testing. Inside that container, the &lt;code&gt;make&lt;/code&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;creates a new binary&lt;/li&gt;
+&lt;li&gt;cross-compiles all the binaries for the various operating systems&lt;/li&gt;
+&lt;li&gt;runs all the tests in the system&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It can take several minutes to run all the tests. When they complete
+successfully, you see the output concludes with something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[PASSED]: top - sleep process should be listed in privileged mode
+[PASSED]: version - verify that it works and that the output is properly formatted
+PASS
+coverage: 70.8% of statements
+---&amp;gt; Making bundle: test-docker-py (in bundles/1.5.0-dev/test-docker-py)
++++ exec docker --daemon --debug --host unix:///go/src/github.com/docker/docker/bundles/1.5.0-dev/test-docker-py/docker.sock --storage-driver vfs --exec-driver native --pidfile /go/src/github.com/docker/docker/bundles/1.5.0-dev/test-docker-py/docker.pid
+.................................................................
+----------------------------------------------------------------------
+Ran 65 tests in 89.266s
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;run-test-targets-inside-the-development-container&#34;&gt;Run test targets inside the development container&lt;/h3&gt;
+
+&lt;p&gt;If you are working inside a Docker development container, you use the
+&lt;code&gt;hack/make.sh&lt;/code&gt; script to run tests. The &lt;code&gt;hack/make.sh&lt;/code&gt; script doesn&amp;rsquo;t
+have a single target that runs all the tests. Instead, you provide a single
+command line with multiple targets that does the same thing.&lt;/p&gt;
+
+&lt;p&gt;Try this now.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a terminal and change to the &lt;code&gt;docker-fork&lt;/code&gt; root.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start a Docker development image.&lt;/p&gt;
+
+&lt;p&gt;If you are following along with this guide, you should have a
+&lt;code&gt;dry-run-test&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --privileged --rm -ti -v `pwd`:/go/src/github.com/docker/docker dry-run-test /bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the tests using the &lt;code&gt;hack/make.sh&lt;/code&gt; script.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@5f8630b873fe:/go/src/github.com/docker/docker# hack/make.sh dynbinary binary cross test-unit test-integration-cli test-docker-py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The tests run just as they did within your local host.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Of course, you can also run a subset of these targets too. For example, to run
+just the unit tests:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@5f8630b873fe:/go/src/github.com/docker/docker# hack/make.sh dynbinary binary cross test-unit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Most test targets require that you build these precursor targets first:
+&lt;code&gt;dynbinary binary cross&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;running-individual-or-multiple-named-tests&#34;&gt;Running individual or multiple named tests&lt;/h2&gt;
+
+&lt;p&gt;We use &lt;a href=&#34;https://labix.org/gocheck&#34;&gt;gocheck&lt;/a&gt; for our integration-cli tests.
+You can use the &lt;code&gt;TESTFLAGS&lt;/code&gt; environment variable to run a single test. The
+flag&amp;rsquo;s value is passed as arguments to the &lt;code&gt;go test&lt;/code&gt; command. For example, from
+your local host you can run the &lt;code&gt;TestBuild&lt;/code&gt; test with this command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ TESTFLAGS=&#39;-check.f DockerSuite.TestBuild*&#39; make test-integration-cli
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To run the same test inside your Docker development container, you do this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@5f8630b873fe:/go/src/github.com/docker/docker# TESTFLAGS=&#39;-check.f TestBuild*&#39; hack/make.sh binary test-integration-cli
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;if-tests-under-boot2docker-fail-due-to-disk-space-errors&#34;&gt;If tests under Boot2Docker fail due to disk space errors&lt;/h2&gt;
+
+&lt;p&gt;Running the tests requires about 2GB of memory. If you are running your
+container on bare metal, that is you are not running with Boot2Docker, your
+Docker development container is able to take the memory it requires directly
+from your local host.&lt;/p&gt;
+
+&lt;p&gt;If you are running Docker using Boot2Docker, the VM uses 2048MB by default.
+This means you can exceed the memory of your VM running tests in a Boot2Docker
+environment. When the test suite runs out of memory, it returns errors similar
+to the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;server.go:1302 Error: Insertion failed because database is full: database or
+disk is full
+
+utils_test.go:179: Error copy: exit status 1 (cp: writing
+&#39;/tmp/docker-testd5c9-[...]&#39;: No space left on device
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To increase the memory on your VM, you need to reinitialize the Boot2Docker VM
+with new memory settings.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Stop all running containers.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;View the current memory setting.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker info
+{
+    &amp;quot;Name&amp;quot;: &amp;quot;boot2docker-vm&amp;quot;,
+    &amp;quot;UUID&amp;quot;: &amp;quot;491736fd-4075-4be7-a6f5-1d4cdcf2cc74&amp;quot;,
+    &amp;quot;Iso&amp;quot;: &amp;quot;/Users/mary/.boot2docker/boot2docker.iso&amp;quot;,
+    &amp;quot;State&amp;quot;: &amp;quot;running&amp;quot;,
+    &amp;quot;CPUs&amp;quot;: 8,
+    &amp;quot;Memory&amp;quot;: 2048,
+    &amp;quot;VRAM&amp;quot;: 8,
+    &amp;quot;CfgFile&amp;quot;: &amp;quot;/Users/mary/VirtualBox VMs/boot2docker-vm/boot2docker-vm.vbox&amp;quot;,
+    &amp;quot;BaseFolder&amp;quot;: &amp;quot;/Users/mary/VirtualBox VMs/boot2docker-vm&amp;quot;,
+    &amp;quot;OSType&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;Flag&amp;quot;: 0,
+    &amp;quot;BootOrder&amp;quot;: null,
+    &amp;quot;DockerPort&amp;quot;: 0,
+    &amp;quot;SSHPort&amp;quot;: 2022,
+    &amp;quot;SerialFile&amp;quot;: &amp;quot;/Users/mary/.boot2docker/boot2docker-vm.sock&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Delete your existing &lt;code&gt;boot2docker&lt;/code&gt; profile.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker delete
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Reinitialize &lt;code&gt;boot2docker&lt;/code&gt; and specify a higher memory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker init -m 5555
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify the memory was reset.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ boot2docker info
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Restart your container and try your test again.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;testing-just-the-windows-client&#34;&gt;Testing just the Windows client&lt;/h2&gt;
+
+&lt;p&gt;This explains how to test the Windows client on a Windows server set up as a
+development environment.  You&amp;rsquo;ll use the &lt;strong&gt;Git Bash&lt;/strong&gt; came with the Git for
+Windows installation.  &lt;strong&gt;Git Bash&lt;/strong&gt; just as it sounds allows you to run a Bash
+terminal on Windows.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If you don&amp;rsquo;t have one, start a Git Bash terminal.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/git_bash.png&#34; alt=&#34;Git Bash&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change to the &lt;code&gt;docker&lt;/code&gt; source directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd /c/gopath/src/github.com/docker/docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set &lt;code&gt;DOCKER_CLIENTONLY&lt;/code&gt; as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ export DOCKER_CLIENTONLY=1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This ensures you are building only the client binary instead of both the
+binary and the daemon.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set &lt;code&gt;DOCKER_TEST_HOST&lt;/code&gt; to the &lt;code&gt;tcp://IP_ADDRESS:2376&lt;/code&gt; value; substitute your
+machine&amp;rsquo;s actual IP address, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ export DOCKER_TEST_HOST=tcp://263.124.23.200:2376
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make the binary and the test:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ hack/make.sh binary test-integration-cli
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Many tests are skipped on Windows for various reasons. You see which tests
+   were skipped by re-running the make and passing in the
+   &lt;code&gt;TESTFLAGS=&#39;-test.v&#39;&lt;/code&gt; value.&lt;/p&gt;
+
+&lt;p&gt;You can now choose to make changes to the Docker source or the tests. If you
+make any changes just run these commands again.&lt;/p&gt;
+
+&lt;h2 id=&#34;build-and-test-the-documentation&#34;&gt;Build and test the documentation&lt;/h2&gt;
+
+&lt;p&gt;The Docker documentation source files are under &lt;code&gt;docs&lt;/code&gt;. The content is
+written using extended Markdown. We use the static generator &lt;a
+href=&#34;http://www.mkdocs.org/&#34; target=&#34;_blank&#34;&gt;MkDocs&lt;/a&gt; to build Docker&amp;rsquo;s
+documentation. Of course, you don&amp;rsquo;t need to install this generator
+to build the documentation, it is included with container.&lt;/p&gt;
+
+&lt;p&gt;You should always check your documentation for grammar and spelling. The best
+way to do this is with &lt;a href=&#34;http://www.hemingwayapp.com/&#34;
+target=&#34;_blank&#34;&gt;an online grammar checker&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When you change a documentation source file, you should test your change
+locally to make sure your content is there and any links work correctly. You
+can build the documentation from the local host. The build starts a container
+and loads the documentation into a server. As long as this container runs, you
+can browse the docs.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;In a terminal, change to the root of your &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd ~/repos/docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure you are in your feature branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git status
+On branch dry-run-test
+Your branch is up-to-date with &#39;origin/dry-run-test&#39;.
+nothing to commit, working directory clean
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Build the documentation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ make docs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When the build completes, you&amp;rsquo;ll see a final output message similar to the
+following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Successfully built ee7fe7553123
+docker run --rm -it  -e AWS_S3_BUCKET -e NOCACHE -p 8000:8000 &amp;quot;docker-docs:dry-run-test&amp;quot; mkdocs serve
+Running at: http://0.0.0.0:8000/
+Live reload enabled.
+Hold ctrl+c to quit.
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter the URL in your browser.&lt;/p&gt;
+
+&lt;p&gt;If you are running Boot2Docker, replace the default localhost address
+(0.0.0.0) with your DOCKERHOST value. You can get this value at any time by
+entering &lt;code&gt;boot2docker ip&lt;/code&gt; at the command line.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Once in the documentation, look for the red notice to verify you are seeing the correct build.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/red_notice.png&#34; alt=&#34;Beta documentation&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Navigate to your new or changed document.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review both the content and the links.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Return to your terminal and exit out of the running documentation container.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;Congratulations, you have successfully completed the basics you need to
+understand the Docker test framework. In the next steps, you use what you have
+learned so far to &lt;a href=&#34;http://localhost/project/project/project/make-a-contribution/&#34;&gt;contribute to Docker by working on an
+issue&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Set up for development on Windows</title>
+      <link>http://localhost/project/software-req-win/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/software-req-win/</guid>
+      <description>
+
+&lt;h1 id=&#34;get-the-required-software-for-windows&#34;&gt;Get the required software for Windows&lt;/h1&gt;
+
+&lt;p&gt;This page explains how to get the software you need to use a  a Windows Server
+2012 or Windows 8 machine for Docker development. Before you begin contributing
+you must have:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a GitHub account&lt;/li&gt;
+&lt;li&gt;Git for Windows (msysGit)&lt;/li&gt;
+&lt;li&gt;TDM-GCC, a compiler suite for Windows&lt;/li&gt;
+&lt;li&gt;MinGW (tar and xz)&lt;/li&gt;
+&lt;li&gt;Go language&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: This installation procedure refers to the &lt;code&gt;C:\&lt;/code&gt; drive. If you system&amp;rsquo;s main drive
+is &lt;code&gt;D:\&lt;/code&gt; you&amp;rsquo;ll need to substitute that in where appropriate in these
+instructions.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;get-a-github-account&#34;&gt;Get a GitHub account&lt;/h3&gt;
+
+&lt;p&gt;To contribute to the Docker project, you will need a &lt;a
+href=&#34;https://github.com&#34; target=&#34;_blank&#34;&gt;GitHub account&lt;/a&gt;. A free account is
+fine. All the Docker project repositories are public and visible to everyone.&lt;/p&gt;
+
+&lt;p&gt;You should also have some experience using both the GitHub application and &lt;code&gt;git&lt;/code&gt;
+on the command line.&lt;/p&gt;
+
+&lt;h2 id=&#34;install-git-for-windows&#34;&gt;Install Git for Windows&lt;/h2&gt;
+
+&lt;p&gt;Git for Windows includes several tools including msysGit, which is a build
+environment. The environment contains the tools you need for development such as
+Git and a Git Bash shell.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Browse to the &lt;a href=&#34;https://msysgit.github.io/&#34;&gt;Git for Windows&lt;/a&gt; download page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Download&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Windows prompts you to save the file to your machine.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the saved file.&lt;/p&gt;
+
+&lt;p&gt;The system displays the &lt;strong&gt;Git Setup&lt;/strong&gt; wizard.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the &lt;strong&gt;Next&lt;/strong&gt; button to move through the wizard and accept all the defaults.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Finish&lt;/strong&gt; when you are done.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;installing-tdm-gcc&#34;&gt;Installing TDM-GCC&lt;/h2&gt;
+
+&lt;p&gt;TDM-GCC is a compiler suite for Windows. You&amp;rsquo;ll use this suite to compile the
+Docker Go code as you develop.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Browse to
+&lt;a href=&#34;http://tdm-gcc.tdragon.net/download&#34;&gt;tdm-gcc download page&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click on the latest 64-bit version of the package.&lt;/p&gt;
+
+&lt;p&gt;Windows prompts you to save the file to your machine&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set up the suite by running the downloaded file.&lt;/p&gt;
+
+&lt;p&gt;The system opens the &lt;strong&gt;TDM-GCC Setup&lt;/strong&gt; wizard.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Create&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the &lt;strong&gt;Next&lt;/strong&gt; button to move through the wizard and accept all the defaults.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Finish&lt;/strong&gt; when you are done.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;installing-mingw-tar-and-xz&#34;&gt;Installing MinGW (tar and xz)&lt;/h2&gt;
+
+&lt;p&gt;MinGW is a minimalist port of the GNU Compiler Collection (GCC). In this
+procedure, you first download and install the MinGW installation manager. Then,
+you use the manager to install the &lt;code&gt;tar&lt;/code&gt; and &lt;code&gt;xz&lt;/code&gt; tools from the collection.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Browse to MinGW
+&lt;a href=&#34;http://sourceforge.net/projects/mingw/&#34;&gt;SourceForge&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Download&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Windows prompts you to save the file to your machine&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the downloaded file.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The system opens the &lt;strong&gt;MinGW Installation Manager Setup Tool&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Choose &lt;strong&gt;Install&lt;/strong&gt;  install the MinGW Installation Manager.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;strong&gt;Continue&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The system installs and then opens the MinGW Installation Manager.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;strong&gt;Continue&lt;/strong&gt; after the install completes to open the manager.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select &lt;strong&gt;All Packages &amp;gt; MSYS Base System&lt;/strong&gt; from the left hand menu.&lt;/p&gt;
+
+&lt;p&gt;The system displays the available packages.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click on the the &lt;strong&gt;msys-tar bin&lt;/strong&gt; package and choose &lt;strong&gt;Mark for Installation&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click on the &lt;strong&gt;msys-xz bin&lt;/strong&gt; package and choose &lt;strong&gt;Mark for Installation&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select &lt;strong&gt;Installation &amp;gt; Apply Changes&lt;/strong&gt;, to install the selected packages.&lt;/p&gt;
+
+&lt;p&gt;The system displays the &lt;strong&gt;Schedule of Pending Actions Dialog&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/windows-mingw.png&#34; alt=&#34;windows-mingw&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;strong&gt;Apply&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;MingGW installs the packages for you.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Close the dialog and the MinGW Installation Manager.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;set-up-your-environment-variables&#34;&gt;Set up your environment variables&lt;/h2&gt;
+
+&lt;p&gt;You&amp;rsquo;ll need to add the compiler to your &lt;code&gt;Path&lt;/code&gt; environment variable.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open the &lt;strong&gt;Control Panel&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose &lt;strong&gt;System and Security &amp;gt; System&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the &lt;strong&gt;Advanced system settings&lt;/strong&gt; link in the sidebar.&lt;/p&gt;
+
+&lt;p&gt;The system opens the &lt;strong&gt;System Properties&lt;/strong&gt; dialog.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the &lt;strong&gt;Advanced&lt;/strong&gt; tab.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Environment Variables&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The system opens the &lt;strong&gt;Environment Variables dialog&lt;/strong&gt; dialog.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Locate the &lt;strong&gt;System variables&lt;/strong&gt; area and scroll to the &lt;strong&gt;Path&lt;/strong&gt;
+variable.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/path_variable.png&#34; alt=&#34;windows-mingw&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Edit&lt;/strong&gt; to edit the variable (you can also double-click it).&lt;/p&gt;
+
+&lt;p&gt;The system opens the &lt;strong&gt;Edit System Variable&lt;/strong&gt; dialog.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure the &lt;code&gt;Path&lt;/code&gt; includes &lt;code&gt;C:\TDM-GCC64\bin&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/include_gcc.png&#34; alt=&#34;include gcc&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t see &lt;code&gt;C:\TDM-GCC64\bin&lt;/code&gt;, add it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;strong&gt;OK&lt;/strong&gt; to close this dialog.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;strong&gt;OK&lt;/strong&gt; twice to close out of the remaining dialogs.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;install-go-and-cross-compile-it&#34;&gt;Install Go and cross-compile it&lt;/h2&gt;
+
+&lt;p&gt;In this section, you install the Go language. Then, you build the source so that it can cross-compile for &lt;code&gt;linux/amd64&lt;/code&gt; architectures.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open &lt;a href=&#34;http://golang.org/dl/&#34;&gt;Go Language download&lt;/a&gt; page in your browser.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Locate and click the latest &lt;code&gt;.msi&lt;/code&gt; installer.&lt;/p&gt;
+
+&lt;p&gt;The system prompts you to save the file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the installer.&lt;/p&gt;
+
+&lt;p&gt;The system opens the &lt;strong&gt;Go Programming Language Setup&lt;/strong&gt; dialog.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select all the defaults to install.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;strong&gt;Finish&lt;/strong&gt; to close the installation dialog.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start a command prompt.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change to the Go &lt;code&gt;src&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd c:\Go\src 
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set the following Go variables&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;c:\Go\src&amp;gt; set GOOS=linux
+c:\Go\src&amp;gt; set GOARCH=amd64
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Compile the source.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;c:\Go\src&amp;gt; make.bat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Compiling the source also adds a number of variables to your Windows environment.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;get-the-docker-repository&#34;&gt;Get the Docker repository&lt;/h2&gt;
+
+&lt;p&gt;In this step, you start a Git &lt;code&gt;bash&lt;/code&gt; terminal and get the Docker source code from
+Github.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Locate the &lt;strong&gt;Git Bash&lt;/strong&gt; program and start it.&lt;/p&gt;
+
+&lt;p&gt;Recall that &lt;strong&gt;Git Bash&lt;/strong&gt; came with the Git for Windows installation.  &lt;strong&gt;Git
+Bash&lt;/strong&gt; just as it sounds allows you to run a Bash terminal on Windows.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/git_bash.png&#34; alt=&#34;Git Bash&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change to the root directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd /c/
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make a &lt;code&gt;gopath&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir gopath
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go get the &lt;code&gt;docker/docker&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ go.exe get github.com/docker/docker package github.com/docker/docker
+imports github.com/docker/docker
+imports github.com/docker/docker: no buildable Go source files in C:\gopath\src\github.com\docker\docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the next steps, you create environment variables for you Go paths.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open the &lt;strong&gt;Control Panel&lt;/strong&gt; on your system.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose &lt;strong&gt;System and Security &amp;gt; System&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the &lt;strong&gt;Advanced system settings&lt;/strong&gt; link in the sidebar.&lt;/p&gt;
+
+&lt;p&gt;The system opens the &lt;strong&gt;System Properties&lt;/strong&gt; dialog.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the &lt;strong&gt;Advanced&lt;/strong&gt; tab.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Environment Variables&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The system opens the &lt;strong&gt;Environment Variables dialog&lt;/strong&gt; dialog.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Locate the &lt;strong&gt;System variables&lt;/strong&gt; area and scroll to the &lt;strong&gt;Path&lt;/strong&gt;
+variable.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;New&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now you are going to create some new variables. These paths you&amp;rsquo;ll create in the next procedure; but you can set them now.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter &lt;code&gt;GOPATH&lt;/code&gt; for the &lt;strong&gt;Variable Name&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For the &lt;strong&gt;Variable Value&lt;/strong&gt; enter the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;C:\gopath;C:\gopath\src\github.com\docker\docker\vendor
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;strong&gt;OK&lt;/strong&gt; to close this dialog.&lt;/p&gt;
+
+&lt;p&gt;The system adds &lt;code&gt;GOPATH&lt;/code&gt; to the list of &lt;strong&gt;System Variables&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;strong&gt;OK&lt;/strong&gt; twice to close out of the remaining dialogs.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;In the next section, you&amp;rsquo;ll &lt;a href=&#34;http://localhost/project/project/project/set-up-git/&#34;&gt;learn how to set up and configure Git for
+contributing to Docker&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Style guide for Docker documentation</title>
+      <link>http://localhost/project/doc-style/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/doc-style/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-documentation-style-grammar-conventions&#34;&gt;Docker documentation: style &amp;amp; grammar conventions&lt;/h1&gt;
+
+&lt;h2 id=&#34;style-standards&#34;&gt;Style standards&lt;/h2&gt;
+
+&lt;p&gt;Over time, different publishing communities have written standards for the style
+and grammar they prefer in their publications. These standards are called
+&lt;a href=&#34;http://en.wikipedia.org/wiki/Style_guide&#34;&gt;style guides&lt;/a&gt;. Generally, Docker’s
+documentation uses the standards described in the
+&lt;a href=&#34;http://en.wikipedia.org/wiki/AP_Stylebook&#34;&gt;Associated Press&amp;rsquo;s (AP) style guide&lt;/a&gt;.
+If a question about syntactical, grammatical, or lexical practice comes up,
+refer to the AP guide first. If you don’t have a copy of (or online subscription
+to) the AP guide, you can almost always find an answer to a specific question by
+searching the web. If you can’t find an answer, please ask a
+&lt;a href=&#34;https://github.com/docker/docker/blob/master/docs/MAINTAINERS&#34;&gt;maintainer&lt;/a&gt; and
+we will find the answer.&lt;/p&gt;
+
+&lt;p&gt;That said, please don&amp;rsquo;t get too hung up on using correct style. We&amp;rsquo;d rather have
+you submit good information that doesn&amp;rsquo;t conform to the guide than no
+information at all. Docker&amp;rsquo;s tech writers are always happy to help you with the
+prose, and we promise not to judge or use a red pen!&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+The documentation is written with paragraphs wrapped at 80 column lines to
+make it easier for terminal use. You can probably set up your favorite text
+editor to do this automatically for you.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;prose-style&#34;&gt;Prose style&lt;/h3&gt;
+
+&lt;p&gt;In general, try to write simple, declarative prose. We prefer short,
+single-clause sentences and brief three-to-five sentence paragraphs. Try to
+choose vocabulary that is straightforward and precise. Avoid creating new terms,
+using obscure terms or, in particular, using a lot of jargon. For example, use
+&amp;ldquo;use&amp;rdquo; instead of leveraging &amp;ldquo;leverage&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;That said, don’t feel like you have to write for localization or for
+English-as-a-second-language (ESL) speakers specifically. Assume you are writing
+for an ordinary speaker of English with a basic university education. If your
+prose is simple, clear, and straightforward it will translate readily.&lt;/p&gt;
+
+&lt;p&gt;One way to think about this is to assume Docker’s users are generally university
+educated and read at at least a &amp;ldquo;16th&amp;rdquo; grade level (meaning they have a
+university degree). You can use a &lt;a href=&#34;https://readability-score.com/&#34;&gt;readability
+tester&lt;/a&gt; to help guide your judgement. For
+example, the readability score for the phrase &amp;ldquo;Containers should be ephemeral&amp;rdquo;
+is around the 13th grade level (first year at university), and so is acceptable.&lt;/p&gt;
+
+&lt;p&gt;In all cases, we prefer clear, concise communication over stilted, formal
+language. Don&amp;rsquo;t feel like you have to write documentation that &amp;ldquo;sounds like
+technical writing.&amp;rdquo;&lt;/p&gt;
+
+&lt;h3 id=&#34;metaphor-and-figurative-language&#34;&gt;Metaphor and figurative language&lt;/h3&gt;
+
+&lt;p&gt;One exception to the &amp;ldquo;don’t write directly for ESL&amp;rdquo; rule is to avoid the use of
+metaphor or other
+&lt;a href=&#34;http://en.wikipedia.org/wiki/Literal_and_figurative_language&#34;&gt;figurative language&lt;/a&gt; to
+describe things. There are too many cultural and social issues that can prevent
+a reader from correctly interpreting a metaphor.&lt;/p&gt;
+
+&lt;h2 id=&#34;specific-conventions&#34;&gt;Specific conventions&lt;/h2&gt;
+
+&lt;p&gt;Below are some specific recommendations (and a few deviations) from AP style
+that we use in our docs.&lt;/p&gt;
+
+&lt;h3 id=&#34;contractions&#34;&gt;Contractions&lt;/h3&gt;
+
+&lt;p&gt;As long as your prose does not become too slangy or informal, it&amp;rsquo;s perfectly
+acceptable to use contractions in our documentation. Make sure to use
+apostrophes correctly.&lt;/p&gt;
+
+&lt;h3 id=&#34;use-of-dashes-in-a-sentence&#34;&gt;Use of dashes in a sentence.&lt;/h3&gt;
+
+&lt;p&gt;Dashes refers to the en dash (–) and the em dash (—). Dashes can be used to
+separate parenthetical material.&lt;/p&gt;
+
+&lt;p&gt;Usage Example: This is an example of a Docker client – which uses the Big Widget
+to run – and does x, y, and z.&lt;/p&gt;
+
+&lt;p&gt;Use dashes cautiously and consider whether commas or parentheses would work just
+as well. We always emphasize short, succinct sentences.&lt;/p&gt;
+
+&lt;p&gt;More info from the always handy &lt;a href=&#34;http://www.quickanddirtytips.com/education/grammar/dashes-parentheses-and-commas&#34;&gt;Grammar Girl site&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;pronouns&#34;&gt;Pronouns&lt;/h3&gt;
+
+&lt;p&gt;It&amp;rsquo;s okay to use first and second person pronouns. Specifically, use &amp;ldquo;we&amp;rdquo; to
+refer to Docker and &amp;ldquo;you&amp;rdquo; to refer to the user. For example, &amp;ldquo;We built the
+&lt;code&gt;exec&lt;/code&gt; command so you can resize a TTY session.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;As much as possible, avoid using gendered pronouns (&amp;ldquo;he&amp;rdquo; and &amp;ldquo;she&amp;rdquo;, etc.).
+Either recast the sentence so the pronoun is not needed or, less preferably,
+use &amp;ldquo;they&amp;rdquo; instead. If you absolutely can&amp;rsquo;t get around using a gendered pronoun,
+pick one and stick to it. Which one you choose is up to you. One common
+convention is to use the pronoun of the author&amp;rsquo;s gender, but if you prefer to
+default to &amp;ldquo;he&amp;rdquo; or &amp;ldquo;she&amp;rdquo;, that&amp;rsquo;s fine too.&lt;/p&gt;
+
+&lt;h3 id=&#34;capitalization&#34;&gt;Capitalization&lt;/h3&gt;
+
+&lt;h4 id=&#34;in-general&#34;&gt;In general&lt;/h4&gt;
+
+&lt;p&gt;Only proper nouns should be capitalized in body text. In general, strive to be
+as strict as possible in applying this rule. Avoid using capitals for emphasis
+or to denote &amp;ldquo;specialness&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;The word &amp;ldquo;Docker&amp;rdquo; should always be capitalized when referring to either the
+company or the technology. The only exception is when the term appears in a code
+sample.&lt;/p&gt;
+
+&lt;h4 id=&#34;starting-sentences&#34;&gt;Starting sentences&lt;/h4&gt;
+
+&lt;p&gt;Because code samples should always be written exactly as they would appear
+on-screen, you should avoid starting sentences with a code sample.&lt;/p&gt;
+
+&lt;h4 id=&#34;in-headings&#34;&gt;In headings&lt;/h4&gt;
+
+&lt;p&gt;Headings take sentence capitalization, meaning that only the first letter is
+capitalized (and words that would normally be capitalized in a sentence, e.g.,
+&amp;ldquo;Docker&amp;rdquo;). Do not use Title Case (i.e., capitalizing every word) for headings. Generally, we adhere to &lt;a href=&#34;http://www.quickanddirtytips.com/education/grammar/capitalizing-titles&#34;&gt;AP style
+for titles&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;periods&#34;&gt;Periods&lt;/h2&gt;
+
+&lt;p&gt;We prefer one space after a period at the end of a sentence, not two.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&#34;#lists&#34;&gt;lists&lt;/a&gt; below for how to punctuate list items.&lt;/p&gt;
+
+&lt;h3 id=&#34;abbreviations-and-acronyms&#34;&gt;Abbreviations and acronyms&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Exempli gratia (e.g.) and id est ( i.e.): these should always have periods and
+are always followed by a comma.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Acronyms are pluralized by simply adding &amp;ldquo;s&amp;rdquo;, e.g., PCs, OSs.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;On first use on a given page, the complete term should be used, with the
+abbreviation or acronym in parentheses. E.g., Red Hat Enterprise Linux (RHEL).
+The exception is common, non-technical acronyms like AKA or ASAP. Note that
+acronyms other than i.e. and e.g. are capitalized.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Other than &amp;ldquo;e.g.&amp;rdquo; and &amp;ldquo;i.e.&amp;rdquo; (as discussed above), acronyms do not take
+periods, PC not P.C.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;lists&#34;&gt;Lists&lt;/h3&gt;
+
+&lt;p&gt;When writing lists, keep the following in mind:&lt;/p&gt;
+
+&lt;p&gt;Use bullets when the items being listed are independent of each other and the
+order of presentation is not important.&lt;/p&gt;
+
+&lt;p&gt;Use numbers for steps that have to happen in order or if you have mentioned the
+list in introductory text. For example, if you wrote &amp;ldquo;There are three config
+settings available for SSL, as follows:&amp;ldquo;, you would number each config setting
+in the subsequent list.&lt;/p&gt;
+
+&lt;p&gt;In all lists, if an item is a complete sentence, it should end with a
+period. Otherwise, we prefer no terminal punctuation for list items.
+Each item in a list should start with a capital.&lt;/p&gt;
+
+&lt;h3 id=&#34;numbers&#34;&gt;Numbers&lt;/h3&gt;
+
+&lt;p&gt;Write out numbers in body text and titles from one to ten. From 11 on, use numerals.&lt;/p&gt;
+
+&lt;h3 id=&#34;notes&#34;&gt;Notes&lt;/h3&gt;
+
+&lt;p&gt;Use notes sparingly and only to bring things to the reader&amp;rsquo;s attention that are
+critical or otherwise deserving of being called out from the body text. Please
+format all notes as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; **Note:**
+&amp;gt; One line of note text
+&amp;gt; another line of note text
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;avoid-excess-use-of-i-e&#34;&gt;Avoid excess use of &amp;ldquo;i.e.&amp;rdquo;&lt;/h3&gt;
+
+&lt;p&gt;Minimize your use of &amp;ldquo;i.e.&amp;rdquo;. It can add an unnecessary interpretive burden on
+the reader. Avoid writing &amp;ldquo;This is a thing, i.e., it is like this&amp;rdquo;. Just
+say what it is: &amp;ldquo;This thing is …&amp;rdquo;&lt;/p&gt;
+
+&lt;h3 id=&#34;preferred-usages&#34;&gt;Preferred usages&lt;/h3&gt;
+
+&lt;h4 id=&#34;login-vs-log-in&#34;&gt;Login vs. log in.&lt;/h4&gt;
+
+&lt;p&gt;A &amp;ldquo;login&amp;rdquo; is a noun (one word), as in &amp;ldquo;Enter your login&amp;rdquo;. &amp;ldquo;Log in&amp;rdquo; is a compound
+verb (two words), as in &amp;ldquo;Log in to the terminal&amp;rdquo;.&lt;/p&gt;
+
+&lt;h3 id=&#34;oxford-comma&#34;&gt;Oxford comma&lt;/h3&gt;
+
+&lt;p&gt;One way in which we differ from AP style is that Docker’s docs use the &lt;a href=&#34;http://en.wikipedia.org/wiki/Serial_comma&#34;&gt;Oxford
+comma&lt;/a&gt; in all cases. That’s our
+position on this controversial topic, we won&amp;rsquo;t change our mind, and that’s that!&lt;/p&gt;
+
+&lt;h3 id=&#34;code-and-ui-text-styling&#34;&gt;Code and UI text styling&lt;/h3&gt;
+
+&lt;p&gt;We require &lt;code&gt;code font&lt;/code&gt; styling (monospace, sans-serif) for all text that refers
+to a command or other input or output from the CLI. This includes file paths
+(e.g., &lt;code&gt;/etc/hosts/docker.conf&lt;/code&gt;). If you enclose text in backticks (`) markdown
+will style the text as code.&lt;/p&gt;
+
+&lt;p&gt;Text from a CLI should be quoted verbatim, even if it contains errors or its
+style contradicts this guide. You can add &amp;ldquo;(sic)&amp;rdquo; after the quote to indicate
+the errors are in the quote and are not errors in our docs.&lt;/p&gt;
+
+&lt;p&gt;Text taken from a GUI (e.g., menu text or button text) should appear in &amp;ldquo;double
+quotes&amp;rdquo;. The text should take the exact same capitalisation, etc. as appears in
+the GUI. E.g., Click &amp;ldquo;Continue&amp;rdquo; to save the settings.&lt;/p&gt;
+
+&lt;p&gt;Text that refers to a keyboard command or hotkey is  capitalized (e.g., Ctrl-D).&lt;/p&gt;
+
+&lt;p&gt;When writing CLI examples, give the user hints by making the examples resemble
+exactly what they see in their shell:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Indent shell examples by 4 spaces so they get rendered as code blocks.&lt;/li&gt;
+&lt;li&gt;Start typed commands with &lt;code&gt;$&lt;/code&gt; (dollar space), so that they are easily
+differentiated from program output.&lt;/li&gt;
+&lt;li&gt;Program output has no prefix.&lt;/li&gt;
+&lt;li&gt;Comments begin with # (hash space).&lt;/li&gt;
+&lt;li&gt;In-container shell commands, begin with &lt;code&gt;$$&lt;/code&gt; (dollar dollar space).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Please test all code samples to ensure that they are correct and functional so
+that users can successfully cut-and-paste samples directly into the CLI.&lt;/p&gt;
+
+&lt;h2 id=&#34;pull-requests&#34;&gt;Pull requests&lt;/h2&gt;
+
+&lt;p&gt;The pull request (PR) process is in place so that we can ensure changes made to
+the docs are the best changes possible. A good PR will do some or all of the
+following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Explain why the change is needed&lt;/li&gt;
+&lt;li&gt;Point out potential issues or questions&lt;/li&gt;
+&lt;li&gt;Ask for help from experts in the company or the community&lt;/li&gt;
+&lt;li&gt;Encourage feedback from core developers and others involved in creating the
+software being documented.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Writing a PR that is singular in focus and has clear objectives will encourage
+all of the above. Done correctly, the process allows reviewers (maintainers and
+community members) to validate the claims of the documentation and identify
+potential problems in communication or presentation.&lt;/p&gt;
+
+&lt;h3 id=&#34;commit-messages&#34;&gt;Commit messages&lt;/h3&gt;
+
+&lt;p&gt;In order to write clear, useful commit messages, please follow these
+&lt;a href=&#34;http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message&#34;&gt;recommendations&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;links&#34;&gt;Links&lt;/h2&gt;
+
+&lt;p&gt;For accessibility and usability reasons, avoid using phrases such as &amp;ldquo;click
+here&amp;rdquo; for link text. Recast your sentence so that the link text describes the
+content of the link, as we did in the
+&lt;a href=&#34;#commit-messages&#34;&gt;&amp;ldquo;Commit messages&amp;rdquo; section&lt;/a&gt; above.&lt;/p&gt;
+
+&lt;p&gt;You can use relative links (../linkeditem) to link to other pages in Docker&amp;rsquo;s
+documentation.&lt;/p&gt;
+
+&lt;h2 id=&#34;graphics&#34;&gt;Graphics&lt;/h2&gt;
+
+&lt;p&gt;When you need to add a graphic, try to make the file-size as small as possible.
+If you need help reducing file-size of a high-resolution image, feel free to
+contact us for help.
+Usually, graphics should go in the same directory as the .md file that
+references them, or in a subdirectory for images if one already exists.&lt;/p&gt;
+
+&lt;p&gt;The preferred file format for graphics is PNG, but GIF and JPG are also
+acceptable.&lt;/p&gt;
+
+&lt;p&gt;If you are referring to a specific part of the UI in an image, use
+call-outs (circles and arrows or lines) to highlight what you’re referring to.
+Line width for call-outs should not exceed five pixels. The preferred color for
+call-outs is red.&lt;/p&gt;
+
+&lt;p&gt;Be sure to include descriptive alt-text for the graphic. This greatly helps
+users with accessibility issues.&lt;/p&gt;
+
+&lt;p&gt;Lastly, be sure you have permission to use any included graphics.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Understand how to contribute</title>
+      <link>http://localhost/project/make-a-contribution/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/make-a-contribution/</guid>
+      <description>
+
+&lt;h1 id=&#34;understand-how-to-contribute&#34;&gt;Understand how to contribute&lt;/h1&gt;
+
+&lt;p&gt;Contributing is a process where you work with Docker maintainers and the
+community to improve Docker. The maintainers are experienced contributors
+who specialize in one or more Docker components. Maintainers play a big role
+in reviewing contributions.&lt;/p&gt;
+
+&lt;p&gt;There is a formal process for contributing. We try to keep our contribution
+process simple so you&amp;rsquo;ll want to contribute frequently.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-basic-contribution-workflow&#34;&gt;The basic contribution workflow&lt;/h2&gt;
+
+&lt;p&gt;In this guide, you work through Docker&amp;rsquo;s basic contribution workflow by fixing a
+single &lt;em&gt;beginner&lt;/em&gt; issue in the &lt;code&gt;docker/docker&lt;/code&gt; repository. The workflow
+for fixing simple issues looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/existing_issue.png&#34; alt=&#34;Simple process&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;All Docker repositories have code and documentation. You use this same workflow
+for either content type. For example, you can find and fix doc or code issues.
+Also, you can propose a new Docker feature or propose a new Docker tutorial.&lt;/p&gt;
+
+&lt;p&gt;Some workflow stages do have slight differences for code or documentation
+contributions. When you reach that point in the flow, we make sure to tell you.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;Now that you know a little about the contribution process, go to the next section
+to &lt;a href=&#34;http://localhost/project/project/project/find-an-issue/&#34;&gt;find an issue you want to work on&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Where to chat or get help</title>
+      <link>http://localhost/project/get-help/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/get-help/</guid>
+      <description>
+
+&lt;p&gt;&lt;style type=&#34;text/css&#34;&gt;
+/* @TODO add &amp;lsquo;no-zebra&amp;rsquo; table-style to the docs-base stylesheet &lt;em&gt;/
+/&lt;/em&gt; Table without &amp;ldquo;zebra&amp;rdquo; striping */
+.content-body table.no-zebra tr {
+  background-color: transparent;
+}
+&lt;/style&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;where-to-chat-or-get-help&#34;&gt;Where to chat or get help&lt;/h1&gt;
+
+&lt;p&gt;There are several communications channels you can use to chat with Docker
+community members and developers.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;col width=&#34;25%&#34;&gt;
+  &lt;col width=&#34;75%&#34;&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Internet Relay Chat (IRC)&lt;/th&gt;
+    &lt;td&gt;
+      &lt;p&gt;
+        IRC a direct line to our most knowledgeable Docker users.
+        The &lt;code&gt;#docker&lt;/code&gt; and &lt;code&gt;#docker-dev&lt;/code&gt; group on 
+        &lt;strong&gt;irc.freenode.net&lt;/strong&gt;. IRC was first created in 1988. 
+        So, it is a rich chat protocol but it can overwhelm new users. You can search
+        &lt;a href=&#34;https://botbot.me/freenode/docker/#&#34; target=&#34;_blank&#34;&gt;our chat archives&lt;/a&gt;.
+      &lt;/p&gt;
+      Read our IRC quickstart guide below for an easy way to get started.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Google Groups&lt;/td&gt;
+    &lt;td&gt;
+      There are two groups.
+      &lt;a href=&#34;https://groups.google.com/forum/#!forum/docker-user&#34; target=&#34;_blank&#34;&gt;Docker-user&lt;/a&gt;
+      is for people using Docker containers. 
+      The &lt;a href=&#34;https://groups.google.com/forum/#!forum/docker-dev&#34; target=&#34;_blank&#34;&gt;docker-dev&lt;/a&gt; 
+      group is for contributors and other people contributing to the Docker 
+      project.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Twitter&lt;/td&gt;
+    &lt;td&gt;
+      You can follow &lt;a href=&#34;https://twitter.com/docker/&#34; target=&#34;_blank&#34;&gt;Docker&#39;s twitter&lt;/a&gt;
+      to get updates on our products. You can also tweet us questions or just 
+      share blogs or stories.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Stack Overflow&lt;/td&gt;
+    &lt;td&gt;
+      Stack Overflow has over 7000K Docker questions listed. We regularly 
+      monitor &lt;a href=&#34;http://stackoverflow.com/search?tab=newest&amp;q=docker&#34; target=&#34;_blank&#34;&gt;Docker questions&lt;/a&gt;
+      and so do many other knowledgeable Docker users.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;irc-quickstart&#34;&gt;IRC Quickstart&lt;/h2&gt;
+
+&lt;p&gt;IRC can also be overwhelming for new users. This quickstart shows you
+the easiest way to connect to IRC.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;In your browser open &lt;a href=&#34;http://webchat.freenode.net&#34; target=&#34;_blank&#34;&gt;&lt;a href=&#34;http://webchat.freenode.net&#34;&gt;http://webchat.freenode.net&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/irc_connect.png&#34; alt=&#34;Login screen&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fill out the form.&lt;/p&gt;
+
+&lt;table class=&#34;no-zebra&#34; style=&#34;width: auto&#34;&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;b&gt;Nickname&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt;The short name you want to be known as in IRC.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;b&gt;Channels&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;code&gt;#docker&lt;/code&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;b&gt;reCAPTCHA&lt;/b&gt;&lt;/td&gt;
+    &lt;td&gt;Use the value provided.&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &amp;ldquo;Connect&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;The system connects you to chat. You&amp;rsquo;ll see a lot of text. At the bottom of
+the display is a command line. Just above the command line the system asks
+you to register.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/irc_after_login.png&#34; alt=&#34;Login screen&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In the command line, register your nickname.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/msg NickServ REGISTER password youremail@example.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/register_nic.png&#34; alt=&#34;Login screen&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The IRC system sends an email to the address you
+enter. The email contains instructions for completing your registration.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open your mail client and look for the email.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/register_email.png&#34; alt=&#34;Login screen&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Back in the browser, complete the registration according to the email.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/msg NickServ VERIFY REGISTER moxiegirl_ acljtppywjnr
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Join the &lt;code&gt;#docker&lt;/code&gt; group using the following command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/j #docker
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can also join the &lt;code&gt;#docker-dev&lt;/code&gt; group.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/j #docker-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;To ask questions to the channel just type messages in the command line.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/irc_chat.png&#34; alt=&#34;Login screen&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;To quit, close the browser window.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;tips-and-learning-more-about-irc&#34;&gt;Tips and learning more about IRC&lt;/h3&gt;
+
+&lt;p&gt;Next time you return to log into chat, you&amp;rsquo;ll need to re-enter your password
+on the command line using this command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/msg NickServ identify &amp;lt;password&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you forget or lose your password see &lt;a
+href=&#34;https://freenode.net/faq.shtml#sendpass&#34; target=&#34;_blank&#34;&gt;the FAQ on
+freenode.net&lt;/a&gt; to learn how to recover it.&lt;/p&gt;
+
+&lt;p&gt;This quickstart was meant to get you up and into IRC very quickly. If you find
+IRC useful there is a lot more to learn. Drupal, another open source project,
+actually has &lt;a href=&#34;https://www.drupal.org/irc/setting-up&#34; target=&#34;_blank&#34;&gt;
+written a lot of good documentation about using IRC&lt;/a&gt; for their project
+(thanks Drupal!).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Work on your issue</title>
+      <link>http://localhost/project/work-issue/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/work-issue/</guid>
+      <description>
+
+&lt;h1 id=&#34;work-on-your-issue&#34;&gt;Work on your issue&lt;/h1&gt;
+
+&lt;p&gt;The work you do for your issue depends on the specific issue you picked.
+This section gives you a step-by-step workflow. Where appropriate, it provides
+command examples.&lt;/p&gt;
+
+&lt;p&gt;However, this is a generalized workflow, depending on your issue you may repeat
+steps or even skip some. How much time the work takes depends on you &amp;mdash; you
+could spend days or 30 minutes of your time.&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-work-on-your-local-branch&#34;&gt;How to work on your local branch&lt;/h2&gt;
+
+&lt;p&gt;Follow this workflow as you work:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Review the appropriate style guide.&lt;/p&gt;
+
+&lt;p&gt;If you are changing code, review the &lt;a href=&#34;../coding-style&#34;
+target=&#34;_blank&#34;&gt;coding style guide&lt;/a&gt;. Changing documentation? Review the
+&lt;a href=&#34;../doc-style&#34; target=&#34;_blank&#34;&gt;documentation style guide&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make changes in your feature branch.&lt;/p&gt;
+
+&lt;p&gt;Your feature branch you created in the last section. Here you use the
+development container. If you are making a code change, you can mount your
+source into a development container and iterate that way. For documentation
+alone, you can work on your local host.&lt;/p&gt;
+
+&lt;p&gt;Make sure you don&amp;rsquo;t change files in the &lt;code&gt;vendor&lt;/code&gt; directory and its
+subdirectories; they contain third-party dependency code. Review &lt;a
+href=&#34;../set-up-dev-env&#34; target=&#34;_blank&#34;&gt;if you forgot the details of
+working with a container&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Test your changes as you work.&lt;/p&gt;
+
+&lt;p&gt;If you have followed along with the guide, you know the &lt;code&gt;make test&lt;/code&gt; target
+runs the entire test suite and &lt;code&gt;make docs&lt;/code&gt; builds the documentation. If you
+forgot the other test targets, see the documentation for &lt;a
+href=&#34;../test-and-docs&#34; target=&#34;_blank&#34;&gt;testing both code and
+documentation&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For code changes, add unit tests if appropriate.&lt;/p&gt;
+
+&lt;p&gt;If you add new functionality or change existing functionality, you should
+add a unit test also. Use the existing test files for inspiration. Aren&amp;rsquo;t
+sure if you need tests? Skip this step; you can add them later in the
+process if necessary.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Format your source files correctly.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;File type&lt;/th&gt;
+    &lt;th&gt;How to format&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;code&gt;.go&lt;/code&gt;&lt;/td&gt;
+    &lt;td&gt;
+        &lt;p&gt;
+        Format &lt;code&gt;.go&lt;/code&gt; files using the &lt;code&gt;gofmt&lt;/code&gt; command.
+        For example, if you edited the `docker.go` file you would format the file
+        like this:
+        &lt;/p&gt;
+        &lt;p&gt;&lt;code&gt;$ gofmt -s -w docker.go&lt;/code&gt;&lt;/p&gt;
+        &lt;p&gt;
+        Most file editors have a plugin to format for you. Check your editor&#39;s
+        documentation.
+        &lt;/p&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td style=&#34;white-space: nowrap&#34;&gt;&lt;code&gt;.md&lt;/code&gt; and non-&lt;code&gt;.go&lt;/code&gt; files&lt;/td&gt;
+    &lt;td&gt;Wrap lines to 80 characters.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;List your changes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git status
+On branch 11038-fix-rhel-link
+Changes not staged for commit:
+  (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to update what will be committed)
+  (use &amp;quot;git checkout -- &amp;lt;file&amp;gt;...&amp;quot; to discard changes in working directory)
+
+
+modified:   docs/installation/mac.md
+modified:   docs/installation/rhel.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;status&lt;/code&gt; command lists what changed in the repository. Make sure you see
+the changes you expect.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add your change to Git.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git add docs/installation/mac.md
+$ git add docs/installation/rhel.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Commit your changes making sure you use the &lt;code&gt;-s&lt;/code&gt; flag to sign your work.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git commit -s -m &amp;quot;Fixing RHEL link&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Push your change to your repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git push origin 11038-fix-rhel-link
+Username for &#39;https://github.com&#39;: moxiegirl
+Password for &#39;https://moxiegirl@github.com&#39;: 
+Counting objects: 60, done.
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (7/7), 582 bytes | 0 bytes/s, done.
+Total 7 (delta 6), reused 0 (delta 0)
+To https://github.com/moxiegirl/docker.git
+ * [new branch]      11038-fix-rhel-link -&amp;gt; 11038-fix-rhel-link
+Branch 11038-fix-rhel-link set up to track remote branch 11038-fix-rhel-link from origin.
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;review-your-branch-on-github&#34;&gt;Review your branch on GitHub&lt;/h2&gt;
+
+&lt;p&gt;After you push a new branch, you should verify it on GitHub:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open your browser to &lt;a href=&#34;https://github.com&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to your Docker fork.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select your branch from the dropdown.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/locate_branch.png&#34; alt=&#34;Find branch&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use the &amp;ldquo;Compare&amp;rdquo; button to compare the differences between your branch and master.&lt;/p&gt;
+
+&lt;p&gt;Depending how long you&amp;rsquo;ve been working on your branch, your branch maybe
+ behind Docker&amp;rsquo;s upstream repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review the commits.&lt;/p&gt;
+
+&lt;p&gt;Make sure your branch only shows the work you&amp;rsquo;ve done.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;pull-and-rebase-frequently&#34;&gt;Pull and rebase frequently&lt;/h2&gt;
+
+&lt;p&gt;You should pull and rebase frequently as you work.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Return to the terminal on your local machine and checkout your
+feature branch in your local &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fetch any last minute changes from &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git fetch upstream master
+From github.com:docker/docker
+ * branch            master     -&amp;gt; FETCH_HEAD
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start an interactive rebase.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git rebase -i upstream/master
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rebase opens an editor with a list of commits.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pick 1a79f55 Tweak some of the other text for grammar
+pick 53e4983 Fix a link
+pick 3ce07bb Add a new line about RHEL
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Replace the &lt;code&gt;pick&lt;/code&gt; keyword with &lt;code&gt;squash&lt;/code&gt; on all but the first commit.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pick 1a79f55 Tweak some of the other text for grammar
+squash 53e4983 Fix a link
+squash 3ce07bb Add a new line about RHEL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After you save the changes and quit from the editor, git starts
+the rebase, reporting the progress along the way. Sometimes
+your changes can conflict with the work of others. If git
+encounters a conflict, it stops the rebase, and prints guidance
+for how to correct the conflict.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Edit and save your commit message.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git commit -s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure your message includes &lt;a href=&#34;../set-up-git&#34; target=&#34;_blank&#34;&gt;your signature&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Force push any changes to your fork on GitHub.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git push -f origin 11038-fix-rhel-link
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;At this point, you should understand how to work on an issue. In the next
+section, you &lt;a href=&#34;http://localhost/project/project/project/create-pr/&#34;&gt;learn how to make a pull request&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Work with a development container</title>
+      <link>http://localhost/project/set-up-dev-env/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/project/set-up-dev-env/</guid>
+      <description>
+
+&lt;h1 id=&#34;work-with-a-development-container&#34;&gt;Work with a development container&lt;/h1&gt;
+
+&lt;p&gt;In this section, you learn to develop like a member of Docker&amp;rsquo;s core team.
+The &lt;code&gt;docker&lt;/code&gt; repository includes a &lt;code&gt;Dockerfile&lt;/code&gt; at its root. This file defines
+Docker&amp;rsquo;s development environment.  The &lt;code&gt;Dockerfile&lt;/code&gt; lists the environment&amp;rsquo;s
+dependencies: system libraries and binaries, Go environment, Go dependencies,
+etc.&lt;/p&gt;
+
+&lt;p&gt;Docker&amp;rsquo;s development environment is itself, ultimately a Docker container.
+You use the &lt;code&gt;docker&lt;/code&gt; repository and its &lt;code&gt;Dockerfile&lt;/code&gt; to create a Docker image,
+run a Docker container, and develop code in the container. Docker itself builds,
+tests, and releases new Docker versions using this container.&lt;/p&gt;
+
+&lt;p&gt;If you followed the procedures that &lt;a href=&#34;http://localhost/project/set-up-git&#34; target=&#34;_blank&#34;&gt;
+set up Git for contributing&lt;/a&gt;, you should have a fork of the &lt;code&gt;docker/docker&lt;/code&gt;
+repository. You also created a branch called &lt;code&gt;dry-run-test&lt;/code&gt;. In this section,
+you continue working with your fork on this branch.&lt;/p&gt;
+
+&lt;h2 id=&#34;clean-your-host-of-docker-artifacts&#34;&gt;Clean your host of Docker artifacts&lt;/h2&gt;
+
+&lt;p&gt;Docker developers run the latest stable release of the Docker software (with Boot2Docker if their machine is Mac OS X). They clean their local
+hosts of unnecessary Docker artifacts such as stopped containers or unused
+images. Cleaning unnecessary artifacts isn&amp;rsquo;t strictly necessary, but it is
+good practice, so it is included here.&lt;/p&gt;
+
+&lt;p&gt;To remove unnecessary artifacts,&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Verify that you have no unnecessary containers running on your host.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see something similar to the following:&lt;/p&gt;
+
+&lt;table class=&#34;code&#34;&gt;
+  &lt;tr&gt;
+    &lt;th&gt;CONTAINER ID&lt;/th&gt;
+    &lt;th&gt;IMAGE&lt;/th&gt;
+    &lt;th&gt;COMMAND&lt;/th&gt;
+    &lt;th&gt;CREATED&lt;/th&gt;
+    &lt;th&gt;STATUS&lt;/th&gt;
+    &lt;th&gt;PORTS&lt;/th&gt;
+    &lt;th&gt;NAMES&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;There are no running containers on this host. If you have running but unused
+containers, stop and then remove them with the &lt;code&gt;docker stop&lt;/code&gt; and &lt;code&gt;docker rm&lt;/code&gt;
+commands.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify that your host has no dangling images.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see something similar to the following:&lt;/p&gt;
+
+&lt;table class=&#34;code&#34;&gt;
+  &lt;tr&gt;
+    &lt;th&gt;REPOSITORY&lt;/th&gt;
+    &lt;th&gt;TAG&lt;/th&gt;
+    &lt;th&gt;IMAGE ID&lt;/th&gt;
+    &lt;th&gt;CREATED&lt;/th&gt;
+    &lt;th&gt;VIRTUAL SIZE&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;This host has no images. You may have one or more &lt;em&gt;dangling&lt;/em&gt; images. A
+dangling image is not used by a running container and is not an ancestor of
+another image on your system. A fast way to remove dangling containers is
+the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker rmi -f $(docker images -q -a -f dangling=true)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command uses &lt;code&gt;docker images&lt;/code&gt; to list all images (&lt;code&gt;-a&lt;/code&gt; flag) by numeric
+IDs (&lt;code&gt;-q&lt;/code&gt; flag) and filter them to find dangling images (&lt;code&gt;-f dangling=true&lt;/code&gt;).
+Then, the &lt;code&gt;docker rmi&lt;/code&gt; command forcibly (&lt;code&gt;-f&lt;/code&gt; flag) removes
+the resulting list. To remove just one image, use the &lt;code&gt;docker rmi ID&lt;/code&gt;
+command.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;build-an-image&#34;&gt;Build an image&lt;/h2&gt;
+
+&lt;p&gt;If you followed the last procedure, your host is clean of unnecessary images
+and containers. In this section, you build an image from the Docker development
+environment.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a terminal.&lt;/p&gt;
+
+&lt;p&gt;Mac users, use &lt;code&gt;boot2docker status&lt;/code&gt; to make sure Boot2Docker is running. You
+may need to run &lt;code&gt;eval &amp;quot;$(boot2docker shellinit)&amp;quot;&lt;/code&gt; to initialize your shell
+environment.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change into the root of your forked repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd ~/repos/docker-fork 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you are following along with this guide, you created a &lt;code&gt;dry-run-test&lt;/code&gt;
+branch when you &lt;a href=&#34;http://localhost/project/set-up-git&#34; target=&#34;_blank&#34;&gt; set up Git for
+contributing&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ensure you are on your &lt;code&gt;dry-run-test&lt;/code&gt; branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git checkout dry-run-test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you get a message that the branch doesn&amp;rsquo;t exist, add the &lt;code&gt;-b&lt;/code&gt; flag (git checkout -b dry-run-test) so the
+command both creates the branch and checks it out.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Compile your development environment container into an image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker build -t dry-run-test .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;docker build&lt;/code&gt; command returns informational message as it runs. The
+first build may take a few minutes to create an image. Using the
+instructions in the &lt;code&gt;Dockerfile&lt;/code&gt;, the build may need to download source and
+other images. A successful build returns a final status message similar to
+the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Successfully built 676815d59283
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;List your Docker images again.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see something similar to this:&lt;/p&gt;
+
+&lt;table class=&#34;code&#34;&gt;
+  &lt;tr&gt;
+    &lt;th&gt;REPOSTITORY&lt;/th&gt;
+    &lt;th&gt;TAG&lt;/th&gt;
+    &lt;th&gt;IMAGE ID&lt;/th&gt;
+    &lt;th&gt;CREATED&lt;/th&gt;
+    &lt;th&gt;VIRTUAL SIZE&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;dry-run-test&lt;/td&gt;
+    &lt;td&gt;latest&lt;/td&gt;
+    &lt;td&gt;663fbee70028&lt;/td&gt;
+    &lt;td&gt;About a minute ago&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;ubuntu&lt;/td&gt;
+    &lt;td&gt;trusty&lt;/td&gt;
+    &lt;td&gt;2d24f826cb16&lt;/td&gt;
+    &lt;td&gt;2 days ago&lt;/td&gt;
+    &lt;td&gt;188.3 MB&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;ubuntu&lt;/td&gt;
+    &lt;td&gt;trusty-20150218.1&lt;/td&gt;
+    &lt;td&gt;2d24f826cb16&lt;/td&gt;
+    &lt;td&gt;2 days ago&lt;/td&gt;
+    &lt;td&gt;188.3 MB&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;ubuntu&lt;/td&gt;
+    &lt;td&gt;14.04&lt;/td&gt;
+    &lt;td&gt;2d24f826cb16&lt;/td&gt;
+    &lt;td&gt;2 days ago&lt;/td&gt;
+    &lt;td&gt;188.3 MB&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;ubuntu&lt;/td&gt;
+    &lt;td&gt;14.04.2&lt;/td&gt;
+    &lt;td&gt;2d24f826cb16&lt;/td&gt;
+    &lt;td&gt;2 days ago&lt;/td&gt;
+    &lt;td&gt;188.3 MB&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;ubuntu&lt;/td&gt;
+    &lt;td&gt;latest&lt;/td&gt;
+    &lt;td&gt;2d24f826cb16&lt;/td&gt;
+    &lt;td&gt;2 days ago&lt;/td&gt;
+    &lt;td&gt;188.3 MB&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Locate your new &lt;code&gt;dry-run-test&lt;/code&gt; image in the list. You should also see a
+number of &lt;code&gt;ubuntu&lt;/code&gt; images. The build process creates these. They are the
+ancestors of your new Docker development image. When you next rebuild your
+image, the build process reuses these ancestors images if they exist.&lt;/p&gt;
+
+&lt;p&gt;Keeping the ancestor images improves the build performance. When you rebuild
+the child image, the build process uses the local ancestors rather than
+retrieving them from the Hub. The build process gets new ancestors only if
+DockerHub has updated versions.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;start-a-container-and-run-a-test&#34;&gt;Start a container and run a test&lt;/h2&gt;
+
+&lt;p&gt;At this point, you have created a new Docker development environment image. Now,
+you&amp;rsquo;ll use this image to create a Docker container to develop in. Then, you&amp;rsquo;ll
+build and run a &lt;code&gt;docker&lt;/code&gt; binary in your container.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open two additional terminals on your host.&lt;/p&gt;
+
+&lt;p&gt;At this point, you&amp;rsquo;ll have about three terminals open.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/three_terms.png&#34; alt=&#34;Multiple terminals&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Mac OS X users, make sure you run &lt;code&gt;eval &amp;quot;$(boot2docker shellinit)&amp;quot;&lt;/code&gt; in any new
+terminals.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In a terminal, create a new container from your &lt;code&gt;dry-run-test&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --privileged --rm -ti dry-run-test /bin/bash
+root@5f8630b873fe:/go/src/github.com/docker/docker# 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The command creates a container from your &lt;code&gt;dry-run-test&lt;/code&gt; image. It opens an
+interactive terminal (&lt;code&gt;-ti&lt;/code&gt;) running a &lt;code&gt;/bin/bash&lt;/code&gt; shell.  The
+&lt;code&gt;--privileged&lt;/code&gt; flag gives the container access to kernel features and device
+access. This flag allows you to run a container in a container.
+Finally, the &lt;code&gt;-rm&lt;/code&gt; flag instructs Docker to remove the container when you
+exit the &lt;code&gt;/bin/bash&lt;/code&gt; shell.&lt;/p&gt;
+
+&lt;p&gt;The container includes the source of your image repository in the
+&lt;code&gt;/go/src/github.com/docker/docker&lt;/code&gt; directory. Try listing the contents to
+verify they are the same as that of your &lt;code&gt;docker-fork&lt;/code&gt; repo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/list_example.png&#34; alt=&#34;List example&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Investigate your container bit.&lt;/p&gt;
+
+&lt;p&gt;If you do a &lt;code&gt;go version&lt;/code&gt; you&amp;rsquo;ll find the &lt;code&gt;go&lt;/code&gt; language is part of the
+container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@31ed86e9ddcf:/go/src/github.com/docker/docker# go version
+go version go1.4.2 linux/amd64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Similarly, if you do a &lt;code&gt;docker version&lt;/code&gt; you find the container
+has no &lt;code&gt;docker&lt;/code&gt; binary.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@31ed86e9ddcf:/go/src/github.com/docker/docker# docker version
+bash: docker: command not found
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will create one in the next steps.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;From the &lt;code&gt;/go/src/github.com/docker/docker&lt;/code&gt; directory make a &lt;code&gt;docker&lt;/code&gt; binary
+with the &lt;code&gt;make.sh&lt;/code&gt; script.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@5f8630b873fe:/go/src/github.com/docker/docker# hack/make.sh binary
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You only call &lt;code&gt;hack/make.sh&lt;/code&gt; to build a binary &lt;em&gt;inside&lt;/em&gt; a Docker
+development container as you are now. On your host, you&amp;rsquo;ll use &lt;code&gt;make&lt;/code&gt;
+commands (more about this later).&lt;/p&gt;
+
+&lt;p&gt;As it makes the binary, the &lt;code&gt;make.sh&lt;/code&gt; script reports the build&amp;rsquo;s progress.
+When the command completes successfully, you should see the following
+output:&lt;/p&gt;
+
+&lt;p&gt;&amp;mdash;&amp;gt; Making bundle: binary (in bundles/1.5.0-dev/binary)
+Created binary: /go/src/github.com/docker/docker/bundles/1.5.0-dev/binary/docker-1.5.0-dev&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;List all the contents of the &lt;code&gt;binary&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@5f8630b873fe:/go/src/github.com/docker/docker#  ls bundles/1.5.0-dev/binary/
+docker  docker-1.5.0-dev  docker-1.5.0-dev.md5  docker-1.5.0-dev.sha256
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see that &lt;code&gt;binary&lt;/code&gt; directory, just as it sounds, contains the
+made binaries.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy the &lt;code&gt;docker&lt;/code&gt; binary to the &lt;code&gt;/usr/bin&lt;/code&gt; of your container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@5f8630b873fe:/go/src/github.com/docker/docker#  cp bundles/1.5.0-dev/binary/docker /usr/bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Inside your container, check your Docker version.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@5f8630b873fe:/go/src/github.com/docker/docker# docker --version
+Docker version 1.5.0-dev, build 6e728fb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Inside the container you are running a development version. This is the version
+on the current branch. It reflects the value of the &lt;code&gt;VERSION&lt;/code&gt; file at the
+root of your &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start a &lt;code&gt;docker&lt;/code&gt; daemon running inside your container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@5f8630b873fe:/go/src/github.com/docker/docker#  docker -dD
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;-dD&lt;/code&gt; flag starts the daemon in debug mode. You&amp;rsquo;ll find this useful
+when debugging your code.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Bring up one of the terminals on your local host.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;List your containers and look for the container running the &lt;code&gt;dry-run-test&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table class=&#34;code&#34;&gt;
+  &lt;tr&gt;
+    &lt;th&gt;CONTAINER ID&lt;/th&gt;
+    &lt;th&gt;IMAGE&lt;/th&gt;
+    &lt;th&gt;COMMAND&lt;/th&gt;
+    &lt;th&gt;CREATED&lt;/th&gt;
+    &lt;th&gt;STATUS&lt;/th&gt;
+    &lt;th&gt;PORTS&lt;/th&gt;
+    &lt;th&gt;NAMES&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;474f07652525&lt;/td&gt;
+    &lt;td&gt;dry-run-test:latest&lt;/td&gt;
+    &lt;td&gt;&#34;hack/dind /bin/bash&lt;/td&gt;
+    &lt;td&gt;14 minutes ago&lt;/td&gt;
+    &lt;td&gt;Up 14 minutes&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;tender_shockley&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;In this example, the container&amp;rsquo;s name is &lt;code&gt;tender_shockley&lt;/code&gt;; yours will be
+different.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;From the terminal, start another shell on your Docker development container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker exec -it tender_shockley bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point, you have two terminals both with a shell open into your
+development container. One terminal is running a debug session. The other
+terminal is displaying a &lt;code&gt;bash&lt;/code&gt; prompt.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;At the prompt, test the Docker client by running the &lt;code&gt;hello-world&lt;/code&gt; container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@9337c96e017a:/go/src/github.com/docker/docker#  docker run hello-world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see the image load and return. Meanwhile, you
+can see the calls made via the debug session in your other terminal.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/project/project/project/images/three_running.png&#34; alt=&#34;List example&#34; /&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;restart-a-container-with-your-source&#34;&gt;Restart a container with your source&lt;/h2&gt;
+
+&lt;p&gt;At this point, you have experienced the &amp;ldquo;Docker inception&amp;rdquo; technique. That is,
+you have:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;built a Docker image from the Docker repository&lt;/li&gt;
+&lt;li&gt;created and started a Docker development container from that image&lt;/li&gt;
+&lt;li&gt;built a Docker binary inside of your Docker development container&lt;/li&gt;
+&lt;li&gt;launched a &lt;code&gt;docker&lt;/code&gt; daemon using your newly compiled binary&lt;/li&gt;
+&lt;li&gt;called the &lt;code&gt;docker&lt;/code&gt; client to run a &lt;code&gt;hello-world&lt;/code&gt; container inside
+your development container&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;When you really get to developing code though, you&amp;rsquo;ll want to iterate code
+changes and builds inside the container. For that you need to mount your local
+Docker repository source into your Docker container. Try that now.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If you haven&amp;rsquo;t already, exit out of BASH shells in your running Docker
+container.&lt;/p&gt;
+
+&lt;p&gt;If you have followed this guide exactly, exiting out your BASH shells stops
+the running container. You can use the &lt;code&gt;docker ps&lt;/code&gt; command to verify the
+development container is stopped. All of your terminals should be at the
+local host prompt.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose a terminal and make sure you are in your &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ pwd
+/Users/mary/go/src/github.com/moxiegirl/docker-fork
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your location will be different because it reflects your environment.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a container using &lt;code&gt;dry-run-test&lt;/code&gt;, but this time, mount your repository
+onto the &lt;code&gt;/go&lt;/code&gt; directory inside the container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$  docker run --privileged --rm -ti -v `pwd`:/go/src/github.com/docker/docker dry-run-test /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you pass &lt;code&gt;pwd&lt;/code&gt;, &lt;code&gt;docker&lt;/code&gt; resolves it to your current directory.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;From inside the container, list your &lt;code&gt;binary&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@074626fc4b43:/go/src/github.com/docker/docker# ls bundles/1.5.0-dev/binary
+ls: cannot access binary: No such file or directory
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your &lt;code&gt;dry-run-test&lt;/code&gt; image does not retain any of the changes you made inside
+the container.  This is the expected behavior for a container.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In a fresh terminal on your local host, change to the &lt;code&gt;docker-fork&lt;/code&gt; root.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd ~/repos/docker-fork/
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a fresh binary, but this time, use the &lt;code&gt;make&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ make BINDDIR=. binary
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;BINDDIR&lt;/code&gt; flag is only necessary on Mac OS X but it won&amp;rsquo;t hurt to pass
+it on Linux command line. The &lt;code&gt;make&lt;/code&gt; command, like the &lt;code&gt;make.sh&lt;/code&gt; script
+inside the container, reports its progress. When the make succeeds, it
+returns the location of the new binary.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Back in the terminal running the container, list your &lt;code&gt;binary&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root@074626fc4b43:/go/src/github.com/docker/docker# ls bundles/1.5.0-dev/binary
+docker  docker-1.5.0-dev  docker-1.5.0-dev.md5  docker-1.5.0-dev.sha256 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The compiled binaries created from your repository on your local host are
+now available inside your running Docker development container.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Repeat the steps you ran in the previous procedure.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;copy the binary inside the development container using
+&lt;code&gt;cp bundles/1.5.0-dev/binary/docker /usr/bin&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;start &lt;code&gt;docker -dD&lt;/code&gt; to launch the Docker daemon inside the container&lt;/li&gt;
+&lt;li&gt;run &lt;code&gt;docker ps&lt;/code&gt; on local host to get the development container&amp;rsquo;s name&lt;/li&gt;
+&lt;li&gt;connect to your running container &lt;code&gt;docker exec -it container_name bash&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;use the &lt;code&gt;docker run hello-world&lt;/code&gt; command to create and run a container
+inside your development container&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;Congratulations, you have successfully achieved Docker inception. At this point,
+you&amp;rsquo;ve set up your development environment and verified almost all the essential
+processes you need to contribute. Of course, before you start contributing,
+&lt;a href=&#34;http://localhost/project/project/project/test-and-docs/&#34;&gt;you&amp;rsquo;ll need to learn one more piece of the development environment, the test
+framework&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

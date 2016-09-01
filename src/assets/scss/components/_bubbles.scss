@@ -1,0 +1,46 @@
+.bubbles {
+	display: block;
+	max-width: 500px;
+	margin: auto;
+	@media #{$small-only} {display: none;}
+}
+
+	.flip {
+		-moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+	}
+
+.bubbles.animated {
+	.b1, .b2, .b3, .b4, .b5, .b6, .b7, .b8, .b9, .b10, .b11, .b12, .b13 {
+		opacity: 0;
+		-webkit-animation-name: fadeInUp;
+		-webkit-animation-duration: 600ms;;
+		-webkit-animation-timing-function: ease-in-out;
+		-webkit-animation-delay: 0;
+		-webkit-animation-fill-mode: both;
+		-moz-animation-name: fadeInUp;
+		-moz-animation-duration: 600ms;;
+		-moz-animation-timing-function: ease-in-out;
+		-moz-animation-delay: 0;
+		-moz-animation-fill-mode: both;
+	}
+	.b2 { -webkit-animation-delay: 200ms; -moz-animation-delay: 200ms;}
+	.b3 {-webkit-animation-delay: 300ms; -moz-animation-delay: 300ms;}
+	.b4 {-webkit-animation-delay: 400ms; -moz-animation-delay: 400ms;}
+	.b5 {-webkit-animation-delay: 500ms; -moz-animation-delay: 500ms;}
+	.b6 {-webkit-animation-delay: 6000ms;-moz-animation-delay: 600ms;}
+	.b7 {-webkit-animation-delay: 700ms; -moz-animation-delay: 700ms;}
+	.b8 {-webkit-animation-delay: 800ms; -moz-animation-delay: 800ms;}
+	.b9 {-webkit-animation-delay: 900ms; -moz-animation-delay: 900ms;}
+	.b10 {-webkit-animation-delay: 1000ms; -moz-animation-delay: 1000ms;}
+	.b11 {-webkit-animation-delay: 1200ms; -moz-animation-delay: 1200ms;}
+	.b12 {-webkit-animation-delay: 1300ms; -moz-animation-delay: 1300ms;}
+	.b13 {-webkit-animation-delay: 1400ms; -moz-animation-delay: 1400ms;}
+}
+
+.ie9  {
+  .bubbles.animated {
+		opacity: 1;
+  }
+ } 

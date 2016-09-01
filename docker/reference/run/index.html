@@ -1,0 +1,3161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docker run reference </title>
+     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/dist/assets/css/app.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.6/animate.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script href="/dist/assets/js/modernizr.js"></script> 
+</head>
+<body>
+  <div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+
+      <a class="left-off-canvas-toggle" href="#" >
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve">
+          <path fill="#3597D4" d="M30.583,9.328c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,7.966,30.583,8.576,30.583,9.328L30.583,9.328z"/>
+          <path fill="#3597D4" d="M30.583,17.09c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,15.728,30.583,16.338,30.583,17.09L30.583,17.09z"/>
+          <path fill="#3597D4" d="M30.583,24.387c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,23.025,30.583,23.635,30.583,24.387L30.583,24.387z"/>
+        </svg>
+      </a>
+      <a class="button secondary small get-started-cta">Get Started</a>
+      <header class="main-header">
+        <div class="row">
+          <div class="large-3 columns">
+            <a href="/"><img class="logo" href="/dist/assets/images/logo.png"></a>
+          </div>
+          <div class="large-9 columns">
+            <ul class="nav-global">
+              <li><a href="https://www.docker.com/support">Support</a></li>
+              <li><a href="https://training.docker.com/">Training</a></li>
+              <li><a href="/">Docs</a></li>
+              <li><a href="http://blog.docker.com/">Blog</a></li>
+              <li><a href="https://hub.docker.com/account/signup/">Docker Hub</a></li>
+              <li><a class="button" href="/mac/started/">Get Started</a></li>
+            </ul>
+            <ul class="nav-main">
+              <li><a href="https://www.docker.com/products">Products</a>
+                <ul>
+                  <li><a href="https://www.docker.com/pricing">Pricing</a></li>
+                  <li><a href="https://www.docker.com/whatisdocker">What is Docker?</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/customers">Customers</a></li>
+              <li><a href="https://www.docker.com/community">Community</a>
+                <ul>
+                  <li><a href="https://www.docker.com/community/meetups">Meetups</a></li>
+                  <li><a href="https://www.docker.com/community/events">Events</a></li>
+                  <li><a href="https://forums.docker.com">Forums</a></li>
+                  <li><a href="http://www.scoop.it/t/docker-by-docker">Community News</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/partners">Partners</a>
+                <ul>
+                  <li><a href="https://www.docker.com/partners/partner-programs">Partner Programs</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/company">Company</a>
+                <ul>
+                  <li><a href="https://www.docker.com/news-and-press">News &amp; Press</a></li>
+                  <li><a href="https://www.docker.com/work-docker">Work at Docker</a></li>
+                  <li><a href="https://www.docker.com/company/management">Management</a></li>
+                  <li><a href="https://www.docker.com/company/contact">Contact</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/open-source">Open Source</a>
+                <ul>
+                  <li><a href="https://www.docker.com/contribute">Contribute</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      
+      <aside class="left-off-canvas-menu">
+        <ul class="off-canvas-list">
+          <li class="has-submenu"><a href="#">Products</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">What Is Docker</a></li>
+              <li><a href="#">Products</a></li>
+              <li><a href="#">Docker Engine</a></li>
+              <li><a href="#">Docker Hub</a></li>
+              <li><a href="#">Docker Registry</a></li>
+              <li><a href="#">Docker Machine</a></li>
+              <li><a href="#">Docker Swarm</a></li>
+              <li><a href="#">Docker Compose</a></li>
+              <li><a href="#">Kitematic</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Customers</a></li>
+          <li class="has-submenu"><a href="#">Community</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#">Meetups</a></li>
+              <li><a href="https://www.docker.com/community/events">Events</a></li>
+              <li><a href="#">Forum</a></li>
+              <li><a href="#">Scoop.it</a></li>
+            </ul>
+          </li>
+          <li class="has-submenu"><a href="#">Partners</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Partners</a></li>
+              <li><a href="https://www.docker.com/partners/partner-programs">Partners Programs</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Company</a></li>
+          <li class="has-submenu"><a href="#">Open Source</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Open Source</a></li>
+              <li><a href="#">Contribute</a></li>
+              <li><a href="#">Governance</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav-global-off-canvas">
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Training</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Sign in</a></li>
+          <li><a href="#">Sign up</a></li>
+        </ul>
+      </aside>
+      
+      <a class="exit-off-canvas"></a>
+<div id="docs" class="row">
+    <div class="large-3 columns">
+        <section id="multiple" data-accordion-group>
+  
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Install</button>
+          <div data-content>
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Engine</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/installation/mac/" class=""> Installation on Mac OS X</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/installation/windows/" class=""> Installation on Windows</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Linux</button>
+                          <div data-content>
+                            
+                                <a data-link href="/docker/installation/archlinux/" class=""> Installation on Arch Linux</a>
+                            
+                                <a data-link href="/docker/installation/cruxlinux/" class=""> Installation on CRUX Linux</a>
+                            
+                                <a data-link href="/docker/installation/centos/" class=""> Installation on CentOS</a>
+                            
+                                <a data-link href="/docker/installation/debian/" class=""> Installation on Debian</a>
+                            
+                                <a data-link href="/docker/installation/fedora/" class=""> Installation on Fedora</a>
+                            
+                                <a data-link href="/docker/installation/frugalware/" class=""> Installation on FrugalWare</a>
+                            
+                                <a data-link href="/docker/installation/gentoolinux/" class=""> Installation on Gentoo</a>
+                            
+                                <a data-link href="/docker/installation/oracle/" class=""> Installation on Oracle Linux</a>
+                            
+                                <a data-link href="/docker/installation/rhel/" class=""> Installation on Red Hat Enterprise Linux</a>
+                            
+                                <a data-link href="/docker/installation/ubuntulinux/" class=""> Installation on Ubuntu </a>
+                            
+                                <a data-link href="/docker/installation/SUSE/" class=""> Installation on openSUSE and SUSE Linux Enterprise</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Cloud</button>
+                          <div data-content>
+                            
+                                <a data-link href="/docker/installation/amazon/" class=""> Amazon EC2 Installation</a>
+                            
+                                <a data-link href="/docker/installation/joyent/" class=""> Install on Joyent Public Cloud</a>
+                            
+                                <a data-link href="/docker/installation/google/" class=""> Installation on Google Cloud Platform</a>
+                            
+                                <a data-link href="/docker/installation/softlayer/" class=""> Installation on IBM SoftLayer </a>
+                            
+                                <a data-link href="/docker/installation/azure/" class=""> Installation on Microsoft Azure platform</a>
+                            
+                                <a data-link href="/docker/installation/rackspace/" class=""> Installation on Rackspace Cloud</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/installation/binaries/" class=""> Installation from binaries</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="/kitematic/" class=""> Kitematic</a>
+              
+            
+              
+                <a data-link href="/machine/install-machine/" class=""> Docker Machine</a>
+              
+            
+              
+                <a data-link href="/compose/install/" class=""> Docker Compose</a>
+              
+            
+              
+                <a data-link href="/swarm/install-w-machine/" class=""> Docker Swarm</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Docker Fundamentals</button>
+          <div data-content>
+            
+              
+                <a data-link href="/docker/userguide/" class=""> The Docker user guide</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Work with Docker Images</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/articles/dockerfile_best-practices/" class=""> Best practices for writing Dockerfiles</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/baseimages/" class=""> Create a base image</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/dockerimages/" class=""> Get started with images</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/dockerrepos/" class=""> Get started with Docker Hub</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Work with Docker Containers</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/articles/basics/" class=""> Get started with containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/usingdocker/" class=""> Working with containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/dockervolumes/" class=""> Managing data in containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/dockerlinks/" class=""> Linking containers together</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/host_integration/" class=""> Automatically start containers</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker on Windows &amp; OSX</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/articles/dsc/" class=""> PowerShell DSC Usage</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/b2d_volume_resize/" class=""> Resizing a Boot2Docker volume	</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Use the Kitematic GUI</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/kitematic/userguide/" class=""> Kitematic User Guide: Intro &amp; Overview</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/kitematic/nginx-web-server/" class=""> Set up an Nginx web server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/kitematic/minecraft-server/" class=""> Set up a Minecraft Server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/kitematic/rethinkdb-dev-database/" class=""> Creating a Local RethinkDB Database for Development</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/kitematic/faq/" class=""> Frequently Asked Questions</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/kitematic/known-issues/" class=""> Known Issues</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Use Docker</button>
+          <div data-content>
+            
+              
+                <a data-link href="/docker/misc/" class=""> About Docker</a>
+              
+            
+              
+                <a data-link href="/docker/userguide/labels-custom-metadata/" class=""> Apply custom metadata</a>
+              
+            
+              
+                <a data-link href="/docker/introduction/understanding-docker/" class=""> Understand the architecture</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Provision &amp; set up Docker hosts</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/machine/" class=""> Overview of Docker Machine</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Create multi-container applications</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/compose/" class=""> Overview of Docker Compose</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/production/" class=""> Using Compose in production</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/extends/" class=""> Extending services in Compose</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/completion/" class=""> Command Completion</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/django/" class=""> Quickstart Guide: Compose and Django</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/rails/" class=""> Quickstart Guide: Compose and Rails</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/wordpress/" class=""> Quickstart Guide: Compose and Wordpress</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Cluster Docker containers</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/swarm/" class=""> Docker Swarm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/swarm/install-manual/" class=""> Create a swarm for development</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/swarm/discovery/" class=""> Docker Swarm discovery</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/swarm/scheduler/filter/" class=""> Docker Swarm filters</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/swarm/scheduler/strategy/" class=""> Docker Swarm strategies</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Adminstrate Docker</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/articles/networking/" class=""> Network configuration</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/security/" class=""> Docker security</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/configuring/" class=""> Configuring and running Docker</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/runmetrics/" class=""> Runtime metrics</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/https/" class=""> Protect the Docker daemon socket</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/ambassador_pattern_linking/" class=""> Link via an ambassador container</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/articles/systemd/" class=""> Control and configure Docker with systemd</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Applications and Services</button>
+                          <div data-content>
+                            
+                                <a data-link href="/docker/examples/running_riak_service/" class=""> Dockerizing a Riak service</a>
+                            
+                                <a data-link href="/docker/examples/running_ssh_service/" class=""> Dockerizing an SSH service</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Integrate with Third-party Tools</button>
+                          <div data-content>
+                            
+                                <a data-link href="/articles/cfengine_process_management/" class=""> Process management with CFEngine</a>
+                            
+                                <a data-link href="/articles/chef/" class=""> Using Chef</a>
+                            
+                                <a data-link href="/articles/puppet/" class=""> Using Puppet</a>
+                            
+                                <a data-link href="/articles/using_supervisord/" class=""> Using Supervisor with Docker</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Applied Docker</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/examples/mongodb/" class=""> Dockerizing MongoDB</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/examples/postgresql_service/" class=""> Dockerizing PostgreSQL</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/examples/couchdb_data_volumes/" class=""> Dockerizing a CouchDB service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/examples/nodejs_web_app/" class=""> Dockerizing a Node.js web app</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/examples/running_redis_service/" class=""> Dockerizing a Redis service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/examples/apt-cacher-ng/" class=""> Dockerizing an apt-cacher-ng service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/dockerizing/" class=""> Dockerizing applications: A &#39;Hello world&#39;</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Manage image repositories</button>
+          <div data-content>
+            
+              
+                <article data-accordion>
+                  <button data-control> The Public Hub</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/docker-hub/userguide/" class=""> Docker Hub user guide</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/docker-hub/" class=""> The Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/docker-hub/accounts/" class=""> Accounts on Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/userguide/dockerhub/" class=""> Getting started with Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/docker-hub/repos/" class=""> Your Repositories on Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/docker-hub/builds/" class=""> Automated Builds on Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/docker-hub/official_repos/" class=""> Official Repositories on Docker Hub</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Trusted Registry</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/" class=""> Overview</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/quick-start/" class=""> Quick-start: Basic Workflow</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/userguide/" class=""> User guide</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/adminguide/" class=""> Admin guide</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/install/" class=""> Installation</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/configuration/" class=""> Configuration options</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/support/" class=""> Support</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/release-notes/" class=""> Release notes</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker-trusted-registry/prior-release-notes/" class=""> Prior release notes archive</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Registry</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/registry/" class=""> Docker Registry 2.0</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/introduction/" class=""> Understanding the Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/deploying/" class=""> Deploying a registry server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/configuration/" class=""> Configure a Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/notifications/" class=""> Work with Notifications</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/authentication/" class=""> Authentication for the Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/help/" class=""> Getting help</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="/articles/certificates/" class=""> Using certificates for repository client verification</a>
+              
+            
+              
+                <a data-link href="/articles/registry_mirror/" class=""> Run a local registry mirror</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Command and API references</button>
+          <div data-content>
+            
+              
+                <article data-accordion>
+                  <button data-control> Command line reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/cli/" class=""> Using the command line</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/daemon/" class=""> daemon</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/attach/" class=""> attach</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/build/" class=""> build</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/commit/" class=""> commit</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/cp/" class=""> cp</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/create/" class=""> create</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/diff/" class=""> diff</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/events/" class=""> events</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/exec/" class=""> exec</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/export/" class=""> export</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/history/" class=""> history</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/images/" class=""> images</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/import/" class=""> import</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/info/" class=""> info</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/inspect/" class=""> inspect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/kill/" class=""> kill</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/load/" class=""> load</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/login/" class=""> login</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/logout/" class=""> logout</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/logs/" class=""> logs</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/pause/" class=""> pause</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/port/" class=""> port</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/ps/" class=""> ps</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/pull/" class=""> pull</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/push/" class=""> push</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/rename/" class=""> rename</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/restart/" class=""> restart</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/rm/" class=""> rm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/rmi/" class=""> rmi</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/run/" class=""> run</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/save/" class=""> save</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/search/" class=""> search</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/start/" class=""> start</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/stats/" class=""> stats</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/stop/" class=""> stop</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/tag/" class=""> tag</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/top/" class=""> top</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/unpause/" class=""> unpause</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/version/" class=""> version</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/commandline/wait/" class=""> wait</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="/docker/reference/run/" class=" active"> Docker run reference</a>
+              
+            
+              
+                <a data-link href="/docker/reference/builder/" class=""> Dockerfile reference</a>
+              
+            
+              
+                <a data-link href="/docker/reference/api/remote_api_client_libraries/" class=""> Remote API client libraries</a>
+              
+            
+              
+                <a data-link href="/docker/reference/api/docker_io_accounts_api/" class=""> docker.io accounts API</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Remote API</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker-io_api/" class=""> Docker Hub API</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api/" class=""> Remote API</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api_v1.19/" class=""> Remote API v1.19</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api_v1.18/" class=""> Remote API v1.18</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api_v1.17/" class=""> Remote API v1.17</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api_v1.16/" class=""> Remote API v1.16</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api_v1.15/" class=""> Remote API v1.15</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/reference/api/docker_remote_api_v1.14/" class=""> Remote API v1.14</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Hub</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/reference/api/hub_registry_spec/" class=""> The Docker Hub and the Registry v1</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Compose Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/compose/cli/" class=""> Compose CLI reference</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/yml/" class=""> docker-compose.yml reference</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/compose/env/" class=""> Compose environment variables reference</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="" class=""> Docker Machine Reference</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Swarm Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/swarm/api/swarm-api/" class=""> Docker Swarm API</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Registry Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/registry/spec/api/" class=""> Docker Registry HTTP API V2</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/storagedrivers/" class=""> Docker Registry Storage Driver</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/registry/spec/auth/token/" class=""> Docker Registry v2 Authentication</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Open Source at Docker</button>
+          <div data-content>
+            
+              
+                <a data-link href="/opensource/how-to-contribute/" class=""> Overview of contributing</a>
+              
+            
+              
+                <a data-link href="/docker/project/get-help/" class=""> Where to chat or get help</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Configure Development Environment</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/project/who-written-for/" class=""> README first</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/software-required/" class=""> Get the required software</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/software-req-win/" class=""> Set up for development on Windows</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/set-up-git/" class=""> Configure Git for contributing</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/set-up-dev-env/" class=""> Work with a development container</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/test-and-docs/" class=""> Run tests and test documentation</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Contribution Workflow</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/docker/project/make-a-contribution/" class=""> Understand how to contribute</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/find-an-issue/" class=""> Find and claim an issue</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/work-issue/" class=""> Work on your issue</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/create-pr/" class=""> Create a pull request (PR)</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/review-pr/" class=""> Participate in the PR review</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/advanced-contributing/" class=""> Advanced contributing</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/docker/project/coding-style/" class=""> Coding style checklist</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="/opensource/code/" class=""> Contribute code overview</a>
+              
+            
+              
+                <a data-link href="/opensource/community/" class=""> Support the community</a>
+              
+            
+              
+                <a data-link href="/opensource/issues/" class=""> Organize our issues</a>
+              
+            
+              
+                <a data-link href="/opensource/meetups/" class=""> Organize a Docker Meetup</a>
+              
+            
+              
+                <a data-link href="/opensource/test/" class=""> Testing contributions</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Governance</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="/opensource/governance/dgab-info/" class=""> Docker Governance Advisory Board</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/opensource/governance/board-profiles/" class=""> Board member profiles</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="/opensource/governance/conduct-code/" class=""> Code of conduct</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="/docker/project/doc-style/" class=""> Style guide for Docker documentation</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> About</button>
+          <div data-content>
+            
+              
+                <a data-link href="/release-notes/" class=""> Docker Release Notes</a>
+              
+            
+              
+                <a data-link href="/swarm/release-notes/" class=""> Docker Swarm Release Notes</a>
+              
+            
+              
+                <a data-link href="/docker/misc/faq/" class=""> FAQ</a>
+              
+            
+              
+                <a data-link href="/docker/reference/glossary/" class=""> Docker Glossary</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Get older docs</button>
+          <div data-content>
+            
+              
+                <a data-link href="https://docs.docker.com/v1.6/" class=""> Version 1.6</a>
+              
+            
+              
+                <a data-link href="https://docs.docker.com/v1.5/" class=""> Version 1.5</a>
+              
+            
+              
+                <a data-link href="https://docs.docker.com/v1.4/" class=""> Version 1.4</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+</section>
+
+<script>
+$(document).ready(function () {
+  var $activeLink = $('#multiple [data-link].active');
+  var $accordions = $activeLink.parents('article[data-accordion]');
+  $($accordions.get().reverse()).each(function (index, accordion) {
+    var $accordion = $(accordion);
+    var $content = $accordion.find('[data-content]');
+    $accordion.addClass('open');
+    $content.css({'max-height': '100%'});
+  });
+});
+</script>
+    </div>
+    <div class="large-6 columns">
+      <section id="main">
+        <article id="content">
+          
+
+<!-- TODO (@thaJeztah) define more flexible table/td classes -->
+
+<p><style>
+.content-body table .no-wrap {
+    white-space: nowrap;
+}
+</style></p>
+
+<h1 id="docker-run-reference">Docker run reference</h1>
+
+<p><strong>Docker runs processes in isolated containers</strong>. When an operator
+executes <code>docker run</code>, she starts a process with its own file system,
+its own networking, and its own isolated process tree.  The
+<a href="/terms/image/#image"><em>Image</em></a> which starts the process may define
+defaults related to the binary to run, the networking to expose, and
+more, but <code>docker run</code> gives final control to the operator who starts
+the container from the image. That&rsquo;s the main reason
+<a href="/reference/commandline/cli/#run"><em>run</em></a> has more options than any
+other <code>docker</code> command.</p>
+
+<h2 id="general-form">General form</h2>
+
+<p>The basic <code>docker run</code> command takes this form:</p>
+
+<pre><code>$ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
+</code></pre>
+
+<p>To learn how to interpret the types of <code>[OPTIONS]</code>,
+see <a href="/reference/commandline/cli/#option-types"><em>Option types</em></a>.</p>
+
+<p>The <code>run</code> options control the image&rsquo;s runtime behavior in a container. These
+settings affect:</p>
+
+<ul>
+<li>detached or foreground running</li>
+<li>container identification</li>
+<li>network settings</li>
+<li>runtime constraints on CPU and memory</li>
+<li>privileges and LXC configuration</li>
+</ul>
+
+<p>An image developer may set defaults for these same settings when they create the
+image using the <code>docker build</code> command. Operators, however, can override all
+defaults set by the developer using the <code>run</code> options.  And, operators can also
+override nearly all the defaults set by the Docker runtime itself.</p>
+
+<p>Finally, depending on your Docker system configuration, you may be required to
+preface each <code>docker</code> command with <code>sudo</code>. To avoid having to use <code>sudo</code> with
+the <code>docker</code> command, your system administrator can create a Unix group called
+<code>docker</code> and add users to it. For more information about this configuration,
+refer to the Docker installation documentation for your operating system.</p>
+
+<h2 id="operator-exclusive-options">Operator exclusive options</h2>
+
+<p>Only the operator (the person executing <code>docker run</code>) can set the
+following options.</p>
+
+<ul>
+<li><a href="#detached-vs-foreground">Detached vs Foreground</a>
+
+<ul>
+<li><a href="#detached-d">Detached (-d)</a></li>
+<li><a href="#foreground">Foreground</a></li>
+</ul></li>
+<li><a href="#container-identification">Container Identification</a>
+
+<ul>
+<li><a href="#name-name">Name (&ndash;name)</a></li>
+<li><a href="#pid-equivalent">PID Equivalent</a></li>
+</ul></li>
+<li><a href="#ipc-settings-ipc">IPC Settings (&ndash;ipc)</a></li>
+<li><a href="#network-settings">Network Settings</a></li>
+<li><a href="#restart-policies-restart">Restart Policies (&ndash;restart)</a></li>
+<li><a href="#clean-up-rm">Clean Up (&ndash;rm)</a></li>
+<li><a href="#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a></li>
+<li><a href="#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime Privilege, Linux Capabilities, and LXC Configuration</a></li>
+</ul>
+
+<h2 id="detached-vs-foreground">Detached vs foreground</h2>
+
+<p>When starting a Docker container, you must first decide if you want to
+run the container in the background in a &ldquo;detached&rdquo; mode or in the
+default foreground mode:</p>
+
+<pre><code>-d=false: Detached mode: Run container in the background, print new container id
+</code></pre>
+
+<h3 id="detached-d">Detached (-d)</h3>
+
+<p>In detached mode (<code>-d=true</code> or just <code>-d</code>), all I/O should be done
+through network connections or shared volumes because the container is
+no longer listening to the command line where you executed <code>docker run</code>.
+You can reattach to a detached container with <code>docker</code>
+<a href="/reference/commandline/cli/#attach"><em>attach</em></a>. If you choose to run a
+container in the detached mode, then you cannot use the <code>--rm</code> option.</p>
+
+<h3 id="foreground">Foreground</h3>
+
+<p>In foreground mode (the default when <code>-d</code> is not specified), <code>docker
+run</code> can start the process in the container and attach the console to
+the process&rsquo;s standard input, output, and standard error. It can even
+pretend to be a TTY (this is what most command line executables expect)
+and pass along signals. All of that is configurable:</p>
+
+<pre><code>-a=[]           : Attach to `STDIN`, `STDOUT` and/or `STDERR`
+-t=false        : Allocate a pseudo-tty
+--sig-proxy=true: Proxify all received signal to the process (non-TTY mode only)
+-i=false        : Keep STDIN open even if not attached
+</code></pre>
+
+<p>If you do not specify <code>-a</code> then Docker will <a href="https://github.com/docker/docker/blob/
+75a7f4d90cde0295bcfb7213004abce8d4779b75/commands.go#L1797">attach all standard
+streams</a>. You can
+specify to which of the three standard streams (<code>STDIN</code>, <code>STDOUT</code>,
+<code>STDERR</code>) you&rsquo;d like to connect instead, as in:</p>
+
+<pre><code>$ docker run -a stdin -a stdout -i -t ubuntu /bin/bash
+</code></pre>
+
+<p>For interactive processes (like a shell), you must use <code>-i -t</code> together in
+order to allocate a tty for the container process. <code>-i -t</code> is often written <code>-it</code>
+as you&rsquo;ll see in later examples.  Specifying <code>-t</code> is forbidden when the client
+standard output is redirected or piped, such as in:
+<code>echo test | docker run -i busybox cat</code>.</p>
+
+<blockquote>
+<p><strong>Note</strong>: A process running as PID 1 inside a container is treated
+specially by Linux: it ignores any signal with the default action.
+So, the process will not terminate on <code>SIGINT</code> or <code>SIGTERM</code> unless it is
+coded to do so.</p>
+</blockquote>
+
+<h2 id="container-identification">Container identification</h2>
+
+<h3 id="name-name">Name (&ndash;name)</h3>
+
+<p>The operator can identify a container in three ways:</p>
+
+<ul>
+<li>UUID long identifier
+(&ldquo;f78375b1c487e03c9438c729345e54db9d20cfa2ac1fc3494b6eb60872e74778&rdquo;)</li>
+<li>UUID short identifier (&ldquo;f78375b1c487&rdquo;)</li>
+<li>Name (&ldquo;evil_ptolemy&rdquo;)</li>
+</ul>
+
+<p>The UUID identifiers come from the Docker daemon, and if you do not
+assign a name to the container with <code>--name</code> then the daemon will also
+generate a random string name too. The name can become a handy way to
+add meaning to a container since you can use this name when defining
+<a href="/userguide/dockerlinks"><em>links</em></a> (or any
+other place you need to identify a container). This works for both
+background and foreground Docker containers.</p>
+
+<h3 id="pid-equivalent">PID equivalent</h3>
+
+<p>Finally, to help with automation, you can have Docker write the
+container ID out to a file of your choosing. This is similar to how some
+programs might write out their process ID to a file (you&rsquo;ve seen them as
+PID files):</p>
+
+<pre><code>--cidfile=&quot;&quot;: Write the container ID to the file
+</code></pre>
+
+<h3 id="image-tag">Image[:tag]</h3>
+
+<p>While not strictly a means of identifying a container, you can specify a version of an
+image you&rsquo;d like to run the container with by adding <code>image[:tag]</code> to the command. For
+example, <code>docker run ubuntu:14.04</code>.</p>
+
+<h3 id="image-digest">Image[@digest]</h3>
+
+<p>Images using the v2 or later image format have a content-addressable identifier
+called a digest. As long as the input used to generate the image is unchanged,
+the digest value is predictable and referenceable.</p>
+
+<h2 id="pid-settings-pid">PID settings (&ndash;pid)</h2>
+
+<pre><code>--pid=&quot;&quot;  : Set the PID (Process) Namespace mode for the container,
+       'host': use the host's PID namespace inside the container
+</code></pre>
+
+<p>By default, all containers have the PID namespace enabled.</p>
+
+<p>PID namespace provides separation of processes. The PID Namespace removes the
+view of the system processes, and allows process ids to be reused including
+pid 1.</p>
+
+<p>In certain cases you want your container to share the host&rsquo;s process namespace,
+basically allowing processes within the container to see all of the processes
+on the system.  For example, you could build a container with debugging tools
+like <code>strace</code> or <code>gdb</code>, but want to use these tools when debugging processes
+within the container.</p>
+
+<pre><code>$ docker run --pid=host rhel7 strace -p 1234
+</code></pre>
+
+<p>This command would allow you to use <code>strace</code> inside the container on pid 1234 on
+the host.</p>
+
+<h2 id="uts-settings-uts">UTS settings (&ndash;uts)</h2>
+
+<pre><code>--uts=&quot;&quot;  : Set the UTS namespace mode for the container,
+       'host': use the host's UTS namespace inside the container
+</code></pre>
+
+<p>The UTS namespace is for setting the hostname and the domain that is visible
+to running processes in that namespace.  By default, all containers, including
+those with <code>--net=host</code>, have their own UTS namespace.  The <code>host</code> setting will
+result in the container using the same UTS namespace as the host.</p>
+
+<p>You may wish to share the UTS namespace with the host if you would like the
+hostname of the container to change as the hostname of the host changes.  A
+more advanced use case would be changing the host&rsquo;s hostname from a container.</p>
+
+<blockquote>
+<p><strong>Note</strong>: <code>--uts=&quot;host&quot;</code> gives the container full access to change the
+hostname of the host and is therefore considered insecure.</p>
+</blockquote>
+
+<h2 id="ipc-settings-ipc">IPC settings (&ndash;ipc)</h2>
+
+<pre><code>--ipc=&quot;&quot;  : Set the IPC mode for the container,
+             'container:&lt;name|id&gt;': reuses another container's IPC namespace
+             'host': use the host's IPC namespace inside the container
+</code></pre>
+
+<p>By default, all containers have the IPC namespace enabled.</p>
+
+<p>IPC (POSIX/SysV IPC) namespace provides separation of named shared memory
+segments, semaphores and message queues.</p>
+
+<p>Shared memory segments are used to accelerate inter-process communication at
+memory speed, rather than through pipes or through the network stack. Shared
+memory is commonly used by databases and custom-built (typically C/OpenMPI,
+C++/using boost libraries) high performance applications for scientific
+computing and financial services industries. If these types of applications
+are broken into multiple containers, you might need to share the IPC mechanisms
+of the containers.</p>
+
+<h2 id="network-settings">Network settings</h2>
+
+<pre><code>--dns=[]         : Set custom dns servers for the container
+--net=&quot;bridge&quot;   : Set the Network mode for the container
+                    'bridge': creates a new network stack for the container on the docker bridge
+                    'none': no networking for this container
+                    'container:&lt;name|id&gt;': reuses another container network stack
+                    'host': use the host network stack inside the container
+--add-host=&quot;&quot;    : Add a line to /etc/hosts (host:IP)
+--mac-address=&quot;&quot; : Sets the container's Ethernet device's MAC address
+</code></pre>
+
+<p>By default, all containers have networking enabled and they can make any
+outgoing connections. The operator can completely disable networking
+with <code>docker run --net none</code> which disables all incoming and outgoing
+networking. In cases like this, you would perform I/O through files or
+<code>STDIN</code> and <code>STDOUT</code> only.</p>
+
+<p>Your container will use the same DNS servers as the host by default, but
+you can override this with <code>--dns</code>.</p>
+
+<p>By default, the MAC address is generated using the IP address allocated to the
+container. You can set the container&rsquo;s MAC address explicitly by providing a
+MAC address via the <code>--mac-address</code> parameter (format:<code>12:34:56:78:9a:bc</code>).</p>
+
+<p>Supported networking modes are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th class="no-wrap">Mode</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="no-wrap"><strong>none</strong></td>
+      <td>
+        No networking in the container.
+      </td>
+    </tr>
+    <tr>
+      <td class="no-wrap"><strong>bridge</strong> (default)</td>
+      <td>
+        Connect the container to the bridge via veth interfaces.
+      </td>
+    </tr>
+    <tr>
+      <td class="no-wrap"><strong>host</strong></td>
+      <td>
+        Use the host's network stack inside the container.
+      </td>
+    </tr>
+    <tr>
+      <td class="no-wrap"><strong>container</strong>:&lt;name|id&gt;</td>
+      <td>
+        Use the network stack of another container, specified via
+        its *name* or *id*.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="mode-none">Mode: none</h4>
+
+<p>With the networking mode set to <code>none</code> a container will not have a
+access to any external routes.  The container will still have a
+<code>loopback</code> interface enabled in the container but it does not have any
+routes to external traffic.</p>
+
+<h4 id="mode-bridge">Mode: bridge</h4>
+
+<p>With the networking mode set to <code>bridge</code> a container will use docker&rsquo;s
+default networking setup.  A bridge is setup on the host, commonly named
+<code>docker0</code>, and a pair of <code>veth</code> interfaces will be created for the
+container.  One side of the <code>veth</code> pair will remain on the host attached
+to the bridge while the other side of the pair will be placed inside the
+container&rsquo;s namespaces in addition to the <code>loopback</code> interface.  An IP
+address will be allocated for containers on the bridge&rsquo;s network and
+traffic will be routed though this bridge to the container.</p>
+
+<h4 id="mode-host">Mode: host</h4>
+
+<p>With the networking mode set to <code>host</code> a container will share the host&rsquo;s
+network stack and all interfaces from the host will be available to the
+container.  The container&rsquo;s hostname will match the hostname on the host
+system.  Publishing ports and linking to other containers will not work
+when sharing the host&rsquo;s network stack. Note that <code>--add-host</code> <code>--hostname</code>
+<code>--dns</code> <code>--dns-search</code> and <code>--mac-address</code> is invalid in <code>host</code> netmode.</p>
+
+<p>Compared to the default <code>bridge</code> mode, the <code>host</code> mode gives <em>significantly</em>
+better networking performance since it uses the host&rsquo;s native networking stack
+whereas the bridge has to go through one level of virtualization through the
+docker daemon. It is recommended to run containers in this mode when their
+networking performance is critical, for example, a production Load Balancer
+or a High Performance Web Server.</p>
+
+<blockquote>
+<p><strong>Note</strong>: <code>--net=&quot;host&quot;</code> gives the container full access to local system
+services such as D-bus and is therefore considered insecure.</p>
+</blockquote>
+
+<h4 id="mode-container">Mode: container</h4>
+
+<p>With the networking mode set to <code>container</code> a container will share the
+network stack of another container.  The other container&rsquo;s name must be
+provided in the format of <code>--net container:&lt;name|id&gt;</code>. Note that <code>--add-host</code>
+<code>--hostname</code> <code>--dns</code> <code>--dns-search</code> and <code>--mac-address</code> is invalid
+in <code>container</code> netmode.</p>
+
+<p>Example running a Redis container with Redis binding to <code>localhost</code> then
+running the <code>redis-cli</code> command and connecting to the Redis server over the
+<code>localhost</code> interface.</p>
+
+<pre><code>$ docker run -d --name redis example/redis --bind 127.0.0.1
+$ # use the redis container's network stack to access localhost
+$ docker run --rm -it --net container:redis example/redis-cli -h 127.0.0.1
+</code></pre>
+
+<h3 id="managing-etc-hosts">Managing /etc/hosts</h3>
+
+<p>Your container will have lines in <code>/etc/hosts</code> which define the hostname of the
+container itself as well as <code>localhost</code> and a few other common things.  The
+<code>--add-host</code> flag can be used to add additional lines to <code>/etc/hosts</code>.</p>
+
+<pre><code>$ docker run -it --add-host db-static:86.75.30.9 ubuntu cat /etc/hosts
+172.17.0.22     09d03f76bf2c
+fe00::0         ip6-localnet
+ff00::0         ip6-mcastprefix
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
+127.0.0.1       localhost
+::1             localhost ip6-localhost ip6-loopback
+86.75.30.9      db-static
+</code></pre>
+
+<h2 id="restart-policies-restart">Restart policies (&ndash;restart)</h2>
+
+<p>Using the <code>--restart</code> flag on Docker run you can specify a restart policy for
+how a container should or should not be restarted on exit.</p>
+
+<p>When a restart policy is active on a container, it will be shown as either <code>Up</code>
+or <code>Restarting</code> in <a href="/reference/commandline/cli/#ps"><code>docker ps</code></a>. It can also be
+useful to use <a href="/reference/commandline/cli/#events"><code>docker events</code></a> to see the
+restart policy in effect.</p>
+
+<p>Docker supports the following restart policies:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Policy</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>no</strong></td>
+      <td>
+        Do not automatically restart the container when it exits. This is the 
+        default.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span style="white-space: nowrap">
+          <strong>on-failure</strong>[:max-retries]
+        </span>
+      </td>
+      <td>
+        Restart only if the container exits with a non-zero exit status.
+        Optionally, limit the number of restart retries the Docker 
+        daemon attempts.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>always</strong></td>
+      <td>
+        Always restart the container regardless of the exit status.
+        When you specify always, the Docker daemon will try to restart
+        the container indefinitely.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>An ever increasing delay (double the previous delay, starting at 100
+milliseconds) is added before each restart to prevent flooding the server.
+This means the daemon will wait for 100 ms, then 200 ms, 400, 800, 1600,
+and so on until either the <code>on-failure</code> limit is hit, or when you <code>docker stop</code>
+or <code>docker rm -f</code> the container.</p>
+
+<p>If a container is successfully restarted (the container is started and runs
+for at least 10 seconds), the delay is reset to its default value of 100 ms.</p>
+
+<p>You can specify the maximum amount of times Docker will try to restart the
+container when using the <strong>on-failure</strong> policy.  The default is that Docker
+will try forever to restart the container. The number of (attempted) restarts
+for a container can be obtained via <a href="/reference/commandline/cli/#inspect"><code>docker inspect</code></a>. For example, to get the number of restarts
+for container &ldquo;my-container&rdquo;;</p>
+
+<pre><code>$ docker inspect -f &quot;{{ .RestartCount }}&quot; my-container
+# 2
+</code></pre>
+
+<p>Or, to get the last time the container was (re)started;</p>
+
+<pre><code>$ docker inspect -f &quot;{{ .State.StartedAt }}&quot; my-container
+# 2015-03-04T23:47:07.691840179Z
+</code></pre>
+
+<p>You cannot set any restart policy in combination with
+<a href="#clean-up-rm">&ldquo;clean up (&ndash;rm)&rdquo;</a>. Setting both <code>--restart</code> and <code>--rm</code>
+results in an error.</p>
+
+<p>###Examples</p>
+
+<pre><code>$ docker run --restart=always redis
+</code></pre>
+
+<p>This will run the <code>redis</code> container with a restart policy of <strong>always</strong>
+so that if the container exits, Docker will restart it.</p>
+
+<pre><code>$ docker run --restart=on-failure:10 redis
+</code></pre>
+
+<p>This will run the <code>redis</code> container with a restart policy of <strong>on-failure</strong>
+and a maximum restart count of 10.  If the <code>redis</code> container exits with a
+non-zero exit status more than 10 times in a row Docker will abort trying to
+restart the container. Providing a maximum restart limit is only valid for the
+<strong>on-failure</strong> policy.</p>
+
+<h2 id="clean-up-rm">Clean up (&ndash;rm)</h2>
+
+<p>By default a container&rsquo;s file system persists even after the container
+exits. This makes debugging a lot easier (since you can inspect the
+final state) and you retain all your data by default. But if you are
+running short-term <strong>foreground</strong> processes, these container file
+systems can really pile up. If instead you&rsquo;d like Docker to
+<strong>automatically clean up the container and remove the file system when
+the container exits</strong>, you can add the <code>--rm</code> flag:</p>
+
+<pre><code>--rm=false: Automatically remove the container when it exits (incompatible with -d)
+</code></pre>
+
+<h2 id="security-configuration">Security configuration</h2>
+
+<pre><code>--security-opt=&quot;label:user:USER&quot;   : Set the label user for the container
+--security-opt=&quot;label:role:ROLE&quot;   : Set the label role for the container
+--security-opt=&quot;label:type:TYPE&quot;   : Set the label type for the container
+--security-opt=&quot;label:level:LEVEL&quot; : Set the label level for the container
+--security-opt=&quot;label:disable&quot;     : Turn off label confinement for the container
+--security-opt=&quot;apparmor:PROFILE&quot;  : Set the apparmor profile to be applied 
+                                     to the container
+</code></pre>
+
+<p>You can override the default labeling scheme for each container by specifying
+the <code>--security-opt</code> flag. For example, you can specify the MCS/MLS level, a
+requirement for MLS systems. Specifying the level in the following command
+allows you to share the same content between containers.</p>
+
+<pre><code>$ docker run --security-opt label:level:s0:c100,c200 -i -t fedora bash
+</code></pre>
+
+<p>An MLS example might be:</p>
+
+<pre><code>$ docker run --security-opt label:level:TopSecret -i -t rhel7 bash
+</code></pre>
+
+<p>To disable the security labeling for this container versus running with the
+<code>--permissive</code> flag, use the following command:</p>
+
+<pre><code>$ docker run --security-opt label:disable -i -t fedora bash
+</code></pre>
+
+<p>If you want a tighter security policy on the processes within a container,
+you can specify an alternate type for the container. You could run a container
+that is only allowed to listen on Apache ports by executing the following
+command:</p>
+
+<pre><code>$ docker run --security-opt label:type:svirt_apache_t -i -t centos bash
+</code></pre>
+
+<p>Note:</p>
+
+<p>You would have to write policy defining a <code>svirt_apache_t</code> type.</p>
+
+<h2 id="specifying-custom-cgroups">Specifying custom cgroups</h2>
+
+<p>Using the <code>--cgroup-parent</code> flag, you can pass a specific cgroup to run a
+container in. This allows you to create and manage cgroups on their own. You can
+define custom resources for those cgroups and put containers under a common
+parent group.</p>
+
+<h2 id="runtime-constraints-on-resources">Runtime constraints on resources</h2>
+
+<p>The operator can also adjust the performance parameters of the
+container:</p>
+
+<pre><code>-m, --memory=&quot;&quot;: Memory limit (format: &lt;number&gt;&lt;optional unit&gt;, where unit = b, k, m or g)
+--memory-swap=&quot;&quot;: Total memory limit (memory + swap, format: &lt;number&gt;&lt;optional unit&gt;, where unit = b, k, m or g)
+-c, --cpu-shares=0: CPU shares (relative weight)
+--cpu-period=0: Limit the CPU CFS (Completely Fair Scheduler) period
+--cpuset-cpus=&quot;&quot;: CPUs in which to allow execution (0-3, 0,1)
+--cpuset-mems=&quot;&quot;: Memory nodes (MEMs) in which to allow execution (0-3, 0,1). Only effective on NUMA systems.
+--cpu-quota=0: Limit the CPU CFS (Completely Fair Scheduler) quota
+--blkio-weight=0: Block IO weight (relative weight) accepts a weight value between 10 and 1000.
+--oom-kill-disable=true|false: Whether to disable OOM Killer for the container or not.
+</code></pre>
+
+<h3 id="memory-constraints">Memory constraints</h3>
+
+<p>We have four ways to set memory usage:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="no-wrap">
+          <strong>memory=inf, memory-swap=inf</strong> (default)
+      </td>
+      <td>
+        There is no memory limit for the container. The container can use
+        as much memory as needed.
+      </td>
+    </tr>
+    <tr>
+      <td class="no-wrap"><strong>memory=L&lt;inf, memory-swap=inf</strong></td>
+      <td>
+        (specify memory and set memory-swap as <code>-1</code>) The container is
+        not allowed to use more than L bytes of memory, but can use as much swap
+        as is needed (if the host supports swap memory).
+      </td>
+    </tr>
+    <tr>
+      <td class="no-wrap"><strong>memory=L&lt;inf, memory-swap=2*L</strong></td>
+      <td>
+        (specify memory without memory-swap) The container is not allowed to
+        use more than L bytes of memory, swap *plus* memory usage is double
+        of that.
+      </td>
+    </tr>
+    <tr>
+      <td class="no-wrap">
+          <strong>memory=L&lt;inf, memory-swap=S&lt;inf, L&lt;=S</strong>
+      </td>
+      <td>
+        (specify both memory and memory-swap) The container is not allowed to
+        use more than L bytes of memory, swap *plus* memory usage is limited
+        by S.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Examples:</p>
+
+<pre><code>$ docker run -ti ubuntu:14.04 /bin/bash
+</code></pre>
+
+<p>We set nothing about memory, this means the processes in the container can use
+as much memory and swap memory as they need.</p>
+
+<pre><code>$ docker run -ti -m 300M --memory-swap -1 ubuntu:14.04 /bin/bash
+</code></pre>
+
+<p>We set memory limit and disabled swap memory limit, this means the processes in
+the container can use 300M memory and as much swap memory as they need (if the
+host supports swap memory).</p>
+
+<pre><code>$ docker run -ti -m 300M ubuntu:14.04 /bin/bash
+</code></pre>
+
+<p>We set memory limit only, this means the processes in the container can use
+300M memory and 300M swap memory, by default, the total virtual memory size
+(&ndash;memory-swap) will be set as double of memory, in this case, memory + swap
+would be 2*300M, so processes can use 300M swap memory as well.</p>
+
+<pre><code>$ docker run -ti -m 300M --memory-swap 1G ubuntu:14.04 /bin/bash
+</code></pre>
+
+<p>We set both memory and swap memory, so the processes in the container can use
+300M memory and 700M swap memory.</p>
+
+<p>By default, Docker kills processes in a container if an out-of-memory (OOM)
+error occurs. To change this behaviour, use the <code>--oom-kill-disable</code> option.
+Only disable the OOM killer on containers where you have also set the
+<code>-m/--memory</code> option. If the <code>-m</code> flag is not set, this can result in the host
+running out of memory and require killing the host&rsquo;s system processes to free
+memory.</p>
+
+<p>Examples:</p>
+
+<p>The following example limits the memory to 100M and disables the OOM killer for
+this container:</p>
+
+<pre><code>$ docker run -ti -m 100M --oom-kill-disable ubuntu:14.04 /bin/bash
+</code></pre>
+
+<p>The following example, illustrates a dangerous way to use the flag:</p>
+
+<pre><code>$ docker run -ti --oom-kill-disable ubuntu:14.04 /bin/bash
+</code></pre>
+
+<p>The container has unlimited memory which can cause the host to run out memory
+and require killing system processes to free memory.</p>
+
+<h3 id="cpu-share-constraint">CPU share constraint</h3>
+
+<p>By default, all containers get the same proportion of CPU cycles. This proportion
+can be modified by changing the container&rsquo;s CPU share weighting relative
+to the weighting of all other running containers.</p>
+
+<p>To modify the proportion from the default of 1024, use the <code>-c</code> or <code>--cpu-shares</code>
+flag to set the weighting to 2 or higher.</p>
+
+<p>The proportion will only apply when CPU-intensive processes are running.
+When tasks in one container are idle, other containers can use the
+left-over CPU time. The actual amount of CPU time will vary depending on
+the number of containers running on the system.</p>
+
+<p>For example, consider three containers, one has a cpu-share of 1024 and
+two others have a cpu-share setting of 512. When processes in all three
+containers attempt to use 100% of CPU, the first container would receive
+50% of the total CPU time. If you add a fourth container with a cpu-share
+of 1024, the first container only gets 33% of the CPU. The remaining containers
+receive 16.5%, 16.5% and 33% of the CPU.</p>
+
+<p>On a multi-core system, the shares of CPU time are distributed over all CPU
+cores. Even if a container is limited to less than 100% of CPU time, it can
+use 100% of each individual CPU core.</p>
+
+<p>For example, consider a system with more than three cores. If you start one
+container <code>{C0}</code> with <code>-c=512</code> running one process, and another container
+<code>{C1}</code> with <code>-c=1024</code> running two processes, this can result in the following
+division of CPU shares:</p>
+
+<pre><code>PID    container    CPU CPU share
+100    {C0}     0   100% of CPU0
+101    {C1}     1   100% of CPU1
+102    {C1}     2   100% of CPU2
+</code></pre>
+
+<h3 id="cpu-period-constraint">CPU period constraint</h3>
+
+<p>The default CPU CFS (Completely Fair Scheduler) period is 100ms. We can use
+<code>--cpu-period</code> to set the period of CPUs to limit the container&rsquo;s CPU usage.
+And usually <code>--cpu-period</code> should work with <code>--cpu-quota</code>.</p>
+
+<p>Examples:</p>
+
+<pre><code>$ docker run -ti --cpu-period=50000 --cpu-quota=25000 ubuntu:14.04 /bin/bash
+</code></pre>
+
+<p>If there is 1 CPU, this means the container can get 50% CPU worth of run-time every 50ms.</p>
+
+<p>For more information, see the <a href="https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt">CFS documentation on bandwidth limiting</a>.</p>
+
+<h3 id="cpuset-constraint">Cpuset constraint</h3>
+
+<p>We can set cpus in which to allow execution for containers.</p>
+
+<p>Examples:</p>
+
+<pre><code>$ docker run -ti --cpuset-cpus=&quot;1,3&quot; ubuntu:14.04 /bin/bash
+</code></pre>
+
+<p>This means processes in container can be executed on cpu 1 and cpu 3.</p>
+
+<pre><code>$ docker run -ti --cpuset-cpus=&quot;0-2&quot; ubuntu:14.04 /bin/bash
+</code></pre>
+
+<p>This means processes in container can be executed on cpu 0, cpu 1 and cpu 2.</p>
+
+<p>We can set mems in which to allow execution for containers. Only effective
+on NUMA systems.</p>
+
+<p>Examples:</p>
+
+<pre><code>$ docker run -ti --cpuset-mems=&quot;1,3&quot; ubuntu:14.04 /bin/bash
+</code></pre>
+
+<p>This example restricts the processes in the container to only use memory from
+memory nodes 1 and 3.</p>
+
+<pre><code>$ docker run -ti --cpuset-mems=&quot;0-2&quot; ubuntu:14.04 /bin/bash
+</code></pre>
+
+<p>This example restricts the processes in the container to only use memory from
+memory nodes 0, 1 and 2.</p>
+
+<h3 id="cpu-quota-constraint">CPU quota constraint</h3>
+
+<p>The <code>--cpu-quota</code> flag limits the container&rsquo;s CPU usage. The default 0 value
+allows the container to take 100% of a CPU resource (1 CPU). The CFS (Completely Fair
+Scheduler) handles resource allocation for executing processes and is default
+Linux Scheduler used by the kernel. Set this value to 50000 to limit the container
+to 50% of a CPU resource. For multiple CPUs, adjust the <code>--cpu-quota</code> as necessary.
+For more information, see the <a href="https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt">CFS documentation on bandwidth limiting</a>.</p>
+
+<h3 id="block-io-bandwidth-blkio-constraint">Block IO bandwidth (Blkio) constraint</h3>
+
+<p>By default, all containers get the same proportion of block IO bandwidth
+(blkio). This proportion is 500. To modify this proportion, change the
+container&rsquo;s blkio weight relative to the weighting of all other running
+containers using the <code>--blkio-weight</code> flag.</p>
+
+<p>The <code>--blkio-weight</code> flag can set the weighting to a value between 10 to 1000.
+For example, the commands below create two containers with different blkio
+weight:</p>
+
+<pre><code>$ docker run -ti --name c1 --blkio-weight 300 ubuntu:14.04 /bin/bash
+$ docker run -ti --name c2 --blkio-weight 600 ubuntu:14.04 /bin/bash
+</code></pre>
+
+<p>If you do block IO in the two containers at the same time, by, for example:</p>
+
+<pre><code>$ time dd if=/mnt/zerofile of=test.out bs=1M count=1024 oflag=direct
+</code></pre>
+
+<p>You&rsquo;ll find that the proportion of time is the same as the proportion of blkio
+weights of the two containers.</p>
+
+<blockquote>
+<p><strong>Note:</strong> The blkio weight setting is only available for direct IO. Buffered IO
+is not currently supported.</p>
+</blockquote>
+
+<h2 id="runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege, Linux capabilities, and LXC configuration</h2>
+
+<pre><code>--cap-add: Add Linux capabilities
+--cap-drop: Drop Linux capabilities
+--privileged=false: Give extended privileges to this container
+--device=[]: Allows you to run devices inside the container without the --privileged flag.
+--lxc-conf=[]: Add custom lxc options
+</code></pre>
+
+<p>By default, Docker containers are &ldquo;unprivileged&rdquo; and cannot, for
+example, run a Docker daemon inside a Docker container. This is because
+by default a container is not allowed to access any devices, but a
+&ldquo;privileged&rdquo; container is given access to all devices (see <a href="https://github.com/docker/docker/blob/master/daemon/execdriver/lxc/lxc_template.go">lxc-template.go</a>
+and documentation on <a href="https://www.kernel.org/doc/Documentation/cgroups/devices.txt">cgroups devices</a>).</p>
+
+<p>When the operator executes <code>docker run --privileged</code>, Docker will enable
+to access to all devices on the host as well as set some configuration
+in AppArmor or SELinux to allow the container nearly all the same access to the
+host as processes running outside containers on the host. Additional
+information about running with <code>--privileged</code> is available on the
+<a href="http://blog.docker.com/2013/09/docker-can-now-run-within-docker/">Docker Blog</a>.</p>
+
+<p>If you want to limit access to a specific device or devices you can use
+the <code>--device</code> flag. It allows you to specify one or more devices that
+will be accessible within the container.</p>
+
+<pre><code>$ docker run --device=/dev/snd:/dev/snd ...
+</code></pre>
+
+<p>By default, the container will be able to <code>read</code>, <code>write</code>, and <code>mknod</code> these devices.
+This can be overridden using a third <code>:rwm</code> set of options to each <code>--device</code> flag:</p>
+
+<pre><code>$ docker run --device=/dev/sda:/dev/xvdc --rm -it ubuntu fdisk  /dev/xvdc
+
+Command (m for help): q
+$ docker run --device=/dev/sda:/dev/xvdc:r --rm -it ubuntu fdisk  /dev/xvdc
+You will not be able to write the partition table.
+
+Command (m for help): q
+
+$ docker run --device=/dev/sda:/dev/xvdc:w --rm -it ubuntu fdisk  /dev/xvdc
+    crash....
+
+$ docker run --device=/dev/sda:/dev/xvdc:m --rm -it ubuntu fdisk  /dev/xvdc
+fdisk: unable to open /dev/xvdc: Operation not permitted
+</code></pre>
+
+<p>In addition to <code>--privileged</code>, the operator can have fine grain control over the
+capabilities using <code>--cap-add</code> and <code>--cap-drop</code>. By default, Docker has a default
+list of capabilities that are kept. The following table lists the Linux capability options which can be added or dropped.</p>
+
+<table>
+<thead>
+<tr>
+<th>Capability Key</th>
+<th>Capability Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>SETPCAP</td>
+<td>Modify process capabilities.</td>
+</tr>
+
+<tr>
+<td>SYS_MODULE</td>
+<td>Load and unload kernel modules.</td>
+</tr>
+
+<tr>
+<td>SYS_RAWIO</td>
+<td>Perform I/O port operations (iopl(2) and ioperm(2)).</td>
+</tr>
+
+<tr>
+<td>SYS_PACCT</td>
+<td>Use acct(2), switch process accounting on or off.</td>
+</tr>
+
+<tr>
+<td>SYS_ADMIN</td>
+<td>Perform a range of system administration operations.</td>
+</tr>
+
+<tr>
+<td>SYS_NICE</td>
+<td>Raise process nice value (nice(2), setpriority(2)) and change the nice value for arbitrary processes.</td>
+</tr>
+
+<tr>
+<td>SYS_RESOURCE</td>
+<td>Override resource Limits.</td>
+</tr>
+
+<tr>
+<td>SYS_TIME</td>
+<td>Set system clock (settimeofday(2), stime(2), adjtimex(2)); set real-time (hardware) clock.</td>
+</tr>
+
+<tr>
+<td>SYS_TTY_CONFIG</td>
+<td>Use vhangup(2); employ various privileged ioctl(2) operations on virtual terminals.</td>
+</tr>
+
+<tr>
+<td>MKNOD</td>
+<td>Create special files using mknod(2).</td>
+</tr>
+
+<tr>
+<td>AUDIT_WRITE</td>
+<td>Write records to kernel auditing log.</td>
+</tr>
+
+<tr>
+<td>AUDIT_CONTROL</td>
+<td>Enable and disable kernel auditing; change auditing filter rules; retrieve auditing status and filtering rules.</td>
+</tr>
+
+<tr>
+<td>MAC_OVERRIDE</td>
+<td>Allow MAC configuration or state changes. Implemented for the Smack LSM.</td>
+</tr>
+
+<tr>
+<td>MAC_ADMIN</td>
+<td>Override Mandatory Access Control (MAC). Implemented for the Smack Linux Security Module (LSM).</td>
+</tr>
+
+<tr>
+<td>NET_ADMIN</td>
+<td>Perform various network-related operations.</td>
+</tr>
+
+<tr>
+<td>SYSLOG</td>
+<td>Perform privileged syslog(2) operations.</td>
+</tr>
+
+<tr>
+<td>CHOWN</td>
+<td>Make arbitrary changes to file UIDs and GIDs (see chown(2)).</td>
+</tr>
+
+<tr>
+<td>NET_RAW</td>
+<td>Use RAW and PACKET sockets.</td>
+</tr>
+
+<tr>
+<td>DAC_OVERRIDE</td>
+<td>Bypass file read, write, and execute permission checks.</td>
+</tr>
+
+<tr>
+<td>FOWNER</td>
+<td>Bypass permission checks on operations that normally require the file system UID of the process to match the UID of the file.</td>
+</tr>
+
+<tr>
+<td>DAC_READ_SEARCH</td>
+<td>Bypass file read permission checks and directory read and execute permission checks.</td>
+</tr>
+
+<tr>
+<td>FSETID</td>
+<td>Don&rsquo;t clear set-user-ID and set-group-ID permission bits when a file is modified.</td>
+</tr>
+
+<tr>
+<td>KILL</td>
+<td>Bypass permission checks for sending signals.</td>
+</tr>
+
+<tr>
+<td>SETGID</td>
+<td>Make arbitrary manipulations of process GIDs and supplementary GID list.</td>
+</tr>
+
+<tr>
+<td>SETUID</td>
+<td>Make arbitrary manipulations of process UIDs.</td>
+</tr>
+
+<tr>
+<td>LINUX_IMMUTABLE</td>
+<td>Set the FS_APPEND_FL and FS_IMMUTABLE_FL i-node flags.</td>
+</tr>
+
+<tr>
+<td>NET_BIND_SERVICE</td>
+<td>Bind a socket to internet domain privileged ports (port numbers less than 1024).</td>
+</tr>
+
+<tr>
+<td>NET_BROADCAST</td>
+<td>Make socket broadcasts, and listen to multicasts.</td>
+</tr>
+
+<tr>
+<td>IPC_LOCK</td>
+<td>Lock memory (mlock(2), mlockall(2), mmap(2), shmctl(2)).</td>
+</tr>
+
+<tr>
+<td>IPC_OWNER</td>
+<td>Bypass permission checks for operations on System V IPC objects.</td>
+</tr>
+
+<tr>
+<td>SYS_CHROOT</td>
+<td>Use chroot(2), change root directory.</td>
+</tr>
+
+<tr>
+<td>SYS_PTRACE</td>
+<td>Trace arbitrary processes using ptrace(2).</td>
+</tr>
+
+<tr>
+<td>SYS_BOOT</td>
+<td>Use reboot(2) and kexec_load(2), reboot and load a new kernel for later execution.</td>
+</tr>
+
+<tr>
+<td>LEASE</td>
+<td>Establish leases on arbitrary files (see fcntl(2)).</td>
+</tr>
+
+<tr>
+<td>SETFCAP</td>
+<td>Set file capabilities.</td>
+</tr>
+
+<tr>
+<td>WAKE_ALARM</td>
+<td>Trigger something that will wake up the system.</td>
+</tr>
+
+<tr>
+<td>BLOCK_SUSPEND</td>
+<td>Employ features that can block system suspend.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Further reference information is available on the <a href="http://linux.die.net/man/7/capabilities">capabilities(7) - Linux man page</a></p>
+
+<p>Both flags support the value <code>all</code>, so if the
+operator wants to have all capabilities but <code>MKNOD</code> they could use:</p>
+
+<pre><code>$ docker run --cap-add=ALL --cap-drop=MKNOD ...
+</code></pre>
+
+<p>For interacting with the network stack, instead of using <code>--privileged</code> they
+should use <code>--cap-add=NET_ADMIN</code> to modify the network interfaces.</p>
+
+<pre><code>$ docker run -t -i --rm  ubuntu:14.04 ip link add dummy0 type dummy
+RTNETLINK answers: Operation not permitted
+$ docker run -t -i --rm --cap-add=NET_ADMIN ubuntu:14.04 ip link add dummy0 type dummy
+</code></pre>
+
+<p>To mount a FUSE based filesystem, you need to combine both <code>--cap-add</code> and
+<code>--device</code>:</p>
+
+<pre><code>$ docker run --rm -it --cap-add SYS_ADMIN sshfs sshfs sven@10.10.10.20:/home/sven /mnt
+fuse: failed to open /dev/fuse: Operation not permitted
+$ docker run --rm -it --device /dev/fuse sshfs sshfs sven@10.10.10.20:/home/sven /mnt
+fusermount: mount failed: Operation not permitted
+$ docker run --rm -it --cap-add SYS_ADMIN --device /dev/fuse sshfs
+# sshfs sven@10.10.10.20:/home/sven /mnt
+The authenticity of host '10.10.10.20 (10.10.10.20)' can't be established.
+ECDSA key fingerprint is 25:34:85:75:25:b0:17:46:05:19:04:93:b5:dd:5f:c6.
+Are you sure you want to continue connecting (yes/no)? yes
+sven@10.10.10.20's password:
+root@30aa0cfaf1b5:/# ls -la /mnt/src/docker
+total 1516
+drwxrwxr-x 1 1000 1000   4096 Dec  4 06:08 .
+drwxrwxr-x 1 1000 1000   4096 Dec  4 11:46 ..
+-rw-rw-r-- 1 1000 1000     16 Oct  8 00:09 .dockerignore
+-rwxrwxr-x 1 1000 1000    464 Oct  8 00:09 .drone.yml
+drwxrwxr-x 1 1000 1000   4096 Dec  4 06:11 .git
+-rw-rw-r-- 1 1000 1000    461 Dec  4 06:08 .gitignore
+....
+</code></pre>
+
+<p>If the Docker daemon was started using the <code>lxc</code> exec-driver
+(<code>docker -d --exec-driver=lxc</code>) then the operator can also specify LXC options
+using one or more <code>--lxc-conf</code> parameters. These can be new parameters or
+override existing parameters from the <a href="https://github.com/docker/docker/blob/master/daemon/execdriver/lxc/lxc_template.go">lxc-template.go</a>.
+Note that in the future, a given host&rsquo;s docker daemon may not use LXC, so this
+is an implementation-specific configuration meant for operators already
+familiar with using LXC directly.</p>
+
+<blockquote>
+<p><strong>Note:</strong>
+If you use <code>--lxc-conf</code> to modify a container&rsquo;s configuration which is also
+managed by the Docker daemon, then the Docker daemon will not know about this
+modification, and you will need to manage any conflicts yourself. For example,
+you can use <code>--lxc-conf</code> to set a container&rsquo;s IP address, but this will not be
+reflected in the <code>/etc/hosts</code> file.</p>
+</blockquote>
+
+<h2 id="logging-drivers-log-driver">Logging drivers (&ndash;log-driver)</h2>
+
+<p>You can specify a different logging driver for the container than for the daemon.</p>
+
+<h4 id="logging-driver-none">Logging driver: none</h4>
+
+<p>Disables any logging for the container. <code>docker logs</code> won&rsquo;t be available with
+this driver.</p>
+
+<h4 id="logging-driver-json-file">Logging driver: json-file</h4>
+
+<p>Default logging driver for Docker. Writes JSON messages to file. <code>docker logs</code>
+command is available only for this logging driver</p>
+
+<p>The following logging options are supported for this logging driver: [none]</p>
+
+<h4 id="logging-driver-syslog">Logging driver: syslog</h4>
+
+<p>Syslog logging driver for Docker. Writes log messages to syslog. <code>docker logs</code>
+command is not available for this logging driver</p>
+
+<p>The following logging options are supported for this logging driver:</p>
+
+<pre><code>--log-opt address=[tcp|udp]://host:port
+--log-opt address=unix://path
+</code></pre>
+
+<p><code>address</code> specifies the remote syslog server address where the driver connects to.
+If not specified it defaults to the local unix socket of the running system.
+If transport is either <code>tcp</code> or <code>udp</code> and <code>port</code> is not specified it defaults to <code>514</code>
+The following example shows how to have the <code>syslog</code> driver connect to a <code>syslog</code>
+remote server at <code>192.168.0.42</code> on port <code>123</code></p>
+
+<pre><code>$ docker run --log-driver=syslog --log-opt address=tcp://192.168.0.42:123
+</code></pre>
+
+<h4 id="logging-driver-journald">Logging driver: journald</h4>
+
+<p>Journald logging driver for Docker. Writes log messages to journald; the container id will be stored in the journal&rsquo;s <code>CONTAINER_ID</code> field. <code>docker logs</code> command is not available for this logging driver.  For detailed information on working with this logging driver, see <a href="reference/logging/journald">the journald logging driver</a> reference documentation.</p>
+
+<p>The following logging options are supported for this logging driver: [none]</p>
+
+<h2 id="overriding-dockerfile-image-defaults">Overriding Dockerfile image defaults</h2>
+
+<p>When a developer builds an image from a <a href="/reference/builder"><em>Dockerfile</em></a>
+or when she commits it, the developer can set a number of default parameters
+that take effect when the image starts up as a container.</p>
+
+<p>Four of the Dockerfile commands cannot be overridden at runtime: <code>FROM</code>,
+<code>MAINTAINER</code>, <code>RUN</code>, and <code>ADD</code>. Everything else has a corresponding override
+in <code>docker run</code>. We&rsquo;ll go through what the developer might have set in each
+Dockerfile instruction and how the operator can override that setting.</p>
+
+<ul>
+<li><a href="#cmd-default-command-or-options">CMD (Default Command or Options)</a></li>
+<li><a href="#entrypoint-default-command-to-execute-at-runtime">ENTRYPOINT (Default Command to Execute at Runtime)</a></li>
+<li><a href="#expose-incoming-ports">EXPOSE (Incoming Ports)</a></li>
+<li><a href="#env-environment-variables">ENV (Environment Variables)</a></li>
+<li><a href="#volume-shared-filesystems">VOLUME (Shared Filesystems)</a></li>
+<li><a href="#user">USER</a></li>
+<li><a href="#workdir">WORKDIR</a></li>
+</ul>
+
+<h2 id="cmd-default-command-or-options">CMD (default command or options)</h2>
+
+<p>Recall the optional <code>COMMAND</code> in the Docker
+commandline:</p>
+
+<pre><code>$ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]
+</code></pre>
+
+<p>This command is optional because the person who created the <code>IMAGE</code> may
+have already provided a default <code>COMMAND</code> using the Dockerfile <code>CMD</code>
+instruction. As the operator (the person running a container from the
+image), you can override that <code>CMD</code> instruction just by specifying a new
+<code>COMMAND</code>.</p>
+
+<p>If the image also specifies an <code>ENTRYPOINT</code> then the <code>CMD</code> or <code>COMMAND</code>
+get appended as arguments to the <code>ENTRYPOINT</code>.</p>
+
+<h2 id="entrypoint-default-command-to-execute-at-runtime">ENTRYPOINT (default command to execute at runtime)</h2>
+
+<pre><code>--entrypoint=&quot;&quot;: Overwrite the default entrypoint set by the image
+</code></pre>
+
+<p>The <code>ENTRYPOINT</code> of an image is similar to a <code>COMMAND</code> because it
+specifies what executable to run when the container starts, but it is
+(purposely) more difficult to override. The <code>ENTRYPOINT</code> gives a
+container its default nature or behavior, so that when you set an
+<code>ENTRYPOINT</code> you can run the container <em>as if it were that binary</em>,
+complete with default options, and you can pass in more options via the
+<code>COMMAND</code>. But, sometimes an operator may want to run something else
+inside the container, so you can override the default <code>ENTRYPOINT</code> at
+runtime by using a string to specify the new <code>ENTRYPOINT</code>. Here is an
+example of how to run a shell in a container that has been set up to
+automatically run something else (like <code>/usr/bin/redis-server</code>):</p>
+
+<pre><code>$ docker run -i -t --entrypoint /bin/bash example/redis
+</code></pre>
+
+<p>or two examples of how to pass more parameters to that ENTRYPOINT:</p>
+
+<pre><code>$ docker run -i -t --entrypoint /bin/bash example/redis -c ls -l
+$ docker run -i -t --entrypoint /usr/bin/redis-cli example/redis --help
+</code></pre>
+
+<h2 id="expose-incoming-ports">EXPOSE (incoming ports)</h2>
+
+<p>The Dockerfile doesn&rsquo;t give much control over networking, only providing
+the <code>EXPOSE</code> instruction to give a hint to the operator about what
+incoming ports might provide services. The following options work with
+or override the Dockerfile&rsquo;s exposed defaults:</p>
+
+<pre><code>--expose=[]: Expose a port or a range of ports from the container
+            without publishing it to your host
+-P=false   : Publish all exposed ports to the host interfaces
+-p=[]      : Publish a container᾿s port or a range of ports to the host 
+               format: ip:hostPort:containerPort | ip::containerPort | hostPort:containerPort | containerPort
+               Both hostPort and containerPort can be specified as a range of ports. 
+               When specifying ranges for both, the number of container ports in the range must match the number of host ports in the range. (e.g., `-p 1234-1236:1234-1236/tcp`)
+               (use 'docker port' to see the actual mapping)
+--link=&quot;&quot;  : Add link to another container (&lt;name or id&gt;:alias or &lt;name or id&gt;)
+</code></pre>
+
+<p>As mentioned previously, <code>EXPOSE</code> (and <code>--expose</code>) makes ports available
+<strong>in</strong> a container for incoming connections. The port number on the
+inside of the container (where the service listens) does not need to be
+the same number as the port exposed on the outside of the container
+(where clients connect), so inside the container you might have an HTTP
+service listening on port 80 (and so you <code>EXPOSE 80</code> in the Dockerfile),
+but outside the container the port might be 42800.</p>
+
+<p>To help a new client container reach the server container&rsquo;s internal
+port operator <code>--expose</code>&rsquo;d by the operator or <code>EXPOSE</code>&rsquo;d by the
+developer, the operator has three choices: start the server container
+with <code>-P</code> or <code>-p,</code> or start the client container with <code>--link</code>.</p>
+
+<p>If the operator uses <code>-P</code> or <code>-p</code> then Docker will make the exposed port
+accessible on the host and the ports will be available to any client that can
+reach the host. When using <code>-P</code>, Docker will bind the exposed port to a random
+port on the host within an <em>ephemeral port range</em> defined by
+<code>/proc/sys/net/ipv4/ip_local_port_range</code>. To find the mapping between the host
+ports and the exposed ports, use <code>docker port</code>.</p>
+
+<p>If the operator uses <code>--link</code> when starting the new client container,
+then the client container can access the exposed port via a private
+networking interface.  Docker will set some environment variables in the
+client container to help indicate which interface and port to use.</p>
+
+<h2 id="env-environment-variables">ENV (environment variables)</h2>
+
+<p>When a new container is created, Docker will set the following environment
+variables automatically:</p>
+
+<table>
+ <tr>
+  <th>Variable</th>
+  <th>Value</th>
+ </tr>
+ <tr>
+  <td><code>HOME</code></td>
+  <td>
+    Set based on the value of <code>USER</code>
+  </td>
+ </tr>
+ <tr>
+  <td><code>HOSTNAME</code></td>
+  <td> 
+    The hostname associated with the container
+  </td>
+ </tr>
+ <tr>
+  <td><code>PATH</code></td>
+  <td> 
+    Includes popular directories, such as :<br>
+    <code>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</code>
+  </td>
+ <tr>
+  <td><code>TERM</code></td>
+  <td><code>xterm</code> if the container is allocated a psuedo-TTY</td>
+ </tr>
+</table>
+
+<p>The container may also include environment variables defined
+as a result of the container being linked with another container. See
+the <a href="/userguide/dockerlinks/#container-linking"><em>Container Links</em></a>
+section for more details.</p>
+
+<p>Additionally, the operator can <strong>set any environment variable</strong> in the
+container by using one or more <code>-e</code> flags, even overriding those mentioned
+above, or already defined by the developer with a Dockerfile <code>ENV</code>:</p>
+
+<pre><code>$ docker run -e &quot;deep=purple&quot; --rm ubuntu /bin/bash -c export
+declare -x HOME=&quot;/&quot;
+declare -x HOSTNAME=&quot;85bc26a0e200&quot;
+declare -x OLDPWD
+declare -x PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;
+declare -x PWD=&quot;/&quot;
+declare -x SHLVL=&quot;1&quot;
+declare -x container=&quot;lxc&quot;
+declare -x deep=&quot;purple&quot;
+</code></pre>
+
+<p>Similarly the operator can set the <strong>hostname</strong> with <code>-h</code>.</p>
+
+<p><code>--link &lt;name or id&gt;:alias</code> also sets environment variables, using the <em>alias</em> string to
+define environment variables within the container that give the IP and PORT
+information for connecting to the service container. Let&rsquo;s imagine we have a
+container running Redis:</p>
+
+<pre><code># Start the service container, named redis-name
+$ docker run -d --name redis-name dockerfiles/redis
+4241164edf6f5aca5b0e9e4c9eccd899b0b8080c64c0cd26efe02166c73208f3
+
+# The redis-name container exposed port 6379
+$ docker ps
+CONTAINER ID        IMAGE                        COMMAND                CREATED             STATUS              PORTS               NAMES
+4241164edf6f        $ dockerfiles/redis:latest   /redis-stable/src/re   5 seconds ago       Up 4 seconds        6379/tcp            redis-name
+
+# Note that there are no public ports exposed since we didn᾿t use -p or -P
+$ docker port 4241164edf6f 6379
+2014/01/25 00:55:38 Error: No public port '6379' published for 4241164edf6f
+</code></pre>
+
+<p>Yet we can get information about the Redis container&rsquo;s exposed ports
+with <code>--link</code>. Choose an alias that will form a
+valid environment variable!</p>
+
+<pre><code>$ docker run --rm --link redis-name:redis_alias --entrypoint /bin/bash dockerfiles/redis -c export
+declare -x HOME=&quot;/&quot;
+declare -x HOSTNAME=&quot;acda7f7b1cdc&quot;
+declare -x OLDPWD
+declare -x PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;
+declare -x PWD=&quot;/&quot;
+declare -x REDIS_ALIAS_NAME=&quot;/distracted_wright/redis&quot;
+declare -x REDIS_ALIAS_PORT=&quot;tcp://172.17.0.32:6379&quot;
+declare -x REDIS_ALIAS_PORT_6379_TCP=&quot;tcp://172.17.0.32:6379&quot;
+declare -x REDIS_ALIAS_PORT_6379_TCP_ADDR=&quot;172.17.0.32&quot;
+declare -x REDIS_ALIAS_PORT_6379_TCP_PORT=&quot;6379&quot;
+declare -x REDIS_ALIAS_PORT_6379_TCP_PROTO=&quot;tcp&quot;
+declare -x SHLVL=&quot;1&quot;
+declare -x container=&quot;lxc&quot;
+</code></pre>
+
+<p>And we can use that information to connect from another container as a client:</p>
+
+<pre><code>$ docker run -i -t --rm --link redis-name:redis_alias --entrypoint /bin/bash dockerfiles/redis -c '/redis-stable/src/redis-cli -h $REDIS_ALIAS_PORT_6379_TCP_ADDR -p $REDIS_ALIAS_PORT_6379_TCP_PORT'
+172.17.0.32:6379&gt;
+</code></pre>
+
+<p>Docker will also map the private IP address to the alias of a linked
+container by inserting an entry into <code>/etc/hosts</code>.  You can use this
+mechanism to communicate with a linked container by its alias:</p>
+
+<pre><code>$ docker run -d --name servicename busybox sleep 30
+$ docker run -i -t --link servicename:servicealias busybox ping -c 1 servicealias
+</code></pre>
+
+<p>If you restart the source container (<code>servicename</code> in this case), the recipient
+container&rsquo;s <code>/etc/hosts</code> entry will be automatically updated.</p>
+
+<blockquote>
+<p><strong>Note</strong>:
+Unlike host entries in the <code>/etc/hosts</code> file, IP addresses stored in the
+environment variables are not automatically updated if the source container is
+restarted. We recommend using the host entries in <code>/etc/hosts</code> to resolve the
+IP address of linked containers.</p>
+</blockquote>
+
+<h2 id="volume-shared-filesystems">VOLUME (shared filesystems)</h2>
+
+<pre><code>-v=[]: Create a bind mount with: [host-dir:]container-dir[:rw|ro].
+       If 'host-dir' is missing, then docker creates a new volume.
+       If neither 'rw' or 'ro' is specified then the volume is mounted
+       in read-write mode.
+--volumes-from=&quot;&quot;: Mount all volumes from the given container(s)
+</code></pre>
+
+<p>The volumes commands are complex enough to have their own documentation
+in section <a href="/userguide/dockervolumes"><em>Managing data in
+containers</em></a>. A developer can define
+one or more <code>VOLUME</code>&rsquo;s associated with an image, but only the operator
+can give access from one container to another (or from a container to a
+volume mounted on the host).</p>
+
+<h2 id="user">USER</h2>
+
+<p>The default user within a container is <code>root</code> (id = 0), but if the
+developer created additional users, those are accessible too. The
+developer can set a default user to run the first process with the
+Dockerfile <code>USER</code> instruction, but the operator can override it:</p>
+
+<pre><code>-u=&quot;&quot;: Username or UID
+</code></pre>
+
+<blockquote>
+<p><strong>Note:</strong> if you pass numeric uid, it must be in range 0-2147483647.</p>
+</blockquote>
+
+<h2 id="workdir">WORKDIR</h2>
+
+<p>The default working directory for running binaries within a container is the
+root directory (<code>/</code>), but the developer can set a different default with the
+Dockerfile <code>WORKDIR</code> command. The operator can override this with:</p>
+
+<pre><code>-w=&quot;&quot;: Working directory inside the container
+</code></pre>
+
+        </article>
+		  </section>
+    </div>
+    <div id="toc" class="large-3 columns toc compact">
+     On this page:
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#docker-run-reference">Docker run reference</a>
+<ul>
+<li><a href="#general-form">General form</a></li>
+<li><a href="#operator-exclusive-options">Operator exclusive options</a></li>
+<li><a href="#detached-vs-foreground">Detached vs foreground</a>
+<ul>
+<li><a href="#detached-d">Detached (-d)</a></li>
+<li><a href="#foreground">Foreground</a></li>
+</ul></li>
+<li><a href="#container-identification">Container identification</a>
+<ul>
+<li><a href="#name-name">Name (&ndash;name)</a></li>
+<li><a href="#pid-equivalent">PID equivalent</a></li>
+<li><a href="#image-tag">Image[:tag]</a></li>
+<li><a href="#image-digest">Image[@digest]</a></li>
+</ul></li>
+<li><a href="#pid-settings-pid">PID settings (&ndash;pid)</a></li>
+<li><a href="#uts-settings-uts">UTS settings (&ndash;uts)</a></li>
+<li><a href="#ipc-settings-ipc">IPC settings (&ndash;ipc)</a></li>
+<li><a href="#network-settings">Network settings</a>
+<ul>
+<li>
+<ul>
+<li><a href="#mode-none">Mode: none</a></li>
+<li><a href="#mode-bridge">Mode: bridge</a></li>
+<li><a href="#mode-host">Mode: host</a></li>
+<li><a href="#mode-container">Mode: container</a></li>
+</ul></li>
+<li><a href="#managing-etc-hosts">Managing /etc/hosts</a></li>
+</ul></li>
+<li><a href="#restart-policies-restart">Restart policies (&ndash;restart)</a></li>
+<li><a href="#clean-up-rm">Clean up (&ndash;rm)</a></li>
+<li><a href="#security-configuration">Security configuration</a></li>
+<li><a href="#specifying-custom-cgroups">Specifying custom cgroups</a></li>
+<li><a href="#runtime-constraints-on-resources">Runtime constraints on resources</a>
+<ul>
+<li><a href="#memory-constraints">Memory constraints</a></li>
+<li><a href="#cpu-share-constraint">CPU share constraint</a></li>
+<li><a href="#cpu-period-constraint">CPU period constraint</a></li>
+<li><a href="#cpuset-constraint">Cpuset constraint</a></li>
+<li><a href="#cpu-quota-constraint">CPU quota constraint</a></li>
+<li><a href="#block-io-bandwidth-blkio-constraint">Block IO bandwidth (Blkio) constraint</a></li>
+</ul></li>
+<li><a href="#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege, Linux capabilities, and LXC configuration</a></li>
+<li><a href="#logging-drivers-log-driver">Logging drivers (&ndash;log-driver)</a>
+<ul>
+<li>
+<ul>
+<li><a href="#logging-driver-none">Logging driver: none</a></li>
+<li><a href="#logging-driver-json-file">Logging driver: json-file</a></li>
+<li><a href="#logging-driver-syslog">Logging driver: syslog</a></li>
+<li><a href="#logging-driver-journald">Logging driver: journald</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#overriding-dockerfile-image-defaults">Overriding Dockerfile image defaults</a></li>
+<li><a href="#cmd-default-command-or-options">CMD (default command or options)</a></li>
+<li><a href="#entrypoint-default-command-to-execute-at-runtime">ENTRYPOINT (default command to execute at runtime)</a></li>
+<li><a href="#expose-incoming-ports">EXPOSE (incoming ports)</a></li>
+<li><a href="#env-environment-variables">ENV (environment variables)</a></li>
+<li><a href="#volume-shared-filesystems">VOLUME (shared filesystems)</a></li>
+<li><a href="#user">USER</a></li>
+<li><a href="#workdir">WORKDIR</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+<footer class="main-footer">
+  <div class="row">
+  </div>
+  <div class="row">
+  </div>
+  <div id="buildinfo">
+    Jul 8, 2015 at 6:45pm (PST)
+        BUILD_DATA
+   </div>
+</footer>
+<link rel="stylesheet" href="/highlight/styles/github.css">
+<script href="/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script href="/dist/assets/js/all.js"></script>
+<script>
+  $( 'nav li:has(ul)' ).doubleTapToGo();
+</script>
+<script>
+
+;(function ( $, window, document, undefined ) {
+
+    var pluginName = 'accordion',
+        defaults = {
+            transitionSpeed: 300,
+            transitionEasing: 'ease',
+            controlElement: '[data-control]',
+            contentElement: '[data-content]',
+            groupElement: '[data-accordion-group]',
+            singleOpen: true
+        };
+
+    function Accordion(element, options) {
+        this.element = element;
+        this.options = $.extend({}, defaults, options);
+        this._defaults = defaults;
+        this._name = pluginName;
+        this.init();
+    }
+
+    Accordion.prototype.init = function () {
+        var self = this,
+            opts = self.options;
+
+        var $accordion = $(self.element),
+            $controls = $accordion.find('> ' + opts.controlElement),
+            $content =  $accordion.find('> ' + opts.contentElement);
+
+        var accordionParentsQty = $accordion.parents('[data-accordion]').length,
+            accordionHasParent = accordionParentsQty > 0;
+
+        var closedCSS = { 'max-height': 0, 'overflow': 'hidden' };
+
+        var CSStransitions = supportsTransitions();
+
+        function debounce(func, threshold, execAsap) {
+            var timeout;
+
+            return function debounced() {
+                var obj = this,
+                    args = arguments;
+
+                function delayed() {
+                    if (!execAsap) func.apply(obj, args);
+                    timeout = null;
+                };
+
+                if (timeout) clearTimeout(timeout);
+                else if (execAsap) func.apply(obj, args);
+
+                timeout = setTimeout(delayed, threshold || 100);
+            };
+        }
+
+        function supportsTransitions() {
+            var b = document.body || document.documentElement,
+                s = b.style,
+                p = 'transition';
+
+            if (typeof s[p] == 'string') {
+                return true;
+            }
+
+            var v = ['Moz', 'webkit', 'Webkit', 'Khtml', 'O', 'ms'];
+
+            p = 'Transition';
+
+            for (var i=0; i<v.length; i++) {
+                if (typeof s[v[i] + p] == 'string') {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function requestAnimFrame(cb) {
+            if(window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame) {
+                return  requestAnimationFrame(cb) ||
+                        webkitRequestAnimationFrame(cb) ||
+                        mozRequestAnimationFrame(cb);
+            } else {
+                return setTimeout(cb, 1000 / 60);
+            }
+        }
+
+        function toggleTransition($el, remove) {
+            if(!remove) {
+                $content.css({
+                    '-webkit-transition': 'max-height ' + opts.transitionSpeed + 'ms ' + opts.transitionEasing,
+                    'transition': 'max-height ' + opts.transitionSpeed + 'ms ' + opts.transitionEasing
+                });
+            } else {
+                $content.css({
+                    '-webkit-transition': '',
+                    'transition': ''
+                });
+            }
+        }
+
+        function calculateHeight($el) {
+            var height = 0;
+
+            $el.children().each(function() {
+                height = height + $(this).outerHeight(true);
+            });
+
+            $el.data('oHeight', height);
+        }
+
+        function updateParentHeight($parentAccordion, $currentAccordion, qty, operation) {
+            var $content = $parentAccordion.filter('.open').find('> [data-content]'),
+                $childs = $content.find('[data-accordion].open > [data-content]'),
+                $matched;
+
+            if(!opts.singleOpen) {
+                $childs = $childs.not($currentAccordion.siblings('[data-accordion].open').find('> [data-content]'));
+            }
+
+            $matched = $content.add($childs);
+
+            if($parentAccordion.hasClass('open')) {
+                $matched.each(function() {
+                    var currentHeight = $(this).data('oHeight');
+
+                    switch (operation) {
+                        case '+':
+                            $(this).data('oHeight', currentHeight + qty);
+                            break;
+                        case '-':
+                            $(this).data('oHeight', currentHeight - qty);
+                            break;
+                        default:
+                            throw 'updateParentHeight method needs an operation';
+                    }
+
+                    $(this).css('max-height', $(this).data('oHeight'));
+                });
+            }
+        }
+
+        function refreshHeight($accordion) {
+            if($accordion.hasClass('open')) {
+                var $content = $accordion.find('> [data-content]'),
+                    $childs = $content.find('[data-accordion].open > [data-content]'),
+                    $matched = $content.add($childs);
+
+                calculateHeight($matched);
+
+                $matched.css('max-height', $matched.data('oHeight'));
+            }
+        }
+
+        function closeAccordion($accordion, $content) {
+            $accordion.trigger('accordion.close');
+            
+            if(CSStransitions) {
+                if(accordionHasParent) {
+                    var $parentAccordions = $accordion.parents('[data-accordion]');
+
+                    updateParentHeight($parentAccordions, $accordion, $content.data('oHeight'), '-');
+                }
+
+                $content.css(closedCSS);
+
+                $accordion.removeClass('open');
+            } else {
+                $content.css('max-height', $content.data('oHeight'));
+
+                $content.animate(closedCSS, opts.transitionSpeed);
+
+                $accordion.removeClass('open');
+            }
+        }
+
+        function openAccordion($accordion, $content) {
+            $accordion.trigger('accordion.open');
+            if(CSStransitions) {
+                toggleTransition($content);
+
+                if(accordionHasParent) {
+                    var $parentAccordions = $accordion.parents('[data-accordion]');
+
+                    updateParentHeight($parentAccordions, $accordion, $content.data('oHeight'), '+');
+                }
+
+                requestAnimFrame(function() {
+                    $content.css('max-height', $content.data('oHeight'));
+                });
+
+                $accordion.addClass('open');
+            } else {
+                $content.animate({
+                    'max-height': $content.data('oHeight')
+                }, opts.transitionSpeed, function() {
+                    $content.css({'max-height': 'none'});
+                });
+
+                $accordion.addClass('open');
+            }
+        }
+
+        function closeSiblingAccordions($accordion) {
+            var $accordionGroup = $accordion.closest(opts.groupElement);
+
+            var $siblings = $accordion.siblings('[data-accordion]').filter('.open'),
+                $siblingsChildren = $siblings.find('[data-accordion]').filter('.open');
+
+            var $otherAccordions = $siblings.add($siblingsChildren);
+
+            $otherAccordions.each(function() {
+                var $accordion = $(this),
+                    $content = $accordion.find(opts.contentElement);
+
+                closeAccordion($accordion, $content);
+            });
+
+            $otherAccordions.removeClass('open');
+        }
+
+        function toggleAccordion() {
+            var isAccordionGroup = (opts.singleOpen) ? $accordion.parents(opts.groupElement).length > 0 : false;
+
+            calculateHeight($content);
+
+            if(isAccordionGroup) {
+                closeSiblingAccordions($accordion);
+            }
+
+            if($accordion.hasClass('open')) {
+                closeAccordion($accordion, $content);
+            } else {
+                openAccordion($accordion, $content);
+            }
+        }
+
+        function addEventListeners() {
+            $controls.on('click', toggleAccordion);
+            
+            $controls.on('accordion.toggle', function() {
+                if(opts.singleOpen && $controls.length > 1) {
+                    return false;
+                }
+                
+                toggleAccordion();
+            });
+
+            $(window).on('resize', debounce(function() {
+                refreshHeight($accordion);
+            }));
+        }
+
+        function setup() {
+            $content.each(function() {
+                var $curr = $(this);
+
+                if($curr.css('max-height') != 0) {
+                    if(!$curr.closest('[data-accordion]').hasClass('open')) {
+                        $curr.css({ 'max-height': 0, 'overflow': 'hidden' });
+                    } else {
+                        toggleTransition($curr);
+                        calculateHeight($curr);
+
+                        $curr.css('max-height', $curr.data('oHeight'));
+                    }
+                }
+            });
+
+
+            if(!$accordion.attr('data-accordion')) {
+                $accordion.attr('data-accordion', '');
+                $accordion.find(opts.controlElement).attr('data-control', '');
+                $accordion.find(opts.contentElement).attr('data-content', '');
+            }
+        }
+
+        setup();
+        addEventListeners();
+    };
+
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName,
+                new Accordion( this, options ));
+            }
+        });
+    }
+
+})( jQuery, window, document );
+
+$(document).ready(function() {
+  $('#multiple [data-accordion]').accordion({
+    singleOpen: false
+  });
+});
+
+</script>
+
+
+  <noscript>
+  <iframe src="//www.googletagmanager.com/ns.html?id=GTM-PSVHG8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PSVHG8');
+</script>
+

@@ -1,0 +1,1505 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://localhost/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/ambassador_pattern_linking/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/b2d_volume_resize/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/basics/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/baseimages/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/chef/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/certificates/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/cfengine_process_management/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/dockerfile_best-practices/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/https/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/configuring/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/host_integration/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/dsc/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/https/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/networking/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/puppet/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/registry_mirror/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/systemd/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/runmetrics/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/security/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/articles/using_supervisord/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/cli/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/completion/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/env/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/django/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/extends/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/production/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/install/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/rails/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/wordpress/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/ambassador_pattern_linking/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/yml/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/baseimages/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/b2d_volume_resize/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/basics/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/certificates/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/chef/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/cfengine_process_management/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/configuring/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/dockerfile_best-practices/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/host_integration/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/dsc/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/https/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/puppet/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/https/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/networking/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/registry_mirror/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/security/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/runmetrics/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/systemd/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/articles/using_supervisord/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/docker-hub/accounts/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/docker-hub/builds/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/docker-hub/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/docker-hub/official_repos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/docker-hub/repos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/docker-hub/userguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/examples/apt-cacher-ng/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/examples/couchdb_data_volumes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/examples/mongodb/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/examples/nodejs_web_app/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/examples/postgresql_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/examples/running_redis_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/examples/running_ssh_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/examples/running_riak_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/SUSE/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/amazon/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/archlinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/azure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/centos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/binaries/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/cruxlinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/debian/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/fedora/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/frugalware/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/gentoolinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/google/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/joyent/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/mac/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/oracle/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/rhel/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/rackspace/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/softlayer/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/windows/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/introduction/understanding-docker/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/installation/ubuntulinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/misc/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/misc/faq/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/advanced-contributing/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/create-pr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/coding-style/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/doc-style/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/get-help/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/find-an-issue/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/make-a-contribution/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/set-up-git/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/review-pr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/set-up-dev-env/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/software-req-win/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/software-required/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/test-and-docs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/who-written-for/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/api/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/project/work-issue/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/api/docker-io_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/api/docker_io_accounts_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/api/docker_remote_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/api/docker_remote_api_v1.14/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/api/docker_remote_api_v1.16/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/api/docker_remote_api_v1.17/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/api/docker_remote_api_v1.15/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/api/docker_remote_api_v1.18/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/api/docker_remote_api_v1.19/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/api/hub_registry_spec/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/api/remote_api_client_libraries/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/attach/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/build/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/builder/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/cli/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/cp/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/commit/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/create/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/diff/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/daemon/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/events/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/exec/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/export/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/history/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/images/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/import/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/info/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/inspect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/kill/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/load/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/login/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/logout/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/logs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/pause/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/port/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/ps/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/pull/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/push/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/rename/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/restart/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/rm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/rmi/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/save/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/run/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/start/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/search/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/stats/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/stop/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/tag/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/unpause/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/top/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/wait/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/commandline/version/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/glossary/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/logging/journald/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/static_files/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/reference/run/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/userguide/dockerhub/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/userguide/dockerimages/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/userguide/dockerizing/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/userguide/dockerlinks/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/userguide/dockervolumes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/userguide/dockerrepos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/userguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/userguide/labels-custom-metadata/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/userguide/level1/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/userguide/level2/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker/userguide/usingdocker/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/builds/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/accounts/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/repos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/official_repos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/adminguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/userguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/configuration/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/install/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/prior-release-notes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/quick-start/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/release-notes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/support/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/userguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/examples/apt-cacher-ng/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/examples/couchdb_data_volumes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/examples/mongodb/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/examples/nodejs_web_app/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/examples/postgresql_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/examples/running_redis_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/examples/running_riak_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/examples/running_ssh_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/amazon/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/archlinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/SUSE/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/azure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/binaries/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/centos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/cruxlinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/debian/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/fedora/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/gentoolinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/frugalware/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/google/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/joyent/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/mac/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/oracle/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/rackspace/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/rhel/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/softlayer/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/ubuntulinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/installation/windows/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/faq/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/introduction/understanding-docker/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/known-issues/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/nginx-web-server/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/minecraft-server/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/rethinkdb-dev-database/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/last_page/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/userguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/step_five/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/started/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/step_one/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/step_four/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/step_three/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/step_six/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/step_two/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/last_page/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/step_five/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/started/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/step_one/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/step_four/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/step_two/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/step_six/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/step_three/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/misc/faq/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/install-machine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/misc/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/community/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/governance/board-profiles/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/governance/conduct-code/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/code/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/governance/dgab-info/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/how-to-contribute/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/issues/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/meetups/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/advanced-contributing/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/test/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/create-pr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/coding-style/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/doc-style/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/find-an-issue/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/get-help/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/make-a-contribution/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/set-up-dev-env/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/review-pr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/software-req-win/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/set-up-git/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/software-required/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/test-and-docs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/api/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/work-issue/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/project/who-written-for/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/api/docker-io_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/api/docker_remote_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/api/docker_io_accounts_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/api/docker_remote_api_v1.14/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/api/docker_remote_api_v1.15/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/api/docker_remote_api_v1.16/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/api/docker_remote_api_v1.17/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/api/docker_remote_api_v1.18/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/api/docker_remote_api_v1.19/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/api/hub_registry_spec/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/attach/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/api/remote_api_client_libraries/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/builder/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/cli/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/commit/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/build/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/create/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/events/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/diff/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/cp/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/daemon/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/exec/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/export/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/history/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/import/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/images/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/info/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/inspect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/kill/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/load/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/login/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/logout/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/logs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/pause/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/port/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/ps/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/pull/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/push/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/rename/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/restart/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/rmi/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/rm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/run/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/save/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/search/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/start/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/stop/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/stats/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/top/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/tag/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/unpause/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/version/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/commandline/wait/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/logging/journald/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/glossary/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/authentication/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/reference/run/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/configuration/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/deploying/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/help/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/introduction/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/notifications/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/spec/implementations/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/spec/auth/token/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/spec/manifest-v2-1/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/spec/api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/azure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/filesystem/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/inmemory/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/rados/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/s3/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storagedrivers/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/static_files/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/release-notes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/api/swarm-api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/discovery/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/install-manual/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/install-w-machine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/release-notes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/scheduler/filter/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/scheduler/strategy/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/userguide/dockerhub/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/userguide/dockerizing/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/userguide/dockerimages/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/userguide/dockerrepos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/userguide/dockerlinks/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/userguide/dockervolumes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/userguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/userguide/labels-custom-metadata/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/userguide/level1/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/userguide/level2/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/userguide/usingdocker/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/step_four/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/step_five/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/step_one/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/started/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/last_page/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/step_three/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/step_six/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/step_two/</loc>
+  </url>
+  
+</urlset>

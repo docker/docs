@@ -1,0 +1,68 @@
+.terminal-window {
+  text-align: left;
+  max-width: 650px;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 2rem
+}
+
+.terminal-window header {
+  background: #E0E8F0;
+  height: 30px;
+  border-radius: 5px 5px 0 0;
+  padding-left: 10px;
+}
+
+.terminal-window header .btn {
+  width: 12px;
+  height: 12px;
+  margin: 10px 4px 0 0;
+  display: inline-block;
+  border-radius: 8px;
+}
+
+.terminal-window header .btn.green { background: #3BB662;}
+.terminal-window header .btn.yellow { background: #E5C30F;}
+.terminal-window header .btn.red { background: #E75448;}
+
+.terminal-window section.terminal {
+  color: white;
+  font-family: Menlo, Monaco, "Consolas", "Courier New", "Courier";
+  font-size: 11pt;
+  background: #30353A;
+  padding: 15px;
+  width: 100%;
+  min-height: 320px;
+}
+
+.terminal-window section.terminal .typed-cursor {
+    opacity: 1;
+    -webkit-animation: blink 1.2s infinite;
+    -moz-animation: blink 1.2s infinite;
+    animation: blink 1.2s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+
+.terminal-window .gray { color: gray; }
+.terminal-window .green { color: green;}
+
+
+.terminal-window section.terminal.terminal-small {
+  border-radius: $global-radius;
+  min-height: 220px;
+  // background: #f2f2f2;
+}

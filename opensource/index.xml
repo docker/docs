@@ -1,0 +1,978 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Opensources on Docker Docs</title>
+    <link>http://localhost/opensource/</link>
+    <description>Recent content in Opensources on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/opensource/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Board member profiles</title>
+      <link>http://localhost/opensource/governance/board-profiles/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/governance/board-profiles/</guid>
+      <description>
+
+&lt;h1 id=&#34;project-leadership&#34;&gt;Project Leadership&lt;/h1&gt;
+
+&lt;p&gt;The Docker Project is led by three individuals who are responsible for the direction, operations, quality and community of the project as a whole.&lt;/p&gt;
+
+&lt;h3 id=&#34;chief-architect-solomon-hykes&#34;&gt;Chief Architect : Solomon Hykes&lt;/h3&gt;
+
+&lt;p&gt;The chief architect is responsible for the general direction of the project,
+defining it’s design principles, and preserving the integrity of it’s overall
+architecture as the platform grows and matures.&lt;/p&gt;
+
+&lt;h3 id=&#34;chief-maintainer-michael-crosby&#34;&gt;Chief Maintainer : Michael Crosby&lt;/h3&gt;
+
+&lt;p&gt;The chief maintainer is responsible for all aspects of quality for the project
+including code reviews, usability, stability, security and performance.&lt;/p&gt;
+
+&lt;h3 id=&#34;chief-operator-steve-francia&#34;&gt;Chief Operator : Steve Francia&lt;/h3&gt;
+
+&lt;p&gt;The chief operator is responsible for the day-to-day operations of the project
+including: facilitating communications amongst all the contributors; tracking
+release schedules; managing the relationship with downstream distributions and
+upstream dependencies; and helping new contributors to get involved and become
+successful contributors and maintainers. The role is also responsible for
+managing and measuring the success of the overall project and ensuring it is
+governed properly working in concert with the Docker Governance Advisory Board
+(DGAB).&lt;/p&gt;
+
+&lt;h1 id=&#34;members-of-the-2014-dgab&#34;&gt;Members of the 2014 DGAB&lt;/h1&gt;
+
+&lt;p&gt;The DGAB is made up of 15 individual who represent the ecosystem, contributors
+and community of the Docker Project.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker&#34;&gt;Docker&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Solomon Hykes&lt;/li&gt;
+&lt;li&gt;Victor Vieux&lt;/li&gt;
+&lt;li&gt;Michael Crosby&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;contributor&#34;&gt;Contributor&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Andrew Tianon Page&lt;/li&gt;
+&lt;li&gt;Brandon Phillips&lt;/li&gt;
+&lt;li&gt;Jonathan Rudenberg&lt;/li&gt;
+&lt;li&gt;David Calavera&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;corporate&#34;&gt;Corporate&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Eric Brewer (Google)&lt;/li&gt;
+&lt;li&gt;Dave Ing (IBM)&lt;/li&gt;
+&lt;li&gt;Van Lindberg (Rackspace)&lt;/li&gt;
+&lt;li&gt;Dan Walsh (RedHat)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;user&#34;&gt;User&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nicola Paolucci (Atlassian)&lt;/li&gt;
+&lt;li&gt;Rohan Singh (Spotify)&lt;/li&gt;
+&lt;li&gt;Meghdoot Bhattacharya (PayPal)&lt;/li&gt;
+&lt;li&gt;Borja Burgos (Tutum)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Code of conduct</title>
+      <link>http://localhost/opensource/governance/conduct-code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/governance/conduct-code/</guid>
+      <description>
+
+&lt;h1 id=&#34;code-of-conduct&#34;&gt;Code of conduct&lt;/h1&gt;
+
+&lt;p&gt;The Docker project has not currently adopted a Code of Conduct though there is work being done in this regard.&lt;/p&gt;
+
+&lt;p&gt;There is an official &lt;a href=&#34;http://www.dockercon.com/code-of-conduct&#34;&gt;DockerCon code of conduct&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Without a formal Code of Conduct being adopted by the project, it is
+anticipated that participants and contributors follow the generic &lt;a href=&#34;http://contributor-covenant.org&#34;&gt;contributor
+covenant&lt;/a&gt; until a formal code of conduct is
+adopted.&lt;/p&gt;
+
+&lt;h1 id=&#34;contributor-covenant&#34;&gt;Contributor Covenant&lt;/h1&gt;
+
+&lt;p&gt;As contributors and maintainers of this project, we pledge to respect all
+people who contribute through reporting issues, posting feature requests,
+updating documentation, submitting pull requests or patches, and other
+activities.&lt;/p&gt;
+
+&lt;p&gt;We are committed to making participation in this project a harassment-free
+experience for everyone, regardless of level of experience, gender, gender
+identity and expression, sexual orientation, disability, personal appearance,
+body size, race, ethnicity, age, or religion.&lt;/p&gt;
+
+&lt;p&gt;Examples of unacceptable behavior by participants include the use of sexual
+language or imagery, derogatory comments or personal attacks, trolling, public
+or private harassment, insults, or other unprofessional conduct.&lt;/p&gt;
+
+&lt;p&gt;Project maintainers have the right and responsibility to remove, edit, or
+reject comments, commits, code, wiki edits, issues, and other contributions
+that are not aligned to this Code of Conduct. Project maintainers who do not
+follow the Code of Conduct may be removed from the project team.&lt;/p&gt;
+
+&lt;p&gt;Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported by opening an issue or contacting one or more of the project
+maintainers.&lt;/p&gt;
+
+&lt;p&gt;This Code of Conduct is adapted from the &lt;a href=&#34;http:contributor-covenant.org&#34;&gt;Contributor
+Covenant&lt;/a&gt;, version 1.0.0, available at
+&lt;a href=&#34;http://contributor-covenant.org/version/1/0/0/&#34;&gt;http://contributor-covenant.org/version/1/0/0/&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Contribute code overview</title>
+      <link>http://localhost/opensource/code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/code/</guid>
+      <description>
+
+&lt;h1 id=&#34;contribute-code-overview&#34;&gt;Contribute code overview&lt;/h1&gt;
+
+&lt;p&gt;If you&amp;rsquo;d like to improve the code of any of Docker&amp;rsquo;s projects, we would love to
+have your contributions. All of our projects&amp;rsquo; code repositories are on GitHub:&lt;/p&gt;
+
+&lt;table class=&#34;tg&#34; &gt;
+        &lt;col width=&#34;20%&#34;&gt;
+        &lt;col width=&#34;80%&#34;&gt;
+        &lt;tr&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/docker&#34; target=&#34;_blank&#34;&gt;docker/docker&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;Docker the open-source application container engine&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/machine&#34; target=&#34;_blank&#34;&gt;docker/machine&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;Software for the easy and quick creation of Docker hosts on your computer, on cloud providers, and inside your own data center.&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;tr&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/kitematic/kitematic&#34; target=&#34;_blank&#34;&gt;kitematic/kitematic&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;Kitematic is a simple application for managing Docker containers on Mac OS X.&lt;/td&gt;
+   &lt;/tr&gt;
+&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/swarm&#34; target=&#34;_blank&#34;&gt;docker/swarm&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;Native clustering for Docker; manage several Docker hosts as a single, virtual host.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/compose&#34; target=&#34;_blank&#34;&gt;docker/compose&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;Define and run complex applications using one or many interlinked containers.&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+
+&lt;p&gt;See &lt;a href=&#34;https://github.com/docker&#34; target=&#34;_blank&#34;&gt;the complete list of
+Docker repositories&lt;/a&gt; on GitHub.&lt;/p&gt;
+
+&lt;p&gt;If you want to contribute to the &lt;code&gt;docker/docker&lt;/code&gt; repository you should be
+familiar with or a invested in learning Go or the Markdown language.  If you
+know other languages, investigate our
+other repositories&amp;mdash;not all of them run on Go.&lt;/p&gt;
+
+&lt;h1 id=&#34;code-contribution-workflow&#34;&gt;Code contribution workflow&lt;/h1&gt;
+
+&lt;p&gt;Below is the general workflow for contributing Docker code or documentation.
+If you are an experienced open source contributor you may be familiar with this
+workflow. If you are new or just need reminders, the steps below link to more
+detailed documentation in Docker&amp;rsquo;s project contributors guide.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://docs.docker.com/project/software-required/&#34;
+target=&#34;_blank&#34;&gt;Get the software&lt;/a&gt; you need.&lt;/p&gt;
+
+&lt;p&gt;This explains how to install a couple of tools used in our development
+environment.  What you need (or don&amp;rsquo;t need) might surprise you.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://docs.docker.com/project/set-up-git/&#34;
+target=&#34;_blank&#34;&gt;Configure Git and fork the repo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Your Git configuration can make it easier for you to contribute.
+Configuration is especially key if are new to contributing or to Docker.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://docs.docker.com/project/set-up-dev-env/&#34;
+target=&#34;_blank&#34;&gt;Learn to work with the Docker development container&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Docker developers run &lt;code&gt;docker&lt;/code&gt; in &lt;code&gt;docker&lt;/code&gt;.  If you are a geek,
+this is a pretty cool experience.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://docs.docker.com/project/find-an-issue/&#34;
+target=&#34;_blank&#34;&gt;Claim an issue&lt;/a&gt; to work on.&lt;/p&gt;
+
+&lt;p&gt;We created a filter listing &lt;a href=&#34;http://goo.gl/Hsp2mk&#34; target=&#34;_blank&#34;&gt;all open
+and unclaimed issues&lt;/a&gt; for Docker.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a
+href=&#34;http://docs.docker.com/project/work-issue/&#34; target=&#34;_blank&#34;&gt;Work on the
+issue&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you change or add code or docs to a project, you should test your changes
+as you work. This page explains &lt;a
+href=&#34;http://docs.docker.com/project/test-and-docs/&#34; target=&#34;_blank&#34;&gt;how to
+test in our development environment&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Also, remember to always &lt;strong&gt;sign your commits&lt;/strong&gt; as you work! To sign your
+commits, include the &lt;code&gt;-s&lt;/code&gt; flag in your commit like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git commit -s -m &amp;quot;Add commit with signature example&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t sign &lt;a href=&#34;https://twitter.com/gordontheturtle&#34;
+target=&#34;_blank&#34;&gt;Gordon&lt;/a&gt; will get you!&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://docs.docker.com/project/create-pr/&#34; target=&#34;_blank&#34;&gt;Create a
+pull request&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you make a change to fix an issue, add reference to the issue in the pull
+request. Here is an example of a perfect pull request with a good description,
+issue reference, and signature in the commit:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/opensource/images/bonus.png&#34; alt=&#34;Sign commits and issues&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;We have also have checklist that describes &lt;a href=&#34;#what-is-the-pre-pull-request-checklist&#34;&gt;what each pull request
+needs&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://docs.docker.com/project/review-pr/&#34;
+target=&#34;_blank&#34;&gt;Participate in the pull request review&lt;/a&gt; till a successful
+merge.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;faq-and-troubleshooting-tips-for-coders&#34;&gt;FAQ and troubleshooting tips for coders&lt;/h2&gt;
+
+&lt;p&gt;This section contains some frequently asked questions and tips for
+troubleshooting problems in your code contribution.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#how-do-i-set-my-signature:cb7f612e17aad7eb26c06709ef92a867&#34;&gt;How do I set my signature?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-do-i-track-changes-from-the-docker-repo-upstream:cb7f612e17aad7eb26c06709ef92a867&#34;&gt;How do I track changes from the docker repo upstream?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-do-i-format-my-go-code:cb7f612e17aad7eb26c06709ef92a867&#34;&gt;How do I format my Go code?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#what-is-the-pre-pull-request-checklist:cb7f612e17aad7eb26c06709ef92a867&#34;&gt;What is the pre-pull request checklist?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-should-i-comment-my-code:cb7f612e17aad7eb26c06709ef92a867&#34;&gt;How should I comment my code?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-do-i-rebase-my-feature-branch:cb7f612e17aad7eb26c06709ef92a867&#34;&gt;How do I rebase my feature branch?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;how-do-i-set-my-signature&#34;&gt;How do I set my signature&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Change to the root of your &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;user.name&lt;/code&gt; for the repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local user.name &amp;quot;FirstName LastName&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;user.email&lt;/code&gt; for the repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local user.email &amp;quot;emailname@mycompany.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;how-do-i-track-changes-from-the-docker-repo-upstream&#34;&gt;How do I track changes from the docker repo upstream&lt;/h3&gt;
+
+&lt;p&gt;Set your local repo to track changes upstream, on the &lt;code&gt;docker&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Change to the root of your Docker repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add a remote called &lt;code&gt;upstream&lt;/code&gt; that points to &lt;code&gt;docker/docker&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote add upstream https://github.com/docker/docker.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;how-do-i-format-my-go-code&#34;&gt;How do I format my Go code&lt;/h3&gt;
+
+&lt;p&gt;Run &lt;code&gt;gofmt -s -w filename.go&lt;/code&gt; on each changed file before committing your changes.
+Most editors have plug-ins that do the formatting automatically.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-is-the-pre-pull-request-checklist&#34;&gt;What is the pre-pull request checklist&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Sync and cleanly rebase on top of Docker&amp;rsquo;s &lt;code&gt;master&lt;/code&gt;; do not mix multiple branches
+in the pull request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Squash your commits into logical units of work using
+&lt;code&gt;git rebase -i&lt;/code&gt; and &lt;code&gt;git push -f&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If your code requires a change to tests or documentation, include code,test,
+and documentation changes in the same commit as your code; this ensures a
+revert would remove all traces of the feature or fix.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Reference each issue in your pull request description (&lt;code&gt;#XXXX&lt;/code&gt;).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;how-should-i-comment-my-code&#34;&gt;How should I comment my code?&lt;/h3&gt;
+
+&lt;p&gt;The Go blog wrote about code comments, it is &lt;a href=&#34;http://goo.gl/fXCRu&#34;
+target=&#34;_blank&#34;&gt;a single page explanation&lt;/a&gt;. A summary follows:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Comments begin with two forward &lt;code&gt;//&lt;/code&gt; slashes.&lt;/li&gt;
+&lt;li&gt;To document a type, variable, constant, function, or even a package, write a
+regular comment directly preceding the elements declaration, with no intervening blank
+line.&lt;/li&gt;
+&lt;li&gt;Comments on package declarations should provide general package documentation.&lt;/li&gt;
+&lt;li&gt;For packages that need large amounts of introductory documentation: the
+package comment is placed in its own file.&lt;/li&gt;
+&lt;li&gt;Subsequent lines of text are considered part of the same paragraph; you must
+leave a blank line to separate paragraphs.&lt;/li&gt;
+&lt;li&gt;Indent pre-formatted text relative to the surrounding comment text (see gob&amp;rsquo;s doc.go for an example).&lt;/li&gt;
+&lt;li&gt;URLs are converted to HTML links; no special markup is necessary.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;how-do-i-rebase-my-feature-branch&#34;&gt;How do I rebase my feature branch?&lt;/h3&gt;
+
+&lt;p&gt;Always rebase and squash your commits before making a pull request.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Fetch any of the last minute changes from &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git fetch upstream master
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start an interactive rebase.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git rebase -i upstream/master
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rebase opens an editor with a list of commits.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    pick 1a79f55 Tweak some of images
+    pick 3ce07bb Add a new line 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you run into trouble, &lt;code&gt;git --rebase abort&lt;/code&gt; removes any changes and gets you
+back to where you started.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Squash the &lt;code&gt;pick&lt;/code&gt; keyword with &lt;code&gt;squash&lt;/code&gt; on all but the first commit.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pick 1a79f55 Tweak some of images
+squash 3ce07bb Add a new line 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After closing the file, &lt;code&gt;git&lt;/code&gt; opens your editor again to edit the commit
+message.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Edit and save your commit message.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git commit -s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure your message includes your signature.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Push any changes to your fork on GitHub.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git push origin my-keen-feature
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker Governance Advisory Board</title>
+      <link>http://localhost/opensource/governance/dgab-info/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/governance/dgab-info/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-governance-advisory-board-june-2014-version&#34;&gt;Docker Governance Advisory Board: June 2014 Version&lt;/h1&gt;
+
+&lt;p&gt;An initial version of this proposal was posted for comments on April 30th,
+2014. This version reflects all comments received prior to announcing the
+initial members/nominees for the board on June 10th. A subsequent version will
+be released following the first meeting of the board.&lt;/p&gt;
+
+&lt;h2 id=&#34;1-0-background&#34;&gt;1.0 Background&lt;/h2&gt;
+
+&lt;p&gt;The Docker project is experiencing incredible momentum in project growth,
+adoption, and contribution. As of June 9, 2014, there are over 460
+contributors, 95% of whom do not work for the project’s commercial sponsor.
+Large numbers of projects are being built on top of or incorporating Docker
+(over 7,000 projects with “Docker” in the title on GitHub), and there is a
+large and growing community of users. The project was designed from the outset
+to have a very open structure, including open design, open contribution, and
+consistent use of tools across the project. Maintainers include both Docker,
+Inc. and non-Docker Inc. employees. Given the large numbers of contributors,
+users, and companies with a stake in the future of the project, the project
+leadership is looking to supplement the current governance and contribution
+mechanisms with an advisory board, as part of its long term commitment to open
+governance.&lt;/p&gt;
+
+&lt;h2 id=&#34;2-0-purpose&#34;&gt;2.0 Purpose&lt;/h2&gt;
+
+&lt;p&gt;The primary purpose of the Docker Governance Advisory Board (DGAB) is to advise
+the Docker project leadership (Leadership) on matters related to supporting the
+long term governance, structure, and roadmap of the Docker project. The
+following main areas are included in this charter:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Provide a forum for individuals, users, and companies to discuss the issues
+under the DGAB purview (SCOPE)&lt;/li&gt;
+&lt;li&gt;Provide guidance and input to Leadership, and where possible, present a
+consistent and consolidated opinion from the broader Docker community&lt;/li&gt;
+&lt;li&gt;Produce a formal, twice yearly report to the Leadership and broader Docker
+community of the status of and progress made in all areas under the purview
+of the DGAB.&lt;/li&gt;
+&lt;li&gt;Promote and support the use of Docker in manner consistent with Guiding *&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;principles-of-the-project-and-the-core-criteria&#34;&gt;Principles of the project and the Core Criteria&lt;/h3&gt;
+
+&lt;p&gt;The DGAB is not:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Intended to serve as a governance board. The DGAB advises, but does not manage, the Docker project leadership&lt;/li&gt;
+&lt;li&gt;Intended to replace existing mechanisms for community input, governance, or contribution&lt;/li&gt;
+&lt;li&gt;Intended to assume a formal, fiduciary role with respect to the project. The DGAB membership will not be asked to provide funds to the project, assume liabilities with respect to the project or their activities, or assume responsibility for enforcing either trademarks or DGAB recommendations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;3-0-scope&#34;&gt;3.0 Scope&lt;/h2&gt;
+
+&lt;p&gt;The DGAB is expected to provide input and formal recommendations regarding the following areas:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker project long term roadmap&lt;/li&gt;
+&lt;li&gt;Docker project policies and procedures around maintenance and contributions&lt;/li&gt;
+&lt;li&gt;Docker project policies and procedures around intellectual property, trademark, and licensing&lt;/li&gt;
+&lt;li&gt;Core Criteria for Docker-related project (c.f. section 7.0)&lt;/li&gt;
+&lt;li&gt;Docker project long term governance model&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;4-0-meetings-and-memberships&#34;&gt;4.0 Meetings and Memberships&lt;/h2&gt;
+
+&lt;h3 id=&#34;4-1-general&#34;&gt;4.1 General&lt;/h3&gt;
+
+&lt;p&gt;The DGAB will have 15 members&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The Docker Chief Maintainer and architect: Solomon Hykes&lt;/li&gt;
+&lt;li&gt;2 seats for the top core maintainers&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Up to 12 additional seats: 4 corporate seats, 4 individual or small business seats, 4 “user” seats&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;No fee or sponsorship is required for membership&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The membership term will last 12 months. With the exception of the Chief Maintainer, all members can serve a maximum of two consecutive terms&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The selection process is intended to be open, transparent, and guided by objective criteria for membership.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The DGAB shall elect a Chair and Vice Chair from amongst their members to serve a renewable 6 month term.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The Chair or Vice-Chair shall prepare an agenda for and preside over regular meetings of the DGAB. These meetings shall occur as frequently as the DGAB determines is in the project’s best interest, but no less than quarterly&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Docker, inc. shall appoint a temporary chair to set the agenda for the first meeting and preside until the election shall occur.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;A member of the DGAB may be removed by a resolution of the DGAB supported by more than two thirds of its membership.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The DGAB may fill any vacancy arising by removal or resignation by a simple majority vote to fill the remainder of the term of the vacating member.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The rules of election and membership outlined in this section may be varied by a resolution of the DGAB supported by more than two thirds of its voting membership.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;All project maintainers are welcome as participants and observers at DGAB meetings&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;4-2-selection-process&#34;&gt;4.2 Selection Process&lt;/h3&gt;
+
+&lt;h4 id=&#34;contributors&#34;&gt;Contributors:&lt;/h4&gt;
+
+&lt;p&gt;Four seats will be granted to the top contributors, as measured
+by non-trivial pull requests merged to master in the last 6 months. Trivial
+pull requests are typos, minor document corrections, or other items that do not
+require a DCO. These seats will be reserved for individual contributors who are
+neither employees of Docker, Inc. nor employees of companies that hold a
+corporate seat.&lt;/p&gt;
+
+&lt;h4 id=&#34;corporate-seats&#34;&gt;Corporate seats:&lt;/h4&gt;
+
+&lt;p&gt;Nomination is restricted to companies for whom all three of
+the following are true&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Are in the top 8 companies in terms of non-trivial pull requests merged to
+master in the past six months as measured by contributions by all employees&lt;/li&gt;
+&lt;li&gt;Have employees as maintainers and/or make significant contributions to the
+code base&lt;/li&gt;
+&lt;li&gt;Have committed to integrate Docker into widely used products in a manner
+consistent with Core Criteria. (c.f. section 7.0)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Once nomination has been closed, selection of corporate seats will be made by a
+vote by eligible contributors. Eligible contributors are those who have had at
+least one non-trivial pull request merged to master in the past six months.&lt;/p&gt;
+
+&lt;h4 id=&#34;user-seats&#34;&gt;User seats:&lt;/h4&gt;
+
+&lt;p&gt;These seats are for organizations that are using Docker. To be nominated, an
+organization must be using Docker in production and have published a use case.
+Once nomination has been closed, selection will be made by a vote by eligible
+contributors. Eligible contributors are those who have had at least one
+non-trivial pull request merged to master in the past six months.&lt;/p&gt;
+
+&lt;h2 id=&#34;5-0-operation&#34;&gt;5.0 Operation&lt;/h2&gt;
+
+&lt;p&gt;The DGAB is authorized to seek advice and counsel from other interested parties
+and invited experts as appropriate&lt;/p&gt;
+
+&lt;p&gt;Any outside party wishing to bring an issue before the DGAB may do so by
+emailing the DGAB mailing list&lt;/p&gt;
+
+&lt;p&gt;The DGAB shall provide transparent and timely reporting (through any mechanism
+it deems appropriate) to the Community at large on all of its activities,
+subject to the right of any individual to designate their comments and the
+ensuing discussion as &amp;ldquo;in confidence,&amp;rdquo; in which case the public report shall
+contain only a note of the request and an agreed summary (if any) of the
+substance.&lt;/p&gt;
+
+&lt;p&gt;The DGAB is being formed at the discretion of the Leadership. The Leadership
+alone may decide to terminate the DGAB in its sole discretion; provided
+however, that the Leadership shall first consult the DGAB Chair.&lt;/p&gt;
+
+&lt;p&gt;The DGAB and its members shall abide by appropriate antitrust guidelines.&lt;/p&gt;
+
+&lt;h2 id=&#34;6-0-open-governance-principles&#34;&gt;6.0 Open Governance Principles&lt;/h2&gt;
+
+&lt;p&gt;The DGAB will formulate recommendations in conjunction with the following, open governance principles&lt;/p&gt;
+
+&lt;h3 id=&#34;open-participation&#34;&gt;Open participation:&lt;/h3&gt;
+
+&lt;p&gt;Throughout the project, anyone should be able to participate and contribute.
+All bugs and tasks will be tracked in a public tracker and all of the source
+code and all of the tools needed to build it will be available under an open
+license permitting unrestricted use&lt;/p&gt;
+
+&lt;h3 id=&#34;open-technical-meritocracy&#34;&gt;Open technical meritocracy:&lt;/h3&gt;
+
+&lt;p&gt;Technical merit over pride of authorship. Code
+is contributed for the express purpose of advancing technologies relevant to
+the project, effectively separating technology advancement from individual or
+commercial intent.&lt;/p&gt;
+
+&lt;h3 id=&#34;open-design&#34;&gt;Open design:&lt;/h3&gt;
+
+&lt;p&gt;Roadmaps are discussed in the open, and design receives input from all
+contributors and maintainers Influence through contribution: organizations and
+individuals gain influence over the project through contribution&lt;/p&gt;
+
+&lt;h3 id=&#34;ip-cleanliness&#34;&gt;IP Cleanliness:&lt;/h3&gt;
+
+&lt;p&gt;Steps are taken to ensure that all incoming code is legally contributed (DCOs
+terms-of-use etc.), that use of approved third party libraries does not create
+incompatible dependencies, and that all non-trivial commits have DCOs&lt;/p&gt;
+
+&lt;h3 id=&#34;open-licensing&#34;&gt;Open Licensing:&lt;/h3&gt;
+
+&lt;p&gt;Code should be licensed using approved, standard, open-source licenses. (Docker is currently licensed under Apache 2.0)&lt;/p&gt;
+
+&lt;h2 id=&#34;7-0-core-criteria&#34;&gt;7.0 Core Criteria&lt;/h2&gt;
+
+&lt;p&gt;The DGAB will formulate a set of Core Criteria for projects and commercial
+products that use the Docker trademarks&lt;/p&gt;
+
+&lt;p&gt;Core Criteria will generally cover such areas as: use of standard APIs,
+consistent behaviors expected of Docker containers, trademark guidelines,
+provenance, upstream contribution models, and alternative distributions&lt;/p&gt;
+
+&lt;p&gt;As Core Criteria will not be fully defined when the initial DGAB membership is
+formulated, it is understood that there is a possibility that certain members
+of the initial DGAB may not agree with the Core Criteria when they are fully
+defined or may have products/offerings that are not in compliance with the Core
+Criteria at the time they are finalized. In this case, the corporate members
+will either agree to become compliant within a specified timeframe or else
+resign their DGAB position.&lt;/p&gt;
+
+&lt;p&gt;Please help us improve this draft by sending your comments and feedback to
+governance@docker.com).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Organize a Docker Meetup</title>
+      <link>http://localhost/opensource/meetups/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/meetups/</guid>
+      <description>
+
+&lt;h1 id=&#34;organize-a-docker-meetup&#34;&gt;Organize a Docker Meetup&lt;/h1&gt;
+
+&lt;p&gt;Anyone interested in Docker can become an active member of the Docker community
+by becoming co-organizer of a Docker Meetup group.&lt;/p&gt;
+
+&lt;p&gt;If a Meetup group does not already exist in your area and you are willing to
+start a new one, the best way to proceed is to contact us so that we can create
+it for you. We will always agree to create a new Docker Meetup group as long as
+it makes sense geographically speaking.&lt;/p&gt;
+
+&lt;p&gt;If you have already created a Docker Meetup group that is fine, we will simply
+ask you to add us as a co-organizer so that we can ensure a consistent support
+to the group in terms of community and Meetup management.&lt;/p&gt;
+
+&lt;p&gt;Before contacting us to create a new Docker Meetup Group, take a look at our
+Meetup Groups page to make sure a group does not already exist in the area.&lt;/p&gt;
+
+&lt;h2 id=&#34;get-started-putting-on-a-docker-meetup&#34;&gt;Get started putting on a Docker Meetup&lt;/h2&gt;
+
+&lt;p&gt;Now that you are co-organizer of a Docker Meetup Group, here are a few tips and
+suggestions to help you get started:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Attend similar DevOps or Developers Meetups to gain experience and gauge interest in Docker&lt;/li&gt;
+&lt;li&gt;Contact other people interested in Docker to help you organize and promote future Meetups&lt;/li&gt;
+&lt;li&gt;Research High-Tech companies in your area willing to host a Docker Meetup event&lt;/li&gt;
+&lt;li&gt;Research what would be the best date(s) to schedule the Meetups based on availabilities with regard to competing events in the area and other calendar imperative&lt;/li&gt;
+&lt;li&gt;Research what are the topic of interest to your audience prior to set an agenda for the meetup&lt;/li&gt;
+&lt;li&gt;Pay attention to the Meetup page aesthetics, add logos and pictures, invite members to leave comments and reply to these comments&lt;/li&gt;
+&lt;li&gt;Promote the event on social media and make sure that the list of keywords is well define if you have created the Docker Meetup Group on your own&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;how-docker-can-help-you-organize&#34;&gt;How Docker can help you organize&lt;/h2&gt;
+
+&lt;p&gt;We can support the co-organizers of the Docker Meetup Groups based on their specific needs. For instance, we might / will be able to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Send you Docker T-shirts and stickers&lt;/li&gt;
+&lt;li&gt;Put you in contact with other people interested in being a co-organizer of a Docker Meetup group, and which are in the same area&lt;/li&gt;
+&lt;li&gt;Put you in contact with companies willing to host a Docker Meetup in your area&lt;/li&gt;
+&lt;li&gt;Introduce you to people willing to give a lightning talk about Docker
+Promote your Docker Group on Docker.com, Docker Weekly and Social Media
+Hackday Picture&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;host-a-docker-meetup-at-your-location&#34;&gt;Host a Docker meetup at your location&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/opensource/images/docker-friends.png&#34; alt=&#34;Meetup&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;want-to-host-a-docker-meetup&#34;&gt;Want to host a Docker Meetup?&lt;/h2&gt;
+
+&lt;p&gt;We are always looking for new office space to host Docker Meetups. If your
+company is willing to host a Docker Meetup, please contact us by email at
+meetup@docker.com. Previous Docker Meetups have been hosted by companies such
+as Rackspace, Twitter, MongoDB, BrightCove, DigitlOcean, Viadeo and Edmodo&lt;/p&gt;
+
+&lt;h3 id=&#34;how-many-attendees&#34;&gt;How many attendees?&lt;/h3&gt;
+
+&lt;p&gt;The company hosting the event fixes the number of attendees depending on their
+office size and availability. This number usually varies between 30 and 200.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-long-is-a-docker-meetup&#34;&gt;How long is a Docker Meetup?&lt;/h3&gt;
+
+&lt;p&gt;Once again, each company hosting the event decides when does the meetup start,
+and how long it lasts. Usual meetups tend to last 2 hours, and start between
+4pm and 6pm.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Organize our issues</title>
+      <link>http://localhost/opensource/issues/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/issues/</guid>
+      <description>
+
+&lt;h1 id=&#34;organize-our-issues&#34;&gt;Organize our issues&lt;/h1&gt;
+
+&lt;p&gt;The Docker projects use GitHub issues to record issues and feature requests that
+come in from contributors.  Help us organize our work by triaging. Triage is the
+process of reviewing incoming issue tickets, gathering more information about
+the issue, and verifying whether or not the issue is valid.&lt;/p&gt;
+
+&lt;p&gt;You should triage if you want to discover which Docker features other contributors
+think are important. Triage is a great choice if you have an interest
+or experience in software product management or project management.&lt;/p&gt;
+
+&lt;h1 id=&#34;what-kind-of-issues-can-i-triage&#34;&gt;What kind of issues can I triage?&lt;/h1&gt;
+
+&lt;p&gt;Docker users and contributors create new issues if they want to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;report a problem they had with Docker software&lt;/li&gt;
+&lt;li&gt;request a new feature&lt;/li&gt;
+&lt;li&gt;ask a question&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;how-do-i-triage&#34;&gt;How do I triage?&lt;/h1&gt;
+
+&lt;p&gt;Follow these steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Sign up for a &lt;a href=&#34;https://github.com&#34; target=&#34;_blank&#34;&gt;Github account&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Visit a Docker repository and press the &lt;strong&gt;Watch&lt;/strong&gt; button.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This tells GitHub to notify you of new issues. Depending on your settings,
+notification go to your GitHub or email inbox. Some of repositories you can watch are:
+&lt;table class=&#34;tg&#34; &gt;
+    &lt;col width=&#34;20%&#34;&gt;
+    &lt;col width=&#34;80%&#34;&gt;
+    &lt;tr&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/docker&#34; target=&#34;_blank&#34;&gt;docker/docker&lt;/a&gt;&lt;/td&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;Docker the open-source application container engine&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/machine&#34; target=&#34;_blank&#34;&gt;docker/machine&lt;/a&gt;&lt;/td&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;Software for the easy and quick creation of Docker hosts on your computer, on cloud providers, and inside your own data center.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/kitematic/kitematic&#34; target=&#34;_blank&#34;&gt;kitematic/kitematic&lt;/a&gt;&lt;/td&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;Kitematic is a simple application for managing Docker containers on Mac OS X.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/swarm&#34; target=&#34;_blank&#34;&gt;docker/swarm&lt;/a&gt;&lt;/td&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;Native clustering for Docker; manage several Docker hosts as a single, virtual host.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/compose&#34; target=&#34;_blank&#34;&gt;docker/compose&lt;/a&gt;&lt;/td&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;Define and run complex applications using one or many interlinked containers.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&#34;https://github.com/docker&#34; target=&#34;_blank&#34;&gt;the complete list of
+Docker repositories&lt;/a&gt; on GitHub.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Choose an issue from the &lt;a
+href=&#34;https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+-label%
+3Akind%2Fproposal+-label%3Akind%2Fenhancement+-label%3Akind%2Fbug+-label%3Akind%
+2Fcleanup+-label%3Akind%2Fgraphics+-label%3Akind%2Fwriting+-label%3Akind%
+2Fsecurity+-label%3Akind%2Fquestion+-label%3Akind%2Fimprovement+-label%3Akind%
+2Ffeature&#34; target=&#34;_blank&#34;&gt;list of untriaged issues&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Follow the &lt;a
+href=&#34;https://github.com/docker/docker/blob/master/project/ISSUE-TRIAGE.md&#34;
+target=&#34;_blank&#34;&gt;the triage process&lt;/a&gt; to triage the issue.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The triage process asks you to add both a &lt;code&gt;kind/&lt;/code&gt; and a &lt;code&gt;exp/&lt;/code&gt; label to each
+issue. Because you are not a Docker maintainer, you add these through comments.
+Simply add a &lt;code&gt;+label&lt;/code&gt; keyword to an issue comment:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost/opensource/images/triage-label.png&#34; alt=&#34;Example&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;For example, the &lt;code&gt;+exp/beginner&lt;/code&gt; and &lt;code&gt;+kind/writing&lt;/code&gt; labels would triage an issue as
+beginner writing task. For descriptions of valid labels, see the &lt;a
+href=&#34;https://github.com/docker/docker/blob/master/project/ISSUE-TRIAGE.md&#34;&gt;the triage process&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Triage another issue.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Overview of contributing</title>
+      <link>http://localhost/opensource/how-to-contribute/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/how-to-contribute/</guid>
+      <description>
+
+&lt;h1 id=&#34;overview-of-contributing&#34;&gt;Overview of contributing&lt;/h1&gt;
+
+&lt;p&gt;Contributing to the Docker project or to any open source project can be a
+rewarding experience. You help yourself and you help the projects you work on.
+You also help the countless number of other project participants.&lt;/p&gt;
+
+&lt;p&gt;Open source projects depend on a lot more than just code to be successful.
+Proper documentation, testing, training, publicity, support and organization are
+all critical.&lt;/p&gt;
+
+&lt;h1 id=&#34;filters-for-experienced-contributors&#34;&gt;Filters for experienced contributors&lt;/h1&gt;
+
+&lt;p&gt;If you are an experienced Docker contributor, we have pre-filtered for open
+issues in the &lt;code&gt;docker/docker&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fgraphics+-label%3Astatus%2Fclaimed+-label%3Astatus%2Fassigned+no%3Aassignee&#34;&gt;Graphics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Ftest+-label%3Astatus%2Fclaimed+-label%3Astatus%2Fassigned+no%3Aassignee&#34;&gt;Test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fwriting+-label%3Astatus%2Fclaimed+-label%3Astatus%2Fassigned+no%3Aassignee&#34;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fquestion+-label%3Astatus%2Fclaimed+-label%3Astatus%2Fassigned+no%3Aassignee&#34;&gt;Questions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fbug+-label%3Astatus%2Fclaimed+-label%3Astatus%2Fassigned+no%3Aassignee&#34;&gt;Bugs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Ffeature+-label%3Astatus%2Fclaimed+-label%3Astatus%2Fassigned+no%3Aassignee&#34;&gt;Features&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+label%3Akind%2Fenhancement+-label%3Astatus%2Fclaimed+-label%3Astatus%2Fassigned+no%3Aassignee&#34;&gt;Enhancements&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You might also want to check for open issues in our other Docker repositories:
+&lt;table class=&#34;tg&#34;&gt;
+        &lt;col width=&#34;20%&#34;&gt;
+        &lt;col width=&#34;80%&#34;&gt;
+        &lt;tr&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/machine/issues&#34; &gt;docker/machine&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;Software for the easy and quick creation of Docker hosts on your computer, on cloud providers, and inside your own data center.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/distribution/issues&#34;&gt;docker/distribution&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;Registry implementation for storing and distributing
+            docker images. Provides a secure tool chain for distributing content.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker-library/official-images/issues&#34;&gt;docker-library/official-images&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;This repository contains the images for our official repository.&lt;/td&gt;
+       &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/distribution/issues&#34;&gt;docker/distribution&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;Registry implementation for storing and distributing docker images. Provides a secure tool chain for distributing content.&lt;/td&gt;
+        &lt;/tr&gt;&lt;br /&gt;
+        &lt;tr&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/swarm/issues&#34;&gt;docker/swarm&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;Native clustering for Docker; manage several Docker hosts as a single, virtual host.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/compose/issues&#34; &gt;docker/compose&lt;/a&gt;&lt;/td&gt;
+            &lt;td class=&#34;tg-031e&#34;&gt;Define and run complex applications using one or many interlinked containers.&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;general-resources-and-acknowledgements&#34;&gt;General resources and acknowledgements&lt;/h1&gt;
+
+&lt;p&gt;We’ve found &lt;a href=&#34;https://guides.github.com/overviews/os-contributing/&#34;&gt;GitHub&amp;rsquo;s guide on contributing to open source&lt;/a&gt; to
+be a helpful guide to contributing in general.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Support the community</title>
+      <link>http://localhost/opensource/community/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/community/</guid>
+      <description>
+
+&lt;h1 id=&#34;support-the-community&#34;&gt;Support the community&lt;/h1&gt;
+
+&lt;p&gt;With millions of Docker users all over the world, there&amp;rsquo;s always someone who
+needs a helping hand. Like many open source projects, the Docker project relies
+on community support channels like forums, IRC, and StackOverflow.  You should
+contribute mentoring if you have good knowledge of:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;how open source projects run&lt;/li&gt;
+&lt;li&gt;using Docker in some particular domain (for example, testing or deployment)&lt;/li&gt;
+&lt;li&gt;using Git, Go, GitHub, IRC, or other common tools&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Also, choose mentoring if you like to be happy. Studies show that &lt;a
+href=&#34;http://goo.gl/HSz8UT&#34; target=&#34;_blank&#34;&gt;helping others&lt;/a&gt; is a great way to
+boost your own well being.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-users&#34;&gt;Docker users&lt;/h2&gt;
+
+&lt;p&gt;Docker users are people using Docker in their daily work. To help Docker users, visit:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the &lt;a href=&#34;https://groups.google.com/forum/#!forum/docker-user&#34;
+target=&#34;_blank&#34;&gt;Docker-user&lt;/a&gt; Google group&lt;/li&gt;
+&lt;li&gt;the &lt;code&gt;#docker&lt;/code&gt; channel on Freenode IRC&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://stackoverflow.com/search?tab=newest&amp;q=docker&#34;
+target=&#34;_blank&#34;&gt;StackOverflow&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can also check the &lt;a href=&#34;http://goo.gl/Kv8EdU&#34; target=&#34;_blank&#34;&gt;list of
+open user questions&lt;/a&gt; on the Docker project.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-contributors&#34;&gt;Docker contributors&lt;/h2&gt;
+
+&lt;p&gt;Docker contributors are people like you contributing to Docker open source.
+Contributors may need help with IRC, Go programming, Markdown, or with other
+aspects of contributing. To help Docker contributors:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the &lt;a href=&#34;https://gitter.im/docker/docker&#34; target=&#34;_blank&#34;&gt;Docker Gitter IM
+&lt;/a&gt; room&lt;/li&gt;
+&lt;li&gt;the &lt;a href=&#34;https://groups.google.com/forum/#!forum/docker-dev&#34;
+target=&#34;_blank&#34;&gt;docker-dev&lt;/a&gt;  Google group&lt;/li&gt;
+&lt;li&gt;the &lt;a href=&#34;https://dev.dockerproject.com&#34;
+target=&#34;_blank&#34;&gt;dev.dockerproject.com&lt;/a&gt; on Discourse&lt;/li&gt;
+&lt;li&gt;the &lt;code&gt;#docker-dev&lt;/code&gt; channel on Freenode IRC&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Testing contributions</title>
+      <link>http://localhost/opensource/test/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/test/</guid>
+      <description>
+
+&lt;h1 id=&#34;testing-contributions&#34;&gt;Testing contributions&lt;/h1&gt;
+
+&lt;p&gt;Testing is about software quality, performance, reliability, or product
+usability. We develop and test Docker software before we release but we are
+human. So, we make mistakes, we get forgetful, or we just don&amp;rsquo;t have enough
+time to do everything.&lt;/p&gt;
+
+&lt;p&gt;Choose to contribute testing if you want to improve Docker software and
+processes. Testing is a good choice for contributors that have experience
+software testing, usability testing, or who are otherwise great at spotting
+problems.&lt;/p&gt;
+
+&lt;h1 id=&#34;what-can-you-contribute-to-testing&#34;&gt;What can you contribute to testing?&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Write a blog about &lt;a href=&#34;http://www.appneta.com/blog/automated-testing-with-docker/&#34; target=&#34;_blank&#34;&gt;how your company uses Docker its test infrastructure&lt;/a&gt;.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Take &lt;a href=&#34;http://ows.io/tj/w88v3siv&#34; target=&#34;_blank&#34;&gt;an online usability test&lt;/a&gt; or create a usability test about Docker.&lt;/li&gt;
+&lt;li&gt;Test one of&lt;a href=&#34;https://github.com/docker-library/official-images/issues&#34;&gt; Docker&amp;rsquo;s official images&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Test the Docker documentation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;test-the-docker-documentation&#34;&gt;Test the Docker documentation&lt;/h1&gt;
+
+&lt;p&gt;Testing documentation is relatively easy:&lt;/p&gt;
+
+&lt;h2 id=&#34;step-1-find-a-page-in-a-href-http-docs-docker-com-target-blank-docker-s-documentation-a-that-contains-a-procedure-or-example-you-want-to-test&#34;&gt;Step 1.  Find a page in &lt;a href=&#34;http://docs.docker.com/&#34; target=&#34;_blank&#34;&gt;Docker&amp;rsquo;s documentation&lt;/a&gt; that contains a procedure or example you want to test.&lt;/h2&gt;
+
+&lt;p&gt;You should choose something that &lt;em&gt;should work&lt;/em&gt; on your machine. For example,
+&lt;a href=&#34;http://docs.docker.com/articles/baseimages/&#34; target=&#34;_blank&#34;&gt;creating
+a base image&lt;/a&gt; is something anyone with Docker can do. While &lt;a
+href=&#34;https://kitematic.com/docs/managing-volumes/&#34; target=&#34;_blank&#34;&gt;changing
+volume directories in Kitematic&lt;/a&gt; requires a Mac and Docker&amp;rsquo;s Kitematic
+installed.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-2-try-and-follow-the-procedure-or-recreate-the-example&#34;&gt;Step 2.  Try and follow the procedure or recreate the example.&lt;/h2&gt;
+
+&lt;p&gt;What to look for:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Are the steps clearly laid out and identifiable?&lt;/li&gt;
+&lt;li&gt;Are the steps in the right order?&lt;/li&gt;
+&lt;li&gt;Did you get the results the procedure or example said you would?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;step-3-if-you-couldn-t-complete-the-procedure-or-example-file-a-href-https-github-com-docker-docker-issues-new-target-blank-an-issue-in-the-docker-repo-a&#34;&gt;Step 3.  If you couldn&amp;rsquo;t complete the procedure or example, file &lt;a href=&#34;https://github.com/docker/docker/issues/new&#34; target=&#34;_blank&#34;&gt;an issue in the Docker repo&lt;/a&gt;.&lt;/h2&gt;
+
+&lt;h1 id=&#34;test-code-in-the-docker&#34;&gt;Test code in the Docker&lt;/h1&gt;
+
+&lt;p&gt;If you are interested in writing or fixing test code for the Docker project, learn  about  &lt;a href=&#34;http://docs.docker.com/project/test-and-docs/&#34; target=&#34;_blank&#34;&gt;our test infrastructure&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;View &lt;a href=&#34;http://goo.gl/EkyABb&#34; target=&#34;_blank&#34;&gt; our open test issues&lt;/a&gt; in Docker for something to work on. Or, create one of your own.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

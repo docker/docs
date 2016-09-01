@@ -1,0 +1,122 @@
+.timeline {
+  position: relative;
+  &::before {
+    left: 5px;
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    background: #e1e1e1;
+  }
+  ul {
+    list-style: none;
+    z-index: 1;
+    padding:0;
+  }
+  li {
+    margin-bottom: 2em;
+    position: relative;
+    display: block;
+    h5{color: #fff;}
+    img {margin-bottom: 1rem;}
+    &::before {
+      content: '';
+      top: 0;
+      background: #e1e1e1;
+      width: 18px;
+      height: 18px;
+      border-radius: 18px;
+      position: absolute;
+      left: -21px;
+    }
+  }
+}
+
+@media #{$medium-up} { 
+  .timeline {
+    padding-bottom: 4rem;
+    &::before {
+      left: 50%;
+    }
+    
+    ul {
+      padding-left: 0;
+      margin: 0 auto;
+    }
+    
+    li {
+      width: 50%;
+    }
+    
+    li {
+      padding-left:45px;
+      position: relative;
+      margin-left: 50%;
+      &::before {
+        left: -9px;
+      }
+    }
+    
+    li.featured {
+      padding-left:0;
+      padding-right:45px;
+      margin-left: 0;
+      &::before {
+        right: -9px;
+        top: 18px;
+        left: auto;
+      }
+      > div {
+        padding: 1rem 1rem 0.15rem 1rem;
+        background: #e1e1e1;
+        border-radius: $global-radius;
+        position: relative;
+        &::after {
+          content:'';
+          position: absolute;
+          right: -12px;
+          top: 20px;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 8px 0 8px 12px;
+          border-color: transparent transparent transparent #e1e1e1;
+        }
+      }
+    }
+
+    li:first-child {
+      margin-top: 4em;
+    }
+    
+    li:nth-of-type(2n+1) {
+      clear: both;
+    }
+  }
+}
+.timeline {
+
+  li.featured > div {
+    padding: 1rem 1rem 0.15rem 1rem;
+    background: #e1e1e1;
+    border-radius: $global-radius;
+  }
+
+// Acquisition
+  li.featured.acquisition {
+    &:before, > div {background: $docker-teal; color: #fff;}
+    > div::after {border-color: transparent transparent transparent $docker-teal;}
+  }
+
+  // launch
+  li.featured.launch {
+    &:before, > div {background: $docker-green; color: #fff;}
+    > div::after {border-color: transparent transparent transparent $docker-green;}
+  }
+
+  // funding
+  li.featured.funding {
+    &:before, > div {background: $docker-yellow; color: #fff;}
+    > div::after {border-color: transparent transparent transparent $docker-yellow;}
+  }
+}

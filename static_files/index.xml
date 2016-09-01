@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Static_files on Docker Docs</title>
+    <link>http://localhost/static_files/</link>
+    <description>Recent content in Static_files on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/static_files/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title></title>
+      <link>http://localhost/static_files/README/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/static_files/README/</guid>
+      <description>
+
+&lt;h1 id=&#34;static-files-dir&#34;&gt;Static files dir&lt;/h1&gt;
+
+&lt;p&gt;Files you put in /static_files/ will be copied to the web visible /_static/&lt;/p&gt;
+
+&lt;p&gt;Be careful not to override pre-existing static files from the template.&lt;/p&gt;
+
+&lt;p&gt;Generally, layout related files should go in the /theme directory.&lt;/p&gt;
+
+&lt;p&gt;If you want to add images to your particular documentation page. Just put them next to
+your .rst source file and reference them relatively.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

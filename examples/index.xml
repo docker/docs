@@ -1,0 +1,1094 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Examples on Docker Docs</title>
+    <link>http://localhost/examples/</link>
+    <description>Recent content in Examples on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/examples/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Dockerizing MongoDB</title>
+      <link>http://localhost/examples/mongodb/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/examples/mongodb/</guid>
+      <description>
+
+&lt;h1 id=&#34;dockerizing-mongodb&#34;&gt;Dockerizing MongoDB&lt;/h1&gt;
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;In this example, we are going to learn how to build a Docker image with
+MongoDB pre-installed.  We&amp;rsquo;ll also see how to &lt;code&gt;push&lt;/code&gt; that image to the
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub registry&lt;/a&gt; and share it with others!&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This guide will show the mechanics of building a MongoDB container, but
+you will probably want to use the official image on &lt;a href=&#34;https://registry.hub.docker.com/_/mongo/&#34;&gt;Docker Hub&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Using Docker and containers for deploying &lt;a href=&#34;https://www.mongodb.org/&#34;&gt;MongoDB&lt;/a&gt;
+instances will bring several benefits, such as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Easy to maintain, highly configurable MongoDB instances;&lt;/li&gt;
+&lt;li&gt;Ready to run and start working within milliseconds;&lt;/li&gt;
+&lt;li&gt;Based on globally accessible and shareable images.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you do &lt;strong&gt;&lt;em&gt;not&lt;/em&gt;&lt;/strong&gt; like &lt;code&gt;sudo&lt;/code&gt;, you might want to check out:
+&lt;a href=&#34;http://localhost/examples/examples/installation/binaries/#giving-non-root-access&#34;&gt;&lt;em&gt;Giving non-root access&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;creating-a-dockerfile-for-mongodb&#34;&gt;Creating a Dockerfile for MongoDB&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s create our &lt;code&gt;Dockerfile&lt;/code&gt; and start building it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ nano Dockerfile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Although optional, it is handy to have comments at the beginning of a
+&lt;code&gt;Dockerfile&lt;/code&gt; explaining its purpose:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Dockerizing MongoDB: Dockerfile for building MongoDB images
+# Based on ubuntu:latest, installs MongoDB following the instructions from:
+# http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; &lt;code&gt;Dockerfile&lt;/code&gt;s are flexible. However, they need to follow a certain
+format. The first item to be defined is the name of an image, which becomes
+the &lt;em&gt;parent&lt;/em&gt; of your &lt;em&gt;Dockerized MongoDB&lt;/em&gt; image.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We will build our image using the latest version of Ubuntu from the
+&lt;a href=&#34;https://registry.hub.docker.com/_/ubuntu/&#34;&gt;Docker Hub Ubuntu&lt;/a&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Format: FROM    repository[:version]
+FROM       ubuntu:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Continuing, we will declare the &lt;code&gt;MAINTAINER&lt;/code&gt; of the &lt;code&gt;Dockerfile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Format: MAINTAINER Name &amp;lt;email@addr.ess&amp;gt;
+MAINTAINER M.Y. Name &amp;lt;myname@addr.ess&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Although Ubuntu systems have MongoDB packages, they are likely to
+be outdated. Therefore in this example, we will use the official MongoDB
+packages.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We will begin with importing the MongoDB public GPG key. We will also create
+a MongoDB repository file for the package manager.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Installation:
+# Import MongoDB public GPG key AND create a MongoDB list file
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+RUN echo &amp;quot;deb http://repo.mongodb.org/apt/ubuntu &amp;quot;$(lsb_release -sc)&amp;quot;/mongodb-org/3.0 multiverse&amp;quot; | tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After this initial preparation we can update our packages and install MongoDB.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Update apt-get sources AND install MongoDB
+RUN apt-get update &amp;amp;&amp;amp; apt-get install -y mongodb-org
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; You can install a specific version of MongoDB by using a list
+of required packages with versions, e.g.:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;RUN apt-get update &amp;amp;&amp;amp; apt-get install -y mongodb-org=3.0.1 mongodb-org-server=3.0.1 mongodb-org-shell=3.0.1 mongodb-org-mongos=3.0.1 mongodb-org-tools=3.0.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;MongoDB requires a data directory. Let&amp;rsquo;s create it as the final step of our
+installation instructions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Create the MongoDB data directory
+RUN mkdir -p /data/db
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Lastly we set the &lt;code&gt;ENTRYPOINT&lt;/code&gt; which will tell Docker to run &lt;code&gt;mongod&lt;/code&gt; inside
+the containers launched from our MongoDB image. And for ports, we will use
+the &lt;code&gt;EXPOSE&lt;/code&gt; instruction.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Expose port 27017 from the container to the host
+EXPOSE 27017
+
+# Set usr/bin/mongod as the dockerized entry-point application
+ENTRYPOINT [&amp;quot;/usr/bin/mongod&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now save the file and let&amp;rsquo;s build our image.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The full version of this &lt;code&gt;Dockerfile&lt;/code&gt; can be found &lt;a href=&#34;http://localhost/examples/examples/examples/mongodb/Dockerfile&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;building-the-mongodb-docker-image&#34;&gt;Building the MongoDB Docker image&lt;/h2&gt;
+
+&lt;p&gt;With our &lt;code&gt;Dockerfile&lt;/code&gt;, we can now build the MongoDB image using Docker. Unless
+experimenting, it is always a good practice to tag Docker images by passing the
+&lt;code&gt;--tag&lt;/code&gt; option to &lt;code&gt;docker build&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Format: docker build --tag/-t &amp;lt;user-name&amp;gt;/&amp;lt;repository&amp;gt; .
+# Example:
+$ docker build --tag my/repo .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once this command is issued, Docker will go through the &lt;code&gt;Dockerfile&lt;/code&gt; and build
+the image. The final image will be tagged &lt;code&gt;my/repo&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;pushing-the-mongodb-image-to-docker-hub&#34;&gt;Pushing the MongoDB image to Docker Hub&lt;/h2&gt;
+
+&lt;p&gt;All Docker image repositories can be hosted and shared on
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; with the &lt;code&gt;docker push&lt;/code&gt; command. For this,
+you need to be logged-in.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Log-in
+$ docker login
+Username:
+..
+
+# Push the image
+# Format: docker push &amp;lt;user-name&amp;gt;/&amp;lt;repository&amp;gt;
+$ docker push my/repo
+The push refers to a repository [my/repo] (len: 1)
+Sending image list
+Pushing repository my/repo (1 tags)
+..
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;using-the-mongodb-image&#34;&gt;Using the MongoDB image&lt;/h2&gt;
+
+&lt;p&gt;Using the MongoDB image we created, we can run one or more MongoDB instances
+as daemon process(es).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Basic way
+# Usage: docker run --name &amp;lt;name for container&amp;gt; -d &amp;lt;user-name&amp;gt;/&amp;lt;repository&amp;gt;
+$ docker run -p 27017:27017 --name mongo_instance_001 -d my/repo
+
+# Dockerized MongoDB, lean and mean!
+# Usage: docker run --name &amp;lt;name for container&amp;gt; -d &amp;lt;user-name&amp;gt;/&amp;lt;repository&amp;gt; --noprealloc --smallfiles
+$ docker run -p 27017:27017 --name mongo_instance_001 -d my/repo --noprealloc --smallfiles
+
+# Checking out the logs of a MongoDB container
+# Usage: docker logs &amp;lt;name for container&amp;gt;
+$ docker logs mongo_instance_001
+
+# Playing with MongoDB
+# Usage: mongo --port &amp;lt;port you get from `docker ps`&amp;gt; 
+$ mongo --port 27017
+
+# If using boot2docker
+# Usage: mongo --port &amp;lt;port you get from `docker ps`&amp;gt;  --host &amp;lt;ip address from `boot2docker ip`&amp;gt;
+$ mongo --port 27017 --host 192.168.59.103
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt;
+If you want to run two containers on the same engine, then you will need to map
+the exposed port to two different ports on the host&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;# Start two containers and map the ports
+$ docker run -p 28001:27017 --name mongo_instance_001 -d my/repo
+$ docker run -p 28002:27017 --name mongo_instance_002 -d my/repo
+
+# Now you can connect to each MongoDB instance on the two ports
+$ mongo --port 28001
+$ mongo --port 28002
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost/examples/examples/userguide/dockerlinks&#34;&gt;Linking containers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost/examples/examples/articles/ambassador_pattern_linking/&#34;&gt;Cross-host linking containers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://localhost/examples/examples/docker-io/builds/#automated-builds&#34;&gt;Creating an Automated Build&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dockerizing PostgreSQL</title>
+      <link>http://localhost/examples/postgresql_service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/examples/postgresql_service/</guid>
+      <description>
+
+&lt;h1 id=&#34;dockerizing-postgresql&#34;&gt;Dockerizing PostgreSQL&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
+- &lt;strong&gt;If you don&amp;rsquo;t like sudo&lt;/strong&gt; then see &lt;a href=&#34;http://localhost/examples/examples/installation/binaries/#giving-non-root-access&#34;&gt;&lt;em&gt;Giving non-root
+  access&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;installing-postgresql-on-docker&#34;&gt;Installing PostgreSQL on Docker&lt;/h2&gt;
+
+&lt;p&gt;Assuming there is no Docker image that suits your needs on the &lt;a href=&#34;http://hub.docker.com&#34;&gt;Docker
+Hub&lt;/a&gt;, you can create one yourself.&lt;/p&gt;
+
+&lt;p&gt;Start by creating a new &lt;code&gt;Dockerfile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
+This PostgreSQL setup is for development-only purposes. Refer to the
+PostgreSQL documentation to fine-tune these settings so that it is
+suitably secure.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;#
+# example Dockerfile for https://docs.docker.com/examples/postgresql_service/
+#
+
+FROM ubuntu
+MAINTAINER SvenDowideit@docker.com
+
+# Add the PostgreSQL PGP key to verify their Debian packages.
+# It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
+RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+
+# Add PostgreSQL&#39;s repository. It contains the most recent stable release
+#     of PostgreSQL, ``9.3``.
+RUN echo &amp;quot;deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main&amp;quot; &amp;gt; /etc/apt/sources.list.d/pgdg.list
+
+# Install ``python-software-properties``, ``software-properties-common`` and PostgreSQL 9.3
+#  There are some warnings (in red) that show up during the build. You can hide
+#  them by prefixing each apt-get statement with DEBIAN_FRONTEND=noninteractive
+RUN apt-get update &amp;amp;&amp;amp; apt-get install -y python-software-properties software-properties-common postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
+
+# Note: The official Debian and Ubuntu images automatically ``apt-get clean``
+# after each ``apt-get``
+
+# Run the rest of the commands as the ``postgres`` user created by the ``postgres-9.3`` package when it was ``apt-get installed``
+USER postgres
+
+# Create a PostgreSQL role named ``docker`` with ``docker`` as the password and
+# then create a database `docker` owned by the ``docker`` role.
+# Note: here we use ``&amp;amp;&amp;amp;\`` to run commands one after the other - the ``\``
+#       allows the RUN command to span multiple lines.
+RUN    /etc/init.d/postgresql start &amp;amp;&amp;amp;\
+    psql --command &amp;quot;CREATE USER docker WITH SUPERUSER PASSWORD &#39;docker&#39;;&amp;quot; &amp;amp;&amp;amp;\
+    createdb -O docker docker
+
+# Adjust PostgreSQL configuration so that remote connections to the
+# database are possible. 
+RUN echo &amp;quot;host all  all    0.0.0.0/0  md5&amp;quot; &amp;gt;&amp;gt; /etc/postgresql/9.3/main/pg_hba.conf
+
+# And add ``listen_addresses`` to ``/etc/postgresql/9.3/main/postgresql.conf``
+RUN echo &amp;quot;listen_addresses=&#39;*&#39;&amp;quot; &amp;gt;&amp;gt; /etc/postgresql/9.3/main/postgresql.conf
+
+# Expose the PostgreSQL port
+EXPOSE 5432
+
+# Add VOLUMEs to allow backup of config, logs and databases
+VOLUME  [&amp;quot;/etc/postgresql&amp;quot;, &amp;quot;/var/log/postgresql&amp;quot;, &amp;quot;/var/lib/postgresql&amp;quot;]
+
+# Set the default command to run when starting the container
+CMD [&amp;quot;/usr/lib/postgresql/9.3/bin/postgres&amp;quot;, &amp;quot;-D&amp;quot;, &amp;quot;/var/lib/postgresql/9.3/main&amp;quot;, &amp;quot;-c&amp;quot;, &amp;quot;config_file=/etc/postgresql/9.3/main/postgresql.conf&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Build an image from the Dockerfile assign it a name.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker build -t eg_postgresql .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And run the PostgreSQL server container (in the foreground):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -P --name pg_test eg_postgresql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are 2 ways to connect to the PostgreSQL server. We can use &lt;a href=&#34;http://localhost/examples/examples/userguide/dockerlinks&#34;&gt;&lt;em&gt;Link
+Containers&lt;/em&gt;&lt;/a&gt;, or we can access it from our host
+(or the network).&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
+The &lt;code&gt;--rm&lt;/code&gt; removes the container and its image when
+the container exits successfully.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;using-container-linking&#34;&gt;Using container linking&lt;/h3&gt;
+
+&lt;p&gt;Containers can be linked to another container&amp;rsquo;s ports directly using
+&lt;code&gt;-link remote_name:local_alias&lt;/code&gt; in the client&amp;rsquo;s
+&lt;code&gt;docker run&lt;/code&gt;. This will set a number of environment
+variables that can then be used to connect:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -t -i --link pg_test:pg eg_postgresql bash
+
+postgres@7ef98b1b7243:/$ psql -h $PG_PORT_5432_TCP_ADDR -p $PG_PORT_5432_TCP_PORT -d docker -U docker --password
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;connecting-from-your-host-system&#34;&gt;Connecting from your host system&lt;/h3&gt;
+
+&lt;p&gt;Assuming you have the postgresql-client installed, you can use the
+host-mapped port to test as well. You need to use &lt;code&gt;docker ps&lt;/code&gt;
+to find out what local host port the container is mapped to
+first:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps
+CONTAINER ID        IMAGE                  COMMAND                CREATED             STATUS              PORTS                                      NAMES
+5e24362f27f6        eg_postgresql:latest   /usr/lib/postgresql/   About an hour ago   Up About an hour    0.0.0.0:49153-&amp;gt;5432/tcp                    pg_test
+$ psql -h localhost -p 49153 -d docker -U docker --password
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;testing-the-database&#34;&gt;Testing the database&lt;/h3&gt;
+
+&lt;p&gt;Once you have authenticated and have a &lt;code&gt;docker =#&lt;/code&gt;
+prompt, you can create a table and populate it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;psql (9.3.1)
+Type &amp;quot;help&amp;quot; for help.
+
+$ docker=# CREATE TABLE cities (
+docker(#     name            varchar(80),
+docker(#     location        point
+docker(# );
+CREATE TABLE
+$ docker=# INSERT INTO cities VALUES (&#39;San Francisco&#39;, &#39;(-194.0, 53.0)&#39;);
+INSERT 0 1
+$ docker=# select * from cities;
+     name      | location
+---------------+-----------
+ San Francisco | (-194,53)
+(1 row)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;using-the-container-volumes&#34;&gt;Using the container volumes&lt;/h3&gt;
+
+&lt;p&gt;You can use the defined volumes to inspect the PostgreSQL log files and
+to backup your configuration and data:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm --volumes-from pg_test -t -i busybox sh
+
+/ # ls
+bin      etc      lib      linuxrc  mnt      proc     run      sys      usr
+dev      home     lib64    media    opt      root     sbin     tmp      var
+/ # ls /etc/postgresql/9.3/main/
+environment      pg_hba.conf      postgresql.conf
+pg_ctl.conf      pg_ident.conf    start.conf
+/tmp # ls /var/log
+ldconfig    postgresql
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dockerizing a CouchDB service</title>
+      <link>http://localhost/examples/couchdb_data_volumes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/examples/couchdb_data_volumes/</guid>
+      <description>
+
+&lt;h1 id=&#34;dockerizing-a-couchdb-service&#34;&gt;Dockerizing a CouchDB service&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
+- &lt;strong&gt;If you don&amp;rsquo;t like sudo&lt;/strong&gt; then see &lt;a href=&#34;http://localhost/examples/examples/installation/binaries/#giving-non-root-access&#34;&gt;&lt;em&gt;Giving non-root
+  access&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Here&amp;rsquo;s an example of using data volumes to share the same data between
+two CouchDB containers. This could be used for hot upgrades, testing
+different versions of CouchDB on the same data, etc.&lt;/p&gt;
+
+&lt;h2 id=&#34;create-first-database&#34;&gt;Create first database&lt;/h2&gt;
+
+&lt;p&gt;Note that we&amp;rsquo;re marking &lt;code&gt;/var/lib/couchdb&lt;/code&gt; as a data volume.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ COUCH1=$(docker run -d -p 5984 -v /var/lib/couchdb shykes/couchdb:2013-05-03)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;add-data-to-the-first-database&#34;&gt;Add data to the first database&lt;/h2&gt;
+
+&lt;p&gt;We&amp;rsquo;re assuming your Docker host is reachable at &lt;code&gt;localhost&lt;/code&gt;. If not,
+replace &lt;code&gt;localhost&lt;/code&gt; with the public IP of your Docker host.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ HOST=localhost
+$ URL=&amp;quot;http://$HOST:$(docker port $COUCH1 5984 | grep -o &#39;[1-9][0-9]*$&#39;)/_utils/&amp;quot;
+$ echo &amp;quot;Navigate to $URL in your browser, and use the couch interface to add data&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;create-second-database&#34;&gt;Create second database&lt;/h2&gt;
+
+&lt;p&gt;This time, we&amp;rsquo;re requesting shared access to &lt;code&gt;$COUCH1&lt;/code&gt;&amp;rsquo;s volumes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ COUCH2=$(docker run -d -p 5984 --volumes-from $COUCH1 shykes/couchdb:2013-05-03)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;browse-data-on-the-second-database&#34;&gt;Browse data on the second database&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;$ HOST=localhost
+$ URL=&amp;quot;http://$HOST:$(docker port $COUCH2 5984 | grep -o &#39;[1-9][0-9]*$&#39;)/_utils/&amp;quot;
+$ echo &amp;quot;Navigate to $URL in your browser. You should see the same data as in the first database&amp;quot;&#39;!&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Congratulations, you are now running two Couchdb containers, completely
+isolated from each other &lt;em&gt;except&lt;/em&gt; for their data.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dockerizing a Node.js web app</title>
+      <link>http://localhost/examples/nodejs_web_app/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/examples/nodejs_web_app/</guid>
+      <description>
+
+&lt;h1 id=&#34;dockerizing-a-node-js-web-app&#34;&gt;Dockerizing a Node.js web app&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
+- &lt;strong&gt;If you don&amp;rsquo;t like sudo&lt;/strong&gt; then see &lt;a href=&#34;http://localhost/examples/examples/installation/binaries/#giving-non-root-access&#34;&gt;&lt;em&gt;Giving non-root
+  access&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The goal of this example is to show you how you can build your own
+Docker images from a parent image using a &lt;code&gt;Dockerfile&lt;/code&gt;
+. We will do that by making a simple Node.js hello world web
+application running on CentOS. You can get the full source code at
+&lt;a href=&#34;https://github.com/enokd/docker-node-hello/&#34;&gt;https://github.com/enokd/docker-node-hello/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;create-node-js-app&#34;&gt;Create Node.js app&lt;/h2&gt;
+
+&lt;p&gt;First, create a directory &lt;code&gt;src&lt;/code&gt; where all the files
+would live. Then create a &lt;code&gt;package.json&lt;/code&gt; file that
+describes your app and its dependencies:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;name&amp;quot;: &amp;quot;docker-centos-hello&amp;quot;,
+  &amp;quot;private&amp;quot;: true,
+  &amp;quot;version&amp;quot;: &amp;quot;0.0.1&amp;quot;,
+  &amp;quot;description&amp;quot;: &amp;quot;Node.js Hello world app on CentOS using docker&amp;quot;,
+  &amp;quot;author&amp;quot;: &amp;quot;Daniel Gasienica &amp;lt;daniel@gasienica.ch&amp;gt;&amp;quot;,
+  &amp;quot;dependencies&amp;quot;: {
+    &amp;quot;express&amp;quot;: &amp;quot;3.2.4&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, create an &lt;code&gt;index.js&lt;/code&gt; file that defines a web
+app using the &lt;a href=&#34;http://expressjs.com/&#34;&gt;Express.js&lt;/a&gt; framework:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var express = require(&#39;express&#39;);
+
+// Constants
+var PORT = 8080;
+
+// App
+var app = express();
+app.get(&#39;/&#39;, function (req, res) {
+  res.send(&#39;Hello world\n&#39;);
+});
+
+app.listen(PORT);
+console.log(&#39;Running on http://localhost:&#39; + PORT);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the next steps, we&amp;rsquo;ll look at how you can run this app inside a
+CentOS container using Docker. First, you&amp;rsquo;ll need to build a Docker
+image of your app.&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-a-dockerfile&#34;&gt;Creating a Dockerfile&lt;/h2&gt;
+
+&lt;p&gt;Create an empty file called &lt;code&gt;Dockerfile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;touch Dockerfile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Open the &lt;code&gt;Dockerfile&lt;/code&gt; in your favorite text editor&lt;/p&gt;
+
+&lt;p&gt;Define the parent image you want to use to build your own image on
+top of. Here, we&amp;rsquo;ll use
+&lt;a href=&#34;https://registry.hub.docker.com/_/centos/&#34;&gt;CentOS&lt;/a&gt; (tag: &lt;code&gt;centos6&lt;/code&gt;)
+available on the &lt;a href=&#34;https://hub.docker.com/&#34;&gt;Docker Hub&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM    centos:centos6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Since we&amp;rsquo;re building a Node.js app, you&amp;rsquo;ll have to install Node.js as
+well as npm on your CentOS image. Node.js is required to run your app
+and npm to install your app&amp;rsquo;s dependencies defined in
+&lt;code&gt;package.json&lt;/code&gt;. To install the right package for
+CentOS, we&amp;rsquo;ll use the instructions from the &lt;a href=&#34;https://github.com/joyent/node/wiki/Installing-Node.js-
+via-package-manager#rhelcentosscientific-linux-6&#34;&gt;Node.js wiki&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Enable EPEL for Node.js
+RUN     rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+# Install Node.js and npm
+RUN     yum install -y npm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To bundle your app&amp;rsquo;s source code inside the Docker image, use the &lt;code&gt;COPY&lt;/code&gt;
+instruction:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Bundle app source
+COPY . /src
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install your app dependencies using the &lt;code&gt;npm&lt;/code&gt; binary:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Install app dependencies
+RUN cd /src; npm install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your app binds to port &lt;code&gt;8080&lt;/code&gt; so you&amp;rsquo;ll use the&lt;code&gt;EXPOSE&lt;/code&gt; instruction to have
+it mapped by the &lt;code&gt;docker&lt;/code&gt; daemon:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;EXPOSE  8080
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Last but not least, define the command to run your app using &lt;code&gt;CMD&lt;/code&gt; which
+defines your runtime, i.e. &lt;code&gt;node&lt;/code&gt;, and the path to our app, i.e. &lt;code&gt;src/index.js&lt;/code&gt;
+(see the step where we added the source to the container):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;CMD [&amp;quot;node&amp;quot;, &amp;quot;/src/index.js&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your &lt;code&gt;Dockerfile&lt;/code&gt; should now look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM    centos:centos6
+
+# Enable EPEL for Node.js
+RUN     rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+# Install Node.js and npm
+RUN     yum install -y npm
+
+# Bundle app source
+COPY . /src
+# Install app dependencies
+RUN cd /src; npm install
+
+EXPOSE  8080
+CMD [&amp;quot;node&amp;quot;, &amp;quot;/src/index.js&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;building-your-image&#34;&gt;Building your image&lt;/h2&gt;
+
+&lt;p&gt;Go to the directory that has your &lt;code&gt;Dockerfile&lt;/code&gt; and run the following command
+to build a Docker image. The &lt;code&gt;-t&lt;/code&gt; flag lets you tag your image so it&amp;rsquo;s easier
+to find later using the &lt;code&gt;docker images&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker build -t &amp;lt;your username&amp;gt;/centos-node-hello .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your image will now be listed by Docker:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+
+# Example
+REPOSITORY                          TAG        ID              CREATED
+centos                              centos6    539c0211cd76    8 weeks ago
+&amp;lt;your username&amp;gt;/centos-node-hello   latest     d64d3505b0d2    2 hours ago
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;run-the-image&#34;&gt;Run the image&lt;/h2&gt;
+
+&lt;p&gt;Running your image with &lt;code&gt;-d&lt;/code&gt; runs the container in detached mode, leaving the
+container running in the background. The &lt;code&gt;-p&lt;/code&gt; flag redirects a public port to
+a private port in the container. Run the image you previously built:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -p 49160:8080 -d &amp;lt;your username&amp;gt;/centos-node-hello
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Print the output of your app:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Get container ID
+$ docker ps
+
+# Print app output
+$ docker logs &amp;lt;container id&amp;gt;
+
+# Example
+Running on http://localhost:8080
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;test&#34;&gt;Test&lt;/h2&gt;
+
+&lt;p&gt;To test your app, get the port of your app that Docker mapped:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps
+
+# Example
+ID            IMAGE                                     COMMAND              ...   PORTS
+ecce33b30ebf  &amp;lt;your username&amp;gt;/centos-node-hello:latest  node /src/index.js         49160-&amp;gt;8080
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the example above, Docker mapped the &lt;code&gt;8080&lt;/code&gt; port of the container to &lt;code&gt;49160&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now you can call your app using &lt;code&gt;curl&lt;/code&gt; (install if needed via:
+&lt;code&gt;sudo apt-get install curl&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -i localhost:49160
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 12
+Date: Sun, 02 Jun 2013 03:53:22 GMT
+Connection: keep-alive
+
+Hello world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you use Boot2docker on OS X, the port is actually mapped to the Docker host VM,
+and you should use the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl $(boot2docker ip):49160
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We hope this tutorial helped you get up and running with Node.js and
+CentOS on Docker. You can get the full source code at
+&lt;a href=&#34;https://github.com/enokd/docker-node-hello/&#34;&gt;https://github.com/enokd/docker-node-hello/&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dockerizing a Redis service</title>
+      <link>http://localhost/examples/running_redis_service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/examples/running_redis_service/</guid>
+      <description>
+
+&lt;h1 id=&#34;dockerizing-a-redis-service&#34;&gt;Dockerizing a Redis service&lt;/h1&gt;
+
+&lt;p&gt;Very simple, no frills, Redis service attached to a web application
+using a link.&lt;/p&gt;
+
+&lt;h2 id=&#34;create-a-docker-container-for-redis&#34;&gt;Create a Docker container for Redis&lt;/h2&gt;
+
+&lt;p&gt;Firstly, we create a &lt;code&gt;Dockerfile&lt;/code&gt; for our new Redis
+image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM        ubuntu:14.04
+RUN         apt-get update &amp;amp;&amp;amp; apt-get install -y redis-server
+EXPOSE      6379
+ENTRYPOINT  [&amp;quot;/usr/bin/redis-server&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next we build an image from our &lt;code&gt;Dockerfile&lt;/code&gt;.
+Replace &lt;code&gt;&amp;lt;your username&amp;gt;&lt;/code&gt; with your own user name.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker build -t &amp;lt;your username&amp;gt;/redis .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;run-the-service&#34;&gt;Run the service&lt;/h2&gt;
+
+&lt;p&gt;Use the image we&amp;rsquo;ve just created and name your container &lt;code&gt;redis&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Running the service with &lt;code&gt;-d&lt;/code&gt; runs the container in detached mode, leaving
+the container running in the background.&lt;/p&gt;
+
+&lt;p&gt;Importantly, we&amp;rsquo;re not exposing any ports on our container. Instead
+we&amp;rsquo;re going to use a container link to provide access to our Redis
+database.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --name redis -d &amp;lt;your username&amp;gt;/redis
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;create-your-web-application-container&#34;&gt;Create your web application container&lt;/h2&gt;
+
+&lt;p&gt;Next we can create a container for our application. We&amp;rsquo;re going to use
+the &lt;code&gt;-link&lt;/code&gt; flag to create a link to the &lt;code&gt;redis&lt;/code&gt; container we&amp;rsquo;ve just
+created with an alias of &lt;code&gt;db&lt;/code&gt;. This will create a secure tunnel to the
+&lt;code&gt;redis&lt;/code&gt; container and expose the Redis instance running inside that
+container to only this container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --link redis:db -i -t ubuntu:14.04 /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once inside our freshly created container we need to install Redis to
+get the &lt;code&gt;redis-cli&lt;/code&gt; binary to test our connection.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get update
+$ sudo apt-get install redis-server
+$ sudo service redis-server stop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As we&amp;rsquo;ve used the &lt;code&gt;--link redis:db&lt;/code&gt; option, Docker
+has created some environment variables in our web application container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ env | grep DB_
+
+# Should return something similar to this with your values
+DB_NAME=/violet_wolf/db
+DB_PORT_6379_TCP_PORT=6379
+DB_PORT=tcp://172.17.0.33:6379
+DB_PORT_6379_TCP=tcp://172.17.0.33:6379
+DB_PORT_6379_TCP_ADDR=172.17.0.33
+DB_PORT_6379_TCP_PROTO=tcp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can see that we&amp;rsquo;ve got a small list of environment variables prefixed
+with &lt;code&gt;DB&lt;/code&gt;. The &lt;code&gt;DB&lt;/code&gt; comes from the link alias specified when we launched
+the container. Let&amp;rsquo;s use the &lt;code&gt;DB_PORT_6379_TCP_ADDR&lt;/code&gt; variable to connect to
+our Redis container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ redis-cli -h $DB_PORT_6379_TCP_ADDR
+$ redis 172.17.0.33:6379&amp;gt;
+$ redis 172.17.0.33:6379&amp;gt; set docker awesome
+OK
+$ redis 172.17.0.33:6379&amp;gt; get docker
+&amp;quot;awesome&amp;quot;
+$ redis 172.17.0.33:6379&amp;gt; exit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We could easily use this or other environment variables in our web
+application to make a connection to our &lt;code&gt;redis&lt;/code&gt;
+container.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dockerizing a Riak service</title>
+      <link>http://localhost/examples/running_riak_service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/examples/running_riak_service/</guid>
+      <description>
+
+&lt;h1 id=&#34;dockerizing-a-riak-service&#34;&gt;Dockerizing a Riak service&lt;/h1&gt;
+
+&lt;p&gt;The goal of this example is to show you how to build a Docker image with
+Riak pre-installed.&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-a-dockerfile&#34;&gt;Creating a Dockerfile&lt;/h2&gt;
+
+&lt;p&gt;Create an empty file called &lt;code&gt;Dockerfile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ touch Dockerfile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, define the parent image you want to use to build your image on top
+of. We&amp;rsquo;ll use &lt;a href=&#34;https://registry.hub.docker.com/_/ubuntu/&#34;&gt;Ubuntu&lt;/a&gt; (tag:
+&lt;code&gt;trusty&lt;/code&gt;), which is available on &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Riak
+#
+# VERSION       0.1.1
+
+# Use the Ubuntu base image provided by dotCloud
+FROM ubuntu:trusty
+MAINTAINER Hector Castro hector@basho.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After that, we install the curl which is used to download the repository setup
+script and we download the setup script and run it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Install Riak repository before we do apt-get update, so that update happens
+# in a single step
+RUN apt-get install -q -y curl &amp;amp;&amp;amp; \
+    curl -sSL https://packagecloud.io/install/repositories/basho/riak/script.deb | sudo bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then we install and setup a few dependencies:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;supervisor&lt;/code&gt; is used manage the Riak processes&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;riak=2.0.5-1&lt;/code&gt; is the Riak package coded to version 2.0.5&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- --&gt;
+
+&lt;pre&gt;&lt;code&gt;# Install and setup project dependencies
+RUN apt-get update &amp;amp;&amp;amp; \
+    apt-get install -y supervisor riak=2.0.5-1
+
+RUN mkdir -p /var/log/supervisor
+
+RUN locale-gen en_US en_US.UTF-8
+
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After that, we modify Riak&amp;rsquo;s configuration:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Configure Riak to accept connections from any host
+RUN sed -i &amp;quot;s|listener.http.internal = 127.0.0.1:8098|listener.http.internal = 0.0.0.0:8098|&amp;quot; /etc/riak/riak.conf
+RUN sed -i &amp;quot;s|listener.protobuf.internal = 127.0.0.1:8087|listener.protobuf.internal = 0.0.0.0:8087|&amp;quot; /etc/riak/riak.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, we expose the Riak Protocol Buffers and HTTP interfaces:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Expose Riak Protocol Buffers and HTTP interfaces
+EXPOSE 8087 8098
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, run &lt;code&gt;supervisord&lt;/code&gt; so that Riak is started:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;CMD [&amp;quot;/usr/bin/supervisord&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;create-a-supervisord-configuration-file&#34;&gt;Create a supervisord configuration file&lt;/h2&gt;
+
+&lt;p&gt;Create an empty file called &lt;code&gt;supervisord.conf&lt;/code&gt;. Make
+sure it&amp;rsquo;s at the same directory level as your &lt;code&gt;Dockerfile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;touch supervisord.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Populate it with the following program definitions:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[supervisord]
+nodaemon=true
+
+[program:riak]
+command=bash -c &amp;quot;/usr/sbin/riak console&amp;quot;
+numprocs=1
+autostart=true
+autorestart=true
+user=riak
+environment=HOME=&amp;quot;/var/lib/riak&amp;quot;
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;build-the-docker-image-for-riak&#34;&gt;Build the Docker image for Riak&lt;/h2&gt;
+
+&lt;p&gt;Now you should be able to build a Docker image for Riak:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker build -t &amp;quot;&amp;lt;yourname&amp;gt;/riak&amp;quot; .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next steps&lt;/h2&gt;
+
+&lt;p&gt;Riak is a distributed database. Many production deployments consist of
+&lt;a href=&#34;http://basho.com/why-your-riak-cluster-should-have-at-least-five-nodes/&#34;&gt;at least five nodes&lt;/a&gt;.
+See the &lt;a href=&#34;https://github.com/hectcastro/docker-riak&#34;&gt;docker-riak&lt;/a&gt; project
+details on how to deploy a Riak cluster using Docker and Pipework.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dockerizing an SSH service</title>
+      <link>http://localhost/examples/running_ssh_service/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/examples/running_ssh_service/</guid>
+      <description>
+
+&lt;h1 id=&#34;dockerizing-an-ssh-daemon-service&#34;&gt;Dockerizing an SSH daemon service&lt;/h1&gt;
+
+&lt;h2 id=&#34;build-an-eg-sshd-image&#34;&gt;Build an &lt;code&gt;eg_sshd&lt;/code&gt; image&lt;/h2&gt;
+
+&lt;p&gt;The following &lt;code&gt;Dockerfile&lt;/code&gt; sets up an SSHd service in a container that you
+can use to connect to and inspect other container&amp;rsquo;s volumes, or to get
+quick access to a test container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# sshd
+#
+# VERSION               0.0.2
+
+FROM ubuntu:14.04
+MAINTAINER Sven Dowideit &amp;lt;SvenDowideit@docker.com&amp;gt;
+
+RUN apt-get update &amp;amp;&amp;amp; apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN echo &#39;root:screencast&#39; | chpasswd
+RUN sed -i &#39;s/PermitRootLogin without-password/PermitRootLogin yes/&#39; /etc/ssh/sshd_config
+
+# SSH login fix. Otherwise user is kicked off after login
+RUN sed &#39;s@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g&#39; -i /etc/pam.d/sshd
+
+ENV NOTVISIBLE &amp;quot;in users profile&amp;quot;
+RUN echo &amp;quot;export VISIBLE=now&amp;quot; &amp;gt;&amp;gt; /etc/profile
+
+EXPOSE 22
+CMD [&amp;quot;/usr/sbin/sshd&amp;quot;, &amp;quot;-D&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Build the image using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker build -t eg_sshd .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;run-a-test-sshd-container&#34;&gt;Run a &lt;code&gt;test_sshd&lt;/code&gt; container&lt;/h2&gt;
+
+&lt;p&gt;Then run it. You can then use &lt;code&gt;docker port&lt;/code&gt; to find out what host port
+the container&amp;rsquo;s port 22 is mapped to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -P --name test_sshd eg_sshd
+$ docker port test_sshd 22
+0.0.0.0:49154
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And now you can ssh as &lt;code&gt;root&lt;/code&gt; on the container&amp;rsquo;s IP address (you can find it
+with &lt;code&gt;docker inspect&lt;/code&gt;) or on port &lt;code&gt;49154&lt;/code&gt; of the Docker daemon&amp;rsquo;s host IP address
+(&lt;code&gt;ip address&lt;/code&gt; or &lt;code&gt;ifconfig&lt;/code&gt; can tell you that) or &lt;code&gt;localhost&lt;/code&gt; if on the
+Docker daemon host:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh root@192.168.1.2 -p 49154
+# The password is ``screencast``.
+$$
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;environment-variables&#34;&gt;Environment variables&lt;/h2&gt;
+
+&lt;p&gt;Using the &lt;code&gt;sshd&lt;/code&gt; daemon to spawn shells makes it complicated to pass environment
+variables to the user&amp;rsquo;s shell via the normal Docker mechanisms, as &lt;code&gt;sshd&lt;/code&gt; scrubs
+the environment before it starts the shell.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re setting values in the &lt;code&gt;Dockerfile&lt;/code&gt; using &lt;code&gt;ENV&lt;/code&gt;, you&amp;rsquo;ll need to push them
+to a shell initialization file like the &lt;code&gt;/etc/profile&lt;/code&gt; example in the &lt;code&gt;Dockerfile&lt;/code&gt;
+above.&lt;/p&gt;
+
+&lt;p&gt;If you need to pass&lt;code&gt;docker run -e ENV=value&lt;/code&gt; values, you will need to write a
+short script to do the same before you start &lt;code&gt;sshd -D&lt;/code&gt; and then replace the
+&lt;code&gt;CMD&lt;/code&gt; with that script.&lt;/p&gt;
+
+&lt;h2 id=&#34;clean-up&#34;&gt;Clean up&lt;/h2&gt;
+
+&lt;p&gt;Finally, clean up after your test by stopping and removing the
+container, and then removing the image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker stop test_sshd
+$ docker rm test_sshd
+$ docker rmi eg_sshd
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dockerizing an apt-cacher-ng service</title>
+      <link>http://localhost/examples/apt-cacher-ng/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/examples/apt-cacher-ng/</guid>
+      <description>
+
+&lt;h1 id=&#34;dockerizing-an-apt-cacher-ng-service&#34;&gt;Dockerizing an apt-cacher-ng service&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;:
+- &lt;strong&gt;If you don&amp;rsquo;t like sudo&lt;/strong&gt; then see &lt;a href=&#34;http://localhost/examples/examples/installation/binaries/#giving-non-root-access&#34;&gt;&lt;em&gt;Giving non-root
+  access&lt;/em&gt;&lt;/a&gt;.
+- &lt;strong&gt;If you&amp;rsquo;re using OS X or docker via TCP&lt;/strong&gt; then you shouldn&amp;rsquo;t use
+  sudo.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;When you have multiple Docker servers, or build unrelated Docker
+containers which can&amp;rsquo;t make use of the Docker build cache, it can be
+useful to have a caching proxy for your packages. This container makes
+the second download of any package almost instant.&lt;/p&gt;
+
+&lt;p&gt;Use the following Dockerfile:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#
+# Build: docker build -t apt-cacher .
+# Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher
+#
+# and then you can run containers with:
+#   docker run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash
+#
+FROM        ubuntu
+MAINTAINER  SvenDowideit@docker.com
+
+VOLUME      [&amp;quot;/var/cache/apt-cacher-ng&amp;quot;]
+RUN     apt-get update &amp;amp;&amp;amp; apt-get install -y apt-cacher-ng
+
+EXPOSE      3142
+CMD     chmod 777 /var/cache/apt-cacher-ng &amp;amp;&amp;amp; /etc/init.d/apt-cacher-ng start &amp;amp;&amp;amp; tail -f /var/log/apt-cacher-ng/*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To build the image using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker build -t eg_apt_cacher_ng .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then run it, mapping the exposed port to one on the host&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To see the logfiles that are &lt;code&gt;tailed&lt;/code&gt; in the default command, you can
+use:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker logs -f test_apt_cacher_ng
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To get your Debian-based containers to use the proxy, you can do one of
+three things&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Add an apt Proxy setting
+&lt;code&gt;echo &#39;Acquire::http { Proxy &amp;quot;http://dockerhost:3142&amp;quot;; };&#39; &amp;gt;&amp;gt; /etc/apt/conf.d/01proxy&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Set an environment variable:
+&lt;code&gt;http_proxy=http://dockerhost:3142/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Change your &lt;code&gt;sources.list&lt;/code&gt; entries to start with
+&lt;code&gt;http://dockerhost:3142/&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Option 1&lt;/strong&gt; injects the settings safely into your apt configuration in
+a local version of a common base:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM ubuntu
+RUN  echo &#39;Acquire::http { Proxy &amp;quot;http://dockerhost:3142&amp;quot;; };&#39; &amp;gt;&amp;gt; /etc/apt/apt.conf.d/01proxy
+RUN apt-get update &amp;amp;&amp;amp; apt-get install -y vim git
+
+# docker build -t my_ubuntu .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Option 2&lt;/strong&gt; is good for testing, but will break other HTTP clients
+which obey &lt;code&gt;http_proxy&lt;/code&gt;, such as &lt;code&gt;curl&lt;/code&gt;, &lt;code&gt;wget&lt;/code&gt; and others:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Option 3&lt;/strong&gt; is the least portable, but there will be times when you
+might need to do it and you can do it from your &lt;code&gt;Dockerfile&lt;/code&gt;
+too.&lt;/p&gt;
+
+&lt;p&gt;Apt-cacher-ng has some tools that allow you to manage the repository,
+and they can be used by leveraging the &lt;code&gt;VOLUME&lt;/code&gt;
+instruction, and the image we built to run the service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
+
+$$ /usr/lib/apt-cacher-ng/distkill.pl
+Scanning /var/cache/apt-cacher-ng, please wait...
+Found distributions:
+bla, taggedcount: 0
+     1. precise-security (36 index files)
+     2. wheezy (25 index files)
+     3. precise-updates (36 index files)
+     4. precise (36 index files)
+     5. wheezy-updates (18 index files)
+
+Found architectures:
+     6. amd64 (36 index files)
+     7. i386 (24 index files)
+
+WARNING: The removal action may wipe out whole directories containing
+         index files. Select d to see detailed list.
+
+(Number nn: tag distribution or architecture nn; 0: exit; d: show details; r: remove tagged; q: quit): q
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, clean up after your test by stopping and removing the
+container, and then removing the image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker stop test_apt_cacher_ng
+$ docker rm test_apt_cacher_ng
+$ docker rmi eg_apt_cacher_ng
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
