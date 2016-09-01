@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="docker_version" content="1.6.1">
+  <meta name="docker_git_branch" content="master">
+  <meta name="docker_git_commit" content="59cd467">
+  <meta name="docker_build_date" content="Fri Jun  5 11:40:50 UTC 2015">
+
+  <meta name="description" content="API Documentation for Docker">
+  <meta name="keywords" content="API, Docker, rcli, REST, documentation">
+  
+  <link rel="canonical" href="/reference/api/docker_remote_api_v1.8/">
+  <link href="/css/bootstrap-custom.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/prettify-1.0.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/dockerfile_tutorial.css">
+  <link href="/tipuesearch
+/tipuesearch.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <title>Docker Documentation</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-6096819-11', 'docker.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash,
+  });
+  </script>
+  
+</head>
+<body>
+
+<div id="topmostnav" class="topmostnav_loggedout navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li class=""><a href="http://www.docker.com/whatisdocker/" title="What is Docker">What is Docker?</a></li>
+      <li class=""><a href="http://www.docker.com/resources/usecases/" title="Use Cases">Use Cases</a></li>
+      <li class=""><a href="http://www.docker.com/tryit/" title="Try It!">Try It!</a></li>
+      <li><a href="https://registry.hub.docker.com" title="Browse">Browse</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <a href="https://hub.docker.com/account/login" class="btn nav-button2" title="Lg In">Log In</a>
+      <a href="https://hub.docker.com/account/signup" class="btn nav-button1" title="Sign Up">Sign Up</a>
+    </div>
+  </div>
+</div>
+<div id="topmostnav" class="topmostnav_loggedin navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li><a href="https://registry.hub.docker.com" title="Browse Repos">Browse Repos</a></li>
+      <li class="active"><a href="http://docs.docker.com" title="Documentation">Documentation</a></li>
+      <li><a href="http://www.docker.com/community/participate/" title="Community">Community</a></li>
+      <li><a href="http://www.docker.com/resources/help/" title="Help">Help</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <ul class="nav user">
+        <li class="dropdown">
+          <a id="logged-in-header-username" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img class="profile" src="" alt="profile picture">
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="https://hub.docker.com/">View Profile</a></li>
+            <li><a href="https://hub.docker.com/account/settings/">Settings</a></li>
+            <li><a href="https://hub.docker.com/repos/">My Repositories</a></li>
+            <li><a href="https://hub.docker.com/plans/billing-info">Billing</a></li>
+            <li><a href="https://hub.docker.com/account/logout/?next=/">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="wrap">
+  <nav id="nav_menu" class="clearfix navbar navbar-default navbar-static-top affix" role="navigation">
+  <div id="docsnav">
+    <ul id="main-nav" class="pull-left">
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/">About</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/">Docker</a>
+          </li>
+        
+          <li >
+            <a href="/release-notes/">Release Notes</a>
+          </li>
+        
+          <li >
+            <a href="/introduction/understanding-docker/">Understanding Docker</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/installation/ubuntulinux/">Installation</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/installation/ubuntulinux/">Ubuntu</a>
+          </li>
+        
+          <li >
+            <a href="/installation/mac/">Mac OS X</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/">Kitematic on OS X</a>
+          </li>
+        
+          <li >
+            <a href="/installation/windows/">Microsoft Windows</a>
+          </li>
+        
+          <li >
+            <a href="/installation/testing-windows-docker-client/">Building and testing the Windows Docker client</a>
+          </li>
+        
+          <li >
+            <a href="/installation/amazon/">Amazon EC2</a>
+          </li>
+        
+          <li >
+            <a href="/installation/archlinux/">Arch Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/binaries/">Binaries</a>
+          </li>
+        
+          <li >
+            <a href="/installation/centos/">CentOS</a>
+          </li>
+        
+          <li >
+            <a href="/installation/cruxlinux/">CRUX Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/debian/">Debian</a>
+          </li>
+        
+          <li >
+            <a href="/installation/fedora/">Fedora</a>
+          </li>
+        
+          <li >
+            <a href="/installation/frugalware/">FrugalWare</a>
+          </li>
+        
+          <li >
+            <a href="/installation/google/">Google Cloud Platform</a>
+          </li>
+        
+          <li >
+            <a href="/installation/gentoolinux/">Gentoo</a>
+          </li>
+        
+          <li >
+            <a href="/installation/softlayer/">IBM Softlayer</a>
+          </li>
+        
+          <li >
+            <a href="/installation/joyent/">Joyent Compute Service</a>
+          </li>
+        
+          <li >
+            <a href="/installation/azure/">Microsoft Azure</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rackspace/">Rackspace Cloud</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rhel/">Red Hat Enterprise Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/oracle/">Oracle Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/SUSE/">SUSE</a>
+          </li>
+        
+          <li >
+            <a href="/compose/install/">Docker Compose</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/userguide/">User Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/userguide/">The Docker User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerhub/">Getting Started with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerizing/">Dockerizing Applications</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/usingdocker/">Working with Containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerimages/">Working with Docker Images</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerlinks/">Linking containers together</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockervolumes/">Managing data in containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/labels-custom-metadata/">Apply custom metadata</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerrepos/">Working with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/compose/">Docker Compose</a>
+          </li>
+        
+          <li >
+            <a href="/compose/production/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Use Compose in production</a>
+          </li>
+        
+          <li >
+            <a href="/compose/extends/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Extend Compose services</a>
+          </li>
+        
+          <li >
+            <a href="/machine/">Docker Machine</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/">Docker Swarm</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/userguide/">Kitematic</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub/">Docker Hub</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub/">Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/accounts/">Accounts</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/userguide/">User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/repos/">Your Repositories</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/builds/">Automated Builds</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/official_repos/">Official Repositories</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub-enterprise/">Docker Hub Enterprise</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub-enterprise/">Overview</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/quick-start/">Quick Start: Basic Workflow</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/userguide/">User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/adminguide/">Admin Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/install/">&nbsp;&nbsp;Installation</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/configuration/">&nbsp;&nbsp;Configuration options</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/support/">Support</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/release-notes/">Release notes</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/examples/nodejs_web_app/">Examples</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/examples/nodejs_web_app/">Dockerizing a Node.js web application</a>
+          </li>
+        
+          <li >
+            <a href="/examples/mongodb/">Dockerizing MongoDB</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_redis_service/">Dockerizing a Redis service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/postgresql_service/">Dockerizing a PostgreSQL service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_riak_service/">Dockerizing a Riak service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_ssh_service/">Dockerizing an SSH service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/couchdb_data_volumes/">Dockerizing a CouchDB service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/apt-cacher-ng/">Dockerizing an Apt-Cacher-ng service</a>
+          </li>
+        
+          <li >
+            <a href="/compose/django/">Getting started with Compose and Django</a>
+          </li>
+        
+          <li >
+            <a href="/compose/rails/">Getting started with Compose and Rails</a>
+          </li>
+        
+          <li >
+            <a href="/compose/wordpress/">Getting started with Compose and Wordpress</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/minecraft-server/">Kitematic: Minecraft server</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/nginx-web-server/">Kitematic: Ngnix web server</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/rethinkdb-dev-database/">Kitematic: RethinkDB development database</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/articles/basics/">Articles</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/articles/basics/">Docker basics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/networking/">Advanced networking</a>
+          </li>
+        
+          <li >
+            <a href="/articles/security/">Security</a>
+          </li>
+        
+          <li >
+            <a href="/articles/https/">Running Docker with HTTPS</a>
+          </li>
+        
+          <li >
+            <a href="/articles/registry_mirror/">Run a local registry mirror</a>
+          </li>
+        
+          <li >
+            <a href="/articles/host_integration/">Automatically starting containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/baseimages/">Creating a base image</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+          </li>
+        
+          <li >
+            <a href="/articles/certificates/">Using certificates for repository client verification</a>
+          </li>
+        
+          <li >
+            <a href="/articles/using_supervisord/">Using Supervisor</a>
+          </li>
+        
+          <li >
+            <a href="/articles/configuring/">Configuring Docker</a>
+          </li>
+        
+          <li >
+            <a href="/articles/cfengine_process_management/">Process management with CFEngine</a>
+          </li>
+        
+          <li >
+            <a href="/articles/puppet/">Using Puppet</a>
+          </li>
+        
+          <li >
+            <a href="/articles/chef/">Using Chef</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dsc/">Using PowerShell DSC</a>
+          </li>
+        
+          <li >
+            <a href="/articles/ambassador_pattern_linking/">Cross-Host linking using ambassador containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/runmetrics/">Runtime metrics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/b2d_volume_resize/">Increasing a Boot2Docker volume</a>
+          </li>
+        
+          <li >
+            <a href="/articles/systemd/">Controlling and configuring Docker using Systemd</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/reference/commandline/cli/">Reference</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/reference/commandline/cli/">Docker command line</a>
+          </li>
+        
+          <li >
+            <a href="/reference/builder/">Dockerfile</a>
+          </li>
+        
+          <li >
+            <a href="/faq/">FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/reference/run/">Run Reference</a>
+          </li>
+        
+          <li >
+            <a href="/compose/cli/">Compose command line</a>
+          </li>
+        
+          <li >
+            <a href="/compose/yml/">Compose yml</a>
+          </li>
+        
+          <li >
+            <a href="/compose/env/">Compose ENV variables</a>
+          </li>
+        
+          <li >
+            <a href="/compose/completion/">Compose commandline completion</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/discovery/">Swarm discovery</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/strategy/">Swarm strategies</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/filter/">Swarm filters</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/API/">Swarm API</a>
+          </li>
+        
+          <li >
+            <a href="/registry/">Docker Registry 2.0</a>
+          </li>
+        
+          <li >
+            <a href="/registry/deploying/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Deploy a registry</a>
+          </li>
+        
+          <li >
+            <a href="/registry/configuration/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Configure a registry</a>
+          </li>
+        
+          <li >
+            <a href="/registry/storagedrivers/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Storage driver model</a>
+          </li>
+        
+          <li >
+            <a href="/registry/notifications/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Work with notifications</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/api/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Registry Service API v2</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/json/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; JSON format</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/auth/token/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Authenticate via central service</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/hub_registry_spec/">Docker Hub and Registry 1.0</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp;Docker Registry API v1</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api_client_libraries/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp;Docker Registry 1.0 API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker-io_api/">Docker Hub API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api/">Docker Remote API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.18/">Docker Remote API v1.18</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.17/">Docker Remote API v1.17</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.16/">Docker Remote API v1.16</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/remote_api_client_libraries/">Docker Remote API client libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_io_accounts_api/">Docker Hub accounts API</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/faq/">Kitematic: FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/known-issues/">Kitematic: Known issues</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/project/who-written-for/">Contributor</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/project/who-written-for/">README first</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-required/">Get required software for Linux or OS X</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-req-win/">Get required software for Windows</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-git/">Configure Git for contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-dev-env/">Work with a development container</a>
+          </li>
+        
+          <li >
+            <a href="/project/test-and-docs/">Run tests and test documentation</a>
+          </li>
+        
+          <li >
+            <a href="/project/make-a-contribution/">Understand contribution workflow</a>
+          </li>
+        
+          <li >
+            <a href="/project/find-an-issue/">Find an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/work-issue/">Work on an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/create-pr/">Create a pull request</a>
+          </li>
+        
+          <li >
+            <a href="/project/review-pr/">Participate in the PR review</a>
+          </li>
+        
+          <li >
+            <a href="/project/advanced-contributing/">Advanced contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/get-help/">Where to get help</a>
+          </li>
+        
+          <li >
+            <a href="/project/coding-style/">Coding style guide</a>
+          </li>
+        
+          <li >
+            <a href="/project/doc-style/">Documentation style guide</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+    </ul>
+  </div>
+</nav>
+  <div id="content" class="container">
+    <div class="row">
+
+      <div class="span3" id="leftnav">
+        <div id="toc_table">
+          <ul class="nav nav-tabs nav-stacked">
+            
+  
+
+  
+
+  
+    <li class=""><a href="#21-containers">2.1 Containers</a>
+      <ul>
+    
+      <li><a href="#list-containers">List containers</a></li>
+    
+      <li><a href="#create-a-container">Create a container</a></li>
+    
+      <li><a href="#inspect-a-container">Inspect a container</a></li>
+    
+      <li><a href="#list-processes-running-inside-a-container">List processes running inside a container</a></li>
+    
+      <li><a href="#inspect-changes-on-a-containers-filesystem">Inspect changes on a container's filesystem</a></li>
+    
+      <li><a href="#export-a-container">Export a container</a></li>
+    
+      <li><a href="#start-a-container">Start a container</a></li>
+    
+      <li><a href="#stop-a-container">Stop a container</a></li>
+    
+      <li><a href="#restart-a-container">Restart a container</a></li>
+    
+      <li><a href="#kill-a-container">Kill a container</a></li>
+    
+      <li><a href="#attach-to-a-container">Attach to a container</a></li>
+    
+      <li><a href="#attach-to-a-container-websocket">Attach to a container (websocket)</a></li>
+    
+      <li><a href="#wait-a-container">Wait a container</a></li>
+    
+      <li><a href="#remove-a-container">Remove a container</a></li>
+    
+      <li><a href="#copy-files-or-folders-from-a-container">Copy files or folders from a container</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#22-images">2.2 Images</a>
+      <ul>
+    
+      <li><a href="#list-images">List Images</a></li>
+    
+      <li><a href="#create-an-image">Create an image</a></li>
+    
+      <li><a href="#insert-a-file-in-an-image">Insert a file in an image</a></li>
+    
+      <li><a href="#inspect-an-image">Inspect an image</a></li>
+    
+      <li><a href="#get-the-history-of-an-image">Get the history of an image</a></li>
+    
+      <li><a href="#push-an-image-on-the-registry">Push an image on the registry</a></li>
+    
+      <li><a href="#tag-an-image-into-a-repository">Tag an image into a repository</a></li>
+    
+      <li><a href="#remove-an-image">Remove an image</a></li>
+    
+      <li><a href="#search-images">Search images</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#23-misc">2.3 Misc</a>
+      <ul>
+    
+      <li><a href="#build-an-image-from-dockerfile-via-stdin">Build an image from Dockerfile via stdin</a></li>
+    
+      <li><a href="#check-auth-configuration">Check auth configuration</a></li>
+    
+      <li><a href="#display-system-wide-information">Display system-wide information</a></li>
+    
+      <li><a href="#show-the-docker-version-information">Show the docker version information</a></li>
+    
+      <li><a href="#create-a-new-image-from-a-containers-changes">Create a new image from a container's changes</a></li>
+    
+      <li><a href="#monitor-dockers-events">Monitor Docker's events</a></li>
+    
+      <li><a href="#get-a-tarball-containing-all-images-and-tags-in-a-repository">Get a tarball containing all images and tags in a repository</a></li>
+    
+      <li><a href="#load-a-tarball-with-a-set-of-images-and-tags-into-docker">Load a tarball with a set of images and tags into docker</a></li>
+    
+      <li><a href="#image-tarball-format">Image tarball format</a></li>
+    
+      </ul>
+    </li>
+  
+
+  
+    <li class=""><a href="#31-inside-docker-run">3.1 Inside docker run</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#32-hijacking">3.2 Hijacking</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#33-cors-requests">3.3 CORS Requests</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+
+          </ul>
+        </div>
+      </div>
+      <div class="span9 content-body">
+
+        
+
+        <div id="versionnav" class="span3 pull-right">
+          <ul class="nav version pull-right">
+            <li class="dropdown">
+              <a id="document-version-number" class="dropdown-toggle" data-toggle="dropdown" href="#">
+		      Version v1.6
+              </a>
+              <ul id="documentation-version-list" class="dropdown-menu pull-right">
+
+		<li role="presentation" class="divider"></li>
+		<li> <a class="home-link3 tertiary-nav" href="https://github.com/docker/docker/blob/master/docs/sources/reference/api/docker_remote_api_v1.8.md" >Edit on GitHub</a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <h1 id="docker-remote-api-v18">Docker Remote API v1.8</h1>
+<h1 id="1-brief-introduction">1. Brief introduction</h1>
+<ul>
+<li>The Remote API has replaced rcli</li>
+<li>The daemon listens on <code>unix:///var/run/docker.sock</code> but you can bind
+   Docker to another host/port or a Unix socket.</li>
+<li>The API tends to be REST, but for some complex commands, like <code>attach</code>
+   or <code>pull</code>, the HTTP connection is hijacked to transport <code>stdout, stdin</code>
+   and <code>stderr</code></li>
+</ul>
+<h1 id="2-endpoints">2. Endpoints</h1>
+<h2 id="21-containers">2.1 Containers</h2>
+<h3 id="list-containers">List containers</h3>
+<p><code>GET /containers/json</code></p>
+<p>List containers</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    GET /containers/json?all=1&amp;before=8dfafdbc3a40&amp;size=1 HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    [
+         {
+                 "Id": "8dfafdbc3a40",
+                 "Image": "base:latest",
+                 "Command": "echo 1",
+                 "Created": 1367854155,
+                 "Status": "Exit 0",
+                 "Ports": [{"PrivatePort": 2222, "PublicPort": 3333, "Type": "tcp"}],
+                 "SizeRw": 12288,
+                 "SizeRootFs": 0
+         },
+         {
+                 "Id": "9cd87474be90",
+                 "Image": "base:latest",
+                 "Command": "echo 222222",
+                 "Created": 1367854155,
+                 "Status": "Exit 0",
+                 "Ports": [],
+                 "SizeRw": 12288,
+                 "SizeRootFs": 0
+         },
+         {
+                 "Id": "3176a2479c92",
+                 "Image": "base:latest",
+                 "Command": "echo 3333333333333333",
+                 "Created": 1367854154,
+                 "Status": "Exit 0",
+                 "Ports":[],
+                 "SizeRw":12288,
+                 "SizeRootFs":0
+         },
+         {
+                 "Id": "4cb07b47f9fb",
+                 "Image": "base:latest",
+                 "Command": "echo 444444444444444444444444444444444",
+                 "Created": 1367854152,
+                 "Status": "Exit 0",
+                 "Ports": [],
+                 "SizeRw": 12288,
+                 "SizeRootFs": 0
+         }
+    ]
+</code></pre>
+<p>Query Parameters:</p>
+<pre class="prettyprint well"><code>
+</code></pre>
+<ul>
+<li><strong>all</strong> – 1/True/true or 0/False/false, Show all containers.
+    Only running containers are shown by default (i.e., this defaults to false)</li>
+<li><strong>limit</strong> – Show <code>limit</code> last created containers, include non-running ones.</li>
+<li><strong>since</strong> – Show only containers created since Id, include non-running ones.</li>
+<li><strong>before</strong> – Show only containers created before Id, include non-running ones.</li>
+<li><strong>size</strong> – 1/True/true or 0/False/false, Show the containers sizes</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>400</strong> – bad parameter</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="create-a-container">Create a container</h3>
+<p><code>POST /containers/create</code></p>
+<p>Create a container</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /containers/create HTTP/1.1
+    Content-Type: application/json
+
+    {
+         "Hostname":"",
+         "User":"",
+         "Memory":0,
+         "MemorySwap":0,
+         "CpuShares":0,
+         "AttachStdin":false,
+         "AttachStdout":true,
+         "AttachStderr":true,
+         "PortSpecs":null,
+         "Tty":false,
+         "OpenStdin":false,
+         "StdinOnce":false,
+         "Env":null,
+         "Cmd":[
+                 "date"
+         ],
+         "Dns":null,
+         "Image":"base",
+         "Volumes":{
+                 "/tmp": {}
+         },
+         "VolumesFrom":"",
+         "WorkingDir":"",
+         "ExposedPorts":{
+                 "22/tcp": {}
+         }
+    }
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 201 Created
+    Content-Type: application/json
+
+    {
+         "Id":"e90e34656806"
+         "Warnings":[]
+    }
+</code></pre>
+<p>Json Parameters:</p>
+<pre class="prettyprint well"><code>
+</code></pre>
+<ul>
+<li><strong>Hostname</strong> – Container host name</li>
+<li><strong>User</strong> – Username or UID</li>
+<li><strong>Memory</strong> – Memory Limit in bytes</li>
+<li><strong>CpuShares</strong> – CPU shares (relative weight)</li>
+<li><strong>AttachStdin</strong> – 1/True/true or 0/False/false, attach to
+        standard input. Default false</li>
+<li><strong>AttachStdout</strong> – 1/True/true or 0/False/false, attach to
+        standard output. Default false</li>
+<li><strong>AttachStderr</strong> – 1/True/true or 0/False/false, attach to
+        standard error. Default false</li>
+<li><strong>Tty</strong> – 1/True/true or 0/False/false, allocate a pseudo-tty.
+        Default false</li>
+<li><strong>OpenStdin</strong> – 1/True/true or 0/False/false, keep stdin open
+        even if not attached. Default false</li>
+</ul>
+<p>Query Parameters:</p>
+<pre class="prettyprint well"><code>
+</code></pre>
+<ul>
+<li><strong>name</strong> – Assign the specified name to the container. Mus
+        match <code>/?[a-zA-Z0-9_-]+</code>.</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>201</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>406</strong> – impossible to attach (container not running)</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="inspect-a-container">Inspect a container</h3>
+<p><code>GET /containers/(id)/json</code></p>
+<p>Return low-level information on the container <code>id</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    GET /containers/4fa6e0f0c678/json HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {
+                 "Id": "4fa6e0f0c6786287e131c3852c58a2e01cc697a68231826813597e4994f1d6e2",
+                 "Created": "2013-05-07T14:51:42.041847+02:00",
+                 "Path": "date",
+                 "Args": [],
+                 "Config": {
+                         "Hostname": "4fa6e0f0c678",
+                         "User": "",
+                         "Memory": 0,
+                         "MemorySwap": 0,
+                         "AttachStdin": false,
+                         "AttachStdout": true,
+                         "AttachStderr": true,
+                         "PortSpecs": null,
+                         "Tty": false,
+                         "OpenStdin": false,
+                         "StdinOnce": false,
+                         "Env": null,
+                         "Cmd": [
+                                 "date"
+                         ],
+                         "Dns": null,
+                         "Image": "base",
+                         "Volumes": {},
+                         "VolumesFrom": "",
+                         "WorkingDir": ""
+                 },
+                 "State": {
+                         "Running": false,
+                         "Pid": 0,
+                         "ExitCode": 0,
+                         "StartedAt": "2013-05-07T14:51:42.087658+02:01360",
+                         "Ghost": false
+                 },
+                 "Image": "b750fe79269d2ec9a3c593ef05b4332b1d1a02a62b4accb2c21d589ff2f5f2dc",
+                 "NetworkSettings": {
+                         "IpAddress": "",
+                         "IpPrefixLen": 0,
+                         "Gateway": "",
+                         "Bridge": "",
+                         "PortMapping": null
+                 },
+                 "SysInitPath": "/home/kitty/go/src/github.com/docker/docker/bin/docker",
+                 "ResolvConfPath": "/etc/resolv.conf",
+                 "Volumes": {},
+                 "HostConfig": {
+                     "Binds": null,
+                     "ContainerIDFile": "",
+                     "LxcConf": [],
+                     "Privileged": false,
+                     "PortBindings": {
+                        "80/tcp": [
+                            {
+                                "HostIp": "0.0.0.0",
+                                "HostPort": "49153"
+                            }
+                        ]
+                     },
+                     "Links": null,
+                     "PublishAllPorts": false
+                 }
+    }
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="list-processes-running-inside-a-container">List processes running inside a container</h3>
+<p><code>GET /containers/(id)/top</code></p>
+<p>List processes running inside the container <code>id</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    GET /containers/4fa6e0f0c678/top HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {
+         "Titles": [
+                 "USER",
+                 "PID",
+                 "%CPU",
+                 "%MEM",
+                 "VSZ",
+                 "RSS",
+                 "TTY",
+                 "STAT",
+                 "START",
+                 "TIME",
+                 "COMMAND"
+                 ],
+         "Processes": [
+                 ["root","20147","0.0","0.1","18060","1864","pts/4","S","10:06","0:00","bash"],
+                 ["root","20271","0.0","0.0","4312","352","pts/4","S+","10:07","0:00","sleep","10"]
+         ]
+    }
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>ps_args</strong> – ps arguments to use (e.g., aux)</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="inspect-changes-on-a-containers-filesystem">Inspect changes on a container's filesystem</h3>
+<p><code>GET /containers/(id)/changes</code></p>
+<p>Inspect changes on container <code>id</code>'s filesystem</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    GET /containers/4fa6e0f0c678/changes HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    [
+         {
+                 "Path": "/dev",
+                 "Kind": 0
+         },
+         {
+                 "Path": "/dev/kmsg",
+                 "Kind": 1
+         },
+         {
+                 "Path": "/test",
+                 "Kind": 1
+         }
+    ]
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="export-a-container">Export a container</h3>
+<p><code>GET /containers/(id)/export</code></p>
+<p>Export the contents of container <code>id</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    GET /containers/4fa6e0f0c678/export HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/octet-stream
+
+    {{ TAR STREAM }}
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="start-a-container">Start a container</h3>
+<p><code>POST /containers/(id)/start</code></p>
+<p>Start the container <code>id</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /containers/(id)/start HTTP/1.1
+    Content-Type: application/json
+
+    {
+         "Binds":["/tmp:/tmp"],
+         "LxcConf":[{"Key":"lxc.utsname","Value":"docker"}],
+         "PortBindings":{ "22/tcp": [{ "HostPort": "11022" }] },
+         "PublishAllPorts":false,
+         "Privileged":false
+    }
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 204 No Content
+    Content-Type: text/plain
+</code></pre>
+<p>Json Parameters:</p>
+<pre class="prettyprint well"><code>
+</code></pre>
+<ul>
+<li><strong>Binds</strong> – Create a bind mount to a directory or file with
+        [host-path]:[container-path]:[rw|ro]. If a directory
+        "container-path" is missing, then docker creates a new volume.</li>
+<li><strong>LxcConf</strong> – Map of custom lxc options</li>
+<li><strong>PortBindings</strong> – Expose ports from the container, optionally
+        publishing them via the HostPort flag</li>
+<li><strong>PublishAllPorts</strong> – 1/True/true or 0/False/false, publish all
+        exposed ports to the host interfaces. Default false</li>
+<li><strong>Privileged</strong> – 1/True/true or 0/False/false, give extended
+        privileges to this container. Default false</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="stop-a-container">Stop a container</h3>
+<p><code>POST /containers/(id)/stop</code></p>
+<p>Stop the container <code>id</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /containers/e90e34656806/stop?t=5 HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 204 OK
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>t</strong> – number of seconds to wait before killing the container</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="restart-a-container">Restart a container</h3>
+<p><code>POST /containers/(id)/restart</code></p>
+<p>Restart the container <code>id</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /containers/e90e34656806/restart?t=5 HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 204 No Content
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>t</strong> – number of seconds to wait before killing the container</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="kill-a-container">Kill a container</h3>
+<p><code>POST /containers/(id)/kill</code></p>
+<p>Kill the container <code>id</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /containers/e90e34656806/kill HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 204 No Content
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="attach-to-a-container">Attach to a container</h3>
+<p><code>POST /containers/(id)/attach</code></p>
+<p>Attach to the container <code>id</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /containers/16253994b7c4/attach?logs=1&amp;stream=0&amp;stdout=1 HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/vnd.docker.raw-stream
+
+    {{ STREAM }}
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>logs</strong> – 1/True/true or 0/False/false, return logs. Defaul
+        false</li>
+<li><strong>stream</strong> – 1/True/true or 0/False/false, return stream.
+        Default false</li>
+<li><strong>stdin</strong> – 1/True/true or 0/False/false, if stream=true, attach
+        to stdin. Default false</li>
+<li><strong>stdout</strong> – 1/True/true or 0/False/false, if logs=true, return
+        stdout log, if stream=true, attach to stdout. Default false</li>
+<li><strong>stderr</strong> – 1/True/true or 0/False/false, if logs=true, return
+        stderr log, if stream=true, attach to stderr. Default false</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>400</strong> – bad parameter</li>
+<li><strong>404</strong> – no such container</li>
+<li>
+<p><strong>500</strong> – server error</p>
+<p><strong>Stream details</strong>:</p>
+<p>When using the TTY setting is enabled in
+<a href="/reference/api/docker_remote_api_v1.9/#create-a-container" title="POST /containers/create"><code>POST /containers/create</code>
+</a>,
+the stream is the raw data from the process PTY and client's stdin.
+When the TTY is disabled, then the stream is multiplexed to separate
+stdout and stderr.</p>
+<p>The format is a <strong>Header</strong> and a <strong>Payload</strong> (frame).</p>
+<p><strong>HEADER</strong></p>
+<p>The header will contain the information on which stream write the
+stream (stdout or stderr). It also contain the size of the
+associated frame encoded on the last 4 bytes (uint32).</p>
+<p>It is encoded on the first 8 bytes like this:</p>
+<pre class="prettyprint well"><code>header := [8]byte{STREAM_TYPE, 0, 0, 0, SIZE1, SIZE2, SIZE3, SIZE4}
+</code></pre>
+<p><code>STREAM_TYPE</code> can be:</p>
+</li>
+<li>
+<p>0: stdin (will be written on stdout)</p>
+</li>
+<li>1: stdout</li>
+<li>
+<p>2: stderr</p>
+<p><code>SIZE1, SIZE2, SIZE3, SIZE4</code> are the 4 bytes of
+the uint32 size encoded as big endian.</p>
+<p><strong>PAYLOAD</strong></p>
+<p>The payload is the raw stream.</p>
+<p><strong>IMPLEMENTATION</strong></p>
+<p>The simplest way to implement the Attach protocol is the following:</p>
+<ol>
+<li>Read 8 bytes</li>
+<li>chose stdout or stderr depending on the first byte</li>
+<li>Extract the frame size from the last 4 byets</li>
+<li>Read the extracted size and output it on the correct output</li>
+<li>Goto 1)</li>
+</ol>
+</li>
+</ul>
+<h3 id="attach-to-a-container-websocket">Attach to a container (websocket)</h3>
+<p><code>GET /containers/(id)/attach/ws</code></p>
+<p>Attach to the container <code>id</code> via websocket</p>
+<p>Implements websocket protocol handshake according to <a href="http://tools.ietf.org/html/rfc6455">RFC 6455</a></p>
+<p><strong>Example request</strong></p>
+<pre class="prettyprint well"><code>    GET /containers/e90e34656806/attach/ws?logs=0&amp;stream=1&amp;stdin=1&amp;stdout=1&amp;stderr=1 HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong></p>
+<pre class="prettyprint well"><code>    {{ STREAM }}
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>logs</strong> – 1/True/true or 0/False/false, return logs. Default false</li>
+<li><strong>stream</strong> – 1/True/true or 0/False/false, return stream.
+        Default false</li>
+<li><strong>stdin</strong> – 1/True/true or 0/False/false, if stream=true, attach
+        to stdin. Default false</li>
+<li><strong>stdout</strong> – 1/True/true or 0/False/false, if logs=true, return
+        stdout log, if stream=true, attach to stdout. Default false</li>
+<li><strong>stderr</strong> – 1/True/true or 0/False/false, if logs=true, return
+        stderr log, if stream=true, attach to stderr. Default false</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>400</strong> – bad parameter</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="wait-a-container">Wait a container</h3>
+<p><code>POST /containers/(id)/wait</code></p>
+<p>Block until container <code>id</code> stops, then returns the exit code</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /containers/16253994b7c4/wait HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {"StatusCode": 0}
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="remove-a-container">Remove a container</h3>
+<p><code>DELETE /containers/(id)</code></p>
+<p>Remove the container <code>id</code> from the filesystem</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    DELETE /containers/16253994b7c4?v=1 HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 204 No Content
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>v</strong> – 1/True/true or 0/False/false, Remove the volumes
+        associated to the container. Default false</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>204</strong> – no error</li>
+<li><strong>400</strong> – bad parameter</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="copy-files-or-folders-from-a-container">Copy files or folders from a container</h3>
+<p><code>POST /containers/(id)/copy</code></p>
+<p>Copy files or folders of container <code>id</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /containers/4fa6e0f0c678/copy HTTP/1.1
+    Content-Type: application/json
+
+    {
+         "Resource": "test.txt"
+    }
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/octet-stream
+
+    {{ TAR STREAM }}
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h2 id="22-images">2.2 Images</h2>
+<h3 id="list-images">List Images</h3>
+<p><code>GET /images/json</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    GET /images/json?all=0 HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    [
+      {
+         "RepoTags": [
+           "ubuntu:12.04",
+           "ubuntu:precise",
+           "ubuntu:latest"
+         ],
+         "Id": "8dbd9e392a964056420e5d58ca5cc376ef18e2de93b5cc90e868a1bbc8318c1c",
+         "Created": 1365714795,
+         "Size": 131506275,
+         "VirtualSize": 131506275
+      },
+      {
+         "RepoTags": [
+           "ubuntu:12.10",
+           "ubuntu:quantal"
+         ],
+         "ParentId": "27cf784147099545",
+         "Id": "b750fe79269d2ec9a3c593ef05b4332b1d1a02a62b4accb2c21d589ff2f5f2dc",
+         "Created": 1364102658,
+         "Size": 24653,
+         "VirtualSize": 180116135
+      }
+    ]
+</code></pre>
+<h3 id="create-an-image">Create an image</h3>
+<p><code>POST /images/create</code></p>
+<p>Create an image, either by pull it from the registry or by importing i</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /images/create?fromImage=base HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {"status": "Pulling..."}
+    {"status": "Pulling", "progress": "1 B/ 100 B", "progressDetail": {"current": 1, "total": 100}}
+    {"error": "Invalid..."}
+    ...
+
+When using this endpoint to pull an image from the registry, the
+`X-Registry-Auth` header can be used to include
+a base64-encoded AuthConfig object.
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>fromImage</strong> – name of the image to pull</li>
+<li><strong>fromSrc</strong> – source to import, - means stdin</li>
+<li><strong>repo</strong> – repository</li>
+<li><strong>tag</strong> – tag</li>
+<li><strong>registry</strong> – the registry to pull from</li>
+</ul>
+<p>Request Headers:</p>
+<ul>
+<li><strong>X-Registry-Auth</strong> – base64-encoded AuthConfig object</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="insert-a-file-in-an-image">Insert a file in an image</h3>
+<p><code>POST /images/(name)/insert</code></p>
+<p>Insert a file from <code>url</code> in the image <code>name</code> at <code>path</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /images/test/insert?path=/usr&amp;url=myurl HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {"status":"Inserting..."}
+    {"status":"Inserting", "progress":"1/? (n/a)", "progressDetail":{"current":1}}
+    {"error":"Invalid..."}
+    ...
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>url</strong> – The url from where the file is taken</li>
+<li><strong>path</strong> – The path where the file is stored</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="inspect-an-image">Inspect an image</h3>
+<p><code>GET /images/(name)/json</code></p>
+<p>Return low-level information on the image <code>name</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    GET /images/base/json HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {
+         "id":"b750fe79269d2ec9a3c593ef05b4332b1d1a02a62b4accb2c21d589ff2f5f2dc",
+         "parent":"27cf784147099545",
+         "created":"2013-03-23T22:24:18.818426-07:00",
+         "container":"3d67245a8d72ecf13f33dffac9f79dcdf70f75acb84d308770391510e0c23ad0",
+         "container_config":
+                 {
+                         "Hostname":"",
+                         "User":"",
+                         "Memory":0,
+                         "MemorySwap":0,
+                         "AttachStdin":false,
+                         "AttachStdout":false,
+                         "AttachStderr":false,
+                         "PortSpecs":null,
+                         "Tty":true,
+                         "OpenStdin":true,
+                         "StdinOnce":false,
+                         "Env":null,
+                         "Cmd": ["/bin/bash"],
+                         "Dns":null,
+                         "Image":"base",
+                         "Volumes":null,
+                         "VolumesFrom":"",
+                         "WorkingDir":""
+                 },
+         "Size": 6824592
+    }
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such image</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="get-the-history-of-an-image">Get the history of an image</h3>
+<p><code>GET /images/(name)/history</code></p>
+<p>Return the history of the image <code>name</code></p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    GET /images/base/history HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    [
+         {
+                 "Id": "b750fe79269d",
+                 "Created": 1364102658,
+                 "CreatedBy": "/bin/bash"
+         },
+         {
+                 "Id": "27cf78414709",
+                 "Created": 1364068391,
+                 "CreatedBy": ""
+         }
+    ]
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such image</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="push-an-image-on-the-registry">Push an image on the registry</h3>
+<p><code>POST /images/(name)/push</code></p>
+<p>Push the image <code>name</code> on the registry</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /images/test/push HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {"status": "Pushing..."}
+    {"status": "Pushing", "progress": "1/? (n/a)", "progressDetail": {"current": 1}}}
+    {"error": "Invalid..."}
+    ...
+
+Request Headers:
+</code></pre>
+<ul>
+<li><strong>X-Registry-Auth</strong> – include a base64-encoded AuthConfig
+        object.</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such image</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="tag-an-image-into-a-repository">Tag an image into a repository</h3>
+<p><code>POST /images/(name)/tag</code></p>
+<p>Tag the image <code>name</code> into a repository</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /images/test/tag?repo=myrepo&amp;force=0&amp;tag=v42 HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 201 OK
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>repo</strong> – The repository to tag in</li>
+<li><strong>force</strong> – 1/True/true or 0/False/false, default false</li>
+<li><strong>tag</strong> - The new tag name</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>201</strong> – no error</li>
+<li><strong>400</strong> – bad parameter</li>
+<li><strong>404</strong> – no such image</li>
+<li><strong>409</strong> – conflict</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="remove-an-image">Remove an image</h3>
+<p><code>DELETE /images/(name)</code></p>
+<p>Remove the image <code>name</code> from the filesystem</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    DELETE /images/test HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-type: application/json
+
+    [
+     {"Untagged": "3e2f21a89f"},
+     {"Deleted": "3e2f21a89f"},
+     {"Deleted": "53b4f83ac9"}
+    ]
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>404</strong> – no such image</li>
+<li><strong>409</strong> – conflict</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="search-images">Search images</h3>
+<p><code>GET /images/search</code></p>
+<p>Search for an image on <a href="https://hub.docker.com">Docker Hub</a>.</p>
+<blockquote>
+<p><strong>Note</strong>:
+The response keys have changed from API v1.6 to reflect the JSON
+sent by the registry server to the docker daemon's request.</p>
+</blockquote>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    GET /images/search?term=sshd HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    [
+            {
+                "description": "",
+                "is_official": false,
+                "is_trusted": false,
+                "name": "wma55/u1210sshd",
+                "star_count": 0
+            },
+            {
+                "description": "",
+                "is_official": false,
+                "is_trusted": false,
+                "name": "jdswinbank/sshd",
+                "star_count": 0
+            },
+            {
+                "description": "",
+                "is_official": false,
+                "is_trusted": false,
+                "name": "vgauthier/sshd",
+                "star_count": 0
+            }
+    ...
+    ]
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>term</strong> – term to search</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h2 id="23-misc">2.3 Misc</h2>
+<h3 id="build-an-image-from-dockerfile-via-stdin">Build an image from Dockerfile via stdin</h3>
+<p><code>POST /build</code></p>
+<p>Build an image from Dockerfile via stdin</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /build HTTP/1.1
+
+    {{ TAR STREAM }}
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {"stream": "Step 1..."}
+    {"stream": "..."}
+    {"error": "Error...", "errorDetail": {"code": 123, "message": "Error..."}}
+
+The stream must be a tar archive compressed with one of the
+following algorithms: identity (no compression), gzip, bzip2, xz.
+
+The archive must include a file called `Dockerfile`
+at its root. It may include any number of other files,
+which will be accessible in the build context (See the [*ADD build
+command*](/reference/builder/#dockerbuilder)).
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>t</strong> – repository name (and optionally a tag) to be applied to
+    the resulting image in case of success</li>
+<li><strong>remote</strong> – build source URI (git or HTTPS/HTTP)</li>
+<li><strong>q</strong> – suppress verbose build output</li>
+<li>
+<p><strong>nocache</strong> – do not use the cache when building the image</p>
+<p>Request Headers:</p>
+</li>
+<li>
+<p><strong>Content-type</strong> – should be set to
+        <code>"application/tar"</code>.</p>
+</li>
+<li><strong>X-Registry-Auth</strong> – base64-encoded AuthConfig objec</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="check-auth-configuration">Check auth configuration</h3>
+<p><code>POST /auth</code></p>
+<p>Get the default username and email</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /auth HTTP/1.1
+    Content-Type: application/json
+
+    {
+         "username":" hannibal",
+         "password: "xxxx",
+         "email": "hannibal@a-team.com",
+         "serveraddress": "https://index.docker.io/v1/"
+    }
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: text/plain
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>204</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="display-system-wide-information">Display system-wide information</h3>
+<p><code>GET /info</code></p>
+<p>Display system-wide information</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    GET /info HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {
+         "Containers":11,
+         "Images":16,
+         "Debug":false,
+         "NFd": 11,
+         "NGoroutines":21,
+         "MemoryLimit":true,
+         "SwapLimit":false,
+         "IPv4Forwarding":true
+    }
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="show-the-docker-version-information">Show the docker version information</h3>
+<p><code>GET /version</code></p>
+<p>Show the docker version information</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    GET /version HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {
+         "Version":"0.2.2",
+         "GitCommit":"5a2a5cc+CHANGES",
+         "GoVersion":"go1.0.3"
+    }
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="create-a-new-image-from-a-containers-changes">Create a new image from a container's changes</h3>
+<p><code>POST /commit</code></p>
+<p>Create a new image from a container's changes</p>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    POST /commit?container=44c004db4b17&amp;m=message&amp;repo=myrepo HTTP/1.1
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 201 OK
+        Content-Type: application/vnd.docker.raw-stream
+
+    {"Id": "596069db4bf5"}
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>container</strong> – source container</li>
+<li><strong>repo</strong> – repository</li>
+<li><strong>tag</strong> – tag</li>
+<li><strong>m</strong> – commit message</li>
+<li><strong>author</strong> – author (e.g., "John Hannibal Smith
+        &lt;<a href="mailto:hannibal%40a-team.com">hannibal@a-team.com</a>&gt;")</li>
+<li><strong>run</strong> – config automatically applied when the image is run.
+        (ex: {"Cmd": ["cat", "/world"], "PortSpecs":["22"]})</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>201</strong> – no error</li>
+<li><strong>404</strong> – no such container</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="monitor-dockers-events">Monitor Docker's events</h3>
+<p><code>GET /events</code></p>
+<p>Get events from docker, either in real time via streaming,
+or via polling (using since).</p>
+<p>Docker containers will report the following events:</p>
+<pre class="prettyprint well"><code>create, destroy, die, export, kill, pause, restart, start, stop, unpause
+</code></pre>
+<p>and Docker images will report:</p>
+<pre class="prettyprint well"><code>untag, delete
+</code></pre>
+<p><strong>Example request</strong>:</p>
+<pre class="prettyprint well"><code>    GET /events?since=1374067924
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {"status": "create", "id": "dfdf82bd3881","from": "base:latest", "time":1374067924}
+    {"status": "start", "id": "dfdf82bd3881","from": "base:latest", "time":1374067924}
+    {"status": "stop", "id": "dfdf82bd3881","from": "base:latest", "time":1374067966}
+    {"status": "destroy", "id": "dfdf82bd3881","from": "base:latest", "time":1374067970}
+</code></pre>
+<p>Query Parameters:</p>
+<ul>
+<li><strong>since</strong> – timestamp used for polling</li>
+</ul>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="get-a-tarball-containing-all-images-and-tags-in-a-repository">Get a tarball containing all images and tags in a repository</h3>
+<p><code>GET /images/(name)/get</code></p>
+<p>Get a tarball containing all images and metadata for the repository
+specified by <code>name</code>.
+See the <a href="#image-tarball-format">image tarball format</a> for more details.</p>
+<p><strong>Example request</strong></p>
+<pre class="prettyprint well"><code>    GET /images/ubuntu/get
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/x-tar
+
+    Binary data stream
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="load-a-tarball-with-a-set-of-images-and-tags-into-docker">Load a tarball with a set of images and tags into docker</h3>
+<p><code>POST /images/load</code></p>
+<p>Load a set of images and tags into the docker repository.</p>
+<p>See the <a href="#image-tarball-format">image tarball format</a> for more details.</p>
+<p><strong>Example request</strong></p>
+<pre class="prettyprint well"><code>    POST /images/load
+
+    Tarball in body
+</code></pre>
+<p><strong>Example response</strong>:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+</code></pre>
+<p>Status Codes:</p>
+<ul>
+<li><strong>200</strong> – no error</li>
+<li><strong>500</strong> – server error</li>
+</ul>
+<h3 id="image-tarball-format">Image tarball format</h3>
+<p>An image tarball contains one directory per image layer (named using its long ID),
+each containing three files:</p>
+<ol>
+<li><code>VERSION</code>: currently <code>1.0</code> - the file format version</li>
+<li><code>json</code>: detailed layer information, similar to <code>docker inspect layer_id</code></li>
+<li><code>layer.tar</code>: A tarfile containing the filesystem changes in this layer</li>
+</ol>
+<p>The <code>layer.tar</code> file will contain <code>aufs</code> style <code>.wh..wh.aufs</code> files and directories
+for storing attribute changes and deletions.</p>
+<p>If the tarball defines a repository, there will also be a <code>repositories</code> file at
+the root that contains a list of repository and tag names mapped to layer IDs.</p>
+<pre class="prettyprint well"><code>{&quot;hello-world&quot;:
+    {&quot;latest&quot;: &quot;565a9d68a73f6706862bfe8409a7f659776d4d60a8d096eb4a3cbce6999cc2a1&quot;}
+}
+</code></pre>
+
+<h1 id="3-going-further">3. Going further</h1>
+<h2 id="31-inside-docker-run">3.1 Inside <code>docker run</code></h2>
+<p>Here are the steps of <code>docker run</code>:</p>
+<ul>
+<li>
+<p>Create the container</p>
+</li>
+<li>
+<p>If the status code is 404, it means the image doesn't exist:
+        - Try to pull it
+        - Then retry to create the container</p>
+</li>
+<li>
+<p>Start the container</p>
+</li>
+<li>
+<p>If you are not in detached mode:
+        - Attach to the container, using logs=1 (to have stdout and
+            stderr from the container's start) and stream=1</p>
+</li>
+<li>
+<p>If in detached mode or only stdin is attached:
+        - Display the container's id</p>
+</li>
+</ul>
+<h2 id="32-hijacking">3.2 Hijacking</h2>
+<p>In this version of the API, /attach, uses hijacking to transport stdin,
+stdout and stderr on the same socket. This might change in the future.</p>
+<h2 id="33-cors-requests">3.3 CORS Requests</h2>
+<p>To enable cross origin requests to the remote api add the flag
+"--api-enable-cors" when running docker in daemon mode.</p>
+<pre class="prettyprint well"><code>$ docker -d -H="192.168.1.9:2375" --api-enable-cors
+</code></pre>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="push-footer"></div>
+
+</div>
+
+
+
+<div id="footer-container" class="container">
+  <div id="footer" class="grey-body">
+    <div class="row">
+      <div class="span2">
+        <span class="footer-title">Community</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/community/events/">Events</a></li>
+          <li><a class="primary-button" href="http://posts.docker.com">Friends' Posts</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/meetups/">Meetups</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/governance/">Governance</a></li>
+          <li><a class="primary-button" href="http://forums.docker.com">Forums</a></li>
+          <li><a class="primary-button" href="http://botbot.me/freenode/docker">IRC</a></li>
+          <li><a class="primary-button" href="https://github.com/docker/docker">GitHub</a></li>
+          <li><a class="primary-button" href="http://stackoverflow.com/search?q=docker">Stackoverflow</a></li>
+          <li><a class="primary-button" href="http://www.cafepress.com/docker">Swag</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Enterprise</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/support/">Support</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/education/">Education</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/services/">Services</a></li>
+        </ul>
+        <span class="footer-title">Partner Solutions</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/partners/find/">Find a Partner</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/program/">Partner Program</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/learn/">Learn More</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Resources</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://docs.docker.com">Documentation</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/help/">Help</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/usecases/">Use Cases</a></li>
+          <li><a class="primary-button" href="http://www.docker.com/tryit/">Online Tutorial</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/howtobuy/">How To Buy</a></li>
+          <li><a class="primary-button" href="http://status.docker.com">Status</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/security/">Security</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Company</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/company/aboutus/">About Us</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/team/">Team</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/news/">News</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/press/">Press</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/careers/">Careers</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <span class="footer-title">Connect</span>
+        <div class="search">
+          <span>Subscribe to our newsletter</span>
+          <form action="https://www.docker.com/subscribe_newsletter/" method="post">
+            <input type='hidden' name='csrfmiddlewaretoken' value='aWL78QXQkY8DSKNYh6cl08p5eTLl7sOa' />
+            <tr><th><label for="id_email">Email:</label></th><td><input class="form-control" id="id_email" name="email" placeholder="Enter your email" type="text" /></td></tr>
+            
+            <button type="submit"><i class="icon-arrow-right"></i> </button>
+          </form>
+        </div>
+        <ul class="unstyled social">
+          <li><a title="Docker on Twitter" class="primary-button blog" href="http://blog.docker.com">Blog</a></li>
+          <li><a title="Docker on Twitter" class="primary-button twitter" href="http://twitter.com/docker">Twitter</a></li>
+          <li><a title="Docker on Google+" class="primary-button googleplus" href="https://plus.google.com/u/0/communities/108146856671494713993">Google+</a></li>
+          <li><a title="Docker on Facebook" class="primary-button facebook" href="https://www.facebook.com/docker.run">Facebook</a></li>
+          <li><a title="Docker on Youtube" class="primary-button youtube" href="http://www.youtube.com/user/dockerrun">YouTube</a></li>
+        </ul>
+        <ul class="unstyled social">
+          <li><a title="Docker on SlideShare" class="primary-button slideshare" href="http://www.slideshare.net/Docker">Slideshare</a></li>
+          <li>
+             <a title="Docker on LinkedIn" class="primary-button" href="https://www.linkedin.com/company/docker">
+                 <span class="linkedin"></span>
+                 LinkedIn
+             </a>
+          </li>
+          <li>
+              <a title="Docker on GitHub" class="primary-button" href="https://github.com/docker/">
+                  <span class="github"></span>
+                  GitHub
+              </a>
+          </li>
+          <li>
+              <a title="Docker on Reddit" class="primary-button" href="http://www.reddit.com/r/docker">
+                  <span class="reddit"></span>
+                  Reddit
+              </a>
+          </li>
+          <li>
+              <a title="Docker on AngelList" class="primary-button" href="https://angel.co/docker-inc-1">
+                  <span class="angellist"></span>
+                  AngelList
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="span6 pagination-right copyright">
+        <span>&copy; 2014-2015 Docker, Inc.</span>
+      </div>
+      <div class="span6 pagination-left copyright">
+        <a href="http://www.docker.com/legal/terms_of_service">Terms</a> &middot;
+        <a href="http://www.docker.com/legal/privacy_policy">Privacy</a> &middot;
+        <a href="http://www.docker.com/legal/trademark_guidelines">Trademarks</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.cookie.js" ></script>
+<script src="/js/jquery-scrolltofixed-min.js"></script>
+<script src="/js/bootstrap-3.0.3.min.js"></script>
+<script src="/js/prettify-1.0.min.js"></script>
+<script src="/js/dockerfile_tutorial.js"></script>
+<script src="/js/dockerfile_tutorial_level.js"></script>
+<script src="/js/base.js"></script>
+<script src="/tipuesearch/tipuesearch_set.js"></script>
+<script src="/tipuesearch/tipuesearch.min.js"></script>
+<script type="text/javascript">
+piAId = '45082';
+piCId = '1482';
+
+(function() {
+  function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+  }
+  if(window.attachEvent) { window.attachEvent('onload', async_load); }
+  else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').css("min-height", $(window).height() - 553 );
+    // if the URL contains a version string, update the version picker to reflect that
+    version = document.location.pathname.match(/^\/(v\d\.\d)\/.*/)
+    if (version && version[1]) {
+        $('#document-version-number')[0].text = 'Version '+version[1];
+    } else {
+        $('#document-version-number')[0].text = $('#document-version-number')[0].text + " (Latest)"
+    }
+    // load the complete versions list
+    $.get("/versions.html_fragment", function( data ) {
+    	$('#documentation-version-list').prepend(data);
+	//remove any "/v1.1/" bits from front, so we can add the path to the version selection dropdown.
+	path = document.location.pathname.replace(/^\/v\d\.\d/, "");
+	$('#documentation-version-list a.version').each(function(i, e) {
+		e.href = e.href+path;
+		$(e).removeClass()
+	});
+    });
+
+  })
+  var userName = getCookie('docker_sso_username');
+  if (userName) {
+    $('.topmostnav_loggedout').hide();
+    $('.topmostnav_loggedin').show();
+    $('#logged-in-header-username').text(userName);
+  } else {
+    $('.topmostnav_loggedout').show();
+    $('.topmostnav_loggedin').hide();
+  }
+</script>
+</body>
+</html>

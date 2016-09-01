@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="docker_version" content="1.6.1">
+  <meta name="docker_git_branch" content="master">
+  <meta name="docker_git_commit" content="59cd467">
+  <meta name="docker_build_date" content="Fri Jun  5 11:40:50 UTC 2015">
+
+  <meta name="description" content="Installation instructions for Docker Hub Enterprise">
+  <meta name="keywords" content="docker, documentation, about, technology, understanding, enterprise, hub, registry">
+  
+  <link rel="canonical" href="/docker-hub-enterprise/install/">
+  <link href="/css/bootstrap-custom.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/prettify-1.0.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/dockerfile_tutorial.css">
+  <link href="/tipuesearch
+/tipuesearch.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <title>&nbsp;&nbsp;Installation - Docker Documentation</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-6096819-11', 'docker.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash,
+  });
+  </script>
+  
+</head>
+<body>
+
+<div id="topmostnav" class="topmostnav_loggedout navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li class=""><a href="http://www.docker.com/whatisdocker/" title="What is Docker">What is Docker?</a></li>
+      <li class=""><a href="http://www.docker.com/resources/usecases/" title="Use Cases">Use Cases</a></li>
+      <li class=""><a href="http://www.docker.com/tryit/" title="Try It!">Try It!</a></li>
+      <li><a href="https://registry.hub.docker.com" title="Browse">Browse</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <a href="https://hub.docker.com/account/login" class="btn nav-button2" title="Lg In">Log In</a>
+      <a href="https://hub.docker.com/account/signup" class="btn nav-button1" title="Sign Up">Sign Up</a>
+    </div>
+  </div>
+</div>
+<div id="topmostnav" class="topmostnav_loggedin navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li><a href="https://registry.hub.docker.com" title="Browse Repos">Browse Repos</a></li>
+      <li class="active"><a href="http://docs.docker.com" title="Documentation">Documentation</a></li>
+      <li><a href="http://www.docker.com/community/participate/" title="Community">Community</a></li>
+      <li><a href="http://www.docker.com/resources/help/" title="Help">Help</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <ul class="nav user">
+        <li class="dropdown">
+          <a id="logged-in-header-username" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img class="profile" src="" alt="profile picture">
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="https://hub.docker.com/">View Profile</a></li>
+            <li><a href="https://hub.docker.com/account/settings/">Settings</a></li>
+            <li><a href="https://hub.docker.com/repos/">My Repositories</a></li>
+            <li><a href="https://hub.docker.com/plans/billing-info">Billing</a></li>
+            <li><a href="https://hub.docker.com/account/logout/?next=/">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="wrap">
+  <nav id="nav_menu" class="clearfix navbar navbar-default navbar-static-top affix" role="navigation">
+  <div id="docsnav">
+    <ul id="main-nav" class="pull-left">
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/">About</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/">Docker</a>
+          </li>
+        
+          <li >
+            <a href="/release-notes/">Release Notes</a>
+          </li>
+        
+          <li >
+            <a href="/introduction/understanding-docker/">Understanding Docker</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/installation/ubuntulinux/">Installation</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/installation/ubuntulinux/">Ubuntu</a>
+          </li>
+        
+          <li >
+            <a href="/installation/mac/">Mac OS X</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/">Kitematic on OS X</a>
+          </li>
+        
+          <li >
+            <a href="/installation/windows/">Microsoft Windows</a>
+          </li>
+        
+          <li >
+            <a href="/installation/testing-windows-docker-client/">Building and testing the Windows Docker client</a>
+          </li>
+        
+          <li >
+            <a href="/installation/amazon/">Amazon EC2</a>
+          </li>
+        
+          <li >
+            <a href="/installation/archlinux/">Arch Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/binaries/">Binaries</a>
+          </li>
+        
+          <li >
+            <a href="/installation/centos/">CentOS</a>
+          </li>
+        
+          <li >
+            <a href="/installation/cruxlinux/">CRUX Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/debian/">Debian</a>
+          </li>
+        
+          <li >
+            <a href="/installation/fedora/">Fedora</a>
+          </li>
+        
+          <li >
+            <a href="/installation/frugalware/">FrugalWare</a>
+          </li>
+        
+          <li >
+            <a href="/installation/google/">Google Cloud Platform</a>
+          </li>
+        
+          <li >
+            <a href="/installation/gentoolinux/">Gentoo</a>
+          </li>
+        
+          <li >
+            <a href="/installation/softlayer/">IBM Softlayer</a>
+          </li>
+        
+          <li >
+            <a href="/installation/joyent/">Joyent Compute Service</a>
+          </li>
+        
+          <li >
+            <a href="/installation/azure/">Microsoft Azure</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rackspace/">Rackspace Cloud</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rhel/">Red Hat Enterprise Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/oracle/">Oracle Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/SUSE/">SUSE</a>
+          </li>
+        
+          <li >
+            <a href="/compose/install/">Docker Compose</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/userguide/">User Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/userguide/">The Docker User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerhub/">Getting Started with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerizing/">Dockerizing Applications</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/usingdocker/">Working with Containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerimages/">Working with Docker Images</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerlinks/">Linking containers together</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockervolumes/">Managing data in containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/labels-custom-metadata/">Apply custom metadata</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerrepos/">Working with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/compose/">Docker Compose</a>
+          </li>
+        
+          <li >
+            <a href="/compose/production/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Use Compose in production</a>
+          </li>
+        
+          <li >
+            <a href="/compose/extends/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Extend Compose services</a>
+          </li>
+        
+          <li >
+            <a href="/machine/">Docker Machine</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/">Docker Swarm</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/userguide/">Kitematic</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub/">Docker Hub</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub/">Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/accounts/">Accounts</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/userguide/">User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/repos/">Your Repositories</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/builds/">Automated Builds</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/official_repos/">Official Repositories</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left active">
+        
+        <a href="/docker-hub-enterprise/">Docker Hub Enterprise</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub-enterprise/">Overview</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/quick-start/">Quick Start: Basic Workflow</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/userguide/">User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/adminguide/">Admin Guide</a>
+          </li>
+        
+          <li class="active">
+            <a href="/docker-hub-enterprise/install/">&nbsp;&nbsp;Installation</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/configuration/">&nbsp;&nbsp;Configuration options</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/support/">Support</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/release-notes/">Release notes</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/examples/nodejs_web_app/">Examples</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/examples/nodejs_web_app/">Dockerizing a Node.js web application</a>
+          </li>
+        
+          <li >
+            <a href="/examples/mongodb/">Dockerizing MongoDB</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_redis_service/">Dockerizing a Redis service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/postgresql_service/">Dockerizing a PostgreSQL service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_riak_service/">Dockerizing a Riak service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_ssh_service/">Dockerizing an SSH service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/couchdb_data_volumes/">Dockerizing a CouchDB service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/apt-cacher-ng/">Dockerizing an Apt-Cacher-ng service</a>
+          </li>
+        
+          <li >
+            <a href="/compose/django/">Getting started with Compose and Django</a>
+          </li>
+        
+          <li >
+            <a href="/compose/rails/">Getting started with Compose and Rails</a>
+          </li>
+        
+          <li >
+            <a href="/compose/wordpress/">Getting started with Compose and Wordpress</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/minecraft-server/">Kitematic: Minecraft server</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/nginx-web-server/">Kitematic: Ngnix web server</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/rethinkdb-dev-database/">Kitematic: RethinkDB development database</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/articles/basics/">Articles</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/articles/basics/">Docker basics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/networking/">Advanced networking</a>
+          </li>
+        
+          <li >
+            <a href="/articles/security/">Security</a>
+          </li>
+        
+          <li >
+            <a href="/articles/https/">Running Docker with HTTPS</a>
+          </li>
+        
+          <li >
+            <a href="/articles/registry_mirror/">Run a local registry mirror</a>
+          </li>
+        
+          <li >
+            <a href="/articles/host_integration/">Automatically starting containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/baseimages/">Creating a base image</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+          </li>
+        
+          <li >
+            <a href="/articles/certificates/">Using certificates for repository client verification</a>
+          </li>
+        
+          <li >
+            <a href="/articles/using_supervisord/">Using Supervisor</a>
+          </li>
+        
+          <li >
+            <a href="/articles/configuring/">Configuring Docker</a>
+          </li>
+        
+          <li >
+            <a href="/articles/cfengine_process_management/">Process management with CFEngine</a>
+          </li>
+        
+          <li >
+            <a href="/articles/puppet/">Using Puppet</a>
+          </li>
+        
+          <li >
+            <a href="/articles/chef/">Using Chef</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dsc/">Using PowerShell DSC</a>
+          </li>
+        
+          <li >
+            <a href="/articles/ambassador_pattern_linking/">Cross-Host linking using ambassador containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/runmetrics/">Runtime metrics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/b2d_volume_resize/">Increasing a Boot2Docker volume</a>
+          </li>
+        
+          <li >
+            <a href="/articles/systemd/">Controlling and configuring Docker using Systemd</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/reference/commandline/cli/">Reference</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/reference/commandline/cli/">Docker command line</a>
+          </li>
+        
+          <li >
+            <a href="/reference/builder/">Dockerfile</a>
+          </li>
+        
+          <li >
+            <a href="/faq/">FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/reference/run/">Run Reference</a>
+          </li>
+        
+          <li >
+            <a href="/compose/cli/">Compose command line</a>
+          </li>
+        
+          <li >
+            <a href="/compose/yml/">Compose yml</a>
+          </li>
+        
+          <li >
+            <a href="/compose/env/">Compose ENV variables</a>
+          </li>
+        
+          <li >
+            <a href="/compose/completion/">Compose commandline completion</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/discovery/">Swarm discovery</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/strategy/">Swarm strategies</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/filter/">Swarm filters</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/API/">Swarm API</a>
+          </li>
+        
+          <li >
+            <a href="/registry/">Docker Registry 2.0</a>
+          </li>
+        
+          <li >
+            <a href="/registry/deploying/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Deploy a registry</a>
+          </li>
+        
+          <li >
+            <a href="/registry/configuration/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Configure a registry</a>
+          </li>
+        
+          <li >
+            <a href="/registry/storagedrivers/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Storage driver model</a>
+          </li>
+        
+          <li >
+            <a href="/registry/notifications/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Work with notifications</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/api/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Registry Service API v2</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/json/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; JSON format</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/auth/token/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Authenticate via central service</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/hub_registry_spec/">Docker Hub and Registry 1.0</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp;Docker Registry API v1</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api_client_libraries/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp;Docker Registry 1.0 API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker-io_api/">Docker Hub API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api/">Docker Remote API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.18/">Docker Remote API v1.18</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.17/">Docker Remote API v1.17</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.16/">Docker Remote API v1.16</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/remote_api_client_libraries/">Docker Remote API client libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_io_accounts_api/">Docker Hub accounts API</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/faq/">Kitematic: FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/known-issues/">Kitematic: Known issues</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/project/who-written-for/">Contributor</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/project/who-written-for/">README first</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-required/">Get required software for Linux or OS X</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-req-win/">Get required software for Windows</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-git/">Configure Git for contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-dev-env/">Work with a development container</a>
+          </li>
+        
+          <li >
+            <a href="/project/test-and-docs/">Run tests and test documentation</a>
+          </li>
+        
+          <li >
+            <a href="/project/make-a-contribution/">Understand contribution workflow</a>
+          </li>
+        
+          <li >
+            <a href="/project/find-an-issue/">Find an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/work-issue/">Work on an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/create-pr/">Create a pull request</a>
+          </li>
+        
+          <li >
+            <a href="/project/review-pr/">Participate in the PR review</a>
+          </li>
+        
+          <li >
+            <a href="/project/advanced-contributing/">Advanced contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/get-help/">Where to get help</a>
+          </li>
+        
+          <li >
+            <a href="/project/coding-style/">Coding style guide</a>
+          </li>
+        
+          <li >
+            <a href="/project/doc-style/">Documentation style guide</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+    </ul>
+  </div>
+</nav>
+  <div id="content" class="container">
+    <div class="row">
+
+      <div class="span3" id="leftnav">
+        <div id="toc_table">
+          <ul class="nav nav-tabs nav-stacked">
+            
+  
+    <li class=""><a href="#overview">Overview</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#licensing">Licensing</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#prerequisites">Prerequisites</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#installing-the-commercially-supported-docker-engine">Installing the Commercially Supported Docker Engine</a>
+      <ul>
+    
+      <li><a href="#download-the-commercially-supported-docker-engine-installation-script">Download the commercially supported Docker Engine installation script</a></li>
+    
+      <li><a href="#rhel-7071-installation">RHEL 7.0/7.1 installation</a></li>
+    
+      <li><a href="#ubuntu-1404-lts-installation">Ubuntu 14.04 LTS installation</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#upgrading-the-commercially-supported-docker-engine">Upgrading the Commercially Supported Docker Engine</a>
+      <ul>
+    
+      <li><a href="#rhel-7071-upgrade">RHEL 7.0/7.1 upgrade</a></li>
+    
+      <li><a href="#ubuntu-1404-lts-upgrade">Ubuntu 14.04 LTS upgrade</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#installing-docker-hub-enterprise_1">Installing Docker Hub Enterprise</a>
+      <ul>
+    
+      <li><a href="#setting-the-dhe-domain-name">Setting the DHE Domain Name</a></li>
+    
+      <li><a href="#add-your-license">Add your license</a></li>
+    
+      <li><a href="#securing-dhe">Securing DHE</a></li>
+    
+      <li><a href="#using-dhe-to-push-and-pull-images">Using DHE to push and pull images</a></li>
+    
+      <li><a href="#dhe-web-interface-and-registry-authentication">DHE web interface and registry authentication</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#upgrading-docker-hub-enterprise">Upgrading Docker Hub Enterprise</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#next-steps">Next Steps</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+
+          </ul>
+        </div>
+      </div>
+      <div class="span9 content-body">
+
+        
+
+        <h1 id="installing-docker-hub-enterprise">Installing Docker Hub Enterprise</h1>
+<h2 id="overview">Overview</h2>
+<p>This document describes the process of obtaining, installing, and securing
+Docker Hub Enterprise (DHE). DHE is installed from Docker containers. Once
+installed, you will need to select a method of securing it. This doc will
+explain the options you have for security and help you find the resources needed
+to configure it according to your chosen method. More configuration details can
+be found in the <a href="/docker-hub-enterprise/configuration/">DHE Configuration page</a>.</p>
+<p>Specifically, installation requires completion of these steps, in order:</p>
+<ol>
+<li>Acquire a license by purchasing DHE or requesting a trial license.</li>
+<li>Install the commercially supported Docker Engine.</li>
+<li>Install DHE</li>
+<li>Add your license to your DHE instance</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> This initial release of DHE has limited access. To get access,
+you will need an account on <a href="https://hub.docker.com/">Docker Hub</a>. Once you're
+logged in to the Hub with your account, visit the
+<a href="https://registry.hub.docker.com/earlyaccess/">early access registration page</a>
+and follow the steps there to get signed up.</p>
+</blockquote>
+<h2 id="licensing">Licensing</h2>
+<p>In order to run DHE, you will need to acquire a license, either by purchasing
+DHE or requesting a trial license. The license will be associated with your
+Docker Hub account or Docker Hub organization (so if you don't have an account,
+you'll need to set one up, which can be done at the same time as your license
+request). To get your license or start your trial, please contact our
+<a href="mailto:sales@docker.com">sales department</a>. Upon completion of your purchase or
+request, you will receive an email with further instructions for licensing your
+copy of DHE.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>DHE 1.0.1 requires the following:</p>
+<ul>
+<li>Commercially supported Docker Engine 1.6.1 or later running on an
+Ubuntu 14.04 LTS, RHEL 7.1 or RHEL 7.0 host. (See below for instructions on how
+to install the commercially supported Docker Engine.)</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> In order to remain in compliance with your DHE support agreement,
+you must use the current version of commercially supported Docker Engine.
+Running the regular, open source version of Engine is <strong>not</strong> supported.</p>
+</blockquote>
+<ul>
+<li>
+<p>Your Docker daemon needs to be listening to the Unix socket (the default) so
+that it can be bind-mounted into the DHE management containers, allowing
+DHE to manage itself and its updates. For this reason, your DHE host will also
+need internet connectivity so it can access the updates.</p>
+</li>
+<li>
+<p>Your host also needs to have TCP ports <code>80</code> and <code>443</code> available for the DHE
+container port mapping.</p>
+</li>
+<li>
+<p>You will also need the Docker Hub user-name and password used when obtaining
+the DHE license (or the user-name of an administrator of the Hub organization
+that obtained an Enterprise license).</p>
+</li>
+</ul>
+<h2 id="installing-the-commercially-supported-docker-engine">Installing the Commercially Supported Docker Engine</h2>
+<p>Since DHE is installed using Docker, the commercially supported Docker Engine
+must be installed first. This is done with an RPM or DEB repository, which you
+set up using a Bash script downloaded from the <a href="https://hub.docker.com">Docker Hub</a>.</p>
+<h3 id="download-the-commercially-supported-docker-engine-installation-script">Download the commercially supported Docker Engine installation script</h3>
+<p>To download the commercially supported Docker Engine Bash installation script,
+log in to the <a href="https://hub.docker.com">Docker Hub</a> with the user-name used to
+obtain your license . Once you're logged in, go to the
+<a href="https://registry.hub.docker.com/account/licenses/">"Enterprise Licenses"</a> page
+in your Hub account's "Settings" section.</p>
+<p>Select your intended host operating system from the "Download CS Engine" drop-
+down at the top right of the page and then, once the Bash setup script is
+downloaded, follow the steps below appropriate for your chosen OS.</p>
+<p><img alt="Docker Hub Docker engine install dropdown" src="../assets/docker-hub-org-enterprise-license-CSDE-dropdown.png" /></p>
+<h3 id="rhel-7071-installation">RHEL 7.0/7.1 installation</h3>
+<p>First, copy the downloaded Bash setup script to your RHEL host. Next, run the
+following to install commercially supported Docker Engine and its dependencies,
+and then start the Docker daemon:</p>
+<pre class="prettyprint well"><code>$ sudo yum update &amp;&amp; sudo yum upgrade
+$ chmod 755 docker-cs-engine-rpm.sh
+$ sudo ./docker-cs-engine-rpm.sh
+$ sudo yum install docker-engine-cs
+$ sudo systemctl enable docker.service
+$ sudo systemctl start docker.service
+</code></pre>
+
+<p>In order to simplify using Docker, you can get non-sudo access to the Docker
+socket by adding your user to the <code>docker</code> group, then logging out and back in
+again:</p>
+<pre class="prettyprint well"><code>$ sudo usermod -a -G docker $USER
+$ exit
+</code></pre>
+
+<blockquote>
+<p><strong>Note</strong>: you may need to reboot your server to update its RHEL kernel.</p>
+</blockquote>
+<h3 id="ubuntu-1404-lts-installation">Ubuntu 14.04 LTS installation</h3>
+<p>First, copy the downloaded Bash setup script to your Ubuntu host. Next, run the
+following to install commercially supported Docker Engine and its dependencies:</p>
+<pre class="prettyprint well"><code>$ sudo apt-get update &amp;&amp; sudo apt-get upgrade
+$ sudo apt-get install -y linux-image-extra-virtual
+$ sudo reboot
+$ chmod 755 docker-cs-engine-deb.sh
+$ sudo ./docker-cs-engine-deb.sh
+$ sudo apt-get install docker-engine-cs
+</code></pre>
+
+<p>Lastly, confirm Docker is running with <code>sudo service docker start</code>.</p>
+<p>In order to simplify using Docker, you can get non-sudo access to the Docker
+socket by adding your user to the <code>docker</code> group, then logging out and back in
+again:</p>
+<pre class="prettyprint well"><code>$ sudo usermod -a -G docker $USER
+$ exit
+</code></pre>
+
+<blockquote>
+<p><strong>Note</strong>: you may need to reboot your server to update its LTS kernel.</p>
+</blockquote>
+<h2 id="upgrading-the-commercially-supported-docker-engine">Upgrading the Commercially Supported Docker Engine</h2>
+<p>CS Docker Engine 1.6.1 contains fixes to security vulnerabilities,
+  and customers should upgrade to it immediately.</p>
+<blockquote>
+<p><strong>Note</strong>: If you have CS Docker Engine 1.6.0 installed, it must be upgraded;
+  however, due to compatibility issues, <a href="#upgrading-docker-hub-enterprise">DHE must be upgraded</a>
+  first.</p>
+</blockquote>
+<p>The CS Docker Engine installation script set up the RHEL/Ubuntu package repositories,
+so upgrading the Engine only requires you to run the update commands on your server.</p>
+<h3 id="rhel-7071-upgrade">RHEL 7.0/7.1 upgrade</h3>
+<p>The following commands will stop the running DHE, upgrade CS Docker Engine,
+and then start DHE again:</p>
+<pre class="prettyprint well"><code>    $ sudo bash -c &quot;$(sudo docker run dockerhubenterprise/manager stop)&quot;
+    $ sudo yum update
+    $ sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart docker
+    $ sudo bash -c &quot;$(sudo docker run dockerhubenterprise/manager start)&quot;
+</code></pre>
+
+<h3 id="ubuntu-1404-lts-upgrade">Ubuntu 14.04 LTS upgrade</h3>
+<p>The following commands will stop the running DHE, upgrade CS Docker Engine,
+and then start DHE again:</p>
+<pre class="prettyprint well"><code>    $ sudo bash -c &quot;$(sudo docker run dockerhubenterprise/manager stop)&quot;
+    $ sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade docker-engine-cs
+    $ sudo bash -c &quot;$(sudo docker run dockerhubenterprise/manager start)&quot;
+</code></pre>
+
+<h2 id="installing-docker-hub-enterprise_1">Installing Docker Hub Enterprise</h2>
+<p>Once the commercially supported Docker Engine is installed, you can install DHE
+itself. DHE is a self-installing application built and distributed using Docker
+and the <a href="https://registry.hub.docker.com/">Docker Hub</a>. It is able to restart
+and reconfigure itself using the Docker socket that is bind-mounted to its
+container.</p>
+<p>Start installing DHE by running the "dockerhubenterprise/manager" container:</p>
+<pre class="prettyprint well"><code>    $ sudo bash -c &quot;$(sudo docker run dockerhubenterprise/manager install)&quot;
+</code></pre>
+
+<blockquote>
+<p><strong>Note</strong>: <code>sudo</code> is needed for <code>dockerhubenterprise/manager</code> commands to
+ensure that the Bash script is run with full access to the Docker host.</p>
+</blockquote>
+<p>You can also find this command on the "Enterprise Licenses" section of your Hub
+user profile. The command will execute a shell script that creates the needed
+directories and then runs Docker to pull DHE's images and run its containers.</p>
+<p>Depending on your internet connection, this process may take several minutes to
+complete.</p>
+<p>A successful installation will pull a large number of Docker images and should
+display output similar to:</p>
+<pre class="prettyprint well"><code>$ sudo bash -c &quot;$(sudo docker run dockerhubenterprise/manager install)&quot;
+Unable to find image 'dockerhubenterprise/manager:latest' locally
+Pulling repository dockerhubenterprise/manager
+c46d58daad7d: Pulling image (latest) from dockerhubenterprise/manager
+c46d58daad7d: Pulling image (latest) from dockerhubenterprise/manager
+c46d58daad7d: Pulling dependent layers
+511136ea3c5a: Download complete
+fa4fd76b09ce: Pulling metadata
+fa4fd76b09ce: Pulling fs layer
+ff2996b1faed: Download complete
+...
+fd7612809d57: Pulling metadata
+fd7612809d57: Pulling fs layer
+fd7612809d57: Download complete
+c46d58daad7d: Pulling metadata
+c46d58daad7d: Pulling fs layer
+c46d58daad7d: Download complete
+c46d58daad7d: Download complete
+Status: Downloaded newer image for dockerhubenterprise/manager:latest
+Unable to find image 'dockerhubenterprise/manager:1.0.0_8ce62a61e058' locally
+Pulling repository dockerhubenterprise/manager
+c46d58daad7d: Download complete
+511136ea3c5a: Download complete
+fa4fd76b09ce: Download complete
+1c8294cc5160: Download complete
+117ee323aaa9: Download complete
+2d24f826cb16: Download complete
+33bfc1956932: Download complete
+48f0dd6c9414: Download complete
+65c30f72ecb2: Download complete
+d4b29764d0d3: Download complete
+5654f4fe5384: Download complete
+9b9faa6ecd11: Download complete
+0c275f56ca5c: Download complete
+ff2996b1faed: Download complete
+fd7612809d57: Download complete
+Status: Image is up to date for dockerhubenterprise/manager:1.0.0_8ce62a61e058
+INFO  [1.0.0_8ce62a61e058] Attempting to connect to docker engine dockerHost=&quot;unix:///var/run/docker.sock&quot;
+INFO  [1.0.0_8ce62a61e058] Running install command
+&lt;...output truncated...&gt;
+Creating container docker_hub_enterprise_load_balancer with docker daemon unix:///var/run/docker.sock
+Starting container docker_hub_enterprise_load_balancer with docker daemon unix:///var/run/docker.sock
+Bringing up docker_hub_enterprise_log_aggregator.
+Creating container docker_hub_enterprise_log_aggregator with docker daemon unix:///var/run/docker.sock
+Starting container docker_hub_enterprise_log_aggregator with docker daemon unix:///var/run/docker.sock
+$ docker ps
+CONTAINER ID        IMAGE                                                   COMMAND                CREATED             STATUS         PORTS                                      NAMES
+0168f37b6221        dockerhubenterprise/log-aggregator:1.0.0_8ce62a61e058   &quot;log-aggregator&quot;       4 seconds ago       Up 4 seconds                                              docker_hub_enterprise_log_aggregator
+b51c73bebe8b        dockerhubenterprise/nginx:1.0.0_8ce62a61e058            &quot;nginxWatcher&quot;         4 seconds ago       Up 4 seconds   0.0.0.0:80-&gt;80/tcp, 0.0.0.0:443-&gt;443/tcp   docker_hub_enterprise_load_balancer
+e8327864356b        dockerhubenterprise/admin-server:1.0.0_8ce62a61e058     &quot;server&quot;               5 seconds ago       Up 5 seconds   80/tcp                                     docker_hub_enterprise_admin_server
+52885a6e830a        dockerhubenterprise/auth_server:alpha-a5a2af8a555e      &quot;garant --authorizat   6 seconds ago       Up 5 seconds   8080/tcp
+</code></pre>
+
+<p>Once this process completes, you should be able to manage and configure your DHE
+instance by pointing your browser to <code>https://&lt;host-ip&gt;/</code>.</p>
+<p>Your browser will warn you that this is an unsafe site, with a self-signed,
+untrusted certificate. This is normal and expected; allow this connection
+temporarily.</p>
+<h3 id="setting-the-dhe-domain-name">Setting the DHE Domain Name</h3>
+<p>The DHE Administrator site will also warn that the "Domain Name" is not set. Go
+to the "Settings" tab, and set the "Domain Name" to the full host-name of your
+DHE server.
+Hitting the "Save and Restart DHE Server" button will generate a new certificate, which will be used
+by both the DHE Administrator web interface and the DHE Registry server.</p>
+<p>After the server restarts, you will again need to allow the connection to the untrusted DHE web admin site.</p>
+<p><img alt="http settings page&lt;/admin/settings#http&gt;" src="../assets/admin-settings-http-unlicensed.png" /></p>
+<p>Lastly, you will see a warning notifying you that this instance of DHE is
+unlicensed. You'll correct this in the next step.</p>
+<h3 id="add-your-license">Add your license</h3>
+<p>The DHE registry services will not start until you add your license.
+To do that, you'll first download your license from the Docker Hub and then
+upload it to your DHE web admin server. Follow these steps:</p>
+<ol>
+<li>
+<p>If needed, log back into the <a href="https://hub.docker.com">Docker Hub</a>
+   using the user-name you used when obtaining your license. Go to "Settings" (in
+   the menu under your user-name, top right) to get to your account settings, and
+   then click on "Enterprise Licenses" in the side bar at left.</p>
+</li>
+<li>
+<p>You'll see a list of available licenses. Click on the download button to
+   obtain the license file you'd like to use.
+   <img alt="Download DHE license" src="../assets/docker-hub-org-enterprise-license.png" /></p>
+</li>
+<li>
+<p>Next, go to your DHE instance in your browser and click on the Settings tab
+   and then the "License" tab. Click on the "Upload license file" button, which
+   will open a standard file browser. Locate and select the license file you
+   downloaded in step 2, above. Approve the selection to close the dialog.
+   <img alt="http settings page&lt;/admin/settings#license&gt;" src="../assets/admin-settings-license.png" /></p>
+</li>
+<li>
+<p>Click the "Save and Restart DHE" button, which will quit DHE and then restart it, registering
+   the new license.</p>
+</li>
+<li>
+<p>Verify the acceptance of the license by confirming that the "unlicensed copy"
+warning is no longer present.</p>
+</li>
+</ol>
+<h3 id="securing-dhe">Securing DHE</h3>
+<p>Securing DHE is <strong>required</strong>. You will not be able to push or pull from DHE until you secure it.</p>
+<p>There are several options and methods for securing DHE. For more information,
+see the <a href="/docker-hub-enterprise/configuration/#security">configuration documentation</a></p>
+<h3 id="using-dhe-to-push-and-pull-images">Using DHE to push and pull images</h3>
+<p>Now that you have DHE configured with a "Domain Name" and have your client
+Docker daemons configured with the required security settings, you can test your
+setup by following the instructions for
+<a href="/docker-hub-enterprise/userguide/#using-dhe-to-push-and-pull-images">Using DHE to Push and pull images</a>.</p>
+<h3 id="dhe-web-interface-and-registry-authentication">DHE web interface and registry authentication</h3>
+<p>By default, there is no authentication set on either the DHE web admin
+interface or the DHE registry. You can restrict access using an in-DHE
+configured set of users (and passwords), or you can configure DHE to use LDAP-
+based authentication.</p>
+<p>See <a href="/docker-hub-enterprise/configuration/#authentication">DHE Authentication settings</a> for more
+details.</p>
+<h2 id="upgrading-docker-hub-enterprise">Upgrading Docker Hub Enterprise</h2>
+<p>DHE has been designed to allow on-the-fly software upgrades. Start by
+clicking on the "System Health" tab. In the upper, right-hand side of the
+dashboard, below the navigation bar, you'll see the currently installed version
+(e.g., <code>Current Version: 0.1.12345</code>).</p>
+<p>If your DHE instance is the latest available, you will also see the message:
+"System Up to Date."</p>
+<p>If there is an upgrade available, you will see the message "System Update
+Available!" alongside a button labeled "Update to Version X.XX". To upgrade, DHE
+will pull new DHE container images from the Docker Hub. If you have not already
+connected to Docker Hub, DHE will prompt you to log in.</p>
+<p>The upgrade process requires a small amount of downtime to complete. To complete
+the upgrade, DHE will:
+<em> Connect to the Docker Hub to pull new container images with the new version of
+DHE.
+</em> Deploy those containers
+<em> Shut down the old containers
+</em> Resolve any necessary links/urls.</p>
+<p>Assuming you have a decent internet connection, the entire upgrade process
+should complete within a few minutes.</p>
+<p>You should now <a href="#upgrading-the-commercially-supported-docker-engine">upgrade CS Docker Engine</a>.</p>
+<blockquote>
+<p><strong>Note</strong>: If Docker engine is upgraded first (DHE 1.0.0 on CS Docker Engine 1.6.1),
+DHE can still be upgraded from the command line by running:</p>
+<p><code>sudo bash -c "$(sudo docker run dockerhubenterprise/manager:1.0.0 upgrade 1.0.1)"</code></p>
+</blockquote>
+<h2 id="next-steps">Next Steps</h2>
+<p>For information on configuring DHE for your environment, take a look at the
+<a href="/docker-hub-enterprise/configuration/">Configuration instructions</a>.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="push-footer"></div>
+
+</div>
+
+
+
+<div id="footer-container" class="container">
+  <div id="footer" class="grey-body">
+    <div class="row">
+      <div class="span2">
+        <span class="footer-title">Community</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/community/events/">Events</a></li>
+          <li><a class="primary-button" href="http://posts.docker.com">Friends' Posts</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/meetups/">Meetups</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/governance/">Governance</a></li>
+          <li><a class="primary-button" href="http://forums.docker.com">Forums</a></li>
+          <li><a class="primary-button" href="http://botbot.me/freenode/docker">IRC</a></li>
+          <li><a class="primary-button" href="https://github.com/docker/docker">GitHub</a></li>
+          <li><a class="primary-button" href="http://stackoverflow.com/search?q=docker">Stackoverflow</a></li>
+          <li><a class="primary-button" href="http://www.cafepress.com/docker">Swag</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Enterprise</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/support/">Support</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/education/">Education</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/services/">Services</a></li>
+        </ul>
+        <span class="footer-title">Partner Solutions</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/partners/find/">Find a Partner</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/program/">Partner Program</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/learn/">Learn More</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Resources</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://docs.docker.com">Documentation</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/help/">Help</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/usecases/">Use Cases</a></li>
+          <li><a class="primary-button" href="http://www.docker.com/tryit/">Online Tutorial</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/howtobuy/">How To Buy</a></li>
+          <li><a class="primary-button" href="http://status.docker.com">Status</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/security/">Security</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Company</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/company/aboutus/">About Us</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/team/">Team</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/news/">News</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/press/">Press</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/careers/">Careers</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <span class="footer-title">Connect</span>
+        <div class="search">
+          <span>Subscribe to our newsletter</span>
+          <form action="https://www.docker.com/subscribe_newsletter/" method="post">
+            <input type='hidden' name='csrfmiddlewaretoken' value='aWL78QXQkY8DSKNYh6cl08p5eTLl7sOa' />
+            <tr><th><label for="id_email">Email:</label></th><td><input class="form-control" id="id_email" name="email" placeholder="Enter your email" type="text" /></td></tr>
+            
+            <button type="submit"><i class="icon-arrow-right"></i> </button>
+          </form>
+        </div>
+        <ul class="unstyled social">
+          <li><a title="Docker on Twitter" class="primary-button blog" href="http://blog.docker.com">Blog</a></li>
+          <li><a title="Docker on Twitter" class="primary-button twitter" href="http://twitter.com/docker">Twitter</a></li>
+          <li><a title="Docker on Google+" class="primary-button googleplus" href="https://plus.google.com/u/0/communities/108146856671494713993">Google+</a></li>
+          <li><a title="Docker on Facebook" class="primary-button facebook" href="https://www.facebook.com/docker.run">Facebook</a></li>
+          <li><a title="Docker on Youtube" class="primary-button youtube" href="http://www.youtube.com/user/dockerrun">YouTube</a></li>
+        </ul>
+        <ul class="unstyled social">
+          <li><a title="Docker on SlideShare" class="primary-button slideshare" href="http://www.slideshare.net/Docker">Slideshare</a></li>
+          <li>
+             <a title="Docker on LinkedIn" class="primary-button" href="https://www.linkedin.com/company/docker">
+                 <span class="linkedin"></span>
+                 LinkedIn
+             </a>
+          </li>
+          <li>
+              <a title="Docker on GitHub" class="primary-button" href="https://github.com/docker/">
+                  <span class="github"></span>
+                  GitHub
+              </a>
+          </li>
+          <li>
+              <a title="Docker on Reddit" class="primary-button" href="http://www.reddit.com/r/docker">
+                  <span class="reddit"></span>
+                  Reddit
+              </a>
+          </li>
+          <li>
+              <a title="Docker on AngelList" class="primary-button" href="https://angel.co/docker-inc-1">
+                  <span class="angellist"></span>
+                  AngelList
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="span6 pagination-right copyright">
+        <span>&copy; 2014-2015 Docker, Inc.</span>
+      </div>
+      <div class="span6 pagination-left copyright">
+        <a href="http://www.docker.com/legal/terms_of_service">Terms</a> &middot;
+        <a href="http://www.docker.com/legal/privacy_policy">Privacy</a> &middot;
+        <a href="http://www.docker.com/legal/trademark_guidelines">Trademarks</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.cookie.js" ></script>
+<script src="/js/jquery-scrolltofixed-min.js"></script>
+<script src="/js/bootstrap-3.0.3.min.js"></script>
+<script src="/js/prettify-1.0.min.js"></script>
+<script src="/js/dockerfile_tutorial.js"></script>
+<script src="/js/dockerfile_tutorial_level.js"></script>
+<script src="/js/base.js"></script>
+<script src="/tipuesearch/tipuesearch_set.js"></script>
+<script src="/tipuesearch/tipuesearch.min.js"></script>
+<script type="text/javascript">
+piAId = '45082';
+piCId = '1482';
+
+(function() {
+  function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+  }
+  if(window.attachEvent) { window.attachEvent('onload', async_load); }
+  else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').css("min-height", $(window).height() - 553 );
+    // if the URL contains a version string, update the version picker to reflect that
+    version = document.location.pathname.match(/^\/(v\d\.\d)\/.*/)
+    if (version && version[1]) {
+        $('#document-version-number')[0].text = 'Version '+version[1];
+    } else {
+        $('#document-version-number')[0].text = $('#document-version-number')[0].text + " (Latest)"
+    }
+    // load the complete versions list
+    $.get("/versions.html_fragment", function( data ) {
+    	$('#documentation-version-list').prepend(data);
+	//remove any "/v1.1/" bits from front, so we can add the path to the version selection dropdown.
+	path = document.location.pathname.replace(/^\/v\d\.\d/, "");
+	$('#documentation-version-list a.version').each(function(i, e) {
+		e.href = e.href+path;
+		$(e).removeClass()
+	});
+    });
+
+  })
+  var userName = getCookie('docker_sso_username');
+  if (userName) {
+    $('.topmostnav_loggedout').hide();
+    $('.topmostnav_loggedin').show();
+    $('#logged-in-header-username').text(userName);
+  } else {
+    $('.topmostnav_loggedout').show();
+    $('.topmostnav_loggedin').hide();
+  }
+</script>
+</body>
+</html>

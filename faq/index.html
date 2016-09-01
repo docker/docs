@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="docker_version" content="1.6.1">
+  <meta name="docker_git_branch" content="master">
+  <meta name="docker_git_commit" content="59cd467">
+  <meta name="docker_build_date" content="Fri Jun  5 11:40:50 UTC 2015">
+
+  
+  <meta name="keywords" content="faq, questions, documentation, docker">
+  
+  <link rel="canonical" href="/faq/">
+  <link href="/css/bootstrap-custom.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/prettify-1.0.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/dockerfile_tutorial.css">
+  <link href="/tipuesearch
+/tipuesearch.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <title>FAQ - Docker Documentation</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-6096819-11', 'docker.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash,
+  });
+  </script>
+  
+</head>
+<body>
+
+<div id="topmostnav" class="topmostnav_loggedout navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li class=""><a href="http://www.docker.com/whatisdocker/" title="What is Docker">What is Docker?</a></li>
+      <li class=""><a href="http://www.docker.com/resources/usecases/" title="Use Cases">Use Cases</a></li>
+      <li class=""><a href="http://www.docker.com/tryit/" title="Try It!">Try It!</a></li>
+      <li><a href="https://registry.hub.docker.com" title="Browse">Browse</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <a href="https://hub.docker.com/account/login" class="btn nav-button2" title="Lg In">Log In</a>
+      <a href="https://hub.docker.com/account/signup" class="btn nav-button1" title="Sign Up">Sign Up</a>
+    </div>
+  </div>
+</div>
+<div id="topmostnav" class="topmostnav_loggedin navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li><a href="https://registry.hub.docker.com" title="Browse Repos">Browse Repos</a></li>
+      <li class="active"><a href="http://docs.docker.com" title="Documentation">Documentation</a></li>
+      <li><a href="http://www.docker.com/community/participate/" title="Community">Community</a></li>
+      <li><a href="http://www.docker.com/resources/help/" title="Help">Help</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <ul class="nav user">
+        <li class="dropdown">
+          <a id="logged-in-header-username" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img class="profile" src="" alt="profile picture">
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="https://hub.docker.com/">View Profile</a></li>
+            <li><a href="https://hub.docker.com/account/settings/">Settings</a></li>
+            <li><a href="https://hub.docker.com/repos/">My Repositories</a></li>
+            <li><a href="https://hub.docker.com/plans/billing-info">Billing</a></li>
+            <li><a href="https://hub.docker.com/account/logout/?next=/">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="wrap">
+  <nav id="nav_menu" class="clearfix navbar navbar-default navbar-static-top affix" role="navigation">
+  <div id="docsnav">
+    <ul id="main-nav" class="pull-left">
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/">About</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/">Docker</a>
+          </li>
+        
+          <li >
+            <a href="/release-notes/">Release Notes</a>
+          </li>
+        
+          <li >
+            <a href="/introduction/understanding-docker/">Understanding Docker</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/installation/ubuntulinux/">Installation</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/installation/ubuntulinux/">Ubuntu</a>
+          </li>
+        
+          <li >
+            <a href="/installation/mac/">Mac OS X</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/">Kitematic on OS X</a>
+          </li>
+        
+          <li >
+            <a href="/installation/windows/">Microsoft Windows</a>
+          </li>
+        
+          <li >
+            <a href="/installation/testing-windows-docker-client/">Building and testing the Windows Docker client</a>
+          </li>
+        
+          <li >
+            <a href="/installation/amazon/">Amazon EC2</a>
+          </li>
+        
+          <li >
+            <a href="/installation/archlinux/">Arch Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/binaries/">Binaries</a>
+          </li>
+        
+          <li >
+            <a href="/installation/centos/">CentOS</a>
+          </li>
+        
+          <li >
+            <a href="/installation/cruxlinux/">CRUX Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/debian/">Debian</a>
+          </li>
+        
+          <li >
+            <a href="/installation/fedora/">Fedora</a>
+          </li>
+        
+          <li >
+            <a href="/installation/frugalware/">FrugalWare</a>
+          </li>
+        
+          <li >
+            <a href="/installation/google/">Google Cloud Platform</a>
+          </li>
+        
+          <li >
+            <a href="/installation/gentoolinux/">Gentoo</a>
+          </li>
+        
+          <li >
+            <a href="/installation/softlayer/">IBM Softlayer</a>
+          </li>
+        
+          <li >
+            <a href="/installation/joyent/">Joyent Compute Service</a>
+          </li>
+        
+          <li >
+            <a href="/installation/azure/">Microsoft Azure</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rackspace/">Rackspace Cloud</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rhel/">Red Hat Enterprise Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/oracle/">Oracle Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/SUSE/">SUSE</a>
+          </li>
+        
+          <li >
+            <a href="/compose/install/">Docker Compose</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/userguide/">User Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/userguide/">The Docker User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerhub/">Getting Started with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerizing/">Dockerizing Applications</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/usingdocker/">Working with Containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerimages/">Working with Docker Images</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerlinks/">Linking containers together</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockervolumes/">Managing data in containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/labels-custom-metadata/">Apply custom metadata</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerrepos/">Working with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/compose/">Docker Compose</a>
+          </li>
+        
+          <li >
+            <a href="/compose/production/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Use Compose in production</a>
+          </li>
+        
+          <li >
+            <a href="/compose/extends/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Extend Compose services</a>
+          </li>
+        
+          <li >
+            <a href="/machine/">Docker Machine</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/">Docker Swarm</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/userguide/">Kitematic</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub/">Docker Hub</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub/">Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/accounts/">Accounts</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/userguide/">User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/repos/">Your Repositories</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/builds/">Automated Builds</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/official_repos/">Official Repositories</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub-enterprise/">Docker Hub Enterprise</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub-enterprise/">Overview</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/quick-start/">Quick Start: Basic Workflow</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/userguide/">User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/adminguide/">Admin Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/install/">&nbsp;&nbsp;Installation</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/configuration/">&nbsp;&nbsp;Configuration options</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/support/">Support</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/release-notes/">Release notes</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/examples/nodejs_web_app/">Examples</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/examples/nodejs_web_app/">Dockerizing a Node.js web application</a>
+          </li>
+        
+          <li >
+            <a href="/examples/mongodb/">Dockerizing MongoDB</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_redis_service/">Dockerizing a Redis service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/postgresql_service/">Dockerizing a PostgreSQL service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_riak_service/">Dockerizing a Riak service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_ssh_service/">Dockerizing an SSH service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/couchdb_data_volumes/">Dockerizing a CouchDB service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/apt-cacher-ng/">Dockerizing an Apt-Cacher-ng service</a>
+          </li>
+        
+          <li >
+            <a href="/compose/django/">Getting started with Compose and Django</a>
+          </li>
+        
+          <li >
+            <a href="/compose/rails/">Getting started with Compose and Rails</a>
+          </li>
+        
+          <li >
+            <a href="/compose/wordpress/">Getting started with Compose and Wordpress</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/minecraft-server/">Kitematic: Minecraft server</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/nginx-web-server/">Kitematic: Ngnix web server</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/rethinkdb-dev-database/">Kitematic: RethinkDB development database</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/articles/basics/">Articles</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/articles/basics/">Docker basics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/networking/">Advanced networking</a>
+          </li>
+        
+          <li >
+            <a href="/articles/security/">Security</a>
+          </li>
+        
+          <li >
+            <a href="/articles/https/">Running Docker with HTTPS</a>
+          </li>
+        
+          <li >
+            <a href="/articles/registry_mirror/">Run a local registry mirror</a>
+          </li>
+        
+          <li >
+            <a href="/articles/host_integration/">Automatically starting containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/baseimages/">Creating a base image</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+          </li>
+        
+          <li >
+            <a href="/articles/certificates/">Using certificates for repository client verification</a>
+          </li>
+        
+          <li >
+            <a href="/articles/using_supervisord/">Using Supervisor</a>
+          </li>
+        
+          <li >
+            <a href="/articles/configuring/">Configuring Docker</a>
+          </li>
+        
+          <li >
+            <a href="/articles/cfengine_process_management/">Process management with CFEngine</a>
+          </li>
+        
+          <li >
+            <a href="/articles/puppet/">Using Puppet</a>
+          </li>
+        
+          <li >
+            <a href="/articles/chef/">Using Chef</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dsc/">Using PowerShell DSC</a>
+          </li>
+        
+          <li >
+            <a href="/articles/ambassador_pattern_linking/">Cross-Host linking using ambassador containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/runmetrics/">Runtime metrics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/b2d_volume_resize/">Increasing a Boot2Docker volume</a>
+          </li>
+        
+          <li >
+            <a href="/articles/systemd/">Controlling and configuring Docker using Systemd</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left active">
+        
+        <a href="/reference/commandline/cli/">Reference</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/reference/commandline/cli/">Docker command line</a>
+          </li>
+        
+          <li >
+            <a href="/reference/builder/">Dockerfile</a>
+          </li>
+        
+          <li class="active">
+            <a href="/faq/">FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/reference/run/">Run Reference</a>
+          </li>
+        
+          <li >
+            <a href="/compose/cli/">Compose command line</a>
+          </li>
+        
+          <li >
+            <a href="/compose/yml/">Compose yml</a>
+          </li>
+        
+          <li >
+            <a href="/compose/env/">Compose ENV variables</a>
+          </li>
+        
+          <li >
+            <a href="/compose/completion/">Compose commandline completion</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/discovery/">Swarm discovery</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/strategy/">Swarm strategies</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/filter/">Swarm filters</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/API/">Swarm API</a>
+          </li>
+        
+          <li >
+            <a href="/registry/">Docker Registry 2.0</a>
+          </li>
+        
+          <li >
+            <a href="/registry/deploying/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Deploy a registry</a>
+          </li>
+        
+          <li >
+            <a href="/registry/configuration/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Configure a registry</a>
+          </li>
+        
+          <li >
+            <a href="/registry/storagedrivers/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Storage driver model</a>
+          </li>
+        
+          <li >
+            <a href="/registry/notifications/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Work with notifications</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/api/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Registry Service API v2</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/json/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; JSON format</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/auth/token/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Authenticate via central service</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/hub_registry_spec/">Docker Hub and Registry 1.0</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp;Docker Registry API v1</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api_client_libraries/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp;Docker Registry 1.0 API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker-io_api/">Docker Hub API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api/">Docker Remote API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.18/">Docker Remote API v1.18</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.17/">Docker Remote API v1.17</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.16/">Docker Remote API v1.16</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/remote_api_client_libraries/">Docker Remote API client libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_io_accounts_api/">Docker Hub accounts API</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/faq/">Kitematic: FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/known-issues/">Kitematic: Known issues</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/project/who-written-for/">Contributor</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/project/who-written-for/">README first</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-required/">Get required software for Linux or OS X</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-req-win/">Get required software for Windows</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-git/">Configure Git for contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-dev-env/">Work with a development container</a>
+          </li>
+        
+          <li >
+            <a href="/project/test-and-docs/">Run tests and test documentation</a>
+          </li>
+        
+          <li >
+            <a href="/project/make-a-contribution/">Understand contribution workflow</a>
+          </li>
+        
+          <li >
+            <a href="/project/find-an-issue/">Find an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/work-issue/">Work on an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/create-pr/">Create a pull request</a>
+          </li>
+        
+          <li >
+            <a href="/project/review-pr/">Participate in the PR review</a>
+          </li>
+        
+          <li >
+            <a href="/project/advanced-contributing/">Advanced contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/get-help/">Where to get help</a>
+          </li>
+        
+          <li >
+            <a href="/project/coding-style/">Coding style guide</a>
+          </li>
+        
+          <li >
+            <a href="/project/doc-style/">Documentation style guide</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+    </ul>
+  </div>
+</nav>
+  <div id="content" class="container">
+    <div class="row">
+
+      <div class="span3" id="leftnav">
+        <div id="toc_table">
+          <ul class="nav nav-tabs nav-stacked">
+            
+  
+    <li class=""><a href="#how-much-does-docker-cost">How much does Docker cost?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#what-open-source-license-are-you-using">What open source license are you using?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#does-docker-run-on-mac-os-x-or-windows">Does Docker run on Mac OS X or Windows?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#how-do-containers-compare-to-virtual-machines">How do containers compare to virtual machines?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#what-does-docker-add-to-just-plain-lxc">What does Docker add to just plain LXC?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#what-is-different-between-a-docker-container-and-a-vm">What is different between a Docker container and a VM?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#do-i-lose-my-data-when-the-container-exits">Do I lose my data when the container exits?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#how-far-do-docker-containers-scale">How far do Docker containers scale?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#how-do-i-connect-docker-containers">How do I connect Docker containers?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#how-do-i-run-more-than-one-process-in-a-docker-container">How do I run more than one process in a Docker container?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#what-platforms-does-docker-run-on">What platforms does Docker run on?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#how-do-i-report-a-security-issue-with-docker">How do I report a security issue with Docker?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#why-do-i-need-to-sign-my-commits-to-docker-with-the-dco">Why do I need to sign my commits to Docker with the DCO?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#when-building-an-image-should-i-prefer-system-libraries-or-bundled-ones">When building an image, should I prefer system libraries or bundled ones?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#why-is-debian_frontendnoninteractive-discouraged-in-dockerfiles">Why is DEBIAN_FRONTEND=noninteractive discouraged in Dockerfiles?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#why-do-i-get-connection-reset-by-peer-when-making-a-request-to-a-service-running-in-a-container">Why do I get Connection reset by peer when making a request to a service running in a container?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#where-can-i-find-more-answers">Where can I find more answers?</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+
+          </ul>
+        </div>
+      </div>
+      <div class="span9 content-body">
+
+        
+
+        <div id="versionnav" class="span3 pull-right">
+          <ul class="nav version pull-right">
+            <li class="dropdown">
+              <a id="document-version-number" class="dropdown-toggle" data-toggle="dropdown" href="#">
+		      Version v1.6
+              </a>
+              <ul id="documentation-version-list" class="dropdown-menu pull-right">
+
+		<li role="presentation" class="divider"></li>
+		<li> <a class="home-link3 tertiary-nav" href="https://github.com/docker/docker/blob/master/docs/sources/faq.md" >Edit on GitHub</a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <h1 id="frequently-asked-questions-faq">Frequently Asked Questions (FAQ)</h1>
+<p>If you don't see your question here, feel free to submit new ones to
+<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#100;&#111;&#99;&#115;&#64;&#100;&#111;&#99;&#107;&#101;&#114;&#46;&#99;&#111;&#109;">&#100;&#111;&#99;&#115;&#64;&#100;&#111;&#99;&#107;&#101;&#114;&#46;&#99;&#111;&#109;</a>.  Or, you can fork <a href="https://github.com/docker/docker">the
+repo</a> and contribute them yourself by editing
+the documentation sources.</p>
+<h3 id="how-much-does-docker-cost">How much does Docker cost?</h3>
+<p>Docker is 100% free. It is open source, so you can use it without paying.</p>
+<h3 id="what-open-source-license-are-you-using">What open source license are you using?</h3>
+<p>We are using the Apache License Version 2.0, see it here:
+<a href="https://github.com/docker/docker/blob/master/LICENSE">https://github.com/docker/docker/blob/master/LICENSE</a></p>
+<h3 id="does-docker-run-on-mac-os-x-or-windows">Does Docker run on Mac OS X or Windows?</h3>
+<p>Docker currently runs only on Linux, but you can use VirtualBox to run Docker in
+a virtual machine on your box, and get the best of both worlds. Check out the
+<a href="../installation/mac/#macosx"><em>Mac OS X</em></a> and <a href="../installation/windows/#windows"><em>Microsoft
+Windows</em></a> installation guides. The small Linux
+distribution boot2docker can be run inside virtual machines on these two
+operating systems.</p>
+<blockquote>
+<p><strong>Note:</strong> if you are using a remote Docker daemon, such as Boot2Docker, 
+then <em>do not</em> type the <code>sudo</code> before the <code>docker</code> commands shown in the
+documentation's examples.</p>
+</blockquote>
+<h3 id="how-do-containers-compare-to-virtual-machines">How do containers compare to virtual machines?</h3>
+<p>They are complementary. VMs are best used to allocate chunks of hardware
+resources. Containers operate at the process level, which makes them very
+lightweight and perfect as a unit of software delivery.</p>
+<h3 id="what-does-docker-add-to-just-plain-lxc">What does Docker add to just plain LXC?</h3>
+<p>Docker is not a replacement for LXC. "LXC" refers to capabilities of the Linux
+kernel (specifically namespaces and control groups) which allow sandboxing
+processes from one another, and controlling their resource allocations. On top
+of this low-level foundation of kernel features, Docker offers a high-level tool
+with several powerful functionalities:</p>
+<ul>
+<li>
+<p><em>Portable deployment across machines.</em> Docker defines a format for bundling
+ an application and all its dependencies into a single object which can be
+ transferred to any Docker-enabled machine, and executed there with the
+ guarantee that the execution environment exposed to the application will be the
+ same. LXC implements process sandboxing, which is an important pre-requisite
+ for portable deployment, but that alone is not enough for portable deployment.
+ If you sent me a copy of your application installed in a custom LXC
+ configuration, it would almost certainly not run on my machine the way it does
+ on yours, because it is tied to your machine's specific configuration:
+ networking, storage, logging, distro, etc. Docker defines an abstraction for
+ these machine-specific settings, so that the exact same Docker container can
+ run - unchanged - on many different machines, with many different
+ configurations.</p>
+</li>
+<li>
+<p><em>Application-centric.</em> Docker is optimized for the deployment of
+ applications, as opposed to machines. This is reflected in its API, user
+ interface, design philosophy and documentation. By contrast, the <code>lxc</code> helper
+ scripts focus on containers as lightweight machines - basically servers that
+ boot faster and need less RAM. We think there's more to containers than just
+ that.</p>
+</li>
+<li>
+<p><em>Automatic build.</em> Docker includes <a href="../reference/builder/#dockerbuilder"><em>a tool for developers to automatically
+ assemble a container from their source
+ code</em></a>, with full control over application
+ dependencies, build tools, packaging etc. They are free to use <code>make</code>, <code>maven</code>,
+ <code>chef</code>, <code>puppet</code>, <code>salt,</code> Debian packages, RPMs, source tarballs, or any
+ combination of the above, regardless of the configuration of the machines.</p>
+</li>
+<li>
+<p><em>Versioning.</em> Docker includes git-like capabilities for tracking successive
+ versions of a container, inspecting the diff between versions, committing new
+ versions, rolling back etc. The history also includes how a container was
+ assembled and by whom, so you get full traceability from the production server
+ all the way back to the upstream developer. Docker also implements incremental
+ uploads and downloads, similar to <code>git pull</code>, so new versions of a container
+ can be transferred by only sending diffs.</p>
+</li>
+<li>
+<p><em>Component re-use.</em> Any container can be used as a <a href="../terms/image/#base-image-def"><em>"base image"</em></a> to create more specialized components. This can
+ be done manually or as part of an automated build. For example you can prepare
+ the ideal Python environment, and use it as a base for 10 different
+ applications. Your ideal Postgresql setup can be re-used for all your future
+ projects. And so on.</p>
+</li>
+<li>
+<p><em>Sharing.</em> Docker has access to a <a href="https://hub.docker.com">public registry</a>
+ where thousands of people have uploaded useful containers: anything from Redis,
+ CouchDB, Postgres to IRC bouncers to Rails app servers to Hadoop to base images
+ for various Linux distros. The
+ <a href="../reference/api/registry_index_spec/#registryindexspec"><em>registry</em></a> also
+ includes an official "standard library" of useful containers maintained by the
+ Docker team. The registry itself is open-source, so anyone can deploy their own
+ registry to store and transfer private containers, for internal server
+ deployments for example.</p>
+</li>
+<li>
+<p><em>Tool ecosystem.</em> Docker defines an API for automating and customizing the
+ creation and deployment of containers. There are a huge number of tools
+ integrating with Docker to extend its capabilities. PaaS-like deployment
+ (Dokku, Deis, Flynn), multi-node orchestration (Maestro, Salt, Mesos, Openstack
+ Nova), management dashboards (docker-ui, Openstack Horizon, Shipyard),
+ configuration management (Chef, Puppet), continuous integration (Jenkins,
+ Strider, Travis), etc. Docker is rapidly establishing itself as the standard
+ for container-based tooling.</p>
+</li>
+</ul>
+<h3 id="what-is-different-between-a-docker-container-and-a-vm">What is different between a Docker container and a VM?</h3>
+<p>There's a great StackOverflow answer <a href="http://stackoverflow.com/questions/16047306/how-is-docker-io-different-from-a-normal-virtual-machine">showing the differences</a>.</p>
+<h3 id="do-i-lose-my-data-when-the-container-exits">Do I lose my data when the container exits?</h3>
+<p>Not at all! Any data that your application writes to disk gets preserved in its
+container until you explicitly delete the container. The file system for the
+container persists even after the container halts.</p>
+<h3 id="how-far-do-docker-containers-scale">How far do Docker containers scale?</h3>
+<p>Some of the largest server farms in the world today are based on containers.
+Large web deployments like Google and Twitter, and platform providers such as
+Heroku and dotCloud all run on container technology, at a scale of hundreds of
+thousands or even millions of containers running in parallel.</p>
+<h3 id="how-do-i-connect-docker-containers">How do I connect Docker containers?</h3>
+<p>Currently the recommended way to link containers is via the link primitive. You
+can see details of how to <a href="/userguide/dockerlinks">work with links here</a>.</p>
+<p>Also useful for more flexible service portability is the <a href="/articles/ambassador_pattern_linking/">Ambassador linking
+pattern</a>.</p>
+<h3 id="how-do-i-run-more-than-one-process-in-a-docker-container">How do I run more than one process in a Docker container?</h3>
+<p>Any capable process supervisor such as <a href="http://supervisord.org/">http://supervisord.org/</a>, runit, s6, or daemontools can do the trick. Docker
+will start up the process management daemon which will then fork to run
+additional processes. As long as the processor manager daemon continues to run,
+the container will continue to as well. You can see a more substantial example
+<a href="/articles/using_supervisord/">that uses supervisord here</a>.</p>
+<h3 id="what-platforms-does-docker-run-on">What platforms does Docker run on?</h3>
+<p>Linux:</p>
+<ul>
+<li>Ubuntu 12.04, 13.04 et al </li>
+<li>Fedora 19/20+ </li>
+<li>RHEL 6.5+ </li>
+<li>CentOS 6+ </li>
+<li>Gentoo </li>
+<li>ArchLinux </li>
+<li>openSUSE 12.3+ </li>
+<li>CRUX 3.0+</li>
+</ul>
+<p>Cloud:</p>
+<ul>
+<li>Amazon EC2 </li>
+<li>Google Compute Engine </li>
+<li>Rackspace</li>
+</ul>
+<h3 id="how-do-i-report-a-security-issue-with-docker">How do I report a security issue with Docker?</h3>
+<p>You can learn about the project's security policy
+<a href="https://www.docker.com/security/">here</a> and report security issues to this
+<a href="mailto:security@docker.com">mailbox</a>.</p>
+<h3 id="why-do-i-need-to-sign-my-commits-to-docker-with-the-dco">Why do I need to sign my commits to Docker with the DCO?</h3>
+<p>Please read <a href="http://blog.docker.com/2014/01/docker-code-contributions-require-developer-certificate-of-origin/">our blog post</a> on the introduction of the DCO.</p>
+<h3 id="when-building-an-image-should-i-prefer-system-libraries-or-bundled-ones">When building an image, should I prefer system libraries or bundled ones?</h3>
+<p><em>This is a summary of a discussion on the <a href="https://groups.google.com/forum/#!topic/docker-dev/L2RBSPDu1L0">docker-dev mailing list</a>.</em></p>
+<p>Virtually all programs depend on third-party libraries. Most frequently, they
+will use dynamic linking and some kind of package dependency, so that when
+multiple programs need the same library, it is installed only once.</p>
+<p>Some programs, however, will bundle their third-party libraries, because they
+rely on very specific versions of those libraries. For instance, Node.js bundles
+OpenSSL; MongoDB bundles V8 and Boost (among others).</p>
+<p>When creating a Docker image, is it better to use the bundled libraries, or
+should you build those programs so that they use the default system libraries
+instead?</p>
+<p>The key point about system libraries is not about saving disk or memory space.
+It is about security. All major distributions handle security seriously, by
+having dedicated security teams, following up closely with published
+vulnerabilities, and disclosing advisories themselves. (Look at the <a href="https://www.debian.org/security/">Debian
+Security Information</a> for an example of those
+procedures.) Upstream developers, however, do not always implement similar
+practices.</p>
+<p>Before setting up a Docker image to compile a program from source, if you want
+to use bundled libraries, you should check if the upstream authors provide a
+convenient way to announce security vulnerabilities, and if they update their
+bundled libraries in a timely manner. If they don't, you are exposing yourself
+(and the users of your image) to security vulnerabilities.</p>
+<p>Likewise, before using packages built by others, you should check if the
+channels providing those packages implement similar security best practices.
+Downloading and installing an "all-in-one" .deb or .rpm sounds great at first,
+except if you have no way to figure out that it contains a copy of the OpenSSL
+library vulnerable to the <a href="http://heartbleed.com/">Heartbleed</a> bug.</p>
+<h3 id="why-is-debian_frontendnoninteractive-discouraged-in-dockerfiles">Why is <code>DEBIAN_FRONTEND=noninteractive</code> discouraged in Dockerfiles?</h3>
+<p>When building Docker images on Debian and Ubuntu you may have seen errors like:</p>
+<pre class="prettyprint well"><code>unable to initialize frontend: Dialog
+</code></pre>
+<p>These errors don't stop the image from being built but inform you that the
+installation process tried to open a dialog box, but was unable to. Generally,
+these errors are safe to ignore.</p>
+<p>Some people circumvent these errors by changing the <code>DEBIAN_FRONTEND</code>
+environment variable inside the Dockerfile using:</p>
+<pre class="prettyprint well"><code>ENV DEBIAN_FRONTEND=noninteractive
+</code></pre>
+<p>This prevents the installer from opening dialog boxes during installation which
+stops the errors.</p>
+<p>While this may sound like a good idea, it <em>may</em> have side effects. The
+<code>DEBIAN_FRONTEND</code> environment variable will be inherited by all images and
+containers built from your image, effectively changing their behavior. People
+using those images will run into problems when installing software
+interactively, because installers will not show any dialog boxes.</p>
+<p>Because of this, and because setting <code>DEBIAN_FRONTEND</code> to <code>noninteractive</code> is
+mainly a 'cosmetic' change, we <em>discourage</em> changing it.</p>
+<p>If you <em>really</em> need to change its setting, make sure to change it back to its
+<a href="https://www.debian.org/releases/stable/i386/ch05s03.html.en">default value</a>
+afterwards.</p>
+<h3 id="why-do-i-get-connection-reset-by-peer-when-making-a-request-to-a-service-running-in-a-container">Why do I get <code>Connection reset by peer</code> when making a request to a service running in a container?</h3>
+<p>Typically, this message is returned if the service is already bound to your
+localhost. As a result, requests coming to the container from outside are
+dropped. To correct this problem, change the service's configuration on your
+localhost so that the service accepts requests from all IPs.  If you aren't sure
+how to do this, check the documentation for your OS.</p>
+<h3 id="where-can-i-find-more-answers">Where can I find more answers?</h3>
+<p>You can find more answers on:</p>
+<ul>
+<li><a href="https://groups.google.com/d/forum/docker-user">Docker user mailinglist</a> </li>
+<li><a href="https://groups.google.com/d/forum/docker-dev">Docker developer mailinglist</a> </li>
+<li><a href="irc://chat.freenode.net#docker">IRC, docker on freenode</a> </li>
+<li><a href="https://github.com/docker/docker">GitHub</a> </li>
+<li><a href="http://stackoverflow.com/search?q=docker">Ask questions on Stackoverflow</a> </li>
+<li><a href="http://twitter.com/docker">Join the conversation on Twitter</a></li>
+</ul>
+<p>Looking for something else to read? Checkout the <a href="/userguide/">User Guide</a>.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="push-footer"></div>
+
+</div>
+
+
+
+<div id="footer-container" class="container">
+  <div id="footer" class="grey-body">
+    <div class="row">
+      <div class="span2">
+        <span class="footer-title">Community</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/community/events/">Events</a></li>
+          <li><a class="primary-button" href="http://posts.docker.com">Friends' Posts</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/meetups/">Meetups</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/governance/">Governance</a></li>
+          <li><a class="primary-button" href="http://forums.docker.com">Forums</a></li>
+          <li><a class="primary-button" href="http://botbot.me/freenode/docker">IRC</a></li>
+          <li><a class="primary-button" href="https://github.com/docker/docker">GitHub</a></li>
+          <li><a class="primary-button" href="http://stackoverflow.com/search?q=docker">Stackoverflow</a></li>
+          <li><a class="primary-button" href="http://www.cafepress.com/docker">Swag</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Enterprise</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/support/">Support</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/education/">Education</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/services/">Services</a></li>
+        </ul>
+        <span class="footer-title">Partner Solutions</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/partners/find/">Find a Partner</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/program/">Partner Program</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/learn/">Learn More</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Resources</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://docs.docker.com">Documentation</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/help/">Help</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/usecases/">Use Cases</a></li>
+          <li><a class="primary-button" href="http://www.docker.com/tryit/">Online Tutorial</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/howtobuy/">How To Buy</a></li>
+          <li><a class="primary-button" href="http://status.docker.com">Status</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/security/">Security</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Company</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/company/aboutus/">About Us</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/team/">Team</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/news/">News</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/press/">Press</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/careers/">Careers</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <span class="footer-title">Connect</span>
+        <div class="search">
+          <span>Subscribe to our newsletter</span>
+          <form action="https://www.docker.com/subscribe_newsletter/" method="post">
+            <input type='hidden' name='csrfmiddlewaretoken' value='aWL78QXQkY8DSKNYh6cl08p5eTLl7sOa' />
+            <tr><th><label for="id_email">Email:</label></th><td><input class="form-control" id="id_email" name="email" placeholder="Enter your email" type="text" /></td></tr>
+            
+            <button type="submit"><i class="icon-arrow-right"></i> </button>
+          </form>
+        </div>
+        <ul class="unstyled social">
+          <li><a title="Docker on Twitter" class="primary-button blog" href="http://blog.docker.com">Blog</a></li>
+          <li><a title="Docker on Twitter" class="primary-button twitter" href="http://twitter.com/docker">Twitter</a></li>
+          <li><a title="Docker on Google+" class="primary-button googleplus" href="https://plus.google.com/u/0/communities/108146856671494713993">Google+</a></li>
+          <li><a title="Docker on Facebook" class="primary-button facebook" href="https://www.facebook.com/docker.run">Facebook</a></li>
+          <li><a title="Docker on Youtube" class="primary-button youtube" href="http://www.youtube.com/user/dockerrun">YouTube</a></li>
+        </ul>
+        <ul class="unstyled social">
+          <li><a title="Docker on SlideShare" class="primary-button slideshare" href="http://www.slideshare.net/Docker">Slideshare</a></li>
+          <li>
+             <a title="Docker on LinkedIn" class="primary-button" href="https://www.linkedin.com/company/docker">
+                 <span class="linkedin"></span>
+                 LinkedIn
+             </a>
+          </li>
+          <li>
+              <a title="Docker on GitHub" class="primary-button" href="https://github.com/docker/">
+                  <span class="github"></span>
+                  GitHub
+              </a>
+          </li>
+          <li>
+              <a title="Docker on Reddit" class="primary-button" href="http://www.reddit.com/r/docker">
+                  <span class="reddit"></span>
+                  Reddit
+              </a>
+          </li>
+          <li>
+              <a title="Docker on AngelList" class="primary-button" href="https://angel.co/docker-inc-1">
+                  <span class="angellist"></span>
+                  AngelList
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="span6 pagination-right copyright">
+        <span>&copy; 2014-2015 Docker, Inc.</span>
+      </div>
+      <div class="span6 pagination-left copyright">
+        <a href="http://www.docker.com/legal/terms_of_service">Terms</a> &middot;
+        <a href="http://www.docker.com/legal/privacy_policy">Privacy</a> &middot;
+        <a href="http://www.docker.com/legal/trademark_guidelines">Trademarks</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.cookie.js" ></script>
+<script src="/js/jquery-scrolltofixed-min.js"></script>
+<script src="/js/bootstrap-3.0.3.min.js"></script>
+<script src="/js/prettify-1.0.min.js"></script>
+<script src="/js/dockerfile_tutorial.js"></script>
+<script src="/js/dockerfile_tutorial_level.js"></script>
+<script src="/js/base.js"></script>
+<script src="/tipuesearch/tipuesearch_set.js"></script>
+<script src="/tipuesearch/tipuesearch.min.js"></script>
+<script type="text/javascript">
+piAId = '45082';
+piCId = '1482';
+
+(function() {
+  function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+  }
+  if(window.attachEvent) { window.attachEvent('onload', async_load); }
+  else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').css("min-height", $(window).height() - 553 );
+    // if the URL contains a version string, update the version picker to reflect that
+    version = document.location.pathname.match(/^\/(v\d\.\d)\/.*/)
+    if (version && version[1]) {
+        $('#document-version-number')[0].text = 'Version '+version[1];
+    } else {
+        $('#document-version-number')[0].text = $('#document-version-number')[0].text + " (Latest)"
+    }
+    // load the complete versions list
+    $.get("/versions.html_fragment", function( data ) {
+    	$('#documentation-version-list').prepend(data);
+	//remove any "/v1.1/" bits from front, so we can add the path to the version selection dropdown.
+	path = document.location.pathname.replace(/^\/v\d\.\d/, "");
+	$('#documentation-version-list a.version').each(function(i, e) {
+		e.href = e.href+path;
+		$(e).removeClass()
+	});
+    });
+
+  })
+  var userName = getCookie('docker_sso_username');
+  if (userName) {
+    $('.topmostnav_loggedout').hide();
+    $('.topmostnav_loggedin').show();
+    $('#logged-in-header-username').text(userName);
+  } else {
+    $('.topmostnav_loggedout').show();
+    $('.topmostnav_loggedin').hide();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="docker_version" content="1.6.1">
+  <meta name="docker_git_branch" content="master">
+  <meta name="docker_git_commit" content="59cd467">
+  <meta name="docker_build_date" content="Fri Jun  5 11:40:50 UTC 2015">
+
+  <meta name="description" content="Introduces the Docker Registry v2 authentication">
+  <meta name="keywords" content="registry, images, repository, v2, authentication">
+  
+  <link rel="canonical" href="/registry/spec/auth/token/">
+  <link href="/css/bootstrap-custom.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/prettify-1.0.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/dockerfile_tutorial.css">
+  <link href="/tipuesearch
+/tipuesearch.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <title>&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Authenticate via central service - Docker Documentation</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-6096819-11', 'docker.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash,
+  });
+  </script>
+  
+</head>
+<body>
+
+<div id="topmostnav" class="topmostnav_loggedout navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li class=""><a href="http://www.docker.com/whatisdocker/" title="What is Docker">What is Docker?</a></li>
+      <li class=""><a href="http://www.docker.com/resources/usecases/" title="Use Cases">Use Cases</a></li>
+      <li class=""><a href="http://www.docker.com/tryit/" title="Try It!">Try It!</a></li>
+      <li><a href="https://registry.hub.docker.com" title="Browse">Browse</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <a href="https://hub.docker.com/account/login" class="btn nav-button2" title="Lg In">Log In</a>
+      <a href="https://hub.docker.com/account/signup" class="btn nav-button1" title="Sign Up">Sign Up</a>
+    </div>
+  </div>
+</div>
+<div id="topmostnav" class="topmostnav_loggedin navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li><a href="https://registry.hub.docker.com" title="Browse Repos">Browse Repos</a></li>
+      <li class="active"><a href="http://docs.docker.com" title="Documentation">Documentation</a></li>
+      <li><a href="http://www.docker.com/community/participate/" title="Community">Community</a></li>
+      <li><a href="http://www.docker.com/resources/help/" title="Help">Help</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <ul class="nav user">
+        <li class="dropdown">
+          <a id="logged-in-header-username" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img class="profile" src="" alt="profile picture">
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="https://hub.docker.com/">View Profile</a></li>
+            <li><a href="https://hub.docker.com/account/settings/">Settings</a></li>
+            <li><a href="https://hub.docker.com/repos/">My Repositories</a></li>
+            <li><a href="https://hub.docker.com/plans/billing-info">Billing</a></li>
+            <li><a href="https://hub.docker.com/account/logout/?next=/">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="wrap">
+  <nav id="nav_menu" class="clearfix navbar navbar-default navbar-static-top affix" role="navigation">
+  <div id="docsnav">
+    <ul id="main-nav" class="pull-left">
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/">About</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/">Docker</a>
+          </li>
+        
+          <li >
+            <a href="/release-notes/">Release Notes</a>
+          </li>
+        
+          <li >
+            <a href="/introduction/understanding-docker/">Understanding Docker</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/installation/ubuntulinux/">Installation</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/installation/ubuntulinux/">Ubuntu</a>
+          </li>
+        
+          <li >
+            <a href="/installation/mac/">Mac OS X</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/">Kitematic on OS X</a>
+          </li>
+        
+          <li >
+            <a href="/installation/windows/">Microsoft Windows</a>
+          </li>
+        
+          <li >
+            <a href="/installation/testing-windows-docker-client/">Building and testing the Windows Docker client</a>
+          </li>
+        
+          <li >
+            <a href="/installation/amazon/">Amazon EC2</a>
+          </li>
+        
+          <li >
+            <a href="/installation/archlinux/">Arch Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/binaries/">Binaries</a>
+          </li>
+        
+          <li >
+            <a href="/installation/centos/">CentOS</a>
+          </li>
+        
+          <li >
+            <a href="/installation/cruxlinux/">CRUX Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/debian/">Debian</a>
+          </li>
+        
+          <li >
+            <a href="/installation/fedora/">Fedora</a>
+          </li>
+        
+          <li >
+            <a href="/installation/frugalware/">FrugalWare</a>
+          </li>
+        
+          <li >
+            <a href="/installation/google/">Google Cloud Platform</a>
+          </li>
+        
+          <li >
+            <a href="/installation/gentoolinux/">Gentoo</a>
+          </li>
+        
+          <li >
+            <a href="/installation/softlayer/">IBM Softlayer</a>
+          </li>
+        
+          <li >
+            <a href="/installation/joyent/">Joyent Compute Service</a>
+          </li>
+        
+          <li >
+            <a href="/installation/azure/">Microsoft Azure</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rackspace/">Rackspace Cloud</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rhel/">Red Hat Enterprise Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/oracle/">Oracle Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/SUSE/">SUSE</a>
+          </li>
+        
+          <li >
+            <a href="/compose/install/">Docker Compose</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/userguide/">User Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/userguide/">The Docker User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerhub/">Getting Started with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerizing/">Dockerizing Applications</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/usingdocker/">Working with Containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerimages/">Working with Docker Images</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerlinks/">Linking containers together</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockervolumes/">Managing data in containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/labels-custom-metadata/">Apply custom metadata</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerrepos/">Working with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/compose/">Docker Compose</a>
+          </li>
+        
+          <li >
+            <a href="/compose/production/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Use Compose in production</a>
+          </li>
+        
+          <li >
+            <a href="/compose/extends/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Extend Compose services</a>
+          </li>
+        
+          <li >
+            <a href="/machine/">Docker Machine</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/">Docker Swarm</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/userguide/">Kitematic</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub/">Docker Hub</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub/">Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/accounts/">Accounts</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/userguide/">User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/repos/">Your Repositories</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/builds/">Automated Builds</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/official_repos/">Official Repositories</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub-enterprise/">Docker Hub Enterprise</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub-enterprise/">Overview</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/quick-start/">Quick Start: Basic Workflow</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/userguide/">User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/adminguide/">Admin Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/install/">&nbsp;&nbsp;Installation</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/configuration/">&nbsp;&nbsp;Configuration options</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/support/">Support</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/release-notes/">Release notes</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/examples/nodejs_web_app/">Examples</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/examples/nodejs_web_app/">Dockerizing a Node.js web application</a>
+          </li>
+        
+          <li >
+            <a href="/examples/mongodb/">Dockerizing MongoDB</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_redis_service/">Dockerizing a Redis service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/postgresql_service/">Dockerizing a PostgreSQL service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_riak_service/">Dockerizing a Riak service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_ssh_service/">Dockerizing an SSH service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/couchdb_data_volumes/">Dockerizing a CouchDB service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/apt-cacher-ng/">Dockerizing an Apt-Cacher-ng service</a>
+          </li>
+        
+          <li >
+            <a href="/compose/django/">Getting started with Compose and Django</a>
+          </li>
+        
+          <li >
+            <a href="/compose/rails/">Getting started with Compose and Rails</a>
+          </li>
+        
+          <li >
+            <a href="/compose/wordpress/">Getting started with Compose and Wordpress</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/minecraft-server/">Kitematic: Minecraft server</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/nginx-web-server/">Kitematic: Ngnix web server</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/rethinkdb-dev-database/">Kitematic: RethinkDB development database</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/articles/basics/">Articles</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/articles/basics/">Docker basics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/networking/">Advanced networking</a>
+          </li>
+        
+          <li >
+            <a href="/articles/security/">Security</a>
+          </li>
+        
+          <li >
+            <a href="/articles/https/">Running Docker with HTTPS</a>
+          </li>
+        
+          <li >
+            <a href="/articles/registry_mirror/">Run a local registry mirror</a>
+          </li>
+        
+          <li >
+            <a href="/articles/host_integration/">Automatically starting containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/baseimages/">Creating a base image</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+          </li>
+        
+          <li >
+            <a href="/articles/certificates/">Using certificates for repository client verification</a>
+          </li>
+        
+          <li >
+            <a href="/articles/using_supervisord/">Using Supervisor</a>
+          </li>
+        
+          <li >
+            <a href="/articles/configuring/">Configuring Docker</a>
+          </li>
+        
+          <li >
+            <a href="/articles/cfengine_process_management/">Process management with CFEngine</a>
+          </li>
+        
+          <li >
+            <a href="/articles/puppet/">Using Puppet</a>
+          </li>
+        
+          <li >
+            <a href="/articles/chef/">Using Chef</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dsc/">Using PowerShell DSC</a>
+          </li>
+        
+          <li >
+            <a href="/articles/ambassador_pattern_linking/">Cross-Host linking using ambassador containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/runmetrics/">Runtime metrics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/b2d_volume_resize/">Increasing a Boot2Docker volume</a>
+          </li>
+        
+          <li >
+            <a href="/articles/systemd/">Controlling and configuring Docker using Systemd</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left active">
+        
+        <a href="/reference/commandline/cli/">Reference</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/reference/commandline/cli/">Docker command line</a>
+          </li>
+        
+          <li >
+            <a href="/reference/builder/">Dockerfile</a>
+          </li>
+        
+          <li >
+            <a href="/faq/">FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/reference/run/">Run Reference</a>
+          </li>
+        
+          <li >
+            <a href="/compose/cli/">Compose command line</a>
+          </li>
+        
+          <li >
+            <a href="/compose/yml/">Compose yml</a>
+          </li>
+        
+          <li >
+            <a href="/compose/env/">Compose ENV variables</a>
+          </li>
+        
+          <li >
+            <a href="/compose/completion/">Compose commandline completion</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/discovery/">Swarm discovery</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/strategy/">Swarm strategies</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/filter/">Swarm filters</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/API/">Swarm API</a>
+          </li>
+        
+          <li >
+            <a href="/registry/">Docker Registry 2.0</a>
+          </li>
+        
+          <li >
+            <a href="/registry/deploying/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Deploy a registry</a>
+          </li>
+        
+          <li >
+            <a href="/registry/configuration/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Configure a registry</a>
+          </li>
+        
+          <li >
+            <a href="/registry/storagedrivers/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Storage driver model</a>
+          </li>
+        
+          <li >
+            <a href="/registry/notifications/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Work with notifications</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/api/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Registry Service API v2</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/json/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; JSON format</a>
+          </li>
+        
+          <li class="active">
+            <a href="/registry/spec/auth/token/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Authenticate via central service</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/hub_registry_spec/">Docker Hub and Registry 1.0</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp;Docker Registry API v1</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api_client_libraries/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp;Docker Registry 1.0 API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker-io_api/">Docker Hub API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api/">Docker Remote API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.18/">Docker Remote API v1.18</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.17/">Docker Remote API v1.17</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.16/">Docker Remote API v1.16</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/remote_api_client_libraries/">Docker Remote API client libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_io_accounts_api/">Docker Hub accounts API</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/faq/">Kitematic: FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/known-issues/">Kitematic: Known issues</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/project/who-written-for/">Contributor</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/project/who-written-for/">README first</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-required/">Get required software for Linux or OS X</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-req-win/">Get required software for Windows</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-git/">Configure Git for contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-dev-env/">Work with a development container</a>
+          </li>
+        
+          <li >
+            <a href="/project/test-and-docs/">Run tests and test documentation</a>
+          </li>
+        
+          <li >
+            <a href="/project/make-a-contribution/">Understand contribution workflow</a>
+          </li>
+        
+          <li >
+            <a href="/project/find-an-issue/">Find an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/work-issue/">Work on an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/create-pr/">Create a pull request</a>
+          </li>
+        
+          <li >
+            <a href="/project/review-pr/">Participate in the PR review</a>
+          </li>
+        
+          <li >
+            <a href="/project/advanced-contributing/">Advanced contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/get-help/">Where to get help</a>
+          </li>
+        
+          <li >
+            <a href="/project/coding-style/">Coding style guide</a>
+          </li>
+        
+          <li >
+            <a href="/project/doc-style/">Documentation style guide</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+    </ul>
+  </div>
+</nav>
+  <div id="content" class="container">
+    <div class="row">
+
+      <div class="span3" id="leftnav">
+        <div id="toc_table">
+          <ul class="nav nav-tabs nav-stacked">
+            
+  
+    <li class=""><a href="#requirements">Requirements</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#authorization-server-endpoint-descriptions">Authorization Server Endpoint Descriptions</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#how-to-authenticate">How to authenticate</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#requesting-a-token">Requesting a Token</a>
+      <ul>
+    
+      <li><a href="#query-parameters">Query Parameters</a></li>
+    
+      <li><a href="#description">Description</a></li>
+    
+      <li><a href="#example">Example</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#using-the-signed-token">Using the signed token</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#verifying-the-token">Verifying the token</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+
+          </ul>
+        </div>
+      </div>
+      <div class="span9 content-body">
+
+        
+
+        <h1 id="docker-registry-v2-authentication-via-central-service">Docker Registry v2 authentication via central service</h1>
+<p>Today a Docker Registry can run in standalone mode in which there are no
+authorization checks. While adding your own HTTP authorization requirements in
+a proxy placed between the client and the registry can give you greater access
+control, we'd like a native authorization mechanism that's public key based
+with access control lists managed separately with the ability to have fine
+granularity in access control on a by-key, by-user, by-namespace, and
+by-repository basis. In v1 this can be configured by specifying an
+<code>index_endpoint</code> in the registry's config. Clients present tokens generated by
+the index and tokens are validated on-line by the registry with every request.
+This results in a complex authentication and authorization loop that occurs
+with every registry operation. Some people are very familiar with this image:</p>
+<p><img alt="index auth" src="https://docs.docker.com/static_files/docker_pull_chart.png" /></p>
+<p>The above image outlines the 6-step process in accessing the Official Docker
+Registry.</p>
+<ol>
+<li>Contact the Docker Hub to know where I should download “samalba/busybox”</li>
+<li>Docker Hub replies:
+    a. samalba/busybox is on Registry A
+    b. here are the checksums for samalba/busybox (for all layers)
+    c. token</li>
+<li>Contact Registry A to receive the layers for samalba/busybox (all of them to
+   the base image). Registry A is authoritative for “samalba/busybox” but keeps
+   a copy of all inherited layers and serve them all from the same location.</li>
+<li>Registry contacts Docker Hub to verify if token/user is allowed to download
+   images.</li>
+<li>Docker Hub returns true/false lettings registry know if it should proceed or
+   error out.</li>
+<li>Get the payload for all layers.</li>
+</ol>
+<p>The goal of this document is to outline a way to eliminate steps 4 and 5 from
+the above process by using cryptographically signed tokens and no longer
+require the client to authenticate each request with a username and password
+stored locally in plain text.</p>
+<p>The new registry workflow is more like this:</p>
+<p><img alt="v2 registry auth" src="https://docs.google.com/drawings/d/1EHZU9uBLmcH0kytDClBv6jv6WR4xZjE8RKEUw1mARJA/pub?w=480&amp;h=360" /></p>
+<ol>
+<li>Attempt to begin a push/pull operation with the registry.</li>
+<li>If the registry requires authorization it will return a <code>401 Unauthorized</code>
+   HTTP response with information on how to authenticate.</li>
+<li>The registry client makes a request to the authorization service for a
+   signed JSON Web Token.</li>
+<li>The authorization service returns a token.</li>
+<li>The client retries the original request with the token embedded in the
+   request header.</li>
+<li>The Registry authorizes the client and begins the push/pull session as
+   usual. </li>
+</ol>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Registry Clients capable of generating key pairs which can be used to
+  authenticate to an authorization server.</li>
+<li>An authorization server capable of managing user accounts, their public keys,
+  and access controls to their resources hosted by any given service (such as
+  repositories in a Docker Registry).</li>
+<li>A Docker Registry capable of trusting the authorization server to sign tokens
+  which clients can use for authorization and the ability to verify these
+  tokens for single use or for use during a sufficiently short period of time.</li>
+</ul>
+<h2 id="authorization-server-endpoint-descriptions">Authorization Server Endpoint Descriptions</h2>
+<p>This document borrows heavily from the <a href="https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32">JSON Web Token Draft Spec</a></p>
+<p>The described server is meant to serve as a user account and key manager and a
+centralized access control list for resources hosted by other services which
+wish to authenticate and manage authorizations using this services accounts and
+their public keys.</p>
+<p>Such a service could be used by the official docker registry to authenticate
+clients and verify their authorization to docker image repositories.</p>
+<p>Docker will need to be updated to interact with an authorization server to get
+an authorization token.</p>
+<h2 id="how-to-authenticate">How to authenticate</h2>
+<p>Today, registry clients first contact the index to initiate a push or pull.
+For v2, clients should contact the registry first. If the registry server
+requires authentication it will return a <code>401 Unauthorized</code> response with a
+<code>WWW-Authenticate</code> header detailing how to authenticate to this registry.</p>
+<p>For example, say I (username <code>jlhawn</code>) am attempting to push an image to the
+repository <code>samalba/my-app</code>. For the registry to authorize this, I either need
+<code>push</code> access to the <code>samalba/my-app</code> repository or <code>push</code> access to the whole
+<code>samalba</code> namespace in general. The registry will first return this response:</p>
+<pre class="prettyprint well"><code>HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Bearer realm=&quot;https://auth.docker.com/v2/token/&quot;,service=&quot;registry.docker.com&quot;,scope=&quot;repository:samalba/my-app:push&quot;
+</code></pre>
+
+<p>This format is documented in <a href="https://tools.ietf.org/html/rfc6750#section-3">Section 3 of RFC 6750: The OAuth 2.0 Authorization Framework: Bearer Token Usage</a></p>
+<p>The client will then know to make a <code>GET</code> request to the URL
+<code>https://auth.docker.com/v2/token/</code> using the <code>service</code> and <code>scope</code> values from
+the <code>WWW-Authenticate</code> header.</p>
+<h2 id="requesting-a-token">Requesting a Token</h2>
+<h4 id="query-parameters">Query Parameters</h4>
+<dl>
+    <dt>
+        <code>service</code>
+    </dt>
+    <dd>
+        The name of the service which hosts the resource.
+    </dd>
+    <dt>
+        <code>scope</code>
+    </dt>
+    <dd>
+        The resource in question, formatted as one of the space-delimited
+        entries from the <code>scope</code> parameters from the <code>WWW-Authenticate</code> header
+        shown above. This query parameter should be specified multiple times if
+        there is more than one <code>scope</code> entry from the <code>WWW-Authenticate</code>
+        header. The above example would be specified as:
+        <code>scope=repository:samalba/my-app:push</code>.
+    </dd>
+    <dt>
+        <code>account</code>
+    </dt>
+    <dd>
+        The name of the account which the client is acting as. Optional if it
+        can be inferred from client authentication.
+    </dd>
+</dl>
+
+<h4 id="description">Description</h4>
+<p>Requests an authorization token for access to a specific resource hosted by a
+specific service provider. Requires the client to authenticate either using a
+TLS client certificate or using basic authentication (or any other kind of
+digest/challenge/response authentication scheme if the client doesn't support
+TLS client certs). If the key in the client certificate is linked to an account
+then the token is issued for that account key. If the key in the certificate is
+linked to multiple accounts then the client must specify the <code>account</code> query
+parameter. The returned token is in JWT (JSON Web Token) format, signed using
+the authorization server's private key.</p>
+<h4 id="example">Example</h4>
+<p>For this example, the client makes an HTTP request to the following endpoint
+over TLS using a client certificate with the server being configured to allow a
+non-verified issuer during the handshake (i.e., a self-signed client cert is
+okay).</p>
+<pre class="prettyprint well"><code>GET /v2/token/?service=registry.docker.com&amp;scope=repository:samalba/my-app:push&amp;account=jlhawn HTTP/1.1
+Host: auth.docker.com
+</code></pre>
+
+<p>The server first inspects the client certificate to extract the subject key and
+lookup which account it is associated with. The client is now authenticated
+using that account.</p>
+<p>The server next searches its access control list for the account's access to
+the repository <code>samalba/my-app</code> hosted by the service <code>registry.docker.com</code>.</p>
+<p>The server will now construct a JSON Web Token to sign and return. A JSON Web
+Token has 3 main parts:</p>
+<ol>
+<li>
+<p>Headers</p>
+<p>The header of a JSON Web Token is a standard JOSE header. The "typ" field
+will be "JWT" and it will also contain the "alg" which identifies the
+signing algorithm used to produce the signature. It will also usually have
+a "kid" field, the ID of the key which was used to sign the token.</p>
+<p>Here is an example JOSE Header for a JSON Web Token (formatted with
+whitespace for readability):</p>
+<p><code>{
+    "typ": "JWT",
+    "alg": "ES256",
+    "kid": "PYYO:TEWU:V7JH:26JV:AQTZ:LJC3:SXVJ:XGHA:34F2:2LAQ:ZRMK:Z7Q6"
+}</code></p>
+<p>It specifies that this object is going to be a JSON Web token signed using
+the key with the given ID using the Elliptic Curve signature algorithm
+using a SHA256 hash.</p>
+</li>
+<li>
+<p>Claim Set</p>
+<p>The Claim Set is a JSON struct containing these standard registered claim
+name fields:</p>
+<p><dl>
+    <dt>
+        <code>iss</code> (Issuer)
+    </dt>
+    <dd>
+        The issuer of the token, typically the fqdn of the authorization
+        server.
+    </dd>
+    <dt>
+        <code>sub</code> (Subject)
+    </dt>
+    <dd>
+        The subject of the token; the id of the client which requested it.
+    </dd>
+    <dt>
+        <code>aud</code> (Audience)
+    </dt>
+    <dd>
+        The intended audience of the token; the id of the service which
+        will verify the token to authorize the client/subject.
+    </dd>
+    <dt>
+        <code>exp</code> (Expiration)
+    </dt>
+    <dd>
+        The token should only be considered valid up to this specified date
+        and time.
+    </dd>
+    <dt>
+        <code>nbf</code> (Not Before)
+    </dt>
+    <dd>
+        The token should not be considered valid before this specified date
+        and time.
+    </dd>
+    <dt>
+        <code>iat</code> (Issued At)
+    </dt>
+    <dd>
+        Specifies the date and time which the Authorization server
+        generated this token.
+    </dd>
+    <dt>
+        <code>jti</code> (JWT ID)
+    </dt>
+    <dd>
+        A unique identifier for this token. Can be used by the intended
+        audience to prevent replays of the token.
+    </dd>
+</dl></p>
+<p>The Claim Set will also contain a private claim name unique to this
+authorization server specification:</p>
+<p><dl>
+    <dt>
+        <code>access</code>
+    </dt>
+    <dd>
+        An array of access entry objects with the following fields:</p>
+<pre class="prettyprint well"><code>    &lt;dl&gt;
+        &lt;dt&gt;
+            &lt;code&gt;type&lt;/code&gt;
+        &lt;/dt&gt;
+        &lt;dd&gt;
+            The type of resource hosted by the service.
+        &lt;/dd&gt;
+        &lt;dt&gt;
+            &lt;code&gt;name&lt;/code&gt;
+        &lt;/dt&gt;
+        &lt;dd&gt;
+            The name of the recource of the given type hosted by the
+            service.
+        &lt;/dd&gt;
+        &lt;dt&gt;
+            &lt;code&gt;actions&lt;/code&gt;
+        &lt;/dt&gt;
+        &lt;dd&gt;
+            An array of strings which give the actions authorized on
+            this resource.
+        &lt;/dd&gt;
+    &lt;/dl&gt;
+&lt;/dd&gt;
+</code></pre>
+</dl>
+
+<p>Here is an example of such a JWT Claim Set (formatted with whitespace for
+readability):</p>
+<p><code>{
+    "iss": "auth.docker.com",
+    "sub": "jlhawn",
+    "aud": "registry.docker.com",
+    "exp": 1415387315,
+    "nbf": 1415387015,
+    "iat": 1415387015,
+    "jti": "tYJCO1c6cnyy7kAn0c7rKPgbV1H1bFws",
+    "access": [
+        {
+            "type": "repository",
+            "name": "samalba/my-app",
+            "actions": [
+                "push"
+            ]
+        }
+    ]
+}</code></p>
+</li>
+<li>
+<p>Signature</p>
+<p>The authorization server will produce a JOSE header and Claim Set with no
+extraneous whitespace, i.e., the JOSE Header from above would be</p>
+<p><code>{"typ":"JWT","alg":"ES256","kid":"PYYO:TEWU:V7JH:26JV:AQTZ:LJC3:SXVJ:XGHA:34F2:2LAQ:ZRMK:Z7Q6"}</code></p>
+<p>and the Claim Set from above would be</p>
+<p><code>{"iss":"auth.docker.com","sub":"jlhawn","aud":"registry.docker.com","exp":1415387315,"nbf":1415387015,"iat":1415387015,"jti":"tYJCO1c6cnyy7kAn0c7rKPgbV1H1bFws","access":[{"type":"repository","name":"samalba/my-app","actions":["push"]}]}</code></p>
+<p>The utf-8 representation of this JOSE header and Claim Set are then
+url-safe base64 encoded (sans trailing '=' buffer), producing:</p>
+<p><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0</code></p>
+<p>for the JOSE Header and</p>
+<p><code>eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0</code></p>
+<p>for the Claim Set. These two are concatenated using a '.' character,
+yielding the string:</p>
+<p><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0</code></p>
+<p>This is then used as the payload to a the <code>ES256</code> signature algorithm
+specified in the JOSE header and specified fully in <a href="https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-38#section-3.4">Section 3.4 of the JSON Web Algorithms (JWA)
+draft specification</a></p>
+<p>This example signature will use the following ECDSA key for the server:</p>
+<p><code>{
+    "kty": "EC",
+    "crv": "P-256",
+    "kid": "PYYO:TEWU:V7JH:26JV:AQTZ:LJC3:SXVJ:XGHA:34F2:2LAQ:ZRMK:Z7Q6",
+    "d": "R7OnbfMaD5J2jl7GeE8ESo7CnHSBm_1N2k9IXYFrKJA",
+    "x": "m7zUpx3b-zmVE5cymSs64POG9QcyEpJaYCD82-549_Q",
+    "y": "dU3biz8sZ_8GPB-odm8Wxz3lNDr1xcAQQPQaOcr1fmc"
+}</code></p>
+<p>A resulting signature of the above payload using this key is:</p>
+<p><code>QhflHPfbd6eVF4lM9bwYpFZIV0PfikbyXuLx959ykRTBpe3CYnzs6YBK8FToVb5R47920PVLrh8zuLzdCr9t3w</code></p>
+<p>Concatenating all of these together with a <code>.</code> character gives the
+resulting JWT:</p>
+<p><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0.QhflHPfbd6eVF4lM9bwYpFZIV0PfikbyXuLx959ykRTBpe3CYnzs6YBK8FToVb5R47920PVLrh8zuLzdCr9t3w</code></p>
+</li>
+</ol>
+<p>This can now be placed in an HTTP response and returned to the client to use to
+authenticate to the audience service:</p>
+<pre class="prettyprint well"><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{&quot;token&quot;: &quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBZWU86VEVXVTpWN0pIOjI2SlY6QVFUWjpMSkMzOlNYVko6WEdIQTozNEYyOjJMQVE6WlJNSzpaN1E2In0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJqbGhhd24iLCJhdWQiOiJyZWdpc3RyeS5kb2NrZXIuY29tIiwiZXhwIjoxNDE1Mzg3MzE1LCJuYmYiOjE0MTUzODcwMTUsImlhdCI6MTQxNTM4NzAxNSwianRpIjoidFlKQ08xYzZjbnl5N2tBbjBjN3JLUGdiVjFIMWJGd3MiLCJhY2Nlc3MiOlt7InR5cGUiOiJyZXBvc2l0b3J5IiwibmFtZSI6InNhbWFsYmEvbXktYXBwIiwiYWN0aW9ucyI6WyJwdXNoIl19XX0.QhflHPfbd6eVF4lM9bwYpFZIV0PfikbyXuLx959ykRTBpe3CYnzs6YBK8FToVb5R47920PVLrh8zuLzdCr9t3w&quot;}
+</code></pre>
+
+<h2 id="using-the-signed-token">Using the signed token</h2>
+<p>Once the client has a token, it will try the registry request again with the
+token placed in the HTTP <code>Authorization</code> header like so:</p>
+<pre class="prettyprint well"><code>Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IkJWM0Q6MkFWWjpVQjVaOktJQVA6SU5QTDo1RU42Ok40SjQ6Nk1XTzpEUktFOkJWUUs6M0ZKTDpQT1RMIn0.eyJpc3MiOiJhdXRoLmRvY2tlci5jb20iLCJzdWIiOiJCQ0NZOk9VNlo6UUVKNTpXTjJDOjJBVkM6WTdZRDpBM0xZOjQ1VVc6NE9HRDpLQUxMOkNOSjU6NUlVTCIsImF1ZCI6InJlZ2lzdHJ5LmRvY2tlci5jb20iLCJleHAiOjE0MTUzODczMTUsIm5iZiI6MTQxNTM4NzAxNSwiaWF0IjoxNDE1Mzg3MDE1LCJqdGkiOiJ0WUpDTzFjNmNueXk3a0FuMGM3cktQZ2JWMUgxYkZ3cyIsInNjb3BlIjoiamxoYXduOnJlcG9zaXRvcnk6c2FtYWxiYS9teS1hcHA6cHVzaCxwdWxsIGpsaGF3bjpuYW1lc3BhY2U6c2FtYWxiYTpwdWxsIn0.Y3zZSwaZPqy4y9oRBVRImZyv3m_S9XDHF1tWwN7mL52C_IiA73SJkWVNsvNqpJIn5h7A2F8biv_S2ppQ1lgkbw
+</code></pre>
+
+<p>This is also described in <a href="https://tools.ietf.org/html/rfc6750#section-2.1">Section 2.1 of RFC 6750: The OAuth 2.0 Authorization Framework: Bearer Token Usage</a></p>
+<h2 id="verifying-the-token">Verifying the token</h2>
+<p>The registry must now verify the token presented by the user by inspecting the
+claim set within. The registry will:</p>
+<ul>
+<li>Ensure that the issuer (<code>iss</code> claim) is an authority it trusts.</li>
+<li>Ensure that the registry identifies as the audience (<code>aud</code> claim).</li>
+<li>Check that the current time is between the <code>nbf</code> and <code>exp</code> claim times.</li>
+<li>If enforcing single-use tokens, check that the JWT ID (<code>jti</code> claim) value has
+  not been seen before.</li>
+<li>To enforce this, the registry may keep a record of <code>jti</code>s it has seen for
+    up to the <code>exp</code> time of the token to prevent token replays.</li>
+<li>Check the <code>access</code> claim value and use the identified resources and the list
+  of actions authorized to determine whether the token grants the required
+  level of access for the operation the client is attempting to perform.</li>
+<li>Verify that the signature of the token is valid.</li>
+</ul>
+<p>At no point in this process should the registry need to <em>call back</em> to
+the authorization server. If anything, it would only need to update a list of
+trusted public keys for verifying token signatures or use a separate API
+(still to be spec'd) to add/update resource records on the authorization
+server.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="push-footer"></div>
+
+</div>
+
+
+
+<div id="footer-container" class="container">
+  <div id="footer" class="grey-body">
+    <div class="row">
+      <div class="span2">
+        <span class="footer-title">Community</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/community/events/">Events</a></li>
+          <li><a class="primary-button" href="http://posts.docker.com">Friends' Posts</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/meetups/">Meetups</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/governance/">Governance</a></li>
+          <li><a class="primary-button" href="http://forums.docker.com">Forums</a></li>
+          <li><a class="primary-button" href="http://botbot.me/freenode/docker">IRC</a></li>
+          <li><a class="primary-button" href="https://github.com/docker/docker">GitHub</a></li>
+          <li><a class="primary-button" href="http://stackoverflow.com/search?q=docker">Stackoverflow</a></li>
+          <li><a class="primary-button" href="http://www.cafepress.com/docker">Swag</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Enterprise</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/support/">Support</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/education/">Education</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/services/">Services</a></li>
+        </ul>
+        <span class="footer-title">Partner Solutions</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/partners/find/">Find a Partner</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/program/">Partner Program</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/learn/">Learn More</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Resources</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://docs.docker.com">Documentation</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/help/">Help</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/usecases/">Use Cases</a></li>
+          <li><a class="primary-button" href="http://www.docker.com/tryit/">Online Tutorial</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/howtobuy/">How To Buy</a></li>
+          <li><a class="primary-button" href="http://status.docker.com">Status</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/security/">Security</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Company</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/company/aboutus/">About Us</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/team/">Team</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/news/">News</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/press/">Press</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/careers/">Careers</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <span class="footer-title">Connect</span>
+        <div class="search">
+          <span>Subscribe to our newsletter</span>
+          <form action="https://www.docker.com/subscribe_newsletter/" method="post">
+            <input type='hidden' name='csrfmiddlewaretoken' value='aWL78QXQkY8DSKNYh6cl08p5eTLl7sOa' />
+            <tr><th><label for="id_email">Email:</label></th><td><input class="form-control" id="id_email" name="email" placeholder="Enter your email" type="text" /></td></tr>
+            
+            <button type="submit"><i class="icon-arrow-right"></i> </button>
+          </form>
+        </div>
+        <ul class="unstyled social">
+          <li><a title="Docker on Twitter" class="primary-button blog" href="http://blog.docker.com">Blog</a></li>
+          <li><a title="Docker on Twitter" class="primary-button twitter" href="http://twitter.com/docker">Twitter</a></li>
+          <li><a title="Docker on Google+" class="primary-button googleplus" href="https://plus.google.com/u/0/communities/108146856671494713993">Google+</a></li>
+          <li><a title="Docker on Facebook" class="primary-button facebook" href="https://www.facebook.com/docker.run">Facebook</a></li>
+          <li><a title="Docker on Youtube" class="primary-button youtube" href="http://www.youtube.com/user/dockerrun">YouTube</a></li>
+        </ul>
+        <ul class="unstyled social">
+          <li><a title="Docker on SlideShare" class="primary-button slideshare" href="http://www.slideshare.net/Docker">Slideshare</a></li>
+          <li>
+             <a title="Docker on LinkedIn" class="primary-button" href="https://www.linkedin.com/company/docker">
+                 <span class="linkedin"></span>
+                 LinkedIn
+             </a>
+          </li>
+          <li>
+              <a title="Docker on GitHub" class="primary-button" href="https://github.com/docker/">
+                  <span class="github"></span>
+                  GitHub
+              </a>
+          </li>
+          <li>
+              <a title="Docker on Reddit" class="primary-button" href="http://www.reddit.com/r/docker">
+                  <span class="reddit"></span>
+                  Reddit
+              </a>
+          </li>
+          <li>
+              <a title="Docker on AngelList" class="primary-button" href="https://angel.co/docker-inc-1">
+                  <span class="angellist"></span>
+                  AngelList
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="span6 pagination-right copyright">
+        <span>&copy; 2014-2015 Docker, Inc.</span>
+      </div>
+      <div class="span6 pagination-left copyright">
+        <a href="http://www.docker.com/legal/terms_of_service">Terms</a> &middot;
+        <a href="http://www.docker.com/legal/privacy_policy">Privacy</a> &middot;
+        <a href="http://www.docker.com/legal/trademark_guidelines">Trademarks</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.cookie.js" ></script>
+<script src="/js/jquery-scrolltofixed-min.js"></script>
+<script src="/js/bootstrap-3.0.3.min.js"></script>
+<script src="/js/prettify-1.0.min.js"></script>
+<script src="/js/dockerfile_tutorial.js"></script>
+<script src="/js/dockerfile_tutorial_level.js"></script>
+<script src="/js/base.js"></script>
+<script src="/tipuesearch/tipuesearch_set.js"></script>
+<script src="/tipuesearch/tipuesearch.min.js"></script>
+<script type="text/javascript">
+piAId = '45082';
+piCId = '1482';
+
+(function() {
+  function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+  }
+  if(window.attachEvent) { window.attachEvent('onload', async_load); }
+  else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').css("min-height", $(window).height() - 553 );
+    // if the URL contains a version string, update the version picker to reflect that
+    version = document.location.pathname.match(/^\/(v\d\.\d)\/.*/)
+    if (version && version[1]) {
+        $('#document-version-number')[0].text = 'Version '+version[1];
+    } else {
+        $('#document-version-number')[0].text = $('#document-version-number')[0].text + " (Latest)"
+    }
+    // load the complete versions list
+    $.get("/versions.html_fragment", function( data ) {
+    	$('#documentation-version-list').prepend(data);
+	//remove any "/v1.1/" bits from front, so we can add the path to the version selection dropdown.
+	path = document.location.pathname.replace(/^\/v\d\.\d/, "");
+	$('#documentation-version-list a.version').each(function(i, e) {
+		e.href = e.href+path;
+		$(e).removeClass()
+	});
+    });
+
+  })
+  var userName = getCookie('docker_sso_username');
+  if (userName) {
+    $('.topmostnav_loggedout').hide();
+    $('.topmostnav_loggedin').show();
+    $('#logged-in-header-username').text(userName);
+  } else {
+    $('.topmostnav_loggedout').show();
+    $('.topmostnav_loggedin').hide();
+  }
+</script>
+</body>
+</html>

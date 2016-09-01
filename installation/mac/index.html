@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="docker_version" content="1.6.1">
+  <meta name="docker_git_branch" content="master">
+  <meta name="docker_git_commit" content="59cd467">
+  <meta name="docker_build_date" content="Fri Jun  5 11:40:50 UTC 2015">
+
+  <meta name="description" content="Instructions for installing Docker on OS X using boot2docker.">
+  <meta name="keywords" content="Docker, Docker documentation, requirements, boot2docker, VirtualBox, SSH, Linux, OSX, OS X, Mac">
+  
+  <link rel="canonical" href="/installation/mac/">
+  <link href="/css/bootstrap-custom.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/prettify-1.0.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/dockerfile_tutorial.css">
+  <link href="/tipuesearch
+/tipuesearch.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <title>Mac OS X - Docker Documentation</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-6096819-11', 'docker.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash,
+  });
+  </script>
+  
+</head>
+<body>
+
+<div id="topmostnav" class="topmostnav_loggedout navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li class=""><a href="http://www.docker.com/whatisdocker/" title="What is Docker">What is Docker?</a></li>
+      <li class=""><a href="http://www.docker.com/resources/usecases/" title="Use Cases">Use Cases</a></li>
+      <li class=""><a href="http://www.docker.com/tryit/" title="Try It!">Try It!</a></li>
+      <li><a href="https://registry.hub.docker.com" title="Browse">Browse</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <a href="https://hub.docker.com/account/login" class="btn nav-button2" title="Lg In">Log In</a>
+      <a href="https://hub.docker.com/account/signup" class="btn nav-button1" title="Sign Up">Sign Up</a>
+    </div>
+  </div>
+</div>
+<div id="topmostnav" class="topmostnav_loggedin navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li><a href="https://registry.hub.docker.com" title="Browse Repos">Browse Repos</a></li>
+      <li class="active"><a href="http://docs.docker.com" title="Documentation">Documentation</a></li>
+      <li><a href="http://www.docker.com/community/participate/" title="Community">Community</a></li>
+      <li><a href="http://www.docker.com/resources/help/" title="Help">Help</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <ul class="nav user">
+        <li class="dropdown">
+          <a id="logged-in-header-username" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img class="profile" src="" alt="profile picture">
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="https://hub.docker.com/">View Profile</a></li>
+            <li><a href="https://hub.docker.com/account/settings/">Settings</a></li>
+            <li><a href="https://hub.docker.com/repos/">My Repositories</a></li>
+            <li><a href="https://hub.docker.com/plans/billing-info">Billing</a></li>
+            <li><a href="https://hub.docker.com/account/logout/?next=/">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="wrap">
+  <nav id="nav_menu" class="clearfix navbar navbar-default navbar-static-top affix" role="navigation">
+  <div id="docsnav">
+    <ul id="main-nav" class="pull-left">
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/">About</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/">Docker</a>
+          </li>
+        
+          <li >
+            <a href="/release-notes/">Release Notes</a>
+          </li>
+        
+          <li >
+            <a href="/introduction/understanding-docker/">Understanding Docker</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left active">
+        
+        <a href="/installation/ubuntulinux/">Installation</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/installation/ubuntulinux/">Ubuntu</a>
+          </li>
+        
+          <li class="active">
+            <a href="/installation/mac/">Mac OS X</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/">Kitematic on OS X</a>
+          </li>
+        
+          <li >
+            <a href="/installation/windows/">Microsoft Windows</a>
+          </li>
+        
+          <li >
+            <a href="/installation/testing-windows-docker-client/">Building and testing the Windows Docker client</a>
+          </li>
+        
+          <li >
+            <a href="/installation/amazon/">Amazon EC2</a>
+          </li>
+        
+          <li >
+            <a href="/installation/archlinux/">Arch Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/binaries/">Binaries</a>
+          </li>
+        
+          <li >
+            <a href="/installation/centos/">CentOS</a>
+          </li>
+        
+          <li >
+            <a href="/installation/cruxlinux/">CRUX Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/debian/">Debian</a>
+          </li>
+        
+          <li >
+            <a href="/installation/fedora/">Fedora</a>
+          </li>
+        
+          <li >
+            <a href="/installation/frugalware/">FrugalWare</a>
+          </li>
+        
+          <li >
+            <a href="/installation/google/">Google Cloud Platform</a>
+          </li>
+        
+          <li >
+            <a href="/installation/gentoolinux/">Gentoo</a>
+          </li>
+        
+          <li >
+            <a href="/installation/softlayer/">IBM Softlayer</a>
+          </li>
+        
+          <li >
+            <a href="/installation/joyent/">Joyent Compute Service</a>
+          </li>
+        
+          <li >
+            <a href="/installation/azure/">Microsoft Azure</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rackspace/">Rackspace Cloud</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rhel/">Red Hat Enterprise Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/oracle/">Oracle Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/SUSE/">SUSE</a>
+          </li>
+        
+          <li >
+            <a href="/compose/install/">Docker Compose</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/userguide/">User Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/userguide/">The Docker User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerhub/">Getting Started with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerizing/">Dockerizing Applications</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/usingdocker/">Working with Containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerimages/">Working with Docker Images</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerlinks/">Linking containers together</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockervolumes/">Managing data in containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/labels-custom-metadata/">Apply custom metadata</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerrepos/">Working with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/compose/">Docker Compose</a>
+          </li>
+        
+          <li >
+            <a href="/compose/production/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Use Compose in production</a>
+          </li>
+        
+          <li >
+            <a href="/compose/extends/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Extend Compose services</a>
+          </li>
+        
+          <li >
+            <a href="/machine/">Docker Machine</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/">Docker Swarm</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/userguide/">Kitematic</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub/">Docker Hub</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub/">Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/accounts/">Accounts</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/userguide/">User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/repos/">Your Repositories</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/builds/">Automated Builds</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/official_repos/">Official Repositories</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub-enterprise/">Docker Hub Enterprise</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub-enterprise/">Overview</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/quick-start/">Quick Start: Basic Workflow</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/userguide/">User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/adminguide/">Admin Guide</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/install/">&nbsp;&nbsp;Installation</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/configuration/">&nbsp;&nbsp;Configuration options</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/support/">Support</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub-enterprise/release-notes/">Release notes</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/examples/nodejs_web_app/">Examples</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/examples/nodejs_web_app/">Dockerizing a Node.js web application</a>
+          </li>
+        
+          <li >
+            <a href="/examples/mongodb/">Dockerizing MongoDB</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_redis_service/">Dockerizing a Redis service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/postgresql_service/">Dockerizing a PostgreSQL service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_riak_service/">Dockerizing a Riak service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_ssh_service/">Dockerizing an SSH service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/couchdb_data_volumes/">Dockerizing a CouchDB service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/apt-cacher-ng/">Dockerizing an Apt-Cacher-ng service</a>
+          </li>
+        
+          <li >
+            <a href="/compose/django/">Getting started with Compose and Django</a>
+          </li>
+        
+          <li >
+            <a href="/compose/rails/">Getting started with Compose and Rails</a>
+          </li>
+        
+          <li >
+            <a href="/compose/wordpress/">Getting started with Compose and Wordpress</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/minecraft-server/">Kitematic: Minecraft server</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/nginx-web-server/">Kitematic: Ngnix web server</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/rethinkdb-dev-database/">Kitematic: RethinkDB development database</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/articles/basics/">Articles</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/articles/basics/">Docker basics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/networking/">Advanced networking</a>
+          </li>
+        
+          <li >
+            <a href="/articles/security/">Security</a>
+          </li>
+        
+          <li >
+            <a href="/articles/https/">Running Docker with HTTPS</a>
+          </li>
+        
+          <li >
+            <a href="/articles/registry_mirror/">Run a local registry mirror</a>
+          </li>
+        
+          <li >
+            <a href="/articles/host_integration/">Automatically starting containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/baseimages/">Creating a base image</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+          </li>
+        
+          <li >
+            <a href="/articles/certificates/">Using certificates for repository client verification</a>
+          </li>
+        
+          <li >
+            <a href="/articles/using_supervisord/">Using Supervisor</a>
+          </li>
+        
+          <li >
+            <a href="/articles/configuring/">Configuring Docker</a>
+          </li>
+        
+          <li >
+            <a href="/articles/cfengine_process_management/">Process management with CFEngine</a>
+          </li>
+        
+          <li >
+            <a href="/articles/puppet/">Using Puppet</a>
+          </li>
+        
+          <li >
+            <a href="/articles/chef/">Using Chef</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dsc/">Using PowerShell DSC</a>
+          </li>
+        
+          <li >
+            <a href="/articles/ambassador_pattern_linking/">Cross-Host linking using ambassador containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/runmetrics/">Runtime metrics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/b2d_volume_resize/">Increasing a Boot2Docker volume</a>
+          </li>
+        
+          <li >
+            <a href="/articles/systemd/">Controlling and configuring Docker using Systemd</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/reference/commandline/cli/">Reference</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/reference/commandline/cli/">Docker command line</a>
+          </li>
+        
+          <li >
+            <a href="/reference/builder/">Dockerfile</a>
+          </li>
+        
+          <li >
+            <a href="/faq/">FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/reference/run/">Run Reference</a>
+          </li>
+        
+          <li >
+            <a href="/compose/cli/">Compose command line</a>
+          </li>
+        
+          <li >
+            <a href="/compose/yml/">Compose yml</a>
+          </li>
+        
+          <li >
+            <a href="/compose/env/">Compose ENV variables</a>
+          </li>
+        
+          <li >
+            <a href="/compose/completion/">Compose commandline completion</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/discovery/">Swarm discovery</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/strategy/">Swarm strategies</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/filter/">Swarm filters</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/API/">Swarm API</a>
+          </li>
+        
+          <li >
+            <a href="/registry/">Docker Registry 2.0</a>
+          </li>
+        
+          <li >
+            <a href="/registry/deploying/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Deploy a registry</a>
+          </li>
+        
+          <li >
+            <a href="/registry/configuration/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Configure a registry</a>
+          </li>
+        
+          <li >
+            <a href="/registry/storagedrivers/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Storage driver model</a>
+          </li>
+        
+          <li >
+            <a href="/registry/notifications/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Work with notifications</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/api/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Registry Service API v2</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/json/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; JSON format</a>
+          </li>
+        
+          <li >
+            <a href="/registry/spec/auth/token/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp; Authenticate via central service</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/hub_registry_spec/">Docker Hub and Registry 1.0</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp;Docker Registry API v1</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api_client_libraries/">&nbsp;&nbsp;&nbsp;&nbsp;&blacksquare;&nbsp;Docker Registry 1.0 API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker-io_api/">Docker Hub API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api/">Docker Remote API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.18/">Docker Remote API v1.18</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.17/">Docker Remote API v1.17</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.16/">Docker Remote API v1.16</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/remote_api_client_libraries/">Docker Remote API client libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_io_accounts_api/">Docker Hub accounts API</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/faq/">Kitematic: FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/kitematic/known-issues/">Kitematic: Known issues</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/project/who-written-for/">Contributor</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/project/who-written-for/">README first</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-required/">Get required software for Linux or OS X</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-req-win/">Get required software for Windows</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-git/">Configure Git for contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-dev-env/">Work with a development container</a>
+          </li>
+        
+          <li >
+            <a href="/project/test-and-docs/">Run tests and test documentation</a>
+          </li>
+        
+          <li >
+            <a href="/project/make-a-contribution/">Understand contribution workflow</a>
+          </li>
+        
+          <li >
+            <a href="/project/find-an-issue/">Find an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/work-issue/">Work on an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/create-pr/">Create a pull request</a>
+          </li>
+        
+          <li >
+            <a href="/project/review-pr/">Participate in the PR review</a>
+          </li>
+        
+          <li >
+            <a href="/project/advanced-contributing/">Advanced contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/get-help/">Where to get help</a>
+          </li>
+        
+          <li >
+            <a href="/project/coding-style/">Coding style guide</a>
+          </li>
+        
+          <li >
+            <a href="/project/doc-style/">Documentation style guide</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+    </ul>
+  </div>
+</nav>
+  <div id="content" class="container">
+    <div class="row">
+
+      <div class="span3" id="leftnav">
+        <div id="toc_table">
+          <ul class="nav nav-tabs nav-stacked">
+            
+  
+    <li class=""><a href="#command-line-docker-with-boot2docker">Command-line Docker with Boot2Docker</a>
+      <ul>
+    
+      <li><a href="#learn-the-key-concepts-before-installing">Learn the key concepts before installing</a></li>
+    
+      <li><a href="#install-boot2docker">Install Boot2Docker</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#start-the-boot2docker-application">Start the Boot2Docker Application</a>
+      <ul>
+    
+      <li><a href="#from-the-applications-folder">From the Applications folder</a></li>
+    
+      <li><a href="#from-your-command-line">From your command line</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#basic-boot2docker-exercises">Basic Boot2Docker Exercises</a>
+      <ul>
+    
+      <li><a href="#access-container-ports">Access container ports</a></li>
+    
+      <li><a href="#mount-a-volume-on-the-container">Mount a volume on the container</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#upgrade-boot2docker">Upgrade Boot2Docker</a>
+      <ul>
+    
+      <li><a href="#from-the-command-line">From the command line</a></li>
+    
+      <li><a href="#use-the-installer">Use the installer</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#learning-more-and-acknowledgement">Learning more and Acknowledgement</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+
+          </ul>
+        </div>
+      </div>
+      <div class="span9 content-body">
+
+        
+
+        <div id="versionnav" class="span3 pull-right">
+          <ul class="nav version pull-right">
+            <li class="dropdown">
+              <a id="document-version-number" class="dropdown-toggle" data-toggle="dropdown" href="#">
+		      Version v1.6
+              </a>
+              <ul id="documentation-version-list" class="dropdown-menu pull-right">
+
+		<li role="presentation" class="divider"></li>
+		<li> <a class="home-link3 tertiary-nav" href="https://github.com/docker/docker/blob/master/docs/sources/installation/mac.md" >Edit on GitHub</a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <h1 id="install-docker-on-mac-os-x">Install Docker on Mac OS X</h1>
+<p>You can install Docker using Boot2Docker to run <code>docker</code> commands at your command-line.
+Choose this installation if you are familiar with the command-line or plan to
+contribute to the Docker project on GitHub.</p>
+<p><a href="https://kitematic.com/download"><img src="/installation/images/kitematic.png" alt="Download Kitematic"
+style="float:right;"></a></p>
+<p>Alternatively, you may want to try <a id="inlinelink" href="https://kitematic.com/"
+target="_blank">Kitematic</a>, an application that lets you set up Docker and
+run containers using a graphical user interface (GUI).</p>
+<h2 id="command-line-docker-with-boot2docker">Command-line Docker with Boot2Docker</h2>
+<p>Because the Docker daemon uses Linux-specific kernel features, you can't run
+Docker natively in OS X. Instead, you must install the Boot2Docker application.
+The application includes a VirtualBox Virtual Machine (VM), Docker itself, and the
+Boot2Docker management tool.</p>
+<p>The Boot2Docker management tool is a lightweight Linux virtual machine made
+specifically to run the Docker daemon on Mac OS X. The VirtualBox VM runs
+completely from RAM, is a small ~24MB download, and boots in approximately 5s.</p>
+<p><strong>Requirements</strong></p>
+<p>Your Mac must be running OS X 10.6 "Snow Leopard" or newer to run Boot2Docker.</p>
+<h3 id="learn-the-key-concepts-before-installing">Learn the key concepts before installing</h3>
+<p>In a Docker installation on Linux, your machine is both the localhost and the
+Docker host. In networking, localhost means your computer. The Docker host is
+the machine on which the containers run.</p>
+<p>On a typical Linux installation, the Docker client, the Docker daemon, and any
+containers run directly on your localhost. This means you can address ports on a
+Docker container using standard localhost addressing such as <code>localhost:8000</code> or
+<code>0.0.0.0:8376</code>.</p>
+<p><img alt="Linux Architecture Diagram" src="/installation/images/linux_docker_host.png" /></p>
+<p>In an OS X installation, the <code>docker</code> daemon is running inside a Linux virtual
+machine provided by Boot2Docker.</p>
+<p><img alt="OSX Architecture Diagram" src="/installation/images/mac_docker_host.png" /></p>
+<p>In OS X, the Docker host address is the address of the Linux VM.
+When you start the <code>boot2docker</code> process, the VM is assigned an IP address. Under
+<code>boot2docker</code> ports on a container map to ports on the VM. To see this in
+practice, work through the exercises on this page.</p>
+<h3 id="install-boot2docker">Install Boot2Docker</h3>
+<ol>
+<li>
+<p>Go to the <a href="https://github.com/boot2docker/osx-installer/releases/latest">boot2docker/osx-installer </a> release page.</p>
+</li>
+<li>
+<p>Download Boot2Docker by clicking <code>Boot2Docker-x.x.x.pkg</code> in the "Downloads"
+section.</p>
+</li>
+<li>
+<p>Install Boot2Docker by double-clicking the package.</p>
+<p>The installer places Boot2Docker in your "Applications" folder.</p>
+</li>
+</ol>
+<p>The installation places the <code>docker</code> and <code>boot2docker</code> binaries in your
+<code>/usr/local/bin</code> directory.</p>
+<h2 id="start-the-boot2docker-application">Start the Boot2Docker Application</h2>
+<p>To run a Docker container, you first start the <code>boot2docker</code> VM and then issue
+<code>docker</code> commands to create, load, and manage containers. You can launch
+<code>boot2docker</code> from your Applications folder or from the command line.</p>
+<blockquote>
+<p><strong>NOTE</strong>: Boot2Docker is designed as a development tool. You should not use
+ it in production environments.</p>
+</blockquote>
+<h3 id="from-the-applications-folder">From the Applications folder</h3>
+<p>When you launch the "Boot2Docker" application from your "Applications" folder, the
+application:</p>
+<ul>
+<li>
+<p>opens a terminal window</p>
+</li>
+<li>
+<p>creates a $HOME/.boot2docker directory</p>
+</li>
+<li>
+<p>creates a VirtualBox ISO and certs</p>
+</li>
+<li>
+<p>starts a VirtualBox VM running the <code>docker</code> daemon</p>
+</li>
+</ul>
+<p>Once the launch completes, you can run <code>docker</code> commands. A good way to verify
+your setup succeeded is to run the <code>hello-world</code> container.</p>
+<pre class="prettyprint well"><code>    $ docker run hello-world
+    Unable to find image 'hello-world:latest' locally
+    511136ea3c5a: Pull complete
+    31cbccb51277: Pull complete
+    e45a5af57b00: Pull complete
+    hello-world:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+    Status: Downloaded newer image for hello-world:latest
+    Hello from Docker.
+    This message shows that your installation appears to be working correctly.
+
+    To generate this message, Docker took the following steps:
+     1. The Docker client contacted the Docker daemon.
+     2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+        (Assuming it was not already locally available.)
+     3. The Docker daemon created a new container from that image which runs the
+        executable that produces the output you are currently reading.
+     4. The Docker daemon streamed that output to the Docker client, which sent it
+        to your terminal.
+
+    To try something more ambitious, you can run an Ubuntu container with:
+     $ docker run -it ubuntu bash
+
+    For more examples and ideas, visit:
+     http://docs.docker.com/userguide/
+</code></pre>
+<p>A more typical way to start and stop <code>boot2docker</code> is using the command line.</p>
+<h3 id="from-your-command-line">From your command line</h3>
+<p>Initialize and run <code>boot2docker</code> from the command line, do the following:</p>
+<ol>
+<li>
+<p>Create a new Boot2Docker VM.</p>
+<pre class="prettyprint well"><code>$ boot2docker init
+</code></pre>
+<p>This creates a new virtual machine. You only need to run this command once.</p>
+</li>
+<li>
+<p>Start the <code>boot2docker</code> VM.</p>
+<pre class="prettyprint well"><code>$ boot2docker start
+</code></pre>
+</li>
+<li>
+<p>Display the environment variables for the Docker client.</p>
+<pre class="prettyprint well"><code>$ boot2docker shellinit
+Writing /Users/mary/.boot2docker/certs/boot2docker-vm/ca.pem
+Writing /Users/mary/.boot2docker/certs/boot2docker-vm/cert.pem
+Writing /Users/mary/.boot2docker/certs/boot2docker-vm/key.pem
+    export DOCKER_HOST=tcp://192.168.59.103:2376
+    export DOCKER_CERT_PATH=/Users/mary/.boot2docker/certs/boot2docker-vm
+    export DOCKER_TLS_VERIFY=1
+</code></pre>
+<p>The specific paths and address on your machine will be different.</p>
+</li>
+<li>
+<p>To set the environment variables in your shell do the following:</p>
+<pre class="prettyprint well"><code>$ eval "$(boot2docker shellinit)"
+</code></pre>
+<p>You can also set them manually by using the <code>export</code> commands <code>boot2docker</code>
+returns.</p>
+</li>
+<li>
+<p>Run the <code>hello-world</code> container to verify your setup.</p>
+<pre class="prettyprint well"><code>$ docker run hello-world
+</code></pre>
+</li>
+</ol>
+<h2 id="basic-boot2docker-exercises">Basic Boot2Docker Exercises</h2>
+<p>At this point, you should have <code>boot2docker</code> running and the <code>docker</code> client
+environment initialized. To verify this, run the following commands:</p>
+<pre class="prettyprint well"><code>$ boot2docker status
+$ docker version
+</code></pre>
+<p>Work through this section to try some practical container tasks using <code>boot2docker</code> VM.</p>
+<h3 id="access-container-ports">Access container ports</h3>
+<ol>
+<li>
+<p>Start an NGINX container on the DOCKER_HOST.</p>
+<pre class="prettyprint well"><code>$ docker run -d -P --name web nginx
+</code></pre>
+<p>Normally, the <code>docker run</code> commands starts a container, runs it, and then
+exits. The <code>-d</code> flag keeps the container running in the background
+after the <code>docker run</code> command completes. The <code>-P</code> flag publishes exposed ports from the
+container to your local host; this lets you access them from your Mac.</p>
+</li>
+<li>
+<p>Display your running container with <code>docker ps</code> command</p>
+<pre class="prettyprint well"><code>CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                           NAMES
+5fb65ff765e9        nginx:latest        "nginx -g 'daemon of   3 minutes ago       Up 3 minutes        0.0.0.0:49156-&gt;443/tcp, 0.0.0.0:49157-&gt;80/tcp   web
+</code></pre>
+<p>At this point, you can see <code>nginx</code> is running as a daemon.</p>
+</li>
+<li>
+<p>View just the container's ports.</p>
+<pre class="prettyprint well"><code>$ docker port web
+443/tcp -&gt; 0.0.0.0:49156
+80/tcp -&gt; 0.0.0.0:49157
+</code></pre>
+<p>This tells you that the <code>web</code> container's port <code>80</code> is mapped to port
+<code>49157</code> on your Docker host.</p>
+</li>
+<li>
+<p>Enter the <code>http://localhost:49157</code> address (<code>localhost</code> is <code>0.0.0.0</code>) in your browser:</p>
+<p><img alt="Bad Address" src="/installation/images/bad_host.png" /></p>
+<p>This didn't work. The reason it doesn't work is your <code>DOCKER_HOST</code> address is
+not the localhost address (0.0.0.0) but is instead the address of the
+<code>boot2docker</code> VM.</p>
+</li>
+<li>
+<p>Get the address of the <code>boot2docker</code> VM.</p>
+<pre class="prettyprint well"><code>$ boot2docker ip
+192.168.59.103
+</code></pre>
+</li>
+<li>
+<p>Enter the <code>http://192.168.59.103:49157</code> address in your browser:</p>
+<p><img alt="Correct Addressing" src="/installation/images/good_host.png" /></p>
+<p>Success!</p>
+</li>
+<li>
+<p>To stop and then remove your running <code>nginx</code> container, do the following:</p>
+<pre class="prettyprint well"><code>$ docker stop web
+$ docker rm web
+</code></pre>
+</li>
+</ol>
+<h3 id="mount-a-volume-on-the-container">Mount a volume on the container</h3>
+<p>When you start <code>boot2docker</code>, it automatically shares your <code>/Users</code> directory
+with the VM. You can use this share point to mount directories onto your container.
+The next exercise demonstrates how to do this.</p>
+<ol>
+<li>
+<p>Change to your user <code>$HOME</code> directory.</p>
+<pre class="prettyprint well"><code>$ cd $HOME
+</code></pre>
+</li>
+<li>
+<p>Make a new <code>site</code> directory.</p>
+<pre class="prettyprint well"><code>$ mkdir site
+</code></pre>
+</li>
+<li>
+<p>Change into the <code>site</code> directory.</p>
+<pre class="prettyprint well"><code>$ cd site
+</code></pre>
+</li>
+<li>
+<p>Create a new <code>index.html</code> file.</p>
+<pre class="prettyprint well"><code>$ echo "my new site" &gt; index.html
+</code></pre>
+</li>
+<li>
+<p>Start a new <code>nginx</code> container and replace the <code>html</code> folder with your <code>site</code> directory.</p>
+<pre class="prettyprint well"><code>$ docker run -d -P -v $HOME/site:/usr/share/nginx/html --name mysite nginx
+</code></pre>
+</li>
+<li>
+<p>Get the <code>mysite</code> container's port.</p>
+<pre class="prettyprint well"><code>$ docker port mysite
+80/tcp -&gt; 0.0.0.0:49166
+443/tcp -&gt; 0.0.0.0:49165
+</code></pre>
+</li>
+<li>
+<p>Open the site in a browser:</p>
+<p><img alt="My site page" src="/installation/images/newsite_view.png" /></p>
+</li>
+<li>
+<p>Try adding a page to your <code>$HOME/site</code> in real time.</p>
+<pre class="prettyprint well"><code>$ echo "This is cool" &gt; cool.html
+</code></pre>
+</li>
+<li>
+<p>Open the new page in the browser.</p>
+<p><img alt="Cool page" src="/installation/images/cool_view.png" /></p>
+</li>
+<li>
+<p>Stop and then remove your running <code>mysite</code> container.</p>
+<pre class="prettyprint well"><code>$ docker stop mysite
+$ docker rm mysite
+</code></pre>
+</li>
+</ol>
+<h2 id="upgrade-boot2docker">Upgrade Boot2Docker</h2>
+<p>If you running Boot2Docker 1.4.1 or greater, you can upgrade Boot2Docker from
+the command line. If you are running an older version, you should use the
+package provided by the <code>boot2docker</code> repository.</p>
+<h3 id="from-the-command-line">From the command line</h3>
+<p>To upgrade from 1.4.1 or greater, you can do this:</p>
+<ol>
+<li>
+<p>Open a terminal on your local machine.</p>
+</li>
+<li>
+<p>Stop the <code>boot2docker</code> application.</p>
+<pre class="prettyprint well"><code>$ boot2docker stop
+</code></pre>
+</li>
+<li>
+<p>Run the upgrade command.</p>
+<pre class="prettyprint well"><code>$ boot2docker upgrade
+</code></pre>
+</li>
+</ol>
+<h3 id="use-the-installer">Use the installer</h3>
+<p>To upgrade any version of Boot2Docker, do this:</p>
+<ol>
+<li>
+<p>Open a terminal on your local machine.</p>
+</li>
+<li>
+<p>Stop the <code>boot2docker</code> application.</p>
+<pre class="prettyprint well"><code>$ boot2docker stop
+</code></pre>
+</li>
+<li>
+<p>Go to the <a href="https://github.com/boot2docker/osx-installer/releases/latest">boot2docker/osx-installer </a> release page.</p>
+</li>
+<li>
+<p>Download Boot2Docker by clicking <code>Boot2Docker-x.x.x.pkg</code> in the "Downloads"
+section.</p>
+</li>
+<li>
+<p>Install Boot2Docker by double-clicking the package.</p>
+<p>The installer places Boot2Docker in your "Applications" folder.</p>
+</li>
+</ol>
+<h2 id="learning-more-and-acknowledgement">Learning more and Acknowledgement</h2>
+<p>Use <code>boot2docker help</code> to list the full command line reference. For more
+information about using SSH or SCP to access the Boot2Docker VM, see the README
+at  <a href="https://github.com/boot2docker/boot2docker">Boot2Docker repository</a>.</p>
+<p>Thanks to Chris Jones whose <a href="http://goo.gl/Be6cCk">blog</a>  inspired me to redo
+this page.</p>
+<p>Continue with the <a href="/userguide/">Docker User Guide</a>.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="push-footer"></div>
+
+</div>
+
+
+
+<div id="footer-container" class="container">
+  <div id="footer" class="grey-body">
+    <div class="row">
+      <div class="span2">
+        <span class="footer-title">Community</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/community/events/">Events</a></li>
+          <li><a class="primary-button" href="http://posts.docker.com">Friends' Posts</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/meetups/">Meetups</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/governance/">Governance</a></li>
+          <li><a class="primary-button" href="http://forums.docker.com">Forums</a></li>
+          <li><a class="primary-button" href="http://botbot.me/freenode/docker">IRC</a></li>
+          <li><a class="primary-button" href="https://github.com/docker/docker">GitHub</a></li>
+          <li><a class="primary-button" href="http://stackoverflow.com/search?q=docker">Stackoverflow</a></li>
+          <li><a class="primary-button" href="http://www.cafepress.com/docker">Swag</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Enterprise</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/support/">Support</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/education/">Education</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/services/">Services</a></li>
+        </ul>
+        <span class="footer-title">Partner Solutions</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/partners/find/">Find a Partner</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/program/">Partner Program</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/learn/">Learn More</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Resources</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://docs.docker.com">Documentation</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/help/">Help</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/usecases/">Use Cases</a></li>
+          <li><a class="primary-button" href="http://www.docker.com/tryit/">Online Tutorial</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/howtobuy/">How To Buy</a></li>
+          <li><a class="primary-button" href="http://status.docker.com">Status</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/security/">Security</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Company</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/company/aboutus/">About Us</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/team/">Team</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/news/">News</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/press/">Press</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/careers/">Careers</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <span class="footer-title">Connect</span>
+        <div class="search">
+          <span>Subscribe to our newsletter</span>
+          <form action="https://www.docker.com/subscribe_newsletter/" method="post">
+            <input type='hidden' name='csrfmiddlewaretoken' value='aWL78QXQkY8DSKNYh6cl08p5eTLl7sOa' />
+            <tr><th><label for="id_email">Email:</label></th><td><input class="form-control" id="id_email" name="email" placeholder="Enter your email" type="text" /></td></tr>
+            
+            <button type="submit"><i class="icon-arrow-right"></i> </button>
+          </form>
+        </div>
+        <ul class="unstyled social">
+          <li><a title="Docker on Twitter" class="primary-button blog" href="http://blog.docker.com">Blog</a></li>
+          <li><a title="Docker on Twitter" class="primary-button twitter" href="http://twitter.com/docker">Twitter</a></li>
+          <li><a title="Docker on Google+" class="primary-button googleplus" href="https://plus.google.com/u/0/communities/108146856671494713993">Google+</a></li>
+          <li><a title="Docker on Facebook" class="primary-button facebook" href="https://www.facebook.com/docker.run">Facebook</a></li>
+          <li><a title="Docker on Youtube" class="primary-button youtube" href="http://www.youtube.com/user/dockerrun">YouTube</a></li>
+        </ul>
+        <ul class="unstyled social">
+          <li><a title="Docker on SlideShare" class="primary-button slideshare" href="http://www.slideshare.net/Docker">Slideshare</a></li>
+          <li>
+             <a title="Docker on LinkedIn" class="primary-button" href="https://www.linkedin.com/company/docker">
+                 <span class="linkedin"></span>
+                 LinkedIn
+             </a>
+          </li>
+          <li>
+              <a title="Docker on GitHub" class="primary-button" href="https://github.com/docker/">
+                  <span class="github"></span>
+                  GitHub
+              </a>
+          </li>
+          <li>
+              <a title="Docker on Reddit" class="primary-button" href="http://www.reddit.com/r/docker">
+                  <span class="reddit"></span>
+                  Reddit
+              </a>
+          </li>
+          <li>
+              <a title="Docker on AngelList" class="primary-button" href="https://angel.co/docker-inc-1">
+                  <span class="angellist"></span>
+                  AngelList
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="span6 pagination-right copyright">
+        <span>&copy; 2014-2015 Docker, Inc.</span>
+      </div>
+      <div class="span6 pagination-left copyright">
+        <a href="http://www.docker.com/legal/terms_of_service">Terms</a> &middot;
+        <a href="http://www.docker.com/legal/privacy_policy">Privacy</a> &middot;
+        <a href="http://www.docker.com/legal/trademark_guidelines">Trademarks</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.cookie.js" ></script>
+<script src="/js/jquery-scrolltofixed-min.js"></script>
+<script src="/js/bootstrap-3.0.3.min.js"></script>
+<script src="/js/prettify-1.0.min.js"></script>
+<script src="/js/dockerfile_tutorial.js"></script>
+<script src="/js/dockerfile_tutorial_level.js"></script>
+<script src="/js/base.js"></script>
+<script src="/tipuesearch/tipuesearch_set.js"></script>
+<script src="/tipuesearch/tipuesearch.min.js"></script>
+<script type="text/javascript">
+piAId = '45082';
+piCId = '1482';
+
+(function() {
+  function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+  }
+  if(window.attachEvent) { window.attachEvent('onload', async_load); }
+  else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').css("min-height", $(window).height() - 553 );
+    // if the URL contains a version string, update the version picker to reflect that
+    version = document.location.pathname.match(/^\/(v\d\.\d)\/.*/)
+    if (version && version[1]) {
+        $('#document-version-number')[0].text = 'Version '+version[1];
+    } else {
+        $('#document-version-number')[0].text = $('#document-version-number')[0].text + " (Latest)"
+    }
+    // load the complete versions list
+    $.get("/versions.html_fragment", function( data ) {
+    	$('#documentation-version-list').prepend(data);
+	//remove any "/v1.1/" bits from front, so we can add the path to the version selection dropdown.
+	path = document.location.pathname.replace(/^\/v\d\.\d/, "");
+	$('#documentation-version-list a.version').each(function(i, e) {
+		e.href = e.href+path;
+		$(e).removeClass()
+	});
+    });
+
+  })
+  var userName = getCookie('docker_sso_username');
+  if (userName) {
+    $('.topmostnav_loggedout').hide();
+    $('.topmostnav_loggedin').show();
+    $('#logged-in-header-username').text(userName);
+  } else {
+    $('.topmostnav_loggedout').show();
+    $('.topmostnav_loggedin').hide();
+  }
+</script>
+</body>
+</html>
