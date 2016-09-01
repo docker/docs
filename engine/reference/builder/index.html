@@ -1,0 +1,3651 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dockerfiles use a simple DSL which allows you to automate the steps you would normally manually take to create an image.">
+    <meta name="keywords" content="[builder, docker, Dockerfile, automation,  image creation]">
+    <title>Dockerfile reference </title>
+     <link rel="shortcut icon" href="https://docs.docker.com/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../../dist/assets/css/app.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.6/animate.min.css">
+    <link rel="stylesheet" href="../../../css/custom.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="../../../dist/assets/js/modernizr.js"></script> 
+</head>
+<body>
+  <div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+
+      <a class="left-off-canvas-toggle" href="#" >
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve">
+          <path fill="#3597D4" d="M30.583,9.328c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,7.966,30.583,8.576,30.583,9.328L30.583,9.328z"/>
+          <path fill="#3597D4" d="M30.583,17.09c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,15.728,30.583,16.338,30.583,17.09L30.583,17.09z"/>
+          <path fill="#3597D4" d="M30.583,24.387c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+          c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,23.025,30.583,23.635,30.583,24.387L30.583,24.387z"/>
+        </svg>
+      </a>
+      <a class="button secondary small get-started-cta">Get Started</a>
+      <header class="main-header">
+        <div class="row">
+          <div class="large-3 columns">
+            <a href="../../../"><img class="logo" src="../../../dist/assets/images/logo.png"></a>
+          </div>
+          <div class="large-9 columns">
+            <ul class="nav-global">
+              <li><a href="https://www.docker.com/support">Support</a></li>
+              <li><a href="https://training.docker.com/">Training</a></li>
+              <li><a href="https://docs.docker.com/">Docs</a></li>
+              <li><a href="http://blog.docker.com/">Blog</a></li>
+              <li><a href="https://hub.docker.com/">Docker Hub</a></li>
+              <li><a class="button" href="../../../mac/started/">Get Started</a></li>
+            </ul>
+            <ul class="nav-main">
+              <li><a href="https://www.docker.com/products">Products</a>
+                <ul>
+                  <li><a href="https://www.docker.com/pricing">Pricing</a></li>
+                  <li><a href="https://www.docker.com/whatisdocker">What is Docker?</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/customers">Customers</a></li>
+              <li><a href="https://www.docker.com/community">Community</a>
+                <ul>
+                  <li><a href="https://www.docker.com/community/meetups">Meetups</a></li>
+                  <li><a href="https://www.docker.com/community/events">Events</a></li>
+                  <li><a href="https://forums.docker.com">Forums</a></li>
+                  <li><a href="http://www.scoop.it/t/docker-by-docker">Community News</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/partners">Partners</a>
+                <ul>
+                  <li><a href="https://www.docker.com/partners/partner-programs">Partner Programs</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/company">Company</a>
+                <ul>
+                  <li><a href="https://www.docker.com/news-and-press">News &amp; Press</a></li>
+                  <li><a href="https://www.docker.com/work-docker">Work at Docker</a></li>
+                  <li><a href="https://www.docker.com/company/management">Management</a></li>
+                  <li><a href="https://www.docker.com/company/contact">Contact</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.docker.com/open-source">Open Source</a>
+                <ul>
+                  <li><a href="https://www.docker.com/contribute">Contribute</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      
+      <aside class="left-off-canvas-menu">
+        <ul class="off-canvas-list">
+          <li class="has-submenu"><a href="#">Products</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">What Is Docker</a></li>
+              <li><a href="#">Products</a></li>
+              <li><a href="#">Docker Engine</a></li>
+              <li><a href="#">Docker Hub</a></li>
+              <li><a href="#">Docker Registry</a></li>
+              <li><a href="#">Docker Machine</a></li>
+              <li><a href="#">Docker Swarm</a></li>
+              <li><a href="#">Docker Compose</a></li>
+              <li><a href="#">Kitematic</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Customers</a></li>
+          <li class="has-submenu"><a href="#">Community</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#">Meetups</a></li>
+              <li><a href="https://www.docker.com/community/events">Events</a></li>
+              <li><a href="#">Forum</a></li>
+              <li><a href="#">Scoop.it</a></li>
+            </ul>
+          </li>
+          <li class="has-submenu"><a href="#">Partners</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Partners</a></li>
+              <li><a href="https://www.docker.com/partners/partner-programs">Partners Programs</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Company</a></li>
+          <li class="has-submenu"><a href="#">Open Source</a>
+            <ul class="left-submenu">
+              <li class="back"><a href="#">Back</a></li>
+              <li><a href="#">Open Source</a></li>
+              <li><a href="#">Contribute</a></li>
+              <li><a href="#">Governance</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav-global-off-canvas">
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Training</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Sign in</a></li>
+          <li><a href="#">Sign up</a></li>
+        </ul>
+      </aside>
+      
+      <a class="exit-off-canvas"></a>
+<div id="docs" class="row">
+    <div class="large-3 columns">
+        <section id="multiple" data-accordion-group>
+  
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Install</button>
+          <div data-content>
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Engine</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../engine/installation/mac/" class=""> Installation on Mac OS X</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/installation/windows/" class=""> Installation on Windows</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Linux</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../engine/installation/ubuntulinux/" class=""> Installation on Ubuntu </a>
+                            
+                                <a data-link href="../../../engine/installation/rhel/" class=""> Installation on Red Hat Enterprise Linux</a>
+                            
+                                <a data-link href="../../../engine/installation/centos/" class=""> Installation on CentOS</a>
+                            
+                                <a data-link href="../../../engine/installation/fedora/" class=""> Installation on Fedora</a>
+                            
+                                <a data-link href="../../../engine/installation/debian/" class=""> Installation on Debian</a>
+                            
+                                <a data-link href="../../../engine/installation/archlinux/" class=""> Installation on Arch Linux</a>
+                            
+                                <a data-link href="../../../engine/installation/cruxlinux/" class=""> Installation on CRUX Linux</a>
+                            
+                                <a data-link href="../../../engine/installation/frugalware/" class=""> Installation on FrugalWare</a>
+                            
+                                <a data-link href="../../../engine/installation/gentoolinux/" class=""> Installation on Gentoo</a>
+                            
+                                <a data-link href="../../../engine/installation/oracle/" class=""> Installation on Oracle Linux</a>
+                            
+                                <a data-link href="../../../engine/installation/SUSE/" class=""> Installation on openSUSE and SUSE Linux Enterprise</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Cloud</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../engine/installation/amazon/" class=""> Amazon EC2 Installation</a>
+                            
+                                <a data-link href="../../../engine/installation/google/" class=""> Installation on Google Cloud Platform</a>
+                            
+                                <a data-link href="../../../engine/installation/softlayer/" class=""> Installation on IBM SoftLayer </a>
+                            
+                                <a data-link href="../../../engine/installation/azure/" class=""> Installation on Microsoft Azure platform</a>
+                            
+                                <a data-link href="../../../engine/installation/rackspace/" class=""> Installation on Rackspace Cloud</a>
+                            
+                                <a data-link href="../../../engine/installation/joyent/" class=""> Joyent Triton Elastic Container Service</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/installation/binaries/" class=""> Installation from binaries</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="../../../kitematic/" class=""> Kitematic</a>
+              
+            
+              
+                <a data-link href="../../../machine/install-machine/" class=""> Docker Machine</a>
+              
+            
+              
+                <a data-link href="../../../compose/install/" class=""> Docker Compose</a>
+              
+            
+              
+                <a data-link href="../../../swarm/install-w-machine/" class=""> Docker Swarm</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Docker Fundamentals</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../engine/userguide/basics/" class=""> Quickstart containers</a>
+              
+            
+              
+                <a data-link href="../../../engine/userguide/" class=""> The Docker user guide</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Work with Docker Images</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../engine/articles/dockerfile_best-practices/" class=""> Best practices for writing Dockerfiles</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/articles/baseimages/" class=""> Create a base image</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Work with Docker Containers</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../engine/userguide/dockerizing/" class=""> Hello world in a container</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/usingdocker/" class=""> Run a simple application</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/dockerimages/" class=""> Build your own images</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/networkingcontainers/" class=""> Networking containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/dockervolumes/" class=""> Manage data in containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/dockerrepos/" class=""> Store images on Docker Hub</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker on Windows &amp; OSX</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../engine/articles/dsc/" class=""> PowerShell DSC Usage</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Use the Kitematic GUI</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../kitematic/userguide/" class=""> Kitematic User Guide: Intro &amp; Overview</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../kitematic/nginx-web-server/" class=""> Set up an Nginx web server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../kitematic/minecraft-server/" class=""> Set up a Minecraft Server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../kitematic/rethinkdb-dev-database/" class=""> Creating a Local RethinkDB Database for Development</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../kitematic/faq/" class=""> Frequently Asked Questions</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../kitematic/known-issues/" class=""> Known Issues</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Use Docker</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../engine/misc/" class=""> About Docker</a>
+              
+            
+              
+                <a data-link href="../../../engine/userguide/labels-custom-metadata/" class=""> Apply custom metadata</a>
+              
+            
+              
+                <a data-link href="../../../engine/misc/deprecated/" class=""> Docker Deprecated Features</a>
+              
+            
+              
+                <a data-link href="../../../engine/introduction/understanding-docker/" class=""> Understand the architecture</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Provision &amp; set up Docker hosts</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../machine/" class=""> Overview of Docker Machine</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../machine/get-started/" class=""> Get started with Docker Machine and a local VM</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../machine/get-started-cloud/" class=""> Using Docker Machine with a cloud provider</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../machine/migrate-to-machine/" class=""> Migrate from Boot2Docker to Docker Machine</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Create multi-container applications</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../compose/" class=""> Overview of Docker Compose</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../compose/production/" class=""> Using Compose in production</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../compose/extends/" class=""> Extending services in Compose</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../compose/gettingstarted/" class=""> Getting Started</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../compose/django/" class=""> Quickstart Guide: Compose and Django</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../compose/rails/" class=""> Quickstart Guide: Compose and Rails</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../compose/networking/" class=""> Networking in Compose</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../compose/wordpress/" class=""> Quickstart Guide: Compose and WordPress</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../compose/completion/" class=""> Command-line Completion</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Cluster Docker containers</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../swarm/" class=""> Docker Swarm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../swarm/install-manual/" class=""> Create a swarm for development</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../swarm/multi-manager-setup/" class=""> High availability in Docker Swarm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../swarm/networking/" class=""> Docker Swarm Networking</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../swarm/discovery/" class=""> Docker Swarm discovery</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../swarm/scheduler/filter/" class=""> Docker Swarm filters</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../swarm/scheduler/strategy/" class=""> Docker Swarm strategies</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Administrate Docker</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../engine/articles/host_integration/" class=""> Automatically start containers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/articles/security/" class=""> Docker security</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/articles/configuring/" class=""> Configuring and running Docker</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/articles/runmetrics/" class=""> Runtime metrics</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/articles/https/" class=""> Protect the Docker daemon socket</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/articles/ambassador_pattern_linking/" class=""> Link via an ambassador container</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/articles/systemd/" class=""> Control and configure Docker with systemd</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Logging</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../engine/reference/logging/overview/" class=""> Configuring Logging Drivers</a>
+                            
+                                <a data-link href="../../../engine/reference/logging/awslogs/" class=""> Amazon CloudWatch Logs logging driver</a>
+                            
+                                <a data-link href="../../../engine/reference/logging/log_tags/" class=""> Log tags for logging driver</a>
+                            
+                                <a data-link href="../../../engine/reference/logging/fluentd/" class=""> Fluentd logging driver</a>
+                            
+                                <a data-link href="../../../engine/reference/logging/splunk/" class=""> Splunk logging driver</a>
+                            
+                                <a data-link href="../../../engine/reference/logging/journald/" class=""> journald logging driver</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Applications and Services</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../engine/examples/running_riak_service/" class=""> Dockerizing a Riak service</a>
+                            
+                                <a data-link href="../../../engine/examples/running_ssh_service/" class=""> Dockerizing an SSH service</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Integrate with Third-party Tools</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../engine/articles/cfengine_process_management/" class=""> Process management with CFEngine</a>
+                            
+                                <a data-link href="../../../engine/articles/chef/" class=""> Using Chef</a>
+                            
+                                <a data-link href="../../../engine/articles/puppet/" class=""> Using Puppet</a>
+                            
+                                <a data-link href="../../../engine/articles/using_supervisord/" class=""> Using Supervisor with Docker</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker storage drivers</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../engine/userguide/storagedriver/imagesandcontainers/" class=""> Understand images, containers, and storage drivers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/storagedriver/selectadriver/" class=""> Select a storage driver</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/storagedriver/aufs-driver/" class=""> AUFS storage driver in practice</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/storagedriver/btrfs-driver/" class=""> BTRFS storage in practice</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/storagedriver/device-mapper-driver/" class=""> Device mapper storage in practice</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/storagedriver/overlayfs-driver/" class=""> OverlayFS storage in practice</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/storagedriver/zfs-driver/" class=""> ZFS storage in practice</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Network configuration</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../engine/userguide/networking/dockernetworks/" class=""> Docker container networking</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/networking/work-with-networks/" class=""> Work with network commands</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/userguide/networking/get-started-overlay/" class=""> Get started with multi-host networking</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Default bridge network</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../engine/userguide/networking/default_network/dockerlinks/" class=""> Legacy container links</a>
+                            
+                                <a data-link href="../../../engine/userguide/networking/default_network/binding/" class=""> Bind container ports to the host</a>
+                            
+                                <a data-link href="../../../engine/userguide/networking/default_network/build-bridges/" class=""> Build your own bridge</a>
+                            
+                                <a data-link href="../../../engine/userguide/networking/default_network/configure-dns/" class=""> Configure container DNS</a>
+                            
+                                <a data-link href="../../../engine/userguide/networking/default_network/custom-docker0/" class=""> Customize the docker0 bridge</a>
+                            
+                                <a data-link href="../../../engine/userguide/networking/default_network/container-communication/" class=""> Understand container communication</a>
+                            
+                                <a data-link href="../../../engine/userguide/networking/default_network/ipv6/" class=""> IPv6 with Docker</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Applied Docker</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../engine/examples/mongodb/" class=""> Dockerizing MongoDB</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/examples/postgresql_service/" class=""> Dockerizing PostgreSQL</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/examples/couchdb_data_volumes/" class=""> Dockerizing a CouchDB service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/examples/nodejs_web_app/" class=""> Dockerizing a Node.js web app</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/examples/running_redis_service/" class=""> Dockerizing a Redis service</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/examples/apt-cacher-ng/" class=""> Dockerizing an apt-cacher-ng service</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Manage image repositories</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../engine/userguide/image_management/" class=""> Image management</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Hub</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../docker-hub/" class=""> Introducing Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-hub/accounts/" class=""> Your Docker Hub account</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-hub/repos/" class=""> Repositories on Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-hub/builds/" class=""> Automated Builds on Docker Hub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-hub/github/" class=""> Automated Builds from GitHub</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-hub/bitbucket/" class=""> Automated Builds with Bitbucket</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-hub/orgs/" class=""> Teams &amp; Organizations</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-hub/official_repos/" class=""> Official Repositories on Docker Hub</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Trusted Registry</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../docker-trusted-registry/" class=""> Overview</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Trusted Registry installation overview</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../docker-trusted-registry/install/dtr-ami-byol-launch/" class=""> Install Docker Subscription for AWS (BYOL))</a>
+                            
+                                <a data-link href="../../../docker-trusted-registry/install/engine-ami-launch/" class=""> Install Docker Engine for AWS AMI (BDS)</a>
+                            
+                                <a data-link href="../../../docker-trusted-registry/install/dtr-ami-bds-launch/" class=""> Install Trusted Registry for AWS AMI (BDS)</a>
+                            
+                                <a data-link href="../../../docker-trusted-registry/install/install-csengine/" class=""> Manually Install the CS Docker Engine</a>
+                            
+                                <a data-link href="../../../docker-trusted-registry/install/install-dtr/" class=""> Manually install Trusted Registry</a>
+                            
+                                <a data-link href="../../../docker-trusted-registry/install/upgrade/" class=""> Upgrade Trusted Registry and CS Engine</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-trusted-registry/quick-start/" class=""> Quick-start: Basic Workflow</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-trusted-registry/userguide/" class=""> User guide</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-trusted-registry/adminguide/" class=""> Admin guide</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-trusted-registry/configuration/" class=""> Configuration options</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-trusted-registry/license/" class=""> Trusted Registry License</a>
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> DTR APIs</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../docker-trusted-registry/api/" class=""> Docker Trusted Registry Accounts &amp; Repos API: Intro &amp; Overview</a>
+                            
+                                <a data-link href="../../../docker-trusted-registry/api/dtr_1_3_accounts/" class=""> Docker Trusted Registry Accounts API</a>
+                            
+                                <a data-link href="../../../docker-trusted-registry/api/dtr_1_3_teams/" class=""> Docker Trusted Registry User and Org API</a>
+                            
+                                <a data-link href="../../../docker-trusted-registry/api/dtr_1_3_repositories/" class=""> Docker Trusted Registry Repository API</a>
+                            
+                                <a data-link href="../../../docker-trusted-registry/api/dtr_1_3_user_repo_access/" class=""> Docker Trusted Registry User Repository API</a>
+                            
+                                <a data-link href="../../../docker-trusted-registry/api/dtr_1_3_team_repo_access/" class=""> Docker Trusted Registry Org Repository API</a>
+                            
+                                <a data-link href="../../../docker-trusted-registry/api/dtr_1_3_team_repo_namespace_access/" class=""> Docker Trusted Registry Org Namespace API</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-trusted-registry/support/" class=""> Support</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-trusted-registry/release-notes/" class=""> Release notes</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../docker-trusted-registry/prior-release-notes/" class=""> Prior release notes archive</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Registry</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../registry/" class=""> Docker Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../registry/introduction/" class=""> Understanding the Registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../registry/deploying/" class=""> Deploying a registry server</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../registry/configuration/" class=""> Configuring a registry</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../registry/notifications/" class=""> Working with notifications</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../registry/help/" class=""> Getting help</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Use trusted images</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../engine/security/trust/content_trust/" class=""> Content trust in Docker</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/security/trust/trust_automation/" class=""> Automation with content trust</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/security/trust/trust_key_mng/" class=""> Manage keys for content trust</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/security/trust/trust_sandbox/" class=""> Play in a content trust sandbox</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="../../../engine/articles/certificates/" class=""> Using certificates for repository client verification</a>
+              
+            
+              
+                <a data-link href="../../../engine/articles/registry_mirror/" class=""> Run a local registry mirror</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Extend Docker</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../engine/extend/plugins_network/" class=""> Docker network driver plugins</a>
+              
+            
+              
+                <a data-link href="../../../engine/extend/plugins/" class=""> Extending Docker with plugins</a>
+              
+            
+              
+                <a data-link href="../../../engine/extend/plugins_volume/" class=""> Volume plugins</a>
+              
+            
+              
+                <a data-link href="../../../engine/extend/plugin_api/" class=""> Plugins API</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Command and API references</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../engine/reference/run/" class=""> Docker run reference</a>
+              
+            
+              
+                <a data-link href="../../../engine/reference/builder/" class=" active"> Dockerfile reference</a>
+              
+            
+              
+                <a data-link href="../../../engine/reference/api/remote_api_client_libraries/" class=""> Remote API client libraries</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Using the command line</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/cli/" class=""> Use the Docker command line</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/daemon/" class=""> daemon</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/attach/" class=""> attach</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/build/" class=""> build</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/commit/" class=""> commit</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/cp/" class=""> cp</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/create/" class=""> create</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/diff/" class=""> diff</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/events/" class=""> events</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/exec/" class=""> exec</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/export/" class=""> export</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/history/" class=""> history</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/images/" class=""> images</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/import/" class=""> import</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/info/" class=""> info</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/inspect/" class=""> inspect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/kill/" class=""> kill</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/load/" class=""> load</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/login/" class=""> login</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/logout/" class=""> logout</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/logs/" class=""> logs</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/network_connect/" class=""> network connect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/network_create/" class=""> network create</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/network_disconnect/" class=""> network disconnect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/network_inspect/" class=""> network inspect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/network_ls/" class=""> network ls</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/network_rm/" class=""> network rm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/pause/" class=""> pause</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/port/" class=""> port</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/ps/" class=""> ps</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/pull/" class=""> pull</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/push/" class=""> push</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/rename/" class=""> rename</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/restart/" class=""> restart</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/rm/" class=""> rm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/rmi/" class=""> rmi</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/run/" class=""> run</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/save/" class=""> save</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/search/" class=""> search</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/start/" class=""> start</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/stats/" class=""> stats</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/stop/" class=""> stop</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/tag/" class=""> tag</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/top/" class=""> top</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/unpause/" class=""> unpause</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/version/" class=""> version</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/volume_create/" class=""> volume create</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/volume_inspect/" class=""> volume inspect</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/volume_ls/" class=""> volume ls</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/volume_rm/" class=""> volume rm</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/commandline/wait/" class=""> wait</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="../../../engine/reference/api/docker_io_accounts_api/" class=""> docker.io accounts API</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Remote API</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../engine/reference/api/docker_remote_api/" class=""> Remote API</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/api/docker_remote_api_v1.21/" class=""> Remote API v1.21</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/api/docker_remote_api_v1.20/" class=""> Remote API v1.20</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/api/docker_remote_api_v1.19/" class=""> Remote API v1.19</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/api/docker_remote_api_v1.18/" class=""> Remote API v1.18</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/api/docker_remote_api_v1.17/" class=""> Remote API v1.17</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/api/docker_remote_api_v1.16/" class=""> Remote API v1.16</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/api/docker_remote_api_v1.15/" class=""> Remote API v1.15</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/api/docker_remote_api_v1.14/" class=""> Remote API v1.14</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../engine/reference/api/docker-io_api/" class=""> Docker Hub API</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Hub</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../engine/reference/api/hub_registry_spec/" class=""> The Docker Hub and the Registry v1</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="../../../docker-trusted-registry/api/dtr_api/" class=""> Docker Trusted Registry</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Compose Reference</button>
+                  <div data-content>
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Compose CLI reference</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../compose/reference/overview/" class=""> Introduction to the CLI</a>
+                            
+                                <a data-link href="../../../compose/reference/docker-compose/" class=""> docker-compose</a>
+                            
+                                <a data-link href="../../../compose/reference/build/" class=""> build</a>
+                            
+                                <a data-link href="../../../compose/reference/help/" class=""> help</a>
+                            
+                                <a data-link href="../../../compose/reference/kill/" class=""> kill</a>
+                            
+                                <a data-link href="../../../compose/reference/logs/" class=""> logs</a>
+                            
+                                <a data-link href="../../../compose/reference/pause/" class=""> pause</a>
+                            
+                                <a data-link href="../../../compose/reference/port/" class=""> port</a>
+                            
+                                <a data-link href="../../../compose/reference/ps/" class=""> ps</a>
+                            
+                                <a data-link href="../../../compose/reference/pull/" class=""> pull</a>
+                            
+                                <a data-link href="../../../compose/reference/restart/" class=""> restart</a>
+                            
+                                <a data-link href="../../../compose/reference/rm/" class=""> rm</a>
+                            
+                                <a data-link href="../../../compose/reference/run/" class=""> run</a>
+                            
+                                <a data-link href="../../../compose/reference/scale/" class=""> scale</a>
+                            
+                                <a data-link href="../../../compose/reference/start/" class=""> start</a>
+                            
+                                <a data-link href="../../../compose/reference/stop/" class=""> stop</a>
+                            
+                                <a data-link href="../../../compose/reference/unpause/" class=""> unpause</a>
+                            
+                                <a data-link href="../../../compose/reference/up/" class=""> up</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../compose/compose-file/" class=""> Compose file reference</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../compose/env/" class=""> Compose environment variables reference</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Machine Reference</button>
+                  <div data-content>
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Drivers</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../machine/drivers/os-base/" class=""> Driver options and operating system defaults</a>
+                            
+                                <a data-link href="../../../machine/drivers/aws/" class=""> Amazon Web Services</a>
+                            
+                                <a data-link href="../../../machine/drivers/digital-ocean/" class=""> Digital Ocean</a>
+                            
+                                <a data-link href="../../../machine/drivers/generic/" class=""> Generic</a>
+                            
+                                <a data-link href="../../../machine/drivers/gce/" class=""> Google Compute Engine</a>
+                            
+                                <a data-link href="../../../machine/drivers/soft-layer/" class=""> IBM Softlayer</a>
+                            
+                                <a data-link href="../../../machine/drivers/azure/" class=""> Microsoft Azure</a>
+                            
+                                <a data-link href="../../../machine/drivers/hyper-v/" class=""> Microsoft Hyper-V</a>
+                            
+                                <a data-link href="../../../machine/drivers/openstack/" class=""> OpenStack</a>
+                            
+                                <a data-link href="../../../machine/drivers/virtualbox/" class=""> Oracle VirtualBox</a>
+                            
+                                <a data-link href="../../../machine/drivers/rackspace/" class=""> Rackspace</a>
+                            
+                                <a data-link href="../../../machine/drivers/vm-fusion/" class=""> VMware Fusion</a>
+                            
+                                <a data-link href="../../../machine/drivers/vm-cloud/" class=""> VMware vCloud Air</a>
+                            
+                                <a data-link href="../../../machine/drivers/vsphere/" class=""> VMware vSphere</a>
+                            
+                                <a data-link href="../../../machine/drivers/exoscale/" class=""> exoscale</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                      
+                        <article data-accordion>
+                          <button data-control> Subcommands</button>
+                          <div data-content>
+                            
+                                <a data-link href="../../../machine/reference/active/" class=""> active</a>
+                            
+                                <a data-link href="../../../machine/reference/config/" class=""> config</a>
+                            
+                                <a data-link href="../../../machine/reference/create/" class=""> create</a>
+                            
+                                <a data-link href="../../../machine/reference/env/" class=""> env</a>
+                            
+                                <a data-link href="../../../machine/reference/help/" class=""> help</a>
+                            
+                                <a data-link href="../../../machine/reference/inspect/" class=""> inspect</a>
+                            
+                                <a data-link href="../../../machine/reference/ip/" class=""> ip</a>
+                            
+                                <a data-link href="../../../machine/reference/kill/" class=""> kill</a>
+                            
+                                <a data-link href="../../../machine/reference/ls/" class=""> ls</a>
+                            
+                                <a data-link href="../../../machine/reference/regenerate-certs/" class=""> regenerate-certs</a>
+                            
+                                <a data-link href="../../../machine/reference/restart/" class=""> restart</a>
+                            
+                                <a data-link href="../../../machine/reference/rm/" class=""> rm</a>
+                            
+                                <a data-link href="../../../machine/reference/scp/" class=""> scp</a>
+                            
+                                <a data-link href="../../../machine/reference/ssh/" class=""> ssh</a>
+                            
+                                <a data-link href="../../../machine/reference/start/" class=""> start</a>
+                            
+                                <a data-link href="../../../machine/reference/status/" class=""> status</a>
+                            
+                                <a data-link href="../../../machine/reference/stop/" class=""> stop</a>
+                            
+                                <a data-link href="../../../machine/reference/upgrade/" class=""> upgrade</a>
+                            
+                                <a data-link href="../../../machine/reference/url/" class=""> url</a>
+                            
+                           </div>
+                         </article> 
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Swarm Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../swarm/api/swarm-api/" class=""> Docker Swarm API</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Docker Registry Reference</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../registry/spec/api/" class=""> HTTP API V2</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../registry/storagedrivers/" class=""> Storage Drivers</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../registry/spec/auth/jwt/" class=""> Token Authentication Implementation</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../registry/spec/auth/token/" class=""> Token Authentication Specification</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Open Source at Docker</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../opensource/code/" class=""> Quickstart contribution</a>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Set up for Engine Development</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../opensource/project/who-written-for/" class=""> README first</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/project/software-required/" class=""> Get the required software</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/project/software-req-win/" class=""> Set up for development on Windows</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/project/set-up-git/" class=""> Configure Git for contributing</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/project/set-up-dev-env/" class=""> Work with a development container</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/project/test-and-docs/" class=""> Run tests and test documentation</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Contribution workflow</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../opensource/workflow/make-a-contribution/" class=""> Understand how to contribute</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/workflow/find-an-issue/" class=""> Find and claim an issue</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/workflow/work-issue/" class=""> Work on your issue</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/workflow/create-pr/" class=""> Create a pull request (PR)</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/workflow/review-pr/" class=""> Participate in the PR review</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/workflow/advanced-contributing/" class=""> Advanced contributing</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/workflow/coding-style/" class=""> Coding style checklist</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Other ways to contribute</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../opensource/ways/meetups/" class=""> Organize a Docker Meetup</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/ways/issues/" class=""> Organize our issues</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/ways/community/" class=""> Support the community</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/ways/test/" class=""> Testing contributions</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <article data-accordion>
+                  <button data-control> Governance</button>
+                  <div data-content>
+                    
+                      
+                        <a data-link href="../../../opensource/governance/dgab-info/" class=""> Docker Governance Advisory Board</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/governance/board-profiles/" class=""> Board member profiles</a>
+                      
+                      
+                    
+                      
+                        <a data-link href="../../../opensource/governance/conduct-code/" class=""> Code of conduct</a>
+                      
+                      
+                    
+                  </div>
+                </article>
+              
+            
+              
+                <a data-link href="../../../opensource/FAQ/" class=""> FAQ for contributors</a>
+              
+            
+              
+                <a data-link href="../../../opensource/get-help/" class=""> Where to chat or get help</a>
+              
+            
+              
+                <a data-link href="../../../opensource/doc-style/" class=""> Style guide for Docker documentation</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> About</button>
+          <div data-content>
+            
+              
+                <a data-link href="../../../release-notes/" class=""> Docker Release Notes</a>
+              
+            
+              
+                <a data-link href="../../../engine/misc/faq/" class=""> FAQ</a>
+              
+            
+              
+                <a data-link href="../../../engine/reference/glossary/" class=""> Docker Glossary</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+    <section data-accordion>
+      
+        <article data-accordion>
+          <button data-control> Docs archive</button>
+          <div data-content>
+            
+              
+                <a data-link href="http://docs.docker.com/v1.7/" class=""> Version 1.7</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.6/" class=""> Version 1.6</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.5/" class=""> Version 1.5</a>
+              
+            
+              
+                <a data-link href="http://docs.docker.com/v1.4/" class=""> Version 1.4</a>
+              
+            
+          </div>
+        </article>
+       
+    </section>
+  
+</section>
+
+<script>
+$(document).ready(function () {
+  var $activeLink = $('#multiple [data-link].active');
+  var $accordions = $activeLink.parents('article[data-accordion]');
+  $($accordions.get().reverse()).each(function (index, accordion) {
+    var $accordion = $(accordion);
+    var $content = $accordion.find('[data-content]');
+    $accordion.addClass('open');
+    $content.css({'max-height': '100%'});
+  });
+});
+</script>
+
+    </div>
+    <div class="large-6 columns">
+      <section id="main">
+        <article id="content">
+          
+
+<h1 id="dockerfile-reference">Dockerfile reference</h1>
+
+<p>Docker can build images automatically by reading the instructions from a
+<code>Dockerfile</code>. A <code>Dockerfile</code> is a text document that contains all the commands a
+user could call on the command line to assemble an image. Using <code>docker build</code>
+users can create an automated build that executes several command-line
+instructions in succession.</p>
+
+<p>This page describes the commands you can use in a <code>Dockerfile</code>. When you are
+done reading this page, refer to the <a href="../../../engine/articles/dockerfile_best-practices/"><code>Dockerfile</code> Best
+Practices</a> for a tip-oriented guide.</p>
+
+<h2 id="usage">Usage</h2>
+
+<p>The <a href="../../../engine/reference/commandline/build/"><code>docker build</code></a> command builds an image from
+a <code>Dockerfile</code> and a <em>context</em>. The build&rsquo;s context is the files at a specified
+location <code>PATH</code> or <code>URL</code>. The <code>PATH</code> is a directory on your local filesystem.
+The <code>URL</code> is a the location of a Git repository.</p>
+
+<p>A context is processed recursively. So, a <code>PATH</code> includes any subdirectories and
+the <code>URL</code> includes the repository and its submodules. A simple build command
+that uses the current directory as context:</p>
+
+<pre><code>$ docker build .
+Sending build context to Docker daemon  6.51 MB
+...
+</code></pre>
+
+<p>The build is run by the Docker daemon, not by the CLI. The first thing a build
+process does is send the entire context (recursively) to the daemon.  In most
+cases, it&rsquo;s best to start with an empty directory as context and keep your
+Dockerfile in that directory. Add only the files needed for building the
+Dockerfile.</p>
+
+<blockquote>
+<p><strong>Warning</strong>: Do not use your root directory, <code>/</code>, as the <code>PATH</code> as it causes
+the build to transfer the entire contents of your hard drive to the Docker
+daemon.</p>
+</blockquote>
+
+<p>To use a file in the build context, the <code>Dockerfile</code> refers to the file specified
+in an instruction, for example,  a <code>COPY</code> instruction. To increase the build&rsquo;s
+performance, exclude files and directories by adding a <code>.dockerignore</code> file to
+the context directory.  For information about how to <a href="#dockerignore-file">create a <code>.dockerignore</code>
+file</a> see the documentation on this page.</p>
+
+<p>Traditionally, the <code>Dockerfile</code> is called <code>Dockerfile</code> and located in the root
+of the context. You use the <code>-f</code> flag with <code>docker build</code> to point to a Dockerfile
+anywhere in your file system.</p>
+
+<pre><code>$ docker build -f /path/to/a/Dockerfile .
+</code></pre>
+
+<p>You can specify a repository and tag at which to save the new image if
+the build succeeds:</p>
+
+<pre><code>$ docker build -t shykes/myapp .
+</code></pre>
+
+<p>To tag the image into multiple repositories after the build,
+add multiple <code>-t</code> parameters when you run the <code>build</code> command:</p>
+
+<pre><code>$ docker build -t shykes/myapp:1.0.2 -t shykes/myapp:latest .
+</code></pre>
+
+<p>The Docker daemon runs the instructions in the <code>Dockerfile</code> one-by-one,
+committing the result of each instruction
+to a new image if necessary, before finally outputting the ID of your
+new image. The Docker daemon will automatically clean up the context you
+sent.</p>
+
+<p>Note that each instruction is run independently, and causes a new image
+to be created - so <code>RUN cd /tmp</code> will not have any effect on the next
+instructions.</p>
+
+<p>Whenever possible, Docker will re-use the intermediate images (cache),
+to accelerate the <code>docker build</code> process significantly. This is indicated by
+the <code>Using cache</code> message in the console output.
+(For more information, see the <a href="../../../engine/articles/dockerfile_best-practices/#build-cache">Build cache section</a>) in the
+<code>Dockerfile</code> best practices guide:</p>
+
+<pre><code>$ docker build -t svendowideit/ambassador .
+Sending build context to Docker daemon 15.36 kB
+Step 0 : FROM alpine:3.2
+ ---&gt; 31f630c65071
+Step 1 : MAINTAINER SvenDowideit@home.org.au
+ ---&gt; Using cache
+ ---&gt; 2a1c91448f5f
+Step 2 : RUN apk update &amp;&amp;      apk add socat &amp;&amp;        rm -r /var/cache/
+ ---&gt; Using cache
+ ---&gt; 21ed6e7fbb73
+Step 3 : CMD env | grep _TCP= | sed 's/.*_PORT_\([0-9]*\)_TCP=tcp:\/\/\(.*\):\(.*\)/socat -t 100000000 TCP4-LISTEN:\1,fork,reuseaddr TCP4:\2:\3 \&amp; wait/' | sh
+ ---&gt; Using cache
+ ---&gt; 7ea8aef582cc
+Successfully built 7ea8aef582cc
+</code></pre>
+
+<p>When you&rsquo;re done with your build, you&rsquo;re ready to look into <a href="../../../engine/userguide/dockerrepos/#contributing-to-docker-hub"><em>Pushing a
+repository to its registry</em></a>.</p>
+
+<h2 id="format">Format</h2>
+
+<p>Here is the format of the <code>Dockerfile</code>:</p>
+
+<pre><code># Comment
+INSTRUCTION arguments
+</code></pre>
+
+<p>The instruction is not case-sensitive, however convention is for them to
+be UPPERCASE in order to distinguish them from arguments more easily.</p>
+
+<p>Docker runs the instructions in a <code>Dockerfile</code> in order. <strong>The
+first instruction must be `FROM`</strong> in order to specify the <a href="../../../engine/reference/glossary/#base-image"><em>Base
+Image</em></a> from which you are building.</p>
+
+<p>Docker will treat lines that <em>begin</em> with <code>#</code> as a
+comment. A <code>#</code> marker anywhere else in the line will
+be treated as an argument. This allows statements like:</p>
+
+<pre><code># Comment
+RUN echo 'we are running some # of cool things'
+</code></pre>
+
+<p>Here is the set of instructions you can use in a <code>Dockerfile</code> for building
+images.</p>
+
+<h3 id="environment-replacement">Environment replacement</h3>
+
+<p>Environment variables (declared with <a href="#env">the <code>ENV</code> statement</a>) can also be
+used in certain instructions as variables to be interpreted by the
+<code>Dockerfile</code>. Escapes are also handled for including variable-like syntax
+into a statement literally.</p>
+
+<p>Environment variables are notated in the <code>Dockerfile</code> either with
+<code>$variable_name</code> or <code>${variable_name}</code>. They are treated equivalently and the
+brace syntax is typically used to address issues with variable names with no
+whitespace, like <code>${foo}_bar</code>.</p>
+
+<p>The <code>${variable_name}</code> syntax also supports a few of the standard <code>bash</code>
+modifiers as specified below:</p>
+
+<ul>
+<li><code>${variable:-word}</code> indicates that if <code>variable</code> is set then the result
+will be that value. If <code>variable</code> is not set then <code>word</code> will be the result.</li>
+<li><code>${variable:+word}</code> indicates that if <code>variable</code> is set then <code>word</code> will be
+the result, otherwise the result is the empty string.</li>
+</ul>
+
+<p>In all cases, <code>word</code> can be any string, including additional environment
+variables.</p>
+
+<p>Escaping is possible by adding a <code>\</code> before the variable: <code>\$foo</code> or <code>\${foo}</code>,
+for example, will translate to <code>$foo</code> and <code>${foo}</code> literals respectively.</p>
+
+<p>Example (parsed representation is displayed after the <code>#</code>):</p>
+
+<pre><code>FROM busybox
+ENV foo /bar
+WORKDIR ${foo}   # WORKDIR /bar
+ADD . $foo       # ADD . /bar
+COPY \$foo /quux # COPY $foo /quux
+</code></pre>
+
+<p>Environment variables are supported by the following list of instructions in
+the <code>Dockerfile</code>:</p>
+
+<ul>
+<li><code>ADD</code></li>
+<li><code>COPY</code></li>
+<li><code>ENV</code></li>
+<li><code>EXPOSE</code></li>
+<li><code>LABEL</code></li>
+<li><code>USER</code></li>
+<li><code>WORKDIR</code></li>
+<li><code>VOLUME</code></li>
+<li><code>STOPSIGNAL</code></li>
+</ul>
+
+<p>as well as:</p>
+
+<ul>
+<li><code>ONBUILD</code> (when combined with one of the supported instructions above)</li>
+</ul>
+
+<blockquote>
+<p><strong>Note</strong>:
+prior to 1.4, <code>ONBUILD</code> instructions did <strong>NOT</strong> support environment
+variable, even when combined with any of the instructions listed above.</p>
+</blockquote>
+
+<p>Environment variable substitution will use the same value for each variable
+throughout the entire command. In other words, in this example:</p>
+
+<pre><code>ENV abc=hello
+ENV abc=bye def=$abc
+ENV ghi=$abc
+</code></pre>
+
+<p>will result in <code>def</code> having a value of <code>hello</code>, not <code>bye</code>. However,
+<code>ghi</code> will have a value of <code>bye</code> because it is not part of the same command
+that set <code>abc</code> to <code>bye</code>.</p>
+
+<h3 id="dockerignore-file">.dockerignore file</h3>
+
+<p>Before the docker CLI sends the context to the docker daemon, it looks
+for a file named <code>.dockerignore</code> in the root directory of the context.
+If this file exists, the CLI modifies the context to exclude files and
+directories that match patterns in it.  This helps to avoid
+unnecessarily sending large or sensitive files and directories to the
+daemon and potentially adding them to images using <code>ADD</code> or <code>COPY</code>.</p>
+
+<p>The CLI interprets the <code>.dockerignore</code> file as a newline-separated
+list of patterns similar to the file globs of Unix shells.  For the
+purposes of matching, the root of the context is considered to be both
+the working and the root directory.  For example, the patterns
+<code>/foo/bar</code> and <code>foo/bar</code> both exclude a file or directory named <code>bar</code>
+in the <code>foo</code> subdirectory of <code>PATH</code> or in the root of the git
+repository located at <code>URL</code>.  Neither excludes anything else.</p>
+
+<p>Here is an example <code>.dockerignore</code> file:</p>
+
+<pre><code>    */temp*
+    */*/temp*
+    temp?
+</code></pre>
+
+<p>This file causes the following build behavior:</p>
+
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Behavior</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>*/temp*</code></td>
+<td>Exclude files and directories whose names start with <code>temp</code> in any immediate subdirectory of the root.  For example, the plain file <code>/somedir/temporary.txt</code> is excluded, as is the directory <code>/somedir/temp</code>.</td>
+</tr>
+
+<tr>
+<td><code>*/*/temp*</code></td>
+<td>Exclude files and directories starting with <code>temp</code> from any subdirectory that is two levels below the root. For example, <code>/somedir/subdir/temporary.txt</code> is excluded.</td>
+</tr>
+
+<tr>
+<td><code>temp?</code></td>
+<td>Exclude files and directories in the root directory whose names are a one-character extension of <code>temp</code>.  For example, <code>/tempa</code> and <code>/tempb</code> are excluded.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Matching is done using Go&rsquo;s
+<a href="http://golang.org/pkg/path/filepath#Match">filepath.Match</a> rules.  A
+preprocessing step removes leading and trailing whitespace and
+eliminates <code>.</code> and <code>..</code> elements using Go&rsquo;s
+<a href="http://golang.org/pkg/path/filepath/#Clean">filepath.Clean</a>.  Lines
+that are blank after preprocessing are ignored.</p>
+
+<p>Lines starting with <code>!</code> (exclamation mark) can be used to make exceptions
+to exclusions.  The following is an example <code>.dockerignore</code> file that
+uses this mechanism:</p>
+
+<pre><code>    *.md
+    !README.md
+</code></pre>
+
+<p>All markdown files <em>except</em> <code>README.md</code> are excluded from the context.</p>
+
+<p>The placement of <code>!</code> exception rules influences the behavior: the last
+line of the <code>.dockerignore</code> that matches a particular file determines
+whether it is included or excluded.  Consider the following example:</p>
+
+<pre><code>    *.md
+    !README*.md
+    README-secret.md
+</code></pre>
+
+<p>No markdown files are included in the context except README files other than
+<code>README-secret.md</code>.</p>
+
+<p>Now consider this example:</p>
+
+<pre><code>    *.md
+    README-secret.md
+    !README*.md
+</code></pre>
+
+<p>All of the README files are included.  The middle line has no effect because
+<code>!README*.md</code> matches <code>README-secret.md</code> and comes last.</p>
+
+<p>You can even use the <code>.dockerignore</code> file to exclude the <code>Dockerfile</code>
+and <code>.dockerignore</code> files.  These files are still sent to the daemon
+because it needs them to do its job.  But the <code>ADD</code> and <code>COPY</code> commands
+do not copy them to the the image.</p>
+
+<p>Finally, you may want to specify which files to include in the
+context, rather than which to exclude. To achieve this, specify <code>*</code> as
+the first pattern, followed by one or more <code>!</code> exception patterns.</p>
+
+<p><strong>Note</strong>: For historical reasons, the pattern <code>.</code> is ignored.</p>
+
+<h2 id="from">FROM</h2>
+
+<pre><code>FROM &lt;image&gt;
+</code></pre>
+
+<p>Or</p>
+
+<pre><code>FROM &lt;image&gt;:&lt;tag&gt;
+</code></pre>
+
+<p>Or</p>
+
+<pre><code>FROM &lt;image&gt;@&lt;digest&gt;
+</code></pre>
+
+<p>The <code>FROM</code> instruction sets the <a href="../../../engine/reference/glossary/#base-image"><em>Base Image</em></a>
+for subsequent instructions. As such, a valid <code>Dockerfile</code> must have <code>FROM</code> as
+its first instruction. The image can be any valid image – it is especially easy
+to start by <strong>pulling an image</strong> from the <a href="../../../engine/userguide/dockerrepos/"><em>Public Repositories</em></a>.</p>
+
+<ul>
+<li><p><code>FROM</code> must be the first non-comment instruction in the <code>Dockerfile</code>.</p></li>
+
+<li><p><code>FROM</code> can appear multiple times within a single <code>Dockerfile</code> in order to create
+multiple images. Simply make a note of the last image ID output by the commit
+before each new <code>FROM</code> command.</p></li>
+
+<li><p>The <code>tag</code> or <code>digest</code> values are optional. If you omit either of them, the builder
+assumes a <code>latest</code> by default. The builder returns an error if it cannot match
+the <code>tag</code> value.</p></li>
+</ul>
+
+<h2 id="maintainer">MAINTAINER</h2>
+
+<pre><code>MAINTAINER &lt;name&gt;
+</code></pre>
+
+<p>The <code>MAINTAINER</code> instruction allows you to set the <em>Author</em> field of the
+generated images.</p>
+
+<h2 id="run">RUN</h2>
+
+<p>RUN has 2 forms:</p>
+
+<ul>
+<li><code>RUN &lt;command&gt;</code> (<em>shell</em> form, the command is run in a shell - <code>/bin/sh -c</code>)</li>
+<li><code>RUN [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;]</code> (<em>exec</em> form)</li>
+</ul>
+
+<p>The <code>RUN</code> instruction will execute any commands in a new layer on top of the
+current image and commit the results. The resulting committed image will be
+used for the next step in the <code>Dockerfile</code>.</p>
+
+<p>Layering <code>RUN</code> instructions and generating commits conforms to the core
+concepts of Docker where commits are cheap and containers can be created from
+any point in an image&rsquo;s history, much like source control.</p>
+
+<p>The <em>exec</em> form makes it possible to avoid shell string munging, and to <code>RUN</code>
+commands using a base image that does not contain <code>/bin/sh</code>.</p>
+
+<p>In the <em>shell</em> form you can use a <code>\</code> (backslash) to continue a single
+RUN instruction onto the next line. For example, consider these two lines:</p>
+
+<pre><code>RUN /bin/bash -c 'source $HOME/.bashrc ;\
+echo $HOME'
+</code></pre>
+
+<p>Together they are equivalent to this single line:</p>
+
+<pre><code>RUN /bin/bash -c 'source $HOME/.bashrc ; echo $HOME'
+</code></pre>
+
+<blockquote>
+<p><strong>Note</strong>:
+To use a different shell, other than &lsquo;/bin/sh&rsquo;, use the <em>exec</em> form
+passing in the desired shell. For example,
+<code>RUN [&quot;/bin/bash&quot;, &quot;-c&quot;, &quot;echo hello&quot;]</code></p>
+
+<p><strong>Note</strong>:
+The <em>exec</em> form is parsed as a JSON array, which means that
+you must use double-quotes (&ldquo;) around words not single-quotes (&lsquo;).</p>
+
+<p><strong>Note</strong>:
+Unlike the <em>shell</em> form, the <em>exec</em> form does not invoke a command shell.
+This means that normal shell processing does not happen. For example,
+<code>RUN [ &quot;echo&quot;, &quot;$HOME&quot; ]</code> will not do variable substitution on <code>$HOME</code>.
+If you want shell processing then either use the <em>shell</em> form or execute
+a shell directly, for example: <code>RUN [ &quot;sh&quot;, &quot;-c&quot;, &quot;echo&quot;, &quot;$HOME&quot; ]</code>.</p>
+</blockquote>
+
+<p>The cache for <code>RUN</code> instructions isn&rsquo;t invalidated automatically during
+the next build. The cache for an instruction like
+<code>RUN apt-get dist-upgrade -y</code> will be reused during the next build. The
+cache for <code>RUN</code> instructions can be invalidated by using the <code>--no-cache</code>
+flag, for example <code>docker build --no-cache</code>.</p>
+
+<p>See the <a href="../../../engine/articles/dockerfile_best-practices/#build-cache"><code>Dockerfile</code> Best Practices
+guide</a> for more information.</p>
+
+<p>The cache for <code>RUN</code> instructions can be invalidated by <code>ADD</code> instructions. See
+<a href="#add">below</a> for details.</p>
+
+<h3 id="known-issues-run">Known issues (RUN)</h3>
+
+<ul>
+<li><a href="https://github.com/docker/docker/issues/783">Issue 783</a> is about file
+permissions problems that can occur when using the AUFS file system. You
+might notice it during an attempt to <code>rm</code> a file, for example.</li>
+</ul>
+
+<p>For systems that have recent aufs version (i.e., <code>dirperm1</code> mount option can
+  be set), docker will attempt to fix the issue automatically by mounting
+  the layers with <code>dirperm1</code> option. More details on <code>dirperm1</code> option can be
+  found at <a href="http://aufs.sourceforge.net/aufs3/man.html"><code>aufs</code> man page</a></p>
+
+<p>If your system doesn&rsquo;t have support for <code>dirperm1</code>, the issue describes a workaround.</p>
+
+<h2 id="cmd">CMD</h2>
+
+<p>The <code>CMD</code> instruction has three forms:</p>
+
+<ul>
+<li><code>CMD [&quot;executable&quot;,&quot;param1&quot;,&quot;param2&quot;]</code> (<em>exec</em> form, this is the preferred form)</li>
+<li><code>CMD [&quot;param1&quot;,&quot;param2&quot;]</code> (as <em>default parameters to ENTRYPOINT</em>)</li>
+<li><code>CMD command param1 param2</code> (<em>shell</em> form)</li>
+</ul>
+
+<p>There can only be one <code>CMD</code> instruction in a <code>Dockerfile</code>. If you list more than one <code>CMD</code>
+then only the last <code>CMD</code> will take effect.</p>
+
+<p><strong>The main purpose of a <code>CMD</code> is to provide defaults for an executing
+container.</strong> These defaults can include an executable, or they can omit
+the executable, in which case you must specify an <code>ENTRYPOINT</code>
+instruction as well.</p>
+
+<blockquote>
+<p><strong>Note</strong>:
+If <code>CMD</code> is used to provide default arguments for the <code>ENTRYPOINT</code>
+instruction, both the <code>CMD</code> and <code>ENTRYPOINT</code> instructions should be specified
+with the JSON array format.</p>
+
+<p><strong>Note</strong>:
+The <em>exec</em> form is parsed as a JSON array, which means that
+you must use double-quotes (&ldquo;) around words not single-quotes (&lsquo;).</p>
+
+<p><strong>Note</strong>:
+Unlike the <em>shell</em> form, the <em>exec</em> form does not invoke a command shell.
+This means that normal shell processing does not happen. For example,
+<code>CMD [ &quot;echo&quot;, &quot;$HOME&quot; ]</code> will not do variable substitution on <code>$HOME</code>.
+If you want shell processing then either use the <em>shell</em> form or execute
+a shell directly, for example: <code>CMD [ &quot;sh&quot;, &quot;-c&quot;, &quot;echo&quot;, &quot;$HOME&quot; ]</code>.</p>
+</blockquote>
+
+<p>When used in the shell or exec formats, the <code>CMD</code> instruction sets the command
+to be executed when running the image.</p>
+
+<p>If you use the <em>shell</em> form of the <code>CMD</code>, then the <code>&lt;command&gt;</code> will execute in
+<code>/bin/sh -c</code>:</p>
+
+<pre><code>FROM ubuntu
+CMD echo &quot;This is a test.&quot; | wc -
+</code></pre>
+
+<p>If you want to <strong>run your</strong> <code>&lt;command&gt;</code> <strong>without a shell</strong> then you must
+express the command as a JSON array and give the full path to the executable.
+<strong>This array form is the preferred format of <code>CMD</code>.</strong> Any additional parameters
+must be individually expressed as strings in the array:</p>
+
+<pre><code>FROM ubuntu
+CMD [&quot;/usr/bin/wc&quot;,&quot;--help&quot;]
+</code></pre>
+
+<p>If you would like your container to run the same executable every time, then
+you should consider using <code>ENTRYPOINT</code> in combination with <code>CMD</code>. See
+<a href="#entrypoint"><em>ENTRYPOINT</em></a>.</p>
+
+<p>If the user specifies arguments to <code>docker run</code> then they will override the
+default specified in <code>CMD</code>.</p>
+
+<blockquote>
+<p><strong>Note</strong>:
+don&rsquo;t confuse <code>RUN</code> with <code>CMD</code>. <code>RUN</code> actually runs a command and commits
+the result; <code>CMD</code> does not execute anything at build time, but specifies
+the intended command for the image.</p>
+</blockquote>
+
+<h2 id="label">LABEL</h2>
+
+<pre><code>LABEL &lt;key&gt;=&lt;value&gt; &lt;key&gt;=&lt;value&gt; &lt;key&gt;=&lt;value&gt; ...
+</code></pre>
+
+<p>The <code>LABEL</code> instruction adds metadata to an image. A <code>LABEL</code> is a
+key-value pair. To include spaces within a <code>LABEL</code> value, use quotes and
+backslashes as you would in command-line parsing. A few usage examples:</p>
+
+<pre><code>LABEL &quot;com.example.vendor&quot;=&quot;ACME Incorporated&quot;
+LABEL com.example.label-with-value=&quot;foo&quot;
+LABEL version=&quot;1.0&quot;
+LABEL description=&quot;This text illustrates \
+that label-values can span multiple lines.&quot;
+</code></pre>
+
+<p>An image can have more than one label. To specify multiple labels,
+Docker recommends combining labels into a single <code>LABEL</code> instruction where
+possible. Each <code>LABEL</code> instruction produces a new layer which can result in an
+inefficient image if you use many labels. This example results in a single image
+layer.</p>
+
+<pre><code>LABEL multi.label1=&quot;value1&quot; multi.label2=&quot;value2&quot; other=&quot;value3&quot;
+</code></pre>
+
+<p>The above can also be written as:</p>
+
+<pre><code>LABEL multi.label1=&quot;value1&quot; \
+      multi.label2=&quot;value2&quot; \
+      other=&quot;value3&quot;
+</code></pre>
+
+<p>Labels are additive including <code>LABEL</code>s in <code>FROM</code> images. If Docker
+encounters a label/key that already exists, the new value overrides any previous
+labels with identical keys.</p>
+
+<p>To view an image&rsquo;s labels, use the <code>docker inspect</code> command.</p>
+
+<pre><code>&quot;Labels&quot;: {
+    &quot;com.example.vendor&quot;: &quot;ACME Incorporated&quot;
+    &quot;com.example.label-with-value&quot;: &quot;foo&quot;,
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;description&quot;: &quot;This text illustrates that label-values can span multiple lines.&quot;,
+    &quot;multi.label1&quot;: &quot;value1&quot;,
+    &quot;multi.label2&quot;: &quot;value2&quot;,
+    &quot;other&quot;: &quot;value3&quot;
+},
+</code></pre>
+
+<h2 id="expose">EXPOSE</h2>
+
+<pre><code>EXPOSE &lt;port&gt; [&lt;port&gt;...]
+</code></pre>
+
+<p>The <code>EXPOSE</code> instruction informs Docker that the container listens on the
+specified network ports at runtime. <code>EXPOSE</code> does not make the ports of the
+container accessible to the host. To do that, you must use either the <code>-p</code> flag
+to publish a range of ports or the <code>-P</code> flag to publish all of the exposed
+ports. You can expose one port number and publish it externally under another
+number.</p>
+
+<p>To set up port redirection on the host system, see <a href="../../../engine/reference/run/#expose-incoming-ports">using the -P
+flag</a>. The Docker network feature supports
+creating networks without the need to expose ports within the network, for
+detailed information see the  <a href="../../../engine/userguide/networking/">overview of this
+feature</a>).</p>
+
+<h2 id="env">ENV</h2>
+
+<pre><code>ENV &lt;key&gt; &lt;value&gt;
+ENV &lt;key&gt;=&lt;value&gt; ...
+</code></pre>
+
+<p>The <code>ENV</code> instruction sets the environment variable <code>&lt;key&gt;</code> to the value
+<code>&lt;value&gt;</code>. This value will be in the environment of all &ldquo;descendent&rdquo;
+<code>Dockerfile</code> commands and can be <a href="#environment-replacement">replaced inline</a> in
+many as well.</p>
+
+<p>The <code>ENV</code> instruction has two forms. The first form, <code>ENV &lt;key&gt; &lt;value&gt;</code>,
+will set a single variable to a value. The entire string after the first
+space will be treated as the <code>&lt;value&gt;</code> - including characters such as
+spaces and quotes.</p>
+
+<p>The second form, <code>ENV &lt;key&gt;=&lt;value&gt; ...</code>, allows for multiple variables to
+be set at one time. Notice that the second form uses the equals sign (=)
+in the syntax, while the first form does not. Like command line parsing,
+quotes and backslashes can be used to include spaces within values.</p>
+
+<p>For example:</p>
+
+<pre><code>ENV myName=&quot;John Doe&quot; myDog=Rex\ The\ Dog \
+    myCat=fluffy
+</code></pre>
+
+<p>and</p>
+
+<pre><code>ENV myName John Doe
+ENV myDog Rex The Dog
+ENV myCat fluffy
+</code></pre>
+
+<p>will yield the same net results in the final container, but the first form
+is preferred because it produces a single cache layer.</p>
+
+<p>The environment variables set using <code>ENV</code> will persist when a container is run
+from the resulting image. You can view the values using <code>docker inspect</code>, and
+change them using <code>docker run --env &lt;key&gt;=&lt;value&gt;</code>.</p>
+
+<blockquote>
+<p><strong>Note</strong>:
+Environment persistence can cause unexpected side effects. For example,
+setting <code>ENV DEBIAN_FRONTEND noninteractive</code> may confuse apt-get
+users on a Debian-based image. To set a value for a single command, use
+<code>RUN &lt;key&gt;=&lt;value&gt; &lt;command&gt;</code>.</p>
+</blockquote>
+
+<h2 id="add">ADD</h2>
+
+<p>ADD has two forms:</p>
+
+<ul>
+<li><code>ADD &lt;src&gt;... &lt;dest&gt;</code></li>
+<li><code>ADD [&quot;&lt;src&gt;&quot;,... &quot;&lt;dest&gt;&quot;]</code> (this form is required for paths containing
+whitespace)</li>
+</ul>
+
+<p>The <code>ADD</code> instruction copies new files, directories or remote file URLs from <code>&lt;src&gt;</code>
+and adds them to the filesystem of the container at the path <code>&lt;dest&gt;</code>.</p>
+
+<p>Multiple <code>&lt;src&gt;</code> resource may be specified but if they are files or
+directories then they must be relative to the source directory that is
+being built (the context of the build).</p>
+
+<p>Each <code>&lt;src&gt;</code> may contain wildcards and matching will be done using Go&rsquo;s
+<a href="http://golang.org/pkg/path/filepath#Match">filepath.Match</a> rules. For example:</p>
+
+<pre><code>ADD hom* /mydir/        # adds all files starting with &quot;hom&quot;
+ADD hom?.txt /mydir/    # ? is replaced with any single character, e.g., &quot;home.txt&quot;
+</code></pre>
+
+<p>The <code>&lt;dest&gt;</code> is an absolute path, or a path relative to <code>WORKDIR</code>, into which
+the source will be copied inside the destination container.</p>
+
+<pre><code>ADD test relativeDir/          # adds &quot;test&quot; to `WORKDIR`/relativeDir/
+ADD test /absoluteDir          # adds &quot;test&quot; to /absoluteDir
+</code></pre>
+
+<p>All new files and directories are created with a UID and GID of 0.</p>
+
+<p>In the case where <code>&lt;src&gt;</code> is a remote file URL, the destination will
+have permissions of 600. If the remote file being retrieved has an HTTP
+<code>Last-Modified</code> header, the timestamp from that header will be used
+to set the <code>mtime</code> on the destination file. However, like any other file
+processed during an <code>ADD</code>, <code>mtime</code> will not be included in the determination
+of whether or not the file has changed and the cache should be updated.</p>
+
+<blockquote>
+<p><strong>Note</strong>:
+If you build by passing a <code>Dockerfile</code> through STDIN (<code>docker
+build - &lt; somefile</code>), there is no build context, so the <code>Dockerfile</code>
+can only contain a URL based <code>ADD</code> instruction. You can also pass a
+compressed archive through STDIN: (<code>docker build - &lt; archive.tar.gz</code>),
+the <code>Dockerfile</code> at the root of the archive and the rest of the
+archive will get used at the context of the build.</p>
+
+<p><strong>Note</strong>:
+If your URL files are protected using authentication, you
+will need to use <code>RUN wget</code>, <code>RUN curl</code> or use another tool from
+within the container as the <code>ADD</code> instruction does not support
+authentication.</p>
+
+<p><strong>Note</strong>:
+The first encountered <code>ADD</code> instruction will invalidate the cache for all
+following instructions from the Dockerfile if the contents of <code>&lt;src&gt;</code> have
+changed. This includes invalidating the cache for <code>RUN</code> instructions.
+See the <a href="../../../engine/articles/dockerfile_best-practices/#build-cache"><code>Dockerfile</code> Best Practices
+guide</a> for more information.</p>
+</blockquote>
+
+<p><code>ADD</code> obeys the following rules:</p>
+
+<ul>
+<li><p>The <code>&lt;src&gt;</code> path must be inside the <em>context</em> of the build;
+you cannot <code>ADD ../something /something</code>, because the first step of a
+<code>docker build</code> is to send the context directory (and subdirectories) to the
+docker daemon.</p></li>
+
+<li><p>If <code>&lt;src&gt;</code> is a URL and <code>&lt;dest&gt;</code> does not end with a trailing slash, then a
+file is downloaded from the URL and copied to <code>&lt;dest&gt;</code>.</p></li>
+
+<li><p>If <code>&lt;src&gt;</code> is a URL and <code>&lt;dest&gt;</code> does end with a trailing slash, then the
+filename is inferred from the URL and the file is downloaded to
+<code>&lt;dest&gt;/&lt;filename&gt;</code>. For instance, <code>ADD http://example.com/foobar /</code> would
+create the file <code>/foobar</code>. The URL must have a nontrivial path so that an
+appropriate filename can be discovered in this case (<code>http://example.com</code>
+will not work).</p></li>
+
+<li><p>If <code>&lt;src&gt;</code> is a directory, the entire contents of the directory are copied,
+including filesystem metadata.</p></li>
+</ul>
+
+<blockquote>
+<p><strong>Note</strong>:
+The directory itself is not copied, just its contents.</p>
+</blockquote>
+
+<ul>
+<li><p>If <code>&lt;src&gt;</code> is a <em>local</em> tar archive in a recognized compression format
+(identity, gzip, bzip2 or xz) then it is unpacked as a directory. Resources
+from <em>remote</em> URLs are <strong>not</strong> decompressed. When a directory is copied or
+unpacked, it has the same behavior as <code>tar -x</code>: the result is the union of:</p>
+
+<ol>
+<li>Whatever existed at the destination path and</li>
+<li>The contents of the source tree, with conflicts resolved in favor
+of &ldquo;2.&rdquo; on a file-by-file basis.</li>
+</ol></li>
+
+<li><p>If <code>&lt;src&gt;</code> is any other kind of file, it is copied individually along with
+its metadata. In this case, if <code>&lt;dest&gt;</code> ends with a trailing slash <code>/</code>, it
+will be considered a directory and the contents of <code>&lt;src&gt;</code> will be written
+at <code>&lt;dest&gt;/base(&lt;src&gt;)</code>.</p></li>
+
+<li><p>If multiple <code>&lt;src&gt;</code> resources are specified, either directly or due to the
+use of a wildcard, then <code>&lt;dest&gt;</code> must be a directory, and it must end with
+a slash <code>/</code>.</p></li>
+
+<li><p>If <code>&lt;dest&gt;</code> does not end with a trailing slash, it will be considered a
+regular file and the contents of <code>&lt;src&gt;</code> will be written at <code>&lt;dest&gt;</code>.</p></li>
+
+<li><p>If <code>&lt;dest&gt;</code> doesn&rsquo;t exist, it is created along with all missing directories
+in its path.</p></li>
+</ul>
+
+<h2 id="copy">COPY</h2>
+
+<p>COPY has two forms:</p>
+
+<ul>
+<li><code>COPY &lt;src&gt;... &lt;dest&gt;</code></li>
+<li><code>COPY [&quot;&lt;src&gt;&quot;,... &quot;&lt;dest&gt;&quot;]</code> (this form is required for paths containing
+whitespace)</li>
+</ul>
+
+<p>The <code>COPY</code> instruction copies new files or directories from <code>&lt;src&gt;</code>
+and adds them to the filesystem of the container at the path <code>&lt;dest&gt;</code>.</p>
+
+<p>Multiple <code>&lt;src&gt;</code> resource may be specified but they must be relative
+to the source directory that is being built (the context of the build).</p>
+
+<p>Each <code>&lt;src&gt;</code> may contain wildcards and matching will be done using Go&rsquo;s
+<a href="http://golang.org/pkg/path/filepath#Match">filepath.Match</a> rules. For example:</p>
+
+<pre><code>COPY hom* /mydir/        # adds all files starting with &quot;hom&quot;
+COPY hom?.txt /mydir/    # ? is replaced with any single character, e.g., &quot;home.txt&quot;
+</code></pre>
+
+<p>The <code>&lt;dest&gt;</code> is an absolute path, or a path relative to <code>WORKDIR</code>, into which
+the source will be copied inside the destination container.</p>
+
+<pre><code>COPY test relativeDir/   # adds &quot;test&quot; to `WORKDIR`/relativeDir/
+COPY test /absoluteDir   # adds &quot;test&quot; to /absoluteDir
+</code></pre>
+
+<p>All new files and directories are created with a UID and GID of 0.</p>
+
+<blockquote>
+<p><strong>Note</strong>:
+If you build using STDIN (<code>docker build - &lt; somefile</code>), there is no
+build context, so <code>COPY</code> can&rsquo;t be used.</p>
+</blockquote>
+
+<p><code>COPY</code> obeys the following rules:</p>
+
+<ul>
+<li><p>The <code>&lt;src&gt;</code> path must be inside the <em>context</em> of the build;
+you cannot <code>COPY ../something /something</code>, because the first step of a
+<code>docker build</code> is to send the context directory (and subdirectories) to the
+docker daemon.</p></li>
+
+<li><p>If <code>&lt;src&gt;</code> is a directory, the entire contents of the directory are copied,
+including filesystem metadata.</p></li>
+</ul>
+
+<blockquote>
+<p><strong>Note</strong>:
+The directory itself is not copied, just its contents.</p>
+</blockquote>
+
+<ul>
+<li><p>If <code>&lt;src&gt;</code> is any other kind of file, it is copied individually along with
+its metadata. In this case, if <code>&lt;dest&gt;</code> ends with a trailing slash <code>/</code>, it
+will be considered a directory and the contents of <code>&lt;src&gt;</code> will be written
+at <code>&lt;dest&gt;/base(&lt;src&gt;)</code>.</p></li>
+
+<li><p>If multiple <code>&lt;src&gt;</code> resources are specified, either directly or due to the
+use of a wildcard, then <code>&lt;dest&gt;</code> must be a directory, and it must end with
+a slash <code>/</code>.</p></li>
+
+<li><p>If <code>&lt;dest&gt;</code> does not end with a trailing slash, it will be considered a
+regular file and the contents of <code>&lt;src&gt;</code> will be written at <code>&lt;dest&gt;</code>.</p></li>
+
+<li><p>If <code>&lt;dest&gt;</code> doesn&rsquo;t exist, it is created along with all missing directories
+in its path.</p></li>
+</ul>
+
+<h2 id="entrypoint">ENTRYPOINT</h2>
+
+<p>ENTRYPOINT has two forms:</p>
+
+<ul>
+<li><code>ENTRYPOINT [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;]</code>
+(<em>exec</em> form, preferred)</li>
+<li><code>ENTRYPOINT command param1 param2</code>
+(<em>shell</em> form)</li>
+</ul>
+
+<p>An <code>ENTRYPOINT</code> allows you to configure a container that will run as an executable.</p>
+
+<p>For example, the following will start nginx with its default content, listening
+on port 80:</p>
+
+<pre><code>docker run -i -t --rm -p 80:80 nginx
+</code></pre>
+
+<p>Command line arguments to <code>docker run &lt;image&gt;</code> will be appended after all
+elements in an <em>exec</em> form <code>ENTRYPOINT</code>, and will override all elements specified
+using <code>CMD</code>.
+This allows arguments to be passed to the entry point, i.e., <code>docker run &lt;image&gt; -d</code>
+will pass the <code>-d</code> argument to the entry point.
+You can override the <code>ENTRYPOINT</code> instruction using the <code>docker run --entrypoint</code>
+flag.</p>
+
+<p>The <em>shell</em> form prevents any <code>CMD</code> or <code>run</code> command line arguments from being
+used, but has the disadvantage that your <code>ENTRYPOINT</code> will be started as a
+subcommand of <code>/bin/sh -c</code>, which does not pass signals.
+This means that the executable will not be the container&rsquo;s <code>PID 1</code> - and
+will <em>not</em> receive Unix signals - so your executable will not receive a
+<code>SIGTERM</code> from <code>docker stop &lt;container&gt;</code>.</p>
+
+<p>Only the last <code>ENTRYPOINT</code> instruction in the <code>Dockerfile</code> will have an effect.</p>
+
+<h3 id="exec-form-entrypoint-example">Exec form ENTRYPOINT example</h3>
+
+<p>You can use the <em>exec</em> form of <code>ENTRYPOINT</code> to set fairly stable default commands
+and arguments and then use either form of <code>CMD</code> to set additional defaults that
+are more likely to be changed.</p>
+
+<pre><code>FROM ubuntu
+ENTRYPOINT [&quot;top&quot;, &quot;-b&quot;]
+CMD [&quot;-c&quot;]
+</code></pre>
+
+<p>When you run the container, you can see that <code>top</code> is the only process:</p>
+
+<pre><code>$ docker run -it --rm --name test  top -H
+top - 08:25:00 up  7:27,  0 users,  load average: 0.00, 0.01, 0.05
+Threads:   1 total,   1 running,   0 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.1 us,  0.1 sy,  0.0 ni, 99.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:   2056668 total,  1616832 used,   439836 free,    99352 buffers
+KiB Swap:  1441840 total,        0 used,  1441840 free.  1324440 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+    1 root      20   0   19744   2336   2080 R  0.0  0.1   0:00.04 top
+</code></pre>
+
+<p>To examine the result further, you can use <code>docker exec</code>:</p>
+
+<pre><code>$ docker exec -it test ps aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  2.6  0.1  19752  2352 ?        Ss+  08:24   0:00 top -b -H
+root         7  0.0  0.1  15572  2164 ?        R+   08:25   0:00 ps aux
+</code></pre>
+
+<p>And you can gracefully request <code>top</code> to shut down using <code>docker stop test</code>.</p>
+
+<p>The following <code>Dockerfile</code> shows using the <code>ENTRYPOINT</code> to run Apache in the
+foreground (i.e., as <code>PID 1</code>):</p>
+
+<pre><code>FROM debian:stable
+RUN apt-get update &amp;&amp; apt-get install -y --force-yes apache2
+EXPOSE 80 443
+VOLUME [&quot;/var/www&quot;, &quot;/var/log/apache2&quot;, &quot;/etc/apache2&quot;]
+ENTRYPOINT [&quot;/usr/sbin/apache2ctl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
+</code></pre>
+
+<p>If you need to write a starter script for a single executable, you can ensure that
+the final executable receives the Unix signals by using <code>exec</code> and <code>gosu</code>
+commands:</p>
+
+<pre><code class="language-bash">#!/bin/bash
+set -e
+
+if [ &quot;$1&quot; = 'postgres' ]; then
+    chown -R postgres &quot;$PGDATA&quot;
+
+    if [ -z &quot;$(ls -A &quot;$PGDATA&quot;)&quot; ]; then
+        gosu postgres initdb
+    fi
+
+    exec gosu postgres &quot;$@&quot;
+fi
+
+exec &quot;$@&quot;
+</code></pre>
+
+<p>Lastly, if you need to do some extra cleanup (or communicate with other containers)
+on shutdown, or are co-ordinating more than one executable, you may need to ensure
+that the <code>ENTRYPOINT</code> script receives the Unix signals, passes them on, and then
+does some more work:</p>
+
+<pre><code>#!/bin/sh
+# Note: I've written this using sh so it works in the busybox container too
+
+# USE the trap if you need to also do manual cleanup after the service is stopped,
+#     or need to start multiple services in the one container
+trap &quot;echo TRAPed signal&quot; HUP INT QUIT KILL TERM
+
+# start service in background here
+/usr/sbin/apachectl start
+
+echo &quot;[hit enter key to exit] or run 'docker stop &lt;container&gt;'&quot;
+read
+
+# stop service and clean up here
+echo &quot;stopping apache&quot;
+/usr/sbin/apachectl stop
+
+echo &quot;exited $0&quot;
+</code></pre>
+
+<p>If you run this image with <code>docker run -it --rm -p 80:80 --name test apache</code>,
+you can then examine the container&rsquo;s processes with <code>docker exec</code>, or <code>docker top</code>,
+and then ask the script to stop Apache:</p>
+
+<pre><code class="language-bash">$ docker exec -it test ps aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.1  0.0   4448   692 ?        Ss+  00:42   0:00 /bin/sh /run.sh 123 cmd cmd2
+root        19  0.0  0.2  71304  4440 ?        Ss   00:42   0:00 /usr/sbin/apache2 -k start
+www-data    20  0.2  0.2 360468  6004 ?        Sl   00:42   0:00 /usr/sbin/apache2 -k start
+www-data    21  0.2  0.2 360468  6000 ?        Sl   00:42   0:00 /usr/sbin/apache2 -k start
+root        81  0.0  0.1  15572  2140 ?        R+   00:44   0:00 ps aux
+$ docker top test
+PID                 USER                COMMAND
+10035               root                {run.sh} /bin/sh /run.sh 123 cmd cmd2
+10054               root                /usr/sbin/apache2 -k start
+10055               33                  /usr/sbin/apache2 -k start
+10056               33                  /usr/sbin/apache2 -k start
+$ /usr/bin/time docker stop test
+test
+real	0m 0.27s
+user	0m 0.03s
+sys	0m 0.03s
+</code></pre>
+
+<blockquote>
+<p><strong>Note:</strong> you can over ride the <code>ENTRYPOINT</code> setting using <code>--entrypoint</code>,
+but this can only set the binary to <em>exec</em> (no <code>sh -c</code> will be used).</p>
+
+<p><strong>Note</strong>:
+The <em>exec</em> form is parsed as a JSON array, which means that
+you must use double-quotes (&ldquo;) around words not single-quotes (&lsquo;).</p>
+
+<p><strong>Note</strong>:
+Unlike the <em>shell</em> form, the <em>exec</em> form does not invoke a command shell.
+This means that normal shell processing does not happen. For example,
+<code>ENTRYPOINT [ &quot;echo&quot;, &quot;$HOME&quot; ]</code> will not do variable substitution on <code>$HOME</code>.
+If you want shell processing then either use the <em>shell</em> form or execute
+a shell directly, for example: <code>ENTRYPOINT [ &quot;sh&quot;, &quot;-c&quot;, &quot;echo&quot;, &quot;$HOME&quot; ]</code>.
+Variables that are defined in the <code>Dockerfile</code>using <code>ENV</code>, will be substituted by
+the <code>Dockerfile</code> parser.</p>
+</blockquote>
+
+<h3 id="shell-form-entrypoint-example">Shell form ENTRYPOINT example</h3>
+
+<p>You can specify a plain string for the <code>ENTRYPOINT</code> and it will execute in <code>/bin/sh -c</code>.
+This form will use shell processing to substitute shell environment variables,
+and will ignore any <code>CMD</code> or <code>docker run</code> command line arguments.
+To ensure that <code>docker stop</code> will signal any long running <code>ENTRYPOINT</code> executable
+correctly, you need to remember to start it with <code>exec</code>:</p>
+
+<pre><code>FROM ubuntu
+ENTRYPOINT exec top -b
+</code></pre>
+
+<p>When you run this image, you&rsquo;ll see the single <code>PID 1</code> process:</p>
+
+<pre><code>$ docker run -it --rm --name test top
+Mem: 1704520K used, 352148K free, 0K shrd, 0K buff, 140368121167873K cached
+CPU:   5% usr   0% sys   0% nic  94% idle   0% io   0% irq   0% sirq
+Load average: 0.08 0.03 0.05 2/98 6
+  PID  PPID USER     STAT   VSZ %VSZ %CPU COMMAND
+    1     0 root     R     3164   0%   0% top -b
+</code></pre>
+
+<p>Which will exit cleanly on <code>docker stop</code>:</p>
+
+<pre><code>$ /usr/bin/time docker stop test
+test
+real    0m 0.20s
+user    0m 0.02s
+sys 0m 0.04s
+</code></pre>
+
+<p>If you forget to add <code>exec</code> to the beginning of your <code>ENTRYPOINT</code>:</p>
+
+<pre><code>FROM ubuntu
+ENTRYPOINT top -b
+CMD --ignored-param1
+</code></pre>
+
+<p>You can then run it (giving it a name for the next step):</p>
+
+<pre><code>$ docker run -it --name test top --ignored-param2
+Mem: 1704184K used, 352484K free, 0K shrd, 0K buff, 140621524238337K cached
+CPU:   9% usr   2% sys   0% nic  88% idle   0% io   0% irq   0% sirq
+Load average: 0.01 0.02 0.05 2/101 7
+  PID  PPID USER     STAT   VSZ %VSZ %CPU COMMAND
+    1     0 root     S     3168   0%   0% /bin/sh -c top -b cmd cmd2
+    7     1 root     R     3164   0%   0% top -b
+</code></pre>
+
+<p>You can see from the output of <code>top</code> that the specified <code>ENTRYPOINT</code> is not <code>PID 1</code>.</p>
+
+<p>If you then run <code>docker stop test</code>, the container will not exit cleanly - the
+<code>stop</code> command will be forced to send a <code>SIGKILL</code> after the timeout:</p>
+
+<pre><code>$ docker exec -it test ps aux
+PID   USER     COMMAND
+    1 root     /bin/sh -c top -b cmd cmd2
+    7 root     top -b
+    8 root     ps aux
+$ /usr/bin/time docker stop test
+test
+real    0m 10.19s
+user    0m 0.04s
+sys 0m 0.03s
+</code></pre>
+
+<h2 id="volume">VOLUME</h2>
+
+<pre><code>VOLUME [&quot;/data&quot;]
+</code></pre>
+
+<p>The <code>VOLUME</code> instruction creates a mount point with the specified name
+and marks it as holding externally mounted volumes from native host or other
+containers. The value can be a JSON array, <code>VOLUME [&quot;/var/log/&quot;]</code>, or a plain
+string with multiple arguments, such as <code>VOLUME /var/log</code> or <code>VOLUME /var/log
+/var/db</code>. For more information/examples and mounting instructions via the
+Docker client, refer to
+<a href="../../../engine/userguide/dockervolumes/#mount-a-host-directory-as-a-data-volume"><em>Share Directories via Volumes</em></a>
+documentation.</p>
+
+<p>The <code>docker run</code> command initializes the newly created volume with any data
+that exists at the specified location within the base image. For example,
+consider the following Dockerfile snippet:</p>
+
+<pre><code>FROM ubuntu
+RUN mkdir /myvol
+RUN echo &quot;hello world&quot; &gt; /myvol/greeting
+VOLUME /myvol
+</code></pre>
+
+<p>This Dockerfile results in an image that causes <code>docker run</code>, to
+create a new mount point at <code>/myvol</code> and copy the  <code>greeting</code> file
+into the newly created volume.</p>
+
+<blockquote>
+<p><strong>Note</strong>:
+If any build steps change the data within the volume after it has been
+declared, those changes will be discarded.</p>
+
+<p><strong>Note</strong>:
+The list is parsed as a JSON array, which means that
+you must use double-quotes (&ldquo;) around words not single-quotes (&lsquo;).</p>
+</blockquote>
+
+<h2 id="user">USER</h2>
+
+<pre><code>USER daemon
+</code></pre>
+
+<p>The <code>USER</code> instruction sets the user name or UID to use when running the image
+and for any <code>RUN</code>, <code>CMD</code> and <code>ENTRYPOINT</code> instructions that follow it in the
+<code>Dockerfile</code>.</p>
+
+<h2 id="workdir">WORKDIR</h2>
+
+<pre><code>WORKDIR /path/to/workdir
+</code></pre>
+
+<p>The <code>WORKDIR</code> instruction sets the working directory for any <code>RUN</code>, <code>CMD</code>,
+<code>ENTRYPOINT</code>, <code>COPY</code> and <code>ADD</code> instructions that follow it in the <code>Dockerfile</code>.</p>
+
+<p>It can be used multiple times in the one <code>Dockerfile</code>. If a relative path
+is provided, it will be relative to the path of the previous <code>WORKDIR</code>
+instruction. For example:</p>
+
+<pre><code>WORKDIR /a
+WORKDIR b
+WORKDIR c
+RUN pwd
+</code></pre>
+
+<p>The output of the final <code>pwd</code> command in this <code>Dockerfile</code> would be
+<code>/a/b/c</code>.</p>
+
+<p>The <code>WORKDIR</code> instruction can resolve environment variables previously set using
+<code>ENV</code>. You can only use environment variables explicitly set in the <code>Dockerfile</code>.
+For example:</p>
+
+<pre><code>ENV DIRPATH /path
+WORKDIR $DIRPATH/$DIRNAME
+RUN pwd
+</code></pre>
+
+<p>The output of the final <code>pwd</code> command in this <code>Dockerfile</code> would be
+<code>/path/$DIRNAME</code></p>
+
+<h2 id="arg">ARG</h2>
+
+<pre><code>ARG &lt;name&gt;[=&lt;default value&gt;]
+</code></pre>
+
+<p>The <code>ARG</code> instruction defines a variable that users can pass at build-time to
+the builder with the <code>docker build</code> command using the <code>--build-arg
+&lt;varname&gt;=&lt;value&gt;</code> flag. If a user specifies a build argument that was not
+defined in the Dockerfile, the build outputs an error.</p>
+
+<pre><code>One or more build-args were not consumed, failing build.
+</code></pre>
+
+<p>The Dockerfile author can define a single variable by specifying <code>ARG</code> once or many
+variables by specifying <code>ARG</code> more than once. For example, a valid Dockerfile:</p>
+
+<pre><code>FROM busybox
+ARG user1
+ARG buildno
+...
+</code></pre>
+
+<p>A Dockerfile author may optionally specify a default value for an <code>ARG</code> instruction:</p>
+
+<pre><code>FROM busybox
+ARG user1=someuser
+ARG buildno=1
+...
+</code></pre>
+
+<p>If an <code>ARG</code> value has a default and if there is no value passed at build-time, the
+builder uses the default.</p>
+
+<p>An <code>ARG</code> variable definition comes into effect from the line on which it is
+defined in the <code>Dockerfile</code> not from the argument&rsquo;s use on the command-line or
+elsewhere.  For example, consider this Dockerfile:</p>
+
+<pre><code>1 FROM busybox
+2 USER ${user:-some_user}
+3 ARG user
+4 USER $user
+...
+</code></pre>
+
+<p>A user builds this file by calling:</p>
+
+<pre><code>$ docker build --build-arg user=what_user Dockerfile
+</code></pre>
+
+<p>The <code>USER</code> at line 2 evaluates to <code>some_user</code> as the <code>user</code> variable is defined on the
+subsequent line 3. The <code>USER</code> at line 4 evaluates to <code>what_user</code> as <code>user</code> is
+defined and the <code>what_user</code> value was passed on the command line. Prior to its definition by an
+<code>ARG</code> instruction, any use of a variable results in an empty string.</p>
+
+<blockquote>
+<p><strong>Note:</strong> It is not recommended to use build-time variables for
+ passing secrets like github keys, user credentials etc.</p>
+</blockquote>
+
+<p>You can use an <code>ARG</code> or an <code>ENV</code> instruction to specify variables that are
+available to the <code>RUN</code> instruction. Environment variables defined using the
+<code>ENV</code> instruction always override an <code>ARG</code> instruction of the same name. Consider
+this Dockerfile with an <code>ENV</code> and <code>ARG</code> instruction.</p>
+
+<pre><code>1 FROM ubuntu
+2 ARG CONT_IMG_VER
+3 ENV CONT_IMG_VER v1.0.0
+4 RUN echo $CONT_IMG_VER
+</code></pre>
+
+<p>Then, assume this image is built with this command:</p>
+
+<pre><code>$ docker build --build-arg CONT_IMG_VER=v2.0.1 Dockerfile
+</code></pre>
+
+<p>In this case, the <code>RUN</code> instruction uses <code>v1.0.0</code> instead of the <code>ARG</code> setting
+passed by the user:<code>v2.0.1</code> This behavior is similar to a shell
+script where a locally scoped variable overrides the variables passed as
+arguments or inherited from environment, from its point of definition.</p>
+
+<p>Using the example above but a different <code>ENV</code> specification you can create more
+useful interactions between <code>ARG</code> and <code>ENV</code> instructions:</p>
+
+<pre><code>1 FROM ubuntu
+2 ARG CONT_IMG_VER
+3 ENV CONT_IMG_VER ${CONT_IMG_VER:-v1.0.0}
+4 RUN echo $CONT_IMG_VER
+</code></pre>
+
+<p>Unlike an <code>ARG</code> instruction, <code>ENV</code> values are always persisted in the built
+image. Consider a docker build without the &ndash;build-arg flag:</p>
+
+<pre><code>$ docker build Dockerfile
+</code></pre>
+
+<p>Using this Dockerfile example, <code>CONT_IMG_VER</code> is still persisted in the image but
+its value would be <code>v1.0.0</code> as it is the default set in line 3 by the <code>ENV</code> instruction.</p>
+
+<p>The variable expansion technique in this example allows you to pass arguments
+from the command line and persist them in the final image by leveraging the
+<code>ENV</code> instruction. Variable expansion is only supported for <a href="#environment-replacement">a limited set of
+Dockerfile instructions.</a></p>
+
+<p>Docker has a set of predefined <code>ARG</code> variables that you can use without a
+corresponding <code>ARG</code> instruction in the Dockerfile.</p>
+
+<ul>
+<li><code>HTTP_PROXY</code></li>
+<li><code>http_proxy</code></li>
+<li><code>HTTPS_PROXY</code></li>
+<li><code>https_proxy</code></li>
+<li><code>FTP_PROXY</code></li>
+<li><code>ftp_proxy</code></li>
+<li><code>NO_PROXY</code></li>
+<li><code>no_proxy</code></li>
+</ul>
+
+<p>To use these, simply pass them on the command line using the <code>--build-arg
+&lt;varname&gt;=&lt;value&gt;</code> flag.</p>
+
+<h2 id="onbuild">ONBUILD</h2>
+
+<pre><code>ONBUILD [INSTRUCTION]
+</code></pre>
+
+<p>The <code>ONBUILD</code> instruction adds to the image a <em>trigger</em> instruction to
+be executed at a later time, when the image is used as the base for
+another build. The trigger will be executed in the context of the
+downstream build, as if it had been inserted immediately after the
+<code>FROM</code> instruction in the downstream <code>Dockerfile</code>.</p>
+
+<p>Any build instruction can be registered as a trigger.</p>
+
+<p>This is useful if you are building an image which will be used as a base
+to build other images, for example an application build environment or a
+daemon which may be customized with user-specific configuration.</p>
+
+<p>For example, if your image is a reusable Python application builder, it
+will require application source code to be added in a particular
+directory, and it might require a build script to be called <em>after</em>
+that. You can&rsquo;t just call <code>ADD</code> and <code>RUN</code> now, because you don&rsquo;t yet
+have access to the application source code, and it will be different for
+each application build. You could simply provide application developers
+with a boilerplate <code>Dockerfile</code> to copy-paste into their application, but
+that is inefficient, error-prone and difficult to update because it
+mixes with application-specific code.</p>
+
+<p>The solution is to use <code>ONBUILD</code> to register advance instructions to
+run later, during the next build stage.</p>
+
+<p>Here&rsquo;s how it works:</p>
+
+<ol>
+<li>When it encounters an <code>ONBUILD</code> instruction, the builder adds a
+trigger to the metadata of the image being built. The instruction
+does not otherwise affect the current build.</li>
+<li>At the end of the build, a list of all triggers is stored in the
+image manifest, under the key <code>OnBuild</code>. They can be inspected with
+the <code>docker inspect</code> command.</li>
+<li>Later the image may be used as a base for a new build, using the
+<code>FROM</code> instruction. As part of processing the <code>FROM</code> instruction,
+the downstream builder looks for <code>ONBUILD</code> triggers, and executes
+them in the same order they were registered. If any of the triggers
+fail, the <code>FROM</code> instruction is aborted which in turn causes the
+build to fail. If all triggers succeed, the <code>FROM</code> instruction
+completes and the build continues as usual.</li>
+<li>Triggers are cleared from the final image after being executed. In
+other words they are not inherited by &ldquo;grand-children&rdquo; builds.</li>
+</ol>
+
+<p>For example you might add something like this:</p>
+
+<pre><code>[...]
+ONBUILD ADD . /app/src
+ONBUILD RUN /usr/local/bin/python-build --dir /app/src
+[...]
+</code></pre>
+
+<blockquote>
+<p><strong>Warning</strong>: Chaining <code>ONBUILD</code> instructions using <code>ONBUILD ONBUILD</code> isn&rsquo;t allowed.</p>
+
+<p><strong>Warning</strong>: The <code>ONBUILD</code> instruction may not trigger <code>FROM</code> or <code>MAINTAINER</code> instructions.</p>
+</blockquote>
+
+<h2 id="stopsignal">STOPSIGNAL</h2>
+
+<pre><code>STOPSIGNAL signal
+</code></pre>
+
+<p>The <code>STOPSIGNAL</code> instruction sets the system call signal that will be sent to the container to exit.
+This signal can be a valid unsigned number that matches a position in the kernel&rsquo;s syscall table, for instance 9,
+or a signal name in the format SIGNAME, for instance SIGKILL.</p>
+
+<h2 id="dockerfile-examples">Dockerfile examples</h2>
+
+<p>Below you can see some examples of Dockerfile syntax. If you&rsquo;re interested in
+something more realistic, take a look at the list of <a href="../../../engine/examples/">Dockerization examples</a>.</p>
+
+<pre><code># Nginx
+#
+# VERSION               0.0.1
+
+FROM      ubuntu
+MAINTAINER Victor Vieux &lt;victor@docker.com&gt;
+
+LABEL Description=&quot;This image is used to start the foobar executable&quot; Vendor=&quot;ACME Products&quot; Version=&quot;1.0&quot;
+RUN apt-get update &amp;&amp; apt-get install -y inotify-tools nginx apache2 openssh-server
+</code></pre>
+
+<pre><code># Firefox over VNC
+#
+# VERSION               0.3
+
+FROM ubuntu
+
+# Install vnc, xvfb in order to create a 'fake' display and firefox
+RUN apt-get update &amp;&amp; apt-get install -y x11vnc xvfb firefox
+RUN mkdir ~/.vnc
+# Setup a password
+RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
+# Autostart firefox (might not be the best way, but it does the trick)
+RUN bash -c 'echo &quot;firefox&quot; &gt;&gt; /.bashrc'
+
+EXPOSE 5900
+CMD    [&quot;x11vnc&quot;, &quot;-forever&quot;, &quot;-usepw&quot;, &quot;-create&quot;]
+</code></pre>
+
+<pre><code># Multiple images example
+#
+# VERSION               0.1
+
+FROM ubuntu
+RUN echo foo &gt; bar
+# Will output something like ===&gt; 907ad6c2736f
+
+FROM ubuntu
+RUN echo moo &gt; oink
+# Will output something like ===&gt; 695d7793cbe4
+
+# You᾿ll now have two images, 907ad6c2736f with /bar, and 695d7793cbe4 with
+# /oink.
+</code></pre>
+
+        </article>
+		  </section>
+    </div>
+    <div id="toc" class="large-3 columns toc ">
+     On this page:
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#dockerfile-reference">Dockerfile reference</a>
+<ul>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#format">Format</a>
+<ul>
+<li><a href="#environment-replacement">Environment replacement</a></li>
+<li><a href="#dockerignore-file">.dockerignore file</a></li>
+</ul></li>
+<li><a href="#from">FROM</a></li>
+<li><a href="#maintainer">MAINTAINER</a></li>
+<li><a href="#run">RUN</a>
+<ul>
+<li><a href="#known-issues-run">Known issues (RUN)</a></li>
+</ul></li>
+<li><a href="#cmd">CMD</a></li>
+<li><a href="#label">LABEL</a></li>
+<li><a href="#expose">EXPOSE</a></li>
+<li><a href="#env">ENV</a></li>
+<li><a href="#add">ADD</a></li>
+<li><a href="#copy">COPY</a></li>
+<li><a href="#entrypoint">ENTRYPOINT</a>
+<ul>
+<li><a href="#exec-form-entrypoint-example">Exec form ENTRYPOINT example</a></li>
+<li><a href="#shell-form-entrypoint-example">Shell form ENTRYPOINT example</a></li>
+</ul></li>
+<li><a href="#volume">VOLUME</a></li>
+<li><a href="#user">USER</a></li>
+<li><a href="#workdir">WORKDIR</a></li>
+<li><a href="#arg">ARG</a></li>
+<li><a href="#onbuild">ONBUILD</a></li>
+<li><a href="#stopsignal">STOPSIGNAL</a></li>
+<li><a href="#dockerfile-examples">Dockerfile examples</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+<footer class="main-footer">
+  <div class="row">
+  </div>
+  <div class="row">
+  </div>
+  <div id="buildinfo">
+    Nov 3, 2015 at 7:59pm (PST)
+{
+    "docker/compose": {
+        "ref": "docs",
+        "repos": [
+            "git@github.com:docker/compose.git"
+        ],
+        "sha": "9c8173dbfda93baef214359991b6a8a54172f6ae"
+    },
+    "docker/docker-hub": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:docker/hub2-demo.git"
+        ],
+        "sha": "4b2e522c81c860d63b126342a6b981ac0ff1605c"
+    },
+    "docker/docker-trusted-registry": {
+        "ref": "docs",
+        "repos": [
+            "git@github.com:docker/dhe-deploy.git"
+        ],
+        "sha": "b8988465878952f2e2c2472e8fc5fd35e5975fbf"
+    },
+    "docker/docs-base": {
+        "ref": "hugo-github-linking",
+        "repos": [
+            "git@github.com:docker/docs-base.git"
+        ],
+        "sha": "dc98c0381a6cc311c9e3189dc78a3c7e62e5a205"
+    },
+    "docker/engine": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:docker/docker.git"
+        ],
+        "sha": "474b16af8ecfe94ec635dfac60025348d3186aa3"
+    },
+    "docker/machine": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:docker/machine.git"
+        ],
+        "sha": "786437901c0c883ecb59c1e0531654c1d89b326d"
+    },
+    "docker/opensource": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:docker/opensource.git"
+        ],
+        "sha": "0cd99bcdd876ca0293d8944980c79f32064b6354"
+    },
+    "docker/registry": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:docker/distribution.git"
+        ],
+        "sha": "a9da0e510032314910b5405acc50873ab2fa2e5a"
+    },
+    "docker/swarm": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:docker/swarm.git"
+        ],
+        "sha": "087e2452f3ec474f112b4e5b8c52b8dacb5751be"
+    },
+    "docker/tutorials": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:docker/tutorials.git"
+        ],
+        "sha": "cb55d4de0df55e22f443aac664d66f092f06c56b"
+    },
+    "docs.docker.com": {
+        "ref": "refs/heads/1-9-release",
+        "repos": [
+            "git@github.com:moxiegirl/docs.docker.com.git",
+            "git@github.com:docker/docs.docker.com.git"
+        ],
+        "sha": "5878eae5de6f012c67a2a4772327c9948274c351"
+    },
+    "kitematic/kitematic": {
+        "ref": "master",
+        "repos": [
+            "git@github.com:kitematic/kitematic.git"
+        ],
+        "sha": "e533ed35d2eab31ce528675b0665f97516b4147b"
+    }
+}   </div>
+</footer>
+<link rel="stylesheet" href="../../../highlight/styles/github.css">
+<script src="../../../highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="../../../dist/assets/js/all.js"></script>
+<script>
+  $( 'nav li:has(ul)' ).doubleTapToGo();
+</script>
+<script>
+
+;(function ( $, window, document, undefined ) {
+
+    var pluginName = 'accordion',
+        defaults = {
+            transitionSpeed: 300,
+            transitionEasing: 'ease',
+            controlElement: '[data-control]',
+            contentElement: '[data-content]',
+            groupElement: '[data-accordion-group]',
+            singleOpen: true
+        };
+
+    function Accordion(element, options) {
+        this.element = element;
+        this.options = $.extend({}, defaults, options);
+        this._defaults = defaults;
+        this._name = pluginName;
+        this.init();
+    }
+
+    Accordion.prototype.init = function () {
+        var self = this,
+            opts = self.options;
+
+        var $accordion = $(self.element),
+            $controls = $accordion.find('> ' + opts.controlElement),
+            $content =  $accordion.find('> ' + opts.contentElement);
+
+        var accordionParentsQty = $accordion.parents('[data-accordion]').length,
+            accordionHasParent = accordionParentsQty > 0;
+
+        var closedCSS = { 'max-height': 0, 'overflow': 'hidden' };
+
+        var CSStransitions = supportsTransitions();
+
+        function debounce(func, threshold, execAsap) {
+            var timeout;
+
+            return function debounced() {
+                var obj = this,
+                    args = arguments;
+
+                function delayed() {
+                    if (!execAsap) func.apply(obj, args);
+                    timeout = null;
+                };
+
+                if (timeout) clearTimeout(timeout);
+                else if (execAsap) func.apply(obj, args);
+
+                timeout = setTimeout(delayed, threshold || 100);
+            };
+        }
+
+        function supportsTransitions() {
+            var b = document.body || document.documentElement,
+                s = b.style,
+                p = 'transition';
+
+            if (typeof s[p] == 'string') {
+                return true;
+            }
+
+            var v = ['Moz', 'webkit', 'Webkit', 'Khtml', 'O', 'ms'];
+
+            p = 'Transition';
+
+            for (var i=0; i<v.length; i++) {
+                if (typeof s[v[i] + p] == 'string') {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function requestAnimFrame(cb) {
+            if(window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame) {
+                return  requestAnimationFrame(cb) ||
+                        webkitRequestAnimationFrame(cb) ||
+                        mozRequestAnimationFrame(cb);
+            } else {
+                return setTimeout(cb, 1000 / 60);
+            }
+        }
+
+        function toggleTransition($el, remove) {
+            if(!remove) {
+                $content.css({
+                    '-webkit-transition': 'max-height ' + opts.transitionSpeed + 'ms ' + opts.transitionEasing,
+                    'transition': 'max-height ' + opts.transitionSpeed + 'ms ' + opts.transitionEasing
+                });
+            } else {
+                $content.css({
+                    '-webkit-transition': '',
+                    'transition': ''
+                });
+            }
+        }
+
+        function calculateHeight($el) {
+            var height = 0;
+
+            $el.children().each(function() {
+                height = height + $(this).outerHeight(true);
+            });
+
+            $el.data('oHeight', height);
+        }
+
+        function updateParentHeight($parentAccordion, $currentAccordion, qty, operation) {
+            var $content = $parentAccordion.filter('.open').find('> [data-content]'),
+                $childs = $content.find('[data-accordion].open > [data-content]'),
+                $matched;
+
+            if(!opts.singleOpen) {
+                $childs = $childs.not($currentAccordion.siblings('[data-accordion].open').find('> [data-content]'));
+            }
+
+            $matched = $content.add($childs);
+
+            if($parentAccordion.hasClass('open')) {
+                $matched.each(function() {
+                    var currentHeight = $(this).data('oHeight');
+
+                    switch (operation) {
+                        case '+':
+                            $(this).data('oHeight', currentHeight + qty);
+                            break;
+                        case '-':
+                            $(this).data('oHeight', currentHeight - qty);
+                            break;
+                        default:
+                            throw 'updateParentHeight method needs an operation';
+                    }
+
+                    $(this).css('max-height', $(this).data('oHeight'));
+                });
+            }
+        }
+
+        function refreshHeight($accordion) {
+            if($accordion.hasClass('open')) {
+                var $content = $accordion.find('> [data-content]'),
+                    $childs = $content.find('[data-accordion].open > [data-content]'),
+                    $matched = $content.add($childs);
+
+                calculateHeight($matched);
+
+                $matched.css('max-height', $matched.data('oHeight'));
+            }
+        }
+
+        function closeAccordion($accordion, $content) {
+            $accordion.trigger('accordion.close');
+            
+            if(CSStransitions) {
+                if(accordionHasParent) {
+                    var $parentAccordions = $accordion.parents('[data-accordion]');
+
+                    updateParentHeight($parentAccordions, $accordion, $content.data('oHeight'), '-');
+                }
+
+                $content.css(closedCSS);
+
+                $accordion.removeClass('open');
+            } else {
+                $content.css('max-height', $content.data('oHeight'));
+
+                $content.animate(closedCSS, opts.transitionSpeed);
+
+                $accordion.removeClass('open');
+            }
+        }
+
+        function openAccordion($accordion, $content) {
+            $accordion.trigger('accordion.open');
+            if(CSStransitions) {
+                toggleTransition($content);
+
+                if(accordionHasParent) {
+                    var $parentAccordions = $accordion.parents('[data-accordion]');
+
+                    updateParentHeight($parentAccordions, $accordion, $content.data('oHeight'), '+');
+                }
+
+                requestAnimFrame(function() {
+                    $content.css('max-height', $content.data('oHeight'));
+                });
+
+                $accordion.addClass('open');
+            } else {
+                $content.animate({
+                    'max-height': $content.data('oHeight')
+                }, opts.transitionSpeed, function() {
+                    $content.css({'max-height': 'none'});
+                });
+
+                $accordion.addClass('open');
+            }
+        }
+
+        function closeSiblingAccordions($accordion) {
+            var $accordionGroup = $accordion.closest(opts.groupElement);
+
+            var $siblings = $accordion.siblings('[data-accordion]').filter('.open'),
+                $siblingsChildren = $siblings.find('[data-accordion]').filter('.open');
+
+            var $otherAccordions = $siblings.add($siblingsChildren);
+
+            $otherAccordions.each(function() {
+                var $accordion = $(this),
+                    $content = $accordion.find(opts.contentElement);
+
+                closeAccordion($accordion, $content);
+            });
+
+            $otherAccordions.removeClass('open');
+        }
+
+        function toggleAccordion() {
+            var isAccordionGroup = (opts.singleOpen) ? $accordion.parents(opts.groupElement).length > 0 : false;
+
+            calculateHeight($content);
+
+            if(isAccordionGroup) {
+                closeSiblingAccordions($accordion);
+            }
+
+            if($accordion.hasClass('open')) {
+                closeAccordion($accordion, $content);
+            } else {
+                openAccordion($accordion, $content);
+            }
+        }
+
+        function addEventListeners() {
+            $controls.on('click', toggleAccordion);
+            
+            $controls.on('accordion.toggle', function() {
+                if(opts.singleOpen && $controls.length > 1) {
+                    return false;
+                }
+                
+                toggleAccordion();
+            });
+
+            $(window).on('resize', debounce(function() {
+                refreshHeight($accordion);
+            }));
+        }
+
+        function setup() {
+            $content.each(function() {
+                var $curr = $(this);
+
+                if($curr.css('max-height') != 0) {
+                    if(!$curr.closest('[data-accordion]').hasClass('open')) {
+                        $curr.css({ 'max-height': 0, 'overflow': 'hidden' });
+                    } else {
+                        toggleTransition($curr);
+                        calculateHeight($curr);
+
+                        $curr.css('max-height', $curr.data('oHeight'));
+                    }
+                }
+            });
+
+
+            if(!$accordion.attr('data-accordion')) {
+                $accordion.attr('data-accordion', '');
+                $accordion.find(opts.controlElement).attr('data-control', '');
+                $accordion.find(opts.contentElement).attr('data-content', '');
+            }
+        }
+
+        setup();
+        addEventListeners();
+    };
+
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName,
+                new Accordion( this, options ));
+            }
+        });
+    }
+
+})( jQuery, window, document );
+
+$(document).ready(function() {
+  $('#multiple [data-accordion]').accordion({
+    singleOpen: false
+  });
+});
+
+</script>
+
+
+  <noscript>
+  <iframe src="//www.googletagmanager.com/ns.html?id=GTM-PSVHG8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PSVHG8');
+</script>
+

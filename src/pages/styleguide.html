@@ -1,0 +1,959 @@
+---
+layout: src/layouts/styleguide.html
+---
+
+<div class="row">
+  <div class="small-12 columns">
+    <h1>Client Style Guide</h1>
+    <p class="lead">This style guide was built with Foundation for Sites. For more information on how to use this responsive front-end framework, check out the documentation, get help from the Foundation community, or request immediate technical support.</p>
+    <a href="http://foundation.zurb.com/docs/" class="button">Visit the Docs</a>
+    <a href="http://foundation.zurb.com/forum/" class="secondary button">Foundation Forum</a>
+    <a href="http://foundation.zurb.com/business/business-support.html" class="secondary button">Technical Support</a>
+  </div>
+</div>
+
+<!-- Main content area -->
+<div class="row">
+
+<!-- Table of contents -->
+<div class="medium-3 small-4 columns">
+  <dl class="vertical tabs" data-tab>
+    <dd class="active"><a href="#grid">The Grid</a></dd>
+    <dd><a href="#colors">Colors</a></dd>
+    <dd><a href="#typography">Typography</a></dd>
+    <dd><a href="#buttons">Buttons</a></dd>
+    <dd><a href="#forms">Forms</a></dd>
+    <dd><a href="#navigation">Navigation</a></dd>
+    <dd><a href="#product-cards">Product Cards</a></dd>
+    <dd><a href="#terminal">Terminal Window</a></dd>
+    <dd><a href="#animations">Animations</a></dd>
+    <dd><a href="#blockquotes">Blockquotes</a></dd>
+    <dd><a href="#callouts">Callouts</a></dd>
+    <dd><a href="#landing-hero">Landing Hero</a></dd>
+    <dd><a href="#news-item">News Item</a></dd>
+    <!-- Add new style guide sections here. -->
+  </dl>
+</div>
+<!-- /Table of contents -->
+
+<!-- Content sections -->
+<div class="medium-9 small-8 columns">
+
+  <div class="tabs-content">
+
+    <!-- The Grid -->
+    <section class="content active" id="grid">
+      <h2>The Grid</h2>
+      <p class="lead">Problem: You've got tons of content, each needing different sized vertical columns, and don't know how to quick and easily get it all done. Solution: The awesome grid!</p>
+
+      <hr>
+
+      <section>
+        <h3>The Grid</h3>
+        <p>The grid is built around two key elements: rows and columns. Rows create a max-width and contain the columns, and columns create the final structure. Everything on your page that you don't give a specific structural style to should be within a row or column.</p>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>Nesting Support</h3>
+        <p>In the Grid you can nest columns down as far as you'd like. Just embed rows inside columns and go from there. Each embedded row can contain up to 12 columns.</p>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>How to Use</h3>
+        <p>Using this framework is easy. Here's how your code will look when you use a series of <code>&lt;div&gt;</code> tags to create vertical columns.</p>
+
+<pre><code class="html">
+<div class="row">
+  <div class="small-6 medium-4 large-3 columns">...</div>
+  <div class="small-6 medium-8 large-9 columns">...</div>
+</div>
+</code></pre>
+
+        <div class="row display">
+          <div class="small-12 large-4 columns">4</div>
+          <div class="small-12 large-4 columns">4</div>
+          <div class="small-12 large-4 columns">4</div>
+        </div>
+        <div class="row display">
+          <div class="small-12 large-3 columns">3</div>
+          <div class="small-12 large-6 columns">6</div>
+          <div class="small-12 large-3 columns">3</div>
+        </div>
+        <div class="row display">
+          <div class="small-12 large-2 columns">2</div>
+          <div class="small-12 large-8 columns">8</div>
+          <div class="small-12 large-2 columns">2</div>
+        </div>
+        <div class="row display">
+          <div class="small-12 large-3 columns">3</div>
+          <div class="small-12 large-9 columns">9</div>
+        </div>
+        <div class="row display">
+          <div class="small-12 large-4 columns">4</div>
+          <div class="small-12 large-8 columns">8</div>
+        </div>
+        <div class="row display">
+          <div class="small-12 large-5 columns">5</div>
+          <div class="small-12 large-7 columns">7</div>
+        </div>
+        <div class="row display">
+          <div class="small-12 large-6 columns">6</div>
+          <div class="small-12 large-6 columns">6</div>
+        </div>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>Nesting Rows</h3>
+        <p>In the Grid you can nest columns down as far as you'd like. Just embed rows inside columns and go from there. Each embedded row can contain up to 12 columns.</p>
+
+<pre><code class="html">
+<div class="row">
+  <div class="small-8 columns">8
+    <div class="row">
+      <div class="small-8 columns">8 Nested
+        <div class="row">
+          <div class="small-8 columns">8 Nested Again</div>
+          <div class="small-4 columns">4</div>
+        </div>
+      </div>
+      <div class="small-4 columns">4</div>
+    </div>
+  </div>
+  <div class="small-4 columns">4</div>
+</div>
+</code></pre>
+        
+        <div class="row display">
+          <div class="small-8 columns">8
+            <div class="row">
+              <div class="small-8 columns">8 Nested
+                <div class="row">
+                  <div class="small-8 columns">8 Nested Again</div>
+                  <div class="small-4 columns">4</div>
+                </div>
+              </div>
+              <div class="small-4 columns">4</div>
+            </div>
+          </div>
+          <div class="small-4 columns">4</div>
+        </div>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>Small Grid</h3>
+
+        <p>As you've probably noticed in the examples above, you have access to a small, medium, and large grid. If you know that your grid structure will be the same for small devices as it will be on large devices, just use the small grid. You can override your small grid classes by adding medium or large grid classes.</p>
+
+<pre><code class="html">
+<div class="row">
+  <div class="small-2 columns">2</div>
+  <div class="small-10 columns">10, last</div>
+</div>
+<div class="row">
+  <div class="small-3 columns">3</div>
+  <div class="small-9 columns">9, last</div>
+</div>
+</code></pre>
+
+        <div class="row display">
+          <div class="small-2 columns">2</div>
+          <div class="small-10 columns">10, last</div>
+        </div>
+        <div class="row display">
+          <div class="small-3 columns">3</div>
+          <div class="small-9 columns">9, last</div>
+        </div>
+      </section>
+    </section>
+    <!-- /The Grid -->
+
+    <!-- Colors -->
+    <section class="content" id="colors">
+      <h2>Colors</h2>
+      <p class="lead">Below you can find the different values we created that support the primary color variable you can change at any time in <code>_settings.scss</code></p>
+
+      <hr>
+      <h3>Primary Colors</h3>
+      <p>These are Docker's main brand colors that set the tone for all of Docker's design materials.</p>
+      <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-5">
+        <li><div class="color-block">
+          <span style="background: #23B8EB"></span>
+          #23B8EB
+        </div></li>
+        <li><div class="color-block">
+          <span style="background: #243137"></span>
+          #243137
+        </div></li>
+      </ul>
+      <hr>
+      <h3>Secondary Colors</h3>
+      <p>These accent colors and should be used in illustration and design elements, but not as large backgrounds.</p>
+      <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-5">
+        <li><div class="color-block">
+          <span style="background: #FF992E"></span>
+          #FF992E
+        </div></li>
+        <li><div class="color-block">
+          <span style="background: #86D800"></span>
+          #86D800
+        </div></li>
+        <li><div class="color-block">
+          <span style="background: #FFDE00"></span>
+          #FFDE00
+        </div></li>
+      </ul>
+      <hr>
+      <h3>Background Colors</h3>
+      <p>These colors can be used as backgrounds.</p>
+      <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-5">
+        <li><div class="color-block">
+          <span style="background: #134a6a"></span>
+          #134A6A
+        </div></li>
+        <li><div class="color-block">
+          <span style="background: #F4F9FB"></span>
+          #F4F9FB
+        </div></li>
+      </ul>
+      <hr>
+      <h3>Text Color</h3>
+      <p>This is the color for paragraph text.</p>
+      <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-5">
+        <li><div class="color-block">
+          <span style="background: #7A8491"></span>
+          #7A8491
+        </div></li>
+      </ul>
+    </section>
+    <!-- /Colors -->
+
+    <!-- Typography -->
+    <section class="content" id="typography">
+      <h2>Typography</h2>
+      <p class="lead">Docker uses Helvetica Neue for headings and paragraph text.</p>
+
+      <hr>
+
+      <section>
+        <h4>Headings</h4>
+
+        <p>Headings are used to denote different sections of content, usually consisting of related paragraphs and other HTML elements. They range from h1 to h6 and should be styled in a clear hierarchy (i.e., largest to smallest)</p>
+      </section>
+
+      <hr>
+
+      <section>
+        <h4>Paragraphs</h4>
+
+        <p>Paragraphs are groups of sentences, each with a lead (first sentence) and transition (last sentence). They are block level elements, meaning they stack vertically when repeated. Use them as such.</p>
+      </section>
+
+      <hr>
+
+      <h1>h1. Heading Level 1</h1>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quibusdam ratione sunt dolorum, qui illo maxime doloremque accusantium cum libero eum, a optio odio placeat debitis ullam aut non distinctio.</p>
+
+      <h2>h2. Heading Level 2</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quibusdam ratione sunt dolorum, qui illo maxime doloremque accusantium cum libero eum, a optio odio placeat debitis ullam aut non distinctio.</p>
+
+      <h3>h3. Heading Level 3</h3>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quibusdam ratione sunt dolorum, qui illo maxime doloremque accusantium cum libero eum, a optio odio placeat debitis ullam aut non distinctio.</p>
+
+      <h4>h4. Heading Level 4</h4>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quibusdam ratione sunt dolorum, qui illo maxime doloremque accusantium cum libero eum, a optio odio placeat debitis ullam aut non distinctio.</p>
+
+      <h5>h5. Heading Level 5</h5>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quibusdam ratione sunt dolorum, qui illo maxime doloremque accusantium cum libero eum, a optio odio placeat debitis ullam aut non distinctio.</p>
+
+      <h6>h6. Heading Level 6</h1>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quibusdam ratione sunt dolorum, qui illo maxime doloremque accusantium cum libero eum, a optio odio placeat debitis ullam aut non distinctio.</p>
+    </section>
+    <!-- /Typography -->
+
+    <!-- Buttons -->
+    <section class="content" id="buttons">
+      <h2>Buttons</h2>
+      <p class="lead">Buttons are tied to an action of some kind, whether that button is on a cheese dispenser or launches the rocket that you're strapped to. On the web, we follow similar conventions.</p>
+
+      <hr>
+
+      <section>
+        <h3>Primary Buttons</h3>
+        <p>These buttons are primary calls to action and should be used sparingly. Their size can be adjusted with the <code>tiny</code>, <code>small</code>, and <code>large</code> classes.</p>
+
+<pre><code class="html">
+<a href="#" class="primary large button">Large button</a>
+<a href="#" class="primary button">Regular button</a>
+<a href="#" class="primary small button">Small button</a>
+<a href="#" class="primary tiny button">Tiny button</a>
+</code></pre>
+
+        <a href="#" class="primary large button">Large button</a>
+        <a href="#" class="primary button">Regular button</a>
+        <a href="#" class="primary small button">Small button</a>
+        <a href="#" class="primary tiny button">Tiny button</a>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>Secondary Buttons</h3>
+        <p>These buttons are used for less important, secondary actions on a page.</p>
+
+<pre><code class="html">
+<a href="#" class="secondary large button">Large button</a>
+<a href="#" class="secondary button">Regular button</a>
+<a href="#" class="secondary small button">Small button</a>
+<a href="#" class="secondary tiny button">Tiny button</a>
+</code></pre>
+
+        <a href="#" class="secondary large button">Large button</a>
+        <a href="#" class="secondary button">Regular button</a>
+        <a href="#" class="secondary small button">Small button</a>
+        <a href="#" class="secondary tiny button">Tiny button</a>
+      </section>
+    </section>
+    <!-- /Buttons -->
+
+    <!-- Forms -->
+    <section class="content" id="forms">
+      <h2>Forms</h2>
+      <p class="lead">Use forms to allow users to interact with the site and provide information to the company.</p>
+
+      <hr>
+
+      <section>
+        <h3>Elements of a Form</h3>
+
+        <p>A form should be marked up using its default HTML properties. The ones we make use of include (in hierarchical order):</p>
+
+        <ul>
+          <li>Form</li>
+          <li>Label</li>
+          <li>Input</li>
+          <li>Select</li>
+          <li>Text area</li>
+          <li>Button</li>
+        </ul>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>How to Use</h3>
+
+        <p>Make forms great and easy to use with the following rules:</p>
+
+        <ul>
+          <li>Wrap checkboxes and radio buttons within labels for larger hit areas, and be sure to set the for, name, and id attributes for all applicable elements.</li>
+          <li>Series of checkboxes and radio buttons below within a <code>&lt;ul class="inline-list"&gt;</code>.</li>
+          <li>Before selecting any set of fields to use for a required input, explore other options (e.g., radio buttons over select lists).</li>
+        </ul>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>Learn All About Forms</h3>
+
+        <p>Check out the <a href="http://foundation.zurb.com/docs/components/forms.html">Foundation Docs</a> to learn about how flexible our forms are for creating different layouts. It works perfectly with the grid to meet all your form needs.</p>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>Form Layouts</h3>
+
+        <p>Form elements in Foundation are styled based on their type attribute rather than a class. Inputs in Foundation have another major advantage — they are full width by default. That means that inputs will run as wide as the column that contains them. However, you have two options which make these forms extremely versatile:</p>
+
+        <ul>
+          <li>You can size inputs using column sizes, like <code>.medium-6</code>, <code>.small-6</code>.</li>
+          <li>You can create row elements inside your form and use columns for the form, including inputs, labels and more. Rows inside a form inherit some special padding to even up input spacing.</li>
+        </ul>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>Form Example</h3>
+
+<pre><code class="html">
+<form class="callout">
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Label</label>
+      <input type="text" placeholder="placeholder">
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-6 columns">
+      <label>Label</label>
+      <input type="text" placeholder="placeholder">
+    </div>
+    <div class="large-6 columns">
+      <div class="row collapse">
+        <label>Label</label>
+        <div class="small-9 columns">
+          <input type="text" placeholder="placeholder">
+        </div>
+        <div class="small-3 columns">
+          <span class="postfix">.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Select Box</label>
+      <select>
+        <option value="good">Good</option>
+        <option value="better">Better</option>
+        <option value="best">Best</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-6 columns">
+      <label>Choose Your Favorite</label>
+      <input type="radio" name="radio1" value="radio1" id="radio1"><label for="radio1">Red</label>
+      <input type="radio" name="radio2" value="radio2" id="radio2"><label for="radio2">Blue</label>
+    </div>
+    <div class="large-6 columns">
+      <label>Check these out</label>
+      <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
+      <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Textarea Label</label>
+      <textarea placeholder="placeholder"></textarea>
+    </div>
+  </div>
+</form>
+</code></pre>
+
+        <form>
+          <div class="row">
+            <div class="large-12 columns">
+              <label>Label</label>
+              <input type="text" placeholder="placeholder">
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-6 columns">
+              <label>Label</label>
+              <input type="text" placeholder="placeholder">
+            </div>
+            <div class="large-6 columns">
+              <div class="row collapse">
+                <label>Label</label>
+                <div class="small-9 columns">
+                  <input type="text" placeholder="placeholder">
+                </div>
+                <div class="small-3 columns">
+                  <span class="postfix">.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-12 columns">
+              <label>Select Box</label>
+              <select>
+                <option value="good">Good</option>
+                <option value="better">Better</option>
+                <option value="best">Best</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-6 columns">
+              <label>Choose Your Favorite</label>
+              <input type="radio" name="radio1" value="radio1" id="radio1"><label for="radio1">Red</label>
+              <input type="radio" name="radio2" value="radio2" id="radio2"><label for="radio2">Blue</label>
+            </div>
+            <div class="large-6 columns">
+              <label>Check these out</label>
+              <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
+              <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-12 columns">
+              <label>Textarea Label</label>
+              <textarea placeholder="placeholder"></textarea>
+            </div>
+          </div>
+        </form>
+      </section>
+    </section>
+    <!-- /Forms -->
+
+    <!-- Add new style guide sections here. -->
+    <!-- <section class="content" id="newsection">
+      <h2>New Section</h2>
+      <p class="lead">This is a new section.</p>
+      <hr>
+    </section> -->
+    <!-- Product cards -->
+    <section class="content" id="product-cards">
+          <h2>Product Cards</h2>
+          <p class="lead">These cards are used for product items, they include a the product icon, header, description, and more link.</p>
+
+<pre><code class="html">
+  <ul class="products-items" data-equalizer>
+    <li class="wow fadeInUp" data-wow-delay="100ms">
+      <a href="#" class="products-items-card">
+        <img src="assets/images/products/engine.svg">
+        <div data-equalizer-watch>
+          <h3>Docker Engine</h3>
+          <p>At the core of the platform is the Engine which communicates with the client to create and run the Docker containers.</p>
+        </div>
+        <span class="link">More</span>
+      </a>  
+    </li>
+  </ul>  
+</code></pre>
+      <ul class="products-items" data-equalizer>
+        <li class="wow fadeInUp" data-wow-delay="100ms">
+          <a href="#" class="products-items-card">
+            <img src="assets/images/products/engine.svg">
+            <div data-equalizer-watch>
+              <h3>Docker Engine</h3>
+              <p>At the core of the platform is the Engine which communicates with the client to create and run the Docker containers.</p>
+            </div>
+            <span class="link">More</span>
+          </a>  
+        </li>
+      </ul>  
+    </section>
+    </section>
+    <!-- end product cards -->
+    <!-- Terminal window -->
+    <section class="content" id="terminal">
+          <h2>Terminal</h2>
+          <p class="lead">This terminal component can be used to display commands. The text colors can be adjusted with the <code>green</code>, and <code>gray</code>, and <code>prompt</code> classes.</p>
+          <hr>
+          <section>
+            <h3>Large Terminal</h3>
+            <p>These can be used for the main feature of the page.</p>
+<pre><code class="html">
+  <div class="terminal-window">
+    <header>
+      <div class="btn green"></div>
+      <div class="btn yellow"></div>
+      <div class="btn red"></div>
+    </header>
+    <section class="terminal">
+      <div class="terminal-data">
+        $ docker-compose up<br>
+        &nbsp;&nbsp;<span class="green">Pulling</span> <span class="gray">image redis...</span><br>
+        &nbsp;&nbsp;<span class="green">Building</span> <span class="gray">web...</span><br>
+        &nbsp;&nbsp;<span class="green">Starting</span> <span class="gray">composetest_redis_1...</span><br>
+        &nbsp;&nbsp;<span class="green">Starting</span> <span class="gray">composetest_web_1...</span><br>
+        &nbsp;&nbsp;<span class="gray">redis_1 | [8] 02 Jan 18:43:35.576 # Server started,<br>&nbsp; Redis version 2.8.3</span><br>
+        &nbsp;&nbsp;web_1   |  * Running on http://0.0.0.0:5000/<br>
+        $<span class="prompt"></span>
+        <span class="typed-cursor">|</span>
+      </div>
+    </section>
+  </div>
+</code></pre>
+              <div class="terminal-window">
+                <header>
+                  <div class="btn green"></div>
+                  <div class="btn yellow"></div>
+                  <div class="btn red"></div>
+                </header>
+                <section class="terminal">
+                  <div class="terminal-data">
+                    $ docker-compose up<br>
+                    &nbsp;&nbsp;<span class="green">Pulling</span> <span class="gray">image redis...</span><br>
+                    &nbsp;&nbsp;<span class="green">Building</span> <span class="gray">web...</span><br>
+                    &nbsp;&nbsp;<span class="green">Starting</span> <span class="gray">composetest_redis_1...</span><br>
+                    &nbsp;&nbsp;<span class="green">Starting</span> <span class="gray">composetest_web_1...</span><br>
+                    &nbsp;&nbsp;<span class="gray">redis_1 | [8] 02 Jan 18:43:35.576 # Server started,<br>&nbsp; Redis version 2.8.3</span><br>
+                    &nbsp;&nbsp;web_1   |  * Running on http://0.0.0.0:5000/<br>
+                    $<span class="prompt"></span>
+                    <span class="typed-cursor">|</span>
+                  </div>
+                </section>
+              </div>
+          </section>
+          <hr>
+          <section>
+            <h3>Small Terminal</h3>
+            <p>These are supporting components, secondary to the Large Terminal.</p>
+          </section>
+<pre><code class="html">
+  <div class="medium-4 columns">
+    <div class="terminal-window">
+      <section class="terminal terminal-small">
+        <div class="terminal-data">
+          <span class="green">WORKDIR</span> <span class="gray"> /code<br>
+          <span class="green">ADD</span> <span class="gray"> requirements.txt /code/<br>
+          <span class="green">RUN</span> <span class="gray"> pip install -r requirements.txt<br>
+          <span class="green">ADD</span> <span class="gray"> . /code<br>
+          <span class="green">CMD</span> <span class="gray"> python app.py
+        </div>
+      </section>
+    </div>
+  </div>
+</code></pre>
+            <div class="medium-4 columns">
+              <div class="terminal-window">
+                <section class="terminal terminal-small">
+                  <div class="terminal-data">
+                    <span class="green">WORKDIR</span> <span class="gray"> /code<br>
+                    <span class="green">ADD</span> <span class="gray"> requirements.txt /code/<br>
+                    <span class="green">RUN</span> <span class="gray"> pip install -r requirements.txt<br>
+                    <span class="green">ADD</span> <span class="gray"> . /code<br>
+                    <span class="green">CMD</span> <span class="gray"> python app.py
+                  </div>
+                </section>
+              </div>
+            </div>
+    </section>
+    <!-- end termindal window -->
+    <!-- animations -->
+    <section class="content" id="animations">
+          <h2>Animations</h2>
+          <p class="lead">Animation can be added to images, buttons, and product cards. They're great for adding polish and bringing the pages to life, but be sure not to overuse them.</p>
+          <hr>
+          <section>
+            <h3>How to Use</h3>
+            <p>1. First add class of <code>wow</code> to the element you want animated.</p>
+            <p>2. Next, define the type of animation desired by adding the class of <code>fadeInUp</code>, <code>fadeInLeft</code>, or <code>fadeInRight</code> .</p>
+            <hr> 
+            <h3>Additional Customization</h3>
+            <p>1. You can offset the animation with the code: <code>data-wow-offset="40"</code> .</p>
+            <p>2. To control the delay, you can use: <code>data-wow-delay="200ms"</code> .</p>
+            <p>3. For custom duration use: <code>data-wow-duration="1.5s"</code> .</p>
+      </section>
+    </section>
+    <!-- end animations  -->
+    <!-- blockquotes -->
+    <section class="content" id="blockquotes">
+      <h2>Blockquotes</h2>
+      <p class="lead">Blockquotes are used whenever we want to display a quote.</p>
+      <hr>
+      <section>
+        <h3>Small Blockquote</h3>
+        <p>This is the styling for a small blockquote.</p>
+<pre><code class="html">
+  <blockquote>“Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit.”
+  <br><img src="http://placehold.it/50x50">
+  <cite>James Smith, Developer</cite>
+  </blockquote>
+</code></pre>
+        <blockquote>“Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit.”
+        <br><img src="http://placehold.it/50x50">
+        <cite>James Smith, Developer</cite>
+        </blockquote>
+      </section>
+      <section>
+        <h3>Large Blockquote</h3>
+        <p>Large blockquotes look like the quote below add the class of <code>large</code> to the blockquote</p>
+<pre><code class="html">
+  <blockquote class="large">
+    &#8220;The Mission of Docker is to create tools of mass innovation.&#8221;
+    <cite>Solomon Hykes</cite>
+  </blockquote>
+</code></pre>
+        <blockquote class="large">
+          &#8220;The Mission of Docker is to create tools of mass innovation.&#8221;
+          <cite>Solomon Hykes</cite>
+        </blockquote>
+      </section>
+    </section>
+
+    <!-- end blockquotes -->
+
+    <!-- callouts -->
+    <section class="content" id="callouts">
+      <h2>Callouts</h2>
+      <p class="lead">Callouts are used when we want to make a large display that's full width and has the wave on the bottom.</p>
+      <section>
+<pre><code class="html">
+<div class="callout">
+  <section class="row">
+    <div class="small-12 columns">
+      <h2>Heading</h2>
+      <p>Aenean lacinia bibendum nulla sed consectetur. Donec id elit non mi porta gravida at eget metus.</p>
+  </div>
+  </section>
+</div>
+</code></pre>
+          <div class="callout">
+            <section class="row">
+              <div class="small-10 small-centered intro-header columns">
+                <h2>Heading</h2>
+                <p>Aenean lacinia bibendum nulla sed consectetur. Donec id elit non mi porta gravida at eget metus.</p>
+            </div>
+            </section>
+          </div>
+        </section>
+      </section>
+
+    <!-- end callouts -->
+
+
+    <!-- landing hero -->
+    <section class="content" id="landing-hero">
+      <h2>Landing Hero</h2>
+      <p class="lead">These components are used on the main landing pages. They include a large background illustration and tabbed sub navigation.</p>
+      <section>
+<pre><code class="html">
+  <section class="hero-sub">
+    <div class="row">
+      <div class="columns">
+        <div class="landing-hero-des">
+          <h1>Header</h1>
+          <p class="lead">Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+        </div>
+        <ul class="nav-sub">
+          <li><a class="is-active" href="#">Active Sub Nav 1</a></li>
+          <li><a href="#">Sub Nav 2</a></li>
+          <li><a href="#">Sub Nav 3</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</code></pre>
+          <section class="hero-sub">
+            <div class="row">
+              <div class="columns">
+                <div class="landing-hero-des">
+                  <h1>Header</h1>
+                  <p class="lead">Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+                </div>
+                <ul class="nav-sub">
+                  <li><a class="is-active" href="#">Active Sub Nav 1</a></li>
+                  <li><a href="#">Sub Nav 2</a></li>
+                  <li><a href="#">Sub Nav 3</a></li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </section>
+      </section>
+    <!-- end landing hero -->
+
+    <!-- navigation -->
+    <section class="content" id="navigation">
+      <h2>Navigation</h2>
+      <p class="lead">These are the key links in a website that help users get to the pages they're looking for.</p>
+      <hr>
+      <section>
+        <h3>Main Nav</h3>
+        <p>This nav covers the main sections of the .com website.</p>
+<pre><code class="html">
+  <ul class="nav-main">
+    <li><a href="products.html">Products</a>
+      <ul>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="what-is-docker.html">What is Docker?</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Customers</a></li>
+    <li><a href="#">Community</a>
+      <ul>
+        <li><a href="#">Meetups</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Forums</a></li>
+        <li><a href="#">Scoop.it</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Partners</a>
+      <ul>
+        <li><a href="#">Partner Programs</a></li>
+      </ul>
+    </li>
+    <li><a href="company.html">Company</a>
+      <ul>
+        <li><a href="#">News &amp; Press</a></li>
+        <li><a href="#">Work at Docker</a></li>
+        <li><a href="#">Management</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </li>
+    <li><a href="#">Open Source</a>
+      <ul>
+        <li><a href="#">Contribute</a></li>
+        <li><a href="#">Governance</a></li>
+      </ul>
+    </li>
+  </ul>
+</code></pre>
+        <ul class="nav-main">
+          <li><a href="products.html">Products</a>
+            <ul>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="what-is-docker.html">What is Docker?</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Customers</a></li>
+          <li><a href="#">Community</a>
+            <ul>
+              <li><a href="#">Meetups</a></li>
+              <li><a href="#">Events</a></li>
+              <li><a href="#">Forums</a></li>
+              <li><a href="#">Scoop.it</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Partners</a>
+            <ul>
+              <li><a href="#">Partner Programs</a></li>
+            </ul>
+          </li>
+          <li><a href="company.html">Company</a>
+            <ul>
+              <li><a href="#">News &amp; Press</a></li>
+              <li><a href="#">Work at Docker</a></li>
+              <li><a href="#">Management</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Open Source</a>
+            <ul>
+              <li><a href="#">Contribute</a></li>
+              <li><a href="#">Governance</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <hr>
+      <section>
+        <h3>Global Nav</h3>
+        <p>This nav works globally for all of Docker websites.</p>
+<pre><code class="html">
+  <ul class="nav-global">
+    <li><a href="#">Support</a></li>
+    <li><a href="#">Training</a></li>
+    <li><a href="#">Docs</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Sign-in</a></li>
+    <li><a class="button" href="#">Get Started</a></li>
+  </ul>
+</code></pre>
+        <ul class="nav-global">
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Training</a></li>
+          <li><a href="#">Docs</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Sign-in</a></li>
+          <li><a class="button" href="#">Get Started</a></li>
+        </ul>
+      </section>
+      <hr>
+      <section>
+        <h3>Sub Nav</h3>
+        <p>This is nav on each landing page.</p>
+<pre><code class="html">
+  <ul class="nav-sub">
+    <li><a class="is-active" href="#">Active Sub Nav 1</a></li>
+    <li><a href="#">Sub Nav 2</a></li>
+    <li><a href="#">Sub Nav 3</a></li>
+  </ul>
+</code></pre>
+        <ul class="nav-sub">
+          <li><a class="is-active" href="#">Active Sub Nav 1</a></li>
+          <li><a href="#">Sub Nav 2</a></li>
+          <li><a href="#">Sub Nav 3</a></li>
+        </ul>
+      </section>
+      <hr>
+      <section>
+        <h3>Side Nav</h3>
+        <p>Side nav is used to navigate for 3rd level pages.</p>
+<pre><code class="html">
+  <ul class="side-nav hide-for-small-only">
+    <li class="heading">Side Nav Title</li>
+    <li class="divider"></li>
+    <li class="active"><a href="#">Active Side Nav 1</a></li>
+    <li><a href="#">Side Nav 2</a></li>
+    <li><a href="#">Side Nav 3</a></li>
+    <li><a href="#">Side Nav 4</a></li>
+    <li><a href="#">Side Nav 5</a></li>
+    <li><a href="#">Side Nav 6</a></li>
+  </ul>
+</code></pre>
+        <ul class="side-nav hide-for-small-only">
+          <li class="heading">Side Nav Title</li>
+          <li class="divider"></li>
+          <li class="active"><a href="#">Active Side Nav 1</a></li>
+          <li><a href="#">Side Nav 2</a></li>
+          <li><a href="#">Side Nav 3</a></li>
+          <li><a href="#">Side Nav 4</a></li>
+          <li><a href="#">Side Nav 5</a></li>
+          <li><a href="#">Side Nav 6</a></li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- end navigation -->
+
+    <!-- news item -->
+    <section class="content" id="news-item">
+      <h2>News Item</h2>
+      <p class="lead">These can be used when Docker wants to feature new things happening in the company. </p>
+      <section>
+<pre><code class="html">
+  <section class="row">
+    <div class="medium-6 columns">
+      <div class="news-item">
+        <p class="news-item-title">Announcing Docker 1.6</p>
+        <p class="news-item-description">Unified release across Docker Engine 1.6, Registry 2.0 and Orchestration Tools accelerate developer experience and enhance sysadmin management.</p>
+        <a href="#">Learn More</a>
+      </div>
+    </div>
+    <div class="medium-6 columns">
+      <div class="news-item divider">
+        <p class="news-item-title">Announcing Docker 1.6</p>
+        <p class="news-item-description">Unified release across Docker Engine 1.6, Registry 2.0 and Orchestration Tools accelerate developer experience and enhance sysadmin management.</p>
+        <a href="#">Learn More</a>
+      </div>
+    </div>
+  </section>
+</code></pre>
+        <section class="row">
+          <div class="medium-6 columns">
+            <div class="news-item">
+              <p class="news-item-title">Announcing Docker 1.6</p>
+              <p class="news-item-description">Unified release across Docker Engine 1.6, Registry 2.0 and Orchestration Tools accelerate developer experience and enhance sysadmin management.</p>
+              <a href="#">Learn More</a>
+            </div>
+          </div>
+          <div class="medium-6 columns">
+            <div class="news-item divider">
+              <p class="news-item-title">Announcing Docker 1.6</p>
+              <p class="news-item-description">Unified release across Docker Engine 1.6, Registry 2.0 and Orchestration Tools accelerate developer experience and enhance sysadmin management.</p>
+              <a href="#">Learn More</a>
+            </div>
+          </div>
+        </section>
+      </section>
+
+    </section>
+    <!-- end news item -->
+
+  </div>
+  
+</div>
+
+</div>

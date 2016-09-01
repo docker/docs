@@ -1,0 +1,9 @@
+.landing-hero{
+  @include grid-row();
+}
+.landing-hero-des{
+  @include grid-column(12);
+}
+.nav-landing {
+  @include inline-list;
+}

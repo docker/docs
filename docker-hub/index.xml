@@ -1,0 +1,1163 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker-hubs on Docker Docs</title>
+    <link>http://localhost/docker-hub/</link>
+    <description>Recent content in Docker-hubs on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/docker-hub/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/concepts/Om/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/concepts/Om/</guid>
+      <description>
+
+&lt;h1 id=&#34;om&#34;&gt;Om&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/omcljs/om&#34;&gt;Om&lt;/a&gt; is a great example of the functional nature of React. Om has
+a focus on immutability and functional programming concepts. It
+achieves better performance than raw react through a focus on
+functional paradigms.&lt;/p&gt;
+
+&lt;h1 id=&#34;quickstart&#34;&gt;Quickstart&lt;/h1&gt;
+
+&lt;p&gt;There is a basic Om &lt;a href=&#34;https://github.com/omcljs/om/wiki/Basic-Tutorial&#34;&gt;tutorial&lt;/a&gt; which will help you get a grasp
+on the differences between React and Om as well as how we might move
+our tooling forward in the future.&lt;/p&gt;
+
+&lt;h1 id=&#34;examples-of-om&#34;&gt;Examples of Om&lt;/h1&gt;
+
+&lt;p&gt;CircleCI&amp;rsquo;s &lt;a href=&#34;https://github.com/circleci/frontend&#34;&gt;Frontend&lt;/a&gt; is open
+source and includes examples such as build log streaming using
+immutable data structures.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/concepts/Flux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/concepts/Flux/</guid>
+      <description>
+
+&lt;h1 id=&#34;flux&#34;&gt;Flux&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=i__969noyAM&#34;&gt;Intro&lt;/a&gt; to Flux&lt;/p&gt;
+
+&lt;h1 id=&#34;fluxible&#34;&gt;Fluxible&lt;/h1&gt;
+
+&lt;p&gt;We use Yahoo&amp;rsquo;s &lt;a href=&#34;https://github.com/yahoo/fluxible&#34;&gt;Fluxible&lt;/a&gt; as our Flux implementation.&lt;/p&gt;
+
+&lt;h1 id=&#34;relay&#34;&gt;Relay&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=9sc8Pyc51uU&#34;&gt;Relay&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/concepts/Immutability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/concepts/Immutability/</guid>
+      <description>
+
+&lt;h1 id=&#34;immutability&#34;&gt;Immutability&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=I7IdS-PbEgI&#34;&gt;Immutability&lt;/a&gt; is a primary way in which we can enhance
+the operational status of React&lt;/p&gt;
+
+&lt;h2 id=&#34;immutable-js-libs&#34;&gt;Immutable JS libs&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/facebook/immutable-js&#34;&gt;ImmutableJS&lt;/a&gt; (Facebook)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/swannodette/mori&#34;&gt;Mori&lt;/a&gt; (Om)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/concepts/React-Native/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/concepts/React-Native/</guid>
+      <description>
+
+&lt;h1 id=&#34;react-native&#34;&gt;React Native&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=7rDsRXj9-cU&#34;&gt;React Native&lt;/a&gt; is&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/concepts/React-Router/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/concepts/React-Router/</guid>
+      <description>
+
+&lt;h1 id=&#34;react-router&#34;&gt;React Router&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=XZfvW1a8Xac&#34;&gt;react-router&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/developing/production--testing-builds/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/developing/production--testing-builds/</guid>
+      <description>
+
+&lt;h1 id=&#34;testing-production-builds&#34;&gt;Testing Production Builds&lt;/h1&gt;
+
+&lt;p&gt;To build the production Image and run a container:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;make base&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make prod&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make copy-prod&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd .tmp &amp;amp;&amp;amp; docker build -t whatever .&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker run -ite ENV=production -e DEBUG=* -p 7001:3000 whatever&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;make-base&#34;&gt;make base&lt;/h3&gt;
+
+&lt;p&gt;installs dependencies, both local (&lt;code&gt;docker-ux&lt;/code&gt; and &lt;code&gt;hub-js-sdk&lt;/code&gt;) and
+remote (&lt;code&gt;package.json&lt;/code&gt;). If you modify anything in either of the local
+projects or the &lt;code&gt;package.json&lt;/code&gt;, you will have to re-run this step.&lt;/p&gt;
+
+&lt;h3 id=&#34;make-prod&#34;&gt;make prod&lt;/h3&gt;
+
+&lt;p&gt;builds the production application into a &lt;code&gt;.tmp&lt;/code&gt; folder inside the
+container. Run this step if you&amp;rsquo;ve edited code in the hub2
+application.&lt;/p&gt;
+
+&lt;h3 id=&#34;make-copy-prod&#34;&gt;make copy-prod&lt;/h3&gt;
+
+&lt;p&gt;copies the resulting folder out of a running container (the running
+container is created from the &lt;code&gt;make prod&lt;/code&gt; image). The folder will be
+placed at &lt;code&gt;hub2demo/.tmp&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;docker-build&#34;&gt;docker build&lt;/h3&gt;
+
+&lt;p&gt;will build the actual production image. This should be very similar to
+&lt;code&gt;bagel/hub-prod&lt;/code&gt;, except you&amp;rsquo;ve built it yourself instead of running
+it through the CI system.&lt;/p&gt;
+
+&lt;h3 id=&#34;docker-run&#34;&gt;docker run&lt;/h3&gt;
+
+&lt;p&gt;creates and runs a new container based on the production image. We use
+environment variables for a few things such as &lt;code&gt;debug&lt;/code&gt; logs.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/concepts/React/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/concepts/React/</guid>
+      <description>
+
+&lt;h1 id=&#34;react&#34;&gt;React&lt;/h1&gt;
+
+&lt;p&gt;React is a library from Facebook that uses an immediate-mode rendering
+pattern much like Doom&amp;rsquo;s. It brings JavaScript in a functional
+programming direction enabling the use of JS functions as the primary
+unit in applications. React also creates a foundation for more
+functional programming concepts such as immutability and purity. These
+&amp;ldquo;optimizations&amp;rdquo; can make rendering faster, debugging easier and enable
+more advanced techniques such as rendering of components through
+&lt;a href=&#34;http://en.wikipedia.org/wiki/QuickCheck&#34;&gt;Quickcheck&lt;/a&gt; semantics.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=nYkdrAPrdcw#t=224&#34;&gt;Rethinking Web App Development at Facebook&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;useful-react-links&#34;&gt;Useful React Links&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://facebook.github.io/react/docs/getting-started.html&#34;&gt;Getting Started&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://react-components.com/&#34;&gt;react-components search&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://facebook.github.io/react/docs/videos.html&#34;&gt;Videos and Talks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/lantiga/react.hiccup&#34;&gt;hiccup&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;key-concepts&#34;&gt;Key Concepts&lt;/h2&gt;
+
+&lt;h3 id=&#34;virtual-dom&#34;&gt;Virtual Dom&lt;/h3&gt;
+
+&lt;p&gt;React Components render to an intermediate DOM representation which
+then diffs against previous iterations and inserts minimal changes
+into the actual DOM.  (This is a loose description of what actually
+happens). Virtual DOM is not exclusive to React and has other
+implementations such as &lt;a href=&#34;https://github.com/Matt-Esch/virtual-dom&#34;&gt;virtual-dom&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;diffing&#34;&gt;Diffing&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://calendar.perfplanet.com/2013/diff/&#34;&gt;React&amp;rsquo;s Diffing Algorithm&lt;/a&gt;
+applies heuristics to tell when to re-render components. These
+heuristics bring complexity down from &lt;code&gt;O(n^3)&lt;/code&gt; to &lt;code&gt;O(n)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In addition we have lifecycle events such as &lt;code&gt;shouldComponentUpdate&lt;/code&gt;
+to manually declare how far down the tree we should go to render new
+data. This is especially useful for integration with existing
+infrastructure such as D3.js where we don&amp;rsquo;t actually want React to
+manage the DOM for us.&lt;/p&gt;
+
+&lt;h3 id=&#34;props-vs-state&#34;&gt;Props vs State&lt;/h3&gt;
+
+&lt;p&gt;React has &lt;code&gt;&amp;quot;two&amp;quot;&lt;/code&gt; locations for data in a component. &lt;code&gt;this.props&lt;/code&gt; and
+&lt;code&gt;this.state&lt;/code&gt;. Props are immutable and should contain only &amp;ldquo;raw&amp;rdquo;
+data. Any computed properties should be computed in the &lt;code&gt;render()&lt;/code&gt;
+function. &lt;code&gt;this.state&lt;/code&gt; is where we would store localized state. As
+much as possible we should move away from &lt;code&gt;this.state&lt;/code&gt; and use
+&lt;code&gt;this.props&lt;/code&gt; as much as possible. Extending React&amp;rsquo;s immutable behavior
+up into our data in this way allows us to write more pure functions
+and take after the excellent &lt;a href=&#34;../docker-hub/concepts/Om/&#34;&gt;Om&lt;/a&gt; library to achieve better
+performance.&lt;/p&gt;
+
+&lt;p&gt;Stores are now the primary holders of State in our applications.&lt;/p&gt;
+
+&lt;h4 id=&#34;prop-validation&#34;&gt;Prop Validation&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://facebook.github.io/react/docs/reusable-components.html&#34;&gt;Types&lt;/a&gt;
+should be declared for React Component props. This eases the load on
+new people coming into the codebase and also eases debugging load
+(Passing in invalid props in development will log informative errors).&lt;/p&gt;
+
+&lt;h3 id=&#34;react-components&#34;&gt;React Components&lt;/h3&gt;
+
+&lt;p&gt;React components are the modular unit of reusability in React
+apps. Since React Components are just functions, this means that
+functions are now the modular units in our applications.&lt;/p&gt;
+
+&lt;h4 id=&#34;component-lifecycle&#34;&gt;Component Lifecycle&lt;/h4&gt;
+
+&lt;p&gt;React Components have lifecycle events depicted here:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-hub/concepts/imgs/react-component-lifecycle.jpg&#34; alt=&#34;img&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;usage&#34;&gt;Usage&lt;/h1&gt;
+
+&lt;h2 id=&#34;dev-niceties&#34;&gt;Dev Niceties&lt;/h2&gt;
+
+&lt;p&gt;When creating a new &lt;code&gt;React&lt;/code&gt; component, it is important to set the
+&lt;code&gt;displayName&lt;/code&gt; so that the React Tools console (in Chrome, etc) can
+tell which componenet is rendering. If this is not set, the component
+will render as &lt;code&gt;&amp;lt;Unknown model=&amp;quot;..&amp;quot;&amp;gt;&lt;/code&gt; in the developer tools.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-JavaScript&#34;&gt;var Layout = React.createClass({
+
+    displayName : &#39;MyLayout&#39;,
+    render      : (...)
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;rendering&#34;&gt;Rendering&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;render()&lt;/code&gt; is for displaying data &lt;em&gt;only&lt;/em&gt;. Do not store or edit &lt;code&gt;this.state&lt;/code&gt;.
+&lt;code&gt;render()&lt;/code&gt; should return the same thing every time given the same input.&lt;/p&gt;
+
+&lt;h2 id=&#34;jsx&#34;&gt;JSX&lt;/h2&gt;
+
+&lt;p&gt;JSX is a &lt;a href=&#34;http://facebook.github.io/jsx/&#34;&gt;draft spec&lt;/a&gt; extension to
+ECMAScript and one option for specifying DOM and Components. &lt;code&gt;babel&lt;/code&gt;
+handles transpiling jsx to js for us.&lt;/p&gt;
+
+&lt;h1 id=&#34;other-concepts&#34;&gt;Other Concepts&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-hub/concepts/Flux/&#34;&gt;Flux&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-hub/concepts/React-Native/&#34;&gt;React Native&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-hub/concepts/React-Router/&#34;&gt;React Router&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-hub/concepts/Immutability/&#34;&gt;Immutability&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/developing/gettingstarted--long-start/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/developing/gettingstarted--long-start/</guid>
+      <description>
+
+&lt;h1 id=&#34;longstart&#34;&gt;Longstart&lt;/h1&gt;
+
+&lt;h2 id=&#34;set-up-dns&#34;&gt;Set up DNS&lt;/h2&gt;
+
+&lt;p&gt;This command is &lt;code&gt;dns&lt;/code&gt; in &lt;code&gt;Makefile&lt;/code&gt;. It sets up
+&lt;code&gt;/etc/resolver/bagels.docker.com&lt;/code&gt; so we can hit
+&lt;code&gt;https://bagels.docker.com&lt;/code&gt; in a browser. This is necessary to comply
+with the CORS restrictions on the APIs.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd $PROJECT_ROOT
+make dns
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;clone-dependency-projects&#34;&gt;Clone dependency projects&lt;/h2&gt;
+
+&lt;p&gt;This will clone &lt;code&gt;docker-ux&lt;/code&gt; and &lt;code&gt;hub-js-sdk&lt;/code&gt; into &lt;code&gt;./private-deps&lt;/code&gt;. We
+deploy the master branch of each, so it&amp;rsquo;s good to check to make sure
+these are up to date occasionally.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;make hub-deps
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;run-all-of-the-containers-in-the-background&#34;&gt;Run all of the containers in the background&lt;/h2&gt;
+
+&lt;p&gt;This includes&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;dnsmasq
+
+&lt;ul&gt;
+&lt;li&gt;local dns resolution for bagels.docker.com&lt;/li&gt;
+&lt;li&gt;To comply with API CORS Origin header&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;haproxy
+
+&lt;ul&gt;
+&lt;li&gt;SSL Offloading&lt;/li&gt;
+&lt;li&gt;To handle routing domains to containers from dnsmasq&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;hub
+
+&lt;ul&gt;
+&lt;li&gt;Hub Frontend (development container)&lt;/li&gt;
+&lt;li&gt;Includes the environment to serve image assets, etc.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker-compose up -d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;run-the-developer-tools&#34;&gt;Run the Developer Tools&lt;/h1&gt;
+
+&lt;p&gt;You will need the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;tmux&lt;/li&gt;
+&lt;li&gt;node (v0.10.x)&lt;/li&gt;
+&lt;li&gt;npm (&amp;gt; v2)&lt;/li&gt;
+&lt;li&gt;flow (v0.8.0 or latest)&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;./startup-scripts/boot-dev-tmux.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;commands&#34;&gt;Commands&lt;/h2&gt;
+
+&lt;h3 id=&#34;flow-start&#34;&gt;&lt;code&gt;flow start&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;This is run by default by &lt;code&gt;./startup-scripts/boot-dev.sh&lt;/code&gt;. This runs
+the flow server in the background. To see the errors flow detects, you
+must be inside the &lt;code&gt;hub&lt;/code&gt; container and run &lt;code&gt;flow&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;gulp-nodemon-dev&#34;&gt;&lt;code&gt;gulp nodemon::dev&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;This is run by default, it handles reloading/transpiling es6 and jsx
+content on file changes.&lt;/p&gt;
+
+&lt;h3 id=&#34;gulp-webpack&#34;&gt;&lt;code&gt;gulp webpack&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;This is a watch task that handles the client js. If you are
+making changes, you will want to run this (probably via &lt;code&gt;gulp watch&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&#34;gulp-styles-dev&#34;&gt;&lt;code&gt;gulp styles::dev&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Compiles sass to css. Is included in &lt;code&gt;gulp watch&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;gulp-jscs&#34;&gt;&lt;code&gt;gulp jscs&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Lints all of the code, skipping jsx sections while
+including flow types and es6 syntax.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/developing/react--components/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/developing/react--components/</guid>
+      <description>
+
+&lt;h1 id=&#34;creating-components&#34;&gt;Creating Components&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// use strict by default
+&#39;use strict&#39;;
+
+/**
+ * ES6 import syntax.
+ */
+import React = from &#39;react&#39;;
+import Router, { Link, RouteHandler } = from &#39;react-router&#39;;
+import JWTStore from &#39;../stores/JWTStore&#39;;
+
+var UserPage = React.createClass({
+
+  /**
+   * displayName is used mostly in error messages, but also
+   * in the React chrome extension. Always include a 
+   * displayName.
+   */
+  displayName: &#39;UserPage&#39;,
+
+  /**
+   * The render function is required. It must return a valid
+   * React Element. We are using ES6 syntax to declare the
+   * function.
+   */
+  render() {
+    return (
+      /**
+       * jsx is compiled to function calls. Due to this, there
+       * must always be a *single* Element returned in the 
+       * render() call
+       */
+      &amp;lt;div&amp;gt;
+          This will be the base wrapper of the &#39;Users&#39; page where either your or another users profile will appear &amp;lt;br/&amp;gt;
+          This will let you see your public facing page at /u/username/ too &amp;lt;br/&amp;gt;
+          &#39;Your&#39; homepage/dashboard will live at /home/&amp;lt;br/&amp;gt;
+          /**
+           * RouteHandler comes from React-Router and displays
+           * the sub-route&#39;s content (more on this in Routing)
+           */
+          &amp;lt;RouteHandler /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+});
+
+var RootUser = React.createClass({
+  displayName: &#39;RootUser&#39;,
+  render() {
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;p/&amp;gt;
+        This is root user page.&amp;lt;br/&amp;gt;
+        When not looking at a specific user or an owned image&amp;lt;br/&amp;gt;
+        This will show a list of repos/images owned by the root user &amp;lt;br/&amp;gt;
+        /**
+         * Link is from React-Router and requires the params
+         * to be set as an object. The `repo` route is 
+         * designated in Routes.jsx
+         */
+        &amp;lt;Link to=&#39;repo&#39; params={{user:&#39;testing&#39;, splat:&#39;1234&#39;}}&amp;gt;This could be a image box of some sort&amp;lt;/Link&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+});
+
+var User = React.createClass({
+  displayName: &#39;User&#39;,
+  /**
+   * contextTypes are required to access Fluxible or React-Router
+   * functions. In this case, we specify that React-Router is 
+   * required for this Element.
+   */
+  contextTypes: {
+    router: React.PropTypes.func.isRequired
+  },
+  render() {
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;p/&amp;gt;
+        /**
+         * Using the router from contextTypes:
+         */
+        This is the UID: {this.context.router.getCurrentParams().uid}&amp;lt;br/&amp;gt;
+        This is main user page.&amp;lt;br/&amp;gt;
+        This will show a list of repos/images owned by the user &amp;lt;br/&amp;gt;
+        &amp;lt;RouteHandler /&amp;gt;
+      &amp;lt;/div&amp;gt;
+      );
+  }
+});
+
+/**
+ * Only export one Element per file.
+ */
+module.exports = {
+  userpage: UserPage,
+  rootuser: RootUser,
+  user: User
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/developing/react-router--adding-routes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/developing/react-router--adding-routes/</guid>
+      <description>
+
+&lt;h1 id=&#34;adding-routes&#34;&gt;Adding Routes&lt;/h1&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/developing/saas-config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/developing/saas-config/</guid>
+      <description>
+
+&lt;h1 id=&#34;saas-config&#34;&gt;saas-config&lt;/h1&gt;
+
+&lt;p&gt;You can swap environments by doing two things:&lt;/p&gt;
+
+&lt;p&gt;In tmux:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ENV=local gulp webpack
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In &lt;code&gt;docker-compose.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hub:
+  ...
+  environment:
+    ENV: local
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automated Builds from GitHub</title>
+      <link>http://localhost/docker-hub/github/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/github/</guid>
+      <description>
+
+&lt;h1 id=&#34;automated-builds-from-github&#34;&gt;Automated Builds from GitHub&lt;/h1&gt;
+
+&lt;p&gt;If you&amp;rsquo;ve previously linked your Docker Hub account to your GitHub account,
+you&amp;rsquo;ll be able to skip to &lt;a href=&#34;#creating-an-automated-build&#34;&gt;Creating an Automated Build&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;linking-your-docker-hub-account-to-a-github-account&#34;&gt;Linking your Docker Hub account to a GitHub account&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt;
+Automated Builds currently require &lt;em&gt;read&lt;/em&gt; and &lt;em&gt;write&lt;/em&gt; access since
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; needs to set up a GitHub service
+hook. We have no choice here, this is how GitHub manages permissions.
+We do guarantee nothing else will be touched in your account.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In order to set up an Automated Build of a repository on GitHub, you need to
+link your &lt;a href=&#34;https://hub.docker.com/account/authorized-services/&#34;&gt;Docker Hub&lt;/a&gt;
+account to a GitHub account. This will allow the registry to see your GitHub
+repositories.&lt;/p&gt;
+
+&lt;p&gt;To add, remove or view your linked account, go to the &amp;ldquo;Linked Accounts &amp;amp; Services&amp;rdquo;
+section of your Hub profile &amp;ldquo;Settings&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-hub/hub-images/authorized-services.png&#34; alt=&#34;authorized-services&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When linking to GitHub, you&amp;rsquo;ll need to select either &amp;ldquo;Public and Private&amp;rdquo;,
+or &amp;ldquo;Limited Access&amp;rdquo; linking.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-hub/hub-images/add-authorized-github-service.png&#34; alt=&#34;add-authorized-github-service.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &amp;ldquo;Public and Private&amp;rdquo; option is the easiest to use,
+as it grants the Docker Hub full access to all of your repositories. GitHub
+also allows you to grant access to repositories belonging to your GitHub
+organizations.&lt;/p&gt;
+
+&lt;p&gt;By choosing the &amp;ldquo;Limited Access&amp;rdquo; linking, your Docker Hub account only gets permission
+to access your public data and public repositories.&lt;/p&gt;
+
+&lt;p&gt;Follow the onscreen instructions to authorize and link your
+GitHub account to Docker Hub. Once it is linked, you&amp;rsquo;ll be able to
+choose a source repository from which to create the Automatic Build.&lt;/p&gt;
+
+&lt;p&gt;You will be able to review and revoke Docker Hub&amp;rsquo;s access by visiting the
+&lt;a href=&#34;https://github.com/settings/applications&#34;&gt;GitHub User&amp;rsquo;s Applications settings&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you delete the GitHub account linkage that is used for one of your
+automated build repositories, the previously built images will still be available.
+If you re-link to that GitHub account later, the automated build can be started
+using the &amp;ldquo;Start Build&amp;rdquo; button on the Hub, or if the webhook on the GitHub repository
+still exists, it will be triggered by any subsequent commits.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;auto-builds-and-limited-linked-github-accounts&#34;&gt;Auto builds and limited linked GitHub accounts.&lt;/h2&gt;
+
+&lt;p&gt;If you selected to link your GitHub account with only a &amp;ldquo;Limited Access&amp;rdquo; link, then
+after creating your automated build, you will need to either manually trigger a
+Docker Hub build using the &amp;ldquo;Start a Build&amp;rdquo; button, or add the GitHub webhook
+manually, as described in &lt;a href=&#34;#github-service-hooks&#34;&gt;GitHub Service Hooks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;changing-the-github-user-link&#34;&gt;Changing the GitHub user link&lt;/h2&gt;
+
+&lt;p&gt;If you want to remove, or change the level of linking between your GitHub account
+and the Docker Hub, you need to do this in two places.&lt;/p&gt;
+
+&lt;p&gt;First, remove the &amp;ldquo;Linked Account&amp;rdquo; from your Docker Hub &amp;ldquo;Settings&amp;rdquo;.
+Then go to your GitHub account&amp;rsquo;s Personal settings, and in the &amp;ldquo;Applications&amp;rdquo;
+section, &amp;ldquo;Revoke access&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;You can now re-link your account at any time.&lt;/p&gt;
+
+&lt;h2 id=&#34;github-organizations&#34;&gt;GitHub organizations&lt;/h2&gt;
+
+&lt;p&gt;GitHub organizations and private repositories forked from organizations will be
+made available to auto build using the &amp;ldquo;Docker Hub Registry&amp;rdquo; application, which
+needs to be added to the organization - and then will apply to all users.&lt;/p&gt;
+
+&lt;p&gt;To check, or request access, go to your GitHub user&amp;rsquo;s &amp;ldquo;Setting&amp;rdquo; page, select the
+&amp;ldquo;Applications&amp;rdquo; section from the left side bar, then click the &amp;ldquo;View&amp;rdquo; button for
+&amp;ldquo;Docker Hub Registry&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-hub/hub-images/gh-check-user-org-dh-app-access.png&#34; alt=&#34;Check User access to GitHub&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The organization&amp;rsquo;s administrators may need to go to the Organization&amp;rsquo;s &amp;ldquo;Third
+party access&amp;rdquo; screen in &amp;ldquo;Settings&amp;rdquo; to grant or deny access to the Docker Hub
+Registry application. This change will apply to all organization members.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-hub/hub-images/gh-check-admin-org-dh-app-access.png&#34; alt=&#34;Check Docker Hub application access to Organization&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;More detailed access controls to specific users and GitHub repositories can be
+managed using the GitHub &amp;ldquo;People and Teams&amp;rdquo; interfaces.&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-an-automated-build&#34;&gt;Creating an Automated Build&lt;/h2&gt;
+
+&lt;p&gt;You can &lt;a href=&#34;https://hub.docker.com/add/automated-build/github/orgs/&#34;&gt;create an Automated Build&lt;/a&gt; from any of your
+public or private GitHub repositories that have a &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Once you&amp;rsquo;ve selected the source repository, you can then configure:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The Hub user/org namespace the repository is built to - either your Hub account name,
+or the name of any Hub organizations your account is in&lt;/li&gt;
+&lt;li&gt;The Docker repository name the image is built to&lt;/li&gt;
+&lt;li&gt;The description of the repository&lt;/li&gt;
+&lt;li&gt;If the visibility of the Docker repository: &amp;ldquo;Public&amp;rdquo; or &amp;ldquo;Private&amp;rdquo;
+You can change the accessibility options after the repository has been created.
+If you add a Private repository to a Hub user namespace, then you can only add other users
+as collaborators, and those users will be able to view and pull all images in that
+repository. To configure more granular access permissions, such as using teams of
+users or allow different users access to different image tags, then you need
+to add the Private repository to a Hub organization for which your user has Administrator
+privileges.&lt;/li&gt;
+&lt;li&gt;Enable or disable rebuilding the Docker image when a commit is pushed to the
+GitHub repository.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can also select one or more:
+- The git branch/tag,
+- A repository sub-directory to use as the context,
+- The Docker image tag name&lt;/p&gt;
+
+&lt;p&gt;You can modify the description for the repository by clicking the &amp;ldquo;Description&amp;rdquo; section
+of the repository view.
+Note that the &amp;ldquo;Full Description&amp;rdquo; will be over-written by the README.md file when the
+next build is triggered.&lt;/p&gt;
+
+&lt;h2 id=&#34;github-private-submodules&#34;&gt;GitHub private submodules&lt;/h2&gt;
+
+&lt;p&gt;If your GitHub repository contains links to private submodules, you&amp;rsquo;ll get an
+error message in your build.&lt;/p&gt;
+
+&lt;p&gt;Normally, the Docker Hub sets up a deploy key in your GitHub repository.
+Unfortunately, GitHub only allows a repository deploy key to access a single repository.&lt;/p&gt;
+
+&lt;p&gt;To work around this, you can create a dedicated user account in GitHub and attach
+the automated build&amp;rsquo;s deploy key that account. This dedicated build account
+can be limited to read-only access to just the repositories required to build.&lt;/p&gt;
+
+&lt;table class=&#34;table table-bordered&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Step&lt;/th&gt;
+      &lt;th&gt;Screenshot&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;../docker-hub/hub-images/gh_org_members.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;First, create the new account in GitHub. It should be given read-only
+      access to the main repository and all submodules that are needed.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;../docker-hub/hub-images/gh_team_members.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;This can be accomplished by adding the account to a read-only team in
+      the organization(s) where the main GitHub repository and all submodule
+      repositories are kept.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;../docker-hub/hub-images/gh_repo_deploy_key.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Next, remove the deploy key from the main GitHub repository. This can be done in the GitHub repository&#39;s &#34;Deploy keys&#34; Settings section.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;../docker-hub/hub-images/deploy_key.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;Your automated build&#39;s deploy key is in the &#34;Build Details&#34; menu
+      under &#34;Deploy keys&#34;.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5.&lt;/td&gt;
+      &lt;td&gt;&lt;img src=&#34;../docker-hub/hub-images/gh_add_ssh_user_key.png&#34;&gt;&lt;/td&gt;
+      &lt;td&gt;In your dedicated GitHub User account, add the deploy key from your
+      Docker Hub Automated Build.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&#34;github-service-hooks&#34;&gt;GitHub service hooks&lt;/h2&gt;
+
+&lt;p&gt;A GitHub Service hook allows GitHub to notify the Docker Hub when something has
+been committed to a given git repository.&lt;/p&gt;
+
+&lt;p&gt;When you create an Automated Build from a GitHub user that has full &amp;ldquo;Public and
+Private&amp;rdquo; linking, a Service Hook should get automatically added to your GitHub
+repository.&lt;/p&gt;
+
+&lt;p&gt;If your GitHub account link to the Docker Hub is &amp;ldquo;Limited Access&amp;rdquo;, then you will
+need to add the Service Hook manually.&lt;/p&gt;
+
+&lt;p&gt;To add, confirm, or modify the service hook, log in to GitHub, then navigate to
+the repository, click &amp;ldquo;Settings&amp;rdquo; (the gear), then select &amp;ldquo;Webhooks &amp;amp; Services&amp;rdquo;.
+You must have Administrator privilegdes on the repository to view or modfy
+this setting.&lt;/p&gt;
+
+&lt;p&gt;The image below shows the &amp;ldquo;Docker&amp;rdquo; Service Hook.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-hub/hub-images/github-side-hook.png&#34; alt=&#34;bitbucket-hooks&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you add the &amp;ldquo;Docker&amp;rdquo; service manually, make sure the &amp;ldquo;Active&amp;rdquo; checkbox is
+selected and click the &amp;ldquo;Update service&amp;rdquo; button to save your changes.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automated Builds on Docker Hub</title>
+      <link>http://localhost/docker-hub/builds/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/builds/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-hub-automated-builds-and-webhooks&#34;&gt;Docker Hub: Automated Builds and Webhooks&lt;/h1&gt;
+
+&lt;h2 id=&#34;about-automated-builds&#34;&gt;About Automated Builds&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Automated Builds&lt;/em&gt; allow you to
+use &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&amp;rsquo;s&lt;/a&gt; build clusters to automatically
+create images from a GitHub or Bitbucket repository containing a &lt;code&gt;Dockerfile&lt;/code&gt;. Automated Builds work by adding a commit hook to your selected GitHub or BitBucket repository,
+triggering a build and update whenever you push a commit.
+The system will clone your repository and build the image described by the
+&lt;code&gt;Dockerfile&lt;/code&gt; using the directory containing the &lt;code&gt;Dockerfile&lt;/code&gt; (including any subdirectories)
+as the build context. The resulting automated image will then be uploaded
+to the Docker Hub registry and marked as an &lt;em&gt;Automated Build&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Automated Builds have several advantages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Users of &lt;em&gt;your&lt;/em&gt; Automated Build can trust that the resulting
+image was built exactly as specified.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;Dockerfile&lt;/code&gt; will be available to anyone with access to
+your repository on the Docker Hub registry.&lt;/li&gt;
+&lt;li&gt;Because the process is automated, Automated Builds help you
+keep your repository up to date.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Automated Builds are supported for both public and private repositories
+on both &lt;a href=&#34;http://github.com&#34;&gt;GitHub&lt;/a&gt; and &lt;a href=&#34;https://bitbucket.org/&#34;&gt;Bitbucket&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To use Automated Builds, you must have&lt;br /&gt;
+&lt;a href=&#34;../docker-hub/github/&#34;&gt;accounts on Docker Hub&lt;/a&gt;
+and on GitHub and/or Bitbucket. In any case, the accounts need
+to be properly validated and activated before you can use Automated Builds.&lt;/p&gt;
+
+&lt;p&gt;The first time you set up an Automated Build, you will need to link your
+&lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; account to your GitHub or Bitbucket account. This will allow the Docker Hub to access your Git repositories.&lt;/p&gt;
+
+&lt;p&gt;If you have previously linked your Github or Bitbucket account, and you want to view or modify that link, log into the Docker Hub and click &amp;ldquo;Settings&amp;rdquo; in the account&amp;rsquo;s user menu at the top right. Then click &amp;ldquo;Linked Accounts &amp;amp; Services&amp;rdquo; from the menu bar.&lt;/p&gt;
+
+&lt;h3 id=&#34;to-set-up-an-automated-build&#34;&gt;To set up an Automated Build&lt;/h3&gt;
+
+&lt;p&gt;Generically, setting up an Automated Build involves the following steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Create a &lt;a href=&#34;https://hub.docker.com/&#34;&gt;Docker Hub account&lt;/a&gt; and log in.&lt;/li&gt;
+&lt;li&gt;If this is a new account, or your first Automated Build from that provider,
+link your Hub account by referring to the &lt;a href=&#34;../docker-hub/github/&#34;&gt;GitHub&lt;/a&gt;
+or &lt;a href=&#34;../docker-hub/bitbucket/&#34;&gt;Bitbucket&lt;/a&gt; documentation.&lt;/li&gt;
+&lt;li&gt;Select &amp;ldquo;Create Automated Build&amp;rdquo; from the top right &amp;ldquo;Create &amp;#x25BC;&amp;rdquo; menu item.&lt;/li&gt;
+&lt;li&gt;Pick a GitHub or BitBucket project that has a &lt;code&gt;Dockerfile&lt;/code&gt; you want to build.&lt;/li&gt;
+&lt;li&gt;Pick the branch you want to build (the default is the &lt;code&gt;master&lt;/code&gt; branch).&lt;/li&gt;
+&lt;li&gt;Give the Automated Build a name.&lt;/li&gt;
+&lt;li&gt;Assign an optional Docker tag to the Build.&lt;/li&gt;
+&lt;li&gt;Specify where the &lt;code&gt;Dockerfile&lt;/code&gt; is located. The default is &lt;code&gt;/&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Click &amp;ldquo;Create&amp;rdquo;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Once the Automated Build is configured, it will automatically trigger a
+build whenever you push to the linked Github or Bitbucket repo. In a few minutes, you should see your new Automated Build on the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;
+dashboard. It will stay in sync with your GitHub and BitBucket repository until you
+deactivate or delete it.&lt;/p&gt;
+
+&lt;p&gt;To see the status or build history of your Automated Build, go to the
+repository&amp;rsquo;s information page, and then select the &amp;ldquo;Build Details&amp;rdquo; section.&lt;/p&gt;
+
+&lt;p&gt;You cannot push to an Automated Build with the &lt;code&gt;docker push&lt;/code&gt; command.
+You can only change the image by committing code to your GitHub or BitBucket
+repository.&lt;/p&gt;
+
+&lt;p&gt;You can create multiple Automated Builds per repository and configure them
+to point to specific &lt;code&gt;Dockerfile&lt;/code&gt;&amp;rsquo;s or Git branches.&lt;/p&gt;
+
+&lt;p&gt;For more detailed instructions, see &lt;a href=&#34;../docker-hub/bitbucket/&#34;&gt;Bitbucket&lt;/a&gt;
+and &lt;a href=&#34;../docker-hub/github/&#34;&gt;GitHub&lt;/a&gt; pages.&lt;/p&gt;
+
+&lt;h2 id=&#34;webhooks&#34;&gt;Webhooks&lt;/h2&gt;
+
+&lt;p&gt;Automated Builds also include a webhooks feature. Webhooks are attached to your repositories and allow you to trigger an
+event when an image or updated image is pushed to the repository. With
+a webhook, you can specify a target URL and a JSON payload that will be
+delivered when the image is pushed. Webhooks can be called
+whenever a successful repository push is made. This includes when a new tag is added
+to an existing image.&lt;/p&gt;
+
+&lt;p&gt;The webhook call will generate an HTTP POST with the following JSON
+payload:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;callback_url&amp;quot;: &amp;quot;https://registry.hub.docker.com/u/svendowideit/testhook/hook/2141b5bi5i5b02bec211i4eeih0242eg11000a/&amp;quot;,
+  &amp;quot;push_data&amp;quot;: {
+    &amp;quot;images&amp;quot;: [
+        &amp;quot;27d47432a69bca5f2700e4dff7de0388ed65f9d3fb1ec645e2bc24c223dc1cc3&amp;quot;,
+        &amp;quot;51a9c7c1f8bb2fa19bcd09789a34e63f35abb80044bc10196e304f6634cc582c&amp;quot;,
+        ...
+    ],
+    &amp;quot;pushed_at&amp;quot;: 1.417566161e+09,
+    &amp;quot;pusher&amp;quot;: &amp;quot;trustedbuilder&amp;quot;
+  },
+  &amp;quot;repository&amp;quot;: {
+    &amp;quot;comment_count&amp;quot;: 0,
+    &amp;quot;date_created&amp;quot;: 1.417494799e+09,
+    &amp;quot;description&amp;quot;: &amp;quot;&amp;quot;,
+    &amp;quot;dockerfile&amp;quot;: &amp;quot;#\n# BUILD\u0009\u0009docker build -t svendowideit/apt-cacher .\n# RUN\u0009\u0009docker run -d -p 3142:3142 -name apt-cacher-run apt-cacher\n#\n# and then you can run containers with:\n# \u0009\u0009docker run -t -i -rm -e http_proxy http://192.168.1.2:3142/ debian bash\n#\nFROM\u0009\u0009ubuntu\nMAINTAINER\u0009SvenDowideit@home.org.au\n\n\nVOLUME\u0009\u0009[\&amp;quot;/var/cache/apt-cacher-ng\&amp;quot;]\nRUN\u0009\u0009apt-get update ; apt-get install -yq apt-cacher-ng\n\nEXPOSE \u0009\u00093142\nCMD\u0009\u0009chmod 777 /var/cache/apt-cacher-ng ; /etc/init.d/apt-cacher-ng start ; tail -f /var/log/apt-cacher-ng/*\n&amp;quot;,
+    &amp;quot;full_description&amp;quot;: &amp;quot;Docker Hub based automated build from a GitHub repo&amp;quot;,
+    &amp;quot;is_official&amp;quot;: false,
+    &amp;quot;is_private&amp;quot;: true,
+    &amp;quot;is_trusted&amp;quot;: true,
+    &amp;quot;name&amp;quot;: &amp;quot;testhook&amp;quot;,
+    &amp;quot;namespace&amp;quot;: &amp;quot;svendowideit&amp;quot;,
+    &amp;quot;owner&amp;quot;: &amp;quot;svendowideit&amp;quot;,
+    &amp;quot;repo_name&amp;quot;: &amp;quot;svendowideit/testhook&amp;quot;,
+    &amp;quot;repo_url&amp;quot;: &amp;quot;https://registry.hub.docker.com/u/svendowideit/testhook/&amp;quot;,
+    &amp;quot;star_count&amp;quot;: 0,
+    &amp;quot;status&amp;quot;: &amp;quot;Active&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Webhooks are available under the &amp;ldquo;Settings&amp;rdquo; menu of each Repository.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you want to test your webhook, we recommend using a tool like
+&lt;a href=&#34;http://requestb.in/&#34;&gt;requestb.in&lt;/a&gt;. Also note, the Docker Hub server can&amp;rsquo;t be
+filtered by IP address.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;webhook-chains&#34;&gt;Webhook chains&lt;/h3&gt;
+
+&lt;p&gt;Webhook chains allow you to chain calls to multiple services. For example,
+you can use a webhook chain to trigger a deployment of your container only after
+it has been successfully tested, then update a separate Changelog once the
+deployment is complete.
+After clicking the &amp;ldquo;Add webhook&amp;rdquo; button, simply add as many URLs as necessary
+in your chain.&lt;/p&gt;
+
+&lt;p&gt;The first webhook in a chain will be called after a successful push. Subsequent
+URLs will be contacted after the callback has been validated.&lt;/p&gt;
+
+&lt;h3 id=&#34;validating-a-callback&#34;&gt;Validating a callback&lt;/h3&gt;
+
+&lt;p&gt;In order to validate a callback in a webhook chain, you need to&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Retrieve the &lt;code&gt;callback_url&lt;/code&gt; value in the request&amp;rsquo;s JSON payload.&lt;/li&gt;
+&lt;li&gt;Send a POST request to this URL containing a valid JSON body.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: A chain request will only be considered complete once the last
+callback has been validated.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To help you debug or simply view the results of your webhook(s),
+view the &amp;ldquo;History&amp;rdquo; of the webhook available on its settings page.&lt;/p&gt;
+
+&lt;h3 id=&#34;callback-json-data&#34;&gt;Callback JSON data&lt;/h3&gt;
+
+&lt;p&gt;The following parameters are recognized in callback data:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;state&lt;/code&gt; (required): Accepted values are &lt;code&gt;success&lt;/code&gt;, &lt;code&gt;failure&lt;/code&gt; and &lt;code&gt;error&lt;/code&gt;.
+If the state isn&amp;rsquo;t &lt;code&gt;success&lt;/code&gt;, the webhook chain will be interrupted.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;description&lt;/code&gt;: A string containing miscellaneous information that will be
+available on the Docker Hub. Maximum 255 characters.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;context&lt;/code&gt;: A string containing the context of the operation. Can be retrieved
+from the Docker Hub. Maximum 100 characters.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;target_url&lt;/code&gt;: The URL where the results of the operation can be found. Can be
+retrieved on the Docker Hub.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Example callback payload:&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;state&amp;quot;: &amp;quot;success&amp;quot;,
+  &amp;quot;description&amp;quot;: &amp;quot;387 tests PASSED&amp;quot;,
+  &amp;quot;context&amp;quot;: &amp;quot;Continuous integration by Acme CI&amp;quot;,
+  &amp;quot;target_url&amp;quot;: &amp;quot;http://ci.acme.com/results/afd339c1c3d27&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can find specific details on how to set up webhooks in the &lt;a href=&#34;../docker-hub/github/&#34;&gt;GitHub&lt;/a&gt;
+and &lt;a href=&#34;../docker-hub/github/&#34;&gt;Bitbucket&lt;/a&gt; documentation.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-dockerfile-and-automated-builds&#34;&gt;The Dockerfile and Automated Builds&lt;/h2&gt;
+
+&lt;p&gt;During the build process, Docker will copy the contents of your &lt;code&gt;Dockerfile&lt;/code&gt;.
+It will also add it to the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; for the Docker
+community (for public repositories) or approved team members/orgs (for private
+repositories) to see on the repository page.&lt;/p&gt;
+
+&lt;h3 id=&#34;readme-md&#34;&gt;README.md&lt;/h3&gt;
+
+&lt;p&gt;If you have a &lt;code&gt;README.md&lt;/code&gt; file in your repository, it will be used in the
+repository as the full description. The build process will look for a
+&lt;code&gt;README.md&lt;/code&gt; in the same directory as your &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt;
+If you change the full description after a build, it will be
+overwritten the next time the Automated Build has been built. To make changes,
+modify the &lt;code&gt;README.md&lt;/code&gt; from the Git repository.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;repository-links&#34;&gt;Repository links&lt;/h2&gt;
+
+&lt;p&gt;Repository links let you associate one Automated Build with
+another. If one Automated Build gets updated, the linking system triggers a rebuild
+for the other. This makes it easy to keep all your Automated Builds up to date.&lt;/p&gt;
+
+&lt;p&gt;To add a link, go to the &amp;ldquo;Build Settings&amp;rdquo; for the Automated Build you want to
+trigger. In the &amp;ldquo;Repository Links&amp;rdquo; section, enter the name of the Automated
+Builds that should trigger a rebuild of this one when they&amp;rsquo;re updated.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt;
+You can add more than one repository link, however, you should do so very
+carefully. Creating a two way relationship between Automated Builds will
+cause an endless build loop.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;remote-build-triggers&#34;&gt;Remote Build triggers&lt;/h2&gt;
+
+&lt;p&gt;To trigger Automated Builds programatically, you can set up a remote build trigger.
+When you &amp;ldquo;Activate&amp;rdquo; the build trigger for an Automated Build, it will give you a URL
+to which you can send POST requests.&lt;/p&gt;
+
+&lt;p&gt;Build triggers are available under the &amp;ldquo;Build Settings&amp;rdquo; section of each Automated Build
+repository on the Docker Hub.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-hub/hub-images/build-trigger.png&#34; alt=&#34;Build trigger screen&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can use &lt;code&gt;curl&lt;/code&gt; to trigger a build:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl --data &amp;quot;build=true&amp;quot; -X POST https://registry.hub.docker.com/u/svendowideit/testhook/trigger/be579c
+82-7c0e-11e4-81c4-0242ac110020/
+OK
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+You can only trigger one build at a time and no more than one
+every five minutes. If you already have a build pending, or if you
+recently submitted a build request, new requests &lt;em&gt;will be ignored&lt;/em&gt;.
+To verify everything is working correctly, check the logs of last
+ten triggers on the settings page .&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Automated Builds with Bitbucket</title>
+      <link>http://localhost/docker-hub/bitbucket/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/bitbucket/</guid>
+      <description>
+
+&lt;h1 id=&#34;automated-builds-with-bitbucket&#34;&gt;Automated Builds with Bitbucket&lt;/h1&gt;
+
+&lt;p&gt;If you&amp;rsquo;ve previously linked your Docker Hub account to your Bitbucket account,
+you&amp;rsquo;ll be able to skip to &lt;a href=&#34;#creating-an-automated-build&#34;&gt;Creating an Automated Build&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;linking-to-your-bitbucket-account&#34;&gt;Linking to your Bitbucket account&lt;/h2&gt;
+
+&lt;p&gt;In order to set up an Automated Build of a repository on Bitbucket, you need to
+link your &lt;a href=&#34;https://hub.docker.com/account/authorized-services/&#34;&gt;Docker Hub&lt;/a&gt;
+account to a Bitbucket account. This will allow the registry to see your Bitbucket
+repositories.&lt;/p&gt;
+
+&lt;p&gt;To add, remove or view your linked account, go to the &amp;ldquo;Linked Accounts &amp;amp; Services&amp;rdquo;
+section of your Hub profile &amp;ldquo;Settings&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-hub/hub-images/authorized-services.png&#34; alt=&#34;authorized-services&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then follow the onscreen instructions to authorize and link your
+Bitbucket account to Docker Hub. Once it is linked, you&amp;rsquo;ll be able
+to create a Docker Hub repository from which to create the Automatic Build.&lt;/p&gt;
+
+&lt;h2 id=&#34;creating-an-automated-build&#34;&gt;Creating an Automated Build&lt;/h2&gt;
+
+&lt;p&gt;You can &lt;a href=&#34;https://hub.docker.com/add/automated-build/bitbucket/orgs/&#34;&gt;create an Automated Build&lt;/a&gt; from any of your
+public or private Bitbucket repositories with a &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To get started, log into your Docker Hub account and click the
+&amp;ldquo;Create &amp;#x25BC;&amp;rdquo; menu item at the top right of the screen. Then select
+&lt;a href=&#34;https://hub.docker.com/add/automated-build&#34;&gt;Create Automated Build&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Select the the linked Bitbucket account, and then choose a repository to set up
+an Automated Build for.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-bitbucket-service-hook&#34;&gt;The Bitbucket service hook&lt;/h2&gt;
+
+&lt;p&gt;When you create an Automated Build, a &lt;code&gt;POST&lt;/code&gt; service hook should get automatically
+added to your Bitbucket repository.&lt;/p&gt;
+
+&lt;p&gt;To confirm or modify the service hook log in to Bitbucket, then navigate to
+the repository, click &amp;ldquo;Settings&amp;rdquo; (the gear), then select &amp;ldquo;Services&amp;rdquo;.
+You must have Administrator privilegdes on the repository to view or modfy
+this setting.&lt;/p&gt;
+
+&lt;p&gt;The image below shows the correct &lt;code&gt;POST&lt;/code&gt; hook pointing to
+&lt;code&gt;https://registry.hub.docker.com/hooks/bitbucket&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-hub/hub-images/bitbucket-hook.png&#34; alt=&#34;bitbucket-hooks&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introducing Docker Hub</title>
+      <link>http://localhost/docker-hub/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/</guid>
+      <description>
+
+&lt;h1 id=&#34;about-the-docker-hub&#34;&gt;About the Docker Hub&lt;/h1&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; is a cloud-based registry service for
+building and shipping application or service containers. It provides a centralized resource for container
+image discovery, distribution and change management, user and team
+collaboration, and workflow automation throughout the development pipeline.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-hub/hub-images/getting-started.png&#34; alt=&#34;Getting started with Docker Hub&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Specifically, Docker Hub provides the following major features and functions:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-hub/repos/&#34;&gt;Image Repositories&lt;/a&gt;: Find, manage, and push and pull images from community, official, and private image libraries.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-hub/builds/&#34;&gt;Automated Builds&lt;/a&gt;: Automatically create new images when you make changes to a source GitHub or Bitbucket repository.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-hub/builds/#webhooks&#34;&gt;Webhooks&lt;/a&gt;: A feature of Automated Builds, Webhooks let you trigger actions after a successful push to a repository.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-hub/orgs/&#34;&gt;Organizations&lt;/a&gt;: Create work groups to manage user access to image repositories.&lt;/li&gt;
+&lt;li&gt;GitHub and Bitbucket Integration: Add the Hub and your Docker Images to your current workflows.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;create-a-docker-hub-account&#34;&gt;Create a Docker Hub account&lt;/h2&gt;
+
+&lt;p&gt;To explore Docker Hub, you&amp;rsquo;ll need to create an account by following the
+directions in &lt;a href=&#34;../docker-hub/accounts/&#34;&gt;Hub Accounts&lt;/a&gt;. You can create an account and use the Hub with one private repo for free. If you need more private repos, you can upgrade from your free account to a paid plan. To learn more, log in to the Hub and go to &lt;a href=&#34;https://hub.docker.com/account/billing-plans/&#34;&gt;Billing &amp;amp; Plans&lt;/a&gt;, which you access via the Settings menu (gear icon at upper right).&lt;/p&gt;
+
+&lt;h2 id=&#34;work-with-docker-image-repositories&#34;&gt;Work with Docker image repositories&lt;/h2&gt;
+
+&lt;p&gt;The Docker Hub provides you and your team with a place to build and ship Docker images.&lt;/p&gt;
+
+&lt;p&gt;You can configure Docker Hub repositories in two ways:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-hub/repos/&#34;&gt;Repositories&lt;/a&gt;, which allow you to push images at will from your local Docker daemon to the Hub, and&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-hub/builds/&#34;&gt;Automated Builds&lt;/a&gt;, which allow you to configure GitHub or Bitbucket to
+trigger the Hub to rebuild repositories when changes are made to the repository.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can create public repositories which can be accessed by any other Hub user, or you can create private repositories with limited access you control.&lt;/p&gt;
+
+&lt;h3 id=&#34;docker-commands-and-docker-hub&#34;&gt;Docker commands and Docker Hub&lt;/h3&gt;
+
+&lt;p&gt;Docker itself provides access to Docker Hub services via the &lt;a href=&#34;http://docs.docker.com/reference/commandline/search&#34;&gt;&lt;code&gt;docker search&lt;/code&gt;&lt;/a&gt;,
+&lt;a href=&#34;http://docs.docker.com/reference/commandline/pull&#34;&gt;&lt;code&gt;pull&lt;/code&gt;&lt;/a&gt;, &lt;a href=&#34;http://docs.docker.com/reference/commandline/login&#34;&gt;&lt;code&gt;login&lt;/code&gt;&lt;/a&gt;, and &lt;a href=&#34;http://docs.docker.com/reference/commandline/push&#34;&gt;&lt;code&gt;push&lt;/code&gt;&lt;/a&gt; commands.&lt;/p&gt;
+
+&lt;h3 id=&#34;explore-repositories&#34;&gt;Explore repositories&lt;/h3&gt;
+
+&lt;p&gt;There are two ways you can search for public repositories and images available
+on the Docker Hub. You can &amp;ldquo;Search&amp;rdquo; on the Docker Hub website, or
+you can &lt;code&gt;docker search&lt;/code&gt; for all the repositories and images using the Docker commandline
+tool:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker search ubuntu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Both will show you a list of the currently available public repositories on the
+Docker Hub which match the provided keyword.&lt;/p&gt;
+
+&lt;p&gt;A private repository won&amp;rsquo;t be listed in the repository
+search results. To see all the repositories you can access and their status,
+view your &amp;ldquo;Dashboard&amp;rdquo; page on &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can find more information on working with Docker images in the &lt;a href=&#34;https://docs.docker.com/userguide/dockerimages/&#34;&gt;Docker userguide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;use-official-repositories&#34;&gt;Use Official Repositories&lt;/h3&gt;
+
+&lt;p&gt;The Docker Hub contains a number of &lt;a href=&#34;http://hub.docker.com/explore/&#34;&gt;Official
+Repositories&lt;/a&gt;. These are public,
+certified repositories from vendors and contributors to Docker. They
+contain Docker images from vendors like Canonical, Oracle, and Red Hat
+that you can use as the basis to building your applications and services.&lt;/p&gt;
+
+&lt;p&gt;With Official Repositories you know you&amp;rsquo;re using an optimized and
+up-to-date image that was built by experts to power your applications.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+If you would like to contribute an Official Repository for your
+organization or product, see the documentation on &lt;a href=&#34;../docker-hub/official_repos/&#34;&gt;Official Repositories on Docker
+Hub&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;create-organization&#34;&gt;Create organization&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;../docker-hub/github/&#34;&gt;Learn how to create&lt;/a&gt; a Docker Hub
+account and manage your organizations and teams.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,3132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker-trusted-registries on Docker Docs</title>
+    <link>http://localhost/docker-trusted-registry/</link>
+    <description>Recent content in Docker-trusted-registries on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/docker-trusted-registry/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Admin guide</title>
+      <link>http://localhost/docker-trusted-registry/adminguide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/adminguide/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-trusted-registry-administrator-s-guide&#34;&gt;Docker Trusted Registry Administrator&amp;rsquo;s Guide&lt;/h1&gt;
+
+&lt;p&gt;This guide explains the tasks and functions an administrator of Docker Trusted Registry needs to understand such as reporting, logging, system management,
+performance metrics, optimizing the Trusted Registry file size, and deleting containers.
+For tasks Docker Trusted Registry users need to accomplish, such as pushing and pulling
+images, please look at the &lt;a href=&#34;../docker-trusted-registry/userguide/&#34;&gt;User&amp;rsquo;s Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;reporting&#34;&gt;Reporting&lt;/h2&gt;
+
+&lt;h3 id=&#34;dashboard&#34;&gt;Dashboard&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/assets/admin-metrics.png&#34; alt=&#34;Docker Trusted Registry Dashboard&amp;lt;/admin/metrics/&amp;gt;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &amp;ldquo;Docker Trusted Registry Dashboard displays &amp;ldquo;hardware&amp;rdquo; resource utilization and network traffic metrics for the Docker Trusted Registry host as well as for each of its contained services. The CPU and RAM usage meters at the top indicate overall resource usage for the host, while detailed time-series charts are provided below for each container providing a Docker Trusted Registry service.&lt;/p&gt;
+
+&lt;p&gt;In addition, if your registry is using a filesystem storage driver, you will see a usage meter indicating used and available space on the storage volume. Third-party storage back-ends are not supported, so if you are using one, this meter will not be displayed.&lt;/p&gt;
+
+&lt;p&gt;You can mouse-over the charts or meters to see detailed data points.&lt;/p&gt;
+
+&lt;p&gt;Clicking on a service name (i.e., &amp;ldquo;load_balancer&amp;rdquo;, &amp;ldquo;admin_server&amp;rdquo;, etc.) will
+display the network, CPU, and memory (RAM) utilization data for the specified
+service. See below for a
+&lt;a href=&#34;#services&#34;&gt;detailed explanation of the available services&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;logs&#34;&gt;Logs&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/assets/admin-logs.png&#34; alt=&#34;System Logs page&amp;lt;/admin/logs/&amp;gt;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click &amp;ldquo;Logs&amp;rdquo; in the global nav bar at the top of page to view the logs from your Docker Trusted Registry&amp;rsquo;s containers. You will see
+log sections on this page for each service in your Docker Trusted Registry instance. Older or newer
+logs can be loaded by scrolling up or down. See below for a
+&lt;a href=&#34;#services&#34;&gt;detailed explanation of the available services&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Docker Trusted Registry&amp;rsquo;s log files can be found on the host in &lt;code&gt;/usr/local/etc/dtr/logs/&lt;/code&gt;. The
+files are limited to a maximum size of 64mb. They are rotated every two weeks,
+when the aggregator sends logs to the collection server, or they are rotated if
+a logfile would exceed 64mb without rotation. Log files are named &lt;code&gt;&amp;lt;component
+name&amp;gt;-&amp;lt;timestamp at rotation&amp;gt;&lt;/code&gt;, where the &amp;ldquo;component name&amp;rdquo; is the service it
+provides (&lt;code&gt;manager&lt;/code&gt;, &lt;code&gt;admin-server&lt;/code&gt;, etc.).&lt;/p&gt;
+
+&lt;h3 id=&#34;usage-statistics-and-crash-reports&#34;&gt;Usage statistics and crash reports&lt;/h3&gt;
+
+&lt;p&gt;During normal use, Docker Trusted Registry generates usage statistics and crash reports. This
+information is collected by Docker, Inc. to help us prioritize features, fix
+bugs, and improve our products. Specifically, Docker, Inc. collects the
+following information:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Error logs&lt;/li&gt;
+&lt;li&gt;Crash logs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;emergency-access-to-docker-trusted-registry&#34;&gt;Emergency access to Docker Trusted Registry&lt;/h2&gt;
+
+&lt;p&gt;If your authenticated or public access to the Docker Trusted Registry web interface has stopped
+working, but your Docker Trusted Registry admin container is still running, you can add an
+&lt;a href=&#34;https://docs.docker.com/articles/ambassador_pattern_linking/&#34;&gt;ambassador container&lt;/a&gt;
+to get temporary unsecure access to it by running:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -it --link docker_trusted_registry_admin_server:admin -p 9999:80 svendowideit/ambassador
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This guide assumes that you are a member of the &lt;code&gt;docker&lt;/code&gt; group,
+or have root privileges. Otherwise, you may need to add &lt;code&gt;sudo&lt;/code&gt; to the example
+command above.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This will give you access on port &lt;code&gt;9999&lt;/code&gt; on your Docker Trusted Registry server - &lt;code&gt;http://&amp;lt;dtr-host-ip&amp;gt;:9999/admin/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;ssh-access-to-host&#34;&gt;SSH Access to host&lt;/h3&gt;
+
+&lt;p&gt;As an extra measure of safety, make sure you have SSH access to the Docker Trusted Registry host before you start using Docker Trusted Registry.&lt;/p&gt;
+
+&lt;p&gt;If you are hosting Docker Trusted Registry on an EC2 host launched from the AWS Marketplace AMI, note that the user is &lt;code&gt;ec2-user&lt;/code&gt;:
+&lt;code&gt;/path/to/private_key/id_rsa ec2-user@&amp;lt;dtr-dns-entry&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;services&#34;&gt;Services&lt;/h2&gt;
+
+&lt;p&gt;Docker Trusted Registry runs several Docker services which are essential to its reliability and
+usability. The following services are included; you can see their details by
+viewing the &lt;a href=&#34;#dashboard&#34;&gt;Docker Trusted Registry Dashboard&lt;/a&gt; and &lt;a href=&#34;#logs&#34;&gt;Logs&lt;/a&gt; pages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;admin_server&lt;/code&gt;: Used for displaying system health, performing upgrades,
+configuring settings, and viewing logs.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;load_balancer&lt;/code&gt;: Used for maintaining high availability by distributing load
+to each image storage service (&lt;code&gt;image_storage_X&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;log_aggregator&lt;/code&gt;: A microservice used for aggregating logs from each of the
+other services. Handles log persistence and rotation on disk.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;image_storage_X&lt;/code&gt;: Stores Docker images using the &lt;a href=&#34;http://docs.docker.com/registry/spec/api/&#34;&gt;Docker Registry HTTP API V2&lt;/a&gt;. Typically,
+multiple image storage services are used in order to provide greater uptime and
+faster, more efficient resource utilization.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;postgres&lt;/code&gt;: A database service used to host authentication (LDAP) data and other datasets as needed by Docker Trusted Registry.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;docker-trusted-registry-system-management&#34;&gt;Docker Trusted Registry system management&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;docker/trusted-registry&lt;/code&gt; image is used to control the Docker Trusted Registry system. This
+image uses the Docker socket to orchestrate the multiple services that comprise
+Docker Trusted Registry.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; $ sudo bash -c &amp;quot;$(sudo docker run docker/trusted-registry [COMMAND])&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Supported commands are: &lt;code&gt;install&lt;/code&gt;, &lt;code&gt;start&lt;/code&gt;, &lt;code&gt;stop&lt;/code&gt;, &lt;code&gt;restart&lt;/code&gt;, &lt;code&gt;pull&lt;/code&gt;, &lt;code&gt;info&lt;/code&gt;,
+&lt;code&gt;export-settings&lt;/code&gt;, &lt;code&gt;diagnostics&lt;/code&gt;, &lt;code&gt;status&lt;/code&gt;, &lt;code&gt;upgrade&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: &lt;code&gt;sudo&lt;/code&gt; is needed for &lt;code&gt;docker/trusted-registry&lt;/code&gt; commands to
+ensure that the Bash script is run with full access to the Docker host.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;install&#34;&gt;&lt;code&gt;install&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Install Docker Trusted Registry.&lt;/p&gt;
+
+&lt;h3 id=&#34;start&#34;&gt;&lt;code&gt;start&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Start Docker Trusted Registry containers that are not running.&lt;/p&gt;
+
+&lt;h3 id=&#34;stop&#34;&gt;&lt;code&gt;stop&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Stop Docker Trusted Registry containers that are running.&lt;/p&gt;
+
+&lt;h3 id=&#34;restart&#34;&gt;&lt;code&gt;restart&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Stop and then start the Docker Trusted Registry containers.&lt;/p&gt;
+
+&lt;h3 id=&#34;status&#34;&gt;&lt;code&gt;status&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Display the current running status of only the Docker Trusted Registry containers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(docker run docker/trusted-registry status)&amp;quot;
+INFO  [1.1.0-alpha-001472_g8a9ddb4] Attempting to connect to docker engine dockerHost=&amp;quot;unix:///var/run/docker.sock&amp;quot;
+INFO  [1.1.0-alpha-001472_g8a9ddb4] Running status command
+docker_trusted_registry_load_balancer
+    Daemon [default (unix:///var/run/docker.sock)]
+        Id: 4d6abd5c39acda25e3d3ccf7cc2acf00f32c7786a7e86fb56daf7fd67584ce9f
+        Created: 2015-06-16 21:52:53+00:00
+        Status: Up 4 minutes
+        Image: docker/trusted-registry-nginx:1.1.0-alpha-001472_g8a9ddb4
+        Ports:
+            tcp://0.0.0.0:443 -&amp;gt; 443
+            tcp://0.0.0.0:80 -&amp;gt; 80
+        Command:
+            nginxWatcher
+        Linked To:
+            None
+
+docker_trusted_registry_auth_server
+    Daemon [default (unix:///var/run/docker.sock)]
+        Id: 22d5c1cf988338638dd810bc8111295f71713e81338d16298028122d33eed64a
+        Created: 2015-06-16 21:52:46+00:00
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;info&#34;&gt;&lt;code&gt;info&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Display the version and info for the Docker daemon, and version and image ID&amp;rsquo;s
+of Docker Trusted Registry.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(docker run docker/trusted-registry info)&amp;quot;
+INFO  [1.1.0-alpha-001472_g8a9ddb4] Attempting to connect to docker engine dockerHost=&amp;quot;unix:///var/run/docker.sock&amp;quot;
+{
+  &amp;quot;DockerEngine&amp;quot;: {
+    &amp;quot;Version&amp;quot;: {
+      &amp;quot;ApiVersion&amp;quot;: &amp;quot;1.20&amp;quot;,
+      &amp;quot;Arch&amp;quot;: &amp;quot;amd64&amp;quot;,
+      &amp;quot;GitCommit&amp;quot;: &amp;quot;55bdb51&amp;quot;,
+      &amp;quot;GoVersion&amp;quot;: &amp;quot;go1.4.2&amp;quot;,
+      &amp;quot;KernelVersion&amp;quot;: &amp;quot;3.16.0-4-amd64&amp;quot;,
+      &amp;quot;Os&amp;quot;: &amp;quot;linux&amp;quot;,
+      &amp;quot;Version&amp;quot;: &amp;quot;1.6.0&amp;quot;
+    },
+    &amp;quot;Info&amp;quot;: {
+      &amp;quot;ID&amp;quot;: &amp;quot;QUMM:6SGD:6ZK4:TLJD:LTX7:64Z5:WP4Y:NE3N:TY7P:Y2RR:KVGO:IWRX&amp;quot;,
+      &amp;quot;Containers&amp;quot;: 15,
+      &amp;quot;Driver&amp;quot;: &amp;quot;btrfs&amp;quot;,
+      &amp;quot;DriverStatus&amp;quot;: [],
+      &amp;quot;ExecutionDriver&amp;quot;: &amp;quot;native-0.2&amp;quot;,
+      &amp;quot;Images&amp;quot;: 2793,
+      &amp;quot;KernelVersion&amp;quot;: &amp;quot;3.16.0-4-amd64&amp;quot;,
+      &amp;quot;OperatingSystem&amp;quot;: &amp;quot;Debian GNU/Linux stretch/sid&amp;quot;,
+      &amp;quot;NCPU&amp;quot;: 4,
+      &amp;quot;MemTotal&amp;quot;: 12305711104,
+      &amp;quot;Name&amp;quot;: &amp;quot;t440s&amp;quot;,
+      &amp;quot;Labels&amp;quot;: null,
+      &amp;quot;Debug&amp;quot;: true,
+      &amp;quot;NFd&amp;quot;: 43,
+      &amp;quot;NGoroutines&amp;quot;: 85,
+      &amp;quot;SystemTime&amp;quot;: &amp;quot;2015-06-17T04:24:54.634746915+10:00&amp;quot;,
+      &amp;quot;NEventsListener&amp;quot;: 1,
+      &amp;quot;InitPath&amp;quot;: &amp;quot;/usr/bin/docker&amp;quot;,
+      &amp;quot;InitSha1&amp;quot;: &amp;quot;&amp;quot;,
+      &amp;quot;IndexServerAddress&amp;quot;: &amp;quot;https://index.docker.io/v1/&amp;quot;,
+      &amp;quot;MemoryLimit&amp;quot;: false,
+      &amp;quot;SwapLimit&amp;quot;: false,
+      &amp;quot;IPv4Forwarding&amp;quot;: true,
+      &amp;quot;DockerRootDir&amp;quot;: &amp;quot;/data/docker&amp;quot;,
+      &amp;quot;HttpProxy&amp;quot;: &amp;quot;&amp;quot;,
+      &amp;quot;HttpsProxy&amp;quot;: &amp;quot;&amp;quot;,
+      &amp;quot;NoProxy&amp;quot;: &amp;quot;&amp;quot;
+    }
+  },
+  &amp;quot;DTR&amp;quot;: {
+    &amp;quot;Version&amp;quot;: &amp;quot;1.1.0-alpha-001472_g8a9ddb4&amp;quot;,
+    &amp;quot;GitSHA&amp;quot;: &amp;quot;8a9ddb4595c3&amp;quot;,
+    &amp;quot;StorageDriver&amp;quot;: &amp;quot;filesystem&amp;quot;,
+    &amp;quot;AuthDriver&amp;quot;: &amp;quot;dtr&amp;quot;,
+    &amp;quot;ImageIDs&amp;quot;: {
+      &amp;quot;Garant&amp;quot;: &amp;quot;59bc135c362ad7e44743800b037061976210a9cc6aec323c3ea6eb93ebb513ca&amp;quot;,
+      &amp;quot;Registry&amp;quot;: &amp;quot;6aba58d8bbe71b14edd538a20ac98e1279577bbef461ca25fd2794dcb017c1dc&amp;quot;,
+      &amp;quot;AdminServer&amp;quot;: &amp;quot;af4dfb1f386e3e07b612f5f59f08166ce499ef1dfc619d499a42c53c5e424acf&amp;quot;,
+      &amp;quot;Manager&amp;quot;: &amp;quot;3abc65af8385e63d61af40a1393438d0d720e6bf2a60c1b15b7a17a2a0d8965b&amp;quot;,
+      &amp;quot;LogAggregator&amp;quot;: &amp;quot;01da5d7ef561a251c0c63b860a95d55b602cc70347192ef34acd3b1c5bcd317f&amp;quot;,
+      &amp;quot;Nginx&amp;quot;: &amp;quot;631537f98c8876050fae00106c8db424d03e408b27cc14b5eb1fc11abbaba03b&amp;quot;
+    },
+    &amp;quot;LicenseKeyID&amp;quot;: &amp;quot;2Y6QPUBxoYEms6pIysneyum6SZY_QxE9v4zLF8i1wBNZ&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;diagnostics&#34;&gt;&lt;code&gt;diagnostics&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;The &lt;code&gt;diagnostics&lt;/code&gt; command is used to extract configuration and run time data
+about your containers for support purposes.&lt;/p&gt;
+
+&lt;p&gt;The output includes the &lt;code&gt;docker inspect&lt;/code&gt; output for all
+containers, running and not, so please check the resulting files for passwords
+and other proprietary information before sending it.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(docker run docker/trusted-registry diagnostics)&amp;quot; &amp;gt; diagnostics.zip&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; These diagnostics files may contain secrets that you need to remove
+before passing on - such as raw container log files, Azure storage credentials, or passwords that may be
+sent to non-Docker Trusted Registry containers using the &lt;code&gt;docker run -e PASSWORD=asdf&lt;/code&gt; environment variable
+options.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Stream to STDOUT a zip file containing CSDE and Docker Trusted Registry configuration, state, and log
+files to help the Docker Enterprise support team:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;your Docker host&amp;rsquo;s &lt;code&gt;ca-certificates.crt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;containers/&lt;/code&gt;: the first 20 running, stopped and paused containers &lt;code&gt;docker inspect&lt;/code&gt;
+information and log files.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dockerEngine/&lt;/code&gt;: the Docker daemon&amp;rsquo;s &lt;code&gt;info&lt;/code&gt; and &lt;code&gt;version&lt;/code&gt; output&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dockerState/&lt;/code&gt;: the Docker daemon&amp;rsquo;s container states, image states, daemon log file, and daemon configuration file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dtrlogs/&lt;/code&gt;: the Docker Trusted Registry container log files&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;manager/&lt;/code&gt;: the Docker Trusted Registry &lt;code&gt;/usr/local/etc/dtr&lt;/code&gt; configuration directory and manager &lt;code&gt;info&lt;/code&gt; output. See the &lt;a href=&#34;#export-settings&#34;&gt;export settings section&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sysinfo/&lt;/code&gt;: Host information&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;errors.txt&lt;/code&gt;: errors and warnings encountered while running diagnostics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;export-settings&#34;&gt;&lt;code&gt;export-settings&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Export the Docker Trusted Registry configuration files for backup or diagnostics use.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo bash -c &amp;quot;$(docker run docker/trusted-registry export-settings)&amp;quot; &amp;gt; export-settings.tar.gz&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; These diagnostics files may contain secrets that you need to remove
+before passing on - such as Azure storage credentials.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Stream to STDOUT a gzipped tar file containing the Docker Trusted Registry configuration files from &lt;code&gt;/usr/local/etc/dtr/&lt;/code&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;garant.yml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;generatedConfigs/nginx.conf&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;generatedConfigs/stacker.yml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hub.yml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;license.json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ssl/server.pem&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;storage.yml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;client-docker-daemon-diagnostics&#34;&gt;Client Docker Daemon diagnostics&lt;/h2&gt;
+
+&lt;p&gt;To debug client Docker daemon communication issues with Docker Trusted Registry, we also provide
+a diagnostics tool to be run on the client Docker daemon.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; These diagnostics files may contain secrets that you need to remove
+before passing on - such as raw container log files, Azure storage credentials, or passwords that may be
+sent to non-Docker Trusted Registry containers using the &lt;code&gt;docker run -e PASSWORD=asdf&lt;/code&gt; environment variable
+options.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can download and run this tool using the following command:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you supply an administrator username and password, then the
+&lt;code&gt;diagnostics&lt;/code&gt; tool will also download some logs and configuration data
+from the remote Docker Trusted Registry server.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;$ wget https://dhe.mycompany.com/admin/bin/diagnostics &amp;amp;&amp;amp; chmod +x diagnostics
+$ sudo ./diagnostics dhe.mycompany.com &amp;gt; enduserDiagnostics.zip
+DTR administrator password (provide empty string if there is no admin server authentication):
+WARN  [1.1.0-alpha-001472_g8a9ddb4] Encountered errors running diagnostics errors=[Failed to copy DTR Adminserver&#39;s exported settings into ZIP output: &amp;quot;Failed to read next tar header: \&amp;quot;archive/tar: invalid tar header\&amp;quot;&amp;quot; Failed to copy logs from DTR Adminserver into ZIP output: &amp;quot;Failed to read next tar header: \&amp;quot;archive/tar: invalid tar header\&amp;quot;&amp;quot; error running &amp;quot;sestatus&amp;quot;: &amp;quot;exit status 127&amp;quot; error running &amp;quot;dmidecode&amp;quot;: &amp;quot;exit status 127&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The zip file will contain the following information:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;your local Docker host&amp;rsquo;s &lt;code&gt;ca-certificates.crt&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;containers/&lt;/code&gt;: the first 20 running, stopped and paused containers &lt;code&gt;docker inspect&lt;/code&gt;
+information and log files.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dockerEngine/&lt;/code&gt;: the local Docker daemon&amp;rsquo;s &lt;code&gt;info&lt;/code&gt; and &lt;code&gt;version&lt;/code&gt; output&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dockerState/&lt;/code&gt;: the local Docker daemon&amp;rsquo;s container states, image states, log file, and daemon configuration file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dtr/&lt;/code&gt;: Remote Docker Trusted Registry services information. This directory will only be populated if the user enters a Docker Trusted Registry &amp;ldquo;admin&amp;rdquo; username and password.&lt;/li&gt;
+&lt;li&gt;- &lt;code&gt;dtr/logs/&lt;/code&gt;: the remote Docker Trusted Registry container log files. This directory will only be populated if the user enters a Docker Trusted Registry &amp;ldquo;admin&amp;rdquo; username and password.&lt;/li&gt;
+&lt;li&gt;- &lt;code&gt;dtr/exportedSettings/&lt;/code&gt;: the Docker Trusted Registry manager container&amp;rsquo;s log files and a backup of the &lt;code&gt;/usr/local/etc/dtr&lt;/code&gt; Docker Trusted Registry configuration directory. See the &lt;a href=&#34;#export-settings&#34;&gt;export settings section&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sysinfo/&lt;/code&gt;: local Host information&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;errors.txt&lt;/code&gt;: errors and warnings encountered while running diagnostics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;starting-and-stopping-docker-trusted-registry&#34;&gt;Starting and stopping Docker Trusted Registry&lt;/h3&gt;
+
+&lt;p&gt;If you need to stop and/or start Docker Trusted Registry (for upgrading, troubleshooting, etc.), use the following commands:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sudo bash -c &amp;quot;$(docker run docker/trusted-registry stop)&amp;quot;&lt;/code&gt;
+&lt;code&gt;sudo bash -c &amp;quot;$(docker run docker/trusted-registry start)&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;see-also&#34;&gt;See also&lt;/h2&gt;
+
+&lt;p&gt;For information on installing Docker Trusted Registry, take a look at the &lt;a href=&#34;docker-trusted-registry/install.md&#34;&gt;Installation instructions&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To configure for your environment, see the
+&lt;a href=&#34;../docker-trusted-registry/configuration/&#34;&gt;Configuration instructions&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To use Docker Trusted Registry, see the &lt;a href=&#34;../docker-trusted-registry/userguide/&#34;&gt;User guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To upgrade, see the &lt;a href=&#34;upgrade.md&#34;&gt;Upgrade guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To see previous changes, see the &lt;a href=&#34;../docker-trusted-registry/release-notes/&#34;&gt;release notes&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Configuration options</title>
+      <link>http://localhost/docker-trusted-registry/configuration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/configuration/</guid>
+      <description>
+
+&lt;h1 id=&#34;configuring-docker-trusted-registry&#34;&gt;Configuring Docker Trusted Registry&lt;/h1&gt;
+
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;This page will help you properly configure Docker Trusted Registry  so it can
+run in your environment.&lt;/p&gt;
+
+&lt;p&gt;Start with Docker Trusted Registry loaded in your browser and click  &amp;ldquo;Settings&amp;rdquo; in the global nav
+bar at the top of the page to view configuration options. You&amp;rsquo;ll see menus
+organizing the options for configuring:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;General Settings (ports, proxies, etc.)&lt;/li&gt;
+&lt;li&gt;Security settings&lt;/li&gt;
+&lt;li&gt;Storage settings&lt;/li&gt;
+&lt;li&gt;Your Docker Trusted Registry license&lt;/li&gt;
+&lt;li&gt;Authentication settings&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;
+Saving changes you&amp;rsquo;ve made to settings may restart various services, as follows:
+* General settings: full Docker Trusted Registry restart
+* License change: full Docker Trusted Registry restart
+* SSL change: Nginx reload
+* Storage config: only registries restart
+* Authentication config: no restart&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;general-settings&#34;&gt;General Settings&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/assets/admin-settings.png&#34; alt=&#34;Domain and Ports page&amp;lt;/admin/settings#http&amp;gt;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Domain Name&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to an empty string, the fully qualified domain name assigned to the Docker Trusted Registry host.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;HTTP Port&lt;/em&gt;: defaults to 80, used as the entry point for the image storage service. To see load balancer status, you can query
+http://&amp;lt;dtr-host&amp;gt;/load_balancer_status.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;HTTPS Port&lt;/em&gt;: defaults to 443, used as the secure entry point for the image storage service.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;HTTP proxy&lt;/em&gt;: defaults to an empty string, proxy server for HTTP requests.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;HTTPS proxy&lt;/em&gt;: defaults to an empty string, proxy server for HTTPS requests.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;No proxy&lt;/em&gt;: defaults to an empty string, proxy bypass for HTTP and HTTPS requests.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Upgrade checking&lt;/em&gt;: enables or disables automatic checking for Docker Trusted Registry software updates.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you need Docker Trusted Registry to re-generate a self-signed certificate at some
+point, you&amp;rsquo;ll need to first delete &lt;code&gt;/usr/local/etc/dtr/ssl/server.pem&lt;/code&gt;, and
+then restart the Docker Trusted Registry containers, either by changing and saving the &amp;ldquo;Domain Name&amp;rdquo;,
+or using &lt;code&gt;bash -c &amp;quot;$(docker run docker/trusted-registry restart)&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;security&#34;&gt;Security&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/assets/admin-settings-security.png&#34; alt=&#34;Security settings page&amp;lt;/admin/settings#security&amp;gt;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;SSL Certificate&lt;/em&gt;: Used to enter the hash (string) from the SSL Certificate.
+This cert must be accompanied by its private key, entered below.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;SSL Private Key&lt;/em&gt;: The hash from the private key associated with the provided
+SSL Certificate (as a standard x509 key pair).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In order to run, Docker Trusted Registry requires encrypted communications via HTTPS/SSL between (a) the Docker Trusted Registry and your Docker Engine(s), and (b) between your web browser and the Docker Trusted Registry admin server. There are a few options for setting this up:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You can use the self-signed certificate Docker Trusted Registry generates by default.&lt;/li&gt;
+&lt;li&gt;You can generate your own certificates using a public service or your enterprise&amp;rsquo;s infrastructure. See the &lt;a href=&#34;#generating-ssl-certificates&#34;&gt;Generating SSL certificates&lt;/a&gt; section for the options available.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you are generating your own certificates, you can install them by following the instructions for
+&lt;a href=&#34;#adding-your-own-registry-certificates-to-dtr&#34;&gt;Adding your own registry certificates to Docker Trusted Registry&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, if you choose to use the Docker Trusted Registry-generated certificates, or the
+certificates you generate yourself are not trusted by your client Docker hosts,
+you will need to do one of the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#installing-registry-certificates-on-client-docker-daemons&#34;&gt;Install a registry certificate on all of your client Docker daemons&lt;/a&gt;,&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;a href=&#34;#if-you-can-t-install-the-certificates&#34;&gt;client Docker daemons to run with an unconfirmed connection to the registry&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;generating-ssl-certificates&#34;&gt;Generating SSL certificates&lt;/h3&gt;
+
+&lt;p&gt;There are three basic approaches to generating certificates:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Most enterprises will have private key infrastructure (PKI) in place to
+generate keys. Consult with your security team or whomever manages your private
+key infrastructure. If you have this resource available, Docker recommends you
+use it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If your enterprise can&amp;rsquo;t provide keys, you can use a public Certificate
+Authority (CA) like &amp;ldquo;InstantSSL.com&amp;rdquo; or &amp;ldquo;RapidSSL.com&amp;rdquo; to generate a
+certificate. If your certificates are generated using a globally trusted
+Certificate Authority, you won&amp;rsquo;t need to install them on all of your
+client Docker daemons.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use the self-signed registry certificate generated by Docker Trusted Registry, and install it
+onto the client Docker daemon hosts as shown below.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;adding-your-own-registry-certificates-to-docker-trusted-registry&#34;&gt;Adding your own Registry certificates to Docker Trusted Registry&lt;/h3&gt;
+
+&lt;p&gt;Whichever method you use to generate certificates, once you have them
+you can set up your Docker Trusted Registry server to use them by navigating to the &amp;ldquo;Settings&amp;rdquo; page,
+going to &amp;ldquo;Security,&amp;rdquo; and putting the SSL Certificate text (including all
+intermediate Certificates, starting with the host) into the
+&amp;ldquo;SSL Certificate&amp;rdquo; edit box, and the previously generated Private key into
+the &amp;ldquo;SSL Private Key&amp;rdquo; edit box.&lt;/p&gt;
+
+&lt;p&gt;Click the &amp;ldquo;Save&amp;rdquo; button, and then wait for the Docker Trusted Registry Admin site to restart and
+reload. It should now be using the new certificate.&lt;/p&gt;
+
+&lt;p&gt;Once the &amp;ldquo;Security&amp;rdquo; page has reloaded, it will show &lt;code&gt;#&lt;/code&gt; hashes instead of the
+certificate text you pasted in.&lt;/p&gt;
+
+&lt;p&gt;If your certificate is signed by a chain of Certificate Authorities that are
+already trusted by your Docker daemon servers, you can skip the &amp;ldquo;Installing
+registry certificates&amp;rdquo; step below.&lt;/p&gt;
+
+&lt;h3 id=&#34;installing-registry-certificates-on-client-docker-daemons&#34;&gt;Installing Registry certificates on client Docker daemons&lt;/h3&gt;
+
+&lt;p&gt;If your certificates do not have a trusted Certificate Authority, you will need
+to install them on each client Docker daemon host.&lt;/p&gt;
+
+&lt;p&gt;The procedure for installing the Docker Trusted Registry certificates on each Linux distribution has
+slightly different steps, as shown below.&lt;/p&gt;
+
+&lt;p&gt;You can test this certificate using &lt;code&gt;curl&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl https://dtr.yourdomain.com/v2/
+curl: (60) SSL certificate problem: self signed certificate
+More details here: http://curl.haxx.se/docs/sslcerts.html
+
+curl performs SSL certificate verification by default, using a &amp;quot;bundle&amp;quot;
+ of Certificate Authority (CA) public keys (CA certs). If the default
+ bundle file isn&#39;t adequate, you can specify an alternate file
+ using the --cacert option.
+If this HTTPS server uses a certificate signed by a CA represented in
+ the bundle, the certificate verification probably failed due to a
+ problem with the certificate (it might be expired, or the name might
+ not match the domain name in the URL).
+If you&#39;d like to turn off curl&#39;s verification of the certificate, use
+ the -k (or --insecure) option.
+
+$ curl --cacert /usr/local/etc/dtr/ssl/server.pem https://dtr.yourdomain.com/v2/
+{&amp;quot;errors&amp;quot;:[{&amp;quot;code&amp;quot;:&amp;quot;UNAUTHORIZED&amp;quot;,&amp;quot;message&amp;quot;:&amp;quot;access to the requested resource is not authorized&amp;quot;,&amp;quot;detail&amp;quot;:null}]}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Continue by following the steps corresponding to your chosen OS.&lt;/p&gt;
+
+&lt;h4 id=&#34;ubuntu-debian&#34;&gt;Ubuntu/Debian&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ export DOMAIN_NAME=dtr.yourdomain.com
+    $ openssl s_client -connect $DOMAIN_NAME:443 -showcerts &amp;lt;/dev/null 2&amp;gt;/dev/null | openssl x509 -outform PEM | sudo tee /usr/local/share/ca-certificates/$DOMAIN_NAME.crt
+    $ sudo update-ca-certificates
+    Updating certificates in /etc/ssl/certs... 1 added, 0 removed; done.
+    Running hooks in /etc/ca-certificates/update.d....done.
+    $ sudo service docker restart
+    docker stop/waiting
+    docker start/running, process 29291
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;rhel-centos&#34;&gt;RHEL/Centos&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ export DOMAIN_NAME=dtr.yourdomain.com
+    $ openssl s_client -connect $DOMAIN_NAME:443 -showcerts &amp;lt;/dev/null 2&amp;gt;/dev/null | openssl x509 -outform PEM | sudo tee /etc/pki/ca-trust/source/anchors/$DOMAIN_NAME.crt
+    $ sudo update-ca-trust
+    $ sudo /bin/systemctl restart docker.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;docker-machine-and-boot2docker&#34;&gt;Docker Machine and Boot2Docker&lt;/h4&gt;
+
+&lt;p&gt;You&amp;rsquo;ll need to make some persistent changes using &lt;code&gt;bootsync.sh&lt;/code&gt; in your
+Boot2Docker-based virtual machine (as documented in &lt;a href=&#34;https://github.com/boot2docker/boot2docker/blob/master/doc/FAQ.md#local-customisation-with-persistent-partition&#34;&gt;local customization&lt;/a&gt;). To do this:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;docker-machine ssh dev&lt;/code&gt; to enter the VM&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;vi /var/lib/boot2docker/bootsync.sh&lt;/code&gt; (create it if it doesn&amp;rsquo;t exist, or edit it if it does)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Install the CA cert (or the auto-generated cert) by adding the following to
+your &lt;code&gt;/var/lib/boot2docker/bootsync.sh&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/sh
+
+cat /var/lib/boot2docker/server.pem &amp;gt;&amp;gt; /etc/ssl/certs/ca-certificates.crt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then get the certificate from the new Docker Trusted Registry server using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ openssl s_client -connect dtr.yourdomain.com:443 -showcerts &amp;lt;/dev/null 2&amp;gt;/dev/null | openssl x509 -outform PEM | sudo tee -a /var/lib/boot2docker/server.pem
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If your certificate chain is complicated, you may want to use the changes in
+&lt;a href=&#34;https://github.com/boot2docker/boot2docker/pull/807/files&#34;&gt;Pull request 807&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Now you can either reboot your virtual machine, or run the following to
+install the server certificate, and then restart the Docker daemon.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo chmod 755 /var/lib/boot2docker/bootsync.sh
+$ sudo /var/lib/boot2docker/bootsync.sh
+$ sudo /etc/init.d/docker restart`.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;if-you-can-t-install-the-certificates&#34;&gt;If you can&amp;rsquo;t install the certificates&lt;/h3&gt;
+
+&lt;p&gt;If for some reason you can&amp;rsquo;t install the certificate chain on a client Docker host,
+or your certificates do not have a global CA, you can configure your Docker daemon to run in &amp;ldquo;insecure&amp;rdquo; mode. This is done by adding an extra flag,
+&lt;code&gt;--insecure-registry host-ip|domain-name&lt;/code&gt;, to your client Docker daemon startup flags.
+You&amp;rsquo;ll need to restart the Docker daemon for the change to take effect.&lt;/p&gt;
+
+&lt;p&gt;This flag means that the communications between your Docker client and the Docker Trusted Registry
+Registry server are still encrypted, but the client Docker daemon is not
+confirming that the Registry connection is not being hijacked or diverted.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you enter a &amp;ldquo;Domain Name&amp;rdquo; into the &amp;ldquo;Security&amp;rdquo; settings, it needs
+to be DNS resolvable on any client Docker daemons that are running in
+&amp;ldquo;insecure-registry&amp;rdquo; mode.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To set the flag, follow the directions below for your operating system.&lt;/p&gt;
+
+&lt;h4 id=&#34;ubuntu&#34;&gt;Ubuntu&lt;/h4&gt;
+
+&lt;p&gt;On Ubuntu 14.04 LTS, you customize the Docker daemon configuration with the
+&lt;code&gt;/etc/defaults/docker&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Open or create the &lt;code&gt;/etc/defaults/docker&lt;/code&gt; file, and add the
+&lt;code&gt;--insecure-registry&lt;/code&gt; flag to the &lt;code&gt;DOCKER_OPTS&lt;/code&gt; setting (which may need to be
+added or uncommented) as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DOCKER_OPTS=&amp;quot;--insecure-registry dtr.yourdomain.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then restart the Docker daemon with &lt;code&gt;sudo service docker restart&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;rhel-centos-1&#34;&gt;RHEL/Centos&lt;/h4&gt;
+
+&lt;p&gt;On RHEL/Centos, you customize the Docker daemon configuration with the
+&lt;code&gt;/etc/sysconfig/docker&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Open or create the &lt;code&gt;/etc/sysconfig/docker&lt;/code&gt; file, and add the
+&lt;code&gt;--insecure-registry&lt;/code&gt; flag to the &lt;code&gt;OPTIONS&lt;/code&gt; setting (which may need to be
+added or uncommented) as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;OPTIONS=&amp;quot;--insecure-registry dtr.yourdomain.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then restart the Docker daemon with &lt;code&gt;sudo service docker restart&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;docker-machine-and-boot2docker-1&#34;&gt;Docker Machine and Boot2Docker&lt;/h3&gt;
+
+&lt;p&gt;In your Boot2Docker-based virtual machine, you customize the Docker daemon configuration with the
+&lt;code&gt;/var/lib/boot2docker/profile&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;Open or create the &lt;code&gt;/var/lib/boot2docker/profile&lt;/code&gt; file, and add an &lt;code&gt;EXTRA_ARGS&lt;/code&gt;
+setting as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;EXTRA_ARGS=&amp;quot;--insecure-registry dtr.yourdomain.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then restart the Docker daemon with &lt;code&gt;sudo /etc/init.d/docker restart&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;image-storage-configuration&#34;&gt;Image Storage Configuration&lt;/h2&gt;
+
+&lt;p&gt;Docker Trusted Registry image storage can be configured to use the local filesystem, or a cloud service
+such as S3 or Azure.&lt;/p&gt;
+
+&lt;p&gt;See the &lt;a href=&#34;http://docs.docker.com/registry/configuration/&#34;&gt;Registry 2.0 configuration&lt;/a&gt;
+documentation for the full options specific to each driver.
+Storage drivers can be added or customized via the &lt;a href=&#34;http://docs.docker.com/registry/storagedrivers/#storage-driver-api&#34;&gt;Docker Registry storage driver
+API&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/assets/admin-settings-storage.png&#34; alt=&#34;Storage settings page&amp;lt;/admin/settings#storage&amp;gt;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After you select the image storage method you would like to use from the drop-down menu
+near the top of the page, the UI will change to reflect the configuration settings
+appropriate to the selected method.&lt;/p&gt;
+
+&lt;p&gt;You can either use the storage specific input boxes to configure the most common settngs
+for local filesystem, S3 or Azure storage backends,
+or use the full Yaml configuration file upload to have more detailed control.&lt;/p&gt;
+
+&lt;p&gt;You can view the current &lt;code&gt;storage.yaml&lt;/code&gt; file on your Docker Trusted Registry Docker host in the &lt;code&gt;/usr/local/etc/dtr/&lt;/code&gt;
+directory.&lt;/p&gt;
+
+&lt;h3 id=&#34;filesystem-settings&#34;&gt;Filesystem settings&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href=&#34;../registry/configuration/#filesystem&#34;&gt;filesystem storage backend&lt;/a&gt;
+has only one setting - the &amp;ldquo;Storage directory&amp;rdquo;, the subdirectory of &lt;code&gt;/var/local/dtr/image-storage&lt;/code&gt;
+in which all registry files are stored.
+The default value of &lt;code&gt;/local&lt;/code&gt; means the files are stored in &lt;code&gt;/var/local/dtr/image-storage/local&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;s3-settings&#34;&gt;S3 settings&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href=&#34;../registry/configuration/#s3&#34;&gt;S3 storage backend&lt;/a&gt; page allows you to set the
+&amp;ldquo;AWS region&amp;rdquo;, &amp;ldquo;Bucket name&amp;rdquo;, &amp;ldquo;Access Key&amp;rdquo;, and &amp;ldquo;Secret Key&amp;rdquo;.&lt;/p&gt;
+
+&lt;h3 id=&#34;azure-settings&#34;&gt;Azure settings&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href=&#34;../registry/configuration/#azure&#34;&gt;Azure storage backend&lt;/a&gt; page allows you to set
+the &amp;ldquo;Account name&amp;rdquo;, &amp;ldquo;Account key&amp;rdquo;, &amp;ldquo;Container&amp;rdquo;, and &amp;ldquo;Realm&amp;rdquo;.&lt;/p&gt;
+
+&lt;h3 id=&#34;yaml-configuration-file&#34;&gt;Yaml configuration file&lt;/h3&gt;
+
+&lt;p&gt;If the Quick setup options above are not sufficient to configure your Registry
+options, you can upload a YAML file.&lt;/p&gt;
+
+&lt;p&gt;The schema of this file is identical to that used
+by the &lt;a href=&#34;http://docs.docker.com/registry/configuration/&#34;&gt;Registry 2.0&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If you are using the file system driver to provide local image storage, you
+will need to specify a root directory which will get mounted as a sub-path of
+&lt;code&gt;/var/local/dtr/image-storage&lt;/code&gt;. The default value of this root directory is
+&lt;code&gt;/local&lt;/code&gt;, so the full path to it is &lt;code&gt;/var/local/dtr/image-storage/local&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;authentication&#34;&gt;Authentication&lt;/h2&gt;
+
+&lt;p&gt;The &amp;ldquo;Authentication&amp;rdquo; settings lets Docker Trusted Registry administrators control access
+to the Docker Trusted Registry web admin tool and to the Docker Trusted Registry.&lt;/p&gt;
+
+&lt;p&gt;The current authentication methods are &lt;code&gt;None&lt;/code&gt;, &lt;code&gt;Managed&lt;/code&gt; and &lt;code&gt;LDAP&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: if you have issues logging into the Docker Trusted Registry admin web interface after changing the authentication
+settings, you may need to use the &lt;a href=&#34;../docker-trusted-registry/adminguide/#emergency-access-to-dtr&#34;&gt;emergency access to the Docker Trusted Registry admin web interface&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;no-authentication&#34;&gt;No authentication&lt;/h3&gt;
+
+&lt;p&gt;No authentication means that everyone that can access your Docker Trusted Registry web administration
+site. This is not recommended for any use other than testing.&lt;/p&gt;
+
+&lt;h3 id=&#34;managed-authentication&#34;&gt;Managed authentication&lt;/h3&gt;
+
+&lt;p&gt;With &lt;code&gt;Managed&lt;/code&gt; authentication, the Docker Trusted Registry admin can control users&amp;rsquo; access by setting username/password pairs. The admin can then &lt;a href=&#34;../docker-trusted-registry/api/&#34;&gt;use the API&lt;/a&gt; to give these users global &amp;ldquo;admin&amp;rdquo;, &amp;ldquo;read-write&amp;rdquo; or &amp;ldquo;read-only&amp;rdquo; privileges while assigning them Organization, Team or User repository access.&lt;/p&gt;
+
+&lt;p&gt;The &amp;ldquo;read-only&amp;rdquo; role can pull all images from the registry, &amp;ldquo;read-write&amp;rdquo; can
+push and pull all images, and the &amp;ldquo;admin&amp;rdquo; role can push and pull and also access
+the web administration UI and metrics dashboard.&lt;/p&gt;
+
+&lt;p&gt;When you create users and assign their roles via the API, you do not need
+to assign those users roles using the Docker Trusted Registry admin web UI.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/assets/admin-settings-authentication-basic.png&#34; alt=&#34;Managed authentication settings page&amp;lt;/admin/settings#auth&amp;gt;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Choose the appropriate button to add one user, or to upload a CSV file containing username,
+password pairs, and selection boxes for &amp;ldquo;admin&amp;rdquo;, &amp;ldquo;read-write&amp;rdquo;, and &amp;ldquo;read-only&amp;rdquo; roles.&lt;/li&gt;
+&lt;li&gt;You can also create, or allow others to create the username, password pair using the
+&lt;a href=&#34;../docker-trusted-registry/api/dtr_1_3_accounts/#create-an-account&#34;&gt;Account API&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;ldap-authentication&#34;&gt;LDAP authentication&lt;/h3&gt;
+
+&lt;p&gt;Using LDAP authentication allows you to integrate your Docker Trusted Registry into your
+organization&amp;rsquo;s existing LDAP user and authentication database.&lt;/p&gt;
+
+&lt;p&gt;To improve the performance of Docker Trusted Registry&amp;rsquo;s Access Control Lists, User and Group
+membership data is synced into Docker Trusted Registry&amp;rsquo;s database at a configurable &lt;em&gt;LDAP Sync
+Interval&lt;/em&gt;. User passwords are not transferred during syncing; Docker Trusted Registry will defer to the LDAP server to validate username/password pairs.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: LDAP syncing does not create new user accounts or teams in Docker Trusted Registry. It
+will only manage existing teams that have been specified to sync with LDAP.
+Use the &lt;a href=&#34;../docker-trusted-registry/api/&#34;&gt;Docker Trusted Registry APIs&lt;/a&gt; to create new users and
+teams from your LDAP server.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can configure the &amp;ldquo;userFilter&amp;rdquo; to select the set of users that are candidates
+for each of the &amp;ldquo;admin&amp;rdquo;, global &amp;ldquo;read-write&amp;rdquo;, and global &amp;ldquo;read-only&amp;rdquo; roles. Unlike &amp;ldquo;Managed&amp;rdquo;
+authentication, the &amp;ldquo;admin&amp;rdquo; role is separate from the registry access roles, so
+LDAP users in the &amp;ldquo;admin&amp;rdquo; role won&amp;rsquo;t have access to Docker Trusted Registry images unless they are
+also given the &amp;ldquo;read-write&amp;rdquo; or &amp;ldquo;read-only&amp;rdquo; role.&lt;/p&gt;
+
+&lt;p&gt;Alternativly, you can assign
+&lt;a href=&#34;../docker-trusted-registry/api/&#34;&gt;Organization, Team or User repository roles using the API&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Because connecting to LDAP involves existing infrastructure external to Docker Trusted Registry and
+Docker, you will need to gather the details required to configure Docker Trusted Registry for your
+organization&amp;rsquo;s particular LDAP implementation.&lt;/p&gt;
+
+&lt;p&gt;You can test that you have the correct LDAP server information by connecting to
+the LDAP server from inside a Docker container running on the same server as
+your Docker Trusted Registry:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: if the LDAP server is configured to use &lt;em&gt;StartTLS&lt;/em&gt;, then you need to
+add &lt;code&gt;-Z&lt;/code&gt; to the &lt;code&gt;ldapsearch&lt;/code&gt; command examples below.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --rm -it svendowideit/ldapsearch -h &amp;lt;LDAP Server hostname&amp;gt; -b &amp;lt;User Base DN&amp;gt; -D &amp;lt;Search User DN&amp;gt; -w &amp;lt;Search User Password&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or if the LDAP server is set up to allow anonymous access (which means your
+&lt;em&gt;Search User DN&lt;/em&gt; and &lt;em&gt;Search User Password&lt;/em&gt; settings will remain empty):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run --rm -it svendowideit/ldapsearch -h &amp;lt;LDAP Server hostname&amp;gt; -b &amp;lt;User Base DN&amp;gt; -x
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The result of these queries should be a (very) long list - if you get an authentication error,
+then the details you have are not sufficient - contact your organization&amp;rsquo;s LDAP team.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;User Login Attribute&lt;/em&gt; key setting must match the field used in the LDAP server
+for the user&amp;rsquo;s login-name. On OpenLDAP, it&amp;rsquo;s generally &lt;code&gt;uid&lt;/code&gt;, and on Microsoft Active Directory
+servers, it&amp;rsquo;s &lt;code&gt;sAMAccountName&lt;/code&gt;. The &lt;code&gt;ldapsearch&lt;/code&gt; output above should allow you to
+confirm which setting you need.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/assets/admin-settings-authentication-ldap.png&#34; alt=&#34;LDAP authentication settings page&amp;lt;/admin/settings#auth&amp;gt;&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;ldap-configuration-options&#34;&gt;LDAP Configuration options&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;LDAP Server URL&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to null, LDAP server URL (e.g., - ldap://example.com)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Use StartTLS&lt;/em&gt;: defaults to unchecked, check to enable StartTLS&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;User Base DN&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to null, user base DN in the form (e.g., - dc=example,dc=com)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;User Login Attribute&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to null, user login attribute (e.g., - uid or sAMAccountName)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Search User DN&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to null, search user DN (e.g., - domain\username)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Search User Password&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to null, search user password&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;LDAP Sync Interval&lt;/em&gt;: &lt;strong&gt;required&lt;/strong&gt; defaults to 1h0m0s, sets the interval for Docker Trusted Registry to sync with the LDAP db.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;User Search filters&lt;/em&gt;: allows you to configure LDAP queries to limit the users that have the roles:&lt;/li&gt;
+&lt;li&gt;* &lt;em&gt;User Filter&lt;/em&gt;: This filter is used to select the objects to use as candidates for the role filters&lt;/li&gt;
+&lt;li&gt;* &lt;em&gt;Admin Role Filter&lt;/em&gt;: Combined with the &amp;ldquo;User Filter&amp;rdquo; to specify users with the
+&amp;ldquo;Admin&amp;rdquo; role - permitted to access the Docker Trusted Registry web UI&lt;/li&gt;
+&lt;li&gt;* &lt;em&gt;Read-Write Role Filter&lt;/em&gt;: Combined with the &amp;ldquo;User Filter&amp;rdquo; to specify users permitted to
+push images to, and pull images from Docker Trusted Registry&lt;/li&gt;
+&lt;li&gt;* &lt;em&gt;Read-Only Role Filter&lt;/em&gt;: Combined with the &amp;ldquo;User Filter&amp;rdquo; to specify users permitted to
+pull images from Docker Trusted Registry&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: While the &amp;ldquo;role&amp;rdquo; filters are optional, keep in mind that if they are
+left empty, all users will get those full privileges. In other words, if the
+&amp;ldquo;admin&amp;rdquo; filter is left empty, all users will get admin privileges, if the
+&amp;ldquo;read-write&amp;rdquo; filter is empty, all users can push/pull any image, etc. (This
+behavior will be corrected in future versions.)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;confirm-login-with-current-configuration&#34;&gt;Confirm login with current configuration&lt;/h4&gt;
+
+&lt;p&gt;You can test your current LDAP configuration before saving it by entering a test username and password and then clicking &amp;ldquo;Try Login&amp;rdquo;. If the login succeeds, your configuration is working.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For information on getting support for Docker Trusted Registry, take a look at the &lt;a href=&#34;../docker-trusted-registry/support/&#34;&gt;Support information&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker Trusted Registry Accounts &amp; Repos API: Intro &amp; Overview</title>
+      <link>http://localhost/docker-trusted-registry/api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/api/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-trusted-registry-1-3-accounts-repos-api&#34;&gt;Docker Trusted Registry 1.3: Accounts &amp;amp; Repos API&lt;/h1&gt;
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;The Accounts &amp;amp; Repos API lets you integrate Docker Trusted Registry  with your enterprise&amp;rsquo;s organizational structure by providing fine-grained, role-based access control for your repositories. Specifically, this API provides:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;An API for account management, including creating an account, listing existing accounts, creating a team within an organization, listing teamns in an organization, getting a specific team, listing members of a team, adding and removing members from a team (if using a managed whitelist), or editing LDAP syncing configuration.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Methods for syncing members of a team in Docker Trusted Registry with an LDAP group filter configured by an admin.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;An API for repository management and access control, including creating a repository, listing repositories for an account, adding collaborators to a repository, setting namespace-level access for teams, etc.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The API is designed so that minimal data migration is required, only schema migration. There is no UI accompanying this API.&lt;/p&gt;
+
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;This API defines two types of accounts that can own repositories: Users and Organizations. Account-owned (i.e., non-global) repos define a namespace similar to that of the Docker Hub, with two component names in the form &lt;code&gt;namespace/reponame&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Repositories can be either public or private. Public repositories can be
+read by any account in the system, but can only be written to by accounts granted explicit write access. Private repositories cannot be discovered by
+any account that does not have at least explicit read access to that
+repository.&lt;/p&gt;
+
+&lt;h3 id=&#34;user-accounts&#34;&gt;User accounts&lt;/h3&gt;
+
+&lt;p&gt;Docker Trusted Registry users can create a repository under their own namespace and can control which other users have read-only, read-write, or admin access to any
+of their repositories.&lt;/p&gt;
+
+&lt;p&gt;User owned repositories can only be accessed by the owner and other
+individual user accounts, i.e., you cannot grant access to a user-owned
+repository to a team of users in an organization. If a repository requires this level of control, consider moving it within an organization namespace.&lt;/p&gt;
+
+&lt;p&gt;When the Docker Trusted Registry web admin tool is used to assign users global &amp;ldquo;read-only&amp;rdquo;,
+&amp;ldquo;read-write&amp;rdquo;, or managed &amp;ldquo;admin&amp;rdquo; roles, they will have that access level to all
+repositories. You can access and modify these roles with the API, using the
+&lt;code&gt;_global&lt;/code&gt; organization. However, you must have admin access in order to view and
+edit the &lt;code&gt;_global&lt;/code&gt; organization.&lt;/p&gt;
+
+&lt;h3 id=&#34;organization-accounts&#34;&gt;Organization accounts&lt;/h3&gt;
+
+&lt;p&gt;System administrators can also create an Organization account, with its own
+namespace of repositories. Organization accounts are comprised of one or more teams which can be managed by anyone in an initial ‘owners’ team which is created by default. Teams can be created  with either a managed whitelist of users known to the system or with an LDAP group search filter which is periodically synced automatically.&lt;/p&gt;
+
+&lt;p&gt;Any member of an organization’s owners team can create new repositories under
+the organization’s namespace and can also create and edit other teams. Each team
+can be given read-only or read-write access to all repositories in the
+organization’s namespace and/or be granted separate levels of access on a
+per-repository basis. However, permissions are additive, so you cannot override
+a team level permission to prevent access to a specific repository.&lt;/p&gt;
+
+&lt;p&gt;Teams within an organization can also be granted read-only, read-write, or
+admin level access to all repositories in the organizations namespace. This
+allows a team to pull, push, and manage repositories for an organization,
+but &lt;em&gt;not&lt;/em&gt; manage the teams themselves.&lt;/p&gt;
+
+&lt;p&gt;Organization-owned repositories can only be given access to the teams within
+that organization, i.e., you cannot grant access to an organization-owned
+repository to an individual user account or team in another organization.
+If this level of control is needed on a repository, you can add those
+individual users to a team within the owning organization or add users in the
+other organization’s team to a team within the owning organization.&lt;/p&gt;
+
+&lt;h3 id=&#34;notable-differences-from-docker-hub&#34;&gt;Notable differences from Docker Hub&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Repositories must be explicitly created using the API. A &lt;code&gt;docker push&lt;/code&gt; will
+not create a repository if it does not exist. This prevents a typo from
+creating an unwanted repository in Docker Trusted Registry. This policy will be globally enforced
+in Docker Trusted Registry 1.3.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Organizations can only be created by system admins. This should prevent the
+proliferation of unwanted organization accounts.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Collaborators on user-owned repositories can be given more granular
+access than on Docker Hub. Docker Hub Registry offers only read-write access.
+Docker Trusted Registry offers read-only, read-write, and admin access for
+each user-owned repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Teams can be granted access to all repositories in an organization&amp;rsquo;s
+namespace. Docker Hub Registry offers team access control on a
+per-repository level only, and only an organization&amp;rsquo;s &amp;lsquo;owners team can
+manage access and create new repositories. Further, in the future, Docker
+Trusted Registry will offer the ability to grant a team access and/or
+management privileges to all repositories under a namespace.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Teams within an organization are visible to all members of the
+organization. In Docker Hub Registry, users are &amp;lsquo;invisible&amp;rsquo; to teams to which
+they do not belong. In Docker Trusted Registry, teams will be
+visible to the members of the organization, but will not be able to see a
+teams&amp;rsquo;s members unless they are also a member of that team.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;authentication&#34;&gt;Authentication&lt;/h3&gt;
+
+&lt;p&gt;Clients authenticate API requests by providing Basic Auth credentials (
+username and password) via an &amp;ldquo;Authorization&amp;rdquo; header for each request.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ curl --user readuser:password https://dtr.domain.com/api/v0/accounts
+{
+  &amp;quot;accounts&amp;quot;: [
+    {
+      &amp;quot;id&amp;quot;: 1,
+      &amp;quot;type&amp;quot;: &amp;quot;user&amp;quot;,
+      &amp;quot;name&amp;quot;: &amp;quot;admin&amp;quot;,
+    },
+    {
+      &amp;quot;id&amp;quot;: 2,
+      &amp;quot;type&amp;quot;: &amp;quot;user&amp;quot;,
+      &amp;quot;name&amp;quot;: &amp;quot;readuser&amp;quot;,
+    },
+    {
+      &amp;quot;id&amp;quot;: 3,
+      &amp;quot;type&amp;quot;: &amp;quot;user&amp;quot;,
+      &amp;quot;name&amp;quot;: &amp;quot;user&amp;quot;,
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If you are using Docker Trusted Registry&amp;rsquo;s automatically generated, self-signed SSL
+certificate
+then you&amp;rsquo;ll need to add &lt;code&gt;--insecure&lt;/code&gt; to the curl examples.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;api-documentation&#34;&gt;API Documentation&lt;/h3&gt;
+
+&lt;p&gt;The following documents detail the API:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/api/dtr_1_3_accounts/&#34;&gt;Accounts API Doc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/api/dtr_1_3_teams/&#34;&gt;Teams API Doc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/api/dtr_1_3_repositories/&#34;&gt;Repositories API Doc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/api/dtr_1_3_user_repo_access/&#34;&gt;User-Owned Repository Access API Doc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/api/dtr_1_3_team_repo_access/&#34;&gt;Organization-Owned Repository Access API Doc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/api/dtr_1_3_team_repo_namespace_access/&#34;&gt;Organization-Owned Repository Namespace Access API Doc&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install Docker Engine for AWS AMI (BDS)</title>
+      <link>http://localhost/docker-trusted-registry/install/engine-ami-launch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/install/engine-ami-launch/</guid>
+      <description>
+
+&lt;h1 id=&#34;install-docker-engine-for-aws-ami-bds&#34;&gt;Install Docker Engine for AWS AMI (BDS)&lt;/h1&gt;
+
+&lt;p&gt;This article walks you through the following steps to launch the &lt;em&gt;Docker Engine for AWS (Business Day Support)&lt;/em&gt; AMI as an EC2 instance in the Amazon Web Services (AWS) cloud:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Locate the &lt;em&gt;Docker Engine for AWS (Business Day Support)&lt;/em&gt; AMI&lt;/li&gt;
+&lt;li&gt;Deploy with 1-Click Launch&lt;/li&gt;
+&lt;li&gt;Connect to the Docker Engine&lt;/li&gt;
+&lt;li&gt;Confirm the Docker Engine is running&lt;/li&gt;
+&lt;li&gt;Configure &lt;em&gt;Docker Engine for AWS&lt;/em&gt; to use &lt;em&gt;Docker Trusted Registry for AWS&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Push a Docker image to your &lt;em&gt;Docker Trusted Registry for AWS&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The &lt;em&gt;Docker Engine for AWS (Business Day Support)&lt;/em&gt; AMI launches an instance of the commercially supported Docker Engine. Upgrading the Docker Engine to a non commercially supported version is not supported. This AMI requires the use of Docker Trusted Registry for AWS (Business Day Support) to maintain a supported configuration.&lt;/p&gt;
+
+&lt;p&gt;To learn more about &lt;em&gt;Docker Engine for AWS&lt;/em&gt; visit our &lt;a href=&#34;https://www.docker.com/aws&#34;&gt;AWS Documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can refer to the &lt;a href=&#34;../engine/misc/&#34;&gt;overview&lt;/a&gt; to see additional information on the general install process.&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;You can locate, install, and launch the AMI from the Amazon AWS Marketplace, or with the AWS EC2 Console by selecting the AMI from the &amp;ldquo;Launch Instance&amp;rdquo; dialog. Both the AWS Marketplace and the AWS EC2 Console require that you have an AWS account to launch the AMI.&lt;/p&gt;
+
+&lt;p&gt;If your account is supplied through your company, your company&amp;rsquo;s administrator must have given you permissions to launch EC2 instances. If you receive a permissions error when following these instructions, contact your AWS administrator for help.&lt;/p&gt;
+
+&lt;h1 id=&#34;install-procedure&#34;&gt;Install procedure&lt;/h1&gt;
+
+&lt;p&gt;These instructions show you how to locate, install, and launch the Docker Engine from Amazon&amp;rsquo;s AWS Marketplace. The AWS Marketplace allows you to do a &amp;ldquo;1-Click Launch&amp;rdquo; or &amp;ldquo;Manual Launch&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;Manual Launch&lt;/em&gt; allows you to launch using the AWS EC2 Console. It allows for fine control of EC2 instance settings such as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Instance type&lt;/li&gt;
+&lt;li&gt;VPC settings&lt;/li&gt;
+&lt;li&gt;Storage&lt;/li&gt;
+&lt;li&gt;Instance tags&lt;/li&gt;
+&lt;li&gt;Security Group settings&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;em&gt;1-Click Launch&lt;/em&gt; is quicker, provides default values for most settings, and dynamically updates the Cost Estimator. This install shows you how to do a &lt;em&gt;1-Click Launch&lt;/em&gt;. The entire process should take about 20 minutes to complete.&lt;/p&gt;
+
+&lt;h2 id=&#34;locate-the-docker-engine-for-aws-business-day-support-ami&#34;&gt;Locate the Docker Engine for AWS (Business Day Support) AMI&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If you haven&amp;rsquo;t already done so, open your browser to the &lt;a href=&#34;https://aws.amazon.com/marketplace&#34;&gt;Amazon Marketplace&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Search the Marketplace for &amp;ldquo;Docker Engine for AWS (Business Day Support)&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the &amp;ldquo;Docker Engine for AWS (Business Day Support)&amp;rdquo; AMI from the list of results.&lt;/p&gt;
+
+&lt;p&gt;The Marketplace entry provides details on the product.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &amp;ldquo;Continue&amp;rdquo; to move to the launch step.&lt;/p&gt;
+
+&lt;p&gt;If you are not logged into AWS, the system prompts you to.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter your AWS login credentials.&lt;/p&gt;
+
+&lt;p&gt;When your login succeeds, the browser displays the &amp;ldquo;Launch on EC2&amp;rdquo; page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure that the &amp;ldquo;1-Click Launch&amp;rdquo; tab is selected.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;deploy-with-1-click-launch&#34;&gt;Deploy with 1-Click Launch&lt;/h2&gt;
+
+&lt;p&gt;You can deploy the Docker Engine AMI to an Instance in a private or public subnet. A private subnet provides added security but also prevents your Docker Engine instance from being directly addressable on the internet. If you choose to deploy to a private subnet, you may need to access your Docker Engine instance via a Bastion host or a management instance within your VPC.&lt;/p&gt;
+
+&lt;p&gt;These instructions launch an EC2 instance into a public subnet with a public IP, so that gaining access to it in the &amp;ldquo;Connect to the Docker Engine&amp;rdquo; section is simplified.&lt;/p&gt;
+
+&lt;p&gt;The following steps walk you through the 1-Click Launch settings:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;From the &amp;ldquo;Software Pricing&amp;rdquo; box, select a &amp;ldquo;Subscription Term&amp;rdquo; and an &amp;ldquo;Applicable Instance Type.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;These two options contribute to the overall cost of running your choice of EC2 instance. The combination of these two fees make up the running costs of your EC2 instance, and are shown in the &amp;ldquo;Cost Estimator&amp;rdquo; box. Make sure you understand these costs before launching your instance.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the version you want to deploy from the list of available versions.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the Region you want to deploy to from the &amp;ldquo;Region&amp;rdquo; dropdown.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the VPC and Subnet you want to deploy to from the &amp;ldquo;VPC&amp;rdquo; and &amp;ldquo;Subnet&amp;rdquo; dropdowns.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;From the Security Group box, select &amp;ldquo;Create new based on seller settings&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/install/images/aws-engine-sg-rules.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This option has security implications. It allows incoming connections to the listed ports from any host or IP address. You should lock this down in line with your existing AWS security policies.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select an existing or add a new key pair using the &amp;ldquo;Key Pair&amp;rdquo; box.&lt;/p&gt;
+
+&lt;p&gt;If you choose to use an existing key pair, be sure to choose one that you have access to, as this cannot be changed after the instance is launched.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review your choices and check the values in the Cost Estimator.&lt;/p&gt;
+
+&lt;p&gt;Changing your selected Region and VPC settings can cause your selected EC2 instance type to reset to the default value of &amp;ldquo;m3.medium&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you are happy with your configuration and estimated charges, click &amp;ldquo;Launch with 1-Click&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to the &lt;a href=&#34;https://console.aws.amazon.com/ec2/v2/home&#34;&gt;EC2 Dashboard&lt;/a&gt; to view your instance.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;connect-to-the-docker-engine&#34;&gt;Connect to the Docker Engine&lt;/h2&gt;
+
+&lt;p&gt;You administer your Docker Engine using the &lt;code&gt;docker&lt;/code&gt; command line tool. You can run the &lt;code&gt;docker&lt;/code&gt; command line tool directly from your Docker Engine EC2 Instance, or remotely from another machine with network connectivity to your Docker Engine EC2 Instance. These instructions administer the Docker Engine directly from the Docker Engine EC2 Instance.&lt;/p&gt;
+
+&lt;p&gt;To connect to the command line of your Docker Engine EC2 Instance:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into the AWS Console.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to the EC2 Dashboard.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose the &amp;ldquo;Running Instances&amp;rdquo; option.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Right-click your Docker Engine EC2 Instance and choose &amp;ldquo;Connect&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy and paste the &amp;ldquo;Example:&amp;rdquo; command into a terminal window.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change the username from &amp;ldquo;root&amp;rdquo; to &amp;ldquo;ec2-user&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;After changing the username from &amp;ldquo;root&amp;rdquo; to &amp;ldquo;ec2-user&amp;rdquo;, the command should look like the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ ssh -i &amp;lt;key-pair&amp;gt; ec2-user@52.27.119.45&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;key-pair&gt; will reflect the name of the key pair you launched the instance with and the IP address will match the IP of your Docker Engine EC2 Instance.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;code&gt;Return&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Connecting to the Docker Engine EC2 Instance will gnerate and authentication warning. This is expected behavior and you can continue.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re connecting from a Windows machine, you&amp;rsquo;ll need to have an SSH client isntalled and in your PATH variable.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For more information about connecting to your Docker Engine EC2 Instance over SSH, right-click your EC2 Instance and choose &amp;ldquo;Connect&amp;rdquo;.&lt;/p&gt;
+
+&lt;h2 id=&#34;confirm-the-docker-engine-is-ready-to-use&#34;&gt;Confirm the Docker Engine is ready to use&lt;/h2&gt;
+
+&lt;p&gt;The Docker daemon is configured to automatically start with your Docker Engine EC2 Instance.&lt;/p&gt;
+
+&lt;p&gt;Run the &lt;a href=&#34;https://docs.docker.com/reference/commandline/version&#34;&gt;&lt;code&gt;docker version&lt;/code&gt;&lt;/a&gt; command from the command line of your Docker Engine EC2 Instance:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ sudo docker version
+    Client version: 1.6.2-cs5
+    Client API version: 1.18
+    Go version (client): go1.4.2
+    Git commit (client): 9c454bd
+    OS/Arch (client): linux/amd64
+    Server version: 1.6.2-cs5
+    Server API version: 1.18
+    Go version (server): go1.4.2
+    Git commit (server): 9c454bd
+    OS/Arch (server): linux/amd64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you get a &amp;ldquo;FATA[0000]&amp;rdquo; error for the server portion of the output, make sure you are using &lt;code&gt;sudo&lt;/code&gt; at the beginning of the command. If you are using &lt;code&gt;sudo&lt;/code&gt; and still get the error, check the status of the Docker service with the &lt;code&gt;sudo service docker status&lt;/code&gt; command, and try restarting the service with the &lt;code&gt;sudo service docker restart&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;h2 id=&#34;configuring-the-docker-engine-to-use-docker-trusted-registry&#34;&gt;Configuring the Docker Engine to use Docker Trusted Registry&lt;/h2&gt;
+
+&lt;p&gt;This section of the guide walks you through the steps to configure &lt;em&gt;Docker Engine for AWS&lt;/em&gt; to use &lt;em&gt;Docker Trusted Registry for AWS&lt;/em&gt; as its image registry.&lt;/p&gt;
+
+&lt;p&gt;This guide assumes you have a working version of &lt;em&gt;Docker Trusted Registry for AWS&lt;/em&gt; running in your AWS VPC at &amp;ldquo;ec2-52-24-229-123.us-west-2.compute.amazonaws.com&amp;rdquo;. You will need to substitute this value with the correct value for your environment for the remainder of this guide.&lt;/p&gt;
+
+&lt;p&gt;For information on installing Docker Trusted Registry for AWS, see our &lt;a href=&#34;https://www.docker.com/aws&#34;&gt;AWS Documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Docker Trusted Registry is only supported with the commercially supported Docker Engine. For more information see the &lt;a href=&#34;https://www.docker.com/compatibility-maintenance&#34;&gt;online compatibility matrix&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Save the Domain name of your Docker Trusted Registry for AWS service to an environment variable:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ export DOMAIN_NAME=ec2-52-24-229-123.us-west-2.compute.amazonaws.com&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Don&amp;rsquo;t forget to substitute the Domain name in the command above with the correct domain name in your environment.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Retrieve the certificate from your Docker Trusted Registry server and store it locally on the Docker Engine for AWS EC2 Instance:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo openssl s_client -connect $DOMAIN_NAME:443 -showcerts &amp;lt;/dev/null 2&amp;gt;/dev/null | openssl x509 -outform PEM | sudo tee /usr/local/share/ca-certificates/$DOMAIN_NAME.crt&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add the retrieved certificate as a trusted root:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo update-ca-certificates&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Restart the Docker service:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo service docker restart&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Your &lt;em&gt;Docker Engine for AWS&lt;/em&gt; EC2 Instance is now configured to be able to push and pull images to your instance of &lt;em&gt;Docker Trusted Registry for AWS&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;push-a-docker-image-to-your-docker-trusted-registry-for-aws&#34;&gt;Push a Docker image to your Docker Trusted Registry for AWS&lt;/h2&gt;
+
+&lt;p&gt;You push and pull images to Docker Trusted Registry using the normal &lt;a href=&#34;https://docs.docker.com/reference/commandline/push&#34;&gt;&lt;code&gt;docker push&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://docs.docker.com/reference/commandline/pull&#34;&gt;&lt;code&gt;docker pull&lt;/code&gt;&lt;/a&gt; commands.&lt;/p&gt;
+
+&lt;p&gt;The following steps walk you through the process of pulling an image from Docker Hub, pushing that same image to your Docker Trusted Registry, and then pulling it back from your Docker Trusted Registry.&lt;/p&gt;
+
+&lt;p&gt;This guide assumes your Docker Trusted Registry is reachable at &amp;ldquo;ec2-52-24-229-123.us-west-2.compute.amazonaws.com&amp;rdquo;. You will need to substitute this value with the DNS name of your own Docker Trusted Registry. All commands are ran from your &lt;em&gt;Docker Engine for AWS&lt;/em&gt; EC2 Instance.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Pull a Docker image from Docker Hub with the &lt;a href=&#34;https://docs.docker.com/reference/commandline/pull&#34;&gt;&lt;code&gt;docker pull&lt;/code&gt;&lt;/a&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker pull busybox
+latest: Pulling from busybox
+cf2616975b4a: Pull complete
+79722f6accc3: Pull complete
+0f864637f229: Pull complete
+busybox:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+Digest: sha256:c451012efb6e79b9cf93f48a326a195acfcdf01cadf4271d678d03e031c214d3
+Status: Downloaded newer image for busybox:latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify the image is stored locally with the &lt;a href=&#34;https://docs.docker.com/reference/commandline/images&#34;&gt;&lt;code&gt;docker images&lt;/code&gt;&lt;/a&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+busybox             latest              0f864637f229        2 days ago          2.433 MB
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Tag the image for storage in your Docker Trusted Registry using the &lt;a href=&#34;https://docs.docker.com/reference/commandline/tag&#34;&gt;&lt;code&gt;docker tag&lt;/code&gt;&lt;/a&gt; command:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo docker tag 0f864637f229 ec2-52-24-229-123.us-west-2.compute.amazonaws.com/devops/busybox:0.1&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This will tag the local busybox image (0f864637f229) so that it can be pushed to the &amp;ldquo;devops&amp;rdquo; repository in your Docker Trusted Registry at &amp;ldquo;ec2-52-24-229-123.us-west-2.compute.amazonaws.com&amp;rdquo;. Don&amp;rsquo;t forget to substitute the image ID (0f864637f229) and the domain anme of the Docker Trusted Registry with the appropriate values for your environment.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Log in to the Docker Trusted Registry with the &lt;a href=&#34;https://docs.docker.com/reference/commandline/login&#34;&gt;&lt;code&gt;docker login&lt;/code&gt;&lt;/a&gt; command:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo docker login ec2-52-24-229-123.us-west-2.compute.amazonaws.com&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;By default, Docker Trusted Registry requires you to login before you can push and pull images. It is recommended that you create user accounts with the appropriate permissions on the &amp;ldquo;Settings&amp;rdquo; &amp;gt; &amp;ldquo;Auth&amp;rdquo; tab in the Docker Trusted Registry Administration web interface.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Push the local tagged BusyBox image to your Docker Trusted Registry with the &lt;a href=&#34;https://docs.docker.com/reference/commandline/push&#34;&gt;&lt;code&gt;docker push&lt;/code&gt;&lt;/a&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker push ec2-52-24-229-123.us-west-2.compute.amazonaws.com/devops/busybox
+The push refers to a repository [ec2-52-24-229-123.us-west-2.compute.amazonaws.com/devops/busybox] (len: 1)
+0f864637f229: Image already exists
+79722f6accc3: Image successfully pushed
+cf2616975b4a: Image successfully pushed
+Digest: sha256:06a01d4fc44fd4d3fb9fbb808e337822b2af3a97ca1ffdde7c0548eae33d3fec
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Delete the local copies of the &amp;ldquo;busybox&amp;rdquo; image from the Docker Engine EC2 Instance using the &lt;a href=&#34;https://docs.docker.com/reference/commandline/rmi&#34;&gt;&lt;code&gt;docker rmi&lt;/code&gt;&lt;/a&gt; command:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo docker rmi -f 0f864637f229&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;You may need to run the command above command twice. The first time you run the command, it deletes the tagged image we created earlier with the &lt;code&gt;docker tag&lt;/code&gt; command. The second time you run the command it deletes the image pulled from Docker Hub.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify there are no local copies of the &amp;ldquo;busybox&amp;rdquo; image:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Pull a copy of the busybox image from your Docker Trusted Registry:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker pull ec2-52-24-229-123.us-west-2.compute.amazonaws.com/devops/busybox:0.1
+0.1: Pulling from ec2-52-24-229-123.us-west-2.compute.amazonaws.com/devops/busybox
+cf2616975b4a: Pull complete
+79722f6accc3: Pull complete
+0f864637f229: Already exists
+Digest: sha256:06a01d4fc44fd4d3fb9fbb808e337822b2af3a97ca1ffdde7c0548eae33d3fec
+Status: Downloaded newer image for ec2-52-24-229-123.us-west-2.compute.amazonaws.com/devops/busybox:0.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify that the image is now stored locally:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker images
+REPOSITORY                                                         TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+ec2-52-24-229-123.us-west-2.compute.amazonaws.com/devops/busybox   0.1                 0f864637f229        2 days ago          2.433 MB
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You have now successfully deployed the &lt;em&gt;Docker Engine for AWS (Business Day Support)&lt;/em&gt; AMI and configured it to work with &lt;em&gt;Docker Trusted Registry for AWS (Business Day Support)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For more information on using Docker Enginer in AWS, visit our &lt;a href=&#34;https://www.docker.com/aws&#34;&gt;AWS Documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;see-also&#34;&gt;See also&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To configure for your environment, see
+&lt;a href=&#34;../docker-trusted-registry/configuration/&#34;&gt;Configuration instructions&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To use Docker Trusted Registry, see &lt;a href=&#34;../kitematic/userguide/&#34;&gt;the User guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To make administrative changes, see &lt;a href=&#34;../docker-trusted-registry/adminguide/&#34;&gt;the Admin guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To see previous changes, see &lt;a href=&#34;../release-notes/&#34;&gt;the release notes&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install Docker Subscription for AWS (BYOL))</title>
+      <link>http://localhost/docker-trusted-registry/install/dtr-ami-byol-launch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/install/dtr-ami-byol-launch/</guid>
+      <description>
+
+&lt;h1 id=&#34;install-docker-subscription-for-aws-byol&#34;&gt;Install Docker Subscription for AWS (BYOL)&lt;/h1&gt;
+
+&lt;p&gt;This article walks you through the process of launching the &lt;em&gt;Docker Subscription
+for AWS (BYOL)&lt;/em&gt; AMI as an EC2 instance in the Amazon Web Services (AWS) cloud.
+The Trusted Registry installation includes a single instance of the commercially
+supported Docker Engine.&lt;/p&gt;
+
+&lt;p&gt;You can install additional instances of the commercially supported Docker Engine
+either on premise or through AWS. For more information, see the &lt;a href=&#34;../docker-trusted-registry/install/&#34;&gt;installation
+overview&lt;/a&gt; for Trusted Registry.&lt;/p&gt;
+
+&lt;p&gt;The remainder of this document refers to the running instance of this AMI as a “Trusted Registry”.&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;You need the following to complete this guide:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;An AWS account with permissions to launch EC2 Instances.&lt;/li&gt;
+&lt;li&gt;A valid Docker subscription license.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Contact your AWS administrator if your AWS account is provided by your company and you do not have permissions to launch EC2 Instances.&lt;/p&gt;
+
+&lt;p&gt;If you do not have a valid Docker Subscription license the following options are available:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use the &lt;em&gt;Docker Trusted Registry for AWS (Business Day Support)&lt;/em&gt; AMI and the &lt;em&gt;Docker Engine for AWS (Business Day Support)&lt;/em&gt; AMI, both of which include the cost of a Docker Subscription.&lt;/li&gt;
+&lt;li&gt;Register for a &lt;a href=&#34;https://hub.docker.com/enterprise/trial/&#34;&gt;Free 30 Day Trial&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.docker.com/contact&#34;&gt;Contact Docker&lt;/a&gt; to obtain a quote for a Docker Subscription.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;install-procedure&#34;&gt;Install procedure&lt;/h1&gt;
+
+&lt;p&gt;These instructions show you how to locate, install, and launch a Trusted Registry using the &lt;em&gt;Docker Subscription for AWS (BYOL)&lt;/em&gt; AMI from Amazon&amp;rsquo;s AWS Marketplace.&lt;/p&gt;
+
+&lt;p&gt;The AWS Marketplace allows you to do a &amp;ldquo;1-Click Launch&amp;rdquo; or &amp;ldquo;Manual Launch&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;Manual Launch&lt;/em&gt; allows you to launch using the AWS EC2 Console. It allows for fine control of EC2 instance settings such as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Instance type&lt;/li&gt;
+&lt;li&gt;VPC settings&lt;/li&gt;
+&lt;li&gt;Storage&lt;/li&gt;
+&lt;li&gt;Instance tags&lt;/li&gt;
+&lt;li&gt;Security Group settings&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;em&gt;1-Click Launch&lt;/em&gt; is quicker, provides default values for most settings, and dynamically updates the Cost Estimator. This install shows you how to do a &lt;em&gt;1-Click Launch&lt;/em&gt;. The entire process should take about 15 minutes to complete.&lt;/p&gt;
+
+&lt;h2 id=&#34;locate-the-docker-trusted-registry-ami&#34;&gt;Locate the Docker Trusted Registry AMI&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If you haven&amp;rsquo;t already done so, open your browser to the &lt;a href=&#34;https://aws.amazon.com/marketplace&#34;&gt;Amazon AWS Marketplace&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Search the Marketplace for &amp;ldquo;Docker Subscription for AWS (BYOL)&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the &amp;ldquo;Docker Subscription for AWS (BYOL)&amp;rdquo; AMI from the list of results.&lt;/p&gt;
+
+&lt;p&gt;The Marketplace entry provides details on the product.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &amp;ldquo;Continue&amp;rdquo; to move to the launch step.&lt;/p&gt;
+
+&lt;p&gt;If you are not logged into AWS, the system prompts you to.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter your AWS login credentials.&lt;/p&gt;
+
+&lt;p&gt;When your login succeeds, the browser displays the &amp;ldquo;Launch on EC2&amp;rdquo; page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure that the &amp;ldquo;1-Click Launch&amp;rdquo; tab is selected.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;deploy-the-1-click-launch&#34;&gt;Deploy the 1-Click Launch&lt;/h2&gt;
+
+&lt;p&gt;You can deploy a Trusted Registry instance to a private or public subnet. A private subnet provides added security but also prevents your Trusted Registry instance from being directly addressable on the internet. If you choose to deploy to a private subnet, you may need to access your Trusted Registry via a Bastion host or a management instance within your VPC.&lt;/p&gt;
+
+&lt;p&gt;These instructions launch a Trusted Registry on an EC2 instance in a public subnet with a public IP, so that gaining access to it in the &amp;ldquo;Connecting to the Docker Trusted Registry Administration web interface&amp;rdquo; section is simplified.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Deploying a Trusted Registry instance to an AWS Public Subnet will automatically assign it a Public IP and Public DNS. Do not forget that AWS Public IPs and Public DNS names change when an EC2 Instance is rebooted. If you want your Trusted Registry EC2 Instance to be directly accessible over the internet you should assign it an Elastic IP.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The following steps walk you through the 1-Click Launch settings:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Select the version you want to deploy from the list of available versions.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the Region you want to deploy to from the &amp;ldquo;Region&amp;rdquo; dropdown.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the EC2 Instance type&lt;/p&gt;
+
+&lt;p&gt;Be sure to check the &amp;ldquo;Pricing Details&amp;rdquo; and &amp;ldquo;Cost Estimator&amp;rdquo; boxes when changing EC2 Instance types.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the VPC and Subnet you want to deploy to from the &amp;ldquo;VPC&amp;rdquo; and &amp;ldquo;Subnet&amp;rdquo; dropdowns.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;From the Security Group box, select &amp;ldquo;Create new based on seller settings&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/install/images/aws-dtr-sg-rules.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This option has security implications. It allows incoming connections to the listed ports from any host or IP address. You should lock this down in line with your existing AWS security policies..&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select an existing or add a new key pair using the &amp;ldquo;Key Pair&amp;rdquo; box.&lt;/p&gt;
+
+&lt;p&gt;If you choose to use an existing key pair, be sure to choose one that you have access to, as this cannot be changed after the instance is launched.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review your choices and check the values in the Cost Estimator.&lt;/p&gt;
+
+&lt;p&gt;Changing your selected Region and VPC settings can cause your selected EC2 Instance type to reset to the default value of &amp;ldquo;m3.2xlarge&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you are happy with your configuration and estimated charges, click &amp;ldquo;Launch with 1-Click&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to the &lt;a href=&#34;https://console.aws.amazon.com/ec2/v2/home&#34;&gt;EC2 Dashboard&lt;/a&gt; to view your instance.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;connect-to-the-docker-trusted-registry-administration-web-interface&#34;&gt;Connect to the Docker Trusted Registry Administration web interface&lt;/h2&gt;
+
+&lt;p&gt;You administer your Trusted Registry server via the Administration web
+interface (hereafter referred to as &lt;em&gt;DTR Administration web interface&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;You can configure your own custom DNS names for your EC2 instance
+using CNAME records and so forth. Or, you can use the default DNS names provided by
+AWS. These instructions use the default DNS name provided by AWS.&lt;/p&gt;
+
+&lt;p&gt;The DTR Administration web interface is exposed on port 443 (HTTPS) of
+the EC2 instance. To connect to the DTR Administration web
+interface:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into the AWS Console.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to the EC2 Dashboard.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose the &amp;ldquo;Running Instances&amp;rdquo; option.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the Trusted Registry EC2 instance.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the &amp;ldquo;Description&amp;rdquo; tab.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Locate the Public DNS or Public IP of the EC2 instance.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy the Public DNS or Public IP into your browser&amp;rsquo;s address bar and press &lt;code&gt;return&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Connecting to the DTR Administration web
+interface may result in a certificate related browser warning. This is
+expected behavior and you can bypass the warning.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The interface prompts you for the username and password.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Enter &amp;ldquo;admin&amp;rdquo; for the username.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For the password, use the EC2 Instance ID.&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll find the Instance ID on the &amp;ldquo;Description&amp;rdquo; tab on the EC2 Dashboard as shown in the image below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/install/images/aws-instance-id.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;configure-the-docker-trusted-registry-service&#34;&gt;Configure the Docker Trusted Registry Service&lt;/h2&gt;
+
+&lt;p&gt;When you first login to the DTR Administration web interface you are prompted to complete two configuration items:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Configure the &amp;ldquo;Domain name&amp;rdquo; on the &amp;ldquo;General&amp;rdquo; tab of the &amp;ldquo;Settings&amp;rdquo; page.&lt;/p&gt;
+
+&lt;p&gt;This should be a fully qualified domain name that you have configured for your Trusted Registry service.&lt;/p&gt;
+
+&lt;p&gt;Enter your desired domain name and click the &amp;ldquo;Save and restart&amp;rdquo; button at the bottom of the page.&lt;/p&gt;
+
+&lt;p&gt;After the Trusted Registry server restarts, return to the DTR Administration web interface. The browser displays another certificate related browser warning. Changing the Domain Name property of your Trusted Registry server generates a new self-signed certificate. Again, this is expected behavior and you can bypass the warning.&lt;/p&gt;
+
+&lt;p&gt;Log back in to the DTR Administration web interface.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;License your copy of Docker Trusted Registry from the &amp;ldquo;License&amp;rdquo; tab of the &amp;ldquo;Settings&amp;rdquo; page.&lt;/p&gt;
+
+&lt;p&gt;Your Docker Trusted Registry license file is available from Docker Hub. To download it, login to Docker Hub and click your username in the top right corner. Choose &amp;ldquo;Settings&amp;rdquo; and select the &amp;ldquo;Licenses&amp;rdquo; tab. Click the download button beneath your license.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/install/images/dtr-license-download.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the Docker Trusted Registry Administration web interface, select &amp;ldquo;Settings&amp;rdquo; and then &amp;ldquo;License&amp;rdquo;. Under the &amp;ldquo;Apply a new license&amp;rdquo; heading select &amp;ldquo;Choose File&amp;rdquo;. Select your downloaded license file and click &amp;ldquo;Save and restart&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Restarting your Trusted Registry from the DTR Administration web interface, or as part of the above procedures, does not restart the EC2 instance. Therefore, the Public IP and Public DNS of the EC2 instance does not change.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Log into the DTR Administration web interface and change the default password for the &amp;ldquo;admin&amp;rdquo; account from the &amp;ldquo;Auth&amp;rdquo; tab on the &amp;ldquo;Settings&amp;rdquo; page.&lt;/p&gt;
+
+&lt;p&gt;Your Docker Trusted Registry server is now ready for use.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For more information on using DTR, go to the
+&lt;a href=&#34;https://docs.docker.com/docker-trusted-registry/userguide/&#34;&gt;User&amp;rsquo;s Guide&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install Trusted Registry for AWS AMI (BDS)</title>
+      <link>http://localhost/docker-trusted-registry/install/dtr-ami-bds-launch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/install/dtr-ami-bds-launch/</guid>
+      <description>
+
+&lt;h1 id=&#34;install-trusted-registry-for-aws-ami-bds&#34;&gt;Install Trusted Registry for AWS AMI (BDS)&lt;/h1&gt;
+
+&lt;p&gt;This article walks you through the process of launching the &lt;em&gt;Docker Trusted Registry for AWS (Business Day Support)&lt;/em&gt; AMI as an EC2 instance in the Amazon Web Services (AWS) cloud.&lt;/p&gt;
+
+&lt;p&gt;This AMI launches an instance of Docker Trusted Registry (Trusted Registry). The remainder of this document refers to the running instance of this AMI as a “Trusted Registry”. This AMI requires the use of Docker Engine for AWS (Business Day Support).&lt;/p&gt;
+
+&lt;p&gt;If you have not already done so, make sure you have read the &lt;a href=&#34;../docker-trusted-registry/install/&#34;&gt;installation overview&lt;/a&gt; for Trusted Registry.&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;You can locate, install, and launch the AMI from the Amazon AWS Marketplace or with the AWS EC2 Console by selecting the AMI from the &amp;ldquo;Launch Instance&amp;rdquo; dialog. Both the AWS Marketplace and the AWS EC2 Console require that you have an AWS account to launch the AMI.&lt;/p&gt;
+
+&lt;p&gt;If your account is supplied through your company, your company&amp;rsquo;s administrator must give you permissions to launch EC2 instances. If you receive a permissions error when following these instructions, contact your AWS administrator for help.&lt;/p&gt;
+
+&lt;p&gt;You will need to create a Key Pair, which is associated to your selected region. Refer to &lt;a href=&#34;http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html&#34;&gt;AWS Documentation&lt;/a&gt; to learn how to do this.&lt;/p&gt;
+
+&lt;h1 id=&#34;install-procedure&#34;&gt;Install procedure&lt;/h1&gt;
+
+&lt;p&gt;These instructions show you how to locate, install, and launch a Trusted Registry from Amazon&amp;rsquo;s AWS Marketplace. The AWS Marketplace allows you to do a &amp;ldquo;1-Click Launch&amp;rdquo; or &amp;ldquo;Manual Launch&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;The &lt;em&gt;Manual Launch&lt;/em&gt; allows you to launch using the AWS EC2 Console. It allows for fine control of EC2 instance settings such as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Instance type&lt;/li&gt;
+&lt;li&gt;VPC settings&lt;/li&gt;
+&lt;li&gt;Storage&lt;/li&gt;
+&lt;li&gt;Instance tags&lt;/li&gt;
+&lt;li&gt;Security Group settings&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;em&gt;1-Click Launch&lt;/em&gt; is quicker, provides default values for most settings, and dynamically updates the Cost Estimator. This install shows you how to do a &lt;em&gt;1-Click Launch&lt;/em&gt;. The entire process should take about 15 minutes to complete.&lt;/p&gt;
+
+&lt;h2 id=&#34;locate-the-docker-trusted-registry-ami&#34;&gt;Locate the Docker Trusted Registry AMI&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If you haven&amp;rsquo;t already done so, open your browser to the &lt;a href=&#34;https://aws.amazon.com/marketplace&#34;&gt;Amazon AWS Marketplace&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Search the Marketplace for &amp;ldquo;Docker Trusted Registry for AWS (Business Day Support)&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the &amp;ldquo;Docker Trusted Registry for AWS (Business Day Support)&amp;rdquo; AMI from the list of results.&lt;/p&gt;
+
+&lt;p&gt;The Marketplace entry provides details on the product.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &amp;ldquo;Continue&amp;rdquo; to move to the launch step.&lt;/p&gt;
+
+&lt;p&gt;If you are not logged into AWS, the system prompts you to.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter your AWS login credentials.&lt;/p&gt;
+
+&lt;p&gt;When your login succeeds, the browser displays the &amp;ldquo;Launch on EC2&amp;rdquo; page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ensure that the &amp;ldquo;1-Click Launch&amp;rdquo; tab is selected.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;deploy-the-1-click-launch&#34;&gt;Deploy the 1-Click Launch&lt;/h2&gt;
+
+&lt;p&gt;You can deploy a Trusted Registry to a private or public subnet. A private subnet provides added security but also prevents your Trusted Registry instance from being directly addressable on the internet. If you choose to deploy to a private subnet, you may need to access your Trusted Registry through a Bastion host or a management instance within your VPC.&lt;/p&gt;
+
+&lt;p&gt;These instructions launch an EC2 instance into a public subnet with a public IP so that gaining access to it in the &amp;ldquo;Connecting to the Docker Trusted Registry Administration web interface&amp;rdquo; section is simplified.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Deploying a Trusted Registry instance to an AWS Public Subnet will automatically assign it a Public IP and Public DNS. Remember that AWS Public IPs and Public DNS names change when an EC2 Instance is rebooted. If you want your Trusted Registry EC2 Instance to be directly accessible over the internet, you should assign it an Elastic IP.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The following steps walk you through the 1-Click Launch settings:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;From the &amp;ldquo;Software Pricing&amp;rdquo; box, select a &amp;ldquo;Subscription Term&amp;rdquo; and an &amp;ldquo;Applicable Instance Type.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;These two options contribute to the overall cost of running your choice of EC2 instance. The combination of these two fees make up the running costs of your EC2 instance, and are shown in the &amp;ldquo;Cost Estimator&amp;rdquo; box. Make sure you understand these costs before launching your instance.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the version you want to deploy from the list of available versions.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the Region you want to deploy to from the &amp;ldquo;Region&amp;rdquo; dropdown menu. Remember you must have the appropriate permissions for the selected region.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the VPC and Subnet you want to deploy to from the &amp;ldquo;VPC&amp;rdquo; and &amp;ldquo;Subnet&amp;rdquo; dropdown menus.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;From the Security Group box, select &amp;ldquo;Create new based on seller settings&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/install/images/aws-dtr-sg-rules.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This option has security implications. It allows incoming connections to the listed ports from any host or IP address. You should lock this down in line with your existing AWS security policies.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select an existing or add a new key pair using the &amp;ldquo;Key Pair&amp;rdquo; box.&lt;/p&gt;
+
+&lt;p&gt;If you choose to use an existing key pair, be sure to choose one that you have access to, as this cannot be changed after the instance is launched. If you do not have a key pair, then you need to create one which is associated to your region.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review your choices and check the values in the Cost Estimator.&lt;/p&gt;
+
+&lt;p&gt;Changing your selected Region and VPC settings can cause your selected EC2 instance type to reset to the default value of &amp;ldquo;m3.2xlarge&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you are satisfied with your configuration and estimated charges, click &amp;ldquo;Launch with 1-Click&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to the &lt;a href=&#34;https://console.aws.amazon.com/ec2/v2/home&#34;&gt;EC2 Dashboard&lt;/a&gt; to view your instance.&lt;/p&gt;
+
+&lt;p&gt;If your instance has no name, it may be hard to find depending on the instance list. Use the Key Name and/or Launch Time columns to help you find your instance. Once found, you can select your instance and name it.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;connect-to-the-docker-trusted-registry-administration-web-interface&#34;&gt;Connect to the Docker Trusted Registry Administration web interface&lt;/h2&gt;
+
+&lt;p&gt;You administer your Trusted Registry server via the Administration web
+interface. You can configure your own custom DNS names for your EC2 instance
+using CNAME records and so forth. Or, you can use the default DNS names provided by
+AWS. These instructions use the default DNS name provided by AWS.&lt;/p&gt;
+
+&lt;p&gt;The DTR Administration web interface is exposed on port 443 (HTTPS) of
+the EC2 instance. To connect to the DTR Administration web
+interface:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into the AWS Console.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to the EC2 Dashboard.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose the &amp;ldquo;Running Instances&amp;rdquo; option.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the Trusted Registry EC2 instance.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Select the &amp;ldquo;Description&amp;rdquo; tab.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Locate the Public DNS or Public IP of the EC2 instance.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy the Public DNS or Public IP into your browser&amp;rsquo;s address bar and press &lt;code&gt;return&lt;/code&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Connecting to the DTR Administration web
+interface may result in a certificate related browser warning. This is
+expected behavior and you can bypass the warning.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The interface prompts you for the username and password.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Enter &amp;ldquo;admin&amp;rdquo; for the username.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For the password, use the EC2 Instance ID.&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll find the Instance ID on the &amp;ldquo;Description&amp;rdquo; tab on the EC2 Dashboard as shown in the image below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/install/images/aws-instance-id.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;configure-the-docker-trusted-registry-service&#34;&gt;Configure the Docker Trusted Registry Service&lt;/h2&gt;
+
+&lt;p&gt;When you first login to the DTR Administration web interface you are prompted to configure the &amp;ldquo;Domain name&amp;rdquo; on the &amp;ldquo;General&amp;rdquo; tab of the &amp;ldquo;Settings&amp;rdquo; page. The Domain Name should be a fully qualified domain name that you have configured for your DTR service. Enter your desired domain name and click the &amp;ldquo;Save and restart&amp;rdquo; button at the bottom of the page.&lt;/p&gt;
+
+&lt;p&gt;After the DTR server restarts, return to the DTR Administration web interface. The browser displays another certificate related browser warning. Changing the Domain Name property of your DTR server generates a new self-signed certificate. Again, this is expected behavior and you can bypass the warning.&lt;/p&gt;
+
+&lt;p&gt;Log into the Trusted Registry and change the default password for the &amp;ldquo;admin&amp;rdquo; account from the &amp;ldquo;Auth&amp;rdquo; tab on the &amp;ldquo;Settings&amp;rdquo; page in the DTR Administration web interface.&lt;/p&gt;
+
+&lt;p&gt;Your Docker Trusted Registry server is now ready for use.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next steps&lt;/h2&gt;
+
+&lt;p&gt;For more information on using DTR, go to the
+&lt;a href=&#34;https://docs.docker.com/docker-trusted-registry/userguide/&#34;&gt;User&amp;rsquo;s Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;see-also&#34;&gt;See also&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To configure for your environment, see
+&lt;a href=&#34;../docker-trusted-registry/configuration/&#34;&gt;Configuration instructions&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To use Docker Trusted Registry, see &lt;a href=&#34;../kitematic/userguide/&#34;&gt;the User guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To make administrative changes, see &lt;a href=&#34;../docker-trusted-registry/adminguide/&#34;&gt;the Admin guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To see previous changes, see &lt;a href=&#34;../release-notes/&#34;&gt;the release notes&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Manually Install the CS Docker Engine</title>
+      <link>http://localhost/docker-trusted-registry/install/install-csengine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/install/install-csengine/</guid>
+      <description>
+
+&lt;h1 id=&#34;manually-install-the-cs-docker-engine&#34;&gt;Manually Install the CS Docker Engine&lt;/h1&gt;
+
+&lt;p&gt;This document describes the process of obtaining and installing the Commercially
+Supported Docker Engine (CS Engine). Installing CS Engine is a prerequisite for
+installing the Docker Trusted Registry. You can use these instructions if you are installing CS Engine on physical or cloud infrastructure.&lt;/p&gt;
+
+&lt;p&gt;If your cloud provider is AWS, you have the option of installing CS Engine using an Amazon Machine Image (AMI) instead. For more information, read the &lt;a href=&#34;../docker-trusted-registry/install/&#34;&gt;installation overview&lt;/a&gt; to understand your options.&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h2&gt;
+
+&lt;p&gt;Installing CS Engine requires that you have a login to Docker Hub. If you have
+not already done so, go to Docker Hub and &lt;a href=&#34;https://hub.docker.com&#34;&gt;sign up for an
+account&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Also, you must have a license for Docker Trusted Registry. This license allows
+you to run both Docker Trusted Registry and CS Engine. Before installing,
+&lt;a href=&#34;(https://hub.docker.com/enterprise/&#34;&gt;purchase a license or sign up for a free, 30 day trial license&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h2 id=&#34;install-on-centos-7-1-rhel-7-0-7-1&#34;&gt;Install on CentOS 7.1 &amp;amp; RHEL 7.0/7.1&lt;/h2&gt;
+
+&lt;p&gt;This section explains how to install on CentOS 7.1 &amp;amp; RHEL 7.0/7.1. Only these versions are supported. CentOS 7.0 is not supported. On RHEL, depending on your current level of updates, you may need to reboot your server to update its RHEL kernel.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into the system as a user with root or sudo permissions.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Update your &lt;code&gt;yum&lt;/code&gt; repositories.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum update &amp;amp;&amp;amp; sudo yum upgrade
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In a browser, log in to the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; with the account you used to obtain your license.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Once you&amp;rsquo;re logged in, go to your account&amp;rsquo;s &lt;a href=&#34;https://hub.docker.com/account/licenses/&#34;&gt;Licenses&lt;/a&gt; page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In the &amp;ldquo;Download and Install CS Engine&amp;rdquo; locate the script appropriate to your system.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy the script, paste it into your terminal, and press Return.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -s
+https://packagecloud.io/install/repositories/Docker/cs-public/script.rpm.sh |
+sudo bash sudo yum install docker-engine-cs
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;After the command completes, install the CS Engine with the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo yum install docker-engine-cs
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enable the Docker daemon as a service and then start it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl enable docker.service
+$ sudo systemctl start docker.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify the installation was successful by running a simple container.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo docker run hello-world
+Unable to find image &#39;hello-world:latest&#39; locally
+latest: Pulling from hello-world
+b901d36b6f2fd75: Pull complete
+0a6ba66e537a53a: Pull complete
+hello-world:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+Digest: sha256:517f03be3f8169d84711c9ffb2b3235a4d27c1eb4ad147f6248c8040adb93113
+Status: Downloaded newer image for hello-world:latest
+
+
+Hello from Docker.
+This message shows that your installation appears to be working correctly.
+
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the &amp;quot;hello-world&amp;quot; image from the Docker Hub.
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+
+Share images, automate workflows, and more with a free Docker Hub account:
+ https://hub.docker.com
+
+
+For more examples and ideas, visit:
+ https://docs.docker.com/userguide/
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Optionally, add non-sudo access to the Docker socket by adding your user to the &lt;code&gt;docker&lt;/code&gt; group.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo usermod -a -G docker $USER
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Log out and log back in to have your new permissions take effect.&lt;/p&gt;
+
+&lt;h2 id=&#34;install-on-ubuntu-14-04-lts&#34;&gt;Install on Ubuntu 14.04 LTS&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log into the system as a user with root or sudo permissions.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Update your &lt;code&gt;yum&lt;/code&gt; repositories.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get update &amp;amp;&amp;amp; sudo apt-get upgrade
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install additional virtual drivers not in the base image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get install -y linux-image-extra-virtual
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You may need to reboot your server to after updating the LTS kernel.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In a browser, log in to the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; with the account you used to obtain your license.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Once you&amp;rsquo;re logged in, go to your account&amp;rsquo;s &lt;a href=&#34;https://hub.docker.com/account/licenses/&#34;&gt;Licenses&lt;/a&gt; page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In the &amp;ldquo;Download and Install CS Engine&amp;rdquo; locate the script appropriate to your system.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy the script, paste it into your terminal, and press Return.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -s
+https://packagecloud.io/install/repositories/Docker/cs-public/script.deb.sh | sudo bash sudo apt-get install docker-engine-cs
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the following to install commercially supported Docker Engine and its dependencies:
+​
+    $ sudo apt-get install docker-engine-cs&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Confirm the Docker daemon is running with &lt;code&gt;sudo service docker start&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo service docker start
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Optionally, add non-sudo access to the Docker socket by adding your user to the &lt;code&gt;docker&lt;/code&gt; group.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo usermod -a -G docker $USER
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Log out and log back in to have your new permissions take effect.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;next-step&#34;&gt;Next step&lt;/h2&gt;
+
+&lt;p&gt;You are ready to install &lt;a href=&#34;install-dtry.md&#34;&gt;Docker Trusted Registry&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Manually install Trusted Registry</title>
+      <link>http://localhost/docker-trusted-registry/install/install-dtr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/install/install-dtr/</guid>
+      <description>
+
+&lt;h1 id=&#34;manually-install-trusted-registry&#34;&gt;Manually install Trusted Registry&lt;/h1&gt;
+
+&lt;p&gt;This document describes the process of obtaining, installing, and securing
+Docker Trusted Registry. You can use these instructions if you are installing Trusted Registry on a physical or cloud infrastructure.&lt;/p&gt;
+
+&lt;p&gt;If your cloud provider is AWS, you have the option of installing Trusted Registry using an Amazon Machine Image (AMI) instead. For more information, read the &lt;a href=&#34;../docker-trusted-registry/install/&#34;&gt;installation overview&lt;/a&gt; to understand your options.&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;Docker Trusted Registry runs on the following 64-bit platforms:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ubuntu 14.04 LTS&lt;/li&gt;
+&lt;li&gt;RHEL 7.0 and 7.1&lt;/li&gt;
+&lt;li&gt;CentOS 7.1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Docker Trusted Registry requires the latest commercially supported Docker Engine (CS Engine), running on a supported host.&lt;/p&gt;
+
+&lt;p&gt;The Docker daemon listens to the Unix socket (the default) so that it can be
+bind-mounted into the Trusted Registry management containers. This allows
+Trusted Registry to manage itself and its updates. For this reason, the host you
+install on needs internet connectivity so it can access the updates.
+Additionally, your host needs to have TCP ports &lt;code&gt;80&lt;/code&gt; and &lt;code&gt;443&lt;/code&gt; available for the
+Docker Trusted Registry container port mapping.&lt;/p&gt;
+
+&lt;p&gt;Installing Trusted Registry requires that you have a login to Docker Hub (or the
+user-name of an administrator of the Hub organization that obtained an
+Enterprise license. If you already installed CS Engine, you should already have a &lt;a href=&#34;https://hub.docker.com&#34;&gt;Hub account&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Also, you must have a license for Docker Trusted Registry. This license allows
+you to run both Docker Trusted Registry and CS Engine. Before installing,
+&lt;a href=&#34;(https://hub.docker.com/enterprise/&#34;&gt;purchase a license or sign up for a free, 30 day trial license&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h2 id=&#34;install-docker-trusted-registry&#34;&gt;Install Docker Trusted Registry&lt;/h2&gt;
+
+&lt;p&gt;Trusted Registry is a self-installing application built and distributed using
+Docker and the &lt;a href=&#34;https://hub.docker.com/&#34;&gt;Docker Hub&lt;/a&gt;. You install Docker Trusted
+Registry by running the &amp;ldquo;docker/trusted-registry&amp;rdquo; container. Once installed, it
+is able to restart and reconfigure itself using the Docker socket that is
+bind-mounted to this container.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Log in to the machine where you want to install Trusted Registry.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify that CS Engine is installed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; To remain compliant with your Docker Trusted Registry support agreement, you &lt;strong&gt;must&lt;/strong&gt; use the current version of commercially supported Docker Engine. Running the open source version of Engine is &lt;strong&gt;not&lt;/strong&gt; supported.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Login into the Docker Hub from the command line.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker login
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install the Trusted Registry&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   $ sudo bash -c &amp;quot;$(sudo docker run docker/trusted-registry install)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: &lt;code&gt;sudo&lt;/code&gt; is needed for &lt;code&gt;docker/trusted-registry&lt;/code&gt; commands to
+ensure that the Bash script is run with full access to the Docker host.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The command executes a shell script that creates the needed directories,
+pulls the registry&amp;rsquo;s images, and run its containers. Depending on your
+internet connection, this process may take several minutes to complete. A successful outcome completes as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $ sudo bash -c &amp;quot;$(sudo docker run docker/trusted-registry install)&amp;quot;
+  Unable to find image &#39;docker/trusted-registry:latest&#39; locally
+  Pulling repository docker/trusted-registry
+  c46d58daad7d: Pulling image (latest) from docker/trusted-registry
+  c46d58daad7d: Pulling image (latest) from docker/trusted-registry
+  c46d58daad7d: Pulling dependent layers
+  511136ea3c5a: Download complete
+  fa4fd76b09ce: Pulling metadata
+  fa4fd76b09ce: Pulling fs layer
+  ff2996b1faed: Download complete
+  ...
+  fd7612809d57: Pulling metadata
+  fd7612809d57: Pulling fs layer
+  fd7612809d57: Download complete
+  Status: Downloaded newer image for docker/trusted-registry:latest
+  Unable to find image &#39;docker/trusted-registry:1.1.0&#39; locally
+  Pulling repository docker/trusted-registry
+  c46d58daad7d: Download complete
+  511136ea3c5a: Download complete
+  ...
+  Status: Image is up to date for docker/trusted-registry:1.1.0
+  INFO  [1.0.0_8ce62a61e058] Attempting to connect to docker engine dockerHost=&amp;quot;unix:///var/run/docker.sock&amp;quot;
+  INFO  [1.0.0_8ce62a61e058] Running install command
+  &amp;lt;...output truncated...&amp;gt;
+  Creating container docker_trusted_registry_load_balancer with docker daemon unix:///var/run/docker.sock
+  Starting container docker_trusted_registry_load_balancer with docker daemon unix:///var/run/docker.sock
+  Bringing up docker_trusted_registry_log_aggregator.
+  Creating container docker_trusted_registry_log_aggregator with docker daemon unix:///var/run/docker.sock
+  Starting container docker_trusted_registry_log_aggregator with docker daemon unix:///var/run/docker.sock
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use &lt;code&gt;docker ps&lt;/code&gt; to list all the running containers.&lt;/p&gt;
+
+&lt;p&gt;The listing should show the following were started:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;docker_trusted_registry_load_balancer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker_trusted_registry_image_storage_0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker_trusted_registry_image_storage_1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker_trusted_registry_admin_server&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker_trusted_registry_log_aggregator&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker_trusted_registry_auth_server&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker_trusted_registry_postgres&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter the &lt;code&gt;https://&amp;lt;host-ip&amp;gt;/&lt;/code&gt;` your browser;s address bar to run the Trusted Registry interface.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Your browser warns you that this is an unsafe site, with a self-signed,
+  untrusted certificate. This is normal and expected; allow this connection
+  temporarily.&lt;/p&gt;
+
+&lt;h2 id=&#34;set-the-trusted-registry-domain-name&#34;&gt;Set the Trusted Registry domain name&lt;/h2&gt;
+
+&lt;p&gt;The Docker Trusted Registry Administrator site will also warn that the &amp;ldquo;Domain Name&amp;rdquo; is not set.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Select &amp;ldquo;Settings&amp;rdquo; from the global nav bar at the top of the page, and then set the &amp;ldquo;Domain Name&amp;rdquo; to the full host-name of your Docker Trusted Registry server.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the &amp;ldquo;Save and Restart Docker Trusted Registry Server&amp;rdquo; button to generate a new certificate, which will be used
+by both the Docker Trusted Registry Administrator web interface and the Docker Trusted Registry server.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;After the server restarts, you will again need to allow the connection to the untrusted Docker Trusted Registry web admin site.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You see a warning notification that this instance of Docker Trusted Registry is unlicensed. You&amp;rsquo;ll correct this in the next section.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;apply-your-license&#34;&gt;Apply your license&lt;/h2&gt;
+
+&lt;p&gt;The Docker Trusted Registry services will not start until you apply your license.
+To do that, you&amp;rsquo;ll first download your license from the Docker Hub and then
+upload it to your Docker Trusted Registry web admin server. Follow these steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If needed, log back into the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt;
+using the user-name you used when obtaining your license. Under your name, go to Settings to display the Account Settings page. Click the Licenses submenu to display the Licenses page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;There is a list of available licenses. Click the download button to
+obtain the license file you want.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to your Docker Trusted Registry instance in your browser, click Settings in the global nav bar. Click License in the Settings nav bar. Click the Choose File button. It opens a standard file browser. Locate and select the license file you downloaded in the previous step. Approve the selection to close the dialog.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the Save and restart button. Docker Trusted Registry quits and then restarts with the applied the license.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify the acceptance of the license by confirming that the &amp;ldquo;Unlicensed copy&amp;rdquo;
+warning is no longer present.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;secure-the-trusted-registry&#34;&gt;Secure the Trusted Registry&lt;/h2&gt;
+
+&lt;p&gt;Securing Docker Trusted Registry is &lt;strong&gt;required&lt;/strong&gt;. You will not be able to push
+or pull from Docker Trusted Registry until you secure it.&lt;/p&gt;
+
+&lt;p&gt;There are several options and methods for securing Docker Trusted Registry. For
+more information, see the &lt;a href=&#34;../docker-trusted-registry/configuration/#security&#34;&gt;configuration documentation&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;push-and-pull-images&#34;&gt;Push and pull images&lt;/h2&gt;
+
+&lt;p&gt;Now that you have Docker Trusted Registry configured with a &amp;ldquo;Domain Name&amp;rdquo; and
+have your client Docker daemons configured with the required security settings,
+you can test your setup by following the instructions for &lt;a href=&#34;../kitematic/userguide/&#34;&gt;Using Docker Trusted
+Registry to Push and pull images&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-trusted-registry-web-interface-and-registry-authentication&#34;&gt;Docker Trusted Registry web interface and registry authentication&lt;/h2&gt;
+
+&lt;p&gt;By default, there is no authentication set on either the Docker Trusted Registry
+web admin interface or the Docker Trusted Registry. You can restrict access
+using an in-Docker Trusted Registry configured set of users (and passwords), or
+you can configure Docker Trusted Registry to use LDAP- based authentication.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&#34;../docker-trusted-registry/configuration/#authentication&#34;&gt;Docker Trusted Registry Authentication settings&lt;/a&gt; for more details.&lt;/p&gt;
+
+&lt;h2 id=&#34;see-also&#34;&gt;See also&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;To configure for your environment, see the
+&lt;a href=&#34;../docker-trusted-registry/configuration/&#34;&gt;configuration instructions&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To use Docker Trusted Registry, see &lt;a href=&#34;../kitematic/userguide/&#34;&gt;the User guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To make administrative changes, see &lt;a href=&#34;../docker-trusted-registry/adminguide/&#34;&gt;the Admin guide&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;To see previous changes, see &lt;a href=&#34;../release-notes/&#34;&gt;the release notes&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Overview</title>
+      <link>http://localhost/docker-trusted-registry/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/</guid>
+      <description>
+
+&lt;h1 id=&#34;welcome-to-docker-trusted-registry&#34;&gt;Welcome to Docker Trusted Registry&lt;/h1&gt;
+
+&lt;p&gt;Docker Trusted Registry  lets you run and manage your own Docker image
+storage service, securely on your own infrastructure behind your company
+firewall. This allows you to securely store, push, and pull the images used by
+your enterprise to build, ship, and run applications. Docker Trusted Registry also provides
+monitoring and usage information to help you understand the workloads being
+placed on it.&lt;/p&gt;
+
+&lt;p&gt;Specifically, Docker Trusted Registry provides:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;An image registry to store, manage, and collaborate on Docker images&lt;/li&gt;
+&lt;li&gt;Pluggable storage drivers&lt;/li&gt;
+&lt;li&gt;Configuration options to let you run Docker Trusted Registry in your particular enterprise
+environment.&lt;/li&gt;
+&lt;li&gt;Easy, transparent upgrades&lt;/li&gt;
+&lt;li&gt;Logging, usage and system health metrics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Docker Trusted Registry is perfect for:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Providing a secure, on-premise development environment&lt;/li&gt;
+&lt;li&gt;Creating a streamlined build pipeline&lt;/li&gt;
+&lt;li&gt;Building a consistent, high-performance test/QA environment&lt;/li&gt;
+&lt;li&gt;Managing image deployment&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Docker Trusted Registry is built on &lt;a href=&#34;https://github.com/docker/distribution&#34;&gt;version 2 of the Docker registry&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To get your copy of Docker Trusted Registry, including a free trial, visit &lt;a href=&#34;https://hub.docker.com/enterprise/&#34;&gt;the Docker Subscription page&lt;/a&gt;. For more information on acquiring Docker Trusted Registry, see the &lt;a href=&#34;../docker-trusted-registry/install/&#34;&gt;install page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Important&lt;/strong&gt;: Docker Trusted Registry must be used with the current version of the commercially
+  supported Docker Engine. You must install this version of Docker before
+  installing Docker Trusted Registry. For instructions on accessing and installing commercially
+  supported Docker Engine, visit the &lt;a href=&#34;../docker-trusted-registry/install/#download-the-commercially-supported-docker-engine-installation-script&#34;&gt;install page&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;available-documentation&#34;&gt;Available Documentation&lt;/h2&gt;
+
+&lt;p&gt;The following documentation for Docker Trusted Registry is available:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Overview&lt;/strong&gt; This page.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/quick-start/&#34;&gt;&lt;strong&gt;Quick Start: Basic User Workflow&lt;/strong&gt;&lt;/a&gt; Go here to learn the
+fundamentals of how Docker Trusted Registry works and how you can set up a simple, but useful
+workflow.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/userguide/&#34;&gt;&lt;strong&gt;User Guide&lt;/strong&gt;&lt;/a&gt; Go here to learn about using Docker Trusted Registry from day to
+day.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/adminguide/&#34;&gt;&lt;strong&gt;Administrator Guide&lt;/strong&gt;&lt;/a&gt; Go here if you are an administrator
+responsible for running and maintaining Docker Trusted Registry.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/install/&#34;&gt;&lt;strong&gt;Installation&lt;/strong&gt;&lt;/a&gt; Go here for the steps you&amp;rsquo;ll need to install
+Docker Trusted Registry and get it working.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/configuration/&#34;&gt;&lt;strong&gt;Configuration&lt;/strong&gt;&lt;/a&gt; Go here to find out details about
+setting up and configuring Docker Trusted Registry for your particular environment.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../docker-trusted-registry/install/&#34;&gt;&lt;strong&gt;Support&lt;/strong&gt;&lt;/a&gt; Go here for information on getting support for Docker Trusted Registry.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.docker.com/docker-trusted-registry&#34;&gt;&lt;strong&gt;The Docker Trusted Registry product page&lt;/strong&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.docker.com/products/use-cases&#34;&gt;&lt;strong&gt;Docker Trusted Registry Use Cases page&lt;/strong&gt;&lt;/a&gt; showing an example CI/CD pipeline.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.docker.com/products/resources&#34;&gt;&lt;strong&gt;Docker Trusted Registry and Docker tutorials and webinars&lt;/strong&gt;&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note: Docker Trusted Registry requires that you use the commercially supported Docker Engine.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Prior release notes archive</title>
+      <link>http://localhost/docker-trusted-registry/prior-release-notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/prior-release-notes/</guid>
+      <description>
+
+&lt;h1 id=&#34;release-notes&#34;&gt;Release Notes&lt;/h1&gt;
+
+&lt;h2 id=&#34;docker-trusted-registry&#34;&gt;Docker Trusted Registry&lt;/h2&gt;
+
+&lt;h3 id=&#34;docker-trusted-registry-1-1-0&#34;&gt;Docker Trusted Registry 1.1.0&lt;/h3&gt;
+
+&lt;p&gt;(23 June 2015)&lt;/p&gt;
+
+&lt;p&gt;This release of Docker Trusted Registry (formerly DHE) adds major integration with the AWS and Azure marketplaces, giving customers a smoother installation path. Docker Trusted Registry 1.1 also adds finer-grained permissions and improvements and additions to the UI and logging. Bugs in LDAP/AD integration have also been remediated, improving the stability and usability of Docker Trusted Registry. See below for specifics.&lt;/p&gt;
+
+&lt;h4 id=&#34;new-features&#34;&gt;New Features&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;New, more granular, &lt;a href=&#34;../docker-trusted-registry/configuration/#authentication&#34;&gt;roles for users&lt;/a&gt;. Docker Trusted Registry users can now be assigned different levels of access (admin, r/w, r/o) to the repositories. &lt;strong&gt;Important:&lt;/strong&gt; Existing Docker Trusted Registry users should make sure to see the note &lt;a href=&#34;#dhe-1-0-upgrade-warning&#34;&gt;below&lt;/a&gt; regarding migrating users before upgrading.&lt;/li&gt;
+&lt;li&gt;A new storage status indicator for storage space. The dashboard now shows used and available storage space for supported storage drivers.&lt;/li&gt;
+&lt;li&gt;A new &lt;a href=&#34;../docker-trusted-registry/adminguide/#client-docker-daemon-diagnostics&#34;&gt;diagnostics tool&lt;/a&gt; gathers and bundles Docker Trusted Registry logs, system information, container information, and other configuration settings for use by Docker support or as a backup.&lt;/li&gt;
+&lt;li&gt;Performance and reliability improvements to the S3 storage backend.&lt;/li&gt;
+&lt;li&gt;Docker Trusted Registry images are now available on the Amazon AWS and Microsoft Azure marketplaces.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;fixes&#34;&gt;Fixes&lt;/h4&gt;
+
+&lt;p&gt;The following notable issues have been remediated:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fixed an issue that caused Docker Trusted Registry logins to fail if some LDAP servers were unreachable.&lt;/li&gt;
+&lt;li&gt;Fixed a resource leak in Docker Trusted Registry storage.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;dhe-1-0-upgrade-warning&#34;&gt;DHE 1.0 Upgrade Warning&lt;/h4&gt;
+
+&lt;p&gt;Customers who are currently using DHE 1.0 &lt;strong&gt;must&lt;/strong&gt; follow the &lt;a href=&#34;https://forums.docker.com/t/upgrading-docker-hub-enterprise-to-docker-trusted-registry/1925&#34;&gt;upgrading instructions&lt;/a&gt; in our support Knowledge Base. These instructions will show you how to modify existing authentication data and storage volume settings to move to Docker Trusted Registry. Note that automatic upgrading has been disabled for DHE users because of these issues.&lt;/p&gt;
+
+&lt;h3 id=&#34;docker-trusted-registry-1-0-1&#34;&gt;Docker Trusted Registry 1.0.1&lt;/h3&gt;
+
+&lt;p&gt;(11 May 2015)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Addresses compatibility issue with 1.6.1 CS Docker Engine&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;docker-trusted-registry-1-0-0&#34;&gt;Docker Trusted Registry 1.0.0&lt;/h3&gt;
+
+&lt;p&gt;(23 Apr 2015)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;First release&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;commercially-supported-docker-engine&#34;&gt;Commercially Supported Docker Engine&lt;/h2&gt;
+
+&lt;h3 id=&#34;cs-docker-engine-1-6-2-cs5&#34;&gt;CS Docker Engine 1.6.2-cs5&lt;/h3&gt;
+
+&lt;p&gt;(21 May 2015)&lt;/p&gt;
+
+&lt;p&gt;For customers running Docker Engine on &lt;a href=&#34;https://www.docker.com/enterprise/support/&#34;&gt;supported versions of RedHat Enterprise
+Linux&lt;/a&gt; with &lt;a href=&#34;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/SELinux_Users_and_Administrators_Guide/sect-Security-Enhanced_Linux-Working_with_SELinux-Enabling_and_Disabling_SELinux.html&#34;&gt;SELinux
+enabled&lt;/a&gt;, the &lt;code&gt;docker build&lt;/code&gt; and &lt;code&gt;docker run&lt;/code&gt;
+commands will not have DNS host name resolution and bind-mounted volumes may
+not be accessible.
+As a result, customers with SELinux will be unable to use hostname-based network
+access in either &lt;code&gt;docker build&lt;/code&gt; or &lt;code&gt;docker run&lt;/code&gt;, nor will they be able to
+&lt;code&gt;docker run&lt;/code&gt; containers
+that use &lt;code&gt;--volume&lt;/code&gt; or &lt;code&gt;-v&lt;/code&gt; bind-mounts (with an incorrect SELinux label) in
+their environment. By installing Docker
+Engine 1.6.2-cs5, customers can use Docker as intended on RHEL with SELinux enabled.&lt;/p&gt;
+
+&lt;p&gt;For example, you see will failures like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@dtr ~]# docker -v
+Docker version 1.6.0-cs2, build b8dd430
+[root@dtr ~]# ping dtr.home.org.au
+PING dtr.home.org.au (10.10.10.104) 56(84) bytes of data.
+64 bytes from dtr.home.gateway (10.10.10.104): icmp_seq=1 ttl=64 time=0.663 ms
+^C
+--- dtr.home.org.au ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 0.078/0.370/0.663/0.293 ms
+[root@dtr ~]# docker run --rm -it debian ping dtr.home.org.au
+ping: unknown host
+[root@dtr ~]# docker run --rm -it debian cat /etc/resolv.conf
+cat: /etc/resolv.conf: Permission denied
+[root@dtr ~]# docker run --rm -it debian apt-get update
+Err http://httpredir.debian.org jessie InRelease
+
+Err http://security.debian.org jessie/updates InRelease
+
+Err http://httpredir.debian.org jessie-updates InRelease
+
+Err http://security.debian.org jessie/updates Release.gpg
+  Could not resolve &#39;security.debian.org&#39;
+Err http://httpredir.debian.org jessie Release.gpg
+  Could not resolve &#39;httpredir.debian.org&#39;
+Err http://httpredir.debian.org jessie-updates Release.gpg
+  Could not resolve &#39;httpredir.debian.org&#39;
+[output truncated]
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or when running a &lt;code&gt;docker build&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@dtr ~]# docker build .
+Sending build context to Docker daemon 11.26 kB
+Sending build context to Docker daemon
+Step 0 : FROM fedora
+ ---&amp;gt; e26efd418c48
+Step 1 : RUN yum install httpd
+ ---&amp;gt; Running in cf274900ea35
+
+One of the configured repositories failed (Fedora 21 - x86_64),
+and yum doesn&#39;t have enough cached data to continue. At this point the only
+safe thing yum can do is fail. There are a few ways to work &amp;quot;fix&amp;quot; this:
+
+[output truncated]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Affected Versions&lt;/strong&gt;: All previous versions of Docker Engine when SELinux
+is enabled.&lt;/p&gt;
+
+&lt;p&gt;Docker &lt;strong&gt;highly recommends&lt;/strong&gt; that all customers running previous versions of
+Docker Engine update to this release.&lt;/p&gt;
+
+&lt;h4 id=&#34;how-to-workaround-this-issue&#34;&gt;&lt;strong&gt;How to workaround this issue&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Customers who choose not to install this update have two options. The
+first option is to disable SELinux. This is &lt;em&gt;not recommended&lt;/em&gt; for production
+systems where SELinux is typically required.&lt;/p&gt;
+
+&lt;p&gt;The second option is to pass the following parameter in to &lt;code&gt;docker run&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     --security-opt=label:type:docker_t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This parameter cannot be passed to the &lt;code&gt;docker build&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;h4 id=&#34;upgrade-notes&#34;&gt;&lt;strong&gt;Upgrade notes&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;When upgrading, make sure you stop Docker Trusted Registry first, perform the Engine upgrade, and
+then restart Docker Trusted Registry.&lt;/p&gt;
+
+&lt;p&gt;If you are running with SELinux enabled, previous Docker Engine releases allowed
+you to bind-mount additional volumes or files inside the container as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ docker run -it -v /home/user/foo.txt:/foobar.txt:ro &amp;lt;imagename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the 1.6.2-cs5 release, you must ensure additional bind-mounts have the correct
+SELinux context. For example, if you want to mount &lt;code&gt;foobar.txt&lt;/code&gt; as read-only
+into the container, do the following to create and test your bind-mount:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Add the &lt;code&gt;z&lt;/code&gt; option to the bind mount when you specify &lt;code&gt;docker run&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -it -v /home/user/foo.txt:/foobar.txt:ro,z &amp;lt;imagename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Exec into your new container.&lt;/p&gt;
+
+&lt;p&gt;For example, if your container is &lt;code&gt;bashful_curie&lt;/code&gt;, open a shell on the
+container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker exec -it bashful_curie bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use &lt;code&gt;cat&lt;/code&gt; to check the permissions on the mounted file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cat /foobar.txt
+the contents of foobar appear
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you see the file&amp;rsquo;s contents, your mount succeeded. If you receive a
+&lt;code&gt;Permission denied&lt;/code&gt; message and/or the &lt;code&gt;/var/log/audit/audit.log&lt;/code&gt; file on
+your Docker host contains an AVC Denial message, the mount did not succeed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;type=AVC msg=audit(1432145409.197:7570): avc:  denied  { read } for  pid=21167 comm=&amp;quot;cat&amp;quot; name=&amp;quot;foobar.txt&amp;quot; dev=&amp;quot;xvda2&amp;quot; ino=17704136 scontext=system_u:system_r:svirt_lxc_net_t:s0:c909,c965 tcontext=unconfined_u:object_r:user_home_t:s0 tclass=file
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Recheck your command line to make sure you passed in the &lt;code&gt;z&lt;/code&gt; option.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;cs-docker-engine-1-6-2-cs4&#34;&gt;CS Docker Engine 1.6.2-cs4&lt;/h3&gt;
+
+&lt;p&gt;(13 May 2015)&lt;/p&gt;
+
+&lt;p&gt;Fix mount regression for &lt;code&gt;/sys&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;cs-docker-engine-1-6-1-cs3&#34;&gt;CS Docker Engine 1.6.1-cs3&lt;/h3&gt;
+
+&lt;p&gt;(11 May 2015)&lt;/p&gt;
+
+&lt;p&gt;Docker Engine version 1.6.1 has been released to address several vulnerabilities
+and is immediately available for all supported platforms. Users are advised to
+upgrade existing installations of the Docker Engine and use 1.6.1 for new installations.&lt;/p&gt;
+
+&lt;p&gt;It should be noted that each of the vulnerabilities allowing privilege escalation
+may only be exploited by a malicious Dockerfile or image.  Users are advised to
+run their own images and/or images built by trusted parties, such as those in
+the official images library.&lt;/p&gt;
+
+&lt;p&gt;Please send any questions to security@docker.com.&lt;/p&gt;
+
+&lt;h4 id=&#34;cve-2015-3629-https-cve-mitre-org-cgi-bin-cvename-cgi-name-cve-2015-3629-symlink-traversal-on-container-respawn-allows-local-privilege-escalation&#34;&gt;&lt;strong&gt;&lt;a href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3629&#34;&gt;CVE-2015-3629&lt;/a&gt; Symlink traversal on container respawn allows local privilege escalation&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Libcontainer version 1.6.0 introduced changes which facilitated a mount namespace
+breakout upon respawn of a container. This allowed malicious images to write
+files to the host system and escape containerization.&lt;/p&gt;
+
+&lt;p&gt;Libcontainer and Docker Engine 1.6.1 have been released to address this
+vulnerability. Users running untrusted images are encouraged to upgrade Docker Engine.&lt;/p&gt;
+
+&lt;p&gt;Discovered by Tõnis Tiigi.&lt;/p&gt;
+
+&lt;h4 id=&#34;cve-2015-3627-https-cve-mitre-org-cgi-bin-cvename-cgi-name-cve-2015-3627-insecure-opening-of-file-descriptor-1-leading-to-privilege-escalation&#34;&gt;&lt;strong&gt;&lt;a href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3627&#34;&gt;CVE-2015-3627&lt;/a&gt; Insecure opening of file-descriptor 1 leading to privilege escalation&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;The file-descriptor passed by libcontainer to the pid-1 process of a container
+has been found to be opened prior to performing the chroot, allowing insecure
+open and symlink traversal. This allows malicious container images to trigger
+a local privilege escalation.&lt;/p&gt;
+
+&lt;p&gt;Libcontainer and Docker Engine 1.6.1 have been released to address this
+vulnerability. Users running untrusted images are encouraged to upgrade
+Docker Engine.&lt;/p&gt;
+
+&lt;p&gt;Discovered by Tõnis Tiigi.&lt;/p&gt;
+
+&lt;h4 id=&#34;cve-2015-3630-https-cve-mitre-org-cgi-bin-cvename-cgi-name-cve-2015-3630-read-write-proc-paths-allow-host-modification-information-disclosure&#34;&gt;&lt;strong&gt;&lt;a href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3630&#34;&gt;CVE-2015-3630&lt;/a&gt; Read/write proc paths allow host modification &amp;amp; information disclosure&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Several paths underneath /proc were writable from containers, allowing global
+system manipulation and configuration. These paths included &lt;code&gt;/proc/asound&lt;/code&gt;,
+&lt;code&gt;/proc/timer_stats&lt;/code&gt;, &lt;code&gt;/proc/latency_stats&lt;/code&gt;, and &lt;code&gt;/proc/fs&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;By allowing writes to &lt;code&gt;/proc/fs&lt;/code&gt;, it has been noted that CIFS volumes could be
+forced into a protocol downgrade attack by a root user operating inside of a
+container. Machines having loaded the timer_stats module were vulnerable to
+having this mechanism enabled and consumed by a container.&lt;/p&gt;
+
+&lt;p&gt;We are releasing Docker Engine 1.6.1 to address this vulnerability. All
+versions up to 1.6.1 are believed vulnerable. Users running untrusted
+images are encouraged to upgrade.&lt;/p&gt;
+
+&lt;p&gt;Discovered by Eric Windisch of the Docker Security Team.&lt;/p&gt;
+
+&lt;h4 id=&#34;cve-2015-3631-https-cve-mitre-org-cgi-bin-cvename-cgi-name-cve-2015-3631-volume-mounts-allow-lsm-profile-escalation&#34;&gt;&lt;strong&gt;&lt;a href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3631&#34;&gt;CVE-2015-3631&lt;/a&gt; Volume mounts allow LSM profile escalation&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;By allowing volumes to override files of &lt;code&gt;/proc&lt;/code&gt; within a mount namespace, a user
+could specify arbitrary policies for Linux Security Modules, including setting
+an unconfined policy underneath AppArmor, or a &lt;code&gt;docker_t&lt;/code&gt; policy for processes
+managed by SELinux. In all versions of Docker up until 1.6.1, it is possible for
+malicious images to configure volume mounts such that files of proc may be overridden.&lt;/p&gt;
+
+&lt;p&gt;We are releasing Docker Engine 1.6.1 to address this vulnerability. All versions
+up to 1.6.1 are believed vulnerable. Users running untrusted images are encouraged
+to upgrade.&lt;/p&gt;
+
+&lt;p&gt;Discovered by Eric Windisch of the Docker Security Team.&lt;/p&gt;
+
+&lt;h4 id=&#34;apparmor-policy-improvements&#34;&gt;&lt;strong&gt;AppArmor policy improvements&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;The 1.6.1 release also marks preventative additions to the AppArmor policy.
+Recently, several CVEs against the kernel have been reported whereby mount
+namespaces could be circumvented through the use of the sys_mount syscall from
+inside of an unprivileged Docker container. In all reported cases, the
+AppArmor policy included in libcontainer and shipped with Docker has been
+sufficient to deflect these attacks. However, we have deemed it prudent to
+proactively tighten the policy further by outright denying the use of the
+&lt;code&gt;sys_mount&lt;/code&gt; syscall.&lt;/p&gt;
+
+&lt;p&gt;Because this addition is preventative, no CVE-ID is requested.&lt;/p&gt;
+
+&lt;h3 id=&#34;cs-docker-engine-1-6-0-cs2&#34;&gt;CS Docker Engine 1.6.0-cs2&lt;/h3&gt;
+
+&lt;p&gt;(23 Apr 2015)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;First release, please see the &lt;a href=&#34;http://docs.docker.com/v1.6/release-notes/&#34;&gt;Docker Engine 1.6.0 Release notes&lt;/a&gt;
+for more details.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Quick-start: Basic Workflow</title>
+      <link>http://localhost/docker-trusted-registry/quick-start/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/quick-start/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-trusted-registry-quick-start-guide-basic-user-workflow&#34;&gt;Docker Trusted Registry Quick Start guide: Basic User Workflow&lt;/h1&gt;
+
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;This Quick Start Guide gives you a hands-on look at the basics of using
+Docker Trusted Registry, Docker&amp;rsquo;s on-premise image storage application.
+This guide will walk you through using Docker Trusted Registry to complete a typical, and critical,
+part of building a development pipeline: setting up a Jenkins instance. Once you
+complete the task, you should have a good idea of how Docker Trusted Registry works and how it might
+be useful to you.&lt;/p&gt;
+
+&lt;p&gt;Specifically, this guide demonstrates the process of retrieving the
+&lt;a href=&#34;https://registry.hub.docker.com/_/jenkins/&#34;&gt;official Docker image for Jenkins&lt;/a&gt;,
+customizing it to suit your needs, and then hosting it on your private instance
+of Docker Trusted Registry located inside your enterprise’s firewalled environment. Your developers
+will then be able to retrieve the custom Jenkins image in order to use it to
+build CI/CD infrastructure for their projects, no matter the platform they&amp;rsquo;re
+working from, be it a laptop, a VM, or a cloud provider.&lt;/p&gt;
+
+&lt;p&gt;You will perform the following steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Pulling the official Jenkins image from the public Docker Hub&lt;/li&gt;
+&lt;li&gt;Customizing the Jenkins image to suit your needs&lt;/li&gt;
+&lt;li&gt;Pushing the customized image to Docker Trusted Registry&lt;/li&gt;
+&lt;li&gt;Pulling the customized image from Docker Trusted Registry&lt;/li&gt;
+&lt;li&gt;Launching a container from the custom image&lt;/li&gt;
+&lt;li&gt;Using the new Jenkins container&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You should be able to complete this guide in about thirty minutes.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This guide assumes you have installed a working instance of Docker Trusted Registry
+reachable at dtr.yourdomain.com. If you need help installing and configuring
+Docker Trusted Registry, please consult the
+&lt;a href=&#34;install.md&#34;&gt;installation instructions&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;pulling-the-official-jenkins-image&#34;&gt;Pulling the official Jenkins image&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This guide assumes you are familiar with basic Docker concepts such
+as images, containers, and registries. If you need to learn more about Docker
+fundamentals, please consult the
+&lt;a href=&#34;http://docs.docker.com/userguide/&#34;&gt;Docker user guide&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;First, you will retrieve a copy of the official Jenkins image from the Docker Hub. By default, if
+Docker can&amp;rsquo;t find an image locally, it will attempt to pull the image from the
+Docker Hub. From the CLI of a machine running the Docker Engine on your network, use
+the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/pull&#34;&gt;&lt;code&gt;docker pull&lt;/code&gt;&lt;/a&gt;
+command to pull the public Jenkins image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull jenkins
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This guide assumes you can run Docker commands from a machine where
+you are a member of the &lt;code&gt;docker&lt;/code&gt; group or have root privileges. Otherwise, you
+may need to add &lt;code&gt;sudo&lt;/code&gt; to the example commands below.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Docker will start the process of pulling the image from the Hub. Once it has completed, the Jenkins image should be visible in the output of a &lt;a href=&#34;https://docs.docker.com/reference/commandline/images&#34;&gt;&lt;code&gt;docker images&lt;/code&gt;&lt;/a&gt; command, which lists your available images:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY  TAG     IMAGE ID      CREATED      VIRTUAL SIZE
+jenkins     latest  1a7cc22b0ee9  2 weeks ago  888 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Because the &lt;code&gt;pull&lt;/code&gt; command did not specify any tags, it will pull
+the latest version of the public Jenkins image. If your enterprise environment
+requires you to use a specific version, add the tag for the version you need
+(e.g., &lt;code&gt;jenkins:1.609.2&lt;/code&gt;).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;customizing-the-jenkins-image&#34;&gt;Customizing the Jenkins image&lt;/h2&gt;
+
+&lt;p&gt;Now that you have a local copy of the Jenkins image, you&amp;rsquo;ll customize it so that
+the containers it builds will integrate with your infrastructure. To do this,
+you&amp;rsquo;ll create a custom Docker image that adds a Jenkins plugin that provides
+fine grained user management. You&amp;rsquo;ll also configure Jenkins to be more secure by
+disabling HTTP access and forcing it to use HTTPS.
+You&amp;rsquo;ll do this by using a &lt;code&gt;Dockerfile&lt;/code&gt; and the &lt;code&gt;docker build&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; These are obviously just a couple of examples of the many ways you
+can modify and configure Jenkins. Feel free to add or substitute whatever
+customization is necessary to run Jenkins in your environment.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;creating-a-build-context&#34;&gt;Creating a &lt;code&gt;build&lt;/code&gt; context&lt;/h3&gt;
+
+&lt;p&gt;In order to add the new plugin and configure HTTPS access to the custom Jenkins
+image, you need to:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Create a text file that defines the new plugin&lt;/li&gt;
+&lt;li&gt;Create copies of the private key and certificate&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;All of the above files need to be in the same directory as the Dockerfile you
+will create in the next step.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Create a build directory called &lt;code&gt;build&lt;/code&gt;, and change to that new directory:&lt;/p&gt;
+
+&lt;p&gt;$ mkdir build &amp;amp;&amp;amp; cd build&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In this directory, create a new file called &lt;code&gt;plugins&lt;/code&gt; and add the following
+line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;role-strategy:2.2.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(The plugin version used above was the latest version at the time of writing.)&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You will also need to make copies of the server&amp;rsquo;s private key and certificate. Give the copies the following names - &lt;code&gt;https.key&lt;/code&gt; and &lt;code&gt;https.pem&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Because creating new keys varies widely by platform and
+implementation, this guide won&amp;rsquo;t cover key generation. We assume you have
+access to existing keys. If you don&amp;rsquo;t have access, or can&amp;rsquo;t generate keys
+yourself, feel free to skip the steps involving them and HTTPS config. The
+guide will still walk you through building a custom Jenkins image and pushing
+and pulling that image using Docker Trusted Registry.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;creating-a-dockerfile&#34;&gt;Creating a Dockerfile&lt;/h3&gt;
+
+&lt;p&gt;In the same directory as the &lt;code&gt;plugins&lt;/code&gt; file and the private key and certificate,
+create a new &lt;a href=&#34;https://docs.docker.com/reference/builder/&#34;&gt;&lt;code&gt;Dockerfile&lt;/code&gt;&lt;/a&gt; with the
+following contents:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; FROM jenkins
+
+ #New plugins must be placed in the plugins file
+ COPY plugins /usr/share/jenkins/plugins
+
+ #The plugins.sh script will install new plugins
+ RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins
+
+ #Copy private key and cert to image
+ COPY https.pem /var/lib/jenkins/cert
+ COPY https.key /var/lib/jenkins/pk
+
+ #Configure HTTP off and HTTPS on, using port 1973
+ENV JENKINS_OPTS --httpPort=-1 --httpsPort=1973 --httpsCertificate=/var/lib/jenkins/cert --httpsPrivateKey=/var/lib/jenkins/pk
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first &lt;code&gt;COPY&lt;/code&gt; instruction in the above will copy the &lt;code&gt;plugins&lt;/code&gt; file created
+earlier into the &lt;code&gt;/usr/share/jenkins&lt;/code&gt; directory within the custom image you are
+defining with the &lt;code&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;RUN&lt;/code&gt; instruction will execute the &lt;code&gt;/usr/local/bin/plugins.sh&lt;/code&gt; script with
+the newly copied &lt;code&gt;plugins&lt;/code&gt; file, which will install the listed plugin.&lt;/p&gt;
+
+&lt;p&gt;The next two &lt;code&gt;COPY&lt;/code&gt; instructions copy the server&amp;rsquo;s private key and certificate
+into the required directories within the new image.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;ENV&lt;/code&gt; instruction creates an environment variable called &lt;code&gt;JENKINS_OPT&lt;/code&gt; in
+the image you are about to create. This environment variable will be present in
+any containers launched form the image and contains the required settings to
+tell Jenkins to disable HTTP and operate over HTTPS.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; You can specify any valid port number as part of the &lt;code&gt;JENKINS_OPT&lt;/code&gt;
+environment variable declared above. The value &lt;code&gt;1973&lt;/code&gt; used in the example is
+arbitrary.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The &lt;code&gt;Dockerfile&lt;/code&gt;, the &lt;code&gt;plugins&lt;/code&gt; file, as well as the private key and
+certificate, must all be in the same directory because the &lt;code&gt;docker build&lt;/code&gt;
+command uses the directory that contains the &lt;code&gt;Dockerfile&lt;/code&gt; as its &amp;ldquo;build
+context&amp;rdquo;. Only files contained within that &amp;ldquo;build context&amp;rdquo; will be included in
+the image being built.&lt;/p&gt;
+
+&lt;h3 id=&#34;building-your-custom-image&#34;&gt;Building your custom image&lt;/h3&gt;
+
+&lt;p&gt;Now that the &lt;code&gt;Dockerfile&lt;/code&gt;, the &lt;code&gt;plugins&lt;/code&gt; file, and the files required for HTTPS
+operation are created in your current working directory, you can build your
+custom image using the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/build&#34;&gt;&lt;code&gt;docker build&lt;/code&gt; command&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker build -t dtr.yourdomain.com/ci-infrastructure/jnkns-img .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Don&amp;rsquo;t miss the period (&lt;code&gt;.&lt;/code&gt;) at the end of the command above. This
+tells the &lt;code&gt;docker build&lt;/code&gt; command to use the current working directory as the
+&amp;ldquo;build context&amp;rdquo;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This command will build a new Docker image called &lt;code&gt;jnkns-img&lt;/code&gt; which is based on
+the public Jenkins image you pulled earlier, but contains all of your
+customization.&lt;/p&gt;
+
+&lt;p&gt;Please note the use of the &lt;code&gt;-t&lt;/code&gt; flag in the &lt;code&gt;docker build&lt;/code&gt; command above. The
+&lt;code&gt;-t&lt;/code&gt; flag lets you  tag an image so it can be pushed to a custom repository. In
+the example above, the new image is tagged so it can be pushed to the
+&lt;code&gt;ci-infrastructure&lt;/code&gt; repository within the &lt;code&gt;dtr.yourdomain.com&lt;/code&gt; registry (your
+local Docker Trusted Registry instance). This will be important when you need to &lt;code&gt;push&lt;/code&gt; the
+customized image to Docker Trusted Registry later.&lt;/p&gt;
+
+&lt;p&gt;A &lt;code&gt;docker images&lt;/code&gt; command will now show the custom image alongside the Jenkins
+image pulled earlier:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY   TAG    IMAGE ID    CREATED    VIRTUAL SIZE
+dtr.yourdomain.com/ci-infrastructure/jnkns-img    latest    fc0ab3008d40    2 minutes ago    888.1 MB
+jenkins    latest    1a7cc22b0ee9    2 weeks ago    888 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;pushing-to-docker-trusted-registry&#34;&gt;Pushing to Docker Trusted Registry&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If your Docker Trusted Registry instance has authentication enabled, you will need to
+use your command line to &lt;code&gt;docker login &amp;lt;dtr-hostname&amp;gt;&lt;/code&gt; (e.g., &lt;code&gt;docker login
+dtr.yourdomain.com&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Failures due to unauthenticated &lt;code&gt;docker push&lt;/code&gt; and &lt;code&gt;docker pull&lt;/code&gt; commands will
+look like :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull dtr.yourdomain.com/hello-world
+Pulling repository dtr.yourdomain.com/hello-world
+FATA[0001] Error: image hello-world:latest not found
+
+$ docker push dtr.yourdomain.com/hello-world
+The push refers to a repository [dtr.yourdomain.com/hello-world] (len: 1)
+e45a5af57b00: Image push failed
+FATA[0001] Error pushing to registry: token auth attempt for registry
+https://dtr.yourdomain.com/v2/:
+https://dtr.yourdomain.com/auth/v2/token/
+?scope=repository%3Ahello-world%3Apull%2Cpush&amp;amp;service=dtr.yourdomain.com
+request failed with status: 401 Unauthorized
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now that you’ve created the custom image, it can be pushed to Docker Trusted Registry using the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/push&#34;&gt;&lt;code&gt;docker push&lt;/code&gt; command&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker push dtr.yourdomain.com/ci-infrastructure/jnkns-img
+511136ea3c5a: Image successfully pushed
+848d84b4b2ab: Image successfully pushed
+71d9d77ae89e: Image already exists
+&amp;lt;truncated ouput...&amp;gt;
+492ed3875e3e: Image successfully pushed
+fc0ab3008d40: Image successfully pushed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can view the traffic throughput from the custom image being pushed, by selecting &lt;code&gt;Network&lt;/code&gt; from the &lt;code&gt;Load Balancer&lt;/code&gt; tile on the Docker Trusted Registry Dashboard:
+&lt;img src=&#34;http://i.imgur.com/8KlHj9u.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/assets/console-push.png&#34; alt=&#34;Docker Trusted Registry console push throughput&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once the image is successfully pushed, it can be downloaded, or pulled, by any
+Docker host that has access to Docker Trusted Registry.&lt;/p&gt;
+
+&lt;h2 id=&#34;pulling-from-docker-trusted-registry&#34;&gt;Pulling from Docker Trusted Registry&lt;/h2&gt;
+
+&lt;p&gt;To pull the &lt;code&gt;jnkns-img&lt;/code&gt; image from Docker Trusted Registry, run the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/pull&#34;&gt;&lt;code&gt;docker pull&lt;/code&gt;&lt;/a&gt;
+command from any Docker Host that has access to your Docker Trusted Registry instance:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker pull dtr.yourdomain.com/ci-infrastructure/jnkns-img
+latest: Pulling from dtr.yourdomain.com/ci-infrastructure/jnkns-img
+511136ea3c5a: Pull complete
+848d84b4b2ab: Pull complete
+71d9d77ae89e: Pull complete
+&amp;lt;truncated ouput...&amp;gt;
+492ed3875e3e: Pull complete
+fc0ab3008d40: Pull complete
+dtr.yourdomain.com/ci-infrastructure/jnkns-img:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+Status: Downloaded newer image for dtr.yourdomain.com/ci-infrastructure/jnkns-img:latest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can view the traffic throughput from the custom image being pulled on the Docker Trusted Registry Dashboard.&lt;/p&gt;
+
+&lt;p&gt;Now that the &lt;code&gt;jnkns-img&lt;/code&gt; image has been pulled locally from Docker Trusted Registry, you can view it
+in the output of the &lt;code&gt;docker images&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; $ docker images
+REPOSITORY     TAG    IMAGE ID    CREATED    VIRTUAL SIZE
+dtr.yourdomain.com/ci-infrastructure/jnkns-img    latest  fc0ab3008d40    2 minutes ago    888.1 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;launching-a-custom-jenkins-container&#34;&gt;Launching a custom Jenkins container&lt;/h2&gt;
+
+&lt;p&gt;Now that you’ve successfully pulled the customized Jenkins image from Docker Trusted Registry, you
+can create a container from it with the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/run&#34;&gt;&lt;code&gt;docker run&lt;/code&gt; command&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -p 1973:1973 --name jenkins01 dtr.yourdomain.com/ci-infrastructure/jnkns-img
+/usr/share/jenkins/ref/init.groovy.d/tcp-slave-angent-port.groovy
+ /usr/share/jenkins/ref/init.groovy.d/tcp-slave-angent-port.groovy -&amp;gt; init.groovy.d/tcp-slave-angent-port.groovy
+copy init.groovy.d/tcp-slave-angent-port.groovy to JENKINS_HOME
+/usr/share/jenkins/ref/plugins/role-strategy.hpi
+ /usr/share/jenkins/ref/plugins/role-strategy.hpi -&amp;gt; plugins/role-strategy.hpi
+copy plugins/role-strategy.hpi to JENKINS_HOME
+/usr/share/jenkins/ref/plugins/dockerhub.hpi
+ /usr/share/jenkins/ref/plugins/dockerhub.hpi -&amp;gt; plugins/dockerhub.hpi
+copy plugins/dockerhub.hpi to JENKINS_HOME
+&amp;lt;truncated output...&amp;gt;
+INFO: Jenkins is fully up and running
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The &lt;code&gt;docker run&lt;/code&gt; command above maps port 1973 in the container
+through to port 1973 on the host. This is the HTTPS port you specified in the
+Dockerfile earlier. If you specified a different HTTPS port in your
+Dockerfile, you will need to substitute this with the correct port numbers for
+your environment.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can view the newly launched a container, called &lt;code&gt;jenkins01&lt;/code&gt;, using the
+&lt;a href=&#34;https://docs.docker.com/reference/commandline/ps&#34;&gt;&lt;code&gt;docker ps&lt;/code&gt; command&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker ps
+CONTAINER ID     IMAGE     COMMAND     CREATED      STATUS  ...PORTS     NAMES
+2e5d2f068504    dtr.yourdomain.com/ci-infrastructure/jnkns-img:latest    &amp;quot;/usr/local/bin/jenk     About a minute ago     Up About a minute     50000/tcp, 0.0.0.0:1973-&amp;gt;1973/tcp     jenkins01
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;accessing-the-new-jenkins-container&#34;&gt;Accessing the new Jenkins container&lt;/h2&gt;
+
+&lt;p&gt;The previous &lt;code&gt;docker run&lt;/code&gt; command mapped port &lt;code&gt;1973&lt;/code&gt; on the container to port
+&lt;code&gt;1973&lt;/code&gt; on the Docker host, so the Jenkins Web UI can be accessed at
+&lt;code&gt;https://&amp;lt;docker-host&amp;gt;:1973&lt;/code&gt; (Don&amp;rsquo;t forget the &lt;code&gt;s&lt;/code&gt; at the end of &lt;code&gt;https&lt;/code&gt;.)&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you are using a self-signed certificate, you may get a security
+warning from your browser telling you that the certificate is self-signed and
+not trusted. You may wish to add the certificate to the trusted store in order
+to prevent further warnings in the future.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/assets/jenkins-ui.png&#34; alt=&#34;Jenkins landing page&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From within the Jenkins Web UI, navigate to &lt;code&gt;Manage Jenkins&lt;/code&gt; (on the left-hand
+pane) &amp;gt; &lt;code&gt;Manage Plugins&lt;/code&gt; &amp;gt; &lt;code&gt;Installed&lt;/code&gt;. The  &lt;code&gt;Role-based Authorization Strategy&lt;/code&gt;
+plugin should be present with the &lt;code&gt;Uninstall&lt;/code&gt; button available to the right.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../docker-trusted-registry/assets/jenkins-plugins.png&#34; alt=&#34;Jenkins plugin manager&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In another browser session, try to access Jenkins via the default HTTP port 8080
+ &lt;code&gt;http://&amp;lt;docker-host&amp;gt;:8080&lt;/code&gt;. This should result in a &amp;ldquo;connection timeout&amp;rdquo;,
+showing that Jenkins is not available on its default port 8080 over HTTP.&lt;/p&gt;
+
+&lt;p&gt;This demonstration shows your Jenkins image has been configured correctly for
+HTTPS access, your new plugin was added and is ready for use, and HTTP access
+has been disabled. At this point, any member of your team can use &lt;code&gt;docker pull&lt;/code&gt;
+to access the image from your Docker Trusted Registry instance, allowing them to access a
+configured, secured Jenkins instance that can run on any infrastructure.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;For more information on using Docker Trusted Registry, take a look at the
+&lt;a href=&#34;../docker-trusted-registry/userguide/&#34;&gt;User&amp;rsquo;s Guide&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Release notes</title>
+      <link>http://localhost/docker-trusted-registry/release-notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/release-notes/</guid>
+      <description>
+
+&lt;h1 id=&#34;release-notes-docker-trusted-registry-commercially-supported-docker-engine&#34;&gt;Release Notes: Docker Trusted Registry &amp;amp; Commercially Supported Docker Engine&lt;/h1&gt;
+
+&lt;h2 id=&#34;prior-versions&#34;&gt;Prior Versions&lt;/h2&gt;
+
+&lt;p&gt;These notes refer to the current and immediately prior releases of Docker Trusted Registry  and the commercially supported Docker Engine. For notes on older versions of these, see the &lt;a href=&#34;../docker-trusted-registry/prior-release-notes/&#34;&gt;prior release notes archive&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker-trusted-registry&#34;&gt;Docker Trusted Registry&lt;/h2&gt;
+
+&lt;h3 id=&#34;docker-trusted-registry-1-3-3&#34;&gt;Docker Trusted Registry 1.3.3&lt;/h3&gt;
+
+&lt;p&gt;(18 September 2015)&lt;/p&gt;
+
+&lt;p&gt;This release corrects the following issues in Docker Trusted Registry 1.3.2&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fixed an issue related to LDAP integration for users of Oracle Virtual Directory.&lt;/li&gt;
+&lt;li&gt;Corrected an issue where Docker Trusted Registry would not accept a given certificate if the configured domain was only in the Subject Alternative Names (SANs) field and not in the Common Name (CN) field of the certificate.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;docker-trusted-registry-1-3-2&#34;&gt;Docker Trusted Registry 1.3.2&lt;/h3&gt;
+
+&lt;p&gt;(16 September 2015)&lt;/p&gt;
+
+&lt;p&gt;This release addresses the following change in Docker Trusted Registry 1.3.2 and is only available to customers who purchased DTR through Amazon Web Services (AWS) Marketplace.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker Trusted Registry (DTR) now supports Amazon Web
+Services (AWS) Integrated Billing. Previously, AWS users were required to
+separately purchase a DTR license from Docker. AWS users can try DTR
+out-of-the-box.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;docker-trusted-registry-1-3-1&#34;&gt;Docker Trusted Registry 1.3.1&lt;/h3&gt;
+
+&lt;p&gt;(31 August 2015)&lt;/p&gt;
+
+&lt;p&gt;This release corrects the following issues in Docker Trusted Registry 1.3.0&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The dashboard page was calculating incorrect stats.&lt;/li&gt;
+&lt;li&gt;LDAP group sync failed to handle paginated results for extremely large groups.&lt;/li&gt;
+&lt;li&gt;The repo delete endpoint returned incorrect error codes under certain conditions.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;docker-trusted-registry-1-3-0&#34;&gt;Docker Trusted Registry 1.3.0&lt;/h3&gt;
+
+&lt;p&gt;(26 August 2015)&lt;/p&gt;
+
+&lt;p&gt;This release addresses a few bugs and issues in Docker Trusted Registry 1.2.0 and introduces some new features and functionality, including:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;A completely new user-interface for the Admin application brings Docker Trusted Registry in line with other Docker products and provides greater ease-of-use.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;A new Accounts &amp;amp; Repos API provides new fine-grained role-based access control down to the per-repo level. See the &lt;a href=&#34;../docker-trusted-registry/api/&#34;&gt;API&amp;rsquo;s documentation&lt;/a&gt; for more information.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Improvements to the handling of configuration changes so that fewer restarts are required.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Multiple security improvements and bug fixes.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;docker-trusted-registry-1-2-0&#34;&gt;Docker Trusted Registry 1.2.0&lt;/h3&gt;
+
+&lt;p&gt;(23 July 2015)&lt;/p&gt;
+
+&lt;p&gt;This release adds CentOS support and addresses a few bugs and issues in Docker Trusted Registry 1.1.0:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fixes an issue where for certain configurations of Docker Trusted Registry, proxy configuration settings and variables were not being passed to all Docker Trusted Registry containers and thus were not being respected.&lt;/li&gt;
+&lt;li&gt;Documentation links in the UI now point to correct docs.&lt;/li&gt;
+&lt;li&gt;Generated support info bundles have been scrubbed to remove highly sensitive data.&lt;/li&gt;
+&lt;li&gt;Certifies support for CentOS 7.1.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;commercially-supported-docker-engine&#34;&gt;Commercially Supported Docker Engine&lt;/h2&gt;
+
+&lt;h3 id=&#34;cs-docker-engine-1-6-2-cs7&#34;&gt;CS Docker Engine 1.6.2-cs7&lt;/h3&gt;
+
+&lt;p&gt;(12 October 2015)&lt;/p&gt;
+
+&lt;p&gt;As part of our ongoing security efforts, &lt;a href=&#34;http://blog.docker.com/2015/10/security-release-docker-1-8-3-1-6-2-cs7&#34; target=&#34;_blank&#34;&gt;a vulnerability was discovered&lt;/a&gt; that
+affects the way content is stored and retrieved within the Docker Engine and CS
+Docker Engine. Today we are releasing a security update that fixes this
+issue in both Docker Engine 1.8.3 and CS Docker Engine 1.6.2-cs7. The &lt;a
+href=&#34;https://github.com/docker/docker/blob/master/CHANGELOG.md#161-2015-10-12&#34;
+target=&#34;_blank&#34;&gt;change log for Docker Engine 1.8.3&lt;/a&gt; has a complete list of
+all the changes incorporated into both the open source and commercially
+supported releases.&lt;/p&gt;
+
+&lt;p&gt;We recommend that users upgrade to CS Docker Engine 1.6.2-cs7.
+If you are unable to upgrade to CS Docker Engine 1.6.2-cs7  right away, remember to only pull content from trusted sources.&lt;/p&gt;
+
+&lt;p&gt;To keep up to date on all the latest Docker Security news, make sure you check
+out our &lt;a href=&#34;http://www.docker.com/docker-security&#34;&gt;Security page&lt;/a&gt;, subscribe to our
+mailing list, or find us in #docker-security.&lt;/p&gt;
+
+&lt;h3 id=&#34;cs-docker-engine-1-6-2-cs6&#34;&gt;CS Docker Engine 1.6.2-cs6&lt;/h3&gt;
+
+&lt;p&gt;(23 July 2015)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Certifies support for CentOS 7.1.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;cs-docker-engine-1-6-2-cs5&#34;&gt;CS Docker Engine 1.6.2-cs5&lt;/h3&gt;
+
+&lt;p&gt;(21 May 2015)&lt;/p&gt;
+
+&lt;p&gt;For customers running Docker Engine on &lt;a href=&#34;https://www.docker.com/enterprise/support/&#34;&gt;supported versions of RedHat Enterprise
+Linux&lt;/a&gt; with &lt;a href=&#34;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/SELinux_Users_and_Administrators_Guide/sect-Security-Enhanced_Linux-Working_with_SELinux-Enabling_and_Disabling_SELinux.html&#34;&gt;SELinux
+enabled&lt;/a&gt;, the &lt;code&gt;docker build&lt;/code&gt; and &lt;code&gt;docker run&lt;/code&gt;
+commands will not have DNS host name resolution and bind-mounted volumes may
+not be accessible.
+As a result, customers with SELinux will be unable to use hostname-based network
+access in either &lt;code&gt;docker build&lt;/code&gt; or &lt;code&gt;docker run&lt;/code&gt;, nor will they be able to
+&lt;code&gt;docker run&lt;/code&gt; containers
+that use &lt;code&gt;--volume&lt;/code&gt; or &lt;code&gt;-v&lt;/code&gt; bind-mounts (with an incorrect SELinux label) in
+their environment. By installing Docker Engine 1.6.2-cs5, customers can use Docker as intended on RHEL with SELinux enabled.&lt;/p&gt;
+
+&lt;p&gt;For example, you see will failures like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@dtr ~]# docker -v
+Docker version 1.6.0-cs2, build b8dd430
+[root@dtr ~]# ping dtr.home.org.au
+PING dtr.home.org.au (10.10.10.104) 56(84) bytes of data.
+64 bytes from dtr.home.gateway (10.10.10.104): icmp_seq=1 ttl=64 time=0.663 ms
+^C
+--- dtr.home.org.au ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 0.078/0.370/0.663/0.293 ms
+[root@dtr ~]# docker run --rm -it debian ping dtr.home.org.au
+ping: unknown host
+[root@dtr ~]# docker run --rm -it debian cat /etc/resolv.conf
+cat: /etc/resolv.conf: Permission denied
+[root@dtr ~]# docker run --rm -it debian apt-get update
+Err http://httpredir.debian.org jessie InRelease
+
+Err http://security.debian.org jessie/updates InRelease
+
+Err http://httpredir.debian.org jessie-updates InRelease
+
+Err http://security.debian.org jessie/updates Release.gpg
+  Could not resolve &#39;security.debian.org&#39;
+Err http://httpredir.debian.org jessie Release.gpg
+  Could not resolve &#39;httpredir.debian.org&#39;
+Err http://httpredir.debian.org jessie-updates Release.gpg
+  Could not resolve &#39;httpredir.debian.org&#39;
+[output truncated]
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or when running a &lt;code&gt;docker build&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@dtr ~]# docker build .
+Sending build context to Docker daemon 11.26 kB
+Sending build context to Docker daemon
+Step 0 : FROM fedora
+ ---&amp;gt; e26efd418c48
+Step 1 : RUN yum install httpd
+ ---&amp;gt; Running in cf274900ea35
+
+One of the configured repositories failed (Fedora 21 - x86_64),
+and yum doesn&#39;t have enough cached data to continue. At this point the only
+safe thing yum can do is fail. There are a few ways to work &amp;quot;fix&amp;quot; this:
+
+[output truncated]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Affected Versions&lt;/strong&gt;: All previous versions of Docker Engine when SELinux
+is enabled.&lt;/p&gt;
+
+&lt;p&gt;Docker &lt;strong&gt;highly recommends&lt;/strong&gt; that all customers running previous versions of
+Docker Engine update to this release.&lt;/p&gt;
+
+&lt;h4 id=&#34;how-to-workaround-this-issue&#34;&gt;&lt;strong&gt;How to workaround this issue&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Customers who choose not to install this update have two options. The
+first option is to disable SELinux. This is &lt;em&gt;not recommended&lt;/em&gt; for production
+systems where SELinux is typically required.&lt;/p&gt;
+
+&lt;p&gt;The second option is to pass the following parameter in to &lt;code&gt;docker run&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;     --security-opt=label:type:docker_t
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This parameter cannot be passed to the &lt;code&gt;docker build&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;h4 id=&#34;upgrade-notes&#34;&gt;&lt;strong&gt;Upgrade notes&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;When upgrading, make sure you stop Docker Trusted Registry first, perform the Engine upgrade, and
+then restart Docker Trusted Registry.&lt;/p&gt;
+
+&lt;p&gt;If you are running with SELinux enabled, previous Docker Engine releases allowed
+you to bind-mount additional volumes or files inside the container as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    $ docker run -it -v /home/user/foo.txt:/foobar.txt:ro &amp;lt;imagename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the 1.6.2-cs5 release, you must ensure additional bind-mounts have the correct
+SELinux context. For example, if you want to mount &lt;code&gt;foobar.txt&lt;/code&gt; as read-only
+into the container, do the following to create and test your bind-mount:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Add the &lt;code&gt;z&lt;/code&gt; option to the bind mount when you specify &lt;code&gt;docker run&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run -it -v /home/user/foo.txt:/foobar.txt:ro,z &amp;lt;imagename&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Exec into your new container.&lt;/p&gt;
+
+&lt;p&gt;For example, if your container is &lt;code&gt;bashful_curie&lt;/code&gt;, open a shell on the
+container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker exec -it bashful_curie bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use &lt;code&gt;cat&lt;/code&gt; to check the permissions on the mounted file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cat /foobar.txt
+the contents of foobar appear
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you see the file&amp;rsquo;s contents, your mount succeeded. If you receive a
+&lt;code&gt;Permission denied&lt;/code&gt; message and/or the &lt;code&gt;/var/log/audit/audit.log&lt;/code&gt; file on
+your Docker host contains an AVC Denial message, the mount did not succeed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;type=AVC msg=audit(1432145409.197:7570): avc:  denied  { read } for  pid=21167 comm=&amp;quot;cat&amp;quot; name=&amp;quot;foobar.txt&amp;quot; dev=&amp;quot;xvda2&amp;quot; ino=17704136 scontext=system_u:system_r:svirt_lxc_net_t:s0:c909,c965 tcontext=unconfined_u:object_r:user_home_t:s0 tclass=file
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Recheck your command line to make sure you passed in the &lt;code&gt;z&lt;/code&gt; option.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Support</title>
+      <link>http://localhost/docker-trusted-registry/support/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/support/</guid>
+      <description>
+
+&lt;h1 id=&#34;commercial-support-options&#34;&gt;Commercial Support Options&lt;/h1&gt;
+
+&lt;h2 id=&#34;how-to-get-support&#34;&gt;How to get support&lt;/h2&gt;
+
+&lt;p&gt;Purchasing a Docker Trusted Registry License or Commercial Support subscription means your questions
+and issues about Docker Trusted Registry will receive prioritized support.
+You can file a ticket through &lt;a href=&#34;mailto:support@docker.com&#34;&gt;email&lt;/a&gt; from your
+company email address, or visit our &lt;a href=&#34;https://support.docker.com&#34;&gt;support site&lt;/a&gt;.
+In either case, you&amp;rsquo;ll need to verify your email address, and then you can
+communicate with the support team either by email or web interface.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The availability of support depends on your &lt;a href=&#34;https://www.docker.com/enterprise/support/&#34;&gt;support subscription&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Trusted Registry License</title>
+      <link>http://localhost/docker-trusted-registry/license/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/license/</guid>
+      <description>
+
+&lt;h1 id=&#34;licensing&#34;&gt;Licensing&lt;/h1&gt;
+
+&lt;p&gt;To run Docker Trusted Registry, you need a Docker license, obtained either by
+purchasing Docker Trusted Registry, acquiring a trial license, or through an AWS
+hourly subscription. If you a purchase a license or you have a trial license, it is associated with your free Docker Hub account or Docker Hub organization.&lt;/p&gt;
+
+&lt;h2 id=&#34;get-your-trusted-registry-license&#34;&gt;Get your Trusted Registry License&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Go to the &lt;a href=&#34;https://hub.docker.com/enterprise/&#34;&gt;Docker Subscription page&lt;/a&gt; and select an edition. After completing a brief registration process, follow the steps to acquire it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: You may need to disable any pop-up blocker installed on your browser in order to complete the download.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;After acquiring your license, view or download it by logging in to
+Docker Hub, going to your account settings (gear icon at upper right), and
+selecting &lt;a href=&#34;https://hub.docker.com/account/licenses/&#34;&gt;&amp;ldquo;Licenses&amp;rdquo;&lt;/a&gt; from the
+top nav bar. Download the license by clicking the cloud icon.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The Licenses page displays your currently available licenses and if you selected the trial license, it also keeps track of how many trial days are remaining.&lt;/p&gt;
+
+&lt;p&gt;When installing Docker Trusted Registry, you must first obtain your license, then apply it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; The Licenses page is where you download the CS engine script by selecting the operating system it needs to run on.&lt;/p&gt;
+
+&lt;h2 id=&#34;see-also&#34;&gt;See also&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;For information on how to download the CS engine, see &lt;a href=&#34;install-csengine.md&#34;&gt;Installing the CS engine&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Trusted Registry installation overview</title>
+      <link>http://localhost/docker-trusted-registry/install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-trusted-registry/install/</guid>
+      <description>
+
+&lt;h1 id=&#34;trusted-registry-installation-overview&#34;&gt;Trusted Registry Installation Overview&lt;/h1&gt;
+
+&lt;p&gt;Docker Trusted Registry is an enterprise-grade on-premise registry bundled with commercially supported Docker Engines (CS Engine). Use Docker Trusted Registry to manage your images, and the commercially supported Docker Engine to create, test, and share your application images. Together, these two Docker products can optimize your continuous integration (CI) and/or software deployment workflows.&lt;/p&gt;
+
+&lt;p&gt;Depending on your business requirements, there are two paths available for you to install Docker Trusted Registry (Trusted Registry). This document describes those options and prerequisites in order for you to make a decision that is best suited to your needs and provides the install directions for your selected path.&lt;/p&gt;
+
+&lt;h2 id=&#34;install-options&#34;&gt;Install options&lt;/h2&gt;
+
+&lt;p&gt;You can install Trusted Registry on premise or through a cloud provider. Currently, Docker supports installation on any cloud provider.&lt;/p&gt;
+
+&lt;h2 id=&#34;get-a-license&#34;&gt;Get a license&lt;/h2&gt;
+
+&lt;p&gt;Docker requires that you obtain a license to use the Trusted Registry. The installation path you choose (on premise or in the cloud) can affect the licensing methods available to you (bring your own license or cloud marketplace).&lt;/p&gt;
+
+&lt;p&gt;All installation paths  support a license which you buy outright from Docker and
+apply during the installation process. If you would like, you can get a free
+trial license that is good for 30 days. To get a free trial or buy a
+license go to the &lt;a href=&#34;https://hub.docker.com/enterprise/&#34;&gt;Subscription page&lt;/a&gt;
+on Docker Hub.&lt;/p&gt;
+
+&lt;p&gt;If you are installing on Microsoft Azure, you have the option of installing using the Virtual Hard Disk (VHD) in the Azure Marketplace. You should use a license you bought direct from Docker in this installation.&lt;/p&gt;
+
+&lt;p&gt;If you are installing on AWS, you have the option of installing using Amazon Machine Images (AMI). You can use a license you bought direct using the Docker&amp;rsquo;s Bring Your Own License (BYOL) AMI. You can also choose to pay-as-you-go by installing with the AWS Business Day Support (BDS) AMI. Under the BDS model, your license is part of your Amazon Web Services (AWS) Business Support subscription.&lt;/p&gt;
+
+&lt;h2 id=&#34;plan-your-install&#34;&gt;Plan your install&lt;/h2&gt;
+
+&lt;p&gt;This section summarizes the process of installing Docker Trusted Registry.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;(Option 1) Install on physical infrastructure or a cloud provider&lt;/strong&gt;
+  * Obtain a trial or paid license.
+  * Install the commercially supported Docker Engine.
+  * Install the Trusted Registry.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;(Option 2) Install using AWS AMI&lt;/strong&gt;
+  * Decide if you are going to bring your own license or use a subscription.
+  * Depending on your choice:
+    * Obtain a trial or paid license and install the bring your own license (BYOL) AMI.
+    * Install the pay-as-you-go business day subscription (BDS) AMI.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;After installing either option&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Start the DTR admin console.&lt;/li&gt;
+&lt;li&gt;If you have a license and not a subscription, install the license.&lt;/li&gt;
+&lt;li&gt;Configure your DTR installation.&lt;/li&gt;
+&lt;li&gt;Install additional CS engines on other systems.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Remember, your support is based on your type of license. Each license has a single Trusted Registry and one or more CS engines. Your support for CS Engine installations is limited to the number of engines identified by your license.&lt;/p&gt;
+
+&lt;p&gt;Docker Trusted Registry requires that you use the latest version of the commercially supported Docker Engine. This means that when you upgrade Trusted Registry, you must also upgrade to the latest CS Engine.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;If you are installing on physical infrastructure or a cloud provider, first install the &lt;a href=&#34;../docker-trusted-registry/install/install-csengine/&#34;&gt;commercially supported Docker Engine&lt;/a&gt; and then go on to install &lt;a href=&#34;install-dtry.md&#34;&gt;Trusted Registry&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you are installing on AWS and would like to use a pre-built AMI and a license you purchased, see &lt;a href=&#34;../docker-trusted-registry/install/dtr-ami-byol-launch/&#34;&gt;bringing your own license (BYOL)&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you are installing on AWS and would like to use the subscription license, see the &lt;a href=&#34;../docker-trusted-registry/install/dtr-ami-bds-launch/&#34;&gt;pay as you go BDS installation&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

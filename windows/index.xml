@@ -1,0 +1,1058 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on Docker Docs</title>
+    <link>http://localhost/windows/</link>
+    <description>Recent content in Windows on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Build your own image</title>
+      <link>http://localhost/windows/step_four/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/windows/step_four/</guid>
+      <description>
+
+&lt;h1 id=&#34;build-your-own-image&#34;&gt;Build your own image&lt;/h1&gt;
+
+&lt;p&gt;The &lt;code&gt;whalesay&lt;/code&gt; image could be improved. It would be nice if you didn&amp;rsquo;t have to
+think of something to say. And you type a lot to get &lt;code&gt;whalesay&lt;/code&gt; to talk.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run docker/whalesay cowsay boo-boo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this next section, you will improve the &lt;code&gt;whalesay&lt;/code&gt; image by building a new version that &amp;ldquo;talks on its own&amp;rdquo; and requires fewer words to run.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-1-open-a-docker-quickstart-terminal&#34;&gt;Step 1: Open a Docker Quickstart Terminal&lt;/h2&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t already have a terminal open, open one now:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;From the &lt;strong&gt;Desktop&lt;/strong&gt; and locate the Docker Quickstart Terminal icon.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/icon-set.png&#34; alt=&#34;Desktop&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the icon to launch a Docker Quickstart Terminal.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Just leave the terminal open on your desktop, you&amp;rsquo;ll be using it in a moment.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-2-write-a-dockerfile&#34;&gt;Step 2: Write a Dockerfile&lt;/h2&gt;
+
+&lt;p&gt;In this step, you use the Windows Notepad application to write a short
+Dockerfile. A Dockerfile describes the software elements that make up an
+image. It isn&amp;rsquo;t just elements though, a Dockerfile can describe what environment
+to use or what commands to run in the container. Your Dockerfile is going to be very short.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Place your cursor at the prompt in the Docker Quickstart Terminal.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change to your Desktop.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd Desktop
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;From the command line, a folder called &lt;code&gt;testdocker&lt;/code&gt; on your Desktop.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir testdocker
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change into the &lt;code&gt;testdocker&lt;/code&gt; folder.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd testdocker
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a Dockerfile in the current directory by typing &lt;code&gt;touch Dockerfile&lt;/code&gt; and pressing RETURN.&lt;/p&gt;
+
+&lt;p&gt;Make sure you use a capital &lt;code&gt;D&lt;/code&gt; in the file name. Linux file names are case sensitive.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ touch Dockerfile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The command appears to do nothing but it actually creates the Dockerfile in the current directory. Just type &lt;code&gt;ls Dockerfile&lt;/code&gt; to see it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ls Dockerfile
+Dockerfile
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Now, type the &lt;code&gt;notepad Dockerfile&amp;amp;&lt;/code&gt; to open the file in Window&amp;rsquo;s Notepad  (don&amp;rsquo;t forget the &lt;code&gt;&amp;amp;&lt;/code&gt; ampersand).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/ampersand.png&#34; alt=&#34;ampersand&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Your system opens the Notepad program with the empty Dockerfile.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/note-pad1.png&#34; alt=&#34;Edit Dockerfile&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Type &lt;code&gt;FROM docker/whalesay:latest&lt;/code&gt; line into the open file.&lt;/p&gt;
+
+&lt;p&gt;Now, it should look like this.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/note-pad2.png&#34; alt=&#34;Line one&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;FROM&lt;/code&gt; keyword tells Docker which image your image is based on. You
+are basing your new work on the existing &lt;code&gt;whalesay&lt;/code&gt; image.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Now, add the &lt;code&gt;fortunes&lt;/code&gt; program to the image.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/note-pad3.png&#34; alt=&#34;Line two&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;fortunes&lt;/code&gt; program has a command that prints out wise sayings for our
+ whale to say. So, the first step is to install it. This line adds the
+ &lt;code&gt;fortune&lt;/code&gt; program using the &lt;code&gt;apt-get&lt;/code&gt; program. If these sound all very
+ cryptic to you, don&amp;rsquo;t worry. As long as you type the words correctly, they
+ will work for you!&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Once the image has the software it needs, you instruct the software to run
+when the image is loaded.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/note-pad4.png&#34; alt=&#34;Line two&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This line tells the &lt;code&gt;fortune&lt;/code&gt; program to send its nifty quotes to the &lt;code&gt;cowsay&lt;/code&gt; program.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Save your work and the Dockerfile by choosing &lt;strong&gt;File &amp;gt; Save&lt;/strong&gt; from the Notepad menu.&lt;/p&gt;
+
+&lt;p&gt;At this point, you have all your software ingredients and behaviors described
+in a Dockerfile. You are ready to build a new image.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-3-build-an-image-from-your-dockerfile&#34;&gt;Step 3: Build an image from your Dockerfile&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Place your cursor back in your Docker Quickstart Terminal.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure the Dockerfile is in the current directory by typing &lt;code&gt;cat Dockerfile&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cat Dockerfile
+FROM docker/whalesay:latest
+
+
+RUN apt-get -y update &amp;amp;&amp;amp; apt-get install -y fortunes
+
+
+CMD /usr/games/fortune -a | cowsay
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Now, build your new image by typing the &lt;code&gt;docker build -t docker-whale .&lt;/code&gt; command in your terminal (don&amp;rsquo;t forget the . period).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker build -t docker-whale .
+Sending build context to Docker daemon 158.8 MB
+...snip...
+Removing intermediate container a8e6faa88df3
+Successfully built 7d9495d03763
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The command takes several seconds to run and reports its outcome. Before
+you do anything with the new image, take a minute to learn about the
+Dockerfile build process.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-4-learn-about-the-build-process&#34;&gt;Step 4: Learn about the build process&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;docker build -t docker-whale .&lt;/code&gt; command takes the &lt;code&gt;Dockerfile&lt;/code&gt; in the
+current directory, and builds an image called &lt;code&gt;docker-whale&lt;/code&gt; on your local
+machine. The command takes about a minute and its output looks really long and
+complex. In this section, you learn what each message means.&lt;/p&gt;
+
+&lt;p&gt;First Docker checks to make sure it has everything it needs to build.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Sending build context to Docker daemon 158.8 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, Docker loads with the &lt;code&gt;whalesay&lt;/code&gt; image.   It already has this image
+locally as your might recall from the last page. So, Docker doesn&amp;rsquo;t need to
+download it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Step 0 : FROM docker/whalesay:latest
+ ---&amp;gt; fb434121fc77
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker moves onto the next step which is to update the &lt;code&gt;apt-get&lt;/code&gt; package
+manager. This takes a lot of lines, no need to list them all again here.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Step 1 : RUN apt-get -y update &amp;amp;&amp;amp; apt-get install -y fortunes
+ ---&amp;gt; Running in 27d224dfa5b2
+Ign http://archive.ubuntu.com trusty InRelease
+Ign http://archive.ubuntu.com trusty-updates InRelease
+Ign http://archive.ubuntu.com trusty-security InRelease
+Hit http://archive.ubuntu.com trusty Release.gpg
+....snip...
+Get:15 http://archive.ubuntu.com trusty-security/restricted amd64 Packages [14.8 kB]
+Get:16 http://archive.ubuntu.com trusty-security/universe amd64 Packages [134 kB]
+Reading package lists...
+---&amp;gt; eb06e47a01d2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, Docker installs the new &lt;code&gt;fortunes&lt;/code&gt; software.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Removing intermediate container e2a84b5f390f
+Step 2 : RUN apt-get install -y fortunes
+ ---&amp;gt; Running in 23aa52c1897c
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following extra packages will be installed:
+  fortune-mod fortunes-min librecode0
+Suggested packages:
+  x11-utils bsdmainutils
+The following NEW packages will be installed:
+  fortune-mod fortunes fortunes-min librecode0
+0 upgraded, 4 newly installed, 0 to remove and 3 not upgraded.
+Need to get 1961 kB of archives.
+After this operation, 4817 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty/main librecode0 amd64 3.6-21 [771 kB]
+...snip......
+Setting up fortunes (1:1.99.1-7) ...
+Processing triggers for libc-bin (2.19-0ubuntu6.6) ...
+ ---&amp;gt; c81071adeeb5
+Removing intermediate container 23aa52c1897c
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, Docker finishes the build and reports its outcome.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Step 3 : CMD /usr/games/fortune -a | cowsay
+ ---&amp;gt; Running in a8e6faa88df3
+ ---&amp;gt; 7d9495d03763
+Removing intermediate container a8e6faa88df3
+Successfully built 7d9495d03763
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;step-5-run-your-new-docker-whale&#34;&gt;Step 5: Run your new docker-whale&lt;/h2&gt;
+
+&lt;p&gt;In this step, you verify the new images is on your computer and then you run your new image.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;If it isn&amp;rsquo;t already there, place your cursor at the prompt in the Docker Quickstart Terminal window.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Type &lt;code&gt;docker images&lt;/code&gt; and press RETURN.&lt;/p&gt;
+
+&lt;p&gt;This command, you might remember, lists the images you have locally.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY           TAG          IMAGE ID          CREATED             VIRTUAL SIZE
+docker-whale         latest       7d9495d03763      4 minutes ago       273.7 MB
+docker/whalesay      latest       fb434121fc77      4 hours ago         247 MB
+hello-world          latest       91c95931e552      5 weeks ago         910 B
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run your new image by typing &lt;code&gt;docker run docker-whale&lt;/code&gt; and pressing RETURN.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run docker-whale
+ _________________________________________ 
+/ &amp;quot;He was a modest, good-humored boy. It  \
+\ was Oxford that made him insufferable.&amp;quot; /
+ ----------------------------------------- 
+          \
+           \
+            \     
+                          ##        .            
+                    ## ## ##       ==            
+                 ## ## ## ##      ===            
+             /&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;___/ ===        
+        ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~   
+             \______ o          __/            
+              \    \        __/             
+                \____\______/   
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;As you can see, you&amp;rsquo;ve made the whale a lot smarter. It finds its own
+things to say and the command line is a lot shorter!  You may also notice
+that Docker didn&amp;rsquo;t have to download anything.  That is because the image was
+built locally and is already available.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;On this page, you learned to build an image by writing your own Dockerfile.
+You ran your image in a container. You also just used Linux from your Windows yet
+again. In the next section, you take the first step in sharing your image by
+&lt;a href=&#34;../windows/step_five/&#34;&gt;creating a Docker Hub account&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Create a Docker Hub account &amp; repository </title>
+      <link>http://localhost/windows/step_five/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/windows/step_five/</guid>
+      <description>
+
+&lt;h1 id=&#34;create-a-docker-hub-account-repository&#34;&gt;Create a Docker Hub account &amp;amp; repository&lt;/h1&gt;
+
+&lt;p&gt;You&amp;rsquo;ve built something really cool, you should share it. In this next section,
+you&amp;rsquo;ll do just that. You&amp;rsquo;ll need a Docker Hub account. Then, you&amp;rsquo;ll push your
+image up to it so other people with Docker can run it.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-1-sign-up-for-an-account&#34;&gt;Step 1: Sign up for an account&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Use your browser to navigate to &lt;a href=&#34;https://hub.docker.com/?utm_source=getting_started_guide&amp;utm_medium=embedded_Windows&amp;utm_campaign=create_docker_hub_account&#34; target=&#34;_blank&#34;&gt;the Docker Hub signup page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Your browser displays the page.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;../tutimg/hub_signup.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fill out the form on the signup page.&lt;/p&gt;
+
+&lt;p&gt;Docker Hub is free. Docker does need a name, password, and email address.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;strong&gt;Signup&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The browser displays the welcome to Docker Hub page.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-2-verify-your-email-and-add-a-repository&#34;&gt;Step 2: Verify your email and add a repository&lt;/h2&gt;
+
+&lt;p&gt;Before you can share anything on the hub, you need to verify your email address.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open your email inbox.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Look for the email titled &lt;code&gt;Please confirm email for your Docker Hub account&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t see the email, check your Spam folder or wait a moment for the email to arrive.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open the email and click the &lt;strong&gt;Confirm Your Email&lt;/strong&gt; button.&lt;/p&gt;
+
+&lt;p&gt;The browser opens Docker Hub to your profile page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Choose &lt;strong&gt;Create Repository&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The browser opens the &lt;strong&gt;Create Repository&lt;/strong&gt; page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Provide a Repository Name and Short Description.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure Visibility is set to &lt;strong&gt;Public&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;When you are done, your form should look similar to the following:&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;../tutimg/add_repository.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;strong&gt;Create&lt;/strong&gt; when you are done.&lt;/p&gt;
+
+&lt;p&gt;Docker Hub creates your new repository.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;On this page, you opened an account on Docker Hub and created a new repository.
+In the next section, you populate the repository &lt;a href=&#34;../windows/step_six/&#34;&gt;by tagging and pushing the
+image you created earlier&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Find &amp; run the whalesay image </title>
+      <link>http://localhost/windows/step_three/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/windows/step_three/</guid>
+      <description>
+
+&lt;h1 id=&#34;find-and-run-the-whalesay-image&#34;&gt;Find and run the whalesay image&lt;/h1&gt;
+
+&lt;p&gt;People all over the world create Docker images. You can find these images by
+browsing the Docker Hub. In this next section, you&amp;rsquo;ll search for and find the
+image you&amp;rsquo;ll use in the rest of this getting started.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-1-locate-the-whalesay-image&#34;&gt;Step 1: Locate the whalesay image&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open your browser and  &lt;a href=&#34;https://hub.docker.com/?utm_source=getting_started_guide&amp;utm_medium=embedded_Windows&amp;utm_campaign=find_whalesay&#34; target=_blank&gt; browse to the Docker Hub&lt;/a&gt;.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;../tutimg/browse_and_search.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;The Docker Hub contains images from individuals like you and official images
+from organizations like RedHat, IBM, Google, and a whole lot more.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &lt;strong&gt;Browse &amp;amp; Search&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The browser opens the search page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Enter the word &lt;code&gt;whalesay&lt;/code&gt; in the search bar.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;../tutimg/image_found.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click on the &lt;strong&gt;docker/whalesay&lt;/strong&gt; image in the results.&lt;/p&gt;
+
+&lt;p&gt;The browser displays the repository for the &lt;strong&gt;whalesay&lt;/strong&gt; image.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;../tutimg/whale_repo.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Each image repository contains information about an image. It should
+include information such as what kind of software the image contains and
+how to use it. You may notice that the &lt;strong&gt;whalesay&lt;/strong&gt; image is based on a
+Linux distribution called Ubuntu. In the next step, you run the &lt;strong&gt;whalesay&lt;/strong&gt; image on your machine.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-2-run-the-whalesay-image&#34;&gt;Step 2: Run the whalesay image&lt;/h2&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t already have the Docker Quickstart Terminal open, open one now:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;From the &lt;strong&gt;Desktop&lt;/strong&gt; and locate the Docker Quickstart Terminal icon.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/icon-set.png&#34; alt=&#34;Desktop&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the icon to launch a Docker Quickstart Terminal.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Put your cursor in your Docker Quickstart Terminal at the &lt;code&gt;$&lt;/code&gt; prompt.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Type the &lt;code&gt;docker run docker/whalesay cowsay boo&lt;/code&gt; command and press RETURN.&lt;/p&gt;
+
+&lt;p&gt;This command runs the &lt;strong&gt;whalesay&lt;/strong&gt; image in a container. Your terminal should look like the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run docker/whalesay cowsay boo
+Unable to find image &#39;docker/whalesay:latest&#39; locally
+latest: Pulling from docker/whalesay
+e9e06b06e14c: Pull complete
+a82efea989f9: Pull complete
+37bea4ee0c81: Pull complete
+07f8e8c5e660: Pull complete
+676c4a1897e6: Pull complete
+5b74edbcaa5b: Pull complete
+1722f41ddcb5: Pull complete
+99da72cfe067: Pull complete
+5d5bd9951e26: Pull complete
+fb434121fc77: Already exists
+Digest: sha256:d6ee73f978a366cf97974115abe9c4099ed59c6f75c23d03c64446bb9cd49163
+Status: Downloaded newer image for docker/whalesay:latest
+ _____
+&amp;lt; boo &amp;gt;
+ -----
+    \
+     \
+      \     
+                    ##        .            
+              ## ## ##       ==            
+           ## ## ## ##      ===            
+       /&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;___/ ===        
+  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~   
+       \______ o          __/            
+        \    \        __/             
+          \____\______/   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first time you run a software image, the &lt;code&gt;docker&lt;/code&gt; command looks for it
+on your local system. If the image isn&amp;rsquo;t there, then &lt;code&gt;docker&lt;/code&gt; gets it from
+the hub.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;While still in the Docker Quickstart Terminal, type &lt;code&gt;docker images&lt;/code&gt; command and press RETURN.&lt;/p&gt;
+
+&lt;p&gt;The command lists all the images on your local system. You should see
+&lt;code&gt;docker/whalesay&lt;/code&gt; in the list.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY           TAG         IMAGE ID            CREATED            VIRTUAL SIZE
+docker/whalesay      latest      fb434121fc77        3 hours ago        247 MB
+hello-world          latest      91c95931e552        5 weeks ago        910 B
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you run an image in a container, Docker downloads the image to your
+computer. This local copy of the image saves you time.  Docker only
+downloads the image again if the image&amp;rsquo;s source changes on the hub.  You
+can, of course, delete the image yourself. You&amp;rsquo;ll learn more about that
+later. Let&amp;rsquo;s leave the image there for now because we are going to use it
+later.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Take a moment to play with the &lt;strong&gt;whalesay&lt;/strong&gt; container a bit.&lt;/p&gt;
+
+&lt;p&gt;Try running the &lt;code&gt;whalesay&lt;/code&gt; image again with a word or phrase. Try a long or
+short phrase.  Can you break the cow?&lt;/p&gt;
+
+&lt;p&gt;$ docker run docker/whalesay cowsay boo-boo
+     _________
+    &amp;lt; boo-boo &amp;gt;
+     &amp;mdash;&amp;mdash;&amp;mdash;
+        \
+         \
+          \&lt;br /&gt;
+                        ##        .&lt;br /&gt;
+                  ## ## ##       ==&lt;br /&gt;
+               ## ## ## ##      ===&lt;br /&gt;
+           /&amp;ldquo;&amp;rdquo;&amp;ldquo;&amp;rdquo;&amp;ldquo;&amp;rdquo;&amp;ldquo;&amp;rdquo;&amp;ldquo;&amp;rdquo;&amp;ldquo;&amp;rdquo;&amp;ldquo;&amp;rdquo;&amp;ldquo;&amp;rdquo;&lt;strong&gt;&lt;em&gt;/ ===&lt;br /&gt;
+      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~&lt;br /&gt;
+           &lt;/em&gt;&lt;/strong&gt;___ o          &lt;strong&gt;/&lt;br /&gt;
+            \    \        __/&lt;br /&gt;
+              &lt;/strong&gt;____/&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;On this page, you learned to search for images on Docker Hub. You used your
+command line to run an image. Think about it, effectively you ran a piece of
+Linux software on your Windows computer.  You learned that running an image copies
+it on your computer.  Now, you are ready to create your own image with Docker.
+Go on to the next part &lt;a href=&#34;../windows/step_four/&#34;&gt;to build your own image&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Get Started with Docker</title>
+      <link>http://localhost/windows/started/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/windows/started/</guid>
+      <description>
+
+&lt;h1 id=&#34;get-started-with-docker-for-windows&#34;&gt;Get Started with Docker for Windows&lt;/h1&gt;
+
+&lt;h4 id=&#34;this-is-written-for-users-of-windows-if-you-are-not-using-windows-see-the-linux-linux-started-md-or-mac-os-x-mac-started-md-version&#34;&gt;&lt;strong&gt;This is written for users of Windows. If you are not using Windows, see the &lt;a href=&#34;../linux/started/&#34;&gt;Linux&lt;/a&gt; or &lt;a href=&#34;../mac/started/&#34;&gt;Mac OS X&lt;/a&gt; version.&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;This getting started is for non-technical users who are interested in learning about Docker. By following this getting started, you&amp;rsquo;ll learn fundamental Docker features by performing some simple tasks. You&amp;rsquo;ll learn how to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;install Docker&lt;/li&gt;
+&lt;li&gt;run a software image in a container&lt;/li&gt;
+&lt;li&gt;browse for an image on Docker Hub&lt;/li&gt;
+&lt;li&gt;create your own image and run it in a container&lt;/li&gt;
+&lt;li&gt;create a Docker Hub account and an image repository&lt;/li&gt;
+&lt;li&gt;create an image of your own&lt;/li&gt;
+&lt;li&gt;push your image to Docker Hub for others to use&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The getting started was user tested to reduce the chance of users having problems. For the best chance of success, follow the steps as written the first time before exploring on your own. It takes approximately 45 minutes to complete.&lt;/p&gt;
+
+&lt;h3 id=&#34;make-sure-you-understand&#34;&gt;Make sure you understand&amp;hellip;&lt;/h3&gt;
+
+&lt;p&gt;This getting started uses Docker commands with a terminal window. You don&amp;rsquo;t need
+to be experienced using a command line, but you should be familiar with how to
+open one and type commands.&lt;/p&gt;
+
+&lt;p&gt;Go to &lt;a href=&#34;../windows/step_one/&#34;&gt;the next page to install&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install Docker for Windows</title>
+      <link>http://localhost/windows/step_one/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/windows/step_one/</guid>
+      <description>
+
+&lt;h1 id=&#34;install-docker-for-windows&#34;&gt;Install Docker for Windows&lt;/h1&gt;
+
+&lt;p&gt;Because Docker relies on Linux-specific features, you can&amp;rsquo;t run Docker natively
+in Windows. Instead, you must install the Docker Toolbox application. The
+application installs a VirtualBox Virtual Machine (VM), Docker itself, and the
+Docker Toolbox management tool. These three things allow you to run Docker on
+Windows.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-1-check-your-version&#34;&gt;Step 1: Check your version&lt;/h2&gt;
+
+&lt;p&gt;Your machine must be running Windows 7.1, 8/8.1 or newer to run Docker Toolbox. To find out what version of Windows you have:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Right click the windows message and choose *&lt;em&gt;System&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/win_ver.png&#34; alt=&#34;Which version&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you aren&amp;rsquo;t using a supported version, you could consider upgrading your
+operating system.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure your Windows system supports Hardware Virtualization Technology and that virtualization is enabled.&lt;/p&gt;
+
+&lt;h4 id=&#34;for-windows-8-or-8-1&#34;&gt;For Windows 8 or 8.1&lt;/h4&gt;
+
+&lt;p&gt;Choose &lt;strong&gt;Start &amp;gt; Task Manager&lt;/strong&gt; and navigate to the &lt;strong&gt;Performance&lt;/strong&gt; tab.
+  Under &lt;strong&gt;CPU&lt;/strong&gt; you should see the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/virtualization.png&#34; alt=&#34;Release page&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If virtualization is not enabled on your system, follow the manufacturer&amp;rsquo;s instructions for enabling it.&lt;/p&gt;
+
+&lt;h3 id=&#34;for-windows-7&#34;&gt;For Windows 7&lt;/h3&gt;
+
+&lt;p&gt;Run the &lt;a href=&#34;http://www.microsoft.com/en-us/download/details.aspx?id=592&#34;
+target=&#34;_blank&#34;&gt; Microsoft® Hardware-Assisted Virtualization Detection Tool&lt;/a&gt;
+and follow the on-screen instructions.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-2-install-docker-toolbox&#34;&gt;Step 2: Install Docker Toolbox&lt;/h2&gt;
+
+&lt;p&gt;In this section, you install the Docker Toolbox software and several &amp;ldquo;helper&amp;rdquo; applications. The installation adds the following software to your machine:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker Client for Windows&lt;/li&gt;
+&lt;li&gt;Docker Toolbox management tool and ISO&lt;/li&gt;
+&lt;li&gt;Oracle VM VirtualBox&lt;/li&gt;
+&lt;li&gt;Git MSYS-git UNIX tools&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you have a previous version of VirtualBox installed, do not reinstall it with the Docker Toolbox installer. When prompted, uncheck it.&lt;/p&gt;
+
+&lt;p&gt;If you have Virtual Box running, you must shut it down before running the
+installer.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Go to the &lt;a href=&#34;https://www.docker.com/toolbox&#34; targe=&#34;_blank&#34;&gt;Docker Toolbox&lt;/a&gt; page.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the installer link to download.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install Docker Toolbox by double-clicking the installer.&lt;/p&gt;
+
+&lt;p&gt;The installer launches the &amp;ldquo;Setup - Docker Toolbox&amp;rdquo; dialog.&lt;/p&gt;
+
+&lt;p&gt;If Windows security dialog prompts you to allow the program to make a
+change, choose &lt;strong&gt;Yes&lt;/strong&gt;. The system displays the &lt;strong&gt;Setup - Docker Toolbox for
+Windows&lt;/strong&gt; wizard.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/installer_open.png&#34; alt=&#34;Release page&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &lt;strong&gt;Next&lt;/strong&gt; to accept all the defaults and then &lt;strong&gt;Install&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Accept all the installer defaults. The installer takes a few minutes to install all the components:&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;When notified by Windows Security the installer will make changes, make sure you allow the installer to make the necessary changes.&lt;/p&gt;
+
+&lt;p&gt;When it completes, the installer reports it was successful:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/finish.png&#34; alt=&#34;Success&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Uncheck &amp;ldquo;View Shortcuts in File Explorer&amp;rdquo; and press &lt;strong&gt;Finish&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;step-3-verify-your-installation&#34;&gt;Step 3: Verify your installation&lt;/h2&gt;
+
+&lt;p&gt;The installer places Docker Toolbox and VirtualBox in your &lt;strong&gt;Applications&lt;/strong&gt; folder.
+In this step, you start Docker Toolbox and run a simple Docker command.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;On your Desktop, find the Docker Toolbox icon.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/icon-set.png&#34; alt=&#34;Desktop&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the icon to launch a Docker Toolbox terminal.&lt;/p&gt;
+
+&lt;p&gt;If the system displays a &lt;strong&gt;User Account Control&lt;/strong&gt; prompt to allow VirtualBox to make changes to your computer. Choose &lt;strong&gt;Yes&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The terminal does several things to set up Docker Toolbox for you. When it is done, the terminal displays the &lt;code&gt;$&lt;/code&gt; prompt.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/b2d_shell.png&#34; alt=&#34;Desktop&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The terminal runs a special &lt;code&gt;bash&lt;/code&gt; environment instead of the standard Windows command prompt. The &lt;code&gt;bash&lt;/code&gt; environment is required by Docker.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make the terminal active by click your mouse next to the &lt;code&gt;$&lt;/code&gt; prompt.&lt;/p&gt;
+
+&lt;p&gt;If you aren&amp;rsquo;t familiar with a terminal window, here are some quick tips.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;../tutimg/terminal.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;The prompt is traditionally a &lt;code&gt;$&lt;/code&gt; dollar sign. You type commands into the
+&lt;em&gt;command line&lt;/em&gt; which is the area after the prompt. Your cursor is indicated
+by a highlighted area or a &lt;code&gt;|&lt;/code&gt; that appears in the command line. After
+typing a command, always press RETURN.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Type the &lt;code&gt;docker run hello-world&lt;/code&gt; command and press RETURN.&lt;/p&gt;
+
+&lt;p&gt;The command does some work for you, if everything runs well, the command&amp;rsquo;s
+output looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run hello-world
+Unable to find image &#39;hello-world:latest&#39; locally
+Pulling repository hello-world
+91c95931e552: Download complete
+a8219747be10: Download complete
+Status: Downloaded newer image for hello-world:latest
+Hello from Docker.
+This message shows that your installation appears to be working correctly.
+
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the &amp;quot;hello-world&amp;quot; image from the Docker Hub.
+    (Assuming it was not already locally available.)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+
+For more examples and ideas, visit:
+ https://docs.docker.com/userguide/
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;At this point, you have successfully installed Docker. Leave the Docker Toolbox
+window open. Go to the next page to &lt;a href=&#34;../windows/step_two/&#34;&gt;read a very short introduction to Docker
+images and containers&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Learning more</title>
+      <link>http://localhost/windows/last_page/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/windows/last_page/</guid>
+      <description>
+
+&lt;h1 id=&#34;learning-more&#34;&gt;Learning more&lt;/h1&gt;
+
+&lt;p&gt;Depending on your interest, the Docker documentation contains a wealth of information.  Here are some places that might interest you:&lt;/p&gt;
+
+&lt;p&gt;&lt;style type=&#34;text/css&#34;&gt;
+&lt;/style&gt;
+&lt;table class=&#34;tutorial&#34;&gt;
+  &lt;tr&gt;
+    &lt;th class=&#34;tg-031e&#34;&gt;If you are looking for&lt;/th&gt;
+    &lt;th class=&#34;tg-031e&#34;&gt;Where to find it&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;This getting started provided very basic essentials for using Docker on Windows. If you want to do more with Docker, start with the full installation and user guide for Docker Toolbox.&lt;/td&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://docs.docker.com/installation/windows/&#34;&gt;Install Docker Toolbox&lt;/a&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;Information about the Docker product line.&lt;/td&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;http://www.docker.com/products&#34;&gt;The product explainer is a good place to start.&lt;/a&gt;&lt;/td&gt;
+  &lt;/tr&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;tr&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;Set up an automated build on Docker Hub.&lt;/td&gt;
+    &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://docs.docker.com/docker-hub/&#34;&gt;The Docker Hub documentation.&lt;/a&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tag, push, &amp; pull your image</title>
+      <link>http://localhost/windows/step_six/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/windows/step_six/</guid>
+      <description>
+
+&lt;h1 id=&#34;tag-push-and-pull-your-image&#34;&gt;Tag, push, and pull your image&lt;/h1&gt;
+
+&lt;p&gt;In this section, you tag and push your &lt;code&gt;docker-whale&lt;/code&gt; image to your newly
+created repository. When you are done, you test the repository by pulling your
+new image.&lt;/p&gt;
+
+&lt;h2 id=&#34;step-1-tag-and-push-the-image&#34;&gt;Step 1: Tag and push the image&lt;/h2&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t already have a terminal open, open one now:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;From the &lt;strong&gt;Desktop&lt;/strong&gt; and locate the Docker Quickstart Terminal icon.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../windows/images/icon-set.png&#34; alt=&#34;Desktop&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the icon to launch a Docker Quickstart Terminal.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Place your cursor at the prompt in the Docker Quickstart Terminal window.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Type &lt;code&gt;docker images&lt;/code&gt; to list the images you currently have:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY           TAG          IMAGE ID            CREATED             VIRTUAL SIZE
+docker-whale         latest       7d9495d03763        38 minutes ago      273.7 MB
+&amp;lt;none&amp;gt;               &amp;lt;none&amp;gt;       5dac217f722c        45 minutes ago      273.7 MB
+docker/whalesay      latest       fb434121fc77        4 hours ago         247 MB
+hello-world          latest       91c95931e552        5 weeks ago         910 B
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Find the &lt;code&gt;IMAGE ID&lt;/code&gt; for your &lt;code&gt;docker-whale&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;p&gt;In this example, the id is &lt;code&gt;7d9495d03763&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll notice that currently, the &lt;code&gt;REPOSITORY&lt;/code&gt; shows the repository but not
+the namespace for &lt;code&gt;docker-whale&lt;/code&gt;. You need to include the &lt;code&gt;namespace&lt;/code&gt; for
+Docker Hub to associate it with your account.  The &lt;code&gt;namespace&lt;/code&gt; is the same as
+your account name.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use &lt;code&gt;IMAGE ID&lt;/code&gt; and the &lt;code&gt;docker tag&lt;/code&gt; command to tag your &lt;code&gt;docker-whale&lt;/code&gt; image.&lt;/p&gt;
+
+&lt;p&gt;The command you type looks like this:&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;../tutimg/tagger.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Of course, your account name will be your own. So, you type the command with
+your image&amp;rsquo;s ID and your account name and press RETURN.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker tag 7d9495d03763 maryatdocker/docker-whale:latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Type the &lt;code&gt;docker images&lt;/code&gt; command again to see your newly tagged image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY                  TAG       IMAGE ID        CREATED          VIRTUAL SIZE
+maryatdocker/docker-whale   latest    7d9495d03763    5 minutes ago    273.7 MB
+docker-whale                latest    7d9495d03763    2 hours ago      273.7 MB
+&amp;lt;none&amp;gt;                      &amp;lt;none&amp;gt;    5dac217f722c    5 hours ago      273.7 MB
+docker/whalesay             latest    fb434121fc77    5 hours ago      247 MB
+hello-world                 latest    91c95931e552    5 weeks ago      910 B
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use the &lt;code&gt;docker login&lt;/code&gt; command to log into the Docker Hub from the command line.&lt;/p&gt;
+
+&lt;p&gt;The format for the login command is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker login --username=yourhubusername --password=yourpassword --email=youremail@company.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So, for example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker login --username=maryatdocker --password=uydfiad77fad --email=mary@docker.com
+WARNING: login credentials saved in C:\Users\sven\.docker\config.json
+Login Succeeded
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Type the &lt;code&gt;docker push&lt;/code&gt; command to push your image to your new repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker push maryatdocker/docker-whale
+    The push refers to a repository [maryatdocker/docker-whale] (len: 1)
+    7d9495d03763: Image already exists
+    c81071adeeb5: Image successfully pushed
+    eb06e47a01d2: Image successfully pushed
+    fb434121fc77: Image successfully pushed
+    5d5bd9951e26: Image successfully pushed
+    99da72cfe067: Image successfully pushed
+    1722f41ddcb5: Image successfully pushed
+    5b74edbcaa5b: Image successfully pushed
+    676c4a1897e6: Image successfully pushed
+    07f8e8c5e660: Image successfully pushed
+    37bea4ee0c81: Image successfully pushed
+    a82efea989f9: Image successfully pushed
+    e9e06b06e14c: Image successfully pushed
+    Digest: sha256:ad89e88beb7dc73bf55d456e2c600e0a39dd6c9500d7cd8d1025626c4b985011
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Return to your profile on Docker Hub to see your new image.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;../tutimg/new_image.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;step-2-pull-your-new-image&#34;&gt;Step 2: Pull your new image&lt;/h1&gt;
+
+&lt;p&gt;In this last section, you&amp;rsquo;ll pull the image you just pushed to hub. Before you
+do that though, you&amp;rsquo;ll need to remove the original image from your local
+machine. If you left the original image on your machine. Docker would not pull
+from the hub &amp;mdash; why would it? The two images are identical.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Place your cursor at the prompt in the Docker Quickstart Terminal window.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Type &lt;code&gt;docker images&lt;/code&gt; to list the images you currently have on your local machine.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY                  TAG       IMAGE ID        CREATED          VIRTUAL SIZE
+maryatdocker/docker-whale   latest    7d9495d03763    5 minutes ago    273.7 MB
+docker-whale                latest    7d9495d03763    2 hours ago      273.7 MB
+&amp;lt;none&amp;gt;                      &amp;lt;none&amp;gt;    5dac217f722c    5 hours ago      273.7 MB
+docker/whalesay             latest    fb434121fc77    5 hours ago      247 MB
+hello-world                 latest    91c95931e552    5 weeks ago      910 B
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To make a good test, you need to remove the &lt;code&gt;maryatdocker/docker-whale&lt;/code&gt; and
+&lt;code&gt;docker-whale&lt;/code&gt; images from your local system. Removing them forces the next
+&lt;code&gt;docker pull&lt;/code&gt; to get the image from your repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use the &lt;code&gt;docker rmi&lt;/code&gt; to remove the &lt;code&gt;maryatdocker/docker-whale&lt;/code&gt; and &lt;code&gt;docker-whale&lt;/code&gt;
+images.&lt;/p&gt;
+
+&lt;p&gt;You can use an ID or the name to remove an image.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker rmi -f 7d9495d03763
+$ docker rmi -f docker-whale
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Pull a new image from your repository using the &lt;code&gt;docker pull&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;The command you type should include your username from Docker Hub.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; docker pull yourusername/docker-whale
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Since the image is no longer available on your local system, Docker downloads it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run maryatdocker/docker-whale
+Unable to find image &#39;maryatdocker/docker-whale:latest&#39; locally
+latest: Pulling from maryatdocker/docker-whale
+eb06e47a01d2: Pull complete
+c81071adeeb5: Pull complete
+7d9495d03763: Already exists
+e9e06b06e14c: Already exists
+a82efea989f9: Already exists
+37bea4ee0c81: Already exists
+07f8e8c5e660: Already exists
+676c4a1897e6: Already exists
+5b74edbcaa5b: Already exists
+1722f41ddcb5: Already exists
+99da72cfe067: Already exists
+5d5bd9951e26: Already exists
+fb434121fc77: Already exists
+Digest: sha256:ad89e88beb7dc73bf55d456e2c600e0a39dd6c9500d7cd8d1025626c4b985011
+Status: Downloaded newer image for maryatdocker/docker-whale:latest
+ ________________________________________
+/ Having wandered helplessly into a      \
+| blinding snowstorm Sam was greatly     |
+| relieved to see a sturdy Saint Bernard |
+| dog bounding toward him with the       |
+| traditional keg of brandy strapped to  |
+| his collar.                            |
+|                                        |
+| &amp;quot;At last,&amp;quot; cried Sam, &amp;quot;man&#39;s best      |
+\ friend -- and a great big dog, too!&amp;quot;   /
+ ----------------------------------------
+                \
+                 \
+                  \
+                          ##        .            
+                    ## ## ##       ==            
+                 ## ## ## ##      ===            
+             /&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;quot;___/ ===        
+        ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~   
+             \______ o          __/            
+              \    \        __/             
+                \____\______/   
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;You&amp;rsquo;ve done a lot, you&amp;rsquo;ve done all of the following fundamental Docker tasks.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;installed Docker&lt;/li&gt;
+&lt;li&gt;run a software image in a container&lt;/li&gt;
+&lt;li&gt;located an interesting image on Docker Hub&lt;/li&gt;
+&lt;li&gt;run the image on your own machine&lt;/li&gt;
+&lt;li&gt;modified an image to create your own and run it&lt;/li&gt;
+&lt;li&gt;create a Docker Hub account and repository&lt;/li&gt;
+&lt;li&gt;pushed your image to Docker Hub for others to share&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://twitter.com/intent/tweet?button_hashtag=dockerdocs&amp;text=Just%20ran%20a%20container%20with%20an%20image%20I%20built.%20Find%20it%20on%20%23dockerhub.%20Build%20your%20own%3A%20http%3A%2F%2Fgoo.gl%2FMUi7cA&#34; class=&#34;twitter-hashtag-button&#34; data-size=&#34;large&#34; data-related=&#34;docker&#34; target=&#34;_blank&#34;&gt;Tweet your accomplishment!&lt;/a&gt;
+&lt;script&gt;!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?&amp;lsquo;http&amp;rsquo;:&amp;lsquo;https&amp;rsquo;;if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+&amp;rsquo;://platform.twitter.com/widgets.js&amp;rsquo;;fjs.parentNode.insertBefore(js,fjs);}}(document, &amp;lsquo;script&amp;rsquo;, &amp;lsquo;twitter-wjs&amp;rsquo;);&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ve only scratched the surface of what Docker can do. Go to the next page to &lt;a href=&#34;../windows/last_page/&#34;&gt;learn more&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Understand images &amp; containers</title>
+      <link>http://localhost/windows/step_two/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/windows/step_two/</guid>
+      <description>
+
+&lt;h1 id=&#34;learn-about-images-containers&#34;&gt;Learn about images &amp;amp; containers&lt;/h1&gt;
+
+&lt;p&gt;As the last step in your installation, you ran the &lt;code&gt;docker run hello-world&lt;/code&gt; command. With this one command, you completed the core tasks to using  Docker. The command you ran had three parts.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;../tutimg/container_explainer.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;A &lt;em&gt;container&lt;/em&gt; is a stripped-to-basics version of a Linux operating system. An &lt;em&gt;image&lt;/em&gt; is software you load into a container. When you ran the command, the Docker software:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;checked to see if you had the &lt;code&gt;hello-world&lt;/code&gt; software image&lt;/li&gt;
+&lt;li&gt;downloaded the image from the Docker Hub (more about the hub later)&lt;/li&gt;
+&lt;li&gt;loaded the image into the container and &amp;ldquo;ran&amp;rdquo; it&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Depending on how it was built, an image might run a simple, single command and then exit. This is what &lt;code&gt;Hello-World&lt;/code&gt; did.&lt;/p&gt;
+
+&lt;p&gt;A Docker image, though, is capable of much more. An image can start software as complex as a database, wait for you (or someone else) to add data, store the data for later use, and then wait for the next person.&lt;/p&gt;
+
+&lt;p&gt;Who built the &lt;code&gt;hello-world&lt;/code&gt; software image though? In this case, Docker did but anyone can. Docker lets people (or companies) create and share software through Docker images. Using Docker, you don&amp;rsquo;t have to worry about whether your computer can run the software in a Docker image &amp;mdash; a Docker container &lt;em&gt;can always run it&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;See, that was quick wasn&amp;rsquo;t it? Now, you are ready to do some really fun stuff with Docker.
+Go on to the next part &lt;a href=&#34;../windows/step_three/&#34;&gt;to find and run the whalesay image&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

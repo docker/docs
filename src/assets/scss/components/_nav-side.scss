@@ -1,0 +1,21 @@
+.side-nav li {
+	a:not(.button) {
+		padding: rem-calc(5 0);
+		@extend %primary-transition;
+		&:hover {
+			background: #f1f1f1;
+			padding: rem-calc(5 10);
+			color: darken($primary-color, 10%);
+		}
+	}
+	&.active {
+		a:not(.button) {
+			background: #f1f1f1;
+			padding: rem-calc(5 10);
+			color: darken($primary-color, 10%);
+		}
+	}
+}
+.side-nav li.active>a:first-child:not(.button) {
+	color: darken($primary-color, 10%);
+}

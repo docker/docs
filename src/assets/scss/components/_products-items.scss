@@ -1,0 +1,43 @@
+.products-items {
+  padding: 1rem 0;
+  @include block-grid(1);
+  @media #{$medium-up} {
+    @include block-grid(2);
+  }
+  @media #{$large-up} {
+    @include block-grid(4);
+  }
+  li {
+  	margin-bottom: 0.5rem;
+    text-align: center;
+  }
+}
+.products-items-card {
+  display: block;
+  padding: 2rem 2rem;
+  background-color: $docker-bg;
+  border: 1px solid darken($docker-bg, 8%);
+  border-radius: $global-radius;
+  @extend %primary-transition;
+  img {
+    max-width: 60%;
+  }
+  &:hover {
+    background-color: darken($docker-bg, 2%);
+    border: 1px solid darken($docker-bg, 8%);
+  }
+  p {
+    color: $body-font-color;
+  }
+  .link {color: $secondary-color;}
+}
+.sub-links {
+  ul {
+    list-style: none;
+    text-align: center;
+  }
+  li {
+    display: inline-block;
+    padding: 1rem;
+  }
+}

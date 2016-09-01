@@ -1,0 +1,1545 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://localhost/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/concepts/Om/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/concepts/Flux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/concepts/Immutability/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/concepts/React-Native/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/concepts/React-Router/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/developing/production--testing-builds/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/concepts/React/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/developing/gettingstarted--long-start/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/developing/react--components/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/developing/react-router--adding-routes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/developing/saas-config/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/https/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/security/apparmor/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/static_files/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/README/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/spec/manifest-v2-1/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/spec/implementations/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/storagedriver/aufs-driver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/misc/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/adminguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/workflow/advanced-contributing/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/oss/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/logging/awslogs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/amazon/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/aws/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/examples/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/labels-custom-metadata/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/apache/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/nginx/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/github/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/builds/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/bitbucket/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/host_integration/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/security/trust/trust_automation/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/storagedriver/btrfs-driver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/dockerfile_best-practices/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networking/default_network/binding/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/governance/board-profiles/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/building/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networking/default_network/build-bridges/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/step_four/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/step_four/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/step_four/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/dockerimages/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/rados/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/governance/conduct-code/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/workflow/coding-style/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/completion/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/env/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/compose-file/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/configuration/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/project/set-up-git/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networking/default_network/configure-dns/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/logging/overview/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/configuration/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/configuring/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/security/trust/content_trust/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/workflow/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/systemd/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/step_five/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/step_five/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/step_five/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/baseimages/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/workflow/create-pr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/install-manual/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/rethinkdb-dev-database/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networking/default_network/custom-docker0/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networking/default_network/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/deploying/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/storagedriver/device-mapper-driver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/digital-ocean/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/install/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/misc/deprecated/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/glossary/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/governance/dgab-info/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/docker-io_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/install-machine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/release-notes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/install-w-machine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/api/swarm-api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/networking/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/discovery/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/scheduler/filter/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/scheduler/strategy/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networking/dockernetworks/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/extend/plugins_network/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/run/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/security/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/storagedriver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/builder/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/examples/mongodb/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/examples/postgresql_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/examples/couchdb_data_volumes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/examples/nodejs_web_app/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/examples/running_redis_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/examples/running_riak_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/examples/running_ssh_service/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/examples/apt-cacher-ng/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/os-base/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/extend/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/extend/plugins/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/extends/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/misc/faq/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/FAQ/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/filesystem/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/step_three/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/step_three/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/step_three/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/workflow/find-an-issue/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/logging/fluentd/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/faq/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/gcs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/generic/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/started/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/started/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/started/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/get-started/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networking/get-started-overlay/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/project/software-required/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/gettingstarted/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/help/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/gce/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/governance/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/spec/api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/dockerizing/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/swarm/multi-manager-setup/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/soft-layer/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networking/default_network/ipv6/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/image_management/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/inmemory/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/step_one/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/install/engine-ami-launch/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/install/dtr-ami-byol-launch/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/step_one/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/step_one/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/install/dtr-ami-bds-launch/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/binaries/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/archlinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/cruxlinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/centos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/debian/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/fedora/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/frugalware/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/gentoolinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/google/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/softlayer/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/mac/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/azure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/oracle/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/rackspace/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/rhel/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/ubuntulinux/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/windows/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/SUSE/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/overview/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/joyent/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/userguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/known-issues/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/last_page/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/last_page/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/last_page/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networking/default_network/dockerlinks/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/ambassador_pattern_linking/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/logging/log_tags/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/logging/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/dockervolumes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/security/trust/trust_key_mng/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/install/install-csengine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/install/install-dtr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/azure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/azure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/hyper-v/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/migrate-to-machine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/mirror/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networking/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networkingcontainers/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/networking/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/official_repos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/openstack/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/virtualbox/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/ways/meetups/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/ways/issues/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/ways/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/storagedriver/overlayfs-driver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/workflow/review-pr/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/security/trust/trust_sandbox/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/extend/plugin_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/dsc/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/prior-release-notes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/cfengine_process_management/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/https/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/quick-start/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/django/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/rails/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/wordpress/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/basics/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/code/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/project/who-written-for/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/rackspace/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/recipes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/release-notes/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/docker_remote_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/remote_api_client_libraries/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/docker_remote_api_v1.14/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/docker_remote_api_v1.15/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/docker_remote_api_v1.16/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/docker_remote_api_v1.17/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/docker_remote_api_v1.18/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/docker_remote_api_v1.19/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/docker_remote_api_v1.20/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/docker_remote_api_v1.21/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/repos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/registry_mirror/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/usingdocker/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/project/test-and-docs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/osx-setup-guide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/runmetrics/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/s3/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/storagedriver/selectadriver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/minecraft-server/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/kitematic/nginx-web-server/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/project/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/project/software-req-win/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/logging/splunk/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storagedrivers/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/dockerrepos/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/doc-style/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/support/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/ways/community/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/installation/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/storage-drivers/swift/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/step_six/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/step_six/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/step_six/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/orgs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/insecure/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/ways/test/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/hub_registry_spec/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/spec/auth/jwt/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/spec/auth/token/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/license/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/install/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networking/default_network/container-communication/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/workflow/make-a-contribution/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/linux/step_two/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/mac/step_two/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/windows/step_two/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/storagedriver/imagesandcontainers/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/introduction/understanding-docker/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/introduction/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/install/upgrade/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/cli/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/security/trust/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/userguide/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/chef/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/production/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/get-started-cloud/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/puppet/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/using_supervisord/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/articles/certificates/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/vm-fusion/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/vm-cloud/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/vsphere/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/extend/plugins_volume/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/get-help/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/workflow/work-issue/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/opensource/project/set-up-dev-env/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/networking/work-with-networks/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/registry/notifications/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-hub/accounts/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/userguide/storagedriver/zfs-driver/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/active/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/attach/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/build/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/build/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/commit/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/config/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/cp/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/create/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/create/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/daemon/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/diff/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/docker-compose/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/api/docker_io_accounts_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/env/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/events/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/exec/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/drivers/exoscale/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/export/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/help/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/help/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/history/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/images/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/import/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/info/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/inspect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/inspect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/ip/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/logging/journald/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/kill/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/kill/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/kill/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/load/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/login/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/logout/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/logs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/logs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/ls/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/network_connect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/network_create/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/network_disconnect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/network_inspect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/network_ls/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/network_rm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/pause/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/pause/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/port/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/port/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/ps/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/ps/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/pull/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/pull/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/push/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/regenerate-certs/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/rename/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/restart/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/restart/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/restart/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/rm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/rm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/rm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/rmi/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/run/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/run/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/save/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/scale/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/scp/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/search/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/ssh/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/start/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/start/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/start/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/stats/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/status/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/stop/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/stop/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/stop/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/tag/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/top/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/unpause/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/unpause/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/compose/reference/up/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/upgrade/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/machine/reference/url/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/version/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/volume_create/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/volume_inspect/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/volume_ls/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/volume_rm/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/engine/reference/commandline/wait/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/api/dtr_api/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/api/dtr_1_3_accounts/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/api/dtr_1_3_teams/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/api/dtr_1_3_repositories/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/api/dtr_1_3_user_repo_access/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/api/dtr_1_3_team_repo_access/</loc>
+  </url>
+  
+  <url>
+    <loc>http://localhost/docker-trusted-registry/api/dtr_1_3_team_repo_namespace_access/</loc>
+  </url>
+  
+</urlset>

@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker Docs</title>
+    <link>http://localhost/</link>
+    <description>Recent content on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title></title>
+      <link>http://localhost/compose/README/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/compose/README/</guid>
+      <description>
+
+&lt;h1 id=&#34;contributing-to-the-docker-compose-documentation&#34;&gt;Contributing to the Docker Compose documentation&lt;/h1&gt;
+
+&lt;p&gt;The documentation in this directory is part of the &lt;a href=&#34;https://docs.docker.com&#34;&gt;https://docs.docker.com&lt;/a&gt; website.  Docker uses &lt;a href=&#34;http://gohugo.io/overview/introduction/&#34;&gt;the Hugo static generator&lt;/a&gt; to convert project Markdown files to a static HTML site.&lt;/p&gt;
+
+&lt;p&gt;You don&amp;rsquo;t need to be a Hugo expert to contribute to the compose documentation. If you are familiar with Markdown, you can modify the content in the &lt;code&gt;docs&lt;/code&gt; files.&lt;/p&gt;
+
+&lt;p&gt;If you want to add a new file or change the location of the document in the menu, you do need to know a little more.&lt;/p&gt;
+
+&lt;h2 id=&#34;documentation-contributing-workflow&#34;&gt;Documentation contributing workflow&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Edit a Markdown file in the tree.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Save your changes.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure you are in the &lt;code&gt;docs&lt;/code&gt; subdirectory.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Build the documentation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ make docs
+ ---&amp;gt; ffcf3f6c4e97
+Removing intermediate container a676414185e8
+Successfully built ffcf3f6c4e97
+docker run --rm -it  -e AWS_S3_BUCKET -e NOCACHE -p 8000:8000 -e DOCKERHOST &amp;quot;docs-base:test-tooling&amp;quot; hugo server --port=8000 --baseUrl=192.168.59.103 --bind=0.0.0.0
+ERROR: 2015/06/13 MenuEntry&#39;s .Url is deprecated and will be removed in Hugo 0.15. Use .URL instead.
+0 of 4 drafts rendered
+0 future content
+12 pages created
+0 paginator pages created
+0 tags created
+0 categories created
+in 55 ms
+Serving pages from /docs/public
+Web Server is available at http://0.0.0.0:8000/
+Press Ctrl+C to stop
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open the available server in your browser.&lt;/p&gt;
+
+&lt;p&gt;The documentation server has the complete menu but only the Docker Compose
+documentation resolves.  You can&amp;rsquo;t access the other project docs from this
+localized build.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;tips-on-hugo-metadata-and-menu-positioning&#34;&gt;Tips on Hugo metadata and menu positioning&lt;/h2&gt;
+
+&lt;p&gt;The top of each Docker Compose documentation file contains TOML metadata. The metadata is commented out to prevent it from appearing in GitHub.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!--[metadata]&amp;gt;
++++
+title = &amp;quot;Extending services in Compose&amp;quot;
+description = &amp;quot;How to use Docker Compose&#39;s extends keyword to share configuration between files and projects&amp;quot;
+keywords = [&amp;quot;fig, composition, compose, docker, orchestration, documentation, docs&amp;quot;]
+[menu.main]
+parent=&amp;quot;smn_workw_compose&amp;quot;
+weight=2
++++
+&amp;lt;![end-metadata]--&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The metadata alone has this structure:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;+++
+title = &amp;quot;Extending services in Compose&amp;quot;
+description = &amp;quot;How to use Docker Compose&#39;s extends keyword to share configuration between files and projects&amp;quot;
+keywords = [&amp;quot;fig, composition, compose, docker, orchestration, documentation, docs&amp;quot;]
+[menu.main]
+parent=&amp;quot;smn_workw_compose&amp;quot;
+weight=2
++++
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;[menu.main]&lt;/code&gt; section refers to navigation defined &lt;a href=&#34;https://github.com/docker/docs-base/blob/hugo/config.toml&#34;&gt;in the main Docker menu&lt;/a&gt;. This metadata says &lt;em&gt;add a menu item called&lt;/em&gt; Extending services in Compose &lt;em&gt;to the menu with the&lt;/em&gt; &lt;code&gt;smn_workdw_compose&lt;/code&gt; &lt;em&gt;identifier&lt;/em&gt;.  If you locate the menu in the configuration, you&amp;rsquo;ll find &lt;em&gt;Create multi-container applications&lt;/em&gt; is the menu title.&lt;/p&gt;
+
+&lt;p&gt;You can move an article in the tree by specifying a new parent. You can shift the location of the item by changing its weight.  Higher numbers are heavier and shift the item to the bottom of menu. Low or no numbers shift it up.&lt;/p&gt;
+
+&lt;h2 id=&#34;other-key-documentation-repositories&#34;&gt;Other key documentation repositories&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;docker/docs-base&lt;/code&gt; repository contains &lt;a href=&#34;https://github.com/docker/docs-base&#34;&gt;the Hugo theme and menu configuration&lt;/a&gt;. If you open the &lt;code&gt;Dockerfile&lt;/code&gt; you&amp;rsquo;ll see the &lt;code&gt;make docs&lt;/code&gt; relies on this as a base image for building the Compose documentation.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;docker/docs.docker.com&lt;/code&gt; repository contains &lt;a href=&#34;https://github.com/docker/docs.docker.com&#34;&gt;build system for building the Docker documentation site&lt;/a&gt;. Fork this repository to build the entire documentation site.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/concepts/Om/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/concepts/Om/</guid>
+      <description>
+
+&lt;h1 id=&#34;om&#34;&gt;Om&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/omcljs/om&#34;&gt;Om&lt;/a&gt; is a great example of the functional nature of React. Om has
+a focus on immutability and functional programming concepts. It
+achieves better performance than raw react through a focus on
+functional paradigms.&lt;/p&gt;
+
+&lt;h1 id=&#34;quickstart&#34;&gt;Quickstart&lt;/h1&gt;
+
+&lt;p&gt;There is a basic Om &lt;a href=&#34;https://github.com/omcljs/om/wiki/Basic-Tutorial&#34;&gt;tutorial&lt;/a&gt; which will help you get a grasp
+on the differences between React and Om as well as how we might move
+our tooling forward in the future.&lt;/p&gt;
+
+&lt;h1 id=&#34;examples-of-om&#34;&gt;Examples of Om&lt;/h1&gt;
+
+&lt;p&gt;CircleCI&amp;rsquo;s &lt;a href=&#34;https://github.com/circleci/frontend&#34;&gt;Frontend&lt;/a&gt; is open
+source and includes examples such as build log streaming using
+immutable data structures.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/concepts/Flux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/concepts/Flux/</guid>
+      <description>
+
+&lt;h1 id=&#34;flux&#34;&gt;Flux&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=i__969noyAM&#34;&gt;Intro&lt;/a&gt; to Flux&lt;/p&gt;
+
+&lt;h1 id=&#34;fluxible&#34;&gt;Fluxible&lt;/h1&gt;
+
+&lt;p&gt;We use Yahoo&amp;rsquo;s &lt;a href=&#34;https://github.com/yahoo/fluxible&#34;&gt;Fluxible&lt;/a&gt; as our Flux implementation.&lt;/p&gt;
+
+&lt;h1 id=&#34;relay&#34;&gt;Relay&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=9sc8Pyc51uU&#34;&gt;Relay&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/concepts/Immutability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/concepts/Immutability/</guid>
+      <description>
+
+&lt;h1 id=&#34;immutability&#34;&gt;Immutability&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=I7IdS-PbEgI&#34;&gt;Immutability&lt;/a&gt; is a primary way in which we can enhance
+the operational status of React&lt;/p&gt;
+
+&lt;h2 id=&#34;immutable-js-libs&#34;&gt;Immutable JS libs&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/facebook/immutable-js&#34;&gt;ImmutableJS&lt;/a&gt; (Facebook)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/swannodette/mori&#34;&gt;Mori&lt;/a&gt; (Om)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/concepts/React-Native/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/concepts/React-Native/</guid>
+      <description>
+
+&lt;h1 id=&#34;react-native&#34;&gt;React Native&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=7rDsRXj9-cU&#34;&gt;React Native&lt;/a&gt; is&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/concepts/React-Router/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/concepts/React-Router/</guid>
+      <description>
+
+&lt;h1 id=&#34;react-router&#34;&gt;React Router&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=XZfvW1a8Xac&#34;&gt;react-router&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/developing/production--testing-builds/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/developing/production--testing-builds/</guid>
+      <description>
+
+&lt;h1 id=&#34;testing-production-builds&#34;&gt;Testing Production Builds&lt;/h1&gt;
+
+&lt;p&gt;To build the production Image and run a container:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;make base&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make prod&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make copy-prod&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd .tmp &amp;amp;&amp;amp; docker build -t whatever .&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker run -ite ENV=production -e DEBUG=* -p 7001:3000 whatever&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;make-base&#34;&gt;make base&lt;/h3&gt;
+
+&lt;p&gt;installs dependencies, both local (&lt;code&gt;docker-ux&lt;/code&gt; and &lt;code&gt;hub-js-sdk&lt;/code&gt;) and
+remote (&lt;code&gt;package.json&lt;/code&gt;). If you modify anything in either of the local
+projects or the &lt;code&gt;package.json&lt;/code&gt;, you will have to re-run this step.&lt;/p&gt;
+
+&lt;h3 id=&#34;make-prod&#34;&gt;make prod&lt;/h3&gt;
+
+&lt;p&gt;builds the production application into a &lt;code&gt;.tmp&lt;/code&gt; folder inside the
+container. Run this step if you&amp;rsquo;ve edited code in the hub2
+application.&lt;/p&gt;
+
+&lt;h3 id=&#34;make-copy-prod&#34;&gt;make copy-prod&lt;/h3&gt;
+
+&lt;p&gt;copies the resulting folder out of a running container (the running
+container is created from the &lt;code&gt;make prod&lt;/code&gt; image). The folder will be
+placed at &lt;code&gt;hub2demo/.tmp&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;docker-build&#34;&gt;docker build&lt;/h3&gt;
+
+&lt;p&gt;will build the actual production image. This should be very similar to
+&lt;code&gt;bagel/hub-prod&lt;/code&gt;, except you&amp;rsquo;ve built it yourself instead of running
+it through the CI system.&lt;/p&gt;
+
+&lt;h3 id=&#34;docker-run&#34;&gt;docker run&lt;/h3&gt;
+
+&lt;p&gt;creates and runs a new container based on the production image. We use
+environment variables for a few things such as &lt;code&gt;debug&lt;/code&gt; logs.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/concepts/React/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/concepts/React/</guid>
+      <description>
+
+&lt;h1 id=&#34;react&#34;&gt;React&lt;/h1&gt;
+
+&lt;p&gt;React is a library from Facebook that uses an immediate-mode rendering
+pattern much like Doom&amp;rsquo;s. It brings JavaScript in a functional
+programming direction enabling the use of JS functions as the primary
+unit in applications. React also creates a foundation for more
+functional programming concepts such as immutability and purity. These
+&amp;ldquo;optimizations&amp;rdquo; can make rendering faster, debugging easier and enable
+more advanced techniques such as rendering of components through
+&lt;a href=&#34;http://en.wikipedia.org/wiki/QuickCheck&#34;&gt;Quickcheck&lt;/a&gt; semantics.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=nYkdrAPrdcw#t=224&#34;&gt;Rethinking Web App Development at Facebook&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;useful-react-links&#34;&gt;Useful React Links&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://facebook.github.io/react/docs/getting-started.html&#34;&gt;Getting Started&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://react-components.com/&#34;&gt;react-components search&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://facebook.github.io/react/docs/videos.html&#34;&gt;Videos and Talks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/lantiga/react.hiccup&#34;&gt;hiccup&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;key-concepts&#34;&gt;Key Concepts&lt;/h2&gt;
+
+&lt;h3 id=&#34;virtual-dom&#34;&gt;Virtual Dom&lt;/h3&gt;
+
+&lt;p&gt;React Components render to an intermediate DOM representation which
+then diffs against previous iterations and inserts minimal changes
+into the actual DOM.  (This is a loose description of what actually
+happens). Virtual DOM is not exclusive to React and has other
+implementations such as &lt;a href=&#34;https://github.com/Matt-Esch/virtual-dom&#34;&gt;virtual-dom&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;diffing&#34;&gt;Diffing&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://calendar.perfplanet.com/2013/diff/&#34;&gt;React&amp;rsquo;s Diffing Algorithm&lt;/a&gt;
+applies heuristics to tell when to re-render components. These
+heuristics bring complexity down from &lt;code&gt;O(n^3)&lt;/code&gt; to &lt;code&gt;O(n)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In addition we have lifecycle events such as &lt;code&gt;shouldComponentUpdate&lt;/code&gt;
+to manually declare how far down the tree we should go to render new
+data. This is especially useful for integration with existing
+infrastructure such as D3.js where we don&amp;rsquo;t actually want React to
+manage the DOM for us.&lt;/p&gt;
+
+&lt;h3 id=&#34;props-vs-state&#34;&gt;Props vs State&lt;/h3&gt;
+
+&lt;p&gt;React has &lt;code&gt;&amp;quot;two&amp;quot;&lt;/code&gt; locations for data in a component. &lt;code&gt;this.props&lt;/code&gt; and
+&lt;code&gt;this.state&lt;/code&gt;. Props are immutable and should contain only &amp;ldquo;raw&amp;rdquo;
+data. Any computed properties should be computed in the &lt;code&gt;render()&lt;/code&gt;
+function. &lt;code&gt;this.state&lt;/code&gt; is where we would store localized state. As
+much as possible we should move away from &lt;code&gt;this.state&lt;/code&gt; and use
+&lt;code&gt;this.props&lt;/code&gt; as much as possible. Extending React&amp;rsquo;s immutable behavior
+up into our data in this way allows us to write more pure functions
+and take after the excellent &lt;a href=&#34;./docker-hub/concepts/Om/&#34;&gt;Om&lt;/a&gt; library to achieve better
+performance.&lt;/p&gt;
+
+&lt;p&gt;Stores are now the primary holders of State in our applications.&lt;/p&gt;
+
+&lt;h4 id=&#34;prop-validation&#34;&gt;Prop Validation&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://facebook.github.io/react/docs/reusable-components.html&#34;&gt;Types&lt;/a&gt;
+should be declared for React Component props. This eases the load on
+new people coming into the codebase and also eases debugging load
+(Passing in invalid props in development will log informative errors).&lt;/p&gt;
+
+&lt;h3 id=&#34;react-components&#34;&gt;React Components&lt;/h3&gt;
+
+&lt;p&gt;React components are the modular unit of reusability in React
+apps. Since React Components are just functions, this means that
+functions are now the modular units in our applications.&lt;/p&gt;
+
+&lt;h4 id=&#34;component-lifecycle&#34;&gt;Component Lifecycle&lt;/h4&gt;
+
+&lt;p&gt;React Components have lifecycle events depicted here:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./docker-hub/concepts/imgs/react-component-lifecycle.jpg&#34; alt=&#34;img&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;usage&#34;&gt;Usage&lt;/h1&gt;
+
+&lt;h2 id=&#34;dev-niceties&#34;&gt;Dev Niceties&lt;/h2&gt;
+
+&lt;p&gt;When creating a new &lt;code&gt;React&lt;/code&gt; component, it is important to set the
+&lt;code&gt;displayName&lt;/code&gt; so that the React Tools console (in Chrome, etc) can
+tell which componenet is rendering. If this is not set, the component
+will render as &lt;code&gt;&amp;lt;Unknown model=&amp;quot;..&amp;quot;&amp;gt;&lt;/code&gt; in the developer tools.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-JavaScript&#34;&gt;var Layout = React.createClass({
+
+    displayName : &#39;MyLayout&#39;,
+    render      : (...)
+})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;rendering&#34;&gt;Rendering&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;render()&lt;/code&gt; is for displaying data &lt;em&gt;only&lt;/em&gt;. Do not store or edit &lt;code&gt;this.state&lt;/code&gt;.
+&lt;code&gt;render()&lt;/code&gt; should return the same thing every time given the same input.&lt;/p&gt;
+
+&lt;h2 id=&#34;jsx&#34;&gt;JSX&lt;/h2&gt;
+
+&lt;p&gt;JSX is a &lt;a href=&#34;http://facebook.github.io/jsx/&#34;&gt;draft spec&lt;/a&gt; extension to
+ECMAScript and one option for specifying DOM and Components. &lt;code&gt;babel&lt;/code&gt;
+handles transpiling jsx to js for us.&lt;/p&gt;
+
+&lt;h1 id=&#34;other-concepts&#34;&gt;Other Concepts&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;./docker-hub/concepts/Flux/&#34;&gt;Flux&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./docker-hub/concepts/React-Native/&#34;&gt;React Native&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./docker-hub/concepts/React-Router/&#34;&gt;React Router&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;./docker-hub/concepts/Immutability/&#34;&gt;Immutability&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/developing/gettingstarted--long-start/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/developing/gettingstarted--long-start/</guid>
+      <description>
+
+&lt;h1 id=&#34;longstart&#34;&gt;Longstart&lt;/h1&gt;
+
+&lt;h2 id=&#34;set-up-dns&#34;&gt;Set up DNS&lt;/h2&gt;
+
+&lt;p&gt;This command is &lt;code&gt;dns&lt;/code&gt; in &lt;code&gt;Makefile&lt;/code&gt;. It sets up
+&lt;code&gt;/etc/resolver/bagels.docker.com&lt;/code&gt; so we can hit
+&lt;code&gt;https://bagels.docker.com&lt;/code&gt; in a browser. This is necessary to comply
+with the CORS restrictions on the APIs.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd $PROJECT_ROOT
+make dns
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;clone-dependency-projects&#34;&gt;Clone dependency projects&lt;/h2&gt;
+
+&lt;p&gt;This will clone &lt;code&gt;docker-ux&lt;/code&gt; and &lt;code&gt;hub-js-sdk&lt;/code&gt; into &lt;code&gt;./private-deps&lt;/code&gt;. We
+deploy the master branch of each, so it&amp;rsquo;s good to check to make sure
+these are up to date occasionally.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;make hub-deps
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;run-all-of-the-containers-in-the-background&#34;&gt;Run all of the containers in the background&lt;/h2&gt;
+
+&lt;p&gt;This includes&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;dnsmasq
+
+&lt;ul&gt;
+&lt;li&gt;local dns resolution for bagels.docker.com&lt;/li&gt;
+&lt;li&gt;To comply with API CORS Origin header&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;haproxy
+
+&lt;ul&gt;
+&lt;li&gt;SSL Offloading&lt;/li&gt;
+&lt;li&gt;To handle routing domains to containers from dnsmasq&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;hub
+
+&lt;ul&gt;
+&lt;li&gt;Hub Frontend (development container)&lt;/li&gt;
+&lt;li&gt;Includes the environment to serve image assets, etc.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker-compose up -d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;run-the-developer-tools&#34;&gt;Run the Developer Tools&lt;/h1&gt;
+
+&lt;p&gt;You will need the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;tmux&lt;/li&gt;
+&lt;li&gt;node (v0.10.x)&lt;/li&gt;
+&lt;li&gt;npm (&amp;gt; v2)&lt;/li&gt;
+&lt;li&gt;flow (v0.8.0 or latest)&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;./startup-scripts/boot-dev-tmux.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;commands&#34;&gt;Commands&lt;/h2&gt;
+
+&lt;h3 id=&#34;flow-start&#34;&gt;&lt;code&gt;flow start&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;This is run by default by &lt;code&gt;./startup-scripts/boot-dev.sh&lt;/code&gt;. This runs
+the flow server in the background. To see the errors flow detects, you
+must be inside the &lt;code&gt;hub&lt;/code&gt; container and run &lt;code&gt;flow&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;gulp-nodemon-dev&#34;&gt;&lt;code&gt;gulp nodemon::dev&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;This is run by default, it handles reloading/transpiling es6 and jsx
+content on file changes.&lt;/p&gt;
+
+&lt;h3 id=&#34;gulp-webpack&#34;&gt;&lt;code&gt;gulp webpack&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;This is a watch task that handles the client js. If you are
+making changes, you will want to run this (probably via &lt;code&gt;gulp watch&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&#34;gulp-styles-dev&#34;&gt;&lt;code&gt;gulp styles::dev&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Compiles sass to css. Is included in &lt;code&gt;gulp watch&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;gulp-jscs&#34;&gt;&lt;code&gt;gulp jscs&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Lints all of the code, skipping jsx sections while
+including flow types and es6 syntax.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/developing/react--components/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/developing/react--components/</guid>
+      <description>
+
+&lt;h1 id=&#34;creating-components&#34;&gt;Creating Components&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// use strict by default
+&#39;use strict&#39;;
+
+/**
+ * ES6 import syntax.
+ */
+import React = from &#39;react&#39;;
+import Router, { Link, RouteHandler } = from &#39;react-router&#39;;
+import JWTStore from &#39;../stores/JWTStore&#39;;
+
+var UserPage = React.createClass({
+
+  /**
+   * displayName is used mostly in error messages, but also
+   * in the React chrome extension. Always include a 
+   * displayName.
+   */
+  displayName: &#39;UserPage&#39;,
+
+  /**
+   * The render function is required. It must return a valid
+   * React Element. We are using ES6 syntax to declare the
+   * function.
+   */
+  render() {
+    return (
+      /**
+       * jsx is compiled to function calls. Due to this, there
+       * must always be a *single* Element returned in the 
+       * render() call
+       */
+      &amp;lt;div&amp;gt;
+          This will be the base wrapper of the &#39;Users&#39; page where either your or another users profile will appear &amp;lt;br/&amp;gt;
+          This will let you see your public facing page at /u/username/ too &amp;lt;br/&amp;gt;
+          &#39;Your&#39; homepage/dashboard will live at /home/&amp;lt;br/&amp;gt;
+          /**
+           * RouteHandler comes from React-Router and displays
+           * the sub-route&#39;s content (more on this in Routing)
+           */
+          &amp;lt;RouteHandler /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+});
+
+var RootUser = React.createClass({
+  displayName: &#39;RootUser&#39;,
+  render() {
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;p/&amp;gt;
+        This is root user page.&amp;lt;br/&amp;gt;
+        When not looking at a specific user or an owned image&amp;lt;br/&amp;gt;
+        This will show a list of repos/images owned by the root user &amp;lt;br/&amp;gt;
+        /**
+         * Link is from React-Router and requires the params
+         * to be set as an object. The `repo` route is 
+         * designated in Routes.jsx
+         */
+        &amp;lt;Link to=&#39;repo&#39; params={{user:&#39;testing&#39;, splat:&#39;1234&#39;}}&amp;gt;This could be a image box of some sort&amp;lt;/Link&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+});
+
+var User = React.createClass({
+  displayName: &#39;User&#39;,
+  /**
+   * contextTypes are required to access Fluxible or React-Router
+   * functions. In this case, we specify that React-Router is 
+   * required for this Element.
+   */
+  contextTypes: {
+    router: React.PropTypes.func.isRequired
+  },
+  render() {
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;p/&amp;gt;
+        /**
+         * Using the router from contextTypes:
+         */
+        This is the UID: {this.context.router.getCurrentParams().uid}&amp;lt;br/&amp;gt;
+        This is main user page.&amp;lt;br/&amp;gt;
+        This will show a list of repos/images owned by the user &amp;lt;br/&amp;gt;
+        &amp;lt;RouteHandler /&amp;gt;
+      &amp;lt;/div&amp;gt;
+      );
+  }
+});
+
+/**
+ * Only export one Element per file.
+ */
+module.exports = {
+  userpage: UserPage,
+  rootuser: RootUser,
+  user: User
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/developing/react-router--adding-routes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/developing/react-router--adding-routes/</guid>
+      <description>
+
+&lt;h1 id=&#34;adding-routes&#34;&gt;Adding Routes&lt;/h1&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/docker-hub/developing/saas-config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/docker-hub/developing/saas-config/</guid>
+      <description>
+
+&lt;h1 id=&#34;saas-config&#34;&gt;saas-config&lt;/h1&gt;
+
+&lt;p&gt;You can swap environments by doing two things:&lt;/p&gt;
+
+&lt;p&gt;In tmux:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ENV=local gulp webpack
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In &lt;code&gt;docker-compose.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hub:
+  ...
+  environment:
+    ENV: local
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/engine/articles/https/README/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/engine/articles/https/README/</guid>
+      <description>&lt;p&gt;This is an initial attempt to make it easier to test the examples in the https.md
+doc&lt;/p&gt;
+
+&lt;p&gt;at this point, it has to be a manual thing, and I&amp;rsquo;ve been running it in boot2docker&lt;/p&gt;
+
+&lt;p&gt;so my process is&lt;/p&gt;
+
+&lt;p&gt;$ boot2docker ssh
+$$ git clone &lt;a href=&#34;https://github.com/docker/docker&#34;&gt;https://github.com/docker/docker&lt;/a&gt;
+$$ cd docker/docs/articles/https
+$$ make cert
+lots of things to see and manually answer, as openssl wants to be interactive
+&lt;strong&gt;NOTE:&lt;/strong&gt; make sure you enter the hostname (&lt;code&gt;boot2docker&lt;/code&gt; in my case) when prompted for &lt;code&gt;Computer Name&lt;/code&gt;)
+$$ sudo make run&lt;/p&gt;
+
+&lt;p&gt;start another terminal&lt;/p&gt;
+
+&lt;p&gt;$ boot2docker ssh
+$$ cd docker/docs/articles/https
+$$ make client&lt;/p&gt;
+
+&lt;p&gt;the last will connect first with &lt;code&gt;--tls&lt;/code&gt; and then with &lt;code&gt;--tlsverify&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;both should succeed&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/engine/reference/api/README/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/engine/reference/api/README/</guid>
+      <description>&lt;p&gt;This directory holds the authoritative specifications of APIs defined and implemented by Docker. Currently this includes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The remote API by which a docker node can be queried over HTTP&lt;/li&gt;
+&lt;li&gt;The registry API by which a docker node can download and upload
+images for storage and sharing&lt;/li&gt;
+&lt;li&gt;The index search API by which a docker node can search the public
+index for images to download&lt;/li&gt;
+&lt;li&gt;The docker.io OAuth and accounts API which 3rd party services can
+use to access account information&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost/engine/security/apparmor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/engine/security/apparmor/</guid>
+      <description>
+
+&lt;h2 id=&#34;apparmor-security-profiles-for-docker&#34;&gt;AppArmor security profiles for Docker&lt;/h2&gt;
+
+&lt;p&gt;AppArmor (Application Armor) is a security module that allows a system
+administrator to associate a security profile with each program. Docker
+expects to find an AppArmor policy loaded and enforced.&lt;/p&gt;
+
+&lt;p&gt;Container profiles are loaded automatically by Docker. A profile
+for the Docker Engine itself also exists and is installed
+with the official &lt;em&gt;.deb&lt;/em&gt; packages. Advanced users and package
+managers may find the profile for &lt;em&gt;/usr/bin/docker&lt;/em&gt; underneath
+&lt;a href=&#34;https://github.com/docker/docker/tree/master/contrib/apparmor&#34;&gt;contrib/apparmor&lt;/a&gt;
+in the Docker Engine source repository.&lt;/p&gt;
+
+&lt;h2 id=&#34;understand-the-policies&#34;&gt;Understand the policies&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;docker-default&lt;/code&gt; profile the default for running
+containers. It is moderately protective while
+providing wide application compatibility.&lt;/p&gt;
+
+&lt;p&gt;The system&amp;rsquo;s standard &lt;code&gt;unconfined&lt;/code&gt; profile inherits all
+system-wide policies, applying path-based policies
+intended for the host system inside of containers.
+This was the default for privileged containers
+prior to Docker 1.8.&lt;/p&gt;
+
+&lt;h2 id=&#34;overriding-the-profile-for-a-container&#34;&gt;Overriding the profile for a container&lt;/h2&gt;
+
+&lt;p&gt;Users may override the AppArmor profile using the
+&lt;code&gt;security-opt&lt;/code&gt; option (per-container).&lt;/p&gt;
+
+&lt;p&gt;For example, the following explicitly specifies the default policy:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker run --rm -it --security-opt apparmor:docker-default hello-world
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

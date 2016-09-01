@@ -1,0 +1,1800 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Opensources on Docker Docs</title>
+    <link>http://localhost/opensource/</link>
+    <description>Recent content in Opensources on Docker Docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost/opensource/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Advanced contributing</title>
+      <link>http://localhost/opensource/workflow/advanced-contributing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/workflow/advanced-contributing/</guid>
+      <description>
+
+&lt;h1 id=&#34;advanced-contributing&#34;&gt;Advanced contributing&lt;/h1&gt;
+
+&lt;p&gt;In this section, you learn about the more advanced contributions you can make.
+They are advanced because they have a more involved workflow or require greater
+programming experience. Don&amp;rsquo;t be scared off though, if you like to stretch and
+challenge yourself, this is the place for you.&lt;/p&gt;
+
+&lt;p&gt;This section gives generalized instructions for advanced contributions. You&amp;rsquo;ll
+read about the workflow but there are not specific descriptions of commands.
+Your goal should be to understand the processes described.&lt;/p&gt;
+
+&lt;p&gt;At this point, you should have read and worked through the earlier parts of
+the project contributor guide. You should also have
+&lt;a href=&#34;../make-a-contribution/&#34; target=&#34;_blank&#34;&gt; made at least one project contribution&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;refactor-or-cleanup-proposal&#34;&gt;Refactor or cleanup proposal&lt;/h2&gt;
+
+&lt;p&gt;A refactor or cleanup proposal changes Docker&amp;rsquo;s internal structure without
+altering the external behavior. To make this type of proposal:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Fork &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make your changes in a feature branch.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Sync and rebase with &lt;code&gt;master&lt;/code&gt; as you work.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the full test suite.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Submit your code through a pull request (PR).&lt;/p&gt;
+
+&lt;p&gt;The PR&amp;rsquo;s title should have the format:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cleanup:&lt;/strong&gt; &lt;em&gt;short title&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;If your changes required logic changes, note that in your request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Work through Docker&amp;rsquo;s review process until merge.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;design-proposal&#34;&gt;Design proposal&lt;/h2&gt;
+
+&lt;p&gt;A design proposal solves a problem or adds a feature to the Docker software.
+The process for submitting design proposals requires two pull requests, one
+for the design and one for the implementation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/workflow/images/proposal.png&#34; alt=&#34;Simple process&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The important thing to notice is that both the design pull request and the
+implementation pull request go through a review. In other words, there is
+considerable time commitment in a design proposal; so, you might want to pair
+with someone on design work.&lt;/p&gt;
+
+&lt;p&gt;The following provides greater detail on the process:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Come up with an idea.&lt;/p&gt;
+
+&lt;p&gt;Ideas usually come from limitations users feel working with a product. So,
+take some time to really use Docker. Try it on different platforms; explore
+how it works with different web applications. Go to some community events
+and find out what other users want.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review existing issues and proposals to make sure no other user is proposing a similar idea.&lt;/p&gt;
+
+&lt;p&gt;The design proposals are &lt;a
+href=&#34;https://github.com/docker/docker/pulls?q=is%3Aopen+is%3Apr+label%
+3Akind%2Fproposal&#34; target=&#34;_blank&#34;&gt;all online in our GitHub pull requests&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Talk to the community about your idea.&lt;/p&gt;
+
+&lt;p&gt;We have lots of &lt;a href=&#34;../get-help/&#34; target=&#34;_blank&#34;&gt;community forums&lt;/a&gt;
+where you can get feedback on your idea. Float your idea in a forum or two
+to get some commentary going on it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fork &lt;code&gt;docker/docker&lt;/code&gt; and clone the repo to your local host.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new Markdown file in the area you wish to change.&lt;/p&gt;
+
+&lt;p&gt;For example, if you want to redesign our daemon create a new file under the
+&lt;code&gt;daemon/&lt;/code&gt; folder.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Name the file descriptively, for example &lt;code&gt;redesign-daemon-proposal.md&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Write a proposal for your change into the file.&lt;/p&gt;
+
+&lt;p&gt;This is a Markdown file that describes your idea. Your proposal
+should include information like:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Why is this change needed or what are the use cases?&lt;/li&gt;
+&lt;li&gt;What are the requirements this change should meet?&lt;/li&gt;
+&lt;li&gt;What are some ways to design/implement this feature?&lt;/li&gt;
+&lt;li&gt;Which design/implementation do you think is best and why?&lt;/li&gt;
+&lt;li&gt;What are the risks or limitations of your proposal?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is your chance to convince people your idea is sound.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Submit your proposal in a pull request to &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The title should have the format:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Proposal:&lt;/strong&gt; &lt;em&gt;short title&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The body of the pull request should include a brief summary of your change
+and then say something like &amp;ldquo;&lt;em&gt;See the file for a complete description&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Refine your proposal through review.&lt;/p&gt;
+
+&lt;p&gt;The maintainers and the community review your proposal. You&amp;rsquo;ll need to
+answer questions and sometimes explain or defend your approach. This is
+chance for everyone to both teach and learn.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Pull request accepted.&lt;/p&gt;
+
+&lt;p&gt;Your request may also be rejected. Not every idea is a good fit for Docker.
+Let&amp;rsquo;s assume though your proposal succeeded.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Implement your idea.&lt;/p&gt;
+
+&lt;p&gt;Implementation uses all the standard practices of any contribution.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;fork &lt;code&gt;docker/docker&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;create a feature branch&lt;/li&gt;
+&lt;li&gt;sync frequently back to master&lt;/li&gt;
+&lt;li&gt;test as you go and full test before a PR&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you run into issues, the community is there to help.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;When you have a complete implementation, submit a pull request back to &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Review and iterate on your code.&lt;/p&gt;
+
+&lt;p&gt;If you are making a large code change, you can expect greater scrutiny
+during this phase.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Acceptance and merge!&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;about-the-advanced-process&#34;&gt;About the advanced process&lt;/h2&gt;
+
+&lt;p&gt;Docker is a large project. Our core team gets a great many design proposals.
+Design proposal discussions can span days, weeks, and longer. The number of comments can reach the 100s.
+In that situation, following the discussion flow and the decisions reached is crucial.&lt;/p&gt;
+
+&lt;p&gt;Making a pull request with a design proposal simplifies this process:
+* you can leave comments on specific design proposal line
+* replies around line are easy to track
+* as a proposal changes and is updated, pages reset as line items resolve
+* GitHub maintains the entire history&lt;/p&gt;
+
+&lt;p&gt;While proposals in pull requests do not end up merged into a master repository, they provide a convenient tool for managing the design process.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Board member profiles</title>
+      <link>http://localhost/opensource/governance/board-profiles/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/governance/board-profiles/</guid>
+      <description>
+
+&lt;h1 id=&#34;project-leadership&#34;&gt;Project Leadership&lt;/h1&gt;
+
+&lt;p&gt;The Docker Project is led by three individuals who are responsible for the direction, operations, quality and community of the project as a whole.&lt;/p&gt;
+
+&lt;h3 id=&#34;chief-architect-solomon-hykes&#34;&gt;Chief Architect : Solomon Hykes&lt;/h3&gt;
+
+&lt;p&gt;The chief architect is responsible for the general direction of the project,
+defining it’s design principles, and preserving the integrity of it’s overall
+architecture as the platform grows and matures.&lt;/p&gt;
+
+&lt;h3 id=&#34;chief-maintainer-michael-crosby&#34;&gt;Chief Maintainer : Michael Crosby&lt;/h3&gt;
+
+&lt;p&gt;The chief maintainer is responsible for all aspects of quality for the project
+including code reviews, usability, stability, security and performance.&lt;/p&gt;
+
+&lt;h3 id=&#34;chief-operator-steve-francia&#34;&gt;Chief Operator : Steve Francia&lt;/h3&gt;
+
+&lt;p&gt;The chief operator is responsible for the day-to-day operations of the project
+including: facilitating communications amongst all the contributors; tracking
+release schedules; managing the relationship with downstream distributions and
+upstream dependencies; and helping new contributors to get involved and become
+successful contributors and maintainers. The role is also responsible for
+managing and measuring the success of the overall project and ensuring it is
+governed properly working in concert with the Docker Governance Advisory Board
+(DGAB).&lt;/p&gt;
+
+&lt;h1 id=&#34;members-of-the-2015-dgab&#34;&gt;Members of the 2015 DGAB&lt;/h1&gt;
+
+&lt;p&gt;The DGAB is made up of 16 individual who represent the ecosystem, contributors
+and community of the Docker Project.&lt;/p&gt;
+
+&lt;h2 id=&#34;docker&#34;&gt;Docker&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Michael Crosby&lt;/li&gt;
+&lt;li&gt;Steve Francia&lt;/li&gt;
+&lt;li&gt;Stephen Day&lt;/li&gt;
+&lt;li&gt;Arnaud Poterie&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;individual-contributors&#34;&gt;Individual Contributors&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Andrew Tianon Page&lt;/li&gt;
+&lt;li&gt;Aleksa Sarai&lt;/li&gt;
+&lt;li&gt;Harald Albers&lt;/li&gt;
+&lt;li&gt;Darren Shepherd&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;corporate-contributors&#34;&gt;Corporate Contributors&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Jeff Borek (IBM)&lt;/li&gt;
+&lt;li&gt;Dan Walsh (RedHat)&lt;/li&gt;
+&lt;li&gt;Ahmet Alp Balkan (Microsoft)&lt;/li&gt;
+&lt;li&gt;Rohit Jnagal (Google)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;user&#34;&gt;User&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nicola Paolucci (Atlassian)&lt;/li&gt;
+&lt;li&gt;Burke Libbey (Shopify)&lt;/li&gt;
+&lt;li&gt;Meghdoot Bhattacharya (PayPal)&lt;/li&gt;
+&lt;li&gt;Tapabrata Pal (Capital One)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Code of conduct</title>
+      <link>http://localhost/opensource/governance/conduct-code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/governance/conduct-code/</guid>
+      <description>
+
+&lt;h1 id=&#34;code-of-conduct&#34;&gt;Code of conduct&lt;/h1&gt;
+
+&lt;p&gt;The Docker project has not currently adopted a Code of Conduct though there is
+work being done in this regard. Without a formal Code of Conduct being adopted
+by the project, it is anticipated that participants and contributors follow the
+generic &lt;a href=&#34;http://contributor-covenant.org&#34;&gt;contributor covenant&lt;/a&gt; until a formal
+code of conduct is adopted.&lt;/p&gt;
+
+&lt;h1 id=&#34;contributor-covenant&#34;&gt;Contributor Covenant&lt;/h1&gt;
+
+&lt;p&gt;As contributors and maintainers of this project, we pledge to respect all people
+who contribute through reporting issues, posting feature requests, updating
+documentation, submitting pull requests or patches, and other activities.&lt;/p&gt;
+
+&lt;p&gt;We are committed to making participation in this project a harassment-free
+experience for everyone, regardless of level of experience, gender, gender
+identity and expression, sexual orientation, disability, personal appearance,
+body size, race, ethnicity, age, or religion.&lt;/p&gt;
+
+&lt;p&gt;Examples of unacceptable behavior by participants include the use of sexual
+language or imagery, derogatory comments or personal attacks, trolling, public
+or private harassment, insults, or other unprofessional conduct.&lt;/p&gt;
+
+&lt;p&gt;Project maintainers have the right and responsibility to remove, edit, or
+reject comments, commits, code, wiki edits, issues, and other contributions
+that are not aligned to this Code of Conduct. Project maintainers who do not
+follow the Code of Conduct may be removed from the project team.&lt;/p&gt;
+
+&lt;p&gt;Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported by opening an issue or contacting one or more of the project
+maintainers.&lt;/p&gt;
+
+&lt;p&gt;This Code of Conduct is adapted from the &lt;a href=&#34;http://contributor-covenant.org&#34;&gt;Contributor
+Covenant&lt;/a&gt;, version 1.0.0, available at
+&lt;a href=&#34;http://contributor-covenant.org/version/1/0/0/&#34;&gt;http://contributor-covenant.org/version/1/0/0/&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Coding style checklist</title>
+      <link>http://localhost/opensource/workflow/coding-style/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/workflow/coding-style/</guid>
+      <description>
+
+&lt;h1 id=&#34;coding-style-checklist&#34;&gt;Coding style checklist&lt;/h1&gt;
+
+&lt;p&gt;This checklist summarizes the material you experienced working through &lt;a href=&#34;../opensource/workflow/make-a-contribution/&#34;&gt;make a
+code contribution&lt;/a&gt; and &lt;a href=&#34;../opensource/workflow/advanced-contributing/&#34;&gt;advanced
+contributing&lt;/a&gt;. The checklist applies to both
+program code and documentation code.&lt;/p&gt;
+
+&lt;h2 id=&#34;change-and-commit-code&#34;&gt;Change and commit code&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Fork the &lt;code&gt;docker/docker&lt;/code&gt; repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make changes on your fork in a feature branch. Name your branch &lt;code&gt;XXXX-something&lt;/code&gt;
+where &lt;code&gt;XXXX&lt;/code&gt; is the issue number you are working on.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run &lt;code&gt;gofmt -s -w file.go&lt;/code&gt; on each changed file before
+committing your changes. Most editors have plug-ins that do this automatically.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run &lt;code&gt;golint&lt;/code&gt; on each changed file before
+committing your changes.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Update the documentation when creating or modifying features.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Commits that fix or close an issue should reference them in the commit message
+&lt;code&gt;Closes #XXXX&lt;/code&gt; or &lt;code&gt;Fixes #XXXX&lt;/code&gt;. Mentions help by automatically closing the
+issue on a merge.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;After every commit, run the test suite and ensure it is passing.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Sync and rebase frequently as you code to keep up with &lt;code&gt;docker&lt;/code&gt; master.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;git&lt;/code&gt; signature and make sure you sign each commit.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Do not add yourself to the &lt;code&gt;AUTHORS&lt;/code&gt; file. This file is autogenerated from the
+Git history.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;tests-and-testing&#34;&gt;Tests and testing&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Submit unit tests for your changes.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make use of the builtin Go test framework built.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use existing Docker test files (&lt;code&gt;name_test.go&lt;/code&gt;) for inspiration.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run &lt;a href=&#34;../test-and-docs/&#34; target=&#34;_blank&#34;&gt;the full test suite&lt;/a&gt; on your
+branch before submitting a pull request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run &lt;code&gt;make docs&lt;/code&gt; to build the documentation and then check it locally.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use an &lt;a href=&#34;http://www.hemingwayapp.com&#34; target=&#34;_blank&#34;&gt;online grammar
+checker&lt;/a&gt; or similar to test you documentation changes for clarity,
+concision, and correctness.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;pull-requests&#34;&gt;Pull requests&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Sync and cleanly rebase on top of Docker&amp;rsquo;s &lt;code&gt;master&lt;/code&gt; without multiple branches
+mixed into the PR.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Before the pull request, squash your commits into logical units of work using
+&lt;code&gt;git rebase -i&lt;/code&gt; and &lt;code&gt;git push -f&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Include documentation changes in the same commit so that a revert would
+remove all traces of the feature or fix.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Reference each issue in your pull request description (&lt;code&gt;#XXXX&lt;/code&gt;)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;respond-to-pull-requests-reviews&#34;&gt;Respond to pull requests reviews&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Docker maintainers use LGTM (&lt;strong&gt;l&lt;/strong&gt;ooks-&lt;strong&gt;g&lt;/strong&gt;ood-&lt;strong&gt;t&lt;/strong&gt;o-&lt;strong&gt;m&lt;/strong&gt;e) in PR comments
+to indicate acceptance.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Code review comments may be added to your pull request. Discuss, then make
+the suggested modifications and push additional commits to your feature
+branch.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Incorporate changes on your feature branch and push to your fork. This
+automatically updates your open pull request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Post a comment after pushing to alert reviewers to PR changes; pushing a
+change does not send notifications.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;A change requires LGTMs from an absolute majority maintainers of an
+affected component. For example, if you change &lt;code&gt;docs/&lt;/code&gt; and &lt;code&gt;registry/&lt;/code&gt; code,
+an absolute majority of the &lt;code&gt;docs/&lt;/code&gt; and the &lt;code&gt;registry/&lt;/code&gt; maintainers must
+approve your PR.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;merges-after-pull-requests&#34;&gt;Merges after pull requests&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;After a merge, &lt;a href=&#34;https://master.dockerproject.org/&#34;&gt;a master build&lt;/a&gt; is
+available almost immediately.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If you made a documentation change, you can see it at
+&lt;a href=&#34;http://docs.master.dockerproject.org/&#34;&gt;docs.master.dockerproject.org&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Configure Git for contributing</title>
+      <link>http://localhost/opensource/project/set-up-git/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/project/set-up-git/</guid>
+      <description>
+
+&lt;h1 id=&#34;configure-git-for-contributing&#34;&gt;Configure Git for contributing&lt;/h1&gt;
+
+&lt;p&gt;Work through this page to configure Git and a repository you&amp;rsquo;ll use throughout
+the Contributor Guide. The work you do further in the guide, depends on the work
+you do here.&lt;/p&gt;
+
+&lt;h2 id=&#34;fork-and-clone-the-docker-code&#34;&gt;Fork and clone the Docker code&lt;/h2&gt;
+
+&lt;p&gt;Before contributing, you first fork the Docker code repository. A fork copies
+a repository at a particular point in time. GitHub tracks for you where a fork
+originates.&lt;/p&gt;
+
+&lt;p&gt;As you make contributions, you change your fork&amp;rsquo;s code. When you are ready,
+you make a pull request back to the original Docker repository. If you aren&amp;rsquo;t
+familiar with this workflow, don&amp;rsquo;t worry, this guide walks you through all the
+steps.&lt;/p&gt;
+
+&lt;p&gt;To fork and clone Docker:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a browser and log into GitHub with your account.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Go to the &lt;a href=&#34;https://github.com/docker/docker&#34;
+target=&#34;_blank&#34;&gt;docker/docker repository&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the &amp;ldquo;Fork&amp;rdquo; button in the upper right corner of the GitHub interface.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/project/images/fork_docker.png&#34; alt=&#34;Branch Signature&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;GitHub forks the repository to your GitHub account. The original
+&lt;code&gt;docker/docker&lt;/code&gt; repository becomes a new fork &lt;code&gt;YOUR_ACCOUNT/docker&lt;/code&gt; under
+your account.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Copy your fork&amp;rsquo;s clone URL from GitHub.&lt;/p&gt;
+
+&lt;p&gt;GitHub allows you to use HTTPS or SSH protocols for clones. You can use the
+&lt;code&gt;git&lt;/code&gt; command line or clients like Subversion to clone a repository.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/project/images/copy_url.png&#34; alt=&#34;Copy clone URL&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This guide assume you are using the HTTPS protocol and the &lt;code&gt;git&lt;/code&gt; command
+line. If you are comfortable with SSH and some other tool, feel free to use
+that instead. You&amp;rsquo;ll need to convert what you see in the guide to what is
+appropriate to your tool.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open a terminal window on your local host and change to your home directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd ~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In Windows, you&amp;rsquo;ll work in your Docker Quickstart Terminal window instead of
+Powershell or a &lt;code&gt;cmd&lt;/code&gt; window.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a &lt;code&gt;repos&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ mkdir repos
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change into your &lt;code&gt;repos&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd repos
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Clone the fork to your local host into a repository called &lt;code&gt;docker-fork&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/moxiegirl/docker.git docker-fork
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Naming your local repo &lt;code&gt;docker-fork&lt;/code&gt; should help make these instructions
+easier to follow; experienced coders don&amp;rsquo;t typically change the name.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change directory into your new &lt;code&gt;docker-fork&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Take a moment to familiarize yourself with the repository&amp;rsquo;s contents. List
+the contents.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;set-your-signature-and-an-upstream-remote&#34;&gt;Set your signature and an upstream remote&lt;/h2&gt;
+
+&lt;p&gt;When you contribute to Docker, you must certify you agree with the
+&lt;a href=&#34;http://developercertificate.org/&#34; target=&#34;_blank&#34;&gt;Developer Certificate of Origin&lt;/a&gt;.
+You indicate your agreement by signing your &lt;code&gt;git&lt;/code&gt; commits like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Signed-off-by: Pat Smith &amp;lt;pat.smith@email.com&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To create a signature, you configure your username and email address in Git.
+You can set these globally or locally on just your &lt;code&gt;docker-fork&lt;/code&gt; repository.
+You must sign with your real name. We don&amp;rsquo;t accept anonymous contributions or
+contributions through pseudonyms.&lt;/p&gt;
+
+&lt;p&gt;As you change code in your fork, you&amp;rsquo;ll want to keep it in sync with the changes
+others make in the &lt;code&gt;docker/docker&lt;/code&gt; repository. To make syncing easier, you&amp;rsquo;ll
+also add a &lt;em&gt;remote&lt;/em&gt; called &lt;code&gt;upstream&lt;/code&gt; that points to &lt;code&gt;docker/docker&lt;/code&gt;. A remote
+is just another project version hosted on the internet or network.&lt;/p&gt;
+
+&lt;p&gt;To configure your username, email, and add a remote:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Change to the root of your &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;user.name&lt;/code&gt; for the repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local user.name &amp;quot;FirstName LastName&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;user.email&lt;/code&gt; for the repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local user.email &amp;quot;emailname@mycompany.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your local repo to track changes upstream, on the &lt;code&gt;docker&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote add upstream https://github.com/docker/docker.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check the result in your &lt;code&gt;git&lt;/code&gt; configuration.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local -l
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/moxiegirl/docker.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+user.name=Mary Anthony
+user.email=mary@docker.com
+remote.upstream.url=https://github.com/docker/docker.git
+remote.upstream.fetch=+refs/heads/*:refs/remotes/upstream/*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To list just the remotes use:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote -v
+origin  https://github.com/moxiegirl/docker.git (fetch)
+origin  https://github.com/moxiegirl/docker.git (push)
+upstream    https://github.com/docker/docker.git (fetch)
+upstream    https://github.com/docker/docker.git (push)
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;create-and-push-a-branch&#34;&gt;Create and push a branch&lt;/h2&gt;
+
+&lt;p&gt;As you change code in your fork, make your changes on a repository branch.
+The branch name should reflect what you are working on. In this section, you
+create a branch, make a change, and push it up to your fork.&lt;/p&gt;
+
+&lt;p&gt;This branch is just for testing your config for this guide. The changes are part
+of a dry run, so the branch name will be dry-run-test. To create and push
+the branch to your fork on GitHub:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a terminal and go to the root of your &lt;code&gt;docker-fork&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a &lt;code&gt;dry-run-test&lt;/code&gt; branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git checkout -b dry-run-test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command creates the branch and switches the repository to it.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Verify you are in your new branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git branch
+* dry-run-test
+  master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The current branch has an * (asterisk) marker. So, these results shows you
+are on the right branch.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a &lt;code&gt;TEST.md&lt;/code&gt; file in the repository&amp;rsquo;s root.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ touch TEST.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Edit the file and add your email and location.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/project/images/contributor-edit.png&#34; alt=&#34;Add your information&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can use any text editor you are comfortable with.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Save and close the file.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check the status of your branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git status
+On branch dry-run-test
+Untracked files:
+  (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to include in what will be committed)
+
+
+    TEST.md
+
+
+nothing added to commit but untracked files present (use &amp;quot;git add&amp;quot; to track)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You&amp;rsquo;ve only changed the one file. It is untracked so far by git.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add your file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git add TEST.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That is the only &lt;em&gt;staged&lt;/em&gt; file. Stage is fancy word for work that Git is
+tracking.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Sign and commit your change.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git commit -s -m &amp;quot;Making a dry run test.&amp;quot;
+[dry-run-test 6e728fb] Making a dry run test
+ 1 file changed, 1 insertion(+)
+ create mode 100644 TEST.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Commit messages should have a short summary sentence of no more than 50
+characters. Optionally, you can also include a more detailed explanation
+after the summary. Separate the summary from any explanation with an empty
+line.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Push your changes to GitHub.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git push --set-upstream origin dry-run-test
+Username for &#39;https://github.com&#39;: moxiegirl
+Password for &#39;https://moxiegirl@github.com&#39;:
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Git prompts you for your GitHub username and password. Then, the command
+returns a result.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Counting objects: 13, done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 320 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To https://github.com/moxiegirl/docker.git
+ * [new branch]      dry-run-test -&amp;gt; dry-run-test
+Branch dry-run-test set up to track remote branch dry-run-test from origin.
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open your browser to GitHub.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Navigate to your Docker fork.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure the &lt;code&gt;dry-run-test&lt;/code&gt; branch exists, that it has your commit, and the
+commit is signed.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/project/images/branch-sig.png&#34; alt=&#34;Branch Signature&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;Congratulations, you have finished configuring both your local host environment
+and Git for contributing. In the next section you&amp;rsquo;ll &lt;a href=&#34;../opensource/project/set-up-dev-env/&#34;&gt;learn how to set up and
+work in a Docker development container&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Contribution workflow</title>
+      <link>http://localhost/opensource/workflow/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/workflow/</guid>
+      <description>
+
+&lt;h1 id=&#34;contribution-workflow&#34;&gt;Contribution workflow&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/workflow/make-a-contribution/&#34;&gt;Understand how to contribute&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/workflow/find-an-issue/&#34;&gt;Find and claim an issue&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/workflow/work-issue/&#34;&gt;Work on your issue&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/workflow/create-pr/&#34;&gt;Create a pull request&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/workflow/review-pr/&#34;&gt;Participate in the PR review&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/workflow/advanced-contributing/&#34;&gt;Advanced contributing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/workflow/coding-style/&#34;&gt;Coding style checklist&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Create a pull request (PR)</title>
+      <link>http://localhost/opensource/workflow/create-pr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/workflow/create-pr/</guid>
+      <description>
+
+&lt;h1 id=&#34;create-a-pull-request-pr&#34;&gt;Create a pull request (PR)&lt;/h1&gt;
+
+&lt;p&gt;A pull request (PR) sends your changes to the Docker maintainers for review. You
+create a pull request on GitHub. A pull request &amp;ldquo;pulls&amp;rdquo; changes from your forked
+repository into the &lt;code&gt;docker/docker&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;p&gt;You can see &lt;a href=&#34;https://github.com/docker/docker/pulls&#34; target=&#34;_blank&#34;&gt;the
+list of active pull requests to Docker&lt;/a&gt; on GitHub.&lt;/p&gt;
+
+&lt;h2 id=&#34;check-your-work&#34;&gt;Check your work&lt;/h2&gt;
+
+&lt;p&gt;Before you create a pull request, check your work.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;In a terminal window, go to the root of your &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd ~/repos/docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Checkout your feature branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git checkout 11038-fix-rhel-link
+Switched to branch &#39;11038-fix-rhel-link&#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Run the full test suite on your branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ make test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All the tests should pass. If they don&amp;rsquo;t, find out why and correct the
+situation.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Optionally, if modified the documentation, build the documentation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ make docs
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Commit and push any changes that result from your checks.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;rebase-your-branch&#34;&gt;Rebase your branch&lt;/h2&gt;
+
+&lt;p&gt;Always rebase and squash your commits before making a pull request.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Checkout your feature branch in your local &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;p&gt;This is the branch associated with your request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fetch any last minute changes from &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git fetch upstream master
+From github.com:docker/docker
+ * branch            master     -&amp;gt; FETCH_HEAD
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start an interactive rebase.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git rebase -i upstream/master
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rebase opens an editor with a list of commits.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pick 1a79f55 Tweak some of the other text for grammar
+pick 53e4983 Fix a link
+pick 3ce07bb Add a new line about RHEL
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Replace the &lt;code&gt;pick&lt;/code&gt; keyword with &lt;code&gt;squash&lt;/code&gt; on all but the first commit.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pick 1a79f55 Tweak some of the other text for grammar
+squash 53e4983 Fix a link
+squash 3ce07bb Add a new line about RHEL
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After you save the changes and quit from the editor, git starts
+the rebase, reporting the progress along the way. Sometimes
+your changes can conflict with the work of others. If git
+encounters a conflict, it stops the rebase, and prints guidance
+for how to correct the conflict.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Edit and save your commit message.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git commit -s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure your message includes &lt;a href=&#34;../set-up-git&#34; target=&#34;_blank&#34;&gt;your signature&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Force push any changes to your fork on GitHub.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git push -f origin 11038-fix-rhel-link
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;create-a-pr-on-github&#34;&gt;Create a PR on GitHub&lt;/h2&gt;
+
+&lt;p&gt;You create and manage PRs on GitHub:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open your browser to your fork on GitHub.&lt;/p&gt;
+
+&lt;p&gt;You should see the latest activity from your branch.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/workflow/images/latest_commits.png&#34; alt=&#34;Latest commits&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click &amp;ldquo;Compare &amp;amp; pull request.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;The system displays the pull request dialog.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/workflow/images/to_from_pr.png&#34; alt=&#34;PR dialog&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The pull request compares your changes to the &lt;code&gt;master&lt;/code&gt; branch on the
+&lt;code&gt;docker/docker&lt;/code&gt; repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Edit the dialog&amp;rsquo;s description and add a reference to the issue you are fixing.&lt;/p&gt;
+
+&lt;p&gt;GitHub helps you out by searching for the issue as you type.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/workflow/images/fixes_num.png&#34; alt=&#34;Fixes issue&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Scroll down and verify the PR contains the commits and changes you expect.&lt;/p&gt;
+
+&lt;p&gt;For example, is the file count correct? Are the changes in the files what
+you expect?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/workflow/images/commits_expected.png&#34; alt=&#34;Commits&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Press &amp;ldquo;Create pull request&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;The system creates the request and opens it for you in the &lt;code&gt;docker/docker&lt;/code&gt;
+repository.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/workflow/images/pull_request_made.png&#34; alt=&#34;Pull request made&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;Congratulations, you&amp;rsquo;ve created your first pull request to Docker. The next
+step is for you learn how to &lt;a href=&#34;../opensource/workflow/review-pr/&#34;&gt;participate in your PR&amp;rsquo;s
+review&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker Governance Advisory Board</title>
+      <link>http://localhost/opensource/governance/dgab-info/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/governance/dgab-info/</guid>
+      <description>
+
+&lt;h1 id=&#34;docker-governance-advisory-board-june-2015-version&#34;&gt;Docker Governance Advisory Board: June 2015 Version&lt;/h1&gt;
+
+&lt;p&gt;An initial version of this proposal was posted for comments on April 30th,
+2014. This version reflects all comments received prior to announcing the
+initial members/nominees for the board on June 10th. This document was
+updated to reflect the new membership for 2015.&lt;/p&gt;
+
+&lt;h2 id=&#34;1-0-background&#34;&gt;1.0 Background&lt;/h2&gt;
+
+&lt;p&gt;The Docker project is experiencing incredible momentum in project growth,
+adoption, and contribution. As of June 9, 2014, there are over 460
+contributors, 95% of whom do not work for the project’s commercial sponsor.
+Large numbers of projects are being built on top of or incorporating Docker
+(over 7,000 projects with “Docker” in the title on GitHub), and there is a
+large and growing community of users. The project was designed from the outset
+to have a very open structure, including open design, open contribution, and
+consistent use of tools across the project. Maintainers include both Docker,
+Inc. and non-Docker Inc. employees. Given the large numbers of contributors,
+users, and companies with a stake in the future of the project, the project
+leadership is looking to supplement the current governance and contribution
+mechanisms with an advisory board, as part of its long term commitment to open
+governance.&lt;/p&gt;
+
+&lt;h2 id=&#34;2-0-purpose&#34;&gt;2.0 Purpose&lt;/h2&gt;
+
+&lt;p&gt;The primary purpose of the Docker Governance Advisory Board (DGAB) is to advise
+the Docker project leadership (Leadership) on matters related to supporting the
+long term governance, structure, and roadmap of the Docker project. The
+following main areas are included in this charter:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Provide a forum for individuals, users, and companies to discuss the issues
+under the DGAB purview (SCOPE)&lt;/li&gt;
+&lt;li&gt;Provide guidance and input to Leadership, and where possible, present a
+consistent and consolidated opinion from the broader Docker community&lt;/li&gt;
+&lt;li&gt;Produce a formal, twice yearly report to the Leadership and broader Docker
+community of the status of and progress made in all areas under the purview
+of the DGAB.&lt;/li&gt;
+&lt;li&gt;Promote and support the use of Docker in manner consistent with Guiding *&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;principles-of-the-project-and-the-core-criteria&#34;&gt;Principles of the project and the Core Criteria&lt;/h3&gt;
+
+&lt;p&gt;The DGAB is not:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Intended to serve as a governance board. The DGAB advises, but does not manage, the Docker project leadership&lt;/li&gt;
+&lt;li&gt;Intended to replace existing mechanisms for community input, governance, or contribution&lt;/li&gt;
+&lt;li&gt;Intended to assume a formal, fiduciary role with respect to the project. The DGAB membership will not be asked to provide funds to the project, assume liabilities with respect to the project or their activities, or assume responsibility for enforcing either trademarks or DGAB recommendations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;3-0-scope&#34;&gt;3.0 Scope&lt;/h2&gt;
+
+&lt;p&gt;The DGAB is expected to provide input and formal recommendations regarding the following areas:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Docker project long term roadmap&lt;/li&gt;
+&lt;li&gt;Docker project policies and procedures around maintenance and contributions&lt;/li&gt;
+&lt;li&gt;Docker project policies and procedures around intellectual property, trademark, and licensing&lt;/li&gt;
+&lt;li&gt;Core Criteria for Docker-related project (c.f. section 7.0)&lt;/li&gt;
+&lt;li&gt;Docker project long term governance model&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;4-0-meetings-and-memberships&#34;&gt;4.0 Meetings and Memberships&lt;/h2&gt;
+
+&lt;h3 id=&#34;4-1-general&#34;&gt;4.1 General&lt;/h3&gt;
+
+&lt;p&gt;The DGAB will have 16 members&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The Docker Chief Maintainer: Michael Crosby&lt;/li&gt;
+&lt;li&gt;The Docker Chief Operator: Steve Francia&lt;/li&gt;
+&lt;li&gt;2 seats for the top core maintainers (Docker)&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Up to 12 additional seats: 4 corporate seats, 4 individual or small business seats, 4 “user” seats&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;No fee or sponsorship is required for membership&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The membership term will last 12 months. With the exception of the Chief Maintainer, all members can serve a maximum of two consecutive terms&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The selection process is intended to be open, transparent, and guided by objective criteria for membership.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The DGAB shall elect a Chair and Vice Chair from amongst their members to serve a renewable 6 month term.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The Chair or Vice-Chair shall prepare an agenda for and preside over regular meetings of the DGAB. These meetings shall occur as frequently as the DGAB determines is in the project’s best interest, but no less than quarterly&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Docker, inc. shall appoint a temporary chair to set the agenda for the first meeting and preside until the election shall occur.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;A member of the DGAB may be removed by a resolution of the DGAB supported by more than two thirds of its membership.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The DGAB may fill any vacancy arising by removal or resignation by a simple majority vote to fill the remainder of the term of the vacating member.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The rules of election and membership outlined in this section may be varied by a resolution of the DGAB supported by more than two thirds of its voting membership.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;All project maintainers are welcome as participants and observers at DGAB meetings&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;4-2-selection-process&#34;&gt;4.2 Selection Process&lt;/h3&gt;
+
+&lt;h4 id=&#34;contributors&#34;&gt;Contributors:&lt;/h4&gt;
+
+&lt;p&gt;Four seats will be granted to the top contributors, as measured
+by non-trivial pull requests merged to master in the last 6 months. Trivial
+pull requests are typos, minor document corrections, or other items that do not
+require a DCO. These seats will be reserved for individual contributors who are
+neither employees of Docker, Inc. nor employees of companies that hold a
+corporate seat.&lt;/p&gt;
+
+&lt;h4 id=&#34;corporate-seats&#34;&gt;Corporate seats:&lt;/h4&gt;
+
+&lt;p&gt;Nomination is restricted to companies for whom all three of
+the following are true&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Are in the top 8 companies in terms of non-trivial pull requests merged to
+master in the past six months as measured by contributions by all employees&lt;/li&gt;
+&lt;li&gt;Have employees as maintainers and/or make significant contributions to the
+code base&lt;/li&gt;
+&lt;li&gt;Have committed to integrate Docker into widely used products in a manner
+consistent with Core Criteria. (c.f. section 7.0)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Once nomination has been closed, selection of corporate seats will be made by a
+vote by eligible contributors. Eligible contributors are those who have had at
+least one non-trivial pull request merged to master in the past six months.&lt;/p&gt;
+
+&lt;h4 id=&#34;user-seats&#34;&gt;User seats:&lt;/h4&gt;
+
+&lt;p&gt;These seats are for organizations that are using Docker. To be nominated, an
+organization must be using Docker in production and have published a use case.
+Once nomination has been closed, selection will be made by a vote by eligible
+contributors. Eligible contributors are those who have had at least one
+non-trivial pull request merged to master in the past six months.&lt;/p&gt;
+
+&lt;h2 id=&#34;5-0-operation&#34;&gt;5.0 Operation&lt;/h2&gt;
+
+&lt;p&gt;The DGAB is authorized to seek advice and counsel from other interested parties
+and invited experts as appropriate&lt;/p&gt;
+
+&lt;p&gt;Any outside party wishing to bring an issue before the DGAB may do so by
+emailing the DGAB mailing list&lt;/p&gt;
+
+&lt;p&gt;The DGAB shall provide transparent and timely reporting (through any mechanism
+it deems appropriate) to the Community at large on all of its activities,
+subject to the right of any individual to designate their comments and the
+ensuing discussion as &amp;ldquo;in confidence,&amp;rdquo; in which case the public report shall
+contain only a note of the request and an agreed summary (if any) of the
+substance.&lt;/p&gt;
+
+&lt;p&gt;The DGAB is being formed at the discretion of the Leadership. The Leadership
+alone may decide to terminate the DGAB in its sole discretion; provided
+however, that the Leadership shall first consult the DGAB Chair.&lt;/p&gt;
+
+&lt;p&gt;The DGAB and its members shall abide by appropriate antitrust guidelines.&lt;/p&gt;
+
+&lt;h2 id=&#34;6-0-open-governance-principles&#34;&gt;6.0 Open Governance Principles&lt;/h2&gt;
+
+&lt;p&gt;The DGAB will formulate recommendations in conjunction with the following, open governance principles&lt;/p&gt;
+
+&lt;h3 id=&#34;open-participation&#34;&gt;Open participation:&lt;/h3&gt;
+
+&lt;p&gt;Throughout the project, anyone should be able to participate and contribute.
+All bugs and tasks will be tracked in a public tracker and all of the source
+code and all of the tools needed to build it will be available under an open
+license permitting unrestricted use&lt;/p&gt;
+
+&lt;h3 id=&#34;open-technical-meritocracy&#34;&gt;Open technical meritocracy:&lt;/h3&gt;
+
+&lt;p&gt;Technical merit over pride of authorship. Code
+is contributed for the express purpose of advancing technologies relevant to
+the project, effectively separating technology advancement from individual or
+commercial intent.&lt;/p&gt;
+
+&lt;h3 id=&#34;open-design&#34;&gt;Open design:&lt;/h3&gt;
+
+&lt;p&gt;Roadmaps are discussed in the open, and design receives input from all
+contributors and maintainers Influence through contribution: organizations and
+individuals gain influence over the project through contribution&lt;/p&gt;
+
+&lt;h3 id=&#34;ip-cleanliness&#34;&gt;IP Cleanliness:&lt;/h3&gt;
+
+&lt;p&gt;Steps are taken to ensure that all incoming code is legally contributed (DCOs
+terms-of-use etc.), that use of approved third party libraries does not create
+incompatible dependencies, and that all non-trivial commits have DCOs&lt;/p&gt;
+
+&lt;h3 id=&#34;open-licensing&#34;&gt;Open Licensing:&lt;/h3&gt;
+
+&lt;p&gt;Code should be licensed using approved, standard, open-source licenses. (Docker is currently licensed under Apache 2.0)&lt;/p&gt;
+
+&lt;h2 id=&#34;7-0-core-criteria&#34;&gt;7.0 Core Criteria&lt;/h2&gt;
+
+&lt;p&gt;The DGAB will formulate a set of Core Criteria for projects and commercial
+products that use the Docker trademarks&lt;/p&gt;
+
+&lt;p&gt;Core Criteria will generally cover such areas as: use of standard APIs,
+consistent behaviors expected of Docker containers, trademark guidelines,
+provenance, upstream contribution models, and alternative distributions&lt;/p&gt;
+
+&lt;p&gt;As Core Criteria will not be fully defined when the initial DGAB membership is
+formulated, it is understood that there is a possibility that certain members
+of the initial DGAB may not agree with the Core Criteria when they are fully
+defined or may have products/offerings that are not in compliance with the Core
+Criteria at the time they are finalized. In this case, the corporate members
+will either agree to become compliant within a specified timeframe or else
+resign their DGAB position.&lt;/p&gt;
+
+&lt;p&gt;Please help us improve this draft by sending your comments and feedback to
+governance@docker.com).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>FAQ for contributors</title>
+      <link>http://localhost/opensource/FAQ/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/FAQ/</guid>
+      <description>
+
+&lt;h1 id=&#34;faq-for-contributors&#34;&gt;FAQ for contributors&lt;/h1&gt;
+
+&lt;p&gt;This section contains some frequently asked questions and tips for
+troubleshooting problems in your code contribution.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#how-do-i-set-my-signature:cb7f612e17aad7eb26c06709ef92a867&#34;&gt;How do I set my signature?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-do-i-track-changes-from-the-docker-repo-upstream:cb7f612e17aad7eb26c06709ef92a867&#34;&gt;How do I track changes from the docker repo upstream?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-do-i-format-my-go-code:cb7f612e17aad7eb26c06709ef92a867&#34;&gt;How do I format my Go code?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#what-is-the-pre-pull-request-checklist:cb7f612e17aad7eb26c06709ef92a867&#34;&gt;What is the pre-pull request checklist?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-should-i-comment-my-code:cb7f612e17aad7eb26c06709ef92a867&#34;&gt;How should I comment my code?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#how-do-i-rebase-my-feature-branch:cb7f612e17aad7eb26c06709ef92a867&#34;&gt;How do I rebase my feature branch?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;how-do-i-set-my-signature&#34;&gt;How do I set my signature&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Change to the root of your &lt;code&gt;docker-fork&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;user.name&lt;/code&gt; for the repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local user.name &amp;quot;FirstName LastName&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set your &lt;code&gt;user.email&lt;/code&gt; for the repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git config --local user.email &amp;quot;emailname@mycompany.com&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;how-do-i-track-changes-from-the-docker-repo-upstream&#34;&gt;How do I track changes from the docker repo upstream&lt;/h2&gt;
+
+&lt;p&gt;Set your local repo to track changes upstream, on the &lt;code&gt;docker&lt;/code&gt; repository.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Change to the root of your Docker repository.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Add a remote called &lt;code&gt;upstream&lt;/code&gt; that points to &lt;code&gt;docker/docker&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote add upstream https://github.com/docker/docker.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;how-do-i-format-my-go-code&#34;&gt;How do I format my Go code&lt;/h2&gt;
+
+&lt;p&gt;Run &lt;code&gt;gofmt -s -w filename.go&lt;/code&gt; on each changed file before committing your changes.
+Most editors have plug-ins that do the formatting automatically.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-the-pre-pull-request-checklist&#34;&gt;What is the pre-pull request checklist&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Sync and cleanly rebase on top of Docker&amp;rsquo;s &lt;code&gt;master&lt;/code&gt;; do not mix multiple branches
+in the pull request.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Squash your commits into logical units of work using
+&lt;code&gt;git rebase -i&lt;/code&gt; and &lt;code&gt;git push -f&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;If your code requires a change to tests or documentation, include code,test,
+and documentation changes in the same commit as your code; this ensures a
+revert would remove all traces of the feature or fix.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Reference each issue in your pull request description (&lt;code&gt;#XXXX&lt;/code&gt;).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;how-should-i-comment-my-code&#34;&gt;How should I comment my code?&lt;/h2&gt;
+
+&lt;p&gt;The Go blog wrote about code comments, it is &lt;a href=&#34;http://goo.gl/fXCRu&#34;
+target=&#34;_blank&#34;&gt;a single page explanation&lt;/a&gt;. A summary follows:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Comments begin with two forward &lt;code&gt;//&lt;/code&gt; slashes.&lt;/li&gt;
+&lt;li&gt;To document a type, variable, constant, function, or even a package, write a
+regular comment directly preceding the elements declaration, with no intervening blank
+line.&lt;/li&gt;
+&lt;li&gt;Comments on package declarations should provide general package documentation.&lt;/li&gt;
+&lt;li&gt;For packages that need large amounts of introductory documentation: the
+package comment is placed in its own file.&lt;/li&gt;
+&lt;li&gt;Subsequent lines of text are considered part of the same paragraph; you must
+leave a blank line to separate paragraphs.&lt;/li&gt;
+&lt;li&gt;Indent pre-formatted text relative to the surrounding comment text (see gob&amp;rsquo;s doc.go for an example).&lt;/li&gt;
+&lt;li&gt;URLs are converted to HTML links; no special markup is necessary.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;how-do-i-rebase-my-feature-branch&#34;&gt;How do I rebase my feature branch?&lt;/h2&gt;
+
+&lt;p&gt;Always rebase and squash your commits before making a pull request.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Fetch any of the last minute changes from &lt;code&gt;docker/docker&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git fetch upstream master
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Start an interactive rebase.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git rebase -i upstream/master
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rebase opens an editor with a list of commits.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    pick 1a79f55 Tweak some of images
+    pick 3ce07bb Add a new line
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you run into trouble, &lt;code&gt;git --rebase abort&lt;/code&gt; removes any changes and gets you
+back to where you started.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Squash the &lt;code&gt;pick&lt;/code&gt; keyword with &lt;code&gt;squash&lt;/code&gt; on all but the first commit.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pick 1a79f55 Tweak some of images
+squash 3ce07bb Add a new line
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After closing the file, &lt;code&gt;git&lt;/code&gt; opens your editor again to edit the commit
+message.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Edit and save your commit message.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git commit -s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure your message includes your signature.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Push any changes to your fork on GitHub, using the &lt;code&gt;-f&lt;/code&gt; option to
+force the previous change to be overwritten.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git push -f origin my-keen-feature
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Find and claim an issue</title>
+      <link>http://localhost/opensource/workflow/find-an-issue/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/workflow/find-an-issue/</guid>
+      <description>
+
+&lt;p&gt;&lt;style type=&#34;text/css&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;.gh-label {
+    display: inline-block;
+    padding: 3px 4px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    border-radius: 2px;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.12);
+}
+.gh-label.beginner { background-color: #B5E0B5; color: #333333; }
+.gh-label.expert { background-color: #599898; color: #ffffff; }
+.gh-label.master { background-color: #306481; color: #ffffff; }
+.gh-label.novice { background-color: #D6F2AC; color: #333333; }
+.gh-label.proficient { background-color: #8DC7A9; color: #333333; }
+.gh-label.bug { background-color: #FF9DA4; color: #333333; }
+.gh-label.cleanup { background-color: #FFB7B3; color: #333333; }
+.gh-label.content { background-color: #CDD3C2; color: #333333; }
+.gh-label.feature { background-color: #B7BEB7; color: #333333; }
+.gh-label.graphics { background-color: #E1EFCB; color: #333333; }
+.gh-label.improvement { background-color: #EBD2BB; color: #333333; }
+.gh-label.proposal { background-color: #FFD9C0; color: #333333; }
+.gh-label.question { background-color: #EEF1D1; color: #333333; }
+.gh-label.usecase { background-color: #F0E4C2; color: #333333; }
+.gh-label.writing { background-color: #B5E9D5; color: #333333; }&lt;/p&gt;
+
+&lt;p&gt;&lt;/style&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;find-and-claim-an-issue&#34;&gt;Find and claim an issue&lt;/h1&gt;
+
+&lt;p&gt;On this page, you choose the issue you want to work on. As a contributor, you can work
+on whatever you want. If you are new to contributing, you should start by
+working with our known issues.&lt;/p&gt;
+
+&lt;h2 id=&#34;understand-the-issue-types&#34;&gt;Understand the issue types&lt;/h2&gt;
+
+&lt;p&gt;An existing issue is something reported by a Docker user. As issues come in,
+our maintainers triage them. Triage is its own topic. For now, it is important
+for you to know that triage includes ranking issues according to difficulty.&lt;/p&gt;
+
+&lt;p&gt;Triaged issues have one of these labels:&lt;/p&gt;
+
+&lt;table class=&#34;tg&#34;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;td class=&#34;tg-031e&#34;&gt;Label&lt;/td&gt;
+      &lt;td class=&#34;tg-031e&#34;&gt;Experience level guideline&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td class=&#34;tg-031e&#34;&gt;&lt;strong class=&#34;gh-label beginner&#34;&gt;exp/beginner&lt;/strong&gt;&lt;/td&gt;
+      &lt;td class=&#34;tg-031e&#34;&gt;You have made less than ten contributions in your life time to any open source project.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td class=&#34;tg-031e&#34;&gt;&lt;strong class=&#34;gh-label novice&#34;&gt;exp/novice&lt;/strong&gt;&lt;/td&gt;
+      &lt;td class=&#34;tg-031e&#34;&gt;You have made more than ten contributions to an open source project or at least 5 contributions to Docker.  &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td class=&#34;tg-031e&#34;&gt;&lt;strong class=&#34;gh-label proficient&#34;&gt;exp/proficient&lt;/strong&gt;&lt;/td&gt;
+      &lt;td class=&#34;tg-031e&#34;&gt;You have made more than five contributions to Docker which amount to at least 200 code lines or 1000 documentation lines. &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td class=&#34;tg-031e&#34;&gt;&lt;strong class=&#34;gh-label expert&#34;&gt;exp/expert&lt;/strong&gt;&lt;/td&gt;
+      &lt;td class=&#34;tg-031e&#34;&gt;You have made less than 20 commits to Docker which amount to 500-1000 code lines or 1000-3000 documentation lines. &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td class=&#34;tg-031e&#34;&gt;&lt;strong class=&#34;gh-label master&#34;&gt;exp/master&lt;/strong&gt;&lt;/td&gt;
+      &lt;td class=&#34;tg-031e&#34;&gt;You have made more than 20 commits to Docker and greater than 1000 code lines or 3000 documentation lines.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;These labels are guidelines. You might have written a whole plugin for Docker in a personal
+project and never contributed to Docker. With that kind of experience, you could take on an &lt;strong
+class=&#34;gh-label expert&#34;&gt;exp/expert&lt;/strong&gt; or &lt;strong class=&#34;gh-label
+master&#34;&gt;exp/master&lt;/strong&gt; level issue.&lt;/p&gt;
+
+&lt;h2 id=&#34;claim-a-beginner-or-novice-issue&#34;&gt;Claim a beginner or novice issue&lt;/h2&gt;
+
+&lt;p&gt;To claim an issue:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Go to the &lt;code&gt;docker/docker&lt;/code&gt; &lt;a
+href=&#34;https://github.com/docker/docker&#34; target=&#34;_blank&#34;&gt;repository&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Click the &amp;ldquo;Issues&amp;rdquo; link.&lt;/p&gt;
+
+&lt;p&gt;A list of the open issues appears.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/workflow/images/issue_list.png&#34; alt=&#34;Open issues&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;From the &amp;ldquo;Labels&amp;rdquo; drop-down, select &lt;strong class=&#34;gh-label beginner&#34;&gt;exp/beginner&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The system filters to show only open &lt;strong class=&#34;gh-label beginner&#34;&gt;exp/beginner&lt;/strong&gt; issues.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Open an issue that interests you.&lt;/p&gt;
+
+&lt;p&gt;The comments on the issues describe the problem and can provide information for a potential
+solution.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;When you find an open issue that both interests you and is unclaimed, add a
+&lt;code&gt;#dibs&lt;/code&gt; comment. Make sure that no other user has chosen to work on the issue.&lt;/p&gt;
+
+&lt;p&gt;The project does not permit external contributors to assign issues to themselves. Read
+the comments to find if a user claimed the issue by leaving a
+&lt;code&gt;#dibs&lt;/code&gt; comment on the issue.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Your issue # will be different depending on what you claimed. After a moment, Gordon the Docker
+bot, changes the issue status to claimed. The following example shows issue #11038.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/workflow/images/easy_issue.png&#34; alt=&#34;Easy issue&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make a note of the issue number; you will need it for later.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;sync-your-fork-and-create-a-new-branch&#34;&gt;Sync your fork and create a new branch&lt;/h2&gt;
+
+&lt;p&gt;If you have followed along in this guide, you forked the &lt;code&gt;docker/docker&lt;/code&gt;
+repository. Maybe that was an hour ago or a few days ago. In any case, before
+you start working on your issue, sync your repository with the upstream
+&lt;code&gt;docker/docker&lt;/code&gt; master. Syncing ensures your repository has the latest
+changes.&lt;/p&gt;
+
+&lt;p&gt;To sync your repository:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Open a terminal on your local host.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Change directory to the &lt;code&gt;docker-fork&lt;/code&gt; root.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd ~/repos/docker-fork
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Checkout the master branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git checkout master
+Switched to branch &#39;master&#39;
+Your branch is up-to-date with &#39;origin/master&#39;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Recall that &lt;code&gt;origin/master&lt;/code&gt; is a branch on your remote GitHub repository.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Make sure you have the upstream remote &lt;code&gt;docker/docker&lt;/code&gt; by listing them.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote -v
+origin  https://github.com/moxiegirl/docker.git (fetch)
+origin  https://github.com/moxiegirl/docker.git (push)
+upstream    https://github.com/docker/docker.git (fetch)
+upstream    https://github.com/docker/docker.git (push)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the &lt;code&gt;upstream&lt;/code&gt; is missing, add it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git remote add upstream https://github.com/docker/docker.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Fetch all the changes from the &lt;code&gt;upstream master&lt;/code&gt; branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git fetch upstream master
+remote: Counting objects: 141, done.
+remote: Compressing objects: 100% (29/29), done.
+remote: Total 141 (delta 52), reused 46 (delta 46), pack-reused 66
+Receiving objects: 100% (141/141), 112.43 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (79/79), done.
+From github.com:docker/docker
+ * branch            master     -&amp;gt; FETCH_HEAD
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command says get all the changes from the &lt;code&gt;master&lt;/code&gt; branch belonging to
+the &lt;code&gt;upstream&lt;/code&gt; remote.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rebase your local master with the &lt;code&gt;upstream/master&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git rebase upstream/master
+First, rewinding head to replay your work on top of it...
+Fast-forwarded master to upstream/master.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command applies all the commits from the upstream master to your local
+master.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Check the status of your local branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git status
+On branch master
+Your branch is ahead of &#39;origin/master&#39; by 38 commits.
+  (use &amp;quot;git push&amp;quot; to publish your local commits)
+nothing to commit, working directory clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your local repository now has all the changes from the &lt;code&gt;upstream&lt;/code&gt; remote. You
+need to push the changes to your own remote fork which is &lt;code&gt;origin master&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Push the rebased master to &lt;code&gt;origin master&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git push origin master
+Username for &#39;https://github.com&#39;: moxiegirl
+Password for &#39;https://moxiegirl@github.com&#39;:
+Counting objects: 223, done.
+Compressing objects: 100% (38/38), done.
+Writing objects: 100% (69/69), 8.76 KiB | 0 bytes/s, done.
+Total 69 (delta 53), reused 47 (delta 31)
+To https://github.com/moxiegirl/docker.git
+   8e107a9..5035fa1  master -&amp;gt; master
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Create a new feature branch to work on your issue.&lt;/p&gt;
+
+&lt;p&gt;Your branch name should have the format &lt;code&gt;XXXX-descriptive&lt;/code&gt; where &lt;code&gt;XXXX&lt;/code&gt; is
+the issue number you are working on. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git checkout -b 11038-fix-rhel-link
+Switched to a new branch &#39;11038-fix-rhel-link&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your branch should be up-to-date with the &lt;code&gt;upstream/master&lt;/code&gt;. Why? Because you
+branched off a freshly synced master.  Let&amp;rsquo;s check this anyway in the next
+step.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Rebase your branch from upstream/master.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git rebase upstream/master
+Current branch 11038-fix-rhel-link is up to date.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At this point, your local branch, your remote repository, and the Docker
+repository all have identical code. You are ready to make changes for your
+issue.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;At this point, you know what you want to work on and you have a branch to do
+your work in.  Go onto the next section to learn &lt;a href=&#34;../opensource/workflow/work-issue/&#34;&gt;how to work on your
+changes&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Get the required software</title>
+      <link>http://localhost/opensource/project/software-required/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/project/software-required/</guid>
+      <description>
+
+&lt;h1 id=&#34;get-the-required-software-for-linux-or-os-x&#34;&gt;Get the required software for Linux or OS X&lt;/h1&gt;
+
+&lt;p&gt;This page explains how to get the software you need to use a Linux or OS X
+machine for Docker development. Before you begin contributing you must have:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a GitHub account&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;docker&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You&amp;rsquo;ll notice that &lt;code&gt;go&lt;/code&gt;, the language that Docker is written in, is not listed.
+That&amp;rsquo;s because you don&amp;rsquo;t need it installed; Docker&amp;rsquo;s development environment
+provides it for you. You&amp;rsquo;ll learn more about the development environment later.&lt;/p&gt;
+
+&lt;h3 id=&#34;get-a-github-account&#34;&gt;Get a GitHub account&lt;/h3&gt;
+
+&lt;p&gt;To contribute to the Docker project, you will need a &lt;a
+href=&#34;https://github.com&#34; target=&#34;_blank&#34;&gt;GitHub account&lt;/a&gt;. A free account is
+fine. All the Docker project repositories are public and visible to everyone.&lt;/p&gt;
+
+&lt;p&gt;You should also have some experience using both the GitHub application and &lt;code&gt;git&lt;/code&gt;
+on the command line.&lt;/p&gt;
+
+&lt;h3 id=&#34;install-git&#34;&gt;Install git&lt;/h3&gt;
+
+&lt;p&gt;Install &lt;code&gt;git&lt;/code&gt; on your local system. You can check if &lt;code&gt;git&lt;/code&gt; is on already on your
+system and properly installed with the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This documentation is written using &lt;code&gt;git&lt;/code&gt; version 2.2.2. Your version may be
+different depending on your OS.&lt;/p&gt;
+
+&lt;h3 id=&#34;install-make&#34;&gt;Install make&lt;/h3&gt;
+
+&lt;p&gt;Install &lt;code&gt;make&lt;/code&gt;. You can check if &lt;code&gt;make&lt;/code&gt; is on your system with the following
+command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ make -v
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This documentation is written using GNU Make 3.81. Your version may be different
+depending on your OS.&lt;/p&gt;
+
+&lt;h3 id=&#34;install-or-upgrade-docker&#34;&gt;Install or upgrade Docker&lt;/h3&gt;
+
+&lt;p&gt;If you haven&amp;rsquo;t already, install the Docker software using the
+&lt;a href=&#34;../engine/installation&#34; target=&#34;_blank&#34;&gt;instructions for your operating system&lt;/a&gt;.
+If you have an existing installation, check your version and make sure you have
+the latest Docker.&lt;/p&gt;
+
+&lt;p&gt;To check if &lt;code&gt;docker&lt;/code&gt; is already installed on Linux:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker --version
+Docker version 1.5.0, build a8a31ef
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On Mac OS X or Windows, you should have installed Docker Toolbox which includes
+Docker. You&amp;rsquo;ll need to verify both Docker Machine and Docker. This
+documentation was written on OS X using the following versions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker-machine --version
+docker-machine version 0.3.0 (0a251fe)
+
+$ docker --version
+Docker version 1.7.0, build a8a31ef
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;linux-users-and-sudo&#34;&gt;Linux users and sudo&lt;/h2&gt;
+
+&lt;p&gt;This guide assumes you have added your user to the &lt;code&gt;docker&lt;/code&gt; group on your system.
+To check, list the group&amp;rsquo;s contents:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ getent group docker
+docker:x:999:ubuntu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the command returns no matches, you have two choices. You can preface this
+guide&amp;rsquo;s &lt;code&gt;docker&lt;/code&gt; commands with &lt;code&gt;sudo&lt;/code&gt; as you work. Alternatively, you can add
+your user to the &lt;code&gt;docker&lt;/code&gt; group as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo usermod -aG docker ubuntu
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You must log out and log back in for this modification to take effect.&lt;/p&gt;
+
+&lt;h2 id=&#34;where-to-go-next&#34;&gt;Where to go next&lt;/h2&gt;
+
+&lt;p&gt;In the next section, you&amp;rsquo;ll &lt;a href=&#34;../opensource/project/set-up-git/&#34;&gt;learn how to set up and configure Git for
+contributing to Docker&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Governance</title>
+      <link>http://localhost/opensource/governance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/governance/</guid>
+      <description>
+
+&lt;h1 id=&#34;governance&#34;&gt;Governance&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/governance/dgab-info/&#34;&gt;Docker Governance Advisory Board&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/governance/board-profiles/&#34;&gt;Board member profiles&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/governance/conduct-code/&#34;&gt;Code of conduct&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Open Source at Docker</title>
+      <link>http://localhost/opensource/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/</guid>
+      <description>
+
+&lt;h1 id=&#34;open-source-at-docker&#34;&gt;Open Source at Docker&lt;/h1&gt;
+
+&lt;p&gt;Contributing to the Docker project or to any open source project can be a
+rewarding experience. You help yourself and you help the projects you work on.
+You also help the countless number of other project participants.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/project/who-written-for/&#34;&gt;Configure the development environment&lt;/a&gt; explains how to setup an environment to contribute to Docker engine.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/workflow/make-a-contribution/&#34;&gt;Understand the contribution workflow &lt;/a&gt; explains the workflow the team uses across most Docker projects.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/ways/&#34;&gt;Other ways to contribute&lt;/a&gt; provides tips for contributing if you dont&amp;rsquo; want to code.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../opensource/governance/&#34;&gt;Governance&lt;/a&gt; describes the proper conduct and who defines it.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Organize a Docker Meetup</title>
+      <link>http://localhost/opensource/ways/meetups/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/ways/meetups/</guid>
+      <description>
+
+&lt;h1 id=&#34;organize-a-docker-meetup&#34;&gt;Organize a Docker Meetup&lt;/h1&gt;
+
+&lt;p&gt;Anyone interested in Docker can become an active member of the Docker community
+by becoming co-organizer of a Docker Meetup group.&lt;/p&gt;
+
+&lt;p&gt;If a Meetup group does not already exist in your area and you are willing to
+start a new one, the best way to proceed is to contact us so that we can create
+it for you. We will always agree to create a new Docker Meetup group as long as
+it makes sense geographically speaking.&lt;/p&gt;
+
+&lt;p&gt;If you have already created a Docker Meetup group that is fine, we will simply
+ask you to add us as a co-organizer so that we can ensure a consistent support
+to the group in terms of community and Meetup management.&lt;/p&gt;
+
+&lt;p&gt;Before contacting us to create a new Docker Meetup Group, take a look at our
+Meetup Groups page to make sure a group does not already exist in the area.&lt;/p&gt;
+
+&lt;h2 id=&#34;get-started-putting-on-a-docker-meetup&#34;&gt;Get started putting on a Docker Meetup&lt;/h2&gt;
+
+&lt;p&gt;Now that you are co-organizer of a Docker Meetup Group, here are a few tips and
+suggestions to help you get started:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Attend similar DevOps or Developers Meetups to gain experience and gauge interest in Docker&lt;/li&gt;
+&lt;li&gt;Contact other people interested in Docker to help you organize and promote future Meetups&lt;/li&gt;
+&lt;li&gt;Research High-Tech companies in your area willing to host a Docker Meetup event&lt;/li&gt;
+&lt;li&gt;Research what would be the best date(s) to schedule the Meetups based on availabilities with regard to competing events in the area and other calendar imperative&lt;/li&gt;
+&lt;li&gt;Research what are the topic of interest to your audience prior to set an agenda for the meetup&lt;/li&gt;
+&lt;li&gt;Pay attention to the Meetup page aesthetics, add logos and pictures, invite members to leave comments and reply to these comments&lt;/li&gt;
+&lt;li&gt;Promote the event on social media and make sure that the list of keywords is well define if you have created the Docker Meetup Group on your own&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;how-docker-can-help-you-organize&#34;&gt;How Docker can help you organize&lt;/h2&gt;
+
+&lt;p&gt;We can support the co-organizers of the Docker Meetup Groups based on their specific needs. For instance, we might / will be able to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Send you Docker T-shirts and stickers&lt;/li&gt;
+&lt;li&gt;Put you in contact with other people interested in being a co-organizer of a Docker Meetup group, and which are in the same area&lt;/li&gt;
+&lt;li&gt;Put you in contact with companies willing to host a Docker Meetup in your area&lt;/li&gt;
+&lt;li&gt;Introduce you to people willing to give a lightning talk about Docker
+Promote your Docker Group on Docker.com, Docker Weekly and Social Media
+Hackday Picture&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;host-a-docker-meetup-at-your-location&#34;&gt;Host a Docker meetup at your location&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/images/docker-friends.png&#34; alt=&#34;Meetup&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;want-to-host-a-docker-meetup&#34;&gt;Want to host a Docker Meetup?&lt;/h2&gt;
+
+&lt;p&gt;We are always looking for new office space to host Docker Meetups. If your
+company is willing to host a Docker Meetup, please contact us by email at
+meetup@docker.com. Previous Docker Meetups have been hosted by companies such
+as Rackspace, Twitter, MongoDB, BrightCove, DigitlOcean, Viadeo and Edmodo&lt;/p&gt;
+
+&lt;h3 id=&#34;how-many-attendees&#34;&gt;How many attendees?&lt;/h3&gt;
+
+&lt;p&gt;The company hosting the event fixes the number of attendees depending on their
+office size and availability. This number usually varies between 30 and 200.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-long-is-a-docker-meetup&#34;&gt;How long is a Docker Meetup?&lt;/h3&gt;
+
+&lt;p&gt;Once again, each company hosting the event decides when does the meetup start,
+and how long it lasts. Usual meetups tend to last 2 hours, and start between
+4pm and 6pm.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Organize our issues</title>
+      <link>http://localhost/opensource/ways/issues/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost/opensource/ways/issues/</guid>
+      <description>
+
+&lt;h1 id=&#34;organize-our-issues&#34;&gt;Organize our issues&lt;/h1&gt;
+
+&lt;p&gt;The Docker projects use GitHub issues to record issues and feature requests that
+come in from contributors.  Help us organize our work by triaging. Triage is the
+process of reviewing incoming issue tickets, gathering more information about
+the issue, and verifying whether or not the issue is valid.&lt;/p&gt;
+
+&lt;p&gt;You should triage if you want to discover which Docker features other contributors
+think are important. Triage is a great choice if you have an interest
+or experience in software product management or project management.&lt;/p&gt;
+
+&lt;h1 id=&#34;what-kind-of-issues-can-i-triage&#34;&gt;What kind of issues can I triage?&lt;/h1&gt;
+
+&lt;p&gt;Docker users and contributors create new issues if they want to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;report a problem they had with Docker software&lt;/li&gt;
+&lt;li&gt;request a new feature&lt;/li&gt;
+&lt;li&gt;ask a question&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;how-do-i-triage&#34;&gt;How do I triage?&lt;/h1&gt;
+
+&lt;p&gt;Follow these steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Sign up for a &lt;a href=&#34;https://github.com&#34; target=&#34;_blank&#34;&gt;Github account&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Visit a Docker repository and press the &lt;strong&gt;Watch&lt;/strong&gt; button.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This tells GitHub to notify you of new issues. Depending on your settings,
+notification go to your GitHub or email inbox. Some of repositories you can watch are:
+&lt;table class=&#34;tg&#34; &gt;
+    &lt;col width=&#34;20%&#34;&gt;
+    &lt;col width=&#34;80%&#34;&gt;
+    &lt;tr&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/docker&#34; target=&#34;_blank&#34;&gt;docker/docker&lt;/a&gt;&lt;/td&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;Docker the open-source application container engine&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/machine&#34; target=&#34;_blank&#34;&gt;docker/machine&lt;/a&gt;&lt;/td&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;Software for the easy and quick creation of Docker hosts on your computer, on cloud providers, and inside your own data center.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/kitematic/kitematic&#34; target=&#34;_blank&#34;&gt;kitematic/kitematic&lt;/a&gt;&lt;/td&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;Kitematic is a simple application for managing Docker containers on Mac OS X.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/swarm&#34; target=&#34;_blank&#34;&gt;docker/swarm&lt;/a&gt;&lt;/td&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;Native clustering for Docker; manage several Docker hosts as a single, virtual host.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;&lt;a href=&#34;https://github.com/docker/compose&#34; target=&#34;_blank&#34;&gt;docker/compose&lt;/a&gt;&lt;/td&gt;
+        &lt;td class=&#34;tg-031e&#34;&gt;Define and run complex applications using one or many interlinked containers.&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&#34;https://github.com/docker&#34; target=&#34;_blank&#34;&gt;the complete list of
+Docker repositories&lt;/a&gt; on GitHub.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Choose an issue from the &lt;a
+href=&#34;https://github.com/docker/docker/issues?q=is%3Aopen+is%3Aissue+-label%
+3Akind%2Fproposal+-label%3Akind%2Fenhancement+-label%3Akind%2Fbug+-label%3Akind%
+2Fcleanup+-label%3Akind%2Fgraphics+-label%3Akind%2Fwriting+-label%3Akind%
+2Fsecurity+-label%3Akind%2Fquestion+-label%3Akind%2Fimprovement+-label%3Akind%
+2Ffeature&#34; target=&#34;_blank&#34;&gt;list of untriaged issues&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Follow the &lt;a
+href=&#34;https://github.com/docker/docker/blob/master/project/ISSUE-TRIAGE.md&#34;
+target=&#34;_blank&#34;&gt;the triage process&lt;/a&gt; to triage the issue.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The triage process asks you to add both a &lt;code&gt;kind/&lt;/code&gt; and a &lt;code&gt;exp/&lt;/code&gt; label to each
+issue. Because you are not a Docker maintainer, you add these through comments.
+Simply add a &lt;code&gt;+label&lt;/code&gt; keyword to an issue comment:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../opensource/images/triage-label.png&#34; alt=&#34;Example&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For example, the &lt;code&gt;+exp/beginner&lt;/code&gt; and &lt;code&gt;+kind/writing&lt;/code&gt; labels would triage an issue as
+beginner writing task. For descriptions of valid labels, see the &lt;a
+href=&#34;https://github.com/docker/docker/blob/master/project/ISSUE-TRIAGE.md&#34;&gt;the triage process&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Triage another issue.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

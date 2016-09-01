@@ -1,0 +1,23 @@
+.cta-section {
+  background-color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+  @media #{$medium-up} {
+    padding: 2rem 0 4rem 0;
+  }
+}
+.cta-illustration {
+	background-color: $primary-color;
+  text-align: center;
+  margin-top: 2rem;
+  padding: rem-calc(40) 0 rem-calc(46) 0;
+  @media #{$medium-up} {
+    margin-top: 5rem;
+    padding: rem-calc(75) 0 rem-calc(200) 0;
+  }
+}
+.normal-links {
+  a {
+    color: #fff;
+  }
+}

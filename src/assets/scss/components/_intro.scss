@@ -1,0 +1,17 @@
+.intro {
+  padding: rem-calc(25) inherit;
+  text-align: center;
+  @media #{$medium-up} {
+    padding: rem-calc(50) inherit;
+  }
+  li {
+    text-align: center;
+  }
+}
+.intro-header{
+  padding: 1.7rem 0 1.5rem 0;
+  text-align: center;
+  p {
+    font-size: rem-calc(20);
+  }
+}

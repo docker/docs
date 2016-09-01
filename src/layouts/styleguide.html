@@ -1,0 +1,80 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docker | Styleguide</title>
+    <link rel="stylesheet" href="{{assets}}css/app.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+    <script src="{{assets}}js/modernizr.js"></script>
+
+    <!-- Style guide-specific CSS goes here. -->
+    <style>
+    /* This styles the vertical tabs used for the table of contents. */
+    .tabs.vertical {
+      width: 100%;
+      max-width: 100%;
+    }
+    /* This styles code blocks used for examples. */
+    pre > code {
+      margin-bottom: 1.5rem;
+    }
+    /* This styles the example rows used in the grid documentation. */
+    .row.display {
+      background: #eee;
+      font-size: 11px;
+      margin-bottom: 10px;
+      line-height: 2rem;
+      border: solid 1px #c6c6c6;
+      margin-left: 0 !important;
+      margin-right: 0 !important; }
+      .row.display .columns:nth-child(2), .row.display .columns.small-centered, .row.display .columns.large-centered {
+        background: #e1e1e1; }
+      .row.display .columns.color-end {
+        background: #d4d4d4; }
+    /* This styles the color blocks used in the color documentation. */
+    .color-block {
+      border-radius: 2px;
+      display: block;
+      padding: 8px 8px 6px;
+      color: #333;
+      /*text-transform: uppercase;*/
+      border: 1px solid #ddd;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+      .color-block span {
+        display: block;
+        width: 100%;
+        height: 100px;
+        margin-bottom: 0.42857rem;
+      }
+    </style>
+  </head>
+  <body>
+
+    {{>body}}
+    
+    <script src="{{assets}}js/all.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>
+    // This function escapes the < and > characters in HTML for you,
+    // and strips extra whitespace from the start and end of the string.
+    (function() {
+      var codeBlocks = document.querySelectorAll("pre code");
+      if (codeBlocks.length) {
+        for (var i = 0, len = codeBlocks.length; i < len; i++) {
+          var dom = codeBlocks[i];
+          var html = dom.innerHTML;
+          html = html
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/^\n/, "")
+            .replace(/\n$/, "");
+          dom.innerHTML = html;
+          hljs.highlightBlock(codeBlocks[i]);
+        }
+      }
+    })();
+    </script>
+  </body>
+</html>
