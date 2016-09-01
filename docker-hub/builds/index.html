@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="docker_version" content="1.5.0">
+  <meta name="docker_git_branch" content="docs">
+  <meta name="docker_git_commit" content="35ea4de">
+  <meta name="docker_build_date" content="Fri Apr 10 23:25:55 UTC 2015">
+
+  <meta name="description" content="Docker Hub Automated Builds">
+  <meta name="keywords" content="Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, trusted, builds, trusted builds, automated builds">
+  
+  <link rel="canonical" href="/docker-hub/builds/">
+  <link href="/css/bootstrap-custom.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/prettify-1.0.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/dockerfile_tutorial.css">
+  <link href="/tipuesearch/tipuesearch.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <title>Automated Builds - Docker Documentation</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-6096819-11', 'docker.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash,
+  });
+  </script>
+  
+</head>
+<body>
+
+<div id="topmostnav" class="topmostnav_loggedout navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li class=""><a href="http://www.docker.com/whatisdocker/" title="What is Docker">What is Docker?</a></li>
+      <li class=""><a href="http://www.docker.com/resources/usecases/" title="Use Cases">Use Cases</a></li>
+      <li class=""><a href="http://www.docker.com/tryit/" title="Try It!">Try It!</a></li>
+      <li><a href="https://registry.hub.docker.com" title="Browse">Browse</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <a href="https://hub.docker.com/account/login" class="btn nav-button2" title="Lg In">Log In</a>
+      <a href="https://hub.docker.com/account/signup" class="btn nav-button1" title="Sign Up">Sign Up</a>
+    </div>
+  </div>
+</div>
+<div id="topmostnav" class="topmostnav_loggedin navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li><a href="https://registry.hub.docker.com" title="Browse Repos">Browse Repos</a></li>
+      <li class="active"><a href="http://docs.docker.com" title="Documentation">Documentation</a></li>
+      <li><a href="http://www.docker.com/community/participate/" title="Community">Community</a></li>
+      <li><a href="http://www.docker.com/resources/help/" title="Help">Help</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <ul class="nav user">
+        <li class="dropdown">
+          <a id="logged-in-header-username" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img class="profile" src="" alt="profile picture">
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="https://hub.docker.com/">View Profile</a></li>
+            <li><a href="https://hub.docker.com/account/settings/">Settings</a></li>
+            <li><a href="https://hub.docker.com/repos/">My Repositories</a></li>
+            <li><a href="https://hub.docker.com/plans/billing-info">Billing</a></li>
+            <li><a href="https://hub.docker.com/account/logout/?next=/">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="wrap">
+  <nav id="nav_menu" class="clearfix navbar navbar-default navbar-static-top affix" role="navigation">
+  <div id="docsnav">
+    <ul id="main-nav" class="pull-left">
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/">About</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/">Docker</a>
+          </li>
+        
+          <li >
+            <a href="/release-notes/">Release Notes</a>
+          </li>
+        
+          <li >
+            <a href="/introduction/understanding-docker/">Understanding Docker</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/installation/ubuntulinux/">Installation</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/installation/ubuntulinux/">Ubuntu</a>
+          </li>
+        
+          <li >
+            <a href="/installation/mac/">Mac OS X</a>
+          </li>
+        
+          <li >
+            <a href="/installation/windows/">Microsoft Windows</a>
+          </li>
+        
+          <li >
+            <a href="/installation/amazon/">Amazon EC2</a>
+          </li>
+        
+          <li >
+            <a href="/installation/archlinux/">Arch Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/binaries/">Binaries</a>
+          </li>
+        
+          <li >
+            <a href="/installation/centos/">CentOS</a>
+          </li>
+        
+          <li >
+            <a href="/installation/cruxlinux/">CRUX Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/debian/">Debian</a>
+          </li>
+        
+          <li >
+            <a href="/installation/fedora/">Fedora</a>
+          </li>
+        
+          <li >
+            <a href="/installation/frugalware/">FrugalWare</a>
+          </li>
+        
+          <li >
+            <a href="/installation/google/">Google Cloud Platform</a>
+          </li>
+        
+          <li >
+            <a href="/installation/gentoolinux/">Gentoo</a>
+          </li>
+        
+          <li >
+            <a href="/installation/softlayer/">IBM Softlayer</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rackspace/">Rackspace Cloud</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rhel/">Red Hat Enterprise Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/oracle/">Oracle Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/SUSE/">SUSE</a>
+          </li>
+        
+          <li >
+            <a href="/compose/install/">Docker Compose</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/userguide/">User Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/userguide/">The Docker User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerhub/">Getting Started with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerizing/">Dockerizing Applications</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/usingdocker/">Working with Containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerimages/">Working with Docker Images</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerlinks/">Linking containers together</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockervolumes/">Managing data in containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerrepos/">Working with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/compose/">Docker Compose</a>
+          </li>
+        
+          <li >
+            <a href="/machine/">Docker Machine</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/">Docker Swarm</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left active">
+        
+        <a href="/docker-hub/">Docker Hub</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub/">Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/accounts/">Accounts</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/repos/">Repositories</a>
+          </li>
+        
+          <li class="active">
+            <a href="/docker-hub/builds/">Automated Builds</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/official_repos/">Official Repo Guidelines</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/examples/nodejs_web_app/">Examples</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/examples/nodejs_web_app/">Dockerizing a Node.js web application</a>
+          </li>
+        
+          <li >
+            <a href="/examples/mongodb/">Dockerizing MongoDB</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_redis_service/">Dockerizing a Redis service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/postgresql_service/">Dockerizing a PostgreSQL service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_riak_service/">Dockerizing a Riak service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_ssh_service/">Dockerizing an SSH service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/couchdb_data_volumes/">Dockerizing a CouchDB service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/apt-cacher-ng/">Dockerizing an Apt-Cacher-ng service</a>
+          </li>
+        
+          <li >
+            <a href="/compose/django/">Getting started with Compose and Django</a>
+          </li>
+        
+          <li >
+            <a href="/compose/rails/">Getting started with Compose and Rails</a>
+          </li>
+        
+          <li >
+            <a href="/compose/wordpress/">Getting started with Compose and Wordpress</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/articles/basics/">Articles</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/articles/basics/">Docker basics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/networking/">Advanced networking</a>
+          </li>
+        
+          <li >
+            <a href="/articles/security/">Security</a>
+          </li>
+        
+          <li >
+            <a href="/articles/https/">Running Docker with HTTPS</a>
+          </li>
+        
+          <li >
+            <a href="/articles/registry_mirror/">Run a local registry mirror</a>
+          </li>
+        
+          <li >
+            <a href="/articles/host_integration/">Automatically starting containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/baseimages/">Creating a base image</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+          </li>
+        
+          <li >
+            <a href="/articles/certificates/">Using certificates for repository client verification</a>
+          </li>
+        
+          <li >
+            <a href="/articles/using_supervisord/">Using Supervisor</a>
+          </li>
+        
+          <li >
+            <a href="/articles/cfengine_process_management/">Process management with CFEngine</a>
+          </li>
+        
+          <li >
+            <a href="/articles/puppet/">Using Puppet</a>
+          </li>
+        
+          <li >
+            <a href="/articles/chef/">Using Chef</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dsc/">Using PowerShell DSC</a>
+          </li>
+        
+          <li >
+            <a href="/articles/ambassador_pattern_linking/">Cross-Host linking using ambassador containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/runmetrics/">Runtime metrics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/b2d_volume_resize/">Increasing a Boot2Docker volume</a>
+          </li>
+        
+          <li >
+            <a href="/articles/systemd/">Controlling and configuring Docker using Systemd</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/reference/commandline/cli/">Reference</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/reference/commandline/cli/">Command line</a>
+          </li>
+        
+          <li >
+            <a href="/reference/builder/">Dockerfile</a>
+          </li>
+        
+          <li >
+            <a href="/faq/">FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/reference/run/">Run Reference</a>
+          </li>
+        
+          <li >
+            <a href="/compose/cli/">Compose command line</a>
+          </li>
+        
+          <li >
+            <a href="/compose/yml/">Compose yml</a>
+          </li>
+        
+          <li >
+            <a href="/compose/env/">Compose ENV variables</a>
+          </li>
+        
+          <li >
+            <a href="/compose/completion/">Compose commandline completion</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/discovery/">Swarm discovery</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/strategy/">Swarm strategies</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/filter/">Swarm filters</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/API/">Swarm API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker-io_api/">Docker Hub API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api/">Docker Registry API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api_client_libraries/">Docker Registry API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/hub_registry_spec/">Docker Hub and Registry Spec</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api/">Docker Remote API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.17/">Docker Remote API v1.17</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.16/">Docker Remote API v1.16</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/remote_api_client_libraries/">Docker Remote API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_io_accounts_api/">Docker Hub Accounts API</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/project/who-written-for/">Contributor Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/project/who-written-for/">README first</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-required/">Get required software</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-git/">Configure Git for contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-dev-env/">Work with a development container</a>
+          </li>
+        
+          <li >
+            <a href="/project/test-and-docs/">Run tests and test documentation</a>
+          </li>
+        
+          <li >
+            <a href="/project/make-a-contribution/">Understand contribution workflow</a>
+          </li>
+        
+          <li >
+            <a href="/project/find-an-issue/">Find an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/work-issue/">Work on an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/create-pr/">Create a pull request</a>
+          </li>
+        
+          <li >
+            <a href="/project/review-pr/">Participate in the PR review</a>
+          </li>
+        
+          <li >
+            <a href="/project/advanced-contributing/">Advanced contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/get-help/">Where to get help</a>
+          </li>
+        
+          <li >
+            <a href="/project/coding-style/">Coding style guide</a>
+          </li>
+        
+          <li >
+            <a href="/project/doc-style/">Documentation style guide</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+    </ul>
+  </div>
+</nav>
+  <div id="content" class="container">
+    <div class="row">
+
+      <div class="span3" id="leftnav">
+        <div id="toc_table">
+          <ul class="nav nav-tabs nav-stacked">
+            
+  
+    <li class=""><a href="#about-automated-builds">About Automated Builds</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#setting-up-automated-builds-with-github">Setting up Automated Builds with GitHub</a>
+      <ul>
+    
+      <li><a href="#creating-an-automated-build">Creating an Automated Build</a></li>
+    
+      <li><a href="#github-submodules">GitHub Submodules</a></li>
+    
+      <li><a href="#github-organizations">GitHub Organizations</a></li>
+    
+      <li><a href="#github-service-hooks">GitHub Service Hooks</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#setting-up-automated-builds-with-bitbucket">Setting up Automated Builds with Bitbucket</a>
+      <ul>
+    
+      <li><a href="#creating-an-automated-build_1">Creating an Automated Build</a></li>
+    
+      <li><a href="#adding-a-hook">Adding a Hook</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#the-dockerfile-and-automated-builds">The Dockerfile and Automated Builds</a>
+      <ul>
+    
+      <li><a href="#readmemd">README.md</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#remote-build-triggers">Remote Build triggers</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#webhooks">Webhooks</a>
+      <ul>
+    
+      <li><a href="#webhook-chains">Webhook chains</a></li>
+    
+      <li><a href="#validating-a-callback">Validating a callback</a></li>
+    
+      <li><a href="#callback-json-data">Callback JSON data</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#repository-links">Repository links</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+
+          </ul>
+        </div>
+      </div>
+      <div class="span9 content-body">
+
+        
+
+        <div id="versionnav" class="span3 pull-right">
+          <ul class="nav version pull-right">
+            <li class="dropdown">
+              <a id="document-version-number" class="dropdown-toggle" data-toggle="dropdown" href="#">
+		      Version v1.5
+              </a>
+              <ul id="documentation-version-list" class="dropdown-menu pull-right">
+
+		<li role="presentation" class="divider"></li>
+		<li> <a class="home-link3 tertiary-nav" href="https://github.com/docker/docker/blob/master/docs/sources/docker-hub/builds.md" >Edit on GitHub</a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <h1 id="automated-builds-on-docker-hub">Automated Builds on Docker Hub</h1>
+<h2 id="about-automated-builds">About Automated Builds</h2>
+<p><em>Automated Builds</em> are a special feature of Docker Hub which allow you to
+use <a href="https://hub.docker.com">Docker Hub's</a> build clusters to automatically
+create images from a specified <code>Dockerfile</code> and a GitHub or Bitbucket repository
+(or "context"). The system will clone your repository and build the image
+described by the <code>Dockerfile</code> using the repository as the context. The
+resulting automated image will then be uploaded to the Docker Hub registry
+and marked as an <em>Automated Build</em>.</p>
+<p>Automated Builds have several advantages:</p>
+<ul>
+<li>
+<p>Users of <em>your</em> Automated Build can trust that the resulting
+image was built exactly as specified.</p>
+</li>
+<li>
+<p>The <code>Dockerfile</code> will be available to anyone with access to
+your repository on the Docker Hub registry. </p>
+</li>
+<li>
+<p>Because the process is automated, Automated Builds help to
+make sure that your repository is always up to date.</p>
+</li>
+</ul>
+<p>Automated Builds are supported for both public and private repositories
+on both <a href="http://github.com">GitHub</a> and <a href="https://bitbucket.org/">Bitbucket</a>.</p>
+<p>To use Automated Builds, you must have an <a href="http://docs.docker.com/userguide/dockerhub/#creating-a-docker-hub-account">account on Docker Hub</a>
+and on GitHub and/or Bitbucket. In either case, the account needs
+to be properly validated and activated before you can link to it.</p>
+<h2 id="setting-up-automated-builds-with-github">Setting up Automated Builds with GitHub</h2>
+<p>In order to set up an Automated Build, you need to first link your
+<a href="https://hub.docker.com">Docker Hub</a> account with a GitHub account.
+This will allow the registry to see your repositories.</p>
+<blockquote>
+<p><em>Note:</em> 
+Automated Builds currently require <em>read</em> and <em>write</em> access since
+<a href="https://hub.docker.com">Docker Hub</a> needs to setup a GitHub service
+hook. We have no choice here, this is how GitHub manages permissions, sorry! 
+We do guarantee nothing else will be touched in your account.</p>
+</blockquote>
+<p>To get started, log into your Docker Hub account and click the
+"+ Add Repository" button at the upper right of the screen. Then select
+<a href="https://registry.hub.docker.com/builds/add/">Automated Build</a>.</p>
+<p>Select the <a href="https://registry.hub.docker.com/associate/github/">GitHub service</a>.</p>
+<p>Then follow the onscreen instructions to authorize and link your
+GitHub account to Docker Hub. Once it is linked, you'll be able to
+choose a repo from which to create the Automatic Build.</p>
+<h3 id="creating-an-automated-build">Creating an Automated Build</h3>
+<p>You can <a href="https://registry.hub.docker.com/builds/github/select/">create an Automated Build</a> from any of your
+public or private GitHub repositories with a <code>Dockerfile</code>.</p>
+<h3 id="github-submodules">GitHub Submodules</h3>
+<p>If your GitHub repository contains links to private submodules, you'll
+need to add a deploy key from your Docker Hub repository. </p>
+<p>Your Docker Hub deploy key is located under the "Build Details"
+menu on the Automated Build's main page in the Hub. Add this key
+to your GitHub submodule by visiting the Settings page for the
+repository on GitHub and selecting "Deploy keys".</p>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>Screenshot</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.</td>
+      <td><img src="/docker-hub/hub-images/deploy_key.png"></td>
+      <td>Your automated build's deploy key is in the "Build Details" menu 
+under "Deploy keys".</td>
+    </tr>
+    <tr>
+      <td>2.</td>
+      <td><img src="/docker-hub/hub-images/github_deploy_key.png"></td>
+      <td>In your GitHub submodule's repository Settings page, add the 
+deploy key from your Docker Hub Automated Build.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="github-organizations">GitHub Organizations</h3>
+<p>GitHub organizations will appear once your membership to that organization is
+made public on GitHub. To verify, you can look at the members tab for your
+organization on GitHub.</p>
+<h3 id="github-service-hooks">GitHub Service Hooks</h3>
+<p>Follow the steps below to configure the GitHub service
+hooks for your Automated Build:</p>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>Screenshot</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.</td>
+      <td><img src="/docker-hub/hub-images/gh_settings.png"></td>
+      <td>Log in to Github.com, and go to your Repository page. Click on "Settings" on
+      the right side of the page. You must have admin privileges to the repository in order to do this.</td>
+    </tr>
+    <tr>
+      <td>2.</td>
+      <td><img src="/docker-hub/hub-images/gh_menu.png" alt="Webhooks & Services"></td>
+      <td>Click on "Webhooks & Services" on the left side of the page.</td></tr>
+      <tr><td>3.</td>
+      <td><img src="/docker-hub/hub-images/gh_service_hook.png" alt="Find the service labeled Docker"></td><td>Find the service labeled "Docker" and click on it.</td></tr>
+      <tr><td>4.</td><td><img src="/docker-hub/hub-images/gh_docker-service.png" alt="Activate Service Hooks"></td>
+      <td>Make sure the "Active" checkbox is selected and click the "Update service" button to save your changes.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="setting-up-automated-builds-with-bitbucket">Setting up Automated Builds with Bitbucket</h2>
+<p>In order to setup an Automated Build, you need to first link your
+<a href="https://hub.docker.com">Docker Hub</a> account with a Bitbucket account.
+This will allow the registry to see your repositories.</p>
+<p>To get started, log into your Docker Hub account and click the
+"+ Add Repository" button at the upper right of the screen. Then
+select <a href="https://registry.hub.docker.com/builds/add/">Automated Build</a>.</p>
+<p>Select the <a href="https://registry.hub.docker.com/associate/bitbucket/">Bitbucket source</a>.</p>
+<p>Then follow the onscreen instructions to authorize and link your
+Bitbucket account to Docker Hub. Once it is linked, you'll be able
+to choose a repository from which to create the Automatic Build.</p>
+<h3 id="creating-an-automated-build_1">Creating an Automated Build</h3>
+<p>You can <a href="https://registry.hub.docker.com/builds/bitbucket/select/">create an Automated Build</a> from any of your
+public or private Bitbucket repositories with a <code>Dockerfile</code>.</p>
+<h3 id="adding-a-hook">Adding a Hook</h3>
+<p>When you link your Docker Hub account, a <code>POST</code> hook should get automatically
+added to your Bitbucket repository. Follow the steps below to confirm or modify the
+Bitbucket hooks for your Automated Build:</p>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>Screenshot</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.</td>
+      <td><img src="/docker-hub/hub-images/bb_menu.png" alt="Settings" width="180"></td>
+      <td>Log in to Bitbucket.org and go to your Repository page. Click on "Settings" on
+      the far left side of the page, under "Navigation". You must have admin privileges
+      to the repository in order to do this.</td>
+    </tr>
+    <tr>
+      <td>2.</td>
+      <td><img src="/docker-hub/hub-images/bb_hooks.png" alt="Hooks" width="180"></td>
+      <td>Click on "Hooks" on the near left side of the page, under "Settings".</td></tr>
+    <tr>
+      <td>3.</td>
+      <td><img src="/docker-hub/hub-images/bb_post-hook.png" alt="Docker Post Hook"></td><td>You should now see a list of hooks associated with the repo, including a <code>POST</code> hook that points at
+      registry.hub.docker.com/hooks/bitbucket.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="the-dockerfile-and-automated-builds">The Dockerfile and Automated Builds</h2>
+<p>During the build process, Docker will copy the contents of your <code>Dockerfile</code>.
+It will also add it to the <a href="https://hub.docker.com">Docker Hub</a> for the Docker
+community (for public repositories) or approved team members/orgs (for private
+repositories) to see on the repository page.</p>
+<h3 id="readmemd">README.md</h3>
+<p>If you have a <code>README.md</code> file in your repository, it will be used as the
+repository's full description.The build process will look for a
+<code>README.md</code> in the same directory as your <code>Dockerfile</code>.</p>
+<blockquote>
+<p><strong>Warning:</strong>
+If you change the full description after a build, it will be
+rewritten the next time the Automated Build has been built. To make changes,
+modify the <code>README.md</code> from the Git repository.</p>
+</blockquote>
+<h2 id="remote-build-triggers">Remote Build triggers</h2>
+<p>If you need a way to trigger Automated Builds outside of GitHub or Bitbucket,
+you can set up a build trigger. When you turn on the build trigger for an
+Automated Build, it will give you a URL to which you can send POST requests.
+This will trigger the Automated Build, much as with a GitHub webhook.</p>
+<p>Build triggers are available under the Settings menu of each Automated Build
+repository on the Docker Hub.</p>
+<p><img alt="Build trigger screen" src="/docker-hub/hub-images/build-trigger.png" /></p>
+<p>You can use <code>curl</code> to trigger a build:</p>
+<pre class="prettyprint well"><code>$ curl --data &quot;build=true&quot; -X POST https://registry.hub.docker.com/u/svendowideit/testhook/trigger/be579c
+82-7c0e-11e4-81c4-0242ac110020/
+OK
+</code></pre>
+
+<blockquote>
+<p><strong>Note:</strong> 
+You can only trigger one build at a time and no more than one
+every five minutes. If you already have a build pending, or if you
+recently submitted a build request, those requests <em>will be ignored</em>.
+To verify everything is working correctly, check the logs of last
+ten triggers on the settings page .</p>
+</blockquote>
+<h2 id="webhooks">Webhooks</h2>
+<p>Automated Builds also include a Webhooks feature. Webhooks can be called
+after a successful repository push is made. This includes when a new tag is added
+to an existing image.</p>
+<p>The webhook call will generate a HTTP POST with the following JSON
+payload:</p>
+<pre class="prettyprint well"><code>{
+  &quot;callback_url&quot;: &quot;https://registry.hub.docker.com/u/svendowideit/testhook/hook/2141b5bi5i5b02bec211i4eeih0242eg11000a/&quot;,
+  &quot;push_data&quot;: {
+    &quot;images&quot;: [
+        &quot;27d47432a69bca5f2700e4dff7de0388ed65f9d3fb1ec645e2bc24c223dc1cc3&quot;,
+        &quot;51a9c7c1f8bb2fa19bcd09789a34e63f35abb80044bc10196e304f6634cc582c&quot;,
+        ...
+    ],
+    &quot;pushed_at&quot;: 1.417566161e+09,
+    &quot;pusher&quot;: &quot;trustedbuilder&quot;
+  },
+  &quot;repository&quot;: {
+    &quot;comment_count&quot;: 0,
+    &quot;date_created&quot;: 1.417494799e+09,
+    &quot;description&quot;: &quot;&quot;,
+    &quot;dockerfile&quot;: &quot;#\n# BUILD\u0009\u0009docker build -t svendowideit/apt-cacher .\n# RUN\u0009\u0009docker run -d -p 3142:3142 -name apt-cacher-run apt-cacher\n#\n# and then you can run containers with:\n# \u0009\u0009docker run -t -i -rm -e http_proxy http://192.168.1.2:3142/ debian bash\n#\nFROM\u0009\u0009ubuntu\nMAINTAINER\u0009SvenDowideit@home.org.au\n\n\nVOLUME\u0009\u0009[\&quot;/var/cache/apt-cacher-ng\&quot;]\nRUN\u0009\u0009apt-get update ; apt-get install -yq apt-cacher-ng\n\nEXPOSE \u0009\u00093142\nCMD\u0009\u0009chmod 777 /var/cache/apt-cacher-ng ; /etc/init.d/apt-cacher-ng start ; tail -f /var/log/apt-cacher-ng/*\n&quot;,
+    &quot;full_description&quot;: &quot;Docker Hub based automated build from a GitHub repo&quot;,
+    &quot;is_official&quot;: false,
+    &quot;is_private&quot;: true,
+    &quot;is_trusted&quot;: true,
+    &quot;name&quot;: &quot;testhook&quot;,
+    &quot;namespace&quot;: &quot;svendowideit&quot;,
+    &quot;owner&quot;: &quot;svendowideit&quot;,
+    &quot;repo_name&quot;: &quot;svendowideit/testhook&quot;,
+    &quot;repo_url&quot;: &quot;https://registry.hub.docker.com/u/svendowideit/testhook/&quot;,
+    &quot;star_count&quot;: 0,
+    &quot;status&quot;: &quot;Active&quot;
+  }
+}
+</code></pre>
+
+<p>Webhooks are available under the Settings menu of each Repository.</p>
+<blockquote>
+<p><strong>Note:</strong> If you want to test your webhook out we recommend using
+a tool like <a href="http://requestb.in/">requestb.in</a>.</p>
+<p><strong>Note</strong>: The Docker Hub servers are currently in the IP range
+<code>162.242.195.64 - 162.242.195.127</code>, so you can restrict your webhooks to
+accept webhook requests from that set of IP addresses.</p>
+</blockquote>
+<h3 id="webhook-chains">Webhook chains</h3>
+<p>Webhook chains allow you to chain calls to multiple services. For example,
+you can use this to trigger a deployment of your container only after
+it has been successfully tested, then update a separate Changelog once the
+deployment is complete.
+After clicking the "Add webhook" button, simply add as many URLs as necessary
+in your chain.</p>
+<p>The first webhook in a chain will be called after a successful push. Subsequent
+URLs will be contacted after the callback has been validated.</p>
+<h3 id="validating-a-callback">Validating a callback</h3>
+<p>In order to validate a callback in a webhook chain, you need to</p>
+<ol>
+<li>Retrieve the <code>callback_url</code> value in the request's JSON payload.</li>
+<li>Send a POST request to this URL containing a valid JSON body.</li>
+</ol>
+<blockquote>
+<p><strong>Note</strong>: A chain request will only be considered complete once the last
+callback has been validated.</p>
+</blockquote>
+<p>To help you debug or simply view the results of your webhook(s),
+view the "History" of the webhook available on its settings page.</p>
+<h3 id="callback-json-data">Callback JSON data</h3>
+<p>The following parameters are recognized in callback data:</p>
+<ul>
+<li><code>state</code> (required): Accepted values are <code>success</code>, <code>failure</code> and <code>error</code>.
+  If the state isn't <code>success</code>, the webhook chain will be interrupted.</li>
+<li><code>description</code>: A string containing miscellaneous information that will be
+  available on the Docker Hub. Maximum 255 characters.</li>
+<li><code>context</code>: A string containing the context of the operation. Can be retrieved
+  from the Docker Hub. Maximum 100 characters.</li>
+<li><code>target_url</code>: The URL where the results of the operation can be found. Can be
+  retrieved on the Docker Hub.</li>
+</ul>
+<p><em>Example callback payload:</em></p>
+<pre class="prettyprint well"><code>{
+  "state": "success",
+  "description": "387 tests PASSED",
+  "context": "Continuous integration by Acme CI",
+  "target_url": "http://ci.acme.com/results/afd339c1c3d27"
+}
+</code></pre>
+<h2 id="repository-links">Repository links</h2>
+<p>Repository links are a way to associate one Automated Build with
+another. If one gets updated,the linking system triggers a rebuild
+for the other Automated Build. This makes it easy to keep all your
+Automated Builds up to date.</p>
+<p>To add a link, go to the repository for the Automated Build you want to
+link to and click on <em>Repository Links</em> under the Settings menu at
+right. Then, enter the name of the repository that you want have linked.</p>
+<blockquote>
+<p><strong>Warning:</strong>
+You can add more than one repository link, however, you should
+do so very carefully. Creating a two way relationship between Automated Builds will
+cause an endless build loop.</p>
+</blockquote>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="push-footer"></div>
+
+</div>
+
+
+
+<div id="footer-container" class="container">
+  <div id="footer" class="grey-body">
+    <div class="row">
+      <div class="span2">
+        <span class="footer-title">Community</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/community/events/">Events</a></li>
+          <li><a class="primary-button" href="http://posts.docker.com">Friends' Posts</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/meetups/">Meetups</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/governance/">Governance</a></li>
+          <li><a class="primary-button" href="http://forums.docker.com">Forums</a></li>
+          <li><a class="primary-button" href="http://botbot.me/freenode/docker">IRC</a></li>
+          <li><a class="primary-button" href="https://github.com/docker/docker">GitHub</a></li>
+          <li><a class="primary-button" href="http://stackoverflow.com/search?q=docker">Stackoverflow</a></li>
+          <li><a class="primary-button" href="http://www.cafepress.com/docker">Swag</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Enterprise</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/support/">Support</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/education/">Education</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/services/">Services</a></li>
+        </ul>
+        <span class="footer-title">Partner Solutions</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/partners/find/">Find a Partner</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/program/">Partner Program</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/learn/">Learn More</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Resources</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://docs.docker.com">Documentation</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/help/">Help</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/usecases/">Use Cases</a></li>
+          <li><a class="primary-button" href="http://www.docker.com/tryit/">Online Tutorial</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/howtobuy/">How To Buy</a></li>
+          <li><a class="primary-button" href="http://status.docker.com">Status</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/security/">Security</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Company</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/company/aboutus/">About Us</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/team/">Team</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/news/">News</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/press/">Press</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/careers/">Careers</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <span class="footer-title">Connect</span>
+        <div class="search">
+          <span>Subscribe to our newsletter</span>
+          <form action="https://www.docker.com/subscribe_newsletter/" method="post">
+            <input type='hidden' name='csrfmiddlewaretoken' value='aWL78QXQkY8DSKNYh6cl08p5eTLl7sOa' />
+            <tr><th><label for="id_email">Email:</label></th><td><input class="form-control" id="id_email" name="email" placeholder="Enter your email" type="text" /></td></tr>
+            
+            <button type="submit"><i class="icon-arrow-right"></i> </button>
+          </form>
+        </div>
+        <ul class="unstyled social">
+          <li><a title="Docker on Twitter" class="primary-button blog" href="http://blog.docker.com">Blog</a></li>
+          <li><a title="Docker on Twitter" class="primary-button twitter" href="http://twitter.com/docker">Twitter</a></li>
+          <li><a title="Docker on Google+" class="primary-button googleplus" href="https://plus.google.com/u/0/communities/108146856671494713993">Google+</a></li>
+          <li><a title="Docker on Facebook" class="primary-button facebook" href="https://www.facebook.com/docker.run">Facebook</a></li>
+          <li><a title="Docker on Youtube" class="primary-button youtube" href="http://www.youtube.com/user/dockerrun">YouTube</a></li>
+        </ul>
+        <ul class="unstyled social">
+          <li><a title="Docker on SlideShare" class="primary-button slideshare" href="http://www.slideshare.net/Docker">Slideshare</a></li>
+          <li>
+             <a title="Docker on LinkedIn" class="primary-button" href="https://www.linkedin.com/company/docker">
+                 <span class="linkedin"></span>
+                 LinkedIn
+             </a>
+          </li>
+          <li>
+              <a title="Docker on GitHub" class="primary-button" href="https://github.com/docker/">
+                  <span class="github"></span>
+                  GitHub
+              </a>
+          </li>
+          <li>
+              <a title="Docker on Reddit" class="primary-button" href="http://www.reddit.com/r/docker">
+                  <span class="reddit"></span>
+                  Reddit
+              </a>
+          </li>
+          <li>
+              <a title="Docker on AngelList" class="primary-button" href="https://angel.co/docker-inc-1">
+                  <span class="angellist"></span>
+                  AngelList
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="span6 pagination-right copyright">
+        <span>&copy; 2014-2015 Docker, Inc.</span>
+      </div>
+      <div class="span6 pagination-left copyright">
+        <a href="http://www.docker.com/legal/terms_of_service">Terms</a> &middot;
+        <a href="http://www.docker.com/legal/privacy_policy">Privacy</a> &middot;
+        <a href="http://www.docker.com/legal/trademark_guidelines">Trademarks</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.cookie.js" ></script>
+<script src="/js/jquery-scrolltofixed-min.js"></script>
+<script src="/js/bootstrap-3.0.3.min.js"></script>
+<script src="/js/prettify-1.0.min.js"></script>
+<script src="/js/dockerfile_tutorial.js"></script>
+<script src="/js/dockerfile_tutorial_level.js"></script>
+<script src="/js/base.js"></script>
+<script src="/tipuesearch/tipuesearch_set.js"></script>
+<script src="/tipuesearch/tipuesearch.min.js"></script>
+<script type="text/javascript">
+piAId = '45082';
+piCId = '1482';
+
+(function() {
+  function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+  }
+  if(window.attachEvent) { window.attachEvent('onload', async_load); }
+  else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').css("min-height", $(window).height() - 553 );
+    // if the URL contains a version string, update the version picker to reflect that
+    version = document.location.pathname.match(/^\/(v\d\.\d)\/.*/)
+    if (version && version[1]) {
+        $('#document-version-number')[0].text = 'Version '+version[1];
+    } else {
+        $('#document-version-number')[0].text = $('#document-version-number')[0].text + " (Latest)"
+    }
+    // load the complete versions list
+    $.get("/versions.html_fragment", function( data ) {
+    	$('#documentation-version-list').prepend(data);
+	//remove any "/v1.1/" bits from front, so we can add the path to the version selection dropdown.
+	path = document.location.pathname.replace(/^\/v\d\.\d/, "");
+	$('#documentation-version-list a.version').each(function(i, e) {
+		e.href = e.href+path;
+		$(e).removeClass()
+	});
+    });
+
+  })
+  var userName = getCookie('docker_sso_username');
+  if (userName) {
+    $('.topmostnav_loggedout').hide();
+    $('.topmostnav_loggedin').show();
+    $('#logged-in-header-username').text(userName);
+  } else {
+    $('.topmostnav_loggedout').show();
+    $('.topmostnav_loggedin').hide();
+  }
+</script>
+</body>
+</html>

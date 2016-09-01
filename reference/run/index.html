@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="docker_version" content="1.5.0">
+  <meta name="docker_git_branch" content="docs">
+  <meta name="docker_git_commit" content="35ea4de">
+  <meta name="docker_build_date" content="Fri Apr 10 23:25:55 UTC 2015">
+
+  <meta name="description" content="Configure containers at runtime">
+  <meta name="keywords" content="docker, run, configure, runtime">
+  
+  <link rel="canonical" href="/reference/run/">
+  <link href="/css/bootstrap-custom.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/prettify-1.0.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/dockerfile_tutorial.css">
+  <link href="/tipuesearch/tipuesearch.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <title>Run Reference - Docker Documentation</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-6096819-11', 'docker.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash,
+  });
+  </script>
+  
+</head>
+<body>
+
+<div id="topmostnav" class="topmostnav_loggedout navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li class=""><a href="http://www.docker.com/whatisdocker/" title="What is Docker">What is Docker?</a></li>
+      <li class=""><a href="http://www.docker.com/resources/usecases/" title="Use Cases">Use Cases</a></li>
+      <li class=""><a href="http://www.docker.com/tryit/" title="Try It!">Try It!</a></li>
+      <li><a href="https://registry.hub.docker.com" title="Browse">Browse</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <a href="https://hub.docker.com/account/login" class="btn nav-button2" title="Lg In">Log In</a>
+      <a href="https://hub.docker.com/account/signup" class="btn nav-button1" title="Sign Up">Sign Up</a>
+    </div>
+  </div>
+</div>
+<div id="topmostnav" class="topmostnav_loggedin navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li><a href="https://registry.hub.docker.com" title="Browse Repos">Browse Repos</a></li>
+      <li class="active"><a href="http://docs.docker.com" title="Documentation">Documentation</a></li>
+      <li><a href="http://www.docker.com/community/participate/" title="Community">Community</a></li>
+      <li><a href="http://www.docker.com/resources/help/" title="Help">Help</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <ul class="nav user">
+        <li class="dropdown">
+          <a id="logged-in-header-username" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img class="profile" src="" alt="profile picture">
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="https://hub.docker.com/">View Profile</a></li>
+            <li><a href="https://hub.docker.com/account/settings/">Settings</a></li>
+            <li><a href="https://hub.docker.com/repos/">My Repositories</a></li>
+            <li><a href="https://hub.docker.com/plans/billing-info">Billing</a></li>
+            <li><a href="https://hub.docker.com/account/logout/?next=/">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="wrap">
+  <nav id="nav_menu" class="clearfix navbar navbar-default navbar-static-top affix" role="navigation">
+  <div id="docsnav">
+    <ul id="main-nav" class="pull-left">
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/">About</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/">Docker</a>
+          </li>
+        
+          <li >
+            <a href="/release-notes/">Release Notes</a>
+          </li>
+        
+          <li >
+            <a href="/introduction/understanding-docker/">Understanding Docker</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/installation/ubuntulinux/">Installation</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/installation/ubuntulinux/">Ubuntu</a>
+          </li>
+        
+          <li >
+            <a href="/installation/mac/">Mac OS X</a>
+          </li>
+        
+          <li >
+            <a href="/installation/windows/">Microsoft Windows</a>
+          </li>
+        
+          <li >
+            <a href="/installation/amazon/">Amazon EC2</a>
+          </li>
+        
+          <li >
+            <a href="/installation/archlinux/">Arch Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/binaries/">Binaries</a>
+          </li>
+        
+          <li >
+            <a href="/installation/centos/">CentOS</a>
+          </li>
+        
+          <li >
+            <a href="/installation/cruxlinux/">CRUX Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/debian/">Debian</a>
+          </li>
+        
+          <li >
+            <a href="/installation/fedora/">Fedora</a>
+          </li>
+        
+          <li >
+            <a href="/installation/frugalware/">FrugalWare</a>
+          </li>
+        
+          <li >
+            <a href="/installation/google/">Google Cloud Platform</a>
+          </li>
+        
+          <li >
+            <a href="/installation/gentoolinux/">Gentoo</a>
+          </li>
+        
+          <li >
+            <a href="/installation/softlayer/">IBM Softlayer</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rackspace/">Rackspace Cloud</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rhel/">Red Hat Enterprise Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/oracle/">Oracle Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/SUSE/">SUSE</a>
+          </li>
+        
+          <li >
+            <a href="/compose/install/">Docker Compose</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/userguide/">User Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/userguide/">The Docker User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerhub/">Getting Started with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerizing/">Dockerizing Applications</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/usingdocker/">Working with Containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerimages/">Working with Docker Images</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerlinks/">Linking containers together</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockervolumes/">Managing data in containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerrepos/">Working with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/compose/">Docker Compose</a>
+          </li>
+        
+          <li >
+            <a href="/machine/">Docker Machine</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/">Docker Swarm</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub/">Docker Hub</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub/">Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/accounts/">Accounts</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/repos/">Repositories</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/builds/">Automated Builds</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/official_repos/">Official Repo Guidelines</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/examples/nodejs_web_app/">Examples</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/examples/nodejs_web_app/">Dockerizing a Node.js web application</a>
+          </li>
+        
+          <li >
+            <a href="/examples/mongodb/">Dockerizing MongoDB</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_redis_service/">Dockerizing a Redis service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/postgresql_service/">Dockerizing a PostgreSQL service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_riak_service/">Dockerizing a Riak service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_ssh_service/">Dockerizing an SSH service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/couchdb_data_volumes/">Dockerizing a CouchDB service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/apt-cacher-ng/">Dockerizing an Apt-Cacher-ng service</a>
+          </li>
+        
+          <li >
+            <a href="/compose/django/">Getting started with Compose and Django</a>
+          </li>
+        
+          <li >
+            <a href="/compose/rails/">Getting started with Compose and Rails</a>
+          </li>
+        
+          <li >
+            <a href="/compose/wordpress/">Getting started with Compose and Wordpress</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/articles/basics/">Articles</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/articles/basics/">Docker basics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/networking/">Advanced networking</a>
+          </li>
+        
+          <li >
+            <a href="/articles/security/">Security</a>
+          </li>
+        
+          <li >
+            <a href="/articles/https/">Running Docker with HTTPS</a>
+          </li>
+        
+          <li >
+            <a href="/articles/registry_mirror/">Run a local registry mirror</a>
+          </li>
+        
+          <li >
+            <a href="/articles/host_integration/">Automatically starting containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/baseimages/">Creating a base image</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+          </li>
+        
+          <li >
+            <a href="/articles/certificates/">Using certificates for repository client verification</a>
+          </li>
+        
+          <li >
+            <a href="/articles/using_supervisord/">Using Supervisor</a>
+          </li>
+        
+          <li >
+            <a href="/articles/cfengine_process_management/">Process management with CFEngine</a>
+          </li>
+        
+          <li >
+            <a href="/articles/puppet/">Using Puppet</a>
+          </li>
+        
+          <li >
+            <a href="/articles/chef/">Using Chef</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dsc/">Using PowerShell DSC</a>
+          </li>
+        
+          <li >
+            <a href="/articles/ambassador_pattern_linking/">Cross-Host linking using ambassador containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/runmetrics/">Runtime metrics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/b2d_volume_resize/">Increasing a Boot2Docker volume</a>
+          </li>
+        
+          <li >
+            <a href="/articles/systemd/">Controlling and configuring Docker using Systemd</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left active">
+        
+        <a href="/reference/commandline/cli/">Reference</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/reference/commandline/cli/">Command line</a>
+          </li>
+        
+          <li >
+            <a href="/reference/builder/">Dockerfile</a>
+          </li>
+        
+          <li >
+            <a href="/faq/">FAQ</a>
+          </li>
+        
+          <li class="active">
+            <a href="/reference/run/">Run Reference</a>
+          </li>
+        
+          <li >
+            <a href="/compose/cli/">Compose command line</a>
+          </li>
+        
+          <li >
+            <a href="/compose/yml/">Compose yml</a>
+          </li>
+        
+          <li >
+            <a href="/compose/env/">Compose ENV variables</a>
+          </li>
+        
+          <li >
+            <a href="/compose/completion/">Compose commandline completion</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/discovery/">Swarm discovery</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/strategy/">Swarm strategies</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/filter/">Swarm filters</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/API/">Swarm API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker-io_api/">Docker Hub API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api/">Docker Registry API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api_client_libraries/">Docker Registry API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/hub_registry_spec/">Docker Hub and Registry Spec</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api/">Docker Remote API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.17/">Docker Remote API v1.17</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.16/">Docker Remote API v1.16</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/remote_api_client_libraries/">Docker Remote API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_io_accounts_api/">Docker Hub Accounts API</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/project/who-written-for/">Contributor Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/project/who-written-for/">README first</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-required/">Get required software</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-git/">Configure Git for contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-dev-env/">Work with a development container</a>
+          </li>
+        
+          <li >
+            <a href="/project/test-and-docs/">Run tests and test documentation</a>
+          </li>
+        
+          <li >
+            <a href="/project/make-a-contribution/">Understand contribution workflow</a>
+          </li>
+        
+          <li >
+            <a href="/project/find-an-issue/">Find an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/work-issue/">Work on an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/create-pr/">Create a pull request</a>
+          </li>
+        
+          <li >
+            <a href="/project/review-pr/">Participate in the PR review</a>
+          </li>
+        
+          <li >
+            <a href="/project/advanced-contributing/">Advanced contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/get-help/">Where to get help</a>
+          </li>
+        
+          <li >
+            <a href="/project/coding-style/">Coding style guide</a>
+          </li>
+        
+          <li >
+            <a href="/project/doc-style/">Documentation style guide</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+    </ul>
+  </div>
+</nav>
+  <div id="content" class="container">
+    <div class="row">
+
+      <div class="span3" id="leftnav">
+        <div id="toc_table">
+          <ul class="nav nav-tabs nav-stacked">
+            
+  
+    <li class=""><a href="#general-form">General form</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#operator-exclusive-options">Operator exclusive options</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#detached-vs-foreground">Detached vs foreground</a>
+      <ul>
+    
+      <li><a href="#detached-d">Detached (-d)</a></li>
+    
+      <li><a href="#foreground">Foreground</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#container-identification">Container identification</a>
+      <ul>
+    
+      <li><a href="#name-name">Name (--name)</a></li>
+    
+      <li><a href="#pid-equivalent">PID equivalent</a></li>
+    
+      <li><a href="#imagetag">Image[:tag]</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#pid-settings">PID Settings</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#ipc-settings">IPC Settings</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#network-settings">Network settings</a>
+      <ul>
+    
+      <li><a href="#mode-none">Mode: none</a></li>
+    
+      <li><a href="#mode-bridge">Mode: bridge</a></li>
+    
+      <li><a href="#mode-host">Mode: host</a></li>
+    
+      <li><a href="#mode-container">Mode: container</a></li>
+    
+      <li><a href="#managing-etchosts">Managing /etc/hosts</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#restart-policies-restart">Restart policies (--restart)</a>
+      <ul>
+    
+      <li><a href="#examples">Examples</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#clean-up-rm">Clean up (--rm)</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#security-configuration">Security configuration</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#runtime-constraints-on-cpu-and-memory">Runtime constraints on CPU and memory</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege, Linux capabilities, and LXC configuration</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#overriding-dockerfile-image-defaults">Overriding Dockerfile image defaults</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#cmd-default-command-or-options">CMD (default command or options)</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#entrypoint-default-command-to-execute-at-runtime">ENTRYPOINT (default command to execute at runtime)</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#expose-incoming-ports">EXPOSE (incoming ports)</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#env-environment-variables">ENV (environment variables)</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#volume-shared-filesystems">VOLUME (shared filesystems)</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#user">USER</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#workdir">WORKDIR</a>
+      <ul>
+    
+      </ul>
+    </li>
+  
+
+          </ul>
+        </div>
+      </div>
+      <div class="span9 content-body">
+
+        
+
+        <div id="versionnav" class="span3 pull-right">
+          <ul class="nav version pull-right">
+            <li class="dropdown">
+              <a id="document-version-number" class="dropdown-toggle" data-toggle="dropdown" href="#">
+		      Version v1.5
+              </a>
+              <ul id="documentation-version-list" class="dropdown-menu pull-right">
+
+		<li role="presentation" class="divider"></li>
+		<li> <a class="home-link3 tertiary-nav" href="https://github.com/docker/docker/blob/master/docs/sources/reference/run.md" >Edit on GitHub</a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <h1 id="docker-run-reference">Docker run reference</h1>
+<p><strong>Docker runs processes in isolated containers</strong>. When an operator
+executes <code>docker run</code>, she starts a process with its own file system,
+its own networking, and its own isolated process tree.  The
+<a href="/terms/image/#image"><em>Image</em></a> which starts the process may define
+defaults related to the binary to run, the networking to expose, and
+more, but <code>docker run</code> gives final control to the operator who starts
+the container from the image. That's the main reason
+<a href="/reference/commandline/cli/#run"><em>run</em></a> has more options than any
+other <code>docker</code> command.</p>
+<h2 id="general-form">General form</h2>
+<p>The basic <code>docker run</code> command takes this form:</p>
+<pre class="prettyprint well"><code>$ sudo docker run [OPTIONS] IMAGE[:TAG] [COMMAND] [ARG...]
+</code></pre>
+<p>To learn how to interpret the types of <code>[OPTIONS]</code>,
+see <a href="/reference/commandline/cli/#option-types"><em>Option types</em></a>.</p>
+<p>The list of <code>[OPTIONS]</code> breaks down into two groups:</p>
+<ol>
+<li>Settings exclusive to operators, including:<ul>
+<li>Detached or Foreground running,</li>
+<li>Container Identification,</li>
+<li>Network settings, and</li>
+<li>Runtime Constraints on CPU and Memory</li>
+<li>Privileges and LXC Configuration</li>
+</ul>
+</li>
+<li>Settings shared between operators and developers, where operators can
+   override defaults developers set in images at build time.</li>
+</ol>
+<p>Together, the <code>docker run [OPTIONS]</code> give the operator complete control over runtime
+behavior, allowing them to override all defaults set by
+the developer during <code>docker build</code> and nearly all the defaults set by
+the Docker runtime itself.</p>
+<h2 id="operator-exclusive-options">Operator exclusive options</h2>
+<p>Only the operator (the person executing <code>docker run</code>) can set the
+following options.</p>
+<ul>
+<li><a href="#detached-vs-foreground">Detached vs Foreground</a><ul>
+<li><a href="#detached-d">Detached (-d)</a></li>
+<li><a href="#foreground">Foreground</a></li>
+</ul>
+</li>
+<li><a href="#container-identification">Container Identification</a><ul>
+<li><a href="#name-name">Name (--name)</a></li>
+<li><a href="#pid-equivalent">PID Equivalent</a></li>
+</ul>
+</li>
+<li><a href="#ipc-settings">IPC Settings</a></li>
+<li><a href="#network-settings">Network Settings</a></li>
+<li><a href="#restart-policies-restart">Restart Policies<br />(--restart)</a></li>
+<li><a href="#clean-up-rm">Clean Up (--rm)</a></li>
+<li><a href="#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a></li>
+<li><a href="#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime Privilege, Linux Capabilities, and LXC Configuration</a></li>
+</ul>
+<h2 id="detached-vs-foreground">Detached vs foreground</h2>
+<p>When starting a Docker container, you must first decide if you want to
+run the container in the background in a "detached" mode or in the
+default foreground mode:</p>
+<pre class="prettyprint well"><code>-d=false: Detached mode: Run container in the background, print new container id
+</code></pre>
+<h3 id="detached-d">Detached (-d)</h3>
+<p>In detached mode (<code>-d=true</code> or just <code>-d</code>), all I/O should be done
+through network connections or shared volumes because the container is
+no longer listening to the command line where you executed <code>docker run</code>.
+You can reattach to a detached container with <code>docker</code>
+<a href="/reference/commandline/cli/#attach"><em>attach</em></a>. If you choose to run a
+container in the detached mode, then you cannot use the <code>--rm</code> option.</p>
+<h3 id="foreground">Foreground</h3>
+<p>In foreground mode (the default when <code>-d</code> is not specified), <code>docker
+run</code> can start the process in the container and attach the console to
+the process's standard input, output, and standard error. It can even
+pretend to be a TTY (this is what most command line executables expect)
+and pass along signals. All of that is configurable:</p>
+<pre class="prettyprint well"><code>-a=[]           : Attach to `STDIN`, `STDOUT` and/or `STDERR`
+-t=false        : Allocate a pseudo-tty
+--sig-proxy=true: Proxify all received signal to the process (non-TTY mode only)
+-i=false        : Keep STDIN open even if not attached
+</code></pre>
+<p>If you do not specify <code>-a</code> then Docker will <a href="https://github.com/docker/docker/blob/
+75a7f4d90cde0295bcfb7213004abce8d4779b75/commands.go#L1797">attach all standard
+streams</a>. You can
+specify to which of the three standard streams (<code>STDIN</code>, <code>STDOUT</code>,
+<code>STDERR</code>) you'd like to connect instead, as in:</p>
+<pre class="prettyprint well"><code>$ sudo docker run -a stdin -a stdout -i -t ubuntu /bin/bash
+</code></pre>
+<p>For interactive processes (like a shell), you must use <code>-i -t</code> together in
+order to allocate a tty for the container process. Specifying <code>-t</code> is however
+forbidden when the client standard output is redirected or pipe, such as in:
+<code>echo test | docker run -i busybox cat</code>.</p>
+<h2 id="container-identification">Container identification</h2>
+<h3 id="name-name">Name (--name)</h3>
+<p>The operator can identify a container in three ways:</p>
+<ul>
+<li>UUID long identifier
+    ("f78375b1c487e03c9438c729345e54db9d20cfa2ac1fc3494b6eb60872e74778")</li>
+<li>UUID short identifier ("f78375b1c487")</li>
+<li>Name ("evil_ptolemy")</li>
+</ul>
+<p>The UUID identifiers come from the Docker daemon, and if you do not
+assign a name to the container with <code>--name</code> then the daemon will also
+generate a random string name too. The name can become a handy way to
+add meaning to a container since you can use this name when defining
+<a href="/userguide/dockerlinks"><em>links</em></a> (or any
+other place you need to identify a container). This works for both
+background and foreground Docker containers.</p>
+<h3 id="pid-equivalent">PID equivalent</h3>
+<p>Finally, to help with automation, you can have Docker write the
+container ID out to a file of your choosing. This is similar to how some
+programs might write out their process ID to a file (you've seen them as
+PID files):</p>
+<pre class="prettyprint well"><code>--cidfile="": Write the container ID to the file
+</code></pre>
+<h3 id="imagetag">Image[:tag]</h3>
+<p>While not strictly a means of identifying a container, you can specify a version of an
+image you'd like to run the container with by adding <code>image[:tag]</code> to the command. For
+example, <code>docker run ubuntu:14.04</code>.</p>
+<h2 id="pid-settings">PID Settings</h2>
+<pre class="prettyprint well"><code>--pid=""  : Set the PID (Process) Namespace mode for the container,
+       'host': use the host's PID namespace inside the container
+</code></pre>
+<p>By default, all containers have the PID namespace enabled.</p>
+<p>PID namespace provides separation of processes. The PID Namespace removes the
+view of the system processes, and allows process ids to be reused including
+pid 1.</p>
+<p>In certain cases you want your container to share the host's process namespace,
+basically allowing processes within the container to see all of the processes
+on the system.  For example, you could build a container with debugging tools
+like <code>strace</code> or <code>gdb</code>, but want to use these tools when debugging processes
+within the container.</p>
+<pre class="prettyprint well"><code>$ sudo docker run --pid=host rhel7 strace -p 1234
+</code></pre>
+<p>This command would allow you to use <code>strace</code> inside the container on pid 1234 on
+the host.</p>
+<h2 id="ipc-settings">IPC Settings</h2>
+<pre class="prettyprint well"><code>--ipc=""  : Set the IPC mode for the container,
+                             'container:&lt;name|id&gt;': reuses another container's IPC namespace
+                             'host': use the host's IPC namespace inside the container
+</code></pre>
+<p>By default, all containers have the IPC namespace enabled.</p>
+<p>IPC (POSIX/SysV IPC) namespace provides separation of named shared memory segments, semaphores and message queues.  </p>
+<p>Shared memory segments are used to accelerate inter-process communication at
+memory speed, rather than through pipes or through the network stack. Shared
+memory is commonly used by databases and custom-built (typically C/OpenMPI, 
+C++/using boost libraries) high performance applications for scientific
+computing and financial services industries. If these types of applications
+are broken into multiple containers, you might need to share the IPC mechanisms
+of the containers.</p>
+<h2 id="network-settings">Network settings</h2>
+<pre class="prettyprint well"><code>--dns=[]         : Set custom dns servers for the container
+--net="bridge"   : Set the Network mode for the container
+                              'bridge': creates a new network stack for the container on the docker bridge
+                              'none': no networking for this container
+                              'container:&lt;name|id&gt;': reuses another container network stack
+                              'host': use the host network stack inside the container
+--add-host=""    : Add a line to /etc/hosts (host:IP)
+--mac-address="" : Sets the container's Ethernet device's MAC address
+</code></pre>
+<p>By default, all containers have networking enabled and they can make any
+outgoing connections. The operator can completely disable networking
+with <code>docker run --net none</code> which disables all incoming and outgoing
+networking. In cases like this, you would perform I/O through files or
+<code>STDIN</code> and <code>STDOUT</code> only.</p>
+<p>Your container will use the same DNS servers as the host by default, but
+you can override this with <code>--dns</code>.</p>
+<p>By default a random MAC is generated. You can set the container's MAC address
+explicitly by providing a MAC via the <code>--mac-address</code> parameter (format:
+<code>12:34:56:78:9a:bc</code>).</p>
+<p>Supported networking modes are:</p>
+<ul>
+<li>none - no networking in the container</li>
+<li>bridge - (default) connect the container to the bridge via veth interfaces</li>
+<li>host - use the host's network stack inside the container.  Note: This gives the container full access to local system services such as D-bus and is therefore considered insecure.</li>
+<li>container - use another container's network stack</li>
+</ul>
+<h4 id="mode-none">Mode: none</h4>
+<p>With the networking mode set to <code>none</code> a container will not have a
+access to any external routes.  The container will still have a
+<code>loopback</code> interface enabled in the container but it does not have any
+routes to external traffic.</p>
+<h4 id="mode-bridge">Mode: bridge</h4>
+<p>With the networking mode set to <code>bridge</code> a container will use docker's
+default networking setup.  A bridge is setup on the host, commonly named
+<code>docker0</code>, and a pair of <code>veth</code> interfaces will be created for the
+container.  One side of the <code>veth</code> pair will remain on the host attached
+to the bridge while the other side of the pair will be placed inside the
+container's namespaces in addition to the <code>loopback</code> interface.  An IP
+address will be allocated for containers on the bridge's network and
+traffic will be routed though this bridge to the container.</p>
+<h4 id="mode-host">Mode: host</h4>
+<p>With the networking mode set to <code>host</code> a container will share the host's
+network stack and all interfaces from the host will be available to the
+container.  The container's hostname will match the hostname on the host
+system.  Publishing ports and linking to other containers will not work
+when sharing the host's network stack.</p>
+<h4 id="mode-container">Mode: container</h4>
+<p>With the networking mode set to <code>container</code> a container will share the
+network stack of another container.  The other container's name must be
+provided in the format of <code>--net container:&lt;name|id&gt;</code>.</p>
+<p>Example running a Redis container with Redis binding to <code>localhost</code> then
+running the <code>redis-cli</code> command and connecting to the Redis server over the
+<code>localhost</code> interface.</p>
+<pre class="prettyprint well"><code>$ sudo docker run -d --name redis example/redis --bind 127.0.0.1
+$ # use the redis container's network stack to access localhost
+$ sudo docker run --rm -ti --net container:redis example/redis-cli -h 127.0.0.1
+</code></pre>
+<h3 id="managing-etchosts">Managing /etc/hosts</h3>
+<p>Your container will have lines in <code>/etc/hosts</code> which define the hostname of the
+container itself as well as <code>localhost</code> and a few other common things.  The
+<code>--add-host</code> flag can be used to add additional lines to <code>/etc/hosts</code>.  </p>
+<pre class="prettyprint well"><code>$ /docker run -ti --add-host db-static:86.75.30.9 ubuntu cat /etc/hosts
+172.17.0.22     09d03f76bf2c
+fe00::0         ip6-localnet
+ff00::0         ip6-mcastprefix
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
+127.0.0.1       localhost
+::1             localhost ip6-localhost ip6-loopback
+86.75.30.9      db-static
+</code></pre>
+<h2 id="restart-policies-restart">Restart policies (--restart)</h2>
+<p>Using the <code>--restart</code> flag on Docker run you can specify a restart policy for
+how a container should or should not be restarted on exit.</p>
+<p>When a restart policy is active on a container, it will be shown as either <code>Up</code>
+or <code>Restarting</code> in <a href="/reference/commandline/cli/#ps"><code>docker ps</code></a>. It can also be
+useful to use <a href="/reference/commandline/cli/#events"><code>docker events</code></a> to see the
+restart policy in effect.</p>
+<p>Docker supports the following restart policies:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Policy</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>no</strong></td>
+      <td>
+        Do not automatically restart the container when it exits. This is the 
+        default.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span style="white-space: nowrap">
+          <strong>on-failure</strong>[:max-retries]
+        </span>
+      </td>
+      <td>
+        Restart only if the container exits with a non-zero exit status.
+        Optionally, limit the number of restart retries the Docker 
+        daemon attempts.
+      </td>
+    </tr>
+    <tr>
+      <td><strong>always</strong></td>
+      <td>
+        Always restart the container regardless of the exit status.
+        When you specify always, the Docker daemon will try to restart
+        the container indefinitely.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>An ever increasing delay (double the previous delay, starting at 100
+milliseconds) is added before each restart to prevent flooding the server.
+This means the daemon will wait for 100 ms, then 200 ms, 400, 800, 1600,
+and so on until either the <code>on-failure</code> limit is hit, or when you <code>docker stop</code>
+or <code>docker rm -f</code> the container.</p>
+<p>If a container is succesfully restarted (the container is started and runs
+for at least 10 seconds), the delay is reset to its default value of 100 ms.</p>
+<p>You can specify the maximum amount of times Docker will try to restart the
+container when using the <strong>on-failure</strong> policy.  The default is that Docker
+will try forever to restart the container. The number of (attempted) restarts
+for a container can be obtained via <a href="/reference/commandline/cli/#inspect"><code>docker inspect</code></a>. For example, to get the number of restarts
+for container "my-container";</p>
+<pre class="prettyprint well"><code>$ sudo docker inspect -f "{{ .RestartCount }}" my-container
+# 2
+</code></pre>
+<p>Or, to get the last time the container was (re)started;</p>
+<pre class="prettyprint well"><code>$ docker inspect -f "{{ .State.StartedAt }}" my-container
+# 2015-03-04T23:47:07.691840179Z
+</code></pre>
+<p>You cannot set any restart policy in combination with 
+<a href="#clean-up-rm">"clean up (--rm)"</a>. Setting both <code>--restart</code> and <code>--rm</code>
+results in an error.</p>
+<h3 id="examples">Examples</h3>
+<pre class="prettyprint well"><code>$ sudo docker run --restart=always redis
+</code></pre>
+<p>This will run the <code>redis</code> container with a restart policy of <strong>always</strong>
+so that if the container exits, Docker will restart it.</p>
+<pre class="prettyprint well"><code>$ sudo docker run --restart=on-failure:10 redis
+</code></pre>
+<p>This will run the <code>redis</code> container with a restart policy of <strong>on-failure</strong> 
+and a maximum restart count of 10.  If the <code>redis</code> container exits with a
+non-zero exit status more than 10 times in a row Docker will abort trying to
+restart the container. Providing a maximum restart limit is only valid for the
+<strong>on-failure</strong> policy.</p>
+<h2 id="clean-up-rm">Clean up (--rm)</h2>
+<p>By default a container's file system persists even after the container
+exits. This makes debugging a lot easier (since you can inspect the
+final state) and you retain all your data by default. But if you are
+running short-term <strong>foreground</strong> processes, these container file
+systems can really pile up. If instead you'd like Docker to
+<strong>automatically clean up the container and remove the file system when
+the container exits</strong>, you can add the <code>--rm</code> flag:</p>
+<pre class="prettyprint well"><code>--rm=false: Automatically remove the container when it exits (incompatible with -d)
+</code></pre>
+<h2 id="security-configuration">Security configuration</h2>
+<pre class="prettyprint well"><code>--security-opt="label:user:USER"   : Set the label user for the container
+--security-opt="label:role:ROLE"   : Set the label role for the container
+--security-opt="label:type:TYPE"   : Set the label type for the container
+--security-opt="label:level:LEVEL" : Set the label level for the container
+--security-opt="label:disable"     : Turn off label confinement for the container
+--security-opt="apparmor:PROFILE"  : Set the apparmor profile to be applied 
+                                     to the container
+</code></pre>
+<p>You can override the default labeling scheme for each container by specifying
+the <code>--security-opt</code> flag. For example, you can specify the MCS/MLS level, a
+requirement for MLS systems. Specifying the level in the following command
+allows you to share the same content between containers.</p>
+<pre class="prettyprint well"><code># docker run --security-opt label:level:s0:c100,c200 -i -t fedora bash
+</code></pre>
+<p>An MLS example might be:</p>
+<pre class="prettyprint well"><code># docker run --security-opt label:level:TopSecret -i -t rhel7 bash
+</code></pre>
+<p>To disable the security labeling for this container versus running with the
+<code>--permissive</code> flag, use the following command:</p>
+<pre class="prettyprint well"><code># docker run --security-opt label:disable -i -t fedora bash
+</code></pre>
+<p>If you want a tighter security policy on the processes within a container,
+you can specify an alternate type for the container. You could run a container
+that is only allowed to listen on Apache ports by executing the following
+command:</p>
+<pre class="prettyprint well"><code># docker run --security-opt label:type:svirt_apache_t -i -t centos bash
+</code></pre>
+<p>Note:</p>
+<p>You would have to write policy defining a <code>svirt_apache_t</code> type.</p>
+<h2 id="runtime-constraints-on-cpu-and-memory">Runtime constraints on CPU and memory</h2>
+<p>The operator can also adjust the performance parameters of the
+container:</p>
+<pre class="prettyprint well"><code>-m="": Memory limit (format: &lt;number&gt;&lt;optional unit&gt;, where unit = b, k, m or g)
+-c=0 : CPU shares (relative weight)
+</code></pre>
+<p>The operator can constrain the memory available to a container easily
+with <code>docker run -m</code>. If the host supports swap memory, then the <code>-m</code>
+memory setting can be larger than physical RAM.</p>
+<p>We have four ways to set memory usage:</p>
+<ul>
+<li>
+<p>memory=L&lt;inf, memory-swap=inf (specify memory and set memory-swap as <code>-1</code>)
+   It is not allowed to use more than L bytes of memory, but use as much swap
+   as you want (only if the host supports swap memory).</p>
+</li>
+<li>
+<p>memory=L&lt;inf, memory-swap=2<em>L (specify memory without memory-swap)
+   It is not allowed to use more than L bytes of memory, swap </em>plus* memory
+   usage is double of that.</p>
+</li>
+<li>
+<p>memory=L&lt;inf, memory-swap=S&lt;inf, L&lt;=S (specify both memory and memory-swap)
+   It is not allowed to use more than L bytes of memory, swap <em>plus</em> memory
+   usage is limited by S.</p>
+</li>
+</ul>
+<p>Similarly the operator can increase the priority of this container with
+the <code>-c</code> option. By default, all containers run at the same priority and
+get the same proportion of CPU cycles, but you can tell the kernel to
+give more shares of CPU time to one or more containers when you start
+them via Docker.</p>
+<p>The flag <code>-c</code> or <code>--cpu-shares</code> with value 0 indicates that the running
+container has access to all 1024 (default) CPU shares. However, this value
+can be modified to run a container with a different priority or different
+proportion of CPU cycles.</p>
+<p>E.g., If we start three {C0, C1, C2} containers with default values
+(<code>-c</code> OR <code>--cpu-shares</code> = 0) and one {C3} with (<code>-c</code> or <code>--cpu-shares</code>=512)
+then C0, C1, and C2 would have access to 100% CPU shares (1024) and C3 would
+only have access to 50% CPU shares (512). In the context of a time-sliced OS
+with time quantum set as 100 milliseconds, containers C0, C1, and C2 will run
+for full-time quantum, and container C3 will run for half-time quantum i.e 50
+milliseconds.</p>
+<h2 id="runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege, Linux capabilities, and LXC configuration</h2>
+<pre class="prettyprint well"><code>--cap-add: Add Linux capabilities
+--cap-drop: Drop Linux capabilities
+--privileged=false: Give extended privileges to this container
+--device=[]: Allows you to run devices inside the container without the --privileged flag.
+--lxc-conf=[]: (lxc exec-driver only) Add custom lxc options --lxc-conf="lxc.cgroup.cpuset.cpus = 0,1"
+</code></pre>
+<p>By default, Docker containers are "unprivileged" and cannot, for
+example, run a Docker daemon inside a Docker container. This is because
+by default a container is not allowed to access any devices, but a
+"privileged" container is given access to all devices (see <a href="https://github.com/docker/docker/blob/master/daemon/execdriver/lxc/lxc_template.go">lxc-template.go</a>
+and documentation on <a href="https://www.kernel.org/doc/Documentation/cgroups/devices.txt">cgroups devices</a>).</p>
+<p>When the operator executes <code>docker run --privileged</code>, Docker will enable
+to access to all devices on the host as well as set some configuration
+in AppArmor or SELinux to allow the container nearly all the same access to the
+host as processes running outside containers on the host. Additional
+information about running with <code>--privileged</code> is available on the
+<a href="http://blog.docker.com/2013/09/docker-can-now-run-within-docker/">Docker Blog</a>.</p>
+<p>If you want to limit access to a specific device or devices you can use
+the <code>--device</code> flag. It allows you to specify one or more devices that
+will be accessible within the container.</p>
+<pre class="prettyprint well"><code>$ sudo docker run --device=/dev/snd:/dev/snd ...
+</code></pre>
+<p>By default, the container will be able to <code>read</code>, <code>write</code>, and <code>mknod</code> these devices.
+This can be overridden using a third <code>:rwm</code> set of options to each <code>--device</code> flag:</p>
+<pre class="prettyprint well"><code>    $ sudo docker run --device=/dev/sda:/dev/xvdc --rm -it ubuntu fdisk  /dev/xvdc
+
+    Command (m for help): q
+    $ sudo docker run --device=/dev/sda:/dev/xvdc:r --rm -it ubuntu fdisk  /dev/xvdc
+    You will not be able to write the partition table.
+
+    Command (m for help): q
+
+    $ sudo docker run --device=/dev/sda:/dev/xvdc:w --rm -it ubuntu fdisk  /dev/xvdc
+        crash....
+
+    $ sudo docker run --device=/dev/sda:/dev/xvdc:m --rm -it ubuntu fdisk  /dev/xvdc
+    fdisk: unable to open /dev/xvdc: Operation not permitted
+</code></pre>
+
+<p>In addition to <code>--privileged</code>, the operator can have fine grain control over the
+capabilities using <code>--cap-add</code> and <code>--cap-drop</code>. By default, Docker has a default
+list of capabilities that are kept. Both flags support the value <code>all</code>, so if the
+operator wants to have all capabilities but <code>MKNOD</code> they could use:</p>
+<pre class="prettyprint well"><code>$ sudo docker run --cap-add=ALL --cap-drop=MKNOD ...
+</code></pre>
+<p>For interacting with the network stack, instead of using <code>--privileged</code> they
+should use <code>--cap-add=NET_ADMIN</code> to modify the network interfaces.</p>
+<pre class="prettyprint well"><code>$ docker run -t -i --rm  ubuntu:14.04 ip link add dummy0 type dummy
+RTNETLINK answers: Operation not permitted
+$ docker run -t -i --rm --cap-add=NET_ADMIN ubuntu:14.04 ip link add dummy0 type dummy
+</code></pre>
+<p>To mount a FUSE based filesystem, you need to combine both <code>--cap-add</code> and
+<code>--device</code>:</p>
+<pre class="prettyprint well"><code>$ docker run --rm -it --cap-add SYS_ADMIN sshfs sshfs sven@10.10.10.20:/home/sven /mnt
+fuse: failed to open /dev/fuse: Operation not permitted
+$ docker run --rm -it --device /dev/fuse sshfs sshfs sven@10.10.10.20:/home/sven /mnt
+fusermount: mount failed: Operation not permitted
+$ docker run --rm -it --cap-add SYS_ADMIN --device /dev/fuse sshfs
+# sshfs sven@10.10.10.20:/home/sven /mnt
+The authenticity of host '10.10.10.20 (10.10.10.20)' can't be established.
+ECDSA key fingerprint is 25:34:85:75:25:b0:17:46:05:19:04:93:b5:dd:5f:c6.
+Are you sure you want to continue connecting (yes/no)? yes
+sven@10.10.10.20's password:
+root@30aa0cfaf1b5:/# ls -la /mnt/src/docker
+total 1516
+drwxrwxr-x 1 1000 1000   4096 Dec  4 06:08 .
+drwxrwxr-x 1 1000 1000   4096 Dec  4 11:46 ..
+-rw-rw-r-- 1 1000 1000     16 Oct  8 00:09 .dockerignore
+-rwxrwxr-x 1 1000 1000    464 Oct  8 00:09 .drone.yml
+drwxrwxr-x 1 1000 1000   4096 Dec  4 06:11 .git
+-rw-rw-r-- 1 1000 1000    461 Dec  4 06:08 .gitignore
+....
+</code></pre>
+<p>If the Docker daemon was started using the <code>lxc</code> exec-driver
+(<code>docker -d --exec-driver=lxc</code>) then the operator can also specify LXC options
+using one or more <code>--lxc-conf</code> parameters. These can be new parameters or
+override existing parameters from the <a href="https://github.com/docker/docker/blob/master/daemon/execdriver/lxc/lxc_template.go">lxc-template.go</a>.
+Note that in the future, a given host's docker daemon may not use LXC, so this
+is an implementation-specific configuration meant for operators already
+familiar with using LXC directly.</p>
+<blockquote>
+<p><strong>Note:</strong>
+If you use <code>--lxc-conf</code> to modify a container's configuration which is also
+managed by the Docker daemon, then the Docker daemon will not know about this
+modification, and you will need to manage any conflicts yourself. For example,
+you can use <code>--lxc-conf</code> to set a container's IP address, but this will not be
+reflected in the <code>/etc/hosts</code> file.</p>
+</blockquote>
+<h2 id="overriding-dockerfile-image-defaults">Overriding Dockerfile image defaults</h2>
+<p>When a developer builds an image from a <a href="/reference/builder"><em>Dockerfile</em></a>
+or when she commits it, the developer can set a number of default parameters
+that take effect when the image starts up as a container.</p>
+<p>Four of the Dockerfile commands cannot be overridden at runtime: <code>FROM</code>,
+<code>MAINTAINER</code>, <code>RUN</code>, and <code>ADD</code>. Everything else has a corresponding override
+in <code>docker run</code>. We'll go through what the developer might have set in each
+Dockerfile instruction and how the operator can override that setting.</p>
+<ul>
+<li><a href="#cmd-default-command-or-options">CMD (Default Command or Options)</a></li>
+<li><a href="#entrypoint-default-command-to-execute-at-runtime">ENTRYPOINT (Default Command to Execute at Runtime)</a></li>
+<li><a href="#expose-incoming-ports">EXPOSE (Incoming Ports)</a></li>
+<li><a href="#env-environment-variables">ENV (Environment Variables)</a></li>
+<li><a href="#volume-shared-filesystems">VOLUME (Shared Filesystems)</a></li>
+<li><a href="#user">USER</a></li>
+<li><a href="#workdir">WORKDIR</a></li>
+</ul>
+<h2 id="cmd-default-command-or-options">CMD (default command or options)</h2>
+<p>Recall the optional <code>COMMAND</code> in the Docker
+commandline:</p>
+<pre class="prettyprint well"><code>$ sudo docker run [OPTIONS] IMAGE[:TAG] [COMMAND] [ARG...]
+</code></pre>
+<p>This command is optional because the person who created the <code>IMAGE</code> may
+have already provided a default <code>COMMAND</code> using the Dockerfile <code>CMD</code>
+instruction. As the operator (the person running a container from the
+image), you can override that <code>CMD</code> instruction just by specifying a new
+<code>COMMAND</code>.</p>
+<p>If the image also specifies an <code>ENTRYPOINT</code> then the <code>CMD</code> or <code>COMMAND</code>
+get appended as arguments to the <code>ENTRYPOINT</code>.</p>
+<h2 id="entrypoint-default-command-to-execute-at-runtime">ENTRYPOINT (default command to execute at runtime)</h2>
+<pre class="prettyprint well"><code>--entrypoint="": Overwrite the default entrypoint set by the image
+</code></pre>
+<p>The <code>ENTRYPOINT</code> of an image is similar to a <code>COMMAND</code> because it
+specifies what executable to run when the container starts, but it is
+(purposely) more difficult to override. The <code>ENTRYPOINT</code> gives a
+container its default nature or behavior, so that when you set an
+<code>ENTRYPOINT</code> you can run the container <em>as if it were that binary</em>,
+complete with default options, and you can pass in more options via the
+<code>COMMAND</code>. But, sometimes an operator may want to run something else
+inside the container, so you can override the default <code>ENTRYPOINT</code> at
+runtime by using a string to specify the new <code>ENTRYPOINT</code>. Here is an
+example of how to run a shell in a container that has been set up to
+automatically run something else (like <code>/usr/bin/redis-server</code>):</p>
+<pre class="prettyprint well"><code>$ sudo docker run -i -t --entrypoint /bin/bash example/redis
+</code></pre>
+<p>or two examples of how to pass more parameters to that ENTRYPOINT:</p>
+<pre class="prettyprint well"><code>$ sudo docker run -i -t --entrypoint /bin/bash example/redis -c ls -l
+$ sudo docker run -i -t --entrypoint /usr/bin/redis-cli example/redis --help
+</code></pre>
+<h2 id="expose-incoming-ports">EXPOSE (incoming ports)</h2>
+<p>The Dockerfile doesn't give much control over networking, only providing
+the <code>EXPOSE</code> instruction to give a hint to the operator about what
+incoming ports might provide services. The following options work with
+or override the Dockerfile's exposed defaults:</p>
+<pre class="prettyprint well"><code>--expose=[]: Expose a port or a range of ports from the container
+            without publishing it to your host
+-P=false   : Publish all exposed ports to the host interfaces
+-p=[]      : Publish a container᾿s port or a range of ports to the host 
+               format: ip:hostPort:containerPort | ip::containerPort | hostPort:containerPort | containerPort
+               Both hostPort and containerPort can be specified as a range of ports. 
+               When specifying ranges for both, the number of container ports in the range must match the number of host ports in the range. (e.g., `-p 1234-1236:1234-1236/tcp`)
+               (use 'docker port' to see the actual mapping)
+--link=""  : Add link to another container (&lt;name or id&gt;:alias)
+</code></pre>
+<p>As mentioned previously, <code>EXPOSE</code> (and <code>--expose</code>) makes ports available
+<strong>in</strong> a container for incoming connections. The port number on the
+inside of the container (where the service listens) does not need to be
+the same number as the port exposed on the outside of the container
+(where clients connect), so inside the container you might have an HTTP
+service listening on port 80 (and so you <code>EXPOSE 80</code> in the Dockerfile),
+but outside the container the port might be 42800.</p>
+<p>To help a new client container reach the server container's internal
+port operator <code>--expose</code>'d by the operator or <code>EXPOSE</code>'d by the
+developer, the operator has three choices: start the server container
+with <code>-P</code> or <code>-p,</code> or start the client container with <code>--link</code>.</p>
+<p>If the operator uses <code>-P</code> or <code>-p</code> then Docker will make the exposed port
+accessible on the host and the ports will be available to any client
+that can reach the host. When using <code>-P</code>, Docker will bind the exposed 
+ports to a random port on the host between 49153 and 65535. To find the
+mapping between the host ports and the exposed ports, use <code>docker port</code>.</p>
+<p>If the operator uses <code>--link</code> when starting the new client container,
+then the client container can access the exposed port via a private
+networking interface.  Docker will set some environment variables in the
+client container to help indicate which interface and port to use.</p>
+<h2 id="env-environment-variables">ENV (environment variables)</h2>
+<p>When a new container is created, Docker will set the following environment
+variables automatically:</p>
+<table>
+ <tr>
+  <th>Variable</th>
+  <th>Value</th>
+ </tr>
+ <tr>
+  <td><code>HOME</code></td>
+  <td>
+    Set based on the value of <code>USER</code>
+  </td>
+ </tr>
+ <tr>
+  <td><code>HOSTNAME</code></td>
+  <td> 
+    The hostname associated with the container
+  </td>
+ </tr>
+ <tr>
+  <td><code>PATH</code></td>
+  <td> 
+    Includes popular directories, such as :<br>
+    <code>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</code>
+  </td>
+ <tr>
+  <td><code>TERM</code></td>
+  <td><code>xterm</code> if the container is allocated a psuedo-TTY</td>
+ </tr>
+</table>
+
+<p>The container may also include environment variables defined
+as a result of the container being linked with another container. See
+the <a href="/userguide/dockerlinks/#container-linking"><em>Container Links</em></a>
+section for more details.</p>
+<p>Additionally, the operator can <strong>set any environment variable</strong> in the 
+container by using one or more <code>-e</code> flags, even overriding those mentioned 
+above, or already defined by the developer with a Dockerfile <code>ENV</code>:</p>
+<pre class="prettyprint well"><code>$ sudo docker run -e "deep=purple" --rm ubuntu /bin/bash -c export
+declare -x HOME="/"
+declare -x HOSTNAME="85bc26a0e200"
+declare -x OLDPWD
+declare -x PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+declare -x PWD="/"
+declare -x SHLVL="1"
+declare -x container="lxc"
+declare -x deep="purple"
+</code></pre>
+<p>Similarly the operator can set the <strong>hostname</strong> with <code>-h</code>.</p>
+<p><code>--link &lt;name or id&gt;:alias</code> also sets environment variables, using the <em>alias</em> string to
+define environment variables within the container that give the IP and PORT
+information for connecting to the service container. Let's imagine we have a
+container running Redis:</p>
+<pre class="prettyprint well"><code># Start the service container, named redis-name
+$ sudo docker run -d --name redis-name dockerfiles/redis
+4241164edf6f5aca5b0e9e4c9eccd899b0b8080c64c0cd26efe02166c73208f3
+
+# The redis-name container exposed port 6379
+$ sudo docker ps
+CONTAINER ID        IMAGE                        COMMAND                CREATED             STATUS              PORTS               NAMES
+4241164edf6f        $ dockerfiles/redis:latest   /redis-stable/src/re   5 seconds ago       Up 4 seconds        6379/tcp            redis-name
+
+# Note that there are no public ports exposed since we didn᾿t use -p or -P
+$ sudo docker port 4241164edf6f 6379
+2014/01/25 00:55:38 Error: No public port '6379' published for 4241164edf6f
+</code></pre>
+<p>Yet we can get information about the Redis container's exposed ports
+with <code>--link</code>. Choose an alias that will form a
+valid environment variable!</p>
+<pre class="prettyprint well"><code>$ sudo docker run --rm --link redis-name:redis_alias --entrypoint /bin/bash dockerfiles/redis -c export
+declare -x HOME="/"
+declare -x HOSTNAME="acda7f7b1cdc"
+declare -x OLDPWD
+declare -x PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+declare -x PWD="/"
+declare -x REDIS_ALIAS_NAME="/distracted_wright/redis"
+declare -x REDIS_ALIAS_PORT="tcp://172.17.0.32:6379"
+declare -x REDIS_ALIAS_PORT_6379_TCP="tcp://172.17.0.32:6379"
+declare -x REDIS_ALIAS_PORT_6379_TCP_ADDR="172.17.0.32"
+declare -x REDIS_ALIAS_PORT_6379_TCP_PORT="6379"
+declare -x REDIS_ALIAS_PORT_6379_TCP_PROTO="tcp"
+declare -x SHLVL="1"
+declare -x container="lxc"
+</code></pre>
+<p>And we can use that information to connect from another container as a client:</p>
+<pre class="prettyprint well"><code>$ sudo docker run -i -t --rm --link redis-name:redis_alias --entrypoint /bin/bash dockerfiles/redis -c '/redis-stable/src/redis-cli -h $REDIS_ALIAS_PORT_6379_TCP_ADDR -p $REDIS_ALIAS_PORT_6379_TCP_PORT'
+172.17.0.32:6379&gt;
+</code></pre>
+<p>Docker will also map the private IP address to the alias of a linked
+container by inserting an entry into <code>/etc/hosts</code>.  You can use this
+mechanism to communicate with a linked container by its alias:</p>
+<pre class="prettyprint well"><code>$ sudo docker run -d --name servicename busybox sleep 30
+$ sudo docker run -i -t --link servicename:servicealias busybox ping -c 1 servicealias
+</code></pre>
+<p>If you restart the source container (<code>servicename</code> in this case), the recipient
+container's <code>/etc/hosts</code> entry will be automatically updated.</p>
+<blockquote>
+<p><strong>Note</strong>:
+Unlike host entries in the <code>/ets/hosts</code> file, IP addresses stored in the
+environment variables are not automatically updated if the source container is
+restarted. We recommend using the host entries in <code>/etc/hosts</code> to resolve the
+IP address of linked containers.</p>
+</blockquote>
+<h2 id="volume-shared-filesystems">VOLUME (shared filesystems)</h2>
+<pre class="prettyprint well"><code>-v=[]: Create a bind mount with: [host-dir]:[container-dir]:[rw|ro].
+       If "container-dir" is missing, then docker creates a new volume.
+--volumes-from="": Mount all volumes from the given container(s)
+</code></pre>
+<p>The volumes commands are complex enough to have their own documentation
+in section <a href="/userguide/dockervolumes"><em>Managing data in 
+containers</em></a>. A developer can define
+one or more <code>VOLUME</code>'s associated with an image, but only the operator
+can give access from one container to another (or from a container to a
+volume mounted on the host).</p>
+<h2 id="user">USER</h2>
+<p>The default user within a container is <code>root</code> (id = 0), but if the
+developer created additional users, those are accessible too. The
+developer can set a default user to run the first process with the
+Dockerfile <code>USER</code> instruction, but the operator can override it:</p>
+<pre class="prettyprint well"><code>-u="": Username or UID
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> if you pass numeric uid, it must be in range 0-2147483647.</p>
+</blockquote>
+<h2 id="workdir">WORKDIR</h2>
+<p>The default working directory for running binaries within a container is the
+root directory (<code>/</code>), but the developer can set a different default with the
+Dockerfile <code>WORKDIR</code> command. The operator can override this with:</p>
+<pre class="prettyprint well"><code>-w="": Working directory inside the container
+</code></pre>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="push-footer"></div>
+
+</div>
+
+
+
+<div id="footer-container" class="container">
+  <div id="footer" class="grey-body">
+    <div class="row">
+      <div class="span2">
+        <span class="footer-title">Community</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/community/events/">Events</a></li>
+          <li><a class="primary-button" href="http://posts.docker.com">Friends' Posts</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/meetups/">Meetups</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/governance/">Governance</a></li>
+          <li><a class="primary-button" href="http://forums.docker.com">Forums</a></li>
+          <li><a class="primary-button" href="http://botbot.me/freenode/docker">IRC</a></li>
+          <li><a class="primary-button" href="https://github.com/docker/docker">GitHub</a></li>
+          <li><a class="primary-button" href="http://stackoverflow.com/search?q=docker">Stackoverflow</a></li>
+          <li><a class="primary-button" href="http://www.cafepress.com/docker">Swag</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Enterprise</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/support/">Support</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/education/">Education</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/services/">Services</a></li>
+        </ul>
+        <span class="footer-title">Partner Solutions</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/partners/find/">Find a Partner</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/program/">Partner Program</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/learn/">Learn More</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Resources</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://docs.docker.com">Documentation</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/help/">Help</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/usecases/">Use Cases</a></li>
+          <li><a class="primary-button" href="http://www.docker.com/tryit/">Online Tutorial</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/howtobuy/">How To Buy</a></li>
+          <li><a class="primary-button" href="http://status.docker.com">Status</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/security/">Security</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Company</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/company/aboutus/">About Us</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/team/">Team</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/news/">News</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/press/">Press</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/careers/">Careers</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <span class="footer-title">Connect</span>
+        <div class="search">
+          <span>Subscribe to our newsletter</span>
+          <form action="https://www.docker.com/subscribe_newsletter/" method="post">
+            <input type='hidden' name='csrfmiddlewaretoken' value='aWL78QXQkY8DSKNYh6cl08p5eTLl7sOa' />
+            <tr><th><label for="id_email">Email:</label></th><td><input class="form-control" id="id_email" name="email" placeholder="Enter your email" type="text" /></td></tr>
+            
+            <button type="submit"><i class="icon-arrow-right"></i> </button>
+          </form>
+        </div>
+        <ul class="unstyled social">
+          <li><a title="Docker on Twitter" class="primary-button blog" href="http://blog.docker.com">Blog</a></li>
+          <li><a title="Docker on Twitter" class="primary-button twitter" href="http://twitter.com/docker">Twitter</a></li>
+          <li><a title="Docker on Google+" class="primary-button googleplus" href="https://plus.google.com/u/0/communities/108146856671494713993">Google+</a></li>
+          <li><a title="Docker on Facebook" class="primary-button facebook" href="https://www.facebook.com/docker.run">Facebook</a></li>
+          <li><a title="Docker on Youtube" class="primary-button youtube" href="http://www.youtube.com/user/dockerrun">YouTube</a></li>
+        </ul>
+        <ul class="unstyled social">
+          <li><a title="Docker on SlideShare" class="primary-button slideshare" href="http://www.slideshare.net/Docker">Slideshare</a></li>
+          <li>
+             <a title="Docker on LinkedIn" class="primary-button" href="https://www.linkedin.com/company/docker">
+                 <span class="linkedin"></span>
+                 LinkedIn
+             </a>
+          </li>
+          <li>
+              <a title="Docker on GitHub" class="primary-button" href="https://github.com/docker/">
+                  <span class="github"></span>
+                  GitHub
+              </a>
+          </li>
+          <li>
+              <a title="Docker on Reddit" class="primary-button" href="http://www.reddit.com/r/docker">
+                  <span class="reddit"></span>
+                  Reddit
+              </a>
+          </li>
+          <li>
+              <a title="Docker on AngelList" class="primary-button" href="https://angel.co/docker-inc-1">
+                  <span class="angellist"></span>
+                  AngelList
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="span6 pagination-right copyright">
+        <span>&copy; 2014-2015 Docker, Inc.</span>
+      </div>
+      <div class="span6 pagination-left copyright">
+        <a href="http://www.docker.com/legal/terms_of_service">Terms</a> &middot;
+        <a href="http://www.docker.com/legal/privacy_policy">Privacy</a> &middot;
+        <a href="http://www.docker.com/legal/trademark_guidelines">Trademarks</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.cookie.js" ></script>
+<script src="/js/jquery-scrolltofixed-min.js"></script>
+<script src="/js/bootstrap-3.0.3.min.js"></script>
+<script src="/js/prettify-1.0.min.js"></script>
+<script src="/js/dockerfile_tutorial.js"></script>
+<script src="/js/dockerfile_tutorial_level.js"></script>
+<script src="/js/base.js"></script>
+<script src="/tipuesearch/tipuesearch_set.js"></script>
+<script src="/tipuesearch/tipuesearch.min.js"></script>
+<script type="text/javascript">
+piAId = '45082';
+piCId = '1482';
+
+(function() {
+  function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+  }
+  if(window.attachEvent) { window.attachEvent('onload', async_load); }
+  else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').css("min-height", $(window).height() - 553 );
+    // if the URL contains a version string, update the version picker to reflect that
+    version = document.location.pathname.match(/^\/(v\d\.\d)\/.*/)
+    if (version && version[1]) {
+        $('#document-version-number')[0].text = 'Version '+version[1];
+    } else {
+        $('#document-version-number')[0].text = $('#document-version-number')[0].text + " (Latest)"
+    }
+    // load the complete versions list
+    $.get("/versions.html_fragment", function( data ) {
+    	$('#documentation-version-list').prepend(data);
+	//remove any "/v1.1/" bits from front, so we can add the path to the version selection dropdown.
+	path = document.location.pathname.replace(/^\/v\d\.\d/, "");
+	$('#documentation-version-list a.version').each(function(i, e) {
+		e.href = e.href+path;
+		$(e).removeClass()
+	});
+    });
+
+  })
+  var userName = getCookie('docker_sso_username');
+  if (userName) {
+    $('.topmostnav_loggedout').hide();
+    $('.topmostnav_loggedin').show();
+    $('#logged-in-header-username').text(userName);
+  } else {
+    $('.topmostnav_loggedout').show();
+    $('.topmostnav_loggedin').hide();
+  }
+</script>
+</body>
+</html>

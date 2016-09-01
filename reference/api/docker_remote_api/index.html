@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="docker_version" content="1.5.0">
+  <meta name="docker_git_branch" content="docs">
+  <meta name="docker_git_commit" content="35ea4de">
+  <meta name="docker_build_date" content="Fri Apr 10 23:25:55 UTC 2015">
+
+  <meta name="description" content="API Documentation for Docker">
+  <meta name="keywords" content="API, Docker, rcli, REST, documentation">
+  
+  <link rel="canonical" href="/reference/api/docker_remote_api/">
+  <link href="/css/bootstrap-custom.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <link href="/css/prettify-1.0.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/dockerfile_tutorial.css">
+  <link href="/tipuesearch/tipuesearch.css" rel="stylesheet">
+  <link href="/css/docs.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <title>Docker Remote API - Docker Documentation</title>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
+  
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-6096819-11', 'docker.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash,
+  });
+  </script>
+  
+</head>
+<body>
+
+<div id="topmostnav" class="topmostnav_loggedout navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li class=""><a href="http://www.docker.com/whatisdocker/" title="What is Docker">What is Docker?</a></li>
+      <li class=""><a href="http://www.docker.com/resources/usecases/" title="Use Cases">Use Cases</a></li>
+      <li class=""><a href="http://www.docker.com/tryit/" title="Try It!">Try It!</a></li>
+      <li><a href="https://registry.hub.docker.com" title="Browse">Browse</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <a href="https://hub.docker.com/account/login" class="btn nav-button2" title="Lg In">Log In</a>
+      <a href="https://hub.docker.com/account/signup" class="btn nav-button1" title="Sign Up">Sign Up</a>
+    </div>
+  </div>
+</div>
+<div id="topmostnav" class="topmostnav_loggedin navbar navbar-static-top">
+  <div class="container">
+    <a href="/" title="Docker Docs Home"><div class="brand logo"><img src="/img/nav/docker-logo-loggedin.png"> </div></a>
+    <form id="nav_search" class="navbar-index-search pull-right" action="/jsearch/">
+      <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+      <input name="q" id="tipue_search_input" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off">
+    </form>
+    <ul class="nav">
+      <li><a href="https://registry.hub.docker.com" title="Browse Repos">Browse Repos</a></li>
+      <li class="active"><a href="http://docs.docker.com" title="Documentation">Documentation</a></li>
+      <li><a href="http://www.docker.com/community/participate/" title="Community">Community</a></li>
+      <li><a href="http://www.docker.com/resources/help/" title="Help">Help</a></li>
+    </ul>
+    <div id="usernav" class="pull-right">
+      <ul class="nav user">
+        <li class="dropdown">
+          <a id="logged-in-header-username" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <img class="profile" src="" alt="profile picture">
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="https://hub.docker.com/">View Profile</a></li>
+            <li><a href="https://hub.docker.com/account/settings/">Settings</a></li>
+            <li><a href="https://hub.docker.com/repos/">My Repositories</a></li>
+            <li><a href="https://hub.docker.com/plans/billing-info">Billing</a></li>
+            <li><a href="https://hub.docker.com/account/logout/?next=/">Log out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="wrap">
+  <nav id="nav_menu" class="clearfix navbar navbar-default navbar-static-top affix" role="navigation">
+  <div id="docsnav">
+    <ul id="main-nav" class="pull-left">
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/">About</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/">Docker</a>
+          </li>
+        
+          <li >
+            <a href="/release-notes/">Release Notes</a>
+          </li>
+        
+          <li >
+            <a href="/introduction/understanding-docker/">Understanding Docker</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/installation/ubuntulinux/">Installation</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/installation/ubuntulinux/">Ubuntu</a>
+          </li>
+        
+          <li >
+            <a href="/installation/mac/">Mac OS X</a>
+          </li>
+        
+          <li >
+            <a href="/installation/windows/">Microsoft Windows</a>
+          </li>
+        
+          <li >
+            <a href="/installation/amazon/">Amazon EC2</a>
+          </li>
+        
+          <li >
+            <a href="/installation/archlinux/">Arch Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/binaries/">Binaries</a>
+          </li>
+        
+          <li >
+            <a href="/installation/centos/">CentOS</a>
+          </li>
+        
+          <li >
+            <a href="/installation/cruxlinux/">CRUX Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/debian/">Debian</a>
+          </li>
+        
+          <li >
+            <a href="/installation/fedora/">Fedora</a>
+          </li>
+        
+          <li >
+            <a href="/installation/frugalware/">FrugalWare</a>
+          </li>
+        
+          <li >
+            <a href="/installation/google/">Google Cloud Platform</a>
+          </li>
+        
+          <li >
+            <a href="/installation/gentoolinux/">Gentoo</a>
+          </li>
+        
+          <li >
+            <a href="/installation/softlayer/">IBM Softlayer</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rackspace/">Rackspace Cloud</a>
+          </li>
+        
+          <li >
+            <a href="/installation/rhel/">Red Hat Enterprise Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/oracle/">Oracle Linux</a>
+          </li>
+        
+          <li >
+            <a href="/installation/SUSE/">SUSE</a>
+          </li>
+        
+          <li >
+            <a href="/compose/install/">Docker Compose</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/userguide/">User Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/userguide/">The Docker User Guide</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerhub/">Getting Started with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerizing/">Dockerizing Applications</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/usingdocker/">Working with Containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerimages/">Working with Docker Images</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerlinks/">Linking containers together</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockervolumes/">Managing data in containers</a>
+          </li>
+        
+          <li >
+            <a href="/userguide/dockerrepos/">Working with Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/compose/">Docker Compose</a>
+          </li>
+        
+          <li >
+            <a href="/machine/">Docker Machine</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/">Docker Swarm</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/docker-hub/">Docker Hub</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/docker-hub/">Docker Hub</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/accounts/">Accounts</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/repos/">Repositories</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/builds/">Automated Builds</a>
+          </li>
+        
+          <li >
+            <a href="/docker-hub/official_repos/">Official Repo Guidelines</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/examples/nodejs_web_app/">Examples</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/examples/nodejs_web_app/">Dockerizing a Node.js web application</a>
+          </li>
+        
+          <li >
+            <a href="/examples/mongodb/">Dockerizing MongoDB</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_redis_service/">Dockerizing a Redis service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/postgresql_service/">Dockerizing a PostgreSQL service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_riak_service/">Dockerizing a Riak service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/running_ssh_service/">Dockerizing an SSH service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/couchdb_data_volumes/">Dockerizing a CouchDB service</a>
+          </li>
+        
+          <li >
+            <a href="/examples/apt-cacher-ng/">Dockerizing an Apt-Cacher-ng service</a>
+          </li>
+        
+          <li >
+            <a href="/compose/django/">Getting started with Compose and Django</a>
+          </li>
+        
+          <li >
+            <a href="/compose/rails/">Getting started with Compose and Rails</a>
+          </li>
+        
+          <li >
+            <a href="/compose/wordpress/">Getting started with Compose and Wordpress</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/articles/basics/">Articles</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/articles/basics/">Docker basics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/networking/">Advanced networking</a>
+          </li>
+        
+          <li >
+            <a href="/articles/security/">Security</a>
+          </li>
+        
+          <li >
+            <a href="/articles/https/">Running Docker with HTTPS</a>
+          </li>
+        
+          <li >
+            <a href="/articles/registry_mirror/">Run a local registry mirror</a>
+          </li>
+        
+          <li >
+            <a href="/articles/host_integration/">Automatically starting containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/baseimages/">Creating a base image</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dockerfile_best-practices/">Best practices for writing Dockerfiles</a>
+          </li>
+        
+          <li >
+            <a href="/articles/certificates/">Using certificates for repository client verification</a>
+          </li>
+        
+          <li >
+            <a href="/articles/using_supervisord/">Using Supervisor</a>
+          </li>
+        
+          <li >
+            <a href="/articles/cfengine_process_management/">Process management with CFEngine</a>
+          </li>
+        
+          <li >
+            <a href="/articles/puppet/">Using Puppet</a>
+          </li>
+        
+          <li >
+            <a href="/articles/chef/">Using Chef</a>
+          </li>
+        
+          <li >
+            <a href="/articles/dsc/">Using PowerShell DSC</a>
+          </li>
+        
+          <li >
+            <a href="/articles/ambassador_pattern_linking/">Cross-Host linking using ambassador containers</a>
+          </li>
+        
+          <li >
+            <a href="/articles/runmetrics/">Runtime metrics</a>
+          </li>
+        
+          <li >
+            <a href="/articles/b2d_volume_resize/">Increasing a Boot2Docker volume</a>
+          </li>
+        
+          <li >
+            <a href="/articles/systemd/">Controlling and configuring Docker using Systemd</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left active">
+        
+        <a href="/reference/commandline/cli/">Reference</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/reference/commandline/cli/">Command line</a>
+          </li>
+        
+          <li >
+            <a href="/reference/builder/">Dockerfile</a>
+          </li>
+        
+          <li >
+            <a href="/faq/">FAQ</a>
+          </li>
+        
+          <li >
+            <a href="/reference/run/">Run Reference</a>
+          </li>
+        
+          <li >
+            <a href="/compose/cli/">Compose command line</a>
+          </li>
+        
+          <li >
+            <a href="/compose/yml/">Compose yml</a>
+          </li>
+        
+          <li >
+            <a href="/compose/env/">Compose ENV variables</a>
+          </li>
+        
+          <li >
+            <a href="/compose/completion/">Compose commandline completion</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/discovery/">Swarm discovery</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/strategy/">Swarm strategies</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/scheduler/filter/">Swarm filters</a>
+          </li>
+        
+          <li >
+            <a href="/swarm/API/">Swarm API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker-io_api/">Docker Hub API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api/">Docker Registry API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/registry_api_client_libraries/">Docker Registry API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/hub_registry_spec/">Docker Hub and Registry Spec</a>
+          </li>
+        
+          <li class="active">
+            <a href="/reference/api/docker_remote_api/">Docker Remote API</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.17/">Docker Remote API v1.17</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_remote_api_v1.16/">Docker Remote API v1.16</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/remote_api_client_libraries/">Docker Remote API Client Libraries</a>
+          </li>
+        
+          <li >
+            <a href="/reference/api/docker_io_accounts_api/">Docker Hub Accounts API</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+      
+      <li class="dd_menu pull-left">
+        
+        <a href="/project/who-written-for/">Contributor Guide</a>
+        
+        <ul class="dd_submenu" style="max-height: 75px;">
+        
+          <li >
+            <a href="/project/who-written-for/">README first</a>
+          </li>
+        
+          <li >
+            <a href="/project/software-required/">Get required software</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-git/">Configure Git for contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/set-up-dev-env/">Work with a development container</a>
+          </li>
+        
+          <li >
+            <a href="/project/test-and-docs/">Run tests and test documentation</a>
+          </li>
+        
+          <li >
+            <a href="/project/make-a-contribution/">Understand contribution workflow</a>
+          </li>
+        
+          <li >
+            <a href="/project/find-an-issue/">Find an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/work-issue/">Work on an issue</a>
+          </li>
+        
+          <li >
+            <a href="/project/create-pr/">Create a pull request</a>
+          </li>
+        
+          <li >
+            <a href="/project/review-pr/">Participate in the PR review</a>
+          </li>
+        
+          <li >
+            <a href="/project/advanced-contributing/">Advanced contributing</a>
+          </li>
+        
+          <li >
+            <a href="/project/get-help/">Where to get help</a>
+          </li>
+        
+          <li >
+            <a href="/project/coding-style/">Coding style guide</a>
+          </li>
+        
+          <li >
+            <a href="/project/doc-style/">Documentation style guide</a>
+          </li>
+        
+        </ul>
+      </li>
+      
+      
+    </ul>
+  </div>
+</nav>
+  <div id="content" class="container">
+    <div class="row">
+
+      <div class="span3" id="leftnav">
+        <div id="toc_table">
+          <ul class="nav nav-tabs nav-stacked">
+            
+  
+    <li class=""><a href="#v117">v1.17</a>
+      <ul>
+    
+      <li><a href="#full-documentation">Full Documentation</a></li>
+    
+      <li><a href="#whats-new">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v116">v1.16</a>
+      <ul>
+    
+      <li><a href="#full-documentation_1">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_1">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v115">v1.15</a>
+      <ul>
+    
+      <li><a href="#full-documentation_2">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_2">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v114">v1.14</a>
+      <ul>
+    
+      <li><a href="#full-documentation_3">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_3">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v113">v1.13</a>
+      <ul>
+    
+      <li><a href="#full-documentation_4">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_4">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v112">v1.12</a>
+      <ul>
+    
+      <li><a href="#full-documentation_5">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_5">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v111">v1.11</a>
+      <ul>
+    
+      <li><a href="#full-documentation_6">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_6">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v110">v1.10</a>
+      <ul>
+    
+      <li><a href="#full-documentation_7">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_7">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v19">v1.9</a>
+      <ul>
+    
+      <li><a href="#full-documentation_8">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_8">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v18">v1.8</a>
+      <ul>
+    
+      <li><a href="#full-documentation_9">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_9">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v17">v1.7</a>
+      <ul>
+    
+      <li><a href="#full-documentation_10">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_10">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v16">v1.6</a>
+      <ul>
+    
+      <li><a href="#full-documentation_11">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_11">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v15">v1.5</a>
+      <ul>
+    
+      <li><a href="#full-documentation_12">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_12">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v14">v1.4</a>
+      <ul>
+    
+      <li><a href="#full-documentation_13">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_13">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v13">v1.3</a>
+      <ul>
+    
+      <li><a href="#full-documentation_14">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_14">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v12">v1.2</a>
+      <ul>
+    
+      <li><a href="#full-documentation_15">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_15">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v11">v1.1</a>
+      <ul>
+    
+      <li><a href="#full-documentation_16">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_16">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+    <li class=""><a href="#v10">v1.0</a>
+      <ul>
+    
+      <li><a href="#full-documentation_17">Full Documentation</a></li>
+    
+      <li><a href="#whats-new_17">What's new</a></li>
+    
+      </ul>
+    </li>
+  
+
+          </ul>
+        </div>
+      </div>
+      <div class="span9 content-body">
+
+        
+
+        <div id="versionnav" class="span3 pull-right">
+          <ul class="nav version pull-right">
+            <li class="dropdown">
+              <a id="document-version-number" class="dropdown-toggle" data-toggle="dropdown" href="#">
+		      Version v1.5
+              </a>
+              <ul id="documentation-version-list" class="dropdown-menu pull-right">
+
+		<li role="presentation" class="divider"></li>
+		<li> <a class="home-link3 tertiary-nav" href="https://github.com/docker/docker/blob/master/docs/sources/reference/api/docker_remote_api.md" >Edit on GitHub</a></li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <h1 id="docker-remote-api">Docker Remote API</h1>
+<ul>
+<li>By default the Docker daemon listens on <code>unix:///var/run/docker.sock</code>
+   and the client must have <code>root</code> access to interact with the daemon.</li>
+<li>If the Docker daemon is set to use an encrypted TCP socket (<code>--tls</code>,
+   or <code>--tlsverify</code>) as with Boot2Docker 1.3.0, then you need to add extra
+   parameters to <code>curl</code> or <code>wget</code> when making test API requests:
+   <code>curl --insecure --cert ~/.docker/cert.pem --key ~/.docker/key.pem https://boot2docker:2376/images/json</code>
+   or 
+   <code>wget --no-check-certificate --certificate=$DOCKER_CERT_PATH/cert.pem --private-key=$DOCKER_CERT_PATH/key.pem https://boot2docker:2376/images/json -O - -q</code></li>
+<li>If a group named <code>docker</code> exists on your system, docker will apply
+   ownership of the socket to the group.</li>
+<li>The API tends to be REST, but for some complex commands, like attach
+   or pull, the HTTP connection is hijacked to transport STDOUT, STDIN,
+   and STDERR.</li>
+<li>Since API version 1.2, the auth configuration is now handled client
+   side, so the client has to send the <code>authConfig</code> as a <code>POST</code> in <code>/images/(name)/push</code>.</li>
+<li>authConfig, set as the <code>X-Registry-Auth</code> header, is currently a Base64
+   encoded (JSON) string with the following structure:
+   <code>{"username": "string", "password": "string", "email": "string",
+   "serveraddress" : "string", "auth": ""}</code>. Notice that <code>auth</code> is to be left
+   empty, <code>serveraddress</code> is a domain/ip without protocol, and that double
+   quotes (instead of single ones) are required.</li>
+<li>The Remote API uses an open schema model.  In this model, unknown 
+   properties in incoming messages will be ignored.
+   Client applications need to take this into account to ensure
+   they will not break when talking to newer Docker daemons.</li>
+</ul>
+<p>The current version of the API is v1.17</p>
+<p>Calling <code>/info</code> is the same as calling
+<code>/v1.17/info</code>.</p>
+<p>You can still call an old version of the API using
+<code>/v1.16/info</code>.</p>
+<h2 id="v117">v1.17</h2>
+<h3 id="full-documentation">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.17/"><em>Docker Remote API v1.17</em></a></p>
+<h3 id="whats-new">What's new</h3>
+<p><code>POST /containers/(id)/attach</code> and <code>POST /exec/(id)/start</code></p>
+<p><strong>New!</strong>
+Docker client now hints potential proxies about connection hijacking using HTTP Upgrade headers.</p>
+<p><code>GET /containers/(id)/json</code></p>
+<p><strong>New!</strong>
+This endpoint now returns the list current execs associated with the container (<code>ExecIDs</code>).</p>
+<p><code>POST /containers/(id)/rename</code></p>
+<p><strong>New!</strong>
+New endpoint to rename a container <code>id</code> to a new name.</p>
+<p><code>POST /containers/create</code>
+<code>POST /containers/(id)/start</code></p>
+<p><strong>New!</strong>
+(<code>ReadonlyRootfs</code>) can be passed in the host config to mount the container's
+root filesystem as read only.</p>
+<p><code>GET /containers/(id)/stats</code></p>
+<p><strong>New!</strong>
+This endpoint returns a live stream of a container's resource usage statistics.</p>
+<blockquote>
+<p><strong>Note</strong>: this functionality currently only works when using the <em>libcontainer</em> exec-driver.</p>
+</blockquote>
+<h2 id="v116">v1.16</h2>
+<h3 id="full-documentation_1">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.16/"><em>Docker Remote API v1.16</em></a></p>
+<h3 id="whats-new_1">What's new</h3>
+<p><code>GET /info</code></p>
+<p><strong>New!</strong>
+<code>info</code> now returns the number of CPUs available on the machine (<code>NCPU</code>),
+total memory available (<code>MemTotal</code>), a user-friendly name describing the running Docker daemon (<code>Name</code>), a unique ID identifying the daemon (<code>ID</code>), and
+a list of daemon labels (<code>Labels</code>).</p>
+<p><code>POST /containers/create</code></p>
+<p><strong>New!</strong>
+You can set the new container's MAC address explicitly.</p>
+<p><strong>New!</strong>
+Volumes are now initialized when the container is created.</p>
+<p><code>POST /containers/(id)/copy</code></p>
+<p><strong>New!</strong>
+You can now copy data which is contained in a volume.</p>
+<h2 id="v115">v1.15</h2>
+<h3 id="full-documentation_2">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.15/"><em>Docker Remote API v1.15</em></a></p>
+<h3 id="whats-new_2">What's new</h3>
+<p><code>POST /containers/create</code></p>
+<p><strong>New!</strong>
+It is now possible to set a container's HostConfig when creating a container.
+Previously this was only available when starting a container.</p>
+<h2 id="v114">v1.14</h2>
+<h3 id="full-documentation_3">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.14/"><em>Docker Remote API v1.14</em></a></p>
+<h3 id="whats-new_3">What's new</h3>
+<p><code>DELETE /containers/(id)</code></p>
+<p><strong>New!</strong>
+When using <code>force</code>, the container will be immediately killed with SIGKILL.</p>
+<p><code>POST /containers/(id)/start</code></p>
+<p><strong>New!</strong>
+The <code>hostConfig</code> option now accepts the field <code>CapAdd</code>, which specifies a list of capabilities
+to add, and the field <code>CapDrop</code>, which specifies a list of capabilities to drop.</p>
+<p><code>POST /images/create</code></p>
+<p><strong>New!</strong>
+The <code>fromImage</code> and <code>repo</code> parameters now supports the <code>repo:tag</code> format.
+Consequently,  the <code>tag</code> parameter is now obsolete. Using the new format and
+the <code>tag</code> parameter at the same time will return an error.</p>
+<h2 id="v113">v1.13</h2>
+<h3 id="full-documentation_4">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.13/"><em>Docker Remote API v1.13</em></a></p>
+<h3 id="whats-new_4">What's new</h3>
+<p><code>GET /containers/(name)/json</code></p>
+<p><strong>New!</strong>
+The <code>HostConfig.Links</code> field is now filled correctly</p>
+<p><strong>New!</strong>
+<code>Sockets</code> parameter added to the <code>/info</code> endpoint listing all the sockets the 
+daemon is configured to listen on.</p>
+<p><code>POST /containers/(name)/start</code>
+<code>POST /containers/(name)/stop</code></p>
+<p><strong>New!</strong>
+<code>start</code> and <code>stop</code> will now return 304 if the container's status is not modified</p>
+<p><code>POST /commit</code></p>
+<p><strong>New!</strong>
+Added a <code>pause</code> parameter (default <code>true</code>) to pause the container during commit</p>
+<h2 id="v112">v1.12</h2>
+<h3 id="full-documentation_5">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.12/"><em>Docker Remote API v1.12</em></a></p>
+<h3 id="whats-new_5">What's new</h3>
+<p><code>POST /build</code></p>
+<p><strong>New!</strong>
+Build now has support for the <code>forcerm</code> parameter to always remove containers</p>
+<p><code>GET /containers/(name)/json</code>
+<code>GET /images/(name)/json</code></p>
+<p><strong>New!</strong>
+All the JSON keys are now in CamelCase</p>
+<p><strong>New!</strong>
+Trusted builds are now Automated Builds - <code>is_trusted</code> is now <code>is_automated</code>.</p>
+<p><strong>Removed Insert Endpoint</strong>
+The <code>insert</code> endpoint has been removed.</p>
+<h2 id="v111">v1.11</h2>
+<h3 id="full-documentation_6">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.11/"><em>Docker Remote API v1.11</em></a></p>
+<h3 id="whats-new_6">What's new</h3>
+<p><code>GET /_ping</code></p>
+<p><strong>New!</strong>
+You can now ping the server via the <code>_ping</code> endpoint.</p>
+<p><code>GET /events</code></p>
+<p><strong>New!</strong>
+You can now use the <code>-until</code> parameter to close connection
+after timestamp.</p>
+<p><code>GET /containers/(id)/logs</code></p>
+<p>This url is preferred method for getting container logs now.</p>
+<h2 id="v110">v1.10</h2>
+<h3 id="full-documentation_7">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.10/"><em>Docker Remote API v1.10</em></a></p>
+<h3 id="whats-new_7">What's new</h3>
+<p><code>DELETE /images/(name)</code></p>
+<p><strong>New!</strong>
+You can now use the force parameter to force delete of an
+    image, even if it's tagged in multiple repositories. <strong>New!</strong>
+    You
+    can now use the noprune parameter to prevent the deletion of parent
+    images</p>
+<p><code>DELETE /containers/(id)</code></p>
+<p><strong>New!</strong>
+You can now use the force parameter to force delete a
+    container, even if it is currently running</p>
+<h2 id="v19">v1.9</h2>
+<h3 id="full-documentation_8">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.9/"><em>Docker Remote API v1.9</em></a></p>
+<h3 id="whats-new_8">What's new</h3>
+<p><code>POST /build</code></p>
+<p><strong>New!</strong>
+This endpoint now takes a serialized ConfigFile which it
+uses to resolve the proper registry auth credentials for pulling the
+base image. Clients which previously implemented the version
+accepting an AuthConfig object must be updated.</p>
+<h2 id="v18">v1.8</h2>
+<h3 id="full-documentation_9">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.8/"><em>Docker Remote API v1.8</em></a></p>
+<h3 id="whats-new_9">What's new</h3>
+<p><code>POST /build</code></p>
+<p><strong>New!</strong>
+This endpoint now returns build status as json stream. In
+case of a build error, it returns the exit status of the failed
+command.</p>
+<p><code>GET /containers/(id)/json</code></p>
+<p><strong>New!</strong>
+This endpoint now returns the host config for the
+container.</p>
+<p><code>POST /images/create</code></p>
+<p><code>POST /images/(name)/insert</code></p>
+<p><code>POST /images/(name)/push</code></p>
+<p><strong>New!</strong>
+progressDetail object was added in the JSON. It's now
+possible to get the current value and the total of the progress
+without having to parse the string.</p>
+<h2 id="v17">v1.7</h2>
+<h3 id="full-documentation_10">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.7/"><em>Docker Remote API v1.7</em></a></p>
+<h3 id="whats-new_10">What's new</h3>
+<p><code>GET /images/json</code></p>
+<p>The format of the json returned from this uri changed. Instead of an
+entry for each repo/tag on an image, each image is only represented
+once, with a nested attribute indicating the repo/tags that apply to
+that image.</p>
+<p>Instead of:</p>
+<pre class="prettyprint well"><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  {
+    "VirtualSize": 131506275,
+    "Size": 131506275,
+    "Created": 1365714795,
+    "Id": "8dbd9e392a964056420e5d58ca5cc376ef18e2de93b5cc90e868a1bbc8318c1c",
+    "Tag": "12.04",
+    "Repository": "ubuntu"
+  },
+  {
+    "VirtualSize": 131506275,
+    "Size": 131506275,
+    "Created": 1365714795,
+    "Id": "8dbd9e392a964056420e5d58ca5cc376ef18e2de93b5cc90e868a1bbc8318c1c",
+    "Tag": "latest",
+    "Repository": "ubuntu"
+  },
+  {
+    "VirtualSize": 131506275,
+    "Size": 131506275,
+    "Created": 1365714795,
+    "Id": "8dbd9e392a964056420e5d58ca5cc376ef18e2de93b5cc90e868a1bbc8318c1c",
+    "Tag": "precise",
+    "Repository": "ubuntu"
+  },
+  {
+    "VirtualSize": 180116135,
+    "Size": 24653,
+    "Created": 1364102658,
+    "Id": "b750fe79269d2ec9a3c593ef05b4332b1d1a02a62b4accb2c21d589ff2f5f2dc",
+    "Tag": "12.10",
+    "Repository": "ubuntu"
+  },
+  {
+    "VirtualSize": 180116135,
+    "Size": 24653,
+    "Created": 1364102658,
+    "Id": "b750fe79269d2ec9a3c593ef05b4332b1d1a02a62b4accb2c21d589ff2f5f2dc",
+    "Tag": "quantal",
+    "Repository": "ubuntu"
+  }
+]
+</code></pre>
+<p>The returned json looks like this:</p>
+<pre class="prettyprint well"><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  {
+     "RepoTags": [
+       "ubuntu:12.04",
+       "ubuntu:precise",
+       "ubuntu:latest"
+     ],
+     "Id": "8dbd9e392a964056420e5d58ca5cc376ef18e2de93b5cc90e868a1bbc8318c1c",
+     "Created": 1365714795,
+     "Size": 131506275,
+     "VirtualSize": 131506275
+  },
+  {
+     "RepoTags": [
+       "ubuntu:12.10",
+       "ubuntu:quantal"
+     ],
+     "ParentId": "27cf784147099545",
+     "Id": "b750fe79269d2ec9a3c593ef05b4332b1d1a02a62b4accb2c21d589ff2f5f2dc",
+     "Created": 1364102658,
+     "Size": 24653,
+     "VirtualSize": 180116135
+  }
+]
+</code></pre>
+<p><code>GET /images/viz</code></p>
+<p>This URI no longer exists. The <code>images --viz</code>
+output is now generated in the client, using the
+<code>/images/json</code> data.</p>
+<h2 id="v16">v1.6</h2>
+<h3 id="full-documentation_11">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.6/"><em>Docker Remote API v1.6</em></a></p>
+<h3 id="whats-new_11">What's new</h3>
+<p><code>POST /containers/(id)/attach</code></p>
+<p><strong>New!</strong>
+You can now split stderr from stdout. This is done by
+prefixing a header to each transmission. See
+<a href="/reference/api/docker_remote_api_v1.9/#attach-to-a-container" title="POST /containers/(id)/attach"><code>POST /containers/(id)/attach</code></a>.
+The WebSocket attach is unchanged. Note that attach calls on the
+previous API version didn't change. Stdout and stderr are merged.</p>
+<h2 id="v15">v1.5</h2>
+<h3 id="full-documentation_12">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.5/"><em>Docker Remote API v1.5</em></a></p>
+<h3 id="whats-new_12">What's new</h3>
+<p><code>POST /images/create</code></p>
+<p><strong>New!</strong>
+You can now pass registry credentials (via an AuthConfig
+    object) through the X-Registry-Auth header</p>
+<p><code>POST /images/(name)/push</code></p>
+<p><strong>New!</strong>
+The AuthConfig object now needs to be passed through the
+    X-Registry-Auth header</p>
+<p><code>GET /containers/json</code></p>
+<p><strong>New!</strong>
+The format of the Ports entry has been changed to a list of
+dicts each containing PublicPort, PrivatePort and Type describing a
+port mapping.</p>
+<h2 id="v14">v1.4</h2>
+<h3 id="full-documentation_13">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.4/"><em>Docker Remote API v1.4</em></a></p>
+<h3 id="whats-new_13">What's new</h3>
+<p><code>POST /images/create</code></p>
+<p><strong>New!</strong>
+When pulling a repo, all images are now downloaded in parallel.</p>
+<p><code>GET /containers/(id)/top</code></p>
+<p><strong>New!</strong>
+You can now use ps args with docker top, like docker top
+    <container_id> aux</p>
+<p><code>GET /events</code></p>
+<p><strong>New!</strong>
+Image's name added in the events</p>
+<h2 id="v13">v1.3</h2>
+<p>docker v0.5.0
+<a href="https://github.com/docker/docker/commit/51f6c4a7372450d164c61e0054daf0223ddbd909">51f6c4a</a></p>
+<h3 id="full-documentation_14">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.3/"><em>Docker Remote API v1.3</em></a></p>
+<h3 id="whats-new_14">What's new</h3>
+<p><code>GET /containers/(id)/top</code></p>
+<p>List the processes running inside a container.</p>
+<p><code>GET /events</code></p>
+<p><strong>New!</strong>
+Monitor docker's events via streaming or via polling</p>
+<p>Builder (/build):</p>
+<ul>
+<li>Simplify the upload of the build context</li>
+<li>Simply stream a tarball instead of multipart upload with 4
+   intermediary buffers</li>
+<li>Simpler, less memory usage, less disk usage and faster</li>
+</ul>
+<blockquote>
+<p><strong>Warning</strong>: 
+The /build improvements are not reverse-compatible. Pre 1.3 clients will
+break on /build.</p>
+</blockquote>
+<p>List containers (/containers/json):</p>
+<ul>
+<li>You can use size=1 to get the size of the containers</li>
+</ul>
+<p>Start containers (/containers/<id>/start):</p>
+<ul>
+<li>You can now pass host-specific configuration (e.g., bind mounts) in
+   the POST body for start calls</li>
+</ul>
+<h2 id="v12">v1.2</h2>
+<p>docker v0.4.2
+<a href="https://github.com/docker/docker/commit/2e7649beda7c820793bd46766cbc2cfeace7b168">2e7649b</a></p>
+<h3 id="full-documentation_15">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.2/"><em>Docker Remote API v1.2</em></a></p>
+<h3 id="whats-new_15">What's new</h3>
+<p>The auth configuration is now handled by the client.</p>
+<p>The client should send it's authConfig as POST on each call of
+<code>/images/(name)/push</code></p>
+<p><code>GET /auth</code></p>
+<p><strong>Deprecated.</strong></p>
+<p><code>POST /auth</code></p>
+<p>Only checks the configuration but doesn't store it on the server</p>
+<pre class="prettyprint well"><code>Deleting an image is now improved, will only untag the image if it
+has children and remove all the untagged parents if has any.
+</code></pre>
+<p><code>POST /images/&lt;name&gt;/delete</code></p>
+<p>Now returns a JSON structure with the list of images
+deleted/untagged.</p>
+<h2 id="v11">v1.1</h2>
+<p>docker v0.4.0
+<a href="https://github.com/docker/docker/commit/a8ae398bf52e97148ee7bd0d5868de2e15bd297f">a8ae398</a></p>
+<h3 id="full-documentation_16">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.1/"><em>Docker Remote API v1.1</em></a></p>
+<h3 id="whats-new_16">What's new</h3>
+<p><code>POST /images/create</code></p>
+<p><code>POST /images/(name)/insert</code></p>
+<p><code>POST /images/(name)/push</code></p>
+<p>Uses json stream instead of HTML hijack, it looks like this:</p>
+<pre class="prettyprint well"><code>    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {"status":"Pushing..."}
+    {"status":"Pushing", "progress":"1/? (n/a)"}
+    {"error":"Invalid..."}
+    ...
+</code></pre>
+<h2 id="v10">v1.0</h2>
+<p>docker v0.3.4
+<a href="https://github.com/docker/docker/commit/8d73740343778651c09160cde9661f5f387b36f4">8d73740</a></p>
+<h3 id="full-documentation_17">Full Documentation</h3>
+<p><a href="/reference/api/docker_remote_api_v1.0/"><em>Docker Remote API v1.0</em></a></p>
+<h3 id="whats-new_17">What's new</h3>
+<p>Initial version</p>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="push-footer"></div>
+
+</div>
+
+
+
+<div id="footer-container" class="container">
+  <div id="footer" class="grey-body">
+    <div class="row">
+      <div class="span2">
+        <span class="footer-title">Community</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/community/events/">Events</a></li>
+          <li><a class="primary-button" href="http://posts.docker.com">Friends' Posts</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/meetups/">Meetups</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/community/governance/">Governance</a></li>
+          <li><a class="primary-button" href="http://forums.docker.com">Forums</a></li>
+          <li><a class="primary-button" href="http://botbot.me/freenode/docker">IRC</a></li>
+          <li><a class="primary-button" href="https://github.com/docker/docker">GitHub</a></li>
+          <li><a class="primary-button" href="http://stackoverflow.com/search?q=docker">Stackoverflow</a></li>
+          <li><a class="primary-button" href="http://www.cafepress.com/docker">Swag</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Enterprise</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/support/">Support</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/education/">Education</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/enterprise/services/">Services</a></li>
+        </ul>
+        <span class="footer-title">Partner Solutions</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/partners/find/">Find a Partner</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/program/">Partner Program</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/partners/learn/">Learn More</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Resources</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://docs.docker.com">Documentation</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/help/">Help</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/usecases/">Use Cases</a></li>
+          <li><a class="primary-button" href="http://www.docker.com/tryit/">Online Tutorial</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/howtobuy/">How To Buy</a></li>
+          <li><a class="primary-button" href="http://status.docker.com">Status</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/resources/security/">Security</a></li>
+        </ul>
+      </div>
+      <div class="span2">
+        <span class="footer-title">Company</span>
+        <ul class="unstyled">
+          <li><a class="primary-button" href="https://www.docker.com/company/aboutus/">About Us</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/team/">Team</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/news/">News</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/press/">Press</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/careers/">Careers</a></li>
+          <li><a class="primary-button" href="https://www.docker.com/company/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div class="span3">
+        <span class="footer-title">Connect</span>
+        <div class="search">
+          <span>Subscribe to our newsletter</span>
+          <form action="https://www.docker.com/subscribe_newsletter/" method="post">
+            <input type='hidden' name='csrfmiddlewaretoken' value='aWL78QXQkY8DSKNYh6cl08p5eTLl7sOa' />
+            <tr><th><label for="id_email">Email:</label></th><td><input class="form-control" id="id_email" name="email" placeholder="Enter your email" type="text" /></td></tr>
+            
+            <button type="submit"><i class="icon-arrow-right"></i> </button>
+          </form>
+        </div>
+        <ul class="unstyled social">
+          <li><a title="Docker on Twitter" class="primary-button blog" href="http://blog.docker.com">Blog</a></li>
+          <li><a title="Docker on Twitter" class="primary-button twitter" href="http://twitter.com/docker">Twitter</a></li>
+          <li><a title="Docker on Google+" class="primary-button googleplus" href="https://plus.google.com/u/0/communities/108146856671494713993">Google+</a></li>
+          <li><a title="Docker on Facebook" class="primary-button facebook" href="https://www.facebook.com/docker.run">Facebook</a></li>
+          <li><a title="Docker on Youtube" class="primary-button youtube" href="http://www.youtube.com/user/dockerrun">YouTube</a></li>
+        </ul>
+        <ul class="unstyled social">
+          <li><a title="Docker on SlideShare" class="primary-button slideshare" href="http://www.slideshare.net/Docker">Slideshare</a></li>
+          <li>
+             <a title="Docker on LinkedIn" class="primary-button" href="https://www.linkedin.com/company/docker">
+                 <span class="linkedin"></span>
+                 LinkedIn
+             </a>
+          </li>
+          <li>
+              <a title="Docker on GitHub" class="primary-button" href="https://github.com/docker/">
+                  <span class="github"></span>
+                  GitHub
+              </a>
+          </li>
+          <li>
+              <a title="Docker on Reddit" class="primary-button" href="http://www.reddit.com/r/docker">
+                  <span class="reddit"></span>
+                  Reddit
+              </a>
+          </li>
+          <li>
+              <a title="Docker on AngelList" class="primary-button" href="https://angel.co/docker-inc-1">
+                  <span class="angellist"></span>
+                  AngelList
+              </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="span6 pagination-right copyright">
+        <span>&copy; 2014-2015 Docker, Inc.</span>
+      </div>
+      <div class="span6 pagination-left copyright">
+        <a href="http://www.docker.com/legal/terms_of_service">Terms</a> &middot;
+        <a href="http://www.docker.com/legal/privacy_policy">Privacy</a> &middot;
+        <a href="http://www.docker.com/legal/trademark_guidelines">Trademarks</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.cookie.js" ></script>
+<script src="/js/jquery-scrolltofixed-min.js"></script>
+<script src="/js/bootstrap-3.0.3.min.js"></script>
+<script src="/js/prettify-1.0.min.js"></script>
+<script src="/js/dockerfile_tutorial.js"></script>
+<script src="/js/dockerfile_tutorial_level.js"></script>
+<script src="/js/base.js"></script>
+<script src="/tipuesearch/tipuesearch_set.js"></script>
+<script src="/tipuesearch/tipuesearch.min.js"></script>
+<script type="text/javascript">
+piAId = '45082';
+piCId = '1482';
+
+(function() {
+  function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+  }
+  if(window.attachEvent) { window.attachEvent('onload', async_load); }
+  else { window.addEventListener('load', async_load, false); }
+})();
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#content').css("min-height", $(window).height() - 553 );
+    // if the URL contains a version string, update the version picker to reflect that
+    version = document.location.pathname.match(/^\/(v\d\.\d)\/.*/)
+    if (version && version[1]) {
+        $('#document-version-number')[0].text = 'Version '+version[1];
+    } else {
+        $('#document-version-number')[0].text = $('#document-version-number')[0].text + " (Latest)"
+    }
+    // load the complete versions list
+    $.get("/versions.html_fragment", function( data ) {
+    	$('#documentation-version-list').prepend(data);
+	//remove any "/v1.1/" bits from front, so we can add the path to the version selection dropdown.
+	path = document.location.pathname.replace(/^\/v\d\.\d/, "");
+	$('#documentation-version-list a.version').each(function(i, e) {
+		e.href = e.href+path;
+		$(e).removeClass()
+	});
+    });
+
+  })
+  var userName = getCookie('docker_sso_username');
+  if (userName) {
+    $('.topmostnav_loggedout').hide();
+    $('.topmostnav_loggedin').show();
+    $('#logged-in-header-username').text(userName);
+  } else {
+    $('.topmostnav_loggedout').show();
+    $('.topmostnav_loggedin').hide();
+  }
+</script>
+</body>
+</html>

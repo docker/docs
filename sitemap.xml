@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+<url>
+ <loc>//</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//release-notes/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//introduction/understanding-docker/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+
+
+
+    
+<url>
+ <loc>//installation/ubuntulinux/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/mac/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/windows/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/amazon/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/archlinux/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/binaries/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/centos/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/cruxlinux/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/debian/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/fedora/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/frugalware/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/google/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/gentoolinux/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/softlayer/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/rackspace/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/rhel/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/oracle/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//installation/SUSE/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//compose/install/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+
+
+
+    
+<url>
+ <loc>//userguide/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//userguide/dockerhub/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//userguide/dockerizing/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//userguide/usingdocker/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//userguide/dockerimages/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//userguide/dockerlinks/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//userguide/dockervolumes/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//userguide/dockerrepos/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//compose/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//machine/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//swarm/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+
+
+
+    
+<url>
+ <loc>//docker-hub/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//docker-hub/accounts/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//docker-hub/repos/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//docker-hub/builds/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//docker-hub/official_repos/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+
+
+
+    
+<url>
+ <loc>//examples/nodejs_web_app/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//examples/mongodb/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//examples/running_redis_service/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//examples/postgresql_service/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//examples/running_riak_service/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//examples/running_ssh_service/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//examples/couchdb_data_volumes/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//examples/apt-cacher-ng/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//compose/django/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//compose/rails/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//compose/wordpress/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+
+
+
+    
+<url>
+ <loc>//articles/basics/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/networking/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/security/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/https/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/registry_mirror/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/host_integration/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/baseimages/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/dockerfile_best-practices/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/certificates/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/using_supervisord/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/cfengine_process_management/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/puppet/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/chef/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/dsc/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/ambassador_pattern_linking/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/runmetrics/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/b2d_volume_resize/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//articles/systemd/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+
+
+
+    
+<url>
+ <loc>//reference/commandline/cli/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//reference/builder/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//faq/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//reference/run/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//compose/cli/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//compose/yml/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//compose/env/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//compose/completion/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//swarm/discovery/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//swarm/scheduler/strategy/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//swarm/scheduler/filter/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//swarm/API/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//reference/api/docker-io_api/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//reference/api/registry_api/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//reference/api/registry_api_client_libraries/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//reference/api/hub_registry_spec/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//reference/api/docker_remote_api/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//reference/api/docker_remote_api_v1.17/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//reference/api/docker_remote_api_v1.16/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//reference/api/remote_api_client_libraries/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//reference/api/docker_io_accounts_api/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+
+
+
+    
+<url>
+ <loc>//project/who-written-for/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/software-required/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/set-up-git/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/set-up-dev-env/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/test-and-docs/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/make-a-contribution/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/find-an-issue/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/work-issue/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/create-pr/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/review-pr/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/advanced-contributing/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/get-help/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/coding-style/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+<url>
+ <loc>//project/doc-style/</loc>
+ <lastmod>2015-04-10</lastmod>
+ <changefreq>daily</changefreq>
+</url>
+    
+
+
+</urlset>
