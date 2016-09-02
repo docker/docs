@@ -4,37 +4,37 @@
     background-position: initial;
 }
 /* Notes */
-#DockerDocumentation p {
+#DocumentationText p {
     margin-bottom: 1.25rem;
 }
-#DockerDocumentation strong,
-#DockerDocumentation  b {
+#DocumentationText strong,
+#DocumentationText  b {
     font-weight: 500;
     line-height: inherit;
 }
-#DockerDocumentation blockquote {
+#DocumentationText blockquote {
     font-size: 16px;
     border-left: 4px solid #6db9d1;
     padding: 6px;
     background-color: #f5f5f5;
 }
-#DockerDocumentation blockquote p {
+#DocumentationText blockquote p {
     color: black;
 		margin: 0;
 		padding: 10px 20px;
 }
-#DockerDocumentation blockquote p strong {
+#DocumentationText blockquote p strong {
     color: #6db9d1;
     /* most Note's have a non-strong ':' display: block;*/
 }
-#DockerDocumentation code {
-  border-width: 0;
-  background-color: #f5f5f5;
+#DocumentationText code {
+  border-width: 0px !important;
+  background-color: #f5f5f5 !important;
 }
-#DockerDocumentation thead {
+#DocumentationText thead {
   background: rgb(200, 230, 239);
 }
-#DockerDocumentation thead th {
+#DocumentationText thead th {
     color: black;
     font-weight: normal;
     font-size: 1rem;
@@ -45,12 +45,12 @@
 #DocumentationText h2 {
   font-size: 38px;
 }
-#DockerDocumentation h1,
-#DockerDocumentation h2,
-#DockerDocumentation h3,
-#DockerDocumentation h4,
-#DockerDocumentation h5,
-#DockerDocumentation h6 {
+#DocumentationText h1,
+#DocumentationText h2,
+#DocumentationText h3,
+#DocumentationText h4,
+#DocumentationText h5,
+#DocumentationText h6 {
     color: #155A74;
     font-weight: normal;
 }
@@ -183,7 +183,7 @@ div.docsidebarnav_section.affix ul {
       margin: 20px 0 20px !important;
       padding: 10px;
 }
-#DockerDocumentation li p {
+#DocumentationText li p {
   margin-bottom: 0;
 }
 .docsidebarnav_section .menu-icon {
