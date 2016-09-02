@@ -195,12 +195,47 @@ ng\:form {
               {{ content }}
 			       </section>
 						 <script language="javascript">
+						 window.onload = function () {
 						 var x = document.links.length;
 						 for (i = 0; i < x; i++) {
 						   var thisHREF = document.links[i].href;
 						   if (thisHREF.indexOf(window.location.hostname) > -1) thisHREF = thisHREF.replace(".md","/").replace("/index/","/");
 						   document.links[i].setAttribute('href', thisHREF);
 						 }
+					    var toc = "";
+					    var level = 0;
+
+					    document.getElementById("DocumentationText").innerHTML =
+					        document.getElementById("DocumentationText").innerHTML.replace(
+					            /<h([\d])>([^<]+)<\/h([\d])>/gi,
+					            function (str, openLevel, titleText, closeLevel) {
+					                if (openLevel != closeLevel) {
+					                    return str;
+					                }
+
+					                if (openLevel > level) {
+					                    toc += (new Array(openLevel - level + 1)).join("<ul>");
+					                } else if (openLevel < level) {
+					                    toc += (new Array(level - openLevel + 1)).join("</ul>");
+					                }
+
+					                level = parseInt(openLevel);
+
+					                var anchor = titleText.replace(/ /g, "_");
+					                toc += "<li><a href=\"#" + anchor + "\">" + titleText
+					                    + "</a></li>";
+
+					                return "<h" + openLevel + "><a name=\"" + anchor + "\">"
+					                    + titleText + "</a></h" + closeLevel + ">";
+					            }
+					        );
+
+					    if (level) {
+					        toc += (new Array(level + 1)).join("</ul>");
+					    }
+
+					    document.getElementById("TableOfContents").innerHTML += toc;
+					};
 						 </script>
             </div>
 						<div class="hidden-xs hidden-sm col-md-2 col-xl-1 tableofcontents_section">
@@ -213,7 +248,6 @@ ng\:form {
 						    </span>
                 <span class="heading">On this page</span>
                 <nav id="TableOfContents">
-									{% include rightnav.md %}
 								</nav>
                 </section>
             </div>
