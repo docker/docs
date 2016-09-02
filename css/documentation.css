@@ -217,13 +217,13 @@ div.docsidebarnav_section.affix ul {
   background-color: #f5fdff;
 }
 
-#TableOfContentsSection li a,
+#TableOfContents li a,
 #TableOfContentsSection .heading {
   font-size: 14px;
   font-style: normal;
   margin: 0;
   padding: 10px 15px;
-  display: block;
+  display: block !important;
   line-height: 15px;
 }
 #TableOfContentsSection .heading {
@@ -247,14 +247,10 @@ div.docsidebarnav_section.affix ul {
     padding-left: 0.30rem;
     font-size: 14px;
 }
+
 #TableOfContentsSection #TableOfContents > ul {
   padding-left: 0;
-}
-
-/* HACK: Don't display current page title in TOC. */
-/* This removes one level of hierarchy and makes it a bit more compact. */
-#TableOfContentsSection #TableOfContents > ul > li > a {
-  display: none;
+  list-style: none;
 }
 
 #TableOfContentsSection #TableOfContents > ul > li > ul {

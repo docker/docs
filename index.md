@@ -4,10 +4,11 @@ keywords:
 - Docker, documentation, manual, guide, reference, api
 title: Welcome to the Docker Documentation
 layout: docs
+hideright: true
 ---
 <section class="section projects_items_section GenericDev" style="margin-top:-150px; margin-bottom:-150px">
 
-<h1 style="text-align:center">Welcome to the Docker Documentation</h1>
+<h1>Welcome to the Docker Documentation</h1>
 
 <span class="search-banner">
   <form class="search-form form-inline ng-pristine ng-valid" action="/search/">
