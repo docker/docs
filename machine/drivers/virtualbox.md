@@ -34,6 +34,7 @@ The size of the VM's disk can be configured this way:
 -   `--virtualbox-hostonly-cidr`: The CIDR of the host only adapter.
 -   `--virtualbox-hostonly-nictype`: Host Only Network Adapter Type. Possible values are '82540EM' (Intel PRO/1000), 'Am79C973' (PCnet-FAST III), and 'virtio' Paravirtualized network adapter.
 -   `--virtualbox-hostonly-nicpromisc`: Host Only Network Adapter Promiscuous Mode. Possible options are deny , allow-vms, allow-all
+-   `--virtualbox-hostonly-no-dhcp`: Disable the Host Only DHCP Server
 -   `--virtualbox-no-share`: Disable the mount of your home directory
 -   `--virtualbox-no-dns-proxy`: Disable proxying all DNS requests to the host (Boolean value, default to false)
 -   `--virtualbox-no-vtx-check`: Disable checking for the availability of hardware virtualization before the VM is started
@@ -78,6 +79,7 @@ upper bound of `192.168.24.254`.
 | `--virtualbox-hostonly-cidr`         | `VIRTUALBOX_HOSTONLY_CIDR`         | `192.168.99.1/24`        |
 | `--virtualbox-hostonly-nictype`      | `VIRTUALBOX_HOSTONLY_NIC_TYPE`     | `82540EM`                |
 | `--virtualbox-hostonly-nicpromisc`   | `VIRTUALBOX_HOSTONLY_NIC_PROMISC`  | `deny`                   |
+| `--virtualbox-hostonly-no-dhcp`      | `VIRTUALBOX_HOSTONLY_NO_DHCP`      | `false`                  |
 | `--virtualbox-no-share`              | `VIRTUALBOX_NO_SHARE`              | `false`                  |
 | `--virtualbox-no-dns-proxy`          | `VIRTUALBOX_NO_DNS_PROXY`          | `false`                  |
 | `--virtualbox-no-vtx-check`          | `VIRTUALBOX_NO_VTX_CHECK`          | `false`                  |
