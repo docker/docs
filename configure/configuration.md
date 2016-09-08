@@ -16,7 +16,7 @@ this overview to see what you can configure.
 To start, navigate to the Trusted Registry user interface (UI) > Settings, to
 view configuration options. Configuring is grouped by the following:
 
-* [General settings](config-general.md) (ports, proxies, and Notary)
+* [General settings](config-general.md) (ports, proxies)
 * [Security settings](config-security.md)
 * [Storage settings](config-storage.md)
 * [License](../install/license.md)

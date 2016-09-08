@@ -1,7 +1,7 @@
 +++
 title = "Configure general settings"
 description = "Configure general settings for Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, general, domain name, HTTP, HTTPS ports, Notary, registry"]
+keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, general, domain name, HTTP, HTTPS ports, registry"]
 [menu.main]
 parent="workw_dtr_configure"
 identifier="dtr_configure_general"
@@ -10,7 +10,7 @@ weight=3
 
 # Configure general settings
 
-This document describes the general settings you need to configure including using Trusted Content through setting up your Notary server.
+This document describes the general settings you need to configure.
 
 ## Configure your domain name and port settings
 
@@ -33,14 +33,14 @@ for the new domain. This also works with IP addresses.
 
 ## Docker Content Trust
 
-The Trusted Registry's includes integration with of Docker Notary to provide
+The Trusted Registry integrates with Docker Notary by default to provide
 Content Trust functionality, allowing your organization to push and pull
 trusted images. After pushing images in the Trusted Registry, you can see
 which image tags were signed by viewing the appropriate repositories through
 Trusted Registry's web interface.
 
 To configure your Docker client to be able to push signed images to Docker
-Trusted Registry refer to the CLI Reference's [Environment Variables
+Trusted Registry, refer to the CLI Reference's [Environment Variables
 Section](/engine/reference/commandline/cli.md#environment-variables) and
 [Notary Section](/engine/reference/commandline/cli.md#notary).
 
