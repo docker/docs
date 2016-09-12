@@ -204,7 +204,7 @@ ng\:form {
 						 }
 						 </script>
             </div>
-						{% if page.hideright != "true" %}
+						{% if page.notoc == "true" %}
 						<div class="hidden-xs hidden-sm col-md-2 col-xl-1 tableofcontents_section">
                 <section class="section" id="TableOfContentsSection">
 						    <span class="title_section">
@@ -219,7 +219,7 @@ ng\:form {
 								</nav>
                 </section>
             </div>
-						{% endif %}<!-- end check for hideright != true -->
+						{% endif %}<!-- end check for notoc != true -->
           </div>
         </div>
       </div>
@@ -375,7 +375,6 @@ background-image: linear-gradient(to bottom, #75ae4c, #99c47c);
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-WLGFZV');</script>
-  <script type="text/javascript" src="/js/docsearch.min.js"></script>
   <script type="text/javascript"> docsearch({
 apiKey: '828e35034e76dbb6fdc5b33c03d5702f',
 indexName: 'docker',

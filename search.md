@@ -8,17 +8,29 @@ title: Search the Docker Documentation
 
 # Search Results
 
-<input type="text" id="search-box" name="q" style="display:none" />
-<span class="ds-dropdown-menu ds-with-0" style="position: absolute; top: 100%; z-index: 100; left: 0px; right: auto; display: block;">
-<div class="algolia-autocomplete"><div class="ds-dataset-0"><span class="ds-suggestions" style="display: block;"><div class="ds-suggestion"><div class="algolia-docsearch-suggestion algolia-docsearch-suggestion__main algolia-docsearch-suggestion__secondary " style="white-space: normal;" id="hits-container"></div></div></span></div></div>
-<div id="pagination-container"></div>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
-<script src="//cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
-<script async src="/search.js"></script>
-<style>
-/* bring up the content divs so users can see the URL being suggested, and click on them  */
-.algolia-autocomplete .algolia-docsearch-suggestion--content {
-    z-index: 9999;
-}
+<style type='text/css'>
+#my-cse1 { all: initial !important; all: default !important; }
+#my-cse1 table, #my-cse1 table tr, #my-cse1 table tr th, #my-cse1 table tr td, .gs-bidi-start-align { border: 0px !important; padding: 0px !important; line-height: initial !important; margin: 0px !important; }
+.gs-snippet { margin-top: 0px !important; margin-bottom: 0px !important; padding: 0px !important; color: #999}
+.gs-webResult .gs-result .gs-no-results-result { padding: 10px !important; }
+.gs-per-result-labels { display: none !important; }
+.gsc-url-top, .gsc-thumbnail-inside, .gs-spelling { padding: 0px !important; }
+.gcsc-branding { padding-right: 0px !important; }
+.gsc-tabHeader.gsc-tabhActive, .gsc-tabsArea { border-color: #CCC !important; }
+.gcs-input, #gsc-i-id1 { padding: 5px 5px 5px 5px !important; }
+#gscb_a, .gscb_a { padding: 3px 0px 0px 0px !important;}
 </style>
+<div id="my-cse1">
+<script>
+  (function() {
+    var cx = '005610573923180467403:iwlnuvjqpv4';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+</div>
