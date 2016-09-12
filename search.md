@@ -19,6 +19,8 @@ title: Search the Docker Documentation
 .gsc-tabHeader.gsc-tabhActive, .gsc-tabsArea { border-color: #CCC !important; }
 .gcs-input, #gsc-i-id1 { padding: 5px 5px 5px 5px !important; }
 #gscb_a, .gscb_a { padding: 3px 0px 0px 0px !important;}
+.gsc-control-cse, .gsc-control-cse-en { padding: 0px !important; }
+.gsc-result-info { padding-bottom: 0px !important; }
 </style>
 <div id="my-cse1">
 <script>

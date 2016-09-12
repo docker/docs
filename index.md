@@ -4,20 +4,36 @@ keywords:
 - Docker, documentation, manual, guide, reference, api
 title: Welcome to the Docker Documentation
 layout: docs
-hideright: true
 ---
-<section class="section projects_items_section GenericDev" style="margin-top:-150px; margin-bottom:-150px">
 
-<h1>Welcome to the Docker Documentation</h1>
+# Welcome to the Docker Documentation
+{: style="text-align: center"}
 
 <span class="search-banner">
   <form class="search-form form-inline ng-pristine ng-valid" action="/search/">
     <input class="search-field form-control" id="st-search-input" value="" name="q" placeholder="Search the Documentation" type="search">
-    <button type="submit" class="search-submit btn btn-default">Search</button>
-  </form>
-</span>
+    <button type="submit" class="search-submit btn btn-default">Search</button></form>
 
+## What is the Docker platform?
 
+At its core, Docker provides a way to run almost any application securely
+isolated in a container. The isolation and security allow you to run many
+containers simultaneously on your host. The lightweight nature of containers,
+which run without the extra load of a hypervisor, means you can get more out of
+your hardware.
+
+Surrounding the container is tooling and a platform which can help you in
+several ways:
+
+* Get your applications (and supporting components) into Docker containers
+* Distribute and ship those containers to your teams for further development
+and testing
+* Deploy those applications to your production environment,
+ whether it is in a local data center or the Cloud
+
+## Products
+
+<section class="section projects_items_section GenericDev" style="margin-top:-150px; margin-bottom:-150px">
 <ul class="items widthcol3 media">
 <li>
 	<div class="media_image">

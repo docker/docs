@@ -13,7 +13,7 @@ jQuery(document).ready(function(){
       return false;
     });
 
-    $("#TableOfContents").empty();
+    $("#TableOfContents ul").empty();
 
     var prevH2Item = null;
     var prevH2List = null;
@@ -25,13 +25,13 @@ jQuery(document).ready(function(){
         var anchor = "<a name='" + index + "'></a>";
         $(this).before(anchor);
 
-        var li= "<li><a href='#" + index + "'>" + $(this).text() + "</a></li>";
+        var li= "<li><a href='" + window.location + "#" + $(this).id + "'>" + $(this).text() + "</a></li>";
 
         if( $(this).is("h2") ){
             prevH2List = $("<ul></ul>");
             prevH2Item = $(li);
             prevH2Item.append(prevH2List);
-            prevH2Item.appendTo("#TableOfContents");
+            prevH2Item.appendTo("#TableOfContents ul");
         } else {
             prevH2List.append(li);
         }

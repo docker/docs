@@ -278,9 +278,10 @@ color: #F04124;
   width: 100%;
   padding-right: 54px;
 }
-.search-form .algolia-autocomplete .search-field {
+.search-form .algolia-autocomplete .search-field, #st-search-input {
   width: 100%;
   border: 1px solid lightgray;
+  margin: 2px;
 }
 .search-form{
     max-width: 420px;
@@ -321,7 +322,6 @@ color: #F04124;
     background-position: center center;
     /* border-right: 1px solid #e1e1e1; */
     outline: none;
-    background-color: #fff;
     border-radius: 0;
 }
 

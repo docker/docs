@@ -1,6 +1,6 @@
 toc:
-- title: Docker Overview
-  path: /engine/understanding-docker/
+- title: What is the Docker Platform?
+  path: /
 - sectiontitle: Docker Engine
   section:
   - sectiontitle: Install

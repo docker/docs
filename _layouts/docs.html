@@ -66,7 +66,6 @@ ng\:form {
 <link rel="stylesheet" href="/css/temporary.css">
 <link rel="stylesheet" href="/css/documentation.css">
 <script async="" src="/js/modernizr.min.js"></script>
-<link rel="stylesheet" href="/css/docsearch.min.css">
 <meta class="foundation-data-attribute-namespace">
 <meta class="foundation-mq-xxlarge">
 <meta class="foundation-mq-xlarge-only">
@@ -190,8 +189,8 @@ ng\:form {
 							</ul>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-9 col-md-8 col-xl-9">
-              <section class="section" id="DocumentationText">
+            <div {% if page.notoc %} class="col-xs-12 col-sm-9 col-md-10" {% else %} class="col-xs-12 col-sm-9 col-md-8 col-xl-9" {% endif %} >
+              <section class="section{% if page.notoc %}projects_items_section GenericDev{% endif %}" id="DocumentationText">
               {{ content }}
 			       </section>
 
@@ -204,7 +203,7 @@ ng\:form {
 						 }
 						 </script>
             </div>
-						{% if page.notoc == "true" %}
+						{% if page.notoc != "true" %}
 						<div class="hidden-xs hidden-sm col-md-2 col-xl-1 tableofcontents_section">
                 <section class="section" id="TableOfContentsSection">
 						    <span class="title_section">
@@ -214,8 +213,8 @@ ng\:form {
 								  </form>
 						    </span>
                 <span class="heading">On this page</span>
-                <nav>
-									<ul id="TableOfContents"></ul>
+                <nav id="TableOfContents">
+									<ul></ul>
 								</nav>
                 </section>
             </div>
@@ -375,14 +374,6 @@ background-image: linear-gradient(to bottom, #75ae4c, #99c47c);
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-WLGFZV');</script>
-  <script type="text/javascript"> docsearch({
-apiKey: '828e35034e76dbb6fdc5b33c03d5702f',
-indexName: 'docker',
-autoSelect: false,
-inputSelector: '#st-search-input',
-debug: false
-});
-</script>
 </div>
 <div id="mktoStyleLoaded" style="display: none; border-top-color: rgb(18, 52, 86);"></div>
 <form class="ng-pristine ng-valid mktoForm mktoHasWidth mktoLayoutLeft" novalidate style="font-family: Helvetica, Arial, sans-serif; font-size: 13px; color: rgb(51, 51, 51); visibility: hidden; position: absolute; top: -500px; left: -1000px; width: 1602px;">
