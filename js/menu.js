@@ -21,15 +21,18 @@ jQuery(document).ready(function(){
     var index = 0;
     var currentHeader = 0, lastHeader = 0;
     var output = "";
-    $("h2, h3").each(function() {
+    $("h2, h3, h4").each(function() {
         var li= "<li><a href='" + window.location + "#" + $(this).attr('id') + "'>" + $(this).text().replace("¶","") + "</a></li>";
         lastHeader = currentHeader;
         if( $(this).is("h2") ){
           // h2
           currentHeader = 2;
-        } else {
+        } else if( $(this).is("h3") ){
           // h3
           currentHeader = 3;
+        } else if( $(this).is("h4") ) {
+          // h4
+          currentHeader = 4;
         }
         if (currentHeader > lastHeader)
         {
