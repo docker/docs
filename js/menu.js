@@ -20,11 +20,6 @@ jQuery(document).ready(function(){
 
     var index = 0;
     $("h2, h3").each(function() {
-
-        //insert an anchor to jump to, from the TOC link.
-        var anchor = "<a name='" + index + "'></a>";
-        $(this).before(anchor);
-
         var li= "<li><a href='" + window.location + "#" + $(this).id + "'>" + $(this).text() + "</a></li>";
 
         if( $(this).is("h2") ){

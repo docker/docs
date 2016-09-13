@@ -281,7 +281,6 @@ color: #F04124;
 .search-form .algolia-autocomplete .search-field, #st-search-input {
   width: 100%;
   border: 1px solid lightgray;
-  margin: 2px;
 }
 .search-form{
     max-width: 420px;

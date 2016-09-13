@@ -1,14 +1,20 @@
----
-{}
----
+FROM starefossen/ruby-node:2-5
 
-FROM docs/base:oss
-MAINTAINER Docker Docs <docs@docker.com>
+RUN gem install github-pages
 
-# because both the 2 dir's are going into the root
-env PROJECT=
+VOLUME /docs
 
-# To get the git info for this repo
-COPY . /src
-#RUN rm -rf /docs/content/$PROJECT/
-COPY . /docs/content/$PROJECT/
+EXPOSE 4000
+
+WORKDIR /docs
+
+CMD jekyll clean && jekyll serve -H 0.0.0.0 -P 4000
+
+WORKDIR /data
+
+RUN git clone https://github.com/docker/docker.github.io.git docs
+RUN git checkout v1.4
+
+WORKDIR /data/docs
+
+ENTRYPOINT ["jekyll", "serve", "--host=0.0.0.0"]
