@@ -976,7 +976,7 @@ toc:
   - path: /apidocs/docker-cloud/
     title: API reference
   - path: /docker-cloud/release-notes/
-  title: Release Notes
+    title: Release Notes
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
