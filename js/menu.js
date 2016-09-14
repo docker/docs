@@ -19,9 +19,34 @@ jQuery(document).ready(function(){
     var prevH2List = null;
 
     var index = 0;
-    $("h2, h3").each(function() {
-        var li= "<li><a href='" + window.location + "#" + $(this).id + "'>" + $(this).text() + "</a></li>";
-
+    var currentHeader = 0, lastHeader = 0;
+    var output = "";
+    $("h2, h3, h4").each(function() {
+        var li= "<li><a href='" + window.location + "#" + $(this).attr('id') + "'>" + $(this).text().replace("¶","") + "</a></li>";
+        lastHeader = currentHeader;
+        if( $(this).is("h2") ){
+          // h2
+          currentHeader = 2;
+        } else if( $(this).is("h3") ){
+          // h3
+          currentHeader = 3;
+        } else if( $(this).is("h4") ) {
+          // h4
+          currentHeader = 4;
+        }
+        if (currentHeader > lastHeader)
+        {
+            // nest further
+            output += "<ul>" + li;
+        } else if (lastHeader < currentHeader)
+        {
+            // close nesting
+            output += "</ul>" + li
+        } else {
+            // continue, no change in nesting
+            output += li;
+        }
+        /*
         if( $(this).is("h2") ){
             prevH2List = $("<ul></ul>");
             prevH2Item = $(li);
@@ -30,6 +55,8 @@ jQuery(document).ready(function(){
         } else {
             prevH2List.append(li);
         }
-        index++;
+        index++;*/
     });
+    output += "</ul>";
+    $("#TableOfContents").html(output);
 });

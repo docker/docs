@@ -22,33 +22,26 @@ Try [Getting Started withDocker Engine](engine/getstarted/index.md) to learn the
 basics of building and running containers, [Getting Started with Docker Compose](compose/gettingstarted.md) to see
 how easy it is to deploy a multi-container app (standing up a Python + Redis app in the process), or [our Swarm tutorial](engine/swarm/swarm-tutorial/index.md), which
 shows how to run containers on many hosts (VMs or physical machines) at once,
-as a cluster.
-
-Prefer a more linear, guided, visual tour? [Check out our self-paced training](https://training.docker.com/self-paced-training)!
+as a cluster. Prefer a more linear, guided, visual tour? [Check out our self-paced training](https://training.docker.com/self-paced-training)!
 
 ### Typical Docker Platform Workflow
 
-You'll know you've got a good picture of the platform when this is making sense.
-
 1. Get your code and its dependencies into Docker [containers](engine/getstarted/step_two.md):
-   - [Write a Dockerfile](engine/getstarted/step_four.md) for your application that specifies the execution
-     environment and pulls in your code. For example, "include Apache and PHP 5.5 with these extensions installed, and these ports exposed, and have it run my app's code from the `foo/` directory with `$BAR` environment variable."
-   - If your application depends on external applications (such as Redis, or
+   - [Write a Dockerfile](engine/getstarted/step_four.md) that specifies the execution
+     environment and pulls in your code.
+   - If your app depends on external applications (such as Redis, or
      MySQL), simply [find them on a registry such as Docker Hub](docker-hub/repos.md), and refer to them in
      [a Docker Compose file](compose/overview.md), along with a reference to your application, so they'll run
      simultaneously.
-     - Software providers also distribute paid software, shipped
-       in containers, that you can incorporate this way, via the [Docker Store](https://store.docker.com).
+     - Software providers also distribute paid software via the [Docker Store](https://store.docker.com).
    - Build, then run your containers on a virtual host via [Docker Machine](machine/overview.md) as you develop.
 2. Configure [networking](engine/tutorials/networkingcontainers.md) and
    [storage](engine/tutorials/dockervolumes.md) for your solution, if needed.
-3. Share containers to your teams for further development
-   and testing via a registry ([ours](engine/tutorials/dockerrepos.md), [yours](docker-trusted-registry/index.md), or your cloud provider's).
-4. If you're gonna need to scale your solution across multiple machines, [plan
+3. Upload builds to a registry ([ours](engine/tutorials/dockerrepos.md), [yours](docker-trusted-registry/index.md), or your cloud provider's), to collaborate with your team.
+4. If you're gonna need to scale your solution across multiple hosts (VMs or physical machines), [plan
    for how you'll set up your Swarm cluster](engine/swarm/key-concepts.md) and [scale it to meet demand](engine/swarm/swarm-tutorial/index.md).
-   - If this part seems a little complicated to be doing from the command line,
-     use [Universal Control Plane](ucp/overview.md) and you can manage your
-     Swarm cluster using a friendly UI.
+   - Note: Use [Universal Control Plane](ucp/overview.md) and you can manage your
+     Swarm cluster using a friendly UI!
 5. Finally, deploy to your preferred
    cloud provider (or, for redundancy, *multiple* cloud providers) with [Docker Cloud](docker-cloud/overview.md). Or, use [Docker Datacenter](https://www.docker.com/products/docker-datacenter), and deploy to your own on-premise hardware.
 
