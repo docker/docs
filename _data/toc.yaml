@@ -891,82 +891,82 @@ toc:
         title: Stackfiles for your service
       - path: /docker-cloud/getting-started/deploy-app/12_data_management_with_volumes/
         title: Data management with Volumes
-    - sectiontitle: Manage Applications
-      section:
-      - path: /docker-cloud/apps/deploy-to-cloud-btn/
-        title: Add a Deploy to Docker Cloud button
-      - path: /docker-cloud/apps/auto-destroy/
-        title: Automatic container destroy
-      - path: /docker-cloud/apps/autorestart/
-        title: Automatic container restart
-      - path: /docker-cloud/apps/auto-redeploy/
-        title: Automatic service redeploy
-      - path: /docker-cloud/apps/load-balance-hello-world/
-        title: Create a proxy or load balancer
-      - path: /docker-cloud/apps/deploy-tags/
-        title: Deployment tags
-      - path: /docker-cloud/apps/stacks/
-        title: Manage service stacks
-      - path: /docker-cloud/apps/ports/
-        title: Publish and expose service or container ports
-      - path: /docker-cloud/apps/service-redeploy/
-        title: Redeploy running services
-      - path: /docker-cloud/apps/service-scaling/
-        title: Scale your service
-      - path: /docker-cloud/apps/api-roles/
-        title: Service API Roles
-      - path: /docker-cloud/apps/service-links/
-        title: Service discovery and links
-      - path: /docker-cloud/apps/stack-yaml-reference/
-        title: Stack YAML reference
-      - path: /docker-cloud/apps/triggers/
-        title: Use triggers
-      - path: /docker-cloud/apps/volumes/
-        title: Work with data volumes
-    - sectiontitle: Manage Builds and Images
-      section:
-      - path: /docker-cloud/builds/
-        title: Builds and Images Overview
-      - path: /docker-cloud/builds/repos/
-        title: Docker Cloud repositories
-      - path: /docker-cloud/builds/link-source/
-        title: Link to a source code repository
-      - path: /docker-cloud/builds/push-images/
-        title: Push images to Docker Cloud
-      - path: /docker-cloud/builds/image-scan/
-        title: Docker Security Scanning
-      - path: /docker-cloud/builds/automated-build/
-        title: Automated builds
-      - path: /docker-cloud/builds/automated-testing/
-        title: Automated repository tests
-      - path: /docker-cloud/builds/advanced/
-        title: Advanced options for Autobuild and Autotest
-    - sectiontitle: Manage Infrastructure
-      section:
-      - path: /docker-cloud/infrastructure/
-        title: Infrastructure Overview
-      - path: /docker-cloud/infrastructure/deployment-strategies/
-        title: Container distribution strategies
-      - path: /docker-cloud/infrastructure/link-aws/
-        title: Link to Amazon Web Services hosts
-      - path: /docker-cloud/infrastructure/link-do/
-        title: Link to DigitalOcean hosts
-      - path: /docker-cloud/infrastructure/link-azure/
-        title: Link to Microsoft Azure hosts
-      - path: /docker-cloud/infrastructure/link-packet/
-        title: Link to Packet hosts
-      - path: /docker-cloud/infrastructure/link-softlayer/
-        title: Link to SoftLayer hosts
-      - path: /docker-cloud/infrastructure/ssh-into-a-node/
-        title: SSH into a Docker Cloud-managed node
-      - path: /docker-cloud/infrastructure/docker-upgrade/
-        title: Upgrade Docker Engine on a node
-      - path: /docker-cloud/infrastructure/byoh/
-        title: Use the Docker Cloud Agent
-      - path: /docker-cloud/infrastructure/cloud-on-packet.net-faq/
-        title: Using Docker Cloud and Packet.net
-      - path: /docker-cloud/infrastructure/cloud-on-aws-faq/
-        title: Using Docker Cloud on AWS
+  - sectiontitle: Manage Applications
+    section:
+    - path: /docker-cloud/apps/deploy-to-cloud-btn/
+      title: Add a Deploy to Docker Cloud button
+    - path: /docker-cloud/apps/auto-destroy/
+      title: Automatic container destroy
+    - path: /docker-cloud/apps/autorestart/
+      title: Automatic container restart
+    - path: /docker-cloud/apps/auto-redeploy/
+      title: Automatic service redeploy
+    - path: /docker-cloud/apps/load-balance-hello-world/
+      title: Create a proxy or load balancer
+    - path: /docker-cloud/apps/deploy-tags/
+      title: Deployment tags
+    - path: /docker-cloud/apps/stacks/
+      title: Manage service stacks
+    - path: /docker-cloud/apps/ports/
+      title: Publish and expose service or container ports
+    - path: /docker-cloud/apps/service-redeploy/
+      title: Redeploy running services
+    - path: /docker-cloud/apps/service-scaling/
+      title: Scale your service
+    - path: /docker-cloud/apps/api-roles/
+      title: Service API Roles
+    - path: /docker-cloud/apps/service-links/
+      title: Service discovery and links
+    - path: /docker-cloud/apps/stack-yaml-reference/
+      title: Stack YAML reference
+    - path: /docker-cloud/apps/triggers/
+      title: Use triggers
+    - path: /docker-cloud/apps/volumes/
+      title: Work with data volumes
+  - sectiontitle: Manage Builds and Images
+    section:
+    - path: /docker-cloud/builds/
+      title: Builds and Images Overview
+    - path: /docker-cloud/builds/repos/
+      title: Docker Cloud repositories
+    - path: /docker-cloud/builds/link-source/
+      title: Link to a source code repository
+    - path: /docker-cloud/builds/push-images/
+      title: Push images to Docker Cloud
+    - path: /docker-cloud/builds/image-scan/
+      title: Docker Security Scanning
+    - path: /docker-cloud/builds/automated-build/
+      title: Automated builds
+    - path: /docker-cloud/builds/automated-testing/
+      title: Automated repository tests
+    - path: /docker-cloud/builds/advanced/
+      title: Advanced options for Autobuild and Autotest
+  - sectiontitle: Manage Infrastructure
+    section:
+    - path: /docker-cloud/infrastructure/
+      title: Infrastructure Overview
+    - path: /docker-cloud/infrastructure/deployment-strategies/
+      title: Container distribution strategies
+    - path: /docker-cloud/infrastructure/link-aws/
+      title: Link to Amazon Web Services hosts
+    - path: /docker-cloud/infrastructure/link-do/
+      title: Link to DigitalOcean hosts
+    - path: /docker-cloud/infrastructure/link-azure/
+      title: Link to Microsoft Azure hosts
+    - path: /docker-cloud/infrastructure/link-packet/
+      title: Link to Packet hosts
+    - path: /docker-cloud/infrastructure/link-softlayer/
+      title: Link to SoftLayer hosts
+    - path: /docker-cloud/infrastructure/ssh-into-a-node/
+      title: SSH into a Docker Cloud-managed node
+    - path: /docker-cloud/infrastructure/docker-upgrade/
+      title: Upgrade Docker Engine on a node
+    - path: /docker-cloud/infrastructure/byoh/
+      title: Use the Docker Cloud Agent
+    - path: /docker-cloud/infrastructure/cloud-on-packet.net-faq/
+      title: Using Docker Cloud and Packet.net
+    - path: /docker-cloud/infrastructure/cloud-on-aws-faq/
+      title: Using Docker Cloud on AWS
   - path: /docker-cloud/slack-integration/
     title: Docker Cloud notifications in Slack
   - path: /docker-cloud/installing-cli/
