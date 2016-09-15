@@ -13,11 +13,13 @@ lsi: false
 
 gems:
   - jekyll-redirect-from
+  - jekyll-sitemap
 
 defaults:
   -
     scope:
       path: ""
+      type: "pages"
     values:
       layout: docs
 
