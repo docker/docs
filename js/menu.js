@@ -1,7 +1,6 @@
 jQuery(document).ready(function(){
     $('.expand-menu').on('click touchstart', function(elem) {
 //      menu = elem.currentTarget.nextElementSibling
-      console.log("menu.js firing!")
       menu = elem.currentTarget.parentElement
       if (menu.classList.contains("menu-closed")) {
         menu.classList.remove("menu-closed")
@@ -12,7 +11,9 @@ jQuery(document).ready(function(){
       }
       return false;
     });
-
+    $(".currentPage").each(function(){
+      $(this).parentsUntil($('.docsidebarnav_section')).addClass("active").removeClass("menu-closed").addClass("menu-open");
+    });
     $("#TableOfContents ul").empty();
 
     var prevH2Item = null;

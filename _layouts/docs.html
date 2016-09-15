@@ -203,7 +203,7 @@ ng\:form {
 						 }
 						 </script>
             </div>
-						{% if page.notoc != "true" %}
+						{% if page.notoc != true %}
 						<div class="hidden-xs hidden-sm col-md-2 col-xl-1 tableofcontents_section">
                 <section class="section" id="TableOfContentsSection">
 						    <span class="title_section">
@@ -261,32 +261,7 @@ background-image: -moz-linear-gradient(top, #75ae4c, #99c47c);
 background-image: linear-gradient(to bottom, #75ae4c, #99c47c);
 }
 </style>
-                <div class="mktoFormRow">
-                  <div class="mktoFieldDescriptor mktoFormCol" style="margin-bottom: 10px;">
-                    <div class="mktoOffset" style="width: 10px;"></div>
-                    <div class="mktoFieldWrap mktoRequiredField">
-                      <label for="Email" class="mktoLabel mktoHasWidth" style="width: 100px;">
-                      <div class="mktoAsterix">*</div>
-                      Email Address:
-                      </label>
-                      <div class="mktoGutter mktoHasWidth" style="width: 10px;"></div>
-                      <input id="Email" name="Email" maxlength="255" type="email" class="mktoField mktoEmailField mktoHasWidth mktoRequired" style="width: 150px;">
-                      <div class="mktoClear"></div>
-                    </div>
-                    <div class="mktoClear"></div>
-                  </div>
-                  <div class="mktoClear"></div>
-                </div>
-                <div class="mktoFormRow">
-                  <input type="hidden" name="list_1019" class="mktoField mktoFieldDescriptor mktoFormCol" value="subscribed" style="margin-bottom: 10px;">
-                  <div class="mktoClear"></div>
-                </div>
-                <div class="mktoButtonRow"><span class="mktoButtonWrap mktoSimple" style="margin-left: 120px;">
-                  <button type="submit" class="mktoButton">Submit</button>
-                  </span></div>
-                <input type="hidden" name="formid" class="mktoField mktoFieldDescriptor" value="1038">
-                <input type="hidden" name="munchkinId" class="mktoField mktoFieldDescriptor" value="929-FJL-178">
-              </form>
+  </form>
               <script>
 							MktoForms2.loadForm("//app-sj05.marketo.com", "929-FJL-178", 1038, function(form) {
 								form.onSuccess(function(values, followUpUrl) {
