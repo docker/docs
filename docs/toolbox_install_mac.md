@@ -175,7 +175,11 @@ Virtual Box VM, it maintains its configuration between uses.
 
 ## How to uninstall Toolbox
 
-Removing Toolbox involves removing all the Docker components it includes. In some cases, you might want to keep the machines you created with Docker Machine, so that step is described here as optional.
+Removing Toolbox involves removing all the Docker components it includes.
+
+A full uninstall also includes removing the local and remote machines you created with Docker Machine. In some cases, you might want to keep machines created with Docker Machine.
+
+For example, if you plan to re-install Docker Machine as a part of Docker for Mac you can continue to manage those machines through Docker. Or, if you have remote machines on a cloud provider and you plan to manage them using the provider, you wouldn't want to remove them.  So the step to remove machines is described here as optional.
 
 To uninstall Toolbox on a Mac, do the following:
 
