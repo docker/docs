@@ -168,4 +168,31 @@ A Windows specific problem you might encounter has to do with the NDIS6 host net
 versions. For Windows Vista systems and newer, VirtualBox installs NDIS6 driver by default. Issues can range from system slowdowns to networking problems for the virtual machine (VM). If you notice problems, **re-run the Docker Toolbox installer**, and select the option to _**install VirtualBox with the NDIS5 driver**_.
 
 
+## How to uninstall Toolbox
+
+Removing Toolbox involves removing all the Docker components it includes. In
+some cases, you might want to keep the machines you created with Docker Machine, so that step is described here as optional.
+
+To uninstall Toolbox on Windows, do the following:
+
+1. List your machines.
+  ```
+    $ docker-machine ls
+    NAME                ACTIVE   DRIVER       STATE     URL                        SWARM
+    dev                 *        virtualbox   Running   tcp://192.168.99.100:2376   
+    my-docker-machine            virtualbox   Stopped                               
+    default                      virtualbox   Stopped  
+  ```
+
+2. Optionally, remove each machine. For example:
+
+    ```
+    $ docker-machine rm my-docker-machine
+    Successfully removed my-docker-machine
+    ```
+
+3. Uninstall Docker Toolbox using Window’s standard process for uninstalling programs through the control panel.
+
+    >**Note:** This process does not remove the `docker-install.exe` file. You must delete that file yourself.
+
 &nbsp;
