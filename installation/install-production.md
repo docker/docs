@@ -27,10 +27,14 @@ infrastructure has all the [requirements UCP needs to run](system-requirements.m
 ## Step 2: Install CS Docker on all nodes
 
 UCP is a containerized application that requires CS Docker Engine 1.12.0 or
-above to run. Note: It is recommended to install the exact same version of the CS Docker Engine across all nodes to avoid experiencing any issues during and after the install.
+above to run.
 
 So on each host that you want to be part of the UCP cluster,
-[install CS Docker Engine 1.12.0 or above](https://docs.docker.com/docker-trusted-registry/cs-engine/install/). In the case where you are creating a VM template with CS Engine already installed, make sure that `/etc/docker/key.json` is not included in the image. You can do this by simply removing `/etc/docker/key.json`. You can then restart Docker on each node, which will generate new `/etc/docker/key.json` files.
+[install CS Docker Engine 1.12.0 or above](https://docs.docker.com/docker-trusted-registry/cs-engine/install/).
+
+Note: It is recommended to install the exact same version of the CS Docker Engine across all nodes to avoid experiencing any issues during and after the install.
+
+In the case where you are creating a VM template with CS Engine already installed, make sure that `/etc/docker/key.json` is not included in the image. You can do this by simply removing `/etc/docker/key.json`. You can then restart Docker on each node, which will generate new `/etc/docker/key.json` files.
 
 
 ## Step 3: Customize named volumes
