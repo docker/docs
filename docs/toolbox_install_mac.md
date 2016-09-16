@@ -172,3 +172,35 @@ Virtual Box VM, it maintains its configuration between uses.
 
         For more examples and ideas, visit:
         https://docs.docker.com/userguide/
+
+## How to uninstall Toolbox
+
+Removing Toolbox involves removing all the Docker components it includes. In some cases, you might want to keep the machines you created with Docker Machine, so that step is described here as optional.
+
+To uninstall Toolbox on a Mac, do the following:
+
+1. List your machines.
+  ```
+    $ docker-machine ls
+    NAME                ACTIVE   DRIVER       STATE     URL                        SWARM
+    dev                 *        virtualbox   Running   tcp://192.168.99.100:2376   
+    my-docker-machine            virtualbox   Stopped                               
+    default                      virtualbox   Stopped  
+  ```
+
+2. Optionally, remove each machine. For example:
+
+    ```
+    $ docker-machine rm my-docker-machine
+    Successfully removed my-docker-machine
+    ```
+
+3. Remove the Docker Quickstart Terminal and Kitematic from your “Applications” folder.
+
+4. Remove the `docker`, `docker-compose`, and `docker-machine` commands from the `/usr/local/bin` folder.
+
+    ```
+    $ rm /usr/local/bin/docker
+    $ rm /usr/local/bin/docker-compose
+    $ rm /usr/local/bin/docker-machine
+    ```
