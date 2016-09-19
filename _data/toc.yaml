@@ -1,6 +1,18 @@
 toc:
 - title: What is the Docker Platform?
   path: /
+- sectiontitle: Getting Started with Docker
+  section:
+  - path: /getting-started/
+    title: Part 1
+  - path: /getting-started/part2/
+    title: Part 2
+  - path: /getting-started/part3/
+    title: Part 3
+  - path: /getting-started/part4/
+    title: Part 4
+  - path: /getting-started/part5/
+    title: Part 5
 - sectiontitle: Docker Engine
   section:
   - sectiontitle: Install
