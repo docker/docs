@@ -781,70 +781,70 @@ toc:
         title: remove
       - path: /docker-trusted-registry/reference/restore/
         title: restore
-    - sectiontitle: Configuration
-      section:
-      - path: /docker-trusted-registry/configure/configuration/
-        title: Configuration overview
-      - path: /docker-trusted-registry/configure/config-general/
-        title: Configure general settings
-      - path: /docker-trusted-registry/configure/config-security/
-        title: Security configuration
-      - path: /docker-trusted-registry/configure/config-storage/
-        title: Storage configuration
-      - path: /docker-trusted-registry/configure/config-auth/
-        title: Auth configuration
-    - sectiontitle: Monitor and troubleshoot
-      section:
-      - path: /docker-trusted-registry/monitor-troubleshoot/
-        title: Monitor DTR
-      - path: /docker-trusted-registry/monitor-troubleshoot/troubleshoot/
-        title: Troubleshoot DTR
-    - sectiontitle: High-availability
-      section:
-      - path: /docker-trusted-registry/high-availability/
-        title: Set up high availability
-      - path: /docker-trusted-registry/high-availability/backups-and-disaster-recovery/
-        title: Backups and disaster recovery
-    - sectiontitle: User management
-      section:
-      - path: /docker-trusted-registry/user-management/
-        title: Authentication and authorization
-      - path: /docker-trusted-registry/user-management/create-and-manage-users/
-        title: Create and manage users
-      - path: /docker-trusted-registry/user-management/create-and-manage-orgs/
-        title: Create and manage organizations
-      - path: /docker-trusted-registry/user-management/create-and-manage-teams/
-        title: Create and manage teams
-      - path: /docker-trusted-registry/user-management/permission-levels/
-        title: Permission levels
-    - sectiontitle: Repositories and images
-      section:
-      - path: /docker-trusted-registry/repos-and-images/
-        title: Configure your Docker Engine
-      - path: /docker-trusted-registry/repos-and-images/pull-an-image/
-        title: Pull an image
-      - path: /docker-trusted-registry/repos-and-images/push-an-image/
-        title: Push an image
-      - path: /docker-trusted-registry/repos-and-images/delete-an-image/
-        title: Delete an image
-    - sectiontitle: DTR APIs
-      section:
-      - path: /apidocs/overview/
-        title: Overview
-      - path: /apidocs/v1.3.3/
-        title: v1.3.3 API
-      - path: /apidocs/v1.4.0/
-        title: v1.4.0 API
-      - path: /apidocs/v2.0.0/
-        title: v2.0.0 API
-      - path: /apidocs/v2.0.1/
-        title: v2.0.1 API
-    - sectiontitle: Release notes
-      section:
-      - path: /docker-trusted-registry/release-notes/
-        title: Trusted Registry release notes
-      - path: /docker-trusted-registry/release-notes/prior-release-notes/
-        title: Prior Trusted Registry release notes
+  - sectiontitle: Configuration
+    section:
+    - path: /docker-trusted-registry/configure/configuration/
+      title: Configuration overview
+    - path: /docker-trusted-registry/configure/config-general/
+      title: Configure general settings
+    - path: /docker-trusted-registry/configure/config-security/
+      title: Security configuration
+    - path: /docker-trusted-registry/configure/config-storage/
+      title: Storage configuration
+    - path: /docker-trusted-registry/configure/config-auth/
+      title: Auth configuration
+  - sectiontitle: Monitor and troubleshoot
+    section:
+    - path: /docker-trusted-registry/monitor-troubleshoot/
+      title: Monitor DTR
+    - path: /docker-trusted-registry/monitor-troubleshoot/troubleshoot/
+      title: Troubleshoot DTR
+  - sectiontitle: High-availability
+    section:
+    - path: /docker-trusted-registry/high-availability/
+      title: Set up high availability
+    - path: /docker-trusted-registry/high-availability/backups-and-disaster-recovery/
+      title: Backups and disaster recovery
+  - sectiontitle: User management
+    section:
+    - path: /docker-trusted-registry/user-management/
+      title: Authentication and authorization
+    - path: /docker-trusted-registry/user-management/create-and-manage-users/
+      title: Create and manage users
+    - path: /docker-trusted-registry/user-management/create-and-manage-orgs/
+      title: Create and manage organizations
+    - path: /docker-trusted-registry/user-management/create-and-manage-teams/
+      title: Create and manage teams
+    - path: /docker-trusted-registry/user-management/permission-levels/
+      title: Permission levels
+  - sectiontitle: Repositories and images
+    section:
+    - path: /docker-trusted-registry/repos-and-images/
+      title: Configure your Docker Engine
+    - path: /docker-trusted-registry/repos-and-images/pull-an-image/
+      title: Pull an image
+    - path: /docker-trusted-registry/repos-and-images/push-an-image/
+      title: Push an image
+    - path: /docker-trusted-registry/repos-and-images/delete-an-image/
+      title: Delete an image
+  - sectiontitle: DTR APIs
+    section:
+    - path: /apidocs/overview/
+      title: Overview
+    - path: /apidocs/v1.3.3/
+      title: v1.3.3 API
+    - path: /apidocs/v1.4.0/
+      title: v1.4.0 API
+    - path: /apidocs/v2.0.0/
+      title: v2.0.0 API
+    - path: /apidocs/v2.0.1/
+      title: v2.0.1 API
+  - sectiontitle: Release notes
+    section:
+    - path: /docker-trusted-registry/release-notes/
+      title: Trusted Registry release notes
+    - path: /docker-trusted-registry/release-notes/prior-release-notes/
+      title: Prior Trusted Registry release notes
   - path: /docker-trusted-registry/support/
     title: Get support
 - sectiontitle: Docker Cloud
