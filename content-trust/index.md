@@ -167,6 +167,13 @@ trusted repository.
 Valid delegation roles take the form of `targets/<delegation>`, where
 `<delegation>` does not include further slashes.
 
+Before delegation role users can publish signed content with Notary or
+Docker Content Trust, they must import the private key associated with the user certificate:
+
+```bash
+$ notary key import key.pem
+```
+
 ## Where to go next
 
 * [Manage trusted repositories](manage-trusted-repositories.md)
