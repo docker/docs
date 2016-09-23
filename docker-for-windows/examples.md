@@ -24,6 +24,6 @@ For now, if you want get started experimenting with the Beta apps and Docker Com
 
 <a href=https://docs.docker.com/compose/wordpress/ target="_blank">Quickstart: Compose and WordPress</a>
 
-See also [learn by example](/engine/tutorials/index.md) tutorials on building images, runnning containers, networking, managing data, and storing images on Docker Hub.
+See also [learn by example](/engine/tutorials/index.md) tutorials on building images, running containers, networking, managing data, and storing images on Docker Hub.
 
 <p style="margin-bottom:300px">&nbsp;</p>
