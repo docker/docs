@@ -3,7 +3,7 @@ aliases:
 - /swarm/swarm_at_scale/about/
 description: Try Swarm at scale
 keywords:
-- docker, swarm, scale, voting, application, archiecture
+- docker, swarm, scale, voting, application, architecture
 menu:
   main:
     parent: scale_swarm
@@ -33,7 +33,7 @@ vote is counted.
 The voting application is composed of several microservices. It uses a parallel
 web frontend that sends jobs to asynchronous background workers. The
 application's design can accommodate arbitrarily large scale. The diagram below
-shows the appliation's high level architecture:
+shows the application's high level architecture:
 
 ![](../images/app-architecture.png)
 

@@ -78,4 +78,4 @@ whenever a new image is pushed. See the [Autoredeploy documentation](auto-redepl
 ## Redeploy a service using webhooks
 
 You can also use **triggers** to redeploy a service, for example when its image
-is pushed or rebuilt in a third-party registry. See the [Triggers documentaiton](triggers.md) to learn more.
+is pushed or rebuilt in a third-party registry. See the [Triggers documentation](triggers.md) to learn more.

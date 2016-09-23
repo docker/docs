@@ -268,7 +268,7 @@ To get a popup menu with application options, right-click the whale:
 
 ![Docker for Windows popup menu](images/config-popup-menu-win.png)
 
-The **Settings** dialogs provide options to allow Docker auto-start, automatically check for updates, share local drives with Docker containers, enable VPN compatibilty, manage CPUs and memory Docker uses, restart Docker, or perform a factory reset.
+The **Settings** dialogs provide options to allow Docker auto-start, automatically check for updates, share local drives with Docker containers, enable VPN compatibility, manage CPUs and memory Docker uses, restart Docker, or perform a factory reset.
 
 **Beta 26** includes an option to switch between Windows and Linux conatiners. See [Switch between Windows and Linux containers (Beta 26)](#switch-between-windows-and-linux-containers-beta-26). This is not yet available on stable builds.
 
@@ -321,7 +321,7 @@ You can configure Docker for Windows networking to work on a virtual private net
 
 ![Network settings](images/settings-network.png)
 
->**Note:** Some users reported problems connecting to Docker Hub on Docker for Windows stable version. This would manifest as an error when trying to run `docker` commands that pull images from Docker Hub that are not alredy downloaded, such as a first time run of `docker run hello-world`. If you encounter this, reset the DNS server to use the Google DNS fixed address: `8.8.8.8`. For more information, see [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
+>**Note:** Some users reported problems connecting to Docker Hub on Docker for Windows stable version. This would manifest as an error when trying to run `docker` commands that pull images from Docker Hub that are not already downloaded, such as a first time run of `docker run hello-world`. If you encounter this, reset the DNS server to use the Google DNS fixed address: `8.8.8.8`. For more information, see [Networking issues](troubleshoot.md#networking-issues) in Troubleshooting.
 
 Note that updating these settings requires a reconfiguration and reboot of the Linux VM.
 
@@ -400,7 +400,7 @@ If you want to go back to using Docker Toolbox, you have to disable the Hyper-V 
 
 * Try out the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
-* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on building images, runnning containers, networking, managing data, and storing images on Docker Hub.
+* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on building images, running containers, networking, managing data, and storing images on Docker Hub.
 
 * See [Example Applications](examples.md) for example applications that include setting up services and databases in Docker Compose.
 
@@ -412,7 +412,7 @@ If you want to go back to using Docker Toolbox, you have to disable the Hyper-V 
 
 * For a summary of Docker command line interface (CLI) commands, see [Docker CLI Reference Guide](/engine/reference/index.md).
 
-* Check out the <a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">blog posts</a> on Docker for Mac and Docker for Windows public betas, and <a href="https://blog.docker.com/2016/03/docker-for-mac-windows-beta/">earlier posts</a> on the intial private beta.
+* Check out the <a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">blog posts</a> on Docker for Mac and Docker for Windows public betas, and <a href="https://blog.docker.com/2016/03/docker-for-mac-windows-beta/">earlier posts</a> on the initial private beta.
 
 * Please give feedback on your experience with the app and report bugs and problems by logging into our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows).
 

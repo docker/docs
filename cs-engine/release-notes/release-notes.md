@@ -83,7 +83,7 @@ This release addresses the following issues:
 [#22947](https://github.com/docker/docker/pull/22947)
 * Fix a possible deadlock on image deletion and container attach
 [#22918](https://github.com/docker/docker/pull/22918)
-* Fix an issue causing `docker ps` to hange when using devicemapper
+* Fix an issue causing `docker ps` to hang when using devicemapper
 [#22168](https://github.com/docker/docker/pull/22168)
 * Fix a bug preventing to `docker exec` into a container when using
 devicemapper [#22168](https://github.com/docker/docker/pull/22168)

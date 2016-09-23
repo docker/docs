@@ -24,7 +24,7 @@ file that defines the three services (lb, web, redis) you created in the
 previous steps, including all modifications and environment variables.
 
 This is what the `docker-cloud.yml` file looks like. (If you are using the
-quickstart-go version, you'll see `quickstart-go` indstead of
+quickstart-go version, you'll see `quickstart-go` instead of
 `quickstart-python`.)
 
 ```yml
