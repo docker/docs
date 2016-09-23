@@ -39,7 +39,8 @@ In the third option, the site will be viewable at `http://YOUR_GITHUB_USERNAME.g
 ## Important files
 
 - `/_data/toc.yaml` defines the left-hand navigation for the docs
-- `/_includes/tree.html` spits out the left-hand navigation's HTML, based on the contents of `/_data/toc.yaml`
+- `/js/menu.js` defines most of the docs-specific JS such as TOC generation and menu syncing
+- `/css/documentation.css` defines the docs-specific style rules
 - `/_layouts/docs.html` is the HTML template file, which defines the header and footer, and includes all the JS/CSS that serves the docs content
 
 ## Relative linking for GitHub viewing
