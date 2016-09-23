@@ -211,6 +211,19 @@ div.docsidebarnav_section.affix ul {
 .tableofcontents_section {
   padding: 0;
 }
+.rating-msg {
+  display: none !important;
+}
+#pd_rating_holder_8453675 {
+  vertical-align: bottom !important;
+}
+#rating_info_8453675 {
+  display: none !important;
+}
+
+#TableOfContents {
+  padding-top: 10px;
+}
 #TableOfContentsSection {
   margin: 0;
   padding: 0 !important;

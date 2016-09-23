@@ -175,23 +175,4 @@ as a cluster. Prefer a more linear, guided, visual tour? [Check out our self-pac
 	</div>
 </li>
 </ul>
-
-<ul class="media">
-<li>
-<div class="media_image">
-	<a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="/images/chat.png" alt="chat icon"></a>
-</div>
-	<div class="media_content">
-	<div data-mh="mh_docker_projects">
-	<h3><a href="mailto:feedback@docker.com?subject=Docker%20Feedback">Feedback!</a></h3>
-		<p>
-    Questions? Suggestions? Spot a typo?! 😱<br/>
-    Email us at <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">feedback@docker.com</a>.
-    </p>
-	</div>
-	</div>
-
-
-</li>
-</ul>
 </section>
