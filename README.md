@@ -30,3 +30,7 @@ In the third option, the site will be viewable at `http://YOUR_GITHUB_USERNAME.g
 Feel free to link to `../foo.md` so that the docs are readable in GitHub, but keep in mind that Jekyll templating notation
 `{% such as this %}` will render in raw text and not be processed. In general it's best to assume the docs are being read
 directly on docs.docker.com.
+
+## Copyright and license
+
+Code and documentation copyright 2016 Docker, inc, released under the Apache 2.0 license.
