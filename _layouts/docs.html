@@ -211,14 +211,14 @@ ng\:form {
 			       </section>
 
 						 <script language="javascript">
-						 function hasClass(element, cls) {
-						    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-						 }
 						 var x = document.links.length;
 						 for (i = 0; i < x; i++) {
 						   var thisHREF = document.links[i].href;
-						   if (thisHREF.indexOf(window.location.hostname) > -1 && !hasClass(thisHREF,"nomunge")) thisHREF = thisHREF.replace(".md","/").replace("/index/","/");
-						   document.links[i].setAttribute('href', thisHREF);
+						   if (thisHREF.indexOf(window.location.hostname) > -1 && document.links[i].className.indexOf("nomunge")<0)
+							 {
+								thisHREF = thisHREF.replace(".md","/").replace("/index/","/");
+						   	document.links[i].setAttribute('href', thisHREF);
+							 }
 						 }
 						 </script>
             </div>
