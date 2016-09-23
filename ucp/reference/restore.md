@@ -1,13 +1,12 @@
----
-description: Stream a tar file on stdin containing all local UCP data volumes.
-keywords:
-- docker, ucp, backup, restore
-menu:
-  main:
-    identifier: ucp_ref_restore
-    parent: ucp_ref
-title: restore
----
++++
+title = "restore"
+description = "Stream a tar file on stdin containing all local UCP data volumes."
+keywords= ["docker, ucp, backup, restore"]
+[menu.main]
+parent = "ucp_ref"
+identifier = "ucp_ref_restore"
++++
+
 
 # docker/ucp id
 

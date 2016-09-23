@@ -1,14 +1,14 @@
----
-description: Learn how to access Docker Universal Control Plane from the web browser.
-keywords:
-- docker, ucp, web, administration
-menu:
-  main:
-    identifier: ucp_web_access
-    parent: mn_ucp_access
-    weight: 0
-title: Web-based access
----
+<!--[metadata]>
++++
+title = "Web-based access"
+description = "Learn how to access Docker Universal Control Plane from the web browser."
+keywords = ["docker, ucp, web, administration"]
+[menu.main]
+parent="mn_ucp_access"
+identifier="ucp_web_access"
+weight=0
++++
+<![end-metadata]-->
 
 # Web-based access
 

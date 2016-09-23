@@ -1,13 +1,11 @@
----
-description: Generate a support dump for this engine.
-keywords:
-- docker, ucp, support, logs
-menu:
-  main:
-    identifier: ucp_ref_support
-    parent: ucp_ref
-title: support
----
++++
+title = "support"
+description = "Generate a support dump for this engine."
+keywords= ["docker, ucp, support, logs"]
+[menu.main]
+parent = "ucp_ref"
+identifier = "ucp_ref_support"
++++
 
 # docker/ucp support
 

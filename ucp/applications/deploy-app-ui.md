@@ -1,15 +1,14 @@
----
-description: Learn how to deploy containerized applications on a cluster, with Docker
-  Universal Control Plane.
-keywords:
-- ucp, deploy, application
-menu:
-  main:
-    identifier: ucp_deploy_ui
-    parent: mn_ucp_applications
-    weight: 0
-title: Deploy an app from the UI
----
+<!--[metadata]>
++++
+title = "Deploy an app from the UI"
+description = "Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane."
+keywords = ["ucp, deploy, application"]
+[menu.main]
+parent="mn_ucp_applications"
+identifier="ucp_deploy_ui"
+weight=0
++++
+<![end-metadata]-->
 
 # Deploy an app from the UI
 

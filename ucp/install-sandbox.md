@@ -1,16 +1,16 @@
----
-aliases:
-- /ucp/evaluation-install/
-description: Evaluation installation
-keywords:
-- tbd, tbd
-menu:
-  main:
-    identifier: ucp_evaluate_sandbox
-    parent: mn_ucp
-    weight: 10
-title: Evaluate UCP in a sandbox
----
+<!--[metadata]>
++++
+aliases = ["/ucp/evaluation-install/"]
+title = "Evaluate UCP in a sandbox"
+description = "Evaluation installation"
+keywords = ["tbd, tbd"]
+[menu.main]
+parent="mn_ucp"
+identifier="ucp_evaluate_sandbox"
+weight=10
++++
+<![end-metadata]-->
+
 
 # Evaluate UCP in a sandbox
 

@@ -1,16 +1,16 @@
----
-aliases:
-- /ucp/dtr-integration/
-description: Integrate UCP with Docker Trusted Registry
-keywords:
-- trusted, registry, integrate, UCP, DTR
-menu:
-  main:
-    identifier: ucp_integrate_dtr
-    parent: mn_ucp_configuration
-    weight: 20
-title: Integrate with Docker Trusted Registry
----
+<!--[metadata]>
++++
+aliases = [ "/ucp/dtr-integration/"]
+title = "Integrate with Docker Trusted Registry"
+description = "Integrate UCP with Docker Trusted Registry"
+keywords = ["trusted, registry, integrate, UCP, DTR"]
+[menu.main]
+parent="mn_ucp_configuration"
+identifier="ucp_integrate_dtr"
+weight=20
++++
+<![end-metadata]-->
+
 
 # Integrate with Docker Trusted Registry
 
