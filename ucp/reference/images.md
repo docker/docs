@@ -1,13 +1,11 @@
----
-description: Verify the UCP images on this Docker Engine.
-keywords:
-- images, ucp, images
-menu:
-  main:
-    identifier: ucp_ref_images
-    parent: ucp_ref
-title: images
----
++++
+title = "images"
+description = "Verify the UCP images on this Docker Engine."
+keywords= ["images, ucp, images"]
+[menu.main]
+parent = "ucp_ref"
+identifier = "ucp_ref_images"
++++
 
 # docker/ucp images
 

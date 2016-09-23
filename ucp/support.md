@@ -1,16 +1,14 @@
----
-description: Your Docker subscription gives you access to prioritized support. You
-  can file tickets via email, your the support portal.
-keywords:
-- Docker, support
-- help
-menu:
-  main:
-    identifier: ucp_support
-    parent: mn_ucp
-    weight: 100
-title: Get support
----
+<!--[metadata]>
++++
+title ="Get support"
+description="Your Docker subscription gives you access to prioritized support. You can file tickets via email, your the support portal."
+keywords = ["Docker, support", "help"]
+[menu.main]
+parent="mn_ucp"
+identifier="ucp_support"
+weight=100
++++
+<![end-metadata]-->
 
 # Get support
 

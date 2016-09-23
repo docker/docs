@@ -1,17 +1,14 @@
----
-description: Release notes for Docker Universal Control Plane. Learn more about the
-  changes introduced in the latest versions.
-keywords:
-- Docker, UCP
-- Release notes
-- Versions
-menu:
-  main:
-    identifier: ucp_rnotes
-    parent: mn_ucp
-    weight: 110
-title: Release Notes
----
+<!--[metadata]>
++++
+title ="Release Notes"
+description="Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions."
+keywords = ["Docker, UCP", "Release notes", "Versions"]
+[menu.main]
+identifier="ucp_rnotes"
+parent="mn_ucp"
+weight=110
++++
+<![end-metadata]-->
 
 # UCP Release Notes
 
@@ -19,6 +16,56 @@ Here you can learn about new features, bug fixes, breaking changes and
 known issues for each UCP version.
 You can then use [the upgrade instructions](installation/upgrade.md), to
 upgrade your installation to the latest release.
+
+
+## Version 1.1.3
+
+Note: UCP 1.1.3 supports Docker Engine 1.12 but does not use the built-in
+orchestration capabilities provided by the Docker Engine with swarm mode enabled.
+When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
+cluster using Docker Swarm v1.2.5.
+
+**Security Update**
+
+Fixes a security issue by which a malicious user with limited privileges can
+escalate their privileges to perform unauthorized actions on the cluster via
+the API.
+
+This issue affects deployments of Universal Control Plane versions 1.1.2 or
+prior, and can only be used to gain access to the system by someone who already
+has a UCP account.
+
+This issue was discovered by our development team during internal testing.
+
+**Features**
+
+* Core
+  * Upgraded Docker Swarm to 1.2.5
+  * Non-admin users no longer have the ability to edit or delete UCP/DTR volumes
+	and networks.
+  * The Pull Image, Delete Image, Create Volume, Delete Volume, Create Network
+    and Delete Network operations are now inaccessible to users with View Only
+	default permissions or lower.
+
+**Bug Fixes**
+
+* Improved system performance when large numbers of overlay networks are deployed
+  on the cluster.
+* Fixed an issue which affected container rescheduling on clusters with overlay
+  networks.
+* Fixed an issue which affected synchronizing organization owners (admins) in
+  LDAP when migrating from DTR 1.4.3 to 2.0.x
+* Fixed an issue where UCP/DTR integration config was not loaded when UCP
+  controller was restarted.
+* Fixed an issue in the GUI where the sidebar does not display when first
+  logging into UCP.
+* Fixed an issue where volumes created through the UCP GUI did not correctly
+  populate the labels field.
+
+**Known Issues**
+
+* This version of UCP cannot be installed on Engine 1.12 host with swarm mode
+enabled, and is not compatible with swarm-mode based APIs, e.g. `docker service`.
 
 ## Version 1.1.2
 

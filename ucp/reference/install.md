@@ -1,13 +1,11 @@
----
-description: Install Docker Universal Control Plane.
-keywords:
-- install, ucp
-menu:
-  main:
-    identifier: ucp_ref_install
-    parent: ucp_ref
-title: install
----
++++
+title = "install"
+description = "Install Docker Universal Control Plane."
+keywords= ["install, ucp"]
+[menu.main]
+parent = "ucp_ref"
+identifier = "ucp_ref_install"
++++
 
 # docker/ucp install
 

@@ -1,13 +1,11 @@
----
-description: Joins a node to an existing Docker Universal Control Plane cluster.
-keywords:
-- join, ucp
-menu:
-  main:
-    identifier: ucp_ref_join
-    parent: ucp_ref
-title: join
----
++++
+title = "join"
+keywords= ["join, ucp"]
+description = "Joins a node to an existing Docker Universal Control Plane cluster."
+[menu.main]
+parent = "ucp_ref"
+identifier = "ucp_ref_join"
++++
 
 # docker/ucp join
 

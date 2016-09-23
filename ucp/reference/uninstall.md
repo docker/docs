@@ -1,13 +1,11 @@
----
-description: Uninstall a UCP controller and nodes
-keywords:
-- uninstall, ucp
-menu:
-  main:
-    identifier: ucp_ref_uninstall
-    parent: ucp_ref
-title: uninstall
----
++++
+title = "uninstall"
+keywords= ["uninstall, ucp"]
+description = "Uninstall a UCP controller and nodes"
+[menu.main]
+parent = "ucp_ref"
+identifier = "ucp_ref_uninstall"
++++
 
 # docker/ucp uninstall
 

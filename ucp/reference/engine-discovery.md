@@ -1,13 +1,11 @@
----
-description: Manage the engine discovery configuration on a node.
-keywords:
-- docker, ucp, discovery
-menu:
-  main:
-    identifier: ucp_ref_engine_discovery
-    parent: ucp_ref
-title: engine-discovery
----
++++
+title = "engine-discovery"
+description = "Manage the engine discovery configuration on a node."
+keywords= ["docker, ucp, discovery"]
+[menu.main]
+parent = "ucp_ref"
+identifier="ucp_ref_engine_discovery"
++++
 
 # docker/ucp engine-discovery
 

@@ -1,17 +1,15 @@
----
-aliases:
-- /ucp/plan-production-install/
-description: Learn about the Docker Universal Control Plane architecture, and the
-  requirements to install it on production.
-keywords:
-- docker, ucp, install, checklist
-menu:
-  main:
-    identifier: ucp_plan_production_install
-    parent: mn_ucp_installation
-    weight: 10
-title: Plan a production installation
----
+<!--[metadata]>
++++
+aliases = ["/ucp/plan-production-install/"]
+title = "Plan a production installation"
+description = "Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production."
+keywords = ["docker, ucp, install, checklist"]
+[menu.main]
+parent="mn_ucp_installation"
+identifier="ucp_plan_production_install"
+weight=10
++++
+<![end-metadata]-->
 
 # Plan a production installation
 
@@ -30,14 +28,13 @@ comply with the [system requirements](system-requirements.md).
 
 ## Hostname strategy
 
-Docker UCP requires CS Docker Engine to run. Before installing the commercially
-supported Docker Engine on your cluster nodes, you should plan for a common
-hostname strategy.
+Docker UCP requires the Docker CS Engine to run. Before installing Docker CS
+Engine on the cluster nodes, you should plan for a common naming strategy.
 
 Decide if you want to use short hostnames like `engine01` or Fully Qualified
 Domain Names (FQDN) likes `engine01.docker.vm`. Independently of your choice,
-ensure your naming strategy is consistent across the cluster, since Docker
-Engine and UCP use hostnames.
+ensure your naming strategy is consistent across the cluster, since UCP uses
+the hostnames.
 
 As an example, if your cluster has 4 hosts you can name them:
 
@@ -54,14 +51,22 @@ Docker UCP requires each node on the cluster to have a static IP address.
 Before installing UCP, ensure your network and nodes are configured to support
 this.
 
+## Time Synchronization
+
+In distributed systems such as Docker UCP, time synchronization is critical
+to ensure proper operation. As a best practice to ensure consistency between
+then engines in a UCP cluster, all engines should regularly synchronize time
+with a NTP server. If a server's clock is skewed, unexpected behavior may
+cause poor performance or even failures.
+
 ## Load balancing strategy
 
-Docker UCP does not include a load balancer. You can configure your own
-load balancer to balance user requests across all controller nodes.
+UCP Docker UCP does not include a load-balancer. You can configure your own
+load-balancer to balance user requests across all controller nodes.
 
 If you plan on using a load balancer, you need to decide whether you are going
 to add the nodes to the load balancer using their IP address, or their FQDN.
-Independently of what you choose, it should be consistent across nodes.
+Independently of what you choose, it should be consistent across the  nodes.
 
 After that, you should take note of all IPs or FQDNs before starting the
 installation.
@@ -81,14 +86,14 @@ or port number.
 ## Using external CAs
 
 You can customize UCP to use certificates signed by an external Certificate
-Authority. When using your own certificates, take in consideration that you
-need to have a certificate bundle that has:
+Authority. If you decide to use your own CAs take in consideration that:
 
-* A ca.pem file with the root CA public certificate,
-* A cert.pem file with the server certificate and any intermediate CA public
-certificates. This certificate should also have SANs for all addresses used to
-reach the UCP controller,
-* A key.pem file with server private key.
+* During the installation you need to copy the ca.pem, cert.pem, and key.pem
+files across all controller hosts,
+* The ca.pem is the root CA public certificate
+* The cert.pem is the server cert plus any intermediate CA public certificates,
+* The cert.pem should have SANs for all addresses used to reach UCP,
+* The key.pem is the server private key,
 
 You can have a certificate for each controller, with a common SAN. As an
 example, on a three node cluster you can have:
@@ -97,11 +102,14 @@ example, on a three node cluster you can have:
 * engine02.docker.vm with SAN ducp.docker.vm
 * engine03.docker.vm with SAN ducp.docker.vm
 
+## File transfer across hosts
 
-Alternatively, you can also install UCP with a single externally-signed
-certificate for all controllers rather than one for each controller node.
-In that case, the certificate files will automatically be copied to any new
-controller nodes joining the cluster or being promoted into controllers.
+Make sure you can transfer file between the hosts on the cluster. You will
+need to replicate CAs across controller nodes.
+
+For this, you can tools like `scp` or `rsync`, or configure the hosts to use
+a network file system.
+
 
 ## Where to go next
 

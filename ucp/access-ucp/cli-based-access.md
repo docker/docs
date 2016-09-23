@@ -1,14 +1,14 @@
----
-description: Learn how to access Docker Universal Control Plane from the CLI.
-keywords:
-- docker, ucp, cli, administration
-menu:
-  main:
-    identifier: ucp_cli_access
-    parent: mn_ucp_access
-    weight: 10
-title: CLI-based access
----
+<!--[metadata]>
++++
+title = "CLI-based access"
+description = "Learn how to access Docker Universal Control Plane from the CLI."
+keywords = ["docker, ucp, cli, administration"]
+[menu.main]
+parent="mn_ucp_access"
+identifier="ucp_cli_access"
+weight=10
++++
+<![end-metadata]-->
 
 # CLI-based access
 

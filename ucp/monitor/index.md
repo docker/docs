@@ -1,16 +1,15 @@
----
-aliases:
-- /ucp/manage/
-description: Manage, monitor, troubleshoot
-keywords:
-- manage, monitor, troubleshoot
-menu:
-  main:
-    identifier: mn_monitor_ucp
-    parent: mn_ucp
-    weight: 50
-title: Monitor and troubleshoot
----
+<!--[metadata]>
++++
+aliases = [ "/ucp/manage/"]
+title = "Monitor and troubleshoot"
+description = "Manage, monitor, troubleshoot"
+keywords = ["manage, monitor, troubleshoot"]
+[menu.main]
+parent="mn_ucp"
+identifier="mn_monitor_ucp"
+weight=50
++++
+<![end-metadata]-->
 
 # Monitor UCP
 
