@@ -1,3 +1,20 @@
+# This repo is for preview/dev purposes only
+
+The docs team is in the process of migrating to this repo. During this time we're also 
+converting from a Hugo-based doc system to a Jekyll-based doc system. That means there
+are lots of content errors and so forth at the preview URL. We're on it. 
+
+While this repo is not the source of truth, it's important to us that it be viewable
+so contributors can see what we're doing, and so that they can migrate open pull requests
+from other repos such as `docker/docker` that make doc changes, into this repo. 
+
+## Timeline of migration
+
+- During the week of Monday, September 26th, any existing docs PRs need to be migrated over or merged.
+- We’ll do one last “pull” from the various docs repos on Wednesday, September 28th, at which time the docs/ folders in the various repos will be emptied.
+- Between the 28th and full cutover, the docs team will be testing the new repo and making sure all is well across every page.
+- Full cutover (production is drawing from the new repo, new docs work is pointed at the new repo, dissolution of old docs/ folders) is complete on Monday, October 3rd.
+
 # Docs @ Docker
 
 Welcome to the repo for our documentation. This is the source for the URL
