@@ -46,7 +46,7 @@ Choose the install instructions for your platform, and follow the steps:
 
 * Try out the examples in the [Getting Started](/engine/getstarted/index.md) tutorial.
 
-* Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, runnning containers, networking, managing data, and storing images on Docker Hub.
+* Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
 
 * [Learn about Kitematic](/kitematic/userguide.md)
 

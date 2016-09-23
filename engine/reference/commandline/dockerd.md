@@ -569,7 +569,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
 
 * `btrfs.min_space`
 
-    Specifies the mininum size to use when creating the subvolume which is used
+    Specifies the minimum size to use when creating the subvolume which is used
     for containers. If user uses disk quota for btrfs when creating or running
     a container with **--storage-opt size** option, docker should ensure the
     **size** cannot be smaller than **btrfs.min_space**.

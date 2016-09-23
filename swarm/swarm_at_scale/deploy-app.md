@@ -303,15 +303,15 @@ the containers at once. This extra credit
 
     In general, Compose starts services in reverse order they appear in the file.
     So, if you want a service to start before all the others, make it the last
-    service in the file file.  This applciation relies on a volume and a network,
+    service in the file file.  This application relies on a volume and a network,
     declare those at the bottom of the file.
 
 3. Check your work against <a href="../docker-compose.yml" target="_blank">this
 result file</a>
 
-4. When you are satisifed, save the `docker-compose.yml` file to your system.
+4. When you are satisfied, save the `docker-compose.yml` file to your system.
 
-5. Set  `DOCKER_HOST` to the Swarm manager.
+5. Set `DOCKER_HOST` to the Swarm manager.
 
     ```bash
     $ DOCKER_HOST=$(docker-machine ip manager):3376

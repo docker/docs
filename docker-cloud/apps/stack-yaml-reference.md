@@ -241,7 +241,7 @@ restart: always
 ```
 
 ## roles
-A list of Docker Cloud API roles to grant the service. The only supported value is `global`, which creates an environment variable `DOCKERCLOUD_AUTH` used to authenticate againts Docker Cloud API. Learn more [here](api-roles.md).
+A list of Docker Cloud API roles to grant the service. The only supported value is `global`, which creates an environment variable `DOCKERCLOUD_AUTH` used to authenticate against Docker Cloud API. Learn more [here](api-roles.md).
 
 ```yml
 roles:

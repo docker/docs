@@ -58,7 +58,7 @@ Hackday Picture
 We are always looking for new office space to host Docker Meetups. If your
 company is willing to host a Docker Meetup, please contact us by email at
 meetup@docker.com. Previous Docker Meetups have been hosted by companies such
-as Rackspace, Twitter, MongoDB, BrightCove, DigitlOcean, Viadeo and Edmodo
+as Rackspace, Twitter, MongoDB, BrightCove, DigitalOcean, Viadeo and Edmodo
 
 ### How many attendees?
 

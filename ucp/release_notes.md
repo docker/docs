@@ -217,7 +217,7 @@ characters. This will be fixed in a future release. (Fixed in UCP 1.1.2)
   * Added the 'stop' and 'restart' commands, to stop and start UCP containers.
 ​
 * UI
-  * Now you can deploy apps from the UI using a docker-compse.yml file.
+  * Now you can deploy apps from the UI using a docker-compose.yml file.
   * There's a new setting to prevent users from deploying containers to the UCP
   controller nodes.
   * Improved usability of LDAP configuration settings.

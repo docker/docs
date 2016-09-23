@@ -78,7 +78,7 @@ To generate your access token:
 
 ### Step 4. Run Docker commands on the Droplet
 
-1. Run some `docker-machine` commands to inspect the remote host. For example, `docker-machine ip <machine>` gets the host IP adddress and `docker-machine inspect <machine>` lists all the details.
+1. Run some `docker-machine` commands to inspect the remote host. For example, `docker-machine ip <machine>` gets the host IP address and `docker-machine inspect <machine>` lists all the details.
 
         $ docker-machine ip docker-sandbox
         104.131.43.236

@@ -107,7 +107,7 @@ You should also open the following ports:
 
 * **2375/tcp**: This allows Docker Cloud to communicate with the Docker daemon running in the node. If port 2375 is not accessible, Docker Cloud attempts to connect with the node through a secure reverse tunnel.
 
-You must also open any ports that you plann to publish in your services, however these are not required to install the Docker Cloud Agent.
+You must also open any ports that you plan to publish in your services, however these are not required to install the Docker Cloud Agent.
 
 ### Supported Linux distributions
 

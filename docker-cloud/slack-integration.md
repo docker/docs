@@ -51,4 +51,4 @@ Enjoy your new Slack channel integration!
 
 * Click **Cloud Settings** in the lower left, scroll down to **Notifications**, and locate the **Slack** section. From here you can choose a new notification level, delete the webhook, or update the webhook URL.
 
-* Alternately, go to the <a href="https://slack.com/apps/manage" target="_blank">Slack App Management page</a> and click **Custom Integrations \> Incoming Webooks** to see a list of webhooks. Click the pencil icon next to the webhook configuration you want to change.
+* Alternately, go to the <a href="https://slack.com/apps/manage" target="_blank">Slack App Management page</a> and click **Custom Integrations \> Incoming Webhooks** to see a list of webhooks. Click the pencil icon next to the webhook configuration you want to change.

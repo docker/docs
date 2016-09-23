@@ -45,7 +45,7 @@ node. For example, the tutorial uses a machine named `manager1`.
     address as `192.168.99.100`. The other nodes in the swarm must be able
     to access the manager at the IP address.
 
-    The output incudes the commands to join new nodes to the swarm. Nodes will
+    The output includes the commands to join new nodes to the swarm. Nodes will
     join as managers or workers depending on the value for the `--token`
     flag.
 

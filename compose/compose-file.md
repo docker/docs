@@ -808,7 +808,7 @@ an error if it doesn't exist.
 `external` cannot be used in conjunction with other volume configuration keys
 (`driver`, `driver_opts`).
 
-In the example below, instead of attemping to create a volume called
+In the example below, instead of attempting to create a volume called
 `[projectname]_data`, Compose will look for an existing volume simply
 called `data` and mount it into the `db` service's containers.
 
@@ -902,7 +902,7 @@ an error if it doesn't exist.
 (`driver`, `driver_opts`, `ipam`, `internal`).
 
 In the example below, `proxy` is the gateway to the outside world. Instead of
-attemping to create a network called `[projectname]_outside`, Compose will
+attempting to create a network called `[projectname]_outside`, Compose will
 look for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 

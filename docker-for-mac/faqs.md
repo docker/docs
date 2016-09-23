@@ -35,7 +35,7 @@ A: Two different download channels are available for Docker for Mac:
 
 **Q: Can I switch back and forth between stable and beta versions of Docker for Mac?**
 
-A: Yes, you can switch between versions; try out the betas to see what's new, then go back to stable for other work. However, doing so can de-stabalize your development environment, particularly in cases where you switch from a newer (beta) channel to older (stable).
+A: Yes, you can switch between versions; try out the betas to see what's new, then go back to stable for other work. However, doing so can de-stabilize your development environment, particularly in cases where you switch from a newer (beta) channel to older (stable).
 
 For example, containers created with a newer beta version of Docker for Mac may not work after you switch back to stable because they may have been created leveraging beta features that aren't in stable yet. Just keep this in mind as you create and work with beta containers, perhaps in the spirit of a playground space where you are prepared to troubleshoot or start over.
 

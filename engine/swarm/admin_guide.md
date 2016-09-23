@@ -97,7 +97,7 @@ While it is possible to scale a swarm down to a single manager node, it is
 impossible to demote the last manager node. This ensures you maintain access to
 the swarm and that the swarm can still process requests. Scaling down to a
 single manager is an unsafe operation and is not recommended. If
-the last node leaves the swarm unexpetedly during the demote operation, the
+the last node leaves the swarm unexpectedly during the demote operation, the
 swarm will become unavailable until you reboot the node or restart with
 `--force-new-cluster`.
 

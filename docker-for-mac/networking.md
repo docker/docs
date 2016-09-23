@@ -64,6 +64,6 @@ This interface is actually within `HyperKit`.
 
 ### I can't ping my containers
 
-Unfortunately, due to limtations in OSX, we're unable to route traffic to containers, and from containers back to the host.
+Unfortunately, due to limitations in OSX, we're unable to route traffic to containers, and from containers back to the host.
 
 <p style="margin-bottom:300px">&nbsp;</p>
