@@ -117,7 +117,7 @@ One way to solve this problem is to update the file `/var/lib/boot2docker/profil
 
 This file lives on the VM itself, so you have to `ssh` into the machine, then edit and save the file there.
 
-You can add your machine addresses as values for a `NO_PROXY` setting, and also speicify proxy servers that you know about and you want to use. Typically setting your Docker machine URLs to `NO_PROXY` solves this type of connectivity problem, so that example is shown here.
+You can add your machine addresses as values for a `NO_PROXY` setting, and also specify proxy servers that you know about and you want to use. Typically setting your Docker machine URLs to `NO_PROXY` solves this type of connectivity problem, so that example is shown here.
 
 1. Use `ssh` to log in to the virtual machine (e.g., `default`).
 

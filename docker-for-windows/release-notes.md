@@ -492,7 +492,7 @@ Unreleased. See Beta 23 for changes.
 
 * Moved `Import from toolbox` option to the General Settings
 * Increased the timeout to write to the configuration database
-* Fixed an issue where sending anonynous stats to Mixpanel made the application stop
+* Fixed an issue where sending anonymous stats to Mixpanel made the application stop
 * Faster boot time
 * All named pipes are now prefixed with the word `docker`
 * Full version number is now displayed in the update window
@@ -575,7 +575,7 @@ This Beta release includes some significant changes:
 
 **Hot fixes**
 
-* Fixed an issue with named pipe permisions that prevented Docker from starting
+* Fixed an issue with named pipe permissions that prevented Docker from starting
 
 ### Beta 11 Release (2016-05-10 1.11.1-beta11)
 
@@ -619,7 +619,7 @@ This Beta release includes some significant changes:
 
 * Improved Settings panel, allow to configure the VM’s memory and CPUs
 * Co-exist with multiple internal Hyper-V switches and improved DHCP handling
-* Token validation is now done over HTTPS. This should fix issues with some firewalls and antiviros software.
+* Token validation is now done over HTTPS. This should fix issues with some firewalls and antivirus software.
 
 **Upgrades**
 

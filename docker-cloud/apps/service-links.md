@@ -59,11 +59,11 @@ Docker Cloud's service linking is modeled on [Docker Compose links](https://docs
 
 When you link a "client" service to a "server" service, Docker Cloud performs the following actions on the "client" service:
 
-1. Creates a group of environment variables that contian information about the exposed ports of the "server" service, including its IP address, port and protocol.
+1. Creates a group of environment variables that contain information about the exposed ports of the "server" service, including its IP address, port and protocol.
 2. Copies all of the "server" service environment variables to the "client" service with an `HOSTNAME_ENV_` prefix.
 3. Adds a DNS hostname to the Docker Cloud DNS service that resolves to the "server" service IP address.
 
-Some environment variables such as the API endpoint are updated when a serivce scales up or down. Service links are only updated when a service is deployed or redeployed, but are not updated during runtime. No new service link environment variables are created when a service scales up or down.
+Some environment variables such as the API endpoint are updated when a service scales up or down. Service links are only updated when a service is deployed or redeployed, but are not updated during runtime. No new service link environment variables are created when a service scales up or down.
 
 ### Service link example
 
@@ -77,7 +77,7 @@ Imagine that you are running a web service (`my-web-app`) with 2 containers (`my
 
 Several environment variables are set on each container at startup to provide link details to other containers. The links created are directional. These are similar to those used by Docker Compose.
 
-For our example app above, the following enviroment variables are set in the proxy containers to provide service links. The example proxy application can use these environment variables to configure itself on startup, and start balancing traffic between the two containers of `my-web-app`.
+For our example app above, the following environment variables are set in the proxy containers to provide service links. The example proxy application can use these environment variables to configure itself on startup, and start balancing traffic between the two containers of `my-web-app`.
 
 | Name                    | Value                 |
 |:------------------------|:----------------------|

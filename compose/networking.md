@@ -150,4 +150,4 @@ If you want your containers to join a pre-existing network, use the [`external` 
         external:
           name: my-pre-existing-network
 
-Instead of attemping to create a network called `[projectname]_default`, Compose will look for a network called `my-pre-existing-network` and connect your app's containers to it.
+Instead of attempting to create a network called `[projectname]_default`, Compose will look for a network called `my-pre-existing-network` and connect your app's containers to it.
