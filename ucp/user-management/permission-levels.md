@@ -1,14 +1,16 @@
-<!--[metadata]>
-+++
-title = "Permission levels"
-description = "Learn about the permission levels available in Docker Universal Control Plane."
-keywords = ["authorization, authentication, users, teams, UCP"]
-[menu.main]
-parent="mn_ucp_user_management"
-identifier="ucp_permission_levels"
-weight=30
-+++
-<![end-metadata]-->
+---
+description: Learn about the permission levels available in Docker Universal Control
+  Plane.
+keywords:
+- authorization, authentication, users, teams, UCP
+menu:
+  main:
+    identifier: ucp_permission_levels
+    parent: mn_ucp_user_management
+    weight: 30
+title: Permission levels
+---
+
 
 # Permission levels
 

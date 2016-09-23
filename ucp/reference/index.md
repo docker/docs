@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title = "UCP tool reference"
-description = "Installs Docker Universal Control Plane."
-keywords= ["docker, ucp, install"]
-[menu.main]
-parent = "mn_ucp_installation"
-identifier = "ucp_ref"
-weight=100
-+++
-<![end-metadata]-->
+---
+description: Installs Docker Universal Control Plane.
+keywords:
+- docker, ucp, install
+menu:
+  main:
+    identifier: ucp_ref
+    parent: mn_ucp_installation
+    weight: 100
+title: UCP tool reference
+---
+
 
 # UCP tool reference
 

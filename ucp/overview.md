@@ -1,14 +1,16 @@
-<!--[metadata]>
-+++
-title ="Universal Control Plane overview"
-description="Learn about Docker Universal Control Plane, the enterprise-grade cluster management solution from Docker."
-keywords= ["docker, ucp, overview, orchestration, clustering"]
-[menu.main]
-parent="mn_ucp"
-identifier="ucp_overview"
-weight=0
-+++
-<![end-metadata]-->
+---
+description: Learn about Docker Universal Control Plane, the enterprise-grade cluster
+  management solution from Docker.
+keywords:
+- docker, ucp, overview, orchestration, clustering
+menu:
+  main:
+    identifier: ucp_overview
+    parent: mn_ucp
+    weight: 0
+title: Universal Control Plane overview
+---
+
 
 # Universal Control Plane overview
 

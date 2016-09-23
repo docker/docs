@@ -1,11 +1,13 @@
-+++
-title = "dump-certs"
-keywords= ["dump-certs, ucp"]
-description = "Dump out public certificates"
-[menu.main]
-parent ="ucp_ref"
-identifier="ucp_ref_dump_certs"
-+++
+---
+description: Dump out public certificates
+keywords:
+- dump-certs, ucp
+menu:
+  main:
+    identifier: ucp_ref_dump_certs
+    parent: ucp_ref
+title: dump-certs
+---
 
 # docker/ucp dump-certs
 

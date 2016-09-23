@@ -1,14 +1,16 @@
-<!--[metadata]>
-+++
-title = "Create and manage teams"
-description = "Learn how to create and manage user permissions, using teams in your Docker Universal Control Plane cluster."
-keywords = ["authorize, authentication, users, teams, UCP, Docker"]
-[menu.main]
-parent="mn_ucp_user_management"
-identifier="ucp_create_manage_teams"
-weight=20
-+++
-<![end-metadata]-->
+---
+description: Learn how to create and manage user permissions, using teams in your
+  Docker Universal Control Plane cluster.
+keywords:
+- authorize, authentication, users, teams, UCP, Docker
+menu:
+  main:
+    identifier: ucp_create_manage_teams
+    parent: mn_ucp_user_management
+    weight: 20
+title: Create and manage teams
+---
+
 
 # Create and manage teams
 

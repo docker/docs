@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-title ="Universal Control Plane"
-keywords= ["universal, control, plane, ucp"]
-description="Docker Universal Control Plane"
-[menu.main]
-identifier="mn_ucp"
-weight=-64
-+++
-<![end-metadata]-->
+---
+description: Docker Universal Control Plane
+keywords:
+- universal, control, plane, ucp
+menu:
+  main:
+    identifier: mn_ucp
+    weight: -64
+title: Universal Control Plane
+---
+
 
 # Docker Universal Control Plane
 

@@ -1,4 +1,4 @@
-<!--[metadata]>
+
 +++
 aliases = ["/ucp/kv_store/"]
 title ="Troubleshoot cluster configurations"
@@ -9,7 +9,7 @@ parent="mn_monitor_ucp"
 identifier="ucp_troubleshoot_configurations"
 weight=20
 +++
-<![end-metadata]-->
+
 
 # Troubleshoot cluster configurations
 

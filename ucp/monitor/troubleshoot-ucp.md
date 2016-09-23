@@ -1,14 +1,16 @@
-<!--[metadata]>
-+++
-title ="Troubleshoot your cluster"
-keywords= ["docker, ucp, troubleshoot"]
-description="Learn how to troubleshoot your Docker Universal Control Plane cluster."
-[menu.main]
-parent="mn_monitor_ucp"
-identifier="ucp_troubleshoot_cluster"
-weight=10
-+++
-<![end-metadata]-->
+
+---
+description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
+keywords:
+- docker, ucp, troubleshoot
+menu:
+  main:
+    identifier: ucp_troubleshoot_cluster
+    parent: mn_monitor_ucp
+    weight: 10
+title: Troubleshoot your cluster
+---
+
 
 # Troubleshoot your cluster
 
