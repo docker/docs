@@ -194,7 +194,7 @@ ng\:form {
 							<div style="text-align: center">
 								<img src="/images/chat.png" alt="chat icon" style="margin-right: 10px">
 								<b>Feedback?</b> Questions? Suggestions?<br/>
-							  <a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}">Edit this page</a>,
+							  <a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}" class="nomunge">Edit this page</a>,
 								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&body=URL: {{ page.path }}">file a ticket</a>, or rate this page:
 								<div id="pd_rating_holder_8453675"></div>
 								<script type="text/javascript">
@@ -211,10 +211,13 @@ ng\:form {
 			       </section>
 
 						 <script language="javascript">
+						 function hasClass(element, cls) {
+						    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+						 }
 						 var x = document.links.length;
 						 for (i = 0; i < x; i++) {
 						   var thisHREF = document.links[i].href;
-						   if (thisHREF.indexOf(window.location.hostname) > -1) thisHREF = thisHREF.replace(".md","/").replace("/index/","/");
+						   if (thisHREF.indexOf(window.location.hostname) > -1 && !hasClass(thisHREF,"nomunge")) thisHREF = thisHREF.replace(".md","/").replace("/index/","/");
 						   document.links[i].setAttribute('href', thisHREF);
 						 }
 						 </script>
