@@ -1,11 +1,13 @@
-+++
-title = "restart"
-description = "Restart Docker Universal Control Plane containers."
-keywords= ["install, ucp, restart"]
-[menu.main]
-parent = "ucp_ref"
-identifier = "ucp_ref_restart"
-+++
+---
+description: Restart Docker Universal Control Plane containers.
+keywords:
+- install, ucp, restart
+menu:
+  main:
+    identifier: ucp_ref_restart
+    parent: ucp_ref
+title: restart
+---
 
 # docker/ucp restart
 

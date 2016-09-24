@@ -1,15 +1,18 @@
-<!--[metadata]>
-+++
-aliases = ["/ucp/plan-production-install/"]
-title = "Plan a production installation"
-description = "Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production."
-keywords = ["docker, ucp, install, checklist"]
-[menu.main]
-parent="mn_ucp_installation"
-identifier="ucp_plan_production_install"
-weight=10
-+++
-<![end-metadata]-->
+---
+aliases:
+- /ucp/plan-production-install/
+description: Learn about the Docker Universal Control Plane architecture, and the
+  requirements to install it on production.
+keywords:
+- docker, ucp, install, checklist
+menu:
+  main:
+    identifier: ucp_plan_production_install
+    parent: mn_ucp_installation
+    weight: 10
+title: Plan a production installation
+---
+
 
 # Plan a production installation
 

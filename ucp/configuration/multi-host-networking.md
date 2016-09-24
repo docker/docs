@@ -1,15 +1,17 @@
-<!--[metadata]>
-+++
-aliases = [ "/ucp/networking/"]
-title ="Set up container networking"
-keywords= ["networking, kv, engine-discovery, ucp"]
-description="Docker Universal Control Plane"
-[menu.main]
-parent="mn_ucp_configuration"
-identifier="ucp_configure_networking"
-weight=40
-+++
-<![end-metadata]-->
+---
+aliases:
+- /ucp/networking/
+description: Docker Universal Control Plane
+keywords:
+- networking, kv, engine-discovery, ucp
+menu:
+  main:
+    identifier: ucp_configure_networking
+    parent: mn_ucp_configuration
+    weight: 40
+title: Set up container networking
+---
+
 
 # Enable container networking with UCP
 

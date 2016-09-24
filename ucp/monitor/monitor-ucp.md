@@ -1,4 +1,4 @@
-<!--[metadata]>
+
 +++
 aliases = [ "/ucp/manage/monitor-ucp/"]
 title = "Monitor your cluster"
@@ -9,7 +9,7 @@ parent="mn_monitor_ucp"
 identifier="ucp_monitor_cluster"
 weight=0
 +++
-<![end-metadata]-->
+
 
 # Monitor your cluster
 

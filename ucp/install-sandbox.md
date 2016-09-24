@@ -1,15 +1,16 @@
-<!--[metadata]>
-+++
-aliases = ["/ucp/evaluation-install/"]
-title = "Evaluate UCP in a sandbox"
-description = "Evaluation installation"
-keywords = ["tbd, tbd"]
-[menu.main]
-parent="mn_ucp"
-identifier="ucp_evaluate_sandbox"
-weight=10
-+++
-<![end-metadata]-->
+---
+aliases:
+- /ucp/evaluation-install/
+description: Evaluation installation
+keywords:
+- tbd, tbd
+menu:
+  main:
+    identifier: ucp_evaluate_sandbox
+    parent: mn_ucp
+    weight: 10
+title: Evaluate UCP in a sandbox
+---
 
 
 # Evaluate UCP in a sandbox
@@ -86,9 +87,11 @@ Set up the nodes for your evaluation:
 
 2. Use Docker Machine to list any VMs in VirtualBox.
 
-  		$ docker-machine ls
-  		NAME         ACTIVE   DRIVER       STATE     URL                         SWARM
-  		default    *        virtualbox   Running   tcp://192.168.99.100:2376  
+
+        $ docker-machine ls
+        NAME         ACTIVE   DRIVER       STATE     URL                         SWARM
+        default    *        virtualbox   Running   tcp://192.168.99.100:2376  
+
 
 3. Create a VM named `node1`.  
 

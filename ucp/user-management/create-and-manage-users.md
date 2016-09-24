@@ -1,14 +1,16 @@
-<!--[metadata]>
-+++
-title = "Create and manage users"
-description = "Learn how to create and manage users in your Docker Universal Control Plane cluster."
-keywords = ["authorize, authentication, users, teams, UCP, Docker"]
-[menu.main]
-parent="mn_ucp_user_management"
-identifier="ucp_create_manage_users"
-weight=10
-+++
-<![end-metadata]-->
+---
+description: Learn how to create and manage users in your Docker Universal Control
+  Plane cluster.
+keywords:
+- authorize, authentication, users, teams, UCP, Docker
+menu:
+  main:
+    identifier: ucp_create_manage_users
+    parent: mn_ucp_user_management
+    weight: 10
+title: Create and manage users
+---
+
 
 # Create and manage users
 

@@ -1,14 +1,18 @@
-<!--[metadata]>
-+++
-title ="Release Notes"
-description="Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions."
-keywords = ["Docker, UCP", "Release notes", "Versions"]
-[menu.main]
-identifier="ucp_rnotes"
-parent="mn_ucp"
-weight=110
-+++
-<![end-metadata]-->
+---
+description: Release notes for Docker Universal Control Plane. Learn more about the
+  changes introduced in the latest versions.
+keywords:
+- Docker, UCP
+- Release notes
+- Versions
+menu:
+  main:
+    identifier: ucp_rnotes
+    parent: mn_ucp
+    weight: 110
+title: Release Notes
+---
+
 
 # UCP Release Notes
 
