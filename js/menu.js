@@ -9,7 +9,7 @@ function renderTree(tree)
       // render a heading
     } else {
       if (tree[i].sectiontitle) {
-        treeOutput.push('<li class="leaf menu-closed"><a href="#``" class="expand-menu "><span class="menu-icon" aria-hidden="true"></span>' + tree[i].sectiontitle + '</a>');
+        treeOutput.push('<li class="leaf menu-closed"><a href="#" class="expand-menu "><span class="menu-icon" aria-hidden="true"></span>' + tree[i].sectiontitle + '</a>');
         treeOutput.push('<ul class="nav-sub">');
         renderTree(tree[i].section);
         treeOutput.push('</ul>');
