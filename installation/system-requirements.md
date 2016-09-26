@@ -21,7 +21,7 @@ You can install UCP on-premises or on a cloud provider. To install UCP,
 all nodes must have:
 
 * Linux kernel version 3.10 or higher
-* CS Docker Engine version 1.12.0 or higher. Learn about the
+* CS Docker Engine version 1.12.1 or higher. Learn about the
 [operating systems supported by CS Docker Engine](https://docs.docker.com/cs-engine/install/).
 * 2.00 GB of RAM
 * 3.00 GB of available disk space
@@ -34,22 +34,22 @@ between hosts.
 
 When installing UCP on a host, make sure the following ports are open:
 
-| Hosts              | Direction | Port                    | Purpose                                                                    |
-|:-------------------|:---------:|:------------------------|:---------------------------------------------------------------------------|
-| controllers, nodes |    in     | TCP 443  (configurable) | Web app and CLI client access to UCP.                                      |
-| controllers        |    in     | TCP 2376 (configurable) | Swarm manager API endpoint, used by the UCP controller.                    |
-| controllers, nodes |    in     | TCP 2377 (configurable) | Docker Engine port for communicating with other swarm nodes.               |
-| controllers, nodes |  in, out  | UDP 4789                | Overlay networking.                                                        |
-| controllers, nodes |  in, out  | TCP & UDP 7946          | Overlay networking.                                                        |
-| controllers, nodes |    in     | TCP 12376               | Proxy for TLS, provides access to UCP, Docker Engine, and Docker Swarm.    |
-| controllers        |    in     | TCP 12379               | Internal node configuration, cluster configuration, and HA.                |
-| controllers        |    in     | TCP 12380               | Internal node configuration, cluster configuration, and HA.                |
-| controllers        |    in     | TCP 12381               | Proxy for TLS, provides access to UCP.                                     |
-| controllers        |    in     | TCP 12382               | Manages TLS and requests from the swarm manager.                           |
-| controllers        |    in     | TCP 12383               | Used by the authentication storage backend.                                |
-| controllers        |    in     | TCP 12384               | Used by authentication storage backend for replication across controllers. |
-| controllers        |    in     | TCP 12385               | The port where the authentication service is exposed.                      |
-| controllers        |    in     | TCP 12386               | Used by the authentication worker.                                         |
+| Hosts             | Direction | Port                    | Purpose                                                                           |
+|:------------------|:---------:|:------------------------|:----------------------------------------------------------------------------------|
+| managers, workers |    in     | TCP 443  (configurable) | Port for the UCP web UI and API                                                   |
+| managers          |    in     | TCP 2376 (configurable) | Port for the Docker Swarm manager. Used for backwards compatibility               |
+| managers, workers |    in     | TCP 2377 (configurable) | Port for communication between swarm nodes                                        |
+| managers, workers |  in, out  | UDP 4789                | Port for overlay networking                                                       |
+| managers, workers |  in, out  | TCP & UDP 7946          | Port  for overlay networking                                                      |
+| managers, workers |    in     | TCP 12376               | Port for a TLS proxy that provides access to UCP, Docker Engine, and Docker Swarm |
+| managers          |    in     | TCP 12379               | Port for internal node configuration, cluster configuration, and HA               |
+| managers          |    in     | TCP 12380               | Port for internal node configuration, cluster configuration, and HA               |
+| managers          |    in     | TCP 12381               | Port for the certificate authority                                                |
+| managers          |    in     | TCP 12382               | Port for the UCP certificate authority                                            |
+| managers          |    in     | TCP 12383               | Port for the authentication storage backend                                       |
+| managers          |    in     | TCP 12384               | Port for the authentication storage backend for replication across managers       |
+| managers          |    in     | TCP 12385               | Port for the authentication service API                                           |
+| managers          |    in     | TCP 12386               | Port for the authentication worker                                                |
 
 ## Compatibility and maintenance lifecycle
 
