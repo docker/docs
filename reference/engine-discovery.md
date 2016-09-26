@@ -28,7 +28,7 @@ automatically via swarm-mode.
 
 ## Options
 
-| Option        | Description                                      |
-|:--------------|:-------------------------------------------------|
-| `--debug, -D` | Enable debug                                     |
-| `--jsonlog`   | Produce json formatted output for easier parsing |
+```nohighlight
+--debug, -D  Enable debug mode
+--jsonlog    Produce json formatted output for easier parsing
+```

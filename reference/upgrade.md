@@ -9,16 +9,16 @@ identifier = "ucp_ref_upgrade"
 
 # docker/ucp upgrade
 
-Upgrade the UCP components on this Docker Engine.
+Upgrade the UCP components on this engine.
 
 ## Usage
 
 ```
 docker run --rm -it \
-  --name ucp \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  docker/ucp \
-  upgrade [OPTIONS]
+           --name ucp \
+           -v /var/run/docker.sock:/var/run/docker.sock \
+           docker/ucp \
+           upgrade [command options]
 ```
 
 ## Description
@@ -34,14 +34,15 @@ before proceeding to the next node.
 
 ## Options
 
-| Option                | Description                                                                             |
-|:----------------------|:----------------------------------------------------------------------------------------|
-| ` --debug, -D`        | Enable debug                                                                            |
-| ` --jsonlog`          | Produce json formatted output for easier parsing                                        |
-| ` --interactive, -i`  | Enable interactive mode.,You will be prompted to enter all required information         |
-| `--admin-username`    | Specify the UCP admin username [$UCP_ADMIN_USER]                                        |
-| `--admin-password`    | Specify the UCP admin password [$UCP_ADMIN_PASSWORD]                                    |
-| `--registry-username` | Specify the username to pull required images with [$REGISTRY_USERNAME]                  |
-| `--registry-password` | Specify the password to pull required images with [$REGISTRY_PASSWORD]                  |
-| `--id`                | The ID of the UCP instance to upgrade                                                   |
-| `--pull "always"`     | Specify image pull behavior ('always', when 'missing', or 'never') (default: "missing") |
+```nohighlight
+--debug, -D                Enable debug mode
+--jsonlog                  Produce json formatted output for easier parsing
+--interactive, -i          Enable interactive mode.  You will be prompted to enter all required information
+--admin-username value     Specify the UCP admin username [$UCP_ADMIN_USER]
+--admin-password value     Specify the UCP admin password [$UCP_ADMIN_PASSWORD]
+--pull value               Specify image pull behavior ('always', when 'missing', or 'never') (default: "missing")
+--registry-username value  Specify the username to pull required images with [$REGISTRY_USERNAME]
+--registry-password value  Specify the password to pull required images with [$REGISTRY_PASSWORD]
+--id value                 The ID of the UCP instance to upgrade
+--host-address value       Override the previously configured host address with this IP or network interface [$UCP_HOST_ADDRESS]
+```

@@ -1,15 +1,15 @@
 +++
-title = "images"
-description = "Verify the UCP images on this Docker Engine."
-keywords= ["images, ucp, images"]
+title = "uninstall-cluster"
+keywords= ["uninstall, ucp"]
+description = "Uninstall UCP from this swarm clusters"
 [menu.main]
 parent = "ucp_ref"
-identifier = "ucp_ref_images"
+identifier = "ucp_ref_uninstall-cluster"
 +++
 
-# docker/ucp images
+# docker/ucp uninstall-cluster
 
-Verify the UCP images on this engine.
+Uninstall UCP from this swarm cluster.
 
 ## Usage
 
@@ -18,22 +18,20 @@ docker run --rm -it \
            --name ucp \
            -v /var/run/docker.sock:/var/run/docker.sock \
            docker/ucp \
-           images [command options]
+           uninstall-cluster [command options]
 ```
 
 ## Description
 
-This command will verify all the required images used by UCP on the current engine.
-By default, this will pull any missing images. Use the `--pull` argument to change
-behavior.
+Uninstall UCP from this swarm cluster, while preserving the cluster.
 
 ## Options
-
 ```nohighlight
 --debug, -D                Enable debug mode
 --jsonlog                  Produce json formatted output for easier parsing
+--interactive, -i          Enable interactive mode.  You will be prompted to enter all required information
 --pull value               Specify image pull behavior ('always', when 'missing', or 'never') (default: "missing")
 --registry-username value  Specify the username to pull required images with [$REGISTRY_USERNAME]
 --registry-password value  Specify the password to pull required images with [$REGISTRY_PASSWORD]
---list                     Don't do anything, just list the images used by UCP
+--id value                 The ID of the UCP instance to uninstall
 ```

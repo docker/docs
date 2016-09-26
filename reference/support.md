@@ -15,10 +15,10 @@ Generate a support dump for this engine.
 
 ```
 docker run --rm \
-  --name ucp \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  docker/ucp \
-  support > docker-support.tgz
+           --name ucp \
+           -v /var/run/docker.sock:/var/run/docker.sock \
+           docker/ucp \
+           support > docker-support.tgz
 ```
 
 ## Description
