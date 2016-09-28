@@ -1,0 +1,42 @@
+language: go
+go: 1.3
+services:
+  - memcache # github.com/revel/revel/cache
+  - redis-server
+install:
+  - export PATH=$PATH:$HOME/gopath/bin
+  - export REVEL_BRANCH="master"
+  - 'if [[ "$TRAVIS_BRANCH" == "master" ]]; then export REVEL_BRANCH="master"; fi'
+  - 'echo "Travis branch: $TRAVIS_BRANCH, Revel dependency branch: $REVEL_BRANCH"'
+  - go get -v github.com/revel/revel/...
+  - git clone -b $REVEL_BRANCH git://github.com/revel/modules ../modules/
+  - git clone -b $REVEL_BRANCH git://github.com/revel/cmd ../cmd/
+  - git clone git://github.com/revel/samples ../samples/
+  - go get -v github.com/revel/cmd/revel
+script:
+  - go test github.com/revel/revel
+  - go test github.com/revel/revel/cache
+  - go test github.com/revel/cmd/harness
+
+  # Ensure the new-app flow works (plus the other commands).
+  - revel new     my/testapp
+  - revel test    my/testapp
+  - revel clean   my/testapp
+  - revel build   my/testapp build/testapp
+  - revel package my/testapp
+
+  # Build & run the sample apps
+  # Sleep between tests to avoid spurious "address already in use" failures.
+  - revel test github.com/revel/samples/booking
+  - sleep 30
+  - revel test github.com/revel/samples/chat
+  - sleep 30
+  - revel test github.com/revel/samples/facebook-oauth2
+  - sleep 30
+  - revel test github.com/revel/samples/twitter-oauth
+  - sleep 30
+  - revel test github.com/revel/samples/validation
+  - sleep 30
+  - revel test github.com/revel/samples/persona
+  - sleep 30
+  - revel test github.com/revel/samples/upload
