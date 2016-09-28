@@ -1,8 +1,0 @@
-@import 'utilities.css';
-
-:global .dTag {
-  display: inline-block;
-  font-style: italic;
-  color: $color-loblolly;
-  padding-right: $space-xxs;
-}

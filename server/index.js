@@ -1,2 +1,0 @@
-require('./env');
-require('./server');

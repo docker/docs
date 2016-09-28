@@ -1,7 +1,0 @@
-web:
-    publish_all_ports: True
-    restart_policy:
-        MaximumRetryCount: 0
-        Name: always
-    ports:
-      - 3000

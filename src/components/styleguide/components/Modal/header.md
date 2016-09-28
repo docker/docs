@@ -1,3 +1,0 @@
-### Modal
-
-A base Modal
