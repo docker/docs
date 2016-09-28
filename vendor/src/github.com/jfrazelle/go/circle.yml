@@ -1,8 +1,0 @@
-test:
-  pre:
-    - go version
-    - go get -t -d -v ./...
-  override:
-    - test -z "$(gofmt -s -l . | tee /dev/stderr)"
-    - go test -race -test.v ./...:
-        timeout: 600
