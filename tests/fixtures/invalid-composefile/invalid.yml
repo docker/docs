@@ -1,5 +1,0 @@
-
-notaservice: oops
-
-web:
-    image: 'alpine:edge'

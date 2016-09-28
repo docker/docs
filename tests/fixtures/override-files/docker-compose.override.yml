@@ -1,6 +1,0 @@
-
-web:
-    command: "top"
-
-db:
-    command: "top"
