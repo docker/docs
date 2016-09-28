@@ -1,0 +1,3 @@
+definedinyamlnotyml:
+  image: busybox:latest
+  command: top
