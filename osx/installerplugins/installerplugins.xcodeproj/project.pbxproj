@@ -1,0 +1,479 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1B4C91B91B85198100A06068 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91B71B85198100A06068 /* InfoPlist.strings */; };
+		1B4C91BC1B85198100A06068 /* quickstartpluginPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4C91BB1B85198100A06068 /* quickstartpluginPane.m */; };
+		1B4C91BF1B85198100A06068 /* quickstartplugin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91BD1B85198100A06068 /* quickstartplugin.xib */; };
+		1B4C91C21B85198100A06068 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91C01B85198100A06068 /* Localizable.strings */; };
+		1B4C91C41B85198100A06068 /* InstallerSections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B4C91C31B85198100A06068 /* InstallerSections.plist */; };
+		1B8417E91B85261F00B1FA4D /* kitematic.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B8417E71B85261F00B1FA4D /* kitematic.png */; };
+		1B8417EA1B85261F00B1FA4D /* quickstart.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B8417E81B85261F00B1FA4D /* quickstart.png */; };
+		1BF102C11B8BDEDA00FCB650 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BF102BF1B8BDEDA00FCB650 /* InfoPlist.strings */; };
+		1BF102C41B8BDEDA00FCB650 /* overviewpluginPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF102C31B8BDEDA00FCB650 /* overviewpluginPane.m */; };
+		1BF102C71B8BDEDA00FCB650 /* overviewplugin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BF102C51B8BDEDA00FCB650 /* overviewplugin.xib */; };
+		1BF102CA1B8BDEDA00FCB650 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1BF102C81B8BDEDA00FCB650 /* Localizable.strings */; };
+		1BF102CC1B8BDEDA00FCB650 /* InstallerSections.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1BF102CB1B8BDEDA00FCB650 /* InstallerSections.plist */; };
+		1BF102D11B8BDF4D00FCB650 /* overview.html in Resources */ = {isa = PBXBuildFile; fileRef = 1BF102D01B8BDF4D00FCB650 /* overview.html */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1B4C915E1B85023200A06068 /* mixpanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = mixpanel.h; path = common/mixpanel.h; sourceTree = "<group>"; };
+		1B4C91B31B85198100A06068 /* quickstartplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = quickstartplugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B4C91B61B85198100A06068 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B4C91B81B85198100A06068 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1B4C91BA1B85198100A06068 /* quickstartpluginPane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = quickstartpluginPane.h; sourceTree = "<group>"; };
+		1B4C91BB1B85198100A06068 /* quickstartpluginPane.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = quickstartpluginPane.m; sourceTree = "<group>"; };
+		1B4C91BE1B85198100A06068 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/quickstartplugin.xib; sourceTree = "<group>"; };
+		1B4C91C11B85198100A06068 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1B4C91C31B85198100A06068 /* InstallerSections.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InstallerSections.plist; sourceTree = "<group>"; };
+		1B8417E71B85261F00B1FA4D /* kitematic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitematic.png; sourceTree = "<group>"; };
+		1B8417E81B85261F00B1FA4D /* quickstart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = quickstart.png; sourceTree = "<group>"; };
+		1BF102BB1B8BDEDA00FCB650 /* overviewplugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = overviewplugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BF102BE1B8BDEDA00FCB650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BF102C01B8BDEDA00FCB650 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1BF102C21B8BDEDA00FCB650 /* overviewpluginPane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = overviewpluginPane.h; sourceTree = "<group>"; };
+		1BF102C31B8BDEDA00FCB650 /* overviewpluginPane.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = overviewpluginPane.m; sourceTree = "<group>"; };
+		1BF102C61B8BDEDA00FCB650 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/overviewplugin.xib; sourceTree = "<group>"; };
+		1BF102C91B8BDEDA00FCB650 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1BF102CB1B8BDEDA00FCB650 /* InstallerSections.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InstallerSections.plist; sourceTree = "<group>"; };
+		1BF102D01B8BDF4D00FCB650 /* overview.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = overview.html; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1B4C91B01B85198100A06068 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BF102B81B8BDEDA00FCB650 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1B4C90691B84FDEB00A06068 = {
+			isa = PBXGroup;
+			children = (
+				1BF102BB1B8BDEDA00FCB650 /* overviewplugin.bundle */,
+				1B4C91B31B85198100A06068 /* quickstartplugin.bundle */,
+				1BF102BC1B8BDEDA00FCB650 /* overviewplugin */,
+				1B4C91B41B85198100A06068 /* quickstartplugin */,
+				1B4C915D1B85021200A06068 /* common */,
+			);
+			sourceTree = "<group>";
+		};
+		1B4C915D1B85021200A06068 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				1B4C915E1B85023200A06068 /* mixpanel.h */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		1B4C91B41B85198100A06068 /* quickstartplugin */ = {
+			isa = PBXGroup;
+			children = (
+				1B8417E71B85261F00B1FA4D /* kitematic.png */,
+				1B8417E81B85261F00B1FA4D /* quickstart.png */,
+				1B4C91BA1B85198100A06068 /* quickstartpluginPane.h */,
+				1B4C91BB1B85198100A06068 /* quickstartpluginPane.m */,
+				1B4C91BD1B85198100A06068 /* quickstartplugin.xib */,
+				1B4C91C01B85198100A06068 /* Localizable.strings */,
+				1B4C91C31B85198100A06068 /* InstallerSections.plist */,
+				1B4C91B51B85198100A06068 /* Supporting Files */,
+			);
+			path = quickstartplugin;
+			sourceTree = "<group>";
+		};
+		1B4C91B51B85198100A06068 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1B4C91B61B85198100A06068 /* Info.plist */,
+				1B4C91B71B85198100A06068 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1BF102BC1B8BDEDA00FCB650 /* overviewplugin */ = {
+			isa = PBXGroup;
+			children = (
+				1BF102C21B8BDEDA00FCB650 /* overviewpluginPane.h */,
+				1BF102C31B8BDEDA00FCB650 /* overviewpluginPane.m */,
+				1BF102C51B8BDEDA00FCB650 /* overviewplugin.xib */,
+				1BF102C81B8BDEDA00FCB650 /* Localizable.strings */,
+				1BF102CB1B8BDEDA00FCB650 /* InstallerSections.plist */,
+				1BF102D01B8BDF4D00FCB650 /* overview.html */,
+				1BF102BD1B8BDEDA00FCB650 /* Supporting Files */,
+			);
+			path = overviewplugin;
+			sourceTree = "<group>";
+		};
+		1BF102BD1B8BDEDA00FCB650 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1BF102BE1B8BDEDA00FCB650 /* Info.plist */,
+				1BF102BF1B8BDEDA00FCB650 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1B4C91B21B85198100A06068 /* quickstartplugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B4C91C51B85198100A06068 /* Build configuration list for PBXNativeTarget "quickstartplugin" */;
+			buildPhases = (
+				1B4C91AF1B85198100A06068 /* Sources */,
+				1B4C91B01B85198100A06068 /* Frameworks */,
+				1B4C91B11B85198100A06068 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = quickstartplugin;
+			productName = quickstartplugin;
+			productReference = 1B4C91B31B85198100A06068 /* quickstartplugin.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		1BF102BA1B8BDEDA00FCB650 /* overviewplugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BF102CD1B8BDEDA00FCB650 /* Build configuration list for PBXNativeTarget "overviewplugin" */;
+			buildPhases = (
+				1BF102B71B8BDEDA00FCB650 /* Sources */,
+				1BF102B81B8BDEDA00FCB650 /* Frameworks */,
+				1BF102B91B8BDEDA00FCB650 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = overviewplugin;
+			productName = overviewplugin;
+			productReference = 1BF102BB1B8BDEDA00FCB650 /* overviewplugin.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1B4C906A1B84FDEB00A06068 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Docker Inc";
+				TargetAttributes = {
+					1B4C91B21B85198100A06068 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					1BF102BA1B8BDEDA00FCB650 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 1B4C906D1B84FDEB00A06068 /* Build configuration list for PBXProject "installerplugins" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1B4C90691B84FDEB00A06068;
+			productRefGroup = 1B4C90691B84FDEB00A06068;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1B4C91B21B85198100A06068 /* quickstartplugin */,
+				1BF102BA1B8BDEDA00FCB650 /* overviewplugin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1B4C91B11B85198100A06068 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B4C91B91B85198100A06068 /* InfoPlist.strings in Resources */,
+				1B4C91C21B85198100A06068 /* Localizable.strings in Resources */,
+				1B8417EA1B85261F00B1FA4D /* quickstart.png in Resources */,
+				1B4C91BF1B85198100A06068 /* quickstartplugin.xib in Resources */,
+				1B4C91C41B85198100A06068 /* InstallerSections.plist in Resources */,
+				1B8417E91B85261F00B1FA4D /* kitematic.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BF102B91B8BDEDA00FCB650 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BF102C11B8BDEDA00FCB650 /* InfoPlist.strings in Resources */,
+				1BF102CA1B8BDEDA00FCB650 /* Localizable.strings in Resources */,
+				1BF102C71B8BDEDA00FCB650 /* overviewplugin.xib in Resources */,
+				1BF102CC1B8BDEDA00FCB650 /* InstallerSections.plist in Resources */,
+				1BF102D11B8BDF4D00FCB650 /* overview.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1B4C91AF1B85198100A06068 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B4C91BC1B85198100A06068 /* quickstartpluginPane.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BF102B71B8BDEDA00FCB650 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BF102C41B8BDEDA00FCB650 /* overviewpluginPane.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1B4C91B71B85198100A06068 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B4C91B81B85198100A06068 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1B4C91BD1B85198100A06068 /* quickstartplugin.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B4C91BE1B85198100A06068 /* Base */,
+			);
+			name = quickstartplugin.xib;
+			sourceTree = "<group>";
+		};
+		1B4C91C01B85198100A06068 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B4C91C11B85198100A06068 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		1BF102BF1B8BDEDA00FCB650 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1BF102C01B8BDEDA00FCB650 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1BF102C51B8BDEDA00FCB650 /* overviewplugin.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1BF102C61B8BDEDA00FCB650 /* Base */,
+			);
+			name = overviewplugin.xib;
+			sourceTree = "<group>";
+		};
+		1BF102C81B8BDEDA00FCB650 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1BF102C91B8BDEDA00FCB650 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1B4C90851B84FDEB00A06068 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/../mpkg/Plugins";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1B4C90861B84FDEB00A06068 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/../mpkg/Plugins";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1B4C91C61B85198100A06068 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = quickstartplugin/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.docker.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		1B4C91C71B85198100A06068 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = quickstartplugin/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.docker.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		1BF102CE1B8BDEDA00FCB650 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = overviewplugin/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.docker.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		1BF102CF1B8BDEDA00FCB650 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = overviewplugin/Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.docker.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1B4C906D1B84FDEB00A06068 /* Build configuration list for PBXProject "installerplugins" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B4C90851B84FDEB00A06068 /* Debug */,
+				1B4C90861B84FDEB00A06068 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B4C91C51B85198100A06068 /* Build configuration list for PBXNativeTarget "quickstartplugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B4C91C61B85198100A06068 /* Debug */,
+				1B4C91C71B85198100A06068 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BF102CD1B8BDEDA00FCB650 /* Build configuration list for PBXNativeTarget "overviewplugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BF102CE1B8BDEDA00FCB650 /* Debug */,
+				1BF102CF1B8BDEDA00FCB650 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1B4C906A1B84FDEB00A06068 /* Project object */;
+}

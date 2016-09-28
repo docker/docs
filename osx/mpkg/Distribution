@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<installer-gui-script minSpecVersion="1">
+    <title>docker_title</title>
+    <options customize="allow" allow-external-scripts="yes" rootVolumeOnly="true" hostArchitectures="x86_64"/>
+    <background file="toolbox.png" alignment="bottomleft" scaling="none"/>
+    <welcome file="welcome.rtfd" mime-type="text/rtfd"/>
+    <choices-outline>
+        <line choice="choiceDockerCLI"/>
+        <line choice="choiceDockerMachineCLI"/>
+        <line choice="choiceDockerComposeCLI"/>
+        <line choice="choiceDockerQuickstartTerminalAPP"/>
+        <line choice="choiceKitematicAPP"/>
+        <line choice="choiceVBox"/>
+        <line choice="choiceBoot2DockerISO"/>
+    </choices-outline>
+    <choice id="choiceDockerCLI" title="choiceDockerCLI_title" description="choiceDockerCLI_msg" start_enabled="false" start_selected="true" start_visible="true">
+        <pkg-ref id="io.docker.pkg.docker"/>
+    </choice>
+    <choice id="choiceDockerComposeCLI" title="choiceDockerComposeCLI_title" description="choiceDockerComposeCLI_msg" start_selected="true" start_enabled="true" start_visible="true">
+        <pkg-ref id="io.docker.pkg.dockercompose"/>
+    </choice>
+    <choice id="choiceKitematicAPP" title="choiceKitematicAPP_title" description="choiceKitematicAPP_msg" start_selected="true" start_enabled="true" start_visible="true">
+        <pkg-ref id="io.docker.pkg.kitematicapp"/>
+    </choice>
+    <pkg-ref id="io.docker.pkg.docker" auth="Root" version="%DOCKER_VERSION%" installKBytes="%DOCKER_INSTALL_KBYTES%">#docker.pkg</pkg-ref>
+    <pkg-ref id="io.docker.pkg.docker">
+        <bundle-version/>
+    </pkg-ref>
+    <pkg-ref id="io.docker.pkg.dockercompose" auth="Root" version="%DOCKERCOMPOSE_VERSION%" installKBytes="%DOCKERCOMPOSE_INSTALL_KBYTES%">#dockercompose.pkg</pkg-ref>
+    <pkg-ref id="io.docker.pkg.dockercompose">
+        <bundle-version/>
+    </pkg-ref>
+    <pkg-ref id="io.docker.pkg.kitematicapp" auth="Root" version="%KITEMATICAPP_VERSION%" installKBytes="%KITEMATICAPP_INSTALL_KBYTES%">#kitematicapp.pkg</pkg-ref>
+    <pkg-ref id="io.docker.pkg.kitematicapp">
+        <bundle-version/>
+    </pkg-ref>
+    <choice id="choiceVBox" title="choiceVBox_title" description="choiceVBox_msg" start_selected="vboxNeedsUpgrade()" start_enabled="vboxNeedsUpgrade()" start_visible="vboxNeedsUpgrade()">
+        <pkg-ref id="org.virtualbox.pkg.vboxkexts" auth="Root" version="%VBOX_VERSION%" installKBytes="935">#VBoxKEXTs.pkg</pkg-ref>
+        <pkg-ref id="org.virtualbox.pkg.virtualbox" auth="Root" version="%VBOX_VERSION%" installKBytes="247220">#VirtualBox.pkg</pkg-ref>
+        <pkg-ref id="org.virtualbox.pkg.virtualboxcli" auth="Root" version="%VBOX_VERSION%" installKBytes="4">#VirtualBoxCLI.pkg</pkg-ref>
+    </choice>
+    <pkg-ref id="org.virtualbox.pkg.vboxkexts">
+        <bundle-version>
+            <bundle CFBundleShortVersionString="%VBOX_VERSION%" CFBundleVersion="%VBOX_VERSION%" id="org.virtualbox.kext.VBoxNetAdp" path="VBoxNetAdp.kext"/>
+            <bundle CFBundleShortVersionString="%VBOX_VERSION%" CFBundleVersion="%VBOX_VERSION%" id="org.virtualbox.kext.VBoxDrv" path="VBoxDrv.kext"/>
+            <bundle CFBundleShortVersionString="%VBOX_VERSION%" CFBundleVersion="%VBOX_VERSION%" id="org.virtualbox.kext.VBoxNetFlt" path="VBoxNetFlt.kext"/>
+            <bundle CFBundleShortVersionString="%VBOX_VERSION%" CFBundleVersion="%VBOX_VERSION%" id="org.virtualbox.kext.VBoxUSB" path="VBoxUSB.kext"/>
+        </bundle-version>
+    </pkg-ref>
+    <pkg-ref id="org.virtualbox.pkg.virtualbox">
+        <bundle-version>
+            <bundle CFBundleShortVersionString="%VBOX_VERSION%" CFBundleVersion="%VBOX_VERSION%" id="org.virtualbox.app.VirtualBox" path="VirtualBox.app"/>
+        </bundle-version>
+    </pkg-ref>
+    <pkg-ref id="org.virtualbox.pkg.virtualboxcli">
+        <bundle-version/>
+    </pkg-ref>
+    <choice id="choiceBoot2DockerISO" title="choiceBoot2DockerISO_title" description="choiceBoot2DockerISO_msg" start_selected="true" start_enabled="true" start_visible="false">
+        <pkg-ref id="io.boot2dockeriso.pkg.boot2dockeriso"/>
+    </choice>
+    <pkg-ref id="io.boot2dockeriso.pkg.boot2dockeriso" auth="Root" version="%BOOT2DOCKER_ISO_VERSION%" installKBytes="%BOOT2DOCKER_ISO_INSTALL_KBYTES%">#boot2dockeriso.pkg</pkg-ref>
+    <pkg-ref id="io.boot2dockeriso.pkg.boot2dockeriso">
+        <bundle-version/>
+    </pkg-ref>
+    <choice id="choiceDockerQuickstartTerminalAPP" title="choiceDockerQuickstartTerminalAPP_title" description="choiceDockerQuickstartTerminalAPP_msg" start_selected="true" start_enabled="true" start_visible="true">
+        <pkg-ref id="io.docker.pkg.dockerquickstartterminalapp"/>
+    </choice>
+    <pkg-ref id="io.docker.pkg.dockerquickstartterminalapp" auth="Root" version="%DOCKERQUICKSTARTTERMINALAPP_VERSION%" installKBytes="%DOCKERQUICKSTARTTERMINALAPP_INSTALL_KBYTES%">#dockerquickstartterminalapp.pkg</pkg-ref>
+    <pkg-ref id="io.docker.pkg.dockerquickstartterminalapp">
+        <bundle-version/>
+    </pkg-ref>
+    <pkg-ref id="io.docker.pkg.kitematicapp" auth="Root" version="%KITEMATICAPP_VERSION%" installKBytes="%KITEMATICAPP_INSTALL_KBYTES%">#kitematicapp.pkg</pkg-ref>
+    <pkg-ref id="io.docker.pkg.kitematicapp">
+        <bundle-version/>
+    </pkg-ref>
+    <choice id="choiceDockerMachineCLI" title="choiceDockerMachineCLI_title" description="choiceDockerMachineCLI_msg" start_enabled="false" start_selected="true" start_visible="true">
+        <pkg-ref id="io.docker.pkg.dockermachine"/>
+    </choice>
+    <pkg-ref id="io.docker.pkg.dockermachine" auth="Root" version="%DOCKERMACHINE_VERSION%" installKBytes="%DOCKERMACHINE_INSTALL_KBYTES%">#dockermachine.pkg</pkg-ref>
+    <pkg-ref id="io.docker.pkg.dockermachine">
+        <bundle-version/>
+    </pkg-ref>
+
+    <product id="io.docker.mpkg.docker" version="%INSTALLER_VERSION%"/>
+
+    <!-- Manually imported VBox Stuff -->
+    <installation-check script="checkPrerequisite()"/>
+    <script>
+    <![CDATA[
+    /* js:pkmk:start */
+    function checkPrerequisite()
+    {
+       try
+       {
+           test = system.sysctl('hw.machine');
+           system.log("Hardware architecture detected: " + test);
+           result = (test == 'i386' || test == 'x86_64');
+       } catch (e) { system.log(e); result = false; }
+
+       if (!result)
+       {
+           my.result.type = 'Fatal';
+           my.result.title = system.localizedString('UNSUPPORTED_HW_MACHINE_TLE');
+           my.result.message = system.localizedString('UNSUPPORTED_HW_MACHINE_MSG');
+           return result;
+       }
+
+       try
+       {
+           test = system.version['ProductVersion'];
+           system.log("OS version detected: " + test);
+           result = (system.compareVersions(test, '10.8') >= 0);
+       } catch (e) { system.log(e); result = false; }
+
+       if (!result)
+       {
+           my.result.type = 'Fatal';
+           my.result.title = system.localizedString('UNSUPPORTED_OS_TLE');
+           my.result.message = system.localizedString('UNSUPPORTED_OS_MSG');
+           return result;
+       }
+
+       try
+       {
+           /* Embedded scripts are not available here. So, just do a command
+           line checking for running VMs instead. */
+           if (vboxNeedsUpgrade()) {
+               system.log(vboxplist.CFBundleVersion);
+               rcScript = system.run('/bin/sh', '-c', '/bin/ps -e | /usr/bin/grep -E "VirtualBox|VirtualBox.*startvm|VBoxNetDHCP|VBoxNetNAT|VBoxHeadless|VBoxSVC" | /usr/bin/grep -qv grep');
+               result = (rcScript != 0);
+               system.log("system.run /bin/sh .. returned: " + rcScript + " result=" + result);
+           }
+       } catch (e) { system.log(e); }
+
+       if (!result)
+       {
+           my.result.type = 'Fatal';
+           my.result.title = system.localizedString('RUNNING_VMS_TLE');
+           my.result.message = system.localizedString('RUNNING_VMS_MSG');
+           return result;
+       }
+
+       system.log("result:" + result);
+       return result;
+     }
+
+     function vboxNeedsUpgrade ()
+     {
+         try {
+             vboxplist = system.files.plistAtPath('/Applications/VirtualBox.app/Contents/Info.plist');
+             if (!vboxplist || !vboxplist.CFBundleVersion || system.compareVersions(vboxplist.CFBundleVersion, '%VBOX_VERSION%') === -1) {
+                 return true;
+             }
+
+             return false;
+         } catch (e){ system.log(e); return false; }
+     }
+     /* js:pkmk:end */
+     ]]>
+    </script>
+</installer-gui-script>
