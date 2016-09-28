@@ -1,9 +1,0 @@
-#inspect .terminal.icon {
-  background-color: transparent !important;
-  border: 0;
-  color: #c0c9ce;
-}
-
-#inspect .item.active .terminal.icon {
-  color: rgb(26, 170, 248);
-}

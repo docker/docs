@@ -1,9 +1,0 @@
-/*******************************
-    User Variable Overrides
-*******************************/
-
-@boxShadow: none;
-@hoverBoxShadow: none;
-@shadowBoxShadow: none;
-@horizontalPadding: 14px;
-@basicBorderSize: 0px;
