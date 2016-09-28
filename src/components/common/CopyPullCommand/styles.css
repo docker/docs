@@ -1,0 +1,36 @@
+@import "utilities";
+
+.pullCommand {
+  @mixin fontSize 2;
+  color: $color-regent-gray;
+  margin-bottom: $space-sm;
+}
+
+.pullCode {
+  display: flex;
+  justify-content: space-between;
+  background-color: $color-fiord;
+  border-radius: $corner-size;
+}
+
+.input {
+  @mixin fontSize 2;
+  width: 100%;
+  overflow-x: auto;
+  color: $color-white;
+  padding: $space-xs $space-sm;
+  font-family: monospace;
+  unicode-bidi: embed;
+  background-color: $color-fiord;
+  border: none;
+  border-radius: $corner-size;
+}
+
+.copyButton {
+  align-self: center;
+  cursor: pointer;
+  padding-right: $space-sm;
+  & > svg {
+    fill: white;
+  }
+}

@@ -1,0 +1,15 @@
+@import "utilities";
+
+/* stylelint-disable block-no-empty */
+:global .dtabs {}
+/* stylelint-enable */
+
+.selected {
+  pointer-events: none;
+}
+
+:global .dvtabs {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 200px;
+}

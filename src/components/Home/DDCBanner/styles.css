@@ -1,0 +1,89 @@
+@import "utilities";
+
+$color-ddc-background: #1b4255;
+
+/* DDC */
+.ddcWrapper {
+  background-color: $color-ddc-background;
+  color: $color-white;
+}
+
+.ddcWrapperBeta {
+  background-color: $color-white;
+  color: $color-fiord;
+}
+
+.ddcSection,
+.ddcSectionBeta {
+  @mixin 2columnsResponsive 4.5, 7.5;
+}
+
+.ddcSection {
+  padding-top: $space-xxxxl;
+  padding-bottom: $space-xxxxl;
+}
+
+.ddcSectionBeta {
+  padding-bottom: 64px;
+}
+
+.titleBox {
+  padding-top: 64px;
+  padding-bottom: $space-xl;
+}
+
+.titleAndButtons {
+  padding-bottom: $space-lg;
+
+  @media (min-width: $screen-md) {
+    padding-bottom: 0;
+  }
+}
+
+.DDCComponents {
+  @mixin 3columns 4, 4, 4;
+}
+
+.DDC {
+  flex-direction: column;
+}
+
+.DDCName {
+  @mixin fontSize 4;
+  margin-bottom: $space-xl;
+}
+
+.DDCDescription {
+  @mixin fontSize 1;
+  width: 95%;
+}
+
+.DDCtitle {
+  @mixin fontSize 7;
+  margin-bottom: $space-xl;
+  width: 80%;
+  & > a {
+    text-decoration: none;
+  }
+}
+
+.button,
+.buttonBeta {
+  @mixin fontSize 2;
+  @mixin semiBold;
+  text-decoration: none;
+  padding: $space-sm $space-md;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: $corner-size;
+  margin-right: $space-sm;
+}
+
+.button {
+  border: 2px solid $color-white;
+}
+
+.buttonBeta {
+  color: $color-dodger-blue;
+  border: 2px solid $color-dodger-blue;
+}

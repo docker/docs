@@ -1,0 +1,23 @@
+@import "utilities";
+
+.form {
+  padding: $space-sm;
+}
+
+.row {
+  @mixin 2columns 6, 6;
+}
+
+.fullRow {
+  width: 100%;
+}
+
+.title {
+  @mixin fontSize 2;
+  color: $color-fiord;
+  font-weight: bold;
+}
+
+.submit {
+  cursor: pointer;
+}

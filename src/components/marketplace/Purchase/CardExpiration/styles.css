@@ -1,0 +1,23 @@
+@import "utilities";
+
+.expiration {
+  .title {
+    margin-top: -22px;
+    padding: $space-xxs;
+    color: $color-variant-dull;
+  }
+  .dates {
+    @mixin 2columns 6, 6;
+    margin-bottom: $space-xs;
+  }
+}
+
+.expirationErr > div {
+  border-color: $color-variant-panic !important;
+}
+
+.dateErr {
+  color: $color-variant-panic;
+  font-size: $font-size-0;
+  margin: 0 $space-xxs;
+}

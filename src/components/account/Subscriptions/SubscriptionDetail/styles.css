@@ -1,0 +1,178 @@
+@import "utilities";
+
+$card-padding: 64px;
+
+.product {
+  display: flex;
+  align-items: center;
+  margin-bottom: $space-xs;
+}
+
+.icon {
+  @mixin storeIcon;
+  margin-right: $space-xl;
+}
+
+.nameAndLicense {
+  @mixin fontSize 2;
+  color: $color-regent-gray;
+}
+
+.subscriptionSummary,
+.partnerName {
+  display: flex;
+  align-items: center;
+}
+
+.summaryAndPullCommand {
+  @mixin 2columnsResponsive 7, 5;
+}
+
+.pullText {
+  @mixin fontSize 1;
+}
+
+.productName {
+  @mixin fontSize 4;
+  @mixin semiBold;
+  margin-right: $space-xs;
+}
+
+.check {
+  fill: $color-robins-egg-blue;
+  margin-right: $space-xxs;
+}
+
+.marketplaceIcon {
+  fill: $color-regent-gray;
+  margin-left: $space-xxs;
+}
+
+.subscriptionDetailCard {
+  padding: $card-padding;
+  margin-bottom: $space-xxl;
+}
+
+.subscriptionLine {
+  @mixin fontSize 2;
+  color: $color-regent-gray;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: calc($space-xl - 1em);
+  padding-bottom: calc($space-xl - 1em);
+}
+
+.subscriptionName,
+.licenseStatus {
+  @mixin fontSize 3;
+  color: $color-fiord;
+}
+
+.subscriptionName {
+  @mixin semiBold;
+}
+
+.licenseInformation {
+  text-align: right;
+}
+
+.downloadLicense {
+  @mixin fontSize 2;
+  display: flex;
+  font-weight: bold;
+  color: $color-dodger-blue;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  & > svg {
+    fill: $color-dodger-blue;
+    margin-right: $space-xxs;
+  }
+}
+
+.downloadLicenseError {
+  color: $color-carnation;
+  & > svg {
+    fill: $color-carnation;
+  }
+}
+
+.newSubscription {
+  background-color: $color-robins-egg-blue;
+  box-shadow: 0 2px 4px 0 $color-regent-gray;
+  margin-bottom: $space-xxxl;
+  color: $color-white;
+  position: relative;
+}
+
+.error {
+  background-color: $color-carnation;
+  box-shadow: 0 2px 4px 0 $color-regent-gray;
+  margin-bottom: $space-xxxl;
+  color: $color-white;
+  position: relative;
+}
+
+.notificationHeader {
+  font-weight: 600;
+  margin-bottom: $space-sm;
+}
+
+.closeModal {
+  position: absolute;
+  top: $space-md;
+  right: $space-md;
+}
+
+.close {
+  fill: $color-white;
+}
+
+.modal {
+  background: $color-white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cancelHeader {
+  @mixin fontSize 5;
+  margin-bottom: $space-sm;
+}
+
+.cancelDetail {
+  @mixin fontSize 3;
+  color: $color-regent-gray;
+  margin-bottom: $space-xl;
+}
+
+.underlined {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* DDC Instructions */
+.instructionsSection {
+  padding-right: $card-padding;
+  padding-left: $card-padding;
+  margin-bottom: $space-xxl;
+}
+
+.instructionsHeader {
+  @mixin fontSize 3;
+  @mixin semiBold;
+  margin-bottom: $space-xl;
+}
+
+.instructionsDetail {
+  @mixin fontSize 2;
+}
+
+.link {
+  composes: underlined;
+  display: inline-block;
+  color: $color-fiord;
+}

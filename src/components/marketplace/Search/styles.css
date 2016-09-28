@@ -1,0 +1,52 @@
+@import "utilities";
+
+.content {
+  @mixin 2columns 3, 9;
+  padding-top: $space-xxl;
+}
+
+.resultsWrapper {
+  lost-flex-container: row;
+  & > * {
+    lost-column: 1/3;
+  }
+}
+
+.filterList {
+  margin-bottom: $space-xxl;
+}
+
+.communityImagesBanner {
+  padding: $space-xl;
+  text-align: center;
+}
+
+.helpText {
+  @mixin fontSize 0;
+  color: $color-regent-gray;
+}
+
+.communityImagesLink {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.showDockerVerifiedBanner {
+  & > div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.description {
+  @mixin fontSize 2;
+  margin-bottom: $space-xxs;
+}
+
+.pagination {
+  padding: $space-xl;
+}
+
+.warning {
+  margin-right: $space-xl;
+}

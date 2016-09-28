@@ -1,0 +1,30 @@
+@import "utilities";
+
+$slant: 50px;
+$purple: #8460ff;
+
+/* Bigger right offset to account for slant */
+.box {
+  @mixin fontSize 3;
+  @mixin semiBold;
+  background-color: $purple;
+  color: white;
+  padding: $space-sm $space-lg $space-sm $space-md;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+}
+
+.box::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 100%;
+  transform: skewX(-20deg);
+  transform-origin: bottom left;
+  background: $purple;
+}

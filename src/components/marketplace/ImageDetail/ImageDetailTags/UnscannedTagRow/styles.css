@@ -1,0 +1,10 @@
+@import "utilities";
+
+.listItem {
+  padding-right: $space-xl;
+  padding-left: $space-xl;
+}
+
+.twoColumns {
+  @mixin 2columns 6, 6;
+}

@@ -1,0 +1,190 @@
+@import "variables.css";
+@import "mixins.css";
+
+@define-mixin btn-variant $variant {
+  /* stylelint-disable function-whitespace-after */
+  &:not(.inverted) {
+    background-color: $color-variant-$(variant);
+    border-color: $color-variant-$(variant);
+
+    &:hover {
+      background-color: $color-variant-$(variant)-hover;
+      border-color: $color-variant-$(variant)-hover;
+    }
+
+    &.text,
+    &.outlined {
+      color: $color-variant-$(variant);
+
+      &:hover {
+        color: $color-variant-$(variant)-hover;
+      }
+    }
+
+    &.outlined.iconRight :global .dicon,
+    &.outlined.iconLeft :global .dicon,
+    &.icon :global .dicon {
+      fill: $color-variant-$(variant);
+    }
+
+    &.outlined.iconRight:hover :global .dicon,
+    &.outlined.iconLeft:hover :global .dicon,
+    &.icon:hover :global .dicon {
+      fill: $color-variant-$(variant)-hover;
+    }
+  }
+  /* stylelint-enable */
+}
+
+/* stylelint-disable block-no-empty */
+:global .dbutton {}
+/* stylelint-enable */
+
+.button {
+  box-sizing: border-box;
+  user-select: none;
+  position: relative;
+  outline: 0;
+  display: inline-block;
+  align-items: center;
+  border-style: solid;
+  white-space: nowrap;
+  text-align: center;
+  font-weight: 700;
+  font-style: inherit;
+  font-variant: inherit;
+  font-family: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  padding: 0 10px;
+  margin: 6px 8px;
+  min-width: $button-min-width;
+  line-height: calc($button-height - 4px);
+  min-height: calc($button-height - 4px);
+  border-width: 2px;
+  border-radius: $button-border-radius;
+  font-size: $button-font-size;
+  color: white;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+}
+
+.button :global .dicon {
+  fill: white;
+  position: relative;
+  top: calc(($button-height - $icon-size-regular) / 2 - 2px);
+}
+
+.icon {
+  min-width: auto;
+}
+
+.iconLeft,
+.iconRight {
+  :global .dicon {
+    position: absolute;
+  }
+}
+
+.iconLeft {
+  &::before {
+    content: " ";
+    display: block;
+    float: left;
+    margin-right: 10px;
+
+    @mixin square 24px;
+  }
+
+  :global .dicon {
+    left: 10px;
+  }
+}
+
+.iconRight {
+  &::after {
+    content: " ";
+    display: block;
+    float: right;
+    margin-left: 10px;
+
+    @mixin square 24px;
+  }
+
+  :global .dicon {
+    right: 10px;
+  }
+}
+
+.primary {
+  @mixin btn-variant primary;
+}
+
+.secondary {
+  @mixin btn-variant secondary;
+}
+
+.warn {
+  @mixin btn-variant warn;
+}
+
+.panic {
+  @mixin btn-variant panic;
+}
+
+.dull {
+  @mixin btn-variant dull;
+}
+
+.icon,
+.text,
+.outlined {
+  &,
+  &:hover {
+    background: none !important;
+  }
+}
+
+.text,
+.icon {
+  &,
+  &:hover {
+    border: none !important;
+  }
+}
+
+.inverted {
+  border-color: white;
+  background-color: white;
+  color: $color-variant-primary;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-color: rgba(255, 255, 255, 0.85);
+  }
+
+  &.outlined,
+  &.text {
+    & :global .dicon {
+      fill: white;
+    }
+
+    color: white;
+  }
+
+  &.text:hover {
+    color: rgba(255, 255, 255, 0.85);
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}

@@ -1,0 +1,28 @@
+@import "utilities";
+
+.footerWrapper {
+  @mixin fontSize 0;
+  margin-top: $space-lg;
+  background-color: #1b4255;
+  color: $color-white;
+}
+
+.contentWrapper {
+  @mixin wrapped;
+  padding-top: $space-xxxl;
+  padding-bottom: $space-xxxl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.description {
+  margin-bottom: $space-xs;
+}
+
+.links {
+  & > a {
+    text-decoration: none;
+    margin-left: $space-xxl;
+  }
+}

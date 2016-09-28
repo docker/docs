@@ -1,0 +1,49 @@
+@import "utilities";
+
+.form {
+  padding: $space-sm;
+}
+
+.row {
+  @mixin 2columns 6, 6;
+}
+
+.cardRow {
+  @mixin 3columns 6, 2, 4;
+  margin-top: $space-md;
+}
+
+.postalRow {
+  @mixin 3columns 4, 2, 6;
+}
+
+.title {
+  @mixin fontSize 2;
+  color: $color-fiord;
+  font-weight: bold;
+}
+
+.error {
+  @mixin fontSize 2;
+  font-weight: bold;
+  color: $color-variant-panic;
+}
+
+.submit {
+  cursor: pointer;
+  margin-top: $space-lg;
+}
+
+.warning {
+  color: $color-variant-panic;
+  margin
+  display: flex;
+  flex-direction: column;
+  margin: 0 $space-md;
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

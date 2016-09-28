@@ -1,0 +1,5 @@
+@import "utilities";
+
+.content {
+  margin: $space-xxl 0;
+}

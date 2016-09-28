@@ -1,0 +1,19 @@
+@import "utilities";
+
+.trigger {
+  display: inline-block;
+  background-color: $color-picton-blue;
+  color: $color-white;
+  padding: $space-md;
+  vertical-align: middle;
+  text-align: center;
+  margin-right: $space-md;
+  margin-bottom: $space-md;
+  border-radius: $corner-size;
+  cursor: pointer;
+}
+
+.input {
+  padding: $space-md;
+  border-radius: $corner-size;
+}

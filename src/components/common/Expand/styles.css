@@ -1,0 +1,23 @@
+.title {
+	cursor: pointer;
+
+	display: flex;
+	align-items: center;
+
+	&::before {
+		transition: all .25s;
+		transform: rotate(-90deg);
+		content: '';
+		margin-right: .5rem;
+
+		width: 0; 
+		height: 0; 
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-top: 5px solid #8f9ea6;
+	}
+}
+
+.expanded::before {
+	transform: rotate(0deg);
+}

@@ -1,0 +1,52 @@
+@import "utilities";
+
+:global {
+  .ReactModal__Overlay {
+    opacity: 0;
+  }
+
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+    transition: opacity 250ms ease-out;
+  }
+}
+
+.magicCarpet {
+  background-color: $color-background-base;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  padding: $space-xxl;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.close {
+  align-self: flex-start;
+  cursor: pointer;
+}
+
+/* Must be greater than FullscreenLoading's zindex so close can be pressed */
+.aboveLoading {
+  z-index: 1000;
+}
+
+.icon {
+  margin-right: $space-sm;
+}
+
+.title {
+  @mixin headline;
+}
+
+.subscription {
+  margin-bottom: $space-sm;
+}

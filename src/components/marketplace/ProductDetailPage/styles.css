@@ -1,0 +1,252 @@
+@import "utilities";
+
+$grey-border: solid 1px $color-geyser;
+$tab-height: 44px;
+$logo-height: 80px;
+
+/* Backgrounds and Layout */
+.fullWhiteBackground {
+  background: $color-white;
+  border-bottom: $grey-border;
+}
+
+.header {
+  margin-bottom: $space-xxxxl;
+}
+
+.splitSections {
+  @mixin 2columns 8, 4;
+}
+
+.descriptionSection {
+  padding-top: $space-xxxxl;
+}
+
+.rightBorder {
+  border-right: $grey-border;
+  padding-right: $space-sm;
+}
+
+/* Versions and Subscriptions */
+.versionsAndSubscriptions {
+  padding-left: $space-lg;
+
+  /* Make sure children can take up all vertical space */
+  display: flex;
+  flex-direction: column;
+}
+
+.versionsAndSubscriptionsLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  @mixin fontSize 2;
+  color: $color-regent-gray;
+  margin-right: $space-xl;
+}
+
+.defaultVersion {
+  @mixin fontSize 3;
+  margin-right: $space-xs;
+}
+
+.flexRow {
+  display: flex;
+  align-items: center;
+}
+
+.defaultVersionLine {
+  margin-bottom: $space-xs;
+}
+
+.shield {
+  fill: $color-pacific-blue;
+  margin-right: $space-xs;
+}
+
+.pullCommand {
+  @mixin fontSize 2;
+  color: $color-regent-gray;
+  margin-bottom: $space-sm;
+}
+
+.pullCode {
+  @mixin fontSize 2;
+  background-color: $color-fiord;
+  color: $color-white;
+  padding: $space-xs $space-sm;
+  white-space: nowrap;
+  overflow-x: auto;
+  width: 100%;
+}
+
+/* Header Information */
+.logo {
+  @mixin square $logo-height;
+}
+
+.fallbackElement {
+  @mixin square $logo-height;
+  fill: $color-regent-gray;
+}
+
+.partnerDetail {
+  display: flex;
+  justify-content: space-between;
+}
+
+.partnerLinks {
+  padding-top: $tab-height;
+  text-decoration: underline;
+  color: $color-regent-gray;
+  & > a {
+    display: block;
+    margin-bottom: $space-md;
+  }
+}
+
+.partnerName {
+  @mixin fontSize 3;
+}
+
+.dockerVerifiedPartner {
+  display: flex;
+  align-items: center;
+}
+
+.check {
+  margin-right: $space-xxs;
+  margin-left: $space-xs;
+}
+
+.inlineWithLogo {
+  display: flex;
+  margin-bottom: $space-md;
+}
+
+.repoDetailColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: $space-md;
+}
+
+.popularity {
+  @mixin fontSize 2;
+  color: $color-fiord;
+}
+
+.popularityAndRatings {
+  display: flex;
+  margin-bottom: $space-xxs;
+}
+
+.name {
+  @mixin fontSize 7;
+  margin-bottom: $space-xs;
+}
+
+.category {
+  @mixin fontSize 2;
+  color: $color-regent-gray;
+  margin-bottom: $space-sm;
+}
+
+.categoryTitle {
+  @mixin semiBold;
+  color: $color-fiord;
+}
+
+.shortDescription {
+  @mixin fontSize 2;
+  margin-bottom: $space-md;
+}
+
+/* Description */
+.description {
+  margin-bottom: $space-xxl;
+}
+
+/* Do not let a child img element stretch outside of the parent's bounds */
+.scaleImages img {
+  max-width: 100%;
+}
+
+/* Screenshots */
+.screenshots {
+  margin-bottom: $space-xxl;
+}
+
+.screenshot {
+  width: 100%;
+  margin-bottom: $space-md;
+}
+
+.fallbackElement {
+  composes: screenshot;
+
+  @mixin fontSize 2;
+  background-color: $color-geyser;
+  color: $color-regent-gray;
+  padding: $space-xxxxl 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $corner-size;
+  font-style: italic;
+}
+
+/* Links */
+.partnerLinks {
+  padding-left: $space-xxl;
+}
+
+/* Tabs + Ratings */
+.tabsWrapper {
+  margin-bottom: $space-xl;
+  display: flex;
+}
+
+.tabContent {
+  padding-bottom: 60px;
+}
+
+.tabWidth {
+  width: 100%;
+}
+
+.ratingTitle {
+  display: inline-block;
+}
+
+/* Override fill:white from button with icon */
+button .ratingTitle svg[class*="dicon"].ratingStar {
+  fill: $color-loblolly;
+}
+
+/* Override fill:white from button with icon */
+button .ratingTitle svg[class*="dicon"].filledRatingStar {
+  fill: $color-dodger-blue;
+}
+
+/* Ratings and Reviews */
+.ratingsWrapper {
+  @mixin fontSize 2;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  color: $color-regent-gray;
+  & > div {
+    margin-bottom: $space-sm;
+  }
+}
+
+.placeholderStar {
+  @mixin square 30px;
+  fill: $color-geyser;
+}

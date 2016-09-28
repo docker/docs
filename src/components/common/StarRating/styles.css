@@ -1,0 +1,16 @@
+@import "utilities";
+
+.star {
+  fill: $color-loblolly;
+}
+
+.filled {
+  fill: $color-dodger-blue;
+}
+
+.clickable {
+  cursor: pointer;
+  &:hover {
+    fill: $color-dodger-blue;
+  }
+}

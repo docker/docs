@@ -1,0 +1,37 @@
+@import "utilities";
+
+/* stylelint-disable block-no-empty */
+:global .dcard {}
+/* stylelint-enable */
+
+.card {
+  background: $color-background-card;
+  border: 1px solid $color-geyser;
+  border-radius: $corner-size;
+  padding: $space-xl;
+}
+
+.title {
+  @mixin title;
+  margin: 0;
+  margin-bottom: $space-xl;
+}
+
+.card.shy {
+  padding: $space-md;
+
+  .title {
+    @mixin fontSize 2;
+    margin-bottom: $space-lg;
+  }
+}
+
+.shadowCard {
+  background-color: $color-white;
+  padding: $space-xl;
+  box-shadow: inset -1px 0 0 0 rgba(224, 227, 231, 0.6), inset 0 -1px 0 0 $color-geyser, inset 1px 0 0 0 rgba(224, 227, 231, 0.6);
+}
+
+.shadowCardHover:hover {
+  box-shadow: 0 2px 6px 0 $color-geyser, inset -1px 0 0 0 rgba(224, 227, 231, 0.3), inset 0 -1px 0 0 $color-geyser, inset 1px 0 0 0 rgba(224, 227, 231, 0.2);
+}

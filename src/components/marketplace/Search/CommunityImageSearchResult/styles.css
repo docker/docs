@@ -1,0 +1,25 @@
+@import "utilities";
+
+.communityRepo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.name {
+  @mixin fontSize 2;
+  margin-bottom: $space-xs;
+}
+
+.popularity {
+  @mixin fontSize 2;
+  min-height: $line-height-2;
+  color: $color-fiord;
+  flex-shrink: 0;
+}
+
+.shortDescription {
+  color: $color-regent-gray;
+  min-height: $space-xxl;
+}

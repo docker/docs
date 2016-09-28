@@ -1,0 +1,18 @@
+@import "variables.css";
+@import "utilities.css";
+
+.breadcrumbs {
+  margin: 20px 0;
+  font-size: 14px;
+}
+
+.header {
+  display: flex;
+
+  .switchWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1 auto;
+  }
+}

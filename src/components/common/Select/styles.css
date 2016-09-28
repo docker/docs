@@ -1,0 +1,44 @@
+@import "utilities";
+
+:global {
+  .Select-control {
+    border-radius: $corner-size;
+    border-color: $color-geyser !important;
+  }
+
+  .Select-menu-outer {
+    border-bottom-right-radius: $corner-size;
+    border-bottom-left-radius: $corner-size;
+    border: 1px solid $color-geyser;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .Select-option {
+    box-sizing: border-box;
+    background-color: $color-white;
+    color: inherit;
+    cursor: pointer;
+    display: block;
+    padding: 8px 10px;
+
+    &:last-child {
+      border-bottom-right-radius: $corner-size;
+      border-bottom-left-radius: $corner-size;
+    }
+
+    &.is-focused {
+      background: $color-porcelain;
+      color: inherit;
+    }
+  }
+}
+
+.errorText {
+  display: none;
+  color: $color-carnation;
+  font-size: $font-size-0;
+  line-height: $space-sm;
+  height: $space-sm;
+  margin-top: $space-xs;
+  display: block;
+}

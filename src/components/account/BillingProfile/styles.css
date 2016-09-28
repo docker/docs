@@ -1,0 +1,22 @@
+@import "utilities";
+
+.navigation {
+  @mixin 2columns 6, 6;
+}
+
+.emptyNav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  button {
+    cursor: pointer;
+  }
+}
+
+.content {
+  margin: $space-xxl 0;
+}

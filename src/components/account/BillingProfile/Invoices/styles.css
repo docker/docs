@@ -1,0 +1,47 @@
+@import "utilities";
+
+.table {
+  .head,
+  .row {
+    @mixin 4columns 2, 4.5, 2, 2, 1.5;
+  }
+
+  .row {
+    align-items: center;
+  }
+
+  .row + .row {
+    margin-top: $space-xxl;
+  }
+
+  .head {
+    font-weight: bold;
+    color: $color-variant-dull;
+    margin: $space-sm 0;
+  }
+}
+
+.noInvoices {
+  text-align: center;
+}
+
+.downloadLicense {
+  @mixin fontSize 2;
+  display: flex;
+  font-weight: bold;
+  color: $color-dodger-blue;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  & > svg {
+    fill: $color-dodger-blue;
+    margin-right: $space-xxs;
+  }
+}
+
+.downloadLicenseError {
+  color: $color-carnation;
+  & > svg {
+    fill: $color-carnation;
+  }
+}

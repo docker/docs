@@ -1,0 +1,4 @@
+DEBUG: 'True'
+SERVICE_NAME: 'mercury-ui'
+RELEASE_STAGE: 'staging'
+NODE_ENV: 'production'

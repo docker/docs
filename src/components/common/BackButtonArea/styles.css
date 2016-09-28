@@ -1,0 +1,21 @@
+@import "utilities";
+
+.wrapper {
+  padding: $space-xl 0;
+}
+
+.link {
+  @mixin linkUnstyled;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.text {
+  margin-left: $space-xs;
+  color: $color-regent-gray;
+}
+
+.icon {
+  fill: $color-regent-gray;
+}

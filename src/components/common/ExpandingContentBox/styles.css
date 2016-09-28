@@ -1,0 +1,12 @@
+@import "utilities";
+
+.content {
+	overflow: hidden;
+}
+
+.toggleText {
+  padding: $space-sm 0;
+  color: $color-regent-gray;
+  text-decoration: underline;
+  cursor: pointer;
+}

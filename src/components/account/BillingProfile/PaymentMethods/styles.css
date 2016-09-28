@@ -1,0 +1,45 @@
+@import "utilities";
+
+.title {
+  @mixin fontSize 2;
+  color: $color-fiord;
+  font-weight: bold;
+}
+
+.updateCardRow {
+  margin-bottom: $space-md;
+}
+
+.warning {
+  color: $color-variant-panic;
+  margin
+  display: flex;
+  align-items: center;
+  margin: 0 $space-md;
+}
+
+.paymentMethod {
+  display: inline-flex;
+  width: 22%;
+  min-width: 200px;
+  margin: $space-md;
+  &.selected {
+    border: 1px solid $color-variant-primary-hover;
+  }
+  &:hover {
+    border: 1px solid $color-variant-primary-light;
+    cursor: pointer;
+  }
+}
+
+.splitForms {
+  @mixin 2columns 6, 6;
+  > div:first-child {
+    border-right: 1px solid $color-loblolly;
+  }
+}
+
+.submit {
+  cursor: pointer;
+  margin: $space-xs $space-md;
+}

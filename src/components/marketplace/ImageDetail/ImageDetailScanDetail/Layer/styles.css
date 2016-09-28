@@ -1,0 +1,96 @@
+@import "utilities";
+
+$nautilus-border: 1px solid $color-geyser;
+
+.baseLayerLabel {
+  @mixin fontSize 0;
+  color: $color-regent-gray;
+  border-radius: $corner-size;
+  background-color: $color-geyser;
+  padding: 2px 8px;
+}
+
+.check {
+  margin-right: $space-xxs;
+  fill: $color-robins-egg-blue;
+}
+
+.chevron {
+  transition: all 1s;
+  fill: $color-regent-gray;
+}
+
+.chevronUp {
+  transform: rotateX(-180deg);
+  transition: all 1s;
+}
+
+.dockerCommandLine {
+  @mixin fontSize 3;
+  color: $color-fiord;
+  margin-right: $space-xs;
+}
+
+.information {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.layer {
+  lost-flex-container: row;
+  border-top: $nautilus-border;
+  padding: $space-sm $space-xl;
+  & > * {
+    lost-column: 1/2;
+  }
+}
+
+.selectedLayer {
+  border-left: $nautilus-border;
+  border-right: $nautilus-border;
+  border-bottom: $nautilus-border;
+  border-radius: $corner-size;
+}
+
+.selectedLayer + .layer {
+  border-top: none;
+}
+
+.layerSize {
+  @mixin fontSize 0;
+  color: $color-regent-gray;
+  margin-right: $space-xs;
+}
+
+.line {
+  display: flex;
+}
+
+.numVulnerableComps {
+  color: $color-regent-gray;
+}
+
+.section {
+  padding-right: $space-xl;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $space-xs;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.notClickable {
+  color: $color-regent-gray;
+}
+
+.tooltipContent {
+  @mixin fontSize 0;
+  width: 400px;
+  font-family: $font-family-mono;
+}

@@ -1,0 +1,42 @@
+@import "utilities";
+
+.wrapper {
+  position: relative;
+  align-self: center;
+  width: 100%;
+}
+
+.icon {
+  fill: $color-white;
+  position: absolute;
+  top: calc(($select-height - $icon-size-small) / 2);
+  left: calc(($select-height - $icon-size-small) / 2);
+}
+
+.input {
+  text-indent: $space-xl;
+  width: 100%;
+  height: $select-height;
+  padding-top: $space-xs;
+  padding-bottom: $space-xs;
+  padding-left: $space-sm;
+  border: 0;
+  outline: none;
+  border-radius: $corner-size;
+  background-color: $color-white;
+}
+
+.menu {
+  border-radius: $corner-size;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  background: $color-white;
+  position: absolute;
+  overflow: auto;
+  z-index: 999;
+  max-height: $autocomplete-dropdown-max-height;
+  width: 100%;
+}
+
+.menuTitle {
+  @mixin semiBold;
+}

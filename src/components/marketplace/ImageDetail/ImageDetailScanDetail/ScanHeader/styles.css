@@ -1,0 +1,38 @@
+@import "utilities";
+
+.text {
+  @mixin fontSize 0;
+  color: $color-regent-gray;
+  margin-right: $space-xs;
+}
+
+.row {
+  display: flex;
+  margin-bottom: $space-md;
+  padding-top: $space-md;
+}
+
+.tagname {
+  @mixin fontSize 4;
+  color: $color-fiord;
+}
+
+.viewAllTags {
+  @mixin fontSize 0;
+  color: $color-regent-gray;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.icon {
+  fill: $color-robins-egg-blue;
+}
+
+.clean {
+  display: flex;
+  > * {
+    margin-right: $space-xxs;
+  }
+}

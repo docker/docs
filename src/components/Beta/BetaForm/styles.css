@@ -1,0 +1,15 @@
+@import "utilities";
+
+.main {
+  @mixin clearfix;
+}
+
+.input {
+  margin-bottom: $space-lg;
+  width: 100%;
+}
+
+.submit {
+  cursor: pointer;
+  margin: $space-xs 0;
+}

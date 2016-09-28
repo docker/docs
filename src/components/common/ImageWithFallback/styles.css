@@ -1,0 +1,27 @@
+@import "utilities";
+
+/* hide the ALT text in certain browsers (firefox) */
+.hideAltText {
+  color: transparent;
+}
+
+/*
+ * Make sure there is no flash between when the image calls onLoad() and the
+ * loaded styles are applied
+ */
+.hideFadeInFlash {
+  opacity: 0;
+}
+
+.fadeInImage {
+  animation: fadein 0.6s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

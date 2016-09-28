@@ -1,0 +1,13 @@
+# Include your project-specific ignores in this file
+# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+
+dist
+node_modules
+npm-debug.log
+npm-debug.*.log
+.eslintcache
+.DS_Store
+coverage
+
+# ignore webstorm ide files
+.idea

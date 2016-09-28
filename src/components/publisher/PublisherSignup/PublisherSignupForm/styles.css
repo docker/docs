@@ -1,0 +1,19 @@
+@import "utilities";
+
+.row {
+  flex: 1 auto;
+}
+
+.form {
+  width: 280px;
+  margin: 32px 0;
+}
+
+.button {
+  margin: 10px 0 0;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,30 @@
+@import "utilities";
+
+:global {
+  #cookie-bar {
+    background: $color-variant-primary-light;
+    color: white;
+    text-align: center;
+    padding: $space-sm;
+
+    &,
+    p {
+      margin: 0;
+    }
+
+    a {
+      @mixin linkUnstyled;
+      text-decoration: underline;
+    }
+
+    .cb-enable {
+      background: white;
+      color: $color-dodger-blue !important;
+      padding: 4px 10px;
+      text-decoration: none;
+      border-radius: $button-border-radius;
+      font-weight: 700;
+      margin-left: $space-sm;
+    }
+  }
+}

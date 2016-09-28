@@ -1,0 +1,15 @@
+@import "utilities";
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: $space-md;
+}
+
+.avatar {
+  margin-right: $space-xs;
+}
+
+.user {
+  margin-right: $space-sm;
+}

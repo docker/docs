@@ -1,0 +1,55 @@
+@import "utilities";
+
+/* stylelint-disable block-no-empty */
+:global .dmenu {}
+/* stylelint-enable */
+
+.container {
+  display: inline-block;
+  position: relative;
+
+  &:not(.opened) .backdrop {
+    @mixin hide;
+  }
+}
+
+.opened .backdrop {
+  position: fixed;
+  background: transparent;
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  top: 0;
+
+  /* Must be smaller than the magic carpet */
+  z-index: 797;
+}
+
+.menu {
+  @mixin listUnstyled;
+  @mixin fontSize 2;
+  position: absolute;
+  z-index: 798;
+  background: white;
+  border: 1px solid $color-athens-gray;
+  border-radius: $corner-size;
+  padding: $space-xs 0;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  width: 100%;
+  min-width: calc(80px + $space-xs * 2);
+}
+
+.item {
+  cursor: pointer;
+  line-height: 2.4;
+  padding: 0 $space-lg;
+
+  &:hover {
+    background: $color-porcelain;
+  }
+
+  &.disabled {
+    color: $color-loblolly;
+    pointer-events: none;
+  }
+}

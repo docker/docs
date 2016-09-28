@@ -1,0 +1,35 @@
+@import "utilities";
+
+:global {
+  .rc-slider {
+    height: 2px !important;
+  }
+  .rc-slider-track {
+    height: 2px !important;
+  }
+  .rc-slider-handle {
+    margin-top: -6px;
+    background: $color-picton-blue;
+    border-color: $color-picton-blue;
+  }
+  .rc-tooltip-inner {
+    background: $color-picton-blue;
+    border-color: $color-picton-blue;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    visibility: visible;
+    padding: 4px 2px;
+    min-width: 32px;
+    height: 32px;
+    font-size: 12px;
+    line-height: 2;
+  }
+  .rc-tooltip-inner span {
+    display: inline-block;
+    transform: rotate(45deg);
+  }
+  .rc-tooltip-arrow {
+    border: none;
+  }
+
+}

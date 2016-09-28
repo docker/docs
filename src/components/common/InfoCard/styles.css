@@ -1,0 +1,34 @@
+@import "utilities";
+
+/* stylelint-disable block-no-empty */
+:global .dserviceList {}
+/* stylelint-enable */
+.wrapper {
+  max-width: 740px;
+  margin: auto;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.cardBody {
+  margin-left: $font-size-3;
+}
+
+.cardText {
+  color: $color-regent-gray;
+  font-size: $font-size-1;
+}
+
+.cardLink {
+  color: $color-fiord;
+  display: block;
+  font-size: $font-size-0;
+  margin-top: $space-sm;
+}

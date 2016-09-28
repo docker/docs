@@ -1,0 +1,64 @@
+@import "utilities";
+
+.ddcgraphic {
+  width: 150px;
+  height: 175px;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  hr {
+    width: 100%;
+    margin: $space-lg 0;
+  }
+}
+
+.icon {
+  width: 100%;
+  margin-bottom: $space-sm;
+}
+
+.included {
+  @mixin fontSize 2;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  .title {
+    font-size: $font-size-4;
+    margin-bottom: $space-lg;
+  }
+  .includeItems div {
+    padding-top: $space-sm;
+  }
+}
+
+.pricingTier {
+  @mixin fontSize 2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cost {
+  @mixin fontSize 2;
+  margin-bottom: $space-xxl;
+  text-align: center;
+}
+
+.price {
+  @mixin fontSize 7;
+  font-weight: bold;
+}
+
+.submit {
+  @mixin fontSize 1;
+  cursor: pointer;
+  margin: 0;
+  white-space: inherit;
+}
+
+.card {
+  padding: $space-xxl;
+}

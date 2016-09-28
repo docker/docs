@@ -1,0 +1,19 @@
+@import "utilities";
+
+.main {
+  @mixin clearfix;
+}
+
+.input {
+  margin-bottom: $space-lg;
+  width: 100%;
+}
+
+.login {
+  cursor: pointer;
+  float: right;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: $space-xl;
+  width: 110px;
+}

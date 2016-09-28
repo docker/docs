@@ -1,0 +1,125 @@
+@import "utilities";
+
+.card {
+  padding: $space-xxl;
+  height: 100%;
+}
+
+.check {
+  fill: $color-robins-egg-blue;
+}
+
+.already {
+  margin-top: 18px;
+  margin-bottom: 10px;
+
+  label {
+    margin-right: 20px;
+  }
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  margin-bottom: 28px;
+
+  display: flex;
+  align-items: center;
+
+  .titleText {
+    margin-left: 28px;
+  }
+
+  .titleSubText {
+    font-size: 14px;
+    color: $color-regent-gray;
+  }
+}
+
+.sectionTitle {
+  @mixin fontSize 2;
+  font-weight: 600;
+  margin-bottom: 8px;
+  margin-top: 14px;
+}
+
+.soft {
+  @mixin fontSize 2;
+  color: $color-loblolly;
+  font-weight: bold;
+}
+
+.fields {
+  padding-left: $space-xs;
+  padding-right: $space-xs;
+}
+
+.row {
+  @mixin 2columns 6, 6;
+}
+
+.euta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 14px;
+  svg {
+    fill: $color-loblolly;
+  }
+}
+
+.error {
+  @mixin fontSize 1;
+  height: $space-md;
+  color: $color-variant-panic;
+  margin: 0 $space-xl $space-sm;
+}
+
+.submit {
+  @mixin fontSize 2;
+  cursor: pointer;
+  padding: 0 $space-xxxl;
+  margin: 0;
+}
+
+.continue {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.subscriptionExists {
+  @mixin fontSize 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: $space-xxl $space-lg;
+}
+
+.verify {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  flex-direction: column;
+
+  @mixin fontSize 2;
+  font-weight: 600;
+  margin: 58px 0;
+
+  img {
+    margin: 28px;
+  }
+
+  .verifyTitle {
+    @mixin fontSize 3;
+    margin-bottom: 10px;
+  }
+
+  .verifySubtitle {
+    color: $color-regent-gray;
+    max-width: 340px;
+  }
+}

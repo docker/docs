@@ -1,0 +1,18 @@
+@import "variables.css";
+
+.admin {
+  ul {
+    border-top: 1px solid $color-geyser;
+    list-style: none;
+    padding: 0;
+    li {
+      padding: 8px 0;
+      border-bottom: 1px solid $color-geyser;
+    }
+  }
+
+  .subtext {
+    color: $color-fiord;
+    margin-left: 10px;
+  }
+}

@@ -1,0 +1,10 @@
+@import "variables";
+@import "mixins";
+
+/* stylelint-disable block-no-empty */
+:global .dlist {}
+/* stylelint-enable */
+
+.list {
+  padding-left: 0;
+}

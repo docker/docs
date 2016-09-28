@@ -1,0 +1,18 @@
+@import "utilities";
+
+.account {
+  margin: $space-sm 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sectionTitle {
+  @mixin fontSize 2;
+  margin: $space-sm 0;
+  font-weight: 600;
+}
+
+.accountSelect {
+  margin: 0 $space-lg;
+  width: 150px;
+}

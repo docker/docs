@@ -1,0 +1,96 @@
+@import "utilities";
+
+.product {
+  display: flex;
+  align-items: center;
+  margin-bottom: $space-xs;
+}
+
+.icon {
+  @mixin storeIcon;
+  margin-right: $space-xl;
+}
+
+.nameAndLicense {
+  @mixin fontSize 2;
+  color: $color-regent-gray;
+}
+
+.sectionTitle {
+  @mixin title;
+  padding: $space-xl 0;
+}
+
+.dockerSectionTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.partnerName {
+  display: flex;
+  align-items: center;
+}
+
+.productName {
+  @mixin fontSize 4;
+  @mixin semiBold;
+  margin-right: $space-xs;
+}
+
+.check {
+  fill: $color-robins-egg-blue;
+  margin-right: $space-xxs;
+}
+
+.marketplaceIcon {
+  fill: $color-regent-gray;
+  margin-left: $space-xxs;
+}
+
+.subscriptionCard {
+  cursor: pointer;
+  margin-bottom: $space-sm;
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.subscriptionSummary {
+  display: flex;
+  align-items: center;
+}
+
+.namespaceSelect {
+  height: $select-height;
+  width: $select-width;
+  margin-left: $space-sm;
+}
+
+.namespaceSelectWrapper {
+  @mixin fontSize 2;
+  color: $color-regent-gray;
+  display: flex;
+  align-items: center;
+}
+
+.terms {
+  margin-left: $space-xxs;
+  margin-right: $space-sm;
+}
+
+.noClick {
+  height: 100%;
+}
+
+.fetchingError {
+  padding-top: $space-xl;
+  color: $color-regent-gray;
+}
+
+.empty {
+  display: flex;
+  justify-content: flex-end;
+}

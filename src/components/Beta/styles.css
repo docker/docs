@@ -1,0 +1,132 @@
+@import "utilities";
+
+$hero-height: 550px;
+$featured-height: 250px;
+$section-padding: 64px;
+$color-ddc-background: #1b4255;
+
+/* Hero and NavBar */
+.home {
+  top: calc($topnav-height * -1);
+  position: relative;
+  width: 100%;
+}
+
+.heroWrapper {
+  min-height: $hero-height;
+  position: relative;
+  padding: $topnav-height 0;
+
+  /* set fallback in case multiple background images are not supported */
+  background-color: $color-dodger-blue;
+  background-image:
+    linear-gradient(to bottom, rgba(0, 191, 165, 0.8) 0%, transparent 100%),
+    linear-gradient(-74deg, transparent 90%, rgba(255, 255, 255, 0.23) 20%),
+    linear-gradient(-74deg, transparent 83%, rgba(255, 255, 255, 0.18) 15%),
+    linear-gradient(-74deg, transparent 76%, rgba(255, 255, 255, 0.1) 15%),
+    linear-gradient(to top, #127ab1, #1799e0, #1796db);
+}
+
+.title {
+  @mixin display2;
+  @mixin semiBold;
+}
+
+.logo {
+  margin: 0;
+  padding: 0;
+}
+
+.navBar {
+  display: flex;
+  height: $topnav-height;
+  color: $color-white;
+  align-items: center;
+  justify-content: space-between;
+
+  .rightNavLinks {
+    @mixin fontSize 2;
+    display: inline-flex;
+
+    & > * {
+      margin-right: $space-sm;
+      margin-left: $space-sm;
+    }
+  }
+}
+
+.heroContent {
+  @mixin flexCentered;
+  height: calc($hero-height - $topnav-height);
+  margin-top: $topnav-height;
+  flex-direction: column;
+  text-align: center;
+  color: $color-white;
+}
+
+.subText {
+  @mixin subhead;
+  margin-bottom: $space-xxxl;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: inline-flex;
+  flex-direction: column;
+  width: $input-width-large;
+  button {
+    width: 100%;
+  }
+  .signupFlow {
+    display: flex;
+    justify-content: space-between;
+    margin: $space-xs 0;
+  }
+}
+
+.betaThanks {
+  width: $input-width-xlarge;
+  margin: $space-xl 0;
+}
+
+.error {
+  @mixin fontSize 2;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  background: $color-variant-panic;
+  padding: $space-sm $space-xs;
+}
+
+/* Content sections */
+.sectionWrapper {
+  padding-bottom: $section-padding;
+  & > div {
+    padding-top: $section-padding;
+  }
+}
+
+/* Help Articles */
+.articles {
+  @mixin 2columnsResponsive 4, 8;
+}
+
+.helpArticlesCards {
+  align-self: stretch;
+  margin-bottom: $space-sm;
+}
+
+.helpArticlesHeadline {
+  @mixin fontSize 6;
+  margin-bottom: $space-sm;
+}
+
+.helpArticlesDescription {
+  @mixin fontSize 2;
+  margin-bottom: $space-xl;
+}

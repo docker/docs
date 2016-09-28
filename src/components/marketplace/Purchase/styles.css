@@ -1,0 +1,133 @@
+@import "utilities";
+
+.purchasePage {
+  @mixin 2columns 8, 4;
+  margin-bottom: 76px;
+}
+
+.trialPage {
+  @mixin 2columns 6, 6;
+  margin-bottom: 76px;
+}
+
+.ddcgraphic {
+  width: 150px;
+  height: 175px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  padding-left: $space-xl;
+  hr {
+    width: 100%;
+    margin: $space-lg 0;
+  }
+}
+
+.contact {
+  margin-top: 10px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+
+  .headerText {
+    flex: 1 auto;
+    margin-left: $space-xl;
+    .title {
+      font-size: $font-size-headline;
+      font-weight: 500;
+      margin-bottom: $space-sm;
+    }
+
+    .tagline {
+      font-size: $font-size-1;
+    }
+  }
+}
+
+.value {
+  margin-top: $space-xl;
+  .title {
+    font-size: $font-size-4;
+  }
+  .includeItems div {
+    padding-top: $space-sm;
+  }
+}
+
+ul.bullets {
+  margin: 0;
+  .title {
+    font-size: $font-size-4;
+  }
+
+  &.check {
+    list-style: none;
+    list-style-position: outside;
+
+    li::before {
+      content: '✔';
+      color: $color-robins-egg-blue;
+      margin-left: -1.6em;
+      margin-right: 0.6em;
+    }
+  }
+
+  li {
+    text-indent: 2px;
+    padding-top: $space-sm;
+  }
+}
+
+.logo {
+  @mixin square 120px;
+}
+
+.logoWrapper {
+  flex: 1 auto;
+  min-width: 120px;
+}
+
+.included {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  .title {
+    font-size: $font-size-4;
+  }
+  .includeItems div {
+    padding-top: $space-sm;
+  }
+}
+
+.form {
+  position: relative;
+}
+
+.account {
+  margin: $space-sm 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sectionTitle {
+  margin: $space-sm 0;
+  font-size: $font-size-2;
+  font-weight: 600;
+}
+
+.accountSelect {
+  margin: 0 $space-lg;
+  width: 150px;
+}
+
+.error {
+  color: $color-variant-panic;
+  height: $font-size-2;
+  margin: 0 $space-xxxl $space-xl;
+}

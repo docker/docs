@@ -1,0 +1,32 @@
+@import "utilities";
+
+.details {
+  margin-top: 32px;
+
+  @mixin 2columns 9, 3;
+
+  .card {
+    padding: 48px;
+  }
+}
+
+.tips {
+  margin-left: 20px;
+  font-size: 13px;
+
+  .tip {
+    margin-bottom: 32px;
+
+    h5 {
+      color: #354a5b;
+      font-size: 13px;
+      margin: 0 0 $space-md;
+      font-weight: normal;
+    }
+
+    p {
+      color: $color-regent-gray;
+      margin: 0;
+    }
+  }
+}

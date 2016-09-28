@@ -1,0 +1,43 @@
+@import "utilities";
+
+.contentRow {
+  @mixin 2columns 3, 9;
+}
+
+.images {
+  lost-flex-container: row;
+  justify-content: center;
+  & > * {
+    lost-column: 1;
+  }
+
+  @media (min-width: $screen-md) {
+    & > * {
+      lost-column: 1/3;
+    }
+  }
+}
+
+.contentDescription {
+  padding-right: $space-lg;
+  min-width: 240px;
+}
+
+.title {
+  margin-bottom: $space-xl;
+}
+
+.headline {
+  @mixin fontSize 7;
+  margin-bottom: $space-sm;
+}
+
+.description {
+  @mixin fontSize 2;
+  margin-bottom: $space-xl;
+}
+
+div.imageWrapper {
+  padding-top: 0;
+  margin-bottom: $space-sm;
+}

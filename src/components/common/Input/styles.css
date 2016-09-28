@@ -1,0 +1,6 @@
+@import "utilities";
+
+.main {
+  font-family: $font-family !important;
+  font-size: $font-size-2 !important;
+}

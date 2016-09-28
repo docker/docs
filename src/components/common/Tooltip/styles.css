@@ -1,0 +1,70 @@
+@import "utilities";
+
+/* Overrides specific to Docker Cloud */
+
+:global {
+  .dTooltip-inner {
+    border: 0 none;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    transform: none;
+    padding: $space-sm;
+  }
+
+  .dTooltip-arrow {
+    @mixin square 11px;
+    background: $color-white;
+    transform: rotate(45deg);
+    z-index: 999;
+  }
+
+  .dTooltip-inner * {
+    word-wrap: break-word;
+  }
+
+  /* placement of arrows */
+  .dTooltip-placement-top .dTooltip-arrow,
+  .dTooltip-placement-topLeft .dTooltip-arrow,
+  .dTooltip-placement-topRight .dTooltip-arrow {
+    border-left: 0 none;
+    border-top: 0 none;
+    background: $color-white;
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .dTooltip-placement-bottom .dTooltip-arrow,
+  .dTooltip-placement-bottomLeft .dTooltip-arrow,
+  .dTooltip-placement-bottomRight .dTooltip-arrow {
+    border-right: 0 none;
+    border-bottom: 0 none;
+    border-left: 1px solid #dddddd;
+    border-top: 1px solid #dddddd;
+  }
+
+  .dTooltip-placement-left .dTooltip-arrow {
+    border-left: 0 none;
+    border-bottom: 0 none;
+    background: $color-white;
+    border-right: 1px solid #dddddd;
+    border-top: 1px solid #dddddd;
+  }
+
+  .dTooltip-placement-right .dTooltip-arrow {
+    border-right: 0 none;
+    border-top: 0 none;
+    border-left: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+  }
+
+  /* dark theme styling */
+  .dTooltip.darkTheme {
+    .dTooltip-inner {
+      background: $color-fiord;
+      color: $color-white;
+    }
+
+    .dTooltip-arrow {
+      background: $color-fiord;
+    }
+  }
+}

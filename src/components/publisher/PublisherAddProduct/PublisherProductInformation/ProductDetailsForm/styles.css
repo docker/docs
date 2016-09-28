@@ -1,0 +1,106 @@
+@import "utilities";
+
+.card {
+  padding: 0 $space-xxxl;
+}
+
+.productDetailsWrapper {
+  @mixin 2columns 2, 10;
+}
+
+.productIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.previewWrapper {
+  width: $icon-size-store;
+  height: $icon-size-store;
+  border: 1px solid $color-variant-light-shade-hover;
+  border-radius: 2px;
+  background: $color-background-base;
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.iconPreview {
+  @mixin storeIcon;
+}
+
+.title {
+  @mixin fontSize 4;
+  margin: $space-xl 0;
+}
+
+.fields {
+  margin-bottom: $space-md;
+}
+
+.sectionTitle {
+  @mixin fontSize 2;
+  font-weight: bold;
+  margin-bottom: $space-xs;
+}
+
+.subText {
+  color: $color-variant-dull;
+  margin-bottom: $space-sm;
+}
+
+.input {
+  width: 100%;
+}
+
+.description {
+  font-family: monospace;
+  max-width: 100%;
+  width: 100%;
+  min-height: 240px;
+  border: 1px solid $color-variant-dull-disabled;
+}
+
+.error {
+  color: $color-variant-panic;
+}
+
+.screenInfo {
+  @mixin 3columns 5, 5, 2;
+  align-items: center;
+  width: 100%;
+}
+
+.removeScreen {
+  fill: $color-variant-panic;
+  &:hover {
+    fill: $color-variant-panic-hover;
+    cursor: pointer;
+  }
+}
+
+.screenshotpreview {
+  width: 100%;
+}
+
+.addScreen {
+  margin: $space-lg 0;
+  display: inline-block;
+}
+
+.uploadIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: $icon-size-store;
+  height: $icon-size-store;
+  border-radius: 2px;
+  background: $color-background-base;
+  border: 1px solid $color-variant-light-shade-hover;
+  margin: $space-sm 0;
+  &:hover {
+    background: $color-variant-light-shade-hover;
+  }
+}

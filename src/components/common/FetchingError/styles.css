@@ -1,0 +1,10 @@
+@import "utilities";
+
+.icon {
+  margin-right: $space-sm;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+}

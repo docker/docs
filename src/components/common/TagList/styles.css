@@ -1,0 +1,10 @@
+@import 'utilities.css';
+
+:global .dTagList {
+  margin-top: $space-sm;
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+}
