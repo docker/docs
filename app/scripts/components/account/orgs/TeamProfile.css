@@ -1,7 +1,0 @@
-@import "dux/css/box.css";
-
-.addTeamButtonGroup {
-    button[type="submit"] {
-      margin-right: var(--default-margin);
-    }
-}

@@ -1,7 +1,0 @@
-@import 'dux/css/colors.css';
-
-.infoContent {
-    border-left: 1px solid var(--iron);
-    padding: 0 3rem;
-    margin: .5rem 0;
-}
