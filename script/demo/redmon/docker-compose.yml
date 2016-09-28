@@ -1,0 +1,10 @@
+redis:
+ image: redis
+
+redmon:
+ image: vieux/redmon
+ links:
+  - redis:redis
+ ports:
+  - "4567:4567"
+ command: -r redis://redis:6379

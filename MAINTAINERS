@@ -1,0 +1,120 @@
+# Swarm maintainers file
+#
+# This file describes who runs the docker/swarm project and how.
+# This is a living document - if you see something out of date or missing, speak up!
+#
+# It is structured to be consumable by both humans and programs.
+# To extract its contents programmatically, use any TOML-compliant parser.
+#
+# This file is compiled into the MAINTAINERS file in docker/opensource.
+#
+[Org]
+	[Org."Core maintainers"]
+		people = [
+			"abronan",
+			"allencloud",
+			"aluzzardi",
+			"chanwit",
+			"dongluochen",
+			"jimmyxian",
+			"mhbauer",
+			"nishanttotla",
+			"vieux",
+		]
+
+	[Org."Docs maintainers"]
+		people = [
+			"sfsmithcha",
+			"sven",
+			"thajeztah",
+		]
+
+
+	[Org.Curators]
+
+	# The curators help ensure that incoming issues and pull requests are properly triaged and
+	# that our various contribution and reviewing processes are respected. With their knowledge of
+	# the repository activity, they can also guide contributors to relevant material or
+	# discussions.
+	#
+	# They are neither code nor docs reviewers, so they are never expected to merge. They can
+	# however:
+	# - close an issue or pull request when it's an exact duplicate
+	# - close an issue or pull request when it's inappropriate or off-topic
+
+		people = [
+			"amitshukla"
+		]
+
+[people]
+
+# A reference list of all people associated with the project.
+# All other sections should refer to people by their canonical key
+# in the people section.
+
+	# ADD YOURSELF HERE IN ALPHABETICAL ORDER
+
+	[people.abronan]
+	Name = "Alexandre Beslic"
+	Email = "abronan@docker.com"
+	GitHub = "abronan"
+
+	[people.aluzzardi]
+	Name = "Andrea Luzzardi"
+	Email = "al@docker.com"
+	GitHub = "aluzzardi"
+
+	[people.allencloud]
+	Name = "Allen Sun"
+	Email = "allen.sun@daocloud.io"
+	GitHub = "allencloud"
+
+	[people.amitshukla]
+	Name = "Amit Shukla"
+	Email = "amit.shukla@docker.com"
+	GitHub = "amitshukla"
+
+	[people.chanwit]
+	Name = "Chanwit Kaewkasi"
+	Email = "chanwit@gmail.com"
+	GitHub = "chanwit"
+
+	[people.dongluochen]
+	Name = "Dongluo Chen"
+	Email = "dong@docker.com"
+	GitHub = "dongluochen"
+
+	[people.mhbauer]
+	Name = "Morgan Bauer"
+	Email = "mbauer@us.ibm.com"
+	GitHub = "mhbauer"
+
+	[people.nishanttotla]
+	Name = "Nishant Totla"
+	Email = "nishanttotla@gmail.com"
+	GitHub = "nishanttotla"
+
+	[people.sfsmithcha]
+	Name = "Charles Smith"
+	Email = "charles.smith@docker.com"
+	GitHub = "sfsmithcha"
+
+	[people.sven]
+	Name = "Sven Dowideit"
+	Email = "SvenDowideit@home.org.au"
+	GitHub = "SvenDowideit"
+
+	[people.thajeztah]
+	Name = "Sebastiaan van Stijn"
+	Email = "github@gone.nl"
+	GitHub = "thaJeztah"
+
+	[people.vieux]
+	Name = "Victor Vieux"
+	Email = "vieux@docker.com"
+	GitHub = "vieux"
+
+	[people.jimmyxian]
+	Name = "Xian Chaobo"
+	Email = "xianchaobo@huawei.com"
+	GitHub = "jimmyxian"
