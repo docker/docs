@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pkg-info overwrite-permissions="true" relocatable="false" identifier="io.docker.pkg.kitematicapp" postinstall-action="none" version="%KITEMATICAPP_VERSION%" format-version="2" generator-version="steeve's strong hands" install-location="/Applications/Docker/" auth="root">
+    <payload numberOfFiles="%KITEMATICAPP_NUMBER_OF_FILES%" installKBytes="%KITEMATICAPP_INSTALL_KBYTES%"/>
+    <bundle-version/>
+    <upgrade-bundle/>
+    <update-bundle/>
+    <atomic-update-bundle/>
+    <strict-identifier/>
+    <relocate/>
+</pkg-info>
