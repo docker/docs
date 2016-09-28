@@ -1,0 +1,87 @@
+<div id="accountsBase" class="flex-wrapper">
+	<div id="create-team-modal" class="ui small modal transition">
+		<i class="close icon"></i>
+		<div class="header">
+			Create Team
+		</div>
+		<div class="content">
+			<div class="ui new-team form">
+				<div class="two fields">
+					<div class="field">
+						<label>Team Name</label>
+						<input type="text" ng-model="vm.newTeamRequest.name" name="teamName" placeholder="team-name"></input>
+					</div>
+					<div class="field">
+						<label>Type</label>
+						<select class="ui dropdown" ng-model="vm.newTeamType">
+							<option value="Managed">Managed</option>
+							<option value="Discovered">Discovered</option>
+						</select>
+					</div>
+				</div>
+				<div class="field" ng-show="vm.newTeamType === 'Discovered'">
+					<label>LDAP DN</label>
+					<input type="text" placeholder="CN=groupname,OU=Groups,DC=example,DC=com" ng-model="vm.newTeamRequest.ldapdn"></input>
+				</div>
+				<div class="field" ng-show="vm.newTeamType === 'Discovered'">
+					<label>LDAP Member Attribute</label>
+					<input type="text" placeholder="member" ng-model="vm.newTeamRequest.ldap_member_attr"></input>
+				</div>
+			</div>
+		</div>
+		<div class="actions">
+			<div class="ui negative button" ng-click="vm.resetAddTeamForm()">
+				Cancel
+			</div>
+			<div class="ui positive button">
+				Create Team
+			</div>
+		</div>
+	</div>
+
+  <div class="sidenav">
+    <a ui-sref="dashboard.accounts.users" ui-sref-active="active" class="item" ng-click="vm.selectedTeam = 'All Users'">All Users</a>
+    <div class="teams-section">
+      <span class="label">Teams</span>
+      <a class="ui icon" alt="Create a new team" ng-click="vm.showCreateTeam()">
+        + Create
+      </a>
+    </div>
+    <a ng-repeat="t in vm.teams" ui-sref="dashboard.accounts.team({ teamId: t.id })" ng-class="{ 'active': $state.params.teamId === t.id }" class="item team" ng-click="vm.selectedTeam = t.id">{{ t.name }}</a>
+    <div class="no-teams" ng-show="vm.teams.length === 0">Please create a team.</div>
+  </div>
+
+	<div id="accountsBase-container" class="content-pane">
+		<div class="ui fluid container">
+			<div class="ui secondary pointing compact menu" ng-hide="vm.selectedTeam && vm.selectedTeam === 'All Users'">
+				<a class="item" ui-sref="dashboard.accounts.team({ teamId: vm.selectedTeam })" ng-class="{ 'active': $state.current.name === 'dashboard.accounts.team' }">
+					Members
+				</a>
+				<a class="item" ui-sref="dashboard.accounts.teamPermissions({ teamId: vm.selectedTeam })" ng-class="{ 'active': $state.current.name === 'dashboard.accounts.teamPermissions' }">
+					Permissions
+				</a>
+				<a class="item" ui-sref="dashboard.accounts.teamSettings({ teamId: vm.selectedTeam })" ng-class="{ 'active': $state.current.name === 'dashboard.accounts.teamSettings' }">
+					Settings
+				</a>
+			</div>
+			<div ui-view></div>
+		</div>
+	</div>
+</div>
+
+<script>
+  $('.ui.new-team.form').form({
+    inline: true,
+    fields: {
+      teamName: {
+        identifier : 'teamName',
+        rules: [
+        {
+          type   : 'empty',
+          prompt : 'Please enter a team name'
+        }
+        ]
+      }
+    }
+  });
+</script>

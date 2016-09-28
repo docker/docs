@@ -1,0 +1,8 @@
+<tr ng-show="show_filter" class="ng-table-filters">
+    <th data-title-text="{{$column.titleAlt(this) || $column.title(this)}}" ng-repeat="$column in $columns" ng-if="$column.show(this)" class="filter {{$column.class(this)}}"
+        ng-class="params.settings().filterOptions.filterLayout === 'horizontal' ? 'filter-horizontal' : ''">
+        <div ng-repeat="(name, filter) in $column.filter(this)" ng-include="config.getTemplateUrl(filter)" class="filter-cell"
+             ng-class="[getFilterCellCss($column.filter(this), params.settings().filterOptions.filterLayout), $last ? 'last' : '']">
+        </div>
+    </th>
+</tr>

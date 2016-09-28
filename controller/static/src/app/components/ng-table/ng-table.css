@@ -1,0 +1,108 @@
+.ui.pagination.menu {
+    padding: 0;
+}
+
+.ng-table-sort-header > th.header.sortable > .ng-table-header > .ng-binding {
+    cursor: pointer;
+}
+
+.ng-table-sort-header > th.header.sortable > .ng-table-header > .ng-binding:after {
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    content: '';
+    height: 1em;
+    width: auto;
+    opacity: 0.8;
+    margin: 0em 0em 0em 0.5em;
+    font-family: 'Icons';
+}
+
+.ng-table-sort-header > th.header.sortable.sort-asc > .ng-table-header > .ng-binding:after {
+    content: '\f0d8';
+}
+
+.ng-table-sort-header > th.header.sortable.sort-desc > .ng-table-header > .ng-binding:after {
+    content: '\f0d7';
+}
+
+#pager {
+    margin-top: 0;
+}
+
+#pager .pages {
+  font-size: 14px;
+}
+
+#pager .pages .ui.menu {
+  border-radius: 0px;
+  border: none;
+}
+
+#pager .pages .ui.menu > .item {
+  background-color: #F7F8F9;
+  border-radius: 2px;
+  margin-right: 4px;
+  text-align: center;
+}
+
+#pager .pages .ui.menu .item:before {
+  width: 0;
+}
+
+#pager .pages .ui.menu > .item a {
+  color: #445D6E;
+  font-weight: bold;
+}
+
+#pager .pages .ui.menu > .item.active {
+  background-color: #1AAAF8 !important;
+}
+
+#pager .pages .ui.menu > .item.active a {
+  color: white;
+  font-weight: bold;
+}
+
+#pager .pages .ui.menu .item.disabled, .ui.menu .item.disabled:hover {
+  background-color: #F7F8F9 !important;
+  opacity: 0.3;
+}
+
+#pager .items-per-page {
+  font-size: 11px;
+}
+
+#pager .items-per-page .ui.menu {
+  border-radius: 0px;
+  border: none;
+}
+
+#pager .items-per-page .ui.menu > .item {
+  background-color: none;
+  text-align: center;
+  font-size: 11px !important;
+}
+
+#pager .items-per-page .ui.menu .item:before {
+  width: 0;
+}
+
+#pager .items-per-page .ui.menu > .item a {
+  color: #445D6E;
+  font-weight: bold;
+}
+
+#pager .items-per-page .ui.menu > .item.active {
+  background-color: white !important;
+}
+
+#pager .items-per-page .ui.menu > .item.active a {
+  color: #1AAAF8;
+  font-weight: bold;
+}
+
+#pager .items-per-page .ui.menu .item.disabled, .ui.menu .item.disabled:hover {
+  background-color: none;
+  opacity: 0.3;
+}

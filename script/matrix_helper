@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -ue
+
+# Script to export environment variables from a json mapping
+# Usage: script/matrix_helper platform=aws-debian8 engine=oss ...
+# Parameters are in the below json file.
+JSON_FILE=$(dirname $0)/matrix_params.json
+
+output=""
+for param in $@; do
+    # Catch typoed parameters here
+    line="$(jq -r .\"$param\" $JSON_FILE)"
+    if [ "$line" = null ] ; then
+        echo Matrix parameter "'$param'" not found >&2
+        exit 1
+    fi
+
+    # Catch unset variables within parameters here
+    # Note: this requires the parameters to be idempotent when eval'ing them
+    eval "(set -ue; $line)" || exit 1
+
+    output="$output $line"
+done
+
+# Unconditionally export the variables since `make` cannot reliably handle all
+# the ones we use as command line arguments (MACHINE_FIXUP_FLAG especially)
+printf "export $output"
+
+# && is needed for combining flags below
+printf " && \n"
+
+# Specially combine all the MACHINE_CREATE_FLAGS, adding spaces only when needed
+echo 'export MACHINE_CREATE_FLAGS="${ENGINE_INSTALL_URL:+--engine-install-url=$ENGINE_INSTALL_URL }${MACHINE_PLATFORM_FLAGS:-}"'
+
+echo "# eval me by running: eval \$($0 $*)"

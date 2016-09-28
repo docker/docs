@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ng-file-upload-demo-server:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="ng-file-upload-demo-server-0.0.1.war">
+      <element id="artifact" artifact-name="ng-file-upload-demo-server:war exploded" />
+    </root>
+  </artifact>
+</component>

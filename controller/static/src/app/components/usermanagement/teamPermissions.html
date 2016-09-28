@@ -1,0 +1,109 @@
+<div id="add-label-modal" class="ui small modal transition">
+  <i class="close icon"></i>
+  <div class="header">
+    Add Label
+  </div>
+  <div class="content">
+    <div class="ui add-label form">
+      <div class="two fields">
+        <div class="field">
+          <label>Label</label>
+          <input type="text" ng-model="vm.newLabelRequest.label" name="label" placeholder="eg. test, staging, prod"></input>
+        </div>
+        <div class="field">
+          <label>Permission</label>
+          <select ng-model="vm.newLabelRequest.role" class="ui dropdown" convert-to-number>
+            <option value="0">No Access</option>
+            <option value="1">View Only</option>
+            <option value="2">Restricted Control</option>
+            <option value="3">Full Control</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui negative button" ng-click="vm.resetFormVisibility()">
+      Cancel
+    </div>
+    <div ng-click="vm.addLabel()" class="ui positive button">
+      Add Label
+    </div>
+  </div>
+</div>
+<div id="delete-permission-modal" class="ui small modal transition">
+  <i class="close icon"></i>
+  <div class="header">
+    Are you sure you wish to delete permission {{ vm.selectedPermission.label }}?
+  </div>
+  <div class="content">
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      No
+    </div>
+    <div ng-click="vm.deletePermission()" class="ui positive button">
+      Yes
+    </div>
+  </div>
+</div>
+<div class="ui grid">
+  <div class="two column row">
+    <div class="left floated column">
+      <div class="ui green icon button" ng-click="vm.showAddLabel()">
+        <i class="plus icon"></i> Add Label
+      </div>
+    </div>
+    <div class="right aligned right floated column">
+      <div class="ui left icon input">
+        <input ng-model="vm.filter" placeholder="Search labels..." />
+        <i class="search icon"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" ng-show="vm.addLabelVisible">
+    <div class="column">
+      <div class="ui add-label form segment">
+        <div class="two fields">
+          <div class="field">
+            <label>Label</label>
+            <input ng-model="vm.newLabelRequest.label" name="label"></input>
+          </div>
+          <div class="field">
+            <label>Permission</label>
+            <select ng-model="vm.newLabelRequest.role" class="ui dropdown" convert-to-number>
+              <option value="0">No Access</option>
+              <option value="1">View Only</option>
+              <option value="2">Restricted Control</option>
+              <option value="3">Full Control</option>
+            </select>
+          </div>
+        </div>
+        <div class="ui red button" ng-click="vm.resetFormVisibility()">Cancel</div>
+        <div class="ui blue submit button" ng-click="vm.addLabel()">Save</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <table ng-table="vm.tableParams" template-pagination="custom/pager" class="ui very basic unstackable selectable padded table">
+        <tr ng-repeat="p in $data">
+          <td data-title="'Resource Label'" sortable="'label'">
+            {{ p.label }}
+          </td>
+          <td data-title="'Permission'" sortable="'role'">
+            {{ vm.roleDescription(p.role) }}
+          </td>
+          <td class="right aligned collapsing">
+            <div class="ui action buttons">
+              <div class="ui basic icon button" ng-click="vm.showDeletePermissionModal(p)">
+                <i class="delete icon"></i>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

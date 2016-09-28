@@ -1,0 +1,17 @@
+{
+	"engine=oss": "ENGINE_INSTALL_URL=https://get.docker.com",
+	"engine=oss-test": "ENGINE_INSTALL_URL=https://test.docker.com",
+	"engine=oss-experimental": "ENGINE_INSTALL_URL=https://experimental.docker.com",
+	"engine=cs1.10": "ENGINE_INSTALL_URL=https://s3.amazonaws.com/packages.docker.com-staging/1.10/install.sh",
+	"engine=cs1.11": "ENGINE_INSTALL_URL=https://s3.amazonaws.com/packages.docker.com-staging/1.11/install.sh",
+	"engine=cs1.11-test": "ENGINE_INSTALL_URL=https://s3.amazonaws.com/packages.docker.com-staging/1.10/install.sh MACHINE_FIXUP_COMMAND='curl https://s3.amazonaws.com/packages.docker.com-staging/1.11/install.sh | repo=testing bash'",
+
+	"platform=aws-debian8": "MACHINE_DRIVER=amazonec2 MACHINE_PLATFORM_FLAGS='--amazonec2-instance-type m1.medium --amazonec2-ami ami-ed8eb7dd --amazonec2-ssh-user admin --amazonec2-retries 10'",
+	"platform=aws-debian8-hvm": "MACHINE_DRIVER=amazonec2 MACHINE_PLATFORM_FLAGS='--amazonec2-instance-type m3.medium --amazonec2-ami ami-818eb7b1 --amazonec2-device-name /dev/xvda --amazonec2-ssh-user admin --amazonec2-retries 10'",
+	"platform=aws-centos7": "MACHINE_DRIVER=amazonec2 MACHINE_PLATFORM_FLAGS='--amazonec2-instance-type m3.medium --amazonec2-ami ami-d440a6e7 --amazonec2-ssh-user centos --amazonec2-retries 10'",
+	"platform=aws-sles12": "MACHINE_DRIVER=amazonec2 MACHINE_PLATFORM_FLAGS='--amazonec2-instance-type m3.medium --amazonec2-ami ami-d2627db3 --amazonec2-ssh-user ec2-user --amazonec2-retries 10'",
+	"platform=aws-ubuntu15.10": "MACHINE_DRIVER=amazonec2 MACHINE_PLATFORM_FLAGS='--amazonec2-instance-type m3.medium --amazonec2-ami ami-16b1a077 --amazonec2-ssh-user ubuntu --amazonec2-retries 10'",
+
+	"swarm=default": "SWARM_IMAGE=",
+	"swarm=master": "SWARM_IMAGE=dockerswarm/swarm:master"
+}

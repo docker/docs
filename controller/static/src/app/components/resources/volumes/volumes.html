@@ -1,0 +1,127 @@
+<div id="create-volume-modal" class="ui small modal transition">
+  <i class="close icon"></i>
+  <div class="header">
+    Create Volume
+  </div>
+  <div class="content">
+    <div class="ui form" ng-method="post">
+      <div class="field">
+        <label>Name</label>
+        <input type="text" name="volumeName" ng-model="vm.volumeName">
+      </div>
+      <div class="field">
+        <label>Driver</label>
+        <input type="text" ng-model="vm.volumeDriver" placeholder="local">
+      </div>
+      <div class="field">
+        <label>Options</label>
+        <input type="text" ng-model="vm.volumeOptions" placeholder="option=value space separated">
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      Cancel
+    </div>
+    <div class="ui positive button">
+      Create
+    </div>
+  </div>
+</div>
+
+<div id="remove-volume-modal" class="ui small modal transition" ng-submit="vm.removeVolume()">
+  <i class="close icon"></i>
+  <div class="header">
+    Remove Volume: {{ vm.selectedVolume.Name }}
+  </div>
+  <div class="content">
+    <p>Are you sure you want to remove the selected {{ vm.selectedVolume ? 'volume' : 'volumes' }}?</p>
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      No
+    </div>
+    <div ng-click="vm.selectedVolume ? vm.removeVolume() : vm.removeAll()" class="ui positive button">
+      Yes
+    </div>
+  </div>
+</div>
+
+<div class="ui fluid container">
+  <div class="ui grid">
+    <div class="two column row">
+      <div class="column">
+        <div ng-click="vm.showCreateVolumeDialog()" class="ui left floated green icon button">
+          <i class="add icon"></i>
+          Create Volume
+        </div>
+        <div id="volumes-selected-button" class="ui blue dropdown button" ng-class="{'disabled': vm.selectedItemCount === 0}">
+          {{ vm.selectedItemCount }} Volumes Selected
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <a ng-click="vm.showRemoveVolumeDialog()" class="item"><i class="red remove icon"></i> Remove</a>
+          </div>
+        </div>
+      </div>
+      <div class="right aligned right floated column">
+        <div class="ui left icon input">
+            <input ng-model="vm.filter" placeholder="Search volumes..." />
+            <i class="search icon"></i>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <script type="text/ng-template" id="headerCheckbox.html">
+          <div class="ui fitted checkbox">
+            <input type="checkbox" ng-click="vm.selectAll()" ng-model="vm.selectedAll" id="select_all" />
+            <label for="select_all"></label>
+          </div>
+        </script>
+        <table ng-table="vm.tableParams" template-pagination="custom/pager" class="ui very basic unstackable selectable compact table">
+          <tr ng-repeat="v in $data">
+            <td class="collapsing" stop-event='click' header="'headerCheckbox.html'">
+              <div class="ui fitted checkbox">
+                <input type="checkbox" id="{{$index}}-cb" ng-model="vm.selected[v.Name].Selected">
+                <label for="{{$index}}-cb"></label>
+              </div>
+            </td>
+            <td data-title="'Info'" sortable="'Name'">
+              <div class="ui list">
+                <div class="ui item"><label class="ui tiny basic label">Name</label><br/> {{ v.Name }}</div>
+                <div class="ui item"><label class="ui tiny basic label">Mountpoint</label><br/> {{ v.Mountpoint}}</div>
+              </div>
+            </td>
+            <td data-title="'Driver'" sortable="'Driver'">{{ v.Driver }}</td>
+            <td class="right aligned collapsing">
+              <div class="ui action buttons">
+                <div ng-click="vm.showRemoveVolumeDialog(v)" class="ui basic icon button">
+                  <i class="remove icon"></i>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.ui.form').form({
+    fields: {
+      first_name: {
+        identifier : 'volumeName',
+        rules: [
+        {
+          type   : 'empty',
+          prompt : 'Please enter a volume name'
+        }
+        ]
+      }
+    }
+  });
+
+  $('#volumes-selected-button')
+    .dropdown();
+</script>

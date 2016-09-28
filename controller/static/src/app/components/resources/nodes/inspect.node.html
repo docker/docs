@@ -1,0 +1,206 @@
+<div id="inspect-node" class="ui container">
+  <div class="ui grid">
+    <div class="two column row">
+      <div class="column">
+        <h2 class="header">
+            <i class="ui circle icon" ng-class="{'red': vm.node.Status.State === 'down' || vm.node.Status.State === 'disconnected', 'grey': vm.node.Status.State === 'unknown', 'green': vm.node.Status.State === 'ready'}"></i>
+          {{ vm.node.Description.Hostname || 'Unknown' }}
+        </h2>
+      </div>
+      <div class="ui sticky right aligned column" ng-show="vm.editMode && !vm.logsVisible">
+        <div class="ui green button" ng-click="vm.completeEdit()">Finish Editing</div>
+        <div class="ui negative button" ng-click="vm.cancelEdit()">Cancel Editing</div>
+      </div>
+      <div class="right aligned column" ng-show="!vm.editMode && !vm.logsVisible">
+        <div class="ui green button" ng-click="vm.startEdit()" ng-if="vm.node.Spec.Membership !== 'pending'">Edit</div>
+        <div class="ui negative button" ng-click="vm.removeNode()">Remove</div>
+      </div>
+    </div>
+    <div class="sixteen wide column">
+      <div class="ui secondary pointing compact menu">
+        <a class="item" ng-class="{'active': vm.activeTab === 'details' }" ng-click="vm.showDetails()"><i class="sidebar icon"></i> Details</a>
+        <a class="item" ng-class="{'active': vm.activeTab === 'tasks' }" ng-click="vm.showTasks()"><i class="file text outline icon"></i> Tasks</a>
+        <a class="item" ng-class="{'active': vm.activeTab === 'logs', 'disabled': !vm.agentTask }" ng-click="vm.showLogs()"><i class="file text outline icon"></i> Agent Logs</a>
+      </div>
+    </div>
+    <div class="sixteen wide column" ng-show="vm.activeTab === 'tasks'">
+      <div class="details-section">
+        <h3 class="header">Tasks</h3>
+        <div id="view-options-menu" class="ui blue inverted top right pointing dropdown button">
+          <span class="text">View Options</span>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="header">
+              Filters
+            </div>
+            <div class="item" ng-click="vm.toggleRunningTasks()">
+              <i class="green circle icon" ng-class="{'thin': !vm.runningTasksVisible}"></i>
+              Running Tasks
+            </div>
+            <div class="item" ng-click="vm.toggleHistoricalTasks()">
+              <i class="history icon" ng-class="{'grey': !vm.historicalTasksVisible}"></i>
+              Historical Tasks
+            </div>
+          </div>
+        </div>
+        <table ng-table="vm.tableParams" template-pagination="custom/pager" class="ui very basic unstackable selectable padded content table padded-header">
+          <tr ng-repeat="c in $data" ng-click="vm.inspectContainer(c.Status.ContainerStatus.ContainerID)">
+            <td class="collapsing" sortable="'Status.State'">
+              <i
+                class="circle icon"
+                ng-class="{'green': vm.stateSummaryMap[c.Status.State] === 'active',
+                'red': vm.stateSummaryMap[c.Status.State] === 'errored',
+                'grey': vm.stateSummaryMap[c.Status.State] === 'inactive',
+                'orange': vm.stateSummaryMap[c.Status.State] === 'updating'}"
+                data-content="{{ c.Status.State }}"
+                variation="inverted blue"></i>
+            </td>
+            <td data-title="'Image'" sortable="'Spec.ContainerSpec.Image'">
+              {{ c.Spec.ContainerSpec.Image }}
+            </td>
+            <td data-title="'Container ID'" sortable="'Status.ContainerStatus.ContainerID'">
+              {{ (c.Status.ContainerStatus.ContainerID | limitTo:12) }}
+              <span ng-hide="c.Status.ContainerStatus.ContainerID" class="weak">N/A</span>
+            </td>
+            <td data-title="'Created'" sortable="'CreatedAt'">{{ c.CreatedAt | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+            <td data-title="''" sortable="'Status.Message'" class="weak fixed-width-font">{{ c.Status.Message }}<br/>{{ c.Status.Err }}</td>
+          </tr>
+        </table>
+      </div>
+      </div>
+    <div class="sixteen wide column" ng-show="vm.activeTab === 'logs'">
+      <pre class="fixed-width-font" ng-bind="vm.nodeLogs"></pre>
+    </div>
+    <div class="sixteen wide column" ng-show="vm.activeTab === 'details'">
+      <div class="details-section" ng-show="vm.node.Description">
+        <div class="contents">
+          <table class="ui very basic definition unstackable selectable padded table">
+            <tbody>
+              <tr>
+                <td class="three wide column">Status</td>
+                <td>{{ vm.node.Status.State }}</td>
+              </tr>
+              <tr>
+                <td class="three wide column">Availability</td>
+                <td ng-show="!vm.editMode">{{ vm.node.Spec.Availability }}</td>
+                <td ng-show="vm.editMode">
+                  <dropdown class="fluid" ng-model="vm.node.Spec.Availability">
+                    <dropdown-group>active</dropdown-group>
+                    <dropdown-group>pause</dropdown-group>
+                    <dropdown-group>drain</dropdown-group>
+                  </dropdown>
+                </td>
+              </tr>
+              <tr>
+                <td class="three wide column">Membership</td>
+                <td>{{ vm.node.Spec.Membership }}</td>
+              </tr>
+              <tr>
+                <td class="three wide column">Message</td>
+                <td class="fixed-width-font">{{ vm.node.Status.Message || '' }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h5 class="header">Role</h5>
+          <table class="ui very basic definition unstackable selectable padded table">
+            <tbody>
+              <tr>
+                <td class="three wide column">Role</td>
+                <td ng-show="!vm.editMode">{{ vm.node.Spec.Role }} </td>
+                <td ng-show="vm.editMode">
+                  <dropdown class="fluid" ng-model="vm.node.Spec.Availability">
+                    <dropdown-group>leader</dropdown-group>
+                    <dropdown-group>worker</dropdown-group>
+                  </dropdown>
+                </td>
+              </tr>
+              <tr ng-if="vm.node.ManagerStatus">
+                <td class="three wide column">Leader</td>
+                <td>
+                  <span ng-if="vm.node.ManagerStatus.Leader === true">Yes</span>
+                  <span ng-if="vm.node.ManagerStatus.Leader === false">No</span>
+                </td>
+              </tr>
+              <tr ng-if="vm.node.ManagerStatus">
+                <td class="three wide column">Address</td>
+                <td>{{ vm.node.ManagerStatus.Addr }}</td>
+              </tr>
+              <tr ng-if="vm.node.ManagerStatus">
+                <td class="three wide column">Reachability</td>
+                <td>{{ vm.node.ManagerStatus.Reachability }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h5 class="header">Node Labels</h5>
+          <p class="weak" ng-show="!vm.node.Spec.Labels && !vm.editMode">No node labels defined</p>
+          <table class="ui very basic definition unstackable selectable padded table">
+            <tbody>
+              <tr ng-repeat="(k,v) in vm.node.Spec.Labels" ng-hide="vm.editMode">
+                <td class="three wide column">{{ k }}</td>
+                <td>{{ v }}</td>
+              </tr>
+              <tr ng-repeat="l in vm.editNodeLabels" ng-show="vm.editMode">
+                <td class="three wide column">
+                  <div class="ui small fluid input">
+                    <input type="text" ng-model="l.id"></input>
+                  </div>
+                </td>
+                <td>
+                  <div class="ui small fluid input">
+                    <input type="text" ng-model="l.value"></input>
+                  </div>
+                </td>
+                <td><div class="ui very basic icon red inverted button" ng-click="vm.removeNodeLabel(l.id)"><i class="ui red remove icon"></i></div></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="ui basic green button" ng-click="vm.editNodeLabels.push({id: '', value: ''})" ng-if="vm.editMode">
+            <i class="ui add icon"></i>
+            New Label
+          </div>
+        </div>
+      </div>
+      <div class="details-section" ng-show="vm.node.Description.Engine">
+        <div class="contents">
+          <h3 class="header">Engine</h3>
+          <table class="ui very basic definition unstackable selectable padded table">
+            <tbody>
+              <tr>
+                <td class="three wide column">Version</td>
+                <td>{{ vm.node.Description.Engine.EngineVersion }}</td>
+              </tr>
+              <tr>
+                <td class="three wide column">Platform</td>
+                <td>{{ vm.node.Description.Platform.OS + ' ' + vm.node.Description.Platform.Architecture }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h5 class="header">Labels</h5>
+          <p class="weak" ng-show="!vm.node.Description.Engine.Labels">No engine labels defined</p>
+          <table class="ui very basic definition unstackable selectable padded table">
+            <tbody>
+              <tr ng-repeat="(k, v) in vm.node.Description.Engine.Labels">
+                <td class="three wide column">{{ k }}</td>
+                <td>{{ v }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h5 class="header">Plugins</h5>
+          <p class="weak" ng-show="!vm.node.Description.Engine.Plugins">No engine plugins loaded</p>
+          <table class="ui very basic definition unstackable selectable padded table">
+            <tbody>
+              <tr ng-repeat="p in vm.node.Description.Engine.Plugins">
+                <td class="three wide column">{{ p.Type }}</td>
+                <td>{{ p.Name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#view-options-menu').dropdown({action: 'nothing'});
+</script>

@@ -1,0 +1,145 @@
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	body {
+		font: normal 14px/21px Arial, serif;
+	}
+	.example {
+		float: left;
+		width: 40%;
+		margin: 5%;
+	}
+	table {
+		font-size: 1em;
+		border-collapse: collapse;
+		margin: 0 auto
+	}
+	table, th, td {
+		border: 1px solid #999;
+		padding: 8px 16px;
+		text-align: left;
+	}
+	th {
+		background: #f4f4f4;
+		cursor: pointer;
+	}
+
+	th:hover,
+	th.sorted {
+		background: #d4d4d4;
+	}
+
+	th.sorted.ascending:after {
+		content: "  \2191";
+	}
+
+	th.sorted.descending:after {
+		content: " \2193";
+	}
+	</style>
+</head>
+<body>
+
+<div class="example ex-1">
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Band</th>
+				<th>Date of Birth</th>
+				<th class="number">Age</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Thom Yorke</td>
+				<td>Radiohead</td>
+				<td data-sort-value="2">October 7, 1968</td>
+				<td>43</td>
+			</tr>
+			<tr>
+				<td>Justin Vernon</td>
+				<td>Bon Iver</td>
+				<td data-sort-value="4">April 30, 1981</td>
+				<td>30</td>
+			</tr>
+			<tr>
+				<td>Paul McCartney</td>
+				<td>The Beatles</td>
+				<td data-sort-value="1">June 18, 1942</td>
+				<td>69</td>
+			</tr>
+			<tr>
+				<td>Sam Beam</td>
+				<td>Iron &amp; Wine</td>
+				<td data-sort-value="3">July 26, 1974</td>
+				<td>37</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p>No <code>thead</code> or <code>tbody</code>; just <code>tr</code>s</p>
+	<table>
+			<tr>
+				<th>Name</th>
+				<th>Band</th>
+				<th>Date of Birth</th>
+				<th class="number">Age</th>
+			</tr>
+			<tr>
+				<td>Thom Yorke</td>
+				<td>Radiohead</td>
+				<td data-sort-value="2">October 7, 1968</td>
+				<td>43</td>
+			</tr>
+			<tr>
+				<td>Justin Vernon</td>
+				<td>Bon Iver</td>
+				<td data-sort-value="4">April 30, 1981</td>
+				<td>30</td>
+			</tr>
+			<tr>
+				<td>Paul McCartney</td>
+				<td>The Beatles</td>
+				<td data-sort-value="1">June 18, 1942</td>
+				<td>69</td>
+			</tr>
+			<tr>
+				<td>Sam Beam</td>
+				<td>Iron &amp; Wine</td>
+				<td data-sort-value="3">July 26, 1974</td>
+				<td>37</td>
+			</tr>
+	</table>
+
+</div>
+
+<div class="example ex-2"></div>
+
+<script src="http://f.cl.ly/items/2Q3A1w0X3p0q2N2f103B/zepto.js"></script>
+<script src="jquery.tablesort.js"></script>
+<script type="text/javascript">
+
+	$(function() {
+
+		var table = $('<table></table>');
+		table.append('<thead><tr><th class="number">Number</th></tr></thead>');
+		var tbody = $('<tbody></tbody>');
+		for(var i = 0; i<100; i++) {
+			tbody.append('<tr><td>' + Math.floor(Math.random() * 100) + '</td></tr>');
+		}
+		table.append(tbody);
+		$('.example.ex-2').append(table);
+
+		$('table').tablesort().data('tablesort');
+
+		$('thead th.number').data('sortBy', function(th, td, sorter) {
+			return parseInt(td.text(), 10);
+		});
+
+	});
+</script>
+
+</body>
+</html>

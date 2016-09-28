@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Copy the local images to the target system via ssh
+SSH_ARGS="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+if [ -z "$ORG" ]; then
+    ORG=docker
+fi
+
+# Allow overriding the path to the docker binary to run remotely
+if [ -z "$DOCKER" ]; then
+    DOCKER=docker
+fi
+
+if [ "$ORG" = "dockerorcadev" ]; then
+    IMAGE_VERSION_FLAGS="--image-version dev:"
+fi
+
+if [ -z "$TAG" ]; then
+    _DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    TAG=$(cd ${_DIR}/..; make print-TAG)
+    echo "Copying images using TAG=${TAG}"
+fi
+
+TRANSFER_IMAGES=""
+# Only migrate the images that are dockerorca specific
+for image in ${ORG}/ucp:${TAG} $(docker run --rm ${ORG}/ucp:${TAG} images ${IMAGE_VERSION_FLAGS} --list) ; do
+    # Check to see if the image ID's match
+    OUR_ID=$(docker inspect ${image}|jq -r ".[].Id")
+    REMOTE_ID=$(ssh $SSH_ARGS $1 "${DOCKER} inspect ${image}" 2>/dev/null | jq -r ".[].Id")
+    if [ "${OUR_ID}" != "${REMOTE_ID}" ] ; then
+        TRANSFER_IMAGES="${TRANSFER_IMAGES} ${image}"
+    else
+        echo "Image ${image} already in sync"
+    fi
+done
+
+if [ -n "${TRANSFER_IMAGES}" ] ; then
+    echo "Migrating ${TRANSFER_IMAGES} to $1..."
+    docker save ${TRANSFER_IMAGES} | ssh $SSH_ARGS $1 "${DOCKER} load"
+fi

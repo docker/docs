@@ -1,0 +1,10 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.success.segment {
+  border: 2px solid @green;
+}
+.ui.failure.segment {
+  border: 2px solid @red;
+}

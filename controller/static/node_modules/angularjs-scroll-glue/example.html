@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+  <head lang="en">
+    <meta charset="utf-8">
+    <title>AngularJS Scroll Glue Directive</title>
+
+    <style type="text/css">
+      [scroll-glue-top],
+      [scroll-glue-bottom],
+      [scroll-glue]{
+        height: 100px;
+        overflow-y: scroll;
+        border: 1px solid gray;
+      }
+
+      [scroll-glue-left],
+      [scroll-glue-right]{
+        width: 100px;
+        overflow-x: scroll;
+        border: 1px solid gray;
+        padding: 10px;
+      }
+
+      [scroll-glue-left] span,
+      [scroll-glue-right] span{
+        border: 1px solid black;
+      }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>
+    <script src="src/scrollglue.js"></script>
+    
+    <script>
+      angular
+        .module('demo', ['luegg.directives'])
+        .controller('ItemsCtrl', function ItemsCtrl($scope, $timeout){
+          $scope.items = ['1', '2', '3'];
+          var counter = $scope.items.slice(-1)[0];
+          $scope.glued = true;
+          
+          function addItem(){
+            $scope.items.push(++counter);
+            $timeout(addItem, 1000);
+          }
+          
+          $timeout(addItem, 1000);
+        });
+    </script>
+  </head>
+  
+  <body ng-app="demo" ng-controller="ItemsCtrl">
+    <h1>Simple</h1>
+    <p>To activate the scroll glue on an element just add the scroll-glue attribute.</p>
+    <pre>&lt;div scroll-glue/&gt;</pre>
+    <div scroll-glue>
+      <ul>
+        <li ng-repeat="item in items">{{item}}</li>
+      </ul>
+    </div>
+
+    <h1>With two-way data binding</h1>
+    <p>If you pass a scope variable to the attribute, scroll-glue updates the variable to true when the glue is attached or to false if the glue is released and activates/deactivates the glue according to the variables value.</p>
+    <pre>&lt;div scroll-glue="glued"/&gt;</pre>
+    <div scroll-glue="glued">
+      <ul>
+        <li ng-repeat="item in items">{{item}}</li>
+      </ul>
+    </div>
+    <p><button ng-click="glued = !glued">Toggle glued ({{glued}})</button></p>
+
+    <h1>With one-way data binding</h1>
+    <p>If you pass an expression that is not a scope variable, the scroll-glue is bound to the result of this expression.</p>
+    <pre>&lt;div scroll-glue="!glued"/&gt;</pre>
+    <div scroll-glue="!glued">
+      <ul>
+        <li ng-repeat="item in items">{{item}}</li>
+      </ul>
+    </div>
+    <p>If you want to force one way-binding on a scope variable use double negation:</p>
+    <pre>&lt;div scroll-glue="!!glued"/&gt;</pre>
+
+    <h1>Scroll Direction</h1>
+    <p>You can also specify the scroll direction by combining the following directives:</p>
+      <pre>&lt;div scroll-glue-top="glued"/&gt;</pre>
+      <div scroll-glue-top="glued">
+        <ul>
+          <li ng-repeat="item in items.slice().reverse()">{{item}}</li>
+        </ul>
+      </div>
+      <pre>&lt;div scroll-glue-bottom="glued"/&gt;</pre>
+      <div scroll-glue-bottom="glued">
+        <ul>
+          <li ng-repeat="item in items">{{item}}</li>
+        </ul>
+      </div>
+      <pre>&lt;div scroll-glue-left="glued"/&gt;</pre>
+      <div scroll-glue-left="glued">
+        <span ng-repeat="item in items.slice().reverse()">{{item}}</span>
+      </div>
+      <pre>&lt;div scroll-glue-right="glued"/&gt;</pre>
+      <div scroll-glue-right="glued">
+        <span ng-repeat="item in items">{{item}}</span>
+      </div>
+  </body>
+  
+</html>

@@ -1,0 +1,14 @@
+FROM alpine:3.4
+
+MAINTAINER Josh Hawn <josh.hawn@docker.com>
+
+RUN apk add --update bash ca-certificates && rm -rf /var/cache/apk/*
+
+# Establish the version and upgrade matrix
+ARG UCP_VERSION
+LABEL com.docker.ucp.version="$UCP_VERSION"
+
+WORKDIR /etc/cfssl
+
+ADD bin/ucp-ca /ucp-ca
+ENTRYPOINT ["/ucp-ca"]

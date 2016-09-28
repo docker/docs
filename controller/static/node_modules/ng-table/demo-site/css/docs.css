@@ -1,0 +1,253 @@
+body > .row {
+    width: 100%;
+}
+
+[ng-view] {
+    padding: 20px 0;
+}
+
+.row .page-header {
+    margin-top: 0;
+    padding: 0;
+}
+.page-header h1 {
+    margin: 0;
+    padding: 5px 0px;
+}
+
+.bs-docs-sidebar.affix {
+    position: static;
+}
+@media (min-width: 768px) {
+    .bs-docs-sidebar {
+        padding-left: 20px;
+    }
+}
+/* First level of nav */
+.bs-docs-sidenav {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-left: 2px solid #b94a48;
+}
+
+.bs-docs-sidenav h1 {
+    margin: 0;
+    padding: 10px 18px;
+    font-size: 24px;
+}
+.bs-docs-sidenav h1 a {
+    color: #b94a48;
+    text-decoration: none;
+}
+
+/* All levels of nav */
+.bs-docs-sidebar .nav > li > a {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #999;
+    padding: 4px 20px;
+}
+.bs-docs-sidebar .nav > li > a:hover,
+.bs-docs-sidebar .nav > li > a:focus {
+    padding-left: 19px;
+    color: #b94a48;
+    text-decoration: none;
+    background-color: transparent;
+}
+.bs-docs-sidebar .nav > .active > a,
+.bs-docs-sidebar .nav > .active:hover > a,
+.bs-docs-sidebar .nav > .active:focus > a {
+    padding-left: 18px;
+    font-weight: bold;
+    color: #b94a48;
+    background-color: transparent;
+}
+
+/* Nav: second level (shown on .active) */
+.bs-docs-sidebar .nav .nav {
+    display: none; /* Hide by default, but at >768px, show it */
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav > li > a {
+    padding-top:    1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav > li > a:focus {
+    padding-left: 29px;
+}
+.bs-docs-sidebar .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav > .active:focus > a {
+    font-weight: 500;
+    padding-left: 28px;
+}
+
+/* Back to top (hidden on mobile) */
+.back-to-top {
+    display: none;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #999;
+}
+.back-to-top:hover {
+    text-decoration: none;
+    color: #b94a48;
+}
+
+@media (min-width: 768px) {
+    .back-to-top {
+        display: block;
+    }
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+    .bs-docs-sidebar .nav > .active > ul {
+        display: block;
+    }
+    /* Widen the fixed sidebar */
+    .bs-docs-sidebar.affix,
+    .bs-docs-sidebar.affix-bottom {
+        width: 213px;
+    }
+    .bs-docs-sidebar.affix {
+        position: fixed; /* Undo the static from mobile first approach */
+        top: 20px;
+    }
+    .bs-docs-sidebar.affix-bottom {
+        position: absolute; /* Undo the static from mobile first approach */
+    }
+    .bs-docs-sidebar.affix-bottom .bs-docs-sidenav,
+    .bs-docs-sidebar.affix .bs-docs-sidenav {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+@media (min-width: 1200px) {
+    /* Widen the fixed sidebar again */
+    .bs-docs-sidebar.affix-bottom,
+    .bs-docs-sidebar.affix {
+        width: 263px;
+    }
+}
+
+
+/* Footer
+-------------------------------------------------- */
+
+.bs-footer {
+    padding: 20px 0;
+    margin-top: 10px;
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+}
+.bs-footer p {
+    margin-bottom: 0;
+    color: #777;
+}
+.footer-links {
+    margin: 10px 0;
+}
+.footer-links li {
+    display: inline;
+    padding: 0 2px;
+}
+.footer-links li:first-child {
+    padding-left: 0;
+}
+
+
+/* Table */
+.variables-matrix {
+    border:1px solid #ddd;
+    width:100%;
+    margin:10px 0;
+}
+
+.variables-matrix td,
+.variables-matrix th {
+    padding:10px;
+}
+
+.variables-matrix td {
+    border-top:1px solid #eee;
+}
+
+.variables-matrix td + td,
+.variables-matrix th + th {
+    border-left:1px solid #eee;
+}
+
+.variables-matrix tr:nth-child(even) td {
+    background:#f5f5f5;
+}
+
+.variables-matrix th {
+    background:#f1f1f1;
+}
+
+/* bootstrap callouts
+-------------------------------------------------- */
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+.bs-callout code {
+    border-radius: 3px;
+}
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+.bs-callout-default {
+    border-left-color: #777;
+}
+.bs-callout-default h4 {
+    color: #777;
+}
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+.bs-callout-info {
+    border-left-color: #1b809e;
+}
+.bs-callout-info h4 {
+    color: #1b809e;
+}
+
+/* extra callout styles */
+.bs-callout dl {
+    margin-top: 10px
+}

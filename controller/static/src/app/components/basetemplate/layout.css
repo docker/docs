@@ -1,0 +1,113 @@
+#banner .ui.message {
+  border-radius: 0px;
+  margin: 0;
+  border-bottom: 1px solid white;
+}
+
+#banner .ui.message:last-child {
+  border-bottom: 0;
+}
+
+#topnav {
+    margin: 0;
+    width: 100%;
+    background-color: #1AAAF8;
+}
+
+#topnav {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#topnav .header.item {
+    font-weight: normal;
+    font-size: 14px;
+    padding: 10px 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#topnav .header.item img {
+    height: 36px !important;
+    padding: 0;
+    margin: 0 10px 0 0;
+}
+
+#topnav .sidenavbutton {
+    padding: 0.5em;
+    margin: 0;
+    font-size: 1.5em;
+}
+
+#topnav.ui.menu .item:before {
+    display: none;
+}
+
+#topnav .item .content.icon {
+    margin: 0;
+}
+
+#breadcrumbs {
+    margin: 0;
+    background-color: #47BBF9 !important;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 10px 20px 14px 20px;
+    list-style: none;
+    width: 100%;
+}
+
+#breadcrumbs li a {
+    color: #ffffff;
+}
+
+#breadcrumbs li {
+    display: inline-block;
+    opacity: 0.6;
+}
+
+#breadcrumbs li + li::before {
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+    content: "/";
+}
+
+#breadcrumbs li:last-of-type {
+    opacity: 1;
+}
+
+.main-contents .ui.fluid.container {
+    padding: 3rem 4rem;
+}
+
+.main-contents .ui.container {
+    padding: 3rem 4rem;
+}
+
+#messages {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+#messages .ui.info.message {
+  background-color: #47BBF9;
+}
+
+#messages .ui.message {
+  position: relative;
+  box-shadow: 0px 0px 10px rgba(68, 93, 110, 0.5);
+  margin-bottom: 0.6em;
+  display: block;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+#messages .ui.message p {
+  min-width: 240px;
+  max-width: 640px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,53 @@
+#licenseReminder {
+  padding-top: 10em;
+  margin: 0;
+  background-color: #1AAAF8;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  color: #ffffff;
+}
+
+#licenseReminder h1 {
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: normal;
+}
+
+#licenseReminder .license-file-input {
+  visibility: hidden;
+  position: absolute;
+}
+
+#licenseReminder .upload-section {
+  position: relative;
+  top: 2em;
+  margin: 0 auto;
+  width: 50%;
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+}
+
+#licenseReminder .upload-section .license-link {
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+#licenseReminder a {
+  color: white;
+  opacity: 0.8;
+  transition: all 150ms;
+}
+
+#licenseReminder a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+#licenseReminder .upload-section p {
+  font-size: 18px;
+}

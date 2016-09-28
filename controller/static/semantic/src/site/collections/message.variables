@@ -1,0 +1,12 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@warningBackgroundColor: @orange;
+@warningTextColor: @white;
+
+@infoBackgroundColor: @green;
+@infoTextColor: @white;
+
+@successBackgroundColor: @green;
+@successTextColor: @white;

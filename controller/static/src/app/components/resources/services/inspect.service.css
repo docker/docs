@@ -1,0 +1,13 @@
+#inspect-service .horizontal.statistic .label {
+  font-weight: normal;
+  text-transform: none;
+  margin-left: 1rem;
+}
+
+#inspect-service h2 .sub.header {
+  font-weight: normal;
+  font-size: 1rem;
+  margin: 0;
+  margin-left: 0.1rem;
+  line-height: 1.2rem;
+}

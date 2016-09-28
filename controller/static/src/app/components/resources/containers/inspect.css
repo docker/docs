@@ -1,0 +1,98 @@
+.rollup-data {
+  color: #949EA8;
+  font-weight: 400;
+  margin-left: 2rem;
+}
+
+#inspect-stats svg {
+    width: 903px;
+}
+
+#inspect-header {
+  margin-bottom: 2rem;
+}
+
+#inspect-header .container-actions.column {
+  min-width: 460px;
+}
+
+.item.disabled .terminal.icon {
+    opacity: 0.4 !important;
+}
+
+.details-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid #E0E4E7;
+}
+
+.details-section:last-child {
+  border-bottom: 0;
+}
+
+.details-section .contents {
+  margin-top: 30px;
+}
+
+/* Container Inspect */
+#inspect {
+  margin-top: 3rem;
+}
+
+#inspect svg {
+    height: 400px;
+}
+
+#inspect .container-info {
+  width: 580px;
+  display: flex;
+}
+
+#inspect .container-info .status {
+  width: 60px;
+  height: 60px;
+  border-radius: 2px;
+  margin-right: 1rem;
+}
+
+#inspect .container-info .name h2 {
+  margin-bottom: 0;
+}
+
+#inspect .container-info .name h5 {
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+#inspect .running {
+    background-color: #86CC86; /* green */
+    text-align: center;
+}
+
+#inspect .stopped {
+    background-color: #D44B4B; /* red */
+    text-align: center;
+}
+
+#inspect .cube.large.icon {
+    opacity: .5;
+    padding-top: 13px;
+    padding-left: 6px;
+    font-size: 30px;
+}
+
+#inspect .nine.wide.column .column { /* status text */
+    opacity: .6;
+    top: -.8rem;
+    position: relative;
+}
+
+/* Container Inspect - Console */
+
+#container-terminal {
+    overflow: hidden;
+}
+
+#inspect-exec .segment {
+    padding: 0 2rem 2rem 2rem;
+}

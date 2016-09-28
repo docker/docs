@@ -1,0 +1,91 @@
+#!/bin/bash
+
+# Hint:
+#
+# Example using parallel (make sure to get the fingerprint setup first - see below)
+#
+#  Set up the replicas
+#  parallel -j2 --bar --delay 10 --halt 1 --tag 'ORG=dockerorcadev TAG=dev: ./script/build_node repl{1}' ::: {1..2}
+#
+#  Spin up a bunch of secondary nodes
+#  parallel -j10 --bar --delay 10 --halt 1 --tag 'ORG=dockerorcadev TAG=dev: ./script/build_node {1}' ::: {1..100}
+
+
+
+if [ $# -lt 1 ]; then
+    echo "ERROR: You must specify the node number/label you want as the first arg"
+    exit 1
+fi
+
+set -e
+
+source $(dirname $0)/.build_utils
+
+NODE0=${PREFIX}-cluster-controller
+NODE0_IP=$(docker-machine ip ${NODE0})
+export UCP_URL="https://${NODE0_IP}/"
+
+# Allow the fingerprint to be set externally
+# Hint: parallel runs will fail if you don't set it externally!
+if [ -z "$UCP_FINGERPRINT" ]; then
+    echo "must set UCP_FINGERPRINT externally.  Run:"
+    echo ""
+    echo "export UCP_FINGERPRINT=\$(eval \"\$(docker-machine env ${NODE0})\"; \\"
+    echo "    docker run --rm \\"
+    echo "        --name ucp \\"
+    echo "        -v /var/run/docker.sock:/var/run/docker.sock \\"
+    echo "        ${ORG}/ucp \\"
+    echo "        fingerprint|cut -f2 -d' ')"
+    exit 1
+fi
+
+if ! [ -z "$REPLICA" ]; then
+    echo "Setting up replica"
+    _REP="--replica --swarm-port 3376"
+else
+    echo "Set REPLICA in the env to a non-zero value to make this a replica node"
+fi
+
+export UCP_FINGERPRINT
+
+echo "Will be joining ${UCP_URL} with ${UCP_FINGERPRINT}"
+
+NODE=${PREFIX}-cluster-${1}
+if ! docker-machine ip ${NODE} > /dev/null ; then
+    echo "Creating node ${NODE}"
+    docker-machine create --driver amazonec2 \
+        --amazonec2-request-spot-instance --amazonec2-spot-price ${SPOT_PRICE} \
+        --amazonec2-instance-type ${INSTANCE_TYPE} --amazonec2-ami ${AMI} \
+        --engine-install-url "https://get.docker.com" \
+        --amazonec2-ssh-user admin ${EXTRA_MACHINE_FLAGS} \
+        "${NODE}"
+else
+    echo "${NODE} already exists, using it"
+fi
+
+
+eval "$(docker-machine env ${NODE})"
+
+# TODO - might be nice to use the new pull command once it's merged...
+
+echo ""
+echo "Pre-Loading the required images"
+for i in $(docker run --rm ${ORG}/ucp images --list --image-version ${TAG}); do
+    docker pull $i
+done
+
+
+echo "Starting node join for ${NODE}"
+NODE_IP=$(docker-machine ip ${NODE})
+docker run --rm \
+    --name ucp \
+    -e UCP_ADMIN_USER \
+    -e UCP_ADMIN_PASSWORD \
+    -e UCP_FINGERPRINT \
+    -e UCP_URL \
+    -e REGISTRY_USERNAME \
+    -e REGISTRY_PASSWORD \
+    -e REGISTRY_EMAIL \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    ${ORG}/ucp \
+    join --san ${NODE_IP} --image-version ${TAG} ${_REP}

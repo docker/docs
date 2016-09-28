@@ -1,0 +1,277 @@
+<div id="remove-modal" class="ui small modal transition" ng-submit="vm.removeAccount()">
+  <i class="close icon"></i>
+  <div class="header">
+    Remove Account: {{ vm.selectedAccount.username }}
+  </div>
+  <div class="content">
+    <p>Are you sure you want to remove this account?</p>
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      No
+    </div>
+    <div ng-click="vm.removeAccount()" class="ui positive right button">
+      Yes
+    </div>
+  </div>
+</div>
+
+<div id="create-user-modal" class="ui small modal transition">
+  <i class="close icon"></i>
+  <div class="header">
+    Create User
+  </div>
+  <div class="content">
+    <div class="ui new-user form">
+      <div class="two fields">
+        <div class="field">
+          <label>Username</label>
+          <input type="text" ng-model="vm.newUserRequest.username" name="username" placeholder="my-user-name"></input>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input ng-model="vm.newUserRequest.password" name="password" type="password" placeholder="Password"></input>
+        </div>
+      </div>
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" ng-model="vm.newUserRequest.first_name" name="firstName" placeholder="John Doe"></input>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input ng-model="vm.newUserRequest.admin" type="checkbox" id="is_admin">
+          <label for="is_admin">Is a UCP admin?</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Default Permissions
+          <i class="large blue help circle icon"></i>
+          <div class="ui popup">
+            <h5>Default Permissions</h5>
+            The account default permissions are for non-labeled (<code>com.docker.access.label</code>) resources such as Images, Networks and Volumes.
+          </div>
+        </label>
+        <select class="ui default-permissions dropdown" ng-model="vm.newUserRequest.role" convert-to-number>
+          <option value="0">No Access</option>
+          <option value="1">View Only</option>
+          <option value="2">Restricted Control</option>
+          <option value="3">Full Control</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui negative button" ng-click="vm.resetFormVisibility()">
+      Cancel
+    </div>
+    <div class="ui positive button">
+      Create User
+    </div>
+  </div>
+</div>
+
+<div class="ui grid" ng-hide="vm.teamView">
+  <div class="two column row">
+    <div class="left floated column">
+      <div class="ui green icon button" ng-click="vm.showCreateUser()">
+        <i class="add user icon"></i> Create User
+      </div>
+    </div>
+    <div class="right aligned right floated column">
+      <div class="ui left icon input">
+        <input ng-model="vm.filter" placeholder="Search users..." />
+        <i class="search icon"></i>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <table ng-table="vm.tableParams" template-pagination="custom/pager" class="ui very basic unstackable selectable padded table">
+        <tr ng-repeat="a in $data">
+          <td data-title="'Username'" sortable="'username'">
+            {{ a.username }}
+            <div class="ui horizontal tiny label" ng-show="a.admin">Admin</div>
+            <div class="ui horizontal tiny label" ng-show="username === a.username">You</div>
+            <div class="ui horizontal tiny label" ng-show="a.disabled">Disabled</div>
+          </td>
+          <td data-title="'Full Name'" sortable="'first_name'">{{ a.first_name }}</td>
+          <td class="right aligned collapsing">
+            <div class="ui action buttons">
+              <div ng-click="vm.showEditUser(a)" class="ui basic icon button">
+                <i class="edit icon"></i>
+              </div>
+              <div ng-click="vm.showRemoveAccountDialog(a)" class="ui basic icon button">
+                <i class="remove icon"></i>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="edit-user-modal" class="ui small modal transition">
+  <i class="close icon"></i>
+  <div class="header">
+    Edit Account: {{ vm.editedAccount.username }}
+  </div>
+  <div class="content">
+    <div id="editAccount" class="ui grid">
+      <div class="row">
+        <div class="column">
+          <div class="details-section">
+            <div class="ui form">
+              <h3>Account Details</h3>
+              <div class="field">
+                <label>Full Name</label>
+                <input type="text" name="first_name" ng-model="vm.editedAccount.first_name">
+              </div>
+              <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" ng-model="vm.newPassword">
+              </div>
+              <div class="field">
+                <div class="ui checkbox">
+                  <input id="editedAccount_disabled" ng-model="vm.editedAccount.disabled" type="checkbox">
+                  <label for="editedAccount_disabled">Disable account</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui checkbox">
+                  <input id="editedAccount_isAdmin" ng-model="vm.editedAccount.admin" type="checkbox">
+                  <label for="editedAccount_isAdmin">Is a UCP admin?</label>
+                </div>
+                <p class="warning-message" ng-show="vm.adminToggled">
+                  <i class="ui red warning sign icon"></i>
+                  Changing a user's admin privileges will result in their client bundles being removed
+                </p>
+              </div>
+              <div class="field">
+                <label>Default Permissions
+                  <i class="large blue help circle icon"></i>
+                  <div class="ui popup">
+                    <h5>Default Permissions</h5>
+                    The account default permissions are for non-labeled (<code>com.docker.access.label</code>) resources such as Images, Networks and Volumes.
+                  </div>
+                </label>
+                <select class="ui default-permissions dropdown" ng-class="{'disabled': vm.editedAccount.admin}" ng-model="vm.editedAccount.role" convert-to-number>
+                  <option value="0">No Access</option>
+                  <option value="1">View Only</option>
+                  <option value="2">Restricted Control</option>
+                  <option value="3">Full Control</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      Cancel
+    </div>
+    <div ng-click="vm.editAccount()" class="ui positive right button">
+      Update
+    </div>
+  </div>
+</div>
+
+<script>
+$('.ui.new-user.form').form({
+  inline: true,
+  fields: {
+    username: {
+      identifier : 'username',
+      rules: [
+      {
+        type   : 'empty',
+        prompt : 'Please enter a username'
+      },
+      {
+        type   : 'doesntContain["]',
+        prompt : 'Username cannot contain quotes'
+      },
+      {
+        type   : 'doesntContain[/]',
+        prompt : 'Username cannot contain slashes'
+      },
+      {
+        type   : 'doesntContain[\\]',
+        prompt : 'Username cannot contain slashes'
+      },
+      {
+        type   : 'doesntContain[[]',
+        prompt : 'Username cannot contain square brackets'
+      },
+      {
+        type   : 'doesntContain[]]',
+        prompt : 'Username cannot contain square brackets'
+      },
+      {
+        type   : 'doesntContain[,]',
+        prompt : 'Username cannot contain commas'
+      },
+      {
+        type   : 'doesntContain[:]',
+        prompt : 'Username cannot contain colons'
+      },
+      {
+        type   : 'doesntContain[;]',
+        prompt : 'Username cannot contain semi-colons'
+      },
+      {
+        type   : 'doesntContain[|]',
+        prompt : 'Username cannot contain pipe characters'
+      },
+      {
+        type   : 'doesntContain[=]',
+          prompt : 'Username cannot contain equals equal characters'
+      },
+      {
+        type   : 'doesntContain[+]',
+        prompt : 'Username cannot contain plus characters'
+      },
+      {
+        type   : 'doesntContain[*]',
+        prompt : 'Username cannot contain asterisks'
+      },
+      {
+        type   : 'doesntContain[?]',
+        prompt : 'Username cannot contain question marks'
+      },
+      {
+        type   : 'doesntContain[>]',
+        prompt : 'Username cannot contain angled brackets'
+      },
+      {
+        type   : 'doesntContain[<]',
+        prompt : 'Username cannot contain angled brackets'
+      },
+      {
+        type   : 'doesntContain[ ]',
+        prompt : 'Username cannot contain spaces'
+      }
+      ]
+    },
+    password: {
+      identifier : 'password',
+      rules: [
+      {
+        type   : 'empty',
+        prompt : 'Please enter a password'
+      }
+      ]
+    }
+  }
+});
+$('.help.circle.icon').popup({
+  inline: true,
+  hoverable: true,
+  delay: {
+    show: 150,
+    hide: 400
+  }
+});
+</script>

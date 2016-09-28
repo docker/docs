@@ -1,0 +1,6 @@
+<select ng-options="data.id as data.title for data in $column.data"
+        ng-disabled="$filterRow.disabled"
+        multiple ng-multiple="true"
+        ng-model="params.filter()[name]"
+        class="filter filter-select-multiple form-control" name="{{name}}">
+</select>

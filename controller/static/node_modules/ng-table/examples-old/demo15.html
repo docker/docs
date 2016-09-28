@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <!--[if lt IE 9]>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../dist/ng-table.js"></script>
+    <script src="js/ng-table-export.src.js"></script>
+    <link rel="stylesheet" href="../dist/ng-table.css">
+</head>
+<body ng-app="main">
+<h1>Export to CSV</h1>
+
+<div ng-controller="DemoCtrl as demo">
+
+    <a class="btn btn-primary" ng-mousedown="csv.generate()" ng-href="{{ csv.link() }}" download="test.csv">Export to CSV</a>
+
+    <div style="margin-bottom: 20px">
+        <label class="checkbox-inline" ng-repeat="col in demo.columns">
+            <input type="checkbox" ng-model-options="{ getterSetter: true }" ng-model="col.show"/> {{col.title()}}
+        </label>
+    </div>
+
+    <table ng-table="demo.tableParams" class="table" export-csv="csv" ng-table-columns-binding="demo.columns">
+        <tr ng-repeat="user in $data">
+            <td data-title="'Name'" ng-if="true">
+                {{user.name}}
+            </td>
+            <td data-title="'Age'" ng-if="true" filter="{ age: 'text'}">
+                {{user.age}}
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        var app = angular.module('main', ['ngTable', 'ngTableExport']).
+                controller('DemoCtrl', function($scope, NgTableParams, $sce) {
+                    var self = this;
+                    var data = [{name: "Moroni", age: 50},
+                        {name: "Tiancum", age: 43},
+                        {name: "Jacob", age: 27},
+                        {name: "Nephi", age: 29},
+                        {name: "Enos", age: 34},
+                        {name: "Tiancum", age: 43},
+                        {name: "Jacob", age: 27},
+                        {name: "Nephi", age: 29},
+                        {name: "Enos", age: 34},
+                        {name: "Tiancum", age: 43},
+                        {name: "Jacob", age: 27},
+                        {name: "Nephi", age: 29},
+                        {name: "Enos", age: 34},
+                        {name: "Tiancum", age: 43},
+                        {name: "Jacob", age: 27},
+                        {name: "Nephi", age: 29},
+                        {name: "Enos", age: 34}];
+
+                self.tableParams = new NgTableParams({
+                    }, {
+                        dataset: data
+                    });
+                });
+    </script>
+
+</div>
+
+
+</body>
+</html>

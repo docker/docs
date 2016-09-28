@@ -1,0 +1,14 @@
+.ui.action.buttons > .button {
+    margin-right: 5px;
+}
+.ui.action.buttons > .button:last-child {
+    margin-right: 0;
+}
+
+.padded-header {
+  margin-top: 2rem !important;
+}
+
+.ui.table .checkbox {
+  margin-top: 4px;
+}

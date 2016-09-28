@@ -1,0 +1,17 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@boxShadow: none !important;
+@dividerSize: 0px;
+
+@itemVerticalPadding: @relativeLarge;
+@itemHorizontaPadding: @relativeLarge;
+
+@secondaryPointingColor: @mediumGrey;
+@secondaryPointingBorderColor: @mediumGrey;
+@secondaryPointingActiveTextColor: @blue;
+@secondaryPointingActiveBorderColor: @blue;
+@secondaryPointingHoverTextColor: @blue;
+@secondaryPointingHoverBorderColor: @blue;
+@secondaryPointingBottomMargin: @relativeMassive;

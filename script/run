@@ -1,0 +1,75 @@
+#!/bin/bash
+#
+# This build script will work against local or remote engines without relying on
+# volume mounts.  As a result, every build is a full build.  If you are building
+# against a local engine, consider unsing run_inc instead
+#
+
+DEV_IMAGE_NAME="${DEV_IMAGE_NAME:-ucp-controller-dev}"
+DEV_DOCKER_VOLUME_NAME="${DEV_IMAGE_NAME}-dockerdir"
+SRC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. ; pwd )"
+
+# Store machine certs in a docker volume to limit a race condition
+# See the "race condition" section in integration_tests.md
+if ! docker volume ls | grep -q ${DEV_DOCKER_VOLUME_NAME} ; then
+    docker volume create --name ${DEV_DOCKER_VOLUME_NAME} || exit 1
+fi
+
+if [ -z "${MACHINE_PREFIX}" ] ; then
+    MACHINE_PREFIX=${USER}
+fi
+export MACHINE_PREFIX
+
+
+# We don't volume mount the code, so always build the image unless told explicitly to skip
+if [ -z "${SKIP_DEV_IMAGE_BUILD}" ] ; then
+    docker build -t ${DEV_IMAGE_NAME} -f Dockerfile.build . || exit 1
+else
+    echo "Skipping build of ${DEV_IMAGE_NAME}"
+fi
+
+# If no args, assume interactive
+if [ -z "$*" ] ; then
+    IT="-it"
+    set -- "sh"
+fi
+
+# TODO - Add more pass-through goop to be able to run integration in dev mode
+#        with other "local" drivers
+docker run --rm ${IT} \
+    -e GOPATH=/go \
+    -e PRE_RELEASE \
+    -e TEST_VERBOSE \
+    -e MACHINE_CREATE_FLAGS \
+    -e MACHINE_DRIVER \
+    -e REGISTRY_USERNAME \
+    -e REGISTRY_PASSWORD \
+    -e REGISTRY_EMAIL \
+    -e AWS_ACCESS_KEY_ID \
+    -e AWS_SECRET_ACCESS_KEY \
+    -e AWS_VPC_ID \
+    -e AWS_DEFAULT_REGION \
+    -e PRESERVE_TEST_MACHINE \
+    -e MACHINE_FIXUP_COMMAND \
+    -e MACHINE_PREFIX \
+    -e TAG \
+    -e ORG \
+    -e REPO \
+    -e DOCKER \
+    -e TEST_FLAGS \
+    -e NOTARY_DELEGATION_PASSPHRASE \
+    -e DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE \
+    -e DOCKER_CONTENT_TRUST \
+    -e LOG_DIR=/root/.docker \
+    -v ${DEV_DOCKER_VOLUME_NAME}:/root/.docker \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    ${DEV_IMAGE_NAME} $*
+ret=$?
+if echo "$*" | grep -q " integration" ; then
+    # Copy out the integration log if we've got one
+    docker run --rm \
+        -v ${DEV_DOCKER_VOLUME_NAME}:/data \
+        ${DEV_IMAGE_NAME} cat /data/${MACHINE_PREFIX}integration.log > ${SRC_DIR}/${MACHINE_PREFIX}integration.log
+fi
+exit ${ret}
+

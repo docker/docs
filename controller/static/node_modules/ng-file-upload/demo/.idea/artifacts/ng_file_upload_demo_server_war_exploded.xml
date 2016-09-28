@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ng-file-upload-demo-server:war exploded">
+    <output-path>$PROJECT_DIR$/target/ng-file-upload-demo-server-0.0.1</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ng-file-upload-demo-server" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.2" />
+          <element id="library" level="project" name="Maven: com.google.appengine:appengine-api-1.0-sdk:1.9.18" />
+          <element id="library" level="project" name="Maven: com.google.appengine:appengine-endpoints:1.9.18" />
+          <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/ng-file-upload-demo-server-0.0.1/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="ng-file-upload-demo-server/web/Web" />
+    </root>
+  </artifact>
+</component>

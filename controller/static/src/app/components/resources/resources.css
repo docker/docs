@@ -1,0 +1,82 @@
+.flex-wrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  width: 100%;
+}
+
+.content-pane {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.content-pane .container {
+  width: auto !important;
+}
+
+.sidenav {
+  flex: 0 0 310px;
+  padding: 2rem 0;
+  border-right: 1px solid #E3E7E9;
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidenav .sidenav-section a {
+  color: #949EA8;
+  font-size: 11px;
+  float: right;
+  padding-right: 16px;
+  padding-top: 12px;
+  font-weight: 600;
+}
+
+.sidenav .sidenav-section a:hover {
+  color: #445D6E;
+}
+
+.sidenav .sidenav-section .label {
+  color: #C0C9CE;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 1rem 2rem 0.5rem 2rem;
+  display: inline-block;
+}
+
+.sidenav a.item {
+  display: block;
+  padding: 0.5rem 2rem;
+  color: #445D6E;
+  padding-left: 1.5rem;
+	width: 310px;
+}
+
+.sidenav a.item:hover {
+  background-color: #F2F2F2;
+}
+
+.sidenav a.item.active {
+  background-color: #E9EEF2;
+  border-right: 4px solid #1AAAF8;
+  font-weight: 600;
+  color: #1AAAF8;
+}
+
+.sidenav a.item svg {
+	height: 24px;
+	width: 24px;
+	margin-right: 1rem;
+}
+
+.sidenav a.item svg path,
+.sidenav a.item svg rect,
+.sidenav a.item svg circle {
+  fill: #C5CDD2;
+}
+
+.sidenav a.active.item svg path,
+.sidenav a.active.item svg rect,
+.sidenav a.active.item svg circle {
+  fill: #1AAAF8;
+}

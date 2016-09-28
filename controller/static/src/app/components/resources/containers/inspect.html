@@ -1,0 +1,362 @@
+<div id="inspect-details">
+
+  <!-- General details -->
+  <div class="details-section">
+    <h3>Status</h3>
+    <div class="contents">
+      <table class="ui very basic definition unstackable selectable padded table">
+        <tbody>
+          <tr>
+            <td class="three wide column">Status</td>
+            <td>{{ vm.container.State.Status }}</td>
+          </tr>
+          <tr>
+            <td>Created</td>
+            <td>{{ vm.container.Created | date:'yyyy-MM-dd HH:mm:ss Z' }}</td>
+          </tr>
+          <tr>
+            <td>Started At</td>
+            <td>{{ vm.container.State.StartedAt | date:'yyyy-MM-dd HH:mm:ss Z' }}</td>
+          </tr>
+          <tr ng-hide="vm.container.State.Running">
+            <td>Finished At</td>
+            <td>{{ vm.container.State.FinishedAt | date:'yyyy-MM-dd HH:mm:ss Z' }}</td>
+          </tr>
+          <tr ng-show="vm.container.HostConfig.RestartPolicy !== ''">
+            <td>Restart Count</td>
+            <td>{{ vm.container.RestartCount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="details-section">
+    <div class="ui two column grid" ng-click="vm.showHealthcheck = !vm.showHealthcheck">
+      <div class="row">
+        <div class="fourteen wide column">
+          <h3>
+            Healthcheck
+            <span class="rollup-data">
+              <span ng-if="vm.container.State.Health">
+                <i class="ui circle icon" ng-class="{'green': vm.container.State.Health.Status === 'healthy', 'red': vm.container.State.Health.Status === 'unhealthy'}"></i>
+                {{ vm.container.State.Health.Status }}
+              </span>
+              <span ng-if="!vm.container.State.Health">
+                No healthcheck configured.
+              </span>
+            </span>
+          </h3>
+        </div>
+        <div class="two wide right aligned column" ng-if="vm.container.State.Health">
+          <i ng-if="!vm.showHealthcheck" class="add icon"></i>
+          <i ng-if="vm.showHealthcheck" class="minus icon"></i>
+        </div>
+      </div>
+    </div>
+    <div class="contents" ng-if="vm.container.State.Health" ng-show="vm.showHealthcheck">
+      <table class="ui very basic definition unstackable selectable padded table">
+        <tbody>
+          <tr>
+            <td class="three wide column">Status</td>
+            <td>{{ vm.container.State.Health.Status }}</td>
+          </tr>
+          <tr ng-if="vm.container.state.Health.FailingStreak > 0">
+            <td>Failing Streak</td>
+            <td>{{ vm.container.State.Health.FailingStreak }}</td>
+          </tr>
+          <tr>
+            <td>Test</td>
+            <td class="fixed-width-font">{{ vm.container.Config.Healthcheck.Test.join(' ') }}</td>
+          </tr>
+          <tr>
+            <td>Interval (seconds)</td>
+            <td>{{ vm.container.Config.Healthcheck.Interval / 1000000000 }}</td>
+          </tr>
+          <tr>
+            <td>Timeout (seconds)</td>
+            <td>{{ vm.container.Config.Healthcheck.Timeout / 1000000000 }}</td>
+          </tr>
+          <tr>
+            <td>Retries</td>
+            <td>{{ vm.container.Config.Healthcheck.Retries }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Log</h4>
+      <table ng-table="vm.healthLog" template-pagination="custom/pager" class="ui very basic unstackable selectable padded table padded-header">
+        <tr ng-repeat="l in $data">
+          <td data-title="'Start'" sortable="'Start'" class="collapsing" ng-if="true">{{ l.Start | date:'yyyy-MM-dd HH:mm:ss Z' }}</td>
+          <td data-title="'End'" sortable="'End'" class="collapsing" ng-if="true">{{ l.End | date:'yyyy-MM-dd HH:mm:ss Z' }}</td>
+          <td data-title="'ExitCode'" sortable="'ExitCode'" class="collapsing" ng-if="true">{{ l.ExitCode }}</td>
+          <td data-title="'Output'" sortable="'Output'" class="fixed-width-font" ng-if="true">{{ l.Output }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="details-section">
+    <h3>Configuration</h3>
+    <div class="contents">
+      <table class="ui very basic definition unstackable selectable padded table">
+        <tbody>
+          <tr>
+            <td class="three wide column">ID</td>
+            <td>{{ vm.container.Id | limitTo:12 }}</td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td>{{ vm.container.Name.split("/")[1] }}</td>
+          </tr>
+          <tr>
+            <td>Image</td>
+            <td>{{ vm.container.Config.Image }}</td>
+          </tr>
+          <tr>
+            <td>Restart Policy</td>
+            <td>{{ vm.container.HostConfig.RestartPolicy.Name || 'None' }}</td>
+          </tr>
+          <tr ng-show="vm.container.HostConfig.RestartPolicy === 'on-failure'">
+            <td>Maximum Retries</td>
+            <td>{{ vm.container.HostCOnfig.RestartPolicy.MaximumRetryCount }}</td>
+          </tr>
+          <tr>
+            <td>Entrypoint</h4>
+            <td class="fixed-width-font">{{ vm.container.Config.Entrypoint.join(" ") }}</td>
+          </tr>
+          <tr>
+            <td>Command</h4>
+            <td class="fixed-width-font">{{ vm.container.Config.Cmd.join(" ") }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="details-section">
+    <h3>Resources</h3>
+    <div class="contents">
+      <table class="ui very basic definition unstackable selectable padded table">
+        <tbody>
+          <tr>
+            <td class="three wide column">Memory Limit</td>
+            <td>{{ vm.container.HostConfig.Memory }}</td>
+          </tr>
+          <tr>
+            <td>Memory Reservation</td>
+            <td>{{ vm.container.HostConfig.MemoryReservation }}</td>
+          </tr>
+          <tr>
+            <td>Memory Swap</td>
+            <td>{{ vm.container.HostConfig.MemorySwap }}</td>
+          </tr>
+          <tr>
+            <td>CPU Shares</td>
+            <td>{{ vm.container.HostConfig.CpuShares }}</td>
+          </tr>
+          <tr>
+            <td>Cpuset CPUs</td>
+            <td>{{ vm.container.HostConfig.CpusetCpus || "None" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="details-section">
+    <h3>Node</h3>
+    <div class="contents">
+      <table class="ui very basic definition unstackable selectable padded table">
+        <tbody>
+          <tr>
+            <td class="three wide column">Name</td>
+            <td>{{ vm.container.Node.Name }}</td>
+          </tr>
+          <tr>
+            <td>Memory</td>
+            <td>{{ (vm.container.Node.Memory / 1024 / 1024 | number:0) || "&infin;" }} MB</td>
+          </tr>
+          <tr>
+            <td>CPUs</td>
+            <td>{{ vm.container.Node.Cpus || "&infin;" }}</td>
+          </tr>
+          <tr>
+            <td>Host</td>
+            <td>{{ vm.container.Node.Addr }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="details-section">
+    <h3>Volumes</h3>
+    <div class="contents">
+      <div ng-hide="vm.container.Mounts.length > 0">
+        No volumes configured
+      </div>
+      <table class="ui very basic unstackable selectable padded table" ng-show="vm.container.Mounts.length > 0">
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>Mode</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="m in vm.container.Mounts">
+            <td>{{ m.Source }}</td>
+            <td>{{ m.Destination }}</td>
+            <td>{{ m.Mode }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="details-section">
+    <div class="ui two column grid" ng-click="vm.showEnvVars = !vm.showEnvVars">
+      <div class="row">
+        <div class="fourteen wide column">
+          <h3>Environment</h3>
+        </div>
+        <div class="two wide right aligned column">
+          <i ng-if="!vm.showEnvVars" class="add icon"></i>
+          <i ng-if="vm.showEnvVars" class="minus icon"></i>
+        </div>
+      </div>
+    </div>
+    <div class="contents" ng-show="vm.showEnvVars">
+      <div ng-hide="vm.container.Config.Env.length > 0">
+        No environment variables configured
+      </div>
+      <table class="ui very basic definition unstackable selectable padded table" ng-show="vm.container.Config.Env.length > 0">
+        <tbody>
+          <tr ng-repeat="e in vm.container.Config.Env">
+            <td class="three wide column no-cap">
+              {{ e.split('=')[0] }}
+            </td>
+            <td class="fixed-width-font">
+              {{ e.split('=')[1] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="details-section">
+    <div class="ui two column grid">
+      <div class="row">
+        <div class="column">
+          <h3>Labels</h3>
+        </div>
+      </div>
+    </div>
+    <div class="contents">
+      <table class="ui very basic definition unstackable selectable padded table">
+        <tbody>
+          <tr ng-repeat="(k, v) in vm.container.Config.Labels">
+            <td class="three wide column no-cap">
+              {{ k }}
+            </td>
+            <td class="fixed-width-font">
+              {{ v }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Port configurations -->
+  <div class="details-section">
+    <h3>Network</h3>
+    <div class="contents">
+      <table class="ui very basic definition unstackable selectable padded table">
+        <tbody>
+          <tr>
+            <td class="three wide column">Network Mode</td>
+            <td>{{ vm.container.HostConfig.NetworkMode}}</td>
+          </tr>
+          <tr>
+            <td>Hostname</td>
+            <td>{{ vm.container.Config.Hostname}}</td>
+          </tr>
+          <tr>
+            <td>Domainname</td>
+            <td>{{ vm.container.Config.Domainname || "None" }}</td>
+          </tr>
+          <tr>
+            <td>DNS</td>
+            <td>{{ vm.container.HostConfig.Dns || "Default" }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <table class="ui very basic definition unstackable selectable padded table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>IP</th>
+            <th>Gateway</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="(k, values) in vm.container.NetworkSettings.Networks">
+            <td class="three wide column">
+              {{ k }}
+            </td>
+            <td>
+              {{ values.IPAddress }}
+            </td>
+            <td>
+              {{ values.Gateway }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="details-section">
+    <h3>Ports</h3>
+    <div class="contents">
+      <p ng-show="vm.container.NetworkSettings.Ports | isEmpty">
+      No published ports
+      </p>
+      <table class="ui very basic definition unstackable selectable padded table" ng-hide="vm.container.NetworkSettings.Ports | isEmpty">
+        <tbody>
+          <tr ng-repeat="(k, values) in vm.container.NetworkSettings.Ports">
+            <td class="three wide column">
+              <span ng-show="values.length > 0">Exposed</span>
+              <span ng-show="values.length === 0 || values == null">Internal</span>
+            </td>
+            <td>{{ k }}</td>
+            <td><span ng-show="values.length > 0">{{ values[0].HostIp }}:{{ values[0].HostPort }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Processes -->
+  <div class="details-section">
+    <h3>Processes</h3>
+    <div class="contents">
+      <table id="toptable" class="ui very basic unstackable selectable padded table">
+        <thead>
+          <tr>
+            <th ng-repeat="t in vm.top.Titles">{{ t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="r in vm.top.Processes">
+            <td class="fixed-width-font" ng-repeat="c in r">
+              {{ c }}
+              <script>
+$('.ui.sortable.celled.table').tablesort();
+              </script>
+            </td>
+          </tr>
+      </table>
+    </div>
+  </div>
+</div>

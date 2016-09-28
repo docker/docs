@@ -1,0 +1,25 @@
+<div class="ui form container">
+  <div class="ui segment">
+    <h3>Server Certificates</h3>
+    <p>The certificates used by UCP can be replaced by importing an existing certificate bundle.</p>
+    <p><b>Note:</b> Replacing the certificates will result in all affected UCP controller containers being restarted.  Log sessions, exec sessions and event streams will be closed during the restart.</p>
+    <div class="ui field">
+      <label>CA Certificate</label>
+      <input type="file" accept=".pem" file-input="vm.updateRequest.ca">
+    </div>
+    <div class="ui field">
+      <label>Certificate</label>
+      <input type="file" accept=".pem" file-input="vm.updateRequest.cert">
+    </div>
+    <div class="ui field">
+      <label>Key</label>
+      <input type="file" accept=".pem" file-input="vm.updateRequest.key">
+    </div>
+
+    <button class="ui positive button"
+      ng-class="{'disabled': !vm.updateRequest.ca && !vm.updateRequest.cert && !vm.updateRequest.key}"
+      ng-click="vm.uploadCerts()">
+      Update
+    </button>
+  </div>
+</div>

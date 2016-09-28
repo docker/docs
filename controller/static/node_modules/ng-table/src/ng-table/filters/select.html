@@ -1,0 +1,7 @@
+<select ng-options="data.id as data.title for data in $selectData"
+        ng-table-select-filter-ds="$column"
+        ng-disabled="$filterRow.disabled"
+        ng-model="params.filter()[name]"
+        class="filter filter-select form-control" name="{{name}}">
+    <option style="display:none" value=""></option>
+</select>

@@ -1,0 +1,19 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@checkboxColor: @blue;
+
+@labelHoverColor: @blue;
+@checkboxHoverBorderColor: @blue !important;
+
+@checkboxPressedBorderColor: @blue;
+@labelPressedColor: @textColor;
+
+@labelFocusColor: @textColor;
+@checkboxFocusBorderColor: @solidBorderColor;
+
+@checkboxActiveBorderColor: @solidBorderColor;
+@checkboxActiveCheckColor: @blue;
+
+@checkboxActiveFocusCheckColor: @blue;

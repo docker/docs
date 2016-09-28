@@ -1,0 +1,20 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.secondary.pointing.menu {
+    margin-bottom: @secondaryPointingBottomMargin;
+}
+
+.ui.secondary.pointing.menu .item {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: @secondaryPointingColor;
+}
+
+.ui.secondary.pointing.menu .item:hover {
+    border-bottom-color: @secondaryPointingHoverBorderColor;
+}
+
+.ui.secondary.pointing.menu .active.item {
+    font-weight: bold;
+}

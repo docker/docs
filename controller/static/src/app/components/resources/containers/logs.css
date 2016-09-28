@@ -1,0 +1,11 @@
+.tail.input > label {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  vertical-align: middle !important;
+  padding-left: 1em;
+}
+#inspect-logs .logs {
+    overflow: scroll;
+    max-height: 800px;
+    padding: 2rem;
+}

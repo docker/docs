@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "about to 'make image'"
+make image
+echo "done building"

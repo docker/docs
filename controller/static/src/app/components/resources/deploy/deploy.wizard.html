@@ -1,0 +1,451 @@
+<div id="registry-auth-modal" class="ui small modal transition">
+  <i class="close icon"></i>
+  <div class="header">
+    Private Repository Authentication
+  </div>
+  <div class="content">
+    <div class="ui registry-auth form">
+      <div class="two fields">
+        <div class="field">
+          <label>Username</label>
+          <input type="text" name="registryUsername" ng-model="vm.registryUsername"></input>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" name="registryPassword" ng-model="vm.registryPassword"></input>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      Cancel
+    </div>
+    <div class="ui positive button">
+      Deploy
+    </div>
+  </div>
+</div>
+
+<div id="deploy" class="flex-wrapper">
+  <div class="sidenav">
+    <div class="sidenav-section">
+      <span class="label">
+        Deploy Method
+      </span>
+    </div>
+
+    <a class="deploy-option item" ui-sref="dashboard.deploywizard" ui-sref-active="active">
+      <svg-icon p="jumpstart"></svg-icon>
+      <div class="content">Form Wizard</div>
+    </a>
+
+    <a class="deploy-option item" ui-sref="dashboard.deploystack" ui-sref-active="active">
+      <svg-icon p="stacks"></svg-icon>
+      <div class="content">
+        Upload Bundle <span class="weak" style="margin-left: 5px; text-transform: uppercase;">EXPERIMENTAL</span>
+      </div>
+    </a>
+
+    <p>Follow a step-by-step form wizard to deploy a service.</p>
+
+    <a class="item" ng-click="vm.scrollTo('deploy-basic')">Basic Settings</a>
+    <a class="item" ng-click="vm.scrollTo('deploy-environment')">Environment</a>
+    <a class="item" ng-click="vm.scrollTo('deploy-network')">Network</a>
+    <a class="item" ng-click="vm.scrollTo('deploy-volumes')">Volumes</a>
+    <a class="item" ng-click="vm.scrollTo('deploy-labels')">Labels</a>
+
+    <div class="ui green large deploy button" ng-click="vm.deploy()">Deploy</div>
+  </div>
+
+  <div class="ui content-pane">
+    <div class="ui form container">
+      <div class="ui error message"></div>
+      <div id="deploy-basic" class="details-section">
+        <h3>Basic Settings</h3>
+        <div class="contents">
+          <div class="field">
+            <label>Service Name</label>
+            <input name="serviceName" type="text" ng-model="vm.service.Name"></input>
+          </div>
+          <div class="field">
+            <label>Image Name</label>
+            <input name="imageName" type="text" ng-model="vm.service.TaskTemplate.ContainerSpec.Image"></input>
+          </div>
+          <div class="field">
+            <label>Command</label>
+            <input name="command" type="text" class="fixed-width-font input" ng-model="vm.command"></input>
+          </div>
+          <div class="fluid field">
+            <label>Permissions Label (com.docker.ucp.access.label)</label>
+            <select class="ui permissions search dropdown" ng-model="vm.service.Labels['com.docker.ucp.access.label']">
+              <option value="">Do not use a permissions label</option>
+              <option ng-repeat="p in vm.permissions" value="{{ p }}">{{ p }}</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Mode</label>
+            <dropdown class="fluid" ng-model="vm.serviceMode">
+              <dropdown-group>Replicated</dropdown-group>
+              <dropdown-group>Global</dropdown-group>
+            </dropdown>
+          </div>
+          <div class="field" ng-class="{'disabled': vm.serviceMode === 'Global'}">
+            <label>Replicas</label>
+            <input name="replicas" ng-disabled="vm.serviceMode === 'Global'" type="number" ng-model="vm.serviceScale"></input>
+          </div>
+          <div class="field">
+            <label>Stop Grace Period (seconds)</label>
+            <input name="stopGracePeriod" type="number" ng-model="vm.stopGracePeriod"></input>
+          </div>
+        </div>
+      </div>
+
+      <div id="deploy-update" class="details-section">
+        <div class="ui two column grid" ng-click="vm.updateConfigVisible = !vm.updateConfigVisible">
+          <div class="row">
+            <div class="fourteen wide column">
+              <h3>Update Config</h3>
+            </div>
+            <div class="two wide right aligned column">
+              <i ng-if="!vm.updateConfigVisible" class="add icon"></i>
+              <i ng-if="vm.updateConfigVisible" class="minus icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="contents" ng-show="vm.updateConfigVisible">
+          <div class="field">
+            <label>Parallelism</label>
+            <input name="updateConfigParallelism" type="number" ng-model="vm.service.UpdateConfig.Parallelism"></input>
+          </div>
+          <div class="field">
+            <label>Update Delay (seconds)</label>
+            <input name="updateConfigDelay" type="number" ng-model="vm.updateConfigDelay"></input>
+          </div>
+        </div>
+      </div>
+
+      <div id="deploy-network" class="details-section">
+        <div class="ui two column grid" ng-click="vm.networkConfigVisible = !vm.networkConfigVisible">
+          <div class="row">
+            <div class="fourteen wide column">
+              <h3>Network</h3>
+            </div>
+            <div class="two wide right aligned column">
+              <i ng-if="!vm.networkConfigVisible" class="add icon"></i>
+              <i ng-if="vm.networkConfigVisible" class="minus icon"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="contents" ng-show="vm.networkConfigVisible">
+          <div class="fields">
+            <div class="fifteen wide field">
+              <label>Attach a Network</label>
+              <select class="ui fluid search dropdown" ng-model="vm.network">
+                <option ng-repeat="n in vm.swarmNetworks" value="{{ n.Id }}">{{ n.Name }}</option>
+              </select>
+            </div>
+            <div class="one wide field">
+              <label>&nbsp;</label>
+              <div class="ui green icon button" ng-click="vm.pushNetwork()">
+                <i class="add icon"></i>
+              </div>
+            </div>
+          </div>
+          <div class="fields" ng-repeat="n in vm.networks">
+            <div class="fifteen wide field">
+              <input type="text" readonly="" value="{{ vm.swarmNetworkMap[n].Name }}"></input>
+            </div>
+            <div class="one wide field">
+              <div class="ui red icon button" ng-click="vm.removeNetwork(n)">
+                <i class="delete icon"></i>
+              </div>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="three wide field">
+              <label>&nbsp;</label>
+              <input type="number" ng-model="vm.publishPort" placeholder="Publish Port"></input>
+            </div>
+            <div class="three wide field">
+              <label>&nbsp;</label>
+              <input type="number" ng-model="vm.targetPort" placeholder="Target Port"></input>
+            </div>
+            <div class="three wide field">
+              <label>Protocol</label>
+              <dropdown class="fluid" ng-model="vm.publishPortProtocol">
+                <dropdown-group>TCP</dropdown-group>
+                <dropdown-group>UDP</dropdown-group>
+              </dropdown>
+            </div>
+            <div class="one wide field">
+              <label>&nbsp;</label>
+              <div class="ui green icon button" ng-click="vm.pushPort()">
+                <i class="add icon"></i>
+              </div>
+            </div>
+          </div>
+          <div class="fields" ng-repeat="p in vm.ports">
+            <div class="three wide field">
+              <input type="number" ng-model="p.PublishedPort" placeholder="Published Port"></input>
+            </div>
+            <div class="three wide field">
+              <input type="number" ng-model="p.TargetPort" placeholder="Target Port"></input>
+            </div>
+            <div class="three wide field">
+              <dropdown class="fluid" ng-model="p.Protocol">
+                <dropdown-group>TCP</dropdown-group>
+                <dropdown-group>UDP</dropdown-group>
+              </dropdown>
+            </div>
+            <div class="one wide field">
+              <div class="ui red icon button" ng-click="vm.removePort(p)">
+                <i class="delete icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="deploy-environment" class="details-section">
+        <div class="ui two column grid" ng-click="vm.environmentVarsVisible = !vm.environmentVarsVisible">
+          <div class="row">
+            <div class="fourteen wide column">
+              <h3>Environment</h3>
+            </div>
+            <div class="two wide right aligned column">
+              <i ng-if="!vm.environmentVarsVisible" class="add icon"></i>
+              <i ng-if="vm.environmentVarsVisible" class="minus icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="contents" ng-show="vm.environmentVarsVisible">
+          <div class="fields">
+            <div class="seven wide field">
+              <label>Name</label>
+              <input name="variableName" type="text" ng-model="vm.variableName" placeholder="Environment Variable Name"></input>
+            </div>
+            <div class="eight wide field">
+              <label>Value</label>
+              <input name="variableValue" type="text" ng-model="vm.variableValue" placeholder="Environment Variable Value"></input>
+            </div>
+            <div class="one wide field">
+              <label>&nbsp;</label>
+              <div class="ui green icon button" ng-click="vm.pushEnvVar()">
+                <i class="add icon"></i>
+              </div>
+            </div>
+          </div>
+          <div class="fields" ng-repeat="v in vm.envVars">
+            <div class="seven wide field">
+              <input type="text" ng-model="v.name"></input>
+            </div>
+            <div class="eight wide field">
+              <input type="text" ng-model="v.value"></input>
+            </div>
+            <div class="one wide field">
+              <div ng-click="vm.removeEnvVar(v)" class="ui red icon button">
+                <i class="delete icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="deploy-volumes" class="details-section">
+        <div class="ui two column grid" ng-click="vm.volumeConfigVisible = !vm.volumeConfigVisible">
+          <div class="row">
+            <div class="fourteen wide column">
+              <h3>Volumes</h3>
+            </div>
+            <div class="two wide right aligned column">
+              <i ng-if="!vm.volumeConfigVisible" class="add icon"></i>
+              <i ng-if="vm.volumeConfigVisible" class="minus icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="contents" ng-show="vm.volumeConfigVisible">
+          <div class="fields">
+            <div class="three wide field">
+              <label>Type</label>
+              <dropdown class="fluid" ng-model="vm.volumeType">
+                <dropdown-group>bind</dropdown-group>
+                <dropdown-group>volume</dropdown-group>
+              </dropdown>
+            </div>
+            <div class="four wide field" ng-show="vm.volumeType === 'bind'">
+              <label>Source</label>
+              <input type="text" ng-model="vm.volumeSource" placeholder="/path/to/source"></input>
+            </div>
+            <div class="four wide field" ng-show="vm.volumeType === 'volume'">
+              <label>Volume Name</label>
+              <select class="ui fluid search volume-name dropdown" ng-model="vm.volumeSource">
+                <option ng-repeat="v in vm.swarmVolumes">{{ v.Name }}</option>
+              </select>
+            </div>
+            <div class="five wide field">
+              <label>Target</label>
+              <input type="text" ng-model="vm.volumeTarget" placeholder="/path/to/target"></input>
+            </div>
+            <div class="three wide field">
+              <label>&nbsp;</label>
+              <dropdown class="fluid" ng-model="vm.volumeWritable">
+                <dropdown-group>Write</dropdown-group>
+                <dropdown-group>Read-only</dropdown-group>
+              </dropdown>
+            </div>
+            <div class="one wide field">
+              <label>&nbsp;</label>
+              <div class="ui green icon button" ng-click="vm.pushVolume()" ng-class="{'disabled': vm.volumeTarget === '' || vm.volumeSource === ''}">
+                <i class="add icon"></i>
+              </div>
+            </div>
+          </div>
+          <div class="fields" ng-repeat="v in vm.volumes">
+            <div class="three wide field">
+              <dropdown class="fluid" ng-model="v.Type">
+                <dropdown-group>bind</dropdown-group>
+                <dropdown-group>volume</dropdown-group>
+              </dropdown>
+            </div>
+            <div class="four wide field" ng-if="v.Type === 'bind'">
+              <input type="text" ng-model="v.Source" placeholder="/path/to/source"></input>
+            </div>
+            <div class="four wide field" ng-if="v.Type === 'volume'">
+              <input type="text" ng-model="v.Source" placeholder="volume-name"></input>
+            </div>
+            <div class="five wide field">
+              <input type="text" ng-model="v.Target" placeholder="/path/to/target"></input>
+            </div>
+            <div class="three wide field">
+              <dropdown class="fluid" ng-model="v.Writable">
+                <dropdown-group>Write</dropdown-group>
+                <dropdown-group>Read-only</dropdown-group>
+              </dropdown>
+            </div>
+            <div class="one wide field">
+              <div class="ui red icon button" ng-click="vm.removeVolume(v)">
+                <i class="delete icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="deploy-labels" class="details-section">
+        <div class="ui two column grid" ng-click="vm.labelsVisible = !vm.labelsVisible">
+          <div class="row">
+            <div class="fourteen wide column">
+              <h3>Labels</h3>
+            </div>
+            <div class="two wide right aligned column">
+              <i ng-hide="vm.labelsVisible" class="add icon"></i>
+              <i ng-show="vm.labelsVisible" class="minus icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="contents" ng-show="vm.labelsVisible">
+          <div class="fields">
+            <div class="seven wide field">
+              <label>Name</label>
+              <input type="text" ng-model="vm.labelName" placeholder="Label Name"></input>
+            </div>
+            <div class="eight wide field">
+              <label>Value</label>
+              <input type="text" ng-model="vm.labelValue" placeholder="Label Value"></input>
+            </div>
+            <div class="one wide field">
+              <label>&nbsp;</label>
+              <div class="ui green icon button" ng-click="vm.pushLabel()">
+                <i class="add icon"></i>
+              </div>
+            </div>
+          </div>
+          <div class="fields" ng-repeat="l in vm.labels">
+            <div class="seven wide field">
+              <input type="text" ng-model="l.name"></input>
+            </div>
+            <div class="eight wide field">
+              <input type="text" ng-model="l.value"></input>
+            </div>
+            <div class="one wide field">
+              <div ng-click="vm.removeLabel(l)" class="ui red icon button">
+                <i class="delete icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="deploy-constraints" class="details-section">
+        <div class="ui two column grid" ng-click="vm.constraintsVisible = !vm.constraintsVisible">
+          <div class="row">
+            <div class="fourteen wide column">
+              <h3>Constraints</h3>
+            </div>
+            <div class="two wide right aligned column">
+              <i ng-hide="vm.constraintsVisible" class="add icon"></i>
+              <i ng-show="vm.constraintsVisible" class="minus icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="contents" ng-show="vm.constraintsVisible">
+          <div class="fields">
+            <div class="fifteen wide field">
+              <label>Constraint</label>
+              <input type="text" ng-model="vm.currentConstraint" placeholder="New placement constraint"></input>
+            </div>
+            <div class="one wide field">
+              <label>&nbsp;</label>
+              <div class="ui green icon button" ng-click="vm.pushConstraint()">
+                <i class="add icon"></i>
+              </div>
+            </div>
+          </div>
+          <div class="fields" ng-repeat="c in vm.constraints">
+            <div class="fifteen wide field">
+              <input type="text" ng-model="c"></input>
+            </div>
+            <div class="one wide field">
+              <div ng-click="vm.removeConstraint(c)" class="ui red icon button">
+                <i class="delete icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.ui.form').form({
+    inline: true,
+    fields: {
+      image: {
+        identifier: 'imageName',
+        rules: [
+          {
+            type: 'empty',
+            prompt: 'Please enter an image'
+          }
+        ]
+      }
+    }
+  });
+
+  $('.help.circle.icon').popup({
+    inline: true,
+    hoverable: true,
+    delay: {
+      show: 150,
+      hide: 400
+    }
+  });
+
+  $('.ui.dropdown').dropdown({
+    placeholder: false
+  });
+</script>

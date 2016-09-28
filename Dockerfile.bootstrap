@@ -1,0 +1,4 @@
+FROM alpine:3.4
+RUN apk add --update ca-certificates && rm -rf /var/cache/apk/*
+ADD bin/ucp-tool /bin/ucp-tool
+ENTRYPOINT ["/bin/ucp-tool"]

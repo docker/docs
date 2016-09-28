@@ -1,0 +1,2 @@
+    return angular.module('ngTable');
+}));

@@ -1,0 +1,49 @@
+
+if [ -z "$UCP_ADMIN_PASSWORD" ]; then
+    echo "ERROR: You must set UCP_ADMIN_PASSWORD in the environment"
+    exit 1
+fi
+
+if [ -z "$UCP_ADMIN_USER" ]; then
+    UCP_ADMIN_USER=admin
+fi
+
+export UCP_ADMIN_USER
+export UCP_ADMIN_PASSWORD
+
+# Users can override the various AWS settings...
+if [ -z "$INSTANCE_TYPE" ]; then
+    INSTANCE_TYPE="m1.medium"
+fi
+if [ -z "$SPOT_PRICE" ]; then
+    SPOT_PRICE="0.05"
+fi
+if [ -z "$AMI" ]; then
+    AMI="ami-ed8eb7dd"
+fi
+
+SIZE=$1
+
+if [ -z "$TAG" ]; then
+    echo "You must specify a specific version with TAG=xxx"
+    exit 1
+fi
+
+if [ -z "$ORG" ]; then
+    ORG="docker"
+fi
+
+if [ -z "${AWS_ACCESS_KEY_ID}" ] ; then
+    echo "You must set your AWS settings from lastpass (or your own account)"
+    exit 1
+fi
+PREFIX=${USER}${LABEL}
+
+if [ -z "$REGISTRY_USERNAME" ]; then
+    echo "ERROR: You must set registry settings in the environment"
+    echo ""
+    echo "export REGISTRY_USERNAME=xxx"
+    echo "export REGISTRY_PASSWORD=xxx"
+    echo "export REGISTRY_EMAIL=xxx"
+    exit 1
+fi

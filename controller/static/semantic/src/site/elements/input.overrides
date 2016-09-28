@@ -1,0 +1,33 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.cm-s-docker {
+    font-family: 'Droid Sans Mono', monospace;
+    border: @border;
+    border-radius: @borderRadius;
+    transition: @transition;
+    box-shadow: @boxShadow;
+    background-color: transparent;
+    color: @textColor;
+    display: inline-block;
+    width: 100%;
+}
+.cm-s-docker.CodeMirror-focused {
+    border: 1px solid @blue !important;
+}
+.cm-s-docker.CodeMirror-focused div.CodeMirror-selected {
+    background-color: lighten(@blue, 25) !important;
+}
+.cm-s-docker .CodeMirror-line {
+    padding-left: @relative10px;
+}
+.cm-s-docker span.cm-error { background-color: lighten(@red, 25) !important; }
+
+.cm-s-docker span.cm-atom { color: @blue; }
+.cm-s-docker span.cm-meta { color: @blue; }
+.cm-s-docker span.cm-comment { color: @mediumGrey; }
+.cm-s-docker span.cm-string { color: #cc9393; }
+.cm-s-docker span.cm-string-2 { color: #cc9393; }
+.cm-s-docker .CodeMirror-linenumber { color: @mediumGrey !important; text-align: center; }
+.cm-s-docker .CodeMirror-gutters { background: @lightGrey !important; border: none; }

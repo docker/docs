@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../dist/ng-table.js"></script>
+    <link rel="stylesheet" href="../dist/ng-table.css">
+
+    <style>
+        /* original source: http://elvery.net/demo/responsive-tables/ */
+        @media only screen and (max-width: 800px){
+            .demo-reponsiveTable table,
+            .demo-reponsiveTable thead,
+            .demo-reponsiveTable tbody,
+            .demo-reponsiveTable th,
+            .demo-reponsiveTable td,
+            .demo-reponsiveTable tr {
+                display: block;
+            }
+            /* Hide table sorting (but not display: none;, for accessibility) */
+            /* Note: we're hiding the sorting because it looks terrible! Making this pretty is an exercise for the reader*/
+            .demo-reponsiveTable thead tr:first-child {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            .demo-reponsiveTable tr {
+                border: 1px solid #ccc;
+            }
+            .demo-reponsiveTable table>tbody>tr>td,
+            .demo-reponsiveTable table>thead>tr>th {
+                /* Behave  like a "row" */
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                white-space: normal;
+                text-align: left;
+            }
+            .demo-reponsiveTable table>tbody>tr>td:before,
+            .demo-reponsiveTable table>thead>tr>th:before {
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                /* Label the data */
+                content: attr(data-title-text);
+            }
+        }
+    </style>
+</head>
+<body ng-app="main">
+
+<h1>Responsive table</h1>
+
+<p><strong>Resize the the width of browser window to see table switch to <em>'card view'</em></strong></p>
+
+<div ng-controller="DemoCtrl" class="demo-reponsiveTable clearfix">
+
+    <button class="btn btn-default" ng-click="removeFilters()">Remove filters</button>
+    <button class="btn btn-default" ng-click="addFilters()">Add filters</button>
+
+    <table ng-table="tableParams" class="table table-bordered table-striped">
+        <tr ng-repeat="user in $data">
+            <td title="'Full Name'" title-alt="'Name'" sortable="'name'" filter="filters.name">
+                {{user.name}}
+            </td>
+            <td title="'Age'" sortable="'age'" filter="filters.age">
+                {{user.age}}
+            </td>
+        </tr>
+    </table>
+
+
+<script>
+    var app = angular.module('main', ['ngTable']).
+            controller('DemoCtrl', function ($scope, $filter, NgTableParams) {
+                var data = [
+                    {name: "Moroni", age: 50},
+                    {name: "Tiancum", age: 43},
+                    {name: "Jacob", age: 27},
+                    {name: "Nephi", age: 29},
+                    {name: "Enos", age: 34},
+                    {name: "Tiancum", age: 43},
+                    {name: "Jacob", age: 27},
+                    {name: "Nephi", age: 29},
+                    {name: "Enos", age: 34},
+                    {name: "Tiancum", age: 43},
+                    {name: "Jacob", age: 27},
+                    {name: "Nephi", age: 29},
+                    {name: "Enos", age: 34},
+                    {name: "Tiancum", age: 43},
+                    {name: "Jacob", age: 27},
+                    {name: "Nephi", age: 29},
+                    {name: "Enos", age: 34}
+                ];
+                $scope.data = data;
+
+                $scope.removeFilters = function(){
+                    $scope.filters = { name: false, age: false };
+                };
+                $scope.addFilters = function(){
+                    $scope.filters = {
+                        name: {
+                            'name': 'text'
+                        },
+                        age: {
+                            'age': 'number'
+                        }
+                    };
+                };
+
+            $scope.addFilters();
+
+                $scope.tableParams = new NgTableParams({
+                    page: 1,            // show first page
+                    count: 10,          // count per page
+                    filter: {
+                        //name: 'M'       // initial filter
+                    },
+                    sorting: {
+                        //name: 'asc'     // initial sorting
+                    }
+                }, {
+                    filterOptions: { filterDelay: 0 },
+                    total: data.length, // length of data
+                    getData: function ($defer, params) {
+                        // use built-in angular filter
+                        var filteredData = params.filter() ?
+                                $filter('filter')(data, params.filter()) :
+                                data;
+                        var orderedData = params.sorting() ?
+                                $filter('orderBy')(filteredData, params.orderBy()) :
+                                data;
+
+                        params.total(orderedData.length); // set total for recalc pagination
+                        $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                    }
+                });
+            })
+</script>
+
+</div>
+
+
+</body>
+</html>

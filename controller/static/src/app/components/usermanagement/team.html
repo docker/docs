@@ -1,0 +1,143 @@
+<div id="add-user-to-team-modal" class="ui small modal transition">
+  <i class="close icon"></i>
+  <div class="header">
+    Add User to Team
+  </div>
+  <div class="content">
+    <div class="ui grid">
+      <div class="row">
+        <div class="column">
+          <div class="ui left icon input fluid">
+            <input ng-model="vm.addUserToTeamFilter" placeholder="Search user..." />
+            <i class="search icon"></i>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <table ng-table="vm.addUserTableParams" template-pagination="custom/pager" class="ui very basic unstackable selectable padded table">
+            <tr ng-repeat="a in $data">
+              <td data-title="'Username'" sortable="'username'">
+                {{ a.username }}
+                <div class="ui horizontal label" ng-show="a.admin">Admin</div>
+                <div class="ui horizontal label" ng-show="username === a.username">You</div>
+                <div class="ui horizontal tiny label" ng-show="a.disabled">Disabled</div>
+              </td>
+              <td data-title="'Full Name'" sortable="'first_name'">{{ a.first_name }}</td>
+              <td class="right aligned collapsing">
+                <div ng-switch="vm.isUserInSelectedTeam(a.username)">
+                  <div ng-switch-when="false" class="ui basic blue button" ng-click="vm.addUserToTeam(a.username)" ng-hide="">Add to Team</div>
+                  <div ng-switch-when="true" class="ui basic disabled weak button">Already in Team</div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div ng-click="vm.createUser()" class="ui positive button" ng-click="vm.resetFormVisibility()">
+      Done
+    </div>
+  </div>
+</div>
+
+<div class="ui grid">
+  <div class="two column row">
+    <div class="left floated column">
+      <div class="ui green icon button" ng-click="vm.showAddUser()">
+        <i class="plus icon"></i> Add User to Team
+      </div>
+    </div>
+    <div class="right aligned right floated column">
+      <div class="ui left icon input">
+        <input ng-model="vm.filter" placeholder="Search users..." />
+        <i class="search icon"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" ng-show="vm.addUserVisible">
+    <div class="column">
+      <div class="ui segment">
+        <div class="ui grid">
+          <div class="row">
+            <div class="column">
+              <div class="ui icon input">
+                <input ng-model="vm.addUserToTeamFilter" placeholder="Add user to team" reset-field/>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column">
+              <table ng-table="vm.addUserTableParams" template-pagination="custom/pager" class="ui very basic unstackable selectable padded table">
+                <tr ng-repeat="a in $data">
+                  <td data-title="'Username'" sortable="'username'">
+                    {{ a.username }}
+                    <div class="ui horizontal label" ng-show="a.admin">Admin</div>
+                    <div class="ui horizontal label" ng-show="username === a.username">You</div>
+                    <div class="ui horizontal tiny label" ng-show="a.disabled">Disabled</div>
+                  </td>
+                  <td data-title="'Full Name'" sortable="'first_name'">{{ a.first_name }}</td>
+                  <td class="right aligned collapsing">
+                    <div class="ui basic blue button" ng-click="vm.addUserToTeam(a.username)" ng-hide="vm.isUserInSelectedTeam(a.username)">Add User to Team</div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column">
+              <div class="ui blue button" ng-click="vm.resetFormVisibility()">Done</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="remove-from-team-modal" class="ui small modal transition">
+    <i class="close icon"></i>
+    <div class="header">
+      Remove {{ vm.selectedAccount.username }} from {{ vm.team.name }}
+    </div>
+    <div class="content">
+      <p>Are you sure you want to remove this user from {{ vm.team.name }}?</p>
+    </div>
+    <div class="actions">
+      <div class="ui negative button">
+        No
+      </div>
+      <div ng-click="vm.removeFromTeam()" class="ui positive button">
+        Yes
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <table ng-table="vm.tableParams" template-pagination="custom/pager" class="ui very basic unstackable selectable padded table">
+        <tr ng-repeat="a in $data">
+          <td data-title="'Username'" sortable="'username'">
+            {{ a.username }}
+            <div ng-repeat="r in a.roles" class="ui horizontal label">{{r|roleDisplay}}</div>
+            <div class="ui horizontal label" ng-show="a.admin">Admin</div>
+            <div class="ui horizontal label" ng-show="username === a.username">You</div>
+          </td>
+          <td data-title="'Full Name'" sortable="'first_name'">{{ a.first_name }}</td>
+          <td class="right aligned collapsing">
+            <div class="ui action buttons">
+              <div ui-sref="dashboard.editAccount({username: a.username})" class="ui basic icon button">
+                <i class="edit icon"></i>
+              </div>
+              <div class="ui basic red button" ng-click="vm.showRemoveFromTeamModal(a)">
+                Remove from team
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

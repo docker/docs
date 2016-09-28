@@ -1,0 +1,27 @@
+<tr ng-if="params.hasGroup()" ng-show="$groupRow.show" class="ng-table-group-header">
+    <th colspan="{{getVisibleColumns().length}}" class="sortable" ng-class="{
+                    'sort-asc': params.hasGroup($selGroup, 'asc'),
+                    'sort-desc':params.hasGroup($selGroup, 'desc')
+                  }">
+        <a href="" ng-click="isSelectorOpen = !isSelectorOpen" class="ng-table-group-selector">
+            <strong class="sort-indicator">{{$selGroupTitle}}</strong>
+            <button class="btn btn-default btn-xs ng-table-group-close"
+                    ng-click="$groupRow.show = false; $event.preventDefault(); $event.stopPropagation();">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+            <button class="btn btn-default btn-xs ng-table-group-toggle"
+                    ng-click="toggleDetail(); $event.preventDefault(); $event.stopPropagation();">
+                <span class="glyphicon" ng-class="{
+                    'glyphicon-resize-small': params.settings().groupOptions.isExpanded,
+                    'glyphicon-resize-full': !params.settings().groupOptions.isExpanded
+                }"></span>
+            </button>
+        </a>
+        <div class="list-group" ng-if="isSelectorOpen">
+            <a href="" class="list-group-item" ng-repeat="group in getGroupables()" ng-click="groupBy(group)">
+                <strong>{{ getGroupTitle(group)}}</strong>
+                <strong ng-class="isSelectedGroup(group) && 'sort-indicator'"></strong>
+            </a>
+        </div>
+    </th>
+</tr>

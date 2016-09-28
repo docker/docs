@@ -1,0 +1,24 @@
+<div id="pager" class="ui grid">
+  <div class="pages ui eight wide column">
+    <ul ng-if="pages.length" class="ui pagination menu">
+      <li ng-click="params.page(page.number)" class="item" ng-class="{'disabled': !page.active && !page.current, 'active': page.current}" ng-repeat="page in pages" ng-switch="page.type">
+        <a ng-switch-when="prev">&laquo;</a>
+        <a ng-switch-when="first"><span ng-bind="page.number"></span></a>
+        <a ng-switch-when="page"><span ng-bind="page.number"></span></a>
+        <a ng-switch-when="more">&#8230;</a>
+        <a ng-switch-when="last"><span ng-bind="page.number"></span></a>
+        <a ng-switch-when="next">&raquo;</a>
+      </li>
+    </ul>
+  </div>
+  <div class="items-per-page ui eight wide right aligned column" ng-show="params.settings().dataset.length > 10">
+    <label class="weak right-padded">Items per page</label>
+    <div ng-if="params.settings().counts.length" class="ui buttons">
+      <ul class="ui pagination menu">
+        <li class="item" ng-repeat="count in params.settings().counts" ng-class="{'active':params.count() == count}" ng-click="params.count(count)">
+          <a ng-bind="count"></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

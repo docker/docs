@@ -1,0 +1,11 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+@basicBackground: transparent;
+@basicBorder: none;
+@basicColor: @grey;
+@basicBoxShadow: none;
+@basicHoverBackground: transparent;
+@basicHoverBorder none;
+@basicHoverColor: darken(@grey, 5);
+@basicHoverBoxShadow: none;

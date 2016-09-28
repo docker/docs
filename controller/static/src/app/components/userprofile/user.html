@@ -1,0 +1,199 @@
+<div id="rename-modal" class="ui small modal transition" ng-submit="vm.renameBundle()">
+  <i class="close icon"></i>
+  <div class="header">
+    Rename Client Bundle Label
+  </div>
+  <div class="content">
+    <div class="ui form">
+      <div class="fields">
+        <label>New Label</label>
+        <input class="ui fluid input" ng-model="vm.newLabel" type="text" />
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      Cancel
+    </div>
+    <div ng-click="vm.renameBundle()" class="ui positive right icon button">
+      Rename
+      <i class="edit icon"></i>
+    </div>
+  </div>
+</div>
+<div id="remove-modal" class="ui small modal transition" ng-submit="vm.removeBundle()">
+  <i class="close icon"></i>
+  <div class="header">
+    Remove Client Bundle
+  </div>
+  <div class="content">
+    <pre>{{ vm.publicKeyAction }}</pre>
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      Cancel
+    </div>
+    <div ng-click="vm.removeBundle()" class="ui positive button">
+      Remove
+    </div>
+  </div>
+</div>
+
+<div id="add-public-key-modal" class="ui small modal transition" ng-submit="vm.addPublicKey()">
+  <i class="close icon"></i>
+  <div class="header">
+    Add a Public Key
+  </div>
+  <div class="content">
+    <div class="ui form">
+      <div class="fluid field">
+        <label>Label</label>
+        <input type="text" ng-model="vm.label">
+      </div>
+      <div class="fluid field">
+        <label>Public Key</label>
+        <textarea ng-model="vm.publicKey"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      Cancel
+    </div>
+    <div ng-click="vm.addPublicKey()" class="ui positive button">
+      Add
+    </div>
+  </div>
+</div>
+
+<div class="full-width-page">
+  <div class="ui container">
+    <div class="ui password form details-section" ng-submit="vm.changePassword()">
+      <h3>Change Password</h3>
+      <div class="ui error message"></div>
+      <div class="field">
+        <label>Current Password</label>
+        <input type="password" name="old_password" ng-model="vm.changeRequest.old_password">
+      </div>
+      <div class="field">
+        <label>New Password</label>
+        <input type="password" name="new_password" ng-model="vm.changeRequest.new_password">
+      </div>
+      <div class="field">
+        <label>Confirm New Password</label>
+        <input type="password" name="new_password_confirm">
+      </div>
+      <div class="ui hidden divider"></div>
+      <div class="ui positive submit button">
+        Change Password
+      </div>
+    </div>
+    <div class="ui details-section">
+      <h3>Permissions</h3>
+      <table class="ui very basic definition unstackable selectable padded table">
+        <tbody>
+          <tr>
+            <td class="collapsing">Default Permissions</td>
+            <td ng-if="vm.account.admin">Admin</td>
+            <td ng-if="vm.account.role === 0 && !vm.account.admin">No Access</td>
+            <td ng-if="vm.account.role === 1 && !vm.account.admin">View Only</td>
+            <td ng-if="vm.account.role === 2 && !vm.account.admin">Restricted Control</td>
+            <td ng-if="vm.account.role === 3 && !vm.account.admin">Full Control</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="ui hidden divider"></div>
+      <table ng-table="vm.tableParams" template-pagination="custom/pager" class="ui very basic unstackable selectable padded table">
+        <tr ng-repeat="p in $data">
+          <td data-title="'Team'" sortable="'teamName'">
+            {{ p.teamName }}
+          </td>
+          <td data-title="'Resource Label'" sortable="'label'">
+            {{ p.label }}
+          </td>
+          <td data-title="'Permission'" sortable="'role'">
+            {{ vm.roleDescription(p.role) }}
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="ui details-section">
+      <h3>Client Bundles</h3>
+      <div class="ui grid">
+        <div class="row">
+          <div class="column">
+            <div class="ui positive button" ng-click="vm.createAndDownloadBundle()">
+              Create a Client Bundle
+            </div>
+            <div class="ui blue button" ng-click="vm.showAddPublicKeyModal()">
+              Add an Existing Public Key
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <table class="ui very basic unstackable selectable padded table" ng-show="vm.account.public_keys && vm.account.public_keys.length > 0">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Public Key</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="k in vm.account.public_keys" jquery>
+                  <td class="fixed-width-font">{{ k.label }}</td>
+                  <td class="fixed-width-font" style="word-wrap: break-all;"><pre>{{ k.public_key }}</pre></td>
+                  <td class="collapsing">
+                    <div class="ui right pointing dropdown basic icon button">
+                      <i class="ellipsis vertical icon"></i>
+                      <div class="menu">
+                        <a ng-click="vm.showRenameModal(k.public_key)" class="item"><i class="pencil icon"></i> Change Description</a>
+                        <a ng-click="vm.showRemoveModal(k.public_key)" class="item"><i class="red delete icon"></i> Remove</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $('.ui.password.form')
+    .form({
+      inline: true,
+      fields: {
+        old_password: {
+          identifier : 'old_password',
+          rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please enter your current password'
+          }
+          ]
+        },
+        new_password: {
+          identifier : 'new_password',
+          rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please enter a new password'
+          }
+          ]
+        },
+        new_password_confirm: {
+          identifier : 'new_password_confirm',
+          rules: [
+          {
+            type   : 'match[new_password]',
+            prompt : 'Your password confirmation does not match'
+          }
+          ]
+        }
+      }
+    });
+</script>

@@ -1,0 +1,54 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.field > input.inverted.line {
+  color: @white;
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+  transition: all 300ms;
+  border-radius: 0;
+}
+.field > input.inverted.line:focus {
+  color: @white;
+  background-color: transparent;
+  border-bottom: 2px solid @white;
+}
+.field > inverted.line::-webkit-input-placeholder { /* Safari, Chrome and Opera */
+  color: rgba(255, 255, 255, 0.5);
+}
+.field > input.inverted.line:focus::-webkit-input-placeholder { /* Safari, Chrome and Opera */
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.field > .prompt.label {
+  padding-left: 0.833em;
+  text-transform: none;
+}
+
+.field.error > input.line {
+  border-bottom: 2px solid @red;
+}
+
+.field label.left.floated {
+  background-color: transparent;
+  float: left;
+}
+
+.field label.right.floated {
+  float: right;
+  color: @mediumGrey;
+  background-color: transparent;
+  text-transform: none !important;
+  padding: @relative6px;
+  margin-bottom: @relative6px !important;
+}
+
+.field label.right.floated a {
+	color: @mediumGrey;
+}
+
+.field label.right.floated a:hover {
+	color: @blue;
+}

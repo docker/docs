@@ -1,0 +1,155 @@
+/*
+  make all block level elements visible (for debugging purpose)
+*{
+    border: 1px solid #000;
+    padding: 1px;
+    margin: 1px;
+}
+*/
+
+html, body{
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2NkYGBg+Pr1639ubm5GGA1nIEswUqYSAMjrL8JwoIBIAAAAAElFTkSuQmCC);
+    width: 100% !important;
+    height: 100% !important; /* Sue me :) */
+    overflow: hidden;
+}
+
+#doc-search{
+    color: #000000;
+    margin: 11px;
+}
+
+#top-header{
+    background-color: rgb(242, 249, 255);
+}
+
+#brand{
+    margin: 14px;
+}
+
+#top-nav{
+    width: 84%;
+    position: fixed;
+    z-index: 1000;
+    background-color: #fff;
+    /* padding-bottom: 15px; */
+    border-bottom: 1px solid #eee;
+    padding: 25px;
+}
+
+#top-nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#top-nav  li{
+    float: left;
+    margin-right: 50px;
+}
+
+#side-nav{
+    text-align: right;
+    margin-top: 50px;
+    /* display: inline-block; */
+    /* float: left; */
+    margin-right: 25px;
+    position: fixed;
+    width: 200px;
+}
+
+#side-nav ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+#side-nav ul li a{
+    text-decoration: none;
+}
+
+
+#side-nav ul li a:hover{
+    text-decoration: underline;
+}
+
+#api-content{
+    margin-top: 71px;
+    background-color: #fff;
+    height: 100%;
+    padding: 60px;
+    width: 50%;
+}
+
+td a{
+    color: #0099FF;
+}
+
+th{
+    padding: 12px;
+}
+
+
+
+table{
+    width: 100%;
+}
+thead{
+    padding: 50px;
+}
+
+tbody td{
+    padding: 10px;
+}
+tbody td a{
+    color: #000011 !important;
+}
+
+.content{
+    /* padding: 50px; */
+    /* background-color: #fff; */
+    /* height: 100%; */
+    /* margin-top: 113px; */
+    /* height: 100%; */
+}
+
+.methods{
+    list-style: none;
+}
+
+.methods li{
+    margin-bottom: 75px;
+}
+
+code{
+    background-color: #FAFAFA;
+}
+
+.method-header{
+    padding: 20px;
+    background-color: #FAFAFA;
+    border: 1px solid #F0F0F0;
+}
+
+.fixed{
+    position: fixed;
+}
+
+.full-height{
+    height: 100%;
+}
+
+#column{
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    margin-left: 220px;
+    width: 88%;
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.methods h4{
+    color:darkorange;
+}

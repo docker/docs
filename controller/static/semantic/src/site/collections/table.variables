@@ -1,0 +1,24 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@headerColor: @mediumGrey;
+@headerTextTransform: uppercase;
+@headerBackground: transparent;
+@selectableBackground: @lightGrey;
+
+@headerBorder: 1px solid @internalBorderColor;
+@headerDivider: none;
+@headerAlign: inherit;
+@headerVerticalAlign: inherit;
+@headerVerticalPadding: @relativeMedium;
+@headerHorizontalPadding: @cellHorizontalPadding;
+@headerFontStyle: none;
+@headerFontWeight: 600;
+@headerBoxShadow: none;
+
+@definitionColumnBackground: transparent;
+@definitionColumnFontWeight: 600;
+@definitionColumnColor: @mediumGrey;
+
+@activeBackgroundColor: @lightGrey;

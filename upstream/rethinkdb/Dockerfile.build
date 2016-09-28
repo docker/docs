@@ -1,0 +1,33 @@
+FROM alpine:3.4
+
+ARG VERSION=2.3.4
+
+RUN \
+    apk add --update \
+        alpine-sdk bash python perl protobuf-dev icu-dev \
+        openssl-dev curl-dev boost-dev linux-headers \
+        bsd-compat-headers m4 paxmark && \
+    apk add --update \
+        -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+        libexecinfo-dev
+
+RUN \
+	wget https://download.rethinkdb.com/dist/rethinkdb-$VERSION.tgz && \
+	gunzip rethinkdb-$VERSION.tgz && \
+	tar xvf rethinkdb-$VERSION.tar && \
+	rm rethinkdb-$VERSION.tar
+
+RUN \
+	cd rethinkdb-$VERSION && \
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		--fetch v8 \
+		--dynamic all \
+		--with-system-malloc \
+		LDFLAGS=-lexecinfo && \
+	make --jobs $(grep -c '^processor' /proc/cpuinfo) SPLIT_SYMBOLS=1 && \
+	mv build/release_system/rethinkdb /usr/local/bin/
+
+ENTRYPOINT ["rethinkdb"]

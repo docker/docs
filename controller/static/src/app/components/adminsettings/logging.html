@@ -1,0 +1,70 @@
+<div id="disable-remote-logging-modal" class="ui small modal transition" ng-submit="vm.disableRemoteLogging()">
+  <i class="close icon"></i>
+  <div class="header">
+    Are you sure you wish to disable remote logging?
+  </div>
+  <div class="content">
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      No
+    </div>
+    <div ng-click="vm.disableRemoteLogging()" class="ui positive button">
+      Yes
+    </div>
+  </div>
+</div>
+
+<div id="update-remote-logging-modal" class="ui small modal transition" ng-submit="vm.enableRemoteLogging()">
+  <i class="close icon"></i>
+  <div class="header">
+    Are you sure you wish to update your remote logging config?
+  </div>
+  <div class="content">
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      No
+    </div>
+    <div ng-click="vm.enableRemoteLogging()" class="ui positive button">
+      Yes
+    </div>
+  </div>
+</div>
+
+<div class="ui container">
+  <div class="details-section">
+    <form class="ui form">
+      <h3>Logging Configuration</h3>
+      <div class="ui three fields">
+        <div class="ui ten wide field">
+          <label>Remote syslog server</label>
+          <input name="remoteSyslog" type="text" placeholder="hostname:port" ng-model="vm.remoteLoggingConfig.host">
+        </div>
+        <div class="ui three wide field">
+          <label>Protocol</label>
+          <dropdown class="fluid" ng-model="vm.remoteLoggingConfig.protocol">
+          <dropdown-group>tcp</dropdown-group>
+          <dropdown-group>udp</dropdown-group>
+          </dropdown>
+        </div>
+        <div class="ui three wide field">
+          <label>Level</label>
+          <dropdown class="fluid" ng-model="vm.remoteLoggingConfig.level">
+          <dropdown-group>DEBUG</dropdown-group>
+          <dropdown-group>INFO</dropdown-group>
+          <dropdown-group>NOTICE</dropdown-group>
+          <dropdown-group>WARN</dropdown-group>
+          <dropdown-group>ERR</dropdown-group>
+          <dropdown-group>CRIT</dropdown-group>
+          <dropdown-group>ALERT</dropdown-group>
+          <dropdown-group>EMERG</dropdown-group>
+          </dropdown>
+        </div>
+      </div>
+      <button class="ui positive button" ng-hide="vm.remoteLoggingEnabled" ng-click="vm.enableRemoteLogging()">Enable Remote Logging</button>
+      <button class="ui positive button" ng-show="vm.remoteLoggingEnabled" ng-click="vm.showUpdateRemoteLoggingModal()">Update Remote Logging</button>
+      <button class="ui negative button" ng-show="vm.remoteLoggingEnabled" ng-click="vm.showDisableRemoteLoggingModal()">Disable Remote Logging</button>
+    </form>
+  </div>
+</div>

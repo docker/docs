@@ -1,0 +1,40 @@
+<div id="resources" class="flex-wrapper">
+    <div class="sidenav">
+        <div class="sidenav-section">
+            <span class="label">Resource Type</span>
+        </div>
+        <a ui-sref="dashboard.resources.services" ui-sref-active="active" class="item">
+            <svg-icon p="services"></svg-icon>
+            Services
+        </a>
+        <a ui-sref="dashboard.resources.images" ng-show="vm.account.role > 0 || vm.account.admin" ui-sref-active="active" class="item">
+            <svg-icon p="images"></svg-icon>
+            Images
+        </a>
+        <a ui-sref="dashboard.resources.nodes" ui-sref-active="active" class="item">
+            <svg-icon p="nodes"></svg-icon>
+            Nodes
+        </a>
+        <a ui-sref="dashboard.resources.networks" ui-sref-active="active" class="item">
+            <svg-icon p="networks"></svg-icon>
+            Networks
+        </a>
+        <a ui-sref="dashboard.resources.volumes" ui-sref-active="active" class="item">
+            <svg-icon p="volumes"></svg-icon>
+            Volumes
+        </a>
+
+        <br/>
+
+        <a ui-sref="dashboard.resources.applications" ui-sref-active="active" class="item">
+            <svg-icon p="applications"></svg-icon>
+            Applications
+        </a>
+        <a ui-sref="dashboard.resources.containers" ui-sref-active="active" class="item">
+            <svg-icon p="containers"></svg-icon>
+            Containers
+        </a>
+    </div>
+
+    <div class="content-pane" ui-view></div>
+</div>

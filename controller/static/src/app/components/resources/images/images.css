@@ -1,0 +1,7 @@
+#remove-modal .content p {
+    margin-bottom: 0.5em;
+}
+
+#remove-modal .content ul {
+    margin-top: 0;
+}

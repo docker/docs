@@ -1,0 +1,175 @@
+.ui.card {
+  box-shadow: none !important;
+  border: 1px solid #E3E7E9 !important;
+}
+
+#node-logs-modal .content {
+  max-height: 60vh;
+  overflow: scroll;
+}
+
+#node-logs-modal .content pre {
+  overflow: visible;
+}
+
+#nodes .join.button {
+  padding: 0.6em !important;
+}
+
+#nodes .title.content .right.floated.delete.icon:hover {
+  color: #EF4A53 !important;
+  opacity: 1;
+  cursor: pointer;
+}
+
+#nodes .title.content .right.floated.icon:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+#nodes .ui.popup {
+  width: 450px;
+}
+
+#nodes .header {
+  display: block;
+}
+
+#nodes .card {
+  min-width: 320px;
+  max-width: 320px;
+}
+
+#nodes .card:hover {
+  cursor: pointer;
+  background-color: rgb(247, 248, 249);
+  transition: 300ms;
+}
+
+#nodes .card .header {
+  color: #445D6E;
+}
+
+#nodes .card .title.content {
+  flex: 0 0 44px;
+}
+
+#nodes .card .state.status.content {
+  flex: 0 0 38px;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  padding-right: 14px;
+  padding-left: 14px;
+}
+
+#nodes .card .green.status.content {
+  background-color: #00CBCA;
+  color: #ffffff;
+}
+
+#nodes .card .red.status.content {
+  background-color: #EF4A53;
+  color: #ffffff;
+}
+
+#nodes .card .status.content {
+  background-color: #949EA8;
+  color: #ffffff;
+  height: 100%;
+}
+
+#nodes .card .state.status.content > h5 > .subheader {
+  font-size: 0.8rem;
+  font-weight: 200;
+  overflow: hidden;
+}
+
+#nodes .card .state.status.content > h5 > .subheader > .icon {
+  margin: 0;
+}
+
+#nodes .card .state.status.content {
+  height: 38px;
+  text-align: justify;
+}
+
+#nodes .card .state.status.content::after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+
+#nodes .card .state.status.content h5::before {
+  content: '';
+  height: 100%;
+}
+
+#nodes .card .state.status.content > h5,
+#nodes .card .state.status.content > h5::before {
+  text-align: left !important;
+  vertical-align: middle;
+  display: inline-block;
+  color: #ffffff;
+  height: 100%;
+}
+
+#nodes .card .state.status.content > div,
+#nodes .card .state.status.content > a {
+  display: inline-block;
+  text-align: left !important;
+  vertical-align: middle;
+  color: #ffffff;
+}
+
+#nodes .card .state.status.content .loader {
+  margin-right: 8px;
+}
+
+#nodes .card .state.status.content a {
+  font-size: 0.9rem;
+  font-weight: 400;
+  opacity: 0.8;
+  transition: 300ms;
+}
+
+#nodes .card .state.status.content a:hover {
+  opacity: 1;
+}
+
+#nodes a.left.floated {
+  float: left;
+}
+
+#nodes a.right.floated {
+  float: right;
+  font-size: 0.85rem;
+}
+
+#nodes .card .status.content p {
+  margin: 0;
+}
+
+#nodes .card h5.header {
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0;
+}
+
+#nodes h5.clearing.header {
+  clear: both;
+}
+
+#nodes .extra.content svg {
+	height: 20px;
+	width: 20px;
+}
+
+#nodes .extra.content span p {
+  display: inline-block;
+}
+
+#nodes svg path,
+#nodes svg rect,
+#nodes svg circle {
+  fill: #C5CDD2;
+}

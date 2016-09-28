@@ -1,0 +1,236 @@
+<div id="create-network-modal" class="ui small modal transition" ng-submit="vm.createNetwork()">
+  <i class="close icon"></i>
+  <div class="header">
+    Create Network
+  </div>
+  <div class="content">
+    <div class="ui negative message" ng-show="vm.createNetworkError">{{vm.createNetworkError}}</div>
+    <div class="ui form" ng-method="post">
+      <label>Name</label>
+      <div class="field">
+        <input type="text" name="networkName" ng-model="vm.networkName">
+      </div>
+      <label>Driver</label>
+      <div class="field">
+        <input type="text" ng-model="vm.networkDriver">
+      </div>
+      <label>Options</label>
+      <div class="field">
+        <input type="text" ng-model="vm.networkOptions" placeholder="option=value space separated">
+      </div>
+      <label>Permissions label (com.docker.ucp.access.label)</label>
+      <div class="field">
+        <input type="text" class="input" placeholder="Manually specify a label" ng-model="vm.accessLabel"></input>
+      </div>
+      <div class="segment">
+        <h4 class="header">IPAM</h4>
+        <label>Driver</label>
+        <div class="field">
+          <input type="text" ng-model="vm.networkIPAMDriver">
+        </div>
+        <label>Subnet</label>
+        <div class="field">
+          <input type="text" ng-model="vm.networkIPAMSubnet">
+        </div>
+        <label>IP Range</label>
+        <div class="field">
+          <input type="text" ng-model="vm.networkIPAMIPRange">
+        </div>
+        <label>Gateway</label>
+        <div class="field">
+          <input type="text" ng-model="vm.networkIPAMGateway">
+        </div>
+      </div>
+      <br />
+      <div class="segment">
+        <h4 class="header">Labels</h4>
+        <div class="fields">
+          <div class="seven wide field">
+            <label>Name</label>
+            <input type="text" ng-model="vm.labelName" placeholder="Label Name"></input>
+          </div>
+          <div class="eight wide field">
+            <label>Value</label>
+            <input type="text" ng-model="vm.labelValue" placeholder="Label Value"></input>
+          </div>
+          <div class="one wide field">
+            <label>&nbsp;</label>
+            <div class="ui green icon button" ng-click="vm.pushLabel()">
+              <i class="add icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="fields" ng-repeat="l in vm.networkLabels">
+          <div class="seven wide field">
+            <input type="text" ng-model="l.name"></input>
+          </div>
+          <div class="eight wide field">
+            <input type="text" ng-model="l.value"></input>
+          </div>
+          <div class="one wide field">
+            <div ng-click="vm.removeLabel(l)" class="ui red icon button">
+              <i class="delete icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      Cancel
+    </div>
+    <div class="ui positive button">
+      Create
+    </div>
+  </div>
+</div>
+
+<div id="remove-network-modal" class="ui small modal transition" ng-submit="vm.removeNetwork()">
+  <i class="close icon"></i>
+  <div class="header">
+    Remove Network: {{ vm.selectedNetwork.Name }}
+  </div>
+  <div class="content">
+    <p>Are you sure you want to remove this network?</p>
+  </div>
+  <div class="actions">
+    <div class="ui negative button">
+      No
+    </div>
+    <div ng-click="vm.removeNetwork()" class="ui positive button">
+      Yes
+    </div>
+  </div>
+</div>
+
+<div id="show-network-modal" class="ui small modal transition">
+  <i class="close icon"></i>
+  <h3 class="ui header">
+    <strong>{{ vm.selectedNetwork.Name }}</strong>
+  </h3>
+  <div class="content">
+    <table class="ui very basic definition unstackable table">
+      <tbody>
+        <tr>
+          <td class="two wide column">ID</td>
+          <td>{{ vm.selectedNetwork.Id }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="ui very basic single line table">
+      <thead>
+        <tr>
+          <th>Scope</th>
+          <th>Driver</th>
+          <th>IPAM Driver</th>
+          <th>IPv6</th>
+          <th>Internal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ vm.selectedNetwork.Scope }}</td>
+          <td>{{ vm.selectedNetwork.Driver }}</td>
+          <td>{{ vm.selectedNetwork.IPAM.Driver }}</td>
+          <td>{{ vm.selectedNetwork.EnableIPv6 ? 'enabled' : 'disabled' }}</td>
+          <td>{{ vm.selectedNetwork.Internal ? 'true' : 'false' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table ng-hide="vm.selectedNetwork.IPAM.Config.length <= 0"
+           class="ui very basic definition unstackable table">
+      <tbody>
+        <tr>
+          <td class="two wide column">IPAM Configuration</td>
+        </tr>
+      </tbody>
+    </table>
+    <div ng-hide="vm.selectedNetwork.IPAM.Config.length <= 0"
+         ng-repeat="ic in vm.selectedNetwork.IPAM.Config">
+      <p class="three wide column ui small">Subnet {{ ic.Subnet }}</p>
+      <p class="three wide column ui small">Gateway {{ ic.Gateway }}</p>
+    </div>
+    <table ng-show="vm.hasLabels"
+           class="ui very basic definition unstackable table">
+      <tbody>
+        <tr>
+          <td class="two wide column">Labels</td>
+        </tr>
+        <tr ng-repeat="(k, v) in vm.selectedNetwork.Labels">
+          <td class="tdKey">{{ k }}</td>
+          <td>{{ v }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table ng-show="vm.hasOptions"
+           class="ui very basic definition unstackable table">
+      <tbody>
+        <tr>
+          <td class="two wide column">Options</td>
+        </tr>
+        <tr ng-repeat="(k, v) in vm.selectedNetwork.Options">
+          <td class="tdKey">{{ k }}</td>
+          <td>{{ v }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="actions">
+    <div class="ui button positive">
+      Done
+    </div>
+  </div>
+</div>
+
+<div class="ui fluid container">
+  <div class="ui grid">
+    <div class="two column row">
+      <div class="column">
+        <div ng-click="vm.showCreateNetworkDialog()" class="ui left floated green icon button">
+          <i class="add icon"></i>
+          Create Network
+        </div>
+      </div>
+      <div class="right aligned right floated column">
+        <div class="ui left icon input">
+          <input ng-model="vm.filter" placeholder="Search networks..." />
+          <i class="search icon"></i>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <table ng-table="vm.tableParams" template-pagination="custom/pager" class="ui very basic unstackable selectable compact table">
+          <tr ng-repeat="n in $data" ng-click="vm.showNetworkDialog(n)">
+            <td data-title="'Name'" sortable="'Name'" ng-click="vm.showNetworkDialog(n)">{{ n.Name }}</td>
+            <td data-title="'Driver'" sortable="'Driver'">{{ n.Driver }}</td>
+            <td class="right aligned collapsing">
+              <div class="ui action buttons">
+                <div ng-click="vm.showRemoveNetworkDialog(n)" class="ui basic icon button" stop-event='click'>
+                  <i class="remove icon"></i>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.ui.form').form({
+    fields: {
+      first_name: {
+        identifier : 'networkName',
+        rules: [
+        {
+          type   : 'empty',
+          prompt : 'Please enter a network name'
+        }
+        ]
+      }
+    }
+  });
+</script>

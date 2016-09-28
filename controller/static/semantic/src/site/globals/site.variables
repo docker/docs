@@ -1,0 +1,83 @@
+/*******************************
+  User Global Variables
+ *******************************/
+
+@inputVerticalPadding: @relative12px;
+@pageOverflowX: auto !important;
+@relativeBorderRadius: @relative2px;
+@absoluteBorderRadius: @2px;
+@defaultDuration : 0.15s;
+
+
+/* Colors */
+
+@white      : #FFFFFF;
+@blue       : #47BBF9;
+@darkBlue	  : #1AAAF8;
+@green      : #00CBCA;
+@red        : #EF4A53;
+@orange     : #FFB463;
+@grey		    : #949EA8;
+
+@mediumGrey : #C0C9CE;
+@lightGrey  : #F7F8F9;
+
+@redHover             : saturate(lighten(@red, 2), 5, relative);
+@orangeHover          : saturate(lighten(@orange, 2), 5, relative);
+@yellowHover          : saturate(lighten(@yellow, 2), 5, relative);
+@oliveHover           : saturate(lighten(@olive, 2), 5, relative);
+@greenHover           : saturate(lighten(@green, 2), 5, relative);
+@tealHover            : saturate(lighten(@teal, 2), 5, relative);
+@blueHover            : saturate(lighten(@blue, 2), 5, relative);
+@violetHover          : saturate(lighten(@violet, 2), 5, relative);
+@purpleHover          : saturate(lighten(@purple, 2), 5, relative);
+@pinkHover            : saturate(lighten(@pink, 2), 5, relative);
+@brownHover           : saturate(lighten(@brown, 2), 5, relative);
+@whiteHover           : saturate(darken(@white, 2), 5, relative);
+
+
+/* Font Configuration */
+@importGoogleFonts: false;
+
+@textColor: #445D6E;
+@invertedTextColor: #FFFFFF;
+@linkColor: @darkBlue;
+@linkHoverColor: @blue;
+
+@pageFont           : 'Open Sans';
+@headerFont         : 'Open Sans';
+@fontFamily         : 'Open Sans';
+@headerFontFamily   : 'Open Sans';
+@siteFontPath  : '../src/site/assets/fonts';
+
+/* Positive */
+@positiveColor           : @blue;
+@positiveBackgroundColor : @blue;
+@positiveBorderColor     : none;
+@positiveHeaderColor     : @white;
+@positiveTextColor       : @white;
+
+/* Negative */
+@negativeColor           : @red;
+@negativeBackgroundColor : @red;
+@negativeBorderColor     : none;
+@negativeHeaderColor     : @white;
+@negativeTextColor       : @white;
+
+/* Info */
+@infoColor              : @blue;
+@infoBackgroundColor    : @blue;
+@infoBorderColor        : none;
+@infoHeaderColor        : @white;
+@infoTextColor          : @white;
+
+/* Warning */
+@warningColor           : @orange;
+@warningBackgroundColor : @orange;
+@warningBorderColor     : @orange;
+@warningHeaderColor     : @white;
+@warningTextColor       : @white;
+
+@inputPlaceholderFocusColor: #C0C9CE;
+@focusedFormBorderColor: @darkBlue;
+@focusedFormMutedBorderColor: @darkBlue;

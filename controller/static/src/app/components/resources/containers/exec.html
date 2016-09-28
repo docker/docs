@@ -1,0 +1,18 @@
+<div id="inspect-exec" class="ui grid">
+    <!-- this needs to be inlined so it does not conflict with the semantic "terminal" names -->
+    <div class="row">
+        <div class="column">
+            <div class="ui input">
+                <input id="command" ng-model="vm.command" />
+            </div>
+            <div ng-hide="vm.connected" ng-click="vm.connect()" class="ui positive button">Run</div>
+            <div ng-show="vm.connected" ng-click="vm.disconnect()" class="ui negative button">Disconnect</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <div id="container-terminal"></div>
+        </div>
+    </div>
+</div>

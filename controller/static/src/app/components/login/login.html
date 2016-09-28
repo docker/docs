@@ -1,0 +1,40 @@
+<div id="login" class="ui centered grid">
+	<div class="six wide center aligned column">
+		<img src="../../../media/logo.svg" class="logo"></img>
+		<h1 class="ui inverted header">Docker Universal Control Plane</h1>
+		<p>Welcome! Please login to your account.</p>
+		<div class="ui negative message" ng-if="vm.error">{{ vm.error }}</div>
+		<div class="ui form" ng-submit="vm.login()">
+			<div class="field">
+				<input class="line inverted" tabindex="1" name="username" placeholder="Username" type="text" ng-model="vm.username">
+			</div>
+			<div class="field">
+				<input class="line inverted" tabindex="2" name="password" placeholder="Password" type="password" ng-model="vm.password">
+			</div>
+			<div class="buttons">
+				<button id="login-button" tabindex="3" class="ui large white submit button">Login</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$('.ui.form').form({
+	fields: {
+		username: {
+			identifier : 'username',
+			rules: [{
+				type: 'empty',
+				prompt: 'Please enter a username'
+			}]
+		},
+		password: {
+			identifier : 'password',
+			rules: [{
+				type: 'empty',
+				prompt: 'Please enter your password'
+			}]
+		}
+	}
+});
+</script>

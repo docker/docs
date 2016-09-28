@@ -1,0 +1,42 @@
+<div class="main-contents">
+	<div id="topnav" class="ui top attached blue inverted menu">
+		<a ui-sref="dashboard.main" class="header item">
+			<img src="../../../media/mini-logo.svg"></img>
+		</a>
+		<a class="item" ui-sref="dashboard.main" ui-sref-active="active">Dashboard</a>
+		<a class="item" ng-click="$state.go('dashboard.resources');" ui-sref="dashboard.resources" ui-sref-active="active">Resources</a>
+		<a class="item" ui-sref="dashboard.accounts" ui-sref-active="active" ng-if="vm.account.admin">User Management</a>
+		<a class="item" ui-sref="dashboard.settings" ui-sref-active="active" ng-if="vm.account.admin">Admin Settings</a>
+		<div class="ui right floated dropdown item">
+			{{ vm.account.username }}
+			<i class="dropdown icon"></i>
+			<div class="menu">
+				<div ui-sref="dashboard.user" class="item"><i class="user icon"></i>Profile</div>
+				<div ui-sref="logout" class="item"><i class="sign out icon"></i>Logout</div>
+				<div class="ui divider"></div>
+				<div class="item" ng-controller="SupportController as support" ng-click="support.downloadSupportDump()" ng-show="vm.account.admin"><i class="download icon"></i>Support Dump</div>
+				<a href="https://www.docker.com/ucp-docs" target="_blank" class="item"><i class="help circle icon"></i>Help</a>
+			</div>
+		</div>
+	</div>
+	<div id="breadcrumbs" class="ui attached inverted blue segment" ncy-breadcrumb></div>
+	<div class="ui active inverted dimmer" ng-show="isLoadingView">
+		<div class="ui text loader">{{ loadingMessage }}</div>
+	</div>
+	<div id="banner" ng-controller="BannerController as banner">
+		<div class="ui message" ng-bind-html="m.msg | linky:'_blank'" ng-class="{'info': m.level === 'INFO', 'warning': m.level === 'WARN', 'negative': m.level === 'CRIT'}" ng-repeat="m in banner.messages">
+		</div>
+	</div>
+	<div id="content" ng-hide="isLoadingView">
+		<div ui-view></div>
+	</div>
+</div>
+<div id="messages">
+  <div ng-repeat="message in messages" jquery>
+		<message ng-model="message"></message>
+	</div>
+</div>
+
+<script>
+$('.ui.dropdown').dropdown();
+</script>

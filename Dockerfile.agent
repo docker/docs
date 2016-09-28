@@ -1,0 +1,15 @@
+FROM alpine:3.4
+
+MAINTAINER Alex Mavrogiannis <alex.mavrogiannis@docker.com>
+
+RUN apk add --update bash ca-certificates && rm -rf /var/cache/apk/*
+
+# Establish the version and upgrade matrix
+ARG UCP_VERSION
+LABEL com.docker.ucp.version="$UCP_VERSION"
+
+EXPOSE 2376
+ENV PORT 2376
+
+ADD bin/ucp-agent /ucp-agent
+ENTRYPOINT ["/ucp-agent"]

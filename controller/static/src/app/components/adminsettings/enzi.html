@@ -1,0 +1,431 @@
+<div class="ui container">
+  <div id="enzi">
+    <h3>Authentication</h3>
+    <div class="ui negative message" ng-show="vm.error">{{ vm.error }}</div>
+    <div class="ui grid">
+      <div class="sixteen wide column">
+        <form class="ui form">
+          <div class="field">
+            <label>Method</label>
+            <select ng-model="vm.authBackend" class="ui dropdown">
+              <option value="managed">Managed</option>
+              <option value="ldap">LDAP</option>
+            </select>
+          </div>
+
+          <div class="ui field">
+            <label>Default permission for newly discovered accounts
+              <i class="blue help circle icon"></i>
+              <div class="ui popup">
+                <h5>Default permission</h5>
+                This specifies the permission granted to newly discovered
+                accounts.  The permission may be changed later by an admin.
+              </div>
+            </label>
+            <select class="ui dropdown" ng-model="vm.legacyAuthSettings.enziConfig.userDefaultRole" convert-to-number>
+              <option value="0">No Access</option>
+              <option value="1">View Only</option>
+              <option value="2">Restricted Control</option>
+              <option value="3">Full Control</option>
+            </select>
+          </div>
+
+          <div class="ui padded divider"></div>
+          <br/>
+
+          <div ng-show="vm.authBackend === 'ldap'">
+            <h3>LDAP Server Configuration</h3>
+
+            <div class="ui field">
+              <label>LDAP Server URL</label>
+              <input placeholder="ldaps://192.168.1.10" type="text" name="serverURL" ng-model="vm.ldapConfig.serverURL"></input>
+            </div>
+
+            <div class="two fields">
+              <div class="ui field">
+                <label>Recovery Admin Username
+                  <i class="blue help circle icon"></i>
+                  <div class="ui popup">
+                    <h5>Recovery Admin Username</h5>
+                    The user with this name will be able to authenticate to the system even when the LDAP server is unavailable or if auth is misconfigured
+                  </div>
+                </label>
+                <input placeholder="admin" type="text" name="recoveryAdminUsername" ng-model="vm.ldapConfig.recoveryAdminUsername"></input>
+              </div>
+              <div class="ui field">
+                <label>Recovery Admin Password</label>
+                <input type="password" name="recoveryAdminPassword" ng-model="vm.ldapConfig.recoveryAdminPassword"></input>
+              </div>
+            </div>
+
+            <div class="two fields">
+              <div class="ui field">
+                <label>Reader DN
+                  <i class="blue help circle icon"></i>
+                  <div class="ui popup">
+                    <h5>Reader DN</h5>
+                    This specifies the LDAP account used to search
+                    for users and groups.
+                  </div>
+                </label>
+                <input placeholder="read-only-ldap-user" type="text" name="readerDN" ng-model="vm.ldapConfig.readerDN"></input>
+              </div>
+              <div class="ui field">
+                <label>Reader Password
+                  <i class="blue help circle icon"></i>
+                  <div class="ui popup">
+                    <h5>Reader Password</h5>
+                    To conduct searches, the system must store the LDAP
+                    password for the Search Account.  We recommend this
+                    account be a "read-only" account with minimal LDAP
+                    privileges just sufficient to search for users.
+                  </div>
+                </label>
+                <input type="password" name="readerPassword" ng-model="vm.ldapConfig.readerPassword"></input>
+              </div>
+            </div>
+
+
+            <h4>LDAP Security Options</h4>
+            <div class="ui field">
+              <div class="ui checkbox">
+                <input type="checkbox" id="tlsSkipVerify" ng-model="vm.ldapConfig.tlsSkipVerify">
+                <label for="tlsSkipVerify">Skip verification of server certificate
+                  <i class="blue help circle icon"></i>
+                  <div class="ui popup">
+                    <h5>Skip verification of server certificate</h5>
+                    Whether to skip verifying of the server's certificate when establishing a TLS connection, not recommended unless testing on a secure network
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="ui field">
+              <div class="ui checkbox">
+                <input type="checkbox" id="startTLS" ng-model="vm.ldapConfig.startTLS" ng-disabled="vm.ldapConfig.serverURL.startsWith('ldaps')">
+                <label for="startTLS">Use StartTLS
+                  <i class="blue help circle icon"></i>
+                  <div class="ui popup">
+                    <h5>Use StartTLS</h5>
+                    Whether to use StartTLS to secure the connection to the server, ignored if server URL scheme is 'ldaps://'
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="ui field" ng-show="(vm.ldapConfig.serverURL.startsWith('ldaps') || vm.ldapConfig.startTLS) && !vm.ldapConfig.tlsSkipVerify">
+              <label>Root Certificate Bundle
+                <i class="blue help circle icon"></i>
+                <div class="ui popup">
+                  <h5>Root Certs</h5>
+                  This specifies the certificate for the LDAP server when using StartTLS
+                </div>
+              </label>
+              <textarea name="rootCerts" ng-model="vm.ldapConfig.rootCerts"></textarea>
+            </div>
+
+            <h4>User Search Configurations</h4>
+            <div class="ui grid">
+              <div class="row" ng-repeat="userConfig in vm.ldapConfig.userSearchConfigs" jquery>
+                <div class="fourteen wide column">
+                    <div class="ui field">
+                      <label for="userSearchBaseDN{{$index}}">Base DN
+                        <i class="blue help circle icon"></i>
+                        <div class="ui popup">
+                          <h5>Base DN</h5>
+                          The distinguished name of the element from which the LDAP server will search for users
+                        </div>
+                      </label>
+                      <input placeholder="dc=ad,dc=cmpny,dc=com" type="text" id="userSearchBaseDN{{$index}}" name="userSearchBaseDN{{$index}}" ng-model="userConfig.baseDN"></input>
+                    </div>
+                  <div class="two fields">
+                    <div class="ui field">
+                      <label for="userSearchUsernameAttr{{$index}}">Username Attribute
+                        <i class="blue help circle icon"></i>
+                        <div class="ui popup">
+                          <h5>Username Attribute</h5>
+                          The name of the attribute of the LDAP user element which should be selected as the username
+                        </div>
+                      </label>
+                      <input placeholder="sAMAccountName" type="text" id="userSearchUsernameAttr{{$index}}" name="userSearchUsernameAttr{{$index}}" ng-model="userConfig.usernameAttr"></input>
+                    </div>
+                    <div class="ui field">
+                      <label for="userSearchFullNameAttr{{$index}}">Full Name Attribute
+                        <i class="blue help circle icon"></i>
+                        <div class="ui popup">
+                          <h5>Full Name Attribute</h5>
+                          The name of the attribute of the LDAP full name element
+                        </div>
+                      </label>
+                      <input placeholder="cn" type="text" id="userSearchFullNameAttr{{$index}}" name="userSearchFullNameAttr{{$index}}" ng-model="userConfig.fullNameAttr"></input>
+                    </div>
+                  </div>
+                  <div class="ui fields">
+                    <div class="ui eight wide field">
+                      <label for="userSearchFilter{{$index}}">Filter
+                        <i class="blue help circle icon"></i>
+                        <div class="ui popup">
+                          <h5>Filter</h5>
+                          The LDAP search filter used to select user elements, may be left blank
+                        </div>
+                      </label>
+                      <input placeholder="(&(objectClass=person)(objectClass=user))" type="text" id="userSearchFilter{{$index}}" name="userSearchFilter{{$index}}" ng-model="userConfig.filter"></input>
+                    </div>
+                    <div class="field">
+                      <label>Search Scope
+                        <i class="blue help circle icon"></i>
+                        <div class="ui popup">
+                          A search scope defines how deep to search within the search base.
+                          <ul>
+                            <li><b>One Level</b> indicates a search of objects immediately subordinate to the base object, but does not include the base object itself.</li>
+                            <li><b>Subtree</b> indicates a search of the base object and the entire subtree of which the base object distinguished name is the topmost object.</li>
+                          </ul>
+                        </div>
+                      </label>
+                      <div class="ui radio checkbox">
+                        <input type="radio" id="userSearchScopeOneLevel{{$index}}" ng-model="userConfig.scopeSubtree" ng-value=false>
+                        <label for="userSearchScopeOneLevel{{$index}}">One Level</label>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label>&nbsp;</label>
+                      <div class="ui radio checkbox">
+                        <input type="radio" id="userSearchScopeSubtree{{$index}}" ng-model="userConfig.scopeSubtree" ng-value=true>
+                        <label for="userSearchScopeSubtree{{$index}}">Subtree</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="one wide column" style="padding-top: 1.66rem;">
+                  <div ng-hide="$index === 0" class="ui negative icon button" ng-click="vm.ldapConfig.userSearchConfigs.splice($index, 1)"><i class="ui remove icon"></i></div>
+                </div>
+              </div>
+              <div class="sixteen wide column">
+                <div class="ui blue inverted button" ng-click="vm.addBlankUserSearchConfig()">Add Another</div>
+                <br/>
+              </div>
+
+              <div class="ui row" ng-click="vm.advancedLdapVisible = !vm.advancedLdapVisible">
+                <div class="fourteen wide column">
+                  <h4>Advanced LDAP Configuration</h4>
+                </div>
+                <div class="two wide right aligned column">
+                  <i ng-if="!vm.advancedLdapVisible" class="add icon"></i>
+                  <i ng-if="vm.advancedLdapVisible" class="minus icon"></i>
+                </div>
+              </div>
+              <div class="ui row" ng-show="vm.advancedLdapVisible">
+                <div class="ui column">
+                  <div class="ui field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" id="noSimplePagination" ng-model="vm.ldapConfig.noSimplePagination">
+                      <label for="noSimplePagination">No Simple Pagination (RFC 2696)
+                        <i class="blue help circle icon"></i>
+                        <div class="ui popup">
+                          <h5>No Simple Pagination (RFC 2696)</h5>
+                          The server does not support the Simple Paged Results control extension
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="ui field">
+                    <div class="ui checkbox">
+                      <input type="checkbox" id="adminSearchEnableSync" ng-model="vm.ldapConfig.adminSyncOpts.enableSync">
+                      <label for="adminSearchEnableSync">Enable Sync of Admin Users
+                        <i class="blue help circle icon"></i>
+                        <div class="ui popup">
+                          <h5>Enable Sync of Admin Users</h5>
+                          Whether to sync admin users using LDAP, use of this option is discouraged unless absolutely necessary
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="ui field" ng-show="vm.ldapConfig.adminSyncOpts.enableSync">
+                    <label>LDAP Match Method
+                      <i class="blue help circle icon"></i>
+                      <div class="ui popup">
+                        <h5>LDAP Match Method</h5>
+                        Whether to sync using a group DN and member attribute selection or to use a search filter
+                      </div>
+                    </label>
+                    <select class="ui dropdown" ng-model="vm.ldapConfig.adminSyncOpts.selectGroupMembers" convert-to-boolean>
+                      <option value="false">Match LDAP Search Results</option>
+                      <option value="true">Match LDAP Group Members</option>
+                    </select>
+                  </div>
+
+                  <div ng-show="vm.ldapConfig.adminSyncOpts.selectGroupMembers && vm.ldapConfig.adminSyncOpts.enableSync" class="two fields">
+                    <div class="ui field">
+                      <label>Group DN
+                        <i class="blue help circle icon"></i>
+                        <div class="ui popup">
+                          <h5>Group DN</h5>
+                          The distinguished name of the LDAP group.
+                        </div>
+                      </label>
+                      <input placeholder="ou=dockeradmins,dc=example,dc=com" type="text" name="adminSearchGroupDN" ng-model="vm.ldapConfig.adminSyncOpts.groupDN"></input>
+                    </div>
+                    <div class="ui field">
+                      <label>Group Member Attribute
+                        <i class="blue help circle icon"></i>
+                        <div class="ui popup">
+                          <h5>Group Member Attribute</h5>
+                          The name of the LDAP group entry attribute which corresponds to distinguished names of members
+                        </div>
+                      </label>
+                      <input placeholder="uniqueGroupMember" type="text" name="adminSearchMemberAttr" ng-model="vm.ldapConfig.adminSyncOpts.groupMemberAttr"></input>
+                    </div>
+                  </div>
+
+                  <div ng-show="!vm.ldapConfig.adminSyncOpts.selectGroupMembers && vm.ldapConfig.adminSyncOpts.enableSync">
+                    <div class="ui field">
+                      <label>Base DN
+                        <i class="blue help circle icon"></i>
+                        <div class="ui popup">
+                          <h5>Base DN</h5>
+                          The distinguished name of the element from which the LDAP server will search for users.
+                        </div>
+                      </label>
+                      <input placeholder="ou=dockeradmins,dc=example,dc=com" type="text" name="adminSearchBaseDN" ng-model="vm.ldapConfig.adminSyncOpts.searchBaseDN"></input>
+                    </div>
+                    <div class="fields">
+                      <div class="ui eight wide field">
+                        <label>Search Filter
+                          <i class="blue help circle icon"></i>
+                          <div class="ui popup">
+                            <h5>Search Filter</h5>
+                            Whether to search for users in the entire subtree of the base DN or to only search one level under the base DN (if false)
+                          </div>
+                        </label>
+                        <input placeholder="uniqueMember" type="text" name="adminSearchFilter" ng-model="vm.ldapConfig.adminSyncOpts.searchFilter"></input>
+                      </div>
+                      <div class="field">
+                        <label>Search Scope
+                          <i class="blue help circle icon"></i>
+                          <div class="ui popup">
+                            A search scope defines how deep to search within the search base.
+                            <ul>
+                              <li><b>One Level</b> indicates a search of objects immediately subordinate to the base object, but does not include the base object itself.</li>
+                              <li><b>Subtree</b> indicates a search of the base object and the entire subtree of which the base object distinguished name is the topmost object.</li>
+                            </ul>
+                          </div>
+                        </label>
+                        <div class="ui radio checkbox">
+                          <input type="radio" id="adminSearchScopeOneLevel" ng-model="vm.ldapConfig.adminSyncOpts.searchScopeSubtree" ng-value=false>
+                          <label for="adminSearchScopeOneLevel">One Level</label>
+                        </div>
+                      </div>
+                      <div class="field">
+                        <label>&nbsp;</label>
+                        <div class="ui radio checkbox">
+                          <input type="radio" id="adminSearchScopeSubtree" ng-model="vm.ldapConfig.adminSyncOpts.searchScopeSubtree" ng-value=true>
+                          <label for="adminSearchScopeSubtree">Subtree</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h4>Sync Configuration</h4>
+            <div class="ui field">
+              <label>Sync Interval (hours)</label>
+              <input placeholder="1" type="number" id="ldapSyncInterval" ng-model="vm.ldapSyncInterval">
+            </div>
+
+            <script>
+              $('.help.circle.icon').popup({
+                inline: true,
+                hoverable: true,
+                delay: {
+                  show: 150,
+                  hide: 400
+                }
+              });
+            </script>
+          </div>
+
+          <div ng-show="vm.authBackend === 'managed'">
+            <h4>Managed Auth</h4>
+            <p>With managed authentication, an admin user will be able to create users using the <a ui-sref="dashboard.accounts.users">Users and Teams</a> page</p>
+          </div>
+
+          <div ng-show="vm.authBackend === 'ldap'">
+            <h4>Test LDAP Connection</h4>
+            <div class="fields">
+              <div class="ui seven wide field">
+                <label>LDAP Test Username</label>
+                <input placeholder="ldap-username" type="text" id="ldapTestUsername" ng-model="vm.ldapTestUsername">
+              </div>
+              <div class="ui seven wide field">
+                <label>LDAP Test Password</label>
+                <input type="password" id="ldapTestPassword" ng-model="vm.ldapTestPassword">
+              </div>
+              <div class="ui two wide field">
+                <label>&nbsp;</label>
+                <button class="ui fluid blue inverted button" ng-click="vm.testLogin()">Test</button>
+              </div>
+            </div>
+          </div>
+          <br/>
+
+          <button class="ui positive button" ng-click="vm.updateAuthConfig()">Update Auth Settings</button>
+        </form>
+
+        <div class="ui divider"></div>
+        <br/>
+
+        <div ng-show="vm.configuredAuthBackend === 'ldap'">
+          <h3>LDAP Sync Status</h3>
+          <button class="ui blue button" ng-click="vm.triggerSync()">Sync Now</button>
+          <button class="ui inverted blue button" ng-click="vm.refreshJobs()">Refresh</button>
+          <table ng-table="vm.tableParams" template-pagination="custom/pager" class="ui very basic unstackable selectable padded table">
+            <tr ng-repeat="j in $data">
+              <td class="collapsing" sortable="'status'">
+                <i class="circle icon link" ng-class="{'green': j.status === 'done', 'red' : j.status === 'error', 'yellow': j.status === 'running'}" data-content="{{ c.Status }}" variation="inverted blue"></i>
+                <span class="hidden">{{j.status}}</span>
+              </td>
+              <td data-title="'Last Updated'" sortable="'lastUpdated'">{{ j.lastUpdated | date:'yyyy-MM-dd HH:mm:ss Z' }}</td>
+              <td data-title="'Scheduled At'" sortable="'scheduledAt'">{{ j.scheduledAt | date:'yyyy-MM-dd HH:mm:ss Z'  }}</td>
+              <td class="right aligned">
+                <div class="ui action buttons">
+                  <div ng-click="vm.showJobLog(j.id)" class="ui blue basic button">
+                    View Log
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="job-log-modal" class="ui large long modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Job Logs
+    </div>
+    <div class="content">
+      <pre class="ui fixed-width-font segment">{{ vm.jobLog }}</pre>
+    </div>
+  </div>
+
+  <div id="ldap-warning-modal" class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+      LDAP Configuration
+    </div>
+    <div class="content">
+      <p>The authentication mode is about to be switched to use LDAP.</p>
+      <p ng-show="vm.username !== vm.ldapConfig.recoveryAdminUsername">The recovery admin username <b>{{ vm.ldapConfig.recoveryAdminUsername }}</b> does not match your account.  Upon a successful LDAP sync, your current account will be made inactive.  You will be able to login with the recovery admin account, or a synced LDAP account.</p>
+    </div>
+    <div class="actions">
+      <div class="ui negative button">
+        Cancel
+      </div>
+      <div class="ui positive button">
+        Confirm
+      </div>
+    </div>
+  </div>
+</div>

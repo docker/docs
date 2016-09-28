@@ -1,0 +1,49 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.button {
+    font-weight: 700;
+}
+
+.ui.negative.buttons .button,
+.ui.negative.button {
+  background-color: transparent !important;
+  box-shadow: 0px 0px 0px @invertedBorderSize @red inset !important;
+  color: @red;
+}
+.ui.negative.buttons .button:hover,
+.ui.negative.button:hover,
+.ui.negative.buttons .button:focus,
+.ui.negative.button:focus,
+.ui.negative.buttons .button.active,
+.ui.negative.button.active,
+.ui.negative.buttons .button:active,
+.ui.negative.button:active {
+  box-shadow: none !important;
+  color: @lightRedTextColor;
+}
+.ui.negative.buttons .button:hover,
+.ui.negative.button:hover {
+  background-color: @lightRedHover;
+}
+.ui.negative.buttons .button:focus,
+.ui.negative.button:focus {
+  background-color: @lightRedFocus;
+}
+.ui.negative.buttons .active.button,
+.ui.negative.active.button {
+  background-color: @lightRedActive;
+}
+.ui.negative.buttons .button:active,
+.ui.negative.button:active {
+  background-color: @lightRedDown;
+}
+
+.ui.white.button {
+  color: @blue;
+  background-color: @white;
+  opacity: 1;
+}
+.ui.white.button:hover {
+  opacity: 0.9;
+}

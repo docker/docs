@@ -1,0 +1,60 @@
+#!/bin/bash
+#
+# This build script will only work against engines that can volume mount
+# your local directory.  This allows faster incremental builds by saving
+# the build results within the local system.
+#
+set -e
+
+DEV_IMAGE_NAME="${DEV_IMAGE_NAME:-ucp-controller-dev}"
+DEV_DOCKER_VOLUME_NAME="${DEV_IMAGE_NAME}-dockerdir"
+
+# Store machine certs in a docker volume to limit a race condition
+# See the "race condition" section in integration_tests.md
+if ! docker volume ls | grep -q ${DEV_DOCKER_VOLUME_NAME} ; then
+    docker volume create --name ${DEV_DOCKER_VOLUME_NAME}
+fi
+
+# Only build the image once to speed things up, since we'll volume mount the code
+echo "Checking for ${DEV_IMAGE_NAME}"
+if ! docker run --rm ${DEV_IMAGE_NAME} /bin/true 2>/dev/null ; then
+    echo "Building ${DEV_IMAGE_NAME}"
+    docker build -t ${DEV_IMAGE_NAME} -f Dockerfile.build .
+fi
+
+# If no args, assume interactive
+if [ -z "$*" ] ; then
+    IT="-it"
+    set -- "sh"
+fi
+
+
+# TODO - Add more pass-through goop to be able to run integration in dev mode
+#        with other "local" drivers
+exec docker run --rm ${IT} \
+    -e GOPATH=/go \
+    -e PRE_RELEASE \
+    -e TEST_VERBOSE \
+    -e MACHINE_CREATE_FLAGS \
+    -e MACHINE_DRIVER \
+    -e REGISTRY_USERNAME \
+    -e REGISTRY_PASSWORD \
+    -e REGISTRY_EMAIL \
+    -e AWS_ACCESS_KEY_ID \
+    -e AWS_SECRET_ACCESS_KEY \
+    -e AWS_VPC_ID \
+    -e AWS_DEFAULT_REGION \
+    -e PRESERVE_TEST_MACHINE \
+    -e MACHINE_FIXUP_COMMAND \
+    -e TAG \
+    -e ORG \
+    -e REPO \
+    -e DOCKER \
+    -e TEST_FLAGS \
+    -e NOTARY_DELEGATION_PASSPHRASE \
+    -e DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE \
+    -e DOCKER_CONTENT_TRUST \
+    -v ${DEV_DOCKER_VOLUME_NAME}:/root/.docker \
+    -v $(pwd):/go/src/github.com/docker/orca \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    ${DEV_IMAGE_NAME} $*

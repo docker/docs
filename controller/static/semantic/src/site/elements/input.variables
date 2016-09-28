@@ -1,0 +1,8 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@errorBackground: lighten(@negativeBackgroundColor, 90);
+@errorColor: @red;
+@errorBorder: @red;
+@errorBoxShadow: none;
