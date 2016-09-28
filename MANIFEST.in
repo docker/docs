@@ -1,0 +1,15 @@
+include Dockerfile
+include LICENSE
+include requirements.txt
+include requirements-dev.txt
+include tox.ini
+include *.md
+exclude README.md
+include README.rst
+include compose/config/*.json
+include compose/GITSHA
+recursive-include contrib/completion *
+recursive-include tests *
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.un~
