@@ -1,0 +1,300 @@
+/* Sidebar */
+
+.sidebar {
+  background-color: white;
+  margin: 0;
+  border-right: 1px solid @color-divider;
+  display: flex;
+  flex-direction: column;
+  min-width: @sidebar-width;
+  box-sizing: border-box;
+  position: relative;
+  .sidebar-header {
+    flex: 0 auto;
+    min-width: @sidebar-width;
+    min-height: 44px;
+    display: flex;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.25s;
+    &.sep {
+      border-bottom: 1px solid @color-divider;
+      box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.03);
+    }
+    h4 {
+      align-self: flex-start;
+      padding: 0.4rem 0 0 1.4rem;
+      display: inline-block;
+      position: relative;
+    }
+    .create {
+      display: flex;
+      flex: 1 auto;
+      justify-content: flex-end;
+      margin: 0.8rem 0.8rem 0 0;
+      a {
+        display: block;
+        text-decoration: none;
+        cursor: default;
+        &:focus {
+          outline: 0;
+        }
+        &.active {
+          .btn-new {
+            opacity: 0.3;
+          }
+        }
+      }
+    }
+  }
+  .sidebar-containers {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    max-width: @sidebar-width;
+    ul {
+      flex: 1 auto;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      .new-container-item {
+        .info {
+          position: relative;
+          top: 9px;
+        }
+      }
+      a {
+        color: inherit;
+        flex-shrink: 0;
+        cursor: default;
+        outline: none;
+        &:hover {
+          text-decoration: none;
+          cursor: default;
+        }
+        &:first-child {
+          li {
+            //border-top: 1px solid @color-divider;
+          }
+        }
+        &:focus {
+          text-decoration: none;
+        }
+        &.active {
+          background: @brand-action;
+          li {
+            height: 45px;
+            border-bottom: none;
+            background-color: @brand-primary;
+            .name {
+              color: white;
+            }
+            .image {
+              color: white;
+              opacity: 0.8;
+            }
+            .action {
+              .btn {
+                border: 1px solid white;
+                .icon {
+                  color: white;
+                }
+              }
+            }
+            .state-new {
+              .at2x('container-white.png', @container-state-size, @container-state-size);
+            }
+            .state-running {
+              .at2x('running-white.png', @container-state-size, @container-state-size);
+              .runningwave {
+                .at2x('runningwave-white.png', @container-state-size, @container-state-size);
+              }
+            }
+            .state-paused {
+              .at2x('wavy-white.png', @container-state-size, @container-state-size);
+            }
+            .state-stopped {
+              .at2x('stopped-white.png', @container-state-size, @container-state-size);
+            }
+            .state-downloading {
+              .at2x('downloading-white.png', @container-state-size, @container-state-size);
+              .downloading-arrow {
+                .at2x('downloading-arrow-white.png', @container-state-size, @container-state-size);
+              }
+            }
+          }
+        }
+      }
+      li {
+        vertical-align: middle;
+        padding: 0.5rem 1rem 0.7rem 1.4rem;
+        display: flex;
+        flex-direction: row;
+        height: 45px;
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+        &:hover {
+          background-color: @color-box-button;
+        }
+        .info {
+          margin-left: 1rem;
+          .name {
+            text-overflow: ellipsis;
+            max-width: @sidebar-text-overflow-width;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 13px;
+            font-weight: 400;
+            color: @gray-darkest;
+          }
+          .image {
+            margin-top: -0.1rem;
+            color: @gray-light;
+            font-size: 11px;
+            font-weight: 400;
+            text-overflow: ellipsis;
+            max-width: @sidebar-text-overflow-width;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+        }
+        .action {
+          display: none;
+          flex: 1;
+          position: relative;
+          top: 0.4rem;
+          text-align: right;
+          .btn {
+            border: 1px solid @gray-lighter;
+            .icon {
+              color: @gray-lighter;
+            }
+          }
+        }
+        .state {
+          margin-top: 0.6rem;
+          display: inline-block;
+          position: relative;
+          min-width: @container-state-size;
+          height: @container-state-size;
+        }
+        .state-error {
+          .at2x('error.png', @container-state-size, @container-state-size);
+        }
+        .state-stopped {
+          .at2x('stopped.png', @container-state-size, @container-state-size);
+        }
+        .state-paused {
+          .at2x('paused.png', @container-state-size, @container-state-size);
+        }
+        .state-new {
+          .at2x('container.png', @container-state-size, @container-state-size);
+        }
+        .state-downloading {
+          .at2x('downloading.png', @container-state-size, @container-state-size);
+          overflow: hidden;
+          .downloading-arrow {
+            width: @container-state-size;
+            height: @container-state-size;
+            .at2x('downloading-arrow.png', @container-state-size, @container-state-size);
+            position: absolute;
+            -webkit-animation-name: translatedownload;
+            -webkit-animation-duration: 1.8s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-timing-function: linear;
+          }
+        }
+        .state-running {
+          .at2x('running.png', @container-state-size, @container-state-size);
+          overflow: hidden;
+          .runningwave {
+            position: absolute;
+            width: @container-state-size * 2;
+            height: @container-state-size;
+            left: -20px;
+            .at2x('runningwave.png', @container-state-size, @container-state-size);
+            -webkit-animation-name: translatewave;
+            -webkit-animation-duration: 7.0s;
+            -webkit-animation-iteration-count: 5;
+            -webkit-animation-timing-function: linear;
+          }
+        }
+        .state-restarting {
+          display: inline-block;
+          width: @container-state-size;
+          height: @container-state-size;
+          .at2x('restarting.png', @container-state-size, @container-state-size);
+          background-repeat: repeat-x;
+          -webkit-animation-delay: -1s;
+          -webkit-animation-name: rotate;
+          -webkit-animation-duration: 3.0s;
+          -webkit-animation-iteration-count: 5;
+          -webkit-animation-timing-function: linear;
+        }
+      }
+    }
+  }
+}
+
+/* Sidebar Buttons */
+
+.sidebar-buttons {
+  border-top: 1px solid @color-divider;
+  min-height: 40px;
+  flex: 0 auto;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  opacity: 0.9;
+  z-index: 10000;
+  .btn-label {
+    color: @gray-lighter;
+    font-size: 10px;
+    height: 18px;
+  }
+  .btn-sidebar {
+    .box-button();
+    flex: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+
+    &:active {
+      img, .text {
+        -webkit-filter: brightness(0.9);
+      }
+    }
+  }
+
+  .btn-terminal {
+    flex: 1 auto;
+    border-right: 1px solid @color-divider;
+    color: @brand-primary;
+  }
+  .btn-feedback {
+    border-right: 1px solid @color-divider;
+    .icon {
+      margin-right: 0;
+    }
+  }
+  .btn-preferences {
+    .icon {
+      margin-right: 0;
+    }
+  }
+  .btn {
+    position: relative;
+    top: 1px;
+    float: right;
+  }
+}
+
+.sidebar-buttons-padding {
+  position: relative;
+  height: 62px;
+}

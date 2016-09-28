@@ -1,0 +1,285 @@
+//
+// Load core variables and mixins
+// --------------------------------------------------
+
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+h2 {
+  font-size: 16px;
+  color: @gray-normal;
+}
+
+h3 {
+  font-size: 14px;
+  color: @gray-darkest;
+}
+
+h4 {
+  font-size: 13px;
+  color: @gray-darker;
+  font-weight: 500;
+}
+
+a {
+  color: @brand-action;
+  transition: color 150ms;
+  //cursor: pointer;
+  &:hover {
+    text-decoration: none;
+    color: darken(@brand-action, 10%);
+  }
+  outline: 0 !important;
+}
+
+input[type="text"] {
+  &.line {
+    border: 0;
+    border-bottom: 1px solid @gray-lightest;
+    color: @gray-normal;
+    font-weight: 300;
+    padding: 5px;
+    transition: all 0.25s;
+    &:focus {
+      outline: 0;
+      border-bottom: 1px solid @brand-action;
+    }
+    &::-webkit-input-placeholder {
+      color: @gray-lighter;
+      font-weight: 400;
+    }
+  }
+}
+
+//
+// Buttons
+// --------------------------------------------------
+
+// Common styles
+.btn-default,
+.btn-primary,
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger {
+
+}
+
+// Mixin for generating new styles
+.btn-hollow-styles(@btn-color: @gray-normal) {
+  .reset-filter(); // Disable gradients for IE9 because filter bleeds through rounded corners
+  transition: all 100ms;
+  background: transparent;
+	border: 1px solid @btn-color;
+	color: @btn-color;
+  font-weight: 500;
+
+  &:hover {
+    background-color: fade(@btn-color, 2%);
+    border-color: darken(@btn-color, 5%);
+    color: darken(@btn-color, 5%);
+    cursor: default;
+    box-shadow: none;
+  }
+
+  &:focus,
+	&.focus {
+		color: @btn-color;
+		outline: none;
+	}
+
+  &:active {
+		background-color: fade(@btn-color, 3%);
+		border-color: darken(@btn-color, 5%);
+    box-shadow: 0 0 15px fade(@btn-color, 25%);
+	}
+
+  &:disabled,
+  &[disabled] {
+    opacity: 0.5;
+    background: none;
+    &.active {
+      background: none;
+      color: white;
+      box-shadow: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.btn-filled-styles(@btn-color: @gray-normal) {
+  .reset-filter(); // Disable gradients for IE9 because filter bleeds through rounded corners
+  transition: all 100ms;
+  background: @btn-color;
+  border: none;
+	color: white;
+  font-weight: 500;
+  
+  &:hover {
+    background-color: darken(@btn-color, 4%);
+    color: white;
+    cursor: default;
+    box-shadow: none;
+  }
+
+  &:focus,
+	&.focus {
+		color: white;
+		outline: none;
+	}
+
+  &:active {
+    background-color: darken(@btn-color, 5%);
+    box-shadow: 0 0 15px fade(@btn-color, 25%);
+	}
+
+  &:disabled,
+  &[disabled] {
+    opacity: 0.5;
+    background: @btn-color;
+    &.active {
+      background: @btn-color;
+      color: white;
+      box-shadow: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.btn-group {
+  &.tabs {
+    .btn {
+      padding: 6px 14px 6px 14px;
+    }
+  }
+  .btn {
+    .icon-dropdown {
+      &.icon:before {
+        position: relative;
+        font-size: 10px;
+        top: -2px;
+        margin-left: 0px;
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+// Common styles
+.btn {
+  background-color: transparent;
+  color: @gray-normal;
+  border: 1px solid @gray-normal;
+  border-radius: @border-radius;
+  box-shadow: none;
+  text-shadow: none;
+  cursor: default;
+  font-size: 12px;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+
+  &.has-icon {
+    .icon {
+      font-size: 0.9rem;
+      margin-right: 0.4rem;
+      &::before {
+        -webkit-font-smoothing: subpixel-antialiased;
+      }
+    }
+  }
+
+  &.circular {
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    padding-top: 4px;
+    .icon {
+      font-size: 10px;
+      &::before {
+        -webkit-font-smoothing: subpixel-antialiased;
+      }
+    }
+  }
+
+  &.small {
+    font-size: 10px;
+    padding: 0.3rem 0.7rem;
+    height: 22px;
+    .icon {
+      font-size: 10px;
+    }
+  }
+
+  .content {
+    position: relative;
+    top: -4px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .icon-dropdown {
+    &.icon:before {
+      font-size: 10px;
+      position: relative;
+      top: -2px;
+    }
+  }
+
+  .icon {
+    position: relative;
+    font-size: 16px;
+  }
+
+  // Remove the gradient for the pressed/active state
+  &:active,
+  &.active {
+    background-image: none;
+    box-shadow: none;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: none;
+    outline: none !important;
+  }
+
+  &.only-icon {
+    padding: 6px 7px 6px 7px;
+    border-radius: 100%;
+    &.small {
+      width: 22px;
+      height: 22px;
+      padding: 0.4rem 0.55rem;
+      .icon {
+        &::before {
+          -webkit-font-smoothing: subpixel-antialiased;
+        }
+      }
+    }
+  }
+}
+
+// Apply the mixin to the buttons
+.btn-action {
+  .btn-hollow-styles(@brand-action);
+  &.btn-hollow {
+    .btn-hollow-styles(@brand-action);
+  }
+}
+.btn-positive {
+  .btn-hollow-styles(@brand-positive);
+}
+.btn-default { .btn-filled-styles(@btn-default-bg); }
+.btn-primary { .btn-filled-styles(@btn-primary-bg); }
+.btn-success { .btn-filled-styles(@btn-success-bg); }
+.btn-info    { .btn-filled-styles(@btn-info-bg); }
+.btn-warning { .btn-filled-styles(@btn-warning-bg); }
+.btn-danger  { .btn-filled-styles(@btn-danger-bg); }
+
+.tooltip {
+  .tooltip-inner {
+    font-size: 10px;
+    padding-bottom: 5px;
+  }
+}
