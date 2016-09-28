@@ -1,8 +1,0 @@
-server:
-    listenip: 127.0.0.1
-    listenport: 1337
-    alsoclient: true
-    setup:
-        key: value
-    client:
-        key: value

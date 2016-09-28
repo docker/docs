@@ -1,9 +1,0 @@
-.buttons {
-	lost-align: right;
-	height: 25px;
-	margin: 30px 0 10px 0;
-
-	button:first-child {
-		margin-right: 10px;
-	}
-}

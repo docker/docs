@@ -1,2 +1,0 @@
-{{$template := getv "/dtr/configs/nginx.conf"}}
-{{replace $template "XXXREPLICA_IDXXX" (getenv "DTR_REPLICA_ID") -1}}

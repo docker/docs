@@ -1,8 +1,0 @@
-{
-  "preset": "jquery",
-  "esnext": true,
-  "maximumLineLength": null,
-  "requireCurlyBraces": null,
-  "requireCapitalizedComments": null,
-  "requireCamelCaseOrUpperCaseIdentifiers": null
-}
