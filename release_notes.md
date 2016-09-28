@@ -17,6 +17,21 @@ known issues for each UCP version.
 You can then use [the upgrade instructions](installation/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 1.1.4
+
+(29 Sept 2016)
+
+Note: UCP 1.1.4 supports Docker Engine 1.12 but does not use the built-in
+orchestration capabilities provided by the Docker Engine with swarm mode enabled.
+When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
+cluster using Docker Swarm v1.2.5.
+
+** Bug fixes **
+
+* Don't generate authentication tokens for organization accounts
+* Improved performance when deploying to a cluster with thousands of users
+* Increased timeouts for adding new nodes and other network operations
+
 
 ## Version 1.1.3
 
