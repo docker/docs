@@ -1,0 +1,86 @@
+.wrapper {
+  flex: 1;
+}
+
+.container {
+  margin: 30px 0;
+
+  .controls {
+    display: flex;
+    width: 100%;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 100;
+
+    .createFormButtonWrapper {
+      margin-left: auto;
+
+      i {
+        font-size: 18px;
+        position: relative;
+        top: 2px;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .newFormWrapper {
+    border: 1px solid ~colors.secondary6;
+    background: ~colors.ghost;
+    padding: 20px;
+    margin-bottom: -1px;
+  }
+
+  .zero {
+    position: relative;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+
+    .arrow {
+      border-bottom: 5px dashed ~colors.textColor;
+      border-left: 6px dashed ~colors.textColor;
+      border-color: transparent transparent transparent ~colors.textColor;
+      border-radius: 80px 0 0 10px;
+
+      position: absolute;
+      top: 20%;
+      right: 0;
+      width: 50px;
+      height: 150px;
+      transform: rotate(-150deg);
+
+      &:after {
+        content: "";
+        border-top: 30px solid ~colors.textColor;
+        border-right: 25px solid transparent; 
+        position: absolute;
+        bottom: -12px;
+        right: 35px;
+        transform: rotate(-130deg);
+      }    
+    }
+
+    img {
+      opacity: 0.3;
+      max-height: 220px;
+    }
+
+    p {
+      font-size: 21px;
+    }
+  }
+
+  .listContainer {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+
+  }
+}
+
+.noShared {
+  margin: 2rem 0 0 0;
+  text-align: center;
+  width: 100%;
+}

@@ -1,0 +1,17 @@
+.list a {
+	display: block;
+	padding: 7px 10px 7px 30px;
+	color: ~colors.headingLinkColor;
+	transition: background .25s;
+	&, &:hover, &:active, &:focus {
+		text-decoration: none;
+	}
+	&:hover {
+		background: rgba(0, 0, 0, 0.05);
+	}
+}
+.list .active {
+	border-left: 3px solid ~colors.primary1;
+	background: rgba(0, 0, 0, 0.05);
+	padding-left: 27px;
+}

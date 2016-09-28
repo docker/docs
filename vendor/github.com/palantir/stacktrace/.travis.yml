@@ -1,0 +1,16 @@
+sudo: false
+
+language: go
+
+go: 1.6
+
+before_install:
+  - go get github.com/golang/lint/golint
+
+script:
+  - go vet ./...
+  - $HOME/gopath/bin/golint ./...
+  - go test -v ./...
+
+notifications:
+  email: false

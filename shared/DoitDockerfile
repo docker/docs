@@ -1,0 +1,11 @@
+FROM docker:1.10.3
+
+# bash is necessary for running convert_env.sh
+RUN apk add -uU python3 git perl bash util-linux && \
+    python3 -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip3 install --upgrade pip doit && \
+    rm -r /root/.cache
+
+# TODO: remove this when circle ci updates their docker version or we switch completely to jenkins
+RUN apk add curl && curl https://get.docker.com/builds/Linux/x86_64/docker-1.8.3.tgz > /tmp/docker-1.8.3.tgz && cd tmp && tar -zxvf docker-1.8.3.tgz && cp /tmp/usr/local/bin/docker $(which docker)

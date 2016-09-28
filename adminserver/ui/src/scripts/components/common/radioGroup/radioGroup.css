@@ -1,0 +1,80 @@
+$svgSize: 22px;
+
+.choices {
+    display: inline-block;
+    font-size: 0.9rem;
+    vertical-align: middle;
+    background-color: #fff;
+}
+
+h2 > .choices {
+    margin-left: 1rem;
+}
+
+/** Horizontal choices **/
+
+.choice {
+    display: inline-block;
+    margin-right: -1px;
+    padding: 10px 12px 5px;
+    color: ~colors.slate;
+    border: 1px solid ~colors.coolGrey;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:first-child {
+        border-radius: 2px 0 0 2px;
+    }
+
+    &:last-child {
+        border-radius: 0 2px 2px 0;
+    }
+
+    span {
+        position: relative;
+        top: -2px;
+    }
+}
+.slim .choice {
+    padding: 10px 12px 5px;
+}
+
+/** Vertical choices **/
+.vertical {
+    width: 100%;
+    .choice {
+        display: block;
+        margin: 0;
+        border: 1px solid ~colors.coolGrey;
+        margin-bottom: -1px;
+        padding: .6rem 0.75rem 0.4rem;
+    }
+}
+
+/** Radio styles **/
+
+.inner,
+.active,
+.circle {
+    stroke-width: 2;
+    stroke: ~colors.coolGrey;
+    fill: #fff;
+}
+
+.active {
+    stroke: ~colors.primary1;
+}
+.inner {
+    stroke-width: 0;
+    fill: ~colors.primary1;
+}
+
+.svg {
+    display: inline-block;
+    width: $svgSize;
+    height: $svgSize;
+    vertical-align: middle;
+    position: relative;
+    top: -3px;
+    margin-right: 0.25rem;
+}

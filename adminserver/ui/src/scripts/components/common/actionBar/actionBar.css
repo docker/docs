@@ -1,0 +1,8 @@
+.bar {
+	border-top: 1px solid ~colors.secondary6;
+	padding: 1rem;
+	lost-flex-container: row;
+	* {
+		font-size: .825rem;
+	}
+}

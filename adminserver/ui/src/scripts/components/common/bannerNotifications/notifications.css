@@ -1,0 +1,50 @@
+@keyframes dropdown {
+    0% {
+        line-height: 0;
+    }
+    100% {
+        line-height: 3;
+    }
+}
+
+.banner {
+    background-color: ~colors.warningColor;
+    line-height: 3;
+    color: white;
+    font-size: 0.9rem;
+    animation: dropdown 0.5s linear;
+
+    &.success {
+        background: ~colors.successColor;
+    }
+
+    &.info {
+        background: ~colors.secondary6;
+    }
+
+    &.warning {
+        background: ~colors.paleOrange;
+    }
+
+    &.alert, &.error {
+        background: ~colors.alertColor;
+    }
+
+    &.clickable {
+        cursor: pointer;
+    }
+
+    .img {
+        height: 1.5em;
+        width: auto;
+        margin: 10px 10px 10px 20px;
+    }
+
+    .message {
+        margin: 10px 20px;
+    }
+
+    .img + .message {
+        margin: 10px 0;
+    }
+}

@@ -1,0 +1,361 @@
+.wrapper {
+  max-width: ~grid.width;
+}
+
+.backToRepos {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: .9rem;
+
+  :global .fa::after {
+    content: '\00a0';
+    text-decoration: none;
+  }
+}
+
+.shortDescriptionInput{}
+
+.repositoryDetail {
+    background-color: ~colors.ghost;
+    border: 1px solid #e7e7e7;
+    margin: 1.5rem 0 .5rem;
+    padding: 1.4rem 1rem .7rem;
+    lost-utility: clearfix;
+    font-size: 1.7rem;
+    p {
+        font-size: 16px;
+    }
+    .book {
+        color: #c0c9ce;
+        font-size: 45px;
+        float: left;
+        margin: -9px 22px 0 17px;
+    }
+    .repoInfo {
+        margin-left: 60px;
+        line-height: 1.2;
+    }
+    .visibility {
+        display: inline-block;
+        color: #ffb463;
+        border: 2px solid #ffb463;
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding: 1px 8px 2px;
+        position: relative;
+        top: -4px;
+    }
+    .showEditTools {
+        background-color: rgba(255, 181, 91, 0.3)
+    }
+    .shortDescription {
+        color: ~colors.primary5;
+    }
+    .edit {
+        margin-left: 0.5em;
+    }
+    input {
+        lost-column: 1/1;
+    }
+    .name {
+        font-weight: 600;
+        color: ~colors.slate;
+        margin-right: 1rem;
+    }
+    .divider {
+        display: inline-block;
+        margin: 0 0.4rem;
+    }
+    .actions {
+        text-align: right;
+    }
+}
+.repositoryInfo {
+    lost-flex-container: row;
+
+    .longDescriptionForm {
+        lost-column: 6/10;
+        lost-offset: 1/10;
+        word-wrap: break-word;
+        font-size: 1rem;
+        line-height: 1.8;
+
+        .longDescription {
+            margin-top: 10px;
+        }
+    }
+    .detailColumn {
+        lost-column: 3/10;
+    }
+}
+.repositorySettings {
+    .repoKey {
+        word-wrap: break-word;
+    }
+    .addUserKeyRow {
+        lost-flex-container: row;
+        margin-bottom: -1em;
+        margin-top: 1em;
+        .label {
+            lost-column: 4/10 flex;
+            margin-top: auto;
+        }
+        .addUser {
+            lost-column: 6/10 flex;
+            text-align: right;
+            margin-top: auto;
+            font-size: 80%;
+            input {
+                lost-column: 4/10 0 flex;
+                height: 26px;
+                line-height: 26px;
+                border: 1px solid #8f9ea8;
+                border-right: 0 none;
+            }
+            button {
+                float: right;
+                margin: 0;
+                padding: 0 1em;
+                height: 26px;
+                line-height: 22px;
+                border-radius: 0 2px 2px 0;
+            }
+        }
+    }
+    .generateUserKey {
+        margin-top: 2em;
+    }
+    .userKeysDisplay {
+        color: #3f5167;
+        margin-top: 1em;
+        lost-column: 1/1 0;
+        height: 159px;
+        border-radius: 2px;
+        overflow-y: scroll;
+
+        background-color: #e8ebed;
+        padding: 1em;
+
+        lost-utility: clearfix;
+
+        .userKeyRow {
+            lost-flex-container: row;
+            margin-bottom: 0.5em;
+            .userIcon {
+                display: inline-block;
+                lost-column: 2/10 flex;
+            }
+            .userKey {
+                lost-column: 7/10 flex;
+            }
+            .deleteIcon {
+                lost-column: 1/10 flex;
+                text-align: right;
+            }
+        }
+    }
+
+    .editRepository,
+    .deleteRepository {
+      margin-bottom: 20px;
+
+      .field-title {
+        font-size: 14px;
+        color: #445d6e;
+        margin-bottom: 6px;
+      }
+    }
+
+    .editRepository {
+      padding-bottom: 20px;
+      border-bottom: 1px solid #c0c9ce;
+
+      & > *:not(:first-child) {
+        margin-top: 30px;
+      }
+
+      .actions {
+        margin-top: 40px;
+        & > *:not(:first-child) {
+          margin-left: 26px;
+        }
+      }
+    }
+}
+
+:root {
+    --svgSize: 22px;
+    --circleRadius: 9;
+}
+.activity {
+    .activityRow {
+        lost-flex-container: row;
+        margin-bottom: 0.5em;
+        .ago {
+            lost-column: 2/10 flex;
+            color: #c0c9ce;
+            font-size: 12px;
+            text-align: right;
+            padding-top: 0.5em;
+        }
+        .circleDisplay {
+            lost-column: 1/20 flex;
+            text-align: center;
+            position: relative;
+            padding-top: 0.4em;
+            .svg {
+                display: inline-block;
+                width: var(--svgSize);
+                height: var(--svgSize);
+                vertical-align: middle;
+                position: relative;
+                top: -3px;
+            }
+            .circle {
+                stroke-width: 1.5;
+                stroke: ~colors.secondary5;
+                fill: #fff;
+            }
+            hr {
+                width: 2px;
+                height: 40px;
+                border: 0;
+                display: inline-block;
+                background-color: #e0e4e7;
+                position: absolute;
+                top: -40px;
+                left: 48%;
+            }
+        }
+        .action {
+            lost-column: 7/10 flex;
+            font-size: 12px;
+            border: 1px solid #e0e4e7;
+            background-color: #fafafa;
+            padding: 0.5em 1em;
+            position: relative;
+            .svg {
+                display: inline-block;
+                width: 6px;
+                height: 15px;
+                vertical-align: middle;
+                position: absolute;
+                left: -6px;
+                top: 9px;
+                polygon {
+                    fill: #fafafa;
+                    stroke-width: 1;
+                    stroke: #e0e4e7;
+                }
+            }
+        }
+    }
+}
+
+.tagsTable {
+    table {
+        border: 0 none;
+        background-color: #f7f8f9;
+        thead {
+            tr,
+            td {
+                background-color: #fff !important;
+                border-bottom: 0 none;
+            }
+        }
+        td {
+            background-color: #fff;
+            border-bottom: 2px solid #e0e4e7;
+        }
+        tr td:first-child {
+            padding-left: 0;
+        }
+        tr:last-child td {
+            border-bottom: 0 none;
+        }
+    }
+    .actionrow {
+        lost-flex-container: row;
+        lost-utility: clearfix;
+
+        .delete {
+            lost-column: 1/10;
+            text-align: right;
+        }
+        .selectText {
+            lost-column: 8/10;
+        }
+        .check {
+            lost-column: 1/20;
+        }
+        .deleteRepoButton {
+            border: 2px solid #ef4a53;
+            background-color: #fff;
+            color: #ef4a53;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 900;
+        }
+        hr {
+            width: 1px;
+            border: 0 none;
+            background-color: #c0c9ce;
+            height: 24px;
+            display: inline-block;
+            margin: 0 1em;
+            position: relative;
+            top: 5px;
+        }
+    }
+    .outOfDate {}
+    .signed {}
+}
+
+.teamsTable {
+    table {
+        border: 0 none;
+        background-color: #f7f8f9;
+        thead {
+            tr,
+            td {
+                background-color: #fff !important;
+                border-bottom: 0 none;
+                color: #ccc;
+                text-transform: uppercase;
+            }
+        }
+        td {
+            background-color: #fff;
+            border-bottom: 2px solid #e0e4e7;
+        }
+        tr:last-child td {
+            border: 0 none;
+        }
+    }
+}
+
+.tag {}
+.deleteTagContainer {}
+.tagRow {
+
+}
+
+.formbox {
+    composes: formbox from '../settings/formstyle.css';
+}
+.row {
+    composes: row from '../settings/formstyle.css';
+}
+.halfColumn {
+    composes: halfColumn from '../settings/formstyle.css';
+}
+
+.readmeHeader {
+    lost-column: 3/4;
+    lost-align: left;
+
+}
+.readmeButton {
+    lost-column: 1/4;
+    lost-align: right;
+}

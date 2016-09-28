@@ -1,0 +1,156 @@
+@import "./dux-overrides.css";
+@lost flexbox flex; /* grid system */
+
+
+html, body {
+	font-family: ~fonts.base;
+	color: ~colors.textColor;
+}
+html, body, :global(#content) {
+	height: 100%;
+	min-width: 800px;
+}
+
+.wrapper {
+	position: relative;
+	min-height: 100%;
+	height: 100%;
+}
+
+.content,
+.contentExpanded
+ {
+	margin: 0 20px;
+	position: relative;
+	height: 100%;
+	padding-left: auto;
+	/* Must match nav.css and leftNav.css */
+	transition: padding-left .25s linear;
+}
+
+.content {
+	padding-left: ~layout.leftNavWidth;
+}
+
+.contentExpanded {
+	padding-left: ~layout.leftNavWidthExpanded;
+}
+
+.notificationBanner {
+	padding-left: ~layout.leftNavWidth;
+}
+
+.notificationBannerExpanded {
+	padding-left: ~layout.leftNavWidthExpanded;
+}
+
+p {
+	font-size: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: ~fonts.base;
+	font-weight: 600;
+}
+
+h1, h2 {
+  /* TODO can we scope this better? */
+	color: ~colors.slate;
+	a {
+		color: ~colors.headingLinkColor;
+		transition: .25s color;
+		&:hover {
+			text-decoration: none;
+			color: ~colors.primary1;
+		}
+	}
+}
+
+h2 {
+    font-size: 1.286rem;
+}
+
+h3 {
+    font-size: 1.125rem;
+}
+
+h4 {
+	font-size: 1.4375rem;
+	margin: .5rem 0 .4rem 0; /* TODO can we scope this better? It has margin and it's larger than our h1/2/3 */
+}
+
+h5 {
+	font-size: 1.125rem;
+}
+
+h6 {
+	font-size: .9rem;
+}
+
+a {
+	color: ~colors.primary1;
+}
+
+textarea, input {
+	font-size: .9rem;
+	padding: .5rem;
+}
+
+button {
+	cursor: pointer /** mum told me never to point =( **/
+}
+
+hr {
+	padding: 0;
+	margin: 3.5rem 0 2rem 0;
+	border: 0;
+	border-bottom: 1px solid ~colors.secondary5;
+}
+
+table {
+	display: table;
+	width: 100%;
+	margin: 1rem 0;
+	border: 1px solid ~colors.secondary5;
+	font-size: .9rem;
+	background: #fff;
+
+	thead {
+		tr, td {
+			background: #E6EDF4;
+			background: color(~colors.secondary6 l(-2%));
+		}
+	}
+
+	tbody tr:nth-of-type(2n) {
+		background: #f5f5f5;
+	}
+
+	thead, tr td:first-child {
+		font-weight: bold;
+	}
+
+	td {
+		color: ~colors.secondary2;
+		padding: .85rem 1rem;
+	}
+
+}
+
+form:before,
+form:after {
+    content: " ";
+    display: table;
+}
+form:after {
+	clear: both;
+}
+
+table thead {
+	background: ~colors.secondary6;
+}
+
+ul, ol {
+	margin: 0;
+	padding: 0;
+}

@@ -1,0 +1,101 @@
+.button {
+	display: inline-block;
+	outline: 0;
+	border: 0;
+	border-radius: 3px;
+	padding: 8px 22px;
+	font-size: 16px;
+	font-weight: 400;
+	letter-spacing: .025rem;
+	transition: all 150ms linear;
+}
+
+.button[disabled=true] {
+	opacity: 0.5;
+}
+
+
+/* 
+ * Styles: Solid (default), Outline, Simple
+ */
+
+/* Solid */
+
+@define-mixin solid $btn-color {
+	background-color: $btn-color;
+	color: #fff;
+
+	&:hover {
+		background-color: color($btn-color lightness(45%));
+	} 
+}
+
+.primary {
+	@mixin solid ~colors.primary1;
+}
+
+.secondary {
+	@mixin solid ~colors.primary4;
+}
+
+.alert {
+	@mixin solid ~colors.alertColor;
+}
+
+
+/* Outline */
+
+@define-mixin outline $btn-color {
+	border-color: $btn-color;
+	color: $btn-color;
+
+	&:hover {
+		border-color: color($btn-color lightness(70%));
+		color: color($btn-color lightness(70%));
+		background: transparent;
+	}  
+}
+
+.outline {
+	border: 2px solid;
+	padding: 6px 22px;
+	background: transparent;
+
+	&.primary {
+		@mixin outline ~colors.primary1;
+	}	
+
+	&.alert {
+		@mixin outline ~colors.alertColor;
+	}
+}
+
+
+/* Simple */
+
+@define-mixin simple $btn-color {
+	color: $btn-color;
+
+	&:hover {
+		color: color($btn-color lightness(70%));
+		background: transparent;
+	}  
+}
+
+.simple {
+	border: none;
+	background: transparent;
+
+	&.primary {
+		@mixin simple ~colors.primary1;
+	}
+}
+
+/* 
+ * Sizes: (default), Slim
+ */
+
+.slim {
+	padding: 0px 18px;
+	font-size: 14px;
+}

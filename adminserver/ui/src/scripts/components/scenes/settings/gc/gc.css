@@ -1,0 +1,158 @@
+.banner {
+    lost-column: 1/1;
+    padding-bottom: 2rem;
+
+    .bannerImg {
+        width: 60px;
+        float: left;
+        margin-right: 0.5rem;
+    }
+
+    .bannerText {
+        overflow: hidden;
+
+        .bannerHeader {
+            font-weight: 100;
+        }
+
+        .bannerBody {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+.sectionTitle {
+    font-size: 14px;
+    margin-top: 20px;
+    color: ~colors.slate;
+}
+
+.collectionInProgress {
+    color: ~colors.slate;
+
+    .spinning {
+        font-size: 1.2rem;
+    }
+
+    .deletingText {
+        font-size: 0.9rem;
+        margin-left: 10px;
+    }
+
+    button {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+}
+
+.gcTimeoutButton {
+    lost-flex-container: row;
+    align-items: center;
+    composes: buttonContent from '../../../common/buttonSelect/buttonSelect.css';
+
+    .form {
+        overflow: hidden;
+        display: flex;
+
+
+        .inputContainer {
+            width: 50px;
+            margin: 0 10px;
+
+            input:focus {
+                outline: none;
+            }
+        }
+    }
+}
+
+.icon {
+    composes: icon from '../../../common/buttonSelect/buttonSelect.css';
+}
+
+.primaryText {
+    line-height: 40px;
+    composes: primaryText from '../../../common/buttonSelect/buttonSelect.css';
+}
+
+.saveButtons {
+    margin-top: 40px;
+
+    button:first-child {
+        margin-right: 10px;
+    }
+
+    .buttonText {
+        font-size: 14px;
+    }
+}
+
+.layersDeletedSection {
+    lost-flex-container: row;
+
+    .lastRanSection {
+        lost-flex-container: row;
+        lost-column: 1/6 flex;
+        color: ~colors.slate;
+
+        .icon {
+            display: flex;
+            font-size: 24px;
+        }
+
+        .textSection {
+            lost-flex-container: column;
+            display: flex;
+            margin-left: 10px;
+
+            .lastRan {
+                display: flex;
+                margin: 0 0 5px;
+            }
+
+            .time, .date {
+                font-size: 12px;
+                display: flex;
+            }
+        }
+    }
+
+    .layersDeleted {
+        lost-column: 5/6 flex;
+        font-family: monospace;
+
+        .layersDeletedTitle {
+            margin: 0;
+        }
+
+        .layer {
+            margin-top: 10px;
+
+            .sha {
+                color: ~colors.primary5;
+            }
+        }
+    }
+}
+
+.row {
+    composes: row from '../formstyle.css';
+}
+
+.scheduleForm {
+    max-width: 460px;
+}
+
+.gcScheduleSelect {
+    composes: halfColumn from '../formstyle.css';
+    select:focus {
+        outline: none;
+    }
+}
+
+.gcScheduleInput {
+    composes: halfColumn from '../formstyle.css';
+    input:focus {
+        outline: none;
+    }
+}

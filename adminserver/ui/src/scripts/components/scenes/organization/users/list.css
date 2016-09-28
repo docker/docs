@@ -1,0 +1,31 @@
+.list {
+	list-style: none;
+	border-top: 1px solid ~colors.secondary6;
+	margin: 10px 0;
+}
+
+.listItem {
+	border-bottom: 1px solid ~colors.secondary6;
+	padding: 12px 0;
+	i:first-child {
+		opacity: 0.75;
+	}
+}
+
+.name {
+	display: inline-block;
+	margin: 0 16px;
+	color: ~colors.headingLinkColor;
+}
+
+.remove {
+	cursor: pointer;
+	float: right;
+	padding: 4px;
+	margin: -4px 0;
+	opacity: 0.5;
+	transition: opacity .25s;
+	&:hover {
+		opacity: 1;
+	}
+}

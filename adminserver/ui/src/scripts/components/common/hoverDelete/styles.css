@@ -1,0 +1,23 @@
+.hoverDelete {
+  position: relative;
+  padding-right: 0;
+  
+  transition: .2s padding-right;
+  &:hover {
+    padding-right: 40px;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .deleteButton {
+    z-index: 0;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 5px;
+  }
+}

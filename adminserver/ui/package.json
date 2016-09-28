@@ -1,0 +1,135 @@
+{
+  "name": "dhe-adminserver",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "$(npm bin)/mocha  --compilers js:babel/register --recursive --require ./test.setup.js src/scripts/**/_tests/",
+    "start": "ENV=local node dev-server.js",
+    "build": "NODE_ENV=production ./node_modules/.bin/webpack --progress --verbose --config",
+    "build-dev": "NODE_ENV=development ./node_modules/.bin/webpack --progress --verbose --config ./webpack.dev.config.js",
+    "watch": "NODE_ENV=development ./node_modules/.bin/webpack --progress --verbose --watch --config ./webpack.dev.config.js"
+  },
+  "private": true,
+  "browserify": {
+    "transform": [
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "rootDir": "./src/scripts",
+    "scriptPreprocessor": "./node_modules/babel-jest",
+    "testFileExtensions": [
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "jsx",
+      "js",
+      "json"
+    ],
+    "modulePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "unmockedModulePathPatterns": [
+      "react"
+    ]
+  },
+  "dependencies": {
+    "ansi_up": "^1.2.1",
+    "autoaction": "0.0.11",
+    "axios": "0.9.1",
+    "babel": "6.5.2",
+    "babel-register": "6.7.2",
+    "babel-runtime": "6.6.1",
+    "classnames": "2.2.3",
+    "color": "0.11.1",
+    "debug": "2.2.0",
+    "dtr-js-sdk": "file:private-deps/dtr-js-sdk",
+    "esprima-fb": "13001.1001.0-dev-harmony-fb",
+    "events": "^1.0.2",
+    "flux": "^2.0.3",
+    "immutable": "3.7.6",
+    "invariant": "2.2.1",
+    "lodash": "4.6.1",
+    "metrics-graphics": "^2.6.0",
+    "moment": "2.12.0",
+    "moment-timezone": "0.5.4",
+    "normalize.css": "4.0.0",
+    "normalizr": "2.0.0",
+    "numeral": "^1.5.3",
+    "object-assign": "4.0.1",
+    "papaparse": "^4.1.2",
+    "paths-js": "0.4.4",
+    "postcss-color-function": "2.0.1",
+    "postcss-mixins": "4.0.1",
+    "rc-tooltip": "3.3.2",
+    "react": "0.14.8",
+    "react-css-modules": "3.7.6",
+    "react-datepicker": "0.25.0",
+    "react-dom": "0.14.8",
+    "react-infinite": "0.8.0",
+    "react-markdown": "2.4.2",
+    "react-redux": "4.4.1",
+    "react-router": "2.0.1",
+    "react-router-redux": "4.0.1",
+    "react-typeahead-component": "^0.9.0",
+    "redux": "3.3.1",
+    "redux-form": "^4.1.4",
+    "redux-logger": "2.6.1",
+    "redux-thunk": "2.0.1",
+    "redux-ui": "0.0.11",
+    "reselect": "2.2.1",
+    "rx": "4.1.0",
+    "velocity-react": "1.1.4"
+  },
+  "devDependencies": {
+    "async": "2.0.0-rc.1",
+    "autoprefixer-core": "^6.0.1",
+    "babel-core": "6.7.4",
+    "babel-eslint": "5.0.0",
+    "babel-jest": "9.0.3",
+    "babel-loader": "6.2.4",
+    "babel-plugin-transform-decorators-legacy": "1.3.4",
+    "babel-preset-es2015": "6.6.0",
+    "babel-preset-react": "6.5.0",
+    "babel-preset-stage-0": "6.5.0",
+    "chai": "^3.4.1",
+    "css-loader": "0.23.1",
+    "cssstats": "^2.0.1",
+    "escope": "3.6.0",
+    "eslint": "1.9.0",
+    "eslint-loader": "^1.1.1",
+    "eslint-plugin-react": "3.9.0",
+    "esprima-fb": "15001.1001.0-dev-harmony-fb",
+    "events": "1.1.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "jest-cli": "0.9.2",
+    "json-loader": "^0.5.2",
+    "lost": "6.7.2",
+    "mocha": "^2.3.4",
+    "nan": "2.2.0",
+    "nightwatch": "0.8.18",
+    "node-libs-browser": "1.0.0",
+    "normalize.css": "^3.0.3",
+    "postcss": "5.0.19",
+    "postcss-constants": "^0.1.1",
+    "postcss-cssnext": "^2.1.0",
+    "postcss-cssstats": "^1.0.0",
+    "postcss-each": "0.7.0",
+    "postcss-import": "8.0.2",
+    "postcss-loader": "0.8.2",
+    "postcss-nested": "^1.0.0",
+    "postcss-url": "^5.0.0",
+    "redux-devtools": "3.1.1",
+    "style-loader": "0.13.0",
+    "webpack": "1.12.14",
+    "webpack-dev-server": "1.14.1",
+    "xhr-interceptor": "^1.2.1"
+  }
+}

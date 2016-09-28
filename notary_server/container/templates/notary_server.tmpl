@@ -1,0 +1,2 @@
+{{$template := getv "/dtr/configs/server_config.json"}}
+{{replace $template "XXXREPLICA_IDXXX" (getenv "DTR_REPLICA_ID") -1}}

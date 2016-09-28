@@ -1,0 +1,249 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Docker CS Engine and Trusted Registry - spins up multiple CS Engine instances and one DTR instance",
+    "Parameters": {
+        "KeyName": {
+            "Type": "AWS::EC2::KeyPair::KeyName",
+            "Description": "Keyname for the keypair to launch EC2 instances"
+        },
+        "Ec2InstanceType": {
+            "Type": "String",
+            "Description": "EC2 instance type",
+            "Default": "m3.large",
+            "AllowedValues": [
+                "m3.large",
+                "m3.xlarge",
+                "m3.2xlarge",
+                "m4.large",
+                "m4.xlarge",
+                "m4.2xlarge",
+                "m4.4xlarge",
+                "m4.10xlarge",
+                "c4.xlarge",
+                "c4.2xlarge",
+                "c4.4xlarge",
+                "c4.8xlarge",
+                "c3.xlarge",
+                "c3.2xlarge",
+                "c3.4xlarge",
+                "c3.8xlarge",
+                "r3.large",
+                "r3.xlarge",
+                "r3.2xlarge",
+                "r3.4xlarge",
+                "r3.8xlarge",
+                "i2.xlarge",
+                "i2.2xlarge",
+                "i2.4xlarge",
+                "i2.8xlarge",
+                "d2.xlarge",
+                "d2.2xlarge",
+                "d2.4xlarge",
+                "d2.8xlarge"
+            ],
+            "ConstraintDescription": "must be a valid T2 EC2 instance type."
+        },
+        "DockerEngineCount": {
+            "Type": "String",
+            "Description": "Number of Docker Engines you want to launch in addition to the one Docker Trusted Registry instance.",
+            "Default": "5",
+            "AllowedValues": [
+                "5",
+                "10",
+                "20",
+                "30",
+                "40",
+                "50",
+                "60",
+                "70",
+                "80",
+                "90",
+                "100",
+                "200",
+                "300",
+                "500",
+                "1000"
+            ]
+        },
+        "DockerSubnet": {
+              "Description": "Subnet to use when launching instances",
+              "Type": "AWS::EC2::Subnet::Id"
+        }
+    },
+    "Mappings": {
+        "TrustedRegistryAMI": {
+            "us-east-1": {
+                "AMI": "ami-27c78d42"
+            },
+            "us-west-1": {
+                "AMI": "ami-b78444f3"
+            },
+            "us-west-2": {
+                "AMI": "ami-8c53b5bf"
+            },
+            "eu-central-1": {
+                "AMI": "ami-b02f2fad"
+            },
+            "eu-west-1": {
+                "AMI": "ami-8ff2d1f8"
+            },
+            "ap-southeast-1": {
+                "AMI": "ami-d855408a"
+            },
+            "ap-southeast-2": {
+                "AMI": "ami-d38dc2e9"
+            },
+            "ap-northeast-1": {
+                "AMI": "ami-aeec79ae"
+            },
+            "sa-east-1": {
+                "AMI": "ami-1183160c"
+            }
+        },
+        "CSEngineAMI": {
+            "us-east-1": {
+                "AMI": "ami-2bc78d4e"
+            },
+            "us-west-1": {
+                "AMI": "ami-b58444f1"
+            },
+            "us-west-2": {
+                "AMI": "ami-8a53b5b9"
+            },
+            "eu-central-1": {
+                "AMI": "ami-ee3736f3"
+            },
+            "eu-west-1": {
+                "AMI": "ami-737a5d04"
+            },
+            "ap-southeast-1": {
+                "AMI": "ami-4a313a18"
+            },
+            "ap-southeast-2": {
+                "AMI": "ami-49561a73"
+            },
+            "ap-northeast-1": {
+                "AMI": "ami-c271fec2"
+            },
+            "sa-east-1": {
+                "AMI": "ami-69911b74"
+            }
+        }
+    },
+    "Resources": {
+        "CSEngineAsg": {
+            "Type": "AWS::AutoScaling::AutoScalingGroup",
+            "Properties": {
+                "VPCZoneIdentifier": [
+                    {
+                        "Ref": "DockerSubnet"
+                    }
+                ],
+                "LaunchConfigurationName": {
+                    "Ref": "CSEngineLc"
+                },
+                "MinSize": "1",
+                "MaxSize": {
+                    "Ref": "DockerEngineCount"
+                },
+                "DesiredCapacity": {
+                    "Ref": "DockerEngineCount"
+                },
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackName"
+                        },
+                        "PropagateAtLaunch": "true"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "Docker CS Engine Instance",
+                        "PropagateAtLaunch": "true"
+                    }
+                ]
+            }
+        },
+        "DTRAsg": {
+            "Type": "AWS::AutoScaling::AutoScalingGroup",
+            "Properties": {
+                "VPCZoneIdentifier": [
+                    {
+                        "Ref": "DockerSubnet"
+                    }
+                ],
+                "LaunchConfigurationName": {
+                    "Ref": "DTRLc"
+                },
+                "MinSize": "1",
+                "MaxSize": "1",
+                "DesiredCapacity": "1",
+                "Tags": [
+                    {
+                        "Key": "Application",
+                        "Value": {
+                            "Ref": "AWS::StackName"
+                        },
+                        "PropagateAtLaunch": "true"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "Docker Trusted Registry Instance",
+                        "PropagateAtLaunch": "true"
+                    }
+                ]
+            }
+        },
+        "CSEngineLc": {
+            "Type": "AWS::AutoScaling::LaunchConfiguration",
+            "Properties": {
+            "AssociatePublicIpAddress": "true",
+            "ImageId": {
+                    "Fn::FindInMap": [
+                        "CSEngineAMI",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "AMI"
+                    ]
+                },
+            "InstanceType": {
+                    "Ref": "Ec2InstanceType"
+                },
+            "KeyName": {
+                    "Ref": "KeyName"
+                }
+          }
+        },
+        "DTRLc": {
+            "Type": "AWS::AutoScaling::LaunchConfiguration",
+            "Properties": {
+            "AssociatePublicIpAddress": "true",
+            "ImageId": {
+                    "Fn::FindInMap": [
+                        "TrustedRegistryAMI",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "AMI"
+                    ]
+                },
+            "InstanceType": {
+                    "Ref": "Ec2InstanceType"
+                },
+            "KeyName": {
+                    "Ref": "KeyName"
+                }
+          }
+        }
+    },
+    "Outputs": {
+        "CSEngineAsgName": {
+            "Description": "Auto Scaling Group Name for EC2 Instances",
+            "Value": {
+                "Ref": "CSEngineAsg"
+            }
+        }
+    }
+}

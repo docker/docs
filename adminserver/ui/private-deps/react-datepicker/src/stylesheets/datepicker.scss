@@ -1,0 +1,184 @@
+@import "variables";
+@import "mixins";
+
+.datepicker {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  background-color: #fff;
+  color: $text-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  display: inline-block;
+  position: relative;
+}
+
+.datepicker__container {
+  position: absolute;
+  display: inline-block;
+  z-index: 2147483647;
+}
+
+.datepicker__triangle {
+  position: absolute;
+  left: 50px;
+}
+
+.tether-element-attached-top .datepicker__triangle {
+  @extend %triangle-arrow-up;
+}
+
+.tether-element-attached-bottom .datepicker__triangle {
+  @extend %triangle-arrow-down;
+}
+
+.datepicker__header {
+  text-align: center;
+  background-color: $background-color;
+  border-bottom: 1px solid $border-color;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  padding-top: 8px;
+  position: relative;
+}
+
+.datepicker__current-month {
+  color: black;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.datepicker__navigation {
+  line-height: $item-size;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  width: 0;
+  border: 6px solid transparent;
+
+  &--previous {
+    left: 10px;
+    border-right-color: $muted-color;
+
+    &:hover {
+      border-right-color: darken($muted-color, 10%);
+    }
+  }
+
+  &--next {
+    right: 10px;
+    border-left-color: $muted-color;
+
+    &:hover {
+      border-left-color: darken($muted-color, 10%);
+    }
+  }
+}
+
+.datepicker__week-day {
+  color: $muted-color;
+  display: inline-block;
+  width: $item-size + (2 * $day-margin);
+  line-height: $item-size;
+}
+
+.datepicker__month {
+  margin: $datepicker__margin;
+  text-align: center;
+}
+
+.datepicker__day {
+  color: $text-color;
+  display: inline-block;
+  width: $item-size;
+  line-height: $item-size;
+  text-align: center;
+  margin: $day-margin;
+  cursor: pointer;
+
+  &:hover {
+    border-radius: $border-radius;
+    background-color: $background-color;
+  }
+
+  &--today {
+    font-weight: bold;
+  }
+
+  &--selected {
+    border-radius: $border-radius;
+    background-color: $selected-color;
+    color: #fff;
+
+    &:hover {
+      background-color: darken($selected-color, 5%);
+    }
+  }
+
+  &--disabled {
+    cursor: default;
+    color: $muted-color;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.datepicker__input-container {
+  position: relative;
+}
+
+.datepicker__input {
+  position: relative;
+  font-size: 13px;
+  border-radius: $border-radius;
+  box-shadow: inset 0 2px 2px #e9e9e9;
+  border: 1px solid $border-color;
+  line-height: 16px;
+  padding: 6px 10px 5px;
+
+  &:focus {
+    outline: none;
+    border-color: $border-color;
+    box-shadow: inset 0 2px 2px #e9e9e9, 0 0 10px 0 rgba(73, 107, 125, .3);
+  }
+
+  &:not(:valid) ~ .close-icon {
+    display: none;
+  }
+}
+
+.close-icon {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  height: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: middle;
+
+  &:after {
+    background-color: $selected-color;
+    border-radius: 50%;
+    bottom: 0;
+    box-sizing: border-box;
+    color: white;
+    content: "\00d7";
+    cursor: pointer;
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    height: 16px;
+    line-height: .8;
+    margin: -8px auto 0;
+    padding: 2px;
+    position: absolute;
+    right: 7px;
+    text-align: center;
+    top: 50%;
+    width: 16px;
+    z-index: 1;
+  }
+}

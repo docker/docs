@@ -1,0 +1,27 @@
+machine:
+  environment:
+    GO15VENDOREXPERIMENT: 1
+
+dependencies:
+  override:
+    - go version
+  post:
+    - go get github.com/axw/gocov/gocov
+    - go get github.com/mattn/goveralls
+    - go get github.com/golang/lint/golint
+    - go get github.com/tools/godep
+
+test:
+  pre:
+    - go version
+  override:
+    - mkdir -p $HOME/.go_workspace/src/github.com/$CIRCLE_PROJECT_USERNAME/
+    - cd $HOME/.go_workspace/src/github.com/$CIRCLE_PROJECT_USERNAME && mv $HOME/$CIRCLE_PROJECT_REPONAME ./
+    - cd $HOME/.go_workspace/src/github.com/$CIRCLE_PROJECT_USERNAME && test -z "$(golint ./... | grep -v /vendor/ | tee /dev/stderr)"
+    - cd $HOME/.go_workspace/src/github.com/$CIRCLE_PROJECT_USERNAME && test -z "$(gofmt -s -l . 2>&1 | grep -v /vendor/ | tee /dev/stderr)"
+    - cd $HOME/.go_workspace/src/github.com/$CIRCLE_PROJECT_USERNAME && go vet $(go list ./... | grep -v /vendor/)
+    - cd $HOME/.go_workspace/src/github.com/$CIRCLE_PROJECT_USERNAME && go test -race -test.v $(go list ./... | grep -v /vendor/)
+
+general:
+  branches:
+    ignore:

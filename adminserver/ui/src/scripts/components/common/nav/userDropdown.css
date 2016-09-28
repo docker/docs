@@ -1,0 +1,65 @@
+.container {
+	position: absolute;
+	right: 0;
+}
+
+.name, .dropdown a {
+	text-align: right;
+	display: block;
+	color: #fff;
+	font-size: 12px;
+	font-weight: 200;
+	width: 100%;
+	padding: 0 20px 0 25px;
+	background: ~colors.primary1;
+}
+
+.name {
+	height: ~layout.topNavHeight;
+	line-height: ~layout.topNavHeight;
+
+	i {
+		position: relative;
+		top: 3px;
+		margin-right: 10px;
+		font-size: 15px;
+		color: #fff;
+		top: 1px;
+		left: 5px;
+	}
+}
+
+.dropdown {
+	display: none;
+	list-style: none;
+	z-index: 100;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+	.container:hover & {
+		display: inline-block;
+		position: absolute;
+		right: 0;
+	}
+
+	a {
+		height: 40px;
+		line-height: 40px;
+		text-align: left;
+
+		&:hover {
+			background: color(~colors.primary1 l(-5%));
+		}
+	}
+
+	i {
+		margin-left: 4px;
+	}
+}
+
+.avatar i {
+    position: absolute;
+    top: 21px;
+	left: -5px;
+	font-size: 21px;
+    color: #fff;
+}

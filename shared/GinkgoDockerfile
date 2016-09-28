@@ -1,0 +1,5 @@
+FROM golang:1.6.2
+
+WORKDIR /go/src/github.com/docker/dhe-deploy
+
+RUN apt-get update && apt-get install git && go get github.com/onsi/ginkgo/ginkgo && go install github.com/onsi/ginkgo/ginkgo

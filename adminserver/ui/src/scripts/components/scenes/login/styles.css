@@ -1,0 +1,41 @@
+.container {
+    lost-center: ~grid.width;
+}
+
+.loginForm {
+	position: relative;
+	margin: 10rem 0 14rem 0;
+	padding: 1rem;
+	&.loading:before {
+		content: " ";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background: rgba(0, 0, 0, 0.05);
+		display: block;
+	}
+	.logo {
+		display: block;
+		margin: 0 auto;
+	}
+	.logoFill {
+		fill: ~colors.primary1;
+	}
+	.submitContainer {
+		margin: 1.5rem 0;
+		lost-align: right;
+		height: 2rem;
+	}
+}
+
+.heading {
+	margin: 1rem 0 2rem 0;
+	text-align: center;
+}
+
+.errorSpan {
+	display: block;
+	text-align: center;
+}

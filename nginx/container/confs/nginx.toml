@@ -1,0 +1,21 @@
+[template]
+
+# The name of the template that will be used to render the application's configuration file
+# Confd will look in `/etc/conf.d/templates` for these files by default
+src = "nginx.tmpl"
+
+# The location to place the rendered configuration file
+dest = "/config/nginx.conf"
+
+# The etcd keys or directory to watch.  This is where the information to fill in
+# the template will come from.
+keys = [ "/dtr/configs/nginx.conf" ]
+
+# File ownership and mode information
+owner = "root"
+mode = "0644"
+
+# These are the commands that will be used to check whether the rendered config is
+# valid and to reload the actual service once the new config is in place
+check_cmd = "nginx -t -c {{.src}}"
+reload_cmd = "nginx -s reload"

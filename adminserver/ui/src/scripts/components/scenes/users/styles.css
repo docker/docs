@@ -1,0 +1,33 @@
+table {
+    border: 0 none !important;
+    background-color: #f7f8f9;
+    thead {
+        tr,
+        td {
+            background-color: #fff !important;
+            border-bottom: 0 none;
+            color: #ccc;
+            text-transform: uppercase;
+        }
+    }
+    td {
+        background-color: #fff;
+        border-bottom: 2px solid #e0e4e7;
+    }
+    tr:last-child td {
+        border: 0 none;
+    }
+    tr td {
+        transition: background-color 0.25s, color 0.25s;
+    }
+    tr:hover td {
+        background-color: #f7f7f7;
+    }
+    tr:hover td.icon {
+        color: ~colors.primary1;
+    }
+}
+
+.textright {
+    composes: textright from '../settings/formstyle.css';
+}

@@ -1,0 +1,32 @@
+.wrapper {
+	position: relative;
+	margin: 10px 0 25px;
+
+	&:after {
+		content: '';
+		width: 90%;
+		border-bottom: 1px #ccc dashed;
+		left: 5%;
+		padding: 10px;
+		position: absolute;
+		bottom: -14px;
+	}
+}
+
+.type {
+	margin: 0 0 10px;
+}
+
+.fields {
+	padding: 0 10px;
+}
+
+.buttons {
+	position: relative;
+	margin-top: 15px;
+	right: 10px;
+}
+
+.ldap input {
+	margin-bottom: 10px;
+}

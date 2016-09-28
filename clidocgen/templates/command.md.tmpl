@@ -1,0 +1,31 @@
+<!--[metadata]>
++++
+title ="{{.Name}}"
+description="{{if .Usage}}{{.Usage}}{{end}}"
+keywords= ["docker, dtr, cli, {{.Name}}"]
+[menu.main]
+parent="dtr_menu_reference"
+identifier="dtr_reference_{{.Name}}"
++++
+<![end-metadata]-->
+
+# docker/dtr {{.Name}}
+
+{{if .Usage}}{{.Usage}}{{end}}
+
+{{if .UsageText}}## Usage
+
+```bash
+{{.UsageText}}
+```{{end}}
+
+{{if .Description}}## Description
+
+{{.Description}}{{end}}
+
+{{if .Flags}}## Options
+
+| Option                    | Description                |
+|:--------------------------|:---------------------------|
+{{range .Flags}}|`--{{.Name}}`|{{.Usage}}|
+{{end}}{{end}}

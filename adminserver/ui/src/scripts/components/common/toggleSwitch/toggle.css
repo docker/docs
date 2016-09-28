@@ -1,0 +1,45 @@
+.ToggleSwitchOn,
+.ToggleSwitch {
+    width: 50px;
+    height: 28px;
+    cursor: pointer;
+    circle {
+        fill: ~colors.primary5;
+        transition: cx 0.1s ease-out, fill 0.1s ease-out;
+    }
+    rect {
+        fill: #c6cdd2;
+        transition: fill 0.1s ease-out;
+    }
+    text {
+        font-size: 9px;
+        fill: #fff;
+    }
+}
+.ToggleSwitchOn {
+    circle {
+        fill: ~colors.primary1;
+    }
+    rect {
+        fill: #9cdafc;
+    }
+}
+.ToggleWithLabel {
+    position: relative;
+    .ToggleSwitchOn,
+    .ToggleSwitch {
+        position: relative;
+        top: 9px;
+    }
+    input[type="checkbox"] {
+        display: none;
+    }
+}
+
+.touched {
+    color: ~colors.successColor;
+}
+.icontainer {
+    display: inline-block;
+    pointer-events: none;
+}

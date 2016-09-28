@@ -1,0 +1,38 @@
+.outerContainer {
+	width: 100%;
+	display: block;
+	padding: 8px;
+}
+
+.header {
+	color: ~colors.primary1;
+
+	a {
+		color: #fff;
+		opacity: 0.5;
+		font-size: 18px;
+
+		&:hover {
+			opacity: 1;
+			transition: opacity 0.25s;
+		}
+	}
+
+	span {
+		font-size: 18px;
+	}
+}
+
+.separator {
+	color: #fff;
+	font-size: 21px;
+	line-height: 25px;  
+	opacity: 0.5;
+	margin: 0 0.6rem;
+}
+
+.wrapper {
+	:last-child {
+		word-break: break-all;
+	}
+}

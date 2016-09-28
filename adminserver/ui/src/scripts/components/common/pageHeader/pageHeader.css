@@ -1,0 +1,10 @@
+.pageHeader {
+	padding: 20px 0;
+	h1 {
+		font-weight: 600;
+		font-size: 25px;
+		color: #445d6e;
+		margin: 0;
+		padding: 0;
+	}
+}

@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package commands;
+
+service Mosher {
+    // This call is initiated by the client. It tells the server it's ready
+    // with a Status message
+    rpc Register(stream Status) returns (stream JobConfig) {}
+}
+
+enum JobState {
+    RUNNING = 0;
+    SUCCESS = 1;
+    FAILURE = 2;
+}
+
+message JobInstance {
+    string uuid = 1;
+    JobState state = 2;
+    uint64 length = 3;
+    string error = 5;
+}
+
+message Status {
+    string client = 1;
+    repeated JobInstance jobs = 2;
+}
+
+message JobConfig {
+    string uuid = 1;
+    // This is a yaml file the client must parse
+    string mosh_config = 2;
+}

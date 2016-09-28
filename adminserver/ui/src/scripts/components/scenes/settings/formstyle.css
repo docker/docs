@@ -1,0 +1,185 @@
+.wrapper {
+    max-width: ~grid.width;
+}
+
+.formbox {
+    background-color: ~colors.ghost;
+    border: 1px solid ~colors.secondary6;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    lost-utility: clearfix;
+
+    .formbox {
+        background-color: transparent;
+        border: 0 none;
+        padding: 0;
+        margin: 0;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    .licenseInput + label {
+        border: 2px solid ~colors.primary1;
+        color: ~colors.primary1;
+        background-color: #fff;
+        padding: 0.35rem 1.25rem;
+        font-weight: 900;
+    }
+
+    .fileInput {
+        background-color: ~colors.primary1;
+        color: #fff;
+    }
+
+    .fileInput {
+        border-radius: 2px;
+    }
+
+    textarea,
+    input {
+        lost-column: 1/1;
+        margin-bottom: 1rem;
+    }
+
+    .minifield {
+        width: 3rem;
+        margin-left: 1rem;
+    }
+
+    .minifield:first-of-type {
+        margin-left: 0;
+    }
+}
+
+.textright {
+    margin-top: 1rem;
+    text-align: right;
+
+    button {
+        margin-left: .5rem;
+    }
+}
+
+.row {
+    lost-flex-container: row;
+}
+
+.halfColumn {
+    lost-column: 1/2 flex;
+	select {
+		width: 100%;
+	}
+}
+.thirdColumn {
+    lost-column: 1/3 flex;
+}
+.quarterColumn {
+    lost-column: 1/4 flex;
+}
+
+.right {
+    lost-align: right;
+}
+
+.testresults {
+    background-color: ~colors.secondary5;
+    lost-column: 1/1;
+    color: #000;
+    border-radius: 2px;
+    padding: 0.5rem 1rem 0.5rem;
+    font-weight: 900;
+}
+
+.scrollbox {
+    overflow-x: scroll;
+    lost-column: 1/1;
+    background-color: ~colors.secondary5;
+    max-height: 12rem;
+    border-radius: 3px;
+    padding: 0.5rem;
+    strong {
+        color: #000;
+    }
+}
+
+.pushed {
+    margin-top: 1rem;
+}
+
+.generalForm {
+    margin-bottom: 4rem;
+
+    .licenseLabel {
+        margin-bottom: 0;
+    }
+
+    .licenseKey {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .licenseInput {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .licenseInput + label {
+        float: right;
+    }
+
+    .licenseProd {
+        color: ~colors.primary3;
+        margin-right: 5px;
+    }
+
+    .buttonRow {
+        text-align: left;
+    }
+
+    .httpColumn {
+        lost-column: 1/7 flex;
+    }
+
+    .colonColumn {
+        font-size: 20px;
+        font-weight: 900;
+        width: 40px;
+        padding-top: 25px;
+    }
+
+    .portValues {
+        font-size: 1.3rem;
+    }
+
+    .tls textarea {
+        font-family: monospace;
+    }
+
+}
+
+/* !IMPORTANT - @camacho 8/18/16 GCS */
+/* DO NOT DELETE - THIS IS SHIPPING DARK TO BE TURNED ON IN >=2.2 */
+.gcsUploadColumn {
+  lost-column: 5/12 flex;
+}
+
+.gcsUploadLabelColumn {
+  lost-column: 1/12 flex;
+  text-align: center;
+}
+
+input.gcsUpload {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}

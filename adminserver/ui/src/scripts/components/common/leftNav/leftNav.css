@@ -1,0 +1,109 @@
+:root {
+  --iconPadding: calc(~layout.leftNavWidth / 2 - 15);
+  --activeBorderSize: 5px;
+}
+
+.container {
+  position: fixed;
+  z-index: 500;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  padding: 20px 0 20px 0;
+  border-right: 1px solid #e1e5e8;
+  background: #fff;
+  width: ~layout.leftNavWidth;
+  min-height: 350px;
+  overflow: hidden;
+  /* Must match nav.css and app.css */
+  transition: width .25s linear;
+
+  i {
+    display: inline-block;
+    /** Icon baseline shift **/
+    margin-top: -2px;
+    color: ~colors.primary1;
+    opacity: .2;
+    font-size: 20px;
+    transition: color .25s, opacity .25s;
+  }
+
+  a {
+    display: block;
+    width: ~layout.leftNavWidth;
+    padding: 13px 0 13px var(--iconPadding);
+    font-size: 14px;
+    color: ~colors.primary5;
+    transition: color .25s, background-color .25s;
+
+    &:hover {
+      background-color: #f4f4f4;
+    }
+
+    &:focus, &:active, &:hover {
+      text-decoration: none;
+      color: ~colors.primary1;
+
+      i {
+        opacity: 1;
+      }
+    }
+
+    span {
+      margin-left: 15px;
+    }
+  }
+
+  button {
+    border: 0;
+    background: transparent;
+    outline: none;
+    padding-left: calc(var(--iconPadding) + 6);
+    margin-bottom: 25px;
+    transition: .25s all;
+  }
+
+  .active {
+    border-left: var(--activeBorderSize) solid ~colors.primary1;
+
+    .iconContainer {
+      margin-left: -var(--activeBorderSize);
+    }
+
+    i {
+      opacity: 1;
+    }
+  }
+
+  .logo {
+    margin: -5px 0 15px 27px;
+  }
+
+  .logoFill {
+    fill: ~colors.primary1;
+  }
+}
+
+.expanded {
+  width: ~layout.leftNavWidthExpanded;
+
+  & .active {
+    span {
+      color: ~colors.primary1;
+    }
+  }
+
+  button i {
+    opacity: 1;
+  }
+
+  a {
+    width: ~layout.leftNavWidthExpanded;
+  }
+}
+
+.iconContainer {
+  display: inline-block;
+  width: 30px;
+  text-align: center;
+}

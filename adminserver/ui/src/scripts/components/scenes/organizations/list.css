@@ -1,0 +1,163 @@
+.wrapper {
+  flex: 1;
+}
+
+.container {
+  margin: 30px 0;
+}
+
+.actions {
+  height: 3.5rem;
+}
+
+.newFormWrapper {
+  border: 1px solid ~colors.secondary6;
+  background: ~colors.ghost;
+  padding: 20px;
+  margin-bottom: -1px;
+  width: 100%;
+
+  .container {
+    lost-flex-container: row;
+
+    .avatar {
+      lost-column: 1/12;
+    }
+
+    .namespace {
+      lost-column: 11/12;
+    }
+  }
+
+  .orgAvatar {
+    color: ~colors.secondary5;
+    font-size: 40px;
+    opacity: .7;
+    display: inline-block;
+    line-height: 70px;
+    vertical-align: top;
+    margin-left: 30%;
+  }
+
+  .actions {
+    float: right;
+    margin-top: 10px;
+
+    button:first-child {
+      margin-right: 5px;
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  width: 100%;
+  margin: 30px 0 20px;
+
+  .createFormButtonWrapper {
+    margin-left: auto;
+
+    i {
+      font-size: 18px;
+      position: relative;
+      top: 2px;
+      margin-right: 5px;
+    }
+  }
+}
+
+.zero {
+  position: relative;
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+
+  .arrow {
+    border-bottom: 5px dashed ~colors.textColor;
+    border-left: 6px dashed ~colors.textColor;
+    border-color: transparent transparent transparent ~colors.textColor;
+    border-radius: 80px 0 0 10px;
+
+    position: absolute;
+    top: 20%;
+    right: 0;
+    width: 50px;
+    height: 150px;
+    transform: rotate(-150deg);
+
+    &:after {
+      content: "";
+      border-top: 30px solid ~colors.textColor;
+      border-right: 25px solid transparent; 
+
+
+      position: absolute;
+      bottom: -12px;
+      right: 35px;
+      transform: rotate(-130deg);
+    }    
+  }
+
+  img {
+    opacity: 0.3;
+    max-height: 220px;
+  }
+
+  p {
+    font-size: 21px;
+  }
+}
+
+.orgList {
+  width: 100%;
+  list-style: none;
+  list-style-type: none;
+  padding: 0;
+
+  .row {
+    border: 0;
+    border-top: 1px solid ~colors.secondary6;
+    lost-flex-container: row;
+
+    .orgGrid {
+      lost-column: 5/12;
+      white-space: nowrap;
+
+      .orgAvatar {
+        color: ~colors.silver;
+        font-size: 30px;
+        display: inline-block;
+        line-height: 70px;
+        vertical-align: top;
+        margin: -6px 15px 0;
+      }
+
+      h2 {
+        display: inline-block;
+        padding-top: 5px;
+
+        a {
+          color: ~colors.slate;
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 50px;
+
+          &:hover {
+            color: ~colors.primary1;
+            text-decoration: none;
+            transition: .25s color;
+          }
+        }
+      }
+    }
+  }
+
+  .labelsGrid {
+    lost-column: 7/12;
+    text-align: right;
+
+    i {
+      margin-right: 5px;
+    }
+  }
+}

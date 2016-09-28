@@ -1,0 +1,99 @@
+:root {
+	--width: 180px;
+}
+
+.wrapper {
+	position: relative;
+	height: 100%;
+	left: -20px;
+	top: 0;
+}
+
+.left {
+	width: var(--width);
+	position: absolute;
+	height: 100%;
+	background: #fbfbfc;
+	border-right: 1px solid ~colors.secondary6;
+	
+	.usersIcon {
+		width: 100%;
+		font-size: 40px;
+		text-align: center;
+		margin-top: .5em;
+	}
+}
+
+.orgName {
+	font-size: 21px;
+	font-weight: bold;
+	padding: 5px 10px 15px 10px;
+	border-bottom: 1px solid ~colors.secondary6;
+	margin: 0;
+	width: 100%;
+	word-wrap: break-word;
+	line-height: 1.2;
+	text-align: center;
+}
+
+.teamHeader {
+	.add {
+		float: right;
+		padding: 0px 12px;
+		margin: 0px 5px 5px;
+		cursor: pointer;
+		opacity: .75;
+		transition: opacity 0.25s;
+		color: ~colors.primary4;
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	a {
+		display: block;
+		padding: 15px 10px;
+		color: ~colors.headingLinkColor;
+		transition: background .25s;
+		&, &:hover, &:active, &:focus {
+			text-decoration: none;
+		}
+		&:hover {
+			background: rgba(0, 0, 0, 0.05);
+		}
+	}
+
+	.active {
+		border-left: 3px solid ~colors.primary1;
+		background: rgba(0, 0, 0, 0.05);
+		padding-left: 7px;
+	}	
+}
+
+.teamHeading {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 14px;
+	margin: 0px 10px;
+	color: ~colors.primary5;
+	display: inline-block;
+}
+
+.content {
+	padding-left: calc(var(--width) + 20);
+}
+
+.createTeam {
+	font-size: .8rem;
+	margin: 1em 3em 0 2em;
+	position: relative;
+	opacity: .5;
+	i {
+		position: absolute;
+		top: -13px;
+		right: -11px;
+		transform: rotate(-50deg);
+		opacity: .6;
+		font-size: 1.4rem;
+	}
+}

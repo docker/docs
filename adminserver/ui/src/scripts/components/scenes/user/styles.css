@@ -1,0 +1,40 @@
+:root {
+    --width: 180px;
+}
+
+.wrapper {
+    position: relative;
+    left: -20px;
+    top: -5px;
+}
+
+.left {
+    width: var(--width);
+    position: fixed;
+    height: 100%;
+    background: #fbfbfc;
+    border-right: 1px solid ~colors.secondary6;
+
+    .usersIcon {
+        width: 100%;
+        font-size: 40px;
+        text-align: center;
+        margin-top: .5em;
+    }
+}
+
+.orgName {
+    font-size: 21px;
+    font-weight: bold;
+    padding: 5px 10px 15px 10px;
+    border-bottom: 1px solid ~colors.secondary6;
+    margin: 0;
+    width: 100%;
+    word-wrap: break-word;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.content {
+    padding-left: calc(var(--width) + 20);
+}

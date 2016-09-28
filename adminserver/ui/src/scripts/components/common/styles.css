@@ -1,0 +1,21 @@
+.container {
+	margin: 2rem 0;
+	lost-center: ~grid.width;
+}
+
+.content {
+	padding-top: 2rem;
+}
+
+.centered {
+	text-align: center;
+}
+
+.buttonContainer {
+	margin: 2rem 0;
+	float: right;
+
+	> button + button {
+		margin-left: 5px;
+	}
+}

@@ -1,0 +1,4 @@
+/INSERT\sSPEC\sHERE/ {
+	r gen/swagger2.json
+	d
+}

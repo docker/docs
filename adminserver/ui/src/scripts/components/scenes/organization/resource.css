@@ -1,0 +1,124 @@
+button[disabled] {
+  opacity: .4;
+}
+
+h1 { /* TODO: move to Card component's stylesheet */
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.container {
+  margin: 30px;
+}
+
+.orgAvatarContainer {
+  background: #e0e4e7;
+  text-align: center;
+  padding: 30px;
+
+  .orgAvatar {
+    color: #fff;
+    margin-bottom: 30px;
+    font-size: 50px;
+    margin: 0;
+  }
+}
+
+.orgName {
+  word-wrap: break-word;
+}
+
+.actions {
+  lost-align: top-right;
+  height: 3.5rem;
+}
+
+.cardFooter {
+  lost-align: middle-right;
+  border-top: 1px solid ~colors.secondary6;
+  padding: 4rem 0 0 0;
+  > div {
+    padding: 0 1.25rem 0 0;
+  }
+
+  button + button {
+    margin: 0 0 0 1rem;
+  }
+}
+
+.teamList {
+  lost-flex-container: row;
+
+  .teamItem {
+    lost-column: 1/2;
+    /*height: 110px;*/ /* TODO: add 'more' feature and re-add */
+    margin-bottom: 20px;
+  }
+}
+
+.controls {
+  lost-align: right;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.memberList {
+  lost-flex-container: row;
+
+  .memberItem {
+    lost-waffle: 1/2;
+
+    i {
+      margin-right: 8px;
+      opacity: 0.6;
+    }
+  }
+}
+
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block; /* fallback for non-webkit */
+  display: -webkit-box;
+  max-height: 40px; /* fallback for non-webkit */
+  width: 100%;
+  -webkit-line-clamp: 2; /* lines to display */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: 20px;
+}
+
+.deleteContainer {
+	lost-align: right;
+	width: 100%;
+	height: 33px;
+}
+
+.deleteModal {
+  text-align: center;
+  p {
+    margin: 0 0 1.5rem 0;
+  }
+}
+
+.createTeamForm {
+  border: 1px solid ~colors.silver;
+  background: ~colors.ghost;
+  padding: 20px 20px 30px;
+  margin: 0 0 2rem 0;
+
+
+  .createActions {
+    float: right;
+  }
+}
+
+.hasLabels {
+  lost-flex-container: row;
+
+  .labels {
+    margin-left: auto;
+    margin-right: 0;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,53 @@
+.navbar,
+.navbarExpanded {
+	position: relative;
+	/* Necessary to show the user dropdown above flexbox content */
+	z-index: 499;
+	box-sizing: border-box;
+	min-height: ~layout.topNavHeight;
+	padding-left: ~layout.leftNavWidth;
+	background: ~colors.primary1;
+	lost-flex-container: row;
+	/* Must match app.css and leftNav.css */
+	transition: padding-left .25s linear;
+
+	.logoContainer {
+		lost-column: 1/5;
+		padding: 15px 27px 17px;
+
+		.logo {
+			float: left;
+			margin: 0 12px 0 0;
+		}
+
+		.text {
+			float: left;
+			width: 80px;
+			line-height: 1.2;
+			padding-left: 12px;
+			color: #fff;
+			font-size: 14px;
+			font-weight: 200;
+			text-transform: uppercase;
+			border-left: 1px solid #fff;
+			display: inline-block;
+		}
+	}
+	
+	.searchContainer {
+		lost-column: 3/5;
+		padding: 15px 0 17px;
+	}
+
+	.userContainer {
+		lost-column: 1/5;
+	}
+}
+
+.navbar {
+	padding-left: ~layout.leftNavWidth;
+}
+
+.navbarExpanded {
+	padding-left: ~layout.leftNavWidthExpanded;
+}

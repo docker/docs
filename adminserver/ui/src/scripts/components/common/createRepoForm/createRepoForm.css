@@ -1,0 +1,34 @@
+.row {
+	lost-flex-container: row;
+	position: relative;
+	margin: 0 0 10px;
+}
+
+.account, .name {
+	lost-column: 3/8 2;
+	position: relative;
+}
+
+.account select {
+	width: 100%;
+}
+
+.description {
+	lost-column: 3/4 2;
+}
+
+.visibility {
+	lost-column: 1/4 2;
+}
+
+.divider {
+	color: ~colors.primary5;
+	font-size: 28px;
+	position: absolute;
+	top: 24px;
+	left: -19px;
+}
+
+input {
+	width: 100%;
+}

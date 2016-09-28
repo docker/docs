@@ -1,0 +1,75 @@
+.container {
+    & input, & textarea {
+        transition: border-color .25s;
+
+        &:hover {
+            border-color: ~colors.primary1;
+        } 
+    }
+
+    & textarea {
+        width: 100%;
+    }
+}
+
+.container,
+.errorContainer,
+.touchContainer {
+    position: relative;
+    display: flex;    
+
+    input, textarea {
+        border-radius: 2px;
+        border: 1px solid ~colors.coolGrey;
+    }
+}
+.errorContainer input,
+.errorContainer textarea {
+    border: 1px solid ~colors.alertColor;
+}
+
+.touchContainer input,
+.touchContainer textarea {
+    border: 1px solid ~colors.successColor;
+}
+
+.error,
+.touched,
+.password {
+    margin-left: 0.5rem;
+}
+.error {
+    color: ~colors.alertColor;
+}
+.touched {
+    color: ~colors.successColor;
+}
+.hide {
+    color: ~colors.primary1;
+}
+.reveal {
+    color: #ccc;
+}
+.password {
+    cursor: pointer;
+}
+.icontainer {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 100%;
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    pointer-events: none;
+    padding: 0.5rem 0.5rem 0 0;
+
+    & > .password,
+    & > .error {
+        pointer-events: all;
+    }
+}
+[disabled=true] {
+	color: #aaa;
+}
