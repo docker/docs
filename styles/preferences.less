@@ -1,0 +1,74 @@
+@import "variables.less";
+
+.preferences {
+  flex: 1 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  .preferences-content, .about-content {
+    flex: 1 auto;
+    margin-top: 45px;
+    padding: 50px;
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      margin-top: 40px;
+      text-align: left;
+      font-size: 18px;
+      font-weight: 400;
+      color: @gray-darker;
+    }
+
+    .option {
+      display: flex;
+      flex-direction: row;
+      margin-top: 14px;
+
+      .option-name {
+        flex: 0 auto;
+        color: @gray-light;
+
+        label {
+          font-weight: 400;
+        }
+      }
+      .option-value {
+        flex: 1 auto;
+        text-align: right;
+      }
+    }
+  }
+  .about-content {
+    margin-top: 0px;
+    height: 100%;
+    overflow: auto;
+    .items {
+      display: flex;
+      .item {
+        flex: 1 auto;
+        margin-right: 1rem;
+        text-align: center;
+      }
+    }
+    h3 {
+      color: @gray-normal;
+      font-weight: 400;
+      font-size: 18px;
+      text-align: center;
+    }
+    img {
+      height: 100px;
+      width: auto;
+    }
+    h4 {
+      margin-bottom: 0.5rem;
+    }
+    p {
+      color: @gray-light;
+      font-size: 1.5rem;
+    }
+  }
+}

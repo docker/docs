@@ -1,0 +1,221 @@
+.setup {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  //-webkit-app-region: drag;
+
+  .setup-content {
+    display: flex;
+    flex-direction: row;
+
+    flex: 1 auto;
+
+    padding: 2rem;
+
+    .image {
+      display: flex;
+      flex: 1 auto;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10rem;
+
+      img {
+        width: 399px;
+        height: 340px;
+      }
+
+      .contents {
+        position: relative;
+        .detail {
+          position: absolute;
+          right: -20px;
+          bottom: 0;
+        }
+      }
+    }
+
+    .form-section {
+      display: flex;
+      flex: 1 auto;
+      align-items: flex-end;
+      justify-content: center;
+      padding-right: 5rem;
+      padding-left: 15rem;
+      flex-direction: column;
+
+      img {
+        width: 323px;
+        height: 64px;
+      }
+
+      form {
+        margin-top: 40px;
+        text-align: right;
+        input[type="text"], input[type="password"] {
+          display: block;
+          border: 0;
+          border-bottom: 1px solid @gray-lightest;
+          color: @gray-normal;
+          font-weight: 300;
+          padding: 10px 5px;
+          transition: all 0.25s;
+          font-size: 18px;
+          width: 340px;
+          &.error {
+            border-bottom: 1px solid @brand-negative;
+            &:focus {
+              border-bottom: 1px solid @brand-negative;
+            }
+          }
+          &:focus {
+            outline: 0;
+            border-bottom: 1px solid @brand-action;
+          }
+          &::-webkit-input-placeholder {
+            color: @gray-lighter;
+            font-weight: 400;
+          }
+        }
+
+        div.checkbox {
+          text-align: left;
+          color: @gray-normal;
+        }
+
+        div.submit {
+          margin-top: 10px;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          align-items: center;
+
+          .spinner {
+            margin-right: 10px;
+            flex: 0 auto;
+          }
+
+          button[type="submit"] {
+            flex: 0 auto;
+            display: block;
+            .btn-filled-styles(@brand-action);
+            font-size: 18px;
+            padding: 10px 20px;
+            border: 0;
+          }
+        }
+
+        hr {
+          border-top: 1px solid #D7DFEA;
+        }
+
+        .extra {
+          text-align: center;
+          font-size: 14px;
+          color: @gray-normal;
+          margin-top: 16px;
+          .btn {
+            margin-left: 6px;
+            position: relative;
+            top: -3px;
+          }
+
+          a {
+            color: @brand-primary;
+          }
+        }
+        .link {
+          display: block;
+          font-size: 10px;
+          text-align: left;
+          position: relative;
+          top: -15px;
+          left: 5px;
+        }
+        .error-message {
+          font-size: 12px;
+          margin-top: 5px;
+          margin-bottom: 0;
+          min-height: 17px;
+          color: @brand-negative;
+        }
+        div.error {
+          font-size: 13px;
+          color: @gray-normal;
+          color: @brand-negative;
+          background-color: lighten(@brand-negative, 32%);
+          padding: 10px;
+          border-radius: 4px;
+          width: 340px;
+          display: none;
+          -webkit-user-select: text;
+        }
+      }
+    }
+
+    .btn-skip {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-size: 14px;
+    }
+
+    .btn-close {
+      -webkit-app-region: no-drag;
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      font-size: 14px;
+    }
+
+    .desc {
+      flex: 1 auto;
+      display: flex;
+
+      align-items: center;
+      padding-left: 40px;
+
+      .content {
+        max-width: 320px;
+
+        h1 {
+          color: @gray-darkest;
+          font-size: 24px;
+        }
+        h4 {
+          color: @gray-lightest;
+          font-size: 13px;
+          margin-top: -30px;
+        }
+        p {
+          font-size: 13px;
+          color: @gray-normal;
+          &.error {
+            color: @brand-negative;
+            background-color: lighten(@brand-negative, 32%);
+            padding: 10px;
+            border-radius: 4px;
+            max-height: 400px;
+            overflow: auto;
+            -webkit-user-select: initial;
+          }
+        }
+        .setup-actions {
+          button {
+            margin-right: 12px;
+          }
+        }
+      }
+
+    }
+
+    p {
+      &.error {
+        color: @brand-danger;
+        word-wrap: break-word;
+      }
+      margin-top: 20px;
+    }
+
+  }
+}

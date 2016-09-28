@@ -1,0 +1,201 @@
+.details-panel .settings {
+  display: flex;
+  flex: 1 auto;
+  flex-direction: column;
+  background-color: white;
+  margin: 1rem;
+  margin-bottom: 0;
+  border: 1px solid @color-divider;
+  border-radius: @border-radius;
+  .settings-menu {
+    display: flex;
+    flex: 0 auto;
+    height: 40px;
+    border-bottom: 1px solid @color-divider;
+    ul {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: flex-end;
+      a {
+        color: @gray-normal;
+        cursor: default;
+        outline: none;
+        &.active {
+          li {
+            font-weight: 500;
+            border-bottom: 3px solid @brand-primary;
+            color: @gray-darkest;
+          }
+        }
+        &:hover {
+          text-decoration: none;
+          li {
+            cursor: default;
+            color: @gray-darkest;
+          }
+        }
+        &:focus {
+          text-decoration: none;
+        }
+      }
+      li {
+        transition: all 140ms;
+        vertical-align: middle;
+        padding: 0.9rem 1.6rem;
+        display: flex;
+        flex-direction: row;
+      }
+    }
+  }
+  .settings-panel {
+    padding: 2rem;
+    flex: 1 auto;
+    overflow-x: hidden;
+    h3 {
+      margin-top: 0;
+      color: @gray-darker;
+      font-weight: 400;
+      font-size: 18px;
+    }
+    .settings-section {
+      margin-bottom: 4rem;
+    }
+    .container-info-row {
+      margin-bottom: 5px;
+      .label-id, .label-name {
+        .env-vars-labels;
+        display: inline-block;
+        width: 5%;
+        min-width: 75px;
+      }
+      a {
+        margin-left: 10px;
+      }
+      input {
+        width: 55%;
+        max-width: 500px;
+      }
+      .btn-copy {
+        border: none;
+        margin-left: 11px;
+      }
+      .disabled {
+        border-bottom: none;
+      }
+      .fadeOut {
+        animation: fade-out 5s ease-in-out forwards;
+      }
+      @keyframes fade-out {
+        0%  { opacity: 0; }
+        10% { opacity: 1; }
+        85% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+      p {
+        font-weight: 300;
+        margin-top: 5px;
+        color: @gray-lighter;
+        font-size: 12px;
+        strong {
+          font-weight: 500;
+        }
+        margin-left: 75px;
+        padding-left: 10px;
+      }
+    }
+    .env-vars-labels {
+      width: 100%;
+      font-size: 14px;
+      color: @gray-lighter;
+      font-weight: 500;
+      margin-left: 5px;
+      margin-bottom: 5px;
+      margin-top: 20px;
+      .label-key {
+        display: inline-block;
+        margin-right: 30px;
+        width: 30%;
+      }
+      .label-val {
+        display: inline-block;
+        width: 50%;
+      }
+    }
+    .env-vars {
+      margin-bottom: 20px;
+      .keyval-row {
+        margin-bottom: 5px;
+      }
+      input {
+        margin-right: 30px;
+        &.key {
+          width: 30%;
+        }
+        &.val {
+          width: 50%;
+        }
+      }
+    }
+    .table {
+      &.ports {
+        input {
+          width: 50px;
+          border: 0;
+        }
+        tr {
+          td {
+            &:first-child {
+              width: 120px;
+            }
+            &.bind {
+              width: 190px;
+            }
+            &.error {
+              text-align: left;
+              color: red;
+              padding-left: 10px;
+              padding-right: 10px;
+              border: 0;
+            }
+          }
+        }
+      }
+      &.volumes {
+        max-width: 100%;
+      }
+      color: @gray-normal;
+      tr {
+        &:first-child {
+          td {
+            border: none;
+          }
+        }
+        td {
+          border-color: @color-divider;
+        }
+      }
+      th {
+        font-size: 14px;
+        color: @gray-lighter;
+        font-weight: 500;
+        border: none;
+      }
+      .btn {
+        margin-right: 0.5rem;
+      }
+    }
+    .checkboxes {
+      padding: 1rem 0;
+      p {
+        color: @gray-normal;
+      }
+      input[type="checkbox"] {
+        margin-right: 0.8rem;
+      }
+      label {
+        font-weight: 400;
+      }
+    }
+  }
+}
