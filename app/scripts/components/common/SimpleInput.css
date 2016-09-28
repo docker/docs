@@ -1,0 +1,23 @@
+@import "dux/css/colors.css";
+@import "dux/css/box.css";
+
+input.default {
+    background-color: var(--white);
+    border-radius: var(--global-radius);
+&:focus {
+     border: 1px solid var(--primary-1);
+     background-color: var(--white);
+ }
+}
+
+input.error {
+    border: 1px solid var(--primary-5);
+    border-radius: var(--global-radius);
+&:focus {
+     border: 1px solid var(--primary-5);
+ }
+}
+
+.inputDiv {
+    width: 100%;
+}

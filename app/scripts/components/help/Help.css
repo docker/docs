@@ -1,0 +1,90 @@
+@import "dux/css/colors.css";
+
+.helpDescription {
+  margin: 1rem 0;
+}
+
+.helpItemList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-item: stretch;
+    margin-top: 0.5rem;
+}
+
+.helpItemContent {
+    padding: 2rem;
+}
+
+.helpItem {
+    flex: 1;
+    margin: 1rem 0;
+    padding-bottom: 0;
+    outline: none;
+    border-right: 1px solid var(--secondary-6);
+    border-radius: 3px;
+    text-align: center;
+    position: relative;
+}
+
+.helpItem:first-child {
+    margin-left: 0;
+    .helpItemContent {
+      padding-left: 0;
+    }
+}
+
+.helpItem:last-child {
+    margin-right: 0;
+    border-right: none;
+    .helpItemContent {
+      padding-right: 0;
+    }
+}
+
+.helpItemIconWrapper {
+    text-align: center;
+}
+
+.helpItemIcon {
+    color: var(--primary-1);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.helpItemLink {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    text-rendering: optimizeLegibility;
+}
+
+.helpItemText {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    text-rendering: optimizeLegibility;
+}
+
+.helpItemTitle {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.helpItemSubtext {
+    font-weight: 500;
+}
+
+.helpItemBody {
+    height: 7rem;
+}
+
+.helpCommunitySupport {
+    color: var(--gray-4);
+    background-color: var(--secondary-6);
+    margin-bottom:0;
+}
+
+.helpPaidSupport {
+    margin-left: 2rem;
+    margin-bottom:0;
+}

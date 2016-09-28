@@ -1,0 +1,82 @@
+@import 'dux/css/box.css';
+@import 'dux/css/colors.css';
+/* Note: tooltip CSS is globally styled in styles/vender-overrides/rc-tooltip.css */
+
+.grey {
+  color: #CECED9;
+}
+
+.row {
+  padding: 1rem 0 1rem 1.5rem;
+  position: relative;
+}
+
+.unselectedRow {
+  composes: row;
+  border-top: 1px solid #E4E4E4;
+}
+
+.selectedRow {
+  composes: row;
+  border: 1px solid #E4E4E4;
+  border-radius: var(--global-radius);
+}
+
+/* remove top border for unselected row following a selected row */
+.selectedRow + .unselectedRow {
+  border-top: none;
+}
+
+.check {
+  color: #6BCEC0;
+}
+
+.chevron {
+  color: #CECED9;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  margin: 6px 0;
+}
+
+.layerSize {
+  composes: grey;
+  display: inline-block;
+  font-size: 0.8rem;
+}
+
+.dockerCommandLine {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width:100%;
+  display: inline;
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+  color: #78828F;
+}
+a .dockerCommandLine {
+  color: #22b8eb;
+}
+
+.title {
+  margin-bottom: 0.5rem;
+}
+
+.layerNum {
+  position: absolute;
+  left: -5px;
+  color: #bbb;
+  top: 2px;
+  font-weight: 500;
+}
+
+.baseLayerLabel {
+  background-color: #E7E7E7;
+  color: var(--jumbo);
+  border-radius: var(--global-radius);
+  padding: 0.2rem 0.5rem;
+}
+
+.numVulnerableComps {
+  margin-right: 0.5rem;
+}

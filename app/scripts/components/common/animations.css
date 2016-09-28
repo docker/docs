@@ -1,0 +1,17 @@
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -2%, 0);
+    }
+   
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.fadeInDown {
+    animation: fadeInDown;
+    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+    animation-duration: 600ms;
+}

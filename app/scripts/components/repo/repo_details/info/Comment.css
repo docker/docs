@@ -1,0 +1,45 @@
+@import "dux/css/colors.css";
+@import "dux/css/box.css";
+
+.closeButton {
+    color: white;
+    display: inline-block;
+    background: var(--oil);
+    border-radius: 100%;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
+    margin-right: .5rem;
+}
+.commentHead {
+    display: flex;
+    margin-bottom: .75rem;
+}
+.commentDelete {
+    cursor: pointer;
+    &:hover {
+        color: var(--primary-5);
+    }
+}
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--global-radius);
+}
+
+.content {
+
+}
+
+.name {
+    color: darken(gray, 30%);
+    font-weight: 500;
+}
+.time {
+    font-size: 0.8rem;
+    color: lighten(gray, 15%);
+}
+
+.commentInfo {
+    margin: .5rem 1rem;
+}

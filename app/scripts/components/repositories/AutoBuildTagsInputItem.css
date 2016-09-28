@@ -1,0 +1,28 @@
+@import 'dux/css/colors.css';
+@import 'dux/css/box.css';
+
+.faBtn {
+    cursor: pointer;
+    user-select: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.8rem;
+}
+
+.addBtn {
+    composes: faBtn;
+    color: var(--success-color);
+}
+
+.removeBtn {
+    composes: faBtn;
+    color: var(--alert-color);
+}
+
+.select {
+	border-radius: var(--global-radius);
+}
+
+input.rounded {
+	border-radius: var(--global-radius);
+}

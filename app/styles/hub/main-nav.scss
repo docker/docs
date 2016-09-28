@@ -1,0 +1,132 @@
+/*
+ * These top bar properties still need to be sassified.
+ *
+ */
+
+.topnav-wrapper {
+    background-color: $topbar-dark;
+}
+
+.top-bar .top-bar-section ul li:hover:not(.has-form) > a {
+    background: transparent;
+}
+
+.top-bar-section ul li > a {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.top-bar-section ul li > a.button.secondary:hover,
+.top-bar-section ul li > a.button.secondary:focus {
+    color: #fff;
+    background: transparent;
+}
+
+.top-bar-section ul li > a.button.secondary {
+    background-color: transparent;
+    color: #c4cdda;
+    font-size: 1em;
+    height: 40px;
+    margin-top: -3px;
+}
+.top-bar-section li:not(.has-form) a:not(.button) {
+    background: transparent;
+    line-height: 3.125rem;
+}
+/*
+ *
+ *
+ */
+
+.top-bar-section {
+    ul li {
+        background: none;
+        a.button.tiny {
+            background-color: #86d800;/** temp color **/
+            border-radius: $global-radius;
+            box-shadow: none;
+            &:hover {
+                background-color: #5fa736;/** temp color **/
+            }
+        }
+    }
+    .profile-photo {
+        width: rem-calc(24px);
+        height: rem-calc(24px);
+        margin-right: 5px;
+        border-radius: $global-radius;
+    }
+    .title-area {
+        margin-top: .5rem;
+        a {
+            padding: 1rem;
+        }
+        img {
+            height: 36px;
+            margin-right: 10px
+        }
+    }
+    .nav-user-info {
+        background: none;
+    }
+    /*
+     * "+" menu
+     *
+     */
+    .css-dropdown {
+        &:hover ul {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+        ul:before {
+            border: 8px solid transparent;
+            border-bottom-color: #3d4c5a;
+            content: "";
+            display: inline-block;
+            left: 90px;
+            position: absolute;
+            top: -16px;
+        }
+        ul {
+            // background: $topbar-dark;
+            background: #3d4c5a;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            display: none;
+            padding: 0;
+            position: absolute;
+            top: 48px;
+            right: 4rem;
+            opacity: 0;
+            padding: .5rem 0;
+            visibility: hidden;
+            width: 220px;
+            z-index: 1;
+            li {
+                cursor: pointer;
+                float: none;
+                padding: .3em;
+                margin: 0;
+                position: relative;
+                a {
+                    display: block;
+                    padding-top: .23rem;
+                }
+                a:hover {
+                    background: #7a8491;
+                }
+            }
+            li:not(.has-form) > a {
+                line-height: 1.7rem;
+            }
+            & i.fa {
+                font-size: 1.2rem;
+                padding-right: 7px;
+            }
+            &.with-button {
+                right: rem-calc(116px);
+            }
+        }
+    }
+}

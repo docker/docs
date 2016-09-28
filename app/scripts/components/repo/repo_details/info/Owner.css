@@ -1,0 +1,18 @@
+@import "dux/css/colors.css";
+@import "dux/css/box.css";
+
+.detail {
+    color: var(--oil);
+    font-weight: 500;
+}
+
+.username {
+    display: inline-block;
+}
+    
+.avatar {
+    margin-right: 1rem;
+    width: 50px;
+    height: 50px;
+    border-radius: var(--global-radius);
+}

@@ -1,0 +1,22 @@
+@import "dux/css/box.css";
+@import "dux/css/colors.css";
+
+.confirmDelete {
+  color: var(--primary-5);
+}
+.confirmDelete:hover {
+  color: color(var(--primary-5) blackness(15%));
+}
+
+.delete {
+  color: var(--secondary-5);
+  transition: color .15s ease-in-out;
+  align-self: center;
+}
+.delete:hover {
+  color: var(--primary-5);
+}
+
+.error {
+  color: var(--primary-5);
+}

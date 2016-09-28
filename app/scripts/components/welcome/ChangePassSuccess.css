@@ -1,0 +1,9 @@
+@import "dux/css/colors";
+@import "dux/css/box";
+
+.passwordReset {
+    margin-top: 5rem;
+    border: 1px solid rgb(233, 237, 240);
+    border-radius: var(--global-radius);
+    min-height: 270px;
+}

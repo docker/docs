@@ -1,0 +1,7 @@
+FROM bagel/milky-way:dc9b2190001e9c64d7b5e63dbf9999b2e4c83d25
+
+RUN rm -rf /opt/hub/node_modules/.bin && \
+    ls && \
+    tar -czf modules.tar ./node_modules/*
+
+CMD ["cat", "/opt/hub/modules.tar"]

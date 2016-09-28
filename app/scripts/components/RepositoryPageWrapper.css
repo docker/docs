@@ -1,0 +1,31 @@
+@import "dux/css/colors.css";
+
+.repoLabel {
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.repoHeader {
+    border-bottom: 1px solid #c1c9d1;
+    background-color: white;
+    padding-top: 1.6rem;
+    padding-bottom: 1.2rem;
+}
+.repoTitle {
+    color: #555;
+    margin-bottom: 0;
+    font-weight: 300;
+}
+.repoSubtitle {
+    color: var(--secondary-5);
+    display: block;
+}
+
+.repoStar {
+    cursor: pointer;
+    color: var(--secondary-3);
+    margin-left: 1rem;
+    font-size: xx-large;
+}
+
+.private {}

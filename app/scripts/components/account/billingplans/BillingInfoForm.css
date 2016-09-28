@@ -1,0 +1,36 @@
+@import 'dux/css/colors.css';
+@import 'dux/css/box.css';
+
+.marginBottom {
+    margin-bottom: var(--default-margin);
+}
+
+.form {
+    padding: 0 var(--default-margin);
+}
+
+.billingDropdown {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.error {
+    border: 1px solid var(--primary-5);
+}
+
+.billingFormSection {
+    margin-bottom: 1.5rem;
+}
+
+.dateText {
+    text-align: center;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.globalError {
+    color: var(--primary-5);
+    padding-bottom: 1rem;
+}

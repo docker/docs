@@ -1,0 +1,8 @@
+@import 'dux/css/box';
+
+.gravatar {
+  border-radius: var(--global-radius);
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}

@@ -1,0 +1,24 @@
+
+.repoDetailsContent {
+    padding: 1.25rem;
+}
+
+.button {
+    margin-top: 1rem;
+}
+
+.storePromo {
+  text-align: center;
+  padding-left: 2rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  background-color: rgba(134, 216, 0, 0.22);
+  color: rgb(59, 95, 1);
+  border-bottom: 1px solid #c1c9d1;
+
+  a {
+    padding-bottom: 0.3rem;
+    color: inherit;
+    text-decoration: none;
+  }
+}
