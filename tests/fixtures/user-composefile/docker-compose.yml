@@ -1,4 +1,0 @@
-service:
-  image: busybox:latest
-  user: notauser
-  command: id

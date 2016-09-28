@@ -1,4 +1,0 @@
-service:
-  image: busybox:latest
-  working_dir: /etc
-  command: /bin/true
