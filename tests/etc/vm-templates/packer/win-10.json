@@ -1,0 +1,87 @@
+{
+  "builders": [
+    {
+      "type": "vmware-iso",
+      "output_directory": "machines/test-{{user `name`}}-template",
+      "name": "{{user `name`}}",
+      "vm_name": "test-{{user `name`}}-template",
+      "communicator": "winrm",
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "headless": true,
+      "boot_wait": "6m",
+      "boot_command": "",
+      "winrm_username": "{{user `username`}}",
+      "winrm_password": "{{user `password`}}",
+      "winrm_timeout": "2h",
+      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "guest_os_type": "windows8srv-64",
+      "disk_size": "61440",
+      "vnc_port_min": 5900,
+      "vnc_port_max": 5980,
+      "version": 11,
+      "floppy_files": [
+        "{{user `autounattend`}}",
+        "floppy/WindowsPowershell.lnk",
+        "floppy/PinTo10.exe",
+        "scripts/win/fixnetwork.ps1",
+        "scripts/win/disable-winrm.ps1",
+        "scripts/win/enable-winrm.ps1",
+        "scripts/win/microsoft-updates.bat",
+        "scripts/win/win-updates.ps1"
+      ],
+      "vmx_data": {
+        "RemoteDisplay.vnc.enabled": "false",
+        "RemoteDisplay.vnc.port": "5900",
+        "memsize": "5120",
+        "numvcpus": "2",
+        "scsi0.virtualDev": "lsisas1068",
+        "vhv.enable": "true",
+        "gui.fitguestusingnativedisplayresolution": "true",
+        "mks.enable3d": "true",
+        "mks.forceDiscreteGPU": "true",
+        "gui.fullscreenatpoweron": "true",
+        "gui.viewmodeatpoweron": "fullscreen",
+        "gui.lastPoweredViewMode": "fullscreen"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "windows-shell",
+      "remote_path": "/tmp/script.bat",
+      "execute_command": "{{ .Vars }} cmd /c \"{{ .Path }}\"",
+      "scripts": [
+        "scripts/win/vm-guest-tools.bat",
+        "scripts/win/enable-rdp.bat"
+      ]
+    },
+    {
+      "type": "windows-restart"
+    },
+    {
+      "type": "powershell",
+      "execute_command": "powershell \"& { {{.Vars}}{{.Path}}; exit $LastExitCode}\"",
+      "scripts": [
+        "scripts/win/set-powerplan.ps1"
+      ]
+    },
+    {
+      "type": "windows-shell",
+      "remote_path": "/tmp/script.bat",
+      "execute_command": "{{ .Vars }} cmd /c \"{{ .Path }}\"",
+      "scripts": [
+        "scripts/win/pin-powershell.bat",
+        "scripts/win/compile-dotnet-assemblies.bat",
+        "scripts/win/set-winrm-automatic.bat",
+        "scripts/win/chocolatey.bat",
+        "scripts/win/rt-host.bat"
+      ]
+    }
+  ],
+  "variables": {
+    "username": "docker",
+    "password": "Pass30rd!"
+  }
+}
