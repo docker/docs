@@ -28,7 +28,8 @@ cluster using Docker Swarm v1.2.5.
 
 **Bug fixes**
 
-* Don't generate authentication tokens for organization accounts
+* Fixed an issue that prevented authentication tokens to be generated for
+organization accounts
 * Improved performance when deploying to a cluster with thousands of users
 * Increased timeouts for adding new nodes and other network operations
 
