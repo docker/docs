@@ -1,9 +1,0 @@
-@import 'dux/css/colors.css';
-
-.gradient {
-  height: 100%;
-  width: 100%;
-  display: inline-block;
-  user-select: none;
-  background-image: repeating-linear-gradient(-45deg, var(--iron), var(--iron) 12px, var(--base) 0, var(--base) 24px);
-}
