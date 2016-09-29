@@ -1,0 +1,153 @@
+#!/usr/bin/env bash
+
+################################################################################
+# Docker.Build created on 2015-07-01 by michaK                                 #
+################################################################################
+#                       ____             __                                    #
+#                      / __ \____  _____/ /_____  _____                        #
+#                     / / / / __ \/ ___/ //_/ _ \/ ___/                        #
+#                    / /_/ / /_/ / /__/ ,< /  __/ /                            #
+#                   /_____/\____/\___/_/|_|\___/_/                             #
+#                                                                              #
+################################################################################
+
+# Intialize global variables, product name and version
+Initialize ()
+{
+  branchName="$(git symbolic-ref HEAD 2>/dev/null)" ||
+  branchName="(unnamed branch)"     # detached HEAD
+  branchName=${branchName##refs/heads/}
+  LogImportant "Working directory:\t$PWD"
+  LogImportant "Script Directory:\t${SCRIPT_FOLDER_PATH}"
+  LogImportant "Docker Root:\t\t${MAC_FOLDER_PATH}"
+  LogImportant "Git Branch:\t\t${branchName}"
+  LogImportant "Build root:\t\t${BUILD_FOLDER_PATH}"
+
+  productName="Docker"
+  bundleIdentifier="com.docker.docker"
+
+  SetUploadChannel
+
+  ExecuteOrFail "mkdir -p \"$BUILD_FOLDER_PATH\" 2> /dev/null"
+}
+
+# Clean all projects
+Clean ()
+{
+  LogImportant "Cleaning $BUILD_FOLDER_PATH"
+  ExecuteOrFail "rm -rf $BUILD_FOLDER_PATH"
+}
+
+################################################################################
+############################# Build ############################################
+################################################################################
+
+Build ()
+{
+  LogImportant "Building Docker for OSX"
+  PreBuildOSX
+  ExecuteOrFail "make -C \"$MAC_FOLDER_PATH/src/docker-app\""
+  PostBuildOSX "$BUILD_FOLDER_PATH"
+}
+
+# PreBuildOSX is executed prior to build Docker OS X application
+# It updates a few fields in the app's Info.plist file to target
+# the right source for auto update, and specify the version,
+# depending on what channel CI has been triggered for
+# In the XCode proj, if the version is 1.10.2-beta1-dev
+# It will become one of these depending on channel:
+# 1.10.2-beta1-test (PR submitted, not merged in master)
+# 1.10.2-beta1-master (when PR is merged in master)
+# 1.10.2-beta1 (when master is tagged, for a new release)
+PreBuildOSX ()
+{
+  Log "PreBuild for OSX"
+
+  # Remove .DS_STORE
+  # NOTE(aduermael): is that mandatory?
+  ExecuteOrFail "find $BUILD_FOLDER_PATH/ -name \".DS_Store\" -depth -exec rm {} \;"
+
+  # Modify stuff in Info.plist only if the build script
+  # is being executed by CI.
+  if [ -n "$CI" ]; then
+
+    local hockeyAppId=''
+    local suFeedURL=''
+    local buildType=''
+
+    if [[ "$updateChannel" = 'stable' ]]; then
+      # we are building a tagged version for the stable channel
+      hockeyAppId="$hockeyAppOSXStableId"
+      suFeedURL="$dockerAppUrl/mac/$updateChannel/$dockerAppRelease"
+      buildType="stable"
+    elif [[ "$updateChannel" = 'beta' ]]; then
+      # we are building a tagged version for the beta channel
+      hockeyAppId="$hockeyAppOSXAlphaId"
+      suFeedURL="$dockerAppUrl/mac/$updateChannel/$dockerAppRelease"
+      buildType="beta"
+    elif [[ "$updateChannel" = 'rc' ]]; then
+      # we are building a tagged version for the rc channel
+      # RC is the similar to beta but lives on the internal/stage url
+      hockeyAppId="$hockeyAppOSXAlphaId"
+      suFeedURL="$dockerAppStageUrl/mac/$updateChannel/$dockerAppRelease"
+      buildType="beta"
+    elif [[ "$updateChannel" = 'master' ]]; then
+      hockeyAppId="$hockeyAppOSXMasterId"
+      suFeedURL="$dockerAppStageUrl/mac/$updateChannel/$dockerAppRelease"
+      buildType="master"
+    else
+      # we are building a test app under a specific channel
+      hockeyAppId="$hockeyAppOSXTestId"
+      suFeedURL="$dockerAppStageUrl/mac/$updateChannel/$dockerAppRelease"
+      buildType="test"
+    fi
+
+    # Update values in main app's plist file
+    local plistPath="$MAC_FOLDER_PATH/src/docker-app/docker/docker/Info.plist"
+
+    # Set Sparkle update channel
+    # Local builds (not built using CI) have an empty URL
+    # So no updates will be listed for these ones
+    PlistEnforceValue "$plistPath" SUFeedURL          string "$suFeedURL"
+
+    # Set HockeyApp app id value in Info.plist.
+    # It will be used by the HockeyApp crash report system.
+    PlistEnforceValue "$plistPath" HockeyAppId        string "$hockeyAppId"
+
+    # Set "DockerBuildType" value in Info.plist.
+    PlistEnforceValue "$plistPath" DockerBuildType    string "$buildType"
+
+    # Set build number for the main app
+    PlistEnforceValue "$plistPath" CFBundleVersion string "$CIRCLE_BUILD_NUM"
+
+    if [[ "$buildType" = 'stable' ]]; then
+      ASSETSPATH=$(pwd)/../src/docker-app/docker/docker/Assets.xcassets
+      mv $ASSETSPATH/AppIcon.appiconset $ASSETSPATH/AppIconBeta.appiconset
+      mv $ASSETSPATH/AppIconStable.appiconset $ASSETSPATH/AppIcon.appiconset
+      HELPERASSETSPATH=$(pwd)/../src/docker-app/docker/docker_helper/Assets.xcassets
+      mv $HELPERASSETSPATH/AppIcon.appiconset $HELPERASSETSPATH/AppIconBeta.appiconset
+      mv $HELPERASSETSPATH/AppIconStable.appiconset $HELPERASSETSPATH/AppIcon.appiconset
+    fi
+  fi
+}
+
+PostBuildOSX ()
+{
+  local buildDirectory=$1
+
+  LogImportant "PostBuild OSX for $buildDirectory"
+  if [ ! -d $buildDirectory ]; then
+    LogError "Directory does not exist!"
+  fi
+  local productAppBundle=${productName}.app
+  local productAppBundlePath=${BUILD_FOLDER_PATH}/${productAppBundle}
+  local PRODUCTS="$MAC_FOLDER_PATH/src/docker-app/build/Build/Products"
+  if [ ! -d "$PRODUCTS" ]; then
+    # On my machine the build artifacts are in docker-app/docker/build, not docker-app/build
+    PRODUCTS="$MAC_FOLDER_PATH/src/docker-app/docker/build/Build/Products"
+  fi
+  LogImportant "Copying built app to \"$BUILD_FOLDER_PATH\""
+  ExecuteOrFail "rsync -valK --delete \"$PRODUCTS/Release/Docker.app\" \"$BUILD_FOLDER_PATH\""
+  LogImportant "Copying app debug symbols to \"$BUILD_FOLDER_PATH\""
+  ExecuteOrFail "rsync -valK --delete \"$PRODUCTS/Release/Docker.app.dSYM\" \"$BUILD_FOLDER_PATH\""
+}

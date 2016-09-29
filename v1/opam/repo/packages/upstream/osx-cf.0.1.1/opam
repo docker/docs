@@ -1,0 +1,43 @@
+opam-version: "1.2"
+maintainer: "sheets@alum.mit.edu"
+authors: ["David Sheets" "Thomas Gazagnaire"]
+homepage: "https://github.com/dsheets/ocaml-osx-cf"
+bug-reports: "https://github.com/dsheets/ocaml-osx-cf/issues"
+license: "ISC"
+doc: "https://dsheets.github.io/ocaml-osx-cf/"
+dev-repo: "https://github.com/dsheets/ocaml-osx-cf.git"
+build: [
+  "ocaml"
+  "pkg/pkg.ml"
+  "build"
+  "--tests"
+  "false"
+  "--pinned"
+  pinned
+  "--with-lwt"
+  lwt:installed
+]
+build-test: [
+  [
+    "ocaml"
+    "pkg/pkg.ml"
+    "build"
+    "--tests"
+    "true"
+    "--pinned"
+    pinned
+    "--with-lwt"
+    lwt:installed
+  ]
+  ["ocaml" "pkg/pkg.ml" "test"]
+]
+depends: [
+  "ocamlfind" {build}
+  "topkg" {build & >= "0.7.4"}
+  "alcotest" {test}
+  "base-bytes"
+  "ctypes" {>= "0.4.0"}
+  "ctypes-foreign"
+]
+depopts: ["lwt" "base-threads"]
+available: [os = "darwin"]

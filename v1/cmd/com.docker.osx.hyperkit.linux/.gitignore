@@ -1,0 +1,5 @@
+com.docker.osx.hyperkit.linux
+_build
+buildtime.go
+buildtime.go.today
+buildtime.sha

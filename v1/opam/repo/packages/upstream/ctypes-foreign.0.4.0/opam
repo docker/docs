@@ -1,0 +1,20 @@
+opam-version: "1.2"
+version: "0.4.0"
+maintainer: "yallop@gmail.com"
+author: "yallop@gmail.com"
+homepage: "https://github.com/ocamllabs/ocaml-ctypes"
+dev-repo: "http://github.com/ocamllabs/ocaml-ctypes.git"
+bug-reports: "http://github.com/ocamllabs/ocaml-ctypes/issues"
+depexts: [
+  [ ["debian"] [ "libffi-dev"] ]   
+  [ ["ubuntu"] [ "libffi-dev" ] ]
+  [ ["osx" "homebrew"] ["libffi"] ]
+  [ ["centos"] ["libffi-devel"] ]
+  [ ["oraclelinux"] ["libffi-devel"] ]
+  [ ["fedora"] ["libffi-devel"] ]
+  [ ["alpine"] ["libffi-dev"] ]
+ ]
+tags: ["org:ocamllabs" "org:mirage"]
+post-messages: [
+  "This package requires libffi on your system" {failure}
+]

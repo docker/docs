@@ -1,0 +1,23 @@
+opam-version: "1.2"
+maintainer: "dave@recoil.org"
+authors: [ "David Scott" ]
+license: "ISC"
+homepage: "https://github.com/mirage/ocaml-asl"
+dev-repo: "https://github.com/mirage/ocaml-asl.git"
+bug-reports: "https://github.com/mirage/ocaml-asl/issues"
+
+build: [
+  [make "PREFIX=%{prefix}%"]
+]
+
+install: [make "PREFIX=%{prefix}%" "install"]
+
+remove: [["ocamlfind" "remove" "asl"]]
+
+depends: [
+  "result"
+  "logs"
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+]
+build-doc: ["ocaml" "setup.ml" "-doc"]

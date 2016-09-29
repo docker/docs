@@ -1,0 +1,16 @@
+opam-version: "1.2"
+maintainer:   ["anil@recoil.org" "thomas@gazagnaire.org"]
+authors:      "The MirageOS team"
+homepage:     "https://github.com/mirage/mirage"
+bug-reports:  "https://github.com/mirage/mirage/issues/"
+dev-repo:     "https://github.com/mirage/mirage.git"
+tags:         ["org:mirage" "org:xapi-project"]
+
+depends: [
+  "ocamlfind"
+  "lwt"
+  "cstruct" {>="1.4.0"}
+  "io-page" {>="1.4.0"}
+  "ipaddr"
+  "mirage-types" {>="2.8.0"}
+]

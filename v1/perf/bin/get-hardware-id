@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Discover the hardware id
+
+if [ "x$PINATA_PERF_HWID" != "x" ] ; then
+    echo ${PINATA_PERF_HWID}
+else
+    system_profiler SPHardwareDataType | grep "Hardware UUID:" | cut -f 2 -d ":" | xargs
+fi

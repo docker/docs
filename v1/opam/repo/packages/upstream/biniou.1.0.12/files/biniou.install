@@ -1,0 +1,4 @@
+bin: [
+  "?bdump.byte"   {"bdump"}
+  "?bdump.native" {"bdump"}
+]

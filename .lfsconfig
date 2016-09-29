@@ -1,0 +1,3 @@
+[lfs]
+	url = git@github.com:docker/pinata
+	concurrenttransfers = 8

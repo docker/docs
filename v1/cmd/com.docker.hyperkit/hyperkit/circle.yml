@@ -1,0 +1,17 @@
+general:
+  artifacts:
+    - build/com.docker.hyperkit
+    - build/com.docker.hyperkit.sym
+machine:
+  xcode:
+    version: "7.3"
+test:
+  override:
+    - brew install opam
+    - opam init --yes
+    - opam pin add qcow-format git://github.com/mirage/ocaml-qcow#master --yes
+    - opam pin add mirage-block-unix git://github.com/mirage/mirage-block-unix#master --yes
+    - opam install --yes uri qcow-format ocamlfind
+    - make clean
+    - eval `opam config env` && make all
+    - make test

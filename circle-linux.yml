@@ -1,0 +1,27 @@
+# Linux specific circleci.yml
+# This build process only build the docs.
+# A process mirrors this repo in another repo for every commit, and cp circle-linux.yml to circle.yml.
+# This ensures that a Linux build happens in circleci for every commit.
+
+general:
+  build_dir: v1
+  artifacts:
+    - "docs/public"
+    - "mac/build"
+machine:
+  services:
+    - docker
+dependencies:
+  cache_directories:
+    - "~/docker"
+  override:
+    - make -C docs DOCS_EXPORT=public docs-deploy
+    - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
+    - mac/make -cblvy
+    - mkdir -p ~/docker; mkdir -p ~/pinata/v1/mac/build
+    - docker save pinata/docker-builder > ~/docker/image.tar
+deployment:
+  master:
+    branch: master
+    commands:
+      - make -C docs DOCS_EXPORT=public docs-deploy

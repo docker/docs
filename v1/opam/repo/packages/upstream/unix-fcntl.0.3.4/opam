@@ -1,0 +1,22 @@
+opam-version: "1.2"
+maintainer: "sheets@alum.mit.edu"
+authors: ["David Sheets" "Jeremy Yallop"]
+homepage: "https://github.com/dsheets/ocaml-unix-fcntl"
+bug-reports: "https://github.com/dsheets/ocaml-unix-fcntl/issues"
+license: "ISC"
+tags: ["unix" "posix" "fcntl" "syscall" "open"]
+dev-repo: "https://github.com/dsheets/ocaml-unix-fcntl.git"
+build: [make "build"]
+install: [make "install"]
+remove: [make "uninstall"]
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "ctypes" {>= "0.4.0"}
+  "unix-errno" {>= "0.5.0"}
+  "alcotest" {test}
+  "unix-type-representations"
+]
+depopts: ["lwt" "base-threads"]
+conflicts: ["lwt" {< "2.4.7"}]
+available: [ocaml-version >= "4.02.0"]

@@ -1,0 +1,29 @@
+opam-version: "1.2"
+maintainer:   "anil@recoil.org"
+homepage:     "https://github.com/mirage/io-page"
+dev-repo:     "https://github.com/mirage/io-page.git"
+bug-reports:  "https://github.com/mirage/io-page/issues"
+authors: [
+  "Anil Madhavapeddy"
+  "Dave Scott"
+  "Thomas Gazagnaire"
+]
+tags: ["org:mirage"]
+build: [
+  [ "./configure" "--prefix" prefix
+     "--%{mirage-xen-ocaml:enable}%-xen"
+  ]
+  [make]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "io-page"]
+depends: [
+  "ocamlfind"
+  "cstruct" {>= "1.1.0"}
+  "ounit" {test}
+  "ocamlbuild" {build}
+]
+depopts: [
+  "mirage-xen-ocaml"
+]
+available: [ocaml-version >= "4.00.0"]

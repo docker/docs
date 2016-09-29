@@ -1,0 +1,7 @@
+*.o
+*.cmi
+*.cmx
+*.annot
+pinata
+src/version.ml
+_build

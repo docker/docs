@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+    <dependencies>
+        <deployment version="1070" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="BITFeedbackWindowController">
+            <connections>
+                <outlet property="composeAttacchmentsArrayController" destination="qlE-az-7zs" id="eHb-7l-lvM"/>
+                <outlet property="contactInfoTextField" destination="77" id="KCn-wy-JQO"/>
+                <outlet property="feedbackAttachmentsScrollView" destination="7No-Zb-2jx" id="J4I-jl-EDL"/>
+                <outlet property="feedbackAttachmentsTableView" destination="vi6-mo-5xv" id="biG-nM-sgF"/>
+                <outlet property="feedbackComposeBackgroundView" destination="5DI-pf-otK" id="amy-rC-HBu"/>
+                <outlet property="feedbackEmptyAppImageView" destination="lQN-lj-bAd" id="NHe-vk-K5r"/>
+                <outlet property="feedbackEmptyView" destination="170" id="187"/>
+                <outlet property="feedbackListBackgroundView" destination="33" id="5QP-cE-kkU"/>
+                <outlet property="feedbackScrollView" destination="12" id="186"/>
+                <outlet property="feedbackTableView" destination="13" id="23"/>
+                <outlet property="feedbackView" destination="11" id="22"/>
+                <outlet property="horizontalLine" destination="vSI-0N-oyJ" id="psD-Ae-5c3"/>
+                <outlet property="mainBackgroundView" destination="2" id="E7U-Ce-xSl"/>
+                <outlet property="messageTextField" destination="159" id="169"/>
+                <outlet property="sendMessageButton" destination="109" id="121"/>
+                <outlet property="statusBar" destination="41" id="CFQ-tR-QkF"/>
+                <outlet property="statusBarComposeView" destination="153" id="168"/>
+                <outlet property="statusBarDefaultView" destination="152" id="167"/>
+                <outlet property="statusBarLoadingIndicator" destination="48" id="49"/>
+                <outlet property="statusBarRefreshButton" destination="46" id="51"/>
+                <outlet property="statusBarTextField" destination="44" id="50"/>
+                <outlet property="userDataBoxView" destination="87" id="YfO-OV-dGh"/>
+                <outlet property="userDataContinueButton" destination="76" id="92"/>
+                <outlet property="userDataView" destination="10" id="21"/>
+                <outlet property="userEmailTextField" destination="88" id="91"/>
+                <outlet property="userNameTextField" destination="72" id="90"/>
+                <outlet property="window" destination="1" id="3"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Feedback" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" frameAutosaveName="BITFeedbackWindow" animationBehavior="default" id="1">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <rect key="contentRect" x="196" y="240" width="600" height="600"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <value key="minSize" type="size" width="500" height="500"/>
+            <view key="contentView" id="2" customClass="BITSDKColoredView">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <customView hidden="YES" id="10" userLabel="User Data">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <customView id="I6Q-78-ucY" userLabel="Centered">
+                                <rect key="frame" x="100" y="61" width="400" height="479"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="tEi-39-9vV">
+                                        <rect key="frame" x="100" y="269" width="200" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSApplicationIcon" id="1pH-f4-8Eb"/>
+                                    </imageView>
+                                    <customView focusRingType="none" id="87" userLabel="Input Box" customClass="BITSDKColoredView">
+                                        <rect key="frame" x="11" y="10" width="378" height="229"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <textField verticalHuggingPriority="750" id="72">
+                                                <rect key="frame" x="37" y="126" width="304" height="38"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="Name" drawsBackground="YES" usesSingleLineMode="YES" id="83" customClass="BITSDKTextFieldCell">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="horizontalInset">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </textFieldCell>
+                                                <connections>
+                                                    <binding destination="-2" name="value" keyPath="self.userName" id="147">
+                                                        <dictionary key="options">
+                                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                            <string key="NSMultipleValuesPlaceholder">Name</string>
+                                                            <string key="NSNoSelectionPlaceholder">Name</string>
+                                                            <string key="NSNotApplicablePlaceholder">Name</string>
+                                                            <string key="NSNullPlaceholder">Name</string>
+                                                        </dictionary>
+                                                    </binding>
+                                                    <outlet property="nextKeyView" destination="88" id="95"/>
+                                                </connections>
+                                            </textField>
+                                            <textField verticalHuggingPriority="750" id="88">
+                                                <rect key="frame" x="37" y="78" width="304" height="38"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="Email" drawsBackground="YES" usesSingleLineMode="YES" id="89" customClass="BITSDKTextFieldCell">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="horizontalInset">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </textFieldCell>
+                                                <connections>
+                                                    <binding destination="-2" name="value" keyPath="self.userEmail" id="145">
+                                                        <dictionary key="options">
+                                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                            <string key="NSMultipleValuesPlaceholder">Email</string>
+                                                            <string key="NSNoSelectionPlaceholder">Email</string>
+                                                            <string key="NSNotApplicablePlaceholder">Email</string>
+                                                            <string key="NSNullPlaceholder">Email</string>
+                                                        </dictionary>
+                                                    </binding>
+                                                    <outlet property="nextKeyView" destination="76" id="96"/>
+                                                </connections>
+                                            </textField>
+                                            <button id="76" userLabel="Continue Button">
+                                                <rect key="frame" x="140" y="20" width="98" height="38"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="square" title="Continue" bezelStyle="shadowlessSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="79">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="validateUserData:" target="-2" id="94"/>
+                                                    <binding destination="-2" name="enabled" keyPath="self.canContinueUserDataView" id="106"/>
+                                                    <outlet property="nextKeyView" destination="72" id="86"/>
+                                                </connections>
+                                            </button>
+                                            <textField verticalHuggingPriority="750" id="77">
+                                                <rect key="frame" x="49" y="172" width="281" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please provide your contact information" id="78">
+                                                    <font key="font" metaFont="systemBold"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                    </customView>
+                                </subviews>
+                            </customView>
+                        </subviews>
+                    </customView>
+                    <customView id="11" userLabel="Feedback">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <splitView autosaveName="BITFeedbackSplitView" dividerStyle="thin" id="32">
+                                <rect key="frame" x="0.0" y="59" width="600" height="541"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <customView id="33" userLabel="List" customClass="BITSDKColoredView">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="443"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <subviews>
+                                            <scrollView hidden="YES" autohidesScrollers="YES" horizontalLineScroll="100" horizontalPageScroll="0.0" verticalLineScroll="100" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="12">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="443"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <clipView key="contentView" id="NzQ-gS-0Jp">
+                                                    <rect key="frame" x="1" y="1" width="598" height="441"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="100" rowSizeStyle="automatic" viewBased="YES" id="13">
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <color key="backgroundColor" red="0.92549026012420654" green="0.94117653369903564" blue="0.95294123888015747" alpha="1" colorSpace="deviceRGB"/>
+                                                            <color key="gridColor" red="0.82352948188781738" green="0.83921575546264648" blue="0.84705889225006104" alpha="1" colorSpace="deviceRGB"/>
+                                                            <tableColumns>
+                                                                <tableColumn identifier="message" editable="NO" width="598" minWidth="40" maxWidth="100000" id="17">
+                                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                                        <font key="font" metaFont="smallSystem"/>
+                                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </tableHeaderCell>
+                                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="20">
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
+                                                                    <prototypeCellViews>
+                                                                        <tableCellView id="6OJ-A4-zuf" customClass="BITFeedbackMessageCellView">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="598" height="100"/>
+                                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                            <subviews>
+                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="GEY-bx-dOl" userLabel="Message">
+                                                                                    <rect key="frame" x="10" y="34" width="580" height="46"/>
+                                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Message" id="Vbq-P6-t56">
+                                                                                        <font key="font" metaFont="system"/>
+                                                                                        <color key="textColor" red="0.25490197539329529" green="0.28627452254295349" blue="0.30196079611778259" alpha="1" colorSpace="deviceRGB"/>
+                                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                        <connections>
+                                                                                            <binding destination="6OJ-A4-zuf" name="value" keyPath="objectValue.text" id="g9G-dR-WfQ"/>
+                                                                                        </connections>
+                                                                                    </textFieldCell>
+                                                                                    <connections>
+                                                                                        <binding destination="6OJ-A4-zuf" name="value" keyPath="objectValue.text" id="v03-A8-7kg"/>
+                                                                                    </connections>
+                                                                                </textField>
+                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="cVx-LJ-IdJ" userLabel="Date &amp; Status">
+                                                                                    <rect key="frame" x="10" y="18" width="580" height="17"/>
+                                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Date" id="gva-wA-fwJ">
+                                                                                        <font key="font" metaFont="smallSystem"/>
+                                                                                        <color key="textColor" red="0.60784316062927246" green="0.66274511814117432" blue="0.70196080207824707" alpha="1" colorSpace="deviceRGB"/>
+                                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                    </textFieldCell>
+                                                                                    <connections>
+                                                                                        <binding destination="6OJ-A4-zuf" name="value" keyPath="objectValue" id="w4B-fr-Prh">
+                                                                                            <dictionary key="options">
+                                                                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                                                                <string key="NSValueTransformerName">BITFeedbackMessageDateValueTransformer</string>
+                                                                                            </dictionary>
+                                                                                        </binding>
+                                                                                    </connections>
+                                                                                </textField>
+                                                                                <customView id="Vrx-tJ-lyK" customClass="BITSDKColoredView">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="598" height="1"/>
+                                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                                                    <userDefinedRuntimeAttributes>
+                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="viewBackgroundColor">
+                                                                                            <color key="value" red="0.82352948188781738" green="0.83921575546264648" blue="0.84705889225006104" alpha="1" colorSpace="deviceRGB"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                    </userDefinedRuntimeAttributes>
+                                                                                </customView>
+                                                                            </subviews>
+                                                                            <connections>
+                                                                                <outlet property="bitDelegate" destination="-2" id="cUP-bs-qpR"/>
+                                                                            </connections>
+                                                                        </tableCellView>
+                                                                    </prototypeCellViews>
+                                                                </tableColumn>
+                                                            </tableColumns>
+                                                            <connections>
+                                                                <outlet property="dataSource" destination="-2" id="35"/>
+                                                                <outlet property="delegate" destination="-2" id="36"/>
+                                                            </connections>
+                                                        </tableView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </clipView>
+                                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="14">
+                                                    <rect key="frame" x="-100" y="-100" width="598" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </scroller>
+                                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="16">
+                                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </scroller>
+                                            </scrollView>
+                                            <customView id="170" userLabel="Empty Message">
+                                                <rect key="frame" x="100" y="22" width="400" height="400"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="lQN-lj-bAd">
+                                                        <rect key="frame" x="100" y="100" width="200" height="200"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSApplicationIcon" id="8PH-ko-gqE"/>
+                                                    </imageView>
+                                                </subviews>
+                                            </customView>
+                                        </subviews>
+                                    </customView>
+                                    <customView id="34" userLabel="Compose">
+                                        <rect key="frame" x="0.0" y="444" width="600" height="97"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <subviews>
+                                            <customView id="5DI-pf-otK" userLabel="Background" customClass="BITSDKColoredView">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="97"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="158">
+                                                        <rect key="frame" x="10" y="10" width="580" height="77"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <clipView key="contentView" id="M3a-n4-XPv">
+                                                            <rect key="frame" x="0.0" y="0.0" width="580" height="77"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <textView importsGraphics="NO" richText="NO" continuousSpellChecking="YES" allowsUndo="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="159" customClass="BITSDKTextView">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="580" height="77"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <size key="minSize" width="580" height="77"/>
+                                                                    <size key="maxSize" width="600" height="10000000"/>
+                                                                    <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <size key="minSize" width="580" height="77"/>
+                                                                    <size key="maxSize" width="600" height="10000000"/>
+                                                                    <connections>
+                                                                        <binding destination="-2" name="attributedString" keyPath="self.messageText" id="166">
+                                                                            <dictionary key="options">
+                                                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                                            </dictionary>
+                                                                        </binding>
+                                                                    </connections>
+                                                                </textView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </clipView>
+                                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="160">
+                                                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </scroller>
+                                                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="161">
+                                                            <rect key="frame" x="564" y="0.0" width="16" height="77"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </scroller>
+                                                    </scrollView>
+                                                    <scrollView hidden="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="55" horizontalPageScroll="10" verticalLineScroll="55" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="7No-Zb-2jx" userLabel="Attachments">
+                                                        <rect key="frame" x="530" y="0.0" width="70" height="97"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
+                                                        <clipView key="contentView" id="KwQ-8c-b4u">
+                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="97"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="55" rowSizeStyle="automatic" viewBased="YES" id="vi6-mo-5xv">
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                                    <tableColumns>
+                                                                        <tableColumn editable="NO" width="70" minWidth="40" maxWidth="1000" id="6Xa-8h-UXK">
+                                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                                                <font key="font" metaFont="smallSystem"/>
+                                                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            </tableHeaderCell>
+                                                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Y4G-bN-BWc">
+                                                                                <font key="font" metaFont="system"/>
+                                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                            </textFieldCell>
+                                                                            <prototypeCellViews>
+                                                                                <tableCellView id="AHq-N8-rmB">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="55"/>
+                                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                                    <subviews>
+                                                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="EUD-XO-ear">
+                                                                                            <rect key="frame" x="13" y="8" width="39" height="39"/>
+                                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="TKu-2x-Qa5"/>
+                                                                                            <connections>
+                                                                                                <binding destination="AHq-N8-rmB" name="toolTip" keyPath="objectValue.originalFilename" id="opG-DZ-Agt"/>
+                                                                                                <binding destination="AHq-N8-rmB" name="value" keyPath="objectValue.thumbnailRepresentation" id="LEC-wx-9Fx"/>
+                                                                                            </connections>
+                                                                                        </imageView>
+                                                                                    </subviews>
+                                                                                    <connections>
+                                                                                        <outlet property="imageView" destination="EUD-XO-ear" id="oS0-XL-eFQ"/>
+                                                                                    </connections>
+                                                                                </tableCellView>
+                                                                            </prototypeCellViews>
+                                                                            <connections>
+                                                                                <binding destination="qlE-az-7zs" name="value" keyPath="arrangedObjects.self" id="qh1-uj-V7n">
+                                                                                    <dictionary key="options">
+                                                                                        <bool key="NSAlwaysPresentsApplicationModalAlerts" value="YES"/>
+                                                                                        <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                                                    </dictionary>
+                                                                                </binding>
+                                                                            </connections>
+                                                                        </tableColumn>
+                                                                    </tableColumns>
+                                                                    <connections>
+                                                                        <outlet property="dataSource" destination="-2" id="AC1-lE-rjK"/>
+                                                                    </connections>
+                                                                </tableView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.98431378602981567" green="0.98823535442352295" blue="0.99215692281723022" alpha="1" colorSpace="deviceRGB"/>
+                                                        </clipView>
+                                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ieQ-6k-nkZ">
+                                                            <rect key="frame" x="-100" y="-100" width="70" height="16"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </scroller>
+                                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="mNG-98-B4q">
+                                                            <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </scroller>
+                                                    </scrollView>
+                                                </subviews>
+                                            </customView>
+                                        </subviews>
+                                    </customView>
+                                </subviews>
+                                <holdingPriorities>
+                                    <real value="251"/>
+                                    <real value="1"/>
+                                </holdingPriorities>
+                                <connections>
+                                    <outlet property="delegate" destination="-2" id="150"/>
+                                </connections>
+                            </splitView>
+                            <customView id="41" userLabel="Status Bar" customClass="BITSDKColoredView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <customView id="152" userLabel="Default">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <progressIndicator hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="48">
+                                                <rect key="frame" x="20" y="23" width="16" height="16"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </progressIndicator>
+                                            <textField verticalHuggingPriority="750" id="44">
+                                                <rect key="frame" x="95" y="18" width="410" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" id="45">
+                                                    <font key="font" metaFont="smallSystem"/>
+                                                    <color key="textColor" red="0.73333334922790527" green="0.76470595598220825" blue="0.78039222955703735" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="backgroundColor" red="0.73333334922790527" green="0.76470595598220825" blue="0.78039222955703735" alpha="1" colorSpace="deviceRGB"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <button id="46">
+                                                <rect key="frame" x="8" y="14" width="39" height="32"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" inset="2" id="47">
+                                                    <behavior key="behavior" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="reloadList:" target="-2" id="55"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </customView>
+                                    <customView id="153" userLabel="Compose">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <button id="109" userLabel="Send Button">
+                                                <rect key="frame" x="505" y="13" width="78" height="33"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                                <buttonCell key="cell" type="square" title="Send" bezelStyle="shadowlessSquare" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="110">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="sendMessage:" target="-2" id="149"/>
+                                                    <binding destination="-2" name="enabled" keyPath="self.canSendMessage" id="127"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </customView>
+                                </subviews>
+                            </customView>
+                            <customView id="vSI-0N-oyJ" userLabel="Horizontal line" customClass="BITSDKColoredView">
+                                <rect key="frame" x="0.0" y="58" width="600" height="1"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </customView>
+                        </subviews>
+                    </customView>
+                </subviews>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="4"/>
+                <outlet property="initialFirstResponder" destination="72" id="97"/>
+            </connections>
+        </window>
+        <arrayController id="qlE-az-7zs" userLabel="Compose Attachments Array Controller"/>
+        <userDefaultsController representsSharedInstance="YES" id="162"/>
+    </objects>
+    <resources>
+        <image name="NSApplicationIcon" width="128" height="128"/>
+        <image name="NSRefreshTemplate" width="11" height="15"/>
+    </resources>
+</document>

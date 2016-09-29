@@ -1,0 +1,4 @@
+docker ps
+docker info
+docker version
+docker images

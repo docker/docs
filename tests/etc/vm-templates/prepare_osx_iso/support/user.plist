@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>authentication_authority</key>
+	<array>
+		<string>;ShadowHash;</string>
+	</array>
+	<key>generateduid</key>
+	<array>
+		<string>11112222-3333-4444-AAAA-BBBBCCCCDDDD</string>
+	</array>
+	<key>gid</key>
+	<array>
+		<string>20</string>
+	</array>
+	<key>home</key>
+	<array>
+		<string>/Users/${USER}</string>
+	</array>
+	<key>jpegphoto</key>
+	<array>
+		<data>
+			${BASE64_IMAGE}
+		</data>
+	</array>
+	<key>name</key>
+	<array>
+		<string>${USER}</string>
+	</array>
+	<key>passwd</key>
+	<array>
+		<string>********</string>
+	</array>
+	<key>realname</key>
+	<array>
+		<string>${USER}</string>
+	</array>
+	<key>shell</key>
+	<array>
+		<string>/bin/bash</string>
+	</array>
+	<key>uid</key>
+	<array>
+		<string>501</string>
+	</array>
+</dict>
+</plist>

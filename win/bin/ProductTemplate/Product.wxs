@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <?define ManufacturerName="--MANUFACTURER--" ?>
+  <?define ProductName="--PRODUCTNAME--" ?>
+  <?define ProductVersion="--PRODUCTVERSION--" ?>
+  <?define ProductId="17017A63-0000-0000-0000---HEX12PRODUCTID--" ?>
+  <?define ProductDescription="--PRODUCTDESCRIPTION--" ?>
+  <?define ManufacturerSupportURL="--SUPPORTURL--" ?>
+  <?define WorkingDirectoryId="--WORKINGDIRECTORYID--" ?>
+    <Product Id="$(var.ProductId)" Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.ManufacturerName)" UpgradeCode="6E2F3AC9-FBD2-47AC-BDB9-0D8369694C06">
+        <Package Description="$(var.ProductDescription)" Comments="$(var.ManufacturerName) Installer" InstallerVersion="405" Compressed="yes" InstallScope="perMachine" />
+        <Media Id="1" Cabinet="$(var.ProductName).cab" EmbedCab="yes" />
+		<Property Id="INSTALLDESKTOPSHORTCUT" Value="1"/>
+        <?include FilesList.wxi ?>
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder" Name="PFiles">
+                <Directory Name="$(var.ManufacturerName)" Id="$(var.ManufacturerName)RootDir">
+<!--                     <Directory Name="$(var.ProductName)" Id="$(var.ProductName)RootDir">
+                    </Directory>
+ -->                </Directory>
+            </Directory>
+            <Directory Id="ProgramMenuFolder">
+                <Directory Id="ProgramMenuDir" Name="$(var.ProductName)">
+					<?define WorkingDirectory="[$(var.ManufacturerName)RootDir]\$(var.ProductName)" ?>
+
+                    <Component Id="StartMenuShortcuts" Guid="C5E42F95-E21B-4B47-B7B0-AFB5FC802961">
+                        <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+                        <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\$(var.ProductName)" Type="string" Value="" />
+                        <Shortcut Id="UninstallProduct" Name="Uninstall $(var.ProductName)" Description="Uninstalls the application" Target="[System64Folder]msiexec.exe" Arguments="/x [ProductCode]" />
+                        <Shortcut Id="$(var.ProductName)Shortcut" Name="$(var.ProductName)" Target="[$(var.ManufacturerName)RootDir]\$(var.ProductName)\$(var.ProductName).exe" Arguments="-fs" WorkingDirectory="$(var.WorkingDirectoryId)" />
+                        <Shortcut Id="$(var.ProductName)ShortcutWindowed" Name="$(var.ProductName) Windowed" Target="[$(var.ManufacturerName)RootDir]\$(var.ProductName)\$(var.ProductName).exe" WorkingDirectory="$(var.WorkingDirectoryId)" />
+                        <Shortcut Id="$(var.ProductName)Keys" Name="$(var.ProductName) Keys" Target="[$(var.ManufacturerName)RootDir]\$(var.ProductName)\$(var.ProductName)Keys.txt" />
+                        <util:InternetShortcut Id="WebsiteShortcut" Name="$(var.ProductName) Online" Target="$(var.ManufacturerSupportURL)" />
+                    </Component>
+                </Directory>
+            </Directory>
+			<Directory Id="DesktopFolder" Name="Desktop"/>
+			<Component Id="DesktopShortcut" Guid="C5E42F95-E21B-4B47-B7B0-AFB5FC802955">
+			<Condition>INSTALLDESKTOPSHORTCUT</Condition>
+				<CreateFolder/>
+				<RegistryKey Root="HKCU" Key="Software\$(var.ManufacturerName)\$(var.ProductName)\Install" Action="createAndRemoveOnUninstall">
+					<RegistryValue Name="DesktopShortcut" Value="1" Type="integer" KeyPath="yes"/>
+				</RegistryKey>
+				<Shortcut Id="DesktopShortcut" Directory="DesktopFolder" Name="$(var.ProductName)"
+								Target="[$(var.ManufacturerName)RootDir]\$(var.ProductName)\$(var.ProductName).exe"
+								Arguments="-fs"
+								WorkingDirectory="$(var.WorkingDirectoryId)" />
+			</Component>
+<!--
+                    <Component Id="DesktopShortcuts" Guid="C5E42F95-E21B-4B47-B7B0-AFB5FC802962">
+                        <Shortcut Id="$(var.ProductName)DesktopShortcut" Name="$(var.ProductName)" Target="[$(var.ProductName)RootDir]\$(var.ProductName).exe" Arguments="-fs" WorkingDirectory="[$(var.ProductName)RootDir]" />
+                    </Component>
+					
+					-->
+            </Directory>
+        <Feature Id="DefaultFeature" Title="$(var.ProductName)" Level="1">
+            <ComponentRef Id="StartMenuShortcuts" />
+            <ComponentRef Id="DesktopShortcut" />
+            <ComponentGroupRef Id="group_$(var.ProductName)" />
+        </Feature>
+        <?include Include\VC120_CRT.wxi ?>
+<!--         <?include Include\DirectX9.0c.wxi ?> -->
+        <?include Include\OpenAL.wxi ?>
+        <!-- <?include ..\Include\OpenNI.wxi ?> -->
+        <UI>
+<!--             <?include Include\DirectX9.0c_UI.wxi ?> -->
+            <?include Include\OpenAL_UI.wxi ?>
+            <!-- <?include ..\Include\OpenNI_UI.wxi ?> -->
+            <UIRef Id="WixUI_Minimal" />
+			<!--
+	        <Publish Dialog="ExitDialog" 
+				Control="Finish" 
+				Event="DoAction" 
+				Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+				-->
+        </UI>
+			<!--
+		<Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch $(var.ProductName)" />
+	    <Property Id="WixShellExecTarget" Value="file_Froggle_2" />
+		<CustomAction Id="LaunchApplication" 
+			BinaryKey="WixCA" 
+			DllEntry="WixShellExec"
+			Impersonate="yes" />
+				-->
+    </Product>
+</Wix>

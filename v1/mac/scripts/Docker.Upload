@@ -1,0 +1,222 @@
+#!/usr/bin/env bash
+
+################################################################################
+# Docker.Upload created on 2015-07-01 by michaK                                #
+################################################################################
+#                       ____             __                                    #
+#                      / __ \____  _____/ /_____  _____                        #
+#                     / / / / __ \/ ___/ //_/ _ \/ ___/                        #
+#                    / /_/ / /_/ / /__/ ,< /  __/ /                            #
+#                   /_____/\____/\___/_/|_|\___/_/                             #
+#                                                                              #
+################################################################################
+#                     Upload Tools                                             #
+################################################################################
+
+releaseNotesFilename="/tmp/hockeyapp.upload/notes.txt"
+
+Upload ()
+{
+  LogImportant "Uploading Docker for OSX"
+  dsymArtifact="${BUILD_FOLDER_PATH}/Docker.app.dSYM.zip"
+  case $uploadFormat in
+    'dmg')
+      LogImportant "Uploading as dmg"
+      buildArtifact="${BUILD_FOLDER_PATH}/Docker.dmg"
+      ;;
+    'app')
+      LogImportant "Uploading as zipped app"
+      buildArtifact="${BUILD_FOLDER_PATH}/Docker.app"
+      local parentDirectory=$(dirname $buildArtifact)
+      local directoryName=$(basename $buildArtifact)
+      Log "Parent Directory: $parentDirectory"
+      LogImportant "Compressing $buildArtifact"
+      if [ ! -e "$buildArtifact" ]; then
+        LogError "Could not find \"$buildArtifact\""
+      fi
+      local directorySize=$(du -shH $buildArtifact | cut -f1)
+      LogImportant "Compressing a $directorySize application"
+      local zipTmpFolder="/tmp/hockeyapp.upload"
+      local zipFilename="$zipTmpFolder/$productName.$uploadFormat.zip"
+      Execute "rm -f $zipFilename"
+      Execute "mkdir -p $zipTmpFolder"
+      ExecuteOrFail "cd $parentDirectory; zip -y -3 -r $zipFilename ./$directoryName > /dev/null; cd -"
+      buildArtifact="$zipFilename"
+      ;;
+    *)
+      LogError "Invalid upload format $uploadFormat. Valid values are \"dmg\" or \"zip\""
+      ;;
+  esac
+
+  if [ -z $CI ]; then
+    LogError "The environment variable CI is not set. Uploads are only allowed from ci"
+  fi
+  SetUploadChannel
+  LogImportant "DEBUG ===> Circle Tag is: $CIRCLE_TAG - Branch is: $CIRCLE_BRANCH - PR is: $CI_PULL_REQUEST - Final channel: $updateChannel"
+
+  ExtractReleaseNotes
+  DockerAppUploadNewVersion "$buildArtifact" "$releaseNotesFilename" "$dsymArtifact"
+
+  #### TEMPORARY HockeyApp SETUP ####
+  case $updateChannel in
+      stable)
+          hockeyAppId=$hockeyAppOSXStableId
+          uploadStatus=1
+          ;;
+      beta)
+          hockeyAppId=$hockeyAppOSXAlphaId
+          uploadStatus=1
+          ;;
+      master)
+          hockeyAppId=$hockeyAppOSXMasterId
+          uploadStatus=2
+          ;;
+      *)
+          hockeyAppId=$hockeyAppOSXTestId
+          uploadStatus=2
+          ;;
+  esac
+
+  local apiToken="$HOCKEYAPP_TOKEN"
+  LogImportant "Upload application"
+  if [ -z "$apiToken" ]; then
+     LogError "The environment variable \$HOCKEYAPP_TOKEN \
+               is not set, check CircleCI configuration."
+  fi
+  HockeyAppUploadNewVersion "$buildArtifact" "$dsymArtifact" "alpha" "$releaseNotesFilename" "markdown" "auto" "true" "$apiToken" "$hockeyAppId" "$MAC_FOLDER_PATH" "$uploadStatus"
+}
+
+ExtractReleaseNotes ()
+{
+  cd "${MAC_FOLDER_PATH}"
+
+  if [ ! -f "$changeLogPath" ]; then
+    LogError "CHANGELOG file missing, pwd = $(pwd)"
+  fi
+  LogImportant "local CHANGELOG versions:"
+  cat "$changeLogPath" | grep '###'
+  Execute "mkdir -p /tmp/hockeyapp.upload" # using a fixed temp dir to ease debugging for now
+  cat "$changeLogPath" | grep -A 50 "### .* " | grep -m 2 -A 48 '###' | grep -vE '###' > "$releaseNotesFilename"
+  if [ $? -ne 0 ]; then
+    LogError "No Changelog entry"
+  fi
+  LogImportant "CHANGELOG for latest version:"
+  cat "$releaseNotesFilename"
+
+}
+
+DockerAppUploadNewVersion() {
+  local filename=$1
+  local notesPath=$2
+  local dsymArtifact=$3
+
+  Log "Uploading Docker app"
+  Log "Filename:\t$filename"
+  ExecuteOrFail "stat $filename"
+
+  # Get version from Info.plist
+  local plistPath="$MAC_FOLDER_PATH/src/docker-app/docker/docker/Info.plist"
+  local appVersion=$(PlistGetValue "$plistPath" "CFBundleShortVersionString")
+  local machineVersion=$(PlistGetValue "$plistPath" "CFBundleVersion")
+  if [ -z "$appVersion" ]; then
+   LogError "App version can't be retrieved from Info.plist"
+  fi
+  # appVersion without channel label 1.10.2-beta1-dev => 1.10.2-beta1
+  ## Add git-commit instead of Circle Build Num
+  # appVersion=${appVersion%-*}
+  # appVersion without channel label or human version 1.10.2-beta1-dev => 1.10.2
+  appCleanVersion=$( cut -d '-' -f 1 <<< "$appVersion" )
+
+  case $updateChannel in
+     stable)
+          ## No auto-publish of Stable
+          action="--prod upload"
+          ;;
+     beta)
+          ## No auto-publish of Beta until GA
+          action="--prod upload"
+          ;;
+      *)
+          action="--human $appVersion publish"
+          ;;
+  esac
+  Log "Pushing to S3: --channel ${updateChannel} --arch mac --build $appCleanVersion.$machineVersion $action $filename $notesPath"
+  docker-release --channel "${updateChannel}" --arch mac --build $appCleanVersion.$machineVersion $action $filename $notesPath $dsymArtifact
+}
+
+
+#### Adding HockeyApp back-in TEMP ####
+
+HockeyAppUploadNewVersion ()
+{
+  local filename=$1
+  local dsymArtifact=$2
+  local releaseType=$3
+  local notesPath=$4
+  local notesType=$5
+  local submit=$6
+  local download=$7
+  local apiToken=$8
+  local appId=$9
+  local repoPath=$10
+  local uploadStatus=${11}
+
+  Log "Filename:\t$filename"
+  ExecuteOrFail "stat $filename"
+  Log "dSYM:\t$dsymArtifact"
+  ExecuteOrFail "stat $dsymArtifact"
+  Log "Release Type:\t$releaseType"
+  Log "Notes Path:\t$notesPath"
+  ExecuteOrFail "stat $notesPath"
+  Log "Notes Type:\t$notesType"
+  Log "Submit:\t\t$submit"
+  Log "Download:\t$download"
+  # Log "Api Token:\t$apiToken"
+  Log "App Id:\t\t$appId"
+  Log "Repo Path:\t$repoPath"
+  Log "Upload status:\t$uploadStatus"
+
+  local additionalParams=''
+  if [ -z $CI ]; then
+    additionalParams=''
+  else
+    additionalParams="$additionalParams -build_server_url=\"https://circleci.com/gh/docker/pinata/\""
+  fi
+  local fileSize=$(du -shH $filename | cut -f1)
+  LogImportant "Uploading $filename ($fileSize)"
+
+  # Get version from Info.plist
+  local plistPath="$MAC_FOLDER_PATH/src/docker-app/docker/docker/Info.plist"
+  local appVersion=$(PlistGetValue "$plistPath" "CFBundleShortVersionString")
+  if [ -z "$appVersion" ]; then
+    LogError "App version can't be retrieved from Info.plist"
+  fi
+
+  LogImportant "Creating version $appVersion ($CIRCLE_BUILD_NUM)"
+
+  local response=$(curl -fsSL \
+  -F "bundle_short_version=$appVersion" \
+  -F "bundle_version=$CIRCLE_BUILD_NUM" \
+  -H "X-HockeyAppToken: $HOCKEYAPP_TOKEN" \
+  $hockeyAppApiUrl/$appId/app_versions/new)
+
+  if [ "$response" = "" ]; then
+    LogError "Invalid response from hockey app trying to create a new version"
+  fi
+  local newVersionID=$(echo "$response" | jq .id)
+  Log "Hockey App new version ID: $newVersionID"
+  ExecuteOrFail "curl --verbose -fsSL \
+  -X PUT \
+  -H \"X-HockeyAppToken: $HOCKEYAPP_TOKEN\" \
+  -F \"build_server_url=https://circleci.com/gh/docker/pinata\" \
+  -F \"repository_url=https://github.com/docker/pinata\" \
+  -F \"ipa=@$filename\" \
+  -F \"dsym=@$dsymArtifact\" \
+  -F \"notes=@$notesPath\" \
+  -F \"notes_type=$notesType\" \
+  -F \"status=$uploadStatus\" \
+  $hockeyAppApiUrl/$appId/app_versions/$newVersionID"
+
+  # fi
+  LogSuccess "Upload Complete"
+}

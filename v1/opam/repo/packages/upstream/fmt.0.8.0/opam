@@ -1,0 +1,29 @@
+opam-version: "1.2"
+maintainer: "Daniel Bünzli <daniel.buenzl i@erratique.ch>"
+authors: ["Daniel Bünzli <daniel.buenzl i@erratique.ch>"]
+homepage: "http://erratique.ch/software/fmt"
+doc: "http://erratique.ch/software/fmt"
+dev-repo: "http://erratique.ch/repos/fmt.git"
+bug-reports: "https://github.com/dbuenzli/fmt/issues"
+tags: [ "string" "format" "pretty-print" "org:erratique" ]
+license: "ISC"
+available: [ ocaml-version >= "4.01.0"]
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "topkg" {build & >= "0.7.5"}
+  "result"
+]
+depopts: [ "base-unix" "cmdliner" ]
+conflicts: [ "cmdliner" {< "0.9.8"} ]
+build: [
+  "ocaml"
+  "pkg/pkg.ml"
+  "build"
+  "--pinned"
+  "%{pinned}%"
+  "--with-base-unix"
+  "%{base-unix:installed}%"
+  "--with-cmdliner"
+  "%{cmdliner:installed}%"
+]

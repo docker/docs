@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Docker</title>
+    <link>https://rink.hockeyapp.net/api/2/apps/d43699ff42651e54a781fa8ef55dc5f2.rss</link>
+    <item>
+      <title>Version 1.11.1.3668</title>
+      <description>&lt;div style='font-size: 110%; font-family: Helvetica, Arial, sans-serif;'&gt;&lt;ul&gt;
+        &lt;li&gt;New&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul&gt;
+        &lt;li&gt;Bug fixes and minor changes&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul&gt;
+        &lt;li&gt;Known issues&lt;br /&gt;
+        &amp;#8211; Due to limitation in the Windows &lt;span class="caps"&gt;NAT&lt;/span&gt; implementation, co-existence with other &lt;span class="caps"&gt;NAT&lt;/span&gt; prefixes needs&lt;br /&gt;
+        to be carefully managed (#2911). See Troubleshooting page for more details.&lt;/li&gt;
+        &lt;/ul&gt;&lt;/div&gt;
+      </description>
+      <pubDate>2016-05-30 08:32:16 UTC</pubDate>
+      <enclosure sparkle:version="1.11.1.3668" sparkle:shortVersionString="1.11.1.3668" url="https://rink.hockeyapp.net/api/2/apps/d43699ff42651e54a781fa8ef55dc5f2/app_versions/2644?format=zip&amp;avtoken=ddbb5e21cec1ece132d771b626e86480dd283f96" length="107106304" type="application/octet-stream"/>
+    </item>
+    <item>
+      <title>Version 1.11.1.3667</title>
+      <description>
+        &lt;div style='font-size: 110%; font-family: Helvetica, Arial, sans-serif;'&gt;&lt;ul&gt;
+        &lt;li&gt;New&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul&gt;
+        &lt;li&gt;Bug fixes and minor changes&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul&gt;
+        &lt;li&gt;Known issues&lt;br /&gt;
+        &amp;#8211; Due to limitation in the Windows &lt;span class="caps"&gt;NAT&lt;/span&gt; implementation, co-existence with other &lt;span class="caps"&gt;NAT&lt;/span&gt; prefixes needs&lt;br /&gt;
+        to be carefully managed (#2911). See Troubleshooting page for more details.&lt;/li&gt;
+        &lt;/ul&gt;&lt;/div&gt;
+      </description>
+      <pubDate>2016-05-30 08:13:44 UTC</pubDate>
+      <enclosure sparkle:version="1.11.1.3667" sparkle:shortVersionString="1.11.1.3667" url="https://rink.hockeyapp.net/api/2/apps/d43699ff42651e54a781fa8ef55dc5f2/app_versions/2643?format=zip&amp;avtoken=a8c9a0d4e06ae88ca024a3aedb7f9aacb1108dc5" length="107106304" type="application/octet-stream"/>
+    </item>
+    <item>
+      <title>Version 1.11.1.3666</title>
+      <description>
+        &lt;div style='font-size: 110%; font-family: Helvetica, Arial, sans-serif;'&gt;&lt;ul&gt;
+        &lt;li&gt;New&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul&gt;
+        &lt;li&gt;Bug fixes and minor changes&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul&gt;
+        &lt;li&gt;Known issues&lt;br /&gt;
+        &amp;#8211; Due to limitation in the Windows &lt;span class="caps"&gt;NAT&lt;/span&gt; implementation, co-existence with other &lt;span class="caps"&gt;NAT&lt;/span&gt; prefixes needs&lt;br /&gt;
+        to be carefully managed (#2911). See Troubleshooting page for more details.&lt;/li&gt;
+        &lt;/ul&gt;&lt;/div&gt;
+      </description>
+      <pubDate>2016-05-30 08:08:24 UTC</pubDate>
+      <enclosure sparkle:version="1.11.1.3666" sparkle:shortVersionString="1.11.1.3666" url="https://rink.hockeyapp.net/api/2/apps/d43699ff42651e54a781fa8ef55dc5f2/app_versions/2642?format=zip&amp;avtoken=e2f323b7094c37f14b1669a1331226b4447152f1" length="107106304" type="application/octet-stream"/>
+    </item>
+    <item>
+      <title>Version 1.11.1.3665</title>
+      <description>
+        &lt;div style='font-size: 110%; font-family: Helvetica, Arial, sans-serif;'&gt;&lt;ul&gt;
+        &lt;li&gt;New&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul&gt;
+        &lt;li&gt;Bug fixes and minor changes&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul&gt;
+        &lt;li&gt;Known issues&lt;br /&gt;
+        &amp;#8211; Due to limitation in the Windows &lt;span class="caps"&gt;NAT&lt;/span&gt; implementation, co-existence with other &lt;span class="caps"&gt;NAT&lt;/span&gt; prefixes needs&lt;br /&gt;
+        to be carefully managed (#2911). See Troubleshooting page for more details.&lt;/li&gt;
+        &lt;/ul&gt;&lt;/div&gt;
+      </description>
+      <pubDate>2016-05-30 08:05:08 UTC</pubDate>
+      <enclosure sparkle:version="1.11.1.3665" sparkle:shortVersionString="1.11.1.3665" url="https://rink.hockeyapp.net/api/2/apps/d43699ff42651e54a781fa8ef55dc5f2/app_versions/2641?format=zip&amp;avtoken=0349cfe1749d97c399f4cae07cba9d59c5266181" length="107106304" type="application/octet-stream"/>
+    </item>
+    <item>
+      <title>Version 1.11.1.3664</title>
+      <description>
+        &lt;div style='font-size: 110%; font-family: Helvetica, Arial, sans-serif;'&gt;&lt;ul&gt;
+        &lt;li&gt;New&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul&gt;
+        &lt;li&gt;Bug fixes and minor changes&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul&gt;
+        &lt;li&gt;Known issues&lt;br /&gt;
+        &amp;#8211; Due to limitation in the Windows &lt;span class="caps"&gt;NAT&lt;/span&gt; implementation, co-existence with other &lt;span class="caps"&gt;NAT&lt;/span&gt; prefixes needs&lt;br /&gt;
+        to be carefully managed (#2911). See Troubleshooting page for more details.&lt;/li&gt;
+        &lt;/ul&gt;&lt;/div&gt;
+      </description>
+      <pubDate>2016-05-30 07:41:48 UTC</pubDate>
+      <enclosure sparkle:version="1.11.1.3664" sparkle:shortVersionString="1.11.1.3664" url="https://rink.hockeyapp.net/api/2/apps/d43699ff42651e54a781fa8ef55dc5f2/app_versions/2640?format=zip&amp;avtoken=a21c37f535bbeea6e47b51800fcfbaaff08e86f3" length="107106304" type="application/octet-stream"/>
+    </item>
+  </channel>
+</rss>

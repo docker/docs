@@ -1,0 +1,23 @@
+opam-version: "1.2"
+maintainer: "sheets@alum.mit.edu"
+authors: ["David Sheets" "Jeremy Yallop"]
+homepage: "https://github.com/dsheets/ocaml-osx-xattr"
+bug-reports: "https://github.com/dsheets/ocaml-osx-xattr/issues"
+license: "ISC"
+tags: ["osx" "xattr" "extended attributes" "file system"]
+dev-repo: "https://github.com/dsheets/ocaml-osx-xattr.git"
+build: [make "build"]
+install: [make "install"]
+build-test: [make "test"]
+remove: [make "uninstall"]
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "alcotest" {test}
+  "ctypes" {>= "0.6.2"}
+  "unix-errno" {>= "0.4.0"}
+  "base-unix"
+  "unix-type-representations"
+]
+depopts: "lwt"
+available: [os = "darwin"]

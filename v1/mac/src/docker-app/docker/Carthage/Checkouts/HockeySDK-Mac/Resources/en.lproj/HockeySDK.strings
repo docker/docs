@@ -1,0 +1,73 @@
+/* Crash dialog */
+
+/* Window title string, with placeholder for the AppName */
+"WindowTitle" = "Problem Report for %@";
+
+/* Introduction text, with app name placeholder first and company placeholder second */
+"IntroductionText" = "%@ unexpectedly quit. Would you like to send a report so we can fix the problem?";
+
+/* Name Text Title */
+"NameTextTitle" = "Name";
+
+/* Email Text Title */
+"EmailTextTitle" = "Email";
+
+/* Comments Disclosure Text */
+"CommentsDisclosureTitle" = "Comments";
+
+/* User description placeholder */
+"UserDescriptionPlaceholder" = "Please describe any steps needed to trigger the problem";
+
+/* Problems Details Box  Title */
+"ProblemDetailsTitle" = "Problem details and system configuration";
+
+/* Privacy note text */
+"PrivacyNote" = "Only the presented data will be sent with this report.";
+
+/* Show Details Button */
+"ShowDetailsButtonTitle" = "Show Details";
+
+/* Hide Details Button */
+"HideDetailsButtonTitle" = "Hide Details";
+
+/* Cancel Button */
+"CancelButtonTitle" = "Cancel";
+
+/* Send Button */
+"SendButtonTitle" = "Send";
+
+
+/* Feedback UI */
+
+/* Compose view placeholder text */
+"FeedbackComposePlaceHolder" = "Your Feedback";
+
+/* Last Update in Status Bar */
+"FeedbackLastUpdate" = "Last Update:";
+
+/* Never in Status Bar */
+"FeedbackLastUpdateNever" = "Never";
+
+/* From text between timestamp and author */
+"FeedbackFrom" = "from";
+
+/* Send button title */
+"FeedbackSendButton" = "Send";
+
+/* Contact info text */
+"FeedbackContactInfo" = "Please provide your contact information";
+
+/* Name placeholder text */
+"FeedbackName" = "Name";
+
+/* Email placeholder text */
+"FeedbackEmail" = "Email";
+
+/* Continue button title */
+"FeedbackContinueButton" = "Continue";
+
+/* Attachment context menu action Preview */
+"FeedbackAttachmentMenuPreview" = "Preview";
+
+/* Attachment context menu action Remove */
+"FeedbackAttachmentMenuRemove" = "Remove";

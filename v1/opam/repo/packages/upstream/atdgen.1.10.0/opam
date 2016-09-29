@@ -1,0 +1,26 @@
+opam-version: "1.2"
+maintainer: "martin@mjambon.com"
+authors: ["Martin Jambon"]
+
+homepage: "https://github.com/mjambon/atdgen"
+bug-reports: "https://github.com/mjambon/atdgen/issues"
+dev-repo: "https://github.com/mjambon/atdgen.git"
+
+build: [ [make] ]
+
+install: [make "findlib-install"]
+
+build-test: [
+  [make]
+  [make "test"]
+]
+
+remove: [
+    ["ocamlfind" "remove" "atdgen"]
+]
+depends: [
+  "ocamlfind"
+  "atd" {>= "1.2.0"}
+  "biniou" {>= "1.0.6"}
+  "yojson" {>= "1.2.1" }
+]

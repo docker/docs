@@ -1,0 +1,18 @@
+opam-version: "1.2"
+maintainer: "Gabriel Scherer <gabriel.scherer@gmail.com>"
+authors: [
+  "Nicolas Pouillard"
+  "Berke Durak"
+]
+license: "LGPL-2 with OCaml linking exception"
+
+homepage: "https://github.com/ocaml/ocaml"
+dev-repo: "https://github.com/ocaml/ocaml.git"
+bug-reports: "http://caml.inria.fr/mantis/"
+
+doc: [
+  "http://caml.inria.fr/pub/docs/manual-ocaml/ocamlbuild.html"
+  "https://github.com/gasche/manual-ocamlbuild/blob/master/manual.md"
+]
+
+depends: [ "base-ocamlbuild" ]

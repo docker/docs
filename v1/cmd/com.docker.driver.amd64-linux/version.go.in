@@ -1,0 +1,4 @@
+package main
+
+// Commit is the current Git Commit
+var Commit = "@SHA@"

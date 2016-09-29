@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+usage()
+{
+    echo ""
+    echo "openInXCode: open and build a .xcodeproj in the XCode editor"
+    echo ""
+    echo "$0 projectFilename projectName targetName"
+    echo ""
+    echo "note: projectFilename must be absolute"
+    echo ""
+
+}
+
+if [[ $# -ne 3 ]]; then
+    usage
+    exit 1
+fi
+
+projectFile=$1
+projectName=$2
+targetName=$3
+
+osascript <<SCRIPT
+tell application "Xcode"
+    open "$projectFile"
+    activate
+--    set targetProject to target "$targetName"
+    tell project "$projectName"
+        build
+        try
+            debug
+        end try
+    end tell
+--    set active scheme to "$projectName"
+end tell
+
+tell application "System Events"
+    keystroke "b" using {command down}
+end tell

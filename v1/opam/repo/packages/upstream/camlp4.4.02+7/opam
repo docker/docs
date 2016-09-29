@@ -1,0 +1,27 @@
+opam-version: "1.2"
+maintainer: "jeremie@dimino.org"
+homepage: "https://github.com/ocaml/camlp4"
+license: "LGPLv2"
+build: [
+  ["./configure" "--bindir=%{bin}%" "--libdir=%{lib}%/ocaml" "--pkgdir=%{lib}%"]
+  [make "all"]
+]
+depends: [
+  "conf-which" {build}
+  "ocamlbuild" {build}
+]
+install: [
+  [make "install" "install-META"]
+]
+remove: [
+  ["rm" "-rf" "%{lib}%/camlp4"]
+  ["rm" "-f" "%{bin}%/camlp4"  "%{bin}%/camlp4boot" "%{bin}%/mkcamlp4"
+             "%{bin}%/camlp4r" "%{bin}%/camlp4rf"   "%{bin}%/camlp4orf"
+             "%{bin}%/camlp4o" "%{bin}%/camlp4of"   "%{bin}%/camlp4oof"
+             "%{bin}%/camlp4prof"  "%{bin}%/camlp4rf.opt"  "%{bin}%/camlp4orf.opt"
+             "%{bin}%/camlp4o.opt" "%{bin}%/camlp4oof.opt" "%{bin}%/camlp4r.opt"
+  ]
+]
+available: [ (!preinstalled) & (ocaml-version >= "4.02") & (ocaml-version < "4.03") ]
+bug-reports: "https://github.com/ocaml/camlp4/issues"
+dev-repo: "https://github.com/ocaml/camlp4.git"

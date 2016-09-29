@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.docker.vmnetd</string>
+	<key>Sockets</key>
+	<dict>
+		<key>Listener</key>
+		<dict>
+			<key>SockPathName</key>
+			<string>/var/tmp/com.docker.vmnetd.socket</string>
+			<key>SockPathMode</key>
+			<integer>438</integer> <!-- 0666 -->
+		</dict>
+	</dict>
+	<key>RunAtLoad</key>
+	<true/>
+</dict>
+</plist>

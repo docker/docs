@@ -1,0 +1,57 @@
+diff --git a/META.in b/META.in
+index a231f19..18a8229 100644
+--- a/META.in
++++ b/META.in
+@@ -5,4 +5,5 @@ requires="bigarray"
+ 
+ archive(byte)="camomile.cma"
+ archive(native)="camomile.cmxa"
++archive(native, plugin)="camomile.cmxs"
+ 
+diff --git a/Makefile.in b/Makefile.in
+index 7afe20f..9dc8862 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -121,7 +121,7 @@ internal/uReStrParser.cmo : internal/uReStrParser.cmi
+ internal/uReStrParser.cmx : internal/uReStrParser.cmi
+ 
+ byte : camomile.cma camomileLibrary.cma
+-opt : camomile.cmxa camomileLibrary.cmxa
++opt : camomile.cmxa camomile.cmxs camomileLibrary.cmxa
+ 
+ $(NOOBJ_INT:.cmi=.cmo) : %.cmo : %.mli %.cmi
+ 	$(OCAMLC) -c $(BFLAGS) -impl $<
+@@ -139,6 +139,8 @@ camomile.cma : $(OBJECTS) camomileLibrary.cmo camomileLibraryDefault.cmo camomil
+ 	$(OCAMLC) -a -o camomile.cma $(OBJECTS) camomileLibrary.cmo camomileLibraryDefault.cmo camomileLibraryDyn.cmo
+ camomile.cmxa : $(OPTOBJECTS) camomileLibrary.cmx camomileLibraryDefault.cmx camomileLibraryDyn.cmx
+ 	$(OCAMLOPT) -a -o camomile.cmxa $(OPTOBJECTS) camomileLibrary.cmx camomileLibraryDefault.cmx camomileLibraryDyn.cmx
++camomile.cmxs : camomile.cmxa
++	$(OCAMLOPT) -shared -linkall -o camomile.cmxs camomile.cmxa
+ 
+ camomileLibrary.cma : $(OBJECTS) camomileLibrary.cmo
+ 	$(OCAMLC) -a -o camomileLibrary.cma $(OBJECTS) camomileLibrary.cmo
+@@ -401,6 +403,7 @@ install-without-ocamlfind:
+ 	if [ -f camomileLibraryDyn.cmx ]; then cp -f camomileLibraryDyn.cmx '$(OCAMLLIB)'; fi
+ 	if [ -f camomile.cma ]; then cp -f camomile.cma '$(OCAMLLIB)'; fi
+ 	if [ -f camomile.cmxa ]; then cp -f camomile.cmxa '$(OCAMLLIB)'; fi
++	if [ -f camomile.cmxs ]; then cp -f camomile.cmxs '$(OCAMLLIB)'; fi
+ 	if [ -f camomile.a ]; then cp -f camomile.a '$(OCAMLLIB)'; fi
+ 
+ install-with-ocamlfind:
+@@ -412,6 +415,7 @@ install-with-ocamlfind:
+ 	if [ -f camomileLibraryDyn.cmx ]; then files="camomileLibraryDyn.cmx $$files"; fi && \
+ 	if [ -f camomile.cma ]; then files="camomile.cma $$files"; fi&& \
+ 	if [ -f camomile.cmxa ]; then files="camomile.cmxa $$files"; fi&& \
++	if [ -f camomile.cmxs ]; then files="camomile.cmxs $$files"; fi&& \
+ 	if [ -f camomile.a ]; then files="camomile.a $$files"; fi && \
+ 	ocamlfind install camomile $$files META $(MLI) camomileLibrary.cmi camomileLibraryDefault.cmi camomileLibraryDyn.cmi
+ 
+@@ -508,7 +512,7 @@ tags :
+ 	otags */*.ml */*.mli *.ml *.mli
+ 
+ clean :
+-	rm -f *.cm[ioxa] *.cmxa *.o *.so *.a */*.cm[iox] */*.o pocaml\
++	rm -f *.cm[ioxa] *.cmxa *.cmxs *.o *.so *.a */*.cm[iox] */*.o pocaml\
+ 	*/*.byte */*.opt
+ 	rm -f database/*.mar
+ 	rm -f charmaps/*.mar

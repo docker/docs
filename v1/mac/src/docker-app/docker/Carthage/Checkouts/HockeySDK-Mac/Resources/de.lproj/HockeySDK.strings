@@ -1,0 +1,72 @@
+/* Window title string, with placeholder for the AppName */
+"WindowTitle" = "Problembericht für %@";
+
+/* Introduction text, with app name placeholder first and company placeholder second */
+"IntroductionText" = "%@ wurde unerwartet beendet. Möchten Sie einen Bericht senden, sodass wir das Problem beheben können?";
+
+/* Name Text Title */
+"NameTextTitle" = "Name";
+
+/* Email Text Title */
+"EmailTextTitle" = "Email";
+
+/* Comments Disclosure Text */
+"CommentsDisclosureTitle" = "Kommentare";
+
+/* User description placeholder */
+"UserDescriptionPlaceholder" = "Bitte beschreiben Sie hier die Schritte welche zu dem Problem geführt haben";
+
+/* Problems Details Box  Title */
+"ProblemDetailsTitle" = "Problemdetails und Systemkonfiguration";
+
+/* Privacy note text */
+"PrivacyNote" = "Es werden nur die dargestellten Informationen mit diesem Bericht verschickt.";
+
+/* Show Details Button */
+"ShowDetailsButtonTitle" = "Details einblenden";
+
+/* HIde Details Button */
+"HideDetailsButtonTitle" = "Details ausblenden";
+
+/* Cancel Button */
+"CancelButtonTitle" = "Abbrechen";
+
+/* Send Button */
+"SendButtonTitle" = "Senden";
+
+
+/* Feedback UI */
+
+/* Compose view placeholder text */
+"FeedbackComposePlaceHolder" = "Ihr Feedback";
+
+/* Last Update in Status Bar */
+"FeedbackLastUpdate" = "Letzte Aktualisierung:";
+
+/* Never in Status Bar */
+"FeedbackLastUpdateNever" = "Nie";
+
+/* From text between timestamp and author */
+"FeedbackFrom" = "von";
+
+/* Send button title */
+"FeedbackSendButton" = "Senden";
+
+/* Contact info text */
+"FeedbackContactInfo" = "Bitte geben Sie Ihre Kontaktdaten an";
+
+/* Name placeholder text */
+"FeedbackName" = "Name";
+
+/* Email placeholder text */
+"FeedbackEmail" = "Email";
+
+/* Continue button title */
+"FeedbackContinueButton" = "Weiter";
+
+/* Attachment context menu action Preview */
+"FeedbackAttachmentMenuPreview" = "Vorschau";
+
+/* Attachment context menu action Remove */
+"FeedbackAttachmentMenuRemove" = "Entfernen";
+

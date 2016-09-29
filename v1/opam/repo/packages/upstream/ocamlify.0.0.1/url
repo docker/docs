@@ -1,0 +1,5 @@
+archive: "http://forge.ocamlcore.org/frs/download.php/379/ocamlify-0.0.1.tar.gz"
+checksum: "bcd97ad0f7203019019997197451dbf0"
+mirrors: [
+  "http://gazagnaire.org/packages/ocamlify.0.0.1/ocamlify-0.0.1.tar.gz"
+]

@@ -1,0 +1,39 @@
+dc111dce2393e70d338e33df35f3d83f6b7e00fcacd4617b51b6dca8eca4bb20
+------------------------------------------------------------
+Client connecting to 127.0.0.1, TCP port 5001
+TCP window size: 0.14 MByte (default)
+------------------------------------------------------------
+[  4] local 127.0.0.1 port 61068 connected with 127.0.0.1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0- 1.0 sec  93.2 MBytes   782 Mbits/sec
+[  4]  1.0- 2.0 sec  90.4 MBytes   758 Mbits/sec
+[  4]  2.0- 3.0 sec  77.2 MBytes   648 Mbits/sec
+[  4]  3.0- 4.0 sec   138 MBytes  1153 Mbits/sec
+[  4]  4.0- 5.0 sec   138 MBytes  1153 Mbits/sec
+[  4]  5.0- 6.0 sec   136 MBytes  1141 Mbits/sec
+[  4]  6.0- 7.0 sec   131 MBytes  1102 Mbits/sec
+[  4]  7.0- 8.0 sec   130 MBytes  1091 Mbits/sec
+[  4]  8.0- 9.0 sec   124 MBytes  1038 Mbits/sec
+[  4]  9.0-10.0 sec   133 MBytes  1119 Mbits/sec
+[  4] 10.0-11.0 sec   120 MBytes  1009 Mbits/sec
+[  4] 11.0-12.0 sec   116 MBytes   974 Mbits/sec
+[  4] 12.0-13.0 sec   131 MBytes  1096 Mbits/sec
+[  4] 13.0-14.0 sec   126 MBytes  1055 Mbits/sec
+[  4] 14.0-15.0 sec   126 MBytes  1060 Mbits/sec
+[  4] 15.0-16.0 sec   118 MBytes   987 Mbits/sec
+[  4] 16.0-17.0 sec   131 MBytes  1101 Mbits/sec
+[  4] 17.0-18.0 sec   131 MBytes  1096 Mbits/sec
+[  4] 18.0-19.0 sec   132 MBytes  1107 Mbits/sec
+[  4] 19.0-20.0 sec   124 MBytes  1038 Mbits/sec
+[  4] 20.0-21.0 sec   132 MBytes  1107 Mbits/sec
+[  4] 21.0-22.0 sec   125 MBytes  1050 Mbits/sec
+[  4] 22.0-23.0 sec   118 MBytes   992 Mbits/sec
+[  4] 23.0-24.0 sec   130 MBytes  1091 Mbits/sec
+[  4] 24.0-25.0 sec   128 MBytes  1073 Mbits/sec
+[  4] 25.0-26.0 sec   127 MBytes  1066 Mbits/sec
+[  4] 26.0-27.0 sec   111 MBytes   934 Mbits/sec
+[  4] 27.0-28.0 sec   129 MBytes  1079 Mbits/sec
+[  4] 28.0-29.0 sec   119 MBytes   997 Mbits/sec
+[  4] 29.0-30.0 sec  94.8 MBytes   795 Mbits/sec
+[  4]  0.0-30.1 sec  3659 MBytes  1021 Mbits/sec
+dc111dce2393

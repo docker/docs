@@ -1,0 +1,1299 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		1E3B4F6B1996796B00203B89 /* HockeySDK Distribution */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 1E3B4F6E1996796B00203B89 /* Build configuration list for PBXAggregateTarget "HockeySDK Distribution" */;
+			buildPhases = (
+				1E3B4F731996797B00203B89 /* ShellScript */,
+			);
+			dependencies = (
+				1E3B4F701996797200203B89 /* PBXTargetDependency */,
+			);
+			name = "HockeySDK Distribution";
+			productName = "HockeySDK Distribution";
+		};
+		1E7FB95C17D3F36B00B7E10D /* HockeySDK Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 1E7FB95F17D3F36B00B7E10D /* Build configuration list for PBXAggregateTarget "HockeySDK Documentation" */;
+			buildPhases = (
+				1E7FB96017D3F37100B7E10D /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "HockeySDK Documentation";
+			productName = "HockeySDK Documentation";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		1B9D52781C8A773800D86C09 /* BITCrashReportTextFormatterPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B9D52771C8A773800D86C09 /* BITCrashReportTextFormatterPrivate.h */; };
+		1BFE83D71C45B21100DE0B39 /* BITCategoryContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE83C61C45B21100DE0B39 /* BITCategoryContainer.h */; };
+		1BFE83D81C45B21100DE0B39 /* BITCategoryContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE83C71C45B21100DE0B39 /* BITCategoryContainer.m */; };
+		1BFE83D91C45B21100DE0B39 /* BITChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE83C81C45B21100DE0B39 /* BITChannel.h */; };
+		1BFE83DA1C45B21100DE0B39 /* BITChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE83C91C45B21100DE0B39 /* BITChannel.m */; };
+		1BFE83DB1C45B21100DE0B39 /* BITGZIP.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE83CA1C45B21100DE0B39 /* BITGZIP.h */; };
+		1BFE83DC1C45B21100DE0B39 /* BITPersistence.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE83CB1C45B21100DE0B39 /* BITPersistence.h */; };
+		1BFE83DD1C45B21100DE0B39 /* BITPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE83CC1C45B21100DE0B39 /* BITPersistence.m */; };
+		1BFE83DE1C45B21100DE0B39 /* BITPersistencePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE83CD1C45B21100DE0B39 /* BITPersistencePrivate.h */; };
+		1BFE83E11C45B21100DE0B39 /* BITTelemetryContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE83D01C45B21100DE0B39 /* BITTelemetryContext.h */; };
+		1BFE83E21C45B21100DE0B39 /* BITTelemetryContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE83D11C45B21100DE0B39 /* BITTelemetryContext.m */; };
+		1BFE83E31C45B21100DE0B39 /* BITTelemetryData.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE83D21C45B21100DE0B39 /* BITTelemetryData.h */; };
+		1BFE83E41C45B21100DE0B39 /* BITTelemetryData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE83D31C45B21100DE0B39 /* BITTelemetryData.m */; };
+		1BFE83E51C45B21100DE0B39 /* BITMetricsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE83D41C45B21100DE0B39 /* BITMetricsManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1BFE83E61C45B21100DE0B39 /* BITMetricsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE83D51C45B21100DE0B39 /* BITMetricsManager.m */; };
+		1BFE83E71C45B21100DE0B39 /* BITMetricsManagerPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE83D61C45B21100DE0B39 /* BITMetricsManagerPrivate.h */; };
+		1BFE84241C45BD5100DE0B39 /* BITApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE84201C45BD5100DE0B39 /* BITApplication.h */; };
+		1BFE84251C45BD5100DE0B39 /* BITApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE84211C45BD5100DE0B39 /* BITApplication.m */; };
+		1BFE84261C45BD5100DE0B39 /* BITBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE84221C45BD5100DE0B39 /* BITBase.h */; };
+		1BFE84271C45BD5100DE0B39 /* BITBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE84231C45BD5100DE0B39 /* BITBase.m */; };
+		1BFE84391C45BD7C00DE0B39 /* BITData.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE84281C45BD7C00DE0B39 /* BITData.h */; };
+		1BFE843A1C45BD7C00DE0B39 /* BITData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE84291C45BD7C00DE0B39 /* BITData.m */; };
+		1BFE843B1C45BD7C00DE0B39 /* BITDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE842A1C45BD7C00DE0B39 /* BITDevice.h */; };
+		1BFE843C1C45BD7C00DE0B39 /* BITDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE842B1C45BD7C00DE0B39 /* BITDevice.m */; };
+		1BFE843D1C45BD7C00DE0B39 /* BITDomain.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE842C1C45BD7C00DE0B39 /* BITDomain.h */; };
+		1BFE843E1C45BD7C00DE0B39 /* BITDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE842D1C45BD7C00DE0B39 /* BITDomain.m */; };
+		1BFE843F1C45BD7C00DE0B39 /* BITEnvelope.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE842E1C45BD7C00DE0B39 /* BITEnvelope.h */; };
+		1BFE84401C45BD7C00DE0B39 /* BITEnvelope.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE842F1C45BD7C00DE0B39 /* BITEnvelope.m */; };
+		1BFE84411C45BD7C00DE0B39 /* BITInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE84301C45BD7C00DE0B39 /* BITInternal.h */; };
+		1BFE84421C45BD7C00DE0B39 /* BITInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE84311C45BD7C00DE0B39 /* BITInternal.m */; };
+		1BFE84431C45BD7C00DE0B39 /* BITOrderedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE84321C45BD7C00DE0B39 /* BITOrderedDictionary.h */; };
+		1BFE84441C45BD7C00DE0B39 /* BITOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE84331C45BD7C00DE0B39 /* BITOrderedDictionary.m */; };
+		1BFE84451C45BD7C00DE0B39 /* BITSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE84341C45BD7C00DE0B39 /* BITSession.h */; };
+		1BFE84461C45BD7C00DE0B39 /* BITSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE84351C45BD7C00DE0B39 /* BITSession.m */; };
+		1BFE84471C45BD7C00DE0B39 /* BITSessionState.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE84361C45BD7C00DE0B39 /* BITSessionState.h */; };
+		1BFE84481C45BD7C00DE0B39 /* BITSessionStateData.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE84371C45BD7C00DE0B39 /* BITSessionStateData.h */; };
+		1BFE84491C45BD7C00DE0B39 /* BITSessionStateData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE84381C45BD7C00DE0B39 /* BITSessionStateData.m */; };
+		1BFE844C1C45BD9F00DE0B39 /* BITTelemetryObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE844A1C45BD9F00DE0B39 /* BITTelemetryObject.h */; };
+		1BFE844D1C45BD9F00DE0B39 /* BITTelemetryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE844B1C45BD9F00DE0B39 /* BITTelemetryObject.m */; };
+		1BFE84501C45BDBE00DE0B39 /* BITUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE844E1C45BDBE00DE0B39 /* BITUser.h */; };
+		1BFE84511C45BDBE00DE0B39 /* BITUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE844F1C45BDBE00DE0B39 /* BITUser.m */; };
+		1BFE84581C45BE5900DE0B39 /* BITSender.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BFE84561C45BE5900DE0B39 /* BITSender.h */; };
+		1BFE84591C45BE5900DE0B39 /* BITSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE84571C45BE5900DE0B39 /* BITSender.m */; };
+		1E20566E15A5F61F008FC20A /* BITCrashManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EE1DFFE1524B3D600C0DA76 /* BITCrashManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E260C9F17D414F200C7F9FE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E260C9E17D414F200C7F9FE /* Security.framework */; };
+		1E260CA617D41E9100C7F9FE /* BITKeychainItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E260CA417D41E9000C7F9FE /* BITKeychainItem.h */; };
+		1E260CA717D41E9100C7F9FE /* BITKeychainItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E260CA517D41E9100C7F9FE /* BITKeychainItem.m */; };
+		1E260CAA17D42B1E00C7F9FE /* BITHockeyManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E260CA917D42B1500C7F9FE /* BITHockeyManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E378AF419586A6900451E28 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E378AF319586A6900451E28 /* QuickLook.framework */; };
+		1E378AF9195899B400451E28 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E378AF8195899B400451E28 /* Quartz.framework */; };
+		1E378B201959D33700451E28 /* BITActivityIndicatorButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E378B1E1959D33700451E28 /* BITActivityIndicatorButton.h */; };
+		1E378B211959D33700451E28 /* BITActivityIndicatorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E378B1F1959D33700451E28 /* BITActivityIndicatorButton.m */; };
+		1E413D9615A0FA0100620BFE /* HockeySDK.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E413D9315A0BB8800620BFE /* HockeySDK.strings */; };
+		1E5785D619461DDF0014D19A /* BITCrashDetails.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E5785D319461DDF0014D19A /* BITCrashDetails.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E5785D719461DDF0014D19A /* BITCrashDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5785D419461DDF0014D19A /* BITCrashDetails.m */; };
+		1E5785D819461DDF0014D19A /* BITCrashDetailsPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E5785D519461DDF0014D19A /* BITCrashDetailsPrivate.h */; };
+		1E5785DB19461DF60014D19A /* BITHockeyAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E5785D919461DF60014D19A /* BITHockeyAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E5785DC19461DF60014D19A /* BITHockeyAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5785DA19461DF60014D19A /* BITHockeyAttachment.m */; };
+		1E5785E1194646C00014D19A /* BITHockeyAppClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E5785DD194646C00014D19A /* BITHockeyAppClient.h */; };
+		1E5785E2194646C00014D19A /* BITHockeyAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5785DE194646C00014D19A /* BITHockeyAppClient.m */; };
+		1E5785E7194647180014D19A /* BITHTTPOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E5785E5194647180014D19A /* BITHTTPOperation.h */; };
+		1E5785E8194647180014D19A /* BITHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5785E6194647180014D19A /* BITHTTPOperation.m */; };
+		1E5785ED194652900014D19A /* BITCrashMetaData.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E5785EB194652900014D19A /* BITCrashMetaData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E5785EE194652900014D19A /* BITCrashMetaData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5785EC194652900014D19A /* BITCrashMetaData.m */; };
+		1E7E5507187F3ED800F0858E /* BITFeedbackManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E7E54FD187F3ED800F0858E /* BITFeedbackManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E7E5508187F3ED800F0858E /* BITFeedbackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E54FE187F3ED800F0858E /* BITFeedbackManager.m */; };
+		1E7E5509187F3ED800F0858E /* BITFeedbackManagerPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E7E54FF187F3ED800F0858E /* BITFeedbackManagerPrivate.h */; };
+		1E7E550A187F3ED800F0858E /* BITFeedbackMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E7E5500187F3ED800F0858E /* BITFeedbackMessage.h */; };
+		1E7E550B187F3ED800F0858E /* BITFeedbackMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E5501187F3ED800F0858E /* BITFeedbackMessage.m */; };
+		1E7E550E187F3ED800F0858E /* BITFeedbackWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E7E5504187F3ED800F0858E /* BITFeedbackWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E7E550F187F3ED800F0858E /* BITFeedbackWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E5505187F3ED800F0858E /* BITFeedbackWindowController.m */; };
+		1E7E5510187F3ED800F0858E /* BITFeedbackWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7E5506187F3ED800F0858E /* BITFeedbackWindowController.xib */; };
+		1E7E5518187F3EE700F0858E /* BITHockeyBaseManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E7E5511187F3EE700F0858E /* BITHockeyBaseManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E7E5519187F3EE700F0858E /* BITHockeyBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E5512187F3EE700F0858E /* BITHockeyBaseManager.m */; };
+		1E7E551A187F3EE700F0858E /* BITHockeyBaseManagerPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E7E5513187F3EE700F0858E /* BITHockeyBaseManagerPrivate.h */; };
+		1E7E551B187F3EE700F0858E /* BITHockeyHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E7E5514187F3EE700F0858E /* BITHockeyHelper.h */; };
+		1E7E551C187F3EE700F0858E /* BITHockeyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E5515187F3EE700F0858E /* BITHockeyHelper.m */; };
+		1E7E551D187F3EE700F0858E /* HockeySDKPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E7E5516187F3EE700F0858E /* HockeySDKPrivate.h */; };
+		1E7E551E187F3EE700F0858E /* HockeySDKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E5517187F3EE700F0858E /* HockeySDKPrivate.m */; };
+		1E7E552A187F62B400F0858E /* BITSystemProfilePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E7E5529187F62B400F0858E /* BITSystemProfilePrivate.h */; };
+		1E7F5A2415A46249001081FC /* HockeySDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E7F5A2315A46249001081FC /* HockeySDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E852AED19509368006E73E0 /* BITFeedbackMessageAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E852AEB19509368006E73E0 /* BITFeedbackMessageAttachment.h */; };
+		1E852AEE19509368006E73E0 /* BITFeedbackMessageAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E852AEC19509368006E73E0 /* BITFeedbackMessageAttachment.m */; };
+		1E85C5671B343DAE00CE2C0D /* libCrashReporter-MacOSX-Static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E85C5661B343DAE00CE2C0D /* libCrashReporter-MacOSX-Static.a */; };
+		1E85C57F1B343E2100CE2C0D /* CrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C5691B343E2100CE2C0D /* CrashReporter.h */; };
+		1E85C5801B343E2100CE2C0D /* PLCrashFeatureConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C56A1B343E2100CE2C0D /* PLCrashFeatureConfig.h */; };
+		1E85C5811B343E2100CE2C0D /* PLCrashMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C56B1B343E2100CE2C0D /* PLCrashMacros.h */; };
+		1E85C5821B343E2100CE2C0D /* PLCrashNamespace.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C56C1B343E2100CE2C0D /* PLCrashNamespace.h */; };
+		1E85C5831B343E2100CE2C0D /* PLCrashReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C56D1B343E2100CE2C0D /* PLCrashReport.h */; };
+		1E85C5841B343E2100CE2C0D /* PLCrashReportApplicationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C56E1B343E2100CE2C0D /* PLCrashReportApplicationInfo.h */; };
+		1E85C5851B343E2100CE2C0D /* PLCrashReportBinaryImageInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C56F1B343E2100CE2C0D /* PLCrashReportBinaryImageInfo.h */; };
+		1E85C5861B343E2100CE2C0D /* PLCrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C5701B343E2100CE2C0D /* PLCrashReporter.h */; };
+		1E85C5871B343E2100CE2C0D /* PLCrashReporterConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C5711B343E2100CE2C0D /* PLCrashReporterConfig.h */; };
+		1E85C5881B343E2100CE2C0D /* PLCrashReportExceptionInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C5721B343E2100CE2C0D /* PLCrashReportExceptionInfo.h */; };
+		1E85C5891B343E2100CE2C0D /* PLCrashReportFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C5731B343E2100CE2C0D /* PLCrashReportFormatter.h */; };
+		1E85C58A1B343E2100CE2C0D /* PLCrashReportMachExceptionInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C5741B343E2100CE2C0D /* PLCrashReportMachExceptionInfo.h */; };
+		1E85C58B1B343E2100CE2C0D /* PLCrashReportMachineInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C5751B343E2100CE2C0D /* PLCrashReportMachineInfo.h */; };
+		1E85C58C1B343E2100CE2C0D /* PLCrashReportProcessInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C5761B343E2100CE2C0D /* PLCrashReportProcessInfo.h */; };
+		1E85C58D1B343E2100CE2C0D /* PLCrashReportProcessorInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C5771B343E2100CE2C0D /* PLCrashReportProcessorInfo.h */; };
+		1E85C58E1B343E2100CE2C0D /* PLCrashReportRegisterInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C5781B343E2100CE2C0D /* PLCrashReportRegisterInfo.h */; };
+		1E85C58F1B343E2100CE2C0D /* PLCrashReportSignalInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C5791B343E2100CE2C0D /* PLCrashReportSignalInfo.h */; };
+		1E85C5901B343E2100CE2C0D /* PLCrashReportStackFrameInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C57A1B343E2100CE2C0D /* PLCrashReportStackFrameInfo.h */; };
+		1E85C5911B343E2100CE2C0D /* PLCrashReportSymbolInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C57B1B343E2100CE2C0D /* PLCrashReportSymbolInfo.h */; };
+		1E85C5921B343E2100CE2C0D /* PLCrashReportSystemInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C57C1B343E2100CE2C0D /* PLCrashReportSystemInfo.h */; };
+		1E85C5931B343E2100CE2C0D /* PLCrashReportTextFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C57D1B343E2100CE2C0D /* PLCrashReportTextFormatter.h */; };
+		1E85C5941B343E2100CE2C0D /* PLCrashReportThreadInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E85C57E1B343E2100CE2C0D /* PLCrashReportThreadInfo.h */; };
+		1E93591E15238FCF00F51DBD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF09D941523574200067A5C /* Foundation.framework */; };
+		1EA551FD17B3EB44004A0CB7 /* BITCrashExceptionApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EA551FB17B3EB44004A0CB7 /* BITCrashExceptionApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1EA551FE17B3EB44004A0CB7 /* BITCrashExceptionApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA551FC17B3EB44004A0CB7 /* BITCrashExceptionApplication.m */; };
+		1EBDC04A195710CA00B5C8A3 /* BITCrashReportUI.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EBDC049195710CA00B5C8A3 /* BITCrashReportUI.xib */; };
+		1EBDC051195716F300B5C8A3 /* BITSDKColoredView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EBDC04F195716F300B5C8A3 /* BITSDKColoredView.h */; };
+		1EBDC052195716F300B5C8A3 /* BITSDKColoredView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBDC050195716F300B5C8A3 /* BITSDKColoredView.m */; };
+		1EBDF2AB195780D100C7F49A /* BITFeedbackMessageDateValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EBDF2A9195780D100C7F49A /* BITFeedbackMessageDateValueTransformer.h */; };
+		1EBDF2AC195780D100C7F49A /* BITFeedbackMessageDateValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBDF2AA195780D100C7F49A /* BITFeedbackMessageDateValueTransformer.m */; };
+		1EBDF2B11957878800C7F49A /* BITSDKTextFieldCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EBDF2AF1957878800C7F49A /* BITSDKTextFieldCell.h */; };
+		1EBDF2B21957878800C7F49A /* BITSDKTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBDF2B01957878800C7F49A /* BITSDKTextFieldCell.m */; };
+		1EC2956C1B30572000CD53B2 /* HockeySDKNullability.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EC2956B1B30572000CD53B2 /* HockeySDKNullability.h */; };
+		1EC2956F1B30572D00CD53B2 /* BITCrashCXXExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EC2956D1B30572D00CD53B2 /* BITCrashCXXExceptionHandler.h */; };
+		1EC295701B30572D00CD53B2 /* BITCrashCXXExceptionHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1EC2956E1B30572D00CD53B2 /* BITCrashCXXExceptionHandler.mm */; };
+		1EC7152619573CB400F72C19 /* BITSDKTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EC7152419573CB400F72C19 /* BITSDKTextView.h */; };
+		1EC7152719573CB400F72C19 /* BITSDKTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC7152519573CB400F72C19 /* BITSDKTextView.m */; };
+		1EC715331957524B00F72C19 /* BITFeedbackMessageCellView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EC715311957524B00F72C19 /* BITFeedbackMessageCellView.h */; };
+		1EC715341957524B00F72C19 /* BITFeedbackMessageCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC715321957524B00F72C19 /* BITFeedbackMessageCellView.m */; };
+		1EF09D901523574200067A5C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF09D8F1523574200067A5C /* Cocoa.framework */; };
+		1EF09DB51523579100067A5C /* BITHockeyManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EF09DAE1523579100067A5C /* BITHockeyManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1EF09DB61523579100067A5C /* BITHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF09DAF1523579100067A5C /* BITHockeyManager.m */; };
+		1EF09DBE1523579A00067A5C /* HockeySDK-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 1EF09DBB1523579A00067A5C /* HockeySDK-Prefix.pch */; };
+		1EF09DD5152371DC00067A5C /* BITCrashManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EF09DCE152371DC00067A5C /* BITCrashManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1EF09DD6152371DC00067A5C /* BITCrashManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF09DCF152371DC00067A5C /* BITCrashManager.m */; };
+		1EF09DD7152371DC00067A5C /* BITCrashReportUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EF09DD0152371DC00067A5C /* BITCrashReportUI.h */; };
+		1EF09DD8152371DC00067A5C /* BITCrashReportUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF09DD1152371DC00067A5C /* BITCrashReportUI.m */; };
+		1EF09DD9152371DC00067A5C /* BITCrashReportTextFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EF09DD2152371DC00067A5C /* BITCrashReportTextFormatter.h */; };
+		1EF09DDA152371DC00067A5C /* BITCrashReportTextFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF09DD3152371DC00067A5C /* BITCrashReportTextFormatter.m */; };
+		4DD13AF4162CA7C400BF15E8 /* BITSystemProfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DD13AF2162CA7C400BF15E8 /* BITSystemProfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4DD13AF5162CA7C400BF15E8 /* BITSystemProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD13AF3162CA7C400BF15E8 /* BITSystemProfile.m */; };
+		4DD13AF7162CAA2200BF15E8 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD13AF6162CAA2200BF15E8 /* IOKit.framework */; };
+		6F53E30A1CF509AE00DC1C64 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF09D8C1523574200067A5C /* HockeySDK.framework */; };
+		6F53E3111CF509E000DC1C64 /* BITPersistenceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53E3101CF509E000DC1C64 /* BITPersistenceTests.m */; };
+		6F53E3151CF50DD800DC1C64 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F53E3141CF50DD800DC1C64 /* OCMock.framework */; };
+		6F53E3171CF50DFF00DC1C64 /* OCMock.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 6F53E3141CF50DD800DC1C64 /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1E3B4F6F1996797200203B89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1EF09D821523574200067A5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E7FB95C17D3F36B00B7E10D;
+			remoteInfo = "HockeySDK Documentation";
+		};
+		6F53E30B1CF509AE00DC1C64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1EF09D821523574200067A5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1EF09D8B1523574200067A5C;
+			remoteInfo = HockeySDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4C7E213C159C900B00D02AD1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F53E3161CF50DF800DC1C64 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6F53E3171CF50DFF00DC1C64 /* OCMock.framework in Copy Files */,
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1B9D52771C8A773800D86C09 /* BITCrashReportTextFormatterPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashReportTextFormatterPrivate.h; sourceTree = "<group>"; };
+		1BFE83C61C45B21100DE0B39 /* BITCategoryContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCategoryContainer.h; sourceTree = "<group>"; };
+		1BFE83C71C45B21100DE0B39 /* BITCategoryContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCategoryContainer.m; sourceTree = "<group>"; };
+		1BFE83C81C45B21100DE0B39 /* BITChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITChannel.h; sourceTree = "<group>"; };
+		1BFE83C91C45B21100DE0B39 /* BITChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITChannel.m; sourceTree = "<group>"; };
+		1BFE83CA1C45B21100DE0B39 /* BITGZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITGZIP.h; sourceTree = "<group>"; };
+		1BFE83CB1C45B21100DE0B39 /* BITPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITPersistence.h; sourceTree = "<group>"; };
+		1BFE83CC1C45B21100DE0B39 /* BITPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITPersistence.m; sourceTree = "<group>"; };
+		1BFE83CD1C45B21100DE0B39 /* BITPersistencePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITPersistencePrivate.h; sourceTree = "<group>"; };
+		1BFE83D01C45B21100DE0B39 /* BITTelemetryContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITTelemetryContext.h; sourceTree = "<group>"; };
+		1BFE83D11C45B21100DE0B39 /* BITTelemetryContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITTelemetryContext.m; sourceTree = "<group>"; };
+		1BFE83D21C45B21100DE0B39 /* BITTelemetryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITTelemetryData.h; sourceTree = "<group>"; };
+		1BFE83D31C45B21100DE0B39 /* BITTelemetryData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITTelemetryData.m; sourceTree = "<group>"; };
+		1BFE83D41C45B21100DE0B39 /* BITMetricsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITMetricsManager.h; sourceTree = "<group>"; };
+		1BFE83D51C45B21100DE0B39 /* BITMetricsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITMetricsManager.m; sourceTree = "<group>"; };
+		1BFE83D61C45B21100DE0B39 /* BITMetricsManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITMetricsManagerPrivate.h; sourceTree = "<group>"; };
+		1BFE84201C45BD5100DE0B39 /* BITApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITApplication.h; sourceTree = "<group>"; };
+		1BFE84211C45BD5100DE0B39 /* BITApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITApplication.m; sourceTree = "<group>"; };
+		1BFE84221C45BD5100DE0B39 /* BITBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITBase.h; sourceTree = "<group>"; };
+		1BFE84231C45BD5100DE0B39 /* BITBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITBase.m; sourceTree = "<group>"; };
+		1BFE84281C45BD7C00DE0B39 /* BITData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITData.h; sourceTree = "<group>"; };
+		1BFE84291C45BD7C00DE0B39 /* BITData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITData.m; sourceTree = "<group>"; };
+		1BFE842A1C45BD7C00DE0B39 /* BITDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITDevice.h; sourceTree = "<group>"; };
+		1BFE842B1C45BD7C00DE0B39 /* BITDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITDevice.m; sourceTree = "<group>"; };
+		1BFE842C1C45BD7C00DE0B39 /* BITDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITDomain.h; sourceTree = "<group>"; };
+		1BFE842D1C45BD7C00DE0B39 /* BITDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITDomain.m; sourceTree = "<group>"; };
+		1BFE842E1C45BD7C00DE0B39 /* BITEnvelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITEnvelope.h; sourceTree = "<group>"; };
+		1BFE842F1C45BD7C00DE0B39 /* BITEnvelope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITEnvelope.m; sourceTree = "<group>"; };
+		1BFE84301C45BD7C00DE0B39 /* BITInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITInternal.h; sourceTree = "<group>"; };
+		1BFE84311C45BD7C00DE0B39 /* BITInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITInternal.m; sourceTree = "<group>"; };
+		1BFE84321C45BD7C00DE0B39 /* BITOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITOrderedDictionary.h; sourceTree = "<group>"; };
+		1BFE84331C45BD7C00DE0B39 /* BITOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITOrderedDictionary.m; sourceTree = "<group>"; };
+		1BFE84341C45BD7C00DE0B39 /* BITSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITSession.h; sourceTree = "<group>"; };
+		1BFE84351C45BD7C00DE0B39 /* BITSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITSession.m; sourceTree = "<group>"; };
+		1BFE84361C45BD7C00DE0B39 /* BITSessionState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITSessionState.h; sourceTree = "<group>"; };
+		1BFE84371C45BD7C00DE0B39 /* BITSessionStateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITSessionStateData.h; sourceTree = "<group>"; };
+		1BFE84381C45BD7C00DE0B39 /* BITSessionStateData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITSessionStateData.m; sourceTree = "<group>"; };
+		1BFE844A1C45BD9F00DE0B39 /* BITTelemetryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITTelemetryObject.h; sourceTree = "<group>"; };
+		1BFE844B1C45BD9F00DE0B39 /* BITTelemetryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITTelemetryObject.m; sourceTree = "<group>"; };
+		1BFE844E1C45BDBE00DE0B39 /* BITUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITUser.h; sourceTree = "<group>"; };
+		1BFE844F1C45BDBE00DE0B39 /* BITUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITUser.m; sourceTree = "<group>"; };
+		1BFE84561C45BE5900DE0B39 /* BITSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITSender.h; sourceTree = "<group>"; };
+		1BFE84571C45BE5900DE0B39 /* BITSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITSender.m; sourceTree = "<group>"; };
+		1E14CB2117E1F1EA00EEFF50 /* Troubleshooting-Crash-Reporting-Not-Working-template.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Troubleshooting-Crash-Reporting-Not-Working-template.md"; sourceTree = "<group>"; };
+		1E260C7817D401D000C7F9FE /* Changelog-template.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Changelog-template.md"; sourceTree = "<group>"; };
+		1E260C7917D401D000C7F9FE /* Guide-Installation-Mac-App-template.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Guide-Installation-Mac-App-template.md"; sourceTree = "<group>"; };
+		1E260C7A17D401D000C7F9FE /* Guide-Installation-Setup-template.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Guide-Installation-Setup-template.md"; sourceTree = "<group>"; };
+		1E260C7C17D401D100C7F9FE /* HowTo-App-Versioning-template.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = "HowTo-App-Versioning-template.md"; sourceTree = "<group>"; };
+		1E260C7D17D401D100C7F9FE /* HowTo-Upload-Symbols-template.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = "HowTo-Upload-Symbols-template.md"; sourceTree = "<group>"; };
+		1E260C7E17D401D100C7F9FE /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		1E260C7F17D401D200C7F9FE /* index.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = index.md; sourceTree = "<group>"; };
+		1E260C9E17D414F200C7F9FE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		1E260CA417D41E9000C7F9FE /* BITKeychainItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITKeychainItem.h; sourceTree = "<group>"; };
+		1E260CA517D41E9100C7F9FE /* BITKeychainItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITKeychainItem.m; sourceTree = "<group>"; };
+		1E260CA917D42B1500C7F9FE /* BITHockeyManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BITHockeyManagerDelegate.h; sourceTree = "<group>"; };
+		1E378AF11958498400451E28 /* BITSDKTextViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BITSDKTextViewDelegate.h; sourceTree = "<group>"; };
+		1E378AF319586A6900451E28 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		1E378AF51958981E00451E28 /* BITFeedbackMessageCellViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BITFeedbackMessageCellViewDelegate.h; sourceTree = "<group>"; };
+		1E378AF6195899A400451E28 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1E378AF8195899B400451E28 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		1E378B1E1959D33700451E28 /* BITActivityIndicatorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITActivityIndicatorButton.h; sourceTree = "<group>"; };
+		1E378B1F1959D33700451E28 /* BITActivityIndicatorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITActivityIndicatorButton.m; sourceTree = "<group>"; };
+		1E413D9215A0BB8800620BFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HockeySDK.strings; sourceTree = "<group>"; };
+		1E413D9515A0BB9700620BFE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/HockeySDK.strings; sourceTree = "<group>"; };
+		1E5785D319461DDF0014D19A /* BITCrashDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashDetails.h; sourceTree = "<group>"; };
+		1E5785D419461DDF0014D19A /* BITCrashDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashDetails.m; sourceTree = "<group>"; };
+		1E5785D519461DDF0014D19A /* BITCrashDetailsPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashDetailsPrivate.h; sourceTree = "<group>"; };
+		1E5785D919461DF60014D19A /* BITHockeyAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BITHockeyAttachment.h; path = ../CrashReporting/BITHockeyAttachment.h; sourceTree = "<group>"; };
+		1E5785DA19461DF60014D19A /* BITHockeyAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BITHockeyAttachment.m; path = ../CrashReporting/BITHockeyAttachment.m; sourceTree = "<group>"; };
+		1E5785DD194646C00014D19A /* BITHockeyAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyAppClient.h; sourceTree = "<group>"; };
+		1E5785DE194646C00014D19A /* BITHockeyAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyAppClient.m; sourceTree = "<group>"; };
+		1E5785E5194647180014D19A /* BITHTTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHTTPOperation.h; sourceTree = "<group>"; };
+		1E5785E6194647180014D19A /* BITHTTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHTTPOperation.m; sourceTree = "<group>"; };
+		1E5785EB194652900014D19A /* BITCrashMetaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashMetaData.h; sourceTree = "<group>"; };
+		1E5785EC194652900014D19A /* BITCrashMetaData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashMetaData.m; sourceTree = "<group>"; };
+		1E66F5E015A1C47700C0816F /* fi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/HockeySDK.strings; sourceTree = "<group>"; };
+		1E66F5E215A1C49400C0816F /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/HockeySDK.strings; sourceTree = "<group>"; };
+		1E66F5E315A1C4A700C0816F /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/HockeySDK.strings; sourceTree = "<group>"; };
+		1E66F5E415A1C4BF00C0816F /* nb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/HockeySDK.strings; sourceTree = "<group>"; };
+		1E66F5E515A1C4D100C0816F /* sv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/HockeySDK.strings; sourceTree = "<group>"; };
+		1E7E54FD187F3ED800F0858E /* BITFeedbackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManager.h; sourceTree = "<group>"; };
+		1E7E54FE187F3ED800F0858E /* BITFeedbackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackManager.m; sourceTree = "<group>"; };
+		1E7E54FF187F3ED800F0858E /* BITFeedbackManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackManagerPrivate.h; sourceTree = "<group>"; };
+		1E7E5500187F3ED800F0858E /* BITFeedbackMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackMessage.h; sourceTree = "<group>"; };
+		1E7E5501187F3ED800F0858E /* BITFeedbackMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackMessage.m; sourceTree = "<group>"; };
+		1E7E5504187F3ED800F0858E /* BITFeedbackWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackWindowController.h; sourceTree = "<group>"; };
+		1E7E5505187F3ED800F0858E /* BITFeedbackWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackWindowController.m; sourceTree = "<group>"; };
+		1E7E5506187F3ED800F0858E /* BITFeedbackWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BITFeedbackWindowController.xib; sourceTree = "<group>"; };
+		1E7E5511187F3EE700F0858E /* BITHockeyBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseManager.h; sourceTree = "<group>"; };
+		1E7E5512187F3EE700F0858E /* BITHockeyBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyBaseManager.m; sourceTree = "<group>"; };
+		1E7E5513187F3EE700F0858E /* BITHockeyBaseManagerPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyBaseManagerPrivate.h; sourceTree = "<group>"; };
+		1E7E5514187F3EE700F0858E /* BITHockeyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyHelper.h; sourceTree = "<group>"; };
+		1E7E5515187F3EE700F0858E /* BITHockeyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyHelper.m; sourceTree = "<group>"; };
+		1E7E5516187F3EE700F0858E /* HockeySDKPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDKPrivate.h; sourceTree = "<group>"; };
+		1E7E5517187F3EE700F0858E /* HockeySDKPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HockeySDKPrivate.m; sourceTree = "<group>"; };
+		1E7E5529187F62B400F0858E /* BITSystemProfilePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BITSystemProfilePrivate.h; path = BetaDistribution/BITSystemProfilePrivate.h; sourceTree = "<group>"; };
+		1E7F5A2315A46249001081FC /* HockeySDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDK.h; sourceTree = "<group>"; };
+		1E7FB96217D3F45200B7E10D /* buildnumber.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = buildnumber.xcconfig; sourceTree = SOURCE_ROOT; };
+		1E7FB96317D3F45200B7E10D /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = SOURCE_ROOT; };
+		1E852AEB19509368006E73E0 /* BITFeedbackMessageAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackMessageAttachment.h; sourceTree = "<group>"; };
+		1E852AEC19509368006E73E0 /* BITFeedbackMessageAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackMessageAttachment.m; sourceTree = "<group>"; };
+		1E85C5661B343DAE00CE2C0D /* libCrashReporter-MacOSX-Static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCrashReporter-MacOSX-Static.a"; sourceTree = "<group>"; };
+		1E85C5691B343E2100CE2C0D /* CrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashReporter.h; sourceTree = "<group>"; };
+		1E85C56A1B343E2100CE2C0D /* PLCrashFeatureConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashFeatureConfig.h; sourceTree = "<group>"; };
+		1E85C56B1B343E2100CE2C0D /* PLCrashMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashMacros.h; sourceTree = "<group>"; };
+		1E85C56C1B343E2100CE2C0D /* PLCrashNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashNamespace.h; sourceTree = "<group>"; };
+		1E85C56D1B343E2100CE2C0D /* PLCrashReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReport.h; sourceTree = "<group>"; };
+		1E85C56E1B343E2100CE2C0D /* PLCrashReportApplicationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportApplicationInfo.h; sourceTree = "<group>"; };
+		1E85C56F1B343E2100CE2C0D /* PLCrashReportBinaryImageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportBinaryImageInfo.h; sourceTree = "<group>"; };
+		1E85C5701B343E2100CE2C0D /* PLCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReporter.h; sourceTree = "<group>"; };
+		1E85C5711B343E2100CE2C0D /* PLCrashReporterConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReporterConfig.h; sourceTree = "<group>"; };
+		1E85C5721B343E2100CE2C0D /* PLCrashReportExceptionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportExceptionInfo.h; sourceTree = "<group>"; };
+		1E85C5731B343E2100CE2C0D /* PLCrashReportFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportFormatter.h; sourceTree = "<group>"; };
+		1E85C5741B343E2100CE2C0D /* PLCrashReportMachExceptionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportMachExceptionInfo.h; sourceTree = "<group>"; };
+		1E85C5751B343E2100CE2C0D /* PLCrashReportMachineInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportMachineInfo.h; sourceTree = "<group>"; };
+		1E85C5761B343E2100CE2C0D /* PLCrashReportProcessInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportProcessInfo.h; sourceTree = "<group>"; };
+		1E85C5771B343E2100CE2C0D /* PLCrashReportProcessorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportProcessorInfo.h; sourceTree = "<group>"; };
+		1E85C5781B343E2100CE2C0D /* PLCrashReportRegisterInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportRegisterInfo.h; sourceTree = "<group>"; };
+		1E85C5791B343E2100CE2C0D /* PLCrashReportSignalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportSignalInfo.h; sourceTree = "<group>"; };
+		1E85C57A1B343E2100CE2C0D /* PLCrashReportStackFrameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportStackFrameInfo.h; sourceTree = "<group>"; };
+		1E85C57B1B343E2100CE2C0D /* PLCrashReportSymbolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportSymbolInfo.h; sourceTree = "<group>"; };
+		1E85C57C1B343E2100CE2C0D /* PLCrashReportSystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportSystemInfo.h; sourceTree = "<group>"; };
+		1E85C57D1B343E2100CE2C0D /* PLCrashReportTextFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportTextFormatter.h; sourceTree = "<group>"; };
+		1E85C57E1B343E2100CE2C0D /* PLCrashReportThreadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCrashReportThreadInfo.h; sourceTree = "<group>"; };
+		1EA551FB17B3EB44004A0CB7 /* BITCrashExceptionApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashExceptionApplication.h; sourceTree = "<group>"; };
+		1EA551FC17B3EB44004A0CB7 /* BITCrashExceptionApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashExceptionApplication.m; sourceTree = "<group>"; };
+		1EB194CA1BA70BDE00793007 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		1EBDC049195710CA00B5C8A3 /* BITCrashReportUI.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BITCrashReportUI.xib; sourceTree = "<group>"; };
+		1EBDC04F195716F300B5C8A3 /* BITSDKColoredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITSDKColoredView.h; sourceTree = "<group>"; };
+		1EBDC050195716F300B5C8A3 /* BITSDKColoredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITSDKColoredView.m; sourceTree = "<group>"; };
+		1EBDF2A9195780D100C7F49A /* BITFeedbackMessageDateValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackMessageDateValueTransformer.h; sourceTree = "<group>"; };
+		1EBDF2AA195780D100C7F49A /* BITFeedbackMessageDateValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackMessageDateValueTransformer.m; sourceTree = "<group>"; };
+		1EBDF2AF1957878800C7F49A /* BITSDKTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITSDKTextFieldCell.h; sourceTree = "<group>"; };
+		1EBDF2B01957878800C7F49A /* BITSDKTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITSDKTextFieldCell.m; sourceTree = "<group>"; };
+		1EC2956B1B30572000CD53B2 /* HockeySDKNullability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HockeySDKNullability.h; sourceTree = "<group>"; };
+		1EC2956D1B30572D00CD53B2 /* BITCrashCXXExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashCXXExceptionHandler.h; sourceTree = "<group>"; };
+		1EC2956E1B30572D00CD53B2 /* BITCrashCXXExceptionHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BITCrashCXXExceptionHandler.mm; sourceTree = "<group>"; };
+		1EC7152419573CB400F72C19 /* BITSDKTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITSDKTextView.h; sourceTree = "<group>"; };
+		1EC7152519573CB400F72C19 /* BITSDKTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITSDKTextView.m; sourceTree = "<group>"; };
+		1EC715311957524B00F72C19 /* BITFeedbackMessageCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITFeedbackMessageCellView.h; sourceTree = "<group>"; };
+		1EC715321957524B00F72C19 /* BITFeedbackMessageCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITFeedbackMessageCellView.m; sourceTree = "<group>"; };
+		1ED926C817B420390046DFD3 /* BITCrashManagerPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BITCrashManagerPrivate.h; sourceTree = "<group>"; };
+		1EE1DFFE1524B3D600C0DA76 /* BITCrashManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManagerDelegate.h; sourceTree = "<group>"; };
+		1EE8CF7E17147CF20088444D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/HockeySDK.strings; sourceTree = "<group>"; };
+		1EF09D8C1523574200067A5C /* HockeySDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HockeySDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EF09D8F1523574200067A5C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		1EF09D921523574200067A5C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		1EF09D931523574200067A5C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1EF09D941523574200067A5C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1EF09DAE1523579100067A5C /* BITHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyManager.h; sourceTree = "<group>"; };
+		1EF09DAF1523579100067A5C /* BITHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyManager.m; sourceTree = "<group>"; };
+		1EF09DBA1523579A00067A5C /* HockeySDK-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "HockeySDK-Info.plist"; sourceTree = "<group>"; };
+		1EF09DBB1523579A00067A5C /* HockeySDK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HockeySDK-Prefix.pch"; sourceTree = "<group>"; };
+		1EF09DCE152371DC00067A5C /* BITCrashManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashManager.h; sourceTree = "<group>"; };
+		1EF09DCF152371DC00067A5C /* BITCrashManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashManager.m; sourceTree = "<group>"; wrapsLines = 1; };
+		1EF09DD0152371DC00067A5C /* BITCrashReportUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashReportUI.h; sourceTree = "<group>"; };
+		1EF09DD1152371DC00067A5C /* BITCrashReportUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashReportUI.m; sourceTree = "<group>"; };
+		1EF09DD2152371DC00067A5C /* BITCrashReportTextFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITCrashReportTextFormatter.h; sourceTree = "<group>"; };
+		1EF09DD3152371DC00067A5C /* BITCrashReportTextFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = BITCrashReportTextFormatter.m; sourceTree = "<group>"; tabWidth = 4; };
+		1EFFB86117D49DE1003FA1FD /* Guide-Migration-template.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Guide-Migration-template.md"; sourceTree = "<group>"; };
+		4DD13AF2162CA7C400BF15E8 /* BITSystemProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BITSystemProfile.h; path = BetaDistribution/BITSystemProfile.h; sourceTree = "<group>"; };
+		4DD13AF3162CA7C400BF15E8 /* BITSystemProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BITSystemProfile.m; path = BetaDistribution/BITSystemProfile.m; sourceTree = "<group>"; };
+		4DD13AF6162CAA2200BF15E8 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		6F53E3051CF509AE00DC1C64 /* HockeySDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HockeySDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F53E3091CF509AE00DC1C64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F53E3101CF509E000DC1C64 /* BITPersistenceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BITPersistenceTests.m; path = ../BITPersistenceTests.m; sourceTree = "<group>"; };
+		6F53E3141CF50DD800DC1C64 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMock.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1EF09D881523574200067A5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E378AF419586A6900451E28 /* QuickLook.framework in Frameworks */,
+				1E378AF9195899B400451E28 /* Quartz.framework in Frameworks */,
+				1E260C9F17D414F200C7F9FE /* Security.framework in Frameworks */,
+				1E85C5671B343DAE00CE2C0D /* libCrashReporter-MacOSX-Static.a in Frameworks */,
+				4DD13AF7162CAA2200BF15E8 /* IOKit.framework in Frameworks */,
+				1E93591E15238FCF00F51DBD /* Foundation.framework in Frameworks */,
+				1EF09D901523574200067A5C /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F53E3021CF509AE00DC1C64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F53E3151CF50DD800DC1C64 /* OCMock.framework in Frameworks */,
+				6F53E30A1CF509AE00DC1C64 /* HockeySDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1BFE841F1C45B9E900DE0B39 /* Contract Files */ = {
+			isa = PBXGroup;
+			children = (
+				1BFE84201C45BD5100DE0B39 /* BITApplication.h */,
+				1BFE84211C45BD5100DE0B39 /* BITApplication.m */,
+				1BFE84221C45BD5100DE0B39 /* BITBase.h */,
+				1BFE84231C45BD5100DE0B39 /* BITBase.m */,
+				1BFE84281C45BD7C00DE0B39 /* BITData.h */,
+				1BFE84291C45BD7C00DE0B39 /* BITData.m */,
+				1BFE842A1C45BD7C00DE0B39 /* BITDevice.h */,
+				1BFE842B1C45BD7C00DE0B39 /* BITDevice.m */,
+				1BFE842C1C45BD7C00DE0B39 /* BITDomain.h */,
+				1BFE842D1C45BD7C00DE0B39 /* BITDomain.m */,
+				1BFE842E1C45BD7C00DE0B39 /* BITEnvelope.h */,
+				1BFE842F1C45BD7C00DE0B39 /* BITEnvelope.m */,
+				1BFE84301C45BD7C00DE0B39 /* BITInternal.h */,
+				1BFE84311C45BD7C00DE0B39 /* BITInternal.m */,
+				1BFE84321C45BD7C00DE0B39 /* BITOrderedDictionary.h */,
+				1BFE84331C45BD7C00DE0B39 /* BITOrderedDictionary.m */,
+				1BFE84341C45BD7C00DE0B39 /* BITSession.h */,
+				1BFE84351C45BD7C00DE0B39 /* BITSession.m */,
+				1BFE84361C45BD7C00DE0B39 /* BITSessionState.h */,
+				1BFE84371C45BD7C00DE0B39 /* BITSessionStateData.h */,
+				1BFE84381C45BD7C00DE0B39 /* BITSessionStateData.m */,
+				1BFE844A1C45BD9F00DE0B39 /* BITTelemetryObject.h */,
+				1BFE844B1C45BD9F00DE0B39 /* BITTelemetryObject.m */,
+				1BFE844E1C45BDBE00DE0B39 /* BITUser.h */,
+				1BFE844F1C45BDBE00DE0B39 /* BITUser.m */,
+			);
+			name = "Contract Files";
+			sourceTree = "<group>";
+		};
+		1E260C7717D401D000C7F9FE /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				1E260C7817D401D000C7F9FE /* Changelog-template.md */,
+				1E260C7917D401D000C7F9FE /* Guide-Installation-Mac-App-template.md */,
+				1E260C7A17D401D000C7F9FE /* Guide-Installation-Setup-template.md */,
+				1EFFB86117D49DE1003FA1FD /* Guide-Migration-template.md */,
+				1E260C7C17D401D100C7F9FE /* HowTo-App-Versioning-template.md */,
+				1E260C7D17D401D100C7F9FE /* HowTo-Upload-Symbols-template.md */,
+				1E260C7E17D401D100C7F9FE /* index.html */,
+				1E260C7F17D401D200C7F9FE /* index.md */,
+				1E14CB2117E1F1EA00EEFF50 /* Troubleshooting-Crash-Reporting-Not-Working-template.md */,
+			);
+			name = docs;
+			path = ../docs;
+			sourceTree = "<group>";
+		};
+		1E260C9917D40FED00C7F9FE /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				1E7E5511187F3EE700F0858E /* BITHockeyBaseManager.h */,
+				1E7E5512187F3EE700F0858E /* BITHockeyBaseManager.m */,
+				1E7E5513187F3EE700F0858E /* BITHockeyBaseManagerPrivate.h */,
+				1E5785DD194646C00014D19A /* BITHockeyAppClient.h */,
+				1E5785DE194646C00014D19A /* BITHockeyAppClient.m */,
+				1E5785E5194647180014D19A /* BITHTTPOperation.h */,
+				1E5785E6194647180014D19A /* BITHTTPOperation.m */,
+				1E7E5514187F3EE700F0858E /* BITHockeyHelper.h */,
+				1E7E5515187F3EE700F0858E /* BITHockeyHelper.m */,
+				1E5785D919461DF60014D19A /* BITHockeyAttachment.h */,
+				1E5785DA19461DF60014D19A /* BITHockeyAttachment.m */,
+				1E7E5516187F3EE700F0858E /* HockeySDKPrivate.h */,
+				1E7E5517187F3EE700F0858E /* HockeySDKPrivate.m */,
+				1EC2956B1B30572000CD53B2 /* HockeySDKNullability.h */,
+				1E260CA417D41E9000C7F9FE /* BITKeychainItem.h */,
+				1E260CA517D41E9100C7F9FE /* BITKeychainItem.m */,
+				1EBDC04F195716F300B5C8A3 /* BITSDKColoredView.h */,
+				1EBDC050195716F300B5C8A3 /* BITSDKColoredView.m */,
+				1EBDF2AF1957878800C7F49A /* BITSDKTextFieldCell.h */,
+				1EBDF2B01957878800C7F49A /* BITSDKTextFieldCell.m */,
+				1EC7152419573CB400F72C19 /* BITSDKTextView.h */,
+				1EC7152519573CB400F72C19 /* BITSDKTextView.m */,
+				1E378AF11958498400451E28 /* BITSDKTextViewDelegate.h */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		1E403408195C2651002E98E5 /* CrashReporter */ = {
+			isa = PBXGroup;
+			children = (
+				1E85C5661B343DAE00CE2C0D /* libCrashReporter-MacOSX-Static.a */,
+				1E85C5681B343E2100CE2C0D /* Headers */,
+			);
+			path = CrashReporter;
+			sourceTree = "<group>";
+		};
+		1E7E54FC187F3ED800F0858E /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				1E7E54FD187F3ED800F0858E /* BITFeedbackManager.h */,
+				1E7E54FE187F3ED800F0858E /* BITFeedbackManager.m */,
+				1E7E54FF187F3ED800F0858E /* BITFeedbackManagerPrivate.h */,
+				1E7E5500187F3ED800F0858E /* BITFeedbackMessage.h */,
+				1E7E5501187F3ED800F0858E /* BITFeedbackMessage.m */,
+				1E852AEB19509368006E73E0 /* BITFeedbackMessageAttachment.h */,
+				1E852AEC19509368006E73E0 /* BITFeedbackMessageAttachment.m */,
+				1E378B1E1959D33700451E28 /* BITActivityIndicatorButton.h */,
+				1E378B1F1959D33700451E28 /* BITActivityIndicatorButton.m */,
+				1EC715311957524B00F72C19 /* BITFeedbackMessageCellView.h */,
+				1EC715321957524B00F72C19 /* BITFeedbackMessageCellView.m */,
+				1E378AF51958981E00451E28 /* BITFeedbackMessageCellViewDelegate.h */,
+				1EBDF2A9195780D100C7F49A /* BITFeedbackMessageDateValueTransformer.h */,
+				1EBDF2AA195780D100C7F49A /* BITFeedbackMessageDateValueTransformer.m */,
+				1E7E5504187F3ED800F0858E /* BITFeedbackWindowController.h */,
+				1E7E5505187F3ED800F0858E /* BITFeedbackWindowController.m */,
+				1E7E5506187F3ED800F0858E /* BITFeedbackWindowController.xib */,
+			);
+			path = Feedback;
+			sourceTree = "<group>";
+		};
+		1E7FB96117D3F44100B7E10D /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				1E7FB96217D3F45200B7E10D /* buildnumber.xcconfig */,
+				1E7FB96317D3F45200B7E10D /* HockeySDK.xcconfig */,
+			);
+			name = Support;
+			path = ../Vendor;
+			sourceTree = "<group>";
+		};
+		1E85C5681B343E2100CE2C0D /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				1E85C5691B343E2100CE2C0D /* CrashReporter.h */,
+				1E85C56A1B343E2100CE2C0D /* PLCrashFeatureConfig.h */,
+				1E85C56B1B343E2100CE2C0D /* PLCrashMacros.h */,
+				1E85C56C1B343E2100CE2C0D /* PLCrashNamespace.h */,
+				1E85C56D1B343E2100CE2C0D /* PLCrashReport.h */,
+				1E85C56E1B343E2100CE2C0D /* PLCrashReportApplicationInfo.h */,
+				1E85C56F1B343E2100CE2C0D /* PLCrashReportBinaryImageInfo.h */,
+				1E85C5701B343E2100CE2C0D /* PLCrashReporter.h */,
+				1E85C5711B343E2100CE2C0D /* PLCrashReporterConfig.h */,
+				1E85C5721B343E2100CE2C0D /* PLCrashReportExceptionInfo.h */,
+				1E85C5731B343E2100CE2C0D /* PLCrashReportFormatter.h */,
+				1E85C5741B343E2100CE2C0D /* PLCrashReportMachExceptionInfo.h */,
+				1E85C5751B343E2100CE2C0D /* PLCrashReportMachineInfo.h */,
+				1E85C5761B343E2100CE2C0D /* PLCrashReportProcessInfo.h */,
+				1E85C5771B343E2100CE2C0D /* PLCrashReportProcessorInfo.h */,
+				1E85C5781B343E2100CE2C0D /* PLCrashReportRegisterInfo.h */,
+				1E85C5791B343E2100CE2C0D /* PLCrashReportSignalInfo.h */,
+				1E85C57A1B343E2100CE2C0D /* PLCrashReportStackFrameInfo.h */,
+				1E85C57B1B343E2100CE2C0D /* PLCrashReportSymbolInfo.h */,
+				1E85C57C1B343E2100CE2C0D /* PLCrashReportSystemInfo.h */,
+				1E85C57D1B343E2100CE2C0D /* PLCrashReportTextFormatter.h */,
+				1E85C57E1B343E2100CE2C0D /* PLCrashReportThreadInfo.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		1EB194741BA7042D00793007 /* Telemetry */ = {
+			isa = PBXGroup;
+			children = (
+				1BFE841F1C45B9E900DE0B39 /* Contract Files */,
+				1BFE83C61C45B21100DE0B39 /* BITCategoryContainer.h */,
+				1BFE83C71C45B21100DE0B39 /* BITCategoryContainer.m */,
+				1BFE83C81C45B21100DE0B39 /* BITChannel.h */,
+				1BFE83C91C45B21100DE0B39 /* BITChannel.m */,
+				1BFE83CA1C45B21100DE0B39 /* BITGZIP.h */,
+				1BFE83CB1C45B21100DE0B39 /* BITPersistence.h */,
+				1BFE83CC1C45B21100DE0B39 /* BITPersistence.m */,
+				1BFE83CD1C45B21100DE0B39 /* BITPersistencePrivate.h */,
+				1BFE84561C45BE5900DE0B39 /* BITSender.h */,
+				1BFE84571C45BE5900DE0B39 /* BITSender.m */,
+				1BFE83D01C45B21100DE0B39 /* BITTelemetryContext.h */,
+				1BFE83D11C45B21100DE0B39 /* BITTelemetryContext.m */,
+				1BFE83D21C45B21100DE0B39 /* BITTelemetryData.h */,
+				1BFE83D31C45B21100DE0B39 /* BITTelemetryData.m */,
+				1BFE83D41C45B21100DE0B39 /* BITMetricsManager.h */,
+				1BFE83D51C45B21100DE0B39 /* BITMetricsManager.m */,
+				1BFE83D61C45B21100DE0B39 /* BITMetricsManagerPrivate.h */,
+			);
+			path = Telemetry;
+			sourceTree = "<group>";
+		};
+		1EF09D801523574200067A5C = {
+			isa = PBXGroup;
+			children = (
+				1EF09DA81523579100067A5C /* Classes */,
+				1EF09DB71523579A00067A5C /* Resources */,
+				1E7FB96117D3F44100B7E10D /* Support */,
+				1EF09DBF152357A500067A5C /* Vendor */,
+				1E260C7717D401D000C7F9FE /* docs */,
+				6F53E3061CF509AE00DC1C64 /* HockeySDKTests */,
+				1EF09D8E1523574200067A5C /* Frameworks */,
+				1EF09D8D1523574200067A5C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1EF09D8D1523574200067A5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1EF09D8C1523574200067A5C /* HockeySDK.framework */,
+				6F53E3051CF509AE00DC1C64 /* HockeySDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1EF09D8E1523574200067A5C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6F53E3141CF50DD800DC1C64 /* OCMock.framework */,
+				1EB194CA1BA70BDE00793007 /* libz.tbd */,
+				1E378AF8195899B400451E28 /* Quartz.framework */,
+				1E378AF6195899A400451E28 /* QuartzCore.framework */,
+				1E378AF319586A6900451E28 /* QuickLook.framework */,
+				1E260C9E17D414F200C7F9FE /* Security.framework */,
+				4DD13AF6162CAA2200BF15E8 /* IOKit.framework */,
+				1EF09D8F1523574200067A5C /* Cocoa.framework */,
+				1EF09D911523574200067A5C /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1EF09D911523574200067A5C /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1EF09D921523574200067A5C /* AppKit.framework */,
+				1EF09D931523574200067A5C /* CoreData.framework */,
+				1EF09D941523574200067A5C /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		1EF09DA81523579100067A5C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1E260C9917D40FED00C7F9FE /* Helper */,
+				4DD13AF0162CA7A800BF15E8 /* BetaDistribution */,
+				1EF09DCC152371DC00067A5C /* CrashReporting */,
+				1E7E54FC187F3ED800F0858E /* Feedback */,
+				1EB194741BA7042D00793007 /* Telemetry */,
+				1EF09DAE1523579100067A5C /* BITHockeyManager.h */,
+				1EF09DAF1523579100067A5C /* BITHockeyManager.m */,
+				1E260CA917D42B1500C7F9FE /* BITHockeyManagerDelegate.h */,
+			);
+			name = Classes;
+			path = ../Classes;
+			sourceTree = "<group>";
+		};
+		1EF09DB71523579A00067A5C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1EF09DBA1523579A00067A5C /* HockeySDK-Info.plist */,
+				1EF09DBB1523579A00067A5C /* HockeySDK-Prefix.pch */,
+				1E7F5A2315A46249001081FC /* HockeySDK.h */,
+				1E413D9315A0BB8800620BFE /* HockeySDK.strings */,
+			);
+			name = Resources;
+			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		1EF09DBF152357A500067A5C /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				1E403408195C2651002E98E5 /* CrashReporter */,
+			);
+			name = Vendor;
+			path = ../Vendor;
+			sourceTree = "<group>";
+		};
+		1EF09DCC152371DC00067A5C /* CrashReporting */ = {
+			isa = PBXGroup;
+			children = (
+				1EF09DCE152371DC00067A5C /* BITCrashManager.h */,
+				1EF09DCF152371DC00067A5C /* BITCrashManager.m */,
+				1ED926C817B420390046DFD3 /* BITCrashManagerPrivate.h */,
+				1EE1DFFE1524B3D600C0DA76 /* BITCrashManagerDelegate.h */,
+				1EA551FB17B3EB44004A0CB7 /* BITCrashExceptionApplication.h */,
+				1EA551FC17B3EB44004A0CB7 /* BITCrashExceptionApplication.m */,
+				1EC2956D1B30572D00CD53B2 /* BITCrashCXXExceptionHandler.h */,
+				1EC2956E1B30572D00CD53B2 /* BITCrashCXXExceptionHandler.mm */,
+				1E5785D319461DDF0014D19A /* BITCrashDetails.h */,
+				1E5785D419461DDF0014D19A /* BITCrashDetails.m */,
+				1E5785D519461DDF0014D19A /* BITCrashDetailsPrivate.h */,
+				1E5785EB194652900014D19A /* BITCrashMetaData.h */,
+				1E5785EC194652900014D19A /* BITCrashMetaData.m */,
+				1EF09DD0152371DC00067A5C /* BITCrashReportUI.h */,
+				1EF09DD1152371DC00067A5C /* BITCrashReportUI.m */,
+				1EBDC049195710CA00B5C8A3 /* BITCrashReportUI.xib */,
+				1EF09DD2152371DC00067A5C /* BITCrashReportTextFormatter.h */,
+				1EF09DD3152371DC00067A5C /* BITCrashReportTextFormatter.m */,
+				1B9D52771C8A773800D86C09 /* BITCrashReportTextFormatterPrivate.h */,
+			);
+			path = CrashReporting;
+			sourceTree = "<group>";
+		};
+		4DD13AF0162CA7A800BF15E8 /* BetaDistribution */ = {
+			isa = PBXGroup;
+			children = (
+				4DD13AF2162CA7C400BF15E8 /* BITSystemProfile.h */,
+				4DD13AF3162CA7C400BF15E8 /* BITSystemProfile.m */,
+				1E7E5529187F62B400F0858E /* BITSystemProfilePrivate.h */,
+			);
+			name = BetaDistribution;
+			sourceTree = "<group>";
+		};
+		6F53E3061CF509AE00DC1C64 /* HockeySDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				6F53E3101CF509E000DC1C64 /* BITPersistenceTests.m */,
+				6F53E3091CF509AE00DC1C64 /* Info.plist */,
+			);
+			path = HockeySDKTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1EF09D891523574200067A5C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BFE83E51C45B21100DE0B39 /* BITMetricsManager.h in Headers */,
+				1E85C58C1B343E2100CE2C0D /* PLCrashReportProcessInfo.h in Headers */,
+				1E7E551B187F3EE700F0858E /* BITHockeyHelper.h in Headers */,
+				1BFE83DE1C45B21100DE0B39 /* BITPersistencePrivate.h in Headers */,
+				1BFE84471C45BD7C00DE0B39 /* BITSessionState.h in Headers */,
+				1E7F5A2415A46249001081FC /* HockeySDK.h in Headers */,
+				1EBDF2AB195780D100C7F49A /* BITFeedbackMessageDateValueTransformer.h in Headers */,
+				1E85C5931B343E2100CE2C0D /* PLCrashReportTextFormatter.h in Headers */,
+				1E5785DB19461DF60014D19A /* BITHockeyAttachment.h in Headers */,
+				1E7E5507187F3ED800F0858E /* BITFeedbackManager.h in Headers */,
+				1BFE843D1C45BD7C00DE0B39 /* BITDomain.h in Headers */,
+				1E85C58F1B343E2100CE2C0D /* PLCrashReportSignalInfo.h in Headers */,
+				1E7E5518187F3EE700F0858E /* BITHockeyBaseManager.h in Headers */,
+				1EC7152619573CB400F72C19 /* BITSDKTextView.h in Headers */,
+				1E5785D619461DDF0014D19A /* BITCrashDetails.h in Headers */,
+				1BFE84451C45BD7C00DE0B39 /* BITSession.h in Headers */,
+				1EC715331957524B00F72C19 /* BITFeedbackMessageCellView.h in Headers */,
+				1E85C5821B343E2100CE2C0D /* PLCrashNamespace.h in Headers */,
+				1BFE84261C45BD5100DE0B39 /* BITBase.h in Headers */,
+				1E85C5921B343E2100CE2C0D /* PLCrashReportSystemInfo.h in Headers */,
+				1E85C58D1B343E2100CE2C0D /* PLCrashReportProcessorInfo.h in Headers */,
+				1E85C58B1B343E2100CE2C0D /* PLCrashReportMachineInfo.h in Headers */,
+				1E85C5801B343E2100CE2C0D /* PLCrashFeatureConfig.h in Headers */,
+				1E85C5841B343E2100CE2C0D /* PLCrashReportApplicationInfo.h in Headers */,
+				1E85C57F1B343E2100CE2C0D /* CrashReporter.h in Headers */,
+				1E7E551D187F3EE700F0858E /* HockeySDKPrivate.h in Headers */,
+				1BFE83DB1C45B21100DE0B39 /* BITGZIP.h in Headers */,
+				1E85C5911B343E2100CE2C0D /* PLCrashReportSymbolInfo.h in Headers */,
+				1E7E550E187F3ED800F0858E /* BITFeedbackWindowController.h in Headers */,
+				1BFE84431C45BD7C00DE0B39 /* BITOrderedDictionary.h in Headers */,
+				1E5785E7194647180014D19A /* BITHTTPOperation.h in Headers */,
+				1E378B201959D33700451E28 /* BITActivityIndicatorButton.h in Headers */,
+				1EF09DB51523579100067A5C /* BITHockeyManager.h in Headers */,
+				1E85C5901B343E2100CE2C0D /* PLCrashReportStackFrameInfo.h in Headers */,
+				1EF09DD5152371DC00067A5C /* BITCrashManager.h in Headers */,
+				1E852AED19509368006E73E0 /* BITFeedbackMessageAttachment.h in Headers */,
+				1BFE83E31C45B21100DE0B39 /* BITTelemetryData.h in Headers */,
+				1EF09DBE1523579A00067A5C /* HockeySDK-Prefix.pch in Headers */,
+				4DD13AF4162CA7C400BF15E8 /* BITSystemProfile.h in Headers */,
+				1E7E551A187F3EE700F0858E /* BITHockeyBaseManagerPrivate.h in Headers */,
+				1E85C5871B343E2100CE2C0D /* PLCrashReporterConfig.h in Headers */,
+				1BFE83DC1C45B21100DE0B39 /* BITPersistence.h in Headers */,
+				1E85C5851B343E2100CE2C0D /* PLCrashReportBinaryImageInfo.h in Headers */,
+				1BFE843F1C45BD7C00DE0B39 /* BITEnvelope.h in Headers */,
+				1BFE84501C45BDBE00DE0B39 /* BITUser.h in Headers */,
+				1EF09DD7152371DC00067A5C /* BITCrashReportUI.h in Headers */,
+				1E85C58A1B343E2100CE2C0D /* PLCrashReportMachExceptionInfo.h in Headers */,
+				1EF09DD9152371DC00067A5C /* BITCrashReportTextFormatter.h in Headers */,
+				1E85C5861B343E2100CE2C0D /* PLCrashReporter.h in Headers */,
+				1EA551FD17B3EB44004A0CB7 /* BITCrashExceptionApplication.h in Headers */,
+				1BFE83E11C45B21100DE0B39 /* BITTelemetryContext.h in Headers */,
+				1E5785E1194646C00014D19A /* BITHockeyAppClient.h in Headers */,
+				1E5785D819461DDF0014D19A /* BITCrashDetailsPrivate.h in Headers */,
+				1E85C5891B343E2100CE2C0D /* PLCrashReportFormatter.h in Headers */,
+				1E85C5881B343E2100CE2C0D /* PLCrashReportExceptionInfo.h in Headers */,
+				1BFE84241C45BD5100DE0B39 /* BITApplication.h in Headers */,
+				1BFE83D91C45B21100DE0B39 /* BITChannel.h in Headers */,
+				1BFE84481C45BD7C00DE0B39 /* BITSessionStateData.h in Headers */,
+				1BFE84391C45BD7C00DE0B39 /* BITData.h in Headers */,
+				1E20566E15A5F61F008FC20A /* BITCrashManagerDelegate.h in Headers */,
+				1E7E5509187F3ED800F0858E /* BITFeedbackManagerPrivate.h in Headers */,
+				1E260CA617D41E9100C7F9FE /* BITKeychainItem.h in Headers */,
+				1EBDC051195716F300B5C8A3 /* BITSDKColoredView.h in Headers */,
+				1B9D52781C8A773800D86C09 /* BITCrashReportTextFormatterPrivate.h in Headers */,
+				1E7E552A187F62B400F0858E /* BITSystemProfilePrivate.h in Headers */,
+				1E85C5811B343E2100CE2C0D /* PLCrashMacros.h in Headers */,
+				1BFE84581C45BE5900DE0B39 /* BITSender.h in Headers */,
+				1BFE83D71C45B21100DE0B39 /* BITCategoryContainer.h in Headers */,
+				1BFE83E71C45B21100DE0B39 /* BITMetricsManagerPrivate.h in Headers */,
+				1EC2956F1B30572D00CD53B2 /* BITCrashCXXExceptionHandler.h in Headers */,
+				1E7E550A187F3ED800F0858E /* BITFeedbackMessage.h in Headers */,
+				1E5785ED194652900014D19A /* BITCrashMetaData.h in Headers */,
+				1EC2956C1B30572000CD53B2 /* HockeySDKNullability.h in Headers */,
+				1E85C5941B343E2100CE2C0D /* PLCrashReportThreadInfo.h in Headers */,
+				1BFE843B1C45BD7C00DE0B39 /* BITDevice.h in Headers */,
+				1EBDF2B11957878800C7F49A /* BITSDKTextFieldCell.h in Headers */,
+				1E85C5831B343E2100CE2C0D /* PLCrashReport.h in Headers */,
+				1BFE84411C45BD7C00DE0B39 /* BITInternal.h in Headers */,
+				1BFE844C1C45BD9F00DE0B39 /* BITTelemetryObject.h in Headers */,
+				1E85C58E1B343E2100CE2C0D /* PLCrashReportRegisterInfo.h in Headers */,
+				1E260CAA17D42B1E00C7F9FE /* BITHockeyManagerDelegate.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1EF09D8B1523574200067A5C /* HockeySDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1EF09DA11523574200067A5C /* Build configuration list for PBXNativeTarget "HockeySDK" */;
+			buildPhases = (
+				1EF09D8A1523574200067A5C /* Resources */,
+				1EF09D871523574200067A5C /* Sources */,
+				1EF09D881523574200067A5C /* Frameworks */,
+				4C7E213C159C900B00D02AD1 /* CopyFiles */,
+				1EF09D891523574200067A5C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HockeySDK;
+			productName = HockeySDK;
+			productReference = 1EF09D8C1523574200067A5C /* HockeySDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		6F53E3041CF509AE00DC1C64 /* HockeySDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F53E30D1CF509AE00DC1C64 /* Build configuration list for PBXNativeTarget "HockeySDKTests" */;
+			buildPhases = (
+				6F53E3011CF509AE00DC1C64 /* Sources */,
+				6F53E3021CF509AE00DC1C64 /* Frameworks */,
+				6F53E3031CF509AE00DC1C64 /* Resources */,
+				6F53E3161CF50DF800DC1C64 /* Copy Files */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6F53E30C1CF509AE00DC1C64 /* PBXTargetDependency */,
+			);
+			name = HockeySDKTests;
+			productName = HockeySDKTests;
+			productReference = 6F53E3051CF509AE00DC1C64 /* HockeySDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1EF09D821523574200067A5C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				TargetAttributes = {
+					6F53E3041CF509AE00DC1C64 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 1EF09D851523574200067A5C /* Build configuration list for PBXProject "HockeySDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				de,
+				fi,
+				fr,
+				it,
+				nb,
+				sv,
+				ja,
+			);
+			mainGroup = 1EF09D801523574200067A5C;
+			productRefGroup = 1EF09D8D1523574200067A5C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1EF09D8B1523574200067A5C /* HockeySDK */,
+				1E7FB95C17D3F36B00B7E10D /* HockeySDK Documentation */,
+				1E3B4F6B1996796B00203B89 /* HockeySDK Distribution */,
+				6F53E3041CF509AE00DC1C64 /* HockeySDKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1EF09D8A1523574200067A5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E7E5510187F3ED800F0858E /* BITFeedbackWindowController.xib in Resources */,
+				1E413D9615A0FA0100620BFE /* HockeySDK.strings in Resources */,
+				1EBDC04A195710CA00B5C8A3 /* BITCrashReportUI.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F53E3031CF509AE00DC1C64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E3B4F731996797B00203B89 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Sets the target folders and the final framework product.\nFMK_NAME=HockeySDK\n\n# Documentation\nHOCKEYSDK_DOCSET_VERSION_NAME=\"de.bitstadium.${HOCKEYSDK_DOCSET_NAME}-${VERSION_STRING}\"\n\n# Install dir will be the final output to the framework.\n# The following line create it in the root folder of the current project.\nPRODUCTS_DIR=${SRCROOT}/../Products\nZIP_FOLDER=HockeySDK-Mac\nTEMP_DIR=${PRODUCTS_DIR}/${ZIP_FOLDER}\n\n# Working dir will be deleted after the framework creation.\nWRK_DIR=build\n\n# Building the framework.\nxcodebuild -project \"HockeySDK.xcodeproj\" -configuration \"Release\" -target \"${FMK_NAME}\"\n\n# Codesign frameworks\ncodesign --verbose --force --sign \"Developer ID Application: Bit Stadium GmbH\" \"${WRK_DIR}/Release/${FMK_NAME}.framework\"\n\n# Cleaning the oldest.\nif [ -d \"${TEMP_DIR}\" ]\nthen\nrm -rf \"${TEMP_DIR}\"\nfi\n\n# Creates and renews the final product folder.\nmkdir -p \"${TEMP_DIR}\"\n\n# Copy build frameworks into product folder\nmv \"${WRK_DIR}/Release/${FMK_NAME}.framework\" \"${TEMP_DIR}\"\nmv \"${WRK_DIR}/Release/${FMK_NAME}.framework.dSYM\" \"${TEMP_DIR}\"\n\nrm -r \"${WRK_DIR}\"\n\n# copy license, changelog, documentation, integration json\ncp -f \"${SRCROOT}/../docs/Changelog-template.md\" \"${TEMP_DIR}/CHANGELOG\"\ncp -f \"${SRCROOT}/../docs/Guide-Installation-Setup-template.md\" \"${TEMP_DIR}/README.md\"\ncp -f \"${SRCROOT}/../LICENSE.md\" \"${TEMP_DIR}\"\nmkdir \"${TEMP_DIR}/${HOCKEYSDK_DOCSET_VERSION_NAME}.docset\"\ncp -R \"${SRCROOT}/../documentation/docset/Contents\" \"${TEMP_DIR}/${HOCKEYSDK_DOCSET_VERSION_NAME}.docset\"\n\n# build zip\ncd \"${PRODUCTS_DIR}\"\nrm -f \"${FMK_NAME}-Mac-${VERSION_STRING}.zip\"\nzip -yr \"${FMK_NAME}-Mac-${VERSION_STRING}.zip\" \"${ZIP_FOLDER}\" -x \\*/.*\n";
+		};
+		1E7FB96017D3F37100B7E10D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${SRCROOT}/appledoc \\\n--output \"${SOURCE_ROOT}/../documentation\" \\\n--ignore Vendor \\\n--ignore Products \\\n--ignore Support \\\n--ignore .m \\\n--ignore BITKeychainItem.h \\\n--ignore BITGenericKeychainItem.h \\\n--create-html \\\n--create-docset \\\n--install-docset \\\n--keep-intermediate-files \\\n--project-name \"${HOCKEYSDK_DOCSET_NAME} ${VERSION_STRING}\" \\\n--project-version \"${VERSION_STRING}\" \\\n--project-company \"Bit Stadium GmbH\" \\\n--company-id \"de.bitstadium\" \\\n--docset-bundle-name \"${HOCKEYSDK_DOCSET_NAME} ${VERSION_STRING}\" \\\n--docset-feed-name \"${HOCKEYSDK_DOCSET_NAME}\" \\\n--docset-desc \"\" \\\n--docset-platform-family \"macosx\" \\\n--index-desc \"${SOURCE_ROOT}/../docs/index.md\" \\\n--include \"${SOURCE_ROOT}/../docs/index.html\" \\\n--include \"${SOURCE_ROOT}/../docs/\" \\\n--merge-categories \\\n--no-repeat-first-par \\\n--warn-undocumented-object \\\n--warn-undocumented-member \\\n--warn-empty-description \\\n--warn-unknown-directive \\\n--warn-invalid-crossref \\\n--warn-missing-arg \\\n--logformat xcode \\\n--exit-threshold 2 \\\n\"${SOURCE_ROOT}/../\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1EF09D871523574200067A5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BFE843E1C45BD7C00DE0B39 /* BITDomain.m in Sources */,
+				1BFE83E41C45B21100DE0B39 /* BITTelemetryData.m in Sources */,
+				1BFE83DD1C45B21100DE0B39 /* BITPersistence.m in Sources */,
+				1E5785E8194647180014D19A /* BITHTTPOperation.m in Sources */,
+				1BFE84511C45BDBE00DE0B39 /* BITUser.m in Sources */,
+				1BFE84441C45BD7C00DE0B39 /* BITOrderedDictionary.m in Sources */,
+				1EF09DB61523579100067A5C /* BITHockeyManager.m in Sources */,
+				1BFE843A1C45BD7C00DE0B39 /* BITData.m in Sources */,
+				1E7E5519187F3EE700F0858E /* BITHockeyBaseManager.m in Sources */,
+				1E5785D719461DDF0014D19A /* BITCrashDetails.m in Sources */,
+				1BFE83D81C45B21100DE0B39 /* BITCategoryContainer.m in Sources */,
+				1BFE84251C45BD5100DE0B39 /* BITApplication.m in Sources */,
+				1E7E551C187F3EE700F0858E /* BITHockeyHelper.m in Sources */,
+				1BFE84421C45BD7C00DE0B39 /* BITInternal.m in Sources */,
+				1EC7152719573CB400F72C19 /* BITSDKTextView.m in Sources */,
+				1BFE84591C45BE5900DE0B39 /* BITSender.m in Sources */,
+				1E5785EE194652900014D19A /* BITCrashMetaData.m in Sources */,
+				1EF09DD6152371DC00067A5C /* BITCrashManager.m in Sources */,
+				1EA551FE17B3EB44004A0CB7 /* BITCrashExceptionApplication.m in Sources */,
+				1EF09DD8152371DC00067A5C /* BITCrashReportUI.m in Sources */,
+				1EBDF2B21957878800C7F49A /* BITSDKTextFieldCell.m in Sources */,
+				1EF09DDA152371DC00067A5C /* BITCrashReportTextFormatter.m in Sources */,
+				4DD13AF5162CA7C400BF15E8 /* BITSystemProfile.m in Sources */,
+				1BFE83E61C45B21100DE0B39 /* BITMetricsManager.m in Sources */,
+				1EBDF2AC195780D100C7F49A /* BITFeedbackMessageDateValueTransformer.m in Sources */,
+				1E7E550F187F3ED800F0858E /* BITFeedbackWindowController.m in Sources */,
+				1E5785E2194646C00014D19A /* BITHockeyAppClient.m in Sources */,
+				1BFE843C1C45BD7C00DE0B39 /* BITDevice.m in Sources */,
+				1E7E550B187F3ED800F0858E /* BITFeedbackMessage.m in Sources */,
+				1BFE844D1C45BD9F00DE0B39 /* BITTelemetryObject.m in Sources */,
+				1BFE84461C45BD7C00DE0B39 /* BITSession.m in Sources */,
+				1E852AEE19509368006E73E0 /* BITFeedbackMessageAttachment.m in Sources */,
+				1EC295701B30572D00CD53B2 /* BITCrashCXXExceptionHandler.mm in Sources */,
+				1E7E5508187F3ED800F0858E /* BITFeedbackManager.m in Sources */,
+				1EBDC052195716F300B5C8A3 /* BITSDKColoredView.m in Sources */,
+				1E7E551E187F3EE700F0858E /* HockeySDKPrivate.m in Sources */,
+				1E5785DC19461DF60014D19A /* BITHockeyAttachment.m in Sources */,
+				1BFE83E21C45B21100DE0B39 /* BITTelemetryContext.m in Sources */,
+				1EC715341957524B00F72C19 /* BITFeedbackMessageCellView.m in Sources */,
+				1BFE84491C45BD7C00DE0B39 /* BITSessionStateData.m in Sources */,
+				1BFE84271C45BD5100DE0B39 /* BITBase.m in Sources */,
+				1BFE84401C45BD7C00DE0B39 /* BITEnvelope.m in Sources */,
+				1E260CA717D41E9100C7F9FE /* BITKeychainItem.m in Sources */,
+				1E378B211959D33700451E28 /* BITActivityIndicatorButton.m in Sources */,
+				1BFE83DA1C45B21100DE0B39 /* BITChannel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F53E3011CF509AE00DC1C64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F53E3111CF509E000DC1C64 /* BITPersistenceTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1E3B4F701996797200203B89 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E7FB95C17D3F36B00B7E10D /* HockeySDK Documentation */;
+			targetProxy = 1E3B4F6F1996797200203B89 /* PBXContainerItemProxy */;
+		};
+		6F53E30C1CF509AE00DC1C64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1EF09D8B1523574200067A5C /* HockeySDK */;
+			targetProxy = 6F53E30B1CF509AE00DC1C64 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1E413D9315A0BB8800620BFE /* HockeySDK.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E413D9215A0BB8800620BFE /* en */,
+				1E413D9515A0BB9700620BFE /* de */,
+				1E66F5E015A1C47700C0816F /* fi */,
+				1E66F5E215A1C49400C0816F /* fr */,
+				1E66F5E315A1C4A700C0816F /* it */,
+				1E66F5E415A1C4BF00C0816F /* nb */,
+				1E66F5E515A1C4D100C0816F /* sv */,
+				1EE8CF7E17147CF20088444D /* ja */,
+			);
+			name = HockeySDK.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1E3B4F6C1996796B00203B89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1E3B4F6D1996796B00203B89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		1E7FB95D17D3F36B00B7E10D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1E7FB95E17D3F36B00B7E10D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		1EF09D9F1523574200067A5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E7FB96217D3F45200B7E10D /* buildnumber.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1EF09DA01523574200067A5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E7FB96217D3F45200B7E10D /* buildnumber.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1EF09DA21523574200067A5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "../Resources/HockeySDK-Prefix.pch";
+				INFOPLIST_FILE = "../Resources/HockeySDK-Info.plist";
+				INSTALL_PATH = "@rpath";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Vendor/CrashReporter\"",
+				);
+				OTHER_LDFLAGS = " -lz";
+				PRODUCT_BUNDLE_IDENTIFIER = net.hockeyapp.sdk.mac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		1EF09DA31523574200067A5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "../Resources/HockeySDK-Prefix.pch";
+				INFOPLIST_FILE = "../Resources/HockeySDK-Info.plist";
+				INSTALL_PATH = "@rpath";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Vendor/CrashReporter\"",
+				);
+				OTHER_LDFLAGS = " -lz";
+				PRODUCT_BUNDLE_IDENTIFIER = net.hockeyapp.sdk.mac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		6F53E30E1CF509AE00DC1C64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = HockeySDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = net.hockeyapp.sdk.mac.HockeySDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6F53E30F1CF509AE00DC1C64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = HockeySDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = net.hockeyapp.sdk.mac.HockeySDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1E3B4F6E1996796B00203B89 /* Build configuration list for PBXAggregateTarget "HockeySDK Distribution" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E3B4F6C1996796B00203B89 /* Debug */,
+				1E3B4F6D1996796B00203B89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E7FB95F17D3F36B00B7E10D /* Build configuration list for PBXAggregateTarget "HockeySDK Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E7FB95D17D3F36B00B7E10D /* Debug */,
+				1E7FB95E17D3F36B00B7E10D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1EF09D851523574200067A5C /* Build configuration list for PBXProject "HockeySDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EF09D9F1523574200067A5C /* Debug */,
+				1EF09DA01523574200067A5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1EF09DA11523574200067A5C /* Build configuration list for PBXNativeTarget "HockeySDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EF09DA21523574200067A5C /* Debug */,
+				1EF09DA31523574200067A5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F53E30D1CF509AE00DC1C64 /* Build configuration list for PBXNativeTarget "HockeySDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F53E30E1CF509AE00DC1C64 /* Debug */,
+				6F53E30F1CF509AE00DC1C64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1EF09D821523574200067A5C /* Project object */;
+}

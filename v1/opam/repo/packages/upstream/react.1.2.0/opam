@@ -1,0 +1,21 @@
+opam-version: "1.2"
+maintainer: "Daniel Bünzli <daniel.buenzl i@erratique.ch>"
+homepage: "http://erratique.ch/software/react"
+authors: ["Daniel Bünzli <daniel.buenzl i@erratique.ch>"]
+doc: "http://erratique.ch/software/react/doc/React"
+#dev-repo: "http://erratique.ch/repos/react.git"
+#bug-reports: "https://github.com/dbuenzli/react/issues"
+tags: [ "reactive" "declarative" "signal" "event" "frp" "org:erratique" ]
+license: "BSD3"
+depends: [
+  "ocamlfind"
+  "ocamlbuild" {build}
+]
+ocaml-version: [>= "4.00.0"]
+build: 
+[
+  [ "ocaml" "pkg/git.ml" ]
+  [ "ocaml" "pkg/build.ml" "native=true" # TODO fixme
+                           "native-dynlink=true" # TODO fixme
+ ]
+]

@@ -1,0 +1,15 @@
+/* 
+  App.strings
+  
+
+  Created by Adrian Duermael on 12/9/15.
+
+*/
+
+// Installer
+"CheckHostVersionError" = "Incompatible OSX Version";
+"CheckHostVersionErrorDetails" = "Docker requires OSX version %1$d.%2$d.%3$d or higher. %4$@ detected.";
+"CheckHostCPUError"="Incompatible CPU Detected";
+"CheckHostCPUErrorDetails"="Docker requires a processor with the VMX extension.\nYou can still download the Docker Toolbox that will emulate it\nhttps://www.docker.com/docker-toolbox";
+"CheckHostRAMError"="Not enough memory";
+"CheckHostRAMErrorDetails"="Docker requires %d bytes to run.\nWe detected %d bytes available";

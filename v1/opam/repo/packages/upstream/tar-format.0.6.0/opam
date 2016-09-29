@@ -1,0 +1,37 @@
+opam-version: "1.2"
+maintainer:   "dave@recoil.org"
+authors:      [ "Dave Scott" "Thomas Gazagnaire" "David Allsopp" ]
+tags:         ["org:xapi-project" "org:mirage"]
+homepage:     "https://github.com/mirage/ocaml-tar"
+bug-reports:  "https://github.com/mirage/ocaml-tar/issues"
+dev-repo:     "https://github.com/mirage/ocaml-tar.git"
+
+build: [
+  ["ocaml" "setup.ml" "-configure"
+     "--prefix" prefix
+     "--%{lwt:enable}%-lwtunix"
+     "--%{mirage-types-lwt:enable}%-mirage" ]
+  ["ocaml" "setup.ml" "-build"]
+]
+build-test: [
+  ["ocaml" "setup.ml" "-configure"
+    "--enable-tests" "--enable-lwtunix" "--enable-mirage"]
+  [make "test"]
+]
+install: ["ocaml" "setup.ml" "-install"]
+remove:  ["ocamlfind" "remove" "tar"]
+
+depends: [
+  "ocamlfind"
+  "cstruct"           {>= "1.9.0"}
+  "ppx_tools"         {build}
+  "re"
+  "result"
+  "cmdliner"
+  "ounit"             {test}
+  "mirage-block-unix" {test}
+  "lwt"               {test}
+  "mirage-types-lwt"  {test}
+]
+depopts: ["lwt" "mirage-types-lwt"]
+available: [ ocaml-version >= "4.01.0" ]

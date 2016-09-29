@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# We want to track the results of each configuration over time, as the code
+# improves (or regresses). If the test will produce different output depending
+# on the
+# - hypervisor
+# - network stack
+# - filesystem implementation
+# then we include the value of these variables in the test configuration so
+# we avoid making unexpected comparisons.
+
+# Example configurations:
+#
+# slirp
+# e1000.vbox
+# osxfs
+# ahci.vmdk.fusion
+
+. $(dirname $0)/../../lib/functions
+
+echo ${hypervisor}.${filesystem}

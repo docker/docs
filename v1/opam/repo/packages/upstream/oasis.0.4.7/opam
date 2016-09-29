@@ -1,0 +1,52 @@
+opam-version: "1.2"
+maintainer: "Sylvain Le Gall <gildor@ocamlcore.org>"
+authors: [ "Sylvain Le Gall" ]
+license: "LGPL-2.1 with OCaml linking exception"
+homepage: "http://oasis.forge.ocamlcore.org/"
+dev-repo: "git://github.com/gildor478/oasis.git"
+bug-reports: "http://oasis.forge.ocamlcore.org/"
+build: [
+  ["ocaml" "setup.ml" "-configure" "--prefix" prefix]
+  ["ocaml" "setup.ml" "-build"]
+]
+install: ["ocaml" "setup.ml" "-install"]
+remove: [
+  ["ocaml" "%{etc}%/oasis/_oasis_remove_.ml" "%{etc}%/oasis"]
+]
+build-doc: [ "ocaml" "setup.ml" "-doc" ]
+depends: [
+  "base-unix"
+  "ocamlbuild"
+  "ocamlfind" {>= "1.3.1"}
+  "ocamlify" {build}
+  "ocamlmod" {build}
+]
+depopts: [
+  "benchmark"
+  "fileutils"
+  "pcre"
+]
+conflicts: [
+  "benchmark" {< "1.2"}
+  "fileutils" {< "0.4.2"}
+  "oasis-mirage" {= "0.3.0a"}
+  "oasis-mirage" {= "0.3.0"}
+  # Following package have a bug with OASIS 0.4.7, the conflicts should be
+  # removed in OASIS 0.4.8.
+  "maildir"
+  "otto"
+  "hamt"
+  "bistro" {<= "0.1.0"}
+  "expect" {<= "0.0.2"}
+  "receive-mail"
+  "facebook-sdk"
+  "mqtt_client"
+  "sociaml-vcard"
+  "sociaml-facebook-api"
+  "ocaml-radixtree"
+  "simple_pam"
+  "sociaml-oauth-client"
+  "ctypes" {<= "0.1.1"}
+  "macaque" {<= "0.6.1"}
+]
+available: [ ocaml-version >= "3.12.1" ]

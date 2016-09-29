@@ -1,0 +1,30 @@
+opam-version: "1.2"
+maintainer: "dave@recoil.org"
+authors: [ "David Scott" ]
+license: "ISC"
+homepage: "https://github.com/djs55/ocaml-named-pipe"
+dev-repo: "https://github.com/djs55/ocaml-named-pipe.git"
+bug-reports: "https://github.com/djs55/ocaml-named-pipe/issues"
+
+build: [
+  ["ocaml" "setup.ml" "-configure" "--%{alcotest:enable}%-tests" ]
+  [make]
+]
+
+build-test:[
+  [make "test"]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "named-pipe"]
+
+depends: [
+  "base-bytes"
+  "lwt" {>= "2.4.7"}
+  "base-unix"
+  "cmdliner"
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "alcotest" {test & >= "0.4.0"}
+]
+
+available: [ ocaml-version >= "3.12.1" ]

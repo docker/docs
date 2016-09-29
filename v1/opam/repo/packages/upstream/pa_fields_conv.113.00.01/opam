@@ -1,0 +1,17 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage:    "https://github.com/janestreet/pa_fields_conv"
+bug-reports: "https://github.com/janestreet/pa_fields_conv/issues"
+dev-repo:    "https://github.com/janestreet/pa_fields_conv.git"
+license: "Apache-2.0"
+build:   [[make]]
+install: [[make "install"]]
+remove:  [["ocamlfind" "remove" "pa_fields_conv"]]
+depends: [
+  "camlp4"
+  "ocamlfind"  {>= "1.3.2"}
+  "type_conv"  {>= "113.00.00" & < "113.01.00"}
+  "ocamlbuild" {build}
+]
+available: [ ocaml-version >= "4.00.0" & ocaml-version < "4.03" ]

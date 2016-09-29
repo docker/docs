@@ -1,0 +1,37 @@
+opam-version: "1.2"
+maintainer: "yallop@gmail.com"
+author: "yallop@gmail.com"
+homepage: "https://github.com/ocamllabs/ocaml-ctypes"
+doc: "http://ocamllabs.github.io/ocaml-ctypes"
+dev-repo: "http://github.com/ocamllabs/ocaml-ctypes.git"
+bug-reports: "http://github.com/ocamllabs/ocaml-ctypes/issues"
+license: "MIT"
+build: [
+  [make "XEN=%{mirage-xen:enable}%" "libffi.config"] {ctypes-foreign:installed}
+  ["touch" "libffi.config"]                          {!ctypes-foreign:installed}
+  [make "XEN=%{mirage-xen:enable}%" "ctypes-base" "ctypes-stubs"]
+  [make "XEN=%{mirage-xen:enable}%" "ctypes-foreign"] {ctypes-foreign:installed}
+]
+build-test: [
+   [make "test"]
+]
+install: [
+  [make "install" "XEN=%{mirage-xen:enable}%"]
+]
+remove: [
+  ["ocamlfind" "remove" "ctypes"]
+]
+depends: [
+   "base-bytes"
+   "ocamlfind" {build}
+   "conf-pkg-config" {build}
+   "lwt" {test}
+   "ounit" {test}
+   "ctypes-foreign" {test}
+]
+depopts: [
+   "ctypes-foreign"
+   "mirage-xen"
+]
+tags: ["org:ocamllabs" "org:mirage"]
+available: [ ocaml-version >= "4.01.0" ]

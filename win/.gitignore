@@ -1,0 +1,25 @@
+build/
+tests/
+buildlog.txt
+log.txt*
+
+## Various settings
+
+## Other
+*.o
+src/Resources/sha1
+src/Resources/UpdateChannel
+
+## CI
+.paket/
+.fake/
+TestResults/
+buildng/
+bin/FAKE*
+bin/nunit
+
+## Windows
+InstallUtil.InstallLog
+
+## IDE
+.idea/

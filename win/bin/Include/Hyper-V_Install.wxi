@@ -1,0 +1,26 @@
+<Include>
+	<Feature Id="HVInstallScript"
+		  Title="Hyper-V Installer"
+		  AllowAdvertise="no"
+		  Display="hidden" Level="1">
+		<ComponentRef Id="HyperVInstaller"/>
+	</Feature>
+
+	<SetProperty Id="RunPSHVInstall"
+         After="InstallFiles"
+         Sequence="execute"
+         Value ="&quot;[POWERSHELLEXE]&quot; -NonInteractive -ExecutionPolicy Bypass -File &quot;[#HyperVInstaller]&quot; -IsoFile &quot;[$(var.ManufacturerName)RootDir]$(var.ProductName)\Resources\mobylinux.iso&quot; -Create" />
+
+	<CustomAction Id="RunPSHVInstall"
+              BinaryKey="WixCA"
+              DllEntry="CAQuietExec"
+              Execute="deferred"
+              Return="check"
+              Impersonate="no" />
+
+	<InstallExecuteSequence>
+  		<Custom Action="RunPSHVInstall" Before="InstallFinalize">
+    		NOT Installed
+  		</Custom>
+	</InstallExecuteSequence>
+</Include>

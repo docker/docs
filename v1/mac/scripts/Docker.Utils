@@ -1,0 +1,522 @@
+#!/usr/bin/env bash
+
+################################################################################
+# Docker.Utils created on 2015-07-01 by michaK                                 #
+################################################################################
+#                       ____             __                                    #
+#                      / __ \____  _____/ /_____  _____                        #
+#                     / / / / __ \/ ___/ //_/ _ \/ ___/                        #
+#                    / /_/ / /_/ / /__/ ,< /  __/ /                            #
+#                   /_____/\____/\___/_/|_|\___/_/                             #
+#                                                                              #
+################################################################################
+#                     Shell Utilities                                          #
+################################################################################
+
+coloredLogs=true
+logFilename="/tmp/log.txt"
+
+Log ()
+{
+  if [ $verbose = true ]; then
+    local timestamp=$(date +%T)
+    printf "[${IYel}$timestamp${RCol}] ${Blu}==>${RCol} $1\n"
+  fi
+}
+
+LogImportant ()
+{
+  local timestamp=$(date +%T)
+  printf "[${IYel}$timestamp${RCol}] ${Cya}==>${RCol} ${BWhi}$1${RCol}\n"
+}
+
+LogWarning ()
+{
+  local timestamp=$(date +%T)
+  printf "[${IYel}$timestamp${RCol}] ${Yel}==>${RCol} $1\n"
+}
+
+LogSuccess ()
+{
+  local timestamp=$(date +%T)
+  printf "[${IYel}$timestamp${RCol}] ${BIBlu} ${success}  Success:${RCol} ${BIWhi}$1${RCol}\n"
+}
+
+LogCompleted ()
+{
+  local timestamp=$(date +%T)
+  printf "[${IGre}$timestamp${RCol}] ${BIGre} ${completed}  Completed:${RCol} ${BIWhi}$1${RCol}\n"
+}
+
+# Some failures are caused by the environment: try to capture these
+LogDiagnostics ()
+{
+  used=$(df . | tail -1 | cut -f 9 -d " ")
+  if [ "${used}" = "100%" ]; then
+    echo The disk containing the build tree is full:
+    df .
+    echo
+    echo Computing the size of the tree:
+    du -hs ${MAC_FOLDER_PATH}/../..
+    echo
+  fi
+  used=$(df ${cacheDirectory} | tail -1 | cut -f 9 -d " ")
+  if [ "${used}" = "100%" ]; then
+    echo The disk containing the cache is full:
+    df ${cacheDirectory}
+    echo
+    echo Computing the size of the cache:
+    du -hs ${cacheDirectory}
+    echo
+  fi
+}
+
+LogError ()
+{
+  local timestamp=$(date +%T)
+  printf "\n[${Red}$timestamp${RCol}] ${BIRed} ${failure}  Error:${RCol} $1\n\n"
+  #quick animation to give a chance to read the error message
+  column=46
+  while [ $column -gt 0 ]
+  do
+    if [ $column -eq 28 ]; then
+      while [ $column -ge 16 ]
+      do
+        if [ $column -eq 28 ]; then printf "[$Red"; fi; if [ $column -eq 26 ]; then printf "O"; fi; if [ $column -eq 24 ]; then printf "U"; fi; if [ $column -eq 22 ]; then printf "C"; fi; if [ $column -eq 20 ]; then printf "H"; fi; if [ $column -eq 18 ]; then printf "!"; fi; if [ $column -eq 16 ]; then printf "$RCol]"; fi
+        printf " "
+      column=`expr $column - 1`
+      done
+    fi
+    printf "$failure  "
+    sleep 0.01
+    column=`expr $column - 2`
+  done
+  echo ""
+  echo ""
+  if [ $verbose = false ]; then
+    echo "Use -v for verbose debug output"
+  fi
+  echo ""
+  LogDiagnostics
+  exit -1
+}
+
+if [ "$(uname)" = "Darwin" ]; then
+  # LogImportant "OSX $(sw_vers -productVersion) detected."
+  scriptPlatformVersion=$(sw_vers -productVersion)
+  revision="$(echo $scriptPlatformVersion | cut -d . -f2)"
+  if [ $revision -lt 9 ]; then
+#   Log "OSX $(sw_vers -productVersion) detected."
+# else
+    LogWarning "This script requires OSX 10.9.x or higher to run. Please upgrade your computer"
+  fi
+fi
+
+scriptArch=`uname -m`
+if [ ${scriptArch} = 'i686' ]; then
+  scriptArch='x86'
+fi
+
+xsed="sed -i ''"
+
+# Color Definitions
+################################################################################
+
+RCol='\e[0m'    # Text Reset
+
+# Regular           Bold                Underline           High Intensity      BoldHigh Intens     Background          High Intensity Backgrounds
+Bla='\e[0;30m';     BBla='\e[1;30m';    UBla='\e[4;30m';    IBla='\e[0;90m';    BIBla='\e[1;90m';   On_Bla='\e[40m';    On_IBla='\e[0;100m';
+Red='\e[0;31m';     BRed='\e[1;31m';    URed='\e[4;31m';    IRed='\e[0;91m';    BIRed='\e[1;91m';   On_Red='\e[41m';    On_IRed='\e[0;101m';
+Gre='\e[0;32m';     BGre='\e[1;32m';    UGre='\e[4;32m';    IGre='\e[0;92m';    BIGre='\e[1;92m';   On_Gre='\e[42m';    On_IGre='\e[0;102m';
+Yel='\e[0;33m';     BYel='\e[1;33m';    UYel='\e[4;33m';    IYel='\e[0;93m';    BIYel='\e[1;93m';   On_Yel='\e[43m';    On_IYel='\e[0;103m';
+Blu='\e[0;34m';     BBlu='\e[1;34m';    UBlu='\e[4;34m';    IBlu='\e[0;94m';    BIBlu='\e[1;94m';   On_Blu='\e[44m';    On_IBlu='\e[0;104m';
+Pur='\e[0;35m';     BPur='\e[1;35m';    UPur='\e[4;35m';    IPur='\e[0;95m';    BIPur='\e[1;95m';   On_Pur='\e[45m';    On_IPur='\e[0;105m';
+Cya='\e[0;36m';     BCya='\e[1;36m';    UCya='\e[4;36m';    ICya='\e[0;96m';    BICya='\e[1;96m';   On_Cya='\e[46m';    On_ICya='\e[0;106m';
+Whi='\e[0;37m';     BWhi='\e[1;37m';    UWhi='\e[4;37m';    IWhi='\e[0;97m';    BIWhi='\e[1;97m';   On_Whi='\e[47m';    On_IWhi='\e[0;107m';
+
+################################################################################
+############################# Utilities Functions ##############################
+################################################################################
+
+# Emoji unicode characters
+################################################################################
+beers=$'\360\237\215\273'
+failure=$'\360\237\215\271'
+wine=$'\360\237\215\267'
+trophy=$'\360\237\217\206'
+bomb=$'\360\237\222\243'
+strawberry=$'\xF0\x9F\x8D\x93'
+highvoltage=$'\xE2\x9A\xA1'
+banana=$'\xF0\x9F\x8D\x8C'
+cherry=$'\xF0\x9F\x8D\x92'
+whale=$'\xF0\x9F\x90\xB3'
+whale2=$'\xF0\x9F\x90\x8B'
+
+success=$whale
+failure=$bomb
+completed=$whale2
+# converts a number of seconds into 1h 23m 12s
+################################################################################
+
+hms_str=''
+hms ()
+{
+  local secs=${1:?}
+  h=$(( secs / 3600 ))
+  m=$(( ( secs / 60 ) % 60 ))
+  s=$(( secs % 60 ))
+
+  #printf "%02d:%02d:%02d" $h $m $s
+  if [ $h -gt 0 ]; then hms_str="${h}h ${m}m ${s}s" return 0; fi
+  if [ $m -gt 0 ]; then hms_str="${m}m ${s}s"; return 0; fi
+  if [ $s -gt 0 ]; then hms_str="${s}s"; return 0; fi
+  hms_str="0s";
+}
+
+# Prompts the user with a [Y/n] question and returns 0 or 1
+################################################################################
+PromptYesNo ()
+{
+  if [ ${autoYes} = true ]; then
+    return 0
+  fi
+  while true; do
+    LogImportant "$1 [Y/n]"
+    read yn
+    case $yn in
+      [Yy]* ) Log "Ok"; return 0;;
+      [Nn]* ) return 1;;
+      ""* ) Log "Ok"; return 0;;
+      * ) LogWarning "I beg your pardon. Please answer Yes or No.";;
+    esac
+  done
+}
+
+UploadFile ()
+{
+  local filename=$1
+  local hostname=$2
+  Log "Uploading $filename to $hostname..."
+  scp "$filename" ${hostname}: > /dev/null
+  if [ $? -eq 0 ]; then
+    LogSuccess "Upload completed"
+  else
+    LogError "Upload Failed with code $?"
+  fi
+}
+
+DownloadFile ()
+{
+  local filename=$1
+  local hostname=$2
+  Log "Downloading $filename from $hostname..."
+  Execute "scp -r \"${hostname}:${filename}\" ."
+  local exitCode=$?
+  if [ $exitCode -eq 0 ]; then
+    # LogSuccess "Download completed"
+    return 0
+  else
+    LogError "Download failed"
+  fi
+}
+
+WGetProgressFilter ()
+{
+    local flag=false c count cr=$'\r' nl=$'\n'
+    while IFS='' read -d '' -rn 1 c
+    do
+        if $flag
+        then
+            printf '%c' "$c"
+        else
+            if [[ $c != $cr && $c != $nl ]]
+            then
+                count=0
+            else
+                ((count++))
+                if ((count > 1))
+                then
+                    flag=true
+                fi
+            fi
+        fi
+    done
+}
+
+WgetFile ()
+{
+    local url=$1
+    local filename=$2
+
+    wget --tries=2 -c -N --progress=bar:force "$url" -O "$filename" 2>&1 | WGetProgressFilter
+  }
+
+CurlFile ()
+{
+    local url=$1
+    local filename=$2
+
+    curl --progress-bar -o "$filename" "$url" 2>&1
+  }
+
+Execute ()
+{
+  local shellCommand=$1
+  if [ $verbose = true ]; then
+    Log "${shellCommand}"
+    eval "${shellCommand}" 2>&1 | tee -a ${logFilename}
+    exitCode=${PIPESTATUS[0]}
+  else
+    eval "${shellCommand}" >> ${logFilename} 2>&1
+    exitCode=${PIPESTATUS[0]}
+  fi
+  return $exitCode
+}
+
+ExecuteOrFail ()
+{
+  local shellCommand=$1
+  Execute "${shellCommand}"
+  exitCode=$?
+  if [ $exitCode -ne 0 ]; then
+    str=$shellCommand
+    LogError "$str"
+  fi
+  return $exitCode
+}
+
+ExecuteOrFailMsg ()
+{
+  local shellCommand=$1
+  local message=$2
+  Execute "${shellCommand}"
+  exitCode=$?
+  if [ $exitCode -ne 0 ]; then
+    str=$shellCommand
+    str="$str\n$message"
+    LogError "$str"
+  fi
+  return $exitCode
+}
+
+NormalizePath ()
+{
+  local path=$1
+  echo "${path}" | sed "s/C:/c/g" | tr '\\' '/'
+}
+
+PathIsAbsolute ()
+{
+  case $1 in
+     /*) return 0 ;;
+     *) return 1 ;;
+  esac
+}
+
+PathMakeAbsolute ()
+{
+  local oldPwd=`pwd`
+  cd $1
+  pwd
+  cd ${oldPwd}
+}
+
+PathMakeRelative ()
+{
+  # both $1 and $2 are absolute paths beginning with /
+  # returns relative path to $2/$target from $1/$source
+    [ $# -ge 1 ] && [ $# -le 2 ] || return 1
+    local current="${2:+"$1"}"
+    local target="${2:-"$1"}"
+    [ "$target" != . ] || target=/
+    target="/${target##/}"
+    [ "$current" != . ] || current=/
+    current="${current:="/"}"
+    current="/${current##/}"
+    local appendix="${target##/}"
+    local relative=''
+    while appendix="${target#"$current"/}"
+        [ "$current" != '/' ] && [ "$appendix" = "$target" ]; do
+        if [ "$current" = "$appendix" ]; then
+            relative="${relative:-.}"
+            echo "${relative#/}"
+            return 0
+        fi
+        current="${current%/*}"
+        relative="$relative${relative:+/}.."
+    done
+    relative="$relative${relative:+${appendix:+/}}${appendix#/}"
+    echo "$relative"
+}
+
+CombineLibraries ()
+{
+  local librariesPath=$1
+  LogImportant "Combining library dependencies into lib${libraryName}.a"
+  cd ${librariesPath}
+  for library in `ls *.a`; do
+    rm -rf "${library}.objs"
+    mkdir "${library}.objs"
+    cp ${library} "${library}.objs"
+    cd "${library}.objs"
+    ar x ${library}
+    cd - > /dev/null
+  done
+  for library in `ls *.a`; do
+    ar rcs lib${libraryName}.a ${library}.objs/*.o > /dev/null
+    rm -rf ${library}.objs
+  done
+  ranlib lib${libraryName}.a > /dev/null 2>&1
+}
+
+checkVersion ()
+{
+  local v1=$1
+
+  echo $v1 | grep -E "^[0-9]+(\.[0-9]+){0,3}$" > /dev/null
+  if [ $? -ne 0 ]; then
+    return -1
+  else
+    local dotCount=$(echo $v1 | tr -d -c '.' | wc -c)
+    if [ $dotCount -eq 0 ]; then
+      echo "${v1}.0.0"
+    elif [ $dotCount -eq 1 ]; then
+      echo "${v1}.0"
+    else
+      echo "${v1}"
+    fi
+  fi
+}
+
+versionCompare ()
+{
+    if [[ $1 == $2 ]]
+    then
+        return 0
+    fi
+    local IFS=.
+    local i ver1=($1) ver2=($2)
+    # fill empty fields in ver1 with zeros
+    for ((i=${#ver1[@]}; i<${#ver2[@]}; i++))
+    do
+        ver1[i]=0
+    done
+    for ((i=0; i<${#ver1[@]}; i++))
+    do
+        if [[ -z ${ver2[i]} ]]
+        then
+            # fill empty fields in ver2 with zeros
+            ver2[i]=0
+        fi
+        if ((10#${ver1[i]} > 10#${ver2[i]}))
+        then
+            return 1
+        fi
+        if ((10#${ver1[i]} < 10#${ver2[i]}))
+        then
+            return 2
+        fi
+    done
+    return 0
+}
+
+# .plist files utility functions
+
+# PlistGetValue returns the value of an entry
+# in a .plist file
+PlistGetValue ()
+{
+  local plistPath=$1
+  local entryName=$2
+  local currentValue=$(/usr/libexec/PlistBuddy -c "Print $entryName" "$plistPath" 2> /dev/null)
+  echo $currentValue
+}
+
+# PlistEnforceValue enforces the value of an entry
+# in a .plist file
+PlistEnforceValue ()
+{
+  local plistPath=$1
+  local entryName=$2
+  local entryType=$3
+  local entryValue=$4
+
+  if [ ! -f "$plistPath" ]; then
+    LogError "can't set \"$entryName\". plist file not found: $plistPath"
+  fi
+  local plistBuddy=''
+  local currentValue=$(/usr/libexec/PlistBuddy -c "Print $entryName" "$plistPath" 2> /dev/null)
+  local exitCode=$?
+  if [ $exitCode -ne 0 ]; then
+    Log "Adding plist entry $entryName ($entryType) as $entryValue"
+    ExecuteOrFail "/usr/libexec/PlistBuddy -c \"Add $entryName $entryType $entryValue\" \"$plistPath\""
+  else
+    Log "Setting plist entry $entryName to $entryValue"
+    ExecuteOrFail "/usr/libexec/PlistBuddy -c \"Set $entryName $entryValue\"            \"$plistPath\""
+  fi
+}
+
+# SetUploadChannel creates the upload channel
+# based on tag provided
+SetUploadChannel ()
+{
+  stable='^mac-v[0-9]+\.[0-9]+\.[0-9.]+$'
+  beta='^mac-v[0-9]+\.[0-9]+\.[0-9]+-([0-9a-zA-Z.]+)$'
+  rc='^mac-([0-9a-zA-Z]+)-v[0-9]+\.[0-9]+\.[0-9a-zA-Z.-]+$'
+  cs='^mac-CS-([0-9.]+)\.v[0-9]+\.[0-9]+\.[0-9a-zA-Z.-]+$'
+
+  # Check if we're on a PR, a TAG or a BRANCH
+  if [[ ! -z $CI_PULL_REQUEST ]]
+  then
+    ref="pr"
+  elif [[ ! -z $CIRCLE_TAG ]]
+  then
+    # We're on a TAG, build against parsed TAG
+    ref=$CIRCLE_TAG
+  else
+    # Not tag present
+    if [[ "${CIRCLE_BRANCH}" = "master" ]]
+    then
+      # BRANCH is master, build against master
+      ref="master"
+    else
+      # BRANCH is not master, build against parsed BRANCH
+      ref=$CIRCLE_BRANCH
+    fi 
+  fi
+
+  # Parse the above ref to determine the updateChannel
+  if [ "${ref}" = "master" ]
+  then
+    # We are on MASTER
+    updateChannel="master"
+  elif [ "${ref}" = "pr" ]
+  then
+    # We are building a PR
+    updateChannel="pr"
+  elif [[ $ref =~ $stable ]]
+  then
+    # We have a STABLE tag
+    # matching tag: mac-v1.11.2
+    updateChannel="stable"
+  elif [[ $ref =~ $beta ]]
+  then
+    # We have a BETA tag
+    # matching tag: mac-v1.11.2-beta15.2
+    updateChannel="beta"
+  elif [[ $ref =~ $rc ]]
+  then
+    # We have a RC/Flexible tag
+    # matching tag: mac-test-v1.11.2-beta15.2
+    # channel would be: test
+    updateChannel="${BASH_REMATCH[1]}"
+  elif [[ $ref =~ $cs ]]
+  then
+    # We have a CS tag
+    # matching tag: mac-CS-1.11.v1.11.2-beta15.2
+    updateChannel="CS-${BASH_REMATCH[1]}"
+  else
+    # catch-all
+    updateChannel="default"
+  fi
+}

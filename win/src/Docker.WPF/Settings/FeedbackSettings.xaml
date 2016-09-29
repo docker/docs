@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="Docker.WPF.FeedbackSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Style.xaml"/>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="75" />
+            <RowDefinition Height="52" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="52" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="13" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Right" Source="../Images/diagnose@2x.png" Grid.RowSpan="2" VerticalAlignment="Top" Height="90"/>
+        <TextBlock Grid.Row="0" Text="Diagnose &amp; Feedback" VerticalAlignment="Top" FontSize="30" />
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" Width="350" Text="Send us diagnose information so that we can improve Docker for Windows." HorizontalAlignment="left" FontSize="16"/>
+
+        <TextBlock Grid.Row="2" TextWrapping="Wrap" FontSize="16">
+            If you have questions about Docker for Windows, we suggest you read our
+            <Hyperlink Click="OpenDocumentationClick">documentation</Hyperlink>
+            first, then search the <Hyperlink Click="OpenIssuesClick">issues</Hyperlink>.
+            You may find your answers.
+        </TextBlock>
+
+        <TextBlock Grid.Row="3" TextWrapping="Wrap" FontSize="16">
+           You might also find valuable information in the <Hyperlink Click="OpenLogClick">log file</Hyperlink>.
+        </TextBlock>
+
+        <TextBlock Grid.Row="5" TextWrapping="Wrap" FontSize="16">
+            <Run FontWeight="bold">If you need help</Run>, please upload a diagnostic and then create an issue with the diagnostic ID in the
+            <Hyperlink Click="OpenIssuesClick">docker/for-win</Hyperlink> GitHub repository.
+        </TextBlock>
+        <Button x:Name="Send" Grid.Row="6" Style="{StaticResource LinkButtons}" Content="Upload a diagnostic..." Click="UploadDiagnosticClick" />
+        <TextBox x:Name="DiagnosticId" Grid.Row="8" FontSize="14" IsReadOnly="True" BorderThickness="0" TextWrapping="Wrap"/>
+    </Grid>
+</UserControl>
+
+
+

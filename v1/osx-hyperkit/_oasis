@@ -1,0 +1,22 @@
+OASISFormat: 0.4
+Name:        osx-hyperkit
+Version:     0.1.0
+Synopsis:    Access hyperkit APIs on OSX
+Authors:     David Sheets, Dave Scott
+License:     ISC
+Plugins:     META (0.4), DevFiles (0.4)
+BuildTools:  ocamlbuild
+
+Library "osx-hyperkit"
+  Path: src
+  Findlibname: osx-hyperkit
+  Modules: Osx_hyperkit
+  BuildDepends: asl, logs, logs.fmt, lwt.unix, cstruct, cstruct.lwt
+
+Document "osx-hyperkit"
+  Title:                Osx-hyperkit docs
+  Type:                 ocamlbuild (0.4)
+  BuildTools+:          ocamldoc
+  Install:              true
+  XOCamlbuildPath:      src
+  XOCamlbuildLibraries: osx-hyperkit

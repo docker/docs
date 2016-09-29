@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+#
+# Copyright (C) 2016 Rolf Neugebauer <rolf.neugebauer@docker.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+
+"""Concurrent and random execution of commands
+
+This utility starts 'n' threads which randomly execute commands from a
+file. The file contains a line per command.
+"""
+
+import argparse
+import random
+import threading
+import subprocess
+import sys
+import time
+
+commands = []
+status = 0
+
+
+class thread(threading.Thread):
+    def __init__(self, tid, iterations):
+        threading.Thread.__init__(self)
+        self.tid = tid
+        self.iters = iterations
+
+    def run(self):
+        for i in range(self.iters):
+            if len(commands) > 1:
+                idx = random.randrange(0, len(commands))
+                cmd = commands[idx]
+            else:
+                cmd = commands[0]
+
+            print("[THREAD-%03d] %03d: %s\n" % (self.tid, i, cmd))
+
+            ret = subprocess.call(cmd, shell=True)
+            if not ret == 0:
+                print("[THREAD-%03d] %03d: FAILED with %d\n" % (self.tid, i, ret))
+                global status
+                status = 1
+                return
+            print("[THREAD-%03d] %03d: DONE\n" % (self.tid, i))
+            # yield
+            time.sleep(0)
+
+
+p = argparse.ArgumentParser()
+p.description = "Concurrent and random execution of commands"
+
+p.add_argument("-c", "--concurrent", default=10, type=int,
+               help="How many current threads to execute")
+
+p.add_argument("-i", "--iterations", default=10, type=int,
+               help="How iterations per thread to execute")
+
+p.add_argument('cmdfile', nargs=1,
+               help="File to execute commands from.")
+
+
+args = p.parse_args()
+
+# read in the commands
+with open(args.cmdfile[0], 'r') as f:
+    commands = f.readlines()
+
+# create threads
+threads = []
+for i in range(args.concurrent):
+    threads.append(thread(i, args.iterations))
+
+# run threads
+for t in threads:
+    t.start()
+
+# wait for them to finish
+for t in threads:
+    t.join()
+
+sys.exit(status)

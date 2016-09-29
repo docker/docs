@@ -1,0 +1,7 @@
+*.o
+*.cmi
+*.cmx
+diagnose
+docker-diagnose
+docker-diagnose-upload
+src/version.ml

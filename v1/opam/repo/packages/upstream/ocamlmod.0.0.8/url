@@ -1,0 +1,5 @@
+archive: "https://forge.ocamlcore.org/frs/download.php/1544/ocamlmod-0.0.8.tar.gz"
+checksum: "411e5b3f3321945fc53d9377a1a17f91"
+mirrors: [
+  "http://gazagnaire.org/packages/ocamlmod.0.0.8/ocamlmod-0.0.8.tar.gz"
+]

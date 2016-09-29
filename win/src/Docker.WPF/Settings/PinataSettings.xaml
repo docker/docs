@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Docker.WPF.PinataSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Style.xaml"/>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="75" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="13" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="13" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Right" Source="../Images/pinata.png" Grid.RowSpan="2" VerticalAlignment="Top" Height="125"/>
+        <TextBlock Grid.Row="0" Text="Pinata" VerticalAlignment="Top" FontSize="30" />
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" Width="350" Text="Just smash it, really." HorizontalAlignment="left" FontSize="16"/>
+
+        <Button Grid.Row="2" Style="{StaticResource LinkButtons}" Content="Open resource folder..." Click="OnResourceFolder" />
+        <Button Grid.Row="3" Style="{StaticResource LinkButtons}" Content="Open settings folder..." Click="OnSettingsFolder" />
+        
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <TextBlock Text="Channel: " Margin="0,3,0,0"/>
+            <ComboBox x:Name="ChannelCombo" SelectionChanged="ChannelChanged">
+<!--                <ComboBoxItem IsSelected="true">Master</ComboBoxItem>-->
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="7" Orientation="Horizontal">
+            <TextBlock>
+                AppCast URL :
+                <Hyperlink x:Name="AppCastHyperlink" NavigateUri="https://www.docker.com" RequestNavigate="OnOpenAppCast">
+                    <TextBlock x:Name="AppCastHyperlinkText" Text="PlaceHolder"/>
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+        <Button Grid.Row="8" Style="{StaticResource LinkButtons}" Content="Manually Check for update..." Click="OnCheckForUpdate" />
+        <Button Grid.Row="9" Style="{StaticResource LinkButtons}" Content="Update from msi..." Click="OnUpdate" />
+        <Button Grid.Row="10" Style="{StaticResource LinkButtons}" Content="Send Crash Report..." Click="OnSendCrashReport" />
+    </Grid>
+</UserControl>

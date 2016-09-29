@@ -1,0 +1,4 @@
+FROM alpine
+RUN apk update && apk add py-pygments py-pip bash tar coreutils
+VOLUME /logs
+VOLUME /html

@@ -1,0 +1,18 @@
+FRAMEWORK: >= NET45
+NUGET
+  remote: https://www.nuget.org/api/v2
+    Bugsnag (1.2)
+      Newtonsoft.Json (>= 6.0.1)
+    Castle.Core (3.3.3)
+    Microsoft.PowerShell.5.ReferenceAssemblies (1.0)
+    Moq (4.5.21)
+      Castle.Core (>= 3.3.3)
+    Newtonsoft.Json (8.0.3)
+    NFluent (1.3.1)
+    NLog (4.3.8)
+    NLog.Config (4.3.8)
+      NLog (>= 4.3.8)
+      NLog.Schema (>= 4.3.8)
+    NLog.Schema (4.3.8)
+    NUnit (3.4.1)
+    WindowsFirewallHelper (1.0)

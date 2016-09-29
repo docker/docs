@@ -1,0 +1,32 @@
+<Include>
+	<DirectoryRef Id="TARGETDIR">
+		<Directory Id="nVidiaTextureToolsDirectory" Name="nVidia Texture Tools">
+			<Component Id="nVidiaTextureToolsRedist" Guid="C5E42F95-E21B-4B47-B7B0-FDB5DC809961">
+				<File Id="nVidiaTextureToolsExe"
+					Source="Dependencies\nVidiaTextureTools32-bit\NVIDIA_Texture_Tools_2.08.0601.1625.exe"
+					KeyPath="yes"
+					Checksum="yes"/>
+			</Component>
+		</Directory>
+	</DirectoryRef>
+	
+	<Feature Id="nVidiaTextureToolsRedist"
+		  Title="nVidia Texture Tools"
+		  AllowAdvertise="no"
+		  Display="hidden" Level="1">
+		<ComponentRef Id="nVidiaTextureToolsRedist"/>
+	</Feature>
+
+	<CustomAction Id="InstallnVidiaTextureTools"
+				   FileKey="nVidiaTextureToolsExe"
+				   ExeCommand="/s"
+				   Execute="deferred"
+				   Impersonate="no"
+				   Return="check"/>
+
+	<InstallExecuteSequence>
+		<Custom Action="InstallnVidiaTextureTools" Before="InstallFinalize">
+			<![CDATA[NOT REMOVE]]>
+		</Custom>
+	</InstallExecuteSequence>
+</Include>

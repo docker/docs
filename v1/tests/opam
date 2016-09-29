@@ -1,0 +1,21 @@
+opam-version: "1.2"
+maintainer:   "thomas@gazagnaire.org"
+authors:      "Thomas Gazagnaire"
+homepage:     "https://github.com/docker/pinata"
+bug-reports:  "https://github.com/docker/pinata/issues"
+dev-repo:     "https://github.com/docker/pinata.git"
+
+depends: [
+  "ocamlfind" {build}
+  "fmt"
+  "alcotest"
+  "re"
+  "base-threads"
+  "ezjsonm"
+  "stringext"
+  "lwt"
+  "cstruct"
+  "sexplib"
+  "ipaddr"
+  "io-page"
+]

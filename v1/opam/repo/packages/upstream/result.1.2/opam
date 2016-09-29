@@ -1,0 +1,8 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/result"
+dev-repo: "https://github.com/janestreet/result.git"
+bug-reports: "https://github.com/janestreet/result/issues"
+license: "BSD3"
+build: [[make]]

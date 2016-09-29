@@ -1,0 +1,45 @@
+opam-version: "1.2"
+maintainer:   "anil@recoil.org"
+authors:      ["Anil Madhavapeddy" "Thomas Leonard" "Thomas Gazagnaire" "Rudi Grinberg"]
+homepage:     "https://github.com/mirage/ocaml-conduit"
+dev-repo:     "https://github.com/mirage/ocaml-conduit.git"
+bug-reports:  "https://github.com/mirage/ocaml-conduit/issues"
+tags:         "org:mirage"
+license:      "ISC"
+
+build:   [make]
+install: [make "install"]
+remove:  ["ocamlfind" "remove" "conduit"]
+
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "pa_sexp_conv"
+  "type_conv"
+  "stringext"
+  "uri"
+  "cstruct" {>="1.0.1"}
+  "ipaddr" {>="2.5.0"}
+]
+depopts: [
+  "async"
+  "lwt"
+  "ssl"
+  "async_ssl"
+  "mirage-dns"
+  "vchan"
+  "launchd"
+  "tls"
+  "mirage-types-lwt"
+]
+conflicts: [
+  "lwt" {<"2.4.4"}
+  "async_ssl" {<"112.24.00"}
+  "async" {<"113.24.00"}
+  "mirage-types" {<"2.0.0"}
+  "dns" {<"0.10.0"}
+  "tls" {<"0.4.0"}
+  "vchan" {<"2.0.0"}
+  "nocrypto" {<"0.4.0"}
+]
+available: [ocaml-version >= "4.02.0"]

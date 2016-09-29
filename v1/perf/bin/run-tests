@@ -1,0 +1,47 @@
+#!/bin/bash
+set -e
+
+PERF=$(dirname $0)/../
+TESTS=$(${PERF}/bin/list-tests)
+
+while getopts ":t:h" opt; do
+  case $opt in
+    t)
+      TESTS=$OPTARG
+      ;;
+    h)
+      echo "Usage:"
+      echo "$0"
+      echo "  -- run all tests"
+      echo "$0 -t <name>"
+      echo "  -- run the named test"
+      exit 0
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+for test in ${TESTS}; do
+  config=$(${PERF}/test/${test}/configuration)
+  if [ -z "${config}" ]; then
+    echo Test ${test} requires a working configuration file >&2
+    exit 1
+  fi
+  echo Will run $test in configuration ${config}
+  result=$(${PERF}/bin/make-result-dir ${test} ${config})
+  make -C ${PERF}/test/${test}
+  if [ -e ${PERF}/test/${test}/logs ] ; then
+      mv ${PERF}/test/${test}/logs ${result}/
+  fi
+  mv ${PERF}/test/${test}/results.dat ${result}/
+  if [ -f ${PERF}/test/${test}/results.png ] ; then
+      mv ${PERF}/test/${test}/results.png ${result}/
+  fi
+done

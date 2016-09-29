@@ -1,0 +1,8 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Declare files that will always have CRLF line endings on checkout.
+*.sln text eol=lf
+*.cs text eol=lf
+*.csproj text eol=lf
+*.resx text eol=lf

@@ -1,0 +1,61 @@
+opam-version: "1.2"
+maintainer:   "anil@recoil.org"
+authors:      ["Anil Madhavapeddy" "Richard Mortier" "Thomas Gazagnaire"
+               "Pierre Chambart" "David Kaloper" "Jeremy Yallop" "Hannes Mehnert" ]
+homepage:     "https://github.com/mirage/ocaml-cstruct"
+license:      "ISC"
+dev-repo:     "https://github.com/mirage/ocaml-cstruct.git"
+bug-reports:  "https://github.com/mirage/ocaml-cstruct/issues"
+tags: [
+  "org:mirage"
+  "org:xapi-project"
+]
+build: [
+  ["./configure"
+      "--prefix" prefix
+      "--%{lwt:enable}%-lwt"
+      "--%{camlp4:enable}%-camlp4"
+      "--%{ppx_tools:enable}%-ppx"
+      "--%{async:enable}%-async"
+      "--%{base-unix:enable}%-unix"]
+  [make]
+]
+build-test: [
+  ["./configure"
+      "--prefix" prefix
+      "--%{lwt:enable}%-lwt"
+      "--%{camlp4:enable}%-camlp4"
+      "--%{ppx_tools:enable}%-ppx"
+      "--%{async:enable}%-async"
+      "--%{base-unix:enable}%-unix"
+      "--enable-tests"]
+  [make]
+  ["./test.sh"]
+]
+install: [
+  [make "install"]
+  [make "js-install"]
+]
+remove:  [
+  [make "js-uninstall"]
+  ["ocamlfind" "remove" "cstruct"]
+]
+depends: [
+  "ocamlfind" {build}
+  "type_conv" {build}
+  "ounit"     {test}
+  "ocplib-endian"
+  "sexplib"
+  "base-bytes"
+]
+depopts: [
+  "camlp4"
+  "ppx_tools"
+  "async"
+  "lwt"
+]
+available: [ocaml-version >= "4.01.0" & ocaml-version < "4.03.0"]
+depexts: [
+  [ ["debian"] ["time"] ]
+  [ ["ubuntu"] ["time"] ]
+]

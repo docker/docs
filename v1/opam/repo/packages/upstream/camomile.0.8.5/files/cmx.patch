@@ -1,0 +1,15 @@
+diff --git a/Makefile.in b/Makefile.in
+index 56a2597..f24253b 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -399,8 +399,8 @@ install-without-ocamlfind:
+ 	if [ -f camomile.a ]; then cp -f camomile.a '$(OCAMLLIB)'; fi
+ 
+ install-with-ocamlfind:
+-	files= &&\
+-	if [ -f camomileLibrary.cmx ]; then files=camomileLibrary.cmx; fi && \
++	files="$(wildcard public/*.cmx internal/*.cmx)" &&\
++	if [ -f camomileLibrary.cmx ]; then files="camomileLibrary.cmx $$files"; fi && \
+ 	if [ -f camomileLibrary.cma ]; then files="camomileLibrary.cma $$files"; fi && \
+ 	if [ -f camomileLibrary.cmxa ]; then files="camomileLibrary.cmxa $$files"; fi && \
+ 	if [ -f camomileLibraryDefault.cmx ]; then files="camomileLibraryDefault.cmx $$files"; fi && \

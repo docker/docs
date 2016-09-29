@@ -1,0 +1,12 @@
+opam-version: "1.2"
+maintainer: "tim@gfxmonk.net"
+homepage: "http://www.gnu.org/software/which/"
+bug-reports: "https://github.com/ocaml/opam-repository/issues"
+dev-repo: "https://github.com/ocaml/opam-repository.git"
+license: "GPL-2+"
+build: [["which" "which"]]
+depexts: [
+  [["debian"] ["debianutils"]]
+  [["ubuntu"] ["debianutils"]]
+  [["nixpkgs"] ["which"]]
+]
