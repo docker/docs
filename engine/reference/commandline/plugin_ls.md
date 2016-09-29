@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "plugin ls"
-description = "The plugin ls command description and usage"
-keywords = ["plugin, list"]
-advisory = "experimental"
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+advisory: experimental
+description: The plugin ls command description and usage
+keywords:
+- plugin, list
+menu:
+  main:
+    parent: smn_cli
+title: plugin ls
+---
 
 # plugin ls (experimental)
 

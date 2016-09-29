@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/engine/extend/"
-]
-title = "Plugin manifest"
-description = "How develop and use a plugin with the managed plugin system"
-keywords = ["API, Usage, plugins, documentation, developer"]
-advisory = "experimental"
-[menu.main]
-parent = "engine_extend"
-weight=1
-+++
-<![end-metadata]-->
+---
+advisory: experimental
+aliases:
+- /engine/extend/
+description: How develop and use a plugin with the managed plugin system
+keywords:
+- API, Usage, plugins, documentation, developer
+menu:
+  main:
+    parent: engine_extend
+    weight: 1
+title: Plugin manifest
+---
 
 # Plugin Manifest Version 0 of Plugin V2
 

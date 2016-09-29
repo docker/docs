@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "install"
-description = "Docker Trusted Registry install command reference."
-keywords = ["docker, registry, reference, install"]
-[menu.main]
-parent="dtr_menu_reference"
-identifier="dtr_reference_install"
-+++
-<![end-metadata]-->
+---
+description: Docker Trusted Registry install command reference.
+keywords:
+- docker, registry, reference, install
+menu:
+  main:
+    identifier: dtr_reference_install
+    parent: dtr_menu_reference
+title: install
+---
 
 # docker/dtr install
 

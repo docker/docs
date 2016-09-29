@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "join"
-description = "Create a Swarm node."
-keywords = ["swarm, create, join"]
-[menu.main]
-identifier="swarm.join"
-parent="smn_swarm_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Create a Swarm node.
+keywords:
+- swarm, create, join
+menu:
+  main:
+    identifier: swarm.join
+    parent: smn_swarm_subcmds
+title: join
+---
 
 # join — Create a Swarm node
 

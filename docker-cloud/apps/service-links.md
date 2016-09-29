@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/service-links/"
-]
-title = "Service discovery and links"
-description = "Service discovery"
-keywords = ["service, discover, links"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/service-links/
+description: Service discovery
+keywords:
+- service, discover, links
+menu:
+  main:
+    parent: apps
+title: Service discovery and links
+---
 
 # Service discovery and links
 

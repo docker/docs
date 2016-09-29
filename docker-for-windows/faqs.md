@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "FAQs"
-description = "Frequently asked questions"
-keywords = ["windows faqs"]
-[menu.main]
-identifier="docker-windows-faqs"
-parent="pinata_win_menu"
-weight = 4
-+++
-<![end-metadata]-->
+---
+description: Frequently asked questions
+keywords:
+- windows faqs
+menu:
+  main:
+    identifier: docker-windows-faqs
+    parent: pinata_win_menu
+    weight: 4
+title: FAQs
+---
 
 #  Frequently Asked Questions (FAQs)
 

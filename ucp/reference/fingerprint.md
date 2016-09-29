@@ -1,13 +1,15 @@
-+++
-title = "fingerprint"
-description = "Dump out TLS certificates."
-keywords= ["fingerprint, ucp"]
-[menu.main]
-keywords= ["tool, reference, ucp"]
-
-parent = "ucp_ref"
-identifier="ucp_ref_fingerprint"
-+++
+---
+description: Dump out TLS certificates.
+keywords:
+- fingerprint, ucp
+menu:
+  main:
+    identifier: ucp_ref_fingerprint
+    keywords:
+    - tool, reference, ucp
+    parent: ucp_ref
+title: fingerprint
+---
 
 # docker/ucp fingerprint
 

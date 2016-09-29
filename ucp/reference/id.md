@@ -1,11 +1,13 @@
-+++
-title = "id"
-description = "Dump out the ID of the UCP components running on this engine."
-keywords= ["docker, ucp, id"]
-[menu.main]
-parent = "ucp_ref"
-identifier = "ucp_ref_id"
-+++
+---
+description: Dump out the ID of the UCP components running on this engine.
+keywords:
+- docker, ucp, id
+menu:
+  main:
+    identifier: ucp_ref_id
+    parent: ucp_ref
+title: id
+---
 
 # docker/ucp id
 

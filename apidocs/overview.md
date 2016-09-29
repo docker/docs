@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-type = "_default"
-title = "Overview"
-description = "Learn how to use DTR APIs."
-keywords = ["docker, registry, DTR, APIs"]
-[menu.main]
-parent="smn_dtrapi"
-identifier="dtr_api_overview"
-weight=0
-+++
-<![end-metadata]-->
-
+---
+description: Learn how to use DTR APIs.
+keywords:
+- docker, registry, DTR, APIs
+menu:
+  main:
+    identifier: dtr_api_overview
+    parent: smn_dtrapi
+    weight: 0
+title: Overview
+type: _default
+---
 
 # API Overview
 

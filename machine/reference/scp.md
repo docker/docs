@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "scp"
-description = "Copy files among machines"
-keywords = ["machine, scp, subcommand"]
-[menu.main]
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Copy files among machines
+keywords:
+- machine, scp, subcommand
+menu:
+  main:
+    parent: smn_machine_subcmds
+title: scp
+---
 
 # scp
 

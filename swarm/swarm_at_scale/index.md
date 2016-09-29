@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Try Swarm at scale"
-description = "Try Swarm at scale"
-keywords = ["docker, swarm, scale, voting, application,  certificates"]
-[menu.main]
-parent="workw_swarm"
-identifier="scale_swarm"
-weight=-35
-+++
-<![end-metadata]-->
+---
+description: Try Swarm at scale
+keywords:
+- docker, swarm, scale, voting, application,  certificates
+menu:
+  main:
+    identifier: scale_swarm
+    parent: workw_swarm
+    weight: -35
+title: Try Swarm at scale
+---
 
 # Try Swarm at scale
 

@@ -1,15 +1,16 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/monitor-troubleshoot/monitor/"]
-title = "Monitor DTR"
-description = "Learn how to monitor your DTR installation."
-keywords = ["docker, registry, monitor, troubleshoot"]
-[menu.main]
-parent="dtr_menu_monitor_troubleshoot"
-identifier="dtr_monitor"
-weight=0
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-trusted-registry/monitor-troubleshoot/monitor/
+description: Learn how to monitor your DTR installation.
+keywords:
+- docker, registry, monitor, troubleshoot
+menu:
+  main:
+    identifier: dtr_monitor
+    parent: dtr_menu_monitor_troubleshoot
+    weight: 0
+title: Monitor DTR
+---
 
 # Monitor DTR
 

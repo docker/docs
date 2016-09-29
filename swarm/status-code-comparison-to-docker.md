@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-title = "API response codes"
-description = "Swarm API response codes"
-keywords = ["docker, swarm, response, code,  api"]
-[menu.main]
-parent="workw_swarm"
-weight=99
-+++
-<![end-metadata]-->
+---
+description: Swarm API response codes
+keywords:
+- docker, swarm, response, code,  api
+menu:
+  main:
+    parent: workw_swarm
+    weight: 99
+title: API response codes
+---
+
 # Understand the Swarm vs. Engine response codes
 
 Docker Engine provides a REST API for making calls to the Engine daemon. Docker Swarm allows a caller to make the same calls to a cluster of Engine daemons. While the API calls are the same, the API response status codes do differ. This document explains the differences.

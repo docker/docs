@@ -1,12 +1,13 @@
-<!--[metadata]>
-+++
-title = "Example: Use Docker Machine to provision cloud hosts"
-description = "Example of using Docker Machine to install Docker Engine on a cloud provider, using Digital Ocean."
-keywords = ["cloud, docker, machine, documentation,  installation, digitalocean"]
-[menu.main]
-parent = "install_cloud"
-+++
-<![end-metadata]-->
+---
+description: Example of using Docker Machine to install Docker Engine on a cloud provider,
+  using Digital Ocean.
+keywords:
+- cloud, docker, machine, documentation,  installation, digitalocean
+menu:
+  main:
+    parent: install_cloud
+title: 'Example: Use Docker Machine to provision cloud hosts'
+---
 
 # Example: Use Docker Machine to provision cloud hosts
 

@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title = "Use externally-signed certificates"
-description = "Learn how to configure Docker Universal Control Plane to use your own certificates."
-keywords = ["Universal Control Plane, UCP, certificate, authentiation, tls"]
-[menu.main]
-parent="mn_ucp_configuration"
-identifier="ucp_configure_certs"
-weight=0
-+++
-<![end-metadata]-->
+---
+description: Learn how to configure Docker Universal Control Plane to use your own
+  certificates.
+keywords:
+- Universal Control Plane, UCP, certificate, authentiation, tls
+menu:
+  main:
+    identifier: ucp_configure_certs
+    parent: mn_ucp_configuration
+    weight: 0
+title: Use externally-signed certificates
+---
 
 # Use externally-signed certificates
 

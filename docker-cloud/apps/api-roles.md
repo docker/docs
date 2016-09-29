@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/api-roles/"
-]
-title = "Service API Roles"
-description = "API Roles"
-keywords = ["API, Services, roles"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/api-roles/
+description: API Roles
+keywords:
+- API, Services, roles
+menu:
+  main:
+    parent: apps
+title: Service API Roles
+---
 
 # Service API Roles
 

@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/beginner/link-aws/",
-"/docker-cloud/getting-started/link-aws/"
-]
-title = "Link to Amazon Web Services hosts"
-description = "Link your Amazon Web Services account"
-keywords = ["AWS, Cloud, link"]
-[menu.main]
-parent="infrastructure"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/beginner/link-aws/
+- /docker-cloud/getting-started/link-aws/
+description: Link your Amazon Web Services account
+keywords:
+- AWS, Cloud, link
+menu:
+  main:
+    parent: infrastructure
+title: Link to Amazon Web Services hosts
+---
 
 # Link your Amazon Web Services account
 

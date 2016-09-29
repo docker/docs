@@ -1,16 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/engine/userguide/containers/dockerrepos/",
-"/engine/userguide/dockerrepos/"
-]
-title = "Store images on Docker Hub"
-description = "Learn how to use the Docker Hub to manage Docker images and work flow"
-keywords = ["repo, Docker Hub, Docker Hub, registry, index, repositories, usage, pull image, push image, image,  documentation"]
-[menu.main]
-parent = "engine_learn_menu"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/userguide/containers/dockerrepos/
+- /engine/userguide/dockerrepos/
+description: Learn how to use the Docker Hub to manage Docker images and work flow
+keywords:
+- repo, Docker Hub, Docker Hub, registry, index, repositories, usage, pull image,
+  push image, image,  documentation
+menu:
+  main:
+    parent: engine_learn_menu
+title: Store images on Docker Hub
+---
 
 # Store images on Docker Hub
 

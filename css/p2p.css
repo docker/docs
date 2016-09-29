@@ -1,0 +1,97 @@
+/* ========== Start Extra Sytling ========== */
+/** CSS Overrides - this is temporary and should be formally added to the master scss files **/
+/** Global links **/
+a, a:active, a:hover, a:focus {outline: none;}
+a:hover, a:focus  {text-decoration: none;}
+/** header **/
+header .nav-global li a,
+.main-header div > .nav-main a {
+    color: rgba(255, 255, 255, 0.85);
+    outline: none;
+}
+header .nav-global li a:hover,
+.main-header div > .nav-main a:hover {
+    color: #fff;
+}
+/********** hide these elements *********/
+.cta-illustration {display: none;}
+.main-header .logo_safari {
+display:none;
+visibility:hidden;
+}
+.main-header .logo{
+	width: 116px;
+	width: 136px;
+	
+}
+/* SVEN SAYS NO
+html.safari .main-header .logo{
+display:none;
+visibility:hidden;	
+}
+html.safari .main-header .logo_safari{
+	width: 116px;
+	width: 136px;
+	
+	display: block;
+    visibility: visible;
+}
+*/
+section.community_section{
+	padding:50px 0;
+}
+section.community_section .columns  iframe{
+    width: 100%;
+}
+section.community_section .columns  img{
+	height:100%!important;
+	width:100%!important;
+}
+section.community_section .columns center img{
+    height: 160px!important;
+    width: 160px!important;
+	float: left;
+}
+.node-type-flexible-page .dockercon16 section.whitebackground p.{
+	font-size: 14px;
+    color: #496B81;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+.path-docker-community-incident-report .iframe{
+	width: 100%;
+	max-width:700px;
+}
+.dockercon16 section.install_the_platform_section.section a.button.darkblue-btn{
+	margin-top:30px;
+}
+.path-find-partner .sidebarnav_section ul{
+	margin: 0px 0 1.5rem 0;
+}
+.path-find-partner div.sidebarnav_section.affix{
+	top: 52px;
+}
+.node-type-projects .button.darkblue-btn {
+  background-color: transparent;
+  color: #E6F9FF;
+  padding: 10px 40px;
+  border: 1px solid #fff;
+}
+/********** for toolbox only *********/
+.path-docker-toolbox .dockercon16 section.title_section a.button.white-btn {
+    padding: 14px 70px 11px 70px;
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.path-docker-toolbox .dockercon16 section.title_section a.button.white-btn:hover {
+    background: RGBA(255, 255, 255, 0.25);
+    border: 1px solid #fff;
+    color: #fff;
+}
+/********** for project only *********/
+.dockercon16 section.projects_docker_projects_section.section a.button.darkblue-border-btn {
+    margin-top: 30px;
+} 
+/* ========== End Extra Sytling ========== */

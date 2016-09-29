@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/intermediate/pushing-images-to-dockercloud/",
-"/docker-cloud/tutorials/pushing-images-to-dockercloud/"
-]
-title = "Push images to Docker Cloud"
-description = "Push images to Docker Cloud"
-keywords = ["images, private, registry"]
-[menu.main]
-parent="builds"
-weight=-60
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/intermediate/pushing-images-to-dockercloud/
+- /docker-cloud/tutorials/pushing-images-to-dockercloud/
+description: Push images to Docker Cloud
+keywords:
+- images, private, registry
+menu:
+  main:
+    parent: builds
+    weight: -60
+title: Push images to Docker Cloud
+---
 
 # Push images to Docker Cloud
 

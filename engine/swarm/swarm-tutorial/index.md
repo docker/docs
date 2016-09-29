@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Set up for the tutorial"
-description = "Getting Started tutorial for Docker Engine swarm mode"
-keywords = ["tutorial, cluster management, swarm mode"]
-[menu.main]
-identifier="tutorial-setup"
-parent="swarm-tutorial"
-weight=11
-+++
-<![end-metadata]-->
+---
+description: Getting Started tutorial for Docker Engine swarm mode
+keywords:
+- tutorial, cluster management, swarm mode
+menu:
+  main:
+    identifier: tutorial-setup
+    parent: swarm-tutorial
+    weight: 11
+title: Set up for the tutorial
+---
 
 # Getting started with swarm mode
 

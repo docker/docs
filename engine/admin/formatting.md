@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Format command and log output"
-description = "CLI and log output formatting reference"
-keywords = ["format, formatting, output, templates, log"]
-[menu.main]
-parent = "engine_admin"
-weight=7
-+++
-<![end-metadata]-->
+---
+description: CLI and log output formatting reference
+keywords:
+- format, formatting, output, templates, log
+menu:
+  main:
+    parent: engine_admin
+    weight: 7
+title: Format command and log output
+---
 
 # Formatting reference
 

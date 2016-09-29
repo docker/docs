@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title ="Replicate CAs for high availability"
-description="Docker Universal Control plane has support for high availability. Learn how to set up your installation to ensure it tolerates failures."
-keywords= ["replica, controller, availability, high, ucp"]
-[menu.main]
-parent="mn_ucp_high_availability"
-identifier="ucp_replicate_cas"
-weight=10
-+++
-<![end-metadata]-->
+---
+description: Docker Universal Control plane has support for high availability. Learn
+  how to set up your installation to ensure it tolerates failures.
+keywords:
+- replica, controller, availability, high, ucp
+menu:
+  main:
+    identifier: ucp_replicate_cas
+    parent: mn_ucp_high_availability
+    weight: 10
+title: Replicate CAs for high availability
+---
 
 # Replicate CAs for high availability
 

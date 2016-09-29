@@ -1,15 +1,15 @@
-<!-- [metadata]>
-+++
-title = "Admin Guide"
-description = "Administer Docker"
-keywords = ["Administer"]
-type="menu"
-[menu.main]
-parent="engine_use"
-identifier="engine_admin"
-weight="-70"
-+++
-<![end-metadata]-->
+---
+description: Administer Docker
+keywords:
+- Administer
+menu:
+  main:
+    identifier: engine_admin
+    parent: engine_use
+    weight: "-70"
+title: Admin Guide
+type: menu
+---
 
 # Admin Topics
 

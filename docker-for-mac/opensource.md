@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Open Source Licensing"
-description = "Docker's use of Open Source"
-keywords = ["docker, opensource"]
-[menu.main]
-parent="pinata_mac_menu"
-identifier='opensource-mac'
-weight="9"
-+++
-<![end-metadata]-->
+---
+description: Docker's use of Open Source
+keywords:
+- docker, opensource
+menu:
+  main:
+    identifier: opensource-mac
+    parent: pinata_mac_menu
+    weight: "9"
+title: Open Source Licensing
+---
 
 # Open Source Components and Licensing
 

@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-title = "Set up an Nginx web server"
-description = "Tutorial demonstrating the setup of an Nginx web server using Docker and Kitematic"
-keywords = ["docker, documentation, about, technology, kitematic, gui, nginx,  tutorial"]
-[menu.main]
-parent="toolbox_kitematic"
-weight=1
-+++
-<![end-metadata]-->
+---
+description: Tutorial demonstrating the setup of an Nginx web server using Docker
+  and Kitematic
+keywords:
+- docker, documentation, about, technology, kitematic, gui, nginx,  tutorial
+menu:
+  main:
+    parent: toolbox_kitematic
+    weight: 1
+title: Set up an Nginx web server
+---
 
 # Kitematic Tutorial: Serving a Static Website with Nginx
 

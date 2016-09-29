@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/byoh/",
-"/docker-cloud/tutorials/byoh/",
-"/docker-cloud/getting-started/use-byon/"
-]
-title = "Use the Docker Cloud Agent"
-description = "Use the Docker Cloud Agent"
-keywords = ["agent, Cloud, install"]
-[menu.main]
-parent="infrastructure"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/byoh/
+- /docker-cloud/tutorials/byoh/
+- /docker-cloud/getting-started/use-byon/
+description: Use the Docker Cloud Agent
+keywords:
+- agent, Cloud, install
+menu:
+  main:
+    parent: infrastructure
+title: Use the Docker Cloud Agent
+---
 
 # Use the Docker Cloud Agent
 

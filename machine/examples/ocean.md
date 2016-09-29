@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Provision Digital Ocean Droplets"
-description = "Using Docker Machine to provision hosts on Digital Ocean"
-keywords = ["docker, machine, cloud, digital ocean"]
-[menu.main]
-parent="cloud_examples"
-weight=1
-+++
-<![end-metadata]-->
+---
+description: Using Docker Machine to provision hosts on Digital Ocean
+keywords:
+- docker, machine, cloud, digital ocean
+menu:
+  main:
+    parent: cloud_examples
+    weight: 1
+title: Provision Digital Ocean Droplets
+---
 
 # Digital Ocean example
 

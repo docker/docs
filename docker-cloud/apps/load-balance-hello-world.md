@@ -1,15 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/intermediate/load-balance-hello-world/",
-"/docker-cloud/tutorials/load-balance-hello-world/"]
-title = "Create a proxy or load balancer"
-description = "Create a proxy or load balancer"
-keywords = ["proxy, load, balancer"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/intermediate/load-balance-hello-world/
+- /docker-cloud/tutorials/load-balance-hello-world/
+description: Create a proxy or load balancer
+keywords:
+- proxy, load, balancer
+menu:
+  main:
+    parent: apps
+title: Create a proxy or load balancer
+---
 
 # Create a proxy or load balancer
 

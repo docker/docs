@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title = "Configure your Docker Engine"
-description = "Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry."
-keywords = ["docker, registry, TLS, certificates"]
-[menu.main]
-parent="dtr_menu_repos_and_images"
-identifier="dtr_configure_engine"
-weight=0
-+++
-<![end-metadata]-->
+---
+description: Learn how to configure your Docker Engine to push and pull images from
+  Docker Trusted Registry.
+keywords:
+- docker, registry, TLS, certificates
+menu:
+  main:
+    identifier: dtr_configure_engine
+    parent: dtr_menu_repos_and_images
+    weight: 0
+title: Configure your Docker Engine
+---
 
 # Configure your Docker Engine
 

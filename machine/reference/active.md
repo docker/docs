@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "active"
-description = "Identify active machines"
-keywords = ["machine, active, subcommand"]
-[menu.main]
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Identify active machines
+keywords:
+- machine, active, subcommand
+menu:
+  main:
+    parent: smn_machine_subcmds
+title: active
+---
 
 # active
 

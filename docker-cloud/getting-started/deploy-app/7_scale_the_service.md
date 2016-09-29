@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/python/7_scale_the_service/",
-"/docker-cloud/getting-started/golang/7_scale_the_service/"
-]
-title = "Scale the service"
-description = "Scale the service"
-keywords = ["scale, Python, service"]
-[menu.main]
-parent="deploy-app"
-weight=-30
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/python/7_scale_the_service/
+- /docker-cloud/getting-started/golang/7_scale_the_service/
+description: Scale the service
+keywords:
+- scale, Python, service
+menu:
+  main:
+    parent: deploy-app
+    weight: -30
+title: Scale the service
+---
 
 # Scale the service
 

@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Command line reference"
-description = "Docker Swarm Commands Overview"
-keywords = ["Swarm, cluster, commands"]
-[menu.main]
-identifier="smn_swarm_subcmds"
-parent="workw_swarm"
-weight=80
-+++
-<![end-metadata]-->
+---
+description: Docker Swarm Commands Overview
+keywords:
+- Swarm, cluster, commands
+menu:
+  main:
+    identifier: smn_swarm_subcmds
+    parent: workw_swarm
+    weight: 80
+title: Command line reference
+---
 
 # Docker Swarm command line reference
 

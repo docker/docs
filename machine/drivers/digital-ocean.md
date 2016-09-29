@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Digital Ocean"
-description = "Digital Ocean driver for machine"
-keywords = ["machine, Digital Ocean, driver"]
-[menu.main]
-parent="smn_machine_drivers"
-+++
-<![end-metadata]-->
+---
+description: Digital Ocean driver for machine
+keywords:
+- machine, Digital Ocean, driver
+menu:
+  main:
+    parent: smn_machine_drivers
+title: Digital Ocean
+---
 
 # Digital Ocean
 

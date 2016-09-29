@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "rm"
-description = "Remove a machine."
-keywords = ["machine, rm, subcommand"]
-[menu.main]
-identifier="machine.rm"
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Remove a machine.
+keywords:
+- machine, rm, subcommand
+menu:
+  main:
+    identifier: machine.rm
+    parent: smn_machine_subcmds
+title: rm
+---
 
 # rm
 

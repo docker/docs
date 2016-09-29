@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-draft=true
-title = "Docker Machine"
-description = "machine"
-keywords = ["machine, orchestration, install, installation, docker, documentation"]
-[menu.main]
-parent="mn_install"
-+++
-<![end-metadata]-->
+---
+description: machine
+draft: true
+keywords:
+- machine, orchestration, install, installation, docker, documentation
+menu:
+  main:
+    parent: mn_install
+title: Docker Machine
+---
 
 # Machine Driver Specification v1
 

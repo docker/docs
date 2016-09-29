@@ -1,0 +1,53 @@
+<nav class="navbar navbar-default" role="navigation">
+    <!-- Main Menu -->
+        <ul class="tab first-level">
+          {{ $currentNode := . }}
+          {{ range .Site.Menus.main }}
+              {{ if .HasChildren }}
+                <!-- Dropdown-->
+                <li class="{{if $currentNode.HasMenuCurrent "main" . }} active{{end}}">
+                    <a href="{{ .URL }}">{{ .Pre }} {{ .Name }} <span class="caret" ></span></a>
+                    <!-- Dropdown level 1 -->
+                    <ul class="tab second-level">
+                        {{ range .Children }}
+                        {{if .HasChildren}} 
+                            <li class="{{if $currentNode.HasMenuCurrent "main" . }} active{{end}}">
+                                <a href="{{ .URL }}">{{ .Pre }} </span> {{ .Name }} <span class="caret"></span></a>  
+                                <!-- Dropdown level 2 -->       
+                                <ul class="tab third-level">
+                                {{ range .Children }}
+                                {{if .HasChildren}} 
+                                    <li class="{{if $currentNode.HasMenuCurrent "main" . }} active{{end}}">
+                                        <a href="{{ .URL }}">{{ .Pre }} </span> {{ .Name }} <span class="caret"></span></a>  
+                                        <!-- Dropdown level 3 -->       
+                                        <ul class="tab fourth-level">
+                                                {{ range .Children }}
+                                                    <li class="{{if $currentNode.IsMenuCurrent "main" . }} active{{end}}"><a href="{{ .URL }}"> {{ .Name }}</a></li>
+                                                {{ end }}
+                                        </ul>
+                                    </li>
+                                {{else}} 
+                                    <li class="{{if $currentNode.IsMenuCurrent "main" . }} active{{end}}"><a href="{{ .URL }}"> {{ .Name }} </a></li>
+                                {{ end }}
+                                {{ end }}
+                                </ul>
+                            </li>
+                        {{else}} 
+                            <li class="{{if $currentNode.IsMenuCurrent "main" . }} active{{end}}"><a href="{{ .URL }}"> {{ .Name }} </a></li>
+                        {{ end }}
+                        {{ end }}
+                    </ul>
+              {{else}} 
+                <!-- item is not a list -->  
+                <li> <a class="" href="{{ .URL }}">{{ .Pre }}{{ .Name }}</a>
+              {{end}} 
+            </li> <!-- 1st level item -->
+          {{end}}
+        </ul> <!-- 1st level list -->
+    </nav>
+    
+<script>
+  $(document).ready(function () {
+    //$('.tab first-level').children().hide();
+  });
+</script>

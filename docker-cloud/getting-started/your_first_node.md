@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/beginner/your_first_node/",
-"/docker-cloud/getting-started/beginner/deploy_first_node/"
-]
-title = "Deploy your first node"
-description = "Deploy your first node on Docker Cloud"
-keywords = ["node, create, understand"]
-[menu.main]
-parent="getting-started"
-weight=-50
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/beginner/your_first_node/
+- /docker-cloud/getting-started/beginner/deploy_first_node/
+description: Deploy your first node on Docker Cloud
+keywords:
+- node, create, understand
+menu:
+  main:
+    parent: getting-started
+    weight: -50
+title: Deploy your first node
+---
 
 # Deploy Your First Node
 

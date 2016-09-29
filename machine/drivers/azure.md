@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Microsoft Azure"
-description = "Microsoft Azure driver for machine"
-keywords = ["machine, Microsoft Azure, driver"]
-[menu.main]
-parent="smn_machine_drivers"
-+++
-<![end-metadata]-->
+---
+description: Microsoft Azure driver for machine
+keywords:
+- machine, Microsoft Azure, driver
+menu:
+  main:
+    parent: smn_machine_drivers
+title: Microsoft Azure
+---
 
 # Microsoft Azure
 

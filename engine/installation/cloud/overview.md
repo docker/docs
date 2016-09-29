@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-  "/engine/installation/cloud/cloud/",
-]
-title = "Choose how to install"
-description = "Installation instructions for Docker on cloud."
-keywords = ["cloud, docker, machine, documentation,  installation"]
-[menu.main]
-parent = "install_cloud"
-weight=-3
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/installation/cloud/cloud/
+description: Installation instructions for Docker on cloud.
+keywords:
+- cloud, docker, machine, documentation,  installation
+menu:
+  main:
+    parent: install_cloud
+    weight: -3
+title: Choose how to install
+---
 
 # Choose how to install
 

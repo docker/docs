@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Permission levels"
-description = "Learn about the permission levels available in Docker Trusted Registry."
-keywords = ["docker, registry, security, permissions"]
-[menu.main]
-parent="dtr_menu_user_management"
-identifier="dtr-permission-levels"
-weight = 40
-+++
-<![end-metadata]-->
+---
+description: Learn about the permission levels available in Docker Trusted Registry.
+keywords:
+- docker, registry, security, permissions
+menu:
+  main:
+    identifier: dtr-permission-levels
+    parent: dtr_menu_user_management
+    weight: 40
+title: Permission levels
+---
 
 # Permission levels
 

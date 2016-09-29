@@ -1,3 +1,7 @@
+---
+{}
+---
+
 # Dockerizing MongoDB: Dockerfile for building MongoDB images
 # Based on ubuntu:16.04, installs MongoDB following the instructions from:
 # http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/

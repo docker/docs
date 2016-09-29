@@ -1,3 +1,5 @@
+
+
 #!/bin/bash -e
 
 # Populate an array with just docker dirs and one with content dirs

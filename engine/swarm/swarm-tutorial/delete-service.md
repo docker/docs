@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Delete the service"
-description = "Remove the service from the swarm"
-keywords = ["tutorial, cluster management, swarm, service"]
-[menu.main]
-identifier="swarm-tutorial-delete-service"
-parent="swarm-tutorial"
-weight=19
-+++
-<![end-metadata]-->
+---
+description: Remove the service from the swarm
+keywords:
+- tutorial, cluster management, swarm, service
+menu:
+  main:
+    identifier: swarm-tutorial-delete-service
+    parent: swarm-tutorial
+    weight: 19
+title: Delete the service
+---
 
 # Delete the service running on the swarm
 

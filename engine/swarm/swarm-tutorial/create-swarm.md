@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Create a swarm"
-description = "Initialize the swarm"
-keywords = ["tutorial, cluster management, swarm mode"]
-[menu.main]
-identifier="initialize-swarm"
-parent="swarm-tutorial"
-weight=12
-+++
-<![end-metadata]-->
+---
+description: Initialize the swarm
+keywords:
+- tutorial, cluster management, swarm mode
+menu:
+  main:
+    identifier: initialize-swarm
+    parent: swarm-tutorial
+    weight: 12
+title: Create a swarm
+---
 
 # Create a swarm
 

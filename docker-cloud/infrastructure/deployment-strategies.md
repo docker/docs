@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-title = "Container distribution strategies"
-aliases = [
-"/docker-cloud/feature-reference/deployment-strategies/"
-]
-description = "Schedule a deployment"
-keywords = ["schedule, deployment, container"]
-[menu.main]
-parent="infrastructure"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/deployment-strategies/
+description: Schedule a deployment
+keywords:
+- schedule, deployment, container
+menu:
+  main:
+    parent: infrastructure
+title: Container distribution strategies
+---
 
 # Container distribution strategies
 

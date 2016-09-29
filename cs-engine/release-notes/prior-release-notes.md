@@ -1,16 +1,18 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/cse-prior-release-notes/",
-          "/docker-trusted-registry/cs-engine/release-notes/prior-release-notes/"]
-title = "Prior CS Engine release notes"
-description = "Archived release notes for commercially supported Docker Engine"
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry,release, commercially supported Docker Engine"]
-[menu.main]
-parent="menu_csengine_release_notes"
-identifier="csengine_prior_release_notes"
-weight=10
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-trusted-registry/cse-prior-release-notes/
+- /docker-trusted-registry/cs-engine/release-notes/prior-release-notes/
+description: Archived release notes for commercially supported Docker Engine
+keywords:
+- docker, documentation, about, technology, understanding, enterprise, hub, registry,release,
+  commercially supported Docker Engine
+menu:
+  main:
+    identifier: csengine_prior_release_notes
+    parent: menu_csengine_release_notes
+    weight: 10
+title: Prior CS Engine release notes
+---
 
 # CS Engine release notes archive
 

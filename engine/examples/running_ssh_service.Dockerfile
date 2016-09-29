@@ -1,3 +1,7 @@
+---
+{}
+---
+
 FROM ubuntu:16.04
 MAINTAINER Sven Dowideit <SvenDowideit@docker.com>
 

@@ -1,13 +1,13 @@
-<!-- [metadata]>
-+++
-title = "AppArmor security profiles for Docker"
-description = "Enabling AppArmor in Docker"
-keywords = ["AppArmor, security, docker, documentation"]
-[menu.main]
-parent= "smn_secure_docker"
-weight=5
-+++
-<![end-metadata]-->
+---
+description: Enabling AppArmor in Docker
+keywords:
+- AppArmor, security, docker, documentation
+menu:
+  main:
+    parent: smn_secure_docker
+    weight: 5
+title: AppArmor security profiles for Docker
+---
 
 # AppArmor security profiles for Docker
 

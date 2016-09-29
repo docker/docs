@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Release Notes"
-description ="Docker Cloud"
-keywords = ["Docker, cloud, release, notes"]
-[menu.main]
-parent="docker-cloud"
-weight=100
-+++
-<![end-metadata]-->
+---
+description: Docker Cloud
+keywords:
+- Docker, cloud, release, notes
+menu:
+  main:
+    parent: docker-cloud
+    weight: 100
+title: Release Notes
+---
 
 # Docker Cloud Release Notes
 

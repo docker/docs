@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Strategies"
-description = "Swarm strategies"
-keywords = ["docker, swarm, clustering,  strategies"]
-[menu.main]
-parent="swarm_sched"
-weight=6
-+++
-<![end-metadata]-->
+---
+description: Swarm strategies
+keywords:
+- docker, swarm, clustering,  strategies
+menu:
+  main:
+    parent: swarm_sched
+    weight: 6
+title: Strategies
+---
 
 # Docker Swarm strategies
 

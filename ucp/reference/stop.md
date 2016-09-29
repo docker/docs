@@ -1,11 +1,13 @@
-+++
-title = "stop"
-description = "Stop Docker Universal Control Plane containers."
-keywords= ["install, ucp, stop"]
-[menu.main]
-parent = "ucp_ref"
-identifier = "ucp_ref_stop"
-+++
+---
+description: Stop Docker Universal Control Plane containers.
+keywords:
+- install, ucp, stop
+menu:
+  main:
+    identifier: ucp_ref_stop
+    parent: ucp_ref
+title: stop
+---
 
 # docker/ucp stop
 

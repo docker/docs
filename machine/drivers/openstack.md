@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "OpenStack"
-description = "OpenStack driver for machine"
-keywords = ["machine, OpenStack, driver"]
-[menu.main]
-parent="smn_machine_drivers"
-+++
-<![end-metadata]-->
+---
+description: OpenStack driver for machine
+keywords:
+- machine, OpenStack, driver
+menu:
+  main:
+    parent: smn_machine_drivers
+title: OpenStack
+---
 
 # OpenStack
 

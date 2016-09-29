@@ -1,12 +1,14 @@
-+++
-title = "Configuration overview"
-description = "Configuration overview for Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
-[menu.main]
-parent="workw_dtr_configure"
-identifier="dtr_configuration"
-weight=2
-+++
+---
+description: Configuration overview for Docker Trusted Registry
+keywords:
+- docker, documentation, about, technology, understanding, enterprise, hub,  registry
+menu:
+  main:
+    identifier: dtr_configuration
+    parent: workw_dtr_configure
+    weight: 2
+title: Configuration overview
+---
 
 # Configure overview
 

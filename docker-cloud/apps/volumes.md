@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/tutorials/download-volume-data/",
-"/docker-cloud/feature-reference/volumes/"
-]
-title = "Work with data volumes"
-description = "Work with data volumes"
-keywords = ["data, volumes, create, reuse"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/tutorials/download-volume-data/
+- /docker-cloud/feature-reference/volumes/
+description: Work with data volumes
+keywords:
+- data, volumes, create, reuse
+menu:
+  main:
+    parent: apps
+title: Work with data volumes
+---
 
 # Work with data volumes
 

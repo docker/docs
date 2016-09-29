@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title = "How to get Swarm"
-description = "Running a Swarm container on Docker Engine. Run a Swarm binary on the host OS without Docker Engine."
-keywords = ["docker, Swarm, container, binary, clustering, install, installation"]
-[menu.main]
-identifier="how-to-get-and-run-Swarm"
-parent="workw_swarm"
-weight=-90
-+++
-<![end-metadata]-->
+---
+description: Running a Swarm container on Docker Engine. Run a Swarm binary on the
+  host OS without Docker Engine.
+keywords:
+- docker, Swarm, container, binary, clustering, install, installation
+menu:
+  main:
+    identifier: how-to-get-and-run-Swarm
+    parent: workw_swarm
+    weight: -90
+title: How to get Swarm
+---
 
 # How to get Docker Swarm
 

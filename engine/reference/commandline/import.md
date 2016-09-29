@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "import"
-description = "The import command description and usage"
-keywords = ["import, file, system, container"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The import command description and usage
+keywords:
+- import, file, system, container
+menu:
+  main:
+    parent: smn_cli
+title: import
+---
 
 # import
 

@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-  "/mackit/faqs/"
-]
-title = "FAQs"
-description = "Frequently asked questions"
-keywords = ["mac faqs"]
-[menu.main]
-identifier="docker-mac-faqs"
-parent="pinata_mac_menu"
-weight = 7
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mackit/faqs/
+description: Frequently asked questions
+keywords:
+- mac faqs
+menu:
+  main:
+    identifier: docker-mac-faqs
+    parent: pinata_mac_menu
+    weight: 7
+title: FAQs
+---
 
 #  Frequently Asked Questions (FAQs)
 

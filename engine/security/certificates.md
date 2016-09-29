@@ -1,13 +1,15 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/articles/certificates/"]
-title = "Using certificates for repository client verification"
-description = "How to set up and use certificates with a registry to verify access"
-keywords = ["Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls, documentation, examples, articles,  tutorials"]
-[menu.main]
-parent = "smn_secure_docker"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/articles/certificates/
+description: How to set up and use certificates with a registry to verify access
+keywords:
+- Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls,
+  documentation, examples, articles,  tutorials
+menu:
+  main:
+    parent: smn_secure_docker
+title: Using certificates for repository client verification
+---
 
 # Using certificates for repository client verification
 

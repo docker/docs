@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "How swarm mode works"
-description = "How the components of swarm mode work"
-keywords = ["cluster, swarm"]
-[menu.main]
-identifier="how-swarm-works"
-parent="engine_swarm"
-weight=11
-+++
-<![end-metadata]-->
+---
+description: How the components of swarm mode work
+keywords:
+- cluster, swarm
+menu:
+  main:
+    identifier: how-swarm-works
+    parent: engine_swarm
+    weight: 11
+title: How swarm mode works
+---
 
 #  How swarm mode works guide
 

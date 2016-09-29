@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "restore"
-description = "Docker Trusted Registry restore command reference."
-keywords = ["docker, registry, restore, backup"]
-[menu.main]
-parent="dtr_menu_reference"
-identifier="dtr_reference_restore"
-+++
-<![end-metadata]-->
+---
+description: Docker Trusted Registry restore command reference.
+keywords:
+- docker, registry, restore, backup
+menu:
+  main:
+    identifier: dtr_reference_restore
+    parent: dtr_menu_reference
+title: restore
+---
 
 # docker/dtr restore
 

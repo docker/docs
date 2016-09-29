@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Get started with a local VM"
-description = "Get started with Docker Machine and a local VM"
-keywords = ["docker, machine, virtualbox, local"]
-[menu.main]
-parent="workw_machine"
-weight=-70
-+++
-<![end-metadata]-->
+---
+description: Get started with Docker Machine and a local VM
+keywords:
+- docker, machine, virtualbox, local
+menu:
+  main:
+    parent: workw_machine
+    weight: -70
+title: Get started with a local VM
+---
 
 # Get started with Docker Machine and a local VM
 

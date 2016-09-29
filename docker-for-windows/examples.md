@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = " Example Applications"
-description = "Docker for Mac and Docker for Windows Tutorials"
-keywords = ["mac, windows, examples, Compose"]
-[menu.main]
-identifier="docker-win-examples"
-parent="pinata_win_menu"
-weight="5"
-+++
-<![end-metadata]-->
+---
+description: Docker for Mac and Docker for Windows Tutorials
+keywords:
+- mac, windows, examples, Compose
+menu:
+  main:
+    identifier: docker-win-examples
+    parent: pinata_win_menu
+    weight: "5"
+title: ' Example Applications'
+---
 
 #  Example Applications
 

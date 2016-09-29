@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/fedora/"]
-title = "Installation on Fedora"
-description = "Instructions for installing Docker on Fedora."
-keywords = ["Docker, Docker documentation, Fedora, requirements,  linux"]
-[menu.main]
-parent = "engine_linux"
-weight=-3
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/installation/fedora/
+description: Instructions for installing Docker on Fedora.
+keywords:
+- Docker, Docker documentation, Fedora, requirements,  linux
+menu:
+  main:
+    parent: engine_linux
+    weight: -3
+title: Installation on Fedora
+---
 
 # Fedora
 

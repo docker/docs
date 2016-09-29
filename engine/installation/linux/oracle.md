@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/oracle/"]
-title = "Installation on Oracle Linux"
-description = "Installation instructions for Docker on Oracle Linux."
-keywords = ["Docker, Docker documentation, requirements, linux, rhel, centos, oracle,  ol"]
-[menu.main]
-parent = "engine_linux"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/installation/oracle/
+description: Installation instructions for Docker on Oracle Linux.
+keywords:
+- Docker, Docker documentation, requirements, linux, rhel, centos, oracle,  ol
+menu:
+  main:
+    parent: engine_linux
+title: Installation on Oracle Linux
+---
 
 # Oracle Linux
 

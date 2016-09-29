@@ -1,14 +1,13 @@
-<!--[metadata]>
-+++
-title = "Organizations and Teams"
-description = "Docker Cloud for Organizations and Teams"
-keywords = ["organizations, teams, Docker Cloud, resources, permissions"]
-[menu.main]
-parent="docker-cloud"
-weight=-98
-+++
-<![end-metadata]-->
-
+---
+description: Docker Cloud for Organizations and Teams
+keywords:
+- organizations, teams, Docker Cloud, resources, permissions
+menu:
+  main:
+    parent: docker-cloud
+    weight: -98
+title: Organizations and Teams
+---
 
 # Organizations and Teams in Docker Cloud
 

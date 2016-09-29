@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/deploy-to-cloud/",
-"/docker-cloud/tutorials/deploy-to-cloud/"
-]
-title = "Add a Deploy to Docker Cloud button"
-description = "Deploy to Docker Cloud"
-keywords = ["deploy, docker, cloud"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/deploy-to-cloud/
+- /docker-cloud/tutorials/deploy-to-cloud/
+description: Deploy to Docker Cloud
+keywords:
+- deploy, docker, cloud
+menu:
+  main:
+    parent: apps
+title: Add a Deploy to Docker Cloud button
+---
 
 # Add a Deploy to Docker Cloud Button
 

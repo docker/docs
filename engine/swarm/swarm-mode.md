@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Run Docker Engine in swarm mode"
-description = "Run Docker Engine in swarm mode"
-keywords = ["guide, swarm mode, node"]
-[menu.main]
-identifier="initialize-swarm-guide"
-parent="engine_swarm"
-weight=12
-+++
-<![end-metadata]-->
+---
+description: Run Docker Engine in swarm mode
+keywords:
+- guide, swarm mode, node
+menu:
+  main:
+    identifier: initialize-swarm-guide
+    parent: engine_swarm
+    weight: 12
+title: Run Docker Engine in swarm mode
+---
 
 # Run Docker Engine in swarm mode
 

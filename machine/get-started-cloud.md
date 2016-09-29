@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-title = "Provision hosts in the cloud"
-description = "Using Docker Machine to provision hosts on cloud providers"
-keywords = ["docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"]
-[menu.main]
-parent="workw_machine"
-weight=-60
-+++
-<![end-metadata]-->
+---
+description: Using Docker Machine to provision hosts on cloud providers
+keywords:
+- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer,
+  virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
+menu:
+  main:
+    parent: workw_machine
+    weight: -60
+title: Provision hosts in the cloud
+---
 
 # Use Docker Machine to provision hosts on cloud providers
 

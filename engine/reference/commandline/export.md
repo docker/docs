@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "export"
-description = "The export command description and usage"
-keywords = ["export, file, system, container"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The export command description and usage
+keywords:
+- export, file, system, container
+menu:
+  main:
+    parent: smn_cli
+title: export
+---
 
 # export
 

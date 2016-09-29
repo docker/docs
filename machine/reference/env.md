@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "env"
-description = "Set environment variables on a machine"
-keywords = ["machine, env, subcommand"]
-[menu.main]
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Set environment variables on a machine
+keywords:
+- machine, env, subcommand
+menu:
+  main:
+    parent: smn_machine_subcmds
+title: env
+---
 
 # env
 

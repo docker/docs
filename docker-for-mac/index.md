@@ -1,21 +1,20 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mackit/",
-"/mackit/getting-started/",
-"/mac/",
-"/mac/started/",
-"/docker-for-mac/started/"
-]
-title = "Getting Started"
-description = "Getting Started"
-keywords = ["mac, beta, alpha, tutorial"]
-[menu.main]
-identifier="docker-mac-getstart"
-parent="pinata_mac_menu"
-weight = 1
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mackit/
+- /mackit/getting-started/
+- /mac/
+- /mac/started/
+- /docker-for-mac/started/
+description: Getting Started
+keywords:
+- mac, beta, alpha, tutorial
+menu:
+  main:
+    identifier: docker-mac-getstart
+    parent: pinata_mac_menu
+    weight: 1
+title: Getting Started
+---
 
 # Getting Started with Docker for Mac
 

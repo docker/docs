@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "regenerate-certs"
-description = "Regenerate and update TLS certificates"
-keywords = ["machine, regenerate-certs, subcommand"]
-[menu.main]
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Regenerate and update TLS certificates
+keywords:
+- machine, regenerate-certs, subcommand
+menu:
+  main:
+    parent: smn_machine_subcmds
+title: regenerate-certs
+---
 
 # regenerate-certs
 

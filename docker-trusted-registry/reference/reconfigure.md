@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "reconfigure"
-description = "Docker Trusted Registry reconfigure command reference."
-keywords = ["docker, registry, reference, reconfigure"]
-[menu.main]
-parent="dtr_menu_reference"
-identifier="dtr_reference_reconfigure"
-+++
-<![end-metadata]-->
+---
+description: Docker Trusted Registry reconfigure command reference.
+keywords:
+- docker, registry, reference, reconfigure
+menu:
+  main:
+    identifier: dtr_reference_reconfigure
+    parent: dtr_menu_reference
+title: reconfigure
+---
 
 # docker/dtr reconfigure
 

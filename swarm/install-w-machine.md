@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Install and use Swarm"
-description = "Swarm release notes"
-keywords = ["docker, swarm, clustering, discovery, release,  notes"]
-[menu.main]
-parent="workw_swarm"
-+++
-<![end-metadata]-->
+---
+description: Swarm release notes
+keywords:
+- docker, swarm, clustering, discovery, release,  notes
+menu:
+  main:
+    parent: workw_swarm
+title: Install and use Swarm
+---
 
 # Install and Create a Docker Swarm
 

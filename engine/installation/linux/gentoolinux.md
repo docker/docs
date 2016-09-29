@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/gentoolinux/"]
-title = "Installation on Gentoo"
-description = "Installation instructions for Docker on Gentoo."
-keywords = ["gentoo linux, docker, documentation,  installation"]
-[menu.main]
-parent = "engine_linux"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/installation/gentoolinux/
+description: Installation instructions for Docker on Gentoo.
+keywords:
+- gentoo linux, docker, documentation,  installation
+menu:
+  main:
+    parent: engine_linux
+title: Installation on Gentoo
+---
 
 # Gentoo
 

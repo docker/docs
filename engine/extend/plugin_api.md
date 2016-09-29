@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Plugins API"
-description = "How to write Docker plugins extensions "
-keywords = ["API, Usage, plugins, documentation, developer"]
-[menu.main]
-parent = "engine_extend"
-weight=7
-+++
-<![end-metadata]-->
+---
+description: 'How to write Docker plugins extensions '
+keywords:
+- API, Usage, plugins, documentation, developer
+menu:
+  main:
+    parent: engine_extend
+    weight: 7
+title: Plugins API
+---
 
 # Docker Plugin API
 

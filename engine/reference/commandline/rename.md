@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "rename"
-description = "The rename command description and usage"
-keywords = ["rename, docker, container"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The rename command description and usage
+keywords:
+- rename, docker, container
+menu:
+  main:
+    parent: smn_cli
+title: rename
+---
 
 # rename
 

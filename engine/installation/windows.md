@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Installation on Windows"
-description = "Docker installation on Microsoft Windows"
-keywords = ["Docker, Docker documentation, Windows, requirements, virtualbox,  boot2docker"]
-[menu.main]
-parent = "engine_install"
-weight="-80"
-+++
-<![end-metadata]-->
+---
+description: Docker installation on Microsoft Windows
+keywords:
+- Docker, Docker documentation, Windows, requirements, virtualbox,  boot2docker
+menu:
+  main:
+    parent: engine_install
+    weight: "-80"
+title: Installation on Windows
+---
 
 # Windows
 

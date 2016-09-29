@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title = "Create and manage teams"
-description = "Learn how to manage teams to enforce fine-grain access control in Docker Trusted Registry."
-keywords = ["docker, registry, security, permissions, teams"]
-[menu.main]
-parent="dtr_menu_user_management"
-identifier="dtr-create-teams"
-weight = 30
-+++
-<![end-metadata]-->
+---
+description: Learn how to manage teams to enforce fine-grain access control in Docker
+  Trusted Registry.
+keywords:
+- docker, registry, security, permissions, teams
+menu:
+  main:
+    identifier: dtr-create-teams
+    parent: dtr_menu_user_management
+    weight: 30
+title: Create and manage teams
+---
 
 # Create and manage teams
 

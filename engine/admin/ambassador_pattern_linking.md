@@ -1,14 +1,16 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/articles/ambassador_pattern_linking/"]
-title = "Link via an ambassador container"
-description = "Using the Ambassador pattern to abstract (network) services"
-keywords = ["Examples, Usage, links, docker, documentation, examples, names, name,  container naming"]
-[menu.main]
-parent = "engine_admin"
-weight = 15
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/articles/ambassador_pattern_linking/
+description: Using the Ambassador pattern to abstract (network) services
+keywords:
+- Examples, Usage, links, docker, documentation, examples, names, name,  container
+  naming
+menu:
+  main:
+    parent: engine_admin
+    weight: 15
+title: Link via an ambassador container
+---
 
 # Link via an ambassador container
 

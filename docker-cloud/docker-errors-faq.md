@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/faq/docker-errors-faq/"
-]
-title = "Known Issues in Docker Cloud"
-description = "Known Docker Engine issues in Docker Cloud"
-keywords = ["Engine, issues, troubleshoot"]
-[menu.main]
-parent="docker-cloud"
-weight=50
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/faq/docker-errors-faq/
+description: Known Docker Engine issues in Docker Cloud
+keywords:
+- Engine, issues, troubleshoot
+menu:
+  main:
+    parent: docker-cloud
+    weight: 50
+title: Known Issues in Docker Cloud
+---
 
 # Known Docker Engine issues in Docker Cloud
 

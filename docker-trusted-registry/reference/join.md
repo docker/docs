@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "join"
-description = "Docker Trusted Registry join command reference."
-keywords = ["docker, registry, reference, join"]
-[menu.main]
-parent="dtr_menu_reference"
-identifier="dtr_reference_join"
-+++
-<![end-metadata]-->
+---
+description: Docker Trusted Registry join command reference.
+keywords:
+- docker, registry, reference, join
+menu:
+  main:
+    identifier: dtr_reference_join
+    parent: dtr_menu_reference
+title: join
+---
 
 # docker/dtr join
 

@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-title = "System requirements"
-description = "Learn about the system requirements for installing Docker Trusted Registry."
-keywords = ["docker, DTR, architecture, requirements"]
-[menu.main]
-parent="dtr-menu-install"
-identifier="dtr_system_requirements"
-weight=0
-+++
-<![end-metadata]-->
-
+---
+description: Learn about the system requirements for installing Docker Trusted Registry.
+keywords:
+- docker, DTR, architecture, requirements
+menu:
+  main:
+    identifier: dtr_system_requirements
+    parent: dtr-menu-install
+    weight: 0
+title: System requirements
+---
 
 # DTR system requirements
 

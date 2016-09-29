@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "version"
-description = "The version command description and usage"
-keywords = ["version, architecture, api"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The version command description and usage
+keywords:
+- version, architecture, api
+menu:
+  main:
+    parent: smn_cli
+title: version
+---
 
 # version
 

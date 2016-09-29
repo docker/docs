@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Deploy a service"
-description = "Deploy a service to the swarm"
-keywords = ["tutorial, cluster management, swarm mode"]
-[menu.main]
-identifier="deploy-application"
-parent="swarm-tutorial"
-weight=16
-+++
-<![end-metadata]-->
+---
+description: Deploy a service to the swarm
+keywords:
+- tutorial, cluster management, swarm mode
+menu:
+  main:
+    identifier: deploy-application
+    parent: swarm-tutorial
+    weight: 16
+title: Deploy a service
+---
 
 # Deploy a service to the swarm
 

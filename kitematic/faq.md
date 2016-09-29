@@ -1,14 +1,13 @@
-<!--[metadata]>
-+++
-title = "Frequently Asked Questions"
-description = "Documentation covering common questions users have about Kitematic"
-keywords = ["docker, documentation, about, technology, kitematic,  gui"]
-[menu.main]
-parent="toolbox_kitematic"
-weight=5
-+++
-<![end-metadata]-->
-
+---
+description: Documentation covering common questions users have about Kitematic
+keywords:
+- docker, documentation, about, technology, kitematic,  gui
+menu:
+  main:
+    parent: toolbox_kitematic
+    weight: 5
+title: Frequently Asked Questions
+---
 
 # Kitematic: Frequently Asked Questions
 

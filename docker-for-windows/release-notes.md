@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-  "/winkit/release-notes/"
-]
-title = "Release Notes"
-description = "Change log / release notes per release"
-keywords = ["pinata, alpha, tutorial"]
-[menu.main]
-identifier='docker-win-relnotes'
-parent="pinata_win_menu"
-weight = 7
-+++
-<![end-metadata]-->
+---
+aliases:
+- /winkit/release-notes/
+description: Change log / release notes per release
+keywords:
+- pinata, alpha, tutorial
+menu:
+  main:
+    identifier: docker-win-relnotes
+    parent: pinata_win_menu
+    weight: 7
+title: Release Notes
+---
 
 # Docker for Windows Release Notes
 

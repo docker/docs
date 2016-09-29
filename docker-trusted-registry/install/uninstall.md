@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Uninstall"
-description = "Learn how to uninstall your Docker Trusted Registry installation."
-keywords = ["docker, dtr, install, uninstall"]
-[menu.main]
-parent="dtr-menu-install"
-identifier="dtr_uninstall"
-weight=50
-+++
-<![end-metadata]-->
+---
+description: Learn how to uninstall your Docker Trusted Registry installation.
+keywords:
+- docker, dtr, install, uninstall
+menu:
+  main:
+    identifier: dtr_uninstall
+    parent: dtr-menu-install
+    weight: 50
+title: Uninstall
+---
 
 # Uninstall Docker Trusted Registry
 

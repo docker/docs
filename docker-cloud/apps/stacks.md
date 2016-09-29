@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/stacks/"
-]
-title = "Manage service stacks"
-description = "Manage service stacks"
-keywords = ["service, stack, yaml"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/stacks/
+description: Manage service stacks
+keywords:
+- service, stack, yaml
+menu:
+  main:
+    parent: apps
+title: Manage service stacks
+---
 
 # Manage service stacks
 

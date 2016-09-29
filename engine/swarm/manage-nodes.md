@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Manage nodes in a swarm"
-description = "Manage existing nodes in a swarm"
-keywords = ["guide, swarm mode, node"]
-[menu.main]
-identifier="manage-nodes-guide"
-parent="engine_swarm"
-weight=14
-+++
-<![end-metadata]-->
+---
+description: Manage existing nodes in a swarm
+keywords:
+- guide, swarm mode, node
+menu:
+  main:
+    identifier: manage-nodes-guide
+    parent: engine_swarm
+    weight: 14
+title: Manage nodes in a swarm
+---
 
 # Manage nodes in a swarm
 

@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title="Device mapper storage in practice"
-description="Learn how to optimize your use of device mapper driver."
-keywords=["container, storage, driver, device mapper"]
-[menu.main]
-parent="engine_driver"
-+++
-<![end-metadata]-->
+---
+description: Learn how to optimize your use of device mapper driver.
+keywords:
+- container, storage, driver, device mapper
+menu:
+  main:
+    parent: engine_driver
+title: Device mapper storage in practice
+---
 
 # Docker and the Device Mapper storage driver
 

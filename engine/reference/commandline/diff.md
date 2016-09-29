@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "diff"
-description = "The diff command description and usage"
-keywords = ["list, changed, files, container"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The diff command description and usage
+keywords:
+- list, changed, files, container
+menu:
+  main:
+    parent: smn_cli
+title: diff
+---
 
 # diff
 

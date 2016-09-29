@@ -1,12 +1,15 @@
-+++
-title = "Security configuration"
-description = "Security configuration for Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, understanding, configuration, security, enterprise, hub, registry"]
-[menu.main]
-parent="workw_dtr_configure"
-identifier="dtr_configure_security"
-weight=4
-+++
+---
+description: Security configuration for Docker Trusted Registry
+keywords:
+- docker, documentation, about, technology, understanding, configuration, security,
+  enterprise, hub, registry
+menu:
+  main:
+    identifier: dtr_configure_security
+    parent: workw_dtr_configure
+    weight: 4
+title: Security configuration
+---
 
 # Security configuration
 

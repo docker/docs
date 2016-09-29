@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/beginner/link-softlayer/",
-"/docker-cloud/getting-started/link-softlayer/"
-]
-title = "Link to SoftLayer hosts"
-description = "Link your SoftLayer account"
-keywords = ["SoftLayer, link, cloud"]
-[menu.main]
-parent="infrastructure"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/beginner/link-softlayer/
+- /docker-cloud/getting-started/link-softlayer/
+description: Link your SoftLayer account
+keywords:
+- SoftLayer, link, cloud
+menu:
+  main:
+    parent: infrastructure
+title: Link to SoftLayer hosts
+---
 
 # Link your SoftLayer account
 

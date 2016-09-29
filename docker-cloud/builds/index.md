@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Builds and Images Overview"
-description = "Manage Builds and Images in Docker Cloud"
-keywords = ["builds, images, Cloud"]
-notoc = true
-[menu.main]
-parent="builds"
-weight=-80
-+++
-<![end-metadata]-->
+---
+description: Manage Builds and Images in Docker Cloud
+keywords:
+- builds, images, Cloud
+menu:
+  main:
+    parent: builds
+    weight: -80
+notoc: true
+title: Builds and Images Overview
+---
 
 # Builds and Images Overview
 

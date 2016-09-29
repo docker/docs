@@ -1,20 +1,18 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mac/step_six/",
-"/windows/step_six/",
-"/linux/step_six/",
-]
-title = "Tag, push, & pull your image"
-description = "Getting started with Docker"
-keywords = ["beginner, getting started, Docker"]
-[menu.main]
-identifier = "getstart_tag_push_pull"
-parent = "tutorial_getstart_menu"
-weight = 6
-+++
-<![end-metadata]-->
-
+---
+aliases:
+- /mac/step_six/
+- /windows/step_six/
+- /linux/step_six/
+description: Getting started with Docker
+keywords:
+- beginner, getting started, Docker
+menu:
+  main:
+    identifier: getstart_tag_push_pull
+    parent: tutorial_getstart_menu
+    weight: 6
+title: Tag, push, & pull your image
+---
 
 # Tag, push, and pull your image
 

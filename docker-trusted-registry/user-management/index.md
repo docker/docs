@@ -1,15 +1,16 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/accounts/"]
-title = "Authentication and authorization"
-description = "Learn about the permission levels available on Docker Trusted Registry."
-keywords = ["docker, registry, security, permissions, users"]
-[menu.main]
-parent="dtr_menu_user_management"
-identifier="dtr-authentication-authorization"
-weight=0
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-trusted-registry/accounts/
+description: Learn about the permission levels available on Docker Trusted Registry.
+keywords:
+- docker, registry, security, permissions, users
+menu:
+  main:
+    identifier: dtr-authentication-authorization
+    parent: dtr_menu_user_management
+    weight: 0
+title: Authentication and authorization
+---
 
 # Authentication and authorization
 

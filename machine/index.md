@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Docker Machine"
-description = "Introduction and Overview of Machine"
-keywords = ["docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"]
-[menu.main]
-identifier="workw_machine"
-+++
-<![end-metadata]-->
-
+---
+description: Introduction and Overview of Machine
+keywords:
+- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer,
+  virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
+menu:
+  main:
+    identifier: workw_machine
+title: Docker Machine
+---
 
 # Docker Machine
 

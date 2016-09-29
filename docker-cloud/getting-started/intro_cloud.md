@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/beginner/intro_cloud/"
-]
-title = "Introducing Docker Cloud"
-description = "Introducing Docker Cloud concepts and terminology"
-keywords = ["node, create, understand"]
-[menu.main]
-parent="getting-started"
-weight=-100
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/beginner/intro_cloud/
+description: Introducing Docker Cloud concepts and terminology
+keywords:
+- node, create, understand
+menu:
+  main:
+    parent: getting-started
+    weight: -100
+title: Introducing Docker Cloud
+---
 
 # Introducing Docker Cloud
 

@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Use the Docker Store"
-description = "Find images in Docker Store"
-keywords = ["Docker, docker, store, purchase images"]
-draft = true
-[menu.main]
-parent = "docker-store"
-+++
-<![end-metadata]-->
+---
+description: Find images in Docker Store
+draft: true
+keywords:
+- Docker, docker, store, purchase images
+menu:
+  main:
+    parent: docker-store
+title: Use the Docker Store
+---
 
 <!-- copied to the index so that this file appears -->
 

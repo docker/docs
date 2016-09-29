@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-title = "Getting started with Notary"
-description = "Performing basic operation to use Notary in tandem with Docker Content Trust."
-keywords = ["docker, Notary, notary-client, docker content trust, content trust"]
-[menu.main]
-parent="mn_notary"
-weight=1
-+++
-<![end-metadata]-->
+---
+description: Performing basic operation to use Notary in tandem with Docker Content
+  Trust.
+keywords:
+- docker, Notary, notary-client, docker content trust, content trust
+menu:
+  main:
+    parent: mn_notary
+    weight: 1
+title: Getting started with Notary
+---
 
 # Getting started with Docker Notary
 

@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/archlinux/"]
-title = "Installation on Arch Linux"
-description = "Installation instructions for Docker on ArchLinux."
-keywords = ["arch linux, docker, documentation,  installation"]
-[menu.main]
-parent = "engine_linux"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/installation/archlinux/
+description: Installation instructions for Docker on ArchLinux.
+keywords:
+- arch linux, docker, documentation,  installation
+menu:
+  main:
+    parent: engine_linux
+title: Installation on Arch Linux
+---
 
 # Arch Linux
 

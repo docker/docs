@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Manage keys for content trust"
-description = "Manage keys for content trust"
-keywords = ["trust, security, root,  keys, repository"]
-[menu.main]
-parent= "smn_content_trust"
-+++
-<![end-metadata]-->
+---
+description: Manage keys for content trust
+keywords:
+- trust, security, root,  keys, repository
+menu:
+  main:
+    parent: smn_content_trust
+title: Manage keys for content trust
+---
 
 # Manage keys for content trust
 

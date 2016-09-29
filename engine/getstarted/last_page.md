@@ -1,19 +1,18 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mac/last_page/",
-"/windows/last_page/",
-"/linux/last_page/",
-]
-title = "Learning more"
-description = "Getting started with Docker"
-keywords = ["beginner, getting started, Docker"]
-[menu.main]
-identifier = "getstart_learn_more"
-parent = "tutorial_getstart_menu"
-weight = 7
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mac/last_page/
+- /windows/last_page/
+- /linux/last_page/
+description: Getting started with Docker
+keywords:
+- beginner, getting started, Docker
+menu:
+  main:
+    identifier: getstart_learn_more
+    parent: tutorial_getstart_menu
+    weight: 7
+title: Learning more
+---
 
 # Learning more
 

@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "search"
-description = "The search command description and usage"
-keywords = ["search, hub, images"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The search command description and usage
+keywords:
+- search, hub, images
+menu:
+  main:
+    parent: smn_cli
+title: search
+---
 
 # search
 

@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Customize the docker0 bridge"
-description = "Customizing docker0"
-keywords = ["docker, bridge, docker0, network"]
-[menu.main]
-parent = "smn_networking_def"
-+++
-<![end-metadata]-->
+---
+description: Customizing docker0
+keywords:
+- docker, bridge, docker0, network
+menu:
+  main:
+    parent: smn_networking_def
+title: Customize the docker0 bridge
+---
 
 # Customize the docker0 bridge
 

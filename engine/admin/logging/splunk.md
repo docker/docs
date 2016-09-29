@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/reference/logging/splunk/"]
-title = "Splunk logging driver"
-description = "Describes how to use the Splunk logging driver."
-keywords = ["splunk, docker, logging, driver"]
-[menu.main]
-parent = "smn_logging"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/reference/logging/splunk/
+description: Describes how to use the Splunk logging driver.
+keywords:
+- splunk, docker, logging, driver
+menu:
+  main:
+    parent: smn_logging
+title: Splunk logging driver
+---
 
 # Splunk logging driver
 

@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-  "/mackit/release-notes/"
-]
-title = "Release Notes"
-description = "Change log / release notes per release"
-keywords = ["pinata, alpha, tutorial"]
-[menu.main]
-identifier='docker-mac-relnotes'
-parent="pinata_mac_menu"
-weight = 10
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mackit/release-notes/
+description: Change log / release notes per release
+keywords:
+- pinata, alpha, tutorial
+menu:
+  main:
+    identifier: docker-mac-relnotes
+    parent: pinata_mac_menu
+    weight: 10
+title: Release Notes
+---
 
 # Docker for Mac Release Notes
 

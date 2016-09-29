@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "info"
-description = "The info command description and usage"
-keywords = ["display, docker, information"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The info command description and usage
+keywords:
+- display, docker, information
+menu:
+  main:
+    parent: smn_cli
+title: info
+---
 
 # info
 

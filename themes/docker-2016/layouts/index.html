@@ -1,0 +1,31 @@
+{{ partial "header.html" (dict "thispage" . "errorpage" false) }}
+<section class="title_section darkblue">
+</section>
+
+<div class="">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3 col-md-2 docsidebarnav_section">
+                    {{ partial "navbar.html" . }}
+                </div>
+                <div class="col-xs-12 col-sm-9 col-md-10">
+                    <section class="section projects_items_section GenericDev" id="DocumentationText">
+                        {{ range where .Data.Pages "Title" "Welcome to the Docker Documentation" }}
+                        <p>{{ .Content }}</p>
+                        {{ end }}
+                    </section>
+                </div>
+            </div>
+        </div>
+</div>
+                  <a class="exit-off-canvas"></a>
+                </div>
+        </div>
+
+        <div class="moby_footer">
+<i class="bar"></i>
+<i class="moby"></i>
+</div>
+
+
+{{ partial "footer.html" . }}

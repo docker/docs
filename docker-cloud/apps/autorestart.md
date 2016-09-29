@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-title = "Automatic container restart"
-aliases = [
-"/docker-cloud/feature-reference/autorestart/"
-]
-description = "Automatically restart a container in Docker Cloud"
-keywords = ["container, restart, automated"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/autorestart/
+description: Automatically restart a container in Docker Cloud
+keywords:
+- container, restart, automated
+menu:
+  main:
+    parent: apps
+title: Automatic container restart
+---
 
 # Automatically restart a container
 

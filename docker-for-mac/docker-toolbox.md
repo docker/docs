@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-  "/mackit/docker-toolbox/"
-]
-title = "Docker for Mac vs. Docker Toolbox"
-description = "Docker for Mac and Docker Toolbox"
-keywords = ["mac, windows, alpha, beta, toolbox, docker-machine, tutorial"]
-[menu.main]
-identifier="kit-toolbox"
-parent="pinata_mac_menu"
-weight = 2
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mackit/docker-toolbox/
+description: Docker for Mac and Docker Toolbox
+keywords:
+- mac, windows, alpha, beta, toolbox, docker-machine, tutorial
+menu:
+  main:
+    identifier: kit-toolbox
+    parent: pinata_mac_menu
+    weight: 2
+title: Docker for Mac vs. Docker Toolbox
+---
 
 # Docker for Mac vs. Docker Toolbox
 

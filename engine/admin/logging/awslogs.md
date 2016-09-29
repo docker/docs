@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/reference/logging/awslogs/"]
-title = "Amazon CloudWatch Logs logging driver"
-description = "Describes how to use the Amazon CloudWatch Logs logging driver."
-keywords = ["AWS, Amazon, CloudWatch, logging, driver"]
-[menu.main]
-parent = "smn_logging"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/reference/logging/awslogs/
+description: Describes how to use the Amazon CloudWatch Logs logging driver.
+keywords:
+- AWS, Amazon, CloudWatch, logging, driver
+menu:
+  main:
+    parent: smn_logging
+title: Amazon CloudWatch Logs logging driver
+---
 
 # Amazon CloudWatch Logs logging driver
 

@@ -1,19 +1,18 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/use-hosted/"
-]
-title = "Link to your Infrastructure"
-description = "How to link Docker Cloud to a hosted cloud services provider or your own hosts"
-keywords = ["node, create, understand"]
-[menu.main]
-parent="getting-started"
-weight=-90
-aliases = [
-"/docker-cloud/getting-started/use-hosted/"
-]
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/use-hosted/
+description: How to link Docker Cloud to a hosted cloud services provider or your
+  own hosts
+keywords:
+- node, create, understand
+menu:
+  main:
+    aliases:
+    - /docker-cloud/getting-started/use-hosted/
+    parent: getting-started
+    weight: -90
+title: Link to your Infrastructure
+---
 
 # Link to your Infrastructure
 

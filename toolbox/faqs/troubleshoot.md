@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Troubleshooting"
-description = "Troubleshooting connectivity and certificate issues"
-keywords = ["beginner, getting started, FAQs, troubleshooting, Docker"]
-[menu.main]
-parent="workw_toolbox"
-weight=4
-+++
-<![end-metadata]-->
+---
+description: Troubleshooting connectivity and certificate issues
+keywords:
+- beginner, getting started, FAQs, troubleshooting, Docker
+menu:
+  main:
+    parent: workw_toolbox
+    weight: 4
+title: Troubleshooting
+---
 
 # Troubleshooting
 Typically, the QuickStart works out-of-the-box, but some scenarios can cause problems.

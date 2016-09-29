@@ -1,19 +1,18 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mac/step_one/",
-"/windows/step_one/",
-"/linux/step_one/",
-]
-title = "Install Docker and run hello-world"
-description = "Getting started with Docker"
-keywords = ["beginner, getting started, Docker, install"]
-[menu.main]
-identifier = "getstart_all_install"
-parent = "tutorial_getstart_menu"
-weight = 1
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mac/step_one/
+- /windows/step_one/
+- /linux/step_one/
+description: Getting started with Docker
+keywords:
+- beginner, getting started, Docker, install
+menu:
+  main:
+    identifier: getstart_all_install
+    parent: tutorial_getstart_menu
+    weight: 1
+title: Install Docker and run hello-world
+---
 
 # Install Docker
 

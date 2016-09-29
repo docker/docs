@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Known Issues"
-description = "Information about known issues in Kitematic"
-keywords = ["docker, documentation, about, technology, kitematic,  gui"]
-[menu.main]
-parent="toolbox_kitematic"
-weight=5
-+++
-<![end-metadata]-->
+---
+description: Information about known issues in Kitematic
+keywords:
+- docker, documentation, about, technology, kitematic,  gui
+menu:
+  main:
+    parent: toolbox_kitematic
+    weight: 5
+title: Known Issues
+---
 
 # Kitematic: Known Issues
 

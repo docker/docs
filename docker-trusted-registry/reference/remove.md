@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "remove"
-description = "Docker Trusted Registry remove command reference."
-keywords = ["docker, registry, reference, remove"]
-[menu.main]
-parent="dtr_menu_reference"
-identifier="dtr_reference_remove"
-+++
-<![end-metadata]-->
+---
+description: Docker Trusted Registry remove command reference.
+keywords:
+- docker, registry, reference, remove
+menu:
+  main:
+    identifier: dtr_reference_remove
+    parent: dtr_menu_reference
+title: remove
+---
 
 # docker/dtr remove
 

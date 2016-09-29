@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-title = "Legacy container links"
-description = "Learn how to connect Docker containers together."
-keywords = ["Examples, Usage, user guide, links, linking, docker, documentation, examples, names, name, container naming, port, map, network port,  network"]
-[menu.main]
-parent = "smn_networking_def"
-weight=-2
-+++
-<![end-metadata]-->
+---
+description: Learn how to connect Docker containers together.
+keywords:
+- Examples, Usage, user guide, links, linking, docker, documentation, examples, names,
+  name, container naming, port, map, network port,  network
+menu:
+  main:
+    parent: smn_networking_def
+    weight: -2
+title: Legacy container links
+---
 
 # Legacy container links
 

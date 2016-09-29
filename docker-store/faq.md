@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Docker Store FAQs"
-description = "Docker Store frequently asked questions"
-keywords = ["Docker, docker, store, purchase images"]
-[menu.main]
-parent = "docker-store"
-+++
-<![end-metadata]-->
+---
+description: Docker Store frequently asked questions
+keywords:
+- Docker, docker, store, purchase images
+menu:
+  main:
+    parent: docker-store
+title: Docker Store FAQs
+---
 
 # Docker Store Frequently Asked Questions
 

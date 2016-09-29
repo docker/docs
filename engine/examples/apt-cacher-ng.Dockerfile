@@ -1,3 +1,7 @@
+---
+{}
+---
+
 #
 # Build: docker build -t apt-cacher .
 # Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher

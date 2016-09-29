@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/docker-upgrade/",
-"/docker-cloud/tutorials/docker-upgrade/"
-]
-title = "Upgrade Docker Engine on a node"
-description = "Upgrade Docker Engine on a node"
-keywords = ["upgrade, engine, node"]
-[menu.main]
-parent="infrastructure"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/docker-upgrade/
+- /docker-cloud/tutorials/docker-upgrade/
+description: Upgrade Docker Engine on a node
+keywords:
+- upgrade, engine, node
+menu:
+  main:
+    parent: infrastructure
+title: Upgrade Docker Engine on a node
+---
 
 # Upgrade Docker Engine on a node
 

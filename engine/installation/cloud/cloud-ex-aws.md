@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "Example: Manual install on cloud provider"
-description = "Example of a manual install of Docker Engine on a cloud provider, using Amazon Web Services (AWS) EC2. Shows how to create an EC2 instance, and install Docker Engine on it."
-keywords = ["cloud, docker, machine, documentation,  installation, AWS, EC2"]
-[menu.main]
-parent = "install_cloud"
-+++
-<![end-metadata]-->
+---
+description: Example of a manual install of Docker Engine on a cloud provider, using
+  Amazon Web Services (AWS) EC2. Shows how to create an EC2 instance, and install
+  Docker Engine on it.
+keywords:
+- cloud, docker, machine, documentation,  installation, AWS, EC2
+menu:
+  main:
+    parent: install_cloud
+title: 'Example: Manual install on cloud provider'
+---
 
 # Example: Manual install on cloud provider
 

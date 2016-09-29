@@ -1,11 +1,14 @@
-+++
-title = "Official Repositories on Docker Hub"
-description = "Guidelines for Official Repositories on Docker Hub"
-keywords = ["Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, official, image, documentation"]
-[menu.main]
-parent="mn_pubhub"
-weight=15
-+++
+---
+description: Guidelines for Official Repositories on Docker Hub
+keywords:
+- Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, official,
+  image, documentation
+menu:
+  main:
+    parent: mn_pubhub
+    weight: 15
+title: Official Repositories on Docker Hub
+---
 
 # Official Repositories on Docker Hub
 

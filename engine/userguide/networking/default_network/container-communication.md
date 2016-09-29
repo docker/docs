@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Understand container communication"
-description = "Understand container communication"
-keywords = ["docker, container, communication, network"]
-[menu.main]
-parent = "smn_networking_def"
-+++
-<![end-metadata]-->
+---
+description: Understand container communication
+keywords:
+- docker, container, communication, network
+menu:
+  main:
+    parent: smn_networking_def
+title: Understand container communication
+---
 
 # Understand container communication
 

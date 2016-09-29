@@ -1,19 +1,18 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mac/step_five/",
-"/windows/step_five/",
-"/linux/step_five/",
-]
-title = "Create a Docker Hub account & repository"
-description = "Getting started with Docker"
-keywords = ["beginner, getting started, Docker"]
-[menu.main]
-identifier = "getstart_docker_hub"
-parent = "tutorial_getstart_menu"
-weight = 5
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mac/step_five/
+- /windows/step_five/
+- /linux/step_five/
+description: Getting started with Docker
+keywords:
+- beginner, getting started, Docker
+menu:
+  main:
+    identifier: getstart_docker_hub
+    parent: tutorial_getstart_menu
+    weight: 5
+title: Create a Docker Hub account & repository
+---
 
 # Create a Docker Hub account & repository
 

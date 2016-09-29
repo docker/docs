@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "start"
-description = "The start command description and usage"
-keywords = ["Start, container, stopped"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The start command description and usage
+keywords:
+- Start, container, stopped
+menu:
+  main:
+    parent: smn_cli
+title: start
+---
 
 # start
 

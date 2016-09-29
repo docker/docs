@@ -1,17 +1,17 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/soft-garbage/",
-          "/docker-trusted-registry/repos-and-images/delete-images/"]
-title = "Delete an image"
-description = "Learn how to delete images from your repositories on Docker Trusted Registry."
-keywords = ["docker, registry, repository, delete, image"]
-[menu.main]
-parent="dtr_menu_repos_and_images"
-identifier="dtr_delete_images"
-weight=30
-+++
-<![end-metadata]-->
-
+---
+aliases:
+- /docker-trusted-registry/soft-garbage/
+- /docker-trusted-registry/repos-and-images/delete-images/
+description: Learn how to delete images from your repositories on Docker Trusted Registry.
+keywords:
+- docker, registry, repository, delete, image
+menu:
+  main:
+    identifier: dtr_delete_images
+    parent: dtr_menu_repos_and_images
+    weight: 30
+title: Delete an image
+---
 
 # Delete an image
 

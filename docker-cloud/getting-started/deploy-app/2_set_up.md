@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/python/2_set_up/",
-"/docker-cloud/getting-started/golang/2_set_up/"
-]
-title = "Set up your environment"
-description = "Set up the application"
-keywords = ["Python, application, setup"]
-[menu.main]
-parent="deploy-app"
-weight=-80
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/python/2_set_up/
+- /docker-cloud/getting-started/golang/2_set_up/
+description: Set up the application
+keywords:
+- Python, application, setup
+menu:
+  main:
+    parent: deploy-app
+    weight: -80
+title: Set up your environment
+---
 
 # Set up your environment
 

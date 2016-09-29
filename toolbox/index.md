@@ -1,12 +1,13 @@
-<!--[metadata]>
-+++
-title = "Docker Toolbox"
-description = "Documentation that provides an overview of Docker Toolbox and installation instructions"
-keywords = ["docker, documentation, about, technology, docker toolbox, gui"]
-[menu.main]
-identifier="workw_toolbox"
-+++
-<![end-metadata]-->
+---
+description: Documentation that provides an overview of Docker Toolbox and installation
+  instructions
+keywords:
+- docker, documentation, about, technology, docker toolbox, gui
+menu:
+  main:
+    identifier: workw_toolbox
+title: Docker Toolbox
+---
 
 # Toolbox
 Available for both Windows and Mac, Docker Toolbox installs the Docker Client, Machine, Compose, and Kitematic.

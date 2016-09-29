@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Amazon Web Services"
-description = "Amazon Web Services driver for machine"
-keywords = ["machine, Amazon Web Services, driver"]
-[menu.main]
-parent="smn_machine_drivers"
-+++
-<![end-metadata]-->
+---
+description: Amazon Web Services driver for machine
+keywords:
+- machine, Amazon Web Services, driver
+menu:
+  main:
+    parent: smn_machine_drivers
+title: Amazon Web Services
+---
 
 # Amazon Web Services
 

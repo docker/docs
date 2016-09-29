@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title = "System requirements"
-description = "Learn about the system requirements for installing Docker Universal Control Plane."
-keywords = ["docker, ucp, architecture, requirements"]
-[menu.main]
-parent="mn_ucp_installation"
-identifier="ucp_system_requirements"
-weight=0
-+++
-<![end-metadata]-->
+---
+description: Learn about the system requirements for installing Docker Universal Control
+  Plane.
+keywords:
+- docker, ucp, architecture, requirements
+menu:
+  main:
+    identifier: ucp_system_requirements
+    parent: mn_ucp_installation
+    weight: 0
+title: System requirements
+---
 
 # UCP system requirements
 

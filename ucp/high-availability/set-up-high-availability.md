@@ -1,16 +1,17 @@
-<!--[metadata]>
-+++
-aliases = [ "/ucp/understand_ha/"]
-title ="Set up high availability"
-description="Docker Universal Control plane has support for high availability. Learn how to set up your installation to ensure it tolerates failures."
-keywords= ["docker, ucp, high-availability, replica"]
-[menu.main]
-parent="mn_ucp_high_availability"
-identifier="ucp_set_high_availability"
-weight=0
-+++
-<![end-metadata]-->
-
+---
+aliases:
+- /ucp/understand_ha/
+description: Docker Universal Control plane has support for high availability. Learn
+  how to set up your installation to ensure it tolerates failures.
+keywords:
+- docker, ucp, high-availability, replica
+menu:
+  main:
+    identifier: ucp_set_high_availability
+    parent: mn_ucp_high_availability
+    weight: 0
+title: Set up high availability
+---
 
 # Set up high availability
 

@@ -1,15 +1,16 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/quick-start/"]
-title = "Pull an image"
-description = "Learn how to pull an image from Docker Trusted Registry."
-keywords = ["docker, registry, images, pull"]
-[menu.main]
-parent="dtr_menu_repos_and_images"
-identifier="dtr_pull_image"
-weight=10
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-trusted-registry/quick-start/
+description: Learn how to pull an image from Docker Trusted Registry.
+keywords:
+- docker, registry, images, pull
+menu:
+  main:
+    identifier: dtr_pull_image
+    parent: dtr_menu_repos_and_images
+    weight: 10
+title: Pull an image
+---
 
 # Pull an image from DTR
 

@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title = "Getting Started"
-description = "Getting Started with Docker Cloud: Setting up a node using a hosted cloud provider or your own nodes, deploying a service and clustering."
-keywords = ["one, two, three"]
-[menu.main]
-identifier="getting-started"
-parent="docker-cloud"
-weight=-97
-+++
-<![end-metadata]-->
+---
+description: 'Getting Started with Docker Cloud: Setting up a node using a hosted
+  cloud provider or your own nodes, deploying a service and clustering.'
+keywords:
+- one, two, three
+menu:
+  main:
+    identifier: getting-started
+    parent: docker-cloud
+    weight: -97
+title: Getting Started
+---
 
 # Getting Started with Docker Cloud
 

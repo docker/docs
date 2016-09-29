@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Driver options and operating system defaults"
-description = "Identify active machines"
-keywords = ["machine, driver, base, operating system"]
-[menu.main]
-parent="smn_machine_drivers"
-weight=-1
-+++
-<![end-metadata]-->
+---
+description: Identify active machines
+keywords:
+- machine, driver, base, operating system
+menu:
+  main:
+    parent: smn_machine_drivers
+    weight: -1
+title: Driver options and operating system defaults
+---
 
 # Driver options and operating system defaults
 

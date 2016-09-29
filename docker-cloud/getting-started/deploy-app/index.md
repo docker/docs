@@ -1,18 +1,17 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/python/",
-"/docker-cloud/getting-started/golang/"
-]
-title = "Deploy an application"
-description = "Go or Python and Docker Cloud"
-keywords = ["Python, Go, Docker, Cloud, application"]
-[menu.main]
-parent="getting-started"
-identifier="deploy-app"
-weight=50
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/python/
+- /docker-cloud/getting-started/golang/
+description: Go or Python and Docker Cloud
+keywords:
+- Python, Go, Docker, Cloud, application
+menu:
+  main:
+    identifier: deploy-app
+    parent: getting-started
+    weight: 50
+title: Deploy an application
+---
 
 # Deploy an application
 

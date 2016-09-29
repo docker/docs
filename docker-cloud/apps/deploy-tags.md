@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/deploy-tags/"
-]
-title = "Deployment tags"
-description = "Deployment tags"
-keywords = ["Deployment, tags, services"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/deploy-tags/
+description: Deployment tags
+keywords:
+- Deployment, tags, services
+menu:
+  main:
+    parent: apps
+title: Deployment tags
+---
 
 # Deployment tags
 

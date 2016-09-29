@@ -1,15 +1,16 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/cs-engine/release-notes/"]
-title = "Release notes"
-description = "The release notes for CS Docker Engine."
-keywords = ["docker, engine, release notes"]
-[menu.main]
-parent="menu_csengine"
-identifier="menu_csengine_release_notes"
-weight=100
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-trusted-registry/cs-engine/release-notes/
+description: The release notes for CS Docker Engine.
+keywords:
+- docker, engine, release notes
+menu:
+  main:
+    identifier: menu_csengine_release_notes
+    parent: menu_csengine
+    weight: 100
+title: Release notes
+---
 
 # Docker CS Engine release notes
 

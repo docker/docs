@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/engine/swarm/how-swarm-mode-works/"
-]
-title = "How nodes work"
-description = "How swarm nodes work"
-keywords = ["docker, container, cluster, swarm mode, node"]
-[menu.main]
-identifier="how-nodes-work"
-parent="how-swarm-works"
-weight="3"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/swarm/how-swarm-mode-works/
+description: How swarm nodes work
+keywords:
+- docker, container, cluster, swarm mode, node
+menu:
+  main:
+    identifier: how-nodes-work
+    parent: how-swarm-works
+    weight: "3"
+title: How nodes work
+---
 
 # How nodes work
 

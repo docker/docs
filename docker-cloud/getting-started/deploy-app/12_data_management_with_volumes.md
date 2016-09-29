@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/python/12_data_management_with_volumes/"
-]
-title = "Data management with Volumes"
-description = "Data management with Volumes"
-keywords = ["Python, data, management"]
-[menu.main]
-parent="deploy-app"
-weight=-5
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/python/12_data_management_with_volumes/
+description: Data management with Volumes
+keywords:
+- Python, data, management
+menu:
+  main:
+    parent: deploy-app
+    weight: -5
+title: Data management with Volumes
+---
 
 # Data management with Volumes
 

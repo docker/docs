@@ -1,13 +1,12 @@
-<!--[metadata]>
-+++
-title = "Docker Hub"
-description = "this is a menu"
-keywords = "none"
-type = "menu"
-[menu.main]
-identifier = "mn_pubhub"
-+++
-<![end-metadata]-->
+---
+description: this is a menu
+keywords: none
+menu:
+  main:
+    identifier: mn_pubhub
+title: Docker Hub
+type: menu
+---
 
 # Menu topic
 

@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Play in a content trust sandbox"
-description = "Play in a trust sandbox"
-keywords = ["trust, security, root,  keys, repository, sandbox"]
-[menu.main]
-parent= "smn_content_trust"
-+++
-<![end-metadata]-->
+---
+description: Play in a trust sandbox
+keywords:
+- trust, security, root,  keys, repository, sandbox
+menu:
+  main:
+    parent: smn_content_trust
+title: Play in a content trust sandbox
+---
 
 # Play in a content trust sandbox
 

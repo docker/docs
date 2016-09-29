@@ -1,16 +1,16 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/license/"]
-title = "License DTR"
-description = "Learn how to license your Docker Trusted Registry installation."
-keywords = ["docker, dtr, install, license"]
-[menu.main]
-parent="dtr-menu-install"
-identifier="dtr_license"
-weight=31
-+++
-<![end-metadata]-->
-
+---
+aliases:
+- /docker-trusted-registry/license/
+description: Learn how to license your Docker Trusted Registry installation.
+keywords:
+- docker, dtr, install, license
+menu:
+  main:
+    identifier: dtr_license
+    parent: dtr-menu-install
+    weight: 31
+title: License DTR
+---
 
 # License DTR
 

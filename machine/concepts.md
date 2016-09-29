@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title = "Machine concepts and help"
-description = "Understand concepts for Docker Machine, including drivers, base OS, IP addresses, environment variables"
-keywords = ["docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"]
-[menu.main]
-parent="workw_machine"
-weight=-40
-+++
-<![end-metadata]-->
-
+---
+description: Understand concepts for Docker Machine, including drivers, base OS, IP
+  addresses, environment variables
+keywords:
+- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer,
+  virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
+menu:
+  main:
+    parent: workw_machine
+    weight: -40
+title: Machine concepts and help
+---
 
 # Understand Machine concepts and get help
 

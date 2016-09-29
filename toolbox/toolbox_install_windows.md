@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Install Toolbox on Windows"
-description = "How to install Toolbox on Mac"
-keywords = ["docker, documentation, install, toolbox, win"]
-[menu.main]
-parent="workw_toolbox"
-weight=-5
-+++
-<![end-metadata]-->
+---
+description: How to install Toolbox on Mac
+keywords:
+- docker, documentation, install, toolbox, win
+menu:
+  main:
+    parent: workw_toolbox
+    weight: -5
+title: Install Toolbox on Windows
+---
 
 # Install Docker for Windows
 

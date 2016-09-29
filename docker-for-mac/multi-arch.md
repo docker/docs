@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-  "/mackit/multi-arch/"
-]
-title = "Leveraging Multi-CPU Architecture Support "
-description = "Multi-CPU Architecture Support"
-keywords = ["mac, Multi-CPU architecture support"]
-[menu.main]
-identifier='mac-multiarch'
-parent="pinata_mac_menu"
-weight = 3
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mackit/multi-arch/
+description: Multi-CPU Architecture Support
+keywords:
+- mac, Multi-CPU architecture support
+menu:
+  main:
+    identifier: mac-multiarch
+    parent: pinata_mac_menu
+    weight: 3
+title: 'Leveraging Multi-CPU Architecture Support '
+---
 
 # Leveraging Multi-CPU Architecture Support
 

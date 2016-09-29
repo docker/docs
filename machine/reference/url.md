@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "url"
-description = "Get the URL of a host"
-keywords = ["machine, url, subcommand"]
-[menu.main]
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Get the URL of a host
+keywords:
+- machine, url, subcommand
+menu:
+  main:
+    parent: smn_machine_subcmds
+title: url
+---
 
 # url
 

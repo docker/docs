@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Dockerizing an apt-cacher-ng service"
-description = "Installing and running an apt-cacher-ng service"
-keywords = ["docker, example, package installation, networking, debian,  ubuntu"]
-[menu.main]
-parent = "engine_dockerize"
-+++
-<![end-metadata]-->
+---
+description: Installing and running an apt-cacher-ng service
+keywords:
+- docker, example, package installation, networking, debian,  ubuntu
+menu:
+  main:
+    parent: engine_dockerize
+title: Dockerizing an apt-cacher-ng service
+---
 
 # Dockerizing an apt-cacher-ng service
 

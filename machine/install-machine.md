@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Install Machine"
-description = "How to install Docker Machine"
-keywords = ["machine, orchestration, install, installation, docker, documentation"]
-[menu.main]
-parent="workw_machine"
-weight=-80
-+++
-<![end-metadata]-->
+---
+description: How to install Docker Machine
+keywords:
+- machine, orchestration, install, installation, docker, documentation
+menu:
+  main:
+    parent: workw_machine
+    weight: -80
+title: Install Machine
+---
 
 # Install Docker Machine
 

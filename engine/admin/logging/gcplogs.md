@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Google Cloud Logging driver"
-description = "Describes how to use the Google Cloud Logging driver."
-keywords = ["gcplogs, google, docker, logging, driver"]
-[menu.main]
-parent = "smn_logging"
-+++
-<![end-metadata]-->
+---
+description: Describes how to use the Google Cloud Logging driver.
+keywords:
+- gcplogs, google, docker, logging, driver
+menu:
+  main:
+    parent: smn_logging
+title: Google Cloud Logging driver
+---
 
 # Google Cloud Logging driver
 

@@ -1,3 +1,7 @@
+---
+{}
+---
+
 .PHONY: all default docs docs-build docs-shell shell test
 # to allow `make DOCSDIR=1 docs-shell` (to create a bind mount in docs)
 DOCS_MOUNT := $(if $(DOCSDIR),-v $(CURDIR):/docs/content/swarm/)

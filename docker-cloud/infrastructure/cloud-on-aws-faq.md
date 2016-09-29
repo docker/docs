@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/faq/cloud-on-aws-faq/"
-]
-title = "Using Docker Cloud on AWS"
-description = "Docker Cloud on AWS"
-keywords = ["Cloud, AWS, faq"]
-[menu.main]
-parent="infrastructure"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/faq/cloud-on-aws-faq/
+description: Docker Cloud on AWS
+keywords:
+- Cloud, AWS, faq
+menu:
+  main:
+    parent: infrastructure
+title: Using Docker Cloud on AWS
+---
 
 # Using Docker Cloud on AWS
 

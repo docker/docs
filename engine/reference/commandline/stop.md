@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "stop"
-description = "The stop command description and usage"
-keywords = ["stop, SIGKILL, SIGTERM"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The stop command description and usage
+keywords:
+- stop, SIGKILL, SIGTERM
+menu:
+  main:
+    parent: smn_cli
+title: stop
+---
 
 # stop
 

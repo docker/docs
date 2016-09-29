@@ -1,3 +1,7 @@
+---
+{}
+---
+
 .PHONY: default docs docs-build docs-shell test
 
 # to allow `make DOCSDIR=docs docs-shell` (to create a bind mount in docs)

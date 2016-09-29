@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/tutorials/slack-integration/"
-]
-title = "Docker Cloud notifications in Slack"
-description = "Integrate with Slack"
-keywords = ["Slack, integrate, notifications"]
-[menu.main]
-parent="docker-cloud"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/tutorials/slack-integration/
+description: Integrate with Slack
+keywords:
+- Slack, integrate, notifications
+menu:
+  main:
+    parent: docker-cloud
+title: Docker Cloud notifications in Slack
+---
 
 # Docker Cloud notifications in Slack
 

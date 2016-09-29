@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Architecture"
-description = "Learn about the architecture of Docker Trusted Registry."
-keywords = ["docker, registry, dtr, architecture"]
-[menu.main]
-parent="workw_dtr"
-identifier="dtr_architecture"
-weight=20
-+++
-<![end-metadata]-->
+---
+description: Learn about the architecture of Docker Trusted Registry.
+keywords:
+- docker, registry, dtr, architecture
+menu:
+  main:
+    identifier: dtr_architecture
+    parent: workw_dtr
+    weight: 20
+title: Architecture
+---
 
 # DTR architecture
 
