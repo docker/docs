@@ -51,13 +51,11 @@ settings, log in to Docker Hub and choose <a href="https://hub.docker.com/accoun
 
 ## Create an automated build
 
-Automated build repositories rely entirely on the integration with your code
-repository. You cannot push to these image repositories using the `docker push`
-command. You can only change the image by committing to your code repository. If
-you want to do both, `docker push` and an automated build, you would create a
-regular repository for the `docker push` and an automated build repository.
+Automated build repositories rely on the integration with your code repository
+in order to build. However, you can also push already-built images to these
+repositories using the `docker push` command.
 
-1. Select Create > Create Automated Build from Docker Hub.
+1. Select **Create** > **Create Automated Build** from Docker Hub.
 
     The system prompts you with a list of User/Organizations and code repositories.
 
@@ -153,7 +151,7 @@ At the top of the Build Dialog is a list of configured builds. You can build fro
 ![Build or tag](images/build-by.png)
 
 Docker builds everything listed whenever a push is made to the code repository.
-If you specify a particular branch or tag, you can manually build that image by
+If you specify a branch or tag, you can manually build that image by
 pressing the Trigger. If you use a regular expression syntax (regex) to define
 your build branch or tag, Docker does not give you the option to manually build.
 To add a new build:

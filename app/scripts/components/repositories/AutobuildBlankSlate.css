@@ -1,6 +1,0 @@
-@import "dux/css/box.css";
-@import "dux/css/colors.css";
-
-.row {
-  margin-top: var(--default-margin);
-}

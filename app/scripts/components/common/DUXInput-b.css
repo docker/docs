@@ -1,9 +1,0 @@
-@import "dux/css/colors";
-
-:root {
-    --input-text-color: var(--white);
-    --label-color: var(--secondary-5);
-    --highlight-color: var(--primary-color);
-}
-
-@import "./DUXInput-base.css";
