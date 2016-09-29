@@ -12,79 +12,62 @@ weight=20
 
 # UCP architecture
 
-UCP is a containerized application, so the first step to install UCP is
-installing the Commercially Supported (CS) Docker Engine on all the nodes that
-are going to be part of the cluster.
+Universal Control Plane is a containerized application that runs on the
+Commercially Supported (CS) Docker Engine. It allows you to manage from a
+centralized place a set of nodes that are part of the same swarm.
 
 ![](images/architecture-1.png)
 
-After CS Docker Engine is installed, you install UCP, and join as many
-nodes as you want to the cluster.
+## UCP components
 
-![](images/architecture-2.png)
+The core component of UCP is a globally-scheduled service called `ucp-agent`.
+When you install UCP on a node, or join a node to a swarm that is being managed
+by UCP, the `ucp-agent` service starts running on that node.
 
-## Architecture
+Once this service is running, it deploys containers with other UCP components,
+and ensures they keep running. The UCP components that are deployed
+on a node depend on whether that node is a manager or a worker.
+Manager nodes are responsible for maintaining the swarm state and scheduling
+decisions. Worker nodes are responsible for executing workloads.
 
-A UCP cluster has two types of nodes:
-
-* Controller: manages the cluster and persists the cluster configurations.
-* Node: run your containers.
-
-
-### UCP controller node
-
-When you install Docker UCP on a node, the following containers are started.
-![](images/architecture-3.png)
-
-| Name                | Description                                                                                                                                                |
-|:--------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ucp-proxy           | A TLS proxy. It allows secure access to the local Docker Engine.                                                                                           |
-| ucp-controller      | The UCP application. It uses the key-value store for persisting configurations.                                                                            |
-| ucp-swarm-manager   | Provides the clustering capabilities. It uses the key-value store for leader election, and keeping track of cluster members.                               |
-| ucp-swarm-join      | Heartbeat to record on the key-value store that this node is alive. If the node goes down, this heartbeat stops, and the node is removed from the cluster. |
-| ucp-auth-api        | The centralized API for identity and authentication used by UCP and DTR.                                                                                   |
-| ucp-auth-worker     | Performs scheduled LDAP synchronizations and cleans data on the ucp-auth-store.                                                                            |
-| ucp-auth-store      | Stores authentication configurations, and data for users, organizations and teams.                                                                         |
-| ucp-kv              | Used to store the UCP configurations. Don't use it in your applications, since it's for internal use only.                                                 |
-| ucp-cluster-root-ca | A certificate authority to sign the certificates used when joining new nodes, and on administrator client bundles.                                         |
-| ucp-client-root-ca  | A certificate authority to sign user bundles. Only used when UCP is installed without an external root CA.                                                 |
-
-### UCP node
-
-When you join a node to a Docker UCP cluster, the following containers are
-started.
-
-![](images/architecture-4.png)
-
-| Name           | Description                                                                                                                                                |
-|:---------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ucp-proxy      | A TLS proxy. It allows secure access to the local Docker Engine.                                                                                           |
-| ucp-swarm-join | Heartbeat to record on the key-value store that this node is alive. If the node goes down, this heartbeat stops, and the node is dropped from the cluster. |
-
+| Name                | Node            | Description                                                                                               |
+|:--------------------|:----------------|:----------------------------------------------------------------------------------------------------------|
+| ucp-auth-api        | Manager         | The centralized service for identity and authentication used by UCP and DTR                               |
+| ucp-auth-store      | Manager         | Stores authentication configurations, and data for users, organizations and teams                         |
+| ucp-auth-worker     | Manager         | Performs scheduled LDAP synchronizations and cleans authentication and authorization data                 |
+| ucp-client-root-ca  | Manager         | A certificate authority to sign client bundles                                                            |
+| ucp-cluster-root-ca | Manager         | A certificate authority used for TLS communication between UCP components                                 |
+| ucp-controller      | Manager         | The UCP web server                                                                                        |
+| ucp-kv              | Manager         | Used to store the UCP configurations. Don't use it in your applications, since it's for internal use only |
+| ucp-proxy           | Manager, worker | A TLS proxy. It allows secure access to the local Docker Engine to UCP components                         |
+| ucp-swarm-manager   | Manager         | Used to provide backwards-compatibility with Docker Swarm                                                 |
 
 ## Volumes
 
-Docker UCP uses these named volumes for persisting data:
+Docker UCP uses these named volumes to persist data:
 
-| Node       | Volume name                 | Location on host (/var/lib/docker/volumes/) | Description                                                                                                    |
-|:-----------|:----------------------------|:--------------------------------------------|:---------------------------------------------------------------------------------------------------------------|
-| all        | ucp-client-root-ca          | ucp-client-root-ca/_data                    | The certificate and key for the UCP root CA. Do not create this volume if you are using your own certificates. |
-| all        | ucp-cluster-root-ca         | ucp-cluster-root-ca/_data                   | The certificate and key for the Swarm root CA.                                                                 |
-| all        | ucp-controller-client-certs | ucp-controller-client-certs/_data           | The UCP Controller Swarm client certificates for the current node.                                             |
-| all        | ucp-controller-server-certs | ucp-controller-server-certs/_data           | The controller certificates for the UCP controllers web server.                                                |
-| controller | ucp-kv                      | ucp-kv/_data                                | Key value store persistence.                                                                                   |
-| all        | ucp-kv-certs                | ucp-kv-certs/_data                          | The Swarm KV client certificates for the current node (repeated on every node in the cluster).                 |
-| all        | ucp-node-certs              | ucp-node-certs/_data                        | The Swarm certificates for the current node (repeated on every node in the cluster).                           |
+| Volume name                 | Description                                                                              |
+|:----------------------------|:-----------------------------------------------------------------------------------------|
+| ucp-auth-api-certs          | Certificate and keys for the authentication and authorization service                    |
+| ucp-auth-store-certs        | Certificate and keys for the authentication and authorization store                      |
+| ucp-auth-store-data         | Data of the authentication and authorization store                                       |
+| ucp-auth-worker-certs       | Certificate and keys for authentication worker                                           |
+| ucp-auth-worker-data        | Data of the authentication worker                                                        |
+| ucp-client-root-ca          | Root key material for the UCP root CA that issues client certificates                    |
+| ucp-cluster-root-ca         | Root key material for the UCP root CA that issues certificates for swarm members         |
+| ucp-controller-client-certs | Certificate and keys used by the UCP web server to communicate with other UCP components |
+| ucp-controller-server-certs | Certificate and keys for the UCP web server running in the node                          |
+| ucp-kv                      | UCP configuration data                                                                   |
+| ucp-kv-certs                | Certificates and keys for the key-value store                                            |
+| ucp-node-certs              | Certificate and keys for node communication                                              |
 
+You can customize the volume driver used for these volumes, by creating
+the volumes before installing UCP. During the installation, UCP checks which
+volumes don't exist in the node, and creates them using the default volume
+driver.
 
-If you don’t create these volumes before when installing UCP, they are created with
-the default volume driver and flags.
-
-## High-availability support
-
-For load balancing and high-availability, you can install multiple controller
-nodes and join them to create a cluster.
-[Learn more about high availability](high-availability/set-up-high-availability.md).
+By default, the data for these volumes can be found at
+`/var/lib/docker/volumes/<volume-name>/_data`.
 
 ## Where to go next
 
