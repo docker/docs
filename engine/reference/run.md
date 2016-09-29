@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Docker run reference"
-description = "Configure containers at runtime"
-keywords = ["docker, run, configure,  runtime"]
-[menu.main]
-parent = "engine_ref"
-weight=-80
-+++
-<![end-metadata]-->
+---
+description: Configure containers at runtime
+keywords:
+- docker, run, configure,  runtime
+menu:
+  main:
+    parent: engine_ref
+    weight: -80
+title: Docker run reference
+---
 
 # Docker run reference
 

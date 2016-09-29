@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "manage"
-description = "Create a Swarm manager."
-keywords = ["swarm, create, manage"]
-[menu.main]
-identifier="swarm.manage"
-parent="smn_swarm_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Create a Swarm manager.
+keywords:
+- swarm, create, manage
+menu:
+  main:
+    identifier: swarm.manage
+    parent: smn_swarm_subcmds
+title: manage
+---
 
 # manage  — Create a Swarm manager
 

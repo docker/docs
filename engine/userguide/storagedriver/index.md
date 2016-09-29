@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-title = "Docker storage drivers"
-description = "Learn how select the proper storage driver for your container."
-keywords = ["container, storage, driver, AUFS, btfs, devicemapper,zvfs"]
-[menu.main]
-identifier = "engine_driver"
-parent = "engine_guide"
-weight = 7
-+++
-<![end-metadata]-->
-
+---
+description: Learn how select the proper storage driver for your container.
+keywords:
+- container, storage, driver, AUFS, btfs, devicemapper,zvfs
+menu:
+  main:
+    identifier: engine_driver
+    parent: engine_guide
+    weight: 7
+title: Docker storage drivers
+---
 
 # Docker storage drivers
 

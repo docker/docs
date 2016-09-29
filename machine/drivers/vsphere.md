@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "VMware vSphere"
-description = "VMware vSphere driver for machine"
-keywords = ["machine, VMware vSphere, driver"]
-[menu.main]
-parent="smn_machine_drivers"
-+++
-<![end-metadata]-->
+---
+description: VMware vSphere driver for machine
+keywords:
+- machine, VMware vSphere, driver
+menu:
+  main:
+    parent: smn_machine_drivers
+title: VMware vSphere
+---
 
 # VMware vSphere
 

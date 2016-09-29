@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Docker Cloud repositories"
-description = "Create and edit Docker Cloud repositories"
-keywords = ["Docker Cloud repositories, automated, build, images"]
-[menu.main]
-parent="builds"
-weight=-70
-+++
-<![end-metadata]-->
+---
+description: Create and edit Docker Cloud repositories
+keywords:
+- Docker Cloud repositories, automated, build, images
+menu:
+  main:
+    parent: builds
+    weight: -70
+title: Docker Cloud repositories
+---
 
 # Docker Cloud repositories
 

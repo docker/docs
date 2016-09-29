@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Configure Docker Swarm for TLS"
-description = "Swarm and transport layer security"
-keywords = ["docker, swarm, TLS, discovery, security,  certificates"]
-[menu.main]
-parent="workw_swarm"
-weight=55
-+++
-<![end-metadata]-->
+---
+description: Swarm and transport layer security
+keywords:
+- docker, swarm, TLS, discovery, security,  certificates
+menu:
+  main:
+    parent: workw_swarm
+    weight: 55
+title: Configure Docker Swarm for TLS
+---
 
 # Configure Docker Swarm for TLS
 

@@ -1,15 +1,15 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/reference/logging/overview/"]
-title = "Configuring Logging Drivers"
-description = "Configure logging driver."
-keywords = ["docker, logging, driver, Fluentd"]
-[menu.main]
-parent = "smn_logging"
-weight=-99
-+++
-<![end-metadata]-->
-
+---
+aliases:
+- /engine/reference/logging/overview/
+description: Configure logging driver.
+keywords:
+- docker, logging, driver, Fluentd
+menu:
+  main:
+    parent: smn_logging
+    weight: -99
+title: Configuring Logging Drivers
+---
 
 # Configure logging drivers
 

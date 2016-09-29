@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Swarm and container networks"
-description = "Swarm and container networks"
-keywords = ["docker, swarm, clustering,  networking"]
-[menu.main]
-parent="workw_swarm"
-weight=3
-+++
-<![end-metadata]-->
+---
+description: Swarm and container networks
+keywords:
+- docker, swarm, clustering,  networking
+menu:
+  main:
+    parent: workw_swarm
+    weight: 3
+title: Swarm and container networks
+---
 
 # Swarm and container networks
 

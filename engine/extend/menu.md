@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-title = "Implement plugins"
-description = "Develop plugins and use existing plugins for Docker Engine"
-keywords = ["extend, plugins, docker, documentation, developer"]
-type="menu"
-[menu.main]
-identifier = "engine_extend"
-parent="engine_use"
-weight = 0
-+++
-<![end-metadata]-->
-
+---
+description: Develop plugins and use existing plugins for Docker Engine
+keywords:
+- extend, plugins, docker, documentation, developer
+menu:
+  main:
+    identifier: engine_extend
+    parent: engine_use
+    weight: 0
+title: Implement plugins
+type: menu
+---
 
 <!--menu page not rendered-->

@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-title = "Manage a swarm"
-description = "How to use Docker Engine swarm mode"
-keywords = [" docker, documentation, developer, "]
-type = "menu"
-[menu.main]
-identifier = "engine_swarm"
-parent = "engine_use"
-weight = 0
-+++
-<![end-metadata]-->
-
+---
+description: How to use Docker Engine swarm mode
+keywords:
+- ' docker, documentation, developer, '
+menu:
+  main:
+    identifier: engine_swarm
+    parent: engine_use
+    weight: 0
+title: Manage a swarm
+type: menu
+---
 
 ## Use Docker Engine to create and manage a swarm
 

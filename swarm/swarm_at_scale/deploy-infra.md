@@ -1,16 +1,16 @@
-<!--[metadata]>
-+++
-aliases = ["/swarm/swarm_at_scale/03-create-cluster/",
-"/swarm/swarm_at_scale/02-deploy-infra/"
-]
-title = "Deploy application infrastructure"
-description = "Try Swarm at scale"
-keywords = ["docker, swarm, scale, voting, application,  certificates"]
-[menu.main]
-parent="scale_swarm"
-weight=-90
-+++
-<![end-metadata]-->
+---
+aliases:
+- /swarm/swarm_at_scale/03-create-cluster/
+- /swarm/swarm_at_scale/02-deploy-infra/
+description: Try Swarm at scale
+keywords:
+- docker, swarm, scale, voting, application,  certificates
+menu:
+  main:
+    parent: scale_swarm
+    weight: -90
+title: Deploy application infrastructure
+---
 
 # Deploy your infrastructure
 

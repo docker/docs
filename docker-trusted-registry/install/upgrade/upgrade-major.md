@@ -1,15 +1,17 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/install/upgrade/"]
-title = "Upgrade from 1.4.3"
-description = "Learn how to upgrade your Docker Trusted Registry to the latest major release."
-keywords = ["docker, dtr, upgrade, install"]
-[menu.main]
-parent="menu_dtr_upgrade"
-identifier="dtr_upgrade_major"
-weight=0
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-trusted-registry/install/upgrade/
+description: Learn how to upgrade your Docker Trusted Registry to the latest major
+  release.
+keywords:
+- docker, dtr, upgrade, install
+menu:
+  main:
+    identifier: dtr_upgrade_major
+    parent: menu_dtr_upgrade
+    weight: 0
+title: Upgrade from 1.4.3
+---
 
 # Upgrade from DTR 1.4.3
 

@@ -1,17 +1,17 @@
-<!--[metadata]>
-+++
-aliases = [
-"/engine/userguide/containers/dockerizing/",
-"/engine/userguide/dockerizing/"
-]
-title = "Hello world in a container"
-description = "A simple 'Hello world' exercise that introduced you to Docker."
-keywords = ["docker guide, docker, docker platform, how to, dockerize, dockerizing apps, dockerizing applications, container,  containers"]
-[menu.main]
-parent = "engine_learn_menu"
-weight=-6
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/userguide/containers/dockerizing/
+- /engine/userguide/dockerizing/
+description: A simple 'Hello world' exercise that introduced you to Docker.
+keywords:
+- docker guide, docker, docker platform, how to, dockerize, dockerizing apps, dockerizing
+  applications, container,  containers
+menu:
+  main:
+    parent: engine_learn_menu
+    weight: -6
+title: Hello world in a container
+---
 
 # Hello world in a container
 

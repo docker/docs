@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Microsoft Hyper-V"
-description = "Microsoft Hyper-V driver for machine"
-keywords = ["machine, Microsoft Hyper-V, driver"]
-[menu.main]
-parent="smn_machine_drivers"
-+++
-<![end-metadata]-->
+---
+description: Microsoft Hyper-V driver for machine
+keywords:
+- machine, Microsoft Hyper-V, driver
+menu:
+  main:
+    parent: smn_machine_drivers
+title: Microsoft Hyper-V
+---
 
 # Microsoft Hyper-V
 

@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Create and manage users"
-description = "Learn how to manage user permissions in Docker Trusted Registry."
-keywords = ["docker, registry, security, permissions, users"]
-[menu.main]
-parent="dtr_menu_user_management"
-identifier="dtr-create-users"
-weight = 10
-+++
-<![end-metadata]-->
+---
+description: Learn how to manage user permissions in Docker Trusted Registry.
+keywords:
+- docker, registry, security, permissions, users
+menu:
+  main:
+    identifier: dtr-create-users
+    parent: dtr_menu_user_management
+    weight: 10
+title: Create and manage users
+---
 
 # Create and manage users
 

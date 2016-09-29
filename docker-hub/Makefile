@@ -1,3 +1,7 @@
+---
+{}
+---
+
 .PHONY: all binary build cross default docs docs-build docs-shell shell test test-unit test-integration test-integration-cli test-docker-py validate
 
 # env vars passed through directly to Docker's build scripts

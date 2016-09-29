@@ -1,11 +1,10 @@
-<!--[metadata]>
-+++
-draft = true
-title = "Machine README"
-description = "Machine README"
-keywords = ["Docker, documentation, manual, guide, reference, api"]
-+++
-<![end-metadata]-->
+---
+description: Machine README
+draft: true
+keywords:
+- Docker, documentation, manual, guide, reference, api
+title: Machine README
+---
 
 # Contributing to the Docker Machine documentation
 

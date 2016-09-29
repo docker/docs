@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "inspect"
-description = "Inspect information about a machine"
-keywords = ["machine, inspect, subcommand"]
-[menu.main]
-identifier="machine.inspect"
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Inspect information about a machine
+keywords:
+- machine, inspect, subcommand
+menu:
+  main:
+    identifier: machine.inspect
+    parent: smn_machine_subcmds
+title: inspect
+---
 
 # inspect
 

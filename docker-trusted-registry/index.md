@@ -1,16 +1,17 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-hub-enterprise/",
-          "/docker-trusted-registry/overview/"]
-title = "Docker Trusted Registry overview"
-description = "Learn how to install, configure, and use Docker Trusted Registry."
-keywords = ["docker, registry, repository, images"]
-[menu.main]
-parent="workw_dtr"
-identifier="dtr_overview"
-weight=0
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-hub-enterprise/
+- /docker-trusted-registry/overview/
+description: Learn how to install, configure, and use Docker Trusted Registry.
+keywords:
+- docker, registry, repository, images
+menu:
+  main:
+    identifier: dtr_overview
+    parent: workw_dtr
+    weight: 0
+title: Docker Trusted Registry overview
+---
 
 # Docker Trusted Registry overview
 

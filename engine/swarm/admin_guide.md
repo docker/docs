@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/engine/swarm/manager-administration-guide/"
-]
-title = "Swarm administration guide"
-description = "Manager administration guide"
-keywords = ["docker, container, swarm, manager, raft"]
-[menu.main]
-identifier="manager_admin_guide"
-parent="engine_swarm"
-weight="20"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/swarm/manager-administration-guide/
+description: Manager administration guide
+keywords:
+- docker, container, swarm, manager, raft
+menu:
+  main:
+    identifier: manager_admin_guide
+    parent: engine_swarm
+    weight: "20"
+title: Swarm administration guide
+---
 
 # Administer and maintain a swarm of Docker Engines
 

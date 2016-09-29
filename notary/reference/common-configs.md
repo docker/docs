@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-title = "Common Server and Signer Configurations"
-description = "Configuring the notary client, server and signer."
-keywords = ["docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer"]
-[menu.main]
-parent="mn_notary_config"
-weight=5
-+++
-<![end-metadata]-->
+---
+description: Configuring the notary client, server and signer.
+keywords:
+- docker, notary, notary-client, notary-server, notary server, notary-signer, notary
+  signer
+menu:
+  main:
+    parent: mn_notary_config
+    weight: 5
+title: Common Server and Signer Configurations
+---
 
 # Configure sections common to Notary server and signer
 

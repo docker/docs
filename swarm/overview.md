@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Swarm Overview"
-description = "Swarm: a Docker-native clustering system"
-keywords = ["docker, swarm,  clustering"]
-[menu.main]
-parent="workw_swarm"
-weight=-99
-+++
-<![end-metadata]-->
+---
+description: 'Swarm: a Docker-native clustering system'
+keywords:
+- docker, swarm,  clustering
+menu:
+  main:
+    parent: workw_swarm
+    weight: -99
+title: Swarm Overview
+---
 
 # Docker Swarm overview
 

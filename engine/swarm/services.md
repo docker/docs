@@ -1,14 +1,17 @@
-<!--[metadata]>
-+++
-title = "Deploy services to a swarm"
-description = "Deploy services to a swarm"
-keywords = ["guide", "swarm mode", "swarm", "service"]
-[menu.main]
-identifier="services-guide"
-parent="engine_swarm"
-weight=15
-+++
-<![end-metadata]-->
+---
+description: Deploy services to a swarm
+keywords:
+- guide
+- swarm mode
+- swarm
+- service
+menu:
+  main:
+    identifier: services-guide
+    parent: engine_swarm
+    weight: 15
+title: Deploy services to a swarm
+---
 
 # Deploy services to a swarm
 

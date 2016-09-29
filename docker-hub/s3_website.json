@@ -1,8 +1,7 @@
-{
-  "ErrorDocument": {
-    "Key": "jsearch/index.html"
-  },
-  "IndexDocument": {
-    "Suffix": "index.html"
-  }
-}
+---
+ErrorDocument:
+  Key: jsearch/index.html
+IndexDocument:
+  Suffix: index.html
+---
+

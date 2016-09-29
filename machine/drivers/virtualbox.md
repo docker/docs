@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Oracle VirtualBox"
-description = "Oracle VirtualBox driver for machine"
-keywords = ["machine, Oracle VirtualBox, driver"]
-[menu.main]
-parent="smn_machine_drivers"
-+++
-<![end-metadata]-->
+---
+description: Oracle VirtualBox driver for machine
+keywords:
+- machine, Oracle VirtualBox, driver
+menu:
+  main:
+    parent: smn_machine_drivers
+title: Oracle VirtualBox
+---
 
 # Oracle VirtualBox
 

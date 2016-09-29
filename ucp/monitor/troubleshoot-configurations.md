@@ -1,15 +1,16 @@
-<!--[metadata]>
-+++
-aliases = ["/ucp/kv_store/"]
-title ="Troubleshoot cluster configurations"
-keywords= ["ectd, key, value, store, ucp"]
-description="Learn how to troubleshoot your Docker Universal Control Plane cluster."
-[menu.main]
-parent="mn_monitor_ucp"
-identifier="ucp_troubleshoot_configurations"
-weight=20
-+++
-<![end-metadata]-->
+---
+aliases:
+- /ucp/kv_store/
+description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
+keywords:
+- ectd, key, value, store, ucp
+menu:
+  main:
+    identifier: ucp_troubleshoot_configurations
+    parent: mn_monitor_ucp
+    weight: 20
+title: Troubleshoot cluster configurations
+---
 
 # Troubleshoot cluster configurations
 

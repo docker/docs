@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Docker Store Overview"
-description = "Docker Store overview"
-keywords = ["Docker, docker, store, purchase images"]
-[menu.main]
-parent="docker-store"
-weight=-99
-+++
-<![end-metadata]-->
+---
+description: Docker Store overview
+keywords:
+- Docker, docker, store, purchase images
+menu:
+  main:
+    parent: docker-store
+    weight: -99
+title: Docker Store Overview
+---
 
 # Docker Store Overview
 

@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Configure container DNS"
-description = "Learn how to configure DNS in Docker"
-keywords = ["docker, bridge, docker0, network"]
-[menu.main]
-parent = "smn_networking_def"
-+++
-<![end-metadata]-->
+---
+description: Learn how to configure DNS in Docker
+keywords:
+- docker, bridge, docker0, network
+menu:
+  main:
+    parent: smn_networking_def
+title: Configure container DNS
+---
 
 # Configure container DNS
 

@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/debian/"]
-title = "Installation on Debian"
-description = "Instructions for installing Docker on Debian."
-keywords = ["Docker, Docker documentation, installation,  debian"]
-[menu.main]
-parent = "engine_linux"
-weight=-2
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/installation/debian/
+description: Instructions for installing Docker on Debian.
+keywords:
+- Docker, Docker documentation, installation,  debian
+menu:
+  main:
+    parent: engine_linux
+    weight: -2
+title: Installation on Debian
+---
 
 # Debian
 

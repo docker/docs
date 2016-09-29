@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "How services work"
-description = "How swarm mode services work"
-keywords = ["docker, container, cluster, swarm mode, node"]
-[menu.main]
-identifier="how-services-work"
-parent="how-swarm-works"
-weight="4"
-+++
-<![end-metadata]-->
+---
+description: How swarm mode services work
+keywords:
+- docker, container, cluster, swarm mode, node
+menu:
+  main:
+    identifier: how-services-work
+    parent: how-swarm-works
+    weight: "4"
+title: How services work
+---
 
 # How services work
 

@@ -1,0 +1,234 @@
+
+/* extracted from the index.html */
+
+.node-type-front-page .dockercon16 section.title_section.darkblue img.moby {
+	
+}
+div.dockercon_registation_section { position:static; }
+div.dockercon_registation_section img.dcon_logo {
+    padding-left: 40px;
+}
+div.dockercon_registation_section .cross-btn {
+    color: #fff;
+    font-size: 14px;
+    float: left;
+    height: 43px;
+    width: 260px;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Geomanist Book', sans-serif;
+}
+div.dockercon_registation_section .cross-btn:before {
+}
+div.dockercon_registation_section .cross-btn:after {
+    content: ' ';
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 2;
+    display: block;
+    border-bottom: 10px solid #00445b;
+    border-left: 260px solid transparent;
+    border-right: 0px solid transparent;
+}
+div.dockercon_registation_section .cross-btn > a:hover,
+div.dockercon_registation_section .cross-btn > a:focus,
+div.dockercon_registation_section .cross-btn > a:active,
+div.dockercon_registation_section .cross-btn > a:visited {
+	outline: none;
+	border: none;
+	text-decoration: none;
+}
+div.dockercon_registation_section .cross-btn > a {
+    color: inherit;
+    display: inline-block;
+    background-color: #6cd7d0;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    margin-left: 20px;
+    position: relative;
+	text-decoration:none;
+}
+div.dockercon_registation_section .cross-btn > a:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: -10px;
+    width: 20px;
+    height: 50px;
+    background-color: #6cd7d0;
+    transform: rotate(380deg);
+    transform-origin: center left;
+    z-index: 0;
+}
+div.dockercon_registation_section .cross-btn > a:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: -2px;
+    right: -110px;
+    width: 120px;
+    height: 40px;
+    background-color: #6cd7d0;
+    transform: rotate(380deg);
+    transform-origin: center left;
+    z-index: 0;
+}
+div.dockercon_registation_section .cross-btn > a > span {
+	position: relative;
+    z-index: 1;
+}
+div.dockercon_registation_section .cross-btn > a > span > i {
+    background-image: url(/sites/all/themes/docker/assets/images/dcon_video_play.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+
+/** CSS Overrides - this is temporary and should be formally added to the master scss files **/
+/** Global links **/
+a, a:active {outline: none;}
+a:hover {text-decoration: none;}
+
+/** header **/
+header .nav-global li a,
+.main-header div > .nav-main a {
+    color: rgba(255, 255, 255, 0.85);
+    outline: none;
+}
+
+header .nav-global li a:hover,
+.main-header div > .nav-main a:hover {
+    color: #fff;
+}
+.main-header div > .nav-main > li ul {
+    transition: all ease-in .2s;
+}
+/** global navigation elements **/
+.main-header div>.nav-main a {
+  font-size: 16px;
+}
+.dockercon16 div.heronav_section {
+  background-color: #003E52;
+}
+.dockercon16 div.heronav_section ul li {
+  margin: 0px 3px;
+}
+.dockercon16 div.heronav_section ul li a {
+  padding: 15px 40px 9px 40px;
+}
+/***************************************************************** front page ****************************************************************/
+
+.customer_and_news_section.section.GenericDev.bluebackground {
+    padding: 50px;
+}
+body .dockercon16 section.section {
+    padding: 160px 0;
+}
+/** update to button styles**/
+.front section.title_section.darkblue .button {
+    margin-top: 0px;
+}
+.front .dockercon16 section.title_section.darkblue h1 {
+    margin-bottom: 10px;
+}
+.node-type-front-page .dockercon16 section.title_section.darkblue a.button {
+  background-color: rgba(0, 78, 103, 0.61);
+  padding: 17px 40px 14px 40px;
+}
+.node-type-front-page .dockercon16 section.title_section.darkblue p {
+    font-size: 18px;
+    color: #FFFFFF;
+    max-width: 340px;
+}
+section.customer_and_news_section.section {
+    background-color: #003E52;
+}
+/** hide bottom section - this should be removed from tempate **/
+.bottom_cta_section.gary.section.GenericDev.bgblue5.bluebackground {
+    display: none;
+}
+/*section.title_section.darkblue .button {
+    margin-top: 0px;
+}*/
+/** button on:hover **/
+.node-type-front-page .dockercon16 section.title_section.darkblue a.button:hover {
+    background: rgba(0, 0, 0, 0.6);
+    text-decoration: none;
+}
+
+/** please remove this field from the content type (infra/industry) **/
+ .projects_software_infrast_section img, .projects_open_industry_section img {
+     display: none;
+}
+
+
+/************************************** typography ****************** All headings should be Geomanist Light ***************************/
+.dockercon16 section.title_section.darkblue h1 {
+    font-family: 'Geomanist Light', sans-serif;
+}
+
+body .dockercon16 h2 {
+    font-family: 'Geomanist Light', sans-serif;
+}
+
+.dockercon16 section.GenericDev .items.media li .media_content h3 {
+   font-family: 'Geomanist Regular', sans-serif;
+}
+
+/***** blue background gradient *******/
+ section.bgblue4.section {
+     background: #285a8c;
+     background: -moz-linear-gradient(top, #1488C6 0%, #124b77 100%, #124b77 100%);
+     background: -webkit-linear-gradient(top, #1488C6 0%,#124b77 100%,#124b77 100%);
+     background: linear-gradient(to top, #1488C6 0%,#124b77 100%,#124b77 100%);
+     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1488C6', endColorstr='#124b77',GradientType=0 );
+ }
+
+/************************************** buttons **************************************/
+.dockercon16 section.section a.button.darkblue-btn, .dockercon16 section.title_section a.button.darkblue-btn {
+    padding: 15px 40px 13px 40px;
+}
+.dockercon16 section.section a.button.darkblue-btn:hover, .dockercon16 section.title_section a.button.darkblue-btn:hover {
+    background: #235363;
+}
+/** outline buttons on blue **/
+.dockercon16 section.customer_and_news_section.section.GenericDev .items.media li a.button {
+    border: 1px solid #72B8D6;
+    padding: 10px 40px 9px 40px;
+}
+.dockercon16 section.customer_and_news_section.section.GenericDev .items.media li a.button:hover {
+    background: rgba(255, 255, 255, 0.41);
+}
+
+/** white buttons **/
+.dockercon16 section.section a.button.white-btn {
+   padding: 15px 40px 13px 40px;
+}
+.dockercon16 section.title_section a.button.white-btn {
+    padding: 15px 40px 13px 40px;
+}
+.dockercon16 section.section a.button.white-btn:hover {
+    background: RGBA(255, 255, 255, 0.71);
+}
+.dockercon16 section.title_section a.button.white-border-btn {
+    padding: 14px 40px 12px 40px;
+}
+/************************ footer ****************************/
+div.moby_footer .bar {
+    background-image: none;
+}
+footer.main_footer {
+    border-top: 10px solid #ffd601;
+    outline: 13px solid #9ce2c0;
+}
+/************************ hide these elements ****************************/
+.cta-illustration {display: none;}
+

@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Advanced options for Autobuild and Autotest"
-description = "Automated builds"
-keywords = ["automated, build, images"]
-[menu.main]
-parent="builds"
-weight=-40
-+++
-<![end-metadata]-->
+---
+description: Automated builds
+keywords:
+- automated, build, images
+menu:
+  main:
+    parent: builds
+    weight: -40
+title: Advanced options for Autobuild and Autotest
+---
 
 # Advanced options for Autobuild and Autotest
 

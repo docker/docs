@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/ports/"
-]
-title = "Publish and expose service or container ports"
-description = "Publish and expose service or container ports"
-keywords = ["publish, expose, ports, containers, services"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/ports/
+description: Publish and expose service or container ports
+keywords:
+- publish, expose, ports, containers, services
+menu:
+  main:
+    parent: apps
+title: Publish and expose service or container ports
+---
 
 # Publish and expose service or container ports
 

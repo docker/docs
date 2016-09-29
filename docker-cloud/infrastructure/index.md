@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Docker Cloud network overview"
-description = "Manage network in Docker Cloud"
-keywords = ["nodes, hosts, infrastructure, Cloud"]
-notoc = false
-[menu.main]
-parent="infrastructure"
-weight=-80
-+++
-<![end-metadata]-->
+---
+description: Manage network in Docker Cloud
+keywords:
+- nodes, hosts, infrastructure, Cloud
+menu:
+  main:
+    parent: infrastructure
+    weight: -80
+notoc: false
+title: Docker Cloud network overview
+---
 
 # Docker Cloud infrastructure overview
 

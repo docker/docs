@@ -1,13 +1,13 @@
-<!-- [metadata]>
-+++
-title = "Seccomp security profiles for Docker"
-description = "Enabling seccomp in Docker"
-keywords = ["seccomp, security, docker, documentation"]
-[menu.main]
-parent= "smn_secure_docker"
-weight=90
-+++
-<![end-metadata]-->
+---
+description: Enabling seccomp in Docker
+keywords:
+- seccomp, security, docker, documentation
+menu:
+  main:
+    parent: smn_secure_docker
+    weight: 90
+title: Seccomp security profiles for Docker
+---
 
 # Seccomp security profiles for Docker
 

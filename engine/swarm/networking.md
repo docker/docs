@@ -1,14 +1,17 @@
-<!--[metadata]>
-+++
-title = "Attach services to an overlay network"
-description = "Use swarm mode networking features"
-keywords = ["guide", "swarm mode", "swarm", "network"]
-[menu.main]
-identifier="networking-guide"
-parent="engine_swarm"
-weight=16
-+++
-<![end-metadata]-->
+---
+description: Use swarm mode networking features
+keywords:
+- guide
+- swarm mode
+- swarm
+- network
+menu:
+  main:
+    identifier: networking-guide
+    parent: engine_swarm
+    weight: 16
+title: Attach services to an overlay network
+---
 
 # Attach services to an overlay network
 

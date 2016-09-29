@@ -1,11 +1,14 @@
-+++
-title = "Automated Builds with Bitbucket"
-description = "Docker Hub Automated Builds using Bitbucket"
-keywords = ["Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, trusted, builds, trusted builds,  automated builds, bitbucket"]
-[menu.main]
-parent="mn_pubhub"
-weight=8
-+++
+---
+description: Docker Hub Automated Builds using Bitbucket
+keywords:
+- Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation,
+  trusted, builds, trusted builds,  automated builds, bitbucket
+menu:
+  main:
+    parent: mn_pubhub
+    weight: 8
+title: Automated Builds with Bitbucket
+---
 
 # Automated Builds with Bitbucket
 

@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/reference/logging/log_tags/"]
-title = "Log tags for logging driver"
-description = "Describes how to format tags for."
-keywords = ["docker, logging, driver, syslog, Fluentd, gelf, journald"]
-[menu.main]
-parent = "smn_logging"
-weight = -1
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/reference/logging/log_tags/
+description: Describes how to format tags for.
+keywords:
+- docker, logging, driver, syslog, Fluentd, gelf, journald
+menu:
+  main:
+    parent: smn_logging
+    weight: -1
+title: Log tags for logging driver
+---
 
 # Log Tags
 

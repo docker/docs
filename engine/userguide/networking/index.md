@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases=[
-"/engine/userguide/networking/dockernetworks/"
-]
-title = "Docker container networking"
-description = "How do we connect docker containers within and across hosts ?"
-keywords = ["Examples, Usage, network, docker, documentation, user guide, multihost, cluster"]
-[menu.main]
-identifier="networking_index"
-parent = "smn_networking"
-weight = -5
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/userguide/networking/dockernetworks/
+description: How do we connect docker containers within and across hosts ?
+keywords:
+- Examples, Usage, network, docker, documentation, user guide, multihost, cluster
+menu:
+  main:
+    identifier: networking_index
+    parent: smn_networking
+    weight: -5
+title: Docker container networking
+---
 
 # Understand Docker container networks
 

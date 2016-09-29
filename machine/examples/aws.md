@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Provision AWS EC2 Instances"
-description = "Using Docker Machine to provision hosts on AWS"
-keywords = ["docker, machine, cloud, aws"]
-[menu.main]
-parent="cloud_examples"
-weight=2
-+++
-<![end-metadata]-->
+---
+description: Using Docker Machine to provision hosts on AWS
+keywords:
+- docker, machine, cloud, aws
+menu:
+  main:
+    parent: cloud_examples
+    weight: 2
+title: Provision AWS EC2 Instances
+---
 
 # Amazon Web Services (AWS) EC2 example
 

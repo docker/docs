@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/articles/run_metrics"]
-title = "Runtime metrics"
-description = "Measure the behavior of running containers"
-keywords = ["docker, metrics, CPU, memory, disk, IO, run,  runtime, stats"]
-[menu.main]
-parent = "engine_admin"
-weight = 14
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/articles/run_metrics
+description: Measure the behavior of running containers
+keywords:
+- docker, metrics, CPU, memory, disk, IO, run,  runtime, stats
+menu:
+  main:
+    parent: engine_admin
+    weight: 14
+title: Runtime metrics
+---
 
 # Runtime metrics
 

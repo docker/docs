@@ -1,8 +1,6 @@
-<!--[metadata]>
-+++
-draft = true
-+++
-<![end-metadata]-->
+---
+draft: true
+---
 
 This directory holds the authoritative specifications of APIs defined and implemented by Docker. Currently this includes:
 

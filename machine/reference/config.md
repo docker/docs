@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "config"
-description = "Show client configuration"
-keywords = ["machine, config, subcommand"]
-[menu.main]
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Show client configuration
+keywords:
+- machine, config, subcommand
+menu:
+  main:
+    parent: smn_machine_subcmds
+title: config
+---
 
 # config
 

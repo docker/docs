@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "ssh"
-description = "Log into or run a command on a machine using SSH."
-keywords = ["machine, ssh, subcommand"]
-[menu.main]
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Log into or run a command on a machine using SSH.
+keywords:
+- machine, ssh, subcommand
+menu:
+  main:
+    parent: smn_machine_subcmds
+title: ssh
+---
 
 # ssh
 

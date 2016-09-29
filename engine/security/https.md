@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/articles/https/"]
-title = "Protect the Docker daemon socket"
-description = "How to setup and run Docker with HTTPS"
-keywords = ["docker, docs, article, example, https, daemon, tls, ca,  certificate"]
-[menu.main]
-parent = "smn_secure_docker"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/articles/https/
+description: How to setup and run Docker with HTTPS
+keywords:
+- docker, docs, article, example, https, daemon, tls, ca,  certificate
+menu:
+  main:
+    parent: smn_secure_docker
+title: Protect the Docker daemon socket
+---
 
 # Protect the Docker daemon socket
 

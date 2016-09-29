@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "ls"
-description = "List machines"
-keywords = ["machine, ls, subcommand"]
-[menu.main]
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: List machines
+keywords:
+- machine, ls, subcommand
+menu:
+  main:
+    parent: smn_machine_subcmds
+title: ls
+---
 
 # ls
 

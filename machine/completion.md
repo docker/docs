@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Command-line Completion"
-description = "Install Machine command-line completion"
-keywords = ["machine, docker, orchestration, cli,  reference"]
-[menu.main]
-identifier="machine_completion"
-parent="workw_machine"
-weight=99
-+++
-<![end-metadata]-->
+---
+description: Install Machine command-line completion
+keywords:
+- machine, docker, orchestration, cli,  reference
+menu:
+  main:
+    identifier: machine_completion
+    parent: workw_machine
+    weight: 99
+title: Command-line Completion
+---
 
 # Command-line Completion
 

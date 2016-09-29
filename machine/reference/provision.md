@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "provision"
-description = "Re-run provisioning on a created machine."
-keywords = ["machine, provision, subcommand"]
-[menu.main]
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Re-run provisioning on a created machine.
+keywords:
+- machine, provision, subcommand
+menu:
+  main:
+    parent: smn_machine_subcmds
+title: provision
+---
 
 # provision
 

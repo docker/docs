@@ -1,21 +1,19 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mac/started/",
-"/windows/started/",
-"/linux/started/",
-"/getting-started/"
-]
-title = "Get Started with Docker"
-description = "Getting started with Docker"
-keywords = ["beginner, getting started, Docker"]
-[menu.main]
-identifier = "getstart_all"
-parent = "tutorial_getstart_menu"
-weight="-1"
-+++
-<![end-metadata]-->
-
+---
+aliases:
+- /mac/started/
+- /windows/started/
+- /linux/started/
+- /getting-started/
+description: Getting started with Docker
+keywords:
+- beginner, getting started, Docker
+menu:
+  main:
+    identifier: getstart_all
+    parent: tutorial_getstart_menu
+    weight: "-1"
+title: Get Started with Docker
+---
 
 # Get Started with Docker
 

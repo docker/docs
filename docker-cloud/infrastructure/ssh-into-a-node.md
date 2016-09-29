@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/intermediate/ssh-into-a-node/",
-"/docker-cloud/tutorials/ssh-into-a-node/",
-"/docker-cloud/faq/how-ssh-nodes/"
-]
-title = "SSH into a Docker Cloud-managed node"
-description = "SSHing into a Docker Cloud-managed node"
-keywords = ["ssh, Cloud, node"]
-[menu.main]
-parent="infrastructure"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/intermediate/ssh-into-a-node/
+- /docker-cloud/tutorials/ssh-into-a-node/
+- /docker-cloud/faq/how-ssh-nodes/
+description: SSHing into a Docker Cloud-managed node
+keywords:
+- ssh, Cloud, node
+menu:
+  main:
+    parent: infrastructure
+title: SSH into a Docker Cloud-managed node
+---
 
 # SSHing into a Docker Cloud-managed node
 

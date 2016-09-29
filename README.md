@@ -1,163 +1,54 @@
-# Pinata: an experimental standalone Docker client
+# This repo is for preview/dev purposes only
 
-|  | pr | master | rc | beta | stable |
-|---|---|---|---|---|---|
-| macOS | [latest](https://download-stage.docker.com/mac/pr/Docker.dmg) | [latest](https://download-stage.docker.com/mac/master/Docker.dmg) | [latest](https://download-stage.docker.com/mac/rc/Docker.dmg) | [latest](https://download.docker.com/mac/beta/Docker.dmg)  | [latest](https://download.docker.com/mac/stable/Docker.dmg)  |
-| Windows | [latest](https://download-stage.docker.com/win/pr/InstallDocker.msi) | [latest](https://download-stage.docker.com/win/master/InstallDocker.msi) | [latest](https://download-stage.docker.com/win/test/InstallDocker.msi)  | [latest](https://download.docker.com/win/beta/InstallDocker.msi)  | [latest](https://download.docker.com/win/stable/InstallDocker.msi)  |
-*( if you get Access Denied errors, it means nothing has been published to this channel yet )*
+The docs team is in the process of migrating to this repo. During this time we're also 
+converting from a Hugo-based doc system to a Jekyll-based doc system. That means there
+are lots of content errors and so forth at the preview URL. We're on it. 
 
-To list all the versions: http://omakase.omakase.e57b9b5b.svc.dockerapp.io/
+While this repo is not the source of truth, it's important to us that it be viewable
+so contributors can see what we're doing, and so that they can migrate open pull requests
+from other repos such as `docker/docker` that make doc changes, into this repo. 
 
-This is an experimental project to develop a new client for Docker,
-separately from the daemon or any other backend component.
+## Timeline of migration
 
-By maintaining a standalone client, the goal is to:
+- During the week of Monday, September 26th, any existing docs PRs need to be migrated over or merged.
+- We’ll do one last “pull” from the various docs repos on Wednesday, September 28th, at which time the docs/ folders in the various repos will be emptied.
+- Between the 28th and full cutover, the docs team will be testing the new repo and making sure all is well across every page.
+- Full cutover (production is drawing from the new repo, new docs work is pointed at the new repo, dissolution of old docs/ folders) is complete on Monday, October 3rd.
 
-1. Allow for more rapid iteration on client functionality.
-2. Improve compatibility between different versions of the client and daemon.
-3. Add more features to the client without bloating the daemon-side components.
-4. Pave the way to simplifying the daemon code base, improving its
-quality and making its maintenance easier.
+# Docs @ Docker
 
-## Versioning
+Welcome to the repo for our documentation. This is the source for the URL
+served at docs.docker.com.
 
-The release cycle respects the following convention: `X-Y[-Z]` where:
+Feel free to send us pull requests and file issues. Our docs are completely
+open source and we deeply appreciate contributions from our community!
 
-- `X` is the version of the docker engine used as a base for the build. The build can be modified during the build process to fit better into the use-case of `Docker.app` (ie. it won't usually be a drop-in replacement, but we will try to upstream our patches as quickly as possible).
+## Staging
 
-- `Y` is an arbitrary string that we can use to define a version of `Docker.app`, independently of the release cycle of docker engine.
+You have three options:
 
-- `Z` indicates the build channel (dev, test, master, release). `Z` is empty for releases.
+1. (Most performant, slowest setup) Clone this repo, [install the GitHub Pages Ruby gem](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/), then run `jekyll serve` from within the directory.
+2. (Slower, fast setup) Clone this repo, and from within the directory, run:
+   `docker run -ti --rm -v "$PWD":/docs -p 4000:4000 docs/docstage`
+3. (Edit entirely in the browser, no local clone) Fork this repo in GitHub, change your fork's repository name to `YOUR_GITHUB_USERNAME.github.io`, and make any changes.
 
-For instance the first beta release of pinata has the version: `1.9.1-beta1`. While on master channel (one build for each PR merged), it has the version: `1.9.1-beta1-master`.
+In the first two options, the site will be staged at `http://localhost:4000` (unless Jekyll is behaving in some non-default way).
 
-On OS X, the version is defined in XCode project's Info.plist file (key: `CFBundleShortVersionString`). There's also a build number, associated with `CFBundleVersion` key (set by CI).
+In the third option, the site will be viewable at `http://YOUR_GITHUB_USERNAME.github.io`, about a minute after your first change is merged into your fork.
 
-In Xcode project, the version should use a suffix like `-dev` (`1.9.1-beta1-dev`). That suffix will be replaced/removed by CI.
+## Important files
 
-## INSTALL
+- `/_data/toc.yaml` defines the left-hand navigation for the docs
+- `/js/menu.js` defines most of the docs-specific JS such as TOC generation and menu syncing
+- `/css/documentation.css` defines the docs-specific style rules
+- `/_layouts/docs.html` is the HTML template file, which defines the header and footer, and includes all the JS/CSS that serves the docs content
 
-### Through HockeyApp
+## Relative linking for GitHub viewing
 
-For Docker for Mac see the [Docker.app installation guide](https://github.com/docker/pinata/blob/master/v1/docs/content/mackit/getting-started.md) and for Docker for Windows see the [Docker installation guide](https://github.com/docker/pinata/blob/master/v1/docs/content/winkit/getting-started.md)
+Feel free to link to `../foo.md` so that the docs are readable in GitHub, but keep in mind that Jekyll templating notation
+`{% such as this %}` will render in raw text and not be processed. In general it's best to assume the docs are being read
+directly on docs.docker.com.
 
-### OSX Build
+## Copyright and license
 
-Check that your `GOPATH` is correctly set-up and clone this repository in
-`$GOPATH/src/github.com/docker/pinata`.
-
-#### Dependencies
-
-As prerequisites, you need to have `Xcode`, `homebrew` and `go` installed.
-
-To minimize build times, the dependencies are cached with this command
-
-You only need to run it once or when an external dependency was updated
-
-At the root of this repository, type:
-
-```
-make depends
-```
-
-When you add a new go dependency, add it in the `GO_DEPS` variable of the toplevel
-`Makefile`.
-
-#### Build
-
-After a successful `make depends`, type:
-
-```
-make
-```
-
-If you are asked for the password to the `dockerbuilder` keychain, it is
-`docker4all`.
-
-#### Run
-
-After a successful `make depends` and `make`, type:
-
-```
-make run
-```
-
-You will see the logs on stdout
-
-#### Install
-
-First, make sure you have uninstalled any previous installation of
-pinata with:
-
-```
-v1/mac/uninstall
-```
-
-Then, install with:
-
-```
-v1/mac/build/Docker.app/Contents/MacOS/docker-installer
-```
-
-#### Tests
-
-You can run the tests by running:
-
-```
-make test
-```
-This is currently Mac only.
-
-
-
-### Windows Build
-
-[![Build status](https://ci.appveyor.com/api/projects/status/fpa7neeotor31bdh/branch/master?svg=true)](https://ci.appveyor.com/project/Pinata/pinata/branch/master)
-
-Latest msi builds :
- * On [Master](https://download-stage.docker.com/win/master/InstallDocker.msi) channel.
- * On [Test](https://download-stage.docker.com/win/test/InstallDocker.msi) channel.
-
-Check that your `GOPATH` is correctly set-up and clone this repository in
-`$GOPATH/src/github.com/docker/pinata`.
-
-#### Dependencies
-
-Install:
-
-- Go 1.6
-- [Visual Studio 2015](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx).  The app builds with the free Community edition but the licensing for that edition doesn't allow its use for commercial, closed source work.
-
-Once you installed the above, open a powershell.
-
-#### Build
-
-The main build is driven by the `please.ps1` powershell script in the `win`
-sub-directory.
-
-```
-cd <pinata_dir>/win
-./please.ps1 package
-```
-
-will clean the build directory and build a new package (installer) in
-the `build` sub-directory.
-
-
-```
-cd <pinata_dir>/win
-./please.ps1 build
-```
-
-will build a new `Docker.exe` file but not the installer.
-
-### Troubleshooting
-
-If you have an issue, please report it to the
-[bugtracker](https://github.com/docker/pinata/issues) with the output
-of:
-
-```
-pinata diagnose
-```
-This is currently Mac only.
+Code and documentation copyright 2016 Docker, inc, released under the Apache 2.0 license.

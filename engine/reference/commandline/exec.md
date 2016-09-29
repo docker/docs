@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "exec"
-description = "The exec command description and usage"
-keywords = ["command, container, run, execute"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The exec command description and usage
+keywords:
+- command, container, run, execute
+menu:
+  main:
+    parent: smn_cli
+title: exec
+---
 
 # exec
 

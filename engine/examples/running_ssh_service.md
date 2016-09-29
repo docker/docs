@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Dockerizing an SSH service"
-description = "Installing and running an SSHd service on Docker"
-keywords = ["docker, example, package installation,  networking"]
-[menu.main]
-parent = "engine_dockerize"
-+++
-<![end-metadata]-->
+---
+description: Installing and running an SSHd service on Docker
+keywords:
+- docker, example, package installation,  networking
+menu:
+  main:
+    parent: engine_dockerize
+title: Dockerizing an SSH service
+---
 
 # Dockerizing an SSH daemon service
 

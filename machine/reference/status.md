@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "status"
-description = "Get the status of a machine"
-keywords = ["machine, status, subcommand"]
-[menu.main]
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Get the status of a machine
+keywords:
+- machine, status, subcommand
+menu:
+  main:
+    parent: smn_machine_subcmds
+title: status
+---
 
 # status
 

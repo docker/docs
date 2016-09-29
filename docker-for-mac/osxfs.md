@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-  "/mackit/osxfs/"
-]
-title = "File system sharing "
-description = "OSXFS"
-keywords = ["mac, osxfs"]
-[menu.main]
-identifier='mac-osxfs'
-parent="pinata_mac_menu"
-weight = 5
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mackit/osxfs/
+description: OSXFS
+keywords:
+- mac, osxfs
+menu:
+  main:
+    identifier: mac-osxfs
+    parent: pinata_mac_menu
+    weight: 5
+title: 'File system sharing '
+---
 
 # File system sharing (osxfs)
 

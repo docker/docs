@@ -1,0 +1,15 @@
+{{ partial "header.html" . }}
+<div id="docs" class="row">
+    <div class="large-3 columns" class="tutmenu">
+      {{ partial "microsite-navbar.html" . }}
+    </div>
+    <div class="large-9 columns">
+      <section id="main">
+        <article id="content" class="tutorial">
+          <div class="microsite" >
+              {{ .Content }}
+          </div>
+    </div>
+</div>
+{{ partial "container-footer.html" . }}
+{{ partial "footer.html" . }}

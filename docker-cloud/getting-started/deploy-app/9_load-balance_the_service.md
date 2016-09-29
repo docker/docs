@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/python/9_load-balance_the_service/",
-"/docker-cloud/getting-started/golang/9_load-balance_the_service/"
-]
-title = "Load-balance the service"
-description = "Load-balance the service"
-keywords = ["load, balance, Python"]
-[menu.main]
-parent="deploy-app"
-weight=-10
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/python/9_load-balance_the_service/
+- /docker-cloud/getting-started/golang/9_load-balance_the_service/
+description: Load-balance the service
+keywords:
+- load, balance, Python
+menu:
+  main:
+    parent: deploy-app
+    weight: -10
+title: Load-balance the service
+---
 
 # Load-balance a Python service
 

@@ -1,3 +1,7 @@
+---
+{}
+---
+
 FROM docs/base:hugo-github-linking
 MAINTAINER Mary Anthony <mary@docker.com> (@moxiegirl)
 

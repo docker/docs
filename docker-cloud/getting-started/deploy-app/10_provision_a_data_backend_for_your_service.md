@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/python/10_provision_a_data_backend_for_your_service/",
-"/docker-cloud/getting-started/golang/10_provision_a_data_backend_for_your_service/"
-]
-title = "Provision a data backend for the service"
-description = "Provision a data backend for the service"
-keywords = ["provision, Python, service"]
-[menu.main]
-parent="deploy-app"
-weight=-9
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/python/10_provision_a_data_backend_for_your_service/
+- /docker-cloud/getting-started/golang/10_provision_a_data_backend_for_your_service/
+description: Provision a data backend for the service
+keywords:
+- provision, Python, service
+menu:
+  main:
+    parent: deploy-app
+    weight: -9
+title: Provision a data backend for the service
+---
 
 # Provision a data backend for a Python service
 

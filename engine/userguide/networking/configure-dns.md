@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Configure container DNS in user-defined networks"
-description = "Learn how to configure DNS in user-defined networks"
-keywords = ["docker, DNS, network"]
-[menu.main]
-parent = "smn_networking"
-+++
-<![end-metadata]-->
+---
+description: Learn how to configure DNS in user-defined networks
+keywords:
+- docker, DNS, network
+menu:
+  main:
+    parent: smn_networking
+title: Configure container DNS in user-defined networks
+---
 
 # Embedded DNS server in user-defined networks
 

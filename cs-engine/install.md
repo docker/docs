@@ -1,18 +1,18 @@
-<!--[metadata]>
-+++
-aliases = [ "/docker-trusted-registry/install/engine-ami-launch/",
-            "/docker-trusted-registry/install/install-csengine/",
-            "/docker-trusted-registry/cs-engine/install/"]
-title = "Install CS Docker Engine"
-description = "Learn how to install the commercially supported version of Docker Engine."
-keywords = ["docker, engine, dtr, install"]
-[menu.main]
-parent="menu_csengine"
-identifier="csengine_install"
-weight=0
-+++
-<![end-metadata]-->
-
+---
+aliases:
+- /docker-trusted-registry/install/engine-ami-launch/
+- /docker-trusted-registry/install/install-csengine/
+- /docker-trusted-registry/cs-engine/install/
+description: Learn how to install the commercially supported version of Docker Engine.
+keywords:
+- docker, engine, dtr, install
+menu:
+  main:
+    identifier: csengine_install
+    parent: menu_csengine
+    weight: 0
+title: Install CS Docker Engine
+---
 
 # Install CS Docker Engine
 

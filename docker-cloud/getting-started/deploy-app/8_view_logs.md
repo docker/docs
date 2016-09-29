@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/python/8_view_logs/",
-"/docker-cloud/getting-started/golang/8_view_logs/"
-]
-title = "View service logs"
-description = "View service logs"
-keywords = ["View, logs, Python"]
-[menu.main]
-parent="deploy-app"
-weight=-20
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/python/8_view_logs/
+- /docker-cloud/getting-started/golang/8_view_logs/
+description: View service logs
+keywords:
+- View, logs, Python
+menu:
+  main:
+    parent: deploy-app
+    weight: -20
+title: View service logs
+---
 
 # View service logs
 

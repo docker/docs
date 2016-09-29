@@ -1,12 +1,14 @@
-+++
-type = "_default"
-title = "v2.0.0 API"
-description = "v2.0.0 API"
-keywords = ["Docker, DTR, API, v2.0.0"]
-weight = 101
-[menu.main]
-parent = "smn_dtrapi"
-+++
+---
+description: v2.0.0 API
+keywords:
+- Docker, DTR, API, v2.0.0
+menu:
+  main:
+    parent: smn_dtrapi
+title: v2.0.0 API
+type: _default
+weight: 101
+---
 
 <div class="swagger-section">
 <div id="swagger-ui-container" class="swagger-ui-wrap"></div>

@@ -1,11 +1,13 @@
-+++
-title = "Docker ID and Settings"
-description = "Using your DockerID to log in to Docker Cloud"
-keywords = ["one, two, three"]
-[menu.main]
-parent="docker-cloud"
-weight=-99
-+++
+---
+description: Using your DockerID to log in to Docker Cloud
+keywords:
+- one, two, three
+menu:
+  main:
+    parent: docker-cloud
+    weight: -99
+title: Docker ID and Settings
+---
 
 # Your Docker ID and Docker Cloud account
 

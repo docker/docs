@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-title = "Link to a source code repository"
-description = [
-"Link to your source code repository"
-]
-keywords = ["sourcecode, github, bitbucket, Cloud"]
-aliases = "/docker-cloud/tutorials/link-source/"
-[menu.main]
-parent="builds"
-weight=-60
-+++
-<![end-metadata]-->
+---
+aliases: /docker-cloud/tutorials/link-source/
+description:
+- Link to your source code repository
+keywords:
+- sourcecode, github, bitbucket, Cloud
+menu:
+  main:
+    parent: builds
+    weight: -60
+title: Link to a source code repository
+---
 
 # Link Docker Cloud to a source code provider
 

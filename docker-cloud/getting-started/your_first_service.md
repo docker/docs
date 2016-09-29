@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/beginner/your_first_service/",
-"/docker-cloud/getting-started/beginner/deploy_first_service/"
-]
-title = "Deploy your first service"
-description = "Deploy your first service on Docker Cloud"
-keywords = ["service, Cloud, three"]
-[menu.main]
-parent="getting-started"
-weight=-40
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/beginner/your_first_service/
+- /docker-cloud/getting-started/beginner/deploy_first_service/
+description: Deploy your first service on Docker Cloud
+keywords:
+- service, Cloud, three
+menu:
+  main:
+    parent: getting-started
+    weight: -40
+title: Deploy your first service
+---
 
 # Your first service
 

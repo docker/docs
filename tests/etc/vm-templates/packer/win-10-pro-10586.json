@@ -1,7 +1,0 @@
-{
-    "name": "win-10-pro-10586",
-    "iso_url": "iso/Win10Pro-10586_1511_x64.iso",
-    "iso_checksum_type": "sha1",
-    "iso_checksum": "875ec108288b9f581e5d8099cf0edb79f0f3e483",
-    "autounattend": "answer_files/10-pro/Autounattend.xml"
-}

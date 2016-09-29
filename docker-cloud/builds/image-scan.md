@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-title = "Docker Security Scanning"
-description = "Docker Security Scanning: automatic image scanning"
-keywords = ["Docker, docker, scan, scanning, security, registry, plans, Docker Cloud, docs, documentation, trusted, builds, trusted builds, automated builds"]
-[menu.main]
-parent="builds"
-weight=-55
-+++
-<![end-metadata]-->
+---
+description: 'Docker Security Scanning: automatic image scanning'
+keywords:
+- Docker, docker, scan, scanning, security, registry, plans, Docker Cloud, docs, documentation,
+  trusted, builds, trusted builds, automated builds
+menu:
+  main:
+    parent: builds
+    weight: -55
+title: Docker Security Scanning
+---
 
 # Docker Security Scanning
 

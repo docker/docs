@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Machine Overview"
-description = "Introduction and Overview of Machine"
-keywords = ["docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"]
-[menu.main]
-parent="workw_machine"
-weight=-90
-+++
-<![end-metadata]-->
-
+---
+description: Introduction and Overview of Machine
+keywords:
+- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer,
+  virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
+menu:
+  main:
+    parent: workw_machine
+    weight: -90
+title: Machine Overview
+---
 
 # Docker Machine Overview
 

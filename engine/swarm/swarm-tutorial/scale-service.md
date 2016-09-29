@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Scale the service"
-description = "Scale the service running in the swarm"
-keywords = ["tutorial, cluster management, swarm mode, scale"]
-[menu.main]
-identifier="swarm-tutorial-scale-service"
-parent="swarm-tutorial"
-weight=18
-+++
-<![end-metadata]-->
+---
+description: Scale the service running in the swarm
+keywords:
+- tutorial, cluster management, swarm mode, scale
+menu:
+  main:
+    identifier: swarm-tutorial-scale-service
+    parent: swarm-tutorial
+    weight: 18
+title: Scale the service
+---
 
 # Scale the service in the swarm
 

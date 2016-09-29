@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "create"
-description = "Create a machine."
-keywords = ["machine, create, subcommand"]
-[menu.main]
-identifier="machine.create"
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Create a machine.
+keywords:
+- machine, create, subcommand
+menu:
+  main:
+    identifier: machine.create
+    parent: smn_machine_subcmds
+title: create
+---
 
 # create
 

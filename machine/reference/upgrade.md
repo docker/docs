@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "upgrade"
-description = "Upgrade Docker on a machine"
-keywords = ["machine, upgrade, subcommand"]
-[menu.main]
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Upgrade Docker on a machine
+keywords:
+- machine, upgrade, subcommand
+menu:
+  main:
+    parent: smn_machine_subcmds
+title: upgrade
+---
 
 # upgrade
 

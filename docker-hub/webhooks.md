@@ -1,11 +1,13 @@
-+++
-title = "Webhooks for automated builds"
-description = "Docker Hub Automated Builds"
-keywords = ["Docker, webhookds, hub, builds"]
-[menu.main]
-parent="mn_pubhub"
-weight=7
-+++
+---
+description: Docker Hub Automated Builds
+keywords:
+- Docker, webhookds, hub, builds
+menu:
+  main:
+    parent: mn_pubhub
+    weight: 7
+title: Webhooks for automated builds
+---
 
 # Webhooks for automated builds
 

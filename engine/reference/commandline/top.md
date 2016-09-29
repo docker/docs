@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "top"
-description = "The top command description and usage"
-keywords = ["container, running, processes"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The top command description and usage
+keywords:
+- container, running, processes
+menu:
+  main:
+    parent: smn_cli
+title: top
+---
 
 # top
 

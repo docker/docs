@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "help"
-description = "Show command help"
-keywords = ["machine, help, subcommand"]
-[menu.main]
-parent="smn_machine_subcmds"
-+++
-<![end-metadata]-->
+---
+description: Show command help
+keywords:
+- machine, help, subcommand
+menu:
+  main:
+    parent: smn_machine_subcmds
+title: help
+---
 
 # help
 

@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/misc/deprecated/"]
-title = "Deprecated Engine Features"
-description = "Deprecated Features."
-keywords = ["docker, documentation, about, technology, deprecate"]
-[menu.main]
-parent = "engine_use"
-weight=80
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/misc/deprecated/
+description: Deprecated Features.
+keywords:
+- docker, documentation, about, technology, deprecate
+menu:
+  main:
+    parent: engine_use
+    weight: 80
+title: Deprecated Engine Features
+---
 
 # Deprecated Engine Features
 

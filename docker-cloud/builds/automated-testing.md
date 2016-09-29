@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/automated-testing/"
-]
-title = "Automated repository tests"
-description = "Automated tests"
-keywords = ["Automated, testing, repository"]
-[menu.main]
-parent="builds"
-weight=-50
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/automated-testing/
+description: Automated tests
+keywords:
+- Automated, testing, repository
+menu:
+  main:
+    parent: builds
+    weight: -50
+title: Automated repository tests
+---
 
 # Automated repository tests
 

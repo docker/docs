@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/python/5_deploy_the_app_as_a_service/",
-"/docker-cloud/getting-started/golang/5_deploy_the_app_as_a_service/"
-]
-title = "Deploy the app as a Docker Cloud service"
-description = "Deploy the app as a Docker Cloud service"
-keywords = ["Python, deploy, Cloud"]
-[menu.main]
-parent="deploy-app"
-weight=-50
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/python/5_deploy_the_app_as_a_service/
+- /docker-cloud/getting-started/golang/5_deploy_the_app_as_a_service/
+description: Deploy the app as a Docker Cloud service
+keywords:
+- Python, deploy, Cloud
+menu:
+  main:
+    parent: deploy-app
+    weight: -50
+title: Deploy the app as a Docker Cloud service
+---
 
 # Deploy the app as a Docker Cloud service
 

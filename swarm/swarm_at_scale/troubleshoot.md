@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-aliases = ["/swarm/swarm_at_scale/05-troubleshoot/"]
-title = "Troubleshoot the application"
-description = "Try Swarm at scale"
-keywords = ["docker, swarm, scale, voting, application,  certificates"]
-[menu.main]
-parent="scale_swarm"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /swarm/swarm_at_scale/05-troubleshoot/
+description: Try Swarm at scale
+keywords:
+- docker, swarm, scale, voting, application,  certificates
+menu:
+  main:
+    parent: scale_swarm
+title: Troubleshoot the application
+---
 
 # Troubleshoot the application
 

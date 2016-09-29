@@ -1,16 +1,16 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/reference/logging/"]
-title = "Logging"
-description = "Logging and Logging Drivers"
-keywords = [" docker, logging, driver"]
-[menu.main]
-parent = "engine_admin"
-identifier = "smn_logging"
-weight=9
-+++
-<![end-metadata]-->
-
+---
+aliases:
+- /engine/reference/logging/
+description: Logging and Logging Drivers
+keywords:
+- ' docker, logging, driver'
+menu:
+  main:
+    identifier: smn_logging
+    parent: engine_admin
+    weight: 9
+title: Logging
+---
 
 # Logging Drivers
 

@@ -1,15 +1,16 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/cs-engine/upgrade/"]
-title = "Upgrade"
-description = "Learn how to install the commercially supported version of Docker Engine."
-keywords = ["docker, engine, dtr, upgrade"]
-[menu.main]
-parent="menu_csengine"
-identifier="csengine_upgrade"
-weight=10
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-trusted-registry/cs-engine/upgrade/
+description: Learn how to install the commercially supported version of Docker Engine.
+keywords:
+- docker, engine, dtr, upgrade
+menu:
+  main:
+    identifier: csengine_upgrade
+    parent: menu_csengine
+    weight: 10
+title: Upgrade
+---
 
 # Upgrade CS Docker Engine
 

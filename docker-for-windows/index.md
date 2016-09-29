@@ -1,21 +1,20 @@
-<!--[metadata]>
-+++
-aliases = [
-"/winkit/getting-started/",
-"/winkit/",
-"/windows/",
-"/windows/started/",
-"/docker-for-windows/started/"
-]
-title = "Getting Started"
-description = "Getting Started"
-keywords = ["windows, beta, alpha, tutorial"]
-[menu.main]
-identifier="docker-win-getstart"
-parent="pinata_win_menu"
-weight = 1
-+++
-<![end-metadata]-->
+---
+aliases:
+- /winkit/getting-started/
+- /winkit/
+- /windows/
+- /windows/started/
+- /docker-for-windows/started/
+description: Getting Started
+keywords:
+- windows, beta, alpha, tutorial
+menu:
+  main:
+    identifier: docker-win-getstart
+    parent: pinata_win_menu
+    weight: 1
+title: Getting Started
+---
 
 # Getting Started with Docker for Windows
 

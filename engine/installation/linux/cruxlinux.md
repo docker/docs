@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/cruxlinux/"]
-title = "Installation on CRUX Linux"
-description = "Docker installation on CRUX Linux."
-keywords = ["crux linux, Docker, documentation,  installation"]
-[menu.main]
-parent = "engine_linux"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/installation/cruxlinux/
+description: Docker installation on CRUX Linux.
+keywords:
+- crux linux, Docker, documentation,  installation
+menu:
+  main:
+    parent: engine_linux
+title: Installation on CRUX Linux
+---
 
 # CRUX Linux
 

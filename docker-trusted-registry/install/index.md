@@ -1,19 +1,19 @@
-<!--[metadata]>
-+++
-aliases = [ "/docker-trusted-registry/install/dtr-ami-byol-launch/",
-            "/docker-trusted-registry/install/dtr-ami-bds-launch/",
-            "/docker-trusted-registry/install/dtr-vhd-azure/",
-            "/docker-trusted-registry/install/install-dtr/"]
-title = "Install Docker Trusted Registry"
-description = "Learn how to install Docker Trusted Registry for production."
-keywords = ["docker, dtr, registry, install"]
-[menu.main]
-parent="dtr-menu-install"
-identifier="dtr_install_production"
-weight=20
-+++
-<![end-metadata]-->
-
+---
+aliases:
+- /docker-trusted-registry/install/dtr-ami-byol-launch/
+- /docker-trusted-registry/install/dtr-ami-bds-launch/
+- /docker-trusted-registry/install/dtr-vhd-azure/
+- /docker-trusted-registry/install/install-dtr/
+description: Learn how to install Docker Trusted Registry for production.
+keywords:
+- docker, dtr, registry, install
+menu:
+  main:
+    identifier: dtr_install_production
+    parent: dtr-menu-install
+    weight: 20
+title: Install Docker Trusted Registry
+---
 
 # Install Docker Trusted Registry
 

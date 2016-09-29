@@ -1,3 +1,7 @@
+---
+{}
+---
+
 FROM docs/base:oss
 MAINTAINER Mary Anthony <mary@docker.com> (@moxiegirl)
 

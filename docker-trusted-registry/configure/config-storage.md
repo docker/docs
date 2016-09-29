@@ -1,12 +1,15 @@
-+++
-title = "Storage configuration"
-description = "Storage configuration for Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, understanding, configuration, storage, storage drivers, Azure, S3, Swift,  enterprise, hub, registry"]
-[menu.main]
-parent="workw_dtr_configure"
-identifier="dtr_configure_storage"
-weight=5
-+++
+---
+description: Storage configuration for Docker Trusted Registry
+keywords:
+- docker, documentation, about, technology, understanding, configuration, storage,
+  storage drivers, Azure, S3, Swift,  enterprise, hub, registry
+menu:
+  main:
+    identifier: dtr_configure_storage
+    parent: workw_dtr_configure
+    weight: 5
+title: Storage configuration
+---
 
 # Storage configuration
 

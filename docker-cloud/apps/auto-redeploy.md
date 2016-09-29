@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-title = "Automatic service redeploy"
-aliases = [
-"/docker-cloud/feature-reference/auto-redeploy/"
-]
-description = "Autoredeploy"
-keywords = ["Autoredeploy, image, store, service"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/auto-redeploy/
+description: Autoredeploy
+keywords:
+- Autoredeploy, image, store, service
+menu:
+  main:
+    parent: apps
+title: Automatic service redeploy
+---
 
 # Autoredeploy
 

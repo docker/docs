@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "service scale"
-description = "The service scale command description and usage"
-keywords = ["service, scale"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The service scale command description and usage
+keywords:
+- service, scale
+menu:
+  main:
+    parent: smn_cli
+title: service scale
+---
 
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
 

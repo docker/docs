@@ -1,17 +1,17 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/intermediate/installing-cli/",
-"/docker-cloud/getting-started/installing-cli/",
-"/docker-cloud/tutorials/installing-cli/"
-]
-title = "The Docker Cloud CLI"
-description = "Using the Docker Cloud CLI on Linux, Windows, and Mac OS X, installing, updating, uninstall"
-keywords = ["cloud, command-line, CLI"]
-[menu.main]
-parent="docker-cloud"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/intermediate/installing-cli/
+- /docker-cloud/getting-started/installing-cli/
+- /docker-cloud/tutorials/installing-cli/
+description: Using the Docker Cloud CLI on Linux, Windows, and Mac OS X, installing,
+  updating, uninstall
+keywords:
+- cloud, command-line, CLI
+menu:
+  main:
+    parent: docker-cloud
+title: The Docker Cloud CLI
+---
 
 # The Docker Cloud CLI
 

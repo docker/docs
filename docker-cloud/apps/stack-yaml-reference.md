@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/stack-yaml-reference/"
-]
-title = "Stack YAML reference"
-description = "Stack YAML reference"
-keywords = ["YAML, stack, reference"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/stack-yaml-reference/
+description: Stack YAML reference
+keywords:
+- YAML, stack, reference
+menu:
+  main:
+    parent: apps
+title: Stack YAML reference
+---
 
 # Stack YAML reference
 

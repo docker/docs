@@ -1,14 +1,17 @@
-<!--[metadata]>
-+++
-title ="Release Notes"
-description="Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions."
-keywords = ["Docker, UCP", "Release notes", "Versions"]
-[menu.main]
-identifier="ucp_rnotes"
-parent="mn_ucp"
-weight=110
-+++
-<![end-metadata]-->
+---
+description: Release notes for Docker Universal Control Plane. Learn more about the
+  changes introduced in the latest versions.
+keywords:
+- Docker, UCP
+- Release notes
+- Versions
+menu:
+  main:
+    identifier: ucp_rnotes
+    parent: mn_ucp
+    weight: 110
+title: Release Notes
+---
 
 # UCP Release Notes
 
@@ -16,6 +19,22 @@ Here you can learn about new features, bug fixes, breaking changes and
 known issues for each UCP version.
 You can then use [the upgrade instructions](installation/upgrade.md), to
 upgrade your installation to the latest release.
+
+## Version 1.1.4
+
+(29 Sept 2016)
+
+Note: UCP 1.1.4 supports Docker Engine 1.12 but does not use the built-in
+orchestration capabilities provided by the Docker Engine with swarm mode enabled.
+When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
+cluster using Docker Swarm v1.2.5.
+
+**Bug fixes**
+
+* Fixed an issue that prevented authentication tokens to be generated for
+organization accounts
+* Improved performance when deploying to a cluster with thousands of users
+* Increased timeouts for adding new nodes and other network operations
 
 
 ## Version 1.1.3

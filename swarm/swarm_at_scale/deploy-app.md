@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-aliases = ["/swarm/swarm_at_scale/04-deploy-app/"]
-title = "Deploy the application"
-description = "Try Swarm at scale"
-keywords = ["docker, swarm, scale, voting, application,  certificates"]
-[menu.main]
-parent="scale_swarm"
-weight=-80
-+++
-<![end-metadata]-->
+---
+aliases:
+- /swarm/swarm_at_scale/04-deploy-app/
+description: Try Swarm at scale
+keywords:
+- docker, swarm, scale, voting, application,  certificates
+menu:
+  main:
+    parent: scale_swarm
+    weight: -80
+title: Deploy the application
+---
 
 # Deploy the application
 

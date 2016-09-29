@@ -1,11 +1,13 @@
-+++
-title = "Automated Builds"
-description = "Docker Hub Automated Builds"
-keywords = ["Dockerfile, Hub, builds, trusted builds, automated builds"]
-[menu.main]
-parent="mn_pubhub"
-weight=6
-+++
+---
+description: Docker Hub Automated Builds
+keywords:
+- Dockerfile, Hub, builds, trusted builds, automated builds
+menu:
+  main:
+    parent: mn_pubhub
+    weight: 6
+title: Automated Builds
+---
 
 # Automated Builds on Docker Hub
 

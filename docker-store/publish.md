@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Submit a Product"
-description = "Submit a product for the Docker Store"
-keywords = ["Docker, docker, store, purchase images"]
-[menu.main]
-parent = "docker-store"
-+++
-<![end-metadata]-->
+---
+description: Submit a product for the Docker Store
+keywords:
+- Docker, docker, store, purchase images
+menu:
+  main:
+    parent: docker-store
+title: Submit a Product
+---
 
 # Docker Store product submissions
 

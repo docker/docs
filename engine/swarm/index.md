@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title = "Swarm mode overview"
-description = "Docker Engine swarm mode overview"
-keywords = ["docker, container, cluster, swarm"]
-[menu.main]
-identifier="swarm_overview"
-parent="engine_swarm"
-weight="1"
-+++
-<![end-metadata]-->
+---
+description: Docker Engine swarm mode overview
+keywords:
+- docker, container, cluster, swarm
+menu:
+  main:
+    identifier: swarm_overview
+    parent: engine_swarm
+    weight: "1"
+title: Swarm mode overview
+---
+
 # Swarm mode overview
 
 To use Docker Engine in swarm mode, install the Docker Engine `v1.12.0` or

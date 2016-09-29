@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/SUSE/"]
-title = "Installation on openSUSE and SUSE Linux Enterprise"
-description = "Installation instructions for Docker on openSUSE and on SUSE Linux Enterprise."
-keywords = ["openSUSE, SUSE Linux Enterprise, SUSE, SLE, docker, documentation,  installation"]
-[menu.main]
-parent = "engine_linux"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/installation/SUSE/
+description: Installation instructions for Docker on openSUSE and on SUSE Linux Enterprise.
+keywords:
+- openSUSE, SUSE Linux Enterprise, SUSE, SLE, docker, documentation,  installation
+menu:
+  main:
+    parent: engine_linux
+title: Installation on openSUSE and SUSE Linux Enterprise
+---
 
 # openSUSE and SUSE Linux Enterprise
 

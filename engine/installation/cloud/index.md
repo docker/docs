@@ -1,22 +1,21 @@
-<!--[metadata]>
-+++
-aliases = [
-  "/engine/installation/amazon/",
-  "/engine/installation/google/",
-  "/engine/installation/softlayer/",
-  "/engine/installation/azure/",
-  "/engine/installation/rackspace/",
-  "/engine/installation/joyent/"
-]
-title = "On cloud providers"
-description = "Cloud Installations"
-keywords = ["Docker install "]
-[menu.main]
-identifier = "install_cloud"
-parent="engine_install"
-weight="-60"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/installation/amazon/
+- /engine/installation/google/
+- /engine/installation/softlayer/
+- /engine/installation/azure/
+- /engine/installation/rackspace/
+- /engine/installation/joyent/
+description: Cloud Installations
+keywords:
+- 'Docker install '
+menu:
+  main:
+    identifier: install_cloud
+    parent: engine_install
+    weight: "-60"
+title: On cloud providers
+---
 
 # Install Engine in the cloud
 

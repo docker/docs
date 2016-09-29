@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/beginner/link-packet/",
-"/docker-cloud/getting-started/link-packet/"
-]
-title = "Link to Packet hosts"
-description = "Link your Packet account"
-keywords = ["Packet, link, Cloud"]
-[menu.main]
-parent="infrastructure"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/beginner/link-packet/
+- /docker-cloud/getting-started/link-packet/
+description: Link your Packet account
+keywords:
+- Packet, link, Cloud
+menu:
+  main:
+    parent: infrastructure
+title: Link to Packet hosts
+---
 
 # Link your Packet account
 

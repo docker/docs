@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Docker Cloud"
-description ="Docker Cloud"
-keywords = ["Docker, cloud"]
-notoc = true
-[menu.main]
-identifier="docker-cloud"
-+++
-<![end-metadata]-->
+---
+description: Docker Cloud
+keywords:
+- Docker, cloud
+menu:
+  main:
+    identifier: docker-cloud
+notoc: true
+title: Docker Cloud
+---
 
 # Welcome to the Docker Cloud Docs!
 

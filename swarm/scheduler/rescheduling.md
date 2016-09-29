@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Rescheduling"
-description = "Swarm rescheduling"
-keywords = ["docker, swarm, clustering, rescheduling"]
-[menu.main]
-parent="swarm_sched"
-weight=6
-+++
-<![end-metadata]-->
+---
+description: Swarm rescheduling
+keywords:
+- docker, swarm, clustering, rescheduling
+menu:
+  main:
+    parent: swarm_sched
+    weight: 6
+title: Rescheduling
+---
 
 # Swarm Rescheduling
 

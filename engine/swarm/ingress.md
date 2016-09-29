@@ -1,14 +1,19 @@
-<!--[metadata]>
-+++
-title = "Use swarm mode routing mesh"
-description = "Use the routing mesh to publish services externally to a swarm"
-keywords = ["guide", "swarm mode", "swarm", "network", "ingress", "routing mesh"]
-[menu.main]
-identifier="ingress-guide"
-parent="engine_swarm"
-weight=17
-+++
-<![end-metadata]-->
+---
+description: Use the routing mesh to publish services externally to a swarm
+keywords:
+- guide
+- swarm mode
+- swarm
+- network
+- ingress
+- routing mesh
+menu:
+  main:
+    identifier: ingress-guide
+    parent: engine_swarm
+    weight: 17
+title: Use swarm mode routing mesh
+---
 
 # Use swarm mode routing mesh
 

@@ -1,0 +1,56 @@
+{{ partial "header.html" (dict "thispage" . "errorpage" true) }}
+<section class="title_section darkblue">
+</section>
+
+<div class="">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3 col-md-2 docsidebarnav_section">
+        {{ partial "navbar.html" . }}
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-10">
+        <section class="section" id="DocumentationText">
+          <h1 style="padding-top:15px;" id="title">{{ .Title }}</h1>
+          <p style="color:#3A4E55;">The page you wanted cannot be found or is no longer available.</p>
+          <p>Can we help you find what you're looking for? Use the <a href="/index.html">sitemap to navigate</a>
+            directly or send email to <a href="mailto:docs@docker.com">docs@docker.com</a> for additional help.</p>
+
+<input type="text" id="search-box" name="q" />
+
+<span class="ds-dropdown-menu ds-with-0" style="top: 100%; z-index: 100; left: 0px; right: auto; display: block;"><div class="algolia-autocomplete"> <div class="ds-dataset-0">
+    <span class="ds-suggestions" style="display: block;">
+      <div class="ds-suggestion">
+        <div class="algolia-docsearch-suggestion algolia-docsearch-suggestion__main algolia-docsearch-suggestion__secondary " style="white-space: normal;" id="hits-container"></div>
+      </div>
+    </span>
+  </div> </div> </span>
+<div id="pagination-container"></div>
+
+
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css">
+<script src="//cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+<script async src="/search.js"></script>
+<style>
+/* bring up the content divs so users can see the URL being suggested, and click on them  */
+.algolia-autocomplete .algolia-docsearch-suggestion--content {
+    z-index: 9999;
+}
+</style>
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+                  <a class="exit-off-canvas"></a>
+                </div>
+        </div>
+
+        <div class="moby_footer">
+<i class="bar"></i>
+<i class="moby"></i>
+</div>
+
+{{ partial "footer.html" . }}

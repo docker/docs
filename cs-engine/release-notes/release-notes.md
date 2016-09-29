@@ -1,16 +1,18 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/cse-release-notes/",
-          "/docker-trusted-registry/cs-engine/release-notes/release-notes/"]
-title = "CS Engine release notes"
-description = "Commercially supported Docker Engine release notes"
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, Commercially Supported Docker Engine, release notes"]
-[menu.main]
-parent="menu_csengine_release_notes"
-identifier="csengine_release_notes"
-weight=0
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-trusted-registry/cse-release-notes/
+- /docker-trusted-registry/cs-engine/release-notes/release-notes/
+description: Commercially supported Docker Engine release notes
+keywords:
+- docker, documentation, about, technology, understanding, enterprise, hub, registry,
+  Commercially Supported Docker Engine, release notes
+menu:
+  main:
+    identifier: csengine_release_notes
+    parent: menu_csengine_release_notes
+    weight: 0
+title: CS Engine release notes
+---
 
 # Commercially supported Engine release notes
 

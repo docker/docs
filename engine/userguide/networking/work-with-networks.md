@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Work with network commands"
-description = "How to work with docker networks"
-keywords = ["commands, Usage, network, docker, cluster"]
-[menu.main]
-parent = "smn_networking"
-weight=-4
-+++
-<![end-metadata]-->
+---
+description: How to work with docker networks
+keywords:
+- commands, Usage, network, docker, cluster
+menu:
+  main:
+    parent: smn_networking
+    weight: -4
+title: Work with network commands
+---
 
 # Work with network commands
 

@@ -1,14 +1,13 @@
-<!--[metadata]>
-+++
-title = "Provision with Machine"
-description = "Provision with Machine"
-keywords = ["docker, Swarm, clustering, provision, Machine"]
-[menu.main]
-parent="workw_swarm"
-weight=5
-+++
-<![end-metadata]-->
-
+---
+description: Provision with Machine
+keywords:
+- docker, Swarm, clustering, provision, Machine
+menu:
+  main:
+    parent: workw_swarm
+    weight: 5
+title: Provision with Machine
+---
 
 # Provision a Swarm cluster with Docker Machine
 

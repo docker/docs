@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "history"
-description = "The history command description and usage"
-keywords = ["docker, image, history"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The history command description and usage
+keywords:
+- docker, image, history
+menu:
+  main:
+    parent: smn_cli
+title: history
+---
 
 # history
 

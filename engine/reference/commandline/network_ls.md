@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "network ls"
-description = "The network ls command description and usage"
-keywords = ["network, list, user-defined"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+description: The network ls command description and usage
+keywords:
+- network, list, user-defined
+menu:
+  main:
+    parent: smn_cli
+title: network ls
+---
 
 # docker network ls
 

@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/automated-build/"
-]
-title = "Automated builds"
-description = "Automated builds"
-keywords = ["automated, build, images"]
-[menu.main]
-parent="builds"
-weight=-50
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/automated-build/
+description: Automated builds
+keywords:
+- automated, build, images
+menu:
+  main:
+    parent: builds
+    weight: -50
+title: Automated builds
+---
 
 # Automated builds
 

@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Architecture"
-description = "Learn about the architecture of Docker Universal Control Plane."
-keywords = ["docker, ucp, architecture"]
-[menu.main]
-parent="mn_ucp"
-identifier="ucp_architecture"
-weight=20
-+++
-<![end-metadata]-->
+---
+description: Learn about the architecture of Docker Universal Control Plane.
+keywords:
+- docker, ucp, architecture
+menu:
+  main:
+    identifier: ucp_architecture
+    parent: mn_ucp
+    weight: 20
+title: Architecture
+---
 
 # UCP architecture
 

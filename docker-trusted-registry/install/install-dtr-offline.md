@@ -1,15 +1,15 @@
-<!--[metadata]>
-+++
-title = "Install offline"
-description = "Learn how to install Docker Trusted Registry on a machine with no internet access."
-keywords = ["docker, registry, install, offline"]
-[menu.main]
-parent="dtr-menu-install"
-identifier="dtr_install_offline"
-weight=30
-+++
-<![end-metadata]-->
-
+---
+description: Learn how to install Docker Trusted Registry on a machine with no internet
+  access.
+keywords:
+- docker, registry, install, offline
+menu:
+  main:
+    identifier: dtr_install_offline
+    parent: dtr-menu-install
+    weight: 30
+title: Install offline
+---
 
 # Install DTR offline
 

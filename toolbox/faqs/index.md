@@ -1,11 +1,10 @@
-<!--[metadata]>
-+++
-title = "FAQs"
-description = "FAQs, troubleshooting, and tips index for Toolbox installs"
-keywords = ["docker, documentation, about, technology, kitematic, gui, toolbox"]
-identifier = "toolbox_overview_faqs"
-+++
-<![end-metadata]-->
+---
+description: FAQs, troubleshooting, and tips index for Toolbox installs
+identifier: toolbox_overview_faqs
+keywords:
+- docker, documentation, about, technology, kitematic, gui, toolbox
+title: FAQs
+---
 
 # FAQs and Troubleshooting
 

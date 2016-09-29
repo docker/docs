@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Google Compute Engine"
-description = "Google Compute Engine driver for machine"
-keywords = ["machine, Google Compute Engine, driver"]
-[menu.main]
-parent="smn_machine_drivers"
-+++
-<![end-metadata]-->
+---
+description: Google Compute Engine driver for machine
+keywords:
+- machine, Google Compute Engine, driver
+menu:
+  main:
+    parent: smn_machine_drivers
+title: Google Compute Engine
+---
 
 # Google Compute Engine
 

@@ -1,14 +1,13 @@
-<!--[metadata]>
-+++
-title = "Become a Publisher"
-description = "Publish to the Docker Store"
-keywords = ["Docker, docker, store, purchase images"]
-draft = true
-[menu.main]
-parent = "docker-store"
-+++
-<![end-metadata]-->
-
+---
+description: Publish to the Docker Store
+draft: true
+keywords:
+- Docker, docker, store, purchase images
+menu:
+  main:
+    parent: docker-store
+title: Become a Publisher
+---
 
 # Become a Docker Store Publisher
 

@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [ "/docker-trusted-registry/cs-engine/"]
-title = "CS Docker Engine"
-description = "Learn more about the Commercially Supported Docker Engine."
-keywords = ["docker, engine, documentation"]
-[menu.main]
-identifier="menu_csengine"
-weight=-65
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-trusted-registry/cs-engine/
+description: Learn more about the Commercially Supported Docker Engine.
+keywords:
+- docker, engine, documentation
+menu:
+  main:
+    identifier: menu_csengine
+    weight: -65
+title: CS Docker Engine
+---
 
 # Docker CS Engine
 

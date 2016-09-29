@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Delegations for content trust"
-description = "Delegations for content trust"
-keywords = ["trust, security, delegations, keys, repository"]
-[menu.main]
-parent= "smn_content_trust"
-+++
-<![end-metadata]-->
+---
+description: Delegations for content trust
+keywords:
+- trust, security, delegations, keys, repository
+menu:
+  main:
+    parent: smn_content_trust
+title: Delegations for content trust
+---
 
 # Delegations for content trust
 

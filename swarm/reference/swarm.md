@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "swarm"
-description = "swarm command overview"
-keywords = ["Swarm, cluster, commands"]
-[menu.main]
-identifier="swarm.swarm"
-parent="smn_swarm_subcmds"
-+++
-<![end-metadata]-->
+---
+description: swarm command overview
+keywords:
+- Swarm, cluster, commands
+menu:
+  main:
+    identifier: swarm.swarm
+    parent: smn_swarm_subcmds
+title: swarm
+---
 
 # Swarm — A Docker-native clustering system
 

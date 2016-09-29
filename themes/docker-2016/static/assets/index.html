@@ -1,0 +1,501 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(e,n){return function(){o(e,[(new Date).getTime()].concat(a(arguments)),null,n)}}var o=e("handle"),i=e(2),a=e(3);"undefined"==typeof window.newrelic&&(newrelic=NREUM);var c=["setPageViewName","setCustomAttribute","finished","addToTrace","inlineHit"],u=["addPageAction"],f="api-";i(c,function(e,n){newrelic[n]=r(f+n,"api")}),i(u,function(e,n){newrelic[n]=r(f+n)}),n.exports=newrelic,newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),o("err",[e,(new Date).getTime()])}},{}],2:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],3:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(0>o?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?c(e,a,i):i()}function t(t,r,o){e&&e(t,r,o);for(var i=n(o),a=l(t),c=a.length,u=0;c>u;u++)a[u].apply(i,r);var s=f[m[t]];return s&&s.push([w,t,r,i]),i}function p(e,n){g[e]=l(e).concat(n)}function l(e){return g[e]||[]}function d(e){return s[e]=s[e]||o(t)}function v(e,n){u(e,function(e,t){n=n||"feature",m[t]=n,n in f||(f[n]=[])})}var g={},m={},w={on:p,emit:t,get:d,listeners:l,context:n,buffer:v};return w}function i(){return new r}var a="nr@context",c=e("gos"),u=e(2),f={},s={},p=n.exports=o();p.backlog=f},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!b++){var e=y.info=NREUM.info,n=s.getElementsByTagName("script")[0];if(e&&e.licenseKey&&e.applicationID&&n){u(m,function(n,t){e[n]||(e[n]=t)});var t="https"===g.split(":")[0]||e.sslForHttp;y.proto=t?"https://":"http://",c("mark",["onload",a()],null,"api");var r=s.createElement("script");r.src=y.proto+e.agent,n.parentNode.insertBefore(r,n)}}}function o(){"complete"===s.readyState&&i()}function i(){c("mark",["domContent",a()],null,"api")}function a(){return(new Date).getTime()}var c=e("handle"),u=e(2),f=window,s=f.document,p="addEventListener",l="attachEvent",d=f.XMLHttpRequest,v=d&&d.prototype;NREUM.o={ST:setTimeout,CT:clearTimeout,XHR:d,REQ:f.Request,EV:f.Event,PR:f.Promise,MO:f.MutationObserver},e(1);var g=""+location,m={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-952.min.js"},w=d&&v&&v[p]&&!/CriOS/.test(navigator.userAgent),y=n.exports={offset:a(),origin:g,features:{},xhrWrappable:w};s[p]?(s[p]("DOMContentLoaded",i,!1),f[p]("load",r,!1)):(s[l]("onreadystatechange",o),f[l]("onload",r)),c("mark",["firstbyte",a()],null,"api");var b=0},{}]},{},["loader"]);</script>
+<meta name="description" content="Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications, whether on laptops, data center VMs, or the cloud." />
+<meta name="keywords" content="docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization" />
+<link rel="canonical" href="https://www.docker.com/" />
+<link rel="shortlink" href="https://www.docker.com/" />
+<meta property="og:site_name" content="Docker" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.docker.com/" />
+<meta property="og:title" content="Docker" />
+<meta property="og:image" content="http://www.docker.com/sites/default/files/social/docker-facebook-share.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@docker" />
+<meta name="twitter:url" content="https://www.docker.com/" />
+<meta name="twitter:title" content="Docker" />
+<meta name="twitter:image:src" content="http://www.docker.com/sites/default/files/social/docker-twitter-share.png" />
+<meta name="google-site-verification" content="T1CoYbGyDDeYDD-XTNkxf14WmkXu9xHmOIZ_JPHwPbk" />
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Docker - Build, Ship, and Run Any App, Anywhere</title>
+	<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+	<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/favicons/manifest.json">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+			<style>
+.is_not_retina .dockercon16 .retina{
+	display:none!important;
+}
+.is_retina .dockercon16 .image_simple{
+	display:none!important;
+}
+	</style>
+	<link rel="stylesheet" href="/sites/all/themes/docker/assets/css/allcss.css" />
+	<link rel="stylesheet" href="/sites/all/themes/docker/assets/css/app2.css" />
+	<link rel="stylesheet" href="/sites/all/themes/docker/assets/css/responsive.css" />
+	<link rel="stylesheet" href="/sites/all/themes/docker/assets/css/p2p.css" />
+	<link rel="stylesheet" href="/sites/all/themes/docker/assets/css/mobile_responsive.css" />
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		<script type="text/javascript" src="//cdn.captora.com/js/track.js"></script>
+	<script>
+	var _prum = [['id', '56f7edaeabe53d203e357b1a'],
+				 ['mark', 'firstbyte', (new Date()).getTime()]];
+	(function() {
+		var s = document.getElementsByTagName('script')[0]
+		  , p = document.createElement('script');
+		p.async = 'async';
+		p.src = '//rum-static.pingdom.net/prum.min.js';
+		s.parentNode.insertBefore(p, s);
+	})();
+	</script>
+</head>
+<body class="html front not-logged-in no-sidebars page-node page-node- page-node-1 node-type-front-page path-docker" ng-app="Docker" ng-controller="DockerController">
+		<div class="off-canvas-wrap" data-offcanvas>
+		<div class="inner-wrap">
+			<a class="left-off-canvas-toggle" href="#">
+	<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve">
+		<path fill="#fff" d="M30.583,9.328c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+		c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,7.966,30.583,8.576,30.583,9.328L30.583,9.328z" />
+		<path fill="#fff" d="M30.583,17.09c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+		c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,15.728,30.583,16.338,30.583,17.09L30.583,17.09z" />
+		<path fill="#fff" d="M30.583,24.387c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
+		c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,23.025,30.583,23.635,30.583,24.387L30.583,24.387z" />
+	</svg>
+</a>
+<header class="main-header">
+	<div class="top-right-bg"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-2">
+				<a href="/"><img class="logo" src="/sites/all/themes/docker/assets/images/logo-docker-main.svg"></a>
+				<a href="/"><img class="logo_safari" src="/sites/all/themes/docker/assets/images/logo-docker-main.png"></a>
+			</div>
+			<div class="col-xs-10">
+				<ul class="nav-global"><li class="first leaf menu-mlid-603"><a href="https://docs.docker.com/" target="_blank">Docs</a></li>
+<li class="leaf menu-mlid-1997"><a href="/community/events">Events</a></li>
+<li class="leaf menu-mlid-1998"><a href="/docker-community">Community</a></li>
+<li class="leaf menu-mlid-1999"><a href="/docker-support-services">Support</a></li>
+<li class="leaf menu-mlid-402"><a href="https://training.docker.com/" target="_blank">Training</a></li>
+<li class="leaf menu-mlid-2000"><a href="/partners/partner-program">Partners</a></li>
+<li class="leaf menu-mlid-602"><a href="http://blog.docker.com/" target="_blank">Blog</a></li>
+<li class="leaf menu-mlid-2001"><a href="https://cloud.docker.com/login/" target="_blank">Log-In</a></li>
+<li class="last leaf menu-mlid-2002"><a href="https://cloud.docker.com/" target="_blank">Sign-up</a></li>
+</ul><ul class="nav-main"><li class="first leaf menu-mlid-398"><a href="/what-docker">What is Docker?</a></li>
+<li class="expanded menu-mlid-1059 has-submenu"><a href="/enterprise">Solutions</a><ul class="nav-main"><li class="first leaf menu-mlid-1064"><a href="/enterprise">Solutions</a></li>
+<li class="leaf menu-mlid-2365"><a href="/enterprise">Overview</a></li>
+<li class="collapsed menu-mlid-993"><a href="/use-cases">Use Cases</a></li>
+<li class="leaf menu-mlid-1034"><a href="/customers">Customers</a></li>
+<li class="leaf menu-mlid-1587"><a href="/industry-government">For Government</a></li>
+<li class="last collapsed menu-mlid-985"><a href="/products/resources">Resources</a></li>
+</ul></li>
+<li class="leaf menu-mlid-954"><a href="/products/overview">Get Docker</a></li>
+<li class="leaf menu-mlid-1055"><a href="/pricing">Pricing</a></li>
+<li class="leaf menu-mlid-2005 double-navstyle secondlast"><a href="/technologies/overview">Open Source</a></li>
+<li class="last expanded menu-mlid-397 has-submenu"><a href="/company">Company</a><ul class="nav-main"><li class="first leaf menu-mlid-698"><a href="/company">Company</a></li>
+<li class="leaf menu-mlid-2366"><a href="/company">Overview</a></li>
+<li class="leaf menu-mlid-622"><a href="/careers">Careers</a></li>
+<li class="last leaf menu-mlid-1086"><a href="/company/news-and-press">News &amp; Press</a></li>
+</ul></li>
+</ul>			</div>
+		</div>
+	</div>
+</header>			<aside class="left-off-canvas-menu">
+	<ul class="off-canvas-list"><li class="first leaf menu-mlid-398"><a href="/what-docker">What is Docker?</a></li>
+<li class="expanded menu-mlid-1059 has-submenu"><a href="/enterprise">Solutions</a><ul class="left-submenu"><li class="back"><a href="#">Back</a></li><li class="first leaf menu-mlid-1064"><a href="/enterprise">Solutions</a></li>
+<li class="leaf menu-mlid-2365"><a href="/enterprise">Overview</a></li>
+<li class="collapsed menu-mlid-993"><a href="/use-cases">Use Cases</a></li>
+<li class="leaf menu-mlid-1034"><a href="/customers">Customers</a></li>
+<li class="leaf menu-mlid-1587"><a href="/industry-government">For Government</a></li>
+<li class="last collapsed menu-mlid-985"><a href="/products/resources">Resources</a></li>
+</ul></li>
+<li class="leaf menu-mlid-954"><a href="/products/overview">Get Docker</a></li>
+<li class="leaf menu-mlid-1055"><a href="/pricing">Pricing</a></li>
+<li class="leaf menu-mlid-2005 double-navstyle secondlast"><a href="/technologies/overview">Open Source</a></li>
+<li class="last expanded menu-mlid-397 has-submenu"><a href="/company">Company</a><ul class="left-submenu"><li class="back"><a href="#">Back</a></li><li class="first leaf menu-mlid-698"><a href="/company">Company</a></li>
+<li class="leaf menu-mlid-2366"><a href="/company">Overview</a></li>
+<li class="leaf menu-mlid-622"><a href="/careers">Careers</a></li>
+<li class="last leaf menu-mlid-1086"><a href="/company/news-and-press">News &amp; Press</a></li>
+</ul></li>
+</ul><ul class="nav-global-off-canvas"><li class="first leaf menu-mlid-603"><a href="https://docs.docker.com/" target="_blank">Docs</a></li>
+<li class="leaf menu-mlid-1997"><a href="/community/events">Events</a></li>
+<li class="leaf menu-mlid-1998"><a href="/docker-community">Community</a></li>
+<li class="leaf menu-mlid-1999"><a href="/docker-support-services">Support</a></li>
+<li class="leaf menu-mlid-402"><a href="https://training.docker.com/" target="_blank">Training</a></li>
+<li class="leaf menu-mlid-2000"><a href="/partners/partner-program">Partners</a></li>
+<li class="leaf menu-mlid-602"><a href="http://blog.docker.com/" target="_blank">Blog</a></li>
+<li class="leaf menu-mlid-2001"><a href="https://cloud.docker.com/login/" target="_blank">Log-In</a></li>
+<li class="last leaf menu-mlid-2002"><a href="https://cloud.docker.com/" target="_blank">Sign-up</a></li>
+</ul></aside>
+						<div class="dockercon16">
+ 
+<section class="title_section darkblue">
+<div class="dockercon16_padding"></div>
+  <div class="container">
+  	<div class="row">          
+						<div class="col-xs-12 col-sm-6 col-md-6 textalign-left"> 
+			<h1>Build, Ship, Run</h1>
+			<p>Docker is the world’s leading software containerization platform</p>
+															<a class="button orange-btn" target="_self" href="/products/docker">Get Started with Docker</a>
+							</div>
+		<div class="col-xs-12 col-sm-6 col-md-6">
+			<img class="moby" src="https://www.docker.com/sites/default/files/docker_banner_image_12312.svg" alt="Build, Ship, Run">
+		</div>
+				</div>
+	</div>
+	<div class="dockercon_registation_section">
+	  <div class="container">
+		<img class="dcon_icon" src="https://www.docker.com/sites/default/files/dcon_icon_12312.png" alt="">		<img class="dcon_logo" src="https://www.docker.com/sites/default/files/doc_icon.png" alt="">										<span class="cross-btn"><a class="video" rel="video" href="https://www.ustream.tv/embed/recorded/88610090?html5ui&autoplay=true&showtitle=false"><span>Watch Video <i></i></span></a></span>
+														  </div>
+	</div> 
+</section>
+<section class="customer_and_news_section section GenericDev bluebackground">
+	<div class="container">
+						<ul class="items widthcol3 media">
+					
+						<li>
+							<div class="media_image">
+								<img src="https://www.docker.com/sites/default/files/Survey-%402X-2.png" alt="DOWNLOAD THE DOCKER SURVEY 2016">
+							</div>
+							<div class="media_content">
+								<div data-mh="mh_customer_and_news_can">
+									<h3>DOWNLOAD THE DOCKER SURVEY 2016</h3>									<p>Learn how the modern software supply chain is evolving, and how Docker is driving this change.</p>								</div>
+																																	<a class="button white-btn" target="_blank" href="/survey-2016">Get Your Copy Now</a>
+																														</div>
+						</li>
+					
+						<li>
+							<div class="media_image">
+								<img src="https://www.docker.com/sites/default/files/Data-Center-%402X-1.png" alt="CONTAINER MANAGEMENT WITH DOCKER DATA CENTER">
+							</div>
+							<div class="media_content">
+								<div data-mh="mh_customer_and_news_can">
+									<h3>CONTAINER MANAGEMENT WITH DOCKER DATA CENTER</h3>									<p>Docker Datacenter brings container orchestration and management to the enterprise.</p>								</div>
+																																	<a class="button white-btn" target="_self" href="https://store.docker.com/bundles/docker-datacenter/purchase?plan=free-trial">Sign Up for a 30-day Trial</a>
+																														</div>
+						</li>
+					
+						<li>
+							<div class="media_image">
+								<img src="https://www.docker.com/sites/default/files/Store-%402X-1_7.png" alt="GET TRUSTED CONTAINERS from DOCKER STORE">
+							</div>
+							<div class="media_content">
+								<div data-mh="mh_customer_and_news_can">
+									<h3>GET TRUSTED CONTAINERS from DOCKER STORE</h3>									<p>Get Trusted and Enterprise ready Docker Containers created by Docker Verified Publishers, from the Docker Store.</p>								</div>
+																																	<a class="button white-btn" target="_self" href="https://store.docker.com/beta">Sign up for Beta</a>
+																														</div>
+						</li>
+								</ul>
+			 
+  </div>
+</section>
+<section id="livedockercon" class="livedockercon_section bgblue3 section GenericDev bluebackground">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-7 col-md-8 left"> 
+				<h2>Dockercon 2016</h2>
+<div class="video-wrapper">
+	<div class="video_container">
+		<img class="" src="/sites/all/themes/docker/assets/images/livedocker_video_image3.png" class="" alt="">
+		<a href="" class="play_btn video_popup">play</a>	 
+	</div>
+<iframe class="video-iframe" id="docker-con-video-iframe" src="https://www.ustream.tv/embed/recorded/88610090?html5ui&autoplay=false&showtitle=false" style="border: 0 none transparent;"  webkitallowfullscreen allowfullscreen frameborder="no" width="718" height="403"></iframe>
+
+</div>
+<a class="keynote" href="" target="_blank">Keynote Session - Day 1</a>			</div>
+			<div class="col-xs-12 col-sm-5 col-md-4 right"> 
+				<a class="button darkblue-btn" target="_blank" href=" https://download.docker.com/mac/beta/Docker.dmg"><i class="livedockercon_apple"></i>Get Docker for MAC</a>
+<span>REQUIRES YOSEMITE 10.10</span>
+<a class="button darkblue-btn" target="_blank" href="https://download.docker.com/win/beta/InstallDocker.msi"><i class="livedockercon_win"></i>Get Docker for WINDOWS</a>
+<span>REQUIRES WINDOWS 10 64bit</span>			</div>
+		</div>
+	</div>
+</section>
+
+<section class="the_docker_solution_section section GenericDev whitebackground">
+	<div class="container">
+		<h2>THE DOCKER SOLUTION</h2>		<p class="max-width500">Docker enables developers and IT admins to build, ship and run any application, anywhere.  </p>                 <img class="image_simple" style="display: none;" src="https://www.docker.com/sites/default/files/Home_1_Solution.png" alt="">
+                         <img class="retina" style="display: none;" src="https://www.docker.com/sites/default/files/Home_1_Solution_%402X.png" alt="">
+        
+											<a class="button darkblue-btn" target="_blank" href="https://store.docker.com/bundles/docker-datacenter/purchase?plan=free-trial">Get Started On-Premises</a>
+									<a class="button darkblue-btn" target="_blank" href="https://cloud.docker.com">Get Started In-Cloud</a>
+							    </div>
+ </section>
+<section id="docker-containers" class="docker_solution_section bgblue3 section GenericDev bluebackground">
+ <div class="container">
+	<h2>Why Docker?</h2>	<p class="max-width500">Docker provides a common framework for developer and IT teams to collaborate on applications. With a clear separation of concerns and robust tooling, organizations are able to innovate faster with greater control.</p>				<ul class="items widthcol3 media">
+				
+					<li>
+						<div class="media_image">
+							<img src="https://www.docker.com/sites/default/files/Agility_icon.png" alt="Agility">
+						</div>
+						<div class="media_content">
+							<h3>Agility</h3>							<p>Developers have the freedom to define environments, and the ability to create and deploy apps faster and easier. IT ops have the flexibility to quickly respond to change.</p>						</div>
+					</li>
+				
+					<li>
+						<div class="media_image">
+							<img src="https://www.docker.com/sites/default/files/Control_icon.png" alt="Control">
+						</div>
+						<div class="media_content">
+							<h3>Control</h3>							<p>Developers own all the code from infrastructure to app.  IT ops have the manageability to standardize, secure, and scale the operating environment.</p>						</div>
+					</li>
+				
+					<li>
+						<div class="media_image">
+							<img src="https://www.docker.com/sites/default/files/Portability_icon.png" alt="Portability">
+						</div>
+						<div class="media_content">
+							<h3>Portability</h3>							<p>Docker gives you choice without complexity, from a laptop to a team, to private infrastructure and public cloud providers.</p>						</div>
+					</li>
+						</ul>
+												<a class="button white-btn" target="_self" href="/use-cases">Learn About Common Use Cases for Docker</a>
+							  </div>
+</section>
+<section class="docker_use_cases_home_section bgblue4 section GenericDev bluebackground">
+	<div class="container">
+	<h2>Docker Use Cases</h2>						<ul class="items widthcol4 media">
+					
+						<li>
+							<div class="media_image">
+								<img src="https://www.docker.com/sites/default/files/CI-CD.png" alt="CI/CD">
+							</div>
+							<div class="media_content">
+								<div data-mh="mh_use_cases_home_can">
+									<h3>CI/CD</h3>									<p>Enable developers to develop and test applications more quickly and within any environment</p>								</div>
+																																	<a class="button darkblue-btn" target="_self" href="/use-cases/continuous-integration">Learn More</a>
+																														</div>
+						</li>
+					
+						<li>
+							<div class="media_image">
+								<img src="https://www.docker.com/sites/default/files/DevOps.png" alt="DevOps">
+							</div>
+							<div class="media_content">
+								<div data-mh="mh_use_cases_home_can">
+									<h3>DevOps</h3>									<p>Break down barriers between Dev and Ops teams to improve the app development process</p>								</div>
+																																	<a class="button darkblue-btn" target="_self" href="/use-cases/devops">Learn More</a>
+																														</div>
+						</li>
+					
+						<li>
+							<div class="media_image">
+								<img src="https://www.docker.com/sites/default/files/BigData.png" alt="Big Data">
+							</div>
+							<div class="media_content">
+								<div data-mh="mh_use_cases_home_can">
+									<h3>Big Data</h3>									<p>Empower your enterprise to leverage big data analytics</p>								</div>
+																																	<a class="button darkblue-btn" target="_self" href="/use-cases/big-data">Learn More</a>
+																														</div>
+						</li>
+					
+						<li>
+							<div class="media_image">
+								<img src="https://www.docker.com/sites/default/files/Optimization.png" alt="Infrastructure Optimization">
+							</div>
+							<div class="media_content">
+								<div data-mh="mh_use_cases_home_can">
+									<h3>Infrastructure Optimization</h3>									<p>Decrease infrastructure costs while increasing its efficiency</p>								</div>
+																																	<a class="button darkblue-btn" target="_self" href="/use-cases/infrastructure-optimization">Learn More</a>
+																														</div>
+						</li>
+								</ul>
+			  </div>
+</section>
+	<section class="bottom_cta_section gary section GenericDev bgblue5 bluebackground">
+	<div class="container">
+																	<a class="button orange-btn  " target="_self" href="https://www.docker.com/products/docker">Get Started with Docker</a>
+					  </div>
+</section>
+</div>			<a class="exit-off-canvas"></a>
+		</div>
+	</div>
+
+	<div class="moby_footer">
+<i class="moby"></i>
+</div>
+<footer class="main_footer">
+	<div class="container">
+		<div class="top_footer">
+			<div class="row">
+				<div class="col-xs-12 col-sm-5 col-md-5 col-sm-push-3 col-md-push-3">
+					<h6>Connect</h6>
+					<p>Subscribe to our newsletter</p>
+					<div class=" newsletter"> 
+						<script src="//app-sj05.marketo.com/js/forms2/js/forms2.min.js"></script>
+						<form id="mktoForm_1038"></form>
+						<script>
+							MktoForms2.loadForm("//app-sj05.marketo.com", "929-FJL-178", 1038, function(form) {
+								form.onSuccess(function(values, followUpUrl) {
+									location.href = "/thank-you-subscribing-docker-newsletter";
+									return false;
+								});
+							});
+							MktoForms2.whenReady(function(form){
+							/*	$('#mktoForm_1038 #Email').attr('placeholder', 'Enter your email'); */
+							});
+						</script> 
+					</div>
+					<ul class="social-icons">
+						<li class="facebook"><a target="_blank" href="https://www.facebook.com/docker.run">facebook</a></li>
+						<li class="google"><a target="_blank" href="https://plus.google.com/u/0/communities/108146856671494713993">google-plus</a></li>
+						<li class="github"><a target="_blank" href="https://github.com/docker/docker">github</a></li>
+						<li class="linkedin"><a target="_blank" href="https://www.linkedin.com/company/docker">linkedin</a></li>
+						<li class="youtube"><a target="_blank" href="http://www.youtube.com/user/dockerrun">youtube</a></li>
+						<li class="reddit"><a target="_blank" href="http://www.reddit.com/r/docker">reddit</a></li>
+						<li class="twitter"><a target="_blank" href="http://twitter.com/docker">twitter</a></li>
+						<li class="slideshare"><a target="_blank" href="http://www.slideshare.net/docker">slideshare</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-6 col-sm-3 col-md-3 col-sm-pull-5 col-md-pull-5 sm-margin-top-40">
+				<h6>Docker</h6>
+					<ul class="menu"><li class="first leaf"><a href="/products/overview">Get Started</a></li>
+<li class="leaf"><a href="https://docs.docker.com/" target="_blank">Docs</a></li>
+<li class="leaf"><a href="http://blog.docker.com/" target="_blank">Blog</a></li>
+<li class="leaf"><a href="https://training.docker.com/" target="_blank">Training</a></li>
+<li class="leaf"><a href="https://goto.docker.com/contact-us.html">Contact Sales</a></li>
+<li class="last leaf"><a href="/open-source">Open Source</a></li>
+</ul>				</div>
+				<div class="col-xs-6 col-sm-4 col-md-4 sm-margin-top-40">
+					<h6>Related Links</h6>
+					<!--8c60a82e716c2bbe785434e072d7ff1b--> <ul id="cp_links">    <li><a href="https://www.docker.com/cp/container-management-deployment">Container Management Deployment</a></li>    <li><a href="https://www.docker.com/cp/docker-and-aws">Docker And Aws</a></li>    <li><a href="https://www.docker.com/cp/container-management-orchestration">Container Management Orchestration</a></li>    <li><a href="https://www.docker.com/cp/docker-and-kubernetes">Docker And Kubernetes</a></li>    <li><a href="https://www.docker.com/cp/container-orchestration-engines">Container Orchestration Engines</a></li>         </ul>					<div id="block-block-5" class="block block-block">
+				<script>
+<!--//--><![CDATA[// ><!--
+
+var   BuyButtonURL_0 = 'https://hub.docker.com'
+,	BuyButtonURL_1 = 'https://hub.docker.com/account/billing-plans/create-subscription/?plan=index_personal_micro'
+,	BuyButtonURL_2 = 'https://hub.docker.com/account/billing-plans/create-subscription/?plan=index_personal_small'
+,	BuyButtonURL_3 = 'https://hub.docker.com/account/billing-plans/create-subscription/?plan=index_personal_medium'
+,	BuyButtonURL_4 = 'https://hub.docker.com/account/billing-plans/create-subscription/?plan=index_personal_large'
+,	BuyButtonURL_5 = 'https://hub.docker.com/account/billing-plans/create-subscription/?plan=index_personal_xlarge'
+,	BuyButtonURL_6 = 'https://hub.docker.com/account/billing-plans/create-subscription/?plan=index_personal_xxlarge'
+,	BuyButtonURL_cloud_starter = 'https://hub.docker.com/enterprise/cloud-starter/'
+,	BuyButtonURL_inquiry = 'http://goto.docker.com/sales-inquiry.html'
+,	buybuttontxt_signup = 'Sign Up'
+,	BuyButtontxt_buy = 'Buy'
+,	buybuttontxt_quote = 'Request Quote'
+,	RepoPricing_free = '<span>Free'
+,	RepoPricing_CriticalSupport = 'Call toll free at 888-214-4258, or'
+,	PricingInfo_Text = ' Private Repos & Parallel Builds<li>Community Hub Support'
+,	PricingInfo_freeText = ' Private Repo & Parallel Build<li>Community Hub Support'
+,	PricingInfo_CommercialSupportText = ' Private Repos & Parallel Builds<li>Up to 10 Docker Engines<li>Email Support'
+,	PricingInfo_CriticalSupportText = ' Private Repos & Parallel Builds<li>Starting at 10 Docker Engines<li>Mon-Fri Same Business Day <br>or 24/7 Critical Support';
+
+
+//--><!]]>
+</script><!--[if IE]>
+<style>
+hr.moby::after {
+    background: url("../images/moby-tiny.png") no-repeat;
+}
+</style>
+<![endif]--><style>
+<!--/*--><![CDATA[/* ><!--*/
+
+
+
+
+/*--><!]]>*/
+</style></div><div id="block-block-1" class="block block-block">
+				<!-- Ethnio High Traffic Activation Code -->
+<script type="text/javascript">
+<!--//--><![CDATA[// ><!--
+if(Math.floor(Math.random()*4)==0) document.write('<script type=\"text/javascript\" language=\"javascript\" src=\"//ethn.io/71802.js\" async=\"true\" charset=\"utf-8\"><\/script>');
+//--><!]]>
+</script></div><div id="block-block-13" class="block block-block">
+				<style>
+<!--/*--><![CDATA[/* ><!--*/
+
+.node-type-front-page .dockercon16 section.title_section.darkblue a.button{
+    margin-left: 0;
+}
+section.livedockercon_section.section .right a.button.darkblue-btn {
+    max-width: 100%;
+}
+.sidebarnav_section ul {
+    display: block;
+}
+@media (max-width: 767px) {
+div.dockercon_registation_section .cross-btn {
+    width: inherit;
+}
+section.title_section.darkblue img {
+    max-height: 250px;
+}
+.dockercon16 section.title_section .textalign-left a.button, .dockercon16 section.title_section .textalign-left a.button+a.button {
+    margin: 20px 0;
+}
+}
+
+/*--><!]]>*/
+</style></div>				</div>
+			</div>
+		</div>
+		<div class="bottom_footer">
+			<div class="footer-nav">
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-5 col-md-push-7">
+		<nav class="primary-footer-sub-nav">
+			<ul class="menu"><li class="first leaf"><a href="/products/docker-hub">Hub</a></li>
+<li class="leaf"><a href="http://www.cafepress.com/docker/">Swag</a></li>
+<li class="leaf"><a href="http://status.docker.com/">Status</a></li>
+<li class="leaf"><a href="/docker-security">Security</a></li>
+<li class="leaf"><a href="/legal">Legal</a></li>
+<li class="last leaf"><a href="https://www.docker.com/company/contact">Contact</a></li>
+</ul>		</nav>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-7 col-md-pull-5">
+		<p>
+		Build, Ship, Run. An open platform for distributed applications for developers and sysadmins		</p> 
+	</div>
+</div>
+			</div>
+			<div class="footer-copyright">
+				<p class="copyright">
+					Copyright © 2016 Docker Inc. All rights reserved.				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+		<script src="/sites/all/themes/docker/assets/js/alljs.js"></script>
+	<script async src="/sites/all/themes/docker/assets/js/app.js"></script>
+		<!-- Google Tag Manager --> 
+	<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PSVHG8" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-PSVHG8');</script>
+	<!-- End Google Tag Manager -->
+	<script src="//cdn.optimizely.com/js/2793990448.js"></script>
+	<script>
+	(function($) {
+$(".livedockercon_section .video_container a.play_btn").click(function() {
+	console.log('a');
+  $(".video_container").animate({
+    opacity: "0"
+  }, 1000, "linear", function() {
+	$(this).css('z-index','0');
+  });
+  $("#docker-con-video-iframe").show("fast", function() {
+	  var getSRC =  $(this).attr('src');
+	  var newSRC = getSRC.replace("autoplay=false", "autoplay=true");
+    $(this).attr('src', newSRC).animate({ opacity: "1" }, 1000);
+  });
+});
+$(window).load(function() {
+/*  $('.pricing-tables > li.standard').css({ transform: "scale(1.05)" }); */
+});
+	})(jQuery, document, window);
+	</script>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"1ceb24fd1c","applicationID":"9142893","transactionName":"YVVaZRcCXRVTAUALWlgfeVIRClwIHQxbBlBpQFlWADxFD1cV","queueTime":0,"applicationTime":1170,"atts":"TRJZE18YThs=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>

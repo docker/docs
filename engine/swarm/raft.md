@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Raft consensus in swarm mode"
-description = "Raft consensus algorithm in swarm mode"
-keywords = ["docker, container, cluster, swarm, raft"]
-[menu.main]
-identifier="raft"
-parent="engine_swarm"
-weight="21"
-+++
-<![end-metadata]-->
+---
+description: Raft consensus algorithm in swarm mode
+keywords:
+- docker, container, cluster, swarm, raft
+menu:
+  main:
+    identifier: raft
+    parent: engine_swarm
+    weight: "21"
+title: Raft consensus in swarm mode
+---
 
 ## Raft consensus algorithm
 

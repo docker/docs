@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "IBM Softlayer"
-description = "IBM Softlayer driver for machine"
-keywords = ["machine, IBM Softlayer, driver"]
-[menu.main]
-parent="smn_machine_drivers"
-+++
-<![end-metadata]-->
+---
+description: IBM Softlayer driver for machine
+keywords:
+- machine, IBM Softlayer, driver
+menu:
+  main:
+    parent: smn_machine_drivers
+title: IBM Softlayer
+---
 
 # IBM Softlayer
 

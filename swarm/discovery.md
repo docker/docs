@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Discovery"
-description = "Swarm discovery"
-keywords = ["docker, swarm, clustering,  discovery"]
-[menu.main]
-parent="workw_swarm"
-weight=4
-+++
-<![end-metadata]-->
+---
+description: Swarm discovery
+keywords:
+- docker, swarm, clustering,  discovery
+menu:
+  main:
+    parent: workw_swarm
+    weight: 4
+title: Discovery
+---
 
 # Docker Swarm Discovery
 

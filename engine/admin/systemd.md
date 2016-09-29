@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/articles/systemd/"]
-title = "Control and configure Docker with systemd"
-description = "Controlling and configuring Docker using systemd"
-keywords = ["docker, daemon, systemd,  configuration"]
-[menu.main]
-parent = "engine_admin"
-weight="7"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/articles/systemd/
+description: Controlling and configuring Docker using systemd
+keywords:
+- docker, daemon, systemd,  configuration
+menu:
+  main:
+    parent: engine_admin
+    weight: "7"
+title: Control and configure Docker with systemd
+---
 
 # Control and configure Docker with systemd
 

@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-  "/windows/troubleshoot/"
-]
-title = "Logs and Troubleshooting"
-description = "Troubleshooting, logs, and known issues"
-keywords = ["windows, troubleshooting, logs, issues"]
-[menu.main]
-identifier="docker-windows-troubleshoot"
-parent="pinata_win_menu"
-weight = 3
-+++
-<![end-metadata]-->
+---
+aliases:
+- /windows/troubleshoot/
+description: Troubleshooting, logs, and known issues
+keywords:
+- windows, troubleshooting, logs, issues
+menu:
+  main:
+    identifier: docker-windows-troubleshoot
+    parent: pinata_win_menu
+    weight: 3
+title: Logs and Troubleshooting
+---
 
 #  Logs and Troubleshooting
 

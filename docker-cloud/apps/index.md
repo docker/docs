@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Applications in Docker Cloud"
-description = "Manage your Docker Cloud Applications"
-keywords = ["applications, reference, Cloud"]
-[menu.main]
-parent="apps"
-weight=-99
-+++
-<![end-metadata]-->
+---
+description: Manage your Docker Cloud Applications
+keywords:
+- applications, reference, Cloud
+menu:
+  main:
+    parent: apps
+    weight: -99
+title: Applications in Docker Cloud
+---
 
 # Applications in Docker Cloud
 

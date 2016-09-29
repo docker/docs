@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Automation with content trust"
-description = "Automating content push pulls with trust"
-keywords = ["trust, security, docker,  documentation, automation"]
-[menu.main]
-parent= "smn_content_trust"
-+++
-<![end-metadata]-->
+---
+description: Automating content push pulls with trust
+keywords:
+- trust, security, docker,  documentation, automation
+menu:
+  main:
+    parent: smn_content_trust
+title: Automation with content trust
+---
 
 # Automation with content trust
 

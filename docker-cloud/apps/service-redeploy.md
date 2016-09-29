@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/service-redeploy/"
-]
-title = "Redeploy running services"
-description = "Redeploy running services"
-keywords = ["redeploy, running, services"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/service-redeploy/
+description: Redeploy running services
+keywords:
+- redeploy, running, services
+menu:
+  main:
+    parent: apps
+title: Redeploy running services
+---
 
 # Redeploy a running service
 

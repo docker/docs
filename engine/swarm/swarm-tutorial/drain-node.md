@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Drain a node"
-description = "Drain nodes on the swarm"
-keywords = ["tutorial, cluster management, swarm, service, drain"]
-[menu.main]
-identifier="swarm-tutorial-drain-node"
-parent="swarm-tutorial"
-weight=21
-+++
-<![end-metadata]-->
+---
+description: Drain nodes on the swarm
+keywords:
+- tutorial, cluster management, swarm, service, drain
+menu:
+  main:
+    identifier: swarm-tutorial-drain-node
+    parent: swarm-tutorial
+    weight: 21
+title: Drain a node
+---
 
 # Drain a node on the swarm
 

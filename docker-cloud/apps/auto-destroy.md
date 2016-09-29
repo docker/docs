@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-title = "Automatic container destroy"
-aliases = [
-"/docker-cloud/feature-reference/auto-destroy/"
-]
-description = "Autodestroy"
-keywords = ["Autodestroy, service, terminate, container"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/auto-destroy/
+description: Autodestroy
+keywords:
+- Autodestroy, service, terminate, container
+menu:
+  main:
+    parent: apps
+title: Automatic container destroy
+---
 
 # Autodestroy
 

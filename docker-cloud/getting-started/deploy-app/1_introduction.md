@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/python/1_introduction/",
-"/docker-cloud/getting-started/golang/1_introduction/"
-]
-title = "Introduction to Deploying an app in Docker Cloud"
-description = "Deploy an app to Docker Cloud"
-keywords = ["deploy, Python, application"]
-[menu.main]
-parent="deploy-app"
-weight=-90
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/python/1_introduction/
+- /docker-cloud/getting-started/golang/1_introduction/
+description: Deploy an app to Docker Cloud
+keywords:
+- deploy, Python, application
+menu:
+  main:
+    parent: deploy-app
+    weight: -90
+title: Introduction to Deploying an app in Docker Cloud
+---
 
 # Introduction and tutorial prerequisites
 

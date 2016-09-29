@@ -1,15 +1,15 @@
-<!--[metadata]>
-+++
-title = "Learn by example"
-description = "Examples of cloud installs"
-keywords = ["docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale"]
-[menu.main]
-parent="workw_machine"
-identifier="cloud_examples"
-weight="-50"
-+++
-<![end-metadata]-->
-
+---
+description: Examples of cloud installs
+keywords:
+- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer,
+  virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
+menu:
+  main:
+    identifier: cloud_examples
+    parent: workw_machine
+    weight: "-50"
+title: Learn by example
+---
 
 # Learn by example
 

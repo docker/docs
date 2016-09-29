@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Add nodes to the swarm"
-description = "Add nodes to the swarm"
-keywords = ["tutorial, cluster management, swarm"]
-[menu.main]
-identifier="add-nodes"
-parent="swarm-tutorial"
-weight=13
-+++
-<![end-metadata]-->
+---
+description: Add nodes to the swarm
+keywords:
+- tutorial, cluster management, swarm
+menu:
+  main:
+    identifier: add-nodes
+    parent: swarm-tutorial
+    weight: 13
+title: Add nodes to the swarm
+---
 
 # Add nodes to the swarm
 

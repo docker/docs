@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "dumpcerts"
-[menu.main]
-description = "Docker Trusted Registry dumpcerts command reference."
-keywords = ["docker, registry, reference, dumpcerts"]
-parent="dtr_menu_reference"
-identifier="dtr_reference_dumpcerts"
-+++
-<![end-metadata]-->
+---
+menu:
+  main:
+    description: Docker Trusted Registry dumpcerts command reference.
+    identifier: dtr_reference_dumpcerts
+    keywords:
+    - docker, registry, reference, dumpcerts
+    parent: dtr_menu_reference
+title: dumpcerts
+---
 
 # docker/dtr dumpcerts
 

@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Dockerizing a Redis service"
-description = "Installing and running a redis service"
-keywords = ["docker, example, package installation, networking,  redis"]
-[menu.main]
-parent = "engine_dockerize"
-+++
-<![end-metadata]-->
+---
+description: Installing and running a redis service
+keywords:
+- docker, example, package installation, networking,  redis
+menu:
+  main:
+    parent: engine_dockerize
+title: Dockerizing a Redis service
+---
 
 # Dockerizing a Redis service
 

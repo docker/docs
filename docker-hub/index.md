@@ -1,13 +1,15 @@
-+++
-title = "Overview of Docker Hub"
-description = "Docker Hub overview"
-keywords = ["Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, accounts, organizations, repositories, groups,  teams"]
-aliases = "/docker-hub/overview/"
-[menu.main]
-parent="mn_pubhub"
-weight=-99
-
-+++
+---
+aliases: /docker-hub/overview/
+description: Docker Hub overview
+keywords:
+- Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation,
+  accounts, organizations, repositories, groups,  teams
+menu:
+  main:
+    parent: mn_pubhub
+    weight: -99
+title: Overview of Docker Hub
+---
 
 # Overview of Docker Hub
 

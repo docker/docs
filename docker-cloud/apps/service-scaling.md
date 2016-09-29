@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/service-scaling/"
-]
-title = "Scale your service"
-description = "Scale your service, spawn new containers"
-keywords = ["spawn, container, service, deploy"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/service-scaling/
+description: Scale your service, spawn new containers
+keywords:
+- spawn, container, service, deploy
+menu:
+  main:
+    parent: apps
+title: Scale your service
+---
 
 # Scale your service
 

@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-  "/mackit/networking/"
-]
-title = "Networking "
-description = "Networking"
-keywords = ["mac, networking"]
-[menu.main]
-identifier='mac-networking'
-parent="pinata_mac_menu"
-weight = 4
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mackit/networking/
+description: Networking
+keywords:
+- mac, networking
+menu:
+  main:
+    identifier: mac-networking
+    parent: pinata_mac_menu
+    weight: 4
+title: 'Networking '
+---
 
 # Networking
 

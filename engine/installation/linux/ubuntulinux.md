@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/ubuntulinux/"]
-title = "Installation on Ubuntu "
-description = "Instructions for installing Docker on Ubuntu. "
-keywords = ["Docker, Docker documentation, requirements, apt, installation,  ubuntu"]
-[menu.main]
-parent = "engine_linux"
-weight = -6
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/installation/ubuntulinux/
+description: 'Instructions for installing Docker on Ubuntu. '
+keywords:
+- Docker, Docker documentation, requirements, apt, installation,  ubuntu
+menu:
+  main:
+    parent: engine_linux
+    weight: -6
+title: 'Installation on Ubuntu '
+---
 
 # Ubuntu
 

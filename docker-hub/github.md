@@ -1,11 +1,14 @@
-+++
-title = "Automated Builds from GitHub"
-description = "Docker Hub Automated Builds with GitHub"
-keywords = ["Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, trusted, builds, trusted builds,  automated builds, GitHub"]
-[menu.main]
-parent="mn_pubhub"
-weight=9
-+++
+---
+description: Docker Hub Automated Builds with GitHub
+keywords:
+- Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation,
+  trusted, builds, trusted builds,  automated builds, GitHub
+menu:
+  main:
+    parent: mn_pubhub
+    weight: 9
+title: Automated Builds from GitHub
+---
 
 # Automated Builds from GitHub
 

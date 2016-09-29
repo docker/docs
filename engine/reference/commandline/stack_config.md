@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "stack config"
-description = "The stack config command description and usage"
-keywords = ["stack, config"]
-advisory = "experimental"
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+advisory: experimental
+description: The stack config command description and usage
+keywords:
+- stack, config
+menu:
+  main:
+    parent: smn_cli
+title: stack config
+---
 
 # stack config (experimental)
 

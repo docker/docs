@@ -1,13 +1,14 @@
-<!--[metadata]>
-+++
-title = "Dockerfile reference"
-description = "Dockerfiles use a simple DSL which allows you to automate the steps you would normally manually take to create an image."
-keywords = ["builder, docker, Dockerfile, automation,  image creation"]
-[menu.main]
-parent = "engine_ref"
-weight=-90
-+++
-<![end-metadata]-->
+---
+description: Dockerfiles use a simple DSL which allows you to automate the steps you
+  would normally manually take to create an image.
+keywords:
+- builder, docker, Dockerfile, automation,  image creation
+menu:
+  main:
+    parent: engine_ref
+    weight: -90
+title: Dockerfile reference
+---
 
 # Dockerfile reference
 

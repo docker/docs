@@ -1,3 +1,7 @@
+---
+{}
+---
+
 403c403
 < 		var fragments = $.param.fragment().split('/');
 ---

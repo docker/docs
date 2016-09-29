@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/feature-reference/triggers/"
-]
-title = "Use triggers"
-description = "Use triggers"
-keywords = ["API, triggers, endpoints"]
-[menu.main]
-parent="apps"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/feature-reference/triggers/
+description: Use triggers
+keywords:
+- API, triggers, endpoints
+menu:
+  main:
+    parent: apps
+title: Use triggers
+---
 
 # Use triggers
 

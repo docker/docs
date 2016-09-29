@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-aliases = [
-"/docker-cloud/getting-started/beginner/link-azure/",
-"/docker-cloud/getting-started/link-azure/"
-]
-title = "Link to Microsoft Azure hosts"
-description = "Link your Microsoft Azure account"
-keywords = ["Microsoft, Azure, account"]
-[menu.main]
-parent="infrastructure"
-+++
-<![end-metadata]-->
+---
+aliases:
+- /docker-cloud/getting-started/beginner/link-azure/
+- /docker-cloud/getting-started/link-azure/
+description: Link your Microsoft Azure account
+keywords:
+- Microsoft, Azure, account
+menu:
+  main:
+    parent: infrastructure
+title: Link to Microsoft Azure hosts
+---
 
 # Link your Microsoft Azure account
 

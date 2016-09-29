@@ -1,19 +1,18 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mac/step_three/",
-"/windows/step_three/",
-"/linux/step_three/",
-]
-title = "Find & run the whalesay image"
-description = "Getting started with Docker"
-keywords = ["beginner, getting started, Docker"]
-[menu.main]
-identifier = "getstart_locate"
-parent = "tutorial_getstart_menu"
-weight = 3
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mac/step_three/
+- /windows/step_three/
+- /linux/step_three/
+description: Getting started with Docker
+keywords:
+- beginner, getting started, Docker
+menu:
+  main:
+    identifier: getstart_locate
+    parent: tutorial_getstart_menu
+    weight: 3
+title: Find & run the whalesay image
+---
 
 # Find and run the whalesay image
 

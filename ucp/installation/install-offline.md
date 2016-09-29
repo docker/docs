@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title = "Install offline"
-description = "Learn how to install Docker Universal Control Plane. on a machine with no internet access."
-keywords = ["docker, ucp, install, offline"]
-[menu.main]
-parent="mn_ucp_installation"
-identifier="ucp_install_offline"
-weight=30
-+++
-<![end-metadata]-->
+---
+description: Learn how to install Docker Universal Control Plane. on a machine with
+  no internet access.
+keywords:
+- docker, ucp, install, offline
+menu:
+  main:
+    identifier: ucp_install_offline
+    parent: mn_ucp_installation
+    weight: 30
+title: Install offline
+---
 
 # Install UCP offline
 

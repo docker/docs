@@ -1,17 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [
-  "/mackit/troubleshoot/"
-]
-title = "Logs and Troubleshooting"
-description = "Troubleshooting, logs, and known issues"
-keywords = ["mac, troubleshooting, logs, issues"]
-[menu.main]
-identifier="docker-mac-troubleshoot"
-parent="pinata_mac_menu"
-weight = 6
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mackit/troubleshoot/
+description: Troubleshooting, logs, and known issues
+keywords:
+- mac, troubleshooting, logs, issues
+menu:
+  main:
+    identifier: docker-mac-troubleshoot
+    parent: pinata_mac_menu
+    weight: 6
+title: Logs and Troubleshooting
+---
 
 #  Logs and Troubleshooting
 

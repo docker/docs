@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title ="Backups and disaster recovery"
-description="Learn how to backup your Docker Universal Control Plane cluster, and to recover your cluster from an existing backup."
-keywords= ["docker, ucp, backup, restore, recovery"]
-[menu.main]
-parent="mn_ucp_high_availability"
-identifier="ucp_backups_and_dr"
-weight=20
-+++
-<![end-metadata]-->
+---
+description: Learn how to backup your Docker Universal Control Plane cluster, and
+  to recover your cluster from an existing backup.
+keywords:
+- docker, ucp, backup, restore, recovery
+menu:
+  main:
+    identifier: ucp_backups_and_dr
+    parent: mn_ucp_high_availability
+    weight: 20
+title: Backups and disaster recovery
+---
 
 # Backups and disaster recovery
 

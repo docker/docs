@@ -1,16 +1,17 @@
-<!--[metadata]>
-+++
-aliases = ["/ucp/deploy-application/"]
-title = "Deploy an app from the CLI"
-description = "Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane."
-keywords = ["deploy, application"]
-[menu.main]
-parent="mn_ucp_applications"
-identifier="ucp_deploy_cli"
-weight=10
-+++
-<![end-metadata]-->
-
+---
+aliases:
+- /ucp/deploy-application/
+description: Learn how to deploy containerized applications on a cluster, with Docker
+  Universal Control Plane.
+keywords:
+- deploy, application
+menu:
+  main:
+    identifier: ucp_deploy_cli
+    parent: mn_ucp_applications
+    weight: 10
+title: Deploy an app from the CLI
+---
 
 # Deploy an app from the CLI
 

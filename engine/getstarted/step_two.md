@@ -1,19 +1,18 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mac/step_two/",
-"/windows/step_two/",
-"/linux/step_two/",
-]
-title = "Understand images & containers"
-description = "Getting started with Docker"
-keywords = ["beginner, getting started, Docker"]
-[menu.main]
-identifier = "getstart_understand"
-parent = "tutorial_getstart_menu"
-weight = 2
-+++
-<![end-metadata]-->
+---
+aliases:
+- /mac/step_two/
+- /windows/step_two/
+- /linux/step_two/
+description: Getting started with Docker
+keywords:
+- beginner, getting started, Docker
+menu:
+  main:
+    identifier: getstart_understand
+    parent: tutorial_getstart_menu
+    weight: 2
+title: Understand images & containers
+---
 
 #  Learn about images & containers
 

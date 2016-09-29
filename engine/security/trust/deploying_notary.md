@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title = "Deploying Notary"
-description = "Deploying Notary"
-keywords = ["trust, security, notary, deployment"]
-[menu.main]
-parent= "smn_content_trust"
-+++
-<![end-metadata]-->
+---
+description: Deploying Notary
+keywords:
+- trust, security, notary, deployment
+menu:
+  main:
+    parent: smn_content_trust
+title: Deploying Notary
+---
 
 # Deploying Notary Server with Compose
 

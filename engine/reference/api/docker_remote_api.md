@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Remote API"
-description = "API Documentation for Docker"
-keywords = ["API, Docker, rcli, REST,  documentation"]
-[menu.main]
-parent = "engine_remoteapi"
-weight=-99
-+++
-<![end-metadata]-->
+---
+description: API Documentation for Docker
+keywords:
+- API, Docker, rcli, REST,  documentation
+menu:
+  main:
+    parent: engine_remoteapi
+    weight: -99
+title: Remote API
+---
 
 # Docker Remote API
 

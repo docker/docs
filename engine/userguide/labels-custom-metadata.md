@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Managing Docker object labels"
-description = "Description of labels, which are used to manage metadata on Docker objects."
-keywords = ["Usage, user guide, labels, metadata, docker, documentation, examples, annotating"]
-[menu.main]
-parent = "engine_guide"
-weight=100
-+++
-<![end-metadata]-->
+---
+description: Description of labels, which are used to manage metadata on Docker objects.
+keywords:
+- Usage, user guide, labels, metadata, docker, documentation, examples, annotating
+menu:
+  main:
+    parent: engine_guide
+    weight: 100
+title: Managing Docker object labels
+---
 
 # About labels
 

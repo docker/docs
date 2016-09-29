@@ -1,14 +1,13 @@
-<!--[metadata]>
-+++
-title = "Build a Swarm cluster for production"
-description = "Deploying Swarm on AWS EC2 AMI's in a VPC"
-keywords = ["docker, swarm, clustering, examples, Amazon, AWS EC2"]
-[menu.main]
-parent="workw_swarm"
-weight=-40
-+++
-<![end-metadata]-->
-
+---
+description: Deploying Swarm on AWS EC2 AMI's in a VPC
+keywords:
+- docker, swarm, clustering, examples, Amazon, AWS EC2
+menu:
+  main:
+    parent: workw_swarm
+    weight: -40
+title: Build a Swarm cluster for production
+---
 
 # Build a Swarm cluster for production
 

@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "list"
-description = "List the nodes in a cluster."
-keywords = ["swarm, list"]
-[menu.main]
-identifier="swarm.list"
-parent="smn_swarm_subcmds"
-+++
-<![end-metadata]-->
+---
+description: List the nodes in a cluster.
+keywords:
+- swarm, list
+menu:
+  main:
+    identifier: swarm.list
+    parent: smn_swarm_subcmds
+title: list
+---
 
 # list — List the nodes in a cluster
 

@@ -1,14 +1,14 @@
-<!--[metadata]>
-+++
-title = "Apply rolling updates"
-description = "Apply rolling updates to a service on the swarm"
-keywords = ["tutorial, cluster management, swarm, service, rolling-update"]
-[menu.main]
-identifier="swarm-tutorial-rolling-update"
-parent="swarm-tutorial"
-weight=20
-+++
-<![end-metadata]-->
+---
+description: Apply rolling updates to a service on the swarm
+keywords:
+- tutorial, cluster management, swarm, service, rolling-update
+menu:
+  main:
+    identifier: swarm-tutorial-rolling-update
+    parent: swarm-tutorial
+    weight: 20
+title: Apply rolling updates
+---
 
 # Apply rolling updates to a service
 

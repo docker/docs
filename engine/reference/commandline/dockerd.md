@@ -1,14 +1,15 @@
-<!--[metadata]>
-+++
-title = "dockerd"
-aliases = ["/engine/reference/commandline/daemon/"]
-description = "The daemon command description and usage"
-keywords = ["container, daemon, runtime"]
-[menu.main]
-parent = "smn_cli"
-weight = -1
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/reference/commandline/daemon/
+description: The daemon command description and usage
+keywords:
+- container, daemon, runtime
+menu:
+  main:
+    parent: smn_cli
+    weight: -1
+title: dockerd
+---
 
 # daemon
 
