@@ -1,5 +1,0 @@
-/build/
-/include/xhyve/dtrace.h
-/test/vmlinuz
-/test/initrd
-/test/initrd.gz

@@ -1,2 +1,0 @@
-Virtual package relying on m4
-This package can only install if the m4 binary is installed on the system.

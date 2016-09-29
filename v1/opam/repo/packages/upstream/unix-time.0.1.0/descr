@@ -1,9 +1,0 @@
-Unix time.h types, maps, and support
-
-unix-time provides access to the features exposed in time.h in a way
-that is not tied to the implementation on the host system.
-
-The Time module provides types which are analogous to those defined in
-time.h such as timespec.
-
-The Time_unix module provides a ctypes view for timespec.

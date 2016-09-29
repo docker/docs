@@ -1,4 +1,0 @@
-OS X generic file system attribute system call bindings
-
-"getattrlist" 'fgetattrlist', 'getattrlistat', 'getattrlistbulk',
-'setattrlist', and 'fsetattrlist' are bound.

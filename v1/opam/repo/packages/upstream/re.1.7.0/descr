@@ -1,8 +1,0 @@
-RE is a regular expression library for OCaml
-
-Pure OCaml regular expressions with:
-* Perl-style regular expressions (module Re_perl)
-* Posix extended regular expressions (module Re_posix)
-* Emacs-style regular expressions (module Re_emacs)
-* Shell-style file globbing (module Re_glob)
-* Compatibility layer for OCaml's built-in Str module (module Re_str)

@@ -1,8 +1,0 @@
-MirageOS disk block driver for Unix
-
-This driver supports
-
-- `read` and `write` of sector-aligned buffers
-- unbuffered by default (buffered on request)
-- if buffered, ability to `flush`
-- ability to iterate over sparse regions if the filesystem supports it

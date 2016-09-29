@@ -1,9 +1,0 @@
-An easy interface on top of the Jsonm library
-
-This version provides more convenient (but far less flexible)
-input and output functions that go to and from [string] values.
-This avoids the need to write signal code, which is useful for
-quick scripts that manipulate JSON.
-
-More advanced users should go straight to the Jsonm library and
-use it directly, rather than be saddled with the Ezjsonm interface.

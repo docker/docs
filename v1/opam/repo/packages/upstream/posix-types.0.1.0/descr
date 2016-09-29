@@ -1,5 +1,0 @@
-ctypes-compatible type representations for the types exposed in <sys/types.h>.
-
-The implementation details, such as sizes and alignments, of the types vary
-from platform to platform, but the interface of each type is consistent across
-platforms.

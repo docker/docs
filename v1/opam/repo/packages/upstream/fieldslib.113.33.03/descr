@@ -1,5 +1,0 @@
-Syntax extension to define first class values representing record fields, to get and set record fields, iterate and fold over all fields of a record and create new record values
-Part of Jane Street’s Core library
-The Core suite of libraries is an industrial strength alternative to
-OCaml's standard library that was developed by Jane Street, the
-largest industrial user of OCaml.

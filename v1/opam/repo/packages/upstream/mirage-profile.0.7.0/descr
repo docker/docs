@@ -1,6 +1,0 @@
-Collect profiling information
-
-This library can be used to trace execution of OCaml/Lwt programs (such as
-MirageOS unikernels) at the level of Lwt threads. The traces can be viewed using
-JavaScript or GTK viewers provided by mirage-trace-viewer or processed by tools
-supporting the Common Trace Format (CTF).

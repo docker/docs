@@ -1,6 +1,0 @@
-bin: [
-  "src/atdgen.run" {"atdgen.run"}
-  "src/atdgen" {"atdgen"}
-  "atdgen-cppo/atdgen-cppo"
-  "atdgen-cppo/cppo-json"
-]

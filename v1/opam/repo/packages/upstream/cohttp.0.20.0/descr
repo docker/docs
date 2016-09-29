@@ -1,9 +1,0 @@
-HTTP(S) library for Lwt, Async and Mirage
-
-There are several optional dependencies which activate functionality:
-
-* Lwt: `opam install lwt cohttp`
-* Lwt and SSL: `opam install lwt ssl cohttp`
-* Async: `opam install async cohttp`
-* Async and SSL: `opam install async_ssl cohttp`
-

@@ -1,5 +1,0 @@
-Extra string functions for OCaml
-
-Provides a single module named Stringext that provides a grab bag of often used
-but missing string functions from the stdlib. E.g, split, full_split, cut,
-rcut, etc.

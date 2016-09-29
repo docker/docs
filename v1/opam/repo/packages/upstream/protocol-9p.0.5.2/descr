@@ -1,6 +1,0 @@
-Client and server implementation of 9P, in a Mirage-friendly style
-
-Protocol-9p is an implementation of the plan9 9P fileserver protocol,
-building on top of the Mirage libraries. Client and server implementations
-are provided. The library supports 9P2000 and 9P2000.u protocol variants.
-The server code is compatible with the Linux kernel client.

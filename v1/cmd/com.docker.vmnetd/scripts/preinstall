@@ -1,6 +1,0 @@
-#!/bin/bash
-
-set -e
-if /bin/launchctl list "com.docker.docker.vmnetd" &> /dev/null; then
-    /bin/launchctl unload "/Library/LaunchDaemons/com.docker.vmnetd.plist"
-fi

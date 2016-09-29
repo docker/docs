@@ -1,5 +1,0 @@
-#!/bin/bash
-
-. $(dirname $0)/../../lib/functions
-
-echo ${hypervisor}

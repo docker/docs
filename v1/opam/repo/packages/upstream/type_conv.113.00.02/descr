@@ -1,5 +1,0 @@
-Library for building type-driven syntax extensions
-Part of Jane Street’s Core library
-The Core suite of libraries is an industrial strength alternative to
-OCaml's standard library that was developed by Jane Street, the
-largest industrial user of OCaml.

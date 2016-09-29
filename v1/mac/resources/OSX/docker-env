@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo "$PATH" |grep -q /Applications/Docker.app/Contents/MacOS
-if [ $? -ne 0 ]; then
-  echo "export PATH=/Applications/Docker.app/Contents/MacOS:$PATH"
-fi
-

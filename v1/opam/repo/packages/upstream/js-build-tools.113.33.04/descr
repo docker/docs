@@ -1,7 +1,0 @@
-Collection of tools to help building Jane Street Packages
-This packages contains tools to help building Jane Street
-Packages. However most of it is general purpose.
-It contains::
-- an oasis2opam-install tool to produce a .install file from the oasis
-  build log
-- an js_build_tools ocamlbuild plugin with various goodies

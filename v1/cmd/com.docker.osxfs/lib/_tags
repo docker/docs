@@ -1,4 +1,0 @@
-<*.*>: package(lwt.unix), package(profuse), package(unix-unistd)
-<*.*>: package(cstruct), package(osx-fsevents), package(ofs), package(logs)
-<*.*>: package(osx-daemon), package(osx-hyperkit), package(osx-xattr.lwt)
-<*.*>: package(mtime.os), package(protocol-9p), package(osx-attr.lwt)

@@ -1,3 +1,0 @@
-<Include>
-	<ProgressText Action="RunPSHVInstall">Setting up Hyper-V for Docker</ProgressText>
-</Include>

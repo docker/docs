@@ -1,3 +1,0 @@
-Virtual package relying on pkg-config installation.
-This package can only install if the pkg-config package is installed
-on the system.

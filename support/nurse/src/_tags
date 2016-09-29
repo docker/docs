@@ -1,6 +1,0 @@
-true: \
-  package(cmdliner github.unix re logs.fmt logs.cli fmt.tty fmt.cli)
-true: \
-  package(tar.lwt tar.mirage result astring mirage-block-unix mirage-block)
-true: \
-  package(io-page.unix, re.perl)

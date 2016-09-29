@@ -1,4 +1,0 @@
-Bindings to OS X mount system calls
-
-`getmntinfo` and `statfs` are bound as well as the statfs struct as a
-record type. 

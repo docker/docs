@@ -1,5 +1,0 @@
-Implements arithmetic and logical operations over arbitrary-precision integers
-The Zarith library implements arithmetic and logical operations over
-arbitrary-precision integers. It uses GMP to efficiently implement
-arithmetic over big integers. Small integers are represented as Caml
-unboxed integers, for speed and space economy.

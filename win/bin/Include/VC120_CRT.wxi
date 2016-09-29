@@ -1,9 +1,0 @@
-<Include>
-	<DirectoryRef Id="TARGETDIR">
-		<Merge Id="VCRedist" SourceFile="Dependencies\VC120_CRT\Microsoft_VC120_CRT_x86.msm" DiskId="1" Language="0"/>
-	</DirectoryRef>
-		
-	<Feature Id="VCRedist" Title="Visual C++ 12.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
-		<MergeRef Id="VCRedist"/>
-	</Feature>
-</Include>

@@ -1,8 +1,0 @@
-A pure OCaml library to read and write tar files
-
-This allows easy processing of tar-formatted data: creating archives,
-listing archives and extracting archives. Together with camlzip, it can
-directly process compressed .tar.gz archives.
-
-A mirage interface is also provided which exposes a tar-formatted block
-device as a read-only key=value store.

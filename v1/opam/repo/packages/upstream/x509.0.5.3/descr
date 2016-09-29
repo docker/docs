@@ -1,4 +1,0 @@
-X.509 certificate (RFC5280) library
-
-Library for X.509 certificate parsing, serialization and authentication.
-Supports path validation (RFC5280) and hostname verification (RFC6125).

@@ -1,7 +1,0 @@
-opam-version: "1.2"
-maintainer: "martin@mjambon.com"
-build: make
-remove: [["ocamlfind" "remove" "ocamlscript"]]
-depends: ["ocamlfind" "camlp4"]
-dev-repo: "git://github.com/mjambon/ocamlscript"
-install: [make "install"]

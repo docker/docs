@@ -1,3 +1,0 @@
-PKG fmt.tty re.glob threads.posix stringext cmdliner ezxmlm
-S src
-B src

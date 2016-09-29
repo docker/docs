@@ -1,7 +1,0 @@
-#!/bin/bash
-
-PERF=$(dirname $0)/../
-
-for test in $(ls -1 ${PERF}/test); do
-  make -C ${PERF}/test/${test} clean
-done
