@@ -26,7 +26,7 @@ orchestration capabilities provided by the Docker Engine with swarm mode enabled
 When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
 cluster using Docker Swarm v1.2.5.
 
-** Bug fixes **
+**Bug fixes**
 
 * Don't generate authentication tokens for organization accounts
 * Improved performance when deploying to a cluster with thousands of users
