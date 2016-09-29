@@ -1,0 +1,3 @@
+PKG irmin.git cmdliner
+S src
+B src

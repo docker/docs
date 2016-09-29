@@ -1,0 +1,50 @@
+opam-version: "1.2"
+maintainer: "sheets@alum.mit.edu"
+authors: [
+  "Anil Madhavapeddy"
+  "David Sheets"
+  "Andy Ray"
+  "Jeff Hammerbacher"
+  "Thomas Gazagnaire"
+  "Rudi Grinberg"
+  "Qi Li"
+  "Jeremy Yallop"
+  "Dave Tucker"
+]
+homepage: "https://github.com/mirage/ocaml-github"
+bug-reports: "https://github.com/mirage/ocaml-github/issues"
+tags: ["org:mirage" "org:xapi-project" "git"]
+dev-repo: "https://github.com/mirage/ocaml-github.git"
+build: [
+  [
+    "ocaml"
+    "setup.ml"
+    "-configure"
+    "--%{base-unix:enable}%-unix"
+    "--%{js_of_ocaml:enable}%-js"
+    "--prefix"
+    prefix
+  ]
+  ["ocaml" "setup.ml" "-build"]
+]
+install: ["ocaml" "setup.ml" "-install"]
+remove: ["ocamlfind" "remove" "github"]
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "tls"
+  "uri" {>= "1.9.0"}
+  "cohttp" {>= "0.17.0"}
+  "lwt" {>= "2.4.4"}
+  "atdgen" {>= "1.10.0"}
+  "yojson" {>= "1.2.0"}
+  "stringext"
+  "lambda-term"
+  "cmdliner" {>= "0.9.8"}
+  "base-unix"
+]
+depopts: "js_of_ocaml"
+conflicts: [
+  "js_of_ocaml" {< "2.4.0"}
+]
+available: [ocaml-version >= "4.02.3"]

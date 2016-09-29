@@ -1,0 +1,20 @@
+version: '2'
+services:
+  consullog:
+    image: alpine:latest
+    volumes:
+      - /var/log/consul
+      - /var/consul
+    command: ['echo', '/var/log/consul mounted']
+  consul:
+    build: .
+    image: consul
+    volumes_from:
+      - consullog
+    ports:
+      - 8300:8300
+      - 8301:8301
+      - 8400:8400
+      - 8500:8500
+      - 8600:53/udp
+    command: ['/usr/local/bin/consul', 'agent', '-server', '-data-dir', '/var/consul', '-client', '127.0.0.1', '-bootstrap-expect', '1', '-advertise', '127.0.0.1', '-dc', 'oridocker', '-node', 'consul-leader', '-encrypt', 'pmgnnMMN8Sa0ag7NClKpZg==', '-ui', '-ui-dir', '/etc/consul/ui']

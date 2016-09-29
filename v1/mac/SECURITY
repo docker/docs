@@ -1,0 +1,5 @@
+Security Notes:
+
+# Make sure the vmnetd only listens to local requests
+# revoke the hockeyapp api token and set it through env variables in ci
+# codesign with actual Docker Inc. keys

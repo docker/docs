@@ -1,0 +1,4 @@
+OS X extended attribute system call bindings
+
+`getxattr`, `fgetxattr`, `listxattr`, `flistxattr`, `removexattr`,
+`fremovexattr`, `setxattr`, and `fsetxattr` are bound.

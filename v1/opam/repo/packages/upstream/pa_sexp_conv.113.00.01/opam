@@ -1,0 +1,19 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage:    "https://github.com/janestreet/pa_sexp_conv"
+bug-reports: "https://github.com/janestreet/pa_sexp_conv/issues"
+dev-repo:    "https://github.com/janestreet/pa_sexp_conv.git"
+build: [
+  ["./configure"]
+  [make]
+]
+install: [[make "install"]]
+remove: [["ocamlfind" "remove" "pa_sexp_conv"]]
+depends: [
+  "ocamlfind"
+  "ocamlbuild" {build}
+  "camlp4"
+  "type_conv"
+]
+available: [ ocaml-version >= "4.02.1" & ocaml-version < "4.03" ]

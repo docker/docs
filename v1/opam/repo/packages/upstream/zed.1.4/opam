@@ -1,0 +1,20 @@
+opam-version: "1.2"
+maintainer: "opam-devel@lists.ocaml.org"
+authors: ["Jérémie Dimino"]
+homepage: "https://github.com/diml/zed"
+license: "BSD3"
+build: [
+  ["ocaml" "setup.ml" "-configure" "--prefix" prefix]
+  ["ocaml" "setup.ml" "-build"]
+]
+remove: [["ocamlfind" "remove" "zed"]]
+depends: [
+  "ocamlfind"
+  "base-bytes"
+  "camomile" {>= "0.8"}
+  "react"
+  "ocamlbuild" {build}
+]
+dev-repo: "git://github.com/diml/zed"
+available: ocaml-version >= "3.12"
+install: ["ocaml" "setup.ml" "-install"]

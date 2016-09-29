@@ -1,0 +1,3 @@
+<Include>
+	<ProgressText Action="RunPSHVUninstall">Removing Hyper-V for Docker</ProgressText>
+</Include>

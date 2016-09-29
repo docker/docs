@@ -1,0 +1,24 @@
+opam-version: "1.2"
+maintainer: "sheets@alum.mit.edu"
+authors: ["David Sheets" "Jeremy Yallop"]
+homepage: "https://github.com/dsheets/ocaml-unix-sys-stat"
+bug-reports: "https://github.com/dsheets/ocaml-unix-sys-stat/issues"
+license: "ISC"
+tags: ["unix" "posix" "sys/stat.h" "syscall" "stat"]
+dev-repo: "https://github.com/dsheets/ocaml-unix-sys-stat.git"
+build: [make "build"]
+install: [make "install"]
+build-test: [make "test"]
+remove: [make "uninstall"]
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "alcotest" {test}
+  "base-bytes"
+  "unix-errno" {>= "0.4.0"}
+  "ctypes" {>= "0.6.0"}
+  "posix-types"
+  "unix-type-representations"
+]
+depopts: ["base-unix" "lwt"]
+conflicts: ["lwt" {< "2.4.7"}]

@@ -1,0 +1,1 @@
+ module Pinata { header "../../../c/sdk/sdk.h" export * }

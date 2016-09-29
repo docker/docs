@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="IntroViewController" customModule="Docker" customModuleProvider="target">
+            <connections>
+                <outlet property="cmdLabel" destination="NvD-9s-Bwv" id="9JD-Zj-3O2"/>
+                <outlet property="text1" destination="qiv-h7-Ppn" id="8LC-2i-ZiA"/>
+                <outlet property="text2" destination="W8E-dg-puD" id="Dvd-9v-dcp"/>
+                <outlet property="trackingCheckButton" destination="Wmv-kK-UAD" id="Q9j-f6-b67"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView wantsLayer="YES" placeholderIntrinsicWidth="280" placeholderIntrinsicHeight="470" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="280" height="466"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vfb-87-mZ0">
+                    <rect key="frame" x="23" y="260" width="234" height="94"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="234" id="TBG-oa-qsJ"/>
+                        <constraint firstAttribute="height" constant="94" id="dSY-Ru-jsv"/>
+                    </constraints>
+                    <shadow key="shadow" blurRadius="4">
+                        <color key="color" white="0.0" alpha="0.4803302304964539" colorSpace="calibratedWhite"/>
+                    </shadow>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="miniterm" id="HJu-61-YeM"/>
+                </imageView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a7G-qY-GGA">
+                    <rect key="frame" x="160" y="50" width="100" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="V7v-DA-xGw"/>
+                        <constraint firstAttribute="height" constant="90" id="h71-rC-Htm"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="AppIconSmall" id="rtL-R0-oET"/>
+                </imageView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" alphaValue="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="caw-Ty-Gkh">
+                    <rect key="frame" x="0.0" y="0.0" width="280" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="ItN-Sg-eXL"/>
+                        <constraint firstAttribute="height" constant="100" id="hYy-Jx-2yO"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="Waves" id="XO7-rM-KgH"/>
+                </imageView>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="38" translatesAutoresizingMaskIntoConstraints="NO" id="W8E-dg-puD">
+                    <rect key="frame" x="18" y="369" width="244" height="38"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="240" id="rah-g9-6QV"/>
+                    </constraints>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Open your favorite terminal and start typing Docker commands!" id="RW2-bk-PuQ">
+                        <font key="font" metaFont="system" size="15"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" translatesAutoresizingMaskIntoConstraints="NO" id="DJB-Sy-IWt">
+                    <rect key="frame" x="60" y="191" width="202" height="59"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="198" id="5Zx-5l-3Sj"/>
+                    </constraints>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Click on the whale in your menu bar to access settings, feedback &amp; documentation." id="4oy-NE-gMD">
+                        <font key="font" metaFont="system" size="15"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="22" placeholderIntrinsicHeight="15" translatesAutoresizingMaskIntoConstraints="NO" id="5wQ-AG-yef">
+                    <rect key="frame" x="20" y="213" width="22" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="22" id="LuX-L2-3yt"/>
+                        <constraint firstAttribute="height" constant="15" id="Pq8-BX-eRZ"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="statusItemIcon-0" id="1Vn-Uz-dOV"/>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NvD-9s-Bwv">
+                    <rect key="frame" x="33" y="292" width="214" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="BhG-0l-I8w"/>
+                        <constraint firstAttribute="width" constant="210" id="ONU-UZ-s0m"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="$ docker ps" id="2zy-sL-qtP">
+                        <font key="font" size="16" name="Monaco"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="14" translatesAutoresizingMaskIntoConstraints="NO" id="Wmv-kK-UAD">
+                    <rect key="frame" x="18" y="152" width="244" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="cgg-F5-tUN"/>
+                    </constraints>
+                    <buttonCell key="cell" type="check" title="Send diagnostics &amp; usage data" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="jgZ-R6-PFO">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="trackingCheckButtonActionReceived:" target="-2" id="C7q-3r-xiQ"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Eqc-e7-D4W">
+                    <rect key="frame" x="20" y="125" width="105" height="19"/>
+                    <buttonCell key="cell" type="roundRect" title="Privacy settings" bezelStyle="roundedRect" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="0Iw-MR-ttH">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="cellTitle"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="openPrivacySettings:" target="-2" id="VKC-w7-yUG"/>
+                    </connections>
+                </button>
+                <box verticalHuggingPriority="750" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="3" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="JSI-mD-z7L">
+                    <rect key="frame" x="20" y="176" width="240" height="7"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="ScM-UB-W3W"/>
+                    </constraints>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <font key="titleFont" metaFont="system"/>
+                </box>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nc5-xz-SWL">
+                    <rect key="frame" x="101" y="13" width="78" height="32"/>
+                    <buttonCell key="cell" type="push" title="Got it!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="C2Q-YK-qkQ">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="closePopover:" target="-2" id="CEQ-sS-DhL"/>
+                    </connections>
+                </button>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="19" translatesAutoresizingMaskIntoConstraints="NO" id="qiv-h7-Ppn">
+                    <rect key="frame" x="18" y="427" width="244" height="19"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="240" id="PjR-2s-PbK"/>
+                    </constraints>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Docker is now up and running!" id="PwP-sE-afo">
+                        <font key="font" metaFont="system" size="15"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="NvD-9s-Bwv" firstAttribute="centerX" secondItem="vfb-87-mZ0" secondAttribute="centerX" id="2b8-bt-Icl"/>
+                <constraint firstItem="5wQ-AG-yef" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="5s1-OS-XO4"/>
+                <constraint firstItem="5wQ-AG-yef" firstAttribute="centerY" secondItem="DJB-Sy-IWt" secondAttribute="centerY" id="62N-qX-Map"/>
+                <constraint firstItem="NvD-9s-Bwv" firstAttribute="centerY" secondItem="vfb-87-mZ0" secondAttribute="centerY" id="9vm-qn-apJ"/>
+                <constraint firstItem="qiv-h7-Ppn" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="Azd-QE-RFb"/>
+                <constraint firstItem="JSI-mD-z7L" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="FA6-5l-hAu"/>
+                <constraint firstItem="DJB-Sy-IWt" firstAttribute="trailing" secondItem="Hz6-mo-xeY" secondAttribute="trailing" constant="-20" id="HxW-CJ-S1R"/>
+                <constraint firstItem="nc5-xz-SWL" firstAttribute="bottom" secondItem="Hz6-mo-xeY" secondAttribute="bottom" constant="-20" id="ILB-ba-KIX"/>
+                <constraint firstItem="caw-Ty-Gkh" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="PPk-kj-0Tb"/>
+                <constraint firstItem="W8E-dg-puD" firstAttribute="top" secondItem="qiv-h7-Ppn" secondAttribute="bottom" constant="20" id="RJP-Nd-UH2"/>
+                <constraint firstItem="vfb-87-mZ0" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="fkV-U9-tie"/>
+                <constraint firstItem="JSI-mD-z7L" firstAttribute="top" secondItem="DJB-Sy-IWt" secondAttribute="bottom" constant="10" id="h3M-3a-etd"/>
+                <constraint firstItem="nc5-xz-SWL" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="hXa-gW-DDx"/>
+                <constraint firstItem="DJB-Sy-IWt" firstAttribute="top" secondItem="vfb-87-mZ0" secondAttribute="bottom" constant="10" id="jzY-XL-rGP"/>
+                <constraint firstItem="a7G-qY-GGA" firstAttribute="trailing" secondItem="Hz6-mo-xeY" secondAttribute="trailing" constant="-20" id="lrn-yE-3SU"/>
+                <constraint firstItem="caw-Ty-Gkh" firstAttribute="bottom" secondItem="Hz6-mo-xeY" secondAttribute="bottom" id="mrN-vY-Xh1"/>
+                <constraint firstItem="Eqc-e7-D4W" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="pNw-ge-Oi3"/>
+                <constraint firstItem="5wQ-AG-yef" firstAttribute="trailing" secondItem="DJB-Sy-IWt" secondAttribute="leading" constant="-20" id="qSl-Re-nST"/>
+                <constraint firstItem="Wmv-kK-UAD" firstAttribute="top" secondItem="JSI-mD-z7L" secondAttribute="bottom" constant="10" id="rBN-Wf-eIe"/>
+                <constraint firstItem="vfb-87-mZ0" firstAttribute="top" secondItem="W8E-dg-puD" secondAttribute="bottom" constant="15" id="rSr-ca-Jxg"/>
+                <constraint firstItem="a7G-qY-GGA" firstAttribute="bottom" secondItem="Hz6-mo-xeY" secondAttribute="bottom" constant="-50" id="raP-zJ-QzF"/>
+                <constraint firstItem="Wmv-kK-UAD" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="v1s-a1-GrK"/>
+                <constraint firstItem="qiv-h7-Ppn" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="xWu-BX-tl1"/>
+                <constraint firstItem="Eqc-e7-D4W" firstAttribute="top" secondItem="Wmv-kK-UAD" secondAttribute="bottom" constant="10" id="xwh-gS-kgf"/>
+                <constraint firstItem="nc5-xz-SWL" firstAttribute="top" secondItem="Eqc-e7-D4W" secondAttribute="bottom" constant="85" id="y8o-kr-RsZ"/>
+                <constraint firstItem="W8E-dg-puD" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="zGa-VL-0Mw"/>
+                <constraint firstItem="Wmv-kK-UAD" firstAttribute="trailing" secondItem="Hz6-mo-xeY" secondAttribute="trailing" constant="-20" id="zpU-RY-IQQ"/>
+            </constraints>
+            <point key="canvasLocation" x="-466" y="-227"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="AppIconSmall" width="100" height="90"/>
+        <image name="Waves" width="280" height="100"/>
+        <image name="miniterm" width="234" height="94"/>
+        <image name="statusItemIcon-0" width="22" height="15"/>
+    </resources>
+</document>

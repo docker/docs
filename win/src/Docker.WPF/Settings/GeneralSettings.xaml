@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Docker.WPF.GeneralSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Style.xaml"/>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource BackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="75" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="13" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="13" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Right" Source="../Images/about-docker.png" Grid.RowSpan="2" VerticalAlignment="Top" Height="90"/>
+        <TextBlock Grid.Row="0" Text="General" VerticalAlignment="Top" FontSize="30" />
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" Width="350" Text="Adjust how Docker for Windows behaves according to your preferences." HorizontalAlignment="left" FontSize="16"/>
+
+        <CheckBox x:Name="AutoStartDockerBox" Grid.Row="2" Style="{StaticResource CheckBoxes}" Content="Start Docker when you log in" Padding="5,-5,0,0" Checked="LaunchDockerBox_Checked" Unchecked="LaunchDockerBox_Checked" />
+        <CheckBox x:Name="AutoCheckUpdatesBox" Grid.Row="3" Style="{StaticResource CheckBoxes}" Content="Check for updates when the application starts" Padding="5,-5,0,0" Checked="AutoUpdateBox_Checked" Unchecked="AutoUpdateBox_Checked" />
+
+        <CheckBox x:Name="TrackingBox" Grid.Row="5" Style="{StaticResource CheckBoxes}" Content="Send usage statistics" Padding="5,-5,0,0" Checked="TrackingBox_Checked" Unchecked="TrackingBox_Checked" />
+
+        <TextBlock x:Name="TrackingText" Grid.Row="6" TextWrapping="Wrap" HorizontalAlignment="left" FontSize="12" Margin="20,0,0,0" Text="Help us improve Docker for Windows by sending anonymous app lifecycle information (e.g., starts, stops, resets), Windows version and language setting." />
+
+        <TextBlock Grid.Row="8" TextWrapping="Wrap" HorizontalAlignment="left" FontSize="12" Margin="20,0,0,0">
+            Note: When running, Docker for Windows will <Run Text="always" TextDecorations="Underline" /> send its version.
+        </TextBlock>
+
+        <TextBlock Grid.Row="10" Margin="0,8,0,0" Height="30" TextWrapping="Wrap" HorizontalAlignment="Left" FontSize="12">
+            You are running a <Run x:Name="CurrentChannelText" Text="stable"/> version. You can switch to a <Hyperlink Click="OpenDocumentation">
+                <Run x:Name="OtherChannelText" Text="beta"/>
+            </Hyperlink> version.
+        </TextBlock>
+    </Grid>
+</UserControl>

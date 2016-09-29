@@ -1,0 +1,38 @@
+iperf running with pid 63087
+------------------------------------------------------------
+Client connecting to 192.168.99.1, TCP port 5001
+TCP window size: 0.08 MByte (default)
+------------------------------------------------------------
+[  3] local 172.17.0.2 port 56242 connected with 192.168.99.1 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  3]  0.0- 1.0 sec   329 MBytes  2758 Mbits/sec
+[  3]  1.0- 2.0 sec   331 MBytes  2780 Mbits/sec
+[  3]  2.0- 3.0 sec   332 MBytes  2784 Mbits/sec
+[  3]  3.0- 4.0 sec   331 MBytes  2773 Mbits/sec
+[  3]  4.0- 5.0 sec   333 MBytes  2792 Mbits/sec
+[  3]  5.0- 6.0 sec   328 MBytes  2754 Mbits/sec
+[  3]  6.0- 7.0 sec   332 MBytes  2786 Mbits/sec
+[  3]  7.0- 8.0 sec   314 MBytes  2635 Mbits/sec
+[  3]  8.0- 9.0 sec   328 MBytes  2750 Mbits/sec
+[  3]  9.0-10.0 sec   335 MBytes  2808 Mbits/sec
+[  3] 10.0-11.0 sec   333 MBytes  2797 Mbits/sec
+[  3] 11.0-12.0 sec   329 MBytes  2757 Mbits/sec
+[  3] 12.0-13.0 sec   332 MBytes  2789 Mbits/sec
+[  3] 13.0-14.0 sec   328 MBytes  2755 Mbits/sec
+[  3] 14.0-15.0 sec   333 MBytes  2790 Mbits/sec
+[  3] 15.0-16.0 sec   330 MBytes  2772 Mbits/sec
+[  3] 16.0-17.0 sec   333 MBytes  2792 Mbits/sec
+[  3] 17.0-18.0 sec   314 MBytes  2632 Mbits/sec
+[  3] 18.0-19.0 sec   328 MBytes  2755 Mbits/sec
+[  3] 19.0-20.0 sec   331 MBytes  2778 Mbits/sec
+[  3] 20.0-21.0 sec   335 MBytes  2809 Mbits/sec
+[  3] 21.0-22.0 sec   333 MBytes  2794 Mbits/sec
+[  3] 22.0-23.0 sec   331 MBytes  2775 Mbits/sec
+[  3] 23.0-24.0 sec   332 MBytes  2787 Mbits/sec
+[  3] 24.0-25.0 sec   332 MBytes  2789 Mbits/sec
+[  3] 25.0-26.0 sec   331 MBytes  2779 Mbits/sec
+[  3] 26.0-27.0 sec   334 MBytes  2802 Mbits/sec
+[  3] 27.0-28.0 sec   316 MBytes  2655 Mbits/sec
+[  3] 28.0-29.0 sec   332 MBytes  2788 Mbits/sec
+[  3] 29.0-30.0 sec   328 MBytes  2755 Mbits/sec
+[  3]  0.0-30.0 sec  9891 MBytes  2766 Mbits/sec

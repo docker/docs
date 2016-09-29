@@ -1,0 +1,18 @@
+opam-version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/ppx_core"
+bug-reports: "https://github.com/janestreet/ppx_core/issues"
+dev-repo: "https://github.com/janestreet/ppx_core.git"
+license: "Apache-2.0"
+build: [[make]]
+install: [[make "install"]]
+remove: [["ocamlfind" "remove" "ppx_core"]]
+build-doc: [[make "doc"]]
+depends: [
+  "ocamlfind" {>= "1.3.2"}
+  "ppx_tools"
+  "ppx_deriving"
+  "ocamlbuild" {build}
+]
+available: [ ocaml-version >= "4.02.3" & ocaml-version < "4.03" ]

@@ -1,0 +1,73 @@
+/* Window title string, with placeholder for the AppName */
+"WindowTitle" = "Rapporto di problemi per %@";
+
+/* Introduction text, with app name placeholder first and company placeholder second */
+"IntroductionText" = "%@ si è chiusa inaspettatamente. Vuoi inviare un report con i dettagli del crash per aiutarci a risolvere il problema?";
+
+
+/* Name Text Title */
+"NameTextTitle" = "Nome";
+
+/* Email Text Title */
+"EmailTextTitle" = "Email";
+
+/* Comments Disclosure Text */
+"CommentsDisclosureTitle" = "Commenti";
+
+/* User description placeholder */
+"UserDescriptionPlaceholder" = "Indicare qui le informazioni relative al proprio Mac e le operazioni che hanno portato al problema.\n\nIndicare inoltre anche l'indirizzo e-mail per permetterci eventualmente di contattarla.";
+
+/* Problems Details Box  Title */
+"ProblemDetailsTitle" = "Dettagli dei problemi e configurazione del sistema";
+
+/* Privacy note text */
+"PrivacyNote" = "Con questo rapporto non verranno inviate alcune informazioni personali.";
+
+/* Show Details Button */
+"ShowDetailsButtonTitle" = "Visualizza dettagli";
+
+/* HIde Details Button */
+"HideDetailsButtonTitle" = "Nascondi dettagli";
+
+/* Cancel Button */
+"CancelButtonTitle" = "Annulla";
+
+/* Send Button */
+"SendButtonTitle" = "Invia";
+
+
+/* Feedback UI */
+
+/* Compose view placeholder text */
+"FeedbackComposePlaceHolder" = "Your Feedback";
+
+/* Last Update in Status Bar */
+"FeedbackLastUpdate" = "Last Update:";
+
+/* Never in Status Bar */
+"FeedbackLastUpdateNever" = "Never";
+
+/* From text between timestamp and author */
+"FeedbackFrom" = "from";
+
+/* Send button title */
+"FeedbackSendButton" = "Send";
+
+/* Contact info text */
+"FeedbackContactInfo" = "Please provide your contact information";
+
+/* Name placeholder text */
+"FeedbackName" = "Name";
+
+/* Email placeholder text */
+"FeedbackEmail" = "Email";
+
+/* Continue button title */
+"FeedbackContinueButton" = "Continue";
+
+/* Attachment context menu action Preview */
+"FeedbackAttachmentMenuPreview" = "Preview";
+
+/* Attachment context menu action Remove */
+"FeedbackAttachmentMenuRemove" = "Remove";
+

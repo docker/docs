@@ -1,0 +1,43 @@
+build
+buildlog.txt
+log.txt*
+src/docker-app/build.md5
+src/docker-utils/docker-login-item
+src/docker-installer/docker-installer/Info.plist
+src/docker-installer/docker-installer/commit.swift
+src/docker-app/docker/docker/commit.swift
+src/docker-app/docker/qemu-system-x86_64
+vmnetd.plist.extracted
+resources/OSX/com.docker.db
+resources/OSX/docker
+resources/OSX/docker-machine
+resources/OSX/docker-compose
+resources/OSX/notary.bin
+resources/OSX/docker.bash-completion
+resources/OSX/docker.zsh-completion
+resources/OSX/docker-machine.bash-completion
+resources/OSX/docker-machine.zsh-completion
+resources/OSX/docker-compose.bash-completion
+resources/OSX/docker-compose.zsh-completion
+resources/OSX/Contents/MacOS/com.docker.slirp
+resources/OSX/Contents/Resources/lib/libuv.1.dylib
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+
+## Other
+*.o
+resources/Windows/sha1
+
+## Xcode
+xcuserdata
+*.xccheckout
+*.xcuserstate
+*.xcscmblueprint

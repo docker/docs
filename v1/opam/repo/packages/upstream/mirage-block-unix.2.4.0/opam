@@ -1,0 +1,33 @@
+opam-version: "1.2"
+authors:      "Dave Scott <dave@recoil.org>"
+maintainer:   "dave@recoil.org"
+homepage:     "https://github.com/mirage/mirage-block-unix"
+dev-repo:     "https://github.com/mirage/mirage-block-unix.git"
+bug-reports:  "https://github.com/mirage/mirage-block-unix/issues"
+
+build: [
+  ["ocaml" "setup.ml" "-configure" "--disable-tests"]
+  ["ocaml" "setup.ml" "-build"]
+]
+build-test: [
+  ["ocaml" "setup.ml" "-configure" "--enable-tests"]
+  ["ocaml" "setup.ml" "-build"]
+  ["ocaml" "setup.ml" "-test"]
+]
+install: ["ocaml" "setup.ml" "-install"]
+remove:  ["ocamlfind" "remove" "mirage-block-unix"]
+depends: [
+  "ocamlfind" {build}
+  "cstruct" {>= "1.3.0"}
+  "lwt" {>= "2.4.3"}
+  "mirage-types" {>= "1.1.0"}
+  "io-page" {>= "1.0.0"}
+  "uri"
+  "logs"
+  "ounit" {test}
+  "ocamlbuild" {build}
+]
+available: [ ocaml-version >= "4.00.0" ]
+depexts: [
+ [["alpine"] ["linux-headers"]]
+]

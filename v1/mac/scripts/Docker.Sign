@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+################################################################################
+# Docker.Sign created on 2015-07-01 by michaK                                  #
+################################################################################
+#                       ____             __                                    #
+#                      / __ \____  _____/ /_____  _____                        #
+#                     / / / / __ \/ ___/ //_/ _ \/ ___/                        #
+#                    / /_/ / /_/ / /__/ ,< /  __/ /                            #
+#                   /_____/\____/\___/_/|_|\___/_/                             #
+#                                                                              #
+################################################################################
+#                     Signing Tools                                            #
+################################################################################
+
+############################# OSX Keychain #####################################
+
+developmentSigningType="Developer ID Application: Docker Inc"
+
+CheckKeychain ()
+{
+  local signingType="$developmentSigningType"
+  LogWarning "Could not detect signing identity. Importing Docker Development Certificates"
+  InitializeKeychain "$MAC_FOLDER_PATH/conf/keys/dockerbuilder-certificates.p12" "docker4all" "$MAC_FOLDER_PATH/conf/keys/adhoc.provisionprofile"
+  xcodeSigningIdentityWithHash=$(security find-identity -v -p codesigning \
+                                        | grep "$signingType" | tail -1 \
+                                        | cut -d \" -f2)
+  LogImportant "Detected $xcodeSigningIdentityWithHash"
+  xcodeSigningIdentity=$(echo $xcodeSigningIdentityWithHash | sed s#\ \(.*##)
+  Log "Detected $xcodeSigningIdentity"
+  if [ "$xcodeSigningIdentity" = '' ]; then
+      LogError "Failed to install dockerbuilder certificate"
+  fi
+  LogImportant "Detected XCode Signing Identity for $signingType: \"$xcodeSigningIdentity\""
+}
+
+InitializeKeychain ()
+{
+  LogImportant "Importing dockerbuilder certificate"
+  local certificate=$1
+  local keychainPassword=$2
+  local mobileProvision=$3
+
+  if [ ! -f $certificate ]; then
+    LogError "Could not find $certificate"
+  fi
+  if [ ! -f $mobileProvision ]; then
+    LogError "Could not find $mobileProvision"
+  fi
+  local keychainsDirectory="$HOME/Library/Keychains"
+  local keychainName="dockerbuilder.keychain"
+
+  if [ ! -d "$keychainsDirectory" ]; then
+    mkdir -p "$keychainsDirectory"
+  fi
+  if [ -f "$keychainsDirectory/$keychainName" ]; then
+    Execute "rm \"$keychainsDirectory/$keychainName\""
+  fi
+  LogImportant "Creating $keychainName"
+  security create-keychain -p "$keychainPassword" "$keychainName"
+  local currentKeychains=$(security list-keychains)
+  Log "Current keychains: $currentKeychains"
+  echo "$currentKeychains" | grep "$keychainsDirectory/$keychainName"
+  if [ $? -ne 0 ]; then
+    local newKeychains=$(security list-keychains | sed 's|^ *"||g' | sed 's|"$||g' | tr "\n" " ")
+    local newKeychains="$newKeychains $keychainsDirectory/$keychainName"
+    Log "Setting new keychain list: $newKeychains"
+    ExecuteOrFail "security list-keychains -s $newKeychains"
+  fi
+  Log "Unlocking Keychain"
+  ExecuteOrFail "security unlock-keychain -p \"$keychainPassword\" \"$keychainsDirectory/$keychainName\""
+  ExecuteOrFail "security set-keychain-settings -t 3600 -l \"$keychainsDirectory/$keychainName\""
+  Log "Importing Keychain"
+  ExecuteOrFail "security import \"$certificate\" -k \"$keychainsDirectory/$keychainName\" -P \"$keychainPassword\" -T /usr/bin/codesign -T /usr/bin/codesign -T /usr/bin/xcodebuild -T /usr/bin/pkgbuild -A > /dev/null"
+}
+
+RestoreLoginKeychain ()
+{
+  LogImportant "Restoring login keychain"
+  ExecuteOrFail "security list-keychains -s $HOME/Library/Keychains/login.keychain"
+  ExecuteOrFail "security default-keychain -d user -s \"$HOME/Library/Keychains/login.keychain\""
+}

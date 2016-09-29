@@ -1,0 +1,19 @@
+opam-version: "1.2"
+maintainer: "Daniel Bünzli <daniel.buenzl i@erratique.ch>"
+authors: ["Daniel Bünzli <daniel.buenzl i@erratique.ch>"]
+homepage: "http://erratique.ch/software/xmlm"
+license: "BSD3"
+doc: ["http://erratique.ch/software/xmlm/doc/Xmlm"]
+tags: [
+  "xml"
+  "codec"
+]
+build: [
+  ["./pkg/pkg-git"]
+  ["./pkg/build" "true"]
+]
+depends: [
+  "ocamlfind"
+  "ocamlbuild" {build}
+]
+ocaml-version: [>= "4.00.0"]

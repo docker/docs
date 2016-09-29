@@ -1,0 +1,20 @@
+#!/usr/bin/env expect
+
+set KERNEL "test/vmlinuz"
+set INITRD "test/initrd.gz"
+set CMDLINE "earlyprintk=serial console=ttyS0"
+
+spawn ./build/com.docker.hyperkit -A -m 512M -s 0:0,hostbridge -s 31,lpc -l com1,stdio -f kexec,$KERNEL,$INITRD,$CMDLINE
+set pid [exp_pid]
+set timeout 20
+
+expect {
+  timeout {puts "FAIL boot"; exec kill -9 $pid; exit 1}
+  "\r\ntc@box:~$ "
+}
+send "sudo halt\r\n";
+expect {
+  timeout {puts "FAIL shutdown"; exec kill -9 $pid; exit 1}
+  "reboot: System halted"
+}
+puts "\n\nPASS"

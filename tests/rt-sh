@@ -1,0 +1,76 @@
+#!/bin/bash
+#
+# Copyright (C) 2016 Docker, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+
+# $1 = os
+# $2 = version
+# $3 = url
+
+set -e
+
+usage () {
+    echo "Creates a VM with rt-vm and runs tests with rt-host/rt-local, optionally cleans up VM when done. "
+    echo "This script must be run from tests/ in the Pinata repo and requires a working vm.json."
+    echo
+    echo "Usage: $0 [os] [version] [installer url]"
+    echo
+    echo "Example: $0 osx 10.12 'https://download-stage.docker.com/mac/master/Docker.dmg'"
+    echo
+    echo "(To change the rt-local command, just edit the script.)"
+    echo
+}
+
+cleanup() {
+    read -p "Do you want to stop and destroy the VM $NAME (y/N)?" -n 1 -r dostop
+    echo
+    case "$dostop" in
+        y|Y ) 
+            echo "Yes"
+            echo "Stopping VM $NAME"
+            ./rt-vm stop "$NAME"
+            sleep 1
+            echo "Destroying VM $NAME"
+            ./rt-vm destroy "$NAME"
+            ;;
+        *)
+            echo "No"
+            echo "Exiting. Test VM still running as $NAME. Use rt-vm stop/destroy to remove it."
+            ;;
+    esac
+}
+
+if [ ! "$#" = "3" ]; then
+    usage
+    exit
+fi
+
+OS="$1"
+VERS="$2"
+URL="$3"
+
+echo "os=${OS}"
+echo "vers=${VERS}"
+echo "url=${URL}"
+
+NAME="$(./rt-vm create "$OS" "$VERS")" || ( echo "Fail: $NAME" ; exit 1)
+echo "vm=$NAME"
+
+
+trap cleanup EXIT
+
+echo "Waiting for VM IP..."
+IP=""
+while (test -z $IP); do
+    IP="$(./rt-vm ip "$NAME")"
+    sleep 1
+done
+echo "ip=$IP"
+
+./rt-host -t "$OS" -r "$IP" -- -vxl installer,release -e D4X_INSTALLER_URL="$URL" run

@@ -1,0 +1,25 @@
+opam-version: "1.2"
+maintainer: "sheets@alum.mit.edu"
+authors: ["David Sheets" "Jeremy Yallop"]
+homepage: "https://github.com/dsheets/ocaml-unix-dirent"
+bug-reports: "https://github.com/dsheets/ocaml-unix-dirent/issues"
+license: "ISC"
+tags: ["unix" "posix" "dirent" "syscall" "readdir"]
+dev-repo: "https://github.com/dsheets/ocaml-unix-dirent.git"
+build: [make "build"]
+install: [make "install"]
+remove: [make "uninstall"]
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "alcotest" {test}
+  "base-bytes"
+]
+depopts: [
+  "base-unix" "unix-type-representations" "ctypes" "unix-errno" "lwt"
+]
+conflicts: [
+  "ctypes" {< "0.6.0"}
+  "unix-errno" {< "0.5.0"}
+]
+available: [ocaml-version >= "4.01.0"]

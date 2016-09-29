@@ -1,0 +1,7 @@
+{
+    "name": "win-10-pro-14393",
+    "iso_url": "iso/Win10Pro-14393_1607_x64.iso",
+    "iso_checksum_type": "sha1",
+    "iso_checksum": "99fd8082a609997ae97a514dca22becf20420891",
+    "autounattend": "answer_files/10-pro/Autounattend.xml"
+}

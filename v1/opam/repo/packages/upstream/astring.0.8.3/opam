@@ -1,0 +1,17 @@
+opam-version: "1.2"
+maintainer: "Daniel Bünzli <daniel.buenzl i@erratique.ch>"
+authors: ["Daniel Bünzli <daniel.buenzl i@erratique.ch>"]
+homepage: "http://erratique.ch/software/astring"
+doc: "http://erratique.ch/software/astring/doc"
+dev-repo: "http://erratique.ch/repos/astring.git"
+bug-reports: "https://github.com/dbuenzli/astring/issues"
+tags: [ "string" "org:erratique" ]
+license: "ISC"
+available: [ ocaml-version >= "4.01.0"]
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "topkg" {build} ]
+build: [[
+  "ocaml" "pkg/pkg.ml" "build"
+          "--pinned" "%{pinned}%" ]]

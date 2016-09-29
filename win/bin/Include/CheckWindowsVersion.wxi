@@ -1,0 +1,35 @@
+<Include>
+	<Property Id="WINDOWSEDITION" Secure="yes">
+    	<RegistrySearch Id="WindowsEditionReg" Root="HKLM" Key="SOFTWARE\Microsoft\Windows NT\CurrentVersion" Name="EditionID" Type="raw" />
+	</Property>
+
+	<Property Id="WINDOWSRELEASEID" Secure="yes">
+    	<RegistrySearch Id="WindowsReleaseIdReg" Root="HKLM" Key="SOFTWARE\Microsoft\Windows NT\CurrentVersion" Name="ReleaseId" Type="raw" />
+	</Property>
+	
+	<Property Id="WINDOWSCURRENTMAJORVERSIONNUMBER" Secure="yes">
+    	<RegistrySearch Id="WindowsCurrentMajorVersionNumberReg" Root="HKLM" Key="SOFTWARE\Microsoft\Windows NT\CurrentVersion" Name="CurrentMajorVersionNumber" Type="raw" />
+	</Property>
+
+	<Property Id="WINDOWSCURRENTBUILD" Secure="yes">
+    	<RegistrySearch Id="WindowsCurrentBuildReg" Root="HKLM" Key="SOFTWARE\Microsoft\Windows NT\CurrentVersion" Name="CurrentBuild" Type="raw" />
+	</Property>
+	
+	<Condition Message="HyperV is not available on Home editions. Please use Docker Toolbox.
+
+https://www.docker.com/products/docker-toolbox">
+    	<![CDATA[NOT (WINDOWSEDITION << "Home")]]>
+	</Condition>
+
+	<Condition Message="HyperV is not available on Home editions. Please use Docker Toolbox.
+
+https://www.docker.com/products/docker-toolbox">
+    	<![CDATA[NOT (WINDOWSEDITION << "Core")]]>
+	</Condition>
+
+	<Condition Message="This version of Docker requires Windows 10 Pro, Enterprise or Education edition with a minimum build number of 10586. Please use Docker Toolbox.
+
+https://www.docker.com/products/docker-toolbox">
+    	<![CDATA[Installed OR (WINDOWSCURRENTBUILD >= 10586 AND (WINDOWSEDITION << "Professional" OR WINDOWSEDITION << "Enterprise" OR WINDOWSEDITION << "Education"))]]>
+	</Condition>
+</Include>

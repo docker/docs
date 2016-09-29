@@ -1,0 +1,20 @@
+opam-version: "1.2"
+maintainer: ["Louis Gesbert <louis.gesbert@ocamlpro.com>"
+             "Anil Madhavapeddy <anil@recoil.org>" ]
+authors: ["Louis Gesbert <louis.gesbert@ocamlpro.com>"
+          "Anil Madhavapeddy <anil@recoil.org>"]
+homepage: "https://github.com/ocaml/opam-depext"
+bug-reports: "https://github.com/ocaml/opam-depext/issues"
+license: "LGPL-3.0 with OCaml linking exception"
+dev-repo: "https://github.com/ocaml/opam-depext.git"
+build: [
+  ["ocamlopt" "-I" cmdliner:lib "unix.cmxa" "cmdliner.cmxa"
+     "-o" "opam-depext" "depext.ml"]
+    { ocaml-native }
+  ["ocamlc" "-I" cmdliner:lib "unix.cma" "cmdliner.cma"
+     "-o" "opam-depext" "depext.ml"]
+    { !ocaml-native }
+]
+depends: [ "cmdliner" {build} ]
+available: [ opam-version >= "1.1.0" ]
+tags: "flags:plugin"

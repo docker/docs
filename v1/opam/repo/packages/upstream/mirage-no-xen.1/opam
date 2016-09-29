@@ -1,0 +1,6 @@
+opam-version: "1.2"
+maintainer: "mirageos-devel@lists.xenproject.org"
+authors: ["mirageos-devel@lists.xenproject.org"]
+homepage: "https://mirage.io"
+license: "BSD2"
+conflicts: [ "mirage-xen" ]

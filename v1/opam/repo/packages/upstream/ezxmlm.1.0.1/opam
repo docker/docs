@@ -1,0 +1,24 @@
+opam-version: "1.2"
+maintainer: "anil@recoil.org"
+authors: [ "Anil Madhavapeddy" ]
+license: "ISC"
+build: [
+  ["ocaml" "setup.ml" "-configure" "--prefix" prefix]
+  ["ocaml" "setup.ml" "-build"]
+]
+remove: [
+  ["ocamlfind" "remove" "ezxmlm"]
+]
+build-doc: [ "ocaml" "setup.ml" "-doc" ]
+depends: [
+  "ocamlfind"
+  "xmlm" {>= "1.1.0"}
+  "ocamlbuild" {build}
+]
+tags: [
+  "org:mirage"
+  "org:ocamllabs"
+]
+dev-repo: "git://github.com/avsm/ezxmlm"
+available: ocaml-version >= "4.01.0"
+install: ["ocaml" "setup.ml" "-install"]

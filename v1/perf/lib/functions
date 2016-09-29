@@ -1,0 +1,62 @@
+#!/bin/sh
+
+# Common functions which can be used by the test case.
+original_db=~/Library/Application\ Support/Docker/database/com.docker.driver.amd64-linux/
+new_db=~/Library/Containers/com.docker.docker/Data/database/com.docker.driver.amd64-linux/
+if [ -d "${original_db}" ]; then
+  db=${original_db}
+elif [ -d "${new_db}" ]; then
+  db=${new_db}
+else
+  echo "Failed to find database"
+  exit 1
+fi
+
+hypervisor="unknown"
+network="unknown"
+filesystem="unknown"
+vmip="unknown"
+hostip="unknown"
+
+if [ "${NATIVE}" = "1" ]; then
+  hypervisor="none"
+  version="unknown"
+  commit="unknown"
+else
+
+if [ -z "${DOCKER_HOST}" ]; then
+  # assume we must be using hyperkit
+  hypervisor="hyperkit"
+  if [ ! -f "${db}/network" ]; then
+    network=native
+  else
+    network=$(cat "${db}/network")
+  fi
+  if [ ! -f "${db}/filesystem" ]; then
+    filesystem=osxfs
+  else
+    filesystem=$(cat "${db}/filesystem")
+  fi
+  if [ "${network}" = "slirp" ]; then
+    vmip=127.0.0.1
+  else
+    vmip=$(ping -c 1 docker.local | grep "PING docker.local" | cut -f2 -d'(' | cut -f1 -d')' )
+    hostip=192.168.64.1
+  fi
+else
+  # use docker-machine to figure out whether it's vbox or fusion?
+  machine=${DOCKER_MACHINE_NAME}
+  hypervisor=$(docker-machine inspect ${DOCKER_MACHINE_NAME}|jq .DriverName | cut -f 2 -d '"')
+  vmip=$(docker-machine inspect default|jq .Driver.Driver.IPAddress|cut -f 2 -d '"')
+  hostip=192.168.99.1
+fi
+if [ -h /usr/local/bin/docker ]; then
+  docker_bin=$(readlink "$(readlink /usr/local/bin/docker)")
+  bundle=$(dirname $(dirname $(dirname $(dirname ${docker_bin}))))
+  version=${PINATA_PERF_VERSION:-$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" ${bundle}/Contents/Info.plist)}
+  commit=$(cat ${bundle}/Contents/Resources/COMMIT)
+else
+  version=${hypervisor}
+  commit=unknown
+fi
+fi

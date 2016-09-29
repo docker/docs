@@ -1,0 +1,6 @@
+bin: [
+  "?_build/test/ocamltweets.byte" {"ocamltweets"}
+  "?_build/test/ocamltweets.native" {"ocamltweets"}
+  "?_build/test/jsontrip.byte" {"jsontrip"}
+  "?_build/test/jsontrip.native" {"jsontrip"}
+]

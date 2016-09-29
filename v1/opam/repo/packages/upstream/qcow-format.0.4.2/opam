@@ -1,0 +1,53 @@
+opam-version: "1.2"
+name: "qcow-format"
+maintainer: "dave@recoil.org"
+authors: [ "David Scott" ]
+license: "ISC"
+homepage: "https://github.com/mirage/ocaml-qcow"
+dev-repo: "https://github.com/mirage/ocaml-qcow.git"
+bug-reports: "https://github.com/mirage/ocaml-qcow/issues"
+
+tags: [
+  "org:mirage"
+]
+
+build: [
+  [make "PREFIX=%{prefix}%"]
+]
+
+install: [make "PREFIX=%{prefix}%" "install"]
+
+remove: [[make "PREFIX=%{prefix}%" "uninstall"]]
+
+depends: [
+  "base-bytes"
+  "cstruct"
+  "result"
+  "mirage-types-lwt"
+  "lwt"
+  "mirage-block" {>= "0.2" }
+  "mirage-block-unix" {>= "2.1.0" }
+  "cmdliner"
+  "sexplib"
+  "logs"
+  "fmt"
+  "astring"
+  "ocamlfind" {build}
+  "oasis" {build}
+  "ppx_tools" {build}
+  "ppx_sexp_conv" {build}
+  "ppx_type_conv" {build}
+  "ounit" {test}
+  "mirage-block-ramdisk" {test}
+  "ezjsonm" {test}
+  "nbd" {test & >= "2.0.1"}
+]
+build-doc: ["ocaml" "setup.ml" "-doc"]
+
+build-test: [
+  ["ocaml" "setup.ml" "-configure" "--enable-tests"]
+  ["ocaml" "setup.ml" "-build"]
+  ["ocaml" "setup.ml" "-test"]
+]
+
+available: [ocaml-version >= "4.02.0"]

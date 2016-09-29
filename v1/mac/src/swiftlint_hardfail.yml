@@ -1,0 +1,30 @@
+disabled_rules:
+  - variable_name
+  - type_name
+  - line_length
+  - function_body_length
+  - cyclomatic_complexity
+  - todo
+  - trailing_newline
+  - control_statement
+  - opening_brace
+  - legacy_constant
+  - statement_position
+  - valid_docs
+  - file_length
+  - return_arrow_whitespace
+  - trailing_whitespace
+  - variable_name_min_length
+  - type_body_length
+
+opt_in_rules:
+  - colon
+  - comma
+  - force_unwrapping
+
+excluded:
+  - Carthage
+
+force_unwrapping:
+  severity: error
+

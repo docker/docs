@@ -1,0 +1,343 @@
+#!/usr/bin/env bash
+
+################################################################################
+# Docker.Dependencies created on 2015-12-22 by michaK                          #
+################################################################################
+#                       ____             __                                    #
+#                      / __ \____  _____/ /_____  _____                        #
+#                     / / / / __ \/ ___/ //_/ _ \/ ___/                        #
+#                    / /_/ / /_/ / /__/ ,< /  __/ /                            #
+#                   /_____/\____/\___/_/|_|\___/_/                             #
+#                                                                              #
+################################################################################
+#                   Docker Cross Platform build scripts                        #
+#                     Dependencies Tools                                       #
+################################################################################
+
+# General file check. It can check:
+# a command in PATH if $filename is not rooted
+# a file or a directory
+# if found, the function returns successfully
+# if not, $hint is evaluated after prompting the user
+# -y option disables the prompt
+DependenciesCheckFile ()
+{
+  filename=$1
+  hint=$2
+  Log "Looking for ${filename}"
+  if [[ ${filename} == /* ]]; then
+    if [ ! -f ${filename} ] && [ ! -d ${filename} ]; then
+      found=false
+    else
+      found=true
+    fi
+  else
+    which ${filename} >/dev/null 2>&1
+    if [ $? -eq 0 ]; then
+      found=true
+    else
+      found=false
+    fi
+  fi
+  if [ ${found} == false ]; then
+    LogWarning "Could not find ${filename} run this command to install it:\n\n${hint}\n";
+    if PromptYesNo 'Would you like to do it now ?'; then
+      echo "$hint"
+      echo ""
+      eval "$hint"
+      if [ $? -ne 0 ]; then
+        LogError "$filename installation failed"
+      fi
+    else
+      LogError "run '$hint' to fix it"
+    fi
+  fi
+  if [ "$found" = "true" ]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+# Dependencies check entry point
+DependenciesCheck ()
+{
+  LogImportant 'Checking Dependencies...'
+  coloredLogs=true
+  LogImportant "Running on OSX $scriptPlatformVersion ($scriptArch)"
+  DependenciesCheckOSX
+  LogSuccess 'Dependencies check complete'
+}
+
+DependenciesCheckGo()
+{
+  DependenciesCheckFile      'go'                    'brew -v install go'
+  local goVersion=$(go version | cut -d \  -f3 | sed 's|go||g')
+  versionCompare $goVersion $goRecommendedVersion
+  local exitCode=$?
+  if [ $exitCode -eq 0 ]; then
+    Log "go version match: (installed: $goVersion == recommended: $goRecommendedVersion)"
+  elif [ $exitCode -eq 1 ]; then
+    Log "go version is newer (installed: $goVersion > recommended: $goRecommendedVersion)"
+  elif [ $exitCode -eq 2 ]; then
+    Log "go version is outdated (installed: $goVersion < recommended: $goRecommendedVersion)"
+    Log "trying to update go..."
+    ExecuteOrFail "brew unpin go"
+    ExecuteOrFail "brew -v update"
+    ExecuteOrFail "brew -v upgrade"
+  fi
+}
+
+DependenciesCheckPinataRepo()
+{
+  Log "Checking pinata git repository. Cloning if necessary"
+  if [ -z $CI ]; then
+    DependenciesCheckFile      "$GOPATH/src/$GIT_PATH" "mkdir -p $GOPATH/src/$GIT_PATH; git clone $GIT_URL $GOPATH/src/$GIT_PATH"
+  else
+    DependenciesCheckFile      "$GOPATH/src/$GIT_PATH" "mkdir -p $GOPATH/src/$GIT_PATH; rm -rf mkdir -p $GOPATH/src/$GIT_PATH; ln -s $HOME/pinata $GOPATH/src/$GIT_PATH; ls -la $GOPATH/src/$GIT_PATH"
+  fi
+}
+
+DependenciesClean()
+{
+  LogImportant "Cleaning system dependencies"
+  case $platformName in
+    "OSX"     ) DependenciesCleanOSX ;;
+  esac
+}
+
+############################## OSX ###########################################
+
+DependenciesCleanOSX()
+{
+  Log     "removing node_modules"
+  Execute "rm -rf $MAC_FOLDER_PATH/src/docker-app/node_modules"
+  Log     "removing md5sha1sum"
+  Execute "brew rm --force md5sha1sum"
+  Log     "removing jq"
+  Execute "brew rm --force jq"
+  Log     "removing dylibbundler"
+  Execute "brew rm --force dylibbundler"
+  # Log     "removing lynx"
+  # Execute "brew rm --force lynx"
+  Log     "removing npm"
+  Execute "brew rm --force npm"
+  Log     "removing node"
+  Execute "brew rm --force node"
+  Log     "removing go"
+  Execute "brew rm --force go"
+  Log     "removing libtool"
+  Execute "brew rm --force libtool"
+  Execute "brew prune"
+}
+
+DependenciesCheckOSX()
+{
+  local xCodePkgVersions=$(pkgutil --pkgs | grep Xcode)
+  if [ $? -ne 0 ]; then
+    LogError 'Could not find Xcode. Please install Xcode from the app store'
+  else
+    local xcodeVersion=$(xcodebuild -version 2> /dev/null | head -n1 | cut -d\  -f2)
+    Log "Found Xcode ${xcodeVersion}"
+  fi
+  DependenciesCheckFile      'brew'                             'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+  if [ -n "$CI" ]; then
+    Execute "brew -v update"
+    ExecuteOrFail "brew -v update"
+    ExecuteOrFail "brew -v upgrade"
+    # Link Xcode.app to default path
+    local xCodePath=$(xcode-select -p | cut -f1-3 -d'/')
+    echo "xCodePath=${xCodePath}"
+    if [ "$xCodePath" != "/Applications/Xcode.app" ]; then
+        echo "Linking to /Applications/Xcode.app"
+        ln -s "$xCodePath" "/Applications/Xcode.app"
+    fi
+    DependenciesCheckFile    'aws'                                        'brew -v install awscli'
+  fi
+
+  DependenciesCheckFile      'jq'                                           'brew -v install jq'
+  DependenciesCheckFile      'carthage'                                     'brew -v install carthage'
+  DependenciesCheckFile      'cmake'                                        'brew -v install cmake'
+  DependenciesCheckFile      'dylibbundler'                                 'brew -v install dylibbundler'
+  DependenciesCheckFile      'pkg-config'                                   'brew -v install pkg-config'
+  DependenciesCheckFile      '/usr/local/lib/glib-2.0/include/glibconfig.h' 'brew -v install glib'
+  DependenciesCheckFile      '/usr/local/lib/libltdl.dylib'                 'brew -v install libtool'
+
+  DependenciesCheckFile      'swiftlint'                                    'brew -v install swiftlint'
+
+  DependenciesCheckFile      'sha1sum'                                      'brew -v install md5sha1sum'
+
+  DependenciesCheckGo
+
+  DependenciesCheckPinataRepo
+  DownloadToolbox
+}
+
+############################### External Downloads ############################################
+
+DownloadToolbox ()
+{
+  LogImportant "Downloading docker toolbox components"
+  mkdir -p "$cacheDirectory/toolbox"
+  local oldPwd=$(pwd)
+  cd "$cacheDirectory/toolbox"
+
+  if [ ! -e docker-$toolboxDockerVersion ]; then
+    Log "Downloading docker"
+    if echo $toolboxDockerVersion | grep -q -- '-rc'
+    then
+      ExecuteOrFailMsg "curl -fsSL -z docker-${toolboxDockerVersion}.tgz -o docker-${toolboxDockerVersion}.tgz -C - https://experimental.docker.com/builds/Darwin/x86_64/docker-${toolboxDockerVersion}.tgz" "Failed to download docker RC bundle"
+    else
+      ExecuteOrFailMsg "curl -fsSL -z docker-$toolboxDockerVersion -o docker-${toolboxDockerVersion}.tgz -C - https://experimental.docker.com/builds/Darwin/x86_64/docker-${toolboxDockerVersion}.tgz" "Failed to download docker bundle"
+      #ExecuteOrFailMsg "curl -fsSL -z docker-$toolboxDockerVersion -o docker-${toolboxDockerVersion}.tgz -C - https://get.docker.com/builds/Darwin/x86_64/docker-${toolboxDockerVersion}.tgz" "Failed to download docker bundle"
+    fi
+    ExecuteOrFail "gzcat docker-${toolboxDockerVersion}.tgz | tar xvf -"
+    ExecuteOrFail "cp -a docker/docker docker-${toolboxDockerVersion}"
+    ExecuteOrFail "rm -rf docker/"
+    ExecuteOrFail "chmod +x docker-$toolboxDockerVersion"
+  fi
+  ExecuteOrFail "rm -f docker"
+  ExecuteOrFail "ln docker-$toolboxDockerVersion docker"
+  echo "Using docker with md5sum $(md5sum docker)"
+  ExecuteOrFail "cp docker ${MAC_FOLDER_PATH}/resources/OSX/docker"
+  if [ ! -e LICENSE.docker ]; then
+    ExecuteOrFailMsg "curl -fsSL -z LICENSE.docker -o LICENSE.docker -C - https://raw.githubusercontent.com/docker/docker/master/LICENSE" "Failed to download docker LICENSE"
+  fi
+  if [ ! -e docker-$toolboxDockerVersion.bash-completion ]; then
+    #ExecuteOrFailMsg "curl -fsSL -z docker-$toolboxDockerVersion.bash-completion -o docker-$toolboxDockerVersion.bash-completion -C - https://raw.githubusercontent.com/docker/docker/v1.12.0/contrib/completion/bash/docker" "Failed to download docker bash completion"
+    ExecuteOrFailMsg "curl -fsSL -z docker-$toolboxDockerVersion.bash-completion -o docker-$toolboxDockerVersion.bash-completion -C - https://raw.githubusercontent.com/docker/docker/v$toolboxDockerVersion/contrib/completion/bash/docker" "Failed to download docker bash completion"
+  fi
+  ExecuteOrFail "rm -f docker.bash-completion"
+  ExecuteOrFail "ln docker-$toolboxDockerVersion.bash-completion docker.bash-completion"
+  ExecuteOrFail "cp docker.bash-completion ${MAC_FOLDER_PATH}/resources/OSX/docker.bash-completion"
+  if [ ! -e docker-$toolboxDockerVersion.zsh-completion ]; then
+    #ExecuteOrFailMsg "curl -fsSL -z docker-$toolboxDockerVersion.zsh-completion -o docker-$toolboxDockerVersion.zsh-completion -C - https://raw.githubusercontent.com/docker/docker/v1.12.0/contrib/completion/zsh/_docker" "Failed to download docker zsh completion"
+    ExecuteOrFailMsg "curl -fsSL -z docker-$toolboxDockerVersion.zsh-completion -o docker-$toolboxDockerVersion.zsh-completion -C - https://raw.githubusercontent.com/docker/docker/v$toolboxDockerVersion/contrib/completion/zsh/_docker" "Failed to download docker zsh completion"
+  fi
+  ExecuteOrFail "rm -f docker.zsh-completion"
+  ExecuteOrFail "ln docker-$toolboxDockerVersion.zsh-completion docker.zsh-completion"
+  ExecuteOrFail "cp docker.zsh-completion ${MAC_FOLDER_PATH}/resources/OSX/docker.zsh-completion"
+  if [ ! -e docker-machine-$toolboxMachineVersion ]; then
+    Log "Downloading docker machine"
+    ExecuteOrFailMsg "curl -fsSL -z docker-machine-$toolboxMachineVersion -o docker-machine-$toolboxMachineVersion -C - https://github.com/docker/machine/releases/download/v$toolboxMachineVersion/docker-machine-Darwin-x86_64" "Failed to download docker machine"
+    ExecuteOrFail "chmod +x docker-machine-$toolboxMachineVersion"
+  fi
+  ExecuteOrFail "rm -f docker-machine"
+  ExecuteOrFail "ln docker-machine-$toolboxMachineVersion docker-machine"
+  ExecuteOrFail "cp docker-machine ${MAC_FOLDER_PATH}/resources/OSX/docker-machine"
+
+  if [ ! -e LICENSE.docker-machine ]; then
+    ExecuteOrFailMsg "curl -fsSL -z LICENSE.docker-machine -o LICENSE.docker-machine -C - https://raw.githubusercontent.com/docker/machine/master/LICENSE" "Failed to download docker-machine LICENSE"
+  fi
+  if [ ! -e docker-machine-$toolboxMachineVersion.bash-completion ]; then
+    ExecuteOrFailMsg "curl -fsSL -z docker-machine-$toolboxMachineVersion.bash-completion -o docker-machine-$toolboxMachineVersion.bash-completion -C - https://raw.githubusercontent.com/docker/machine/v$toolboxMachineVersion/contrib/completion/bash/docker-machine.bash" "Failed to download docker machine bash completion"
+  fi
+  ExecuteOrFail "rm -f docker-machine.bash-completion"
+  ExecuteOrFail "ln docker-machine-$toolboxMachineVersion.bash-completion docker-machine.bash-completion"
+  ExecuteOrFail "cp docker-machine.bash-completion ${MAC_FOLDER_PATH}/resources/OSX/docker-machine.bash-completion"
+  if [ ! -e docker-machine-$toolboxMachineVersion.zsh-completion ]; then
+    ExecuteOrFailMsg "curl -fsSL -z docker-machine-$toolboxMachineVersion.zsh-completion -o docker-machine-$toolboxMachineVersion.zsh-completion -C - https://raw.githubusercontent.com/docker/machine/v$toolboxMachineVersion/contrib/completion/zsh/_docker-machine" "Failed to download docker machine zsh completion"
+  fi
+  ExecuteOrFail "rm -f docker-machine.zsh-completion"
+  ExecuteOrFail "ln docker-machine-$toolboxMachineVersion.zsh-completion docker-machine.zsh-completion"
+  ExecuteOrFail "cp docker-machine.zsh-completion ${MAC_FOLDER_PATH}/resources/OSX/docker-machine.zsh-completion"
+
+  if [ ! -e docker-compose-$toolboxComposeVersion ]; then
+    Log "Downloading docker compose"
+    ExecuteOrFailMsg "curl -fsSL -z docker-compose-$toolboxComposeVersion -o docker-compose-$toolboxComposeVersion -C - https://github.com/docker/compose/releases/download/$toolboxComposeVersion/docker-compose-Darwin-x86_64" "Failed to download docker compose"
+    ExecuteOrFail "chmod +x docker-compose-$toolboxComposeVersion"
+  fi
+  ExecuteOrFail "rm -f docker-compose"
+  ExecuteOrFail "ln docker-compose-$toolboxComposeVersion docker-compose"
+  ExecuteOrFail "cp docker-compose ${MAC_FOLDER_PATH}/resources/OSX/docker-compose"
+  if [ ! -e LICENSE.docker-compose ]; then
+    ExecuteOrFailMsg "curl -fsSL -z LICENSE.docker-compose -o LICENSE.docker-compose -C - https://raw.githubusercontent.com/docker/compose/master/LICENSE" "Failed to download docker compose LICENSE"
+  fi
+  if [ ! -e docker-compose-$toolboxComposeVersion.bash-completion ]; then
+    ExecuteOrFailMsg "curl -fsSL -z docker-compose-$toolboxComposeVersion.bash-completion -o docker-compose-$toolboxComposeVersion.bash-completion -C - https://raw.githubusercontent.com/docker/compose/$toolboxComposeVersion/contrib/completion/bash/docker-compose" "Failed to download docker compose bash completion"
+  fi
+  ExecuteOrFail "rm -f docker-compose.bash-completion"
+  ExecuteOrFail "ln docker-compose-$toolboxComposeVersion.bash-completion docker-compose.bash-completion"
+  ExecuteOrFail "cp docker-compose.bash-completion ${MAC_FOLDER_PATH}/resources/OSX/docker-compose.bash-completion"
+  if [ ! -e docker-compose-$toolboxComposeVersion.zsh-completion ]; then
+    ExecuteOrFailMsg "curl -fsSL -z docker-compose-$toolboxComposeVersion.zsh-completion -o docker-compose-$toolboxComposeVersion.zsh-completion -C - https://raw.githubusercontent.com/docker/compose/$toolboxComposeVersion/contrib/completion/zsh/_docker-compose" "Failed to download docker compose zsh completion"
+  fi
+  ExecuteOrFail "rm -f docker-compose.zsh-completion"
+  ExecuteOrFail "ln docker-compose-$toolboxComposeVersion.zsh-completion docker-compose.zsh-completion"
+  ExecuteOrFail "cp docker-compose.zsh-completion ${MAC_FOLDER_PATH}/resources/OSX/docker-compose.zsh-completion"
+
+  if [ ! -e notary-${toolboxNotaryVersion} ]; then
+    Log "Downloading notary"
+    ExecuteOrFailMsg "curl -fsSL -z notary-${toolboxNotaryVersion}.zip -o notary-${toolboxNotaryVersion}.zip -C - https://github.com/docker/notary/releases/download/v$toolboxNotaryVersion/notary-v${toolboxNotaryVersion}_darwin-amd64.zip" "Failed to download notary"
+    ExecuteOrFailMsg "ditto -xk notary-${toolboxNotaryVersion}.zip ." "Failed to extract notary"
+    ExecuteOrFail "mv notary-v${toolboxNotaryVersion}_darwin-amd64/notary ./notary-${toolboxNotaryVersion}"
+    ExecuteOrFail "rm -rf notary-v${toolboxNotaryVersion}_darwin-amd64"
+    ExecuteOrFail "chmod +x notary-${toolboxNotaryVersion}"
+  fi
+  ExecuteOrFail "rm -f notary"
+  # XXX temporary build that can be signed
+  # ExecuteOrFail "ln notary-${toolboxNotaryVersion} notary"
+  ExecuteOrFail "cp -a ${MAC_FOLDER_PATH}/resources/OSX/notary.signable ./notary"
+  ExecuteOrFail "install_name_tool -change /usr/local/opt/libtool/lib/libltdl.7.dylib @executable_path/../lib/libltdl.7.dylib notary"
+  ExecuteOrFail "cp notary ${MAC_FOLDER_PATH}/resources/OSX/notary.bin"
+
+  # com.docker.slirp
+  if [ ! -e COMMIT.com.docker.slirp ] || [ "$(cat COMMIT.com.docker.slirp)" != "${slirpCommit}" ]; then
+     LogImportant "Removing stale com.docker.slirp binaries"
+     ExecuteOrFail "rm -f COMMIT.com.docker.slirp LICENSE.com.docker.slirp com.docker.slirp.tgz"
+  fi
+  if [ ! -e com.docker.slirp.tgz ]; then
+    LogImportant "- Downloading com.docker.slirp.tgz"
+    ExecuteOrFailMsg "curl -fsSL -z com.docker.slirp.tgz -o com.docker.slirp.tgz https://circle-artifacts.com/gh/docker/vpnkit/${slirpBuildNumber}/artifacts/0/Users/distiller/vpnkit/com.docker.slirp.tgz" "Failed to download com.docker.slirp.tgz"
+    Log "Downloading LICENSE.com.docker.slirp"
+    ExecuteOrFailMsg "curl -fsSL -z LICENSE.com.docker.slirp -o LICENSE.com.docker.slirp https://circle-artifacts.com/gh/docker/vpnkit/${slirpBuildNumber}/artifacts/0/Users/distiller/vpnkit/OSS-LICENSES" "Failed to download LICENSE.com.docker.slirp"
+  fi
+  Log "Downloading COMMIT.com.docker.slirp"
+  ExecuteOrFailMsg "curl -fsSL -z COMMIT.com.docker.slirp -o COMMIT.com.docker.slirp https://circle-artifacts.com/gh/docker/vpnkit/${slirpBuildNumber}/artifacts/0/Users/distiller/vpnkit/COMMIT" "Failed to download COMMIT.com.docker.slirp"
+  if [ "$(cat COMMIT.com.docker.slirp)" != "${slirpCommit}" ]; then
+    LogError "Wrong commit ID specified for com.docker.slirp (configuration has ${slirpCommit}, download has $(cat COMMIT.com.docker.slirp))"
+  fi
+  if [ -e "com.docker.slirp.local.tgz" ] ; then
+      LogImportant "Using com.docker.slirp.local.tgz"
+      ExecuteOrFail "tar -C ${MAC_FOLDER_PATH}/resources/OSX -xvzf com.docker.slirp.local.tgz"
+  else
+      ExecuteOrFail "tar -C ${MAC_FOLDER_PATH}/resources/OSX -xvzf com.docker.slirp.tgz"
+  fi
+
+  # com.docker.db
+  if [ ! -e COMMIT.com.docker.db ] || [ "$(cat COMMIT.com.docker.db)" != "${datakitCommit}" ]; then
+     LogImportant "Removing stale com.docker.db binaries"
+     ExecuteOrFail "rm -f COMMIT.com.docker.db com.docker.db"
+     # FIXME: LICENSE.com.docker.db
+  fi
+  if [ ! -e com.docker.db ]; then
+    LogImportant "- Downloading com.docker.db"
+    ExecuteOrFailMsg "curl -fsSL -z com.docker.db -o com.docker.db https://circle-artifacts.com/gh/docker/datakit/${datakitBuildNumber}/artifacts/0/Users/distiller/datakit/com.docker.db" "Failed to download com.docker.db"
+    #Log "Downloading LICENSE.com.docker.db"
+    #ExecuteOrFailMsg "curl -fsSL -z LICENSE.com.docker.db -o LICENSE.com.docker.db https://circle-artifacts.com/gh/docker/datakit/${datakitBuildNumber}/artifacts/0/Users/distiller/datakit/OSS-LICENSES" "Failed to download LICENSE.com.docker.db"
+  fi
+  Log "Downloading COMMIT.com.docker.db"
+  ExecuteOrFailMsg "curl -fsSL -z COMMIT.com.docker.db -o COMMIT.com.docker.db https://circle-artifacts.com/gh/docker/datakit/${datakitBuildNumber}/artifacts/0/Users/distiller/datakit/COMMIT" "Failed to download COMMIT.com.docker.db"
+  if [ "$(cat COMMIT.com.docker.db)" != "${datakitCommit}" ]; then
+    LogError "Wrong commit ID specified for com.docker.db (configuration has ${datakitCommit}, download has $(cat COMMIT.com.docker.db))"
+  fi
+  if [ -e "com.docker.db.local" ] ; then
+      LogImportant "Using com.docker.db.local"
+      ExecuteOrFail "cp com.docker.db.local ${MAC_FOLDER_PATH}/resources/OSX/com.docker.db"
+  else
+      ExecuteOrFail "cp com.docker.db ${MAC_FOLDER_PATH}/resources/OSX/com.docker.db"
+  fi
+  ExecuteOrFail "chmod a+x ${MAC_FOLDER_PATH}/resources/OSX/com.docker.db"
+
+  if [ ! -e LICENSE.docker-notary ]; then
+    ExecuteOrFailMsg "curl -fsSL -z LICENSE.docker-notary -o LICENSE.docker-notary -C - https://raw.githubusercontent.com/docker/notary/master/LICENSE" "Failed to download docker-notary LICENSE"
+  fi
+  if [ "${bundleKitematic}" = "true" ]; then
+     Log "Downloading kitematic"
+     Execute "rm -rf \"Kitematic (Beta).app\""
+     ExecuteOrFailMsg "curl -fsSL -z kitematic.zip -o kitematic.zip $toolboxKitematicUrl" "Failed to download Kitematic"
+     ExecuteOrFail "ditto -xk kitematic.zip ." "Failed to extract Kitematic"
+     ExecuteOrFailMsg "curl -fsSL -z LICENSE.kitematic -o LICENSE.kitematic https://raw.githubusercontent.com/docker/kitematic/master/LICENSE" "Failed to download Kitematic LICENSE"
+  fi
+  cd "$oldPwd"
+}

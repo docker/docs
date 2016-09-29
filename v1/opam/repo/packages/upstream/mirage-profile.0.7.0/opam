@@ -1,0 +1,31 @@
+opam-version: "1.2"
+name: "mirage-profile"
+version: "0.7.0"
+maintainer: "Thomas Leonard <talex5@gmail.com>"
+authors: "Thomas Leonard <talex5@gmail.com>"
+homepage: "https://github.com/mirage/mirage-profile"
+dev-repo: "https://github.com/mirage/mirage-profile.git"
+bug-reports: "https://github.com/mirage/mirage-profile/issues"
+license: "BSD-2-clause"
+build: [
+	["./configure"
+	  "--prefix" prefix
+	  "--%{mirage-xen-minios:enable}%-xen"
+	]
+	[make]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "mirage-profile"]
+depends: [
+  "ocamlfind" {build}
+  "cstruct" {>= "1.9.0"}
+  "ppx_tools"
+  "ocplib-endian"
+  "io-page"
+  "lwt"
+  "ocamlbuild" {build}
+]
+depopts: [
+	"mirage-xen-minios"
+]
+available: [ ocaml-version >= "4.02.0" ]

@@ -1,0 +1,15 @@
+opam-version: "1.2"
+maintainer: "martin@mjambon.com"
+authors: ["Martin Jambon"]
+homepage: "http://mjambon.com/easy-format.html"
+bug-reports: "https://github.com/mjambon/easy-format/issues"
+dev-repo: "https://github.com/mjambon/easy-format.git"
+build: [
+  [make] {ocaml-native}
+  [make "all"] {!ocaml-native}
+]
+install: [
+  [make "install"]
+]
+remove: [["ocamlfind" "remove" "easy-format"]]
+depends: ["ocamlfind"]

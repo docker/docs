@@ -1,0 +1,6 @@
+opam-version: "1.2"
+maintainer: " "
+authors: " "
+homepage: " "
+depends: ["ocamlfind" {>= "1.5.3"}]
+available: [ocaml-version >= "4.02.0"]

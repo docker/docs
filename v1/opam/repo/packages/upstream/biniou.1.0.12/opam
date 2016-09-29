@@ -1,0 +1,20 @@
+opam-version: "1.2"
+maintainer: "martin@mjambon.com"
+authors: ["Martin Jambon"]
+
+homepage: "https://github.com/mjambon/biniou"
+bug-reports: "https://github.com/mjambon/biniou/issues"
+dev-repo: "https://github.com/mjambon/biniou.git"
+license: "BSD-3-Clause"
+
+build: make
+remove: [["ocamlfind" "remove" "biniou"]]
+depends: [
+  "conf-which" {build}
+  "ocamlfind"
+  "easy-format"
+]
+install: [make "install" "BINDIR=%{bin}%"]
+
+# -bin-annot flag is used unconditionally, requiring ocaml >= 4.xx
+available: [ocaml-version >= "4.00"]

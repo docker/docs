@@ -1,0 +1,26 @@
+opam-version: "1.2"
+maintainer: "Jeremy Yallop <yallop@gmail.com>"
+authors: "Jeremy Yallop <yallop@gmail.com>"
+homepage: "https://github.com/yallop/ocaml-unix-type-representations"
+bug-reports:
+  "https://github.com/yallop/ocaml-unix-type-representations/issues"
+license: "MIT"
+dev-repo: "https://github.com/yallop/ocaml-unix-type-representations.git"
+build: [
+  ["./configure" "--prefix=%{prefix}%"]
+  [make]
+]
+install: [make "install"]
+build-test: [
+  ["ocaml" "setup.ml" "-configure" "--enable-tests"]
+  [make "test"]
+]
+remove: ["ocamlfind" "remove" "unix-type-representations"]
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "base-unix"
+  "ctypes" {test}
+  "ctypes-foreign" {test}
+  "ounit" {test}
+]

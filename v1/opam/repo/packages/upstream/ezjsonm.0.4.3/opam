@@ -1,0 +1,35 @@
+opam-version: "1.2"
+maintainer:   "thomas@gazagnaire.org"
+authors:      "Thomas Gazagnaire"
+license:      "ISC"
+homepage:     "https://github.com/mirage/ezjsonm"
+bug-reports:  "https://github.com/mirage/ezjsonm/issues"
+dev-repo:     "https://github.com/mirage/ezjsonm.git"
+tags: [
+  "org:mirage"
+  "org:ocamllabs"
+]
+
+build: [
+  ["./configure" "--prefix" prefix "--%{lwt:enable}%-lwt"]
+  [make]
+]
+build-test: [
+  ["./configure" "--prefix" prefix "--enable-tests"]
+  [make "test"]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "ezjsonm"]
+depends: [
+  "ocamlfind" {build}
+  "alcotest" {test & >= "0.4.0"}
+  "lwt" {test}
+  "jsonm" {>= "0.9.1"}
+  "sexplib"
+  "hex"
+  "ocamlbuild" {build}
+]
+depopts: ["lwt"]
+conflicts: [
+  "lwt" {< "2.4.7"}
+]

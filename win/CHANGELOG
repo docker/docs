@@ -1,0 +1,708 @@
+### 1.12.2-rc1-beta27 "Beta27"
+
+## Important
+
+The auto update function in Beta 21 will not be able to install this update.
+If you are still on Beta 21 please install the latest beta manually by downloading the installer from:
+
+https://download.docker.com/win/beta/InstallDocker.msi
+
+Windows Container support relies on the Windows 10 container feature, which is **experimental** at this point.  Windows 10 Pro (1607, build number 14393) requires update `KB3192366` (soon to be released via Windows Update) to fully work. Some insider builds may not work.
+
+## Changes
+
+* New
+    - Reworked the File Sharing dialog and underlying mechanism
+      - Pre-fill username
+      - Faster and more reliable feedback when the user/password is not valid
+      - Better support for domain users
+      - Error message in Logs when File Sharing failed for other reasons
+
+* Upgrades
+    - Docker 1.12.2-rc1
+    - Docker Machine 0.8.2
+    - Docker Compose 1.8.1
+    - kernel 4.4.21
+    - aufs 20160912
+
+* Bug fixes and minor changes
+    - Improve the switching between linux and win containers: better errors, more reliable, deal with more edge cases
+    - Kill lingering dockerd that users might have still around because they played with Windows Containers before
+    - Don't recreate the VM if only the DNS server is set
+    - The uninstaller now kills the service if it failed to stop it properly
+    - Restart VpnKit and DataKit when the processes die
+    - VpnKit: impose a connection limit to avoid exhausting file descriptors
+    - VpnKit: handle UDP datagrams larger than 2035 bytes
+    - VpnKit: reduce the number of file descriptors consumed by DNS
+    - Improve debug information
+
+### 2016-09-16 1.12.1-beta26 "Beta26"
+
+## Important
+
+The auto update function in Beta 21 will not be able to install this update.
+If you are still on Beta 21 please install the latest beta manually by downloading the installer from:
+
+https://download.docker.com/win/beta/InstallDocker.msi
+
+## Changes
+
+* New
+    - Basic support for Windows containers. On windows 10 build >= 14372, a switch in the systray icon
+      will change which daemon (Linux or Windows) the docker CLI talks to
+    - To support trusted registry transparently, all trusted CAs (root or intermediate) on the Windows
+      host are automatically copied to Moby
+    - `Reset Credentials` with also unshare the shared drives
+    - Logs are now rotated every day
+
+* Upgrades
+    - Linux kernel 4.4.20
+    - aufs 20160905
+ 
+* Bug fixes and minor changes
+    - Don't send the same DNS settings twice to the daemon
+    - Fix the lingering net adapters removal on Windows 10 Anniversary Update
+    - Uploading a diagnostic now shows a proper status message in the Settings
+
+* Known issues
+    - Docker will automatically disable lingering net adapters. The only way to remove them is manually
+	  using `devmgmt.msc` as documented in the Troubleshooting guide.
+
+### 2016-09-07 1.12.1-beta25 "Beta25"
+
+## Important
+
+The auto update function in Beta 21 will not be able to install this update.
+If you are still on Beta 21 please install the latest beta manually by downloading the installer from:
+
+https://download.docker.com/win/beta/InstallDocker.msi
+
+## Changes
+
+* New
+    - Support multiple DNS servers
+
+* Bug fixes and minor changes
+    - Improve name servers discovery
+    - VpnKit supports search domains
+    - Set cifs version to 3.02
+
+* Known issues
+    - Only UTF-8 passwords are supported for host filesystem sharing
+    - Docker will automatically disable lingering net adapters. The only way to remove them is manually
+	  using `devmgmt.msc` as documented in the Troubleshooting guide.
+
+### 2016-08-23 1.12.1-rc1-beta24 "Beta24"
+
+* Upgrades
+    - Docker 1.12.1
+    - Docker machine 0.8.1
+    - Linux kernel 4.4.19
+    - aufs 20160822
+
+* Bug fixes and minor changes
+    - slirp: reduce the number of sockets used by UDP NAT, reduce the probability
+      that NAT rules will time out earlier than expected (#4826)
+
+* Known issues
+    - Only UTF-8 passwords are supported for host filesystem sharing
+    - Docker will automatically disable lingering net adapters. The only way to remove them is manually
+	  using `devmgmt.msc` as documented in the Troubleshooting guide.
+
+### 2016-08-16 1.12.1-rc1-beta23 "Beta23"
+
+## Important
+
+The auto update function in Beta 21 will not be able to install this update. To
+install the latest beta manually, please download the installer from:
+
+https://download.docker.com/win/beta/InstallDocker.msi
+
+## Changes
+
+* New
+    - Added `mfsymlinks` smb option to support symlinks on bind mounted folder
+    - Added `nobrl` smb option to support sqlite on bind mounted folders
+    - Detect outdated versions of Kitematic
+
+* Upgrades
+    - Docker 1.12.1-rc1
+    - Linux kernel 4.4.17
+    - aufs 20160808
+
+* Bug fixes and minor changes
+    - Fix password handling for host file system sharing
+    - Automatically disable lingering net adapters that prevent Docker from starting or using the network
+    - Automatically delete duplicated MobyLinuxVMs on a `reset to factory defaults`
+    - Docker will stop asking to import from toolbox after an upgrade
+    - Docker can now import from toolbox just after hyperV is activated
+    - Fix Moby Diagnostics and Update Kernel
+    - Added more debug information to the diagnostics
+    - Sending anonymous statistics shouldn't hang anymore when Mixpanel is not available
+    - Improved the HyperV detection and activation mechanism
+    - VpnKit is now compiled with OCaml 4.03 rather than 4.02.3
+    - Support newlines in release notes
+    - Improve error message when docker daemon is not responding
+    - The configuration database is now stored in-memory
+    - Preserve the stacktrace of PowerShell errors
+    - Display service stacktrace in error windows
+    - Moby: use default sysfs settings, transparent huge pages disabled (#4815)
+    - Moby: cgroup mount to support systemd in containers (#4789)
+
+* Known issues
+    - Only UTF-8 passwords are supported for host filesystem sharing
+    - Docker will automatically disable lingering net adapters. The only way to remove them is manually
+	  using `devmgmt.msc` as documented in the Troubleshooting guide.
+
+### 2016-08-11 1.12.0-beta22 "Beta22"
+
+Unreleased. See Beta 23 for changes.
+
+### 2016-07-28 1.12.0-beta21 "Beta21"
+
+* New
+   - Docker for Win is now available from 2 channels - stable and beta. New features and bug fixes will go out first in auto-updates to users in the beta channel. Updates to the stable channel are much less frequent and happen in sync with major and minor releases of the Docker engine. Only features that are well-tested and ready for production are added to the stable channel releases. You can download Docker for Win stable at https://download.docker.com/win/stable/InstallDocker.msi
+   - Removed the docker host name. Containers with exported ports are reachable via localhost.
+
+* Upgrades
+    - docker 1.12.0 with experimental features
+    - docker machine 0.8.0
+    - docker compose 1.8.0
+
+* Bug fixes and minor changes
+   - Fixed networking issue when transmitting data to a container via an exposed port.
+   - Include the sources for qemu-img
+   - Fix the migration from toolbox when the user has a space in its login
+   - Disable the migration from toolbox when hyperV is not yet activated
+   - More windows can be closed with ESC
+   - Add the channel to crash reports
+   - Fixed a path rewriting bug that happens on Windows insider build 14367
+   - Simplified the MobyLinux.ps1 script
+
+* Known issues
+    - Older Kitematic versions are not compatible with Docker for Windows. You need to manually delete `C:\Program Files\Docker\Kitematic` folder before you click on `Open &Kitematic...` systray link.
+
+### 2016-07-19 1.12.0-rc4-beta20 "Beta20"
+
+* New
+   - The UI option to disable port forwarding to localhost has been removed
+
+* Upgrades
+
+* Bug fixes and minor changes
+
+   - Fix docker.sock permission issues (#3919)
+   - Don't check for update when the settings panel opens (#4431)
+   - Remove obsolete DNS workaround (#4432)
+   - Limit the number of concurrent port forwards to avoid running out of resources (#4429)
+   - Store the database as a "bare" git repo to avoid corruption problems (#4236)
+
+### 2016-07-14 1.12.0-rc4-beta19 "Beta19"
+
+* New
+    - Added an option to opt-out from sending usage statistics
+      (will be available on the future stable channel)
+    - New error dialog box to upload crash reports
+
+* Upgrades
+    - Docker 1.12.0 RC4
+    - Docker Compose 1.8.0 RC2
+    - Docker Machine 0.8.0 RC2
+    - Linux kernel 4.4.15
+
+* Bug fixes and minor changes
+    - com.docker.slirp: include the DNS TCP fallback fix, required when UDP responses are truncated (docker/vpnkit#72)
+    - docker build/events/logs/stats... won't leak when iterrupted with Ctrl-C (#3628)
+    - Disable all buttons on Update Window when a version is downloading
+
+### 2016-07-07 1.12.0-rc3-beta18.1
+
+NOTE: Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2,
+See https://github.com/docker/docker/issues/24343#issuecomment-230623542 for more details.
+
+Fix for the above can be found at: https://docs.docker.com/docker-for-win/troubleshoot/#/recreate-or-update-your-containers-after-beta-18-upgrade
+
+* Hotfix
+    - Fix issue resulting in error "Hijack is incompatible with use of CloseNotifier", reverts previous fix for "Ctrl-C" during build
+
+* New
+    - Forwarding the ports to localhost is now the default
+    - Added http/https proxy configuration to the settings
+    - The toolbox default machine can be imported on first launch
+    - Added UI when a crash report is collected and uploaded
+    - The check for update runs every 6 hours
+
+* Upgrades
+    - Docker 1.12.0 RC3
+
+* Bug fixes and minor changes
+    - The docker API proxy was failing to deal with 1.12 features (health check for eg.)
+    - When killing the VM process, ignore when the process is already stopped
+    - When stopping the VM, always stop the docker proxy
+    - Prevent the update windows from downloading the msi into `C:\Program Files\Docker`
+    - All settings should be disabled when docker is starting. (This regression was introduced in Beta 17)
+    - VPNKit: Improved scalability as number of network connections increases (#4173)
+    - Improve the connection to the database
+    - Ignore when the shutdown service is not available
+
+### 2016-07-06 1.12.0-rc3-beta18
+
+* New
+    - Forwarding the ports to localhost is now the default
+    - Added http/https proxy configuration to the settings
+    - The toolbox default machine can be imported on first launch
+    - Added UI when a crash report is collected and uploaded
+    - The check for update runs every 6 hours
+
+* Upgrades
+    - Docker 1.12.0 RC3
+
+* Bug fixes and minor changes
+    - Interrupting a `docker build` with Ctrl-C will actually stop the build
+    - The docker API proxy was failing to deal with 1.12 features (health check for eg.)
+    - When killing the VM process, ignore when the process is already stopped
+    - When stopping the VM, always stop the docker proxy
+    - Prevent the update windows from downloading the msi into `C:\Program Files\Docker`
+    - All settings should be disabled when docker is starting. (This regression was introduced in Beta 17)
+    - VPNKit: Improved scalability as number of network connections increases (#4173)
+    - Improve the connection to the database
+    - Ignore when the shutdown service is not available
+
+### 2016-06-29 1.12.0-rc2-beta17
+
+* Upgrades
+    - Linux kernel 4.4.14, aufs 20160627 (#4133)
+
+* Bug fixes and minor changes
+    - Support users with spaces in their login
+    - Fix some cases where `dotnet restore` could hang
+    - Fixed `docker inspect` on an image
+    - Removed the console from hyper-v manager
+    - Improved diagnostic for VPN connection and add logs for the service port openers
+    - Improve Moby's boot sequence to adapt to longer boot time when swarm services are running
+    - Forcefully turn off a VM that won't shut down
+    - Clicking on a link from the changelog opens a browser
+    - Fix links to the documentation
+    - Fix the url to download Kitematic
+    - Renewed the signing certificates
+    - Fixed errors with the firewall and the network switch
+    - Fixed parsing errors in the Powershell script
+
+### 2016-06-17 1.12.0-rc2-beta16
+
+* New
+    - Docs have been updated! See https://beta.docker.com/docs/
+
+* Upgrades
+    - Docker 1.12.0 RC2
+    - docker-compose 1.8.0 RC1
+    - docker-machine 0.8.0 RC1
+    - Alpine 3.4
+
+* Bug fixes and minor changes
+	- Fixes to the VPN mode
+	- Fixed the localhost port forwarding performance issue
+    - Auto-detect mounted/unmounted drive in the list of shares
+	- Changed the name of the application from "DockerforWindows" to "Docker for Windows"
+	- Avoid multiple update windows being displayed at the same time
+
+### 2016-06-10 1.11.2-beta15
+
+* New
+    - New experimental networking mode, exposing container ports on `localhost`
+    - New Settings menu to configure sysctl.conf
+    - New Settings menu to configure http proxies
+    - The VPN mode setting is removed (VPN mode is now the only supported mode)
+    - The vSwitch NAT configuration has been removed
+    - Docs have been updated! See https://beta.docker.com/docs/
+
+* Upgrades
+    - Docker 1.11.2
+    - Alpine 3.4
+    - Linux 4.4.12, aufs 20160530
+
+* Bug fixes and minor changes
+    - Moved `Import from toolbox` option to the General Settings
+    - Increased the timeout to write to the configuration database
+    - Fixed an issue where sending anonymous stats to Mixpanel made the application stop
+    - Faster boot time
+    - All named pipes are now prefixed with the word `docker`
+    - Full version number is now displayed in the update window
+    - Default daemon config does not have debug enabled anymore
+    - More responsive Settings Panel, with new whales also :-)
+    - Improved logs and debug information
+
+### 2015-06-02 1.11.1-beta14
+
+* New
+    - Enable configuration of the docker daemon (edit config.json)
+    - VPN mode enabled by default
+    - Removed DHCP for VM network configuration
+    - User configurable NAT prefix and DNS server
+    - New feedback window to upload diagnostics dialog
+    - New status indicator in Settings window
+    - VM logs are uploaded with a crash report
+    - Animated welcome whale
+
+* Bug fixes and minor changes
+    - Support non-ascii characters in passwords
+    - Fix unshare a drive operation
+    - Fix deserialized of exceptions sent from the service
+    - If the backend service is not running, the GUI now starts it
+    - Don't complain if the backend service is not running and the user just wants to shutdown
+
+* Known issues
+    - Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs to be carefully managed (#2911). See Troubleshooting page for more details.
+
+### 2016-05-25 1.11.1-beta13
+
+* New
+    This Beta release has some very significant changes:
+    - Docker communication over Hyper-V sockets instead of the network (#3330, #3272, #3258, #3225, #3224)
+    - Experimental VPN mode, aka vpnkit (#3296, #3289, #3287, #3230, #3334, #3323)
+    - Initial support for datakit for configuration (#3323)
+    - Redesigned Settings panel (#3293, #3284, #3282, #3281, #3279, #3269, #3267, #3264, #3259, #3254, #3243, #3239,
+#3232, #3262, #3320, #3317, #3316, #3314)
+    - Docker can now be restarted (#3292, #3280, #3252, #3312)
+
+* Bug fixes and minor changes
+    - Support Net adapters with a different name than "vEthernet (DockerNAT)" (#3271, #3290)
+    - Sharing now has a better support for domain users (#3266)
+    - Toolbox migration was broken in Beta12 (#3250, #3245)
+    - Enabling HyperV was broken in Beta12 (#3222, #3212, #3218, #3217)
+    - Fix error message when invalid labels are passed to `docker run` (#3305)
+    - Mixpanel should not use roaming App Data (#3261)
+    - UI improvements (#3253)
+    - Support VMs with other IP addresses out of the 10.0.75.0/24 range (#3248)
+    - Improved FAQ (#3338)
+
+* Known issues
+    - Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs
+      to be carefully managed (#2911). See Troubleshooting page for more details.
+
+### 2016-05-17 1.11.1-beta12
+
+* New
+    - The application is now separated in two parts. A back-end service and a front-end GUI.
+      The front-end GUI no longer asks for elevated access. (#3158, #3155, #3154, #3150, #3149,
+      #3148, #3147, #3122, #3115)
+
+* Bug fixes and minor changes
+    - Exclude the network drives from the shares list (#3151)
+    - Remove the notification when closing the application (#3146, #3157)
+    - Minor GUI improvements (#3145, #3144, #3143, )
+
+* Known issues
+    - Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs
+      to be carefully managed (#2911). See Troubleshooting page for more details.
+
+### 2016-05-11 1.11.1-beta11b
+
+* Hot fixes
+    - Fix the issue with named pipe permisions that prevents Docker from starting (#3081)
+
+### 2016-05-10 1.11.1-beta11
+
+* New
+    - Allocate VM memory by 256mb increments, instead of 1gb (#2962)
+    - Show a meaningful error when the user has an empty password (#3033)
+    - Improved Troubleshooting page (#3050)
+
+* Upgrades
+    - docker-compose 1.7.1 (#3016)
+
+* Bug fixes and minor changes
+    - Report the VM's IP in `docker port` (#3047)
+    - Handle passwords with spaces (#3019)
+    - Show a clear error message when trying to install on Home editions (#3043)
+    - Slower whale animation in the System Tray (#2966)
+    - Proxy is restarting itself when it crashes (#2955)
+    - Dhcp process handles exception gracefully (#3012)
+    - Moby: Fix vsock half closed issue (#2961)
+    - Moby: Add NFS support (#2961)
+    - Moby: Hostname is now Moby, not Docker (#2961)
+    - Moby: Fixes to disk formatting scripts (#2961)
+    - Moby: Kernel 4.4.9 (#3062)
+
+* Known issues
+    - Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs
+      to be carefully managed (#2911). See Troubleshooting page for more details.
+
+### 2016-05-03 1.11.1-beta10
+
+* New
+    - Improved Settings panel, allow to configure the VM's memory and CPUs
+      (#2889, #2886, #2882, #2880, #2878, #2875, #2874, #2840, #2838, #2830)
+    - Co-exist with multiple internal Hyper-V switches and improved DHCP handling (#2828, #2879)
+    - Token validation is now done over HTTPS. Should fix issues with some firewalls and antiviros software (#2902)
+
+* Upgrades
+    - docker 1.11.1 (#2858, #2808)
+
+* Bug fixes and minor changes
+    - Fixed Desktop shortcut name and updated icons (#2892, #2845, #2796)
+    - Preparation to run the backend as service (#2887, #2884, #2868, #2862, #2856, #2848, #2847, #2838, #2894, #2891)
+    - Improve logging and Mixpanel events (#2881, #2801, #2849)
+    - Improve code quality (#2888, #2885, #2884, #2877, #2876, #2851, #2814, #2903)
+    - Improve the build (#2859, #2807, #2806)
+    - New icons (#2845, #2892)
+
+* Known issues
+    - Due to limitation in the Windows NAT implementation, co-existence with other NAT prefixes needs
+      to be carefully managed (#2911). See Troubleshooting page for more details.
+
+### 2016-04-28 1.11.0-beta9
+
+* New
+    - One click dialog to enable Hyper-V (#2504)
+    - Report clear underlying Hyper-V errors (#2504, #2627, #2136)
+
+* Bug fixes and minor changes
+    - Better handling of some networking issues (#2765, #2759, #2774, though see known issues)
+    - Fix help menu and start menu getting started urls (#2785)
+    - Restored "Docker is Initializing" notification on first run (#2784)
+    - Better error messages during authentication (#2741)
+    - Improved logging on error conditions (#2667, #2681, #2674, #2648, #2769, #2764)
+    - Improved build and tests (#2724, #2669, #2655)
+
+* Known issues
+    - If multiple internal Hyper-V switches exist the Moby VM
+      may not start correctly.  We have identified the issue and
+      are working on a solution.
+
+### 2016-04-20 1.11.0-beta8
+
+* New
+    - Auto update is installed silently and relaunch the application when it's done (#2549)
+    - Uninstaller can be found in windows menu (#2126)
+    - Kitematic can be downloaded from the Dashboard menu (#2567, #2624)
+
+* Upgrades
+    - Better UI in the ShareDrive window (#2560, #2589)
+    - The firewall alert dialog will not come up as often as it was (#2579)
+
+* Bug fixes and minor changes
+    - Configure MobyLinux VM with a fixed memory of 2GB (#2614)
+    - Don't store the user's password on the hostside KVP  (#2616)
+    - Uninstall shortcut is available in registry (#2579)
+
+### 2016-04-14 1.11.0-beta7
+
+* New
+    - Multiple drives can be shared (#2405, #2419, #2505, #2515)
+    - New update window (#2384, #2362, #2435, #2431, #2368)
+    - Welcome whale (#2479, #2495, #2483, #2511)
+
+* Upgrades
+    - docker 1.11.0
+    - docker-machine 0.7.0
+    - docker-compose 1.7.0
+
+* Bug fixes and minor changes
+    - Improved networking configuration and error detection: fixed DHCP
+      renewal and rebind issues (#2457), allow dns/dhcp processes to
+      restart on bind error (#2357)
+    - Less destructive migration from Toolbox (#2470, #2423)
+    - Improved documentation (#2401)
+    - Better error handling: Moby will restart itself if start takes
+      too long (#2356). Kill proxy and exit docker before a new
+      version is installed (#2368). The application can't start twice
+      now (#2463, #2523). The proxy will stop automatically when the GUI
+      is not running (#2372).
+    - Remove existing proxy firewall rules before starting moby (#2429)
+    - Collect more/better info on crashes/issues (#2464, #2450, #2453,
+      #2441, #2355)
+    - Improved all dialogs and windows (#2399, #2394, #2397, #2366, #2503)
+    - Add the version to installer's first screen (#2336, #2437, #2509)
+    - Better reset to defaults (#2406)
+    - New regression test framework (#2428, #2458)
+    - The installation MSI is now timestamped (#2461)
+    - Only mention toolbox on hyperv install if it's present (#2415)
+    - Improved Bugsnag reports: fixed a dependency bug (#2506), added a
+      unique id to each new report (#2518)
+    - Improved the build (#2473, #2466, #2460, #2346, #2486)
+    - Improved code quality (#2465, #2425, #2371, #2382, #2385, #2370,
+      #2354, #2499)
+
+* Known issues
+    - Settings are now serialized in json. This install will loose the
+      current settings (#2361)
+    - Docker needs to open ports on the firewall. Sometimes, the user will see
+      a firewall alert dialog. The user should allow the ports to be opened.
+    - The application was upgraded to 64 bits. The installation path changed to
+      `C:\Program Files\Docker\Docker`. Powershell/Cmd windows already opened
+      before the update might have to be closed to catch the new `PATH`.
+      In some cases, the user should even log off and on again.
+
+### 2016-04-05 1.11.0 "Beta-6"
+
+  * **Enhancements**
+    - Support roaming: dns queries are forwarded to the host
+    - Improved startup times by running a dhcp server running on the host
+    - New settings dialog design
+    - Support windows paths with `-v`
+    - Update `docker` CLI and deamon to 1.11.0-rc3
+    - Update `docker-machine` to 0.7.0-rc2
+    - Update `docker-compose` to 1.7.0-rc1
+    - Install `docker-credential-wincred`
+    - Allow non-root users in containers to create files on volume mounts
+    - Automatically install HyperV
+    - The application is now 64bits
+    - Improved wording in all dialog boxes and error messages
+    - Remove exit confirmation
+    - Show clickable url in the Install HyperV message box
+    - Dashboard link to Kitematic ( as on Mac )
+    - Moby Kernel updated to 4.4.6
+    - The registry key was changed to `HKLM\SOFTWARE\Docker Inc.\Docker\1.0`
+
+  * **Known issues**
+    - Migration from Toolbox can fail sometimes.
+      In case this happens, the application needs to be restarted.
+    - Docker needs to open ports on the firewall. Sometimes, the user will see
+      a firewall alert dialog. The user should allow the ports to be opened.
+    - The application was upgraded to 64 bits. The installation path changed to
+      `C:\Program Files\Docker\Docker`. Powershell/Cmd windows already opened
+      before the update might have to be closed to catch the new `PATH`.
+      In some cases, the user should even log off and on again.
+
+  * **Bug Fixes**
+    - Kill VMs that cannot be shutdown properly
+    - Improve the diagnostic information sent with bugsnag reports
+    - Settings window shows when the drive is shared or not
+    - `C:` drive can be bind mounted with `//c` or `/c`. Used to be `//c/`
+    - Don't try to submit empty tokens
+    - Fix the version shown in the About box
+    - Fix a race condition on the logs
+    - Fix a race condition on the settings
+    - Fix broken links in the documentation
+    - Replace sha1 with actual version in the assemblies
+    - Don't start the unused agent process
+    - Tokens are now verified on port 443
+
+### 2016-03-29 1.10.6 "Beta-5"
+
+  * **Enhancements**
+    - Remove debug console
+    - Open browser with hyper-v installation instructions
+    - Add Cloudfront for downloads from Europe
+    - Capture qemu logs during toolbox upgrades
+    - Rename alpha distribution channel to beta
+
+  * **Bug Fixes**
+    - Fix diagnose section in bugsnag report
+    - Fix msi version
+    - Don't truncate Toolbox link
+
+### 2016-03-23 1.10.6 "Beta-1"
+
+  * **Enhancements**
+    - Display the third party licenses
+    - Display the license agreement
+    - The application will refuse to start if Hyper-v is not enabled
+    - Rename `console` to `debug console`
+    - Remove `machine` from notification
+    - Open the feedback forum
+    - Use same MixPanel project for Windows and OSX
+    - Align MixPanel events with OSX
+    - Added a script to diagnose problems
+    - Submit diagnostic with bugsnag reports
+	- MixPanel heartbeat every hour
+
+  * **Bug Fixes**
+    - Accept all versions of Enterprise 10, Pro 10 and Education 10 during installation (Eval, N, ...)
+    - Fix Linux kernel crashes with certain applications or somesuch
+    - Fix notifications that are not shown
+    - Animate the systray whale on reset
+    - Shorten the enrollment process timeout
+    - Properly unmount shares when the user un-selects the setting
+    - Don't install on unsupported builds
+
+  * **Build**
+    - Auto-release from AppVeyor
+    - Failing tests now fail the build
+    - Extract the Release notes properly during the release
+    - Update build documentation
+    - Fix the message when hyper-v is not enabled
+
+### 2016-03-18 1.10.5 "Alpha-5"
+
+  * The installer and the application are now signed by Docker Inc.
+  * Fixed DNS lookup failing if users had an external switch configured
+  * Fixed CIFS file sharing in Domain
+  * Added a versioned registry key (HKLM\SOFTWARE\WOW6432Node\Docker Inc.\Docker\1.0\Version)
+  * A "Reset to default" button was added which deletes and recreate the Moby VM
+  * Upgrades from this version to future versions won't loose containers and images
+  * Docker updated to 1.10.3
+  * Bugsnap fixes and improvements (more details in the logs)
+  * Improved notifications and logs overall
+  * Fixed the auto-start on login
+  * Display authentication errors in a message box
+  * The about box contains the update channel
+  * The installer supports installation on windows evaluation versions
+  * Fix the shutdown process. Spawned processes are now stopped.
+  * User actions are now properly queues to avoid race conditions
+  * Improved the release process documentation
+  * Improved the agent CLI
+  * Add autocheck for update at start in settings
+
+### 2016-03-10 1.10.4.0 "Alpha-4"
+
+  * Faster Startup & Shutdown
+  * Use host DNS parameters
+  * Enrollment System
+  * Recreating manually removed vm
+  * More MixPanel Events
+  * Various Bug Fixes
+
+### 2016-03-03 1.10.2.14 "Alpha-3"
+
+  * File sharing
+  - Create network share automatically
+  - Improve Credentials management
+  - Support paths with c and C drive
+  * Crashes and Analytics
+  - Report crashes with Bugsnag
+  - Send analytics through MixPanel
+  * GUI
+  - Improve layout of About and Settings dialog
+  - Improve Updater
+  - Link to *Help*
+  - Link to *Send Feeback*
+  * General
+  - Bug fixes
+
+### 2016-02-26 1.10.2.12 "Alpha-2"
+
+  * Installer
+  - Enhancements
+  - Auto-update
+  - License agreement
+  * General
+  - Bug fixes
+
+### 2016-02-22 1.10.1.42-1 "Alpha-1"
+
+  * Hypervisor
+  - significant performance improvements
+  * Security
+  - retrieving Credentials from user
+  * Filesystem
+  - hot-mounting host filesystem with credential
+  * General
+  - state management
+  - stability, logging
+  - bugfixes, eye candies
+
+### 2016-02-09 1.10.0.0-0 "Alpha-0"
+
+  * Hypervision
+  - hyper-v backed virtual machines
+  - boots moby in a few seconds
+  - installs cli in PATH
+  - proxies docker commands to moby
+  * Filesystem
+  - mounts host filesystem to support --volume
+  - samba client with a hardcoded password
+  - allows live reload
+  * Networking
+  - live debugging nodejs application

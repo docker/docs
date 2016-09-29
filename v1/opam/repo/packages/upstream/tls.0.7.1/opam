@@ -1,0 +1,48 @@
+opam-version: "1.2"
+name:         "tls"
+homepage:     "https://github.com/mirleft/ocaml-tls"
+dev-repo:     "https://github.com/mirleft/ocaml-tls.git"
+bug-reports:  "https://github.com/mirleft/ocaml-tls/issues"
+authors:      ["David Kaloper <david@numm.org>" "Hannes Mehnert <hannes@mehnert.org>"]
+maintainer:   ["Hannes Mehnert <hannes@mehnert.org>" "David Kaloper <david@numm.org>"]
+license:      "BSD2"
+
+build: [
+  [ "./configure" "--prefix" prefix
+    "--%{lwt:enable}%-lwt"
+    "--%{mirage-types-lwt+ipaddr:enable}%-mirage" ]
+  [ make ]
+]
+install: [ make "install"]
+remove: [ "ocamlfind" "remove" "tls" ]
+
+depends: [
+  "ocamlfind" {build}
+  "oasis" {build}
+  "ocamlbuild" {build}
+  "result"
+  "ppx_tools" {build}
+  "cstruct" {>= "1.9.0"}
+  "ppx_sexp_conv" {build}
+  "sexplib"
+  "nocrypto" {>= "0.5.3"}
+  "x509" {>= "0.5.0"}
+  "ounit" {test}
+]
+depopts: [
+  "lwt"
+  "mirage-types-lwt"
+]
+conflicts: [
+  "lwt" {<"2.4.8"}
+  "mirage-types-lwt" {<"2.3.0"}
+  "mirage-net-xen" {<"1.3.0"}
+]
+
+build-test: [
+  [ "./configure" "--%{ounit:enable}%-tests" ]
+  [ make "test" ]
+]
+
+tags: [ "org:mirage"]
+available: [ ocaml-version >= "4.02.2" ]

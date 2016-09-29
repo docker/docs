@@ -1,0 +1,26 @@
+opam-version: "1.2"
+maintainer:   "Thomas Gazagnaire <thomas@gazagnaire.org>"
+author:       "Gerd Stolpmann <gerd@gerd-stolpmann.de>"
+homepage:     "http://projects.camlcity.org/projects/findlib.html"
+bug-reports:  "https://gitlab.camlcity.org/gerd/lib-findlib/issues"
+dev-repo:     "https://gitlab.camlcity.org/gerd/lib-findlib.git"
+
+build: [
+  ["./configure" "-bindir" bin "-sitelib" lib "-mandir" man "-config" "%{lib}%/findlib.conf" "-no-custom" "-no-topfind" {preinstalled}]
+  [make "all"]
+  [make "opt"] { ocaml-native }
+]
+install: [
+  [make "install"]
+  ["cp" "ocaml-stub" "%{bin}%/ocaml"] {preinstalled}
+]
+remove: [
+  ["ocamlfind" "remove" "bytes"]
+  ["./configure" "-bindir" bin "-sitelib" lib "-mandir" man "-config" "%{lib}%/findlib.conf" "-no-topfind" {preinstalled}]
+  [make "uninstall"]
+  ["rm" "-f" "%{bin}%/ocaml"] {preinstalled}
+]
+available: [ocaml-version >= "3.12.0"] # ocamlfind refers to cmxs
+depends: [
+  "conf-m4" {build}
+]

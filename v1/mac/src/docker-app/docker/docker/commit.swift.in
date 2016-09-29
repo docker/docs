@@ -1,0 +1,11 @@
+//
+//  commit.swift
+//  docker-installer
+//
+//  Created by David Scott on 07/12/2015.
+//  Copyright © 2015 David Scott. All rights reserved.
+//
+
+import Foundation
+
+public let git_commit = "@SHA@"

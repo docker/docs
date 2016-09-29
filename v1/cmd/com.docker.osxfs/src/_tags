@@ -1,0 +1,10 @@
+<*.*>: package(stringext), package(lwt.unix), package(profuse.lwt)
+<*.*>: package(unix-sys-stat.lwt), package(unix-fcntl.unix)
+<*.*>: package(unix-fcntl.lwt), package(unix-unistd.unix)
+<*.*>: package(unix-unistd.lwt), package(unix-dirent.lwt)
+<*.*>: package(cmdliner), package(protocol-9p.unix), package(ofs)
+<*.*>: package(logs), package(logs.fmt), package(mtime.os)
+<*.*>: package(osx-cf.lwt), package(osx-fsevents.lwt), package(osx-xattr.lwt)
+<*.*>: package(osx-daemon), package(osx-hyperkit)
+<*.*>: package(unix-time), package(osx-attr.lwt), package(osx-mount)
+true: debug, thread

@@ -1,0 +1,8 @@
+Operations over mirage `BLOCK` devices
+
+This library contains various operations over Mirage `V1_LWT.BLOCK` devices,
+including:
+
+- sparse copy
+- various folds
+- content comparison

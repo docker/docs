@@ -1,0 +1,73 @@
+#!/usr/bin/php
+<?php
+
+#
+# shadowHash - script to automate creating MacOS 10.4/10.5 shadow hash files
+# 
+#
+#  usage: shadowHash password
+#
+#  in most cases you'll want to redirect this to a file with the GUID of the user whose password you 
+#   wish to set. i.e. ./shadowHash mypassword>C78F3A60-FC1D-4377-AD7D-DBAD5A6B8B2C
+#
+#  2008 Pete Akins, Cincinnati, OH . pete.akins@uc.edu
+
+/********************* 
+
+FORMAT OF SHADOW FILE
+
+Offsets and length (hex values)
+0-63 NTLM Password (64)
+64-103 SHA1 Digest (40)
+104-167 CRAM-MD5 (64)
+168-215 Salted SHA1 (48, 8+40)
+216-1239 Recoverable (1024)
+
+*********************/
+
+if (!isset($argv[1])) {
+	fprintf(STDERR, "Enter password: ");
+	$password = trim(fgets(STDIN));
+} else {
+	// get the password as an arg
+	$password = $argv[1];
+}
+
+if (empty($password)) {
+	die("Invalid password");
+}
+
+do {
+	
+/* make sure we get a big random number, but not too big */
+$randmax = getrandmax();
+$max = pow(2, 31)-1;
+if ($max>$randmax) {
+	$max = $randmax;
+}
+
+/* get our salt integer, and it's hex value */
+$salt = rand(1, $max);
+$saltHex = decHex($salt);
+
+/* get string representation of bytes */
+$saltStr = pack("N", $salt);
+
+/* compute salted hash. get uppercase values */
+$sha1_salt = sprintf("%08s%s", strtoupper($saltHex), strtoupper(sha1($saltStr . $password)));
+
+} while (strlen($sha1_salt)!=48); //just in case we have odd ball integers that result in non standard hex.
+
+/* blank out other hashes */
+$NTLM = str_repeat("0", 64);
+$sha1 = str_repeat("0", 40);
+$cram_md5 = str_repeat("0", 64);
+$recoverable = str_repeat("0", 1024);
+
+/* put it all together */
+$string = $NTLM . $sha1 . $cram_md5 . $sha1_salt . $recoverable;
+
+echo $string;
+exit(0);
+
+?>

@@ -1,0 +1,4 @@
+opam-version: "1"
+maintainer: "gabriel.scherer@gmail.com"
+
+ocaml-version: [>= "3.10" & < "4.03"]

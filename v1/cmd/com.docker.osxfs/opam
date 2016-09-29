@@ -1,0 +1,25 @@
+opam-version: "1.2"
+name: "osxfs"
+version: "0.0.0"
+maintainer: "sheets@alum.mit.edu"
+authors: ["David Sheets"]
+depends: [
+  "ocamlfind" {build}
+  "profuse"
+  "lwt"
+  "cmdliner"
+  "unix-unistd"
+  "unix-errno"
+  "unix-time"
+  "ofs"
+  "mtime"
+  "protocol-9p" {>= "0.4.0"}
+  "logs"
+  "cstruct"
+  "osx-fsevents"
+  "osx-daemon"
+  "osx-hyperkit"
+  "osx-xattr" {>= "0.2.0"}
+  "osx-attr"
+  "osx-mount"
+]

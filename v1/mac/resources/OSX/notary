@@ -1,0 +1,5 @@
+#!/bin/sh
+# two levels of symlinks only please
+group=$(readlink "$0")
+path=$(readlink "${group}")
+exec ${path}.bin $*

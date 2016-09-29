@@ -1,0 +1,25 @@
+opam-version: "1.2"
+maintainer: "jerome.vouillon@pps.univ-paris-diderot.fr"
+authors: ["Jerome Vouillon" "Thomas Gazagnaire" "Anil Madhavapeddy"]
+homepage: "https://github.com/ocaml/ocaml-re"
+bug-reports: "https://github.com/ocaml/ocaml-re/issues"
+license: "LGPL-2.0 with OCaml linking exception"
+dev-repo: "https://github.com/ocaml/ocaml-re.git"
+build: [
+  ["ocaml" "setup.ml" "-configure" "--prefix" prefix]
+  ["ocaml" "setup.ml" "-build"]
+]
+install: ["ocaml" "setup.ml" "-install"]
+build-test: [
+  ["ocaml" "setup.ml" "-configure" "--enable-tests"]
+  ["ocaml" "setup.ml" "-build"]
+  ["ocaml" "setup.ml" "-test"]
+]
+build-doc: ["ocaml" "setup.ml" "-doc"]
+remove: ["ocamlfind" "remove" "re"]
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+  "base-bytes"
+  "ounit" {test}
+]

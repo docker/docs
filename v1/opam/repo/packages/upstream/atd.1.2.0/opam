@@ -1,0 +1,16 @@
+opam-version: "1.2"
+maintainer: "martin@mjambon.com"
+authors: ["Martin Jambon"]
+
+homepage: "https://github.com/mjambon/atd"
+bug-reports: "https://github.com/mjambon/atd/issues"
+dev-repo: "https://github.com/mjambon/atd.git"
+
+build: [ [make] ]
+remove: [["ocamlfind" "remove" "atd"]]
+depends: [
+  "ocamlfind"
+  "menhir"
+  "easy-format"
+]
+install: [make "install" "BINDIR=%{bin}%"]

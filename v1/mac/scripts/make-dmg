@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -u
+
+# source global variables
+SCRIPT_FOLDER_PATH=$(cd "$(dirname "$0")"; pwd; cd - > /dev/null)
+source "${SCRIPT_FOLDER_PATH}/Docker.Config"
+source "${SCRIPT_FOLDER_PATH}/Docker.Utils"
+
+# input .app
+appDirectory="$MAC_FOLDER_PATH/build/Docker.app"
+# output .dmg
+dmgDirectory="$MAC_FOLDER_PATH/build"
+
+# window size, position, icons placement
+windowSize="720 340" # height: 326 (image) + 14 (?)
+windowScreenPosition="300 300"
+productIconPosition="145 130"
+applicationsLinkPosition="560 130"
+iconSize="128"
+
+# background image, volume icon
+assetsRoot="$MAC_FOLDER_PATH/assets"
+backgroundImage="$assetsRoot/docker-dmg-background.png"
+volIcon="$assetsRoot/docker-status-icon@2x.png"
+
+# call create-dmg
+LogImportant "Creating Docker.dmg"
+LogImportant "Source:      $appDirectory"
+LogImportant "Destination: $dmgDirectory/Docker.dmg"
+
+if [ ! -d "$appDirectory" ]; then
+  LogError "Could not find \"$appDirectory\". Did you build it from command line ?"
+fi
+if [ ! -d "$dmgDirectory" ]; then
+  LogError "Output directory \"$dmgDirectory\" does not exist"
+fi
+Log "Removing previous .dmg"
+Execute "rm -rf $dmgDirectory/Docker.dmg"
+$SCRIPT_FOLDER_PATH/create-dmg/create-dmg --volname "Docker" --volicon "$volIcon" --window-size $windowSize --window-pos $windowScreenPosition --icon "Docker" $productIconPosition --app-drop-link $applicationsLinkPosition --hide-extension "Docker" --background "$backgroundImage" --icon-size $iconSize "$dmgDirectory/Docker.dmg" "$appDirectory"
+if [ $? -eq 0 ]; then
+  LogCompleted "Docker.dmg created successfully"
+else
+  LogError "Docker.dmg creation failed"
+fi

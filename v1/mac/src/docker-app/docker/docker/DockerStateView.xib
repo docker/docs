@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="DockerStateViewController" customModule="Docker" customModuleProvider="target">
+            <connections>
+                <outlet property="dockerStateIcon" destination="Q1Q-R4-Pra" id="OwD-e6-0EM"/>
+                <outlet property="dockerStateLabel" destination="Pem-zA-CCL" id="6Dj-hE-1cw"/>
+                <outlet property="view" destination="Umz-Nu-vtV" id="otE-D0-V3n"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" id="Umz-Nu-vtV">
+            <rect key="frame" x="0.0" y="0.0" width="270" height="37"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="800" verticalHuggingPriority="750" placeholderIntrinsicWidth="114" placeholderIntrinsicHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Pem-zA-CCL">
+                    <rect key="frame" x="44" y="10" width="118" height="18"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Docker is running" id="pEO-C7-NvM">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q1Q-R4-Pra">
+                    <rect key="frame" x="20" y="10" width="16" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="16" id="Ia0-YK-VXo"/>
+                        <constraint firstAttribute="height" constant="16" id="hrB-Pb-kxD"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusAvailable" id="uzV-qg-NYo"/>
+                </imageView>
+                <button horizontalHuggingPriority="800" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f6J-Gh-XrB">
+                    <rect key="frame" x="181" y="7" width="69" height="19"/>
+                    <buttonCell key="cell" type="roundRect" title="restart" bezelStyle="roundedRect" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DLM-bW-Rg8">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="cellTitle"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="restartVM:" target="-2" id="ZuD-Vz-i87"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Pem-zA-CCL" firstAttribute="bottom" secondItem="Umz-Nu-vtV" secondAttribute="bottom" constant="-10" id="Ajj-Z6-g8r"/>
+                <constraint firstItem="Q1Q-R4-Pra" firstAttribute="bottom" secondItem="Umz-Nu-vtV" secondAttribute="bottom" constant="-10" id="TDB-0E-uEV"/>
+                <constraint firstItem="f6J-Gh-XrB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Pem-zA-CCL" secondAttribute="trailing" constant="10" id="gT9-7t-Q34"/>
+                <constraint firstItem="f6J-Gh-XrB" firstAttribute="trailing" secondItem="Umz-Nu-vtV" secondAttribute="trailing" constant="-20" id="gkS-02-3yU"/>
+                <constraint firstItem="Q1Q-R4-Pra" firstAttribute="leading" secondItem="Umz-Nu-vtV" secondAttribute="leading" constant="20" id="nMZ-KX-XOg"/>
+                <constraint firstItem="f6J-Gh-XrB" firstAttribute="bottom" secondItem="Umz-Nu-vtV" secondAttribute="bottom" constant="-8" id="u6U-NP-bFi"/>
+                <constraint firstItem="Pem-zA-CCL" firstAttribute="leading" secondItem="Q1Q-R4-Pra" secondAttribute="trailing" constant="10" id="wvh-Hk-eXh"/>
+            </constraints>
+            <point key="canvasLocation" x="-830" y="-978.5"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="NSStatusAvailable" width="16" height="16"/>
+    </resources>
+</document>

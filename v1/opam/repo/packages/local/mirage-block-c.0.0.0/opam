@@ -1,0 +1,16 @@
+opam-version: "1.2"
+name: "mirage-block-c"
+version: "0.0.0"
+maintainer: "dave@recoil.org"
+authors: ["Dave Scott"]
+depends: [
+  "ocamlfind" {build}
+  "cstruct"
+  "lwt"
+  "io-page"
+  "uri"
+  "mirage-block"
+  "mirage-block-unix"
+  "qcow-format" {= "0.4.2"}
+  "mirage-profile" {>= "0.6.1"} # -lrt linking problem. necessary now?
+]

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+PERF=$(dirname $0)/../
+VERBOSE=0
+
+while getopts ":vh" opt; do
+  case $opt in
+    v)
+      VERBOSE=1
+      ;;
+    h)
+      echo "Usage:"
+      echo "$0"
+      echo "  -- list all tests, one per line"
+      echo "$0 -v"
+      echo "  -- list all tests, include descriptions"
+      exit 0
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+  esac
+done
+
+: ${PINATA_PERF_TESTS:=$(ls -1 ${PERF}/test)}
+
+for test in ${PINATA_PERF_TESTS} ; do
+  if [ "${VERBOSE}" -eq 0 ]; then
+    echo $test
+  else
+    echo -n "$test: "
+    cat ${PERF}/test/${test}/README.md | head -1
+  fi
+done

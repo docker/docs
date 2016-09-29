@@ -1,0 +1,48 @@
+<!--[metadata]>
++++
+aliases = [
+  "/mackit/multi-arch/"
+]
+title = "Leveraging Multi-CPU Architecture Support "
+description = "Multi-CPU Architecture Support"
+keywords = ["mac, Multi-CPU architecture support"]
+[menu.main]
+identifier='mac-multiarch'
+parent="pinata_mac_menu"
+weight = 3
++++
+<![end-metadata]-->
+
+# Leveraging Multi-CPU Architecture Support
+
+Docker for Mac provides `binfmt_misc` multi architecture support, so you can run containers for different Linux architectures, such as `arm`, `mips`, `ppc64le` and even `s390x`.
+
+This should just work without any configuration, but the containers you run need to have the appropriate `qemu` binary inside the container before you can do this. (See <a href=http://wiki.qemu.org/ target="_blank">QEMU</a> for more information.)
+
+So, you can run a container that already has this set up, like the <a href="https://resin.io/how-it-works/" target="_blank">resin</a> arm builds:
+
+```
+$ docker run resin/armv7hf-debian uname -a
+
+Linux 7ed2fca7a3f0 4.1.12 #1 SMP Tue Jan 12 10:51:00 UTC 2016 armv7l GNU/Linux
+
+$ docker run justincormack/ppc64le-debian uname -a
+
+Linux edd13885f316 4.1.12 #1 SMP Tue Jan 12 10:51:00 UTC 2016 ppc64le GNU/Linux
+
+```
+
+Running containers pre-configured with `qemu` has the advantage that you can use these to do builds `FROM`, so you can build new Multi-CPU architecture packages.
+
+Alternatively, you can bind mount in the `qemu` static binaries to any cross-architecture package, such as the semi-official ones using a script like this one https://github.com/justincormack/cross-docker. (See the README at the given link for details on how to use the script.)
+
+<hr style="color:#99CC99" />
+<ul class="media">
+	<div class="media_content">
+	<div data-mh="mh_docker_projects">
+	<h6> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="../../images/chat.png" alt="chat icon"></a> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">Help improve the documentation</a></h3>
+		<p>
+    Email us at <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">feedback@docker.com</a>
+    </p>
+	</div>
+	</div>

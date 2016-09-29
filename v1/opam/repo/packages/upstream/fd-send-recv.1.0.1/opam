@@ -1,0 +1,14 @@
+opam-version: "1.2"
+maintainer: "dave.scott@eu.citrix.com"
+tags: [
+  "org:mirage"
+  "org:xapi-project"
+]
+build: make
+remove: [["ocamlfind" "remove" "fd-send-recv"]]
+depends: [
+  "ocamlfind"
+  "ocamlbuild" {build}
+]
+dev-repo: "git://github.com/xen-org/ocaml-fd-send-recv"
+install: [make "install"]

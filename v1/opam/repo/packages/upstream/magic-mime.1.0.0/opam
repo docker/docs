@@ -1,0 +1,17 @@
+opam-version: "1.2"
+maintainer: "Anil Madhavapeddy <anil@recoil.org>"
+authors: "Anil Madhavapeddy <anil@recoil.org>"
+homepage: "https://github.com/mirage/ocaml-magic-mime"
+bug-reports: "https://github.com/mirage/ocaml-magic-mime/issues"
+dev-repo: "https://github.com/mirage/ocaml-magic-mime.git"
+license: "ISC"
+build: [
+  ["./configure" "--prefix=%{prefix}%"]
+  [make]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "magic-mime"]
+depends: [
+  "ocamlfind" {build}
+  "ocamlbuild" {build}
+]
