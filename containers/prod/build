@@ -1,0 +1,1 @@
+docker build -t bagel/haproxy_beta ./haproxy

@@ -1,0 +1,17 @@
+@import "dux/css/box";
+
+input.searchInput {
+    background: #405165;
+    border: 1px solid #4c5968;
+    border-radius: var(--global-radius);
+    color: #fff;
+    padding-left: 24px;
+}
+
+.fa {
+    position: relative;
+    color: white;
+    max-width: 1rem;
+    top: -7px;
+    left: 6px;
+}

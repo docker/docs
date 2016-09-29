@@ -1,0 +1,30 @@
+@import 'dux/css/colors.css';
+@import 'dux/css/box.css';
+
+.dropdown {
+    margin-bottom: var(--default-margin);
+}
+
+.dropdownError {
+    border: 1px solid var(--primary-5);
+}
+
+.error {
+    color: var(--primary-5);
+    display: inline-block;
+    margin-left: var(--default-margin);
+}
+
+.formSubmit {
+    margin-top: var(--default-margin);
+}
+
+.infoContent {
+    border-left: 1px solid var(--iron);
+    padding: 0 3rem;
+    margin: .5rem 0;
+}
+
+.formBody {
+    margin: 0 var(--default-margin);
+}

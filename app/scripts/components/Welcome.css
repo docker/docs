@@ -1,0 +1,86 @@
+@import "dux/css/colors.css";
+@import "dux/css/box.css";
+
+.flex{
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+
+.white {
+  background-color: var(--white);
+  flex-grow: 1;
+  padding-top: calc(var(--default-margin) * 1.5);
+}
+
+.browse {
+  padding: .5rem 0;
+  text-align: center;
+}
+
+/* Upper Section */
+.header {
+    background: var(--docker-dark);
+    color: var(--smoke);
+    min-height: 560px;
+    padding-top: 75px;
+}
+
+.top {
+  padding: 0 var(--default-margin);
+}
+
+.buildShipRun {
+    margin-top: 5rem;
+}
+
+.subtext {
+    color: var(--white);
+}
+
+.heading {
+    font-weight: 300;
+    color: var(--smoke);
+}
+
+.headingHero {
+    composes: heading;
+    font-size: 3rem;
+    line-height: 0.8;
+}
+
+.headingHeroAlt {
+    composes: headingHero;
+    color: var(--primary-color);
+}
+
+/* Lower Section */
+.lowerHeading {
+    text-align: center;
+    margin-bottom: var(--default-margin);
+}
+
+/* Company List */
+.companyRow {
+    padding: 1.5rem 0 .5rem 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: var(--default-margin);
+}
+
+.companyLinkLi {
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: var(--default-margin);
+}
+
+.footerCopy {
+  color: var(--gray-3);
+  font-weight: 100;
+  font-size: .8rem;
+}

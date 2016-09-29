@@ -1,0 +1,59 @@
+//colors
+$color_celeste_approx: #ccc;
+$white: #fff;
+$color_conifer_approx: #a5d24a;
+$color_deco_approx: #cde69c;
+$color_olive_drab_approx: #638421;
+$color_cosmos_approx: #fbd8db;
+$color_tamarillo_approx: #90111a;
+$color_tapa_approx: #777;
+
+.react-tagsinput {
+  border: 1px solid lighten($panel-bg, 5%);
+  background: lighten($panel-bg, 8%);
+  padding: rem-calc(10px);
+  overflow-y: auto;
+  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+  border-radius: rem-calc(2px);
+  input {
+    color: $charcoal;
+  }
+}
+.react-tagsinput-tag {
+  display: block;
+  border: 1px solid $secondary-5;
+  background: $secondary-6;
+  color: $oil;
+  font-size: 14px;
+  float: left;
+  padding: 15px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+  border-radius: $global-radius;
+}
+.react-tagsinput-invalid {
+  background: transparent;
+  color: $primary-5;
+}
+.react-tagsinput-remove {
+  font-weight: 300;
+  color: $secondary-4;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  &:before {
+    content: "x";
+  }
+}
+.react-tagsinput-input {
+  background: transparent;
+  color: $charcoal;
+  border: 0;
+  font-size: 13px;
+  padding: 5px;
+  margin: 0;
+  width: 80px;
+  outline: none;
+}

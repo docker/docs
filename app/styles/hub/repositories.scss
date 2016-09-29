@@ -1,0 +1,155 @@
+ul.repositories {
+  margin: 2.25rem 0.3rem 0 0.3rem;
+}
+.repo-header {
+  padding: rem-calc(10px);
+}
+.repo-content {
+  padding: rem-calc(10px);
+}
+.repository {
+  background: white;
+  .title {
+    color: $primary-color;
+  }
+  .logo {
+    width: 64px;
+    min-width: 64px;
+    height: 64px;
+    min-height: 64px;
+    padding: 10px;
+    background: $primary-color;
+    border-radius: $global-radius;
+    .d-logo {
+      color: $ghost;
+      font-size: rem-calc(48px);
+      margin: 0 auto;
+    }
+  }
+  .header {
+    padding-top: 0.325rem;
+    h6 small {
+      font-size: small;
+    }
+    h6 span {
+      font-size: small;
+      text-transform: capitalize;
+      color: #3f5167;
+    }
+  }
+  .repo-wrapper {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  //TODO: These surely should be `scss-ified`
+  .repo-stars {
+    border: 1px solid #c4cdda;
+    border-left: none;
+    padding: 10px;
+    p {
+      font-size: smaller;
+    }
+  }
+  .repo-downloads {
+    border: 1px solid #c4cdda;
+    border-left: none;
+    border-right: none;
+    padding: 10px;
+    p {
+      font-size: smaller;
+    }
+  }
+}
+
+.repo-separator {
+  font-weight: 300;
+  font-size: rem-calc(24px);
+  margin-right: 0px;
+  padding-right: 0px;
+  width: 20px;
+}
+
+.repo-form-margin {
+  margin-left: -15px;
+}
+
+//Need this to make foundation block-grid work with our design and borders
+.repo-border {
+  border:1px solid white;
+  position:relative;
+  z-index:10
+}
+
+.repo-border:before {
+  content:"";
+  display:block;
+  position:absolute;
+  top:2px;
+  left:2px;
+  right:2px;
+  bottom:2px;
+  border:1px solid #c4cdda;
+  border-radius: $global-radius;
+}
+
+.repository-page {
+  .repo-description-dockerfile {
+    .dockerfile {
+      font-family: $font-family-monospace;
+      white-space: pre;
+      overflow-x: auto;
+    }
+  }
+  .repo-details-content {
+    .repo-visibility {
+      margin-bottom: 1.25rem;
+      background: white;
+      border: 1px solid $docker-dark--placeholders;
+      padding: .75rem 1rem;
+      .privacy {
+        font-weight: $font-weight-bold;
+        display: inline-block;
+      }
+      .status {
+        display: inline-block;
+      }
+    }
+
+    
+    
+    .temp-prof-icon {
+      height: 50px;
+      width: 50px;
+      border-radius: 100%;
+      border: 1px solid black;
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+}
+
+.explore-repo-list {
+  margin-top: 1rem;
+}
+
+.add-repository-form {
+  margin-top: rem-calc(20px);
+}
+
+.repo-tags {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  li {
+    float: left;
+    padding: 0.3rem 0.3rem 1rem 0;
+    margin-right: 0.5rem;
+    .repo-tag {
+      background-color: #3c5164;
+      color: white;
+      border-radius: $global-radius;
+      padding: 0.5rem 0.8rem;
+    }
+  }
+}
+

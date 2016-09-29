@@ -1,0 +1,48 @@
+@import 'dux/css/colors.css';
+@import 'dux/css/box.css';
+
+.hover {
+    color: var(--charcoal);
+    line-height: 0.5;
+}
+
+.hover:hover {
+    cursor: pointer;
+}
+
+.hover input {
+    cursor: pointer;
+}
+
+.label {
+    color: #7a8491;
+    font-weight: 500;
+    font-size: .875rem;
+}
+
+.lessLabel {
+    composes: label;
+    margin-bottom: var(--default-margin);
+}
+
+.settingsWrapper {
+  display: flex;
+}
+
+.settingsBox {
+  border-right: 1px solid var(--secondary-5);
+}
+
+.sourceBox {
+  display: flex;
+}
+
+.centerSource {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.source {
+  margin-left: var(--default-margin);
+}

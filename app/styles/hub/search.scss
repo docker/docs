@@ -1,0 +1,191 @@
+//search page
+.search-page {
+  width: 100%;
+  overflow-x: hidden;
+  font-weight: 300;
+  .inline-list {
+    margin-top: rem-calc(12px);
+    li {
+      margin-left: 0.7rem;
+    }
+  }
+  select {
+    background-color: transparent;
+    border: 1px solid #c4cdda;
+    transition: border-color 0.15s linear 0s, background 0.15s linear 0s;
+    outline: 0;
+    color: #3f5167;
+    width: rem-calc(100px);
+    font-size: rem-calc(12px);
+    font-weight: 200;
+    border-color: #c4cdda;
+    border-radius: $global-radius;
+  }
+  input[type="text"] {
+    color: #7A8491;
+  }
+
+  .search-results-container {
+    .no-results-item {
+      text-align: center;
+    }
+  }
+
+  //Search Results
+  .search-results-list {
+    ul {
+      list-style-type: none;
+      text-align: center;
+    }
+    ul li {
+      display: inline-block;
+      padding-right: 5px;
+    }
+    .no-results-item {
+      list-style-type: none;
+      font-size: rem-calc(14px);
+      font-weight: normal;
+    }
+    .search-list-item {
+      background-color: white;
+      margin-bottom: rem-calc(10px);//5px 5px 5px 5px;
+      overflow-y: hidden;
+      font-weight: normal;
+      border: 1px solid #c4cdda;
+      border-radius: $global-radius;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .logo {
+        width: 48px;
+        min-width: 48px;
+        height: 48px;
+        min-height: 48px;
+        padding: 10px;
+        background: $primary-color;
+        border-radius: $global-radius;
+        margin-left: rem-calc(10px);
+        margin-bottom: rem-calc(25px);
+        .d-logo {
+          color: $ghost;
+          font-size: rem-calc(32px);
+          margin: 0 auto;
+        }
+      }
+
+      .search-item-avatar {
+      }
+
+      .search-bar-details {
+        line-height: rem-calc(12px);
+        height: rem-calc(24px);
+        background-color: #c4cdda;
+        p {
+          font-weight: 300;
+          font-size: rem-calc(12px);
+          margin-bottom: 0;
+          line-height: 1.5rem;
+        }
+      }
+
+      .search-item-basic-info {
+        .search-item-name {
+          font-size: 1.4rem;
+          font-weight: 600;
+        }
+        p {
+          font-size: 0.8rem;
+        }
+        .search-item-description {
+          font-size: rem-calc(12px);
+        }
+      }
+
+      .search-item-other-info {
+        font-size: rem-calc(10px);
+      }
+
+      .search-item-badges-stats {
+        ul li {
+          line-height: 0.6rem;
+          border-left: 1px solid #c4cdda;
+        }
+        p {
+          margin-bottom: 0;
+          font-size: rem-calc(12px);
+          font-weight: 500;
+        }
+        .search-item-badges {
+        }
+        .search-item-stats {
+          span {
+            padding-left: rem-calc(4px);
+          }
+        }
+      }
+    }
+  }
+}
+
+.paging-bar {
+  display: inline-flex;
+  float: right;
+  margin-right: rem-calc(25px);
+  .paging-info {
+    align-self: center;
+  }
+  .paging-buttons {
+    align-self: center;
+    button {
+      margin: 0;
+      background-color: $body-bg;
+      color: $docker-dark;
+      padding-right: 0;
+      padding-left: rem-calc(4px);
+      box-shadow: none;
+      &:hover {
+        color: $primary-color;
+        box-shadow: none;
+      }
+      &:focus {
+        color: #7A8491;
+        outline: none;
+        box-shadow: none;
+      }
+      i {
+        font-size: 24;
+      }
+    }
+    button[disabled] {
+      opacity: 0.3;
+      box-shadow: none;
+    }
+  }
+}
+
+.searchbar {
+  input[type=text] {
+    background: #69788a;/** need variable here **/
+    border: 1px solid #4c5968;/** need variable here **/
+    border-radius: $global-radius;
+    color: $white;    
+    display: block;
+    height: 2rem;
+    padding: .2rem 2rem;
+    top: .6rem;
+  }
+  i.fa.fa-search {
+    color: #fff;
+    margin-top: -18px;/** lame **/
+    margin-left: 11px;/** lame **/
+  }
+}
+
+// target webkit only meh
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  i.fa.fa-search {
+    margin-top: -16px!important;/** super lame, this can not be permanent **/
+  }
+}

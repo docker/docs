@@ -1,0 +1,82 @@
+@import 'dux/css/colors.css';
+
+.checkText {
+    margin-left: 1rem;
+    color: var(--oil);
+}
+
+.button {
+    float: right;
+    margin-right: 1.5rem;
+    margin-top: 1.2rem;
+}
+
+.tableInput {
+    width: 100%;
+    input, span, label, div {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.table {
+    border-left-width: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    margin-bottom: 1 rem;
+}
+
+.faBtn {
+    cursor: pointer;
+    user-select: none;
+    margin-top: 0.8rem;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.addBtn {
+    composes: faBtn;
+    color: var(--success-color);
+}
+
+.removeBtn {
+    composes: faBtn;
+    color: var(--alert-color);
+}
+
+.noBtn {
+  flex-grow: 1;
+}
+
+.triggerBtn {
+    composes: faBtn;
+    color: var(--primary-color);
+    margin-left: 0.5rem;
+}
+
+.triggerItem {
+    display: inherit;
+}
+
+.message {
+    float: left;
+    margin-left: .7rem;
+}
+
+.success {
+    composes: message;
+    color: var(--success-color);
+}
+
+.error {
+    composes: message;
+    color: var(--alert-color);
+}
+
+.clumpedErrors {
+    composes: error;
+    font-family: inherit;
+    font-size: .875rem;
+}

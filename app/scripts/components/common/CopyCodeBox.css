@@ -1,0 +1,37 @@
+@import "dux/css/box";
+@import "dux/css/colors";
+
+.copyBox {
+	display: flex;
+	flex-flow: row;
+	flex-basis: 95%;
+	margin-right: 1rem;
+	margin-bottom: 1rem;
+	overflow-x: auto;
+	border: 1px solid var(--iron);
+	border-radius: var(--global-radius);
+	padding: 0.5rem;
+}
+
+.code {
+	font-family: monospace;
+	font-size: .8125em;
+}
+.contentBox {
+	composes: code;
+	white-space: pre;
+}
+
+.dollarBox {
+	composes: code;
+	font-weight: 600;
+	white-space: pre;
+	user-select: none;
+}
+
+.wrapper {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: flex-start;
+	width: 100%;
+}

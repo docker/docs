@@ -1,0 +1,59 @@
+.square {
+  margin-right: 1px;
+  margin-bottom: 1px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.square:hover {
+  border: 1px solid black;
+}
+
+.solid {
+  opacity: 1;
+}
+
+.faded {
+  opacity: 0.4;
+}
+
+.outline {
+  border: 1px solid black;
+}
+
+.component {
+  color: #B1B5B9;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.tooltipSquare {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  vertical-align: middle;
+  margin-right: .25rem;
+}
+
+.vulnLineWrapper {
+  padding-top: 0.25rem;
+}
+
+.critical {
+  background-color: #EB3E46;
+}
+
+.major {
+  background-color: #FF8546;
+}
+
+.minor {
+  background-color: #FFC458;
+}
+
+.secure {
+  background-color: #D3DFDD;
+}

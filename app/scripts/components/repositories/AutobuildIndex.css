@@ -1,0 +1,28 @@
+@import "dux/css/box.css";
+@import "dux/css/colors.css";
+
+.row {
+  margin-top: var(--default-margin);
+}
+
+.link {
+  display: block;
+  background: white;
+  border-radius: var(--global-radius);
+  border: 1px solid var(--silver);
+  color: var(--secondary-4);
+  margin: 0 .3rem .3rem 0;
+  padding: 1.8rem;
+  i {
+      font-size: 6rem;
+      margin-bottom: 1rem;
+  }
+  &:hover {
+    background: #f4f9fc;
+    color: var(--secondary-4);
+  }
+  &:focus {
+    background: color(#f4f9fc blackness(10%));
+    color: var(--secondary-4);
+  }
+}

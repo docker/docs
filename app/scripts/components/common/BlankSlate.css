@@ -1,0 +1,27 @@
+@import 'dux/css/colors.css';
+.blankSlates {
+    background: #fff;
+    padding: 2.5rem;
+    h1 {
+        color: var(--secondary-7);
+        font-size: 2rem;
+        font-weight: 300;
+    }
+}
+
+.link {
+    background: transparent;
+    border-radius: 3px;
+    border: 1px solid var(--silver);
+    color: var(--secondary-4);
+    margin: 0 .3rem .3rem 0;
+    padding: 1.8rem;
+    i {
+        font-size: 2.5em;
+        margin-bottom: 1rem;
+    }
+    &:hover {
+        background: #f4f9fc;
+        color: var(--secondary-4);
+    }
+}

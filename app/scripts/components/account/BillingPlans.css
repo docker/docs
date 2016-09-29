@@ -1,0 +1,21 @@
+@import 'dux/css/colors.css';
+
+.body {
+ margin-top: 2rem;
+}
+
+.error {
+    background: var(--primary-5);
+    color:white;
+}
+
+.plansQuestion {
+    margin-bottom: 2rem;
+}
+
+.questionTitle {
+    font-weight: 500;
+    color: var(--secondary-1);
+}
+
+/*.questionAnswer {}*/

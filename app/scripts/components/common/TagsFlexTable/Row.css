@@ -1,0 +1,16 @@
+@import 'dux/css/colors.css';
+@import 'dux/css/box.css';
+
+.flexRow {
+    background: var(--white);
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    padding-top: 0.3rem;
+    width: 100%;
+}
+
+.flexRow:last-child {
+    border-bottom-right-radius: var(--global-radius);
+    border-bottom-left-radius: var(--global-radius);
+    border-bottom: 0;
+}

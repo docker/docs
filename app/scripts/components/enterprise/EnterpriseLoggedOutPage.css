@@ -1,0 +1,26 @@
+@import 'dux/css/colors.css';
+@import 'dux/css/box.css';
+
+.leftCol {
+  padding: 1rem .7rem;
+}
+
+.rightCol {
+  border-left: 2px solid var(--smoke);
+  padding: var(--default-margin);
+}
+
+.header {
+  color: var(--secondary-7);
+}
+
+.leftHeader {
+  @extend .header;
+  font-size: 1.5rem;
+  font-weight: 200;
+}
+
+.rightHeader {
+  @extend .header;
+  font-size: 1.25rem;
+}

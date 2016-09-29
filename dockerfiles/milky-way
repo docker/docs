@@ -1,0 +1,10 @@
+FROM node:4.1.2
+
+WORKDIR /opt/hub
+ENV PATH /opt/hub/node_modules/.bin/:$PATH
+
+RUN apt-get update
+COPY ./private-deps /opt/hub/private-deps
+COPY ./package.json /opt/hub/
+ADD ./node_modules /opt/hub/node_modules
+#RUN npm install --production

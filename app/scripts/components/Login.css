@@ -1,0 +1,39 @@
+@import 'dux/css/colors.css';
+@import 'dux/css/box.css';
+
+.loginPage {
+  background: var(--docker-dark);
+  height: 100%;
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.header {
+  text-align: center;
+  background: var(--docker-dark);
+}
+
+.head {
+  color: var(--white);
+  font-size: 2rem;
+  font-weight: 200;
+}
+
+.subHead {
+  color: var(--info-color);
+}
+
+.logo {
+    width: 90px;
+    height: 110px;
+}
+
+.footer {
+  background: var(--docker-dark);
+  text-align: center;
+  flex-grow: 1;
+  bottom: var(--default-margin);
+  width: 100%;
+}

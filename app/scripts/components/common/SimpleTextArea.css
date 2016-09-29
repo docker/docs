@@ -1,0 +1,5 @@
+@import "dux/css/box.css";
+
+.textarea {
+    border-radius: var(--global-radius);
+}

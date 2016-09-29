@@ -1,0 +1,170 @@
+@import 'docker-ux';
+@import 'mono-blue';
+@import '_docker';
+
+//============================REMOVE THIS======================================
+
+$default-margin: 1.5rem;
+
+.flex-table {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  border: 1px solid $border-input;
+  border-radius: $global-radius;
+  font-size: 1rem;
+  margin: 0.5rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: $secondary-2;
+  .flex-row {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid $secondary-5;
+    background: white;
+    &:last-child {
+      border-bottom: 0;
+    }
+    &.header {
+      background-color: $primary-1;
+      font-weight: 700;
+      color: white;
+      font-size: 1.2rem;
+      border-bottom: 0;
+    }
+    .flex-item {
+      display: flex;
+      flex-flow: row nowrap;
+      flex-grow: 1;
+      flex-basis: 0;
+      padding: 0.7em 1.2rem 0.7em 1.2rem;
+      word-break: break-word;
+      a {
+        color: $primary-1;
+        &:hover {
+          color: darken($primary-1, 10%);
+        }
+      }
+    }
+  }
+}
+
+//=============================================================================
+
+@import 'hub';
+
+.button {
+  // seems to feel unresponsive with almost any transition length
+  transition: 0.1s;
+  font-weight: 500;
+}
+
+//TODO: could be global style
+.create-object-btn {
+  background-color: white;
+  border: 4px dashed #c4cdda;
+  border-radius: $global-radius;
+  box-shadow: none;
+  color: $docker-dark;
+  line-height: 2.65rem;
+  margin: rem-calc(20px);
+  padding: 0.7rem;
+  font-size: large;
+  text-align: center;
+  width: 90%;
+  cursor: pointer;
+  &:hover {
+    background-color: $docker-light;
+    color: $docker-dark;
+  }
+  &:focus {
+    background-color: $docker-light;
+    color: $docker-dark;
+  }
+  i {
+    float: right;
+  }
+}
+
+//TODO: could be global style
+.blank-slate {
+  min-height: 600px;
+}
+
+.page-top-header {
+  background-color: white;
+  h3 {
+    color: #22b8eb;
+    font-weight: 300;
+  }
+}
+
+.temp-page {
+  margin-top: 2rem;
+  text-align: center;
+  h1 {
+    font-size: 24px;
+    font-weight: 300;
+    color: lighten(gray, 15%);
+  }
+}
+
+
+  select {
+    background-color: transparent;
+    border: 1px solid #c4cdda;
+    transition: border-color 0.15s linear 0s, background 0.15s linear 0s;
+    outline: 0;
+    color: #3f5167;
+    width: rem-calc(100px);
+    font-size: rem-calc(14px);
+    font-weight: 300;
+    border-color: #c4cdda;
+    border-radius: $global-radius;
+  }
+
+form .row textarea.columns {
+  padding-left: 1rem;
+}
+
+.global-select {
+  .text {
+    margin-right: 1rem;
+    color: $secondary-4;
+  }
+}
+
+.alert-box {
+  border-radius: $global-radius;
+}
+
+//TODO: fix in dux
+.sk-cube {
+  background-color: #546473 !important;
+}
+
+/* Pre-move to docker-ux */
+@import 'common/_secondary-top-bar';
+@import 'common/_repository-list-item';
+
+// Don't kill me
+.mktoForm {
+  margin-top: 10px;
+  select#Country {
+    margin-top: 20px;
+    }
+  #Phone {
+    margin-top: 20px;
+  }
+  #accept_eval_terms {
+    margin-top: 30px;
+  }
+}
+.mktoForm div.mktoFormRow {
+  padding-bottom: 20px;
+}
+.mktoFieldWrap {
+  label {
+    top: -15px;
+  }
+}

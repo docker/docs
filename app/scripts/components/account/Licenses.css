@@ -1,0 +1,51 @@
+@import "dux/css/box";
+@import "dux/css/colors";
+
+.license {
+     background: var(--white);
+     border: 1px solid var(--iron);
+     border-top-right-radius: var(--global-radius) 0;
+     border-top-left-radius: var(--global-radius) 0;
+     padding: 1rem 2rem;
+     margin: 1rem 0 0 0;
+}
+
+.download {
+    background: var(--secondary-5);
+    color: var(--secondary-2);
+    border-bottom-right-radius: var(--global-radius) 0;
+    border-bottom-left-radius: var(--global-radius) 0;
+    text-align: center;
+    padding: .5rem;
+    line-height: 16px;
+    font-size: 14px;
+}
+
+.downloadAlert {
+    background: var(--alert-color);
+    color: var(--secondary-5);
+    border-bottom-right-radius: var(--global-radius) 0;
+    border-bottom-left-radius: var(--global-radius) 0;
+    text-align: center;
+    padding: .5rem;
+}
+
+.pageWrapper {
+    padding-top: 1.25rem;
+}
+
+.legal {
+  font-size: 12px;
+  font-style: italic;
+  min-height: 48px;
+}
+
+input.checkbox {
+  margin-bottom: 0;
+  margin-right: 4px;
+}
+
+.finePrint {
+  font-size: 10px;
+  font-style: italic;
+}

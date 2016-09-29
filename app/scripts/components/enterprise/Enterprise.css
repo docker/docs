@@ -1,0 +1,34 @@
+@import 'dux/css/colors.css';
+
+.enterprise {
+	text-align: center;
+}
+.feature {
+	background: var(--docker-dark);
+	background: #2b3d54;
+	padding: 5rem;
+	h1 {
+		color: #fff;
+		font-size: 2.5rem;
+	}
+	p {
+		color: #c4cdda;
+	}
+}
+.section {
+	background: #fff;
+	padding: 2rem;
+	&:nth-of-type(3) {
+		background: transparent;
+	}
+	ul {
+		list-style-type: none;
+	}
+	li {
+		border-bottom: 1px solid #efefef;
+		padding: 1.3rem;
+		&:last-of-type {
+			border: none;
+		}
+	}
+}
