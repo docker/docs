@@ -1,6 +1,0 @@
-Small functional-style crypto library.
-
-Ciphers: AES, 3DES, RC4.
-Hashes: MD5, SHA1, SHA2.
-Pubkey: RSA, DH, DSA.
-Rng: Fortuna.

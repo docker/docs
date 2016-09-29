@@ -1,5 +1,0 @@
-Named pipe bindings
-
-Named pipe bindings for Windows systems. Note this code will compile on
-non-Windows platforms but will raise a dynamic `Not_available` error
-if you try to use the functions.

@@ -1,3 +1,0 @@
-archive: "http://download.camlcity.org/download/findlib-1.6.2.tar.gz"
-checksum: "530ff275d6b96e140f0d3a03ed14b68e"
-mirrors: ["http://gazagnaire.org/packages/ocamlfind.1.6.2/findlib-1.6.2.tar.gz"]

@@ -1,5 +1,0 @@
-Include files in OCaml code
-OCamlify allows to create OCaml source code by including whole files
-into OCaml string or string list. The code generated can be compiled
-as a standard OCaml file. It allows embedding external resources as
-OCaml code.

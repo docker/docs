@@ -1,2 +1,0 @@
-Virtual package relying on a GMP lib system installation.
-This package can only install if the GMP lib is installed on the system.

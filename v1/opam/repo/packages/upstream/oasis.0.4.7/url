@@ -1,5 +1,0 @@
-archive: "https://forge.ocamlcore.org/frs/download.php/1635/oasis-0.4.7.tar.gz"
-checksum: "d848bac0234ed1849a9187d16630cda3"
-mirrors: [
-  "http://gazagnaire.org/packages/oasis.0.4.7/oasis-0.4.7.tar.gz"
-]

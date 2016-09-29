@@ -1,1 +1,0 @@
-Bindings for sendmsg/recvmsg that allow Unix.file_descrs to be sent and received over Unix domain sockets

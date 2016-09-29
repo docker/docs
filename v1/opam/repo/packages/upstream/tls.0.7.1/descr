@@ -1,4 +1,0 @@
-Transport Layer Security (TLS) in OCaml
-
-A clean-slate TLS implementation, with support for protocol versions 1.0-1.2.
-Includes the core library, as well as Lwt and MirageOS frontends.

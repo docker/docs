@@ -1,5 +1,0 @@
-OS X CoreFoundation bindings
-
-String, Array, Index, RunLoop (and Observer), and TimeInterval are
-bound. Additionally, an osx-cf.lwt subpackage provides lwt+RunLoop
-integration.

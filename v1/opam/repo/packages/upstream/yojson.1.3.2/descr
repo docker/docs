@@ -1,9 +1,0 @@
-Yojson is an optimized parsing and printing library for the JSON format 
-It addresses a few shortcomings of json-wheel including 2x speedup,
-polymorphic variants and optional syntax for tuples and variants.
-
-ydump is a pretty-printing command-line program provided with the
-yojson package.
-
-The program atdgen can be used to derive OCaml-JSON serializers and
-deserializers from type definitions.

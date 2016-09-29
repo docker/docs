@@ -1,5 +1,0 @@
-GitHub APIv3 client bindings
-
-This library provides access to many of the most used GitHub API
-endpoints while making authorization, two-factor authentication, rate
-limit monitoring, event delivery, and polling easy to use.

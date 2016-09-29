@@ -1,7 +1,0 @@
-Query and install external dependencies of OPAM packages
-
-opam-depext is a simple program intended to facilitate the interaction between
-OPAM packages and the host package management system. It can perform OS and
-distribution detection, query OPAM for the right external dependencies on a set
-of packages, and call the OS's package manager in the appropriate way to install
-them.

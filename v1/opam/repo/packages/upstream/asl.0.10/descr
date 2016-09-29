@@ -1,4 +1,0 @@
-Bindings for the Apple System Log API
-
-The Apple System Log allows applications to send log messages, which can
-be recorded, filtered and searched.

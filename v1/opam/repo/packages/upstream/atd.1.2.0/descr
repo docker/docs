@@ -1,5 +1,0 @@
-Parser for the ATD data format description language
-ATD is the OCaml library providing a parser for the ATD language and
-various utilities. ATD stands for Adjustable Type Definitions in
-reference to its main property of supporting annotations that allow a
-good fit with a variety of data formats.

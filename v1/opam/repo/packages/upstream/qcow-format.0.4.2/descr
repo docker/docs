@@ -1,4 +1,0 @@
-Read and write images in Qcow2 format
-
-If you want to `create`, `read`, `write` or analyse qcow2-formatted
-data in pure OCaml then this library is for you!

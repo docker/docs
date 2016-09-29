@@ -1,9 +1,0 @@
-logs/*
-*.dat
-results/*
-*.png
-create_hierarchy
-create_hierarchy.cmi
-create_hierarchy.cmx
-create_hierarchy.o
-volumes

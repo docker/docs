@@ -1,3 +1,0 @@
-Combinators for expressing ASN.1 grammars in OCaml
-
-Allows construction of BER and DER parsers and serializers.

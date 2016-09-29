@@ -1,5 +1,0 @@
-Type-driven code generation for OCaml >=4.02
-
-ppx_deriving provides common infrastructure for generating
-code based on type definitions, and a set of useful plugins
-for common tasks.

@@ -1,3 +1,0 @@
-OS X FSevents bindings
-
-osx-fsevents includes event stream resumption and an optional lwt sublibrary.
