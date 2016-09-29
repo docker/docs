@@ -1,0 +1,24 @@
+@import "dux/css/colors.css";
+
+.statusWrapper {
+  cursor: pointer;
+}
+
+.warning {
+  composes: statusWrapper;
+  color: var(--warning-color);
+}
+
+.success {
+  composes: statusWrapper;
+  color: var(--success-color);
+}
+
+.primary {
+  composes: statusWrapper;
+  color: var(--primary-color);
+}
+
+.canceled {
+  color: #eb3e46;
+}

@@ -1,0 +1,24 @@
+@import 'dux/css/colors.css';
+
+.emailAddress {
+    word-wrap: break-word;
+}
+
+.emphasis {
+    color: var(--secondary-3);
+    font-weight: 800;
+}
+
+.failed {
+  color: var(--primary-5);
+}
+
+.remove {
+    color: var(--primary-5);
+    transition: color .15s ease;
+    align-self: center;
+}
+
+.remove:hover {
+     color: var(--secondary-1);
+ }

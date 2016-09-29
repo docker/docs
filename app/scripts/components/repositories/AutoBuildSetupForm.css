@@ -1,0 +1,49 @@
+@import "dux/css/box.css";
+@import "dux/css/colors.css";
+
+.errorText {
+    white-space: pre;
+}
+
+.input {
+    margin-right: var(--default-margin);
+}
+
+.formContainer {
+    margin-top: var(--default-margin);
+}
+
+.error {
+    color: var(--primary-5);
+    font-size: .875rem;
+    margin-bottom: 0.3rem;
+}
+
+/* TODO: this is also used in EnterpriseTrialForm.css | a candidate to be in colors.css */
+.label {
+    color: #7a8491;
+    font-weight: 500;
+    sup {
+        font-size: 1rem;
+        vertical-align: text-bottom;
+    }
+}
+
+.customizeLabel {
+    composes: label;
+    margin-bottom: 0.5rem;
+}
+
+.floatRight {
+    float: right;
+    margin-right: 1rem;
+}
+
+.globalError {
+    composes: error;
+    composes: floatRight;
+}
+
+.select {
+    border-radius: var(--global-radius);
+}

@@ -1,0 +1,12 @@
+.table {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.teamsWrapper {
+	padding-top: 1.25rem;
+}
+
+.button > * {
+	margin-bottom: 0;
+}

@@ -1,0 +1,146 @@
+.options {
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+}
+
+.options_showMenu {
+  box-sizing: content-box;
+  position: relative;
+  cursor: pointer;
+  padding: 2px 4px;
+  width: 4px;
+  height: 16px;
+
+  /* Use pseudo element + box shadows to create 3 dots */
+  &::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    background: #C4CDDA;
+    box-shadow: 0 6px 0 0 #C4CDDA, 0 12px 0 0 #C4CDDA;
+    transition: all 100ms ease-in;
+  }
+
+  &:hover {
+    &::before {
+      background: #7A8491;
+      box-shadow: 0 6px 0 0 #7A8491, 0 12px 0 0 #7A8491;
+    }
+
+    /* Use pseudo element to cover space behind carrot for better hover ux */
+    &::after {
+      content: '';
+      display: block;
+      box-sizing: content-box;
+      position: absolute;
+      right: -8px;
+      bottom: -8px;
+      padding: 0 8px 0 20px;
+      width: 100%;
+      height: 14px;
+    }
+
+    .menu {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}
+
+.menu {
+  position: absolute;
+  top: 26px;
+  right: -12px;
+  background: #F7F8F9;
+  box-shadow: 0 0 2px 0 rgba(4, 39, 60, 0.12), 0 2px 2px 0 rgba(4, 39, 60, 0.24);
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 100ms ease-in;
+
+  /* Make sure children inherit border radius so they don't bleed over */
+  & > *:first-child {
+    border-top-right-radius: inherit;
+    border-top-left-radius: inherit;
+  }
+
+  & > *:last-child {
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+
+  /* Carrot on top of menu */
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    right: 12px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 6px 6px 6px;
+  }
+
+  &::before {
+    top: -7px;
+    border-color: transparent transparent rgba(4, 39, 60, 0.06) transparent;
+  }
+
+  &::after {
+    top: -6px;
+    border-color: transparent transparent #F7F8F9 transparent;
+  }
+}
+
+.menuButton {
+  padding: 7px 24px;
+  font-size: 16px;
+  color: #3F5167;
+  line-height: 22px;
+  white-space: nowrap;
+  transition: background 100ms ease-in;
+
+  &.menuButtonDanger {
+    color: #EB3E46;
+  }
+
+  &:hover {
+    background: #E0E4E7;
+  }
+}
+
+.history {
+  cursor: pointer;
+  font-family: HelveticaNeue;
+  font-size: 12px;
+  color: #3F5167;
+  line-height: 16px;
+  white-space: nowrap;
+
+  .historyClose {
+    display: inline-block;
+    vertical-align: middle;
+    width: 14px;
+    height: 14px;
+    margin: -3px 12px 0 0;
+    transform: rotate(-45deg);
+
+    svg {
+      width: inherit;
+      height: inherit;
+      fill: #22B8EB;
+      transition: fill 300ms ease-out;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+
+    svg {
+      fill: #13a3d4;
+    }
+  }
+}

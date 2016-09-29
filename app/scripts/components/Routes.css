@@ -1,0 +1,15 @@
+/**
+ * Adding global css in Routes.css to load class names as-is so we don't have local processed classes
+ *
+ * vendor overrides
+ * ----------------
+ * 1. react-select [styles/vendor-overrides/react-select.css]
+ * 2. rc-tooltip [styles/vendor-overrides/rc-tooltip.css]
+ *
+ */
+:global {
+    @import '../../styles/vendor-overrides/react-select.css';
+    /** Default styles from rc-tooltip which will be overwritten **/
+    @import "rc-tooltip/assets/bootstrap_white.css";
+    @import '../../styles/vendor-overrides/rc-tooltip.css';
+}

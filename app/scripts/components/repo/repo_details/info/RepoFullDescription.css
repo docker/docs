@@ -1,0 +1,31 @@
+@import "dux/css/colors.css";
+@import "dux/css/box.css";
+
+.textArea {
+    background-color: var(--white);
+    &:focus {
+	    border: 1px solid var(--primary-1);
+	    background-color: var(--white);
+    }
+}
+.text {
+    margin-bottom: var(--default-margin);
+}
+.error {
+	border: 1px solid var(--primary-5);
+	&:focus {
+	    border: 1px solid var(--primary-5);
+	}
+}
+.errorText {
+    composes: text;
+    color: var(--primary-5);
+}
+.successText {
+    composes: text;
+    color: var(--primary-2);
+}
+
+.successfulSave {
+    border: 1px solid var(--primary-2);
+}

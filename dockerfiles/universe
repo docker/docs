@@ -1,0 +1,13 @@
+FROM bagel/milky-way:337f873f4f23f4b2603972229ae3519c5f61f6d7
+
+ENV NODE_ENV development
+
+RUN apt-get install libelf-dev unzip -y
+
+RUN cd /opt && wget http://flowtype.org/downloads/flow-linux64-latest.zip && unzip flow-linux64-latest.zip && rm flow-linux64-latest.zip
+
+# npm global deps
+RUN npm install -g gulp jest-cli
+
+# npm deps
+RUN cd /opt/hub && npm install

@@ -1,0 +1,41 @@
+.lineSpacing {
+  line-height: 1rem;
+}
+
+.linePadding {
+  padding-bottom: 0.5rem;
+}
+
+.smallText {
+  font-size: 0.9rem;
+}
+
+.green {
+  color: #7DCCC0;
+}
+
+.grey {
+  color: #7A8492;
+}
+
+.icon {
+  margin-right: 0.5rem;
+}
+
+.tagSize {
+  composes: lineSpacing;
+  composes: smallText;
+  color: #CECED9;
+}
+
+.tagName {
+  composes: lineSpacing;
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+
+.vulnerabilityBarWrapper {
+  height: 1rem;
+  width: 350px;
+}

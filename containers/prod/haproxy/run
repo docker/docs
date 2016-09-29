@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sed -i s/{BETA_PASSWORD}/"$BETA_PASSWORD"/g /haproxy/haproxy.cfg
+
+# Check is haproxy.cfg is valid before we start
+haproxy -c -f /haproxy/haproxy.cfg || ( echo 'Bad haproxy config'; exit; )
+
+/usr/sbin/haproxy -f /haproxy/haproxy.cfg &
+
+wait $!

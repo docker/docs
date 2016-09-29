@@ -1,0 +1,74 @@
+.tutorial {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.headline {
+  margin: 12px 0;
+  font-size: 14px;
+  color: #3F5167;
+  text-transform: uppercase;
+}
+
+.addWebhook {
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+  padding: 15px;
+  height: 52px;
+  background: #FBFBFC;
+  border: 1px solid #22B8EB;
+  border-radius: 2px;
+  transition-duration: 240ms;
+
+  .webhookIcon,
+  .plusIcon {
+    position: absolute;
+    left: 50%;
+    top: 15px;
+    height: 22px;
+    transition: opacity 240ms 10ms ease-out;
+  }
+
+  .webhookIcon {
+    width: 73px;
+    margin-left: calc(73px/-2);
+
+    svg {
+      width: 73px;
+      height: 22px;
+    }
+  }
+
+  .plusIcon {
+    width: 22px;
+    margin-left: -11px;
+    opacity: 0;
+
+    svg {
+      width: 22px;
+      height: 22px;
+      fill: #FBFBFC;
+    }
+  }
+
+  &:hover {
+    .webhookIcon {
+      opacity: 0;
+    }
+
+    .plusIcon {
+      opacity: 1;
+    }
+  }
+}
+
+.details {
+  position: relative;
+  margin: 12px auto;
+  max-width: 330px;
+  font-style: italic;
+  font-size: 12px;
+  color: #7A8491;
+  line-height: 16px;
+}

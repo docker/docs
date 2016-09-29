@@ -1,0 +1,148 @@
+.form {
+  margin: 12px 0;
+  padding: 22px;
+  background: #FBFBFC;
+  border: 1px solid #C4CDDA;
+  border-radius: 2px;
+}
+
+.formError {
+  margin-right: 10px;
+  color: #DC7D7D;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: right;
+}
+
+.formRow {
+  display: flex;
+  justify-content: space-between;;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+
+  &.formRowActions {
+    justify-content: flex-end;
+    margin: 0 -5px 0;
+
+    .button {
+      margin-top: 12px;
+    }
+  }
+}
+
+.label {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: #C4CDDA;
+  line-height: 20px;
+  transition: all 100ms ease-in;
+}
+
+input[type=text].input,
+input[type=url].input {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 20px;
+  border: none;
+  border-bottom: 1px solid #C4CDDA;
+  font-size: 14px;
+  color: #3F5167;
+  line-height: 20px;
+  transition: all 100ms ease-in;
+
+  &:focus {
+    border-bottom-color: #22B8EB;
+    /*Use box-shadow to thicken bottom border without jumping*/
+    box-shadow: 0 1px #22B8EB;
+  }
+
+  &:not(.input_empty):invalid {
+    border-bottom-color: #EB2222;
+    box-shadow: 0 1px #EB2222;
+
+    & + .inputError {
+      opacity: 1;
+    }
+  }
+}
+
+.inputError {
+  color: #DC7D7D;
+  margin-top: 1px;
+  font-size: 10px;
+  line-height: 14px;
+  opacity: 0;
+  transition: opacity 100ms ease-in;
+}
+
+.inputGroup {
+  flex-grow: 1;
+  margin: 10px;
+  width: 200px;
+
+  .label {
+    position: relative;
+    margin-top: -20px;
+    margin-bottom: 0;
+    transform-origin: bottom left;
+  }
+
+  .input {
+    &::placeholder {
+      opacity: 0;
+      transition: opacity 100ms ease-in;
+    }
+
+    &:focus::placeholder {
+      opacity: 1;
+    }
+
+    &:not(.input_empty):invalid + .label + .inputError {
+      opacity: 1;
+    }
+
+    &:focus + .label,
+    &:not(.input_empty) + .label {
+      color: #B2BBC8;
+      transform: translateY(-20px) scale(0.7);
+    }
+  }
+}
+
+.button {
+  padding: 8px 20px;
+  margin: 0 5px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  border-radius: 2px;
+  transition: all 100ms ease-in;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &.buttonPrimary {
+    background: #22B8EB;
+    color: #FFFFFF;
+    border: none;
+
+    &:not(:disabled):hover {
+      background: #13A3D4;
+    }
+  }
+
+  &.buttonSecondary {
+    background: #FCFDFF;
+    color: #22B8EB;
+    border: 1px solid #22B8EB;
+
+    &:not(:disabled):hover {
+      border-color: #13A3D4;
+      color: #13A3D4;
+    }
+  }
+}

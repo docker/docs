@@ -1,0 +1,108 @@
+.ol-decimal {
+  list-style-type: decimal;
+}
+
+.auto-build-tags-table {
+  input[type="text"] {
+    max-width:180px;
+  }
+}
+
+.autobuild-checkbox {
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+  * {
+    cursor: pointer;
+  }
+  .checkbox-text {
+    margin-left: 5px;
+  }
+}
+
+//GLOBAL?
+.two-level-selector {
+  margin-top: 1.0rem;
+  .dux-form {
+    padding: 0;
+    margin: 0;
+  }
+  .row {
+    padding: 0;
+    margin: 0;
+    .columns {
+      padding: 0;
+    }
+  }
+  //this is actually a lighter filter bar
+  .searchbar input[type=text] {
+    background-color: $secondary-4;
+    width: 100%;
+  }
+  .filterbar-container {
+    margin-left: rem-calc(24px);
+  }
+}
+
+//Strip out the module class
+ul.stripped-module {
+  background: #fff;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  li {
+    text-align: left;
+    border-bottom: 1px solid #cbd1d7;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    &:hover {
+      background: $secondary-6;
+      cursor: pointer;
+    }
+    .list-item {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  img {
+    border-radius: $global-radius;
+  }
+  .header-bar {
+    background-color: $secondary-6;
+    min-height: rem-calc(60px);
+    cursor: default;
+  }
+  .header-title {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    font-size: rem-calc(18px);
+    font-weight: 400;
+  }
+  .alert-box {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+
+ul.left-border {
+  border-left: 1px solid #cbd1d7;
+}
+
+ul.right-border {
+  border-right: 1px solid #cbd1d7;
+}
+
+//fa i class needs this
+.arrow-sel {
+  margin-top: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.create-autobuild-form {
+  .form-error {
+    border: 1px solid $primary-5;
+  }
+  .text-error {
+    color: $primary-5;
+  }
+}

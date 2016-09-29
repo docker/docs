@@ -1,0 +1,98 @@
+@import 'dux/css/colors.css';
+@import 'dux/css/box.css';
+
+.cancel {
+    float: right;
+    color: var(--primary-5);
+}
+.cancel:hover {
+    color: color(var(--primary-5) blackness(15%));
+}
+
+.title {
+    color: var(--primary-1);
+    i {
+        color: var(--secondary-5);
+    }
+}
+.title:hover {
+    cursor: pointer;
+    color: color(var(--primary-1) blackness(55%));
+    i {
+        color: color(var(--secondary-5) blackness(55%));
+    }
+}
+
+.cloudStarter {
+    margin-left: var(--default-margin);
+}
+
+.centerText {
+    text-align: center;
+}
+
+.check {
+    color: var(--primary-2);
+}
+
+.download {
+    margin-right: var(--default-margin);;
+}
+
+.curlHelp {
+    font-size: .875rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.curlWrap {
+    width: 100%;
+}
+
+.curlCommand {
+    resize: none;
+    overflow: hidden;
+    height: inherit;
+}
+
+.clipboard {
+    height: 3rem;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.downloadFlexItem {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-grow: 4;
+    flex-basis: 0;
+    padding: 0 1rem;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.flexbox {
+    display: flex;
+    flex-flow: column;
+}
+
+.flexRow {
+    min-height: 9rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    background-color: var(--white);
+    border: 1px solid var(--secondary-5);
+    border-radius: 3px;
+    margin-bottom: .5rem;
+}
+
+.flexItem {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 0.7em 1rem 0.7em 1rem;
+    word-break: break-word;
+}

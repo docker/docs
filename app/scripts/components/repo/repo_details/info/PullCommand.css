@@ -1,0 +1,17 @@
+@import "dux/css/colors.css";
+@import "dux/css/box.css";
+
+.pullCommand {
+    background-color: var(--white);
+    border: var(--white);
+    outline: none;
+    border-radius: var(--global-radius);
+    font-family: monospace;
+    font-size: 1rem;
+    margin: 0;
+    width: 100%;
+    &:focus {
+        border: var(--white);
+        outline: none;
+    }
+}

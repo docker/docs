@@ -1,0 +1,28 @@
+dnsmasq:
+  build: ./containers/dnsmasq
+  ports:
+    - "53:53/udp"
+  environment:
+    - DOCKER_HOST
+haproxy:
+  build: ./containers/haproxy
+  environment:
+    - DOCKER_HOST
+  ports:
+    - "80:80"
+    - "443:443"
+hub:
+  build: .
+  command: node --harmony ./server.js
+  working_dir: /opt/hub/app/.build
+  volumes:
+    - .:/opt/hub
+    - ./private-deps/docker-ux:/opt/node_modules/docker-ux
+    - ./private-deps/hub-js-sdk:/opt/node_modules/hub-js-sdk
+  ports:
+    - "7001:3000"
+  environment:
+    DEBUG: "hub:*"
+    HUB_API_BASE_URL: "https://hub-beta-stage.docker.com"
+    REGISTRY_API_BASE_URL: "https://hub-beta-stage.docker.com"
+    ENV: development

@@ -1,0 +1,13 @@
+@import 'dux/css/box.css';
+
+.formBody {
+    margin: var(--default-margin) 0;
+}
+
+.pricingPanel {
+    text-align: center;
+}
+
+.price {
+    color: black;
+}

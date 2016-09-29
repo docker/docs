@@ -1,0 +1,32 @@
+@import "dux/css/colors.css";
+@import "dux/css/box.css";
+
+.header {
+  font-weight: 400;
+  padding: 0.5rem;
+  margin: 0;
+  background-color: var(--silver);
+  border: 1px solid var(--secondary-5);
+  border-top-left-radius: var(--global-radius);
+  border-top-right-radius: var(--global-radius);
+}
+
+.listSelectorItems {
+  background: #fff;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--secondary-5);
+  border-bottom-left-radius: var(--global-radius);
+  border-bottom-right-radius: var(--global-radius);
+}
+
+.listSelectorItems li {
+    padding: .5rem;
+    border-bottom: 1px solid var(--secondary-5);
+}
+
+.listSelectorItems li:hover {
+    background-color: var(--silver);
+    cursor: pointer;
+}

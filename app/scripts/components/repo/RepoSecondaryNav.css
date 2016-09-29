@@ -1,0 +1,8 @@
+@import "dux/css/colors.css";
+
+:global .secondary-top-bar-section ul li>a:local(.danger) {
+    color: var(--primary-5);
+    &:hover {
+        color: var(--primary-5);
+    }
+}

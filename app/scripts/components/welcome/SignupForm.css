@@ -1,0 +1,27 @@
+@import "dux/css/colors";
+@import "dux/css/box";
+
+.submit {
+  padding: var(--default-margin);
+  button {
+    float: right;
+  }
+}
+
+.subtext {
+    /** new color variable **/
+    color: #b9eafa;
+}
+
+.heading {
+    font-weight: 200;
+    color: var(--smoke);
+}
+
+.success {
+  text-align: center;
+  margin-top: 5rem;
+  .heading {
+    font-size: 1.5rem;
+  }
+}

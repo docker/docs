@@ -1,0 +1,109 @@
+@import "dux/css/colors.css";
+
+.pageWrapper {
+	padding-top: 1.25rem;
+}
+
+.title {
+	padding-bottom: 1.5rem;
+}
+
+/* Buttons */
+
+.fullWidth > * {
+	width: 100%;
+}
+
+/* Tabs */
+.tabsWrapper {
+	display: flex;
+	flex-flow: row wrap;
+	cursor: pointer;
+}
+
+.tab {
+	padding: 1rem 3rem 1rem 0;
+	margin-bottom: 2rem;
+	color: var(--base);
+	border-bottom: 1px solid var(--base);
+	border-top: 1px solid var(--base);
+	&:hover {
+		color: var(--primary-1);
+	    border-bottom: 1px solid var(--primary-1);
+    	border-top: 1px solid var(--primary-1);
+    }
+}
+
+.last {
+	flex: 1 1 auto;
+}
+
+.success {
+    color: var(--primary-2);
+    border-bottom: 1px solid var(--primary-2);
+    border-top: 1px solid var(--primary-2);
+}
+
+.active {
+	color: var(--primary-1);
+    border-bottom: 1px solid var(--primary-1);
+    border-top: 1px solid var(--primary-1);
+}
+
+/* Instructions Content */
+.instructions {
+	min-height: 350px;
+}
+
+.emphasized {
+	font-weight: 600;
+}
+
+.code {
+	font-family: monospace;
+	font-size: 1.2rem;
+}
+
+.section {
+	margin-bottom: 2rem;
+	width: 60%;
+}
+
+.smallSection {
+	margin-bottom: 1rem;
+}
+
+.copyBox {
+	display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.copyLabel {
+	margin-bottom: 0.25rem;
+}
+
+.downloadBlock {
+	display: inline-block;
+	margin-bottom: 1rem;
+}
+
+.downloadBlock2 {
+	composes: downloadBlock;
+	margin-left: 1rem;
+}
+
+
+.downloadBlockWrapper {
+	display: inline-block;
+}
+
+.error {
+	color: var(--primary-5);
+	margin-bottom: 1rem;
+}
+
+.noBottomMargin {
+	margin-bottom: 0;
+}

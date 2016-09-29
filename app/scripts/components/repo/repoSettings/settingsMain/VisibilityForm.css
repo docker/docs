@@ -1,0 +1,19 @@
+@import "dux/css/colors.css";
+@import "dux/css/box.css";
+
+.text {
+    margin-bottom: 1rem;
+}
+
+.error {
+    composes: text;
+    color: var(--primary-5);
+}
+
+input.textArea {
+    background-color: var(--white);
+    &:focus {
+        border: 1px solid var(--primary-1);
+        background-color: var(--white);
+    }
+}

@@ -1,0 +1,17 @@
+@import "dux/css/colors.css";
+
+.removeButton {
+    padding: 5px;
+    background-color: var(--primary-5);
+    border-radius: 3px;
+    color: white;
+}
+
+.addMemberInput {
+    background-color: white;
+    height: 36px;
+}
+
+.removePadding {
+  padding: 0px;
+}
