@@ -1,0 +1,35 @@
+elasticsearch:
+  image: elasticsearch:1.5.2
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+  volumes:
+    - ../data/elasticsearch:/usr/share/elasticsearch/data
+memcached:
+  image: memcached:latest
+  ports:
+    - "11211:11211"
+redis:
+  image: redis:2.8.13
+  ports:
+    - "6379:7379"
+  volumes:
+    - ../data/redis/:/data
+rabbitmq:
+  image: rabbitmq:3.5.6-management
+  ports:
+    - "4369:4369"
+    - "5672:5672"
+    - "15672:15672"
+    - "25672:25672"
+  environment:
+    - RABBITMQ_DEFAULT_USER=admin
+    - RABBITMQ_DEFAULT_PASS=big
+mariadb:
+  image: mariadb:latest
+  ports:
+    - "3306:3306"
+  volumes:
+    - ../data/mysql:/var/lib/mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=big

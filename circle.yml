@@ -1,0 +1,105 @@
+# Mac specific circleci.yml
+# This build process will download and bundle the build artifacts from the linux ci.
+# Checkout the same file on the linux branch to edit the linux version of the circleci configuration
+
+general:
+  artifacts:
+  - v1/mac/build/Docker.dmg
+  - tests/_results
+  - ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/log
+  - ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/console-ring
+machine:
+  xcode:
+    version: "8.0"
+  environment:
+    GOVERSION: 1.7.1
+    GOPATH: "$HOME/go"
+    GOROOT: "${HOME}/.gimme/versions/go${GOVERSION}.darwin.amd64"
+    PATH: "${GOROOT}/bin:${GOPATH}/bin:${PATH}"
+    PROJECT_ROOT: "$GOPATH/src/github.com/docker/pinata"
+    CI: "1"
+  post:
+    - brew unpin go
+    - brew update
+    - brew -v install git-lfs
+    # something forces /usr/loca/bin to the front of the path.
+    # we'll remove the existing go to be sure
+    - rm /usr/local/bin/go
+    - brew -v install gimme
+    - gimme $GOVERSION
+    # display homebrew config
+    - brew config
+checkout:
+  post:
+    - brew unpin go
+    - git lfs install --local
+    - git lfs pull
+    # Check disk space
+    - df -h
+    # check consistency of v1/opam/repo
+    - v1/opam/repo/check.sh
+    # v1/cmd/com.docker.hyperkit/hyperkit/ is a git subtree merge from
+    # http://github.com/docker/hyperkit and no code should be
+    # committed directly to it. To do this we need to unshallow and to
+    # have the hyperkit history available.
+    #
+    # Mistakes were made prior to
+    # 5e58d3e47a592e9235c4d03a099bc52ccd7a47ae which were repaired in
+    # that commit. Start checking from then onwards.
+    - if [ -s .git/shallow ] ; then git fetch --unshallow git@github.com:docker/pinata master ; fi
+    - git fetch https://github.com/docker/hyperkit +master:hyperkit/master
+    - >
+      if ! git log --no-merges --stat 5e58d3e47a592e9235c4d03a099bc52ccd7a47ae..HEAD --not hyperkit/master -- v1/cmd/com.docker.hyperkit/hyperkit/ |
+         awk 'BEGIN { rc=0 }; // { rc=1; print }; END { exit $rc }' ; then
+          echo "";
+          echo "Direct commit to hyperkit vendored code detected. Please see:";
+          echo "https://github.com/docker/pinata/blob/master/v1/cmd/com.docker.hyperkit/README.md";
+          exit 1
+      fi
+dependencies:
+  override:
+    - which go
+    - go version
+    - rm -rf "$PROJECT_ROOT"
+    - mkdir -p $(dirname "$PROJECT_ROOT")
+    - ln -s $(pwd) "$PROJECT_ROOT"
+    - make cacheclean
+    - make mac-depends
+    - make opam-depends
+    - make moby-depends
+    - make go-depends
+  cache_directories:
+    - ~/.docker-ci-cache
+test:
+  override:
+    - make clean
+    - make opam
+    - make mac
+    - make dmg
+    - make dsym-zip
+    - make test-dmg
+    - >
+      syslog -F "\$Time \$Host \$(Sender)[\$(Facility)][\$(PID)]<\$((Level)(str))>: \$Message" \
+           -k Sender  Seq Docker -o \
+           -k Sender  Seq docker -o \
+           -k Message Seq Docker -o \
+           -k Message Seq docker
+deployment:
+  release:
+    branch: master
+    owner: docker
+    commands:
+      - aws s3 cp v1/mac/build/Docker.dmg s3://pinata-ci/$CIRCLE_SHA1/Docker.dmg
+      - make upload
+  tags:
+    tag: /.*/
+    owner: docker
+    commands:
+      - aws s3 cp v1/mac/build/Docker.dmg s3://pinata-ci/$CIRCLE_TAG/Docker.dmg
+      - make upload
+  pr:
+    branch: /.*/
+    owner: docker
+    commands:
+      - aws s3 cp v1/mac/build/Docker.dmg s3://pinata-ci/$CIRCLE_SHA1/Docker.dmg
+      - make upload

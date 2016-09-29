@@ -1,0 +1,7 @@
+{
+    "name": "win-10-ent-10586",
+    "iso_url": "iso/Win10Ent-10586_1511_x64.iso",
+    "iso_checksum_type": "sha1",
+    "iso_checksum": "f7bb9692c4b545832237c2af8b4e31952931895e",
+    "autounattend": "answer_files/10-pro/Autounattend.xml"
+}

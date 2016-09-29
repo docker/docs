@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>InstallType</key>
+	<string>automated</string>
+	<key>Language</key>
+	<string>en</string>
+	<key>Package</key>
+	<string>/System/Installation/Packages/OSInstall.collection</string>
+	<key>Target</key>
+	<string>/Volumes/Macintosh HD</string>
+	<key>TargetName</key>
+	<string>Macintosh HD</string>
+</dict>
+</plist>
