@@ -1,0 +1,4 @@
+#PyCharm
+*.idea
+# generated cloud-api-docs
+apidocs
