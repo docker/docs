@@ -28,7 +28,7 @@ docker run --rm -it \
 When running the 'join' command, you must run this tool
 on the engine you wish to join to an existing UCP.  The UCP controller
 must be running on a different engine.  Both engines must have network
-visibility to eachother and have the required ports open on their firewall
+visibility to each other and have the required ports open on their firewall
 settings.  If your system has multiple IP addresses, you may need to
 specify the '--host-address' option to ensure the correct address is used.
 

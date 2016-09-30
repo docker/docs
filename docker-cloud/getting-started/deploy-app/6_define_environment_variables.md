@@ -37,7 +37,7 @@ fmt.Fprintf(w, "<h1>hello, %s</h1>\n<b>Hostname: </b>%s<br><b>MongoDB Status: </
 
 ## Edit an environment variable
 
-If you modify the enviroment variable, the message the app shows when you curl or visit the service webpage changes accordingly. Let's try it!
+If you modify the environment variable, the message the app shows when you curl or visit the service webpage changes accordingly. Let's try it!
 
 Run the following command to change the **NAME** variable, and then redeploy the `web` service.
 

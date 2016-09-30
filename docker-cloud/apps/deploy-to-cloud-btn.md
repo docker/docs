@@ -30,7 +30,7 @@ The user can still modify the stack definition before deployment.
 
 ## Adding the 'Deploy to Docker Cloud' button in GitHub
 
-You can simply add the following snipet to your `README.md` file:
+You can simply add the following snippet to your `README.md` file:
 
 ```md
 [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/)

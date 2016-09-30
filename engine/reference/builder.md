@@ -503,7 +503,7 @@ default is `/bin/sh -c` on Linux or `cmd /S /C` on Windows)
 - `RUN ["executable", "param1", "param2"]` (*exec* form)
 
 The `RUN` instruction will execute any commands in a new layer on top of the
-current image and commit the results. The resulting comitted image will be
+current image and commit the results. The resulting committed image will be
 used for the next step in the `Dockerfile`.
 
 Layering `RUN` instructions and generating commits conforms to the core

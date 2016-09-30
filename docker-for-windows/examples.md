@@ -14,7 +14,7 @@ title: ' Example Applications'
 
 Upcoming releases will include example applications especially tailored for Docker for Mac and Docker for Windows.
 
-Examples will highlight develop, build, and run workfows in several languages, including Node.js, Python, Ruby, and Java.
+Examples will highlight develop, build, and run workflows in several languages, including Node.js, Python, Ruby, and Java.
 
 For now, if you want get started experimenting with the Beta apps and Docker Compose (which is installed automatically with Docker Desktop Editions), have a look at these example applications in the Compose documentation. You should be able to run these with Docker for Mac and Docker for Windows.
 
@@ -24,5 +24,5 @@ For now, if you want get started experimenting with the Beta apps and Docker Com
 
 <a href=https://docs.docker.com/compose/wordpress/ target="_blank">Quickstart: Compose and WordPress</a>
 
-See also [learn by example](/engine/tutorials/index.md) tutorials on building images, runnning containers, networking, managing data, and storing images on Docker Hub.
+See also [learn by example](/engine/tutorials/index.md) tutorials on building images, running containers, networking, managing data, and storing images on Docker Hub.
 

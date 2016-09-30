@@ -31,14 +31,14 @@ infrastructure you wish. For example, you could place the application on another
 public cloud platform such as Azure or DigitalOcean, on premises in your data
 center, or even in in a test environment on your laptop.
 
-Finally, these instructions use some common `bash` command substituion techniques to
+Finally, these instructions use some common `bash` command substitution techniques to
 resolve some values, for example:
 
 ```bash
 $ eval $(docker-machine env keystore)
 ```
 
-In a Windows environment, these substituation fail. If you are running in
+In a Windows environment, these substitution fail. If you are running in
 Windows, replace the substitution `$(docker-machine env keystore)` with the
 actual value.
 
