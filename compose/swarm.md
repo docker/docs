@@ -23,7 +23,7 @@ format](compose-file.md#versioning) you are using:
 
 2. If you're using version 2, your app should work with no changes:
 
-    - subject to the [limitations](#limitations) described below,
+    - subject to the [limitations](swarm.md#limitations) described below,
 
     - as long as the Swarm cluster is configured to use the [overlay driver](https://docs.docker.com/engine/userguide/networking/dockernetworks/#an-overlay-network),
       or a custom driver which supports multi-host networking.
@@ -60,7 +60,7 @@ and reference it from `docker-compose.yml`:
 ### Multiple dependencies
 
 If a service has multiple dependencies of the type which force co-scheduling
-(see [Automatic scheduling](#automatic-scheduling) below), it's possible that
+(see [Automatic scheduling](swarm.md#automatic-scheduling) below), it's possible that
 Swarm will schedule the dependencies on different nodes, making the dependent
 service impossible to schedule. For example, here `foo` needs to be co-scheduled
 with `bar` and `baz`:
@@ -80,7 +80,7 @@ The problem is that Swarm might first schedule `bar` and `baz` on different
 nodes (since they're not dependent on one another), making it impossible to
 pick an appropriate node for `foo`.
 
-To work around this, use [manual scheduling](#manual-scheduling) to ensure that
+To work around this, use [manual scheduling](swarm.md#manual-scheduling) to ensure that
 all three services end up on the same node:
 
     version: "2"

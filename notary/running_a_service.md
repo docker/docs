@@ -63,7 +63,7 @@ the IP address of your Docker host.
 
 Both the Notary server and the Notary signer take
 [JSON configuration files](reference/index.md). Pre-built images, such as
-the [development images above](#run-a-service-for-testing-or-development)
+the [development images above](running_a_service.md#run-a-service-for-testing-or-development)
 provide these configuration files for you with some sane defaults.
 
 However, for running in production, or if you just want to change those defaults

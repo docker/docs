@@ -133,7 +133,7 @@ for titles](http://www.quickanddirtytips.com/education/grammar/capitalizing-titl
 
 We prefer one space after a period at the end of a sentence, not two.
 
-See [lists](#lists) below for how to punctuate list items.
+See [lists](doc-style.md#lists) below for how to punctuate list items.
 
 ### Abbreviations and acronyms
 
@@ -257,7 +257,7 @@ In order to write clear, useful commit messages, please follow these
 For accessibility and usability reasons, avoid using phrases such as "click
 here" for link text. Recast your sentence so that the link text describes the
 content of the link, as we did in the
-["Commit messages" section](#commit-messages) above.
+["Commit messages" section](doc-style.md#commit-messages) above.
 
 You can use relative links (../linkeditem) to link to other pages in Docker's
 documentation.

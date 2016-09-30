@@ -38,8 +38,8 @@ packages.
 ## Install Docker Engine
 
 There are two ways to install Docker Engine.  You can [install using the `yum`
-package manager](#install-with-yum). Or you can use `curl` with the [`get.docker.com`
-site](#install-with-the-script). This second method runs an installation script
+package manager](rhel.md#install-with-yum). Or you can use `curl` with the [`get.docker.com`
+site](rhel.md#install-with-the-script). This second method runs an installation script
 which also installs via the `yum` package manager.
 
 ### Install with yum

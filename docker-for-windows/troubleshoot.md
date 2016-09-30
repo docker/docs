@@ -106,7 +106,7 @@ You may get the following error when you try to start a container created with p
 
 			Error response from daemon: Unknown runtime specified default
 
-You can fix this by either [recreating](#recreate-your-containers) or [updating](#update-your-containers) your containers.
+You can fix this by either [recreating](troubleshoot.md#recreate-your-containers) or [updating](troubleshoot.md#update-your-containers) your containers.
 
 If you get the error message shown above, we recommend recreating them.
 
@@ -286,14 +286,3 @@ relates to Docker: [Docker fails to start on Windows
 
 For a temporary workaround, uninstall the Comodo Firewall, or explore other
 workarounds suggested on the forum.
-
-<hr style="color:#99CC99" />
-<ul class="media">
-	<div class="media_content">
-	<div data-mh="mh_docker_projects">
-	<h6> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="../../images/chat.png" alt="chat icon"></a> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">Help improve the documentation</a></h3>
-		<p>
-    Email us at <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">feedback@docker.com</a>
-    </p>
-	</div>
-	</div>

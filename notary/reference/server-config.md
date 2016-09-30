@@ -26,12 +26,12 @@ Here is a full server configuration file example; please click on the top level 
 learn more about the configuration section corresponding to that key:
 
 <pre><code class="language-json">{
-  <a href="#server-section-required">"server"</a>: {
+  <a href="server-config.md#server-section-required">"server"</a>: {
     "http_addr": ":4443",
     "tls_key_file": "./fixtures/notary-server.key",
     "tls_cert_file": "./fixtures/notary-server.crt"
   },
-  <a href="#trust-service-section-required">"trust_service"</a>: {
+  <a href="server-config.md#trust-service-section-required">"trust_service"</a>: {
     "type": "remote",
     "hostname": "notarysigner",
     "port": "7899",
@@ -40,11 +40,11 @@ learn more about the configuration section corresponding to that key:
     "tls_client_cert": "./fixtures/notary-server.crt",
     "tls_client_key": "./fixtures/notary-server.key"
   },
-  <a href="#storage-section-required">"storage"</a>: {
+  <a href="server-config.md#storage-section-required">"storage"</a>: {
     "backend": "mysql",
     "db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true"
   },
-  <a href="#auth-section-optional">"auth"</a>: {
+  <a href="server-config.md#auth-section-optional">"auth"</a>: {
     "type": "token",
     "options": {
       "realm": "https://auth.docker.io/token",
@@ -62,13 +62,13 @@ learn more about the configuration section corresponding to that key:
       "release_stage": "production"
     }
   },
-  <a href="#caching-section-optional">"caching"</a>: {
+  <a href="server-config.md#caching-section-optional">"caching"</a>: {
     "max_age": {
       "current_metadata": 300,
       "consistent_metadata": 31536000,
     }
   },
-  <a href="#repositories-section-optional">"repositories"</a>: {
+  <a href="server-config.md#repositories-section-optional">"repositories"</a>: {
     "gun_prefixes": ["docker.io/", "my-own-registry.com/"]
   }
 }

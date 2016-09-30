@@ -60,7 +60,7 @@ anixjtol6wdf  my_web  1/1       nginx
 ```
 
 To make the web server accessible from outside the swarm, you need to
-[publish the port](#publish-ports-externally-to-the-swarm) where the swarm
+[publish the port](services.md#publish-ports-externally-to-the-swarm) where the swarm
 listens for web requests.
 
 You can include a command to run inside containers after the image:

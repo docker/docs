@@ -105,7 +105,7 @@ You may get the following error when you try to start a container created with p
 
 			Error response from daemon: Unknown runtime specified default
 
-You can fix this by either [recreating](#recreate-your-containers) or [updating](#update-your-containers) your containers.
+You can fix this by either [recreating](troubleshoot.md#recreate-your-containers) or [updating](troubleshoot.md#update-your-containers) your containers.
 
 If you get the error message shown above, we recommend recreating them.
 
@@ -242,7 +242,7 @@ environments, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 		decide whether to shut the other process down, or to use a different port in
 		your docker app.
 
-See also [Known Issues](#known-issues) on this page, and the [FAQs](faqs.md) topic.
+See also [Known Issues](troubleshoot.md#known-issues) on this page, and the [FAQs](faqs.md) topic.
 
 <a name="issues"></a>
 ## Known issues
@@ -251,7 +251,7 @@ See also [Known Issues](#known-issues) on this page, and the [FAQs](faqs.md) top
 timeout when you run `docker` commands that need access to external network
 servers. The aforementioned releases include a workaround for this because
 Docker for Mac does not yet support IPv6. See "IPv6 workaround to auto-filter DNS addresses" in
-[Workarounds for common problems](#workarounds-for-common-problems).
+[Workarounds for common problems](troubleshoot.md#workarounds-for-common-problems).
 
 * You might encounter errors when using `docker-compose up` with Docker for Mac (`ValueError: Extra Data`). We've identified this is likely related to data and/or events being passed all at once rather than one by one, so sometimes the data comes back as 2+ objects concatenated and causes an error.
 

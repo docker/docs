@@ -15,10 +15,10 @@ This article provides guidance to help you plan, deploy, and manage Docker
 Swarm clusters in business critical production environments. The following high
  level topics are covered:
 
-- [Security](#security)
-- [High Availability](#high-availability)
-- [Performance](#performance)
-- [Cluster ownership](#cluster-ownership)
+- [Security](plan-for-production.md#security)
+- [High Availability](plan-for-production.md#high-availability)
+- [Performance](plan-for-production.md#performance)
+- [Cluster ownership](plan-for-production.md#cluster-ownership)
 
 ## Security
 

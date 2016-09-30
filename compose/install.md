@@ -41,7 +41,7 @@ which the release page specifies, in your terminal.
         curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 
      If you have problems installing with `curl`, see
-     [Alternative Install Options](#alternative-install-options).
+     [Alternative Install Options](install.md#alternative-install-options).
 
 5. Apply executable permissions to the binary:
 

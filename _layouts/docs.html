@@ -215,11 +215,13 @@ ng\:form {
 						 <script language="javascript">
 						 var x = document.links.length;
 						 for (i = 0; i < x; i++) {
+							 var munged = false;
 						   var thisHREF = document.links[i].href;
 						   if (thisHREF.indexOf(window.location.hostname) > -1 && document.links[i].className.indexOf("nomunge")<0)
 							 {
+								munged = true;
 								thisHREF = thisHREF.replace(".md","/").replace("/index/","/");
-						   	document.links[i].setAttribute('href', thisHREF);
+								document.links[i].setAttribute('href', thisHREF);
 							 }
 						 }
 						 </script>

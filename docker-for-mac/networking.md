@@ -108,13 +108,3 @@ See the [run commmand](/engine/reference/commandline/run.md) for more details on
 We understand that these workarounds are not ideal, but there are several problems. In particular, there is a bug in OSX that is only fixed in 10.12 and is not being backported as far as we can tell, which means that we could not support this in all supported OSX versions. In addition, this network setup would require root access which we are trying to avoid entirely in Docker for Mac (we currently have a very small root helper that we are trying to remove).
 
 
-<hr style="color:#99CC99" />
-<ul class="media">
-	<div class="media_content">
-	<div data-mh="mh_docker_projects">
-	<h6> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="../../images/chat.png" alt="chat icon"></a> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">Help improve the documentation</a></h3>
-		<p>
-    Email us at <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">feedback@docker.com</a>
-    </p>
-	</div>
-	</div>

@@ -20,16 +20,16 @@ user experience for bind mounting OS X file system trees into Docker
 containers. To this end, `osxfs` features a number of unique
 capabilities as well as differences from a classical Linux file system.
 
-- [Case sensitivity](#case-sensitivity)
-- [Access control](#access-control)
-- [Namespaces](#namespaces)
-- [Ownership](#ownership)
-- [File system events](#file-system-events)
-- [Mounts](#mounts)
-- [Symlinks](#symlinks)
-- [File types](#file-types)
-- [Extended attributes](#extended-attributes)
-- [Technology](#technology)
+- [Case sensitivity](osxfs.md#case-sensitivity)
+- [Access control](osxfs.md#access-control)
+- [Namespaces](osxfs.md#namespaces)
+- [Ownership](osxfs.md#ownership)
+- [File system events](osxfs.md#file-system-events)
+- [Mounts](osxfs.md#mounts)
+- [Symlinks](osxfs.md#symlinks)
+- [File types](osxfs.md#file-types)
+- [Extended attributes](osxfs.md#extended-attributes)
+- [Technology](osxfs.md#technology)
 
 ### Case sensitivity
 
@@ -44,7 +44,7 @@ case-sensitivity or reformat your OS root partition with HFS+ with
 case-sensitivity. We do not recommend reformatting your root partition
 as some Mac software dubiously relies on case-insensitivity to function.
 
-<a name="osxfs-access"></a>
+
 ### Access control
 
 `osxfs`, and therefore Docker, can access only those file system
@@ -114,13 +114,13 @@ The following are **unsupported file system events**:
 * Open
 * Access
 * Close events
-* Unmount events (see <a href="#osxfs-mounts">Mounts</a>)
+* Unmount events (see <a href="osxfs.md#mounts">Mounts</a>)
 
 Some events may be delivered multiple times. Events are not delivered for bind mounts from symlinks (notably `/tmp` will not deliver inotify events but
 `/private/tmp` will). These limitations do not apply to events between
 containers, only to those events originating in OS X.
 
-<a name="osxfs-mounts"></a>
+
 ### Mounts
 
 The OS X mount structure is not visible in the shared volume, but volume
@@ -152,14 +152,3 @@ Extended attributes are not yet supported.
 
 `osxfs` does not use OSXFUSE. `osxfs` does not run under, inside, or
 between OS X userspace processes and the OS X kernel.
-
-<hr style="color:#99CC99" />
-<ul class="media">
-	<div class="media_content">
-	<div data-mh="mh_docker_projects">
-	<h6> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="../images/chat.png" alt="chat icon"></a> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">Help improve the documentation</a></h3>
-		<p>
-    Email us at <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">feedback@docker.com</a>
-    </p>
-	</div>
-	</div>

@@ -112,7 +112,7 @@ The following two examples demonstrate how to utilize this using the existing Do
 
 > **Note:** This example requires Docker Engine 1.10 with auth token support.
 > For older Engine versions, refer to [authenticate using username and
-> password](#authenticate-using-username-and-password)
+> password](swarm-api.md#authenticate-using-username-and-password)
 
 This example uses the [`jq` command-line utility](https://stedolan.github.io/jq/).
 To run this example, install `jq` using your package manager (`apt-get install jq` or `yum install jq`).
@@ -150,7 +150,7 @@ Be aware that tokens are short-lived and will expire quickly.
 ### Authenticate using username and password
 
 > **Note:** this authentication method stores your credentials unencrypted
-> on the filesystem. Refer to [Authenticate using registry tokens](#authenticate-using-registry-tokens)
+> on the filesystem. Refer to [Authenticate using registry tokens](swarm-api.md#authenticate-using-registry-tokens)
 > for a more secure approach.
 
 

@@ -40,7 +40,7 @@ need to link your source code provider.
     options to grant Docker Cloud access to them from this screen. You can also
     individually edit an organization's Third-party access settings to grant or
     revoke Docker Cloud's access. See [Grant access to a GitHub
-    organization](#grant-access-to-a-github-organization) to learn more.
+    organization](link-source.md#grant-access-to-a-github-organization) to learn more.
 
 5. Click **Authorize application** to save the link.
 

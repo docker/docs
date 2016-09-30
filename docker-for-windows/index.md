@@ -42,18 +42,18 @@ If you have not already done so, please install Docker for Windows. You can down
   <tr valign="top">
   <td width="50%">
   <a class="button darkblue-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (stable)</a><br><br>
-  <a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: <font color="#BDBDBD">InstallDocker.msi SHA256</font></a></font>
+  <a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: InstallDocker.msi SHA256</font></a>
   </td>
   <td width="50%">
   <a class="button darkblue-btn" href="https://download.docker.com/win/beta/InstallDocker.msi">Get Docker for Windows (beta)</a><br><br>
-  <a href="https://download.docker.com/win/beta/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: <font color="#BDBDBD">InstallDocker.msi SHA256</font></a></font>
+  <a href="https://download.docker.com/win/beta/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: InstallDocker.msi SHA256</font></a>
   </td>
-  </tr>  
+  </tr>
 </table>
 
 >**Important Notes**:
 >
->* Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please see [What to know before you install](#what-to-know-before-you-install) for a full list of prerequisites.
+>* Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please see [What to know before you install](index.md#what-to-know-before-you-install) for a full list of prerequisites.
 >
 >* <font color="#CC3366">You can switch between beta and stable versions, but _you must have only one app installed at a time_.</font> Also, you will need to save images and export containers you want to keep before uninstalling the current version before installing another. For more about this, see the [FAQs about beta and stable channels](faqs.md#questions-about-stable-and-beta-channels).
 
@@ -270,7 +270,7 @@ To get a popup menu with application options, right-click the whale:
 
 The **Settings** dialogs provide options to allow Docker auto-start, automatically check for updates, share local drives with Docker containers, enable VPN compatibilty, manage CPUs and memory Docker uses, restart Docker, or perform a factory reset.
 
-**Beta 26** includes an option to switch between Windows and Linux conatiners. See [Switch between Windows and Linux containers (Beta 26)](#switch-between-windows-and-linux-containers-beta-26). This is not yet available on stable builds.
+**Beta 26** includes an option to switch between Windows and Linux conatiners. See [Switch between Windows and Linux containers (Beta 26)](index.md#switch-between-windows-and-linux-containers-beta-26). This is not yet available on stable builds.
 
 ![Beta 26 popup with switch for Windows or Linux containers](images/config-popup-menu-win-switch-containers.png)
 
@@ -370,7 +370,7 @@ This feature is not yet available on stable builds.
 
 If you encounter problems for which you do not find solutions in this documentation, searching [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) already filed by other users, or on the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data.
 
-Select **Upload a diagnostic**.  
+Select **Upload a diagnostic**.
 
 This uploads (sends) the logs to Docker.
 
@@ -415,14 +415,3 @@ If you want to go back to using Docker Toolbox, you have to disable the Hyper-V 
 * Check out the <a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">blog posts</a> on Docker for Mac and Docker for Windows public betas, and <a href="https://blog.docker.com/2016/03/docker-for-mac-windows-beta/">earlier posts</a> on the intial private beta.
 
 * Please give feedback on your experience with the app and report bugs and problems by logging into our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows).
-
-<hr style="color:#99CC99" />
-<ul class="media">
-	<div class="media_content">
-	<div data-mh="mh_docker_projects">
-	<h6> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="images/chat.png" alt="chat icon"></a> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">Help improve the documentation</a></h3>
-		<p>
-    Email us at <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">feedback@docker.com</a>
-    </p>
-	</div>
-	</div>

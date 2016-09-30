@@ -1299,7 +1299,7 @@ Attach to the container `id`
 
 When using the TTY setting is enabled in
 [`POST /containers/create`
-](#create-a-container),
+](docker_remote_api_v1.25.md#create-a-container),
 the stream is the raw data from the process PTY and client's `stdin`.
 When the TTY is disabled, then the stream is multiplexed to separate
 `stdout` and `stderr`.
@@ -2638,7 +2638,7 @@ If `name` is a specific name and tag (e.g. ubuntu:latest), then only that image
 image (and its parents) are returned, but with the exclusion of the
 'repositories' file in the tarball, as there were no image names referenced.
 
-See the [image tarball format](#image-tarball-format) for more details.
+See the [image tarball format](docker_remote_api_v1.25.md#image-tarball-format) for more details.
 
 **Example request**
 
@@ -2667,7 +2667,7 @@ For each value of the `names` parameter: if it is a specific name and tag (e.g.
 an image ID, similarly only that image (and its parents) are returned and there
 would be no names referenced in the 'repositories' file for this image ID.
 
-See the [image tarball format](#image-tarball-format) for more details.
+See the [image tarball format](docker_remote_api_v1.25.md#image-tarball-format) for more details.
 
 **Example request**
 
@@ -2690,7 +2690,7 @@ See the [image tarball format](#image-tarball-format) for more details.
 `POST /images/load`
 
 Load a set of images and tags into a Docker repository.
-See the [image tarball format](#image-tarball-format) for more details.
+See the [image tarball format](docker_remote_api_v1.25.md#image-tarball-format) for more details.
 
 **Example request**
 
@@ -3016,7 +3016,7 @@ Create a volume
 
 **JSON fields in response**:
 
-Refer to the [inspect a volume](#inspect-a-volume) section or details about the
+Refer to the [inspect a volume](docker_remote_api_v1.25.md#inspect-a-volume) section or details about the
 JSON fields returned in the response.
 
 ### Inspect a volume
@@ -3555,7 +3555,7 @@ Content-Type: application/json
 `POST /plugins/pull?name=<plugin name>`
 
 Pulls and installs a plugin. After the plugin is installed, it can be enabled
-using the [`POST /plugins/(plugin name)/enable` endpoint](#enable-a-plugin).
+using the [`POST /plugins/(plugin name)/enable` endpoint](docker_remote_api_v1.25.md#enable-a-plugin).
 
 **Example request**:
 
@@ -3566,7 +3566,7 @@ POST /plugins/pull?name=tiborvass/no-remove:latest HTTP/1.1
 The `:latest` tag is optional, and is used as default if omitted. When using
 this endpoint to pull a plugin from the registry, the `X-Registry-Auth` header
 can be used to include a base64-encoded AuthConfig object. Refer to the [create
-an image](#create-an-image) section for more details.
+an image](docker_remote_api_v1.25.md#create-an-image) section for more details.
 
 **Example response**:
 
@@ -3863,7 +3863,7 @@ POST /plugins/tiborvass/no-remove:latest HTTP/1.1
 The `:latest` tag is optional, and is used as default if omitted. When using
 this endpoint to push a plugin to the registry, the `X-Registry-Auth` header
 can be used to include a base64-encoded AuthConfig object. Refer to the [create
-an image](#create-an-image) section for more details.
+an image](docker_remote_api_v1.25.md#create-an-image) section for more details.
 
 **Example response**:
 
@@ -4525,7 +4525,7 @@ List services
 Create a service. When using this endpoint to create a service using a private
 repository from the registry, the `X-Registry-Auth` header must be used to
 include a base64-encoded AuthConfig object. Refer to the [create an
-image](#create-an-image) section for more details.
+image](docker_remote_api_v1.25.md#create-an-image) section for more details.
 
 **Example request**:
 
@@ -4687,7 +4687,7 @@ image](#create-an-image) section for more details.
 
 - **Content-type** – Set to `"application/json"`.
 - **X-Registry-Auth** – base64-encoded AuthConfig object, containing either
-  login information, or a token. Refer to the [create an image](#create-an-image)
+  login information, or a token. Refer to the [create an image](docker_remote_api_v1.25.md#create-an-image)
   section for more details.
 
 
@@ -4809,7 +4809,7 @@ Update a service. When using this endpoint to create a service using a
 private repository from the registry, the `X-Registry-Auth` header can be used
 to update the authentication information for that is stored for the service.
 The header contains a base64-encoded AuthConfig object. Refer to the [create an
-image](#create-an-image) section for more details.
+image](docker_remote_api_v1.25.md#create-an-image) section for more details.
 
 **Example request**:
 
@@ -4925,7 +4925,7 @@ image](#create-an-image) section for more details.
 
 - **Content-type** – Set to `"application/json"`.
 - **X-Registry-Auth** – base64-encoded AuthConfig object, containing either
-  login information, or a token. Refer to the [create an image](#create-an-image)
+  login information, or a token. Refer to the [create an image](docker_remote_api_v1.25.md#create-an-image)
   section for more details.
 
 **Status codes**:

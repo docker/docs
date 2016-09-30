@@ -18,7 +18,7 @@ You can use add a public SSH key to the *authorized_keys* file in each of your n
 
 ## Create pair of keys
 
-First, generate a keypair using `ssh-keygen -t rsa`. If you have an existing keypair you prefer to use, you can skip this step, copy the public key to your clipboard and continue on to [create the authorizedkeys stack](#create-a-stack-in-docker-cloud).
+First, generate a keypair using `ssh-keygen -t rsa`. If you have an existing keypair you prefer to use, you can skip this step, copy the public key to your clipboard and continue on to [create the authorizedkeys stack](ssh-into-a-node.md#create-a-stack-in-docker-cloud).
 
 ```
 $ ssh-keygen -t rsa

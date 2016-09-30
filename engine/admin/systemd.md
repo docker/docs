@@ -73,7 +73,7 @@ Alternatively, find out where the service file is located:
     EnvironmentFile=-/etc/sysconfig/docker
 
 You can customize the Docker daemon options using override files as explained in the
-[HTTP Proxy example](#http-proxy) below. The files located in `/usr/lib/systemd/system`
+[HTTP Proxy example](systemd.md#http-proxy) below. The files located in `/usr/lib/systemd/system`
 or `/lib/systemd/system` contain the default options and should not be edited.
 
 ### Runtime directory and storage driver

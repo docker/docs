@@ -16,15 +16,15 @@ It's a fact of life that things fail. With this in mind, it's important to
 understand what happens when failures occur and how to mitigate them. The
 following sections cover different failure scenarios:
 
-- [Swarm manager failures](#swarm-manager-failures)
-- [Consul (discovery backend) failures](#consul-discovery-backend-failures)
-- [Interlock load balancer failures](#interlock-load-balancer-failures)
-- [Web (voting-app) failures](#web-voting-app-failures)
-- [Redis failures](#redis-failures)
-- [Worker (vote-worker) failures](#worker-vote-worker-failures)
-- [Postgres failures](#postgres-failures)
-- [Results-app failures](#results-app-failures)
-- [Infrastructure failures](#infrastructure-failures)
+- [Swarm manager failures](troubleshoot.md#swarm-manager-failures)
+- [Consul (discovery backend) failures](troubleshoot.md#consul-discovery-backend-failures)
+- [Interlock load balancer failures](troubleshoot.md#interlock-load-balancer-failures)
+- [Web (voting-app) failures](troubleshoot.md#web-voting-app-failures)
+- [Redis failures](troubleshoot.md#redis-failures)
+- [Worker (vote-worker) failures](troubleshoot.md#worker-vote-worker-failures)
+- [Postgres failures](troubleshoot.md#postgres-failures)
+- [Results-app failures](troubleshoot.md#results-app-failures)
+- [Infrastructure failures](troubleshoot.md#infrastructure-failures)
 
 ## Swarm manager failures
 

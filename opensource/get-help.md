@@ -131,7 +131,7 @@ by entering the following command into the webchat command line bar:
 
     Your nickname is now registered to chat on freenode.net.
 
-[Jump ahead to tips to join a docker channel and start chatting](#tips)  
+[Jump ahead to tips to join a docker channel and start chatting](get-help.md#tips)  
 
 ## IRCCloud
 
@@ -151,7 +151,7 @@ form. People who have already registered with IRCCloud can select the "sign in
 here" link. Additionally, people who are already registered with IRCCloud may
 have a cookie stored on their web browser that enables a quick start "let's go"
 link to be shown instead of the above form. In this case just select the
-"let's go" link and [jump ahead to start chatting](#start-chatting)
+"let's go" link and [jump ahead to start chatting](get-help.md#start-chatting)
 
 3. After entering your email address in the form, check your email for an invite
 from IRCCloud and follow the instructions provided in the email.

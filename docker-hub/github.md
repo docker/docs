@@ -13,7 +13,7 @@ title: Automated Builds from GitHub
 # Automated Builds from GitHub
 
 If you've previously linked Docker Hub to your GitHub account,
-you'll be able to skip to [Creating an Automated Build](#creating-an-automated-build).
+you'll be able to skip to [Creating an Automated Build](github.md#creating-an-automated-build).
 
 ## Linking Docker Hub to a GitHub account
 
@@ -62,7 +62,7 @@ You will be able to review and revoke Docker Hub's access by visiting the
 If you selected to link your GitHub account with only a "Limited Access" link, then
 after creating your automated build, you will need to either manually trigger a
 Docker Hub build using the "Start a Build" button, or add the GitHub webhook
-manually, as described in [GitHub Service Hooks](#github-service-hooks).
+manually, as described in [GitHub Service Hooks](github.md#github-service-hooks).
 
 ## Changing the GitHub user link
 

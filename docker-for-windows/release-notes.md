@@ -20,9 +20,9 @@ For system requirements, please see the Getting Started topic on [What to know b
 
 Release notes for _stable_ and _beta_ releases are listed below. You can learn about both kinds of releases, and download stable and beta product installers at [Download Docker for Windows](index.md#download-docker-for-windows).
 
-* [Stable Release Notes](#stable-release-notes)
-* [Beta Release Notes](#beta-release-notes)
-* [Alpha Release Notes](#alpha-release-notes)
+* [Stable Release Notes](release-notes.md#stable-release-notes)
+* [Beta Release Notes](release-notes.md#beta-release-notes)
+* [Alpha Release Notes](release-notes.md#alpha-release-notes)
 
 ## Stable Release Notes
 
