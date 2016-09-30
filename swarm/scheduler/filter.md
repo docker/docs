@@ -82,7 +82,7 @@ practical applications:
   sub-clusters with different properties, for example `environment=production`.
 
 
-#### Example node constraints  
+#### Example node constraints
 
 To specify custom label for a node, pass a list of `--label`
 options at `docker` startup time. For instance, to start `node-1` with the
@@ -194,9 +194,9 @@ there will be no limit on container number.
 
 When creating a container, you can use three types of container filters:
 
-* [`affinity`](#use-an-affinity-filter)
-* [`dependency`](#use-a-dependency-filter)
-* [`port`](#use-a-port-filter)
+* [`affinity`](filter.md#use-an-affinity-filter)
+* [`dependency`](filter.md#use-a-dependency-filter)
+* [`port`](filter.md#use-a-port-filter)
 
 ### Use an affinity filter
 

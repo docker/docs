@@ -27,7 +27,7 @@ Options:
       --no-resolve     Do not map IDs to Names
 ```
 
-Lists all the tasks on a Node that Docker knows about. You can filter using the `-f` or `--filter` flag. Refer to the [filtering](#filtering) section for more information about available filter options.
+Lists all the tasks on a Node that Docker knows about. You can filter using the `-f` or `--filter` flag. Refer to the [filtering](node_ps.md#filtering) section for more information about available filter options.
 
 Example output:
 
@@ -47,10 +47,10 @@ than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "b
 
 The currently supported filters are:
 
-* [name](#name)
-* [id](#id)
-* [label](#label)
-* [desired-state](#desired-state)
+* [name](node_ps.md#name)
+* [id](node_ps.md#id)
+* [label](node_ps.md#label)
+* [desired-state](node_ps.md#desired-state)
 
 #### name
 

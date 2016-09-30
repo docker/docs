@@ -21,15 +21,15 @@ CA's certificate as well as their own key-pair signed by the CA.
 You will complete the following steps in this procedure:
 
 
-- [Step 1: Set up the prerequisites](#step-1-set-up-the-prerequisites)
-- [Step 2: Create a Certificate Authority (CA) server](#step-2-create-a-certificate-authority-ca-server)
-- [Step 3: Create and sign keys](#step-3-create-and-sign-keys)
-- [Step 4: Install the keys](#step-4-install-the-keys)
-- [Step 5: Configure the Engine daemon for TLS](#step-5-configure-the-engine-daemon-for-tls)
-- [Step 6: Create a Swarm cluster](#step-6-create-a-swarm-cluster)
-- [Step 7: Create the Swarm Manager using TLS](#step-7-create-the-swarm-manager-using-tls)
-- [Step 8: Test the Swarm manager configuration](#step-8-test-the-swarm-manager-configuration)
-- [Step 9: Configure the Engine CLI to use TLS](#step-9-configure-the-engine-cli-to-use-tls)
+- [Step 1: Set up the prerequisites](configure-tls.md#step-1-set-up-the-prerequisites)
+- [Step 2: Create a Certificate Authority (CA) server](configure-tls.md#step-2-create-a-certificate-authority-ca-server)
+- [Step 3: Create and sign keys](configure-tls.md#step-3-create-and-sign-keys)
+- [Step 4: Install the keys](configure-tls.md#step-4-install-the-keys)
+- [Step 5: Configure the Engine daemon for TLS](configure-tls.md#step-5-configure-the-engine-daemon-for-tls)
+- [Step 6: Create a Swarm cluster](configure-tls.md#step-6-create-a-swarm-cluster)
+- [Step 7: Create the Swarm Manager using TLS](configure-tls.md#step-7-create-the-swarm-manager-using-tls)
+- [Step 8: Test the Swarm manager configuration](configure-tls.md#step-8-test-the-swarm-manager-configuration)
+- [Step 9: Configure the Engine CLI to use TLS](configure-tls.md#step-9-configure-the-engine-cli-to-use-tls)
 
 ### Before you begin
 The article includes steps to create your own CA using OpenSSL. This is similar

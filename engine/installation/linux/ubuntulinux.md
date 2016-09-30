@@ -239,13 +239,13 @@ install Docker using the following:
 This section contains optional procedures for configuring your Ubuntu to work
 better with Docker.
 
-* [Create a docker group](#create-a-docker-group)
-* [Adjust memory and swap accounting](#adjust-memory-and-swap-accounting)
-* [Enable UFW forwarding](#enable-ufw-forwarding)
-* [Configure a DNS server for use by Docker](#configure-a-dns-server-for-use-by-docker)
-* [Configure Docker to start on boot](#configure-docker-to-start-on-boot)
+* [Create a docker group](ubuntulinux.md#create-a-docker-group)
+* [Adjust memory and swap accounting](ubuntulinux.md#adjust-memory-and-swap-accounting)
+* [Enable UFW forwarding](ubuntulinux.md#enable-ufw-forwarding)
+* [Configure a DNS server for use by Docker](ubuntulinux.md#configure-a-dns-server-for-use-by-docker)
+* [Configure Docker to start on boot](ubuntulinux.md#configure-docker-to-start-on-boot)
 
-### Create a Docker group		
+### Create a Docker group
 
 The `docker` daemon binds to a Unix socket instead of a TCP port. By default
 that Unix socket is owned by the user `root` and other users can access it with

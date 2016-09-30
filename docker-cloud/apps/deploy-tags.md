@@ -18,7 +18,7 @@ the tags on that service. Docker Cloud shows an error if no nodes match all of
 the service's deployment tags. A node might have extra tags that are not
 specified on the service, but these do not prevent the service from deploying.
 
-You can specify multiple tags on services, on individual nodes, and on node clusters. All nodes that are members of a node cluster inherit the tags specified on the cluster. See [Automatic deployment tags](#automatic-deployment-tags) to learn more.
+You can specify multiple tags on services, on individual nodes, and on node clusters. All nodes that are members of a node cluster inherit the tags specified on the cluster. See [Automatic deployment tags](deploy-tags.md#automatic-deployment-tags) to learn more.
 
 #### Deployment tags example
 
@@ -67,7 +67,7 @@ of its member nodes.
     ![](images/nodecluster-wizard-tags.png)
 
     When the node cluster scales up, new nodes automatically inherit the
-    node cluster's tags, including the [Automatic deployment tags](#automatic-deployment-tags) described above.
+    node cluster's tags, including the [Automatic deployment tags](deploy-tags.md#automatic-deployment-tags) described above.
 
     You can see a node cluster's tags on the left side of the cluster's detail page.
 

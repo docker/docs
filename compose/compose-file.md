@@ -14,9 +14,9 @@ title: Compose File Reference
 # Compose file reference
 
 The Compose file is a [YAML](http://yaml.org/) file defining
-[services](#service-configuration-reference),
-[networks](#network-configuration-reference) and
-[volumes](#volume-configuration-reference).
+[services](compose-file.md#service-configuration-reference),
+[networks](compose-file.md#network-configuration-reference) and
+[volumes](compose-file.md#volume-configuration-reference).
 The default path for a Compose file is `./docker-compose.yml`.
 
 A service definition contains configuration which will be applied to each
@@ -29,7 +29,7 @@ As with `docker run`, options specified in the Dockerfile (e.g., `CMD`,
 specify them again in `docker-compose.yml`.
 
 You can use environment variables in configuration values with a Bash-like
-`${VARIABLE}` syntax - see [variable substitution](#variable-substitution) for
+`${VARIABLE}` syntax - see [variable substitution](compose-file.md#variable-substitution) for
 full details.
 
 
@@ -37,7 +37,7 @@ full details.
 
 > **Note:** There are two versions of the Compose file format – version 1 (the
 > legacy format, which does not support volumes or networks) and version 2 (the
-> most up-to-date). For more information, see the [Versioning](#versioning)
+> most up-to-date). For more information, see the [Versioning](compose-file.md#versioning)
 > section.
 
 This section contains a list of all configuration options supported by a service
@@ -48,8 +48,8 @@ definition.
 Configuration options that are applied at build time.
 
 `build` can be specified either as a string containing a path to the build
-context, or an object with the path specified under [context](#context) and
-optionally [dockerfile](#dockerfile) and [args](#args).
+context, or an object with the path specified under [context](compose-file.md#context) and
+optionally [dockerfile](compose-file.md#dockerfile) and [args](compose-file.md#args).
 
     build: ./dir
 
@@ -67,7 +67,7 @@ with the `webapp` and optional `tag` specified in `image`:
 
 This will result in an image named `webapp` and tagged `tag`, built from `./dir`.
 
-> **Note**: In the [version 1 file format](#version-1), `build` is different in
+> **Note**: In the [version 1 file format](compose-file.md#version-1), `build` is different in
 > two ways:
 >
 > -   Only the string form (`build: .`) is allowed - not the object form.
@@ -76,8 +76,8 @@ This will result in an image named `webapp` and tagged `tag`, built from `./dir`
 
 #### context
 
-> [Version 2 file format](#version-2) only. In version 1, just use
-> [build](#build).
+> [Version 2 file format](compose-file.md#version-2) only. In version 1, just use
+> [build](compose-file.md#build).
 
 Either a path to a directory containing a Dockerfile, or a url to a git repository.
 
@@ -101,7 +101,7 @@ specified.
       context: .
       dockerfile: Dockerfile-alternate
 
-> **Note**: In the [version 1 file format](#version-1), `dockerfile` is
+> **Note**: In the [version 1 file format](compose-file.md#version-1), `dockerfile` is
 > different in two ways:
 
   * It appears alongside `build`, not as a sub-option:
@@ -113,7 +113,7 @@ specified.
 
 #### args
 
-> [Version 2 file format](#version-2) only.
+> [Version 2 file format](compose-file.md#version-2) only.
 
 Add build arguments, which are environment variables accessible only during the
 build process.
@@ -247,7 +247,7 @@ Custom DNS search domains. Can be a single value or a list.
 
 ### tmpfs
 
-> [Version 2 file format](#version-2) only.
+> [Version 2 file format](compose-file.md#version-2) only.
 
 Mount a temporary file system inside the container. Can be a single value or a list.
 
@@ -295,9 +295,9 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
     # Set Rails/Rack environment
     RACK_ENV=development
 
-> **Note:** If your service specifies a [build](#build) option, variables
+> **Note:** If your service specifies a [build](compose-file.md#build) option, variables
 > defined in environment files will _not_ be automatically visible during the
-> build. Use the [args](#args) sub-option of `build` to define build-time
+> build. Use the [args](compose-file.md#args) sub-option of `build` to define build-time
 > environment variables.
 
 ### environment
@@ -319,9 +319,9 @@ machine Compose is running on, which can be helpful for secret or host-specific 
       - SHOW=true
       - SESSION_SECRET
 
-> **Note:** If your service specifies a [build](#build) option, variables
+> **Note:** If your service specifies a [build](compose-file.md#build) option, variables
 > defined in `environment` will _not_ be automatically visible during the
-> build. Use the [args](#args) sub-option of `build` to define build-time
+> build. Use the [args](compose-file.md#args) sub-option of `build` to define build-time
 > environment variables.
 
 ### expose
@@ -374,7 +374,7 @@ container name and the link alias (`CONTAINER:ALIAS`).
      - project_db_1:mysql
      - project_db_1:postgresql
 
-> **Note:** If you're using the [version 2 file format](#version-2), the
+> **Note:** If you're using the [version 2 file format](compose-file.md#version-2), the
 > externally-created containers must be connected to at least one of the same
 > networks as the service which is linking to them.
 
@@ -403,10 +403,10 @@ a partial image ID.
     image: a4bc65fd
 
 If the image does not exist, Compose attempts to pull it, unless you have also
-specified [build](#build), in which case it builds it using the specified
+specified [build](compose-file.md#build), in which case it builds it using the specified
 options and tags it with the specified tag.
 
-> **Note**: In the [version 1 file format](#version-1), using `build` together
+> **Note**: In the [version 1 file format](compose-file.md#version-1), using `build` together
 > with `image` is not allowed. Attempting to do so results in an error.
 
 ### labels
@@ -440,16 +440,16 @@ Containers for the linked service will be reachable at a hostname identical to
 the alias, or the service name if no alias was specified.
 
 Links also express dependency between services in the same way as
-[depends_on](#depends-on), so they determine the order of service startup.
+[depends_on](compose-file.md#depends-on), so they determine the order of service startup.
 
-> **Note:** If you define both links and [networks](#networks), services with
+> **Note:** If you define both links and [networks](compose-file.md#networks), services with
 > links between them must share at least one network in common in order to
 > communicate.
 
 ### logging
 
-> [Version 2 file format](#version-2) only. In version 1, use
-> [log_driver](#log_driver) and [log_opt](#log_opt).
+> [Version 2 file format](compose-file.md#version-2) only. In version 1, use
+> [log_driver](compose-file.md#log_driver) and [log_opt](compose-file.md#log_opt).
 
 Logging configuration for the service.
 
@@ -482,8 +482,8 @@ Logging options are key-value pairs. An example of `syslog` options:
 
 ### log_driver
 
-> [Version 1 file format](#version-1) only. In version 2, use
-> [logging](#logging).
+> [Version 1 file format](compose-file.md#version-1) only. In version 2, use
+> [logging](compose-file.md#logging).
 
 Specify a log driver. The default is `json-file`.
 
@@ -491,8 +491,8 @@ Specify a log driver. The default is `json-file`.
 
 ### log_opt
 
-> [Version 1 file format](#version-1) only. In version 2, use
-> [logging](#logging).
+> [Version 1 file format](compose-file.md#version-1) only. In version 2, use
+> [logging](compose-file.md#logging).
 
 Specify logging options as key-value pairs. An example of `syslog` options:
 
@@ -501,8 +501,8 @@ Specify logging options as key-value pairs. An example of `syslog` options:
 
 ### net
 
-> [Version 1 file format](#version-1) only. In version 2, use
-> [network_mode](#network_mode).
+> [Version 1 file format](compose-file.md#version-1) only. In version 2, use
+> [network_mode](compose-file.md#network_mode).
 
 Network mode. Use the same values as the docker client `--net` parameter.
 The `container:...` form can take a service name instead of a container name or
@@ -515,7 +515,7 @@ id.
 
 ### network_mode
 
-> [Version 2 file format](#version-2) only. In version 1, use [net](#net).
+> [Version 2 file format](compose-file.md#version-2) only. In version 1, use [net](compose-file.md#net).
 
 Network mode. Use the same values as the docker client `--net` parameter, plus
 the special form `service:[service name]`.
@@ -528,10 +528,10 @@ the special form `service:[service name]`.
 
 ### networks
 
-> [Version 2 file format](#version-2) only. In version 1, use [net](#net).
+> [Version 2 file format](compose-file.md#version-2) only. In version 1, use [net](compose-file.md#net).
 
 Networks to join, referencing entries under the
-[top-level `networks` key](#network-configuration-reference).
+[top-level `networks` key](compose-file.md#network-configuration-reference).
 
     services:
       some-service:
@@ -593,7 +593,7 @@ In the example below, three services are provided (`web`, `worker`, and `db`), a
 
 Specify a static IP address for containers for this service when joining the network.
 
-The corresponding network configuration in the [top-level networks section](#network-configuration-reference) must have an `ipam` block with subnet and gateway configurations covering each static address. If IPv6 addressing is desired, the `com.docker.network.enable_ipv6` driver option must be set to `true`.
+The corresponding network configuration in the [top-level networks section](compose-file.md#network-configuration-reference) must have an `ipam` block with subnet and gateway configurations covering each static address. If IPv6 addressing is desired, the `com.docker.network.enable_ipv6` driver option must be set to `true`.
 
 An example:
 
@@ -681,9 +681,9 @@ limit as an integer or soft/hard limits as a mapping.
 
 Mount paths or named volumes, optionally specifying a path on the host machine
 (`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
-For [version 2 files](#version-2), named volumes need to be specified with the
-[top-level `volumes` key](#volume-configuration-reference).
-When using [version 1](#version-1), the Docker Engine will create the named
+For [version 2 files](compose-file.md#version-2), named volumes need to be specified with the
+[top-level `volumes` key](compose-file.md#volume-configuration-reference).
+When using [version 1](compose-file.md#version-1), the Docker Engine will create the named
 volume automatically if it doesn't exist.
 
 You can mount a relative path on the host, which will expand relative to
@@ -710,10 +710,10 @@ If you do not use a host path, you may specify a `volume_driver`.
 
     volume_driver: mydriver
 
-Note that for [version 2 files](#version-2), this driver
+Note that for [version 2 files](compose-file.md#version-2), this driver
 will not apply to named volumes (you should use the `driver` option when
-[declaring the volume](#volume-configuration-reference) instead).
-For [version 1](#version-1), both named volumes and container volumes will
+[declaring the volume](compose-file.md#volume-configuration-reference) instead).
+For [version 1](compose-file.md#version-1), both named volumes and container volumes will
 use the specified driver.
 
 > Note: No path expansion will be done if you have also specified a
@@ -736,7 +736,7 @@ then read-write will be used.
      - container:container_name:rw
 
 > **Note:** The `container:...` formats are only supported in the
-> [version 2 file format](#version-2). In [version 1](#version-1), you can use
+> [version 2 file format](compose-file.md#version-2). In [version 1](compose-file.md#version-1), you can use
 > container names without marking them as such:
 >
 >     - service_name
@@ -937,7 +937,7 @@ There are two versions of the Compose file format:
 - Version 2, the recommended format. This is specified with a `version: '2'` entry
   at the root of the YAML.
 
-To move your project from version 1 to 2, see the [Upgrading](#upgrading)
+To move your project from version 1 to 2, see the [Upgrading](compose-file.md#upgrading)
 section.
 
 > **Note:** If you're using
@@ -957,15 +957,15 @@ These differences are explained below.
 ### Version 1
 
 Compose files that do not declare a version are considered "version 1". In
-those files, all the [services](#service-configuration-reference) are declared
+those files, all the [services](compose-file.md#service-configuration-reference) are declared
 at the root of the document.
 
 Version 1 is supported by **Compose up to 1.6.x**. It will be deprecated in a
 future Compose release.
 
 Version 1 files cannot declare named
-[volumes](#volume-configuration-reference), [networks](networking.md) or
-[build arguments](#args).
+[volumes](compose-file.md#volume-configuration-reference), [networks](networking.md) or
+[build arguments](compose-file.md#args).
 
 Example:
 
@@ -984,14 +984,14 @@ Example:
 ### Version 2
 
 Compose files using the version 2 syntax must indicate the version number at
-the root of the document. All [services](#service-configuration-reference)
+the root of the document. All [services](compose-file.md#service-configuration-reference)
 must be declared under the `services` key.
 
 Version 2 files are supported by **Compose 1.6.0+** and require a Docker Engine
 of version **1.10.0+**.
 
-Named [volumes](#volume-configuration-reference) can be declared under the
-`volumes` key, and [networks](#network-configuration-reference) can be declared
+Named [volumes](compose-file.md#volume-configuration-reference) can be declared under the
+`volumes` key, and [networks](compose-file.md#network-configuration-reference) can be declared
 under the `networks` key.
 
 Simple example:
@@ -1082,7 +1082,7 @@ It's more complicated if you're using particular configuration features:
     your service's containers to an
     [external network](networking.md#using-a-pre-existing-network).
 
--   `net`: This is now replaced by [network_mode](#network_mode):
+-   `net`: This is now replaced by [network_mode](compose-file.md#network_mode):
 
         net: host    ->  network_mode: host
         net: bridge  ->  network_mode: bridge

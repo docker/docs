@@ -21,15 +21,15 @@ maintain the swarm.
 
 This article covers the following swarm administration tasks:
 
-* [Using a static IP for manager node advertise address](#use-a-static-ip-for-manager-node-advertise-address)
-* [Adding manager nodes for fault tolerance](#add-manager-nodes-for-fault-tolerance)
-* [Distributing manager nodes](#distribute-manager-nodes)
-* [Running manager-only nodes](#run-manager-only-nodes)
-* [Backing up the swarm state](#back-up-the-swarm-state)
-* [Monitoring the swarm health](#monitor-swarm-health)
-* [Troubleshooting a manager node](#troubleshoot-a-manager-node)
-* [Forcefully removing a node](#force-remove-a-node)
-* [Recovering from disaster](#recover-from-disaster)
+* [Using a static IP for manager node advertise address](admin_guide.md#use-a-static-ip-for-manager-node-advertise-address)
+* [Adding manager nodes for fault tolerance](admin_guide.md#add-manager-nodes-for-fault-tolerance)
+* [Distributing manager nodes](admin_guide.md#distribute-manager-nodes)
+* [Running manager-only nodes](admin_guide.md#run-manager-only-nodes)
+* [Backing up the swarm state](admin_guide.md#back-up-the-swarm-state)
+* [Monitoring the swarm health](admin_guide.md#monitor-swarm-health)
+* [Troubleshooting a manager node](admin_guide.md#troubleshoot-a-manager-node)
+* [Forcefully removing a node](admin_guide.md#force-remove-a-node)
+* [Recovering from disaster](admin_guide.md#recover-from-disaster)
 
 Refer to [How nodes work](how-swarm-mode-works/nodes.md)
 for a brief overview of Docker Swarm mode and the difference between manager and
@@ -91,7 +91,7 @@ guaranteed if you encounter more than two network partitions.
 For example, in a swarm with *5 nodes*, if you lose *3 nodes*, you don't have a
 quorum. Therefore you can't add or remove nodes until you recover one of the
 unavailable manager nodes or recover the swarm with disaster recovery
-commands. See [Recover from disaster](#recover-from-disaster).
+commands. See [Recover from disaster](admin_guide.md#recover-from-disaster).
 
 While it is possible to scale a swarm down to a single manager node, it is
 impossible to demote the last manager node. This ensures you maintain access to
@@ -154,7 +154,7 @@ directory:
 ```
 
 Back up the `raft` data directory often so that you can use it in case of
-[disaster recovery](#recover-from-disaster). Then you can take the `raft`
+[disaster recovery](admin_guide.md#recover-from-disaster). Then you can take the `raft`
 directory of one of the manager nodes to restore to a new swarm.
 
 ## Monitor swarm health

@@ -24,7 +24,6 @@ Please read through these topics on how to get started. To **give us feedback** 
 
 >**Already have Docker for Mac?** If you already have Docker for Mac installed, and are ready to get started, skip over to the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
-<a name="download"></a>
 ## Download Docker for Mac
 
 If you have not already done so, please install Docker for Mac. You can download installers from the stable or beta channel.
@@ -44,23 +43,23 @@ For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-
   <tr valign="top">
   <td width="50%">
   <a class="button darkblue-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac (stable)</a><br><br>
-  <a href="https://download.docker.com/mac/stable/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: <font color="#BDBDBD">Docker.dmg SHA256</font></a></font>
+  <a href="https://download.docker.com/mac/stable/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: Docker.dmg SHA256</font></a>
   </td>
   <td width="50%">
   <a class="button darkblue-btn" href="https://download.docker.com/mac/beta/Docker.dmg">Get Docker for Mac (beta)</a><br><br>
-  <a href="https://download.docker.com/mac/beta/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: <font color="#BDBDBD">Docker.dmg SHA256</font></a></font>
+  <a href="https://download.docker.com/mac/beta/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: Docker.dmg SHA256</font></a>
   </td>
-  </tr>  
+  </tr>
 </table>
 
 >**Important Notes**:
 >
->* Docker for Mac requires OS X 10.10.3 Yosemite or newer running on a 2010 or newer Mac, with Intel's hardware support for MMU virtualization. Please see [What to know before you install](#what-to-know-before-you-install) for a full list of prerequisites.
+>* Docker for Mac requires OS X 10.10.3 Yosemite or newer running on a 2010 or newer Mac, with Intel's hardware support for MMU virtualization. Please see [What to know before you install](index.md#what-to-know-before-you-install) for a full list of prerequisites.
 >
 >* <font color="#CC3366">You can switch between beta and stable versions, but _you must have only one app installed at a time_.</font> Also, you will need to save images and export containers you want to keep before uninstalling the current version before installing another. For more about this, see the [FAQs about beta and stable channels](faqs.md#stable-and-beta-channels).
 
-<a name="preqs"></a>
 ##  What to know before you install
+
 
 * **README FIRST for Docker Toolbox and Docker Machine users**: If you are already running Docker on your machine, first read [Docker for Mac vs. Docker Toolbox](docker-toolbox.md) to understand the impact of this installation on your existing setup, how to set your environment for Docker for Mac, and how the two products can coexist.
 
@@ -80,7 +79,6 @@ For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-
 
 * **What the install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
 
-<a name="run"></a>
 ## Step 1. Install and Run Docker for Mac
 
 1. Double-click `Docker.dmg` to open the installer, then drag Moby the whale to the Applications folder.
@@ -109,7 +107,6 @@ For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-
 
 	Congratulations! You are up and running with Docker for Mac.
 
-<a name="check-versions"></a>
 ## Step 2. Check versions of Docker Engine, Compose, and Machine
 
 Run these commands to test if your versions of `docker`, `docker-compose`, and `docker-machine` are up-to-date and compatible with `Docker.app`.
@@ -127,7 +124,6 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
 >**Note**: The above is an example. Your output will differ if you are running different (e.g., newer) versions.
 
-<a name="explore"></a>
 ## Step 3. Explore the application and run examples
 
 1. Open a command-line terminal, and run some Docker commands to verify that Docker is working as expected.
@@ -240,7 +236,6 @@ Docker uninstalled successfully. You can move the Docker application to the tras
 
 You might want to use the command-line uninstall if, for example, you find that the app is non-functional, and you cannot uninstall it from the menu.
 
-<a name="bash-completion"></a>
 ## Installing bash completion
 
 If you are using [bash completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1), such as [homebrew bash-completion on Mac](http://davidalger.com/development/bash-completion-on-os-x-with-brew/), bash completion scripts for
@@ -278,15 +273,3 @@ ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-comple
 * Check out the <a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">blog posts</a> on Docker for Mac and Docker for Windows public betas, and <a href="https://blog.docker.com/2016/03/docker-for-mac-windows-beta/">earlier posts</a> on the intial private beta.
 
 * Please give feedback on your experience with the app and report bugs and problems by logging into our [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac).
-
-
-<hr style="color:#99CC99" />
-<ul class="media">
-	<div class="media_content">
-	<div data-mh="mh_docker_projects">
-	<h6> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="images/chat.png" alt="chat icon"></a> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">Help improve the documentation</a></h3>
-		<p>
-    Email us at <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">feedback@docker.com</a>
-    </p>
-	</div>
-	</div>

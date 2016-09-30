@@ -13,7 +13,7 @@ title: Automated Builds with Bitbucket
 # Automated Builds with Bitbucket
 
 If you've previously linked Docker Hub to your Bitbucket account,
-you'll be able to skip to [Creating an Automated Build](#creating-an-automated-build).
+you'll be able to skip to [Creating an Automated Build](bitbucket.md#creating-an-automated-build).
 
 ## Linking to your Bitbucket account
 

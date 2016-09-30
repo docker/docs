@@ -16,7 +16,6 @@ title: Docker for Mac vs. Docker Toolbox
 
 If you already have an installation of Docker Toolbox, please read these topics first to learn how Docker for Mac and Docker Toolbox differ, and how they can coexist.
 
-<a name="toolbox-env"></a>
 ## The Docker Toolbox environment
 
 Docker Toolbox installs `docker`, `docker-compose` and `docker-machine` in `/usr/local/bin` on your Mac. It also installs VirtualBox. At installation time, Toolbox uses `docker-machine` to provision a VirtualBox VM called `default`, running the `boot2docker` Linux distribution, with  [Docker Engine](https://docs.docker.com/engine/) with certificates located on your Mac at `$HOME/.docker/machine/machines/default`.
@@ -27,7 +26,7 @@ This setup is shown in the following diagram.
 
 ![Docker Toolbox Install](images/toolbox-install.png)
 
-<a name="docker-mac-env"></a>
+
 ## The Docker for Mac environment
 
 Docker for Mac is a Mac native application, that you install in `/Applications`. At installation time, it creates symlinks in `/usr/local/bin` for `docker` and `docker-compose`, to the version of the commands inside the Mac application bundle, in `/Applications/Docker.app/Contents/Resources/bin`.
@@ -48,9 +47,9 @@ This setup is shown in the following diagram.
 
 With Docker for Mac, you get only one VM, and you don't manage it. It is managed by the Docker for Mac application, which includes autoupdate to update the client and server versions of Docker.
 
-If you need several VMs and want to manage the version of the Docker client or server you are using, you can continue to use `docker-machine`, on the same machine, as described in [Docker Toolbox and Docker for Mac coexistence](#docker-toolbox-and-docker-for-mac-coexistence).
+If you need several VMs and want to manage the version of the Docker client or server you are using, you can continue to use `docker-machine`, on the same machine, as described in [Docker Toolbox and Docker for Mac coexistence](docker-toolbox.md#docker-toolbox-and-docker-for-mac-coexistence).
 
-<a name="docker-mac-setup"></a>
+
 ## Setting up to run Docker for Mac
 
 1. Check whether Toolbox DOCKER environment variables are set:
@@ -82,7 +81,7 @@ If you need several VMs and want to manage the version of the Docker client or s
 
 > **Warning**: If you install Docker for Mac on a machine where Docker Toolbox is installed, it will replace the `docker` and `docker-compose` command lines in `/usr/local/bin` with symlinks to its own versions.
 
-<a name="coexist"></a>
+
 ## Docker Toolbox and Docker for Mac coexistence
 
 You can use Docker for Mac and Docker Toolbox together on the same machine. When you want to use Docker for Mac, make sure all DOCKER environment variables are unset. You can do this in bash with `unset ${!DOCKER_*}`. When you want to use one of the VirtualBox VMs you have set with `docker-machine`, just run a `eval $(docker-machine env default)` (or the name of the machine you want to target). This will switch the current command shell to talk to the specified Toolbox machine.
@@ -91,34 +90,34 @@ This setup is represented in the following diagram.
 
 ![Docker Toolbox and Docker for Mac coexistence](images/docker-for-mac-and-toolbox.png)
 
-<a name="dvm"></a>
+
 ## Using different versions of Docker tools
 
 The coexistence setup works as is as long as your VirtualBox VMs provisioned with `docker-machine` run the same version of Docker Engine as Docker for Mac. If you need to use VMs running older versions of Docker Engine, you can use a tool like <a href="https://github.com/getcarina/dvm" target="_blank">Docker Version Manager</a> to manage several versions of docker client.
 
-<a name="check-versions"></a>
+
 ### Checking component versions
 
 Ideally, the Docker CLI client and Docker Engine should be the same version. Mismatches between client and server, and among host machines you might have created with Docker Machine can cause problems (client can't talk to the server or host machines).
 
 If you already have <a href="https://docs.docker.com/toolbox/overview/" target="_blank">Docker Toolbox</a> installed, and then install Docker for Mac, you might get a newer version of the Docker client. Run `docker version` in a command shell to see client and server versions. In this example, the client installed with Docker for Mac is `Version: 1.11.1` and the server (which was installed earlier with Toolbox) is Version: 1.11.0.
 
-			$ docker version
-			Client:
-			Version:      1.11.1
-			...
+    $ docker version
+    Client:
+    Version:      1.11.1
+    ...
 
-			Server:
-			Version:      1.11.0
-			...
+    Server:
+    Version:      1.11.0
+    ...
 
 Also, if you created machines with Docker Machine (installed with Toolbox) then upgraded or installed Docker for Mac, you might have machines running different versions of Engine. Run `docker-machine ls` to view version information for the machines you created. In this example, the DOCKER column shows that each machine is running a different version of server.
 
-		$ docker-machine ls
-		NAME             ACTIVE   DRIVER         STATE     URL                         SWARM   DOCKER    ERRORS
-		aws-sandbox      -        amazonec2      Running   tcp://52.90.113.128:2376            v1.10.0   
-		default          *        virtualbox     Running   tcp://192.168.99.100:2376           v1.10.1   
-		docker-sandbox   -        digitalocean   Running   tcp://104.131.43.236:2376           v1.10.0   
+    $ docker-machine ls
+    NAME             ACTIVE   DRIVER         STATE     URL                         SWARM   DOCKER    ERRORS
+    aws-sandbox      -        amazonec2      Running   tcp://52.90.113.128:2376            v1.10.0
+    default          *        virtualbox     Running   tcp://192.168.99.100:2376           v1.10.1
+    docker-sandbox   -        digitalocean   Running   tcp://104.131.43.236:2376           v1.10.0
 
 You might also run into a similar situation with Docker Universal Control Plan (UCP).
 
@@ -131,14 +130,3 @@ and want to uninstall it. For details on how to perform a clean uninstall of
 Toolbox on the Mac, see [How to uninstall
 Toolbox](/toolbox/toolbox_install_mac.md#how-to-uninstall-toolbox) in the
 Toolbox Mac topics.
-
-<hr style="color:#99CC99" />
-<ul class="media">
-	<div class="media_content">
-	<div data-mh="mh_docker_projects">
-	<h6> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="../../images/chat.png" alt="chat icon"></a> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">Help improve the documentation</a></h3>
-		<p>
-    Email us at <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">feedback@docker.com</a>
-    </p>
-	</div>
-	</div>

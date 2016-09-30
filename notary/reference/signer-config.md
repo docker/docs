@@ -16,7 +16,7 @@ want to specify custom options.
 
 ## Overview
 
-Notary signer [requires environment variables](#environment-variables-required-if-using-mysql)
+Notary signer [requires environment variables](signer-config.md#environment-variables-required-if-using-mysql)
 to encrypt private keys at rest. It also requires a configuration file, the path to which is
 specified on the command line using the `-config` flag.
 
@@ -24,7 +24,7 @@ Here is a full signer configuration file example; please click on the top level 
 learn more about the configuration section corresponding to that key:
 
 <pre><code class="language-json">{
-  <a href="#server-section-required">"server"</a>: {
+  <a href="signer-config.md#server-section-required">"server"</a>: {
     "http_addr": ":4444",
     "grpc_addr": ":7899",
     "tls_cert_file": "./fixtures/notary-signer.crt",
@@ -34,7 +34,7 @@ learn more about the configuration section corresponding to that key:
   <a href="../common-configs/#logging-section-optional">"logging"</a>: {
     "level": 2
   },
-  <a href="#storage-section-required">"storage"</a>: {
+  <a href="signer-config.md#storage-section-required">"storage"</a>: {
     "backend": "mysql",
     "db_url": "user:pass@tcp(notarymysql:3306)/databasename?parseTime=true",
     "default_alias": "passwordalias1"
@@ -173,7 +173,7 @@ Example:
 			private keys will be encrypted using this password, which
 			must also be provided as the environment variable
 			<code>NOTARY_SIGNER_&lt;DEFAULT_ALIAS_VALUE&gt;</code>.
-			Please see the <a href="#environment-variables-required-if-using-mysql">environment variable</a>
+			Please see the <a href="signer-config.md#environment-variables-required-if-using-mysql">environment variable</a>
 			section for more information.</td>
 	</tr>
 </table>

@@ -20,8 +20,8 @@ For system requirements, please see the Getting Started topic on [What to know b
 
 Release notes for _stable_ and _beta_ releases are listed below. You can learn about both kinds of releases, and download stable and beta product installers at [Download Docker for Mac](index.md#download-docker-for-mac).
 
-* [Stable Release Notes](#stable-release-notes)
-* [Beta Release Notes](#beta-release-notes)
+* [Stable Release Notes](release-notes.md#stable-release-notes)
+* [Beta Release Notes](release-notes.md#beta-release-notes)
 
 ## Stable Release Notes
 
@@ -1145,14 +1145,3 @@ lead to `Docker.app` not starting on reboot
     <td class="tg-vn4c">Fixed permissions on `usr/local` symbolic links</td>
   </tr>
 </table>
-
-<hr style="color:#99CC99" />
-<ul class="media">
-	<div class="media_content">
-	<div data-mh="mh_docker_projects">
-	<h6> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="../../images/chat.png" alt="chat icon"></a> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">Help improve the documentation</a></h3>
-		<p>
-    Email us at <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">feedback@docker.com</a>
-    </p>
-	</div>
-	</div>

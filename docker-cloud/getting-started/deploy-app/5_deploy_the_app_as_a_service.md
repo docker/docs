@@ -17,9 +17,9 @@ title: Deploy the app as a Docker Cloud service
 In this step you will deploy the app as a Docker Cloud Service. Remember that a service is a group of containers of the same **image:tag**.
 
 What you'll do in this step is slightly different if you have Docker Engine installed locally or not.
-If you have Docker Engine installed locally, start at [Deploy app with Docker Engine installed locally](#deploy-app-with-docker-engine-installed-locally).
+If you have Docker Engine installed locally, start at [Deploy app with Docker Engine installed locally](5_deploy_the_app_as_a_service.md#deploy-app-with-docker-engine-installed-locally).
 
-If you do not have Docker Engine installed locally, start at [Deploy app without Docker Engine installed locally](#deploy-app-without-docker-engine-installed-locally).
+If you do not have Docker Engine installed locally, start at [Deploy app without Docker Engine installed locally](5_deploy_the_app_as_a_service.md#deploy-app-without-docker-engine-installed-locally).
 
 > **Note**: If you don't have Docker Engine installed locally, skip to
 
@@ -36,7 +36,7 @@ or
 ```bash
 $ docker-cloud service run -p 80 --name web $DOCKER_ID_USER/quickstart-go
 ```
-Skip the next section and read about [The run command](#the-run-command).
+Skip the next section and read about [The run command](5_deploy_the_app_as_a_service.md#the-run-command).
 
 ## Deploy app without Docker Engine installed locally
 
@@ -53,7 +53,7 @@ $ docker-cloud service run -p 80 --name web dockercloud/quickstart-python
 ```bash
 $ docker-cloud service run -p 80 --name web dockercloud/quickstart-go
 ```
-Go to the next section to read about [The run command](#the-run-command).
+Go to the next section to read about [The run command](5_deploy_the_app_as_a_service.md#the-run-command).
 
 ## The run command
 

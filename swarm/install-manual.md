@@ -15,15 +15,15 @@ This page teaches you to deploy a high-availability Docker Swarm cluster.
 Although the example installation uses the Amazon Web Services (AWS) platform,
 you can deploy an equivalent Docker Swarm cluster on many other platforms. In this example, you do the following:
 
-- [Verify you have the prerequisites](#prerequisites)
-- [Establish basic network security](#step-1-add-network-security-rules)
-- [Create your nodes](#step-2-create-your-instances)
-- [Install Engine on each node](#step-3-install-engine-on-each-node)
-- [Configure a discovery backend](#step-4-set-up-a-discovery-backend)
-- [Create Swarm cluster](#step-5-create-swarm-cluster)
-- [Communicate with the Swarm](#step-6-communicate-with-the-swarm)
-- [Test the high-availability Swarm managers](#step-7-test-swarm-failover)
-- [Additional Resources](#additional-resources)
+- [Verify you have the prerequisites](install-manual.md#prerequisites)
+- [Establish basic network security](install-manual.md#step-1-add-network-security-rules)
+- [Create your nodes](install-manual.md#step-2-create-your-instances)
+- [Install Engine on each node](install-manual.md#step-3-install-engine-on-each-node)
+- [Configure a discovery backend](install-manual.md#step-4-set-up-a-discovery-backend)
+- [Create Swarm cluster](install-manual.md#step-5-create-swarm-cluster)
+- [Communicate with the Swarm](install-manual.md#step-6-communicate-with-the-swarm)
+- [Test the high-availability Swarm managers](install-manual.md#step-7-test-swarm-failover)
+- [Additional Resources](install-manual.md#additional-resources)
 
 For a gentler introduction to Swarm, try the [Evaluate Swarm in a sandbox](install-w-machine.md) page.
 

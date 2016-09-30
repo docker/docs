@@ -109,7 +109,7 @@ For a full explanation and examples, see [I want to connect to a container from 
 
 Note that you need a Mac that supports hardware virtualization, which is most non ancient ones; i.e., use OS X `10.10.3+` or `10.11` (OS X Yosemite or OS X El Capitan). See also "What to know before you install" in [Getting Started](index.md).
 
-<a name="faq-toolbox"></a>
+
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 
 No, you can use these side by side. Docker Toolbox leverages a Docker daemon installed using `docker-machine` in a machine called `default`. Running `eval $(docker-machine env default)` in a shell sets DOCKER environment variables locally to connect to the default machine using Engine from Toolbox. To check whether Toolbox DOCKER environment variables are set, run `env | grep DOCKER`.
@@ -142,14 +142,3 @@ consume any resources unless Docker.app connects to it, so it's safe to ignore.
 ### Can I pass through a USB device to a container?
 
  Unfortunately it is not possible to pass through a USB device (or a serial port) to a container. For use cases requiring this, we recommend the use of [Docker Toolbox](/toolbox/overview.md).
-
-<hr style="color:#99CC99" />
-<ul class="media">
-	<div class="media_content">
-	<div data-mh="mh_docker_projects">
-	<h6> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="../../images/chat.png" alt="chat icon"></a> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">Help improve the documentation</a></h3>
-		<p>
-    Email us at <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">feedback@docker.com</a>
-    </p>
-	</div>
-	</div>

@@ -40,8 +40,8 @@ packages.
 ## Install Docker Engine
 
 There are two ways to install Docker Engine.  You can [install using the `dnf`
-package manager](#install-with-dnf). Or you can use `curl` [with the  `get.docker.com`
-site](#install-with-the-script). This second method runs an installation script
+package manager](fedora.md#install-with-dnf). Or you can use `curl` [with the  `get.docker.com`
+site](fedora.md#install-with-the-script). This second method runs an installation script
 which also installs via the `dnf` package manager.
 
 ### Install with DNF

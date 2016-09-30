@@ -237,7 +237,7 @@ snapshots. For each devicemapper graph location – typically
 `/var/lib/docker/devicemapper` – a thin pool is created based on two block
 devices, one for data and one for metadata. By default, these block devices
 are created automatically by using loopback mounts of automatically created
-sparse files. Refer to [Storage driver options](#storage-driver-options) below
+sparse files. Refer to [Storage driver options](dockerd.md#storage-driver-options) below
 for a way how to customize this setup.
 [~jpetazzo/Resizing Docker containers with the Device Mapper plugin](http://jpetazzo.github.io/2014/01/29/docker-device-mapper-resize/)
 article explains how to tune your existing setup without the use of options.
@@ -249,7 +249,7 @@ does not share executable memory between devices. Use
 The `zfs` driver is probably not as fast as `btrfs` but has a longer track record
 on stability. Thanks to `Single Copy ARC` shared blocks between clones will be
 cached only once. Use `dockerd -s zfs`. To select a different zfs filesystem
-set `zfs.fsname` option as described in [Storage driver options](#storage-driver-options).
+set `zfs.fsname` option as described in [Storage driver options](dockerd.md#storage-driver-options).
 
 The `overlay` is a very fast union filesystem. It is now merged in the main
 Linux kernel as of [3.18.0](https://lkml.org/lkml/2014/10/26/137). `overlay`
@@ -995,7 +995,7 @@ following algorithm to create the mapping ranges:
 If you enable user namespaces on the daemon, all containers are started
 with user namespaces enabled. In some situations you might want to disable
 this feature for a container, for example, to start a privileged container (see
-[user namespace known restrictions](#user-namespace-known-restrictions)).
+[user namespace known restrictions](dockerd.md#user-namespace-known-restrictions)).
 To enable those advanced features for a specific container use `--userns=host`
 in the `run/exec/create` command.
 This option will completely disable user namespace mapping for the container's user.
@@ -1245,7 +1245,7 @@ previously configured cluster configurations.
 This section describes how to run multiple Docker daemons on a single host. To
 run multiple daemons, you must configure each daemon so that it does not
 conflict with other daemons on the same host. You can set these options either
-by providing them as flags, or by using a [daemon configuration file](#daemon-configuration-file).
+by providing them as flags, or by using a [daemon configuration file](dockerd.md#daemon-configuration-file).
 
 The following daemon options must be configured for each daemon:
 

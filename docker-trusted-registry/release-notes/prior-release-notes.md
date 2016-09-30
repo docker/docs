@@ -63,7 +63,7 @@ Release notes contain the following sections:
 
 **Additional storage backend**
 
-This release introduces using Openstack Swift as a storage backend. Refer to the [configuration documentation](../configure/config-storage.md) for details on the Swift driver.  
+This release introduces using Openstack Swift as a storage backend. Refer to the [configuration documentation](../configure/config-storage.md) for details on the Swift driver.
 
 **Fixed or updated with this release**
 This release addresses the following issues in Docker Trusted Registry 1.4.1.
@@ -292,7 +292,7 @@ Trusted Registry. See below for specifics.
 
 * New, more granular, [roles for users](../user-management/index.md). Docker Trusted Registry users can now be assigned different levels of access
 (admin, r/w, r/o) to the repositories. **Important:** Existing Docker Trusted
-Registry users should make sure to see the note [below](#dhe-1-0-upgrade-warning) regarding migrating users before upgrading.
+Registry users should make sure to see the note [below](prior-release-notes.md#dhe-1-0-upgrade-warning) regarding migrating users before upgrading.
 * A new storage status indicator for storage space. The dashboard now shows used and available storage space for supported storage drivers.
 * A new diagnostics tool gathers and bundles Docker Trusted Registry logs, system information, container
 information, and other configuration settings for use by Docker support or as a

@@ -52,9 +52,9 @@ Some services require coordination between different containers to ensure that
 the service functions correctly. Many databases, such as MySQL for example,
 require that the containers know about each other at startup time so that
 traffic can be routed to them appropriately. When this is the case, you should
-use [sequential scaling](#sequential-deployment-and-scaling).
+use [sequential scaling](service-scaling.md#sequential-deployment-and-scaling).
 
-To allow peer-aware container startup, you can enable sequential scaling mode. See [Sequential Scaling](#sequential-deployment-and-scaling) for more information.
+To allow peer-aware container startup, you can enable sequential scaling mode. See [Sequential Scaling](service-scaling.md#sequential-deployment-and-scaling) for more information.
 
 ## Setting the initial number of containers
 

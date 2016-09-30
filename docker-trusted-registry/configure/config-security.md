@@ -23,18 +23,18 @@ SSL Certificate (as a standard x509 key pair).
 In order to run, the Trusted Registry requires encrypted communications through HTTPS/SSL between (a) the Trusted Registry and your Docker Engine(s), and (b) between your web browser and the Trusted Registry admin server. There are a few options for setting this up:
 
 1. You can use the self-signed certificate Docker Trusted Registry generates by default.
-2. You can generate your own certificates using a public service or your enterprise's infrastructure. See the [Generating SSL certificates](#generating-ssl-certificates) section for the options available.
+2. You can generate your own certificates using a public service or your enterprise's infrastructure. See the [Generating SSL certificates](config-security.md#generating-ssl-certificates) section for the options available.
 
 If you are generating your own certificates, you can install them by following the instructions for
-[Adding your own registry certificates to Docker Trusted Registry](#adding-your-own-registry-certificates-to-dtr).
+[Adding your own registry certificates to Docker Trusted Registry](config-security.md#adding-your-own-registry-certificates-to-dtr).
 
 However, if you choose to use the Trusted Registry-generated certificates, or
 the certificates you generate yourself are not trusted by your client Docker
 hosts, you will need to do one of the following:
 
-* [Install](#installing-registry-certificates-on-client-docker-daemons) a registry certificate on all of your client Docker daemons, or
+* [Install](config-security.md#installing-registry-certificates-on-client-docker-daemons) a registry certificate on all of your client Docker daemons, or
 
-* Set your [client Docker daemons](#if-you-can-t-install-the-certificates) to run with an unconfirmed connection to the registry.
+* Set your [client Docker daemons](config-security.md#if-you-can-t-install-the-certificates) to run with an unconfirmed connection to the registry.
 
 ### Generate SSL certificates
 

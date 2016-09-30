@@ -1010,7 +1010,7 @@ Start the container `id`
 
 > **Note**:
 > For backwards compatibility, this endpoint accepts a `HostConfig` as JSON-encoded request body.
-> See [create a container](#create-a-container) for details.
+> See [create a container](docker_remote_api_v1.23.md#create-a-container) for details.
 
 **Example request**:
 
@@ -1263,7 +1263,7 @@ Attach to the container `id`
 
 When using the TTY setting is enabled in
 [`POST /containers/create`
-](#create-a-container),
+](docker_remote_api_v1.23.md#create-a-container),
 the stream is the raw data from the process PTY and client's `stdin`.
 When the TTY is disabled, then the stream is multiplexed to separate
 `stdout` and `stderr`.
@@ -2608,7 +2608,7 @@ If `name` is a specific name and tag (e.g. ubuntu:latest), then only that image
 image (and its parents) are returned, but with the exclusion of the
 'repositories' file in the tarball, as there were no image names referenced.
 
-See the [image tarball format](#image-tarball-format) for more details.
+See the [image tarball format](docker_remote_api_v1.23.md#image-tarball-format) for more details.
 
 **Example request**
 
@@ -2637,7 +2637,7 @@ For each value of the `names` parameter: if it is a specific name and tag (e.g.
 an image ID, similarly only that image (and its parents) are returned and there
 would be no names referenced in the 'repositories' file for this image ID.
 
-See the [image tarball format](#image-tarball-format) for more details.
+See the [image tarball format](docker_remote_api_v1.23.md#image-tarball-format) for more details.
 
 **Example request**
 
@@ -2660,7 +2660,7 @@ See the [image tarball format](#image-tarball-format) for more details.
 `POST /images/load`
 
 Load a set of images and tags into a Docker repository.
-See the [image tarball format](#image-tarball-format) for more details.
+See the [image tarball format](docker_remote_api_v1.23.md#image-tarball-format) for more details.
 
 **Example request**
 
@@ -2684,7 +2684,7 @@ See the [image tarball format](#image-tarball-format) for more details.
 
 **Example response**:
 
-If the "quiet" query parameter is set to `true` / `1` (`?quiet=1`), progress 
+If the "quiet" query parameter is set to `true` / `1` (`?quiet=1`), progress
 details are suppressed, and only a confirmation message is returned as plain text
 once the action completes.
 

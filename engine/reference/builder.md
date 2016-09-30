@@ -51,7 +51,7 @@ To use a file in the build context, the `Dockerfile` refers to the file specifie
 in an instruction, for example,  a `COPY` instruction. To increase the build's
 performance, exclude files and directories by adding a `.dockerignore` file to
 the context directory.  For information about how to [create a `.dockerignore`
-file](#dockerignore-file) see the documentation on this page.
+file](builder.md#dockerignore-file) see the documentation on this page.
 
 Traditionally, the `Dockerfile` is called `Dockerfile` and located in the root
 of the context. You use the `-f` flag with `docker build` to point to a Dockerfile
@@ -299,7 +299,7 @@ Results in:
 
 ## Environment replacement
 
-Environment variables (declared with [the `ENV` statement](#env)) can also be
+Environment variables (declared with [the `ENV` statement](builder.md#env)) can also be
 used in certain instructions as variables to be interpreted by the
 `Dockerfile`. Escapes are also handled for including variable-like syntax
 into a statement literally.
@@ -565,7 +565,7 @@ See the [`Dockerfile` Best Practices
 guide](../userguide/eng-image/dockerfile_best-practices.md#build-cache) for more information.
 
 The cache for `RUN` instructions can be invalidated by `ADD` instructions. See
-[below](#add) for details.
+[below](builder.md#add) for details.
 
 ### Known issues (RUN)
 
@@ -634,7 +634,7 @@ must be individually expressed as strings in the array:
 
 If you would like your container to run the same executable every time, then
 you should consider using `ENTRYPOINT` in combination with `CMD`. See
-[*ENTRYPOINT*](#entrypoint).
+[*ENTRYPOINT*](builder.md#entrypoint).
 
 If the user specifies arguments to `docker run` then they will override the
 default specified in `CMD`.
@@ -712,7 +712,7 @@ feature](../userguide/networking/index.md)).
 
 The `ENV` instruction sets the environment variable `<key>` to the value
 `<value>`. This value will be in the environment of all "descendant"
-`Dockerfile` commands and can be [replaced inline](#environment-replacement) in
+`Dockerfile` commands and can be [replaced inline](builder.md#environment-replacement) in
 many as well.
 
 The `ENV` instruction has two forms. The first form, `ENV <key> <value>`,
@@ -1349,7 +1349,7 @@ its value would be `v1.0.0` as it is the default set in line 3 by the `ENV` inst
 The variable expansion technique in this example allows you to pass arguments
 from the command line and persist them in the final image by leveraging the
 `ENV` instruction. Variable expansion is only supported for [a limited set of
-Dockerfile instructions.](#environment-replacement)
+Dockerfile instructions.](builder.md#environment-replacement)
 
 Docker has a set of predefined `ARG` variables that you can use without a
 corresponding `ARG` instruction in the Dockerfile.

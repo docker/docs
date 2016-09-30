@@ -78,7 +78,7 @@ pull request</a>.
 	![Sign commits and issues](images/bonus.png)
 
 	We have also have checklist that describes [what each pull request
-	needs](#what-is-the-pre-pull-request-checklist).
+	needs](code.md#what-is-the-pre-pull-request-checklist).
 
 
 7. <a href="http://docs.docker.com/project/review-pr/"

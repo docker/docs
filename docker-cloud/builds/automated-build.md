@@ -67,7 +67,7 @@ repository service where the image's source code is stored.
 6. Choose where to run your build processes.
 
     You can either run the process on your own infrastructure and optionally
-    [set up specific nodes to build on](#set-up-builder-nodes), or use the
+    [set up specific nodes to build on](automated-build.md#set-up-builder-nodes), or use the
     hosted build service offered on Docker Cloud's infrastructure. If you use
     Docker's infrastructure, select a builder size to run the build process on.
     This hosted build service is free while it is in Beta.
@@ -88,14 +88,14 @@ repository service where the image's source code is stored.
 
         You can enter a name, or use a regex to match which source branch or tag
         names to build. To learn more, see
-        [regexes](#regexes-and-automated-builds).
+        [regexes](automated-build.md#regexes-and-automated-builds).
 
     * Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
 
     * Enter the tag to apply to Docker images built from this source.
         If you configured a regex to select the source, you can reference the
         capture groups and use its result as part of the tag. To learn more, see
-        [regexes](#regexes-and-automated-builds).
+        [regexes](automated-build.md#regexes-and-automated-builds).
 
 9. For each branch or tag, enable or disable the **Autobuild** toggle.
 
@@ -186,13 +186,13 @@ and you'll see an error in your build timeline.
 
 To work around this, you can set up your automated build using the `SSH_PRIVATE` environment variable to override the deployment key and grant Docker Cloud's build system access to the repositories.
 
-> **Note**: If you are using autobuild for teams, use [the process below](#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Cloud's access to your source repositories.
+> **Note**: If you are using autobuild for teams, use [the process below](automated-build.md#service-users-for-team-autobuilds) instead, and configure a service user for your source code provider. You can also do this for an individual account to limit Docker Cloud's access to your source repositories.
 
 1. Generate a SSH keypair that you will use for builds only, and add the public key to your source code provider account.
 
     This step is optional, but allows you to revoke the build-only keypair without removing other access. <!-- (TODO: Link to instructions for GH & BB ) -->
 2. Copy the private half of the keypair to your clipboard.
-3. In Docker Cloud, navigate to the build page for the repository that has linked private submodules. (If necessary, follow the steps [here](#configure-automated-build-settings) to configure the automated build.)
+3. In Docker Cloud, navigate to the build page for the repository that has linked private submodules. (If necessary, follow the steps [here](automated-build.md#configure-automated-build-settings) to configure the automated build.)
 4. At the bottom of the screen, click the plus sign ( **+** ) next to **Environment Variables**.
 5. Enter `SSH_PRIVATE` as the name for the new environment variable.
 6. Paste the private half of the keypair into the **Value** field.
@@ -254,7 +254,7 @@ variable to automated builds associated with the account.
 
     > **Note**: You may need to log out of your individual account on the source code provider to create the link to the service account.
 
-6. Optionally, use the SSH keys you generated to set up any builds with private submodules, using the service account and [the instructions above](#build-repositories-with-linked-private-submodules).
+6. Optionally, use the SSH keys you generated to set up any builds with private submodules, using the service account and [the instructions above](automated-build.md#build-repositories-with-linked-private-submodules).
 
 ## What's Next?
 

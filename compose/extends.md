@@ -15,8 +15,8 @@ title: Extending Services in Compose
 Compose supports two methods of sharing common configuration:
 
 1. Extending an entire Compose file by
-   [using multiple Compose files](#multiple-compose-files)
-2. Extending individual services with [the `extends` field](#extending-services)
+   [using multiple Compose files](extends.md#multiple-compose-files)
+2. Extending individual services with [the `extends` field](extends.md#extending-services)
 
 
 ## Multiple Compose files
@@ -34,7 +34,7 @@ services.
 
 If a service is defined in both files Compose merges the configurations using
 the rules described in [Adding and overriding
-configuration](#adding-and-overriding-configuration).
+configuration](extends.md#adding-and-overriding-configuration).
 
 To use multiple override files, or an override file with a different name, you
 can use the `-f` option to specify the list of files. Compose merges files in

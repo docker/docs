@@ -73,10 +73,10 @@ The UI refreshes. Log in from the Docker ID you specified as the first Owner, an
 
 Once you've created an organization:
 
-* Add users to [the Owners team](#configure-the-owners-team) to help you manage the organization
-* [Create teams](#create-teams)
-* [Set team permissions](#set-team-permissions)
-* Set up [linked providers](#link-a-service-provider-to-an-organization), and [manage resources](#manage-resources-for-an-organization) for the organization
+* Add users to [the Owners team](orgs.md#configure-the-owners-team) to help you manage the organization
+* [Create teams](orgs.md#create-teams)
+* [Set team permissions](orgs.md#set-team-permissions)
+* Set up [linked providers](orgs.md#link-a-service-provider-to-an-organization), and [manage resources](orgs.md#manage-resources-for-an-organization) for the organization
 
 ## Configure the Owners team
 

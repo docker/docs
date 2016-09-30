@@ -15,11 +15,11 @@ Compose is a tool for defining and running multi-container Docker applications.
 With Compose, you use a Compose file to configure your application's services.
 Then, using a single command, you create and start all the services
 from your configuration. To learn more about all the features of Compose
-see [the list of features](#features).
+see [the list of features](overview.md#features).
 
 Compose is great for development, testing, and staging environments, as well as
 CI workflows. You can learn more about each case in
-[Common Use Cases](#common-use-cases).
+[Common Use Cases](overview.md#common-use-cases).
 
 Using Compose is basically a three-step process.
 
@@ -75,10 +75,10 @@ Compose has commands for managing the whole lifecycle of your application:
 
 The features of Compose that make it effective are:
 
-* [Multiple isolated environments on a single host](#Multiple-isolated-environments-on-a-single-host)
-* [Preserve volume data when containers are created](#preserve-volume-data-when-containers-are-created)
-* [Only recreate containers that have changed](#only-recreate-containers-that-have-changed)
-* [Variables and moving a composition between environments](#variables-and-moving-a-composition-between-environments)
+* [Multiple isolated environments on a single host](overview.md#Multiple-isolated-environments-on-a-single-host)
+* [Preserve volume data when containers are created](overview.md#preserve-volume-data-when-containers-are-created)
+* [Only recreate containers that have changed](overview.md#only-recreate-containers-that-have-changed)
+* [Variables and moving a composition between environments](overview.md#variables-and-moving-a-composition-between-environments)
 
 ### Multiple isolated environments on a single host
 

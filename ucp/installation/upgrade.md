@@ -70,9 +70,9 @@ cluster is set up for high-availability.
 After finding the number of controller nodes in your cluster, jump to the
 upgrade instructions that apply to you:
 
-* [My cluster is not set for high-availability](#my-cluster-is-not-set-for-high-availability),
+* [My cluster is not set for high-availability](upgrade.md#my-cluster-is-not-set-for-high-availability),
 if your cluster has only one controller node.
-* [My cluster is set for high-availability](#my-cluster-is-set-for-high-availability),
+* [My cluster is set for high-availability](upgrade.md#my-cluster-is-set-for-high-availability),
 if your cluster has multiple controller nodes.
 
 

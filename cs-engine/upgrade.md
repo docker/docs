@@ -19,9 +19,9 @@ This article explains how to upgrade your CS Docker Engine.
 The upgrade process depends on the version that is currently installed and the
 version that you want to upgrade to:
 
-* [Upgrade from the same minor version](#upgrade-from-the-same-minor-version)
-* [Upgrade from the same major version](#upgrade-from-the-same-major-version)
-* [Upgrade from a legacy version](#upgrade-from-a-legacy-version)
+* [Upgrade from the same minor version](upgrade.md#upgrade-from-the-same-minor-version)
+* [Upgrade from the same major version](upgrade.md#upgrade-from-the-same-major-version)
+* [Upgrade from a legacy version](upgrade.md#upgrade-from-a-legacy-version)
 
 Before starting the upgrade, make sure you stop all containers running on the
 host. This ensures your containers have time for cleaning up before exiting,
