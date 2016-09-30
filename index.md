@@ -10,13 +10,7 @@ layout: docs
 
 {% include content/docker_elevator_pitch.md %}
 
-## Getting Started
-
-Try [Getting Started withDocker Engine](engine/getstarted/index.md) to learn the
-basics of building and running containers, [Getting Started with Docker Compose](compose/gettingstarted.md) to see
-how easy it is to deploy a multi-container app (standing up a Python + Redis app in the process), or [our Swarm tutorial](engine/swarm/swarm-tutorial/index.md), which
-shows how to run containers on many hosts (VMs or physical machines) at once,
-as a cluster. Prefer a more linear, guided, visual tour? [Check out our self-paced training](https://training.docker.com/self-paced-training)!
+<a href="getting-started/index.md" class="button darkblue-btn">Learn the Docker Platform</a>
 
 {% include content/typical_docker_workflow.md %}
 

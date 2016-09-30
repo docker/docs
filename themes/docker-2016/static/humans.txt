@@ -1,3 +1,0 @@
-Docker Documenation made by the Docker Docs team <docs@docker.com> and community contributors.
-
-Thank you.
