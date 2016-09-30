@@ -1,12 +1,14 @@
+
+
 # This repo is for preview/dev purposes only
 
-The docs team is in the process of migrating to this repo. During this time we're also 
+The docs team is in the process of migrating to this repo. During this time we're also
 converting from a Hugo-based doc system to a Jekyll-based doc system. That means there
-are lots of content errors and so forth at the preview URL. We're on it. 
+are lots of content errors and so forth at the preview URL. We're on it.
 
 While this repo is not the source of truth, it's important to us that it be viewable
 so contributors can see what we're doing, and so that they can migrate open pull requests
-from other repos such as `docker/docker` that make doc changes, into this repo. 
+from other repos such as `docker/docker` that make doc changes, into this repo.
 
 ## Timeline of migration
 
@@ -48,6 +50,20 @@ In the third option, the site will be viewable at `http://YOUR_GITHUB_USERNAME.g
 Feel free to link to `../foo.md` so that the docs are readable in GitHub, but keep in mind that Jekyll templating notation
 `{% such as this %}` will render in raw text and not be processed. In general it's best to assume the docs are being read
 directly on docs.docker.com.
+
+## Style guide
+
+If you have questions about how to write for Docker's documentation, please see
+the [style guide](https://docs.docker.com/opensource/doc-style/). The style guide provides
+guidance about grammar, syntax, formatting, styling, language, or tone. If
+something isn't clear in the guide, please submit an issue to let us know or
+submit a pull request to help us improve it.
+
+### Generate the man pages
+
+For information on generating man pages (short for manual page), see the README.md
+document in [the man page directory](https://github.com/docker/docker/tree/master/man)
+in this project.
 
 ## Copyright and license
 
