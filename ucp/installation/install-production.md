@@ -85,9 +85,9 @@ available, check the [reference documentation](../reference/install.md).
 
 To install UCP:
 
-1. Log in to the machine where you want to install UCP.
+1.  Log in to the machine where you want to install UCP.
 
-2. Use the `docker/ucp install` command to install UCP.
+2.  Use the `docker/ucp install` command to install UCP.
 
     In this example we'll be running the install command interactively, so that
     the command prompts for the necessary configuration values.
@@ -108,14 +108,12 @@ To install UCP:
     * Also, include the `--external-server-cert` flag if you're using server
     certificates signed by an external CA.
 
-    </br>
     When installing Docker UCP, overlay networking is automatically configured
     for you. If you are running Docker CS Engine 1.10, or have custom
     configurations on your Docker CS Engine, you need to restart the Docker
     daemon at this point.
 
-
-3. Check that the UCP web application is running.
+3.  Check that the UCP web application is running.
 
     In your browser, navigate to the address where you've installed UCP.
 
@@ -141,7 +139,7 @@ root certificates and keys.
 To create a backup of the CAs used on the controller node:
 
 1. Log into the controller node using ssh.
-2. Run the docker/ucp backup command.
+2.  Run the docker/ucp backup command.
 
     ```bash
     $ docker run --rm -i --name ucp \
@@ -168,7 +166,7 @@ For each node that you want to install as a controller replica:
 
 2. Make sure you transfer the backup.tar from the previous step to this node.
 
-3. Use the join command with the replica option:
+3.  Use the join command with the replica option:
 
     In this example we'll be running the join command interactively, so that
     the command prompts for the necessary configuration values. We'll also
@@ -214,7 +212,7 @@ For each controller node:
 
 1. Log into that node using ssh.
 
-2. Run the engine-discovery command.
+2.  Run the engine-discovery command.
 
     ```bash
     $ docker run --rm -it \
@@ -233,8 +231,8 @@ For each node that you want to add to your UCP cluster:
 
 1. Log into that node.
 
-2. Use the join command, to join the node to the cluster:
-
+2.  Use the join command, to join the node to the cluster:
+    
     ```bash
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
