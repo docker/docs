@@ -156,7 +156,7 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
     To stop and remove the running container with a single command, type: `docker rm -f webserver`. This will remove the container, but not the `nginx` image. You can list local images with `docker images`. You might want to keep some images around so that you don't have to pull them again from Docker Hub. To remove an image you no longer need, use `docker rmi <imageID>|<imageName>`. For example, `docker rmi nginx`.
 
-**Want more example applictions?** - For more example walkthroughs that include setting up  services and databases in Docker Compose, see [Example Applications](examples.md).
+**Want more example applications?** - For more example walkthroughs that include setting up  services and databases in Docker Compose, see [Example Applications](examples.md).
 
 ## Preferences
 
@@ -258,7 +258,7 @@ ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-comple
 
 * Try out the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
-* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on on building images, runnning containers, networking, managing data, and storing images on Docker Hub.
+* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on on building images, running containers, networking, managing data, and storing images on Docker Hub.
 
 * See [Example Applications](examples.md) for example applications that include setting up services and databases in Docker Compose.
 
@@ -270,6 +270,6 @@ ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-comple
 
 * For a summary of Docker command line interface (CLI) commands, see [Docker CLI Reference Guide](/engine/reference/index.md).
 
-* Check out the <a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">blog posts</a> on Docker for Mac and Docker for Windows public betas, and <a href="https://blog.docker.com/2016/03/docker-for-mac-windows-beta/">earlier posts</a> on the intial private beta.
+* Check out the <a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">blog posts</a> on Docker for Mac and Docker for Windows public betas, and <a href="https://blog.docker.com/2016/03/docker-for-mac-windows-beta/">earlier posts</a> on the initial private beta.
 
 * Please give feedback on your experience with the app and report bugs and problems by logging into our [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac).

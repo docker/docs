@@ -39,7 +39,7 @@ A: Two different download channels are available for Docker for Windows:
 A: Yes, you can switch between versions to try out the betas to see what's new,
 then go back to stable for other work. However, **you can have only one app
 installed at a time**. Switching back and forth between stable and beta apps can
-de-stabilize your development environment, particularly in cases where you
+destabilize your development environment, particularly in cases where you
 switch from a newer (beta) channel to older (stable).
 
 For example, containers created with a newer beta version of Docker for Windows

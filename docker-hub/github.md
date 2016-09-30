@@ -196,7 +196,7 @@ need to add the Service Hook manually.
 
 To add, confirm, or modify the service hook, log in to GitHub, then navigate to
 the repository, click "Settings" (the gear), then select "Webhooks & Services".
-You must have Administrator privileges on the repository to view or modfy
+You must have Administrator privileges on the repository to view or modify
 this setting.
 
 The image below shows the "Docker" Service Hook.

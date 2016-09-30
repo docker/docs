@@ -126,7 +126,7 @@ $ docker exec -it ucp-kv etcdctl \
 Removed member c5a24cfdb4263e72 from cluster
 ```
 
-If your cluser has lost too many members, etcd refuses to remove
+If your cluster has lost too many members, etcd refuses to remove
 members using this tool. Instead you must use the UCP backup and restore
 functionality to reset your cluster to a single controller node cluster.
 [Learn more about backups and disaster recovery](../high-availability/backups-and-disaster-recovery.md).
