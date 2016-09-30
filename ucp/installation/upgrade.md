@@ -88,13 +88,13 @@ replica nodes):
 
 2. Log into the controller node using ssh.
 
-3. Pull the docker/ucp image for the version you want to upgrade to.
+3.  Pull the docker/ucp image for the version you want to upgrade to.
 
     ```bash
     $ docker pull docker/ucp:$UCP_VERSION
     ```
 
-4. Upgrade the controller node.
+4.  Upgrade the controller node.
 
     ```bash
     $ docker run --rm -it \
@@ -169,14 +169,14 @@ If your cluster is set up for high-availability (has several controller nodes):
 
 5. Log into the controller node using ssh.
 
-6. Pull the docker/ucp image for the version you want to upgrade to.
+6.  Pull the docker/ucp image for the version you want to upgrade to.
 
     ```bash
     $ docker pull docker/ucp:$UCP_VERSION
     ```
 
-7. Upgrade the controller node.
-
+7.  Upgrade the controller node.
+    
     ```bash
     $ docker run --rm -it \
       --name ucp \
