@@ -1369,21 +1369,5 @@ toc:
     title: Docker Release Notes
   - path: /engine/reference/glossary/
     title: Docker Glossary
-- sectiontitle: Docs archive
-  section:
-  - path: http://docs.docker.com/v1.11/
-    title: Version 1.11
-  - path: http://docs.docker.com/v1.10/
-    title: Version 1.10
-  - path: http://docs.docker.com/v1.9/
-    title: Version 1.9
-  - path: http://docs.docker.com/v1.8/
-    title: Version 1.8
-  - path: http://docs.docker.com/v1.7/
-    title: Version 1.7
-  - path: http://docs.docker.com/v1.6/
-    title: Version 1.6
-  - path: http://docs.docker.com/v1.5/
-    title: Version 1.5
-  - path: http://docs.docker.com/v1.4/
-    title: Version 1.4
+- title: Docs archive
+  path: /docsarchive/
