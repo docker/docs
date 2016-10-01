@@ -57,7 +57,7 @@ for all the kernels that the base CS Engine is supported on.
 
 >**Note**: Centos 7 has its firewall enabled by default and it prevents the VXLAN tunnel from communicating. If this applies to you, then after installing the CS Engine, execute the following command in the Linux host:
 
-`sudo firewall-cmd --zone=public --permanent --add-port=4789/udp`
+    sudo firewall-cmd --zone=public --permanent --add-port=4789/udp
 
 
 * Corrected an issue where Docker didn't remove the Masquerade NAT rule from `iptables` when the network was removed. This caused the gateway address to be
@@ -138,54 +138,53 @@ SELinux will be unable to use hostname-based network access in either `docker bu
 
 For example, you see will failures such as:
 
-  ```
-  [root@dtr ~]# docker -v
-  Docker version 1.6.0-cs2, build b8dd430
-  [root@dtr ~]# ping dtr.home.org.au
-  PING dtr.home.org.au (10.10.10.104) 56(84) bytes of data.
-  64 bytes from dtr.home.gateway (10.10.10.104): icmp_seq=1 ttl=64 time=0.663 ms
-  ^C
-  --- dtr.home.org.au ping statistics ---
-  2 packets transmitted, 2 received, 0% packet loss, time 1001ms
-  rtt min/avg/max/mdev = 0.078/0.370/0.663/0.293 ms
-  [root@dtr ~]# docker run --rm -it debian ping dtr.home.org.au
-  ping: unknown host
-  [root@dtr ~]# docker run --rm -it debian cat /etc/resolv.conf
-  cat: /etc/resolv.conf: Permission denied
-  [root@dtr ~]# docker run --rm -it debian apt-get update
-  Err http://httpredir.debian.org jessie InRelease
+```bash
+[root@dtr ~]# docker -v
+Docker version 1.6.0-cs2, build b8dd430
+[root@dtr ~]# ping dtr.home.org.au
+PING dtr.home.org.au (10.10.10.104) 56(84) bytes of data.
+64 bytes from dtr.home.gateway (10.10.10.104): icmp_seq=1 ttl=64 time=0.663 ms
+^C
+--- dtr.home.org.au ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 0.078/0.370/0.663/0.293 ms
+[root@dtr ~]# docker run --rm -it debian ping dtr.home.org.au
+ping: unknown host
+[root@dtr ~]# docker run --rm -it debian cat /etc/resolv.conf
+cat: /etc/resolv.conf: Permission denied
+[root@dtr ~]# docker run --rm -it debian apt-get update
+Err http://httpredir.debian.org jessie InRelease
 
-  Err http://security.debian.org jessie/updates InRelease
+Err http://security.debian.org jessie/updates InRelease
 
-  Err http://httpredir.debian.org jessie-updates InRelease
+Err http://httpredir.debian.org jessie-updates InRelease
 
-  Err http://security.debian.org jessie/updates Release.gpg
-    Could not resolve 'security.debian.org'
-  Err http://httpredir.debian.org jessie Release.gpg
-    Could not resolve 'httpredir.debian.org'
-  Err http://httpredir.debian.org jessie-updates Release.gpg
-    Could not resolve 'httpredir.debian.org'
-  [output truncated]
-
-  ```
+Err http://security.debian.org jessie/updates Release.gpg
+  Could not resolve 'security.debian.org'
+Err http://httpredir.debian.org jessie Release.gpg
+  Could not resolve 'httpredir.debian.org'
+Err http://httpredir.debian.org jessie-updates Release.gpg
+  Could not resolve 'httpredir.debian.org'
+[output truncated]
+```
 
 or when running a `docker build`:
 
-  ```
-  [root@dtr ~]# docker build .
-  Sending build context to Docker daemon 11.26 kB
-  Sending build context to Docker daemon
-  Step 0 : FROM fedora
-   ---> e26efd418c48
-  Step 1 : RUN yum install httpd
-   ---> Running in cf274900ea35
+```bash
+[root@dtr ~]# docker build .
+Sending build context to Docker daemon 11.26 kB
+Sending build context to Docker daemon
+Step 0 : FROM fedora
+ ---> e26efd418c48
+Step 1 : RUN yum install httpd
+ ---> Running in cf274900ea35
 
-  One of the configured repositories failed (Fedora 21 - x86_64),
-  and yum doesn't have enough cached data to continue. At this point the only
-  safe thing yum can do is fail. There are a few ways to work "fix" this:
+One of the configured repositories failed (Fedora 21 - x86_64),
+and yum doesn't have enough cached data to continue. At this point the only
+safe thing yum can do is fail. There are a few ways to work "fix" this:
 
-  [output truncated]
-  ```
+[output truncated]
+```
 
 **Affected Versions**: All previous versions of Docker Engine when SELinux is
  enabled.
@@ -200,7 +199,7 @@ where SELinux is typically required.
 
 The second option is to pass the following parameter in to `docker run`.
 
-    	     --security-opt=label:type:docker_t
+    --security-opt=label:type:docker_t
 
 This parameter cannot be passed to the `docker build` command.
 
@@ -211,34 +210,40 @@ When upgrading, make sure you stop Docker Trusted Registry first, perform the En
 If you are running with SELinux enabled, previous Docker Engine releases allowed
 you to bind-mount additional volumes or files inside the container as follows:
 
-  		`$ docker run -it -v /home/user/foo.txt:/foobar.txt:ro <imagename>`
+    $ docker run -it -v /home/user/foo.txt:/foobar.txt:ro <imagename>
 
 In the 1.6.2-cs5 release, you must ensure additional bind-mounts have the
 correct SELinux context. For example, if you want to mount `foobar.txt` as
 read-only into the container, do the following to create and test your
 bind-mount:
 
-  1. Add the `z` option to the bind mount when you specify `docker run`.
+1.  Add the `z` option to the bind mount when you specify `docker run`.
 
-  		$ docker run -it -v /home/user/foo.txt:/foobar.txt:ro,z <imagename>
+    ```bash
+		$ docker run -it -v /home/user/foo.txt:/foobar.txt:ro,z <imagename>
+    ```
 
-  2. Exec into your new container.
+2.  Exec into your new container.
 
-  	For example, if your container is `bashful_curie`, open a shell on the
-  	container:
+	  For example, if your container is `bashful_curie`, open a shell on the
+	  container:
 
-  		$ docker exec -it bashful_curie bash
+    ```bash
+		$ docker exec -it bashful_curie bash
+    ```
 
-  3. Use `cat` to check the permissions on the mounted file.
+3.  Use `cat` to check the permissions on the mounted file.
 
-  		$ cat /foobar.txt
-  		the contents of foobar appear
+    ```bash
+		$ cat /foobar.txt
+		the contents of foobar appear
+    ```
 
 If you see the file's contents, your mount succeeded. If you receive a
 `Permission denied` message and/or the `/var/log/audit/audit.log` file on your
 Docker host contains an AVC Denial message, the mount did not succeed.
 
-  		type=AVC msg=audit(1432145409.197:7570): avc:  denied  { read } for  pid=21167 comm="cat" name="foobar.txt" dev="xvda2" ino=17704136 scontext=system_u:system_r:svirt_lxc_net_t:s0:c909,c965 tcontext=unconfined_u:object_r:user_home_t:s0 tclass=file
+    type=AVC msg=audit(1432145409.197:7570): avc:  denied  { read } for  pid=21167 comm="cat" name="foobar.txt" dev="xvda2" ino=17704136 scontext=system_u:system_r:svirt_lxc_net_t:s0:c909,c965 tcontext=unconfined_u:object_r:user_home_t:s0 tclass=file
 
 Recheck your command line to make sure you passed in the `z` option.
 
