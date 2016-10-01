@@ -803,8 +803,6 @@ toc:
       title: Security configuration
     - path: /docker-trusted-registry/configure/config-storage/
       title: Storage configuration
-    - path: /docker-trusted-registry/configure/config-auth/
-      title: Auth configuration
   - sectiontitle: Monitor and troubleshoot
     section:
     - path: /docker-trusted-registry/monitor-troubleshoot/
