@@ -23,16 +23,15 @@ other relevant information for upgrading to a particular version.
 ## Plan the upgrade
 
 As part of the upgrade process, you'll be upgrading the CS Docker Engine
-installed in each node of the cluster. When this happens, all containers
-running on that node will be stopped, causing some downtime to the cluster
-management functionality and your applications.
+installed in each node of the cluster to version 1.12. If you're currently
+running CS Docker Engine 1.11.2-cs3, all containers will be stopped during the
+upgrade, causing some downtime to UCP and your applications.
 
 You should plan for the upgrade to take place outside business hours, to ensure
 there's minimal impact to your users.
 
-Also, don't make changes to the cluster configurations while you're upgrading
-the cluster. That can lead to misconfigurations that are difficult to
-troubleshoot.
+Also, don't make changes to UCP configurations while you're upgrading it. That
+can lead to misconfigurations that are difficult to troubleshoot.
 
 ## Backup your cluster
 
@@ -55,7 +54,11 @@ Starting with the controller nodes, and then worker nodes:
 
     [Follow the upgrade procedure](/cs-engine/upgrade.md) to upgrade the
     CS Docker Engine. This will cause some downtime on that node, since all
-    containers running there will be restarted.
+    containers will be stopped.
+
+    Containers that have a restart policy set to
+    'always', are automatically started after the upgrade. This is the case of
+    UCP and DTR components. All other containers need to be started manually.
 
 3. Make sure the node is healthy.
 
@@ -72,7 +75,8 @@ that you've installed using that node's root CA material.
 2. Pull the docker/ucp image for the version you want to upgrade to.
 
     ```bash
-    $ docker pull docker/ucp:2.0.0
+    # Check on Docker Hub which versions are available
+    $ docker pull docker/ucp:<version>
     ```
 
 3. Upgrade UCP by running:
@@ -81,7 +85,7 @@ that you've installed using that node's root CA material.
     $ docker run --rm -it \
       --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      docker/ucp:2.0.0 \
+      docker/ucp:<version> \
       upgrade --interactive
     ```
 
