@@ -35,13 +35,13 @@ same minor version. As an example, from 1.1.0 to 1.1.1.
 ### CentOS 7.1 & RHEL 7.0/7.1
 Use these instructions to upgrade YUM-based systems.
 
-1. Update your docker-engine package:
+1.  Update your docker-engine package:
 
     ```bash
     $ sudo yum upgrade docker-engine
     ```
 
-2. Check that the CS Docker Engine is running:
+2.  Check that the CS Docker Engine is running:
 
     ```bash
     $ sudo docker info
@@ -50,13 +50,13 @@ Use these instructions to upgrade YUM-based systems.
 ### Ubuntu 14.04 LTS
 Use these instructions to upgrade APT-based systems.
 
-1. Update your docker-engine package:
+1.  Update your docker-engine package:
 
     ```bash
     $ sudo apt-get update && sudo apt-get upgrade docker-engine
     ```
 
-2. Check that the CS Docker Engine is running:
+2.  Check that the CS Docker Engine is running:
 
     ```bash
     $ sudo docker info
@@ -64,13 +64,13 @@ Use these instructions to upgrade APT-based systems.
 
 ### SUSE Enterprise 12.3
 
-1. Update your docker-engine package:
+1.  Update your docker-engine package:
 
     ```bash
     $ sudo zypper upgrade docker-engine
     ```
 
-2. Check that the CS Docker Engine is running:
+2.  Check that the CS Docker Engine is running:
 
     ```bash
     $ sudo docker info
@@ -86,7 +86,7 @@ same major version. As an example, from 1.1.x to 1.2.x.
 ### CentOS 7.1 & RHEL 7.0/7.1
 Use these instructions to upgrade YUM-based systems.
 
-1. Add the Docker Engine repository.
+1.  Add the Docker Engine repository.
 
     ```bash
     $ sudo yum-config-manager --add-repo https://packages.docker.com/1.12/yum/repo/main/centos/7
@@ -95,13 +95,13 @@ Use these instructions to upgrade YUM-based systems.
     This adds the repository of the latest version of CS Docker Engine. You can
     customize the URL to install other versions.
 
-2. Install the new package:
+2.  Install the new package:
 
     ```bash
     $ sudo yum update docker-engine
     ```
 
-3. Check that the CS Engine is running:
+3.  Check that the CS Engine is running:
 
     ```bash
     $ sudo docker info
@@ -111,7 +111,7 @@ Use these instructions to upgrade YUM-based systems.
 Use these instructions to update APT-based systems.
 
 
-1. Add the docker engine repository.
+1.  Add the docker engine repository.
 
     ```bash
     $ echo "deb https://packages.docker.com/1.12/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
@@ -130,13 +130,13 @@ Use these instructions to update APT-based systems.
     * ubuntu-vivid (Ubuntu 15.04)
     * ubuntu-wily (Ubuntu 15.10)
 
-2. Update your docker-engine package.
+2.  Update your docker-engine package.
 
     ```bash
     $ sudo apt-get update && sudo apt-get upgrade docker-engine
     ```
 
-3. Check that the CS Engine is running:
+3.  Check that the CS Engine is running:
 
     ```bash
     $ sudo docker info
@@ -144,22 +144,22 @@ Use these instructions to update APT-based systems.
 
 #### SUSE Enterprise 12.3
 
-1. Add the docker engine repository.
+1.  Add the docker engine repository.
 
-      ```bash
-      $ sudo zypper ar -t YUM https://packages.docker.com/1.12/yum/repo/main/opensuse/12.3 docker-1.12
-      ```
+    ```bash
+    $ sudo zypper ar -t YUM https://packages.docker.com/1.12/yum/repo/main/opensuse/12.3 docker-1.12
+    ```
 
-      This adds the repository of the latest version of CS Docker Engine. You
-      can customize the URL to install other versions.
+    This adds the repository of the latest version of CS Docker Engine. You
+    can customize the URL to install other versions.
 
-2. Install the new package:
+2.  Install the new package:
 
     ```bash
     $ sudo zypper update docker-engine
     ```
 
-3. Check that the CS Engine is running:
+3.  Check that the CS Engine is running:
 
     ```bash
     $ sudo docker info
@@ -175,25 +175,25 @@ then install the latest version.
 ### CentOS 7.1 & RHEL 7.0/7.1
 Use these instructions to upgrade YUM-based systems.
 
-1. Remove the current CS Engine:
+1.  Remove the current CS Engine:
 
     ```bash
     $ sudo yum remove docker-engine-cs
     ```
 
-2. Add the Docker public key for CS packages:
+2.  Add the Docker public key for CS packages:
 
     ```bash
     $ sudo rpm --import "https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"
     ```
 
-3. Install yum-utils if necessary:
+3.  Install yum-utils if necessary:
 
     ```bash
     $ sudo yum install -y yum-utils
     ```
 
-4. Add the repository for the new version and disable the old one.
+4.  Add the repository for the new version and disable the old one.
 
     ```bash
     $ sudo yum-config-manager --add-repo https://packages.docker.com/1.12/yum/repo/main/centos/7
@@ -203,13 +203,13 @@ Use these instructions to upgrade YUM-based systems.
     This adds the repository of the latest version of CS Docker Engine. You
     can customize the URL to install other versions.
 
-5. Install the new package:
+5.  Install the new package:
 
     ```bash
     $ sudo yum install docker-engine
     ```
 
-6. Enable the Docker daemon as a service and start it.
+6.  Enable the Docker daemon as a service and start it.
 
     ```bash
     $ sudo systemctl enable docker.service
@@ -220,25 +220,25 @@ Use these instructions to upgrade YUM-based systems.
 Use these instructions to update APT-based systems.
 
 
-1. Remove the current Engine:
+1.  Remove the current Engine:
 
     ```bash
     $ sudo apt-get remove docker-engine-cs
     ```
 
-2. Add the Docker public key for CS packages:
+2.  Add the Docker public key for CS packages:
 
     ```bash
     $ curl -s 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add --import
     ```
 
-3. Install the HTTPS helper for apt (your system may already have it):
+3.  Install the HTTPS helper for apt (your system may already have it):
 
     ```bash
     $ sudo apt-get update && sudo apt-get install apt-transport-https
     ```
 
-4. Install additional virtual drivers not in the base image.
+4.  Install additional virtual drivers not in the base image.
 
     ```bash
     $ sudo apt-get install -y linux-image-extra-virtual
@@ -246,7 +246,7 @@ Use these instructions to update APT-based systems.
 
     You may need to reboot your server after updating the LTS kernel.
 
-5. Add the repository for the new version:
+5.  Add the repository for the new version:
 
     ```bash
     $ echo "deb https://packages.docker.com/1.12/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
@@ -266,7 +266,7 @@ Use these instructions to update APT-based systems.
     * ubuntu-wily (Ubuntu 15.10)
 
 
-6. Install the upgraded package:
+6.  Install the upgraded package:
 
     ```bash
     $ sudo apt-get upgrade docker-engine

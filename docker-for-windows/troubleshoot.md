@@ -24,7 +24,6 @@ Here is information about how to diagnose and troubleshoot problems, send logs a
 
 If you encounter problems for which you do not find solutions in this documentation or on the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data. See [Diagnose and Feedback](index.md#diagnose-and-feedback) in the Getting Started topic.
 
-<a name="logs"></a>
 ## Checking the Logs
 
 In addition to using the diagnose and feedback option to submit logs, you can browse the logs yourself.
@@ -38,7 +37,6 @@ To view Docker for Windows latest log, click on the `Diagnose & Feedback` menu e
 If you encounter an issue and the suggested troubleshoot procedures outlined below don't fix it you can generate a diagnostics report. Click on the `Diagnose & Feedback` menu entry in the systray and then on the `Upload diagnostic...` link. This will upload diagnostics to our server and provide you with a unique ID you can use in email or the forum to reference the upload.
 
 
-<a name="troubleshoot"></a>
 ## Troubleshooting
 
 ### inotify on shared drives does not work
@@ -104,7 +102,7 @@ Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to 
 
 You may get the following error when you try to start a container created with pre-Beta 18 Docker for Windows applications.
 
-			Error response from daemon: Unknown runtime specified default
+    Error response from daemon: Unknown runtime specified default
 
 You can fix this by either [recreating](troubleshoot.md#recreate-your-containers) or [updating](troubleshoot.md#update-your-containers) your containers.
 
@@ -114,32 +112,34 @@ If you get the error message shown above, we recommend recreating them.
 
 To recreate your containers, use Docker Compose.
 
-			docker-compose down && docker-compose up
+    docker-compose down && docker-compose up
 
 #### Update your containers
 
 To fix existing containers, follow these steps.
 
-1. Run this command.
+1.  Run this command.
 
-			$ docker run --rm -v /var/lib/docker:/docker cpuguy83/docker112rc3-runtimefix:rc3
+    ```bash
+    $ docker run --rm -v /var/lib/docker:/docker cpuguy83/docker112rc3-runtimefix:rc3
 
-			Unable to find image 'cpuguy83/docker112rc3-runtimefix:rc3' locally
-			rc3: Pulling from cpuguy83/docker112rc3-runtimefix
-			91e7f9981d55: Pull complete
-			Digest: sha256:96abed3f7a7a574774400ff20c6808aac37d37d787d1164d332675392675005c
-			Status: Downloaded newer image for cpuguy83/docker112rc3-runtimefix:rc3
-			proccessed 1648f773f92e8a4aad508a45088ca9137c3103457b48be1afb3fd8b4369e5140
-			skipping container '433ba7ead89ba645efe9b5fff578e674aabba95d6dcb3910c9ad7f1a5c6b4538': already fixed
-			proccessed 43df7f2ac8fc912046dfc48cf5d599018af8f60fee50eb7b09c1e10147758f06
-			proccessed 65204cfa00b1b6679536c6ac72cdde1dbb43049af208973030b6d91356166958
-			proccessed 66a72622e306450fd07f2b3a833355379884b7a6165b7527c10390c36536d82d
-			proccessed 9d196e78390eeb44d3b354d24e25225d045f33f1666243466b3ed42fe670245c
-			proccessed b9a0ecfe2ed9d561463251aa90fd1442299bcd9ea191a17055b01c6a00533b05
-			proccessed c129a775c3fa3b6337e13b50aea84e4977c1774994be1f50ff13cbe60de9ac76
-			proccessed dea73dc21126434f14c58b83140bf6470aa67e622daa85603a13bc48af7f8b04
-			proccessed dfa8f9278642ab0f3e82ee8e4ad029587aafef9571ff50190e83757c03b4216c
-			proccessed ee5bf706b6600a46e5d26327b13c3c1c5f7b261313438d47318702ff6ed8b30b
+    Unable to find image 'cpuguy83/docker112rc3-runtimefix:rc3' locally
+    rc3: Pulling from cpuguy83/docker112rc3-runtimefix
+    91e7f9981d55: Pull complete
+    Digest: sha256:96abed3f7a7a574774400ff20c6808aac37d37d787d1164d332675392675005c
+    Status: Downloaded newer image for cpuguy83/docker112rc3-runtimefix:rc3
+    proccessed 1648f773f92e8a4aad508a45088ca9137c3103457b48be1afb3fd8b4369e5140
+    skipping container '433ba7ead89ba645efe9b5fff578e674aabba95d6dcb3910c9ad7f1a5c6b4538': already fixed
+    proccessed 43df7f2ac8fc912046dfc48cf5d599018af8f60fee50eb7b09c1e10147758f06
+    proccessed 65204cfa00b1b6679536c6ac72cdde1dbb43049af208973030b6d91356166958
+    proccessed 66a72622e306450fd07f2b3a833355379884b7a6165b7527c10390c36536d82d
+    proccessed 9d196e78390eeb44d3b354d24e25225d045f33f1666243466b3ed42fe670245c
+    proccessed b9a0ecfe2ed9d561463251aa90fd1442299bcd9ea191a17055b01c6a00533b05
+    proccessed c129a775c3fa3b6337e13b50aea84e4977c1774994be1f50ff13cbe60de9ac76
+    proccessed dea73dc21126434f14c58b83140bf6470aa67e622daa85603a13bc48af7f8b04
+    proccessed dfa8f9278642ab0f3e82ee8e4ad029587aafef9571ff50190e83757c03b4216c
+    proccessed ee5bf706b6600a46e5d26327b13c3c1c5f7b261313438d47318702ff6ed8b30b
+    ```
 
 2. Quit Docker.
 
@@ -147,10 +147,12 @@ To fix existing containers, follow these steps.
 
 	> **Note:**  Be sure to quit and then restart Docker for Windows before attempting to start containers.
 
-4. Try to start the container again:
+4.  Try to start the container again:
 
-				$ docker start old-container
-				old-container
+    ```bash
+    $ docker start old-container
+    old-container
+    ```
 
 ### Hyper-V
 Docker for Windows requires a Hyper-V as well as the Hyper-V Module for Windows Powershell to be installed and enabled. See [these instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) to install Hyper-V manually. A reboot is *required*. If you install Hyper-V without the reboot, Docker for Windows will not work correctly. On some systems, Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or similar.
@@ -189,8 +191,8 @@ You might have stale NAT configurations on the system. You should remove them wi
 
 You might have stale Network Adapters on the system. You should remove them with the following commands on an elevated Powershell prompt:
 
-		$vmNetAdapter = Get-VMNetworkAdapter -ManagementOS -SwitchName DockerNAT
-		Get-NetAdapter "vEthernet (DockerNAT)" | ? { $_.DeviceID -ne $vmNetAdapter.DeviceID } | Disable-NetAdapter -Confirm:$False -PassThru | Rename-NetAdapter -NewName "Broken Docker Adapter"
+    $vmNetAdapter = Get-VMNetworkAdapter -ManagementOS -SwitchName DockerNAT
+    Get-NetAdapter "vEthernet (DockerNAT)" | ? { $_.DeviceID -ne $vmNetAdapter.DeviceID } | Disable-NetAdapter -Confirm:$False -PassThru | Rename-NetAdapter -NewName "Broken Docker Adapter"
 
 Then you can remove them manually via the `devmgmt.msc` (aka Device Manager). You should see them as disabled Hyper-V Virtual Ethernet Adapter under the Network Adapter section. A right-click and selecting **uninstall** should remove the adapter.
 

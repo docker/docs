@@ -20,7 +20,7 @@ the swarm.
 run your manager node. For example, the tutorial uses a machine named
 `manager1`.
 
-2. Run the following command to change the desired state of the
+2.  Run the following command to change the desired state of the
 service running in the swarm:
 
     ```bash
@@ -35,7 +35,7 @@ service running in the swarm:
     helloworld scaled to 5
     ```
 
-3. Run `docker service ps <SERVICE-ID>` to see the updated task list:
+3.  Run `docker service ps <SERVICE-ID>` to see the updated task list:
 
     ```
     $ docker service ps helloworld
@@ -52,7 +52,7 @@ service running in the swarm:
     running instances of Alpine Linux. The tasks are distributed between the
     three nodes of the swarm. One is running on `manager1`.
 
-4. Run `docker ps` to see the containers running on the node where you're
+4.  Run `docker ps` to see the containers running on the node where you're
 connected. The following example shows the tasks running on `manager1`:
 
     ```
