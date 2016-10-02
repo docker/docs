@@ -29,8 +29,8 @@ open source and we deeply appreciate contributions from our community!
 
 You have three options:
 
-1.  (Most performant, slowest setup) Clone this repo, [install the GitHub Pages Ruby gem](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/), then run `jekyll serve` from within the directory.
-2.  (Slower, fast setup) Clone this repo, and from within the directory, run:
+1.  (Most performant, slowest setup) Clone this repo, [install Ruby 2.3 or higher (required)](https://www.ruby-lang.org/en/documentation/installation/), [install the GitHub Pages Ruby gem](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/), then run `jekyll serve` from within the directory.
+2.  (Slow performance on Mac/Windows, fast setup) Clone this repo, and from within the directory, run:
 
     ```bash
     docker run -ti -v "$PWD":/usr/src/app -p "4000:4000" starefossen/github-pages
