@@ -113,23 +113,23 @@ Continue by following the steps corresponding to your chosen OS. Run the followi
 #### Ubuntu/Debian
 
 ```
-    $ export DOMAIN_NAME=dtr.yourdomain.com
-    $ openssl s_client -connect $DOMAIN_NAME:443 -showcerts </dev/null 2>/dev/null | openssl x509 -outform PEM | sudo tee /usr/local/share/ca-certificates/$DOMAIN_NAME.crt
-    $ sudo update-ca-certificates
-    Updating certificates in /etc/ssl/certs... 1 added, 0 removed; done.
-    Running hooks in /etc/ca-certificates/update.d....done.
-    $ sudo service docker restart
-    docker stop/waiting
-    docker start/running, process 29291
+$ export DOMAIN_NAME=dtr.yourdomain.com
+$ openssl s_client -connect $DOMAIN_NAME:443 -showcerts </dev/null 2>/dev/null | openssl x509 -outform PEM | sudo tee /usr/local/share/ca-certificates/$DOMAIN_NAME.crt
+$ sudo update-ca-certificates
+Updating certificates in /etc/ssl/certs... 1 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d....done.
+$ sudo service docker restart
+docker stop/waiting
+docker start/running, process 29291
 ```
 
 #### RHEL/Centos
 
 ```
-    $ export DOMAIN_NAME=dtr.yourdomain.com
-    $ openssl s_client -connect $DOMAIN_NAME:443 -showcerts </dev/null 2>/dev/null | openssl x509 -outform PEM | sudo tee /etc/pki/ca-trust/source/anchors/$DOMAIN_NAME.crt
-    $ sudo update-ca-trust
-    $ sudo /bin/systemctl restart docker.service
+$ export DOMAIN_NAME=dtr.yourdomain.com
+$ openssl s_client -connect $DOMAIN_NAME:443 -showcerts </dev/null 2>/dev/null | openssl x509 -outform PEM | sudo tee /etc/pki/ca-trust/source/anchors/$DOMAIN_NAME.crt
+$ sudo update-ca-trust
+$ sudo /bin/systemctl restart docker.service
 ```
 
 #### Docker Machine and Boot2Docker
@@ -137,17 +137,17 @@ Continue by following the steps corresponding to your chosen OS. Run the followi
 You'll need to make some persistent changes using `bootsync.sh` in your
 Boot2Docker-based virtual machine (as documented in [local customization](https://github.com/boot2docker/boot2docker/blob/master/doc/FAQ.md#local-customisation-with-persistent-partition)). To do this:
 
-1. `docker-machine ssh dev` to enter the VM
-2. `vi /var/lib/boot2docker/bootsync.sh` creates it if it doesn't exist, or edit it if it does.
-3. Install the CA cert (or the auto-generated cert) by adding the following code to your `/var/lib/boot2docker/bootsync.sh`:
+1.  `docker-machine ssh dev` to enter the VM
+2.  `vi /var/lib/boot2docker/bootsync.sh` creates it if it doesn't exist, or edit it if it does.
+3.  Install the CA cert (or the auto-generated cert) by adding the following code to your `/var/lib/boot2docker/bootsync.sh`:
 
-        ```
-        #!/bin/sh
+    ```
+    #!/bin/sh
 
-        cat /var/lib/boot2docker/server.pem >> /etc/ssl/certs/ca-certificates.crt
-        ```
+    cat /var/lib/boot2docker/server.pem >> /etc/ssl/certs/ca-certificates.crt
+    ```
 
-4. Next get the certificate from the new Docker Trusted Registry server using:
+4.  Next get the certificate from the new Docker Trusted Registry server using:
 
     ```
     $ openssl s_client -connect dtr.yourdomain.com:443 -showcerts </dev/null 2>/dev/null | openssl x509 -outform PEM | sudo tee -a /var/lib/boot2docker/server.pem
@@ -155,7 +155,7 @@ Boot2Docker-based virtual machine (as documented in [local customization](https:
 
     If your certificate chain is complicated, you can use the changes in [Pull request 807](https://github.com/boot2docker/boot2docker/pull/807/files)
 
-5. Either reboot your virtual machine, or run the following commands to
+5.  Either reboot your virtual machine, or run the following commands to
 install the server certificate. Restart the Docker daemon.
 
     ```

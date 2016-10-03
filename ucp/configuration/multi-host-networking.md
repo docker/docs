@@ -71,7 +71,7 @@ Some setups will require manually setting up engine configuration.
 To continue with this procedure, you need to know the host address values you
 used on each controller or node. This is the address used with the `install` or
 `join` subcommands to identify a node. Host addresses are used among the UCP
-nodes for network communication.  
+nodes for network communication.
 
 1. Log into your UCP dashboard as a user with `admin` privileges.
 
@@ -107,17 +107,17 @@ recover.
 
 To enable the networking feature, do the following.
 
-1. Log into the host running the UCP controller.
+1.  Log into the host running the UCP controller.
 
-2. Review the `engine-discovery` help.
+2.  Review the `engine-discovery` help.
 
     ```bash
     $ docker run --rm docker/ucp engine-discovery --help
     ```
 
-3. Leave the UCP processes running.
+3.  Leave the UCP processes running.
 
-4. Run the `engine-discovery` command.  
+4.  Run the `engine-discovery` command.
 
     The command syntax is:
 
@@ -140,7 +140,7 @@ To enable the networking feature, do the following.
       --controller 192.168.99.106 --controller 192.168.99.116 \
       --host-address 192.168.99.106
       INFO[0000] New configuration established.  Signaling the daemon to load it...
-      INFO[0001] Successfully delivered signal to daemon  
+      INFO[0001] Successfully delivered signal to daemon
     ```
 
     The `host-address` value is the the external address of the node you're
@@ -149,20 +149,20 @@ To enable the networking feature, do the following.
 
     If you specify the `--host-address` flag without an IP, the command attempts
     to discover the address of the current node.  If the command cannot discover
-    the address, it fails and prompts you to supply it:    
+    the address, it fails and prompts you to supply it:
 
     ```bash
-    FATA[0000] flag needs an argument: -host-address  
+    FATA[0000] flag needs an argument: -host-address
     ```
 
-5. Restart the Engine `daemon`.
+5.  Restart the Engine `daemon`.
 
     The Engine `daemon` is a OS service process running on each node in your
     cluster.  How you restart a service is operating-system dependent. Some
     examples appear below but keep in mind that on your system, the restart
     operation may differ. Check with your system administrator if you are not
     sure how to restart a daemon. Some example restarts include the following,
-    keep in mind your installation may be different:  
+    keep in mind your installation may be different:
 
     **Ubuntu**:
 
@@ -177,7 +177,7 @@ To enable the networking feature, do the following.
     $ sudo systemctl restart docker.service
     ```
 
-6. Review the Docker logs to check the restart.
+6.  Review the Docker logs to check the restart.
 
     The logging facilities for the Engine daemon is installation dependent. Some
     example review operations include the following, keep in mind your
@@ -195,7 +195,7 @@ To enable the networking feature, do the following.
     $ sudo journalctl -fu docker.service
     ```
 
-7. Verify that you can create and remove a custom network.
+7.  Verify that you can create and remove a custom network.
 
     ```bash
     $ docker network create -d overlay my-custom-network
@@ -226,7 +226,7 @@ production installation. You should plan accordingly.
 ## Troubleshoot container networking
 
 This section lists errors you can encounter when working with container networks
-and UCP.  
+and UCP.
 
 ### Create: failed to parse pool request for address
 
@@ -264,16 +264,18 @@ $ sudo cat /etc/docker/daemon.json
 
 If you have trouble with discovery, try these troubleshooting measures:
 
-* Review the daemon logs to ensure the daemon was started.
-* Add the `-D` (debug) to the Docker daemon start options.
-* Check your Docker daemon configuration to ensure that `--cluster-advertise` is set properly.  
-* Check your daemon configuration `--cluster-store` options is point to the
+*   Review the daemon logs to ensure the daemon was started.
+*   Add the `-D` (debug) to the Docker daemon start options.
+*   Check your Docker daemon configuration to ensure that `--cluster-advertise` is set properly.
+*   Check your daemon configuration `--cluster-store` options is point to the
 key-store `etcd://CONTROLLER_PUBLIC_IP_OR_DOMAIN:PORT` on the UCP controller.
-* Make sure the controller is accessible over the network, for example `ping CONTROLLER_PUBLIC_IP_OR_DOMAIN`.
+*   Make sure the controller is accessible over the network, for example `ping CONTROLLER_PUBLIC_IP_OR_DOMAIN`.
 A ping requires that inbound ICMP requests are allowed on the controller.
-* Stop the daemon and start it manually from the command line.
+*   Stop the daemon and start it manually from the command line.
 
-        $ sudo /usr/bin/docker daemon -D --cluster-advertise eth0:12376 --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DOMAIN:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
+    ```bash
+    $ sudo /usr/bin/docker daemon -D --cluster-advertise eth0:12376 --cluster-store etcd://CONTROLLER_PUBLIC_IP_OR_DOMAIN:12379 --cluster-store-opt kv.cacertfile=/var/lib/docker/discovery_certs/ca.pem --cluster-store-opt kv.certfile=/var/lib/docker/discovery_certs/cert.pem --cluster-store-opt kv.keyfile=/var/lib/docker/discovery_certs/key.pem
+    ```
 
 Remember, you'll need to restart the daemon each time you change the start options.
 

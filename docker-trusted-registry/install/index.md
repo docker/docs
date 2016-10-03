@@ -42,14 +42,14 @@ install, configure, and backup DTR.
 
 To install DTR:
 
-1. Download a UCP client bundle.
+1.  Download a UCP client bundle.
 
     Having a UCP client bundle allows you to run Docker commands on a UCP
     cluster.
     [Download a UCP client bundle](https://docs.docker.com/ucp/access-ucp/cli-based-access/)
     and set up your CLI client to use it.
 
-2. Run the following command to install DTR.
+2.  Run the following command to install DTR.
 
     ```bash
     # Get the certificates used by UCP
@@ -74,7 +74,7 @@ To install DTR:
     * ucp-ca, is the certificate authority used by UCP.
 
 
-3. Check that DTR is running.
+3.  Check that DTR is running.
 
     In your browser, navigate to the the Docker **Universal Control Plane**
     web UI, and navigate to the **Applications** screen. DTR should be listed
@@ -119,9 +119,9 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command. To add
 replicas:
 
 
-1. Load you UCP user bundle.
+1.  Load you UCP user bundle.
 
-2. Run the join command.
+2.  Run the join command.
 
     When you join a replica to a DTR cluster, you need to specify the
     ID of a replica that is already part of the cluster. You can find an
@@ -150,7 +150,7 @@ replicas:
     * ucp-username, and ucp-password are the credentials of a UCP administrator,
     * ucp-ca, is the certificate used by UCP.
 
-3. Check that all replicas are running.
+3.  Check that all replicas are running.
 
     In your browser, navigate to the the Docker **Universal Control Plane**
     web UI, and navigate to the **Applications** screen. All replicas should
@@ -158,7 +158,7 @@ replicas:
 
     ![](../images/install-dtr-4.png)
 
-4. Follow steps 1 to 3, to add more replicas to the DTR cluster.
+4.  Follow steps 1 to 3, to add more replicas to the DTR cluster.
 
     When configuring your DTR cluster for high-availability, you should install
     3, 5, or 7 replicas.

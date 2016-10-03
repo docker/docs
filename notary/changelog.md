@@ -13,6 +13,7 @@ title: Notary Changelog
 # Changelog
 
 ## v0.3
+
 #### 5/11/2016
 Implements root key and certificate rotation, as well as trust pinning configurations to specify known good key IDs and CAs to replace TOFU.
 Additional improvements and fixes to notary internals, and RethinkDB support.
@@ -21,7 +22,9 @@ Additional improvements and fixes to notary internals, and RethinkDB support.
 <a href="https://github.com/docker/notary/releases/tag/v0.3.0" target="_blank">v0.3 release notes</a>.
 
 ## v0.2
+
 #### 2/24/2016
+
 Adds support for
 <a href="https://github.com/theupdateframework/tuf/blob/1bed3e09a478c2c918ffbff10b9118f6e52ee129/docs/tuf-spec.txt#L387" target="_blank">delegation
 roles</a> in TUF.
@@ -33,7 +36,9 @@ Moreover, this version also adds more key management functionality to the notary
 <a href="https://github.com/docker/notary/releases/tag/v0.2.0" target="_blank">v0.2 release notes</a>.
 
 ## v0.1
+
 #### 11/15/2015
+
 Initial notary non-alpha release.
 Implements The Update Framework (TUF) with root, targets, snapshot, and timestamp roles to sign and verify content of a trusted collection.
 

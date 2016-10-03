@@ -37,7 +37,7 @@ To verify your machine meets these requirements, do the following:
 
     If you have a newer system, specifically 64bit Windows 10 Pro, with Enterprise and Education (1511 November update, Build 10586 or later), consider using [Docker for Windows](https://docs.docker.com/docker-for-windows) instead. It runs natively on the Windows, so there is no need for a pre-configured Docker QuickStart shell. It also uses Hyper-V for virtualization, so the instructions below for checking virtualization will be out of date for newer Windows systems. Full install prerequisites are provided in the Docker for Windows topic in [What to know before you install](https://docs.docker.com/docker-for-windows/#what-to-know-before-you-install).
 
-2. Make sure your Windows system supports Hardware Virtualization Technology and that virtualization is enabled.
+2.  Make sure your Windows system supports Hardware Virtualization Technology and that virtualization is enabled.
 
     #### For Windows 8 or 8.1
 
@@ -178,16 +178,17 @@ For example, if you plan to re-install Docker Machine as a part of Docker for Wi
 
 To uninstall Toolbox on Windows, do the following:
 
-1. List your machines.
-  ```
+1.  List your machines.
+
+    ```
     $ docker-machine ls
     NAME                ACTIVE   DRIVER       STATE     URL                        SWARM
-    dev                 *        virtualbox   Running   tcp://192.168.99.100:2376   
-    my-docker-machine            virtualbox   Stopped                               
-    default                      virtualbox   Stopped  
-  ```
+    dev                 *        virtualbox   Running   tcp://192.168.99.100:2376
+    my-docker-machine            virtualbox   Stopped
+    default                      virtualbox   Stopped
+    ```
 
-2. Optionally, remove each machine. For example:
+2.  Optionally, remove each machine. For example:
 
     ```
     $ docker-machine rm my-docker-machine

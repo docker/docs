@@ -146,7 +146,7 @@ start a container.
 The list of environment variables will show any that have been set on the image
 metadata - for example, using the `ENV` instruction in the Dockerfile.
 
-<TODO: image of the jenkins container>
+<!-- TODO: image of the jenkins container-->
 
 When you "Save" the changed environment variables, the container will be stopped,
 removed and re-created.

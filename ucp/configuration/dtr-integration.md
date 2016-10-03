@@ -40,8 +40,8 @@ the two can communicate.
 Before starting the configuration, you need to get the cluster root CA
 certificate used internally by UCP:
 
-1. Log in with **ssh** on a UCP controller node.
-2. Get the UCP cluster CA certificate.
+1.  Log in with **ssh** on a UCP controller node.
+2.  Get the UCP cluster CA certificate.
 
     Run the `docker/ucp dump-certs` command:
 
@@ -63,7 +63,7 @@ certificate used internally by UCP:
     -----END CERTIFICATE-----
     ```
 
-3. Save the result on your local machine.
+3.  Save the result on your local machine.
 
     Copy the resulting certificate to the `ucp-cluster-ca.pem` file,
     and store it on your local machine.
@@ -161,25 +161,25 @@ node to a private DTR repository.
 2. Use a [UCP client bundle](../access-ucp/cli-based-access.md) to run docker
 commands in the UCP cluster.
 
-3. Pull an image from Docker Hub:
+3.  Pull an image from Docker Hub:
 
     ```bash
     $ docker pull hello-world
     ```
 
-4. Retag the image:
+4.  Retag the image:
 
     ```bash
     $ docker tag hello-world:latest $DTR_DOMAIN_NAME/$USERNAME/hello-world:1
     ```
 
-5. Push the image from the UCP node to your private registry:
+5.  Push the image from the UCP node to your private registry:
 
     ```bash
     $ docker push $DTR_DOMAIN_NAME/$USERNAME/hello-world:1
     ```
 
-6. Validate that your image is now stored on DTR.
+6.  Validate that your image is now stored on DTR.
 
     When successfully pushing the image you should see a result like:
 

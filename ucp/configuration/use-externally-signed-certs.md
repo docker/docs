@@ -35,8 +35,8 @@ the cluster.
 
 To replace the server certificates used by UCP, for each controller node:
 
-1. Login into the node with ssh.
-2. In the directory where you have the keys and certificates to use, run:
+1.  Login into the node with ssh.
+2.  In the directory where you have the keys and certificates to use, run:
 
     ```bash
     # Create a container that attaches to the same volume where certificates are stored
@@ -51,7 +51,7 @@ To replace the server certificates used by UCP, for each controller node:
     $ docker rm replace-certs
     ```
 
-3. Restart the `ucp-controller` container.
+3.  Restart the `ucp-controller` container.
 
     To avoid downtime, don't restart all the `ucp-controller` containers of
     your cluster at the same time.
@@ -60,7 +60,7 @@ To replace the server certificates used by UCP, for each controller node:
     $ docker restart ucp-controller
     ```
 
-4. Let your users know.
+4.  Let your users know.
 
     After replacing the certificates your users won't be able to authenticate
     with their old client certificate bundles. Ask your users to go to the UCP
