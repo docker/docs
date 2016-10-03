@@ -24,7 +24,7 @@ use <a href="https://github.com/docker/dockercloud-haproxy" target="_blank">Dock
 
 You can configure and run the `haproxy` load balancer service from the command line using a command like the example below. (If you are using the Go quickstart, edit the `link-service` value before running the command.)
 
-```bash
+```none
 $ docker-cloud service run \
 -p 80:80/tcp \
 --role global \
@@ -48,7 +48,7 @@ dockercloud/haproxy
 
 Run the `service ps` command to check if your service is already running.
 
-```
+```none
 $ docker-cloud service ps
 NAME                 UUID      STATUS     IMAGE                                          DEPLOYED
 web                  68a6fb2c  ▶ Running  my-username/quickstart-python:latest           2 hours ago
@@ -57,7 +57,7 @@ lb                   e81f3815  ▶ Running  dockercloud/haproxy:latest          
 
 Now let's check the container for this service. Run `docker-cloud container ps`.
 
-```
+```none
 $ docker-cloud container ps
 NAME                   UUID      STATUS     IMAGE                                          RUN COMMAND          EXIT CODE  DEPLOYED        PORTS
 web-1                  6c89f20e  ▶ Running  my-username/quickstart-python:latest           python app.py                   2 hours ago     web-1.my-username.cont.dockerapp.io:49162->80/tcp
@@ -69,7 +69,7 @@ You should notice an URL endpoint in the *PORT* column for haproxy-1. In the exa
 
 If you refresh or run curl multiple times you should see requests distributed between the two containers of in the `web` service. You can see which container responds to your request in the `Hostname` section of the response.
 
-```
+```none
 $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io
 Hello Friendly Users!</br>Hostname: web-1</br>Counter: Redis Cache not found, counter disabled.%
 $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io
