@@ -36,7 +36,6 @@ To view Docker for Windows latest log, click on the `Diagnose & Feedback` menu e
 
 If you encounter an issue and the suggested troubleshoot procedures outlined below don't fix it you can generate a diagnostics report. Click on the `Diagnose & Feedback` menu entry in the systray and then on the `Upload diagnostic...` link. This will upload diagnostics to our server and provide you with a unique ID you can use in email or the forum to reference the upload.
 
-
 ## Troubleshooting
 
 ### inotify on shared drives does not work
@@ -274,9 +273,7 @@ docker app.
 
 ### Docker fails to start when firewall or anti-virus software is installed
 
-The **Comodo Firewall currently is incompatible with Hyper-V and some Windows 10
-builds** (possibly, Windows 10 Anniversary Update), which impacts Docker for
-Windows. **Other firewalls and anti-virus software might also be incompatible with these Microsoft Windows 10 buids**. The conflict typically occurs after a Windows update or new install of the firewall, and manifests as an error response from the Docker daemon and a **Docker for Windows start failure**.
+**Some firewalls and anti-virus software might be incompatible with  Microsoft Windows 10 buids** (e.g., Windows 10 Anniversary Update). The conflict typically occurs after a Windows update or new install of the firewall, and manifests as an error response from the Docker daemon and a **Docker for Windows start failure**. The Comodo Firewall was one example of this problem, but users report that software has since been updated to work with these Windows 10 builds.
 
 See the Comodo forums topics [Comodo Firewall conflict with
 Hyper-V](https://forums.comodo.com/bug-reports-cis/comodo-firewall-began-conflict-with-hyperv-t116351.0.html)
@@ -286,5 +283,5 @@ A Docker for Windows user-created issue describes the problem specifically as it
 relates to Docker: [Docker fails to start on Windows
 10](https://github.com/docker/for-win/issues/27).
 
-For a temporary workaround, uninstall the Comodo Firewall, or explore other
+For a temporary workaround, uninstall the firewall or anti-virus software, or explore other
 workarounds suggested on the forum.
