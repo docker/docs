@@ -42,7 +42,7 @@ copy that package to the nodes where you’ll install DTR.
 
 3. Login into the host where you transferred the images.
 
-4. Load the UCP images.
+4. Load the images.
 
     Once the package is on the node where you want to install DTR, you can use
     the `docker load` command, to load the images from the .tar file.
