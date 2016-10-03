@@ -49,7 +49,7 @@ Docker image names for the Notary client, the GUN format is:
 - For official images (identifiable by the "Official Repository" moniker), the
 image name as displayed on Docker Hub, prefixed with `docker.io/library/`. For
 example, if you would normally type `docker pull ubuntu` you must enter `notary
-<cmd> docker.io/library/ubuntu`.
+{cmd} docker.io/library/ubuntu`.
 - For all other images, the image name as displayed on Docker Hub, prefixed by `docker.io`.
 
 The Docker Engine client takes care of these name expansions for you so do not

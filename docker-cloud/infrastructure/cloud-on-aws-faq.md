@@ -20,14 +20,17 @@ To validate your AWS Security Credentials, Docker Cloud tries to dry-run an inst
 
 1. <a href="https://aws.amazon.com/cli/" target="_blank">Download AWS CLI</a>
 2. <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html" target="_blank">Configure the CLI</a> with your security credentials.
-2. Run the following command:
+2.  Run the following command:
+
     ```
     aws ec2 run-instances --dry-run --image-id ami-4d883350 --instance-type m3.medium
     ```
 
 This will try to dry-run an Ubuntu 14.04 LTS 64-bit in `sa-east-1` (Sao Paulo, South America). You can look for the AMI in the region you want to deploy to <a href="http://cloud-images.ubuntu.com/locator/ec2/" target="_blank">here</a>). It should show you the error message. If your configuration is correct, you will see the following message:
 
-`A client error (DryRunOperation) occurred when calling the RunInstances operation: Request would have succeeded, but DryRun flag is set.`
+```
+A client error (DryRunOperation) occurred when calling the RunInstances operation: Request would have succeeded, but DryRun flag is set.
+```
 
 ## "AWS returned an error: unauthorized operation" using instance profiles to deploy node clusters
 
@@ -67,7 +70,7 @@ In the launch node cluster view, you can choose:
 
 Add the following section to your body parameters:
 
-```
+```json
 "provider_options" = {
     "vpc": {                                                 # optional
         "id": "vpc-xxxxxxxx",                                # required

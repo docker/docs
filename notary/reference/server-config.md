@@ -370,6 +370,7 @@ We don't support completely reloading notary configuration files yet at present.
 Example:
 
 To increase logging level
+
 ```
 $ kill -s SIGUSR1 PID
 
@@ -379,6 +380,7 @@ $ docker exec -i CONTAINER_ID kill -s SIGUSR1 PID
 ```
 
 To decrease logging level
+
 ```
 $ kill -s SIGUSR2 PID
 
@@ -386,10 +388,12 @@ or
 
 $ docker exec -i CONTAINER_ID kill -s SIGUSR2 PID
 ```
+
 PID is the process id of `notary-server` and it may not the PID 1 process if you are running
 the container with some kind of wrapper startup script or something.
 
 You can get the PID of `notary-server` through
+
 ```
 $ docker exec CONTAINER_ID ps aux
 

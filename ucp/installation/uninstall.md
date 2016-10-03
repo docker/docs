@@ -32,7 +32,7 @@ In this example we’ll be running the uninstall command interactively, so that
 the command prompts for the necessary configuration values.
 You can also use flags to pass values to the uninstall command.
 
-1. Run the uninstall command.
+1.  Run the uninstall command.
 
     ```bash
     $ docker run --rm -it \
@@ -48,7 +48,7 @@ You can also use flags to pass values to the uninstall command.
     INFO[0005] Removing UCP volumes
     ```
 
-2. List the images remaining on the node.
+2.  List the images remaining on the node.
 
     ```
     $ docker images
@@ -60,7 +60,7 @@ You can also use flags to pass values to the uninstall command.
     The uninstall command removes all UCP-related images except the
     `docker/ucp` image.
 
-3. Remove the docker/ucp image.
+3.  Remove the docker/ucp image.
 
     ```
     $ docker rmi docker/ucp
@@ -71,7 +71,7 @@ You can also use flags to pass values to the uninstall command.
     Deleted: sha256:93743d5df2362466e2fe116a677ec6a4b0091bd09e889abfc9109047fcfcdebf
     ```
 
-5. Restart the Docker daemon.
+5.  Restart the Docker daemon.
 
     When you install or join a node, UCP configures the Docker engine on that
     node for multi-host networking. When uninstalling, the configuration is

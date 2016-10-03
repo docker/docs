@@ -54,6 +54,7 @@ $ brew install docker-cloud
 ```
 
 #### Validate the installation
+
 Check that the CLI installed correctly:
 
 ```bash
@@ -74,6 +75,7 @@ Password:
 Email: user@example.org
 Login succeeded!
 ```
+
 #### What's next?
 
 See the [Developer documentation](/apidocs/docker-cloud.md) for more information on using the CLI and our APIs.

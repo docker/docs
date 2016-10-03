@@ -66,9 +66,9 @@ Before running the migration, get the DTR 2.0 CA certificate used for the `--dtr
 
 To start the migration:
 
-1. Log into the host running DTR 1.4.3 using ssh.
+1.  Log into the host running DTR 1.4.3 using ssh.
 
-2. Use the docker/dtr migrate command.
+2.  Use the docker/dtr migrate command.
 
     When you run the docker/dtr migrate command, Docker pulls the necessary
     images from Docker Hub. If the the host where DTR 1.4.3 is not connected
@@ -114,19 +114,19 @@ the migrate command and should be transferred manually.
 
 To transfer the images:
 
-1. Log into the host running DTR 2.0 using ssh.
+1.  Log into the host running DTR 2.0 using ssh.
 
-2. Get the filesystem volume path DTR 2.0 stores images:
+2.  Get the filesystem volume path DTR 2.0 stores images:
 
-    ```bash
+    ```bash{% raw %}
     $ docker volume inspect --format '{{ .Mountpoint }}' $(docker volume ls -q | grep dtr-registry)
-    ```
+    {% endraw %}```
 
     The path returned will be similar to: `/var/lib/docker/volumes/dtr-registry-fa61225dc006/_data`
 
-3. Log into the host running DTR 1.4.3 using ssh.
+3.  Log into the host running DTR 1.4.3 using ssh.
 
-4. Copy the image data:
+4.  Copy the image data:
 
     ```bash
     $ scp -r /var/local/dtr/image-storage/local/* $DTR_HOST:$DTR_2_FS_VOLUME_PATH
@@ -158,9 +158,9 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command. To add
 replicas:
 
 
-1. Load you UCP user bundle.
+1.  Load you UCP user bundle.
 
-2. Run the join command.
+2.  Run the join command.
 
     When you join a replica to a DTR cluster, you need to specify the
     ID of a replica that is already part of the cluster. You can find an
@@ -189,7 +189,7 @@ replicas:
     * ucp-username, and ucp-password are the credentials of a UCP administrator,
     * ucp-ca, is the certificate used by UCP.
 
-3. Check that all replicas are running.
+3.  Check that all replicas are running.
 
     In your browser, navigate to the the Docker **Universal Control Plane**
     web UI, and navigate to the **Applications** screen. All replicas should
@@ -197,7 +197,7 @@ replicas:
 
     ![](../../images/install-dtr-4.png)
 
-4. Follow steps 1 to 3, to add more replicas to the DTR cluster.
+4.  Follow steps 1 to 3, to add more replicas to the DTR cluster.
 
     When configuring your DTR cluster for high-availability, you should install
     3, 5, or 7 replicas.
