@@ -35,7 +35,9 @@ Docker Cloud supports two types of triggers:
 
 1. Click the name of the service you want to create a trigger for
 2. Go to the detail page and scroll down to the **Triggers** section.
+
     ![](images/triggers-tab-blank.png)
+
 3. In the **Trigger name** field, enter a name for the trigger.
 4. Select a trigger type.
 5. Click the **+** (plus sign) icon.
@@ -52,6 +54,7 @@ To stop a trigger from automatically scaling or redeploying, you must revoke it.
 1. Go to the detail page of the service.
 2. Scroll down to the **Triggers** section.
 3. Click the **trashcan** icon for the trigger you want to revoke.
+
     ![](images/revoke-trigger.png)
 
 Once the trigger is revoked, it stops accepting requests.

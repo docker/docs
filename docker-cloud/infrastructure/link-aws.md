@@ -103,6 +103,7 @@ You can use the following `dockercloud-policy` to limit Docker Cloud to a specif
     The ARN string should look something like `arn:aws:iam::123456789123:role/dockercloud-role`. You'll use the ARN in the next step. If you forget to copy the ARN here, view the Role in IAM to see its related information including the ARN.
 
 9. Click **Create Role**.
+
     ![](images/aws-iam-role-2.png)
 
 
@@ -113,7 +114,9 @@ Once you've created the a `dockercloud-policy`, attached it to a
 
 1. In Docker Cloud, click **Cloud settings** at the lower left.
 2. In the Cloud Providers section, click the plug icon next to Amazon Web Services.
+
     ![](images/aws-link-account.png)
+
 3. Enter the full `Role ARN` for the role you just created.
 
     ![](images/aws-modal.png)
