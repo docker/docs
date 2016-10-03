@@ -36,20 +36,15 @@ To upgrade DTR you use the `docker/dtr upgrade` command.
     Having a UCP client bundle allows you to run Docker commands on a UCP
     cluster. Download a UCP client bundle and set up your CLI client to use it.
 
-2. Find the DTR replica Id.
-
-    When you upgrade your installation, you need to specify the Id of a replica
-    that is part of the cluster. If you have a highly-available installation,
-    you can provide the Id of any replica.
-
-    You can find the DTR replica Ids on the **Applications** page of Docker
-    Universal Control Plane.
-
-3. Pull the latest docker/dtr image.
+2. Pull the latest `docker/dtr` image.
 
     ```bash
     $ docker pull docker/dtr
     ```
+
+    If the node you're upgrading doesn't have access to the internet, you can
+    use a machine with internet connection to
+    [pull all the DTR images](../install-dtr-offline.md).
 
 4. Run the upgrade command.
 
@@ -57,18 +52,16 @@ To upgrade DTR you use the `docker/dtr upgrade` command.
 
     ```bash
     # Get the certificates used by UCP
-    $ curl -k https://$UCP_URL/ca > ucp-ca.pem
+    $ curl -k https://<ucp-url>/ca > ucp-ca.pem
 
-    $ docker run \
-      -it \
-      --rm \
+    $ docker run -it --rm \
       docker/dtr upgrade \
-        --ucp-url $UCP_URL \
-        --existing-replica-id $DTR_REPLICA_ID \
-        --ucp-username $USER \
-        --ucp-password $PASSWORD \
-        --ucp-ca "$(cat ucp-ca.pem)"
+        --ucp-cat "$(cat ucp-ca.pem)"
     ```
+
+    By default the upgrade command runs in interactive mode and prompts you for
+    any necessary information. You can also check the
+    [reference documentation](../reference/index.md) for other existing flags.
 
 ## Where to go next
 
