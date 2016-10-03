@@ -48,13 +48,14 @@ If you click **Open Issues**, this opens [Docker for Mac issues on GitHub](https
 
 ![Create issue on GitHub](images/diagnose-issue.png)
 
-You can also create a new issue directly on GitHub at https://github.com/docker/for-mac/issues. (The README for the repository is [here](https://github.com/docker/for-mac).)
+You can also create a new issue directly on GitHub at [https://github.com/docker/for-mac/issues](https://github.com/docker/for-mac/issues). (The README for the repository is [here](https://github.com/docker/for-mac).)
 
 Click [New Issue](https://github.com/docker/for-mac/issues/new) on that page (or right here &#9786;) to get a "create new issue" template prepopulated with sections for the ID and summary of your diagnostics, system and version details, description of expected and actual behavior, and steps to reproduce the issue.
 
 ![issue template](images/diagnose-d4mac-issues-template.png)
 
 <a name="logs"></a>
+
 ## Checking the logs
 
 In addition to using the diagnose and feedback option to submit logs, you can browse the logs yourself.
@@ -95,6 +96,7 @@ For example, you could construct a search for log messages sent by Docker that c
 The diagnostics and usage information to the left of the results provide auto-generated reports on packages.
 
 <a name="troubleshoot"></a>
+
 ## Troubleshooting
 
 #### Recreate or update your containers after Beta 18 upgrade
@@ -245,6 +247,7 @@ environments, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 See also [Known Issues](troubleshoot.md#known-issues) on this page, and the [FAQs](faqs.md) topic.
 
 <a name="issues"></a>
+
 ## Known issues
 
 * IPv6 is not yet supported on Docker for Mac. If you are using IPv6, and haven't upgraded to Beta 24 or v1.12.1 stable or newer, you will see a network
@@ -318,14 +321,3 @@ Alternatively you could create a plain-text TCP proxy on localhost:1234 using:
 
         sudo launchctl unload /System/Library/LaunchDaemons/org.ntp.ntpd.plist
         sudo launchctl load /System/Library/LaunchDaemons/org.ntp.ntpd.plist
-
-<hr style="color:#99CC99" />
-<ul class="media">
-  <div class="media_content">
-  <div data-mh="mh_docker_projects">
-    <h6> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback"><img src="../../images/chat.png" alt="chat icon"></a> <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">Help improve the documentation</a></h3>
-    <p>
-    Email us at <a href="mailto:feedback@docker.com?subject=Docker%20Feedback">feedback@docker.com</a>
-  </p>
-  </div>
-  </div>

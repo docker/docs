@@ -131,7 +131,7 @@ Windows to work.
 
 ### Why does Docker for Windows fail to start when firewalls or anti-virus software is installed?
 
-Comodo Firewall currently is incompatible with Hyper-V and some Windows 10 builds  (possibly, the Anniversary Update), which impacts Docker for Windows. Other firewalls and anti-virus software might also be incompatible with these Microsoft Windows 10 buids. See details and workarounds in [Docker fails to start when Comodo Firewall is installed](troubleshoot.md#docker-fails-to-start-when-comodo-firewall-is-installed) in [Troubleshooting](troubleshoot.md).
+Some firewalls and anti-virus software might be incompatible with Hyper-V and some Windows 10 builds  (possibly, the Anniversary Update), which impacts Docker for Windows. See details and workarounds in [Docker fails to start when firewall or anti-virus software is installed](troubleshoot.md#docker-fails-to-start-when-firewall-or-anti-virus-software-is-installed) in [Troubleshooting](troubleshoot.md).
 
 
 ### How do I uninstall Docker Toolbox?
@@ -140,4 +140,3 @@ You might decide that you do not need Toolbox now that you have Docker for Windo
 details on how to perform a clean uninstall of Toolbox on Windows, see [How to
 uninstall Toolbox](/toolbox/toolbox_install_windows.md#how-to-uninstall-toolbox)
 in the Toolbox Windows topics.
-
