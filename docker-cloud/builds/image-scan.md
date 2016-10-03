@@ -139,7 +139,8 @@ for a limited time. Security scanning is only available for Docker Official
 Images on Docker Hub, and for paid private repositories in Docker Cloud during
 this free period.
 
-**We invite you to try it out! Send us your feedback through our <a href="https://forums.docker.com/c/docker-cloud/docker-security-scanning" target=_blank>Docker product forums</a>.**
+<b>We invite you to try it out! Send us your feedback through our <a href="https://forums.docker.com/c/docker-cloud/docker-security-scanning" target="_blank" >Docker Product Forums</a>.</b>
+
 
 #### Will Docker Security Scanning always be available for free?
 

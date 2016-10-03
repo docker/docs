@@ -84,6 +84,7 @@ can often grant access at the same time as you link your user account. In this
 case, a **Grant access** button appears next to the organization name in the
 link accounts screen, as shown below.  If this button does not appear, you must
 manually grant the application's access.
+
 ![](images/link-source-github-org-lite.png)
 
 To manually grant Docker Cloud access to a GitHub organization:

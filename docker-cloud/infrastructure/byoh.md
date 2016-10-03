@@ -33,6 +33,7 @@ You can still run `docker` CLI commands on a host that is running the Docker Clo
 
     The dialog that appears lists the currently supported distributions of Linux, and provides a command that you can copy.
     This command includes a token that allows the agent to talk to Docker Cloud.
+
     ![](images/node-byoh-wizard-v2.png)
 
 4. Copy the command to your clipboard.

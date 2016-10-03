@@ -11,10 +11,10 @@ title: Docker Store Overview
 
 # Docker Store Overview
 
-<center>
-**The Docker Store is in private Beta. [Sign up today](https://store.docker.com/beta)!**
 
-You can also [learn more about publishing](https://success.docker.com/Store), or [apply to be a publisher](https://store.docker.com/publisher/signup).
+<center>
+<b>The Docker Store is now in public Beta!</b><br/>
+You can also <a href="https://success.docker.com/Store">learn more about publishing</a>, or <a href="https://store.docker.com/publisher/signup">apply to be a publisher</a>.
 </center>
 
 -----------------

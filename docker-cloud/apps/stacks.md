@@ -55,7 +55,9 @@ To create a stack from the Docker Cloud web interface:
 3. Click **Create**.
 4. Enter a name for the stackfile.
 5. Enter or paste the stack file in the **Stackfile** field, or drag a file to the field to upload it. (You can also click in the field to browse for and upload a file on your computer.)
+
     ![](images/stack-create.png)
+
 6. Click **Create** or **Create and deploy**.
 
 ### Create a stack using the API
@@ -97,6 +99,7 @@ To update a stack from the Docker Cloud web interface:
 
 1. Navigate to the stack you want to update.
 2. Click **Edit**.
+
     ![](images/stack-edit.png)
 3. Edit the stack file, or upload a new one from your computer.
 4. Click **Save**.

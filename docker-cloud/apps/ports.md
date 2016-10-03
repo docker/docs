@@ -32,6 +32,7 @@ If the image that you are using for your service already exposes any ports, thes
 
 1. From the **Launch new service** wizard, select the image to use.
 2. Scroll down to the **Ports** section.
+
     ![](images/exposing-port.png)
 
 The image in this example screenshot *exposes* port 80. Remember, this means
