@@ -63,7 +63,7 @@ For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-
 
 * **README FIRST for Docker Toolbox and Docker Machine users**: If you are already running Docker on your machine, first read [Docker for Mac vs. Docker Toolbox](docker-toolbox.md) to understand the impact of this installation on your existing setup, how to set your environment for Docker for Mac, and how the two products can coexist.
 
-*  **Relationship to Docker Machine**: Installing Docker for Mac does not affect machines you created with Docker Machine. You'll get the option to copy containers and images from your local `default` machine (if one exists) to the new Docker for Mac <a href="https://github.com/docker/HyperKit/" target="_blank">HyperKit</a> VM.
+*  **Relationship to Docker Machine**: Installing Docker for Mac does not affect machines you created with Docker Machine. You'll get the option to copy containers and images from your local `default` machine (if one exists) to the new Docker for Mac <a href="https://github.com/docker/HyperKit/" target="_blank">HyperKit</a> VM. When you are running Docker for Mac, you do not need Docker Machine nodes running at all locally (or anywhere else). With Docker for Mac, you have a new, native virtualization system running (HyperKit) which takes the place of the VirtualBox system. To learn more, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 
 * **System Requirements**: Docker for Mac will launch only if all these requirements are met.
 
