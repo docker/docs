@@ -20,7 +20,7 @@ You can use add a public SSH key to the *authorized_keys* file in each of your n
 
 First, generate a keypair using `ssh-keygen -t rsa`. If you have an existing keypair you prefer to use, you can skip this step, copy the public key to your clipboard and continue on to [create the authorizedkeys stack](ssh-into-a-node.md#create-a-stack-in-docker-cloud).
 
-```
+```none
 $ ssh-keygen -t rsa
 Generating public/private rsa key pair.
 Enter file in which to save the key (/Users/borjaburgos/.ssh/id_rsa): dockercloud
@@ -89,7 +89,7 @@ Next, get the node's IP from Docker Cloud from the Node details page.
 
 With that IP number, you can then SSH to the node as `root`.
 
-```
+```none
 $ ssh -i ~/dockercloud root@104.236.69.138
 The authenticity of host '104.236.69.138 (104.236.69.138)' can't be established.
 RSA key fingerprint is 4b:22:71:39:53:4a:88:51:4b:a7:2e:ed:03:dd:a3:7f.
