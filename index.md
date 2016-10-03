@@ -10,8 +10,6 @@ layout: docs
 
 {% include content/docker_elevator_pitch.md %}
 
-<a href="getting-started/index.md" class="button darkblue-btn">Learn the Docker Platform</a>
-
 {% include content/typical_docker_workflow.md %}
 
 ## Components

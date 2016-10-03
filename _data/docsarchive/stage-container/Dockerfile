@@ -1,14 +1,15 @@
-FROM starefossen/ruby-node:2-5
+FROM starefossen/ruby-node
 
-RUN gem install github-pages
-
+RUN mkdir -p /docs
 VOLUME /docs
 
 EXPOSE 4000
 
 WORKDIR /docs
 
-CMD bundle && jekyll clean && jekyll serve -H 0.0.0.0 -P 4000
+RUN gem install github-pages
+
+CMD jekyll clean && jekyll serve -H 0.0.0.0 -P 4000
 
 # To run:
 #

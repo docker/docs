@@ -1,18 +1,6 @@
 toc:
-- title: What is the Docker Platform?
+- title: Welcome to the Docs
   path: /
-- sectiontitle: Getting Started with Docker
-  section:
-  - path: /getting-started/
-    title: "Part 1: Orientation and Setup"
-  - path: /getting-started/part2/
-    title: "Part 2: Creating and Building Your App"
-  - path: /getting-started/part3/
-    title: "Part 3: Stateful, Multi-container Applications"
-  - path: /getting-started/part4/
-    title: Part 4
-  - path: /getting-started/part5/
-    title: Part 5
 - sectiontitle: Docker Engine
   section:
   - sectiontitle: Install
