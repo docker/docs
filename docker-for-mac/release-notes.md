@@ -786,362 +786,149 @@ lead to `Docker.app` not starting on reboot
 
 **New Features and Upgrades**
 
-  <style type="text/css">
-  .tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
-  .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
-  .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
-  .tg .tg-vn4c{background-color:#D2E4FC}
-  </style>
-  <table class="tg">
-    <tr>
-      <th class="tg-031e">Component</th>
-      <th class="tg-031e">Description</th>
-    </tr>
-    <tr>
-      <td class="tg-vn4c">File System/Sharing</td>
-      <td class="tg-vn4c">Support `inotify` events so that file system events on the
-      Mac will trigger file system activations inside Linux containers</td>
-    </tr>
-    <tr>
-      <td class="tg-031e">Docker Machine</td>
-      <td class="tg-031e">Install Docker Machine as a part of Docker for Mac install in `/usr/local`</td>
-    </tr>
-    <tr>
-      <td class="tg-vn4c">Getting Started and About</td>
-      <td class="tg-vn4c">- Added  animated popover window to help first-time users get started<br>- Added a Beta icon to  About box</td>
-    </tr>
-  </table>
+- File system/sharing: Support `inotify` events so that file system events on the Mac will trigger file system activations inside Linux containers
 
-**Known issues**
+- Install Docker Machine as a part of Docker for Mac install in ``/usr/local`
 
-  <style type="text/css">
-  .tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
-  .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
-  .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
-  .tg .tg-vn4c{background-color:#D2E4FC}
-  </style>
-  <table class="tg">
-    <tr>
-      <th class="tg-031e">Component</th>
-      <th class="tg-031e">Description</th>
-    </tr>
-    <tr>
-      <td class="tg-vn4c">Starting Docker</td>
-      <td class="tg-vn4c">There is a race on startup between Docker and networking that can lead to `Docker.app` not starting on reboot.<br><br>The workaround is to restart the application manually.
-      </td>
-    </tr>
-    <tr>
-      <td class="tg-031e">OS X version support</td>
-      <td class="tg-031e">`Docker.app` sometimes uses 200% CPU after OS X wakes up from sleep mode.
-      The issue is being investigated. <br><br>The workaround is to restart
-      `Docker.app`. <br>
-      </td>
-    </tr>
-    <tr>
-      <td class="tg-vn4c">VPN/Hostnet</td>
-      <td class="tg-vn4c">In VPN mode, the `-p` option needs to be explicitly of the form
-      `-p <host port>:<container port>`. `-p <port>` and `-P` will not
-      work yet.
-      </td>
-    </tr>
-  </table>
+- Added animated popover window to help first-time users get started
+
+- Added a Beta icon to About box
+
+**Known Issues**
+
+- There is a race on startup between Docker and networking that can lead to `Docker.app` not starting on reboot. The workaround is to restart the application manually.
+
+- `Docker.app` sometimes uses 200% CPU after OS X wakes up from sleep mode. The issue is being investigated. The workaround is to restart `Docker.app`.
+
+- VPN/Hostnet: In VPN mode, the `-p` option needs to be explicitly of the form
+`-p <host port>:<container port>`. `-p <port>` and `-P` will not
+work yet.    
 
 **Bug fixes and minor changes**
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
-.tg .tg-vn4c{background-color:#D2E4FC}
-</style>
-<table class="tg">
-  <tr>
-    <th class="tg-031e">Component</th>
-    <th class="tg-031e">Description</th>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Hostnet/VPN mode</td>
-    <td class="tg-vn4c">Fixed Moby DNS resolver failures by proxying the "Recursion Available" flag.<br>
-    </td>
-  </tr>
-  <tr>
-    <td class="tg-031e">IP addresses</td>
-    <td class="tg-031e">`docker ps` shows IP address rather than `docker.local`.
-    </td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">OS X version support</td>
-    <td class="tg-vn4c">- Re-enabled support for OS X Yosemite version 10.10 <br>- Ensured binaries are built for 10.10 rather than 10.11.
-    </td>
-  </tr>
-  <tr>
-    <td class="tg-031e">Application startup</td>
-    <td class="tg-031e">- Fixed "Notification Center"-related crash on startup<br>- Fixed watchdog crash on startup</td>
-  </tr>
-</table>
+- Hostnet/VPN mode: Fixed Moby DNS resolver failures by proxying the "Recursion Available" flag.
+
+- `docker ps` shows IP address rather than `docker.local`
+
+- Re-enabled support for OS X Yosemite version 10.10
+
+- Ensured binaries are built for 10.10 rather than 10.11
+
+- Fixed “Notification Center”-related crash on startup
+
+- Fixed watchdog crash on startup
+
 
 ### Beta 3 Release (2016-03-15 1.10.3-beta3)
 
 **New Features and Upgrades**
 
-  <style type="text/css">
-  .tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
-  .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
-  .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
-  .tg .tg-vn4c{background-color:#D2E4FC}
-  </style>
-  <table class="tg">
-    <tr>
-      <th class="tg-031e">Component</th>
-      <th class="tg-031e">Description</th>
-    </tr>
-    <tr>
-      <td class="tg-vn4c">File System</td>
-      <td class="tg-vn4c">Improved file sharing write speed in OSXFS</td>
-    </tr>
-    <tr>
-      <td class="tg-031e">User space networking</td>
-      <td class="tg-031e">Renamed `bridged` mode to `nat` mode</td>
-    </tr>
-    <tr>
-      <td class="tg-vn4c">Debugging</td>
-      <td class="tg-vn4c">Docker runs in debug mode by default for new installs
-      </td>
-    </tr>
-    <tr>
-      <td class="tg-031e">Docker Engine</td>
-      <td class="tg-031e">Upgraded to 1.10.3</td>
-    </tr>
-  </table>
+- Improved file sharing write speed in OSXFS
+
+- User space networking: Renamed `bridged` mode to `nat` mode
+
+- Docker runs in debug mode by default for new installs
+
+- Docker Engine: Upgraded to 1.10.3
 
 **Bug fixes and minor changes**
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
-.tg .tg-vn4c{background-color:#D2E4FC}
-</style>
-<table class="tg">
-  <tr>
-    <th class="tg-031e">Component</th>
-    <th class="tg-031e">Description</th>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">GUI</td>
-    <td class="tg-vn4c">Auto update automatically checks for new versions again<br>
-    </td>
-  </tr>
-  <tr>
-    <td class="tg-031e">File System</td>
-    <td class="tg-031e">- Fixed OSXFS chmod on sockets <br>
-    - FixED OSXFS EINVAL from `open` using O_NOFOLLOW</td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Hypervisor</td>
-    <td class="tg-vn4c">Hypervisor stability fixes, resynced with upstream repository <br></td>
-  </tr>
-  <tr>
-    <td class="tg-031e">Hostnet/VPN mode</td>
-    <td class="tg-031e">- Fixed get/set VPN mode in Preferences (GUI) <br>
-    - Added more verbose logging on errors in `nat` mode<br>
-    - Show correct forwarding details in `docker ps/inspect/port` in `nat` mode<br>
-    </td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Tokens</td>
-    <td class="tg-vn4c">New lines ignored in token entry field</td>
-  </tr>
-  <tr>
-    <td class="tg-031e">Feedback</td>
-    <td class="tg-031e">Feedback mail has app version in subject field</td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Licensing</td>
-    <td class="tg-vn4c">Clarified open source licenses</td>
-  </tr>
-  <tr>
-    <td class="tg-031e">Crash reporting and error handling</td>
-    <td class="tg-031e">- Fixed HockeyApp crash reporting <br>
-    - Fatal GUI errors now correctly terminate the app again<br>
-    - Fix proxy panics on EOF when decoding JSON<br>
-    - Fix long delay/crash when switching from `hostnet` to `nat` mode
-    </td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Logging</td>
-    <td class="tg-vn4c">- Moby logs included in diagnose upload<br>
-    - App version included in logs on startup
-    </td>
-  </tr>
-</table>
+- GUI: Auto update automatically checks for new versions again
 
+- File System
+  - Fixed OSXFS chmod on sockets
+  - FixED OSXFS EINVAL from `open` using O_NOFOLLOW
+
+
+- Hypervisor stability fixes, resynced with upstream repository
+
+- Hostnet/VPN mode
+  - Fixed get/set VPN mode in Preferences (GUI)
+  - Added more verbose logging on errors in `nat` mode
+  - Show correct forwarding details in `docker ps/inspect/port` in `nat` mode
+
+
+- New lines ignored in token entry field
+
+- Feedback mail has app version in subject field
+
+- Clarified open source licenses
+
+- Crash reporting and error handling
+  - Fixed HockeyApp crash reporting
+  - Fatal GUI errors now correctly terminate the app again
+  - Fix proxy panics on EOF when decoding JSON
+  - Fix long delay/crash when switching from `hostnet` to `nat` mode
+
+
+- Logging
+  - Moby logs included in diagnose upload
+  - App version included in logs on startup
 
 ### Beta 2 Release (2016-03-08 1.10.2-beta2)
 
 **New Features and Upgrades**
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
-.tg .tg-vn4c{background-color:#D2E4FC}
-</style>
-<table class="tg">
-  <tr>
-    <th class="tg-031e">Component</th>
-    <th class="tg-031e">Description</th>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">GUI</td>
-    <td class="tg-vn4c">Add VPN mode/`hostnet` to Preferences<br></td>
-  </tr>
-  <tr>
-    <td class="tg-031e"></td>
-    <td class="tg-031e">Add disable Time Machine backups of VM disk image to Preferences</td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">CLI</td>
-    <td class="tg-vn4c">Added `pinata` configuration tool for experimental Preferences</td>
-  </tr>
-  <tr>
-    <td class="tg-031e">File System</td>
-    <td class="tg-031e">Add guest-to-guest FIFO and socket file support</td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Notary</td>
-    <td class="tg-vn4c">Upgraded to version 0.2</td>
-  </tr>
-</table>
+- GUI
+  - Add VPN mode/`hostnet` to Preferences
+  - Add disable Time Machine backups of VM disk image to Preferences
 
-**Bug fixes**
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
-.tg .tg-vn4c{background-color:#D2E4FC}
-</style>
-<table class="tg">
-  <tr>
-    <th class="tg-031e">Component</th>
-    <th class="tg-031e">Description</th>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">File System</td>
-    <td class="tg-vn4c">Fixed data corruption bug during cp (use of sendfile/splice)</td>
-  </tr>
-  <tr>
-    <td class="tg-031e">GUI</td>
-    <td class="tg-031e">Fixed About box to contain correct version string</td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Hostnet/VPN mode</td>
-    <td class="tg-vn4c">- Stability fixes and tests<br>- Fixed DNS issues when changing networks</td>
-  </tr>
-  <tr>
-    <td class="tg-031e">Moby</td>
-    <td class="tg-031e">Cleaned up Docker startup code</td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Linking and dependencies</td>
-    <td class="tg-vn4c">Fixed various problems</td>
-  </tr>
-  <tr>
-    <td class="tg-031e">Logging</td>
-    <td class="tg-031e">Various improvements</td>
-  </tr>
-</table>
+- Added `pinata` configuration tool for experimental Preferences
 
-<p>&nbsp;</p>
+- File System: Add guest-to-guest FIFO and socket file support
+
+- Upgraded Notary to version 0.2
+
+
+**Bug fixes and minor changes**
+
+- Fixed data corruption bug during cp (use of sendfile/splice)
+- Fixed About box to contain correct version string
+
+- Hostnet/VPN mode
+  - Stability fixes and tests
+  - Fixed DNS issues when changing networks
+
+
+- Cleaned up Docker startup code related to Moby
+
+- Fixed various problems with linking and dependencies
+
+- Various improvements to logging
 
 ### Beta 1 Release (2016-03-01 1.10.2-b1)
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
-.tg .tg-vn4c{background-color:#D2E4FC}
-</style>
-<table class="tg">
-  <tr>
-    <th class="tg-031e">Component</th>
-    <th class="tg-031e">Description </th>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">GUI</td>
-    <td class="tg-vn4c">Added dialog to explain why we need admin rights</td>
-  </tr>
-  <tr>
-    <td class="tg-031e"></td>
-    <td class="tg-031e">Removed shutdown/quit window</td>
-  </tr>
-  <tr>
-    <td class="tg-031e"></td>
-    <td class="tg-031e">Improved machine migration</td>
-  </tr>
-  <tr>
-    <td class="tg-031e"></td>
-    <td class="tg-031e">Added "Help" option in menu to open documentation web pages</td>
-  </tr>
-  <tr>
-    <td class="tg-031e"></td>
-    <td class="tg-031e">Added license agreement</td>
-  </tr>
-  <tr>
-    <td class="tg-031e"></td>
-    <td class="tg-031e">Added MixPanel support</td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Crash Reports</td>
-    <td class="tg-vn4c">Add HockeyApp crash reporting</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">Task Manager</td>
-    <td class="tg-yw4l">Improve signal handling</td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Logging</td>
-    <td class="tg-vn4c">Use ISO timestamps with microsecond precision</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l">Clean up logging format</td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Packaging</td>
-    <td class="tg-vn4c">Create /usr/local if it doesn't exist</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l">docker-uninstall improvements</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l">Remove docker-select as it's no longer used</td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Hypervisor</td>
-    <td class="tg-vn4c">Add PID file</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l">Networking reliability improvements</td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Hostnet</td>
-    <td class="tg-vn4c">Fixed port forwarding issue</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l">Stability fixes</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l">Fixed setting hostname</td>
-  </tr>
-  <tr>
-    <td class="tg-vn4c">Symlinks</td>
-    <td class="tg-vn4c">Fixed permissions on `usr/local` symbolic links</td>
-  </tr>
-</table>
+- GUI
+  - Added dialog to explain why we need admin rights
+  - Removed shutdown/quit window
+  - Improved machine migration
+  - Added “Help” option in menu to open documentation web pages
+  - Added license agreement
+  - Added MixPanel support
+
+
+- Add HockeyApp crash reporting
+- Improve signal handling on task manager
+- Use ISO timestamps with microsecond precision for logging
+- Clean up logging format
+
+- Packaging
+  - Create /usr/local if it doesn’t exist
+  - docker-uninstall improvements
+  - Remove docker-select as it’s no longer used
+
+
+- Hypervisor
+  - Add PID file
+  - Networking reliability improvements
+
+
+- Hostnet
+
+  - Fixed port forwarding issue
+  - Stability fixes
+  - Fixed setting hostname
+
+
+- Fixed permissions on `usr/local` symbolic links
