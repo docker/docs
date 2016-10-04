@@ -14,14 +14,15 @@ release: build
 	docker rm -f $(CONTAINER_NAME) || true
 	docker run --name $(CONTAINER_NAME) -it \
 		dockercloud/api-docs middleman build
-	docker cp $(CONTAINER_NAME):/app/build ../cloud-api-output/
-	rm -r ../cloud-api-output/docker-cloud
-	mv ../cloud-api-output/build ../cloud-api-output/docker-cloud
-	cp ../cloud-api-output/docker-cloud/index.html ../cloud-api-output/layouts/single.html
+	docker cp $(CONTAINER_NAME):/app/build ../
+	rm -r ../docker-cloud
+	mv ../build ../docker-cloud
+	cp ../docker-cloud/index.html ../layouts/single.html
 	# defuse text that looks like a go template
-	grep -rl '{{' ../cloud-api-output/* | xargs sed -i~ "s/{{/{ {/g"
-	rm ../cloud-api-output/docker-cloud/includes/node.html~
-	rm ../cloud-api-output/docker-cloud/includes/stack.html~
-	rm ../cloud-api-output/docker-cloud/index.html~
-	rm ../cloud-api-output/layouts/single.html~
+	# commenting out until we know that we're not using Hugo anywhere & can remove
+#	grep -rl '{ {' ../docker-cloud/* | xargs sed -i~ "s/{ {/{ {/g"
+	#rm source/includes/node.md~
+	#rm source/includes/stack.md~
+	#rm ../source/index.html~
+	#rm ../source/layouts/single.html~
 	docker rm $(CONTAINER_NAME)
