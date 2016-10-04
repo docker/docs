@@ -1057,38 +1057,38 @@ toc:
       title: upgrade
     - path: /machine/reference/url/
       title: url
-    - sectiontitle: Drivers
-      section:
-      - path: /machine/drivers/os-base/
-        title: Driver options and operating system defaults
-      - path: /machine/drivers/aws/
-        title: Amazon Web Services
-      - path: /machine/drivers/digital-ocean/
-        title: Digital Ocean
-      - path: /machine/drivers/generic/
-        title: Generic
-      - path: /machine/drivers/gce/
-        title: Google Compute Engine
-      - path: /machine/drivers/soft-layer/
-        title: IBM Softlayer
-      - path: /machine/drivers/azure/
-        title: Microsoft Azure
-      - path: /machine/drivers/hyper-v/
-        title: Microsoft Hyper-V
-      - path: /machine/drivers/openstack/
-        title: OpenStack
-      - path: /machine/drivers/virtualbox/
-        title: Oracle VirtualBox
-      - path: /machine/drivers/rackspace/
-        title: Rackspace
-      - path: /machine/drivers/vm-fusion/
-        title: VMware Fusion
-      - path: /machine/drivers/vm-cloud/
-        title: VMware vCloud Air
-      - path: /machine/drivers/vsphere/
-        title: VMware vSphere
-      - path: /machine/drivers/exoscale/
-        title: exoscale
+  - sectiontitle: Drivers
+    section:
+    - path: /machine/drivers/os-base/
+      title: Driver options and operating system defaults
+    - path: /machine/drivers/aws/
+      title: Amazon Web Services
+    - path: /machine/drivers/digital-ocean/
+      title: Digital Ocean
+    - path: /machine/drivers/generic/
+      title: Generic
+    - path: /machine/drivers/gce/
+      title: Google Compute Engine
+    - path: /machine/drivers/soft-layer/
+      title: IBM Softlayer
+    - path: /machine/drivers/azure/
+      title: Microsoft Azure
+    - path: /machine/drivers/hyper-v/
+      title: Microsoft Hyper-V
+    - path: /machine/drivers/openstack/
+      title: OpenStack
+    - path: /machine/drivers/virtualbox/
+      title: Oracle VirtualBox
+    - path: /machine/drivers/rackspace/
+      title: Rackspace
+    - path: /machine/drivers/vm-fusion/
+      title: VMware Fusion
+    - path: /machine/drivers/vm-cloud/
+      title: VMware vCloud Air
+    - path: /machine/drivers/vsphere/
+      title: VMware vSphere
+    - path: /machine/drivers/exoscale/
+      title: exoscale
   - path: /machine/completion/
     title: Command-line Completion
 - sectiontitle: Docker Store
