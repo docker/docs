@@ -9,7 +9,9 @@ incremental: true
 permalink: pretty
 safe: false
 lsi: false
-exclude: [vendor, bin]
+exclude:
+  - vendor
+  - bin
 
 gems:
   - jekyll-redirect-from
