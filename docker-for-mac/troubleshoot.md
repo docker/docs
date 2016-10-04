@@ -298,6 +298,8 @@ Alternatively you could create a plain-text TCP proxy on localhost:1234 using:
   	- `ember build`
   	- Symfony
   	- Magento
+    - Zend Framework
+    - PHP applications that use [Composer](https://getcomposer.org) to install dependencies in a ```vendor``` folder 
 
     As a work-around for this behavior, you can put vendor or third-party library directories in Docker volumes, perform temporary file system
     operations outside of `osxfs` mounts, and use third-party tools like
