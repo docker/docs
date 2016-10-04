@@ -98,5 +98,5 @@ in gray.
 
 ## Learn More
 
-* Read about how swarm mode [nodes](services.md) work.
+* Read about how swarm mode [nodes](nodes.md) work.
 * Learn how [PKI](pki.md) works in swarm mode.
