@@ -1,0 +1,8 @@
+version: "2"
+services:
+  docs:
+    image: docs/docstage
+    ports:
+     - "4000:4000"
+    volumes:
+     - "./:/usr/src/app"

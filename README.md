@@ -17,8 +17,10 @@ You have three options:
     ```bash
     git clone https://github.com/docker/docker.github.io.git
     cd docker.github.io
-    docker run -ti -v "$PWD":/usr/src/app -p 4000:4000 docs/docstage
+    docker-compose up
     ```
+
+    If you haven't got Docker Compose installed, [follow these installation instructions](https://docs.docker.com/compose/install/).
 3.  (Edit entirely in the browser, no local clone) Fork this repo in GitHub, change your fork's repository name to `YOUR_GITHUB_USERNAME.github.io`, and make any changes.
 
 In the first two options, the site will be staged at `http://localhost:4000` (unless Jekyll is behaving in some non-default way).
