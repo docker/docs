@@ -971,7 +971,7 @@ toc:
     title: The Docker Cloud CLI
   - path: /docker-cloud/docker-errors-faq/
     title: Known Issues in Docker Cloud
-  - path: /apidocs/docker-cloud/
+  - path: /apidocs/cloud-api-output/docker-cloud/
     title: API reference
   - path: /docker-cloud/release-notes/
     title: Release Notes
