@@ -7,9 +7,11 @@ title: Install Docker Machine
 {% assign machineversion = '0.12.2' %}
 
 On macOS and Windows, Machine is installed along with other Docker products when
-you install the [Docker for Mac](/docker-for-mac/index.md), [Docker for
-Windows](/docker-for-windows/index.md), or [Docker
-Toolbox](/toolbox/overview.md).
+you install the Docker Toolbox. For details on installing Docker Toolbox, see
+the <a href="https://docs.docker.com/installation/mac/" target="_blank">macOS
+installation</a> instructions or <a
+href="https://docs.docker.com/docker-for-windows/" target="_blank">Windows
+installation</a> instructions.
 
 If you want only Docker Machine, you can install the Machine binaries directly
 by following the instructions in the next section. You can find the latest
@@ -19,7 +21,12 @@ on GitHub.
 
 ## Installing Machine directly
 
+<<<<<<< HEAD
 1.  Install [Docker](/engine/installation/index.md){: target="_blank" class="_" }.
+=======
+1.  Install <a href="https://docs.docker.com/installation/"
+    target="_blank">the Docker binary</a>.
+>>>>>>> FreeBSD: add build support
 
 2.  Download the Docker Machine binary and extract it to your PATH.
 
@@ -38,7 +45,11 @@ on GitHub.
     sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
     ```
 
+<<<<<<< HEAD
     If you are running with **Windows** with [Git BASH](https://git-for-windows.github.io/){: target="_blank" class="_"}:
+=======
+    If you are running Windows with git bash
+>>>>>>> FreeBSD: add build support
 
     ```console
     $ if [[ ! -d "$HOME/bin" ]]; then mkdir -p "$HOME/bin"; fi && \
@@ -82,6 +93,7 @@ prompt, add `$(__docker_machine_ps1)` to your `PS1` setting in `~/.bashrc`.
 PS1='[\u@\h \W$(__docker_machine_ps1)]\$ '
 ```
 
+<<<<<<< HEAD
 You can find additional documentation in the comments at the [top of each script](https://github.com/docker/machine/tree/master/contrib/completion/bash){: target="_blank" class="_"}.
 
 ## How to uninstall Docker Machine
@@ -100,6 +112,9 @@ To uninstall Docker Machine:
   want to save and migrate existing machines to a [Docker for
   Mac](/docker-for-mac/index.md) or [Docker for
   Windows](/docker-for-windows/index.md) environment, for example.
+=======
+You can find additional documentation in the comments at the <a href="https://github.com/docker/machine/tree/master/contrib/completion/bash" target="_blank">top of each script</a>.
+>>>>>>> FreeBSD: add build support
 
 >**Note**: As a point of information, the `config.json`, certificates,
 and other data related to each virtual machine created by `docker-machine`
@@ -114,5 +129,10 @@ servers.
 -   [Docker Machine overview](overview.md)
 -   Create and run a Docker host on your [local system using virtualization](get-started.md)
 -   Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
+<<<<<<< HEAD
 -  [Docker Machine driver reference](/machine/drivers/index.md)
 -  [Docker Machine subcommand reference](/machine/reference/index.md)
+=======
+-   <a href="https://docs.docker.com/machine/drivers/" target="_blank">Docker Machine driver reference</a>
+-   <a href="https://docs.docker.com/machine/reference/" target="_blank">Docker Machine subcommand reference</a>
+>>>>>>> FreeBSD: add build support
