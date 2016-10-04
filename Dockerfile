@@ -1,12 +1,11 @@
-FROM starefossen/ruby-node
+FROM starefossen/ruby-node:2-4
 
-RUN mkdir -p /docs
-VOLUME /docs
+RUN git clone https://www.github.com/docker/docker.github.io docs
+
+RUN gem install --no-document github-pages jekyll-github-metadata
 
 EXPOSE 4000
 
-WORKDIR /docs
+EXPOSE 4000
 
-RUN gem install github-pages
-
-CMD jekyll clean && jekyll serve -H 0.0.0.0 -P 4000
+CMD jekyll serve --source docs -d docs/_site -H 0.0.0.0 -P 4000
