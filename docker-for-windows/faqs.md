@@ -108,6 +108,15 @@ For more information and a temporary workaround, see [inotify on shared drives
 does not work](troubleshoot.md#inotify-on-shared-drives-does-not-work) in
 [Troubleshooting](troubleshoot.md).
 
+### Are symlinks supported?
+
+Docker for Windows supports symbolic links (symlinks) created within containers.
+Symbolic link (symlinks) created within containers and across containers will
+resolve.
+Symlinks created outside of containers (e.g., on the host) will not work in  containers.
+
+To learn more about the reasons for this limitation, see this issue on GitHub: [Symlinks don't work as expected](https://github.com/docker/for-win/issues/109#issuecomment-251307391).
+
 ### Why does Docker for Windows sometimes lose network connectivity (e.g., `push`/`pull` doesn't work)?
 
 Networking is not yet fully stable across network changes and system sleep
