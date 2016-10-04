@@ -1,0 +1,9 @@
+version: "2"
+services:
+  docs:
+    image: starefossen/github-pages
+    command: jekyll serve -d /_site --watch -H 0.0.0.0 -P 4000
+    ports:
+     - "4000:4000"
+    volumes:
+     - "./:/usr/src/app"

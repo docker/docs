@@ -14,7 +14,7 @@ You have three options:
 2.  (Slow performance on Mac/Windows, fast setup) Clone this repo, and from within the directory, run:
 
     ```bash
-    docker run -ti -v "$PWD":/usr/src/app -p "4000:4000" starefossen/github-pages
+    docker-compose up
     ```
 3.  (Edit entirely in the browser, no local clone) Fork this repo in GitHub, change your fork's repository name to `YOUR_GITHUB_USERNAME.github.io`, and make any changes.
 
