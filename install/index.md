@@ -18,8 +18,8 @@ weight=20
 # Install Docker Trusted Registry
 
 Docker Trusted Registry (DTR) is a containerized application that runs on a
-Docker Universal Control Plane (UCP) cluster. It can be installed on-premises
-or on a cloud infrastructure.
+swarm managed by Docker Universal Control Plane (UCP). It can be installed
+on-premises or on a cloud infrastructure.
 
 Use these instructions to install DTR.
 
@@ -30,10 +30,11 @@ infrastructure has all the [requirements DTR needs to run](system-requirements.m
 
 ## Step 2. Install UCP
 
-Since DTR requires a Docker Universal Control Plane (UCP) cluster
-to run, you need to install UCP first.
-[Learn how to install UCP](https://docs.docker.com/ucp/installation/install-production/). Make sure that the node you install DTR on is already joined to the UCP cluster.
+Since DTR requires Docker Universal Control Plane (UCP)
+to run, you need to install UCP on all the nodes where you plan to install DTR.
+[Learn how to install UCP](https://docs.docker.com/ucp/installation/install-production/).
 
+Make sure all the nodes you plan on installing DTR are being managed by UCP.
 
 ## Step 3. Install DTR
 
@@ -44,34 +45,25 @@ To install DTR:
 
 1. Download a UCP client bundle.
 
-    Having a UCP client bundle allows you to run Docker commands on a UCP
-    cluster.
+    Having a UCP client bundle allows you to run Docker commands on a swarm
+    being managed by UCP.
     [Download a UCP client bundle](https://docs.docker.com/ucp/access-ucp/cli-based-access/)
     and set up your CLI client to use it.
 
-2. Run the following command to install DTR.
+2. Run the following commands to install DTR.
 
     ```bash
     # Get the certificates used by UCP
-    $ curl -k https://$UCP_HOST/ca > ucp-ca.pem
+    $ curl -k https://<ucp-url>/ca > ucp-ca.pem
 
     # Install DTR
     $ docker run -it --rm \
       docker/dtr install \
-      --ucp-url $UCP_URL \
-      --ucp-node $NODE_HOSTNAME \
-      --dtr-external-url $DTR_PUBLIC_IP \
-      --ucp-username $USER --ucp-password $PASSWORD \
       --ucp-ca "$(cat ucp-ca.pem)"
     ```
 
-    Where:
-
-    * ucp-url, is the URL of the UCP controller,
-    * ucp-node, is the hostname of the UCP node where DTR will be installed,
-    * dtr-external-url, is the public IP or domain name where DTR can be reached,
-    * ucp-username, and ucp-password are the credentials of a UCP administrator,
-    * ucp-ca, is the certificate authority used by UCP.
+    The install command has other flags for customizing DTR at install time.
+    Check the [reference documentation to learn more](../reference/install.md).
 
 
 3. Check that DTR is running.
@@ -113,11 +105,13 @@ This step is optional.
 To set up DTR for [high availability](../high-availability/index.md),
 you can add more replicas to your DTR cluster. Adding more replicas allows you
 to load-balance requests across all replicas, and keep DTR working if a
-replica fails. Each replica must be located on a node already joined to the UCP cluster.
+replica fails.
+
+For high-availability you should set 3, 5, or 7 DTR replicas. The nodes where
+you're going to install these replicas also need to be managed by UCP.
 
 To add replicas to a DTR cluster, use the `docker/dtr join` command. To add
 replicas:
-
 
 1. Load you UCP user bundle.
 
@@ -131,24 +125,12 @@ replicas:
 
     ```bash
     # Get the certificates used by UCP
-    $ curl -k https://$UCP_HOST/ca > ucp-ca.pem
+    $ curl -k https://<ucp-url>/ca > ucp-ca.pem
 
     $ docker run -it --rm \
       docker/dtr join \
-      --ucp-url $UCP_URL \
-      --ucp-node $UCP_NODE \
-      --existing-replica-id $REPLICA_TO_JOIN \
-      --ucp-username $USER --ucp-password $PASSWORD \
       --ucp-ca "$(cat ucp-ca.pem)"
     ```
-
-    Where:
-
-    * ucp-url, is the URL of the UCP controller,
-    * ucp-node, is the node on the ucp cluster where the DTR  replica will be installed,
-    * existing-replica-id, is the ID of the DTR replica you want to replicate,
-    * ucp-username, and ucp-password are the credentials of a UCP administrator,
-    * ucp-ca, is the certificate used by UCP.
 
 3. Check that all replicas are running.
 
@@ -157,12 +139,6 @@ replicas:
     be displayed.
 
     ![](../images/install-dtr-4.png)
-
-4. Follow steps 1 to 3, to add more replicas to the DTR cluster.
-
-    When configuring your DTR cluster for high-availability, you should install
-    3, 5, or 7 replicas.
-    [Learn more about high availability](../high-availability/index.md)
 
 ## See also
 
