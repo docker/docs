@@ -2,7 +2,7 @@ FROM starefossen/ruby-node:2-4
 
 RUN git clone https://www.github.com/docker/docker.github.io docs
 
-RUN gem install --no-document github-pages jekyll-github-metadata
+RUN gem install --no-document github-pages
 
 EXPOSE 4000
 
