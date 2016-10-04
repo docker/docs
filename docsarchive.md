@@ -27,8 +27,8 @@ following locations.
 
 {% for item in site.data.docsarchive.docker-compose %}
 
-### {{ item[0] }}
+### [{{ item[0] }}]
 
-Docs for {{ item[0] }} are at [http://54.71.194.30:{{ item[1].ports[0] | replace:':4000','' }}](http://54.71.194.30:{{ item[1].ports[0] | replace:':4000','' }})
+Docs for {{ item[0] }} are at [/{{ item[0] }}](http://54.71.194.30:{{ item[1].ports[0] | replace:':4000','' }})
 
 {% endfor %}
