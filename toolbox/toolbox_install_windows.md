@@ -39,21 +39,21 @@ To verify your machine meets these requirements, do the following:
 
 2.  Make sure your Windows system supports Hardware Virtualization Technology and that virtualization is enabled.
 
-    #### For Windows 8 or 8.1
+    <br>
+    **For Windows 8 or 8.1**
 
-	  Choose **Start > Task Manager** and navigate to the **Performance** tab.
+    Choose **Start > Task Manager** and navigate to the **Performance** tab.
 	  Under **CPU** you should see the following:
 
-      ![Release page](images/virtualization.png)
+    ![Release page](images/virtualization.png)
 
     If virtualization is not enabled on your system, follow the manufacturer's instructions for enabling it.
 
-    ### For Windows 7
+    <br>
+    **For Windows 7**
 
-	  Run the <a href="http://www.microsoft.com/en-us/download/details.aspx?id=592"
-target="_blank"> Microsoft® Hardware-Assisted Virtualization Detection Tool</a>
-and follow the on-screen instructions.
-
+    Run the [Microsoft® Hardware-Assisted Virtualization Detection Tool](http://www.microsoft.com/en-us/download/details.aspx?id=592) and follow the on-screen instructions.
+    <br><br>
 3. Verify your Windows OS is 64-bit (x64)
 
    How you do this verification depends on your Windows version.  For details, see the Windows
