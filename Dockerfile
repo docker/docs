@@ -1,11 +1,7 @@
-FROM starefossen/ruby-node:2-4
+FROM starefossen/github-pages:onbuild
 
-RUN git clone https://www.github.com/docker/docker.github.io docs
+ONBUILD RUN git clone https://www.github.com/docker/docker.github.io docs
 
-RUN gem install --no-document github-pages
+ONBUILD WORKDIR docs
 
-EXPOSE 4000
-
-EXPOSE 4000
-
-CMD jekyll serve --source docs -d docs/_site -H 0.0.0.0 -P 4000
+ONBUILD COPY . /usr/src/app
