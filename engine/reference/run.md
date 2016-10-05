@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/run/
 description: Configure containers at runtime
 keywords:
 - docker, run, configure,  runtime
