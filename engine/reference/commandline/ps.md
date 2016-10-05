@@ -148,6 +148,7 @@ $ docker ps -a --filter 'exited=137'
 CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                       PORTS               NAMES
 b3e1c0ed5bfe        ubuntu:latest       "sleep 1000"           12 seconds ago      Exited (137) 5 seconds ago                       grave_kowalevski
 a2eb5558d669        redis:latest        "/entrypoint.sh redi   2 hours ago         Exited (137) 2 hours ago                         sharp_lalande
+```
 
 Any of these events result in a `137` status:
 
