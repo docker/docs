@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/
 description: Docker Engine reference
 keywords:
 - Engine
