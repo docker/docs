@@ -1,11 +1,11 @@
 ---
-description: exoscale driver for machine
+description: Exoscale driver for machine
 keywords:
 - machine, exoscale, driver
 menu:
   main:
     parent: smn_machine_drivers
-title: exoscale
+title: Exoscale
 ---
 
 # Exoscale
