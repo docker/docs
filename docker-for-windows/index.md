@@ -268,7 +268,7 @@ To get a popup menu with application options, right-click the whale:
 
 The **Settings** dialogs provide options to allow Docker auto-start, automatically check for updates, share local drives with Docker containers, enable VPN compatibility, manage CPUs and memory Docker uses, restart Docker, or perform a factory reset.
 
-**Beta 26** includes an option to switch between Windows and Linux conatiners. See [Switch between Windows and Linux containers (Beta 26)](index.md#switch-between-windows-and-linux-containers-beta-26). This is not yet available on stable builds.
+**Beta 26 and newer** include an option to switch between Windows and Linux conatiners. See [Switch between Windows and Linux containers (Beta feature)](index.md#switch-between-windows-and-linux-containers-beta-feature). This is not yet available on stable builds.
 
 ![Beta 26 popup with switch for Windows or Linux containers](images/config-popup-menu-win-switch-containers.png)
 
@@ -296,6 +296,8 @@ Share your local drives (volumes) with Docker for Windows, so that they are avai
 You will be asked to provide your Windows system username and password (domain user) to apply shared drives. You can select an option to have Docker store the credentials so that you don't have to re-enter them every time.
 
 Permissions to access shared drives are tied to the credentials you provide here. If you run `docker` commands and tasks under a different username than the one used here to set up sharing, your containers will not have permissions to access the mounted volumes.
+
+>**Tip:** Shared drives are only required for volume mounting [Linux containers](#switch-between-windows-and-linux-containers-beta-feature), not Windows containers.
 
 See also [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes) in Troubleshooting.
 
@@ -356,13 +358,15 @@ For a full list of options on the Docker daemon, see <a href="https://docs.docke
 
 Note that updating these settings requires a reconfiguration and reboot of the Linux VM.
 
-### Switch between Windows and Linux containers (Beta 26)
+### Switch between Windows and Linux containers (Beta feature)
 
 Starting with Beta 26, you can select which daemon (Linux or Windows) the Docker CLI talks to. Select **Switch to Windows containers** to toggle to Windows containers. Select **Switch to Linux containers**.
 
 Microsoft Developer Network has preliminary/draft information on Windows containers [here](https://msdn.microsoft.com/en-us/virtualization/windowscontainers/about/about_overview).
 
 This feature is not yet available on stable builds.
+
+See also [Shared Drives](#shared-drives)
 
 ### Diagnose and Feedback
 

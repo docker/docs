@@ -175,24 +175,22 @@ See also, [Hypervisor Framework Reference](https://developer.apple.com/library/m
 
 * IPv6 workaround to auto-filter DNS addresses - IPv6 is not yet supported on Docker for Mac, which typically manifests as a network timeout when running `docker` commands that need access to external network servers (e.g., `docker pull busybox`).
 
-        ```
         $ docker pull busybox
         Using default tag: latest
         Pulling repository docker.io/library/busybox
         Network timed out while trying to connect to https://index.docker.io/v1/repositories/library/busybox/images. You may want to check your internet connection or if you are behind a proxy.
-        ```
 
     Starting with v1.12.1, 2016-09016 on the stable channel, and Beta 24 on the beta channel, a workaround is provided that auto-filters out the IPv6 addresses in DNS server lists and enables successful network accesss. For example, `2001:4860:4860::8888` would become `8.8.8.8`. So, the only workaround action needed for users is to [upgrade to Docker for Mac stable v1.12.1 or newer, or Beta 24 or newer](index.md#download-docker-for-mac).
 
     On releases with the workaround included to filter out / truncate IPv6 addresses from the DNS list, the above command should run properly:
 
-        ```
+
         $ docker pull busybox
         Using default tag: latest
         latest: Pulling from library/busybox
         Digest: sha256:a59906e33509d14c036c8678d687bd4eec81ed7c4b8ce907b888c607f6a1e0e6
         Status: Image is up to date for busy box:latest
-        ```
+
 
     To learn more, see these issues on GitHub and Docker for Mac forums:
 
@@ -200,7 +198,10 @@ See also, [Hypervisor Framework Reference](https://developer.apple.com/library/m
 
   * [ERROR: Network timed out while trying to connect to index.docker.io](https://forums.docker.com/t/error-network-timed-out-while-trying-to-connect-to-index-docker-io/17206)
 
+  <p></p>
+
 * If Docker for Mac fails to install or start properly:
+
   * Make sure you quit Docker for Mac before installing a new version of the application ( <img src="../images/whale-x.png"> --> **Quit Docker**). Otherwise, you will get an "application in use" error when you try to copy the new app from the `.dmg` to `/Applications`.
 
   * Restart your Mac to stop / discard any vestige of the daemon running from the previously installed version.
@@ -211,14 +212,11 @@ See also, [Hypervisor Framework Reference](https://developer.apple.com/library/m
 
 * If `docker` commands aren't working properly or as expected:
 
-    Make sure you are not using the legacy Docker Machine environment in your shell
-or command window. You do not need `DOCKER_HOST` set, so unset it as it may be
-pointing at another Docker (e.g. VirtualBox). If you use bash, `unset
+  * Make sure you are not using the legacy Docker Machine environment in your shell or command window. You do not need `DOCKER_HOST` set, so unset it as it
+may be pointing at another Docker (e.g. VirtualBox). If you use bash, `unset
 ${!DOCKER_*}` will unset existing `DOCKER` environment variables you have set.
-For other shells, unset each environment variable individually as described in
-[Setting up to run Docker for
-Mac](docker-toolbox.md#setting-up-to-run-docker-for-mac) in [Docker for Mac vs.
-Docker Toolbox](docker-toolbox.md).
+
+  * For other shells, unset each environment variable individually as described in [Setting up to run Docker for Mac](docker-toolbox.md#setting-up-to-run-docker-for-mac) in [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 
 <p></p>
 
@@ -255,6 +253,8 @@ timeout when you run `docker` commands that need access to external network
 servers. The aforementioned releases include a workaround for this because
 Docker for Mac does not yet support IPv6. See "IPv6 workaround to auto-filter DNS addresses" in
 [Workarounds for common problems](troubleshoot.md#workarounds-for-common-problems).
+
+<p></p>
 
 * You might encounter errors when using `docker-compose up` with Docker for Mac (`ValueError: Extra Data`). We've identified this is likely related to data and/or events being passed all at once rather than one by one, so sometimes the data comes back as 2+ objects concatenated and causes an error.
 
@@ -294,14 +294,16 @@ Alternatively you could create a plain-text TCP proxy on localhost:1234 using:
   repeated scans of large directory trees, may suffer from poor
   performance. Applications that behave in this way include:
 
-  	- `rake`
-  	- `ember build`
-  	- Symfony
-  	- Magento
-    - Zend Framework
-    - PHP applications that use [Composer](https://getcomposer.org) to install dependencies in a ```vendor``` folder 
+  - `rake`
+  - `ember build`
+  - Symfony
+  - Magento
+  - Zend Framework
+  - PHP applications that use [Composer](https://getcomposer.org) to install dependencies in a ```vendor``` folder
 
-    As a work-around for this behavior, you can put vendor or third-party library directories in Docker volumes, perform temporary file system
+<p></p>
+
+  As a work-around for this behavior, you can put vendor or third-party library directories in Docker volumes, perform temporary file system
     operations outside of `osxfs` mounts, and use third-party tools like
     Unison or `rsync` to synchronize between container directories and
     bind-mounted directories. We are actively working on `osxfs`
@@ -314,12 +316,12 @@ Alternatively you could create a plain-text TCP proxy on localhost:1234 using:
 
         docker run --rm --privileged alpine hwclock -s
 
-  	Or, to resolve both issues, you can add the local clock as a low-priority (high stratum) fallback NTP time source for the host. To do this, edit the host's `/etc/ntp-restrict.conf` to add:
+    Or, to resolve both issues, you can add the local clock as a low-priority (high stratum) fallback NTP time source for the host. To do this, edit the host's `/etc/ntp-restrict.conf` to add:
 
         server 127.127.1.1              # LCL, local clock
         fudge  127.127.1.1 stratum 12   # increase stratum
 
-  	Then restart the NTP service with:
+    Then restart the NTP service with:
 
         sudo launchctl unload /System/Library/LaunchDaemons/org.ntp.ntpd.plist
         sudo launchctl load /System/Library/LaunchDaemons/org.ntp.ntpd.plist

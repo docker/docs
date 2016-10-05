@@ -30,9 +30,15 @@ This topic also has more information about the two channels.
 
 A: Two different download channels are available for Docker for Windows:
 
-* The stable channel provides a general availability release-ready installer for a fully baked and tested, more reliable app. The stable version of Docker for Windows comes with the latest released version of Docker Engine.  The release schedule is synched with Docker Engine releases and hotfixes.
+* The stable channel provides a general availability release-ready installer for a fully baked and tested, more reliable app. The stable version of Docker
+for Windows comes with the latest released version of Docker Engine.  The
+release schedule is synched with Docker Engine releases and hotfixes.
 
-* The beta channel provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of Docker Engine. Bugs, crashes and issues are more likely to occur with the beta app, but you get a chance to preview new functionality, experiment, and provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month.
+* The beta channel provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of
+Docker Engine. Bugs, crashes and issues are more likely to occur with the beta
+app, but you get a chance to preview new functionality, experiment, and provide
+feedback as the apps evolve. Releases are typically more frequent than for
+stable, often one or more per month.
 
 **Q: Can I switch back and forth between stable and beta versions of Docker for Windows?**
 
@@ -83,13 +89,26 @@ in [Docker Swarm](/engine/swarm/index.md). A good place to start is the
 You can find the list of frequent issues in
 [Logs and Troubleshooting](troubleshoot.md).
 
-If you do not find a solution in Troubleshooting, browse issues on [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) or create a new one. You can also create new issues based on diagnostics. To learn more about running diagnostics and about Docker for Windows GitHub issues, see [Diagnose and Feedback](index.md#diagnose-and-feedback).
+If you do not find a solution in Troubleshooting, browse issues on [Docker for
+Windows issues on GitHub](https://github.com/docker/for-win/issues) or create a
+new one. You can also create new issues based on diagnostics. To learn more
+about running diagnostics and about Docker for Windows GitHub issues, see
+[Diagnose and Feedback](index.md#diagnose-and-feedback).
 
-[Docker for Windows forum](https://forums.docker.com/c/docker-for-windows) provides discussion threads as well, and you can create discussion topics there, but we recommend using the GitHub issues over the forums for better tracking and response.
+[Docker for Windows forum](https://forums.docker.com/c/docker-for-windows)
+provides discussion threads as well, and you can create discussion topics there,
+but we recommend using the GitHub issues over the forums for better tracking and
+response.
 
 ### Can I use Docker for Windows with new swarm mode?
 
-Yes! You can use Docker for Windows to test single-node features of [swarm mode](/engine/swarm/index.md) introduced with Docker Engine 1.12, including initializing a swarm with a single node, creating services, and scaling services. Docker “Moby” on Hyper-V will serve as the single swarm node. You can also use Docker Machine, which comes with Docker for Windows, to create and experiment with a multi-node swarm. Check out the tutorial at [Get started with swarm mode](/engine/swarm/swarm-tutorial/index.md).
+Yes! You can use Docker for Windows to test single-node features of [swarm
+mode](/engine/swarm/index.md) introduced with Docker Engine 1.12, including
+initializing a swarm with a single node, creating services, and scaling
+services. Docker “Moby” on Hyper-V will serve as the single swarm node. You can
+also use Docker Machine, which comes with Docker for Windows, to create and
+experiment with a multi-node swarm. Check out the tutorial at [Get started with
+swarm mode](/engine/swarm/swarm-tutorial/index.md).
 
 ### How do I connect to the remote Docker Engine API?
 
@@ -117,6 +136,14 @@ Symlinks created outside of containers (e.g., on the host) will not work in  con
 
 To learn more about the reasons for this limitation, see this issue on GitHub: [Symlinks don't work as expected](https://github.com/docker/for-win/issues/109#issuecomment-251307391).
 
+### How do I add custom CA certificates?
+
+Starting with Docker for Windows 1.12.1, 2016-09-16 (stable) and Beta 26 (2016-09-14 1.12.1-beta26), all trusted CAs (root or intermediate) are supported. Docker recognizes certs stored under Trust Root Certification Authorities or Intermediate Certification Authorities.
+
+Docker for Windows creates a certificate bundle of all user-trusted CAs based on the Windows certificate store, and appends it to Moby trusted certificates. So if an enterprise SSL certificate is trusted by the user on the host, it will be trusted by Docker for Windows.
+
+To learn more, see the GitHub issue [Allow user to add custom Certificate Authorities ](https://github.com/docker/for-win/issues/48).
+
 ### Why does Docker for Windows sometimes lose network connectivity (e.g., `push`/`pull` doesn't work)?
 
 Networking is not yet fully stable across network changes and system sleep
@@ -140,8 +167,12 @@ Windows to work.
 
 ### Why does Docker for Windows fail to start when firewalls or anti-virus software is installed?
 
-Some firewalls and anti-virus software might be incompatible with Hyper-V and some Windows 10 builds  (possibly, the Anniversary Update), which impacts Docker for Windows. See details and workarounds in [Docker fails to start when firewall or anti-virus software is installed](troubleshoot.md#docker-fails-to-start-when-firewall-or-anti-virus-software-is-installed) in [Troubleshooting](troubleshoot.md).
-
+Some firewalls and anti-virus software might be incompatible with Hyper-V and
+some Windows 10 builds  (possibly, the Anniversary Update), which impacts Docker
+for Windows. See details and workarounds in [Docker fails to start when firewall
+or anti-virus software is
+installed](troubleshoot.md#docker-fails-to-start-when-firewall-or-anti-virus-software-is-installed)
+in [Troubleshooting](troubleshoot.md).
 
 ### How do I uninstall Docker Toolbox?
 

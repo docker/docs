@@ -32,7 +32,7 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 >
 > The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
 
-> https://download.docker.com/win/beta/InstallDocker.msi
+> [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
 > This problem is fixed as of Beta 23 for subsequent auto-updates.
 
@@ -138,7 +138,7 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 >
 > The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
 
-> https://download.docker.com/win/beta/InstallDocker.msi
+> [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
 > This problem is fixed as of Beta 23 for subsequent auto-updates.
 
@@ -176,7 +176,7 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 >
 > The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
 
-> https://download.docker.com/win/beta/InstallDocker.msi
+> [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
 > This problem is fixed as of Beta 23 for subsequent auto-updates.
 
@@ -209,7 +209,7 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 >
 > The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
 
-> https://download.docker.com/win/beta/InstallDocker.msi
+> [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
 > This problem is fixed as of Beta 23 for subsequent auto-updates.
 
@@ -235,7 +235,7 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 >
 > The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
 
-> https://download.docker.com/win/beta/InstallDocker.msi
+> [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
 > This problem is fixed as of Beta 23 for subsequent auto-updates.
 
@@ -262,7 +262,7 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 >
 > The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
 
-> https://download.docker.com/win/beta/InstallDocker.msi
+> [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
 
 > This problem is fixed as of Beta 23 for subsequent auto-updates.
 
