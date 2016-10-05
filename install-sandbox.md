@@ -87,7 +87,7 @@ Set up the nodes for your evaluation:
     ```
     $ docker-machine create -d virtualbox \
     --virtualbox-memory "2000" \
-    --virtualbox-disk-size "5000" node1 \
+    --virtualbox-disk-size "5000" node1
     ```
 
     When you create your virtual host you specify the memory and disk size
@@ -196,7 +196,7 @@ host for the controller works fine.
     supplied to replace it with the actual IP address.
 
     The first time you run the `ucp` tool, the `docker run` command pulls the
-    UCP bootstrapper image from Docker Hub. The tool downloads the packages it
+    UCP bootstrapper image from Docker Cloud. The tool downloads the packages it
     needs, and verifies that your system will support a UCP installation.
 
 4. Enter a password for UCP when prompted, and then confirm it.
@@ -214,8 +214,8 @@ host for the controller works fine.
     individual "leaf certificates."
 
     When it completes, the `ucp` tool prompts you to log in into the UCP web
-    interface when it completes, and gives you its location. You'll do this so
-    you can install a license in the next step.
+    interface and gives you its location. You'll do this in the next stepo so
+    you can install a license.
 
 ## Step 3. License your installation
 
@@ -395,23 +395,6 @@ Now that you have your DTR instance up and running, we'll link it to your UCP in
 * [Install UCP for production](installation/install-production.md).
 
 
-<!--
-## Step N + ?: Allow Docker to touch insecure registries?
-
-Now, we're going to make sure that our UCP instance running on node1 can pull images from this self-signed registry on node2. We do this by specifying that there is one insecure registry that we'll allow the Docker instance on `node1` (the UCP node) to connect to.  And we'll specify this by editing the configuration file where docker-machine stores `node1`'s configuration details.
-
-1. Edit the file found at `~/.docker/machine/machines/node1/config.json` using your preferred text editor.
-    For example `$ vi ~/.docker/machine/machines/node1/config.json`
-
-2. Locate `InsecureRegistry` key in `EngineOptions` section, and add your DTR instance's IP between the brackets, enclosed in quotes.
-    For example, `"InsecureRegistry": ["192.168.99.100"],`
-
-3. Save your changes to the file and exit.
-4. Run the command `docker-machine provision node1` to update `node1`'s configuration with the new `InsecureRegistry` setting.
-
-This allows you to push docker images to, and pull docker images from, the registry on `node2`.
-
--->
 
 <!-- Wat.
 Take a minute and explore UCP. At this point, you have a single controller
