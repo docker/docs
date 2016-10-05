@@ -1248,8 +1248,7 @@ The output of the final `pwd` command in this `Dockerfile` would be
     ARG <name>[=<default value>]
 
 The `ARG` instruction defines a variable that users can pass at build-time to
-the builder with the `docker build` command using the `--build-arg
-<varname>=<value>` flag. If a user specifies a build argument that was not
+the builder with the `docker build` command using the`--build-arg <varname>=<value>` flag. If a user specifies a build argument that was not
 defined in the Dockerfile, the build outputs an error.
 
 ```
@@ -1337,7 +1336,7 @@ useful interactions between `ARG` and `ENV` instructions:
 ```
 
 Unlike an `ARG` instruction, `ENV` values are always persisted in the built
-image. Consider a docker build without the --build-arg flag:
+image. Consider a docker build without the `--build-arg` flag:
 
 ```
 $ docker build Dockerfile
@@ -1363,8 +1362,7 @@ corresponding `ARG` instruction in the Dockerfile.
 * `NO_PROXY`
 * `no_proxy`
 
-To use these, simply pass them on the command line using the `--build-arg
-<varname>=<value>` flag.
+To use these, simply pass them on the command line using the `--build-arg <varname>=<value>` flag.
 
 ### Impact on build caching
 
