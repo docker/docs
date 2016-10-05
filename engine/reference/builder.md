@@ -1248,9 +1248,9 @@ The output of the final `pwd` command in this `Dockerfile` would be
     ARG <name>[=<default value>]
 
 The `ARG` instruction defines a variable that users can pass at build-time to
-the builder with the `docker build` command using the `--build-arg
-<varname>=<value>` flag. If a user specifies a build argument that was not
-defined in the Dockerfile, the build outputs an error.
+the builder with the `docker build` command using the
+`--build-arg <varname>=<value>` flag. If a user specifies a build argument
+that was not defined in the Dockerfile, the build outputs an error.
 
 ```
 One or more build-args were not consumed, failing build.
