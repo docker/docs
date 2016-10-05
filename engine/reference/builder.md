@@ -1363,8 +1363,11 @@ corresponding `ARG` instruction in the Dockerfile.
 * `NO_PROXY`
 * `no_proxy`
 
-To use these, simply pass them on the command line using the `--build-arg
-<varname>=<value>` flag.
+To use these, simply pass them on the command line using the flag:
+
+```
+--build-arg <varname>=<value>
+```
 
 ### Impact on build caching
 
