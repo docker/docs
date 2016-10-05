@@ -49,6 +49,8 @@ Currently, `inotify` does not work on Docker for Windows. This will become evide
 
 ### Verify domain user has permissions for shared drives (volumes)
 
+>**Tip:** Shared drives are only required for volume mounting [Linux containers](index.md#switch-between-windows-and-linux-containers-beta-feature), not Windows containers.
+
 Permissions to access shared drives are tied to the username and password you use to set up shared drives. (See [Shared Drives](index.md#shared-drives).) If you run `docker` commands and tasks under a different username than the one used to set up shared drives, your containers will not have permissions to access the mounted volumes. The volumes will show as empty.
 
 The solution to this is to switch to the domain user account and reset credentials on shared drives.
