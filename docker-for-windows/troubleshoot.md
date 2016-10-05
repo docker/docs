@@ -89,6 +89,10 @@ Here is an example of how to de-bug this problem, given a scenario where you sha
 
 See also, the related issue on GitHub, [Mounted volumes are empty in the container](https://github.com/docker/for-win/issues/25).
 
+### Understand symlinks limitations
+
+Symlinks will work within and across containers. However, symlinks created outside of containers (for example, on the host) will not work. To learn more, see [Are symlinks supported?](faqs.md#are-symlinks-supported) in the FAQs.
+
 ### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 
 Any file destined to run inside a container must use Unix style `\n` line endings. This includes files referenced at the command line for builds and in RUN commands in Docker files.
