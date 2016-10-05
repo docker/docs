@@ -1,21 +1,20 @@
 <!--[metadata]>
 +++
-title ="Release Notes"
-description="Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions."
+title ="Release notes for previous versions"
+description="Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the previous versions."
 keywords = ["Docker, UCP", "Release notes", "Versions"]
 [menu.main]
-identifier="ucp_rnotes"
-parent="mn_ucp"
-weight=110
+identifier="ucp-release-notes-previous"
+parent="ucp_menu_release_notes"
+weight=10
 +++
 <![end-metadata]-->
 
-# UCP Release Notes
+## Release notes for previous versions
 
 Here you can learn about new features, bug fixes, breaking changes and
-known issues for each UCP version.
-You can then use [the upgrade instructions](installation/upgrade-major.md), to
-upgrade your installation to the latest release.
+known issues for older UCP versions. Check the [release notes for the
+latest UCP release](index.md).
 
 ## Version 1.1.4
 
@@ -412,6 +411,3 @@ the regular nodes, followed by the controller nodes. Also, make sure you
 use `ucp uninstall` command from version 1.0:
 
     docker run --rm -it --name ucp -v /var/run/docker.sock:/var/run/docker.sock docker/ucp:1.0.0 uninstall -i
-
-After uninstalling, you can [Install UCP on a sandbox](install-sandbox.md),
-or [Install UCP for production](installation/install-production.md).

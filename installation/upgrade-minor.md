@@ -18,7 +18,7 @@ This page guides you in upgrading Docker Universal Control Plane (UCP) to
 version 1.1.
 
 Before upgrading to a new version of UCP, check the
-[release notes](../release_notes.md) for the version you are upgrading to.
+[release notes](../release-notes/index.md) for the version you are upgrading to.
 There you'll find information about the new features, breaking changes, and
 other relevant information for upgrading to a particular version.
 
@@ -97,4 +97,4 @@ are upgraded, upgrade existing worker nodes. To upgrade a node:
 
 ## Where to go next
 
-* [UCP release notes](../release_notes.md)
+* [UCP release notes](../release-notes/index.md)
