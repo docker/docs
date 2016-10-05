@@ -12,6 +12,8 @@ menu:
 title: Network containers
 ---
 
+{% raw %}
+
 # Network containers
 
 If you are working your way through the user guide, you just built and ran a
@@ -261,3 +263,5 @@ The `ping` shows it is contacting a different IP address, the address on the `my
 ## Next steps
 
 Now that you know how to network containers, see [how to manage data in containers](dockervolumes.md).
+
+{% endraw %}

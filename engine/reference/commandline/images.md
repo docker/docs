@@ -8,6 +8,8 @@ menu:
 title: images
 ---
 
+{% raw %}
+
 # images
 
 ```markdown
@@ -274,3 +276,5 @@ can use:
     746b819f315e        postgres                  9.3
     746b819f315e        postgres                  9.3.5
     746b819f315e        postgres                  latest
+
+{% endraw %}

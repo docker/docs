@@ -12,6 +12,8 @@ menu:
 title: Run a simple application
 ---
 
+{% raw %}
+
 # Run a simple application
 
 In the ["*Hello world in a container*"](dockerizing.md) you launched your
@@ -320,3 +322,5 @@ Until now you've only used images that you've downloaded from Docker Hub. Next,
 you can get introduced to building and sharing our own images.
 
 Go to [Working with Docker Images](dockerimages.md).
+
+{% endraw %}

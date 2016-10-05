@@ -8,6 +8,8 @@ menu:
 title: service inspect
 ---
 
+{% raw %}
+
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
 
 # service inspect
@@ -153,3 +155,5 @@ $ docker service inspect --format='{{.Spec.Mode.Replicated.Replicas}}' redis
 * [service scale](service_scale.md)
 * [service ps](service_ps.md)
 * [service update](service_update.md)
+
+{% endraw %}
