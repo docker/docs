@@ -1,4 +1,6 @@
 ---
+aliases: 
+  - /userguide/
 description: Introduction to user guide
 identifier: engine_guide_intro
 keywords:
