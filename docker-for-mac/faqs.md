@@ -97,18 +97,32 @@ If you are working with applications like [Apache Maven](https://maven.apache.or
 
 The Mac has a changing IP address (or none if you have no network access). Our current recommendation is to attach an unused IP to the `lo0` interface on the Mac so that containers can connect to this address.
 
-For a full explanation and examples, see [I want to connect from a container to a service on the host](networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host) under [Known Limitations, Use Cases, and Workarounds](networking.md#known-limitations-use-cases-and-workarounds) in the Networking topic.
+For a full explanation and examples, see [I want to connect from a container to
+a service on the
+host](networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host)
+under [Known Limitations, Use Cases, and
+Workarounds](networking.md#known-limitations-use-cases-and-workarounds) in the
+Networking topic.
 
 ### How do I to connect to a container from the Mac?
 
 Our current recommendation is to publish a port, or to connect from another container. Note that this is what you have to do even on Linux if the container is on an overlay network, not a bridge network, as these are not routed.
 
-For a full explanation and examples, see [I want to connect to a container from the Mac](networking.md#i-want-to-connect-to-a-container-from-the-mac) under [Known Limitations, Use Cases, and Workarounds](networking.md#known-limitations-use-cases-and-workarounds) in the Networking topic.
+For a full explanation and examples, see [I want to connect to a container from
+the Mac](networking.md#i-want-to-connect-to-a-container-from-the-mac) under
+[Known Limitations, Use Cases, and
+Workarounds](networking.md#known-limitations-use-cases-and-workarounds) in the
+Networking topic.
+
+### How do I add custom CA certificates?
+
+Starting with Docker for Mac 1.12.1, 2016-09-16 (stable) and Beta 27 Release Notes (2016-09-28 1.12.2-rc1-beta27), all trusted certificate authorities (CAs) (root or intermediate) are supported.
+
+Docker for Mac creates a certificate bundle of all user-trusted CAs based on the Mac Keychain, and appends it to Moby trusted certificates. So if an enterprise SSL certificate is trusted by the user on the host, it will be trusted by Docker for Mac.
 
 ### What are system requirements for Docker for Mac?
 
 Note that you need a Mac that supports hardware virtualization, which is most non ancient ones; i.e., use OS X `10.10.3+` or `10.11` (OS X Yosemite or OS X El Capitan). See also "What to know before you install" in [Getting Started](index.md).
-
 
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 
