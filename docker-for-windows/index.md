@@ -378,7 +378,7 @@ This uploads (sends) the logs to Docker.
 
 ![Diagnose problems and Feedback](images/diagnose-feedback-id-win.png)
 
-To create a new issue directly on GitHub, open [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) in your web browser and follow the instructions in the README. Click [New Issue](https://github.com/docker/for-win/issues/new) on that page (or right here &#9786;) to get a "create new issue" template prepopulated with sections for the ID and summary of your diagnostics, system and version details, description of expected and actual behavior, and steps to reproduce the issue.
+To create a new issue directly on GitHub, open [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) in your web browser and follow the instructions in the README. Click [New Issue](https://github.com/docker/for-win/issues/new) on that page to get a "create new issue" template prepopulated with sections for the ID and summary of your diagnostics, system and version details, description of expected and actual behavior, and steps to reproduce the issue.
 
 ![issue template](images/diagnose-d4win-issues-template.png)
 
