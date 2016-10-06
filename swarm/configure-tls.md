@@ -76,32 +76,38 @@ CA (external or corporate) and certificates can follow along and complete the
 later steps that require installing and using certificates. It is `not`
 intended as a model for how to deploy production-worthy CA.
 
-1. Logon to the terminal of your CA server and elevate to root.
+1.  Logon to the terminal of your CA server and elevate to root.
 
-        $ sudo su
+    ```
+    $ sudo su
+    ```
 
-2. Create a private key called `ca-priv-key.pem` for the CA:
+2.  Create a private key called `ca-priv-key.pem` for the CA:
 
-        # openssl genrsa -out ca-priv-key.pem 2048
-        Generating RSA private key, 2048 bit long modulus
-        ...........................................................+++
-        .....+++
-        e is 65537 (0x10001)
+    ```
+    # openssl genrsa -out ca-priv-key.pem 2048
+    Generating RSA private key, 2048 bit long modulus
+    ...........................................................+++
+    .....+++
+    e is 65537 (0x10001)
+    ```
 
-3. Create a public key called `ca.pem` for the CA.
+3.  Create a public key called `ca.pem` for the CA.
 
     The public key is based on the private key created in the previous step.
 
-        # openssl req -config /usr/lib/ssl/openssl.cnf -new -key ca-priv-key.pem -x509 -days 1825 -out ca.pem
-        You are about to be asked to enter information that will be incorporated
-        into your certificate request.
-        What you are about to enter is what is called a Distinguished Name or a DN.
-        There are quite a few fields but you can leave some blank
-        For some fields there will be a default value,
-        If you enter '.', the field will be left blank.
-        -----
-        Country Name (2 letter code) [AU]:US
-        <output truncated>
+    ```
+    # openssl req -config /usr/lib/ssl/openssl.cnf -new -key ca-priv-key.pem -x509 -days 1825 -out ca.pem
+    You are about to be asked to enter information that will be incorporated
+    into your certificate request.
+    What you are about to enter is what is called a Distinguished Name or a DN.
+    There are quite a few fields but you can leave some blank
+    For some fields there will be a default value,
+    If you enter '.', the field will be left blank.
+    -----
+    Country Name (2 letter code) [AU]:US
+    <output truncated>
+    ```
 
 You have now configured a CA server with a public and private keypair. You can inspect the contents of each key. To inspect the private key:
 
@@ -117,24 +123,26 @@ To inspect the public key (cert):
 
 The following command shows the partial contents of the CA's public key.
 
-    # openssl x509 -in ca.pem -noout -text
-    Certificate:
-        Data:
-            Version: 3 (0x2)
-            Serial Number: 17432010264024107661 (0xf1eaf0f9f41eca8d)
-        Signature Algorithm: sha256WithRSAEncryption
-            Issuer: C=US, ST=CA, L=Sanfrancisco, O=Docker Inc
-            Validity
-                Not Before: Jan 16 18:28:12 2016 GMT
-                Not After : Jan 13 18:28:12 2026 GMT
-            Subject: C=US, ST=CA, L=San Francisco, O=Docker Inc
-            Subject Public Key Info:
-                Public Key Algorithm: rsaEncryption
-                    Public-Key: (2048 bit)
-                    Modulus:
-                        00:d1:fe:6e:55:d4:93:fc:c9:8a:04:07:2d:ba:f0:
-                        55:97:c5:2c:f5:d7:1d:6a:9b:f0:f0:55:6c:5d:90:
-    <output truncated>
+```
+# openssl x509 -in ca.pem -noout -text
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 17432010264024107661 (0xf1eaf0f9f41eca8d)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=US, ST=CA, L=Sanfrancisco, O=Docker Inc
+        Validity
+            Not Before: Jan 16 18:28:12 2016 GMT
+            Not After : Jan 13 18:28:12 2026 GMT
+        Subject: C=US, ST=CA, L=San Francisco, O=Docker Inc
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:d1:fe:6e:55:d4:93:fc:c9:8a:04:07:2d:ba:f0:
+                    55:97:c5:2c:f5:d7:1d:6a:9b:f0:f0:55:6c:5d:90:
+<output truncated>
+```
 
 Later, you'll use this to certificate to sign keys for other servers in the
 infrastructure.
@@ -145,112 +153,82 @@ Now that you have a working CA, you need to create key pairs for the Swarm
 Manager, Swarm nodes, and remote Docker Engine client. The commands and process
 to create key pairs is identical for all servers.  You'll create the following keys:
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-  </tr>
-  <tr>
-    <td><code>ca-priv-key.pem</td>
-    <td>The CA's private key and must be kept secure. It is used later to sign new keys for the other nodes in the environment. Together with the <code>ca.pem</code> file, this makes up the CA's key pair.</td>
-  </tr>
-  <tr>
-    <td><code>ca.pem</td>
-    <td>The CA's public key (also called certificate). This is installed on all nodes in the environment so that all nodes trust certificates signed by the CA. Together with the <code>ca-priv-key.pem</code> file, this makes up the CA's key pair.</td>
-  </tr>
-  <tr>
-    <td><code><i>node</i>.csr</code></td>
-    <td>A certificate signing request (CSR). A CSR is effectively an application to the CA to create a new key pair for a particular node. The CA takes the information provided in the CSR and generates the public and private key pair for that node.</td>
-  </tr>
-  <tr>
-    <td><code><i>node</i>-priv-key.pem</code></td>
-    <td>A private key signed by the CA. The node uses this key to authenticate itself with remote Docker Engines. Together with the <code><i>node</i>-cert.pem</code> file, this makes up a node's key pair.</td>
-  </tr>
-  <tr>
-    <td><code><i>node</i>-cert.pem</code></td>
-    <td>A certificate signed by the CA. This is not used in this example. Together with the <code><i>node</i>-priv-key.pem</code> file, this makes up a node's key pair</td>
-  </tr>
-</table>
+| Key | Description |
+| --- | ----------- |
+| `ca-priv-key.pem` | The CA's private key and must be kept secure. It is used later to sign new keys for the other nodes in the environment. Together with the `ca.pem` file, this makes up the CA's key pair. |
+| `ca.pem` | The CA's public key (also called certificate). This is installed on all nodes in the environment so that all nodes trust certificates signed by the CA. Together with the `ca-priv-key.pem` file, this makes up the CA's key pair. |
+| `NODE_NAME.csr` | A certificate signing request (CSR). A CSR is effectively an application to the CA to create a new key pair for a particular node. The CA takes the information provided in the CSR and generates the public and private key pair for that node. |
+| `NODE_NAME-priv-key.pem` | A private key signed by the CA. The node uses this key to authenticate itself with remote Docker Engines. Together with the `NODE_NAME-cert.pem` file, this makes up a node's key pair. |
+| `NODE_NAME-cert.pem` | A certificate signed by the CA. This is not used in this example. Together with the `NODE_NAME-priv-key.pem` file, this makes up a node's key pair. |
 
 The commands below show how to create keys for all of your nodes. You perform this procedure in a working directory located on your CA server.
 
-1. Logon to the terminal of your CA server and elevate to root.
+1.  Logon to the terminal of your CA server and elevate to root.
 
-        $ sudo su
+    ```
+    $ sudo su
+    ```
 
-2. Create a private key `swarm-priv-key.pem` for your Swarm Manager
+2.  Create a private key `swarm-priv-key.pem` for your Swarm Manager
 
-        # openssl genrsa -out swarm-priv-key.pem 2048
-        Generating RSA private key, 2048 bit long modulus
-        ............................................................+++
-        ........+++
-        e is 65537 (0x10001)
+    ```
+    # openssl genrsa -out swarm-priv-key.pem 2048
+    Generating RSA private key, 2048 bit long modulus
+    ............................................................+++
+    ........+++
+    e is 65537 (0x10001)
+    ```
 
-2. Generate a certificate signing request (CSR) `swarm.csr` using the private key you create in the previous step.
+2.  Generate a certificate signing request (CSR) `swarm.csr` using the private key you create in the previous step.
 
-        # openssl req -subj "/CN=swarm" -new -key swarm-priv-key.pem -out swarm.csr
+    ```
+    # openssl req -subj "/CN=swarm" -new -key swarm-priv-key.pem -out swarm.csr
+    ```
 
     Remember, this is only for demonstration purposes. The process to create a
     CSR will be slightly different in real-world production environments.
 
-3. Create the certificate `swarm-cert.pem` based on the CSR created in the previous step.
+3.  Create the certificate `swarm-cert.pem` based on the CSR created in the previous step.
 
-        # openssl x509 -req -days 1825 -in swarm.csr -CA ca.pem -CAkey ca-priv-key.pem -CAcreateserial -out swarm-cert.pem -extensions v3_req -extfile /usr/lib/ssl/openssl.cnf
-        <snip>
-        # openssl rsa -in swarm-priv-key.pem -out swarm-priv-key.pem
+    ```
+    # openssl x509 -req -days 1825 -in swarm.csr -CA ca.pem -CAkey ca-priv-key.pem -CAcreateserial -out swarm-cert.pem -extensions v3_req -extfile /usr/lib/ssl/openssl.cnf
+    <snip>
+    # openssl rsa -in swarm-priv-key.pem -out swarm-priv-key.pem
+    ```
 
-   You now have a keypair for the Swarm Manager.
+    You now have a keypair for the Swarm Manager.
 
-4. Repeat the steps above for the remaining nodes in your infrastructure (`node1`, `node2`, and `client`).
+4.  Repeat the steps above for the remaining nodes in your infrastructure (`node1`, `node2`, and `client`).
 
     Remember to replace the `swarm` specific values with the values relevant to the node you are creating the key pair for.
 
-    <table>
-    <tr>
-    <th>Server name</th>
-    <th>Private key</th>
-    <th>CSR</th>
-    <th>Certificate</th>
-    </tr>
-    <tr>
-    <td><code>node1 </code></td>
-    <td><code>node1-priv-key.pem</code></td>
-    <td><code>node1.csr</code></td>
-    <td><code>node1-cert.pem</code></td>
-    </tr>
-    <tr>
-    <td><code>node2</code></td>
-    <td><code>node2-priv-key.pem</code></td>
-    <td><code>node2.csr</code></td>
-    <td><code>node2-cert.pem</code></td>
-    </tr>
-    <tr>
-    <td><code>client</code></td>
-    <td><code>client-priv-key.pem</td>
-    <td><code>client.csr</code></td>
-    <td><code>client-cert.pem</code></td>
-    </tr>
-    </table>
+    | Server name | Private key | CSR | Certificate |
+    | ----------- | ----------- | --- | ----------- |
+    | `node1` | `node1-priv-key.pem` | `node1.csr` | `node1-cert.pem` |
+    | `node2` | `node2-priv-key.pem` | `node2.csr` | `node2-cert.pem` |
+    | `client` | `client-priv-key.pem` | `client.csr` | `client-cert.pem` |
 
-5. Verify that your working directory contains the following files:
+5.  Verify that your working directory contains the following files:
 
-        # ls -l
-        total 64
-        -rw-r--r-- 1 root   root   1679 Jan 16 18:27 ca-priv-key.pem
-        -rw-r--r-- 1 root   root   1229 Jan 16 18:28 ca.pem
-        -rw-r--r-- 1 root   root     17 Jan 18 09:56 ca.srl
-        -rw-r--r-- 1 root   root   1086 Jan 18 09:56 client-cert.pem
-        -rw-r--r-- 1 root   root    887 Jan 18 09:55 client.csr
-        -rw-r--r-- 1 root   root   1679 Jan 18 09:56 client-priv-key.pem
-        -rw-r--r-- 1 root   root   1082 Jan 18 09:44 node1-cert.pem
-        -rw-r--r-- 1 root   root    887 Jan 18 09:43 node1.csr
-        -rw-r--r-- 1 root   root   1675 Jan 18 09:44 node1-priv-key.pem
-        -rw-r--r-- 1 root   root   1082 Jan 18 09:49 node2-cert.pem
-        -rw-r--r-- 1 root   root    887 Jan 18 09:49 node2.csr
-        -rw-r--r-- 1 root   root   1675 Jan 18 09:49 node2-priv-key.pem
-        -rw-r--r-- 1 root   root   1082 Jan 18 09:42 swarm-cert.pem
-        -rw-r--r-- 1 root   root    887 Jan 18 09:41 swarm.csr
-        -rw-r--r-- 1 root   root   1679 Jan 18 09:42 swarm-priv-key.pem
+    ```
+    # ls -l
+    total 64
+    -rw-r--r-- 1 root   root   1679 Jan 16 18:27 ca-priv-key.pem
+    -rw-r--r-- 1 root   root   1229 Jan 16 18:28 ca.pem
+    -rw-r--r-- 1 root   root     17 Jan 18 09:56 ca.srl
+    -rw-r--r-- 1 root   root   1086 Jan 18 09:56 client-cert.pem
+    -rw-r--r-- 1 root   root    887 Jan 18 09:55 client.csr
+    -rw-r--r-- 1 root   root   1679 Jan 18 09:56 client-priv-key.pem
+    -rw-r--r-- 1 root   root   1082 Jan 18 09:44 node1-cert.pem
+    -rw-r--r-- 1 root   root    887 Jan 18 09:43 node1.csr
+    -rw-r--r-- 1 root   root   1675 Jan 18 09:44 node1-priv-key.pem
+    -rw-r--r-- 1 root   root   1082 Jan 18 09:49 node2-cert.pem
+    -rw-r--r-- 1 root   root    887 Jan 18 09:49 node2.csr
+    -rw-r--r-- 1 root   root   1675 Jan 18 09:49 node2-priv-key.pem
+    -rw-r--r-- 1 root   root   1082 Jan 18 09:42 swarm-cert.pem
+    -rw-r--r-- 1 root   root    887 Jan 18 09:41 swarm.csr
+    -rw-r--r-- 1 root   root   1679 Jan 18 09:42 swarm-priv-key.pem
+    ```
 
 You can inspect the contents of each of the keys. To inspect a private key:
 
@@ -302,30 +280,35 @@ follows on each node:
 | `<server>-cert.pem`     | `cert.pem`  |
 | `<server>-priv-key.pem` | `key.pem`   |
 
-1. Logon to the terminal of your CA server and elevate to root.
+1.  Logon to the terminal of your CA server and elevate to root.
 
-        $ sudo su
+    ```
+    $ sudo su
+    ```
 
-2. Create a` ~/.certs` directory on the Swarm manager. Here we assume user account is ubuntu.
+2.  Create a` ~/.certs` directory on the Swarm manager. Here we assume user account is ubuntu.
 
-        $ ssh ubuntu@swarm 'mkdir -p /home/ubuntu/.certs'
+    ```
+    $ ssh ubuntu@swarm 'mkdir -p /home/ubuntu/.certs'
+    ```
 
-2. Copy the keys from the CA to the Swarm Manager server.
+2.  Copy the keys from the CA to the Swarm Manager server.
 
-        $ scp ./ca.pem ubuntu@swarm:/home/ubuntu/.certs/ca.pem
-        $ scp ./swarm-cert.pem ubuntu@swarm:/home/ubuntu/.certs/cert.pem
-        $ scp ./swarm-priv-key.pem ubuntu@swarm:/home/ubuntu/.certs/key.pem
-
+    ```
+    $ scp ./ca.pem ubuntu@swarm:/home/ubuntu/.certs/ca.pem
+    $ scp ./swarm-cert.pem ubuntu@swarm:/home/ubuntu/.certs/cert.pem
+    $ scp ./swarm-priv-key.pem ubuntu@swarm:/home/ubuntu/.certs/key.pem
+    ```
 
     >**Note**: You may need to provide authentication for the `scp` commands to work. For example, AWS EC2 instances use certificate-based authentication. To copy the files to an EC2 instance associated with a public key called `nigel.pem`, modify the `scp` command as follows: `scp -i /path/to/nigel.pem ./ca.pem ubuntu@swarm:/home/ubuntu/.certs/ca.pem`.
 
-3. Repeat step 2 for each remaining  server in the infrastructure.
+3.  Repeat step 2 for each remaining  server in the infrastructure.
 
     * `node1`
     * `node2`
     * `client`
 
-4. Verify your work.
+4.  Verify your work.
 
     When the copying is complete, each machine should have the following keys.
 
@@ -334,11 +317,13 @@ follows on each node:
     Each node in your infrastructure should have the following files in the
     `/home/ubuntu/.certs/` directory:
 
-        # ls -l /home/ubuntu/.certs/
-        total 16
-        -rw-r--r-- 1 ubuntu ubuntu 1229 Jan 18 10:03 ca.pem
-        -rw-r--r-- 1 ubuntu ubuntu 1082 Jan 18 10:06 cert.pem
-        -rw-r--r-- 1 ubuntu ubuntu 1679 Jan 18 10:06 key.pem
+    ```
+    # ls -l /home/ubuntu/.certs/
+    total 16
+    -rw-r--r-- 1 ubuntu ubuntu 1229 Jan 18 10:03 ca.pem
+    -rw-r--r-- 1 ubuntu ubuntu 1082 Jan 18 10:06 cert.pem
+    -rw-r--r-- 1 ubuntu ubuntu 1679 Jan 18 10:06 key.pem
+    ```
 
 ## Step 5: Configure the Engine daemon for TLS
 
@@ -349,9 +334,11 @@ listen on TCP port 2376, and only accept connections using TLS.
 
 On `node1` and `node2` (your Swarm nodes), do the following:
 
-1. Open a terminal on `node1` and elevate to root.
+1.  Open a terminal on `node1` and elevate to root.
 
-        $ sudo su
+    ```
+    $ sudo su
+    ```
 
 2. Edit Docker Engine configuration file.
 
@@ -459,20 +446,22 @@ Now that you have a Swarm cluster built and configured to use TLS, you'll test t
     The output above shows the `Server` version as "swarm/1.0.1". This means
     that the command was successfully issued against the Swarm manager.
 
-2. Verify that the same command does not work without TLS.
+2.  Verify that the same command does not work without TLS.
 
     This time, do not pass your certs to the Swarm manager.
 
-        $ sudo docker -H swarm:3376 version
-        :
-         Version:      1.9.1
-         API version:  1.21
-         Go version:   go1.4.2
-         Git commit:   a34a1d5
-         Built:        Fri Nov 20 13:12:04 UTC 2015
-         OS/Arch:      linux/amd64
-        Get http://swarm:3376/v1.21/version: malformed HTTP response "\x15\x03\x01\x00\x02\x02".
-        * Are you trying to connect to a TLS-enabled daemon without TLS?
+    ```
+    $ sudo docker -H swarm:3376 version
+    :
+     Version:      1.9.1
+     API version:  1.21
+     Go version:   go1.4.2
+     Git commit:   a34a1d5
+     Built:        Fri Nov 20 13:12:04 UTC 2015
+     OS/Arch:      linux/amd64
+    Get http://swarm:3376/v1.21/version: malformed HTTP response "\x15\x03\x01\x00\x02\x02".
+    * Are you trying to connect to a TLS-enabled daemon without TLS?
+    ```
 
     The output above shows that the command was rejected by the server. This is
     because the server (Swarm manager) is configured to only accept connections
@@ -488,70 +477,66 @@ you issue a command. To do this, you'll configure the `Docker Engine host` and
 To do this, you place the client's keys in your `~/.docker` configuration folder. If you have other users on your system using the Engine command line, you'll need to configure their account's `~/.docker` as well. The procedure below shows how to do this for the `ubuntu` user on
 your Docker Engine client.
 
-1. Open a terminal onto your `client` server.
+1.  Open a terminal onto your `client` server.
 
-2. If it doesn't exist, create a `.docker` directory in the `ubuntu` user's home directory.
+2.  If it doesn't exist, create a `.docker` directory in the `ubuntu` user's home directory.
 
-        $ mkdir /home/ubuntu/.docker
+    ```
+    $ mkdir /home/ubuntu/.docker
+    ```
 
-4. Copy the Docker Engine client's keys from `/home/ubuntu/.certs` to
-`/home/ubuntu/.docker`
+4.  Copy the Docker Engine client's keys from `/home/ubuntu/.certs` to
+    `/home/ubuntu/.docker`
 
-        $ cp /home/ubuntu/.certs/{ca,cert,key}.pem /home/ubuntu/.docker
+    ```
+    $ cp /home/ubuntu/.certs/{ca,cert,key}.pem /home/ubuntu/.docker
+    ```
 
-5. Edit the account's `~/.bash_profile`.
+5.  Edit the account's `~/.bash_profile`.
 
-6. Set the following variables:
+6.  Set the following variables:
 
-    <table>
-    <tr>
-    <th>Variable</th>
-    <th>Description</th>
-    </tr>
-    <tr>
-    <td><code>DOCKER_HOST</code></td>
-    <td>Sets the Docker host and TCP port to send all Engine commands to.</td>
-    </tr>
-    <tr>
-    <td><code>DOCKER_TLS_VERIFY</code></td>
-    <td>Tell's Engine to use TLS.</td>
-    </tr>
-    <tr>
-    <td><code>DOCKER_CERT_PATH</code></td>
-    <td>Specifies the location of TLS keys.</td>
-    </tr>
-    </table>
+    | Variable | Description |
+    | `DOCKER_HOST` | Sets the Docker host and TCP port to send all Engine commands to. |
+    | `DOCKER_TLS_VERIFY` | Tells Engine to use TLS. |
+    | `DOCKER_CERT_PATH` | Specifies the location of TLS keys. |
 
     For example:
 
-            export DOCKER_HOST=tcp://swarm:3376
-            export DOCKER_TLS_VERIFY=1
-            export DOCKER_CERT_PATH=/home/ubuntu/.docker/
+    ```
+    export DOCKER_HOST=tcp://swarm:3376
+    export DOCKER_TLS_VERIFY=1
+    export DOCKER_CERT_PATH=/home/ubuntu/.docker/
+    ```
 
-6. Save and close the file.
+6.  Save and close the file.
 
-7. Source the file to pick up the new variables.
+7.  Source the file to pick up the new variables.
 
-            $ source ~/.bash_profile
+    ```
+    $ source ~/.bash_profile
+    ```
 
-8. Verify that the procedure worked by issuing a `docker version` command
+8.  Verify that the procedure worked by issuing a `docker version` command
 
-        $ docker version
-        Client:
-         Version:      1.9.1
-         API version:  1.21
-         Go version:   go1.4.2
-         Git commit:   a34a1d5
-         Built:        Fri Nov 20 13:12:04 UTC 2015
-         OS/Arch:      linux/amd64
+    ```
+    $ docker version
+    Client:
+     Version:      1.9.1
+     API version:  1.21
+     Go version:   go1.4.2
+     Git commit:   a34a1d5
+     Built:        Fri Nov 20 13:12:04 UTC 2015
+     OS/Arch:      linux/amd64
 
-        Server:
-         Version:      swarm/1.0.1
-         API version:  1.21
-         Go version:   go1.5.2
-         Git commit:   744e3a3
-         Built:
-         OS/Arch:      linux/amd64
+    Server:
+     Version:      swarm/1.0.1
+     API version:  1.21
+     Go version:   go1.5.2
+     Git commit:   744e3a3
+     Built:
+     OS/Arch:      linux/amd64
+    ```
 
     The server portion of the output above command shows that your Docker
     client is issuing commands to the Swarm Manager and using TLS.
@@ -561,4 +546,4 @@ Congratulations! You have configured a Docker Swarm cluster to use TLS.
 ## Related Information
 
 * [Secure Docker Swarm with TLS](secure-swarm-tls.md)
-* [Docker security](https://docs.docker.com/engine/security/security/)
+* [Docker security](/engine/security/security/)

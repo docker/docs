@@ -1368,34 +1368,12 @@ it will provide a named alias for the container being linked to.
 When a new container is created, Docker will set the following environment
 variables automatically:
 
-<table>
- <tr>
-  <th>Variable</th>
-  <th>Value</th>
- </tr>
- <tr>
-  <td><code>HOME</code></td>
-  <td>
-    Set based on the value of <code>USER</code>
-  </td>
- </tr>
- <tr>
-  <td><code>HOSTNAME</code></td>
-  <td>
-    The hostname associated with the container
-  </td>
- </tr>
- <tr>
-  <td><code>PATH</code></td>
-  <td>
-    Includes popular directories, such as :<br>
-    <code>/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</code>
-  </td>
- <tr>
-  <td><code>TERM</code></td>
-  <td><code>xterm</code> if the container is allocated a pseudo-TTY</td>
- </tr>
-</table>
+| Variable | Value |
+| -------- | ----- |
+| `HOME` | Set based on the value of `USER` |
+| `HOSTNAME` | The hostname associated with the container |
+| `PATH` | Includes popular directories, such as `:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin` |
+| `TERM` | `xterm` if the container is allocated a pseudo-TTY |
 
 Additionally, the operator can **set any environment variable** in the
 container by using one or more `-e` flags, even overriding those mentioned
