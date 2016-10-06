@@ -8,6 +8,8 @@ menu:
 title: volume inspect
 ---
 
+{% raw %}
+
 # volume inspect
 
 ```markdown
@@ -49,3 +51,5 @@ Example output:
 * [volume ls](volume_ls.md)
 * [volume rm](volume_rm.md)
 * [Understand Data Volumes](../../tutorials/dockervolumes.md)
+
+{% endraw %}

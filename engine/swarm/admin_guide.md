@@ -12,6 +12,8 @@ menu:
 title: Swarm administration guide
 ---
 
+{% raw %}
+
 # Administer and maintain a swarm of Docker Engines
 
 When you run a swarm of Docker Engines, **manager nodes** are the key components
@@ -262,3 +264,5 @@ The `--force-new-cluster` flag puts the Docker Engine into swarm mode as a
 manager node of a single-node swarm. It discards swarm membership information
 that existed before the loss of the quorum but it retains data necessary to the
 Swarm such as services, tasks and the list of worker nodes.
+
+{% endraw %}

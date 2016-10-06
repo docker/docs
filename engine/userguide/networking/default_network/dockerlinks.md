@@ -10,6 +10,8 @@ menu:
 title: Legacy container links
 ---
 
+{% raw %}
+
 # Legacy container links
 
 The information in this section explains legacy container links within the Docker default bridge. This is a `bridge` network named `bridge` created automatically when you install Docker.
@@ -370,3 +372,5 @@ allowing linked communication to continue.
     172.17.0.9  db
 
 # Related information
+
+{% endraw %}

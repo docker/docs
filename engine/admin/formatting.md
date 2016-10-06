@@ -9,6 +9,8 @@ menu:
 title: Format command and log output
 ---
 
+{% raw %}
+
 # Formatting reference
 
 Docker uses [Go templates](https://golang.org/pkg/text/template/) to allow users manipulate the output format
@@ -64,3 +66,5 @@ Title capitalizes a string.
 Upper turns a string into its upper case representation.
 
 	$ docker inspect --format "{{upper .Name}}" container
+
+{% endraw %}
