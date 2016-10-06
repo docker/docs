@@ -4,6 +4,7 @@ keywords:
 - Search, Docker, documentation, manual, guide, reference, api
 notoc: true
 title: Search the Docker Documentation
+noratings: true
 ---
 
 # Search Results

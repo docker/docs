@@ -22,7 +22,7 @@ Here is information about how to diagnose and troubleshoot problems, send logs a
 
 ## Submitting diagnostics, feedback, and GitHub issues
 
-If you encounter problems for which you do not find solutions in this documentation or on the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data. See [Diagnose and Feedback](index.md#diagnose-and-feedback) in the Getting Started topic.
+If you encounter problems for which you do not find solutions in this documentation, on [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues), or the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data. See [Diagnose and Feedback](index.md#diagnose-and-feedback) to learn about diagnostics and how to create new issues on GitHub. 
 
 ## Checking the Logs
 
@@ -88,6 +88,10 @@ Here is an example of how to de-bug this problem, given a scenario where you sha
 		Permission        windowsbox\merlin, FULL
 
 See also, the related issue on GitHub, [Mounted volumes are empty in the container](https://github.com/docker/for-win/issues/25).
+
+### Understand symlinks limitations
+
+Symlinks will work within and across containers. However, symlinks created outside of containers (for example, on the host) will not work. To learn more, see [Are symlinks supported?](faqs.md#are-symlinks-supported) in the FAQs.
 
 ### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 

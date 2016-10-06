@@ -130,11 +130,14 @@ does not work](troubleshoot.md#inotify-on-shared-drives-does-not-work) in
 ### Are symlinks supported?
 
 Docker for Windows supports symbolic links (symlinks) created within containers.
-Symbolic link (symlinks) created within containers and across containers will
-resolve.
-Symlinks created outside of containers (e.g., on the host) will not work in  containers.
+Symlinks will resolve within and across containers.
+Symlinks created elsewhere (e.g., on the host) will not work.
 
-To learn more about the reasons for this limitation, see this issue on GitHub: [Symlinks don't work as expected](https://github.com/docker/for-win/issues/109#issuecomment-251307391).
+To learn more about the reasons for this limitation, see the following discussions:
+
+* GitHub issue: [Symlinks don't work as expected](https://github.com/docker/for-win/issues/109#issuecomment-251307391)
+
+* Docker for Windows forums topic: [Symlinks on shared volumes not supported](https://forums.docker.com/t/symlinks-on-shared-volumes-not-supported/9288)
 
 ### How do I add custom CA certificates?
 
