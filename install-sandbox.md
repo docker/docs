@@ -15,9 +15,11 @@ weight=10
 
 # Install DDC in a sandbox for evaluation
 
-This page introduces Docker Datacenter: a combination of Docker Universal
-Control Plane (UCP) and Docker Trusted Registry (DTR), and walks you through
-installing it on a local (non-production) host or sandbox. Once you've installed, we'll also give you a guided tour so you can evaluate its features.
+This page introduces Docker Datacenter (also known as DDC): a combination of
+Docker Universal Control Plane (UCP) and Docker Trusted Registry (DTR), and
+walks you through installing it on a local (non-production) host or sandbox.
+Once you've installed, we'll also give you a guided tour so you can evaluate its
+features.
 
 The instructions here are for a sandbox installation on Mac OS X or Windows
 systems. If you're an experienced Linux user, or if you want more detailed
@@ -57,7 +59,7 @@ container through UCP, and explore the user interface.
 
 This example requires that you have:
 
-* [Docker Toolbox installed](/toolbox/overview.md) (contains Docker Machine and Docker Engine)
+* [Docker Toolbox installed](https://docs.docker.com/toolbox/overview/) (contains Docker Machine and Docker Engine)
 * A free Docker ID account
 
 ## Step 1: Provision hosts with Engine
@@ -86,7 +88,7 @@ Set up the nodes for your evaluation:
 
     ```
     $ docker-machine create -d virtualbox \
-    --virtualbox-memory "2000" \
+    --virtualbox-memory "2100" \
     --virtualbox-disk-size "5000" node1
     ```
 
@@ -98,7 +100,7 @@ Set up the nodes for your evaluation:
 
     ```none
     $ docker-machine create -d virtualbox \
-    --virtualbox-memory "2000" node2
+    --virtualbox-memory "2100" node2
     ```
 
 5. Use the `docker-machine ls` command to list your hosts.
@@ -214,7 +216,7 @@ host for the controller works fine.
     individual "leaf certificates."
 
     When it completes, the `ucp` tool prompts you to log in into the UCP web
-    interface and gives you its location. You'll do this in the next stepo so
+    interface and gives you its location. You'll do this in the next step so
     you can install a license.
 
 ## Step 3. License your installation
@@ -358,7 +360,9 @@ code produced by your own organization.
 
     This command downloads the ca certificate from your UCP installation, and saves it to a file. You'll use this in the next step. You may want to run `cat ucp-ca.pem` to make sure the file actually contains the certificate.
 
-3. Next, use the following command to install DTR on `node2`.
+3. Run the `docker-machine env node2` command to make sure that you are passing commands to the node on which you will install DTR.
+
+4. Next, use the following command to install DTR on `node2`.
 
     ```
     $ docker run -it --rm docker/dtr install --ucp-url $UCP_URL \
@@ -368,9 +372,9 @@ code produced by your own organization.
 
     > **Tip**: You'll need to edit the command so it uses the correct IP addresses for your UCP and DTR nodes, and the correct administrator credentials. You might want to do this in a text editor. You may also omit the admin credentials from the command if you would prefer to be prompted for them during installation.
 
-4. Verify that DTR is running by navigating your browser to the DTR server's IP.
+5. Verify that DTR is running by navigating your browser to the DTR server's IP.
 
-5. Confirm that you can log in using your UCP administrator credentials.
+6. Confirm that you can log in using your UCP administrator credentials.
 
 ## Step 6: Link UCP to your DTR instance
 

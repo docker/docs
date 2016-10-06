@@ -27,13 +27,13 @@ Over the course of this tutorial, we will:
 - Use UCP to deploy your edited image to a node
 
 
-## Set --insecure registry or set up DTR trust and login
+## Step 1: Set --insecure registry or set up DTR trust and login
 
-Next, we'll set up a security exception that allows a specific Docker-machine to push images to DTR even though the DTR instance has a self-signed certificate. For a production deployment, you would [set up certificate trust](https://docs.docker.com/ucp/configuration/dtr-integration/) between UCP and DTR, and [between DTR and your Docker Engine](https://docs.docker.com/docker-trusted-registry/repos-and-images/), but for our sandbox deployment we can skip this.
+Next, we'll set up a security exception that allows a the Docker-machine hosts used in your UCP cluster to push images to and pull images from DTR even though the DTR instance has a self-signed certificate. For a production deployment, you would [set up certificate trust](https://docs.docker.com/ucp/configuration/dtr-integration/) between UCP and DTR, and [between DTR and your Docker Engine](https://docs.docker.com/docker-trusted-registry/repos-and-images/), but for our sandbox deployment we can skip this.
 
 > **Warning**: These steps produce an insecure DTR connection. Do not use these configuration steps for a production deployment.
 
-To allow your shell to connect to DTR despite it having a self-signed certificate, we'll specify that there is one insecure registry that we'll allow the Docker instance on `node1` (the UCP node) to connect to.  We'll add this exception by editing the configuration file where docker-machine stores `node1`'s configuration details.
+To allow the Docker Engine to connect to DTR despite it having a self-signed certificate, we'll specify that there is one insecure registry that we'll allow the Engine instance to connect to. We'll add this exception by editing the configuration file where docker-machine stores the host's configuration details.
 
 1. Edit the file found at `~/.docker/machine/machines/node1/config.json` using your preferred text editor.
 
@@ -47,26 +47,30 @@ To allow your shell to connect to DTR despite it having a self-signed certificat
 
 4. Run the command `docker-machine provision node1` to update `node1`'s configuration with the new `InsecureRegistry` setting.
 
-This allows you to push docker images to, and pull docker images from, the registry running on `node2`.
+5. Repeat this process for `node2`.
+
+    Because UCP runs a `docker pull` from DTR for each node in its cluster, you must make this security exception for all nodes in the cluster.
+
+This allows you to push docker images to, and pull docker images from, the registry.
 
 
-## Step 1: Create an image repository in DTR
+## Step 2: Create an image repository in DTR
 
 In this step, we'll create an image repository in DTR that you will be able to push Docker images to. Remember a Docker image is a combination of code and filesystem used as a template to create a container.
 
 1. In your web browser, go to the DTR web UI.
 
-    If you need help finding the URL for this host, you can use `docker-machine ls` to find the IP for `node2` where you installed it.
+    If you need help finding the URL for this host, you can use `docker-machine ls` to find the IP for `node2` where you installed DTR.
 
 2. Log in to DTR using your administrator credentials.
 
-3. Navigate to the Repositories screen and click New Repository.
+3. Navigate to the **Repositories** screen and click **New Repository**.
 
 4. In the repository name field, enter `my-nginx`.
 
 5. Click **Save**.
 
-## Step 2: Pull an image, tag and push to DTR
+## Step 3: Pull an image, tag and push to DTR
 
 1. In your terminal, make sure `node1` is active using `docker-machine ls`.
 
@@ -78,11 +82,11 @@ In this step, we'll create an image repository in DTR that you will be able to p
     $ eval "$(docker-machine env node1)"
     ```
 
-2. Pull the latest Nginx image by running `docker pull ngnix:latest`
+2. Pull the latest Nginx image by running `docker pull nginx:latest`
 
-    Because you aren't specifying a registry as part of the `pull` command, Docker Engine locates and downloads the latest `ngnix` image from Docker Cloud's registry.
+    Because you aren't specifying a registry as part of the `pull` command, Docker Engine locates and downloads the latest `nginx` image from Docker Cloud's registry.
 
-2. Log in to your DTR instance on `node2` using the `docker login` command.
+2. Log in to your DTR instance on `node2` using the `docker login` command and the DTR instance's IP address.
 
     ```none
     docker login $DTR_IP
@@ -91,17 +95,35 @@ In this step, we'll create an image repository in DTR that you will be able to p
     Enter your administrator username and password when prompted.
 
 3. Tag the `nginx` image you downloaded.
+
     Use the IP of your DTR instance to specify the repository path, and the .
 
+    ```none
     `docker tag nginx:latest [$DTR]/admin/my-nginx:official`
+    ```
 
 4. Push the tagged image to your DTR instance.
 
-    `docker push my-nginx:official $DTR_IP/admin/my-nginx:official`
+    `docker push $DTR_IP/admin/my-nginx:official`
 
 You now have a copy of the official Nginx Docker image available on your sandbox DTR instance.
 
-## Step 3. Deploy a container from the UCP web interface
+## Step 4: Pull your image from DTR into UCP
+
+UCP does not automatically pull images from DTR. To make an image from DTR appear in UCP, you'll use the UCP web UI to perform a `docker pull`. This `pull` command pulls the image and makes it available on all nodes in the UCP cluster.
+
+1. From the UCP dashboard, click **Images** in the left navigation.
+
+2. Click **Pull Image**.
+3. Enter the full path to the image that you just pushed to your DTR instance.
+
+    For the example path in this demo use `$DTR_IP/admin/my-nginx:official`
+
+4. Click **Pull**.
+
+    UCP contacts the DTR host, and pulls the image on each node in the cluster.
+
+## Step 5. Deploy a container from the UCP web interface
 
 UCP allows you to deploy and manage "Dockerized" applications in production. An
 application is built using Docker objects, such as images and containers, and
@@ -119,7 +141,7 @@ inside of it.
 
 1. Log in to the UCP **Dashboard**.
 
-2. Click **Containers**.
+2. Click **Containers** from the left navigation.
 
     The system displays the **Containers** page.
 
@@ -128,15 +150,17 @@ inside of it.
 
 3. Click **+ Deploy Container**.
 
-    UCP provides a dialog for you to enter configuration options for the container. For this example, we'll deploy a simple `nginx` container using specific values for each field. If you already know what you're doing, feel free to explore once you've completed this example.
+    We'll deploy the simple `nginx` container you just pulled, using specific values for each field. If you already know what you're doing, feel free to explore once you've completed this example.
 
-4. Enter `nginx` for the image name.
+4. Enter the path to the `nginx:official` image you just pulled in the **image name** field.
+
+    This should something like `$DTR_IP/admin/my-nginx:official`
 
     An image is a specific build of software you want to run. The software might
     be a stand-alone application, or component software necessary to support a
     complex service.
 
-5. Enter `nginx_server` for the container name.
+5. Enter `nginx_official` for the container name.
 
     This name just identifies the container on your network.
 
@@ -160,7 +184,7 @@ inside of it.
 
     ![Deployed](images/display_container.png)
 
-## Step 9. View a running service
+## Step 6. View a running service
 
 At this point, you have deployed a container and you should see the container
 status is `running`. Recall that you deployed an Nginx web server. That server
@@ -169,7 +193,7 @@ running. In this step, you open the running server.
 
 1. Navigate back to the **Containers** page.
 
-2. Click the nginx container.
+2. Click the **nginx_official** container.
 
     ![Edit](images/container_edit.png)
 
@@ -186,17 +210,17 @@ running. In this step, you open the running server.
     ![Port 80](images/welcome_nginx.png)
 
 
-## Step 4: Edit your image, tag, and push
+## Step 7: Edit your image, tag, and push
 
 In this step, we'll edit the Nginx image so that it shows a customized webpage when you run it in a container. Then we'll tag the edited image, and push it to DTR so you can deploy it using UCP.
 
-2. Change to your user `$HOME` directory.
+1. Change to your user `$HOME` directory.
 
     ```none
     $ cd $HOME
     ```
 
-2. Make a `site` directory and open it.
+2. Create a `site` directory and open it.
 
     ```none
     $ mkdir site
@@ -212,7 +236,9 @@ In this step, we'll edit the Nginx image so that it shows a customized webpage w
 
     This allows you to copy files from the file system into a container.
 
+    ```
     `docker-machine scp $HOME/site/ node1:~/site`
+    ```
 
 5. Start a new `nginx` container and replace the `html` folder with your `site` directory.
 
@@ -220,16 +246,24 @@ In this step, we'll edit the Nginx image so that it shows a customized webpage w
     $ docker run -d -P -v $HOME/site:/usr/share/nginx/html --name mysite nginx
     ```
 
-    This command runs an `nginx` image in a container called `mysite`. The `-P` tells the Engine to expose all the ports on the container.
+    This command runs an `nginx` image in a container called `mysite`. The `-P` tells the Engine to expose all the ports on the container.  While the container is running, the terminal window will be unresponsive.
 
-6. Stop the container, and see that it's still around and called `mysite`
+7. Stop the container. You may need to use `ctrl + c`  to stop it from your terminal.
+8. Run a `docker images` and see that the container called `mysite` persists even though it's no longer running.
 
-2. docker tag
-    `docker tag nginx:mysite [$DTR]/admin/my-nginx:mysite`
-7. docker push (edited) `[$DTR]/admin/my-nginx:mysite`
+2. Tag the container.
 
+    `docker tag $CONTAINER_ID $DTR_IP/admin/my-nginx:mysite`
 
-## Step 1. Download a client bundle
+7. Push the container to your DTR repository.
+
+    `docker push $DTR_IP/admin/my-nginx:mysite`
+
+8. Log in to DTR and check that the new `mysite` tag appears in your `my-nginx` repository.
+
+In our next step, we'll set up a client certificate bundle so you can try out deploying the edited container using the UCP command line tools.
+
+## Step 8. Download a client bundle
 
 In this step, you download the *client bundle*, which contains your user
 certificates, and a script to configure a shell environment with them so you can
@@ -256,15 +290,9 @@ First, we'll download the bundle and configure your environment.
 
 4. Open a new shell on your local machine.
 
-5. Make sure this new shell is not connected to a Docker Machine host by running `docker-machine ls`. No Docker host is connective if none of the hosts in the list show an * (asterisk) in the `ACTIVE` column.
+5. Make sure this new shell is not connected to a Docker Machine host by running `docker-machine ls`.
 
-<!-- Not needed here - needed elsewhere?
-4. Create a directory to hold the deploy information.
-
-    ```
-    $ mkdir deploy-app
-    ```
--->
+    No Docker host is connective if none of the hosts in the list show an * (asterisk) in the `ACTIVE` column.
 
 4. Navigate to where the bundle was downloaded, and unzip the client bundle
 
@@ -339,66 +367,44 @@ unzipped.
      com.docker.ucp.license_expires=2016-10-29 00:01:45 +0000 UTC
    ```
 
+## Step 9: Docker pull to put images on ucp
+
+Now that you've logged in successfully using the client bundle, you can run the same Docker commands you're used to from the terminal window without having to load the UCP web interface.
+
+In this step, we'll do the same thing we did in Step 4, only using the command line, and pulling our edited `nginx:mysite` image.
+
+1. Use `docker images` to list the images available and locate your `mysite` image.
+
+2. Pull the nginx image.
+
+     `docker pull $DTR_IP/admin/my-nginx:mysite`
+
+    UCP pulls the image from DTR and makes it available on both nodes of the UCP cluster.
+
+    ```
+    $ docker pull 192.168.99.101/admin/my-nginx:mysite
+    node1: Pulling nginx:mysite... : downloaded
+    node2: Pulling nginx:mysite... : downloaded
+    ```
 
 
+## Step 10. Deploy with the CLI
 
+In this exercise, you'll launch another Nginx container. Only this time, you'll use the Engine CLI and the edited version of the Nginx that you justpulled. Then, you'll look at the result in the UCP dashboard.
 
-
-## Docker pull to put images on ucp
-
-1. docker pull nginx - from docker hub/cloud
-```
-$ docker pull nginx
-Using default tag: latest
-node1: Pulling nginx:latest... : downloaded
-node2: Pulling nginx:latest... : downloaded
-```
- see that it shows up on both nodes
-
-
-
-
-## Step 11. Deploy with the CLI
-
-In this exercise, you'll launch another Nginx container. Only this time, you'll use the Engine CLI. Then, you'll look at the result in the UCP dashboard.
-
-1. Connect the terminal environment to the `node2`.
+1. Check which Docker Engine you're connected to.  `node2`.
 
     ```none
     $ eval "$(docker-machine env node2)"
     ```
 
-2. Change to your user `$HOME` directory.
 
-    ```none
-    $ cd $HOME
-    ```
+5. Start a new `nginx` container.
 
-2. Make a `site` directory.
-
-    ```none
-    $ mkdir site
-    ```
-
-3. Change into the `site` directory.
-
-    ```none
-    $ cd site
-    ```
-
-4. Create an `index.html` file.
-
-    ```none
-    $ echo "my new site" > index.html
-    ```
-
-5. Start a new `nginx` container and replace the `html` folder with your `site` directory.
-
+<!-- TODO: This needs to be just the vanilla run command but with new port mappings? I think?   Use 8088 instead of 8080 that we used above-->
     ```none
     $ docker run -d -P -v $HOME/site:/usr/share/nginx/html --name mysite nginx
     ```
-
-    This command runs an `nginx` image in a container called `mysite`. The `-P` tells the Engine to expose all the ports on the container.
 
 6. Open the UCP dashboard in your browser.
 
@@ -408,10 +414,10 @@ In this exercise, you'll launch another Nginx container. Only this time, you'll 
 
 8. Scroll down to the ports section.
 
-    You'll see an IP address with port `80/tcp` for the server. This time,
+    You'll see an IP address with port `8088/tcp` for the server. This time,
     you'll find that the port mapped on this container than the one created
     yourself. That's because the command didn't explicitly map a port, so the
-    Engine chose mapped the default Nginx port `80` inside the container to an
+    Engine chose mapped the default Nginx port `8088` inside the container to an
     arbitrary port on the node.
 
 4. Copy the IP address to your browser and paste the information you copied.
