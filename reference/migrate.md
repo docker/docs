@@ -11,7 +11,8 @@ identifier="dtr_reference_migrate"
 
 # docker/dtr migrate
 
-Migrate configurations, accounts, and repository metadata from DTR 1.4.3 to 2.0
+Migrate configurations, accounts, and repository metadata from DTR 1.4.3 to 2.0.
+Only available in `docker/dtr` version 2.0.x.
 
 ## Usage
 

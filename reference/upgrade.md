@@ -1,30 +1,29 @@
 <!--[metadata]>
 +++
-title ="dumpcerts"
-description="Print the TLS certificates used by DTR"
-keywords= ["docker, dtr, cli, dumpcerts"]
+title ="upgrade"
+description="Upgrade DTR 2.0.0 or later cluster to this version"
+keywords= ["docker, dtr, cli, upgrade"]
 [menu.main]
 parent="dtr_menu_reference"
-identifier="dtr_reference_dumpcerts"
+identifier="dtr_reference_upgrade"
 +++
 <![end-metadata]-->
 
-# docker/dtr dumpcerts
+# docker/dtr upgrade
 
-Print the TLS certificates used by DTR
+Upgrade DTR 2.0.0 or later cluster to this version
 
 ## Usage
 
 ```bash
-docker run -i --rm docker/dtr \
-    dumpcerts [command options] > backup.tar
+docker run -it --rm docker/dtr \
+    upgrade [command options]
 ```
 
 ## Description
 
 
-This command creates a backup of the certificates used by DTR for
-communicating across replicas with TLS.
+This command upgrades DTR 2.0.0 or later to the current version of this image.
 
 
 ## Options

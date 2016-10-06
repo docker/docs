@@ -1,8 +1,8 @@
 <!--[metadata]>
 +++
-title = "remove"
-description = "Docker Trusted Registry remove command reference."
-keywords = ["docker, registry, reference, remove"]
+title ="remove"
+description="Remove a DTR replica"
+keywords= ["docker, dtr, cli, remove"]
 [menu.main]
 parent="dtr_menu_reference"
 identifier="dtr_reference_remove"
@@ -11,31 +11,35 @@ identifier="dtr_reference_remove"
 
 # docker/dtr remove
 
-Remove a replica from a DTR cluster
+Remove a DTR replica
 
 ## Usage
 
 ```bash
-$ docker run -it --rm docker/dtr \
-  remove [command options]
+docker run -it --rm docker/dtr \
+    remove [command options]
 ```
 
 ## Description
 
-This command removes a replica from the cluster, stops and removes all
-DTR containers, and deletes all DTR volumes.
 
-| Option                  | Description                                                                                  |
-|:------------------------|:---------------------------------------------------------------------------------------------|
-| `--ucp-url`             | Specify the UCP controller URL [$UCP_URL]                                                    |
-| `--ucp-username`        | Specify the UCP admin username [$UCP_USERNAME]                                               |
-| `--ucp-password`        | Specify the UCP admin password [$UCP_PASSWORD]                                               |
-| `--debug`               | Enable debug mode, provides additional logging [$DEBUG]                                      |
-| `--hub-username`        | Specify the Docker Hub username for pulling images [$HUB_USERNAME]                           |
-| `--hub-password`        | Specify the Docker Hub password for pulling images [$HUB_PASSWORD]                           |
-| `--ucp-insecure-tls`    | Disable TLS verification for UCP [$UCP_INSECURE_TLS]                                         |
-| `--ucp-ca`              | Use a PEM-encoded TLS CA certificate for UCP [$UCP_CA]                                       |
-| `--ucp-node`            | Specify the host to install Docker Trusted Registry [$UCP_NODE]                              |
-| `--force-remove`        | Force removal of replica even if it will break your cluster's state [$DTR_CONFIG_ONLY]       |
-| `--replica-id`          | Specify the replica Id. Must be unique per replica, leave blank for random [$DTR_REPLICA_ID] |
-| `--existing-replica-id` | ID of an existing replica in a cluster [$DTR_EXISTING_REPLICA_ID]                            |
+This command removes a replica from a DTR deployment. All DTR containers and
+volumes are removed from the node.
+
+
+## Options
+
+| Option                    | Description                |
+|:--------------------------|:---------------------------|
+|`--ucp-url`|The UCP URL including domain and port|
+|`--ucp-username`|The UCP administrator username|
+|`--ucp-password`|The UCP administrator password|
+|`--debug`|Enable debug mode for additional logging|
+|`--hub-username`|Username to use when pulling images|
+|`--hub-password`|Password to use when pulling images|
+|`--ucp-insecure-tls`|Disable TLS verification for UCP|
+|`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
+|`--force-remove`|Force a DTR replica to be removed|
+|`--replica-id`|Assign an ID to the DTR replica. By default the ID is random|
+|`--existing-replica-id`|The ID of an existing DTR replica|
+

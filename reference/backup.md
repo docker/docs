@@ -1,8 +1,8 @@
 <!--[metadata]>
 +++
-title = "backup"
-description = "Docker Trusted Registry backup command reference."
-keywords = ["docker, registry, reference, backup"]
+title ="backup"
+description="Create a backup of DTR"
+keywords= ["docker, dtr, cli, backup"]
 [menu.main]
 parent="dtr_menu_reference"
 identifier="dtr_reference_backup"
@@ -11,40 +11,49 @@ identifier="dtr_reference_backup"
 
 # docker/dtr backup
 
-Backup a DTR cluster to a tar file and stream it to stdout
+Create a backup of DTR
 
 ## Usage
 
 ```bash
-$ docker run -i --rm docker/dtr \
- backup [command options] > backup.tar
+docker run -i --rm docker/dtr \
+    backup [command options] > backup.tar
 ```
 
 ## Description
 
-This command creates a backup of configurations and image metadata, in a tar
-file. It can be used to make periodic backups of a DTR installation.
 
-This command only creates backups of configurations, and image metadata.
-It does not backup the Docker images stored in your registry.
+This command creates a tar file with the contents of the volumes used by
+DTR, and prints it. You can then use the 'restore' command to restore the data
+from an existing backup.
 
-You should implement a separate backup policy for the Docker images stored
-in your registry, taking in consideration whether your DTR installation is
-configured to store images on the filesystem or using a cloud provider.
+Note:
 
-WARNING: This backup contains sensitive information and should be
-stored securely.
+  * This command only creates backups of configurations, and image metadata.
+    It doesn't backup users and organizations. Users and organizations can be
+    backed up when performing a UCP backup.
+
+    It also doesn't backup the Docker images stored in your registry.
+    You should implement a separate backup policy for the Docker images stored
+    in your registry, taking in consideration whether your DTR installation is
+    configured to store images on the filesystem or using a cloud provider.
+
+  * This backup contains sensitive information and should be
+    stored securely.
 
 
-| Option                  | Description                                                                           |
-|:------------------------|:--------------------------------------------------------------------------------------|
-| `--ucp-url`             | Specify the UCP controller URL [$UCP_URL]                                             |
-| `--ucp-username`        | Specify the UCP admin username [$UCP_USERNAME]                                        |
-| `--ucp-password`        | Specify the UCP admin password [$UCP_PASSWORD]                                        |
-| `--debug`               | Enable debug mode, provides additional logging [$DEBUG]                               |
-| `--hub-username`        | Specify the Docker Hub username for pulling images [$HUB_USERNAME]                    |
-| `--hub-password`        | Specify the Docker Hub password for pulling images [$HUB_PASSWORD]                    |
-| `--ucp-insecure-tls`    | Disable TLS verification for UCP [$UCP_INSECURE_TLS]                                  |
-| `--ucp-ca`              | Use a PEM-encoded TLS CA certificate for UCP [$UCP_CA]                                |
-| `--existing-replica-id` | ID of an existing replica in a cluster [$DTR_EXISTING_REPLICA_ID]                     |
-| `--config-only`         | Backup/restore only the configurations of DTR and not the database [$DTR_CONFIG_ONLY] |
+## Options
+
+| Option                    | Description                |
+|:--------------------------|:---------------------------|
+|`--ucp-url`|The UCP URL including domain and port|
+|`--ucp-username`|The UCP administrator username|
+|`--ucp-password`|The UCP administrator password|
+|`--debug`|Enable debug mode for additional logging|
+|`--hub-username`|Username to use when pulling images|
+|`--hub-password`|Password to use when pulling images|
+|`--ucp-insecure-tls`|Disable TLS verification for UCP|
+|`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
+|`--existing-replica-id`|The ID of an existing DTR replica|
+|`--config-only`|Backup/restore only the configurations of DTR and not the database|
+
