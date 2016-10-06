@@ -255,23 +255,23 @@ example, you'll edit the help for the `attach` subcommand.
     Your location should be different because, at least, your username is
     different.
 
-3. Open the `api/client/attach.go` file.
+3. Open the `cli/command/container/attach.go` file.
 
 4. Edit the command's help message.
 
     For example, you can edit this line:
 
     ```go
-    noStdin := cmd.Bool([]string{"-no-stdin"}, false, "Do not attach STDIN")
+    flags.BoolVar(&opts.noStdin, "no-stdin", false, "Do not attach STDIN")
     ```
 
     And change it to this:
 
     ```go
-    noStdin := cmd.Bool([]string{"-no-stdin"}, false, "Do not attach STDIN (standard in)")
+    flags.BoolVar(&opts.noStdin, "no-stdin", false, "Do not attach STDIN (standard in)")
     ```
 
-5. Save and close the `api/client/attach.go` file.
+5. Save and close the `cli/command/container/attach.go` file.
 
 6. Go to your running development container.
 
