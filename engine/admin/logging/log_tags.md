@@ -9,6 +9,7 @@ menu:
     parent: smn_logging
     weight: -1
 title: Log tags for logging driver
+noliquid: true
 ---
 
 # Log Tags
