@@ -22,7 +22,7 @@ Here is information about how to diagnose and troubleshoot problems, send logs a
 
 ## Submitting diagnostics, feedback, and GitHub issues
 
-If you encounter problems for which you do not find solutions in this documentation or on the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data. See [Diagnose and Feedback](index.md#diagnose-and-feedback) in the Getting Started topic.
+If you encounter problems for which you do not find solutions in this documentation, on [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues), or the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data. See [Diagnose and Feedback](index.md#diagnose-and-feedback) to learn about diagnostics and how to create new issues on GitHub. 
 
 ## Checking the Logs
 
