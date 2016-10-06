@@ -468,7 +468,7 @@ The default value is json-file.
     driver: "syslog"
     driver: "none"
 
-> **Note:** Only the `json-file` driver makes the logs available directly from
+> **Note:** Only the `json-file` and `journald` drivers make the logs available directly from
 > `docker-compose up` and `docker-compose logs`. Using any other driver will not
 > print any logs.
 
