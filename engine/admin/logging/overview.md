@@ -11,6 +11,8 @@ menu:
 title: Configuring Logging Drivers
 ---
 
+{% raw %}
+
 # Configure logging drivers
 
 The container can have a different logging driver than the Docker daemon. Use
@@ -305,3 +307,5 @@ The Google Cloud Logging driver supports the following options:
 
 For detailed information about working with this logging driver, see the
 [Google Cloud Logging driver](gcplogs.md). reference documentation.
+
+{% endraw %}

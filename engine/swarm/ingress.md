@@ -15,6 +15,8 @@ menu:
 title: Use swarm mode routing mesh
 ---
 
+{% raw %}
+
 # Use swarm mode routing mesh
 
 Docker Engine swarm mode makes it easy to publish ports for services to make
@@ -135,3 +137,5 @@ To learn more about HAProxy, see the [HAProxy documentation](https://cbonte.gith
 ## Learn more
 
 * [Deploy services to a swarm](services.md)
+
+{% endraw %}

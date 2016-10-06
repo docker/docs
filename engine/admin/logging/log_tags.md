@@ -11,6 +11,8 @@ menu:
 title: Log tags for logging driver
 ---
 
+{% raw %}
+
 # Log Tags
 
 The `tag` log option specifies how to format a tag that identifies the
@@ -66,3 +68,5 @@ Apr  1 15:22:17 ip-10-27-39-73 docker/logtester.1234[45499]: + exec app
 Apr  1 15:22:17 ip-10-27-39-73 docker/logtester.1234[45499]: 2016-04-01 15:22:17.075416751 +0000 UTC stderr msg: 1
 ```
 
+
+{% endraw %}
