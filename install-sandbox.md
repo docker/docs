@@ -1,5 +1,6 @@
 <!--[metadata]>
 +++
+draft=true
 aliases = ["/ucp/evaluation-install/"]
 title = "Evaluate UCP in a sandbox"
 description = "Evaluation installation"

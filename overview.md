@@ -70,5 +70,5 @@ the images you deploy have not been altered in any way.
 
 ## Where to go next
 
- * [Get started with UCP](install-sandbox.md)
- * [UCP architecture](architecture.md)
+* [UCP architecture](architecture.md)
+* [Install UCP](installation/install-production.md)

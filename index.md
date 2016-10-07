@@ -18,7 +18,6 @@ manage your whole cluster from a single place.
 The UCP documentation includes the following topics:
 
 * [Universal Control Plane overview](overview.md)
-* [Evaluate UCP in a sandbox](install-sandbox.md)
 * [Architecture](architecture.md)
 * [Installation](installation/system-requirements.md)
 * [Access UCP](access-ucp/web-based-access.md)

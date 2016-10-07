@@ -63,7 +63,7 @@ To install UCP:
     ```bash
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      docker/ucp install \
+      docker/ucp:2.0.0-beta1 install \
       --host-address <node-ip-address> \
       --interactive
     ```

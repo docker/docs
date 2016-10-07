@@ -14,9 +14,7 @@ weight=10
 # Plan a production installation
 
 Docker Universal Control Plane can be installed on-premises, or
-on a virtual private cloud. If you've never used Docker UCP before,
-you should start by [installing it on a sandbox](../install-sandbox.md).
-
+on a virtual private cloud.
 This article explains what you need to consider before deploying
 Docker Universal Control Plane.
 
