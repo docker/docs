@@ -9,8 +9,6 @@ menu:
 title: inspect
 ---
 
-{% raw %}
-
 # inspect
 
     Usage: docker-machine inspect [OPTIONS] [arg...]
@@ -89,5 +87,3 @@ While this is usable, it's not very human-readable. For this reason, there is
         "SwarmHost": "tcp://0.0.0.0:3376",
         "SwarmMaster": false
     }
-
-{% endraw %}

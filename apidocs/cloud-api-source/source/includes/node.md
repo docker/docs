@@ -1,5 +1,3 @@
-{% raw %}
-
 # Nodes
 
 ## Node
@@ -376,5 +374,3 @@ Available in Docker Cloud's **REST API**
 Parameter | Description
 --------- | -----------
 uuid | The UUID of the node to terminate
-
-{% endraw %}

@@ -8,8 +8,6 @@ menu:
 title: inspect
 ---
 
-{% raw %}
-
 # inspect
 
 ```markdown
@@ -82,5 +80,3 @@ Docker adds a template function, `json`, which can be applied to get
 results in JSON format.
 
     $ docker inspect --format='{{json .Config}}' $INSTANCE_ID
-
-{% endraw %}
