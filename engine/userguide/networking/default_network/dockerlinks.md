@@ -190,7 +190,9 @@ example as:
 
 Next, inspect your linked containers with `docker inspect`:
 
+    {% raw %}
     $ docker inspect -f "{{ .HostConfig.Links }}" web
+    {% endraw %}
 
     [/db:/web/db]
 

@@ -523,7 +523,9 @@ Get `stdout` and `stderr` logs from the container ``id``
      Connection: Upgrade
      Upgrade: tcp
 
+     {% raw %}
      {{ STREAM }}
+     {% endraw %}
 
 **Query parameters**:
 
@@ -598,7 +600,9 @@ Export the contents of container `id`
     HTTP/1.1 200 OK
     Content-Type: application/octet-stream
 
+    {% raw %}
     {{ TAR STREAM }}
+    {% endraw %}
 
 **Status codes**:
 
@@ -902,7 +906,9 @@ Attach to the container `id`
     Connection: Upgrade
     Upgrade: tcp
 
+    {% raw %}
     {{ STREAM }}
+    {% endraw %}
 
 **Query parameters**:
 
@@ -982,7 +988,9 @@ Implements websocket protocol handshake according to [RFC 6455](http://tools.iet
 
 **Example response**
 
+    {% raw %}
     {{ STREAM }}
+    {% endraw %}
 
 **Query parameters**:
 
@@ -1075,7 +1083,9 @@ Copy files or folders of container `id`
     HTTP/1.1 200 OK
     Content-Type: application/x-tar
 
+    {% raw %}
     {{ TAR STREAM }}
+    {% endraw %}
 
 **Status codes**:
 
@@ -1181,7 +1191,9 @@ Build an image from a Dockerfile
 
     POST /build HTTP/1.1
 
+    {% raw %}
     {{ TAR STREAM }}
+    {% endraw %}
 
 **Example response**:
 
@@ -1942,7 +1954,9 @@ interactive session with the `exec` command.
     HTTP/1.1 200 OK
     Content-Type: application/vnd.docker.raw-stream
 
+    {% raw %}
     {{ STREAM }}
+    {% endraw %}
 
 **JSON parameters**:
 

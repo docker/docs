@@ -96,13 +96,17 @@ when using the table directive, will include column headers as well.
 The following example uses a template without headers and outputs the `Name` and `Driver` entries separated by a colon
 for all running machines:
 
+    {% raw %}
     $ docker-machine ls --format "{{.Name}}: {{.DriverName}}"
     default: virtualbox
     ec2: amazonec2
+    {% endraw %}
 
 To list all machine names with their driver in a table format you can use:
 
+    {% raw %}
     $ docker-machine ls --format "table {{.Name}} {{.DriverName}}"
     NAME     DRIVER
     default  virtualbox
     ec2      amazonec2
+    {% endraw %}
