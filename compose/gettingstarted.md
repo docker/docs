@@ -157,27 +157,27 @@ If you want to run your services in the background, you can pass the `-d` flag
 (for "detached" mode) to `docker-compose up` and use `docker-compose ps` to
 see what is currently running:
 
-        $ docker-compose up -d
-        Starting composetest_redis_1...
-        Starting composetest_web_1...
-        $ docker-compose ps
-        Name                 Command            State       Ports
-        -------------------------------------------------------------------
-        composetest_redis_1   /usr/local/bin/run         Up
-        composetest_web_1     /bin/sh -c python app.py   Up      5000->5000/tcp
+    $ docker-compose up -d
+    Starting composetest_redis_1...
+    Starting composetest_web_1...
+    $ docker-compose ps
+    Name                 Command            State       Ports
+    -------------------------------------------------------------------
+    composetest_redis_1   /usr/local/bin/run         Up
+    composetest_web_1     /bin/sh -c python app.py   Up      5000->5000/tcp
 
 The `docker-compose run` command allows you to run one-off commands for your
 services. For example, to see what environment variables are available to the
 `web` service:
 
-        $ docker-compose run web env
+    $ docker-compose run web env
 
 See `docker-compose --help` to see other available commands. You can also install [command completion](completion.md) for the bash and zsh shell, which will also show you available commands.
 
 If you started Compose with `docker-compose up -d`, you'll probably want to stop
 your services once you've finished with them:
 
-        $ docker-compose stop
+    $ docker-compose stop
 
 At this point, you have seen the basics of how Compose works.
 
