@@ -43,14 +43,39 @@ install, configure, and backup DTR.
 
 To install DTR:
 
-1. Download a UCP client bundle.
+1. Get the DTR package.
+
+    ```bash
+    $ wget https://packages.docker.com/caas/ucp-2.0.0-beta1_dtr-2.1.0-beta1.tar.gz -O docker-datacenter.tar.gz
+    ```
+
+2. Transfer the package to the nodes.
+
+    Now that you have the DTR package in your machine, you can transfer it to the
+    nodes that you want to install DTR. For each node run:
+
+    ```bash
+    $ scp docker-datacenter.tag.gz <user>@<host>:/tmp
+    ```
+
+3. Load the images.
+
+    Once the package is on the nodes where you want to install DTR, you can use
+    the `docker load` command, to load the images from the .tar file. Log
+    into each node where you plan on installing DTR and run:
+
+    ```bash
+    $ docker load < /tmp/docker-datacenter.tar.gz
+    ```
+
+4. Download a UCP client bundle.
 
     Having a UCP client bundle allows you to run Docker commands on a swarm
     being managed by UCP.
     [Download a UCP client bundle](https://docs.docker.com/ucp/access-ucp/cli-based-access/)
     and set up your CLI client to use it.
 
-2. Run the following commands to install DTR.
+5. Run the following commands to install DTR.
 
     ```bash
     # Get the certificates used by UCP
@@ -58,15 +83,18 @@ To install DTR:
 
     # Install DTR
     $ docker run -it --rm \
-      docker/dtr install \
+      docker/dtr:2.0.0-beta1 install \
+      --ucp-node <hostname> \
       --ucp-ca "$(cat ucp-ca.pem)"
     ```
 
+    Where the `--ucp-node` is the hostname of the node where you've previously
+    loaded the DTR images.
     The install command has other flags for customizing DTR at install time.
     Check the [reference documentation to learn more](../reference/install.md).
 
 
-3. Check that DTR is running.
+6. Check that DTR is running.
 
     In your browser, navigate to the the Docker **Universal Control Plane**
     web UI, and navigate to the **Applications** screen. DTR should be listed
@@ -113,9 +141,11 @@ you're going to install these replicas also need to be managed by UCP.
 To add replicas to a DTR cluster, use the `docker/dtr join` command. To add
 replicas:
 
-1. Load you UCP user bundle.
+1. Make sure the DTR images are loaded into the node.
 
-2. Run the join command.
+2. Load you UCP user bundle.
+
+3. Run the join command.
 
     When you join a replica to a DTR cluster, you need to specify the
     ID of a replica that is already part of the cluster. You can find an
@@ -132,7 +162,7 @@ replicas:
       --ucp-ca "$(cat ucp-ca.pem)"
     ```
 
-3. Check that all replicas are running.
+4. Check that all replicas are running.
 
     In your browser, navigate to the the Docker **Universal Control Plane**
     web UI, and navigate to the **Applications** screen. All replicas should
