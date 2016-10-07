@@ -539,13 +539,17 @@ will try forever to restart the container. The number of (attempted) restarts
 for a container can be obtained via [`docker inspect`](commandline/inspect.md). For example, to get the number of restarts
 for container "my-container";
 
+    {% raw %}
     $ docker inspect -f "{{ .RestartCount }}" my-container
     # 2
+    {% endraw %}
 
 Or, to get the last time the container was (re)started;
 
+    {% raw %}
     $ docker inspect -f "{{ .State.StartedAt }}" my-container
     # 2015-03-04T23:47:07.691840179Z
+    {% endraw %}
 
 
 Combining `--restart` (restart policy) with the `--rm` (clean up) flag results
@@ -1402,6 +1406,7 @@ Similarly the operator can set the **hostname** with `-h`.
 
 Example:
 
+    {% raw %}
     $ docker run --name=test -d \
         --health-cmd='stat /etc/passwd || exit 1' \
         --health-interval=2s \
@@ -1446,6 +1451,7 @@ Example:
         }
       ]
     }
+    {% endraw %}
 
 The health status is also displayed in the `docker ps` output.
 
