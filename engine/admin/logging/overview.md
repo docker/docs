@@ -11,8 +11,6 @@ menu:
 title: Configuring Logging Drivers
 ---
 
-{% raw %}
-
 # Configure logging drivers
 
 The container can have a different logging driver than the Docker daemon. Use
@@ -245,13 +243,13 @@ logging driver options.
 
 For example, to specify both additional options:
 
-```bash
+```bash{% raw %}
 $ docker run -dit \
     --log-driver=fluentd \
     --log-opt fluentd-address=localhost:24224 \
     --log-opt tag="docker.{{.Name}}" \
     alpine sh
-```
+{% endraw %}```
 
 If container cannot connect to the Fluentd daemon on the specified address and
 `fluentd-async-connect` is not enabled, the container stops immediately.
@@ -307,5 +305,3 @@ The Google Cloud Logging driver supports the following options:
 
 For detailed information about working with this logging driver, see the
 [Google Cloud Logging driver](gcplogs.md). reference documentation.
-
-{% endraw %}

@@ -12,8 +12,6 @@ menu:
 title: Run a simple application
 ---
 
-{% raw %}
-
 # Run a simple application
 
 In the ["*Hello world in a container*"](dockerizing.md) you launched your
@@ -252,7 +250,9 @@ You can see a sample of that JSON output.
 We can also narrow down the information we want to return by requesting a
 specific element, for example to return the container's IP address we would:
 
+    {% raw %}
     $ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nostalgic_morse
+    {% endraw %}
 
     172.17.0.5
 
@@ -322,5 +322,3 @@ Until now you've only used images that you've downloaded from Docker Hub. Next,
 you can get introduced to building and sharing our own images.
 
 Go to [Working with Docker Images](dockerimages.md).
-
-{% endraw %}

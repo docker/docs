@@ -12,8 +12,6 @@ menu:
 title: Swarm administration guide
 ---
 
-{% raw %}
-
 # Administer and maintain a swarm of Docker Engines
 
 When you run a swarm of Docker Engines, **manager nodes** are the key components
@@ -168,17 +166,17 @@ for more information.
 From the command line, run `docker node inspect <id-node>` to query the nodes.
 For instance, to query the reachability of the node as a manager:
 
-```bash
+```bash{% raw %}
 docker node inspect manager1 --format "{{ .ManagerStatus.Reachability }}"
 reachable
-```
+{% endraw %}```
 
 To query the status of the node as a worker that accept tasks:
 
-```bash
+```bash{% raw %}
 docker node inspect manager1 --format "{{ .Status.State }}"
 ready
-```
+{% endraw %}```
 
 From those commands, we can see that `manager1` is both at the status
 `reachable` as a manager and `ready` as a worker.
@@ -264,5 +262,3 @@ The `--force-new-cluster` flag puts the Docker Engine into swarm mode as a
 manager node of a single-node swarm. It discards swarm membership information
 that existed before the loss of the quorum but it retains data necessary to the
 Swarm such as services, tasks and the list of worker nodes.
-
-{% endraw %}

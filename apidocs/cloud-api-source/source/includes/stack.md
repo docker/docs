@@ -1,5 +1,3 @@
-{% raw %}
-
 # Stacks
 
 ## Stack
@@ -568,5 +566,3 @@ Available in Docker Cloud's **REST API**
 Parameter | Description
 --------- | -----------
 uuid | The UUID of the stack to terminate
-
-{% endraw %}
