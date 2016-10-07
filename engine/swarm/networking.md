@@ -13,8 +13,6 @@ menu:
 title: Attach services to an overlay network
 ---
 
-{% raw %}
-
 # Attach services to an overlay network
 
 Docker Engine swarm mode natively supports **overlay networks**, so you can
@@ -177,13 +175,13 @@ active tasks.
 
 You can inspect the service to view the virtual IP. For example:
 
-```bash
+```bash{% raw %}
 $ docker service inspect \
   --format='{{json .Endpoint.VirtualIPs}}' \
   my-web
 
 [{"NetworkID":"7m2rjx0a97n88wzr4nu8772r3" "Addr":"10.0.0.2/24"}]
-```
+{% endraw %}```
 
 The following example shows how you can add a `busybox` service on the same
 network as the `nginx` service and the busybox service is able to access `nginx`
@@ -311,5 +309,3 @@ is not the right tool to confirm VIP connectivity.
 * [Swarm administration guide](admin_guide.md)
 * [Docker Engine command line reference](../reference/commandline/index.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)
-
-{% endraw %}

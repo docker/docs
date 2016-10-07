@@ -9,8 +9,6 @@ menu:
 title: Use the Docker command line
 ---
 
-{% raw %}
-
 # Use the Docker command line
 
 To list available commands, either run `docker` with no parameters
@@ -147,6 +145,7 @@ directives, see the [**Formatting** section in the `docker images` documentation
 
 Following is a sample `config.json` file:
 
+    {% raw %}
     {
       "HttpHeaders": {
         "MyHeader": "MyValue"
@@ -155,6 +154,7 @@ Following is a sample `config.json` file:
       "imagesFormat": "table {{.ID}}\\t{{.Repository}}\\t{{.Tag}}\\t{{.CreatedAt}}",
       "detachKeys": "ctrl-e,e"
     }
+    {% endraw %}
 
 ### Notary
 
@@ -224,5 +224,3 @@ Sometimes, multiple options can call for a more complex value string as for
 Options like `--name=""` expect a string, and they
 can only be specified once. Options like `-c=0`
 expect an integer, and they can only be specified once.
-
-{% endraw %}

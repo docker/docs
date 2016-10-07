@@ -9,8 +9,6 @@ menu:
 title: Remote API v1.23
 ---
 
-{% raw %}
-
 # Docker Remote API v1.23
 
 ## 1. Brief introduction
@@ -768,7 +766,9 @@ Get `stdout` and `stderr` logs from the container ``id``
      Connection: Upgrade
      Upgrade: tcp
 
+     {% raw %}
      {{ STREAM }}
+     {% endraw %}
 
 **Query parameters**:
 
@@ -845,7 +845,9 @@ Export the contents of container `id`
     HTTP/1.1 200 OK
     Content-Type: application/octet-stream
 
+    {% raw %}
     {{ TAR STREAM }}
+    {% endraw %}
 
 **Status codes**:
 
@@ -1235,7 +1237,9 @@ Attach to the container `id`
     Connection: Upgrade
     Upgrade: tcp
 
+    {% raw %}
     {{ STREAM }}
+    {% endraw %}
 
 **Query parameters**:
 
@@ -1319,7 +1323,9 @@ Implements websocket protocol handshake according to [RFC 6455](http://tools.iet
 
 **Example response**
 
+    {% raw %}
     {{ STREAM }}
+    {% endraw %}
 
 **Query parameters**:
 
@@ -1417,7 +1423,9 @@ Copy files or folders of container `id`
     HTTP/1.1 200 OK
     Content-Type: application/x-tar
 
+    {% raw %}
     {{ TAR STREAM }}
+    {% endraw %}
 
 **Status codes**:
 
@@ -1463,7 +1471,9 @@ Get a tar archive of a resource in the filesystem of container `id`.
     Content-Type: application/x-tar
     X-Docker-Container-Path-Stat: eyJuYW1lIjoicm9vdCIsInNpemUiOjQwOTYsIm1vZGUiOjIxNDc0ODQwOTYsIm10aW1lIjoiMjAxNC0wMi0yN1QyMDo1MToyM1oiLCJsaW5rVGFyZ2V0IjoiIn0=
 
+    {% raw %}
     {{ TAR STREAM }}
+    {% endraw %}
 
 On success, a response header `X-Docker-Container-Path-Stat` will be set to a
 base64-encoded JSON object containing some filesystem header information about
@@ -1518,7 +1528,9 @@ Upload a tar archive to be extracted to a path in the filesystem of container
     PUT /containers/8cce319429b2/archive?path=/vol1 HTTP/1.1
     Content-Type: application/x-tar
 
+    {% raw %}
     {{ TAR STREAM }}
+    {% endraw %}
 
 **Example response**:
 
@@ -1644,7 +1656,9 @@ Build an image from a Dockerfile
 
     POST /build HTTP/1.1
 
+    {% raw %}
     {{ TAR STREAM }}
+    {% endraw %}
 
 **Example response**:
 
@@ -2804,7 +2818,9 @@ interactive session with the `exec` command.
     HTTP/1.1 200 OK
     Content-Type: application/vnd.docker.raw-stream
 
+    {% raw %}
     {{ STREAM }}
+    {% endraw %}
 
 **JSON parameters**:
 
@@ -3389,5 +3405,3 @@ To set cross origin requests to the remote api please give values to
 default or blank means CORS disabled
 
     $ dockerd -H="192.168.1.9:2375" --api-cors-header="http://foo.bar"
-
-{% endraw %}

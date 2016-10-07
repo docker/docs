@@ -15,8 +15,6 @@ menu:
 title: Use swarm mode routing mesh
 ---
 
-{% raw %}
-
 # Use swarm mode routing mesh
 
 Docker Engine swarm mode makes it easy to publish ports for services to make
@@ -81,11 +79,11 @@ $ docker service update \
 You can use `docker service inspect` to view the service's published port. For
 instance:
 
-```bash
+```bash{% raw %}
 $ docker service inspect --format="{{json .Endpoint.Spec.Ports}}" my-web
 
 [{"Protocol":"tcp","TargetPort":80,"PublishedPort":8080}]
-```
+{% endraw %}```
 
 The output shows the `<TARGET-PORT>` from the containers and the
 `<PUBLISHED-PORT>` where nodes listen for requests for the service.
@@ -137,5 +135,3 @@ To learn more about HAProxy, see the [HAProxy documentation](https://cbonte.gith
 ## Learn more
 
 * [Deploy services to a swarm](services.md)
-
-{% endraw %}

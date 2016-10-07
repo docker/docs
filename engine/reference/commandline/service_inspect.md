@@ -8,8 +8,6 @@ menu:
 title: service inspect
 ---
 
-{% raw %}
-
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
 
 # service inspect
@@ -141,10 +139,10 @@ The `--format` option can be used to obtain specific information about a
 service. For example, the following command outputs the number of replicas
 of the "redis" service.
 
-```bash
+```bash{% raw %}
 $ docker service inspect --format='{{.Spec.Mode.Replicated.Replicas}}' redis
 10
-```
+{% endraw %}```
 
 
 ## Related information
@@ -155,5 +153,3 @@ $ docker service inspect --format='{{.Spec.Mode.Replicated.Replicas}}' redis
 * [service scale](service_scale.md)
 * [service ps](service_ps.md)
 * [service update](service_update.md)
-
-{% endraw %}

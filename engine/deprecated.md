@@ -11,8 +11,6 @@ menu:
 title: Deprecated Engine Features
 ---
 
-{% raw %}
-
 # Deprecated Engine Features
 
 The following list of features are deprecated in Engine.
@@ -108,7 +106,9 @@ Log tags are now generated in a standard way across different logging drivers.
 Because of which, the driver specific log tag options `syslog-tag`, `gelf-tag` and
 `fluentd-tag` have been deprecated in favor of the generic `tag` option.
 
+    {% raw %}
     docker --log-driver=syslog --log-opt tag="{{.ImageName}}/{{.Name}}/{{.ID}}"
+    {% endraw %}
 
 ### LXC built-in exec driver
 **Deprecated In Release: [v1.8.0](https://github.com/docker/docker/releases/tag/v1.8.0)**
@@ -189,5 +189,3 @@ Since 1.9, Docker Content Trust Offline key has been renamed to Root key and the
 
 - DOCKER_CONTENT_TRUST_OFFLINE_PASSPHRASE is now named DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE
 - DOCKER_CONTENT_TRUST_TAGGING_PASSPHRASE is now named DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE
-
-{% endraw %}

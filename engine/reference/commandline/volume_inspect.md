@@ -8,8 +8,6 @@ menu:
 title: volume inspect
 ---
 
-{% raw %}
-
 # volume inspect
 
 ```markdown
@@ -42,8 +40,10 @@ Example output:
       }
     ]
 
+    {% raw %}
     $ docker volume inspect --format '{{ .Mountpoint }}' 85bffb0677236974f93955d8ecc4df55ef5070117b0e53333cc1b443777be24d
     /var/lib/docker/volumes/85bffb0677236974f93955d8ecc4df55ef5070117b0e53333cc1b443777be24d/_data
+    {% endraw %}
 
 ## Related information
 
@@ -51,5 +51,3 @@ Example output:
 * [volume ls](volume_ls.md)
 * [volume rm](volume_rm.md)
 * [Understand Data Volumes](../../tutorials/dockervolumes.md)
-
-{% endraw %}
