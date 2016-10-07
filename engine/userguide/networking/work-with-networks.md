@@ -9,8 +9,6 @@ menu:
 title: Work with network commands
 ---
 
-{% raw %}
-
 # Work with network commands
 
 This article provides examples of the network subcommands you can use to
@@ -266,15 +264,15 @@ configuration does not change across daemon reload.
 
 Now, inspect the network resources used by `container3`.
 
-```bash
+```bash{% raw %}
 $ docker inspect --format='{{json .NetworkSettings.Networks}}'  container3
 
 {"isolated_nw":{"IPAMConfig":{"IPv4Address":"172.25.3.3"},"NetworkID":"1196a4c5af43a21ae38ef34515b6af19236a3fc48122cf585e3f3054d509679b",
 "EndpointID":"dffc7ec2915af58cc827d995e6ebdc897342be0420123277103c40ae35579103","Gateway":"172.25.0.1","IPAddress":"172.25.3.3","IPPrefixLen":16,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"02:42:ac:19:03:03"}}
-```
+{% endraw %}```
 Repeat this command for `container2`. If you have Python installed, you can pretty print the output.
 
-```bash
+```bash{% raw %}
 $ docker inspect --format='{{json .NetworkSettings.Networks}}'  container2 | python -m json.tool
 
 {
@@ -303,7 +301,7 @@ $ docker inspect --format='{{json .NetworkSettings.Networks}}'  container2 | pyt
         "MacAddress": "02:42:ac:19:00:02"
     }
 }
-```
+{% endraw %}```
 
 You should find `container2` belongs to two networks.  The `bridge` network
 which it joined by default when you launched it and the `isolated_nw` which you
@@ -753,7 +751,7 @@ round-trip min/avg/max = 0.072/0.085/0.101 ms
 You can disconnect a container from a network using the `docker network
 disconnect` command.
 
-```bash
+```bash{% raw %}
 $ docker network disconnect isolated_nw container2
 
 $ docker inspect --format='{{json .NetworkSettings.Networks}}'  container2 | python -m json.tool
@@ -802,7 +800,7 @@ $ docker network inspect isolated_nw
         "Options": {}
     }
 ]
-```
+{% endraw %}```
 
 Once a container is disconnected from a network, it cannot communicate with
 other containers connected to that network. In this example, `container2` can
@@ -928,5 +926,3 @@ f7ab26d71dbd        bridge              bridge
 * [network disconnect](../../reference/commandline/network_disconnect.md)
 * [network ls](../../reference/commandline/network_ls.md)
 * [network rm](../../reference/commandline/network_rm.md)
-
-{% endraw %}
