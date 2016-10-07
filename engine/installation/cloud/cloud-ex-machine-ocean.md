@@ -29,21 +29,21 @@ To generate your access token:
 
   1. Go to the Digital Ocean administrator console and click **API** in the header.
 
-    ![Click API in Digital Ocean console](../images/ocean_click_api.png)
+  ![Click API in Digital Ocean console](../images/ocean_click_api.png)
 
   2. Click **Generate New Token** to get to the token generator.
 
-    ![Generate token](../images/ocean_gen_token.png)
+  ![Generate token](../images/ocean_gen_token.png)
 
   3. Give the token a clever name (e.g. "machine"), make sure the **Write (Optional)** checkbox is checked, and click **Generate Token**.
 
-    ![Name and generate token](../images/ocean_token_create.png)
+  ![Name and generate token](../images/ocean_token_create.png)
 
   4. Grab (copy to clipboard) the generated big long hex string and store it somewhere safe.
 
-    ![Copy and save personal access token](../images/ocean_save_token.png)
+  ![Copy and save personal access token](../images/ocean_save_token.png)
 
-    This is the personal access token you'll use in the next step to create your cloud server.
+  This is the personal access token you'll use in the next step to create your cloud server.
 
 ### Step 3. Install Docker Machine
 
@@ -97,7 +97,7 @@ To generate your access token:
 
 2. Go to the Digital Ocean console to view the new Droplet.
 
-    ![Droplet in Digital Ocean created with Machine](../images/ocean_droplet.png)
+  ![Droplet in Digital Ocean created with Machine](../images/ocean_droplet.png)
 
 3. At the command terminal, run `docker-machine ls`.
 
