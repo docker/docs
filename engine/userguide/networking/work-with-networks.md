@@ -9,8 +9,6 @@ menu:
 title: Work with network commands
 ---
 
-{% raw %}
-
 # Work with network commands
 
 This article provides examples of the network subcommands you can use to
@@ -928,5 +926,3 @@ f7ab26d71dbd        bridge              bridge
 * [network disconnect](../../reference/commandline/network_disconnect.md)
 * [network ls](../../reference/commandline/network_ls.md)
 * [network rm](../../reference/commandline/network_rm.md)
-
-{% endraw %}

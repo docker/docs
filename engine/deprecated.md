@@ -11,8 +11,6 @@ menu:
 title: Deprecated Engine Features
 ---
 
-{% raw %}
-
 # Deprecated Engine Features
 
 The following list of features are deprecated in Engine.
@@ -189,5 +187,3 @@ Since 1.9, Docker Content Trust Offline key has been renamed to Root key and the
 
 - DOCKER_CONTENT_TRUST_OFFLINE_PASSPHRASE is now named DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE
 - DOCKER_CONTENT_TRUST_TAGGING_PASSPHRASE is now named DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE
-
-{% endraw %}

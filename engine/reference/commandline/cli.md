@@ -9,8 +9,6 @@ menu:
 title: Use the Docker command line
 ---
 
-{% raw %}
-
 # Use the Docker command line
 
 To list available commands, either run `docker` with no parameters
@@ -224,5 +222,3 @@ Sometimes, multiple options can call for a more complex value string as for
 Options like `--name=""` expect a string, and they
 can only be specified once. Options like `-c=0`
 expect an integer, and they can only be specified once.
-
-{% endraw %}

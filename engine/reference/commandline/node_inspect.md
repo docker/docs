@@ -8,8 +8,6 @@ menu:
 title: node inspect
 ---
 
-{% raw %}
-
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
 
 # node inspect
@@ -128,5 +126,3 @@ Example output:
 * [node ps](node_ps.md)
 * [node ls](node_ls.md)
 * [node rm](node_rm.md)
-
-{% endraw %}

@@ -10,8 +10,6 @@ menu:
 title: Fluentd logging driver
 ---
 
-{% raw %}
-
 # Fluentd logging driver
 
 The `fluentd` logging driver sends container logs to the
@@ -115,5 +113,3 @@ aggregate store.
 3. Start one or more containers with the `fluentd` logging driver:
 
         $ docker run --log-driver=fluentd your/application
-
-{% endraw %}
