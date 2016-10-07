@@ -25,7 +25,7 @@ you understand what these flags do, you must provide your own values for these
 options while following this document. You can also configure these options, see
 [advanced configuration options](reference/index.md) for more information.
 
-## Initialize a Trusted Collection</a>
+## Initialize a Trusted Collection
 
 Before adding and signing content to a collection, you must first initialize that collection.
 
