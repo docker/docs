@@ -145,6 +145,7 @@ directives, see the [**Formatting** section in the `docker images` documentation
 
 Following is a sample `config.json` file:
 
+    {% raw %}
     {
       "HttpHeaders": {
         "MyHeader": "MyValue"
@@ -153,6 +154,7 @@ Following is a sample `config.json` file:
       "imagesFormat": "table {{.ID}}\\t{{.Repository}}\\t{{.Tag}}\\t{{.CreatedAt}}",
       "detachKeys": "ctrl-e,e"
     }
+    {% endraw %}
 
 ### Notary
 

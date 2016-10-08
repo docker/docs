@@ -70,8 +70,8 @@ This will result in an image named `webapp` and tagged `tag`, built from `./dir`
 > **Note**: In the [version 1 file format](compose-file.md#version-1), `build` is different in
 > two ways:
 >
-> -   Only the string form (`build: .`) is allowed - not the object form.
-> -   Using `build` together with `image` is not allowed. Attempting to do so
+> 1.   Only the string form (`build: .`) is allowed - not the object form.
+> 2.   Using `build` together with `image` is not allowed. Attempting to do so
 >     results in an error.
 
 #### context
@@ -103,13 +103,15 @@ specified.
 
 > **Note**: In the [version 1 file format](compose-file.md#version-1), `dockerfile` is
 > different in two ways:
-
-  * It appears alongside `build`, not as a sub-option:
-
-        build: .
-        dockerfile: Dockerfile-alternate
-
-  * Using `dockerfile` together with `image` is not allowed. Attempting to do so results in an error.
+>
+>  1.  It appears alongside `build`, not as a sub-option:
+>
+>      ```
+>      build: .
+>      dockerfile: Dockerfile-alternate
+>      ```
+>
+>  2.  Using `dockerfile` together with `image` is not allowed. Attempting to do so results in an error.
 
 #### args
 
