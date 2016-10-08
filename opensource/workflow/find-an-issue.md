@@ -110,7 +110,6 @@ The following table describes the kind labels.
 The following table describes the experience level guidelines.
 
 <table>
-<thead>
   <thead>
     <tr>
       <th>Exp Label</th>
