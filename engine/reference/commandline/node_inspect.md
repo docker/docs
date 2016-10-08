@@ -95,8 +95,10 @@ Example output:
     }
     ]
 
+    {% raw %}
     $ docker node inspect --format '{{ .ManagerStatus.Leader }}' self
     false
+    {% endraw %}
 
     $ docker node inspect --pretty self
     ID:                     e216jshn25ckzbvmwlnh5jr3g

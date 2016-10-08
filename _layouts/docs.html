@@ -191,13 +191,13 @@ ng\:form {
             </div>
             <div {% if page.notoc %} class="col-xs-12 col-sm-9 col-md-10" {% else %} class="col-xs-12 col-sm-9 col-md-8 col-xl-9" {% endif %} >
               <section class="section" id="DocumentationText">
-							{{ content | markdownify }}
+              {{ content }}
 							{% if page.noratings != true %}
 							<div style="text-align: center; margin-top: 50px">
 								<img src="/images/chat.png" alt="chat icon" style="margin-right: 10px">
 								<b>Feedback?</b> Questions? Suggestions?<br/>
 							  <a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}" class="nomunge">Edit this page</a>,
-								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&body=URL: {{ page.path }}" class="nomunge">file a ticket</a>, or rate this page:
+								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&body=URL: [https://docs.docker.com/{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge">file a ticket</a>, or rate this page:
 								<div id="pd_rating_holder_8453675"></div>
 								<script type="text/javascript">
 								PDRTJS_settings_8453675 = {
