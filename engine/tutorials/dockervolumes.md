@@ -99,7 +99,7 @@ In addition to creating a volume using the `-v` flag you can also mount a
 directory from your Docker engine's host into a container.
 
 ```bash
-$ docker run -d -P --name web -v /src/webapp:/opt/webapp training/webapp python app.py
+$ docker run -d -P --name web -v /src/webapp:/webapp training/webapp python app.py
 ```
 
 This command mounts the host directory, `/src/webapp`, into the container at
