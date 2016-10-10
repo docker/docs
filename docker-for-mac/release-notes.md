@@ -43,12 +43,12 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 **General**
 
  * Fixed communications glitch when UI talks to com.docker.vmnetd
- Fixes https://github.com/docker/for-mac/issues/90
+ Fixes [https://github.com/docker/for-mac/issues/90](https://github.com/docker/for-mac/issues/90)
 
  * `docker-diagnose`: display and record the time the diagnosis was captured
 
  * Don't compute the container folder in `com.docker.vmnetd`
-   Fixes https://github.com/docker/for-mac/issues/47
+   Fixes [https://github.com/docker/for-mac/issues/47](https://github.com/docker/for-mac/issues/47)
 
  * Warn the user if BlueStacks is installed (potential kernel panic)
 
@@ -69,7 +69,7 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 * Entries from `/etc/hosts` should now resolve from within containers
 
 * Allow ports to be bound on host addresses other than `0.0.0.0` and `127.0.0.1`
-  Fixes issue reported in https://github.com/docker/for-mac/issues/68
+  Fixes issue reported in [https://github.com/docker/for-mac/issues/68](https://github.com/docker/for-mac/issues/68)
 
 * Use Mac System Configuration database to detect DNS
 
@@ -145,6 +145,21 @@ events or unexpected unmounts.
 
 ## Beta Release Notes
 
+### Beta 28 Release Notes (2016-10-13 1.12.2-rc3-beta28)
+
+**Upgrades**
+
+- Docker 1.12.2
+- Kernel 4.4.24
+- Notary 0.4.2
+
+**Bug fixes and minor changes**
+
+- Fixed an issue where Docker for Mac was incorrectly reported as updated
+- osxfs: Fixed race condition causing some reads to run forever
+- Channel is now displayed in About box
+- Crash reports are sent over Bugsnag rather than HockeyApp
+
 ### Beta 27 Release Notes (2016-09-28 1.12.2-rc1-beta27)
 
 **Upgrades**
@@ -158,15 +173,15 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-* Fix an issue where some windows did not claim focus correctly
-* Add UI when switching channel to prevent user losing containers and settings
+* Fixed an issue where some windows did not claim focus correctly
+* Added UI when switching channel to prevent user losing containers and settings
 * Check disk capacity before Toolbox import
 * Import certificates in `etc/ssl/certs/ca-certificates.crt`
 * DNS: reduce the number of UDP sockets consumed on the host
 * VPNkit: improve the connection-limiting code to avoid running out of sockets on the host
 * UDP: handle diagrams bigger than 2035, up to the configured macOS kernel limit
-* UDP: make the forwarding more robust; drop packets and continue rather than stopping
-* disk: make the "flush" behaviour configurable for database-like workloads. This works around a performance regression in `v1.12.1`.
+* UDP: made the forwarding more robust; now, drop packets and continue rather than stopping
+* disk: made the "flush" behaviour configurable for database-like workloads. This works around a performance regression in `v1.12.1`.
 
 ### Beta 26 Release Notes (2016-09-14 1.12.1-beta26)
 
@@ -181,7 +196,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-* Fixed communications glitch when UI talks to `com.docker.vmnetd`. Fixes https://github.com/docker/for-mac/issues/90
+* Fixed communications glitch when UI talks to `com.docker.vmnetd`. Fixes [https://github.com/docker/for-mac/issues/90](https://github.com/docker/for-mac/issues/90)
 
 * UI fix for macOs 10.12
 
@@ -193,9 +208,9 @@ events or unexpected unmounts.
 
 * `docker-diagnose` displays and records the time the diagnosis was captured
 
-* Ports are allowed to bind to host addresses other than `0.0.0.0` and `127.0.0.1`. Fixes issue reported in https://github.com/docker/for-mac/issues/68.
+* Ports are allowed to bind to host addresses other than `0.0.0.0` and `127.0.0.1`. Fixes issue reported in [https://github.com/docker/for-mac/issues/68](https://github.com/docker/for-mac/issues/68).
 
-* We no longer compute the container folder in `com.docker.vmnetd`. Fixes https://github.com/docker/for-mac/issues/47.
+* We no longer compute the container folder in `com.docker.vmnetd`. Fixes [https://github.com/docker/for-mac/issues/47](https://github.com/docker/for-mac/issues/47).
 
 **Known Issues**
 
@@ -468,7 +483,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-* Documentation moved to https://docs.docker.com/docker-for-mac/
+* Documentation moved to [https://docs.docker.com/docker-for-mac/](https://docs.docker.com/docker-for-mac/)
 * Allow non-admin users to launch the app for the first time (using admin creds)
 * Prompt non-admin users for admin password when needed in Preferences
 * Fixed download links, documentation links

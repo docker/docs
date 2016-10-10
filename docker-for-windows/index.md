@@ -352,7 +352,7 @@ If you have containers that you wish to keep running across restarts, you should
 ### Docker daemon
 You can configure options on the Docker daemon in the given JSON configuration file, and determine how your containers will run.
 
-For a full list of options on the Docker daemon, see <a href="https://docs.docker.com/engine/reference/commandline/daemon/" target="_blank">daemon</a> in the Docker Engine command line reference.
+For a full list of options on the Docker daemon, see <a href="https://docs.docker.com/engine/reference/commandline/dockerd/" target="_blank">daemon</a> in the Docker Engine command line reference.
 
 ![Docker Daemon](images/docker-daemon.png)
 
