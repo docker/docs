@@ -132,6 +132,45 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 
 ## Beta Release Notes
 
+### Beta 28 Release Notes (2016-10-13 1.12.2-rc3-beta28)
+
+>**Important Note**:
+>
+> The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+
+> [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
+
+> This problem is fixed as of Beta 23 for subsequent auto-updates.
+>
+Windows Container support relies on the Windows 10 container feature, which is
+**experimental** at this point.  Windows 10 Pro (1607, build number 14393)
+requires update `KB3192366` (soon to be released via Windows Update) to fully
+work. Some insider builds may not work.
+
+**New**
+
+- Path to HyperV disks in no longer hardcoded, making the Toolbox import work with non-standard path
+- Verify that ALL HyperV features are enabled
+- Make it clear why user cannot switch to Windows Containers with a tooltip in the systray
+- Added Moby console to the logs
+- Save the current engine with the other settings
+- Notary version 0.4.2 installed
+
+
+**Upgrades**
+
+- Docker 1.12.2
+- Kernel 4.4.24
+
+**Bug fixes and minor changes**
+
+- Fixed a password escaping regression
+- Support writing large values to the database, especially for trusted CAs
+- VpnKit is now restarted if it dies
+- Make sure invalid "DockerNat" switches are not used
+- Preserve the Powershell stacktraces
+- Write OS and Application versions at the top of each log file
+
 ### Beta 27 Release Notes (2016-09-28 1.12.2-rc1-beta27)
 
 >**Important Note**:
