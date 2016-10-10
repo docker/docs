@@ -1,5 +1,5 @@
 ---
-draft: true
+published: false
 ---
 
 This directory holds the authoritative specifications of APIs defined and implemented by Docker. Currently this includes:
