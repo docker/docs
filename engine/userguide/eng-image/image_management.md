@@ -1,16 +1,14 @@
----
-alias:
-- /reference/api/hub_registry_spec/
-- /userguide/image_management/
-description: Documentation for docker Registry and Registry API
-keywords:
-- docker, registry, api,  hub
-menu:
-  main:
-    parent: engine_images
-    weight: 90
-title: Image management
----
+<!--[metadata]>
++++
+alias = [ "/reference/api/hub_registry_spec/", "/userguide/image_management/"]
+title = "Image management"
+description = "Documentation for docker Registry and Registry API"
+keywords = ["docker, registry, api,  hub"]
+[menu.main]
+parent="engine_images"
+weight=90
++++
+<![end-metadata]-->
 
 # Image management
 

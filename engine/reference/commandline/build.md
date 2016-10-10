@@ -1,12 +1,12 @@
----
-description: The build command description and usage
-keywords:
-- build, docker, image
-menu:
-  main:
-    parent: smn_cli
-title: build
----
+<!--[metadata]>
++++
+title = "build"
+description = "The build command description and usage"
+keywords = ["build, docker, image"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # build
 
@@ -17,7 +17,9 @@ Build an image from a Dockerfile
 
 Options:
       --build-arg value         Set build-time variables (default [])
+      --cache-from value        Images to consider as cache sources (default [])
       --cgroup-parent string    Optional parent cgroup for the container
+      --compress                Compress the build context using gzip
       --cpu-period int          Limit the CPU CFS (Completely Fair Scheduler) period
       --cpu-quota int           Limit the CPU CFS (Completely Fair Scheduler) quota
   -c, --cpu-shares int          CPU shares (relative weight)
@@ -35,6 +37,7 @@ Options:
       --pull                    Always attempt to pull a newer version of the image
   -q, --quiet                   Suppress the build output and print image ID on success
       --rm                      Remove intermediate containers after a successful build (default true)
+      --security-opt value      Security Options (default [])
       --shm-size string         Size of /dev/shm, default value is 64MB.
                                 The format is `<number><unit>`. `number` must be greater than `0`.
                                 Unit is optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes),
@@ -394,6 +397,12 @@ Dockerfile are echoed during the build process.
 
 For detailed information on using `ARG` and `ENV` instructions, see the
 [Dockerfile reference](../builder.md).
+
+### Optional security options (--security-opt)
+
+This flag is only supported on a daemon running on Windows, and only supports 
+the `credentialspec` option. The `credentialspec` must be in the format
+`file://spec.txt` or `registry://keyname`. 
 
 ### Specify isolation technology for container (--isolation)
 

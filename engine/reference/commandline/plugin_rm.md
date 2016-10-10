@@ -1,18 +1,18 @@
----
-advisory: experimental
-description: the plugin rm command description and usage
-keywords:
-- plugin, rm
-menu:
-  main:
-    parent: smn_cli
-title: plugin rm
----
+<!--[metadata]>
++++
+title = "plugin rm"
+description = "the plugin rm command description and usage"
+keywords = ["plugin, rm"]
+advisory = "experimental"
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # plugin rm (experimental)
 
 ```markdown
-Usage:  docker plugin rm PLUGIN
+Usage:  docker plugin rm [OPTIONS] PLUGIN [PLUGIN...]
 
 Remove one or more plugins
 
@@ -20,12 +20,14 @@ Aliases:
   rm, remove
 
 Options:
-      --help   Print usage
+      -f, --force  Force the removal of an active plugin
+          --help   Print usage
 ```
 
-Removes a plugin. You cannot remove a plugin if it is active, you must disable
+Removes a plugin. You cannot remove a plugin if it is enabled, you must disable
 a plugin using the [`docker plugin disable`](plugin_disable.md) before removing
-it.
+it (or use --force, use of force is not recommended, since it can affect
+functioning of running containers using the plugin).
 
 The following example disables and removes the `no-remove:latest` plugin;
 

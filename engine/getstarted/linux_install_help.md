@@ -1,14 +1,14 @@
----
-aliases:
-- /mac/started/
-description: Getting started with Docker
-identifier: getstart_linux_install
-keywords:
-- beginner, getting started, Docker, install
-parent: tutorial_getstart_menu
-title: Install Docker and run hello-world
-weight: "-80"
----
+<!--[metadata]>
++++
+aliases = ["/mac/started/"]
+title = "Install Docker and run hello-world"
+description = "Getting started with Docker"
+keywords = ["beginner, getting started, Docker, install"]
+identifier = "getstart_linux_install"
+parent = "tutorial_getstart_menu"
+weight="-80"
++++
+<![end-metadata]-->
 
 # Example: Install Docker on Ubuntu Linux
 

@@ -1,13 +1,13 @@
----
-description: How to keep containers running when the daemon isn't available.
-keywords:
-- docker, upgrade, daemon, dockerd, live-restore, daemonless container
-menu:
-  main:
-    parent: engine_admin
-    weight: "6"
-title: Keep containers alive during daemon downtime
----
+<!--[metadata]>
++++
+title = "Keep containers alive during daemon downtime"
+description = "How to keep containers running when the daemon isn't available."
+keywords = ["docker, upgrade, daemon, dockerd, live-restore, daemonless container"]
+[menu.main]
+parent = "engine_admin"
+weight="6"
++++
+<![end-metadata]-->
 
 # Keep containers alive during daemon downtime
 

@@ -1,12 +1,12 @@
----
-description: Review of security vulnerabilities Docker mitigated
-keywords:
-- Docker, Docker documentation,  security, security non-events
-menu:
-  main:
-    parent: smn_secure_docker
-title: Docker Security Non-events
----
+<!--[metadata]>
++++
+title = "Docker Security Non-events"
+description = "Review of security vulnerabilities Docker mitigated"
+keywords = ["Docker, Docker documentation,  security, security non-events"]
+[menu.main]
+parent = "smn_secure_docker"
++++
+<![end-metadata]-->
 
 # Docker Security Non-events
 

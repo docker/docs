@@ -1,16 +1,15 @@
----
-aliases:
-- /engine/misc/breaking/
-description: Breaking changes
-keywords:
-- docker, documentation, about, technology, breaking
-- incompatibilities
-menu:
-  main:
-    parent: engine_use
-    weight: 80
-title: Breaking changes
----
+<!--[metadata]>
++++
+aliases = ["/engine/misc/breaking/"]
+title = "Breaking changes"
+description = "Breaking changes"
+keywords = ["docker, documentation, about, technology, breaking",
+"incompatibilities"]
+[menu.main]
+parent = "engine_use"
+weight=80
++++
+<![end-metadata]-->
 
 # Breaking changes and incompatibilities
 

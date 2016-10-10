@@ -1,14 +1,14 @@
----
-description: Remove the service from the swarm
-keywords:
-- tutorial, cluster management, swarm, service
-menu:
-  main:
-    identifier: swarm-tutorial-delete-service
-    parent: swarm-tutorial
-    weight: 19
-title: Delete the service
----
+<!--[metadata]>
++++
+title = "Delete the service"
+description = "Remove the service from the swarm"
+keywords = ["tutorial, cluster management, swarm, service"]
+[menu.main]
+identifier="swarm-tutorial-delete-service"
+parent="swarm-tutorial"
+weight=19
++++
+<![end-metadata]-->
 
 # Delete the service running on the swarm
 
@@ -19,7 +19,7 @@ you can delete the service from the swarm.
 run your manager node. For example, the tutorial uses a machine named
 `manager1`.
 
-2.  Run `docker service rm helloworld` to remove the `helloworld` service.
+2. Run `docker service rm helloworld` to remove the `helloworld` service.
 
     ```
     $ docker service rm helloworld
@@ -27,7 +27,7 @@ run your manager node. For example, the tutorial uses a machine named
     helloworld
     ```
 
-3.  Run `docker service inspect <SERVICE-ID>` to verify that the swarm manager
+3. Run `docker service inspect <SERVICE-ID>` to verify that the swarm manager
 removed the service. The CLI returns a message that the service is not found:
 
     ```

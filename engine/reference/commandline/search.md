@@ -1,12 +1,12 @@
----
-description: The search command description and usage
-keywords:
-- search, hub, images
-menu:
-  main:
-    parent: smn_cli
-title: search
----
+<!--[metadata]>
++++
+title = "search"
+description = "The search command description and usage"
+keywords = ["search, hub, images"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # search
 
@@ -80,7 +80,7 @@ at least 3 stars and the description isn't truncated in the output:
 
 ## Limit search results (--limit)
 
-The flag `--limit` is the maximum number of results returned by a search. This value could
+The flag `--limit` is the maximium number of results returned by a search. This value could
 be in the range between 1 and 100. The default value of `--limit` is 25.
 
 

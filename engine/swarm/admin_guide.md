@@ -1,16 +1,17 @@
----
-aliases:
-- /engine/swarm/manager-administration-guide/
-description: Manager administration guide
-keywords:
-- docker, container, swarm, manager, raft
-menu:
-  main:
-    identifier: manager_admin_guide
-    parent: engine_swarm
-    weight: "20"
-title: Swarm administration guide
----
+<!--[metadata]>
++++
+aliases = [
+"/engine/swarm/manager-administration-guide/"
+]
+title = "Swarm administration guide"
+description = "Manager administration guide"
+keywords = ["docker, container, swarm, manager, raft"]
+[menu.main]
+identifier="manager_admin_guide"
+parent="engine_swarm"
+weight="20"
++++
+<![end-metadata]-->
 
 # Administer and maintain a swarm of Docker Engines
 
@@ -21,15 +22,15 @@ maintain the swarm.
 
 This article covers the following swarm administration tasks:
 
-* [Using a static IP for manager node advertise address](admin_guide.md#use-a-static-ip-for-manager-node-advertise-address)
-* [Adding manager nodes for fault tolerance](admin_guide.md#add-manager-nodes-for-fault-tolerance)
-* [Distributing manager nodes](admin_guide.md#distribute-manager-nodes)
-* [Running manager-only nodes](admin_guide.md#run-manager-only-nodes)
-* [Backing up the swarm state](admin_guide.md#back-up-the-swarm-state)
-* [Monitoring the swarm health](admin_guide.md#monitor-swarm-health)
-* [Troubleshooting a manager node](admin_guide.md#troubleshoot-a-manager-node)
-* [Forcefully removing a node](admin_guide.md#force-remove-a-node)
-* [Recovering from disaster](admin_guide.md#recover-from-disaster)
+* [Using a static IP for manager node advertise address](#use-a-static-ip-for-manager-node-advertise-address)
+* [Adding manager nodes for fault tolerance](#add-manager-nodes-for-fault-tolerance)
+* [Distributing manager nodes](#distribute-manager-nodes)
+* [Running manager-only nodes](#run-manager-only-nodes)
+* [Backing up the swarm state](#back-up-the-swarm-state)
+* [Monitoring the swarm health](#monitor-swarm-health)
+* [Troubleshooting a manager node](#troubleshoot-a-manager-node)
+* [Forcefully removing a node](#force-remove-a-node)
+* [Recovering from disaster](#recover-from-disaster)
 
 Refer to [How nodes work](how-swarm-mode-works/nodes.md)
 for a brief overview of Docker Swarm mode and the difference between manager and
@@ -91,13 +92,13 @@ guaranteed if you encounter more than two network partitions.
 For example, in a swarm with *5 nodes*, if you lose *3 nodes*, you don't have a
 quorum. Therefore you can't add or remove nodes until you recover one of the
 unavailable manager nodes or recover the swarm with disaster recovery
-commands. See [Recover from disaster](admin_guide.md#recover-from-disaster).
+commands. See [Recover from disaster](#recover-from-disaster).
 
 While it is possible to scale a swarm down to a single manager node, it is
 impossible to demote the last manager node. This ensures you maintain access to
 the swarm and that the swarm can still process requests. Scaling down to a
 single manager is an unsafe operation and is not recommended. If
-the last node leaves the swarm unexpectedly during the demote operation, the
+the last node leaves the swarm unexpetedly during the demote operation, the
 swarm will become unavailable until you reboot the node or restart with
 `--force-new-cluster`.
 
@@ -154,7 +155,7 @@ directory:
 ```
 
 Back up the `raft` data directory often so that you can use it in case of
-[disaster recovery](admin_guide.md#recover-from-disaster). Then you can take the `raft`
+[disaster recovery](#recover-from-disaster). Then you can take the `raft`
 directory of one of the manager nodes to restore to a new swarm.
 
 ## Monitor swarm health
@@ -166,17 +167,17 @@ for more information.
 From the command line, run `docker node inspect <id-node>` to query the nodes.
 For instance, to query the reachability of the node as a manager:
 
-```bash{% raw %}
+```bash
 docker node inspect manager1 --format "{{ .ManagerStatus.Reachability }}"
 reachable
-{% endraw %}```
+```
 
 To query the status of the node as a worker that accept tasks:
 
-```bash{% raw %}
+```bash
 docker node inspect manager1 --format "{{ .Status.State }}"
 ready
-{% endraw %}```
+```
 
 From those commands, we can see that `manager1` is both at the status
 `reachable` as a manager and `ready` as a worker.

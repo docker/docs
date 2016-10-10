@@ -1,15 +1,14 @@
----
-aliases:
-- /engine/articles/registry_mirror/
-description: How to set up and run a local registry mirror
-keywords:
-- docker, registry, mirror,  examples
-menu:
-  main:
-    parent: engine_admin
-    weight: 8
-title: Run a local registry mirror
----
+<!--[metadata]>
++++
+aliases = ["/engine/articles/registry_mirror/"]
+title = "Run a local registry mirror"
+description = "How to set up and run a local registry mirror"
+keywords = ["docker, registry, mirror,  examples"]
+[menu.main]
+parent = "engine_admin"
+weight = 8
++++
+<![end-metadata]-->
 
 # Run a local registry mirror
 

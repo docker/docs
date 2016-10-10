@@ -1,16 +1,17 @@
----
-aliases:
-- /engine/articles/configuring/
-- /engine/admin/configuring/
-description: Configuring and running the Docker daemon on various distributions
-keywords:
-- docker, daemon, configuration, running,  process managers
-menu:
-  main:
-    parent: engine_admin
-    weight: 0
-title: Configuring and running Docker
----
+<!--[metadata]>
++++
+aliases = [
+  "/engine/articles/configuring/",
+  "/engine/admin/configuring/"
+  ]
+title = "Configuring and running Docker"
+description = "Configuring and running the Docker daemon on various distributions"
+keywords = ["docker, daemon, configuration, running,  process managers"]
+[menu.main]
+parent = "engine_admin"
+weight = 0
++++
+<![end-metadata]-->
 
 # Configuring and running Docker on various distributions
 

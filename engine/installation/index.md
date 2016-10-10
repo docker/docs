@@ -1,17 +1,15 @@
----
-aliases:
-- /engine/installation/linux/frugalware/
-- /engine/installation/frugalware/
-description: Lists the installation methods
-keywords:
-- 'Docker install '
-menu:
-  main:
-    identifier: engine_install
-    parent: engine_use
-    weight: "-81"
-title: Install
----
+<!--[metadata]>
++++
+aliases = ["/engine/installation/linux/frugalware/","/engine/installation/frugalware/"]
+title = "Install"
+description = "Lists the installation methods"
+keywords = ["Docker install "]
+[menu.main]
+identifier = "engine_install"
+parent="engine_use"
+weight="-81"
++++
+<![end-metadata]-->
 
 # Install Docker Engine
 

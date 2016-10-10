@@ -1,12 +1,12 @@
----
-description: Learn how to build your own bridge interface
-keywords:
-- docker, bridge, docker0, network
-menu:
-  main:
-    parent: smn_networking_def
-title: Build your own bridge
----
+<!--[metadata]>
++++
+title = "Build your own bridge"
+description = "Learn how to build your own bridge interface"
+keywords = ["docker, bridge, docker0, network"]
+[menu.main]
+parent = "smn_networking_def"
++++
+<![end-metadata]-->
 
 # Build your own bridge
 

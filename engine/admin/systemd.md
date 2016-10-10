@@ -1,15 +1,14 @@
----
-aliases:
-- /engine/articles/systemd/
-description: Controlling and configuring Docker using systemd
-keywords:
-- docker, daemon, systemd,  configuration
-menu:
-  main:
-    parent: engine_admin
-    weight: "7"
-title: Control and configure Docker with systemd
----
+<!--[metadata]>
++++
+aliases = ["/engine/articles/systemd/"]
+title = "Control and configure Docker with systemd"
+description = "Controlling and configuring Docker using systemd"
+keywords = ["docker, daemon, systemd,  configuration"]
+[menu.main]
+parent = "engine_admin"
+weight="7"
++++
+<![end-metadata]-->
 
 # Control and configure Docker with systemd
 
@@ -73,7 +72,7 @@ Alternatively, find out where the service file is located:
     EnvironmentFile=-/etc/sysconfig/docker
 
 You can customize the Docker daemon options using override files as explained in the
-[HTTP Proxy example](systemd.md#http-proxy) below. The files located in `/usr/lib/systemd/system`
+[HTTP Proxy example](#http-proxy) below. The files located in `/usr/lib/systemd/system`
 or `/lib/systemd/system` contain the default options and should not be edited.
 
 ### Runtime directory and storage driver

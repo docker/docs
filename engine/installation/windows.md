@@ -1,20 +1,20 @@
----
-description: Docker installation on Microsoft Windows
-keywords:
-- Docker, Docker documentation, Windows, requirements, virtualbox,  boot2docker
-menu:
-  main:
-    parent: engine_install
-    weight: "-80"
-title: Installation on Windows
----
+<!--[metadata]>
++++
+title = "Installation on Windows"
+description = "Docker installation on Microsoft Windows"
+keywords = ["Docker, Docker documentation, Windows, requirements, virtualbox,  boot2docker"]
+[menu.main]
+parent = "engine_install"
+weight="-80"
++++
+<![end-metadata]-->
 
 # Windows
 
 You have two options for installing Docker on Windows:
 
-- [Docker for Windows](windows.md#docker-for-windows)
-- [Docker Toolbox](windows.md#docker-toolbox)
+- [Docker for Windows](#docker-for-windows)
+- [Docker Toolbox](#docker-toolbox)
 
 ## Docker for Windows
 

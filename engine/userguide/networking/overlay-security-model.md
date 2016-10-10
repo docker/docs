@@ -1,14 +1,13 @@
----
-description: Docker swarm mode overlay network security model
-keywords:
-- network, docker, documentation, user guide, multihost, swarm mode
-- overlay
-menu:
-  main:
-    parent: smn_networking
-    weight: -2
-title: Swarm mode overlay network security model
----
+<!--[metadata]>
++++
+title = "Swarm mode overlay network security model"
+description = "Docker swarm mode overlay network security model"
+keywords = ["network, docker, documentation, user guide, multihost, swarm mode", "overlay"]
+[menu.main]
+parent = "smn_networking"
+weight=-2
++++
+<![end-metadata]-->
 
 # Docker swarm mode overlay network security model
 

@@ -1,19 +1,19 @@
----
-description: The restart command description and usage
-keywords:
-- restart, container, Docker
-menu:
-  main:
-    parent: smn_cli
-title: restart
----
+<!--[metadata]>
++++
+title = "restart"
+description = "The restart command description and usage"
+keywords = ["restart, container, Docker"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # restart
 
 ```markdown
 Usage:  docker restart [OPTIONS] CONTAINER [CONTAINER...]
 
-Restart a container
+Restart one or more containers
 
 Options:
       --help       Print usage

@@ -1,12 +1,12 @@
----
-description: The create command description and usage
-keywords:
-- docker, create, container
-menu:
-  main:
-    parent: smn_cli
-title: create
----
+<!--[metadata]>
++++
+title = "create"
+description = "The create command description and usage"
+keywords = ["docker, create, container"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # create
 
@@ -90,6 +90,7 @@ Options:
       --read-only                   Mount the container's root filesystem as read only
       --restart string              Restart policy to apply when a container exits (default "no")
                                     Possible values are: no, on-failure[:max-retry], always, unless-stopped
+      --rm                          Automatically remove the container when it exits
       --runtime string              Runtime to use for this container
       --security-opt value          Security Options (default [])
       --shm-size string             Size of /dev/shm, default value is 64MB.
@@ -171,7 +172,7 @@ Set storage driver options per container.
 
 This (size) will allow to set the container rootfs size to 120G at creation time. 
 User cannot pass a size less than the Default BaseFS Size. This option is only 
-available for the `devicemapper`, `btrfs`, and `zfs` graph drivers.
+available for the `devicemapper`, `btrfs`, `windowsfilter`, and `zfs` graph drivers.
 
 ### Specify isolation technology for container (--isolation)
 

@@ -1,12 +1,12 @@
----
-description: The login command description and usage
-keywords:
-- registry, login, image
-menu:
-  main:
-    parent: smn_cli
-title: login
----
+<!--[metadata]>
++++
+title = "login"
+description = "The login command description and usage"
+keywords = ["registry, login, image"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # login
 
@@ -57,7 +57,7 @@ you can download them from:
 
 ### Usage
 
-You need to specify the credentials store in `$HOME/.docker/config.json`
+You need to speficy the credentials store in `$HOME/.docker/config.json`
 to tell the docker engine to use it:
 
 ```json

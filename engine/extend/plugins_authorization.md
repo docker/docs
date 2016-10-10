@@ -1,16 +1,15 @@
----
-aliases:
-- /engine/extend/authorization/
-description: How to create authorization plugins to manage access control to your
-  Docker daemon.
-keywords:
-- security, authorization, authentication, docker, documentation, plugin, extend
-menu:
-  main:
-    parent: engine_extend
-    weight: 4
-title: Access authorization plugin
----
+<!--[metadata]>
++++
+title = "Access authorization plugin"
+description = "How to create authorization plugins to manage access control to your Docker daemon."
+keywords = ["security, authorization, authentication, docker, documentation, plugin, extend"]
+aliases = ["/engine/extend/authorization/"]
+[menu.main]
+parent = "engine_extend"
+weight = 4
++++
+<![end-metadata]-->
+
 
 # Create an authorization plugin
 
@@ -109,6 +108,8 @@ support the Docker client interactions detailed in this section.
 Enable the authorization plugin with a dedicated command line flag in the
 `--authorization-plugin=PLUGIN_ID` format. The flag supplies a `PLUGIN_ID`
 value. This value can be the plugin’s socket or a path to a specification file.
+Authorization plugins can be loaded without restarting the daemon. Refer
+to the [`dockerd` documentation](../reference/commandline/dockerd.md#configuration-reloading) for more information.
 
 ```bash
 $ dockerd --authorization-plugin=plugin1 --authorization-plugin=plugin2,...

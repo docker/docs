@@ -1,17 +1,17 @@
----
-description: The swarm join-token command description and usage
-keywords:
-- swarm, join-token
-menu:
-  main:
-    parent: smn_cli
-title: swarm join-token
----
+<!--[metadata]>
++++
+title = "swarm join-token"
+description = "The swarm join-token command description and usage"
+keywords = ["swarm, join-token"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # swarm join-token
 
 ```markdown
-Usage:	docker swarm join-token [--rotate] (worker|manager)
+Usage:	docker swarm join-token [OPTIONS] (worker|manager)
 
 Manage join tokens
 

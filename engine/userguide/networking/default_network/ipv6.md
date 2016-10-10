@@ -1,13 +1,13 @@
----
-description: How do we connect docker containers within and across hosts ?
-keywords:
-- docker, network, IPv6
-menu:
-  main:
-    parent: smn_networking_def
-    weight: 3
-title: IPv6 with Docker
----
+<!--[metadata]>
++++
+title = "IPv6 with Docker"
+description = "How do we connect docker containers within and across hosts ?"
+keywords = ["docker, network, IPv6"]
+[menu.main]
+parent = "smn_networking_def"
+weight = 3
++++
+<![end-metadata]-->
 
 # IPv6 with Docker
 

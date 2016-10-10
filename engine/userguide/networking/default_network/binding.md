@@ -1,12 +1,12 @@
----
-description: expose, port, docker, bind publish
-keywords:
-- Examples, Usage, network, docker, documentation, user guide, multihost, cluster
-menu:
-  main:
-    parent: smn_networking_def
-title: Bind container ports to the host
----
+<!--[metadata]>
++++
+title = "Bind container ports to the host"
+description = "expose, port, docker, bind publish"
+keywords = ["Examples, Usage, network, docker, documentation, user guide, multihost, cluster"]
+[menu.main]
+parent = "smn_networking_def"
++++
+<![end-metadata]-->
 
 # Bind container ports to the host
 

@@ -1,13 +1,13 @@
----
-advisory: experimental
-description: The stack services command description and usage
-keywords:
-- stack, services
-menu:
-  main:
-    parent: smn_cli
-title: stack services
----
+<!--[metadata]>
++++
+title = "stack services"
+description = "The stack services command description and usage"
+keywords = ["stack, services"]
+advisory = "experimental"
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # stack services (experimental)
 
@@ -63,3 +63,4 @@ The currently supported filters are:
 * [stack deploy](stack_deploy.md)
 * [stack rm](stack_rm.md)
 * [stack tasks](stack_tasks.md)
+* [stack ls](stack_ls.md)

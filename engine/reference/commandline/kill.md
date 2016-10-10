@@ -1,12 +1,12 @@
----
-description: The kill command description and usage
-keywords:
-- container, kill, signal
-menu:
-  main:
-    parent: smn_cli
-title: kill
----
+<!--[metadata]>
++++
+title = "kill"
+description = "The kill command description and usage"
+keywords = ["container, kill, signal"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # kill
 

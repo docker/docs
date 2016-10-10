@@ -1,15 +1,16 @@
----
-aliases:
-- /engine/userguide/containers/dockervolumes/
-- /engine/userguide/dockervolumes/
-description: How to manage data inside your Docker containers.
-keywords:
-- Examples, Usage, volume, docker, documentation, user guide, data,  volumes
-menu:
-  main:
-    parent: engine_learn_menu
-title: Manage data in containers
----
+<!--[metadata]>
++++
+aliases = [
+"/engine/userguide/containers/dockervolumes/",
+"/engine/userguide/dockervolumes/"
+]
+title = "Manage data in containers"
+description = "How to manage data inside your Docker containers."
+keywords = ["Examples, Usage, volume, docker, documentation, user guide, data,  volumes"]
+[menu.main]
+parent = "engine_learn_menu"
++++
+<![end-metadata]-->
 
 # Manage data in containers
 
@@ -34,7 +35,7 @@ containers that bypasses the [*Union File System*](../reference/glossary.md#unio
 - Volumes are initialized when a container is created. If the container's
   base image contains data at the specified mount point, that existing data is
   copied into the new volume upon volume initialization. (Note that this does
-  not apply when [mounting a host directory](dockervolumes.md#mount-a-host-directory-as-a-data-volume).)
+  not apply when [mounting a host directory](#mount-a-host-directory-as-a-data-volume).)
 - Data volumes can be shared and reused among containers.
 - Changes to a data volume are made directly.
 - Changes to a data volume will not be included when you update an image.

@@ -1,24 +1,25 @@
----
-aliases:
-- /mac/step_one/
-- /windows/step_one/
-- /linux/step_one/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker, install
-menu:
-  main:
-    identifier: getstart_all_install
-    parent: tutorial_getstart_menu
-    weight: 1
-title: Install Docker and run hello-world
----
+<!--[metadata]>
++++
+aliases = [
+"/mac/step_one/",
+"/windows/step_one/",
+"/linux/step_one/",
+]
+title = "Install Docker and run hello-world"
+description = "Getting started with Docker"
+keywords = ["beginner, getting started, Docker, install"]
+[menu.main]
+identifier = "getstart_all_install"
+parent = "tutorial_getstart_menu"
+weight = 1
++++
+<![end-metadata]-->
 
 # Install Docker
 
-- [Step 1: Get Docker](step_one.md#step-1-get-docker)
-- [Step 2: Install Docker](step_one.md#step-2-install-docker)
-- [Step 3: Verify your installation](step_one.md#step-3-verify-your-installation)
+- [Step 1: Get Docker](#step-1-get-docker)
+- [Step 2: Install Docker](#step-2-install-docker)
+- [Step 3: Verify your installation](#step-3-verify-your-installation)
 
 ## Step 1: Get Docker
 

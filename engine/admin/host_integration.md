@@ -1,15 +1,14 @@
----
-aliases:
-- /engine/articles/host_integration/
-description: How to generate scripts for upstart, systemd, etc.
-keywords:
-- systemd, upstart, supervisor, docker, documentation,  host integration
-menu:
-  main:
-    parent: engine_admin
-    weight: "5"
-title: Automatically start containers
----
+<!--[metadata]>
++++
+aliases = ["/engine/articles/host_integration/"]
+title = "Automatically start containers"
+description = "How to generate scripts for upstart, systemd, etc."
+keywords = ["systemd, upstart, supervisor, docker, documentation,  host integration"]
+[menu.main]
+parent = "engine_admin"
+weight="5"
++++
+<![end-metadata]-->
 
 # Automatically start containers
 

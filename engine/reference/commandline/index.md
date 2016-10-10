@@ -1,14 +1,16 @@
----
-description: Docker's CLI command description and usage
-keywords:
-- Docker, Docker documentation, CLI,  command line
-menu:
-  main:
-    identifier: smn_cli_guide
-    parent: smn_cli
-    weight: -70
-title: Docker commands
----
+<!-- [metadata]>
++++
+title = "Docker commands"
+description = "Docker's CLI command description and usage"
+keywords = ["Docker, Docker documentation, CLI,  command line"]
+[menu.main]
+identifier= "smn_cli_guide"
+parent = "smn_cli"
+weight=-70
++++
+<![end-metadata]-->
+
+
 
 # The Docker commands
 
@@ -113,7 +115,7 @@ read the [`dockerd`](dockerd.md) reference page.
 | [node demote](node_demote.md) | Demotes an existing manager so that it is no longer a manager |
 | [node inspect](node_inspect.md) | Inspect a node in the swarm                |
 | [node update](node_update.md) | Update attributes for a node                 |
-| [node ps](node_ps.md) | List tasks running on a node                   |
+| [node ps](node_ps.md) | List tasks running on one or more nodes                         |
 | [node ls](node_ls.md) | List nodes in the swarm                              |
 | [node rm](node_rm.md) | Remove one or more nodes from the swarm                         |
 

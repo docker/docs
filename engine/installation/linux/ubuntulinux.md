@@ -1,21 +1,21 @@
----
-aliases:
-- /engine/installation/ubuntulinux/
-description: 'Instructions for installing Docker on Ubuntu. '
-keywords:
-- Docker, Docker documentation, requirements, apt, installation,  ubuntu
-menu:
-  main:
-    parent: engine_linux
-    weight: -6
-title: 'Installation on Ubuntu '
----
+<!--[metadata]>
++++
+aliases = [ "/engine/installation/ubuntulinux/"]
+title = "Installation on Ubuntu "
+description = "Instructions for installing Docker on Ubuntu. "
+keywords = ["Docker, Docker documentation, requirements, apt, installation,  ubuntu"]
+[menu.main]
+parent = "engine_linux"
+weight = -6
++++
+<![end-metadata]-->
 
 # Ubuntu
 
 Docker is supported on these Ubuntu operating systems:
 
 - Ubuntu Xenial 16.04 (LTS)
+- Ubuntu Wily 15.10
 - Ubuntu Trusty 14.04 (LTS)
 - Ubuntu Precise 12.04 (LTS)
 
@@ -82,6 +82,10 @@ packages from the new repository:
 
             deb https://apt.dockerproject.org/repo ubuntu-trusty main
 
+    - Ubuntu Wily 15.10
+
+            deb https://apt.dockerproject.org/repo ubuntu-wily main
+
     - Ubuntu Xenial 16.04 (LTS)
 
             deb https://apt.dockerproject.org/repo ubuntu-xenial main
@@ -111,9 +115,10 @@ packages from the new repository:
 ### Prerequisites by Ubuntu Version
 
 - Ubuntu Xenial 16.04 (LTS)
+- Ubuntu Wily 15.10
 - Ubuntu Trusty 14.04 (LTS)
 
-For Ubuntu Trusty, and Xenial, it's recommended to install the
+For Ubuntu Trusty, Wily, and Xenial, it's recommended to install the
 `linux-image-extra-*` kernel packages. The `linux-image-extra-*` packages
 allows you use the `aufs` storage driver.
 
@@ -233,13 +238,13 @@ install Docker using the following:
 This section contains optional procedures for configuring your Ubuntu to work
 better with Docker.
 
-* [Create a docker group](ubuntulinux.md#create-a-docker-group)
-* [Adjust memory and swap accounting](ubuntulinux.md#adjust-memory-and-swap-accounting)
-* [Enable UFW forwarding](ubuntulinux.md#enable-ufw-forwarding)
-* [Configure a DNS server for use by Docker](ubuntulinux.md#configure-a-dns-server-for-use-by-docker)
-* [Configure Docker to start on boot](ubuntulinux.md#configure-docker-to-start-on-boot)
+* [Create a docker group](#create-a-docker-group)
+* [Adjust memory and swap accounting](#adjust-memory-and-swap-accounting)
+* [Enable UFW forwarding](#enable-ufw-forwarding)
+* [Configure a DNS server for use by Docker](#configure-a-dns-server-for-use-by-docker)
+* [Configure Docker to start on boot](#configure-docker-to-start-on-boot)
 
-### Create a Docker group
+### Create a Docker group		
 
 The `docker` daemon binds to a Unix socket instead of a TCP port. By default
 that Unix socket is owned by the user `root` and other users can access it with

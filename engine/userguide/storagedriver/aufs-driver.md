@@ -1,12 +1,12 @@
----
-description: Learn how to optimize your use of AUFS driver.
-keywords:
-- 'container, storage, driver, AUFS '
-menu:
-  main:
-    parent: engine_driver
-title: AUFS storage driver in practice
----
+<!--[metadata]>
++++
+title = "AUFS storage driver in practice"
+description = "Learn how to optimize your use of AUFS driver."
+keywords = ["container, storage, driver, AUFS "]
+[menu.main]
+parent = "engine_driver"
++++
+<![end-metadata]-->
 
 # Docker and AUFS in practice
 

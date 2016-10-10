@@ -1,12 +1,12 @@
----
-description: Learn how to configure DNS in Docker
-keywords:
-- docker, bridge, docker0, network
-menu:
-  main:
-    parent: smn_networking_def
-title: Configure container DNS
----
+<!--[metadata]>
++++
+title = "Configure container DNS"
+description = "Learn how to configure DNS in Docker"
+keywords = ["docker, bridge, docker0, network"]
+[menu.main]
+parent = "smn_networking_def"
++++
+<![end-metadata]-->
 
 # Configure container DNS
 
@@ -104,12 +104,16 @@ Four different options affect container domain name services.
     <code>--dns-opt=OPTION...</code>
     </p></td>
     <td><p>
-      Sets the options used by DNS resolvers by writing an <code>options</code>
-      line into the container's <code>/etc/resolv.conf</code>.
+      Sets the options used by DNS resolvers by writing an <code>options<code>
+      line into the container's <code>/etc/resolv.conf<code>.
     </p>
     <p>
-    See documentation for <code>resolv.conf</code> for a list of valid options
+    See documentation for <code>resolv.conf<code> for a list of valid options
     </p></td>
+  </tr>
+  <tr>
+    <td><p></p></td>
+    <td><p></p></td>
   </tr>
 </table>
 

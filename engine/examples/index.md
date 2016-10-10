@@ -1,14 +1,14 @@
----
-description: Provides examples for using Docker
-keywords:
-- dockerize, dockerizing apps, dockerizing applications, container,  containers
-menu:
-  main:
-    identifier: engine_dockerize
-    parent: engine_use
-    weight: 8
-title: Dockerize an application
----
+<!--[metadata]>
++++
+title = "Dockerize an application"
+description = "Provides examples for using Docker"
+keywords = ["dockerize, dockerizing apps, dockerizing applications, container,  containers"]
+[menu.main]
+identifier = "engine_dockerize"
+parent="engine_use"
+weight = 8
++++
+<![end-metadata]-->
 
 # Dockerize an application
 
