@@ -25,8 +25,8 @@ Options:
 
 ### Scale a service
 
-If you scale a service, you set the *desired* number of replicas. Even though
-the command returns directly, actual scaling of the service may take some time.
+Scales a service both up and down to the desired number of replicas. Even though the command returns directly, actual scaling of the service may take some time. To keep a service active but have no instances of it you can scale it to 0.
+
 
 For example, the following command scales the "frontend" service to 50 tasks.
 
