@@ -21,23 +21,23 @@ Depending on your interest, the Docker documentation contains a wealth of inform
   </tr>
   <tr>
     <td class="tg-031e">More about Docker for Mac, features, examples, FAQs, relationship to Docker Machine and Docker Toolbox, and how this fits in the Docker ecosystem</td>
-    <td class="tg-031e"><a href="/docker-for-mac/">Getting Started with Docker for Mac</a></td>
+    <td class="tg-031e">[Getting Started with Docker for Mac](https://docs.docker.com/docker-for-mac/)</td>
   </tr>
   <tr>
     <td class="tg-031e">More about Docker for Windows, features, examples, FAQs, relationship to Docker Machine and Docker Toolbox, and how this fits in the Docker ecosystem</td>
-    <td class="tg-031e"><a href="/docker-for-windows/">Getting Started with Docker for Windows</a></td>
+    <td class="tg-031e">[Getting Started with Docker for Windows](https://docs.docker.com/docker-for-windows/)</td>
   </tr>
   <tr>
     <td class="tg-031e">More about Docker Toolbox</td>
-    <td class="tg-031e"><a href="/toolbox/overview/">Docker Toolbox Overview</a></td>
+    <td class="tg-031e">[Docker Toolbox Overview](/toolbox/overview.md)</td>
   </tr>
   <tr>
     <td class="tg-031e">More about Docker for Linux distributions</td>
-    <td class="tg-031e"><a href="/engine/installation/linux/">Install Docker Engine on Linux</a></td>
+    <td class="tg-031e">[Install Docker Engine on Linux](/engine/installation/linux/index.md)</td>
   </tr>
   <tr>
     <td class="tg-031e">More advanced tutorials on running containers, building your own images, networking containers, managing data for containers, and storing images on Docker Hub</td>
-    <td class="tg-031e"><a href="/engine/tutorials/">Learn by example</a></td>
+    <td class="tg-031e"> [Learn by example](/engine/tutorials/index.md)</a></td>
   </tr>
   <tr>
     <td class="tg-031e">Information about the Docker product line</td>
@@ -46,11 +46,12 @@ Depending on your interest, the Docker documentation contains a wealth of inform
 
   <tr>
     <td class="tg-031e">How to set up an automated build on Docker Hub</td>
-    <td class="tg-031e"><a href="/docker-hub/">Docker Hub documentation</a></td>
+    <td class="tg-031e"><a href="https://docs.docker.com/docker-hub/">Docker Hub documentation</a></td>
   </tr>
   <tr>
     <td class="tg-031e">How to run a multi-container application with Compose</td>
-    <td class="tg-031e"><a href="/compose/">Docker Compose documentation</a></td>
+    <td class="tg-031e"> [Docker Compose documentation](/compose/overview.md)
+    </td>
   </tr>
   <tr>
     <td class="tg-031e">A tutorial on Docker Swarm, which provides clustering capabilities to scale applications across multiple Docker nodes </td>

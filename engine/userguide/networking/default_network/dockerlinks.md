@@ -191,9 +191,7 @@ example as:
 
 Next, inspect your linked containers with `docker inspect`:
 
-    {% raw %}
     $ docker inspect -f "{{ .HostConfig.Links }}" web
-    {% endraw %}
 
     [/db:/web/db]
 
@@ -303,7 +301,7 @@ linked `web` container will be able to talk to the `db` container.
 
 ### Important notes on Docker environment variables
 
-Unlike host entries in the [`/etc/hosts` file](dockerlinks.md#updating-the-etchosts-file),
+Unlike host entries in the [`/etc/hosts` file](#updating-the-etchosts-file),
 IP addresses stored in the environment variables are not automatically updated
 if the source container is restarted. We recommend using the host entries in
 `/etc/hosts` to resolve the IP address of linked containers.

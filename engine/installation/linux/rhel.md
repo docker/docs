@@ -32,21 +32,21 @@ packages.
 ## Install Docker Engine
 
 There are two ways to install Docker Engine.  You can [install using the `yum`
-package manager](rhel.md#install-with-yum). Or you can use `curl` with the [`get.docker.com`
-site](rhel.md#install-with-the-script). This second method runs an installation script
+package manager](#install-with-yum). Or you can use `curl` with the [`get.docker.com`
+site](#install-with-the-script). This second method runs an installation script
 which also installs via the `yum` package manager.
 
 ### Install with yum
 
-1.  Log into your machine as a user with `sudo` or `root` privileges.
+1. Log into your machine as a user with `sudo` or `root` privileges.
 
-2.  Make sure your existing packages are up-to-date.
+2. Make sure your existing packages are up-to-date.
 
     ```bash
     $ sudo yum update
     ```
 
-3.  Add the `yum` repo.
+3. Add the `yum` repo.
 
     ```bash
     $ sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
@@ -59,19 +59,19 @@ which also installs via the `yum` package manager.
     EOF
     ```
 
-4.  Install the Docker package.
+4. Install the Docker package.
 
     ```bash
     $ sudo yum install docker-engine
     ```
 
-5.  Enable the service.
+5. Enable the service.
 
     ```bash
     $ sudo systemctl enable docker.service
     ```
 
-6.  Start the Docker daemon.
+6. Start the Docker daemon.
 
     ```bash
     $ sudo systemctl start docker
@@ -113,15 +113,15 @@ learn how to [customize your Systemd Docker daemon options](../../admin/systemd.
 
 ### Install with the script
 
-1.  Log into your machine as a user with `sudo` or `root` privileges.
+1. Log into your machine as a user with `sudo` or `root` privileges.
 
-2.  Make sure your existing packages are up-to-date.
+2. Make sure your existing packages are up-to-date.
 
     ```bash
     $ sudo yum update
     ```
 
-3.  Run the Docker installation script.
+3. Run the Docker installation script.
 
     ```bash
     $ curl -fsSL https://get.docker.com/ | sh
@@ -129,19 +129,19 @@ learn how to [customize your Systemd Docker daemon options](../../admin/systemd.
 
     This script adds the `docker.repo` repository and installs Docker.
 
-4.  Enable the service.
+4. Enable the service.
 
     ```bash
     $ sudo systemctl enable docker.service
     ```
 
-5.  Start the Docker daemon.
+5. Start the Docker daemon.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-6.  Verify `docker` is installed correctly by running a test image in a container.
+6. Verify `docker` is installed correctly by running a test image in a container.
 
     ```bash
     $ sudo docker run hello-world
@@ -167,25 +167,25 @@ makes the ownership of the Unix socket read/writable by the `docker` group.
 
 To create the `docker` group and add your user:
 
-1.  Log into your machine as a user with `sudo` or `root` privileges.
+1. Log into your machine as a user with `sudo` or `root` privileges.
 
-2.  Create the `docker` group.
+2. Create the `docker` group.
 
     ```bash
     $ sudo groupadd docker
     ```
 
-3.  Add your user to `docker` group.
+3. Add your user to `docker` group.
 
     ```bash
     $ sudo usermod -aG docker your_username`
     ```
 
-4.  Log out and log back in.
+4. Log out and log back in.
 
     This ensures your user is running with the correct permissions.
 
-5.  Verify that your user is in the docker group by running `docker` without `sudo`.
+5. Verify that your user is in the docker group by running `docker` without `sudo`.
 
     ```bash
     $ docker run hello-world
@@ -203,7 +203,7 @@ $ sudo systemctl enable docker
 
 You can uninstall the Docker software with `yum`.
 
-1.  List the installed Docker packages.
+1. List the installed Docker packages.
 
     ```bash
     $ yum list installed | grep docker
@@ -211,7 +211,7 @@ You can uninstall the Docker software with `yum`.
     docker-engine.x86_64     1.7.1-0.1.el7@/docker-engine-1.7.1-0.1.el7.x86_64
     ```
 
-2.  Remove the package.
+2. Remove the package.
 
     ```bash
     $ sudo yum -y remove docker-engine.x86_64
@@ -220,7 +220,7 @@ You can uninstall the Docker software with `yum`.
 	This command does not remove images, containers, volumes, or user-created
 	configuration files on your host.
 
-3.  To delete all images, containers, and volumes, run the following command:
+3. To delete all images, containers, and volumes, run the following command:
 
     ```bash
     $ rm -rf /var/lib/docker
