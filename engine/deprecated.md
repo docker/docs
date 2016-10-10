@@ -23,7 +23,7 @@ see [Feature Deprecation Policy](index.md#feature-deprecation-policy).
 
 **Removed In Release: [v1.12.0](https://github.com/docker/docker/releases/tag/v1.12.0)**
 
-The `docker import` command format 'file|URL|- [REPOSITORY [TAG]]' is deprecated since November 2013. It's no more supported.
+The `docker import` command format `file|URL|- [REPOSITORY [TAG]]` is deprecated since November 2013. It's no more supported.
 
 ### `-h` shorthand for `--help`
 
