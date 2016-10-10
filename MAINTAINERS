@@ -300,9 +300,9 @@ or feedback about project operations.
 
 [Org]
     [Org.Curators]
-        People = ["mgoelzer", "programmerq", "thajeztah", "amitshukla"]
+        People = ["ehazlett", "mgoelzer", "programmerq", "thajeztah", "amitshukla"]
     [Org."Docs maintainers"]
-        People = ["jamtur01", "moxiegirl", "sfsmithcha", "sven", "thajeztah"]
+        People = ["jamtur01", "misty", "sven", "thajeztah", "sfsmithcha"]
     [Org.boot2docker]
         People = ["ehazlett", "tianon"]
     [Org.compose]
@@ -314,7 +314,7 @@ or feedback about project operations.
     [Org.distribution]
         People = ["aaronlehmann", "dmcgowan", "dmp42", "richardscothern", "shykes", "stevvooe"]
     [Org.docker]
-        People = ["aaronlehmann", "aluzzardi", "calavera", "coolljt0725", "cpuguy83", "crosbymichael", "dnephin", "duglin", "estesp", "icecrime", "jhowardmsft", "justincormack", "lk4d4", "mavenugo", "mhbauer", "mlaventure", "runcom", "stevvooe", "tianon", "tibor", "tonistiigi", "unclejack", "vdemeester", "vieux"]
+        People = ["aaronlehmann", "aluzzardi", "anusha", "coolljt0725", "cpuguy83", "crosbymichael", "dnephin", "duglin", "estesp", "icecrime", "jhowardmsft", "justincormack", "lk4d4", "mavenugo", "mhbauer", "mlaventure", "mrjana", "runcom", "stevvooe", "tianon", "tibor", "tonistiigi", "unclejack", "vdemeester", "vieux"]
     [Org.docker-bench-security]
         People = ["diogomonica", "konstruktoid"]
     [Org.docker-credential-helpers]
@@ -340,7 +340,7 @@ or feedback about project operations.
     [Org.kitematic]
         People = ["elesant", "frenchben", "jeffdm", "mchiang0610"]
     [Org.leadership]
-        People = ["abronan"]
+        People = ["aluzzardi"]
     [Org.leeroy]
         People = ["calavera", "jfrazelle"]
     [Org.libchan]
@@ -348,7 +348,7 @@ or feedback about project operations.
     [Org.libcompose]
         People = ["aanand", "aduermael", "dnephin", "ibuildthecloud", "joshwget", "gdevillele", "vdemeester"]
     [Org.libkv]
-        People = ["abronan", "aluzzardi", "sanimej", "vieux"]
+        People = ["aluzzardi", "sanimej", "vieux"]
     [Org.libnetwork]
         People = ["aboch", "lk4d4", "icecrime", "mrjana", "mavenugo", "sanimej", "chenchun"]
     [Org.machine]
@@ -356,15 +356,15 @@ or feedback about project operations.
     [Org.migrator]
         People = ["mbentley"]
     [Org.notary]
-        People = ["cyli", "diogomonica", "dmcgowan", "endophage", "nathanmccauley", "riyazdf"]
+        People = ["cyli", "diogomonica", "dmcgowan", "endophage", "hukeping", "nathanmccauley", "riyazdf"]
     [Org.spdystream]
         People = ["dmcgowan"]
     [Org.swarm]
-        People = ["abronan", "allencloud", "aluzzardi", "chanwit", "dongluochen", "jimmyxian", "mhbauer", "nishanttotla", "vieux"]
+        People = ["allencloud", "aluzzardi", "chanwit", "dongluochen", "jimmyxian", "mhbauer", "nishanttotla", "vieux"]
     [Org.swarm-frontends]
-        People = ["abronan", "amitshukla", "samalba"]
+        People = ["amitshukla", "samalba"]
     [Org.swarmkit]
-        People = ["aaronlehmann", "abronan", "aluzzardi", "amitshukla", "diogomonica", "dongluochen", "lk4d4", "mrjana", "nishanttotla", "stevvooe", "tonistiigi", "vieux"]
+        People = ["aaronlehmann", "aluzzardi", "amitshukla", "diogomonica", "dongluochen", "lk4d4", "mrjana", "nishanttotla", "stevvooe", "tonistiigi", "vieux"]
     [Org.toolbox]
         People = ["jeffdm", "lisean106", "mchiang0610"]
     [Org."v1.10-migrator"]
@@ -385,10 +385,6 @@ or feedback about project operations.
         Name = "Alessandro Boch"
         Email = "aboch@docker.com"
         GitHub = "aboch"
-    [People.abronan]
-        Name = "Alexandre Beslic"
-        Email = "abronan@docker.com"
-        GitHub = "abronan"
     [People.aduermael]
         Name = "Adrien Duermael"
         Email = "adrien@docker.com"
@@ -405,6 +401,10 @@ or feedback about project operations.
         Name = "Amit Shukla"
         Email = "amit.shukla@docker.com"
         GitHub = "amitshukla"
+    [People.anusha]
+        Name = "Anusha Ragunathan"
+        Email = "anusha@docker.com"
+        GitHub = "anusha-ragunathan"
     [People.avsm]
         Name = "Anil Madhavapeddy"
         Email = "anil@recoil.org"
@@ -513,6 +513,10 @@ or feedback about project operations.
         Name = "Gaetan de Villele"
         Email = "gaetan@docker.com"
         GitHub = "gdevillele"
+    [People.hukeping]
+        Name = "Hu Keping"
+        Email = "hukeping@huawei.com"
+        GitHub = "hukeping"
     [People.ibuildthecloud]
         Name = "Darren Shepherd"
         Email = "darren@rancher.com"
@@ -593,6 +597,10 @@ or feedback about project operations.
         Name = "Morgan Bauer"
         Email = "mbauer@us.ibm.com"
         GitHub = "mhbauer"
+    [People.misty]
+        Name = "Misty Stanley-Jones"
+        Email = "misty@docker.com"
+        GitHub = "mstanleyjones"
     [People.mlaventure]
         Name = "Kenfe-Mickaël Laventure"
         Email = "mickael.laventure@docker.com"
