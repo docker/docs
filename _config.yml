@@ -15,7 +15,6 @@ exclude:
 
 gems:
   - jekyll-redirect-from
-  - jekyll-sitemap
   - jekyll-gist
 
 defaults:
