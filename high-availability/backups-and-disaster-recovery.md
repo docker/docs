@@ -65,13 +65,10 @@ backup command to learn about all the available flags.
 As an example, to create a backup of a DTR node, you can use:
 
 ```bash
-# Get the certificates used by UCP
-$ curl https://<ucp-url>/ca > ucp-ca.pem
-
 # Create the backup
 $ docker run -i --rm docker/dtr backup \
   --ucp-url <ucp-url> \
-  --ucp-ca "$(cat ucp-ca.pem)" \
+  --ucp-insecure-tls \
   --existing-replica-id <replica-id> \
   --ucp-username <ucp-admin> \
   --ucp-password <ucp-password> > /tmp/backup.tar
@@ -80,7 +77,7 @@ $ docker run -i --rm docker/dtr backup \
 Where:
 
 * `--ucp-url` is the address of UCP,
-* `--ucp-ca` is the UCP certificate authority,
+* `--ucp-insecure-tls` is to trust the UCP TLS certificate,
 * `--existing-replica-id` is the id of the replica to backup,
 * `--ucp-username`, and `--ucp-password` are the credentials of a UCP administrator.
 
@@ -117,14 +114,11 @@ As an example, to install DTR on the host and restore its
 state from an existing backup:
 
 ```bash
-# Get the certificates used by UCP
-$ curl https://<ucp-url>/ca > ucp-ca.pem
-
 # Install and restore configurations from an existing backup
 $ docker run -i --rm \
   docker/dtr restore \
   --ucp-url <ucp-url> \
-  --ucp-ca "$(cat ucp-ca.pem)" \  
+  --ucp-insecure-tls \  
   --ucp-username <ucp-admin> \
   --ucp-password <ucp-password> \
   --dtr-load-balancer <dtr-domain-name> < /tmp/backup.tar
@@ -133,7 +127,7 @@ $ docker run -i --rm \
 Where:
 
 * `--ucp-url` is the address of UCP,
-* `--ucp-ca` is the UCP certificate authority,
+* `--ucp-insecure-tls` is to trust the UCP TLS certificate,
 * `--ucp-username`, and `--ucp-password` are the credentials of a UCP administrator,
 * `--dtr-load-balancer` is the domain name or ip where DTR can be reached.
 

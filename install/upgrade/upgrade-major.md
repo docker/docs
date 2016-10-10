@@ -76,15 +76,13 @@ To start the migration:
     Then run the migrate command:
 
     ```bash
-    # Get the certificates used by UCP
-    $ curl https://$UCP_HOST/ca > ucpca.crt
-
     # Migrate configurations, accounts, and repository metadata
     docker run -it --rm \
       -v /var/run/docker.sock:/var/run/docker.sock \
       docker/dtr migrate \
-      --ucp-url $UCP_HOST --ucp-ca "$(cat ucpca.crt)" \
+      --ucp-url $UCP_HOST \
       --dtr-external-url $DTR_HOST \
+      --ucp-insecure-tls \
       --dtr-ca "$(cat dtrca.crt)"
     ```
 
@@ -167,16 +165,13 @@ replicas:
     Then run:
 
     ```bash
-    # Get the certificates used by UCP
-    $ curl -k https://$UCP_HOST/ca > ucp-ca.pem
-
     $ docker run -it --rm \
       docker/dtr join \
       --ucp-url $UCP_URL \
       --ucp-node $UCP_NODE \
       --existing-replica-id $REPLICA_TO_JOIN \
       --ucp-username $USER --ucp-password $PASSWORD \
-      --ucp-ca "$(cat ucp-ca.pem)"
+      --ucp-insecure-tls
     ```
 
     Where:

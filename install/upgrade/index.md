@@ -51,12 +51,9 @@ To upgrade DTR you use the `docker/dtr upgrade` command.
     The upgrade command upgrades all DTR replicas that are part of your cluster:
 
     ```bash
-    # Get the certificates used by UCP
-    $ curl -k https://<ucp-url>/ca > ucp-ca.pem
-
     $ docker run -it --rm \
       docker/dtr upgrade \
-        --ucp-cat "$(cat ucp-ca.pem)"
+        --ucp-insecure-tls
     ```
 
     By default the upgrade command runs in interactive mode and prompts you for

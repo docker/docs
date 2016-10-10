@@ -78,18 +78,17 @@ To install DTR:
 5. Run the following commands to install DTR.
 
     ```bash
-    # Get the certificates used by UCP
-    $ curl -k https://<ucp-url>/ca > ucp-ca.pem
 
     # Install DTR
     $ docker run -it --rm \
-      docker/dtr:2.0.0-beta1 install \
+      docker/dtr:2.1.0-beta1 install \
       --ucp-node <hostname> \
-      --ucp-ca "$(cat ucp-ca.pem)"
+      --ucp-insecure-tls
     ```
 
     Where the `--ucp-node` is the hostname of the node where you've previously
-    loaded the DTR images.
+    loaded the DTR images, and `--ucp-insecure-tls` tells the installer to
+    trust the certificates used by UCP.
     The install command has other flags for customizing DTR at install time.
     Check the [reference documentation to learn more](../reference/install.md).
 
@@ -154,12 +153,10 @@ replicas:
     Then run:
 
     ```bash
-    # Get the certificates used by UCP
-    $ curl -k https://<ucp-url>/ca > ucp-ca.pem
-
     $ docker run -it --rm \
-      docker/dtr join \
-      --ucp-ca "$(cat ucp-ca.pem)"
+      docker/dtr:2.1.0-beta1 join \
+      --ucp-node <hostname> \
+      --ucp-insecure-tls
     ```
 
 4. Check that all replicas are running.
