@@ -125,9 +125,7 @@ is `https://get.docker.com/builds/Linux/x86_64/docker-1.11.0.tgz`.
 > **Note** These instructions are for Docker Engine 1.11 and up. Engine 1.10 and
 > under consists of a single binary, and instructions for those versions are
 > different. To install version 1.10 or below, follow the instructions in the
-> [1.10 documentation](/v1.10/engine/installation/binaries/){:target="_blank"}.
-
-#### Verify downloaded files
+> [1.10 documentation](/v1.10/engine/installation/binaries/){: target="_blank" class="_" }.
 
 To verify the integrity of downloaded files, you can get an MD5 or SHA256
 checksum by adding `.md5` or `.sha256` to the end of the URL. For instance,
@@ -159,6 +157,9 @@ For example, to install the binaries in `/usr/bin`:
 ```bash
 $ mv docker/* /usr/bin/
 ```
+
+> **Note**: Depending on your current setup, you can specify custom paths
+> for some of the binaries provided.
 
 > **Note**: If you already have Engine installed on your host, make sure you
 > stop Engine before installing (`killall docker`), and install the binaries

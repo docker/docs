@@ -49,7 +49,7 @@ anixjtol6wdf  my_web  1/1       nginx
 ```
 
 To make the web server accessible from outside the swarm, you need to
-[publish the port](services.md#publish-ports-externally-to-the-swarm) where the swarm
+[publish the port](#publish-ports-externally-to-the-swarm) where the swarm
 listens for web requests.
 
 You can include a command to run inside containers after the image:
@@ -146,8 +146,8 @@ Swarm mode lets you network services in a couple of ways:
 
 #### Publish ports externally to the swarm
 
-You publish service ports externally to the swarm using the `--publish<TARGET-PORT>:<SERVICE-PORT>`
-flag. When you publish a service port, the swarm
+You publish service ports externally to the swarm using the `--publish
+<TARGET-PORT>:<SERVICE-PORT>` flag. When you publish a service port, the swarm
 makes the service accessible at the target port on every node regardless if
 there is a task for the service running on the node.
 
