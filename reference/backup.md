@@ -9,14 +9,14 @@ identifier="dtr_reference_backup"
 +++
 <![end-metadata]-->
 
-# docker/dtr backup
+# dockerhubenterprise/dtr backup
 
 Create a backup of DTR
 
 ## Usage
 
 ```bash
-docker run -i --rm docker/dtr \
+docker run -i --rm dockerhubenterprise/dtr \
     backup [command options] > backup.tar
 ```
 

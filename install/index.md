@@ -38,7 +38,7 @@ Make sure all the nodes you plan on installing DTR are being managed by UCP.
 
 ## Step 3. Install DTR
 
-To install DTR you use the `docker/dtr` image. This image has commands to
+To install DTR you use the `dockerhubenterprise/dtr` image. This image has commands to
 install, configure, and backup DTR.
 
 To install DTR:
@@ -81,7 +81,7 @@ To install DTR:
 
     # Install DTR
     $ docker run -it --rm \
-      docker/dtr:2.1.0-beta1 install \
+      dockerhubenterprise/dtr:2.1.0-beta1 install \
       --ucp-node <hostname> \
       --ucp-insecure-tls
     ```
@@ -137,7 +137,7 @@ replica fails.
 For high-availability you should set 3, 5, or 7 DTR replicas. The nodes where
 you're going to install these replicas also need to be managed by UCP.
 
-To add replicas to a DTR cluster, use the `docker/dtr join` command. To add
+To add replicas to a DTR cluster, use the `dockerhubenterprise/dtr join` command. To add
 replicas:
 
 1. Make sure the DTR images are loaded into the node.
@@ -154,7 +154,7 @@ replicas:
 
     ```bash
     $ docker run -it --rm \
-      docker/dtr:2.1.0-beta1 join \
+      dockerhubenterprise/dtr:2.1.0-beta1 join \
       --ucp-node <hostname> \
       --ucp-insecure-tls
     ```

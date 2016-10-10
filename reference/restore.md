@@ -9,14 +9,14 @@ identifier="dtr_reference_restore"
 +++
 <![end-metadata]-->
 
-# docker/dtr restore
+# dockerhubenterprise/dtr restore
 
 Install and restore DTR from an existing backup
 
 ## Usage
 
 ```bash
-docker run -i --rm docker/dtr \
+docker run -i --rm dockerhubenterprise/dtr \
     restore [command options] < backup.tar
 ```
 

@@ -9,7 +9,7 @@ identifier="dtr_reference_join"
 +++
 <![end-metadata]-->
 
-# docker/dtr join
+# dockerhubenterprise/dtr join
 
 Add a new replica to an existing DTR cluster
 

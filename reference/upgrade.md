@@ -9,14 +9,14 @@ identifier="dtr_reference_upgrade"
 +++
 <![end-metadata]-->
 
-# docker/dtr upgrade
+# dockerhubenterprise/dtr upgrade
 
 Upgrade DTR 2.0.0 or later cluster to this version
 
 ## Usage
 
 ```bash
-docker run -it --rm docker/dtr \
+docker run -it --rm dockerhubenterprise/dtr \
     upgrade [command options]
 ```
 

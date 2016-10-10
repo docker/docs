@@ -9,14 +9,14 @@ identifier="dtr_reference_reconfigure"
 +++
 <![end-metadata]-->
 
-# docker/dtr reconfigure
+# dockerhubenterprise/dtr reconfigure
 
 Change DTR configurations
 
 ## Usage
 
 ```bash
-docker run -it --rm docker/dtr \
+docker run -it --rm dockerhubenterprise/dtr \
     reconfigure [command options]
 ```
 

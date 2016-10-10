@@ -9,14 +9,14 @@ identifier="dtr_reference_remove"
 +++
 <![end-metadata]-->
 
-# docker/dtr remove
+# dockerhubenterprise/dtr remove
 
 Remove a DTR replica
 
 ## Usage
 
 ```bash
-docker run -it --rm docker/dtr \
+docker run -it --rm dockerhubenterprise/dtr \
     remove [command options]
 ```
 

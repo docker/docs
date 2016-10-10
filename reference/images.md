@@ -9,14 +9,14 @@ identifier="dtr_reference_images"
 +++
 <![end-metadata]-->
 
-# docker/dtr images
+# dockerhubenterprise/dtr images
 
 List all the images necessary to install DTR
 
 ## Usage
 
 ```bash
-docker run -it --rm docker/dtr \
+docker run -it --rm dockerhubenterprise/dtr \
     images [command options]
 ```
 
