@@ -1,8 +1,6 @@
 ---
 description: Describes how to use the etwlogs logging driver.
 keywords: ETW, docker, logging, driver
-title: ETW logging driver
----
 
 The ETW logging driver forwards container logs as ETW events.
 ETW stands for Event Tracing in Windows, and is the common framework

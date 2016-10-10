@@ -2,9 +2,8 @@
 description: Configure logging driver.
 keywords: docker, logging, driver, Fluentd
 redirect_from:
-- /engine/reference/logging/overview/
 title: Configure logging drivers
----
+
 
 Docker comes with support of multiple logging mechanisms. Use the
 `--log-driver=VALUE` when starting the `dockerd` daemon to set default logging
@@ -232,7 +231,7 @@ compresses each log message. The accepted values are `gzip`, `zlib` and `none`.
 `gzip` is chosen by default.
 
 The `gelf-compression-level` option can be used to change the level of
-compression when `gzip` or `zlib` is selected as `gelf-compression-type`.
+compresssion when `gzip` or `zlib` is selected as `gelf-compression-type`.
 Accepted value must be from -1 to 9 (BestCompression). Higher levels
 typically run slower but compress more. Default value is 1 (BestSpeed).
 
@@ -250,13 +249,13 @@ logging driver options.
 
 For example, to specify both additional options:
 
-```bash{% raw %}
+```bash
 $ docker run -dit \
     --log-driver=fluentd \
     --log-opt fluentd-address=localhost:24224 \
     --log-opt tag="docker.{{.Name}}" \
     alpine sh
-{% endraw %}```
+```
 
 If container cannot connect to the Fluentd daemon on the specified address and
 `fluentd-async-connect` is not enabled, the container stops immediately.

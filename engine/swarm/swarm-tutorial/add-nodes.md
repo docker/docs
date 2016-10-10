@@ -10,7 +10,7 @@ to add worker nodes.
 1. Open a terminal and ssh into the machine where you want to run a worker node.
 This tutorial uses the name `worker1`.
 
-2.  Run the command produced by the `docker swarm init` output from the
+2. Run the command produced by the `docker swarm init` output from the
 [Create a swarm](create-swarm.md) tutorial step to create a worker node joined to the existing swarm:
 
     ```bash
@@ -37,7 +37,7 @@ This tutorial uses the name `worker1`.
 3. Open a terminal and ssh into the machine where you want to run a second
 worker node. This tutorial uses the name `worker2`.
 
-4.  Run the command produced by the `docker swarm init` output from the
+4. Run the command produced by the `docker swarm init` output from the
 [Create a swarm](create-swarm.md) tutorial step to create a second worker node
 joined to the existing swarm:
 
@@ -49,7 +49,7 @@ joined to the existing swarm:
     This node joined a swarm as a worker.
     ```
 
-5.  Open a terminal and ssh into the machine where the manager node runs and run
+5. Open a terminal and ssh into the machine where the manager node runs and run
 the `docker node ls` command to see the worker nodes:
 
     ```bash

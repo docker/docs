@@ -1,8 +1,6 @@
 ---
 description: Learn the technologies that support storage drivers.
 keywords: container, storage, driver, AUFS, btfs, devicemapper,zvfs
-title: Understand images, containers, and storage drivers
----
 
 To use storage drivers effectively, you must understand how Docker builds and
 stores images. Then, you need an understanding of how these images are used by

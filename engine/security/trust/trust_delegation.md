@@ -96,7 +96,7 @@ to rotate the snapshot key specifically, and you want the server to manage it (`
 stands for "remote").
 
 When adding a delegation, your must acquire
-[the PEM-encoded x509 certificate with the public key](trust_delegation.md#generating-delegation-keys)
+[the PEM-encoded x509 certificate with the public key](#generating-delegation-keys)
 of the collaborator you wish to delegate to.
 
 Assuming you have the certificate `delegation.crt`, you can add a delegation
