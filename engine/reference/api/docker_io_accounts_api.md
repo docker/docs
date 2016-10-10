@@ -1,13 +1,13 @@
----
-description: API Documentation for docker.io accounts.
-keywords:
-- API, Docker, accounts, REST,  documentation
-menu:
-  main:
-    parent: engine_remoteapi
-    weight: 90
-title: docker.io accounts API
----
+<!--[metadata]>
++++
+title = "docker.io accounts API"
+description = "API Documentation for docker.io accounts."
+keywords = ["API, Docker, accounts, REST,  documentation"]
+[menu.main]
+parent = "engine_remoteapi"
+weight=90
++++
+<![end-metadata]-->
 
 # docker.io accounts API
 

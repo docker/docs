@@ -1,12 +1,12 @@
----
-description: Sharing data between 2 couchdb databases
-keywords:
-- docker, example, package installation, networking, couchdb,  data volumes
-menu:
-  main:
-    parent: engine_dockerize
-title: Dockerizing a CouchDB service
----
+<!--[metadata]>
++++
+title = "Dockerizing a CouchDB service"
+description = "Sharing data between 2 couchdb databases"
+keywords = ["docker, example, package installation, networking, couchdb,  data volumes"]
+[menu.main]
+parent = "engine_dockerize"
++++
+<![end-metadata]-->
 
 # Dockerizing a CouchDB service
 

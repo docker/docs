@@ -1,14 +1,12 @@
----
-description: The node ls command description and usage
-keywords:
-- node, list
-menu:
-  main:
-    parent: smn_cli
-title: node ls
----
-
-**Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
+<!--[metadata]>
++++
+title = "node ls"
+description = "The node ls command description and usage"
+keywords = ["node, list"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # node ls
 
@@ -26,7 +24,7 @@ Options:
   -q, --quiet          Only display IDs
 ```
 
-Lists all the nodes that the Docker Swarm manager knows about. You can filter using the `-f` or `--filter` flag. Refer to the [filtering](node_ls.md#filtering) section for more information about available filter options.
+Lists all the nodes that the Docker Swarm manager knows about. You can filter using the `-f` or `--filter` flag. Refer to the [filtering](#filtering) section for more information about available filter options.
 
 Example output:
 

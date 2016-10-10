@@ -1,12 +1,12 @@
----
-description: Learn how to optimize your use of Btrfs driver.
-keywords:
-- 'container, storage, driver, Btrfs '
-menu:
-  main:
-    parent: engine_driver
-title: Btrfs storage in practice
----
+<!--[metadata]>
++++
+title = "Btrfs storage in practice"
+description = "Learn how to optimize your use of Btrfs driver."
+keywords = ["container, storage, driver, Btrfs "]
+[menu.main]
+parent = "engine_driver"
++++
+<![end-metadata]-->
 
 # Docker and Btrfs in practice
 

@@ -1,18 +1,18 @@
----
-advisory: experimental
-description: The plugin ls command description and usage
-keywords:
-- plugin, list
-menu:
-  main:
-    parent: smn_cli
-title: plugin ls
----
+<!--[metadata]>
++++
+title = "plugin ls"
+description = "The plugin ls command description and usage"
+keywords = ["plugin, list"]
+advisory = "experimental"
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # plugin ls (experimental)
 
 ```markdown
-Usage:  docker plugin ls
+Usage:  docker plugin ls [OPTIONS]
 
 List plugins
 
@@ -20,7 +20,8 @@ Aliases:
   ls, list
 
 Options:
-      --help   Print usage
+      --help	   Print usage
+      --no-trunc   Don't truncate output
 ```
 
 Lists all the plugins that are currently installed. You can install plugins
@@ -31,8 +32,8 @@ Example output:
 ```bash
 $ docker plugin ls
 
-NAME                  VERSION             ACTIVE
-tiborvass/no-remove   latest              true
+NAME                  TAG                 DESCRIPTION                ENABLED
+tiborvass/no-remove   latest              A test plugin for Docker   true
 ```
 
 ## Related information

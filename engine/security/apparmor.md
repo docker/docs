@@ -1,13 +1,13 @@
----
-description: Enabling AppArmor in Docker
-keywords:
-- AppArmor, security, docker, documentation
-menu:
-  main:
-    parent: smn_secure_docker
-    weight: 5
-title: AppArmor security profiles for Docker
----
+<!-- [metadata]>
++++
+title = "AppArmor security profiles for Docker"
+description = "Enabling AppArmor in Docker"
+keywords = ["AppArmor, security, docker, documentation"]
+[menu.main]
+parent= "smn_secure_docker"
+weight=5
++++
+<![end-metadata]-->
 
 # AppArmor security profiles for Docker
 
@@ -59,7 +59,7 @@ profile docker-default flags=(attach_disconnected,mediate_deleted) {
   deny /sys/fs/[^c]*/** wklx,
   deny /sys/fs/c[^g]*/** wklx,
   deny /sys/fs/cg[^r]*/** wklx,
-  deny /sys/firmware/efi/efivars/** rwklx,
+  deny /sys/firmware/** rwklx,
   deny /sys/kernel/security/** rwklx,
 }
 ```
@@ -175,7 +175,7 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
   deny /sys/fs/[^c]*/** wklx,
   deny /sys/fs/c[^g]*/** wklx,
   deny /sys/fs/cg[^r]*/** wklx,
-  deny /sys/firmware/efi/efivars/** rwklx,
+  deny /sys/firmware/** rwklx,
   deny /sys/kernel/security/** rwklx,
 }
 ```

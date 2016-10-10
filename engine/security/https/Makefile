@@ -1,6 +1,3 @@
----
-{}
----
 
 HOST:=boot2docker
 

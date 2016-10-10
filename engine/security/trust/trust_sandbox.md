@@ -1,12 +1,12 @@
----
-description: Play in a trust sandbox
-keywords:
-- trust, security, root,  keys, repository, sandbox
-menu:
-  main:
-    parent: smn_content_trust
-title: Play in a content trust sandbox
----
+<!--[metadata]>
++++
+title = "Play in a content trust sandbox"
+description = "Play in a trust sandbox"
+keywords = ["trust, security, root,  keys, repository, sandbox"]
+[menu.main]
+parent= "smn_content_trust"
++++
+<![end-metadata]-->
 
 # Play in a content trust sandbox
 
@@ -83,7 +83,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
         version: "2"
         services:
           notaryserver:
-            image: dockersecurity/notary_autobuilds:server-latest
+            image: dockersecurity/notary_autobuilds:server
             volumes:
               - notarycerts:/go/src/github.com/docker/notary/fixtures
             networks:

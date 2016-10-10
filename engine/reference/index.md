@@ -1,16 +1,14 @@
----
-aliases:
-  - /reference/
-description: Docker Engine reference
-keywords:
-- Engine
-menu:
-  main:
-    identifier: engine_ref
-    parent: engine_use
-    weight: 70
-title: Engine reference
----
+<!-- [metadata]>
++++
+title = "Engine reference"
+description = "Docker Engine reference"
+keywords = ["Engine"]
+[menu.main]
+parent="engine_use"
+identifier="engine_ref"
+weight=70
++++
+<![end-metadata]-->
 
 # Engine reference
 

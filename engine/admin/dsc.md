@@ -1,15 +1,14 @@
----
-aliases:
-- /engine/articles/dsc/
-description: Using DSC to configure a new Docker host
-keywords:
-- powershell, dsc, installation, usage, docker,  documentation
-menu:
-  main:
-    parent: engine_admin
-    weight: "10"
-title: PowerShell DSC Usage
----
+<!--[metadata]>
++++
+aliases = ["/engine/articles/dsc/"]
+title = "PowerShell DSC Usage"
+description = "Using DSC to configure a new Docker host"
+keywords = ["powershell, dsc, installation, usage, docker,  documentation"]
+[menu.main]
+parent = "engine_admin"
+weight="10"
++++
+<![end-metadata]-->
 
 # Using PowerShell DSC
 

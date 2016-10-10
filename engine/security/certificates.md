@@ -1,15 +1,13 @@
----
-aliases:
-- /engine/articles/certificates/
-description: How to set up and use certificates with a registry to verify access
-keywords:
-- Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls,
-  documentation, examples, articles,  tutorials
-menu:
-  main:
-    parent: smn_secure_docker
-title: Using certificates for repository client verification
----
+<!--[metadata]>
++++
+aliases = ["/engine/articles/certificates/"]
+title = "Using certificates for repository client verification"
+description = "How to set up and use certificates with a registry to verify access"
+keywords = ["Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls, documentation, examples, articles,  tutorials"]
+[menu.main]
+parent = "smn_secure_docker"
++++
+<![end-metadata]-->
 
 # Using certificates for repository client verification
 
@@ -60,7 +58,7 @@ creating an os-provided bundled certificate chain.
 ## Creating the client certificates
 
 You will use OpenSSL's `genrsa` and `req` commands to first generate an RSA
-key and then use the key to create the certificate.
+key and then use the key to create the certificate.   
 
     $ openssl genrsa -out client.key 4096
     $ openssl req -new -x509 -text -key client.key -out client.cert
@@ -72,7 +70,7 @@ key and then use the key to create the certificate.
 
 ## Troubleshooting tips
 
-The Docker daemon interprets `.crt` files as CA certificates and `.cert` files
+The Docker daemon interprets ``.crt` files as CA certificates and `.cert` files
 as client certificates. If a CA certificate is accidentally given the extension
 `.cert` instead of the correct `.crt` extension, the Docker daemon logs the
 following error message:

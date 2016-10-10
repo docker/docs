@@ -1,14 +1,13 @@
----
-aliases:
-- /engine/installation/SUSE/
-description: Installation instructions for Docker on openSUSE and on SUSE Linux Enterprise.
-keywords:
-- openSUSE, SUSE Linux Enterprise, SUSE, SLE, docker, documentation,  installation
-menu:
-  main:
-    parent: engine_linux
-title: Installation on openSUSE and SUSE Linux Enterprise
----
+<!--[metadata]>
++++
+aliases = [ "/engine/installation/SUSE/"]
+title = "Installation on openSUSE and SUSE Linux Enterprise"
+description = "Installation instructions for Docker on openSUSE and on SUSE Linux Enterprise."
+keywords = ["openSUSE, SUSE Linux Enterprise, SUSE, SLE, docker, documentation,  installation"]
+[menu.main]
+parent = "engine_linux"
++++
+<![end-metadata]-->
 
 # openSUSE and SUSE Linux Enterprise
 
@@ -72,7 +71,7 @@ The `docker` package creates a new group named `docker`. Users, other than
 `root` user, must be part of this group to interact with the
 Docker daemon. You can add users with this command syntax:
 
-    sudo /usr/sbin/usermod -a -G docker <username>
+    $ sudo /usr/sbin/usermod -a -G docker <username>
 
 Once you add a user, make sure they relog to pick up these new permissions.
 

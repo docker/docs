@@ -1,12 +1,12 @@
----
-description: The port command description and usage
-keywords:
-- port, mapping, container
-menu:
-  main:
-    parent: smn_cli
-title: port
----
+<!--[metadata]>
++++
+title = "port"
+description = "The port command description and usage"
+keywords = ["port, mapping, container"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # port
 

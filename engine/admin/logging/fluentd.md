@@ -1,14 +1,13 @@
----
-aliases:
-- /engine/reference/logging/fluentd/
-description: Describes how to use the fluentd logging driver.
-keywords:
-- Fluentd, docker, logging, driver
-menu:
-  main:
-    parent: smn_logging
-title: Fluentd logging driver
----
+<!--[metadata]>
++++
+aliases = ["/engine/reference/logging/fluentd/"]
+title = "Fluentd logging driver"
+description = "Describes how to use the fluentd logging driver."
+keywords = ["Fluentd, docker, logging, driver"]
+[menu.main]
+parent = "smn_logging"
++++
+<![end-metadata]-->
 
 # Fluentd logging driver
 
@@ -33,10 +32,8 @@ The `docker logs` command is not available for this logging driver.
 
 Some options are supported by specifying `--log-opt` as many times as needed:
 
- {% raw %}
  - `fluentd-address`: specify `host:port` to connect `localhost:24224`
  - `tag`: specify tag for fluentd message, which interpret some markup, ex `{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`
- {% endraw %}
 
 
 Configure the default logging driver by passing the

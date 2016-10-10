@@ -1,13 +1,13 @@
----
-description: Use overlay for multi-host networking
-keywords:
-- Examples, Usage, network, docker, documentation, user guide, multihost, cluster
-menu:
-  main:
-    parent: smn_networking
-    weight: -3
-title: Get started with multi-host networking
----
+<!--[metadata]>
++++
+title = "Get started with multi-host networking"
+description = "Use overlay for multi-host networking"
+keywords = ["Examples, Usage, network, docker, documentation, user guide, multihost, cluster"]
+[menu.main]
+parent = "smn_networking"
+weight=-3
++++
+<![end-metadata]-->
 
 # Get started with multi-host networking
 
@@ -16,11 +16,11 @@ network. Docker Engine supports multi-host networking out-of-the-box through the
 `overlay` network driver.  Unlike `bridge` networks, overlay networks require
 some pre-existing conditions before you can create one:
 
-* [Docker Engine running in swarm mode](get-started-overlay.md#overlay-networking-and-swarm-mode)
+* [Docker Engine running in swarm mode](#overlay-networking-and-swarm-mode)
 
 OR
 
-* [A cluster of hosts using a key value store](get-started-overlay.md#overlay-networking-with-an-external-key-value-store)
+* [A cluster of hosts using a key value store](#overlay-networking-with-an-external-key-value-store)
 
 ## Overlay networking and swarm mode
 
@@ -54,7 +54,7 @@ $ docker service create --replicas 2 --network my-multi-host-network --name my-w
 
 Overlay networks for a swarm are not available to unmanaged containers. For more information refer to [Docker swarm mode overlay network security model](overlay-security-model.md).
 
-See also [Attach services to an overlay network](../../swarm/networking.md).
+See also [Attach services to an overlay network](../../swarm/networking.md). 
 
 ## Overlay networking with an external key-value store
 

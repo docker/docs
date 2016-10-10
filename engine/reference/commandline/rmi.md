@@ -1,12 +1,12 @@
----
-description: The rmi command description and usage
-keywords:
-- remove, image, Docker
-menu:
-  main:
-    parent: smn_cli
-title: rmi
----
+<!--[metadata]>
++++
+title = "rmi"
+description = "The rmi command description and usage"
+keywords = ["remove, image, Docker"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # rmi
 

@@ -1,12 +1,12 @@
----
-description: The network connect command description and usage
-keywords:
-- network, connect, user-defined
-menu:
-  main:
-    parent: smn_cli
-title: network connect
----
+<!--[metadata]>
++++
+title = "network connect"
+description = "The network connect command description and usage"
+keywords = ["network, connect, user-defined"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # network connect
 

@@ -1,14 +1,13 @@
----
-description: Instructions for installing Docker as a binary. Mostly meant for hackers
-  who want to try out Docker on a variety of environments.
-keywords:
-- binaries, installation, docker, documentation,  linux
-menu:
-  main:
-    parent: engine_install
-    weight: 110
-title: Installation from binaries
----
+<!--[metadata]>
++++
+title = "Installation from binaries"
+description = "Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments."
+keywords = ["binaries, installation, docker, documentation,  linux"]
+[menu.main]
+parent = "engine_install"
+weight = 110
++++
+<![end-metadata]-->
 
 # Installation from binaries
 
@@ -118,7 +117,7 @@ For example:
 
 > **Note** These instructions are for Docker Engine 1.11 and up. Engine 1.10 and
 > under consists of a single binary, and instructions for those versions are
-> different. To install version 1.10 or below, follow the instructions in the
+> different. To install version 1.10 or below, follow the instructions in the 
 > <a href="https://docs.docker.com/v1.10/engine/installation/binaries/" target="_blank">1.10 documentation</a>.
 
 
@@ -146,6 +145,9 @@ For example, to install the binaries in `/usr/bin`:
 ```bash
 $ mv docker/* /usr/bin/
 ```
+
+> **Note**: Depending on your current setup, you can specify custom paths
+> for some of the binaries provided.
 
 > **Note**: If you already have Engine installed on your host, make sure you
 > stop Engine before installing (`killall docker`), and install the binaries
@@ -245,7 +247,7 @@ daemon:
 
     $ killall docker
 
-Then follow the [regular installation steps](binaries.md#get-the-linux-binaries).
+Then follow the [regular installation steps](#get-the-linux-binaries).
 
 ## Next steps
 

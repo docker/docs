@@ -1,18 +1,19 @@
----
-aliases:
-- /mac/step_four/
-- /windows/step_four/
-- /linux/step_four/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
-menu:
-  main:
-    identifier: getstart_build_image
-    parent: tutorial_getstart_menu
-    weight: 4
-title: Build your own image
----
+<!--[metadata]>
++++
+aliases = [
+"/mac/step_four/",
+"/windows/step_four/",
+"/linux/step_four/",
+]
+title = "Build your own image"
+description = "Getting started with Docker"
+keywords = ["beginner, getting started, Docker"]
+[menu.main]
+identifier = "getstart_build_image"
+parent = "tutorial_getstart_menu"
+weight = 4
++++
+<![end-metadata]-->
 
 # Build your own image
 

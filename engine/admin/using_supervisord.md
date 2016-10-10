@@ -1,15 +1,14 @@
----
-aliases:
-- /engine/articles/using_supervisord/
-description: How to use Supervisor process management with Docker
-keywords:
-- docker, supervisor,  process management
-menu:
-  main:
-    parent: engine_admin
-    weight: "13"
-title: Using Supervisor with Docker
----
+<!--[metadata]>
++++
+aliases = ["/engine/articles/using_supervisord/"]
+title = "Using Supervisor with Docker"
+description = "How to use Supervisor process management with Docker"
+keywords = ["docker, supervisor,  process management"]
+[menu.main]
+parent = "engine_admin"
+weight="13"
++++
+<![end-metadata]-->
 
 # Using Supervisor with Docker
 

@@ -1,12 +1,12 @@
----
-description: The network inspect command description and usage
-keywords:
-- network, inspect, user-defined
-menu:
-  main:
-    parent: smn_cli
-title: network inspect
----
+<!--[metadata]>
++++
+title = "network inspect"
+description = "The network inspect command description and usage"
+keywords = ["network, inspect, user-defined"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # network inspect
 
@@ -80,7 +80,8 @@ $ sudo docker network inspect bridge
             "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
             "com.docker.network.bridge.name": "docker0",
             "com.docker.network.driver.mtu": "1500"
-        }
+        },
+        "Labels": {}
     }
 ]
 ```
@@ -102,12 +103,13 @@ $ docker network inspect simple-network
             "Config": [
                 {
                     "Subnet": "172.22.0.0/16",
-                    "Gateway": "172.22.0.1/16"
+                    "Gateway": "172.22.0.1"
                 }
             ]
         },
         "Containers": {},
-        "Options": {}
+        "Options": {},
+        "Labels": {}
     }
 ]
 ```

@@ -1,12 +1,12 @@
----
-description: Learn how to optimize your use of ZFS driver.
-keywords:
-- 'container, storage, driver, ZFS '
-menu:
-  main:
-    parent: engine_driver
-title: ZFS storage in practice
----
+<!--[metadata]>
++++
+title = "ZFS storage in practice"
+description = "Learn how to optimize your use of ZFS driver."
+keywords = ["container, storage, driver, ZFS "]
+[menu.main]
+parent = "engine_driver"
++++
+<![end-metadata]-->
 
 # Docker and ZFS in practice
 

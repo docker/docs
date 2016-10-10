@@ -1,14 +1,13 @@
----
-aliases:
-- /engine/reference/logging/journald/
-description: Describes how to use the fluentd logging driver.
-keywords:
-- Journald, docker, logging, driver
-menu:
-  main:
-    parent: smn_logging
-title: Journald logging driver
----
+<!--[metadata]>
++++
+aliases = ["/engine/reference/logging/journald/"]
+title = "Journald logging driver"
+description = "Describes how to use the fluentd logging driver."
+keywords = ["Journald, docker, logging, driver"]
+[menu.main]
+parent = "smn_logging"
++++
+<![end-metadata]-->
 
 # Journald logging driver
 

@@ -1,13 +1,13 @@
----
-description: Docker networking
-keywords:
-- network, networking, bridge, docker,  documentation
-menu:
-  main:
-    identifier: smn_networking_def
-    parent: smn_networking
-title: Default bridge network
----
+<!--[metadata]>
++++
+title = "Default bridge network"
+description = "Docker networking"
+keywords = ["network, networking, bridge, docker,  documentation"]
+[menu.main]
+identifier="smn_networking_def"
+parent= "smn_networking"
++++
+<![end-metadata]-->
 
 # Docker default bridge network
 

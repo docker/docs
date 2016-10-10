@@ -1,12 +1,12 @@
----
-description: Dockerizing a Couchbase service
-keywords:
-- docker, example, package installation, networking, couchbase
-menu:
-  main:
-    parent: engine_dockerize
-title: Dockerizing a Couchbase service
----
+<!--[metadata]>
++++
+title = "Dockerizing a Couchbase service"
+description = "Dockerizing a Couchbase service"
+keywords = ["docker, example, package installation, networking, couchbase"]
+[menu.main]
+parent = "engine_dockerize"
++++
+<![end-metadata]-->
 
 # Dockerizing a Couchbase service
 

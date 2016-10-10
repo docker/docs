@@ -1,15 +1,14 @@
----
-aliases:
-- /engine/misc/deprecated/
-description: Deprecated Features.
-keywords:
-- docker, documentation, about, technology, deprecate
-menu:
-  main:
-    parent: engine_use
-    weight: 80
-title: Deprecated Engine Features
----
+<!--[metadata]>
++++
+aliases = ["/engine/misc/deprecated/"]
+title = "Deprecated Engine Features"
+description = "Deprecated Features."
+keywords = ["docker, documentation, about, technology, deprecate"]
+[menu.main]
+parent = "engine_use"
+weight=80
++++
+<![end-metadata]-->
 
 # Deprecated Engine Features
 
@@ -17,6 +16,13 @@ The following list of features are deprecated in Engine.
 To learn more about Docker Engine's deprecation policy,
 see [Feature Deprecation Policy](index.md#feature-deprecation-policy).
 
+
+### `docker daemon` subcommand
+**Deprecated In Release: [v1.13](https://github.com/docker/docker/releases/)**
+
+**Target For Removal In Release: v1.16**
+
+The daemon is moved to a separate binary (`dockerd`), and should be used instead.
 
 ### Three argument form in `docker import`
 **Deprecated In Release: [v0.6.7](https://github.com/docker/docker/releases/tag/v0.6.7)**
@@ -106,9 +112,7 @@ Log tags are now generated in a standard way across different logging drivers.
 Because of which, the driver specific log tag options `syslog-tag`, `gelf-tag` and
 `fluentd-tag` have been deprecated in favor of the generic `tag` option.
 
-    {% raw %}
     docker --log-driver=syslog --log-opt tag="{{.ImageName}}/{{.Name}}/{{.ID}}"
-    {% endraw %}
 
 ### LXC built-in exec driver
 **Deprecated In Release: [v1.8.0](https://github.com/docker/docker/releases/tag/v1.8.0)**
@@ -175,6 +179,15 @@ The single-dash (`-help`) was removed, in favor of the double-dash `--help`
     docker -help
     docker [COMMAND] -help
 
+### `--run` flag on docker commit
+
+**Deprecated In Release: [v0.10.0](https://github.com/docker/docker/releases/tag/v0.10.0)**
+
+**Removed In Release: [v1.13.0](https://github.com/docker/docker/releases/)**
+
+The flag `--run` of the docker commit (and its short version `-run`) were deprecated in favor 
+of the `--changes` flag that allows to pass `Dockerfile` commands.
+
 
 ### Interacting with V1 registries
 
@@ -189,3 +202,8 @@ Since 1.9, Docker Content Trust Offline key has been renamed to Root key and the
 
 - DOCKER_CONTENT_TRUST_OFFLINE_PASSPHRASE is now named DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE
 - DOCKER_CONTENT_TRUST_TAGGING_PASSPHRASE is now named DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE
+
+### `MAINTAINER` in Dockerfile
+**Deprecated In Release: v1.13.0**
+
+`MAINTAINER` was an early very limited form of `LABEL` which should be used instead.

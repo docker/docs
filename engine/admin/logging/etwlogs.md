@@ -1,12 +1,13 @@
----
-description: Describes how to use the etwlogs logging driver.
-keywords:
-- ETW, docker, logging, driver
-menu:
-  main:
-    parent: smn_logging
-title: ETW logging driver
----
+<!--[metadata]>
++++
+title = "ETW logging driver"
+description = "Describes how to use the etwlogs logging driver."
+keywords = ["ETW, docker, logging, driver"]
+[menu.main]
+parent = "smn_logging" 
++++
+<![end-metadata]-->
+
 
 # ETW logging driver
 

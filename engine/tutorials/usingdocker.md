@@ -1,16 +1,16 @@
----
-aliases:
-- /engine/userguide/containers/usingdocker/
-description: Learn how to manage and operate Docker containers.
-keywords:
-- docker, the docker guide, documentation, docker.io, monitoring containers, docker
-  top, docker inspect, docker port, ports, docker logs, log,  Logs
-menu:
-  main:
-    parent: engine_learn_menu
-    weight: -5
-title: Run a simple application
----
+<!--[metadata]>
++++
+aliases = [
+"/engine/userguide/containers/usingdocker/",
+]
+title = "Run a simple application"
+description = "Learn how to manage and operate Docker containers."
+keywords = ["docker, the docker guide, documentation, docker.io, monitoring containers, docker top, docker inspect, docker port, ports, docker logs, log,  Logs"]
+[menu.main]
+parent = "engine_learn_menu"
+weight=-5
++++
+<![end-metadata]-->
 
 # Run a simple application
 
@@ -250,9 +250,7 @@ You can see a sample of that JSON output.
 We can also narrow down the information we want to return by requesting a
 specific element, for example to return the container's IP address we would:
 
-    {% raw %}
     $ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nostalgic_morse
-    {% endraw %}
 
     172.17.0.5
 

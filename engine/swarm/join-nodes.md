@@ -1,14 +1,14 @@
----
-description: Add worker and manager nodes to a swarm
-keywords:
-- guide, swarm mode, node
-menu:
-  main:
-    identifier: join-nodes-guide
-    parent: engine_swarm
-    weight: 13
-title: Join nodes to a swarm
----
+<!--[metadata]>
++++
+title = "Join nodes to a swarm"
+description = "Add worker and manager nodes to a swarm"
+keywords = ["guide, swarm mode, node"]
+[menu.main]
+identifier="join-nodes-guide"
+parent="engine_swarm"
+weight=13
++++
+<![end-metadata]-->
 
 # Join nodes to a swarm
 
@@ -18,7 +18,7 @@ swarm mode. To take full advantage of swarm mode you can add nodes to the swarm:
 * Adding worker nodes increases capacity. When you deploy a service to a swarm,
 the Engine schedules tasks on available nodes whether they are worker nodes or
 manager nodes. When you add workers to your swarm, you increase the scale of
-the swarm to handle tasks without affecting the manager raft consensus.
+the swarm to handle tasks without affecting the manager raft consenus.
 * Manager nodes increase fault-tolerance. Manager nodes perform the
 orchestration and cluster management functions for the swarm. Among manager
 nodes, a single leader node conducts orchestration tasks. If a leader node

@@ -1,13 +1,13 @@
----
-description: Migrate to Engine 1.10
-keywords:
-- docker, documentation, engine, upgrade, migration
-menu:
-  main:
-    parent: engine_use
-    weight: 79
-title: Migrate to Engine 1.10
----
+<!--[metadata]>
++++
+title = "Migrate to Engine 1.10"
+description = "Migrate to Engine 1.10"
+keywords = ["docker, documentation, engine, upgrade, migration"]
+[menu.main]
+parent = "engine_use"
+weight=79
++++
+<![end-metadata]-->
 
 # Migrate to Engine 1.10
 

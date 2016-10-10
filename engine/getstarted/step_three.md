@@ -1,18 +1,19 @@
----
-aliases:
-- /mac/step_three/
-- /windows/step_three/
-- /linux/step_three/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
-menu:
-  main:
-    identifier: getstart_locate
-    parent: tutorial_getstart_menu
-    weight: 3
-title: Find & run the whalesay image
----
+<!--[metadata]>
++++
+aliases = [
+"/mac/step_three/",
+"/windows/step_three/",
+"/linux/step_three/",
+]
+title = "Find & run the whalesay image"
+description = "Getting started with Docker"
+keywords = ["beginner, getting started, Docker"]
+[menu.main]
+identifier = "getstart_locate"
+parent = "tutorial_getstart_menu"
+weight = 3
++++
+<![end-metadata]-->
 
 # Find and run the whalesay image
 
@@ -22,7 +23,7 @@ image you'll use in the rest of this getting started.
 
 ## Step 1: Locate the whalesay image
 
-1. Open your browser and [browse to the Docker Hub](https://hub.docker.com/?utm_source=getting_started_guide&utm_medium=embedded_MacOSX&utm_campaign=find_whalesay).
+1. Open your browser and  <a href="https://hub.docker.com/?utm_source=getting_started_guide&utm_medium=embedded_MacOSX&utm_campaign=find_whalesay" target=_blank> browse to the Docker Hub</a>.
 
     ![Browse Docker Hub](tutimg/browse_and_search.png)
 
@@ -78,15 +79,15 @@ Make sure Docker is running. On Docker for Mac and Docker for Windows, this is i
          -----
             \
              \
-              \
-                            ##        .
-                      ## ## ##       ==
-                   ## ## ## ##      ===
-               /""""""""""""""""___/ ===
-          ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
-               \______ o          __/
-                \    \        __/
-                  \____\______/
+              \     
+                            ##        .            
+                      ## ## ##       ==            
+                   ## ## ## ##      ===            
+               /""""""""""""""""___/ ===        
+          ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~   
+               \______ o          __/            
+                \    \        __/             
+                  \____\______/   
 
 	The first time you run a software image, the `docker` command looks for it
 	on your local system. If the image isn't there, then `docker` gets it from
@@ -120,15 +121,15 @@ Make sure Docker is running. On Docker for Mac and Docker for Windows, this is i
          ---------
             \
              \
-              \
-                            ##        .
-                      ## ## ##       ==
-                   ## ## ## ##      ===
-               /""""""""""""""""___/ ===
-          ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
-               \______ o          __/
-                \    \        __/
-                  \____\______/
+              \     
+                            ##        .            
+                      ## ## ##       ==            
+                   ## ## ## ##      ===            
+               /""""""""""""""""___/ ===        
+          ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~   
+               \______ o          __/            
+                \    \        __/             
+                  \____\______/   
 
 ## Where to go next
 

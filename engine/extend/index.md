@@ -1,24 +1,25 @@
----
-advisory: experimental
-aliases:
-- /engine/extend/
-description: How develop and use a plugin with the managed plugin system
-keywords:
-- API, Usage, plugins, documentation, developer
-menu:
-  main:
-    parent: engine_extend
-    weight: 1
-title: Managed plugin system
----
+<!--[metadata]>
++++
+aliases = [
+"/engine/extend/"
+]
+title = "Managed plugin system"
+description = "How develop and use a plugin with the managed plugin system"
+keywords = ["API, Usage, plugins, documentation, developer"]
+advisory = "experimental"
+[menu.main]
+parent = "engine_extend"
+weight=1
++++
+<![end-metadata]-->
 
 # Docker Engine managed plugin system
 
 This document describes the plugin system available today in the **experimental
 build** of Docker 1.12:
 
-* [How to operate an existing plugin](index.md#how-to-operate-a-plugin)
-* [How to develop a plugin](index.md#how-to-develop-a-plugin)
+* [How to operate an existing plugin](#how-to-operate-a-plugin)
+* [How to develop a plugin](#how-to-develop-a-plugin)
 
 Unlike the legacy plugin system, you now manage plugins using Docker Engine:
 

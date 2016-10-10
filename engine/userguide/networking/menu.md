@@ -1,15 +1,15 @@
----
-description: Docker networking feature is introduced
-keywords:
-- network, networking, bridge, docker,  documentation
-menu:
-  main:
-    identifier: smn_networking
-    parent: engine_guide
-    weight: 7
-title: Network configuration
-type: menu
----
+<!--[metadata]>
++++
+title = "Network configuration"
+description = "Docker networking feature is introduced"
+keywords = ["network, networking, bridge, docker,  documentation"]
+type="menu"
+[menu.main]
+identifier="smn_networking"
+parent= "engine_guide"
+weight=7
++++
+<![end-metadata]-->
 
 # Docker networks feature overview
 

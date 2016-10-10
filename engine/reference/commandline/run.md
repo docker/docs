@@ -1,12 +1,12 @@
----
-description: The run command description and usage
-keywords:
-- run, command, container
-menu:
-  main:
-    parent: smn_cli
-title: run
----
+<!--[metadata]>
++++
+title = "run"
+description = "The run command description and usage"
+keywords = ["run, command, container"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # run
 
@@ -76,7 +76,7 @@ Options:
   -m, --memory string               Memory limit
       --memory-reservation string   Memory soft limit
       --memory-swap string          Swap limit equal to memory plus swap: '-1' to enable unlimited swap
-      --memory-swappiness int       Tune container memory swappiness (0 to 100) (default -1).
+      --memory-swappiness int       Tune container memory swappiness (0 to 100) (default -1)
       --name string                 Assign a name to the container
       --network-alias value         Add network-scoped alias for the container (default [])
       --network string              Connect a container to a network
@@ -197,9 +197,9 @@ The `-w` lets the command being executed inside directory given, here
 
     $ docker run -it --storage-opt size=120G fedora /bin/bash
 
-This (size) will allow to set the container rootfs size to 120G at creation time. 
-User cannot pass a size less than the Default BaseFS Size. This option is only 
-available for the `devicemapper`, `btrfs`, and `zfs` graph drivers.
+This (size) will allow to set the container rootfs size to 120G at creation time.
+User cannot pass a size less than the Default BaseFS Size. This option is only
+available for the `devicemapper`, `btrfs`, `windowsfilter`, and `zfs` graph drivers.
 
 ### Mount tmpfs (--tmpfs)
 
@@ -613,6 +613,11 @@ the three processes quota set for the `daemon` user.
 The `--stop-signal` flag sets the system call signal that will be sent to the container to exit.
 This signal can be a valid unsigned number that matches a position in the kernel's syscall table, for instance 9,
 or a signal name in the format SIGNAME, for instance SIGKILL.
+
+### Optional security options (--security-opt)
+
+On Windows, this flag can be used to specify the `credentialspec` option. 
+The `credentialspec` must be in the format `file://spec.txt` or `registry://keyname`. 
 
 ### Specify isolation technology for container (--isolation)
 

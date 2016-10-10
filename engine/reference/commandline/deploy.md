@@ -1,13 +1,13 @@
----
-advisory: experimental
-description: The deploy command description and usage
-keywords:
-- stack, deploy
-menu:
-  main:
-    parent: smn_cli
-title: deploy
----
+<!--[metadata]>
++++
+title = "deploy"
+description = "The deploy command description and usage"
+keywords = ["stack, deploy"]
+advisory = "experimental"
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # stack deploy (experimental)
 

@@ -1,15 +1,13 @@
----
-aliases:
-  - /extend/plugin_api/
-description: 'How to write Docker plugins extensions '
-keywords:
-- API, Usage, plugins, documentation, developer
-menu:
-  main:
-    parent: engine_extend
-    weight: 7
-title: Plugins API
----
+<!--[metadata]>
++++
+title = "Plugins API"
+description = "How to write Docker plugins extensions "
+keywords = ["API, Usage, plugins, documentation, developer"]
+[menu.main]
+parent = "engine_extend"
+weight=7
++++
+<![end-metadata]-->
 
 # Docker Plugin API
 
@@ -28,7 +26,7 @@ If you just want to learn about or use Docker plugins, look
 
 A plugin is a process running on the same or a different host as the docker daemon,
 which registers itself by placing a file on the same docker host in one of the plugin
-directories described in [Plugin discovery](plugin_api.md#plugin-discovery).
+directories described in [Plugin discovery](#plugin-discovery).
 
 Plugins have human-readable names, which are short, lowercase strings. For
 example, `flocker` or `weave`.

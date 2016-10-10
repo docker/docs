@@ -1,16 +1,17 @@
----
-aliases:
-- /engine/swarm/how-swarm-mode-works/
-description: How swarm nodes work
-keywords:
-- docker, container, cluster, swarm mode, node
-menu:
-  main:
-    identifier: how-nodes-work
-    parent: how-swarm-works
-    weight: "3"
-title: How nodes work
----
+<!--[metadata]>
++++
+aliases = [
+"/engine/swarm/how-swarm-mode-works/"
+]
+title = "How nodes work"
+description = "How swarm nodes work"
+keywords = ["docker, container, cluster, swarm mode, node"]
+[menu.main]
+identifier="how-nodes-work"
+parent="how-swarm-works"
+weight="3"
++++
+<![end-metadata]-->
 
 # How nodes work
 
@@ -19,8 +20,8 @@ cluster of one or more Docker Engines called a swarm. A swarm consists
 of one or more nodes: physical or virtual machines running Docker
 Engine 1.12 or later in swarm mode.
 
-There are two types of nodes: [**managers**](nodes.md#manager-nodes) and
-[**workers**](nodes.md#worker-nodes).
+There are two types of nodes: [**managers**](#manager-nodes) and
+[**workers**](#worker-nodes).
 
 ![Swarm mode cluster](../images/swarm-diagram.png)
 

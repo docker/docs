@@ -1,15 +1,13 @@
----
-aliases:
-- /engine/articles/https/
-- /articles/https/
-description: How to setup and run Docker with HTTPS
-keywords:
-- docker, docs, article, example, https, daemon, tls, ca,  certificate
-menu:
-  main:
-    parent: smn_secure_docker
-title: Protect the Docker daemon socket
----
+<!--[metadata]>
++++
+aliases = ["/engine/articles/https/"]
+title = "Protect the Docker daemon socket"
+description = "How to setup and run Docker with HTTPS"
+keywords = ["docker, docs, article, example, https, daemon, tls, ca,  certificate"]
+[menu.main]
+parent = "smn_secure_docker"
++++
+<![end-metadata]-->
 
 # Protect the Docker daemon socket
 

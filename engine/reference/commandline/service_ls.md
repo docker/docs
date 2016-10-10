@@ -1,14 +1,12 @@
----
-description: The service ls command description and usage
-keywords:
-- service, ls
-menu:
-  main:
-    parent: smn_cli
-title: service ls
----
-
-**Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
+<!--[metadata]>
++++
+title = "service ls"
+description = "The service ls command description and usage"
+keywords = ["service, ls"]
+[menu.main]
+parent = "smn_cli"
++++
+<![end-metadata]-->
 
 # service ls
 
@@ -47,9 +45,9 @@ than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "b
 
 The currently supported filters are:
 
-* [id](service_ls.md#id)
-* [label](service_ls.md#label)
-* [name](service_ls.md#name)
+* [id](#id)
+* [label](#label)
+* [name](#name)
 
 #### ID
 

@@ -1,14 +1,14 @@
----
-description: Use trusted images
-keywords:
-- trust, security, docker,  index
-menu:
-  main:
-    identifier: smn_content_trust
-    parent: smn_secure_docker
-    weight: 4
-title: Use trusted images
----
+<!--[metadata]>
++++
+title = "Use trusted images"
+description = "Use trusted images"
+keywords = ["trust, security, docker,  index"]
+[menu.main]
+identifier="smn_content_trust"
+parent= "smn_secure_docker"
+weight=4
++++
+<![end-metadata]-->
 
 # Use trusted images
 
