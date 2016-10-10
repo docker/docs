@@ -1,5 +1,5 @@
 ---
-draft: true
+published: false
 ---
 
 # Docker Machine Release Process

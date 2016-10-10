@@ -1,6 +1,6 @@
 ---
 description: Documentation for docker Registry and Registry API
-draft: true
+published: false
 keywords:
 - docker, registry, api,  hub
 menu:
