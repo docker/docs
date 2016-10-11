@@ -50,7 +50,7 @@ commands to run. Your recipe is going to be very short.
 
     The command appears to do nothing but it actually creates the Dockerfile in the current directory.  Just type `ls Dockerfile` to see it.
 
-        $ ls Dockerfile
+        $ ls
         Dockerfile
 
 5. Open the `Dockerfile` in a visual text editor like <a href="https://atom.io/" target="_blank">Atom</a> or <a href="https://www.sublimetext.com/" target="_blank">Sublime</a>, or a text based editor like `vi`, or `nano` (https://www.nano-editor.org/).
