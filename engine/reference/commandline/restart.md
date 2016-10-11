@@ -13,7 +13,7 @@ title: restart
 ```markdown
 Usage:  docker restart [OPTIONS] CONTAINER [CONTAINER...]
 
-Restart a container
+Restart one or more containers
 
 Options:
       --help       Print usage
