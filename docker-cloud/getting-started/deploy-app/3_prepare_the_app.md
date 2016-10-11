@@ -23,14 +23,14 @@ install Python or Go to follow the tutorial.
 
 ```bash
 $ git clone https://github.com/docker/dockercloud-quickstart-python.git
-$ cd quickstart-python
+$ cd dockercloud-quickstart-python
 ```
 
 **Go quickstart**
 
 ```bash
 $ git clone https://github.com/docker/dockercloud-quickstart-go.git
-$ cd quickstart-go
+$ cd dockercloud-quickstart-go
 ```
 
 ## Build the application
