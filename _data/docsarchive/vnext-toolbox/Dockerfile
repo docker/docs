@@ -5,7 +5,7 @@ ONBUILD RUN git clone https://www.github.com/docker/docker.github.io docs
 
 ONBUILD WORKDIR docs
 
-ONBUILD RUN git checkout vnext-compose
+ONBUILD RUN git checkout vnext-toolbox
 
 ONBUILD COPY . /usr/src/app
 
