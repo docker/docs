@@ -9,4 +9,4 @@ ONBUILD RUN git checkout vnext-machine
 
 ONBUILD COPY . /usr/src/app
 
-CMD jekyll serve -d /_site --watch -H 0.0.0.0 -P 4000
+CMD jekyll serve -d /_site -H 0.0.0.0 -P 4000
