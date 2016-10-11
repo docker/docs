@@ -367,6 +367,7 @@ After you have verified that the configuration is correct, you can remove the
 ```bash
 $ rm -rf /var/lib/docker.bk
 ```
+
 If you run into repeated problems with thin pool, you can use the
 `dm.min_free_space` option to tune the Engine behavior. This value ensures that
 operations fail with a warning when the free space is at or near the minimum.
