@@ -1,13 +1,13 @@
----
-description: Swarm and transport layer security
-keywords:
-- docker, swarm, TLS, discovery, security,  certificates
-menu:
-  main:
-    parent: workw_swarm
-    weight: 50
-title: Overview Docker Swarm with TLS
----
+<!--[metadata]>
++++
+title = "Overview Docker Swarm with TLS"
+description = "Swarm and transport layer security"
+keywords = ["docker, swarm, TLS, discovery, security,  certificates"]
+[menu.main]
+parent="workw_swarm"
+weight=50
++++
+<![end-metadata]-->
 
 # Overview Swarm with TLS
 

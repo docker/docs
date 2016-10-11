@@ -1,13 +1,13 @@
----
-description: Plan for Swarm in production
-keywords:
-- docker, swarm, scale, voting, application,  plan
-menu:
-  main:
-    parent: workw_swarm
-    weight: -45
-title: Plan for Swarm in production
----
+<!--[metadata]>
++++
+title = "Plan for Swarm in production"
+description = "Plan for Swarm in production"
+keywords = ["docker, swarm, scale, voting, application,  plan"]
+[menu.main]
+parent="workw_swarm"
+weight=-45
++++
+<![end-metadata]-->
 
 # Plan for Swarm in production
 
@@ -15,10 +15,10 @@ This article provides guidance to help you plan, deploy, and manage Docker
 Swarm clusters in business critical production environments. The following high
  level topics are covered:
 
-- [Security](plan-for-production.md#security)
-- [High Availability](plan-for-production.md#high-availability)
-- [Performance](plan-for-production.md#performance)
-- [Cluster ownership](plan-for-production.md#cluster-ownership)
+- [Security](#security)
+- [High Availability (HA)](#high-availability-ha)
+- [Performance](#performance)
+- [Ownership of Swarm clusters](#ownership-of-swarm-clusters)
 
 ## Security
 
