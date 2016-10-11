@@ -175,13 +175,13 @@ active tasks.
 
 You can inspect the service to view the virtual IP. For example:
 
-```bash{% raw %}
+```bash
 $ docker service inspect \
   --format='{{json .Endpoint.VirtualIPs}}' \
   my-web
 
 [{"NetworkID":"7m2rjx0a97n88wzr4nu8772r3" "Addr":"10.0.0.2/24"}]
-{% endraw %}```
+```
 
 The following example shows how you can add a `busybox` service on the same
 network as the `nginx` service and the busybox service is able to access `nginx`
