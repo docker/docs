@@ -30,7 +30,7 @@ $ cd quickstart-python
 
 ```bash
 $ git clone https://github.com/docker/dockercloud-quickstart-go.git
-$ cd quickstart-go
+$ cd dockercloud-quickstart-go
 ```
 
 ## Build the application
