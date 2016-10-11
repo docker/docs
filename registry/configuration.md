@@ -1,13 +1,13 @@
----
-description: Explains how to configure a registry
-keywords:
-- registry, on-prem, images, tags, repository, distribution, configuration
-menu:
-  main:
-    parent: smn_registry
-    weight: 4
-title: Configuring a registry
----
+<!--[metadata]>
++++
+title = "Configuring a registry"
+description = "Explains how to configure a registry"
+keywords = ["registry, on-prem, images, tags, repository, distribution, configuration"]
+[menu.main]
+parent="smn_registry"
+weight=4
++++
+<![end-metadata]-->
 
 # Registry Configuration Reference
 
@@ -55,6 +55,8 @@ information about each option that appears later in this page.
 
     version: 0.1
     log:
+      accesslog:
+        disabled: true
       level: debug
       formatter: text
       fields:
@@ -99,6 +101,9 @@ information about each option that appears later in this page.
         secure: true
         v4auth: true
         chunksize: 5242880
+        multipartcopychunksize: 33554432
+        multipartcopymaxconcurrency: 100
+        multipartcopythresholdsize: 33554432
         rootdirectory: /s3/object/name/prefix
       swift:
         username: username
@@ -198,6 +203,8 @@ information about each option that appears later in this page.
         addr: localhost:5001
       headers:
         X-Content-Type-Options: [nosniff]
+      http2:
+        disabled: false
     notifications:
       endpoints:
         - name: alistener
@@ -207,6 +214,8 @@ information about each option that appears later in this page.
           timeout: 500
           threshold: 5
           backoff: 1000
+          ignoredmediatypes:
+            - application/octet-stream
     redis:
       addr: localhost:6379
       password: asecret
@@ -246,6 +255,14 @@ information about each option that appears later in this page.
     compatibility:
       schema1:
         signingkeyfile: /etc/registry/key.json
+    validation:
+      enabled: true
+      manifests:
+        urls:
+          allow:
+            - ^https?://([^/]+\.)*example\.com/
+          deny:
+            - ^https?://www\.example\.com/
 
 In some instances a configuration option is **optional** but it contains child
 options marked as **required**. This indicates that you can omit the parent with
@@ -266,63 +283,87 @@ The `log` subsection configures the behavior of the logging system. The logging
 system outputs everything to stdout. You can adjust the granularity and format
 with this configuration section.
 
-```
-log:
-  level: debug
-  formatter: text
-  fields:
-    service: registry
-    environment: staging
-```
+    log:
+      accesslog:
+        disabled: true
+      level: debug
+      formatter: text
+      fields:
+        service: registry
+        environment: staging
 
 <table>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-<tr>
-<td><code>level</code></td>
-<td>no</td>
-<td>Sets the sensitivity of logging output. Permitted values are
-<code>error</code>, <code>warn</code>, <code>info</code> and
-<code>debug</code>. The default is <code>info</code>.
-</td>
-</tr>
-<tr>
-<td><code>formatter</code></td>
-<td>no</td>
-<td>This selects the format of logging output. The format primarily affects how keyed attributes for a log line are encoded. Options are <code>text</code>, <code>json</code> or
-<code>logstash</code>. The default is <code>text</code>.
-</td>
-</tr>
-<tr>
-<td>
-<code>fields</code>
-</td>
-<td>no</td>
-<td>A map of field names to values. These are added to every log line for the context. This is useful for identifying log messages source after being mixed in other systems.
-</td>
-</tr>
+  <tr>
+    <th>Parameter</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>
+      <code>level</code>
+    </td>
+    <td>
+      no
+    </td>
+    <td>
+      Sets the sensitivity of logging output. Permitted values are
+      <code>error</code>, <code>warn</code>, <code>info</code> and
+      <code>debug</code>. The default is <code>info</code>.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>formatter</code>
+    </td>
+    <td>
+      no
+    </td>
+    <td>
+      This selects the format of logging output. The format primarily affects how keyed
+      attributes for a log line are encoded. Options are <code>text</code>, <code>json</code> or
+      <code>logstash</code>. The default is <code>text</code>.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>fields</code>
+    </td>
+    <td>
+      no
+    </td>
+    <td>
+      A map of field names to values. These are added to every log line for
+      the context. This is useful for identifying log messages source after
+      being mixed in other systems.
+    </td>
+  </tr>
 </table>
+
+### accesslog
+
+    accesslog:
+      disabled: true
+
+Within `log`, `accesslog` configures the behavior of the access logging
+system. By default, the access logging system outputs to stdout in
+[Combined Log Format](https://httpd.apache.org/docs/2.4/logs.html#combined).
+Access logging can be disabled by setting the boolean flag `disabled` to `true`.
 
 ## hooks
 
-```
-hooks:
-  - type: mail
-    levels:
-      - panic
-    options:
-      smtp:
-        addr: smtp.sendhost.com:25
-        username: sendername
-        password: password
-        insecure: true
-      from: name@sendhost.com
-      to:
-        - name@receivehost.com
-```
+    hooks:
+      - type: mail
+        levels:
+          - panic
+        options:
+          smtp:
+            addr: smtp.sendhost.com:25
+            username: sendername
+            password: password
+            insecure: true
+          from: name@sendhost.com
+          to:
+            - name@receivehost.com
 
 The `hooks` subsection configures the logging hooks' behavior. This subsection
 includes a sequence handler which you can use for sending mail, for example.
@@ -330,7 +371,7 @@ Refer to `loglevel` to configure the level of messages printed.
 
 ## loglevel
 
-> **DEPRECATED:** Please use [log](configuration.md#log) instead.
+> **DEPRECATED:** Please use [log](#log) instead.
 
     loglevel: debug
 
@@ -361,6 +402,9 @@ Permitted values are `error`, `warn`, `info` and `debug`. The default is
         secure: true
         v4auth: true
         chunksize: 5242880
+        multipartcopychunksize: 33554432
+        multipartcopymaxconcurrency: 100
+        multipartcopythresholdsize: 33554432
         rootdirectory: /s3/object/name/prefix
       swift:
         username: username
@@ -891,6 +935,8 @@ configuration may contain both.
         addr: localhost:5001
       headers:
         X-Content-Type-Options: [nosniff]
+      http2:
+        disabled: false
 
 The `http` option details the configuration for the HTTP server that hosts the registry.
 
@@ -1037,6 +1083,11 @@ and proxy connections to the registry server.
 The `letsencrypt` struct within `tls` is **optional**. Use this to configure TLS
 certificates provided by [Let's Encrypt](https://letsencrypt.org/how-it-works/).
 
+>**NOTE**: When using Let's Encrypt ensure that the outward facing address is
+> accessible on port `443`. The registry defaults to listening on `5000`, if
+> run as a container consider adding the flag `-p 443:5000` to the `docker run`
+> command or similar setting in cloud configuration.
+
 <table>
   <tr>
     <th>Parameter</th>
@@ -1093,6 +1144,29 @@ Including `X-Content-Type-Options: [nosniff]` is recommended, so that browsers
 will not interpret content as HTML if they are directed to load a page from the
 registry. This header is included in the example configuration files.
 
+### http2
+
+The `http2` struct within `http` is **optional**. Use this to control http2
+settings for the registry.
+
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>
+      <code>disabled</code>
+    </td>
+    <td>
+      no
+    </td>
+    <td>
+       A boolean that determines if http2 support should be disabled
+    </td>
+  </tr>
+</table>
 
 ## notifications
 
@@ -1105,6 +1179,8 @@ registry. This header is included in the example configuration files.
           timeout: 500
           threshold: 5
           backoff: 1000
+          ignoredmediatypes:
+            - application/octet-stream
 
 The notifications option is **optional** and currently may contain a single
 option, `endpoints`.
@@ -1219,6 +1295,18 @@ The URL to which events should be published.
     If you omit the suffix, the system interprets the value as nanoseconds.
     </td>
   </tr>
+  <tr>
+    <td>
+      <code>ignoredmediatypes</code>
+    </td>
+    <td>
+      no
+    </td>
+    <td>
+      List of target media types to ignore. An event whose target media type
+      is present in this list will not be published to the endpoint.
+    </td>
+  </tr>
 </table>
 
 
@@ -1240,7 +1328,7 @@ Declare parameters for constructing the redis connections. Registry instances
 may use the Redis instance for several applications. The current purpose is
 caching information about immutable blobs. Most of the options below control
 how the registry connects to redis. You can control the pool's behavior
-with the [pool](configuration.md#pool) subsection.
+with the [pool](#pool) subsection.
 
 It's advisable to configure Redis itself with the **allkeys-lru** eviction policy
 as the registry does not set an expire value on keys.
@@ -1760,7 +1848,7 @@ To enable pulling private repositories (e.g. `batman/robin`) a username and pass
         signingkeyfile: /etc/registry/key.json
 
 Configure handling of older and deprecated features. Each subsection
-defines a such a feature with configurable behavior.
+defines such a feature with configurable behavior.
 
 ### Schema1
 
@@ -1784,6 +1872,39 @@ defines a such a feature with configurable behavior.
     </td>
   </tr>
 </table>
+
+## Validation
+
+    validation:
+      enabled: true
+      manifests:
+        urls:
+          allow:
+            - ^https?://([^/]+\.)*example\.com/
+          deny:
+            - ^https?://www\.example\.com/
+
+### Enabled
+
+Use the `enabled` flag to enable the other options in the `validation`
+section. They are disabled by default.
+
+### Manifests
+
+Use the `manifest` subsection to configure manifest validation.
+
+#### URLs
+
+The `allow` and `deny` options are both lists of
+[regular expressions](https://godoc.org/regexp/syntax) that restrict the URLs in
+pushed manifests.
+
+If `allow` is unset, pushing a manifest containing URLs will fail.
+
+If `allow` is set, pushing a manifest will succeed only if all URLs within match
+one of the `allow` regular expressions and one of the following holds:
+1. `deny` is unset.
+2. `deny` is set but no URLs within the manifest match any of the `deny` regular expressions.
 
 ## Example: Development configuration
 
