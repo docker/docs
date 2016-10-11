@@ -16,6 +16,8 @@ exclude:
 gems:
   - jekyll-redirect-from
   - jekyll-gist
+  - jekyll-seo-tag
+
 
 defaults:
   -
