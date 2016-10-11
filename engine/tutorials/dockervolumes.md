@@ -103,7 +103,7 @@ $ docker run -d -P --name web -v /src/webapp:/webapp training/webapp python app.
 ```
 
 This command mounts the host directory, `/src/webapp`, into the container at
-`/opt/webapp`.  If the path `/opt/webapp` already exists inside the container's
+`/webapp`.  If the path `/webapp` already exists inside the container's
 image, the `/src/webapp` mount overlays but does not remove the pre-existing
 content. Once the mount is removed, the content is accessible again. This is
 consistent with the expected behavior of the `mount` command.
@@ -152,7 +152,7 @@ Docker volumes default to mount in read-write mode, but you can also set it to
 be mounted read-only.
 
 ```bash
-$ docker run -d -P --name web -v /src/webapp:/opt/webapp:ro training/webapp python app.py
+$ docker run -d -P --name web -v /src/webapp:/webapp:ro training/webapp python app.py
 ```
 
 Here you've mounted the same `/src/webapp` directory but you've added the `ro`
@@ -186,12 +186,12 @@ the other examples.
 
 The following command creates a named volume, called `my-named-volume`,
 using the `flocker` volume driver, and makes it available within the container
-at `/opt/webapp`:
+at `/webapp`:
 
 ```bash
 $ docker run -d -P \
   --volume-driver=flocker \
-  -v my-named-volume:/opt/webapp \
+  -v my-named-volume:/webapp \
   --name web training/webapp python app.py
 ```
 
@@ -205,7 +205,7 @@ using the `docker volume create` command.
 $ docker volume create -d flocker -o size=20GB my-named-volume
 
 $ docker run -d -P \
-  -v my-named-volume:/opt/webapp \
+  -v my-named-volume:/webapp \
   --name web training/webapp python app.py
 ```
 
