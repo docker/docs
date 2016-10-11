@@ -27,8 +27,8 @@ infrastructure has all the [requirements UCP needs to run](system-requirements.m
 ## Step 2: Install CS Docker on all nodes
 
 UCP is a containerized application that requires CS Docker Engine 1.12.0 or
-above to run. Start by [installing CS Docker Engine](/cs-engine/install.md)
-on all hosts that you want to manage with UCP.
+above to run. Start by installing CS Docker Engine on all hosts that you want to
+manage with UCP.
 
 Make sure you install the same CS Docker Engine version on all the nodes. Also,
 if you're creating virtual machine templates with CS Docker Engine  already

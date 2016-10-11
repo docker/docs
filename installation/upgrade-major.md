@@ -52,9 +52,8 @@ Starting with the controller nodes, and then worker nodes:
 1. Log into the node using ssh.
 2. Upgrade the CS Docker Engine to version 1.12 or higher.
 
-    [Follow the upgrade procedure](/cs-engine/upgrade.md) to upgrade the
-    CS Docker Engine. This will cause some downtime on that node, since all
-    containers will be stopped.
+    If you're upgrading from CS Docker Engine 1.11.3 or previous this will cause
+    some downtime on that node, since all containers will be stopped.
 
     Containers that have a restart policy set to
     'always', are automatically started after the upgrade. This is the case of
