@@ -159,7 +159,7 @@ $ docker network inspect my-network
 ```
 
 In the example above, the container `my-web.1.63s86gf6a0ms34mvboniev7bs` for the
-`my-web` service is attached to the `my-network` network on node2.
+`my-web` service is attached to the `my-network` network on node1.
 
 ## Use swarm mode service discovery
 
