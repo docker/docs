@@ -159,7 +159,7 @@ $ docker network inspect my-network
 ```
 
 In the example above, the container `my-web.1.63s86gf6a0ms34mvboniev7bs` for the
-`my-web` service is attached to the `my-network` network on node2.
+`my-web` service is attached to the `my-network` network on node1.
 
 ## Use swarm mode service discovery
 
@@ -175,19 +175,19 @@ active tasks.
 
 You can inspect the service to view the virtual IP. For example:
 
-```bash{% raw %}
+```liquid
 $ docker service inspect \
-  --format='{{json .Endpoint.VirtualIPs}}' \
+  --format='{% raw %}{{json .Endpoint.VirtualIPs}}{% endraw %}' \
   my-web
 
 [{"NetworkID":"7m2rjx0a97n88wzr4nu8772r3" "Addr":"10.0.0.2/24"}]
-{% endraw %}```
+```
 
 The following example shows how you can add a `busybox` service on the same
 network as the `nginx` service and the busybox service is able to access `nginx`
 using the DNS name `my-web`:
 
-1. From a manager node, deploy a busybox service to the same network as
+1.  From a manager node, deploy a busybox service to the same network as
 `my-web`:
 
     ```bash
@@ -198,7 +198,7 @@ using the DNS name `my-web`:
       sleep 3000
     ```
 
-2. Lookup the node where `my-busybox` is running:
+2.  Lookup the node where `my-busybox` is running:
 
     ```bash
     $ docker service ps my-busybox
@@ -207,7 +207,7 @@ using the DNS name `my-web`:
     1dok2cmx2mln5hbqve8ilnair  my-busybox.1  busybox  node1  Running        Running 5 seconds ago
     ```
 
-3. From the node where the busybox task is running, open an interactive shell to
+3.  From the node where the busybox task is running, open an interactive shell to
 the busybox container:
 
     ```bash
@@ -217,7 +217,7 @@ the busybox container:
     You can deduce the container name as `<TASK-NAME>`+`<ID>`. Alternatively,
     you can run `docker ps` on the node where the task is running.
 
-4. From inside the busybox container, query the DNS to view the VIP for the
+4.  From inside the busybox container, query the DNS to view the VIP for the
 `my-web` service:
 
     ```bash
@@ -233,8 +233,8 @@ the busybox container:
     >**Note:** the examples here use `nslookup`, but you can use `dig` or any
     available DNS query tool.
 
-5. From inside the busybox container, query the DNS using a special query
-<tasks.SERVICE-NAME> to find the IP addresses of all the containers for the
+5.  From inside the busybox container, query the DNS using a special query
+&lt;tasks.SERVICE-NAME&gt; to find the IP addresses of all the containers for the
 `my-web` service:
 
     ```bash
@@ -249,7 +249,7 @@ the busybox container:
     Address 3: 10.0.9.5 my-web.3.66u2hcrz0miqpc8h0y0f3v7aw.my-network
     ```
 
-6. From inside the busybox container, run `wget` to access the nginx web server
+6.  From inside the busybox container, run `wget` to access the nginx web server
 running in the `my-web` service:
 
     ```bash
