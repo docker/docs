@@ -1,8 +1,5 @@
-FROM docs/base:oss
+FROM docs/base:latest
 MAINTAINER Docker Docs <docs@docker.com>
 
-ENV PROJECT=ucp
-# to get the git info for this repo
-COPY . /src
-RUN rm -rf /docs/content/$PROJECT/
-COPY . /docs/content/$PROJECT/
+RUN mkdir -p /docs/content
+COPY . /docs/content/ucp/
