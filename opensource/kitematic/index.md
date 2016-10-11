@@ -1,14 +1,14 @@
----
-description: Introduces Kitematic contribute topics and tour
-keywords:
-- Kitematic, open source, contribute, contributor, tour, issue, review
-menu:
-  main:
-    identifier: smn_kitematic_contrib
-    parent: mn_oss_contrib
-    weight: 1
-title: Contribute to Kitematic
----
+<!--[metadata]>
++++
+title = "Contribute to Kitematic"
+description = "Introduces Kitematic contribute topics and tour"
+keywords = ["Kitematic, open source, contribute, contributor, tour, issue, review"]
+[menu.main]
+parent="mn_oss_contrib"
+identifier="smn_kitematic_contrib"
+weight=1
++++
+<![end-metadata]-->
 
 # Contribute to Kitematic
 * [Get started] (get_started.md)

@@ -1,13 +1,13 @@
----
-description: Explains next steps after the tour
-keywords:
-- Kitematic, open source, contribute, contributor, tour, development, contribute
-menu:
-  main:
-    parent: smn_kitematic_contrib
-    weight: 6
-title: Where to learn more
----
+<!--[metadata]>
++++
+title = "Where to learn more"
+description = "Explains next steps after the tour"
+keywords = ["Kitematic, open source, contribute, contributor, tour, development, contribute"]
+[menu.main]
+parent= "smn_kitematic_contrib"
+weight=6
++++
+<![end-metadata]-->
 
 # Where to learn more
 

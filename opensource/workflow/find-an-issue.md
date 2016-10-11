@@ -1,13 +1,13 @@
----
-description: Basic workflow for Docker contributions
-keywords:
-- contribute, issue, review, workflow, beginner, expert, squash, commit
-menu:
-  main:
-    parent: smn_workflow
-    weight: 2
-title: Find and claim an issue
----
+<!--[metadata]>
++++
+title = "Find and claim an issue"
+description = "Basic workflow for Docker contributions"
+keywords = ["contribute, issue, review, workflow, beginner, expert, squash, commit"]
+[menu.main]
+parent = "smn_workflow"
+weight=2
++++
+<![end-metadata]-->
 
 <!-- 
 note: don't use blank lines inside the style-block;
@@ -110,6 +110,7 @@ The following table describes the kind labels.
 The following table describes the experience level guidelines.
 
 <table>
+<thead>
   <thead>
     <tr>
       <th>Exp Label</th>

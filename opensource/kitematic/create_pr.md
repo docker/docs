@@ -1,14 +1,13 @@
----
-description: Explains how to create a pull request for change or new feature
-keywords:
-- Kitematic, open source, contribute, contributor, tour, development, contribute,
-  pull request, review, workflow, beginner, squash,  commit
-menu:
-  main:
-    parent: smn_kitematic_contrib
-    weight: 5
-title: Create a pull request (PR)
----
+<!--[metadata]>
++++
+title = "Create a pull request (PR)"
+description = "Explains how to create a pull request for change or new feature"
+keywords = ["Kitematic, open source, contribute, contributor, tour, development, contribute, pull request, review, workflow, beginner, squash,  commit"]
+[menu.main]
+parent= "smn_kitematic_contrib"
+weight=5
++++
+<![end-metadata]-->
 
 # Create a pull request (PR)
 Make sure you follow the <a href="http://docs.docker.com/opensource/workflow/create-pr/#rebase-your-branch"

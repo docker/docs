@@ -1,13 +1,14 @@
----
-description: Board member profiles
-keywords:
-- governance, board, members, profiles
-menu:
-  main:
-    parent: smn_govern
-    weight: 1
-title: Board member profiles
----
+<!--[metadata]>
++++
+title = "Board member profiles"
+description = "Board member profiles"
+keywords = ["governance, board, members, profiles"]
+[menu.main]
+parent="smn_govern"
+weight=1
++++
+<![end-metadata]-->
+
 
 # Project Leadership
 

@@ -1,12 +1,12 @@
----
-description: Organize our issues
-keywords:
-- governance, board, members, profiles
-menu:
-  main:
-    parent: smn_ways
-title: Organize our issues
----
+<!--[metadata]>
++++
+title = "Organize our issues"
+description = "Organize our issues"
+keywords = ["governance, board, members, profiles"]
+[menu.main]
+parent="smn_ways"
++++
+<![end-metadata]-->
 
 # Organize our issues
 
@@ -52,6 +52,7 @@ notification go to your GitHub or email inbox. Some of repositories you can watc
     <tr>
         <td class="tg-031e"><a href="https://github.com/kitematic/kitematic" target="_blank">kitematic/kitematic</a></td>
         <td class="tg-031e">Kitematic is a simple application for managing Docker containers on Mac OS X and Windows.</td>
+    </tr>
     </tr>
     <tr>
         <td class="tg-031e"><a href="https://github.com/docker/swarm" target="_blank">docker/swarm</a></td>

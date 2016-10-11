@@ -1,13 +1,13 @@
----
-description: Explains Docker's code of conduct
-keywords:
-- Docker, conduct, code
-menu:
-  main:
-    parent: smn_govern
-    weight: 2
-title: Code of conduct
----
+<!--[metadata]>
++++
+title = "Code of conduct"
+description = "Explains Docker's code of conduct"
+keywords = ["Docker, conduct, code"]
+[menu.main]
+parent="smn_govern"
+weight=2
++++
+<![end-metadata]-->
 
 # Code of conduct
 

@@ -1,12 +1,12 @@
----
-description: Support the community
-keywords:
-- support, community, users, irc
-menu:
-  main:
-    parent: smn_ways
-title: Support the community
----
+<!--[metadata]>
++++
+title = "Support the community"
+description = "Support the community"
+keywords = ["support, community, users, irc"]
+[menu.main]
+parent="smn_ways"
++++
+<![end-metadata]-->
 
 # Support the community
 

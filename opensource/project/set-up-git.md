@@ -1,13 +1,13 @@
----
-description: Describes how to set up your local machine and repository
-keywords:
-- 'GitHub account, repository, clone, fork, branch, upstream, Git, Go, make '
-menu:
-  main:
-    parent: smn_engine_contrib
-    weight: 4
-title: Configure Git for contributing
----
+<!--[metadata]>
++++
+title = "Configure Git for contributing"
+description = "Describes how to set up your local machine and repository"
+keywords = ["GitHub account, repository, clone, fork, branch, upstream, Git, Go, make "]
+[menu.main]
+parent = "smn_engine_contrib"
+weight=4
++++
+<![end-metadata]-->
 
 # Configure Git for contributing
 

@@ -1,12 +1,12 @@
----
-description: Explains basic workflow for Docker contributions
-keywords:
-- contribute, maintainers, review, workflow,  process
-menu:
-  main:
-    parent: smn_workflow
-title: Understand how to contribute
----
+<!--[metadata]>
++++
+title = "Understand how to contribute"
+description = "Explains basic workflow for Docker contributions"
+keywords = ["contribute, maintainers, review, workflow,  process"]
+[menu.main]
+parent = "smn_workflow"
++++
+<![end-metadata]-->
 
 # Understand how to contribute
 

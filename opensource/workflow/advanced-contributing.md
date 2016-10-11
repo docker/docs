@@ -1,13 +1,13 @@
----
-description: Explains workflows for refactor and design proposals
-keywords:
-- contribute, project, design, refactor,  proposal
-menu:
-  main:
-    parent: smn_workflow
-    weight: 6
-title: Advanced contributing
----
+<!--[metadata]>
++++
+title = "Advanced contributing"
+description = "Explains workflows for refactor and design proposals"
+keywords = ["contribute, project, design, refactor,  proposal"]
+[menu.main]
+parent = "smn_workflow"
+weight=6
++++
+<![end-metadata]-->
 
 # Advanced contributing
 

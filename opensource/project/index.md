@@ -1,14 +1,14 @@
----
-description: Describes Docker's communication channels
-keywords:
-- IRC, Google group, Twitter, blog,  Stackoverflow
-menu:
-  main:
-    identifier: smn_engine_contrib
-    parent: mn_oss_contrib
-    weight: -2
-title: Set up for Engine Development
----
+<!--[metadata]>
++++
+title = "Set up for Engine Development"
+description = "Describes Docker's communication channels"
+keywords = ["IRC, Google group, Twitter, blog,  Stackoverflow"]
+[menu.main]
+identifier = "smn_engine_contrib"
+parent="mn_oss_contrib"
+weight=-2
++++
+<![end-metadata]-->
 
 # Set up for Engine Development
 

@@ -1,25 +1,25 @@
----
-description: Overview of contributing
-keywords:
-- open, source, contributing, overview
-menu:
-  main:
-    parent: mn_oss_contrib
-    weight: 2
-title: FAQ for contributors
----
+<!--[metadata]>
++++
+title = "FAQ for contributors"
+description = "Overview of contributing"
+keywords = ["open, source, contributing, overview"]
+[menu.main]
+parent="mn_oss_contrib"
+weight=2
++++
+<![end-metadata]-->
 
 # FAQ for contributors
 
 This section contains some frequently asked questions and tips for
 troubleshooting problems in your code contribution.
 
-- [How do I set my signature?](FAQ.md#how-do-i-set-my-signature:cb7f612e17aad7eb26c06709ef92a867)
-- [How do I track changes from the docker repo upstream?](FAQ.md#how-do-i-track-changes-from-the-docker-repo-upstream:cb7f612e17aad7eb26c06709ef92a867)
-- [How do I format my Go code?](FAQ.md#how-do-i-format-my-go-code:cb7f612e17aad7eb26c06709ef92a867)
-- [What is the pre-pull request checklist?](FAQ.md#what-is-the-pre-pull-request-checklist:cb7f612e17aad7eb26c06709ef92a867)
-- [How should I comment my code?](FAQ.md#how-should-i-comment-my-code:cb7f612e17aad7eb26c06709ef92a867)
-- [How do I rebase my feature branch?](FAQ.md#how-do-i-rebase-my-feature-branch:cb7f612e17aad7eb26c06709ef92a867)
+- [How do I set my signature?](#how-do-i-set-my-signature:cb7f612e17aad7eb26c06709ef92a867)
+- [How do I track changes from the docker repo upstream?](#how-do-i-track-changes-from-the-docker-repo-upstream:cb7f612e17aad7eb26c06709ef92a867)
+- [How do I format my Go code?](#how-do-i-format-my-go-code:cb7f612e17aad7eb26c06709ef92a867)
+- [What is the pre-pull request checklist?](#what-is-the-pre-pull-request-checklist:cb7f612e17aad7eb26c06709ef92a867)
+- [How should I comment my code?](#how-should-i-comment-my-code:cb7f612e17aad7eb26c06709ef92a867)
+- [How do I rebase my feature branch?](#how-do-i-rebase-my-feature-branch:cb7f612e17aad7eb26c06709ef92a867)
 
 ## How do I set my signature {#how-do-i-set-my-signature}
 

@@ -1,14 +1,13 @@
----
-description: Style guide for Docker documentation describing standards and conventions
-  for contributors
-keywords:
-- style, guide, docker,  documentation
-menu:
-  main:
-    parent: mn_oss_contrib
-    weight: 4
-title: Style guide for Docker documentation
----
+<!--[metadata]>
++++
+title = "Style guide for Docker documentation"
+description = "Style guide for Docker documentation describing standards and conventions for contributors"
+keywords = ["style, guide, docker,  documentation"]
+[menu.main]
+parent = "mn_oss_contrib"
+weight=4
++++
+<![end-metadata]-->
 
 # Docker documentation: style & grammar conventions
 
@@ -133,7 +132,7 @@ for titles](http://www.quickanddirtytips.com/education/grammar/capitalizing-titl
 
 We prefer one space after a period at the end of a sentence, not two.
 
-See [lists](doc-style.md#lists) below for how to punctuate list items.
+See [lists](#lists) below for how to punctuate list items.
 
 ### Abbreviations and acronyms
 
@@ -257,7 +256,7 @@ In order to write clear, useful commit messages, please follow these
 For accessibility and usability reasons, avoid using phrases such as "click
 here" for link text. Recast your sentence so that the link text describes the
 content of the link, as we did in the
-["Commit messages" section](doc-style.md#commit-messages) above.
+["Commit messages" section](#commit-messages) above.
 
 You can use relative links (../linkeditem) to link to other pages in Docker's
 documentation.

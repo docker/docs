@@ -1,12 +1,12 @@
----
-description: Docker Governance Advisory Board
-keywords:
-- governance, board, members, explained
-menu:
-  main:
-    parent: smn_govern
-title: Docker Governance Advisory Board
----
+<!--[metadata]>
++++
+title = "Docker Governance Advisory Board"
+description = "Docker Governance Advisory Board"
+keywords = ["governance, board, members, explained"]
+[menu.main]
+parent="smn_govern"
++++
+<![end-metadata]-->
 
 # Docker Governance Advisory Board: June 2015 Version
 

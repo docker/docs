@@ -1,13 +1,13 @@
----
-description: Describes Docker's testing infrastructure
-keywords:
-- make test, make docs, Go tests, gofmt, contributing,  running tests
-menu:
-  main:
-    parent: smn_engine_contrib
-    weight: 6
-title: Run tests and test documentation
----
+<!--[metadata]>
++++
+title = "Run tests and test documentation"
+description = "Describes Docker's testing infrastructure"
+keywords = ["make test, make docs, Go tests, gofmt, contributing,  running tests"]
+[menu.main]
+parent = "smn_engine_contrib"
+weight=6
++++
+<![end-metadata]-->
 
 # Run tests and test documentation
 

@@ -1,13 +1,14 @@
----
-description: Basic workflow for Docker contributions
-keywords:
-- contribute, pull request, review, workflow, beginner, squash,  commit
-menu:
-  main:
-    parent: smn_workflow
-    weight: 3
-title: Work on your issue
----
+<!--[metadata]>
++++
+title = "Work on your issue"
+description = "Basic workflow for Docker contributions"
+keywords = ["contribute, pull request, review, workflow, beginner, squash,  commit"]
+[menu.main]
+parent = "smn_workflow"
+weight=3
++++
+<![end-metadata]-->
+
 
 # Work on your issue
 

@@ -1,12 +1,12 @@
----
-description: Testing contributions
-keywords:
-- test, source, contributions, Docker
-menu:
-  main:
-    parent: smn_ways
-title: Testing contributions
----
+<!--[metadata]>
++++
+title = "Testing contributions"
+description = "Testing contributions"
+keywords = ["test, source, contributions, Docker"]
+[menu.main]
+parent="smn_ways"
++++
+<![end-metadata]-->
 
 # Testing contributions
 

@@ -1,13 +1,14 @@
----
-description: Basic workflow for Docker contributions
-keywords:
-- contribute, pull request, review, workflow, beginner, squash,  commit
-menu:
-  main:
-    parent: smn_workflow
-    weight: 5
-title: Participate in the PR review
----
+<!--[metadata]>
++++
+title = "Participate in the PR review"
+description = "Basic workflow for Docker contributions"
+keywords = ["contribute, pull request, review, workflow, beginner, squash,  commit"]
+[menu.main]
+parent = "smn_workflow"
+weight=5
++++
+<![end-metadata]-->
+
 
 # Participate in the PR review
 

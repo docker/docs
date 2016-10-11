@@ -1,14 +1,13 @@
----
-description: List of guidelines for coding Docker contributions
-keywords:
-- change, commit, squash, request, pull request, test, unit test, integration tests,
-  Go, gofmt,  LGTM
-menu:
-  main:
-    parent: smn_workflow
-    weight: 7
-title: Coding style checklist
----
+<!--[metadata]>
++++
+title = "Coding style checklist"
+description = "List of guidelines for coding Docker contributions"
+keywords = ["change, commit, squash, request, pull request, test, unit test, integration tests, Go, gofmt,  LGTM"]
+[menu.main]
+parent = "smn_workflow"
+weight=7
++++
+<![end-metadata]-->
 
 # Coding style checklist
 

@@ -1,13 +1,13 @@
----
-description: Describes the software required to contribute to Docker
-keywords:
-- 'GitHub account, repository, Docker, Git, Go, make,  '
-menu:
-  main:
-    parent: smn_engine_contrib
-    weight: 2
-title: Get the required software
----
+<!--[metadata]>
++++
+title = "Get the required software"
+description = "Describes the software required to contribute to Docker"
+keywords = ["GitHub account, repository, Docker, Git, Go, make,  "]
+[menu.main]
+parent = "smn_engine_contrib"
+weight=2
++++
+<![end-metadata]-->
 
 # Get the required software for Linux or OS X
 

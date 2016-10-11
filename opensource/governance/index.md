@@ -1,14 +1,15 @@
----
-description: Describes Docker's communication channels
-keywords:
-- IRC, Google group, Twitter, blog,  Stackoverflow
-menu:
-  main:
-    identifier: smn_govern
-    parent: mn_oss_contrib
-    weight: 1
-title: Governance
----
+<!--[metadata]>
++++
+title = "Governance"
+description = "Describes Docker's communication channels"
+keywords = ["IRC, Google group, Twitter, blog,  Stackoverflow"]
+[menu.main]
+identifier = "smn_govern"
+parent="mn_oss_contrib"
+weight=1
++++
+<![end-metadata]-->
+
 
 # Governance
 

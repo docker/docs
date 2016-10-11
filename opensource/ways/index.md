@@ -1,13 +1,13 @@
----
-description: Contribute code
-keywords:
-- governance, board, members, profiles
-menu:
-  main:
-    identifier: smn_ways
-    parent: mn_oss_contrib
-title: Other ways to contribute
----
+<!--* [metadata]>
++++
+title = "Other ways to contribute"
+description = "Contribute code"
+keywords = ["governance, board, members, profiles"]
+[menu.main]
+parent="mn_oss_contrib"
+identifier = "smn_ways"
++++
+<![end-metadata]-->
 
 # Ways to contribute
 

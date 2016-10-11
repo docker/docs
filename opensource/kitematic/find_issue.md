@@ -1,13 +1,14 @@
----
-description: Explains how to find a Kitematic issue
-keywords:
-- 'Kitematic, open source, contribute, contributor, tour '
-menu:
-  main:
-    parent: smn_kitematic_contrib
-    weight: 2
-title: Find an issue
----
+
+<!--[metadata]>
++++
+title = "Find an issue"
+description = "Explains how to find a Kitematic issue"
+keywords = ["Kitematic, open source, contribute, contributor, tour "]
+[menu.main]
+parent = "smn_kitematic_contrib"
+weight=2
++++
+<![end-metadata]-->
 
 # Find an issue on GitHub
 Currently, the Kitematic GUI shows the name of a selected container, but not the ID. The tour shows you how to improve the GUI by adding the container ID to the display items, and integrate the updates into the codebase.

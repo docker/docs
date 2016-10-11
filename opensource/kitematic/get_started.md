@@ -1,13 +1,13 @@
----
-description: Overview of Kitematic development process
-keywords:
-- Kitematic, open source, contribute, contributor, tour, development
-menu:
-  main:
-    parent: smn_kitematic_contrib
-    weight: 1
-title: Get started
----
+<!--[metadata]>
++++
+title = "Get started"
+description = "Overview of Kitematic development process"
+keywords = ["Kitematic, open source, contribute, contributor, tour, development"]
+[menu.main]
+parent= "smn_kitematic_contrib"
+weight=1
++++
+<![end-metadata]-->
 
 ## Contribute to Kitematic
 

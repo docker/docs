@@ -1,14 +1,14 @@
----
-description: Basic workflow for Docker contributions
-keywords:
-- contribute, pull request, review, workflow, beginner, squash,  commit
-menu:
-  main:
-    identifier: docker_pr
-    parent: smn_workflow
-    weight: 4
-title: Create a pull request (PR)
----
+<!--[metadata]>
++++
+title = "Create a pull request (PR)"
+description = "Basic workflow for Docker contributions"
+keywords = ["contribute, pull request, review, workflow, beginner, squash,  commit"]
+[menu.main]
+identifier="docker_pr"
+parent = "smn_workflow"
+weight=4
++++
+<![end-metadata]-->
 
 # Create a pull request (PR)
 

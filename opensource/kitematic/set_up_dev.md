@@ -1,13 +1,13 @@
----
-description: Explains how to find a Kitematic issue
-keywords:
-- Kitematic, open source, contribute, contributor, tour, development
-menu:
-  main:
-    parent: smn_kitematic_contrib
-    weight: 3
-title: Set up for Kitematic development
----
+<!--[metadata]>
++++
+title = "Set up for Kitematic development"
+description = "Explains how to find a Kitematic issue"
+keywords = ["Kitematic, open source, contribute, contributor, tour, development"]
+[menu.main]
+parent= "smn_kitematic_contrib"
+weight=3
++++
+<![end-metadata]-->
 
 # Set up for Kitematic development
 

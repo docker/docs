@@ -1,13 +1,14 @@
----
-description: How to set up a server to test Docker Windows client
-keywords:
-- development, inception, container, image Dockerfile, dependencies, Go, artifacts,  windows
-menu:
-  main:
-    parent: smn_engine_contrib
-    weight: 3
-title: Set up for development on Windows
----
+<!--[metadata]>
++++
+title = "Set up for development on Windows"
+description = "How to set up a server to test Docker Windows client"
+keywords = ["development, inception, container, image Dockerfile, dependencies, Go, artifacts,  windows"]
+[menu.main]
+parent = "smn_engine_contrib"
+weight=3
++++
+<![end-metadata]-->
+
 
 # Get the required software for Windows
 
@@ -106,7 +107,7 @@ you use the manager to install the `tar` and `xz` tools from the collection.
 
 	The system displays the available packages.
 
-8. Click on the the **msys-tar bin** package and choose **Mark for Installation**.
+8. Click on the **msys-tar bin** package and choose **Mark for Installation**.
 
 9. Click on the **msys-xz bin** package and choose **Mark for Installation**.
 
