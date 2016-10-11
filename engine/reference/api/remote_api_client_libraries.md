@@ -53,8 +53,8 @@ with the library maintainers.
     </tr>
     <tr>
       <td>Go</td>
-      <td>engine-api</td>
-      <td><a class="reference external" href="https://github.com/docker/engine-api">https://github.com/docker/engine-api</a></td>
+      <td>Docker Go client</td>
+      <td><a class="reference external" href="https://godoc.org/github.com/docker/docker/client">https://godoc.org/github.com/docker/docker/client</a></td>
     </tr>
     <tr>
       <td>Gradle</td>
