@@ -314,10 +314,10 @@ assumes that the Docker daemon is in the `stopped` state.
 
 14. Configure the Docker daemon with specific devicemapper options.
 
-    There are two ways to do this. You can set options on the command line if you start the daemon there:
+    Now that your storage is configured, configure the Docker daemon to use it. There are two ways to do this. You can set options on the command line if you start the daemon there:
 
     ```bash
-    --storage-driver=devicemapper --storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool --storage-opt dm.use_deferred_removal=true
+    --storage-driver=devicemapper --storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool --storage-opt=dm.use_deferred_removal=true --storage-opt=dm.use_deferred_deletion=true
     ```
 
     You can also set them for startup in the `daemon.json` configuration, for example:
@@ -327,10 +327,13 @@ assumes that the Docker daemon is in the `stopped` state.
       "storage-driver": "devicemapper",
        "storage-opts": [
          "dm.thinpooldev=/dev/mapper/docker-thinpool",
-         "dm.use_deferred_removal=true"
+         "dm.use_deferred_removal=true",
+         "dm.use_deferred_deletion=true"
        ]
     }
     ```
+
+    >**Note**: Always set both `dm.use_deferred_removal=true` and `dm.use_deferred_deletion=true` to prevent unintentionally leaking mount points.
 
 15. If using systemd and modifying the daemon configuration via unit or drop-in file, reload systemd to scan for changes.
 
