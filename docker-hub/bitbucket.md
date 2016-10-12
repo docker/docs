@@ -13,7 +13,7 @@ title: Automated Builds with Bitbucket
 # Automated Builds with Bitbucket
 
 If you've previously linked Docker Hub to your Bitbucket account,
-you'll be able to skip to [Creating an Automated Build](bitbucket.md#creating-an-automated-build).
+you'll be able to skip to [Creating an Automated Build](https://docs.docker.com/docker-hub/builds/#create-an-automated-build).
 
 ## Linking to your Bitbucket account
 
@@ -34,12 +34,12 @@ to create a Docker Hub repository from which to create the Automatic Build.
 ## Creating an Automated Build
 
 You can [create an Automated Build](
-https://hub.docker.com/add/automated-build/bitbucket/orgs/) from any of your
+https://docs.docker.com/docker-hub/builds/#create-an-automated-build) from any of your
 public or private Bitbucket repositories with a `Dockerfile`.
 
 To get started, log in to Docker Hub and click the
 "Create &#x25BC;" menu item at the top right of the screen. Then select
-[Create Automated Build](https://hub.docker.com/add/automated-build).
+[Create Automated Build](https://docs.docker.com/docker-hub/builds/#create-an-automated-build).
 
 Select the the linked Bitbucket account, and then choose a repository to set up
 an Automated Build for.
