@@ -262,3 +262,14 @@ The `--force-new-cluster` flag puts the Docker Engine into swarm mode as a
 manager node of a single-node swarm. It discards swarm membership information
 that existed before the loss of the quorum but it retains data necessary to the
 Swarm such as services, tasks and the list of worker nodes.
+
+### Joining a previously failed node
+
+If a node becomes unavailable, it cannot communicate with the rest of the swarm
+and its workload is redistributed among the other nodes.
+If access to that node is restored, it will join the swarm automatically, but it
+will join with no workload because the containers it was assigned have been
+reassigned. The node will only receive new workloads when the swarm is rebalanced.
+To force the swarm to be rebalanced, you can
+[update](../reference/commandline/service_update/) or
+[scale](../reference/commandline/service_scale/) the service.
