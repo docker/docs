@@ -9,9 +9,7 @@ incremental: true
 permalink: pretty
 safe: false
 lsi: false
-exclude:
-  - vendor
-  - bin
+url: https://docs.docker.com
 
 gems:
   - jekyll-redirect-from
