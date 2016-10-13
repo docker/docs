@@ -25,7 +25,7 @@ Options:
 
 ### Scale a service
 
-Scales one or more service either up or down to the desired number of replicas. The command will return immediatly, but the actual scaling of the service may take some time. To stop all replicas of a service while keeping the service active in the swarm you can set the scale to 0. 
+The scale command enables you to scale one or more services either up or down to the desired number of replicas. The command will return immediatly, but the actual scaling of the service may take some time. To stop all replicas of a service while keeping the service active in the swarm you can set the scale to 0. 
 
 
 For example, the following command scales the "frontend" service to 50 tasks.
