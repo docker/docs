@@ -57,8 +57,7 @@ UCP administration operator, you may prefer to skip this and go straight to
 [Plan a production installation](installation/plan-production-install.md).
 
 >**Note**: The command examples in this page were tested for a Mac OSX environment.
-If you are in another, you may need to adjust the commands to use analogous
-commands for you environment.
+If you are in another, you may need to adjust to use analogous commands for your environment.
 
 ## Step 2. Verify the prerequisites
 
@@ -144,7 +143,7 @@ UCP controller. The general format of these commands are:
 | `docker`      | `run --rm -it`             | `docker/ucp` | `join --help`           |
 | `docker`      | `run --rm -it`             | `docker/ucp` | `uninstall --help`      |
 
-You can these subcommands interactively by passing them the `-i` option or by
+You can use these subcommands interactively by passing them the `-i` option or by
 passing command-line options. The `ucp` tool is designed to make UCP easier to
 install than many enterprise-grade applications. In interactive mode the tool
 works to discover your network topology and suggest default answers to you. This
@@ -207,7 +206,7 @@ host for the controller suffices.
 
       An `*` (asterisk) in the `ACTIVE` field indicates that the `node1` environment is active.
 
-    The client will send the `docker` commands in the following steps to the Docker Engine on on `node1`.
+    The client will send the `docker` commands in the following steps to the Docker Engine on `node1`.
 
 3. Start the `ucp` tool to install interactively.
 
@@ -256,7 +255,7 @@ host for the controller suffices.
         with the above list.
         Additional aliases:
 
-5. Press enter to proceed with the list the `ucp` tool provided.
+5. Press enter to proceed with the list the `ucp` tool provides.
 
         INFO[0005] Installing UCP with host address 192.168.99.106 - If this is
         incorrect, please specify an alternative address with the
@@ -274,7 +273,7 @@ host for the controller suffices.
         INFO[0028] Login as "admin"/(your admin password) to UCP at https://192.168.99.106:443
 
     When it completes, the `ucp` tool prompts you to login into the UCP GUI
-    gives you its location. You'll do this and install a license in Step 5,
+    by giving you its location. You'll do this and install a license in Step 6,
     below.
 
 
@@ -387,7 +386,7 @@ you want to add.
         --name ucp docker/ucp join -i \
         --host-address $(docker-machine ip node2)
 
-    The `join` pulls several images and prompts you for the UCL of the UCP Server.
+    The `join` pulls several images and prompts you for the URL of the UCP Server.
 
         Unable to find image 'docker/ucp:latest' locally
         latest: Pulling from docker/ucp
@@ -549,21 +548,26 @@ Download the bundle and configure your environment.
 
 4. Navigate to where the bundle was downloaded, and unzip the client bundle
 
-    		$ unzip bundle.zip
-    		Archive:  bundle.zip
-     		extracting: ca.pem
-    		extracting: cert.pem
-    		extracting: key.pem
-     		extracting: cert.pub
-    		extracting: env.sh
+        $ unzip ucp-bundle.zip
+		Archive:  ucp-bundle-admin.zip
+		 extracting: ca.pem                  
+		 extracting: cert.pem                
+		 extracting: key.pem                 
+		 extracting: cert.pub                
+		 extracting: env.sh                  
+		 extracting: env.ps1                 
+		 extracting: env.cmd                 
+
 
 5. Change into the directory that was created when the bundle was unzipped
 
 6. Execute the `env.sh` script to set the appropriate environment variables for your UCP deployment.
 
-    		$ source env.sh
+         $ source env.sh
 
-    If you are on Windows, you may need to set the environment variables manually.
+   Or if you are on Windows.
+
+         $ source env.cmd
 
 7. Run `docker info` to examine the UCP deployment.
 
