@@ -160,7 +160,7 @@ can take over 15 minutes to complete.
     Building: bundles/1.12.0-dev/binary/docker-1.12.0-dev
     Created binary: bundles/1.12.0-dev/binary/docker-1.12.0-dev
     Copying nested executables into bundles/1.12.0-dev/binary
-  ```
+    ```
 
 7. Copy the binary to the container's `/usr/bin` directory.
 
