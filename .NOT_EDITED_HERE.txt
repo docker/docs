@@ -20,6 +20,7 @@
 apidocs/
 compose/reference/
 docker-trusted-registry/reference/
+engine/extend/
 engine/reference/
 machine/reference/
 notary/reference/
