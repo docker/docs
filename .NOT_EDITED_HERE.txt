@@ -20,6 +20,7 @@
 apidocs/
 compose/reference/
 docker-trusted-registry/reference/
+engine/deprecated.md
 engine/extend/
 engine/reference/
 machine/reference/
