@@ -180,7 +180,13 @@ Choose <img src="images/whale-x.png"> --> **Preferences** from the menu bar. You
 
 ![Advanced Preference settings-advanced](images/settings-advanced.png)
 
-* **Adding registries** - As an alternative to using [Docker Hub](https://hub.docker.com/) to store your public or private images or [Docker Trusted Registry](https://docs.docker.com/docker-trusted-registry/overview/), you can use Docker to set up your own insecure [registry](https://docs.docker.com/registry/introduction/). Add URLs for insecure registries and registry mirrors on which to host your images.
+* **Adding registries** - As an alternative to using [Docker Hub](https://hub.docker.com/) to store your public or private images or [Docker
+Trusted Registry](https://docs.docker.com/docker-trusted-registry/overview/),
+you can use Docker to set up your own insecure
+[registry](https://docs.docker.com/registry/introduction/). Add URLs for
+insecure registries and registry mirrors on which to host your images. (See
+also, [How do I add custom CA
+certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in the FAQs.)
 
 * **HTTP proxy settings** - Docker for Mac will detect HTTP/HTTPS Proxy Settings and automatically propagate these to Docker and to your containers.
 For example, if you set your proxy settings to `http://proxy.example.com`, Docker will use this proxy when pulling containers.
