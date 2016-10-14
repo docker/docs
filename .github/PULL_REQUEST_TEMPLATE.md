@@ -2,8 +2,13 @@
 guidelines to help us review it. You can remove these comments
 as you fill out this template. -->
 
+<!--DO NOT edit files and directories listed in .NOT_EDITED_HERE.txt
+as these are maintained in upstream repos and added to the central
+docs repo periodically. Your PR will fail automated checks if it
+includes changes to these files or directories.-->
+
 <!-- **Squash your commits**: Please use an
-[interactive rebase](https://help.github.com/articles/about-git-rebase/)
+interactive rebase (https://help.github.com/articles/about-git-rebase/)
 to squash (combine) multiple commits into a single commit, to keep the
 commit history clean. The exception is when commits from multiple
 contributors exist in the same pull request. In that case, one commit
