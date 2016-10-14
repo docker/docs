@@ -25,7 +25,7 @@ Follow this workflow as you work:
 
 1. Review the appropriate style guide.
 
-    If you are changing code, review the <a href="../coding-style"
+    If you are changing code, review the <a href="/opensource/workflow/coding-style/"
     target="_blank">coding style guide</a>. Changing documentation? Review the
     <a href="/opensource/doc-style/" target="_blank">documentation style guide</a>.
 
