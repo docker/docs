@@ -14,14 +14,15 @@ the template. -->
 
 ### Problem location
 
-<!-- Help us find the problem quickly by choosing one of these: -->
+<!-- Help us find the problem quickly by choosing one
+     of these. Put an x between the brackets of your
+     choice, like [x]. -->
 
-[ ] I saw the problem on the following URL:
+- [ ] I saw the problem on the following URL:
 
-[ ] I couldn't find the information I wanted. I expected to find it near the
-  following URL:
+- [ ] I couldn't find the information I wanted. I expected to find it near the following URL:
 
-[ ] Other:
+- [ ] Other:
 
 ### Project version(s) affected
 
