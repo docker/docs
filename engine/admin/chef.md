@@ -7,7 +7,7 @@ keywords:
 menu:
   main:
     parent: engine_admin
-    weight: "11"
+    weight: "12"
 title: Using Chef
 ---
 

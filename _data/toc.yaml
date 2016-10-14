@@ -167,6 +167,8 @@ toc:
         title: Splunk logging driver
     - path: /engine/admin/dsc/
       title: PowerShell DSC Usage
+    - path: /engine/admin/ansible/
+      title: Using Ansible
     - path: /engine/admin/chef/
       title: Using Chef
     - path: /engine/admin/puppet/

@@ -8,7 +8,7 @@ keywords:
 menu:
   main:
     parent: engine_admin
-    weight: 14
+    weight: 15
 title: Runtime metrics
 ---
 
