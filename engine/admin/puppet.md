@@ -7,7 +7,7 @@ keywords:
 menu:
   main:
     parent: engine_admin
-    weight: "12"
+    weight: "13"
 title: Using Puppet
 ---
 
