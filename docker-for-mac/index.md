@@ -5,6 +5,7 @@ aliases:
 - /mac/
 - /mac/started/
 - /docker-for-mac/started/
+- /installation/mac/
 description: Getting Started
 keywords:
 - mac, beta, alpha, tutorial
