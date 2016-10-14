@@ -116,7 +116,7 @@ Networking topic.
 
 ### How do I add custom CA certificates?
 
-Starting with Docker for Mac 1.12.1, 2016-09-16 (stable) and Beta 27 Release Notes (2016-09-28 1.12.2-rc1-beta27), all trusted certificate authorities (CAs) (root or intermediate) are supported.
+Starting with Docker for Mac Beta 27 Release Notes (2016-09-28 1.12.2-rc1-beta27) and follow-on Beta releases, all trusted certificate authorities (CAs) (root or intermediate) are supported. (**Note:** Custom CA certificates are not yet supported on stable releases.)
 
 Docker for Mac creates a certificate bundle of all user-trusted CAs based on the Mac Keychain, and appends it to Moby trusted certificates. So if an enterprise SSL certificate is trusted by the user on the host, it will be trusted by Docker for Mac.
 
