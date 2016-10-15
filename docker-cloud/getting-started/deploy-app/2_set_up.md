@@ -66,7 +66,7 @@ The documentation for the Docker Cloud CLI tool and API [here](/apidocs/docker-c
 Use the `login` CLI command to log in to Docker Cloud. Use the username and password you used when creating your Docker ID. If you use Docker Hub, you can use the same username and password you use to log in to Docker Hub.
 
 ```
-$ docker-cloud login
+$ docker login
 Username: my-username
 Password:
 Login succeeded!
