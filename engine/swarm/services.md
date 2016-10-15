@@ -266,7 +266,40 @@ $ docker service create \
 0u6a4s31ybk7yw2wyvtikmu50
 ```
 
-### Configure mounts
+The `--update-max-failure-ratio` flag controls what fraction of tasks can fail
+during an update before the update as a whole is considered to have failed. For
+example, with `--update-max-failure-ratio 0.1 --update-failure-action pause`,
+after 10% of the tasks being updated fail, the update will be paused.
+
+An individual task update is considered to have failed if the task doesn't
+start up, or if it stops running within the monitoring period specified with
+the `--update-monitor` flag. The default value for `--update-monitor` is 30
+seconds, which means that a task failing in the first 30 seconds after its
+started counts towards the service update failure threshold, and a failure
+after that is not counted.
+
+## Roll back to the previous version of a service
+
+In case the updated version of a service doesn't function as expected, it's
+possible to roll back to the previous version of the service using
+`docker service update`'s `--rollback` flag. This will revert the service
+to the configuration that was in place before the most recent
+`docker service update` command.
+
+Other options can be combined with `--rollback`; for example,
+`--update-delay 0s` to execute the rollback without a delay between tasks:
+
+```bash
+$ docker service update \
+  --rollback \
+  --update-delay 0s
+  my_web
+
+my_web
+
+```
+
+## Configure mounts
 
 You can create two types of mounts for services in a swarm, `volume` mounts or
 `bind` mounts. You pass the `--mount` flag when you create a service. The
