@@ -55,8 +55,8 @@ change an existing one.
 ## Run tests on your local host
 
 Before submitting a pull request with a code change, you should run the entire
-Docker Engine test suite.  The `Makefile` contains a target for the entire test suite.
-The target's name is simply `test`. The `Makefile` contains several targets for
+Docker Engine test suite.  The `Makefile` contains a target for the entire test
+suite, simple named as `test`. Also, it contains several targets for
 testing:
 
 | Target                 | What this target does                          |
@@ -198,27 +198,30 @@ Git for Windows installation.  **Git Bash**, just as it sounds, allows you to
 run a Bash terminal on Windows.
 
 1.  If you don't have one open already, start a Git Bash terminal.
-    ```bash
+
     ![Git Bash](images/git_bash.png)
-    ```
 
 2.  Change to the `docker` source directory.
+
     ```bash
     $ cd /c/gopath/src/github.com/docker/docker
     ```
 
 3.  Set `DOCKER_REMOTE_DAEMON` as follows:
+
     ```bash
     $ export DOCKER_REMOTE_DAEMON=1
     ```
 
 4.  Set `DOCKER_TEST_HOST` to the `tcp://IP_ADDRESS:2376` value; substitute your
     Linux machines actual IP address. For example:
+
     ```bash
     $ export DOCKER_TEST_HOST=tcp://213.124.23.200:2376
     ```
 
 5.  Make the binary and run the tests:
+
     ```bash
     $ hack/make.sh binary test-integration-cli
     ```
@@ -239,13 +242,13 @@ run a Bash terminal on Windows.
     ```
 
 You can now choose to make changes to the Docker source or the tests. If you
-make any changes just run these commands again.
+make any changes, just run these commands again.
 
 
 ## Build and test the documentation
 
 The Docker documentation source files are in a centralized repository at
-https://github.com/docker/docker.github.io. The content is
+[https://github.com/docker/docker.github.io](https://github.com/docker/docker.github.io). The content is
 written using extended Markdown, which you can edit in a plain text editor such
 Atom or Notepad. The docs are built using [Jekyll](https://jekyllrb.com/).
 
@@ -253,8 +256,8 @@ Most documentation is developed in the centralized repository. The exceptions ar
 a project's API and CLI references and man pages, which are developed alongside
 the project's code and periodically imported into the documentation repository.
 
-Always check your documentation for grammar and spelling. You can user
-an online grammar checker such as http://www.hemingwayapp.com/ or a spelling or
+Always check your documentation for grammar and spelling. You can use
+an online grammar checker such as [Hemingway Editor](http://www.hemingwayapp.com/) or a spelling or
 grammar checker built into your text editor. If you spot spelling or grammar errors,
 fixing them is one of the easiest ways to get started contributing to opensource
 projects.
@@ -281,20 +284,27 @@ In the root of the repository, issue the following  command:
 $ docker-compose up
 ```
 
-This launches a container which has Jekyll and all its dependencies configured
-correctly, and uses Jekyll to incrementally build and serve the site using the
+This command will create and start service `docs` defined in `docker-compose.xml`,
+which will build an image named `docs/docstage` and launch a container with Jekyll and all its dependencies configured
+correctly. The container uses Jekyll to incrementally build and serve the site using the
 files in the local repository.
 
-Go to http://localhost:4000/ in your web browser to view the documentation.
+Go to [http://localhost:4000/](http://localhost:4000/) in your web browser to view the documentation.
 
-The container runs in the foreground. To send it to the background, use `CTRL+C`.
+The container runs in the foreground if invoking `docker-compose up` with `-d` option.
 It will continue to run and incrementally build the site when changes are detected,
 even if you change branches.
 
 To stop the container, use the following command:
 
 ```bash
-$ docker-compose down
+$ docker-compose stop docs
+```
+
+To start the container again, use the following command:
+
+```bash
+$ docker-compose start docs
 ```
 
 #### Using Jekyll directly
@@ -305,16 +315,20 @@ If for some reason you are unable to use Docker Compose, you can use Jekyll dire
 
 -  You need a recent version of Ruby installed. If you are on OS X, install Ruby
   and Bundle using homebrew.
-    ```bash
-    brew install ruby
-    brew install bundle
-    ```
+
+   ```bash
+   brew install ruby
+   brew install bundle
+   ```
+
 -  Use `bundle` to install Jekyll and its dependencies from the bundle in the
    centralized documentation repository. Within your clone of the
-   https://github.com/docker/docker.github.io repository, issue the following command:
-    ```bash
-    bundle install
-    ```
+   [https://github.com/docker/docker.github.io](https://github.com/docker/docker.github.io)
+   repository, issue the following command:
+
+   ```bash
+   bundle install
+   ```
 
 **To build the website locally:**
 

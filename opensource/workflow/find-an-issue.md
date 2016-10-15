@@ -56,7 +56,7 @@ experience, and priority. You can filter using one or more labels. The
 kind and experience labels are useful for new contributors.
 
 The following table describes the kind labels.
-<strong class="foobar">kind/bug</strong>
+<!-- strong class="foobar">kind/bug</strong -->
 
 <table>
   <thead>
@@ -234,7 +234,7 @@ To sync your repository:
 	    From github.com:docker/docker
 	     * branch            master     -> FETCH_HEAD
 
-    This command says get all the changes from the `master` branch belonging to
+    This command says that you have got all the changes from the `master` branch belonging to
     the `upstream` remote.
 
 7. Rebase your local master with the `upstream/master`.

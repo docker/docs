@@ -25,7 +25,7 @@ The tutorial guides you through the following activities:
 
 This tutorial uses Docker Engine CLI commands entered on the command line of a
 terminal window. You should be able to install Docker on networked machines and
-be comfortable running commands in the shell of your choice.
+be comfortable with running commands in the shell of your choice.
 
 If you are brand new to Docker, see [About Docker Engine](../../index.md).
 
