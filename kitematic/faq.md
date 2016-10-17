@@ -29,7 +29,7 @@ the Docker Remote API.
 
 ### Which platforms does Kitematic support?
 
-Right now Kitematic works on Mac OS X and Windows. Linux is planned in the
+Right now Kitematic works on macOS and Windows. Linux is planned in the
 future.  Review our product <a
 href="https://github.com/kitematic/kitematic/blob/master/ROADMAP.md">roadmap</a>.
 

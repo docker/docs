@@ -49,8 +49,8 @@ Hyper-V](drivers/hyper-v.md).)
 #### If you are using Docker for Mac
 
 Docker for Mac uses [HyperKit](https://github.com/docker/HyperKit/), a
-lightweight OS X virtualization solution built on top of the
-[Hypervisor.framework](https://developer.apple.com/reference/hypervisor) in OS X
+lightweight macOS virtualization solution built on top of the
+[Hypervisor.framework](https://developer.apple.com/reference/hypervisor) in macOS
 10.10 Yosemite and higher.
 
 Currently, there is no `docker-machine create` driver for HyperKit, so you will
@@ -291,7 +291,7 @@ default)` in their shell profiles (e.g., the `~/.bash_profile` file). However,
 this fails if the `default` machine is not running. If desired, you can
 configure your system to start the `default` machine automatically.
 
-Here is an example of how to configure this on OS X.
+Here is an example of how to configure this on macOS.
 
 Create a file called `com.docker.machine.default.plist` under `~/Library/LaunchAgents` with the following content:
 

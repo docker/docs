@@ -53,8 +53,8 @@ Do the following each time:
 ### What is Docker.app?
 
 `Docker.app` is Docker for Mac, a bundle of Docker client, and Docker
-Engine. `Docker.app` uses the OS X
-Hypervisor.framework (part of MacOS X 10.10 Yosemite and higher)
+Engine. `Docker.app` uses the macOS
+Hypervisor.framework (part of macOS 10.10 Yosemite and higher)
 to run containers, meaning that _**no separate VirtualBox is required**_.
 
 ### What kind of feedback are we looking for?
@@ -122,7 +122,7 @@ Docker for Mac creates a certificate bundle of all user-trusted CAs based on the
 
 ### What are system requirements for Docker for Mac?
 
-Note that you need a Mac that supports hardware virtualization, which is most non ancient ones; i.e., use OS X `10.10.3+` or `10.11` (OS X Yosemite or OS X El Capitan). See also "What to know before you install" in [Getting Started](index.md).
+Note that you need a Mac that supports hardware virtualization, which is most non ancient ones; i.e., use macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also "What to know before you install" in [Getting Started](index.md).
 
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 
@@ -140,7 +140,7 @@ Toolbox Mac topics.
 
 ### What is HyperKit?
 
-HyperKit is a hypervisor built on top of the Hypervisor.framework in OS X 10.10 Yosemite and higher. It runs entirely in userspace and has no other dependencies.
+HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS 10.10 Yosemite and higher. It runs entirely in userspace and has no other dependencies.
 
 We use HyperKit to eliminate the need for other VM products, such as Oracle Virtualbox or VMWare Fusion.
 

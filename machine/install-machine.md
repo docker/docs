@@ -11,9 +11,9 @@ title: Install Machine
 
 # Install Docker Machine
 
-On OS X and Windows, Machine is installed along with other Docker products when
+On macOS and Windows, Machine is installed along with other Docker products when
 you install the Docker Toolbox. For details on installing Docker Toolbox, see
-the <a href="https://docs.docker.com/installation/mac/" target="_blank">Mac OS X
+the <a href="https://docs.docker.com/installation/mac/" target="_blank">macOS
 installation</a> instructions or <a
 href="https://docs.docker.com/installation/windows" target="_blank">Windows
 installation</a> instructions.
@@ -27,7 +27,7 @@ If you want only Docker Machine, you can install the Machine binaries directly b
 
 2.  Download the Docker Machine binary and extract it to your PATH.
 
-    If you are running OS X or Linux:
+    If you are running macOS or Linux:
 
         $ curl -L https://github.com/docker/machine/releases/download/v0.8.2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
         chmod +x /usr/local/bin/docker-machine

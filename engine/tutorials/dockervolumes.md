@@ -122,9 +122,9 @@ If you supply the `/foo` value, the Docker Engine creates a bind-mount. If you s
 the `foo` specification, the Docker Engine creates a named volume.
 
 If you are using Docker Machine on Mac or Windows, your Docker Engine daemon has only
-limited access to your OS X or Windows filesystem. Docker Machine tries to
-auto-share your `/Users` (OS X) or `C:\Users` (Windows) directory.  So, you can
-mount files or directories on OS X using.
+limited access to your macOS or Windows filesystem. Docker Machine tries to
+auto-share your `/Users` (macOS) or `C:\Users` (Windows) directory.  So, you can
+mount files or directories on macOS using.
 
 ```bash
 docker run -v /Users/<path>:/<container path> ...
