@@ -9,7 +9,7 @@ menu:
 title: backup
 ---
 
-# docker/ucp id
+# docker/ucp backup
 
 Stream a tar file to stdout containing all UCP data volumes.
 
