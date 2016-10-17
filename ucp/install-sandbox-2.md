@@ -22,14 +22,12 @@ Over the course of this tutorial, we will:
 - Create a repository in DTR
 - Set up certificates or set insecure flag
 - Pull a Docker image, tag it and push it to your DTR repo.
-- Edit the Docker image you just pulled, tag it and push it to your DTR repo.
-- Set up your shell so you can interact with Docker objects in UCP using the command line
-- Use UCP to deploy your edited image to a node
+- Use UCP to deploy the image to a node
 
 
-## Step 1: Set --insecure registry or set up DTR trust and login
+## Step 1: Set --insecure registry or set up DTR trust and log in
 
-Next, we'll set up a security exception that allows a the Docker-machine hosts
+First, we'll set up a security exception that allows a the Docker-machine hosts
 used in your UCP cluster to push images to and pull images from DTR even though
 the DTR instance has a self-signed certificate. For a production deployment,
 you would
@@ -132,7 +130,7 @@ the DTR instance's IP address.
 
 4. Tag the `nginx` image you downloaded.
 
-   Use the IP of your DTR instance to specify the repository path, and the .
+   Use the IP of your DTR instance to specify the repository path, and the tag.
 
    ```none
    $ docker tag nginx:latest $(docker-machine ip node2)/admin/my-nginx:official
