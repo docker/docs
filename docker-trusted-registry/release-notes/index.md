@@ -18,7 +18,7 @@ title: Trusted Registry release notes
 Here you can learn about new features, bug fixes, breaking changes and
 known issues for each DTR version.
 
-You can then use [the upgrade instructions](../install/upgrade/upgrade-major.md),
+You can then use [the upgrade instructions](../install/upgrade/index.md),
 to upgrade your installation to the latest release.
 
 ## Version 2.0.4
