@@ -132,4 +132,4 @@ directory where your private keys are stored, with the `-d` flag.
 ## Where to go next
 
 * [Run only the images you trust](index.md)
-* [Get started with Notary](/notary/getting_started.md)
+* [Get started with Notary](https://docs.docker.com/notary/getting_started/)

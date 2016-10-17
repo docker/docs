@@ -177,4 +177,4 @@ $ notary key import key.pem
 ## Where to go next
 
 * [Manage trusted repositories](manage-trusted-repositories.md)
-* [Get started with Notary](/notary/getting_started.md)
+* [Get started with Notary](https://docs.docker.com/notary/getting_started/)
