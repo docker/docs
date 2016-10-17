@@ -630,7 +630,9 @@ toc:
   - path: /ucp/overview/
     title: Universal Control Plane overview
   - path: /ucp/install-sandbox/
-    title: Evaluate UCP in a sandbox
+    title: Install DDC in a sandbox for evaluation
+  - path: /ucp/install-sandbox-2/
+    title: Evaluate DDC in a sandbox deployment
   - path: /ucp/architecture/
     title: Architecture
   - sectiontitle: Installation
