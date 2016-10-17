@@ -44,7 +44,7 @@ secures the cluster via self-signed TLS certificates.
 DDC's second component is DTR, which must be installed on a host that's a member
 of the UCP swarm. So next, we'll then install DTR on that second node.
 
-Once you've installed UCP and DTR you'll work through a tutorial to deploy a
+Once you've installed UCP and DTR you'll [work through a tutorial](install-sandbox-2.md) to deploy a
 container through UCP, and explore the user interface.
 
 >**Note**: The command examples in this page were tested for a Mac OS X
