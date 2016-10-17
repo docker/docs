@@ -30,11 +30,11 @@ We are using the Apache License Version 2.0, see it here:
 [https://github.com/docker/docker/blob/master/LICENSE](
 https://github.com/docker/docker/blob/master/LICENSE)
 
-### Does Docker run on Mac OS X or Windows?
+### Does Docker run on macOS or Windows?
 
 Docker Engine currently runs only on Linux, but you can use VirtualBox to run
 Engine in a virtual machine on your box, and get the best of both worlds. Check
-out the [*Mac OS X*](installation/mac.md) and [*Microsoft
+out the [*macOS*](installation/mac.md) and [*Microsoft
 Windows*](installation/windows.md) installation guides. The small Linux
 distribution boot2docker can be set up using the Docker Machine tool to be run
 inside virtual machines on these two operating systems.

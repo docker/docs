@@ -11,13 +11,13 @@ title: Install Compose
 
 # Install Docker Compose
 
-You can run Compose on OS X, Windows and 64-bit Linux. To install it, you'll need to install Docker first.
+You can run Compose on macOS, Windows and 64-bit Linux. To install it, you'll need to install Docker first.
 
 To install Compose, do the following:
 
 1. Install Docker Engine:
 
-     * <a href="/engine/installation/mac/" target="_blank">Mac OS X installation</a>
+     * <a href="/engine/installation/mac/" target="_blank">macOS installation</a>
 
      * <a href="/engine/installation/windows/" target="_blank">Windows installation</a>
 

@@ -33,7 +33,7 @@ Docker for Mac is a Mac native application, that you install in `/Applications`.
 
 Here are some key points to know about Docker for Mac before you get started:
 
-* Docker for Mac does not use VirtualBox, but rather <a href="https://github.com/docker/HyperKit/" target="_blank">HyperKit</a>, a lightweight OS X virtualization solution built on top of Hypervisor.framework in OS X 10.10 Yosemite and higher.
+* Docker for Mac does not use VirtualBox, but rather <a href="https://github.com/docker/HyperKit/" target="_blank">HyperKit</a>, a lightweight macOS virtualization solution built on top of Hypervisor.framework in macOS 10.10 Yosemite and higher.
 
 * Installing Docker for Mac does not affect machines you created with Docker Machine. The install offers to copy containers and images from your local `default` machine (if one exists) to the new Docker for Mac HyperKit VM. If chosen, content from `default` is copied to the new Docker for Mac HyperKit VM, and your original `default` machine is kept as is.
 

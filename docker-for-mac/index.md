@@ -55,7 +55,7 @@ For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-
 
 >**Important Notes**:
 >
->* Docker for Mac requires OS X 10.10.3 Yosemite or newer running on a 2010 or newer Mac, with Intel's hardware support for MMU virtualization. Please see [What to know before you install](index.md#what-to-know-before-you-install) for a full list of prerequisites.
+>* Docker for Mac requires macOS 10.10.3 Yosemite or newer running on a 2010 or newer Mac, with Intel's hardware support for MMU virtualization. Please see [What to know before you install](index.md#what-to-know-before-you-install) for a full list of prerequisites.
 >
 >* <font color="#CC3366">You can switch between beta and stable versions, but _you must have only one app installed at a time_.</font> Also, you will need to save images and export containers you want to keep before uninstalling the current version before installing another. For more about this, see the [FAQs about beta and stable channels](faqs.md#stable-and-beta-channels).
 
@@ -70,7 +70,7 @@ For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-
 
 	- Mac must be a 2010 or newer model, with Intel's hardware support for memory management unit (MMU) virtualization; i.e., Extended Page Tables (EPT)
 
-	- OS X 10.10.3 Yosemite or newer
+	- macOS 10.10.3 Yosemite or newer
 
 	- At least 4GB of RAM
 

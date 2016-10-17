@@ -172,7 +172,7 @@ see the application.
 Our Python application is live!
 
 > **Note:**
-> If you have been using a virtual machine on OS X, Windows or Linux,
+> If you have been using a virtual machine on macOS, Windows or Linux,
 > you'll need to get the IP of the virtual host instead of using localhost.
 > You can do this by running the `docker-machine ip your_vm_name` from your  command line or terminal application, for example:
 >

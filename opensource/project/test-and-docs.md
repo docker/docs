@@ -271,7 +271,7 @@ directly requires you to install some prerequisites, but is faster on each build
 
 #### Using Docker Compose
 
-The easiest way to build the docs locally on OS X, Windows, or Linux is to use
+The easiest way to build the docs locally on macOS, Windows, or Linux is to use
 `docker-compose`. If you have not yet installed `docker-compose`,
 [follow these installation instructions](https://docs.docker.com/compose/install/).
 
@@ -303,7 +303,7 @@ If for some reason you are unable to use Docker Compose, you can use Jekyll dire
 
 **Prerequisites:**
 
--  You need a recent version of Ruby installed. If you are on OS X, install Ruby
+-  You need a recent version of Ruby installed. If you are on macOS, install Ruby
   and Bundle using homebrew.
     ```bash
     brew install ruby

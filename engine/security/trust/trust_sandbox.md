@@ -19,7 +19,7 @@ overview](content_trust.md).
 
 ### Prerequisites
 
-These instructions assume you are running in Linux or Mac OS X. You can run
+These instructions assume you are running in Linux or macOS. You can run
 this sandbox on a local machine or on a virtual machine. You will need to
 have privileges to run docker commands on your local machine or in the VM.
 

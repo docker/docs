@@ -32,7 +32,7 @@ freshness of your content.
 
 ## Install Notary
 
-You can download precompiled notary binary for 64 bit Linux or Mac OS X from the
+You can download precompiled notary binary for 64 bit Linux or macOS from the
 Notary repository's
 <a href="https://github.com/docker/notary/releases" target="_blank">releases page on
 GitHub</a>. Windows is not officially
