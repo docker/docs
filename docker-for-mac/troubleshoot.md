@@ -220,7 +220,7 @@ ${!DOCKER_*}` will unset existing `DOCKER` environment variables you have set.
 
 <p></p>
 
-* Note that network connections will fail if the OS X Firewall is set to
+* Note that network connections will fail if the macOS Firewall is set to
 "Block all incoming connections". You can enable the firewall, but `bootpd` must be allowed incoming connections so that the VM can get an IP address.
 
 <p></p>
@@ -268,7 +268,7 @@ Docker for Mac does not yet support IPv6. See "IPv6 workaround to auto-filter DN
 
 <p></p>
 
-* Docker for Mac uses the `HyperKit` hypervisor (https://github.com/docker/hyperkit) in Mac OS X 10.10 Yosemite and higher. If you are developing with tools that have conflicts with `HyperKit`, such as [Intel Hardware Accelerated Execution Manager (HAXM)](https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/), the current workaround is not to run them at the same time. You can pause `HyperKit` by quitting Docker for Mac temporarily while you work with HAXM. This will allow you to continue work with the other tools and prevent `HyperKit` from interfering.
+* Docker for Mac uses the `HyperKit` hypervisor (https://github.com/docker/hyperkit) in macOS 10.10 Yosemite and higher. If you are developing with tools that have conflicts with `HyperKit`, such as [Intel Hardware Accelerated Execution Manager (HAXM)](https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/), the current workaround is not to run them at the same time. You can pause `HyperKit` by quitting Docker for Mac temporarily while you work with HAXM. This will allow you to continue work with the other tools and prevent `HyperKit` from interfering.
 
 <p></p>
 

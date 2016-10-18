@@ -33,7 +33,7 @@ the above installer link will have an uninstaller available.
 
   ![windows installer](images/nvm_install.jpeg)
 
-### Mac OSX/Linux:
+### macOS/Linux:
 
 1. Open a terminal window
 
@@ -45,7 +45,7 @@ the above installer link will have an uninstaller available.
 
     (Alternatively, you can source nvm from your current shell with the command `. ~/.nvm/nvm.sh` )
 
-(To learn more about working with NVM, see <a href="https://github.com/creationix/nvm" target="_blank">Mac OSX/Linux official nvm repo</a>, <a href="https://github.com/coreybutler/nvm-windows" target="_blank">Windows official nvm repo</a>, and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-with-nvm-node-version-manager-on-a-vps" target="_blank">How To Install Node.js with NVM ON A VPS</a>)
+(To learn more about working with NVM, see <a href="https://github.com/creationix/nvm" target="_blank">macOS/Linux official nvm repo</a>, <a href="https://github.com/coreybutler/nvm-windows" target="_blank">Windows official nvm repo</a>, and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-with-nvm-node-version-manager-on-a-vps" target="_blank">How To Install Node.js with NVM ON A VPS</a>)
 
 ## Install Node.js
 

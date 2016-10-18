@@ -38,9 +38,9 @@ Open your shell or terminal application and execute the following command:
 $ pip install docker-cloud
 ```
 
-#### Install on Mac OS X
+#### Install on macOS
 
-We recommend installing Docker CLI for OS X using Homebrew. If you don't have `brew` installed, follow the instructions here: <a href="http://brew.sh" target="_blank">http://brew.sh</a>
+We recommend installing Docker CLI for macOS using Homebrew. If you don't have `brew` installed, follow the instructions here: <a href="http://brew.sh" target="_blank">http://brew.sh</a>
 
 Once Homebrew is installed, open Terminal and run the following command:
 

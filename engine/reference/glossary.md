@@ -117,7 +117,7 @@ Examples :
 
 - Linux : ext4, aufs, btrfs, zfs
 - Windows : NTFS
-- OS X : HFS+
+- macOS : HFS+
 
 ## image
 

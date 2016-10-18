@@ -15,7 +15,7 @@ on your local machine using Docker Machine and VirtualBox.
 
 ## Prerequisites
 
-Make sure your local system has VirtualBox installed. If you are using Mac OS X
+Make sure your local system has VirtualBox installed. If you are using macOS
 or Windows and have installed Docker, you should have VirtualBox already
 installed.
 
@@ -41,7 +41,7 @@ Daemon running on each node. Other discovery service backends such as
 		NAME         ACTIVE   DRIVER       STATE     URL                         SWARM
 		docker-vm    *        virtualbox   Running   tcp://192.168.99.100:2376   
 
-	This example was run a Mac OSX system with Docker Toolbox installed. So, the
+	This example was run a macOS system with Docker Toolbox installed. So, the
 		`docker-vm` virtual machine is in the list.
 
 2. Create a VirtualBox machine called `local` on your system.  

@@ -884,8 +884,8 @@ are working on a solution.
 - Rename `console` to `debug console`
 - Remove `machine` from notification
 - Open the feedback forum
-- Use same MixPanel project for Windows and OSX
-- Align MixPanel events with OSX
+- Use same MixPanel project for Windows and macOS
+- Align MixPanel events with macOS
 - Added a script to diagnose problems
 - Submit diagnostic with bugsnag reports
 - MixPanel heartbeat every hour
