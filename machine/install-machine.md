@@ -15,7 +15,7 @@ On macOS and Windows, Machine is installed along with other Docker products when
 you install the Docker Toolbox. For details on installing Docker Toolbox, see
 the <a href="https://docs.docker.com/installation/mac/" target="_blank">macOS
 installation</a> instructions or <a
-href="https://docs.docker.com/installation/windows" target="_blank">Windows
+href="https://docs.docker.com/docker-for-windows/" target="_blank">Windows
 installation</a> instructions.
 
 If you want only Docker Machine, you can install the Machine binaries directly by following the instructions in the next section. You can find the latest versions of the binaries are on the <a href="https://github.com/docker/machine/releases/" target="_blank"> docker/machine release page</a> on GitHub.
