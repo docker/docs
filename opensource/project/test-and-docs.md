@@ -56,7 +56,7 @@ change an existing one.
 
 Before submitting a pull request with a code change, you should run the entire
 Docker Engine test suite.  The `Makefile` contains a target for the entire test
-suite, simple named as `test`. Also, it contains several targets for
+suite, named `test`. Also, it contains several targets for
 testing:
 
 | Target                 | What this target does                          |
