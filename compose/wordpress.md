@@ -27,7 +27,7 @@ with Docker containers. This quick-start guide demonstrates how to use Compose t
 
     For example, if you named your directory `my_wordpress`:
 
-        $ cd my-wordpress/
+        $ cd my_wordpress/
 
 3. Create a `docker-compose.yml` file that will start your `Wordpress` blog and a separate `MySQL` instance with a volume mount for data persistence:
 
