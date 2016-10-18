@@ -67,7 +67,7 @@ to create a volume.
     The plugin requests 2 privileges, the `CAP_SYS_ADMIN` capability to be able
     to do mount inside the plugin and `host networking`.
 
-2. Check for a value of `true` the `ENABLED` column to verify the plugin
+2.  Check for a value of `true` the `ENABLED` column to verify the plugin
 started without error.
 
     ```bash
@@ -77,7 +77,7 @@ started without error.
     vieux/sshfs         latest              true
     ```
 
-3. Create a volume using the plugin.
+3.  Create a volume using the plugin.
 
     ```bash
     $ docker volume create \
@@ -96,7 +96,7 @@ started without error.
     <content of /remote on machine 1.2.3.4>
     ```
 
-5. Verify the plugin successfully created the volume.
+5.  Verify the plugin successfully created the volume.
 
     ```bash
     $ docker volume ls
