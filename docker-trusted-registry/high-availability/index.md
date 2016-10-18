@@ -82,7 +82,7 @@ or cloud-based load balancer to balance requests across multiple DTR replicas.
 Make sure you configure your load balancer to:
 
 * Load-balance TCP traffic on ports 80 and 443,
-* Not terminate HTTPS connections,
+* Use a TCP load balancer that doesn't terminate HTTPS connections,
 * Use the `/load_balancer_status` endpoint on each DTR replica, to check if
 the replica is healthy and if it should remain on the load balancing pool or
 not.
