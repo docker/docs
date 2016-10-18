@@ -99,7 +99,7 @@ can take over 15 minutes to complete.
 
 1. Open a terminal.
 
-   Mac users, use `docker-machine status your_vm_name` to make sure your VM is running. You
+   For Mac users, use `docker-machine status your_vm_name` to make sure your VM is running. You
    may need to run `eval "$(docker-machine env your_vm_name)"` to initialize your
    shell environment.
 
@@ -206,6 +206,8 @@ can take over 15 minutes to complete.
 
     ```none
     root@5f8630b873fe:/go/src/github.com/docker/docker# docker images
+	REPOSITORY   TAG     IMAGE ID      CREATED        SIZE
+	hello-world  latest  c54a2cc56cbb  3 months ago   1.85 kB
     ```
 
 12. Open another terminal on your local host.
@@ -218,7 +220,7 @@ can take over 15 minutes to complete.
     a8b2885ab900        docker-dev:dry-run-test   "hack/dind bash"    43 minutes ago      Up 43 minutes                           hungry_payne
     ```
 
-    Notice that the tag on the container is marked with the `dry-run-branch` name.
+    Notice that the tag on the container is marked with the `dry-run-test` branch name.
 
 
 ## Task 3. Make a code change
@@ -235,7 +237,7 @@ you have:
   your development container
 
 Running the `make shell` command mounted your local Docker repository source into
-your Docker container. When you start to developing code though, you'll
+your Docker container. When you start to develop code though, you'll
 want to iterate code changes and builds inside the container. If you have
 followed this guide exactly, you have a BASH shell running a development
 container.

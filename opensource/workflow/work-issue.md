@@ -11,7 +11,7 @@ title: Work on your issue
 
 # Work on your issue
 
-The work you do for your issue depends on the specific issue you picked.
+The work you do depends on the specific issue you picked.
 This section gives you a step-by-step workflow. Where appropriate, it provides
 command examples.
 
