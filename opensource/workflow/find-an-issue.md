@@ -56,7 +56,6 @@ experience, and priority. You can filter using one or more labels. The
 kind and experience labels are useful for new contributors.
 
 The following table describes the kind labels.
-<!-- strong class="foobar">kind/bug</strong -->
 
 <table>
   <thead>
