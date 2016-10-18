@@ -278,28 +278,23 @@ The easiest way to build the docs locally on OS X, Windows, or Linux is to use
 `docker-compose`. If you have not yet installed `docker-compose`,
 [follow these installation instructions](https://docs.docker.com/compose/install/).
 
-In the root of the repository, issue the following  command:
+In the root of the repository, issue the following command:
 
 ```bash
 $ docker-compose up
 ```
 
-This command will create and start service `docs` defined in `docker-compose.xml`,
+This command will create and start service `docs` defined in `docker-compose.yml`,
 which will build an image named `docs/docstage` and launch a container with Jekyll and all its dependencies configured
 correctly. The container uses Jekyll to incrementally build and serve the site using the
 files in the local repository.
 
 Go to [http://localhost:4000/](http://localhost:4000/) in your web browser to view the documentation.
 
-The container runs in the foreground if invoking `docker-compose up` with `-d` option.
-It will continue to run and incrementally build the site when changes are detected,
-even if you change branches.
+The container runs in the foreground. It will continue to run and incrementally build the site when changes are
+detected, even if you change branches.
 
-To stop the container, use the following command:
-
-```bash
-$ docker-compose stop docs
-```
+To stop the container, use `CTRL+C`.
 
 To start the container again, use the following command:
 
