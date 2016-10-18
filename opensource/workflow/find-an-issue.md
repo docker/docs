@@ -233,9 +233,6 @@ To sync your repository:
 	    From github.com:docker/docker
 	     * branch            master     -> FETCH_HEAD
 
-    This command says that you have got all the changes from the `master` branch belonging to
-    the `upstream` remote.
-
 7. Rebase your local master with the `upstream/master`.
 
         $ git rebase upstream/master
