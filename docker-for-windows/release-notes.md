@@ -132,6 +132,8 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 
 ## Beta Release Notes
 
+<!--
+
 ### Beta 29 Release Notes (2016-10-22 1.12.2-rc3-beta29)
 
 >**Important Note**:
@@ -158,6 +160,8 @@ TBD
 **Bug fixes and minor changes**
 
 TBD
+
+-->
 
 ### Beta 28 Release Notes (2016-10-13 1.12.2-rc3-beta28)
 
