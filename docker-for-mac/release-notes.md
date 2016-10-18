@@ -145,6 +145,20 @@ events or unexpected unmounts.
 
 ## Beta Release Notes
 
+### Beta 29 Release Notes (2016-10-22 1.12.2-rc3-beta29)
+
+**New**
+
+TBD
+
+**Upgrades**
+
+TBD
+
+**Bug fixes and minor changes**
+
+TBD
+
 ### Beta 28 Release Notes (2016-10-13 1.12.2-rc3-beta28)
 
 **Upgrades**
