@@ -273,7 +273,7 @@ the branch to your fork on GitHub:
     To https://github.com/moxiegirl/docker.git
      * [new branch]      dry-run-test -> dry-run-test
     Branch dry-run-test set up to track remote branch dry-run-test from origin.
-	```
+    ```
 
 11. Open your browser to GitHub.
 
