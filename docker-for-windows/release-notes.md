@@ -132,6 +132,33 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 
 ## Beta Release Notes
 
+### Beta 29 Release Notes (2016-10-22 1.12.2-rc3-beta29)
+
+>**Important Note**:
+>
+> The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+
+> [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
+
+> This problem is fixed as of Beta 23 for subsequent auto-updates.
+>
+Windows Container support relies on the Windows 10 container feature, which is
+**experimental** at this point.  Windows 10 Pro (1607, build number 14393)
+requires update `KB3192366` (soon to be released via Windows Update) to fully
+work. Some insider builds may not work.
+
+**New**
+
+TBD
+
+**Upgrades**
+
+TBD
+
+**Bug fixes and minor changes**
+
+TBD
+
 ### Beta 28 Release Notes (2016-10-13 1.12.2-rc3-beta28)
 
 >**Important Note**:

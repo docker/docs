@@ -22,7 +22,7 @@ Here is information about how to diagnose and troubleshoot problems, send logs a
 
 ## Submitting diagnostics, feedback, and GitHub issues
 
-If you encounter problems for which you do not find solutions in this documentation, on [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues), or the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data. See [Diagnose and Feedback](index.md#diagnose-and-feedback) to learn about diagnostics and how to create new issues on GitHub. 
+If you encounter problems for which you do not find solutions in this documentation, on [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues), or the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data. See [Diagnose and Feedback](index.md#diagnose-and-feedback) to learn about diagnostics and how to create new issues on GitHub.
 
 ## Checking the Logs
 
@@ -160,7 +160,22 @@ To fix existing containers, follow these steps.
     ```
 
 ### Hyper-V
-Docker for Windows requires a Hyper-V as well as the Hyper-V Module for Windows Powershell to be installed and enabled. See [these instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) to install Hyper-V manually. A reboot is *required*. If you install Hyper-V without the reboot, Docker for Windows will not work correctly. On some systems, Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or similar.
+
+Docker for Windows requires a Hyper-V as well as the Hyper-V Module for Windows Powershell to be installed and enabled. The Docker for Windows installer will enable it for you.
+
+See [these instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) to install Hyper-V manually. A reboot is *required*. If you install Hyper-V without the reboot, Docker for Windows will not work correctly. On some systems, Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or similar.
+
+### Virtualization must be enabled
+
+In addition to [Hyper-V](#hyper-v), virtualization must be enabled.
+
+If, at some point, if you manually uninstall Hyper-V or disable virtualization, Docker for Windows will not start.
+
+Verify that virtualization is enabled on Task Manager.
+
+![Task Manager](images/win-virtualization-enabled.png)
+
+See also, the user reported issue [Unable to run Docker for Windows on Windows 10 Enterprise](https://github.com/docker/for-win/issues/74)
 
 ### Networking issues
 
