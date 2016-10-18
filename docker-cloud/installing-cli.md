@@ -3,7 +3,7 @@ aliases:
 - /docker-cloud/getting-started/intermediate/installing-cli/
 - /docker-cloud/getting-started/installing-cli/
 - /docker-cloud/tutorials/installing-cli/
-description: Using the Docker Cloud CLI on Linux, Windows, and Mac OS X, installing,
+description: Using the Docker Cloud CLI on Linux, Windows, and macOS, installing,
   updating, uninstall
 keywords:
 - cloud, command-line, CLI
@@ -43,9 +43,9 @@ Open your terminal or command shell and execute the following command:
 $ pip install docker-cloud
 ```
 
-#### Install on Mac OS X
+#### Install on macOS
 
-We recommend installing Docker CLI for OS X using Homebrew. If you don't have `brew` installed, follow the instructions here: <a href="http://brew.sh" target="_blank">http://brew.sh</a>
+We recommend installing Docker CLI for macOS using Homebrew. If you don't have `brew` installed, follow the instructions here: <a href="http://brew.sh" target="_blank">http://brew.sh</a>
 
 Once Homebrew is installed, open Terminal and run the following command:
 
@@ -90,7 +90,7 @@ Periodically, Docker will add new features and fix bugs in the existing CLI. To 
 $ pip install -U docker-cloud
 ```
 
-#### Upgrade the docker-cloud CLI on Mac OS X
+#### Upgrade the docker-cloud CLI on macOS
 
 ```
 $ brew update && brew upgrade docker-cloud
@@ -109,7 +109,7 @@ Open your terminal or command shell and execute the following command:
 $ pip uninstall docker-cloud
 ```
 
-#### Uninstall on Mac OS X
+#### Uninstall on macOS
 
 Open your Terminal application and execute the following command:
 

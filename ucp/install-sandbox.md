@@ -51,7 +51,10 @@ container through UCP, and explore the user interface.
 environment. If you are in another, you may need to change the commands to use
 the correct ones for you environment.
 
-## Prerequisites
+>**Note**: The command examples in this page were tested for a macOS environment.
+If you are in another, you may need to adjust to use analogous commands for your environment.
+
+## Step 2. Verify the prerequisites
 
 This example requires that you have:
 

@@ -51,7 +51,7 @@ notification go to your GitHub or email inbox. Some of repositories you can watc
     </tr>
     <tr>
         <td class="tg-031e"><a href="https://github.com/kitematic/kitematic" target="_blank">kitematic/kitematic</a></td>
-        <td class="tg-031e">Kitematic is a simple application for managing Docker containers on Mac OS X and Windows.</td>
+        <td class="tg-031e">Kitematic is a simple application for managing Docker containers on macOS and Windows.</td>
     </tr>
     <tr>
         <td class="tg-031e"><a href="https://github.com/docker/swarm" target="_blank">docker/swarm</a></td>
