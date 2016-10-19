@@ -134,7 +134,7 @@ command below, look for the value constraint.
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -p 80:80 \
    --label=interlock.hostname=results \
-   --label=interlock.domain=myenterprise.com \
+   --label=interlock.domain=myenterprise.example.com \
    -e constraint:com.function==dbstore \
    --net="voteapp" \
    --name results-app docker/example-voting-app-result-app
@@ -146,7 +146,7 @@ command below, look for the value constraint.
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -p 80:80 \
    --label=interlock.hostname=vote \
-   --label=interlock.domain=myenterprise.com \
+   --label=interlock.domain=myenterprise.example.com \
    -e constraint:com.function==frontend01 \
    --net="voteapp" \
    --name voting-app01 docker/example-voting-app-voting-app
@@ -158,7 +158,7 @@ command below, look for the value constraint.
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -p 80:80 \
    --label=interlock.hostname=vote \
-   --label=interlock.domain=myenterprise.com \
+   --label=interlock.domain=myenterprise.example.com \
    -e constraint:com.function==frontend02 \
    --net="voteapp" \
    --name voting-app02 docker/example-voting-app-voting-app
@@ -182,8 +182,8 @@ allow you to take advantage of the loadbalancer.
    $ docker exec interlock cat /etc/conf/nginx.conf
    ... output snipped ...
 
-   upstream results.myenterprise.com {
-       zone results.myenterprise.com_backend 64k;
+   upstream results.myenterprise.example.com {
+       zone results.myenterprise.example.com_backend 64k;
 
        server 192.168.99.111:80;
 
@@ -191,14 +191,14 @@ allow you to take advantage of the loadbalancer.
    server {
        listen 80;
 
-       server_name results.myenterprise.com;
+       server_name results.myenterprise.example.com;
 
        location / {
-           proxy_pass http://results.myenterprise.com;
+           proxy_pass http://results.myenterprise.example.com;
        }
    }
-   upstream vote.myenterprise.com {
-       zone vote.myenterprise.com_backend 64k;
+   upstream vote.myenterprise.example.com {
+       zone vote.myenterprise.example.com_backend 64k;
 
        server 192.168.99.109:80;
        server 192.168.99.108:80;
@@ -207,10 +207,10 @@ allow you to take advantage of the loadbalancer.
    server {
        listen 80;
 
-       server_name vote.myenterprise.com;
+       server_name vote.myenterprise.example.com;
 
        location / {
-           proxy_pass http://vote.myenterprise.com;
+           proxy_pass http://vote.myenterprise.example.com;
        }
    }
 
@@ -218,8 +218,8 @@ allow you to take advantage of the loadbalancer.
    }
    ```
 
-    The `http://vote.myenterprise.com` site configuration should point to either
-    frontend node. Requests to `http://results.myenterprise.com` go just to the
+    The `http://vote.myenterprise.example.com` site configuration should point to either
+    frontend node. Requests to `http://results.myenterprise.example.com` go just to the
     single `dbstore` node where the `example-voting-app-result-app` is running.
 
 3. On your local host, edit `/etc/hosts` file add the resolution for both these
@@ -240,14 +240,14 @@ sites.
 
 Now, you can test your application.
 
-1. Open a browser and navigate to the `http://vote.myenterprise.com` site.
+1. Open a browser and navigate to the `http://vote.myenterprise.example.com` site.
 
     You should see something similar to the following:
 
     ![](../images/vote-app-test.png)
 
 2. Click on one of the two voting options.
-3. Navigate to the `http://results.myenterprise.com` site to see the results.
+3. Navigate to the `http://results.myenterprise.example.com` site to see the results.
 4. Try changing your vote.
 
     You'll see both sides change as you switch your vote.
@@ -392,8 +392,8 @@ result file</a>
     ```bash
     $ docker restart nginx
     ```
-11. Check your work again by visiting the `http://vote.myenterprise.com` and
-`http://results.myenterprise.com` again.
+11. Check your work again by visiting the `http://vote.myenterprise.example.com` and
+`http://results.myenterprise.example.com` again.
 
 12. You can view the logs on an individual container.
 
