@@ -131,20 +131,19 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
 	Some good commands to try are `docker version` to check that you have the latest release installed, and `docker ps` and `docker run hello-world` to verify that Docker is running.
 
-2. For something more adventurous, start a Dockerized web server.
+2.  For something more adventurous, start a Dockerized web server.
 
-	```shell
-	docker run -d -p 80:80 --name webserver nginx
-	```
+    ```
+    docker run -d -p 80:80 --name webserver nginx
+    ```
 
-	If the image is not found locally, Docker will pull it from Docker Hub.
+    If the image is not found locally, Docker will pull it from Docker Hub.
 
-	In a web browser, go to `http://localhost/` to bring up the home page. (Since you specified the default HTTP port, it isn't necessary to append `:80` at the end of the URL.)
+    In a web browser, go to `http://localhost/` to bring up the home page. (Since you specified the default HTTP port, it isn't necessary to append `:80` at the end of the URL.)
 
-	![nginx home page](images/hello-world-nginx.png)
+    ![nginx home page](images/hello-world-nginx.png)
 
-	>**Note:** Early beta releases used `docker` as the hostname to build the URL.  Now, ports are exposed on the private IP addresses of the VM and   forwarded to `localhost` with no other host name set. See also, [Release Notes](release-notes.md) for Beta 9.
-  >
+    >**Note:** Early beta releases used `docker` as the hostname to build the URL.  Now, ports are exposed on the private IP addresses of the VM and   forwarded to `localhost` with no other host name set. See also, [Release Notes](release-notes.md) for Beta 9.
 
 3. Run `docker ps` while your web server is running to see details on the webserver container.
 
