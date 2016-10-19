@@ -121,6 +121,9 @@ The following ports must be available. On some systems, these ports are open by 
 * **TCP** and **UDP port 7946** for communication among nodes
 * **TCP** and **UDP port 4789** for overlay network traffic
 
+If you are planning on creating an overlay network with encryption (`--opt encrypted`),
+you will also need to ensure protocol 50 (ESP) is open.
+
 ## What's next?
 
 After you have set up your environment, you are ready to [create a swarm](create-swarm.md).
