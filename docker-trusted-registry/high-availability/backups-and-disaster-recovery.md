@@ -74,7 +74,7 @@ $ docker run -i --rm docker/dtr backup \
   --ucp-ca "$(cat ucp-ca.pem)" \
   --existing-replica-id <replica-id> \
   --ucp-username <ucp-admin> \
-  --ucp-password <ucp-password> > /tmp/backup.tar
+  --ucp-password <ucp-password> > /var/tmp/backup.tar
 ```
 
 Where:
@@ -109,8 +109,8 @@ consideration whether your DTR installation is configured to store images on
 the filesystem or using a cloud provider.
 
 You can check the
-[reference documentation](../reference/backup.md), for the
-backup command to learn about all the available flags.
+[reference documentation](../reference/restore.md), for the
+restore command to learn about all the available flags.
 
 
 As an example, to install DTR on the host and restore its
@@ -127,7 +127,7 @@ $ docker run -i --rm \
   --ucp-ca "$(cat ucp-ca.pem)" \  
   --ucp-username <ucp-admin> \
   --ucp-password <ucp-password> \
-  --dtr-load-balancer <dtr-domain-name> < /tmp/backup.tar
+  --dtr-external-url <dtr-domain-name> < /var/tmp/backup.tar
 ```
 
 Where:
@@ -135,7 +135,7 @@ Where:
 * `--ucp-url` is the address of UCP,
 * `--ucp-ca` is the UCP certificate authority,
 * `--ucp-username`, and `--ucp-password` are the credentials of a UCP administrator,
-* `--dtr-load-balancer` is the domain name or ip where DTR can be reached.
+* `--dtr-external-url` is the domain name or ip where DTR can be reached.
 
 
 ## Where to go next
