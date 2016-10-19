@@ -133,9 +133,7 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
 2. For something more adventurous, start a Dockerized web server.
 
-	```shell
-	docker run -d -p 80:80 --name webserver nginx
-	```
+	`docker run -d -p 80:80 --name webserver nginx`
 
 	If the image is not found locally, Docker will pull it from Docker Hub.
 
