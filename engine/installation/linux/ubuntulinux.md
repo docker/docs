@@ -99,7 +99,7 @@ packages from the Docker repository:
     $ sudo apt-get update
     ```
 
-8. Verify that `APT` is pulling from the right repository.
+8.  Verify that `APT` is pulling from the right repository.
 
     When you run the following command, an entry is returned for each version of
     Docker that is available for you to install. Each entry should have the URL
