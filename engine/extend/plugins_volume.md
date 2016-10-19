@@ -34,14 +34,14 @@ beyond the lifetime of a single Engine host. See the
 
 ## Command-line changes
 
-A volume plugin makes use of the `-v`and `--volume-driver` flag on the `docker run` command.  The `-v` flag accepts a volume name and the `--volume-driver` flag a driver type, for example:
+A volume plugin makes use of the `-v` and `--volume-driver` flag on the `docker run` command. The `-v` flag accepts a volume name and the `--volume-driver` flag a driver type, for example:
 
     $ docker run -ti -v volumename:/data --volume-driver=flocker   busybox sh
 
 This command passes the `volumename` through to the volume plugin as a
 user-given name for the volume. The `volumename` must not begin with a `/`.
 
-By having the user specify a  `volumename`, a plugin can associate the volume
+By having the user specify a `volumename`, a plugin can associate the volume
 with an external volume beyond the lifetime of a single container or container
 host. This can be used, for example, to move a stateful container from one
 server to another.
@@ -79,7 +79,7 @@ containers.
 ```
 
 Instruct the plugin that the user wants to create a volume, given a user
-specified volume name.  The plugin does not need to actually manifest the
+specified volume name. The plugin does not need to actually manifest the
 volume on the filesystem yet (until Mount is called).
 Opts is a map of driver specific options passed through from the user request.
 
@@ -174,7 +174,7 @@ however the plugin may be queried again later if one is not provided.
 ```
 
 Indication that Docker no longer is using the named volume. This is called once
-per container stop.  Plugin may deduce that it is safe to deprovision it at
+per container stop. Plugin may deduce that it is safe to deprovision it at
 this point.
 
 `ID` is a unique ID for the caller that is requesting the mount.
