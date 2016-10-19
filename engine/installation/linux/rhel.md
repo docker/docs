@@ -1,6 +1,7 @@
 ---
 aliases:
 - /engine/installation/rhel/
+- /installation/rhel/
 description: Instructions for installing Docker on Red Hat Enterprise Linux.
 keywords:
 - Docker, Docker documentation, requirements, linux,  rhel
