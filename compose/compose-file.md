@@ -35,10 +35,10 @@ full details.
 
 ## Service configuration reference
 
-> **Note:** There are two versions of the Compose file format – version 1 (the
-> legacy format, which does not support volumes or networks) and version 2 (the
-> most up-to-date). For more information, see the [Versioning](compose-file.md#versioning)
-> section.
+> **Note:** There are several versions of the Compose file format – version 1
+> (the legacy format, which does not support volumes or networks) and
+> version 2, as well as 2.1 (the most up-to-date). For more information,
+> see the [Versioning](compose-file.md#versioning) section.
 
 This section contains a list of all configuration options supported by a service
 definition.
@@ -76,7 +76,7 @@ This will result in an image named `webapp` and tagged `tag`, built from `./dir`
 
 #### context
 
-> [Version 2 file format](compose-file.md#version-2) only. In version 1, just use
+> [Version 2 file format](compose-file.md#version-2) and up. In version 1, just use
 > [build](compose-file.md#build).
 
 Either a path to a directory containing a Dockerfile, or a url to a git repository.
@@ -113,7 +113,7 @@ specified.
 
 #### args
 
-> [Version 2 file format](compose-file.md#version-2) only.
+> [Version 2 file format](compose-file.md#version-2) and up.
 
 Add build arguments, which are environment variables accessible only during the
 build process.
@@ -169,7 +169,8 @@ Override the default command.
 
     command: bundle exec thin -p 3000
 
-The command can also be a list, in a manner similar to [dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+The command can also be a list, in a manner similar to
+[dockerfile](/engine/reference/builder.md#cmd):
 
     command: [bundle, exec, thin, -p, 3000]
 
@@ -247,7 +248,7 @@ Custom DNS search domains. Can be a single value or a list.
 
 ### tmpfs
 
-> [Version 2 file format](compose-file.md#version-2) only.
+> [Version 2 file format](compose-file.md#version-2) and up.
 
 Mount a temporary file system inside the container. Can be a single value or a list.
 
@@ -262,7 +263,8 @@ Override the default entrypoint.
 
     entrypoint: /code/entrypoint.sh
 
-The entrypoint can also be a list, in a manner similar to [dockerfile](https://docs.docker.com/engine/reference/builder/#entrypoint):
+The entrypoint can also be a list, in a manner similar to
+[dockerfile](/engine/reference/builder.md#entrypoint):
 
     entrypoint:
         - php
@@ -391,6 +393,31 @@ An entry with the ip address and hostname will be created in `/etc/hosts` inside
     162.242.195.82  somehost
     50.31.209.229   otherhost
 
+### group_add
+
+> [Version 2 file format](compose-file.md#version-2) and up.
+
+Specify additional groups (by name or number) which the user inside the
+container will be a member of. Groups must exist in both the container and the
+host system to be added. An example of where this is useful is when multiple
+containers (running as different users) need to all read or write the same
+file on the host system. That file can be owned by a group shared by all the
+containers, and specified in `group_add`. See the
+[Docker documentation](/engine/reference/run.md#additional-groups) for more
+details.
+
+A full example:
+
+    version: '2'
+    services:
+        image: alpine
+        group_add:
+          - mail
+
+Running `id` inside the created container will show that the user belongs to
+the `mail` group, which would not have been the case if `group_add` were not
+used.
+
 ### image
 
 Specify the image to start the container from. Can either be a repository/tag or
@@ -409,9 +436,20 @@ options and tags it with the specified tag.
 > **Note**: In the [version 1 file format](compose-file.md#version-1), using `build` together
 > with `image` is not allowed. Attempting to do so results in an error.
 
+### isolation
+
+> [Added in version 2.1 file format](compose-file.md#version-21).
+
+Specify a container’s isolation technology. On Linux, the only supported value
+is `default`. On Windows, acceptable values are `default`, `process` and
+`hyperv`. Refer to the
+[Docker Engine docs](/engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
+for details.
+
 ### labels
 
-Add metadata to containers using [Docker labels](https://docs.docker.com/engine/userguide/labels-custom-metadata/). You can use either an array or a dictionary.
+
+Add metadata to containers using [Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.
 
@@ -448,7 +486,7 @@ Links also express dependency between services in the same way as
 
 ### logging
 
-> [Version 2 file format](compose-file.md#version-2) only. In version 1, use
+> [Version 2 file format](compose-file.md#version-2) and up. In version 1, use
 > [log_driver](compose-file.md#log_driver) and [log_opt](compose-file.md#log_opt).
 
 Logging configuration for the service.
@@ -460,7 +498,7 @@ Logging configuration for the service.
 
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
-([documented here](https://docs.docker.com/engine/reference/logging/overview/)).
+([documented here](/engine/reference/logging/overview.md)).
 
 The default value is json-file.
 
@@ -515,7 +553,7 @@ id.
 
 ### network_mode
 
-> [Version 2 file format](compose-file.md#version-2) only. In version 1, use [net](compose-file.md#net).
+> [Version 2 file format](compose-file.md#version-2) and up. In version 1, use [net](compose-file.md#net).
 
 Network mode. Use the same values as the docker client `--net` parameter, plus
 the special form `service:[service name]`.
@@ -528,7 +566,7 @@ the special form `service:[service name]`.
 
 ### networks
 
-> [Version 2 file format](compose-file.md#version-2) only. In version 1, use [net](compose-file.md#net).
+> [Version 2 file format](compose-file.md#version-2) and up. In version 1, use [net](compose-file.md#net).
 
 Networks to join, referencing entries under the
 [top-level `networks` key](compose-file.md#network-configuration-reference).
@@ -620,6 +658,31 @@ An example:
             gateway: 172.16.238.1
           - subnet: 2001:3984:3989::/64
             gateway: 2001:3984:3989::1
+
+#### link_local_ips
+
+> [Added in version 2.1 file format](compose-file.md#version-21).
+
+Specify a list of link-local IPs. Link-local IPs are special IPs which belong
+to a well known subnet and are purely managed by the operator, usually
+dependent on the architecture where they are deployed. Therefore they are not
+managed by docker (IPAM driver).
+
+Example usage:
+
+    version: '2.1'
+    services:
+      app:
+        image: busybox
+        command: top
+        networks:
+          app_net:
+            link_local_ips:
+              - 57.123.22.11
+              - 57.123.22.13
+    networks:
+      app_net:
+        driver: bridge
 
 ### pid
 
@@ -719,9 +782,8 @@ use the specified driver.
 > Note: No path expansion will be done if you have also specified a
 > `volume_driver`.
 
-See [Docker Volumes](https://docs.docker.com/engine/userguide/dockervolumes/) and
-[Volume Plugins](https://docs.docker.com/engine/extend/plugins_volume/) for more
-information.
+See [Docker Volumes](/engine/userguide/dockervolumes.md) and
+[Volume Plugins](/engine/extend/plugins_volume.md) for more
 
 ### volumes_from
 
@@ -744,10 +806,10 @@ then read-write will be used.
 >     - container_name
 >     - container_name:rw
 
-### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
+### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, oom_score_adj, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](https://docs.docker.com/engine/reference/run/) counterpart.
+[docker run](/engine/reference/run.md) counterpart.
 
     cpu_shares: 73
     cpu_quota: 50000
@@ -765,12 +827,18 @@ Each of these is a single value, analogous to its
     memswap_limit: 2000000000
     privileged: true
 
+    oom_score_adj: 500
+
     restart: always
 
     read_only: true
     shm_size: 64M
     stdin_open: true
     tty: true
+
+> **Note:** The following options are only available for
+> [version 2](compose-file.md#version-2) and up:
+> * `oom_score_adj`
 
 
 ## Volume configuration reference
@@ -779,7 +847,7 @@ While it is possible to declare volumes on the fly as part of the service
 declaration, this section allows you to create named volumes that can be
 reused across multiple services (without relying on `volumes_from`), and are
 easily retrieved and inspected using the docker command line or API.
-See the [docker volume](https://docs.docker.com/engine/reference/commandline/volume_create/)
+See the [docker volume](/engine/reference/commandline/volume_create.md)
 subcommand documentation for more information.
 
 ### driver
@@ -832,6 +900,27 @@ refer to it within the Compose file:
         external:
           name: actual-name-of-volume
 
+### labels
+
+> [Added in version 2.1 file format](compose-file.md#version-21).
+
+Add metadata to containers using
+[Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
+an array or a dictionary.
+
+It's recommended that you use reverse-DNS notation to prevent your labels from
+conflicting with those used by other software.
+
+    labels:
+      com.example.description: "Database volume"
+      com.example.department: "IT/Ops"
+      com.example.label-with-empty-value: ""
+
+    labels:
+      - "com.example.description=Database volume"
+      - "com.example.department=IT/Ops"
+      - "com.example.label-with-empty-value"
+
 
 ## Network configuration reference
 
@@ -861,6 +950,12 @@ documentation for more information. Optional.
         foo: "bar"
         baz: 1
 
+### enable_ipv6
+
+> [Added in version 2.1 file format](compose-file.md#version-21).
+
+Enable IPv6 networking on this network.
+
 ### ipam
 
 Specify custom IPAM config. This is an object with several properties, each of
@@ -888,6 +983,35 @@ A full example:
             host2: 172.28.1.6
             host3: 172.28.1.7
 
+### internal
+
+> [Version 2 file format](compose-file.md#version-2) and up.
+
+By default, Docker also connects a bridge network to it to provide external
+connectivity. If you want to create an externally isolated overlay network,
+you can set this option to `true`.
+
+### labels
+
+> [Added in version 2.1 file format](compose-file.md#version-21).
+
+Add metadata to containers using
+[Docker labels](/engine/userguide/labels-custom-metadata.md). You can use either
+an array or a dictionary.
+
+It's recommended that you use reverse-DNS notation to prevent your labels from
+conflicting with those used by other software.
+
+    labels:
+      com.example.description: "Financial transaction network"
+      com.example.department: "Finance"
+      com.example.label-with-empty-value: ""
+
+    labels:
+      - "com.example.description=Financial transaction network"
+      - "com.example.department=Finance"
+      - "com.example.label-with-empty-value"
+
 ### external
 
 If set to `true`, specifies that this network has been created outside of
@@ -895,7 +1019,7 @@ Compose. `docker-compose up` will not attempt to create it, and will raise
 an error if it doesn't exist.
 
 `external` cannot be used in conjunction with other network configuration keys
-(`driver`, `driver_opts`, `ipam`).
+(`driver`, `driver_opts`, `group_add`, `ipam`, `internal`).
 
 In the example below, `proxy` is the gateway to the outside world. Instead of
 attempting to create a network called `[projectname]_outside`, Compose will
@@ -930,12 +1054,15 @@ refer to it within the Compose file:
 
 ## Versioning
 
-There are two versions of the Compose file format:
+There are currently three versions of the Compose file format:
 
 - Version 1, the legacy format. This is specified by omitting a `version` key at
   the root of the YAML.
 - Version 2, the recommended format. This is specified with a `version: '2'` entry
   at the root of the YAML.
+- Version 2.1, an upgrade over version 2 that takes advantage of the Docker
+  Engine's newest features. Specify with a `version: '2.1'` entry at the root of
+  the YAML.
 
 To move your project from version 1 to 2, see the [Upgrading](compose-file.md#upgrading)
 section.
@@ -1035,6 +1162,18 @@ A more extended example, defining volumes and networks:
       back-tier:
         driver: bridge
 
+
+### Version 2.1
+
+An upgrade of [version 2](compose-file.md#version-2) that introduces new parameters only
+available with Docker Engine version **1.12.0+**
+
+Introduces the following additional parameters:
+
+- [`link_local_ips`](compose-file.md#link_local_ips)
+- [`isolation`](compose-file.md#isolation)
+- `labels` for [volumes](compose-file.md#volume-configuration-reference) and
+  [networks](compose-file.md#network-configuration-reference)
 
 ### Upgrading
 
@@ -1143,20 +1282,16 @@ string. In the example above, if `EXTERNAL_PORT` is not set, the value for the
 port mapping is `:5000` (which is of course an invalid port mapping, and will
 result in an error when attempting to create the container).
 
-In the case of environment variables that are not set, it is also possible to
-define default values  using one of the following syntax variants:
+Both `$VARIABLE` and `${VARIABLE}` syntax are supported.
+Additionally when using the [2.1 file format](compose-file.md#version-21), it
+is possible to provide inline default values using typical shell syntax:
 
+- `${VARIABLE:-default}` will evaluate to `default` if `VARIABLE` is unset or
+  empty in the environment.
+- `${VARIABLE-default}` will evaluate to `default` only if `VARIABLE` is unset
+  in the environment.
 
-* To provide a default value that will be used if `VARIABLE` is either *unset* or *empty*:
-
-  `${VARIABLE:-default}`
-
-* To provide a default value only if `VARIABLE` is *empty*:
-
-  `${VARIABLE-default}`
-
-Both `$VARIABLE` and `${VARIABLE}` syntax are supported. Extended
-shell-style features, such as `${VARIABLE/foo/bar}`, are not
+Other extended shell-style features, such as `${VARIABLE/foo/bar}`, are not
 supported.
 
 You can use a `$$` (double-dollar sign) when your configuration needs a literal
