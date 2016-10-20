@@ -177,9 +177,13 @@ host as one of the Swarm managers.
 
 2. From the output, copy the `eth0` IP address from `inet addr`.
 
-3. Paste the launch command into the command line:
+3. To set up a discovery backend, use the following syntax:
 
-        $ docker run -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap
+        $ docker run -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap -advertise=<consul0_ip>
+        
+    Replacing `<consul0_ip>` with the IP address from the previous command, for example:
+
+        $ docker run -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap -advertise=172.30.0.161
 
 4. Enter `docker ps`.
 
