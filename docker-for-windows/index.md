@@ -5,6 +5,7 @@ aliases:
 - /windows/
 - /windows/started/
 - /docker-for-windows/started/
+- /installation/windows/
 description: Getting Started
 keywords:
 - windows, beta, alpha, tutorial
