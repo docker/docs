@@ -14,7 +14,7 @@ title: Introduction to Deploying an app in Docker Cloud
 
 # Introduction and tutorial prerequisites
 
-In this tutorial you will an application to Docker Cloud using either Go or
+In this tutorial you will bring an application to Docker Cloud using either Go or
 Python. This tutorial is intended for more advanced beginners who have some
 experience with web applications, and who want to learn more about
 multi-container services in Docker Cloud.
