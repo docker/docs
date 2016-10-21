@@ -87,6 +87,7 @@ IPForward=kernel
 ```
 
 This configuration allows IP forwarding from the container as expected.
+
 ## Uninstallation
 
 To uninstall the Docker package:
