@@ -304,6 +304,21 @@ Permissions to access shared drives are tied to the credentials you provide here
 
 See also [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes) in Troubleshooting.
 
+#### Firewall rules for shared drives
+
+Shared drives require port 445 to be open between the host machine and the virtual
+machine that runs Linux containers.
+
+>**Note**: In Docker for Windows Beta 29 and higher,
+Docker detects if port 445 is closed and shows the following message when you
+try to add a shared drive: ![Port 445 blocked](images/drive_sharing_firewall_blocked.png)
+
+
+To share the drive, allow connections between the Windows host machine and the
+virtual machine in Windows Firewall or your third party firewall software. You
+do not need to open port 445 on any other network. By default, allow connections
+to 10.0.75.1 port 445 (the Windows host) from 10.0.75.2 (the virtual machine).
+
 ### Advanced
 
 ![CPU and Memory settings](images/settings-cpu-ram.png)
