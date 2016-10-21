@@ -258,7 +258,7 @@ toc:
   - sectiontitle: Extend Engine
     section:
     - path: /engine/extend/
-    - title: Managed plugin system
+      title: Managed plugin system
     - path: /engine/extend/plugins_authorization/
       title: Access authorization plugin
     - path: /engine/extend/plugins/
