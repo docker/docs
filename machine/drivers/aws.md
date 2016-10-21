@@ -62,6 +62,11 @@ You can use environment variables:
 -   `--amazonec2-security-group`: AWS VPC security group name.
 -   `--amazonec2-session-token`: Your session token for the Amazon Web Services API.
 -   `--amazonec2-spot-price`: Spot instance bid price (in dollars). Require the `--amazonec2-request-spot-instance` flag.
+-   `--amazonec2-block-duration-minutes`: Spot instance duration in minutes (60, 120, 180, 240, 300, or 360)
+-   `--amazonec2-use-private-address`: Use the private IP address for docker-machine, but still create a public IP address.
+-   `--amazonec2-private-address-only`: Use the private IP address only.
+-   `--amazonec2-monitoring`: Enable CloudWatch Monitoring.
+-   `--amazonec2-use-ebs-optimized-instance`: Create an EBS Optimized Instance, instance type must support it.
 -   `--amazonec2-ssh-keypath`: Path to Private Key file to use for instance. Matching public key with .pub extension should exist
 -   `--amazonec2-ssh-user`: The SSH Login username, which must match the default SSH user set in the ami used.
 -   `--amazonec2-subnet-id`: AWS VPC subnet ID.
@@ -77,7 +82,7 @@ You can use environment variables:
 #### Environment variables and default values:
 
 | CLI option                               | Environment variable    | Default          |
-| ---------------------------------------- | ----------------------- | ---------------- |
+|:-----------------------------------------|:------------------------|:-----------------|
 | `--amazonec2-access-key`                 | `AWS_ACCESS_KEY_ID`     | -                |
 | `--amazonec2-secret-key`                 | `AWS_SECRET_ACCESS_KEY` | -                |
 | `--amazonec2-session-token`              | `AWS_SESSION_TOKEN`     | -                |
@@ -96,6 +101,7 @@ You can use environment variables:
 | `--amazonec2-ssh-user`                   | `AWS_SSH_USER`          | `ubuntu`         |
 | `--amazonec2-request-spot-instance`      | -                       | `false`          |
 | `--amazonec2-spot-price`                 | -                       | `0.50`           |
+| `--amazonec2-block-duration-minutes`     | -                       | -                |
 | `--amazonec2-use-private-address`        | -                       | `false`          |
 | `--amazonec2-private-address-only`       | -                       | `false`          |
 | `--amazonec2-monitoring`                 | -                       | `false`          |
@@ -108,7 +114,7 @@ You can use environment variables:
 By default, the Amazon EC2 driver will use a daily image of Ubuntu 16.04 LTS.
 
 | Region         | AMI ID       |
-| -------------- | ------------ |
+|:---------------|:-------------|
 | ap-northeast-1 | ami-b36d4edd |
 | ap-southeast-1 | ami-1069af73 |
 | ap-southeast-2 | ami-1d336a7e |
