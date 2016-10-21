@@ -90,7 +90,7 @@ packages from the Docker repository:
     for the placeholder `<REPO>`.
 
     ```bash
-    $ sudo echo "<REPO>" > /etc/apt/sources.list.d/docker.list
+    $ echo "<REPO>" | sudo tee -a /etc/apt/sources.list.d/docker.list
     ```
 
 7.  Update the `APT` package index.
