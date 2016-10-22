@@ -549,8 +549,7 @@ server is unable to resolve the request it will be forwarded to any external DNS
 servers configured for the container. To facilitate this when the container is
 created, only the embedded DNS server reachable at `127.0.0.11` will be listed
 in the container's `resolv.conf` file. More information on embedded DNS server on
-user-defined networks can be found in the [embedded DNS server in user-defined networks]
-(configure-dns.md)
+user-defined networks can be found in the [embedded DNS server in user-defined networks](configure-dns.md)
 
 ## Links
 
