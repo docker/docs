@@ -30,6 +30,9 @@ you have previously linked your Github or Bitbucket account, you must have
 chosen the Public and Private connection type. To view your current connection
 settings, log in to Docker Hub and choose <a href="https://hub.docker.com/account/authorized-services/" target=\_blank>Profile > Settings > Linked Accounts & Services</a>.
 
+## Limitations
+
+Currently Docker Hub does not support Git LFS (Large File Storage). If you have binaries in your build context that are managed by Git LFS, only the pointer file will be present in the clone made during the automated build, which is not what you want. Subscribe to the [GitHub issue](https://github.com/docker/hub-feedback/issues/500) tracking this limitation.
 
 ## Link to a hosted repository service
 
