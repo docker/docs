@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/plugin_install/
 advisory: experimental
 description: the plugin install command description and usage
 keywords:

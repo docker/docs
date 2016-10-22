@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/rmi/
 description: The rmi command description and usage
 keywords:
 - remove, image, Docker

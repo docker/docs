@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/port/
 description: The port command description and usage
 keywords:
 - port, mapping, container

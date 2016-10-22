@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/rename/
 description: The rename command description and usage
 keywords:
 - rename, docker, container

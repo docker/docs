@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/tag/
 description: The tag command description and usage
 keywords:
 - tag, name, image

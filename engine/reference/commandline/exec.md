@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/exec/
 description: The exec command description and usage
 keywords:
 - command, container, run, execute

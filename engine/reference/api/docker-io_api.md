@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/api/docker-io_api/
 description: API Documentation for the Docker Hub API
 published: false
 keywords:

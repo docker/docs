@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/inspect/
 description: The inspect command description and usage
 keywords:
 - inspect, container, json

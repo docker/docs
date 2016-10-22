@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/version/
 description: The version command description and usage
 keywords:
 - version, architecture, api

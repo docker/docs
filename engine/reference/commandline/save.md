@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/save/
 description: The save command description and usage
 keywords:
 - tarred, repository, backup

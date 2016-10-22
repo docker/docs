@@ -1,5 +1,7 @@
 ---
 aliases:
+  - /reference/commandline/dockerd/
+aliases:
 - /engine/reference/commandline/daemon/
 description: The daemon command description and usage
 keywords:

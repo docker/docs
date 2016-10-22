@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/plugin_inspect/
 advisory: experimental
 description: The plugin inspect command description and usage
 keywords:
