@@ -125,7 +125,7 @@ can take over 15 minutes to complete.
 4. Use `make` to build a development environment image and run it in a container.
 
    ```none
-   $ make BIN_DIR=. shell
+   $ make BIND_DIR=. shell
    ```
 
    The command returns informational messages as it runs. The first build may
