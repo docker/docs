@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/attach/
 description: The attach command description and usage
 keywords:
 - attach, running, container

@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/stack_rm/
 advisory: experimental
 description: The stack rm command description and usage
 keywords:

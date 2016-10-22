@@ -1,5 +1,7 @@
 ---
 aliases:
+  - /reference/commandline/node_ps/
+aliases:
 - /engine/reference/commandline/node_tasks/
 description: The node ps command description and usage
 keywords:

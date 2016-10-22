@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/api/docker_remote_api_v1.19/
 description: API Documentation for Docker
 keywords:
 - API, Docker, rcli, REST,  documentation

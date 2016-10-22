@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/node_promote/
 description: The node promote command description and usage
 keywords:
 - node, promote

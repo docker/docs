@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/node_rm/
 description: The node rm command description and usage
 keywords:
 - node, remove

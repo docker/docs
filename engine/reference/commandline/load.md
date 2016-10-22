@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/load/
 description: The load command description and usage
 keywords:
 - stdin, tarred, repository

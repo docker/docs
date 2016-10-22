@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/unpause/
 description: The unpause command description and usage
 keywords:
 - cgroups, suspend, container

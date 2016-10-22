@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/export/
 description: The export command description and usage
 keywords:
 - export, file, system, container

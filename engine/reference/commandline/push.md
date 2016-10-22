@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/push/
 description: The push command description and usage
 keywords:
 - share, push, image

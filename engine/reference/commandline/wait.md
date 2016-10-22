@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/wait/
 description: The wait command description and usage
 keywords:
 - container, stop, wait

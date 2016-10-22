@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/create/
 description: The create command description and usage
 keywords:
 - docker, create, container

@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/swarm_leave/
 description: The swarm leave command description and usage
 keywords:
 - swarm, leave

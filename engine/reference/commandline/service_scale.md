@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/service_scale/
 description: The service scale command description and usage
 keywords:
 - service, scale

@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/kill/
 description: The kill command description and usage
 keywords:
 - container, kill, signal

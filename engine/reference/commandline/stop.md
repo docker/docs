@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/stop/
 description: The stop command description and usage
 keywords:
 - stop, SIGKILL, SIGTERM

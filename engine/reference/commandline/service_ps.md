@@ -1,5 +1,7 @@
 ---
 aliases:
+  - /reference/commandline/service_ps/
+aliases:
 - /engine/reference/commandline/service_tasks/
 description: The service ps command description and usage
 keywords:

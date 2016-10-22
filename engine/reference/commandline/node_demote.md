@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/node_demote/
 description: The node demote command description and usage
 keywords:
 - node, demote

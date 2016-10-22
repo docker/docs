@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/stack_deploy/
 advisory: experimental
 description: The stack deploy command description and usage
 keywords:
