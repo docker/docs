@@ -196,7 +196,6 @@ your swarm, and start an image on your swarm.
 
 4. Run the Docker `hello-world` test image on your swarm.
 
-
 	 	$ docker run hello-world
 		Hello from Docker.
 		This message shows that your installation appears to be working correctly.
@@ -210,11 +209,12 @@ your swarm, and start an image on your swarm.
 		 4. The Docker daemon streamed that output to the Docker client, which sent it
 				to your terminal.
 
-		To try something more ambitious, you can run an Ubuntu container with:
+To try something more ambitious, you can run an Ubuntu container with:
+
 		 $ docker run -it ubuntu bash
 
-		For more examples and ideas, visit:
-		 http://docs.docker.com/userguide/
+For more examples and ideas, visit:
+http://docs.docker.com/userguide/
 
 5. Use the `docker ps` command to find out which node the container ran on.
 
