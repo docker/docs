@@ -189,7 +189,7 @@ you'd like to update.
 
 Inside our running container first let's update Ruby:
 
-    root@0b2616b0e5a8:/# apt-get install -y ruby2.0-dev
+    root@0b2616b0e5a8:/# apt-get install -y ruby2.0-dev ruby2.0
 
 Now let's add the `json` gem.
 
