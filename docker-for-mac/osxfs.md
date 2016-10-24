@@ -69,7 +69,7 @@ sharing**. (See [Preferences](index.md#preferences).) All other paths
 used in `-v` bind mounts are sourced from the Moby Linux VM running the
 Docker containers, so arguments such as `-v
 /var/run/docker.sock:/var/run/docker.sock` should work as expected. If
-an OS X path is not shared and does not exist in th VM, an attempt to
+an OS X path is not shared and does not exist in the VM, an attempt to
 bind mount it will fail rather than create it in the VM. Paths that
 already exist in the VM and contain files are reserved by Docker and
 cannot be exported from OS X.
