@@ -27,7 +27,7 @@ all the images. Then you copy that package to the host where you’ll install UC
     Docker Datacenter components:
 
     ```bash
-    $ wget https://packages.docker.com/caas/ucp-2.0.0-beta1_dtr-2.1.0-beta1.tar.gz -O docker-datacenter.tar.gz
+    $ wget https://packages.docker.com/caas/ucp-2.0.0-beta3_dtr-2.1.0-beta3.tar.gz -O docker-datacenter.tar.gz
     ```
 
 2. Transfer the package to the offline nodes.
