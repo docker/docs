@@ -46,7 +46,7 @@ To install DTR:
 1. Get the DTR package.
 
     ```bash
-    $ wget https://packages.docker.com/caas/ucp-2.0.0-beta1_dtr-2.1.0-beta1.tar.gz -O docker-datacenter.tar.gz
+    $ wget https://packages.docker.com/caas/ucp-2.0.0-beta3_dtr-2.1.0-beta3.tar.gz -O docker-datacenter.tar.gz
     ```
 
 2. Transfer the package to the nodes.
@@ -81,7 +81,7 @@ To install DTR:
 
     # Install DTR
     $ docker run -it --rm \
-      dockerhubenterprise/dtr:2.1.0-beta1 install \
+      docker/dtr:2.1.0-beta3 install \
       --ucp-node <hostname> \
       --ucp-insecure-tls
     ```
@@ -154,7 +154,7 @@ replicas:
 
     ```bash
     $ docker run -it --rm \
-      dockerhubenterprise/dtr:2.1.0-beta1 join \
+      docker/dtr:2.1.0-beta3 join \
       --ucp-node <hostname> \
       --ucp-insecure-tls
     ```
