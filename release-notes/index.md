@@ -18,38 +18,39 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](../installation/upgrade-major.md), to
 upgrade your installation to the latest release.
 
-## Version 2.0 Beta2
+## Version 2.0 Beta 2
 
 (24 Oct 2016)
 
-** Features **
+**Features**
 
 * Core
-	* Added HTTP Routing Mesh feature to enable hostname routing for services on 
-	top of Swarm's existing network mesh
+	* Added HTTP routing mesh feature to enable hostname routing for services on
+	top of Docker's existing network mesh
 	* It's now possible to install a new UCP cluster using a backup via the
-	`install --from-backup` operation. Note that this will preserve the UCP cluster 
-	configs but not any application services or networks from the old cluster
+	`install --from-backup` operation. Note that this will preserve the UCP cluster
+	configurations but not any application services or networks from the old cluster
+
 * UI/UX
-	* Added "DDC Highlights" section to the main dashboard which provides sample 
+	* Added a new section to the UCP web UI dashboard page that provides sample
 	workflows to help users get started with DDC
 	* Added a new color for node state, gray, which is used to notify the user
 	to wait on using the node until it finishes an operation it is undergoing
 	* The Create Network screen now has additional options for encryption, MTU,
 	and multiple IPAM configs
-	* It's now possible to load image .tar files directly from the UCP UI
-	* It's now possible to edit a permission label directly on the Team screen
+	* It's now possible to load image .tar files directly from the UCP web UI
+	* It's now possible to edit a permission label directly on the Team page
 	* It's now possible to edit multiple node parameters prior to saving changes
 	* You can now see a container's size in its detailed description view
-	
-** Bug Fixes **
+
+**Bug Fixes**
 
 * Core
-	* Pre-loading UCP images onto a node is no longer requires prior to joining
+	* Pre-loading UCP images in a node is no longer requires prior to joining
 	it as a manager or promoting it from worker to manager
 	* Uninstall now properly removes all UCP containers
-	* Auth now correctly normalizes capitalized letters for LDAP authentication
-	* It is now possible to demote or remove manager nodes which are "down"
+	* Authentication service now normalizes capitalized letters for LDAP authentication
+	* It is now possible to demote or remove manager nodes that are "down"
 	* Support dumps should now download correctly despite stalling or timeouts
 	from the cluster
 	* Networks RBAC now works correctly for `service create` and `service update`
@@ -58,19 +59,19 @@ upgrade your installation to the latest release.
 	* DAB deploy screen now correctly displays networks
 * docker/ucp image
 	* UCP now informs you if docker/ucp command has been deprecated or removed
-	* License injection during install now works correctly
+	* Uploading a license during install now works correctly
 	* The `--root-ca-only` flag has been removed from backup/restore commands
 * UI/UX
-	* The Users tab page limits now supports up to 1 million LDAP/AD users
+	* The Users page can now list up to 1 million LDAP/AD users
 	* The Nodes page now displays more useful status updates for commands for
 	joining, removing, and promoting/demoting nodes
 	* Removed unnecessary scrollbars from Deploy Services wizard
 	* Errors in the Services tab are now more descriptive
 	* It's now more clear where to find and manage DDC system images
 	* UCP now provides more clear warnings for issues related to upgrades, node
-	management, backups, DAB deploys, and uploading certs 
+	management, backups, DAB deploys, and uploading certs
 
-## Version 2.0 Beta1
+## Version 2.0 Beta 1
 
 (7 Oct 2016)
 
