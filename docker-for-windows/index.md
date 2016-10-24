@@ -25,6 +25,25 @@ Please read through these topics on how to get started. To **give us your feedba
 
 >**Already have Docker for Windows?** If you already have Docker for Windows installed, and are ready to get started, skip over to the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
+## Using Docker on Windows Server 2016 or Windows 10
+
+You can run Docker on Windows Server 16 and Windows 10 in two different ways:
+- You can
+  [install a native Docker binary](https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start_windows_10)
+  which allows you to develop and run Windows containers natively. If you
+  install Docker this way, you cannot develop or run Linux containers.
+
+- You can [install Docker for Windows](#step-1-install-docker-for-windows),
+  which allows you to develop and run Windows containers natively, or develop
+  and run Linux containers using Hyper-V.
+
+If you try to run a Linux container on the native Docker daemon, an error occurs:
+
+```no-highlight
+C:\Program Files\Docker\docker.exe:
+     image operating system "linux" cannot be used on this platform.
+     See 'C:\Program Files\Docker\docker.exe run --help'.
+```
 
 ## Download Docker for Windows
 
