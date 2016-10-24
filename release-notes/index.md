@@ -19,7 +19,25 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](../install/upgrade/upgrade-major.md),
 to upgrade your installation to the latest release.
 
-## DTR 2.1
+## DTR 2.1 Beta 2
+
+(24 Oct 2016)
+
+**Bug Fixes**
+
+* Fixed Swift configuration error in DTR web UI when using advanced settings
+* Fixed bug where organization owner would not see the delete button for repository
+* Changed http response when deleting a non-existent tag from 204 to 404
+* Changed http response when deleting a non-existent manifest from 500 to 404
+* Users now show in the organization member list
+* Team name is now being displayed in the UI
+* Organization administrators can now delete repositories
+* Fixed problem that prevented organization administrators to change a user role
+* Fixed problem when removing users from an organization in the UI
+* Fixed errors in Internet Explorer 11
+* Fixed problem that caused the garbage collection job to treat valid manifests as corrupt
+
+## DTR 2.1 Beta 1
 
 (7 Oct 2016)
 
