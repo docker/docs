@@ -10,5 +10,3 @@ menu:
 title: Release notes
 type: menu
 ---
-
-<![end-metadata]-->
