@@ -82,7 +82,7 @@ To install compose as a container run:
 ## Master builds
 
 If you're interested in trying out a pre-release build you can download a
-binary from https://dl.bintray.com/docker-compose/master/. Pre-release
+binary from [https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/). Pre-release
 builds allow you to try out new features before they are released, but may
 be less stable.
 
