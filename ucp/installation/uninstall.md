@@ -34,7 +34,7 @@ You can also use flags to pass values to the uninstall command.
 
 1.  Run the uninstall command.
 
-    ```bash
+    ```none
     $ docker run --rm -it \
       -v /var/run/docker.sock:/var/run/docker.sock
       --name ucp \
@@ -50,7 +50,7 @@ You can also use flags to pass values to the uninstall command.
 
 2.  List the images remaining on the node.
 
-    ```
+    ```none
     $ docker images
 
     REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
@@ -62,7 +62,7 @@ You can also use flags to pass values to the uninstall command.
 
 3.  Remove the docker/ucp image.
 
-    ```
+    ```none
     $ docker rmi docker/ucp
 
     Untagged: docker/ucp:latest
