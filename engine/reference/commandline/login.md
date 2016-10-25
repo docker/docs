@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/login/
 description: The login command description and usage
 keywords:
 - registry, login, image

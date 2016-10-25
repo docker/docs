@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/rm/
 description: The rm command description and usage
 keywords:
 - remove, Docker, container

@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/plugin_disable/
 advisory: experimental
 description: the plugin disable command description and usage
 keywords:

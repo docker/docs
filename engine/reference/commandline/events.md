@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/events/
 description: The events command description and usage
 keywords:
 - events, container, report
