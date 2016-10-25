@@ -10,5 +10,3 @@ menu:
 title: Repositories and images
 type: menu
 ---
-
-<![end-metadata]-->
