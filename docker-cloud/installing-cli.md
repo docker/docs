@@ -42,7 +42,8 @@ Open your terminal or command shell and execute the following command:
 ```bash
 $ pip install docker-cloud
 ```
-(On Linux machines, ensure that python-dev is installed.)
+If you encounter errors on Linux machines, make sure that `python-dev` is installed.
+For example, on Ubuntu, run the following command: `apt-get install python-dev`
 
 #### Install on macOS
 
