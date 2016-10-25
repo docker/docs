@@ -11,7 +11,7 @@ title: ps
 
 # ps
 
-```
+```none
 Usage: ps [options] [SERVICE...]
 
 Options:
