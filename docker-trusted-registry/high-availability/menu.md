@@ -10,5 +10,3 @@ menu:
 title: High-availability
 type: menu
 ---
-
-<![end-metadata]-->
