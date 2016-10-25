@@ -777,6 +777,8 @@ toc:
         title: backup
       - path: /docker-trusted-registry/reference/dumpcerts/
         title: dumpcerts
+      - path: /docker-trusted-registry/reference/images/
+        title: images
       - path: /docker-trusted-registry/reference/install/
         title: install
       - path: /docker-trusted-registry/reference/join/
@@ -789,6 +791,8 @@ toc:
         title: remove
       - path: /docker-trusted-registry/reference/restore/
         title: restore
+      - path: /docker-trusted-registry/reference/upgrade/
+        title: upgrade
   - sectiontitle: Configuration
     section:
     - path: /docker-trusted-registry/configure/configuration/
