@@ -54,7 +54,7 @@ Daemon running on each node. Other discovery service backends such as
 		INFO[0005] Starting VirtualBox VM...                    
 		INFO[0005] Waiting for VM to start...                   
 		INFO[0050] "local" has been created and is now the active machine.
-		INFO[0050] To point your Docker client at it, run this in your shell: eval "$(docker-machine env local)"
+  	INFO[0050] To point your Docker client at it, run this in your shell: eval "$(docker-machine env local)"
     ```
 
 3.  Load the `local` machine configuration into your shell.
@@ -69,7 +69,7 @@ Daemon running on each node. Other discovery service backends such as
   	haven't got the `swarm:latest` image on your local machine, Docker pulls it
   	for you.
 
-    ```
+    ```none
 		$ docker run swarm create
 		Unable to find image 'swarm:latest' locally
 		latest: Pulling from swarm
@@ -123,7 +123,7 @@ In this section, you create a swarm manager and two nodes.
 
     For example:
 
-    ```
+    ```none
  		$ docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://fe0cc96a72cf04dba8c1c4aa79536ec3 swarm-master
 		INFO[0000] Creating SSH key...                          
 		INFO[0000] Creating VirtualBox VM...                    
@@ -135,10 +135,8 @@ In this section, you create a swarm manager and two nodes.
 
 2.  Open your VirtualBox Manager, it should contain the `local` machine and the
     new `swarm-master` machine.
-    
-    ```
+
 	  ![VirtualBox](images/virtual-box.png)
-    ```
 
 3.  Create a swarm node.
 
@@ -210,7 +208,7 @@ your swarm, and start an image on your swarm.
 
 3.  Check the images currently running on your swarm.
 
-    ```bash
+    ```none
 		$ docker ps  -a
 		CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                     NAMES
 		78be991b58d1        swarm:latest        "/swarm join --addr    3 minutes ago       Up 2 minutes        2375/tcp                                  swarm-agent-01/swarm-agent        
