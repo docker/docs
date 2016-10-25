@@ -1103,6 +1103,8 @@ toc:
   section:
   - path: /docker-store/
     title: Docker Store Overview
+  - path: /docker-store/
+    title: Submit a product to Docker Store
   - path: /docker-store/faq/
     title: Docker Store FAQs
 - sectiontitle: Docker Toolbox
