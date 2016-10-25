@@ -28,7 +28,7 @@ One popular logging stack is composed of Elasticsearch, Logstash and
 Kibana. The following example demonstrates how to set up an example
 deployment which can be used for logging.
 
-```sh
+```none
 docker volume create --name orca-elasticsearch-data
 
 docker run -d \
@@ -50,12 +50,12 @@ docker run -d \
     kibana
 ```
 
-Once you have these containers running, configure UCP to send logs to 
-the IP of the Logstash container. You can then browse to port 5601 on the system 
-running Kibana and browse log/event entries. You should specify the "time" 
+Once you have these containers running, configure UCP to send logs to
+the IP of the Logstash container. You can then browse to port 5601 on the system
+running Kibana and browse log/event entries. You should specify the "time"
 field for indexing.
 
-Note: When deployed in a production environment, you should secure your ELK
+When deployed in a production environment, you should secure your ELK
 stack. UCP does not do this itself, but there are a number of 3rd party
 options that can accomplish this (e.g. Shield plug-in for Kibana)
 
