@@ -107,15 +107,15 @@ This bug fix release contains osxfs improvements. The fixed issues may have
 been seen as failures with apt-get and npm in containers, missed inotify
 events or unexpected unmounts.
 
-* Bug fixes
-    - osxfs: fixed an issue causing access to children of renamed
-      directories to fail (symptoms: npm failures, apt-get failures)
-    - osxfs: fixed an issue causing some ATTRIB and CREATE inotify
-      events to fail delivery and other inotify events to stop
-    - osxfs: fixed an issue causing all inotify events to stop when an
-      ancestor directory of a mounted directory was mounted
-    - osxfs: fixed an issue causing volumes mounted under other mounts
-      to spontaneously unmount
+**Bug fixes**
+
+* osxfs: fixed an issue causing access to children of renamed directories to fail (symptoms: npm failures, apt-get failures)
+
+* osxfs: fixed an issue causing some ATTRIB and CREATE inotify events to fail delivery and other inotify events to stop
+
+* osxfs: fixed an issue causing all inotify events to stop when an ancestor directory of a mounted directory was mounted
+
+* osxfs: fixed an issue causing volumes mounted under other mounts to spontaneously unmount
 
 ### Docker for Mac 1.12.0-a, 2016-08-03 (stable)
 
