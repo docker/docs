@@ -9,5 +9,3 @@ menu:
 title: Docker Trusted Registry
 type: menu
 ---
-
-<![end-metadata]-->
