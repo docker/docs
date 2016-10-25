@@ -85,9 +85,9 @@ requests for ownership metadata will return the previously set
 values. Ownership-based permissions are only enforced at the OS X file
 system level with all accessing processes behaving as the user running
 Docker. If the user does not have permission to read extended attributes
-on an object, e.g. when that object's permissions are `0000`, ownership
-will be reported as the accessing process until the extended attribute
-is again readable.
+on an object (such as when that object's permissions are `0000`), `osxfs`
+will attempt to add an access control list (ACL) entry that allows the user to
+read and write extended attributes. If this attempt fails, the object will appear to be owned by the process accessing it until the extended attribute is readable again.
 
 ### File system events
 
