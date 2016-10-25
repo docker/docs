@@ -10,14 +10,18 @@ title: status
 
 # status
 
-    Usage: docker-machine status [arg...]
+```none
+Usage: docker-machine status [arg...]
 
-    Get the status of a machine
+Get the status of a machine
 
-    Description:
-       Argument is a machine name.
+Description:
+   Argument is a machine name.
+```
 
 For example:
 
-    $ docker-machine status dev
-    Running
+```
+$ docker-machine status dev
+Running
+```
