@@ -11,5 +11,3 @@ menu:
 title: Installation
 type: menu
 ---
-
-<![end-metadata]-->
