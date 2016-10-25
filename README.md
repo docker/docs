@@ -96,7 +96,7 @@ The following `vnext` branches currently exist:
 
 ## Staging
 
-You have two options:
+You have three options:
 
 1.  Clone this repo and run our staging container:
 
