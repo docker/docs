@@ -103,7 +103,9 @@ Because of which, the driver specific log tag options `syslog-tag`, `gelf-tag` a
 `fluentd-tag` have been deprecated in favor of the generic `tag` option.
 
 ```bash
-docker --log-driver=syslog --log-opt tag="{% raw %}{{.ImageName}}/{{.Name}}/{{.ID}}{% endraw %}"
+{% raw %}
+$ docker --log-driver=syslog --log-opt tag="{{.ImageName}}/{{.Name}}/{{.ID}}"
+{% endraw %}
 ```
 
 ### LXC built-in exec driver
