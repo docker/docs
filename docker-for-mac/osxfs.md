@@ -86,7 +86,7 @@ values. Ownership-based permissions are only enforced at the OS X file
 system level with all accessing processes behaving as the user running
 Docker. If the user does not have permission to read extended attributes
 on an object (such as when that object's permissions are `0000`), `osxfs`
-will attempt to add an access control list (ACL) entry, which allows the user to
+will attempt to add an access control list (ACL) entry that allows the user to
 read and write extended attributes. If this attempt fails, the object will appear to be owned by the process accessing it until the extended attribute is readable again.
 
 ### File system events
