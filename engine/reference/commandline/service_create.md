@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/service_create/
 description: The service create command description and usage
 keywords:
 - service, create

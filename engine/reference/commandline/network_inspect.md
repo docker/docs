@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/network_inspect/
 description: The network inspect command description and usage
 keywords:
 - network, inspect, user-defined
