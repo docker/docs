@@ -98,7 +98,7 @@ command below, look for the value constraint.
 
 1. Start a Postgres database container.
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -v db-data:/var/lib/postgresql/data \
    -e constraint:com.function==dbstore \
@@ -108,7 +108,7 @@ command below, look for the value constraint.
 
 6. Start the Redis container.
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -p 6379:6379 \
    -e constraint:com.function==dbstore \
@@ -120,7 +120,7 @@ command below, look for the value constraint.
 
 7. Start the worker application
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -e constraint:com.function==worker01 \
    --net="voteapp" \
@@ -130,7 +130,7 @@ command below, look for the value constraint.
 
 6. Start the results application.
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -p 80:80 \
    --label=interlock.hostname=results \
@@ -142,7 +142,7 @@ command below, look for the value constraint.
 
 7. Start the voting application twice; once on each frontend node.
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -p 80:80 \
    --label=interlock.hostname=vote \
@@ -154,7 +154,7 @@ command below, look for the value constraint.
 
     And again on the other frontend node.
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -p 80:80 \
    --label=interlock.hostname=vote \
@@ -282,7 +282,7 @@ the containers at once. This extra credit
     in the `docker-compose.yml` file. For example,
     this command:
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -e constraint:com.function==worker01 \
    --net="voteapp" \
