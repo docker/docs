@@ -10,5 +10,3 @@ menu:
 title: User management
 type: menu
 ---
-
-<![end-metadata]-->
