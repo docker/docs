@@ -21,23 +21,23 @@ If you have not done so already, go to <a href="https://digitalocean.com" target
 
 To generate your access token:
 
-  1. Go to the Digital Ocean administrator console and click **API** in the header.
+1.  Go to the Digital Ocean administrator console and click **API** in the header.
 
-  ![Click API in Digital Ocean console](../img/ocean_click_api.png)
+   ![Click API in Digital Ocean console](../img/ocean_click_api.png)
 
-  2. Click **Generate New Token** to get to the token generator.
+2.  Click **Generate New Token** to get to the token generator.
 
-  ![Generate token](../img/ocean_gen_token.png)
+   ![Generate token](../img/ocean_gen_token.png)
 
-  3. Give the token a clever name (e.g. "machine"), make sure the **Write (Optional)** checkbox is checked, and click **Generate Token**.
+3.  Give the token a clever name (e.g. "machine"), make sure the **Write (Optional)** checkbox is checked, and click **Generate Token**.
 
-  ![Name and generate token](../img/ocean_token_create.png)
+   ![Name and generate token](../img/ocean_token_create.png)
 
-  4. Grab (copy to clipboard) the generated big long hex string and store it somewhere safe.
+4. Grab (copy to clipboard) the generated big long hex string and store it somewhere safe.
 
-  ![Copy and save personal access token](../img/ocean_save_token.png)
+   ![Copy and save personal access token](../img/ocean_save_token.png)
 
-  This is the personal access token you'll use in the next step to create your cloud server.
+   This is the personal access token you'll use in the next step to create your cloud server.
 
 ### Step 3. Use Machine to create the Droplet
 
