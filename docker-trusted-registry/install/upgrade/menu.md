@@ -10,5 +10,3 @@ menu:
 title: Upgrade
 type: menu
 ---
-
-<![end-metadata]-->
