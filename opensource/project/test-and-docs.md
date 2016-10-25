@@ -69,7 +69,7 @@ testing:
 Running the entire test suite on your current repository can take over half an
 hour. To run the test suite, do the following:
 
-1. Open a terminal on your local host.
+1.  Open a terminal on your local host.
 
 2.  Change to the root your Docker repository.
 
@@ -115,7 +115,7 @@ command line with multiple targets that does the same thing.
 
 Try this now.
 
-1. Open a terminal and change to the `docker-fork` root.
+1.  Open a terminal and change to the `docker-fork` root.
 
 2.  Start a Docker development image.
 
@@ -124,7 +124,7 @@ Try this now.
 
     ```bash
     $ docker run --privileged --rm -ti -v `pwd`:/go/src/github.com/docker/docker dry-run-test /bin/bash
-      ```
+    ```
 
 3.  Run the tests using the `hack/make.sh` script.
 
