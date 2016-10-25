@@ -38,7 +38,7 @@ To replace the server certificates used by UCP, for each controller node:
 1.  Login into the node with ssh.
 2.  In the directory where you have the keys and certificates to use, run:
 
-    ```bash
+    ```none
     # Create a container that attaches to the same volume where certificates are stored
     $ docker create --name replace-certs -v ucp-controller-server-certs:/data busybox
 
