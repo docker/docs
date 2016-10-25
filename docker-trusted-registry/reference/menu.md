@@ -10,5 +10,3 @@ menu:
 title: docker/dtr image reference
 type: menu
 ---
-
-<![end-metadata]-->
