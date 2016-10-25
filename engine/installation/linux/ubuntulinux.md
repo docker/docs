@@ -1,6 +1,7 @@
 ---
 aliases:
 - /engine/installation/ubuntulinux/
+- /installation/ubuntulinux/
 description: 'Instructions for installing Docker on Ubuntu. '
 keywords:
 - Docker, Docker documentation, requirements, apt, installation,  ubuntu
