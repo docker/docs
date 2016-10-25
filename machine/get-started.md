@@ -26,25 +26,25 @@ power users or multi-node experimentation. Both Docker for Mac and Docker for
 Windows include the newest version of Docker Machine, so when you install either
 of these, you get `docker-machine`.
 
-The new solutions come with their own native virtualization solutions instead of
-Oracle VirtualBox, so keep the following considerations in mind when using
-Machine to create local VMs.
+The new solutions come with their own native virtualization solutions rather
+than using Oracle VirtualBox, so there are new considerations to keep in mind
+when using Machine to create local VMs. Docker for Mac allows for the creation
+of additional `docker-machine` based `virtualbox` machines without issue, but in
+the case of Docker for Windows, you will need to use the `hyperv` driver
+instead.
 
-- **Docker for Mac**: You can create additional `docker-machine` machines using the
-  `virtualbox` driver.
-- **Docker for Windows**: You can create additional `docker-machine` machines using
-  the `hyperv` driver instead of the `virtualbox` driver.
 
 #### If you are using Docker for Windows
 
 Docker for Windows uses [Microsoft
 Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/windows_welcome)
-for virtualization, and Hyper-V is not compatible with Oracle VirtualBox, which
-is the default driver for `docker-machine`. Therefore, if you use Docker
-for Windows, you must use the `hyperv` driver when creating machines using
-`docker-machine` See the
-[Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md) for more
-information.
+for virtualization, and Hyper-V and Oracle VirtualBox are incompatible.
+Therefore, you cannot run the two solutions simultaneously. But you can still
+use `docker-machine` to create local VMs by using the Microsoft Hyper-V driver.
+
+* If you are using Docker for Windows, the only prequisite is to have Docker for Windows installed. You will use the Microsoft `hyperv` driver to create
+local machines. (See the [Docker Machine driver for Microsoft
+Hyper-V](drivers/hyper-v.md).)
 
 #### If you are using Docker for Mac
 
