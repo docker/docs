@@ -97,7 +97,7 @@ Symlinks will work within and across containers. However, symlinks created outsi
 
 Any file destined to run inside a container must use Unix style `\n` line endings. This includes files referenced at the command line for builds and in RUN commands in Docker files.
 
-Docker containers and `docker build` run in a Unix environment, so files in containers must use Unix style line endings `\n`, _not_ Windows style: `\r\n`. Keep this in mind when authoring files such as shell scripts using Windows tools, where the default is likely to be Windows style line endings.  These commands ultimately get passed to Unix commands inside a Unix based container (for example, a shell script passed to `/bin/sh`). If Windows style line endings are used, `docker run` will fail with syntax errors.
+Docker containers and `docker build` run in a Unix environment, so files in containers must use Unix style line endings: `\n`, _not_ Windows style: `\r\n`. Keep this in mind when authoring files such as shell scripts using Windows tools, where the default is likely to be Windows style line endings.  These commands ultimately get passed to Unix commands inside a Unix based container (for example, a shell script passed to `/bin/sh`). If Windows style line endings are used, `docker run` will fail with syntax errors.
 
 For an example of this issue and the resolution, see this issue on GitHub: <a href="https://github.com/docker/docker/issues/24388" target="_blank">Docker RUN fails to execute shell script (https://github.com/docker/docker/issues/24388)</a>.
 
