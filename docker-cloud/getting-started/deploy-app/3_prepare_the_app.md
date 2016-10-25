@@ -42,13 +42,13 @@ Next, we have to build this application to create an image. Run the following co
 **Python quickstart**
 
 ```bash
-$ docker build --tag quickstart-python
+$ docker build --tag quickstart-python .
 ```
 
 **Go quickstart**
 
 ```bash
-$ docker build --tag quickstart-go
+$ docker build --tag quickstart-go .
 ```
 
 Next, we [Push the Docker image to Docker Cloud's Registry](4_push_to_cloud_registry.md).
