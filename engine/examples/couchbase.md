@@ -2,9 +2,6 @@
 description: Dockerizing a Couchbase service
 keywords:
 - docker, example, package installation, networking, couchbase
-menu:
-  main:
-    parent: engine_dockerize
 title: Dockerizing a Couchbase service
 ---
 
@@ -18,18 +15,19 @@ Couchbase is an open source, document-oriented NoSQL database for modern web, mo
 
 Couchbase Docker images are published at [Docker Hub](https://hub.docker.com/_/couchbase/).
 
-Start Couchbase server as:
+Start Couchbase server:
 
-```
-docker run -d --name db -p 8091-8093:8091-8093 -p 11210:11210 couchbase
+```bash
+$ docker run -d --name db -p 8091-8093:8091-8093 -p 11210:11210 couchbase
 ```
 
 The purpose of each port exposed is explained at [Couchbase Developer Portal - Network Configuration](http://developer.couchbase.com/documentation/server/4.1/install/install-ports.html).
 
-Logs can be seen as:
+Logs can be seen using the `docker logs` command:
 
-```
-docker logs db
+```bash
+$ docker logs db
+
 Starting Couchbase Server -- Web UI available at http://<ip>:8091
 ```
 
@@ -51,11 +49,13 @@ Data, Query and Index are three different services that can be configured on a C
 
 Memory needs to be configured for Data and Index service only.
 
-```
-curl -v -X POST http://192.168.99.100:8091/pools/default -d memoryQuota=300 -d indexMemoryQuota=300
+```bash
+$ curl -v -X POST http://192.168.99.100:8091/pools/default -d memoryQuota=300 -d indexMemoryQuota=300
+ 
 * Hostname was NOT found in DNS cache
 *   Trying 192.168.99.100...
 * Connected to 192.168.99.100 (192.168.99.100) port 8091 (#0)
+
 > POST /pools/default HTTP/1.1
 > User-Agent: curl/7.37.1
 > Host: 192.168.99.100:8091
@@ -82,11 +82,13 @@ The command shows an HTTP POST request to the REST endpoint `/pools/default`. Th
 
 All three services, or only one of them, can be configured on each instance. This allows different Couchbase instances to use affinities and setup services accordingly. For example, if Docker host is running a machine with solid-state drive then only Data service can be started.
 
-```
-curl -v http://192.168.99.100:8091/node/controller/setupServices -d 'services=kv%2Cn1ql%2Cindex'
+```bash
+$ curl -v http://192.168.99.100:8091/node/controller/setupServices -d 'services=kv%2Cn1ql%2Cindex'
+
 * Hostname was NOT found in DNS cache
 *   Trying 192.168.99.100...
 * Connected to 192.168.99.100 (192.168.99.100) port 8091 (#0)
+
 > POST /node/controller/setupServices HTTP/1.1
 > User-Agent: curl/7.37.1
 > Host: 192.168.99.100:8091
