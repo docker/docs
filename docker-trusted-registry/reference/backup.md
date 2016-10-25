@@ -16,8 +16,8 @@ Backup a DTR cluster to a tar file and stream it to stdout
 ## Usage
 
 ```bash
-$ docker run -i --rm docker/dtr \
- backup [command options] > backup.tar
+docker run -i --rm docker/dtr \
+    backup [command options] > backup.tar
 ```
 
 ## Description
@@ -35,16 +35,17 @@ configured to store images on the filesystem or using a cloud provider.
 WARNING: This backup contains sensitive information and should be
 stored securely.
 
+## Options
 
-| Option                  | Description                                                                           |
-|:------------------------|:--------------------------------------------------------------------------------------|
-| `--ucp-url`             | Specify the UCP controller URL [$UCP_URL]                                             |
-| `--ucp-username`        | Specify the UCP admin username [$UCP_USERNAME]                                        |
-| `--ucp-password`        | Specify the UCP admin password [$UCP_PASSWORD]                                        |
-| `--debug`               | Enable debug mode, provides additional logging [$DEBUG]                               |
-| `--hub-username`        | Specify the Docker Hub username for pulling images [$HUB_USERNAME]                    |
-| `--hub-password`        | Specify the Docker Hub password for pulling images [$HUB_PASSWORD]                    |
-| `--ucp-insecure-tls`    | Disable TLS verification for UCP [$UCP_INSECURE_TLS]                                  |
-| `--ucp-ca`              | Use a PEM-encoded TLS CA certificate for UCP [$UCP_CA]                                |
-| `--existing-replica-id` | ID of an existing replica in a cluster [$DTR_EXISTING_REPLICA_ID]                     |
-| `--config-only`         | Backup/restore only the configurations of DTR and not the database [$DTR_CONFIG_ONLY] |
+| Option                  | Description                                                        |
+|:------------------------|:-------------------------------------------------------------------|
+| `--ucp-url`             | Specify the UCP controller URL including domain and port           |
+| `--ucp-username`        | Specify the UCP admin username                                     |
+| `--ucp-password`        | Specify the UCP admin password                                     |
+| `--debug`               | Enable debug mode, provides additional logging                     |
+| `--hub-username`        | Specify the Docker Hub username for pulling images                 |
+| `--hub-password`        | Specify the Docker Hub password for pulling images                 |
+| `--ucp-insecure-tls`    | Disable TLS verification for UCP                                   |
+| `--ucp-ca`              | Use a PEM-encoded TLS CA certificate for UCP                       |
+| `--existing-replica-id` | ID of an existing replica in a cluster                             |
+| `--config-only`         | Backup/restore only the configurations of DTR and not the database |
