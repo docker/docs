@@ -73,7 +73,7 @@ Docker repository, regardless of the Autotest settings.
 
     * The source code repository
     * the build location
-    * at least one tag mapping
+    * at least one build rule
 
 8. Choose your **Autotest** option.
 

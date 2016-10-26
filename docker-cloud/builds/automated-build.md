@@ -47,40 +47,34 @@ Before you set up automated builds you need to [create a repository](repos.md) t
 
 2. Click the **Builds** tab.
 
-3. The first time you configure automated builds for a repository, you'll see
-buttons that allow you to link to a hosted source code repository. Select the
-repository service where the image's source code is stored.
+3. If you are setting up automated builds for the first time, select
+the code repository service where the image's source code is stored.
 
-    (If you haven't yet linked a source provider, follow the instructions
-    [here](link-source.md) to link your account.)
-
-    If you are editing an existing the build settings for an existing automated
+    Otherwise, if you are editing the build settings for an existing automated
     build, click **Configure automated builds**.
 
-4. If necessary, select the **source repository** to build the repository from.
-
-5. Select the **source repository** to build the Docker images from.
+4. Select the **source repository** to build the Docker images from.
 
     You might need to specify an organization or user from the source code
     provider to find the code repository you want to build.
 
-6. Choose where to run your build processes.
+5. Choose where to run your build processes.
 
     You can either run the process on your own infrastructure and optionally
-    [set up specific nodes to build on](automated-build.md#set-up-builder-nodes), or use the
+    [set up specific nodes to build on](automated-build.md#set-up-builder-nodes), or you can use the
     hosted build service offered on Docker Cloud's infrastructure. If you use
     Docker's infrastructure, select a builder size to run the build process on.
     This hosted build service is free while it is in Beta.
 
     ![](images/edit-repository-builds.png)
 
-7. Optionally, enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
+6. Optionally, enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
 
-8. In the **Tag mappings** section, enter one or more tags to build.
+8.  In the **Build Rules** section, enter one or more sources to build.
 
-    For each tag:
+    For each source:
 
-    * Select the **Source type** to build: either a **tag** or a
+    * Select the **Source type** to build either a **tag** or a
     **branch**. This tells the build system what to look for in the source code
     repository.
 
@@ -90,12 +84,13 @@ repository service where the image's source code is stored.
         names to build. To learn more, see
         [regexes](automated-build.md#regexes-and-automated-builds).
 
-    * Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
-
     * Enter the tag to apply to Docker images built from this source.
+
         If you configured a regex to select the source, you can reference the
         capture groups and use its result as part of the tag. To learn more, see
         [regexes](automated-build.md#regexes-and-automated-builds).
+
+    * Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
 
 9. For each branch or tag, enable or disable the **Autobuild** toggle.
 
@@ -137,10 +132,10 @@ To disable an automated build:
 
 2. Click **Configure automated builds** to edit the repository's build settings.
 
-3. In the **Tag mappings** section, locate the branch or tag you no longer want
+3. In the **Build Rules** section, locate the branch or tag you no longer want
 to automatically build.
 
-4. Click the **autobuild** toggle next to the branch configuration line.
+4. Click the **autobuild** toggle next to the configuration line.
 
     The toggle turns gray when disabled.
 
