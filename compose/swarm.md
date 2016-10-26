@@ -165,15 +165,15 @@ environment variables, so you can use Compose's `environment` option to set
 them.
 
     # Schedule containers on a specific node
-    labels:
+    environment:
       - "constraint:node==node-1"
 
     # Schedule containers on a node that has the 'storage' label set to 'ssd'
-    labels:
+    environment:
       - "constraint:storage==ssd"
 
     # Schedule containers where the 'redis' image is already pulled
-    labels:
+    environment:
       - "affinity:image==redis"
 
 For the full set of available filters and expressions, see the [Swarm
