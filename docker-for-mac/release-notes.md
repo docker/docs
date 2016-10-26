@@ -144,21 +144,27 @@ events or unexpected unmounts.
 * Docker Compose 1.8.0
 
 ## Beta Release Notes
-<!--
-### Beta 29 Release Notes (2016-10-22 1.12.2-rc3-beta29)
+
+### Beta 29 Release Notes (2016-10-25 1.12.3-rc1-beta29)
 
 **New**
 
-TBD
+- Overlay2 is now the default storage driver. You must do a factory reset for overlay2 to be automatically used. (#5545)
 
 **Upgrades**
 
-TBD
+- Docker 1.12.3-rc1
+- Linux kernel 4.4.27
 
 **Bug fixes and minor changes**
 
-TBD
--->
+- Fix an issue where the whale animation during setting change was inconsistent
+- Fix an issue where some windows stayed hidden behind another app
+- Fix application of system or custom proxy settings over container restart
+- Increase default ulimit for memlock (fixes [https://github.com/docker/for-mac/issues/801](https://github.com/docker/for-mac/issues/801) )
+- Fix an issue where the Docker status would continue to be
+      yellow/animated after the VM had started correctly
+- osxfs: fix the prohibition of chown on read-only or mode 0 files (fixes [https://github.com/docker/for-mac/issues/117](https://github.com/docker/for-mac/issues/117), [https://github.com/docker/for-mac/issues/263](https://github.com/docker/for-mac/issues/263), [https://github.com/docker/for-mac/issues/633](https://github.com/docker/for-mac/issues/633) )
 
 ### Beta 28 Release Notes (2016-10-13 1.12.2-rc3-beta28)
 
