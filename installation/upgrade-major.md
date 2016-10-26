@@ -12,6 +12,11 @@ weight=61
 
 # Upgrade to UCP 2.0
 
+<!-- beta: remove after this goes to GA -->
+
+> You can't upgrade from one beta version to another. To test the latest
+> beta version, start by uninstalling the previous version.
+
 This page guides you in upgrading Docker Universal Control Plane (UCP) to
 version 2.0.
 
