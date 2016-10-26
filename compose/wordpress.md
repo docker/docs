@@ -29,35 +29,40 @@ with Docker containers. This quick-start guide demonstrates how to use Compose t
 
         $ cd my_wordpress/
 
-3. Create a `docker-compose.yml` file that will start your `Wordpress` blog and a separate `MySQL` instance with a volume mount for data persistence:
+3.  Create a `docker-compose.yml` file that will start your
+    `Wordpress` blog and a separate `MySQL` instance with a volume
+    mount for data persistence:
 
-        version: '2'
-        services:
-          db:
-            image: mysql:5.7
-            volumes:
-              - "./.data/db:/var/lib/mysql"
-            restart: always
-            environment:
-              MYSQL_ROOT_PASSWORD: wordpress
-              MYSQL_DATABASE: wordpress
-              MYSQL_USER: wordpress
-              MYSQL_PASSWORD: wordpress
+    ```none
+    version: '2'
 
-          wordpress:
-            depends_on:
-              - db
-            image: wordpress:latest
-            links:
-              - db
-            ports:
-              - "8000:80"
-            restart: always
-            environment:
-              WORDPRESS_DB_HOST: db:3306
-              WORDPRESS_DB_PASSWORD: wordpress
+    services:
+       db:
+         image: mysql:5.7
+         volumes:
+           - "./.data/db:/var/lib/mysql"
+         restart: always
+         environment:
+           MYSQL_ROOT_PASSWORD: wordpress
+           MYSQL_DATABASE: wordpress
+           MYSQL_USER: wordpress
+           MYSQL_PASSWORD: wordpress
 
-    **NOTE**: The folder `./.data/db` will be automatically created in the project directory
+       wordpress:
+         depends_on:
+           - db
+         image: wordpress:latest
+         links:
+           - db
+         ports:
+           - "8000:80"
+         restart: always
+         environment:
+           WORDPRESS_DB_HOST: db:3306
+           WORDPRESS_DB_PASSWORD: wordpress
+    ```
+
+    >**NOTE**: The folder `./.data/db` will be automatically created in the project directory
     alongside the `docker-compose.yml` which will persist any updates made by wordpress to the
     database.
 
