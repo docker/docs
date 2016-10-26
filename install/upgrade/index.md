@@ -13,6 +13,11 @@ weight=10
 
 # Upgrade from 2.0.0
 
+<!-- beta: remove after this goes to GA -->
+
+> You can't upgrade from one beta version to another. To test the latest
+> beta version, start by uninstalling the previous version.
+
 The first step in upgrading to a new minor version or patch release of DTR 2.0,
 is ensuring you're running DTR 2.0. If that's not the case, start by upgrading
 your installation to version 2.0.0, and then upgrade to the latest version
