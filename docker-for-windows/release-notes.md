@@ -132,9 +132,7 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 
 ## Beta Release Notes
 
-<!--
-
-### Beta 29 Release Notes (2016-10-22 1.12.2-rc3-beta29)
+### Beta 29 Release Notes (2016-10-25 1.12.3-rc1-beta29)
 
 >**Important Note**:
 >
@@ -151,17 +149,24 @@ work. Some insider builds may not work.
 
 **New**
 
-TBD
+- Restore the VM's configuration when it was changed by the user
+- Overlay2 is now the default storage driver. After a factory reset overlay2 will automatically be used
+- Detect firewall configuration that might block the file sharing
+- Send more GUI usage statistics to help us improve the product
 
 **Upgrades**
 
-TBD
+- Docker 1.12.3-rc1
+- Linux Kernel 4.4.27
 
 **Bug fixes and minor changes**
 
-TBD
+- Faster mount/unmount of shared drives
+- Added a timeout to mounting/unmounting a shared drive
+- Add the settings to the diagnostics
+- Increase default ulimit for memlock (fixes https://github.com/docker/for-mac/issues/801)
+- Make sure we don't use an older Nlog library from the GAC
 
--->
 
 ### Beta 28 Release Notes (2016-10-13 1.12.2-rc3-beta28)
 
