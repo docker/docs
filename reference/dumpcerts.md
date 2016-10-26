@@ -9,14 +9,14 @@ identifier="dtr_reference_dumpcerts"
 +++
 <![end-metadata]-->
 
-# dockerhubenterprise/dtr dumpcerts
+# docker/dtr dumpcerts
 
 Print the TLS certificates used by DTR
 
 ## Usage
 
 ```bash
-docker run -i --rm dockerhubenterprise/dtr \
+docker run -i --rm docker/dtr \
     dumpcerts [command options] > backup.tar
 ```
 

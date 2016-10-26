@@ -20,8 +20,8 @@ To manually test that overlay networking is working in UCP run the following
 commands on two different UCP machines.
 
 ```
-docker run -it --rm --net dtr-ol --name overlay-test1 --entrypoint sh dockerhubenterprise/dtr
-docker run -it --rm --net dtr-ol --name overlay-test2 --entrypoint ping dockerhubenterprise/dtr -c 3 overlay-test1
+docker run -it --rm --net dtr-ol --name overlay-test1 --entrypoint sh docker/dtr
+docker run -it --rm --net dtr-ol --name overlay-test2 --entrypoint ping docker/dtr -c 3 overlay-test1
 ```
 
 You can create new new overlay network for this test with `docker network create -d overaly network-name`.
@@ -69,5 +69,5 @@ You can execute etcd commands on a UCP node hosting a DTR replica using etcdctl
 via the following docker command:
 
 ```
-docker run --rm -v dtr-ca-$REPLICA_ID:/ca --net dtr-br -it --entrypoint /etcdctl dockerhubenterprise/dtr-etcd:v2.2.4 --endpoint https://dtr-etcd-$REPLICA_ID.dtr-br:2379 --ca-file /ca/etcd/cert.pem --key-file /ca/etcd-client/key.pem --cert-file /ca/etcd-client/cert.pem
+docker run --rm -v dtr-ca-$REPLICA_ID:/ca --net dtr-br -it --entrypoint /etcdctl docker/dtr-etcd:v2.2.4 --endpoint https://dtr-etcd-$REPLICA_ID.dtr-br:2379 --ca-file /ca/etcd/cert.pem --key-file /ca/etcd-client/key.pem --cert-file /ca/etcd-client/cert.pem
 ```

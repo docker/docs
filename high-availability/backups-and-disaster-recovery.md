@@ -37,7 +37,7 @@ on a cloud provider, depending on the way DTR is configured.
 
 ## Backup DTR data
 
-To perform a backup of a DTR node, use the `dockerhubenterprise/dtr backup` command. This
+To perform a backup of a DTR node, use the `backup` command. This
 command creates a backup of DTR:
 
 * Configurations,
@@ -66,7 +66,7 @@ As an example, to create a backup of a DTR node, you can use:
 
 ```bash
 # Create the backup
-$ docker run -i --rm dockerhubenterprise/dtr backup \
+$ docker run -i --rm docker/dtr:2.1.0-beta3 backup \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \
   --existing-replica-id <replica-id> \
@@ -90,7 +90,7 @@ $ tar -tf /tmp/backup.tar
 
 ## Restore DTR data
 
-You can restore a DTR node from a backup using the `dockerhubenterprise/dtr restore`
+You can restore a DTR node from a backup using the `restore`
 command.
 This command performs a fresh installation of DTR, and reconfigures it with
 the configuration created during a backup.
@@ -116,7 +116,7 @@ state from an existing backup:
 ```bash
 # Install and restore configurations from an existing backup
 $ docker run -i --rm \
-  dockerhubenterprise/dtr restore \
+  docker/dtr:2.1.0-beta3 restore \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \  
   --ucp-username <ucp-admin> \

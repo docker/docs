@@ -1,7 +1,7 @@
 <!--[metadata]>
 +++
 title = "Overview"
-description = "Learn about the commands available in the dockerhubenterprise/dtr image."
+description = "Learn about the commands available in the docker/dtr image."
 keywords = ["docker, dtr, install, uninstall, configure"]
 [menu.main]
 parent="dtr_menu_reference"
@@ -10,7 +10,7 @@ weight=-10
 +++
 <![end-metadata]-->
 
-# dockerhubenterprise/dtr overview
+# docker/dtr overview
 
 This tool has commands to install, configure, and backup Docker
 Trusted Registry (DTR). It also allows uninstalling DTR.
@@ -23,7 +23,7 @@ Additional help is available for each command with the '--help' option.
 ## Usage
 
 ```bash
-docker run -it --rm dockerhubenterprise/dtr \
+docker run -it --rm docker/dtr \
     command [command options]
 ```
 

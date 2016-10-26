@@ -9,14 +9,14 @@ identifier="dtr_reference_install"
 +++
 <![end-metadata]-->
 
-# dockerhubenterprise/dtr install
+# docker/dtr install
 
 Install Docker Trusted Registry
 
 ## Usage
 
 ```bash
-docker run -it --rm dockerhubenterprise/dtr \
+docker run -it --rm docker/dtr \
     install [command options]
 ```
 

@@ -29,17 +29,17 @@ installation to the 2.0 version](upgrade-major.md).
 
 ## Step 2. Upgrade DTR
 
-To upgrade DTR you use the `dockerhubenterprise/dtr upgrade` command.
+To upgrade DTR you use the `upgrade` command.
 
 1. Download a UCP client bundle.
 
     Having a UCP client bundle allows you to run Docker commands on a UCP
     cluster. Download a UCP client bundle and set up your CLI client to use it.
 
-2. Pull the latest `dockerhubenterprise/dtr` image.
+2. Pull the latest `docker/dtr` image.
 
     ```bash
-    $ docker pull dockerhubenterprise/dtr
+    $ docker pull docker/dtr:<version>
     ```
 
     If the node you're upgrading doesn't have access to the internet, you can
@@ -52,8 +52,8 @@ To upgrade DTR you use the `dockerhubenterprise/dtr upgrade` command.
 
     ```bash
     $ docker run -it --rm \
-      dockerhubenterprise/dtr upgrade \
-        --ucp-insecure-tls
+      docker/dtr:<version> upgrade \
+      --ucp-insecure-tls
     ```
 
     By default the upgrade command runs in interactive mode and prompts you for

@@ -1,7 +1,7 @@
 <!--[metadata]>
 +++
 title = "migrate"
-description = "Learn about the options available on the dockerhubenterprise/dtr image."
+description = "Learn about the options available on the docker/dtr image."
 keywords = ["docker, dtr, install, uninstall, configure"]
 [menu.main]
 parent="dtr_menu_reference"
@@ -9,15 +9,15 @@ identifier="dtr_reference_migrate"
 +++
 <![end-metadata]-->
 
-# dockerhubenterprise/dtr migrate
+# docker/dtr migrate
 
 Migrate configurations, accounts, and repository metadata from DTR 1.4.3 to 2.0.
-Only available in `dockerhubenterprise/dtr` version 2.0.x.
+Only available in `docker/dtr` version 2.0.x.
 
 ## Usage
 
 ```bash
-$ docker run -it --rm dockerhubenterprise/dtr \
+$ docker run -it --rm docker/dtr \
     migrate [command options]
 ```
 

@@ -1,7 +1,7 @@
 <!--[metadata]>
 +++
-title = "dockerhubenterprise/dtr image reference"
-description = "Learn about the commands available in the dockerhubenterprise/dtr image."
+title = "docker/dtr image reference"
+description = "Learn about the commands available in the docker/dtr image."
 keywords = ["docker, dtr, install, uninstall, configure"]
 type = "menu"
 [menu.main]
