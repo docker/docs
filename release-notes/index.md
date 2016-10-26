@@ -18,7 +18,7 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](../installation/upgrade-major.md), to
 upgrade your installation to the latest release.
 
-## Version 2.0 Beta 2
+## Version 2.0 Beta 3
 
 (24 Oct 2016)
 
