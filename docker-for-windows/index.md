@@ -52,15 +52,17 @@ If you have not already done so, please install Docker for Windows. You can down
 </table>
 
 >**Important Notes:**
-  - Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education
-    (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please
-    see [What to know before you install](index.md#what-to-know-before-you-install)
-    for a full list of prerequisites.
-  - You can switch between beta and stable versions, but you must have only one
-    app installed at a time. Also, you will need to save images and export
-    containers you want to keep before uninstalling the current version before
-    installing another. For more about this, see the
-    [FAQs about beta and stable channels](faqs.md#questions-about-stable-and-beta-channels).
+>
+>- Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education
+>  (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please
+>  see [What to know before you install](index.md#what-to-know-before-you-install)
+>  for a full list of prerequisites.
+>
+>- You can switch between beta and stable versions, but you must have only one
+>   app installed at a time. Also, you will need to save images and export
+>  containers you want to keep before uninstalling the current version before
+>  installing another. For more about this, see the
+>  [FAQs about beta and stable channels](faqs.md#questions-about-stable-and-beta-channels).
 
 ##  What to know before you install
 
