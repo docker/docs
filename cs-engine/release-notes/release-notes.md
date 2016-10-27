@@ -30,13 +30,13 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
-## CS Engine 1.12.1-cs3
+## CS Engine 1.12.3-cs3
 (27 Oct 2016)
 
 Refer to the [detailed list](https://github.com/docker/docker/releases) of all
-changes since the release of CS Engine 1.12.1-cs2.
+changes since the release of CS Engine 1.12.2-cs2.
 
-## CS Engine 1.12.1-cs2
+## CS Engine 1.12.2-cs2
 (13 Oct 2016)
 
 Refer to the [detailed list](https://github.com/docker/docker/releases) of all
