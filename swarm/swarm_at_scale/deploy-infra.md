@@ -46,7 +46,7 @@ actual value.
 ## Task 1. Create the keystore server
 
 To enable a Docker container network and Swarm discovery, you must
-supply deploy a key-value store.  As a discovery backend, the keystore
+deploy (or supply) a key-value store.  As a discovery backend, the key-value store
 maintains an up-to-date list of cluster members and shares that list with the
 Swarm manager. The Swarm manager uses this list to assign tasks to the nodes.
 
@@ -54,7 +54,7 @@ An overlay network requires a key-value store. The key-value store holds
 information about the network state which includes discovery, networks,
 endpoints, IP addresses, and more.
 
-Several different backends are supported. This example uses <a
+[Several different backends are supported](../discovery.md). This example uses <a
 href="https://www.consul.io/" target="blank">Consul</a> container.
 
 1. Create a "machine" named `keystore`.
@@ -436,5 +436,5 @@ commands below, notice the label you are applying to each node.
 
 ## Next Step
 
-Your key-store, load balancer, and Swarm cluster infrastructure is up. You are
+Your key-value store, load balancer, and Swarm cluster infrastructure are up. You are
 ready to [build and run the voting application](deploy-app.md) on it.
