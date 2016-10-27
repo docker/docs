@@ -25,7 +25,6 @@ Please read through these topics on how to get started. To **give us your feedba
 
 >**Already have Docker for Windows?** If you already have Docker for Windows installed, and are ready to get started, skip over to the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
-
 ## Download Docker for Windows
 
 If you have not already done so, please install Docker for Windows. You can download installers from the stable or beta channel.  For more about stable and beta channels, see the [FAQs](faqs.md#questions-about-stable-and-beta-channels).
@@ -52,27 +51,48 @@ If you have not already done so, please install Docker for Windows. You can down
   </tr>
 </table>
 
->**Important Notes**:
+>**Important Notes:**
 >
->* Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please see [What to know before you install](index.md#what-to-know-before-you-install) for a full list of prerequisites.
+>- Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education
+>  (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please
+>  see [What to know before you install](index.md#what-to-know-before-you-install)
+>  for a full list of prerequisites.
 >
->* <font color="#CC3366">You can switch between beta and stable versions, but <i>you must have only one app installed at a time</i>.</font> Also, you will need to save images and export containers you want to keep before uninstalling the current version before installing another. For more about this, see the [FAQs about beta and stable channels](faqs.md#questions-about-stable-and-beta-channels).
+>- You can switch between beta and stable versions, but you must have only one
+>   app installed at a time. Also, you will need to save images and export
+>  containers you want to keep before uninstalling the current version before
+>  installing another. For more about this, see the
+>  [FAQs about beta and stable channels](faqs.md#questions-about-stable-and-beta-channels).
 
 ##  What to know before you install
 
 * **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run. After Hyper-V is enabled, VirtualBox will no longer work, but any VirtualBox VM images will remain. VirtualBox VMs created with `docker-machine` (including the `default` one typically created during Toolbox install) will no longer start. These VMs cannot be used side-by-side with Docker for Windows. However, you can still use `docker-machine` to manage remote VMs.
-
+<p />
 * The current version of Docker for Windows runs on 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later). In the future we will support more versions of Windows 10.
-
+<p />
 * Containers and images created with Docker for Windows are shared between all user accounts on machines where it is installed. This is because all Windows accounts will use the same VM to build and run containers. In the future, Docker for Windows will better isolate user content.
-
-* The Hyper-V package must be enabled for Docker for Windows to work. The Docker for Windows installer will enable it for you, if needed. (This requires a reboot).
-
-  >**Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of Hyper-V.
-
+<p />
+* The Hyper-V package must be enabled for Docker for Windows to work. The Docker for Windows installer will enable it for you, if needed. (This requires a reboot). If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of Hyper-V.
+<p />
 * Virtualization must be enabled. Typically, virtualization is enabled by default. (Note that this is different from having Hyper-V enabled.) For more detail see [Virtualization must be enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
+<br><br>
+* **What the Docker for Windows install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+<p />
+* You can run **Docker on Windows Server 16 and Windows 10** in two different ways:
 
-* **What the install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+  * You can [install a native Docker  binary](https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start_windows_10)
+  which allows you to develop and run Windows containers natively. However, if you
+  install Docker this way, you cannot develop or run Linux containers.  If you try to run a Linux container on the native Docker daemon, an error occurs:
+
+    ```no-highlight
+    C:\Program Files\Docker\docker.exe:
+     image operating system "linux" cannot be used on this platform.
+     See 'C:\Program Files\Docker\docker.exe run --help'.
+     ```
+
+  * You can [install Docker for Windows](#step-1-install-docker-for-windows),
+    which allows you to develop and run Windows containers natively, or develop
+    and run Linux containers using Hyper-V. This is the best of both worlds.
 
 ## Step 1. Install Docker for Windows
 
