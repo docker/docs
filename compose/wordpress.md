@@ -62,7 +62,7 @@ with Docker containers. This quick-start guide demonstrates how to use Compose t
            WORDPRESS_DB_PASSWORD: wordpress
     ```
 
-    >**NOTE**: The folder `./.data/db` will be automatically created in the project directory
+    **NOTE**: The folder `./.data/db` will be automatically created in the project directory
     alongside the `docker-compose.yml` which will persist any updates made by wordpress to the
     database.
 
