@@ -214,7 +214,7 @@ lo        Link encap:Local Loopback
           RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
 ```
 
-Then use `ping`to send three ICMP requests and test the connectivity of the
+Then use `ping` to send three ICMP requests and test the connectivity of the
 containers on this `bridge` network.
 
 ```
