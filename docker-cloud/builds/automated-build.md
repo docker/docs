@@ -105,6 +105,24 @@ run an initial test.
     Docker Cloud on every push. Only pushes to branches that are listed as the
     source for one or more tags will trigger a build.
 
+### Environment variables for builds
+
+You can set the values for environment variables used in your build processes
+when you configure an automated build. Add your build environment variables by
+clicking the plus sign next to the **Build environment variables** section, and
+then entering a variable name and the value.
+
+When you set variable values from the Docker Cloud UI, they can be used by the
+commands you set in `hooks` files, but they are stored so that only users who
+have `admin` access to the Docker Cloud repository can see their values. This
+means you can use them to safely store access tokens or other information that
+should remain secret.
+
+> **Note**: The variables set on the build configuration screen are used during
+the build processes _only_ and should not be confused with the environment
+values used by your service (for example to create service links).
+
+
 ## Check your active builds
 
 1. To view active builds, go to the repository view and click **Timeline**.
@@ -188,7 +206,7 @@ To work around this, you can set up your automated build using the `SSH_PRIVATE`
     This step is optional, but allows you to revoke the build-only keypair without removing other access. <!-- (TODO: Link to instructions for GH & BB ) -->
 2. Copy the private half of the keypair to your clipboard.
 3. In Docker Cloud, navigate to the build page for the repository that has linked private submodules. (If necessary, follow the steps [here](automated-build.md#configure-automated-build-settings) to configure the automated build.)
-4. At the bottom of the screen, click the plus sign ( **+** ) next to **Environment Variables**.
+4. At the bottom of the screen, click the plus sign ( **+** ) next to **Build Environment variables**.
 5. Enter `SSH_PRIVATE` as the name for the new environment variable.
 6. Paste the private half of the keypair into the **Value** field.
 7. Click **Save**, or **Save and Build** to validate that the build now completes.
