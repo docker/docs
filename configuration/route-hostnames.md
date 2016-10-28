@@ -59,14 +59,17 @@ if there is only one port published)
 
 Examples:
 
-A service based on the image `mywebserver` with a webserver running on port
+A service based on the image `myimage/mywebserver:latest` with a webserver running on port
 8080 can be routed to `http://foo.example.com` can be created using the
 following:
 
 ```sh
-$ docker service create -p 80:8080 \
+$ docker service create \
+  -p 8080 \
   --network ucp-hrm \
-  --label com.docker.ucp.mesh.http=http://foo.example.com mywebserver
+  --label com.docker.ucp.mesh.http=8080=http://foo.example.com \
+  --name myservice \
+  myimage/mywebserver:latest
 ```
 
 The HTTP Routing Mesh checks for new services every 60 seconds, so it may take
