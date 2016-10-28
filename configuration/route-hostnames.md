@@ -69,6 +69,9 @@ $ docker service create -p 80:8080 \
   --label com.docker.ucp.mesh.http=http://foo.example.com mywebserver
 ```
 
+The HTTP Routing Mesh checks for new services every 60 seconds, so it may take
+up to one minute for configuration to complete.
+
 Next, you will need to route the referenced domains to the HTTP routing mesh.
 
 ## Route domains to the HTTP routing mesh
@@ -84,6 +87,13 @@ the HTTP routing mesh are disconnected from the **ucp-hrm** network.
 
 Next, go to the **UCP web UI**, navigate to the **Settings** page, and click
 the **Routing Mesh** tab. Uncheck the checkbox to disable the HTTP routing mesh.
+
+## Access Control
+
+To route a domain to the HTTP Routing Mesh, the service must be on the
+`ucp-hrm` network which has the `ucp-hrm` access label. Adding a service to
+this network either requires administrator-level access, or the user must be in
+a group that gives them `ucp-hrm` access.
 
 ## Troubleshoot
 
