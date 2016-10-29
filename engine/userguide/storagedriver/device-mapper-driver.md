@@ -322,7 +322,7 @@ assumes that the Docker daemon is in the `stopped` state.
     Now that your storage is configured, configure the Docker daemon to use it. There are two ways to do this. You can set options on the command line if you start the daemon there:
 
     ```bash
-    --storage-driver=devicemapper --storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool-tpool --storage-opt=dm.use_deferred_removal=true --storage-opt=dm.use_deferred_deletion=true
+    --storage-driver=devicemapper --storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool --storage-opt=dm.use_deferred_removal=true --storage-opt=dm.use_deferred_deletion=true
     ```
 
     You can also set them for startup in the `daemon.json` configuration, for example:
