@@ -265,6 +265,7 @@ The Amazon CloudWatch Logs logging driver supports the following options:
 --log-opt awslogs-region=<aws_region>
 --log-opt awslogs-group=<log_group_name>
 --log-opt awslogs-stream=<log_stream_name>
+--log-opt tag="docker.{{.Name}}" \
 ```
 
 For detailed information on working with this logging driver, see [the awslogs
