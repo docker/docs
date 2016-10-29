@@ -58,6 +58,17 @@ specified, the container ID is used as the log stream.
 > at a time.  Using the same log stream for multiple containers concurrently
 > can cause reduced logging performance.
 
+### tag
+
+Specify tag as an alternative to the AWS logstream name, which interpret some markup, ex `{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`
+
+By default, Docker uses the first 12 characters of the container ID to tag log messages.
+Refer to the [log tag option documentation](log_tags.md) for customizing
+the log tag format.
+
+> **Note:**
+> `awslogs-stream` will **always** overwrite the `tag` specified.
+
 ## Credentials
 
 You must provide AWS credentials to the Docker daemon to use the `awslogs`
