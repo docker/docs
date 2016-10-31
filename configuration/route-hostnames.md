@@ -83,7 +83,7 @@ The HTTP routing mesh uses the `Host` HTTP header to determine which service
 should receive a particular HTTP request. This is typically done using DNS and
 pointing one or more domains to one or more nodes in the UCP cluster.
 
-## Disable the HTTP routing Mesh
+## Disable the HTTP routing mesh
 
 To disable the HTTP routing mesh, first ensure that all services that are using
 the HTTP routing mesh are disconnected from the **ucp-hrm** network.

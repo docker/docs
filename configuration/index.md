@@ -14,7 +14,6 @@ weight=50
 
 This section includes the following topics:
 
-* [Set up container networking](multi-host-networking.md)
 * [Integrate with Docker Trusted Registry](dtr-integration.md)
 * [Configure UCP logging](configure-logs.md)
 * [Route hostnames to services](route-hostnames.md)

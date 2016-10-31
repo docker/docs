@@ -1,5 +1,6 @@
 <!--[metadata]>
 +++
+aliases = [ "/ucp/upgrade-ucp/"]
 title = "Upgrade to UCP 2.0"
 description = "Learn how to upgrade Docker Universal Control Plane with minimal impact to your users."
 keywords = ["Docker, UCP, upgrade, update"]
@@ -12,16 +13,11 @@ weight=61
 
 # Upgrade to UCP 2.0
 
-<!-- beta: remove after this goes to GA -->
-
-> You can't upgrade from one beta version to another. To test the latest
-> beta version, start by uninstalling the previous version.
-
 This page guides you in upgrading Docker Universal Control Plane (UCP) to
 version 2.0.
 
 Before upgrading to a new version of UCP, check the
-[release notes](../release-notes/index.md) for the version you are upgrading to.
+[release notes](../release-notes.md) for the version you are upgrading to.
 There you'll find information about the new features, breaking changes, and
 other relevant information for upgrading to a particular version.
 
@@ -113,4 +109,4 @@ nodes.
 
 ## Where to go next
 
-* [UCP release notes](../release-notes/index.md)
+* [UCP release notes](../release-notes.md)

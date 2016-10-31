@@ -48,8 +48,8 @@ $ curl -s \
     ${KV_URL}/v2/keys | jq "."
 ```
 
-To learn more about the key-value store API, check the
-[etcd official documentation](https://coreos.com/etcd/docs/latest/api.html).
+To learn more about the key-value store rest API check the
+[etcd official documentation](https://coreos.com/etcd/docs/latest/).
 
 
 ## Using a CLI client
@@ -77,59 +77,8 @@ cluster is healthy
 
 On failure the command exits with an error code, and no output.
 
-### Show the current value of a key
-
-```bash
-$ docker exec -it ucp-kv etcdctl \
-        --endpoint https://127.0.0.1:2379 \
-        --ca-file /etc/docker/ssl/ca.pem \
-        --cert-file /etc/docker/ssl/cert.pem \
-        --key-file /etc/docker/ssl/key.pem \
-        ls /docker/nodes
-
-/docker/nodes/192.168.122.196:12376
-/docker/nodes/192.168.122.64:12376
-/docker/nodes/192.168.122.223:12376
-```
-
-
-### List the current members of the cluster
-
-```bash
-$ docker exec -it ucp-kv etcdctl \
-        --endpoint https://127.0.0.1:2379 \
-        --ca-file /etc/docker/ssl/ca.pem \
-        --cert-file /etc/docker/ssl/cert.pem \
-        --key-file /etc/docker/ssl/key.pem \
-        member list
-
-16c9ae1872e8b1f0: name=orca-kv-192.168.122.64 peerURLs=https://192.168.122.64:12380 clientURLs=https://192.168.122.64:12379
-c5a24cfdb4263e72: name=orca-kv-192.168.122.196 peerURLs=https://192.168.122.196:12380 clientURLs=https://192.168.122.196:12379
-ca3c1bb18f1b30bf: name=orca-kv-192.168.122.223 peerURLs=https://192.168.122.223:12380 clientURLs=https://192.168.122.223:12379
-```
-
-### Remove a failed member
-
-As long as your cluster is still functional and has not lost quorum
-(more than (n/2)-1 nodes failed) you can use the following command to
-remove the failed members.
-
-```bash
-$ docker exec -it ucp-kv etcdctl \
-        --endpoint https://127.0.0.1:2379 \
-        --ca-file /etc/docker/ssl/ca.pem \
-        --cert-file /etc/docker/ssl/cert.pem \
-        --key-file /etc/docker/ssl/key.pem \
-        member remove c5a24cfdb4263e72
-
-Removed member c5a24cfdb4263e72 from cluster
-```
-
-If your cluser has lost too many members, etcd refuses to remove
-members using this tool. Instead you must use the UCP backup and restore
-functionality to reset your cluster to a single controller node cluster.
-[Learn more about backups and disaster recovery](../high-availability/backups-and-disaster-recovery.md).
-
+To learn more about the `etcdctl` utility, check the
+[etcd official documentation](https://coreos.com/etcd/docs/latest/).
 
 ## Where to go next
 

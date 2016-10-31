@@ -19,6 +19,5 @@ This section includes the following topics:
 * [Install UCP for production](install-production.md)
 * [Install offline](install-offline.md)
 * [License UCP](license.md)
-* [Upgrade to UCP 1.1](upgrade-minor.md)
-* [Upgrade to UCP 2.0](upgrade-major.md)
+* [Upgrade to UCP 2.0](upgrade.md)
 * [Uninstall UCP](uninstall.md)

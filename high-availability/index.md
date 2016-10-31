@@ -15,5 +15,4 @@ weight=60
 This section includes the following topics:
 
 * [Set up high availability](set-up-high-availability.md)
-* [Replicate CAs for high availability](replicate-cas.md)
 * [Backups and disaster recovery](backups-and-disaster-recovery.md)
