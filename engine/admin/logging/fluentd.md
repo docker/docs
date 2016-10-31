@@ -1,6 +1,7 @@
 ---
 aliases:
 - /engine/reference/logging/fluentd/
+- /reference/logging/fluentd/
 description: Describes how to use the fluentd logging driver.
 keywords:
 - Fluentd, docker, logging, driver
