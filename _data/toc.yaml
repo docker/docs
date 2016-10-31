@@ -25,8 +25,6 @@ toc:
         title: Installation on Arch Linux
       - path: /engine/installation/linux/cruxlinux/
         title: Installation on CRUX Linux
-      - path: /engine/installation/linux/frugalware/
-        title: Installation on FrugalWare
       - path: /engine/installation/linux/gentoolinux/
         title: Installation on Gentoo
       - path: /engine/installation/linux/oracle/
