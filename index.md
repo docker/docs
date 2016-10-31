@@ -1,12 +1,12 @@
 ---
-description: Home page for Docker's documentation
+title: Docker documentation
+description: Learn how to build, ship, and run the next generation of distributed applications
 keywords:
 - Docker, documentation, manual, guide, reference, api
-title: Welcome to the Docs
 layout: docs
 ---
 
-# Welcome to the Docs
+# What is Docker?
 
 {% include content/docker_elevator_pitch.md %}
 
