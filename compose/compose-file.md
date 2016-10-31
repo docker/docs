@@ -1144,10 +1144,16 @@ port mapping is `:5000` (which is of course an invalid port mapping, and will
 result in an error when attempting to create the container).
 
 In the case of environment variables that are not set, it is also possible to
-define default values like so: `${VARIABLE:-default}`. In this case, Compose
-will use the default value if `VARIABLE` is *unset* or *empty*. If you need
-the substitution to occur only if `VARIABLE` is *empty*, use this syntax:
-`${VARIABLE-default}`.
+define default values  using one of the following syntax variants:
+
+
+* To provide a default value that will be used if `VARIABLE` is either *unset* or *empty*:
+
+  `${VARIABLE:-default}`
+
+* To provide a default value only if `VARIABLE` is *empty*:
+
+  `${VARIABLE-default}`
 
 Both `$VARIABLE` and `${VARIABLE}` syntax are supported. Extended
 shell-style features, such as `${VARIABLE/foo/bar}`, are not
