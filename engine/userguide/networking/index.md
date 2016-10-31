@@ -392,6 +392,21 @@ A bridge network is useful in cases where you want to run a relatively small
 network on a single host. You can, however, create significantly larger networks
 by creating an `overlay` network.
 
+### The `docker_gwbridge` network
+
+This is a local bridge network which is automatically created by docker.
+When a container is being connected to a network which cannot provide external connectivity
+(and none of the networks to which the container is already connected can provide external
+connectivity), docker also automatically connects the container to the `docker_gwbridge` network.
+So that the container can reach and can be reached from the internet. 
+
+This network is created on demand, but if it is already present docker uses it as is.
+Therefore, if user needs to control the subnet assignment for this network,
+he can instead manually create the network with the following command:
+
+	$ docker network create --subnet 172.30.0.0/16 --opt com.docker.network.bridge.name=docker_gwbridge --opt com.docker.network.bridge.enable_icc=false docker_gwbridge
+
+An example of network which needs the `docker_gwbridge` assistance is the `overlay` network.
 
 ### An overlay network with Docker Engine swarm mode
 
