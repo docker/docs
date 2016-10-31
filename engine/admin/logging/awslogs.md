@@ -70,7 +70,7 @@ See the [tag option documentation](log_tags.md) for details on all supported tem
 
 When both `awslogs-stream` and `tag` are specified, the value supplied for `awslogs-stream` will override the template specified with `tag`.
 
-By default, the `{{.FullID}}` template will be used to tag log messages.
+If not specified, the container ID is used as the log stream.
 
 
 ## Credentials
