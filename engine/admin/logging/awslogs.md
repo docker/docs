@@ -65,9 +65,7 @@ See the [tag option documentation](log_tags.md) for details on all supported tem
 
 When both `awslogs-stream` and `tag` are specified, the value supplied for `awslogs-stream` will override the template specified with `tag`.
 
-By default, Docker uses the first 12 characters of the container ID to tag log messages.
-Refer to the [log tag option documentation](log_tags.md) for customizing
-the log tag format.
+By default, the `{{.FullID}}` template will be used to tag log messages.
 
 
 ## Credentials
