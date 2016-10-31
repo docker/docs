@@ -65,14 +65,15 @@ specified, the container ID is used as the log stream.
 
 ### tag
 
-Specify tag as an alternative to the AWS logstream name, which interpret some markup, ex `{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`
+Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets template markup (e.g., `{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`). 
+See the [tag option documentation](log_tags.md) for details on all supported template substitutions.
+
+When both `awslogs-stream` and `tag` are specified, the value supplied for `awslogs-stream` will override the template specified with `tag`.
 
 By default, Docker uses the first 12 characters of the container ID to tag log messages.
 Refer to the [log tag option documentation](log_tags.md) for customizing
 the log tag format.
 
-> **Note:**
-> `awslogs-stream` will **always** overwrite the `tag` specified.
 
 ## Credentials
 
