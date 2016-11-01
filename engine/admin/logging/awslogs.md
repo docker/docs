@@ -60,7 +60,7 @@ specified, the container ID is used as the log stream.
 
 ### tag
 
-Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets template markup (e.g., `{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`). 
+Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets template markup (e.g., `{% raw %}{{.ID}}{% endraw %}`, `{% raw %}{{.FullID}}{% endraw %}` or `{% raw %}{{.Name}}{% endraw %}` `{% raw %}docker.{{.ID}}{% endraw %}`). 
 See the [tag option documentation](log_tags.md) for details on all supported template substitutions.
 
 When both `awslogs-stream` and `tag` are specified, the value supplied for `awslogs-stream` will override the template specified with `tag`.
