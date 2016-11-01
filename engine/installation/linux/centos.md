@@ -154,7 +154,7 @@ learn how to [customize your Systemd Docker daemon options](../../admin/systemd.
 6.  Verify `docker` is installed correctly by running a test image in a container.
 
     ```bash
-    $ sudo docker run hello-world
+    $ sudo docker run --rm hello-world
     ```
 
 If you need to add an HTTP Proxy, set a different directory or partition for the
@@ -198,7 +198,7 @@ To create the `docker` group and add your user:
 5.  Verify that your user is in the docker group by running `docker` without `sudo`.
 
     ```bash
-    $ docker run hello-world
+    $ docker run --rm hello-world
     ```
 
 ## Start the docker daemon at boot
