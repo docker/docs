@@ -22,8 +22,10 @@ A custom certificate is configured by creating a directory under
 `localhost`). All `*.crt` files are added to this directory as CA roots.
 
 > **Note:**
-> In the absence of any root certificate authorities, Docker
-> will use the system default (i.e., host's root CA set).
+> As of docker 1.13, on Linux any root certificates authorities will be merged
+> in with the system defaults (i.e., host's root CA set). Prior to 1.13 and on
+> Windows, the system default certificates will only be used when there are no
+> custom root certificates provided.
 
 The presence of one or more `<filename>.key/cert` pairs indicates to Docker
 that there are custom certificates required for access to the desired
@@ -34,7 +36,7 @@ repository.
 > order. If there is an authentication error (e.g., 403, 404, 5xx, etc.), Docker
 > will continue to try with the next certificate.
 
-The following illustrates a configuration with multiple certs:
+The following illustrates a configuration with custom certificates:
 
 ```
     /etc/docker/certs.d/        <-- Certificate directory
