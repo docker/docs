@@ -8,7 +8,7 @@ layout: docs
 
 # Welcome to the Docker Documentation
 
-{% include content/docker_elevator_pitch.md %}
+{% include xxyx/docker_elevator_pitch.md %}
 
 ## Getting Started
 
