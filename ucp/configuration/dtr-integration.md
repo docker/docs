@@ -63,6 +63,7 @@ certificate used internally by UCP:
     -----END CERTIFICATE-----
     ```
 
+
 3.  Save the result on your local machine.
 
     Copy the resulting certificate to the `ucp-cluster-ca.pem` file,
@@ -161,11 +162,13 @@ node to a private DTR repository.
 2. Use a [UCP client bundle](../access-ucp/cli-based-access.md) to run docker
 commands in the UCP cluster.
 
+
 3.  Pull an image from Docker Hub:
 
     ```bash
     $ docker pull hello-world
     ```
+
 
 4.  Retag the image:
 
@@ -173,11 +176,13 @@ commands in the UCP cluster.
     $ docker tag hello-world:latest $DTR_DOMAIN_NAME/$USERNAME/hello-world:1
     ```
 
+
 5.  Push the image from the UCP node to your private registry:
 
     ```bash
     $ docker push $DTR_DOMAIN_NAME/$USERNAME/hello-world:1
     ```
+
 
 6.  Validate that your image is now stored on DTR.
 
@@ -201,6 +206,7 @@ images from a UCP node to a private DTR repository.
 
 When UCP can't communicate with DTR, you'll get:
 
+
 ```none
 $ docker push dtr/username/hello-world:1
 
@@ -215,6 +221,7 @@ with DTR.
 
 When one of the components is misconfigured, and doesn't trust the root CA
 certificate of the other components, you'll get an error like:
+
 
 ```none
 $ docker push dtr/username/hello-world:1

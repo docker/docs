@@ -71,6 +71,7 @@ Some setups will require manually setting up engine configuration.
 To continue with this procedure, you need to know the host address values you
 used on each controller or node. This is the address used with the `install` or
 `join` subcommands to identify a node. Host addresses are used among the UCP
+
 nodes for network communication.
 
 1. Log into your UCP dashboard as a user with `admin` privileges.
@@ -107,6 +108,7 @@ recover.
 
 To enable the networking feature, do the following.
 
+
 1.  Log into the host running the UCP controller.
 
 2.  Review the `engine-discovery` help.
@@ -114,6 +116,7 @@ To enable the networking feature, do the following.
     ```bash
     $ docker run --rm docker/ucp engine-discovery --help
     ```
+
 
 3.  Leave the UCP processes running.
 
@@ -140,7 +143,7 @@ To enable the networking feature, do the following.
       --controller 192.168.99.106 --controller 192.168.99.116 \
       --host-address 192.168.99.106
       INFO[0000] New configuration established.  Signaling the daemon to load it...
-      INFO[0001] Successfully delivered signal to daemon
+      INFO[0001] Successfully delivered signal to daemon  
     ```
 
     The `host-address` value is the the external address of the node you're
@@ -149,6 +152,7 @@ To enable the networking feature, do the following.
 
     If you specify the `--host-address` flag without an IP, the command attempts
     to discover the address of the current node.  If the command cannot discover
+
     the address, it fails and prompts you to supply it:
 
     ```bash
@@ -162,6 +166,7 @@ To enable the networking feature, do the following.
     examples appear below but keep in mind that on your system, the restart
     operation may differ. Check with your system administrator if you are not
     sure how to restart a daemon. Some example restarts include the following,
+
     keep in mind your installation may be different:
 
     **Ubuntu**:
@@ -176,6 +181,7 @@ To enable the networking feature, do the following.
     $ sudo systemctl daemon-reload
     $ sudo systemctl restart docker.service
     ```
+
 
 6.  Review the Docker logs to check the restart.
 
@@ -194,6 +200,7 @@ To enable the networking feature, do the following.
     ```bash
     $ sudo journalctl -fu docker.service
     ```
+
 
 7.  Verify that you can create and remove a custom network.
 

@@ -139,6 +139,7 @@ root certificates and keys.
 To create a backup of the CAs used on the controller node:
 
 1. Log into the controller node using ssh.
+
 2.  Run the docker/ucp backup command.
 
     ```none
@@ -232,7 +233,7 @@ For each node that you want to add to your UCP cluster:
 1. Log into that node.
 
 2.  Use the join command, to join the node to the cluster:
-    
+
     ```none
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \

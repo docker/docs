@@ -53,6 +53,7 @@ You can also monitor the status of a UCP cluster, using the Docker CLI client.
     If your client certificate bundle is for a non-admin user, you won't have
     permissions to execute all docker commands, or see all information about
     the cluster.
+
 2.  Use the `docker info` command to check the cluster status.
 
     ```bash
@@ -70,6 +71,7 @@ You can also monitor the status of a UCP cluster, using the Docker CLI client.
       └ Swarm Manager: tcp://192.168.99.100:3376
       └ KV: etcd://192.168.99.100:12379
     ```
+
 3.  Check the container logs
 
     With an admin user certificate bundle, you can run docker commands directly
@@ -84,6 +86,7 @@ You can also monitor the status of a UCP cluster, using the Docker CLI client.
     2016-04-18 22:40:51.561682 I | etcdserver: saved snapshot at index 40004
     2016-04-18 22:40:51.561927 I | etcdserver: compacted raft log at 35004
     ```
+
 
 ## Where to go next
 

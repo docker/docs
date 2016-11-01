@@ -10,6 +10,7 @@ menu:
 title: Web-based access
 ---
 
+
 # Web-based access
 
 Docker Universal Control Plane allows you to manage your cluster in a visual
