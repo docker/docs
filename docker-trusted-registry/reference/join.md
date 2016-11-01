@@ -13,6 +13,14 @@ title: join
 
 Add a new replica to an existing DTR cluster
 
+## Usage
+
+```bash
+$ docker run -it --rm docker/dtr \
+   join [command options]
+```
+
+
 ## Description
 
 This command installs DTR on the Docker Engine that runs the command,
