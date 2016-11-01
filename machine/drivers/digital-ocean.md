@@ -32,6 +32,7 @@ Control Panel and pass that to `docker-machine create` with the `--digitalocean-
 -   `--digitalocean-ssh-user`: SSH username.
 -   `--digitalocean-ssh-port`: SSH port.
 -   `--digitalocean-ssh-key-fingerprint`: Use an existing SSH key instead of creating a new one, see [SSH keys](https://developers.digitalocean.com/documentation/v2/#ssh-keys).
+-   `--digitalocean-ssh-key-path`: Path to private SSH key. `--digitalocean-ssh-key-fingerprint` must be provided with this option.
 
 The DigitalOcean driver will use `ubuntu-15-10-x64` as the default image.
 
@@ -50,3 +51,4 @@ The DigitalOcean driver will use `ubuntu-15-10-x64` as the default image.
 | `--digitalocean-ssh-user`           | `DIGITALOCEAN_SSH_USER`           | `root`             |
 | `--digitalocean-ssh-port`           | `DIGITALOCEAN_SSH_PORT`           | 22                 |
 | `--digitalocean-ssh-key-fingerprint`| `DIGITALOCEAN_SSH_KEY_FINGERPRINT`| -                  |
+| `--digitalocean-ssh-key-path`       | `DIGITALOCEAN_SSH_KEY_PATH`       | `~/.ssh/id_rsa`    |
