@@ -193,7 +193,7 @@ see a doubling of performance. This is typical of performance engineering, which
 requires significant effort to analyze slowdowns and develop optimized
 components. We know how we can likely halve the roundtrip time but we haven't
 implemented those improvements yet (more on this below in [What you can
-do](#what-you-can-do)).
+do](osxfs.md#what-you-can-do)).
 
 There is hope for significant performance improvement in the near term despite
 these fundamental communication channel properties, which are difficult to
