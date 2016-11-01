@@ -22,6 +22,7 @@ You can configure UCP for sending logs to a remote logging service:
 
 ![](../images/settings-log.png)
 
+
 ## Example: Setting up an ELK stack
 
 One popular logging stack is composed of Elasticsearch, Logstash and

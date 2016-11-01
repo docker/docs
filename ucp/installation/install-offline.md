@@ -21,11 +21,11 @@ is that instead of pulling the UCP images from Docker Hub, you use a
 computer that is connected to the internet to download a single package with
 all the images. Then you copy that package to the host where you’ll install UCP.
 
-
 1.  Get the UCP package.
 
     Use a computer with internet access to download a single package with all
     Docker Datacenter components:
+
 
     ```none
     $ wget https://packages.docker.com/caas/ucp-1.1.3_dtr-2.0.3.tar.gz -O docker-datacenter.tar.gz

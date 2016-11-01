@@ -54,6 +54,7 @@ the correct ones for you environment.
 >**Note**: The command examples in this page were tested for a macOS environment.
 If you are in another, you may need to adjust to use analogous commands for your environment.
 
+
 ## Step 2. Verify the prerequisites
 
 This example requires that you have:
@@ -72,6 +73,7 @@ In a production environment you would use enterprise-grade hosts instead
 of local VMs. These nodes could be on your company's private network or
 in the cloud. You would also use the Commercially Supported (CS Engine) version
 of Docker Engine required by UCP.
+
 
 Set up the nodes for your evaluation:
 
@@ -134,6 +136,7 @@ you can run them unattended in production.
 Regardless of how you use the `docker/ucp` tool, the default install supplies
 default options for both data volumes and the certificate authority (CA). In a
 production installation you can also optionally:
+
 
 * use the high availability feature
 * customize the port used by the UCP web application

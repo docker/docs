@@ -51,6 +51,7 @@ To replace the server certificates used by UCP, for each controller node:
     $ docker rm replace-certs
     ```
 
+
 3.  Restart the `ucp-controller` container.
 
     To avoid downtime, don't restart all the `ucp-controller` containers of
