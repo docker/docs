@@ -2,13 +2,8 @@
 description: Google Compute Engine driver for machine
 keywords:
 - machine, Google Compute Engine, driver
-menu:
-  main:
-    parent: smn_machine_drivers
 title: Google Compute Engine
 ---
-
-# Google Compute Engine
 
 Create machines on [Google Compute Engine](https://cloud.google.com/compute/).
 You will need a Google account and a project id.

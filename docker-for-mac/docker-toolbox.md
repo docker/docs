@@ -4,15 +4,8 @@ aliases:
 description: Docker for Mac and Docker Toolbox
 keywords:
 - mac, windows, alpha, beta, toolbox, docker-machine, tutorial
-menu:
-  main:
-    identifier: kit-toolbox
-    parent: pinata_mac_menu
-    weight: 2
 title: Docker for Mac vs. Docker Toolbox
 ---
-
-# Docker for Mac vs. Docker Toolbox
 
 If you already have an installation of Docker Toolbox, please read these topics first to learn how Docker for Mac and Docker Toolbox differ, and how they can coexist.
 

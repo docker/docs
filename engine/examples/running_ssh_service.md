@@ -2,13 +2,8 @@
 description: Installing and running an SSHd service on Docker
 keywords:
 - docker, example, package installation,  networking
-menu:
-  main:
-    parent: engine_dockerize
-title: Dockerizing an SSH service
+title: Dockerize an SSH service
 ---
-
-# Dockerizing an SSH daemon service
 
 ## Build an `eg_sshd` image
 

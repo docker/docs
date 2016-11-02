@@ -5,14 +5,8 @@ aliases:
 description: Deploy the app as a Docker Cloud service
 keywords:
 - Python, deploy, Cloud
-menu:
-  main:
-    parent: deploy-app
-    weight: -50
 title: Deploy the app as a Docker Cloud service
 ---
-
-# Deploy the app as a Docker Cloud service
 
 In this step you will deploy the app as a Docker Cloud Service. Remember that a service is a group of containers of the same **image:tag**.
 

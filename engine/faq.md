@@ -4,15 +4,8 @@ aliases:
 description: Most frequently asked questions.
 keywords:
 - faq, questions, documentation,  docker
-menu:
-  main:
-    identifier: engine_faq
-    parent: engine_use
-    weight: 80
-title: FAQ
+title: Docker Engine frequently asked questions (FAQ)
 ---
-
-# Frequently Asked Questions (FAQ)
 
 If you don't see your question here, feel free to submit new ones to
 <docs@docker.com>.  Or, you can fork [the

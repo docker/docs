@@ -4,14 +4,8 @@ aliases:
 description: Data management with Volumes
 keywords:
 - Python, data, management
-menu:
-  main:
-    parent: deploy-app
-    weight: -5
-title: Data management with Volumes
+title: Data management with volumes
 ---
-
-# Data management with Volumes
 
 In the previous step, we set up Redis but didn't provide it a way to store the
 data it's caching. This means that if you redeployed the redis service, or if

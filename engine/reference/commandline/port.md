@@ -4,13 +4,8 @@ aliases:
 description: The port command description and usage
 keywords:
 - port, mapping, container
-menu:
-  main:
-    parent: smn_cli
-title: port
+title: docker port
 ---
-
-# port
 
 ```markdown
 Usage:  docker port CONTAINER [PRIVATE_PORT[/PROTO]]

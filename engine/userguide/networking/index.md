@@ -4,15 +4,8 @@ aliases:
 description: How do we connect docker containers within and across hosts ?
 keywords:
 - Examples, Usage, network, docker, documentation, user guide, multihost, cluster
-menu:
-  main:
-    identifier: networking_index
-    parent: smn_networking
-    weight: -5
 title: Docker container networking
 ---
-
-# Understand Docker container networks
 
 This section provides an overview of the default networking behavior that Docker
 Engine delivers natively. It describes the type of networks created by default

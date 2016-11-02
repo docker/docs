@@ -1,19 +1,11 @@
 ---
 aliases:
 - /ucp/manage/monitor-ucp/
-description: Monitor your Docker Universal Control Plane installation, and learn how
-  to troubleshoot it.
+description: Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it.
 keywords:
 - Docker, UCP, troubleshoot
-menu:
-  main:
-    identifier: ucp_monitor_cluster
-    parent: mn_monitor_ucp
-    weight: 0
 title: Monitor your cluster
 ---
-
-# Monitor your cluster
 
 This article gives you an overview of how to monitor your Docker UCP
 cluster. Here you'll also find the information you need to troubleshoot

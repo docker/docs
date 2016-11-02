@@ -2,15 +2,8 @@
 description: Docker Machine Commands Overview
 keywords:
 - machine, commands
-menu:
-  main:
-    identifier: smn_machine_subcmds
-    parent: workw_machine
-    weight: 80
-title: Command line reference
+title: Docker Machine command-line reference
 ---
-
-# Docker Machine command line reference
 
 -   [active](active.md)
 -   [config](config.md)

@@ -2,15 +2,8 @@
 description: Configuration overview for Docker Trusted Registry
 keywords:
 - docker, documentation, about, technology, understanding, enterprise, hub,  registry
-menu:
-  main:
-    identifier: dtr_configuration
-    parent: workw_dtr_configure
-    weight: 2
 title: Configuration overview
 ---
-
-# Configure overview
 
 When you first install Docker Trusted Registry, you need to configure it. Use
 this overview to see what you can configure.
@@ -34,7 +27,9 @@ Saving changes you've made to settings will restart various services, as follows
 
 ## Docker daemon logs
 
-Both the Trusted Registry and the Docker daemon collect and store log messages. To limit duplication of the Docker daemon logs, add the following parameters in a Trusted Registry CLI to the Docker daemon and then restart the daemon.
+Both the Trusted Registry and the Docker daemon collect and store log messages.
+To limit duplication of the Docker daemon logs, add the following parameters in
+a Trusted Registry CLI to the Docker daemon and then restart the daemon.
 
 `docker daemon --log-opt max-size 100m max-file=1`
 

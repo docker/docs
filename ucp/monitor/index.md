@@ -4,15 +4,8 @@ aliases:
 description: Manage, monitor, troubleshoot
 keywords:
 - manage, monitor, troubleshoot
-menu:
-  main:
-    identifier: mn_monitor_ucp
-    parent: mn_ucp
-    weight: 50
-title: Monitor and troubleshoot
+title: Monitor and troubleshoot UCP
 ---
-
-# Monitor UCP
 
 This section includes the following topics:
 

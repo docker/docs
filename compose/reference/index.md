@@ -2,15 +2,8 @@
 description: Compose CLI reference
 keywords:
 - fig, composition, compose, docker, orchestration, cli,  reference
-menu:
-  main:
-    identifier: smn_compose_cli
-    parent: workw_compose
-    weight: 80
-title: Command-line Reference
+title: Compose command-line reference
 ---
-
-## Compose command-line reference
 
 The following pages describe the usage information for the [docker-compose](overview.md) subcommands. You can also see this information by running `docker-compose [SUBCOMMAND] --help` from the command line.
 

@@ -4,17 +4,9 @@ aliases:
 - /docker-trusted-registry/cs-engine/release-notes/release-notes/
 description: Commercially supported Docker Engine release notes
 keywords:
-- docker, documentation, about, technology, understanding, enterprise, hub, registry,
-  Commercially Supported Docker Engine, release notes
-menu:
-  main:
-    identifier: csengine_release_notes
-    parent: menu_csengine_release_notes
-    weight: 0
-title: CS Engine release notes
+- docker, documentation, about, technology, understanding, enterprise, hub, registry, Commercially Supported Docker Engine, release notes
+title: Commercially Supported Engine release notes
 ---
-
-# Commercially supported Engine release notes
 
 This document describes the latest changes, additions, known issues, and fixes
 for the commercially supported Docker Engine (CS Engine).

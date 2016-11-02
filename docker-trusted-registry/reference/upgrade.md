@@ -2,14 +2,8 @@
 description: Docker Trusted Registry upgrade command reference.
 keywords:
 - docker, registry, restore, upgrade
-menu:
-  main:
-    identifier: dtr_reference_upgrade
-    parent: dtr_menu_reference
-title: upgrade
+title: docker/dtr upgrade
 ---
-
-# docker/dtr upgrade
 
 Upgrade a v2.0.0 or later cluster to this version of DTR
 

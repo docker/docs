@@ -4,14 +4,8 @@ aliases:
 description: Automated tests
 keywords:
 - Automated, testing, repository
-menu:
-  main:
-    parent: builds
-    weight: -50
 title: Automated repository tests
 ---
-
-# Automated repository tests
 
 Docker Cloud can automatically test changes pushed to your source code
 repositories using containers. You can enable `Autotest` on [any Docker Cloud repository](repos.md) to run tests at each push to the source code repository,

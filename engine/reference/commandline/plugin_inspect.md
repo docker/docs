@@ -5,13 +5,8 @@ advisory: experimental
 description: The plugin inspect command description and usage
 keywords:
 - plugin, inspect
-menu:
-  main:
-    parent: smn_cli
-title: plugin inspect
+title: docker plugin inspect (experimental)
 ---
-
-# plugin inspect (experimental)
 
 ```markdown
 Usage:  docker plugin inspect [OPTIONS] PLUGIN [PLUGIN...]

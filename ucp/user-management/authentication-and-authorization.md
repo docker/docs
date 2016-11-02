@@ -5,15 +5,8 @@ aliases:
 description: Learn how to manage permissions in Docker Universal Control Plane.
 keywords:
 - authorization, authentication, users, teams, UCP
-menu:
-  main:
-    identifier: ucp_manage_users
-    parent: mn_ucp_user_management
-    weight: 0
 title: Authentication and authorization
 ---
-
-# Authentication and authorization
 
 With Docker Universal Control Plane you get to control who can create and edit
 resources like images, networks, volumes, and containers in your cluster.

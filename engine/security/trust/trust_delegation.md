@@ -2,13 +2,8 @@
 description: Delegations for content trust
 keywords:
 - trust, security, delegations, keys, repository
-menu:
-  main:
-    parent: smn_content_trust
 title: Delegations for content trust
 ---
-
-# Delegations for content trust
 
 Docker Engine supports the usage of the `targets/releases` delegation as the
 canonical source of a trusted image tag.

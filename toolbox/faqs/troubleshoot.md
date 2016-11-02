@@ -2,14 +2,9 @@
 description: Troubleshooting connectivity and certificate issues
 keywords:
 - beginner, getting started, FAQs, troubleshooting, Docker
-menu:
-  main:
-    parent: workw_toolbox
-    weight: 4
 title: Troubleshooting
 ---
 
-# Troubleshooting
 Typically, the QuickStart works out-of-the-box, but some scenarios can cause problems.
 
 ## Example errors
@@ -143,7 +138,7 @@ You can add your machine addresses as values for a `NO_PROXY` setting, and also 
 
   When you move to a different network (for example, leave the office's corporate network and return home), remove or comment out these proxy settings in `/var/lib/boot2docker/profile` and restart Docker.
 
-#### Create machines manually using --engine env to specify proxy settings  
+#### Create machines manually using --engine env to specify proxy settings
 
 Rather than reconfigure automatically-created machines, you can delete them and create your `default` machine and others manually with the `docker-machine create` command, using the `--engine env` flag to specify the proxy settings you want.
 

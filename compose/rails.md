@@ -2,14 +2,8 @@
 description: Getting started with Docker Compose and Rails
 keywords:
 - documentation, docs,  docker, compose, orchestration, containers
-menu:
-  main:
-    parent: workw_compose
-    weight: 5
-title: 'Quickstart: Compose and Rails'
+title: "Quickstart: Compose and Rails"
 ---
-
-## Quickstart: Docker Compose and Rails
 
 This Quickstart guide will show you how to use Docker Compose to set up and run a Rails/PostgreSQL app. Before starting, you'll need to have [Compose installed](install.md).
 

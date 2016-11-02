@@ -4,13 +4,8 @@ aliases:
 description: The rmi command description and usage
 keywords:
 - remove, image, Docker
-menu:
-  main:
-    parent: smn_cli
-title: rmi
+title: docker rmi
 ---
-
-# rmi
 
 ```markdown
 Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]

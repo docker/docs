@@ -5,14 +5,8 @@ aliases:
 description: Prepare the application
 keywords:
 - Python, prepare, application
-menu:
-  main:
-    parent: deploy-app
-    weight: -70
 title: Prepare the application
 ---
-
-# Prepare the application
 
 In this step, you will prepare a simple application that can be deployed.
 Run the following command to clone the sample application. You can use

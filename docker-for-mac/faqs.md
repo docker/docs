@@ -4,15 +4,8 @@ aliases:
 description: Frequently asked questions
 keywords:
 - mac faqs
-menu:
-  main:
-    identifier: docker-mac-faqs
-    parent: pinata_mac_menu
-    weight: 7
-title: FAQs
+title: Frequently asked questions (FAQ)
 ---
-
-#  Frequently Asked Questions (FAQs)
 
 **Looking for popular FAQs on Docker for Mac?** Check out the [Docker Knowledge Hub](http://success.docker.com/) for knowledge base articles, FAQs, technical support for various subscription levels, and more.
 
@@ -20,7 +13,8 @@ title: FAQs
 
 **Q: How do I get the stable or beta version of Docker for Mac?**
 
-A: Use the download links for the channels given in the topic [Download Docker for Mac](index.md#download-docker-for-mac).
+A: Use the download links for the channels given in the topic [Download Docker
+for Mac](index.md#download-docker-for-mac).
 
 This topic also has more information about the two channels.
 
@@ -34,9 +28,17 @@ A: Two different download channels are available for Docker for Mac:
 
 **Q: Can I switch back and forth between stable and beta versions of Docker for Mac?**
 
-A: Yes, you can switch between versions to try out the betas to see what's new, then go back to stable for other work. However, **you can have only one app installed at a time**. Switching back and forth between stable and beta apps can destabilize your development environment, particularly in cases where you switch from a newer (beta) channel to older (stable).
+A: Yes, you can switch between versions to try out the betas to see what's new,
+then go back to stable for other work. However, **you can have only one app
+installed at a time**. Switching back and forth between stable and beta apps can
+destabilize your development environment, particularly in cases where you switch
+from a newer (beta) channel to older (stable).
 
-For example, containers created with a newer beta version of Docker for Mac may not work after you switch back to stable because they may have been created leveraging beta features that aren't in stable yet. Just keep this in mind as you create and work with beta containers, perhaps in the spirit of a playground space where you are prepared to troubleshoot or start over.
+For example, containers created with a newer beta version of Docker for Mac may
+not work after you switch back to stable because they may have been created
+leveraging beta features that aren't in stable yet. Just keep this in mind as
+you create and work with beta containers, perhaps in the spirit of a playground
+space where you are prepared to troubleshoot or start over.
 
 <font color="#CC3366">To safely switch between beta and stable versions be sure to save images and export the containers you need, then uninstall the current version before installing another. The workflow is described in more detail below.</font><br>
 

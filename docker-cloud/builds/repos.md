@@ -2,14 +2,8 @@
 description: Create and edit Docker Cloud repositories
 keywords:
 - Docker Cloud repositories, automated, build, images
-menu:
-  main:
-    parent: builds
-    weight: -70
 title: Docker Cloud repositories
 ---
-
-# Docker Cloud repositories
 
 Repositories in Docker Cloud store your Docker images. You can create
 repositories and manually [push images](push-images.md) using `docker push`, or

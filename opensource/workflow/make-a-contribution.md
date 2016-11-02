@@ -2,13 +2,8 @@
 description: Explains basic workflow for Docker contributions
 keywords:
 - contribute, maintainers, review, workflow,  process
-menu:
-  main:
-    parent: smn_workflow
 title: Understand how to contribute
 ---
-
-# Understand how to contribute
 
 Contributing is a process where you work with Docker maintainers and the
 community to improve Docker. The maintainers are experienced contributors

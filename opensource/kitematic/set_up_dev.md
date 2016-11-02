@@ -2,14 +2,8 @@
 description: Explains how to find a Kitematic issue
 keywords:
 - Kitematic, open source, contribute, contributor, tour, development
-menu:
-  main:
-    parent: smn_kitematic_contrib
-    weight: 3
 title: Set up for Kitematic development
 ---
-
-# Set up for Kitematic development
 
 Kitematic is built on top of:
 

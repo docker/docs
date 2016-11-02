@@ -2,14 +2,8 @@
 description: Stream a tar file on stdin containing all local UCP data volumes.
 keywords:
 - docker, ucp, backup, restore
-menu:
-  main:
-    identifier: ucp_ref_restore
-    parent: ucp_ref
-title: restore
+title: docker/ucp restore
 ---
-
-# docker/ucp id
 
 Stream a tar file on stdin containing all local UCP data volumes.
 

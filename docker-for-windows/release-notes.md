@@ -4,21 +4,18 @@ aliases:
 description: Change log / release notes per release
 keywords:
 - pinata, alpha, tutorial
-menu:
-  main:
-    identifier: docker-win-relnotes
-    parent: pinata_win_menu
-    weight: 7
-title: Release Notes
+title: Docker for Windows Release notes
 ---
 
-# Docker for Windows Release Notes
+Here are the main improvements and issues per release, starting with the current
+release. The documentation is always updated for each release.
 
-Here are the main improvements and issues per release, starting with the current release. The documentation is always updated for each release.
+For system requirements, please see the Getting Started topic on [What to know
+before you install](index.md#what-to-know-before-you-install).
 
-For system requirements, please see the Getting Started topic on [What to know before you install](index.md#what-to-know-before-you-install).
-
-Release notes for _stable_ and _beta_ releases are listed below. You can learn about both kinds of releases, and download stable and beta product installers at [Download Docker for Windows](index.md#download-docker-for-windows).
+Release notes for _stable_ and _beta_ releases are listed below. You can learn
+about both kinds of releases, and download stable and beta product installers at
+[Download Docker for Windows](index.md#download-docker-for-windows).
 
 * [Stable Release Notes](release-notes.md#stable-release-notes)
 * [Beta Release Notes](release-notes.md#beta-release-notes)

@@ -2,14 +2,8 @@
 description: Forces running containers to stop.
 keywords:
 - fig, composition, compose, docker, orchestration, cli,  kill
-menu:
-  main:
-    identifier: kill.compose
-    parent: smn_compose_cli
-title: kill
+title: docker-compose kill
 ---
-
-# kill
 
 ```
 Usage: kill [options] [SERVICE...]

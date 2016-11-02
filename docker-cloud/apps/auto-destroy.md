@@ -4,13 +4,8 @@ aliases:
 description: Autodestroy
 keywords:
 - Autodestroy, service, terminate, container
-menu:
-  main:
-    parent: apps
-title: Automatic container destroy
+title: Destroy containers automatically
 ---
-
-# Autodestroy
 
 When enabled on a service, **Autodestroy**  automatically terminates containers
 when they stop. **This destroys all data in the container on stop.** This is

@@ -4,13 +4,8 @@ aliases:
 description: The import command description and usage
 keywords:
 - import, file, system, container
-menu:
-  main:
-    parent: smn_cli
-title: import
+title: docker import
 ---
-
-# import
 
 ```markdown
 Usage:  docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]

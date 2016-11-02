@@ -2,14 +2,8 @@
 description: Explains workflows for refactor and design proposals
 keywords:
 - contribute, project, design, refactor,  proposal
-menu:
-  main:
-    parent: smn_workflow
-    weight: 6
 title: Advanced contributing
 ---
-
-# Advanced contributing
 
 In this section, you learn about the more advanced contributions you can make.
 They are advanced because they have a more involved workflow or require greater
@@ -84,7 +78,7 @@ The following provides greater detail on the process:
 
 4. Fork `docker/docker` and clone the repo to your local host.
 
-5. Create a new Markdown file in the area you wish to change.  
+5. Create a new Markdown file in the area you wish to change.
 
     For example, if you want to redesign our daemon create a new file under the
     `daemon/` folder.

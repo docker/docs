@@ -4,13 +4,8 @@ aliases:
 description: The diff command description and usage
 keywords:
 - list, changed, files, container
-menu:
-  main:
-    parent: smn_cli
-title: diff
+title: docker diff
 ---
-
-# diff
 
 ```markdown
 Usage:  docker diff CONTAINER

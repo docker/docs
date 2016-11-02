@@ -1,17 +1,9 @@
 ---
-description: Learn how to configure Docker Universal Control Plane to use your own
-  certificates.
+description: Learn how to configure Docker Universal Control Plane to use your own certificates.
 keywords:
 - Universal Control Plane, UCP, certificate, authentiation, tls
-menu:
-  main:
-    identifier: ucp_configure_certs
-    parent: mn_ucp_configuration
-    weight: 0
 title: Use externally-signed certificates
 ---
-
-# Use externally-signed certificates
 
 Docker Universal Control Plane uses TLS to encrypt the traffic between users
 and your cluster. By default this is done using self-signed certificates.

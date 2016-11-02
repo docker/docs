@@ -2,13 +2,8 @@
 description: How to use Compose and Swarm together to deploy apps to multi-host clusters
 keywords:
 - documentation, docs,  docker, compose, orchestration, containers, swarm
-menu:
-  main:
-    parent: workw_compose
-title: Using Compose with Swarm
+title: Use Compose with Swarm
 ---
-
-# Using Compose with Swarm
 
 Docker Compose and [Docker Swarm](/swarm/overview.md) aim to have full integration, meaning
 you can point a Compose app at a Swarm cluster and have it all just work as if

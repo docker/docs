@@ -2,15 +2,8 @@
 description: Introducing key concepts for Docker Engine swarm mode
 keywords:
 - docker, container, cluster, swarm mode
-menu:
-  main:
-    identifier: swarm-mode-concepts
-    parent: engine_swarm
-    weight: "2"
 title: Swarm mode key concepts
 ---
-
-# Swarm mode key concepts
 
 This topic introduces some of the concepts unique to the cluster management and
 orchestration features of Docker Engine 1.12.

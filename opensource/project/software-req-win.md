@@ -2,14 +2,8 @@
 description: How to set up a server to test Docker Windows client
 keywords:
 - development, inception, container, image Dockerfile, dependencies, Go, artifacts,  windows
-menu:
-  main:
-    parent: smn_engine_contrib
-    weight: 3
-title: Set up for development on Windows
+title: Get the required software for Windows
 ---
-
-# Get the required software for Windows
 
 This page explains how to get the software you need to use a Windows Server
 2012 or Windows 8 machine for Docker development. Before you begin contributing

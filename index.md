@@ -6,8 +6,6 @@ title: Welcome to the Docs
 layout: docs
 ---
 
-# Welcome to the Docs
-
 {% include content/docker_elevator_pitch.md %}
 
 {% include content/typical_docker_workflow.md %}

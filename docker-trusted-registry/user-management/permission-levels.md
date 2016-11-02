@@ -2,15 +2,8 @@
 description: Learn about the permission levels available in Docker Trusted Registry.
 keywords:
 - docker, registry, security, permissions
-menu:
-  main:
-    identifier: dtr-permission-levels
-    parent: dtr_menu_user_management
-    weight: 40
 title: Permission levels
 ---
-
-# Permission levels
 
 Docker Trusted Registry allows you to define fine-grain permissions over image
 repositories.

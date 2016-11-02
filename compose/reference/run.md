@@ -2,14 +2,8 @@
 description: Runs a one-off command on a service.
 keywords:
 - fig, composition, compose, docker, orchestration, cli,  run
-menu:
-  main:
-    identifier: run.compose
-    parent: smn_compose_cli
-title: run
+title: docker-compose run
 ---
-
-# run
 
 ```
 Usage: run [options] [-e KEY=VAL...] SERVICE [COMMAND] [ARGS...]

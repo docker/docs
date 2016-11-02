@@ -2,13 +2,8 @@
 description: Docker Governance Advisory Board
 keywords:
 - governance, board, members, explained
-menu:
-  main:
-    parent: smn_govern
-title: Docker Governance Advisory Board
+title: Docker Governance Advisory Board: June 2015 version
 ---
-
-# Docker Governance Advisory Board: June 2015 Version
 
 An initial version of this proposal was posted for comments on April 30th,
 2014. This version reflects all comments received prior to announcing the
@@ -45,7 +40,7 @@ following main areas are included in this charter:
 * Produce a formal, twice yearly report to the Leadership and broader Docker
   community of the status of and progress made in all areas under the purview
   of the DGAB.
-* Promote and support the use of Docker in manner consistent with Guiding * 
+* Promote and support the use of Docker in manner consistent with Guiding *
 
 ### Principles of the project and the Core Criteria
 
@@ -89,7 +84,7 @@ The DGAB will have 16 members
 
 ### 4.2 Selection Process
 
-#### Contributors: 
+#### Contributors:
 
 Four seats will be granted to the top contributors, as measured
 by non-trivial pull requests merged to master in the last 6 months. Trivial
@@ -114,7 +109,7 @@ Once nomination has been closed, selection of corporate seats will be made by a
 vote by eligible contributors. Eligible contributors are those who have had at
 least one non-trivial pull request merged to master in the past six months.
 
-#### User seats: 
+#### User seats:
 
 These seats are for organizations that are using Docker. To be nominated, an
 organization must be using Docker in production and have published a use case.
@@ -147,33 +142,33 @@ The DGAB and its members shall abide by appropriate antitrust guidelines.
 
 The DGAB will formulate recommendations in conjunction with the following, open governance principles
 
-### Open participation: 
+### Open participation:
 
 Throughout the project, anyone should be able to participate and contribute.
 All bugs and tasks will be tracked in a public tracker and all of the source
 code and all of the tools needed to build it will be available under an open
 license permitting unrestricted use
 
-### Open technical meritocracy: 
+### Open technical meritocracy:
 
 Technical merit over pride of authorship. Code
 is contributed for the express purpose of advancing technologies relevant to
 the project, effectively separating technology advancement from individual or
 commercial intent.
 
-### Open design: 
+### Open design:
 
 Roadmaps are discussed in the open, and design receives input from all
 contributors and maintainers Influence through contribution: organizations and
 individuals gain influence over the project through contribution
 
-### IP Cleanliness: 
+### IP Cleanliness:
 
 Steps are taken to ensure that all incoming code is legally contributed (DCOs
 terms-of-use etc.), that use of approved third party libraries does not create
 incompatible dependencies, and that all non-trivial commits have DCOs
 
-### Open Licensing: 
+### Open Licensing:
 
 Code should be licensed using approved, standard, open-source licenses. (Docker is currently licensed under Apache 2.0)
 

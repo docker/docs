@@ -5,14 +5,8 @@ aliases:
 description: Load-balance the service
 keywords:
 - load, balance, Python
-menu:
-  main:
-    parent: deploy-app
-    weight: -10
-title: Load-balance the service
+title: Load-balance your service
 ---
-
-# Load-balance a Python service
 
 To load-balance a your application, you need to deploy a load-balancing service.
 This service distributes incoming requests to all of the available containers in

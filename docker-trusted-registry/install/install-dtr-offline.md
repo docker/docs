@@ -1,17 +1,9 @@
 ---
-description: Learn how to install Docker Trusted Registry on a machine with no internet
-  access.
+description: Learn how to install Docker Trusted Registry on a machine with no internet access.
 keywords:
 - docker, registry, install, offline
-menu:
-  main:
-    identifier: dtr_install_offline
-    parent: dtr-menu-install
-    weight: 30
-title: Install offline
+title: Install Docker Trusted Registry offline
 ---
-
-# Install DTR offline
 
 The procedure to install Docker Trusted Registry on a node is the same,
 whether that node has access to the internet or not.

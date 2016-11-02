@@ -5,13 +5,8 @@ advisory: experimental
 description: the plugin disable command description and usage
 keywords:
 - plugin, disable
-menu:
-  main:
-    parent: smn_cli
-title: plugin disable
+title: docker plugin disable (experimental)
 ---
-
-# plugin disable (experimental)
 
 ```markdown
 Usage:  docker plugin disable PLUGIN

@@ -4,14 +4,8 @@ aliases:
 description: Automated builds
 keywords:
 - automated, build, images
-menu:
-  main:
-    parent: builds
-    weight: -50
 title: Automated builds
 ---
-
-# Automated builds
 
 > **Note**: Docker Cloud's Build functionality is in BETA.
 

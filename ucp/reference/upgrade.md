@@ -1,15 +1,9 @@
 ---
 description: Upgrade Docker Universal Control Plane.
 keywords:
-- 'docker, ucp, upgrade '
-menu:
-  main:
-    identifier: ucp_ref_upgrade
-    parent: ucp_ref
-title: upgrade
+- docker, ucp, upgrade
+title: docker/ucp upgrade
 ---
-
-# docker/ucp upgrade
 
 Upgrade the UCP components on this Docker Engine.
 

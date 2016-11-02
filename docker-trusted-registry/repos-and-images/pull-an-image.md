@@ -4,15 +4,8 @@ aliases:
 description: Learn how to pull an image from Docker Trusted Registry.
 keywords:
 - docker, registry, images, pull
-menu:
-  main:
-    identifier: dtr_pull_image
-    parent: dtr_menu_repos_and_images
-    weight: 10
-title: Pull an image
+title: Pull an image from DTR
 ---
-
-# Pull an image from DTR
 
 Pulling an image from Docker Trusted Registry is the same as pulling an image
 from Docker Hub. Since DTR is secure by default, you always need to authenticate

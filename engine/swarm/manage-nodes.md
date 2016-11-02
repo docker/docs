@@ -2,15 +2,8 @@
 description: Manage existing nodes in a swarm
 keywords:
 - guide, swarm mode, node
-menu:
-  main:
-    identifier: manage-nodes-guide
-    parent: engine_swarm
-    weight: 14
 title: Manage nodes in a swarm
 ---
-
-# Manage nodes in a swarm
 
 As part of the swarm management lifecycle, you may need to view or update a node as follows:
 

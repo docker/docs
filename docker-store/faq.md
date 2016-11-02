@@ -2,13 +2,8 @@
 description: Docker Store frequently asked questions
 keywords:
 - Docker, docker, store, purchase images
-menu:
-  main:
-    parent: docker-store
-title: Docker Store FAQs
+title: Docker Store frequently asked questions (FAQ)
 ---
-
-# Docker Store Frequently Asked Questions
 
 ### How do I log in to the Docker Store?
 

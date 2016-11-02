@@ -4,13 +4,8 @@ aliases:
 description: The push command description and usage
 keywords:
 - share, push, image
-menu:
-  main:
-    parent: smn_cli
-title: push
+title: docker push
 ---
-
-# push
 
 ```markdown
 Usage:  docker push [OPTIONS] NAME[:TAG]

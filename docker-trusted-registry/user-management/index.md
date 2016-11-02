@@ -4,15 +4,8 @@ aliases:
 description: Learn about the permission levels available on Docker Trusted Registry.
 keywords:
 - docker, registry, security, permissions, users
-menu:
-  main:
-    identifier: dtr-authentication-authorization
-    parent: dtr_menu_user_management
-    weight: 0
 title: Authentication and authorization
 ---
-
-# Authentication and authorization
 
 With DTR you get to control which users have access to your image repositories.
 

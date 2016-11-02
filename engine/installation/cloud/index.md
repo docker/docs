@@ -8,16 +8,9 @@ aliases:
 - /engine/installation/joyent/
 description: Cloud Installations
 keywords:
-- 'Docker install '
-menu:
-  main:
-    identifier: install_cloud
-    parent: engine_install
-    weight: "-60"
-title: On cloud providers
+- Docker install
+title: Install Engine in the cloud
 ---
-
-# Install Engine in the cloud
 
 * [Understand cloud install options and choose one](overview.md)
 * [Example: Use Machine to provision cloud hosts](cloud-ex-machine-ocean.md)

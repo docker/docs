@@ -2,12 +2,8 @@
 description: Use macvlan for container networking
 keywords:
 - Examples, Usage, network, docker, documentation, user guide, macvlan, cluster
-title: Get started with macvlan network driver
+title: Get started with Macvlan network driver
 ---
-
-# Macvlan Network Driver
-
-### Getting Started
 
 The Macvlan driver is in order to make Docker users use cases and vet the implementation to ensure a hardened, production ready driver. Libnetwork now gives users total control over both IPv4 and IPv6 addressing. The VLAN drivers build on top of that in giving operators complete control of layer 2 VLAN tagging for users interested in underlay network integration. For overlay deployments that abstract away physical constraints see the [multi-host overlay ](/engine/userguide/networking/get-started-overlay/) driver.
 
@@ -15,7 +11,7 @@ Macvlan is a new twist on the tried and true network virtualization technique. T
 
 Macvlan offers a number of unique features and plenty of room for further innovations with the various modes. Two high level advantages of these approaches are, the positive performance implications of bypassing the Linux bridge and the simplicity of having less moving parts. Removing the bridge that traditionally resides in between the Docker host NIC and container interface leaves a very simple setup consisting of container interfaces, attached directly to the Docker host interface. This result is easy access for external facing services as there is no port mappings in these scenarios.
 
-### Pre-Requisites
+## Pre-Requisites
 
 - The examples on this page are all single host and setup using Docker 1.12.0+
 
@@ -26,7 +22,7 @@ Macvlan offers a number of unique features and plenty of room for further innova
  - To check your current kernel version, use `uname -r` to display your kernel version
  - Macvlan Linux kernel v3.9–3.19 and 4.0+
 
-### MacVlan Bridge Mode Example Usage
+## MacVlan Bridge Mode Example Usage
 
 Macvlan Bridge mode has a unique MAC address per container used to track MAC to port mappings by the Docker host.
 
@@ -131,7 +127,7 @@ docker network rm <network_name or id>
 
 For more on Docker networking commands see [Working with Docker network commands](/engine/userguide/networking/work-with-networks/)
 
-### Macvlan 802.1q Trunk Bridge Mode Example Usage
+## Macvlan 802.1q Trunk Bridge Mode Example Usage
 
 VLANs (Virtual Local Area Networks) have long been a primary means of virtualizing data center networks and are still in virtually all existing networks today. VLANs work by tagging a Layer-2 isolation domain with a 12-bit identifier ranging from 1-4094 that is inserted into a packet header that enables a logical grouping of a single or multiple subnets of both IPv4 and IPv6. It is very common for network operators to separate traffic using VLANs based on a subnet(s) function or security profile such as `web`, `db` or any other isolation needs.
 
@@ -205,7 +201,7 @@ docker run --net=ipvlan210 --ip=192.168.212.10 -itd alpine /bin/sh
 docker run --net=ipvlan210 --ip=192.168.212.9 -it --rm alpine ping -c 2 192.168.212.10
 ```
 
-### Dual Stack IPv4 IPv6 Macvlan Bridge Mode
+## Dual Stack IPv4 IPv6 Macvlan Bridge Mode
 
 **Example:** Macvlan Bridge mode, 802.1q trunk, VLAN ID: 218, Multi-Subnet, Dual Stack
 
@@ -248,7 +244,7 @@ root@526f3060d759:/# ip a show eth0
     inet6 2001:db8:abc8::2/64 scope link nodad
        valid_lft forever preferred_lft forever
 
-# Specified v4 gateway of 192.168.216.1     
+# Specified v4 gateway of 192.168.216.1
 root@526f3060d759:/# ip route
   default via 192.168.216.1 dev eth0
   192.168.216.0/24 dev eth0  proto kernel  scope link  src 192.168.216.11

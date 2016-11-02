@@ -2,14 +2,8 @@
 description: Install Docker Universal Control Plane.
 keywords:
 - install, ucp
-menu:
-  main:
-    identifier: ucp_ref_install
-    parent: ucp_ref
-title: install
+title: docker/ucp install
 ---
-
-# docker/ucp install
 
 Install UCP on this Docker Engine.
 

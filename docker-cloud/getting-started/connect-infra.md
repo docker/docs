@@ -1,20 +1,11 @@
 ---
 aliases:
 - /docker-cloud/getting-started/use-hosted/
-description: How to link Docker Cloud to a hosted cloud services provider or your
-  own hosts
+description: How to link Docker Cloud to a hosted cloud services provider or your own hosts
 keywords:
 - node, create, understand
-menu:
-  main:
-    aliases:
-    - /docker-cloud/getting-started/use-hosted/
-    parent: getting-started
-    weight: -90
-title: Link to your Infrastructure
+title: Link to your infrastructure
 ---
-
-# Link to your Infrastructure
 
 To deploy Docker Cloud nodes, you first need to grant Docker Cloud access to your infrastructure.
 

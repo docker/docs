@@ -5,10 +5,6 @@ aliases:
 description: Review of the Docker Daemon attack surface
 keywords:
 - Docker, Docker documentation,  security
-menu:
-  main:
-    parent: smn_secure_docker
-    weight: -99
 title: Docker security
 ---
 

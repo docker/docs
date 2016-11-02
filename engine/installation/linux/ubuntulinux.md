@@ -5,14 +5,8 @@ aliases:
 description: 'Instructions for installing Docker on Ubuntu. '
 keywords:
 - Docker, Docker documentation, requirements, apt, installation,  ubuntu
-menu:
-  main:
-    parent: engine_linux
-    weight: -6
-title: 'Installation on Ubuntu '
+title: Install Docker on Ubuntu
 ---
-
-# Ubuntu
 
 Docker is supported on these Ubuntu operating systems:
 

@@ -4,16 +4,9 @@ aliases:
 - /engine/userguide/dockerizing/
 description: A simple 'Hello world' exercise that introduced you to Docker.
 keywords:
-- docker guide, docker, docker platform, how to, dockerize, dockerizing apps, dockerizing
-  applications, container,  containers
-menu:
-  main:
-    parent: engine_learn_menu
-    weight: -6
+- docker guide, docker, docker platform, how to, dockerize, dockerizing apps, dockerizing applications, container,  containers
 title: Hello world in a container
 ---
-
-# Hello world in a container
 
 *So what's this Docker thing all about?*
 
@@ -89,7 +82,7 @@ Let's try running some commands inside the container:
 
 In this example:
 
-* `pwd` displays the current directory, the `/` root directory.  
+* `pwd` displays the current directory, the `/` root directory.
 * `ls` displays the directory listing of the root directory of a typical Linux file system.
 
 Now, you can play around inside this container. When completed, run the `exit` command or enter Ctrl-D

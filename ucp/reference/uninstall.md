@@ -2,14 +2,8 @@
 description: Uninstall a UCP controller and nodes
 keywords:
 - uninstall, ucp
-menu:
-  main:
-    identifier: ucp_ref_uninstall
-    parent: ucp_ref
-title: uninstall
+title: docker/ucp uninstall
 ---
-
-# docker/ucp uninstall
 
 Uninstall UCP components from this Docker Engine.
 

@@ -2,13 +2,8 @@
 description: Oracle VirtualBox driver for machine
 keywords:
 - machine, Oracle VirtualBox, driver
-menu:
-  main:
-    parent: smn_machine_drivers
 title: Oracle VirtualBox
 ---
-
-# Oracle VirtualBox
 
 Create machines locally using [VirtualBox](https://www.virtualbox.org/).
 This driver requires VirtualBox 5+ to be installed on your host.

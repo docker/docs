@@ -3,16 +3,9 @@ aliases:
   - /reference/api/remote_api_client_libraries/
 description: Various client libraries available to use with the Docker remote API
 keywords:
-- API, Docker, index, registry, REST, documentation, clients, C#, Erlang, Go, Groovy,
-  Java, JavaScript, Perl, PHP, Python, Ruby, Rust,  Scala
-menu:
-  main:
-    parent: engine_remoteapi
-    weight: 90
-title: Remote API client libraries
+- API, Docker, index, registry, REST, documentation, clients, C#, Erlang, Go, Groovy, Java, JavaScript, Perl, PHP, Python, Ruby, Rust,  Scala
+title: Docker Remote API client libraries
 ---
-
-# Docker Remote API client libraries
 
 These libraries make it easier to build applications on top of the Docker
 Remote API with various programming languages. They have not been tested by the

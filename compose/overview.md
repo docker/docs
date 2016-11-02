@@ -2,14 +2,8 @@
 description: Introduction and Overview of Compose
 keywords:
 - documentation, docs,  docker, compose, orchestration,  containers
-menu:
-  main:
-    parent: workw_compose
-    weight: -99
 title: Overview of Docker Compose
 ---
-
-# Overview of Docker Compose
 
 Compose is a tool for defining and running multi-container Docker applications.
 With Compose, you use a Compose file to configure your application's services.

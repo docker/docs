@@ -1,13 +1,7 @@
 ---
 description: Security configuration for Docker Trusted Registry
 keywords:
-- docker, documentation, about, technology, understanding, configuration, security,
-  enterprise, hub, registry
-menu:
-  main:
-    identifier: dtr_configure_security
-    parent: workw_dtr_configure
-    weight: 4
+- docker, documentation, about, technology, understanding, configuration, security, enterprise, hub, registry
 title: Security configuration
 ---
 
@@ -20,13 +14,17 @@ This cert must be accompanied by its private key, entered below.
 * *SSL Private Key*: The hash from the private key associated with the provided
 SSL Certificate (as a standard x509 key pair).
 
-In order to run, the Trusted Registry requires encrypted communications through HTTPS/SSL between (a) the Trusted Registry and your Docker Engine(s), and (b) between your web browser and the Trusted Registry admin server. There are a few options for setting this up:
+In order to run, the Trusted Registry requires encrypted communications through
+HTTPS/SSL between (a) the Trusted Registry and your Docker Engine(s), and (b)
+between your web browser and the Trusted Registry admin server. There are a few
+options for setting this up:
 
 1. You can use the self-signed certificate Docker Trusted Registry generates by default.
 2. You can generate your own certificates using a public service or your enterprise's infrastructure. See the [Generating SSL certificates](config-security.md#generating-ssl-certificates) section for the options available.
 
-If you are generating your own certificates, you can install them by following the instructions for
-[Adding your own registry certificates to Docker Trusted Registry](config-security.md#adding-your-own-registry-certificates-to-dtr).
+If you are generating your own certificates, you can install them by following
+the instructions for [Adding your own registry certificates to Docker Trusted
+Registry](config-security.md#adding-your-own-registry-certificates-to-dtr).
 
 However, if you choose to use the Trusted Registry-generated certificates, or
 the certificates you generate yourself are not trusted by your client Docker
@@ -66,9 +64,9 @@ set up your Trusted Registry server to use them.
 Certificate" edit box, and the previously generated Private key into the "SSL
 Private Key" edit box.
 
-2. Click Save, and then wait for the Trusted Registry Admin site to restart
-and reload. It should now be using the new certificate. Once the Security page has reloaded, it displays `#` hashes instead of the
-certificate text you pasted.
+2. Click Save, and then wait for the Trusted Registry Admin site to restart and
+reload. It should now be using the new certificate. Once the Security page has
+reloaded, it displays `#` hashes instead of the certificate text you pasted.
 
 If your certificate is signed by a chain of Certificate Authorities that are
 already trusted by your Docker daemon servers, you can skip the following
@@ -172,7 +170,8 @@ Docker daemon to run in "insecure" mode. This is done by adding an extra flag,
 `--insecure-registry host-ip|domain-name`, to your client Docker daemon startup
 flags. You'll need to restart the Docker daemon for the change to take effect.
 
-This flag means that the communications between your Docker client and the Trusted Registry server are still encrypted, but the client Docker daemon is not
+This flag means that the communications between your Docker client and the
+Trusted Registry server are still encrypted, but the client Docker daemon is not
 confirming that the Registry connection is not being hijacked or diverted.
 
 If you enter a "Domain Name" into the Security settings, it needs to be DNS

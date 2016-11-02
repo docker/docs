@@ -4,13 +4,8 @@ aliases:
 description: The wait command description and usage
 keywords:
 - container, stop, wait
-menu:
-  main:
-    parent: smn_cli
-title: wait
+title: docker wait
 ---
-
-# wait
 
 ```markdown
 Usage:  docker wait CONTAINER [CONTAINER...]

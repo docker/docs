@@ -4,15 +4,10 @@ aliases:
 description: The node rm command description and usage
 keywords:
 - node, remove
-menu:
-  main:
-    parent: smn_cli
-title: node rm
+title: docker node rm
 ---
 
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
-
-# node rm
 
 ```markdown
 Usage:  docker node rm [OPTIONS] NODE [NODE...]

@@ -2,14 +2,8 @@
 description: Getting started with Compose and WordPress
 keywords:
 - documentation, docs,  docker, compose, orchestration, containers
-menu:
-  main:
-    parent: workw_compose
-    weight: 6
-title: 'Quickstart: Compose and WordPress'
+title: "Quickstart: Compose and WordPress"
 ---
-
-# Quickstart: Docker Compose and WordPress
 
 You can use Docker Compose to easily run WordPress in an isolated environment built
 with Docker containers. This quick-start guide demonstrates how to use Compose to set up and run WordPress. Before starting, you'll need to have

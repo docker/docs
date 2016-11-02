@@ -4,13 +4,8 @@ aliases:
 description: the volume rm command description and usage
 keywords:
 - volume, rm
-menu:
-  main:
-    parent: smn_cli
-title: volume rm
+title: docker volume rm
 ---
-
-# volume rm
 
 ```markdown
 Usage:  docker volume rm VOLUME [VOLUME...]

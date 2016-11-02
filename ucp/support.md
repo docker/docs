@@ -1,18 +1,10 @@
 ---
-description: Your Docker subscription gives you access to prioritized support. You
-  can file tickets via email, your the support portal.
+description: Your Docker subscription gives you access to prioritized support. You can file tickets via email, your the support portal.
 keywords:
 - Docker, support
 - help
-menu:
-  main:
-    identifier: ucp_support
-    parent: mn_ucp
-    weight: 100
 title: Get support
 ---
-
-# Get support
 
 Your Docker Data Center, or Universal Control Plane subscription gives you
 access to prioritized support. The service levels depend on your subscription.

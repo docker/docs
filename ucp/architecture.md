@@ -2,15 +2,8 @@
 description: Learn about the architecture of Docker Universal Control Plane.
 keywords:
 - docker, ucp, architecture
-menu:
-  main:
-    identifier: ucp_architecture
-    parent: mn_ucp
-    weight: 20
-title: Architecture
+title: UCP architecture
 ---
-
-# UCP architecture
 
 UCP is a containerized application, so the first step to install UCP is
 installing the Commercially Supported (CS) Docker Engine on all the nodes that

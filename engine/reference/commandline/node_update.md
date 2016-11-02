@@ -4,15 +4,10 @@ aliases:
 description: The node update command description and usage
 keywords:
 - resources, update, dynamically
-menu:
-  main:
-    parent: smn_cli
-title: node update
+title: docker node update
 ---
 
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
-
-## update
 
 ```markdown
 Usage:  docker node update [OPTIONS] NODE

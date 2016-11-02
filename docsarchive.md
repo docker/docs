@@ -2,8 +2,6 @@
 title: Documentation Archive
 ---
 
-# Documentation Archive
-
 This page lists the various ways you can view the docs as they were when a
 prior version of Docker was shipped.
 

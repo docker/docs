@@ -4,15 +4,8 @@ aliases:
 description: Learn how to monitor your DTR installation.
 keywords:
 - docker, registry, monitor, troubleshoot
-menu:
-  main:
-    identifier: dtr_monitor
-    parent: dtr_menu_monitor_troubleshoot
-    weight: 0
-title: Monitor DTR
+title: Monitor Docker Trusted Registry
 ---
-
-# Monitor DTR
 
 Docker Trusted Registry is a Dockerized application. To monitor it, you can
 use the same tools and techniques you're already using to monitor other

@@ -4,15 +4,8 @@ aliases:
 description: Docker's CLI command description and usage
 keywords:
 - Docker, Docker documentation, CLI,  command line
-menu:
-  main:
-    identifier: smn_cli_guide
-    parent: smn_cli
-    weight: -70
-title: Docker commands
+title: The Docker commands
 ---
-
-# The Docker commands
 
 This section contains reference information on using Docker's command line
 client. Each command has a reference page along with samples. If you are

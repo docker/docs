@@ -2,16 +2,8 @@
 description: Frequently asked questions
 keywords:
 - windows faqs
-menu:
-  main:
-    identifier: docker-windows-faqs
-    parent: pinata_win_menu
-    weight: 4
-title: FAQs
+title: Frequently asked questions (FAQ)
 ---
-
-#  Frequently Asked Questions (FAQs)
-
 
 >**Looking for popular FAQs on Docker for Windows?** Check out the [Docker
 Knowledge Hub](http://success.docker.com/) for knowledge base articles, FAQs,

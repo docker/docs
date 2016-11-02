@@ -4,14 +4,8 @@ aliases:
 description: Try Swarm at scale
 keywords:
 - docker, swarm, scale, voting, application,  certificates
-menu:
-  main:
-    parent: scale_swarm
-    weight: -80
 title: Deploy the application
 ---
-
-# Deploy the application
 
 You've [deployed the load balancer, the discovery backend, and a Swarm
 cluster](deploy-infra.md) so now you can build and deploy the voting application

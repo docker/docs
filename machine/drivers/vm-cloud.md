@@ -2,13 +2,8 @@
 description: VMware vCloud Air driver for machine
 keywords:
 - machine, VMware vCloud Air, driver
-menu:
-  main:
-    parent: smn_machine_drivers
 title: VMware vCloud Air
 ---
-
-# VMware vCloud Air
 
 Creates machines on [vCloud Air](http://vcloud.vmware.com) subscription service. You need an account within an existing subscription of vCloud Air VPC or Dedicated Cloud.
 

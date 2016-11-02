@@ -2,15 +2,8 @@
 description: Docker for Mac  and Docker for Windows Tutorials
 keywords:
 - mac, windows, examples, Compose
-menu:
-  main:
-    identifier: docker-mac-examples
-    parent: pinata_mac_menu
-    weight: "8"
-title: ' Example Applications'
+title: Example applications
 ---
-
-#  Example Applications
 
 Upcoming releases will include example applications especially tailored for Docker for Mac and Docker for Windows.
 

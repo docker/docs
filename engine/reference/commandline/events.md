@@ -4,13 +4,8 @@ aliases:
 description: The events command description and usage
 keywords:
 - events, container, report
-menu:
-  main:
-    parent: smn_cli
-title: events
+title: docker events
 ---
-
-# events
 
 ```markdown
 Usage:  docker events [OPTIONS]

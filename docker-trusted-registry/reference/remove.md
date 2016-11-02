@@ -2,14 +2,8 @@
 description: Docker Trusted Registry remove command reference.
 keywords:
 - docker, registry, reference, remove
-menu:
-  main:
-    identifier: dtr_reference_remove
-    parent: dtr_menu_reference
-title: remove
+title: docker/dtr remove
 ---
-
-# docker/dtr remove
 
 Remove a replica from a DTR cluster
 

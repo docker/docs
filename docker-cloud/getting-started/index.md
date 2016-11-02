@@ -3,15 +3,8 @@ description: 'Getting Started with Docker Cloud: Setting up a node using a hoste
   cloud provider or your own nodes, deploying a service and clustering.'
 keywords:
 - one, two, three
-menu:
-  main:
-    identifier: getting-started
-    parent: docker-cloud
-    weight: -97
-title: Getting Started
+title: Getting started with Docker Cloud
 ---
-
-# Getting Started with Docker Cloud
 
 If you're completely new to Docker Cloud, start here!
 

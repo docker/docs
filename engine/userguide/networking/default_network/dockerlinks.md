@@ -3,16 +3,9 @@ description: Learn how to connect Docker containers together.
 aliases:
   - /userguide/dockerlinks/
 keywords:
-- Examples, Usage, user guide, links, linking, docker, documentation, examples, names,
-  name, container naming, port, map, network port,  network
-menu:
-  main:
-    parent: smn_networking_def
-    weight: -2
+- Examples, Usage, user guide, links, linking, docker, documentation, examples, names, name, container naming, port, map, network port,  network
 title: Legacy container links
 ---
-
-# Legacy container links
 
 The information in this section explains legacy container links within the Docker default bridge. This is a `bridge` network named `bridge` created automatically when you install Docker.
 

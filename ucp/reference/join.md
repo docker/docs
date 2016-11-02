@@ -2,14 +2,8 @@
 description: Joins a node to an existing Docker Universal Control Plane cluster.
 keywords:
 - join, ucp
-menu:
-  main:
-    identifier: ucp_ref_join
-    parent: ucp_ref
-title: join
+title: docker/ucp join
 ---
-
-# docker/ucp join
 
 Join this engine to an existing UCP.
 

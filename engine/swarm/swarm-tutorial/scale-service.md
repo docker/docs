@@ -2,15 +2,8 @@
 description: Scale the service running in the swarm
 keywords:
 - tutorial, cluster management, swarm mode, scale
-menu:
-  main:
-    identifier: swarm-tutorial-scale-service
-    parent: swarm-tutorial
-    weight: 18
-title: Scale the service
+title: Scale the service in the swarm
 ---
-
-# Scale the service in the swarm
 
 Once you have [deployed a service](deploy-service.md) to a swarm, you are ready
 to use the Docker CLI to scale the number of service ps in

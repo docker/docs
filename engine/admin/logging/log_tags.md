@@ -4,14 +4,8 @@ aliases:
 description: Describes how to format tags for.
 keywords:
 - docker, logging, driver, syslog, Fluentd, gelf, journald
-menu:
-  main:
-    parent: smn_logging
-    weight: -1
 title: Log tags for logging driver
 ---
-
-# Log Tags
 
 The `tag` log option specifies how to format a tag that identifies the
 container's log messages. By default, the system uses the first 12 characters of
@@ -69,4 +63,3 @@ Results in logs like this:
 Apr  1 15:22:17 ip-10-27-39-73 docker/logtester.1234[45499]: + exec app
 Apr  1 15:22:17 ip-10-27-39-73 docker/logtester.1234[45499]: 2016-04-01 15:22:17.075416751 +0000 UTC stderr msg: 1
 ```
-

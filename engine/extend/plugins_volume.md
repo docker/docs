@@ -2,14 +2,8 @@
 description: How to manage data with external volume plugins
 keywords:
 - Examples, Usage, volume, docker, data, volumes, plugin, api
-menu:
-  main:
-    parent: engine_extend
-    weight: 6
-title: Volume plugins
+title: Write a volume plugin
 ---
-
-# Write a volume plugin
 
 Docker Engine volume plugins enable Engine deployments to be integrated with
 external storage systems, such as Amazon EBS, and enable data volumes to persist
