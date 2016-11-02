@@ -191,7 +191,9 @@ For example, the configuration above specifies the default password alias to be
 
 If this configuration is used, then you must:
 
-`export NOTARY_SIGNER_PASSWORDALIAS1=mypassword`
+```
+export NOTARY_SIGNER_PASSWORDALIAS1=mypassword
+```
 
 so that that Notary signer knows to encrypt all keys with the passphrase
 `mypassword`, and to decrypt any private key stored with password alias

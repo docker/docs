@@ -68,21 +68,21 @@ dependencies the Python application requires, including Python itself.
         RUN pip install -r requirements.txt
         CMD python app.py
 
-  This tells Docker to:
+    This tells Docker to:
 
-  * Build an image starting with the Python 2.7 image.
-  * Add the current directory `.` into the path `/code` in the image.
-  * Set the working directory to `/code`.
-  * Install the Python dependencies.
-  * Set the default command for the container to `python app.py`
-
-  For more information on how to write Dockerfiles, see the [Docker user guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile) and the [Dockerfile reference](/engine/reference/builder.md).
-
+    * Build an image starting with the Python 2.7 image.
+    * Add the current directory `.` into the path `/code` in the image.
+    * Set the working directory to `/code`.
+    * Install the Python dependencies.
+    * Set the default command for the container to `python app.py`
+<br>
+    For more information on how to write Dockerfiles, see the [Docker user guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile) and the [Dockerfile reference](/engine/reference/builder.md).
+<br>
 2. Build the image.
 
         $ docker build -t web .
 
-  This command builds an image named `web` from the contents of the current
+    This command builds an image named `web` from the contents of the current
   directory. The command automatically locates the `Dockerfile`, `app.py`, and
   `requirements.txt` files.
 
@@ -91,7 +91,7 @@ dependencies the Python application requires, including Python itself.
 
 Define a set of services using `docker-compose.yml`:
 
-1. Create a file called docker-compose.yml in your project directory and add
+Create a file called docker-compose.yml in your project directory and add
    the following:
 
 

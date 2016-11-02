@@ -167,6 +167,8 @@ loaded. To verify this, use the following command:
 
     $ cat /proc/filesystems | grep btrfs
 
+	        btrfs
+
 ### Configure Btrfs on Ubuntu 14.04 LTS
 
 Assuming your system meets the prerequisites, do the following:
@@ -277,7 +279,7 @@ density container use cases.
 - **Small writes**. Containers performing lots of small writes (including 
 Docker hosts that start and stop many containers) can lead to poor use of Btrfs
  chunks. This can ultimately lead to out-of-space conditions on your Docker 
-host and stop it working. This is currently a major drawback to using current 
+host and stop working. This is currently a major drawback to use current 
 versions of Btrfs.
 
     If you use the `btrfs` storage driver, closely monitor the free space on 

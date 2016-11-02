@@ -164,4 +164,4 @@ facing production workloads exposed to untrusted networks.
 ## Related information
 
 * [Configure Docker Swarm for TLS](configure-tls.md)
-* [Docker security](https://docs.docker.com/engine/security/security/)
+* [Docker security](/engine/security/security/)

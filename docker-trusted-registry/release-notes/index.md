@@ -18,8 +18,27 @@ title: Trusted Registry release notes
 Here you can learn about new features, bug fixes, breaking changes and
 known issues for each DTR version.
 
-You can then use [the upgrade instructions](../install/upgrade/upgrade-major.md),
+You can then use [the upgrade instructions](../install/upgrade/index.md),
 to upgrade your installation to the latest release.
+
+## Version 2.0.4
+
+(13 Oct 2016)
+
+**General improvements**
+
+* Increased limits on pagination for all lists in the UI
+* Improved health check endpoints to report DTR status more accurately
+
+**Bug fixes**
+
+* You can now edit the permissions for a team member
+* Fixed issue that prevented DTR from being installed in Docker Engine 1.12
+* Several improvements to the migrate command
+* Improved the reconfigure command to allow tuning the key-value store heartbeat
+interval, election timeout, and snapshot count
+* Users can now pull from public repositories in an organization namespace
+without having to authenticate. Requires UCP 1.1.4
 
 ## Version 2.0.3
 

@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/restart/
 description: The restart command description and usage
 keywords:
 - restart, container, Docker
@@ -13,7 +15,7 @@ title: restart
 ```markdown
 Usage:  docker restart [OPTIONS] CONTAINER [CONTAINER...]
 
-Restart a container
+Restart one or more containers
 
 Options:
       --help       Print usage

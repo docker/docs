@@ -13,7 +13,7 @@ weight=99
 # Docker Swarm API
 
 The Docker Swarm API is mostly compatible with the [Docker Remote
-API](https://docs.docker.com/engine/reference/api/docker_remote_api/). This
+API](/engine/reference/api/docker_remote_api/). This
 document is an overview of the differences between the Swarm API and the Docker
 Remote API.
 
@@ -180,7 +180,7 @@ $ docker run --rm -it yourprivateimage:latest
 
 ## Docker Swarm documentation index
 
-- [Docker Swarm overview](https://docs.docker.com/swarm/)
-- [Discovery options](https://docs.docker.com/swarm/discovery/)
-- [Scheduler strategies](https://docs.docker.com/swarm/scheduler/strategy/)
-- [Scheduler filters](https://docs.docker.com/swarm/scheduler/filter/)
+- [Docker Swarm overview](/swarm/)
+- [Discovery options](/swarm/discovery/)
+- [Scheduler strategies](/swarm/scheduler/strategy/)
+- [Scheduler filters](/swarm/scheduler/filter/)

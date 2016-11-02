@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-title = "Plan for Swarm in production"
-description = "Plan for Swarm in production"
-keywords = ["docker, swarm, scale, voting, application,  plan"]
-[menu.main]
-parent="workw_swarm"
-weight=-45
-+++
-<![end-metadata]-->
+---
+description: Plan for Swarm in production
+keywords:
+- docker, swarm, scale, voting, application,  plan
+menu:
+  main:
+    parent: workw_swarm
+    weight: -45
+title: Plan for Swarm in production
+---
 
 # Plan for Swarm in production
 
@@ -15,10 +15,10 @@ This article provides guidance to help you plan, deploy, and manage Docker
 Swarm clusters in business critical production environments. The following high
  level topics are covered:
 
-- [Security](#security)
-- [High Availability (HA)](#high-availability-ha)
-- [Performance](#performance)
-- [Ownership of Swarm clusters](#ownership-of-swarm-clusters)
+- [Security](plan-for-production.md#security)
+- [High Availability](plan-for-production.md#high-availability)
+- [Performance](plan-for-production.md#performance)
+- [Cluster ownership](plan-for-production.md#cluster-ownership)
 
 ## Security
 
@@ -75,7 +75,7 @@ configure your firewalls and other network access control lists.
 - **Custom, cross-host container networks**:
     - **Inbound 7946/tcp** Allows for discovering other container networks.
     - **Inbound 7946/udp** Allows for discovering other container networks.
-    - **Inbound <store-port>/tcp** Network key-value store service port.
+    - **Inbound `<store-port>`/tcp** Network key-value store service port.
     - **4789/udp** For the container overlay network.
 
 

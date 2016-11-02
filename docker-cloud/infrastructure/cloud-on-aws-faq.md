@@ -120,6 +120,7 @@ Following the example in the previous section, you have a node cluster deployed 
 What if you have another VPC for some other purpose, (the components already exist) and you want to deploy a node cluster in that VPC.
 
 Docker Cloud:
+
 1. Looks for the selected VPC. Found!
 2. Looks for selected subnets. If you do not select any subnets, Docker Cloud tries to create them using the rules previously described.
 3. If you selected more than one subnet, Docker Cloud distributes the nodes in the cluster among those subnets. If not, all nodes are placed in the same subnet.

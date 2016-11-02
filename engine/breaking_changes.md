@@ -5,10 +5,6 @@ description: Breaking changes
 keywords:
 - docker, documentation, about, technology, breaking
 - incompatibilities
-menu:
-  main:
-    parent: engine_use
-    weight: 80
 title: Breaking changes
 ---
 
@@ -41,7 +37,7 @@ breaking change. Images pushed by Engine 1.10 to a Registry 2.3 cannot be
 pulled by digest by older Engine versions. A `docker pull` that encounters this
 situation returns the following error:
 
-```
+```none
  Error response from daemon: unsupported schema version 2 for tag TAGNAME
 ```
 

@@ -1,10 +1,9 @@
 ---
+aliases:
+  - /reference/commandline/service_ls/
 description: The service ls command description and usage
 keywords:
 - service, ls
-menu:
-  main:
-    parent: smn_cli
 title: service ls
 ---
 
@@ -30,6 +29,7 @@ This command when run targeting a manager, lists services are running in the
 swarm.
 
 On a manager node:
+
 ```bash
 ID            NAME      REPLICAS  IMAGE         COMMAND
 c8wgl7q4ndfd  frontend  5/5       nginx:alpine

@@ -20,7 +20,7 @@ Compose is a tool for defining and running multi-container Docker applications. 
 - [Get started with Rails](rails.md)
 - [Get started with WordPress](wordpress.md)
 - [Frequently asked questions](faq.md)
-- [Command line reference](./reference/index.md)
+- [Command-line reference](./reference/index.md)
 - [Compose file reference](compose-file.md)
 - [Environment file](env-file.md)
 
