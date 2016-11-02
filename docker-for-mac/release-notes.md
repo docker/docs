@@ -504,7 +504,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-* Documentation moved to [https://docs.docker.com/docker-for-mac/](https://docs.docker.com/docker-for-mac/)
+* Documentation moved to [https://docs.docker.com/docker-for-mac/](/docker-for-mac/)
 * Allow non-admin users to launch the app for the first time (using admin creds)
 * Prompt non-admin users for admin password when needed in Preferences
 * Fixed download links, documentation links

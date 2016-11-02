@@ -27,7 +27,7 @@ This sandbox requires you to install two Docker tools: Docker Engine >= 1.10.0
 and Docker Compose >= 1.6.0. To install the Docker Engine, choose from the
 [list of supported platforms](../../installation/index.md). To install
 Docker Compose, see the
-[detailed instructions here](https://docs.docker.com/compose/install/).
+[detailed instructions here](/compose/install/).
 
 Finally, you'll need to have a text editor installed on your local system or VM.
 
