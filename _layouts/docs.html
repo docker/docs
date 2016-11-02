@@ -185,6 +185,7 @@ ng\:form {
             </div>
             <div {% if page.notoc %} class="col-xs-12 col-sm-9 col-md-10" {% else %} class="col-xs-12 col-sm-9 col-md-8 col-xl-9" {% endif %} >
               <section class="section" id="DocumentationText">
+								<h1>{{ page.title }}</h1>
               {{ content }}
 							{% if page.noratings != true %}
 							<div style="text-align: center; margin-top: 50px">

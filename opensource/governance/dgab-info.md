@@ -2,7 +2,7 @@
 description: Docker Governance Advisory Board
 keywords:
 - governance, board, members, explained
-title: Docker Governance Advisory Board: June 2015 version
+title: "Docker Governance Advisory Board: June 2015 version"
 ---
 
 An initial version of this proposal was posted for comments on April 30th,
@@ -190,4 +190,4 @@ will either agree to become compliant within a specified timeframe or else
 resign their DGAB position.
 
 Please help us improve this draft by sending your comments and feedback to
-governance@docker.com)\.
+[governance@docker.com](mailto:governance@docker.com).
