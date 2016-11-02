@@ -36,14 +36,16 @@
 <p>Example</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/service/82d4a246-52d8-468d-903d-9da9ef05ff28/trigger/0224815a-c156-44e4-92d7-997c69354438/call/"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/service/82d4a246-52d8-468d-903d-9da9ef05ff28/trigger/0224815a-c156-44e4-92d7-997c69354438/call/"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"operation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REDEPLOY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker_trigger"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/service/82d4a246-52d8-468d-903d-9da9ef05ff28/trigger/0224815a-c156-44e4-92d7-997c69354438/"</span><span class="w">
+  </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/service/82d4a246-52d8-468d-903d-9da9ef05ff28/trigger/0224815a-c156-44e4-92d7-997c69354438/"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>Triggers are URLs that will start a redeploy of the service whenever a <code class="prettyprint">POST</code> request is sent to them. They require no authorization headers, so they should be treated as access tokens. Triggers can be revoked if they are leaked or no longer used for security purposes. See <a href="../../docker-cloud/apps/triggers/">Triggers</a> for more information.</p>
+
+<p>This is a <a href="#namespaced-endpoints">namespaced endpoint</a>.</p>
 
 <h3 id="attributes">Attributes</h3>
 
@@ -128,7 +130,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/app/v1/service/(uuid)/trigger/</code></p>
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]service/(uuid)/trigger/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -187,7 +189,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/service/(uuid)/trigger/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]service/(uuid)/trigger/</code></p>
 
 <h3 id="json-parameters">JSON Parameters</h3>
 
@@ -243,7 +245,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/app/v1/service/(uuid)/trigger/(trigger_uuid)/</code></p>
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]service/(uuid)/trigger/(trigger_uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -296,7 +298,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">DELETE /api/app/v1/service/(uuid)/trigger/(trigger_uuid)/</code></p>
+<p><code class="prettyprint">DELETE /api/app/v1/[optional_namespace/]service/(uuid)/trigger/(trigger_uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -346,7 +348,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/service/(uuid)/trigger/(trigger_uuid)/call/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]service/(uuid)/trigger/(trigger_uuid)/call/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 

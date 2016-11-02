@@ -56,7 +56,7 @@
         </span><span class="nt">"host_path"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nt">"container_path"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nt">"rewritable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"volumes_from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/service/2f4f54e5-9d3b-4ac1-85ad-a2d4ff25a179/"</span><span class="w">
+        </span><span class="nt">"volumes_from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/service/2f4f54e5-9d3b-4ac1-85ad-a2d4ff25a179/"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"cap_add"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -83,8 +83,8 @@
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"containers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"/api/app/v1/container/6f8ee454-9dc3-4387-80c3-57aac1be3cc6/"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"/api/app/v1/container/fdf9c116-7c08-4a60-b0ce-c54ca72c2f25/"</span><span class="w">
+    </span><span class="s2">"/api/app/v1/user_namespace/container/6f8ee454-9dc3-4387-80c3-57aac1be3cc6/"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"/api/app/v1/user_namespace/container/fdf9c116-7c08-4a60-b0ce-c54ca72c2f25/"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"cpu_shares"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
   </span><span class="nt">"cpuset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0,1"</span><span class="p">,</span><span class="w">
@@ -155,14 +155,14 @@
     </span><span class="nt">"WORDPRESS_STACKABLE_PORT_80_TCP_ADDR"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable-1.admin.cont.dockerapp.io"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"WORDPRESS_STACKABLE_PORT_80_TCP_PORT"</span><span class="p">:</span><span class="w"> </span><span class="s2">"49153"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"WORDPRESS_STACKABLE_PORT_80_TCP_PROTO"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"WORDPRESS_STACKABLE_DOCKERCLOUD_API_URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cloud.docker.com/api/app/v1/service/adeebc1b-1b81-4af0-b8f2-cefffc69d7fb/"</span><span class="w">
+    </span><span class="nt">"WORDPRESS_STACKABLE_DOCKERCLOUD_API_URL"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cloud.docker.com/api/app/v1/user_namespace/service/adeebc1b-1b81-4af0-b8f2-cefffc69d7fb/"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"linked_from_service"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="nt">"linked_to_service"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"from_service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"from_service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"to_service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/service/72f175bd-390b-46e3-9463-830aca32ce3e/"</span><span class="w">
+      </span><span class="nt">"to_service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/service/72f175bd-390b-46e3-9463-830aca32ce3e/"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"mac_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"02:42:ac:11:65:43"</span><span class="p">,</span><span class="w">
@@ -173,7 +173,7 @@
   </span><span class="nt">"privileged"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nt">"public_dns"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable.admin.svc.dockerapp.io"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"read_only"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"global"</span><span class="p">],</span><span class="w">
   </span><span class="nt">"run_command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/run-wordpress.sh"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"running_num_containers"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -182,7 +182,7 @@
   </span><span class="nt">"sequential_deployment"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nt">"started_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mon, 13 Oct 2014 11:01:43 +0000"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Partly running"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"stack"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/stack/46aca402-2109-4a70-a378-760cfed43816/"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stack"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/stack/46aca402-2109-4a70-a378-760cfed43816/"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"stdin_open"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nt">"stopped_datetime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"stopped_num_containers"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -201,6 +201,8 @@
 </span></code></pre>
 
 <p>A service is a template used to deploy one or more containers.</p>
+
+<p>This is a <a href="#namespaced-endpoints">namespaced endpoint</a>.</p>
 
 <h3 id="attributes">Attributes</h3>
 
@@ -661,7 +663,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/app/v1/service/</code></p>
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]service/</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -724,7 +726,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/service/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]service/</code></p>
 
 <h3 id="json-parameters">JSON Parameters</h3>
 
@@ -939,7 +941,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/app/v1/service/(uuid)/</code></p>
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]service/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -1009,7 +1011,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/app/v1/service/(uuid)/logs/</code></p>
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]service/(uuid)/logs/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -1090,7 +1092,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PATCH /api/app/v1/service/(uuid)/</code></p>
+<p><code class="prettyprint">PATCH /api/app/v1/[optional_namespace/]service/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -1234,7 +1236,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/service/(uuid)/start/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]service/(uuid)/start/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -1284,7 +1286,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/service/(uuid)/stop/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]service/(uuid)/stop/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -1324,7 +1326,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/service/(uuid)/scale/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]service/(uuid)/scale/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -1376,7 +1378,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/service/(uuid)/redeploy/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]service/(uuid)/redeploy/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -1440,7 +1442,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">DELETE /api/app/v1/service/(uuid)/</code></p>
+<p><code class="prettyprint">DELETE /api/app/v1/[optional_namespace/]service/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 

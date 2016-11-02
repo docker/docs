@@ -44,10 +44,10 @@
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TestCluster"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"node_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/nodetype/aws/t2.micro/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"nodes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"/api/infra/v1/node/75d20367-0948-4f10-8ba4-ffb4d16ed3c6/"</span><span class="w">
+        </span><span class="s2">"/api/infra/v1/user_namespace/node/75d20367-0948-4f10-8ba4-ffb4d16ed3c6/"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/region/aws/us-east-1/"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/nodecluster/5516df0b-721e-4470-b350-741ff22e63a0/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/user_namespace/nodecluster/5516df0b-721e-4470-b350-741ff22e63a0/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployed"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tag_one"</span><span class="p">},</span><span class="w">
@@ -70,6 +70,8 @@
 </span></code></pre>
 
 <p>A node cluster is a group of nodes that share the same provider, region and/or availability zone, and node type. They are on the same private network.</p>
+
+<p>This is a <a href="#namespaced-endpoints">namespaced endpoint</a>.</p>
 
 <h3 id="attributes">Attributes</h3>
 
@@ -233,7 +235,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/infra/v1/nodecluster/</code></p>
+<p><code class="prettyprint">GET /api/infra/v1/[optional_namespace/]nodecluster/</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -302,7 +304,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/infra/v1/nodecluster/</code></p>
+<p><code class="prettyprint">POST /api/infra/v1/[optional_namespace/]nodecluster/</code></p>
 
 <h3 id="json-parameters">JSON Parameters</h3>
 
@@ -377,7 +379,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/infra/v1/nodecluster/(uuid)/</code></p>
+<p><code class="prettyprint">GET /api/infra/v1/[optional_namespace/]nodecluster/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -425,7 +427,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/infra/v1/nodecluster/(uuid)/deploy/</code></p>
+<p><code class="prettyprint">POST /api/infra/v1/[optional_namespace/]nodecluster/(uuid)/deploy/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -482,7 +484,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PATCH /api/infra/v1/nodecluster/(uuid)/</code></p>
+<p><code class="prettyprint">PATCH /api/infra/v1/[optional_namespace/]nodecluster/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -550,7 +552,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">DELETE /api/infra/v1/nodecluster/(uuid)/</code></p>
+<p><code class="prettyprint">DELETE /api/infra/v1/[optional_namespace/]nodecluster/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
