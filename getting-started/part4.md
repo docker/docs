@@ -87,7 +87,7 @@ So, let's do that now.
 ### Configure Docker Cloud to manage to your AWS instances
 
 - Go to [cloud.docker.com](http://cloud.docker.com) and sign in with the
-  same Docker ID you used in [step 2](/getting-started/step2.md).
+  same Docker ID you used in [part 2](/getting-started/part2.md).
 - Click **Settings**, and in the Cloud Providers section, click the plug icon.
 - Enter the Role ARN string you copied earlier, e.g. `arn:aws:iam::123456789123:role/dockercloud-role`.
 - Click **Save**.

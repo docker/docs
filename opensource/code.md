@@ -38,7 +38,7 @@ target="_blank">Get the software</a> you need.
 target="_blank">Configure Git and fork the repo</a>.
 
 	Your Git configuration can make it easier for you to contribute.
-	Configuration is especially key if are new to contributing or to Docker.
+	Configuration is especially key if you are new to contributing or to Docker.
 
 3. <a href="http://docs.docker.com/opensource/project/set-up-dev-env/"
 target="_blank">Learn to work with the Docker development container</a>.
@@ -77,7 +77,7 @@ pull request</a>.
 
 	![Sign commits and issues](images/bonus.png)
 
-	We have also have checklist that describes [what each pull request
+	We also have checklist that describes [what each pull request
 	needs](code.md#what-is-the-pre-pull-request-checklist).
 
 

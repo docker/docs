@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/swarm_leave/
 description: The swarm leave command description and usage
 keywords:
 - swarm, leave
@@ -32,6 +34,7 @@ without using `--force`. Only use `--force` in situations where the swarm will
 no longer be used after the manager leaves, such as in a single-node swarm.
 
 Consider the following swarm, as seen from the manager:
+
 ```bash
 $ docker node ls
 ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
@@ -41,10 +44,12 @@ dvfxp4zseq4s0rih1selh0d20 *  manager1  Ready   Active        Leader
 ```
 
 To remove `worker2`, issue the following command from `worker2` itself:
+
 ```bash
 $ docker swarm leave
 Node left the default swarm.
 ```
+
 To remove an inactive node, use the [`node rm`](node_rm.md) command instead.
 
 ## Related information

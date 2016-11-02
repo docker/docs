@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/pull/
 description: The pull command description and usage
 keywords:
 - pull, image, hub, docker

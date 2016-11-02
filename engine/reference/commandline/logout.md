@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/logout/
 description: The logout command description and usage
 keywords:
 - logout, docker, registry

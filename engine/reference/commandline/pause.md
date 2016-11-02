@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/pause/
 description: The pause command description and usage
 keywords:
 - cgroups, container, suspend, SIGSTOP

@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/stack_tasks/
 advisory: experimental
 description: The stack tasks command description and usage
 keywords:

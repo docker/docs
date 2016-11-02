@@ -171,7 +171,7 @@ Override the default command.
 
     command: bundle exec thin -p 3000
 
-The command can also be a list, in a manner similar to [dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+The command can also be a list, in a manner similar to [dockerfile](/engine/reference/builder/#cmd):
 
     command: [bundle, exec, thin, -p, 3000]
 
@@ -264,7 +264,7 @@ Override the default entrypoint.
 
     entrypoint: /code/entrypoint.sh
 
-The entrypoint can also be a list, in a manner similar to [dockerfile](https://docs.docker.com/engine/reference/builder/#entrypoint):
+The entrypoint can also be a list, in a manner similar to [dockerfile](/engine/reference/builder/#entrypoint):
 
     entrypoint:
         - php
@@ -413,7 +413,7 @@ options and tags it with the specified tag.
 
 ### labels
 
-Add metadata to containers using [Docker labels](https://docs.docker.com/engine/userguide/labels-custom-metadata/). You can use either an array or a dictionary.
+Add metadata to containers using [Docker labels](/engine/userguide/labels-custom-metadata/). You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.
 
@@ -442,7 +442,7 @@ Containers for the linked service will be reachable at a hostname identical to
 the alias, or the service name if no alias was specified.
 
 Links also express dependency between services in the same way as
-[depends_on](compose-file.md#depends-on), so they determine the order of service startup.
+[depends_on](compose-file.md#dependson), so they determine the order of service startup.
 
 > **Note:** If you define both links and [networks](compose-file.md#networks), services with
 > links between them must share at least one network in common in order to
@@ -462,7 +462,7 @@ Logging configuration for the service.
 
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
-([documented here](https://docs.docker.com/engine/reference/logging/overview/)).
+([documented here](/engine/reference/logging/overview/)).
 
 The default value is json-file.
 
@@ -721,8 +721,8 @@ use the specified driver.
 > Note: No path expansion will be done if you have also specified a
 > `volume_driver`.
 
-See [Docker Volumes](https://docs.docker.com/engine/userguide/dockervolumes/) and
-[Volume Plugins](https://docs.docker.com/engine/extend/plugins_volume/) for more
+See [Docker Volumes](/engine/userguide/dockervolumes/) and
+[Volume Plugins](/engine/extend/plugins_volume/) for more
 information.
 
 ### volumes_from
@@ -749,7 +749,7 @@ then read-write will be used.
 ### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](https://docs.docker.com/engine/reference/run/) counterpart.
+[docker run](/engine/reference/run/) counterpart.
 
     cpu_shares: 73
     cpu_quota: 50000
@@ -781,7 +781,7 @@ While it is possible to declare volumes on the fly as part of the service
 declaration, this section allows you to create named volumes that can be
 reused across multiple services (without relying on `volumes_from`), and are
 easily retrieved and inspected using the docker command line or API.
-See the [docker volume](https://docs.docker.com/engine/reference/commandline/volume_create/)
+See the [docker volume](/engine/reference/commandline/volume_create/)
 subcommand documentation for more information.
 
 ### driver

@@ -75,7 +75,7 @@ configure your firewalls and other network access control lists.
 - **Custom, cross-host container networks**:
     - **Inbound 7946/tcp** Allows for discovering other container networks.
     - **Inbound 7946/udp** Allows for discovering other container networks.
-    - **Inbound <store-port>/tcp** Network key-value store service port.
+    - **Inbound `<store-port>`/tcp** Network key-value store service port.
     - **4789/udp** For the container overlay network.
 
 

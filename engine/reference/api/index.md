@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/api/
 description: Reference
 keywords:
 - Engine

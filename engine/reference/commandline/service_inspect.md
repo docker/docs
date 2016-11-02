@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/service_inspect/
 description: The service inspect command description and usage
 keywords:
 - service, inspect

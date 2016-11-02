@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/network_disconnect/
 description: The network disconnect command description and usage
 keywords:
 - network, disconnect, user-defined
