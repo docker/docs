@@ -3,8 +3,7 @@ aliases:
 - /engine/userguide/containers/networkigncontainers/
 - /engine/userguide/networkigncontainers/
 description: How to network Docker containers.
-keywords:
-- Examples, Usage, volume, docker, documentation, user guide, data,  volumes
+keywords: Examples, Usage, volume, docker, documentation, user guide, data,  volumes
 menu:
   main:
     parent: engine_learn_menu

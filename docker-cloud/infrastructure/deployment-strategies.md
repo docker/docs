@@ -2,8 +2,7 @@
 aliases:
 - /docker-cloud/feature-reference/deployment-strategies/
 description: Schedule a deployment
-keywords:
-- schedule, deployment, container
+keywords: schedule, deployment, container
 menu:
   main:
     parent: infrastructure

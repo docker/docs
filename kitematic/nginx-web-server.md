@@ -1,8 +1,7 @@
 ---
 description: Tutorial demonstrating the setup of an Nginx web server using Docker
   and Kitematic
-keywords:
-- docker, documentation, about, technology, kitematic, gui, nginx,  tutorial
+keywords: docker, documentation, about, technology, kitematic, gui, nginx,  tutorial
 menu:
   main:
     parent: toolbox_kitematic

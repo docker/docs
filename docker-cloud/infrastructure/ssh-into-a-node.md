@@ -4,8 +4,7 @@ aliases:
 - /docker-cloud/tutorials/ssh-into-a-node/
 - /docker-cloud/faq/how-ssh-nodes/
 description: SSHing into a Docker Cloud-managed node
-keywords:
-- ssh, Cloud, node
+keywords: ssh, Cloud, node
 menu:
   main:
     parent: infrastructure

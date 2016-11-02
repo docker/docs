@@ -2,8 +2,7 @@
 aliases:
 - /mackit/multi-arch/
 description: Multi-CPU Architecture Support
-keywords:
-- mac, Multi-CPU architecture support
+keywords: mac, Multi-CPU architecture support
 menu:
   main:
     identifier: mac-multiarch

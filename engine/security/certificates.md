@@ -2,9 +2,8 @@
 aliases:
 - /engine/articles/certificates/
 description: How to set up and use certificates with a registry to verify access
-keywords:
-- Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls,
-  documentation, examples, articles,  tutorials
+keywords: Usage, registry, repository, client, root, certificate, docker, apache,
+  ssl, tls, documentation, examples, articles,  tutorials
 menu:
   main:
     parent: smn_secure_docker

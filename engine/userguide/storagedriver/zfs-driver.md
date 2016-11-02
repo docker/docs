@@ -1,7 +1,6 @@
 ---
 description: Learn how to optimize your use of ZFS driver.
-keywords:
-- 'container, storage, driver, ZFS '
+keywords: 'container, storage, driver, ZFS '
 menu:
   main:
     parent: engine_driver

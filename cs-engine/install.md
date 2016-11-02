@@ -4,8 +4,7 @@ aliases:
 - /docker-trusted-registry/install/install-csengine/
 - /docker-trusted-registry/cs-engine/install/
 description: Learn how to install the commercially supported version of Docker Engine.
-keywords:
-- docker, engine, dtr, install
+keywords: docker, engine, dtr, install
 menu:
   main:
     identifier: csengine_install

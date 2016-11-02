@@ -4,8 +4,7 @@ aliases:
 - /docker-trusted-registry/userguide/
 - /docker-trusted-registry/repos-and-images/push-and-pull-images/
 description: Learn how to push an image to Docker Trusted Registry.
-keywords:
-- docker, registry, images, pull
+keywords: docker, registry, images, pull
 menu:
   main:
     identifier: dtr_push_image

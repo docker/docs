@@ -1,7 +1,6 @@
 ---
 description: Describes Docker's communication channels
-keywords:
-- IRC, Google group, Twitter, blog,  Stackoverflow
+keywords: IRC, Google group, Twitter, blog,  Stackoverflow
 menu:
   main:
     identifier: smn_workflow
@@ -17,4 +16,4 @@ title: Contribution workflow
 * [Create a pull request](create-pr.md)            
 * [Participate in the PR review](review-pr.md)            
 * [Advanced contributing](advanced-contributing.md)
-* [Coding style checklist](coding-style.md)        
+* [Coding style checklist](coding-style.md)

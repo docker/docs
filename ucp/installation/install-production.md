@@ -2,8 +2,7 @@
 aliases:
 - /ucp/production-install/
 description: Learn how to install Docker Universal Control Plane on production
-keywords:
-- Universal Control Plane, UCP, install
+keywords: Universal Control Plane, UCP, install
 menu:
   main:
     identifier: ucp_install_production

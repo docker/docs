@@ -2,8 +2,7 @@
 aliases:
 - /engine/installation/cruxlinux/
 description: Docker installation on CRUX Linux.
-keywords:
-- crux linux, Docker, documentation,  installation
+keywords: crux linux, Docker, documentation,  installation
 menu:
   main:
     parent: engine_linux

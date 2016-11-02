@@ -2,8 +2,7 @@
 aliases:
 - /compose/env
 description: Compose CLI reference
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  reference
+keywords: fig, composition, compose, docker, orchestration, cli,  reference
 menu:
   main:
     parent: workw_compose

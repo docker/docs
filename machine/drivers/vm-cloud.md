@@ -1,7 +1,6 @@
 ---
 description: VMware vCloud Air driver for machine
-keywords:
-- machine, VMware vCloud Air, driver
+keywords: machine, VMware vCloud Air, driver
 menu:
   main:
     parent: smn_machine_drivers

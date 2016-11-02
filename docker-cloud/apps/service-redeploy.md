@@ -2,8 +2,7 @@
 aliases:
 - /docker-cloud/feature-reference/service-redeploy/
 description: Redeploy running services
-keywords:
-- redeploy, running, services
+keywords: redeploy, running, services
 menu:
   main:
     parent: apps

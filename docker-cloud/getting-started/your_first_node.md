@@ -3,8 +3,7 @@ aliases:
 - /docker-cloud/getting-started/beginner/your_first_node/
 - /docker-cloud/getting-started/beginner/deploy_first_node/
 description: Deploy your first node on Docker Cloud
-keywords:
-- node, create, understand
+keywords: node, create, understand
 menu:
   main:
     parent: getting-started

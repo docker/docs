@@ -1,7 +1,6 @@
 ---
 description: Organize our issues
-keywords:
-- governance, board, members, profiles
+keywords: governance, board, members, profiles
 menu:
   main:
     parent: smn_ways

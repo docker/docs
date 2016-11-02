@@ -3,8 +3,7 @@ aliases:
 - /engine/userguide/containers/dockervolumes/
 - /engine/userguide/dockervolumes/
 description: How to manage data inside your Docker containers.
-keywords:
-- Examples, Usage, volume, docker, documentation, user guide, data,  volumes
+keywords: Examples, Usage, volume, docker, documentation, user guide, data,  volumes
 menu:
   main:
     parent: engine_learn_menu

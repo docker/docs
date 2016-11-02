@@ -5,8 +5,7 @@ aliases:
 - /engine/quickstart.md
 - /engine/introduction/understanding-docker/
 description: Docker explained in depth
-keywords:
-- docker, introduction, documentation, about, technology,  understanding
+keywords: docker, introduction, documentation, about, technology,  understanding
 menu:
   main:
     parent: engine_use

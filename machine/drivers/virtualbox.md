@@ -1,7 +1,6 @@
 ---
 description: Oracle VirtualBox driver for machine
-keywords:
-- machine, Oracle VirtualBox, driver
+keywords: machine, Oracle VirtualBox, driver
 menu:
   main:
     parent: smn_machine_drivers

@@ -3,8 +3,7 @@ aliases:
 - /docker-trusted-registry/install/upgrade/
 description: Learn how to upgrade your Docker Trusted Registry to the latest major
   release.
-keywords:
-- docker, dtr, upgrade, install
+keywords: docker, dtr, upgrade, install
 menu:
   main:
     identifier: dtr_upgrade_major

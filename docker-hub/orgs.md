@@ -1,7 +1,7 @@
 ---
 description: Docker Hub Teams and Organizations
-keywords:
-- Docker, docker, registry, teams, organizations, plans, Dockerfile, Docker Hub, docs,  documentation
+keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Docker
+  Hub, docs,  documentation
 menu:
   main:
     parent: mn_pubhub

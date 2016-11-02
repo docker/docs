@@ -2,9 +2,8 @@
 aliases:
 - /docker-trusted-registry/release-notes/release-notes/
 description: 'Docker Trusted Registry release notes '
-keywords:
-- docker, documentation, about, technology, understanding, enterprise, hub, registry,
-  release notes, Docker Trusted Registry
+keywords: docker, documentation, about, technology, understanding, enterprise, hub,
+  registry, release notes, Docker Trusted Registry
 menu:
   main:
     identifier: dtr_release_notes

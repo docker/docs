@@ -3,9 +3,8 @@ aliases:
 - /docker-trusted-registry/cse-prior-release-notes/
 - /docker-trusted-registry/cs-engine/release-notes/prior-release-notes/
 description: Archived release notes for commercially supported Docker Engine
-keywords:
-- docker, documentation, about, technology, understanding, enterprise, hub, registry,release,
-  commercially supported Docker Engine
+keywords: docker, documentation, about, technology, understanding, enterprise, hub,
+  registry,release, commercially supported Docker Engine
 menu:
   main:
     identifier: csengine_prior_release_notes

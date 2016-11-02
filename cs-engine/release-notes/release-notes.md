@@ -3,9 +3,8 @@ aliases:
 - /docker-trusted-registry/cse-release-notes/
 - /docker-trusted-registry/cs-engine/release-notes/release-notes/
 description: Commercially supported Docker Engine release notes
-keywords:
-- docker, documentation, about, technology, understanding, enterprise, hub, registry,
-  Commercially Supported Docker Engine, release notes
+keywords: docker, documentation, about, technology, understanding, enterprise, hub,
+  registry, Commercially Supported Docker Engine, release notes
 menu:
   main:
     identifier: csengine_release_notes

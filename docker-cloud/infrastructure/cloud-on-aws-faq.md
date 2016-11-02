@@ -2,8 +2,7 @@
 aliases:
 - /docker-cloud/faq/cloud-on-aws-faq/
 description: Docker Cloud on AWS
-keywords:
-- Cloud, AWS, faq
+keywords: Cloud, AWS, faq
 menu:
   main:
     parent: infrastructure

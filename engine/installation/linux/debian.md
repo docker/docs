@@ -2,8 +2,7 @@
 aliases:
 - /engine/installation/debian/
 description: Instructions for installing Docker on Debian.
-keywords:
-- Docker, Docker documentation, installation,  debian
+keywords: Docker, Docker documentation, installation,  debian
 menu:
   main:
     parent: engine_linux

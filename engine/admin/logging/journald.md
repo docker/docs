@@ -2,8 +2,7 @@
 aliases:
 - /engine/reference/logging/journald/
 description: Describes how to use the fluentd logging driver.
-keywords:
-- Journald, docker, logging, driver
+keywords: Journald, docker, logging, driver
 menu:
   main:
     parent: smn_logging

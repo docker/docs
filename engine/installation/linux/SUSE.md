@@ -2,8 +2,7 @@
 aliases:
 - /engine/installation/SUSE/
 description: Installation instructions for Docker on openSUSE and on SUSE Linux Enterprise.
-keywords:
-- openSUSE, SUSE Linux Enterprise, SUSE, SLE, docker, documentation,  installation
+keywords: openSUSE, SUSE Linux Enterprise, SUSE, SLE, docker, documentation,  installation
 menu:
   main:
     parent: engine_linux

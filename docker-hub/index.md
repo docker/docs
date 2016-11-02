@@ -1,9 +1,8 @@
 ---
 aliases: /docker-hub/overview/
 description: Docker Hub overview
-keywords:
-- Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation,
-  accounts, organizations, repositories, groups,  teams
+keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs,
+  documentation, accounts, organizations, repositories, groups,  teams
 menu:
   main:
     parent: mn_pubhub

@@ -4,8 +4,7 @@ aliases:
 - /windows/step_five/
 - /linux/step_five/
 description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
+keywords: beginner, getting started, Docker
 menu:
   main:
     identifier: getstart_docker_hub

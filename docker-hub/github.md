@@ -1,8 +1,7 @@
 ---
 description: Docker Hub Automated Builds with GitHub
-keywords:
-- Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation,
-  trusted, builds, trusted builds,  automated builds, GitHub
+keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs,
+  documentation, trusted, builds, trusted builds,  automated builds, GitHub
 menu:
   main:
     parent: mn_pubhub

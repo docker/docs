@@ -1,7 +1,6 @@
 ---
 description: OpenStack driver for machine
-keywords:
-- machine, OpenStack, driver
+keywords: machine, OpenStack, driver
 menu:
   main:
     parent: smn_machine_drivers

@@ -1,8 +1,7 @@
 ---
 description: Documentation that provides an overview of Kitematic and installation
   instructions
-keywords:
-- docker, documentation, about, technology, kitematic,  gui
+keywords: docker, documentation, about, technology, kitematic,  gui
 menu:
   main:
     identifier: toolbox_kitematic

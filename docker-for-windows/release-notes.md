@@ -2,8 +2,7 @@
 aliases:
 - /winkit/release-notes/
 description: Change log / release notes per release
-keywords:
-- pinata, alpha, tutorial
+keywords: pinata, alpha, tutorial
 menu:
   main:
     identifier: docker-win-relnotes

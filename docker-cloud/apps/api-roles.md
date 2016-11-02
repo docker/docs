@@ -2,8 +2,7 @@
 aliases:
 - /docker-cloud/feature-reference/api-roles/
 description: API Roles
-keywords:
-- API, Services, roles
+keywords: API, Services, roles
 menu:
   main:
     parent: apps

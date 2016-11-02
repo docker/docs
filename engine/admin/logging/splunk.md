@@ -2,8 +2,7 @@
 aliases:
 - /engine/reference/logging/splunk/
 description: Describes how to use the Splunk logging driver.
-keywords:
-- splunk, docker, logging, driver
+keywords: splunk, docker, logging, driver
 title: Splunk logging driver
 ---
 

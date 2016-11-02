@@ -2,8 +2,7 @@
 aliases:
 - /mackit/docker-toolbox/
 description: Docker for Mac and Docker Toolbox
-keywords:
-- mac, windows, alpha, beta, toolbox, docker-machine, tutorial
+keywords: mac, windows, alpha, beta, toolbox, docker-machine, tutorial
 menu:
   main:
     identifier: kit-toolbox

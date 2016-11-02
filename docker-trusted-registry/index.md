@@ -3,8 +3,7 @@ aliases:
 - /docker-hub-enterprise/
 - /docker-trusted-registry/overview/
 description: Learn how to install, configure, and use Docker Trusted Registry.
-keywords:
-- docker, registry, repository, images
+keywords: docker, registry, repository, images
 menu:
   main:
     identifier: dtr_overview

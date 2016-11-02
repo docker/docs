@@ -1,7 +1,6 @@
 ---
 description: Swarm discovery
-keywords:
-- docker, swarm, clustering,  discovery
+keywords: docker, swarm, clustering,  discovery
 menu:
   main:
     parent: workw_swarm

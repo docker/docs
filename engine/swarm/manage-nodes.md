@@ -1,7 +1,6 @@
 ---
 description: Manage existing nodes in a swarm
-keywords:
-- guide, swarm mode, node
+keywords: guide, swarm mode, node
 menu:
   main:
     identifier: manage-nodes-guide
