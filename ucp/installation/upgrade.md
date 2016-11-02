@@ -166,7 +166,7 @@ If your cluster is set up for high-availability (has several controller nodes):
     ```
 
 7.  Upgrade the controller node.
-    
+
     ```none
     $ docker run --rm -it \
       --name ucp \
