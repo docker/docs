@@ -249,13 +249,15 @@ logging driver options.
 
 For example, to specify both additional options:
 
-```bash{% raw %}
+```bash
+{% raw %}
 $ docker run -dit \
     --log-driver=fluentd \
     --log-opt fluentd-address=localhost:24224 \
     --log-opt tag="docker.{{.Name}}" \
     alpine sh
-```{% endraw %}
+{% endraw %}
+```
 
 If container cannot connect to the Fluentd daemon on the specified address and
 `fluentd-async-connect` is not enabled, the container stops immediately.
