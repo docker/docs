@@ -9,14 +9,13 @@ incremental: true
 permalink: pretty
 safe: false
 lsi: false
-exclude:
-  - vendor
-  - bin
+url: https://docs.docker.com
 
 gems:
   - jekyll-redirect-from
-  - jekyll-sitemap
   - jekyll-gist
+  - jekyll-seo-tag
+
 
 defaults:
   -
@@ -25,4 +24,4 @@ defaults:
       type: "pages"
     values:
       layout: docs
-      archiveserver: "54.71.194.30"
+      archiveserver: "http://54.71.194.30"

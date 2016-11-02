@@ -16,16 +16,24 @@
     font-size: 16px;
     border-left: 4px solid #6db9d1;
     padding: 6px;
-    background-color: #f5f5f5;
+    background-color: #fafafa;
+    color: black !important;
+}
+#DocumentationText blockquote li div.highlighter-rouge {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 #DocumentationText blockquote p {
-    color: black;
+    color: black !important;
 		margin: 0;
 		padding: 10px 20px;
 }
 #DocumentationText blockquote p strong {
     color: #6db9d1;
     /* most Note's have a non-strong ':' display: block;*/
+}
+#DocumentationText blockquote ol, #DocumentationText blockquote ul {
+  padding-left: 20px !important;
 }
 #DocumentationText code {
   border-width: 0px !important;
@@ -328,7 +336,7 @@ color: #F04124;
     border: 0;
     text-indent: -9999px;
     background-color: transparent;
-    background-image: url("https://blog.docker.com/wp-content/themes/whale_roots/assets/img/search-icon.png");
+    background-image: url("/images/search-icon.png");
     /* background-size: 38px 38px; */
     background-repeat: no-repeat;
     background-position: center center;

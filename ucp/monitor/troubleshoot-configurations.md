@@ -38,7 +38,7 @@ $ sudo apt-get update && apt-get install curl jq
 
 2. Use the REST API to access the cluster configurations.
 
-```bash
+```none
 # $DOCKER_HOST and $DOCKER_CERT_PATH are set when using the client bundle
 $ export KV_URL="https://$(echo $DOCKER_HOST | cut -f3 -d/ | cut -f1 -d:):12379"
 
@@ -62,7 +62,7 @@ The examples below assume you are logged in with ssh into a UCP controller node.
 
 ### Check the health of the etcd cluster
 
-```bash
+```none
 $ docker exec -it ucp-kv etcdctl \
         --endpoint https://127.0.0.1:2379 \
         --ca-file /etc/docker/ssl/ca.pem \
@@ -80,7 +80,7 @@ On failure the command exits with an error code, and no output.
 
 ### Show the current value of a key
 
-```bash
+```none
 $ docker exec -it ucp-kv etcdctl \
         --endpoint https://127.0.0.1:2379 \
         --ca-file /etc/docker/ssl/ca.pem \
@@ -96,7 +96,7 @@ $ docker exec -it ucp-kv etcdctl \
 
 ### List the current members of the cluster
 
-```bash
+```none
 $ docker exec -it ucp-kv etcdctl \
         --endpoint https://127.0.0.1:2379 \
         --ca-file /etc/docker/ssl/ca.pem \
@@ -115,7 +115,7 @@ As long as your cluster is still functional and has not lost quorum
 (more than (n/2)-1 nodes failed) you can use the following command to
 remove the failed members.
 
-```bash
+```none
 $ docker exec -it ucp-kv etcdctl \
         --endpoint https://127.0.0.1:2379 \
         --ca-file /etc/docker/ssl/ca.pem \

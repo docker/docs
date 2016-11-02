@@ -32,7 +32,7 @@ Docker for Mac is our newest offering for the Mac. It runs as a native Mac appli
 
 - Mac must be a 2010 or newer model, with Intel's hardware support for memory management unit (MMU) virtualization; i.e., Extended Page Tables (EPT)
 
-- OS X 10.10.3 Yosemite or newer
+- macOS 10.10.3 Yosemite or newer
 
 - At least 4GB of RAM
 

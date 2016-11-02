@@ -1,16 +1,16 @@
 ---
-description: Instructions for installing Docker on OS X using boot2docker.
+description: Docker installation on macOS
 keywords:
 - Docker, Docker documentation, requirements, boot2docker, VirtualBox, SSH, Linux,
-  OSX, OS X,  Mac
+  osx, os x, macOS,  Mac
 menu:
   main:
     parent: engine_install
     weight: "-90"
-title: Installation on Mac OS X
+title: Installation on macOS
 ---
 
-# Mac OS X
+# macOS
 
 You have two options for installing Docker on Mac:
 
@@ -27,7 +27,7 @@ Go to [Getting Started with Docker for Mac](https://docs.docker.com/docker-for-m
 
 - Mac must be a 2010 or newer model, with Intel's hardware support for memory management unit (MMU) virtualization; i.e., Extended Page Tables (EPT)
 
-- OS X 10.10.3 Yosemite or newer
+- macOS 10.10.3 Yosemite or newer
 
 - At least 4GB of RAM
 
@@ -39,11 +39,11 @@ If you have an earlier Mac that doesn't meet the Docker for Mac requirements, <a
 
 See [Docker Toolbox Overview](/toolbox/overview.md) for help on installing Docker with Toolbox.
 
-The Docker Toolbox setup does not run Docker natively in OS X. Instead, it uses `docker-machine` to create and attach to a virtual machine (VM). This machine is a Linux VM that hosts Docker for you on your Mac.
+The Docker Toolbox setup does not run Docker natively in macOS. Instead, it uses `docker-machine` to create and attach to a virtual machine (VM). This machine is a Linux VM that hosts Docker for you on your Mac.
 
 **Requirements**
 
-Your Mac must be running OS X 10.8 "Mountain Lion" or newer to install the Docker Toolbox. Full install instructions are at [Toolbox install instructions for Mac](/toolbox/toolbox_install_mac.md).
+Your Mac must be running macOS 10.8 "Mountain Lion" or newer to install the Docker Toolbox. Full install instructions are at [Toolbox install instructions for Mac](/toolbox/toolbox_install_mac.md).
 
 
 ## Learning more

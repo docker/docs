@@ -1,6 +1,8 @@
 ---
+aliases:
+  - /reference/api/hub_registry_spec/
 description: Documentation for docker Registry and Registry API
-draft: true
+published: false
 keywords:
 - docker, registry, api,  hub
 menu:

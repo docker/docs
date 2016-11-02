@@ -16,8 +16,7 @@ You can build your images automatically from a build context stored in a reposit
 Automated Builds have several advantages:
 
  * Images built in this way are built exactly as specified.
- * The `Dockerfile` is available to anyone with access to
-your Docker Hub repository.
+ * The `Dockerfile` is available to anyone with access to your Docker Hub repository.
  * Your repository is kept up-to-date with code changes automatically.
 
 Automated Builds are supported for both public and private repositories
@@ -27,15 +26,22 @@ on both [GitHub](http://github.com) and [Bitbucket](https://bitbucket.org/). Thi
 
 To use automated builds you must have an [account on Docker Hub](accounts.md) and on the hosted repository provider (GitHub or Bitbucket). If
 you have previously linked your Github or Bitbucket account, you must have
-chosen the Public and Private connection type. To view your current connection
-settings, log in to Docker Hub and choose <a href="https://hub.docker.com/account/authorized-services/" target=\_blank>Profile > Settings > Linked Accounts & Services</a>.
+chosen the Public and Private connection type. 
 
+To view your current connection
+settings, log in to Docker Hub and choose **Profile > Settings > Linked Accounts & Services**.
+
+## Limitations
+
+Currently Docker Hub does not support Git LFS (Large File Storage). If you have binaries in your build context that are managed by Git LFS, only the pointer file will be present in the clone made during the automated build, which is not what you want. 
+
+Subscribe to the [GitHub issue](https://github.com/docker/hub-feedback/issues/500) tracking this limitation.
 
 ## Link to a hosted repository service
 
 1. Log into Docker Hub.
 
-2. Navigate to <a href="https://hub.docker.com/account/authorized-services/" target=\_blank>Profile &gt; Settings  &gt; Linked Accounts & Services</a>.
+2. Navigate to **Profile &gt; Settings  &gt; Linked Accounts & Services**.
 
 3. Click the service you want to link.
 

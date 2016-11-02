@@ -11,11 +11,11 @@ title: Install Machine
 
 # Install Docker Machine
 
-On OS X and Windows, Machine is installed along with other Docker products when
+On macOS and Windows, Machine is installed along with other Docker products when
 you install the Docker Toolbox. For details on installing Docker Toolbox, see
-the <a href="https://docs.docker.com/installation/mac/" target="_blank">Mac OS X
+the <a href="https://docs.docker.com/installation/mac/" target="_blank">macOS
 installation</a> instructions or <a
-href="https://docs.docker.com/installation/windows" target="_blank">Windows
+href="https://docs.docker.com/docker-for-windows/" target="_blank">Windows
 installation</a> instructions.
 
 If you want only Docker Machine, you can install the Machine binaries directly by following the instructions in the next section. You can find the latest versions of the binaries are on the <a href="https://github.com/docker/machine/releases/" target="_blank"> docker/machine release page</a> on GitHub.
@@ -27,15 +27,15 @@ If you want only Docker Machine, you can install the Machine binaries directly b
 
 2.  Download the Docker Machine binary and extract it to your PATH.
 
-    If you are running OS X or Linux:
+    If you are running macOS or Linux:
 
-        $ curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` > /usr/local/bin/docker-machine && \
+        $ curl -L https://github.com/docker/machine/releases/download/v0.8.2/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
         chmod +x /usr/local/bin/docker-machine
 
     If you are running Windows with git bash
 
         $ if [[ ! -d "$HOME/bin" ]]; then mkdir -p "$HOME/bin"; fi && \
-        curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-Windows-x86_64.exe > "$HOME/bin/docker-machine.exe" && \
+        curl -L https://github.com/docker/machine/releases/download/v0.8.2/docker-machine-Windows-x86_64.exe > "$HOME/bin/docker-machine.exe" && \
         chmod +x "$HOME/bin/docker-machine.exe"
 
     Otherwise, download one of the releases from the <a href="https://github.com/docker/machine/releases/" target="_blank"> docker/machine release page</a> directly.
@@ -43,7 +43,7 @@ If you want only Docker Machine, you can install the Machine binaries directly b
 3.  Check the installation by displaying the Machine version:
 
         $ docker-machine version
-        docker-machine version 0.7.0, build 61388e9
+        docker-machine version 0.8.2, build e18a919
 
 ## Installing bash completion scripts
 
