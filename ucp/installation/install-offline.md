@@ -27,7 +27,7 @@ all the images. Then you copy that package to the host where you’ll install UC
     Use a computer with internet access to download a single package with all
     Docker Datacenter components:
 
-    ```bash
+    ```none
     $ wget https://packages.docker.com/caas/ucp-1.1.3_dtr-2.0.3.tar.gz -O docker-datacenter.tar.gz
     ```
 
@@ -37,7 +37,7 @@ all the images. Then you copy that package to the host where you’ll install UC
     host where you'll be installing Docker UCP. You can use the Secure Copy command
     for this:
 
-    ```bash
+    ```none
     $ scp docker-datacenter.tar.gz $USER@$UCP_HOST:/tmp
     ```
 
@@ -49,7 +49,7 @@ all the images. Then you copy that package to the host where you’ll install UC
     `docker load` command, to load the images from the tar archive. On the host
     were you are going to install UCP, run:
 
-    ```bash
+    ```none
     $ docker load < docker-datacenter.tar.gz
     ```
 

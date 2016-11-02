@@ -72,7 +72,6 @@ You can use environment variables:
 -   `--amazonec2-use-ebs-optimized-instance`: Create an EBS Optimized Instance, instance type must support it.
 -   `--amazonec2-ssh-keypath`: Path to Private Key file to use for instance. Matching public key with .pub extension should exist
 -   `--amazonec2-retries`:  Set retry count for recoverable failures (use -1 to disable)
--   `--amazonec2-userdata`: Path to custom User Data file.
 
 
 #### Environment variables and default values:
@@ -103,7 +102,6 @@ You can use environment variables:
 | `--amazonec2-use-ebs-optimized-instance` | -                       | `false`          |
 | `--amazonec2-ssh-keypath`                | `AWS_SSH_KEYPATH`       | -                |
 | `--amazonec2-retries`                    | -                       | `5`              |
-| `--amazonec2-user-data`                  | `AWS_USERDATA`          | -                |
 
 ## Default AMIs
 

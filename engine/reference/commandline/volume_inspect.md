@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "volume inspect"
-description = "The volume inspect command description and usage"
-keywords = ["volume, inspect"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/volume_inspect/
+description: The volume inspect command description and usage
+keywords:
+- volume, inspect
+menu:
+  main:
+    parent: smn_cli
+title: volume inspect
+---
 
 # volume inspect
 

@@ -1,12 +1,12 @@
-<!--[metadata]>
-+++
-title="Device mapper storage in practice"
-description="Learn how to optimize your use of device mapper driver."
-keywords=["container, storage, driver, device mapper"]
-[menu.main]
-parent="engine_driver"
-+++
-<![end-metadata]-->
+---
+description: Learn how to optimize your use of device mapper driver.
+keywords:
+- container, storage, driver, device mapper
+menu:
+  main:
+    parent: engine_driver
+title: Device mapper storage in practice
+---
 
 # Docker and the Device Mapper storage driver
 
@@ -302,34 +302,42 @@ assumes that the Docker daemon is in the `stopped` state.
 	$ lvs -o+seg_monitor
 	```
 
-13. If the Docker daemon was previously started, clear your graph driver directory.
+13. If the Docker daemon was previously started, move your existing graph driver
+    directory out of the way.
 
-	Clearing your graph driver removes any images, containers, and volumes in your
-	Docker installation.
+    Moving the graph driver removes any images, containers, and volumes in your
+    Docker installation. These commands move the contents of the
+    `/var/lib/docker` directory to a new directory named `/var/lib/docker.bk`.
+    If any of the following steps fail and you need to restore, you can remove
+    `/var/lib/docker` and replace it with `/var/lib/docker.bk`.
 
-	```bash
-	$ rm -rf /var/lib/docker/*
-	```
+    ```bash
+    $ mkdir /var/lib/docker.bk
+    $ mv /var/lib/docker/* /var/lib/docker.bk
+    ```
 
 14. Configure the Docker daemon with specific devicemapper options.
 
-	There are two ways to do this. You can set options on the command line if you start the daemon there:
+    Now that your storage is configured, configure the Docker daemon to use it. There are two ways to do this. You can set options on the command line if you start the daemon there:
 
-	```bash
-	--storage-driver=devicemapper --storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool --storage-opt dm.use_deferred_removal=true
-	```
+    ```bash
+    --storage-driver=devicemapper --storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool --storage-opt=dm.use_deferred_removal=true --storage-opt=dm.use_deferred_deletion=true
+    ```
 
 	You can also set them for startup in the `daemon.json` configuration, for example:
 
-	```json
-	 {
-		 "storage-driver": "devicemapper",
-		 "storage-opts": [
-			 "dm.thinpooldev=/dev/mapper/docker-thinpool",
-			 "dm.use_deferred_removal=true"
-		 ]
-	 }
-	```
+    ```json
+    {
+      "storage-driver": "devicemapper",
+       "storage-opts": [
+         "dm.thinpooldev=/dev/mapper/docker-thinpool",
+         "dm.use_deferred_removal=true",
+         "dm.use_deferred_deletion=true"
+       ]
+    }
+    ```
+
+    >**Note**: Always set both `dm.use_deferred_removal=true` and `dm.use_deferred_deletion=true` to prevent unintentionally leaking mount points.
 
 15. If using systemd and modifying the daemon configuration via unit or drop-in file, reload systemd to scan for changes.
 
@@ -355,11 +363,18 @@ view the logs use:
 $ journalctl -fu dm-event.service
 ```
 
+After you have verified that the configuration is correct, you can remove the
+`/var/lib/docker.bk` directory which contains the previous configuration.
+
+```bash
+$ rm -rf /var/lib/docker.bk
+```
+
 If you run into repeated problems with thin pool, you can use the
 `dm.min_free_space` option to tune the Engine behavior. This value ensures that
 operations fail with a warning when the free space is at or near the minimum.
 For information, see <a
-href="../../../reference/commandline/dockerd/#storage-driver-options"
+href="/../../reference/commandline/dockerd/#storage-driver-options"
 target="_blank">the storage driver options in the Engine daemon reference</a>.
 
 

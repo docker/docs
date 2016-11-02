@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "network inspect"
-description = "The network inspect command description and usage"
-keywords = ["network, inspect, user-defined"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/network_inspect/
+description: The network inspect command description and usage
+keywords:
+- network, inspect, user-defined
+menu:
+  main:
+    parent: smn_cli
+title: network inspect
+---
 
 # network inspect
 

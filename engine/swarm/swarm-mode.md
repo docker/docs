@@ -176,5 +176,5 @@ To add a worker to this swarm, run the following command:
 ## Learn More
 
 * [Join nodes to a swarm](join-nodes.md)
-* `swarm init`[command line reference](../reference/commandline/swarm_init.md)
+* `swarm init` [command line reference](../reference/commandline/swarm_init.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)

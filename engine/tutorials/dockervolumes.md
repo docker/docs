@@ -100,11 +100,11 @@ In addition to creating a volume using the `-v` flag you can also mount a
 directory from your Docker engine's host into a container.
 
 ```bash
-$ docker run -d -P --name web -v /src/webapp:/opt/webapp training/webapp python app.py
+$ docker run -d -P --name web -v /src/webapp:/webapp training/webapp python app.py
 ```
 
 This command mounts the host directory, `/src/webapp`, into the container at
-`/opt/webapp`.  If the path `/opt/webapp` already exists inside the container's
+`/webapp`.  If the path `/webapp` already exists inside the container's
 image, the `/src/webapp` mount overlays but does not remove the pre-existing
 content. Once the mount is removed, the content is accessible again. This is
 consistent with the expected behavior of the `mount` command.
@@ -123,9 +123,9 @@ If you supply the `/foo` value, the Docker Engine creates a bind-mount. If you s
 the `foo` specification, the Docker Engine creates a named volume.
 
 If you are using Docker Machine on Mac or Windows, your Docker Engine daemon has only
-limited access to your OS X or Windows filesystem. Docker Machine tries to
-auto-share your `/Users` (OS X) or `C:\Users` (Windows) directory.  So, you can
-mount files or directories on OS X using.
+limited access to your macOS or Windows filesystem. Docker Machine tries to
+auto-share your `/Users` (macOS) or `C:\Users` (Windows) directory.  So, you can
+mount files or directories on macOS using.
 
 ```bash
 docker run -v /Users/<path>:/<container path> ...
@@ -153,17 +153,11 @@ Docker volumes default to mount in read-write mode, but you can also set it to
 be mounted read-only.
 
 ```bash
-$ docker run -d -P --name web -v /src/webapp:/opt/webapp:ro training/webapp python app.py
+$ docker run -d -P --name web -v /src/webapp:/webapp:ro training/webapp python app.py
 ```
 
 Here you've mounted the same `/src/webapp` directory but you've added the `ro`
 option to specify that the mount should be read-only.
-
-Because of [limitations in the `mount`
-function](http://lists.linuxfoundation.org/pipermail/containers/2015-April/035788.html),
-moving subdirectories within the host's source directory can give
-access from the container to the host's file system. This requires a malicious
-user with access to host and its mounted directory.
 
 >**Note**: The host directory is, by its nature, host-dependent. For this
 >reason, you can't mount a host directory from `Dockerfile` because built images
@@ -187,12 +181,12 @@ the other examples.
 
 The following command creates a named volume, called `my-named-volume`,
 using the `flocker` volume driver, and makes it available within the container
-at `/opt/webapp`:
+at `/webapp`:
 
 ```bash
 $ docker run -d -P \
   --volume-driver=flocker \
-  -v my-named-volume:/opt/webapp \
+  -v my-named-volume:/webapp \
   --name web training/webapp python app.py
 ```
 
@@ -206,7 +200,7 @@ using the `docker volume create` command.
 $ docker volume create -d flocker -o size=20GB my-named-volume
 
 $ docker run -d -P \
-  -v my-named-volume:/opt/webapp \
+  -v my-named-volume:/webapp \
   --name web training/webapp python app.py
 ```
 

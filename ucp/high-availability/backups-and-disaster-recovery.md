@@ -45,7 +45,7 @@ across multiple UCP controller nodes.
 
 The example below shows how to create a backup of a UCP controller node:
 
-```bash
+```none
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \

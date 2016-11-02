@@ -55,54 +55,35 @@ change an existing one.
 ## Run tests on your local host
 
 Before submitting a pull request with a code change, you should run the entire
-Docker Engine test suite.  The `Makefile` contains a target for the entire test suite.
-The target's name is simply `test`. The `Makefile` contains several targets for
+Docker Engine test suite.  The `Makefile` contains a target for the entire test
+suite, named `test`. Also, it contains several targets for
 testing:
 
-<style type="text/css">
-.monospaced {font-family: Monaco, Consolas, "Lucida Console", monospace !important;}
-</style>
-<table>
-  <tr>
-    <th>Target</th>
-    <th>What this target does</th>
-  </tr>
-  <tr>
-    <td class="monospaced">test</td>
-    <td>Run the unit, integration and docker-py tests.</td>
-  </tr>
-  <tr>
-    <td class="monospaced">test-unit</td>
-    <td>Run just the unit tests.</td>
-  </tr>
-  <tr>
-    <td class="monospaced">test-integration-cli</td>
-    <td>Run the test for the integration command line interface.</td>
-  </tr>
-  <tr>
-    <td class="monospaced">test-docker-py</td>
-    <td>Run the tests for Docker API client.</td>
-  </tr>
-</table>
+| Target                 | What this target does                          |
+| ---------------------- | ---------------------------------------------- |
+| `test`                 | Run the unit, integration, and docker-py tests |
+| `test-unit`            | Run just the unit tests                        |
+| `test-integration-cli` | Run the integration tests for the CLI          |
+| `test-docker-py`       | Run the tests for the Docker API client        |
 
-Running the entire test suite on your current repository can take a half an hour
-or more. To run the test suite, do the following:
+Running the entire test suite on your current repository can take over half an
+hour. To run the test suite, do the following:
 
-1. Open a terminal on your local host.
+1.  Open a terminal on your local host.
 
-2. Change to the root your Docker repository.
+2.  Change to the root your Docker repository.
 
     ```bash
     $ cd docker-fork
     ```
 
-3. Make sure you are in your development branch.
+3.  Make sure you are in your development branch.
 
     ```bash
     $ git checkout dry-run-test
     ```
 
-4. Run the `make test` command.
+4.  Run the `make test` command.
 
     ```bash
     $ make test
@@ -121,43 +102,11 @@ or more. To run the test suite, do the following:
     value on the basis of your host performance. When they complete
     successfully, you see the output concludes with something like this:
 
-    ```bash
-    PASS: docker_cli_pull_test.go:133: DockerHubPullSuite.TestPullClientDisconnect	1.127s
-    PASS: docker_cli_pull_test.go:16: DockerHubPullSuite.TestPullFromCentralRegistry	1.049s
-    PASS: docker_cli_pull_test.go:65: DockerHubPullSuite.TestPullFromCentralRegistryImplicitRefParts	9.795s
-    PASS: docker_cli_pull_test.go:42: DockerHubPullSuite.TestPullNonExistingImage	2.158s
-    PASS: docker_cli_pull_test.go:92: DockerHubPullSuite.TestPullScratchNotAllowed	0.044s
-    OK: 918 passed, 13 skipped
-    PASS
-    coverage: 72.9% of statements
-    ok  	github.com/docker/docker/integration-cli	1638.553s
-    ---> Making bundle: .integration-daemon-stop (in bundles/1.9.0-dev/test-integration-cli)
-    ++++ cat bundles/1.9.0-dev/test-integration-cli/docker.pid
-    +++ kill 9453
-    +++ /etc/init.d/apparmor stop
-     * Clearing AppArmor profiles cache
-       ...done.
-    All profile caches have been cleared, but no profiles have been unloaded.
-    Unloading profiles will leave already running processes permanently
-    unconfined, which can lead to unexpected situations.
-
-    To set a process to complain mode, use the command line tool
-    'aa-complain'. To really tear down all profiles, run the init script
-    with the 'teardown' option."
-
-    ---> Making bundle: test-docker-py (in bundles/1.9.0-dev/test-docker-py)
-    ---> Making bundle: .integration-daemon-start (in bundles/1.9.0-dev/test-docker-py)
-    +++ /etc/init.d/apparmor start
-     * Starting AppArmor profiles
-    Skipping profile in /etc/apparmor.d/disable: usr.sbin.rsyslogd
-       ...done.
-    +++ exec docker daemon --debug --host unix:///go/src/github.com/docker/docker/bundles/1.9.0-dev/test-docker-py/docker.sock --storage-driver overlay --exec-driver native --pidfile bundles/1.9.0-dev/test-docker-py/docker.pid --userland-proxy=true
-    ..............s..............s......................................
-    ----------------------------------------------------------------------
+    ```no-highlight
     Ran 68 tests in 79.135s
     ```
 
-## Run  targets inside a development container
+## Run targets inside a development container
 
 If you are working inside a Docker development container, you use the
 `hack/make.sh` script to run tests. The `hack/make.sh` script doesn't
@@ -166,9 +115,9 @@ command line with multiple targets that does the same thing.
 
 Try this now.
 
-1. Open a terminal and change to the `docker-fork` root.
+1.  Open a terminal and change to the `docker-fork` root.
 
-2. Start a Docker development image.
+2.  Start a Docker development image.
 
     If you are following along with this guide, you should have a
     `dry-run-test` image.
@@ -177,7 +126,7 @@ Try this now.
     $ docker run --privileged --rm -ti -v `pwd`:/go/src/github.com/docker/docker dry-run-test /bin/bash
     ```
 
-3. Run the tests using the `hack/make.sh` script.
+3.  Run the tests using the `hack/make.sh` script.
 
     ```bash
     root@5f8630b873fe:/go/src/github.com/docker/docker# hack/make.sh dynbinary binary cross test-unit test-integration-cli test-docker-py
@@ -204,18 +153,24 @@ package or [gocheck](https://labix.org/gocheck) for our unit tests.
 You can use the `TESTDIRS` environment variable to run unit tests for
 a single package.
 
-    $ TESTDIRS='opts' make test-unit
+```bash
+$ TESTDIRS='opts' make test-unit
+```
 
 You can also use the `TESTFLAGS` environment variable to run a single test. The
 flag's value is passed as arguments to the `go test` command. For example, from
 your local host you can run the `TestBuild` test with this command:
 
-    $ TESTFLAGS='-test.run ^TestValidateIPAddress$' make test-unit
+```bash
+$ TESTFLAGS='-test.run ^TestValidateIPAddress$' make test-unit
+```
 
 On unit tests, it's better to use `TESTFLAGS` in combination with
 `TESTDIRS` to make it quicker to run a specific test.
 
-    $ TESTDIRS='opts' TESTFLAGS='-test.run ^TestValidateIPAddress$' make test-unit
+```bash
+$ TESTDIRS='opts' TESTFLAGS='-test.run ^TestValidateIPAddress$' make test-unit
+```
 
 ## Run integration tests
 
@@ -224,11 +179,15 @@ You can use the `TESTFLAGS` environment variable to run a single test. The
 flag's value is passed as arguments to the `go test` command. For example, from
 your local host you can run the `TestBuild` test with this command:
 
-    $ TESTFLAGS='-check.f DockerSuite.TestBuild*' make test-integration-cli
+```bash
+$ TESTFLAGS='-check.f DockerSuite.TestBuild*' make test-integration-cli
+```
 
 To run the same test inside your Docker development container, you do this:
 
-    root@5f8630b873fe:/go/src/github.com/docker/docker# TESTFLAGS='-check.f TestBuild*' hack/make.sh binary test-integration-cli
+```bash
+root@5f8630b873fe:/go/src/github.com/docker/docker# TESTFLAGS='-check.f TestBuild*' hack/make.sh binary test-integration-cli
+```
 
 ## Test the Windows binary against a Linux daemon
 
@@ -240,98 +199,168 @@ run a Bash terminal on Windows.
 
 1.  If you don't have one open already, start a Git Bash terminal.
 
-	 ![Git Bash](images/git_bash.png)
+    ![Git Bash](images/git_bash.png)
 
-2. Change to the `docker` source directory.
+2.  Change to the `docker` source directory.
 
-		$ cd /c/gopath/src/github.com/docker/docker
+    ```bash
+    $ cd /c/gopath/src/github.com/docker/docker
+    ```
 
-3. Set `DOCKER_REMOTE_DAEMON` as follows:
+3.  Set `DOCKER_REMOTE_DAEMON` as follows:
 
-		$ export DOCKER_REMOTE_DAEMON=1
+    ```bash
+    $ export DOCKER_REMOTE_DAEMON=1
+    ```
 
-4. Set `DOCKER_TEST_HOST` to the `tcp://IP_ADDRESS:2376` value; substitute your
-Linux machines actual IP address. For example:
+4.  Set `DOCKER_TEST_HOST` to the `tcp://IP_ADDRESS:2376` value; substitute your
+    Linux machines actual IP address. For example:
 
-		$ export DOCKER_TEST_HOST=tcp://213.124.23.200:2376
+    ```bash
+    $ export DOCKER_TEST_HOST=tcp://213.124.23.200:2376
+    ```
 
-5. Make the binary and run the tests:
+5.  Make the binary and run the tests:
 
-		$ hack/make.sh binary test-integration-cli
-
-   Some tests are skipped on Windows for various reasons. You can see which
-   tests were skipped by re-running the make and passing in the
+    ```bash
+    $ hack/make.sh binary test-integration-cli
+    ```
+    Some tests are skipped on Windows for various reasons. You can see which
+    tests were skipped by re-running the make and passing in the
    `TESTFLAGS='-test.v'` value. For example
 
-		$ TESTFLAGS='-test.v' hack/make.sh binary test-integration-cli
+    ```bash
+    $ TESTFLAGS='-test.v' hack/make.sh binary test-integration-cli
+    ```
 
-	Should you wish to run a single test such as one with the name
-	'TestExample', you can pass in `TESTFLAGS='-check.f TestExample'`. For
-	example
+    Should you wish to run a single test such as one with the name
+    'TestExample', you can pass in `TESTFLAGS='-check.f TestExample'`. For
+    example
 
-		$TESTFLAGS='-check.f TestExample' hack/make.sh binary test-integration-cli
+    ```bash
+    $ TESTFLAGS='-check.f TestExample' hack/make.sh binary test-integration-cli
+    ```
 
 You can now choose to make changes to the Docker source or the tests. If you
-make any changes just run these commands again.
+make any changes, just run these commands again.
 
 
 ## Build and test the documentation
 
-The Docker documentation source files are under `docs`. The content is
-written using extended Markdown. We use the static generator <a
-href="http://www.mkdocs.org/" target="_blank">MkDocs</a> to build Docker's
-documentation. Of course, you don't need to install this generator
-to build the documentation, it is included with container.
+The Docker documentation source files are in a centralized repository at
+[https://github.com/docker/docker.github.io](https://github.com/docker/docker.github.io). The content is
+written using extended Markdown, which you can edit in a plain text editor such
+Atom or Notepad. The docs are built using [Jekyll](https://jekyllrb.com/).
 
-You should always check your documentation for grammar and spelling. The best
-way to do this is with <a href="http://www.hemingwayapp.com/"
-target="_blank">an online grammar checker</a>.
+Most documentation is developed in the centralized repository. The exceptions are
+a project's API and CLI references and man pages, which are developed alongside
+the project's code and periodically imported into the documentation repository.
+
+Always check your documentation for grammar and spelling. You can use
+an online grammar checker such as [Hemingway Editor](http://www.hemingwayapp.com/) or a spelling or
+grammar checker built into your text editor. If you spot spelling or grammar errors,
+fixing them is one of the easiest ways to get started contributing to opensource
+projects.
 
 When you change a documentation source file, you should test your change
 locally to make sure your content is there and any links work correctly. You
-can build the documentation from the local host. The build starts a container
-and loads the documentation into a server. As long as this container runs, you
-can browse the docs.
+can build the documentation from the local host.
 
-1. In a terminal, change to the root of your `docker-fork` repository.
+### Building the docs for docs.docker.com
 
-        $ cd ~/repos/docker-fork
+You can build the docs using a Docker container or by using Jekyll directly.
+Using the Docker container requires no set-up but is slower. Using Jekyll
+directly requires you to install some prerequisites, but is faster on each build.
 
-2. Make sure you are in your feature branch.
+#### Using Docker Compose
 
-        $ git status
-        On branch dry-run-test
-        Your branch is up-to-date with 'origin/dry-run-test'.
-        nothing to commit, working directory clean
+The easiest way to build the docs locally on macOS, Windows, or Linux is to use
+`docker-compose`. If you have not yet installed `docker-compose`,
+[follow these installation instructions](https://docs.docker.com/compose/install/).
 
-3. Build the documentation.
+In the root of the repository, issue the following command:
 
-        $ make docs
+```bash
+$ docker-compose up
+```
 
-    When the build completes, you'll see a final output message similar to the
-    following:
+This command will create and start service `docs` defined in `docker-compose.yml`,
+which will build an image named `docs/docstage` and launch a container with Jekyll and all its dependencies configured
+correctly. The container uses Jekyll to incrementally build and serve the site using the
+files in the local repository.
 
-        Successfully built ee7fe7553123
-        docker run --rm -it  -e AWS_S3_BUCKET -e NOCACHE -p 8000:8000 "docker-docs:dry-run-test" mkdocs serve
-        Running at: http://0.0.0.0:8000/
-        Live reload enabled.
-        Hold ctrl+c to quit.
+Go to [http://localhost:4000/](http://localhost:4000/) in your web browser to view the documentation.
 
-4. Enter the URL in your browser.
+The container runs in the foreground. It will continue to run and incrementally build the site when changes are
+detected, even if you change branches.
 
-    If you are using Docker Machine, replace the default localhost address
-    (0.0.0.0) with your DOCKERHOST value. You can get this value at any time by
-    entering `docker-machine ip <machine-name>` at the command line.
+To stop the container, use `CTRL+C`.
 
-5. Once in the documentation, look for the red notice to verify you are seeing the correct build.
+To start the container again, use the following command:
 
-    ![Beta documentation](images/red_notice.png)
+```bash
+$ docker-compose start docs
+```
 
-6. Navigate to your new or changed document.
+#### Using Jekyll directly
 
-7. Review both the content and the links.
+If for some reason you are unable to use Docker Compose, you can use Jekyll directly.
 
-8. Return to your terminal and exit out of the running documentation container.
+**Prerequisites:**
+
+-  You need a recent version of Ruby installed. If you are on macOS, install Ruby
+  and Bundle using homebrew.
+
+   ```bash
+   brew install ruby
+   brew install bundle
+   ```
+
+-  Use `bundle` to install Jekyll and its dependencies from the bundle in the
+   centralized documentation repository. Within your clone of the
+   [https://github.com/docker/docker.github.io](https://github.com/docker/docker.github.io)
+   repository, issue the following command:
+
+   ```bash
+   bundle install
+   ```
+
+**To build the website locally:**
+
+  1. Issue the `jekyll serve` command. This will build
+     the static website and serve it in a small web server on port 4000. If it
+     fails, examine and fix the errors and run the command again.
+
+  2. You can keep making changes to the Markdown files in another terminal
+     window, and Jekyll will detect the changes and rebuild the relevant HTML
+     pages automatically.
+
+  3. To stop the web server, issue `CTRL+C`.
+
+To serve the website using Github Pages on your fork, first
+[enable Github Pages in your fork](https://pages.github.com/) or rename your fork
+to `<YOUR_GITHUB_USERNAME>.github.io`, then push your
+feature branch to your fork's Github Pages branch, which is `gh-pages` or `master`,
+depending on whether you manually enabled Github Pages or renamed your fork.
+Within a few minutes, the site will be available on your Github Pages URL.
+
+Review your documentation changes on the local or Github Pages site. When you
+are satisfied with your changes, submit your pull request.
+
+
+### Reviewing the reference docs for your project
+
+Some projects, such as Docker Engine, maintain reference documents, such as man
+pages, CLI command references, and API endpoint references. These files are
+maintained within each project and periodically imported into the centralized
+documentation repository. If you change the behavior of a command or endpoint,
+including changing the help text, be sure that the associated reference
+documentation is updated as part of your pull request.
+
+These reference documents are usually under the `docs/reference/` directory or
+the `man/` directory. The best way to review them is to push the changes to
+your fork and view the Markdown files in Github. The style will not match with
+docs.docker.com, but you will be able to preview the changes.
 
 
 ## Where to go next

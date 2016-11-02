@@ -162,7 +162,7 @@ Kitematic will prompt you to confirm that you want to delete.
 
 To see the complete list of exposed ports, go to "Settings" then "Ports". This
 page lists all the container ports exposed, and the IP address and host-only
-network port that you can access use to access that container from your OS X
+network port that you can access use to access that container from your macOS
 system.
 
 ## Docker Command-line Access

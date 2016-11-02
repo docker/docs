@@ -88,7 +88,7 @@ During the process of building an image Docker will step through the
 instructions in your `Dockerfile` executing each in the order specified.
 As each instruction is examined Docker will look for an existing image in its
 cache that it can reuse, rather than creating a new (duplicate) image.
-If you do not want to use the cache at all you can use the ` --no-cache=true`
+If you do not want to use the cache at all you can use the `--no-cache=true`
 option on the `docker build` command.
 
 However, if you do let Docker use its cache then it is very important to

@@ -65,7 +65,7 @@ documents.
 
 The [Docker Swarm API](swarm-api.md) is compatible with
 the [Docker remote
-API](http://docs.docker.com/reference/api/docker_remote_api/), and extends it
+API](/engine/reference/api/docker_remote_api/), and extends it
 with some new endpoints.
 
 ## Getting help

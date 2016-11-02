@@ -336,7 +336,7 @@ color: #F04124;
     border: 0;
     text-indent: -9999px;
     background-color: transparent;
-    background-image: url("https://blog.docker.com/wp-content/themes/whale_roots/assets/img/search-icon.png");
+    background-image: url("/images/search-icon.png");
     /* background-size: 38px 38px; */
     background-repeat: no-repeat;
     background-position: center center;

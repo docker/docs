@@ -1,13 +1,9 @@
-<!--[metadata]>
-+++
-title = "Format command and log output"
-description = "CLI and log output formatting reference"
-keywords = ["format, formatting, output, templates, log"]
-[menu.main]
-parent = "engine_admin"
-weight=7
-+++
-<![end-metadata]-->
+---
+description: CLI and log output formatting reference
+keywords:
+- format, formatting, output, templates, log
+title: Format command and log output
+---
 
 # Formatting reference
 
@@ -52,7 +48,8 @@ Lower turns a string into its lower case representation.
 
 Split slices a string into a list of strings separated by a separator.
 
-	# docker inspect --format '{{split (join .Names "/") "/"}}' container
+	$ docker inspect --format '{{split (join .Names "/") "/"}}' container
+	{% endraw %}
 
 ### Title
 

@@ -10,23 +10,26 @@ title: config
 
 # config
 
-    Usage: docker-machine config [OPTIONS] [arg...]
+```none
+Usage: docker-machine config [OPTIONS] [arg...]
 
-    Print the connection config for machine
+Print the connection config for machine
 
-    Description:
-       Argument is a machine name.
+Description:
+   Argument is a machine name.
 
-    Options:
+Options:
 
-       --swarm      Display the Swarm config instead of the Docker daemon
+   --swarm      Display the Swarm config instead of the Docker daemon
+```
 
+For example:
 
-For example: 
-
-    $ docker-machine config dev
-    --tlsverify
-    --tlscacert="/Users/ehazlett/.docker/machines/dev/ca.pem"
-    --tlscert="/Users/ehazlett/.docker/machines/dev/cert.pem"
-    --tlskey="/Users/ehazlett/.docker/machines/dev/key.pem"
-    -H tcp://192.168.99.103:2376
+```none
+$ docker-machine config dev \
+--tlsverify \
+--tlscacert="/Users/ehazlett/.docker/machines/dev/ca.pem" \
+--tlscert="/Users/ehazlett/.docker/machines/dev/cert.pem" \
+--tlskey="/Users/ehazlett/.docker/machines/dev/key.pem" \
+-H tcp://192.168.99.103:2376
+```

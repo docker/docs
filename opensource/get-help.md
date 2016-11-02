@@ -33,7 +33,7 @@ community members and developers.
     </td>
   </tr>
   <tr>
-    <td>Internet Relay Chat (IRC)</th>
+    <td>Internet Relay Chat (IRC)</td>
     <td>
       <p>
         IRC a direct line to our most knowledgeable Docker users.
@@ -76,11 +76,11 @@ platforms.
 Using Webchat from Freenode.net is a quick and easy way to get chatting. To
 register:
 
-1. In your browser open <a href="https://webchat.freenode.net" target="_blank">https://webchat.freenode.net</a>
+1.  In your browser open <a href="https://webchat.freenode.net" target="_blank">https://webchat.freenode.net</a>
 
     ![Login to webchat screen](images/irc_connect.png)
 
-2. Fill out the form.
+2.  Fill out the form.
 
     <table class="no-zebra" style="width: auto">
       <tr>
@@ -97,7 +97,7 @@ register:
       </tr>
     </table>
 
-3. Click on the "Connect" button.
+3.  Click on the "Connect" button.
 
     The browser connects you to Webchat. You'll see a lot of text. At the bottom of
     the Webchat web page is a command line bar. Just above the command line bar
@@ -105,10 +105,12 @@ register:
 
     ![Registration needed screen](images/irc_after_login.png)
 
-4. Register your nickname by entering the following command in the
+4.  Register your nickname by entering the following command in the
 command line bar:
 
-        /msg NickServ REGISTER yourpassword youremail@example.com
+    ```
+    /msg NickServ REGISTER yourpassword youremail@example.com
+    ```
 
     ![Registering screen](images/register_nic.png)
 
@@ -120,14 +122,15 @@ command line bar:
     that you provided. This email will contain instructions for completing
     your registration.
 
-5. Open your email client and look for the email.
+5.  Open your email client and look for the email.
 
     ![Login screen](images/register_email.png)
 
-6. Back in the browser, complete the registration according to the email
-by entering the following command into the webchat command line bar:
+6.  Back in the browser, complete the registration according to the email by entering the following command into the webchat command line bar:
 
-        /msg NickServ VERIFY REGISTER yournickname somecode
+    ```
+    /msg NickServ VERIFY REGISTER yournickname somecode
+    ```
 
     Your nickname is now registered to chat on freenode.net.
 
@@ -139,24 +142,24 @@ IRCCloud is a web-based IRC client service that is hosted in the cloud. This is
 a Freemium product, meaning the free version is limited and you can pay for more
 features. To use IRCCloud:
 
-1. Select the following link:
+1.  Select the following link:
   <a href="https://www.irccloud.com/invite?channel=%23docker&amp;hostname=chat.freenode.net&amp;port=6697" target="_blank">Join the #docker channel on chat.freenode.net</a>
 
     The following web page is displayed in your browser:
 
     ![IRCCloud Register screen](images/irccloud-join.png)
 
-2. If this is your first time using IRCCloud enter a valid email address in the
+2.  If this is your first time using IRCCloud enter a valid email address in the
 form. People who have already registered with IRCCloud can select the "sign in
 here" link. Additionally, people who are already registered with IRCCloud may
 have a cookie stored on their web browser that enables a quick start "let's go"
 link to be shown instead of the above form. In this case just select the
 "let's go" link and [jump ahead to start chatting](get-help.md#start-chatting)
 
-3. After entering your email address in the form, check your email for an invite
+3.  After entering your email address in the form, check your email for an invite
 from IRCCloud and follow the instructions provided in the email.
 
-4. After following the instructions in your email you should have an IRCCloud
+4.  After following the instructions in your email you should have an IRCCloud
 Client web page in your browser:
 
     ![IRCCloud](images/irccloud-register-nick.png)
@@ -164,20 +167,24 @@ Client web page in your browser:
     The message shown above may appear indicating that you need to register your
     nickname.
 
-5. To register your nickname enter the following message into the command line bar
+5.  To register your nickname enter the following message into the command line bar
 at the bottom of the IRCCloud Client:
 
-        /msg NickServ REGISTER yourpassword youremail@example.com
+    ```
+    /msg NickServ REGISTER yourpassword youremail@example.com
+    ```
 
     This command line bar is for chatting and entering in IRC commands.
 
-6. Check your email for an invite to freenode.net:
+6.  Check your email for an invite to freenode.net:
 
     ![Login screen](images/register_email.png)
 
-7. Back in the browser, complete the registration according to the email.
+7.  Back in the browser, complete the registration according to the email.
 
-        /msg NickServ VERIFY REGISTER yournickname somecode
+    ```
+    /msg NickServ VERIFY REGISTER yournickname somecode
+    ```
 
 ## Tips
 
@@ -188,7 +195,7 @@ The procedures in this section apply to both IRC clients.
 Next time you return to log into chat, you may need to re-enter your password
 on the command line using this command:
 
-      /msg NickServ identify <password>
+    /msg NickServ identify <password>
 
 With Webchat if you forget or lose your password you'll need to join the
 `#freenode` channel and request them to reset it for you.
@@ -198,17 +205,17 @@ With Webchat if you forget or lose your password you'll need to join the
 Join the `#docker` group using the following command in the command line bar of
 your IRC Client:
 
-        /j #docker
+    /j #docker
 
 You can also join the `#docker-dev` group:
 
-        /j #docker-dev
+    /j #docker-dev
 
 ### Start chatting
 
 To ask questions to the group just type messages in the command line bar:
 
-  ![Web Chat Screen](images/irc_chat.png)
+![Web Chat Screen](images/irc_chat.png)
 
 ## Learning more about IRC
 

@@ -87,7 +87,7 @@ So, let's do that now.
 ### Configure Docker Cloud to manage to your AWS instances
 
 - Go to [cloud.docker.com](http://cloud.docker.com) and sign in with the
-  same Docker ID you used in [step 2](/getting-started/step2.md).
+  same Docker ID you used in [part 2](/getting-started/part2.md).
 - Click **Settings**, and in the Cloud Providers section, click the plug icon.
 - Enter the Role ARN string you copied earlier, e.g. `arn:aws:iam::123456789123:role/dockercloud-role`.
 - Click **Save**.
@@ -98,15 +98,18 @@ into a swarm.
 ## Creating your first Swarm cluster
 
 1.  Go back to Docker Cloud by visiting [cloud.docker.com](https://cloud.docker.com).
-2.  Click **Node Clusters** in the left-navigation, then click the **Create** button.
+2.  Click **Node Clusters** in the left navigation, then click the **Create** button.
     This pulls up a form where you can create our cluster.
 3.  Leave everything default, except:
-    - Name: Give your cluster a name.
-    - Region: Select a region that's close to you. 
+    - Name: Give your cluster a name
+    - Region: Select a region that's close to you
     - Provider: Set to "Amazon Web Services"
-    - Type/Size:
-4.  Launch the cluster by clicking **Launch node cluster**, and
-5.
+    - Type/Size: Select the `t2.nano` option as that is free-tier
+4.  Launch the cluster by clicking **Launch node cluster**; this will spin
+    up a free-tier Amazon instance.
+5.  Now, click **Services** in the left navigation, then the **Create** button,
+    then the **globe icon**.
+6.  Search Docker Hub for the image you uploaded
 
 
 [On to next >>](part5.md){: class="button darkblue-btn"}

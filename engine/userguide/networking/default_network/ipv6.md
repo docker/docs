@@ -71,6 +71,7 @@ $ sysctl net.ipv6.conf.eth0.accept_ra=2
 Every new container will get an IPv6 address from the defined subnet. Further a
 default route will be added on `eth0` in the container via the address specified
 by the daemon option `--default-gateway-v6` if present, otherwise via `fe80::1`:
+
 ```
 docker run -it ubuntu bash -c "ip -6 addr show dev eth0; ip -6 route show"
 
@@ -107,9 +108,9 @@ containers.
 
 ### Using NDP proxying
 
-If your Docker host is only part of an IPv6 subnet but has not got an IPv6
+If your Docker host is the only part of an IPv6 subnet but has not got an IPv6
 subnet assigned you can use NDP proxying to connect your containers via IPv6 to
-the internet. For example your host has the IPv6 address `2001:db8::c001`, is
+the internet. For example your host with the IPv6 address `2001:db8::c001`, is
 part of the subnet `2001:db8::/64` and your IaaS provider allows you to
 configure the IPv6 addresses `2001:db8::c000` to `2001:db8::c00f`:
 

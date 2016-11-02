@@ -1,14 +1,11 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/misc/deprecated/"]
-title = "Deprecated Engine Features"
-description = "Deprecated Features."
-keywords = ["docker, documentation, about, technology, deprecate"]
-[menu.main]
-parent = "engine_use"
-weight=80
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/misc/deprecated/
+description: Deprecated Features.
+keywords:
+- docker, documentation, about, technology, deprecate
+title: Deprecated Engine Features
+---
 
 # Deprecated Engine Features
 
@@ -36,7 +33,7 @@ The daemon is moved to a separate binary (`dockerd`), and should be used instead
 
 **Removed In Release: [v1.12.0](https://github.com/docker/docker/releases/tag/v1.12.0)**
 
-The `docker import` command format 'file|URL|- [REPOSITORY [TAG]]' is deprecated since November 2013. It's no more supported.
+The `docker import` command format `file|URL|- [REPOSITORY [TAG]]` is deprecated since November 2013. It's no more supported.
 
 ### `-h` shorthand for `--help`
 
@@ -119,7 +116,11 @@ Log tags are now generated in a standard way across different logging drivers.
 Because of which, the driver specific log tag options `syslog-tag`, `gelf-tag` and
 `fluentd-tag` have been deprecated in favor of the generic `tag` option.
 
-    docker --log-driver=syslog --log-opt tag="{{.ImageName}}/{{.Name}}/{{.ID}}"
+```bash
+{% raw %}
+$ docker --log-driver=syslog --log-opt tag="{{.ImageName}}/{{.Name}}/{{.ID}}"
+{% endraw %}
+```
 
 ### LXC built-in exec driver
 **Deprecated In Release: [v1.8.0](https://github.com/docker/docker/releases/tag/v1.8.0)**
@@ -135,47 +136,53 @@ The built-in LXC execution driver, the lxc-conf flag, and API fields have been r
 
 The flags `-d` and `--daemon` are deprecated in favor of the `daemon` subcommand:
 
-    docker daemon -H ...
+```bash
+$ docker daemon -H ...
+```
 
 The following single-dash (`-opt`) variant of certain command line options
 are deprecated and replaced with double-dash options (`--opt`):
 
-    docker attach -nostdin
-    docker attach -sig-proxy
-    docker build -no-cache
-    docker build -rm
-    docker commit -author
-    docker commit -run
-    docker events -since
-    docker history -notrunc
-    docker images -notrunc
-    docker inspect -format
-    docker ps -beforeId
-    docker ps -notrunc
-    docker ps -sinceId
-    docker rm -link
-    docker run -cidfile
-    docker run -dns
-    docker run -entrypoint
-    docker run -expose
-    docker run -link
-    docker run -lxc-conf
-    docker run -n
-    docker run -privileged
-    docker run -volumes-from
-    docker search -notrunc
-    docker search -stars
-    docker search -t
-    docker search -trusted
-    docker tag -force
+```none
+docker attach -nostdin
+docker attach -sig-proxy
+docker build -no-cache
+docker build -rm
+docker commit -author
+docker commit -run
+docker events -since
+docker history -notrunc
+docker images -notrunc
+docker inspect -format
+docker ps -beforeId
+docker ps -notrunc
+docker ps -sinceId
+docker rm -link
+docker run -cidfile
+docker run -dns
+docker run -entrypoint
+docker run -expose
+docker run -link
+docker run -lxc-conf
+docker run -n
+docker run -privileged
+docker run -volumes-from
+docker search -notrunc
+docker search -stars
+docker search -t
+docker search -trusted
+docker tag -force
+```
 
 The following double-dash options are deprecated and have no replacement:
 
-    docker run --cpuset
-    docker run --networking
-    docker ps --since-id
-    docker ps --before-id
-    docker search --trusted
+```none
+docker run --cpuset
+docker run --networking
+docker ps --since-id
+docker ps --before-id
+docker search --trusted
+```
 
 **Deprecated In Release: [v1.5.0](https://github.com/docker/docker/releases/tag/v1.5.0)**
 
@@ -183,17 +190,11 @@ The following double-dash options are deprecated and have no replacement:
 
 The single-dash (`-help`) was removed, in favor of the double-dash `--help`
 
-    docker -help
-    docker [COMMAND] -help
-
-### `--run` flag on docker commit
-
-**Deprecated In Release: [v0.10.0](https://github.com/docker/docker/releases/tag/v0.10.0)**
-
-**Removed In Release: [v1.13.0](https://github.com/docker/docker/releases/)**
-
-The flag `--run` of the docker commit (and its short version `-run`) were deprecated in favor 
-of the `--changes` flag that allows to pass `Dockerfile` commands.
+```bash
+$ docker -help
+  
+  docker [COMMAND] -help
+```
 
 
 ### Interacting with V1 registries

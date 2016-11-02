@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "wait"
-description = "The wait command description and usage"
-keywords = ["container, stop, wait"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/wait/
+description: The wait command description and usage
+keywords:
+- container, stop, wait
+menu:
+  main:
+    parent: smn_cli
+title: wait
+---
 
 # wait
 

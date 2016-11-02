@@ -55,7 +55,7 @@ replicas.
 
 When configuring UCP for high-availability, you need to ensure the CAs running
 on each UCP controller node are interchangeable. This is done by transferring
-root certificates and keys for the CAs to each controller node on the cluster. 
+root certificates and keys for the CAs to each controller node on the cluster.
 [Learn how to replicate CAs for high availability](replicate-cas.md)
 
 ## Load-balancing on UCP
@@ -67,7 +67,7 @@ load-balancer to balance user requests across all controller replicas.
 Since Docker UCP uses mutual TLS, make sure you configure your load balancer to:
 
 * Load-balance TCP traffic on ports 80 and 443,
-* Not terminate HTTPS connections,
+* Use a TCP load balancer that doesn't terminate HTTPS connections,
 * Use the `/_ping` endpoint on each UCP controller, to check if the controller
 is healthy and if it should remain on the load balancing pool or not.
 

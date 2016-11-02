@@ -1,13 +1,13 @@
-<!--[metadata]>
-+++
-draft = "true"
-title = "Resizing a Boot2Docker volume	"
-description = "Resizing a Boot2Docker volume in VirtualBox with GParted"
-keywords = ["boot2docker, volume,  virtualbox"]
-[menu.main]
-parent = "smn_win_osx"
-+++
-<![end-metadata]-->
+---
+description: Resizing a Boot2Docker volume in VirtualBox with GParted
+published: false
+keywords:
+- boot2docker, volume,  virtualbox
+menu:
+  main:
+    parent: smn_win_osx
+title: "Resizing a Boot2Docker volume\t"
+---
 
 # Getting "no space left on device" errors with Boot2Docker?
 

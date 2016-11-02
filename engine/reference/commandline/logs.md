@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "logs"
-description = "The logs command description and usage"
-keywords = ["logs, retrieve, docker"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/logs/
+description: The logs command description and usage
+keywords:
+- logs, retrieve, docker
+menu:
+  main:
+    parent: smn_cli
+title: logs
+---
 
 # logs
 

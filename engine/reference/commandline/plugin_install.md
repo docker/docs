@@ -1,13 +1,15 @@
-<!--[metadata]>
-+++
-title = "plugin install"
-description = "the plugin install command description and usage"
-keywords = ["plugin, install"]
-advisory = "experimental"
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/plugin_install/
+advisory: experimental
+description: the plugin install command description and usage
+keywords:
+- plugin, install
+menu:
+  main:
+    parent: smn_cli
+title: plugin install
+---
 
 # plugin install (experimental)
 

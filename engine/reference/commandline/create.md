@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "create"
-description = "The create command description and usage"
-keywords = ["docker, create, container"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/create/
+description: The create command description and usage
+keywords:
+- docker, create, container
+menu:
+  main:
+    parent: smn_cli
+title: create
+---
 
 # create
 

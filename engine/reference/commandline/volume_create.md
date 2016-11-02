@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "volume create"
-description = "The volume create command description and usage"
-keywords = ["volume, create"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/volume_create/
+description: The volume create command description and usage
+keywords:
+- volume, create
+menu:
+  main:
+    parent: smn_cli
+title: volume create
+---
 
 # volume create
 

@@ -93,7 +93,7 @@ To install UCP:
     the command prompts for the necessary configuration values.
     You can also use flags to pass values to the install command.
 
-    ```bash
+    ```none
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
       docker/ucp install -i \
@@ -141,7 +141,7 @@ To create a backup of the CAs used on the controller node:
 1. Log into the controller node using ssh.
 2.  Run the docker/ucp backup command.
 
-    ```bash
+    ```none
     $ docker run --rm -i --name ucp \
         -v /var/run/docker.sock:/var/run/docker.sock \
         docker/ucp backup \
@@ -173,7 +173,7 @@ For each node that you want to install as a controller replica:
     be passing the backup.tar file from the previous step in order to ensure
     that the CAs are replicated to the new controller node.
 
-    ```bash
+    ```none
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v $BACKUP_PATH/backup.tar:/backup.tar \
@@ -214,7 +214,7 @@ For each controller node:
 
 2.  Run the engine-discovery command.
 
-    ```bash
+    ```none
     $ docker run --rm -it \
         --name ucp \
         -v /var/run/docker.sock:/var/run/docker.sock \
@@ -233,7 +233,7 @@ For each node that you want to add to your UCP cluster:
 
 2.  Use the join command, to join the node to the cluster:
     
-    ```bash
+    ```none
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
       docker/ucp join -i

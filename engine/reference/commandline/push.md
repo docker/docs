@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "push"
-description = "The push command description and usage"
-keywords = ["share, push, image"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/push/
+description: The push command description and usage
+keywords:
+- share, push, image
+menu:
+  main:
+    parent: smn_cli
+title: push
+---
 
 # push
 

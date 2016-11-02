@@ -129,7 +129,7 @@ you can create these swarm nodes: `manager1`, `worker1`, `worker2`.
       PS C:\WINDOWS\system32>
       ```
 
-* Use the same process, driver and network switch to create the other nodes.
+*   Use the same process, driver and network switch to create the other nodes.
 
     For our example, the commands will look like this:
 

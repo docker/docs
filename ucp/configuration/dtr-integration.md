@@ -53,7 +53,7 @@ certificate used internally by UCP:
 
     This command prints a certificate block like this:
 
-    ```markdown
+    ```none
     -----BEGIN CERTIFICATE-----
     MIIFJDCCAwygAwIBAgIIDAApo7wvQCIwDQYJKoZIhvcNAQENBQAwHjEcMBoGA1UE
     AxMTVUNQIENsdXN0ZXIgUm9vdCBDQTAeFw0xNjA2MDEyMTMzMDBaFw0yMTA1MzEy
@@ -183,7 +183,7 @@ commands in the UCP cluster.
 
     When successfully pushing the image you should see a result like:
 
-    ```markdown
+    ```none
     The push refers to a repository [dtr/username/hello-world]
     5f70bf18a086: Pushed
     33e7801ac047: Pushed
@@ -201,7 +201,7 @@ images from a UCP node to a private DTR repository.
 
 When UCP can't communicate with DTR, you'll get:
 
-```markdown
+```none
 $ docker push dtr/username/hello-world:1
 
 The push refers to a repository [dtr/username/hello-world]
@@ -216,7 +216,7 @@ with DTR.
 When one of the components is misconfigured, and doesn't trust the root CA
 certificate of the other components, you'll get an error like:
 
-```markdown
+```none
 $ docker push dtr/username/hello-world:1
 
 The push refers to a repository [dtr/username/hello-world]

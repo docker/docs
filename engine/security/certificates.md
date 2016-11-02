@@ -65,7 +65,7 @@ key and then use the key to create the certificate.
 
 > **Note:**
 > These TLS commands will only generate a working set of certificates on Linux.
-> The version of OpenSSL in Mac OS X is incompatible with the type of
+> The version of OpenSSL in macOS is incompatible with the type of
 > certificate Docker requires.
 
 ## Troubleshooting tips

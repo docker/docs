@@ -85,7 +85,7 @@ Labels on swarm nodes and services can be updated dynamically.
 
 - Images and containers
   - [Adding labels to images](../reference/builder.md#label)
-  - [Overriding a container's labels at runtime](../reference/commandline/run.md#set-metadata-on-container-l-label-label-file)
+  - [Overriding a container's labels at runtime](../reference/commandline/run.md#set-metadata-on-container--l---label---label-file)
   - [Inspecting labels on images or containers](../reference/commandline/inspect.md)
   - [Filtering images by label](../reference/commandline/inspect.md#filtering)
   - [Filtering containers by label](../reference/commandline/ps.md#filtering)

@@ -31,7 +31,7 @@ When you ran the command, Docker Engine:
 * downloaded the image from the Docker Hub (more about the hub later)
 * loaded the image into the container and "ran" it
 
-Depending on how it was built, an image might run a simple, single command and then exit. This is what `Hello-World` did.
+Depending on how it was built, an image might run a simple, single command and then exit. This is what `hello-world` did.
 
 A Docker image, though, is capable of much more. An image can start software as complex as a database, wait for you (or someone else) to add data, store the data for later use, and then wait for the next person.
 

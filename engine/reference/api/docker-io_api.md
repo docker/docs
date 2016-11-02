@@ -1,14 +1,16 @@
-<!--[metadata]>
-+++
-draft = true
-title = "Docker Hub API"
-description = "API Documentation for the Docker Hub API"
-keywords = ["API, Docker, index, REST, documentation, Docker Hub,  registry"]
-[menu.main]
-parent = "engine_remoteapi"
-weight = 99
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/api/docker-io_api/
+description: API Documentation for the Docker Hub API
+published: false
+keywords:
+- API, Docker, index, REST, documentation, Docker Hub,  registry
+menu:
+  main:
+    parent: engine_remoteapi
+    weight: 99
+title: Docker Hub API
+---
 
 # Docker Hub API
 

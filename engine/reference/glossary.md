@@ -115,7 +115,7 @@ Examples :
 
 - Linux : ext4, aufs, btrfs, zfs
 - Windows : NTFS
-- OS X : HFS+
+- macOS : HFS+
 
 ## image
 
@@ -276,7 +276,7 @@ A virtual machine is a program that emulates a complete computer and imitates de
 It shares physical hardware resources with other users but isolates the operating system. The
 end user has the same experience on a Virtual Machine as they would have on dedicated hardware.
 
-Compared to to containers, a virtual machine is heavier to run, provides more isolation,
+Compared to containers, a virtual machine is heavier to run, provides more isolation,
 gets its own set of resources and does minimal sharing.
 
 *Also known as : VM*

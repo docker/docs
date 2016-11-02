@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "swarm join-token"
-description = "The swarm join-token command description and usage"
-keywords = ["swarm, join-token"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/swarm_join_token/
+description: The swarm join-token command description and usage
+keywords:
+- swarm, join-token
+menu:
+  main:
+    parent: smn_cli
+title: swarm join-token
+---
 
 # swarm join-token
 

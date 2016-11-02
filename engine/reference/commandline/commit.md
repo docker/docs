@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "commit"
-description = "The commit command description and usage"
-keywords = ["commit, file, changes"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/commit/
+description: The commit command description and usage
+keywords:
+- commit, file, changes
+menu:
+  main:
+    parent: smn_cli
+title: commit
+---
 
 # commit
 
