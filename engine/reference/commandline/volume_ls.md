@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/volume_ls/
 description: The volume ls command description and usage
 keywords:
 - volume, list

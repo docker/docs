@@ -10,22 +10,26 @@ title: help
 
 # help
 
-    Usage: docker-machine help [arg...]
+```none
+Usage: docker-machine help [arg...]
 
-    Shows a list of commands or help for one command
+Shows a list of commands or help for one command
+```
 
 Usage: docker-machine help _subcommand_
 
 For example:
 
-    $ docker-machine help config
-    Usage: docker-machine config [OPTIONS] [arg...]
+```none
+$ docker-machine help config
+Usage: docker-machine config [OPTIONS] [arg...]
 
-    Print the connection config for machine
+Print the connection config for machine
 
-    Description:
-       Argument is a machine name.
+Description:
+   Argument is a machine name.
 
-    Options:
+Options:
 
-       --swarm      Display the Swarm config instead of the Docker daemon
+   --swarm      Display the Swarm config instead of the Docker daemon
+```

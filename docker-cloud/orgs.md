@@ -171,8 +171,8 @@ Optionally, override the default access level for specific repositories. -->
 | ------------- | ------------- |
 | **Repositories** | |
 | Read | Pull |
-| Read/Write | Pull, push, update description, delete |
-| Admin | All of the above, plus create |
+| Read/Write | Pull, push |
+| Admin | All of the above, plus update description, create and delete |
 | **Build** | |
 | Read | View build and build settings |
 | Read/write | View, cancel build, retry or trigger build |

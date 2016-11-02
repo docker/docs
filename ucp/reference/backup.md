@@ -9,13 +9,13 @@ menu:
 title: backup
 ---
 
-# docker/ucp id
+# docker/ucp backup
 
 Stream a tar file to stdout containing all UCP data volumes.
 
 ## Usage
 
-```bash
+```none
 docker run --rm -i \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
@@ -44,11 +44,11 @@ built-in PGP compatible encryption.
 
 ## Options
 
-| Option           | Description                                                             |
-|:-----------------|:------------------------------------------------------------------------|
-| `--debug, -D`    | Enable debug mode                                                       |
-| `--jsonlog`      | Produce json formatted output for easier parsing                        |
-| `--id`           | The ID of the UCP instance to backup                                    |
-| `--root-ca-only` | Backup only the root CA certificates and keys from this controller node |
-| `--passphrase`   | Encrypt the tar file with the provided passphrase [$UCP_PASSPHRASE]     |
+| Option              | Description                                                                      |
+|:--------------------|:---------------------------------------------------------------------------------|
+| `--debug, -D`       | Enable debug mode                                                                |
+| `--jsonlog`         | Produce json formatted output for easier parsing                                 |
+| `--id`              | The ID of the UCP instance to backup                                             |
+| `--root-ca-only`    | Backup only the root CA certificates and keys from this controller node          |
+| `--passphrase`      | Encrypt the tar file with the provided passphrase [$UCP_PASSPHRASE]              |
 | `--interactive, -i` | Enable interactive mode. You will be prompted to enter all required information. |

@@ -12,7 +12,7 @@ weight=3
 
 # Get the required software for Windows
 
-This page explains how to get the software you need to use a  a Windows Server
+This page explains how to get the software you need to use a Windows Server
 2012 or Windows 8 machine for Docker development. Before you begin contributing
 you must have:
 

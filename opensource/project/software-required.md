@@ -9,9 +9,9 @@ weight=2
 +++
 <![end-metadata]-->
 
-# Get the required software for Linux or OS X
+# Get the required software for Linux or macOS
 
-This page explains how to get the software you need to use a Linux or OS X
+This page explains how to get the software you need to use a Linux or macOS
 machine for Docker development. Before you begin contributing you must have:
 
 *  a GitHub account
@@ -70,9 +70,9 @@ docker --version
 Docker version 1.11.0, build 4dc5990
 ```
 
-On Mac OS X or Windows, you should have installed Docker Toolbox which includes
+On macOS or Windows, you should have installed Docker Toolbox which includes
 Docker. You'll need to verify both Docker Machine and Docker. This
-documentation was written on OS X using the following versions.
+documentation was written on macOS using the following versions.
 
 ```bash
 $ docker-machine --version

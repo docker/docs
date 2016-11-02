@@ -191,7 +191,7 @@ also in this directory.
 A container's thin writable layer is stored in a directory under
 `/var/lib/docker/aufs/diff/`. With Docker 1.10 and higher, container IDs no
 longer correspond to directory names. However, the containers thin writable
-layer still exists under here and is stacked by AUFS as the top writable layer
+layer still exists here and is stacked by AUFS as the top writable layer
 and is where all changes to the container are stored. The directory exists even
  if the container is stopped. This means that restarting a container will not
 lose changes made to it. Once a container is deleted, it's thin writable layer
@@ -211,7 +211,7 @@ containers uses the systems page cache very efficiently.
 
 - The AUFS storage driver can introduce significant latencies into container
 write performance. This is because the first time a container writes to any
-file, the file has be located and copied into the containers top writable
+file, the file has to be located and copied into the containers top writable
 layer. These latencies increase and are compounded when these files exist below
  many image layers and the files themselves are large.
 

@@ -19,7 +19,7 @@ overview](content_trust.md).
 
 ### Prerequisites
 
-These instructions assume you are running in Linux or Mac OS X. You can run
+These instructions assume you are running in Linux or macOS. You can run
 this sandbox on a local machine or on a virtual machine. You will need to
 have privileges to run docker commands on your local machine or in the VM.
 
@@ -27,14 +27,14 @@ This sandbox requires you to install two Docker tools: Docker Engine >= 1.10.0
 and Docker Compose >= 1.6.0. To install the Docker Engine, choose from the
 [list of supported platforms](../../installation/index.md). To install
 Docker Compose, see the
-[detailed instructions here](https://docs.docker.com/compose/install/).
+[detailed instructions here](/compose/install/).
 
 Finally, you'll need to have a text editor installed on your local system or VM.
 
 ## What is in the sandbox?
 
 If you are just using trust out-of-the-box you only need your Docker Engine
-client and access to the Docker hub. The sandbox mimics a
+client and access to the Docker Hub. The sandbox mimics a
 production trust environment, and sets up these additional components.
 
 | Container       | Description                                                                                                                                 |
@@ -70,8 +70,8 @@ the `trustsandbox` container, the Notary server, and the Registry server.
 
 1. Create a new `trustsandbox` directory and change into it.
 
-        $ mkdir `trustsandbox`
-        $ cd `trustsandbox`
+        $ mkdir trustsandbox
+        $ cd trustsandbox
 
 2. Create a filed called `docker-compose.yml` with your favorite editor.  For example, using vim:
 

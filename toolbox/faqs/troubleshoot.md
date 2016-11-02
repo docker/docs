@@ -156,6 +156,6 @@ Here is an example of creating a `default` machine with proxies set to `http://e
     default
 
 
-To learn more about using `docker-machine create`, see the [create](https://docs.docker.com/machine/reference/create/) command in the [Docker Machine](https://docs.docker.com/machine/overview/) reference.
+To learn more about using `docker-machine create`, see the [create](/machine/reference/create/) command in the [Docker Machine](/machine/overview/) reference.
 
 &nbsp;

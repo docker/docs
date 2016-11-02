@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/network_rm/
 description: the network rm command description and usage
 keywords:
 - network, rm, user-defined

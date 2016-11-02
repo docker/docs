@@ -29,7 +29,7 @@ $ docker-cloud service run \
 -p 80:80/tcp \
 --role global \
 --autorestart ALWAYS \
---link-service quickstart-python:web \
+--link-service web:web \
 --name lb \
 dockercloud/haproxy
 ```
@@ -40,7 +40,7 @@ dockercloud/haproxy
 
 **--autorestart ALWAYS** tells Docker Cloud to always [restart the containers](../../apps/autorestart.md) if they stop.
 
-**--link-service quickstart-python:web** links your load balancer service *haproxy* with the service *quickstart-python*, and names the link *web*. (Learn more about Service Linking [here](../../apps/service-links.md).)
+**--link-service web:web** links your load balancer service *haproxy* with the *web* service, and names the link *web*. (Learn more about Service Linking [here](../../apps/service-links.md).)
 
 **--name lb** names the service *lb* (short for *load balancer*).
 

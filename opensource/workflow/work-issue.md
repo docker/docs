@@ -12,7 +12,7 @@ weight=3
 
 # Work on your issue
 
-The work you do for your issue depends on the specific issue you picked.
+The work you do depends on the specific issue you picked.
 This section gives you a step-by-step workflow. Where appropriate, it provides
 command examples.
 
@@ -26,7 +26,7 @@ Follow this workflow as you work:
 
 1. Review the appropriate style guide.
 
-    If you are changing code, review the <a href="../coding-style"
+    If you are changing code, review the <a href="/opensource/workflow/coding-style/"
     target="_blank">coding style guide</a>. Changing documentation? Review the
     <a href="/opensource/doc-style/" target="_blank">documentation style guide</a>.
 

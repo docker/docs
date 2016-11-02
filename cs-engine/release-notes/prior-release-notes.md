@@ -340,5 +340,5 @@ Because this addition is preventative, no CVE-ID is requested.
 ## CS Engine 1.6.0-cs2
 (23 Apr 2015)
 
-First release, see the [Docker Engine 1.6.0 Release notes](https://docs.docker.com/v1.6/release-notes/)
+First release, see the [Docker Engine 1.6.0 Release notes](/v1.6/release-notes/)
   for more details.

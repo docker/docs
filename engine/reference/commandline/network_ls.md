@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/network_ls/
 description: The network ls command description and usage
 keywords:
 - network, list, user-defined

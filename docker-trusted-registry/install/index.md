@@ -32,7 +32,7 @@ infrastructure has all the [requirements DTR needs to run](system-requirements.m
 
 Since DTR requires a Docker Universal Control Plane (UCP) cluster
 to run, you need to install UCP first.
-[Learn how to install UCP](https://docs.docker.com/ucp/installation/install-production/). Make sure that the node you install DTR on is already joined to the UCP cluster.
+[Learn how to install UCP](/ucp/installation/install-production/). Make sure that the node you install DTR on is already joined to the UCP cluster.
 
 
 ## Step 3. Install DTR
@@ -46,7 +46,7 @@ To install DTR:
 
     Having a UCP client bundle allows you to run Docker commands on a UCP
     cluster.
-    [Download a UCP client bundle](https://docs.docker.com/ucp/access-ucp/cli-based-access/)
+    [Download a UCP client bundle](/ucp/access-ucp/cli-based-access/)
     and set up your CLI client to use it.
 
 2.  Run the following command to install DTR.

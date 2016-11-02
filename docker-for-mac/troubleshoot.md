@@ -99,7 +99,7 @@ The diagnostics and usage information to the left of the results provide auto-ge
 
 ## Troubleshooting
 
-#### Recreate or update your containers after Beta 18 upgrade
+### Recreate or update your containers after Beta 18 upgrade
 
 Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to RC3. (For more information, see https://github.com/docker/docker/issues/24343#issuecomment-230623542.)
 
@@ -111,13 +111,13 @@ You can fix this by either [recreating](troubleshoot.md#recreate-your-containers
 
 If you get the error message shown above, we recommend recreating them.
 
-##### Recreate your containers
+#### Recreate your containers
 
 To recreate your containers, use Docker Compose.
 
 			docker-compose down && docker-compose up
 
-##### Update your containers
+#### Update your containers
 
 To fix existing containers, follow these steps.
 
@@ -153,7 +153,7 @@ To fix existing containers, follow these steps.
 				$ docker start old-container
 				old-container
 
-#### Incompatible CPU detected
+### Incompatible CPU detected
 
 Docker for Mac requires a processor (CPU) that supports virtualization and, more specifically, the [Apple Hypervisor framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/). Docker for Mac is only compatible with Macs that have a CPU that supports the Hypervisor framework. Most Macs built in 2010 and later support it, as described in the Apple Hypervisor Framework documentation about supported hardware:
 
@@ -171,7 +171,7 @@ If not, the command will print `kern.hv_support: 0`.
 See also, [Hypervisor Framework Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/) in the Apple documentation, and Docker for Mac system requirements in [What to know before you install](index.md#what-to-know-before-you-install).
 
 
-#### Workarounds for common problems
+### Workarounds for common problems
 
 * IPv6 workaround to auto-filter DNS addresses - IPv6 is not yet supported on Docker for Mac, which typically manifests as a network timeout when running `docker` commands that need access to external network servers (e.g., `docker pull busybox`).
 
@@ -220,7 +220,7 @@ ${!DOCKER_*}` will unset existing `DOCKER` environment variables you have set.
 
 <p></p>
 
-* Note that network connections will fail if the OS X Firewall is set to
+* Note that network connections will fail if the macOS Firewall is set to
 "Block all incoming connections". You can enable the firewall, but `bootpd` must be allowed incoming connections so that the VM can get an IP address.
 
 <p></p>
@@ -244,8 +244,6 @@ environments, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 
 See also [Known Issues](troubleshoot.md#known-issues) on this page, and the [FAQs](faqs.md) topic.
 
-<a name="issues"></a>
-
 ## Known issues
 
 * IPv6 is not yet supported on Docker for Mac. If you are using IPv6, and haven't upgraded to Beta 24 or v1.12.1 stable or newer, you will see a network
@@ -268,7 +266,7 @@ Docker for Mac does not yet support IPv6. See "IPv6 workaround to auto-filter DN
 
 <p></p>
 
-* Docker for Mac uses the `HyperKit` hypervisor (https://github.com/docker/hyperkit) in Mac OS X 10.10 Yosemite and higher. If you are developing with tools that have conflicts with `HyperKit`, such as [Intel Hardware Accelerated Execution Manager (HAXM)](https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/), the current workaround is not to run them at the same time. You can pause `HyperKit` by quitting Docker for Mac temporarily while you work with HAXM. This will allow you to continue work with the other tools and prevent `HyperKit` from interfering.
+* Docker for Mac uses the `HyperKit` hypervisor (https://github.com/docker/hyperkit) in macOS 10.10 Yosemite and higher. If you are developing with tools that have conflicts with `HyperKit`, such as [Intel Hardware Accelerated Execution Manager (HAXM)](https://software.intel.com/en-us/android/articles/intel-hardware-accelerated-execution-manager/), the current workaround is not to run them at the same time. You can pause `HyperKit` by quitting Docker for Mac temporarily while you work with HAXM. This will allow you to continue work with the other tools and prevent `HyperKit` from interfering.
 
 <p></p>
 
@@ -299,18 +297,14 @@ Alternatively you could create a plain-text TCP proxy on localhost:1234 using:
   - Symfony
   - Magento
   - Zend Framework
-  - PHP applications that use [Composer](https://getcomposer.org) to install dependencies in a ```vendor``` folder
-
-<p></p>
+  - PHP applications that use [Composer](https://getcomposer.org) to install dependencies in a ```vendor``` folder<br><br>
 
   As a work-around for this behavior, you can put vendor or third-party library directories in Docker volumes, perform temporary file system
     operations outside of `osxfs` mounts, and use third-party tools like
     Unison or `rsync` to synchronize between container directories and
     bind-mounted directories. We are actively working on `osxfs`
-    performance using a number of different techniques and we look forward
-    to sharing improvements with you soon.
+    performance using a number of different techniques. To learn more, please see the topic on [Performance issues, solutions, and roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
 
-<p></p>
 
 * If your system does not have access to an NTP server, then after a hibernate the time seen by Docker for Mac may be considerably out of sync with the host. Furthermore, the time may slowly drift out of sync during use. To manually reset the time after hibernation, run:
 

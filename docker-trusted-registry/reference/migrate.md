@@ -16,7 +16,7 @@ Migrate configurations, accounts, and repository metadata from DTR 1.4.3 to 2.0
 ## Usage
 
 ```bash
-$ docker run -it --rm docker/dtr \
+docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock docker/dtr \
     migrate [command options]
 ```
 
@@ -31,20 +31,22 @@ migrate the data to the new installation. Finally, you decommission your
 DTR 1.4.3 by uninstalling it.
 
 
-| Option                 | Description                                                                          |
-|:-----------------------|:-------------------------------------------------------------------------------------|
-| `--ucp-url `           | Specify the UCP controller URL [$UCP_URL]                                            |
-| `--ucp-username`       | Specify the UCP admin username [$UCP_USERNAME]                                       |
-| `--ucp-password`       | Specify the UCP admin password [$UCP_PASSWORD]                                       |
-| `--debug`              | Enable debug mode, provides additional logging [$DEBUG]                              |
-| `--hub-username`       | Specify the Docker Hub username for pulling images [$HUB_USERNAME]                   |
-| `--hub-password`       | Specify the Docker Hub password for pulling images [$HUB_PASSWORD]                   |
-| `--ucp-insecure-tls`   | Disable TLS verification for UCP [$UCP_INSECURE_TLS]                                 |
-| `--ucp-ca`             | Use a PEM-encoded TLS CA certificate for UCP [$UCP_CA]                               |
-| `--run-full-migration` | Run full migration procedure instead of dumping configurations [$RUN_FULL_MIGRATION] |
-| `--dtr-load-balancer`  | Specify the domain name and port for the DTR load balancer [$DTR_LOAD_BALANCER]      |
-| `--dtr-insecure-tls`   | Disable TLS verification for DTR [$DTR_INSECURE_TLS]                                 |
-| `--dtr-ca`             | PEM-encoded TLS CA cert for DTR [$DTR_CA]                                            |
-| `--http-proxy`         | Set the HTTP proxy for outgoing requests [$DTR_HTTP_PROXY]                           |
-| `--https-proxy`        | Set the HTTPS proxy for outgoing requests [$DTR_HTTPS_PROXY]                         |
-| `--no-proxy`           | Set the list of domains to not proxy to [$DTR_NO_PROXY]                              |
+## Options
+
+| Option                 | Description                                                                                                |
+|:-----------------------|:-----------------------------------------------------------------------------------------------------------|
+| `--ucp-url`            | Specify the UCP controller URL including domain and port                                                   |
+| `--ucp-username`       | Specify the UCP admin username                                                                             |
+| `--ucp-password`       | Specify the UCP admin password                                                                             |
+| `--debug`              | Enable debug mode, provides additional logging                                                             |
+| `--hub-username`       | Specify the Docker Hub username for pulling images                                                         |
+| `--hub-password`       | Specify the Docker Hub password for pulling images                                                         |
+| `--ucp-insecure-tls`   | Disable TLS verification for UCP                                                                           |
+| `--ucp-ca`             | Use a PEM-encoded TLS CA certificate for UCP                                                               |
+| `--run-full-migration` | Run full migration procedure instead of dumping configurations                                             |
+| `--dtr-external-url`   | Specify the external domain name and port for DTR. If using a load balancer, use its external URL instead. |
+| `--dtr-insecure-tls`   | Disable TLS verification for DTR                                                                           |
+| `--dtr-ca`             | PEM-encoded TLS CA cert for DTR                                                                            |
+| `--http-proxy`         | Set the HTTP proxy for outgoing requests                                                                   |
+| `--https-proxy`        | Set the HTTPS proxy for outgoing requests                                                                  |
+| `--no-proxy`           | Set the list of domains to not proxy to                                                                    |
