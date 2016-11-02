@@ -387,5 +387,5 @@ multi-host networking scenario in the swarm cluster used above.
 
 * [Understand Docker container networks](index.md)
 * [Work with network commands](work-with-networks.md)
-* [Docker Swarm overview](https://docs.docker.com/swarm)
-* [Docker Machine overview](https://docs.docker.com/machine)
+* [Docker Swarm overview](/swarm)
+* [Docker Machine overview](/machine)

@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/search/
 description: The search command description and usage
 keywords:
 - search, hub, images

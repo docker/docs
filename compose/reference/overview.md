@@ -77,7 +77,7 @@ add to their successors.
 For example, consider this command line:
 
 ```
-$ docker-compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db`
+$ docker-compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db
 ```
 
 The `docker-compose.yml` file might specify a `webapp` service.

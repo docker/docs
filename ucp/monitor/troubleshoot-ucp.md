@@ -46,7 +46,7 @@ specially useful if the UCP web application is not working.
 
 2.  Check the logs of UCP system containers.
     
-    ```bash
+    ```none
     # By default system containers are not displayed. Use the -a flag to display them
     $ docker ps -a
 

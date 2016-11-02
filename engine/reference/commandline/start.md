@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/start/
 description: The start command description and usage
 keywords:
 - Start, container, stopped

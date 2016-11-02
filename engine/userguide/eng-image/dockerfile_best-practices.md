@@ -92,7 +92,7 @@ During the process of building an image Docker will step through the
 instructions in your `Dockerfile` executing each in the order specified.
 As each instruction is examined Docker will look for an existing image in its
 cache that it can reuse, rather than creating a new (duplicate) image.
-If you do not want to use the cache at all you can use the ` --no-cache=true`
+If you do not want to use the cache at all you can use the `--no-cache=true`
 option on the `docker build` command.
 
 However, if you do let Docker use its cache then it is very important to
@@ -531,6 +531,6 @@ These Official Repositories have exemplary `Dockerfile`s:
 
 * [Dockerfile Reference](../../reference/builder.md)
 * [More about Base Images](baseimages.md)
-* [More about Automated Builds](https://docs.docker.com/docker-hub/builds/)
+* [More about Automated Builds](/docker-hub/builds/)
 * [Guidelines for Creating Official
-Repositories](https://docs.docker.com/docker-hub/official_repos/)
+Repositories](/docker-hub/official_repos/)

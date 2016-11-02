@@ -1,5 +1,7 @@
 ---
 aliases:
+  - /reference/commandline/dockerd/
+aliases:
 - /engine/reference/commandline/daemon/
 description: The daemon command description and usage
 keywords:
@@ -1090,71 +1092,71 @@ This is a full example of the allowed configuration options on Linux:
 
 ```json
 {
-	"authorization-plugins": [],
-	"dns": [],
-	"dns-opts": [],
-	"dns-search": [],
-	"exec-opts": [],
-	"exec-root": "",
-	"storage-driver": "",
-	"storage-opts": [],
-	"labels": [],
-	"live-restore": true,
-	"log-driver": "",
-	"log-opts": {},
-	"mtu": 0,
-	"pidfile": "",
-	"graph": "",
-	"cluster-store": "",
-	"cluster-store-opts": {},
-	"cluster-advertise": "",
-	"max-concurrent-downloads": 3,
-	"max-concurrent-uploads": 5,
-	"debug": true,
-	"hosts": [],
-	"log-level": "",
-	"tls": true,
-	"tlsverify": true,
-	"tlscacert": "",
-	"tlscert": "",
-	"tlskey": "",
-	"swarm-default-advertise-addr": "",
-	"api-cors-header": "",
-	"selinux-enabled": false,
-	"userns-remap": "",
-	"group": "",
-	"cgroup-parent": "",
-	"default-ulimits": {},
-	"ipv6": false,
-	"iptables": false,
-	"ip-forward": false,
-	"ip-masq": false,
-	"userland-proxy": false,
-	"ip": "0.0.0.0",
-	"bridge": "",
-	"bip": "",
-	"fixed-cidr": "",
-	"fixed-cidr-v6": "",
-	"default-gateway": "",
-	"default-gateway-v6": "",
-	"icc": false,
-	"raw-logs": false,
-	"registry-mirrors": [],
-	"insecure-registries": [],
-	"disable-legacy-registry": false,
-	"default-runtime": "runc",
-	"oom-score-adjust": -500,
-	"runtimes": {
-		"runc": {
-			"path": "runc"
-		},
-		"custom": {
-			"path": "/usr/local/bin/my-runc-replacement",
-			"runtimeArgs": [
-				"--debug"
-			]
-		}
-	}
+    "api-cors-header": "",
+    "authorization-plugins": [],
+    "bip": "",
+    "bridge": "",
+    "cgroup-parent": "",
+    "cluster-store": "",
+    "cluster-store-opts": {},
+    "cluster-advertise": "",
+    "debug": true,
+    "default-gateway": "",
+    "default-gateway-v6": "",
+    "default-runtime": "runc",
+    "default-ulimits": {},
+    "disable-legacy-registry": false,
+    "dns": [],
+    "dns-opts": [],
+    "dns-search": [],
+    "exec-opts": [],
+    "exec-root": "",
+    "fixed-cidr": "",
+    "fixed-cidr-v6": "",
+    "graph": "",
+    "group": "",
+    "hosts": [],
+    "icc": false,
+    "insecure-registries": [],
+    "ip": "0.0.0.0",
+    "iptables": false,
+    "ipv6": false,
+    "ip-forward": false,
+    "ip-masq": false,
+    "labels": [],
+    "live-restore": true,
+    "log-driver": "",
+    "log-level": "",
+    "log-opts": {},
+    "max-concurrent-downloads": 3,
+    "max-concurrent-uploads": 5,
+    "mtu": 0,
+    "oom-score-adjust": -500,
+    "pidfile": "",
+    "raw-logs": false,
+    "registry-mirrors": [],
+    "runtimes": {
+        "runc": {
+            "path": "runc"
+        },
+        "custom": {
+            "path": "/usr/local/bin/my-runc-replacement",
+            "runtimeArgs": [
+                "--debug"
+            ]
+        }
+    },
+    "selinux-enabled": false,
+    "storage-driver": "",
+    "storage-opts": [],
+    "swarm-default-advertise-addr": "",
+    "tls": true,
+    "tlscacert": "",
+    "tlscert": "",
+    "tlskey": "",
+    "tlsverify": true,
+    "userland-proxy": false,
+    "userns-remap": ""	
 }
 ```
 
@@ -1169,36 +1171,36 @@ This is a full example of the allowed configuration options on Windows:
 ```json
 {
     "authorization-plugins": [],
+    "bridge": "",
+    "cluster-advertise": "",
+    "cluster-store": "",
+    "debug": true,
+    "default-ulimits": {},
+    "disable-legacy-registry": false,
     "dns": [],
     "dns-opts": [],
     "dns-search": [],
     "exec-opts": [],
-    "storage-driver": "",
-    "storage-opts": [],
+    "fixed-cidr": "",
+    "graph": "",
+    "group": "",
+    "hosts": [],
+    "insecure-registries": [],
     "labels": [],
     "live-restore": true,
     "log-driver": "",
+    "log-level": "",
     "mtu": 0,
     "pidfile": "",
-    "graph": "",
-    "cluster-store": "",
-    "cluster-advertise": "",
-    "debug": true,
-    "hosts": [],
-    "log-level": "",
-    "tlsverify": true,
+    "raw-logs": false,
+    "registry-mirrors": [],
+    "storage-driver": "",
+    "storage-opts": [],
+    "swarm-default-advertise-addr": "",
     "tlscacert": "",
     "tlscert": "",
     "tlskey": "",
-    "swarm-default-advertise-addr": "",
-    "group": "",
-    "default-ulimits": {},
-    "bridge": "",
-    "fixed-cidr": "",
-    "raw-logs": false,
-    "registry-mirrors": [],
-    "insecure-registries": [],
-    "disable-legacy-registry": false
+    "tlsverify": true
 }
 ```
 

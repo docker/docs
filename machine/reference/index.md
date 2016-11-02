@@ -21,6 +21,7 @@ title: Command line reference
 -   [ip](ip.md)
 -   [kill](kill.md)
 -   [ls](ls.md)
+-   [provision](provision.md)
 -   [regenerate-certs](regenerate-certs.md)
 -   [restart](restart.md)
 -   [rm](rm.md)

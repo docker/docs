@@ -6,7 +6,7 @@ toc:
   - sectiontitle: Install
     section:
     - path: /engine/installation/mac/
-      title: Installation on Mac OS X
+      title: Installation on macOS
     - path: /engine/installation/windows/
       title: Installation on Windows
     - sectiontitle: On Linux distributions
@@ -25,8 +25,6 @@ toc:
         title: Installation on Arch Linux
       - path: /engine/installation/linux/cruxlinux/
         title: Installation on CRUX Linux
-      - path: /engine/installation/linux/frugalware/
-        title: Installation on FrugalWare
       - path: /engine/installation/linux/gentoolinux/
         title: Installation on Gentoo
       - path: /engine/installation/linux/oracle/
@@ -111,6 +109,8 @@ toc:
         title: Work with network commands
       - path: /engine/userguide/networking/get-started-overlay/
         title: Get started with multi-host networking
+      - path: /engine/userguide/networking/get-started-macvlan/
+        title: Get started with macvlan network driver
       - path: /engine/userguide/networking/overlay-security-model/
         title: Swarm mode overlay network security model
       - path: /engine/userguide/networking/configure-dns/
@@ -167,6 +167,8 @@ toc:
         title: Splunk logging driver
     - path: /engine/admin/dsc/
       title: PowerShell DSC Usage
+    - path: /engine/admin/ansible/
+      title: Using Ansible
     - path: /engine/admin/chef/
       title: Using Chef
     - path: /engine/admin/puppet/
@@ -253,6 +255,8 @@ toc:
       title: Seccomp security profiles for Docker
   - sectiontitle: Extend Engine
     section:
+    - path: /engine/extend/
+      title: Managed plugin system
     - path: /engine/extend/plugins_authorization/
       title: Access authorization plugin
     - path: /engine/extend/plugins/
@@ -630,7 +634,9 @@ toc:
   - path: /ucp/overview/
     title: Universal Control Plane overview
   - path: /ucp/install-sandbox/
-    title: Evaluate UCP in a sandbox
+    title: Install DDC in a sandbox for evaluation
+  - path: /ucp/install-sandbox-2/
+    title: Evaluate DDC in a sandbox deployment
   - path: /ucp/architecture/
     title: Architecture
   - sectiontitle: Installation
@@ -769,6 +775,8 @@ toc:
         title: backup
       - path: /docker-trusted-registry/reference/dumpcerts/
         title: dumpcerts
+      - path: /docker-trusted-registry/reference/images/
+        title: images
       - path: /docker-trusted-registry/reference/install/
         title: install
       - path: /docker-trusted-registry/reference/join/
@@ -781,6 +789,8 @@ toc:
         title: remove
       - path: /docker-trusted-registry/reference/restore/
         title: restore
+      - path: /docker-trusted-registry/reference/upgrade/
+        title: upgrade
   - sectiontitle: Configuration
     section:
     - path: /docker-trusted-registry/configure/configuration/
@@ -1095,6 +1105,8 @@ toc:
   section:
   - path: /docker-store/
     title: Docker Store Overview
+  - path: /docker-store/
+    title: Submit a product to Docker Store
   - path: /docker-store/faq/
     title: Docker Store FAQs
 - sectiontitle: Docker Toolbox
@@ -1206,7 +1218,7 @@ toc:
         - path: /registry/recipes/mirror/
           title: Mirroring Docker Hub
         - path: /registry/recipes/osx-setup-guide/
-          title: Running on OS X
+          title: Running on macOS
       - sectiontitle: Reference
         section:
         - path: /registry/spec/

@@ -136,7 +136,7 @@ You can see the command returns a lot of images that use the term `sinatra`.
 You've received a list of image names, descriptions, Stars (which measure the
 social popularity of images - if a user likes an image then they can "star" it),
 and the Official and Automated build statuses. [Official
-Repositories](https://docs.docker.com/docker-hub/official_repos) are a carefully
+Repositories](/docker-hub/official_repos) are a carefully
 curated set of Docker repositories supported by Docker, Inc.  Automated
 repositories are [Automated Builds](dockerrepos.md#automated-builds) that allow
 you to validate the source and content of an image.
@@ -189,7 +189,7 @@ you'd like to update.
 
 Inside our running container first let's update Ruby:
 
-    root@0b2616b0e5a8:/# apt-get install -y ruby2.0-dev
+    root@0b2616b0e5a8:/# apt-get install -y ruby2.0-dev ruby2.0
 
 Now let's add the `json` gem.
 

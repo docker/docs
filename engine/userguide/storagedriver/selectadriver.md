@@ -12,7 +12,7 @@ title: Select a storage driver
 # Select a storage driver
 
 This page describes Docker's storage driver feature. It lists the storage
-driver's that Docker supports and the basic commands associated with managing
+drivers that Docker supports and the basic commands associated with managing
 them. Finally, this page provides guidance on choosing a storage driver.
 
 The material on this page is intended for readers who already have an

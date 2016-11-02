@@ -303,13 +303,18 @@ assumes that the Docker daemon is in the `stopped` state.
     $ lvs -o+seg_monitor
     ```
 
-13. If the Docker daemon was previously started, clear your graph driver directory.
+13. If the Docker daemon was previously started, move your existing graph driver
+    directory out of the way.
 
-    Clearing your graph driver removes any images, containers, and volumes in your
-    Docker installation.
+    Moving the graph driver removes any images, containers, and volumes in your
+    Docker installation. These commands move the contents of the
+    `/var/lib/docker` directory to a new directory named `/var/lib/docker.bk`.
+    If any of the following steps fail and you need to restore, you can remove
+    `/var/lib/docker` and replace it with `/var/lib/docker.bk`.
 
     ```bash
-    $ rm -rf /var/lib/docker/*
+    $ mkdir /var/lib/docker.bk
+    $ mv /var/lib/docker/* /var/lib/docker.bk
     ```
 
 14. Configure the Docker daemon with specific devicemapper options.
@@ -359,11 +364,18 @@ view the logs use:
 $ journalctl -fu dm-event.service
 ```
 
+After you have verified that the configuration is correct, you can remove the
+`/var/lib/docker.bk` directory which contains the previous configuration.
+
+```bash
+$ rm -rf /var/lib/docker.bk
+```
+
 If you run into repeated problems with thin pool, you can use the
 `dm.min_free_space` option to tune the Engine behavior. This value ensures that
 operations fail with a warning when the free space is at or near the minimum.
 For information, see <a
-href="../../../reference/commandline/dockerd/#storage-driver-options"
+href="/../../reference/commandline/dockerd/#storage-driver-options"
 target="_blank">the storage driver options in the Engine daemon reference</a>.
 
 

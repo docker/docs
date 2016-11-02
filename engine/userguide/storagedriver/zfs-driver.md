@@ -95,7 +95,7 @@ This process of creating child layers and containers from *read-only* snapshots
 Container reads with the `zfs` storage driver are very simple. A newly launched
  container is based on a ZFS clone. This clone initially shares all of its data
  with the dataset it was created from. This means that read operations with the
- `zfs` storage driver are fast &ndash; even if the data being read was note 
+ `zfs` storage driver are fast &ndash; even if the data being read was not 
 copied into the container yet. This sharing of data blocks is shown in the 
 diagram below.
 

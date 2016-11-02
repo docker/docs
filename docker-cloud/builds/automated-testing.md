@@ -73,15 +73,15 @@ Docker repository, regardless of the Autotest settings.
 
     * The source code repository
     * the build location
-    * at least one tag mapping
+    * at least one build rule
 
 8. Choose your **Autotest** option.
 
     The following options are available:
 
-    * `Off`: no additional tests. Test commits only to branches that are using Autobuild to build and push images.
-    * `Source Repository`: test commits to all branches of the source code repository, regardless of their Autobuild setting.
-    * `Source Repository & External Pull Requests`: tests commits to all branches of the source code repository, including any pull requests opened against it.
+    * `Off`: No additional test builds. Tests only run if they're configured as part of an automated build.
+    * `Source repository`: Run a test build for any pull requests to branches that match a build rule, but only when the pull request comes from the same source repository.
+    * `Source repository & external pull requests`: Run a test build for any pull requests to branches that match a build rule, including when the pull request originated in an external source repository.
 
     > **Note**: For security purposes, autotest on _external pull requests_ is
     disabled on public repositories. If you select this option on a public
