@@ -199,11 +199,11 @@ For Ubuntu Trusty (and some other versions), it’s recommended to install the `
 
 ## Where to go next
 
-_Looking for a quicker way to do Docker cloud installs and provision multiple hosts?_ You can use [Docker Machine](https://docs.docker.com/machine/overview/) to provision hosts.
+_Looking for a quicker way to do Docker cloud installs and provision multiple hosts?_ You can use [Docker Machine](/machine/overview/) to provision hosts.
 
-  * [Use Docker Machine to provision hosts on cloud providers](https://docs.docker.com/machine/get-started-cloud/)
+  * [Use Docker Machine to provision hosts on cloud providers](/machine/get-started-cloud/)
 
-  * [Docker Machine driver reference](https://docs.docker.com/machine/drivers/)
+  * [Docker Machine driver reference](/machine/drivers/)
 
 *  [Install Docker Engine](../index.md)
 

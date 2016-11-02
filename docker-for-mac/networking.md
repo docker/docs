@@ -53,7 +53,7 @@ no_proxy=*.local, 169.254/16
 
 You can see from the above output that the `HTTP_PROXY`, `http_proxy` and `no_proxy` environment variables are set.
 When your proxy configuration changes, Docker restarts automatically to pick up the new settings.
-If you have containers that you wish to keep running across restarts, you should consider using [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies-restart)
+If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart)
 
 ## Known Limitations, Use Cases, and Workarounds
 

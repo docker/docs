@@ -207,11 +207,11 @@ If you create a host with Docker Machine, but remove it through the cloud provid
 
 ## Where to go next
 
-* [Docker Machine driver reference](https://docs.docker.com/machine/drivers/)
+* [Docker Machine driver reference](/machine/drivers/)
 
-* [Docker Machine Overview](https://docs.docker.com/machine/overview/)
+* [Docker Machine Overview](/machine/overview/)
 
-* [Use Docker Machine to provision hosts on cloud providers](https://docs.docker.com/machine/get-started-cloud/)
+* [Use Docker Machine to provision hosts on cloud providers](/machine/get-started-cloud/)
 
 * [Install Docker Engine](../../installation/index.md)
 

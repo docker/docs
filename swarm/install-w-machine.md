@@ -20,7 +20,7 @@ or Windows and have installed Docker, you should have VirtualBox already
 installed.
 
 Using the instructions appropriate to your system architecture, [install Docker
-Machine](http://docs.docker.com/machine/install-machine).
+Machine](/machine/install-machine).
 
 ## Create a Docker Swarm
 
@@ -240,7 +240,7 @@ your swarm, and start an image on your swarm.
     $ docker run -it ubuntu bash
     ```
 
-    For more examples and ideas, visit the [User Guide](http://docs.docker.com/userguide/).
+    For more examples and ideas, visit the [User Guide](/userguide/).
 
 5.  Use the `docker ps` command to find out which node the container ran on.
 

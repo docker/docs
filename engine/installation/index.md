@@ -43,7 +43,7 @@ If your linux distribution is not listed above, don't give up yet. To try out Do
 
 ## The Docker Archives
 Instructions for installing prior releases of Docker can be found in the following docker archives:
-[Docker v1.7](http://docs.docker.com/v1.7/), [Docker v1.6](http://docs.docker.com/v1.6/), [Docker v1.5](http://docs.docker.com/v1.5/), and [Docker v1.4](http://docs.docker.com/v1.4/).
+[Docker v1.7](/v1.7/), [Docker v1.6](/v1.6/), [Docker v1.5](/v1.5/), and [Docker v1.4](/v1.4/).
 
 ## Where to go after installing
 * [About Docker Engine](../index.md)

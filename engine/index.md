@@ -98,7 +98,7 @@ implementation, check out the [Docker User Guide](userguide/index.md).
 ## Release notes
 
 A summary of the changes in each release in the current series can now be found
-on the separate [Release Notes page](https://docs.docker.com/release-notes)
+on the separate [Release Notes page](/release-notes)
 
 ## Feature Deprecation Policy
 

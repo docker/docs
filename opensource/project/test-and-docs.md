@@ -276,7 +276,7 @@ directly requires you to install some prerequisites, but is faster on each build
 
 The easiest way to build the docs locally on macOS, Windows, or Linux is to use
 `docker-compose`. If you have not yet installed `docker-compose`,
-[follow these installation instructions](https://docs.docker.com/compose/install/).
+[follow these installation instructions](/compose/install/).
 
 In the root of the repository, issue the following command:
 
