@@ -58,7 +58,7 @@ If you are in another, you may need to adjust to use analogous commands for your
 
 This example requires that you have:
 
-* [Docker Toolbox installed](https://docs.docker.com/toolbox/overview/)
+* [Docker Toolbox installed](/toolbox/overview/)
 (contains Docker Machine and Docker Engine)
 * A free Docker ID account
 

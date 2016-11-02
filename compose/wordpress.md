@@ -94,7 +94,7 @@ This pulls the needed images, and starts the wordpress and database containers, 
 
 ### Bring up WordPress in a web browser
 
-If you're using [Docker Machine](https://docs.docker.com/machine/), then `docker-machine ip MACHINE_VM` gives you the machine address and you can open `http://MACHINE_VM_IP:8000` in a browser.
+If you're using [Docker Machine](/machine/), then `docker-machine ip MACHINE_VM` gives you the machine address and you can open `http://MACHINE_VM_IP:8000` in a browser.
 
 At this point, WordPress should be running on port `8000` of your Docker Host, and you can complete the "famous five-minute installation" as a WordPress administrator.
 

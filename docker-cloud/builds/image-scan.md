@@ -188,4 +188,4 @@ components.
 ## Related information
 
 * [Learn about CVE and how it compiles data](https://cve.mitre.org/about/index.html).
-* [How to create a Docker Official image](https://docs.docker.com/docker-hub/official_repos/)
+* [How to create a Docker Official image](/docker-hub/official_repos/)

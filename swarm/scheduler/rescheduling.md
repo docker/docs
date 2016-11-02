@@ -57,5 +57,5 @@ Failed to start rescheduled container 2362901cb213da321
 
 ## Related information
 
-* [Apply custom metadata](https://docs.docker.com/engine/userguide/labels-custom-metadata/)
-* [Environment variables with run](https://docs.docker.com/engine/reference/run/#env-environment-variables)
+* [Apply custom metadata](/engine/userguide/labels-custom-metadata/)
+* [Environment variables with run](/engine/reference/run/#env-environment-variables)

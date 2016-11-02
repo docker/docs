@@ -531,6 +531,6 @@ These Official Repositories have exemplary `Dockerfile`s:
 
 * [Dockerfile Reference](../../reference/builder.md)
 * [More about Base Images](baseimages.md)
-* [More about Automated Builds](https://docs.docker.com/docker-hub/builds/)
+* [More about Automated Builds](/docker-hub/builds/)
 * [Guidelines for Creating Official
-Repositories](https://docs.docker.com/docker-hub/official_repos/)
+Repositories](/docker-hub/official_repos/)

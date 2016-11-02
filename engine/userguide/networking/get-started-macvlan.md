@@ -9,7 +9,7 @@ title: Get started with macvlan network driver
 
 ### Getting Started
 
-The Macvlan driver is in order to make Docker users use cases and vet the implementation to ensure a hardened, production ready driver. Libnetwork now gives users total control over both IPv4 and IPv6 addressing. The VLAN drivers build on top of that in giving operators complete control of layer 2 VLAN tagging for users interested in underlay network integration. For overlay deployments that abstract away physical constraints see the [multi-host overlay ](https://docs.docker.com/engine/userguide/networking/get-started-overlay/) driver.
+The Macvlan driver is in order to make Docker users use cases and vet the implementation to ensure a hardened, production ready driver. Libnetwork now gives users total control over both IPv4 and IPv6 addressing. The VLAN drivers build on top of that in giving operators complete control of layer 2 VLAN tagging for users interested in underlay network integration. For overlay deployments that abstract away physical constraints see the [multi-host overlay ](/engine/userguide/networking/get-started-overlay/) driver.
 
 Macvlan is a new twist on the tried and true network virtualization technique. The Linux implementations are extremely lightweight because rather than using the traditional Linux bridge for isolation, they are simply associated to a Linux Ethernet interface or sub-interface to enforce separation between networks and connectivity to the physical network.
 
@@ -129,7 +129,7 @@ docker network rm <network_name or id>
 
 - **Note:** In Macvlan you are not able to ping or communicate with the default namespace IP address. For example, if you create a container and try to ping the Docker host's `eth0` it will **not** work. That traffic is explicitly filtered by the kernel modules themselves to offer additional provider isolation and security.
 
-For more on Docker networking commands see [Working with Docker network commands](https://docs.docker.com/engine/userguide/networking/work-with-networks/)
+For more on Docker networking commands see [Working with Docker network commands](/engine/userguide/networking/work-with-networks/)
 
 ### Macvlan 802.1q Trunk Bridge Mode Example Usage
 
