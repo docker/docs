@@ -151,7 +151,7 @@ You can use the variable `{sourceref}` to use the branch or tag name that
 matched the regex. (The variable includes the whole source name, not just the
 portion that matched the regex.) You can also use up to nine regular expression
 capture groups (expressions enclosed in parentheses) to select a source to
-build, and reference these in the Docker Tag field using `{/1}` through `{/9}`.
+build, and reference these in the Docker Tag field using `{\1}` through `{\9}`.
 
 **Regex example: build from version number branch and tag with version number**
 
