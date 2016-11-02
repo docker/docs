@@ -10,9 +10,9 @@
   "destroyed_datetime": null,
   "nickname": "deployment stack",
   "name": "dockercloud-app",
-  "resource_uri": "/api/app/v1/stack/7fe7ec85-58be-4904-81da-de2219098d7c/",
+  "resource_uri": "/api/app/v1/user_namespace/stack/7fe7ec85-58be-4904-81da-de2219098d7c/",
   "services": [
-    "/api/app/v1/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/"
+    "/api/app/v1/user_namespace/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/"
   ],
   "state": "Running",
   "synchronized": true,
@@ -21,6 +21,8 @@
 ```
 
 A stack is a logical grouping of closely related services, that may be linked with one another.
+
+This is a [namespaced endpoint](#namespaced-endpoints).
 
 ### Attributes
 
@@ -91,7 +93,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/app/v1/stack/`
+`GET /api/app/v1/[optional_namespace/]stack/`
 
 ### Query Parameters
 
@@ -163,7 +165,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/stack/`
+`POST /api/app/v1/[optional_namespace/]stack/`
 
 ### JSON Parameters
 
@@ -216,7 +218,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/app/v1/stack/(uuid)/export/`
+`GET /api/app/v1/[optional_namespace/]stack/(uuid)/export/`
 
 ### Path Parameters
 
@@ -265,7 +267,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/app/v1/stack/(uuid)/`
+`GET /api/app/v1/[optional_namespace/]stack/(uuid)/`
 
 ### Path Parameters
 
@@ -339,7 +341,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`PATCH /api/app/v1/stack/(uuid)/`
+`PATCH /api/app/v1/[optional_namespace/]stack/(uuid)/`
 
 ### Path Parameters
 
@@ -398,7 +400,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/stack/(uuid)/stop/`
+`POST /api/app/v1/[optional_namespace/]stack/(uuid)/stop/`
 
 ### Path Parameters
 
@@ -449,7 +451,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/stack/(uuid)/start/`
+`POST /api/app/v1/[optional_namespace/]stack/(uuid)/start/`
 
 ### Path Parameters
 
@@ -502,7 +504,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/stack/(uuid)/redeploy/`
+`POST /api/app/v1/[optional_namespace/]stack/(uuid)/redeploy/`
 
 ### Path Parameters
 
@@ -559,7 +561,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`DELETE /api/app/v1/stack/(uuid)/`
+`DELETE /api/app/v1/[optional_namespace/]stack/(uuid)/`
 
 ### Path Parameters
 

@@ -6,21 +6,23 @@
 
 ```json
 {
-  "in_use": false, 
-  "name": "quay.io/tutum/ubuntu", 
-  "registry": "/api/repo/v1/registry/quay.io/", 
-  "resource_uri": "/api/repo/v1/repository/quay.io/tutum/ubuntu/", 
+  "in_use": false,
+  "name": "my.registry.com/myrepo",
+  "registry": "/api/repo/v1/user_namespace/registry/my.registry.com/",
+  "resource_uri": "/api/repo/v1/user_namespace/repository/my.registry.com/myrepo/",
 }
 ```
 
 The `repository` endpoint is used to add and remove existing repositories on third party registries to be used in deployments and builds.
+
+This is a [namespaced endpoint](#namespaced-endpoints).
 
 ### Attributes
 
 Attribute | Description
 --------- | -----------
 resource_uri | A unique API endpoint that represents the repository
-name | Name of the repository, i.e. `quay.io/tutum/ubuntu`
+name | Name of the repository, i.e. `my.registry.com/myrepo`
 in_use | If the image is being used by any of your services
 registry | Resource URI of the registry where this image is hosted
 
@@ -64,7 +66,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/repo/v1/repository/`
+`GET /api/repo/v1/[optional_namespace/]repository/`
 
 ### Query Parameters
 
@@ -115,13 +117,13 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/repo/v1/repository/`
+`POST /api/repo/v1/[optional_namespace/]repository/`
 
 ### JSON Parameters
 
 Parameter | Description
 --------- | -----------
-name | Name of the repository, i.e. 'quay.io/tutum/hello-world'
+name | Name of the repository, i.e. 'my.registry.com/myrepo'
 username | Username to authenticate with the third party registry
 password | Password to authenticate with the third party registry
 
@@ -165,7 +167,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/repo/v1/repository/(name)/`
+`GET /api/repo/v1/[optional_namespace/]repository/(name)/`
 
 ### Path Parameters
 
@@ -207,7 +209,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`PATCH /api/repo/v1/repository/(name)/`
+`PATCH /api/repo/v1/[optional_namespace/]repository/(name)/`
 
 ### Path Parameters
 
@@ -264,7 +266,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`DELETE /api/repo/v1/repository/registry.local/user1/image1/`
+`DELETE /api/repo/v1/[optional_namespace/]repository/`
 
 ### Path Parameters
 
