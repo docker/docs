@@ -38,9 +38,9 @@ before proceeding to the next node.
 
 | Option                | Description                                                                             |
 |:----------------------|:----------------------------------------------------------------------------------------|
-| `--debug, -D`        | Enable debug                                                                            |
-| `--jsonlog`          | Produce json formatted output for easier parsing                                        |
-| `--interactive, -i`  | Enable interactive mode.,You will be prompted to enter all required information         |
+| `--debug, -D`         | Enable debug                                                                            |
+| `--jsonlog`           | Produce json formatted output for easier parsing                                        |
+| `--interactive, -i`   | Enable interactive mode.,You will be prompted to enter all required information         |
 | `--admin-username`    | Specify the UCP admin username [$UCP_ADMIN_USER]                                        |
 | `--admin-password`    | Specify the UCP admin password [$UCP_ADMIN_PASSWORD]                                    |
 | `--registry-username` | Specify the username to pull required images with [$REGISTRY_USERNAME]                  |
