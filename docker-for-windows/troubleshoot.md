@@ -161,9 +161,17 @@ To fix existing containers, follow these steps.
 
 ### Hyper-V
 
-Docker for Windows requires a Hyper-V as well as the Hyper-V Module for Windows Powershell to be installed and enabled. The Docker for Windows installer will enable it for you.
+Docker for Windows requires a Hyper-V as well as the Hyper-V Module for Windows
+Powershell to be installed and enabled. The Docker for Windows installer will
+enable it for you.
 
-See [these instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) to install Hyper-V manually. A reboot is *required*. If you install Hyper-V without the reboot, Docker for Windows will not work correctly. On some systems, Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or similar.
+See [these
+instructions](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install)
+to install Hyper-V manually. A reboot is *required*. If you install Hyper-V
+without the reboot, Docker for Windows will not work correctly. On some systems,
+Virtualization needs to be enabled in the BIOS. The steps to do so are Vendor
+specific, but typically the BIOS option is called `Virtualization Technology
+(VTx)` or similar.
 
 ### Virtualization must be enabled
 
@@ -175,7 +183,29 @@ Verify that virtualization is enabled on Task Manager.
 
 ![Task Manager](images/win-virtualization-enabled.png)
 
-See also, the user reported issue [Unable to run Docker for Windows on Windows 10 Enterprise](https://github.com/docker/for-win/issues/74)
+See also, the user reported issue [Unable to run Docker for Windows on Windows
+10 Enterprise](https://github.com/docker/for-win/issues/74)
+
+### Windows containers and Windows Server 2016
+
+If you have questions about how to set up and run Windows containers on Windows
+Server 2016 or Windows 10, see [About Windows containers and Windows Server
+2016](index.md#about-windows-containers-and-windows-server-2016).
+
+A full tutorial is available in [docker/labs](https://github.com/docker/labs) at
+[Getting Started with Windows
+Containers](https://github.com/docker/labs/tree/master/windows/windows-containers).
+
+You can install a native Windows binary which allows you to develop and run
+Windows containers without Docker for Windows. However, if you install Docker
+this way, you cannot develop or run Linux containers.  If you try to run a Linux
+container on the native Docker daemon, an error occurs:
+
+  ```no-highlight
+  C:\Program Files\Docker\docker.exe:
+   image operating system "linux" cannot be used on this platform.
+   See 'C:\Program Files\Docker\docker.exe run --help'.
+   ```
 
 ### Networking issues
 
