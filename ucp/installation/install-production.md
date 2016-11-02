@@ -232,7 +232,7 @@ For each node that you want to add to your UCP cluster:
 1. Log into that node.
 
 2.  Use the join command, to join the node to the cluster:
-    
+
     ```none
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
