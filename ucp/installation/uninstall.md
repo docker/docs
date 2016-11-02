@@ -43,11 +43,11 @@ You can also use flags to pass values to the uninstall command.
     INFO[0000] Were about to uninstall the local components for UCP ID: FEY4:M46O:7OUS:QQA4:HLR3:4HRD:IUTH:LC2W:QPRE:BLYH:UWEM:3TYV
     Do you want proceed with the uninstall? (y/n): y
 
-    WARN[0000] We detected a daemon advertisement configuration. Proceed with caution, as the daemon will require a restart. Press ctrl-c to cancel uninstall within 4 seconds. 
+    WARN[0000] We detected a daemon advertisement configuration. Proceed with caution, as the daemon will require a restart. Press ctrl-c to cancel uninstall within 4 seconds.
     INFO[0004] Removing UCP Containers                      
     INFO[0005] Removing UCP images                          
-    WARN[0006] Configuration updated. You will have to manually restart the docker daemon for the changes to take effect. 
-    WARN[0006] Engine discovery configuration removed. You will need to restart the daemon. 
+    WARN[0006] Configuration updated. You will have to manually restart the docker daemon for the changes to take effect.
+    WARN[0006] Engine discovery configuration removed. You will need to restart the daemon.
     INFO[0010] Removing UCP volumes
     ```
 

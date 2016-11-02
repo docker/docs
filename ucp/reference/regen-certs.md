@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 description: Regenerate certificates for Docker Universal Control Plane.
 keywords:
@@ -8,6 +9,16 @@ menu:
     parent: ucp_ref
 title: regen-certs.md
 ---
+=======
++++
+title = "regen-certs.md"
+description = "Regenerate certificates for Docker Universal Control Plane."
+keywords= ["install, ucp"]
+[menu.main]
+parent = "ucp_ref"
+identifier = "ucp_ref_regen_certs"
++++
+>>>>>>> e53bc30bf9a66117a7903d5926b6ab4280aba40d
 
 # docker/ucp regen-certs
 
