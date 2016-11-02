@@ -198,4 +198,4 @@ $ mongo --port 28002
 
  - [Linking containers](../userguide/networking/default_network/dockerlinks.md)
  - [Cross-host linking containers](../admin/ambassador_pattern_linking.md)
- - [Creating an Automated Build](https://docs.docker.com/docker-hub/builds/)
+ - [Creating an Automated Build](/docker-hub/builds/)

@@ -85,7 +85,7 @@ For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-
   >**Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of HyperKit.
 
 <p />
-* **What the install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+* **What the install includes**: The installation provides [Docker Engine](/engine/userguide/intro/), Docker CLI client, [Docker Compose](/compose/overview/), and [Docker Machine](/machine/overview/).
 
 ## Step 1. Install and Run Docker for Mac
 
@@ -188,9 +188,9 @@ Choose <img src="images/whale-x.png"> --> **Preferences** from the menu bar. You
 ![Advanced Preference settings-advanced](images/settings-advanced.png)
 
 * **Adding registries** - As an alternative to using [Docker Hub](https://hub.docker.com/) to store your public or private images or [Docker
-Trusted Registry](https://docs.docker.com/docker-trusted-registry/overview/),
+Trusted Registry](/docker-trusted-registry/overview/),
 you can use Docker to set up your own insecure
-[registry](https://docs.docker.com/registry/introduction/). Add URLs for
+[registry](/registry/introduction/). Add URLs for
 insecure registries and registry mirrors on which to host your images. (See
 also, [How do I add custom CA
 certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in the FAQs.)

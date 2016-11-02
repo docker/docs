@@ -31,9 +31,9 @@ First, we'll set up a security exception that allows a the Docker-machine hosts
 used in your UCP cluster to push images to and pull images from DTR even though
 the DTR instance has a self-signed certificate. For a production deployment,
 you would
-[set up certificate trust](https://docs.docker.com/ucp/configuration/dtr-integration/)
+[set up certificate trust](/ucp/configuration/dtr-integration/)
 between UCP and DTR, and
-[between DTR and your Docker Engine](https://docs.docker.com/docker-trusted-registry/repos-and-images/),
+[between DTR and your Docker Engine](/docker-trusted-registry/repos-and-images/),
 but for our sandbox deployment we can skip this.
 
 > **Warning**: These steps produce an insecure DTR connection. Do not use these

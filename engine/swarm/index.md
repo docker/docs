@@ -23,7 +23,7 @@ application services to a swarm, and manage swarm behavior.
 
 
 If you’re using a Docker version prior to `v1.12.0`, see [Docker
-Swarm](https://docs.docker.com/swarm).
+Swarm](/swarm).
 
 ## Feature highlights
 

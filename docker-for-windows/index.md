@@ -76,7 +76,7 @@ If you have not already done so, please install Docker for Windows. You can down
 <p />
 * Virtualization must be enabled. Typically, virtualization is enabled by default. (Note that this is different from having Hyper-V enabled.) For more detail see [Virtualization must be enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
 <br><br>
-* **What the Docker for Windows install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+* **What the Docker for Windows install includes**: The installation provides [Docker Engine](/engine/userguide/intro/), Docker CLI client, [Docker Compose](/compose/overview/), and [Docker Machine](/machine/overview/).
 <p />
 * You can run **Docker on Windows Server 16 and Windows 10** in two different ways:
 
@@ -385,7 +385,7 @@ no_proxy=*.local, 169.254/16
 
 You can see from the above output that the `HTTP_PROXY`, `http_proxy` and `no_proxy` environment variables are set.
 When your proxy configuration changes, Docker restarts automatically to pick up the new settings.
-If you have containers that you wish to keep running across restarts, you should consider using [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies-restart)
+If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart)
 
 ### Docker daemon
 You can configure options on the Docker daemon in the given JSON configuration file, and determine how your containers will run.

@@ -567,6 +567,6 @@ functionality in user-defined networks.
 - [Work with network commands](work-with-networks.md)
 - [Get started with multi-host networking](get-started-overlay.md)
 - [Managing Data in Containers](../../tutorials/dockervolumes.md)
-- [Docker Machine overview](https://docs.docker.com/machine)
-- [Docker Swarm overview](https://docs.docker.com/swarm)
+- [Docker Machine overview](/machine)
+- [Docker Swarm overview](/swarm)
 - [Investigate the LibNetwork project](https://github.com/docker/libnetwork)
