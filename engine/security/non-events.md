@@ -89,3 +89,10 @@ Bugs *not* mitigated:
 the kernel's non-maskable interrupt handling allowed privilege escalation.
 Can be exploited in Docker containers because the `modify_ldt()` system call is
 not currently blocked using seccomp.
+* [CVE-2016-5195](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5195):
+A race condition was found in the way the Linux kernel's memory subsystem
+handled the copy-on-write (COW) breakage of private read-only memory mappings,
+which allowed unprivileged local users to gain write access to read-only memory.
+Also known as "dirty COW."
+*Partial mitigations:* on some operating systems this vulnerability is mitigated
+by the combination of seccomp filtering of `ptrace` and the fact that `/proc/self/mem` is read-only.

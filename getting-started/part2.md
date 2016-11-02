@@ -13,26 +13,28 @@ In this section, you will write, build, run, and share an app, the Docker way.
 
 ## Your development environment
 
-Normally if you were to start writing a Python app on your laptop, your first
-order of business would be to install a Python runtime onto your machine. But,
-that creates a situation where the environment on your machine has to be just so
-in order for your app to run as expected.
+In the past, if you were to start writing a Python app, your first
+order of business was to install a Python runtime onto your machine. But,
+that creates a situation where the environment on your machine has to be just
+so in order for your app to run as expected; ditto for the server that runs
+your app.
 
-In Docker, you can just grab an image of Python runtime that is already set up,
-and use that as a base for creating your app. Then, your build can include the
-base Python image right alongside your app code, ensuring that your app and the
-runtime it needs to run all travel together.
+With Docker, you can just grab a portable Python runtime as an image, no
+installation necessary. Then, your build can include the base Python image
+right alongside your app code, ensuring that your app, its dependencies, and the
+runtime, all travel together.
 
-It's done with something called a Dockerfile.
+These builds are configured with something called a `Dockerfile`.
 
 ## Your first Dockerfile
 
-Create a folder and put this file in it, with the name `Dockerfile` (no
-extension). This Dockerfile defines what goes on in the environment inside your
-container. Things are virtualized inside this environment, which is isolated
-from the rest of your system, so you have to map ports to the outside world, and
+Create an empty directory and put this file in it, with the name `Dockerfile`.
+`Dockerfile` will define what goes on in the environment inside your
+container. Access to resources like networking interfaces and disk drives is
+virtualized inside this environment, which is isolated from the rest of your
+system, so you have to map ports to the outside world, and
 be specific about what files you want to "copy in" to that environment. However,
-after doing that, you can expect that the build of your app with this
+after doing that, you can expect that the build of your app defined in this
 `Dockerfile` will behave exactly the same wherever it runs.
 
 {% gist johndmulhausen/c31813e076827178216b74e6a6f4a087 %}
@@ -41,34 +43,30 @@ This `Dockerfile` refers to a couple of things we haven't created yet, namely
 `app.py` and `requirements.txt`. We'll get there. But here's what this
 `Dockerfile` is saying:
 
-- Go get the base Python 2.7 runtime
+- Download the official image of the Python 2.7 runtime and include it here.
 - Create `/app` and set it as the current working directory inside the container
-- Copy the contents of my current directory (on my machine) into `/app` (in this container image)
-- Install any Python packages that I list inside what is now `/app/requirements.txt` inside the container
-- Ensure that this container has port 80 open when it runs
+- Copy the contents of the current directory on my machine into `/app` inside the container
+- Install any Python packages that I list inside `requirements.txt`
+- Ensure that port 80 is exposed to the world outside this container
 - Set an environment variable within this container named `NAME` to be the string `World`
-- Finally, when the container runs, execute `python` and pass in what is now `/app/app.py`
-
-This paradigm is how developing with Docker essentially works. Make a
-`Dockerfile` that includes the base image, grabs your code, installs
-dependencies, initializes variables, and runs the command.
+- Finally, execute `python` and pass in `app.py` as the "entry point" command,
+  the default command that is executed at runtime.
 
 ### The app itself
 
-Grab these two files that were referred to in the above `Dockerfile` and place
-them together with `Dockerfile`, all in the same folder.
+Grab these two files and place them in the same folder as `Dockerfile`.
 
 {% gist johndmulhausen/074cc7f4c26a9a8f9164b20b22602ad7 %}
 {% gist johndmulhausen/8728902faede400c057f3205392bb9a8 %}
 
-You're probably getting the picture by now. In `Dockerfile` we told the `pip`
-package installer to install whatever was in `requirements.txt`, which we
-now see is the Flask and Redis libraries for Python. The app itself is going to
-print the environment variable of `NAME`, which we set as `World`, as well as
+Now we see that the `Dockerfile` command `pip install requirements.txt` installs
+the Flask and Redis libraries for Python. We can also see that app itself
+prints the environment variable of `NAME`, which we set as `World`, as well as
 the output of a call to `socket.gethostname()`, which the Docker runtime is
-going to answer with the container ID. Finally, because Redis isn't running
-(we've only installed the Python library), we should expect that the attempt to
-use it here will fail and show the error message.
+going to answer with the container ID, which is sort of like the process ID for
+an executable. Finally, because Redis isn't running
+(as we've only installed the Python library, and not Redis itself), we should
+expect that the attempt to use it here will fail and produce the error message.
 
 ## Build the App
 
@@ -77,8 +75,7 @@ That's it! You don't need to have installed Python or anything in
 your system. It doesn't seem like you've really set up an environment with
 Python and Flask, but you have. Let's build and run your app and prove it.
 
-Make sure you're in the directory where you saved the three files we've shown,
-and you've got everything.
+7Here's what `ls` should show:
 
 ```shell
 $ ls
@@ -86,15 +83,13 @@ Dockerfile		app.py			requirements.txt
 ```
 
 Now run the build command. This creates a Docker image, which we're going to
-tag using `-t` so it has a friendly name, which you can use interchangeable
-with the image ID in commands.
+tag using `-t` so it has a friendly name.
 
 ```shell
-docker build -t "friendlyhello" .
+docker build -t friendlyhello .
 ```
 
-In the output spew you can see everything defined in the `Dockerfile` happening,
-including the installation of the packages we specified in `requirements.txt`.
+In the output spew you can see everything defined in the `Dockerfile` happening.
 Where is your built image? It's in your machine's local Docker image registry.
 Check it out:
 
@@ -106,22 +101,25 @@ friendlyhello         latest              326387cea398        47 seconds ago    
 
 ## Run the app
 
-We're going to run the app and route traffic from our machine's port 80 to the
-port 80 we exposed
+Run the app, mapping our machine's port 4000 to the container's exposed port 80
+using `-p`:
 
 ```shell
-docker run -p 80:80 friendlyhello
+docker run -p 4000:80 friendlyhello
 ```
 
 You should see a notice that Python is serving your app at `http://0.0.0.0:80`.
-You can go there, or just to `http://localhost`, and see your app, "Hello World"
-text, the container ID, and the Redis error message, all printed out in
-beautiful Times New Roman.
+But that message coming from inside the container, which doesn't know you
+actually want to access your app at: `http://localhost:4000`. Go there, and
+you'll see the "Hello World" text, the container ID, and the Redis error
+message, all printed out in beautiful Times New Roman.
 
-Hit `CTRL+C` and let's run the app in the background, in detached mode.
+Hit `CTRL+C` in your terminal to quit.
+
+Now let's run the app in the background, in detached mode:
 
 ```shell
-docker run -d -p 80:80 friendlyhello
+docker run -d -p 4000:80 friendlyhello
 ```
 
 You get a hash ID of the container instance and then are kicked back to your
@@ -133,25 +131,22 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 1fa4ab2cf395        friendlyhello       "python app.py"     28 seconds ago      Up 25 seconds
 ```
 
-You'll see that `CONTAINER ID` matches what's on `http://localhost`, if you
-refresh the browser page. You can't `CTRL+C` now, so let's kill the process this
-way. Use the value you see under `CONTAINER ID`:
+You'll see that `CONTAINER ID` matches what's on `http://localhost:4000`, if you
+refresh the browser page. Now use `docker stop` to end the process, using
+`CONTAINER ID`, like so:
 
 ```shell
-docker kill (containerID)
+docker stop 1fa4ab2cf395
 ```
 
-## Share the App
+## Share your image
 
-Now let's test how portable this app really is.
-
-Sign up for Docker Hub at [https://hub.docker.com/](https://hub.docker.com/).
+Sign up a Docker account at [hub.docker.com](https://hub.docker.com/).
 Make note of your username. We're going to use it in a couple commands.
 
 Docker Hub is a public registry. A registry is a collection of accounts and
-their various repositories. A repository is a collection of assets associated
-with your account - like a GitHub repository, except the code is already built.
-
+their various repositories. A repository is a collection of tagged images like a
+GitHub repository, except the code is already built.
 
 Log in your local machine to Docker Hub.
 
@@ -187,9 +182,40 @@ and run this command:
 docker run YOURUSERNAME/YOURREPO:ARBITRARYTAG
 ```
 
+> Note: If you don't specify the `:ARBITRARYTAG` portion of these commands,
+  the tag of `:latest` will be assumed, both when you build and when you run
+  images.
+
 You'll see this stranger of a machine pull your image, along with Python and all
 the dependencies from `requirements.txt`, and run your code. It all travels
 together in a neat little package, and the new machine didn't have to install
 anything but Docker to run it.
+
+## Recap and cheat sheet for images and containers
+
+To recap: After calling `docker run`, you created and ran a container, based on
+the image created when you called `docker build`. Images are defined in a
+`Dockerfile`. A container is an instance of an image, and it has any package
+installations, file writes, etc that happen after you call `docker run` and run
+the app. And lastly, images are shared via a registry.
+
+```shell
+docker build -t friendlyname . #Create image using this directory's Dockerfile
+docker run -p 4000:80 friendlyname #Run image "friendlyname" mapping port 4000 to 80
+docker run -d -p 4000:80 friendlyname #Same thing, but in detached mode
+docker ps #See a list of all running containers
+docker stop <hash> #Gracefully stop the specified container
+docker ps -a #See a list of all containers on this machine, even the ones not running
+docker kill <hash> #Force shutdown of the specified container
+docker rm <hash> #Remove the specified container from this machine
+docker rm $(docker ps -a -q) #Remove all containers from this machine
+docker images -a #Show all images that have been built or downloaded onto this machine
+docker rmi <imagename> #Remove the specified image from this machine
+docker rmi $(docker images -q) #Remove all images from this machine
+docker login #Log in this CLI session using your Docker credentials (to Docker Hub by default)
+docker tag <image> username/repository:tag #Tag <image> on your local machine for upload
+docker push username/repository:tag #Upload tagged image to registry (Docker Hub by default)
+docker run username/repository:tag #Run image from a registry (Docker Hub by default)
+```
 
 [On to "Getting Started, Part 3: Stateful, Multi-container Applications" >>](part3.md){: class="button darkblue-btn"}

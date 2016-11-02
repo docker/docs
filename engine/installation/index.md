@@ -1,5 +1,6 @@
 ---
 aliases:
+- /installation/
 - /engine/installation/linux/frugalware/
 - /engine/installation/frugalware/
 description: Lists the installation methods
@@ -15,7 +16,7 @@ title: Install
 
 # Install Docker Engine
 
-Docker Engine is supported on Linux, Cloud, Windows, and OS X. Installation instructions are available for the following:
+Docker Engine is supported on Linux, Cloud, Windows, and macOS. Installation instructions are available for the following:
 
 ## On Linux
 * [Arch Linux](linux/archlinux.md)
@@ -36,8 +37,8 @@ If your linux distribution is not listed above, don't give up yet. To try out Do
 * [Example: Manual install on a cloud provider](cloud/cloud-ex-aws.md)
 * [Example: Use Docker Machine to provision cloud hosts](cloud/cloud-ex-machine-ocean.md)
 
-## On OSX and Windows
-* [Mac OS X](mac.md)
+## On macOS and Windows
+* [macOS](mac.md)
 * [Windows](windows.md)
 
 ## The Docker Archives

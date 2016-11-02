@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/service_inspect/
 description: The service inspect command description and usage
 keywords:
 - service, inspect
@@ -139,10 +141,10 @@ The `--format` option can be used to obtain specific information about a
 service. For example, the following command outputs the number of replicas
 of the "redis" service.
 
-```bash
+```bash{% raw %}
 $ docker service inspect --format='{{.Spec.Mode.Replicated.Replicas}}' redis
 10
-```
+{% endraw %}```
 
 
 ## Related information

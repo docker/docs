@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/service_scale/
 description: The service scale command description and usage
 keywords:
 - service, scale
@@ -25,8 +27,8 @@ Options:
 
 ### Scale a service
 
-If you scale a service, you set the *desired* number of replicas. Even though
-the command returns directly, actual scaling of the service may take some time.
+The scale command enables you to scale one or more services either up or down to the desired number of replicas. The command will return immediatly, but the actual scaling of the service may take some time. To stop all replicas of a service while keeping the service active in the swarm you can set the scale to 0. 
+
 
 For example, the following command scales the "frontend" service to 50 tasks.
 

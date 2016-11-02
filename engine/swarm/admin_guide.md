@@ -21,15 +21,15 @@ maintain the swarm.
 
 This article covers the following swarm administration tasks:
 
-* [Using a static IP for manager node advertise address](admin_guide.md#use-a-static-ip-for-manager-node-advertise-address)
-* [Adding manager nodes for fault tolerance](admin_guide.md#add-manager-nodes-for-fault-tolerance)
-* [Distributing manager nodes](admin_guide.md#distribute-manager-nodes)
-* [Running manager-only nodes](admin_guide.md#run-manager-only-nodes)
-* [Backing up the swarm state](admin_guide.md#back-up-the-swarm-state)
-* [Monitoring the swarm health](admin_guide.md#monitor-swarm-health)
-* [Troubleshooting a manager node](admin_guide.md#troubleshoot-a-manager-node)
-* [Forcefully removing a node](admin_guide.md#force-remove-a-node)
-* [Recovering from disaster](admin_guide.md#recover-from-disaster)
+* [Using a static IP for manager node advertise address](#use-a-static-ip-for-manager-node-advertise-address)
+* [Adding manager nodes for fault tolerance](#add-manager-nodes-for-fault-tolerance)
+* [Distributing manager nodes](#distribute-manager-nodes)
+* [Running manager-only nodes](#run-manager-only-nodes)
+* [Backing up the swarm state](#back-up-the-swarm-state)
+* [Monitoring the swarm health](#monitor-swarm-health)
+* [Troubleshooting a manager node](#troubleshoot-a-manager-node)
+* [Forcefully removing a node](#force-remove-a-node)
+* [Recovering from disaster](#recover-from-disaster)
 
 Refer to [How nodes work](how-swarm-mode-works/nodes.md)
 for a brief overview of Docker Swarm mode and the difference between manager and
@@ -91,7 +91,7 @@ guaranteed if you encounter more than two network partitions.
 For example, in a swarm with *5 nodes*, if you lose *3 nodes*, you don't have a
 quorum. Therefore you can't add or remove nodes until you recover one of the
 unavailable manager nodes or recover the swarm with disaster recovery
-commands. See [Recover from disaster](admin_guide.md#recover-from-disaster).
+commands. See [Recover from disaster](#recover-from-disaster).
 
 While it is possible to scale a swarm down to a single manager node, it is
 impossible to demote the last manager node. This ensures you maintain access to
@@ -154,7 +154,7 @@ directory:
 ```
 
 Back up the `raft` data directory often so that you can use it in case of
-[disaster recovery](admin_guide.md#recover-from-disaster). Then you can take the `raft`
+[disaster recovery](#recover-from-disaster). Then you can take the `raft`
 directory of one of the manager nodes to restore to a new swarm.
 
 ## Monitor swarm health
@@ -166,17 +166,17 @@ for more information.
 From the command line, run `docker node inspect <id-node>` to query the nodes.
 For instance, to query the reachability of the node as a manager:
 
-```bash
+```bash{% raw %}
 docker node inspect manager1 --format "{{ .ManagerStatus.Reachability }}"
 reachable
-```
+{% endraw %}```
 
 To query the status of the node as a worker that accept tasks:
 
-```bash
+```bash{% raw %}
 docker node inspect manager1 --format "{{ .Status.State }}"
 ready
-```
+{% endraw %}```
 
 From those commands, we can see that `manager1` is both at the status
 `reachable` as a manager and `ready` as a worker.
@@ -262,3 +262,33 @@ The `--force-new-cluster` flag puts the Docker Engine into swarm mode as a
 manager node of a single-node swarm. It discards swarm membership information
 that existed before the loss of the quorum but it retains data necessary to the
 Swarm such as services, tasks and the list of worker nodes.
+
+### Forcing the swarm to rebalance
+
+Generally, you do not need to force the swarm to rebalance its tasks. When you
+add a new node to a swarm, or a node reconnects to the swarm after a
+period of unavailability, the swarm does not automatically give a workload to
+the idle node. This is a design decision. If the swarm periodically shifted tasks
+to different nodes for the sake of balance, the clients using those tasks would
+be disrupted. The goal is to avoid disrupting running services for the sake of
+balance across the swarm. When new tasks start, or when a node with running
+tasks becomes unavailable, those tasks are given to less busy nodes. The goal
+is eventual balance, with minimal disruption to the end user.
+
+If you are concerned about an even balance of load and don't mind disrupting
+running tasks, you can force your swarm to re-balance by temporarily scaling
+the service upward.
+
+Use `docker service inspect --pretty <servicename>` to see the configured scale
+of a service. When you use `docker service scale`, the nodes with the lowest
+number of tasks are targeted to receive the new workloads. There may be multiple
+under-loaded nodes in your swarm. You may need to scale the service up by modest
+increments a few times to achieve the balance you want across all the nodes.
+
+When the load is balanced to your satisfaction, you can scale the service back
+down to the original scale. You can use `docker service ps` to assess the current
+balance of your service across nodes.
+
+See also
+[`docker service scale`](../reference/commandline/service_scale.md) and
+[`docker service ps`](../reference/commandline/service_ps.md).

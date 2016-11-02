@@ -89,15 +89,15 @@ all three services end up on the same node:
         image: foo
         volumes_from: ["bar"]
         network_mode: "service:baz"
-        environment:
+        labels:
           - "constraint:node==node-1"
       bar:
         image: bar
-        environment:
+        labels:
           - "constraint:node==node-1"
       baz:
         image: baz
-        environment:
+        labels:
           - "constraint:node==node-1"
 
 ### Host ports and recreating containers
@@ -165,15 +165,15 @@ environment variables, so you can use Compose's `environment` option to set
 them.
 
     # Schedule containers on a specific node
-    environment:
+    labels:
       - "constraint:node==node-1"
 
     # Schedule containers on a node that has the 'storage' label set to 'ssd'
-    environment:
+    labels:
       - "constraint:storage==ssd"
 
     # Schedule containers where the 'redis' image is already pulled
-    environment:
+    labels:
       - "affinity:image==redis"
 
 For the full set of available filters and expressions, see the [Swarm

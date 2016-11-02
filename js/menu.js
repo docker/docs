@@ -54,10 +54,9 @@ jQuery(document).ready(function(){
 
     var index = 0;
     var currentHeader = 0, lastHeader = 0;
-    var output = "";
-    $("h2, h3, h4").each(function() {
+    var output = "<ul>";
+    $("h1, h2, h3, h4").each(function() {
         var li= "<li><a href='" + window.location + "#" + $(this).attr('id') + "'>" + $(this).text().replace("¶","") + "</a></li>";
-        lastHeader = currentHeader;
         if( $(this).is("h2") ){
           // h2
           currentHeader = 2;
@@ -68,18 +67,21 @@ jQuery(document).ready(function(){
           // h4
           currentHeader = 4;
         }
-        if (currentHeader > lastHeader)
-        {
+        console.log("currentHeader ",currentHeader, "lastHeader ",lastHeader, "text ", $(this).text());
+        if (currentHeader > lastHeader) {
             // nest further
-            output += "<ul>" + li;
-        } else if (lastHeader < currentHeader)
-        {
-            // close nesting
-            output += "</ul>" + li
-        } else {
-            // continue, no change in nesting
-            output += li;
+            output += "<ul>"
         }
+        if (currentHeader < lastHeader && lastHeader > 0) {
+            // close nesting
+            console.log("Closing nesting because ", lastHeader, "is <", currentHeader);
+            for (i=0; i < (lastHeader - currentHeader); i++)
+            {
+              output += "</ul>"
+            }
+        }
+        output += li;
+        lastHeader = currentHeader;
         /*
         if( $(this).is("h2") ){
             prevH2List = $("<ul></ul>");

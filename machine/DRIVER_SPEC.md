@@ -1,6 +1,6 @@
 ---
 description: machine
-draft: true
+published: false
 keywords:
 - machine, orchestration, install, installation, docker, documentation
 menu:

@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/
 description: Docker's CLI command description and usage
 keywords:
 - Docker, Docker documentation, CLI,  command line

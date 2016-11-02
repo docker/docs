@@ -5,6 +5,7 @@ aliases:
 - /windows/
 - /windows/started/
 - /docker-for-windows/started/
+- /installation/windows/
 description: Getting Started
 keywords:
 - windows, beta, alpha, tutorial
@@ -23,7 +24,6 @@ Welcome to Docker for Windows!
 Please read through these topics on how to get started. To **give us your feedback** on your experience with the app and report bugs or problems, log in to our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows).
 
 >**Already have Docker for Windows?** If you already have Docker for Windows installed, and are ready to get started, skip over to the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
-
 
 ## Download Docker for Windows
 
@@ -51,25 +51,48 @@ If you have not already done so, please install Docker for Windows. You can down
   </tr>
 </table>
 
->**Important Notes**:
+>**Important Notes:**
 >
->* Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please see [What to know before you install](index.md#what-to-know-before-you-install) for a full list of prerequisites.
+>- Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education
+>  (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please
+>  see [What to know before you install](index.md#what-to-know-before-you-install)
+>  for a full list of prerequisites.
 >
->* <font color="#CC3366">You can switch between beta and stable versions, but _you must have only one app installed at a time_.</font> Also, you will need to save images and export containers you want to keep before uninstalling the current version before installing another. For more about this, see the [FAQs about beta and stable channels](faqs.md#questions-about-stable-and-beta-channels).
+>- You can switch between beta and stable versions, but you must have only one
+>   app installed at a time. Also, you will need to save images and export
+>  containers you want to keep before uninstalling the current version before
+>  installing another. For more about this, see the
+>  [FAQs about beta and stable channels](faqs.md#questions-about-stable-and-beta-channels).
 
 ##  What to know before you install
 
 * **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run. After Hyper-V is enabled, VirtualBox will no longer work, but any VirtualBox VM images will remain. VirtualBox VMs created with `docker-machine` (including the `default` one typically created during Toolbox install) will no longer start. These VMs cannot be used side-by-side with Docker for Windows. However, you can still use `docker-machine` to manage remote VMs.
-
+<p />
 * The current version of Docker for Windows runs on 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later). In the future we will support more versions of Windows 10.
-
+<p />
 * Containers and images created with Docker for Windows are shared between all user accounts on machines where it is installed. This is because all Windows accounts will use the same VM to build and run containers. In the future, Docker for Windows will better isolate user content.
+<p />
+* The Hyper-V package must be enabled for Docker for Windows to work. The Docker for Windows installer will enable it for you, if needed. (This requires a reboot). If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of Hyper-V.
+<p />
+* Virtualization must be enabled. Typically, virtualization is enabled by default. (Note that this is different from having Hyper-V enabled.) For more detail see [Virtualization must be enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
+<br><br>
+* **What the Docker for Windows install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+<p />
+* You can run **Docker on Windows Server 16 and Windows 10** in two different ways:
 
-* The Hyper-V package must be enabled for Docker for Windows to work. The Docker for Windows installer will enable it for you, if needed. (This requires a reboot).
+  * You can [install a native Docker  binary](https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start_windows_10)
+  which allows you to develop and run Windows containers natively. However, if you
+  install Docker this way, you cannot develop or run Linux containers.  If you try to run a Linux container on the native Docker daemon, an error occurs:
 
-  >**Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of Hyper-V.
+    ```no-highlight
+    C:\Program Files\Docker\docker.exe:
+     image operating system "linux" cannot be used on this platform.
+     See 'C:\Program Files\Docker\docker.exe run --help'.
+     ```
 
-* **What the install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+  * You can [install Docker for Windows](#step-1-install-docker-for-windows),
+    which allows you to develop and run Windows containers natively, or develop
+    and run Linux containers using Hyper-V. This is the best of both worlds.
 
 ## Step 1. Install Docker for Windows
 
@@ -301,6 +324,21 @@ Permissions to access shared drives are tied to the credentials you provide here
 
 See also [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes) in Troubleshooting.
 
+#### Firewall rules for shared drives
+
+Shared drives require port 445 to be open between the host machine and the virtual
+machine that runs Linux containers.
+
+>**Note**: In Docker for Windows Beta 29 and higher,
+Docker detects if port 445 is closed and shows the following message when you
+try to add a shared drive: ![Port 445 blocked](images/drive_sharing_firewall_blocked.png)
+
+
+To share the drive, allow connections between the Windows host machine and the
+virtual machine in Windows Firewall or your third party firewall software. You
+do not need to open port 445 on any other network. By default, allow connections
+to 10.0.75.1 port 445 (the Windows host) from 10.0.75.2 (the virtual machine).
+
 ### Advanced
 
 ![CPU and Memory settings](images/settings-cpu-ram.png)
@@ -352,7 +390,7 @@ If you have containers that you wish to keep running across restarts, you should
 ### Docker daemon
 You can configure options on the Docker daemon in the given JSON configuration file, and determine how your containers will run.
 
-For a full list of options on the Docker daemon, see <a href="https://docs.docker.com/engine/reference/commandline/daemon/" target="_blank">daemon</a> in the Docker Engine command line reference.
+For a full list of options on the Docker daemon, see <a href="https://docs.docker.com/engine/reference/commandline/dockerd/" target="_blank">daemon</a> in the Docker Engine command line reference.
 
 ![Docker Daemon](images/docker-daemon.png)
 
@@ -367,6 +405,16 @@ Microsoft Developer Network has preliminary/draft information on Windows contain
 This feature is not yet available on stable builds.
 
 See also [Shared Drives](#shared-drives)
+
+#### Getting started with Windows containers (Beta feature)
+
+If you are interested in working with Windows containers, here are some guides to help you get started.
+
+* [Build and Run Your First Windows Server Container (Blog Post)](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/) gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
+
+* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/tree/master/windows/windows-containers) shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md) application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
+
+  >**Disclaimer:** This lab is still in work, and is based off of the blog, but you can test and leverage the example walkthroughs now, if you want to start experimenting. Please checking back as the lab evolves.
 
 ### Diagnose and Feedback
 
