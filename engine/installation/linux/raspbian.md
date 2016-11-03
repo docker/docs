@@ -1,30 +1,21 @@
 ---
 aliases:
-- /engine/installation/debian/
-description: Instructions for installing Docker on Debian.
-keywords: Docker, Docker documentation, installation, debian
-menu:
-  main:
-    parent: engine_linux
-    weight: -2
-title: Installation on Debian
+- /engine/installation/raspbian/
+description: Instructions for installing Docker on Raspbian.
+keywords: Docker, Docker documentation, installation, raspbian
+title: Install on Raspbian
 ---
 
-# Debian
+Docker is supported on the following versions of Raspbian:
 
-Docker is supported on the following versions of Debian:
-
- - [*Debian testing stretch (64-bit)*](debian.md#debian-wheezy-stable-7-x-64-bit)
- - [*Debian 8.0 Jessie (64-bit)*](debian.md#debian-jessie-80-64-bit)
- - [*Debian 7.7 Wheezy (64-bit)*](debian.md#debian-wheezy-stable-7-x-64-bit) (backports required)
-
+ - *Raspbian Jessie*
+ 
  >**Note**: If you previously installed Docker using `APT`, make sure you update
  your `APT` sources to the new `APT` repository.
 
 ## Prerequisites
 
- Docker requires a 64-bit installation regardless of your Debian version.
- Additionally, your kernel must be 3.10 at minimum. The latest 3.10 minor
+ Docker requires  your kernel to be 3.10 at minimum. The latest 3.10 minor
  version or a newer maintained version are also acceptable.
 
  Kernels older than 3.10 lack some of the features required to run Docker
@@ -36,83 +27,41 @@ Docker is supported on the following versions of Debian:
 
      $ uname -r
 
- Additionally, for users of Debian Wheezy, backports must be available. To enable backports in Wheezy:
-
- 1. Log into your machine and open a terminal with `sudo` or `root` privileges.
-
- 2. Open the `/etc/apt/sources.list.d/backports.list` file in your favorite editor.
-
-     If the file doesn't exist, create it.
-
- 3. Remove any existing entries.
-
- 4. Add an entry for backports on Debian Wheezy.
-
-     An example entry:
-
-         deb http://http.debian.net/debian wheezy-backports main
-
- 5. Update package information:
-
-         $ apt-get update
-
 ### Update your apt repository
 
-Docker's `APT` repository contains Docker 1.7.1 and higher. To set `APT` to use
+Docker's `APT` repository contains Docker 1.12.1 and higher. To set `APT` to use
 from the new repository:
 
  1. If you haven't already done so, log into your machine as a user with `sudo` or `root` privileges.
 
  2. Open a terminal window.
 
- 3. Purge any older repositories.
-
-         $ apt-get purge "lxc-docker*"
-         $ apt-get purge "docker.io*"
-
- 4. Update package information, ensure that APT works with the `https` method, and that CA certificates are installed.
+ 3. Update package information, ensure that APT works with the `https` method, and that CA certificates are installed.
 
          $ apt-get update
          $ apt-get install apt-transport-https ca-certificates
 
- 5. Add the new `GPG` key.
+ 4. Add the new `GPG` key.
 
          $ apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
- 6. Open the `/etc/apt/sources.list.d/docker.list` file in your favorite editor.
+ 5. Open the `/etc/apt/sources.list.d/docker.list` file in your favorite editor.
 
      If the file doesn't exist, create it.
 
- 7. Remove any existing entries.
+ 6. Remove any existing entries.
 
- 8. Add an entry for your Debian operating system.
+ 7. Add an entry for your Raspbian operating system.
 
-     The possible entries are:
+        deb https://apt.dockerproject.org/repo raspbian-jessie main
 
-    - On Debian Wheezy
+ 8. Save and close the file.
 
-            deb https://apt.dockerproject.org/repo debian-wheezy main
-
-    - On Debian Jessie
-
-            deb https://apt.dockerproject.org/repo debian-jessie main
-
-    - On Debian Stretch/Sid
-
-            deb https://apt.dockerproject.org/repo debian-stretch main
-
-    > **Note**: Docker does not provide packages for all architectures. To install docker on
-    > a multi-architecture system, add an `[arch=...]` clause to the entry. Refer to the
-    > [Debian Multiarch wiki](https://wiki.debian.org/Multiarch/HOWTO#Setting_up_apt_sources)
-    > for details.
-
- 9. Save and close the file.
-
- 10. Update the `APT` package index.
+ 9. Update the `APT` package index.
 
          $ apt-get update
 
- 11. Verify that `APT` is pulling from the right repository.
+ 10. Verify that `APT` is pulling from the right repository.
 
          $ apt-cache policy docker-engine
 
