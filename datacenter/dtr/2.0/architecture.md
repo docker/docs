@@ -1,4 +1,6 @@
 ---
+aliases:
+- /docker-trusted-registry/architecture/
 description: Learn about the architecture of Docker Trusted Registry.
 keywords:
 - docker, registry, dtr, architecture

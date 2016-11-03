@@ -1,5 +1,8 @@
 ---
-description: Learn about Docker Universal Control Plane, the enterprise-grade cluster management solution from Docker.
+aliases:
+- /ucp/overview/
+description: Learn about Docker Universal Control Plane, the enterprise-grade cluster
+  management solution from Docker.
 keywords:
 - docker, ucp, overview, orchestration, clustering
 title: Universal Control Plane overview

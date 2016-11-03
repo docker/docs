@@ -1,5 +1,8 @@
 ---
-description: Learn how to set up organizations to enforce security in Docker Trusted Registry.
+aliases:
+- /docker-trusted-registry/user-management/create-and-manage-orgs/
+description: Learn how to set up organizations to enforce security in Docker Trusted
+  Registry.
 keywords:
 - docker, registry, security, permissions, organizations
 title: Create and manage organizations

@@ -1,6 +1,7 @@
 ---
 redirect_from:
 - /ucp/production-install/
+- /ucp/installation/install-production/
 description: Learn how to install Docker Universal Control Plane on production
 keywords:
 - Universal Control Plane, UCP, install

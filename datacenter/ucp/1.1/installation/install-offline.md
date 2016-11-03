@@ -1,5 +1,8 @@
 ---
-description: Learn how to install Docker Universal Control Plane. on a machine with no internet access.
+aliases:
+- /ucp/installation/install-offline/
+description: Learn how to install Docker Universal Control Plane. on a machine with
+  no internet access.
 keywords:
 - docker, ucp, install, offline
 title: Install UCP offline

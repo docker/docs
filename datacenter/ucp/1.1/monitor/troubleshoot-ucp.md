@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ucp/monitor/troubleshoot-ucp/
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
 keywords:
 - docker, ucp, troubleshoot

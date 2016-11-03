@@ -1,7 +1,9 @@
 ---
 redirect_from:
 - /ucp/upgrade-ucp/
-description: Learn how to upgrade Docker Universal Control Plane with minimal impact to your users.
+- /ucp/installation/upgrade/
+description: Learn how to upgrade Docker Universal Control Plane with minimal impact
+  to your users.
 keywords:
 - Docker, UCP, upgrade, update
 title: Upgrade UCP

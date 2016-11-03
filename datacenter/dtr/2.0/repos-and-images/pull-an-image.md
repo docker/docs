@@ -1,6 +1,7 @@
 ---
 redirect_from:
 - /docker-trusted-registry/quick-start/
+- /docker-trusted-registry/repos-and-images/pull-an-image/
 description: Learn how to pull an image from Docker Trusted Registry.
 keywords:
 - docker, registry, images, pull

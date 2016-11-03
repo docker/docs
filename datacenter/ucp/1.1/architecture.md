@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ucp/architecture
 description: Learn about the architecture of Docker Universal Control Plane.
 keywords:
 - docker, ucp, architecture
