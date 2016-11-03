@@ -55,17 +55,23 @@ For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-
 
 >**Important Notes**:
 >
-> * Docker for Mac requires macOS 10.10.3 Yosemite or newer running on a 2010 or newer Mac, with Intel's hardware support for MMU virtualization. Please see [What to know before you install](index.md#what-to-know-before-you-install) for a full list of prerequisites.
+>- Docker for Mac requires macOS 10.10.3 Yosemite or newer running on a 2010 or
+>    newer Mac, with Intel's  hardware support for MMU virtualization. Please see
+>    [What to know before you install](index.md#what-to-know-before-you-install)
+>    for a full list of prerequisites.
 >
-> * <font color="#CC3366">You can switch between beta and stable versions, but _you must have only one app installed at a time_.</font> Also, you will need to save images and export containers you want to keep before uninstalling the current version before installing another. For more about this, see the [FAQs about beta and stable channels](faqs.md#stable-and-beta-channels).
+>- You can switch between beta and stable versions, but you must have only one
+>    app installed at a time. Also, you will need to save images and export
+>    containers you want to keep before uninstalling the current version before
+>    installing another. For more about this, see the
+>    [FAQs about beta and stable channels](faqs.md#stable-and-beta-channels).
 
 ##  What to know before you install
 
-
 * **README FIRST for Docker Toolbox and Docker Machine users**: If you are already running Docker on your machine, first read [Docker for Mac vs. Docker Toolbox](docker-toolbox.md) to understand the impact of this installation on your existing setup, how to set your environment for Docker for Mac, and how the two products can coexist.
-
+<p />
 *  **Relationship to Docker Machine**: Installing Docker for Mac does not affect machines you created with Docker Machine. You'll get the option to copy containers and images from your local `default` machine (if one exists) to the new Docker for Mac <a href="https://github.com/docker/HyperKit/" target="_blank">HyperKit</a> VM. When you are running Docker for Mac, you do not need Docker Machine nodes running at all locally (or anywhere else). With Docker for Mac, you have a new, native virtualization system running (HyperKit) which takes the place of the VirtualBox system. To learn more, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
-
+<p />
 * **System Requirements**: Docker for Mac will launch only if all these requirements are met.
 
 	- Mac must be a 2010 or newer model, with Intel's hardware support for memory management unit (MMU) virtualization; i.e., Extended Page Tables (EPT)
@@ -76,9 +82,10 @@ For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-
 
 	- VirtualBox prior to version 4.3.30 must NOT be installed (it is incompatible with Docker for Mac)
 
-	> **Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of HyperKit.
+  >**Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of HyperKit.
 
-* **What the install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+<p />
+* **What the install includes**: The installation provides [Docker Engine](/engine/userguide/intro/), Docker CLI client, [Docker Compose](/compose/overview/), and [Docker Machine](/machine/overview/).
 
 ## Step 1. Install and Run Docker for Mac
 
@@ -181,9 +188,9 @@ Choose <img src="images/whale-x.png"> --> **Preferences** from the menu bar. You
 ![Advanced Preference settings-advanced](images/settings-advanced.png)
 
 * **Adding registries** - As an alternative to using [Docker Hub](https://hub.docker.com/) to store your public or private images or [Docker
-Trusted Registry](https://docs.docker.com/docker-trusted-registry/overview/),
+Trusted Registry](/docker-trusted-registry/overview/),
 you can use Docker to set up your own insecure
-[registry](https://docs.docker.com/registry/introduction/). Add URLs for
+[registry](/registry/introduction/). Add URLs for
 insecure registries and registry mirrors on which to host your images. (See
 also, [How do I add custom CA
 certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in the FAQs.)

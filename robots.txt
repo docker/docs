@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /v1.4/
+Disallow: /v1.5/
+Disallow: /v1.6/
+Disallow: /v1.7/
+Disallow: /v1.8/
+Disallow: /v1.9/
+Disallow: /v1.10/
+Disallow: /v1.11/

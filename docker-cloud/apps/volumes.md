@@ -22,7 +22,7 @@ redeployment, or shared with other services.
 ## Add a data volume to a service
 
 Data volumes can be either specified in the image's `Dockerfile` using the
-[VOLUME instruction](https://docs.docker.com/reference/builder/#volume), or when
+[VOLUME instruction](/reference/builder/#volume), or when
 creating a service.
 
 To define a data volume in a service, specify the **container path** where it

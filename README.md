@@ -107,7 +107,7 @@ You have three options:
     ```
 
     If you haven't got Docker Compose installed,
-    [follow these installation instructions](https://docs.docker.com/compose/install/).
+    [follow these installation instructions](/compose/install/).
 
     The container runs in the background and incrementally rebuilds the site each
     time a file changes. You can keep your browser open to http://localhost:4000/
@@ -150,7 +150,7 @@ directly on docs.docker.com.
 ## Style guide
 
 If you have questions about how to write for Docker's documentation, please see
-the [style guide](https://docs.docker.com/opensource/doc-style/). The style guide provides
+the [style guide](/opensource/doc-style/). The style guide provides
 guidance about grammar, syntax, formatting, styling, language, or tone. If
 something isn't clear in the guide, please submit an issue to let us know or
 submit a pull request to help us improve it.
