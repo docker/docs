@@ -94,7 +94,7 @@ enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
 
 Looking for information on using Windows containers?
 
-* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/tree/master/windows/windows-containers)
+* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
 provides a tutorial on how to set up and run Windows containers on Windows 10 or
 with Windows Server 2016. It shows you how to use a MusicStore application with
 Windows containers.
@@ -425,7 +425,7 @@ If you are interested in working with Windows containers, here are some guides t
 
 * [Build and Run Your First Windows Server Container (Blog Post)](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/) gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
 
-* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/tree/master/windows/windows-containers) shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md) application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
+* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md) shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md) application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
   >**Disclaimer:** This lab is still in work, and is based off of the blog, but you can test and leverage the example walkthroughs now, if you want to start experimenting. Please checking back as the lab evolves.
 

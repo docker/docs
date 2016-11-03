@@ -194,7 +194,7 @@ Server 2016 or Windows 10, see [About Windows containers and Windows Server
 
 A full tutorial is available in [docker/labs](https://github.com/docker/labs) at
 [Getting Started with Windows
-Containers](https://github.com/docker/labs/tree/master/windows/windows-containers).
+Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
 
 You can install a native Windows binary which allows you to develop and run
 Windows containers without Docker for Windows. However, if you install Docker
