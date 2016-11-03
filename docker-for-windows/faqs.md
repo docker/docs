@@ -164,7 +164,7 @@ See [About Windows containers and Windows Server
 
 A full tutorial is available in [docker/labs](https://github.com/docker/labs) at
 [Getting Started with Windows
-Containers](https://github.com/docker/labs/tree/master/windows/windows-containers).
+Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
 
 ### Why is Windows 10 Home not supported?
 
