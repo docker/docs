@@ -1,7 +1,6 @@
 ---
 description: Config validates and view the compose file.
-keywords:
-- fig, composition, compose, docker, orchestration, cli, config
+keywords: fig, composition, compose, docker, orchestration, cli, config
 menu:
   main:
     identifier: config.compose
