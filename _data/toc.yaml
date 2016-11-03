@@ -1098,7 +1098,7 @@ toc:
     - path: /machine/drivers/vsphere/
       title: VMware vSphere
     - path: /machine/drivers/exoscale/
-      title: exoscale
+      title: Exoscale
   - path: /machine/completion/
     title: Command-line Completion
 - sectiontitle: Docker Store
