@@ -2,8 +2,7 @@
 aliases:
 - /userguide/dockerlinks/
 description: Learn how to connect Docker containers together.
-keywords: Examples, Usage, user guide, links, linking, docker, documentation, examples,
-  names, name, container naming, port, map, network port,  network
+keywords: Examples, Usage, user guide, links, linking, docker, documentation, examples, names, name, container naming, port, map, network port, network
 menu:
   main:
     parent: smn_networking_def

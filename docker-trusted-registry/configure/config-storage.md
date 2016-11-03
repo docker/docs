@@ -1,7 +1,6 @@
 ---
 description: Storage configuration for Docker Trusted Registry
-keywords: docker, documentation, about, technology, understanding, configuration,
-  storage, storage drivers, Azure, S3, Swift,  enterprise, hub, registry
+keywords: docker, documentation, about, technology, understanding, configuration, storage, storage drivers, Azure, S3, Swift, enterprise, hub, registry
 menu:
   main:
     identifier: dtr_configure_storage

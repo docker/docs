@@ -3,9 +3,7 @@ aliases:
 - /engine/userguide/containers/dockerimages/
 - /engine/userguide/dockerimages/
 description: How to work with Docker images.
-keywords: documentation, docs, the docker guide, docker guide, docker, docker platform,
-  docker.io, Docker images, Docker image, image management, Docker repos, Docker repositories,
-  docker, docker tag, docker tags, Docker Hub,  collaboration
+keywords: documentation, docs, the docker guide, docker guide, docker, docker platform, docker.io, Docker images, Docker image, image management, Docker repos, Docker repositories, docker, docker tag, docker tags, Docker Hub, collaboration
 menu:
   main:
     parent: engine_learn_menu

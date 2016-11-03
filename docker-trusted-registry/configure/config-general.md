@@ -1,7 +1,6 @@
 ---
 description: Configure general settings for Docker Trusted Registry
-keywords: docker, documentation, about, technology, understanding, enterprise, hub,
-  general, domain name, HTTP, HTTPS ports, Notary, registry
+keywords: docker, documentation, about, technology, understanding, enterprise, hub, general, domain name, HTTP, HTTPS ports, Notary, registry
 menu:
   main:
     identifier: dtr_configure_general
