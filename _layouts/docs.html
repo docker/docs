@@ -3,7 +3,6 @@
 {% else %}
 {% assign crumbs = page.url | split: '/' %}
 {% assign stoppingpoint = crumbs | size | minus: 1 %}
-{% assign output = "" %}
 {% for crumb in crumbs %}
 {% if forloop.index == stoppingpoint %}
 {% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %}
@@ -209,10 +208,19 @@ ng\:form {
 
 						 <script language="javascript">
 						 var x = document.links.length;
+						 var baseHref = document.getElementsByTagName('base')[0].href
 						 for (i = 0; i < x; i++) {
 							 var munged = false;
 						   var thisHREF = document.links[i].href;
-						   if (thisHREF.indexOf(window.location.hostname) > -1 && document.links[i].className.indexOf("nomunge")<0)
+							 var originalURL = "{{ page.url }}";
+							 if (thisHREF.indexOf(baseHref + "#") > -1)
+							 {
+								 // hash fix
+								 //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
+								 thisHREF = originalURL + thisHREF.replace(baseHref,"");
+								 //console.log('AFTER: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
+							 }
+						   if ((thisHREF.indexOf(window.location.hostname) > -1 || thisHREF.indexOf('http') == -1) && document.links[i].className.indexOf("nomunge")<0)
 							 {
 								munged = true;
 								thisHREF = thisHREF.replace(".md","/").replace("/index/","/");

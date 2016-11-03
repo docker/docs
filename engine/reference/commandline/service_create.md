@@ -172,7 +172,7 @@ your web server containers when they start. To update the website, you just
 update the named volume.
 
 For more information about named volumes, see
-[Data Volumes](https://docs.docker.com/engine/tutorials/dockervolumes/).
+[Data Volumes](/engine/tutorials/dockervolumes/).
 
 The following table describes options which apply to both bind-mounts and named
 volumes in a service:

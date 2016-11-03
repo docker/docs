@@ -145,6 +145,25 @@ events or unexpected unmounts.
 
 ## Beta Release Notes
 
+### Beta 29.3 Release Notes (2016-11-02 1.12.3-beta29.3)
+
+**Upgrades**
+
+- Docker Compose 1.9.0-rc2
+- `osxfs`: Fixed a simultaneous volume mount race which can result in a crash
+
+### Beta 29.2 Release Notes (2016-10-27 1.12.2-beta29.2)
+
+**Hotfixes**
+
+- Upgrade to Docker 1.12.3
+
+### Beta 29.1 Release Notes (2016-10-26 1.12.1-beta29.1)
+
+**Hotfixes**
+
+- Fixed missing `/dev/pty/ptmx`
+
 ### Beta 29 Release Notes (2016-10-25 1.12.3-rc1-beta29)
 
 **New**
@@ -504,7 +523,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-* Documentation moved to [https://docs.docker.com/docker-for-mac/](https://docs.docker.com/docker-for-mac/)
+* Documentation moved to [https://docs.docker.com/docker-for-mac/](/docker-for-mac/)
 * Allow non-admin users to launch the app for the first time (using admin creds)
 * Prompt non-admin users for admin password when needed in Preferences
 * Fixed download links, documentation links

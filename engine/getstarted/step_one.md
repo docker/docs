@@ -69,9 +69,9 @@ For full instructions on getting Docker for various Linux distributions, see [In
 
 ## Step 2: Install Docker
 
-- **Docker for Mac** - Install instructions are at [Getting Started with Docker for Mac](https://docs.docker.com/docker-for-mac/).
+- **Docker for Mac** - Install instructions are at [Getting Started with Docker for Mac](/docker-for-mac/).
 
-- **Docker for Windows** - Install instructions are at [Getting Started with Docker for Windows](https://docs.docker.com/docker-for-windows/).
+- **Docker for Windows** - Install instructions are at [Getting Started with Docker for Windows](/docker-for-windows/).
 
 - **Docker Toolbox** - Install instructions are at [Docker Toolbox Overview](/toolbox/overview.md).
 

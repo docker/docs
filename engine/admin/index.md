@@ -87,14 +87,17 @@ are located in  `/etc/init` and the `docker` Upstart job can be found at `/etc/i
 
 After successfully [installing Docker for Ubuntu](../installation/linux/ubuntulinux.md),
 you can check the running status using Upstart in this way:
+
 ```bash
 $ sudo status docker
 
 docker start/running, process 989
 ```
+
 ### Running Docker
 
 You can start/stop/restart the `docker` daemon using
+
 ```bash
 $ sudo start docker
 
@@ -177,12 +180,15 @@ As of `7.x`, CentOS and RHEL use `systemd` as the process manager. As of `21`, F
 `systemd` as its process manager.
 
 After successfully installing Docker for [CentOS](../installation/linux/centos.md)/[Red Hat Enterprise Linux](../installation/linux/rhel.md)/[Fedora](../installation/linux/fedora.md), you can check the running status in this way:
+
 ```bash
 $ sudo systemctl status docker
 ```
+
 ### Running Docker
 
 You can start/stop/restart the `docker` daemon using
+
 ```bash
 $ sudo systemctl start docker
 
@@ -190,10 +196,13 @@ $ sudo systemctl stop docker
 
 $ sudo systemctl restart docker
 ```
+
 If you want Docker to start at boot, you should also:
+
 ```bash
 $ sudo systemctl enable docker
 ```
+
 ### Configuring Docker
 
 For CentOS 7.x and RHEL 7.x you can [control and configure Docker with systemd](systemd.md).
@@ -267,6 +276,7 @@ To configure Docker options:
 
 systemd has its own logging system called the journal. The logs for the `docker` daemon can
 be viewed using `journalctl -u docker`
+
 ```no-highlight
 $ sudo journalctl -u docker
 May 06 00:22:05 localhost.localdomain systemd[1]: Starting Docker Application Container Engine...

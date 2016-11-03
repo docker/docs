@@ -25,7 +25,6 @@ Please read through these topics on how to get started. To **give us your feedba
 
 >**Already have Docker for Windows?** If you already have Docker for Windows installed, and are ready to get started, skip over to the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
-
 ## Download Docker for Windows
 
 If you have not already done so, please install Docker for Windows. You can download installers from the stable or beta channel.  For more about stable and beta channels, see the [FAQs](faqs.md#questions-about-stable-and-beta-channels).
@@ -52,27 +51,61 @@ If you have not already done so, please install Docker for Windows. You can down
   </tr>
 </table>
 
->**Important Notes**:
+>**Important Notes:**
 >
->* Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please see [What to know before you install](index.md#what-to-know-before-you-install) for a full list of prerequisites.
+>- Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education
+>  (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please
+>  see [What to know before you install](index.md#what-to-know-before-you-install)
+>  for a full list of prerequisites.
 >
->* <font color="#CC3366">You can switch between beta and stable versions, but _you must have only one app installed at a time_.</font> Also, you will need to save images and export containers you want to keep before uninstalling the current version before installing another. For more about this, see the [FAQs about beta and stable channels](faqs.md#questions-about-stable-and-beta-channels).
+>- You can switch between beta and stable versions, but you must have only one
+>   app installed at a time. Also, you will need to save images and export
+>  containers you want to keep before uninstalling the current version before
+>  installing another. For more about this, see the
+>  [FAQs about beta and stable channels](faqs.md#questions-about-stable-and-beta-channels).
 
 ##  What to know before you install
 
-* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run. After Hyper-V is enabled, VirtualBox will no longer work, but any VirtualBox VM images will remain. VirtualBox VMs created with `docker-machine` (including the `default` one typically created during Toolbox install) will no longer start. These VMs cannot be used side-by-side with Docker for Windows. However, you can still use `docker-machine` to manage remote VMs.
-
+* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run. After Hyper-V is enabled,
+VirtualBox will no longer work, but any VirtualBox VM images will remain.
+VirtualBox VMs created with `docker-machine` (including the `default` one
+typically created during Toolbox install) will no longer start. These VMs cannot
+be used side-by-side with Docker for Windows. However, you can still use
+`docker-machine` to manage remote VMs.
+<p />
 * The current version of Docker for Windows runs on 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later). In the future we will support more versions of Windows 10.
+<p />
+* Containers and images created with Docker for Windows are shared between all user accounts on machines where it is installed. This is because all
+Windows accounts will use the same VM to build and run containers. In the
+future, Docker for Windows will better isolate user content.
+<p />
+* The Hyper-V package must be enabled for Docker for Windows to work. The Docker for Windows installer will enable it for you, if needed. (This requires a
+reboot). If your system does not satisfy these requirements, you can install
+[Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of
+Hyper-V.
+<p />
+* Virtualization must be enabled. Typically, virtualization is enabled by default. (Note that this is different from having Hyper-V enabled.) For more
+detail see [Virtualization must be
+enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
+<p />
+* **What the Docker for Windows install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
 
-* Containers and images created with Docker for Windows are shared between all user accounts on machines where it is installed. This is because all Windows accounts will use the same VM to build and run containers. In the future, Docker for Windows will better isolate user content.
+### About Windows containers and Windows Server 2016
 
-* The Hyper-V package must be enabled for Docker for Windows to work. The Docker for Windows installer will enable it for you, if needed. (This requires a reboot).
+Looking for information on using Windows containers?
 
-  >**Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of Hyper-V.
-
-* Virtualization must be enabled. Typically, virtualization is enabled by default. (Note that this is different from having Hyper-V enabled.) For more detail see [Virtualization must be enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
-
-* **What the install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
+provides a tutorial on how to set up and run Windows containers on Windows 10 or
+with Windows Server 2016. It shows you how to use a MusicStore application with
+Windows containers.
+<p />
+* [Setup - Windows Server 2016 (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/Setup-Server2016.md) specifically describes environment setup.
+<p />
+* [Switch
+between Windows and Linux containers (Beta
+feature)](index.md#switch-between-windows-and-linux-containers-beta-feature) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
+<p />
+* Docker Container Platform for Windows Server 2016 [articles and blog posts](https://www.docker.com/microsoft) on the Docker website
 
 ## Step 1. Install Docker for Windows
 
@@ -365,7 +398,7 @@ no_proxy=*.local, 169.254/16
 
 You can see from the above output that the `HTTP_PROXY`, `http_proxy` and `no_proxy` environment variables are set.
 When your proxy configuration changes, Docker restarts automatically to pick up the new settings.
-If you have containers that you wish to keep running across restarts, you should consider using [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies-restart)
+If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart)
 
 ### Docker daemon
 You can configure options on the Docker daemon in the given JSON configuration file, and determine how your containers will run.
@@ -392,7 +425,7 @@ If you are interested in working with Windows containers, here are some guides t
 
 * [Build and Run Your First Windows Server Container (Blog Post)](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/) gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
 
-* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/tree/master/windows/windows-containers) shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md) application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
+* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md) shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md) application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
   >**Disclaimer:** This lab is still in work, and is based off of the blog, but you can test and leverage the example walkthroughs now, if you want to start experimenting. Please checking back as the lab evolves.
 

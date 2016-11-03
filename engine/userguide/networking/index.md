@@ -214,7 +214,7 @@ lo        Link encap:Local Loopback
           RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
 ```
 
-Then use `ping`to send three ICMP requests and test the connectivity of the
+Then use `ping` to send three ICMP requests and test the connectivity of the
 containers on this `bridge` network.
 
 ```
@@ -567,6 +567,6 @@ functionality in user-defined networks.
 - [Work with network commands](work-with-networks.md)
 - [Get started with multi-host networking](get-started-overlay.md)
 - [Managing Data in Containers](../../tutorials/dockervolumes.md)
-- [Docker Machine overview](https://docs.docker.com/machine)
-- [Docker Swarm overview](https://docs.docker.com/swarm)
+- [Docker Machine overview](/machine)
+- [Docker Swarm overview](/swarm)
 - [Investigate the LibNetwork project](https://github.com/docker/libnetwork)

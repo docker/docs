@@ -26,14 +26,14 @@ on both [GitHub](http://github.com) and [Bitbucket](https://bitbucket.org/). Thi
 
 To use automated builds you must have an [account on Docker Hub](accounts.md) and on the hosted repository provider (GitHub or Bitbucket). If
 you have previously linked your Github or Bitbucket account, you must have
-chosen the Public and Private connection type. 
+chosen the Public and Private connection type.
 
 To view your current connection
 settings, log in to Docker Hub and choose **Profile > Settings > Linked Accounts & Services**.
 
 ## Limitations
 
-Currently Docker Hub does not support Git LFS (Large File Storage). If you have binaries in your build context that are managed by Git LFS, only the pointer file will be present in the clone made during the automated build, which is not what you want. 
+Currently Docker Hub does not support Git LFS (Large File Storage). If you have binaries in your build context that are managed by Git LFS, only the pointer file will be present in the clone made during the automated build, which is not what you want.
 
 Subscribe to the [GitHub issue](https://github.com/docker/hub-feedback/issues/500) tracking this limitation.
 
@@ -131,17 +131,16 @@ build request, Docker ignores new requests.
 
 ### Build statuses explained
 
-Check your build status through the Build Details screen as seen in the following example.
+You can view the status of the builds for a specific repository by looking at the Build Details screen. If you have builds that are queued or in progress, you can click **Cancel** to end them.
 
 ![Build statuses](images/build-states-ex.png)
 
 The statuses are:
 
 * **Queued**: You're in line and your image will be built soon. Queue time varies depending on number of concurrent builds available to you.
-* **Building**: Your image is currently being constructed.
+* **Building**: The image is being built.
 * **Success**: The image has been built with no issues.
-* **Error**: There was an issue with your image. Click the row to access the Builds Details screen. The banner at the top of the page displays the last sentence of the log file indicating what the error was. If you need more information, scroll to the bottom of the screen to the logs section.
-
+* **Error**: There was an issue with your image. Click the row to go to the Builds Details screen. The banner at the top of the page displays the last sentence of the log file, which indicates what the error was. If you need more information, scroll to the bottom of the screen to the logs section.
 
 ## Use the Build Settings page
 

@@ -32,7 +32,7 @@ above to run. It is recommended to install the exact same version of the
 CS Docker Engine on all nodes.
 
 So on each host that you want to be part of the UCP cluster,
-[install CS Docker Engine 1.10.0 or above](https://docs.docker.com/docker-trusted-registry/cs-engine/install/).
+[install CS Docker Engine 1.10.0 or above](/docker-trusted-registry/cs-engine/install/).
 In the case where you are creating a VM template with CS Engine already
 installed, make sure that `/etc/docker/key.json` is not included in the image.
 You can do this by simply removing `/etc/docker/key.json`. You can then restart
@@ -232,7 +232,7 @@ For each node that you want to add to your UCP cluster:
 1. Log into that node.
 
 2.  Use the join command, to join the node to the cluster:
-    
+
     ```none
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \

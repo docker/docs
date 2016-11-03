@@ -6,7 +6,7 @@ toc:
   - sectiontitle: Install
     section:
     - path: /engine/installation/mac/
-      title: Installation on Mac OS X
+      title: Installation on macOS
     - path: /engine/installation/windows/
       title: Installation on Windows
     - sectiontitle: On Linux distributions
@@ -25,8 +25,6 @@ toc:
         title: Installation on Arch Linux
       - path: /engine/installation/linux/cruxlinux/
         title: Installation on CRUX Linux
-      - path: /engine/installation/linux/frugalware/
-        title: Installation on FrugalWare
       - path: /engine/installation/linux/gentoolinux/
         title: Installation on Gentoo
       - path: /engine/installation/linux/oracle/
@@ -1220,7 +1218,7 @@ toc:
         - path: /registry/recipes/mirror/
           title: Mirroring Docker Hub
         - path: /registry/recipes/osx-setup-guide/
-          title: Running on OS X
+          title: Running on macOS
       - sectiontitle: Reference
         section:
         - path: /registry/spec/
