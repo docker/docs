@@ -1,5 +1,8 @@
 ---
-description: Learn about the system requirements for installing Docker Universal Control Plane.
+aliases:
+- /ucp/installation/system-requirements/
+description: Learn about the system requirements for installing Docker Universal Control
+  Plane.
 keywords:
 - docker, ucp, architecture, requirements
 title: UCP System requirements

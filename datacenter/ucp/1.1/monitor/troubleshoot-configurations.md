@@ -1,6 +1,7 @@
 ---
 redirect_from:
 - /ucp/kv_store/
+- /ucp/monitor/troubleshoot-configurations/
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
 keywords:
 - ectd, key, value, store, ucp

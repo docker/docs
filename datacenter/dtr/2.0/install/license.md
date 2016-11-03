@@ -1,6 +1,7 @@
 ---
 redirect_from:
 - /docker-trusted-registry/license/
+- /docker-trusted-registry/install/license
 description: Learn how to license your Docker Trusted Registry installation.
 keywords:
 - docker, dtr, install, license

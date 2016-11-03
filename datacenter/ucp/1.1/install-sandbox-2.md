@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ucp/install-sandbox-2/
 title: Evaluate DDC in a sandbox deployment
 description: Learn how to push Docker images to your private registry and deploy them to your cluster.
 keywords: Docker Datacenter, registry, orchestration

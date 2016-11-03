@@ -1,4 +1,6 @@
 ---
+aliases:
+- /docker-trusted-registry/install/system-requirements/
 description: Learn about the system requirements for installing Docker Trusted Registry.
 keywords:
 - docker, DTR, architecture, requirements

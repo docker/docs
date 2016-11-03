@@ -1,4 +1,6 @@
 ---
+aliases:
+- /docker-trusted-registry/configure/configuration/
 description: Configuration overview for Docker Trusted Registry
 keywords:
 - docker, documentation, about, technology, understanding, enterprise, hub,  registry
