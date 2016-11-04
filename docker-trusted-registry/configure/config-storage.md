@@ -51,8 +51,10 @@ Additionally, the Trusted Registry supports these cloud-based storage drivers:
 
 ### Filesystem
 
+Use of the `filesystem` storage driver is incompatible when deploying DTR in High Availability with multiple replicas.
+
 If you select `filesystem`, then the Trusted Registry uses the local disk to
-store registry files. This backend has a single, required `rootdirectory`
+store registry files.  This backend has a single, required `rootdirectory`
 parameter which specifies a subdirectory of `/var/local/dtr/imagestorage` in
 which all registry files are stored. The default value of `/local` means the
 files are stored in `/var/local/dtr/image-storage/local`.
