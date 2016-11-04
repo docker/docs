@@ -1,6 +1,7 @@
 ---
 description: exec
-keywords: fig, composition, compose, docker, orchestration, cli,  exec
+keywords:
+- fig, composition, compose, docker, orchestration, cli,  exec
 menu:
   main:
     identifier: exec.compose

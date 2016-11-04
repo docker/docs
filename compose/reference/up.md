@@ -1,6 +1,7 @@
 ---
 description: Builds, (re)creates, starts, and attaches to containers for a service.
-keywords: fig, composition, compose, docker, orchestration, cli,  up
+keywords:
+- fig, composition, compose, docker, orchestration, cli,  up
 menu:
   main:
     identifier: up.compose
