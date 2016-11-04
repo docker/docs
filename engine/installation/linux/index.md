@@ -1,10 +1,6 @@
 ---
 description: Lists the installation methods
-keywords:
-- docker
-- engine
-- install
-- linux
+keywords: docker, engine, install, linux
 menu:
   main:
     identifier: engine_linux

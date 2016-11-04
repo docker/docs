@@ -1,8 +1,6 @@
 ---
 description: Docker swarm mode overlay network security model
-keywords:
-- network, docker, documentation, user guide, multihost, swarm mode
-- overlay
+keywords: network, docker, documentation, user guide, multihost, swarm mode, overlay
 menu:
   main:
     parent: smn_networking

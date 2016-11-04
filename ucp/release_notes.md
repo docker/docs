@@ -1,10 +1,7 @@
 ---
 description: Release notes for Docker Universal Control Plane. Learn more about the
   changes introduced in the latest versions.
-keywords:
-- Docker, UCP
-- Release notes
-- Versions
+keywords: Docker, UCP, Release notes, Versions
 menu:
   main:
     identifier: ucp_rnotes
