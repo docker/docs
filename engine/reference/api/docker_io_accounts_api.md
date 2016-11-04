@@ -4,7 +4,7 @@ aliases:
 description: API Documentation for docker.io accounts.
 keywords:
 - API, Docker, accounts, REST,  documentation
-title: docker.io accounts API
+title: Accounts API for docker.io
 ---
 
 ## Get a single user

@@ -5,7 +5,7 @@ aliases:
 description: Link your DigitalOcean account
 keywords:
 - link, DigitalOcean, account
-title: Link your DigitalOcean account
+title: Link a DigitalOcean account
 ---
 
 You can link your DigitalOcean account to your Docker Cloud account to deploy **nodes** and **node clusters** using Docker Cloud's Dashboard, API, and CLI.  You must link your DigitalOcean account so that Docker Cloud can interact with DigitalOcean on your behalf to create and manage your **nodes** (droplets).

@@ -4,7 +4,7 @@ aliases:
 description: Installation instructions for Docker on cloud.
 keywords:
 - cloud, docker, machine, documentation,  installation
-title: Choose how to install
+title: Choose an installation method
 ---
 
 You can install Docker Engine on any cloud platform that runs an operating system (OS) that Docker supports. This includes many flavors and versions of Linux, along with Mac and Windows.

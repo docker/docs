@@ -3,7 +3,7 @@ description: Manage Builds and Images in Docker Cloud
 keywords:
 - builds, images, Cloud
 notoc: true
-title: Build and images overview
+title: Builds and images overview
 ---
 
 Docker Cloud provides a hosted registry service where you can create

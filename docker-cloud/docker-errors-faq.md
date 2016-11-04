@@ -4,7 +4,7 @@ aliases:
 description: Known Docker Engine issues in Docker Cloud
 keywords:
 - Engine, issues, troubleshoot
-title: Known Docker Engine issues in Docker Cloud
+title: Known issues in Docker Cloud
 ---
 
 This is a list of known issues with current versions of Docker Engine along with our recommended workaround. You might encounter these errors in Docker Cloud.

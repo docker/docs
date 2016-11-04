@@ -5,7 +5,7 @@ description: Documentation for docker Registry and Registry API
 published: false
 keywords:
 - docker, registry, api,  hub
-title: Docker Hub and Registry V1
+title: Docker Hub and Registry v1
 ---
 
 This API is deprecated as of 1.7. To view the old version, see the [go

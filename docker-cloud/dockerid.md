@@ -2,7 +2,7 @@
 description: Using your DockerID to log in to Docker Cloud
 keywords:
 - one, two, three
-title: Your Docker ID and Docker Cloud account
+title: Docker ID and Docker Cloud settings
 ---
 
 Docker Cloud uses your Docker ID for access and access control, and this allows

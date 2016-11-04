@@ -2,7 +2,7 @@
 description: Your Docker ID
 keywords:
 - Docker, docker, trusted, sign-up, registry, accounts, plans, Dockerfile, Docker Hub, docs,  documentation
-title: Your Docker ID
+title: Docker ID and Docker Hub accounts
 ---
 
 You can `search` for Docker images and `pull` them from [Docker

@@ -5,7 +5,7 @@ aliases:
 description: Link your Microsoft Azure account
 keywords:
 - Microsoft, Azure, account
-title: Link your Microsoft Azure account
+title: Link a Microsoft Azure account
 ---
 
 You can link your Microsoft Azure account to your Docker Cloud account to deploy **nodes** and **node clusters** using Docker Cloud's Dashboard, API, or CLI. You must link your Azure account so that Docker Cloud can interact with Azure on your behalf to create and manage your **nodes** (virtual machines).

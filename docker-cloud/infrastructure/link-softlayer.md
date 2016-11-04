@@ -5,7 +5,7 @@ aliases:
 description: Link your SoftLayer account
 keywords:
 - SoftLayer, link, cloud
-title: Link your SoftLayer account
+title: Link a SoftLayer account
 ---
 
 You can register your SoftLayer account credentials in your Docker Cloud account

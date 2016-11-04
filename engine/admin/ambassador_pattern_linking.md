@@ -7,8 +7,6 @@ keywords:
 title: Link via an ambassador container
 ---
 
-# Link via an ambassador container
-
 Rather than hardcoding network links between a service consumer and
 provider, Docker encourages service portability, for example instead of:
 

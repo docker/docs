@@ -9,7 +9,7 @@ aliases:
 description: Cloud Installations
 keywords:
 - Docker install
-title: Install Engine in the cloud
+title: Install Engine on cloud hosts
 ---
 
 * [Understand cloud install options and choose one](overview.md)

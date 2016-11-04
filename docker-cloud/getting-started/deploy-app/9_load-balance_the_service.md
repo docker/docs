@@ -5,7 +5,7 @@ aliases:
 description: Load-balance the service
 keywords:
 - load, balance, Python
-title: Load-balance your service
+title: Load-balance the service
 ---
 
 To load-balance a your application, you need to deploy a load-balancing service.

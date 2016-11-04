@@ -1,5 +1,5 @@
 ---
-title: Documentation Archive
+title: Documentation archive
 ---
 
 This page lists the various ways you can view the docs as they were when a
