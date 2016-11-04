@@ -1,7 +1,6 @@
 ---
 description: Lists containers.
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  ps
+keywords: fig, composition, compose, docker, orchestration, cli,  ps
 menu:
   main:
     identifier: ps.compose

@@ -2,8 +2,7 @@
 aliases:
 - /compose/reference/docker-compose/
 description: Overview of docker-compose CLI
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  docker-compose
+keywords: fig, composition, compose, docker, orchestration, cli,  docker-compose
 menu:
   main:
     parent: smn_compose_cli
