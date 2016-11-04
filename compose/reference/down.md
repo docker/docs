@@ -1,7 +1,6 @@
 ---
 description: down
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  down
+keywords: fig, composition, compose, docker, orchestration, cli,  down
 menu:
   main:
     identifier: down.compose

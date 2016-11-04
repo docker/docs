@@ -1,7 +1,6 @@
 ---
 description: CLI Environment Variables
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  reference
+keywords: fig, composition, compose, docker, orchestration, cli,  reference
 menu:
   main:
     parent: smn_compose_cli

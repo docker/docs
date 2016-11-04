@@ -1,7 +1,6 @@
 ---
 description: build
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  build
+keywords: fig, composition, compose, docker, orchestration, cli,  build
 menu:
   main:
     identifier: build.compose

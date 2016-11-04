@@ -1,7 +1,6 @@
 ---
 description: help
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  help
+keywords: fig, composition, compose, docker, orchestration, cli,  help
 menu:
   main:
     identifier: help.compose
