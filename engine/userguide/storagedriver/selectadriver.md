@@ -162,7 +162,7 @@ your system. Stability is an important factor influencing which storage driver
 is used by default. Straying from this default may increase your chances of
 encountering bugs and nuances.
 - **Follow the configuration specified on the CS Engine
-[compatibility matrix](https://www.docker.com/compatibility-maintenance)**. The
+[compatibility matrix](https://success.docker.com/Help/Compatibility_Matrix)**. The
  CS Engine is the commercially supported version of the Docker Engine. It's
 code-base is identical to the open source Engine, but it has a limited set of
 supported configurations. These *supported configurations* use the most stable
