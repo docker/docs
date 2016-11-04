@@ -1,10 +1,6 @@
 ---
 description: Deploy services to a swarm
-keywords:
-- guide
-- swarm mode
-- swarm
-- service
+keywords: guide, swarm mode, swarm, service
 menu:
   main:
     identifier: services-guide
