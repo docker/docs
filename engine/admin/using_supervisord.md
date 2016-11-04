@@ -4,7 +4,7 @@ aliases:
 description: How to use Supervisor process management with Docker
 keywords:
 - docker, supervisor,  process management
-title: Using Supervisor with Docker
+title: Use Supervisor with Docker
 ---
 
 > **Note**:
