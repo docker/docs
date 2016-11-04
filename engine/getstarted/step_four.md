@@ -172,7 +172,7 @@ Finally, Docker finishes the build and reports its outcome.
 
 ## Step 4: Run your new docker-whale
 
-In this step, you verify the new images is on your computer and then you run your new image.
+In this step, you verify the new image is on your computer and then you run your new image.
 
 1. Open a command line terminal.
 
