@@ -1,6 +1,7 @@
 ---
 description: Removes stopped service containers.
-keywords: fig, composition, compose, docker, orchestration, cli,  rm
+keywords:
+- fig, composition, compose, docker, orchestration, cli,  rm
 menu:
   main:
     identifier: rm.compose
