@@ -1,6 +1,6 @@
 ---
 description: Docker Compose FAQ
-keywords: documentation, docs, docker, compose, faq
+keywords: documentation, docs,  docker, compose, faq
 menu:
   main:
     identifier: faq.compose

@@ -1,6 +1,13 @@
 ---
 description: How PKI works in swarm mode
-keywords: docker, container, cluster, swarm mode, node, tls, pki
+keywords:
+- docker
+- container
+- cluster
+- swarm mode
+- node
+- tls
+- pki
 menu:
   main:
     identifier: how-pki-work

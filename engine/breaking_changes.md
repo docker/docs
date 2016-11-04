@@ -2,7 +2,9 @@
 aliases:
 - /engine/misc/breaking/
 description: Breaking changes
-keywords: docker, documentation, about, technology, breaking, incompatibilities
+keywords:
+- docker, documentation, about, technology, breaking
+- incompatibilities
 title: Breaking changes
 ---
 
