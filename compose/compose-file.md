@@ -70,8 +70,8 @@ This will result in an image named `webapp` and tagged `tag`, built from `./dir`
 > **Note**: In the [version 1 file format](compose-file.md#version-1), `build` is different in
 > two ways:
 >
-> -   Only the string form (`build: .`) is allowed - not the object form.
-> -   Using `build` together with `image` is not allowed. Attempting to do so
+> 1.   Only the string form (`build: .`) is allowed - not the object form.
+> 2.   Using `build` together with `image` is not allowed. Attempting to do so
 >     results in an error.
 
 #### context
@@ -103,13 +103,15 @@ specified.
 
 > **Note**: In the [version 1 file format](compose-file.md#version-1), `dockerfile` is
 > different in two ways:
-
-  * It appears alongside `build`, not as a sub-option:
-
-        build: .
-        dockerfile: Dockerfile-alternate
-
-  * Using `dockerfile` together with `image` is not allowed. Attempting to do so results in an error.
+>
+>  1.  It appears alongside `build`, not as a sub-option:
+>
+>      ```
+>      build: .
+>      dockerfile: Dockerfile-alternate
+>      ```
+>
+>  2.  Using `dockerfile` together with `image` is not allowed. Attempting to do so results in an error.
 
 #### args
 
@@ -478,7 +480,7 @@ Containers for the linked service will be reachable at a hostname identical to
 the alias, or the service name if no alias was specified.
 
 Links also express dependency between services in the same way as
-[depends_on](compose-file.md#depends-on), so they determine the order of service startup.
+[depends_on](compose-file.md#dependson), so they determine the order of service startup.
 
 > **Note:** If you define both links and [networks](compose-file.md#networks), services with
 > links between them must share at least one network in common in order to

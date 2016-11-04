@@ -52,7 +52,7 @@ mounting the file at '/docker_subscription.lic' in the tool.  E.g.
 | `--admin-password`                                         | Specify the UCP admin password [$UCP_ADMIN_PASSWORD]                                                    |
 | `--fresh-install`                                          | Destroy any existing state and start fresh.                                                             |
 | `--san` `[--san option --san option]`                      | Additional Subject Alternative Names for certs (e.g. `--san foo1.bar.com --san foo2.bar.com`).          |
-| `--host-address`                                           | Specify the visible IP for this node.                                                          |
+| `--host-address`                                           | Specify the visible IP for this node.                                                                   |
 | `--swarm-port "2376"`                                      | Select what port to run the local Swarm manager on (default: 2376)                                      |
 | `--controller-port "443"`                                  | Select what port to run the local Controller on (default: 443)                                          |
 | `--dns` `[--dns option --dns option]`                      | Set custom DNS servers for the UCP infrastructure containers.                                           |

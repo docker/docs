@@ -171,12 +171,12 @@ Optionally, override the default access level for specific repositories. -->
 | ------------- | ------------- |
 | **Repositories** | |
 | Read | Pull |
-| Read/Write | Pull, push, update description, delete |
-| Admin | All of the above, plus create |
+| Read/Write | Pull, push |
+| Admin | All of the above, plus update description, create and delete |
 | **Build** | |
-| Read | View build and build settings |
-| Read/write | View, cancel build, retry or trigger build |
-| Admin | All of the above, plus change a build source, create and delete |
+| Read | View basic build settings and Timeline |
+| Read/write | All of the above plus start, retry, or cancel build |
+| Admin | All of the above, plus view and change build configuration, change build source, create and delete |
 | **Nodes** | |
 | Read | View |
 | Read/write  | View, scale, check node health |

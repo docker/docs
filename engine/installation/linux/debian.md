@@ -131,11 +131,11 @@ Before installing Docker, make sure you have set your `APT` repository correctly
 
         $ sudo apt-get install docker-engine
 
-5. Start the `docker` daemon.
+3. Start the `docker` daemon.
 
         $ sudo service docker start
 
-6. Verify `docker` is installed correctly.
+4. Verify `docker` is installed correctly.
 
         $ sudo docker run hello-world
 

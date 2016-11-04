@@ -104,16 +104,12 @@ Four different options affect container domain name services.
     <code>--dns-opt=OPTION...</code>
     </p></td>
     <td><p>
-      Sets the options used by DNS resolvers by writing an <code>options<code>
-      line into the container's <code>/etc/resolv.conf<code>.
+      Sets the options used by DNS resolvers by writing an <code>options</code>
+      line into the container's <code>/etc/resolv.conf</code>.
     </p>
     <p>
-    See documentation for <code>resolv.conf<code> for a list of valid options
+    See documentation for <code>resolv.conf</code> for a list of valid options
     </p></td>
-  </tr>
-  <tr>
-    <td><p></p></td>
-    <td><p></p></td>
   </tr>
 </table>
 

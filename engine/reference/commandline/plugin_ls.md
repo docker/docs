@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/plugin_ls/
 advisory: experimental
 description: The plugin ls command description and usage
 keywords:

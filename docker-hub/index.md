@@ -15,7 +15,7 @@ title: Overview of Docker Hub
 
 [Docker Hub](https://hub.docker.com) is a cloud-based registry service which
 allows you to link to code repositories, build your images and test them, stores
-manually pushed images, and links to [Docker Cloud](https://docs.docker.com/docker-cloud/) so you can deploy images to your
+manually pushed images, and links to [Docker Cloud](/docker-cloud/) so you can deploy images to your
 hosts. It provides a centralized resource for container image discovery,
 distribution and change management, [user and team collaboration](orgs.md), and
 workflow automation throughout the development pipeline.
@@ -61,7 +61,7 @@ the repositories you can access and their status, view your "Dashboard" page on
 [Docker Hub](https://hub.docker.com).
 
 
-You can find more information on working with Docker images in the [Docker userguide](https://docs.docker.com/userguide/dockerimages/).
+You can find more information on working with Docker images in the [Docker userguide](/userguide/dockerimages/).
 
 ### Use Official Repositories
 
@@ -90,5 +90,5 @@ You can create public repositories which can be accessed by any other Hub user, 
 
 ### Docker commands and Docker Hub
 
-Docker itself provides access to Docker Hub services via the [`docker search`](http://docs.docker.com/reference/commandline/search),
-[`pull`](http://docs.docker.com/reference/commandline/pull), [`login`](http://docs.docker.com/reference/commandline/login), and [`push`](http://docs.docker.com/reference/commandline/push) commands.
+Docker itself provides access to Docker Hub services via the [`docker search`](/reference/commandline/search),
+[`pull`](/reference/commandline/pull), [`login`](/reference/commandline/login), and [`push`](/reference/commandline/push) commands.

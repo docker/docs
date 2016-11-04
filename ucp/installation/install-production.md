@@ -32,7 +32,7 @@ above to run. It is recommended to install the exact same version of the
 CS Docker Engine on all nodes.
 
 So on each host that you want to be part of the UCP cluster,
-[install CS Docker Engine 1.10.0 or above](https://docs.docker.com/docker-trusted-registry/cs-engine/install/).
+[install CS Docker Engine 1.10.0 or above](/docker-trusted-registry/cs-engine/install/).
 In the case where you are creating a VM template with CS Engine already
 installed, make sure that `/etc/docker/key.json` is not included in the image.
 You can do this by simply removing `/etc/docker/key.json`. You can then restart
@@ -93,7 +93,7 @@ To install UCP:
     the command prompts for the necessary configuration values.
     You can also use flags to pass values to the install command.
 
-    ```bash
+    ```none
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
       docker/ucp install -i \
@@ -141,7 +141,7 @@ To create a backup of the CAs used on the controller node:
 1. Log into the controller node using ssh.
 2.  Run the docker/ucp backup command.
 
-    ```bash
+    ```none
     $ docker run --rm -i --name ucp \
         -v /var/run/docker.sock:/var/run/docker.sock \
         docker/ucp backup \
@@ -173,7 +173,7 @@ For each node that you want to install as a controller replica:
     be passing the backup.tar file from the previous step in order to ensure
     that the CAs are replicated to the new controller node.
 
-    ```bash
+    ```none
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v $BACKUP_PATH/backup.tar:/backup.tar \
@@ -214,7 +214,7 @@ For each controller node:
 
 2.  Run the engine-discovery command.
 
-    ```bash
+    ```none
     $ docker run --rm -it \
         --name ucp \
         -v /var/run/docker.sock:/var/run/docker.sock \
@@ -232,8 +232,8 @@ For each node that you want to add to your UCP cluster:
 1. Log into that node.
 
 2.  Use the join command, to join the node to the cluster:
-    
-    ```bash
+
+    ```none
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
       docker/ucp join -i

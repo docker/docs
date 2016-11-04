@@ -53,9 +53,11 @@ script:
           db:
             image: postgres
 
--   Write your own wrapper script to perform a more application-specific health
+-   Alternatively, write your own wrapper script to perform a more application-specific health
     check. For example, you might want to wait until Postgres is definitely
     ready to accept commands:
+    
+    wait-for-postgres.sh
 
         #!/bin/bash
 

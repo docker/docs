@@ -132,6 +132,99 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 
 ## Beta Release Notes
 
+### Beta 29.3 Release Notes (2016-11-02 1.12.3-beta29.3)
+
+**Upgrades**
+
+- Docker Compose 1.9.0-rc2
+
+### Beta 29.2 Release Notes (2016-10-27 1.12.2-beta29.2)
+
+**Hotfixes**
+
+- Upgrade to Docker 1.12.3
+
+### Beta 29.1 Release Notes (2016-10-26 1.12.1-beta29.1)
+
+**Hotfixes**
+
+- Fixed missing `/dev/pty/ptmx`
+
+### Beta 29 Release Notes (2016-10-25 1.12.3-rc1-beta29)
+
+>**Important Note**:
+>
+> The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+
+> [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
+
+> This problem is fixed as of Beta 23 for subsequent auto-updates.
+>
+Windows Container support relies on the Windows 10 container feature, which is
+**experimental** at this point.  Windows 10 Pro (1607, build number 14393)
+requires update `KB3192366` (soon to be released via Windows Update) to fully
+work. Some insider builds may not work.
+
+**New**
+
+- Restore the VM's configuration when it was changed by the user
+- Overlay2 is now the default storage driver. After a factory reset overlay2 will automatically be used
+- Detect firewall configuration that might block the file sharing
+- Send more GUI usage statistics to help us improve the product
+
+**Upgrades**
+
+- Docker 1.12.3-rc1
+- Linux Kernel 4.4.27
+
+**Bug fixes and minor changes**
+
+- Faster mount/unmount of shared drives
+- Added a timeout to mounting/unmounting a shared drive
+- Add the settings to the diagnostics
+- Increase default ulimit for memlock (fixes https://github.com/docker/for-mac/issues/801)
+- Make sure we don't use an older Nlog library from the GAC
+
+
+### Beta 28 Release Notes (2016-10-13 1.12.2-rc3-beta28)
+
+>**Important Note**:
+>
+> The auto-update function in Beta 21 will not be able to install this update. To install the latest beta manually if you are still on Beta 21, please download the installer here:
+
+> [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
+
+> This problem is fixed as of Beta 23 for subsequent auto-updates.
+>
+Windows Container support relies on the Windows 10 container feature, which is
+**experimental** at this point.  Windows 10 Pro (1607, build number 14393)
+requires update `KB3192366` (soon to be released via Windows Update) to fully
+work. Some insider builds may not work.
+
+**New**
+
+- Path to HyperV disks in no longer hardcoded, making the Toolbox import work with non-standard path
+- Verify that ALL HyperV features are enabled
+- Make it clear why user cannot switch to Windows Containers with a tooltip in the systray
+- Added Moby console to the logs
+- Save the current engine with the other settings
+- Notary version 0.4.2 installed
+
+
+**Upgrades**
+
+- Docker 1.12.2
+- Kernel 4.4.24
+
+**Bug fixes and minor changes**
+
+- Fixed a password escaping regression
+- Support writing large values to the database, especially for trusted CAs
+- VpnKit is now restarted if it dies
+- Make sure invalid "DockerNat" switches are not used
+- Preserve the Powershell stacktraces
+- Write OS and Application versions at the top of each log file
+
 ### Beta 27 Release Notes (2016-09-28 1.12.2-rc1-beta27)
 
 >**Important Note**:
@@ -814,8 +907,8 @@ are working on a solution.
 - Rename `console` to `debug console`
 - Remove `machine` from notification
 - Open the feedback forum
-- Use same MixPanel project for Windows and OSX
-- Align MixPanel events with OSX
+- Use same MixPanel project for Windows and macOS
+- Align MixPanel events with macOS
 - Added a script to diagnose problems
 - Submit diagnostic with bugsnag reports
 - MixPanel heartbeat every hour
