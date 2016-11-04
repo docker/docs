@@ -16,7 +16,10 @@ gems:
   - jekyll-gist
   - jekyll-seo-tag
 
-
+webrick:
+  headers:
+    Cache-Control: 600
+    
 defaults:
   -
     scope:
