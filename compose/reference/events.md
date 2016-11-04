@@ -1,6 +1,7 @@
 ---
 description: Receive real time events from containers.
-keywords: fig, composition, compose, docker, orchestration, cli, events
+keywords:
+- fig, composition, compose, docker, orchestration, cli, events
 menu:
   main:
     identifier: events.compose
