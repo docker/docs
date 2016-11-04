@@ -2,15 +2,8 @@
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
 keywords:
 - docker, ucp, troubleshoot
-menu:
-  main:
-    identifier: ucp_troubleshoot_cluster
-    parent: mn_monitor_ucp
-    weight: 10
 title: Troubleshoot your cluster
 ---
-
-# Troubleshoot your cluster
 
 If you detect problems in your UCP cluster, you can start your troubleshooting
 session by checking the logs of the

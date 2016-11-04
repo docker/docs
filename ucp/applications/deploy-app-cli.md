@@ -1,19 +1,11 @@
 ---
 aliases:
 - /ucp/deploy-application/
-description: Learn how to deploy containerized applications on a cluster, with Docker
-  Universal Control Plane.
+description: Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane.
 keywords:
 - deploy, application
-menu:
-  main:
-    identifier: ucp_deploy_cli
-    parent: mn_ucp_applications
-    weight: 10
 title: Deploy an app from the CLI
 ---
-
-# Deploy an app from the CLI
 
 With Docker Universal Control Plane you can deploy your apps from the CLI,
 using Docker Compose. In this example we're going to deploy a WordPress

@@ -3,17 +3,11 @@ aliases:
 - /docker-cloud/getting-started/intermediate/installing-cli/
 - /docker-cloud/getting-started/installing-cli/
 - /docker-cloud/tutorials/installing-cli/
-description: Using the Docker Cloud CLI on Linux, Windows, and macOS, installing,
-  updating, uninstall
+description: Using the Docker Cloud CLI on Linux, Windows, and macOS, installing, updating, uninstall
 keywords:
 - cloud, command-line, CLI
-menu:
-  main:
-    parent: docker-cloud
 title: The Docker Cloud CLI
 ---
-
-# The Docker Cloud CLI
 
 Docker Cloud maintains a Command Line Interface (CLI) tool that you can use
 to interact with the service. We highly recommend installing the CLI, as it will

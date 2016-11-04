@@ -2,14 +2,8 @@
 description: Pulls service images.
 keywords:
 - fig, composition, compose, docker, orchestration, cli,  pull
-menu:
-  main:
-    identifier: pull.compose
-    parent: smn_compose_cli
-title: pull
+title: docker-compose pull
 ---
-
-# pull
 
 ```
 Usage: pull [options] [SERVICE...]

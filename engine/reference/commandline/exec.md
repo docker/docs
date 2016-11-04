@@ -4,13 +4,8 @@ aliases:
 description: The exec command description and usage
 keywords:
 - command, container, run, execute
-menu:
-  main:
-    parent: smn_cli
-title: exec
+title: docker exec
 ---
-
-# exec
 
 ```markdown
 Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]

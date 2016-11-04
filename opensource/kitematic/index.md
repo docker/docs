@@ -2,15 +2,9 @@
 description: Introduces Kitematic contribute topics and tour
 keywords:
 - Kitematic, open source, contribute, contributor, tour, issue, review
-menu:
-  main:
-    identifier: smn_kitematic_contrib
-    parent: mn_oss_contrib
-    weight: 1
 title: Contribute to Kitematic
 ---
 
-# Contribute to Kitematic
 * [Get started](get_started.md)
 * [Find an issue on GitHub](find_issue.md)
 * [Set up for Kitematic development](set_up_dev.md)

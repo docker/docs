@@ -4,13 +4,8 @@ aliases:
 description: Try Swarm at scale
 keywords:
 - docker, swarm, scale, voting, application,  certificates
-menu:
-  main:
-    parent: scale_swarm
 title: Troubleshoot the application
 ---
-
-# Troubleshoot the application
 
 It's a fact of life that things fail. With this in mind, it's important to
 understand what happens when failures occur and how to mitigate them. The

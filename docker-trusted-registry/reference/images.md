@@ -1,15 +1,9 @@
 ---
-menu:
-  main:
-    description: Docker Trusted Registry images command reference.
-    identifier: dtr_reference_images
-    keywords:
-    - docker, registry, reference, images
-    parent: dtr_menu_reference
-title: images
+description: Docker Trusted Registry images command reference.
+keywords:
+- docker, registry, reference, images
+title: docker/dtr images
 ---
-
-# docker/dtr images
 
 Lists all the images necessary to install DTR
 
@@ -21,6 +15,5 @@ docker run -it --rm docker/dtr \
 ```
 
 ## Description
-
 
 This command lists all the images necessary to install DTR.

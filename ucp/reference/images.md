@@ -2,14 +2,8 @@
 description: Verify the UCP images on this Docker Engine.
 keywords:
 - images, ucp, images
-menu:
-  main:
-    identifier: ucp_ref_images
-    parent: ucp_ref
-title: images
+title: docker/ucp images
 ---
-
-# docker/ucp images
 
 Verify the UCP images on this Docker Engine.
 

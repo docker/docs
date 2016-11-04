@@ -3,13 +3,10 @@ description: Resizing a Boot2Docker volume in VirtualBox with GParted
 published: false
 keywords:
 - boot2docker, volume,  virtualbox
-menu:
-  main:
-    parent: smn_win_osx
-title: "Resizing a Boot2Docker volume\t"
+title: Resize a Boot2Docker volume
 ---
 
-# Getting “no space left on device” errors with Boot2Docker?
+# Getting "no space left on device" errors with Boot2Docker?
 
 If you're using Boot2Docker with a large number of images, or the images you're
 working with are very large, your pulls might start failing with "no space left

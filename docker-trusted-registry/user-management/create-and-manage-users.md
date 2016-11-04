@@ -2,15 +2,8 @@
 description: Learn how to manage user permissions in Docker Trusted Registry.
 keywords:
 - docker, registry, security, permissions, users
-menu:
-  main:
-    identifier: dtr-create-users
-    parent: dtr_menu_user_management
-    weight: 10
 title: Create and manage users
 ---
-
-# Create and manage users
 
 When using the Docker Datacenter built-in authentication, you can create users
 to grant them fine-grained permissions.

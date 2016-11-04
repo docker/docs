@@ -2,15 +2,8 @@
 description: Basic workflow for Docker contributions
 keywords:
 - contribute, pull request, review, workflow, beginner, squash,  commit
-menu:
-  main:
-    identifier: docker_pr
-    parent: smn_workflow
-    weight: 4
 title: Create a pull request (PR)
 ---
-
-# Create a pull request (PR)
 
 A pull request (PR) sends your changes to the Docker maintainers for review. You
 create a pull request on GitHub. A pull request "pulls" changes from your forked

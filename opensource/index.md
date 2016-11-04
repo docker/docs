@@ -2,14 +2,8 @@
 description: Overview of contributing
 keywords:
 - open, source, contributing, overview
-menu:
-  main:
-    identifier: mn_oss_contrib
-    weight: 8
 title: Open Source at Docker
 ---
-
-# Open Source at Docker
 
 Contributing to the Docker project or to any open source project can be a
 rewarding experience. You help yourself and you help the projects you work on.

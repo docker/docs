@@ -2,8 +2,6 @@
 title: "Getting Started, Part 3: Stateful, Multi-container Applications"
 ---
 
-# Getting Started, Part 3: Stateful, Multi-container Applications
-
 In [Getting Started, Part 2: Creating and Building Your App](part2.md), we
 wrote, built, ran, and shared our first Dockerized app, which all fit in a
 single container.

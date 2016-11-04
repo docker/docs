@@ -5,13 +5,8 @@ aliases:
 description: Link your Amazon Web Services account
 keywords:
 - AWS, Cloud, link
-menu:
-  main:
-    parent: infrastructure
-title: Link to Amazon Web Services hosts
+title: Link an Amazon Web Services account
 ---
-
-# Link your Amazon Web Services account
 
 You can create a role with AWS IAM (Identity and Access Management) so that Docker Cloud can provision and manage **node clusters** and **nodes** on your behalf.
 

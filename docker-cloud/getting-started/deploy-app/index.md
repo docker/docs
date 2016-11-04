@@ -5,15 +5,8 @@ aliases:
 description: Go or Python and Docker Cloud
 keywords:
 - Python, Go, Docker, Cloud, application
-menu:
-  main:
-    identifier: deploy-app
-    parent: getting-started
-    weight: 50
 title: Deploy an application
 ---
-
-# Deploy an application
 
 * [Introduction to Deploying an app to Docker Cloud](1_introduction.md)
 * [Set up your environment](2_set_up.md)

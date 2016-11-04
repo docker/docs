@@ -4,13 +4,8 @@ aliases:
 description: The network connect command description and usage
 keywords:
 - network, connect, user-defined
-menu:
-  main:
-    parent: smn_cli
-title: network connect
+title: docker network connect
 ---
-
-# network connect
 
 ```markdown
 Usage:  docker network connect [OPTIONS] NETWORK CONTAINER

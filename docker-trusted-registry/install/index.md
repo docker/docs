@@ -7,15 +7,8 @@ aliases:
 description: Learn how to install Docker Trusted Registry for production.
 keywords:
 - docker, dtr, registry, install
-menu:
-  main:
-    identifier: dtr_install_production
-    parent: dtr-menu-install
-    weight: 20
 title: Install Docker Trusted Registry
 ---
-
-# Install Docker Trusted Registry
 
 Docker Trusted Registry (DTR) is a containerized application that runs on a
 Docker Universal Control Plane (UCP) cluster. It can be installed on-premises
@@ -33,7 +26,6 @@ infrastructure has all the [requirements DTR needs to run](system-requirements.m
 Since DTR requires a Docker Universal Control Plane (UCP) cluster
 to run, you need to install UCP first.
 [Learn how to install UCP](/ucp/installation/install-production/). Make sure that the node you install DTR on is already joined to the UCP cluster.
-
 
 ## Step 3. Install DTR
 
@@ -110,10 +102,10 @@ push and pull images to it.
 
 This step is optional.
 
-To set up DTR for [high availability](../high-availability/index.md),
-you can add more replicas to your DTR cluster. Adding more replicas allows you
-to load-balance requests across all replicas, and keep DTR working if a
-replica fails. Each replica must be located on a node already joined to the UCP cluster.
+To set up DTR for [high availability](../high-availability/index.md), you can
+add more replicas to your DTR cluster. Adding more replicas allows you to
+load-balance requests across all replicas, and keep DTR working if a replica
+fails. Each replica must be located on a node already joined to the UCP cluster.
 
 To add replicas to a DTR cluster, use the `docker/dtr join` command. To add
 replicas:

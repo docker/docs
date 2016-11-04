@@ -2,14 +2,8 @@
 description: Automated builds
 keywords:
 - automated, build, images
-menu:
-  main:
-    parent: builds
-    weight: -40
 title: Advanced options for Autobuild and Autotest
 ---
-
-# Advanced options for Autobuild and Autotest
 
 The following options allow you to customize your automated build and automated test processes.
 

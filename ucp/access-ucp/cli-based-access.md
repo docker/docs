@@ -2,15 +2,8 @@
 description: Learn how to access Docker Universal Control Plane from the CLI.
 keywords:
 - docker, ucp, cli, administration
-menu:
-  main:
-    identifier: ucp_cli_access
-    parent: mn_ucp_access
-    weight: 10
 title: CLI-based access
 ---
-
-# CLI-based access
 
 Docker UCP secures your cluster with role-based access control, so that only
 authorized users can perform changes to the cluster.

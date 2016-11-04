@@ -1,10 +1,8 @@
 ---
 title: Evaluate DDC in a sandbox deployment
 description: Learn how to push Docker images to your private registry and deploy them to your cluster.
-keywords: "Docker Datacenter, registry, orchestration"
+keywords: Docker Datacenter, registry, orchestration
 ---
-
-# Evaluate DDC in a sandbox deployment
 
 This tutorial assumes that you have
 [installed and configured](install-sandbox.md) a two-node Docker Datacenter

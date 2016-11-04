@@ -4,14 +4,8 @@ aliases:
 description: Compose file reference
 keywords:
 - fig, composition, compose, docker
-menu:
-  main:
-    parent: workw_compose
-    weight: 70
-title: Compose File Reference
+title: Compose file reference
 ---
-
-# Compose file reference
 
 The Compose file is a [YAML](http://yaml.org/) file defining
 [services](compose-file.md#service-configuration-reference),

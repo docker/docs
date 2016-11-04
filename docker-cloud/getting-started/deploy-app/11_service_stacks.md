@@ -4,14 +4,8 @@ aliases:
 description: Stackfiles for your service
 keywords:
 - Python, service, stack
-menu:
-  main:
-    parent: deploy-app
-    weight: -8
 title: Stackfiles for your service
 ---
-
-# Stackfiles for your service
 
 A stack is a logical grouping of related services that are usually deployed together and require each other to work as intended. If you are familiar with *fig* or *Docker Compose* then you should feel right at home with **stacks**. You can learn more about stacks [here](../../apps/stacks.md).
 

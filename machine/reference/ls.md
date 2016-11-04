@@ -2,13 +2,8 @@
 description: List machines
 keywords:
 - machine, ls, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: ls
+title: docker-machine ls
 ---
-
-# ls
 
 ```none
 Usage: docker-machine ls [OPTIONS] [arg...]

@@ -2,15 +2,8 @@
 description: Install Machine command-line completion
 keywords:
 - machine, docker, orchestration, cli,  reference
-menu:
-  main:
-    identifier: machine_completion
-    parent: workw_machine
-    weight: 99
-title: Command-line Completion
+title: Command-line completion
 ---
-
-# Command-line Completion
 
 Docker Machine comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.

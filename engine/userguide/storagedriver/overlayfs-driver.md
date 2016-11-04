@@ -1,14 +1,9 @@
 ---
 description: Learn how to optimize your use of OverlayFS driver.
 keywords:
-- 'container, storage, driver, OverlayFS '
-menu:
-  main:
-    parent: engine_driver
-title: OverlayFS storage in practice
+- container, storage, driver, OverlayFS
+title: Docker and OverlayFS in practice
 ---
-
-# Docker and OverlayFS in practice
 
 OverlayFS is a modern *union filesystem* that is similar to AUFS. In comparison
  to AUFS, OverlayFS:
@@ -17,9 +12,9 @@ OverlayFS is a modern *union filesystem* that is similar to AUFS. In comparison
 * has been in the mainline Linux kernel since version 3.18
 * is potentially faster
 
-As a result, OverlayFS is rapidly gaining popularity in the Docker community 
-and is seen by many as a natural successor to AUFS. As promising as OverlayFS 
-is, it is still relatively young. Therefore caution should be taken before 
+As a result, OverlayFS is rapidly gaining popularity in the Docker community
+and is seen by many as a natural successor to AUFS. As promising as OverlayFS
+is, it is still relatively young. Therefore caution should be taken before
 using it in production Docker environments.
 
 Docker's `overlay` storage driver leverages several OverlayFS features to build
@@ -32,32 +27,32 @@ driver is only compatible with Linux kernel 4.0 and later.
 For comparison between `overlay` vs `overlay2`, please also refer to [Select a
 storage driver](selectadriver.md#overlay-vs-overlay2).
 
->**Note**: Since it was merged into the mainline kernel, the OverlayFS *kernel 
+>**Note**: Since it was merged into the mainline kernel, the OverlayFS *kernel
 >module* was renamed from "overlayfs" to "overlay". As a result you may see the
-> two terms used interchangeably in some documentation. However, this document 
+> two terms used interchangeably in some documentation. However, this document
 > uses  "OverlayFS" to refer to the overall filesystem, and `overlay`/`overlay2`
 > to refer to Docker's storage-drivers.
 
 ## Image layering and sharing with OverlayFS (`overlay`)
 
-OverlayFS takes two directories on a single Linux host, layers one on top of 
-the other, and provides a single unified view. These directories are often 
-referred to as *layers* and the technology used to layer them is known as a 
+OverlayFS takes two directories on a single Linux host, layers one on top of
+the other, and provides a single unified view. These directories are often
+referred to as *layers* and the technology used to layer them is known as a
 *union mount*. The OverlayFS terminology is "lowerdir" for the bottom layer and
- "upperdir" for the top layer. The unified view is exposed through its own 
+ "upperdir" for the top layer. The unified view is exposed through its own
 directory called "merged".
 
-The diagram below shows how a Docker image and a Docker container are layered. 
-The image layer is the "lowerdir" and the container layer is the "upperdir". 
-The unified view is exposed through a directory called "merged" which is 
+The diagram below shows how a Docker image and a Docker container are layered.
+The image layer is the "lowerdir" and the container layer is the "upperdir".
+The unified view is exposed through a directory called "merged" which is
 effectively the containers mount point. The diagram shows how Docker constructs
  map to OverlayFS constructs.
 
 ![](images/overlay_constructs.jpg)
 
 Notice how the image layer and container layer can contain the same files. When
- this happens, the files in the container layer ("upperdir") are dominant and 
-obscure the existence of the same files in the image layer ("lowerdir"). The 
+ this happens, the files in the container layer ("upperdir") are dominant and
+obscure the existence of the same files in the image layer ("lowerdir"). The
 container mount ("merged") presents the unified view.
 
 The `overlay` driver only works with two layers. This means that multi-layered
@@ -68,13 +63,13 @@ layers. As of Docker 1.10, image layer IDs no longer correspond to directory
 names in `/var/lib/docker/`
 
 To create a container, the `overlay` driver combines the directory representing
- the image's top layer plus a new directory for the container. The image's top 
+ the image's top layer plus a new directory for the container. The image's top
 layer is the "lowerdir" in the overlay and read-only. The new directory for the
  container is the "upperdir" and is writable.
 
 ### Example: Image and container on-disk constructs (`overlay`)
 
-The following `docker pull` command shows a Docker host with downloading a 
+The following `docker pull` command shows a Docker host with downloading a
 Docker image comprising five layers.
 
     $ sudo docker pull ubuntu
@@ -90,12 +85,12 @@ Docker image comprising five layers.
     Digest: sha256:46fb5d001b88ad904c5c732b086b596b92cfb4a4840a3abd0e35dbb6870585e4
     Status: Downloaded newer image for ubuntu:latest
 
-Each image layer has its own directory under `/var/lib/docker/overlay/`. This 
-is where the contents of each image layer are stored. 
+Each image layer has its own directory under `/var/lib/docker/overlay/`. This
+is where the contents of each image layer are stored.
 
-The output of the command below shows the five directories that store the 
-contents of each image layer just pulled. However, as can be seen, the image 
-layer IDs do not match the directory names in `/var/lib/docker/overlay`. This 
+The output of the command below shows the five directories that store the
+contents of each image layer just pulled. However, as can be seen, the image
+layer IDs do not match the directory names in `/var/lib/docker/overlay`. This
 is normal behavior in Docker 1.10 and later.
 
     $ ls -l /var/lib/docker/overlay/
@@ -107,8 +102,8 @@ is normal behavior in Docker 1.10 and later.
     drwx------ 3 root root 4096 Jun 20 16:11 ad0fe55125ebf599da124da175174a4b8c1878afe6907bf7c78570341f308461
     drwx------ 3 root root 4096 Jun 20 16:11 edab9b5e5bf73f2997524eebeac1de4cf9c8b904fa8ad3ec43b3504196aa3801
 
-The image layer directories contain the files unique to that layer as well as 
-hard links to the data that is shared with lower layers. This allows for 
+The image layer directories contain the files unique to that layer as well as
+hard links to the data that is shared with lower layers. This allows for
 efficient use of disk space.
 
     $ ls -i /var/lib/docker/overlay/38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8/root/bin/ls
@@ -119,9 +114,9 @@ efficient use of disk space.
 
     19793696 /var/lib/docker/overlay/55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358/root/bin/ls
 
-Containers also exist on-disk in the Docker host's filesystem under 
-`/var/lib/docker/overlay/`. If you inspect the directory relating to a running 
-container using the `ls -l` command, you find the following file and 
+Containers also exist on-disk in the Docker host's filesystem under
+`/var/lib/docker/overlay/`. If you inspect the directory relating to a running
+container using the `ls -l` command, you find the following file and
 directories.
 
     $ ls -l /var/lib/docker/overlay/<directory-of-running-container>
@@ -132,26 +127,26 @@ directories.
     drwxr-xr-x 4 root root 4096 Jun 20 16:39 upper
     drwx------ 3 root root 4096 Jun 20 16:39 work
 
-These four filesystem objects are all artifacts of OverlayFS. The "lower-id" 
-file contains the ID of the top layer of the image the container is based on. 
+These four filesystem objects are all artifacts of OverlayFS. The "lower-id"
+file contains the ID of the top layer of the image the container is based on.
 This is used by OverlayFS as the "lowerdir".
 
     $ cat /var/lib/docker/overlay/ec444863a55a9f1ca2df72223d459c5d940a721b2288ff86a3f27be28b53be6c/lower-id
 
     55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358
 
-The "upper" directory is the containers read-write layer. Any changes made to 
+The "upper" directory is the containers read-write layer. Any changes made to
 the container are written to this directory.
 
 The "merged" directory is effectively the containers mount point. This is where
- the unified view of the image ("lowerdir") and container ("upperdir") is 
+ the unified view of the image ("lowerdir") and container ("upperdir") is
 exposed. Any changes written to the container are immediately reflected in this
  directory.
 
-The "work" directory is required for OverlayFS to function. It is used for 
+The "work" directory is required for OverlayFS to function. It is used for
 things such as *copy_up* operations.
 
-You can verify all of these constructs from the output of the `mount` command. 
+You can verify all of these constructs from the output of the `mount` command.
 (Ellipses and line breaks are used in the output below to enhance readability.)
 
     $ mount | grep overlay
@@ -252,75 +247,75 @@ The result of `mount` is as follows:
 
 ## Container reads and writes with overlay
 
-Consider three scenarios where a container opens a file for read access with 
+Consider three scenarios where a container opens a file for read access with
 overlay.
 
-- **The file does not exist in the container layer**. If a container opens a 
-file for read access and the file does not already exist in the container 
-("upperdir") it is read from the image ("lowerdir"). This should incur very 
+- **The file does not exist in the container layer**. If a container opens a
+file for read access and the file does not already exist in the container
+("upperdir") it is read from the image ("lowerdir"). This should incur very
 little performance overhead.
 
-- **The file only exists in the container layer**. If a container opens a file 
-for read access and the file exists in the container ("upperdir") and not in 
+- **The file only exists in the container layer**. If a container opens a file
+for read access and the file exists in the container ("upperdir") and not in
 the image ("lowerdir"), it is read directly from the container.
 
-- **The file exists in the container layer and the image layer**. If a 
-container opens a file for read access and the file exists in the image layer 
-and the container layer, the file's version in the container layer is read. 
-This is because files in the container layer ("upperdir") obscure files with 
+- **The file exists in the container layer and the image layer**. If a
+container opens a file for read access and the file exists in the image layer
+and the container layer, the file's version in the container layer is read.
+This is because files in the container layer ("upperdir") obscure files with
 the same name in the image layer ("lowerdir").
 
 Consider some scenarios where files in a container are modified.
 
-- **Writing to a file for the first time**. The first time a container writes 
-to an existing file, that file does not exist in the container ("upperdir"). 
+- **Writing to a file for the first time**. The first time a container writes
+to an existing file, that file does not exist in the container ("upperdir").
 The `overlay`/`overlay2` driver performs a *copy_up* operation to copy the file
 from the image ("lowerdir") to the container ("upperdir"). The container then
 writes the changes to the new copy of the file in the container layer.
 
-    However, OverlayFS works at the file level not the block level. This means 
-that all OverlayFS copy-up operations copy entire files, even if the file is 
-very large and only a small part of it is being modified. This can have a 
-noticeable impact on container write performance. However, two things are 
+    However, OverlayFS works at the file level not the block level. This means
+that all OverlayFS copy-up operations copy entire files, even if the file is
+very large and only a small part of it is being modified. This can have a
+noticeable impact on container write performance. However, two things are
 worth noting:
 
-    * The copy_up operation only occurs the first time any given file is 
+    * The copy_up operation only occurs the first time any given file is
 written to. Subsequent writes to the same file will operate against the copy of
  the file already copied up to the container.
 
-    * OverlayFS only works with two layers. This means that performance should 
-be better than AUFS which can suffer noticeable latencies when searching for 
+    * OverlayFS only works with two layers. This means that performance should
+be better than AUFS which can suffer noticeable latencies when searching for
 files in images with many layers.
 
 - **Deleting files and directories**. When files are deleted within a container
- a *whiteout* file is created in the containers "upperdir". The version of the 
+ a *whiteout* file is created in the containers "upperdir". The version of the
 file in the image layer ("lowerdir") is not deleted. However, the whiteout file
  in the container obscures it.
 
-    Deleting a directory in a container results in *opaque directory* being 
-created in the "upperdir". This has the same effect as a whiteout file and 
+    Deleting a directory in a container results in *opaque directory* being
+created in the "upperdir". This has the same effect as a whiteout file and
 effectively masks the existence of the directory in the image's "lowerdir".
 
-- **Renaming directories**. Calling `rename(2)` for a directory is allowed only 
-when both of the source and the destination path are on the top layer. 
+- **Renaming directories**. Calling `rename(2)` for a directory is allowed only
+when both of the source and the destination path are on the top layer.
 Otherwise, it returns `EXDEV` ("cross-device link not permitted").
 
-So your application has to be designed so that it can handle `EXDEV` and fall 
+So your application has to be designed so that it can handle `EXDEV` and fall
 back to a "copy and unlink" strategy.
 
 ## Configure Docker with the `overlay`/`overlay2` storage driver
 
-To configure Docker to use the `overlay` storage driver your Docker host must be 
-running version 3.18 of the Linux kernel (preferably newer) with the overlay 
+To configure Docker to use the `overlay` storage driver your Docker host must be
+running version 3.18 of the Linux kernel (preferably newer) with the overlay
 kernel module loaded. For the `overlay2` driver, the version of your kernel must
 be 4.0 or newer. OverlayFS can operate on top of most supported Linux filesystems.
 However, ext4 is currently recommended for use in production environments.
 
-The following procedure shows you how to configure your Docker host to use 
+The following procedure shows you how to configure your Docker host to use
 OverlayFS. The procedure assumes that the Docker daemon is in a stopped state.
 
-> **Caution:** If you have already run the Docker daemon on your Docker host 
-> and have images you want to keep, `push` them Docker Hub or your private 
+> **Caution:** If you have already run the Docker daemon on your Docker host
+> and have images you want to keep, `push` them Docker Hub or your private
 > Docker Trusted Registry before attempting this procedure.
 
 1. If it is running, stop the Docker `daemon`.
@@ -361,8 +356,8 @@ OverlayFS. The procedure assumes that the Docker daemon is in a stopped state.
          Backing Filesystem: extfs
         <output truncated>
 
-    Notice that the *Backing filesystem* in the output above is showing as 
-`extfs`. Multiple backing filesystems are supported but `extfs` (ext4) is 
+    Notice that the *Backing filesystem* in the output above is showing as
+`extfs`. Multiple backing filesystems are supported but `extfs` (ext4) is
 recommended for production use cases.
 
 Your Docker host is now using the `overlay`/`overlay2` storage driver. If you
@@ -383,55 +378,55 @@ containers accessing the same file can share a single page cache entry (or
 entries). This makes the `overlay`/`overlay2` drivers efficient with memory and
 a good option for PaaS and other high density use cases.
 
-- **copy_up**. As with AUFS, OverlayFS has to perform copy-up operations any 
-time a container writes to a file for the first time. This can insert latency 
-into the write operation &mdash; especially if the file being copied up is 
+- **copy_up**. As with AUFS, OverlayFS has to perform copy-up operations any
+time a container writes to a file for the first time. This can insert latency
+into the write operation &mdash; especially if the file being copied up is
 large. However, once the file has been copied up, all subsequent writes to that
  file occur without the need for further copy-up operations.
 
-    The OverlayFS copy_up operation should be faster than the same operation 
-with AUFS. This is because AUFS supports more layers than OverlayFS and it is 
+    The OverlayFS copy_up operation should be faster than the same operation
+with AUFS. This is because AUFS supports more layers than OverlayFS and it is
 possible to incur far larger latencies if searching through many AUFS layers.
 
-- **Inode limits**. Use of the `overlay` storage driver can cause excessive 
+- **Inode limits**. Use of the `overlay` storage driver can cause excessive
 inode consumption. This is especially so as the number of images and containers
  on the Docker host grows. A Docker host with a large number of images and lots
  of started and stopped containers can quickly run out of inodes. The `overlay2`
  does not have such an issue.
 
-Unfortunately you can only specify the number of inodes in a filesystem at the 
-time of creation. For this reason, you may wish to consider putting 
-`/var/lib/docker` on a separate device with its own filesystem, or manually 
+Unfortunately you can only specify the number of inodes in a filesystem at the
+time of creation. For this reason, you may wish to consider putting
+`/var/lib/docker` on a separate device with its own filesystem, or manually
 specifying the number of inodes when creating the filesystem.
 
 The following generic performance best practices also apply to OverlayFS.
 
-- **Solid State Devices (SSD)**. For best performance it is always a good idea 
+- **Solid State Devices (SSD)**. For best performance it is always a good idea
 to use fast storage media such as solid state devices (SSD).
 
-- **Use Data Volumes**. Data volumes provide the best and most predictable 
-performance. This is because they bypass the storage driver and do not incur 
-any of the potential overheads introduced by thin provisioning and 
-copy-on-write. For this reason, you should place heavy write workloads on data 
+- **Use Data Volumes**. Data volumes provide the best and most predictable
+performance. This is because they bypass the storage driver and do not incur
+any of the potential overheads introduced by thin provisioning and
+copy-on-write. For this reason, you should place heavy write workloads on data
 volumes.
 
 ## OverlayFS compatibility
 To summarize the OverlayFS's aspect which is incompatible with other
 filesystems:
 
-- **open(2)**. OverlayFS only implements a subset of the POSIX standards. 
-This can result in certain OverlayFS operations breaking POSIX standards. One 
-such operation is the *copy-up* operation. Suppose that  your application calls 
-`fd1=open("foo", O_RDONLY)` and then `fd2=open("foo", O_RDWR)`. In this case, 
-your application expects `fd1` and `fd2` to refer to the same file. However, due 
-to a copy-up operation that occurs after the first calling to `open(2)`, the 
+- **open(2)**. OverlayFS only implements a subset of the POSIX standards.
+This can result in certain OverlayFS operations breaking POSIX standards. One
+such operation is the *copy-up* operation. Suppose that  your application calls
+`fd1=open("foo", O_RDONLY)` and then `fd2=open("foo", O_RDWR)`. In this case,
+your application expects `fd1` and `fd2` to refer to the same file. However, due
+to a copy-up operation that occurs after the first calling to `open(2)`, the
 descriptors refer to different files.
 
-`yum` is known to be affected unless the `yum-plugin-ovl` package is installed. 
-If the `yum-plugin-ovl` package is not available in your distribution (e.g. 
-RHEL/CentOS prior to 6.8 or 7.2), you may need to run `touch /var/lib/rpm/*` 
+`yum` is known to be affected unless the `yum-plugin-ovl` package is installed.
+If the `yum-plugin-ovl` package is not available in your distribution (e.g.
+RHEL/CentOS prior to 6.8 or 7.2), you may need to run `touch /var/lib/rpm/*`
 before running `yum install`.
 
-- **rename(2)**. OverlayFS does not fully support the `rename(2)` system call. 
-Your application needs to detect its failure and fall back to a "copy and 
+- **rename(2)**. OverlayFS does not fully support the `rename(2)` system call.
+Your application needs to detect its failure and fall back to a "copy and
 unlink" strategy.

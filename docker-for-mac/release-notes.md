@@ -4,15 +4,8 @@ aliases:
 description: Change log / release notes per release
 keywords:
 - pinata, alpha, tutorial
-menu:
-  main:
-    identifier: docker-mac-relnotes
-    parent: pinata_mac_menu
-    weight: 10
-title: Release Notes
+title: Docker for Mac release notes
 ---
-
-# Docker for Mac Release Notes
 
 Here are the main improvements and issues per release, starting with the current release. The documentation is always updated for each release.
 
@@ -857,7 +850,7 @@ lead to `Docker.app` not starting on reboot
 
 - VPN/Hostnet: In VPN mode, the `-p` option needs to be explicitly of the form
 `-p <host port>:<container port>`. `-p <port>` and `-P` will not
-work yet.    
+work yet.
 
 **Bug fixes and minor changes**
 

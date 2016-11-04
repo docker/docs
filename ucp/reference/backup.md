@@ -2,14 +2,8 @@
 description: Stream a tar file to stdout containing all UCP data volumes.
 keywords:
 - docker, ucp, backup, restore
-menu:
-  main:
-    identifier: ucp_ref_backup
-    parent: ucp_ref
-title: backup
+title: docker/ucp backup
 ---
-
-# docker/ucp backup
 
 Stream a tar file to stdout containing all UCP data volumes.
 

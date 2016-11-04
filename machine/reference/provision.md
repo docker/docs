@@ -2,13 +2,8 @@
 description: Re-run provisioning on a created machine.
 keywords:
 - machine, provision, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: provision
+title: docker-machine provision
 ---
-
-# provision
 
 Re-run provisioning on a created machine.
 

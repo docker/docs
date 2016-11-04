@@ -4,15 +4,8 @@ aliases:
 description: Learn how to troubleshoot your DTR installation.
 keywords:
 - docker, registry, monitor, troubleshoot
-menu:
-  main:
-    identifier: dtr_troubleshoot
-    parent: dtr_menu_monitor_troubleshoot
-    weight: 10
-title: Troubleshoot DTR
+title: Troubleshoot Docker Trusted Registry
 ---
-
-# Troubleshoot DTR
 
 ## Overlay networking
 
@@ -25,23 +18,24 @@ docker run -it --rm --net dtr-ol --name overlay-test1 --entrypoint sh docker/dtr
 docker run -it --rm --net dtr-ol --name overlay-test2 --entrypoint ping docker/dtr -c 3 overlay-test1
 ```
 
-You can create new new overlay network for this test with `docker network create -d overaly network-name`.
-You can also use any images that contain `sh` and `ping` for this test.
+You can create new new overlay network for this test with `docker network create
+-d overaly network-name`. You can also use any images that contain `sh` and
+`ping` for this test.
 
 If the second command succeeds, overlay networking is working.
 
 ## DTR doesn't come up after a Docker restart
 
-This is a known issue with Docker restart policies when DTR is running on the same
-machine as a UCP controller. If this happens, you can simply restart the DTR replica
-from the UCP UI under "Applications". The best workaround right now is to not run
-DTR on the same node as a UCP controller.
+This is a known issue with Docker restart policies when DTR is running on the
+same machine as a UCP controller. If this happens, you can simply restart the
+DTR replica from the UCP UI under "Applications". The best workaround right now
+is to not run DTR on the same node as a UCP controller.
 
 ## Etcd refuses to start after a Docker restart
 
-If you see the following log message in etcd's logs after a DTR restart it means that
-your DTR replicas are on machines that don't have their clocks synchronized. Etcd requires
-synchronized clocks to function correctly.
+If you see the following log message in etcd's logs after a DTR restart it means
+that your DTR replicas are on machines that don't have their clocks
+synchronized. Etcd requires synchronized clocks to function correctly.
 
 ```
 2016-04-27 17:56:34.086748 W | rafthttp: the clock difference against peer aa4fdaf4c562342d is too high [8.484795885s > 1s]

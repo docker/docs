@@ -4,13 +4,8 @@ aliases:
 description: Use triggers
 keywords:
 - API, triggers, endpoints
-menu:
-  main:
-    parent: apps
 title: Use triggers
 ---
-
-# Use triggers
 
 **Triggers** are API endpoints that redeploy or scale a specific service
 whenever a `POST` HTTP request is sent to them. You can create one or more

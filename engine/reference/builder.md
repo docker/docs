@@ -1,18 +1,11 @@
 ---
 aliases:
   - /reference/builder/
-description: Dockerfiles use a simple DSL which allows you to automate the steps you
-  would normally manually take to create an image.
+description: Dockerfiles use a simple DSL which allows you to automate the steps you would normally manually take to create an image.
 keywords:
 - builder, docker, Dockerfile, automation,  image creation
-menu:
-  main:
-    parent: engine_ref
-    weight: -90
 title: Dockerfile reference
 ---
-
-# Dockerfile reference
 
 Docker can build images automatically by reading the instructions from a
 `Dockerfile`. A `Dockerfile` is a text document that contains all the commands a

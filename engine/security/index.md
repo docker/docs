@@ -2,14 +2,8 @@
 description: Sec
 keywords:
 - seccomp, security, docker, documentation
-menu:
-  main:
-    identifier: smn_secure_docker
-    parent: engine_use
 title: Secure Engine
 ---
-
-# Secure Engine
 
 This section discusses the security features you can configure and use within your Docker Engine installation.
 

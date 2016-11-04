@@ -4,10 +4,8 @@ aliases:
 description: Deprecated Features.
 keywords:
 - docker, documentation, about, technology, deprecate
-title: Deprecated Engine Features
+title: Deprecated Engine features
 ---
-
-# Deprecated Engine Features
 
 The following list of features are deprecated in Engine.
 To learn more about Docker Engine's deprecation policy,
@@ -178,7 +176,7 @@ The single-dash (`-help`) was removed, in favor of the double-dash `--help`
 
 ```bash
 $ docker -help
-  
+
   docker [COMMAND] -help
 ```
 

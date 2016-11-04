@@ -4,13 +4,8 @@ aliases:
 description: The login command description and usage
 keywords:
 - registry, login, image
-menu:
-  main:
-    parent: smn_cli
-title: login
+title: docker login
 ---
-
-# login
 
 ```markdown
 Usage:  docker login [OPTIONS] [SERVER]

@@ -2,14 +2,8 @@
 description: Receive real time events from containers.
 keywords:
 - fig, composition, compose, docker, orchestration, cli, events
-menu:
-  main:
-    identifier: events.compose
-    parent: smn_compose_cli
-title: events
+title: docker-compose events
 ---
-
-# events
 
 ```
 Usage: events [options] [SERVICE...]

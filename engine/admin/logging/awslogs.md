@@ -4,13 +4,8 @@ aliases:
 description: Describes how to use the Amazon CloudWatch Logs logging driver.
 keywords:
 - AWS, Amazon, CloudWatch, logging, driver
-menu:
-  main:
-    parent: smn_logging
 title: Amazon CloudWatch Logs logging driver
 ---
-
-# Amazon CloudWatch Logs logging driver
 
 The `awslogs` logging driver sends container logs to
 [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).

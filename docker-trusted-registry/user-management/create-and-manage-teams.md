@@ -1,17 +1,9 @@
 ---
-description: Learn how to manage teams to enforce fine-grain access control in Docker
-  Trusted Registry.
+description: Learn how to manage teams to enforce fine-grain access control in Docker Trusted Registry.
 keywords:
 - docker, registry, security, permissions, teams
-menu:
-  main:
-    identifier: dtr-create-teams
-    parent: dtr_menu_user_management
-    weight: 30
 title: Create and manage teams
 ---
-
-# Create and manage teams
 
 You can extend the user's default permissions by granting them fine-grain
 permissions over image repositories. You do this by adding the user to a team.

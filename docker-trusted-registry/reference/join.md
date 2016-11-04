@@ -2,14 +2,8 @@
 description: Docker Trusted Registry join command reference.
 keywords:
 - docker, registry, reference, join
-menu:
-  main:
-    identifier: dtr_reference_join
-    parent: dtr_menu_reference
-title: join
+title: docker/dtr join
 ---
-
-# docker/dtr join
 
 Add a new replica to an existing DTR cluster
 

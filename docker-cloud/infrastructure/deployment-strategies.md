@@ -4,13 +4,8 @@ aliases:
 description: Schedule a deployment
 keywords:
 - schedule, deployment, container
-menu:
-  main:
-    parent: infrastructure
 title: Container distribution strategies
 ---
-
-# Container distribution strategies
 
 Docker Cloud can use different distribution strategies when deploying containers
 to more than one node. You can use different strategies to change how your

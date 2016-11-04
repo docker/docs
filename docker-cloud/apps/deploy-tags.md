@@ -4,13 +4,8 @@ aliases:
 description: Deployment tags
 keywords:
 - Deployment, tags, services
-menu:
-  main:
-    parent: apps
 title: Deployment tags
 ---
-
-# Deployment tags
 
 You can use **Deployment tags** to make sure certain services are deployed only
 to specific nodes. Tagged services only deploy to nodes that match **all** of

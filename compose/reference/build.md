@@ -1,15 +1,9 @@
 ---
-description: build
+description: docker-compose build
 keywords:
 - fig, composition, compose, docker, orchestration, cli,  build
-menu:
-  main:
-    identifier: build.compose
-    parent: smn_compose_cli
-title: build
+title: docker-compose build
 ---
-
-# build
 
 ```
 Usage: build [options] [SERVICE...]

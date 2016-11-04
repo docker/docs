@@ -1,15 +1,9 @@
 ---
-description: Declaring default environment variables in file
+description: Declare default environment variables in a file
 keywords:
 - fig, composition, compose, docker, orchestration, environment, env file
-menu:
-  main:
-    parent: workw_compose
-    weight: 10
-title: Environment file
+title: Declare default environment variables in file
 ---
-
-# Environment file
 
 Compose supports declaring default environment variables in an environment
 file named `.env` placed in the folder `docker-compose` command is executed from

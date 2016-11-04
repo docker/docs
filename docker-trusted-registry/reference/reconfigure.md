@@ -2,14 +2,8 @@
 description: Docker Trusted Registry reconfigure command reference.
 keywords:
 - docker, registry, reference, reconfigure
-menu:
-  main:
-    identifier: dtr_reference_reconfigure
-    parent: dtr_menu_reference
-title: reconfigure
+title: docker/dtr reconfigure
 ---
-
-# docker/dtr reconfigure
 
 Change DTR configurations
 

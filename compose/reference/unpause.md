@@ -2,14 +2,8 @@
 description: Unpauses paused containers for a service.
 keywords:
 - fig, composition, compose, docker, orchestration, cli, unpause
-menu:
-  main:
-    identifier: unpause.compose
-    parent: smn_compose_cli
-title: unpause
+title: docker-compose unpause
 ---
-
-# unpause
 
 ```
 Usage: unpause [SERVICE...]

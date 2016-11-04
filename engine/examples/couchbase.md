@@ -2,18 +2,22 @@
 description: Dockerizing a Couchbase service
 keywords:
 - docker, example, package installation, networking, couchbase
-title: Dockerizing a Couchbase service
+title: Dockerize a Couchbase service
 ---
 
-# Dockerizing a Couchbase service
+This example shows how to start a [Couchbase](http://couchbase.com) server using
+Docker Compose, configure it using its [REST
+API](http://developer.couchbase.com/documentation/server/4.0/rest-api/rest-endpoints-all.html),
+and query it.
 
-This example shows how to start a [Couchbase](http://couchbase.com) server using Docker Compose, configure it using its [REST API](http://developer.couchbase.com/documentation/server/4.0/rest-api/rest-endpoints-all.html), and query it.
-
-Couchbase is an open source, document-oriented NoSQL database for modern web, mobile, and IoT applications. It is designed for ease of development and Internet-scale performance.
+Couchbase is an open source, document-oriented NoSQL database for modern web,
+mobile, and IoT applications. It is designed for ease of development and
+Internet-scale performance.
 
 ## Start Couchbase server
 
-Couchbase Docker images are published at [Docker Hub](https://hub.docker.com/_/couchbase/).
+Couchbase Docker images are published at [Docker
+Hub](https://hub.docker.com/_/couchbase/).
 
 Start Couchbase server:
 
@@ -21,7 +25,9 @@ Start Couchbase server:
 $ docker run -d --name db -p 8091-8093:8091-8093 -p 11210:11210 couchbase
 ```
 
-The purpose of each port exposed is explained at [Couchbase Developer Portal - Network Configuration](http://developer.couchbase.com/documentation/server/4.1/install/install-ports.html).
+The purpose of each port exposed is explained at [Couchbase Developer Portal -
+Network
+Configuration](http://developer.couchbase.com/documentation/server/4.1/install/install-ports.html).
 
 Logs can be seen using the `docker logs` command:
 
@@ -37,21 +43,28 @@ Starting Couchbase Server -- Web UI available at http://<ip>:8091
 > Docker using Docker machine, you can obtain the IP address
 > of the Docker host using `docker-machine ip <MACHINE-NAME>`.
 
-The logs show that Couchbase console can be accessed at `http://192.168.99.100:8091`. The default username is `Administrator` and the password is `password`.
+The logs show that Couchbase console can be accessed at
+`http://192.168.99.100:8091`. The default username is `Administrator` and the
+password is `password`.
 
 ## Configure Couchbase Docker container
 
-By default, Couchbase server needs to be configured using the console before it can be used. This can be simplified by configuring it using the REST API.
+By default, Couchbase server needs to be configured using the console before it
+can be used. This can be simplified by configuring it using the REST API.
 
 ### Configure memory for Data and Index service
 
-Data, Query and Index are three different services that can be configured on a Couchbase instance. Each service has different operating needs. For example, Query is CPU intensive operation and so requires a faster processor. Index is disk heavy and so requires a faster solid state drive. Data needs to be read/written fast and so requires more memory.
+Data, Query and Index are three different services that can be configured on a
+Couchbase instance. Each service has different operating needs. For example,
+Query is CPU intensive operation and so requires a faster processor. Index is
+disk heavy and so requires a faster solid state drive. Data needs to be
+read/written fast and so requires more memory.
 
 Memory needs to be configured for Data and Index service only.
 
 ```bash
 $ curl -v -X POST http://192.168.99.100:8091/pools/default -d memoryQuota=300 -d indexMemoryQuota=300
- 
+
 * Hostname was NOT found in DNS cache
 *   Trying 192.168.99.100...
 * Connected to 192.168.99.100 (192.168.99.100) port 8091 (#0)
@@ -76,11 +89,17 @@ $ curl -v -X POST http://192.168.99.100:8091/pools/default -d memoryQuota=300 -d
 * Connection #0 to host 192.168.99.100 left intact
 ```
 
-The command shows an HTTP POST request to the REST endpoint `/pools/default`. The host is the IP address of the Docker machine. The port is the exposed port of Couchbase server. The memory and index quota for the server are passed in the request.
+The command shows an HTTP POST request to the REST endpoint `/pools/default`.
+The host is the IP address of the Docker machine. The port is the exposed port
+of Couchbase server. The memory and index quota for the server are passed in the
+request.
 
 ### Configure Data, Query, and Index services
 
-All three services, or only one of them, can be configured on each instance. This allows different Couchbase instances to use affinities and setup services accordingly. For example, if Docker host is running a machine with solid-state drive then only Data service can be started.
+All three services, or only one of them, can be configured on each instance.
+This allows different Couchbase instances to use affinities and setup services
+accordingly. For example, if Docker host is running a machine with solid-state
+drive then only Data service can be started.
 
 ```bash
 $ curl -v http://192.168.99.100:8091/node/controller/setupServices -d 'services=kv%2Cn1ql%2Cindex'
@@ -108,11 +127,15 @@ $ curl -v http://192.168.99.100:8091/node/controller/setupServices -d 'services=
 * Connection #0 to host 192.168.99.100 left intact
 ```
 
-The command shows an HTTP POST request to the REST endpoint `/node/controller/setupServices`. The command shows that all three services are configured for the Couchbase server. The Data service is identified by `kv`, Query service is identified by `n1ql` and Index service identified by `index`.
+The command shows an HTTP POST request to the REST endpoint
+`/node/controller/setupServices`. The command shows that all three services are
+configured for the Couchbase server. The Data service is identified by `kv`,
+Query service is identified by `n1ql` and Index service identified by `index`.
 
 ### Setup credentials for the Couchbase server
 
-Sets the username and password credentials that will subsequently be used for managing the Couchbase server.
+Sets the username and password credentials that will subsequently be used for
+managing the Couchbase server.
 
 ```
 curl -v -X POST http://192.168.99.100:8091/settings/web -d port=8091 -d username=Administrator -d password=password
@@ -140,11 +163,13 @@ curl -v -X POST http://192.168.99.100:8091/settings/web -d port=8091 -d username
 {"newBaseUri":"http://192.168.99.100:8091/"}
 ```
 
-The command shows an HTTP POST request to the REST endpoint `/settings/web`. The user name and password credentials are passed in the request.
+The command shows an HTTP POST request to the REST endpoint `/settings/web`. The
+user name and password credentials are passed in the request.
 
 ### Install sample data
 
-The Couchbase server can be easily load some sample data in the Couchbase instance.
+The Couchbase server can be easily load some sample data in the Couchbase
+instance.
 
 ```
 curl -v -u Administrator:password -X POST http://192.168.99.100:8091/sampleBuckets/install -d '["travel-sample"]'
@@ -174,13 +199,19 @@ curl -v -u Administrator:password -X POST http://192.168.99.100:8091/sampleBucke
 []
 ```
 
-The command shows an HTTP POST request to the REST endpoint `/sampleBuckets/install`. The name of the sample bucket is passed in the request.
+The command shows an HTTP POST request to the REST endpoint
+`/sampleBuckets/install`. The name of the sample bucket is passed in the
+request.
 
-Congratulations, you are now running a Couchbase container, fully configured using the REST API.
+Congratulations, you are now running a Couchbase container, fully configured
+using the REST API.
 
 ## Query Couchbase using CBQ
 
-[CBQ](http://developer.couchbase.com/documentation/server/4.1/cli/cbq-tool.html), short for Couchbase Query, is a CLI tool that allows to create, read, update, and delete JSON documents on a Couchbase server. This tool is installed as part of the Couchbase Docker image.
+[CBQ](http://developer.couchbase.com/documentation/server/4.1/cli/cbq-tool.html),
+short for Couchbase Query, is a CLI tool that allows to create, read, update,
+and delete JSON documents on a Couchbase server. This tool is installed as part
+of the Couchbase Docker image.
 
 Run CBQ tool:
 
@@ -190,9 +221,16 @@ Couchbase query shell connected to http://db:8093/ . Type Ctrl-D to exit.
 cbq>
 ```
 
-`--engine` parameter to CBQ allows to specify the Couchbase server host and port running on the Docker host. For host, typically the host name or IP address of the host where Couchbase server is running is provided. In this case, the container name used when starting the container, `db`, can be used. `8093` port listens for all incoming queries.
+`--engine` parameter to CBQ allows to specify the Couchbase server host and port
+running on the Docker host. For host, typically the host name or IP address of
+the host where Couchbase server is running is provided. In this case, the
+container name used when starting the container, `db`, can be used. `8093` port
+listens for all incoming queries.
 
-Couchbase allows to query JSON documents using [N1QL](http://developer.couchbase.com/documentation/server/4.1/n1ql/n1ql-language-reference/index.html). N1QL is a comprehensive, declarative query language that brings SQL-like query capabilities to JSON documents.
+Couchbase allows to query JSON documents using
+[N1QL](http://developer.couchbase.com/documentation/server/4.1/n1ql/n1ql-language-reference/index.html).
+N1QL is a comprehensive, declarative query language that brings SQL-like query
+capabilities to JSON documents.
 
 Query the database by running a N1QL query:
 
@@ -228,10 +266,13 @@ cbq> select * from `travel-sample` limit 1;
 
 ## Couchbase Web Console
 
-[Couchbase Web Console](http://developer.couchbase.com/documentation/server/4.1/admin/ui-intro.html) is a console that allows to manage a Couchbase instance. It can be seen at:
+[Couchbase Web
+Console](http://developer.couchbase.com/documentation/server/4.1/admin/ui-intro.html)
+is a console that allows to manage a Couchbase instance. It can be seen at:
 
 `http://192.168.99.100:8091/`
 
-Make sure to replace the IP address with the IP address of your Docker Machine or `localhost` if Docker is running locally.
+Make sure to replace the IP address with the IP address of your Docker Machine
+or `localhost` if Docker is running locally.
 
 ![Couchbase Web Console](couchbase/web-console.png)

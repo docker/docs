@@ -2,14 +2,8 @@
 description: Compose CLI reference
 keywords:
 - fig, composition, compose, docker, orchestration, cli,  reference
-menu:
-  main:
-    parent: workw_compose
-    weight: 88
-title: Command-line Completion
+title: Command-line completion
 ---
-
-# Command-line Completion
 
 Compose comes with [command completion](http://en.wikipedia.org/wiki/Command-line_completion)
 for the bash and zsh shell.

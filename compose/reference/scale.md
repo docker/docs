@@ -2,13 +2,8 @@
 description: Sets the number of containers to run for a service.
 keywords:
 - fig, composition, compose, docker, orchestration, cli,  scale
-menu:
-  main:
-    parent: smn_compose_cli
-title: scale
+title: docker-compose scale
 ---
-
-# scale
 
 ```
 Usage: scale [SERVICE=NUM...]

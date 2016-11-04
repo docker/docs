@@ -1,19 +1,11 @@
 ---
 aliases:
 - /docker-trusted-registry/release-notes/release-notes/
-description: 'Docker Trusted Registry release notes '
+description: Docker Trusted Registry release notes
 keywords:
-- docker, documentation, about, technology, understanding, enterprise, hub, registry,
-  release notes, Docker Trusted Registry
-menu:
-  main:
-    identifier: dtr_release_notes
-    parent: dtr_menu_release_notes
-    weight: 0
-title: Trusted Registry release notes
+- docker, documentation, about, technology, understanding, enterprise, hub, registry, release notes, Docker Trusted Registry
+title: Docker Trusted Registry release notes
 ---
-
-# Docker Trusted Registry release notes
 
 Here you can learn about new features, bug fixes, breaking changes and
 known issues for each DTR version.

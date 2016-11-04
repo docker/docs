@@ -2,17 +2,15 @@
 description: Submit a product for the Docker Store
 keywords:
 - Docker, docker, store, purchase images
-menu:
-  main:
-    parent: docker-store
-title: Submit a Product
+title: Submit a product to Docker Store
 ---
 
-# Docker Store product submissions
+To submit an image to the Docker Store, you must first [apply to
+join](https://store.docker.com/publisher/signup) our publisher program. You'll
+receive a welcome email when you're accepted into the program.
 
-To submit an image to the Docker Store, you must first [apply to join](https://store.docker.com/publisher/signup) our publisher program. You'll receive a welcome email when you're accepted into the program.
-
-Once you've been accepted, click the link in your acceptance email, or go to the [Docker Store](https://store.docker.com) and click **Publish a Product**.
+Once you've been accepted, click the link in your acceptance email, or go to the
+[Docker Store](https://store.docker.com) and click **Publish a Product**.
 
 -----------------
 
@@ -22,19 +20,30 @@ Before you start, there are a few things you should know.
 
 **The Docker Store moderation process**
 
-The Docker Store team validates submitted products to ensure quality and security, and to make sure your product information is complete and helpful for potential customers.
+The Docker Store team validates submitted products to ensure quality and
+security, and to make sure your product information is complete and helpful for
+potential customers.
 
-To do this, you'll provide your product binaries and some information about the product (the "product manifest") which will be reviewed by a moderator. If changes are needed, the moderation team will notify you by email. At that point, you can make changes and resubmit the product.
+To do this, you'll provide your product binaries and some information about the
+product (the "product manifest") which will be reviewed by a moderator. If
+changes are needed, the moderation team will notify you by email. At that point,
+you can make changes and resubmit the product.
 
 **Use private repositories**
 
-The source for your product must be in a **private** repository in either Docker Cloud or Docker Hub. This allows us to provide feedback to help you produce excellent products _before_ you make your items available to the public.
+The source for your product must be in a **private** repository in either Docker
+Cloud or Docker Hub. This allows us to provide feedback to help you produce
+excellent products _before_ you make your items available to the public.
 
 **Product tiers**
 
-You can create several different tiers for a single product. For example, you might have Free, Basic, and Enterprise versions of a single product, each with their own features, support levels, and subscription pricing.
+You can create several different tiers for a single product. For example, you
+might have Free, Basic, and Enterprise versions of a single product, each with
+their own features, support levels, and subscription pricing.
 
-At minimum, each product tier must be represented by a unique tag within a repository, however you can also select tags for each tier from several different repositories or namespaces.
+At minimum, each product tier must be represented by a unique tag within a
+repository, however you can also select tags for each tier from several
+different repositories or namespaces.
 
 > **Note**: During the beta period, Docker Store only supports two product tiers. We're working diligently to support more tiers in the future.
 
@@ -73,7 +82,9 @@ Click **Save and Continue**.
 Fill out your Publisher Details. If you've already done this, for example if
 you've already submitted a product, skip to the next section.
 
-Your company name comes from the [initial sign up form](https://store.docker.com/publisher/signup) you filled out, however you can change your details on this screen if needed.
+Your company name comes from the [initial sign up
+form](https://store.docker.com/publisher/signup) you filled out, however you can
+change your details on this screen if needed.
 
 Provide a URL to the logo that represents your company or organization. This
 logo must be at least 512x512 pixels.

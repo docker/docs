@@ -4,14 +4,8 @@ aliases:
 description: API Documentation for Docker
 keywords:
 - API, Docker, rcli, REST,  documentation
-menu:
-  main:
-    parent: engine_remoteapi
-    weight: 2
-title: Remote API v1.19
+title: Docker Remote API v1.19
 ---
-
-# Docker Remote API v1.19
 
 ## 1. Brief introduction
 

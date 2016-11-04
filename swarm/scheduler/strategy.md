@@ -2,14 +2,8 @@
 description: Swarm strategies
 keywords:
 - docker, swarm, clustering,  strategies
-menu:
-  main:
-    parent: swarm_sched
-    weight: 6
-title: Strategies
+title: Docker Swarm strategies
 ---
-
-# Docker Swarm strategies
 
 The Docker Swarm scheduler features multiple strategies for ranking nodes. The
 strategy you choose determines how Swarm computes ranking. When you run a new

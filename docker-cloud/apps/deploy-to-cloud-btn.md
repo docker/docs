@@ -5,13 +5,8 @@ aliases:
 description: Deploy to Docker Cloud
 keywords:
 - deploy, docker, cloud
-menu:
-  main:
-    parent: apps
-title: Add a Deploy to Docker Cloud button
+title: Add a "Deploy to Docker Cloud" button
 ---
-
-# Add a Deploy to Docker Cloud Button
 
 The **Deploy to Docker Cloud** button allows developers to deploy stacks with one click in Docker Cloud. The button is intended to be added to `README.md` files in public GitHub repositories, although it can be used anywhere else.
 

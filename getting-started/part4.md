@@ -2,8 +2,6 @@
 title: "Getting Started, Part 4: Scaling Your App on a Cluster"
 ---
 
-# Part 4: Scaling Your App on a Cluster
-
 In [Getting Started, Part 3: Stateful, Multi-container Applications](part3.md),
 we figured out how to relate containers to each other. We organized an
 application into two simple services -- a frontend and a backend -- and defined

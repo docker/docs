@@ -1,17 +1,9 @@
 ---
 description: How to use the Docker Engine user guide
 keywords:
-- engine, introduction, documentation, about, technology, docker, user, guide, framework,
-  home,  intro
-menu:
-  main:
-    identifier: engine_guide
-    parent: engine_use
-    weight: "-78"
-title: User Guide
+- engine, introduction, documentation, about, technology, docker, user, guide, framework, home, intro
+title: Docker Engine user guide
 ---
-
-# Docker Engine user guide
 
 This guide helps users learn how to use Docker Engine.
 

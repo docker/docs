@@ -2,14 +2,8 @@
 description: Docker Cloud Overview
 keywords:
 - Docker, cloud, three
-menu:
-  main:
-    parent: docker-cloud
-    weight: -100
-title: Docker Cloud Overview
+title: Docker Cloud overview
 ---
-
-# What is Docker Cloud?
 
 Docker Cloud is a hosted service that provides a Registry with build and testing
 facilities for Dockerized application images, tools to help you set up and

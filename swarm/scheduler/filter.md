@@ -2,14 +2,8 @@
 description: Swarm filters
 keywords:
 - docker, swarm, clustering,  filters
-menu:
-  main:
-    parent: swarm_sched
-    weight: 4
-title: Filters
+title: Swarm filters
 ---
-
-# Swarm filters
 
 Filters tell Docker Swarm scheduler which nodes to use when creating and running
 a container.

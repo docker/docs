@@ -7,43 +7,44 @@ keywords:
 title: Control and configure Docker with systemd
 ---
 
-# Control and configure Docker with systemd
-
 Many Linux distributions use systemd to start the Docker daemon. This document
 shows a few examples of how to customize Docker's settings.
 
 ## Starting the Docker daemon
 
 Once Docker is installed, you will need to start the Docker daemon.
+
 ```bash
 $ sudo systemctl start docker
 # or on older distributions, you may need to use
 $ sudo service docker start
 ```
+
 If you want Docker to start at boot, you should also:
+
 ```bash
 $ sudo systemctl enable docker
 # or on older distributions, you may need to use
 $ sudo chkconfig docker on
 ```
+
 ## Custom Docker daemon options
 
 There are a number of ways to configure the daemon flags and environment variables
 for your Docker daemon.
 
-The recommended way is to use a systemd drop-in file (as described in
-the <a target="_blank"
+The recommended way is to use a systemd drop-in file (as described in the <a
+target="_blank"
 href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html">systemd.unit</a>
 documentation). These are local files named `<something>.conf` in the
 `/etc/systemd/system/docker.service.d` directory. This could also be
-`/etc/systemd/system/docker.service`, which also works for overriding
-the defaults from `/lib/systemd/system/docker.service`.
+`/etc/systemd/system/docker.service`, which also works for overriding the
+defaults from `/lib/systemd/system/docker.service`.
 
-However, if you had previously used a package which had an
-`EnvironmentFile` (often pointing to `/etc/sysconfig/docker`) then for
-backwards compatibility, you drop a file with a `.conf` extension into
-the `/etc/systemd/system/docker.service.d` directory including the
-following:
+However, if you had previously used a package which had an `EnvironmentFile`
+(often pointing to `/etc/sysconfig/docker`) then for backwards compatibility,
+you drop a file with a `.conf` extension into the
+`/etc/systemd/system/docker.service.d` directory including the following:
 
 ```conf
 [Service]
@@ -78,16 +79,18 @@ $ grep EnvironmentFile /usr/lib/systemd/system/docker.service
 EnvironmentFile=-/etc/sysconfig/docker
 ```
 
-You can customize the Docker daemon options using override files as explained in the
-[HTTP Proxy example](systemd.md#http-proxy) below. The files located in `/usr/lib/systemd/system`
-or `/lib/systemd/system` contain the default options and should not be edited.
+You can customize the Docker daemon options using override files as explained in
+the [HTTP Proxy example](systemd.md#http-proxy) below. The files located in
+`/usr/lib/systemd/system` or `/lib/systemd/system` contain the default options
+and should not be edited.
 
 ### Runtime directory and storage driver
 
 You may want to control the disk space used for Docker images, containers
 and volumes by moving it to a separate partition.
 
-In this example, we'll assume that your `docker.service` file looks something like:
+In this example, we'll assume that your `docker.service` file looks something
+like:
 
 ```conf
 [Unit]

@@ -2,14 +2,8 @@
 description: Swarm discovery
 keywords:
 - docker, swarm, clustering,  discovery
-menu:
-  main:
-    parent: workw_swarm
-    weight: 4
-title: Discovery
+title: Docker Swarm discovery
 ---
-
-# Docker Swarm Discovery
 
 Docker Swarm comes with multiple discovery backends. You use a hosted discovery service with Docker Swarm. The service maintains a list of IPs in your cluster.
 This page describes the different types of hosted discovery available to you. These are:

@@ -2,13 +2,8 @@
 description: Identify active machines
 keywords:
 - machine, active, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: active
+title: docker-machine active
 ---
-
-# active
 
 See which machine is "active" (a machine is considered active if the
 `DOCKER_HOST` environment variable points to it).

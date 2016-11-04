@@ -5,14 +5,8 @@ aliases:
 description: Set up the application
 keywords:
 - Python, application, setup
-menu:
-  main:
-    parent: deploy-app
-    weight: -80
 title: Set up your environment
 ---
-
-# Set up your environment
 
 In this step you install the Docker Cloud CLI so interact with the service using your command shell. This tutorial uses CLI commands to complete actions.
 

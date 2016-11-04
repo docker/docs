@@ -4,13 +4,8 @@ aliases:
 description: The logs command description and usage
 keywords:
 - logs, retrieve, docker
-menu:
-  main:
-    parent: smn_cli
-title: logs
+title: docker logs
 ---
-
-# logs
 
 ```markdown
 Usage:  docker logs [OPTIONS] CONTAINER

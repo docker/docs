@@ -1,17 +1,9 @@
 ---
-description: Learn how to backup your Docker Trusted Registry cluster, and to recover
-  your cluster from an existing backup.
+description: Learn how to backup your Docker Trusted Registry cluster, and to recover your cluster from an existing backup.
 keywords:
 - docker, registry, high-availability, backup, recovery
-menu:
-  main:
-    identifier: dtr_backup_disaster_recovery
-    parent: dtr_menu_high_availability
-    weight: 10
 title: Backups and disaster recovery
 ---
-
-# Backups and disaster recovery
 
 When you decide to start using Docker Trusted Registry on a production
 setting, you should [configure it for high availability](index.md).
@@ -124,7 +116,7 @@ $ curl https://<ucp-url>/ca > ucp-ca.pem
 $ docker run -i --rm \
   docker/dtr restore \
   --ucp-url <ucp-url> \
-  --ucp-ca "$(cat ucp-ca.pem)" \  
+  --ucp-ca "$(cat ucp-ca.pem)" \
   --ucp-username <ucp-admin> \
   --ucp-password <ucp-password> \
   --dtr-external-url <dtr-domain-name> < /var/tmp/backup.tar

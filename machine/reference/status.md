@@ -2,13 +2,8 @@
 description: Get the status of a machine
 keywords:
 - machine, status, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: status
+title: docker-machine status
 ---
-
-# status
 
 ```none
 Usage: docker-machine status [arg...]

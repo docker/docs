@@ -4,13 +4,8 @@ aliases:
 description: The start command description and usage
 keywords:
 - Start, container, stopped
-menu:
-  main:
-    parent: smn_cli
-title: start
+title: docker start
 ---
-
-# start
 
 ```markdown
 Usage:  docker start [OPTIONS] CONTAINER [CONTAINER...]

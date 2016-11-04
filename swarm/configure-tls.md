@@ -2,14 +2,8 @@
 description: Swarm and transport layer security
 keywords:
 - docker, swarm, TLS, discovery, security,  certificates
-menu:
-  main:
-    parent: workw_swarm
-    weight: 55
 title: Configure Docker Swarm for TLS
 ---
-
-# Configure Docker Swarm for TLS
 
 In this procedure you create a two-node Swarm cluster, a Docker Engine CLI, a
 Swarm Manager, and a Certificate Authority as shown below. All the Docker Engine

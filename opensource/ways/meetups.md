@@ -2,13 +2,8 @@
 description: Organize a Docker Meetup
 keywords:
 - Docker, meetup, hosting, organizing
-menu:
-  main:
-    parent: smn_ways
-title: Organize a Docker Meetup
+title: Organize a Docker meetup
 ---
-
-# Organize a Docker Meetup
 
 Anyone interested in Docker can become an active member of the Docker community
 by becoming co-organizer of a Docker Meetup group.

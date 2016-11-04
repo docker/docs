@@ -7,15 +7,10 @@ description: The service ps command description and usage
 keywords:
 - service, tasks
 - ps
-menu:
-  main:
-    parent: smn_cli
-title: service ps
+title: docker service ps
 ---
 
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
-
-# service ps
 
 ```Markdown
 Usage:	docker service ps [OPTIONS] SERVICE

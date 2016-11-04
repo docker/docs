@@ -1,17 +1,9 @@
 ---
 description: Dump out TLS certificates.
 keywords:
-- fingerprint, ucp
-menu:
-  main:
-    identifier: ucp_ref_fingerprint
-    keywords:
-    - tool, reference, ucp
-    parent: ucp_ref
-title: fingerprint
+- fingerprint, ucp, tool, reference, ucp
+title: docker/ucp fingerprint
 ---
-
-# docker/ucp fingerprint
 
 Dump out the TLS fingerprint for the UCP controller running on this
 Docker Engine.

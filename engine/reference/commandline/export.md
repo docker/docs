@@ -4,13 +4,8 @@ aliases:
 description: The export command description and usage
 keywords:
 - export, file, system, container
-menu:
-  main:
-    parent: smn_cli
-title: export
+title: docker export
 ---
-
-# export
 
 ```markdown
 Usage:  docker export [OPTIONS] CONTAINER

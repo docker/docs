@@ -2,14 +2,8 @@
 description: Documentation covering common questions users have about Kitematic
 keywords:
 - docker, documentation, about, technology, kitematic,  gui
-menu:
-  main:
-    parent: toolbox_kitematic
-    weight: 5
-title: Frequently Asked Questions
+title: "Kitematic: Frequently asked questions (FAQ)"
 ---
-
-# Kitematic: Frequently Asked Questions
 
 ### Is Kitematic Open Source?
 

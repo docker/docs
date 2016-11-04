@@ -1,15 +1,9 @@
 ---
-description: Getting started with Docker Compose
+description: Get started with Docker Compose
 keywords:
 - documentation, docs,  docker, compose, orchestration, containers
-menu:
-  main:
-    parent: workw_compose
-    weight: -85
-title: Getting Started
+title: Get started with Docker Compose
 ---
-
-# Getting Started
 
 On this page you build a simple Python web application running on Docker Compose. The
 application uses the Flask framework and increments a value in Redis. While the

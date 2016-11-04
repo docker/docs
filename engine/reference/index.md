@@ -4,11 +4,6 @@ aliases:
 description: Docker Engine reference
 keywords:
 - Engine
-menu:
-  main:
-    identifier: engine_ref
-    parent: engine_use
-    weight: 70
 title: Engine reference
 ---
 

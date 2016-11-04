@@ -2,14 +2,8 @@
 description: Docker Trusted Registry restore command reference.
 keywords:
 - docker, registry, restore, backup
-menu:
-  main:
-    identifier: dtr_reference_restore
-    parent: dtr_menu_reference
-title: restore
+title: docker/dtr restore
 ---
-
-# docker/dtr restore
 
 Create a new DTR cluster from an existing backup
 

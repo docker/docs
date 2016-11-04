@@ -6,15 +6,8 @@ aliases:
 description: Learn how to install the commercially supported version of Docker Engine.
 keywords:
 - docker, engine, dtr, install
-menu:
-  main:
-    identifier: csengine_install
-    parent: menu_csengine
-    weight: 0
-title: Install CS Docker Engine
+title: Install Commercially Supported Docker Engine
 ---
-
-# Install CS Docker Engine
 
 Follow these instructions to install CS Docker Engine, the commercially
 supported version of Docker Engine.

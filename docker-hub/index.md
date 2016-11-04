@@ -2,16 +2,9 @@
 aliases: /docker-hub/overview/
 description: Docker Hub overview
 keywords:
-- Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation,
-  accounts, organizations, repositories, groups,  teams
-menu:
-  main:
-    parent: mn_pubhub
-    weight: -99
+- Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, accounts, organizations, repositories, groups,  teams
 title: Overview of Docker Hub
 ---
-
-# Overview of Docker Hub
 
 [Docker Hub](https://hub.docker.com) is a cloud-based registry service which
 allows you to link to code repositories, build your images and test them, stores
@@ -42,12 +35,15 @@ directions in [Your Docker ID](accounts.md).
 
 Your Docker ID gives you one private Docker Hub repository for free. If you need
 more private repositories, you can upgrade from your free account to a paid
-plan. To learn more, log in to Docker Hub and go to [Billing & Plans](https://hub.docker.com/account/billing-plans/), in the Settings menu.
+plan. To learn more, log in to Docker Hub and go to [Billing &
+Plans](https://hub.docker.com/account/billing-plans/), in the Settings menu.
 
 ### Explore repositories
 
-You can find public repositories and images from Docker Hub in two ways.
-You can "Search" from the Docker Hub website, or you can use the Docker command line tool to run the `docker search` command. For example if you were looking for an ubuntu image, you might run the following command line search:
+You can find public repositories and images from Docker Hub in two ways. You can
+"Search" from the Docker Hub website, or you can use the Docker command line
+tool to run the `docker search` command. For example if you were looking for an
+ubuntu image, you might run the following command line search:
 
 ```
     $ docker search ubuntu
@@ -60,8 +56,8 @@ Private repositories do not appear in the repository search results. To see all
 the repositories you can access and their status, view your "Dashboard" page on
 [Docker Hub](https://hub.docker.com).
 
-
-You can find more information on working with Docker images in the [Docker userguide](/userguide/dockerimages/).
+You can find more information on working with Docker images in the
+[Docker userguide](/userguide/dockerimages/).
 
 ### Use Official Repositories
 
@@ -79,14 +75,16 @@ up-to-date image that was built by experts to power your applications.
 
 ##  Work with Docker Hub image repositories
 
-Docker Hub provides a place for you and your team to build and ship Docker images.
+Docker Hub provides a place for you and your team to build and ship Docker
+images.
 
 You can configure Docker Hub repositories in two ways:
 
 * [Repositories](repos.md), which allow you to push images from a local Docker daemon to Docker Hub, and
 * [Automated Builds](builds.md), which link to a source code repository and trigger an image rebuild process on Docker Hub when changes are detected in the source code.
 
-You can create public repositories which can be accessed by any other Hub user, or you can create private repositories with limited access you control.
+You can create public repositories which can be accessed by any other Hub user,
+or you can create private repositories with limited access you control.
 
 ### Docker commands and Docker Hub
 

@@ -1,18 +1,12 @@
 ---
-aliases: 
+aliases:
   - /userguide/
 description: Introduction to user guide
 identifier: engine_guide_intro
 keywords:
-- docker, introduction, documentation, about, technology, docker.io, user, guide,
-  user's, manual, platform, framework, home,  intro
-menu:
-  main:
-    parent: engine_guide
-title: Introduction
+- docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home,  intro
+title: Engine user guide
 ---
-
-# Engine user guide
 
 This guide takes you through the fundamentals of using Docker Engine and
 integrating it into your environment. You'll learn how to use Engine to:

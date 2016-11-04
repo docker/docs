@@ -2,14 +2,8 @@
 description: 'Swarm: a Docker-native clustering system'
 keywords:
 - docker, swarm,  clustering
-menu:
-  main:
-    parent: workw_swarm
-    weight: -99
-title: Swarm Overview
+title: Docker Swarm overview
 ---
-
-# Docker Swarm overview
 
 Docker Swarm is native clustering for Docker. It turns a pool of Docker hosts
 into a single, virtual Docker host. Because Docker Swarm serves the standard

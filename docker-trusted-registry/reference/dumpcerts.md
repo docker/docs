@@ -1,15 +1,9 @@
 ---
-menu:
-  main:
-    description: Docker Trusted Registry dumpcerts command reference.
-    identifier: dtr_reference_dumpcerts
-    keywords:
-    - docker, registry, reference, dumpcerts
-    parent: dtr_menu_reference
-title: dumpcerts
+description: Docker Trusted Registry dumpcerts command reference.
+keywords:
+- docker, registry, reference, dumpcerts
+title: docker/dtr dumpcerts
 ---
-
-# docker/dtr dumpcerts
 
 Dump out the TLS certificates used by this DTR instance
 

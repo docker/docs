@@ -4,15 +4,10 @@ aliases:
 description: The service inspect command description and usage
 keywords:
 - service, inspect
-menu:
-  main:
-    parent: smn_cli
-title: service inspect
+title: docker service inspect
 ---
 
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
-
-# service inspect
 
 ```Markdown
 Usage:  docker service inspect [OPTIONS] SERVICE [SERVICE...]

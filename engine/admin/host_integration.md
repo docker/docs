@@ -4,21 +4,15 @@ aliases:
 description: How to generate scripts for upstart, systemd, etc.
 keywords:
 - systemd, upstart, supervisor, docker, documentation,  host integration
-menu:
-  main:
-    parent: engine_admin
-    weight: "5"
-title: Automatically start containers
+title: Start containers automatically
 ---
 
-# Automatically start containers
-
-As of Docker 1.2,
-[restart policies](../reference/run.md#restart-policies-restart) are the
-built-in Docker mechanism for restarting containers when they exit. If set,
-restart policies will be used when the Docker daemon starts up, as typically
-happens after a system boot. Restart policies will ensure that linked containers
-are started in the correct order.
+As of Docker 1.2, [restart
+policies](../reference/run.md#restart-policies-restart) are the built-in Docker
+mechanism for restarting containers when they exit. If set, restart policies
+will be used when the Docker daemon starts up, as typically happens after a
+system boot. Restart policies will ensure that linked containers are started in
+the correct order.
 
 If restart policies don't suit your needs (i.e., you have non-Docker processes
 that depend on Docker containers), you can use a process manager like

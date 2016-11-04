@@ -6,15 +6,8 @@ aliases:
 description: Learn how to push an image to Docker Trusted Registry.
 keywords:
 - docker, registry, images, pull
-menu:
-  main:
-    identifier: dtr_push_image
-    parent: dtr_menu_repos_and_images
-    weight: 20
-title: Push an image
+title: Push an image to DTR
 ---
-
-# Push an image to DTR
 
 Pushing an image to Docker Trusted Registry is the same as pushing an image
 to Docker Hub.

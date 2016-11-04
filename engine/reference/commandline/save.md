@@ -4,13 +4,8 @@ aliases:
 description: The save command description and usage
 keywords:
 - tarred, repository, backup
-menu:
-  main:
-    parent: smn_cli
-title: save
+title: docker save
 ---
-
-# save
 
 ```markdown
 Usage:  docker save [OPTIONS] IMAGE [IMAGE...]

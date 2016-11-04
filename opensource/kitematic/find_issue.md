@@ -1,16 +1,13 @@
 ---
 description: Explains how to find a Kitematic issue
 keywords:
-- 'Kitematic, open source, contribute, contributor, tour '
-menu:
-  main:
-    parent: smn_kitematic_contrib
-    weight: 2
-title: Find an issue
+- Kitematic, open source, contribute, contributor, tour
+title: Find an issue on GitHub
 ---
 
-# Find an issue on GitHub
-Currently, the Kitematic GUI shows the name of a selected container, but not the ID. The tour shows you how to improve the GUI by adding the container ID to the display items, and integrate the updates into the codebase.
+Currently, the Kitematic GUI shows the name of a selected container, but not the
+ID. The tour shows you how to improve the GUI by adding the container ID to the
+display items, and integrate the updates into the codebase.
 
 To find and claim an issue you want to work on:
 
@@ -41,6 +38,7 @@ To find and claim an issue you want to work on:
 
 ## Where to go next
 
-Go to next section to learn [Set up your Kitematic development environment](set_up_dev.md).
+Go to next section to learn [Set up your Kitematic development
+environment](set_up_dev.md).
 
-(For more about working with open source issues in Docker, see <a href="http://docs.docker.com/opensource/workflow/find-an-issue/" target="_blank">Find an issue</a> and <a href="https://github.com/docker/docker/blob/master/CONTRIBUTING.md" target="_blank"> Docker Contributing Guidelines</a>.)
+(For more about working with open source issues in Docker, see <a href="/opensource/workflow/find-an-issue/" target="_blank">Find an issue</a> and <a href="https://github.com/docker/docker/blob/master/CONTRIBUTING.md" target="_blank"> Docker Contributing Guidelines</a>.)

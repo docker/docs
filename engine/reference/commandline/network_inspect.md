@@ -4,13 +4,8 @@ aliases:
 description: The network inspect command description and usage
 keywords:
 - network, inspect, user-defined
-menu:
-  main:
-    parent: smn_cli
-title: network inspect
+title: docker network inspect
 ---
-
-# network inspect
 
 ```markdown
 Usage:  docker network inspect [OPTIONS] NETWORK [NETWORK...]

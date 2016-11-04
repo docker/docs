@@ -2,14 +2,8 @@
 description: Guide to using Docker Compose in production
 keywords:
 - documentation, docs,  docker, compose, orchestration, containers,  production
-menu:
-  main:
-    parent: workw_compose
-    weight: 22
-title: Using Compose in Production
+title: Using Compose in production
 ---
-
-## Using Compose in production
 
 When you define your app with Compose in development, you can use this
 definition to run your application in different environments such as CI,

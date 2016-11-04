@@ -1,15 +1,9 @@
 ---
-description: Documentation that provides an overview of Kitematic and installation
-  instructions
+description: Documentation that provides an overview of Kitematic and installation instructions
 keywords:
 - docker, documentation, about, technology, kitematic, gui
-menu:
-  main:
-    parent: toolbox_kitematic
-title: 'Kitematic User Guide: Intro & Overview'
+title: "Kitematic user guide"
 ---
-
-# Kitematic user guide
 
 ## Overview
 

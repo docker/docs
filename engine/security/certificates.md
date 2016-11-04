@@ -3,15 +3,9 @@ aliases:
 - /engine/articles/certificates/
 description: How to set up and use certificates with a registry to verify access
 keywords:
-- Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls,
-  documentation, examples, articles,  tutorials
-menu:
-  main:
-    parent: smn_secure_docker
-title: Using certificates for repository client verification
+- Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls, documentation, examples, articles,  tutorials
+title: Verify repository client with certificates
 ---
-
-# Using certificates for repository client verification
 
 In [Running Docker with HTTPS](https.md), you learned that, by default,
 Docker runs via a non-networked Unix socket and TLS must be enabled in order

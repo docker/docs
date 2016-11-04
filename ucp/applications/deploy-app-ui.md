@@ -1,17 +1,9 @@
 ---
-description: Learn how to deploy containerized applications on a cluster, with Docker
-  Universal Control Plane.
+description: Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane.
 keywords:
 - ucp, deploy, application
-menu:
-  main:
-    identifier: ucp_deploy_ui
-    parent: mn_ucp_applications
-    weight: 0
 title: Deploy an app from the UI
 ---
-
-# Deploy an app from the UI
 
 With Docker Universal Control Plane you can deploy applications from the
 UI. You can define your application on the UI, or import an existing
