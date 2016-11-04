@@ -1,6 +1,7 @@
 ---
 description: High availability in Swarm
-keywords: docker, swarm,  clustering
+keywords:
+- docker, swarm,  clustering
 menu:
   main:
     parent: workw_swarm

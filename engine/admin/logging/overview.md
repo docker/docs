@@ -2,7 +2,8 @@
 aliases:
 - /engine/reference/logging/overview/
 description: Configure logging driver.
-keywords: docker, logging, driver, Fluentd
+keywords:
+- docker, logging, driver, Fluentd
 title: Configuring Logging Drivers
 ---
 

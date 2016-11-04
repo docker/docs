@@ -2,7 +2,8 @@
 aliases:
 - /docker-trusted-registry/license/
 description: Learn how to license your Docker Trusted Registry installation.
-keywords: docker, dtr, install, license
+keywords:
+- docker, dtr, install, license
 menu:
   main:
     identifier: dtr_license

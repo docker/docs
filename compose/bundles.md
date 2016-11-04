@@ -2,7 +2,8 @@
 advisory: experimental
 description: Description of Docker and Compose's experimental support for application
   bundles
-keywords: documentation, docs,  docker, compose, bundles, stacks
+keywords:
+- documentation, docs,  docker, compose, bundles, stacks
 menu:
   main:
     parent: workw_compose

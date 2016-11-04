@@ -5,7 +5,8 @@ aliases:
 - /docker-trusted-registry/install/dtr-vhd-azure/
 - /docker-trusted-registry/install/install-dtr/
 description: Learn how to install Docker Trusted Registry for production.
-keywords: docker, dtr, registry, install
+keywords:
+- docker, dtr, registry, install
 menu:
   main:
     identifier: dtr_install_production

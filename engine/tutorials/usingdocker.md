@@ -2,7 +2,9 @@
 aliases:
 - /engine/userguide/containers/usingdocker/
 description: Learn how to manage and operate Docker containers.
-keywords: docker, the docker guide, documentation, docker.io, monitoring containers, docker top, docker inspect, docker port, ports, docker logs, log, Logs
+keywords:
+- docker, the docker guide, documentation, docker.io, monitoring containers, docker
+  top, docker inspect, docker port, ports, docker logs, log,  Logs
 menu:
   main:
     parent: engine_learn_menu

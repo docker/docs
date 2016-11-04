@@ -1,6 +1,7 @@
 ---
 description: Identify active machines
-keywords: machine, driver, base, operating system
+keywords:
+- machine, driver, base, operating system
 menu:
   main:
     parent: smn_machine_drivers

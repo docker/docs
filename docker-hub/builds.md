@@ -1,6 +1,7 @@
 ---
 description: Docker Hub Automated Builds
-keywords: Dockerfile, Hub, builds, trusted builds, automated builds
+keywords:
+- Dockerfile, Hub, builds, trusted builds, automated builds
 menu:
   main:
     parent: mn_pubhub

@@ -1,6 +1,7 @@
 ---
 description: Understand container communication
-keywords: docker, container, communication, network
+keywords:
+- docker, container, communication, network
 menu:
   main:
     parent: smn_networking_def

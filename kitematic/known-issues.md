@@ -1,6 +1,7 @@
 ---
 description: Information about known issues in Kitematic
-keywords: docker, documentation, about, technology, kitematic,  gui
+keywords:
+- docker, documentation, about, technology, kitematic,  gui
 menu:
   main:
     parent: toolbox_kitematic

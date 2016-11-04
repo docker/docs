@@ -1,6 +1,7 @@
 ---
 description: Learn about the architecture of Docker Trusted Registry.
-keywords: docker, registry, dtr, architecture
+keywords:
+- docker, registry, dtr, architecture
 menu:
   main:
     identifier: dtr_architecture

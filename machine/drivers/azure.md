@@ -1,6 +1,7 @@
 ---
 description: Microsoft Azure driver for machine
-keywords: machine, Microsoft Azure, driver
+keywords:
+- machine, Microsoft Azure, driver
 menu:
   main:
     parent: smn_machine_drivers

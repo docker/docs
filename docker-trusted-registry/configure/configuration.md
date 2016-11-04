@@ -1,6 +1,7 @@
 ---
 description: Configuration overview for Docker Trusted Registry
-keywords: docker, documentation, about, technology, understanding, enterprise, hub,  registry
+keywords:
+- docker, documentation, about, technology, understanding, enterprise, hub,  registry
 menu:
   main:
     identifier: dtr_configuration

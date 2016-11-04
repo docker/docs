@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/getting-started/python/11_service_stacks/
 description: Stackfiles for your service
-keywords: Python, service, stack
+keywords:
+- Python, service, stack
 menu:
   main:
     parent: deploy-app

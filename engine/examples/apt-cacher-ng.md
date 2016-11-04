@@ -1,6 +1,7 @@
 ---
 description: Installing and running an apt-cacher-ng service
-keywords: docker, example, package installation, networking, debian,  ubuntu
+keywords:
+- docker, example, package installation, networking, debian,  ubuntu
 menu:
   main:
     parent: engine_dockerize

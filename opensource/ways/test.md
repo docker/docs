@@ -1,6 +1,7 @@
 ---
 description: Testing contributions
-keywords: test, source, contributions, Docker
+keywords:
+- test, source, contributions, Docker
 menu:
   main:
     parent: smn_ways

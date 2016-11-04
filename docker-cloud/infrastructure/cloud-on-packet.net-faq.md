@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/faq/cloud-on-packet.net-faq/
 description: Docker Cloud and Packet.net
-keywords: Packet.net, Cloud, drives
+keywords:
+- Packet.net, Cloud, drives
 menu:
   main:
     parent: infrastructure

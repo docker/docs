@@ -4,7 +4,8 @@ aliases:
 - /windows/step_four/
 - /linux/step_four/
 description: Getting started with Docker
-keywords: beginner, getting started, Docker
+keywords:
+- beginner, getting started, Docker
 menu:
   main:
     identifier: getstart_build_image
@@ -26,7 +27,7 @@ In this next section, you will improve the `whalesay` image by building a new ve
 
 In this step, you use your favorite text editor to write a short Dockerfile.  A
 Dockerfile describes the software that is "baked" into an image. It isn't just
-ingredients, though—it can tell the software what environment to use or what
+ingredients tho, it can tell the software what environment to use or what
 commands to run. Your recipe is going to be very short.
 
 1. Go back to your command terminal window.
@@ -171,7 +172,7 @@ Finally, Docker finishes the build and reports its outcome.
 
 ## Step 4: Run your new docker-whale
 
-In this step, you verify the new image is on your computer and then you run your new image.
+In this step, you verify the new images is on your computer and then you run your new image.
 
 1. Open a command line terminal.
 

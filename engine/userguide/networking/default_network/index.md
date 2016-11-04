@@ -1,6 +1,7 @@
 ---
 description: Docker networking
-keywords: network, networking, bridge, docker,  documentation
+keywords:
+- network, networking, bridge, docker,  documentation
 menu:
   main:
     identifier: smn_networking_def
@@ -21,4 +22,4 @@ in this section are related to interacting with that default bridge network.
 - [Build your own bridge](build-bridges.md)
 - [Configure container DNS](configure-dns.md)
 - [Customize the docker0 bridge](custom-docker0.md)  
-- [IPv6 with Docker](ipv6.md)
+- [IPv6 with Docker](ipv6.md)  

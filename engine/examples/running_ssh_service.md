@@ -1,6 +1,7 @@
 ---
 description: Installing and running an SSHd service on Docker
-keywords: docker, example, package installation,  networking
+keywords:
+- docker, example, package installation,  networking
 menu:
   main:
     parent: engine_dockerize
@@ -39,7 +40,6 @@ Build the image using:
 ```bash
 $ docker build -t eg_sshd .
 ```
-
 ## Run a `test_sshd` container
 
 Then run it. You can then use `docker port` to find out what host port

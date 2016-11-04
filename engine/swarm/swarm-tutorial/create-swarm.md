@@ -1,6 +1,7 @@
 ---
 description: Initialize the swarm
-keywords: tutorial, cluster management, swarm mode
+keywords:
+- tutorial, cluster management, swarm mode
 menu:
   main:
     identifier: initialize-swarm

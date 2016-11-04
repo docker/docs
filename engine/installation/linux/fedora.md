@@ -2,7 +2,8 @@
 aliases:
 - /engine/installation/fedora/
 description: Instructions for installing Docker on Fedora.
-keywords: Docker, Docker documentation, Fedora, requirements,  linux
+keywords:
+- Docker, Docker documentation, Fedora, requirements,  linux
 menu:
   main:
     parent: engine_linux

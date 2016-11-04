@@ -1,6 +1,7 @@
 ---
 description: Installation and using Docker via Ansible
-keywords: ansible, installation, usage, docker,  documentation
+keywords:
+- ansible, installation, usage, docker,  documentation
 title: Using Ansible
 ---
 

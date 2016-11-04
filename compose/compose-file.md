@@ -2,7 +2,8 @@
 aliases:
 - /compose/yml
 description: Compose file reference
-keywords: fig, composition, compose, docker
+keywords:
+- fig, composition, compose, docker
 menu:
   main:
     parent: workw_compose

@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/feature-reference/service-links/
 description: Service discovery
-keywords: service, discover, links
+keywords:
+- service, discover, links
 menu:
   main:
     parent: apps

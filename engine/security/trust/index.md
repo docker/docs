@@ -1,6 +1,7 @@
 ---
 description: Use trusted images
-keywords: trust, security, docker,  index
+keywords:
+- trust, security, docker,  index
 menu:
   main:
     identifier: smn_content_trust

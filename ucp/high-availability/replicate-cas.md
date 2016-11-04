@@ -1,7 +1,8 @@
 ---
 description: Docker Universal Control plane has support for high availability. Learn
   how to set up your installation to ensure it tolerates failures.
-keywords: replica, controller, availability, high, ucp
+keywords:
+- replica, controller, availability, high, ucp
 menu:
   main:
     identifier: ucp_replicate_cas

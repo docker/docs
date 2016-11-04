@@ -1,6 +1,7 @@
 ---
 description: Contribute code
-keywords: governance, board, members, profiles
+keywords:
+- governance, board, members, profiles
 menu:
   main:
     identifier: smn_ways

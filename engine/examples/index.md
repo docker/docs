@@ -1,6 +1,7 @@
 ---
 description: Provides examples for using Docker
-keywords: dockerize, dockerizing apps, dockerizing applications, container,  containers
+keywords:
+- dockerize, dockerizing apps, dockerizing applications, container,  containers
 menu:
   main:
     identifier: engine_dockerize

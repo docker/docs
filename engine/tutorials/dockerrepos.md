@@ -3,7 +3,9 @@ aliases:
 - /engine/userguide/containers/dockerrepos/
 - /engine/userguide/dockerrepos/
 description: Learn how to use the Docker Hub to manage Docker images and work flow
-keywords: repo, Docker Hub, Docker Hub, registry, index, repositories, usage, pull image, push image, image, documentation
+keywords:
+- repo, Docker Hub, Docker Hub, registry, index, repositories, usage, pull image,
+  push image, image,  documentation
 menu:
   main:
     parent: engine_learn_menu

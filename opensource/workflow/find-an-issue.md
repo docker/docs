@@ -1,6 +1,7 @@
 ---
 description: Basic workflow for Docker contributions
-keywords: contribute, issue, review, workflow, beginner, expert, squash, commit
+keywords:
+- contribute, issue, review, workflow, beginner, expert, squash, commit
 menu:
   main:
     parent: smn_workflow

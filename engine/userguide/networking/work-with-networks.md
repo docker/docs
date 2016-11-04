@@ -1,6 +1,7 @@
 ---
 description: How to work with docker networks
-keywords: commands, Usage, network, docker, cluster
+keywords:
+- commands, Usage, network, docker, cluster
 menu:
   main:
     parent: smn_networking

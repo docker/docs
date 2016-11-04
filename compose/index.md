@@ -1,6 +1,7 @@
 ---
 description: Introduction and Overview of Compose
-keywords: documentation, docs,  docker, compose, orchestration,  containers
+keywords:
+- documentation, docs,  docker, compose, orchestration,  containers
 menu:
   main:
     identifier: workw_compose

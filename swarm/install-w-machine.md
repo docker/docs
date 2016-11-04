@@ -1,6 +1,7 @@
 ---
 description: Swarm release notes
-keywords: docker, swarm, clustering, discovery, release,  notes
+keywords:
+- docker, swarm, clustering, discovery, release,  notes
 menu:
   main:
     parent: workw_swarm

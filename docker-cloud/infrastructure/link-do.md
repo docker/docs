@@ -3,7 +3,8 @@ aliases:
 - /docker-cloud/getting-started/beginner/link-do/
 - /docker-cloud/getting-started/link-do/
 description: Link your DigitalOcean account
-keywords: link, DigitalOcean, account
+keywords:
+- link, DigitalOcean, account
 menu:
   main:
     parent: infrastructure

@@ -4,7 +4,8 @@ aliases:
 - /windows/step_one/
 - /linux/step_one/
 description: Getting started with Docker
-keywords: beginner, getting started, Docker, install
+keywords:
+- beginner, getting started, Docker, install
 menu:
   main:
     identifier: getstart_all_install
