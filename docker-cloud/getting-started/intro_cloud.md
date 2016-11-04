@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/getting-started/beginner/intro_cloud/
 description: Introducing Docker Cloud concepts and terminology
-keywords: node, create, understand
+keywords:
+- node, create, understand
 menu:
   main:
     parent: getting-started

@@ -1,6 +1,7 @@
 ---
 description: Explains how to create a pull request for change or new feature
-keywords: Kitematic, open source, contribute, contributor, tour, development, contribute,
+keywords:
+- Kitematic, open source, contribute, contributor, tour, development, contribute,
   pull request, review, workflow, beginner, squash,  commit
 menu:
   main:

@@ -1,6 +1,7 @@
 ---
 description: Learn about the system requirements for installing Docker Trusted Registry.
-keywords: docker, DTR, architecture, requirements
+keywords:
+- docker, DTR, architecture, requirements
 menu:
   main:
     identifier: dtr_system_requirements

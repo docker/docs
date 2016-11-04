@@ -3,7 +3,8 @@ aliases:
 - /docker-cloud/getting-started/python/9_load-balance_the_service/
 - /docker-cloud/getting-started/golang/9_load-balance_the_service/
 description: Load-balance the service
-keywords: load, balance, Python
+keywords:
+- load, balance, Python
 menu:
   main:
     parent: deploy-app

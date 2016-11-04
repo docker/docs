@@ -1,7 +1,8 @@
 ---
 description: Performing basic operation to use Notary in tandem with Docker Content
   Trust.
-keywords: docker, Notary, notary-client, docker content trust, content trust
+keywords:
+- docker, Notary, notary-client, docker content trust, content trust
 menu:
   main:
     parent: mn_notary

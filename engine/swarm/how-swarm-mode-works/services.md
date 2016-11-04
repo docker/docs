@@ -1,6 +1,7 @@
 ---
 description: How swarm mode services work
-keywords: docker, container, cluster, swarm mode, node
+keywords:
+- docker, container, cluster, swarm mode, node
 menu:
   main:
     identifier: how-services-work

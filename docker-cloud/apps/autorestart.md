@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/feature-reference/autorestart/
 description: Automatically restart a container in Docker Cloud
-keywords: container, restart, automated
+keywords:
+- container, restart, automated
 menu:
   main:
     parent: apps

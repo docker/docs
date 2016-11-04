@@ -1,6 +1,7 @@
 ---
 description: Get started with Docker Machine and a local VM
-keywords: docker, machine, virtualbox, local
+keywords:
+- docker, machine, virtualbox, local
 menu:
   main:
     parent: workw_machine

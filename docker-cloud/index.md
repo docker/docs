@@ -1,6 +1,7 @@
 ---
 description: Docker Cloud
-keywords: Docker, cloud
+keywords:
+- Docker, cloud
 menu:
   main:
     identifier: docker-cloud

@@ -1,6 +1,7 @@
 ---
 description: Provision with Machine
-keywords: docker, Swarm, clustering, provision, Machine
+keywords:
+- docker, Swarm, clustering, provision, Machine
 menu:
   main:
     parent: workw_swarm

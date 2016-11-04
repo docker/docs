@@ -1,6 +1,7 @@
 ---
 description: How to keep containers running when the daemon isn't available.
-keywords: docker, upgrade, daemon, dockerd, live-restore, daemonless container
+keywords:
+- docker, upgrade, daemon, dockerd, live-restore, daemonless container
 menu:
   main:
     parent: engine_admin

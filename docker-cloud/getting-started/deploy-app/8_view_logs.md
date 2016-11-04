@@ -3,7 +3,8 @@ aliases:
 - /docker-cloud/getting-started/python/8_view_logs/
 - /docker-cloud/getting-started/golang/8_view_logs/
 description: View service logs
-keywords: View, logs, Python
+keywords:
+- View, logs, Python
 menu:
   main:
     parent: deploy-app

@@ -3,7 +3,8 @@ aliases:
 - /ucp/upgrade-ucp/
 description: Learn how to upgrade Docker Universal Control Plane with minimal impact
   to your users.
-keywords: Docker, UCP, upgrade, update
+keywords:
+- Docker, UCP, upgrade, update
 menu:
   main:
     identifier: ucp_upgrade_installation

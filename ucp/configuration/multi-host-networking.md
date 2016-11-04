@@ -2,7 +2,8 @@
 aliases:
 - /ucp/networking/
 description: Docker Universal Control Plane
-keywords: networking, kv, engine-discovery, ucp
+keywords:
+- networking, kv, engine-discovery, ucp
 menu:
   main:
     identifier: ucp_configure_networking

@@ -2,7 +2,8 @@
 aliases:
 - /ucp/dtr-integration/
 description: Integrate UCP with Docker Trusted Registry
-keywords: trusted, registry, integrate, UCP, DTR
+keywords:
+- trusted, registry, integrate, UCP, DTR
 menu:
   main:
     identifier: ucp_integrate_dtr

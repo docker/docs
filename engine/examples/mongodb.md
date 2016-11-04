@@ -1,7 +1,8 @@
 ---
 description: Creating a Docker image with MongoDB pre-installed using a Dockerfile
   and sharing the image on Docker Hub
-keywords: docker, dockerize, dockerizing, article, example, docker.io, platform, package,
+keywords:
+- docker, dockerize, dockerizing, article, example, docker.io, platform, package,
   installation, networking, mongodb, containers, images, image, sharing, dockerfile,
   build, auto-building,  framework
 title: Dockerizing MongoDB
@@ -112,7 +113,7 @@ ENTRYPOINT ["/usr/bin/mongod"]
 
 Now save the file and let's build our image.
 
-> **Note:**  The full version of this `Dockerfile` can be found [here](https://github.com/docker/docker/blob/master/docs/examples/mongodb/Dockerfile).
+> **Note:**  The full version of this `Dockerfile` can be found [here](https://github.com/docker/docker.github.io/blob/master/engine/examples/mongodb/Dockerfile).
 
 ## Building the MongoDB Docker image
 

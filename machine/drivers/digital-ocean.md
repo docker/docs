@@ -1,6 +1,7 @@
 ---
 description: Digital Ocean driver for machine
-keywords: machine, Digital Ocean, driver
+keywords:
+- machine, Digital Ocean, driver
 menu:
   main:
     parent: smn_machine_drivers

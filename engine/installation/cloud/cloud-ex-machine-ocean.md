@@ -1,7 +1,8 @@
 ---
 description: Example of using Docker Machine to install Docker Engine on a cloud provider,
   using Digital Ocean.
-keywords: cloud, docker, machine, documentation,  installation, digitalocean
+keywords:
+- cloud, docker, machine, documentation,  installation, digitalocean
 menu:
   main:
     parent: install_cloud

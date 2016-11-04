@@ -4,7 +4,8 @@ aliases:
 - /docker-cloud/getting-started/intermediate/optimize-dockerfiles/
 - /docker-cloud/tutorials/optimize-dockerfiles/
 description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
-keywords: Examples, Usage, base image, docker, documentation, dockerfile, best practices,
+keywords:
+- Examples, Usage, base image, docker, documentation, dockerfile, best practices,
   hub,  official repo
 menu:
   main:

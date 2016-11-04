@@ -4,7 +4,8 @@ aliases:
 - /engine/installation/linux/frugalware/
 - /engine/installation/frugalware/
 description: Lists the installation methods
-keywords: 'Docker install '
+keywords:
+- 'Docker install '
 menu:
   main:
     identifier: engine_install

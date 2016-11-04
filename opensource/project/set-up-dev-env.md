@@ -1,6 +1,7 @@
 ---
 description: How to use Docker's development environment
-keywords: development, inception, container, image Dockerfile, dependencies, Go,  artifacts
+keywords:
+- development, inception, container, image Dockerfile, dependencies, Go,  artifacts
 menu:
   main:
     parent: smn_engine_contrib

@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/feature-reference/service-scaling/
 description: Scale your service, spawn new containers
-keywords: spawn, container, service, deploy
+keywords:
+- spawn, container, service, deploy
 menu:
   main:
     parent: apps

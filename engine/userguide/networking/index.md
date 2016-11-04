@@ -2,7 +2,8 @@
 aliases:
 - /engine/userguide/networking/dockernetworks/
 description: How do we connect docker containers within and across hosts ?
-keywords: Examples, Usage, network, docker, documentation, user guide, multihost, cluster
+keywords:
+- Examples, Usage, network, docker, documentation, user guide, multihost, cluster
 menu:
   main:
     identifier: networking_index

@@ -3,7 +3,9 @@ aliases:
 - /engine/userguide/containers/dockerizing/
 - /engine/userguide/dockerizing/
 description: A simple 'Hello world' exercise that introduced you to Docker.
-keywords: docker guide, docker, docker platform, how to, dockerize, dockerizing apps, dockerizing applications, container, containers
+keywords:
+- docker guide, docker, docker platform, how to, dockerize, dockerizing apps, dockerizing
+  applications, container,  containers
 menu:
   main:
     parent: engine_learn_menu

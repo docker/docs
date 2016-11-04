@@ -1,6 +1,7 @@
 ---
 description: Declaring default environment variables in file
-keywords: fig, composition, compose, docker, orchestration, environment, env file
+keywords:
+- fig, composition, compose, docker, orchestration, environment, env file
 menu:
   main:
     parent: workw_compose

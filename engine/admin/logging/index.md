@@ -2,7 +2,8 @@
 aliases:
 - /engine/reference/logging/
 description: Logging and Logging Drivers
-keywords: ' docker, logging, driver'
+keywords:
+- ' docker, logging, driver'
 menu:
   main:
     identifier: smn_logging

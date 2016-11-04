@@ -1,6 +1,7 @@
 ---
 description: Learn how to access Docker Universal Control Plane from the web browser.
-keywords: docker, ucp, web, administration
+keywords:
+- docker, ucp, web, administration
 menu:
   main:
     identifier: ucp_web_access

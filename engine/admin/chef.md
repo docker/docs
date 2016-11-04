@@ -2,7 +2,8 @@
 aliases:
 - /engine/articles/chef/
 description: Installation and using Docker via Chef
-keywords: chef, installation, usage, docker,  documentation
+keywords:
+- chef, installation, usage, docker,  documentation
 menu:
   main:
     parent: engine_admin

@@ -4,7 +4,8 @@ aliases:
 - /windows/step_six/
 - /linux/step_six/
 description: Getting started with Docker
-keywords: beginner, getting started, Docker
+keywords:
+- beginner, getting started, Docker
 menu:
   main:
     identifier: getstart_tag_push_pull

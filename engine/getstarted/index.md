@@ -5,7 +5,8 @@ aliases:
 - /linux/started/
 - /getting-started/
 description: Getting started with Docker
-keywords: beginner, getting started, Docker
+keywords:
+- beginner, getting started, Docker
 menu:
   main:
     identifier: getstart_all

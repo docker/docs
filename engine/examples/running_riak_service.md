@@ -1,6 +1,7 @@
 ---
 description: Build a Docker image with Riak pre-installed
-keywords: docker, example, package installation, networking,  riak
+keywords:
+- docker, example, package installation, networking,  riak
 menu:
   main:
     parent: engine_dockerize

@@ -2,7 +2,8 @@
 aliases:
 - /swarm/swarm_at_scale/about/
 description: Try Swarm at scale
-keywords: docker, swarm, scale, voting, application, architecture
+keywords:
+- docker, swarm, scale, voting, application, architecture
 menu:
   main:
     parent: scale_swarm
