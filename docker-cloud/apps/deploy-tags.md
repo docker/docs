@@ -2,8 +2,7 @@
 aliases:
 - /docker-cloud/feature-reference/deploy-tags/
 description: Deployment tags
-keywords:
-- Deployment, tags, services
+keywords: Deployment, tags, services
 menu:
   main:
     parent: apps

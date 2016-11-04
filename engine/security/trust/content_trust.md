@@ -1,7 +1,6 @@
 ---
 description: Enabling content trust in Docker
-keywords:
-- content, trust, security, docker,  documentation
+keywords: content, trust, security, docker,  documentation
 menu:
   main:
     parent: smn_content_trust

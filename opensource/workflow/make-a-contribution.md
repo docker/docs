@@ -1,7 +1,6 @@
 ---
 description: Explains basic workflow for Docker contributions
-keywords:
-- contribute, maintainers, review, workflow,  process
+keywords: contribute, maintainers, review, workflow,  process
 menu:
   main:
     parent: smn_workflow

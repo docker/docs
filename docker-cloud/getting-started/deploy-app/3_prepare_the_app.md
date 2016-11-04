@@ -3,8 +3,7 @@ aliases:
 - /docker-cloud/getting-started/python/3_prepare_the_app/
 - /docker-cloud/getting-started/golang/3_prepare_the_app/
 description: Prepare the application
-keywords:
-- Python, prepare, application
+keywords: Python, prepare, application
 menu:
   main:
     parent: deploy-app

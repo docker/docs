@@ -1,7 +1,6 @@
 ---
 description: Swarm filters
-keywords:
-- docker, swarm, clustering,  filters
+keywords: docker, swarm, clustering,  filters
 menu:
   main:
     parent: swarm_sched

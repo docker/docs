@@ -3,8 +3,7 @@ aliases:
 - /docker-cloud/getting-started/python/1_introduction/
 - /docker-cloud/getting-started/golang/1_introduction/
 description: Deploy an app to Docker Cloud
-keywords:
-- deploy, Python, application
+keywords: deploy, Python, application
 menu:
   main:
     parent: deploy-app

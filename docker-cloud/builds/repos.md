@@ -1,7 +1,6 @@
 ---
 description: Create and edit Docker Cloud repositories
-keywords:
-- Docker Cloud repositories, automated, build, images
+keywords: Docker Cloud repositories, automated, build, images
 menu:
   main:
     parent: builds

@@ -2,8 +2,7 @@
 aliases:
 - /docker-trusted-registry/accounts/
 description: Learn about the permission levels available on Docker Trusted Registry.
-keywords:
-- docker, registry, security, permissions, users
+keywords: docker, registry, security, permissions, users
 menu:
   main:
     identifier: dtr-authentication-authorization

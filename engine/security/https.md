@@ -3,8 +3,7 @@ aliases:
 - /engine/articles/https/
 - /articles/https/
 description: How to setup and run Docker with HTTPS
-keywords:
-- docker, docs, article, example, https, daemon, tls, ca,  certificate
+keywords: docker, docs, article, example, https, daemon, tls, ca,  certificate
 menu:
   main:
     parent: smn_secure_docker

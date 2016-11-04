@@ -4,8 +4,7 @@ aliases:
 - /windows/step_two/
 - /linux/step_two/
 description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
+keywords: beginner, getting started, Docker
 menu:
   main:
     identifier: getstart_understand

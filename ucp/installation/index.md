@@ -1,8 +1,7 @@
 ---
 description: Learn the requirements and procedure to install Docker Universal Control
   Plane on production.
-keywords:
-- docker, ucp, install, requirements
+keywords: docker, ucp, install, requirements
 menu:
   main:
     identifier: mn_ucp_installation

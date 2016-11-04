@@ -1,8 +1,6 @@
 ---
 description: Security configuration for Docker Trusted Registry
-keywords:
-- docker, documentation, about, technology, understanding, configuration, security,
-  enterprise, hub, registry
+keywords: docker, documentation, about, technology, understanding, configuration, security, enterprise, hub, registry
 menu:
   main:
     identifier: dtr_configure_security

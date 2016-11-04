@@ -1,7 +1,6 @@
 ---
 description: 'Swarm: a Docker-native clustering system'
-keywords:
-- docker, swarm,  clustering
+keywords: docker, swarm,  clustering
 menu:
   main:
     identifier: workw_swarm

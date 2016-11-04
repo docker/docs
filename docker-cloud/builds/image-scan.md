@@ -1,8 +1,6 @@
 ---
 description: 'Docker Security Scanning: automatic image scanning'
-keywords:
-- Docker, docker, scan, scanning, security, registry, plans, Docker Cloud, docs, documentation,
-  trusted, builds, trusted builds, automated builds
+keywords: Docker, docker, scan, scanning, security, registry, plans, Docker Cloud, docs, documentation, trusted, builds, trusted builds, automated builds
 menu:
   main:
     parent: builds

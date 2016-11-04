@@ -1,7 +1,6 @@
 ---
 description: Learn how to optimize your use of device mapper driver.
-keywords:
-- container, storage, driver, device mapper
+keywords: container, storage, driver, device mapper
 menu:
   main:
     parent: engine_driver

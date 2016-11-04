@@ -1,7 +1,6 @@
 ---
 description: Docker Cloud Overview
-keywords:
-- Docker, cloud, three
+keywords: Docker, cloud, three
 menu:
   main:
     parent: docker-cloud

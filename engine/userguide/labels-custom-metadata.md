@@ -1,7 +1,6 @@
 ---
 description: Description of labels, which are used to manage metadata on Docker objects.
-keywords:
-- Usage, user guide, labels, metadata, docker, documentation, examples, annotating
+keywords: Usage, user guide, labels, metadata, docker, documentation, examples, annotating
 menu:
   main:
     parent: engine_guide

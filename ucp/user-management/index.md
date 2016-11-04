@@ -1,7 +1,6 @@
 ---
 description: Learn how to manage user permissions on  Docker Universal Control Plane.
-keywords:
-- docker, ucp, management, security, users
+keywords: docker, ucp, management, security, users
 menu:
   main:
     identifier: mn_ucp_user_management

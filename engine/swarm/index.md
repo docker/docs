@@ -1,7 +1,6 @@
 ---
 description: Docker Engine swarm mode overview
-keywords:
-- docker, container, cluster, swarm
+keywords: docker, container, cluster, swarm
 menu:
   main:
     identifier: swarm_overview

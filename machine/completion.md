@@ -1,7 +1,6 @@
 ---
 description: Install Machine command-line completion
-keywords:
-- machine, docker, orchestration, cli,  reference
+keywords: machine, docker, orchestration, cli,  reference
 menu:
   main:
     identifier: machine_completion

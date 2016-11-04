@@ -1,7 +1,6 @@
 ---
 description: Getting started with Compose and WordPress
-keywords:
-- documentation, docs,  docker, compose, orchestration, containers
+keywords: documentation, docs,  docker, compose, orchestration, containers
 menu:
   main:
     parent: workw_compose

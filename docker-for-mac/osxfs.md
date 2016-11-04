@@ -2,8 +2,7 @@
 aliases:
 - /mackit/osxfs/
 description: OSXFS
-keywords:
-- mac, osxfs
+keywords: mac, osxfs
 menu:
   main:
     identifier: mac-osxfs

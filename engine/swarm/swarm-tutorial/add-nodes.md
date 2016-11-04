@@ -1,7 +1,6 @@
 ---
 description: Add nodes to the swarm
-keywords:
-- tutorial, cluster management, swarm
+keywords: tutorial, cluster management, swarm
 menu:
   main:
     identifier: add-nodes

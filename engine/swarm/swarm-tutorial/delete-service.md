@@ -1,7 +1,6 @@
 ---
 description: Remove the service from the swarm
-keywords:
-- tutorial, cluster management, swarm, service
+keywords: tutorial, cluster management, swarm, service
 menu:
   main:
     identifier: swarm-tutorial-delete-service

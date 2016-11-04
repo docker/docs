@@ -3,8 +3,7 @@ aliases:
 - /docker-cloud/getting-started/beginner/link-azure/
 - /docker-cloud/getting-started/link-azure/
 description: Link your Microsoft Azure account
-keywords:
-- Microsoft, Azure, account
+keywords: Microsoft, Azure, account
 menu:
   main:
     parent: infrastructure

@@ -3,8 +3,7 @@ aliases:
 - /docker-cloud/getting-started/beginner/link-softlayer/
 - /docker-cloud/getting-started/link-softlayer/
 description: Link your SoftLayer account
-keywords:
-- SoftLayer, link, cloud
+keywords: SoftLayer, link, cloud
 menu:
   main:
     parent: infrastructure

@@ -1,7 +1,6 @@
 ---
 description: Documentation covering common questions users have about Kitematic
-keywords:
-- docker, documentation, about, technology, kitematic,  gui
+keywords: docker, documentation, about, technology, kitematic,  gui
 menu:
   main:
     parent: toolbox_kitematic

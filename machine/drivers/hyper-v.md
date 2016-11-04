@@ -1,7 +1,6 @@
 ---
 description: Microsoft Hyper-V driver for machine
-keywords:
-- machine, Microsoft Hyper-V, driver
+keywords: machine, Microsoft Hyper-V, driver
 menu:
   main:
     parent: smn_machine_drivers

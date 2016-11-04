@@ -3,8 +3,7 @@ aliases:
 - /engine/articles/configuring/
 - /engine/admin/configuring/
 description: Configuring and running the Docker daemon on various distributions
-keywords:
-- docker, daemon, configuration, running,  process managers
+keywords: docker, daemon, configuration, running,  process managers
 title: Configuring and running Docker
 ---
 

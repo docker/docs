@@ -1,8 +1,7 @@
 ---
 description: Running a Swarm container on Docker Engine. Run a Swarm binary on the
   host OS without Docker Engine.
-keywords:
-- docker, Swarm, container, binary, clustering, install, installation
+keywords: docker, Swarm, container, binary, clustering, install, installation
 menu:
   main:
     identifier: how-to-get-and-run-Swarm

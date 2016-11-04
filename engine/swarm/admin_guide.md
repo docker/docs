@@ -2,8 +2,7 @@
 aliases:
 - /engine/swarm/manager-administration-guide/
 description: Manager administration guide
-keywords:
-- docker, container, swarm, manager, raft
+keywords: docker, container, swarm, manager, raft
 menu:
   main:
     identifier: manager_admin_guide

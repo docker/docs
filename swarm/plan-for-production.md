@@ -1,7 +1,6 @@
 ---
 description: Plan for Swarm in production
-keywords:
-- docker, swarm, scale, voting, application,  plan
+keywords: docker, swarm, scale, voting, application,  plan
 menu:
   main:
     parent: workw_swarm

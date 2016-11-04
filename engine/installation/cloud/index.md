@@ -7,8 +7,7 @@ aliases:
 - /engine/installation/rackspace/
 - /engine/installation/joyent/
 description: Cloud Installations
-keywords:
-- 'Docker install '
+keywords: 'Docker install '
 menu:
   main:
     identifier: install_cloud

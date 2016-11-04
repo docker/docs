@@ -1,8 +1,7 @@
 ---
 description: Style guide for Docker documentation describing standards and conventions
   for contributors
-keywords:
-- style, guide, docker,  documentation
+keywords: style, guide, docker,  documentation
 menu:
   main:
     parent: mn_oss_contrib

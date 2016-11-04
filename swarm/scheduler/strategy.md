@@ -1,7 +1,6 @@
 ---
 description: Swarm strategies
-keywords:
-- docker, swarm, clustering,  strategies
+keywords: docker, swarm, clustering,  strategies
 menu:
   main:
     parent: swarm_sched

@@ -3,8 +3,7 @@ aliases:
 - /docker-cloud/getting-started/python/
 - /docker-cloud/getting-started/golang/
 description: Go or Python and Docker Cloud
-keywords:
-- Python, Go, Docker, Cloud, application
+keywords: Python, Go, Docker, Cloud, application
 menu:
   main:
     identifier: deploy-app

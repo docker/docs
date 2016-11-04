@@ -3,8 +3,7 @@ aliases:
 - /docker-cloud/feature-reference/deploy-to-cloud/
 - /docker-cloud/tutorials/deploy-to-cloud/
 description: Deploy to Docker Cloud
-keywords:
-- deploy, docker, cloud
+keywords: deploy, docker, cloud
 menu:
   main:
     parent: apps

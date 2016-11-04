@@ -1,7 +1,6 @@
 ---
 description: Automating content push pulls with trust
-keywords:
-- trust, security, docker,  documentation, automation
+keywords: trust, security, docker,  documentation, automation
 menu:
   main:
     parent: smn_content_trust
@@ -79,4 +78,3 @@ unable to process Dockerfile: No trust data for notrust
 * [Manage keys for content trust](trust_key_mng.md)
 * [Delegations for content trust](trust_delegation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
-

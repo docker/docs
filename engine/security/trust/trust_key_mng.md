@@ -1,7 +1,6 @@
 ---
 description: Manage keys for content trust
-keywords:
-- trust, security, root,  keys, repository
+keywords: trust, security, root,  keys, repository
 menu:
   main:
     parent: smn_content_trust

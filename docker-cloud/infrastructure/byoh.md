@@ -4,8 +4,7 @@ aliases:
 - /docker-cloud/tutorials/byoh/
 - /docker-cloud/getting-started/use-byon/
 description: Use the Docker Cloud Agent
-keywords:
-- agent, Cloud, install
+keywords: agent, Cloud, install
 menu:
   main:
     parent: infrastructure

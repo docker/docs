@@ -1,8 +1,7 @@
 ---
 description: Instructions for installing Docker as a binary. Mostly meant for hackers
   who want to try out Docker on a variety of environments.
-keywords:
-- binaries, installation, docker, documentation,  linux
+keywords: binaries, installation, docker, documentation,  linux
 menu:
   main:
     parent: engine_install

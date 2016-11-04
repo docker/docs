@@ -2,8 +2,7 @@
 aliases:
 - /engine/installation/centos/
 description: Instructions for installing Docker on CentOS
-keywords:
-- Docker, Docker documentation, requirements, linux, centos, epel, docker.io,  docker-io
+keywords: Docker, Docker documentation, requirements, linux, centos, epel, docker.io,  docker-io
 menu:
   main:
     parent: engine_linux

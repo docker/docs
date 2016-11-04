@@ -1,7 +1,6 @@
 ---
 description: Getting Started tutorial for Docker Engine swarm mode
-keywords:
-- tutorial, cluster management, swarm mode
+keywords: tutorial, cluster management, swarm mode
 menu:
   main:
     identifier: tutorial-setup

@@ -1,7 +1,6 @@
 ---
 description: Learn how to optimize your use of Btrfs driver.
-keywords:
-- 'container, storage, driver, Btrfs '
+keywords: 'container, storage, driver, Btrfs '
 menu:
   main:
     parent: engine_driver

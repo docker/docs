@@ -3,8 +3,7 @@ aliases:
 - /ucp/plan-production-install/
 description: Learn about the Docker Universal Control Plane architecture, and the
   requirements to install it on production.
-keywords:
-- docker, ucp, install, checklist
+keywords: docker, ucp, install, checklist
 menu:
   main:
     identifier: ucp_plan_production_install

@@ -1,7 +1,6 @@
 ---
 description: Learn how to configure DNS in user-defined networks
-keywords:
-- docker, DNS, network
+keywords: docker, DNS, network
 menu:
   main:
     parent: smn_networking

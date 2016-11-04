@@ -3,8 +3,7 @@ aliases:
 - /docker-cloud/getting-started/python/6_define_environment_variables/
 - /docker-cloud/getting-started/golang/6_define_environment_variables/
 description: Define environment variables
-keywords:
-- Python, service, environment, service
+keywords: Python, service, environment, service
 menu:
   main:
     parent: deploy-app
