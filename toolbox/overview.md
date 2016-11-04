@@ -1,6 +1,7 @@
 ---
 description: Documentation that provides an overview of Toolbox
-keywords: docker, documentation, about, technology, kitematic, gui, toolbox
+keywords:
+- docker, documentation, about, technology, kitematic, gui, toolbox
 menu:
   main:
     parent: workw_toolbox

@@ -1,6 +1,7 @@
 ---
 description: Google Compute Engine driver for machine
-keywords: machine, Google Compute Engine, driver
+keywords:
+- machine, Google Compute Engine, driver
 menu:
   main:
     parent: smn_machine_drivers

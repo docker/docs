@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/feature-reference/triggers/
 description: Use triggers
-keywords: API, triggers, endpoints
+keywords:
+- API, triggers, endpoints
 menu:
   main:
     parent: apps

@@ -1,7 +1,8 @@
 ---
 description: Learn about the permission levels available in Docker Universal Control
   Plane.
-keywords: authorization, authentication, users, teams, UCP
+keywords:
+- authorization, authentication, users, teams, UCP
 menu:
   main:
     identifier: ucp_permission_levels

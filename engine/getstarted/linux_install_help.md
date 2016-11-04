@@ -3,7 +3,8 @@ aliases:
 - /mac/started/
 description: Getting started with Docker
 identifier: getstart_linux_install
-keywords: beginner, getting started, Docker, install
+keywords:
+- beginner, getting started, Docker, install
 parent: tutorial_getstart_menu
 title: Install Docker and run hello-world
 weight: "-80"

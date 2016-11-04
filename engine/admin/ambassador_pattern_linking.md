@@ -2,7 +2,8 @@
 aliases:
 - /engine/articles/ambassador_pattern_linking/
 description: Using the Ambassador pattern to abstract (network) services
-keywords: Examples, Usage, links, docker, documentation, examples, names, name,  container
+keywords:
+- Examples, Usage, links, docker, documentation, examples, names, name,  container
   naming
 menu:
   main:

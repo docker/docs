@@ -1,7 +1,8 @@
 ---
 description: Learn how to configure Docker Universal Control Plane to use your own
   certificates.
-keywords: Universal Control Plane, UCP, certificate, authentiation, tls
+keywords:
+- Universal Control Plane, UCP, certificate, authentiation, tls
 menu:
   main:
     identifier: ucp_configure_certs

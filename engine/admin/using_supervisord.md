@@ -2,7 +2,8 @@
 aliases:
 - /engine/articles/using_supervisord/
 description: How to use Supervisor process management with Docker
-keywords: docker, supervisor,  process management
+keywords:
+- docker, supervisor,  process management
 menu:
   main:
     parent: engine_admin

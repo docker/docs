@@ -1,7 +1,8 @@
 ---
 description: Learn how to manage teams to enforce fine-grain access control in Docker
   Trusted Registry.
-keywords: docker, registry, security, permissions, teams
+keywords:
+- docker, registry, security, permissions, teams
 menu:
   main:
     identifier: dtr-create-teams

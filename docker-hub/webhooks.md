@@ -1,6 +1,7 @@
 ---
 description: Docker Hub Automated Builds
-keywords: Docker, webhookds, hub, builds
+keywords:
+- Docker, webhookds, hub, builds
 menu:
   main:
     parent: mn_pubhub

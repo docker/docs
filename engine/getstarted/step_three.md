@@ -4,7 +4,8 @@ aliases:
 - /windows/step_three/
 - /linux/step_three/
 description: Getting started with Docker
-keywords: beginner, getting started, Docker
+keywords:
+- beginner, getting started, Docker
 menu:
   main:
     identifier: getstart_locate

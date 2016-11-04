@@ -2,7 +2,8 @@
 aliases:
 - /engine/installation/gentoolinux/
 description: Installation instructions for Docker on Gentoo.
-keywords: gentoo linux, docker, documentation,  installation
+keywords:
+- gentoo linux, docker, documentation,  installation
 menu:
   main:
     parent: engine_linux

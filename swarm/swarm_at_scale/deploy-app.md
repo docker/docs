@@ -2,7 +2,8 @@
 aliases:
 - /swarm/swarm_at_scale/04-deploy-app/
 description: Try Swarm at scale
-keywords: docker, swarm, scale, voting, application,  certificates
+keywords:
+- docker, swarm, scale, voting, application,  certificates
 menu:
   main:
     parent: scale_swarm
@@ -305,7 +306,7 @@ the containers at once. This extra credit
     service in the file file.  This application relies on a volume and a network,
     declare those at the bottom of the file.
 
-3. Check your work against <a href="docker-compose.yml" target="_blank">this
+3. Check your work against <a href="../docker-compose.yml" target="_blank">this
 result file</a>
 
 4. When you are satisfied, save the `docker-compose.yml` file to your system.

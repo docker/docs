@@ -1,6 +1,7 @@
 ---
 description: Docker Store overview
-keywords: Docker, docker, store, purchase images
+keywords:
+- Docker, docker, store, purchase images
 menu:
   main:
     parent: docker-store

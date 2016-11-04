@@ -1,6 +1,7 @@
 ---
 description: Exoscale driver for machine
-keywords: machine, exoscale, driver
+keywords:
+- machine, exoscale, driver
 menu:
   main:
     parent: smn_machine_drivers

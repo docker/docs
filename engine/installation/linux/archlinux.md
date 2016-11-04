@@ -2,7 +2,8 @@
 aliases:
 - /engine/installation/archlinux/
 description: Installation instructions for Docker on ArchLinux.
-keywords: arch linux, docker, documentation,  installation
+keywords:
+- arch linux, docker, documentation,  installation
 menu:
   main:
     parent: engine_linux

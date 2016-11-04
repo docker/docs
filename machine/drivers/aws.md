@@ -1,6 +1,7 @@
 ---
 description: Amazon Web Services driver for machine
-keywords: machine, Amazon Web Services, driver
+keywords:
+- machine, Amazon Web Services, driver
 menu:
   main:
     parent: smn_machine_drivers

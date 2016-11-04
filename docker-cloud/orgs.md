@@ -1,6 +1,7 @@
 ---
 description: Docker Cloud for Organizations and Teams
-keywords: organizations, teams, Docker Cloud, resources, permissions
+keywords:
+- organizations, teams, Docker Cloud, resources, permissions
 menu:
   main:
     parent: docker-cloud

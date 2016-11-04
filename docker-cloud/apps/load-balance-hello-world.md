@@ -3,7 +3,8 @@ aliases:
 - /docker-cloud/getting-started/intermediate/load-balance-hello-world/
 - /docker-cloud/tutorials/load-balance-hello-world/
 description: Create a proxy or load balancer
-keywords: proxy, load, balancer
+keywords:
+- proxy, load, balancer
 menu:
   main:
     parent: apps

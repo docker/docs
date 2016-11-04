@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/tutorials/slack-integration/
 description: Integrate with Slack
-keywords: Slack, integrate, notifications
+keywords:
+- Slack, integrate, notifications
 menu:
   main:
     parent: docker-cloud

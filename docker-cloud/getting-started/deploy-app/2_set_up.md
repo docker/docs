@@ -3,7 +3,8 @@ aliases:
 - /docker-cloud/getting-started/python/2_set_up/
 - /docker-cloud/getting-started/golang/2_set_up/
 description: Set up the application
-keywords: Python, application, setup
+keywords:
+- Python, application, setup
 menu:
   main:
     parent: deploy-app

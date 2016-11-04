@@ -2,7 +2,8 @@
 aliases:
 - /engine/articles/registry_mirror/
 description: How to set up and run a local registry mirror
-keywords: docker, registry, mirror,  examples
+keywords:
+- docker, registry, mirror,  examples
 menu:
   main:
     parent: engine_admin

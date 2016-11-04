@@ -1,7 +1,8 @@
 ---
 description: Learn how to access Docker Universal Control Plane from the web and the
   CLI.
-keywords: docker, ucp, cli
+keywords:
+- docker, ucp, cli
 menu:
   main:
     identifier: mn_ucp_access

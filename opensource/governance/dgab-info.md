@@ -1,6 +1,7 @@
 ---
 description: Docker Governance Advisory Board
-keywords: governance, board, members, explained
+keywords:
+- governance, board, members, explained
 menu:
   main:
     parent: smn_govern

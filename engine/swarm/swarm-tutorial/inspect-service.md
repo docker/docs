@@ -1,6 +1,7 @@
 ---
 description: Inspect the application
-keywords: tutorial, cluster management, swarm mode
+keywords:
+- tutorial, cluster management, swarm mode
 menu:
   main:
     identifier: inspect-application

@@ -3,7 +3,8 @@ alias:
 - /reference/api/hub_registry_spec/
 - /userguide/image_management/
 description: Documentation for docker Registry and Registry API
-keywords: docker, registry, api,  hub
+keywords:
+- docker, registry, api,  hub
 menu:
   main:
     parent: engine_images

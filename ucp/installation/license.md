@@ -1,6 +1,7 @@
 ---
 description: Learn how to license your Docker Universal Control Plane installation.
-keywords: Universal Control Plane, UCP, install, license
+keywords:
+- Universal Control Plane, UCP, install, license
 menu:
   main:
     identifier: ucp_license

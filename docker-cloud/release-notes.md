@@ -1,6 +1,7 @@
 ---
 description: Docker Cloud
-keywords: Docker, cloud, release, notes
+keywords:
+- Docker, cloud, release, notes
 menu:
   main:
     parent: docker-cloud

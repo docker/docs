@@ -3,7 +3,8 @@ aliases:
 - /docker-cloud/getting-started/python/4_push_to_cloud_registry/
 - /docker-cloud/getting-started/golang/4_push_to_cloud_registry/
 description: Push the Docker image to Docker Cloud's Registry
-keywords: image, Docker, cloud
+keywords:
+- image, Docker, cloud
 menu:
   main:
     parent: deploy-app

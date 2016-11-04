@@ -3,7 +3,8 @@ aliases:
 - /docker-cloud/feature-reference/docker-upgrade/
 - /docker-cloud/tutorials/docker-upgrade/
 description: Upgrade Docker Engine on a node
-keywords: upgrade, engine, node
+keywords:
+- upgrade, engine, node
 menu:
   main:
     parent: infrastructure

@@ -2,7 +2,8 @@
 aliases:
 - /mackit/faqs/
 description: Frequently asked questions
-keywords: mac faqs
+keywords:
+- mac faqs
 menu:
   main:
     identifier: docker-mac-faqs
