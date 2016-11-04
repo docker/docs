@@ -5,13 +5,8 @@ advisory: experimental
 description: The plugin ls command description and usage
 keywords:
 - plugin, list
-menu:
-  main:
-    parent: smn_cli
-title: plugin ls
+title: docker plugin ls (experimental)
 ---
-
-# plugin ls (experimental)
 
 ```markdown
 Usage:  docker plugin ls

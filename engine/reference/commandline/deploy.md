@@ -5,13 +5,8 @@ advisory: experimental
 description: The deploy command description and usage
 keywords:
 - stack, deploy
-menu:
-  main:
-    parent: smn_cli
-title: deploy
+title: docker deploy
 ---
-
-# stack deploy (experimental)
 
 ```markdown
 Usage:  docker deploy [OPTIONS] STACK

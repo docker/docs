@@ -9,15 +9,8 @@ aliases:
 description: Getting Started
 keywords:
 - windows, beta, alpha, tutorial
-menu:
-  main:
-    identifier: docker-win-getstart
-    parent: pinata_win_menu
-    weight: 1
-title: Getting Started
+title: Get started with Docker for Windows
 ---
-
-# Getting Started with Docker for Windows
 
 Welcome to Docker for Windows!
 

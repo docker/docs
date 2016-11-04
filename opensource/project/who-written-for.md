@@ -1,16 +1,11 @@
 ---
-aliases: 
+aliases:
 - /project/who-written-for/
 description: Introduction to project contribution at Docker
 keywords:
 - Gordon, introduction, turtle, machine, libcontainer,  how to
-menu:
-  main:
-    parent: smn_engine_contrib
 title: README first
 ---
-
-# README first
 
 This section of the documentation contains a guide for Docker users who want to
 contribute code or documentation to the Docker Engine project. As a community, we

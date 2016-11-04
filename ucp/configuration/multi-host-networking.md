@@ -4,15 +4,8 @@ aliases:
 description: Docker Universal Control Plane
 keywords:
 - networking, kv, engine-discovery, ucp
-menu:
-  main:
-    identifier: ucp_configure_networking
-    parent: mn_ucp_configuration
-    weight: 40
-title: Set up container networking
+title: Enable container networking with UCP
 ---
-
-# Enable container networking with UCP
 
 Along with host and bridge networks, Docker Engine lets users create container
 overlay networks. These networks span multiple hosts running Docker Engine.

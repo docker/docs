@@ -5,13 +5,8 @@ aliases:
 description: Describes how to use the fluentd logging driver.
 keywords:
 - Fluentd, docker, logging, driver
-menu:
-  main:
-    parent: smn_logging
 title: Fluentd logging driver
 ---
-
-# Fluentd logging driver
 
 The `fluentd` logging driver sends container logs to the
 [Fluentd](http://www.fluentd.org/) collector as structured log data. Then, users

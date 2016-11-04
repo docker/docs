@@ -1,17 +1,9 @@
 ---
-description: Learn how to configure Docker Universal Control Plane to store your logs
-  on an external log system.
+description: Learn how to configure Docker Universal Control Plane to store your logs on an external log system.
 keywords:
 - docker, ucp, integrate, logs
-menu:
-  main:
-    identifier: ucp_configure_logs
-    parent: mn_ucp_configuration
-    weight: 10
 title: Configure UCP logging
 ---
-
-## Configure UCP logging
 
 You can configure UCP for sending logs to a remote logging service:
 

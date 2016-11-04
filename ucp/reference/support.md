@@ -2,14 +2,8 @@
 description: Generate a support dump for this engine.
 keywords:
 - docker, ucp, support, logs
-menu:
-  main:
-    identifier: ucp_ref_support
-    parent: ucp_ref
-title: support
+title: docker/ucp support
 ---
-
-# docker/ucp support
 
 Generate a support dump for this engine.
 

@@ -2,14 +2,8 @@
 description: Dump out public certificates
 keywords:
 - dump-certs, ucp
-menu:
-  main:
-    identifier: ucp_ref_dump_certs
-    parent: ucp_ref
-title: dump-certs
+title: docker/ucp dump-certs
 ---
-
-# docker/ucp dump-certs
 
 Dump out the public certs for this UCP controller.
 

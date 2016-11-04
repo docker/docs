@@ -2,19 +2,14 @@
 description: Explains next steps after the tour
 keywords:
 - Kitematic, open source, contribute, contributor, tour, development, contribute
-menu:
-  main:
-    parent: smn_kitematic_contrib
-    weight: 6
+
 title: Where to learn more
 ---
-
-# Where to learn more
 
 You've just created your first pull request to Kitematic!
 
 The next
-step is to learn how to <a href="http://docs.docker.com/opensource/workflow/review-pr/" target="_blank">participate in your PR's
+step is to learn how to <a href="/opensource/workflow/review-pr/" target="_blank">participate in your PR's
 review</a>.
 
 ## Take the development challenge
@@ -36,9 +31,9 @@ As an exercise, implement the code changes needed to display the current contain
 ## Learn more about open source
 To learn more about contributing to Docker open source projects, see:
 
-* <a href="http://docs.docker.com/opensource/project/who-written-for/" target="_blank">
+* <a href="/opensource/project/who-written-for/" target="_blank">
  README First</a>
 
-* <a href="http://docs.docker.com/opensource/code/" target="_blank"> Quick Start contribution </a>
+* <a href="/opensource/code/" target="_blank"> Quick Start contribution </a>
 
-* <a href="http://docs.docker.com/opensource/workflow/make-a-contribution/" target="_blank"> Understand how to contribute </a>
+* <a href="/opensource/workflow/make-a-contribution/" target="_blank"> Understand how to contribute </a>

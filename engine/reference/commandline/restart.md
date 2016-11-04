@@ -4,13 +4,8 @@ aliases:
 description: The restart command description and usage
 keywords:
 - restart, container, Docker
-menu:
-  main:
-    parent: smn_cli
-title: restart
+title: docker restart
 ---
-
-# restart
 
 ```markdown
 Usage:  docker restart [OPTIONS] CONTAINER [CONTAINER...]

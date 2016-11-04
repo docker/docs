@@ -2,14 +2,8 @@
 description: Regenerate certificates for Docker Universal Control Plane.
 keywords:
 - install, ucp
-menu:
-  main:
-    identifier: ucp_ref_regen_certs
-    parent: ucp_ref
-title: regen-certs.md
+title: docker/ucp regen-certs
 ---
-
-# docker/ucp regen-certs
 
 Regenerate keys and certificates for a UCP controller
 

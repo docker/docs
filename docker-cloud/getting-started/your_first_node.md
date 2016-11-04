@@ -5,14 +5,8 @@ aliases:
 description: Deploy your first node on Docker Cloud
 keywords:
 - node, create, understand
-menu:
-  main:
-    parent: getting-started
-    weight: -50
 title: Deploy your first node
 ---
-
-# Deploy Your First Node
 
 In this step you'll create your first node (inside a node cluster) on Docker Cloud.
 

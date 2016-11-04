@@ -5,13 +5,8 @@ aliases:
 description: Link your SoftLayer account
 keywords:
 - SoftLayer, link, cloud
-menu:
-  main:
-    parent: infrastructure
-title: Link to SoftLayer hosts
+title: Link a SoftLayer account
 ---
-
-# Link your SoftLayer account
 
 You can register your SoftLayer account credentials in your Docker Cloud account
 to deploy **nodes** using Docker Cloud's

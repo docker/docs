@@ -3,13 +3,8 @@ description: machine
 published: false
 keywords:
 - machine, orchestration, install, installation, docker, documentation
-menu:
-  main:
-    parent: mn_install
-title: Docker Machine
+title: Machine driver specification v1
 ---
-
-# Machine Driver Specification v1
 
 This is the standard configuration and specification for version 1 drivers.
 

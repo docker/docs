@@ -5,13 +5,8 @@ advisory: experimental
 description: the plugin rm command description and usage
 keywords:
 - plugin, rm
-menu:
-  main:
-    parent: smn_cli
-title: plugin rm
+title: docker plugin rm (experimental)
 ---
-
-# plugin rm (experimental)
 
 ```markdown
 Usage:  docker plugin rm PLUGIN

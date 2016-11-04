@@ -2,15 +2,8 @@
 description: Inspect the application
 keywords:
 - tutorial, cluster management, swarm mode
-menu:
-  main:
-    identifier: inspect-application
-    parent: swarm-tutorial
-    weight: 17
-title: Inspect the service
+title: Inspect a service on the swarm
 ---
-
-# Inspect a service on the swarm
 
 When you have [deployed a service](deploy-service.md) to your swarm, you can use
 the Docker CLI to see details about the service running in the swarm.

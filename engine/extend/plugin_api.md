@@ -4,14 +4,8 @@ aliases:
 description: 'How to write Docker plugins extensions '
 keywords:
 - API, Usage, plugins, documentation, developer
-menu:
-  main:
-    parent: engine_extend
-    weight: 7
-title: Plugins API
+title: Docker plugin API
 ---
-
-# Docker Plugin API
 
 Docker plugins are out-of-process extensions which add capabilities to the
 Docker Engine.

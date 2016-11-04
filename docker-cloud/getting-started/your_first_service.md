@@ -5,14 +5,8 @@ aliases:
 description: Deploy your first service on Docker Cloud
 keywords:
 - service, Cloud, three
-menu:
-  main:
-    parent: getting-started
-    weight: -40
-title: Deploy your first service
+title: Create your first service
 ---
-
-# Your first service
 
 This page describes how to create a service on Docker Cloud.
 

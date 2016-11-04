@@ -4,15 +4,8 @@ aliases:
 description: Learn how to install the commercially supported version of Docker Engine.
 keywords:
 - docker, engine, dtr, upgrade
-menu:
-  main:
-    identifier: csengine_upgrade
-    parent: menu_csengine
-    weight: 10
-title: Upgrade
+title: Upgrade Commercially Supported Docker Engine
 ---
-
-# Upgrade CS Docker Engine
 
 This article explains how to upgrade your CS Docker Engine.
 

@@ -3,14 +3,8 @@ aliases: /docker-cloud/tutorials/link-source/
 description: Link to your source code repository
 keywords:
 - sourcecode, github, bitbucket, Cloud
-menu:
-  main:
-    parent: builds
-    weight: -60
-title: Link to a source code repository
+title: Link Docker Cloud to a source code provider
 ---
-
-# Link Docker Cloud to a source code provider
 
 To automate building and testing of your images, you link to your hosted source
 code service to Docker Cloud so that it can access your source code

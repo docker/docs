@@ -4,15 +4,8 @@ aliases:
 description: Logging and Logging Drivers
 keywords:
 - ' docker, logging, driver'
-menu:
-  main:
-    identifier: smn_logging
-    parent: engine_admin
-    weight: 9
-title: Logging
+title: Logging drivers
 ---
-
-# Logging Drivers
 
 * [Configuring logging drivers](overview.md)
 * [Configuring log tags](log_tags.md)

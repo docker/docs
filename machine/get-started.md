@@ -2,14 +2,8 @@
 description: Get started with Docker Machine and a local VM
 keywords:
 - docker, machine, virtualbox, local
-menu:
-  main:
-    parent: workw_machine
-    weight: -70
-title: Get started with a local VM
+title: Get started with Docker Machine and a local VM
 ---
-
-# Get started with Docker Machine and a local VM
 
 Let's take a look at using `docker-machine` to create, use and manage a
 Docker host inside of a local virtual machine.

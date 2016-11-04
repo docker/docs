@@ -4,14 +4,8 @@ aliases:
 description: Installation and using Docker via Chef
 keywords:
 - chef, installation, usage, docker,  documentation
-menu:
-  main:
-    parent: engine_admin
-    weight: "11"
-title: Using Chef
+title: Use Chef
 ---
-
-# Using Chef
 
 > **Note**:
 > Please note this is a community contributed installation path.

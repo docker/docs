@@ -2,14 +2,8 @@
 description: Docker Trusted Registry backup command reference.
 keywords:
 - docker, registry, reference, backup
-menu:
-  main:
-    identifier: dtr_reference_backup
-    parent: dtr_menu_reference
-title: backup
+title: docker/dtr backup
 ---
-
-# docker/dtr backup
 
 Backup a DTR cluster to a tar file and stream it to stdout
 

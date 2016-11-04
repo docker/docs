@@ -2,14 +2,8 @@
 description: Shows a list of available commands for Docker Universal Control Plane.
 keywords:
 - help, ucp
-menu:
-  main:
-    identifier: ucp_ref_help
-    parent: ucp_ref
-title: help
+title: docker/ucp help
 ---
-
-# docker/ucp help
 
 Docker Universal Control Plane Tool
 

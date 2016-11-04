@@ -2,14 +2,8 @@
 description: How to set, use and manage environment variables in Compose
 keywords:
 - fig, composition, compose, docker, orchestration, environment, variables, env file
-menu:
-  main:
-    parent: workw_compose
-    weight: 10
 title: Environment variables in Compose
 ---
-
-# Environment variables in Compose
 
 There are multiple parts of Compose that deal with environment variables in one sense or another. This page should help you find the information you need.
 

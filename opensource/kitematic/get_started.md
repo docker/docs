@@ -2,14 +2,8 @@
 description: Overview of Kitematic development process
 keywords:
 - Kitematic, open source, contribute, contributor, tour, development
-menu:
-  main:
-    parent: smn_kitematic_contrib
-    weight: 1
-title: Get started
+title: Get started with your Kitematic contributions
 ---
-
-## Contribute to Kitematic
 
 Kitematic is an open source project that simplifies the Docker experience. It
 automates Docker installation and setup, and provides an interactive graphical
@@ -17,13 +11,16 @@ user interface (GUI) for working with containers. You can use Kitematic to creat
 
 ![Kitematic GUI](images/gui-splash-hub.png)
 
-See the <a href="http://docs.docker.com/kitematic/userguide" target="_blank"> Kitematic user guide</a> to learn more about it from a user perspective.
+See the <a href="/kitematic/userguide" target="_blank"> Kitematic user guide</a> to learn more about it from a user perspective.
 
 ## We welcome your contributions!
+
 We'd like to see Kitematic evolve
 with community contributed add-ons, extensions, themes, plug-ins, and cool, new
 features.
+
 ## Start the developer tour
+
 If you're new to working with Docker open source projects or new to
 the Kitematic codebase, this quick tour will help you get started. Follow along with these steps to set up your Kitematic development environment and practice working on an example issue.
 
@@ -34,4 +31,5 @@ the Kitematic codebase, this quick tour will help you get started. Follow along 
 5. [Where to learn more](next_steps.md)
 
 ## Where to go next
+
 [Find an issue on GitHub](find_issue.md) to get started.

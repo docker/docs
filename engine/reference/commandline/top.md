@@ -4,13 +4,8 @@ aliases:
 description: The top command description and usage
 keywords:
 - container, running, processes
-menu:
-  main:
-    parent: smn_cli
-title: top
+title: docker top
 ---
-
-# top
 
 ```markdown
 Usage:  docker top CONTAINER [ps OPTIONS]

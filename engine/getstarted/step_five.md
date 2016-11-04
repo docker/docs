@@ -6,15 +6,8 @@ aliases:
 description: Getting started with Docker
 keywords:
 - beginner, getting started, Docker
-menu:
-  main:
-    identifier: getstart_docker_hub
-    parent: tutorial_getstart_menu
-    weight: 5
-title: Create a Docker Hub account & repository
+title: Create a Docker Hub account and repository
 ---
-
-# Create a Docker Hub account & repository
 
 You've built something really cool, you should share it. In this next section,
 you'll do just that. You'll need a Docker Hub account. Then, you'll push your

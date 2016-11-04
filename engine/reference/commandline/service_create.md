@@ -4,15 +4,10 @@ aliases:
 description: The service create command description and usage
 keywords:
 - service, create
-menu:
-  main:
-    parent: smn_cli
-title: service create
+title: docker service create
 ---
 
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
-
-# service create
 
 ```Markdown
 Usage:  docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]

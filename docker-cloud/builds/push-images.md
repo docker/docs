@@ -5,14 +5,8 @@ aliases:
 description: Push images to Docker Cloud
 keywords:
 - images, private, registry
-menu:
-  main:
-    parent: builds
-    weight: -60
 title: Push images to Docker Cloud
 ---
-
-# Push images to Docker Cloud
 
 Docker Cloud uses Docker Hub as its native registry for storing both public and
 private repositories. Once you push your images to Docker Hub, they will be

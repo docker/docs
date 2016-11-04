@@ -2,14 +2,10 @@
 description: Basic workflow for Docker contributions
 keywords:
 - contribute, issue, review, workflow, beginner, expert, squash, commit
-menu:
-  main:
-    parent: smn_workflow
-    weight: 2
 title: Find and claim an issue
 ---
 
-<!-- 
+<!--
 note: don't use blank lines inside the style-block;
 hugo converts them to paragraphs, causing the styles to be ignored
 -->

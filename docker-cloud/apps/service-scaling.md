@@ -4,13 +4,8 @@ aliases:
 description: Scale your service, spawn new containers
 keywords:
 - spawn, container, service, deploy
-menu:
-  main:
-    parent: apps
 title: Scale your service
 ---
-
-# Scale your service
 
 Docker Cloud makes it easy to spawn new containers of your service to handle
 additional load. Two modes are available to allow you to scale services with

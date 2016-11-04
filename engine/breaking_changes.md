@@ -5,10 +5,8 @@ description: Breaking changes
 keywords:
 - docker, documentation, about, technology, breaking
 - incompatibilities
-title: Breaking changes
+title: Breaking changes and incompatibilities
 ---
-
-# Breaking changes and incompatibilities
 
 Every Engine release strives to be backward compatible with its predecessors.
 In all cases, the policy is that feature removal is communicated two releases
@@ -23,7 +21,7 @@ documents these by Engine version.
 
 Docker clients <= 1.9.2 used an invalid Host header when making request to the
 daemon. Docker 1.12 is built using golang 1.6 which is now checking the validity
-of the Host header and as such clients <= 1.9.2 can't talk anymore to the daemon. 
+of the Host header and as such clients <= 1.9.2 can't talk anymore to the daemon.
 [An environment variable was added to overcome this issue.](reference/commandline/dockerd.md#miscellaneous-options)
 
 # Engine 1.10

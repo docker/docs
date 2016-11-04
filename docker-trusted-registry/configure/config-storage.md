@@ -1,25 +1,20 @@
 ---
 description: Storage configuration for Docker Trusted Registry
 keywords:
-- docker, documentation, about, technology, understanding, configuration, storage,
-  storage drivers, Azure, S3, Swift,  enterprise, hub, registry
-menu:
-  main:
-    identifier: dtr_configure_storage
-    parent: workw_dtr_configure
-    weight: 5
+- docker, documentation, about, technology, understanding, configuration, storage, storage drivers, Azure, S3, Swift,  enterprise, hub, registry
 title: Storage configuration
 ---
 
-# Storage configuration
-
 After installing Docker Trusted Registry, one of your first tasks is to
-designate and configure the Trusted Registry storage backend. This document provides the following:
+designate and configure the Trusted Registry storage backend. This document
+provides the following:
 
 * Information describing your storage backend options.
 * Configuration steps using either the Trusted Registry UI or a YAML file.
 
-While there is a default storage backend, `filesystem`, the Trusted Registry offers other options that are cloud-based. This flexibility to configure to a different storage backend allows you to:
+While there is a default storage backend, `filesystem`, the Trusted Registry
+offers other options that are cloud-based. This flexibility to configure to a
+different storage backend allows you to:
 
 * Scale your Trusted Registry
 * Leverage storage redundancy
@@ -27,12 +22,13 @@ While there is a default storage backend, `filesystem`, the Trusted Registry off
 * Take advantage of other features that are critical to your organization
 
 At first, you might have explored Docker Trusted Registry and Docker Engine by
- [installing](../install/index.md)
-them on your system in order to familiarize yourself with them.
-However, for various reasons such as deployment purposes or continuous
-integration, it makes sense to think about your long term organization’s needs
-when selecting a storage backend. The Trusted Registry natively supports TLS and
-basic authentication. It also ships with a [notification system](/registry/notifications.md), calling webhooks in response to activity. The notification system also provides both extensive logging and
+[installing](../install/index.md) them on your system in order to familiarize
+yourself with them. However, for various reasons such as deployment purposes or
+continuous integration, it makes sense to think about your long term
+organization’s needs when selecting a storage backend. The Trusted Registry
+natively supports TLS and basic authentication. It also ships with a
+[notification system](/registry/notifications.md), calling webhooks in response
+to activity. The notification system also provides both extensive logging and
 reporting, which is useful for organizations that want to collect metrics.
 
 ## Understand the Trusted Registry storage backend
@@ -41,7 +37,8 @@ By default, your Trusted Registry data resides as a data volume on the host
 `filesystem`. This is where your repositories and images are stored. This
 storage driver is the local posix `filesystem` and is configured to use a
 directory tree in the local filesystem. It's suitable for development or small
-deployments. The `filesystem` can be located on the same computer as the Trusted Registry, or on a separate system.
+deployments. The `filesystem` can be located on the same computer as the Trusted
+Registry, or on a separate system.
 
 Additionally, the Trusted Registry supports these cloud-based storage drivers:
 
@@ -70,7 +67,9 @@ adequate space available. To do so, you can run the following commands:
 ### Amazon S3
 
 S3 stores data as objects within “buckets” where you read, write, and delete
-objects in that container. It too, has a `rootdirectory` parameter. If you select this option, there will be some tasks that you need to first perform [on AWS](https://aws.amazon.com/s3/getting-started/).   
+objects in that container. It too, has a `rootdirectory` parameter. If you
+select this option, there will be some tasks that you need to first perform [on
+AWS](https://aws.amazon.com/s3/getting-started/).
 
 1. You must create an S3 bucket, and write down its name and the AWS zone it
 runs on.
@@ -82,10 +81,17 @@ time differences. This may cause an issue if you try to authenticate with Amazon
 web services.
 6. You will also need your AWS access key and secret key. Learn [more about it ](http://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html) here.
 
-Conversely, you can further limit what users access in the Trusted Registry when you use AW to host your Trusted Registry. Instead of using the UI to enter information, you can create an [IAM user policy](http://docs.aws.amazon.com/AmazonS3/latest/dev/example-policies-s3.html) which is a JSON description of the effects, actions, and resources available to
-a user. The advantage of using this method instead of configuring through the Trusted Registry UI is that you can restrict what users can access. You apply the policy as part of the process of installing the Trusted Registry on AW. To set a policy through the AWS command line, save the policy into a file,
-for example `TrustedRegistryUserPerms.json`, and pass it to the
-put-user-policy AWS command:
+Conversely, you can further limit what users access in the Trusted Registry when
+you use AW to host your Trusted Registry. Instead of using the UI to enter
+information, you can create an [IAM user
+policy](http://docs.aws.amazon.com/AmazonS3/latest/dev/example-policies-s3.html)
+which is a JSON description of the effects, actions, and resources available to
+a user. The advantage of using this method instead of configuring through the
+Trusted Registry UI is that you can restrict what users can access. You apply
+the policy as part of the process of installing the Trusted Registry on AW. To
+set a policy through the AWS command line, save the policy into a file, for
+example `TrustedRegistryUserPerms.json`, and pass it to the put-user-policy AWS
+command:
 
 ```
 $ aws iam put-user-policy --user-name MyUser --policy-name TrustedRegistryUserPerms --policy-document file://C:\Temp\TrustedRegistryUserPerms.json
@@ -93,7 +99,9 @@ $ aws iam put-user-policy --user-name MyUser --policy-name TrustedRegistryUserPe
 
 You can also set a policy through your AWS console. For more information about
 setting IAM policies using the command line or the console, review the AWS
-[Overview of IAM Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) article or visit the console Policies page.
+[Overview of IAM
+Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html)
+article or visit the console Policies page.
 
 The following example describes the minimum permissions set which allows
 Trusted Registry users to access, push, pull, and delete images.
@@ -132,7 +140,9 @@ Trusted Registry users to access, push, pull, and delete images.
 ### OpenStack Swift
 
 OpenStack Swift, also known as OpenStack Object Storage, is an open source
-object storage system that is licensed under the Apache 2.0 license. Refer to [Swift documentation](http://docs.openstack.org/developer/swift/) to get started.
+object storage system that is licensed under the Apache 2.0 license. Refer to
+[Swift documentation](http://docs.openstack.org/developer/swift/) to get
+started.
 
 <!--
 ### Ceph Rados

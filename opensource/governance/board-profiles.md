@@ -2,14 +2,8 @@
 description: Board member profiles
 keywords:
 - governance, board, members, profiles
-menu:
-  main:
-    parent: smn_govern
-    weight: 1
 title: Board member profiles
 ---
-
-# Project Leadership
 
 The Docker Project is led by three individuals who are responsible for the direction, operations, quality and community of the project as a whole.
 
@@ -42,7 +36,7 @@ governed properly working in concert with the Docker Governance Advisory Board
 The DGAB is made up of 16 individual who represent the ecosystem, contributors
 and community of the Docker Project.
 
-## Docker 
+## Docker
 
 * Michael Crosby
 * Steve Francia

@@ -2,15 +2,8 @@
 description: Learn about the options available on the docker/dtr image.
 keywords:
 - docker, dtr, install, uninstall, configure
-menu:
-  main:
-    identifier: dtr_reference_overview
-    parent: dtr_menu_reference
-    weight: 0
-title: Overview
+title: docker/dtr overview
 ---
-
-# docker/dtr overview
 
 This tool has commands to install, configure, and backup Docker
 Trusted Registry (DTR). It also allows uninstalling DTR.

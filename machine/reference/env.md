@@ -2,13 +2,8 @@
 description: Set environment variables on a machine
 keywords:
 - machine, env, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: env
+title: docker-machine env
 ---
-
-# env
 
 Set environment variables to dictate that `docker` should run a command against
 a particular machine.

@@ -2,14 +2,8 @@
 description: How to use Docker's development environment
 keywords:
 - development, inception, container, image Dockerfile, dependencies, Go,  artifacts
-menu:
-  main:
-    parent: smn_engine_contrib
-    weight: 5
 title: Work with a development container
 ---
-
-# Work with a development container
 
 In this section, you learn to develop like the Docker Engine core team.
 The `docker` repository includes a `Dockerfile` at its root. This file defines

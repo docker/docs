@@ -4,15 +4,8 @@ aliases:
 description: Integrate UCP with Docker Trusted Registry
 keywords:
 - trusted, registry, integrate, UCP, DTR
-menu:
-  main:
-    identifier: ucp_integrate_dtr
-    parent: mn_ucp_configuration
-    weight: 20
 title: Integrate with Docker Trusted Registry
 ---
-
-# Integrate with Docker Trusted Registry
 
 You can integrate UCP with Docker Trusted Registry (DTR). This allows you to
 securely store and manage the Docker images that are used in your UCP cluster.

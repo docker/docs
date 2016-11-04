@@ -2,14 +2,8 @@
 description: swarm command overview
 keywords:
 - Swarm, cluster, commands
-menu:
-  main:
-    identifier: swarm.swarm
-    parent: smn_swarm_subcmds
-title: swarm
+title: "Swarm: A Docker-native clustering system"
 ---
-
-# Swarm — A Docker-native clustering system
 
 The `swarm` command runs a Swarm container on a Docker Engine host and performs the task specified by the required subcommand, `COMMAND`.
 

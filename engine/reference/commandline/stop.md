@@ -4,13 +4,8 @@ aliases:
 description: The stop command description and usage
 keywords:
 - stop, SIGKILL, SIGTERM
-menu:
-  main:
-    parent: smn_cli
-title: stop
+title: docker stop
 ---
-
-# stop
 
 ```markdown
 Usage:  docker stop [OPTIONS] CONTAINER [CONTAINER...]

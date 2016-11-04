@@ -7,15 +7,8 @@ aliases:
 description: Getting started with Docker
 keywords:
 - beginner, getting started, Docker
-menu:
-  main:
-    identifier: getstart_all
-    parent: tutorial_getstart_menu
-    weight: "-1"
-title: Get Started with Docker
+title: Get started with Docker
 ---
-
-# Get Started with Docker
 
 This tutorial is a for non-technical users who are interested in learning more about Docker. By following these steps, you'll learn fundamental Docker features while working through some simple tasks.
 

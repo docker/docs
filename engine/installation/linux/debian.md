@@ -4,14 +4,8 @@ aliases:
 description: Instructions for installing Docker on Debian.
 keywords:
 - Docker, Docker documentation, installation,  debian
-menu:
-  main:
-    parent: engine_linux
-    weight: -2
-title: Installation on Debian
+title: Install Docker on Debian
 ---
-
-# Debian
 
 Docker is supported on the following versions of Debian:
 

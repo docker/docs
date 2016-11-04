@@ -4,13 +4,8 @@ aliases:
 description: The network ls command description and usage
 keywords:
 - network, list, user-defined
-menu:
-  main:
-    parent: smn_cli
-title: network ls
+title: docker network ls
 ---
-
-# docker network ls
 
 ```markdown
 Usage:  docker network ls [OPTIONS]

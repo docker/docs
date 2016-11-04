@@ -4,14 +4,8 @@ aliases:
 description: Introducing Docker Cloud concepts and terminology
 keywords:
 - node, create, understand
-menu:
-  main:
-    parent: getting-started
-    weight: -100
 title: Introducing Docker Cloud
 ---
-
-# Introducing Docker Cloud
 
 This page introduces core Docker Cloud concepts and features so you can easily follow along with the tutorial.
 

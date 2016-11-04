@@ -4,13 +4,8 @@ aliases:
 description: the network rm command description and usage
 keywords:
 - network, rm, user-defined
-menu:
-  main:
-    parent: smn_cli
-title: network rm
+title: docker network rm
 ---
-
-# network rm
 
 ```markdown
 Usage:  docker network rm NETWORK [NETWORK...]

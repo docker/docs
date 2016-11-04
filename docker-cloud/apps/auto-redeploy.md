@@ -4,13 +4,8 @@ aliases:
 description: Autoredeploy
 keywords:
 - Autoredeploy, image, store, service
-menu:
-  main:
-    parent: apps
-title: Automatic service redeploy
+title: Redeploy services automatically
 ---
-
-# Autoredeploy
 
 Docker Cloud's **Autoredeploy** feature allows a service that uses an image
 stored in Docker Hub to automatically redeploy whenever a new image is pushed or

@@ -4,14 +4,8 @@ aliases:
 description: Configure containers at runtime
 keywords:
 - docker, run, configure,  runtime
-menu:
-  main:
-    parent: engine_ref
-    weight: -80
 title: Docker run reference
 ---
-
-# Docker run reference
 
 Docker runs processes in isolated containers. A container is a process
 which runs on a host. The host may be local or remote. When an operator

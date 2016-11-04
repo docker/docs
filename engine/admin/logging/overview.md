@@ -4,10 +4,8 @@ aliases:
 description: Configure logging driver.
 keywords:
 - docker, logging, driver, Fluentd
-title: Configuring Logging Drivers
+title: Configure logging drivers
 ---
-
-# Configure logging drivers
 
 The container can have a different logging driver than the Docker daemon. Use
 the `--log-driver=VALUE` with the `docker run` command to configure the

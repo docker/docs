@@ -4,15 +4,8 @@ aliases:
 description: Learn how to set up Docker Trusted Registry for high availability.
 keywords:
 - docker, registry, high-availability, backup, recovery
-menu:
-  main:
-    identifier: dtr_high_availability
-    parent: dtr_menu_high_availability
-    weight: 0
 title: Set up high availability
 ---
-
-# Set up high availability
 
 Docker Trusted Registry (DTR) is designed for high availability.
 

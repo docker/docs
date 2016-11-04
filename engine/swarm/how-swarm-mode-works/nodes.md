@@ -4,15 +4,8 @@ aliases:
 description: How swarm nodes work
 keywords:
 - docker, container, cluster, swarm mode, node
-menu:
-  main:
-    identifier: how-nodes-work
-    parent: how-swarm-works
-    weight: "3"
 title: How nodes work
 ---
-
-# How nodes work
 
 Docker Engine 1.12 introduces swarm mode that enables you to create a
 cluster of one or more Docker Engines called a swarm. A swarm consists

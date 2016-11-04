@@ -4,15 +4,8 @@ aliases:
 description: Troubleshooting, logs, and known issues
 keywords:
 - windows, troubleshooting, logs, issues
-menu:
-  main:
-    identifier: docker-windows-troubleshoot
-    parent: pinata_win_menu
-    weight: 3
-title: Logs and Troubleshooting
+title: Logs and troubleshooting
 ---
-
-#  Logs and Troubleshooting
 
 Here is information about how to diagnose and troubleshoot problems, send logs and communicate with the Docker for Windows team, use our forums and Knowledge Hub, browse and log issues on GitHub, and find workarounds for known problems.
 

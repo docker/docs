@@ -2,14 +2,8 @@
 description: Dump out the ID of the UCP components running on this engine.
 keywords:
 - docker, ucp, id
-menu:
-  main:
-    identifier: ucp_ref_id
-    parent: ucp_ref
-title: id
+title: docker/ucp id
 ---
-
-# docker/ucp id
 
 Dump out the ID of the UCP components running on this engine.
 

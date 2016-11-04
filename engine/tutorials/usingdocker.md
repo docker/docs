@@ -3,16 +3,9 @@ aliases:
 - /engine/userguide/containers/usingdocker/
 description: Learn how to manage and operate Docker containers.
 keywords:
-- docker, the docker guide, documentation, docker.io, monitoring containers, docker
-  top, docker inspect, docker port, ports, docker logs, log,  Logs
-menu:
-  main:
-    parent: engine_learn_menu
-    weight: -5
+- docker, the docker guide, documentation, docker.io, monitoring containers, docker top, docker inspect, docker port, ports, docker logs, log,  Logs
 title: Run a simple application
 ---
-
-# Run a simple application
 
 In the ["*Hello world in a container*"](dockerizing.md) you launched your
 first containers using the `docker run` command. You ran an *interactive container* that ran in the foreground.  You also ran a *detached container* that ran in the background. In the process you learned about several Docker commands:

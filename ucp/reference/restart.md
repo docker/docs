@@ -2,14 +2,8 @@
 description: Restart Docker Universal Control Plane containers.
 keywords:
 - install, ucp, restart
-menu:
-  main:
-    identifier: ucp_ref_restart
-    parent: ucp_ref
-title: restart
+title: docker/ucp restart
 ---
-
-# docker/ucp restart
 
 Start or restart UCP components on this engine
 

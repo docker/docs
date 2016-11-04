@@ -7,8 +7,6 @@ keywords:
 title: Splunk logging driver
 ---
 
-# Splunk logging driver
-
 The `splunk` logging driver sends container logs to
 [HTTP Event Collector](http://dev.splunk.com/view/event-collector/SP-CAAAE6M)
 in Splunk Enterprise and Splunk Cloud.

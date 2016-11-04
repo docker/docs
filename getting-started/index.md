@@ -2,8 +2,6 @@
 title: "Getting Started, Part 1: Orientation and Setup"
 ---
 
-# Getting Started, Part 1: Orientation and Setup
-
 {% include content/docker_elevator_pitch.md %}
 
 ## What we'll be covering

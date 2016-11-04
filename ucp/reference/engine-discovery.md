@@ -2,14 +2,8 @@
 description: Manage the engine discovery configuration on a node.
 keywords:
 - docker, ucp, discovery
-menu:
-  main:
-    identifier: ucp_ref_engine_discovery
-    parent: ucp_ref
-title: engine-discovery
+title: docker/ucp engine-discovery
 ---
-
-# docker/ucp engine-discovery
 
 Manage the Engine discovery configuration.
 

@@ -2,13 +2,8 @@
 description: Exoscale driver for machine
 keywords:
 - machine, exoscale, driver
-menu:
-  main:
-    parent: smn_machine_drivers
 title: Exoscale
 ---
-
-# Exoscale
 
 Create machines on [Exoscale](https://www.exoscale.ch/).
 

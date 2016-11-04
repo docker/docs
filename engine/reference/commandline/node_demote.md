@@ -4,13 +4,8 @@ aliases:
 description: The node demote command description and usage
 keywords:
 - node, demote
-menu:
-  main:
-    parent: smn_cli
-title: node demote
+title: docker node demote
 ---
-
-# node demote
 
 ```markdown
 Usage:  docker node demote NODE [NODE...]

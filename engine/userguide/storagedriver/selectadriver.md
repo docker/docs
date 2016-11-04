@@ -2,14 +2,8 @@
 description: Learn how select the proper storage driver for your container.
 keywords:
 - container, storage, driver, AUFS, btfs, devicemapper,zvfs
-menu:
-  main:
-    parent: engine_driver
-    weight: -1
 title: Select a storage driver
 ---
-
-# Select a storage driver
 
 This page describes Docker's storage driver feature. It lists the storage
 drivers that Docker supports and the basic commands associated with managing

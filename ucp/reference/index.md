@@ -2,15 +2,8 @@
 description: Installs Docker Universal Control Plane.
 keywords:
 - docker, ucp, install
-menu:
-  main:
-    identifier: ucp_ref
-    parent: mn_ucp_installation
-    weight: 100
 title: UCP tool reference
 ---
-
-# UCP tool reference
 
 Installs Docker Universal Control Plane.
 

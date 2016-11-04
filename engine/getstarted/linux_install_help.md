@@ -2,15 +2,10 @@
 aliases:
 - /mac/started/
 description: Getting started with Docker
-identifier: getstart_linux_install
 keywords:
 - beginner, getting started, Docker, install
-parent: tutorial_getstart_menu
-title: Install Docker and run hello-world
-weight: "-80"
+title: "Example: Install Docker on Ubuntu Linux"
 ---
-
-# Example: Install Docker on Ubuntu Linux
 
 This installation procedure for users who are unfamiliar with package
 managers, and just want to try out the Getting Started tutorial while running Docker on Linux. If you are comfortable with package managers, prefer not to use

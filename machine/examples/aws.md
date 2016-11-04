@@ -2,14 +2,8 @@
 description: Using Docker Machine to provision hosts on AWS
 keywords:
 - docker, machine, cloud, aws
-menu:
-  main:
-    parent: cloud_examples
-    weight: 2
-title: Provision AWS EC2 Instances
+title: Amazon Web Services (AWS) EC2 example
 ---
-
-# Amazon Web Services (AWS) EC2 example
 
 Follow along with this example to create a Dockerized <a href="https://aws.amazon.com/" target="_blank"> Amazon Web Services (AWS)</a> EC2 instance.
 
@@ -72,10 +66,10 @@ Follow along with this example to create a Dockerized <a href="https://aws.amazo
 3. At the command terminal, run `docker-machine ls`.
 
         $ docker-machine ls
-        NAME             ACTIVE   DRIVER         STATE     URL                         SWARM   DOCKER        ERRORS      
-        aws-sandbox      *        amazonec2      Running   tcp://52.90.113.128:2376            v1.10.0       
-        default          -        virtualbox     Running   tcp://192.168.99.100:2376           v1.10.0-rc4   
-        aws-sandbox   -        digitalocean   Running   tcp://104.131.43.236:2376           v1.9.1        
+        NAME             ACTIVE   DRIVER         STATE     URL                         SWARM   DOCKER        ERRORS
+        aws-sandbox      *        amazonec2      Running   tcp://52.90.113.128:2376            v1.10.0
+        default          -        virtualbox     Running   tcp://192.168.99.100:2376           v1.10.0-rc4
+        aws-sandbox   -        digitalocean   Running   tcp://104.131.43.236:2376           v1.9.1
 
     The new `aws-sandbox` instance is running, and it is the active host as indicated by the asterisk (*). When you create a new machine, your command shell automatically connects to it. If for some reason your new machine is not the active host, you'll need to run `docker-machine env aws-sandbox`, followed by `eval $(docker-machine env aws-sandbox)` to connect to it.
 

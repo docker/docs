@@ -1,16 +1,9 @@
 ---
-description: How to use Docker Compose's extends keyword to share configuration between
-  files and projects
+description: How to use Docker Compose's extends keyword to share configuration between files and projects
 keywords:
 - fig, composition, compose, docker, orchestration, documentation, docs
-menu:
-  main:
-    parent: workw_compose
-    weight: 20
-title: Extending Services in Compose
+title: Share Compose configurations between files and projects
 ---
-
-# Extending services and Compose files
 
 Compose supports two methods of sharing common configuration:
 

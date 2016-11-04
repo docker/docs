@@ -2,14 +2,8 @@
 description: Create creates containers for a service.
 keywords:
 - fig, composition, compose, docker, orchestration, cli, create
-menu:
-  main:
-    identifier: create.compose
-    parent: smn_compose_cli
-title: create
+title: docker-compose create
 ---
-
-# create
 
 ```
 Creates containers for a service.

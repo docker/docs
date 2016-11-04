@@ -5,14 +5,8 @@ aliases:
 description: Try Swarm at scale
 keywords:
 - docker, swarm, scale, voting, application,  certificates
-menu:
-  main:
-    parent: scale_swarm
-    weight: -90
 title: Deploy application infrastructure
 ---
-
-# Deploy your infrastructure
 
 In this step, you create several Docker hosts to run your application stack on.
 Before you continue, make sure you have taken the time to [learn the application

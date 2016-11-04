@@ -4,13 +4,8 @@ aliases:
 description: The update command description and usage
 keywords:
 - resources, update, dynamically
-menu:
-  main:
-    parent: smn_cli
-title: update
+title: docker update
 ---
-
-## update
 
 ```markdown
 Usage:  docker update [OPTIONS] CONTAINER [CONTAINER...]

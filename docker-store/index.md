@@ -2,24 +2,18 @@
 description: Docker Store overview
 keywords:
 - Docker, docker, store, purchase images
-menu:
-  main:
-    parent: docker-store
-    weight: -99
-title: Docker Store Overview
+title: Docker Store overview
 ---
 
-# Docker Store Overview
-
-
-<center>
-<b>The Docker Store is now in public Beta!</b><br/>
-You can also <a href="https://success.docker.com/Store">learn more about publishing</a>, or <a href="https://store.docker.com/publisher/signup">apply to be a publisher</a>.
+<center> <b>The Docker Store is now in public Beta!</b><br/> You can also <a
+href="https://success.docker.com/Store">learn more about publishing</a>, or <a
+href="https://store.docker.com/publisher/signup">apply to be a publisher</a>.
 </center>
 
 -----------------
 
-The Docker Store is the place to find the best trusted commercial and free software distributed as Docker Images.
+The Docker Store is the place to find the best trusted commercial and free
+software distributed as Docker Images.
 
 ## Search and Browse
 

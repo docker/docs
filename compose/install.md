@@ -2,14 +2,8 @@
 description: How to install Docker Compose
 keywords:
 - compose, orchestration, install, installation, docker, documentation
-menu:
-  main:
-    parent: workw_compose
-    weight: -90
-title: Install Compose
+title: Install Docker Compose
 ---
-
-# Install Docker Compose
 
 You can run Compose on macOS, Windows and 64-bit Linux. To install it, you'll need to install Docker first.
 

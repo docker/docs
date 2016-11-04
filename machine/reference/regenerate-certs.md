@@ -2,13 +2,8 @@
 description: Regenerate and update TLS certificates
 keywords:
 - machine, regenerate-certs, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: regenerate-certs
+title: docker-machine regenerate-certs
 ---
-
-# regenerate-certs
 
 ```none
 Usage: docker-machine regenerate-certs [OPTIONS] [arg...]

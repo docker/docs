@@ -2,14 +2,8 @@
 description: Docker installation on Microsoft Windows
 keywords:
 - Docker, Docker documentation, Windows, requirements, virtualbox,  boot2docker
-menu:
-  main:
-    parent: engine_install
-    weight: "-80"
-title: Installation on Windows
+title: Install Docker on Windows
 ---
-
-# Windows
 
 You have two options for installing Docker on Windows:
 

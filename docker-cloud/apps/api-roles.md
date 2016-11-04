@@ -4,13 +4,8 @@ aliases:
 description: API Roles
 keywords:
 - API, Services, roles
-menu:
-  main:
-    parent: apps
-title: Service API Roles
+title: Service API roles
 ---
-
-# Service API Roles
 
 You can configure a service so that it can access the Docker Cloud API. When you
 grant API access to a service, its containers receive a token through an

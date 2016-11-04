@@ -1,15 +1,9 @@
 ---
-description: CLI Environment Variables
+description: Compose CLI environment variables
 keywords:
 - fig, composition, compose, docker, orchestration, cli,  reference
-menu:
-  main:
-    parent: smn_compose_cli
-    weight: -1
-title: CLI Environment Variables
+title: Compose CLI environment variables
 ---
-
-# CLI Environment Variables
 
 Several environment variables are available for you to configure the Docker Compose command-line behaviour.
 

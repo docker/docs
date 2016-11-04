@@ -1,18 +1,11 @@
 ---
 aliases:
 - /engine/extend/authorization/
-description: How to create authorization plugins to manage access control to your
-  Docker daemon.
+description: How to create authorization plugins to manage access control to your Docker daemon.
 keywords:
 - security, authorization, authentication, docker, documentation, plugin, extend
-menu:
-  main:
-    parent: engine_extend
-    weight: 4
-title: Access authorization plugin
+title: Create an authorization plugin
 ---
-
-# Create an authorization plugin
 
 This document describes the Docker Engine plugins generally available in Docker
 Engine. To view information on plugins managed by Docker Engine currently in

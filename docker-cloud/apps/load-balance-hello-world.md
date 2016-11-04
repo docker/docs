@@ -5,13 +5,8 @@ aliases:
 description: Create a proxy or load balancer
 keywords:
 - proxy, load, balancer
-menu:
-  main:
-    parent: apps
 title: Create a proxy or load balancer
 ---
-
-# Create a proxy or load balancer
 
 When you deploy a web service to multiple containers you might want to load
 balance between the containers using a proxy or load balancer.

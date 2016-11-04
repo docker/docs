@@ -4,13 +4,8 @@ aliases:
 description: Service discovery
 keywords:
 - service, discover, links
-menu:
-  main:
-    parent: apps
 title: Service discovery and links
 ---
-
-# Service discovery and links
 
 Docker Cloud creates a per-user overlay network which connects all containers across all of the user's hosts. This network connects all of your containers on the `10.7.0.0/16` subnet, and gives every container a local IP. This IP persists on each container even if the container is redeployed and ends up on a different host. Every container can reach any other container on any port within the subnet.
 

@@ -2,14 +2,8 @@
 description: Describes the software required to contribute to Docker
 keywords:
 - 'GitHub account, repository, Docker, Git, Go, make,  '
-menu:
-  main:
-    parent: smn_engine_contrib
-    weight: 2
-title: Get the required software
+title: Get the required software for Linux or macOS
 ---
-
-# Get the required software for Linux or macOS
 
 This page explains how to get the software you need to use a Linux or macOS
 machine for Docker development. Before you begin contributing you must have:

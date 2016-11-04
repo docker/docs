@@ -2,14 +2,8 @@
 description: Run your own notary service to host arbitrary content signing.
 keywords:
 - docker, notary, notary-server, notary server, notary-signer, notary signer
-menu:
-  main:
-    parent: mn_notary
-    weight: 4
-title: Running a Notary service
+title: Run a Notary service
 ---
-
-# Run a Notary service
 
 This document is for anyone who wants to run their own Notary
 service (such as those who want to use Notary with a

@@ -2,15 +2,8 @@
 description: Docker Trusted Registry install command reference.
 keywords:
 - docker, registry, reference, install
-menu:
-  main:
-    identifier: dtr_reference_install
-    parent: dtr_menu_reference
-title: install
+title: docker/dtr install
 ---
-
-
-# docker/dtr install
 
 Install Docker Trusted Registry on this Docker Engine
 

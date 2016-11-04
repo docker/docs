@@ -4,14 +4,8 @@ aliases:
 description: Engine
 keywords:
 - Engine
-menu:
-  main:
-    identifier: engine_use
-    weight: -85
-title: Docker Engine
+title: About Docker Engine
 ---
-
-# About Docker Engine
 
 **Develop, Ship and Run Any Application, Anywhere**
 

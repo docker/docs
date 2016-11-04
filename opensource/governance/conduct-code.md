@@ -2,14 +2,8 @@
 description: Explains Docker's code of conduct
 keywords:
 - Docker, conduct, code
-menu:
-  main:
-    parent: smn_govern
-    weight: 2
 title: Code of conduct
 ---
-
-# Code of conduct
 
 The Docker project has not currently adopted a Code of Conduct though there is
 work being done in this regard. Without a formal Code of Conduct being adopted

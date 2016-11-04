@@ -2,14 +2,8 @@
 description: Inspect information about a machine
 keywords:
 - machine, inspect, subcommand
-menu:
-  main:
-    identifier: machine.inspect
-    parent: smn_machine_subcmds
-title: inspect
+title: docker-machine inspect
 ---
-
-# inspect
 
 ```none
 Usage: docker-machine inspect [OPTIONS] [arg...]

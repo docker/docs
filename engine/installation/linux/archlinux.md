@@ -4,13 +4,8 @@ aliases:
 description: Installation instructions for Docker on ArchLinux.
 keywords:
 - arch linux, docker, documentation,  installation
-menu:
-  main:
-    parent: engine_linux
-title: Installation on Arch Linux
+title: Install Docker on Arch Linux
 ---
-
-# Arch Linux
 
 Installing on Arch Linux can be handled via the package in community:
 

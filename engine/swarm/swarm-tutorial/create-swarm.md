@@ -2,15 +2,8 @@
 description: Initialize the swarm
 keywords:
 - tutorial, cluster management, swarm mode
-menu:
-  main:
-    identifier: initialize-swarm
-    parent: swarm-tutorial
-    weight: 12
 title: Create a swarm
 ---
-
-# Create a swarm
 
 After you complete the [tutorial setup](index.md) steps, you're ready
 to create a swarm. Make sure the Docker Engine daemon is started on the host

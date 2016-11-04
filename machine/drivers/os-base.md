@@ -2,14 +2,8 @@
 description: Identify active machines
 keywords:
 - machine, driver, base, operating system
-menu:
-  main:
-    parent: smn_machine_drivers
-    weight: -1
 title: Driver options and operating system defaults
 ---
-
-# Driver options and operating system defaults
 
 When Docker Machine provisions containers on local network provider or with a
 remote, cloud provider such as Amazon Web Services, you must define both the

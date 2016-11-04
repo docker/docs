@@ -2,14 +2,8 @@
 description: Basic workflow for Docker contributions
 keywords:
 - contribute, pull request, review, workflow, beginner, squash,  commit
-menu:
-  main:
-    parent: smn_workflow
-    weight: 3
 title: Work on your issue
 ---
-
-# Work on your issue
 
 The work you do depends on the specific issue you picked.
 This section gives you a step-by-step workflow. Where appropriate, it provides
@@ -48,7 +42,7 @@ Follow this workflow as you work:
     runs the entire test suite and `make docs` builds the documentation. If you
     forgot the other test targets, see the documentation for <a
     href="/opensource/project/test-and-docs/" target="_blank">testing both code and
-    documentation</a>.  
+    documentation</a>.
 
 4. For code changes, add unit tests if appropriate.
 
@@ -149,10 +143,10 @@ After you push a new branch, you should verify it on GitHub:
 
 ## Pull and rebase frequently
 
-You should pull and rebase frequently as you work.  
+You should pull and rebase frequently as you work.
 
 1. Return to the terminal on your local machine and checkout your
-    feature branch in your local `docker-fork` repository.   
+    feature branch in your local `docker-fork` repository.
 
 2. Fetch any last minute changes from `docker/docker`.
 

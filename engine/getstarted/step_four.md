@@ -6,15 +6,8 @@ aliases:
 description: Getting started with Docker
 keywords:
 - beginner, getting started, Docker
-menu:
-  main:
-    identifier: getstart_build_image
-    parent: tutorial_getstart_menu
-    weight: 4
 title: Build your own image
 ---
-
-# Build your own image
 
 The `whalesay` image could be improved. It would be nice if you didn't have to
 think of something to say. And you type a lot to get `whalesay` to talk.
@@ -161,7 +154,7 @@ Then, Docker installs the new `fortunes` software.
      ---> c81071adeeb5
     Removing intermediate container 23aa52c1897c
 
-Finally, Docker finishes the build and reports its outcome.		
+Finally, Docker finishes the build and reports its outcome.
 
     Step 3 : CMD /usr/games/fortune -a | cowsay
      ---> Running in a8e6faa88df3
@@ -195,15 +188,15 @@ In this step, you verify the new images is on your computer and then you run you
          -----------------------------------------
                   \
                    \
-                    \     
-                                  ##        .            
-                            ## ## ##       ==            
-                         ## ## ## ##      ===            
-                     /""""""""""""""""___/ ===        
-                ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~   
-                     \______ o          __/            
-                      \    \        __/             
-                        \____\______/   
+                    \
+                                  ##        .
+                            ## ## ##       ==
+                         ## ## ## ##      ===
+                     /""""""""""""""""___/ ===
+                ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+                     \______ o          __/
+                      \    \        __/
+                        \____\______/
 
 As you can see, you've made the whale a lot smarter. It finds its own
 things to say and the command line is a lot shorter!  You may also notice

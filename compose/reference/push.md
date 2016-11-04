@@ -2,14 +2,8 @@
 description: Pushes service images.
 keywords:
 - fig, composition, compose, docker, orchestration, cli,  push
-menu:
-  main:
-    identifier: push.compose
-    parent: smn_compose_cli
-title: push
+title: docker-compose push
 ---
-
-# push
 
 ```
 Usage: push [options] [SERVICE...]

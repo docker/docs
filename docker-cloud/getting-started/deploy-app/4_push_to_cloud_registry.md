@@ -5,14 +5,8 @@ aliases:
 description: Push the Docker image to Docker Cloud's Registry
 keywords:
 - image, Docker, cloud
-menu:
-  main:
-    parent: deploy-app
-    weight: -60
-title: Push the image to Docker Cloud's Registry
+title: Push the image to Docker Cloud's registry
 ---
-
-# Push the image to Docker Cloud's Registry
 
 *Skip this step if you don't have Docker Engine installed locally.*
 

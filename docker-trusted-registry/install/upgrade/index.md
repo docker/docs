@@ -1,19 +1,11 @@
 ---
 aliases:
 - /docker-trusted-registry/install/upgrade/upgrade-minor/
-description: Learn how to upgrade your Docker Trusted Registry to a new minor version
-  or patch release.
+description: Learn how to upgrade your Docker Trusted Registry to a new minor version or patch release.
 keywords:
 - docker, dtr, upgrade, install
-menu:
-  main:
-    identifier: dtr_upgrade_minor
-    parent: menu_dtr_upgrade
-    weight: 10
 title: Upgrade from 2.0.0
 ---
-
-# Upgrade from 2.0.0
 
 The first step in upgrading to a new minor version or patch release of DTR 2.0,
 is ensuring you're running DTR 2.0. If that's not the case, start by upgrading

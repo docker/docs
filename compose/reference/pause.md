@@ -2,14 +2,8 @@
 description: Pauses running containers for a service.
 keywords:
 - fig, composition, compose, docker, orchestration, cli, pause
-menu:
-  main:
-    identifier: pause.compose
-    parent: smn_compose_cli
-title: pause
+title: docker-compose pause
 ---
-
-# pause
 
 ```
 Usage: pause [SERVICE...]
