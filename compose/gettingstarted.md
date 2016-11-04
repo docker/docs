@@ -68,21 +68,21 @@ dependencies the Python application requires, including Python itself.
         RUN pip install -r requirements.txt
         CMD python app.py
 
-  This tells Docker to:
+    This tells Docker to:
 
-  * Build an image starting with the Python 2.7 image.
-  * Add the current directory `.` into the path `/code` in the image.
-  * Set the working directory to `/code`.
-  * Install the Python dependencies.
-  * Set the default command for the container to `python app.py`
-
-  For more information on how to write Dockerfiles, see the [Docker user guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile) and the [Dockerfile reference](/engine/reference/builder.md).
-
+    * Build an image starting with the Python 2.7 image.
+    * Add the current directory `.` into the path `/code` in the image.
+    * Set the working directory to `/code`.
+    * Install the Python dependencies.
+    * Set the default command for the container to `python app.py`
+<br>
+    For more information on how to write Dockerfiles, see the [Docker user guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile) and the [Dockerfile reference](/engine/reference/builder.md).
+<br>
 2. Build the image.
 
         $ docker build -t web .
 
-  This command builds an image named `web` from the contents of the current
+    This command builds an image named `web` from the contents of the current
   directory. The command automatically locates the `Dockerfile`, `app.py`, and
   `requirements.txt` files.
 
@@ -91,7 +91,7 @@ dependencies the Python application requires, including Python itself.
 
 Define a set of services using `docker-compose.yml`:
 
-1. Create a file called docker-compose.yml in your project directory and add
+Create a file called docker-compose.yml in your project directory and add
    the following:
 
 
@@ -157,27 +157,27 @@ If you want to run your services in the background, you can pass the `-d` flag
 (for "detached" mode) to `docker-compose up` and use `docker-compose ps` to
 see what is currently running:
 
-        $ docker-compose up -d
-        Starting composetest_redis_1...
-        Starting composetest_web_1...
-        $ docker-compose ps
-        Name                 Command            State       Ports
-        -------------------------------------------------------------------
-        composetest_redis_1   /usr/local/bin/run         Up
-        composetest_web_1     /bin/sh -c python app.py   Up      5000->5000/tcp
+    $ docker-compose up -d
+    Starting composetest_redis_1...
+    Starting composetest_web_1...
+    $ docker-compose ps
+    Name                 Command            State       Ports
+    -------------------------------------------------------------------
+    composetest_redis_1   /usr/local/bin/run         Up
+    composetest_web_1     /bin/sh -c python app.py   Up      5000->5000/tcp
 
 The `docker-compose run` command allows you to run one-off commands for your
 services. For example, to see what environment variables are available to the
 `web` service:
 
-        $ docker-compose run web env
+    $ docker-compose run web env
 
 See `docker-compose --help` to see other available commands. You can also install [command completion](completion.md) for the bash and zsh shell, which will also show you available commands.
 
 If you started Compose with `docker-compose up -d`, you'll probably want to stop
 your services once you've finished with them:
 
-        $ docker-compose stop
+    $ docker-compose stop
 
 At this point, you have seen the basics of how Compose works.
 

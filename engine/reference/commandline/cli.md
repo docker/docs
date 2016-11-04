@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/cli/
 description: Docker's CLI command description and usage
 keywords:
 - Docker, Docker documentation, CLI,  command line
@@ -145,6 +147,7 @@ directives, see the [**Formatting** section in the `docker images` documentation
 
 Following is a sample `config.json` file:
 
+    {% raw %}
     {
       "HttpHeaders": {
         "MyHeader": "MyValue"
@@ -153,6 +156,7 @@ Following is a sample `config.json` file:
       "imagesFormat": "table {{.ID}}\\t{{.Repository}}\\t{{.Tag}}\\t{{.CreatedAt}}",
       "detachKeys": "ctrl-e,e"
     }
+    {% endraw %}
 
 ### Notary
 

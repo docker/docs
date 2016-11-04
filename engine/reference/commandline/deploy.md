@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/deploy/
 advisory: experimental
 description: The deploy command description and usage
 keywords:

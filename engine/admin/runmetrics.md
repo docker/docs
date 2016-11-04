@@ -1,6 +1,7 @@
 ---
 aliases:
 - /engine/articles/run_metrics
+- /engine/articles/runmetrics
 description: Measure the behavior of running containers
 keywords:
 - docker, metrics, CPU, memory, disk, IO, run,  runtime, stats

@@ -38,9 +38,9 @@ Open your shell or terminal application and execute the following command:
 $ pip install docker-cloud
 ```
 
-#### Install on Mac OS X
+#### Install on macOS
 
-We recommend installing Docker CLI for OS X using Homebrew. If you don't have `brew` installed, follow the instructions here: <a href="http://brew.sh" target="_blank">http://brew.sh</a>
+We recommend installing Docker CLI for macOS using Homebrew. If you don't have `brew` installed, follow the instructions here: <a href="http://brew.sh" target="_blank">http://brew.sh</a>
 
 Once Homebrew is installed, open Terminal and run the following command:
 
@@ -66,7 +66,7 @@ The documentation for the Docker Cloud CLI tool and API [here](/apidocs/docker-c
 Use the `login` CLI command to log in to Docker Cloud. Use the username and password you used when creating your Docker ID. If you use Docker Hub, you can use the same username and password you use to log in to Docker Hub.
 
 ```
-$ docker-cloud login
+$ docker login
 Username: my-username
 Password:
 Login succeeded!

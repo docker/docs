@@ -139,6 +139,6 @@ Docker Cloud, deploy an app to your Cloud nodes, set environment variables,
 scale the service, view logs, set up a load balancer and a data back end, and
 set up a volume to save the data.
 
-There's lots more to learn about Docker Cloud, so check out [the rest of our documentation](https://docs.docker.com/docker-cloud/), the [API and CLI Documentation](../../../apidocs/docker-cloud.md), and our [Knowledge Hub](https://success.docker.com/Cloud) and [Docker Cloud Forums](https://forums.docker.com/c/docker-cloud).
+There's lots more to learn about Docker Cloud, so check out [the rest of our documentation](/docker-cloud/), the [API and CLI Documentation](../../../apidocs/docker-cloud.md), and our [Knowledge Hub](https://success.docker.com/Cloud) and [Docker Cloud Forums](https://forums.docker.com/c/docker-cloud).
 
 Happy Docking!

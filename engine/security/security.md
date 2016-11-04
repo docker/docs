@@ -1,6 +1,7 @@
 ---
 aliases:
 - /engine/articles/security/
+- /security/security/
 description: Review of the Docker Daemon attack surface
 keywords:
 - Docker, Docker documentation,  security
@@ -197,7 +198,7 @@ to the host.
 This won't affect regular web apps; but malicious users will find that
 the arsenal at their disposal has shrunk considerably! By default Docker
 drops all capabilities except [those
-needed](https://github.com/docker/docker/blob/master/oci/defaults_linux.go#L64-L79),
+needed](https://github.com/docker/docker/blob/master/oci/defaults_linux.go#L62-L77),
 a whitelist instead of a blacklist approach. You can see a full list of
 available capabilities in [Linux
 manpages](http://man7.org/linux/man-pages/man7/capabilities.7.html).

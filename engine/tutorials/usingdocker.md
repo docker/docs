@@ -172,7 +172,7 @@ see the application.
 Our Python application is live!
 
 > **Note:**
-> If you have been using a virtual machine on OS X, Windows or Linux,
+> If you have been using a virtual machine on macOS, Windows or Linux,
 > you'll need to get the IP of the virtual host instead of using localhost.
 > You can do this by running the `docker-machine ip your_vm_name` from your  command line or terminal application, for example:
 >
@@ -250,7 +250,9 @@ You can see a sample of that JSON output.
 We can also narrow down the information we want to return by requesting a
 specific element, for example to return the container's IP address we would:
 
+    {% raw %}
     $ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nostalgic_morse
+    {% endraw %}
 
     172.17.0.5
 

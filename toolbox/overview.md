@@ -37,7 +37,7 @@ Go to the <a href="https://www.docker.com/products/docker-toolbox" target="_blan
 
 Choose the install instructions for your platform, and follow the steps:
 
-* [Install Docker Toolbox on Mac OS X](toolbox_install_mac.md)
+* [Install Docker Toolbox on macOS](toolbox_install_mac.md)
 
 * [Install Docker Toolbox for Windows](toolbox_install_windows.md)
 

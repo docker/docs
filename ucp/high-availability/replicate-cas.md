@@ -60,7 +60,7 @@ containers, so you should use it outside business peak hours.
 
 Log into the node using ssh, and run:
 
-```bash
+```none
 $ docker run --rm -i --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp backup --root-ca-only --interactive \
@@ -82,7 +82,7 @@ use the same certificate and private key.
 
 Log into the node using ssh, and run:
 
-```bash
+```none
 $ docker run --rm -i --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp restore --root-ca-only --interactive \
