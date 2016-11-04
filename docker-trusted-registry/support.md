@@ -1,7 +1,9 @@
 ---
 description: Your Docker subscription gives you access to prioritized support. You
   can file tickets via email, your the support portal.
-keywords: Docker, support, help
+keywords:
+- Docker, support
+- help
 menu:
   main:
     parent: workw_dtr

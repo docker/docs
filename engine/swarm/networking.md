@@ -1,6 +1,10 @@
 ---
 description: Use swarm mode networking features
-keywords: guide, swarm mode, swarm, network
+keywords:
+- guide
+- swarm mode
+- swarm
+- network
 menu:
   main:
     identifier: networking-guide
