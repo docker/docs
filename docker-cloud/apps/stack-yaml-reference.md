@@ -47,7 +47,7 @@ The image used to deploy this service. This is the only mandatory key.
 ```yml
 image: drupal
 image: dockercloud/hello-world
-image: quay.io/borja/redis
+image: my.registry.com/redis
 ```
 
 ## autodestroy
