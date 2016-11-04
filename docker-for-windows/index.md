@@ -7,8 +7,7 @@ aliases:
 - /docker-for-windows/started/
 - /installation/windows/
 description: Getting Started
-keywords:
-- windows, beta, alpha, tutorial
+keywords: windows, beta, alpha, tutorial
 menu:
   main:
     identifier: docker-win-getstart

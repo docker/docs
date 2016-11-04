@@ -2,8 +2,7 @@
 aliases:
 - /engine/reference/logging/awslogs/
 description: Describes how to use the Amazon CloudWatch Logs logging driver.
-keywords:
-- AWS, Amazon, CloudWatch, logging, driver
+keywords: AWS, Amazon, CloudWatch, logging, driver
 menu:
   main:
     parent: smn_logging

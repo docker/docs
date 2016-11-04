@@ -2,8 +2,7 @@
 aliases:
 - /mackit/networking/
 description: Networking
-keywords:
-- mac, networking
+keywords: mac, networking
 menu:
   main:
     identifier: mac-networking
@@ -106,5 +105,3 @@ See the [run commmand](/engine/reference/commandline/run.md) for more details on
 #### A view into implementation
 
 We understand that these workarounds are not ideal, but there are several problems. In particular, there is a bug in macOS that is only fixed in 10.12 and is not being backported as far as we can tell, which means that we could not support this in all supported macOS versions. In addition, this network setup would require root access which we are trying to avoid entirely in Docker for Mac (we currently have a very small root helper that we are trying to remove).
-
-

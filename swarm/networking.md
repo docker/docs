@@ -1,7 +1,6 @@
 ---
 description: Swarm and container networks
-keywords:
-- docker, swarm, clustering,  networking
+keywords: docker, swarm, clustering,  networking
 menu:
   main:
     parent: workw_swarm

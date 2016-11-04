@@ -1,7 +1,6 @@
 ---
 description: Delegations for content trust
-keywords:
-- trust, security, delegations, keys, repository
+keywords: trust, security, delegations, keys, repository
 menu:
   main:
     parent: smn_content_trust

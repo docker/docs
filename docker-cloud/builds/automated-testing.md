@@ -2,8 +2,7 @@
 aliases:
 - /docker-cloud/feature-reference/automated-testing/
 description: Automated tests
-keywords:
-- Automated, testing, repository
+keywords: Automated, testing, repository
 menu:
   main:
     parent: builds

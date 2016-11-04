@@ -3,8 +3,7 @@ aliases:
 - /swarm/swarm_at_scale/03-create-cluster/
 - /swarm/swarm_at_scale/02-deploy-infra/
 description: Try Swarm at scale
-keywords:
-- docker, swarm, scale, voting, application,  certificates
+keywords: docker, swarm, scale, voting, application,  certificates
 menu:
   main:
     parent: scale_swarm

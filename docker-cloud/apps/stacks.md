@@ -2,8 +2,7 @@
 aliases:
 - /docker-cloud/feature-reference/stacks/
 description: Manage service stacks
-keywords:
-- service, stack, yaml
+keywords: service, stack, yaml
 menu:
   main:
     parent: apps

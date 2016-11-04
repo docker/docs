@@ -2,8 +2,7 @@
 aliases:
 - /docker-trusted-registry/quick-start/
 description: Learn how to pull an image from Docker Trusted Registry.
-keywords:
-- docker, registry, images, pull
+keywords: docker, registry, images, pull
 menu:
   main:
     identifier: dtr_pull_image

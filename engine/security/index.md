@@ -1,7 +1,6 @@
 ---
 description: Sec
-keywords:
-- seccomp, security, docker, documentation
+keywords: seccomp, security, docker, documentation
 menu:
   main:
     identifier: smn_secure_docker

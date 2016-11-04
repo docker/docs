@@ -1,7 +1,6 @@
 ---
 description: 'Swarm: a Docker-native clustering system'
-keywords:
-- docker, swarm, clustering, scheduling
+keywords: docker, swarm, clustering, scheduling
 menu:
   main:
     identifier: swarm_sched

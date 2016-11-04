@@ -1,7 +1,6 @@
 ---
 description: Scale the service running in the swarm
-keywords:
-- tutorial, cluster management, swarm mode, scale
+keywords: tutorial, cluster management, swarm mode, scale
 menu:
   main:
     identifier: swarm-tutorial-scale-service

@@ -3,9 +3,7 @@ aliases:
 - /engine/userguide/containers/
 description: Explains how to work with containers
 identifier: engine_learn
-keywords:
-- docker, introduction, documentation, about, technology, docker.io, user, guide,
-  user's, manual, platform, framework, home,  intro
+keywords: docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home, intro
 parent: engine_learn_menu
 title: Learn by example
 weight: "-80"

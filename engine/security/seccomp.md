@@ -1,7 +1,6 @@
 ---
 description: Enabling seccomp in Docker
-keywords:
-- seccomp, security, docker, documentation
+keywords: seccomp, security, docker, documentation
 menu:
   main:
     parent: smn_secure_docker

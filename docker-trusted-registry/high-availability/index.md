@@ -2,8 +2,7 @@
 aliases:
 - /docker-trusted-registry/high-availability/high-availability/
 description: Learn how to set up Docker Trusted Registry for high availability.
-keywords:
-- docker, registry, high-availability, backup, recovery
+keywords: docker, registry, high-availability, backup, recovery
 menu:
   main:
     identifier: dtr_high_availability

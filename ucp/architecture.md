@@ -1,7 +1,6 @@
 ---
 description: Learn about the architecture of Docker Universal Control Plane.
-keywords:
-- docker, ucp, architecture
+keywords: docker, ucp, architecture
 menu:
   main:
     identifier: ucp_architecture

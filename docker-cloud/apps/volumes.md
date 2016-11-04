@@ -3,8 +3,7 @@ aliases:
 - /docker-cloud/tutorials/download-volume-data/
 - /docker-cloud/feature-reference/volumes/
 description: Work with data volumes
-keywords:
-- data, volumes, create, reuse
+keywords: data, volumes, create, reuse
 menu:
   main:
     parent: apps

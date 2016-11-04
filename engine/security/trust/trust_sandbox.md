@@ -1,7 +1,6 @@
 ---
 description: Play in a trust sandbox
-keywords:
-- trust, security, root,  keys, repository, sandbox
+keywords: trust, security, root,  keys, repository, sandbox
 menu:
   main:
     parent: smn_content_trust

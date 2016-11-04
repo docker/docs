@@ -1,7 +1,6 @@
 ---
 description: Installing and running a redis service
-keywords:
-- docker, example, package installation, networking,  redis
+keywords: docker, example, package installation, networking,  redis
 title: Dockerizing a Redis service
 ---
 

@@ -2,8 +2,7 @@
 aliases:
 - /contributing/contributing
 description: Contribute code
-keywords:
-- governance, board, members, profiles
+keywords: governance, board, members, profiles
 menu:
   main:
     parent: mn_oss_contrib

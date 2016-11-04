@@ -3,8 +3,7 @@ aliases:
 - /docker-cloud/getting-started/beginner/your_first_service/
 - /docker-cloud/getting-started/beginner/deploy_first_service/
 description: Deploy your first service on Docker Cloud
-keywords:
-- service, Cloud, three
+keywords: service, Cloud, three
 menu:
   main:
     parent: getting-started

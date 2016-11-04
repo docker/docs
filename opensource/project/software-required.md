@@ -1,7 +1,6 @@
 ---
 description: Describes the software required to contribute to Docker
-keywords:
-- 'GitHub account, repository, Docker, Git, Go, make,  '
+keywords: 'GitHub account, repository, Docker, Git, Go, make,  '
 menu:
   main:
     parent: smn_engine_contrib

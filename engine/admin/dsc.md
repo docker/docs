@@ -2,8 +2,7 @@
 aliases:
 - /engine/articles/dsc/
 description: Using DSC to configure a new Docker host
-keywords:
-- powershell, dsc, installation, usage, docker,  documentation
+keywords: powershell, dsc, installation, usage, docker,  documentation
 menu:
   main:
     parent: engine_admin

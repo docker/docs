@@ -2,8 +2,7 @@
 aliases:
 - /docker-cloud/feature-reference/ports/
 description: Publish and expose service or container ports
-keywords:
-- publish, expose, ports, containers, services
+keywords: publish, expose, ports, containers, services
 menu:
   main:
     parent: apps

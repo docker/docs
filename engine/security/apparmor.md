@@ -1,7 +1,6 @@
 ---
 description: Enabling AppArmor in Docker
-keywords:
-- AppArmor, security, docker, documentation
+keywords: AppArmor, security, docker, documentation
 menu:
   main:
     parent: smn_secure_docker

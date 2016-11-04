@@ -2,8 +2,7 @@
 aliases:
 - /docker-trusted-registry/cs-engine/release-notes/
 description: The release notes for CS Docker Engine.
-keywords:
-- docker, engine, release notes
+keywords: docker, engine, release notes
 menu:
   main:
     identifier: menu_csengine_release_notes

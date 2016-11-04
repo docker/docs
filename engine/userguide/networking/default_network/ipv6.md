@@ -1,7 +1,6 @@
 ---
 description: How do we connect docker containers within and across hosts ?
-keywords:
-- docker, network, IPv6
+keywords: docker, network, IPv6
 menu:
   main:
     parent: smn_networking_def

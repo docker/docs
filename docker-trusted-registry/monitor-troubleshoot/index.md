@@ -2,8 +2,7 @@
 aliases:
 - /docker-trusted-registry/monitor-troubleshoot/monitor/
 description: Learn how to monitor your DTR installation.
-keywords:
-- docker, registry, monitor, troubleshoot
+keywords: docker, registry, monitor, troubleshoot
 menu:
   main:
     identifier: dtr_monitor

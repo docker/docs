@@ -3,8 +3,7 @@ aliases:
 - /docker-cloud/getting-started/intermediate/pushing-images-to-dockercloud/
 - /docker-cloud/tutorials/pushing-images-to-dockercloud/
 description: Push images to Docker Cloud
-keywords:
-- images, private, registry
+keywords: images, private, registry
 menu:
   main:
     parent: builds
