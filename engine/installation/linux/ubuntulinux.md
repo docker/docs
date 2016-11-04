@@ -1,14 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/ubuntulinux/"]
-title = "Installation on Ubuntu "
-description = "Instructions for installing Docker on Ubuntu. "
-keywords = ["Docker, Docker documentation, requirements, apt, installation,  ubuntu"]
-[menu.main]
-parent = "engine_linux"
-weight = -6
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/installation/ubuntulinux/
+- /installation/ubuntulinux/
+description: 'Instructions for installing Docker on Ubuntu. '
+keywords:
+- Docker, Docker documentation, requirements, apt, installation,  ubuntu
+menu:
+  main:
+    parent: engine_linux
+    weight: -6
+title: 'Installation on Ubuntu '
+---
 
 # Ubuntu
 
@@ -20,12 +22,12 @@ Docker is supported on these Ubuntu operating systems:
 - Ubuntu Precise 12.04 (LTS)
 
 This page instructs you to install using Docker-managed release packages and
-installation mechanisms. Using these packages ensures you get the latest release
-of Docker. If you wish to install using Ubuntu-managed packages, consult your
-Ubuntu documentation.
+installation mechanisms. Using these packages ensures you get the latest official
+release of Docker. If you are required to install using Ubuntu-managed packages,
+consult the Ubuntu documentation.
 
 >**Note**: Ubuntu Utopic 14.10 and 15.04 exist in Docker's `APT` repository but
-> are no longer officially supported.
+are no longer officially supported.
 
 ## Prerequisites
 
@@ -34,7 +36,7 @@ Additionally, your kernel must be 3.10 at minimum. The latest 3.10 minor version
 or a newer maintained version are also acceptable.
 
 Kernels older than 3.10 lack some of the features required to run Docker
-containers. These older versions are known to have bugs which cause data loss
+containers. These older versions have known bugs which cause data loss
 and frequently panic under certain conditions.
 
 To check your current kernel version, open a terminal and use `uname -r` to
@@ -49,68 +51,83 @@ your `APT` sources to the new Docker repository.
 ### Update your apt sources
 
 Docker's `APT` repository contains Docker 1.7.1 and higher. To set `APT` to use
-packages from the new repository:
+packages from the Docker repository:
 
-1. Log into your machine as a user with `sudo` or `root` privileges.
+1.  Log into your machine as a user with `sudo` or `root` privileges.
 
-2. Open a terminal window.
+2.  Open a terminal window.
 
-3. Update package information, ensure that APT works with the `https` method, and that CA certificates are installed.
+3.  Update package information, ensure that APT works with the `https` method, and that CA certificates are installed.
 
-         $ sudo apt-get update
-         $ sudo apt-get install apt-transport-https ca-certificates
+    ```bash
+    $ sudo apt-get update
+    $ sudo apt-get install apt-transport-https ca-certificates
+    ```
+4.  Add the new `GPG` key.
 
-4. Add the new `GPG` key.
+    ```bash
+    $ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+    ```
 
-        $ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+5.  Find the entry for your Ubuntu operating system.
 
-5. Open the `/etc/apt/sources.list.d/docker.list` file in your favorite editor.
+    The entry determines where APT will search for packages. The possible entries
+    are:
 
-    If the file doesn't exist, create it.
+    | Ubuntu version      | Repository                                                  |
+    | ------------------- | ----------------------------------------------------------- |
+    | Precise 12.04 (LTS) | `deb https://apt.dockerproject.org/repo ubuntu-precise main`|
+    | Trusty 14.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-trusty main` |
+    | Xenial 16.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-xenial main` |
 
-6. Remove any existing entries.
 
-7. Add an entry for your Ubuntu operating system.
+    >**Note**: Docker does not provide packages for all architectures. Binary artifacts
+    are built nightly, and you can download them from
+    https://master.dockerproject.org. To install docker on a multi-architecture
+    system, add an `[arch=...]` clause to the entry. Refer to
+    [Debian Multiarch wiki](https://wiki.debian.org/Multiarch/HOWTO#Setting_up_apt_sources)
+    for details.
 
-    The possible entries are:
+6.  Run the following command, substituting the entry for your operating system
+    for the placeholder `<REPO>`.
 
-    - On Ubuntu Precise 12.04 (LTS)
+    ```bash
+    $ echo "<REPO>" | sudo tee /etc/apt/sources.list.d/docker.list
+    ```
 
-            deb https://apt.dockerproject.org/repo ubuntu-precise main
+7.  Update the `APT` package index.
 
-    - On Ubuntu Trusty 14.04 (LTS)
+    ```bash
+    $ sudo apt-get update
+    ```
 
-            deb https://apt.dockerproject.org/repo ubuntu-trusty main
+8.  Verify that `APT` is pulling from the right repository.
 
-    - Ubuntu Wily 15.10
+    When you run the following command, an entry is returned for each version of
+    Docker that is available for you to install. Each entry should have the URL
+    `https://apt.dockerproject.org/repo/`. The version currently installed is
+    marked with `***`.The output below is truncated.
 
-            deb https://apt.dockerproject.org/repo ubuntu-wily main
+    ```bash
+    $ apt-cache policy docker-engine
 
-    - Ubuntu Xenial 16.04 (LTS)
-
-            deb https://apt.dockerproject.org/repo ubuntu-xenial main
-
-    > **Note**: Docker does not provide packages for all architectures. You can find
-	> nightly built binaries in https://master.dockerproject.org. To install docker on
-    > a multi-architecture system, add an `[arch=...]` clause to the entry. Refer to the
-    > [Debian Multiarch wiki](https://wiki.debian.org/Multiarch/HOWTO#Setting_up_apt_sources)
-    > for details.
-
-8. Save and close the `/etc/apt/sources.list.d/docker.list` file.
-
-9. Update the `APT` package index.
-
-        $ sudo apt-get update
-
-10. Purge the old repo if it exists.
-
-        $ sudo apt-get purge lxc-docker
-
-11. Verify that `APT` is pulling from the right repository.
-
-        $ apt-cache policy docker-engine
-
-    From now on when you run `apt-get upgrade`, `APT` pulls from the new repository.
+      docker-engine:
+        Installed: 1.12.2-0~trusty
+        Candidate: 1.12.2-0~trusty
+        Version table:
+       *** 1.12.2-0~trusty 0
+              500 https://apt.dockerproject.org/repo/ ubuntu-trusty/main amd64 Packages
+              100 /var/lib/dpkg/status
+           1.12.1-0~trusty 0
+              500 https://apt.dockerproject.org/repo/ ubuntu-trusty/main amd64 Packages
+           1.12.0-0~trusty 0
+              500 https://apt.dockerproject.org/repo/ ubuntu-trusty/main amd64 Packages
+           1.11.2-0~trusty 0
+              500 https://apt.dockerproject.org/repo/ ubuntu-trusty/main amd64 Packages
+           1.11.1-0~trusty 0
+              500 https://apt.dockerproject.org/repo/ ubuntu-trusty/main amd64 Packages
+    ```
+From now on when you run `apt-get upgrade`, `APT` pulls from the new repository.
 
 ### Prerequisites by Ubuntu Version
 

@@ -1,10 +1,6 @@
-<!--[metadata]>
-+++
-draft = true
-+++
-<![end-metadata]-->
-
-
+---
+published: false
+---
 
 This is an initial attempt to make it easier to test the examples in the https.md
 doc.

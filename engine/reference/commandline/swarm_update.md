@@ -1,12 +1,16 @@
-<!--[metadata]>
-+++
-title = "swarm update"
-description = "The swarm update command description and usage"
-keywords = ["swarm, update"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/swarm_update/
+description: The swarm update command description and usage
+keywords:
+- swarm, update
+menu:
+  main:
+    parent: smn_cli
+title: swarm update
+---
+
+**Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
 
 # swarm update
 

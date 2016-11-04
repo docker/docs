@@ -1,13 +1,15 @@
-<!--[metadata]>
-+++
-title = "plugin disable"
-description = "the plugin disable command description and usage"
-keywords = ["plugin, disable"]
-advisory = "experimental"
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/plugin_disable/
+advisory: experimental
+description: the plugin disable command description and usage
+keywords:
+- plugin, disable
+menu:
+  main:
+    parent: smn_cli
+title: plugin disable
+---
 
 # plugin disable (experimental)
 

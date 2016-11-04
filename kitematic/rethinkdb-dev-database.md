@@ -44,7 +44,7 @@ for you). This means you can now reach RethinkDB via a client driver at
 ### (Advanced) Saving Data into RethinkDB with a local Node.js App
 
 Now, you'll create the RethinkDB example chat application running on your local
-OS X system to test drive your new containerized database.
+macOS system to test drive your new containerized database.
 
 First, if you don't have it yet, [download and install
 Node.js](http://nodejs.org/).

@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "login"
-description = "The login command description and usage"
-keywords = ["registry, login, image"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/login/
+description: The login command description and usage
+keywords:
+- registry, login, image
+menu:
+  main:
+    parent: smn_cli
+title: login
+---
 
 # login
 
@@ -52,7 +54,7 @@ This is the list of currently available credentials helpers and where
 you can download them from:
 
 - D-Bus Secret Service: https://github.com/docker/docker-credential-helpers/releases
-- Apple OS X keychain: https://github.com/docker/docker-credential-helpers/releases
+- Apple macOS keychain: https://github.com/docker/docker-credential-helpers/releases
 - Microsoft Windows Credential Manager: https://github.com/docker/docker-credential-helpers/releases
 
 ### Usage

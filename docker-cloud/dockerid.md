@@ -30,10 +30,22 @@ account.
 You can also link to source code repositories such as GitHub and
 Bitbucket from your Docker Cloud account settings.
 
-<!-- TODO:
-## API keys
-API keys are used for what?
--->
+## Email addresses
+
+You can associate multiple email addresses with your Docker ID, and one of these addresses becomes the primary address for the account. The primary address is used by Docker to send password reset notifications and other important information, so be sure to keep it updated.
+
+To add another email address to your Docker ID:
+
+1. In Docker Cloud, click the user icon menu at top right, and click **Account Settings**.
+2. In the **Emails** section, enter a new email address for the account.
+3. Click the **plus sign** icon (**+**) to add the address and send a verification email.
+
+The new email address is not added to the account until you confirm it by
+clicking the link in the verification email. This link is only good for a
+limited time. To send a new verification email, click the envelope icon next to
+the email address that you want to verify.
+
+If you have multiple verified email addresses associated with the account, you can click **Set as primary** to change the primary email address.
 
 ## Notifications
 

@@ -60,7 +60,7 @@ minor version will ensure critical kernel bugs get fixed.
 > newer kernels.
 
 Note that Docker also has a client mode, which can run on virtually any
-Linux kernel (it even builds on OS X!).
+Linux kernel (it even builds on macOS!).
 
 ## Enable AppArmor and SELinux when possible
 
@@ -171,14 +171,14 @@ For additional information about running the Engine in daemon mode, refer to
 the [daemon command](../reference/commandline/dockerd.md) in the Engine command
 line reference.
 
-### Get the Mac OS X binary
+### Get the macOS binary
 
-The Mac OS X binary is only a client. You cannot use it to run the `docker`
-daemon. To download the latest version for Mac OS X, use the following URLs:
+The macOS binary is only a client. You cannot use it to run the `docker`
+daemon. To download the latest version for macOS, use the following URLs:
 
     https://get.docker.com/builds/Darwin/x86_64/docker-latest.tgz
 
-To download a specific version for Mac OS X, use the
+To download a specific version for macOS, use the
 following URL pattern:
 
     https://get.docker.com/builds/Darwin/x86_64/docker-<version>.tgz

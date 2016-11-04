@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "stats"
-description = "The stats command description and usage"
-keywords = ["container, resource, statistics"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/stats/
+description: The stats command description and usage
+keywords:
+- container, resource, statistics
+menu:
+  main:
+    parent: smn_cli
+title: stats
+---
 
 # stats
 

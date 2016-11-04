@@ -1,13 +1,15 @@
-<!--[metadata]>
-+++
-title = "plugin inspect"
-description = "The plugin inspect command description and usage"
-keywords = ["plugin, inspect"]
-advisory = "experimental"
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/plugin_inspect/
+advisory: experimental
+description: The plugin inspect command description and usage
+keywords:
+- plugin, inspect
+menu:
+  main:
+    parent: smn_cli
+title: plugin inspect
+---
 
 # plugin inspect (experimental)
 

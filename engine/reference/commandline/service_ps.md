@@ -1,13 +1,17 @@
-<!--[metadata]>
-+++
-title = "service ps"
-description = "The service ps command description and usage"
-keywords = ["service, tasks", "ps"]
-aliases = ["/engine/reference/commandline/service_tasks/"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/service_ps/
+aliases:
+- /engine/reference/commandline/service_tasks/
+description: The service ps command description and usage
+keywords:
+- service, tasks
+- ps
+menu:
+  main:
+    parent: smn_cli
+title: service ps
+---
 
 # service ps
 

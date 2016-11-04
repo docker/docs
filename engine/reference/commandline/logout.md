@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "logout"
-description = "The logout command description and usage"
-keywords = ["logout, docker, registry"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/logout/
+description: The logout command description and usage
+keywords:
+- logout, docker, registry
+menu:
+  main:
+    parent: smn_cli
+title: logout
+---
 
 # logout
 

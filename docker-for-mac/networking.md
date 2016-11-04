@@ -21,7 +21,7 @@ Docker for Mac provides several networking features to make it easier to use.
 ### VPN Passthrough
 
 Docker for Mac's networking can work when attached to a VPN.
-To do this, Docker for Mac intercepts traffic from the `HyperKit` and injects it into OSX as if it originated from the Docker application.
+To do this, Docker for Mac intercepts traffic from the `HyperKit` and injects it into macOS as if it originated from the Docker application.
 
 ### Port Mapping
 
@@ -33,10 +33,10 @@ Docker for Mac will make the container port available at `localhost`.
 
 ### HTTP/HTTPS Proxy Support
 
-Docker for Mac will detect HTTP/HTTPS Proxy Settings from OSX and automatically propagate these to Docker and to your containers.
-For example, if you set your proxy settings to `http://proxy.example.com` in OSX, Docker will use this proxy when pulling containers.
+Docker for Mac will detect HTTP/HTTPS Proxy Settings from macOS and automatically propagate these to Docker and to your containers.
+For example, if you set your proxy settings to `http://proxy.example.com` in macOS, Docker will use this proxy when pulling containers.
 
-![OSX Proxy Settings](images/proxy-settings.png)
+![macOS Proxy Settings](images/proxy-settings.png)
 
 When you start a container, you will see that your proxy settings propagate into the containers. For example:
 
@@ -59,18 +59,18 @@ If you have containers that you wish to keep running across restarts, you should
 
 Following is a summary of current limitations on the Docker for Mac networking stack, along with some ideas for workarounds.
 
-### There is no docker0 bridge on OSX
+### There is no docker0 bridge on macOS
 
-Because of the way networking is implemented in Docker for Mac, you cannot see a `docker0` interface in OSX.
+Because of the way networking is implemented in Docker for Mac, you cannot see a `docker0` interface in macOS.
 This interface is actually within `HyperKit`.
 
 ### I cannot ping my containers
 
-Unfortunately, due to limitations in OSX, we're unable to route traffic to containers, and from containers back to the host.
+Unfortunately, due to limitations in macOS, we're unable to route traffic to containers, and from containers back to the host.
 
 ### Per-container IP addressing is not possible
 
-The docker (Linux) bridge network is not reachable from the OSX host.
+The docker (Linux) bridge network is not reachable from the macOS host.
 
 ### Use cases and workarounds
 
@@ -105,6 +105,6 @@ See the [run commmand](/engine/reference/commandline/run.md) for more details on
 
 #### A view into implementation
 
-We understand that these workarounds are not ideal, but there are several problems. In particular, there is a bug in OSX that is only fixed in 10.12 and is not being backported as far as we can tell, which means that we could not support this in all supported OSX versions. In addition, this network setup would require root access which we are trying to avoid entirely in Docker for Mac (we currently have a very small root helper that we are trying to remove).
+We understand that these workarounds are not ideal, but there are several problems. In particular, there is a bug in macOS that is only fixed in 10.12 and is not being backported as far as we can tell, which means that we could not support this in all supported macOS versions. In addition, this network setup would require root access which we are trying to avoid entirely in Docker for Mac (we currently have a very small root helper that we are trying to remove).
 
 

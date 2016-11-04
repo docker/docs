@@ -1,14 +1,16 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/rhel/"]
-title = "Installation on Red Hat Enterprise Linux"
-description = "Instructions for installing Docker on Red Hat Enterprise Linux."
-keywords = ["Docker, Docker documentation, requirements, linux,  rhel"]
-[menu.main]
-parent = "engine_linux"
-weight = -5
-+++
-<![end-metadata]-->
+---
+aliases:
+- /engine/installation/rhel/
+- /installation/rhel/
+description: Instructions for installing Docker on Red Hat Enterprise Linux.
+keywords:
+- Docker, Docker documentation, requirements, linux,  rhel
+menu:
+  main:
+    parent: engine_linux
+    weight: -5
+title: Installation on Red Hat Enterprise Linux
+---
 
 # Red Hat Enterprise Linux
 

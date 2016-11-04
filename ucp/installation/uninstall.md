@@ -34,23 +34,26 @@ You can also use flags to pass values to the uninstall command.
 
 1.  Run the uninstall command.
 
-    ```bash
+    ```none
     $ docker run --rm -it \
-      -v /var/run/docker.sock:/var/run/docker.sock
+      -v /var/run/docker.sock:/var/run/docker.sock \
       --name ucp \
       docker/ucp uninstall -i
 
     INFO[0000] Were about to uninstall the local components for UCP ID: FEY4:M46O:7OUS:QQA4:HLR3:4HRD:IUTH:LC2W:QPRE:BLYH:UWEM:3TYV
     Do you want proceed with the uninstall? (y/n): y
 
-    INFO[0000] Removing UCP Containers
-    INFO[0000] Removing UCP images
-    INFO[0005] Removing UCP volumes
+    WARN[0000] We detected a daemon advertisement configuration. Proceed with caution, as the daemon will require a restart. Press ctrl-c to cancel uninstall within 4 seconds. 
+    INFO[0004] Removing UCP Containers                      
+    INFO[0005] Removing UCP images                          
+    WARN[0006] Configuration updated. You will have to manually restart the docker daemon for the changes to take effect. 
+    WARN[0006] Engine discovery configuration removed. You will need to restart the daemon. 
+    INFO[0010] Removing UCP volumes
     ```
 
 2.  List the images remaining on the node.
 
-    ```
+    ```none
     $ docker images
 
     REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
@@ -62,7 +65,7 @@ You can also use flags to pass values to the uninstall command.
 
 3.  Remove the docker/ucp image.
 
-    ```
+    ```none
     $ docker rmi docker/ucp
 
     Untagged: docker/ucp:latest
@@ -71,7 +74,7 @@ You can also use flags to pass values to the uninstall command.
     Deleted: sha256:93743d5df2362466e2fe116a677ec6a4b0091bd09e889abfc9109047fcfcdebf
     ```
 
-5.  Restart the Docker daemon.
+4.  Restart the Docker daemon.
 
     When you install or join a node, UCP configures the Docker engine on that
     node for multi-host networking. When uninstalling, the configuration is
@@ -84,7 +87,7 @@ You can also use flags to pass values to the uninstall command.
     $ sudo service docker restart
     ```
 
-6. Confirm the node was removed from the cluster.
+5. Confirm the node was removed from the cluster.
 
     In the UCP web application, confirm the node is no longer listed. It
     might take a few minutes for UCP to stop listing that node.

@@ -48,7 +48,7 @@ To generate your access token:
 
 1. If you have not done so already, install Docker Machine on your local host.
 
-  * <a href="https://docs.docker.com/engine/installation/mac/" target="_blank"> How to install Docker Machine on Mac OS X</a>
+  * <a href="https://docs.docker.com/engine/installation/mac/" target="_blank"> How to install Docker Machine on macOS</a>
 
   * <a href="https://docs.docker.com/engine/installation/windows/" target="_blank">How to install Docker Machine on Windows</a>
 

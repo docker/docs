@@ -29,18 +29,22 @@ We are using the Apache License Version 2.0, see it here:
 [https://github.com/docker/docker/blob/master/LICENSE](
 https://github.com/docker/docker/blob/master/LICENSE)
 
-### Does Docker run on Mac OS X or Windows?
+### Does Docker run on macOS or Windows?
 
-Docker Engine currently runs only on Linux, but you can use VirtualBox to run
-Engine in a virtual machine on your box, and get the best of both worlds. Check
-out the [*Mac OS X*](installation/mac.md) and [*Microsoft
-Windows*](installation/windows.md) installation guides. The small Linux
-distribution boot2docker can be set up using the Docker Machine tool to be run
-inside virtual machines on these two operating systems.
+The Docker Engine client runs natively on Linux, macOS, and Windows. By default, these
+clients connect to a local Docker daemon running in a virtual environment managed
+by Docker, which provides the required features to run Linux-based containers within
+OS X or Windows, or Windows-based containers on Windows.
 
->**Note:** if you are using a remote Docker Engine daemon on a VM through Docker
->Machine, then _do not_ type the `sudo` before the `docker` commands shown in
->the documentation's examples.
+If your version of macOS or Windows does not include the required virtualization
+technology, you can use Docker Machine to work around these limitations.
+
+You can run Windows-based **containers** on Windows Server 2016 and
+Windows 10. Windows-based containers require a Windows kernel to run, in the same
+way that Linux-based containers require a Linux kernel to run. You can even run
+Windows-based containers on a Windows virtual machine running on an macOS or Linux
+host. Docker Machine is not necessary if you run macOS 10.10.3 Yosemite, Windows
+Server 2016, or Windows 10.
 
 ### How do containers compare to virtual machines?
 
@@ -155,14 +159,14 @@ the container will continue to as well. You can see a more substantial example
 
 Linux:
 
- - Ubuntu 12.04, 13.04 et al
- - Fedora 19/20+
- - RHEL 6.5+
- - CentOS 6+
- - Gentoo
- - ArchLinux
- - openSUSE 12.3+
- - CRUX 3.0+
+ - Any distribution running version 3.10+ of the Linux kernel
+ - Specific instructions are available for most Linux distributions, including
+   [RHEL](installation/linux/rhel.md), [Ubuntu](installation/linux/ubuntulinux.md),
+   [SuSE](installation/linux/suse.md), and many others.
+
+Microsoft Windows:
+ - Windows Server 2016
+ - Windows 10
 
 Cloud:
 

@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "service update"
-description = "The service update command description and usage"
-keywords = ["service, update"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/service_update/
+description: The service update command description and usage
+keywords:
+- service, update
+menu:
+  main:
+    parent: smn_cli
+title: service update
+---
 
 # service update
 

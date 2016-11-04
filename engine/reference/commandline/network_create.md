@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "network create"
-description = "The network create command description and usage"
-keywords = ["network, create"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/network_create/
+description: The network create command description and usage
+keywords:
+- network, create
+menu:
+  main:
+    parent: smn_cli
+title: network create
+---
 
 # network create
 

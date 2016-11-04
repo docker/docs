@@ -1,13 +1,15 @@
-<!--[metadata]>
-+++
-title = "deploy"
-description = "The deploy command description and usage"
-keywords = ["stack, deploy"]
-advisory = "experimental"
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/deploy/
+advisory: experimental
+description: The deploy command description and usage
+keywords:
+- stack, deploy
+menu:
+  main:
+    parent: smn_cli
+title: deploy
+---
 
 # stack deploy (experimental)
 

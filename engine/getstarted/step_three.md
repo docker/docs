@@ -30,15 +30,11 @@ image you'll use in the rest of this getting started.
 	The Docker Hub contains images from individuals like you and official images
 	from organizations like RedHat, IBM, Google, and a whole lot more.
 
-2. Click **Browse & Search**.
-
-    The browser opens the search page.
-
-3. Enter the word `whalesay` in the search bar.
+2. Enter the word `whalesay` in the search bar.
 
     ![Browse Docker Hub](tutimg/image_found.png)
 
-4. Click on the **docker/whalesay** image in the results.
+3. Click on the **docker/whalesay** image in the results.
 
     The browser displays the repository for the **whalesay** image.
 

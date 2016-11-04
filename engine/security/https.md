@@ -28,7 +28,7 @@ it will only connect to servers with a certificate signed by that CA.
 
 > **Warning**:
 > These TLS commands will only generate a working set of certificates on Linux.
-> Mac OS X comes with a version of OpenSSL that is incompatible with the
+> macOS comes with a version of OpenSSL that is incompatible with the
 > certificates that Docker requires.
 
 ## Create a CA, server and client keys with OpenSSL

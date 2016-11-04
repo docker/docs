@@ -1,13 +1,15 @@
-<!--[metadata]>
-+++
-title = "Use the Docker command line"
-description = "Docker's CLI command description and usage"
-keywords = ["Docker, Docker documentation, CLI,  command line"]
-[menu.main]
-parent = "smn_cli"
-weight = -2
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/cli/
+description: Docker's CLI command description and usage
+keywords:
+- Docker, Docker documentation, CLI,  command line
+menu:
+  main:
+    parent: smn_cli
+    weight: -2
+title: Use the Docker command line
+---
 
 # Use the Docker command line
 

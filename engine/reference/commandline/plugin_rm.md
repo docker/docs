@@ -1,13 +1,15 @@
-<!--[metadata]>
-+++
-title = "plugin rm"
-description = "the plugin rm command description and usage"
-keywords = ["plugin, rm"]
-advisory = "experimental"
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/plugin_rm/
+advisory: experimental
+description: the plugin rm command description and usage
+keywords:
+- plugin, rm
+menu:
+  main:
+    parent: smn_cli
+title: plugin rm
+---
 
 # plugin rm (experimental)
 

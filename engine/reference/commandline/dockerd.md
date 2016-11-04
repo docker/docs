@@ -1,14 +1,17 @@
-<!--[metadata]>
-+++
-title = "dockerd"
-aliases = ["/engine/reference/commandline/daemon/"]
-description = "The daemon command description and usage"
-keywords = ["container, daemon, runtime"]
-[menu.main]
-parent = "smn_cli"
-weight = -1
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/dockerd/
+aliases:
+- /engine/reference/commandline/daemon/
+description: The daemon command description and usage
+keywords:
+- container, daemon, runtime
+menu:
+  main:
+    parent: smn_cli
+    weight: -1
+title: dockerd
+---
 
 # daemon
 
@@ -283,7 +286,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
 
 #### Devicemapper options
 
-*  `dm.thinpooldev`
+*   `dm.thinpooldev`
 
     Specifies a custom block storage device to use for the thin pool.
 
@@ -310,7 +313,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     $ sudo dockerd --storage-opt dm.thinpooldev=/dev/mapper/thin-pool
     ```
 
-*  `dm.basesize`
+*   `dm.basesize`
 
     Specifies the size to use when creating the base device, which limits the
     size of images and containers. The default value is 10G. Note, thin devices
@@ -327,7 +330,6 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     ```bash
     $ sudo dockerd --storage-opt dm.basesize=50G
     ```
-
 
     This will increase the base device size to 50G. The Docker daemon will throw an
     error if existing base device size is larger than 50G. A user can use
@@ -349,7 +351,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     $ sudo dockerd --storage-opt dm.basesize=20G
     ```
 
-*  `dm.loopdatasize`
+*   `dm.loopdatasize`
 
     > **Note**:
     > This option configures devicemapper loopback, which should not
@@ -366,7 +368,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     $ sudo dockerd --storage-opt dm.loopdatasize=200G
     ```
 
-*  `dm.loopmetadatasize`
+*   `dm.loopmetadatasize`
 
     > **Note**:
     > This option configures devicemapper loopback, which should not
@@ -383,7 +385,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     $ sudo dockerd --storage-opt dm.loopmetadatasize=4G
     ```
 
-*  `dm.fs`
+*   `dm.fs`
 
     Specifies the filesystem type to use for the base device. The supported
     options are "ext4" and "xfs". The default is "xfs"
@@ -394,7 +396,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     $ sudo dockerd --storage-opt dm.fs=ext4
     ```
 
-*  `dm.mkfsarg`
+*   `dm.mkfsarg`
 
     Specifies extra mkfs arguments to be used when creating the base device.
 
@@ -404,7 +406,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     $ sudo dockerd --storage-opt "dm.mkfsarg=-O ^has_journal"
     ```
 
-*  `dm.mountopt`
+*   `dm.mountopt`
 
     Specifies extra mount options used when mounting the thin devices.
 
@@ -414,7 +416,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     $ sudo dockerd --storage-opt dm.mountopt=nodiscard
     ```
 
-*  `dm.datadev`
+*   `dm.datadev`
 
     (Deprecated, use `dm.thinpooldev`)
 
@@ -432,7 +434,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
           --storage-opt dm.metadatadev=/dev/sdc1
     ```
 
-*  `dm.metadatadev`
+*   `dm.metadatadev`
 
     (Deprecated, use `dm.thinpooldev`)
 
@@ -456,7 +458,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
           --storage-opt dm.metadatadev=/dev/sdc1
     ```
 
-*  `dm.blocksize`
+*   `dm.blocksize`
 
     Specifies a custom blocksize to use for the thin pool. The default
     blocksize is 64K.
@@ -467,7 +469,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     $ sudo dockerd --storage-opt dm.blocksize=512K
     ```
 
-*  `dm.blkdiscard`
+*   `dm.blkdiscard`
 
     Enables or disables the use of blkdiscard when removing devicemapper
     devices. This is enabled by default (only) if using loopback devices and is
@@ -483,7 +485,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     $ sudo dockerd --storage-opt dm.blkdiscard=false
     ```
 
-*  `dm.override_udev_sync_check`
+*   `dm.override_udev_sync_check`
 
     Overrides the `udev` synchronization checks between `devicemapper` and `udev`.
     `udev` is the device manager for the Linux kernel.
@@ -523,7 +525,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     > Otherwise, set this flag for migrating existing Docker daemons to
     > a daemon with a supported environment.
 
-*  `dm.use_deferred_removal`
+*   `dm.use_deferred_removal`
 
     Enables use of deferred device removal if `libdm` and the kernel driver
     support the mechanism.
@@ -545,7 +547,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     $ sudo dockerd --storage-opt dm.use_deferred_removal=true
     ```
 
-*  `dm.use_deferred_deletion`
+*   `dm.use_deferred_deletion`
 
     Enables use of deferred device deletion for thin pool devices. By default,
     thin pool device deletion is synchronous. Before a container is deleted,
@@ -571,7 +573,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     when unintentional leaking of mount point happens across multiple mount
     namespaces.
 
-*  `dm.min_free_space`
+*   `dm.min_free_space`
 
     Specifies the min free space percent in a thin pool require for new device
     creation to succeed. This check applies to both free data space as well
@@ -619,7 +621,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
 
 #### ZFS options
 
-* `zfs.fsname`
+*   `zfs.fsname`
 
     Set zfs filesystem under which docker will create its own datasets.
     By default docker will pick up the zfs filesystem where docker graph
@@ -633,7 +635,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
 
 #### Btrfs options
 
-* `btrfs.min_space`
+*   `btrfs.min_space`
 
     Specifies the mininum size to use when creating the subvolume which is used
     for containers. If user uses disk quota for btrfs when creating or running
@@ -648,7 +650,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
 
 #### Overlay2 options
 
-* `overlay2.override_kernel_check`
+*   `overlay2.override_kernel_check`
 
     Overrides the Linux kernel version check allowing overlay2. Support for
     specifying multiple lower directories needed by overlay2 was added to the
@@ -676,19 +678,20 @@ Runtimes can be registered with the daemon either via the
 configuration file or using the `--add-runtime` command line argument.
 
 The following is an example adding 2 runtimes via the configuration:
+
 ```json
-	"default-runtime": "runc",
-	"runtimes": {
-		"runc": {
-			"path": "runc"
-		},
-		"custom": {
-			"path": "/usr/local/bin/my-runc-replacement",
-			"runtimeArgs": [
-				"--debug"
-			]
-		}
+"default-runtime": "runc",
+"runtimes": {
+	"runc": {
+		"path": "runc"
+	},
+	"custom": {
+		"path": "/usr/local/bin/my-runc-replacement",
+		"runtimeArgs": [
+			"--debug"
+		]
 	}
+}
 ```
 
 This is the same example via the command line:
@@ -848,35 +851,35 @@ $ sudo dockerd \
 
 The currently supported cluster store options are:
 
-*  `discovery.heartbeat`
+*   `discovery.heartbeat`
 
     Specifies the heartbeat timer in seconds which is used by the daemon as a
     keepalive mechanism to make sure discovery module treats the node as alive
     in the cluster. If not configured, the default value is 20 seconds.
 
-*  `discovery.ttl`
+*   `discovery.ttl`
 
     Specifies the ttl (time-to-live) in seconds which is used by the discovery
     module to timeout a node if a valid heartbeat is not received within the
     configured ttl value. If not configured, the default value is 60 seconds.
 
-*  `kv.cacertfile`
+*   `kv.cacertfile`
 
     Specifies the path to a local file with PEM encoded CA certificates to trust
 
-*  `kv.certfile`
+*   `kv.certfile`
 
     Specifies the path to a local file with a PEM encoded certificate.  This
     certificate is used as the client cert for communication with the
     Key/Value store.
 
-*  `kv.keyfile`
+*   `kv.keyfile`
 
     Specifies the path to a local file with a PEM encoded private key.  This
     private key is used as the client key for communication with the
     Key/Value store.
 
-*  `kv.path`
+*   `kv.path`
 
     Specifies the path in the Key/Value store. If not configured, the default value is 'docker/nodes'.
 
@@ -1108,74 +1111,71 @@ This is a full example of the allowed configuration options on Linux:
 
 ```json
 {
-	"authorization-plugins": [],
-	"dns": [],
-	"dns-opts": [],
-	"dns-search": [],
-	"exec-opts": [],
-	"exec-root": "",
-	"storage-driver": "",
-	"storage-opts": [],
-	"labels": [],
-	"live-restore": true,
-	"log-driver": "",
-	"log-opts": {},
-	"mtu": 0,
-	"pidfile": "",
-	"graph": "",
-	"cluster-store": "",
-	"cluster-store-opts": {},
-	"cluster-advertise": "",
-	"max-concurrent-downloads": 3,
-	"max-concurrent-uploads": 5,
-	"debug": true,
-	"hosts": [],
-	"log-level": "",
-	"tls": true,
-	"tlsverify": true,
-	"tlscacert": "",
-	"tlscert": "",
-	"tlskey": "",
-	"swarm-default-advertise-addr": "",
-	"api-cors-header": "",
-	"selinux-enabled": false,
-	"userns-remap": "",
-	"group": "",
-	"cgroup-parent": "",
-	"default-ulimits": {},
-	"init": false,
-	"init-path": "/usr/libexec/docker-init",
-	"ipv6": false,
-	"iptables": false,
-	"ip-forward": false,
-	"ip-masq": false,
-	"userland-proxy": false,
-	"userland-proxy-path": "/usr/libexec/docker-proxy",
-	"ip": "0.0.0.0",
-	"bridge": "",
-	"bip": "",
-	"fixed-cidr": "",
-	"fixed-cidr-v6": "",
-	"default-gateway": "",
-	"default-gateway-v6": "",
-	"icc": false,
-	"raw-logs": false,
-	"registry-mirrors": [],
-	"insecure-registries": [],
-	"disable-legacy-registry": false,
-	"default-runtime": "runc",
-	"oom-score-adjust": -500,
-	"runtimes": {
-		"runc": {
-			"path": "runc"
-		},
-		"custom": {
-			"path": "/usr/local/bin/my-runc-replacement",
-			"runtimeArgs": [
-				"--debug"
-			]
-		}
-	}
+    "api-cors-header": "",
+    "authorization-plugins": [],
+    "bip": "",
+    "bridge": "",
+    "cgroup-parent": "",
+    "cluster-store": "",
+    "cluster-store-opts": {},
+    "cluster-advertise": "",
+    "debug": true,
+    "default-gateway": "",
+    "default-gateway-v6": "",
+    "default-runtime": "runc",
+    "default-ulimits": {},
+    "disable-legacy-registry": false,
+    "dns": [],
+    "dns-opts": [],
+    "dns-search": [],
+    "exec-opts": [],
+    "exec-root": "",
+    "fixed-cidr": "",
+    "fixed-cidr-v6": "",
+    "graph": "",
+    "group": "",
+    "hosts": [],
+    "icc": false,
+    "insecure-registries": [],
+    "ip": "0.0.0.0",
+    "iptables": false,
+    "ipv6": false,
+    "ip-forward": false,
+    "ip-masq": false,
+    "labels": [],
+    "live-restore": true,
+    "log-driver": "",
+    "log-level": "",
+    "log-opts": {},
+    "max-concurrent-downloads": 3,
+    "max-concurrent-uploads": 5,
+    "mtu": 0,
+    "oom-score-adjust": -500,
+    "pidfile": "",
+    "raw-logs": false,
+    "registry-mirrors": [],
+    "runtimes": {
+        "runc": {
+            "path": "runc"
+        },
+        "custom": {
+            "path": "/usr/local/bin/my-runc-replacement",
+            "runtimeArgs": [
+                "--debug"
+            ]
+        }
+    },
+    "selinux-enabled": false,
+    "storage-driver": "",
+    "storage-opts": [],
+    "swarm-default-advertise-addr": "",
+    "tls": true,
+    "tlscacert": "",
+    "tlscert": "",
+    "tlskey": "",
+    "tlsverify": true,
+    "userland-proxy": false,
+    "userns-remap": ""	
 }
 ```
 
@@ -1190,36 +1190,36 @@ This is a full example of the allowed configuration options on Windows:
 ```json
 {
     "authorization-plugins": [],
+    "bridge": "",
+    "cluster-advertise": "",
+    "cluster-store": "",
+    "debug": true,
+    "default-ulimits": {},
+    "disable-legacy-registry": false,
     "dns": [],
     "dns-opts": [],
     "dns-search": [],
     "exec-opts": [],
-    "storage-driver": "",
-    "storage-opts": [],
+    "fixed-cidr": "",
+    "graph": "",
+    "group": "",
+    "hosts": [],
+    "insecure-registries": [],
     "labels": [],
     "live-restore": true,
     "log-driver": "",
+    "log-level": "",
     "mtu": 0,
     "pidfile": "",
-    "graph": "",
-    "cluster-store": "",
-    "cluster-advertise": "",
-    "debug": true,
-    "hosts": [],
-    "log-level": "",
-    "tlsverify": true,
+    "raw-logs": false,
+    "registry-mirrors": [],
+    "storage-driver": "",
+    "storage-opts": [],
+    "swarm-default-advertise-addr": "",
     "tlscacert": "",
     "tlscert": "",
     "tlskey": "",
-    "swarm-default-advertise-addr": "",
-    "group": "",
-    "default-ulimits": {},
-    "bridge": "",
-    "fixed-cidr": "",
-    "raw-logs": false,
-    "registry-mirrors": [],
-    "insecure-registries": [],
-    "disable-legacy-registry": false
+    "tlsverify": true
 }
 ```
 

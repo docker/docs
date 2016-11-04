@@ -1,18 +1,18 @@
-<!--[metadata]>
-+++
-aliases = [
-"/introduction/understanding-docker/",
-"/engine/userguide/basics/",
-"/engine/quickstart.md"
-]
-title = "Docker Overview"
-description = "Docker explained in depth"
-keywords = ["docker, introduction, documentation, about, technology,  understanding"]
-[menu.main]
-parent = "engine_use"
-weight = -90
-+++
-<![end-metadata]-->
+---
+aliases:
+- /introduction/understanding-docker/
+- /engine/userguide/basics/
+- /engine/quickstart.md
+- /engine/introduction/understanding-docker/
+description: Docker explained in depth
+keywords:
+- docker, introduction, documentation, about, technology,  understanding
+menu:
+  main:
+    parent: engine_use
+    weight: -90
+title: Docker Overview
+---
 
 # Docker Overview
 Docker is an open platform for developing, shipping, and running applications.

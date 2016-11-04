@@ -1,12 +1,14 @@
-<!--[metadata]>
-+++
-title = "restart"
-description = "The restart command description and usage"
-keywords = ["restart, container, Docker"]
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+aliases:
+  - /reference/commandline/restart/
+description: The restart command description and usage
+keywords:
+- restart, container, Docker
+menu:
+  main:
+    parent: smn_cli
+title: restart
+---
 
 # restart
 
