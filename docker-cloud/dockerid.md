@@ -1,6 +1,7 @@
 ---
 description: Using your DockerID to log in to Docker Cloud
-keywords: one, two, three
+keywords:
+- one, two, three
 menu:
   main:
     parent: docker-cloud

@@ -3,7 +3,8 @@ aliases:
 - /api/swarm-api/
 - /swarm/api/
 description: Swarm API
-keywords: docker, swarm, clustering,  api
+keywords:
+- docker, swarm, clustering,  api
 menu:
   main:
     parent: workw_swarm

@@ -2,7 +2,8 @@
 aliases:
 - /engine/articles/puppet/
 description: Installing and using Puppet
-keywords: puppet, installation, usage, docker,  documentation
+keywords:
+- puppet, installation, usage, docker,  documentation
 menu:
   main:
     parent: engine_admin

@@ -2,7 +2,8 @@
 aliases:
 - /mackit/troubleshoot/
 description: Troubleshooting, logs, and known issues
-keywords: mac, troubleshooting, logs, issues
+keywords:
+- mac, troubleshooting, logs, issues
 menu:
   main:
     identifier: docker-mac-troubleshoot

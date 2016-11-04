@@ -2,7 +2,8 @@
 aliases:
 - /engine/articles/baseimages/
 description: How to create base images
-keywords: Examples, Usage, base image, docker, documentation,  examples
+keywords:
+- Examples, Usage, base image, docker, documentation,  examples
 menu:
   main:
     parent: engine_images

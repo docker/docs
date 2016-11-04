@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/getting-started/python/12_data_management_with_volumes/
 description: Data management with Volumes
-keywords: Python, data, management
+keywords:
+- Python, data, management
 menu:
   main:
     parent: deploy-app

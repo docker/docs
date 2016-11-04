@@ -1,6 +1,7 @@
 ---
 description: VMware vSphere driver for machine
-keywords: machine, VMware vSphere, driver
+keywords:
+- machine, VMware vSphere, driver
 menu:
   main:
     parent: smn_machine_drivers

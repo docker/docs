@@ -1,6 +1,7 @@
 ---
 description: Dockerizing a Couchbase service
-keywords: docker, example, package installation, networking, couchbase
+keywords:
+- docker, example, package installation, networking, couchbase
 title: Dockerizing a Couchbase service
 ---
 

@@ -2,7 +2,8 @@
 aliases:
 - /engine/installation/cloud/cloud/
 description: Installation instructions for Docker on cloud.
-keywords: cloud, docker, machine, documentation,  installation
+keywords:
+- cloud, docker, machine, documentation,  installation
 menu:
   main:
     parent: install_cloud

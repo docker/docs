@@ -4,7 +4,8 @@ aliases:
 - /windows/last_page/
 - /linux/last_page/
 description: Getting started with Docker
-keywords: beginner, getting started, Docker
+keywords:
+- beginner, getting started, Docker
 menu:
   main:
     identifier: getstart_learn_more

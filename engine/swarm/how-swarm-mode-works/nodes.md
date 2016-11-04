@@ -2,7 +2,8 @@
 aliases:
 - /engine/swarm/how-swarm-mode-works/
 description: How swarm nodes work
-keywords: docker, container, cluster, swarm mode, node
+keywords:
+- docker, container, cluster, swarm mode, node
 menu:
   main:
     identifier: how-nodes-work

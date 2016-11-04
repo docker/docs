@@ -2,7 +2,8 @@
 aliases:
 - /windows/troubleshoot/
 description: Troubleshooting, logs, and known issues
-keywords: windows, troubleshooting, logs, issues
+keywords:
+- windows, troubleshooting, logs, issues
 menu:
   main:
     identifier: docker-windows-troubleshoot

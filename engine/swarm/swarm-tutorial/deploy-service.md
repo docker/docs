@@ -1,6 +1,7 @@
 ---
 description: Deploy a service to the swarm
-keywords: tutorial, cluster management, swarm mode
+keywords:
+- tutorial, cluster management, swarm mode
 menu:
   main:
     identifier: deploy-application

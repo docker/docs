@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/feature-reference/stack-yaml-reference/
 description: Stack YAML reference
-keywords: YAML, stack, reference
+keywords:
+- YAML, stack, reference
 menu:
   main:
     parent: apps

@@ -1,6 +1,7 @@
 ---
 description: Swarm rescheduling
-keywords: docker, swarm, clustering, rescheduling
+keywords:
+- docker, swarm, clustering, rescheduling
 title: Rescheduling
 ---
 

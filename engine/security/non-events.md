@@ -1,6 +1,7 @@
 ---
 description: Review of security vulnerabilities Docker mitigated
-keywords: Docker, Docker documentation,  security, security non-events
+keywords:
+- Docker, Docker documentation,  security, security non-events
 menu:
   main:
     parent: smn_secure_docker

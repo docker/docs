@@ -1,6 +1,7 @@
 ---
 description: Run Docker Engine in swarm mode
-keywords: guide, swarm mode, node
+keywords:
+- guide, swarm mode, node
 menu:
   main:
     identifier: initialize-swarm-guide

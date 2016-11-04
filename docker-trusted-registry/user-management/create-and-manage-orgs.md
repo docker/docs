@@ -1,7 +1,8 @@
 ---
 description: Learn how to set up organizations to enforce security in Docker Trusted
   Registry.
-keywords: docker, registry, security, permissions, organizations
+keywords:
+- docker, registry, security, permissions, organizations
 menu:
   main:
     identifier: dtr-create-organizations

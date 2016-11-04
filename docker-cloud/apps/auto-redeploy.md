@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/feature-reference/auto-redeploy/
 description: Autoredeploy
-keywords: Autoredeploy, image, store, service
+keywords:
+- Autoredeploy, image, store, service
 menu:
   main:
     parent: apps

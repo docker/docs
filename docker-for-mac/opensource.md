@@ -1,6 +1,7 @@
 ---
 description: Docker's use of Open Source
-keywords: docker, opensource
+keywords:
+- docker, opensource
 menu:
   main:
     identifier: opensource-mac
@@ -20,3 +21,4 @@ Docker Desktop Editions distribute some components that are licensed under the G
 
 The sources for `qemu-img` can be obtained [here](http://wiki.qemu-project.org/download/qemu-2.4.1.tar.bz2).
 The sources for the `gettext` and `glib` libraries that `qemu-img` requires were obtained from [Homebrew](https://brew.sh) and may be retrieved using `brew install --build-from-source gettext glib`.
+

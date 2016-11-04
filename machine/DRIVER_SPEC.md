@@ -1,10 +1,11 @@
 ---
 description: machine
-keywords: machine, orchestration, install, installation, docker, documentation
+published: false
+keywords:
+- machine, orchestration, install, installation, docker, documentation
 menu:
   main:
     parent: mn_install
-published: false
 title: Docker Machine
 ---
 

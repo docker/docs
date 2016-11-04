@@ -2,7 +2,8 @@
 aliases:
 - /ucp/kv_store/
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
-keywords: ectd, key, value, store, ucp
+keywords:
+- ectd, key, value, store, ucp
 menu:
   main:
     identifier: ucp_troubleshoot_configurations

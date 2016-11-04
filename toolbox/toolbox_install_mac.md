@@ -1,6 +1,7 @@
 ---
 description: How to install Toolbox on Mac
-keywords: docker, documentation, install, toolbox, mac
+keywords:
+- docker, documentation, install, toolbox, mac
 menu:
   main:
     parent: workw_toolbox

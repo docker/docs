@@ -1,6 +1,8 @@
 ---
 description: Trusted Registry configuration options
-keywords: docker, documentation, about, technology, install, enterprise, hub, CS engine, Docker Trusted Registry, configure, storage, backend, drivers
+keywords:
+- docker, documentation, about, technology, install, enterprise, hub, CS engine, Docker
+  Trusted Registry, configure, storage, backend, drivers
 menu:
   main:
     identifier: workw_dtr_configure

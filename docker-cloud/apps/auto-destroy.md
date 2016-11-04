@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/feature-reference/auto-destroy/
 description: Autodestroy
-keywords: Autodestroy, service, terminate, container
+keywords:
+- Autodestroy, service, terminate, container
 menu:
   main:
     parent: apps

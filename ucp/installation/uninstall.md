@@ -1,6 +1,7 @@
 ---
 description: Learn how to uninstall a Docker Universal Control Plane cluster.
-keywords: docker, ucp, uninstall
+keywords:
+- docker, ucp, uninstall
 menu:
   main:
     identifier: ucp_uninstall

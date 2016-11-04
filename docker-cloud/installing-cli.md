@@ -5,7 +5,8 @@ aliases:
 - /docker-cloud/tutorials/installing-cli/
 description: Using the Docker Cloud CLI on Linux, Windows, and macOS, installing,
   updating, uninstall
-keywords: cloud, command-line, CLI
+keywords:
+- cloud, command-line, CLI
 menu:
   main:
     parent: docker-cloud

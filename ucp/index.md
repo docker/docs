@@ -1,6 +1,7 @@
 ---
 description: Docker Universal Control Plane
-keywords: universal, control, plane, ucp
+keywords:
+- universal, control, plane, ucp
 menu:
   main:
     identifier: mn_ucp

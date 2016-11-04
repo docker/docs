@@ -1,6 +1,7 @@
 ---
 description: CLI and log output formatting reference
-keywords: format, formatting, output, templates, log
+keywords:
+- format, formatting, output, templates, log
 title: Format command and log output
 ---
 

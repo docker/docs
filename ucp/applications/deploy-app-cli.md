@@ -3,7 +3,8 @@ aliases:
 - /ucp/deploy-application/
 description: Learn how to deploy containerized applications on a cluster, with Docker
   Universal Control Plane.
-keywords: deploy, application
+keywords:
+- deploy, application
 menu:
   main:
     identifier: ucp_deploy_cli

@@ -7,7 +7,8 @@ aliases:
 - /docker-for-mac/started/
 - /installation/mac/
 description: Getting Started
-keywords: mac, beta, alpha, tutorial
+keywords:
+- mac, beta, alpha, tutorial
 menu:
   main:
     identifier: docker-mac-getstart

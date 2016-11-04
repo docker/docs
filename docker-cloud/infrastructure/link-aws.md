@@ -3,7 +3,8 @@ aliases:
 - /docker-cloud/getting-started/beginner/link-aws/
 - /docker-cloud/getting-started/link-aws/
 description: Link your Amazon Web Services account
-keywords: AWS, Cloud, link
+keywords:
+- AWS, Cloud, link
 menu:
   main:
     parent: infrastructure

@@ -1,6 +1,7 @@
 ---
 description: Frequently asked questions
-keywords: windows faqs
+keywords:
+- windows faqs
 menu:
   main:
     identifier: docker-windows-faqs

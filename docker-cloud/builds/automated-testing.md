@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/feature-reference/automated-testing/
 description: Automated tests
-keywords: Automated, testing, repository
+keywords:
+- Automated, testing, repository
 menu:
   main:
     parent: builds
@@ -79,8 +80,8 @@ Docker repository, regardless of the Autotest settings.
     The following options are available:
 
     * `Off`: No additional test builds. Tests only run if they're configured as part of an automated build.
-    * `Internal pull requests`: Run a test build for any pull requests to branches that match a build rule, but only when the pull request comes from the same source repository.
-    * `Internal and external pull requests`: Run a test build for any pull requests to branches that match a build rule, including when the pull request originated in an external source repository.
+    * `Source repository`: Run a test build for any pull requests to branches that match a build rule, but only when the pull request comes from the same source repository.
+    * `Source repository & external pull requests`: Run a test build for any pull requests to branches that match a build rule, including when the pull request originated in an external source repository.
 
     > **Note**: For security purposes, autotest on _external pull requests_ is
     disabled on public repositories. If you select this option on a public

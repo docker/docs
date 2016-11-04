@@ -2,7 +2,8 @@
 aliases:
 - /docker-cloud/feature-reference/automated-build/
 description: Automated builds
-keywords: automated, build, images
+keywords:
+- automated, build, images
 menu:
   main:
     parent: builds

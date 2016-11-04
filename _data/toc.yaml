@@ -1075,8 +1075,6 @@ toc:
       title: Amazon Web Services
     - path: /machine/drivers/digital-ocean/
       title: Digital Ocean
-    - path: /machine/drivers/exoscale/
-      title: Exoscale
     - path: /machine/drivers/generic/
       title: Generic
     - path: /machine/drivers/gce/
@@ -1099,6 +1097,8 @@ toc:
       title: VMware vCloud Air
     - path: /machine/drivers/vsphere/
       title: VMware vSphere
+    - path: /machine/drivers/exoscale/
+      title: exoscale
   - path: /machine/completion/
     title: Command-line Completion
 - sectiontitle: Docker Store

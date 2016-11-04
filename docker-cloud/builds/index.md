@@ -1,6 +1,7 @@
 ---
 description: Manage Builds and Images in Docker Cloud
-keywords: builds, images, Cloud
+keywords:
+- builds, images, Cloud
 menu:
   main:
     parent: builds

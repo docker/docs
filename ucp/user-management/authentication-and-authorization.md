@@ -3,7 +3,8 @@ aliases:
 - /ucp/manage/monitor-manage-users/
 - /ucp/user-management/manage-users/
 description: Learn how to manage permissions in Docker Universal Control Plane.
-keywords: authorization, authentication, users, teams, UCP
+keywords:
+- authorization, authentication, users, teams, UCP
 menu:
   main:
     identifier: ucp_manage_users

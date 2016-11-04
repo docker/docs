@@ -2,7 +2,9 @@
 aliases:
 - /docker-trusted-registry/prior-release-notes/
 description: Archived release notes for Docker Trusted Registry
-keywords: docker, documentation, about, technology, understanding, enterprise, hub, registry, Docker Trusted Registry, release
+keywords:
+- docker, documentation, about, technology, understanding, enterprise, hub, registry,
+  Docker Trusted Registry, release
 menu:
   main:
     identifier: dtr_prior_release_notes
