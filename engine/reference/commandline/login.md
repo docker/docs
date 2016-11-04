@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/login/
 description: The login command description and usage
 keywords:
 - registry, login, image
@@ -32,7 +34,7 @@ adding the server name.
 `docker login` requires user to use `sudo` or be `root`, except when:
 
 1.  connecting to a remote daemon, such as a `docker-machine` provisioned `docker engine`.
-2.  user is added to the `docker` group.  This will impact the security of your system; the `docker` group is `root` equivalent.  See [Docker Daemon Attack Surface](https://docs.docker.com/security/security/#docker-daemon-attack-surface) for details.
+2.  user is added to the `docker` group.  This will impact the security of your system; the `docker` group is `root` equivalent.  See [Docker Daemon Attack Surface](/security/security/#docker-daemon-attack-surface) for details.
 
 You can log into any public or private repository for which you have
 credentials.  When you log in, the command stores encoded credentials in
@@ -52,7 +54,7 @@ This is the list of currently available credentials helpers and where
 you can download them from:
 
 - D-Bus Secret Service: https://github.com/docker/docker-credential-helpers/releases
-- Apple OS X keychain: https://github.com/docker/docker-credential-helpers/releases
+- Apple macOS keychain: https://github.com/docker/docker-credential-helpers/releases
 - Microsoft Windows Credential Manager: https://github.com/docker/docker-credential-helpers/releases
 
 ### Usage

@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/service_rm/
 description: The service rm command description and usage
 keywords:
 - service, rm

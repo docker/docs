@@ -214,7 +214,7 @@ lo        Link encap:Local Loopback
           RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
 ```
 
-Then use `ping`to send three ICMP requests and test the connectivity of the
+Then use `ping` to send three ICMP requests and test the connectivity of the
 containers on this `bridge` network.
 
 ```
@@ -465,6 +465,9 @@ You should open the following ports between each of your hosts.
 Your key-value store service may require additional ports.
 Check your vendor's documentation and open any required ports.
 
+If you are planning on creating an overlay network with encryption (`--opt encrypted`),
+you will also need to ensure protocol 50 (ESP) is open.
+
 Once you have several machines provisioned, you can use Docker Swarm to quickly
 form them into a swarm which includes a discovery service as well.
 
@@ -546,8 +549,7 @@ server is unable to resolve the request it will be forwarded to any external DNS
 servers configured for the container. To facilitate this when the container is
 created, only the embedded DNS server reachable at `127.0.0.11` will be listed
 in the container's `resolv.conf` file. More information on embedded DNS server on
-user-defined networks can be found in the [embedded DNS server in user-defined networks]
-(configure-dns.md)
+user-defined networks can be found in the [embedded DNS server in user-defined networks](configure-dns.md)
 
 ## Links
 
@@ -565,6 +567,6 @@ functionality in user-defined networks.
 - [Work with network commands](work-with-networks.md)
 - [Get started with multi-host networking](get-started-overlay.md)
 - [Managing Data in Containers](../../tutorials/dockervolumes.md)
-- [Docker Machine overview](https://docs.docker.com/machine)
-- [Docker Swarm overview](https://docs.docker.com/swarm)
+- [Docker Machine overview](/machine)
+- [Docker Swarm overview](/swarm)
 - [Investigate the LibNetwork project](https://github.com/docker/libnetwork)

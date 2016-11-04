@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/import/
 description: The import command description and usage
 keywords:
 - import, file, system, container

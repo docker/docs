@@ -12,5 +12,7 @@ title: url
 
 Get the URL of a host
 
-    $ docker-machine url dev
-    tcp://192.168.99.109:2376
+```none
+$ docker-machine url dev
+tcp://192.168.99.109:2376
+```

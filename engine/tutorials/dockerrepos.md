@@ -67,7 +67,7 @@ There you can see two example results: `centos` and `tianon/centos`. The second
 result shows that it comes from the public repository of a user, named
 `tianon/`, while the first result, `centos`, doesn't explicitly list a
 repository which means that it comes from the trusted top-level namespace for
-[Official Repositories](https://docs.docker.com/docker-hub/official_repos/). The `/` character separates
+[Official Repositories](/docker-hub/official_repos/). The `/` character separates
 a user's repository from the image name.
 
 Once you've found the image you want, you can download it with `docker pull <imagename>`:
@@ -100,7 +100,7 @@ see the [Docker Hub](https://hub.docker.com) registry.
 
 Anyone can pull public images from the [Docker Hub](https://hub.docker.com)
 registry, but if you would like to share your own images, then you must
-[register first](https://docs.docker.com/docker-hub/accounts).
+[register first](/docker-hub/accounts).
 
 ## Pushing a repository to Docker Hub
 
@@ -118,7 +118,7 @@ community.
 ## Features of Docker Hub
 
 Let's take a closer look at some of the features of Docker Hub. You can find more
-information [here](https://docs.docker.com/docker-hub/).
+information [here](/docker-hub/).
 
 * Private repositories
 * Organizations and teams
@@ -185,7 +185,7 @@ a webhook you can specify a target URL and a JSON payload that will be
 delivered when the image is pushed.
 
 See the Docker Hub documentation for [more information on
-webhooks](https://docs.docker.com/docker-hub/repos/#webhooks)
+webhooks](/docker-hub/repos/#webhooks)
 
 ## Next steps
 

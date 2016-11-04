@@ -25,10 +25,10 @@ format](compose-file.md#versioning) you are using:
 
     - subject to the [limitations](swarm.md#limitations) described below,
 
-    - as long as the Swarm cluster is configured to use the [overlay driver](https://docs.docker.com/engine/userguide/networking/dockernetworks/#an-overlay-network),
+    - as long as the Swarm cluster is configured to use the [overlay driver](/engine/userguide/networking/dockernetworks/#an-overlay-network),
       or a custom driver which supports multi-host networking.
 
-Read [Get started with multi-host networking](https://docs.docker.com/engine/userguide/networking/get-started-overlay/) to see how to
+Read [Get started with multi-host networking](/engine/userguide/networking/get-started-overlay/) to see how to
 set up a Swarm cluster with [Docker Machine](/machine/overview.md) and the overlay driver. Once you've got it running, deploying your app to it should be as simple as:
 
     $ eval "$(docker-machine env --swarm <name of swarm master machine>)"
@@ -89,15 +89,15 @@ all three services end up on the same node:
         image: foo
         volumes_from: ["bar"]
         network_mode: "service:baz"
-        environment:
+        labels:
           - "constraint:node==node-1"
       bar:
         image: bar
-        environment:
+        labels:
           - "constraint:node==node-1"
       baz:
         image: baz
-        environment:
+        labels:
           - "constraint:node==node-1"
 
 ### Host ports and recreating containers
@@ -165,15 +165,15 @@ environment variables, so you can use Compose's `environment` option to set
 them.
 
     # Schedule containers on a specific node
-    environment:
+    labels:
       - "constraint:node==node-1"
 
     # Schedule containers on a node that has the 'storage' label set to 'ssd'
-    environment:
+    labels:
       - "constraint:storage==ssd"
 
     # Schedule containers where the 'redis' image is already pulled
-    environment:
+    labels:
       - "affinity:image==redis"
 
 For the full set of available filters and expressions, see the [Swarm

@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/service_update/
 description: The service update command description and usage
 keywords:
 - service, update

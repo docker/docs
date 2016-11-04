@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/node_inspect/
 description: The node inspect command description and usage
 keywords:
 - node, inspect
@@ -95,8 +97,10 @@ Example output:
     }
     ]
 
+    {% raw %}
     $ docker node inspect --format '{{ .ManagerStatus.Leader }}' self
     false
+    {% endraw %}
 
     $ docker node inspect --pretty self
     ID:                     e216jshn25ckzbvmwlnh5jr3g

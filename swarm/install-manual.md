@@ -302,7 +302,7 @@ They will display corresponding entries for the change in leadership.
 
 ## Additional Resources
 
-- [Installing Docker Engine on a cloud provider](http://docs.docker.com/engine/installation/cloud/cloud-ex-aws/)
+- [Installing Docker Engine on a cloud provider](/engine/installation/cloud/cloud-ex-aws/)
 - [High availability in Docker Swarm](multi-manager-setup.md)
 - [Discovery](discovery.md)
 - [High-availability cluster using a trio of consul nodes](https://hub.docker.com/r/progrium/consul/)
