@@ -40,6 +40,7 @@ Build the image using:
 ```bash
 $ docker build -t eg_sshd .
 ```
+
 ## Run a `test_sshd` container
 
 Then run it. You can then use `docker port` to find out what host port
