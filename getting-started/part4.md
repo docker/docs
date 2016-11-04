@@ -43,7 +43,7 @@ All we have to do to let Docker Cloud manage nodes for us on free-tier AWS is
 create a service policy that grants certain permissions, and apply that to an
 identity called a "role," using AWS's Identity and Access Management (IAM) tool.
 
--   Go to [http://aws.amazon.com] and sign up for an account. It's free.
+-   Go to [aws.amazon.com](https://aws.amazon.com) and sign up for an account. It's free.
 -   Go to [the IAM panel](https://console.aws.amazon.com/iam/home#policies)
 -   Click **Create Policy**, then **Create Your Own Policy**.
 -   Name the policy `dockercloud-policy` and paste the following text in the
@@ -86,8 +86,8 @@ So, let's do that now.
 
 ### Configure Docker Cloud to manage to your AWS instances
 
-- Go to [http://cloud.docker.com](http://cloud.docker.com) and sign in with the
-  same Docker ID you used in [step 2](/getting-started/step2.md).
+- Go to [cloud.docker.com](http://cloud.docker.com) and sign in with the
+  same Docker ID you used in [part 2](/getting-started/part2.md).
 - Click **Settings**, and in the Cloud Providers section, click the plug icon.
 - Enter the Role ARN string you copied earlier, e.g. `arn:aws:iam::123456789123:role/dockercloud-role`.
 - Click **Save**.
@@ -97,6 +97,19 @@ into a swarm.
 
 ## Creating your first Swarm cluster
 
+1.  Go back to Docker Cloud by visiting [cloud.docker.com](https://cloud.docker.com).
+2.  Click **Node Clusters** in the left navigation, then click the **Create** button.
+    This pulls up a form where you can create our cluster.
+3.  Leave everything default, except:
+    - Name: Give your cluster a name
+    - Region: Select a region that's close to you
+    - Provider: Set to "Amazon Web Services"
+    - Type/Size: Select the `t2.nano` option as that is free-tier
+4.  Launch the cluster by clicking **Launch node cluster**; this will spin
+    up a free-tier Amazon instance.
+5.  Now, click **Services** in the left navigation, then the **Create** button,
+    then the **globe icon**.
+6.  Search Docker Hub for the image you uploaded
 
 
 [On to next >>](part5.md){: class="button darkblue-btn"}

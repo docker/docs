@@ -11,14 +11,19 @@ title: start
 
 # start
 
-    Usage: docker-machine start [arg...]
+```none
+Usage: docker-machine start [arg...]
 
-    Start a machine
+Start a machine
 
-    Description:
-       Argument(s) are one or more machine names.
+Description:
+   Argument(s) are one or more machine names.
+```
+
 
 For example:
 
-    $ docker-machine start dev
-    Starting VM...
+```none
+$ docker-machine start dev
+Starting VM...
+```

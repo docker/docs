@@ -96,21 +96,11 @@ replica nodes):
 
 4.  Upgrade the controller node.
 
-    ```bash
+    ```none
     $ docker run --rm -it \
       --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
       docker/ucp:$UCP_VERSION upgrade -i
-
-      # INFO[0000] We're about to upgrade the local components for UCP ID: KRIJ:UEYA:AGTD:6BBO:AHS7:QSPA:ZFAM:X7KW:GNXR:4MWQ:UDPU:MRGR
-      Do you want proceed with the upgrade? (y/n): y
-
-      # INFO[0028] All required images are present
-      # INFO[0000] Checking for version compatibility
-      # INFO[0000] Your system is compatible.  Removing old UCP Containers while preserving data
-      # INFO[0000] Redeploying UCP containers
-      # INFO[0002] Verifying containers started
-      # INFO[0004] Success!  Please log in to the UCP console to verify your system before proceeding to upgrade additional nodes.
     ```
 
 5. Delete your browser cache.
@@ -176,22 +166,12 @@ If your cluster is set up for high-availability (has several controller nodes):
     ```
 
 7.  Upgrade the controller node.
-    
-    ```bash
+
+    ```none
     $ docker run --rm -it \
       --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
       docker/ucp:$UCP_VERSION upgrade -i
-
-      # INFO[0000] We're about to upgrade the local components for UCP ID: KRIJ:UEYA:AGTD:6BBO:AHS7:QSPA:ZFAM:X7KW:GNXR:4MWQ:UDPU:MRGR
-      Do you want proceed with the upgrade? (y/n): y
-
-      # INFO[0028] All required images are present
-      # INFO[0000] Checking for version compatibility
-      # INFO[0000] Your system is compatible.  Removing old UCP Containers while preserving data
-      # INFO[0000] Redeploying UCP containers
-      # INFO[0002] Verifying containers started
-      # INFO[0004] Success!  Please log in to the UCP console to verify your system before proceeding to upgrade additional nodes.
     ```
 
 8. Delete your browser cache.

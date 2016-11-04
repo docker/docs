@@ -11,13 +11,13 @@ title: Install Compose
 
 # Install Docker Compose
 
-You can run Compose on OS X, Windows and 64-bit Linux. To install it, you'll need to install Docker first.
+You can run Compose on macOS, Windows and 64-bit Linux. To install it, you'll need to install Docker first.
 
 To install Compose, do the following:
 
 1. Install Docker Engine:
 
-     * <a href="/engine/installation/mac/" target="_blank">Mac OS X installation</a>
+     * <a href="/engine/installation/mac/" target="_blank">macOS installation</a>
 
      * <a href="/engine/installation/windows/" target="_blank">Windows installation</a>
 
@@ -38,7 +38,7 @@ which the release page specifies, in your terminal.
 
      The following is an example command illustrating the format:
 
-        curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+        curl -L "https://github.com/docker/compose/releases/download/1.8.1/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose
 
      If you have problems installing with `curl`, see
      [Alternative Install Options](install.md#alternative-install-options).
@@ -53,7 +53,7 @@ which the release page specifies, in your terminal.
 7. Test the installation.
 
         $ docker-compose --version
-        docker-compose version: 1.8.0
+        docker-compose version: 1.8.1
 
 
 ## Alternative install options
@@ -76,13 +76,13 @@ to get started.
 Compose can also be run inside a container, from a small bash script wrapper.
 To install compose as a container run:
 
-    $ curl -L https://github.com/docker/compose/releases/download/1.8.0/run.sh > /usr/local/bin/docker-compose
+    $ curl -L https://github.com/docker/compose/releases/download/1.8.1/run.sh > /usr/local/bin/docker-compose
     $ chmod +x /usr/local/bin/docker-compose
 
 ## Master builds
 
 If you're interested in trying out a pre-release build you can download a
-binary from https://dl.bintray.com/docker-compose/master/. Pre-release
+binary from [https://dl.bintray.com/docker-compose/master/](https://dl.bintray.com/docker-compose/master/). Pre-release
 builds allow you to try out new features before they are released, but may
 be less stable.
 

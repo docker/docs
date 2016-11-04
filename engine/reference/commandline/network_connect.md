@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/network_connect/
 description: The network connect command description and usage
 keywords:
 - network, connect, user-defined

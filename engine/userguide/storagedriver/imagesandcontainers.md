@@ -501,7 +501,7 @@ a container is deleted, any data stored in data volumes persists on the Docker
 host.
 
 For detailed information about data volumes 
-[Managing data in containers](https://docs.docker.com/userguide/dockervolumes/).
+[Managing data in containers](/engine/tutorials/dockervolumes/).
 
 ## Related information
 

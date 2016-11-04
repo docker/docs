@@ -1,4 +1,6 @@
 ---
+aliases:
+  - /reference/commandline/history/
 description: The history command description and usage
 keywords:
 - docker, image, history

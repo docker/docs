@@ -30,7 +30,7 @@ you continue working with your fork on this branch.
 ##  Task 1. Remove images and containers
 
 Docker developers run the latest stable release of the Docker software (with
-Docker Machine if their machine is Mac OS X). They clean their local hosts of
+Docker Machine if their machine is macOS). They clean their local hosts of
 unnecessary Docker artifacts such as stopped containers or unused images.
 Cleaning unnecessary artifacts isn't strictly necessary, but it is good
 practice, so it is included here.
@@ -39,55 +39,55 @@ To remove unnecessary artifacts:
 
 1. Verify that you have no unnecessary containers running on your host.
 
-    ```bash
-    $ docker ps -a
-    ```
+   ```none
+   $ docker ps -a
+   ```
 
-    You should see something similar to the following:
+   You should see something similar to the following:
 
-    ```bash
-    CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-    ```
+   ```none
+   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+   ```
 
-    There are no running or stopped containers on this host. A fast way to
-    remove old containers is the following:
+   There are no running or stopped containers on this host. A fast way to
+   remove old containers is the following:
 
-    ```bash
-    $ docker rm $(docker ps -a -q)
-    ```
+   ```none
+   $ docker rm $(docker ps -a -q)
+   ```
 
-    This command uses `docker ps` to list all containers (`-a` flag) by numeric
-    IDs (`-q` flag). Then, the `docker rm` command removes the resulting list.
-    If you have running but unused containers, stop and then remove them with
-    the `docker stop` and `docker rm` commands.
+   This command uses `docker ps` to list all containers (`-a` flag) by numeric
+   IDs (`-q` flag). Then, the `docker rm` command removes the resulting list.
+   If you have running but unused containers, stop and then remove them with
+   the `docker stop` and `docker rm` commands.
 
 2. Verify that your host has no dangling images.
 
-    ```bash
-    $ docker images
-    ```
+   ```none
+   $ docker images
+   ```
 
-    You should see something similar to the following:
+   You should see something similar to the following:
 
-    ```bash
-    REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-    ```
+   ```none
+   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+   ```
 
-    This host has no images. You may have one or more _dangling_ images. A
-    dangling image is not used by a running container and is not an ancestor of
-    another image on your system. A fast way to remove dangling image is
-    the following:
+   This host has no images. You may have one or more _dangling_ images. A
+   dangling image is not used by a running container and is not an ancestor of
+   another image on your system. A fast way to remove dangling image is
+   the following:
 
-    ```bash
-    $ docker rmi -f $(docker images -q -a -f dangling=true)
-    ```
+   ```none
+   $ docker rmi -f $(docker images -q -a -f dangling=true)
+   ```
 
-    This command uses `docker images` to list all images (`-a` flag) by numeric
-    IDs (`-q` flag) and filter them to find dangling images (`-f dangling=true`).
-    Then, the `docker rmi` command forcibly (`-f` flag) removes
-    the resulting list. If you get a "docker: "rmi" requires a minimum of 1 argument."
-    message, that means there were no dangling images. To remove just one image, use the
-    `docker rmi ID` command.
+   This command uses `docker images` to list all images (`-a` flag) by numeric
+   IDs (`-q` flag) and filter them to find dangling images (`-f dangling=true`).
+   Then, the `docker rmi` command forcibly (`-f` flag) removes
+   the resulting list. If you get a "docker: "rmi" requires a minimum of 1 argument."
+   message, that means there were no dangling images. To remove just one image, use the
+   `docker rmi ID` command.
 
 ## Task 2. Start a development container
 
@@ -99,126 +99,128 @@ can take over 15 minutes to complete.
 
 1. Open a terminal.
 
-    Mac users, use `docker-machine status your_vm_name` to make sure your VM is running. You
-    may need to run `eval "$(docker-machine env your_vm_name)"` to initialize your
-    shell environment.
+   For Mac users, use `docker-machine status your_vm_name` to make sure your VM is running. You
+   may need to run `eval "$(docker-machine env your_vm_name)"` to initialize your
+   shell environment.
 
 2. Change into the root of the `docker-fork` repository.
 
-    ```bash
-    $ cd ~/repos/docker-fork
-    ```
+   ```none
+   $ cd ~/repos/docker-fork
+   ```
 
-  	If you are following along with this guide, you created a `dry-run-test`
-  	branch when you <a href="/opensource/project/set-up-git/" target="_blank"> set up Git for
-  	contributing</a>.
+   If you are following along with this guide, you created a `dry-run-test`
+   branch when you <a href="/opensource/project/set-up-git/" target="_blank">
+   set up Git for contributing</a>.
 
 3. Ensure you are on your `dry-run-test` branch.
 
-    ```bash
-    $ git checkout dry-run-test
-    ```
+   ```none
+   $ git checkout dry-run-test
+   ```
 
-    If you get a message that the branch doesn't exist, add the `-b` flag (`git checkout -b dry-run-test`) so the
-    command both creates the branch and checks it out.
+   If you get a message that the branch doesn't exist, add the `-b` flag (`git checkout -b dry-run-test`) so the
+   command both creates the branch and checks it out.
 
 4. Use `make` to build a development environment image and run it in a container.
 
-    ```bash
-    $ make shell
-    ```
+   ```none
+   $ make BIND_DIR=. shell
+   ```
 
-    The command returns informational messages as it runs. The first build may
-    take a few minutes to create an image. Using the instructions in the
-    `Dockerfile`, the build may need to download source and other images. A
-    successful build returns a final message and opens a Bash shell into the
-    container.
+   The command returns informational messages as it runs. The first build may
+   take a few minutes to create an image. Using the instructions in the
+   `Dockerfile`, the build may need to download source and other images. A
+   successful build returns a final message and opens a Bash shell into the
+   container.
 
-    ```bash
-    Successfully built 3d872560918e
-    docker run --rm -i --privileged -e BUILDFLAGS -e KEEPBUNDLE -e DOCKER_BUILD_GOGC -e DOCKER_BUILD_PKGS -e DOCKER_CLIENTONLY -e DOCKER_DEBUG -e DOCKER_EXPERIMENTAL -e DOCKER_GITCOMMIT -e DOCKER_GRAPHDRIVER=devicemapper -e DOCKER_INCREMENTAL_BINARY -e DOCKER_REMAP_ROOT -e DOCKER_STORAGE_OPTS -e DOCKER_USERLANDPROXY -e TESTDIRS -e TESTFLAGS -e TIMEOUT -v "home/ubuntu/repos/docker/bundles:/go/src/github.com/docker/docker/bundles" -t "docker-dev:dry-run-test" bash
-    root@f31fa223770f:/go/src/github.com/docker/docker#
-    ```
+   ```none
+   Successfully built 3d872560918e
+   docker run --rm -i --privileged -e BUILDFLAGS -e KEEPBUNDLE -e DOCKER_BUILD_GOGC -e DOCKER_BUILD_PKGS -e DOCKER_CLIENTONLY -e DOCKER_DEBUG -e DOCKER_EXPERIMENTAL -e DOCKER_GITCOMMIT -e DOCKER_GRAPHDRIVER=devicemapper -e DOCKER_INCREMENTAL_BINARY -e DOCKER_REMAP_ROOT -e DOCKER_STORAGE_OPTS -e DOCKER_USERLANDPROXY -e TESTDIRS -e TESTFLAGS -e TIMEOUT -v "home/ubuntu/repos/docker/bundles:/go/src/github.com/docker/docker/bundles" -t "docker-dev:dry-run-test" bash
+   root@f31fa223770f:/go/src/github.com/docker/docker#
+   ```
 
-    At this point, your prompt reflects the container's BASH shell.
+   At this point, your prompt reflects the container's BASH shell.
 
 5. List the contents of the current directory (`/go/src/github.com/docker/docker`).
 
-    You should see the image's source from the  `/go/src/github.com/docker/docker`
-    directory.
+   You should see the image's source from the  `/go/src/github.com/docker/docker`
+   directory.
 
-      ![List example](images/list_example.png)
+   ![List example](images/list_example.png)
 
 6. Make a `docker` binary.
 
-    ```bash
-    root@a8b2885ab900:/go/src/github.com/docker/docker# hack/make.sh binary
-    ...output snipped...
-    bundles/1.12.0-dev already exists. Removing.
+   ```none
+   root@a8b2885ab900:/go/src/github.com/docker/docker# hack/make.sh binary
+   ...output snipped...
+   bundles/1.12.0-dev already exists. Removing.
 
-    ---> Making bundle: binary (in bundles/1.12.0-dev/binary)
-    Building: bundles/1.12.0-dev/binary/docker-1.12.0-dev
-    Created binary: bundles/1.12.0-dev/binary/docker-1.12.0-dev
-    Copying nested executables into bundles/1.12.0-dev/binary
-  ```
+   ---> Making bundle: binary (in bundles/1.12.0-dev/binary)
+   Building: bundles/1.12.0-dev/binary/docker-1.12.0-dev
+   Created binary: bundles/1.12.0-dev/binary/docker-1.12.0-dev
+   Copying nested executables into bundles/1.12.0-dev/binary
+   ```
 
-7. Copy the binary to the container's `/usr/bin` directory.
+7. Copy the binary to the container's `**/usr/bin/**` directory.
 
-    ```bash
-    root@a8b2885ab900:/go/src/github.com/docker/docker# cp bundles/1.12.0-dev/binary-client/docker* /usr/bin
-    root@a8b2885ab900:/go/src/github.com/docker/docker# cp bundles/1.12.0-dev/binary-daemon/docker* /usr/bin
-    ```
+   ```none
+   root@a8b2885ab900:/go/src/github.com/docker/docker# cp bundles/1.12.0-dev/binary-client/docker* /usr/bin/
+   root@a8b2885ab900:/go/src/github.com/docker/docker# cp bundles/1.12.0-dev/binary-daemon/docker* /usr/bin/
+   ```
 
 8. Start the Engine daemon running in the background.
 
-    ```bash
-    root@a8b2885ab900:/go/src/github.com/docker/docker# docker daemon -D&
-    ...output snipped...
-    DEBU[0001] Registering POST, /networks/{id:.*}/connect
-    DEBU[0001] Registering POST, /networks/{id:.*}/disconnect
-    DEBU[0001] Registering DELETE, /networks/{id:.*}
-    INFO[0001] API listen on /var/run/docker.sock
-    DEBU[0003] containerd connection state change: READY
-    ```
+   ```none
+   root@a8b2885ab900:/go/src/github.com/docker/docker# docker daemon -D&
+   ...output snipped...
+   DEBU[0001] Registering POST, /networks/{id:.*}/connect
+   DEBU[0001] Registering POST, /networks/{id:.*}/disconnect
+   DEBU[0001] Registering DELETE, /networks/{id:.*}
+   INFO[0001] API listen on /var/run/docker.sock
+   DEBU[0003] containerd connection state change: READY
+   ```
 
-    The `-D` flag starts the daemon in debug mode. The `&` starts it as a
-    background process. You'll find these options useful when debugging code
-    development.
+   The `-D` flag starts the daemon in debug mode. The `&` starts it as a
+   background process. You'll find these options useful when debugging code
+   development.
 
 9. Inside your container, check your Docker version.
 
-    ```bash
-    root@5f8630b873fe:/go/src/github.com/docker/docker# docker --version
-    Docker version 1.12.0-dev, build 6e728fb
-    ```
+   ```none
+   root@5f8630b873fe:/go/src/github.com/docker/docker# docker --version
+   Docker version 1.12.0-dev, build 6e728fb
+   ```
 
-    Inside the container you are running a development version. This is the version
-    on the current branch. It reflects the value of the `VERSION` file at the
-    root of your `docker-fork` repository.
+   Inside the container you are running a development version. This is the version
+   on the current branch. It reflects the value of the `VERSION` file at the
+   root of your `docker-fork` repository.
 
 10. Run the `hello-world` image.
 
-    ```bash
+    ```none
     root@5f8630b873fe:/go/src/github.com/docker/docker# docker run hello-world
     ```
 
 11. List the image you just downloaded.
 
-    ```bash
+    ```none
     root@5f8630b873fe:/go/src/github.com/docker/docker# docker images
+	REPOSITORY   TAG     IMAGE ID      CREATED        SIZE
+	hello-world  latest  c54a2cc56cbb  3 months ago   1.85 kB
     ```
 
 12. Open another terminal on your local host.
 
 13. List the container running your development container.
 
-    ```bash
+    ```none
     ubuntu@ubuntu1404:~$ docker ps
     CONTAINER ID        IMAGE                     COMMAND             CREATED             STATUS              PORTS               NAMES
     a8b2885ab900        docker-dev:dry-run-test   "hack/dind bash"    43 minutes ago      Up 43 minutes                           hungry_payne
     ```
 
-    Notice that the tag on the container is marked with the `dry-run-branch` name.
+    Notice that the tag on the container is marked with the `dry-run-test` branch name.
 
 
 ## Task 3. Make a code change
@@ -235,7 +237,7 @@ you have:
   your development container
 
 Running the `make shell` command mounted your local Docker repository source into
-your Docker container. When you start to developing code though, you'll
+your Docker container. When you start to develop code though, you'll
 want to iterate code changes and builds inside the container. If you have
 followed this guide exactly, you have a BASH shell running a development
 container.
@@ -247,52 +249,57 @@ example, you'll edit the help for the `attach` subcommand.
 
 2. Make sure you are in your `docker-fork` repository.
 
-    ```bash
-    $ pwd
-    /Users/mary/go/src/github.com/moxiegirl/docker-fork
-    ```
+   ```none
+   $ pwd
+   /Users/mary/go/src/github.com/moxiegirl/docker-fork
+   ```
 
-    Your location should be different because, at least, your username is
-    different.
+   Your location should be different because, at least, your username is
+   different.
 
-3. Open the `api/client/attach.go` file.
+3. Open the `cli/command/container/attach.go` file.
 
 4. Edit the command's help message.
 
-    For example, you can edit this line:
+   For example, you can edit this line:
 
-    ```go
-    noStdin := cmd.Bool([]string{"-no-stdin"}, false, "Do not attach STDIN")
-    ```
+   ```go
+   flags.BoolVar(&opts.noStdin, "no-stdin", false, "Do not attach STDIN")
+   ```
 
-    And change it to this:
+   And change it to this:
 
-    ```go
-    noStdin := cmd.Bool([]string{"-no-stdin"}, false, "Do not attach STDIN (standard in)")
-    ```
+   ```go
+   flags.BoolVar(&opts.noStdin, "no-stdin", false, "Do not attach STDIN (standard in)")
+   ```
 
-5. Save and close the `api/client/attach.go` file.
+5. Save and close the `cli/command/container/attach.go` file.
 
-6. Go to your running development container.
+6. Go to your running docker development container shell.
 
-7. Remake the binary and copy it to `usr/bin`
+7. Rebuild the binary by using the command `hack/make.sh binary` in the docker development container shell.
 
-8. Restart the Docker daemon with the new binary.
+8. Copy the binaries to **/usr/bin** by entering the following commands in the docker development container shell.
 
-9. View your change by display the `attach` help.
+   ```
+   cp bundles/1.12.0-dev/binary-client/docker* /usr/bin/
+   cp bundles/1.12.0-dev/binary-daemon/docker* /usr/bin/
+   ```
 
-    ```bash
-    root@b0cb4f22715d:/go/src/github.com/docker/docker# docker attach --help
+9. To view your change, run the `docker attach --help` command in the docker development container shell.
 
-    Usage:	docker attach [OPTIONS] CONTAINER
+   ```bash
+   root@b0cb4f22715d:/go/src/github.com/docker/docker# docker attach --help
 
-    Attach to a running container
+   Usage:	docker attach [OPTIONS] CONTAINER
 
-    --detach-keys       Override the key sequence for detaching a container
-    --help              Print usage
-    --no-stdin          Do not attach to STDIN (standard in)
-    --sig-proxy=true    Proxy all received signals to the process
-    ```
+   Attach to a running container
+
+   --detach-keys       Override the key sequence for detaching a container
+   --help              Print usage
+   --no-stdin          Do not attach to STDIN (standard in)
+   --sig-proxy=true    Proxy all received signals to the process
+   ```
 
 You've just done the basic workflow for changing the Engine code base. You made
 your code changes in your feature branch. Then, you updated the binary in your

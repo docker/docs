@@ -17,7 +17,7 @@ Docker Cloud creates a per-user overlay network which connects all containers ac
 Docker Cloud gives your containers two ways find other services:
 
 * Using service and container names directly as **hostnames**
-* Using **service links**, which are based on [Docker Compose links](https://docs.docker.com/compose/compose-file/#links)
+* Using **service links**, which are based on [Docker Compose links](/compose/compose-file/#links)
 
 **Service and Container Hostnames** update automatically when a service scales up or down or redeploys. As a user, you can configure service names, and Docker Cloud uses these names to find the IP of the services and containers for you. You can use hostnames in your code to provide abstraction that allows you to easily swap service containers or components.
 
@@ -55,7 +55,7 @@ If the container making the query is part of a stack, and there is a local match
 
 ## Using service links for service discovery
 
-Docker Cloud's service linking is modeled on [Docker Compose links](https://docs.docker.com/compose/compose-file/#links) to provide a basic service discovery functionality using directional links recorded in environment variables.
+Docker Cloud's service linking is modeled on [Docker Compose links](/compose/compose-file/#links) to provide a basic service discovery functionality using directional links recorded in environment variables.
 
 When you link a "client" service to a "server" service, Docker Cloud performs the following actions on the "client" service:
 

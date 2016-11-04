@@ -18,7 +18,7 @@ If you already have an installation of Docker Toolbox, please read these topics 
 
 ## The Docker Toolbox environment
 
-Docker Toolbox installs `docker`, `docker-compose` and `docker-machine` in `/usr/local/bin` on your Mac. It also installs VirtualBox. At installation time, Toolbox uses `docker-machine` to provision a VirtualBox VM called `default`, running the `boot2docker` Linux distribution, with  [Docker Engine](https://docs.docker.com/engine/) with certificates located on your Mac at `$HOME/.docker/machine/machines/default`.
+Docker Toolbox installs `docker`, `docker-compose` and `docker-machine` in `/usr/local/bin` on your Mac. It also installs VirtualBox. At installation time, Toolbox uses `docker-machine` to provision a VirtualBox VM called `default`, running the `boot2docker` Linux distribution, with  [Docker Engine](/engine/) with certificates located on your Mac at `$HOME/.docker/machine/machines/default`.
 
 Before you use `docker` or `docker-compose` on your Mac, you typically use the command `eval $(docker-machine env default)` to set environment variables so that `docker` or `docker-compose` know how to talk to Docker Engine running on VirtualBox.
 
@@ -33,7 +33,7 @@ Docker for Mac is a Mac native application, that you install in `/Applications`.
 
 Here are some key points to know about Docker for Mac before you get started:
 
-* Docker for Mac does not use VirtualBox, but rather <a href="https://github.com/docker/HyperKit/" target="_blank">HyperKit</a>, a lightweight OS X virtualization solution built on top of Hypervisor.framework in OS X 10.10 Yosemite and higher.
+* Docker for Mac does not use VirtualBox, but rather <a href="https://github.com/docker/HyperKit/" target="_blank">HyperKit</a>, a lightweight macOS virtualization solution built on top of Hypervisor.framework in macOS 10.10 Yosemite and higher.
 
 * Installing Docker for Mac does not affect machines you created with Docker Machine. The install offers to copy containers and images from your local `default` machine (if one exists) to the new Docker for Mac HyperKit VM. If chosen, content from `default` is copied to the new Docker for Mac HyperKit VM, and your original `default` machine is kept as is.
 

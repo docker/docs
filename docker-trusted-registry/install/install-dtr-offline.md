@@ -26,7 +26,7 @@ copy that package to the nodes where you’ll install DTR.
     Use a computer with internet access to download a single package with all
     Docker Datacenter components:
 
-    ```bash
+    ```none
     $ wget https://packages.docker.com/caas/ucp-1.1.2_dtr-2.0.3.tar.gz -O docker-datacenter.tar.gz
     ```
 
@@ -36,7 +36,7 @@ copy that package to the nodes where you’ll install DTR.
     want to install Docker Trusted Registry. You can use the `scp` command
     for this.
 
-    ```bash
+    ```none
     $ scp docker-datacenter.tag.gz $USER@$DTR_HOST:/tmp
     ```
 
@@ -47,7 +47,7 @@ copy that package to the nodes where you’ll install DTR.
     Once the package is on the node where you want to install DTR, you can use
     the `docker load` command, to load the images from the .tar file.
 
-    ```bash
+    ```none
     $ docker load < /tmp/docker-datacenter.tar.gz
     ```
 

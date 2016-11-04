@@ -28,7 +28,7 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 > If you would like to use NAT, create an internal network, and use
 > [Internet Connection  Sharing](http://www.packet6.com/allowing-windows-8-1-hyper-v-vm-to-work-with-wifi/).
 >
-> * This reference page includes an [example](hyper-v.md#example) that shows how to use an elelvated (Administrator-level) PowerShell and how to create and use an external network switch.
+> * This reference page includes an [example](hyper-v.md#example) that shows how to use an elevated (Administrator-level) PowerShell and how to create and use an external network switch.
 
 ## Usage
 
@@ -129,7 +129,7 @@ you can create these swarm nodes: `manager1`, `worker1`, `worker2`.
       PS C:\WINDOWS\system32>
       ```
 
-* Use the same process, driver and network switch to create the other nodes.
+*   Use the same process, driver and network switch to create the other nodes.
 
     For our example, the commands will look like this:
 

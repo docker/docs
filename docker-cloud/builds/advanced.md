@@ -29,9 +29,9 @@ processes and do not affect your service's run environment.
 * `DOCKER_TAG`: the Docker repository tag being built.
 * `IMAGE_NAME`: the name and tag of the Docker repository being built. (This variable is a combination of `DOCKER_REPO`/`DOCKER_TAG`.)
 
-If you are using these environment variables in a `docker-compose.test.yml` file
-for automated testing, declare them in your `sut` service's environment as shows
-below.
+If you are using these build environment variables in a
+`docker-compose.test.yml` file for automated testing, declare them in your `sut`
+service's environment as shown below.
 
 ```yml
 sut:
@@ -41,6 +41,22 @@ sut:
     - SOURCE_BRANCH
 ```
 
+## Override build, test or push commands
+
+Docker Cloud allows you to override and customize the `build`, `test` and `push`
+commands during automated build and test processes using hooks. For example, you
+might use a build hook to set build arguments used only during the build
+process. (You can also set up [custom build phase hooks](#custom-build-phase-hooks) to perform actions in between these commands.)
+
+**Use these hooks with caution.** The contents of these hook files replace the
+basic `docker` commands, so you must include a similar build, test or push
+command in the hook or your automated process will not complete.
+
+To override these phases, create a folder called `hooks` in your source code
+repository at the same directory level as your Dockerfile. Create a file called
+`hooks/build`, `hooks/test`, or `hooks/push` and include commands that the
+builder process can execute, such as `docker` and `bash` commands (prefixed appropriately with `#!/bin/bash`).
+
 ## Custom build phase hooks
 
 You can run custom commands between phases of the build process by creating
@@ -49,7 +65,7 @@ autotest processes.
 
 Create a folder called `hooks` in your source code repository at the same
 directory level as your Dockerfile. Place files that define the hooks in that
-folder. The builder executes them before and after each step.
+folder. Hook files can include both `docker` commands, and `bash` commands as long as they are prefixed appropriately with `#!/bin/bash`. The builder executes the commands in the files before and after each step.
 
 The following hooks are available:
 
@@ -61,13 +77,44 @@ The following hooks are available:
 * `hooks/pre_push` (only used when executing a build rule or [automated build](automated-build.md) )
 * `hooks/post_push` (only used when executing a build rule or [automated build](automated-build.md) )
 
+### Build hook examples
 
-## Override build, test or push commands
+#### Override the "build" phase to set variables
 
-In addition to the custom build phase hooks above, you can also use
-`hooks/build`, `hooks/test`, and `hooks/push` to override and customize the
-`build`, `test` and `push` commands during automated build and test processes.
+Docker Cloud allows you to define build environment variables either in the hook files, or from the automated build UI (which you can then reference in hooks).
 
-**Use these hooks with caution.** The contents of these hook files replace the
-basic `docker` commands, so you must include a similar build, test or push
-command in the hook or your automated process will not complete.
+In the following example, we define a build hook that uses `docker build` arguments to set the variable `CUSTOM` based on the value of variable we defined using the Docker Cloud build settings. `$IMAGE_NAME` is a variable that we provide with the name of the image being built.
+
+```none
+docker build --build-arg CUSTOM=$VAR -t $IMAGE_NAME
+```
+
+> **Caution**: A `hooks/build` file overrides the basic `docker build` command
+used by the builder, so you must include a similar build command in the hook or
+the automated build will fail.
+
+To learn more about Docker build-time variables, see the [docker build documentation]( https://docs.docker.com/engine/reference/commandline/build/#/set-build-time-variables---build-arg).
+
+#### Two-phase build
+
+If your build process requires a component that is not a dependency for your application, you can use a `pre-build` hook to collect and compile required components. In the example below, the hook uses a Docker container to compile a Golang binary required before the build.
+
+```bash
+#!/bin/bash
+echo "=> Building the binary"
+docker run --privileged \
+  -v $(pwd):/src \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  centurylink/golang-builder
+```
+
+#### Push to multiple tags
+
+By default the build process tags the resulting Docker image with a single tag and pushes the image only to the repository where the build settings are configured.
+
+If you needed to give the resulting image multiple tags, or push the same image to multiple repositories, you could set up a `post_push` hook to add additional tags and push to more repositories.
+
+```none
+docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
+docker push $DOCKER_REPO:$SOURCE_COMMIT
+```
