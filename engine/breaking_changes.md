@@ -8,14 +8,21 @@ keywords:
 title: Breaking changes and incompatibilities
 ---
 
-Every Engine release strives to be backward compatible with its predecessors.
-In all cases, the policy is that feature removal is communicated two releases
+Every Engine release strives to be backward compatible with its predecessors,
+and interface stability is always a priority at Docker.
+
+In all cases, feature removal is communicated two releases
 in advance and documented as part of the [deprecated features](deprecated.md)
 page.
+  
+The following list compiles any updates to Docker Engine that created
+backwards-incompatibility for old versions of Docker tools.
 
-Unfortunately, Docker is a fast moving project, and newly introduced features
-may sometime introduce breaking changes and/or incompatibilities. This page
-documents these by Engine version.
+> Note: In the case of your local environment, you should be updating your
+  Docker Engine using [Docker for Mac](/docker-for-mac),
+  [Docker for Windows](/docker-for-windows),
+  or, in the case of Linux, [Docker Toolbox](/toolbox). That way all your
+  tools stay in sync. 
 
 # Engine 1.12
 
@@ -26,9 +33,10 @@ of the Host header and as such clients <= 1.9.2 can't talk anymore to the daemon
 
 # Engine 1.10
 
-There were two breaking changes in the 1.10 release.
+There were two breaking changes in the 1.10 release that affected
+Registry and Docker Content Trust:
 
-## Registry
+** Registry **
 
 Registry 2.3 includes improvements to the image manifest that have caused a
 breaking change. Images pushed by Engine 1.10 to a Registry 2.3 cannot be
@@ -47,7 +55,7 @@ If you are using an older Registry version (< 2.3), this problem does not occur
 with any version of the Engine CLI; push, pull, with and without content trust
 work as you would expect.
 
-## Docker Content Trust
+** Docker Content Trust **
 
 Engine older than the current 1.10 cannot pull images from repositories that
 have enabled key delegation. Key delegation is a feature which requires a
