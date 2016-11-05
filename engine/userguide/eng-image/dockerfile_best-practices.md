@@ -1,5 +1,6 @@
 ---
 redirect_from:
+- /articles/dockerfile_best-practices/
 - /engine/articles/dockerfile_best-practices/
 - /docker-cloud/getting-started/intermediate/optimize-dockerfiles/
 - /docker-cloud/tutorials/optimize-dockerfiles/
