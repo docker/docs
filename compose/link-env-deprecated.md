@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /compose/env
 description: Compose CLI reference
 keywords:

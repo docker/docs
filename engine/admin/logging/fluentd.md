@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/reference/logging/fluentd/
 - /reference/logging/fluentd/
 description: Describes how to use the fluentd logging driver.

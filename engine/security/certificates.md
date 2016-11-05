@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/certificates/
 description: How to set up and use certificates with a registry to verify access
 keywords:

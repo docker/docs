@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/info/
 description: The info command description and usage
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/install/upgrade/upgrade-minor/
 description: Learn how to upgrade your Docker Trusted Registry to a new minor version or patch release.
 keywords:

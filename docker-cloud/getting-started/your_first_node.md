@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/beginner/your_first_node/
 - /docker-cloud/getting-started/beginner/deploy_first_node/
 description: Deploy your first node on Docker Cloud

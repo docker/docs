@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/rmi/
 description: The rmi command description and usage
 keywords:

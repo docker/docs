@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/kill/
 description: The kill command description and usage
 keywords:

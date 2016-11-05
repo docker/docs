@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/logs/
 description: The logs command description and usage
 keywords:

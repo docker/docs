@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/networking/
 description: Docker Universal Control Plane
 keywords:

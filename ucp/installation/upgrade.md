@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/upgrade-ucp/
 description: Learn how to upgrade Docker Universal Control Plane with minimal impact to your users.
 keywords:

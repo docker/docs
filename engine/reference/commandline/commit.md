@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/commit/
 description: The commit command description and usage
 keywords:

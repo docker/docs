@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/cse-release-notes/
 - /docker-trusted-registry/cs-engine/release-notes/release-notes/
 description: Commercially supported Docker Engine release notes

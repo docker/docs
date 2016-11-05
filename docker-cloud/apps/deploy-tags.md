@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/feature-reference/deploy-tags/
 description: Deployment tags
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/
 description: Docker Engine reference
 keywords:

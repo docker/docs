@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/push/
 description: The push command description and usage
 keywords:

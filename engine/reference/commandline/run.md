@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/run/
 description: The run command description and usage
 keywords:

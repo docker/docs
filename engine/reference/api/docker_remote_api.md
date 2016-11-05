@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/api/docker_remote_api/
 description: API Documentation for Docker
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /swarm/swarm_at_scale/04-deploy-app/
 description: Try Swarm at scale
 keywords:

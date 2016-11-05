@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/pause/
 description: The pause command description and usage
 keywords:

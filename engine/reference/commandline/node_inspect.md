@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/node_inspect/
 description: The node inspect command description and usage
 keywords:

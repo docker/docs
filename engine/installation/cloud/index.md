@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/amazon/
 - /engine/installation/google/
 - /engine/installation/softlayer/

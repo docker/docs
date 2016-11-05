@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/run_metrics
 - /engine/articles/runmetrics
 description: Measure the behavior of running containers

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/misc/deprecated/
 description: Deprecated Features.
 keywords:

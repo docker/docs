@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /installation/
 - /engine/installation/linux/frugalware/
 - /engine/installation/frugalware/

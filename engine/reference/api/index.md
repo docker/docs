@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/api/
 description: Reference
 keywords:

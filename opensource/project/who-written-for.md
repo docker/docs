@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /project/who-written-for/
 description: Introduction to project contribution at Docker
 keywords:

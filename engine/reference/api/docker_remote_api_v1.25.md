@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/api/docker_remote_api_v1.25/
 description: API Documentation for Docker
 published: false

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /swarm/swarm_at_scale/03-create-cluster/
 - /swarm/swarm_at_scale/02-deploy-infra/
 description: Try Swarm at scale

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/dsc/
 description: Using DSC to configure a new Docker host
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/reference/logging/splunk/
 description: Describes how to use the Splunk logging driver.
 keywords:

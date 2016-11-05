@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/reference/logging/journald/
 description: Describes how to use the fluentd logging driver.
 keywords:

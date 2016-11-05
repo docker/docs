@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/userguide/containers/dockerizing/
 - /engine/userguide/dockerizing/
 description: A simple 'Hello world' exercise that introduced you to Docker.

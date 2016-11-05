@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/run/
 description: Configure containers at runtime
 keywords:

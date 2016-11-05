@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/chef/
 description: Installation and using Docker via Chef
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /winkit/release-notes/
 description: Change log / release notes per release
 keywords:

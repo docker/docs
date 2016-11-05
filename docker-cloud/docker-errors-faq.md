@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/faq/docker-errors-faq/
 description: Known Docker Engine issues in Docker Cloud
 keywords:

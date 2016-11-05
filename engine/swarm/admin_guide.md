@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/swarm/manager-administration-guide/
 description: Manager administration guide
 keywords:

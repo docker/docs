@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/service_ls/
 description: The service ls command description and usage
 keywords:

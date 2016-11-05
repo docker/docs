@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/swarm_join/
 description: The swarm join command description and usage
 keywords:
