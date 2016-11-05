@@ -20,9 +20,8 @@ backwards-incompatibility for old versions of Docker tools.
 
 > Note: In the case of your local environment, you should be updating your
   Docker Engine using [Docker for Mac](/docker-for-mac),
-  [Docker for Windows](/docker-for-windows),
-  or, in the case of Linux, [Docker Toolbox](/toolbox). That way all your
-  tools stay in sync. 
+  [Docker for Windows](/docker-for-windows). That way all your tools stay
+  in sync with Docker Engine.
 
 # Engine 1.10
 
