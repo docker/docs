@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/restart/
 description: The restart command description and usage
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/swarm_init/
 description: The swarm init command description and usage
 keywords:

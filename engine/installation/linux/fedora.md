@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/fedora/
 description: Instructions for installing Docker on Fedora.
 keywords:

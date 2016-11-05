@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/glossary/
 description: Glossary of terms used around Docker
 keywords:

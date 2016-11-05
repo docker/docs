@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /extend/plugin_api/
 description: 'How to write Docker plugins extensions '
 keywords:

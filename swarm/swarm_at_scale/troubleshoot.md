@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /swarm/swarm_at_scale/05-troubleshoot/
 description: Try Swarm at scale
 keywords:

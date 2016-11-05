@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/beginner/intro_cloud/
 description: Introducing Docker Cloud concepts and terminology
 keywords:

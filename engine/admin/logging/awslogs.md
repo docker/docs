@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/reference/logging/awslogs/
 description: Describes how to use the Amazon CloudWatch Logs logging driver.
 keywords:

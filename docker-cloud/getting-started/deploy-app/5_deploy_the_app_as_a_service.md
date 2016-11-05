@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/python/5_deploy_the_app_as_a_service/
 - /docker-cloud/getting-started/golang/5_deploy_the_app_as_a_service/
 description: Deploy the app as a Docker Cloud service

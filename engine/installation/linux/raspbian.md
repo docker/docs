@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/raspbian/
 description: Instructions for installing Docker on Raspbian.
 keywords: Docker, Docker documentation, installation, raspbian

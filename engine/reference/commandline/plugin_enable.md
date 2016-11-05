@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/plugin_enable/
 advisory: experimental
 description: the plugin enable command description and usage

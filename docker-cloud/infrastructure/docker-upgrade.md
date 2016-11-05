@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/feature-reference/docker-upgrade/
 - /docker-cloud/tutorials/docker-upgrade/
 description: Upgrade Docker Engine on a node

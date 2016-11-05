@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/api/remote_api_client_libraries/
 description: Various client libraries available to use with the Docker remote API
 keywords:

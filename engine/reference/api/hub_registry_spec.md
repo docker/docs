@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/api/hub_registry_spec/
 description: Documentation for docker Registry and Registry API
 published: false

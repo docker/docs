@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/stats/
 description: The stats command description and usage
 keywords:

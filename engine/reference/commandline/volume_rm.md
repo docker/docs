@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/volume_rm/
 description: the volume rm command description and usage
 keywords:

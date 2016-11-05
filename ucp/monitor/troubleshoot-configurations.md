@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/kv_store/
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
 keywords:

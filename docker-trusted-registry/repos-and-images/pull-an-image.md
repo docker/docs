@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/quick-start/
 description: Learn how to pull an image from Docker Trusted Registry.
 keywords:

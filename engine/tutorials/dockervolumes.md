@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/userguide/containers/dockervolumes/
 - /engine/userguide/dockervolumes/
 description: How to manage data inside your Docker containers.

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/archlinux/
 description: Installation instructions for Docker on ArchLinux.
 keywords:

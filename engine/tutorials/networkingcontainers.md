@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/userguide/containers/networkigncontainers/
 - /engine/userguide/networkigncontainers/
 description: How to network Docker containers.

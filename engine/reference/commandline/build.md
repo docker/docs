@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/build/
 description: The build command description and usage
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/volume_create/
 description: The volume create command description and usage
 keywords:

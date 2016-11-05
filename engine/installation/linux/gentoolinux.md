@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/gentoolinux/
 description: Installation instructions for Docker on Gentoo.
 keywords:

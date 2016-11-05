@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/save/
 description: The save command description and usage
 keywords:

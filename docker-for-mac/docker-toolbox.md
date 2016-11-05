@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /mackit/docker-toolbox/
 description: Docker for Mac and Docker Toolbox
 keywords:

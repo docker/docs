@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/misc/breaking/
 description: Breaking changes
 keywords:

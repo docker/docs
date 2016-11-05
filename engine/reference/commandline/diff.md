@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/diff/
 description: The diff command description and usage
 keywords:

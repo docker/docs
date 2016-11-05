@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/intermediate/pushing-images-to-dockercloud/
 - /docker-cloud/tutorials/pushing-images-to-dockercloud/
 description: Push images to Docker Cloud

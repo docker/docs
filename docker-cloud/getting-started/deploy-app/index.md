@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/python/
 - /docker-cloud/getting-started/golang/
 description: Go or Python and Docker Cloud

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/plan-production-install/
 description: Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production.
 keywords:

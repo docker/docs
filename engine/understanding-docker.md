@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /introduction/understanding-docker/
 - /engine/userguide/basics/
 - /engine/quickstart.md

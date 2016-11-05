@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/host_integration/
 description: How to generate scripts for upstart, systemd, etc.
 keywords:

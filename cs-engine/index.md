@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/cs-engine/
 description: Learn more about the Commercially Supported Docker Engine.
 keywords:

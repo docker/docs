@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/tag/
 description: The tag command description and usage
 keywords:

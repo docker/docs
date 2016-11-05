@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/cloud/cloud/
 description: Installation instructions for Docker on cloud.
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/adminguide/
 description: Learn how to troubleshoot your DTR installation.
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/swarm/how-swarm-mode-works/
 description: How swarm nodes work
 keywords:

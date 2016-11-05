@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/python/7_scale_the_service/
 - /docker-cloud/getting-started/golang/7_scale_the_service/
 description: Scale the service

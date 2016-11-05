@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/stack_deploy/
 advisory: experimental
 description: The stack deploy command description and usage

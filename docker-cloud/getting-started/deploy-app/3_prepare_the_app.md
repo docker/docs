@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/python/3_prepare_the_app/
 - /docker-cloud/getting-started/golang/3_prepare_the_app/
 description: Prepare the application

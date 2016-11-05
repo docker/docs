@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/install/engine-ami-launch/
 - /docker-trusted-registry/install/install-csengine/
 - /docker-trusted-registry/cs-engine/install/

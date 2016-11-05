@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/rename/
 description: The rename command description and usage
 keywords:

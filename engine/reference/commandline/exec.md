@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/exec/
 description: The exec command description and usage
 keywords:

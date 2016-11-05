@@ -1,7 +1,7 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/service_ps/
-aliases:
+redirect_from:
 - /engine/reference/commandline/service_tasks/
 description: The service ps command description and usage
 keywords:

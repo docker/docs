@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /contributing/contributing
 description: Contribute code
 keywords:

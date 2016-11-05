@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/attach/
 description: The attach command description and usage
 keywords:

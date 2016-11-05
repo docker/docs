@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /winkit/getting-started/
 - /winkit/
 - /windows/

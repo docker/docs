@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/userguide/networking/dockernetworks/
 description: How do we connect docker containers within and across hosts ?
 keywords:

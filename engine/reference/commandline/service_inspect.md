@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/service_inspect/
 description: The service inspect command description and usage
 keywords:

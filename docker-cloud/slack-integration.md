@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/tutorials/slack-integration/
 description: Integrate with Slack
 keywords:

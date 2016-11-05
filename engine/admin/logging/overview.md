@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/reference/logging/overview/
 description: Configure logging driver.
 keywords:

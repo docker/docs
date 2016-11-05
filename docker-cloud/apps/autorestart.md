@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/feature-reference/autorestart/
 description: Automatically restart a container in Docker Cloud
 keywords:

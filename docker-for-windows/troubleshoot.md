@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /windows/troubleshoot/
 description: Troubleshooting, logs, and known issues
 keywords:

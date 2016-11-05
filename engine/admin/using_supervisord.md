@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/using_supervisord/
 description: How to use Supervisor process management with Docker
 keywords:

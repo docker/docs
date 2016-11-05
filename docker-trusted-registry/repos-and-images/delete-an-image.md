@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/soft-garbage/
 - /docker-trusted-registry/repos-and-images/delete-images/
 description: Learn how to delete images from your repositories on Docker Trusted Registry.

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/search/
 description: The search command description and usage
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/beginner/link-packet/
 - /docker-cloud/getting-started/link-packet/
 description: Link your Packet account

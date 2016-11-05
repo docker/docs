@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/python/10_provision_a_data_backend_for_your_service/
 - /docker-cloud/getting-started/golang/10_provision_a_data_backend_for_your_service/
 description: Provision a data backend for the service

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/network_inspect/
 description: The network inspect command description and usage
 keywords:

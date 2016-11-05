@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/misc/
 description: Engine
 keywords:

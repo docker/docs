@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/api/docker_io_accounts_api/
 description: API Documentation for docker.io accounts.
 keywords:
