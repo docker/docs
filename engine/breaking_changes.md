@@ -11,7 +11,7 @@ title: Breaking changes and incompatibilities
 Every Engine release strives to be backward compatible with its predecessors,
 and interface stability is always a priority at Docker.
 
-In all cases, feature removal is communicated two releases
+In all cases, feature removal is communicated three releases
 in advance and documented as part of the [deprecated features](deprecated.md)
 page.
   
