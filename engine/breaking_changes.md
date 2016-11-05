@@ -29,7 +29,7 @@ backwards-incompatibility for old versions of Docker tools.
 There were two breaking changes in the 1.10 release that affected
 Registry and Docker Content Trust:
 
-** Registry **
+**Registry**
 
 Registry 2.3 includes improvements to the image manifest that have caused a
 breaking change. Images pushed by Engine 1.10 to a Registry 2.3 cannot be
@@ -48,7 +48,7 @@ If you are using an older Registry version (< 2.3), this problem does not occur
 with any version of the Engine CLI; push, pull, with and without content trust
 work as you would expect.
 
-** Docker Content Trust **
+**Docker Content Trust**
 
 Engine older than the current 1.10 cannot pull images from repositories that
 have enabled key delegation. Key delegation is a feature which requires a
