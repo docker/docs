@@ -1,7 +1,6 @@
 ---
 redirect_from:
-  - /reference/commandline/dockerd/
-redirect_from:
+- /reference/commandline/dockerd/
 - /engine/reference/commandline/daemon/
 description: The daemon command description and usage
 keywords:
