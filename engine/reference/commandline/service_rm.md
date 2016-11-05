@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/service_rm/
 description: The service rm command description and usage
 keywords:

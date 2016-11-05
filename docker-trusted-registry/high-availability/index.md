@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/high-availability/high-availability/
 description: Learn how to set up Docker Trusted Registry for high availability.
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/license/
 description: Learn how to license your Docker Trusted Registry installation.
 keywords:

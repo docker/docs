@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/import/
 description: The import command description and usage
 keywords:

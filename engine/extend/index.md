@@ -1,6 +1,6 @@
 ---
 advisory: experimental
-aliases:
+redirect_from:
 - /engine/extend/
 description: How develop and use a plugin with the managed plugin system
 keywords:

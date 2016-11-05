@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/feature-reference/auto-redeploy/
 description: Autoredeploy
 keywords:

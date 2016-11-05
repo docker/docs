@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/systemd/
 description: Controlling and configuring Docker using systemd
 keywords:

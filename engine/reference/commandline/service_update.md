@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/service_update/
 description: The service update command description and usage
 keywords:

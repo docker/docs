@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/debian/
 description: Instructions for installing Docker on Debian.
 keywords:

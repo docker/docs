@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/feature-reference/triggers/
 description: Use triggers
 keywords:

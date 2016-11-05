@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/dtr-integration/
 description: Integrate UCP with Docker Trusted Registry
 keywords:

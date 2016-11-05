@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/stack_config/
 advisory: experimental
 description: The stack config command description and usage

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/logout/
 description: The logout command description and usage
 keywords:

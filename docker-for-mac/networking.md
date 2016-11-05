@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /mackit/networking/
 description: Networking
 keywords:

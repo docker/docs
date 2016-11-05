@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/dockerfile_best-practices/
 - /docker-cloud/getting-started/intermediate/optimize-dockerfiles/
 - /docker-cloud/tutorials/optimize-dockerfiles/

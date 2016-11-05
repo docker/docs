@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /api/swarm-api/
 - /swarm/api/
 description: Swarm API

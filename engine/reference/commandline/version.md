@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/version/
 description: The version command description and usage
 keywords:

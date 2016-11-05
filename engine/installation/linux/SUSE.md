@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/SUSE/
 description: Installation instructions for Docker on openSUSE and on SUSE Linux Enterprise.
 keywords:

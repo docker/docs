@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/oracle/
 description: Installation instructions for Docker on Oracle Linux.
 keywords:

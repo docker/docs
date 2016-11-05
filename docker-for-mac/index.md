@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /mackit/
 - /mackit/getting-started/
 - /mac/

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/intermediate/installing-cli/
 - /docker-cloud/getting-started/installing-cli/
 - /docker-cloud/tutorials/installing-cli/

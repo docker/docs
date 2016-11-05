@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/misc/faq/
 description: Most frequently asked questions.
 keywords:

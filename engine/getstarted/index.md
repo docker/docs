@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /mac/started/
 - /windows/started/
 - /linux/started/

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/manage/monitor-manage-users/
 - /ucp/user-management/manage-users/
 description: Learn how to manage permissions in Docker Universal Control Plane.

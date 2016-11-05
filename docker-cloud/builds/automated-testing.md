@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/feature-reference/automated-testing/
 description: Automated tests
 keywords:

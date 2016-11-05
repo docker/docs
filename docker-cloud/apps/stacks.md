@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/feature-reference/stacks/
 description: Manage service stacks
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /mac/started/
 description: Getting started with Docker
 keywords:

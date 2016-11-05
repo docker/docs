@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/update/
 description: The update command description and usage
 keywords:

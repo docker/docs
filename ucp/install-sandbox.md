@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/evaluation-install/
 title: Install DDC in a sandbox for evaluation
 description: Learn how to get a 30-day trial of Docker Datacenter up and running.

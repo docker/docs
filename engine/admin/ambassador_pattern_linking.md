@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/ambassador_pattern_linking/
 description: Using the Ambassador pattern to abstract (network) services
 keywords:

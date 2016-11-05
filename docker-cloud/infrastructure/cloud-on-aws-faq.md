@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/faq/cloud-on-aws-faq/
 description: Docker Cloud on AWS
 keywords:

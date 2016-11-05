@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/beginner/link-aws/
 - /docker-cloud/getting-started/link-aws/
 description: Link your Amazon Web Services account

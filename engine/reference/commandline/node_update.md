@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/node_update/
 description: The node update command description and usage
 keywords:

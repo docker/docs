@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/python/11_service_stacks/
 description: Stackfiles for your service
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/rm/
 description: The rm command description and usage
 keywords:

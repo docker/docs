@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/beginner/link-azure/
 - /docker-cloud/getting-started/link-azure/
 description: Link your Microsoft Azure account

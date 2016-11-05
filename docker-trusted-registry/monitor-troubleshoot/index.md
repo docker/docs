@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/monitor-troubleshoot/monitor/
 description: Learn how to monitor your DTR installation.
 keywords:

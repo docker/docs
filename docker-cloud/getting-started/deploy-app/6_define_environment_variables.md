@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/python/6_define_environment_variables/
 - /docker-cloud/getting-started/golang/6_define_environment_variables/
 description: Define environment variables

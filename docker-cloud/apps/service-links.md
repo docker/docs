@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/feature-reference/service-links/
 description: Service discovery
 keywords:

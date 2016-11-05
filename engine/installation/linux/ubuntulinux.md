@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/ubuntulinux/
 - /installation/ubuntulinux/
 description: 'Instructions for installing Docker on Ubuntu. '

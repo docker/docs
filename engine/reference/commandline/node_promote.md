@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/node_promote/
 description: The node promote command description and usage
 keywords:

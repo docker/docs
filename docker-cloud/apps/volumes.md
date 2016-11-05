@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/tutorials/download-volume-data/
 - /docker-cloud/feature-reference/volumes/
 description: Work with data volumes

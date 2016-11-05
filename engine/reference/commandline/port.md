@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/port/
 description: The port command description and usage
 keywords:

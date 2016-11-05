@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/beginner/link-do/
 - /docker-cloud/getting-started/link-do/
 description: Link your DigitalOcean account

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/centos/
 description: Instructions for installing Docker on CentOS
 keywords:

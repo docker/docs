@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/volume_inspect/
 description: The volume inspect command description and usage
 keywords:

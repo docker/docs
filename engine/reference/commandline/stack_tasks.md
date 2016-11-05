@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/stack_tasks/
 advisory: experimental
 description: The stack tasks command description and usage
