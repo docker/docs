@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/inspect/
 description: The inspect command description and usage
 keywords:

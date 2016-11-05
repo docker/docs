@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/feature-reference/ports/
 description: Publish and expose service or container ports
 keywords:

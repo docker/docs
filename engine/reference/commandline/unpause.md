@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/unpause/
 description: The unpause command description and usage
 keywords:

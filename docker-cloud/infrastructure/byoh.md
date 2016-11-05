@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/feature-reference/byoh/
 - /docker-cloud/tutorials/byoh/
 - /docker-cloud/getting-started/use-byon/

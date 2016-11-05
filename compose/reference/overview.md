@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /compose/reference/docker-compose/
 description: Overview of docker-compose CLI
 keywords:

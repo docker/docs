@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/stack_services/
 advisory: experimental
 description: The stack services command description and usage

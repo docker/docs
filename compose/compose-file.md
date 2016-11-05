@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /compose/yml
 description: Compose file reference
 keywords:

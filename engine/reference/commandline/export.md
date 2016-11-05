@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/export/
 description: The export command description and usage
 keywords:

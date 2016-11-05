@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/stop/
 description: The stop command description and usage
 keywords:

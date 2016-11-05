@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/rhel/
 - /installation/rhel/
 description: Instructions for installing Docker on Red Hat Enterprise Linux.

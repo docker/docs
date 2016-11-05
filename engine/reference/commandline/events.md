@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/events/
 description: The events command description and usage
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /mackit/release-notes/
 description: Change log / release notes per release
 keywords:

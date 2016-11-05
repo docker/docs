@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/network_rm/
 description: the network rm command description and usage
 keywords:

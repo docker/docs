@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/cli/
 description: Docker's CLI command description and usage
 keywords:

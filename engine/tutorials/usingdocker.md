@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/userguide/containers/usingdocker/
 description: Learn how to manage and operate Docker containers.
 keywords:

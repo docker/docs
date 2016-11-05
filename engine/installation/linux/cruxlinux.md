@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/cruxlinux/
 description: Docker installation on CRUX Linux.
 keywords:

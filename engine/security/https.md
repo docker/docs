@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/https/
 - /articles/https/
 description: How to setup and run Docker with HTTPS

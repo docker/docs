@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/configure/config-auth/
 description: Learn how to integrate UCP with an LDAP service, so that you can manage users from a single place.
 keywords:

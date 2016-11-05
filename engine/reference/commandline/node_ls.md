@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/node_ls/
 description: The node ls command description and usage
 keywords:

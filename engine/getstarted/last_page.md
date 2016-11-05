@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /mac/last_page/
 - /windows/last_page/
 - /linux/last_page/

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/cp/
 description: The cp command description and usage
 keywords:

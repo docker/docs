@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/top/
 description: The top command description and usage
 keywords:

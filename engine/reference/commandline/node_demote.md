@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/node_demote/
 description: The node demote command description and usage
 keywords:

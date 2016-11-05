@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/login/
 description: The login command description and usage
 keywords:

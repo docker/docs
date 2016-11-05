@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /mac/step_one/
 - /windows/step_one/
 - /linux/step_one/

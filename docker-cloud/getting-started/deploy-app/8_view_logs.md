@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/python/8_view_logs/
 - /docker-cloud/getting-started/golang/8_view_logs/
 description: View service logs

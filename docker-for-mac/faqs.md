@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /mackit/faqs/
 description: Frequently asked questions
 keywords:

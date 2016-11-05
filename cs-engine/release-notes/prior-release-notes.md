@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/cse-prior-release-notes/
 - /docker-trusted-registry/cs-engine/release-notes/prior-release-notes/
 description: Archived release notes for commercially supported Docker Engine

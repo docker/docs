@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/plugin_rm/
 advisory: experimental
 description: the plugin rm command description and usage

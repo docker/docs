@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/baseimages/
 description: How to create base images
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/userguide/containers/
 description: Explains how to work with containers
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/swarm_update/
 description: The swarm update command description and usage
 keywords:

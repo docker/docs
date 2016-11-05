@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/production-install/
 description: Learn how to install Docker Universal Control Plane on production
 keywords:

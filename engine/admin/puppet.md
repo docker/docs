@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/puppet/
 description: Installing and using Puppet
 keywords:

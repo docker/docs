@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/userguide/containers/dockerimages/
 - /engine/userguide/dockerimages/
 description: How to work with Docker images.

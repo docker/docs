@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/articles/configuring/
 - /engine/admin/configuring/
 description: Configuring and running the Docker daemon on various distributions

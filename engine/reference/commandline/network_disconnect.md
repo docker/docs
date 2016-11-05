@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/network_disconnect/
 description: The network disconnect command description and usage
 keywords:

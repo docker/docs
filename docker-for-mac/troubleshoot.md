@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /mackit/troubleshoot/
 description: Troubleshooting, logs, and known issues
 keywords:

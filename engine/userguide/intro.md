@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /userguide/
 description: Introduction to user guide
 identifier: engine_guide_intro

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/feature-reference/service-scaling/
 description: Scale your service, spawn new containers
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/beginner/link-softlayer/
 - /docker-cloud/getting-started/link-softlayer/
 description: Link your SoftLayer account

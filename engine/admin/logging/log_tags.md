@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/reference/logging/log_tags/
 description: Describes how to format tags for.
 keywords:

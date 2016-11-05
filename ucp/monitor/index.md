@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/manage/
 description: Manage, monitor, troubleshoot
 keywords:

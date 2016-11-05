@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/pull/
 description: The pull command description and usage
 keywords:

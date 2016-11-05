@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/intermediate/ssh-into-a-node/
 - /docker-cloud/tutorials/ssh-into-a-node/
 - /docker-cloud/faq/how-ssh-nodes/

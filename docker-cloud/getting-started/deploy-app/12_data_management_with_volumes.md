@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/python/12_data_management_with_volumes/
 description: Data management with Volumes
 keywords:

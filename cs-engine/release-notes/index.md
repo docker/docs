@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/cs-engine/release-notes/
 description: The release notes for CS Docker Engine.
 keywords:

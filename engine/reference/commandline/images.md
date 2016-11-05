@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/images/
 description: The images command description and usage
 keywords:

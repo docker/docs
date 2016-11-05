@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /engine/reference/logging/
 description: Logging and Logging Drivers
 keywords:

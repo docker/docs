@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/release-notes/release-notes/
 description: Docker Trusted Registry release notes
 keywords:

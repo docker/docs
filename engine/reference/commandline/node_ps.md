@@ -1,8 +1,7 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/node_ps/
-aliases:
-- /engine/reference/commandline/node_tasks/
+  - /engine/reference/commandline/node_tasks/
 description: The node ps command description and usage
 keywords:
 - node, tasks

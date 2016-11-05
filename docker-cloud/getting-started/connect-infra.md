@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-cloud/getting-started/use-hosted/
 description: How to link Docker Cloud to a hosted cloud services provider or your own hosts
 keywords:

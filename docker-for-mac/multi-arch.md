@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /mackit/multi-arch/
 description: Multi-CPU Architecture Support
 keywords:
