@@ -31,7 +31,7 @@ Registry and Docker Content Trust:
 
 **Registry**
 
-Registry 2.3 includes improvements to the image manifest that have caused a
+Registry 2.3 includes improvements to the image manifest that caused a
 breaking change. Images pushed by Engine 1.10 to a Registry 2.3 cannot be
 pulled by digest by older Engine versions. A `docker pull` that encounters this
 situation returns the following error:
