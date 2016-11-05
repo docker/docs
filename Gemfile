@@ -1,5 +1,4 @@
 source "https://rubygems.org"
-ruby '2.3.1'
 gem "jekyll", "3.2.1"
 gem "jekyll-sass-converter", "1.3.0"
 gem "minima", "1.1.0"
