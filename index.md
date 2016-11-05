@@ -2,7 +2,7 @@
 description: Home page for Docker's documentation
 keywords:
 - Docker, documentation, manual, guide, reference, api
-title: Welcome to the Docs
+title: Welcome to the Docs - NETLIFY EXAMPLE!
 layout: docs
 ---
 
