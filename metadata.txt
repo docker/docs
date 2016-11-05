@@ -1,0 +1,12 @@
+---
+layout: null
+---
+pages: [
+{% for page in site.pages %}{% if page.title %}
+  {{ page.url | jsonify }}: {
+    title: {{ page.title | jsonify }}
+    {% if page.description %}, description: {{ page.description | jsonify }}{% endif %}
+    {% if page.keywords %}, keywords: {{ page.keywords | jsonify }}{% endif %}
+  }
+{% endif %}{% endfor %}
+]

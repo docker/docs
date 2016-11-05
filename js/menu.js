@@ -1,5 +1,10 @@
 var tocData;
+var searchData;
 var treeOutput = new Array();
+function hookupSearchAutocomplete()
+{
+
+}
 function renderTree(tree)
 {
   for (var i=0; i < tree.length; i++)
@@ -46,6 +51,10 @@ jQuery(document).ready(function(){
       renderTree(data.toc);
       $(".nav-sub").html(treeOutput.join(''));
       hookupTOCEvents();
+    });
+    $.getJSON("/metadata.txt", function (data){
+      searchData = data;
+      hookupSearchAutocomplete();
     });
     $("#TableOfContents ul").empty();
 
