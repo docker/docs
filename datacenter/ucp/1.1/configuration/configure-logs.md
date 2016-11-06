@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/configuration/configure-logs/
 description: Learn how to configure Docker Universal Control Plane to store your logs
   on an external log system.

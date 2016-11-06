@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/overview/
 description: Learn about Docker Universal Control Plane, the enterprise-grade cluster
   management solution from Docker.

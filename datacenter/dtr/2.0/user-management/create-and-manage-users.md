@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/user-management/create-and-manage-users/
 description: Learn how to manage user permissions in Docker Trusted Registry.
 keywords:

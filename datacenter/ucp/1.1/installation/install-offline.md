@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/installation/install-offline/
 description: Learn how to install Docker Universal Control Plane. on a machine with
   no internet access.

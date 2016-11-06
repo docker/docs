@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/high-availability/backups-and-disaster-recovery/
 description: Learn how to backup your Docker Trusted Registry cluster, and to recover
   your cluster from an existing backup.

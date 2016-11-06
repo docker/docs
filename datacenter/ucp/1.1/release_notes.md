@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/release_notes/
 description: Release notes for Docker Universal Control Plane. Learn more about the
   changes introduced in the latest versions.

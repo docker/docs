@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/configure/config-storage/
 description: Storage configuration for Docker Trusted Registry
 keywords:

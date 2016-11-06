@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/installation/license/
 description: Learn how to license your Docker Universal Control Plane installation.
 keywords:

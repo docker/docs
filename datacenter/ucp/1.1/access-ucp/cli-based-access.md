@@ -3,7 +3,7 @@ description: Learn how to access Docker Universal Control Plane from the CLI.
 keywords:
 - docker, ucp, cli, administration
 title: CLI-based access
-aliases:
+redirect_from:
 - /ucp/access-ucp/cli-based-access/
 ---
 
