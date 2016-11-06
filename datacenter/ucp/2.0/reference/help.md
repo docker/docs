@@ -1,0 +1,40 @@
++++
+title = "help"
+description = "Show a list of available commands for Docker Universal Control Plane."
+keywords= ["help, ucp"]
+[menu.main]
+parent = "ucp_ref"
+identifier="ucp_ref_help"
++++
+
+# docker/ucp help
+
+Docker Universal Control Plane Tool
+
+This tool has commands to 'install' and 'uninstall' UCP.
+This tool must run as a container with a well-known name and with the
+`docker.sock` volume mounted, which you can cut-and-paste from the usage
+example below.
+
+This tool will generate TLS certificates. The tool may not be able to
+discover your externally visible fully qualified hostname. For proper
+certificate verification, you should pass one or more Subject Alternative
+Names with '--san' during 'install'. These names should match the fully qualified
+hostname you intend to use to access the given system.
+
+Many settings can be passed as flags or environment variables. When passing as
+an environment variable, use the 'docker run -e VARIABLE_NAME ...' syntax to
+pass the value from your shell, or 'docker run -e VARIABLE_NAME=value ...' to
+specify the value explicitly on the command line.
+
+Additional help is available for each command with the '--help' option.
+
+## Usage
+
+```bash
+docker run --rm -it \
+           --name ucp \
+           -v /var/run/docker.sock:/var/run/docker.sock \
+           docker/ucp \
+           command [arguments...]
+```
