@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/installation/system-requirements/
 description: Learn about the system requirements for installing Docker Universal Control
   Plane.

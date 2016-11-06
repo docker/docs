@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/user-management/create-and-manage-users/
 description: Learn how to create and manage users in your Docker Universal Control
   Plane cluster.

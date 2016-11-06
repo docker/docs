@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/high-availability/replicate-cas/
 description: Docker Universal Control plane has support for high availability. Learn
   how to set up your installation to ensure it tolerates failures.

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/configure/config-general/
 description: Configure general settings for Docker Trusted Registry
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/install/install-dtr-offline/
 description: Learn how to install Docker Trusted Registry on a machine with no internet
   access.

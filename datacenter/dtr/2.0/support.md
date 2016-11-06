@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/support/
 description: Your Docker subscription gives you access to prioritized support. You
   can file tickets via email, your the support portal.

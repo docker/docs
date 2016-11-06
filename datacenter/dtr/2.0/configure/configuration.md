@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/configure/configuration/
 description: Configuration overview for Docker Trusted Registry
 keywords:

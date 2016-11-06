@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /ucp/installation/uninstall/
 description: Learn how to uninstall a Docker Universal Control Plane cluster.
 keywords:

@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/user-management/create-and-manage-teams/
 description: Learn how to manage teams to enforce fine-grain access control in Docker
   Trusted Registry.

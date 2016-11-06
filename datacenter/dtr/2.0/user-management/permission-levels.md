@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/user-management/permission-levels/
 description: Learn about the permission levels available in Docker Trusted Registry.
 keywords:

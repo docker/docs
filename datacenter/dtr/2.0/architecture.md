@@ -1,5 +1,5 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/architecture/
 description: Learn about the architecture of Docker Trusted Registry.
 keywords:
