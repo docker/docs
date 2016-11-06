@@ -3,12 +3,21 @@ redirect_from:
 - /engine/userguide/containers/usingdocker/
 description: Learn how to manage and operate Docker containers.
 keywords:
-- docker, the docker guide, documentation, docker.io, monitoring containers, docker top, docker inspect, docker port, ports, docker logs, log,  Logs
+- docker, the docker guide, documentation, docker.io, monitoring containers,
+  docker top, docker inspect, docker port, ports, docker logs, log, logs
+menu:
+  main:
+    parent: engine_learn_menu
+    weight: -5
 title: Run a simple application
 ---
 
-In the ["*Hello world in a container*"](dockerizing.md) you launched your
-first containers using the `docker run` command. You ran an *interactive container* that ran in the foreground.  You also ran a *detached container* that ran in the background. In the process you learned about several Docker commands:
+# Run a simple application
+
+In the ["*Hello world in a container*"](dockerizing.md) you launched your first
+containers using the `docker run` command. You ran an *interactive container*
+that ran in the foreground. You also ran a *detached container* that ran in the
+background. In the process you learned about several Docker commands:
 
 * `docker ps` - Lists containers.
 * `docker logs` - Shows the standard output of a container.
@@ -16,9 +25,7 @@ first containers using the `docker run` command. You ran an *interactive contain
 
 ## Learn about the Docker client
 
-If you didn't realize it yet, you've been using the Docker client each time you
-typed `docker` in your Bash terminal. The client is a simple command line client
-also known as a command-line interface (CLI). Each action you can take with
+The `docker` program is called the Docker client. Each action you can take with
 the client is a command and each command can take a series of flags and arguments.
 
     # Usage:  [sudo] docker [subcommand] [flags] [arguments] ..
@@ -35,20 +42,20 @@ daemon you are using, but also the version of Go (the programming
 language powering Docker).
 
     Client:
-      Version:      1.8.1
-      API version:  1.20
-      Go version:   go1.4.2
-      Git commit:   d12ea79
-      Built:        Thu Aug 13 02:35:49 UTC 2015
-      OS/Arch:      linux/amd64
+     Version:      1.12.2
+     API version:  1.24
+     Go version:   go1.6.3
+     Git commit:   bb80604
+     Built:        Tue Oct 11 17:00:50 2016
+     OS/Arch:      windows/amd64
 
     Server:
-      Version:      1.8.1
-      API version:  1.20
-      Go version:   go1.4.2
-      Git commit:   d12ea79
-      Built:        Thu Aug 13 02:35:49 UTC 2015
-      OS/Arch:      linux/amd64
+     Version:      1.12.3
+     API version:  1.24
+     Go version:   go1.6.3
+     Git commit:   6b644ec
+     Built:        Wed Oct 26 23:26:11 2016
+     OS/Arch:      linux/amd64
 
 ## Get Docker command help
 
@@ -76,9 +83,9 @@ To see usage for a specific command, specify the command with the `--help` flag:
 > For further details and examples of each command, see the
 > [command reference](../reference/commandline/cli.md) in this guide.
 
-## Running a web application in Docker
+## Run a web application in Docker
 
-So now you've learned a bit more about the `docker` client you can move onto
+Now that you've learned a bit more about the Docker client, you can move onto
 the important stuff: running more containers. So far none of the
 containers you've run did anything particularly useful, so you can
 change that by running an example web application in Docker.
@@ -88,24 +95,22 @@ Start with a `docker run` command.
 
     $ docker run -d -P training/webapp python app.py
 
-Review what the command did. You've specified two flags: `-d` and
-`-P`. You've already seen the `-d` flag which tells Docker to run the
-container in the background. The `-P` flag is new and tells Docker to
-map any required network ports inside the container to your host. This
-lets you view the web application.
+This command consists of the following parts:
 
-You've specified an image: `training/webapp`. This image is a
-pre-built image that contains a simple Python Flask web application.
-
-Lastly, you've specified a command for the container to run:
-`python app.py`. This launches the web application.
+* The `-d` flag runs the container in the background (as a so-called daemon).
+* The `-P` flag maps any required network ports inside the container to your
+  host. This lets you view the web application.
+* The `training/webapp` image is a pre-built image that contains a simple Python
+  Flask web application.
+* The remaining arguments make up the command that is run inside
+  the container. The `python app.py` command launches the web application.
 
 > **Note:**
-> You can see more detail on the `docker run` command in the [command
-> reference](../reference/commandline/run.md) and the [Docker Run
-> Reference](../reference/run.md).
+> You can see more detail on the `docker run` command
+> in the [command reference](../reference/commandline/run.md)
+> and the [docker run reference](../reference/run.md).
 
-## Viewing the web application container
+## View the web application container
 
 Now you can see your running container using the `docker ps` command.
 
@@ -114,9 +119,7 @@ Now you can see your running container using the `docker ps` command.
     CONTAINER ID  IMAGE                   COMMAND       CREATED        STATUS        PORTS                    NAMES
     bc533791f3f5  training/webapp:latest  python app.py 5 seconds ago  Up 2 seconds  0.0.0.0:49155->5000/tcp  nostalgic_morse
 
-You can see a new flag, `-l`, for the `docker ps` command.
-This tells the `docker ps` command to return the details of the
-*last* container started.
+The `-l` flag shows only the details of the *last* container started.
 
 > **Note:**
 > By default, the `docker ps` command only shows information about running
@@ -157,19 +160,18 @@ Suppose you want to test two Python applications: both bound to port 5000 inside
 their own containers. Without Docker's port mapping you could only access one at
 a time on the Docker host.
 
-So you can now browse to port 49155 in a web browser to
-see the application.
+So you can now browse to port 49155 in a web browser to see the application.
 
-![Viewing the web application](webapp1.png).
+![Screenshot of the running web application](webapp1.png).
 
-Your Python application is live!
+Your Python web application is live!
 
 > **Note:**
 > If you have been using a virtual machine on macOS, Windows or Linux,
 > you'll need to get the IP of the virtual host instead of using localhost.
-> You can do this by running the `docker-machine ip your_vm_name` from your  command line or terminal application, for example:
+> You can do this by running `docker-machine ip` from the command line:
 >
->     $ docker-machine ip my-docker-vm
+>     $ docker-machine ip
 >     192.168.99.100
 >
 > In this case you'd browse to `http://192.168.99.100:49155` for the above example.
@@ -188,7 +190,7 @@ the port for which you need the corresponding public-facing port.
 In this case you've looked up what port is mapped externally to port 5000 inside
 the container.
 
-## Viewing the web application's logs
+## View the web application's logs
 
 You can also find out a bit more about what's happening with your
 application and use another of the commands you've learned, `docker logs`.
@@ -196,15 +198,14 @@ application and use another of the commands you've learned, `docker logs`.
     $ docker logs -f nostalgic_morse
 
     * Running on http://0.0.0.0:5000/
-    10.0.2.2 - - [23/May/2014 20:16:31] "GET / HTTP/1.1" 200 -
-    10.0.2.2 - - [23/May/2014 20:16:31] "GET /favicon.ico HTTP/1.1" 404 -
+    10.0.2.2 - - [06/Nov/2016 20:16:31] "GET / HTTP/1.1" 200 -
+    10.0.2.2 - - [06/Nov/2016 20:16:31] "GET /favicon.ico HTTP/1.1" 404 -
 
-This time though you've added a new flag, `-f`. This causes the `docker
-logs` command to act like the `tail -f` command and watch the
-container's standard out. You can see here the logs from Flask showing
-the application running on port 5000 and the access log entries for it.
+The `-f` flag causes the `docker logs` command to act like the `tail -f` command
+and watch the container's standard output. You can see here the logs from Flask
+showing the application running on port 5000 and the access log entries for it.
 
-## Looking at the web application container's processes
+## Look at the web application container's processes
 
 In addition to the container's logs you can also examine the processes
 running inside it using the `docker top` command.
@@ -217,7 +218,7 @@ running inside it using the `docker top` command.
 Here you can see that the `python app.py` command is the only process
 running inside the container.
 
-## Inspecting the web application container
+## Inspect the web application container
 
 Lastly, you can take a low-level dive into the Docker container using the
 `docker inspect` command. It returns a JSON document containing useful
@@ -249,10 +250,10 @@ specific element, for example to return the container's IP address, you would:
 
     172.17.0.5
 
-## Stopping the web application container
+## Stop the web application container
 
-Okay you've seen web application working. Now you can stop it using the
-`docker stop` command and the name of the container: `nostalgic_morse`.
+The web application is still running inside the container. You can stop it using
+the `docker stop` command and the name of the container: `nostalgic_morse`.
 
     $ docker stop nostalgic_morse
 
@@ -263,7 +264,7 @@ been stopped.
 
     $ docker ps -l
 
-## Restarting the web application container
+## Restart the web application container
 
 Oops! Just after you stopped the container you get a call to say another
 developer needs the container back. From here you have two choices: you
@@ -282,7 +283,7 @@ responds.
 > Also available is the `docker restart` command that runs a stop and
 > then start on the container.
 
-## Removing the web application container
+## Remove the web application container
 
 Your colleague has let you know that they've now finished with the container
 and won't need it again. Now, you can remove it using the `docker rm` command.
