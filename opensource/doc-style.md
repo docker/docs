@@ -130,7 +130,7 @@ See [lists](doc-style.md#lists) below for how to punctuate list items.
 
 ### Abbreviations and acronyms
 
-* Exempli gratia (e.g.) and id est ( i.e.): these should always have periods and
+* Exempli gratia (e.g.) and id est (i.e.): these should always have periods and
 are always followed by a comma.
 
 * Acronyms are pluralized by simply adding "s", e.g., PCs, OSs.
@@ -197,7 +197,7 @@ position on this controversial topic, we won't change our mind, and that’s tha
 
 We require `code font` styling (monospace, sans-serif) for all text that refers
 to a command or other input or output from the CLI. This includes file paths
-(e.g., `/etc/hosts/docker.conf`). If you enclose text in backticks (`) markdown
+(e.g., `/etc/hosts/docker.conf`). If you enclose text in backticks (\`), markdown
 will style the text as code.
 
 Text from a CLI should be quoted verbatim, even if it contains errors or its
@@ -214,14 +214,14 @@ When writing CLI examples, give the user hints by making the examples resemble
 exactly what they see in their shell:
 
 * Indent shell examples by 4 spaces so they get rendered as code blocks.
-* Start typed commands with `$ ` (dollar space), so that they are easily
+* Start typed commands with `$ `&nbsp;(dollar space), so that they are easily
   differentiated from program output.
 * Program output has no prefix.
-* Comments begin with # (hash space).
-* In-container shell commands, begin with `$$ ` (dollar dollar space).
+* Comments begin with `# `&nbsp;(hash space).
+* In-container shell commands, begin with `$$ `&nbsp;(dollar dollar space).
 
 Please test all code samples to ensure that they are correct and functional so
-that users can successfully cut-and-paste samples directly into the CLI.
+that users can successfully copy-and-paste samples directly into the CLI.
 
 ## Pull requests
 
@@ -257,8 +257,8 @@ documentation.
 
 ## Graphics
 
-When you need to add a graphic, try to make the file-size as small as possible.
-If you need help reducing file-size of a high-resolution image, feel free to
+When you need to add a graphic, try to make the file size as small as possible.
+If you need help reducing file size of a high-resolution image, feel free to
 contact us for help.
 Usually, graphics should go in the same directory as the .md file that
 references them, or in a subdirectory for images if one already exists.
