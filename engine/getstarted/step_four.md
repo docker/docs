@@ -46,7 +46,7 @@ commands to run. Your recipe is going to be very short.
         $ ls
         Dockerfile
 
-5. Open the `Dockerfile` in a visual text editor like <a href="https://atom.io/" target="_blank">Atom</a> or <a href="https://www.sublimetext.com/" target="_blank">Sublime</a>, or a text based editor like `vi`, or `nano` (https://www.nano-editor.org/).
+5. Open the `Dockerfile` in a visual text editor like <a href="https://atom.io/" target="_blank">Atom</a> or <a href="https://www.sublimetext.com/" target="_blank">Sublime</a>, or a text based editor like `vi`, or <a href="https://www.nano-editor.org/" target="_blank">nano-editor</a>.
 
 6. Add a line to the file like this:
 
