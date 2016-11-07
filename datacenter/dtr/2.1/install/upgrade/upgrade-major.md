@@ -1,18 +1,10 @@
-<!--[metadata]>
-+++
-draft=true
-aliases = ["/docker-trusted-registry/install/upgrade/"]
-title = "Upgrade from 1.4.3"
-description = "Learn how to upgrade your Docker Trusted Registry to the latest major release."
-keywords = ["docker, dtr, upgrade, install"]
-[menu.main]
-parent="menu_dtr_upgrade"
-identifier="dtr_upgrade_major"
-weight=0
-+++
-<![end-metadata]-->
-
-# Upgrade from DTR 1.4.3
+---
+title: Upgrade from 1.4.3
+description: Learn how to upgrade your Docker Trusted Registry to the latest major
+  release.
+keywords:
+- docker, dtr, upgrade, install
+---
 
 The first step in upgrading to Docker Trusted Registry (DTR) 2.0, is ensuring
 you are running DTR 1.4.3. If that's not the case, start by upgrading your

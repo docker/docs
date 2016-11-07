@@ -1,17 +1,9 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/quick-start/"]
-title = "Pull an image"
-description = "Learn how to pull an image from Docker Trusted Registry."
-keywords = ["docker, registry, images, pull"]
-[menu.main]
-parent="dtr_menu_repos_and_images"
-identifier="dtr_pull_image"
-weight=10
-+++
-<![end-metadata]-->
-
-# Pull an image from DTR
+---
+title: Pull an image from DTR
+description: Learn how to pull an image from Docker Trusted Registry.
+keywords:
+- docker, registry, images, pull
+---
 
 Pulling an image from Docker Trusted Registry is the same as pulling an image
 from Docker Hub. Since DTR is secure by default, you always need to authenticate

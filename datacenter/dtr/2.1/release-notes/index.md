@@ -1,17 +1,10 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/release-notes/release-notes/"]
-title = "Trusted Registry release notes"
-description = "Docker Trusted Registry release notes "
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, release notes, Docker Trusted Registry"]
-[menu.main]
-parent="dtr_menu_release_notes"
-identifier="dtr_release_notes"
-weight=0
-+++
-<![end-metadata]-->
+---
+title: Docker Trusted Registry release notes
+keywords:
+description: Docker Trusted Registry release notes
+- docker, documentation, about, technology, understanding, enterprise, hub, registry, release notes, Docker Trusted Registry
+---
 
-# Docker Trusted Registry release notes
 
 Here you can learn about new features, bug fixes, breaking changes and
 known issues for each DTR version.

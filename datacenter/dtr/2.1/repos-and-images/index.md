@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "Configure your Docker Engine"
-description = "Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry."
-keywords = ["docker, registry, TLS, certificates"]
-[menu.main]
-parent="dtr_menu_repos_and_images"
-identifier="dtr_configure_engine"
-weight=0
-+++
-<![end-metadata]-->
-
-# Configure your Docker Engine
+---
+description: Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry.
+keywords:
+- docker, registry, TLS, certificates
+title: Configure your Docker Engine
+---
 
 By default Docker Engine uses TLS when pushing and pulling images to an
 image registry like Docker Trusted Registry.

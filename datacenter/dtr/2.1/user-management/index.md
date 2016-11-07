@@ -1,17 +1,9 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/accounts/"]
-title = "Authentication and authorization"
-description = "Learn about the permission levels available on Docker Trusted Registry."
-keywords = ["docker, registry, security, permissions, users"]
-[menu.main]
-parent="dtr_menu_user_management"
-identifier="dtr-authentication-authorization"
-weight=0
-+++
-<![end-metadata]-->
-
-# Authentication and authorization
+---
+title: Authentication and authorization
+description: Learn about the permission levels available on Docker Trusted Registry.
+keywords:
+- docker, registry, security, permissions, users
+---
 
 With DTR you get to control which users have access to your image repositories.
 

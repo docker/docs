@@ -1,14 +1,9 @@
-+++
-title = "Use your own certificates"
-description = "Learn how to configure Docker Trusted Registry to use your own certificates"
-keywords = ["Universal Control Plane, UCP, certificate, authentiation, tls"]
-[menu.main]
-parent="workw_dtr_configure"
-identifier="dtr-configure-certs"
-weight=0
-+++
-
-# Use your own certificates
+---
+title: Use your own certificates
+description: Trusted Registry configuration options
+keywords:
+- docker, documentation, about, technology, install, enterprise, hub, CS engine, Docker Trusted Registry, configure, storage, backend, drivers
+---
 
 By default the DTR services are exposed using HTTPS, to ensure all
 communications between clients and DTR is encrypted. Since DTR

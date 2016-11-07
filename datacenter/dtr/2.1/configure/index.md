@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "Configuration"
-description = "Trusted Registry configuration options"
-keywords = ["docker, documentation, about, technology, install, enterprise, hub, CS engine, Docker Trusted Registry, configure, storage, backend, drivers"]
-[menu.main]
-parent="workw_dtr"
-identifier="workw_dtr_configure"
-weight=50
-+++
-<![end-metadata]-->
-
-# Configure DTR
+---
+title: Configuration of Docker Trusted Registry
+description: Trusted Registry configuration options
+keywords:
+- docker, documentation, about, technology, install, enterprise, hub, CS engine, Docker Trusted Registry, configure, storage, backend, drivers
+---
 
 This section includes the following topics:
 

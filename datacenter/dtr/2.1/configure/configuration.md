@@ -1,14 +1,9 @@
-+++
-title = "Configuration overview"
-description = "Configuration overview for Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub,  registry"]
-[menu.main]
-parent="workw_dtr_configure"
-identifier="dtr_configuration"
-weight=2
-+++
-
-# Configure overview
+---
+title: Configuration overview
+description: Configuration overview for Docker Trusted Registry
+keywords:
+- docker, documentation, about, technology, understanding, enterprise, hub,  registry
+---
 
 When you first install Docker Trusted Registry, you need to configure it. Use
 this overview to see what you can configure.

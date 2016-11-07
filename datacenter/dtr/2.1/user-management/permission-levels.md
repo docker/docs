@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "Permission levels"
-description = "Learn about the permission levels available in Docker Trusted Registry."
-keywords = ["docker, registry, security, permissions"]
-[menu.main]
-parent="dtr_menu_user_management"
-identifier="dtr-permission-levels"
-weight = 40
-+++
-<![end-metadata]-->
-
-# Permission levels
+---
+title: Permission levels
+description: Learn about the permission levels available in Docker Trusted Registry.
+keywords:
+- docker, registry, security, permissions
+---
 
 Docker Trusted Registry allows you to define fine-grain permissions over image
 repositories.

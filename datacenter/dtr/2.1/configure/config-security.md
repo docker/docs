@@ -1,14 +1,9 @@
-+++
-title = "Security configuration"
-description = "Security configuration for Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, understanding, configuration, security, enterprise, hub, registry"]
-[menu.main]
-parent="workw_dtr_configure"
-identifier="dtr_configure_security"
-weight=4
-+++
-
-# Security configuration
+---
+title: Security configuration
+description: Security configuration for Docker Trusted Registry
+keywords:
+- docker, documentation, about, technology, understanding, configuration, security, enterprise, hub, registry
+---
 
 This document describes the security settings you need to configure.
 

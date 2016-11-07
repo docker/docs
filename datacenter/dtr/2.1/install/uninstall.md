@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "Uninstall"
-description = "Learn how to uninstall your Docker Trusted Registry installation."
-keywords = ["docker, dtr, install, uninstall"]
-[menu.main]
-parent="dtr-menu-install"
-identifier="dtr_uninstall"
-weight=50
-+++
-<![end-metadata]-->
-
-# Uninstall Docker Trusted Registry
+---
+title: Uninstall Docker Trusted Registry
+description: Learn how to uninstall your Docker Trusted Registry installation.
+keywords:
+- docker, dtr, install, uninstall
+---
 
 Use the `remove` command, to remove a DTR replica from a cluster.
 To uninstall a DTR cluster you remove all DTR replicas one at a time.

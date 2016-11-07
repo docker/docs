@@ -1,19 +1,9 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/adminguide/"]
-title = "Troubleshoot DTR"
-description = "Learn how to troubleshoot your DTR installation."
-keywords = ["docker, registry, monitor, troubleshoot"]
-[menu.main]
-parent="dtr_menu_monitor_troubleshoot"
-identifier="dtr_troubleshoot"
-weight=10
-+++
-<![end-metadata]-->
-
-# Troubleshoot DTR
-
-## Overlay networking
+---
+title: Troubleshoot Docker Trusted Registry
+description: Learn how to troubleshoot your DTR installation.
+keywords:
+- docker, registry, monitor, troubleshoot
+---
 
 High availability in DTR depends on having overlay networking working in UCP.
 To manually test that overlay networking is working in UCP run the following
