@@ -1,7 +1,6 @@
 ---
 description: docker-compose build
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  build
+keywords: fig, composition, compose, docker, orchestration, cli, build
 title: docker-compose build
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: 'Stops running containers without removing them. '
-keywords:
-- fig, composition, compose, docker, orchestration, cli, stop
+keywords: fig, composition, compose, docker, orchestration, cli, stop
 title: docker-compose stop
 ---
 

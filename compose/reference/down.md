@@ -1,7 +1,6 @@
 ---
 description: docker-compose down
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  down
+keywords: fig, composition, compose, docker, orchestration, cli, down
 title: docker-compose down
 ---
 
