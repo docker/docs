@@ -1,15 +1,9 @@
-<!--[metadata]>
-+++
-title ="join"
-description="Add a new replica to an existing DTR cluster"
-keywords= ["docker, dtr, cli, join"]
-[menu.main]
-parent="dtr_menu_reference"
-identifier="dtr_reference_join"
-+++
-<![end-metadata]-->
-
-# docker/dtr join
+---
+title: join
+keywords:
+- docker, dtr, cli, join
+description: Add a new replica to an existing DTR cluster
+---
 
 Add a new replica to an existing DTR cluster
 
@@ -18,30 +12,31 @@ Add a new replica to an existing DTR cluster
 ## Description
 
 
-This command creates a replica of an existing DTR on a node managed by
-Docker Universal Control Plane (UCP).
+This command installs DTR on the Docker Engine that runs the command,
+and joins the new installation to an existing cluster.
 
-For setting DTR for high-availability, create 3, 5, or 7 replicas of DTR.
+To set up a cluster with high-availability, add 3, 5, or 7 nodes to
+the cluster.
 
 
 ## Options
 
 | Option                    | Description                |
 |:--------------------------|:---------------------------|
-|`--ucp-url`|The UCP URL including domain and port|
-|`--ucp-username`|The UCP administrator username|
-|`--ucp-password`|The UCP administrator password|
-|`--debug`|Enable debug mode for additional logging|
-|`--hub-username`|Username to use when pulling images|
-|`--hub-password`|Password to use when pulling images|
+|`--ucp-url`|Specify the UCP controller URL including domain and port|
+|`--ucp-username`|Specify the UCP admin username|
+|`--ucp-password`|Specify the UCP admin password|
+|`--debug`|Enable debug mode, provides additional logging|
+|`--hub-username`|Specify the Docker Hub username for pulling images|
+|`--hub-password`|Specify the Docker Hub password for pulling images|
 |`--ucp-insecure-tls`|Disable TLS verification for UCP|
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
-|`--ucp-node`|The hostname of the node to install DTR|
-|`--replica-id`|Assign an ID to the DTR replica. By default the ID is random|
-|`--unsafe`|Allow DTR to be installed on a UCP manager node|
-|`--existing-replica-id`|The ID of an existing DTR replica|
-|`--replica-http-port`|The public HTTP port for the DTR replica. Default is 80|
-|`--replica-https-port`|The public HTTPS port for the DTR replica. Default is 443|
-|`--skip-network-test`|Don't test if overlay networks are working correctly between UCP nodes|
-|`--extra-envs`|Environment variables or swarm constraints for DTR containers. Format var=val[&var=val]|
+|`--ucp-node`|Specify the host to install Docker Trusted Registry|
+|`--replica-id`|Specify the replica ID. Must be unique per replica, leave blank for random|
+|`--unsafe`|Enable this flag to skip safety checks when installing or joining|
+|`--existing-replica-id`|ID of an existing replica in a cluster|
+|`--replica-http-port`|Specify the public HTTP port for the DTR replica; 0 means unchanged/default|
+|`--replica-https-port`|Specify the public HTTPS port for the DTR replica; 0 means unchanged/default|
+|`--skip-network-test`|Enable this flag to skip the overlay networking test|
+|`--extra-envs`|List of extra environment variables to use for deploying the DTR containers for the replica. This can be used to specify swarm constraints. Separate the environment variables with ampersands (&). You can escape actual ampersands with backslashes (\). Can't be used in combination with --ucp-node|
 

@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "Overview"
-description = "Learn about the commands available in the docker/dtr image."
-keywords = ["docker, dtr, install, uninstall, configure"]
-[menu.main]
-parent="dtr_menu_reference"
-identifier="dtr_reference_overview"
-weight=-10
-+++
-<![end-metadata]-->
-
-# docker/dtr overview
+---
+title: docker/dtr overview
+keywords:
+- docker, dtr, install, uninstall, configure
+description: Learn about the commands available in the docker/dtr image.
+---
 
 This tool has commands to install, configure, and backup Docker
 Trusted Registry (DTR). It also allows uninstalling DTR.
@@ -32,13 +25,13 @@ docker run -it --rm docker/dtr \
 
 | Option                       | Description                |
 |:-----------------------------|:---------------------------|
-|`install`| Install Docker Trusted Registry|
+|`install`| Install Docker Trusted Registry on this Docker Engine|
 |`join`| Add a new replica to an existing DTR cluster|
 |`reconfigure`| Change DTR configurations|
-|`remove`| Remove a DTR replica|
-|`restore`| Install and restore DTR from an existing backup|
-|`backup`| Create a backup of DTR|
-|`upgrade`| Upgrade DTR 2.0.0 or later cluster to this version|
-|`dumpcerts`| Print the TLS certificates used by DTR|
-|`images`| List all the images necessary to install DTR|
+|`remove`| Remove a replica from a DTR cluster|
+|`restore`| Create a new DTR cluster from an existing backup|
+|`backup`| Backup a DTR cluster to a tar file and stream it to stdout|
+|`upgrade`| Upgrade a v2.0.0 or later cluster to this version of DTR|
+|`dumpcerts`| Dump out the TLS certificates used by this DTR instance|
+|`images`| Lists all the images necessary to install DTR|
 

@@ -1,15 +1,9 @@
-<!--[metadata]>
-+++
-title ="reconfigure"
-description="Change DTR configurations"
-keywords= ["docker, dtr, cli, reconfigure"]
-[menu.main]
-parent="dtr_menu_reference"
-identifier="dtr_reference_reconfigure"
-+++
-<![end-metadata]-->
-
-# docker/dtr reconfigure
+---
+title: reconfigure
+keywords:
+- docker, dtr, cli, reconfigure
+description: Change DTR configurations
+---
 
 Change DTR configurations
 
@@ -23,42 +17,43 @@ docker run -it --rm docker/dtr \
 ## Description
 
 
-This command changes DTR configuration settings.
+This command changes specified configurations for DTR and leaves
+existing configurations in its original state.
 
-DTR is restarted for the new configurations to take effect. To have no down
-time, configure your DTR for high-availability.
+
+WARNING: DTR is restarted for the new configurations to take
+effect. To have no down time, configure your DTR for high-availability.
 
 
 ## Options
 
 | Option                    | Description                |
 |:--------------------------|:---------------------------|
-|`--ucp-url`|The UCP URL including domain and port|
-|`--ucp-username`|The UCP administrator username|
-|`--ucp-password`|The UCP administrator password|
-|`--debug`|Enable debug mode for additional logging|
-|`--hub-username`|Username to use when pulling images|
-|`--hub-password`|Password to use when pulling images|
-|`--http-proxy`|The HTTP proxy used for outgoing requests|
-|`--https-proxy`|The HTTPS proxy used for outgoing requests|
-|`--no-proxy`|Don't use a proxy for these domains. Format acme.org[, acme.com]|
-|`--replica-http-port`|The public HTTP port for the DTR replica. Default is 80|
-|`--replica-https-port`|The public HTTPS port for the DTR replica. Default is 443|
+|`--ucp-url`|Specify the UCP controller URL including domain and port|
+|`--ucp-username`|Specify the UCP admin username|
+|`--ucp-password`|Specify the UCP admin password|
+|`--debug`|Enable debug mode, provides additional logging|
+|`--hub-username`|Specify the Docker Hub username for pulling images|
+|`--hub-password`|Specify the Docker Hub password for pulling images|
+|`--http-proxy`|Set the HTTP proxy for outgoing requests|
+|`--https-proxy`|Set the HTTPS proxy for outgoing requests|
+|`--no-proxy`|Set the list of domains to not proxy to|
+|`--replica-http-port`|Specify the public HTTP port for the DTR replica; 0 means unchanged/default|
+|`--replica-https-port`|Specify the public HTTPS port for the DTR replica; 0 means unchanged/default|
 |`--log-protocol`|The protocol for sending container logs: tcp, tcp+tls, udp or internal. Default: internal|
 |`--log-host`|Endpoint to send logs to, required if --log-protocol is tcp or udp|
 |`--log-level`|Log level for container logs. Default: INFO|
-|`--log-tls-ca-cert`|PEM-encoded TLS CA cert for DTR logging driver. Ignored if the logging protocol is not tcp+tls|
-|`--log-tls-cert`|PEM-encoded TLS cert for DTR logging driver. Ignored if the logging protocol is not tcp+tls|
-|`--log-tls-key`|PEM-encoded TLS key for DTR logging driver. Ignored if the address protocol is not tcp+tls|
-|`--log-tls-skip-verify`|Disable TLS verification for the logging service. Ignored if the logging address is not tcp+tls|
-|`--dtr-external-url`|URL of the host or load balancer clients use to reach DTR. Format https://host[:port]|
-|`--dtr-storage-volume`|Full path or volume name to store Docker images in the local filesystem|
-|`--nfs-storage-url`|NFS to store Docker images. Requires NFS client libraries. Format nfs://<ip|hostname>/<mountpoint>|
+|`--log-tls-ca-cert`|PEM-encoded TLS CA cert for DTR logging driver. This option is ignored if the address protocol is not tcp+tls.|
+|`--log-tls-cert`|PEM-encoded TLS cert for DTR logging driver. This option is ignored if the address protocol is not tcp+tls.|
+|`--log-tls-key`|PEM-encoded TLS key for DTR logging driver. This option is ignored if the address protocol is not tcp+tls.|
+|`--log-tls-skip-verify`|Configures DTR logging driver's TLS verification. This verification is enabled by default, but it can be overrided by setting this option to true. This option is ignored if the address protocol is not tcp+tls.|
+|`--dtr-external-url`|Specify the external domain name and port for DTR. If using a load balancer, use its external URL instead.|
 |`--enable-pprof`|Enables pprof profiling of the server|
-|`--etcd-heartbeat-interval`|Frequency in milliseconds that the key-value store leader notifies followers|
-|`--etcd-election-timeout`|Timeout in milliseconds for key-value store membership|
-|`--etcd-snapshot-count`|Number of changes between key-value store snapshots|
+|`--etcd-heartbeat-interval`|Set etcd's frequency (ms) that its leader will notify followers that it is still the leader.|
+|`--etcd-election-timeout`|Set etcd's timeout (ms) for how long a follower node will go without hearing a heartbeat before attempting to become leader itself.|
+|`--etcd-snapshot-count`|Set etcd's number of changes before creating a snapshot.|
 |`--ucp-insecure-tls`|Disable TLS verification for UCP|
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
-|`--existing-replica-id`|The ID of an existing DTR replica|
+|`--nfs-storage-url`|URL (with IP address or hostname) of the NFS mount if using NFS (e.g. nfs://<ip address>/<mount point>)|
+|`--existing-replica-id`|ID of an existing replica in a cluster|
 
