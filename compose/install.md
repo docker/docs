@@ -1,6 +1,7 @@
 ---
 description: How to install Docker Compose
-keywords: compose, orchestration, install, installation, docker, documentation
+keywords:
+- compose, orchestration, install, installation, docker, documentation
 title: Install Docker Compose
 ---
 

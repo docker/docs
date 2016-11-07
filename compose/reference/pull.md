@@ -1,6 +1,7 @@
 ---
 description: Pulls service images.
-keywords: fig, composition, compose, docker, orchestration, cli,  pull
+keywords:
+- fig, composition, compose, docker, orchestration, cli,  pull
 title: docker-compose pull
 ---
 

@@ -1,6 +1,7 @@
 ---
 description: Declare default environment variables in a file
-keywords: fig, composition, compose, docker, orchestration, environment, env file
+keywords:
+- fig, composition, compose, docker, orchestration, environment, env file
 title: Declare default environment variables in file
 ---
 

@@ -1,6 +1,7 @@
 ---
 description: Getting started with Docker Compose and Django
-keywords: documentation, docs,  docker, compose, orchestration, containers
+keywords:
+- documentation, docs,  docker, compose, orchestration, containers
 title: "Quickstart: Compose and Django"
 ---
 

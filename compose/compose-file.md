@@ -1,8 +1,9 @@
 ---
-description: Compose file reference
-keywords: fig, composition, compose, docker
 redirect_from:
 - /compose/yml
+description: Compose file reference
+keywords:
+- fig, composition, compose, docker
 title: Compose file reference
 ---
 

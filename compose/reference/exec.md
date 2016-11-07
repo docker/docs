@@ -1,6 +1,7 @@
 ---
 description: docker-compose exec
-keywords: fig, composition, compose, docker, orchestration, cli, exec
+keywords:
+- fig, composition, compose, docker, orchestration, cli,  exec
 title: docker-compose exec
 ---
 
