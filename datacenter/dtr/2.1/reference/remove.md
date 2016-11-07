@@ -1,17 +1,11 @@
-<!--[metadata]>
-+++
-title ="remove"
-description="Remove a DTR replica"
-keywords= ["docker, dtr, cli, remove"]
-[menu.main]
-parent="dtr_menu_reference"
-identifier="dtr_reference_remove"
-+++
-<![end-metadata]-->
+---
+title: remove
+keywords:
+- docker, dtr, cli, remove
+description: Remove a replica from a DTR cluster
+---
 
-# docker/dtr remove
-
-Remove a DTR replica
+Remove a replica from a DTR cluster
 
 ## Usage
 
@@ -23,23 +17,23 @@ docker run -it --rm docker/dtr \
 ## Description
 
 
-This command removes a replica from a DTR deployment. All DTR containers and
-volumes are removed from the node.
+This command removes a replica from the cluster, stops and removes all
+DTR containers, and deletes all DTR volumes.
 
 
 ## Options
 
 | Option                    | Description                |
 |:--------------------------|:---------------------------|
-|`--ucp-url`|The UCP URL including domain and port|
-|`--ucp-username`|The UCP administrator username|
-|`--ucp-password`|The UCP administrator password|
-|`--debug`|Enable debug mode for additional logging|
-|`--hub-username`|Username to use when pulling images|
-|`--hub-password`|Password to use when pulling images|
+|`--ucp-url`|Specify the UCP controller URL including domain and port|
+|`--ucp-username`|Specify the UCP admin username|
+|`--ucp-password`|Specify the UCP admin password|
+|`--debug`|Enable debug mode, provides additional logging|
+|`--hub-username`|Specify the Docker Hub username for pulling images|
+|`--hub-password`|Specify the Docker Hub password for pulling images|
 |`--ucp-insecure-tls`|Disable TLS verification for UCP|
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
-|`--force-remove`|Force a DTR replica to be removed|
-|`--replica-id`|Assign an ID to the DTR replica. By default the ID is random|
-|`--existing-replica-id`|The ID of an existing DTR replica|
+|`--force-remove`|Force removal of replica even if it can break your cluster's state. Necessary only when --existing-replica-id == --replica-id.|
+|`--replica-id`|Specify the replica ID. Must be unique per replica, leave blank for random|
+|`--existing-replica-id`|ID of an existing replica in a cluster|
 

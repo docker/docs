@@ -1,17 +1,11 @@
-<!--[metadata]>
-+++
-title ="dumpcerts"
-description="Print the TLS certificates used by DTR"
-keywords= ["docker, dtr, cli, dumpcerts"]
-[menu.main]
-parent="dtr_menu_reference"
-identifier="dtr_reference_dumpcerts"
-+++
-<![end-metadata]-->
+---
+title: dumpcerts
+keywords:
+- docker, dtr, cli, dumpcerts
+description: Dump out the TLS certificates used by this DTR instance
+---
 
-# docker/dtr dumpcerts
-
-Print the TLS certificates used by DTR
+Dump out the TLS certificates used by this DTR instance
 
 ## Usage
 
@@ -31,13 +25,13 @@ communicating across replicas with TLS.
 
 | Option                    | Description                |
 |:--------------------------|:---------------------------|
-|`--ucp-url`|The UCP URL including domain and port|
-|`--ucp-username`|The UCP administrator username|
-|`--ucp-password`|The UCP administrator password|
-|`--debug`|Enable debug mode for additional logging|
-|`--hub-username`|Username to use when pulling images|
-|`--hub-password`|Password to use when pulling images|
+|`--ucp-url`|Specify the UCP controller URL including domain and port|
+|`--ucp-username`|Specify the UCP admin username|
+|`--ucp-password`|Specify the UCP admin password|
+|`--debug`|Enable debug mode, provides additional logging|
+|`--hub-username`|Specify the Docker Hub username for pulling images|
+|`--hub-password`|Specify the Docker Hub password for pulling images|
 |`--ucp-insecure-tls`|Disable TLS verification for UCP|
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
-|`--existing-replica-id`|The ID of an existing DTR replica|
+|`--existing-replica-id`|ID of an existing replica in a cluster|
 

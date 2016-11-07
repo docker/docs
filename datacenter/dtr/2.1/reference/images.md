@@ -1,17 +1,11 @@
-<!--[metadata]>
-+++
-title ="images"
-description="List all the images necessary to install DTR"
-keywords= ["docker, dtr, cli, images"]
-[menu.main]
-parent="dtr_menu_reference"
-identifier="dtr_reference_images"
-+++
-<![end-metadata]-->
+---
+title: images
+keywords:
+- docker, dtr, cli, images
+description: Lists all the images necessary to install DTR
+---
 
-# docker/dtr images
-
-List all the images necessary to install DTR
+Lists all the images necessary to install DTR
 
 ## Usage
 

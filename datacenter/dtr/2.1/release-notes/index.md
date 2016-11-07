@@ -1,7 +1,7 @@
 ---
 title: Docker Trusted Registry release notes
-keywords:
 description: Docker Trusted Registry release notes
+keywords:
 - docker, documentation, about, technology, understanding, enterprise, hub, registry, release notes, Docker Trusted Registry
 ---
 
