@@ -1,6 +1,7 @@
 ---
 description: Displays log output from services.
-keywords: fig, composition, compose, docker, orchestration, cli,  logs
+keywords:
+- fig, composition, compose, docker, orchestration, cli,  logs
 title: docker-compose logs
 ---
 

@@ -1,6 +1,7 @@
 ---
 description: Pushes service images.
-keywords: fig, composition, compose, docker, orchestration, cli,  push
+keywords:
+- fig, composition, compose, docker, orchestration, cli,  push
 title: docker-compose push
 ---
 

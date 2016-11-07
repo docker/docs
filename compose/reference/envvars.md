@@ -1,6 +1,7 @@
 ---
 description: Compose CLI environment variables
-keywords: fig, composition, compose, docker, orchestration, cli, reference
+keywords:
+- fig, composition, compose, docker, orchestration, cli,  reference
 title: Compose CLI environment variables
 ---
 

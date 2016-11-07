@@ -1,6 +1,7 @@
 ---
 description: Guide to using Docker Compose in production
-keywords: documentation, docs,  docker, compose, orchestration, containers, production
+keywords:
+- documentation, docs,  docker, compose, orchestration, containers,  production
 title: Using Compose in production
 ---
 
