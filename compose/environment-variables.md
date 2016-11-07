@@ -1,7 +1,6 @@
 ---
 description: How to set, use and manage environment variables in Compose
-keywords:
-- fig, composition, compose, docker, orchestration, environment, variables, env file
+keywords: fig, composition, compose, docker, orchestration, environment, variables, env file
 title: Environment variables in Compose
 ---
 

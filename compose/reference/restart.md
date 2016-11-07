@@ -1,7 +1,6 @@
 ---
 description: Restarts Docker Compose services.
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  restart
+keywords: fig, composition, compose, docker, orchestration, cli,  restart
 title: docker-compose restart
 ---
 

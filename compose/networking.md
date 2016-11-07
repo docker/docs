@@ -1,7 +1,6 @@
 ---
 description: How Compose sets up networking between containers
-keywords:
-- documentation, docs,  docker, compose, orchestration, containers, networking
+keywords: documentation, docs, docker, compose, orchestration, containers, networking
 title: Networking in Compose
 ---
 
