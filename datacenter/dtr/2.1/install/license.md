@@ -1,18 +1,9 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/license/"]
-title = "License DTR"
-description = "Learn how to license your Docker Trusted Registry installation."
-keywords = ["docker, dtr, install, license"]
-[menu.main]
-parent="dtr-menu-install"
-identifier="dtr_license"
-weight=31
-+++
-<![end-metadata]-->
-
-
-# License DTR
+---
+title: License Docker Trusted Registry
+description: Learn how to license your Docker Trusted Registry installation.
+keywords:
+- docker, dtr, install, license
+---
 
 By default, you don't need to license your Docker Trusted Registry. When
 installing DTR, it automatically starts using the same license file used on

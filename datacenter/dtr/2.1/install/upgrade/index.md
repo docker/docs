@@ -1,17 +1,9 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/install/upgrade/upgrade-minor/"]
-title = "Upgrade from 2.0.0"
-description = "Learn how to upgrade your Docker Trusted Registry to a new minor version or patch release."
-keywords = ["docker, dtr, upgrade, install"]
-[menu.main]
-parent="menu_dtr_upgrade"
-identifier="dtr_upgrade_minor"
-weight=10
-+++
-<![end-metadata]-->
-
-# Upgrade from 2.0.0
+---
+title: Upgrade from 2.0.0
+description: Learn how to upgrade your Docker Trusted Registry to a new minor version or patch release.
+keywords:
+- docker, dtr, upgrade, install
+---
 
 <!-- beta: remove after this goes to GA -->
 

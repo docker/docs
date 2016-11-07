@@ -1,17 +1,9 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/prior-release-notes/"]
-title = "Prior Trusted Registry release notes"
-description = "Archived release notes for Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, understanding, enterprise, hub, registry, Docker Trusted Registry, release"]
-[menu.main]
-parent="dtr_menu_release_notes"
-identifier="dtr_prior_release_notes"
-weight=10
-+++
-<![end-metadata]-->
-
-# DTR release notes archive
+---
+title: DTR release notes archive
+description: Archived release notes for Docker Trusted Registry
+keywords:
+- docker, documentation, about, technology, understanding, enterprise, hub, registry, Docker Trusted Registry, release
+---
 
 This document contains the release notes for all versions of Docker Trusted
 Registry.

@@ -1,14 +1,9 @@
-+++
-title = "Storage configuration"
-description = "Storage configuration for Docker Trusted Registry"
-keywords = ["docker, documentation, about, technology, understanding, configuration, storage, storage drivers, Azure, S3, Swift,  enterprise, hub, registry"]
-[menu.main]
-parent="workw_dtr_configure"
-identifier="dtr_configure_storage"
-weight=5
-+++
-
-# Storage configuration
+---
+title: Storage configuration
+description: Storage configuration for Docker Trusted Registry
+keywords:
+- docker, documentation, about, technology, understanding, configuration, storage, storage drivers, Azure, S3, Swift,  enterprise, hub, registry
+---
 
 After installing Docker Trusted Registry, one of your first tasks is to
 designate and configure the Trusted Registry storage backend. This document provides the following:

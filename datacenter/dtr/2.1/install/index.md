@@ -1,21 +1,9 @@
-<!--[metadata]>
-+++
-aliases = [ "/docker-trusted-registry/install/dtr-ami-byol-launch/",
-            "/docker-trusted-registry/install/dtr-ami-bds-launch/",
-            "/docker-trusted-registry/install/dtr-vhd-azure/",
-            "/docker-trusted-registry/install/install-dtr/"]
-title = "Install Docker Trusted Registry"
-description = "Learn how to install Docker Trusted Registry for production."
-keywords = ["docker, dtr, registry, install"]
-[menu.main]
-parent="dtr-menu-install"
-identifier="dtr_install_production"
-weight=20
-+++
-<![end-metadata]-->
-
-
-# Install Docker Trusted Registry
+---
+title: Install Docker Trusted Registry
+description: Learn how to install Docker Trusted Registry for production.
+keywords:
+- docker, dtr, registry, install
+---
 
 Docker Trusted Registry (DTR) is a containerized application that runs on a
 swarm managed by Docker Universal Control Plane (UCP). It can be installed

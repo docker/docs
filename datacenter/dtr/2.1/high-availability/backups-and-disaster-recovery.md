@@ -1,17 +1,10 @@
-<!--[metadata]>
-+++
-title = "Backups and disaster recovery"
-description = "Learn how to backup your Docker Trusted Registry cluster, and to recover your cluster from an existing backup."
-keywords = ["docker, registry, high-availability, backup, recovery"]
-[menu.main]
-parent="dtr_menu_high_availability"
-identifier="dtr_backup_disaster_recovery"
-weight=10
-+++
-<![end-metadata]-->
-
-
-# Backups and disaster recovery
+---
+title: Backups and disaster recovery
+description: Learn how to backup your Docker Trusted Registry cluster, and to recover
+  your cluster from an existing backup.
+keywords:
+- docker, registry, high-availability, backup, recovery
+---
 
 When you decide to start using Docker Trusted Registry on a production
 setting, you should [configure it for high availability](index.md).

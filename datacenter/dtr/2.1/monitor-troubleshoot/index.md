@@ -1,17 +1,9 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/monitor-troubleshoot/monitor/"]
-title = "Monitor DTR"
-description = "Learn how to monitor your DTR installation."
-keywords = ["docker, registry, monitor, troubleshoot"]
-[menu.main]
-parent="dtr_menu_monitor_troubleshoot"
-identifier="dtr_monitor"
-weight=0
-+++
-<![end-metadata]-->
-
-# Monitor DTR
+---
+title: Monitor Docker Trusted Registry
+description: Learn how to monitor your DTR installation.
+keywords:
+- docker, registry, monitor, troubleshoot
+---
 
 Docker Trusted Registry is a Dockerized application. To monitor it, you can
 use the same tools and techniques you're already using to monitor other

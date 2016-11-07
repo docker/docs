@@ -1,16 +1,10 @@
-<!--[metadata]>
-+++
-title = "Create and manage organizations"
-description = "Learn how to set up organizations to enforce security in Docker Trusted Registry."
-keywords = ["docker, registry, security, permissions, organizations"]
-[menu.main]
-parent="dtr_menu_user_management"
-identifier="dtr-create-organizations"
-weight = 20
-+++
-<![end-metadata]-->
-
-# Create and manage organizations
+---
+title: Create and manage organizations
+description: Learn how to set up organizations to enforce security in Docker Trusted
+  Registry.
+keywords:
+- docker, registry, security, permissions, organizations
+---
 
 When a user creates a repository, only that user has permissions to make changes
 to the repository.

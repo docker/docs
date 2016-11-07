@@ -1,17 +1,9 @@
-<!--[metadata]>
-+++
-title = "System requirements"
-description = "Learn about the system requirements for installing Docker Trusted Registry."
-keywords = ["docker, DTR, architecture, requirements"]
-[menu.main]
-parent="dtr-menu-install"
-identifier="dtr_system_requirements"
-weight=0
-+++
-<![end-metadata]-->
-
-
-# DTR system requirements
+---
+title: Docker Trusted Registry system requirements
+description: Learn about the system requirements for installing Docker Trusted Registry.
+keywords:
+- docker, DTR, architecture, requirements
+---
 
 Docker Trusted Registry can be installed on-premises or on the cloud.
 Before installing, be sure your infrastructure has these requirements.

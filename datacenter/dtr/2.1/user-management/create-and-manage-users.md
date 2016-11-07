@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "Create and manage users"
-description = "Learn how to manage user permissions in Docker Trusted Registry."
-keywords = ["docker, registry, security, permissions, users"]
-[menu.main]
-parent="dtr_menu_user_management"
-identifier="dtr-create-users"
-weight = 10
-+++
-<![end-metadata]-->
-
-# Create and manage users
+---
+title: Create and manage users
+description: Learn how to manage user permissions in Docker Trusted Registry.
+keywords:
+- docker, registry, security, permissions, users
+---
 
 When using the Docker Datacenter built-in authentication, you can create users
 to grant them fine-grained permissions.

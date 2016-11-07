@@ -1,19 +1,9 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/repos-and-images/create-repo/",
-          "/docker-trusted-registry/userguide/",
-          "/docker-trusted-registry/repos-and-images/push-and-pull-images/"]
-title = "Push an image"
-description = "Learn how to push an image to Docker Trusted Registry."
-keywords = ["docker, registry, images, pull"]
-[menu.main]
-parent="dtr_menu_repos_and_images"
-identifier="dtr_push_image"
-weight=20
-+++
-<![end-metadata]-->
-
-# Push an image to DTR
+---
+description: Learn how to push an image to Docker Trusted Registry.
+keywords:
+- docker, registry, images, pull
+title: Push an image to DTR
+---
 
 Pushing an image to Docker Trusted Registry is the same as pushing an image
 to Docker Hub.

@@ -1,17 +1,9 @@
-<!--[metadata]>
-+++
-aliases = ["/docker-trusted-registry/high-availability/high-availability/"]
-title = "Set up high availability"
-description = "Learn how to set up Docker Trusted Registry for high availability."
-keywords = ["docker, registry, high-availability, backup, recovery"]
-[menu.main]
-parent="dtr_menu_high_availability"
-identifier="dtr_high_availability"
-weight=0
-+++
-<![end-metadata]-->
-
-# Set up high availability
+---
+title: Set up high availability
+description: Learn how to set up Docker Trusted Registry for high availability.
+keywords:
+- docker, registry, high-availability, backup, recovery
+---
 
 Docker Trusted Registry (DTR) is designed for high availability.
 

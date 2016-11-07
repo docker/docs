@@ -1,16 +1,10 @@
-<!--[metadata]>
-+++
-title = "Create and manage teams"
-description = "Learn how to manage teams to enforce fine-grain access control in Docker Trusted Registry."
-keywords = ["docker, registry, security, permissions, teams"]
-[menu.main]
-parent="dtr_menu_user_management"
-identifier="dtr-create-teams"
-weight = 30
-+++
-<![end-metadata]-->
-
-# Create and manage teams
+---
+title: Create and manage teams
+description: Learn how to manage teams to enforce fine-grain access control in Docker
+  Trusted Registry.
+keywords:
+- docker, registry, security, permissions, teams
+---
 
 You can extend the user's default permissions by granting them fine-grain
 permissions over image repositories. You do this by adding the user to a team.

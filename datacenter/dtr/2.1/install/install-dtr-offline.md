@@ -1,17 +1,10 @@
-<!--[metadata]>
-+++
-title = "Install offline"
-description = "Learn how to install Docker Trusted Registry on a machine with no internet access."
-keywords = ["docker, registry, install, offline"]
-[menu.main]
-parent="dtr-menu-install"
-identifier="dtr_install_offline"
-weight=30
-+++
-<![end-metadata]-->
-
-
-# Install DTR offline
+---
+title: Install Docker Trusted Registry offline
+description: Learn how to install Docker Trusted Registry on a machine with no internet
+  access.
+keywords:
+- docker, registry, install, offline
+---
 
 The procedure to install Docker Trusted Registry on a node is the same,
 whether that node has access to the internet or not.
