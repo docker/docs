@@ -26,7 +26,7 @@ supported:
 | `etwlogs`   | ETW logging driver for Docker on Windows. Writes log messages as ETW events.                                                  |
 | `gcplogs`   | Google Cloud Logging driver for Docker. Writes log messages to Google Cloud Logging.                                          |
 
-The `docker logs`command is available only for the `json-file` and `journald`
+The `docker logs` command is available only for the `json-file` and `journald`
 logging drivers.
 
 The `labels` and `env` options add additional attributes for use with logging
