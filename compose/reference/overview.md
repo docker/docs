@@ -1,9 +1,8 @@
 ---
+description: Overview of docker-compose CLI
+keywords: fig, composition, compose, docker, orchestration, cli,  docker-compose
 redirect_from:
 - /compose/reference/docker-compose/
-description: Overview of docker-compose CLI
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  docker-compose
 title: Overview of docker-compose CLI
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: Get started with Docker Compose
-keywords:
-- documentation, docs,  docker, compose, orchestration, containers
+keywords: documentation, docs, docker, compose, orchestration, containers
 title: Get started with Docker Compose
 ---
 

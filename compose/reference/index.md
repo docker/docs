@@ -1,7 +1,6 @@
 ---
 description: Compose CLI reference
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  reference
+keywords: fig, composition, compose, docker, orchestration, cli,  reference
 title: Compose command-line reference
 ---
 

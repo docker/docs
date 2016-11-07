@@ -1,7 +1,6 @@
 ---
 description: Runs a one-off command on a service.
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  run
+keywords: fig, composition, compose, docker, orchestration, cli,  run
 title: docker-compose run
 ---
 

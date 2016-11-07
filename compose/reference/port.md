@@ -1,7 +1,6 @@
 ---
 description: Prints the public port for a port binding.s
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  port
+keywords: fig, composition, compose, docker, orchestration, cli,  port
 title: docker-compose port
 ---
 

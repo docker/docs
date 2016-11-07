@@ -1,9 +1,8 @@
 ---
+description: Compose CLI reference
+keywords: fig, composition, compose, docker, orchestration, cli, reference
 redirect_from:
 - /compose/env
-description: Compose CLI reference
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  reference
 title: Link environment variables (superseded)
 ---
 
