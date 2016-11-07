@@ -1,16 +1,11 @@
-<!--[metadata]>
-+++
-title ="Get support"
-description="Your Docker subscription gives you access to prioritized support. You can file tickets via email, your the support portal."
-keywords = ["Docker, support", "help"]
-[menu.main]
-parent="mn_ucp"
-identifier="ucp_support"
-weight=100
-+++
-<![end-metadata]-->
-
-# Get support
+---
+title: Get support
+description: Your Docker subscription gives you access to prioritized support. You
+  can file tickets via email, your the support portal.
+keywords:
+- Docker, support
+- help
+---
 
 Your Docker Data Center, or Universal Control Plane subscription gives you
 access to prioritized support. The service levels depend on your subscription.

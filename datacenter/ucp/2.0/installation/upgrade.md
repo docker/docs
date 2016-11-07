@@ -1,17 +1,10 @@
-<!--[metadata]>
-+++
-aliases = [ "/ucp/upgrade-ucp/"]
-title = "Upgrade to UCP 2.0"
-description = "Learn how to upgrade Docker Universal Control Plane with minimal impact to your users."
-keywords = ["Docker, UCP, upgrade, update"]
-[menu.main]
-parent="mn_ucp_installation"
-identifier="ucp_upgrade_major"
-weight=61
-+++
-<![end-metadata]-->
-
-# Upgrade to UCP 2.0
+---
+title: Upgrade to UCP 2.0
+description: Learn how to upgrade Docker Universal Control Plane with minimal impact
+  to your users.
+keywords:
+- Docker, UCP, upgrade, update
+---
 
 This page guides you in upgrading Docker Universal Control Plane (UCP) to
 version 2.0.

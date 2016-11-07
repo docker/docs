@@ -1,18 +1,9 @@
-<!--[metadata]>
-+++
-aliases = [ "/ucp/dtr-integration/"]
-title = "Integrate with Docker Trusted Registry"
-description = "Integrate UCP with Docker Trusted Registry"
-keywords = ["trusted, registry, integrate, UCP, DTR"]
-[menu.main]
-parent="mn_ucp_configuration"
-identifier="ucp_integrate_dtr"
-weight=20
-+++
-<![end-metadata]-->
-
-
-# Integrate with Docker Trusted Registry
+---
+title: Integrate with Docker Trusted Registry
+description: Integrate UCP with Docker Trusted Registry
+keywords:
+- trusted, registry, integrate, UCP, DTR
+---
 
 Docker UCP integrates out of the box with Docker Trusted Registry (DTR). This
 allows you to use a UCP client bundle to push and pull images to DTR, without

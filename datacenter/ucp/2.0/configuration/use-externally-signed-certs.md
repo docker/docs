@@ -1,16 +1,10 @@
-<!--[metadata]>
-+++
-title = "Use externally-signed certificates"
-description = "Learn how to configure Docker Universal Control Plane to use your own certificates."
-keywords = ["Universal Control Plane, UCP, certificate, authentiation, tls"]
-[menu.main]
-parent="mn_ucp_configuration"
-identifier="ucp_configure_certs"
-weight=0
-+++
-<![end-metadata]-->
-
-# Use externally-signed certificates
+---
+title: Use externally-signed certificates
+description: Learn how to configure Docker Universal Control Plane to use your own
+  certificates.
+keywords:
+- Universal Control Plane, UCP, certificate, authentiation, tls
+---
 
 By default the UCP web UI is exposed using HTTPS, to ensure all
 communications between clients and the cluster are encrypted. Since UCP

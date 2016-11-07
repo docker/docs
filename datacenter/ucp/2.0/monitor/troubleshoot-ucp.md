@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title ="Troubleshoot your cluster"
-keywords= ["docker, ucp, troubleshoot"]
-description="Learn how to troubleshoot your Docker Universal Control Plane cluster."
-[menu.main]
-parent="mn_monitor_ucp"
-identifier="ucp_troubleshoot_cluster"
-weight=10
-+++
-<![end-metadata]-->
-
-# Troubleshoot your cluster
+---
+title: Troubleshoot your cluster
+description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
+keywords:
+- docker, ucp, troubleshoot
+---
 
 If you detect problems in your UCP cluster, you can start your troubleshooting
 session by checking the logs of the

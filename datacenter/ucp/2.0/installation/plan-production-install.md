@@ -1,17 +1,10 @@
-<!--[metadata]>
-+++
-aliases = ["/ucp/plan-production-install/"]
-title = "Plan a production installation"
-description = "Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production."
-keywords = ["docker, ucp, install, checklist"]
-[menu.main]
-parent="mn_ucp_installation"
-identifier="ucp_plan_production_install"
-weight=10
-+++
-<![end-metadata]-->
-
-# Plan a production installation
+---
+title: Plan a production installation
+description: Learn about the Docker Universal Control Plane architecture, and the
+  requirements to install it on production.
+keywords:
+- docker, ucp, install, checklist
+---
 
 Docker Universal Control Plane can be installed on-premises, or
 on a virtual private cloud.

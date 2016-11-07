@@ -1,17 +1,9 @@
-<!--[metadata]>
-+++
-title = "Route hostnames to services"
-description = "Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane."
-keywords = ["deploy, application"]
-[menu.main]
-parent="mn_ucp_configuration"
-identifier="ucp-route-hostnames"
-weight=50
-+++
-<![end-metadata]-->
-
-
-# Route hostnames to services
+---
+title: Enable container networking with UCP
+description: Docker Universal Control Plane
+keywords:
+- networking, kv, engine-discovery, ucp
+---
 
 UCP provides an HTTP routing mesh, that extends the networking capabilities
 of Docker Engine. Docker Engine provides load balancing and service discovery

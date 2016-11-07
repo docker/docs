@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "Uninstall UCP"
-description = "Learn how to uninstall a Docker Universal Control Plane cluster."
-keywords = ["docker, ucp, uninstall"]
-[menu.main]
-parent="mn_ucp_installation"
-identifier="ucp_uninstall"
-weight=70
-+++
-<![end-metadata]-->
-
-# Uninstall UCP
+---
+title: Uninstall UCP
+description: Learn how to uninstall a Docker Universal Control Plane cluster.
+keywords:
+- docker, ucp, uninstall
+---
 
 Docker UCP is designed to scale as your applications grow in size and usage.
 You can [add and remove nodes](scale-your-cluster.md) from the cluster, to make
