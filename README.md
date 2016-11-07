@@ -34,6 +34,14 @@ let you know so that you can rebase it.
 >**Note**: To contribute code to Docker projects, see the
 [Contribution guidelines](opensource/project/who-written-for).
 
+### Files not edited here
+
+Files and directories listed in the `path:` keys in
+[`.NOT_EDITED_HERE.yaml`](.NOT_EDITED_HERE.yaml) are maintained in other
+repositories and should not be edited in this one. Pull requests against these
+files will be rejected. Make your edits to the files in the repository and path
+in the `source:` key in the YAML file.
+
 ### Overall doc improvements
 
 Most commits will be made against the `master` branch. This include:
@@ -93,8 +101,17 @@ The following `vnext` branches currently exist:
   docs for upcoming features in the [docker/kitematic](https://github.com/docker/kitematic/)
   project
 
+## Per-PR staging on Github
 
-## Staging
+For every PR against `master` and all the long-lived branches, a staged version
+of the site is built using Netlify. If the site builds, you will see
+**deploy/netlify — Deploy preview ready**. Otherwise, you will see an error.
+Click **Details** to review the staged site or the errors that prevented it from
+building. Review the staged site and amend your commit if necessary. Reviewers
+will also check the staged site before merging the PR, to protect the integrity
+of [docs.docker.com](http://docs.docker.com/).
+
+## Staging locally
 
 You have three options:
 
