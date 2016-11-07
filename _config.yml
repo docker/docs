@@ -19,7 +19,7 @@ gems:
 webrick:
   headers:
     Cache-Control: 600
-    
+
 defaults:
   -
     scope:
@@ -27,4 +27,3 @@ defaults:
       type: "pages"
     values:
       layout: docs
-      archiveserver: "http://54.71.194.30"
