@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "Architecture"
-description = "Learn about the architecture of Docker Universal Control Plane."
-keywords = ["docker, ucp, architecture"]
-[menu.main]
-parent="mn_ucp"
-identifier="ucp_architecture"
-weight=20
-+++
-<![end-metadata]-->
-
-# UCP architecture
+---
+title: UCP architecture
+description: Learn about the architecture of Docker Universal Control Plane.
+keywords:
+- docker, ucp, architecture
+---
 
 Universal Control Plane is a containerized application that runs on the
 Commercially Supported (CS) Docker Engine. It allows you to manage from a

@@ -1,16 +1,10 @@
-<!--[metadata]>
-+++
-title = "Create and manage users"
-description = "Learn how to create and manage users in your Docker Universal Control Plane cluster."
-keywords = ["authorize, authentication, users, teams, UCP, Docker"]
-[menu.main]
-parent="mn_ucp_user_management"
-identifier="ucp_create_manage_users"
-weight=10
-+++
-<![end-metadata]-->
-
-# Create and manage users
+---
+title: Create and manage users
+description: Learn how to create and manage users in your Docker Universal Control
+  Plane cluster.
+keywords:
+- authorize, authentication, users, teams, UCP, Docker
+---
 
 When using the UCP built-in authentication, you need to create users and
 assign them with a default permission level so that they can access the

@@ -1,15 +1,9 @@
-<!--[metadata]>
-+++
-title ="Universal Control Plane"
-keywords= ["universal, control, plane, ucp"]
-description="Docker Universal Control Plane"
-[menu.main]
-identifier="mn_ucp"
-weight=-64
-+++
-<![end-metadata]-->
-
-# Docker Universal Control Plane
+---
+title: Docker Universal Control Plane
+description: Docker Universal Control Plane
+keywords:
+- universal, control, plane, ucp
+---
 
 Docker Universal Control Plane (UCP) is the enterprise-grade cluster management
 solution from Docker. You install it behind your firewall, and it helps you

@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "License UCP"
-description = "Learn how to license your Docker Universal Control Plane installation."
-keywords = ["Universal Control Plane, UCP, install, license"]
-[menu.main]
-parent="mn_ucp_installation"
-identifier="ucp_license"
-weight=40
-+++
-<![end-metadata]-->
-
-# License UCP
+---
+title: License UCP
+description: Learn how to license your Docker Universal Control Plane installation.
+keywords:
+- Universal Control Plane, UCP, install, license
+---
 
 After installing Docker Universal Control Plane, you need to license your
 installation. Here's how to do it.

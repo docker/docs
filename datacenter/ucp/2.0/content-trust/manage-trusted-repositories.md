@@ -1,17 +1,9 @@
-<!--[metadata]>
-+++
-title = "Manage trusted repositories"
-description = "Learn how to use the Notary CLI client to manage trusted repositories"
-keywords = ["UCP, trust, notary, registry, security"]
-[menu.main]
-parent="ucp-menu-content-trust"
-identifier="ucp-manage-trusted-repository"
-weight=10
-+++
-<![end-metadata]-->
-
-
-# Manage trusted repositories
+---
+title: Manage trusted repositories
+description: Learn how to use the Notary CLI client to manage trusted repositories
+keywords:
+- UCP, trust, notary, registry, security
+---
 
 Once you install the Notary CLI client, you can use it to manage your signing
 keys, authorize other team members to sign images, and rotate the keys if

@@ -1,16 +1,10 @@
-<!--[metadata]>
-+++
-title = "Deploy an app from the UI"
-description = "Learn how to deploy containerized applications on a cluster, with Docker Universal Control Plane."
-keywords = ["ucp, deploy, application"]
-[menu.main]
-parent="mn_ucp_applications"
-identifier="ucp_deploy_ui"
-weight=0
-+++
-<![end-metadata]-->
-
-# Deploy an app from the UI
+---
+title: Deploy an app from the UI
+description: Learn how to deploy containerized applications on a cluster, with Docker
+  Universal Control Plane.
+keywords:
+- ucp, deploy, application
+---
 
 With Docker Universal Control Plane you can deploy applications from the
 UI. You can define your application on the UI, or import an existing

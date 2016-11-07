@@ -1,15 +1,12 @@
-<!--[metadata]>
-+++
-alias=["/ucp/release_notes/"]
-title ="Release Notes"
-description="Release notes for Docker Universal Control Plane. Learn more about the changes introduced in the latest versions."
-keywords = ["Docker, UCP", "Release notes", "Versions"]
-[menu.main]
-identifier="ucp-release-notes"
-parent="mn_ucp"
-weight=100
-+++
-<![end-metadata]-->
+---
+title: UCP release notes
+description: Release notes for Docker Universal Control Plane. Learn more about the
+  changes introduced in the latest versions.
+keywords:
+- Docker, UCP
+- Release notes
+- Versions
+---
 
 # UCP Release Notes
 

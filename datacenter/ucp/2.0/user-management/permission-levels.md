@@ -1,16 +1,10 @@
-<!--[metadata]>
-+++
-title = "Permission levels"
-description = "Learn about the permission levels available in Docker Universal Control Plane."
-keywords = ["authorization, authentication, users, teams, UCP"]
-[menu.main]
-parent="mn_ucp_user_management"
-identifier="ucp_permission_levels"
-weight=30
-+++
-<![end-metadata]-->
-
-# Permission levels
+---
+title: Permission levels
+description: Learn about the permission levels available in Docker Universal Control
+  Plane.
+keywords:
+- authorization, authentication, users, teams, UCP
+---
 
 Docker Universal Control Plane has two types of users: administrators and
 regular users. Administrators can make changes to the UCP cluster, while

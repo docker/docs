@@ -1,16 +1,10 @@
-<!--[metadata]>
-+++
-title = "Create and manage teams"
-description = "Learn how to create and manage user permissions, using teams in your Docker Universal Control Plane cluster."
-keywords = ["authorize, authentication, users, teams, UCP, Docker"]
-[menu.main]
-parent="mn_ucp_user_management"
-identifier="ucp_create_manage_teams"
-weight=20
-+++
-<![end-metadata]-->
-
-# Create and manage teams
+---
+title: Create and manage teams
+description: Learn how to create and manage user permissions, using teams in your
+  Docker Universal Control Plane cluster.
+keywords:
+- authorize, authentication, users, teams, UCP, Docker
+---
 
 You can extend the user's default permissions by granting them fine-grain
 permissions over resources. You do this by adding the user to a team.

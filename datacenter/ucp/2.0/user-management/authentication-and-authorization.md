@@ -1,18 +1,9 @@
-<!--[metadata]>
-+++
-aliases = [ "/ucp/manage/monitor-manage-users/",
-            "/ucp/user-management/manage-users/"]
-title = "Authentication and authorization"
-description = "Learn how to manage permissions in Docker Universal Control Plane."
-keywords = ["authorization, authentication, users, teams, UCP"]
-[menu.main]
-parent="mn_ucp_user_management"
-identifier="ucp_manage_users"
-weight=0
-+++
-<![end-metadata]-->
-
-# Authentication and authorization
+---
+title: Authentication and authorization
+description: Learn how to manage permissions in Docker Universal Control Plane.
+keywords:
+- authorization, authentication, users, teams, UCP
+---
 
 With Docker Universal Control Plane you get to control who can create and edit
 resources like services, images, networks, and volumes in your cluster.

@@ -1,17 +1,10 @@
-<!--[metadata]>
-+++
-aliases = [ "/docker-trusted-registry/configure/config-auth/"]
-title ="Integrate with LDAP"
-keywords= ["LDAP, authentication, user management"]
-description="Learn how to integrate UCP with an LDAP service, so that you can manage users from a single place."
-[menu.main]
-parent="mn_ucp_configuration"
-identifier="ucp_ldap_integration"
-weight=30
-+++
-<![end-metadata]-->
-
-# Integrate with LDAP
+---
+title: Integrate with LDAP
+description: Learn how to integrate UCP with an LDAP service, so that you can manage
+  users from a single place.
+keywords:
+- LDAP, authentication, user management
+---
 
 Docker UCP integrates with LDAP services, so that you can manage users from a
 single place.

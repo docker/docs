@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "Run only the images you trust"
-description = "Configure a Docker Universal Plane cluster to only allow running applications that use images you trust."
-keywords = ["UCP, trust, notary, registry, security"]
-[menu.main]
-parent="ucp-menu-content-trust"
-identifier="ucp-run-trusted-images"
-weight=0
-+++
-<![end-metadata]-->
-
-# Run only the images you trust
+---
+title: Run only the images you trust
+description: Configure a Docker Universal Plane cluster to only allow running applications that use images you trust.
+keywords:
+- docker, ucp, backup, restore, recovery
+---
 
 With Docker Universal Control Plane you can enforce applications to only use
 Docker images signed by UCP users you trust. When a user tries to deploy an

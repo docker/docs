@@ -1,17 +1,9 @@
-<!--[metadata]>
-+++
-aliases = ["/ucp/kv_store/"]
-title ="Troubleshoot cluster configurations"
-keywords= ["ectd, key, value, store, ucp"]
-description="Learn how to troubleshoot your Docker Universal Control Plane cluster."
-[menu.main]
-parent="mn_monitor_ucp"
-identifier="ucp_troubleshoot_configurations"
-weight=20
-+++
-<![end-metadata]-->
-
-# Troubleshoot cluster configurations
+---
+title: Troubleshoot cluster configurations
+description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
+keywords:
+- ectd, key, value, store, ucp
+---
 
 Docker UCP persists configuration data on an [etcd](https://coreos.com/etcd/)
 key-value store that is replicated on all controller nodes of

@@ -1,16 +1,10 @@
-<!--[metadata]>
-+++
-title = "Install offline"
-description = "Learn how to install Docker Universal Control Plane. on a machine with no internet access."
-keywords = ["docker, ucp, install, offline"]
-[menu.main]
-parent="mn_ucp_installation"
-identifier="ucp_install_offline"
-weight=30
-+++
-<![end-metadata]-->
-
-# Install UCP offline
+---
+title: Install UCP offline
+description: Learn how to install Docker Universal Control Plane. on a machine with
+  no internet access.
+keywords:
+- docker, ucp, install, offline
+---
 
 The procedure to install Docker Universal Control Plane on a host is the same,
 whether that host has access to the internet or not.

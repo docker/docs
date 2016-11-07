@@ -1,17 +1,10 @@
-<!--[metadata]>
-+++
-aliases = [ "/ucp/manage/monitor-ucp/"]
-title = "Monitor your cluster"
-description = "Monitor your Docker Universal Control Plane installation, and learn how to troubleshoot it."
-keywords = ["Docker, UCP, troubleshoot"]
-[menu.main]
-parent="mn_monitor_ucp"
-identifier="ucp_monitor_cluster"
-weight=0
-+++
-<![end-metadata]-->
-
-# Monitor your cluster
+---
+title: Monitor your cluster
+description: Monitor your Docker Universal Control Plane installation, and learn how
+  to troubleshoot it.
+keywords:
+- Docker, UCP, troubleshoot
+---
 
 This article gives you an overview of how to monitor your Docker UCP
 cluster. Here you'll also find the information you need to troubleshoot

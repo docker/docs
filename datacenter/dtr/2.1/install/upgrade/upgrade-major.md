@@ -108,7 +108,9 @@ To transfer the images:
 2. Get the filesystem volume path DTR 2.0 stores images:
 
     ```bash
+    {% raw %}
     $ docker volume inspect --format '{{ .Mountpoint }}' $(docker volume ls -q | grep dtr-registry)
+    {% endraw %}
     ```
 
     The path returned will be similar to: `/var/lib/docker/volumes/dtr-registry-fa61225dc006/_data`
