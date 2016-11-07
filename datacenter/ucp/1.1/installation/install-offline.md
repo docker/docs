@@ -47,11 +47,13 @@ all the images. Then you copy that package to the host where you’ll install UC
     ```none
     $ docker load < docker-datacenter.tar.gz
     ```
+5.  Check the version of your images by using `docker images` to view the tag associated with your image, usually referenced as `image:tag` in the `docker run` command.
 
-5.  Install Docker UCP.
+6.  Install Docker UCP.
 
     Now that the offline host has all the images needed to install UCP,
-    you can [install Docker UCP that host](install-production.md).
+    you can [install Docker UCP that host](install-production.md). 
+    Note: When installing, make sure to include the tag to ensure you use your local image when deploying from the offline package. As an example, you would install UCP version 1.1.4 by specifying the image:tag as `docker/ucp:1.1.4` when running the install command.
 
 
 ## Where to go next
