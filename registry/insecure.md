@@ -26,7 +26,15 @@ environment.
 
     Depending on your operating system, your Engine daemon start options.
 
-2. Edit (or add) the `DOCKER_OPTS` line and add the `--insecure-registry` flag.
+2. **If using docker version 1.12 or greater**
+
+    Create or modify /etc/docker/daemon.json on the client machine and add:
+     
+    `{ "insecure-registries":["myregistry.example.com:5000"] }`
+
+    **If using less than version 1.12**
+    
+    Edit (or add) the `DOCKER_OPTS` line and add the `--insecure-registry` flag.
 
     This flag takes the URL of your registry, for example.
 
