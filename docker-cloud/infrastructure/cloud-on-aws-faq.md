@@ -1,9 +1,8 @@
 ---
+description: Docker Cloud on AWS
+keywords: Cloud, AWS, faq
 redirect_from:
 - /docker-cloud/faq/cloud-on-aws-faq/
-description: Docker Cloud on AWS
-keywords:
-- Cloud, AWS, faq
 title: Use Docker Cloud on AWS
 ---
 

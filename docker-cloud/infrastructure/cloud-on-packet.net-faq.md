@@ -1,9 +1,8 @@
 ---
+description: Docker Cloud and Packet.net
+keywords: Packet.net, Cloud, drives
 redirect_from:
 - /docker-cloud/faq/cloud-on-packet.net-faq/
-description: Docker Cloud and Packet.net
-keywords:
-- Packet.net, Cloud, drives
 title: Use Docker Cloud and Packet.net
 ---
 

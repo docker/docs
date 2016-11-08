@@ -1,9 +1,8 @@
 ---
+description: Automatically restart a container in Docker Cloud
+keywords: container, restart, automated
 redirect_from:
 - /docker-cloud/feature-reference/autorestart/
-description: Automatically restart a container in Docker Cloud
-keywords:
-- container, restart, automated
 title: Restart a container automatically
 ---
 

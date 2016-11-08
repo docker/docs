@@ -1,9 +1,8 @@
 ---
+description: API Roles
+keywords: API, Services, roles
 redirect_from:
 - /docker-cloud/feature-reference/api-roles/
-description: API Roles
-keywords:
-- API, Services, roles
 title: Service API roles
 ---
 

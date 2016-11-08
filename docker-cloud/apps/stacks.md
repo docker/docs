@@ -1,9 +1,8 @@
 ---
+description: Manage service stacks
+keywords: service, stack, yaml
 redirect_from:
 - /docker-cloud/feature-reference/stacks/
-description: Manage service stacks
-keywords:
-- service, stack, yaml
 title: Manage service stacks
 ---
 

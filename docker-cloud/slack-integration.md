@@ -1,9 +1,8 @@
 ---
+description: Integrate with Slack
+keywords: Slack, integrate, notifications
 redirect_from:
 - /docker-cloud/tutorials/slack-integration/
-description: Integrate with Slack
-keywords:
-- Slack, integrate, notifications
 title: Set up Docker Cloud notifications in Slack
 ---
 

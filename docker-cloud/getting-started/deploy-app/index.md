@@ -1,10 +1,9 @@
 ---
+description: Go or Python and Docker Cloud
+keywords: Python, Go, Docker, Cloud, application
 redirect_from:
 - /docker-cloud/getting-started/python/
 - /docker-cloud/getting-started/golang/
-description: Go or Python and Docker Cloud
-keywords:
-- Python, Go, Docker, Cloud, application
 title: Deploy an application
 ---
 

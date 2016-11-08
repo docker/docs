@@ -1,9 +1,8 @@
 ---
+description: Redeploy running services
+keywords: redeploy, running, services
 redirect_from:
 - /docker-cloud/feature-reference/service-redeploy/
-description: Redeploy running services
-keywords:
-- redeploy, running, services
 title: Redeploy a running service
 ---
 

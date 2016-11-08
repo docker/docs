@@ -1,9 +1,8 @@
 ---
+description: Autodestroy
+keywords: Autodestroy, service, terminate, container
 redirect_from:
 - /docker-cloud/feature-reference/auto-destroy/
-description: Autodestroy
-keywords:
-- Autodestroy, service, terminate, container
 title: Destroy containers automatically
 ---
 
