@@ -46,9 +46,9 @@ of the UCP swarm. So next, we'll then install DTR on that second node.
 Once you've installed UCP and DTR you'll [work through a tutorial](install-sandbox-2.md) to deploy a
 container through UCP, and explore the user interface.
 
->**Note**: The command examples in this page were tested for a Mac OS X
+<!-- >**Note**: The command examples in this page were tested for a Mac OS X
 environment. If you are in another, you may need to change the commands to use
-the correct ones for you environment.
+the correct ones for you environment. -->
 
 >**Note**: The command examples in this page were tested for a macOS environment.
 If you are in another, you may need to adjust to use analogous commands for your environment.
@@ -120,15 +120,15 @@ Set up the nodes for your evaluation:
 ## About the ucp tool
 
 To install UCP, you'll use the Docker CLI to pull and run the `docker/ucp`
-image, which contains a bootstrapper tool, which is designed to make UCP easier
+image, which contains a bootstrapper tool designed to make UCP easier
 to install than many enterprise-grade applications. The `ucp` tool runs
 `docker run` commands to `install` a UCP controller or `join` a node to a UCP
 controller.
 
-The general format of these commands are a `docker run --rm -it docker/ucp` with
-one or more subcommands, and you'll find them later in this document. For the
-tutorial purposes, we use the `-i` options for "interactive" install mode, but
-you can run them unattended in production.
+The general format of these commands is `docker run --rm -it docker/ucp` with
+one or more subcommands, and you'll find them later in this document. For this
+tutorial, we use the `-i` option for "interactive" install mode, but
+you can run these commands without `-i` (unattended) in production.
 
 Regardless of how you use the `docker/ucp` tool, the default install supplies
 default options for both data volumes and the certificate authority (CA). In a
