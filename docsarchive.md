@@ -23,6 +23,6 @@ The docs for `v1.4` will then be viewable at `http://localhost:4000`.
 
 ### {{ item[0] }}
 
-Docs for {{ item[0] }} are accessible at [/{{ item[0] }}](/{{ item[0] }}).
+Docs for {{ item[0] }} are accessible at [/{{ item[0] }}/](/{{ item[0] }}/).
 
 {% endfor %}
