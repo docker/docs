@@ -38,7 +38,7 @@ which the release page specifies, in your terminal.
 
 5. Apply executable permissions to the binary:
 
-        $ chmod +x /usr/local/bin/docker-compose
+        chmod +x /usr/local/bin/docker-compose
 
 6.  Optionally, install [command completion](completion.md) for the
 `bash` and `zsh` shell.
@@ -60,7 +60,7 @@ have python system packages that conflict with docker-compose dependencies. See
 the [virtualenv tutorial](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
 to get started.
 
-    $ pip install docker-compose
+    pip install docker-compose
 
 > **Note:** pip version 6.0 or greater is required
 
@@ -92,24 +92,22 @@ to run so that you don't end up with two sets of them. If you want to keep using
 your existing containers (for example, because they have data volumes you want
 to preserve) you can use compose 1.5.x to migrate them with the following command:
 
-    $ docker-compose migrate-to-labels
+    docker-compose migrate-to-labels
 
 Alternatively, if you're not worried about keeping them, you can remove them.
 Compose will just create new ones.
 
-    $ docker rm -f -v myapp_web_1 myapp_db_1 ...
-
+    docker rm -f -v myapp_web_1 myapp_db_1 ...
 
 ## Uninstallation
 
 To uninstall Docker Compose if you installed using `curl`:
 
-    $ rm /usr/local/bin/docker-compose
-
+    rm /usr/local/bin/docker-compose
 
 To uninstall Docker Compose if you installed using `pip`:
 
-    $ pip uninstall docker-compose
+    pip uninstall docker-compose
 
 >**Note**: If you get a "Permission denied" error using either of the above
 >methods, you probably do not have the proper permissions to remove

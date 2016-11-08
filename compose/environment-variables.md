@@ -50,11 +50,11 @@ You can pass multiple environment variables from an external file through to a s
 
 Just like with `docker run -e`, you can set environment variables on a one-off container with `docker-compose run -e`:
 
-    $ docker-compose run -e DEBUG=1 web python console.py
+    docker-compose run -e DEBUG=1 web python console.py
 
 You can also pass a variable through from the shell by not giving it a value:
 
-    $ docker-compose run -e DEBUG web python console.py
+    docker-compose run -e DEBUG web python console.py
 
 The value of the `DEBUG` variable in the container will be taken from the value for the same variable in the shell in which Compose is run.
 
@@ -83,7 +83,6 @@ When you run `docker-compose up`, the `web` service defined above uses the image
 Values in the shell take precedence over those specified in the `.env` file. If you set `TAG` to a different value in your shell, the substitution in `image` uses that instead:
 
     $ export TAG=v2.0
-
     $ docker-compose config
     version: '2.0'
     services:
@@ -93,7 +92,6 @@ Values in the shell take precedence over those specified in the `.env` file. If 
 ## Configuring Compose using environment variables
 
 Several environment variables are available for you to configure the Docker Compose command-line behaviour. They begin with `COMPOSE_` or `DOCKER_`, and are documented in [CLI Environment Variables](reference/envvars.md).
-
 
 ## Environment variables created by links
 

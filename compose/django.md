@@ -89,7 +89,7 @@ In this step, you create a Django started project by building the image from the
 
 2. Create the Django project using the `docker-compose` command.
 
-        $ docker-compose run web django-admin.py startproject composeexample .
+        docker-compose run web django-admin.py startproject composeexample .
 
     This instructs Compose to run `django-admin.py startproject composeeexample`
     in a container, using the `web` service's image and configuration. Because
