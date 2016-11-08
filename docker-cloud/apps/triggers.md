@@ -1,9 +1,8 @@
 ---
+description: Use triggers
+keywords: API, triggers, endpoints
 redirect_from:
 - /docker-cloud/feature-reference/triggers/
-description: Use triggers
-keywords:
-- API, triggers, endpoints
 title: Use triggers
 ---
 

@@ -1,9 +1,8 @@
 ---
+description: Known Docker Engine issues in Docker Cloud
+keywords: Engine, issues, troubleshoot
 redirect_from:
 - /docker-cloud/faq/docker-errors-faq/
-description: Known Docker Engine issues in Docker Cloud
-keywords:
-- Engine, issues, troubleshoot
 title: Known issues in Docker Cloud
 ---
 

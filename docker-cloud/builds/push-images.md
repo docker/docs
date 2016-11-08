@@ -1,10 +1,9 @@
 ---
+description: Push images to Docker Cloud
+keywords: images, private, registry
 redirect_from:
 - /docker-cloud/getting-started/intermediate/pushing-images-to-dockercloud/
 - /docker-cloud/tutorials/pushing-images-to-dockercloud/
-description: Push images to Docker Cloud
-keywords:
-- images, private, registry
 title: Push images to Docker Cloud
 ---
 

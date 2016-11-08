@@ -1,7 +1,6 @@
 ---
 description: Manage your Docker Cloud Applications
-keywords:
-- applications, reference, Cloud
+keywords: applications, reference, Cloud
 title: Applications in Docker Cloud
 ---
 

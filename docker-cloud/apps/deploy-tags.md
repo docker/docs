@@ -1,9 +1,8 @@
 ---
+description: Deployment tags
+keywords: Deployment, tags, services
 redirect_from:
 - /docker-cloud/feature-reference/deploy-tags/
-description: Deployment tags
-keywords:
-- Deployment, tags, services
 title: Deployment tags
 ---
 

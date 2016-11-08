@@ -1,9 +1,8 @@
 ---
+description: Automated tests
+keywords: Automated, testing, repository
 redirect_from:
 - /docker-cloud/feature-reference/automated-testing/
-description: Automated tests
-keywords:
-- Automated, testing, repository
 title: Automated repository tests
 ---
 

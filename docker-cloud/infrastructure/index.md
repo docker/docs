@@ -1,7 +1,6 @@
 ---
 description: Manage network in Docker Cloud
-keywords:
-- nodes, hosts, infrastructure, Cloud
+keywords: nodes, hosts, infrastructure, Cloud
 title: Docker Cloud infrastructure overview
 ---
 

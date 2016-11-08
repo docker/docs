@@ -1,7 +1,6 @@
 ---
 description: Docker Cloud
-keywords:
-- Docker, cloud, release, notes
+keywords: Docker, cloud, release, notes
 title: Docker Cloud release notes
 ---
 

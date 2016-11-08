@@ -1,9 +1,8 @@
 ---
+description: Link to your source code repository
+keywords: sourcecode, github, bitbucket, Cloud
 redirect_from:
 - /docker-cloud/tutorials/link-source/
-description: Link to your source code repository
-keywords:
-- sourcecode, github, bitbucket, Cloud
 title: Link Docker Cloud to a source code provider
 ---
 

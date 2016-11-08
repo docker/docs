@@ -1,7 +1,6 @@
 ---
 description: Using your DockerID to log in to Docker Cloud
-keywords:
-- one, two, three
+keywords: one, two, three
 title: Docker ID and Docker Cloud settings
 ---
 

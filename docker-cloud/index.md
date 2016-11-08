@@ -1,7 +1,6 @@
 ---
 description: Docker Cloud
-keywords:
-- Docker, cloud
+keywords: Docker, cloud
 notoc: true
 title: Welcome to the Docker Cloud docs!
 ---

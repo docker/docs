@@ -1,10 +1,9 @@
 ---
+description: Link your Packet account
+keywords: Packet, link, Cloud
 redirect_from:
 - /docker-cloud/getting-started/beginner/link-packet/
 - /docker-cloud/getting-started/link-packet/
-description: Link your Packet account
-keywords:
-- Packet, link, Cloud
 title: Link a Packet account
 ---
 
