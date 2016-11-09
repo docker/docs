@@ -1,14 +1,9 @@
 ---
-title: Upgrade from 2.0.0
-description: Learn how to upgrade your Docker Trusted Registry to a new minor version or patch release.
+title: Upgrade
+description: Learn how to upgrade your Docker Trusted Registry
 keywords:
 - docker, dtr, upgrade, install
 ---
-
-<!-- beta: remove after this goes to GA -->
-
-> You can't upgrade from one beta version to another. To test the latest
-> beta version, start by uninstalling the previous version.
 
 The first step in upgrading to a new minor version or patch release of DTR 2.0,
 is ensuring you're running DTR 2.0. If that's not the case, start by upgrading
