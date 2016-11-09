@@ -18,6 +18,71 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 
 ## Stable Release Notes
 
+### Docker for Mac 1.12.3, 2016-11-09 (stable)
+
+**Upgrades**
+
+- Docker 1.12.3
+- Linux Kernel 4.4.27
+- Notary 0.4.2
+- Docker Machine 0.8.2
+- Docker Compose 1.8.1
+- Kernel vsock driver v7
+- aufs 20160912
+
+**Bug fixes and minor changes**
+
+**General**
+
+- Fixed an issue where the whale animation during setting change was inconsistent
+
+- Fixed an issue where some windows stayed hidden behind another app
+
+- Fixed an issue where the Docker status would continue to be yellow/animated after the VM had started correctly
+
+- Fixed an issue where Docker for Mac was incorrectly reported as updated
+
+- Channel is now displayed in About box
+
+- Crash reports are sent over Bugsnag rather than HockeyApp
+
+- Fixed an issue where some windows did not claim focus correctly
+
+- Added UI when switching channel to prevent user losing containers and settings
+
+- Check disk capacity before toolbox import
+
+- Import certificates in `etc/ssl/certs/ca-certificates.crt`
+
+- disk: make the "flush" behaviour configurable for database-like workloads. This works around a performance regression in 1.12.1.
+
+**Networking**
+
+- Proxy: Fixed application of system or custom proxy settings over container restart
+
+- DNS: reduce the number of UDP sockets consumed on the host
+
+- VPNkit: improve the connection-limiting code to avoid running out of sockets on the host
+
+- UDP: handle diagrams bigger than 2035, up to the configured macOS kernel limit
+
+- UDP: make the forwarding more robust; drop packets and continue rather than stopping
+
+**File sharing**
+
+- osxfs: Fixed the prohibition of chown on read-only or mode 0 files, (fixes
+  [https://github.com/docker/for-mac/issues/117](https://github.com/docker/for-mac/issues/117),
+  [https://github.com/docker/for-mac/issues/263](https://github.com/docker/for-mac/issues/263),
+  [https://github.com/docker/for-mac/issues/633](https://github.com/docker/for-mac/issues/633))
+
+- osxfs: Fixed race causing some reads to run forever
+
+- osxfs: Fixed a simultaneous volume mount race which can result in a crash
+
+**Moby**
+
+- Increase default ulimit for memlock (fixes [https://github.com/docker/for-mac/issues/801](https://github.com/docker/for-mac/issues/801))
+
 ### Docker for Mac 1.12.1, 2016-09-16 (stable)
 
 **New**
@@ -66,7 +131,7 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 
 * Use Mac System Configuration database to detect DNS
 
-**Filesharing (osxfs)**
+**File sharing (osxfs)**
 
 * Fixed thread leak
 
@@ -918,13 +983,13 @@ work yet.
 **New Features and Upgrades**
 
 - GUI
-  - Add VPN mode/`hostnet` to Preferences
-  - Add disable Time Machine backups of VM disk image to Preferences
+  - Added VPN mode/`hostnet` to Preferences
+  - Added disable Time Machine backups of VM disk image to Preferences
 
 
 - Added `pinata` configuration tool for experimental Preferences
 
-- File System: Add guest-to-guest FIFO and socket file support
+- File System: Added guest-to-guest FIFO and socket file support
 
 - Upgraded Notary to version 0.2
 
@@ -956,7 +1021,7 @@ work yet.
   - Added MixPanel support
 
 
-- Add HockeyApp crash reporting
+- Added HockeyApp crash reporting
 - Improve signal handling on task manager
 - Use ISO timestamps with microsecond precision for logging
 - Clean up logging format
@@ -968,7 +1033,7 @@ work yet.
 
 
 - Hypervisor
-  - Add PID file
+  - Added PID file
   - Networking reliability improvements
 
 
