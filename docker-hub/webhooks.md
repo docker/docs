@@ -1,7 +1,6 @@
 ---
 description: Docker Hub Automated Builds
-keywords:
-- Docker, webhookds, hub, builds
+keywords: Docker, webhookds, hub, builds
 title: Webhooks for automated builds
 ---
 
