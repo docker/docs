@@ -10,7 +10,6 @@ title: Install Docker on Ubuntu
 Docker is supported on these Ubuntu operating systems:
 
 - Ubuntu Xenial 16.04 (LTS)
-- Ubuntu Wily 15.10
 - Ubuntu Trusty 14.04 (LTS)
 - Ubuntu Precise 12.04 (LTS)
 
@@ -20,8 +19,8 @@ release of Docker. If you are required to install using Ubuntu-managed packages,
 consult the Ubuntu documentation. Some files and commands may be different if
 you use Ubuntu-managed packages.
 
->**Note**: Ubuntu Utopic 14.10 and 15.04 exist in Docker's `APT` repository but
-are no longer officially supported.
+>**Note**: Ubuntu Utopic 14.10, 15.10, and 15.04 exist in Docker's `APT`
+repository but are no longer officially supported.
 
 ## Prerequisites
 
@@ -127,10 +126,12 @@ From now on when you run `apt-get upgrade`, `APT` pulls from the new repository.
 
 ### Prerequisites by Ubuntu Version
 
-#### Ubuntu Xenial 16.04 (LTS), Wily 15.10, Trusty 14.04 (LTS)
+- Ubuntu Xenial 16.04 (LTS)
+- Ubuntu Trusty 14.04 (LTS)
 
-For Ubuntu Trusty, Wily, and Xenial, install the `linux-image-extra-*` kernel
-packages, which allows you use the `aufs` storage driver.
+For Ubuntu Trusty and Xenial, it's recommended to install the
+`linux-image-extra-*` kernel packages. The `linux-image-extra-*` packages
+allows you use the `aufs` storage driver.
 
 To install the `linux-image-extra-*` packages:
 
