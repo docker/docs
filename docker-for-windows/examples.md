@@ -1,7 +1,6 @@
 ---
 description: Docker for Mac and Docker for Windows Tutorials
-keywords:
-- mac, windows, examples, Compose
+keywords: mac, windows, examples, Compose
 title: Example applications
 ---
 
