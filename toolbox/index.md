@@ -1,7 +1,6 @@
 ---
 description: Documentation that provides an overview of Docker Toolbox and installation instructions
-keywords:
-- docker, documentation, about, technology, docker toolbox, gui
+keywords: docker, documentation, about, technology, docker toolbox, gui
 title: Docker Toolbox
 ---
 

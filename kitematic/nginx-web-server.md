@@ -1,8 +1,7 @@
 ---
 description: Tutorial demonstrating the setup of an Nginx web server using Docker and Kitematic
-keywords:
-- docker, documentation, about, technology, kitematic, gui, nginx,  tutorial
-title: "Kitematic tutorial: Serve a static website with NGINX"
+keywords: docker, documentation, about, technology, kitematic, gui, nginx, tutorial
+title: 'Kitematic tutorial: Serve a static website with NGINX'
 ---
 
 In this tutorial, you will:

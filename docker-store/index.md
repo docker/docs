@@ -1,7 +1,6 @@
 ---
 description: Docker Store overview
-keywords:
-- Docker, docker, store, purchase images
+keywords: Docker, docker, store, purchase images
 title: Docker Store overview
 ---
 
