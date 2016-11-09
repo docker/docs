@@ -1,29 +1,27 @@
-+++
-title = "restart"
-description = "Restart Docker Universal Control Plane containers."
-keywords= ["install, ucp, restart"]
-[menu.main]
-parent = "ucp_ref"
-identifier = "ucp_ref_restart"
-+++
+---
+title: restart
+description: Start or restart UCP components running on this node
+keywords:
+- docker, dtr, cli, restart
+---
 
-# docker/ucp restart
-
-Start or restart UCP components on this engine.
+Start or restart UCP components running on this node
 
 ## Usage
 
 ```bash
-docker run --rm -it \
-           --name ucp \
-           -v /var/run/docker.sock:/var/run/docker.sock \
-           docker/ucp \
-           restart [command options]
+
+docker run -it --rm \
+    --name ucp \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp \
+    restart [command options]
+
 ```
 
 ## Options
 
-```nohighlight
---debug, -D  Enable debug mode
---jsonlog    Produce json formatted output for easier parsing
-```
+| Option                    | Description                |
+|:--------------------------|:---------------------------|
+|`--debug, D`|Enable debug mode|
+|`--jsonlog`|Produce json formatted output for easier parsing|

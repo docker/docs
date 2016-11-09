@@ -1,26 +1,25 @@
-+++
-title = "support"
-description = "Generate a support dump for this engine."
-keywords= ["docker, ucp, support, logs"]
-[menu.main]
-parent = "ucp_ref"
-identifier = "ucp_ref_support"
-+++
+---
+title: support
+description: Create a support dump for this UCP node
+keywords:
+- docker, dtr, cli, support
+---
 
-# docker/ucp support
-
-Generate a support dump for this engine.
+Create a support dump for this UCP node
 
 ## Usage
 
-```
+```bash
+
 docker run --rm \
-           --name ucp \
-           -v /var/run/docker.sock:/var/run/docker.sock \
-           docker/ucp \
-           support > docker-support.tgz
+    --name ucp \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp \
+    support [command options] > docker-support.tgz
+
 ```
 
 ## Description
 
-This utility will produce a support dump file on stdout for this local node.
+This command creates a support dump file for this node, and prints it to stdout.
+

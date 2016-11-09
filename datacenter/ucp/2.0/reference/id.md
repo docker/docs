@@ -1,29 +1,29 @@
-+++
-title = "id"
-description = "Dump out the ID of the UCP components running on this engine."
-keywords= ["docker, ucp, id"]
-[menu.main]
-parent = "ucp_ref"
-identifier = "ucp_ref_id"
-+++
+---
+title: id
+description: Print the ID of UCP running on this node
+keywords:
+- docker, dtr, cli, id
+---
 
-# docker/ucp id
-
-Dump out the ID of the UCP components running on this engine.
+Print the ID of UCP running on this node
 
 ## Usage
 
-```
-docker run --rm \
-           --name ucp \
-           -v /var/run/docker.sock:/var/run/docker.sock \
-           docker/ucp \
-           id
+```bash
+
+docker run -it --rm \
+    --name ucp \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp \
+    id [command options]
+
 ```
 
 ## Description
 
-This utility will display the ID of the local UCP components running
-on this node.  This ID matches what you see when you run `docker info`
-pointed to the UCP controller(s) and is required by various commands
-in this tool as confirmation.
+This command prints the ID of the UCP components running on this node. This ID
+matches what you see when running the 'docker info' command while using
+a client bundle.
+
+This ID is used by other commands as confirmation.
+

@@ -1,31 +1,26 @@
-+++
-title = "fingerprint"
-description = "Dump out TLS certificates."
-keywords= ["fingerprint, ucp"]
-[menu.main]
-keywords= ["tool, reference, ucp"]
+---
+title: fingerprint
+description: Print the TLS fingerprint for this UCP web server
+keywords:
+- docker, dtr, cli, fingerprint
+---
 
-parent = "ucp_ref"
-identifier="ucp_ref_fingerprint"
-+++
-
-# docker/ucp fingerprint
-
-Dump out the TLS fingerprint for the UCP controller running on this
-engine.
+Print the TLS fingerprint for this UCP web server
 
 ## Usage
 
-```
+```bash
+
 docker run --rm \
-           --name ucp \
-           -v /var/run/docker.sock:/var/run/docker.sock \
-           docker/ucp \
-           fingerprint
+    --name ucp \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp \
+    fingerprint [command options]
+
 ```
 
 ## Description
 
-This utility will display the certificate fingerprint of the UCP controller
-running on the local engine. This can be used when scripting 'join'
-operations for the `--fingerprint` flag.
+This command displays the fingerprint of the certificate used in the UCP web
+server running on this node.
+
