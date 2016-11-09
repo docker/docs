@@ -1,7 +1,6 @@
 ---
 description: Your Repositories on Docker Hub
-keywords:
-- Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs,  documentation
+keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation
 title: Repositories on Docker Hub
 ---
 
