@@ -28,7 +28,7 @@ To upgrade DTR you use the `upgrade` command.
     Having a UCP client bundle allows you to run Docker commands on a UCP
     cluster. Download a UCP client bundle and set up your CLI client to use it.
 
-2. Pull the latest `docker/dtr` image.
+2.  Pull the latest `docker/dtr` image.
 
     ```bash
     $ docker pull docker/dtr:<version>
@@ -38,7 +38,7 @@ To upgrade DTR you use the `upgrade` command.
     use a machine with internet connection to
     [pull all the DTR images](../install-dtr-offline.md).
 
-4. Run the upgrade command.
+4.  Run the upgrade command.
 
     The upgrade command upgrades all DTR replicas that are part of your cluster:
 

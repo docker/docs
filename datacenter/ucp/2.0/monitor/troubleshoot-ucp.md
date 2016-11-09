@@ -37,7 +37,7 @@ specially useful if the UCP web application is not working.
     If your client certificate bundle is for a non-admin user, you won't have
     permissions to see the UCP system containers.
 
-2. Check the logs of UCP system containers.
+2.  Check the logs of UCP system containers.
 
     ```bash
     # By default system containers are not displayed. Use the -a flag to display them

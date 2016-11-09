@@ -49,21 +49,21 @@ $ sudo /bin/systemctl restart docker.service
 
 ### Boot2Docker
 
-1. Login into the virtual machine with ssh:
+1.  Login into the virtual machine with ssh:
 
     ```bash
     docker-machine ssh <machine-name>
     ```
 
-2. Create the `bootsync.sh` file, and make it executable:
+2.  Create the `bootsync.sh` file, and make it executable:
 
     ```bash
     sudo touch /var/lib/boot2docker/bootsync.sh
     sudo chmod 755 /var/lib/boot2docker/bootsync.sh
     ```
 
-3. Add the following content to the `bootsync.sh` file. You can use nano or vi
-for this.
+3.  Add the following content to the `bootsync.sh` file. You can use nano or vi
+    for this.
 
     ```bash
     #!/bin/sh
@@ -71,13 +71,13 @@ for this.
     cat /var/lib/boot2docker/server.pem >> /etc/ssl/certs/ca-certificates.crt
     ```
 
-4. Add the DTR CA certificate to the `server.pem` file:
+4.  Add the DTR CA certificate to the `server.pem` file:
 
     ```bash
     curl -k https://<dtr-domain-name>/ca | sudo tee -a /var/lib/boot2docker/server.pem
     ```
 
-5. Run `bootsync.sh` and restart the Docker daemon:
+5.  Run `bootsync.sh` and restart the Docker daemon:
 
     ```bash
     sudo /var/lib/boot2docker/bootsync.sh
