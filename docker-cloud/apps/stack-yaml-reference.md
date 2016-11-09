@@ -1,9 +1,8 @@
 ---
+description: Stack YAML reference
+keywords: YAML, stack, reference
 redirect_from:
 - /docker-cloud/feature-reference/stack-yaml-reference/
-description: Stack YAML reference
-keywords:
-- YAML, stack, reference
 title: Stack file YAML reference
 ---
 

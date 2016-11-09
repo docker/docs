@@ -1,10 +1,9 @@
 ---
+description: Upgrade Docker Engine on a node
+keywords: upgrade, engine, node
 redirect_from:
 - /docker-cloud/feature-reference/docker-upgrade/
 - /docker-cloud/tutorials/docker-upgrade/
-description: Upgrade Docker Engine on a node
-keywords:
-- upgrade, engine, node
 title: Upgrade Docker Engine on a node
 ---
 

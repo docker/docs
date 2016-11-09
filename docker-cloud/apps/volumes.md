@@ -1,10 +1,9 @@
 ---
+description: Work with data volumes
+keywords: data, volumes, create, reuse
 redirect_from:
 - /docker-cloud/tutorials/download-volume-data/
 - /docker-cloud/feature-reference/volumes/
-description: Work with data volumes
-keywords:
-- data, volumes, create, reuse
 title: Work with data volumes
 ---
 

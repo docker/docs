@@ -1,7 +1,6 @@
 ---
 description: Docker Cloud Overview
-keywords:
-- Docker, cloud, three
+keywords: Docker, cloud, three
 title: Docker Cloud overview
 ---
 

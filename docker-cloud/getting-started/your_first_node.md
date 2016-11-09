@@ -1,10 +1,9 @@
 ---
+description: Deploy your first node on Docker Cloud
+keywords: node, create, understand
 redirect_from:
 - /docker-cloud/getting-started/beginner/your_first_node/
 - /docker-cloud/getting-started/beginner/deploy_first_node/
-description: Deploy your first node on Docker Cloud
-keywords:
-- node, create, understand
 title: Deploy your first node
 ---
 

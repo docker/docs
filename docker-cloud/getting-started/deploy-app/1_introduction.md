@@ -1,10 +1,9 @@
 ---
+description: Deploy an app to Docker Cloud
+keywords: deploy, Python, application
 redirect_from:
 - /docker-cloud/getting-started/python/1_introduction/
 - /docker-cloud/getting-started/golang/1_introduction/
-description: Deploy an app to Docker Cloud
-keywords:
-- deploy, Python, application
 title: Introduction to deploying an app in Docker Cloud
 ---
 

@@ -1,9 +1,8 @@
 ---
+description: Stackfiles for your service
+keywords: Python, service, stack
 redirect_from:
 - /docker-cloud/getting-started/python/11_service_stacks/
-description: Stackfiles for your service
-keywords:
-- Python, service, stack
 title: Stackfiles for your service
 ---
 

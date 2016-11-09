@@ -1,9 +1,8 @@
 ---
+description: Schedule a deployment
+keywords: schedule, deployment, container
 redirect_from:
 - /docker-cloud/feature-reference/deployment-strategies/
-description: Schedule a deployment
-keywords:
-- schedule, deployment, container
 title: Container distribution strategies
 ---
 
