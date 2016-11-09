@@ -1,5 +1,5 @@
 ---
-title: fingerprint
+title: docker/ucp fingerprint
 description: Print the TLS fingerprint for this UCP web server
 keywords:
 - docker, dtr, cli, fingerprint

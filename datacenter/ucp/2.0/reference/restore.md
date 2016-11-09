@@ -1,5 +1,5 @@
 ---
-title: restore
+title: docker/ucp restore
 description: Restore a UCP manager node from a backup
 keywords:
 - docker, dtr, cli, restore
