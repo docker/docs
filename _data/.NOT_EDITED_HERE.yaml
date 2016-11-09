@@ -13,18 +13,6 @@
 - path: apidocs/
   description: "Auto-generated API docs for Docker Cloud, DTR, UCP. File an issue."
 
-- path: engine/deprecated.md
-  description: Docker Engine deprecation reference
-  source: https://github.com/docker/docker/docs/deprecated.md
-
-- path: engine/extend/
-  description: References for Docker Engine plugin system
-  source: https://github.com/docker/docker/docs/extend/
-
-- path: engine/reference/
-  description: Docker Engine CLI and API references
-  source: https://github.com/docker/docker/docs/reference/
-
 - path: notary/reference/
   description: Reference docs for Docker Notary
   source: https://github.com/docker/notary/docs/reference/
