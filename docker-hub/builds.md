@@ -1,7 +1,6 @@
 ---
 description: Docker Hub Automated Builds
-keywords:
-- Dockerfile, Hub, builds, trusted builds, automated builds
+keywords: Dockerfile, Hub, builds, trusted builds, automated builds
 title: Configure automated builds on Docker Hub
 ---
 

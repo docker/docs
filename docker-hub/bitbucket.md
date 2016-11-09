@@ -1,7 +1,6 @@
 ---
 description: Docker Hub Automated Builds using Bitbucket
-keywords:
-- Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, trusted, builds, trusted builds,  automated builds, bitbucket
+keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, trusted, builds, trusted builds,  automated builds, bitbucket
 title: Configure automated builds with Bitbucket
 ---
 
