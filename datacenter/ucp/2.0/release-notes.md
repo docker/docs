@@ -8,8 +8,6 @@ keywords:
 - Versions
 ---
 
-# UCP Release Notes
-
 Here you can learn about new features, bug fixes, breaking changes and
 known issues for the latest UCP version.
 You can then use [the upgrade instructions](installation/upgrade.md), to
