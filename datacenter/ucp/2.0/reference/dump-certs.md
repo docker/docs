@@ -1,40 +1,38 @@
-+++
-title = "dump-certs"
-keywords= ["dump-certs, ucp"]
-description = "Dump out public certificates"
-[menu.main]
-parent ="ucp_ref"
-identifier="ucp_ref_dump_certs"
-+++
+---
+title: dump-certs
+description: Print the public certificates used by this UCP web server
+keywords:
+- docker, dtr, cli, dump-certs
+---
 
-# docker/ucp dump-certs
-
-Dump out the public certs for this UCP controller.
+Print the public certificates used by this UCP web server
 
 ## Usage
 
 ```bash
+
 docker run --rm \
-           --name ucp \
-           -v /var/run/docker.sock:/var/run/docker.sock \
-           docker/ucp \
-           dump-certs [command options]
+    --name ucp \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp \
+    uninstall-ucp [command options]
+
 ```
 
 ## Description
 
-This utility will dump out the public certificates for the UCP controller
-running on the local engine. This can then be used to populate local
-certificate trust stores as desired.
+This command outputs the public certificates for the UCP web server running on
+this node. By default it prints the contents of the ca.pem and cert.pem files.
 
-When connecting UCP to DTR, use the output of `--cluster --ca` to
-configure DTR.
+When integrating UCP and DTR, use this command with the '--cluster --ca' flags
+to configure DTR.
+
 
 ## Options
 
-```nohighlight
---debug, -D  Enable debug mode
---jsonlog    Produce json formatted output for easier parsing
---ca         Dump only the contents of the ca.pem file (default is to dump both ca and cert)
---cluster    Dump the internal UCP Cluster Root CA and cert instead of the public server cert
-```
+| Option                    | Description                |
+|:--------------------------|:---------------------------|
+|`--debug, D`|Enable debug mode|
+|`--jsonlog`|Produce json formatted output for easier parsing|
+|`--ca`|Only print the contents of the ca.pem file|
+|`--cluster`|Print the internal UCP swarm root CA and cert instead of the public server cert|

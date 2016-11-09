@@ -1,39 +1,37 @@
-+++
-title = "images"
-description = "Verify the UCP images on this Docker Engine."
-keywords= ["images, ucp, images"]
-[menu.main]
-parent = "ucp_ref"
-identifier = "ucp_ref_images"
-+++
+---
+title: images
+description: Verify the UCP images on this node
+keywords:
+- docker, dtr, cli, images
+---
 
-# docker/ucp images
-
-Verify the UCP images on this engine.
+Verify the UCP images on this node
 
 ## Usage
 
-```
-docker run --rm -it \
-           --name ucp \
-           -v /var/run/docker.sock:/var/run/docker.sock \
-           docker/ucp \
-           images [command options]
+```bash
+
+docker run -it --rm \
+    --name ucp \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp \
+    images [command options]
+
 ```
 
 ## Description
 
-This command will verify all the required images used by UCP on the current engine.
-By default, this will pull any missing images. Use the `--pull` argument to change
-behavior.
+This command checks the UCP images that are available in this node, and pulls
+the ones that are missing.
+  
 
 ## Options
 
-```nohighlight
---debug, -D                Enable debug mode
---jsonlog                  Produce json formatted output for easier parsing
---pull value               Specify image pull behavior ('always', when 'missing', or 'never') (default: "missing")
---registry-username value  Specify the username to pull required images with [$REGISTRY_USERNAME]
---registry-password value  Specify the password to pull required images with [$REGISTRY_PASSWORD]
---list                     Don't do anything, just list the images used by UCP
-```
+| Option                    | Description                |
+|:--------------------------|:---------------------------|
+|`--debug, D`|Enable debug mode|
+|`--jsonlog`|Produce json formatted output for easier parsing|
+|`--pull`|Pull UCP images: 'always', when 'missing', or 'never'|
+|`--registry-username`|Username to use when pulling images|
+|`--registry-password`|Password to use when pulling images|
+|`--list`|List all images used by UCP but don't pull them|
