@@ -50,7 +50,7 @@ To install UCP:
 
 1. Use ssh to log in into the host where you want to install UCP.
 
-2. Run the following command:
+2.  Run the following command:
 
     ```bash
     $ docker run --rm -it --name ucp \

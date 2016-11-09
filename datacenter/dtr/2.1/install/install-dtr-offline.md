@@ -14,7 +14,7 @@ of pulling the DTR images from Docker Hub, you use a computer that is connected
 to the internet to download a single package with all DTR images. Then you
 copy that package to the nodes where you’ll install DTR.
 
-1. Get the DTR package.
+1.  Get the DTR package.
 
     Use a computer with internet access to download a single package with all
     Docker Datacenter components:
@@ -23,7 +23,7 @@ copy that package to the nodes where you’ll install DTR.
     $ wget https://packages.docker.com/caas/ucp-2.0.0-beta3_dtr-2.1.0-beta3.tar.gz -O docker-datacenter.tar.gz
     ```
 
-2. Transfer the package to the offline nodes.
+2.  Transfer the package to the offline nodes.
 
     Now that you have the DTR package in your machine, you can transfer it to the
     nodes that you want to install DTR. For each node run:
@@ -34,7 +34,7 @@ copy that package to the nodes where you’ll install DTR.
 
 3. Login into the nodes where you transferred the images.
 
-4. Load the images.
+4.  Load the images.
 
     Once the package is on the nodes where you want to install DTR, you can use
     the `docker load` command, to load the images from the .tar file. On each

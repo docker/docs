@@ -695,9 +695,9 @@ toc:
         title: Use externally-signed certificates
       - path: /datacenter/ucp/2.0/configuration/configure-logs/
         title: Configure UCP logging
-      - path: /datacenter/ucp/2.0/configuration/dtr-integration/
+      - path: /datacenter/ucp/2.0/configuration/integrate-with-dtr/
         title: Integrate with Docker Trusted Registry
-      - path: /datacenter/ucp/2.0/configuration/ldap-integration/
+      - path: /datacenter/ucp/2.0/configuration/integrate-with-ldap/
         title: Integrate with LDAP
       - path: /datacenter/ucp/2.0/configuration/route-hostnames/
         title: Route hostnames to services

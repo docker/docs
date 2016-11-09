@@ -65,14 +65,14 @@ can be the first node where you installed UCP or any controller replica
 that you've installed using that node's root CA material.
 
 1. Log into the controller node using ssh.
-2. Pull the docker/ucp image for the version you want to upgrade to.
+2.  Pull the docker/ucp image for the version you want to upgrade to.
 
     ```bash
     # Check on Docker Hub which versions are available
     $ docker pull docker/ucp:<version>
     ```
 
-3. Upgrade UCP by running:
+3.  Upgrade UCP by running:
 
     ```bash
     $ docker run --rm -it \

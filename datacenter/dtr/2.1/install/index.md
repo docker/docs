@@ -31,13 +31,13 @@ install, configure, and backup DTR.
 
 To install DTR:
 
-1. Get the DTR package.
+1.  Get the DTR package.
 
     ```bash
     $ wget https://packages.docker.com/caas/ucp-2.0.0-beta3_dtr-2.1.0-beta3.tar.gz -O docker-datacenter.tar.gz
     ```
 
-2. Transfer the package to the nodes.
+2.  Transfer the package to the nodes.
 
     Now that you have the DTR package in your machine, you can transfer it to the
     nodes that you want to install DTR. For each node run:
@@ -46,7 +46,7 @@ To install DTR:
     $ scp docker-datacenter.tag.gz <user>@<host>:/tmp
     ```
 
-3. Load the images.
+3.  Load the images.
 
     Once the package is on the nodes where you want to install DTR, you can use
     the `docker load` command, to load the images from the .tar file. Log
@@ -56,14 +56,14 @@ To install DTR:
     $ docker load < /tmp/docker-datacenter.tar.gz
     ```
 
-4. Download a UCP client bundle.
+4.  Download a UCP client bundle.
 
     Having a UCP client bundle allows you to run Docker commands on a swarm
     being managed by UCP.
     [Download a UCP client bundle](https://docs.docker.com/ucp/access-ucp/cli-based-access/)
     and set up your CLI client to use it.
 
-5. Run the following commands to install DTR.
+5.  Run the following commands to install DTR.
 
     ```bash
 
@@ -132,7 +132,7 @@ replicas:
 
 2. Load you UCP user bundle.
 
-3. Run the join command.
+3.  Run the join command.
 
     When you join a replica to a DTR cluster, you need to specify the
     ID of a replica that is already part of the cluster. You can find an

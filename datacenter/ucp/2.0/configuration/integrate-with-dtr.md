@@ -65,25 +65,25 @@ images from a UCP node to a private DTR repository.
 2. Use a [UCP client bundle](../access-ucp/cli-based-access.md) to run docker
 commands in the UCP cluster.
 
-3. Pull an image from Docker Hub:
+3.  Pull an image from Docker Hub:
 
     ```bash
     $ docker pull hello-world
     ```
 
-4. Retag the image:
+4.  Retag the image:
 
     ```bash
     $ docker tag hello-world:latest <dtr-domain-name>/<username>/hello-world:1
     ```
 
-5. Push the image from the UCP node to your private registry:
+5.  Push the image from the UCP node to your private registry:
 
     ```bash
     $ docker push <dtr-domain-name>/<username>/hello-world:1
     ```
 
-6. Validate that your image is now stored on DTR.
+6.  Validate that your image is now stored on DTR.
 
     When successfully pushing the image you should see a result like:
 

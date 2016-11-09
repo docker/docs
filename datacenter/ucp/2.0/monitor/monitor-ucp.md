@@ -45,7 +45,7 @@ You can also monitor the status of a UCP cluster, using the Docker CLI client.
     permissions to execute all docker commands, or see all information about
     the cluster.
 
-2. Use the `docker info` command to check the cluster status.
+2.  Use the `docker info` command to check the cluster status.
 
     ```bash
     $ docker info
@@ -63,7 +63,7 @@ You can also monitor the status of a UCP cluster, using the Docker CLI client.
       └ KV: etcd://192.168.99.100:12379
     ```
 
-3. Check the container logs
+3.  Check the container logs
 
     With an admin user certificate bundle, you can run docker commands directly
     on the Docker Engine or Swarm Manager of a node. In this example, we are
