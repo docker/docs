@@ -1,7 +1,6 @@
 ---
 description: Your Docker ID
-keywords:
-- Docker, docker, trusted, sign-up, registry, accounts, plans, Dockerfile, Docker Hub, docs,  documentation
+keywords: Docker, docker, trusted, sign-up, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation
 title: Docker ID and Docker Hub accounts
 ---
 

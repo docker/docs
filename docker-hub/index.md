@@ -1,9 +1,8 @@
 ---
+description: Docker Hub overview
+keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, accounts, organizations, repositories, groups, teams
 redirect_from:
 - /docker-hub/overview/
-description: Docker Hub overview
-keywords:
-- Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, accounts, organizations, repositories, groups,  teams
 title: Overview of Docker Hub
 ---
 
