@@ -1,9 +1,8 @@
 ---
+description: OSXFS
+keywords: mac, osxfs
 redirect_from:
 - /mackit/osxfs/
-description: OSXFS
-keywords:
-- mac, osxfs
 title: File system sharing (osxfs)
 ---
 

@@ -1,9 +1,8 @@
 ---
+description: Networking
+keywords: mac, networking
 redirect_from:
 - /mackit/networking/
-description: Networking
-keywords:
-- mac, networking
 title: Networking features in Docker for Mac
 ---
 

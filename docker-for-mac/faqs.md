@@ -1,9 +1,8 @@
 ---
+description: Frequently asked questions
+keywords: mac faqs
 redirect_from:
 - /mackit/faqs/
-description: Frequently asked questions
-keywords:
-- mac faqs
 title: Frequently asked questions (FAQ)
 ---
 

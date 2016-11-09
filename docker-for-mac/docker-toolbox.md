@@ -1,9 +1,8 @@
 ---
+description: Docker for Mac and Docker Toolbox
+keywords: mac, windows, alpha, beta, toolbox, docker-machine, tutorial
 redirect_from:
 - /mackit/docker-toolbox/
-description: Docker for Mac and Docker Toolbox
-keywords:
-- mac, windows, alpha, beta, toolbox, docker-machine, tutorial
 title: Docker for Mac vs. Docker Toolbox
 ---
 
