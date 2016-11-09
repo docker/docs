@@ -1,5 +1,5 @@
 ---
-title: install
+title: docker/ucp install
 description: Install UCP on this node
 keywords:
 - docker, dtr, cli, install

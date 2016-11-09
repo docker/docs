@@ -655,7 +655,7 @@ toc:
         title: Upgrade UCP
       - path: /datacenter/ucp/2.0/installation/uninstall/
         title: Uninstall UCP
-      - sectiontitle: UCP tool reference
+      - sectiontitle: docker/ucp reference
         section:
         - path: /datacenter/ucp/2.0/reference/
           title: docker/ucp overview

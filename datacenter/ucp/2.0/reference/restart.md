@@ -1,5 +1,5 @@
 ---
-title: restart
+title: docker/ucp restart
 description: Start or restart UCP components running on this node
 keywords:
 - docker, dtr, cli, restart

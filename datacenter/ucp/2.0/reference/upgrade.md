@@ -1,5 +1,5 @@
 ---
-title: upgrade
+title: docker/ucp upgrade
 description: Upgrade the UCP components on this node
 keywords:
 - docker, dtr, cli, upgrade

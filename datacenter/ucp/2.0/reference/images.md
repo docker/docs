@@ -1,5 +1,5 @@
 ---
-title: images
+title: docker/ucp images
 description: Verify the UCP images on this node
 keywords:
 - docker, dtr, cli, images
