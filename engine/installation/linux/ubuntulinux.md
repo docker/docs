@@ -9,6 +9,7 @@ title: Install Docker on Ubuntu
 
 Docker is supported on these Ubuntu operating systems:
 
+- Ubuntu Yakkety 16.10
 - Ubuntu Xenial 16.04 (LTS)
 - Ubuntu Trusty 14.04 (LTS)
 - Ubuntu Precise 12.04 (LTS)
@@ -69,12 +70,12 @@ To set `APT` to use packages from the Docker repository:
     This determines where APT will search for Docker packages. When possible,
     run a long-term support (LTS) edition of Ubuntu.
 
-    | Ubuntu version      | Repository                                                  |
-    | ------------------- | ----------------------------------------------------------- |
-    | Precise 12.04 (LTS) | `deb https://apt.dockerproject.org/repo ubuntu-precise main`|
-    | Trusty 14.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-trusty main` |
-    | Wily 15.10          | `deb https://apt.dockerproject.org/repo ubuntu-wily main`   |
-    | Xenial 16.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-xenial main` |
+    | Ubuntu version      | Repository                                                   |
+    | ------------------- | ------------------------------------------------------------ |
+    | Precise 12.04 (LTS) | `deb https://apt.dockerproject.org/repo ubuntu-precise main` |
+    | Trusty 14.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-trusty main`  |
+    | Xenial 16.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-xenial main`  |
+    | Yakkety 16.10       | `deb https://apt.dockerproject.org/repo ubuntu-yakkety main` |
 
 
     >**Note**: Docker does not provide packages for all architectures. Binary artifacts
@@ -123,10 +124,11 @@ From now on when you run `apt-get upgrade`, `APT` pulls from the new repository.
 
 ### Prerequisites by Ubuntu Version
 
+- Ubuntu Yakkety 16.10
 - Ubuntu Xenial 16.04 (LTS)
 - Ubuntu Trusty 14.04 (LTS)
 
-For Ubuntu Trusty and Xenial, it's recommended to install the
+For Ubuntu Trusty, Yakkety, and Xenial, it's recommended to install the
 `linux-image-extra-*` kernel packages. The `linux-image-extra-*` packages
 allows you use the `aufs` storage driver.
 
