@@ -50,7 +50,7 @@ load balancer to balance user requests across all manager nodes.
 
 Since Docker UCP uses mutual TLS, make sure you configure your load balancer to:
 
-* Load-balance TCP traffic on ports 80 and 443,
+* Load-balance TCP traffic on port 443,
 * Not terminate HTTPS connections,
 * Use the `/_ping` endpoint on each manager node, to check if the node
 is healthy and if it should remain on the load balancing pool or not.
