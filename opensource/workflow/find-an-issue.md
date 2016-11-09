@@ -35,9 +35,6 @@ hugo converts them to paragraphs, causing the styles to be ignored
 .gh-label.kinddocs { background-color: #B5E9D5; color: #333333; }
 </style>
 
-
-# Find and claim an issue
-
 As a contributor, you can work on any open issue you want. You can view
 issues in the Issues tab in every repository. If you are new to
 contributing, use the filter option to find suitable issues. You can

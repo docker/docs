@@ -8,8 +8,6 @@ keywords:
 title: Docker security
 ---
 
-# Docker security
-
 There are four major areas to consider when reviewing Docker security:
 
  - the intrinsic security of the kernel and its support for

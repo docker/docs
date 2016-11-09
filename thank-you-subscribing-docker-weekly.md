@@ -5,8 +5,6 @@ keywords:
 title: Thank you for subscribing to Docker weekly
 ---
 
-# Thank you for subscribing to Docker weekly
-
 We've sent you a welcome email with links to previous newsletters.
 Please check your inbox to confirm you received it.
 
