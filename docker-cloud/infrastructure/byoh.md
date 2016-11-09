@@ -1,11 +1,10 @@
 ---
+description: Use the Docker Cloud Agent
+keywords: agent, Cloud, install
 redirect_from:
 - /docker-cloud/feature-reference/byoh/
 - /docker-cloud/tutorials/byoh/
 - /docker-cloud/getting-started/use-byon/
-description: Use the Docker Cloud Agent
-keywords:
-- agent, Cloud, install
 title: Use the Docker Cloud Agent
 ---
 

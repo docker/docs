@@ -1,10 +1,9 @@
 ---
+description: Link your SoftLayer account
+keywords: SoftLayer, link, cloud
 redirect_from:
 - /docker-cloud/getting-started/beginner/link-softlayer/
 - /docker-cloud/getting-started/link-softlayer/
-description: Link your SoftLayer account
-keywords:
-- SoftLayer, link, cloud
 title: Link a SoftLayer account
 ---
 

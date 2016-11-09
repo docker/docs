@@ -1,11 +1,10 @@
 ---
+description: Using the Docker Cloud CLI on Linux, Windows, and macOS, installing, updating, uninstall
+keywords: cloud, command-line, CLI
 redirect_from:
 - /docker-cloud/getting-started/intermediate/installing-cli/
 - /docker-cloud/getting-started/installing-cli/
 - /docker-cloud/tutorials/installing-cli/
-description: Using the Docker Cloud CLI on Linux, Windows, and macOS, installing, updating, uninstall
-keywords:
-- cloud, command-line, CLI
 title: The Docker Cloud CLI
 ---
 

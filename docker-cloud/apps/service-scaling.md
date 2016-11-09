@@ -1,9 +1,8 @@
 ---
+description: Scale your service, spawn new containers
+keywords: spawn, container, service, deploy
 redirect_from:
 - /docker-cloud/feature-reference/service-scaling/
-description: Scale your service, spawn new containers
-keywords:
-- spawn, container, service, deploy
 title: Scale your service
 ---
 

@@ -1,9 +1,8 @@
 ---
+description: Autoredeploy
+keywords: Autoredeploy, image, store, service
 redirect_from:
 - /docker-cloud/feature-reference/auto-redeploy/
-description: Autoredeploy
-keywords:
-- Autoredeploy, image, store, service
 title: Redeploy services automatically
 ---
 

@@ -1,10 +1,9 @@
 ---
+description: Deploy your first service on Docker Cloud
+keywords: service, Cloud, three
 redirect_from:
 - /docker-cloud/getting-started/beginner/your_first_service/
 - /docker-cloud/getting-started/beginner/deploy_first_service/
-description: Deploy your first service on Docker Cloud
-keywords:
-- service, Cloud, three
 title: Create your first service
 ---
 

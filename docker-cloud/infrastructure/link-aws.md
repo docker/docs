@@ -1,10 +1,9 @@
 ---
+description: Link your Amazon Web Services account
+keywords: AWS, Cloud, link
 redirect_from:
 - /docker-cloud/getting-started/beginner/link-aws/
 - /docker-cloud/getting-started/link-aws/
-description: Link your Amazon Web Services account
-keywords:
-- AWS, Cloud, link
 title: Link an Amazon Web Services account
 ---
 

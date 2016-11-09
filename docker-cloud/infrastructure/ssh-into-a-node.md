@@ -1,11 +1,10 @@
 ---
+description: SSHing into a Docker Cloud-managed node
+keywords: ssh, Cloud, node
 redirect_from:
 - /docker-cloud/getting-started/intermediate/ssh-into-a-node/
 - /docker-cloud/tutorials/ssh-into-a-node/
 - /docker-cloud/faq/how-ssh-nodes/
-description: SSHing into a Docker Cloud-managed node
-keywords:
-- ssh, Cloud, node
 title: SSH into a Docker Cloud-managed node
 ---
 

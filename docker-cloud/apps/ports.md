@@ -1,9 +1,8 @@
 ---
+description: Publish and expose service or container ports
+keywords: publish, expose, ports, containers, services
 redirect_from:
 - /docker-cloud/feature-reference/ports/
-description: Publish and expose service or container ports
-keywords:
-- publish, expose, ports, containers, services
 title: Publish and expose service or container ports
 ---
 

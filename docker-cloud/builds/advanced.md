@@ -1,7 +1,6 @@
 ---
 description: Automated builds
-keywords:
-- automated, build, images
+keywords: automated, build, images
 title: Advanced options for Autobuild and Autotest
 ---
 
