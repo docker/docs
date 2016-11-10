@@ -633,13 +633,13 @@ toc:
   section:
   - sectiontitle: Universal Control Plane 2.0
     section:
-    - path: /datacenter/ucp/2.0/overview/
+    - path: /datacenter/ucp/2.0/
       title: Universal Control Plane overview
     - path: /datacenter/ucp/2.0/architecture/
       title: Architecture
     - sectiontitle: Installation
       section:
-      - path: /datacenter/ucp/2.0/installation/system-requirements/
+      - path: /datacenter/ucp/2.0/installation/
         title: System requirements
       - path: /datacenter/ucp/2.0/installation/plan-production-install/
         title: Plan a production installation
@@ -685,13 +685,13 @@ toc:
           title: upgrade
     - sectiontitle: Access UCP
       section:
-      - path: /datacenter/ucp/2.0/access-ucp/web-based-access/
+      - path: /datacenter/ucp/2.0/access-ucp/
         title: Web-based access
       - path: /datacenter/ucp/2.0/access-ucp/cli-based-access/
         title: CLI-based access
     - sectiontitle: Configuration
       section:
-      - path: /datacenter/ucp/2.0/configuration/use-externally-signed-certs/
+      - path: /datacenter/ucp/2.0/configuration/
         title: Use externally-signed certificates
       - path: /datacenter/ucp/2.0/configuration/configure-logs/
         title: Configure UCP logging
@@ -703,7 +703,7 @@ toc:
         title: Route hostnames to services
     - sectiontitle: Monitor and troubleshoot
       section:
-      - path: /datacenter/ucp/2.0/monitor/monitor-ucp/
+      - path: /datacenter/ucp/2.0/monitor/
         title: Monitor your cluster
       - path: /datacenter/ucp/2.0/monitor/troubleshoot-ucp/
         title: Troubleshoot your cluster
@@ -711,13 +711,13 @@ toc:
         title: Troubleshoot cluster configurations
     - sectiontitle: High-availability
       section:
-      - path: /datacenter/ucp/2.0/high-availability/set-up-high-availability/
+      - path: /datacenter/ucp/2.0/high-availability/
         title: Set up high availability
       - path: /datacenter/ucp/2.0/high-availability/backups-and-disaster-recovery/
         title: Backups and disaster recovery
     - sectiontitle: User management
       section:
-      - path: /datacenter/ucp/2.0/user-management/authentication-and-authorization/
+      - path: /datacenter/ucp/2.0/user-management/
         title: Authentication and authorization
       - path: /datacenter/ucp/2.0/user-management/create-and-manage-users/
         title: Create and manage users
@@ -727,10 +727,16 @@ toc:
         title: Permission levels
     - sectiontitle: Applications
       section:
-      - path: /datacenter/ucp/2.0/applications/deploy-app-ui/
+      - path: /datacenter/ucp/2.0/applications/
         title: Deploy an app from the UI
       - path: /datacenter/ucp/2.0/applications/deploy-app-cli/
         title: Deploy an app from the CLI
+    - sectiontitle: Content trust
+      section:
+      - path: /datacenter/ucp/2.0/content-trust/
+        title: Run only images you trust
+      - path: /datacenter/ucp/2.0/content-trust/manage-trusted-repositories/
+        title: Manage trusted repositories
     - path: /datacenter/ucp/2.0/support/
       title: Get support
     - path: /datacenter/ucp/2.0/release-notes/
@@ -747,7 +753,7 @@ toc:
         title: System requirements
       - path: /datacenter/dtr/2.1/install/
         title: Install Docker Trusted Registry
-      - path: /datacenter/dtr/2.1/install/install-dtr-offline/
+      - path: /datacenter/dtr/2.1/install/install-offline/
         title: Install offline
       - path: /datacenter/dtr/2.1/install/license/
         title: License your deployment
@@ -781,7 +787,7 @@ toc:
       section:
       - path: /datacenter/dtr/2.1/configure/
         title: Use your own certificates
-      - path: /datacenter/dtr/2.1/configure/storage-configuration/
+      - path: /datacenter/dtr/2.1/configure/configure-storage/
         title: Storage configuration
     - sectiontitle: Monitor and troubleshoot
       section:
