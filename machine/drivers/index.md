@@ -5,8 +5,6 @@ keywords:
 title: Drivers
 ---
 
-# Supported Drivers
-
 -   [Amazon Web Services](aws.md)
 -   [Microsoft Azure](azure.md)
 -   [Digital Ocean](digital-ocean.md)
