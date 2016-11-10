@@ -1,7 +1,6 @@
 ---
 description: Try Swarm at scale
-keywords:
-- docker, swarm, scale, voting, application,  certificates
+keywords: docker, swarm, scale, voting, application,  certificates
 title: Try Swarm at scale
 ---
 

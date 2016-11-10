@@ -1,7 +1,6 @@
 ---
 description: Deploying Swarm on AWS EC2 AMI's in a VPC
-keywords:
-- docker, swarm, clustering, examples, Amazon, AWS EC2
+keywords: docker, swarm, clustering, examples, Amazon, AWS EC2
 title: Build a Swarm cluster for production
 ---
 

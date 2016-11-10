@@ -1,7 +1,6 @@
 ---
 description: Release notes for Docker
-keywords:
-- docker, documentation, about, technology, understanding,  release
+keywords: docker, documentation, about, technology, understanding,  release
 title: Docker Release Notes
 ---
 

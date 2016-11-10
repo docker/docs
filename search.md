@@ -1,10 +1,9 @@
 ---
 description: Docker documentation search results
-keywords:
-- Search, Docker, documentation, manual, guide, reference, api
+keywords: Search, Docker, documentation, manual, guide, reference, api
+noratings: true
 notoc: true
 title: Search results
-noratings: true
 ---
 
 <style type='text/css'>

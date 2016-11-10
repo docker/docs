@@ -1,9 +1,8 @@
 ---
+description: Try Swarm at scale
+keywords: docker, swarm, scale, voting, application,  certificates
 redirect_from:
 - /swarm/swarm_at_scale/05-troubleshoot/
-description: Try Swarm at scale
-keywords:
-- docker, swarm, scale, voting, application,  certificates
 title: Troubleshoot the application
 ---
 

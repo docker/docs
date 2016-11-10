@@ -1,7 +1,6 @@
 ---
 description: High availability in Swarm
-keywords:
-- docker, swarm,  clustering
+keywords: docker, swarm,  clustering
 title: High availability in Docker Swarm
 ---
 

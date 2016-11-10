@@ -1,7 +1,6 @@
 ---
 description: List the nodes in a cluster.
-keywords:
-- swarm, list
+keywords: swarm, list
 title: list — List the nodes in a cluster
 ---
 
