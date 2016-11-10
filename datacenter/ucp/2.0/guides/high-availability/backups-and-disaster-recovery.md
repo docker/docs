@@ -124,5 +124,5 @@ UCP configuration data:
 
 ## Where to go next
 
-* [Set up high availability](set-up-high-availability.md)
+* [Set up high availability](index.md)
 * [UCP architecture](../architecture.md)

@@ -633,113 +633,113 @@ toc:
   section:
   - sectiontitle: Universal Control Plane 2.0
     section:
-    - path: /datacenter/ucp/2.0/
+    - path: /datacenter/ucp/2.0/guides/
       title: Universal Control Plane overview
-    - path: /datacenter/ucp/2.0/architecture/
+    - path: /datacenter/ucp/2.0/guides/architecture/
       title: Architecture
     - sectiontitle: Installation
       section:
-      - path: /datacenter/ucp/2.0/installation/system-requirements/
+      - path: /datacenter/ucp/2.0/guides/installation/system-requirements/
         title: System requirements
-      - path: /datacenter/ucp/2.0/installation/plan-production-install/
+      - path: /datacenter/ucp/2.0/guides/installation/plan-production-install/
         title: Plan a production installation
-      - path: /datacenter/ucp/2.0/installation/
+      - path: /datacenter/ucp/2.0/guides/installation/
         title: Install UCP for production
-      - path: /datacenter/ucp/2.0/installation/install-offline/
+      - path: /datacenter/ucp/2.0/guides/installation/install-offline/
         title: Install offline
-      - path: /datacenter/ucp/2.0/installation/license/
+      - path: /datacenter/ucp/2.0/guides/installation/license/
         title: License UCP
-      - path: /datacenter/ucp/2.0/installation/scale-your-cluster/
+      - path: /datacenter/ucp/2.0/guides/installation/scale-your-cluster/
         title: Scale your cluster
-      - path: /datacenter/ucp/2.0/installation/upgrade/
+      - path: /datacenter/ucp/2.0/guides/installation/upgrade/
         title: Upgrade UCP
-      - path: /datacenter/ucp/2.0/installation/uninstall/
+      - path: /datacenter/ucp/2.0/guides/installation/uninstall/
         title: Uninstall UCP
-      - sectiontitle: docker/ucp reference
-        section:
-        - path: /datacenter/ucp/2.0/reference/
-          title: docker/ucp overview
-        - path: /datacenter/ucp/2.0/reference/backup/
-          title: backup
-        - path: /datacenter/ucp/2.0/reference/dump-certs/
-          title: dump-certs
-        - path: /datacenter/ucp/2.0/reference/fingerprint/
-          title: fingerprint
-        - path: /datacenter/ucp/2.0/reference/id/
-          title: id
-        - path: /datacenter/ucp/2.0/reference/images/
-          title: images
-        - path: /datacenter/ucp/2.0/reference/install/
-          title: install
-        - path: /datacenter/ucp/2.0/reference/restart/
-          title: restart
-        - path: /datacenter/ucp/2.0/reference/restore/
-          title: restore
-        - path: /datacenter/ucp/2.0/reference/stop/
-          title: stop
-        - path: /datacenter/ucp/2.0/reference/support/
-          title: support
-        - path: /datacenter/ucp/2.0/reference/uninstall-ucp/
-          title: uninstall-ucp
-        - path: /datacenter/ucp/2.0/reference/upgrade/
-          title: upgrade
     - sectiontitle: Access UCP
       section:
-      - path: /datacenter/ucp/2.0/access-ucp/
+      - path: /datacenter/ucp/2.0/guides/access-ucp/
         title: Web-based access
-      - path: /datacenter/ucp/2.0/access-ucp/cli-based-access/
+      - path: /datacenter/ucp/2.0/guides/access-ucp/cli-based-access/
         title: CLI-based access
     - sectiontitle: Configuration
       section:
-      - path: /datacenter/ucp/2.0/configuration/
+      - path: /datacenter/ucp/2.0/guides/configuration/
         title: Use externally-signed certificates
-      - path: /datacenter/ucp/2.0/configuration/configure-logs/
+      - path: /datacenter/ucp/2.0/guides/configuration/configure-logs/
         title: Configure UCP logging
-      - path: /datacenter/ucp/2.0/configuration/integrate-with-dtr/
+      - path: /datacenter/ucp/2.0/guides/configuration/integrate-with-dtr/
         title: Integrate with Docker Trusted Registry
-      - path: /datacenter/ucp/2.0/configuration/integrate-with-ldap/
+      - path: /datacenter/ucp/2.0/guides/configuration/integrate-with-ldap/
         title: Integrate with LDAP
-      - path: /datacenter/ucp/2.0/configuration/route-hostnames/
+      - path: /datacenter/ucp/2.0/guides/configuration/route-hostnames/
         title: Route hostnames to services
     - sectiontitle: Monitor and troubleshoot
       section:
-      - path: /datacenter/ucp/2.0/monitor/
+      - path: /datacenter/ucp/2.0/guides/monitor/
         title: Monitor your cluster
-      - path: /datacenter/ucp/2.0/monitor/troubleshoot-ucp/
+      - path: /datacenter/ucp/2.0/guides/monitor/troubleshoot/
         title: Troubleshoot your cluster
-      - path: /datacenter/ucp/2.0/monitor/troubleshoot-configurations/
+      - path: /datacenter/ucp/2.0/guides/monitor/troubleshoot-configurations/
         title: Troubleshoot cluster configurations
     - sectiontitle: High-availability
       section:
-      - path: /datacenter/ucp/2.0/high-availability/
+      - path: /datacenter/ucp/2.0/guides/high-availability/
         title: Set up high availability
-      - path: /datacenter/ucp/2.0/high-availability/backups-and-disaster-recovery/
+      - path: /datacenter/ucp/2.0/guides/high-availability/backups-and-disaster-recovery/
         title: Backups and disaster recovery
     - sectiontitle: User management
       section:
-      - path: /datacenter/ucp/2.0/user-management/
+      - path: /datacenter/ucp/2.0/guides/user-management/
         title: Authentication and authorization
-      - path: /datacenter/ucp/2.0/user-management/create-and-manage-users/
+      - path: /datacenter/ucp/2.0/guides/user-management/create-and-manage-users/
         title: Create and manage users
-      - path: /datacenter/ucp/2.0/user-management/create-and-manage-teams/
+      - path: /datacenter/ucp/2.0/guides/user-management/create-and-manage-teams/
         title: Create and manage teams
-      - path: /datacenter/ucp/2.0/user-management/permission-levels/
+      - path: /datacenter/ucp/2.0/guides/user-management/permission-levels/
         title: Permission levels
     - sectiontitle: Applications
       section:
-      - path: /datacenter/ucp/2.0/applications/
+      - path: /datacenter/ucp/2.0/guides/applications/
         title: Deploy an app from the UI
-      - path: /datacenter/ucp/2.0/applications/deploy-app-cli/
+      - path: /datacenter/ucp/2.0/guides/applications/deploy-app-cli/
         title: Deploy an app from the CLI
     - sectiontitle: Content trust
       section:
-      - path: /datacenter/ucp/2.0/content-trust/
+      - path: /datacenter/ucp/2.0/guides/content-trust/
         title: Run only images you trust
-      - path: /datacenter/ucp/2.0/content-trust/manage-trusted-repositories/
+      - path: /datacenter/ucp/2.0/guides/content-trust/manage-trusted-repositories/
         title: Manage trusted repositories
-    - path: /datacenter/ucp/2.0/support/
+    - sectiontitle: CLI reference
+      section:
+      - path: /datacenter/ucp/2.0/reference/cli/
+        title: docker/ucp overview
+      - path: /datacenter/ucp/2.0/reference/cli/backup/
+        title: backup
+      - path: /datacenter/ucp/2.0/reference/cli/dump-certs/
+        title: dump-certs
+      - path: /datacenter/ucp/2.0/reference/cli/fingerprint/
+        title: fingerprint
+      - path: /datacenter/ucp/2.0/reference/cli/id/
+        title: id
+      - path: /datacenter/ucp/2.0/reference/cli/images/
+        title: images
+      - path: /datacenter/ucp/2.0/reference/cli/install/
+        title: install
+      - path: /datacenter/ucp/2.0/reference/cli/restart/
+        title: restart
+      - path: /datacenter/ucp/2.0/reference/cli/restore/
+        title: restore
+      - path: /datacenter/ucp/2.0/reference/cli/stop/
+        title: stop
+      - path: /datacenter/ucp/2.0/reference/cli/support/
+        title: support
+      - path: /datacenter/ucp/2.0/reference/cli/uninstall-ucp/
+        title: uninstall-ucp
+      - path: /datacenter/ucp/2.0/reference/cli/upgrade/
+        title: upgrade
+    - path: /datacenter/ucp/2.0/guides/support/
       title: Get support
-    - path: /datacenter/ucp/2.0/release-notes/
+    - path: /datacenter/ucp/2.0/guides/release-notes/
       title: Release Notes
   - sectiontitle: Docker Trusted Registry 2.1
     section:

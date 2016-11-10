@@ -81,5 +81,5 @@ You can also monitor the status of a UCP cluster, using the Docker CLI client.
 
 ## Where to go next
 
-* [Troubleshoot your cluster](troubleshoot-ucp.md)
+* [Troubleshoot your cluster](troubleshoot.md)
 * [Get support](../support.md)

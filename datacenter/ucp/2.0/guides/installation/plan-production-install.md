@@ -103,4 +103,4 @@ controller nodes joining the cluster or being promoted into controllers.
 ## Where to go next
 
 * [UCP system requirements](system-requirements.md)
-* [Install UCP for production](install-production.md)
+* [Install UCP for production](index.md)
