@@ -1,7 +1,6 @@
 ---
 description: List of guidelines for coding Docker contributions
-keywords:
-- change, commit, squash, request, pull request, test, unit test, integration tests, Go, gofmt,  LGTM
+keywords: change, commit, squash, request, pull request, test, unit test, integration tests, Go, gofmt, LGTM
 title: Coding style checklist
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: Explains Docker's code of conduct
-keywords:
-- Docker, conduct, code
+keywords: Docker, conduct, code
 title: Code of conduct
 ---
 

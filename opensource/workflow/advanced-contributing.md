@@ -1,7 +1,6 @@
 ---
 description: Explains workflows for refactor and design proposals
-keywords:
-- contribute, project, design, refactor,  proposal
+keywords: contribute, project, design, refactor,  proposal
 title: Advanced contributing
 ---
 

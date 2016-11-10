@@ -1,7 +1,6 @@
 ---
 description: Explains how to find a Kitematic issue
-keywords:
-- Kitematic, open source, contribute, contributor, tour
+keywords: Kitematic, open source, contribute, contributor, tour
 title: Find an issue on GitHub
 ---
 

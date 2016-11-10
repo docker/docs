@@ -1,8 +1,6 @@
 ---
 description: Explains next steps after the tour
-keywords:
-- Kitematic, open source, contribute, contributor, tour, development, contribute
-
+keywords: Kitematic, open source, contribute, contributor, tour, development, contribute
 title: Where to learn more
 ---
 

@@ -1,9 +1,8 @@
 ---
+description: Introduction to project contribution at Docker
+keywords: Gordon, introduction, turtle, machine, libcontainer,  how to
 redirect_from:
 - /project/who-written-for/
-description: Introduction to project contribution at Docker
-keywords:
-- Gordon, introduction, turtle, machine, libcontainer,  how to
 title: README first
 ---
 

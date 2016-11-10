@@ -1,7 +1,6 @@
 ---
 description: Describes Docker's testing infrastructure
-keywords:
-- make test, make docs, Go tests, gofmt, contributing,  running tests
+keywords: make test, make docs, Go tests, gofmt, contributing,  running tests
 title: Run tests and test documentation
 ---
 
