@@ -1,8 +1,7 @@
 ---
 description: Information about known issues in Kitematic
-keywords:
-- docker, documentation, about, technology, kitematic,  gui
-title: "Kitematic: Known issues"
+keywords: docker, documentation, about, technology, kitematic,  gui
+title: 'Kitematic: Known issues'
 ---
 
 Kitematic is in beta, so we're still working out the kinks. The most common

@@ -1,7 +1,6 @@
 ---
 description: Documentation that provides an overview of Toolbox
-keywords:
-- docker, documentation, about, technology, kitematic, gui, toolbox
+keywords: docker, documentation, about, technology, kitematic, gui, toolbox
 title: Docker Toolbox Overview
 ---
 

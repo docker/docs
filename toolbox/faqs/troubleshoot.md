@@ -1,7 +1,6 @@
 ---
 description: Troubleshooting connectivity and certificate issues
-keywords:
-- beginner, getting started, FAQs, troubleshooting, Docker
+keywords: beginner, getting started, FAQs, troubleshooting, Docker
 title: Troubleshooting
 ---
 

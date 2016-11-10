@@ -1,7 +1,6 @@
 ---
 description: Submit a product for the Docker Store
-keywords:
-- Docker, docker, store, purchase images
+keywords: Docker, docker, store, purchase images
 title: Submit a product to Docker Store
 ---
 
