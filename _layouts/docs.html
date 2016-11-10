@@ -193,7 +193,7 @@ ng\:form {
 								<img src="/images/chat.png" alt="chat icon" style="margin-right: 10px">
 								<b>Feedback?</b> Questions? Suggestions?<br/>
 							  <a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}" class="nomunge">Edit this page</a>,
-								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&body=URL: [https://docs.docker.com/{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge">file a ticket</a>, or rate this page:
+								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=URL: [https://docs.docker.com/{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge">file a ticket</a>, or rate this page:
 								<div id="pd_rating_holder_8453675"></div>
 								<script type="text/javascript">
 								PDRTJS_settings_8453675 = {
