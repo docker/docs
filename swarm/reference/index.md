@@ -1,7 +1,6 @@
 ---
 description: Docker Swarm Commands Overview
-keywords:
-- Swarm, cluster, commands
+keywords: Swarm, cluster, commands
 title: Swarm command-line reference
 ---
 

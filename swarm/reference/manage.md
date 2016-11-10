@@ -1,7 +1,6 @@
 ---
 description: Create a Swarm manager.
-keywords:
-- swarm, create, manage
+keywords: swarm, create, manage
 title: manage  — Create a Swarm manager
 ---
 

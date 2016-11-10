@@ -1,7 +1,6 @@
 ---
 description: Provision with Machine
-keywords:
-- docker, Swarm, clustering, provision, Machine
+keywords: docker, Swarm, clustering, provision, Machine
 title: Provision a Swarm cluster with Docker Machine
 ---
 

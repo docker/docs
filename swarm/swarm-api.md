@@ -1,10 +1,9 @@
 ---
+description: Swarm API
+keywords: docker, swarm, clustering,  api
 redirect_from:
 - /api/swarm-api/
 - /swarm/api/
-description: Swarm API
-keywords:
-- docker, swarm, clustering,  api
 title: Docker Swarm API
 ---
 
