@@ -1,5 +1,5 @@
 ---
-title: reconfigure
+title: docker/dtr reconfigure
 keywords:
 - docker, dtr, cli, reconfigure
 description: Change DTR configurations

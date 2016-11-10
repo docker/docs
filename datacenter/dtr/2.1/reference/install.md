@@ -1,5 +1,5 @@
 ---
-title: install
+title: docker/dtr install
 keywords:
 - docker, dtr, cli, install
 description: Install Docker Trusted Registry on this Docker Engine
