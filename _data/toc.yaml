@@ -823,6 +823,8 @@ toc:
         title: Push an image
       - path: /datacenter/dtr/2.1/repos-and-images/delete-an-image/
         title: Delete an image
+    - path: /apidocs/v2.1.0
+      title: DTR API
     - path: /datacenter/dtr/2.1/release-notes/
       title: Release notes
     - path: /datacenter/dtr/2.1/support/
