@@ -12,4 +12,4 @@ Sets the number of containers to run for a service.
 
 Numbers are specified as arguments in the form `service=num`. For example:
 
-    $ docker-compose scale web=2 worker=3
+    docker-compose scale web=2 worker=3
