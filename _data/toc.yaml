@@ -1076,7 +1076,7 @@ toc:
     - path: /machine/drivers/digital-ocean/
       title: Digital Ocean
     - path: /machine/drivers/exoscale/
-      title: exoscale
+      title: Exoscale
     - path: /machine/drivers/generic/
       title: Generic
     - path: /machine/drivers/gce/
