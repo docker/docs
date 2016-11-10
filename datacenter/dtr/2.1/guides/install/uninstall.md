@@ -14,7 +14,7 @@ The remove command:
 * Deletes all DTR volumes.
 
 To see what options are available in the uninstall command, check the
-[uninstall command reference](../reference/remove.md), or run:
+[uninstall command reference](../../reference/cli/remove.md), or run:
 
 ```bash
 $ docker run -it --rm docker/dtr:2.1.0-beta3 remove --help

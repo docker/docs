@@ -20,7 +20,7 @@ infrastructure has all the [requirements DTR needs to run](system-requirements.m
 
 Since DTR requires Docker Universal Control Plane (UCP)
 to run, you need to install UCP on all the nodes where you plan to install DTR.
-[Learn how to install UCP](/datacenter/ucp/2.0/guides/installation/install.md).
+[Learn how to install UCP](/datacenter/ucp/2.0/guides/installation/index.md).
 
 Make sure all the nodes you plan on installing DTR are being managed by UCP.
 
@@ -47,7 +47,7 @@ DTR. `--ucp-insecure-tls` tells the installer to trust the certificates used
 by UCP.
 
 The install command has other flags for customizing DTR at install time.
-Check the [reference documentation to learn more](../reference/install.md).
+Check the [reference documentation to learn more](../../reference/cli/install.md).
 
 
 ## Step 4. Check that DTR is running
@@ -126,5 +126,5 @@ replicas:
 
 ## See also
 
-* [Install DTR offline](install-dtr-offline.md)
-* [Upgrade DTR](upgrade/upgrade-major.md)
+* [Install DTR offline](install-offline.md)
+* [Upgrade DTR](upgrade.md)
