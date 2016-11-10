@@ -28,7 +28,6 @@ set up a Swarm cluster with [Docker Machine](/machine/overview.md) and the overl
     $ eval "$(docker-machine env --swarm <name of swarm master machine>)"
     $ docker-compose up
 
-
 ## Limitations
 
 ### Building images
@@ -135,7 +134,6 @@ There are two viable workarounds for this problem:
         $ docker-compose stop web
         $ docker-compose rm -f web
         $ docker-compose up web
-
 
 ## Scheduling containers
 
