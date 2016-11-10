@@ -27,7 +27,7 @@ DTR uses the same authentication mechanism as Docker Universal Control Plane.
 It has a built-in authentication mechanism, and also integrates with LDAP
 and Active Directory. It also supports Role Based Access Control (RBAC).
 
-This allows you to implement fine-grain access control policies, on who has
+This allows you to implement fine-grain access control policies on who has
 access to your Docker images.
 
 ![](images/overview-2.png)

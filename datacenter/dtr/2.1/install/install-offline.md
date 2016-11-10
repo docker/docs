@@ -20,7 +20,7 @@ copy that package to the nodes where you’ll install DTR.
     Docker Datacenter components:
 
     ```bash
-    $ wget https://packages.docker.com/caas/ucp-2.0.0-beta3_dtr-2.1.0-beta3.tar.gz -O docker-datacenter.tar.gz
+    $ wget https://packages.docker.com/caas/ucp-2.0.0_dtr-2.1.0.tar.gz -O docker-datacenter.tar.gz
     ```
 
 2.  Transfer the package to the offline nodes.
