@@ -20,5 +20,5 @@ You can configure UCP for sending logs to a remote logging service:
 
 ## Where to go next
 
-* [Integrate with DTR](dtr-integration.md)
-* [Set up high availability](../high-availability/set-up-high-availability.md)
+* [Integrate with DTR](integrate-with-dtr.md)
+* [Set up high availability](../high-availability/index.md)

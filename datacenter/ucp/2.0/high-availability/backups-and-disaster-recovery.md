@@ -7,7 +7,7 @@ keywords:
 
 When you decide to start using Docker Universal Control Plane on a production
 setting, you should
-[configure it for high availability](set-up-high-availability.md).
+[configure it for high availability](index.md).
 
 The next step is creating a backup policy and disaster recovery plan.
 
@@ -116,7 +116,7 @@ UCP configuration data:
    disruptive operation and any existing tasks will be either terminated or
    suspended.
 2. Obtain a backup of one of the remaining manager nodes if one is not already
-   available. 
+   available.
 3. Perform a restore operation on the recovered swarm manager node.
 4. For all other nodes of the cluster, perform a `docker swarm leave --force`
    and then a `docker swarm join` operation with the cluster's new join-token.

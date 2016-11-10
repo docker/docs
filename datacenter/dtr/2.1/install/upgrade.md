@@ -36,7 +36,7 @@ To upgrade DTR you use the `upgrade` command.
 
     If the node you're upgrading doesn't have access to the internet, you can
     use a machine with internet connection to
-    [pull all the DTR images](../install-dtr-offline.md).
+    [pull all the DTR images](../install-offline.md).
 
 4.  Run the upgrade command.
 
@@ -54,5 +54,5 @@ To upgrade DTR you use the `upgrade` command.
 
 ## Where to go next
 
-* [Upgrade to DTR 2.0](upgrade-major.md)
+* [System requirements](system-requirements.md)
 * [Monitor DTR](../../monitor-troubleshoot/index.md)

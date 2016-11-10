@@ -57,4 +57,4 @@ Now you can confirm on Docker Universal Control Plane that the DTR replica
 ## Where to go next
 
 * [Install DTR](index.md)
-* [Install DTR offline](install-dtr-offline.md)
+* [Install DTR offline](install-offline.md)

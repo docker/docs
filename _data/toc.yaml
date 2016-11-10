@@ -639,11 +639,11 @@ toc:
       title: Architecture
     - sectiontitle: Installation
       section:
-      - path: /datacenter/ucp/2.0/installation/
+      - path: /datacenter/ucp/2.0/installation/system-requirements/
         title: System requirements
       - path: /datacenter/ucp/2.0/installation/plan-production-install/
         title: Plan a production installation
-      - path: /datacenter/ucp/2.0/installation/install-production/
+      - path: /datacenter/ucp/2.0/installation/
         title: Install UCP for production
       - path: /datacenter/ucp/2.0/installation/install-offline/
         title: Install offline

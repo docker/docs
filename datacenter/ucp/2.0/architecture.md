@@ -64,5 +64,5 @@ By default, the data for these volumes can be found at
 
 ## Where to go next
 
-* [System requirements](installation/system-requirements.md)
+* [System requirements](installation/index.md)
 * [Plan a production installation](installation/plan-production-install.md)
