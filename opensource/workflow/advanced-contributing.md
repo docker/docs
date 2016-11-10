@@ -16,7 +16,7 @@ Your goal should be to understand the processes described.
 
 At this point, you should have read and worked through the earlier parts of
 the project contributor guide. You should also have
-<a href="../make-a-contribution/" target="_blank"> made at least one project contribution</a>.
+<a href="make-a-contribution/" target="_blank"> made at least one project contribution</a>.
 
 ## Refactor or cleanup proposal
 
