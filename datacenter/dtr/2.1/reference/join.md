@@ -1,5 +1,5 @@
 ---
-title: join
+title: docker/dtr join
 keywords:
 - docker, dtr, cli, join
 description: Add a new replica to an existing DTR cluster

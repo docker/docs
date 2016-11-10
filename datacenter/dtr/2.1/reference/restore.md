@@ -1,5 +1,5 @@
 ---
-title: restore
+title: docker/dtr restore
 keywords:
 - docker, dtr, cli, restore
 description: Create a new DTR cluster from an existing backup

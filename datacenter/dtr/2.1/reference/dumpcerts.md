@@ -1,5 +1,5 @@
 ---
-title: dumpcerts
+title: docker/dtr dumpcerts
 keywords:
 - docker, dtr, cli, dumpcerts
 description: Dump out the TLS certificates used by this DTR instance

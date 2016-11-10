@@ -1,5 +1,5 @@
 ---
-title: remove
+title: docker/dtr remove
 keywords:
 - docker, dtr, cli, remove
 description: Remove a replica from a DTR cluster
