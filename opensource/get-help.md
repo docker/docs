@@ -13,8 +13,6 @@ title: Where to chat or get help
 }
 </style>
 
-# Where to chat or get help
-
 There are several communications channels you can use to chat with Docker
 community members and developers.
 

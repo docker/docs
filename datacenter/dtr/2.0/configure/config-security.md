@@ -7,8 +7,6 @@ keywords:
 title: Security configuration
 ---
 
-# Security configuration
-
 This document describes the security settings you need to configure.
 
 * *SSL Certificate*: Used to enter the hash (string) from the SSL Certificate.

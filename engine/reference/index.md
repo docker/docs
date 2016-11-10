@@ -7,8 +7,6 @@ keywords:
 title: Engine reference
 ---
 
-# Engine reference
-
 * [Dockerfile reference](builder.md)
 * [Docker run reference](run.md)
 * [Command line reference](commandline/index.md)
