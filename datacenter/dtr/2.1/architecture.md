@@ -43,13 +43,14 @@ are created:
 
 DTR uses these named volumes for persisting data:
 
-| Volume name                     | Description                                                                      |
-|:--------------------------------|:---------------------------------------------------------------------------------|
-| dtr-ca-&lt;replica_id&gt;       | Root key material for the DTR root CA that issues certificates                   |
-| dtr-etcd-&lt;replica_id&gt;     | DTR configuration data                                                           |
-| dtr-notary-&lt;replica_id&gt;   | Certificate and keys for the Notary components                                   |
-| dtr-registry-&lt;replica_id&gt; | Docker images data, if DTR is configured to store images on the local filesystem |
-| dtr-rethink-&lt;replica_id&gt;  | Repository metadata                                                              |
+| Volume name                         | Description                                                                      |
+|:------------------------------------|:---------------------------------------------------------------------------------|
+| dtr-ca-&lt;replica_id&gt;           | Root key material for the DTR root CA that issues certificates                   |
+| dtr-etcd-&lt;replica_id&gt;         | DTR configuration data                                                           |
+| dtr-notary-&lt;replica_id&gt;       | Certificate and keys for the Notary components                                   |
+| dtr-registry-&lt;replica_id&gt;     | Docker images data, if DTR is configured to store images on the local filesystem |
+| dtr-rethink-&lt;replica_id&gt;      | Repository metadata                                                              |
+| dtr-nfs-registry-&lt;replica_id&gt; | Docker images data, if DTR is configured to store images on NFS                  |
 
 You can customize the volume driver used for these volumes, by creating the
 volumes before installing DTR. During the installation, DTR checks which volumes

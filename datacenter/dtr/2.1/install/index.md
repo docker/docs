@@ -29,73 +29,42 @@ Make sure all the nodes you plan on installing DTR are being managed by UCP.
 To install DTR you use the `docker/dtr` image. This image has commands to
 install, configure, and backup DTR.
 
-To install DTR:
+Run the following command to install DTR:
 
-1.  Get the DTR package.
+```bash
+# Pull the latest version of DTR
+$ docker pull docker/dtr
 
-    ```bash
-    $ wget https://packages.docker.com/caas/ucp-2.0.0-beta3_dtr-2.1.0-beta3.tar.gz -O docker-datacenter.tar.gz
-    ```
+# Install DTR
+$ docker run -it --rm \
+  docker/dtr install \
+  --ucp-node <ucp-node-name> \
+  --ucp-insecure-tls
+```
 
-2.  Transfer the package to the nodes.
+Where the `--ucp-node` is the hostname of the UCP node where you want to deploy
+DTR. `--ucp-insecure-tls` tells the installer to trust the certificates used
+by UCP.
 
-    Now that you have the DTR package in your machine, you can transfer it to the
-    nodes that you want to install DTR. For each node run:
-
-    ```bash
-    $ scp docker-datacenter.tag.gz <user>@<host>:/tmp
-    ```
-
-3.  Load the images.
-
-    Once the package is on the nodes where you want to install DTR, you can use
-    the `docker load` command, to load the images from the .tar file. Log
-    into each node where you plan on installing DTR and run:
-
-    ```bash
-    $ docker load < /tmp/docker-datacenter.tar.gz
-    ```
-
-4.  Download a UCP client bundle.
-
-    Having a UCP client bundle allows you to run Docker commands on a swarm
-    being managed by UCP.
-    [Download a UCP client bundle](https://docs.docker.com/ucp/access-ucp/cli-based-access/)
-    and set up your CLI client to use it.
-
-5.  Run the following commands to install DTR.
-
-    ```bash
-
-    # Install DTR
-    $ docker run -it --rm \
-      docker/dtr:2.1.0-beta3 install \
-      --ucp-node <hostname> \
-      --ucp-insecure-tls
-    ```
-
-    Where the `--ucp-node` is the hostname of the node where you've previously
-    loaded the DTR images, and `--ucp-insecure-tls` tells the installer to
-    trust the certificates used by UCP.
-    The install command has other flags for customizing DTR at install time.
-    Check the [reference documentation to learn more](../reference/install.md).
+The install command has other flags for customizing DTR at install time.
+Check the [reference documentation to learn more](../reference/install.md).
 
 
-6. Check that DTR is running.
+## Step 4. Check that DTR is running
 
-    In your browser, navigate to the the Docker **Universal Control Plane**
-    web UI, and navigate to the **Applications** screen. DTR should be listed
-    as an application.
+In your browser, navigate to the the Docker **Universal Control Plane**
+web UI, and navigate to the **Applications** screen. DTR should be listed
+as an application.
 
-    ![](../images/install-dtr-1.png)
+![](../images/install-dtr-1.png)
 
-    You can also access the **DTR web UI**, to make sure it is working. In your
-    browser, navigate to the address were you installed DTR.
+You can also access the **DTR web UI**, to make sure it is working. In your
+browser, navigate to the address were you installed DTR.
 
-    ![](../images/install-dtr-2.png)
+![](../images/install-dtr-2.png)
 
 
-## Step 4. Configure DTR
+## Step 5. Configure DTR
 
 After installing DTR, you should configure:
 
@@ -107,13 +76,13 @@ After installing DTR, you should configure:
 
   ![](../images/install-dtr-3.png)
 
-## Step 5. Test pushing and pulling
+## Step 6. Test pushing and pulling
 
 Now that you have a working installation of DTR, you should test that you can
 push and pull images to it.
 [Learn how to push and pull images](../repos-and-images/index.md).
 
-## Step 6. Join replicas to the cluster
+## Step 7. Join replicas to the cluster
 
 This step is optional.
 
@@ -143,7 +112,7 @@ replicas:
     ```bash
     $ docker run -it --rm \
       docker/dtr:2.1.0-beta3 join \
-      --ucp-node <hostname> \
+      --ucp-node <ucp-node-name> \
       --ucp-insecure-tls
     ```
 
