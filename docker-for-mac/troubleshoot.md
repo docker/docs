@@ -1,9 +1,8 @@
 ---
+description: Troubleshooting, logs, and known issues
+keywords: mac, troubleshooting, logs, issues
 redirect_from:
 - /mackit/troubleshoot/
-description: Troubleshooting, logs, and known issues
-keywords:
-- mac, troubleshooting, logs, issues
 title: Logs and troubleshooting
 ---
 
