@@ -1,7 +1,6 @@
 ---
 description: Describes how to set up your local machine and repository
-keywords:
-- GitHub account, repository, clone, fork, branch, upstream, Git, Go, make
+keywords: GitHub account, repository, clone, fork, branch, upstream, Git, Go, make
 title: Configure Git for contributing
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: Overview of Kitematic development process
-keywords:
-- Kitematic, open source, contribute, contributor, tour, development
+keywords: Kitematic, open source, contribute, contributor, tour, development
 title: Get started with your Kitematic contributions
 ---
 

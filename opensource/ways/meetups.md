@@ -1,7 +1,6 @@
 ---
 description: Organize a Docker Meetup
-keywords:
-- Docker, meetup, hosting, organizing
+keywords: Docker, meetup, hosting, organizing
 title: Organize a Docker meetup
 ---
 

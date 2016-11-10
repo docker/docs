@@ -1,7 +1,6 @@
 ---
 description: Basic workflow for Docker contributions
-keywords:
-- contribute, pull request, review, workflow, beginner, squash,  commit
+keywords: contribute, pull request, review, workflow, beginner, squash,  commit
 title: Participate in the PR review
 ---
 

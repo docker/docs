@@ -1,7 +1,6 @@
 ---
 description: Support the community
-keywords:
-- support, community, users, irc
+keywords: support, community, users, irc
 title: Support the community
 ---
 
