@@ -52,7 +52,7 @@ When creating a backup, the resulting .tar file contains sensitive information
 like private keys. You should ensure the backups are stored securely.
 
 You can check the
-[reference documentation](../reference/backup.md), for the
+[reference documentation](../../reference/cli/backup.md), for the
 backup command to learn about all the available flags.
 
 As an example, to create a backup of a DTR node, you can use:
@@ -99,7 +99,7 @@ consideration whether your DTR installation is configured to store images on
 the filesystem or using a cloud provider.
 
 You can check the
-[reference documentation](../reference/backup.md), for the
+[reference documentation](../../reference/cli/backup.md), for the
 backup command to learn about all the available flags.
 
 

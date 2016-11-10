@@ -1,12 +1,9 @@
-+++
-type = "_default"
-title = "v2.1.0 API"
-description = "v2.1.0 API"
-keywords = ["Docker, DTR, API, v2.1.0"]
-weight = 101
-[menu.main]
-parent = "smn_dtrapi"
-+++
+---
+title: Docker Trusted Registry 2.1 API
+description: Learn how to use the Docker Trusted Registry REST API
+keywords:
+- dtr, api, reference
+---
 
 <div class="swagger-section">
 <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
