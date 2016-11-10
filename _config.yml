@@ -19,7 +19,7 @@ gems:
 webrick:
   headers:
     Cache-Control: 600
-    
+
 defaults:
   -
     scope:
@@ -28,3 +28,35 @@ defaults:
     values:
       layout: docs
       archiveserver: "http://54.71.194.30"
+  -
+    scope:
+      path: "datacenter/dtr/2.0"
+    values:
+      hide_from_sitemap: true
+      dtr_latest: 2.1
+  -
+    scope:
+      path: "datacenter/ucp/1.1"
+    values:
+      hide_from_sitemap: true
+      ucp_latest: 2.0
+  -
+    scope:
+      path: "apidocs/v1.3.3"
+    values:
+      hide_from_sitemap: true
+  -
+    scope:
+      path: "apidocs/v1.4.0"
+    values:
+      hide_from_sitemap: true
+  -
+    scope:
+      path: "apidocs/v2.0.0"
+    values:
+      hide_from_sitemap: true
+  -
+    scope:
+      path: "apidocs/v2.0.1"
+    values:
+      hide_from_sitemap: true
