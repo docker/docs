@@ -1,7 +1,6 @@
 ---
 description: Frequently asked questions
-keywords:
-- windows faqs
+keywords: windows faqs
 title: Frequently asked questions (FAQ)
 ---
 
