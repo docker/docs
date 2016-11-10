@@ -1,9 +1,8 @@
 ---
+description: Multi-CPU Architecture Support
+keywords: mac, Multi-CPU architecture support
 redirect_from:
 - /mackit/multi-arch/
-description: Multi-CPU Architecture Support
-keywords:
-- mac, Multi-CPU architecture support
 title: Leveraging multi-CPU architecture support
 ---
 

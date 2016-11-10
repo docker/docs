@@ -1,4 +1,6 @@
 ---
+description: Getting Started
+keywords: mac, beta, alpha, tutorial
 redirect_from:
 - /mackit/
 - /mackit/getting-started/
@@ -6,9 +8,6 @@ redirect_from:
 - /mac/started/
 - /docker-for-mac/started/
 - /installation/mac/
-description: Getting Started
-keywords:
-- mac, beta, alpha, tutorial
 title: Get started with Docker for Mac
 ---
 
