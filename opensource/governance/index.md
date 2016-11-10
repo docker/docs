@@ -1,7 +1,6 @@
 ---
 description: Describes Docker's communication channels
-keywords:
-- IRC, Google group, Twitter, blog,  Stackoverflow
+keywords: IRC, Google group, Twitter, blog,  Stackoverflow
 title: Governance
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: Organize our issues
-keywords:
-- governance, board, members, profiles
+keywords: governance, board, members, profiles
 title: Organize our issues
 ---
 

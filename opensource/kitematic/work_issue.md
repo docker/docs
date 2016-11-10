@@ -1,7 +1,6 @@
 ---
 description: Explains how to find a Kitematic issue
-keywords:
-- Kitematic, open source, contribute, contributor, tour, development
+keywords: Kitematic, open source, contribute, contributor, tour, development
 title: Develop in Kitematic (work on an issue)
 ---
 

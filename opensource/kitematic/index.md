@@ -1,7 +1,6 @@
 ---
 description: Introduces Kitematic contribute topics and tour
-keywords:
-- Kitematic, open source, contribute, contributor, tour, issue, review
+keywords: Kitematic, open source, contribute, contributor, tour, issue, review
 title: Contribute to Kitematic
 ---
 

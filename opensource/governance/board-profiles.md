@@ -1,7 +1,6 @@
 ---
 description: Board member profiles
-keywords:
-- governance, board, members, profiles
+keywords: governance, board, members, profiles
 title: Board member profiles
 ---
 

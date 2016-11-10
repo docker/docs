@@ -1,9 +1,8 @@
 ---
+description: Contribute code
+keywords: governance, board, members, profiles
 redirect_from:
 - /contributing/contributing
-description: Contribute code
-keywords:
-- governance, board, members, profiles
 title: Quickstart code or doc contribution
 ---
 

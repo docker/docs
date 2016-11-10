@@ -1,7 +1,6 @@
 ---
 description: How to set up a server to test Docker Windows client
-keywords:
-- development, inception, container, image Dockerfile, dependencies, Go, artifacts,  windows
+keywords: development, inception, container, image Dockerfile, dependencies, Go, artifacts,  windows
 title: Get the required software for Windows
 ---
 

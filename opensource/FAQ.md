@@ -1,7 +1,6 @@
 ---
 description: Overview of contributing
-keywords:
-- open, source, contributing, overview
+keywords: open, source, contributing, overview
 title: FAQ for contributors
 ---
 

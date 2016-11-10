@@ -1,8 +1,7 @@
 ---
 description: Docker Governance Advisory Board
-keywords:
-- governance, board, members, explained
-title: "Docker Governance Advisory Board: June 2015 version"
+keywords: governance, board, members, explained
+title: 'Docker Governance Advisory Board: June 2015 version'
 ---
 
 An initial version of this proposal was posted for comments on April 30th,

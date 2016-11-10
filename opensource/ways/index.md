@@ -1,7 +1,6 @@
 ---
 description: Contribute code
-keywords:
-- governance, board, members, profiles
+keywords: governance, board, members, profiles
 title: Other ways to contribute
 ---
 
