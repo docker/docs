@@ -74,4 +74,4 @@ deployed.
 
 ## Where to go next
 
-* [Deploy an app from the UI](deploy-app-ui.md)
+* [Deploy an app from the UI](index.md)

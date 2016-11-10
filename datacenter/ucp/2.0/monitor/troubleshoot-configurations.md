@@ -74,5 +74,5 @@ To learn more about the `etcdctl` utility, check the
 
 ## Where to go next
 
-* [Monitor your cluster](monitor-ucp.md)
+* [Monitor your cluster](index.md)
 * [Get support](../support.md)

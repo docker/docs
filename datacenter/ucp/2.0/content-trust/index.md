@@ -46,7 +46,7 @@ To interact with the Notary server, you need to
 
 Once you've installed the Notary client, you need to configure it to talk to
 the Notary server that is built into Docker Trusted Registry. This can be done
-using a [Notary configuration file](https://docs.docker.com/notary/reference/client-config/#/remote-server-section-optional)
+using a [Notary configuration file](/notary/reference/client-config.md)
 or by running:
 
 ```bash
@@ -170,4 +170,4 @@ $ notary key import key.pem
 ## Where to go next
 
 * [Manage trusted repositories](manage-trusted-repositories.md)
-* [Get started with Notary](https://docs.docker.com/notary/getting_started/)
+* [Get started with Notary](/notary/getting_started.md)

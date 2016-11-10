@@ -65,4 +65,4 @@ the images you deploy have not been altered in any way.
 ## Where to go next
 
 * [UCP architecture](architecture.md)
-* [Install UCP](installation/install-production.md)
+* [Install UCP](installation/install.md)

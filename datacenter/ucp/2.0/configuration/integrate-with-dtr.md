@@ -112,6 +112,6 @@ Get https://dtr/v1/_ping: x509: certificate signed by unknown authority
 
 ## Where to go next
 
-* [Monitor your cluster](../monitor/monitor-ucp.md)
-* [Troubleshoot your cluster](../monitor/troubleshoot-ucp.md)
+* [Monitor your cluster](../monitor/index.md)
+* [Troubleshoot your cluster](../monitor/troubleshoot.md)
 * [Run only signed images](../content-trust/index.md)

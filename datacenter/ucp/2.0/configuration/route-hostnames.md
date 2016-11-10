@@ -12,7 +12,7 @@ allows you to extend service discovery to have name-based virtual hosting for
 HTTP services.
 
 See the
-[Docker Engine documentation on overlay networks](https://docs.docker.com/engine/swarm/networking/)
+[Docker Engine documentation on overlay networks](/engine/swarm/networking.md)
 for more information on what Docker Engine provides.
 
 This feature is currently experimental.

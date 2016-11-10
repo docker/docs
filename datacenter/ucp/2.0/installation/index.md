@@ -1,60 +1,129 @@
 ---
-title: UCP System requirements
-description: Learn about the system requirements for installing Docker Universal Control
-  Plane.
+title: Install UCP for production
+description: Learn how to install Docker Universal Control Plane on production
 keywords:
-- docker, ucp, architecture, requirements
+- Universal Control Plane, UCP, install
 ---
 
-Docker Universal Control Plane can be installed on-premises or on the cloud.
-Before installing, be sure your infrastructure has these requirements.
+Docker Universal Control Plane (UCP) is a containerized application that can be
+installed on-premise or on a cloud infrastructure.
 
-## Hardware and software requirements
+If you're installing Docker Datacenter on Azure, [follow this guide](https://success.docker.com/?cid=ddc-on-azure).
 
-You can install UCP on-premises or on a cloud provider. To install UCP,
-all nodes must have:
+## Step 1: Validate the system requirements
 
-* Linux kernel version 3.10 or higher
-* CS Docker Engine version 1.12.1 or higher
-* 2.00 GB of RAM
-* 3.00 GB of available disk space
-* A static IP address
+The first step to installing UCP, is ensuring your
+infrastructure has all the [requirements UCP needs to run](system-requirements.md).
 
-For highly-available installations, you also need a way to transfer files
-between hosts.
 
-## Ports used
+## Step 2: Install CS Docker on all nodes
 
-When installing UCP on a host, make sure the following ports are open:
+UCP is a containerized application that requires CS Docker Engine 1.12.0 or
+above to run. Start by installing CS Docker Engine on all hosts that you want to
+manage with UCP.
 
-| Hosts             | Direction | Port                    | Purpose                                                                           |
-|:------------------|:---------:|:------------------------|:----------------------------------------------------------------------------------|
-| managers, workers |    in     | TCP 443  (configurable) | Port for the UCP web UI and API                                                   |
-| managers          |    in     | TCP 2376 (configurable) | Port for the Docker Swarm manager. Used for backwards compatibility               |
-| managers, workers |    in     | TCP 2377 (configurable) | Port for communication between swarm nodes                                        |
-| managers, workers |  in, out  | TCP, UDP 4789           | Port for overlay networking                                                       |
-| managers, workers |  in, out  | TCP, UDP 7946           | Port  for overlay networking                                                      |
-| managers, workers |    in     | TCP 12376               | Port for a TLS proxy that provides access to UCP, Docker Engine, and Docker Swarm |
-| managers          |    in     | TCP 12379               | Port for internal node configuration, cluster configuration, and HA               |
-| managers          |    in     | TCP 12380               | Port for internal node configuration, cluster configuration, and HA               |
-| managers          |    in     | TCP 12381               | Port for the certificate authority                                                |
-| managers          |    in     | TCP 12382               | Port for the UCP certificate authority                                            |
-| managers          |    in     | TCP 12383               | Port for the authentication storage backend                                       |
-| managers          |    in     | TCP 12384               | Port for the authentication storage backend for replication across managers       |
-| managers          |    in     | TCP 12385               | Port for the authentication service API                                           |
-| managers          |    in     | TCP 12386               | Port for the authentication worker                                                |
+Make sure you install the same CS Docker Engine version on all the nodes. Also,
+if you're creating virtual machine templates with CS Docker Engine  already
+installed, make sure the `/etc/docker/key.json` file is not included in the
+virtual machine image. When provisioning the virtual machine, restart the Docker
+daemon to generate a new `/etc/docker/key.json` file.
 
-## Compatibility and maintenance lifecycle
+## Step 3: Customize named volumes
 
-Docker Datacenter is a software subscription that includes 3 products:
+Skip this step if you want to use the defaults provided by UCP.
 
-* CS Docker Engine,
-* Docker Trusted Registry,
-* Docker Universal Control Plane.
+Docker UCP uses named volumes to persist data. If you want
+to customize the drivers used to manage these volumes, you can create the
+volumes before installing UCP. When you install UCP, the installer
+will notice that the volumes already exist, and will start using them.
+[Learn about the named volumes used by UCP](../architecture.md).
 
-[Learn more about the maintenance lifecycle for these products](http://success.docker.com/Get_Help/Compatibility_Matrix_and_Maintenance_Lifecycle).
+If these volumes don't exist, they'll be automatically created when installing
+UCP.
+
+## Step 4: Install UCP
+
+To install UCP you use the `docker/ucp` image, which has commands to install and
+manage UCP.
+
+To install UCP:
+
+1. Use ssh to log in into the host where you want to install UCP.
+
+2.  Run the following command:
+
+    ```bash
+    # Pull the latest version of UCP
+    $ docker pull docker/ucp:latest
+
+    # Install UCP
+    $ docker run --rm -it --name ucp \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      docker/ucp install \
+      --host-address <node-ip-address> \
+      --interactive
+    ```
+
+    This runs the install command in interactive mode, so that you're
+    prompted for any necessary configuration values.
+    To find what other options are available in the install command, check the
+    [reference documentation](../reference/install.md).
+
+## Step 5: License your installation
+
+Now that UCP is installed, you need to license it. In your browser, navigate
+to the UCP web UI and upload your license.
+
+![](../images/install-production-1.png)
+
+If you don't have a license yet, [learn how to get a free trial license](license.md).
+
+## Step 6: Join manager nodes
+
+Skip this step if you don't want your UCP swarm to be highly available.
+
+To make your UCP swarm fault-tolerant and highly available, you
+can join more manager nodes to your it. Manager nodes are the nodes in the
+swarm that perform the orchestration and swarm management tasks, and
+dispatch tasks for worker nodes to execute.
+[Learn more about high-availability](../high-availability/index.md).
+
+To join manager nodes to the swarm, go to the **UCP web UI**, navigate to
+the **Resources** page, and go to the **Nodes** section.
+
+![](../images/install-production-2.png)
+
+Click the **Add Node button** to add a new node.
+
+![](../images/install-production-3.png)
+
+Check the 'Add node as a manager' to turn this node into a manager and replicate
+UCP for high-availability.
+Set the 'Use a custom listen address' option if you want to customize the
+network and port where this node will listen for swarm management traffic. By
+default the node listens on port 2377.
+Set the 'Use a custom advertise address' option if you want to customize the
+network and port this node will advertise to other swarm members so that they
+can reach it.
+
+For each manager node that you want to join to UCP, login into that
+node using ssh, and run the join command that is displayed on UCP.
+
+![](../images/install-production-4.png)
+
+After you run the join command in the node, the node starts being displayed
+in UCP.
+
+## Step 7: Join worker nodes
+
+Skip this step if you don't want to add more nodes to run and scale your apps.
+
+To add more computational resources to your swarm, you can join worker nodes.
+These nodes execute tasks assigned to them by the manager nodes. For this,
+use the same steps as before, but don't check the 'Add node as a manager'
+option.
 
 ## Where to go next
 
-* [UCP architecture](../architecture.md)
-* [Plan a production installation](plan-production-install.md)
+* [Use externally-signed certificates](../configuration/index.md)
+* [Integrate with LDAP](../configuration/ldap-integration.md)

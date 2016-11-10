@@ -209,4 +209,4 @@ ensure your choices make sense.
 
 ## See also
 
-* [Configure security settings](config-security.md)
+* [Use your own certificates](index.md)
