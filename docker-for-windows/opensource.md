@@ -1,7 +1,6 @@
 ---
 description: Docker's use of Open Source
-keywords:
-- docker, opensource
+keywords: docker, opensource
 title: Open source components and licensing
 ---
 

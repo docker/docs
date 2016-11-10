@@ -1,9 +1,8 @@
 ---
+description: Troubleshooting, logs, and known issues
+keywords: windows, troubleshooting, logs, issues
 redirect_from:
 - /windows/troubleshoot/
-description: Troubleshooting, logs, and known issues
-keywords:
-- windows, troubleshooting, logs, issues
 title: Logs and troubleshooting
 ---
 

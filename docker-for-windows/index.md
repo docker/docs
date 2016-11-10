@@ -1,4 +1,6 @@
 ---
+description: Getting Started
+keywords: windows, beta, alpha, tutorial
 redirect_from:
 - /winkit/getting-started/
 - /winkit/
@@ -6,9 +8,6 @@ redirect_from:
 - /windows/started/
 - /docker-for-windows/started/
 - /installation/windows/
-description: Getting Started
-keywords:
-- windows, beta, alpha, tutorial
 title: Get started with Docker for Windows
 ---
 
