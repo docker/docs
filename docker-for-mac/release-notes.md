@@ -202,6 +202,25 @@ events or unexpected unmounts.
 
 ## Beta Release Notes
 
+### Beta 30 Release Notes (2016-11-10 1.12.3-beta30)
+
+**New**
+
+- Better support for Split DNS VPN configurations
+
+**Upgrades**
+
+- Docker Compose 1.9.0-rc4
+- Linux kernel 4.4.30
+
+**Bug fixes and minor changes**
+
+- HyperKit: code cleanup and minor fixes
+- VPNKit: improvements to DNS handling
+- Improvements to Logging and Diagnostics
+- osxfs: switched to `libev/kqueue` to improve latency
+
+
 ### Beta 29.3 Release Notes (2016-11-02 1.12.3-beta29.3)
 
 **Upgrades**

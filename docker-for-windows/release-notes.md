@@ -206,8 +206,20 @@ about both kinds of releases, and download stable and beta product installers at
 * Docker Machine 0.8.0
 * Docker Compose 1.8.0
 
-
 ## Beta Release Notes
+
+### Beta 30 Release Notes (2016-11-10 1.12.3-beta30)
+
+**Upgrades**
+
+- Docker Compose 1.9.0-rc4
+- Linux kernel 4.4.30
+
+**Bug fixes and minor changes**
+
+- Optimized disk on stop
+- Always remove the disk on factory reset
+- Improvements to Logging and Diagnostics
 
 ### Beta 29.3 Release Notes (2016-11-02 1.12.3-beta29.3)
 
