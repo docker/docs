@@ -56,5 +56,5 @@ specially useful if the UCP web application is not working.
 
 ## Where to go next
 
-* [Monitor your cluster](monitor-ucp.md)
+* [Monitor your cluster](index.md)
 * [Troubleshoot cluster configurations](troubleshoot-configurations.md)

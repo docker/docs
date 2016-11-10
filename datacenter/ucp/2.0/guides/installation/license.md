@@ -30,5 +30,5 @@ Click **Upload License** for the changes to take effect.
 
 ## Where to go next
 
-* [Install UCP](install-production.md)
+* [Install UCP](index.md)
 * [Install UCP offline](install-offline.md)

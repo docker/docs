@@ -67,7 +67,7 @@ To install UCP:
     This runs the install command in interactive mode, so that you're
     prompted for any necessary configuration values.
     To find what other options are available in the install command, check the
-    [reference documentation](../reference/install.md).
+    [reference documentation](../../reference/cli/install.md).
 
 ## Step 5: License your installation
 
@@ -126,4 +126,4 @@ option.
 ## Where to go next
 
 * [Use externally-signed certificates](../configuration/index.md)
-* [Integrate with LDAP](../configuration/ldap-integration.md)
+* [Integrate with LDAP](../configuration/integrate-with-ldap.md)

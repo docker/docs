@@ -31,7 +31,7 @@ $ docker run --rm -it \
 
 This runs the uninstall command in interactive mode, so that you are prompted
 for any necessary configuration values.
-[Check the reference documentation](../reference/index.md) to learn the options
+[Check the reference documentation](../../reference/cli/index.md) to learn the options
 available in the `uninstall-ucp` command.
 
 ## Where to go next

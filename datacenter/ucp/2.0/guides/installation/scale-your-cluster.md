@@ -20,7 +20,7 @@ manager or worker:
     Having multiple manager nodes allows your cluster to be highly-available
     and tolerate node failures. It also allows you to load-balance user requests
     to the cluster.
-    [Learn more about high-availability](../high-availability/set-up-high-availability.md).
+    [Learn more about high-availability](../high-availability/index.md).
 
 * Worker nodes
 
@@ -68,4 +68,4 @@ load-balancing pool.
 
 ## Where to go next
 
-* [Monitor your cluster](../monitor/monitor-ucp.md)
+* [Monitor your cluster](../monitor/index.md)

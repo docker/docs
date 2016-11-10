@@ -48,10 +48,10 @@ all the images. Then you copy that package to the host where you’ll install UC
 5.  Install Docker UCP.
 
     Now that the offline hosts have all the images needed to install UCP,
-    you can [install Docker UCP that host](install-production.md).
+    you can [install Docker UCP that host](index.md).
 
 
 ## Where to go next
 
-* [Install UCP for production](install-production.md).
+* [Install UCP for production](index.md).
 * [UCP system requirements](system-requirements.md)
