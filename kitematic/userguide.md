@@ -1,8 +1,7 @@
 ---
 description: Documentation that provides an overview of Kitematic and installation instructions
-keywords:
-- docker, documentation, about, technology, kitematic, gui
-title: "Kitematic user guide"
+keywords: docker, documentation, about, technology, kitematic, gui
+title: Kitematic user guide
 ---
 
 ## Overview
