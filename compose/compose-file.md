@@ -897,6 +897,21 @@ SIGTERM. Setting an alternative signal using `stop_signal` will cause
 
     stop_signal: SIGUSR1
 
+### sysctls
+
+> [Added in version 2.1 file format](compose-file.md#version-21).
+
+Kernel parameters to set in the container. You can use either an array or a
+dictionary.
+
+    sysctls:
+      net.core.somaxconn: 1024
+      net.ipv4.tcp_syncookies: 0
+
+    sysctls:
+      - net.core.somaxconn=1024
+      - net.ipv4.tcp_syncookies=0
+
 ### ulimits
 
 Override the default ulimits for a container. You can either specify a single
@@ -918,6 +933,7 @@ limit as an integer or soft/hard limits as a mapping.
 Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
 See [dockerd](/engine/reference/commandline/dockerd.md#disable-user-namespace-for-a-container) for
 more information.
+
 
 ### volumes, volume\_driver
 
@@ -1447,6 +1463,7 @@ several more.
 - Added: [deploy](compose-file.md#deploy),
   [healthcheck](compose-file.md#healthcheck),
   [stop_grace_period](compose-file.md#stop-grace-period).
+- [`sysctls`](compose-file.md#sysctls)
 
 ### Upgrading
 
