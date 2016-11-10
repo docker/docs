@@ -1,7 +1,6 @@
 ---
 description: Swarm filters
-keywords:
-- docker, swarm, clustering,  filters
+keywords: docker, swarm, clustering, filters
 title: Swarm filters
 ---
 

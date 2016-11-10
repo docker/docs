@@ -1,7 +1,6 @@
 ---
 description: Create a Swarm node.
-keywords:
-- swarm, create, join
+keywords: swarm, create, join
 title: join — Create a Swarm node
 ---
 

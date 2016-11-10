@@ -1,7 +1,6 @@
 ---
 description: Get help for Swarm commands.
-keywords:
-- swarm, help
+keywords: swarm, help
 title: help - Display information about a command
 ---
 

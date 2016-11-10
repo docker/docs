@@ -1,7 +1,6 @@
 ---
 description: Swarm and transport layer security
-keywords:
-- docker, swarm, TLS, discovery, security,  certificates
+keywords: docker, swarm, TLS, discovery, security, certificates
 title: Use Docker Swarm with TLS
 ---
 

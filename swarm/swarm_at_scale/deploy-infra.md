@@ -1,10 +1,9 @@
 ---
+description: Try Swarm at scale
+keywords: docker, swarm, scale, voting, application, certificates
 redirect_from:
 - /swarm/swarm_at_scale/03-create-cluster/
 - /swarm/swarm_at_scale/02-deploy-infra/
-description: Try Swarm at scale
-keywords:
-- docker, swarm, scale, voting, application,  certificates
 title: Deploy application infrastructure
 ---
 

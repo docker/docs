@@ -1,9 +1,8 @@
 ---
+description: Try Swarm at scale
+keywords: docker, swarm, scale, voting, application, certificates
 redirect_from:
 - /swarm/swarm_at_scale/04-deploy-app/
-description: Try Swarm at scale
-keywords:
-- docker, swarm, scale, voting, application,  certificates
 title: Deploy the application
 ---
 
