@@ -1,10 +1,9 @@
 ---
+description: Learn how to troubleshoot your DTR installation.
+keywords: docker, registry, monitor, troubleshoot
 redirect_from:
 - /docker-trusted-registry/adminguide/
 - /docker-trusted-registry/monitor/troubleshoot
-description: Learn how to troubleshoot your DTR installation.
-keywords:
-- docker, registry, monitor, troubleshoot
 title: Troubleshoot Docker Trusted Registry
 ---
 

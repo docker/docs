@@ -1,10 +1,9 @@
 ---
-redirect_from:
-- /ucp/configuration/configure-logs/
 description: Learn how to configure Docker Universal Control Plane to store your logs
   on an external log system.
-keywords:
-- docker, ucp, integrate, logs
+keywords: docker, ucp, integrate, logs
+redirect_from:
+- /ucp/configuration/configure-logs/
 title: Configure UCP logging
 ---
 

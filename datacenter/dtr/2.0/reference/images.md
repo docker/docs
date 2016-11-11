@@ -1,7 +1,6 @@
 ---
 description: Docker Trusted Registry images command reference.
-keywords:
-- docker, registry, reference, images
+keywords: docker, registry, reference, images
 title: docker/dtr images
 ---
 

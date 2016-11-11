@@ -1,7 +1,6 @@
 ---
 description: Manage the engine discovery configuration on a node.
-keywords:
-- docker, ucp, discovery
+keywords: docker, ucp, discovery
 title: docker/ucp engine-discovery
 ---
 

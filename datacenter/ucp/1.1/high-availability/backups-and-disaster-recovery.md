@@ -1,10 +1,9 @@
 ---
-redirect_from:
-- /ucp/high-availability/backups-and-disaster-recovery/
 description: Learn how to backup your Docker Universal Control Plane cluster, and
   to recover your cluster from an existing backup.
-keywords:
-- docker, ucp, backup, restore, recovery
+keywords: docker, ucp, backup, restore, recovery
+redirect_from:
+- /ucp/high-availability/backups-and-disaster-recovery/
 title: Backups and disaster recovery
 ---
 

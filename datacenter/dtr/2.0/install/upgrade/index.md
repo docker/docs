@@ -1,9 +1,8 @@
 ---
+description: Learn how to upgrade your Docker Trusted Registry to a new minor version or patch release.
+keywords: docker, dtr, upgrade, install
 redirect_from:
 - /docker-trusted-registry/install/upgrade/upgrade-minor/
-description: Learn how to upgrade your Docker Trusted Registry to a new minor version or patch release.
-keywords:
-- docker, dtr, upgrade, install
 title: Upgrade from 2.0.0
 ---
 
