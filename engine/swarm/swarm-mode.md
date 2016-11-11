@@ -1,7 +1,6 @@
 ---
 description: Run Docker Engine in swarm mode
-keywords:
-- guide, swarm mode, node
+keywords: guide, swarm mode, node
 title: Run Docker Engine in swarm mode
 ---
 

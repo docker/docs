@@ -1,7 +1,6 @@
 ---
 description: expose, port, docker, bind publish
-keywords:
-- Examples, Usage, network, docker, documentation, user guide, multihost, cluster
+keywords: Examples, Usage, network, docker, documentation, user guide, multihost, cluster
 title: Bind container ports to the host
 ---
 

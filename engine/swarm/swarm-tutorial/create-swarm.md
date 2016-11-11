@@ -1,7 +1,6 @@
 ---
 description: Initialize the swarm
-keywords:
-- tutorial, cluster management, swarm mode
+keywords: tutorial, cluster management, swarm mode
 title: Create a swarm
 ---
 

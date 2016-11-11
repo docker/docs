@@ -1,7 +1,6 @@
 ---
 description: Learn how to configure DNS in Docker
-keywords:
-- docker, bridge, docker0, network
+keywords: docker, bridge, docker0, network
 title: Configure container DNS
 ---
 

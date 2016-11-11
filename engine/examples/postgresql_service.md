@@ -1,7 +1,6 @@
 ---
 description: Running and installing a PostgreSQL service
-keywords:
-- docker, example, package installation,  postgresql
+keywords: docker, example, package installation,  postgresql
 title: Dockerize PostgreSQL
 ---
 

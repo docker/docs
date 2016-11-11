@@ -1,7 +1,6 @@
 ---
 description: Automating content push pulls with trust
-keywords:
-- trust, security, docker,  documentation, automation
+keywords: trust, security, docker,  documentation, automation
 title: Automation with content trust
 ---
 

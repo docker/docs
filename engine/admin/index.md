@@ -1,10 +1,9 @@
 ---
+description: Configuring and running the Docker daemon on various distributions
+keywords: docker, daemon, configuration, running,  process managers
 redirect_from:
 - /engine/articles/configuring/
 - /engine/admin/configuring/
-description: Configuring and running the Docker daemon on various distributions
-keywords:
-- docker, daemon, configuration, running,  process managers
 title: Configure and run Docker on various distributions
 ---
 

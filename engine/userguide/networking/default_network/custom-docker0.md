@@ -1,7 +1,6 @@
 ---
 description: Customizing docker0
-keywords:
-- docker, bridge, docker0, network
+keywords: docker, bridge, docker0, network
 title: Customize the docker0 bridge
 ---
 

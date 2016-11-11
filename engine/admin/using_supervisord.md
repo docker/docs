@@ -1,9 +1,8 @@
 ---
+description: How to use Supervisor process management with Docker
+keywords: docker, supervisor,  process management
 redirect_from:
 - /engine/articles/using_supervisord/
-description: How to use Supervisor process management with Docker
-keywords:
-- docker, supervisor,  process management
 title: Use Supervisor with Docker
 ---
 

@@ -1,9 +1,8 @@
 ---
+description: How swarm nodes work
+keywords: docker, container, cluster, swarm mode, node
 redirect_from:
 - /engine/swarm/how-swarm-mode-works/
-description: How swarm nodes work
-keywords:
-- docker, container, cluster, swarm mode, node
 title: How nodes work
 ---
 

@@ -1,9 +1,8 @@
 ---
 description: Learn how to connect Docker containers together.
+keywords: Examples, Usage, user guide, links, linking, docker, documentation, examples, names, name, container naming, port, map, network port, network
 redirect_from:
-  - /userguide/dockerlinks/
-keywords:
-- Examples, Usage, user guide, links, linking, docker, documentation, examples, names, name, container naming, port, map, network port,  network
+- /userguide/dockerlinks/
 title: Legacy container links
 ---
 

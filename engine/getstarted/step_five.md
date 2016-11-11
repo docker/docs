@@ -1,11 +1,10 @@
 ---
+description: Getting started with Docker
+keywords: beginner, getting started, Docker
 redirect_from:
 - /mac/step_five/
 - /windows/step_five/
 - /linux/step_five/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
 title: Create a Docker Hub account and repository
 ---
 
