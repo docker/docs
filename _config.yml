@@ -27,3 +27,64 @@ defaults:
       type: "pages"
     values:
       layout: docs
+      defaultassignee: johndmulhausen
+  - scope:
+      path: "compose"
+    values:
+      assignee: "londoncalling"
+  - scope:
+      path: "cs-engine"
+    values:
+      assignee: "joaofnfernandes"
+  - scope:
+      path: "datacenter"
+    values:
+      assignee: "joaofnfernandes"
+  - scope:
+      path: "docker-cloud"
+    values:
+      assignee: "sanscontext"
+  - scope:
+      path: "docker-for-mac"
+    values:
+      assignee: "londoncalling"
+  - scope:
+      path: "docker-for-windows"
+    values:
+      assignee: "londoncalling"
+  - scope:
+      path: "docker-hub"
+    values:
+      assignee: "sanscontext"
+  - scope:
+      path: "docker-store"
+    values:
+      assignee: "johndmulhausen"
+  - scope:
+      path: "engine"
+    values:
+      assignee: "mstanleyjones"
+  - scope:
+      path: "kitematic"
+    values:
+      assignee: "londoncalling"
+  - scope:
+      path: "machine"
+    values:
+      assignee: "londoncalling"
+  - scope:
+      path: "notary"
+    values:
+      assignee: "johndmulhausen"
+  - scope:
+      path: "registry"
+    values:
+      assignee: "joaofnfernandes"
+  - scope:
+      path: "swarm"
+    values:
+      assignee: "londoncalling"
+  - scope:
+      path: "toolbox"
+    values:
+      assignee: "londoncalling"
