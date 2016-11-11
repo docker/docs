@@ -1,7 +1,6 @@
 ---
 description: How to use the Docker Engine user guide
-keywords:
-- engine, introduction, documentation, about, technology, docker, user, guide, framework, home, intro
+keywords: engine, introduction, documentation, about, technology, docker, user, guide, framework, home, intro
 title: Docker Engine user guide
 ---
 

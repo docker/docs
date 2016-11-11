@@ -1,7 +1,6 @@
 ---
 description: Delegations for content trust
-keywords:
-- trust, security, delegations, keys, repository
+keywords: trust, security, delegations, keys, repository
 title: Delegations for content trust
 ---
 

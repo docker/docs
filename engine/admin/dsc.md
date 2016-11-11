@@ -1,9 +1,8 @@
 ---
+description: Using DSC to configure a new Docker host
+keywords: powershell, dsc, installation, usage, docker,  documentation
 redirect_from:
 - /engine/articles/dsc/
-description: Using DSC to configure a new Docker host
-keywords:
-- powershell, dsc, installation, usage, docker,  documentation
 title: Use PowerShell DSC
 ---
 

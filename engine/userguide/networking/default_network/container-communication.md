@@ -1,7 +1,6 @@
 ---
 description: Understand container communication
-keywords:
-- docker, container, communication, network
+keywords: docker, container, communication, network
 title: Understand container communication
 ---
 

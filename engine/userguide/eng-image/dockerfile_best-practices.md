@@ -1,12 +1,11 @@
 ---
+description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
+keywords: Examples, Usage, base image, docker, documentation, dockerfile, best practices, hub, official repo
 redirect_from:
 - /articles/dockerfile_best-practices/
 - /engine/articles/dockerfile_best-practices/
 - /docker-cloud/getting-started/intermediate/optimize-dockerfiles/
 - /docker-cloud/tutorials/optimize-dockerfiles/
-description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
-keywords:
-- Examples, Usage, base image, docker, documentation, dockerfile, best practices, hub,  official repo
 title: Best practices for writing Dockerfiles
 ---
 

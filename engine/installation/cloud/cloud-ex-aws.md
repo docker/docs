@@ -1,8 +1,7 @@
 ---
 description: Example of a manual install of Docker Engine on a cloud provider, using Amazon Web Services (AWS) EC2. Shows how to create an EC2 instance, and install Docker Engine on it.
-keywords:
-- cloud, docker, machine, documentation,  installation, AWS, EC2
-title: "Example: Manual installation on a cloud provider"
+keywords: cloud, docker, machine, documentation, installation, AWS, EC2
+title: 'Example: Manual installation on a cloud provider'
 ---
 
 You can install Docker Engine directly to servers you have on cloud providers.  This example shows how to create an <a href="https://aws.amazon.com/" target="_blank"> Amazon Web Services (AWS)</a> EC2 instance, and install Docker Engine on it.
