@@ -1,16 +1,11 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/debian/"]
-title = "Installation on Debian"
-description = "Instructions for installing Docker on Debian."
-keywords = ["Docker, Docker documentation, installation,  debian"]
-[menu.main]
-parent = "engine_linux"
-weight=-2
-+++
-<![end-metadata]-->
-
-# Debian
+---
+redirect_from:
+- /engine/installation/debian/
+description: Instructions for installing Docker on Debian.
+keywords:
+- Docker, Docker documentation, installation,  debian
+title: Install Docker on Debian
+---
 
 Docker is supported on the following versions of Debian:
 
@@ -130,11 +125,11 @@ Before installing Docker, make sure you have set your `APT` repository correctly
 
         $ sudo apt-get install docker-engine
 
-5. Start the `docker` daemon.
+3. Start the `docker` daemon.
 
         $ sudo service docker start
 
-6. Verify `docker` is installed correctly.
+4. Verify `docker` is installed correctly.
 
         $ sudo docker run hello-world
 

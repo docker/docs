@@ -1,23 +1,19 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/gentoolinux/"]
-title = "Installation on Gentoo"
-description = "Installation instructions for Docker on Gentoo."
-keywords = ["gentoo linux, docker, documentation,  installation"]
-[menu.main]
-parent = "engine_linux"
-+++
-<![end-metadata]-->
-
-# Gentoo
+---
+redirect_from:
+- /engine/installation/gentoolinux/
+description: Installation instructions for Docker on Gentoo.
+keywords:
+- gentoo linux, docker, documentation,  installation
+title: Install Docker on Gentoo
+---
 
 Installing Docker on Gentoo Linux can be accomplished using one of two ways: the **official** way and the `docker-overlay` way.
 
 Official project page of [Gentoo Docker](https://wiki.gentoo.org/wiki/Project:Docker) team.
 
 ## Official way
-The first and recommended way if you are looking for a stable  
-experience is to use the official `app-emulation/docker` package directly  
+The first and recommended way if you are looking for a stable
+experience is to use the official `app-emulation/docker` package directly
 from the tree.
 
 If any issues arise from this ebuild including, missing kernel
@@ -63,7 +59,7 @@ prompt for all necessary kernel options.
     $ sudo emerge -av app-emulation/docker
 
 >Note: Sometimes there is a disparity between the latest versions
->in the official **Gentoo tree** and the **docker-overlay**.  
+>in the official **Gentoo tree** and the **docker-overlay**.
 >Please be patient, and the latest version should propagate shortly.
 
 ## Starting Docker
@@ -72,7 +68,7 @@ Ensure that you are running a kernel that includes all the necessary
 modules and configuration (and optionally for device-mapper
 and AUFS or Btrfs, depending on the storage driver you've decided to use).
 
-To use Docker, the `docker` daemon must be running as **root**.  
+To use Docker, the `docker` daemon must be running as **root**.
 To use Docker as a **non-root** user, add yourself to the **docker**
 group by running the following command:
 

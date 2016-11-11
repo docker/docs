@@ -1,17 +1,10 @@
 ---
-aliases:
-- /swarm/swarm_at_scale/about/
 description: Try Swarm at scale
-keywords:
-- docker, swarm, scale, voting, application, architecture
-menu:
-  main:
-    parent: scale_swarm
-    weight: -99
+keywords: docker, swarm, scale, voting, application, architecture
+redirect_from:
+- /swarm/swarm_at_scale/about/
 title: Learn the application architecture
 ---
-
-# Learn the application architecture
 
 On this page, you learn about the Swarm at scale example.  Make sure you have
 read through [the introduction](index.md) to get an idea of the skills and time
@@ -83,7 +76,7 @@ is what your environment should look like.
 As the previous diagram shows, each node in the cluster runs the following containers:
 
 - `frontend01`:
-  - Container: voting-app 
+  - Container: voting-app
   - Container: Swarm agent
 - `frontend02`:
   - Container: voting-app

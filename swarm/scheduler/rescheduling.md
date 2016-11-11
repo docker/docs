@@ -1,11 +1,8 @@
 ---
 description: Swarm rescheduling
-keywords:
-- docker, swarm, clustering, rescheduling
-title: Rescheduling
+keywords: docker, swarm, clustering, rescheduling
+title: Swarm rescheduling
 ---
-
-# Swarm Rescheduling
 
 You can set rescheduling policies with Docker Swarm. A rescheduling policy
 determines what the Swarm scheduler does for containers when the nodes they are
@@ -57,5 +54,5 @@ Failed to start rescheduled container 2362901cb213da321
 
 ## Related information
 
-* [Apply custom metadata](https://docs.docker.com/engine/userguide/labels-custom-metadata/)
-* [Environment variables with run](https://docs.docker.com/engine/reference/run/#env-environment-variables)
+* [Apply custom metadata](/engine/userguide/labels-custom-metadata/)
+* [Environment variables with run](/engine/reference/run/#env-environment-variables)

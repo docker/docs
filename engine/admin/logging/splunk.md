@@ -1,13 +1,11 @@
 ---
-aliases:
+redirect_from:
 - /engine/reference/logging/splunk/
 description: Describes how to use the Splunk logging driver.
 keywords:
 - splunk, docker, logging, driver
 title: Splunk logging driver
 ---
-
-# Splunk logging driver
 
 The `splunk` logging driver sends container logs to
 [HTTP Event Collector](http://dev.splunk.com/view/event-collector/SP-CAAAE6M)

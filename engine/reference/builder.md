@@ -1,15 +1,11 @@
-<!--[metadata]>
-+++
-title = "Dockerfile reference"
-description = "Dockerfiles use a simple DSL which allows you to automate the steps you would normally manually take to create an image."
-keywords = ["builder, docker, Dockerfile, automation,  image creation"]
-[menu.main]
-parent = "engine_ref"
-weight=-90
-+++
-<![end-metadata]-->
-
-# Dockerfile reference
+---
+redirect_from:
+  - /reference/builder/
+description: Dockerfiles use a simple DSL which allows you to automate the steps you would normally manually take to create an image.
+keywords:
+- builder, docker, Dockerfile, automation,  image creation
+title: Dockerfile reference
+---
 
 Docker can build images automatically by reading the instructions from a
 `Dockerfile`. A `Dockerfile` is a text document that contains all the commands a

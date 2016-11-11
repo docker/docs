@@ -1,16 +1,11 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/articles/chef/"]
-title = "Using Chef"
-description = "Installation and using Docker via Chef"
-keywords = ["chef, installation, usage, docker,  documentation"]
-[menu.main]
-parent = "engine_admin"
-weight="11"
-+++
-<![end-metadata]-->
-
-# Using Chef
+---
+redirect_from:
+- /engine/articles/chef/
+description: Installation and using Docker via Chef
+keywords:
+- chef, installation, usage, docker,  documentation
+title: Use Chef
+---
 
 > **Note**:
 > Please note this is a community contributed installation path.

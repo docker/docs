@@ -1,14 +1,9 @@
-<!--[metadata]>
-+++
-title = "Manage keys for content trust"
-description = "Manage keys for content trust"
-keywords = ["trust, security, root,  keys, repository"]
-[menu.main]
-parent= "smn_content_trust"
-+++
-<![end-metadata]-->
-
-# Manage keys for content trust
+---
+description: Manage keys for content trust
+keywords:
+- trust, security, root,  keys, repository
+title: Manage keys for content trust
+---
 
 Trust for an image tag is managed through the use of keys. Docker's content
 trust makes use of five different types of keys:

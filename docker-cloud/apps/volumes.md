@@ -1,17 +1,11 @@
 ---
-aliases:
+description: Work with data volumes
+keywords: data, volumes, create, reuse
+redirect_from:
 - /docker-cloud/tutorials/download-volume-data/
 - /docker-cloud/feature-reference/volumes/
-description: Work with data volumes
-keywords:
-- data, volumes, create, reuse
-menu:
-  main:
-    parent: apps
 title: Work with data volumes
 ---
-
-# Work with data volumes
 
 In Docker Cloud, you can define one or more data volumes for a service.
 **Volumes** are directories that are stored outside of the container's
@@ -22,7 +16,7 @@ redeployment, or shared with other services.
 ## Add a data volume to a service
 
 Data volumes can be either specified in the image's `Dockerfile` using the
-[VOLUME instruction](https://docs.docker.com/reference/builder/#volume), or when
+[VOLUME instruction](/reference/builder/#volume), or when
 creating a service.
 
 To define a data volume in a service, specify the **container path** where it

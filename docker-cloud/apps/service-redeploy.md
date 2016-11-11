@@ -1,16 +1,10 @@
 ---
-aliases:
-- /docker-cloud/feature-reference/service-redeploy/
 description: Redeploy running services
-keywords:
-- redeploy, running, services
-menu:
-  main:
-    parent: apps
-title: Redeploy running services
+keywords: redeploy, running, services
+redirect_from:
+- /docker-cloud/feature-reference/service-redeploy/
+title: Redeploy a running service
 ---
-
-# Redeploy a running service
 
 You can **redeploy** services in Docker Cloud while they are running to
 regenerate a service's containers. You might do this when a new version of the

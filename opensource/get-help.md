@@ -1,11 +1,6 @@
 ---
 description: Describes Docker's communication channels
-keywords:
-- IRC, Google group, Twitter, blog,  Stackoverflow
-menu:
-  main:
-    parent: mn_oss_contrib
-    weight: 3
+keywords: IRC, Google group, Twitter, blog,  Stackoverflow
 title: Where to chat or get help
 ---
 
@@ -16,8 +11,6 @@ title: Where to chat or get help
   background-color: transparent;
 }
 </style>
-
-# Where to chat or get help
 
 There are several communications channels you can use to chat with Docker
 community members and developers.
@@ -134,7 +127,7 @@ command line bar:
 
     Your nickname is now registered to chat on freenode.net.
 
-[Jump ahead to tips to join a docker channel and start chatting](get-help.md#tips)  
+[Jump ahead to tips to join a docker channel and start chatting](get-help.md#tips)
 
 ## IRCCloud
 

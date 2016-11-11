@@ -2,13 +2,8 @@
 description: OpenStack driver for machine
 keywords:
 - machine, OpenStack, driver
-menu:
-  main:
-    parent: smn_machine_drivers
 title: OpenStack
 ---
-
-# OpenStack
 
 Create machines on [OpenStack](http://www.openstack.org/software/)
 

@@ -1,16 +1,11 @@
-<!--[metadata]>
-+++
-aliases = "/engine/extend/plugins/"
-title = "Use Docker Engine plugins"
-description = "How to add additional functionality to Docker with plugins extensions"
-keywords = ["Examples, Usage, plugins, docker, documentation, user guide"]
-[menu.main]
-parent = "engine_extend"
-weight=3
-+++
-<![end-metadata]-->
-
-# Use Docker Engine plugins
+---
+redirect_from:
+- /engine/extend/plugins/
+description: How to add additional functionality to Docker with plugins extensions
+keywords:
+- Examples, Usage, plugins, docker, documentation, user guide
+title: Use Docker Engine plugins
+---
 
 This document describes the Docker Engine plugins generally available in Docker
 Engine. To view information on plugins managed by Docker Engine currently in

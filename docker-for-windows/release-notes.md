@@ -1,30 +1,107 @@
 ---
-aliases:
-- /winkit/release-notes/
 description: Change log / release notes per release
-keywords:
-- pinata, alpha, tutorial
-menu:
-  main:
-    identifier: docker-win-relnotes
-    parent: pinata_win_menu
-    weight: 7
-title: Release Notes
+keywords: pinata, alpha, tutorial
+redirect_from:
+- /winkit/release-notes/
+title: Docker for Windows Release notes
 ---
 
-# Docker for Windows Release Notes
+Here are the main improvements and issues per release, starting with the current
+release. The documentation is always updated for each release.
 
-Here are the main improvements and issues per release, starting with the current release. The documentation is always updated for each release.
+For system requirements, please see the Getting Started topic on [What to know
+before you install](index.md#what-to-know-before-you-install).
 
-For system requirements, please see the Getting Started topic on [What to know before you install](index.md#what-to-know-before-you-install).
-
-Release notes for _stable_ and _beta_ releases are listed below. You can learn about both kinds of releases, and download stable and beta product installers at [Download Docker for Windows](index.md#download-docker-for-windows).
+Release notes for _stable_ and _beta_ releases are listed below. You can learn
+about both kinds of releases, and download stable and beta product installers at
+[Download Docker for Windows](index.md#download-docker-for-windows).
 
 * [Stable Release Notes](release-notes.md#stable-release-notes)
 * [Beta Release Notes](release-notes.md#beta-release-notes)
 * [Alpha Release Notes](release-notes.md#alpha-release-notes)
 
 ## Stable Release Notes
+
+### Docker for Windows 1.13.3, 2016-11-09 (stable)
+
+**New**
+
+- Restore the VM's configuration when it was changed by the user
+
+- Detect firewall configuration that might block the file sharing
+
+- Send more GUI usage statistics to help us improve the product
+
+- The path to HyperV disks is not hardcoded anymore, making the Toolbox import work with non-standard path
+
+- Verify that ALL HyperV features are enabled
+
+- Added Moby console to the logs
+
+- Save the current engine with the other settings
+
+- Notary version 0.4.2 installed
+
+- Reworked the File Sharing dialog and underlying mechanism
+  - Pre-fill username
+  - Faster and more reliable feedback when the user/password is not valid
+  - Better support for domain users
+  - Error message in Logs when File Sharing failed for other reasons
+
+**Upgrades**
+
+- Docker 1.12.3
+- Linux Kernel 4.4.27
+- Docker Machine 0.8.2
+- Docker Compose 1.8.1
+- aufs 20160912
+
+**Bug fixes and minor changes**
+
+**General**
+
+- Added the settings to the diagnostics
+
+- Make sure we don't use an older Nlog library from the GAC
+
+- Fix a password escaping regression
+
+- Support writing large values to the database, specially for trusted CAs
+
+- Preserve the Powershell stacktraces
+
+- Write OS and Application versions at the top of each log file
+
+- Don't recreate the VM if only the DNS server is set
+
+- The uninstaller now kills the service if it failed to stop it properly
+
+- Improve debug information
+
+**Networking**
+
+- VpnKit is now restarted if it dies
+
+- VpnKit: impose a connection limit to avoid exhausting file descriptors
+
+- VpnKit: handle UDP datagrams larger than 2035 bytes
+
+- VpnKit: reduce the number of file descriptors consumed by DNS
+
+**File sharing**
+
+
+- Faster mount/unmount of shared drives
+
+- Added a timeout to mounting/unmounting a shared drive
+
+**Hyper-V**
+
+- Make sure invalid "DockerNat" switches are not used
+
+**Moby**
+
+- Increase default ulimit for memlock (fixes [https://github.com/docker/for-mac/issues/801](https://github.com/docker/for-mac/issues/801))
 
 ### Docker for Windows 1.12.1, 2016-09-16 (stable)
 
@@ -89,7 +166,7 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 * VpnKit supports search domains
 * VpnKit is now compiled with OCaml 4.03 rather than 4.02.3
 
-**Filesharing**
+**File sharing**
 
 * Set `cifs` version to 3.02
 
@@ -129,8 +206,38 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 * Docker Machine 0.8.0
 * Docker Compose 1.8.0
 
-
 ## Beta Release Notes
+
+### Beta 30 Release Notes (2016-11-10 1.12.3-beta30)
+
+**Upgrades**
+
+- Docker Compose 1.9.0-rc4
+- Linux kernel 4.4.30
+
+**Bug fixes and minor changes**
+
+- Optimized disk on stop
+- Always remove the disk on factory reset
+- Improvements to Logging and Diagnostics
+
+### Beta 29.3 Release Notes (2016-11-02 1.12.3-beta29.3)
+
+**Upgrades**
+
+- Docker Compose 1.9.0-rc2
+
+### Beta 29.2 Release Notes (2016-10-27 1.12.2-beta29.2)
+
+**Hotfixes**
+
+- Upgrade to Docker 1.12.3
+
+### Beta 29.1 Release Notes (2016-10-26 1.12.1-beta29.1)
+
+**Hotfixes**
+
+- Fixed missing `/dev/pty/ptmx`
 
 ### Beta 29 Release Notes (2016-10-25 1.12.3-rc1-beta29)
 
@@ -163,7 +270,7 @@ work. Some insider builds may not work.
 
 - Faster mount/unmount of shared drives
 - Added a timeout to mounting/unmounting a shared drive
-- Add the settings to the diagnostics
+- Added the settings to the diagnostics
 - Increase default ulimit for memlock (fixes https://github.com/docker/for-mac/issues/801)
 - Make sure we don't use an older Nlog library from the GAC
 
@@ -521,7 +628,7 @@ Unreleased. See Beta 23 for changes.
 * Fix some cases where `dotnet restore` could hang
 * Fixed `docker inspect` on an image
 * Removed the console from hyper-v manager
-* Improved diagnostic for VPN connection and add logs for the service port openers
+* Improved diagnostic for VPN connection and addedlogs for the service port openers
 * Improve Moby's boot sequence to adapt to longer boot time when swarm services are running
 * Forcefully turn off a VM that won't shut down
 * Clicking on a link from the changelog opens a browser
@@ -867,7 +974,7 @@ are working on a solution.
 
 * Remove debug console
 * Open browser with hyper-v installation instructions
-* Add Cloudfront for downloads from Europe
+* Added Cloudfront for downloads from Europe
 * Capture qemu logs during toolbox upgrades
 * Rename alpha distribution channel to beta
 

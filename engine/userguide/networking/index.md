@@ -1,19 +1,11 @@
-<!--[metadata]>
-+++
-aliases=[
-"/engine/userguide/networking/dockernetworks/"
-]
-title = "Docker container networking"
-description = "How do we connect docker containers within and across hosts ?"
-keywords = ["Examples, Usage, network, docker, documentation, user guide, multihost, cluster"]
-[menu.main]
-identifier="networking_index"
-parent = "smn_networking"
-weight = -5
-+++
-<![end-metadata]-->
-
-# Understand Docker container networks
+---
+redirect_from:
+- /engine/userguide/networking/dockernetworks/
+description: How do we connect docker containers within and across hosts ?
+keywords:
+- Examples, Usage, network, docker, documentation, user guide, multihost, cluster
+title: Docker container networking
+---
 
 This section provides an overview of the default networking behavior that Docker
 Engine delivers natively. It describes the type of networks created by default
@@ -572,6 +564,6 @@ functionality in user-defined networks.
 - [Work with network commands](work-with-networks.md)
 - [Get started with multi-host networking](get-started-overlay.md)
 - [Managing Data in Containers](../../tutorials/dockervolumes.md)
-- [Docker Machine overview](https://docs.docker.com/machine)
-- [Docker Swarm overview](https://docs.docker.com/swarm)
+- [Docker Machine overview](/machine)
+- [Docker Swarm overview](/swarm)
 - [Investigate the LibNetwork project](https://github.com/docker/libnetwork)

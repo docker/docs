@@ -1,21 +1,13 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mac/step_one/",
-"/windows/step_one/",
-"/linux/step_one/",
-]
-title = "Install Docker and run hello-world"
-description = "Getting started with Docker"
-keywords = ["beginner, getting started, Docker, install"]
-[menu.main]
-identifier = "getstart_all_install"
-parent = "tutorial_getstart_menu"
-weight = 1
-+++
-<![end-metadata]-->
-
-# Install Docker
+---
+redirect_from:
+- /mac/step_one/
+- /windows/step_one/
+- /linux/step_one/
+description: Getting started with Docker
+keywords:
+- beginner, getting started, Docker, install
+title: Install Docker and run hello-world
+---
 
 - [Step 1: Get Docker](#step-1-get-docker)
 - [Step 2: Install Docker](#step-2-install-docker)
@@ -70,9 +62,9 @@ For full instructions on getting Docker for various Linux distributions, see [In
 
 ## Step 2: Install Docker
 
-- **Docker for Mac** - Install instructions are at [Getting Started with Docker for Mac](https://docs.docker.com/docker-for-mac/).
+- **Docker for Mac** - Install instructions are at [Getting Started with Docker for Mac](/docker-for-mac/).
 
-- **Docker for Windows** - Install instructions are at [Getting Started with Docker for Windows](https://docs.docker.com/docker-for-windows/).
+- **Docker for Windows** - Install instructions are at [Getting Started with Docker for Windows](/docker-for-windows/).
 
 - **Docker Toolbox** - Install instructions are at [Docker Toolbox Overview](/toolbox/overview.md).
 

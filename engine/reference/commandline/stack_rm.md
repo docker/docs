@@ -1,17 +1,12 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/stack_rm/
 advisory: experimental
 description: The stack rm command description and usage
 keywords:
 - stack, rm, remove, down
-menu:
-  main:
-    parent: smn_cli
-title: stack rm
+title: docker stack rm (experimental)
 ---
-
-# stack rm (experimental)
 
 ```markdown
 Usage:  docker stack rm STACK

@@ -1,15 +1,12 @@
-<!--[metadata]>
-+++
-title = "Introduction"
-description = "Introduction to user guide"
-keywords = ["docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home,  intro"]
-identifier = "engine_guide_intro"
-[menu.main]
-parent="engine_guide"
-+++
-<![end-metadata]-->
-
-# Engine user guide
+---
+redirect_from:
+  - /userguide/
+description: Introduction to user guide
+identifier: engine_guide_intro
+keywords:
+- docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home,  intro
+title: Engine user guide
+---
 
 This guide takes you through the fundamentals of using Docker Engine and
 integrating it into your environment. You'll learn how to use Engine to:
@@ -94,7 +91,7 @@ Docker Hub is the central hub for Docker. It hosts public Docker images
 and provides services to help you build and manage your Docker
 environment. To learn more:
 
-Go to [Using Docker Hub](https://docs.docker.com/docker-hub/).
+Go to [Using Docker Hub](/docker-hub/).
 
 ### Docker Machine
 
@@ -103,7 +100,7 @@ can set up hosts for Docker Engines on your computer, on cloud providers,
 and/or in your data center, and then configure your Docker client to securely
 talk to them.
 
-Go to [Docker Machine user guide](https://docs.docker.com/machine/).
+Go to [Docker Machine user guide](/machine/).
 
 ### Docker Compose
 
@@ -111,7 +108,7 @@ Docker Compose allows you to define an application's components -- their contain
 configuration, links and volumes -- in a single file. Then a single command
 will set everything up and start your application running.
 
-Go to [Docker Compose user guide](https://docs.docker.com/compose/).
+Go to [Docker Compose user guide](/compose/).
 
 
 ### Docker Swarm
@@ -120,14 +117,14 @@ Docker Swarm pools several Docker Engines together and exposes them as a single
 virtual Docker Engine. It serves the standard Docker API, so any tool that already
 works with Docker can now transparently scale up to multiple hosts.
 
-Go to [Docker Swarm user guide](https://docs.docker.com/swarm/).
+Go to [Docker Swarm user guide](/swarm/).
 
 ## Getting help
 
 * [Docker homepage](https://www.docker.com/)
 * [Docker Hub](https://hub.docker.com)
 * [Docker blog](https://blog.docker.com/)
-* [Docker documentation](https://docs.docker.com/)
+* [Docker documentation](/)
 * [Docker Getting Started Guide](../getstarted/index.md)
 * [Docker code on GitHub](https://github.com/docker/docker)
 * [Docker mailing

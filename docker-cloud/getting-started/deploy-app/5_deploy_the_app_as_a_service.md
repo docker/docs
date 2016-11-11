@@ -1,18 +1,11 @@
 ---
-aliases:
+description: Deploy the app as a Docker Cloud service
+keywords: Python, deploy, Cloud
+redirect_from:
 - /docker-cloud/getting-started/python/5_deploy_the_app_as_a_service/
 - /docker-cloud/getting-started/golang/5_deploy_the_app_as_a_service/
-description: Deploy the app as a Docker Cloud service
-keywords:
-- Python, deploy, Cloud
-menu:
-  main:
-    parent: deploy-app
-    weight: -50
 title: Deploy the app as a Docker Cloud service
 ---
-
-# Deploy the app as a Docker Cloud service
 
 In this step you will deploy the app as a Docker Cloud Service. Remember that a service is a group of containers of the same **image:tag**.
 

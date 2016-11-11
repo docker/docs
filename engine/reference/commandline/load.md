@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/load/
 description: The load command description and usage
 keywords:
 - stdin, tarred, repository
-menu:
-  main:
-    parent: smn_cli
-title: load
+title: docker load
 ---
-
-# load
 
 ```markdown
 Usage:  docker load [OPTIONS]

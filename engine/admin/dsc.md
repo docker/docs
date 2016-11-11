@@ -1,16 +1,11 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/articles/dsc/"]
-title = "PowerShell DSC Usage"
-description = "Using DSC to configure a new Docker host"
-keywords = ["powershell, dsc, installation, usage, docker,  documentation"]
-[menu.main]
-parent = "engine_admin"
-weight="10"
-+++
-<![end-metadata]-->
-
-# Using PowerShell DSC
+---
+redirect_from:
+- /engine/articles/dsc/
+description: Using DSC to configure a new Docker host
+keywords:
+- powershell, dsc, installation, usage, docker,  documentation
+title: Use PowerShell DSC
+---
 
 Windows PowerShell Desired State Configuration (DSC) is a configuration
 management tool that extends the existing functionality of Windows PowerShell.

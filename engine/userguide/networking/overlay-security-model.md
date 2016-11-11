@@ -1,15 +1,10 @@
-<!--[metadata]>
-+++
-title = "Swarm mode overlay network security model"
-description = "Docker swarm mode overlay network security model"
-keywords = ["network, docker, documentation, user guide, multihost, swarm mode", "overlay"]
-[menu.main]
-parent = "smn_networking"
-weight=-2
-+++
-<![end-metadata]-->
-
-# Docker swarm mode overlay network security model
+---
+description: Docker swarm mode overlay network security model
+keywords:
+- network, docker, documentation, user guide, multihost, swarm mode
+- overlay
+title: Docker swarm mode overlay network security model
+---
 
 Overlay networking for Docker Engine swarm mode comes secure out of the box. The
 swarm nodes exchange overlay network information using a gossip protocol. By

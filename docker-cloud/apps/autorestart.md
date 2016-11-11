@@ -1,16 +1,10 @@
 ---
-aliases:
-- /docker-cloud/feature-reference/autorestart/
 description: Automatically restart a container in Docker Cloud
-keywords:
-- container, restart, automated
-menu:
-  main:
-    parent: apps
-title: Automatic container restart
+keywords: container, restart, automated
+redirect_from:
+- /docker-cloud/feature-reference/autorestart/
+title: Restart a container automatically
 ---
-
-# Automatically restart a container
 
 **Autorestart** is a service-level setting that can automatically start your
 containers if they stop or crash. You can use this setting as an automatic crash

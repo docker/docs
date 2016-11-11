@@ -1,16 +1,11 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/centos/"]
-title = "Installation on CentOS"
-description = "Instructions for installing Docker on CentOS"
-keywords = ["Docker, Docker documentation, requirements, linux, centos, epel, docker.io,  docker-io"]
-[menu.main]
-parent = "engine_linux"
-weight=-4
-+++
-<![end-metadata]-->
-
-# CentOS
+---
+redirect_from:
+- /engine/installation/centos/
+description: Instructions for installing Docker on CentOS
+keywords:
+- Docker, Docker documentation, requirements, linux, centos, epel, docker.io,  docker-io
+title: Install Docker on CentOS
+---
 
 Docker runs on CentOS 7.X. An installation on other binary compatible EL7
 distributions such as Scientific Linux might succeed, but Docker does not test

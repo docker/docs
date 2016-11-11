@@ -1,19 +1,11 @@
-<!--[metadata]>
-+++
-aliases = [
-"/engine/swarm/manager-administration-guide/"
-]
-title = "Swarm administration guide"
-description = "Manager administration guide"
-keywords = ["docker, container, swarm, manager, raft"]
-[menu.main]
-identifier="manager_admin_guide"
-parent="engine_swarm"
-weight="20"
-+++
-<![end-metadata]-->
-
-# Administer and maintain a swarm of Docker Engines
+---
+redirect_from:
+- /engine/swarm/manager-administration-guide/
+description: Manager administration guide
+keywords:
+- docker, container, swarm, manager, raft
+title: Administer and maintain a swarm of Docker Engines
+---
 
 When you run a swarm of Docker Engines, **manager nodes** are the key components
 for managing the swarm and storing the swarm state. It is important to

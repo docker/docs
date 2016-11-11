@@ -1,22 +1,13 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mac/step_six/",
-"/windows/step_six/",
-"/linux/step_six/",
-]
-title = "Tag, push, & pull your image"
-description = "Getting started with Docker"
-keywords = ["beginner, getting started, Docker"]
-[menu.main]
-identifier = "getstart_tag_push_pull"
-parent = "tutorial_getstart_menu"
-weight = 6
-+++
-<![end-metadata]-->
-
-
-# Tag, push, and pull your image
+---
+redirect_from:
+- /mac/step_six/
+- /windows/step_six/
+- /linux/step_six/
+description: Getting started with Docker
+keywords:
+- beginner, getting started, Docker
+title: Tag, push, and pull your image
+---
 
 In this section, you tag and push your `docker-whale` image to your newly
 created repository. When you are done, you test the repository by pulling your
@@ -72,14 +63,14 @@ If you don't already have a terminal open, open one now:
 
     The format for the login command is:
 
-        docker login 
+        docker login
 
     When prompted, enter your password and press enter. So, for example:
 
         $ docker login
         Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
-        Username: 
-        Password:        
+        Username:
+        Password:
         Login Succeeded
 
 9. Type the `docker push` command to push your image to your new repository.

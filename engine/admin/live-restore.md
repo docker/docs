@@ -1,20 +1,15 @@
-<!--[metadata]>
-+++
-title = "Keep containers alive during daemon downtime"
-description = "How to keep containers running when the daemon isn't available."
-keywords = ["docker, upgrade, daemon, dockerd, live-restore, daemonless container"]
-[menu.main]
-parent = "engine_admin"
-weight="6"
-+++
-<![end-metadata]-->
-
-# Keep containers alive during daemon downtime
+---
+description: How to keep containers running when the daemon isn't available.
+keywords:
+- docker, upgrade, daemon, dockerd, live-restore, daemonless container
+title: Keep containers alive during daemon downtime
+---
 
 By default, when the Docker daemon terminates, it shuts down running containers.
-Starting with Docker Engine 1.12, you can configure the daemon so that containers remain
-running if the daemon becomes unavailable. The live restore option helps reduce
-container downtime due to daemon crashes, planned outages, or upgrades.
+Starting with Docker Engine 1.12, you can configure the daemon so that
+containers remain running if the daemon becomes unavailable. The live restore
+option helps reduce container downtime due to daemon crashes, planned outages,
+or upgrades.
 
 ## Enable the live restore option
 

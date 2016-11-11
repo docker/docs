@@ -41,11 +41,13 @@
   </span><span class="nt">"is_ssl"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Docker Hub"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/repo/v1/registry/registry-1.docker.io/"</span><span class="p">,</span><span class="w">
-</span><span class="err">}</span><span class="w">
+  </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/repo/v1/user_namespace/registry/registry-1.docker.io/"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>Represents a registry where repositories are hosted.</p>
+
+<p>This is a <a href="#namespaced-endpoints">namespaced endpoint</a>.</p>
 
 <h3 id="attributes">Attributes</h3>
 
@@ -96,7 +98,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/repo/v1/registry/</code></p>
+<p><code class="prettyprint">GET /api/repo/v1/[optional_namespace/]registry/</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -139,7 +141,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/v1/registry/(host)/</code></p>
+<p><code class="prettyprint">GET /api/v1/[optional_namespace/]registry/(host)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 

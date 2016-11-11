@@ -11,11 +11,13 @@
   "is_ssl": true,
   "name": "Docker Hub",
   "port": 443,
-  "resource_uri": "/api/repo/v1/registry/registry-1.docker.io/",
+  "resource_uri": "/api/repo/v1/user_namespace/registry/registry-1.docker.io/"
 }
 ```
 
 Represents a registry where repositories are hosted.
+
+This is a [namespaced endpoint](#namespaced-endpoints).
 
 
 ### Attributes
@@ -47,7 +49,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/repo/v1/registry/`
+`GET /api/repo/v1/[optional_namespace/]registry/`
 
 ### Query Parameters
 
@@ -76,7 +78,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/v1/registry/(host)/`
+`GET /api/v1/[optional_namespace/]registry/(host)/`
 
 ### Path Parameters
 

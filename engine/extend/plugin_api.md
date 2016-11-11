@@ -1,15 +1,11 @@
-<!--[metadata]>
-+++
-title = "Plugins API"
-description = "How to write Docker plugins extensions "
-keywords = ["API, Usage, plugins, documentation, developer"]
-[menu.main]
-parent = "engine_extend"
-weight=7
-+++
-<![end-metadata]-->
-
-# Docker Plugin API
+---
+redirect_from:
+  - /extend/plugin_api/
+description: 'How to write Docker plugins extensions '
+keywords:
+- API, Usage, plugins, documentation, developer
+title: Docker plugin API
+---
 
 Docker plugins are out-of-process extensions which add capabilities to the
 Docker Engine.

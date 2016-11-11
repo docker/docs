@@ -1,15 +1,8 @@
 ---
-description: down
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  down
-menu:
-  main:
-    identifier: down.compose
-    parent: smn_compose_cli
-title: down
+description: docker-compose down
+keywords: fig, composition, compose, docker, orchestration, cli, down
+title: docker-compose down
 ---
-
-# down
 
 ```
 Usage: down [options]

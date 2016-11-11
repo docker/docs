@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/inspect/
 description: The inspect command description and usage
 keywords:
 - inspect, container, json
-menu:
-  main:
-    parent: smn_cli
-title: inspect
+title: docker inspect
 ---
-
-# inspect
 
 ```markdown
 Usage:  docker inspect [OPTIONS] NAME|ID [NAME|ID...]

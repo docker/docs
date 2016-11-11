@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/run/
 description: The run command description and usage
 keywords:
 - run, command, container
-menu:
-  main:
-    parent: smn_cli
-title: run
+title: docker run
 ---
-
-# run
 
 ```markdown
 Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
@@ -618,8 +613,8 @@ or a signal name in the format SIGNAME, for instance SIGKILL.
 
 ### Optional security options (--security-opt)
 
-On Windows, this flag can be used to specify the `credentialspec` option. 
-The `credentialspec` must be in the format `file://spec.txt` or `registry://keyname`. 
+On Windows, this flag can be used to specify the `credentialspec` option.
+The `credentialspec` must be in the format `file://spec.txt` or `registry://keyname`.
 
 ### Specify isolation technology for container (--isolation)
 
@@ -668,7 +663,7 @@ network namespace, run this command:
 
 
 > **Note**: Not all sysctls are namespaced. Docker does not support changing sysctls
-> inside of a container that also modify the host system. As the kernel 
+> inside of a container that also modify the host system. As the kernel
 > evolves we expect to see more sysctls become namespaced.
 
 #### Currently supported sysctls

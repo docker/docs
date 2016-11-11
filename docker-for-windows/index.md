@@ -1,23 +1,15 @@
 ---
-aliases:
+description: Getting Started
+keywords: windows, beta, alpha, tutorial
+redirect_from:
 - /winkit/getting-started/
 - /winkit/
 - /windows/
 - /windows/started/
 - /docker-for-windows/started/
 - /installation/windows/
-description: Getting Started
-keywords:
-- windows, beta, alpha, tutorial
-menu:
-  main:
-    identifier: docker-win-getstart
-    parent: pinata_win_menu
-    weight: 1
-title: Getting Started
+title: Get started with Docker for Windows
 ---
-
-# Getting Started with Docker for Windows
 
 Welcome to Docker for Windows!
 
@@ -66,33 +58,46 @@ If you have not already done so, please install Docker for Windows. You can down
 
 ##  What to know before you install
 
-* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run. After Hyper-V is enabled, VirtualBox will no longer work, but any VirtualBox VM images will remain. VirtualBox VMs created with `docker-machine` (including the `default` one typically created during Toolbox install) will no longer start. These VMs cannot be used side-by-side with Docker for Windows. However, you can still use `docker-machine` to manage remote VMs.
+* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run. After Hyper-V is enabled,
+VirtualBox will no longer work, but any VirtualBox VM images will remain.
+VirtualBox VMs created with `docker-machine` (including the `default` one
+typically created during Toolbox install) will no longer start. These VMs cannot
+be used side-by-side with Docker for Windows. However, you can still use
+`docker-machine` to manage remote VMs.
 <p />
 * The current version of Docker for Windows runs on 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later). In the future we will support more versions of Windows 10.
 <p />
-* Containers and images created with Docker for Windows are shared between all user accounts on machines where it is installed. This is because all Windows accounts will use the same VM to build and run containers. In the future, Docker for Windows will better isolate user content.
+* Containers and images created with Docker for Windows are shared between all user accounts on machines where it is installed. This is because all
+Windows accounts will use the same VM to build and run containers. In the
+future, Docker for Windows will better isolate user content.
 <p />
-* The Hyper-V package must be enabled for Docker for Windows to work. The Docker for Windows installer will enable it for you, if needed. (This requires a reboot). If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of Hyper-V.
+* The Hyper-V package must be enabled for Docker for Windows to work. The Docker for Windows installer will enable it for you, if needed. (This requires a
+reboot). If your system does not satisfy these requirements, you can install
+[Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of
+Hyper-V.
 <p />
-* Virtualization must be enabled. Typically, virtualization is enabled by default. (Note that this is different from having Hyper-V enabled.) For more detail see [Virtualization must be enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
-<br><br>
+* Virtualization must be enabled. Typically, virtualization is enabled by default. (Note that this is different from having Hyper-V enabled.) For more
+detail see [Virtualization must be
+enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
+<p />
 * **What the Docker for Windows install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+
+### About Windows containers and Windows Server 2016
+
+Looking for information on using Windows containers?
+
+* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
+provides a tutorial on how to set up and run Windows containers on Windows 10 or
+with Windows Server 2016. It shows you how to use a MusicStore application with
+Windows containers.
 <p />
-* You can run **Docker on Windows Server 16 and Windows 10** in two different ways:
-
-  * You can [install a native Docker  binary](https://msdn.microsoft.com/en-us/virtualization/windowscontainers/quick_start/quick_start_windows_10)
-  which allows you to develop and run Windows containers natively. However, if you
-  install Docker this way, you cannot develop or run Linux containers.  If you try to run a Linux container on the native Docker daemon, an error occurs:
-
-    ```no-highlight
-    C:\Program Files\Docker\docker.exe:
-     image operating system "linux" cannot be used on this platform.
-     See 'C:\Program Files\Docker\docker.exe run --help'.
-     ```
-
-  * You can [install Docker for Windows](#step-1-install-docker-for-windows),
-    which allows you to develop and run Windows containers natively, or develop
-    and run Linux containers using Hyper-V. This is the best of both worlds.
+* [Setup - Windows Server 2016 (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/Setup-Server2016.md) specifically describes environment setup.
+<p />
+* [Switch
+between Windows and Linux containers (Beta
+feature)](index.md#switch-between-windows-and-linux-containers-beta-feature) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
+<p />
+* Docker Container Platform for Windows Server 2016 [articles and blog posts](https://www.docker.com/microsoft) on the Docker website
 
 ## Step 1. Install Docker for Windows
 
@@ -385,7 +390,7 @@ no_proxy=*.local, 169.254/16
 
 You can see from the above output that the `HTTP_PROXY`, `http_proxy` and `no_proxy` environment variables are set.
 When your proxy configuration changes, Docker restarts automatically to pick up the new settings.
-If you have containers that you wish to keep running across restarts, you should consider using [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies-restart)
+If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart)
 
 ### Docker daemon
 You can configure options on the Docker daemon in the given JSON configuration file, and determine how your containers will run.
@@ -412,7 +417,7 @@ If you are interested in working with Windows containers, here are some guides t
 
 * [Build and Run Your First Windows Server Container (Blog Post)](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/) gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
 
-* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/tree/master/windows/windows-containers) shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md) application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
+* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md) shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md) application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
   >**Disclaimer:** This lab is still in work, and is based off of the blog, but you can test and leverage the example walkthroughs now, if you want to start experimenting. Please checking back as the lab evolves.
 

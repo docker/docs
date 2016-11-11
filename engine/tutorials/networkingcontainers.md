@@ -1,20 +1,12 @@
-<!--[metadata]>
-+++
-aliases = [
-"/engine/userguide/containers/networkigncontainers/",
-"/engine/userguide/networkigncontainers/"
-]
-title = "Network containers"
-description = "How to network Docker containers."
-keywords = ["Examples, Usage, volume, docker, documentation, user guide, data,  volumes"]
-[menu.main]
-parent = "engine_learn_menu"
-weight = -3
-+++
-<![end-metadata]-->
-
-
-# Network containers
+---
+redirect_from:
+- /engine/userguide/containers/networkigncontainers/
+- /engine/userguide/networkigncontainers/
+description: How to network Docker containers.
+keywords:
+- Examples, Usage, volume, docker, documentation, user guide, data,  volumes
+title: Network containers
+---
 
 If you are working your way through the user guide, you just built and ran a
 simple application. You've also built in your own images. This section teaches
@@ -90,9 +82,9 @@ Every installation of the Docker Engine automatically includes three default net
     $ docker network ls
 
     NETWORK ID          NAME                DRIVER
-    18a2866682b8        none                null                
-    c288470c46f6        host                host                
-    7b369448dccb        bridge              bridge  
+    18a2866682b8        none                null
+    c288470c46f6        host                host
+    7b369448dccb        bridge              bridge
 
 The network named `bridge` is a special network. Unless you tell it otherwise, Docker always launches your containers in this network. Try this now:
 
@@ -155,7 +147,7 @@ While you can disconnect a container from a network, you cannot remove the  buil
 
 ## Create your own bridge network
 
-Docker Engine natively supports both bridge networks and overlay networks. A bridge network is limited to a single host running Docker Engine. An overlay network can include multiple hosts and is a more advanced topic. For this example, you'll create a bridge network:  
+Docker Engine natively supports both bridge networks and overlay networks. A bridge network is limited to a single host running Docker Engine. An overlay network can include multiple hosts and is a more advanced topic. For this example, you'll create a bridge network:
 
     $ docker network create -d bridge my-bridge-network
 
@@ -164,9 +156,9 @@ The `-d` flag tells Docker to use the `bridge` driver for the new network. You c
     $ docker network ls
 
     NETWORK ID          NAME                DRIVER
-    7b369448dccb        bridge              bridge              
-    615d565d498c        my-bridge-network   bridge              
-    18a2866682b8        none                null                
+    7b369448dccb        bridge              bridge
+    615d565d498c        my-bridge-network   bridge
+    18a2866682b8        none                null
     c288470c46f6        host                host
 
 If you inspect the network, you'll find that it has nothing in it.

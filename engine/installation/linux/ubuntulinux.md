@@ -1,23 +1,18 @@
 ---
-aliases:
+redirect_from:
 - /engine/installation/ubuntulinux/
 - /installation/ubuntulinux/
 description: 'Instructions for installing Docker on Ubuntu. '
 keywords:
 - Docker, Docker documentation, requirements, apt, installation,  ubuntu
-menu:
-  main:
-    parent: engine_linux
-    weight: -6
-title: 'Installation on Ubuntu '
+title: Install Docker on Ubuntu
 ---
-
-# Ubuntu
 
 Docker is supported on these Ubuntu operating systems:
 
 - Ubuntu Yakkety 16.10
 - Ubuntu Xenial 16.04 (LTS)
+- Ubuntu Wily 15.10
 - Ubuntu Trusty 14.04 (LTS)
 - Ubuntu Precise 12.04 (LTS)
 
@@ -134,6 +129,7 @@ From now on when you run `apt-get upgrade`, `APT` pulls from the new repository.
 
 - Ubuntu Yakkety 16.10
 - Ubuntu Xenial 16.04 (LTS)
+- Ubuntu Wily 15.10
 - Ubuntu Trusty 14.04 (LTS)
 
 For Ubuntu Trusty, Yakkety, and Xenial, it's recommended to install the

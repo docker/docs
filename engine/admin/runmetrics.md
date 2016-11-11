@@ -1,17 +1,12 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/articles/run_metrics"]
-title = "Runtime metrics"
-description = "Measure the behavior of running containers"
-keywords = ["docker, metrics, CPU, memory, disk, IO, run,  runtime, stats"]
-[menu.main]
-parent = "engine_admin"
-weight = 14
-+++
-<![end-metadata]-->
-
-# Runtime metrics
-
+---
+redirect_from:
+- /engine/articles/run_metrics
+- /engine/articles/runmetrics
+description: Measure the behavior of running containers
+keywords:
+- docker, metrics, CPU, memory, disk, IO, run,  runtime, stats
+title: Runtime metrics
+---
 
 ## Docker stats
 

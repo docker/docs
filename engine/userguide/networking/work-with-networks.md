@@ -1,15 +1,9 @@
-<!--[metadata]>
-+++
-title = "Work with network commands"
-description = "How to work with docker networks"
-keywords = ["commands, Usage, network, docker, cluster"]
-[menu.main]
-parent = "smn_networking"
-weight=-4
-+++
-<![end-metadata]-->
-
-# Work with network commands
+---
+description: How to work with docker networks
+keywords:
+- commands, Usage, network, docker, cluster
+title: Work with network commands
+---
 
 This article provides examples of the network subcommands you can use to
 interact with Docker networks and the containers in them. The commands are
@@ -125,6 +119,8 @@ equivalent docker daemon flags used for docker0 bridge:
 | `com.docker.network.bridge.enable_icc`           | `--icc`     | Enable or Disable Inter Container Connectivity        |
 | `com.docker.network.bridge.host_binding_ipv4`    | `--ip`      | Default IP when binding container ports               |
 | `com.docker.network.driver.mtu`                  | `--mtu`     | Set the containers network MTU                        |
+
+The `com.docker.network.driver.mtu` option is also supported by the `overlay` driver.
 
 The following arguments can be passed to `docker network create` for any network driver.
 
@@ -328,7 +324,7 @@ network.
 
 ```bash
 / # ifconfig
-eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:03  
+eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:03
           inet addr:172.17.0.3  Bcast:0.0.0.0  Mask:255.255.0.0
           inet6 addr: fe80::42:acff:fe11:3/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:9001  Metric:1
@@ -337,7 +333,7 @@ eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:03
           collisions:0 txqueuelen:0
           RX bytes:648 (648.0 B)  TX bytes:648 (648.0 B)
 
-eth1      Link encap:Ethernet  HWaddr 02:42:AC:15:00:02  
+eth1      Link encap:Ethernet  HWaddr 02:42:AC:15:00:02
           inet addr:172.25.0.2  Bcast:0.0.0.0  Mask:255.255.0.0
           inet6 addr: fe80::42:acff:fe19:2/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
@@ -346,7 +342,7 @@ eth1      Link encap:Ethernet  HWaddr 02:42:AC:15:00:02
           collisions:0 txqueuelen:0
           RX bytes:648 (648.0 B)  TX bytes:648 (648.0 B)
 
-lo        Link encap:Local Loopback  
+lo        Link encap:Local Loopback
           inet addr:127.0.0.1  Mask:255.0.0.0
           inet6 addr: ::1/128 Scope:Host
           UP LOOPBACK RUNNING  MTU:65536  Metric:1
@@ -814,7 +810,7 @@ no longer talk to `container3` on the `isolated_nw` network.
 $ docker attach container2
 
 / # ifconfig
-eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:03  
+eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:03
           inet addr:172.17.0.3  Bcast:0.0.0.0  Mask:255.255.0.0
           inet6 addr: fe80::42:acff:fe11:3/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:9001  Metric:1
@@ -823,7 +819,7 @@ eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:03
           collisions:0 txqueuelen:0
           RX bytes:648 (648.0 B)  TX bytes:648 (648.0 B)
 
-lo        Link encap:Local Loopback  
+lo        Link encap:Local Loopback
           inet addr:127.0.0.1  Mask:255.0.0.0
           inet6 addr: ::1/128 Scope:Host
           UP LOOPBACK RUNNING  MTU:65536  Metric:1
@@ -918,9 +914,9 @@ List all your networks to verify the `isolated_nw` was removed:
 $ docker network ls
 
 NETWORK ID          NAME                DRIVER
-72314fa53006        host                host                
-f7ab26d71dbd        bridge              bridge              
-0f32e83e61ac        none                null  
+72314fa53006        host                host
+f7ab26d71dbd        bridge              bridge
+0f32e83e61ac        none                null
 ```
 
 ## Related information

@@ -1,16 +1,9 @@
 ---
 description: How the three requisite notary components interact
 keywords:
-- docker, notary, notary-client, docker content trust, content trust, notary-server,
-  notary server, notary-signer, notary signer, notary architecture
-menu:
-  main:
-    parent: mn_notary
-    weight: 3
-title: Understand the service architecture
+- docker, notary, notary-client, docker content trust, content trust, notary-server, notary server, notary-signer, notary signer, notary architecture
+title: Understand the Notary service architecture
 ---
-
-# Understand the Notary service architecture
 
 On this page, you get an overview of the Notary service architecture.
 

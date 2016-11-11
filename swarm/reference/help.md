@@ -1,15 +1,8 @@
 ---
 description: Get help for Swarm commands.
-keywords:
-- swarm, help
-menu:
-  main:
-    identifier: swarm.help
-    parent: smn_swarm_subcmds
-title: help
+keywords: swarm, help
+title: help - Display information about a command
 ---
-
-# help - Display information about a command
 
 The `help` command displays information about how to use a command.
 

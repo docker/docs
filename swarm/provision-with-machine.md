@@ -1,15 +1,8 @@
 ---
 description: Provision with Machine
-keywords:
-- docker, Swarm, clustering, provision, Machine
-menu:
-  main:
-    parent: workw_swarm
-    weight: 5
-title: Provision with Machine
+keywords: docker, Swarm, clustering, provision, Machine
+title: Provision a Swarm cluster with Docker Machine
 ---
-
-# Provision a Swarm cluster with Docker Machine
 
 You can use Docker Machine to provision a Docker Swarm cluster. Machine is the
 Docker provisioning tool. Machine provisions the hosts, installs Docker Engine
@@ -27,15 +20,15 @@ learn about Swarm and its requirements by [installing a Swarm for
 evaluation](install-w-machine.md) or [installing a Swarm for
 production](install-manual.md). If this is the first time you have used Machine,
 you should take some time to [understand Machine before
-continuing](https://docs.docker.com/machine).
+continuing](/machine).
 
 
 ## What you need
 
 If you are using macOS or Windows and have installed with Docker Toolbox, you
 should already have Machine installed. If you need to install, see the
-instructions for [macOS](https://docs.docker.com/engine/installation/mac/) or
-[Windows](https://docs.docker.com/engine/installation/mac/).
+instructions for [macOS](/engine/installation/mac/) or
+[Windows](/engine/installation/mac/).
 
 Machine supports installing on AWS, Digital Ocean, Google Cloud Platform, IBM
 Softlayer, Microsoft Azure and Hyper-V, OpenStack, Rackspace, VirtualBox, VMware
@@ -48,7 +41,7 @@ you need. It also gives you the ability provision on all the systems Machine
 supports.
 
 **Note**:These examples assume you are using macOS or Windows, if you like you can also [install Docker Machine directly on a Linux
-system](http://docs.docker.com/machine/install-machine).
+system](/machine/install-machine).
 
 ## Provision a host to generate a Swarm token
 
@@ -186,4 +179,4 @@ Name: swarm-manager
 * [Evaluate Swarm in a sandbox](install-w-machine.md)
 * [Build a Swarm cluster for production](install-manual.md)
 * [Swarm Discovery](discovery.md)
-* [Docker Machine](https://docs.docker.com/machine) documentation
+* [Docker Machine](/machine) documentation

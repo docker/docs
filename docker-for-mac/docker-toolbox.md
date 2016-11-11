@@ -1,24 +1,16 @@
 ---
-aliases:
-- /mackit/docker-toolbox/
 description: Docker for Mac and Docker Toolbox
-keywords:
-- mac, windows, alpha, beta, toolbox, docker-machine, tutorial
-menu:
-  main:
-    identifier: kit-toolbox
-    parent: pinata_mac_menu
-    weight: 2
+keywords: mac, windows, alpha, beta, toolbox, docker-machine, tutorial
+redirect_from:
+- /mackit/docker-toolbox/
 title: Docker for Mac vs. Docker Toolbox
 ---
-
-# Docker for Mac vs. Docker Toolbox
 
 If you already have an installation of Docker Toolbox, please read these topics first to learn how Docker for Mac and Docker Toolbox differ, and how they can coexist.
 
 ## The Docker Toolbox environment
 
-Docker Toolbox installs `docker`, `docker-compose` and `docker-machine` in `/usr/local/bin` on your Mac. It also installs VirtualBox. At installation time, Toolbox uses `docker-machine` to provision a VirtualBox VM called `default`, running the `boot2docker` Linux distribution, with  [Docker Engine](https://docs.docker.com/engine/) with certificates located on your Mac at `$HOME/.docker/machine/machines/default`.
+Docker Toolbox installs `docker`, `docker-compose` and `docker-machine` in `/usr/local/bin` on your Mac. It also installs VirtualBox. At installation time, Toolbox uses `docker-machine` to provision a VirtualBox VM called `default`, running the `boot2docker` Linux distribution, with  [Docker Engine](/engine/) with certificates located on your Mac at `$HOME/.docker/machine/machines/default`.
 
 Before you use `docker` or `docker-compose` on your Mac, you typically use the command `eval $(docker-machine env default)` to set environment variables so that `docker` or `docker-compose` know how to talk to Docker Engine running on VirtualBox.
 

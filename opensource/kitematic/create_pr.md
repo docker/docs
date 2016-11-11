@@ -1,19 +1,13 @@
 ---
 description: Explains how to create a pull request for change or new feature
-keywords:
-- Kitematic, open source, contribute, contributor, tour, development, contribute,
-  pull request, review, workflow, beginner, squash,  commit
-menu:
-  main:
-    parent: smn_kitematic_contrib
-    weight: 5
+keywords: Kitematic, open source, contribute, contributor, tour, development, contribute, pull request, review, workflow, beginner, squash, commit
 title: Create a pull request (PR)
 ---
 
-# Create a pull request (PR)
-Make sure you follow the <a href="http://docs.docker.com/opensource/workflow/create-pr/#rebase-your-branch"
-target="_blank"> rebase guidelines </a> before you make a pull request.
-Rebasing helps verify that your commit is clean, and allows for an easier and faster merge of your code.
+Make sure you follow the [rebase
+guidelines](/opensource/workflow/create-pr/#rebase-your-branch) before you make
+a pull request. Rebasing helps verify that your commit is clean, and allows for
+an easier and faster merge of your code.
 
 Once you've cleaned up your commits:
 

@@ -49,11 +49,11 @@
     </span><span class="nt">"last_seen"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thu, 25 Sep 2014 13:14:44 +0000"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="mi">1792</span><span class="p">,</span><span class="w">
     </span><span class="nt">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fc1a5bb9-user.node.dockerapp.io"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"node_cluster"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/nodecluster/d787a4b7-d525-4061-97a0-f423e8f1d229/"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"node_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/nodetype/testing-provider/testing-type/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"node_cluster"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/user_namespace/nodecluster/d787a4b7-d525-4061-97a0-f423e8f1d229/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"node_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/user_namespace/nodetype/testing-provider/testing-type/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"public_ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.45.2.11"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/region/testing-provider/testing-region/"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/node/fc1a5bb9-17f5-4819-b667-8c7cd819e949/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/user_namespace/node/fc1a5bb9-17f5-4819-b667-8c7cd819e949/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployed"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tag_one"</span><span class="p">},</span><span class="w">
@@ -65,6 +65,8 @@
 </span></code></pre>
 
 <p>A node is a virtual machine provided by a cloud provider where containers can be deployed.</p>
+
+<p>This is a <a href="#namespaced-endpoints">namespaced endpoint</a>.</p>
 
 <h3 id="attributes">Attributes</h3>
 
@@ -251,7 +253,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/infra/v1/node/</code></p>
+<p><code class="prettyprint">GET /api/infra/v1/[optional_namespace/]node/</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -318,7 +320,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/infra/v1/node/(uuid)/</code></p>
+<p><code class="prettyprint">GET /api/infra/v1/[optional_namespace/]node/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -372,7 +374,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PATCH /api/infra/v1/node/(uuid)/</code></p>
+<p><code class="prettyprint">PATCH /api/infra/v1/[optional_namespace/]node/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -440,7 +442,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/infra/v1/node/(uuid)/docker-upgrade/</code></p>
+<p><code class="prettyprint">POST /api/infra/v1/[optional_namespace/]node/(uuid)/docker-upgrade/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -471,7 +473,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/infra/v1/node/(uuid)/health-check/</code></p>
+<p><code class="prettyprint">POST /api/infra/v1/[optional_namespace/]node/(uuid)/health-check/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -521,7 +523,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">DELETE /api/infra/v1/node/(uuid)/</code></p>
+<p><code class="prettyprint">DELETE /api/infra/v1/[optional_namespace/]node/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 

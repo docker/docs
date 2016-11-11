@@ -1,18 +1,11 @@
 ---
-aliases:
+description: Push the Docker image to Docker Cloud's Registry
+keywords: image, Docker, cloud
+redirect_from:
 - /docker-cloud/getting-started/python/4_push_to_cloud_registry/
 - /docker-cloud/getting-started/golang/4_push_to_cloud_registry/
-description: Push the Docker image to Docker Cloud's Registry
-keywords:
-- image, Docker, cloud
-menu:
-  main:
-    parent: deploy-app
-    weight: -60
-title: Push the image to Docker Cloud's Registry
+title: Push the image to Docker Cloud's registry
 ---
-
-# Push the image to Docker Cloud's Registry
 
 *Skip this step if you don't have Docker Engine installed locally.*
 

@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/version/
 description: The version command description and usage
 keywords:
 - version, architecture, api
-menu:
-  main:
-    parent: smn_cli
-title: version
+title: docker version
 ---
-
-# version
 
 ```markdown
 Usage:  docker version [OPTIONS]

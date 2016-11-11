@@ -1,15 +1,11 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/oracle/"]
-title = "Installation on Oracle Linux"
-description = "Installation instructions for Docker on Oracle Linux."
-keywords = ["Docker, Docker documentation, requirements, linux, rhel, centos, oracle,  ol"]
-[menu.main]
-parent = "engine_linux"
-+++
-<![end-metadata]-->
-
-# Oracle Linux
+---
+redirect_from:
+- /engine/installation/oracle/
+description: Installation instructions for Docker on Oracle Linux.
+keywords:
+- Docker, Docker documentation, requirements, linux, rhel, centos, oracle,  ol
+title: Install Docker on Oracle Linux
+---
 
 Docker is supported on Oracle Linux 6 and 7. You do not require an Oracle Linux
 Support subscription to install Docker on Oracle Linux.

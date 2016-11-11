@@ -1,15 +1,11 @@
-<!--[metadata]>
-+++
-aliases = [ "/engine/installation/cruxlinux/"]
-title = "Installation on CRUX Linux"
-description = "Docker installation on CRUX Linux."
-keywords = ["crux linux, Docker, documentation,  installation"]
-[menu.main]
-parent = "engine_linux"
-+++
-<![end-metadata]-->
-
-# CRUX Linux
+---
+redirect_from:
+- /engine/installation/cruxlinux/
+description: Docker installation on CRUX Linux.
+keywords:
+- crux linux, Docker, documentation,  installation
+title: Install Docker on CRUX Linux
+---
 
 Installing on CRUX Linux can be done using the
 official [contrib](http://crux.nu/portdb/?a=repo&q=contrib) ports:

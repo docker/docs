@@ -1,15 +1,9 @@
-<!--[metadata]>
-+++
-title = "Docker network driver plugins"
-description = "Network driver plugins."
-keywords = ["Examples, Usage, plugins, docker, documentation, user guide"]
-[menu.main]
-parent = "engine_extend"
-weight=5
-+++
-<![end-metadata]-->
-
-# Engine network driver plugins
+---
+description: Network driver plugins.
+keywords:
+- Examples, Usage, plugins, docker, documentation, user guide
+title: Use network plugins
+---
 
 This document describes Docker Engine network driver plugins generally
 available in Docker Engine. To view information on plugins
@@ -57,7 +51,7 @@ referring to that network will be sent to the plugin,
 ## Write a network plugin
 
 Network plugins implement the [Docker plugin
-API](https://docs.docker.com/extend/plugin_api/) and the network plugin protocol
+API](/extend/plugin_api/) and the network plugin protocol
 
 ## Network plugin protocol
 

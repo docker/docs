@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "Scale the service"
-description = "Scale the service running in the swarm"
-keywords = ["tutorial, cluster management, swarm mode, scale"]
-[menu.main]
-identifier="swarm-tutorial-scale-service"
-parent="swarm-tutorial"
-weight=18
-+++
-<![end-metadata]-->
-
-# Scale the service in the swarm
+---
+description: Scale the service running in the swarm
+keywords:
+- tutorial, cluster management, swarm mode, scale
+title: Scale the service in the swarm
+---
 
 Once you have [deployed a service](deploy-service.md) to a swarm, you are ready
 to use the Docker CLI to scale the number of service ps in

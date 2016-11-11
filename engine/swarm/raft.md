@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "Raft consensus in swarm mode"
-description = "Raft consensus algorithm in swarm mode"
-keywords = ["docker, container, cluster, swarm, raft"]
-[menu.main]
-identifier="raft"
-parent="engine_swarm"
-weight="21"
-+++
-<![end-metadata]-->
-
-## Raft consensus algorithm
+---
+description: Raft consensus algorithm in swarm mode
+keywords:
+- docker, container, cluster, swarm, raft
+title: Raft consensus in swarm mode
+---
 
 When the Docker Engine runs in swarm mode, manager nodes implement the
 [Raft Consensus Algorithm](http://thesecretlivesofdata.com/raft/) to manage the global cluster state.

@@ -1,18 +1,13 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/swarm_leave/
 description: The swarm leave command description and usage
 keywords:
 - swarm, leave
-menu:
-  main:
-    parent: smn_cli
-title: swarm leave
+title: docker swarm leave
 ---
 
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
-
-# swarm leave
 
 ```markdown
 Usage:  docker swarm leave [OPTIONS]

@@ -1,15 +1,14 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/articles/dockerfile_best-practices/", "/docker-cloud/getting-started/intermediate/optimize-dockerfiles/", "/docker-cloud/tutorials/optimize-dockerfiles/"]
-title = "Best practices for writing Dockerfiles"
-description = "Hints, tips and guidelines for writing clean, reliable Dockerfiles"
-keywords = ["Examples, Usage, base image, docker, documentation, dockerfile, best practices, hub,  official repo"]
-[menu.main]
-parent = "engine_images"
-+++
-<![end-metadata]-->
-
-# Best practices for writing Dockerfiles
+---
+redirect_from:
+- /articles/dockerfile_best-practices/
+- /engine/articles/dockerfile_best-practices/
+- /docker-cloud/getting-started/intermediate/optimize-dockerfiles/
+- /docker-cloud/tutorials/optimize-dockerfiles/
+description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
+keywords:
+- Examples, Usage, base image, docker, documentation, dockerfile, best practices, hub,  official repo
+title: Best practices for writing Dockerfiles
+---
 
 Docker can build images automatically by reading the instructions from a
 `Dockerfile`, a text file that contains all the commands, in order, needed to
@@ -527,6 +526,6 @@ These Official Repositories have exemplary `Dockerfile`s:
 
 * [Dockerfile Reference](../../reference/builder.md)
 * [More about Base Images](baseimages.md)
-* [More about Automated Builds](https://docs.docker.com/docker-hub/builds/)
+* [More about Automated Builds](/docker-hub/builds/)
 * [Guidelines for Creating Official
-Repositories](https://docs.docker.com/docker-hub/official_repos/)
+Repositories](/docker-hub/official_repos/)

@@ -2,20 +2,14 @@
 description: Run your own notary service to host arbitrary content signing.
 keywords:
 - docker, notary, notary-server, notary server, notary-signer, notary signer
-menu:
-  main:
-    parent: mn_notary
-    weight: 4
-title: Running a Notary service
+title: Run a Notary service
 ---
-
-# Run a Notary service
 
 This document is for anyone who wants to run their own Notary
 service (such as those who want to use Notary with a
 private Docker registry). Running a Notary service requires that you are already
-familiar with using [Docker Engine](https://docs.docker.com/engine/userguide/)
-and [Docker Compose](https://docs.docker.com/compose/overview/).
+familiar with using [Docker Engine](/engine/userguide/)
+and [Docker Compose](/compose/overview/).
 
 ## Run a service for testing or development
 
@@ -185,7 +179,7 @@ One way to do this would be:
 		{"level":"info","msg":"Starting on :4443","time":"2016-02-25T00:53:59Z"}
 
 You can do the same using [Docker
-Compose](https://docs.docker.com/compose/overview/) by setting volumes,
+Compose](/compose/overview/) by setting volumes,
 environment variables, and overriding the default command for the Notary server
 containers in the Compose file.
 

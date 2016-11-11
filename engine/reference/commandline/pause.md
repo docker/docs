@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/pause/
 description: The pause command description and usage
 keywords:
 - cgroups, container, suspend, SIGSTOP
-menu:
-  main:
-    parent: smn_cli
-title: pause
+title: docker pause
 ---
-
-# pause
 
 ```markdown
 Usage:  docker pause CONTAINER [CONTAINER...]

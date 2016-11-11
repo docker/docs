@@ -1,16 +1,10 @@
-<!--[metadata]>
-+++
-aliases = [
-"/engine/userguide/containers/",
-]
-title = "Learn by example"
-description = "Explains how to work with containers"
-keywords = ["docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home,  intro"]
-identifier="engine_learn"
-parent = "engine_learn_menu"
-weight="-80"
-+++
-<![end-metadata]-->
+---
+redirect_from:
+- /engine/userguide/containers/
+description: Explains how to work with containers
+keywords:
+- docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home,  intro
+---
 
 # Learn by example
 

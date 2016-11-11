@@ -1,15 +1,8 @@
 ---
 description: Overview of contributing
-keywords:
-- open, source, contributing, overview
-menu:
-  main:
-    parent: mn_oss_contrib
-    weight: 2
+keywords: open, source, contributing, overview
 title: FAQ for contributors
 ---
-
-# FAQ for contributors
 
 This section contains some frequently asked questions and tips for
 troubleshooting problems in your code contribution.
