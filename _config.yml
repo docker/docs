@@ -82,7 +82,7 @@ defaults:
   - scope:
       path: "swarm"
     values:
-      assignee: "londoncalling"
+      assignee: "mstanleyjones"
   - scope:
       path: "toolbox"
     values:
