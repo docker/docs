@@ -1,7 +1,6 @@
 ---
 description: Google Compute Engine driver for machine
-keywords:
-- machine, Google Compute Engine, driver
+keywords: machine, Google Compute Engine, driver
 title: Google Compute Engine
 ---
 

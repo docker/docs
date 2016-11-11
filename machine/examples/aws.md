@@ -1,7 +1,6 @@
 ---
 description: Using Docker Machine to provision hosts on AWS
-keywords:
-- docker, machine, cloud, aws
+keywords: docker, machine, cloud, aws
 title: Amazon Web Services (AWS) EC2 example
 ---
 

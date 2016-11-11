@@ -1,7 +1,6 @@
 ---
 description: Create a machine.
-keywords:
-- machine, create, subcommand
+keywords: machine, create, subcommand
 title: docker-machine create
 ---
 
