@@ -38,7 +38,7 @@ as follows:
 * designates the current node as a leader manager node for the swarm.
 * names the node with the machine hostname.
 * configures the manager to listen on an active network interface on port 2377.
-* sets the current node to `Active` availability, meaning it can receive tasks
+* sets the current node to `Active` availability, meanining it can receive tasks
 from the scheduler.
 * starts an internal distributed data store for Engines participating in the
 swarm to maintain a consistent view of the swarm and all services running on it.
@@ -85,7 +85,7 @@ reach the first manager node is not the same address the manager sees as its
 own. For instance, in a cloud setup that spans different regions, hosts have
 both internal addresses for access within the region and external addresses that
 you use for access from outside that region. In this case, specify the external
-address with `--advertise-addr` so that the node can propagate that information
+address with `--advertise-addr` so that the node can propogate that information
 to other nodes that subsequently connect to it.
 
 Refer to the `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md)

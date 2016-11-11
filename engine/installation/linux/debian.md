@@ -9,9 +9,9 @@ title: Install Docker on Debian
 
 Docker is supported on the following versions of Debian:
 
- - [*Debian testing stretch (64-bit)*](debian.md#debian-wheezy-stable-7-x-64-bit)
- - [*Debian 8.0 Jessie (64-bit)*](debian.md#debian-jessie-80-64-bit)
- - [*Debian 7.7 Wheezy (64-bit)*](debian.md#debian-wheezy-stable-7-x-64-bit) (backports required)
+ - [*Debian testing stretch (64-bit)*](#debian-wheezy-stable-7-x-64-bit)
+ - [*Debian 8.0 Jessie (64-bit)*](#debian-jessie-80-64-bit)
+ - [*Debian 7.7 Wheezy (64-bit)*](#debian-wheezy-stable-7-x-64-bit) (backports required)
 
  >**Note**: If you previously installed Docker using `APT`, make sure you update
  your `APT` sources to the new `APT` repository.

@@ -22,13 +22,13 @@ see [`docker plugin install`](plugin_install.md).
 
 
 The following example shows that the `no-remove` plugin is installed
-and active:
+and enabled:
 
 ```bash
 $ docker plugin ls
 
-NAME                        TAG           ACTIVE
-tiborvass/no-remove         latest        true
+NAME                  TAG                 DESCRIPTION                ENABLED
+tiborvass/no-remove   latest              A test plugin for Docker   true
 ```
 
 To disable the plugin, use the following command:
@@ -37,15 +37,11 @@ To disable the plugin, use the following command:
 $ docker plugin disable tiborvass/no-remove
 
 tiborvass/no-remove
-```
 
-After the plugin is disabled, it appears as "inactive" in the list of plugins:
-
-```bash
 $ docker plugin ls
 
-NAME                    VERSION           ACTIVE
-tiborvass/no-remove     latest            false
+NAME                  TAG                 DESCRIPTION                ENABLED
+tiborvass/no-remove   latest              A test plugin for Docker   false
 ```
 
 ## Related information

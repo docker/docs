@@ -7,8 +7,8 @@ title: Install Docker on macOS
 
 You have two options for installing Docker on Mac:
 
-- [Docker for Mac](mac.md#docker-for-mac)
-- [Docker Toolbox](mac.md#docker-toolbox)
+- [Docker for Mac](#docker-for-mac)
+- [Docker Toolbox](#docker-toolbox)
 
 ## Docker for Mac
 

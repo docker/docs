@@ -8,7 +8,7 @@ title: docker volume rm
 ---
 
 ```markdown
-Usage:  docker volume rm VOLUME [VOLUME...]
+Usage:  docker volume rm [OPTIONS] VOLUME [VOLUME...]
 
 Remove one or more volumes
 
@@ -16,6 +16,7 @@ Aliases:
   rm, remove
 
 Options:
+  -f, --force  Force the removal of one or more volumes
       --help   Print usage
 ```
 

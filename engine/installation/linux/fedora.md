@@ -7,7 +7,7 @@ keywords:
 title: Install Docker on Fedora
 ---
 
-Docker is supported on Fedora version 22, 23, and 24. These instructions install
+Docker is supported on Fedora version 23, and 24. These instructions install
 Docker using release packages and installation mechanisms managed by Docker, to
 be sure that you get the latest version of Docker. If you wish to install using
 Fedora-managed packages, consult your Fedora release documentation.
@@ -34,21 +34,21 @@ packages.
 ## Install Docker Engine
 
 There are two ways to install Docker Engine.  You can [install using the `dnf`
-package manager](fedora.md#install-with-dnf). Or you can use `curl` [with the  `get.docker.com`
-site](fedora.md#install-with-the-script). This second method runs an installation script
+package manager](#install-with-dnf). Or you can use `curl` [with the  `get.docker.com`
+site](#install-with-the-script). This second method runs an installation script
 which also installs via the `dnf` package manager.
 
 ### Install with DNF
 
 1. Log into your machine as a user with `sudo` or `root` privileges.
 
-2.  Make sure your existing packages are up-to-date.
+2. Make sure your existing packages are up-to-date.
 
     ```bash
     $ sudo dnf update
     ```
 
-3.  Add the `yum` repo.
+3. Add the `yum` repo.
 
     ```bash
     $ sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
@@ -61,19 +61,19 @@ which also installs via the `dnf` package manager.
     EOF
     ```
 
-4.  Install the Docker package.
+4. Install the Docker package.
 
     ```bash
     $ sudo dnf install docker-engine
     ```
 
-5.  Enable the service.
+5. Enable the service.
 
     ```bash
     $ sudo systemctl enable docker.service
     ```
 
-6.  Start the Docker daemon.
+6. Start the Docker daemon.
 
     ```bash
     $ sudo systemctl start docker
@@ -119,13 +119,13 @@ You use the same installation procedure for all versions of Fedora.
 
 1. Log into your machine as a user with `sudo` or `root` privileges.
 
-2.  Make sure your existing packages are up-to-date.
+2. Make sure your existing packages are up-to-date.
 
     ```bash
     $ sudo dnf update
     ```
 
-3.  Run the Docker installation script.
+3. Run the Docker installation script.
 
     ```bash
     $ curl -fsSL https://get.docker.com/ | sh
@@ -133,19 +133,19 @@ You use the same installation procedure for all versions of Fedora.
 
     This script adds the `docker.repo` repository and installs Docker.
 
-4.  Enable the service.
+4. Enable the service.
 
     ```bash
     $ sudo systemctl enable docker.service
     ```
 
-5.  Start the Docker daemon.
+5. Start the Docker daemon.
 
     ```bash
     $ sudo systemctl start docker
     ```
 
-6.  Verify `docker` is installed correctly by running a test image in a container.
+6. Verify `docker` is installed correctly by running a test image in a container.
 
     ```bash
     $ sudo docker run hello-world
@@ -173,13 +173,13 @@ To create the `docker` group and add your user:
 
 1. Log into your machine as a user with `sudo` or `root` privileges.
 
-2.  Create the `docker` group.
+2. Create the `docker` group.
 
     ```bash
     $ sudo groupadd docker
     ```
 
-3.  Add your user to `docker` group.
+3. Add your user to `docker` group.
 
     ```bash
     $ sudo usermod -aG docker your_username`
@@ -189,7 +189,7 @@ To create the `docker` group and add your user:
 
     This ensures your user is running with the correct permissions.
 
-5.  Verify that your user is in the docker group by running `docker` without `sudo`.
+5. Verify that your user is in the docker group by running `docker` without `sudo`.
 
     ```bash
     $ docker run hello-world
@@ -226,7 +226,7 @@ This configuration allows IP forwarding from the container as expected.
 
 You can uninstall the Docker software with `dnf`.
 
-1.  List the installed Docker packages.
+1. List the installed Docker packages.
 
     ```bash
     $ dnf list installed | grep docker
@@ -234,7 +234,7 @@ You can uninstall the Docker software with `dnf`.
     docker-engine.x86_64     1.7.1-0.1.fc21 @/docker-engine-1.7.1-0.1.fc21.el7.x86_64
     ```
 
-2.  Remove the package.
+2. Remove the package.
 
     ```bash
     $ sudo dnf -y remove docker-engine.x86_64
@@ -243,7 +243,7 @@ You can uninstall the Docker software with `dnf`.
 	This command does not remove images, containers, volumes, or user-created
 	configuration files on your host.
 
-3.  To delete all images, containers, and volumes, run the following command:
+3. To delete all images, containers, and volumes, run the following command:
 
     ```bash
     $ rm -rf /var/lib/docker

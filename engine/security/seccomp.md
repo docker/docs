@@ -20,7 +20,7 @@ CONFIG_SECCOMP=y
 ```
 
 > **Note**: seccomp profiles require seccomp 2.2.1 and are only
-> available starting with Debian 9 "Stretch", Ubuntu 15.10 "Wily",
+> available starting with Debian 9 "Stretch", Ubuntu 16.04 "Xenial",
 > Fedora 22, CentOS 7 and Oracle Linux 7. To use this feature on Ubuntu 14.04, Debian Wheezy, or
 > Debian Jessie, you must download the [latest static Docker Linux binary](../installation/binaries.md).
 > This feature is currently *not* available on other distributions.
@@ -34,24 +34,65 @@ compatibility. The default Docker profile (found [here](https://github.com/docke
 ```json
 {
 	"defaultAction": "SCMP_ACT_ERRNO",
-	"architectures": [
-		"SCMP_ARCH_X86_64",
-		"SCMP_ARCH_X86",
-		"SCMP_ARCH_X32"
+	"archMap": [
+		{
+			"architecture": "SCMP_ARCH_X86_64",
+			"subArchitectures": [
+				"SCMP_ARCH_X86",
+				"SCMP_ARCH_X32"
+			]
+		},
+		...
 	],
 	"syscalls": [
 		{
-			"name": "accept",
+			"names": [
+				"accept",
+				"accept4",
+				"access",
+				"alarm",
+				"alarm",
+				"bind",
+				"brk",
+				...
+				"waitid",
+				"waitpid",
+				"write",
+				"writev"
+			],
 			"action": "SCMP_ACT_ALLOW",
-			"args": []
+			"args": [],
+			"comment": "",
+			"includes": {},
+			"excludes": {}
 		},
 		{
-			"name": "accept4",
+			"names": [
+				"clone"
+			],
 			"action": "SCMP_ACT_ALLOW",
-			"args": []
+			"args": [
+				{
+					"index": 1,
+					"value": 2080505856,
+					"valueTwo": 0,
+					"op": "SCMP_CMP_MASKED_EQ"
+				}
+			],
+			"comment": "s390 parameter ordering for clone is different",
+			"includes": {
+				"arches": [
+					"s390",
+					"s390x"
+				]
+			},
+			"excludes": {
+				"caps": [
+					"CAP_SYS_ADMIN"
+				]
+			}
 		},
 		...
-	]
 }
 ```
 

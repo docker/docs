@@ -53,7 +53,7 @@ anixjtol6wdf  my_web  1/1       nginx
 ```
 
 To make the web server accessible from outside the swarm, you need to
-[publish the port](services.md#publish-ports-externally-to-the-swarm) where the swarm
+[publish the port](#publish-ports-externally-to-the-swarm) where the swarm
 listens for web requests.
 
 You can include a command to run inside containers after the image:
@@ -131,8 +131,8 @@ Swarm mode lets you network services in a couple of ways:
 
 ### Publish ports externally to the swarm
 
-You publish service ports externally to the swarm using the `--publish<TARGET-PORT>:<SERVICE-PORT>`
-flag. When you publish a service port, the swarm
+You publish service ports externally to the swarm using the `--publish
+<TARGET-PORT>:<SERVICE-PORT>` flag. When you publish a service port, the swarm
 makes the service accessible at the target port on every node regardless if
 there is a task for the service running on the node.
 
@@ -249,6 +249,39 @@ $ docker service create \
   alpine
 
 0u6a4s31ybk7yw2wyvtikmu50
+```
+
+The `--update-max-failure-ratio` flag controls what fraction of tasks can fail
+during an update before the update as a whole is considered to have failed. For
+example, with `--update-max-failure-ratio 0.1 --update-failure-action pause`,
+after 10% of the tasks being updated fail, the update will be paused.
+
+An individual task update is considered to have failed if the task doesn't
+start up, or if it stops running within the monitoring period specified with
+the `--update-monitor` flag. The default value for `--update-monitor` is 30
+seconds, which means that a task failing in the first 30 seconds after its
+started counts towards the service update failure threshold, and a failure
+after that is not counted.
+
+## Rolling back to the previous version of a service
+
+In case the updated version of a service doesn't function as expected, it's
+possible to roll back to the previous version of the service using
+`docker service update`'s `--rollback` flag. This will revert the service
+to the configuration that was in place before the most recent
+`docker service update` command.
+
+Other options can be combined with `--rollback`; for example,
+`--update-delay 0s` to execute the rollback without a delay between tasks:
+
+```bash
+$ docker service update \
+  --rollback \
+  --update-delay 0s
+  my_web
+
+my_web
+
 ```
 
 ## Configure mounts

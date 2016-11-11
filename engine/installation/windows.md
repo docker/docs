@@ -7,8 +7,8 @@ title: Install Docker on Windows
 
 You have two options for installing Docker on Windows:
 
-- [Docker for Windows](windows.md#docker-for-windows)
-- [Docker Toolbox](windows.md#docker-toolbox)
+- [Docker for Windows](#docker-for-windows)
+- [Docker Toolbox](#docker-toolbox)
 
 ## Docker for Windows
 

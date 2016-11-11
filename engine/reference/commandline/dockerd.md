@@ -44,6 +44,8 @@ Options:
       -H, --host=[]                          Daemon socket(s) to connect to
       --help                                 Print usage
       --icc=true                             Enable inter-container communication
+      --init                                 Run an init inside containers to forward signals and reap processes
+      --init-path                            Path to the docker-init binary
       --insecure-registry=[]                 Enable insecure registry communication
       --ip=0.0.0.0                           Default IP when binding container ports
       --ip-forward=true                      Enable net.ipv4.ip_forward
@@ -72,6 +74,7 @@ Options:
       --tlskey=~/.docker/key.pem             Path to TLS key file
       --tlsverify                            Use TLS and verify the remote
       --userland-proxy=true                  Use userland proxy for loopback traffic
+      --userland-proxy-path=""               Path to the userland proxy binary
       --userns-remap                         User/Group setting for user namespaces
       -v, --version                          Print version information and quit
 ```
@@ -232,7 +235,7 @@ snapshots. For each devicemapper graph location – typically
 `/var/lib/docker/devicemapper` – a thin pool is created based on two block
 devices, one for data and one for metadata. By default, these block devices
 are created automatically by using loopback mounts of automatically created
-sparse files. Refer to [Storage driver options](dockerd.md#storage-driver-options) below
+sparse files. Refer to [Storage driver options](#storage-driver-options) below
 for a way how to customize this setup.
 [~jpetazzo/Resizing Docker containers with the Device Mapper plugin](http://jpetazzo.github.io/2014/01/29/docker-device-mapper-resize/)
 article explains how to tune your existing setup without the use of options.
@@ -244,7 +247,7 @@ does not share executable memory between devices. Use
 The `zfs` driver is probably not as fast as `btrfs` but has a longer track record
 on stability. Thanks to `Single Copy ARC` shared blocks between clones will be
 cached only once. Use `dockerd -s zfs`. To select a different zfs filesystem
-set `zfs.fsname` option as described in [Storage driver options](dockerd.md#storage-driver-options).
+set `zfs.fsname` option as described in [Storage driver options](#storage-driver-options).
 
 The `overlay` is a very fast union filesystem. It is now merged in the main
 Linux kernel as of [3.18.0](https://lkml.org/lkml/2014/10/26/137). `overlay`
@@ -593,6 +596,22 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
     $ sudo dockerd --storage-opt dm.min_free_space=10%
     ```
 
+*  `dm.xfs_nospace_max_retries`
+
+    Specifies the maximum number of retries XFS should attempt to complete
+    IO when ENOSPC (no space) error is returned by underlying storage device.
+
+    By default XFS retries infinitely for IO to finish and this can result
+    in unkillable process. To change this behavior one can set
+    xfs_nospace_max_retries to say 0 and XFS will not retry IO after getting
+    ENOSPC and will shutdown filesystem.
+
+    Example use:
+
+    ```bash
+    $ sudo dockerd --storage-opt dm.xfs_nospace_max_retries=0
+    ```
+
 #### ZFS options
 
 *   `zfs.fsname`
@@ -611,7 +630,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
 
 *   `btrfs.min_space`
 
-    Specifies the minimum size to use when creating the subvolume which is used
+    Specifies the mininum size to use when creating the subvolume which is used
     for containers. If user uses disk quota for btrfs when creating or running
     a container with **--storage-opt size** option, docker should ensure the
     **size** cannot be smaller than **btrfs.min_space**.
@@ -636,7 +655,7 @@ options for `zfs` start with `zfs` and options for `btrfs` start with `btrfs`.
 ## Docker runtime execution options
 
 The Docker daemon relies on a
-[OCI](https://github.com/opencontainers/specs) compliant runtime
+[OCI](https://github.com/opencontainers/runtime-spec) compliant runtime
 (invoked via the `containerd` daemon) as its interface to the Linux
 kernel `namespaces`, `cgroups`, and `SELinux`.
 
@@ -990,7 +1009,7 @@ following algorithm to create the mapping ranges:
 If you enable user namespaces on the daemon, all containers are started
 with user namespaces enabled. In some situations you might want to disable
 this feature for a container, for example, to start a privileged container (see
-[user namespace known restrictions](dockerd.md#user-namespace-known-restrictions)).
+[user namespace known restrictions](#user-namespace-known-restrictions)).
 To enable those advanced features for a specific container use `--userns=host`
 in the `run/exec/create` command.
 This option will completely disable user namespace mapping for the container's user.
@@ -1000,16 +1019,16 @@ This option will completely disable user namespace mapping for the container's u
 The following standard Docker features are currently incompatible when
 running a Docker daemon with user namespaces enabled:
 
- - sharing PID or NET namespaces with the host (`--pid=host` or `--network=host`)
- - A `--read-only` container filesystem (this is a Linux kernel restriction against remounting with modified flags of a currently mounted filesystem when inside a user namespace)
- - external (volume or graph) drivers which are unaware/incapable of using daemon user mappings
+ - sharing PID or NET namespaces with the host (`--pid=host` or `--net=host`)
  - Using `--privileged` mode flag on `docker run` (unless also specifying `--userns=host`)
 
 In general, user namespaces are an advanced feature and will require
 coordination with other capabilities. For example, if volumes are mounted from
 the host, file ownership will have to be pre-arranged if the user or
 administrator wishes the containers to have expected access to the volume
-contents.
+contents. Note that when using external volume or graph driver plugins, those
+external software programs must be made aware of user and group mapping ranges
+if they are to work seamlessly with user namespace support.
 
 Finally, while the `root` user inside a user namespaced container process has
 many of the expected admin privileges that go along with being the superuser, the
@@ -1221,6 +1240,7 @@ The list of currently supported options that can be reconfigured is this:
   the runtime shipped with the official docker packages.
 - `runtimes`: it updates the list of available OCI runtimes that can
   be used to run containers
+- `authorization-plugin`: specifies the authorization plugins to use.
 
 Updating and reloading the cluster configurations such as `--cluster-store`,
 `--cluster-advertise` and `--cluster-store-opts` will take effect only if
@@ -1240,7 +1260,7 @@ previously configured cluster configurations.
 This section describes how to run multiple Docker daemons on a single host. To
 run multiple daemons, you must configure each daemon so that it does not
 conflict with other daemons on the same host. You can set these options either
-by providing them as flags, or by using a [daemon configuration file](dockerd.md#daemon-configuration-file).
+by providing them as flags, or by using a [daemon configuration file](#daemon-configuration-file).
 
 The following daemon options must be configured for each daemon:
 

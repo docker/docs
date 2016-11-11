@@ -12,8 +12,8 @@ cluster of one or more Docker Engines called a swarm. A swarm consists
 of one or more nodes: physical or virtual machines running Docker
 Engine 1.12 or later in swarm mode.
 
-There are two types of nodes: [**managers**](nodes.md#manager-nodes) and
-[**workers**](nodes.md#worker-nodes).
+There are two types of nodes: [**managers**](#manager-nodes) and
+[**workers**](#worker-nodes).
 
 ![Swarm mode cluster](../images/swarm-diagram.png)
 

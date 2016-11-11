@@ -7,8 +7,6 @@ keywords:
 title: docker service inspect
 ---
 
-**Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
-
 ```Markdown
 Usage:  docker service inspect [OPTIONS] SERVICE [SERVICE...]
 
@@ -114,7 +112,7 @@ ID:		c8wgl7q4ndfd52ni6qftkvnnp
 Name:		frontend
 Labels:
  - org.example.projectname=demo-app
-Mode:		REPLICATED
+Service Mode:	REPLICATED
  Replicas:		5
 Placement:
 UpdateConfig:
@@ -122,12 +120,15 @@ UpdateConfig:
 ContainerSpec:
  Image:		nginx:alpine
 Resources:
+Endpoint Mode:  vip
 Ports:
  Name =
  Protocol = tcp
  TargetPort = 443
  PublishedPort = 4443
 ```
+
+You can also use `--format pretty` for the same effect.
 
 
 ### Finding the number of tasks running as part of a service
@@ -136,10 +137,10 @@ The `--format` option can be used to obtain specific information about a
 service. For example, the following command outputs the number of replicas
 of the "redis" service.
 
-```bash{% raw %}
+```bash
 $ docker service inspect --format='{{.Spec.Mode.Replicated.Replicas}}' redis
 10
-{% endraw %}```
+```
 
 
 ## Related information

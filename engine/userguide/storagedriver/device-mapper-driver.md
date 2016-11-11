@@ -189,7 +189,7 @@ Storage Driver: devicemapper
  Metadata loop file: /var/lib/docker/devicemapper/devicemapper/metadata
  Library Version: 1.02.93-RHEL7 (2015-01-28)
  [...]
-```
+ ```
 
 The output above shows a Docker host running with the `devicemapper` storage
 driver operating in `loop-lvm` mode. This is indicated by the fact that the
@@ -205,7 +205,7 @@ you how to configure a Docker host to use the `devicemapper` storage driver in
 a `direct-lvm` configuration.
 
 > **Caution:** If you have already run the Docker daemon on your Docker host
-> and have images you want to keep, `push` them Docker Hub or your private
+> and have images you want to keep, `push` them to Docker Hub or your private
 > Docker Trusted Registry before attempting this procedure.
 
 The procedure below will create a logical volume configured as a thin pool to
@@ -218,85 +218,84 @@ assumes that the Docker daemon is in the `stopped` state.
 1. Log in to the Docker host you want to configure and stop the Docker daemon.
 
 2. Install the LVM2 package.
-
-   The LVM2 package includes the userspace toolset that provides logical volume
-   management facilities on linux.
+	The LVM2 package includes the userspace toolset that provides logical volume
+	management facilities on linux.
 
 3. Create a physical volume replacing `/dev/xvdf` with your block device.
 
-   ```bash
-   $ pvcreate /dev/xvdf
-   ```
+	```bash
+	$ pvcreate /dev/xvdf
+	```
 
 4. Create a 'docker' volume group.
 
-   ```bash
-   $ vgcreate docker /dev/xvdf
-   ```
+	```bash
+	$ vgcreate docker /dev/xvdf
+	```
 
 5. Create a thin pool named `thinpool`.
 
-   In this example, the data logical is 95% of the 'docker' volume group size.
-   Leaving this free space allows for auto expanding of either the data or
-   metadata if space runs low as a temporary stopgap.
+	In this example, the data logical is 95% of the 'docker' volume group size.
+	Leaving this free space allows for auto expanding of either the data or
+	metadata if space runs low as a temporary stopgap.
 
-   ```bash
-   $ lvcreate --wipesignatures y -n thinpool docker -l 95%VG
-   $ lvcreate --wipesignatures y -n thinpoolmeta docker -l 1%VG
-   ```
+	```bash
+	$ lvcreate --wipesignatures y -n thinpool docker -l 95%VG
+	$ lvcreate --wipesignatures y -n thinpoolmeta docker -l 1%VG
+	```
 
 6. Convert the pool to a thin pool.
 
-   ```bash
-   $ lvconvert -y --zero n -c 512K --thinpool docker/thinpool --poolmetadata docker/thinpoolmeta
-   ```
+	```bash
+	$ lvconvert -y --zero n -c 512K --thinpool docker/thinpool --poolmetadata docker/thinpoolmeta
+	```
 
 7. Configure autoextension of thin pools via an `lvm` profile.
 
-   ```bash
-   $ vi /etc/lvm/profile/docker-thinpool.profile
-   ```
+	```bash
+	$ vi /etc/lvm/profile/docker-thinpool.profile
+	```
 
-8. Specify `thin_pool_autoextend_threshold` value.
+8. Specify 'thin_pool_autoextend_threshold' value.
 
-   The value should be the percentage of space used before `lvm` attempts
-   to autoextend the available space (100 = disabled).
+	The value should be the percentage of space used before `lvm` attempts
+	to autoextend the available space (100 = disabled).
 
-   ```
-   thin_pool_autoextend_threshold = 80
-   ```
+	```
+	thin_pool_autoextend_threshold = 80
+	```
 
 9. Modify the `thin_pool_autoextend_percent` for when thin pool autoextension occurs.
 
-   The value's setting is the percentage of space to increase the thin pool (100 =
-   disabled)
+	The value's setting is the perentage of space to increase the thin pool (100 =
+	disabled)
 
-   ```
-   thin_pool_autoextend_percent = 20
-   ```
+	```
+	thin_pool_autoextend_percent = 20
+	```
 
 10. Check your work, your `docker-thinpool.profile` file should appear similar to the following:
 
-    An example `/etc/lvm/profile/docker-thinpool.profile` file:
+	An example `/etc/lvm/profile/docker-thinpool.profile` file:
 
-    ```
-    activation {
-        thin_pool_autoextend_threshold=80
-        thin_pool_autoextend_percent=20
-    }
-    ```
+	```
+	activation {
+		thin_pool_autoextend_threshold=80
+		thin_pool_autoextend_percent=20
+	}
+	```
 
 11. Apply your new lvm profile
 
-    ```bash
-    $ lvchange --metadataprofile docker-thinpool docker/thinpool
-    ```
+	```bash
+	$ lvchange --metadataprofile docker-thinpool docker/thinpool
+	```
 
 12. Verify the `lv` is monitored.
 
-    ```bash
-    $ lvs -o+seg_monitor
-    ```
+	```bash
+	$ lvs -o+seg_monitor
+	```
 
 13. If the Docker daemon was previously started, move your existing graph driver
     directory out of the way.
@@ -320,7 +319,7 @@ assumes that the Docker daemon is in the `stopped` state.
     --storage-driver=devicemapper --storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool --storage-opt=dm.use_deferred_removal=true --storage-opt=dm.use_deferred_deletion=true
     ```
 
-    You can also set them for startup in the `daemon.json` configuration, for example:
+	You can also set them for startup in the `daemon.json` configuration, for example:
 
     ```json
     {
@@ -337,15 +336,15 @@ assumes that the Docker daemon is in the `stopped` state.
 
 15. If using systemd and modifying the daemon configuration via unit or drop-in file, reload systemd to scan for changes.
 
-    ```bash
-    $ systemctl daemon-reload
-    ```
+	```bash
+	$ systemctl daemon-reload
+	```
 
 16. Start the Docker daemon.
 
-    ```bash
-    $ systemctl start docker
-    ```
+	```bash
+	$ systemctl start docker
+	```
 
 After you start the Docker daemon, ensure you monitor your thin pool and volume
 group free space. While the volume group will auto-extend, it can still fill
@@ -464,79 +463,79 @@ The `Data Space` values show that the pool is 100GB total. This example extends 
 
 1. List the sizes of the devices.
 
-   ```bash
-   $ sudo ls -lh /var/lib/docker/devicemapper/devicemapper/
+	```bash
+	$ sudo ls -lh /var/lib/docker/devicemapper/devicemapper/
 
-   total 1175492
-   -rw------- 1 root root 100G Mar 30 05:22 data
-   -rw------- 1 root root 2.0G Mar 31 11:17 metadata
-   ```
+	total 1175492
+	-rw------- 1 root root 100G Mar 30 05:22 data
+	-rw------- 1 root root 2.0G Mar 31 11:17 metadata
+	```
 
 2. Truncate `data` file to the size of the `metadata` file (approximage 200GB).
 
-   ```bash
-   $ sudo truncate -s 214748364800 /var/lib/docker/devicemapper/devicemapper/data
-   ```
+	```bash
+	$ sudo truncate -s 214748364800 /var/lib/docker/devicemapper/devicemapper/data
+	```
 
 3. Verify the file size changed.
 
-   ```bash
-   $ sudo ls -lh /var/lib/docker/devicemapper/devicemapper/
+	```bash
+	$ sudo ls -lh /var/lib/docker/devicemapper/devicemapper/
 
-   total 1.2G
-   -rw------- 1 root root 200G Apr 14 08:47 data
-   -rw------- 1 root root 2.0G Apr 19 13:27 metadata
-   ```
+	total 1.2G
+	-rw------- 1 root root 200G Apr 14 08:47 data
+	-rw------- 1 root root 2.0G Apr 19 13:27 metadata
+	```
 
 4. Reload data loop device
 
-   ```bash
-   $ sudo blockdev --getsize64 /dev/loop0
+	```bash
+	$ sudo blockdev --getsize64 /dev/loop0
 
-   107374182400
+	107374182400
 
-   $ sudo losetup -c /dev/loop0
+	$ sudo losetup -c /dev/loop0
 
-   $ sudo blockdev --getsize64 /dev/loop0
+	$ sudo blockdev --getsize64 /dev/loop0
 
-   214748364800
-   ```
+	214748364800
+	```
 
 5. Reload devicemapper thin pool.
 
-   1. Get the pool name first.
+	a. Get the pool name first.
 
-      ```bash
-      $ sudo dmsetup status | grep pool
+	```bash
+	$ sudo dmsetup status | grep pool
 
-      docker-8:1-123141-pool: 0 209715200 thin-pool 91
-      422/524288 18338/1638400 - rw discard_passdown queue_if_no_space -
-      ```
+	docker-8:1-123141-pool: 0 209715200 thin-pool 91
+	422/524288 18338/1638400 - rw discard_passdown queue_if_no_space -
+	```
 
-      The name is the string before the colon.
+	The name is the string before the colon.
 
-    2. Dump the device mapper table first.
+	b. Dump the device mapper table first.
 
-       ```bash
-       $ sudo dmsetup table docker-8:1-123141-pool
+	```bash
+	$ sudo dmsetup table docker-8:1-123141-pool
 
-       0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
-       ```
+	0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
+	```
 
-    3. Calculate the real total sectors of the thin pool now.
+	c. Calculate the real total sectors of the thin pool now.
 
-       Change the second number of the table info (i.e. the disk end sector) to
-       reflect the new number of 512 byte sectors in the disk. For example, as the
-       new loop size is 200GB, change the second number to 419430400.
+	Change the second number of the table info (i.e. the disk end sector) to
+	reflect the new number of 512 byte sectors in the disk. For example, as the
+	new loop size is 200GB, change the second number to 419430400.
 
 
-    4. Reload the thin pool with the new sector number
+	d. Reload the thin pool with the new sector number
 
-       ```bash
-       $ sudo dmsetup suspend docker-8:1-123141-pool \
-           && sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing' \
-           && sudo dmsetup resume docker-8:1-123141-pool
-       ```
+	```bash
+	$ sudo dmsetup suspend docker-8:1-123141-pool \
+	    && sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing' \
+	    && sudo dmsetup resume docker-8:1-123141-pool
+	```
 
 #### The device_tool
 
@@ -559,64 +558,63 @@ disk partition.
 
 1. Extend the volume group (VG) `vg-docker`.
 
-   ```bash
-   $ sudo vgextend vg-docker /dev/sdh1
+	```bash
+	$ sudo vgextend vg-docker /dev/sdh1
 
-   Volume group "vg-docker" successfully extended
-   ```
+	Volume group "vg-docker" successfully extended
+	```
 
-   Your volume group may use a different name.
+	Your volume group may use a different name.
 
 2. Extend the `data` logical volume(LV) `vg-docker/data`
 
-   ```bash
-   $ sudo lvextend  -l+100%FREE -n vg-docker/data
+	```bash
+	$ sudo lvextend  -l+100%FREE -n vg-docker/data
 
-   Extending logical volume data to 200 GiB
-   Logical volume data successfully resized
-   ```
+	Extending logical volume data to 200 GiB
+	Logical volume data successfully resized
+	```
 
 3. Reload devicemapper thin pool.
 
-   1. Get the pool name.
+	a. Get the pool name.
 
-      ```bash
-      $ sudo dmsetup status | grep pool
+	```bash
+	$ sudo dmsetup status | grep pool
 
-      docker-253:17-1835016-pool: 0 96460800 thin-pool 51593 6270/1048576 701943/753600 - rw no_discard_passdown queue_if_no_space
-      ```
+	docker-253:17-1835016-pool: 0 96460800 thin-pool 51593 6270/1048576 701943/753600 - rw no_discard_passdown queue_if_no_space
+	```
 
-      The name is the string before the colon.
+	The name is the string before the colon.
 
-   2. Dump the device mapper table.
+	b. Dump the device mapper table.
 
-      ```bash
-      $ sudo dmsetup table docker-253:17-1835016-pool
+	```bash
+	$ sudo dmsetup table docker-253:17-1835016-pool
 
-      0 96460800 thin-pool 252:0 252:1 128 32768 1 skip_block_zeroing
-      ```
+	0 96460800 thin-pool 252:0 252:1 128 32768 1 skip_block_zeroing
+	```
 
-   3. Calculate the real total sectors of the thin pool now. we can use `blockdev` to get the real size of data lv.
+	c. Calculate the real total sectors of the thin pool now. we can use `blockdev` to get the real size of data lv.
 
-      Change the second number of the table info (i.e. the number of sectors) to
-      reflect the new number of 512 byte sectors in the disk. For example, as the
-      new data `lv` size is `264132100096` bytes, change the second number to
-      `515883008`.
+	Change the second number of the table info (i.e. the number of sectors) to
+	reflect the new number of 512 byte sectors in the disk. For example, as the
+	new data `lv` size is `264132100096` bytes, change the second number to
+	`515883008`.
 
-      ```bash
-      $ sudo blockdev --getsize64 /dev/vg-docker/data
+	```bash
+	$ sudo blockdev --getsize64 /dev/vg-docker/data
 
-      264132100096
-      ```
+	264132100096
+	```
 
-   4. Then reload the thin pool with the new sector number.
+	d. Then reload the thin pool with the new sector number.
 
-      ```bash
-      $ sudo dmsetup suspend docker-253:17-1835016-pool \
-          && sudo dmsetup reload docker-253:17-1835016-pool \
-            --table  '0 515883008 thin-pool 252:0 252:1 128 32768 1 skip_block_zeroing' \
-          && sudo dmsetup resume docker-253:17-1835016-pool
-      ```
+	```bash
+	$ sudo dmsetup suspend docker-253:17-1835016-pool \
+	    && sudo dmsetup reload docker-253:17-1835016-pool --table  '0 515883008 thin-pool 252:0 252:1 128 32768 1 skip_block_zeroing' \
+	    && sudo dmsetup resume docker-253:17-1835016-pool
+	```
 
 ## Device Mapper and Docker performance
 

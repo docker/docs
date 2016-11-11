@@ -45,9 +45,9 @@ than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "b
 
 The currently supported filters are:
 
-* [id](service_ls.md#id)
-* [label](service_ls.md#label)
-* [name](service_ls.md#name)
+* [id](#id)
+* [label](#label)
+* [name](#name)
 
 #### ID
 

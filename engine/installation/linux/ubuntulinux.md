@@ -10,6 +10,7 @@ title: Install Docker on Ubuntu
 
 Docker is supported on these Ubuntu operating systems:
 
+- Ubuntu Yakkety 16.10
 - Ubuntu Xenial 16.04 (LTS)
 - Ubuntu Wily 15.10
 - Ubuntu Trusty 14.04 (LTS)
@@ -20,8 +21,8 @@ installation mechanisms. Using these packages ensures you get the latest officia
 release of Docker. If you are required to install using Ubuntu-managed packages,
 consult the Ubuntu documentation.
 
->**Note**: Ubuntu Utopic 14.10 and 15.04 exist in Docker's `APT` repository but
-are no longer officially supported.
+>**Note**: Ubuntu Utopic 14.10, 15.10, and 15.04 exist in Docker's `APT`
+repository but are no longer officially supported.
 
 ## Prerequisites
 
@@ -68,12 +69,12 @@ packages from the Docker repository:
     The entry determines where APT will search for packages. The possible entries
     are:
 
-    | Ubuntu version      | Repository                                                  |
-    | ------------------- | ----------------------------------------------------------- |
-    | Precise 12.04 (LTS) | `deb https://apt.dockerproject.org/repo ubuntu-precise main`|
-    | Trusty 14.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-trusty main` |
-    | Wily 15.10          | `deb https://apt.dockerproject.org/repo ubuntu-wily main`   |
-    | Xenial 16.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-xenial main` |
+    | Ubuntu version      | Repository                                                   |
+    | ------------------- | ------------------------------------------------------------ |
+    | Precise 12.04 (LTS) | `deb https://apt.dockerproject.org/repo ubuntu-precise main` |
+    | Trusty 14.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-trusty main`  |
+    | Xenial 16.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-xenial main`  |
+    | Yakkety 16.10       | `deb https://apt.dockerproject.org/repo ubuntu-yakkety main` |
 
 
     >**Note**: Docker does not provide packages for all architectures. Binary artifacts
@@ -126,11 +127,12 @@ From now on when you run `apt-get upgrade`, `APT` pulls from the new repository.
 
 ### Prerequisites by Ubuntu Version
 
+- Ubuntu Yakkety 16.10
 - Ubuntu Xenial 16.04 (LTS)
 - Ubuntu Wily 15.10
 - Ubuntu Trusty 14.04 (LTS)
 
-For Ubuntu Trusty, Wily, and Xenial, it's recommended to install the
+For Ubuntu Trusty, Yakkety, and Xenial, it's recommended to install the
 `linux-image-extra-*` kernel packages. The `linux-image-extra-*` packages
 allows you use the `aufs` storage driver.
 
@@ -250,13 +252,13 @@ install Docker using the following:
 This section contains optional procedures for configuring your Ubuntu to work
 better with Docker.
 
-* [Create a docker group](ubuntulinux.md#create-a-docker-group)
-* [Adjust memory and swap accounting](ubuntulinux.md#adjust-memory-and-swap-accounting)
-* [Enable UFW forwarding](ubuntulinux.md#enable-ufw-forwarding)
-* [Configure a DNS server for use by Docker](ubuntulinux.md#configure-a-dns-server-for-use-by-docker)
-* [Configure Docker to start on boot](ubuntulinux.md#configure-docker-to-start-on-boot)
+* [Create a docker group](#create-a-docker-group)
+* [Adjust memory and swap accounting](#adjust-memory-and-swap-accounting)
+* [Enable UFW forwarding](#enable-ufw-forwarding)
+* [Configure a DNS server for use by Docker](#configure-a-dns-server-for-use-by-docker)
+* [Configure Docker to start on boot](#configure-docker-to-start-on-boot)
 
-### Create a Docker group
+### Create a Docker group		
 
 The `docker` daemon binds to a Unix socket instead of a TCP port. By default
 that Unix socket is owned by the user `root` and other users can access it with

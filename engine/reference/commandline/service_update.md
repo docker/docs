@@ -7,8 +7,6 @@ keywords:
 title: docker service update
 ---
 
-**Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
-
 ```Markdown
 Usage:  docker service update [OPTIONS] SERVICE
 
@@ -23,6 +21,8 @@ Options:
       --endpoint-mode string           Endpoint mode (vip or dnsrr)
       --env-add value                  Add or update environment variables (default [])
       --env-rm value                   Remove an environment variable (default [])
+      --group-add value                Add additional user groups to the container (default [])
+      --group-rm value                 Remove previously added user groups from the container (default [])
       --help                           Print usage
       --image string                   Service image tag
       --label-add value                Add or update service labels (default [])
@@ -47,7 +47,7 @@ Options:
       --update-delay duration          Delay between updates
       --update-failure-action string   Action on update failure (pause|continue) (default "pause")
       --update-parallelism uint        Maximum number of tasks updated simultaneously (0 to update all at once) (default 1)
-  -u, --user string                    Username or UID
+  -u, --user string                    Username or UID (format: <name|uid>[:<group|gid>])
       --with-registry-auth             Send registry authentication details to Swarm agents
   -w, --workdir string                 Working directory inside the container
 ```

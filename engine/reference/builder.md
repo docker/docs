@@ -46,7 +46,7 @@ To use a file in the build context, the `Dockerfile` refers to the file specifie
 in an instruction, for example,  a `COPY` instruction. To increase the build's
 performance, exclude files and directories by adding a `.dockerignore` file to
 the context directory.  For information about how to [create a `.dockerignore`
-file](builder.md#dockerignore-file) see the documentation on this page.
+file](#dockerignore-file) see the documentation on this page.
 
 Traditionally, the `Dockerfile` is called `Dockerfile` and located in the root
 of the context. You use the `-f` flag with `docker build` to point to a Dockerfile
@@ -63,6 +63,13 @@ To tag the image into multiple repositories after the build,
 add multiple `-t` parameters when you run the `build` command:
 
     $ docker build -t shykes/myapp:1.0.2 -t shykes/myapp:latest .
+
+Before the Docker daemon runs the instructions in the `Dockerfile`, it performs
+a preliminary validation of the `Dockerfile` and returns an error if the syntax is incorrect:
+
+    $ docker build -t test/myapp .
+    Sending build context to Docker daemon 2.048 kB
+    Error response from daemon: Unknown instruction: RUNCMD
 
 The Docker daemon runs the instructions in the `Dockerfile` one-by-one,
 committing the result of each instruction
@@ -94,6 +101,13 @@ the `Using cache` message in the console output.
      ---> Using cache
      ---> 7ea8aef582cc
     Successfully built 7ea8aef582cc
+
+Build cache is only used from images that have a local parent chain. This means
+that these images were created by previous builds or the whole chain of images
+was loaded with `docker load`. If you wish to use build cache of a specific
+image you can specify it with `--cache-from` option. Images specified with
+`--cache-from` do not need to have a parent chain and may be pulled from other
+registries.
 
 When you're done with your build, you're ready to look into [*Pushing a
 repository to its registry*](../tutorials/dockerrepos.md#contributing-to-docker-hub).
@@ -294,7 +308,7 @@ Results in:
 
 ## Environment replacement
 
-Environment variables (declared with [the `ENV` statement](builder.md#env)) can also be
+Environment variables (declared with [the `ENV` statement](#env)) can also be
 used in certain instructions as variables to be interpreted by the
 `Dockerfile`. Escapes are also handled for including variable-like syntax
 into a statement literally.
@@ -482,13 +496,6 @@ before each new `FROM` command.
 assumes a `latest` by default. The builder returns an error if it cannot match
 the `tag` value.
 
-## MAINTAINER
-
-    MAINTAINER <name>
-
-The `MAINTAINER` instruction allows you to set the *Author* field of the
-generated images.
-
 ## RUN
 
 RUN has 2 forms:
@@ -498,7 +505,7 @@ default is `/bin/sh -c` on Linux or `cmd /S /C` on Windows)
 - `RUN ["executable", "param1", "param2"]` (*exec* form)
 
 The `RUN` instruction will execute any commands in a new layer on top of the
-current image and commit the results. The resulting committed image will be
+current image and commit the results. The resulting comitted image will be
 used for the next step in the `Dockerfile`.
 
 Layering `RUN` instructions and generating commits conforms to the core
@@ -560,7 +567,7 @@ See the [`Dockerfile` Best Practices
 guide](../userguide/eng-image/dockerfile_best-practices.md#build-cache) for more information.
 
 The cache for `RUN` instructions can be invalidated by `ADD` instructions. See
-[below](builder.md#add) for details.
+[below](#add) for details.
 
 ### Known issues (RUN)
 
@@ -629,7 +636,7 @@ must be individually expressed as strings in the array:
 
 If you would like your container to run the same executable every time, then
 you should consider using `ENTRYPOINT` in combination with `CMD`. See
-[*ENTRYPOINT*](builder.md#entrypoint).
+[*ENTRYPOINT*](#entrypoint).
 
 If the user specifies arguments to `docker run` then they will override the
 default specified in `CMD`.
@@ -683,6 +690,20 @@ To view an image's labels, use the `docker inspect` command.
         "other": "value3"
     },
 
+## MAINTAINER (deprecated)
+
+    MAINTAINER <name>
+
+The `MAINTAINER` instruction sets the *Author* field of the generated images. 
+The `LABEL` instruction is a much more flexible version of this and you should use
+it instead, as it enables setting any metadata you require, and can be viewed
+easily, for example with `docker inspect`. To set a label corresponding to the
+`MAINTAINER` field you could use:
+
+    LABEL maintainer "SvenDowideit@home.org.au"
+
+This will then be visible from `docker inspect` with the other labels.
+
 ## EXPOSE
 
     EXPOSE <port> [<port>...]
@@ -707,7 +728,7 @@ feature](../userguide/networking/index.md)).
 
 The `ENV` instruction sets the environment variable `<key>` to the value
 `<value>`. This value will be in the environment of all "descendant"
-`Dockerfile` commands and can be [replaced inline](builder.md#environment-replacement) in
+`Dockerfile` commands and can be [replaced inline](#environment-replacement) in
 many as well.
 
 The `ENV` instruction has two forms. The first form, `ENV <key> <value>`,
@@ -1157,12 +1178,12 @@ or for executing an ad-hoc command in a container.
 
 The table below shows what command is executed for different `ENTRYPOINT` / `CMD` combinations:
 
-|                                | No ENTRYPOINT              | ENTRYPOINT exec_entry p1_entry                            | ENTRYPOINT ["exec_entry", "p1_entry"]          |
-|--------------------------------|----------------------------|-----------------------------------------------------------|------------------------------------------------|
-| **No CMD**                     | *error, not allowed*       | /bin/sh -c exec_entry p1_entry                            | exec_entry p1_entry                            |
-| **CMD ["exec_cmd", "p1_cmd"]** | exec_cmd p1_cmd            | /bin/sh -c exec_entry p1_entry exec_cmd p1_cmd            | exec_entry p1_entry exec_cmd p1_cmd            |
-| **CMD ["p1_cmd", "p2_cmd"]**   | p1_cmd p2_cmd              | /bin/sh -c exec_entry p1_entry p1_cmd p2_cmd              | exec_entry p1_entry p1_cmd p2_cmd              |
-| **CMD exec_cmd p1_cmd**        | /bin/sh -c exec_cmd p1_cmd | /bin/sh -c exec_entry p1_entry /bin/sh -c exec_cmd p1_cmd | exec_entry p1_entry /bin/sh -c exec_cmd p1_cmd |
+|                                | No ENTRYPOINT              | ENTRYPOINT exec_entry p1_entry | ENTRYPOINT ["exec_entry", "p1_entry"]          |
+|--------------------------------|----------------------------|--------------------------------|------------------------------------------------|
+| **No CMD**                     | *error, not allowed*       | /bin/sh -c exec_entry p1_entry | exec_entry p1_entry                            |
+| **CMD ["exec_cmd", "p1_cmd"]** | exec_cmd p1_cmd            | /bin/sh -c exec_entry p1_entry | exec_entry p1_entry exec_cmd p1_cmd            |
+| **CMD ["p1_cmd", "p2_cmd"]**   | p1_cmd p2_cmd              | /bin/sh -c exec_entry p1_entry | exec_entry p1_entry p1_cmd p2_cmd              |
+| **CMD exec_cmd p1_cmd**        | /bin/sh -c exec_cmd p1_cmd | /bin/sh -c exec_entry p1_entry | exec_entry p1_entry /bin/sh -c exec_cmd p1_cmd |
 
 ## VOLUME
 
@@ -1243,9 +1264,9 @@ The output of the final `pwd` command in this `Dockerfile` would be
     ARG <name>[=<default value>]
 
 The `ARG` instruction defines a variable that users can pass at build-time to
-the builder with the `docker build` command using the
-`--build-arg <varname>=<value>` flag. If a user specifies a build argument
-that was not defined in the Dockerfile, the build outputs an error.
+the builder with the `docker build` command using the `--build-arg
+<varname>=<value>` flag. If a user specifies a build argument that was not
+defined in the Dockerfile, the build outputs an error.
 
 ```
 One or more build-args were not consumed, failing build.
@@ -1344,7 +1365,7 @@ its value would be `v1.0.0` as it is the default set in line 3 by the `ENV` inst
 The variable expansion technique in this example allows you to pass arguments
 from the command line and persist them in the final image by leveraging the
 `ENV` instruction. Variable expansion is only supported for [a limited set of
-Dockerfile instructions.](builder.md#environment-replacement)
+Dockerfile instructions.](#environment-replacement)
 
 Docker has a set of predefined `ARG` variables that you can use without a
 corresponding `ARG` instruction in the Dockerfile.
@@ -1358,11 +1379,8 @@ corresponding `ARG` instruction in the Dockerfile.
 * `NO_PROXY`
 * `no_proxy`
 
-To use these, simply pass them on the command line using the flag:
-
-```
---build-arg <varname>=<value>
-```
+To use these, simply pass them on the command line using the `--build-arg
+<varname>=<value>` flag.
 
 ### Impact on build caching
 
@@ -1675,8 +1693,6 @@ something more realistic, take a look at the list of [Dockerization examples](..
 # VERSION               0.0.1
 
 FROM      ubuntu
-MAINTAINER Victor Vieux <victor@docker.com>
-
 LABEL Description="This image is used to start the foobar executable" Vendor="ACME Products" Version="1.0"
 RUN apt-get update && apt-get install -y inotify-tools nginx apache2 openssh-server
 ```

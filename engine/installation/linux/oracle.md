@@ -82,11 +82,11 @@ btrfs storage engine on both Oracle Linux 6 and 7.
 This section contains optional procedures for configuring your Oracle Linux to work
 better with Docker.
 
-* [Create a docker group](oracle.md#create-a-docker-group)
-* [Configure Docker to start on boot](oracle.md#configure-docker-to-start-on-boot)
-* [Use the btrfs storage engine](oracle.md#use-the-btrfs-storage-engine)
+* [Create a docker group](#create-a-docker-group)
+* [Configure Docker to start on boot](#configure-docker-to-start-on-boot)
+* [Use the btrfs storage engine](#use-the-btrfs-storage-engine)
 
-### Create a Docker group
+### Create a Docker group		
 
 The `docker` daemon binds to a Unix socket instead of a TCP port. By default
 that Unix socket is owned by the user `root` and other users can access it with

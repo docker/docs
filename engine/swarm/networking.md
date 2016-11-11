@@ -49,7 +49,7 @@ different nodes. For more information, refer to [Docker swarm mode overlay netwo
 The `--subnet` flag specifies the subnet for use with the overlay network. When
 you don't specify a subnet, the swarm manager automatically chooses a subnet and
 assigns it to the network. On some older kernels, including kernel 3.10,
-automatically assigned addresses may overlap with another subnet in your
+automatically assigned adresses may overlap with another subnet in your
 infrastructure. Such overlaps can cause connectivity issues or failures with containers connected to the network.
 
 Before you attach a service to the network, the network only extends to manager
@@ -96,10 +96,10 @@ tasks are running for the service:
 ```bash
 $ docker service ps my-web
 
-ID                         NAME      IMAGE  NODE   DESIRED STATE  CURRENT STATE               ERROR
-63s86gf6a0ms34mvboniev7bs  my-web.1  nginx  node1  Running        Running 58 seconds ago
-6b3q2qbjveo4zauc6xig7au10  my-web.2  nginx  node2  Running        Running 58 seconds ago
-66u2hcrz0miqpc8h0y0f3v7aw  my-web.3  nginx  node3  Running        Running about a minute ago
+NAME                                IMAGE  NODE   DESIRED STATE  CURRENT STATE               ERROR
+my-web.1.63s86gf6a0ms34mvboniev7bs  nginx  node1  Running        Running 58 seconds ago
+my-web.2.6b3q2qbjveo4zauc6xig7au10  nginx  node2  Running        Running 58 seconds ago
+my-web.3.66u2hcrz0miqpc8h0y0f3v7aw  nginx  node3  Running        Running about a minute ago
 ```
 
 ![service vip image](images/service-vip.png)
@@ -196,8 +196,8 @@ using the DNS name `my-web`:
     ```bash
     $ docker service ps my-busybox
 
-    ID                         NAME          IMAGE    NODE   DESIRED STATE  CURRENT STATE          ERROR
-    1dok2cmx2mln5hbqve8ilnair  my-busybox.1  busybox  node1  Running        Running 5 seconds ago
+    NAME                                    IMAGE    NODE   DESIRED STATE  CURRENT STATE          ERROR
+    my-busybox.1.1dok2cmx2mln5hbqve8ilnair  busybox  node1  Running        Running 5 seconds ago
     ```
 
 3.  From the node where the busybox task is running, open an interactive shell to
@@ -292,7 +292,7 @@ Address 3: 10.0.9.9 my-dnsrr-service.2.am6fx47p3bropyy2dy4f8hofb.my-network
 
 ## Confirm VIP connectivity
 
-In general we recommend you use `dig`, `nslookup`, or another DNS query tool to
+In genaral we recommend you use `dig`, `nslookup`, or another DNS query tool to
 test access to the service name via DNS. Because a VIP is a logical IP, `ping`
 is not the right tool to confirm VIP connectivity.
 

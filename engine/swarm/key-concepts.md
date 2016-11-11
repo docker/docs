@@ -16,7 +16,7 @@ running in **swarm mode**. You enable swarm mode for the Engine by either
 initializing a swarm or joining an existing swarm.
 
 A **swarm** is a cluster of Docker Engines where you deploy
-[services](key-concepts.md#Services-and-tasks). The Docker Engine CLI includes the commands for
+[services](#Services-and-tasks). The Docker Engine CLI includes the commands for
 swarm management, such as adding and removing nodes. The CLI also includes the
 commands you need to deploy services to the swarm and manage service
 orchestration.
@@ -30,7 +30,7 @@ A **node** is an instance of the Docker Engine participating in the swarm.
 
 To deploy your application to a swarm, you submit a service definition to a
 **manager node**. The manager node dispatches units of work called
-[tasks](key-concepts.md#Services-and-tasks) to worker nodes.
+[tasks](#Services-and-tasks) to worker nodes.
 
 Manager nodes also perform the orchestration and cluster management functions
 required to maintain the desired state of the swarm. Manager nodes elect a single leader to conduct orchestration tasks.

@@ -10,7 +10,7 @@ title: docker wait
 ```markdown
 Usage:  docker wait CONTAINER [CONTAINER...]
 
-Block until a container stops, then print its exit code
+Block until one or more containers stop, then print their exit codes
 
 Options:
       --help   Print usage

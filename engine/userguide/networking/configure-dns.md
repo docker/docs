@@ -25,14 +25,94 @@ the files alone and use the following Docker options instead.
 
 Various container options that affect container domain name services.
 
-| Options | Description |
-| ------- | ----------- |
-| `--name=CONTAINER-NAME` | Container name configured using `--name` is used to discover a container within an user-defined docker network. The embedded DNS server maintains the mapping between the container name and its IP address (on the network the container is connected to). |
-| `--network-alias=ALIAS` | In addition to `--name` as described above, a container is discovered by one or more of its configured `--network-alias` (or `--alias` in docker network connect command) within the user-defined network. The embedded DNS server maintains the mapping between all of the container aliases and its IP address on a specific user-defined network. A container can have different aliases in different networks by using the `--alias` option in docker network connect command. |
-| `--link=CONTAINER_NAME:ALIAS` | Using this option as you run a container gives the embedded DNS an extra entry named ALIAS that points to the IP address of the container identified by CONTAINER_NAME. When using `--link` the embedded DNS will guarantee that localized lookup result only on that container where the `--link` is used. This lets processes inside the new container connect to container without having to know its name or IP. |
-| `--dns=[IP_ADDRESS...]` | The IP addresses passed via the `--dns` option is used by the embedded DNS server to forward the DNS query if embedded DNS server is unable to resolve a name resolution request from the containers. These `--dns` IP addresses are managed by the embedded DNS server and will not be updated in the container's `/etc/resolv.conf` file.|
-| `--dns-search=DOMAIN...` | Sets the domain names that are searched when a bare unqualified hostname isused inside of the container. These `--dns-search` options are managed by the embedded DNS server and will not be updated in the container's `/etc/resolv.conf` file. When a container process attempts to access host and the search domain `example.com` is set, for instance, the DNS logic will not only look up host but also `host.example.com`. |
-| `--dns-opt=OPTION...` |Sets the options used by DNS resolvers. These options are managed by the embedded DNS server and will not be updated in the container's `/etc/resolv.conf` file. See documentation for resolv.conf for a list of valid options |
+<table>
+  <tr>
+    <td>
+    <p>
+    <code>--name=CONTAINER-NAME</code>
+    </p>
+    </td>
+    <td>
+    <p>
+     Container name configured using <code>--name</code> is used to discover a container within
+     an user-defined docker network. The embedded DNS server maintains the mapping between
+     the container name and its IP address (on the network the container is connected to).
+    </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <p>
+    <code>--network-alias=ALIAS</code>
+    </p>
+    </td>
+    <td>
+    <p>
+     In addition to <code>--name</code> as described above, a container is discovered by one or more 
+     of its configured <code>--network-alias</code> (or <code>--alias</code> in <code>docker network connect</code> command)
+     within the user-defined network. The embedded DNS server maintains the mapping between
+     all of the container aliases and its IP address on a specific user-defined network.
+     A container can have different aliases in different networks by using the <code>--alias</code>
+     option in <code>docker network connect</code> command.
+    </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <p>
+    <code>--link=CONTAINER_NAME:ALIAS</code>
+    </p>
+    </td>
+    <td>
+    <p>
+      Using this option as you <code>run</code> a container gives the embedded DNS
+      an extra entry named <code>ALIAS</code> that points to the IP address
+      of the container identified by <code>CONTAINER_NAME</code>. When using <code>--link</code>
+      the embedded DNS will guarantee that localized lookup result only on that
+      container where the <code>--link</code> is used. This lets processes inside the new container 
+      connect to container without having to know its name or IP.
+    </p>
+    </td>
+  </tr>
+  <tr>
+    <td><p>
+    <code>--dns=[IP_ADDRESS...]</code>
+    </p></td>
+    <td><p>
+     The IP addresses passed via the <code>--dns</code> option is used by the embedded DNS
+     server to forward the DNS query if embedded DNS server is unable to resolve a name
+     resolution request from the containers.
+     These  <code>--dns</code> IP addresses are managed by the embedded DNS server and
+     will not be updated in the container's <code>/etc/resolv.conf</code> file.
+  </tr>
+  <tr>
+    <td><p>
+    <code>--dns-search=DOMAIN...</code>
+    </p></td>
+    <td><p>
+    Sets the domain names that are searched when a bare unqualified hostname is
+    used inside of the container. These <code>--dns-search</code> options are managed by the
+    embedded DNS server and will not be updated in the container's <code>/etc/resolv.conf</code> file.
+    When a container process attempts to access <code>host</code> and the search
+    domain <code>example.com</code> is set, for instance, the DNS logic will not only
+    look up <code>host</code> but also <code>host.example.com</code>.
+    </p>
+    </td>
+  </tr>
+  <tr>
+    <td><p>
+    <code>--dns-opt=OPTION...</code>
+    </p></td>
+    <td><p>
+      Sets the options used by DNS resolvers. These options are managed by the embedded
+      DNS server and will not be updated in the container's <code>/etc/resolv.conf</code> file.
+    </p>
+    <p>
+    See documentation for <code>resolv.conf</code> for a list of valid options
+    </p></td>
+  </tr>
+</table>
+
 
 In the absence of the `--dns=IP_ADDRESS...`, `--dns-search=DOMAIN...`, or
 `--dns-opt=OPTION...` options, Docker uses the `/etc/resolv.conf` of the
