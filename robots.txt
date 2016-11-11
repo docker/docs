@@ -1,4 +1,6 @@
 User-agent: *
+
+# Docker Engine archives
 Disallow: /v1.4/
 Disallow: /v1.5/
 Disallow: /v1.6/
@@ -7,3 +9,10 @@ Disallow: /v1.8/
 Disallow: /v1.9/
 Disallow: /v1.10/
 Disallow: /v1.11/
+
+# Docker Datacenter archives
+Disallow: /datacenter/dtr/2.1
+Disallow: /datacenter/ucp/1.1
+Disallow: /apidocs/v*
+
+Sitemap: https://docs.docker.com/sitemap.xml
