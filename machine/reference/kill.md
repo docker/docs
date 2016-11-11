@@ -1,7 +1,6 @@
 ---
 description: Kill (abruptly force stop) a machine.
-keywords:
-- machine, kill, subcommand
+keywords: machine, kill, subcommand
 title: docker-machine kill
 ---
 

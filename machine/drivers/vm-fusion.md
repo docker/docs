@@ -1,7 +1,6 @@
 ---
 description: VMware Fusion driver for machine
-keywords:
-- machine, VMware Fusion, driver
+keywords: machine, VMware Fusion, driver
 title: VMware Fusion
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: Exoscale driver for machine
-keywords:
-- machine, exoscale, driver
+keywords: machine, exoscale, driver
 title: Exoscale
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: Inspect information about a machine
-keywords:
-- machine, inspect, subcommand
+keywords: machine, inspect, subcommand
 title: docker-machine inspect
 ---
 
