@@ -1,7 +1,6 @@
 ---
 description: Re-run provisioning on a created machine.
-keywords:
-- machine, provision, subcommand
+keywords: machine, provision, subcommand
 title: docker-machine provision
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: IBM Softlayer driver for machine
-keywords:
-- machine, IBM Softlayer, driver
+keywords: machine, IBM Softlayer, driver
 title: IBM Softlayer
 ---
 

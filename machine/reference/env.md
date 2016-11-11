@@ -1,7 +1,6 @@
 ---
 description: Set environment variables on a machine
-keywords:
-- machine, env, subcommand
+keywords: machine, env, subcommand
 title: docker-machine env
 ---
 
