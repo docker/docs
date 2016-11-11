@@ -1,9 +1,8 @@
 ---
+description: The release notes for CS Docker Engine.
+keywords: docker, engine, release notes
 redirect_from:
 - /docker-trusted-registry/cs-engine/release-notes/
-description: The release notes for CS Docker Engine.
-keywords:
-- docker, engine, release notes
 title: Commercially Supported Docker Engine release notes
 ---
 

@@ -1,11 +1,10 @@
 ---
+description: Learn how to install the commercially supported version of Docker Engine.
+keywords: docker, engine, dtr, install
 redirect_from:
 - /docker-trusted-registry/install/engine-ami-launch/
 - /docker-trusted-registry/install/install-csengine/
 - /docker-trusted-registry/cs-engine/install/
-description: Learn how to install the commercially supported version of Docker Engine.
-keywords:
-- docker, engine, dtr, install
 title: Install Commercially Supported Docker Engine
 ---
 

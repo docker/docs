@@ -1,10 +1,9 @@
 ---
+description: Archived release notes for commercially supported Docker Engine
+keywords: docker, documentation, about, technology, understanding, enterprise, hub, registry, release, commercially supported Docker Engine
 redirect_from:
 - /docker-trusted-registry/cse-prior-release-notes/
 - /docker-trusted-registry/cs-engine/release-notes/prior-release-notes/
-description: Archived release notes for commercially supported Docker Engine
-keywords:
-- docker, documentation, about, technology, understanding, enterprise, hub, registry, release, commercially supported Docker Engine
 title: Release notes archive for Commercially Supported Docker Engine.
 ---
 

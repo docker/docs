@@ -1,9 +1,8 @@
 ---
+description: Learn how to install the commercially supported version of Docker Engine.
+keywords: docker, engine, dtr, upgrade
 redirect_from:
 - /docker-trusted-registry/cs-engine/upgrade/
-description: Learn how to install the commercially supported version of Docker Engine.
-keywords:
-- docker, engine, dtr, upgrade
 title: Upgrade Commercially Supported Docker Engine
 ---
 
