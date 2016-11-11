@@ -1,7 +1,6 @@
 ---
 description: Run your own notary service to host arbitrary content signing.
-keywords:
-- docker, notary, notary-server, notary server, notary-signer, notary signer
+keywords: docker, notary, notary-server, notary server, notary-signer, notary signer
 title: Run a Notary service
 ---
 
