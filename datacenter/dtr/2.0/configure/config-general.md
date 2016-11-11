@@ -1,9 +1,8 @@
 ---
+description: Configure general settings for Docker Trusted Registry
+keywords: docker, documentation, about, technology, understanding, enterprise, hub, general, domain name, HTTP, HTTPS ports, Notary, registry
 redirect_from:
 - /docker-trusted-registry/configure/config-general/
-description: Configure general settings for Docker Trusted Registry
-keywords:
-- docker, documentation, about, technology, understanding, enterprise, hub, general, domain name, HTTP, HTTPS ports, Notary, registry
 title: Configure general settings
 ---
 

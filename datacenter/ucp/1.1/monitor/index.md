@@ -1,9 +1,8 @@
 ---
+description: Manage, monitor, troubleshoot
+keywords: manage, monitor, troubleshoot
 redirect_from:
 - /ucp/manage/
-description: Manage, monitor, troubleshoot
-keywords:
-- manage, monitor, troubleshoot
 title: Monitor and troubleshoot UCP
 ---
 

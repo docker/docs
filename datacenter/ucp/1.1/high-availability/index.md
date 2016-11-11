@@ -1,7 +1,6 @@
 ---
 description: Learn how to set up Docker Universal Control Plane for high availability.
-keywords:
-- docker, ucp, high-availability, backup, recovery
+keywords: docker, ucp, high-availability, backup, recovery
 title: Configure UCP for high availability
 ---
 

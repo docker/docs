@@ -1,7 +1,6 @@
 ---
 description: Docker Trusted Registry join command reference.
-keywords:
-- docker, registry, reference, join
+keywords: docker, registry, reference, join
 title: docker/dtr join
 ---
 

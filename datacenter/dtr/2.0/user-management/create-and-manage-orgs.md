@@ -1,10 +1,9 @@
 ---
-redirect_from:
-- /docker-trusted-registry/user-management/create-and-manage-orgs/
 description: Learn how to set up organizations to enforce security in Docker Trusted
   Registry.
-keywords:
-- docker, registry, security, permissions, organizations
+keywords: docker, registry, security, permissions, organizations
+redirect_from:
+- /docker-trusted-registry/user-management/create-and-manage-orgs/
 title: Create and manage organizations
 ---
 
