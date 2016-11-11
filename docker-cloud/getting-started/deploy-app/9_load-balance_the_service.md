@@ -1,18 +1,11 @@
 ---
-aliases:
+description: Load-balance the service
+keywords: load, balance, Python
+redirect_from:
 - /docker-cloud/getting-started/python/9_load-balance_the_service/
 - /docker-cloud/getting-started/golang/9_load-balance_the_service/
-description: Load-balance the service
-keywords:
-- load, balance, Python
-menu:
-  main:
-    parent: deploy-app
-    weight: -10
 title: Load-balance the service
 ---
-
-# Load-balance a Python service
 
 To load-balance a your application, you need to deploy a load-balancing service.
 This service distributes incoming requests to all of the available containers in

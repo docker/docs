@@ -1,15 +1,8 @@
 ---
-description: exec
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  exec
-menu:
-  main:
-    identifier: exec.compose
-    parent: smn_compose_cli
-title: exec
+description: docker-compose exec
+keywords: fig, composition, compose, docker, orchestration, cli, exec
+title: docker-compose exec
 ---
-
-# exec
 
 ```
 Usage: exec [options] SERVICE COMMAND [ARGS...]

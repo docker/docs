@@ -1,17 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/api/docker_remote_api_v1.18/
 description: API Documentation for Docker
 keywords:
 - API, Docker, rcli, REST,  documentation
-menu:
-  main:
-    parent: engine_remoteapi
-    weight: 3
-title: Remote API v1.18
+title: Docker Remote API v1.18
 ---
-
-# Docker Remote API v1.18
 
 ## 1. Brief introduction
 

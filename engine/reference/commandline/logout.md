@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/logout/
 description: The logout command description and usage
 keywords:
 - logout, docker, registry
-menu:
-  main:
-    parent: smn_cli
-title: logout
+title: docker logout
 ---
-
-# logout
 
 ```markdown
 Usage:  docker logout [SERVER]

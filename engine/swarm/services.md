@@ -1,16 +1,12 @@
-<!--[metadata]>
-+++
-title = "Deploy services to a swarm"
-description = "Deploy services to a swarm"
-keywords = ["guide", "swarm mode", "swarm", "service"]
-[menu.main]
-identifier="services-guide"
-parent="engine_swarm"
-weight=15
-+++
-<![end-metadata]-->
-
-# Deploy services to a swarm
+---
+description: Deploy services to a swarm
+keywords:
+- guide
+- swarm mode
+- swarm
+- service
+title: Deploy services to a swarm
+---
 
 When you are running Docker Engine in swarm mode, you run
 `docker service create` to deploy your application in the swarm. The swarm

@@ -1,15 +1,9 @@
-<!--[metadata]>
-+++
-title = "Installation on Windows"
-description = "Docker installation on Microsoft Windows"
-keywords = ["Docker, Docker documentation, Windows, requirements, virtualbox,  boot2docker"]
-[menu.main]
-parent = "engine_install"
-weight="-80"
-+++
-<![end-metadata]-->
-
-# Windows
+---
+description: Docker installation on Microsoft Windows
+keywords:
+- Docker, Docker documentation, Windows, requirements, virtualbox,  boot2docker
+title: Install Docker on Windows
+---
 
 You have two options for installing Docker on Windows:
 
@@ -20,7 +14,7 @@ You have two options for installing Docker on Windows:
 
 Docker for Windows is our newest offering for PCs. It runs as a native Windows application and uses Hyper-V to virtualize the Docker Engine environment and Linux kernel-specific features for the Docker daemon.
 
-Go to [Getting Started with Docker for Windows](https://docs.docker.com/docker-for-windows/) for download and install instructions, and to learn all about Docker for Windows.
+Go to [Getting Started with Docker for Windows](/docker-for-windows/) for download and install instructions, and to learn all about Docker for Windows.
 
 **Requirements**
 
@@ -46,6 +40,6 @@ To run Docker, your machine must have a 64-bit operating system running Windows 
 
 * You can find more extensive examples in [Learn by example](../tutorials/index.md) and in the [Docker Engine User Guide](../userguide/index.md).
 
-* If you are interested in using the Kitematic GUI, see the [Kitematic user guide](https://docs.docker.com/kitematic/userguide/).
+* If you are interested in using the Kitematic GUI, see the [Kitematic user guide](/kitematic/userguide/).
 
 > **Note**: The Boot2Docker command line was deprecated several releases > back in favor of Docker Machine, and now Docker for Windows.

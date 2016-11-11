@@ -1,14 +1,9 @@
-<!--[metadata]>
-+++
-title = "Dockerizing a Riak service"
-description = "Build a Docker image with Riak pre-installed"
-keywords = ["docker, example, package installation, networking,  riak"]
-[menu.main]
-parent = "engine_dockerize"
-+++
-<![end-metadata]-->
-
-# Dockerizing a Riak service
+---
+description: Build a Docker image with Riak pre-installed
+keywords:
+- docker, example, package installation, networking,  riak
+title: Dockerize a Riak service
+---
 
 The goal of this example is to show you how to build a Docker image with
 Riak pre-installed.

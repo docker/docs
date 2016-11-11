@@ -1,35 +1,33 @@
 ---
-aliases:
+description: Getting Started
+keywords: mac, beta, alpha, tutorial
+redirect_from:
 - /mackit/
 - /mackit/getting-started/
 - /mac/
 - /mac/started/
 - /docker-for-mac/started/
 - /installation/mac/
-description: Getting Started
-keywords:
-- mac, beta, alpha, tutorial
-menu:
-  main:
-    identifier: docker-mac-getstart
-    parent: pinata_mac_menu
-    weight: 1
-title: Getting Started
+title: Get started with Docker for Mac
 ---
-
-# Getting Started with Docker for Mac
 
 Welcome to Docker for Mac!
 
-Please read through these topics on how to get started. To **give us feedback** on your experience with the app and report bugs or problems, log in to our [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac).
+Please read through these topics on how to get started. To **give us feedback**
+on your experience with the app and report bugs or problems, log in to our
+[Docker for Mac forum](https://forums.docker.com/c/docker-for-mac).
 
->**Already have Docker for Mac?** If you already have Docker for Mac installed, and are ready to get started, skip over to the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
+>**Already have Docker for Mac?** If you already have Docker for Mac installed,
+and are ready to get started, skip over to the [Getting Started with
+Docker](/engine/getstarted/index.md) tutorial.
 
 ## Download Docker for Mac
 
-If you have not already done so, please install Docker for Mac. You can download installers from the stable or beta channel.
+If you have not already done so, please install Docker for Mac. You can download
+installers from the stable or beta channel.
 
-For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-channels).
+For more about stable and beta channels, see the
+[FAQs](faqs.md#stable-and-beta-channels).
 
 <table style="width:100%">
   <tr>
@@ -85,7 +83,7 @@ For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-
   >**Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of HyperKit.
 
 <p />
-* **What the install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+* **What the install includes**: The installation provides [Docker Engine](/engine/userguide/intro/), Docker CLI client, [Docker Compose](/compose/overview/), and [Docker Machine](/machine/overview/).
 
 ## Step 1. Install and Run Docker for Mac
 
@@ -188,9 +186,9 @@ Choose <img src="images/whale-x.png"> --> **Preferences** from the menu bar. You
 ![Advanced Preference settings-advanced](images/settings-advanced.png)
 
 * **Adding registries** - As an alternative to using [Docker Hub](https://hub.docker.com/) to store your public or private images or [Docker
-Trusted Registry](https://docs.docker.com/docker-trusted-registry/overview/),
+Trusted Registry](/docker-trusted-registry/overview/),
 you can use Docker to set up your own insecure
-[registry](https://docs.docker.com/registry/introduction/). Add URLs for
+[registry](/registry/introduction/). Add URLs for
 insecure registries and registry mirrors on which to host your images. (See
 also, [How do I add custom CA
 certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in the FAQs.)

@@ -1,18 +1,11 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/reference/logging/"]
-title = "Logging"
-description = "Logging and Logging Drivers"
-keywords = [" docker, logging, driver"]
-[menu.main]
-parent = "engine_admin"
-identifier = "smn_logging"
-weight=9
-+++
-<![end-metadata]-->
-
-
-# Logging Drivers
+---
+redirect_from:
+- /engine/reference/logging/
+description: Logging and Logging Drivers
+keywords:
+- ' docker, logging, driver'
+title: Logging drivers
+---
 
 * [Configuring logging drivers](overview.md)
 * [Configuring log tags](log_tags.md)

@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "How services work"
-description = "How swarm mode services work"
-keywords = ["docker, container, cluster, swarm mode, node"]
-[menu.main]
-identifier="how-services-work"
-parent="how-swarm-works"
-weight="4"
-+++
-<![end-metadata]-->
-
-# How services work
+---
+description: How swarm mode services work
+keywords:
+- docker, container, cluster, swarm mode, node
+title: How services work
+---
 
 To deploy an application image when Docker Engine is in swarm mode, you create a
 service. Frequently a service will be the image for a microservice within the

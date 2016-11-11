@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/rename/
 description: The rename command description and usage
 keywords:
 - rename, docker, container
-menu:
-  main:
-    parent: smn_cli
-title: rename
+title: docker rename
 ---
-
-# rename
 
 ```markdown
 Usage:  docker rename CONTAINER NEW_NAME

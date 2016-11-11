@@ -16,6 +16,9 @@ gems:
   - jekyll-gist
   - jekyll-seo-tag
 
+webrick:
+  headers:
+    Cache-Control: 600
 
 defaults:
   -
@@ -24,4 +27,3 @@ defaults:
       type: "pages"
     values:
       layout: docs
-      archiveserver: "http://54.71.194.30"

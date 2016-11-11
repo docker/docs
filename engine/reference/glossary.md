@@ -1,15 +1,11 @@
-<!--[metadata]>
-+++
-title = "Docker Glossary"
-description = "Glossary of terms used around Docker"
-keywords = ["glossary, docker, terms,  definitions"]
-[menu.main]
-parent = "mn_about"
-weight = "50"
-+++
-<![end-metadata]-->
-
-# Glossary
+---
+redirect_from:
+  - /reference/glossary/
+description: Glossary of terms used around Docker
+keywords:
+- glossary, docker, terms,  definitions
+title: Docker glossary
+---
 
 A list of terms used around the Docker project.
 

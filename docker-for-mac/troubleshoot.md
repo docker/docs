@@ -1,20 +1,14 @@
 ---
-aliases:
-- /mackit/troubleshoot/
 description: Troubleshooting, logs, and known issues
-keywords:
-- mac, troubleshooting, logs, issues
-menu:
-  main:
-    identifier: docker-mac-troubleshoot
-    parent: pinata_mac_menu
-    weight: 6
-title: Logs and Troubleshooting
+keywords: mac, troubleshooting, logs, issues
+redirect_from:
+- /mackit/troubleshoot/
+title: Logs and troubleshooting
 ---
 
-#  Logs and Troubleshooting
-
-Here is information about how to diagnose and troubleshoot problems, send logs and communicate with the Docker for Mac team, use our forums and Knowledge Hub, browse and log issues on GitHub, and find workarounds for known problems.
+Here is information about how to diagnose and troubleshoot problems, send logs
+and communicate with the Docker for Mac team, use our forums and Knowledge Hub,
+browse and log issues on GitHub, and find workarounds for known problems.
 
 ## Docker Knowledge Hub
 
@@ -22,13 +16,19 @@ Here is information about how to diagnose and troubleshoot problems, send logs a
 
 ## Diagnose problems, send feedback, and create GitHub issues
 
-If you encounter problems for which you do not find solutions in this documentation, [Docker for Mac issues on GitHub](https://github.com/docker/for-mac/issues) already filed by other users, or on the [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac), we can help you troubleshoot the log data.
+If you encounter problems for which you do not find solutions in this
+documentation, [Docker for Mac issues on
+GitHub](https://github.com/docker/for-mac/issues) already filed by other users,
+or on the [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac), we
+can help you troubleshoot the log data.
 
-Choose <img src="../images/whale-x.png"> --> **Diagnose & Feedback** from the menu bar.
+Choose <img src="../images/whale-x.png"> --> **Diagnose & Feedback** from the
+menu bar.
 
 ![Diagnose problems](images/settings-diagnose.png)
 
-You can choose to run diagnostics only, or diagnose and send the results to the Docker Team:
+You can choose to run diagnostics only, or diagnose and send the results to the
+Docker Team:
 
 * **Diagnose Only** - Runs diagnostics, and shows results locally. (Results are not sent to Docker, and no ID is generated.)
 
@@ -38,7 +38,9 @@ You can choose to run diagnostics only, or diagnose and send the results to the 
 
 ![Diagnostics & Feedback](images/settings-diagnose-id.png)
 
-If you click **Open Issues**, this opens [Docker for Mac issues on GitHub](https://github.com/docker/for-mac/issues/) in your web browser in a “create new issue” template prepopulated with the following:
+If you click **Open Issues**, this opens [Docker for Mac issues on
+GitHub](https://github.com/docker/for-mac/issues/) in your web browser in a
+“create new issue” template prepopulated with the following:
 
 * ID and summary of the diagnostic you just ran
 
@@ -48,9 +50,14 @@ If you click **Open Issues**, this opens [Docker for Mac issues on GitHub](https
 
 ![Create issue on GitHub](images/diagnose-issue.png)
 
-You can also create a new issue directly on GitHub at [https://github.com/docker/for-mac/issues](https://github.com/docker/for-mac/issues). (The README for the repository is [here](https://github.com/docker/for-mac).)
+You can also create a new issue directly on GitHub at
+[https://github.com/docker/for-mac/issues](https://github.com/docker/for-mac/issues).
+(The README for the repository is [here](https://github.com/docker/for-mac).)
 
-Click [New Issue](https://github.com/docker/for-mac/issues/new) on that page (or right here &#9786;) to get a "create new issue" template prepopulated with sections for the ID and summary of your diagnostics, system and version details, description of expected and actual behavior, and steps to reproduce the issue.
+Click [New Issue](https://github.com/docker/for-mac/issues/new) on that page (or
+right here &#9786;) to get a "create new issue" template prepopulated with
+sections for the ID and summary of your diagnostics, system and version details,
+description of expected and actual behavior, and steps to reproduce the issue.
 
 ![issue template](images/diagnose-d4mac-issues-template.png)
 
@@ -58,23 +65,28 @@ Click [New Issue](https://github.com/docker/for-mac/issues/new) on that page (or
 
 ## Checking the logs
 
-In addition to using the diagnose and feedback option to submit logs, you can browse the logs yourself.
+In addition to using the diagnose and feedback option to submit logs, you can
+browse the logs yourself.
 
 #### Use the command line to view logs
 
-To view Docker for Mac logs at the command line, type this command in a terminal window or your favorite shell.
+To view Docker for Mac logs at the command line, type this command in a terminal
+window or your favorite shell.
 
     $ syslog -k Sender Docker
 
-Alternatively, you can send the output of this command to a file. The following command redirects the log output to a file called `my_docker_logs.txt`.
+Alternatively, you can send the output of this command to a file. The following
+command redirects the log output to a file called `my_docker_logs.txt`.
 
     $ syslog -k Sender Docker > ~/Desktop/my_docker_logs.txt
 
 #### Use the Mac Console for log queries
 
-Macs provide a built-in log viewer. You can use the Mac Console System Log Query to check Docker app logs.
+Macs provide a built-in log viewer. You can use the Mac Console System Log Query
+to check Docker app logs.
 
-The Console lives on your Mac hard drive in `Applications` > `Utilities`. You can bring it up quickly by just searching for it with Spotlight Search.
+The Console lives on your Mac hard drive in `Applications` > `Utilities`. You
+can bring it up quickly by just searching for it with Spotlight Search.
 
 To find all Docker app log messages, do the following.
 
@@ -89,11 +101,15 @@ To find all Docker app log messages, do the following.
 
   ![Mac Console display of Docker app search results](images/console_logs.png)
 
-You can use the Console Log Query to search logs, filter the results in various ways, and create reports.
+You can use the Console Log Query to search logs, filter the results in various
+ways, and create reports.
 
-For example, you could construct a search for log messages sent by Docker that contain the word `hypervisor` then filter the results by time (earlier, later, now).
+For example, you could construct a search for log messages sent by Docker that
+contain the word `hypervisor` then filter the results by time (earlier, later,
+now).
 
-The diagnostics and usage information to the left of the results provide auto-generated reports on packages.
+The diagnostics and usage information to the left of the results provide
+auto-generated reports on packages.
 
 <a name="troubleshoot"></a>
 
@@ -101,13 +117,18 @@ The diagnostics and usage information to the left of the results provide auto-ge
 
 ### Recreate or update your containers after Beta 18 upgrade
 
-Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to RC3. (For more information, see https://github.com/docker/docker/issues/24343#issuecomment-230623542.)
+Docker 1.12.0 RC3 release introduces a backward incompatible change from RC2 to
+RC3. (For more information, see
+https://github.com/docker/docker/issues/24343#issuecomment-230623542.)
 
-You may get the following error when you try to start a container created with pre-Beta 18 Docker for Mac applications.
+You may get the following error when you try to start a container created with
+pre-Beta 18 Docker for Mac applications.
 
 			Error response from daemon: Unknown runtime specified default
 
-You can fix this by either [recreating](troubleshoot.md#recreate-your-containers) or [updating](troubleshoot.md#update-your-containers) your containers.
+You can fix this by either
+[recreating](troubleshoot.md#recreate-your-containers) or
+[updating](troubleshoot.md#update-your-containers) your containers.
 
 If you get the error message shown above, we recommend recreating them.
 
@@ -155,20 +176,27 @@ To fix existing containers, follow these steps.
 
 ### Incompatible CPU detected
 
-Docker for Mac requires a processor (CPU) that supports virtualization and, more specifically, the [Apple Hypervisor framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/). Docker for Mac is only compatible with Macs that have a CPU that supports the Hypervisor framework. Most Macs built in 2010 and later support it, as described in the Apple Hypervisor Framework documentation about supported hardware:
+Docker for Mac requires a processor (CPU) that supports virtualization and, more
+specifically, the [Apple Hypervisor
+framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/).
+Docker for Mac is only compatible with Macs that have a CPU that supports the
+Hypervisor framework. Most Macs built in 2010 and later support it, as described
+in the Apple Hypervisor Framework documentation about supported hardware:
 
 *Generally, machines with an Intel VT-x feature set that includes Extended Page Tables (EPT) and Unrestricted Mode are supported.*
 
-To check if your Mac supports the Hypervisor framework, run this command in a terminal window.
+To check if your Mac supports the Hypervisor framework, run this command in a
+terminal window.
 
-```
-sysctl kern.hv_support
-```
-If your Mac supports the Hypervisor Framework, the command will print `kern.hv_support: 1`.
+``` sysctl kern.hv_support ``` If your Mac supports the Hypervisor Framework,
+the command will print `kern.hv_support: 1`.
 
 If not, the command will print `kern.hv_support: 0`.
 
-See also, [Hypervisor Framework Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/) in the Apple documentation, and Docker for Mac system requirements in [What to know before you install](index.md#what-to-know-before-you-install).
+See also, [Hypervisor Framework
+Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
+in the Apple documentation, and Docker for Mac system requirements in [What to
+know before you install](index.md#what-to-know-before-you-install).
 
 
 ### Workarounds for common problems

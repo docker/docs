@@ -1,19 +1,13 @@
-<!--[metadata]>
-+++
-title = "IPv6 with Docker"
-description = "How do we connect docker containers within and across hosts ?"
-keywords = ["docker, network, IPv6"]
-[menu.main]
-parent = "smn_networking_def"
-weight = 3
-+++
-<![end-metadata]-->
-
-# IPv6 with Docker
+---
+description: How do we connect docker containers within and across hosts ?
+keywords:
+- docker, network, IPv6
+title: IPv6 with Docker
+---
 
 The information in this section explains IPv6 with the Docker default bridge.
 This is a `bridge` network named `bridge` created automatically when you install
-Docker.  
+Docker.
 
 As we are [running out of IPv4
 addresses](http://en.wikipedia.org/wiki/IPv4_address_exhaustion) the IETF has

@@ -1,23 +1,14 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mac/started/",
-"/windows/started/",
-"/linux/started/",
-"/getting-started/"
-]
-title = "Get Started with Docker"
-description = "Getting started with Docker"
-keywords = ["beginner, getting started, Docker"]
-[menu.main]
-identifier = "getstart_all"
-parent = "tutorial_getstart_menu"
-weight="-1"
-+++
-<![end-metadata]-->
-
-
-# Get Started with Docker
+---
+redirect_from:
+- /mac/started/
+- /windows/started/
+- /linux/started/
+- /getting-started/
+description: Getting started with Docker
+keywords:
+- beginner, getting started, Docker
+title: Get started with Docker
+---
 
 This tutorial is a for non-technical users who are interested in learning more about Docker. By following these steps, you'll learn fundamental Docker features while working through some simple tasks.
 

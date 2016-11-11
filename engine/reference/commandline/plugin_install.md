@@ -1,17 +1,12 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/plugin_install/
 advisory: experimental
 description: the plugin install command description and usage
 keywords:
 - plugin, install
-menu:
-  main:
-    parent: smn_cli
-title: plugin install
+title: docker plugin install (experimental)
 ---
-
-# plugin install (experimental)
 
 ```markdown
 Usage:  docker plugin install [OPTIONS] PLUGIN

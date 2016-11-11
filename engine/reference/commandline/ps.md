@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/ps/
 description: The ps command description and usage
 keywords:
 - container, running, list
-menu:
-  main:
-    parent: smn_cli
-title: ps
+title: docker ps
 ---
-
-# ps
 
 ```markdown
 Usage: docker ps [OPTIONS]

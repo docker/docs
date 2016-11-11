@@ -2,8 +2,6 @@
 title: "Getting Started, Part 2: Creating and Building Your App"
 ---
 
-# Getting Started, Part 2: Creating and Building Your App
-
 In [Getting Started, Part 1: Orientation and Setup](index.md), you heard an
 overview of what containers are, what the
 Docker platform does, and what we'll be covering in this multi-part tutorial.

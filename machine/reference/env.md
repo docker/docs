@@ -2,13 +2,8 @@
 description: Set environment variables on a machine
 keywords:
 - machine, env, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: env
+title: docker-machine env
 ---
-
-# env
 
 Set environment variables to dictate that `docker` should run a command against
 a particular machine.
@@ -68,11 +63,11 @@ set -x DOCKER_MACHINE_NAME overlay
 # eval "$(docker-machine env overlay)"
 ```
 
-If you are on Windows and using either Powershell or `cmd.exe`, `docker-machine env`
+If you are on Windows and using either PowerShell or `cmd.exe`, `docker-machine env`
  Docker Machine should now detect your shell automatically. If the automagic detection does not work you
   can still override it using the `--shell` flag for `docker-machine env`.
 
-For Powershell:
+For PowerShell:
 
 ```none
 $ docker-machine.exe env --shell powershell dev

@@ -1,19 +1,13 @@
 ---
-aliases:
-  - /reference/commandline/service_ps/
-aliases:
+redirect_from:
+- /reference/commandline/service_ps/
 - /engine/reference/commandline/service_tasks/
 description: The service ps command description and usage
 keywords:
 - service, tasks
 - ps
-menu:
-  main:
-    parent: smn_cli
-title: service ps
+title: docker service ps
 ---
-
-# service ps
 
 ```Markdown
 Usage:	docker service ps [OPTIONS] SERVICE

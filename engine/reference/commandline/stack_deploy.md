@@ -1,17 +1,12 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/stack_deploy/
 advisory: experimental
 description: The stack deploy command description and usage
 keywords:
 - stack, deploy, up
-menu:
-  main:
-    parent: smn_cli
-title: stack deploy
+title: docker stack deploy (experimental)
 ---
-
-# stack deploy (experimental)
 
 ```markdown
 Usage:  docker stack deploy [OPTIONS] STACK

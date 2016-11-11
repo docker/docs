@@ -1,15 +1,8 @@
 ---
 description: Getting started with Compose and WordPress
-keywords:
-- documentation, docs,  docker, compose, orchestration, containers
-menu:
-  main:
-    parent: workw_compose
-    weight: 6
-title: 'Quickstart: Compose and WordPress'
+keywords: documentation, docs,  docker, compose, orchestration, containers
+title: "Quickstart: Compose and WordPress"
 ---
-
-# Quickstart: Docker Compose and WordPress
 
 You can use Docker Compose to easily run WordPress in an isolated environment built
 with Docker containers. This quick-start guide demonstrates how to use Compose to set up and run WordPress. Before starting, you'll need to have
@@ -27,7 +20,7 @@ with Docker containers. This quick-start guide demonstrates how to use Compose t
 
     For example, if you named your directory `my_wordpress`:
 
-        $ cd my_wordpress/
+        cd my_wordpress/
 
 3.  Create a `docker-compose.yml` file that will start your
     `Wordpress` blog and a separate `MySQL` instance with a volume
@@ -94,7 +87,7 @@ This pulls the needed images, and starts the wordpress and database containers, 
 
 ### Bring up WordPress in a web browser
 
-If you're using [Docker Machine](https://docs.docker.com/machine/), then `docker-machine ip MACHINE_VM` gives you the machine address and you can open `http://MACHINE_VM_IP:8000` in a browser.
+If you're using [Docker Machine](/machine/), then `docker-machine ip MACHINE_VM` gives you the machine address and you can open `http://MACHINE_VM_IP:8000` in a browser.
 
 At this point, WordPress should be running on port `8000` of your Docker Host, and you can complete the "famous five-minute installation" as a WordPress administrator.
 
@@ -103,7 +96,6 @@ At this point, WordPress should be running on port `8000` of your Docker Host, a
 ![Choose language for WordPress install](images/wordpress-lang.png)
 
 ![WordPress Welcome](images/wordpress-welcome.png)
-
 
 ## More Compose documentation
 

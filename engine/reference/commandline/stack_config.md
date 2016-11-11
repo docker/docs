@@ -1,17 +1,12 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/stack_config/
 advisory: experimental
 description: The stack config command description and usage
 keywords:
 - stack, config
-menu:
-  main:
-    parent: smn_cli
-title: stack config
+title: docker stack config (experimental)
 ---
-
-# stack config (experimental)
 
 ```markdown
 Usage:  docker stack config [OPTIONS] STACK

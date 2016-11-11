@@ -1,18 +1,13 @@
-<!--[metadata]>
-+++
-title = "Configure container DNS"
-description = "Learn how to configure DNS in Docker"
-keywords = ["docker, bridge, docker0, network"]
-[menu.main]
-parent = "smn_networking_def"
-+++
-<![end-metadata]-->
-
-# Configure container DNS
+---
+description: Learn how to configure DNS in Docker
+keywords:
+- docker, bridge, docker0, network
+title: Configure container DNS
+---
 
 The information in this section explains configuring container DNS within
 the Docker default bridge. This is a `bridge` network named `bridge` created
-automatically when you install Docker.  
+automatically when you install Docker.
 
 > **Note**: The [Docker networks feature](../index.md) allows you to create user-defined networks in addition to the default bridge network. Please refer to the [Docker Embedded DNS](../configure-dns.md) section for more information on DNS configurations in user-defined networks.
 
@@ -68,7 +63,7 @@ Four different options affect container domain name services.
       discussed in more detail below. Because Docker may assign a different IP
       address to the linked containers on restart, Docker updates the
       <code>ALIAS</code> entry in the <code>/etc/hosts</code> file of the
-      recipient containers.   
+      recipient containers.
 </p>
     </td>
   </tr>

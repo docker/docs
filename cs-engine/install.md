@@ -1,20 +1,13 @@
 ---
-aliases:
+redirect_from:
 - /docker-trusted-registry/install/engine-ami-launch/
 - /docker-trusted-registry/install/install-csengine/
 - /docker-trusted-registry/cs-engine/install/
 description: Learn how to install the commercially supported version of Docker Engine.
 keywords:
 - docker, engine, dtr, install
-menu:
-  main:
-    identifier: csengine_install
-    parent: menu_csengine
-    weight: 0
-title: Install CS Docker Engine
+title: Install Commercially Supported Docker Engine
 ---
-
-# Install CS Docker Engine
 
 Follow these instructions to install CS Docker Engine, the commercially
 supported version of Docker Engine.
@@ -63,27 +56,31 @@ to update its RHEL kernel.
     $ sudo yum install docker-engine
     ```
 
-6.  Enable the Docker daemon as a service and start it.
+6.  Configure devicemapper:
+
+    By default, the `devicemapper` graph driver does not come pre-configured in a production ready state. Follow the documented step by step instructions to [configure devicemapper with direct-lvm for production](../../engine/userguide/storagedriver/device-mapper-driver/#/for-a-direct-lvm-mode-configuration) in order to achieve the best performance and reliability for your environment.
+
+7.  Enable the Docker daemon as a service and start it.
 
     ```bash
     $ sudo systemctl enable docker.service
     $ sudo systemctl start docker.service
     ```
 
-7.  Confirm the Docker daemon is running:
+8.  Confirm the Docker daemon is running:
 
     ```bash
     $ sudo docker info
     ```
 
-8.  Optionally, add non-sudo access to the Docker socket by adding your user
+9.  Optionally, add non-sudo access to the Docker socket by adding your user
 to the `docker` group.
 
     ```bash
     $ sudo usermod -a -G docker $USER
     ```
 
-9. Log out and log back in to have your new permissions take effect.
+10. Log out and log back in to have your new permissions take effect.
 
 ## Install on Ubuntu 14.04 LTS
 

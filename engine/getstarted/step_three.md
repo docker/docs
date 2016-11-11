@@ -1,21 +1,13 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mac/step_three/",
-"/windows/step_three/",
-"/linux/step_three/",
-]
-title = "Find & run the whalesay image"
-description = "Getting started with Docker"
-keywords = ["beginner, getting started, Docker"]
-[menu.main]
-identifier = "getstart_locate"
-parent = "tutorial_getstart_menu"
-weight = 3
-+++
-<![end-metadata]-->
-
-# Find and run the whalesay image
+---
+redirect_from:
+- /mac/step_three/
+- /windows/step_three/
+- /linux/step_three/
+description: Getting started with Docker
+keywords:
+- beginner, getting started, Docker
+title: Find and run the whalesay image
+---
 
 People all over the world create Docker images. You can find these images by
 browsing the Docker Hub. In this next section, you'll search for and find the

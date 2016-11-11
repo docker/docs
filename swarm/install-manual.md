@@ -1,15 +1,8 @@
 ---
 description: Deploying Swarm on AWS EC2 AMI's in a VPC
-keywords:
-- docker, swarm, clustering, examples, Amazon, AWS EC2
-menu:
-  main:
-    parent: workw_swarm
-    weight: -40
+keywords: docker, swarm, clustering, examples, Amazon, AWS EC2
 title: Build a Swarm cluster for production
 ---
-
-# Build a Swarm cluster for production
 
 This page teaches you to deploy a high-availability Docker Swarm cluster.
 Although the example installation uses the Amazon Web Services (AWS) platform,
@@ -302,7 +295,7 @@ They will display corresponding entries for the change in leadership.
 
 ## Additional Resources
 
-- [Installing Docker Engine on a cloud provider](http://docs.docker.com/engine/installation/cloud/cloud-ex-aws/)
+- [Installing Docker Engine on a cloud provider](/engine/installation/cloud/cloud-ex-aws/)
 - [High availability in Docker Swarm](multi-manager-setup.md)
 - [Discovery](discovery.md)
 - [High-availability cluster using a trio of consul nodes](https://hub.docker.com/r/progrium/consul/)

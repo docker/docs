@@ -1,15 +1,12 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/articles/https/"]
-title = "Protect the Docker daemon socket"
-description = "How to setup and run Docker with HTTPS"
-keywords = ["docker, docs, article, example, https, daemon, tls, ca,  certificate"]
-[menu.main]
-parent = "smn_secure_docker"
-+++
-<![end-metadata]-->
-
-# Protect the Docker daemon socket
+---
+redirect_from:
+- /engine/articles/https/
+- /articles/https/
+description: How to setup and run Docker with HTTPS
+keywords:
+- docker, docs, article, example, https, daemon, tls, ca,  certificate
+title: Protect the Docker daemon socket
+---
 
 By default, Docker runs via a non-networked Unix socket. It can also
 optionally communicate using an HTTP socket.

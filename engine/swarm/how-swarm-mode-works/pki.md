@@ -1,16 +1,15 @@
-<!--[metadata]>
-+++
-title = "How PKI works"
-description = "How PKI works in swarm mode"
-keywords = ["docker", "container", "cluster", "swarm mode", "node", "tls", "pki"]
-[menu.main]
-identifier="how-pki-work"
-parent="how-swarm-works"
-weight="5"
-+++
-<![end-metadata]-->
-
-# How PKI works in swarm mode
+---
+description: How PKI works in swarm mode
+keywords:
+- docker
+- container
+- cluster
+- swarm mode
+- node
+- tls
+- pki
+title: How PKI works in swarm mode
+---
 
 The swarm mode public key infrastructure (PKI) system built into Docker Engine
 makes it simple to securely deploy a container orchestration system. The nodes

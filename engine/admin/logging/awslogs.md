@@ -1,15 +1,11 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/reference/logging/awslogs/"]
-title = "Amazon CloudWatch Logs logging driver"
-description = "Describes how to use the Amazon CloudWatch Logs logging driver."
-keywords = ["AWS, Amazon, CloudWatch, logging, driver"]
-[menu.main]
-parent = "smn_logging"
-+++
-<![end-metadata]-->
-
-# Amazon CloudWatch Logs logging driver
+---
+redirect_from:
+- /engine/reference/logging/awslogs/
+description: Describes how to use the Amazon CloudWatch Logs logging driver.
+keywords:
+- AWS, Amazon, CloudWatch, logging, driver
+title: Amazon CloudWatch Logs logging driver
+---
 
 The `awslogs` logging driver sends container logs to
 [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).

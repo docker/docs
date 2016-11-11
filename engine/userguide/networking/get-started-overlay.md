@@ -1,15 +1,9 @@
-<!--[metadata]>
-+++
-title = "Get started with multi-host networking"
-description = "Use overlay for multi-host networking"
-keywords = ["Examples, Usage, network, docker, documentation, user guide, multihost, cluster"]
-[menu.main]
-parent = "smn_networking"
-weight=-3
-+++
-<![end-metadata]-->
-
-# Get started with multi-host networking
+---
+description: Use overlay for multi-host networking
+keywords:
+- Examples, Usage, network, docker, documentation, user guide, multihost, cluster
+title: Get started with multi-host networking
+---
 
 This article uses an example to explain the basics of creating a multi-host
 network. Docker Engine supports multi-host networking out-of-the-box through the
@@ -387,5 +381,5 @@ multi-host networking scenario in the swarm cluster used above.
 
 * [Understand Docker container networks](index.md)
 * [Work with network commands](work-with-networks.md)
-* [Docker Swarm overview](https://docs.docker.com/swarm)
-* [Docker Machine overview](https://docs.docker.com/machine)
+* [Docker Swarm overview](/swarm)
+* [Docker Machine overview](/machine)

@@ -13,11 +13,12 @@
     "can_be_canceled": false,
     "location": "New York, USA",
     "method": "POST",
-    "object": "/api/infra/v1/cluster/eea638f4-b77a-4183-b241-22dbd7866f22/",
-    "path": "/api/infra/v1/cluster/",
+    "object": "/api/infra/v1/user_namespace/cluster/eea638f4-b77a-4183-b241-22dbd7866f22/",
+    "path": "/api/infra/v1/user_namespace/cluster/",
     "resource_uri": "/api/audit/v1/action/6246c558-976c-4df6-ba60-eb1a344a17af/",
     "start_date": "Wed, 17 Sep 2014 08:26:22 +0000",
     "state": "Success",
+    "user": "user_namespace",
     "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.78.2 (KHTML, like Gecko) Version/7.0.6 Safari/537.78.2",
     "uuid": "6246c558-976c-4df6-ba60-eb1a344a17af"
 }
@@ -38,6 +39,7 @@ Simple API calls that do not require asynchronous execution will return immediat
 | action          | Name of the operation performed/being performed                                    |
 | method          | HTTP method used to access the API                                                 |
 | path            | HTTP path of the API accessed                                                      |
+| user            | The user authenticated in the request that created the action                      |
 | user_agent      | The user agent provided by the client when accessing the API endpoint              |
 | start_date      | Date and time when the API call was performed and the operation started processing |
 | end_date        | Date and time when the API call finished processing                                |

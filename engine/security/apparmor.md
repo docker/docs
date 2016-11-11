@@ -1,15 +1,9 @@
-<!-- [metadata]>
-+++
-title = "AppArmor security profiles for Docker"
-description = "Enabling AppArmor in Docker"
-keywords = ["AppArmor, security, docker, documentation"]
-[menu.main]
-parent= "smn_secure_docker"
-weight=5
-+++
-<![end-metadata]-->
-
-# AppArmor security profiles for Docker
+---
+description: Enabling AppArmor in Docker
+keywords:
+- AppArmor, security, docker, documentation
+title: AppArmor security profiles for Docker
+---
 
 AppArmor (Application Armor) is a Linux security module that protects an
 operating system and its applications from security threats. To use it, a system

@@ -1,15 +1,10 @@
 ---
 description: Basic workflow for Docker contributions
-keywords:
-- contribute, issue, review, workflow, beginner, expert, squash, commit
-menu:
-  main:
-    parent: smn_workflow
-    weight: 2
+keywords: contribute, issue, review, workflow, beginner, expert, squash, commit
 title: Find and claim an issue
 ---
 
-<!-- 
+<!--
 note: don't use blank lines inside the style-block;
 hugo converts them to paragraphs, causing the styles to be ignored
 -->
@@ -38,9 +33,6 @@ hugo converts them to paragraphs, causing the styles to be ignored
 .gh-label.usecase { background-color: #F0E4C2; color: #333333; }
 .gh-label.kinddocs { background-color: #B5E9D5; color: #333333; }
 </style>
-
-
-# Find and claim an issue
 
 As a contributor, you can work on any open issue you want. You can view
 issues in the Issues tab in every repository. If you are new to

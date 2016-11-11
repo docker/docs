@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/volume_inspect/
 description: The volume inspect command description and usage
 keywords:
 - volume, inspect
-menu:
-  main:
-    parent: smn_cli
-title: volume inspect
+title: docker volume inspect
 ---
-
-# volume inspect
 
 ```markdown
 Usage:  docker volume inspect [OPTIONS] VOLUME [VOLUME...]

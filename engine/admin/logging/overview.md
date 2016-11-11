@@ -1,13 +1,11 @@
 ---
-aliases:
+redirect_from:
 - /engine/reference/logging/overview/
 description: Configure logging driver.
 keywords:
 - docker, logging, driver, Fluentd
-title: Configuring Logging Drivers
+title: Configure logging drivers
 ---
-
-# Configure logging drivers
 
 The container can have a different logging driver than the Docker daemon. Use
 the `--log-driver=VALUE` with the `docker run` command to configure the
@@ -28,7 +26,7 @@ supported:
 | `etwlogs`   | ETW logging driver for Docker on Windows. Writes log messages as ETW events.                                                  |
 | `gcplogs`   | Google Cloud Logging driver for Docker. Writes log messages to Google Cloud Logging.                                          |
 
-The `docker logs`command is available only for the `json-file` and `journald`
+The `docker logs` command is available only for the `json-file` and `journald`
 logging drivers.
 
 The `labels` and `env` options add additional attributes for use with logging

@@ -1,15 +1,8 @@
 ---
 description: How to install Toolbox on Mac
-keywords:
-- docker, documentation, install, toolbox, mac
-menu:
-  main:
-    parent: workw_toolbox
-    weight: -7
-title: Install Toolbox on Mac
+keywords: docker, documentation, install, toolbox, mac
+title: Install Docker Toolbox on macOS
 ---
-
-# Install Docker Toolbox on macOS
 
 macOS users use Docker Toolbox to install Docker software. Docker Toolbox includes the following Docker tools:
 
@@ -39,7 +32,7 @@ software. To find out what version of the OS you have:
     If you aren't using a supported version, you could consider upgrading your
     operating system.
 
-    If you have macOS 10.10.3 Yosemite or newer, consider using [Docker for Mac](https://docs.docker.com/docker-for-mac/) instead. It runs natively on the Mac, so there is no need for a pre-configured Docker QuickStart shell. It uses xhyve for virtualization, instead of VirutalBox. Full install prerequisites are provided in the Docker for Mac topic in [Docker for Mac](https://docs.docker.com/docker-for-mac/#what-to-know-before-you-install).
+    If you have macOS 10.10.3 Yosemite or newer, consider using [Docker for Mac](/docker-for-mac/) instead. It runs natively on the Mac, so there is no need for a pre-configured Docker QuickStart shell. It uses xhyve for virtualization, instead of VirutalBox. Full install prerequisites are provided in the Docker for Mac topic in [Docker for Mac](/docker-for-mac/#what-to-know-before-you-install).
 
 ## Step 2: Install Docker Toolbox
 

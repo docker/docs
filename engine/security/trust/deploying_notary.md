@@ -1,14 +1,9 @@
-<!--[metadata]>
-+++
-title = "Deploying Notary"
-description = "Deploying Notary"
-keywords = ["trust, security, notary, deployment"]
-[menu.main]
-parent= "smn_content_trust"
-+++
-<![end-metadata]-->
-
-# Deploying Notary Server with Compose
+---
+description: Deploying Notary
+keywords:
+- trust, security, notary, deployment
+title: Deploying Notary Server with Compose
+---
 
 The easiest way to deploy Notary Server is by using Docker Compose. To follow the procedure on this page, you must have already [installed Docker Compose](/compose/install.md).
 

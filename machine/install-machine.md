@@ -2,14 +2,8 @@
 description: How to install Docker Machine
 keywords:
 - machine, orchestration, install, installation, docker, documentation
-menu:
-  main:
-    parent: workw_machine
-    weight: -80
-title: Install Machine
+title: Install Docker Machine
 ---
-
-# Install Docker Machine
 
 On macOS and Windows, Machine is installed along with other Docker products when
 you install the Docker Toolbox. For details on installing Docker Toolbox, see

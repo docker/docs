@@ -1,16 +1,11 @@
-<!--[metadata]>
-+++
-title = "Dockerizing a CouchDB service"
-description = "Sharing data between 2 couchdb databases"
-keywords = ["docker, example, package installation, networking, couchdb,  data volumes"]
-[menu.main]
-parent = "engine_dockerize"
-+++
-<![end-metadata]-->
+---
+description: Sharing data between 2 couchdb databases
+keywords:
+- docker, example, package installation, networking, couchdb,  data volumes
+title: Dockerize a CouchDB service
+---
 
-# Dockerizing a CouchDB service
-
-> **Note**: 
+> **Note**:
 > - **If you don't like sudo** then see [*Giving non-root
 >   access*](../installation/binaries.md#giving-non-root-access)
 

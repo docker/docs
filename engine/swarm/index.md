@@ -1,15 +1,9 @@
-<!--[metadata]>
-+++
-title = "Swarm mode overview"
-description = "Docker Engine swarm mode overview"
-keywords = ["docker, container, cluster, swarm"]
-[menu.main]
-identifier="swarm_overview"
-parent="engine_swarm"
-weight="1"
-+++
-<![end-metadata]-->
-# Swarm mode overview
+---
+description: Docker Engine swarm mode overview
+keywords:
+- docker, container, cluster, swarm
+title: Swarm mode overview
+---
 
 To use Docker Engine in swarm mode, install the Docker Engine `v1.12.0` or
 later from the [Docker releases GitHub
@@ -22,7 +16,7 @@ application services to a swarm, and manage swarm behavior.
 
 
 If you’re using a Docker version prior to `v1.12.0`, see [Docker
-Swarm](https://docs.docker.com/swarm).
+Swarm](/swarm).
 
 ## Feature highlights
 

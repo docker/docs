@@ -2,14 +2,8 @@
 description: Gracefully stop a machine
 keywords:
 - machine, stop, subcommand
-menu:
-  main:
-    identifier: machine.stop
-    parent: smn_machine_subcmds
-title: stop
+title: docker-machine stop
 ---
-
-# stop
 
 ```none
 Usage: docker-machine stop [arg...]

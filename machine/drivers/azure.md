@@ -2,13 +2,8 @@
 description: Microsoft Azure driver for machine
 keywords:
 - machine, Microsoft Azure, driver
-menu:
-  main:
-    parent: smn_machine_drivers
 title: Microsoft Azure
 ---
-
-# Microsoft Azure
 
 You will need an Azure Subscription to use this Docker Machine driver.
 [Sign up for a free trial.][trial]

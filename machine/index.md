@@ -1,15 +1,9 @@
 ---
 description: Introduction and Overview of Machine
 keywords:
-- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer,
-  virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
-menu:
-  main:
-    identifier: workw_machine
+- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
 title: Docker Machine
 ---
-
-# Docker Machine
 
 -   [Docker Machine overview](overview.md)
 -   [Install Docker Machine](install-machine.md)

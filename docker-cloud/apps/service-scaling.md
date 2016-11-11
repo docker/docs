@@ -1,16 +1,10 @@
 ---
-aliases:
-- /docker-cloud/feature-reference/service-scaling/
 description: Scale your service, spawn new containers
-keywords:
-- spawn, container, service, deploy
-menu:
-  main:
-    parent: apps
+keywords: spawn, container, service, deploy
+redirect_from:
+- /docker-cloud/feature-reference/service-scaling/
 title: Scale your service
 ---
-
-# Scale your service
 
 Docker Cloud makes it easy to spawn new containers of your service to handle
 additional load. Two modes are available to allow you to scale services with

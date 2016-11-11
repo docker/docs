@@ -1,17 +1,13 @@
 ---
 description: Docker Hub Automated Builds
-keywords:
-- Dockerfile, Hub, builds, trusted builds, automated builds
-menu:
-  main:
-    parent: mn_pubhub
-    weight: 6
-title: Automated Builds
+keywords: Dockerfile, Hub, builds, trusted builds, automated builds
+title: Configure automated builds on Docker Hub
 ---
 
-# Automated Builds on Docker Hub
-
-You can build your images automatically from a build context stored in a repository. A *build context* is a Dockerfile and any files at a specific location. For an automated build, the build context is a repository containing a Dockerfile.
+You can build your images automatically from a build context stored in a
+repository. A *build context* is a Dockerfile and any files at a specific
+location. For an automated build, the build context is a repository containing a
+Dockerfile.
 
 Automated Builds have several advantages:
 
@@ -19,23 +15,30 @@ Automated Builds have several advantages:
  * The `Dockerfile` is available to anyone with access to your Docker Hub repository.
  * Your repository is kept up-to-date with code changes automatically.
 
-Automated Builds are supported for both public and private repositories
-on both [GitHub](http://github.com) and [Bitbucket](https://bitbucket.org/). This document guides you through the process of working with automated builds.
+Automated Builds are supported for both public and private repositories on both
+[GitHub](http://github.com) and [Bitbucket](https://bitbucket.org/). This
+document guides you through the process of working with automated builds.
 
 ## Prerequisites
 
-To use automated builds you must have an [account on Docker Hub](accounts.md) and on the hosted repository provider (GitHub or Bitbucket). If
-you have previously linked your Github or Bitbucket account, you must have
-chosen the Public and Private connection type. 
+To use automated builds you must have an [account on Docker Hub](accounts.md)
+and on the hosted repository provider (GitHub or Bitbucket). If you have
+previously linked your Github or Bitbucket account, you must have chosen the
+Public and Private connection type.
 
-To view your current connection
-settings, log in to Docker Hub and choose **Profile > Settings > Linked Accounts & Services**.
+To view your current connection settings, log in to Docker Hub and choose
+**Profile > Settings > Linked Accounts & Services**.
 
 ## Limitations
 
-Currently Docker Hub does not support Git LFS (Large File Storage). If you have binaries in your build context that are managed by Git LFS, only the pointer file will be present in the clone made during the automated build, which is not what you want. 
+Currently Docker Hub does not support Git LFS (Large File Storage). If you have
+binaries in your build context that are managed by Git LFS, only the pointer
+file will be present in the clone made during the automated build, which is not
+what you want.
 
-Subscribe to the [GitHub issue](https://github.com/docker/hub-feedback/issues/500) tracking this limitation.
+Subscribe to the [GitHub
+issue](https://github.com/docker/hub-feedback/issues/500) tracking this
+limitation.
 
 ## Link to a hosted repository service
 
@@ -131,21 +134,24 @@ build request, Docker ignores new requests.
 
 ### Build statuses explained
 
-Check your build status through the Build Details screen as seen in the following example.
+You can view the status of the builds for a specific repository by looking at
+the Build Details screen. If you have builds that are queued or in progress, you
+can click **Cancel** to end them.
 
 ![Build statuses](images/build-states-ex.png)
 
 The statuses are:
 
 * **Queued**: You're in line and your image will be built soon. Queue time varies depending on number of concurrent builds available to you.
-* **Building**: Your image is currently being constructed.
+* **Building**: The image is being built.
 * **Success**: The image has been built with no issues.
-* **Error**: There was an issue with your image. Click the row to access the Builds Details screen. The banner at the top of the page displays the last sentence of the log file indicating what the error was. If you need more information, scroll to the bottom of the screen to the logs section.
-
+* **Error**: There was an issue with your image. Click the row to go to the Builds Details screen. The banner at the top of the page displays the last sentence of the log file, which indicates what the error was. If you need more information, scroll to the bottom of the screen to the logs section.
 
 ## Use the Build Settings page
 
-The Build Settings page allows you to manage your existing automated build configurations and add new ones. By default, when new code is merged into your source repository, it triggers a build of your DockerHub image.
+The Build Settings page allows you to manage your existing automated build
+configurations and add new ones. By default, when new code is merged into your
+source repository, it triggers a build of your DockerHub image.
 
 ![Default checkbox](images/merge_builds.png)
 
@@ -154,7 +160,8 @@ the page to configure and build images.
 
 ## Add and run a new build
 
-At the top of the Build Dialog is a list of configured builds. You can build from a code branch or by build tag.
+At the top of the Build Dialog is a list of configured builds. You can build
+from a code branch or by build tag.
 
 ![Build or tag](images/build-by.png)
 
@@ -210,7 +217,8 @@ To add a link:
 
 To trigger Automated Builds programmatically, you can set up a remote build
 trigger in another application such as GitHub or Bitbucket. When you Activate
-the build trigger for an Automated Build, it supplies you with a Token and a URL.
+the build trigger for an Automated Build, it supplies you with a Token and a
+URL.
 
 ![Build trigger screen](images/build-trigger.png)
 
@@ -222,6 +230,5 @@ $ curl --data build=true -X POST https://registry.hub.docker.com/u/svendowideit/
 OK
 ```
 
-To verify everything is working correctly, check the **Last 10 Trigger Logs** on the page.
-
-&nbsp;
+To verify everything is working correctly, check the **Last 10 Trigger Logs** on
+the page.

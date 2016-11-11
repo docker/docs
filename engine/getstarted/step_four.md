@@ -1,21 +1,13 @@
-<!--[metadata]>
-+++
-aliases = [
-"/mac/step_four/",
-"/windows/step_four/",
-"/linux/step_four/",
-]
-title = "Build your own image"
-description = "Getting started with Docker"
-keywords = ["beginner, getting started, Docker"]
-[menu.main]
-identifier = "getstart_build_image"
-parent = "tutorial_getstart_menu"
-weight = 4
-+++
-<![end-metadata]-->
-
-# Build your own image
+---
+redirect_from:
+- /mac/step_four/
+- /windows/step_four/
+- /linux/step_four/
+description: Getting started with Docker
+keywords:
+- beginner, getting started, Docker
+title: Build your own image
+---
 
 The `whalesay` image could be improved. It would be nice if you didn't have to
 think of something to say. And you type a lot to get `whalesay` to talk.
@@ -54,7 +46,7 @@ commands to run. Your recipe is going to be very short.
         $ ls
         Dockerfile
 
-5. Open the `Dockerfile` in a visual text editor like <a href="https://atom.io/" target="_blank">Atom</a> or <a href="https://www.sublimetext.com/" target="_blank">Sublime</a>, or a text based editor like `vi`, or `nano` (https://www.nano-editor.org/).
+5. Open the `Dockerfile` in a visual text editor like <a href="https://atom.io/" target="_blank">Atom</a> or <a href="https://www.sublimetext.com/" target="_blank">Sublime</a>, or a text based editor like `vi`, or <a href="https://www.nano-editor.org/" target="_blank">nano</a>.
 
 6. Add a line to the file like this:
 
@@ -162,7 +154,7 @@ Then, Docker installs the new `fortunes` software.
      ---> c81071adeeb5
     Removing intermediate container 23aa52c1897c
 
-Finally, Docker finishes the build and reports its outcome.		
+Finally, Docker finishes the build and reports its outcome.
 
     Step 3 : CMD /usr/games/fortune -a | cowsay
      ---> Running in a8e6faa88df3
@@ -196,15 +188,15 @@ In this step, you verify the new images is on your computer and then you run you
          -----------------------------------------
                   \
                    \
-                    \     
-                                  ##        .            
-                            ## ## ##       ==            
-                         ## ## ## ##      ===            
-                     /""""""""""""""""___/ ===        
-                ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~   
-                     \______ o          __/            
-                      \    \        __/             
-                        \____\______/   
+                    \
+                                  ##        .
+                            ## ## ##       ==
+                         ## ## ## ##      ===
+                     /""""""""""""""""___/ ===
+                ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+                     \______ o          __/
+                      \    \        __/
+                        \____\______/
 
 As you can see, you've made the whale a lot smarter. It finds its own
 things to say and the command line is a lot shorter!  You may also notice
@@ -218,5 +210,3 @@ You ran your image in a container. You also just used Linux from your Mac yet
 again. In the next section, you take the first step in sharing your image by
 [creating a Docker Hub account](step_five.md).
 
-
-&nbsp;

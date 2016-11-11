@@ -1,16 +1,11 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/articles/puppet/"]
-title = "Using Puppet"
-description = "Installing and using Puppet"
-keywords = ["puppet, installation, usage, docker,  documentation"]
-[menu.main]
-parent = "engine_admin"
-weight="12"
-+++
-<![end-metadata]-->
-
-# Using Puppet
+---
+redirect_from:
+- /engine/articles/puppet/
+description: Installing and using Puppet
+keywords:
+- puppet, installation, usage, docker,  documentation
+title: Use Puppet
+---
 
 > *Note:* Please note this is a community contributed installation path. The
 > only `official` installation is using the

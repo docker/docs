@@ -1,15 +1,9 @@
-<!--[metadata]>
-+++
-title = "Content trust in Docker"
-description = "Enabling content trust in Docker"
-keywords = ["content, trust, security, docker,  documentation"]
-[menu.main]
-parent= "smn_content_trust"
-weight=-1
-+++
-<![end-metadata]-->
-
-# Content trust in Docker
+---
+description: Enabling content trust in Docker
+keywords:
+- content, trust, security, docker,  documentation
+title: Content trust in Docker
+---
 
 When transferring data among networked systems, *trust* is a central concern. In
 particular, when communicating over an untrusted medium such as the internet, it

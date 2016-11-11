@@ -1,16 +1,11 @@
-<!--[metadata]>
-+++
-aliases = ["/engine/articles/using_supervisord/"]
-title = "Using Supervisor with Docker"
-description = "How to use Supervisor process management with Docker"
-keywords = ["docker, supervisor,  process management"]
-[menu.main]
-parent = "engine_admin"
-weight="13"
-+++
-<![end-metadata]-->
-
-# Using Supervisor with Docker
+---
+redirect_from:
+- /engine/articles/using_supervisord/
+description: How to use Supervisor process management with Docker
+keywords:
+- docker, supervisor,  process management
+title: Use Supervisor with Docker
+---
 
 > **Note**:
 > - **If you don't like sudo** then see [*Giving non-root

@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/service_inspect/
 description: The service inspect command description and usage
 keywords:
 - service, inspect
-menu:
-  main:
-    parent: smn_cli
-title: service inspect
+title: docker service inspect
 ---
-
-# service inspect
 
 ```Markdown
 Usage:  docker service inspect [OPTIONS] SERVICE [SERVICE...]

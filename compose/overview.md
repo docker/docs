@@ -1,15 +1,8 @@
 ---
 description: Introduction and Overview of Compose
-keywords:
-- documentation, docs,  docker, compose, orchestration,  containers
-menu:
-  main:
-    parent: workw_compose
-    weight: -99
+keywords: documentation, docs,  docker, compose, orchestration, containers
 title: Overview of Docker Compose
 ---
-
-# Overview of Docker Compose
 
 Compose is a tool for defining and running multi-container Docker applications.
 With Compose, you use a Compose file to configure your application's services.
@@ -184,4 +177,4 @@ individuals, we have a number of open channels for communication.
 
 * To contribute code or documentation changes: please submit a [pull request on Github](https://github.com/docker/compose/pulls).
 
-For more information and resources, please visit the [Getting Help project page](https://docs.docker.com/opensource/get-help/).
+For more information and resources, please visit the [Getting Help project page](/opensource/get-help/).

@@ -1,14 +1,9 @@
-<!--[metadata]>
-+++
-title = "Delegations for content trust"
-description = "Delegations for content trust"
-keywords = ["trust, security, delegations, keys, repository"]
-[menu.main]
-parent= "smn_content_trust"
-+++
-<![end-metadata]-->
-
-# Delegations for content trust
+---
+description: Delegations for content trust
+keywords:
+- trust, security, delegations, keys, repository
+title: Delegations for content trust
+---
 
 Docker Engine supports the usage of the `targets/releases` delegation as the
 canonical source of a trusted image tag.

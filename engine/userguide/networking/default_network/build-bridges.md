@@ -1,14 +1,9 @@
-<!--[metadata]>
-+++
-title = "Build your own bridge"
-description = "Learn how to build your own bridge interface"
-keywords = ["docker, bridge, docker0, network"]
-[menu.main]
-parent = "smn_networking_def"
-+++
-<![end-metadata]-->
-
-# Build your own bridge
+---
+description: Learn how to build your own bridge interface
+keywords:
+- docker, bridge, docker0, network
+title: Build your own bridge
+---
 
 This section explains how to build your own bridge to replace the Docker default
 bridge. This is a `bridge` network named `bridge` created automatically when you

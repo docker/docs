@@ -1,17 +1,10 @@
 ---
-aliases:
-- /contributing/contributing
 description: Contribute code
-keywords:
-- governance, board, members, profiles
-menu:
-  main:
-    parent: mn_oss_contrib
-    weight: -3
-title: Quickstart contribution
+keywords: governance, board, members, profiles
+redirect_from:
+- /contributing/contributing
+title: Quickstart code or doc contribution
 ---
-
-# Quickstart code or doc contribution
 
 If you'd like to improve the code of any of Docker's projects, we would love to
 have your contributions. All of our projects' code <a href="https://github.com/docker" target="_blank">repositories are on GitHub</a>.

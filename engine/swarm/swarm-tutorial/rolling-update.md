@@ -1,16 +1,9 @@
-<!--[metadata]>
-+++
-title = "Apply rolling updates"
-description = "Apply rolling updates to a service on the swarm"
-keywords = ["tutorial, cluster management, swarm, service, rolling-update"]
-[menu.main]
-identifier="swarm-tutorial-rolling-update"
-parent="swarm-tutorial"
-weight=20
-+++
-<![end-metadata]-->
-
-# Apply rolling updates to a service
+---
+description: Apply rolling updates to a service on the swarm
+keywords:
+- tutorial, cluster management, swarm, service, rolling-update
+title: Apply rolling updates to a service
+---
 
 In a previous step of the tutorial, you [scaled](scale-service.md) the number of
 instances of a service. In this part of the tutorial, you deploy a service based

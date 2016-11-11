@@ -2,10 +2,8 @@
 description: Running and installing a PostgreSQL service
 keywords:
 - docker, example, package installation,  postgresql
-title: Dockerizing PostgreSQL
+title: Dockerize PostgreSQL
 ---
-
-# Dockerizing PostgreSQL
 
 > **Note**:
 > - **If you don't like sudo** then see [*Giving non-root

@@ -1,17 +1,10 @@
 ---
-aliases:
-- /compose/yml
 description: Compose file reference
-keywords:
-- fig, composition, compose, docker
-menu:
-  main:
-    parent: workw_compose
-    weight: 70
-title: Compose File Reference
+keywords: fig, composition, compose, docker
+redirect_from:
+- /compose/yml
+title: Compose file reference
 ---
-
-# Compose file reference
 
 The Compose file is a [YAML](http://yaml.org/) file defining
 [services](compose-file.md#service-configuration-reference),
@@ -171,7 +164,7 @@ Override the default command.
 
     command: bundle exec thin -p 3000
 
-The command can also be a list, in a manner similar to [dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+The command can also be a list, in a manner similar to [dockerfile](/engine/reference/builder/#cmd):
 
     command: [bundle, exec, thin, -p, 3000]
 
@@ -264,7 +257,7 @@ Override the default entrypoint.
 
     entrypoint: /code/entrypoint.sh
 
-The entrypoint can also be a list, in a manner similar to [dockerfile](https://docs.docker.com/engine/reference/builder/#entrypoint):
+The entrypoint can also be a list, in a manner similar to [dockerfile](/engine/reference/builder/#entrypoint):
 
     entrypoint:
         - php
@@ -413,7 +406,7 @@ options and tags it with the specified tag.
 
 ### labels
 
-Add metadata to containers using [Docker labels](https://docs.docker.com/engine/userguide/labels-custom-metadata/). You can use either an array or a dictionary.
+Add metadata to containers using [Docker labels](/engine/userguide/labels-custom-metadata/). You can use either an array or a dictionary.
 
 It's recommended that you use reverse-DNS notation to prevent your labels from conflicting with those used by other software.
 
@@ -462,7 +455,7 @@ Logging configuration for the service.
 
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
-([documented here](https://docs.docker.com/engine/reference/logging/overview/)).
+([documented here](/engine/reference/logging/overview/)).
 
 The default value is json-file.
 
@@ -721,8 +714,8 @@ use the specified driver.
 > Note: No path expansion will be done if you have also specified a
 > `volume_driver`.
 
-See [Docker Volumes](https://docs.docker.com/engine/userguide/dockervolumes/) and
-[Volume Plugins](https://docs.docker.com/engine/extend/plugins_volume/) for more
+See [Docker Volumes](/engine/userguide/dockervolumes/) and
+[Volume Plugins](/engine/extend/plugins_volume/) for more
 information.
 
 ### volumes_from
@@ -749,7 +742,7 @@ then read-write will be used.
 ### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](https://docs.docker.com/engine/reference/run/) counterpart.
+[docker run](/engine/reference/run/) counterpart.
 
     cpu_shares: 73
     cpu_quota: 50000
@@ -781,7 +774,7 @@ While it is possible to declare volumes on the fly as part of the service
 declaration, this section allows you to create named volumes that can be
 reused across multiple services (without relying on `volumes_from`), and are
 easily retrieved and inspected using the docker command line or API.
-See the [docker volume](https://docs.docker.com/engine/reference/commandline/volume_create/)
+See the [docker volume](/engine/reference/commandline/volume_create/)
 subcommand documentation for more information.
 
 ### driver
