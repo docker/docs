@@ -41,10 +41,6 @@ defaults:
     values:
       assignee: "joaofnfernandes"
   - scope:
-      path: "cs-engine"
-    values:
-      assignee: "joaofnfernandes"
-  - scope:
       path: "docker-cloud"
     values:
       assignee: "sanscontext"
@@ -59,7 +55,7 @@ defaults:
   - scope:
       path: "docker-hub"
     values:
-      assignee: "johndmulhausen"
+      assignee: "sanscontext"
   - scope:
       path: "docker-store"
     values:
