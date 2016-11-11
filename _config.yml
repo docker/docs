@@ -13,7 +13,6 @@ url: https://docs.docker.com
 
 gems:
   - jekyll-redirect-from
-  - jekyll-gist
   - jekyll-seo-tag
 
 webrick:
