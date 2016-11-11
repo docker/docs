@@ -1,7 +1,6 @@
 ---
 description: Enabling content trust in Docker
-keywords:
-- content, trust, security, docker,  documentation
+keywords: content, trust, security, docker,  documentation
 title: Content trust in Docker
 ---
 

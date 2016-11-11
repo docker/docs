@@ -1,10 +1,9 @@
 ---
+description: How to manage data inside your Docker containers.
+keywords: Examples, Usage, volume, docker, documentation, user guide, data,  volumes
 redirect_from:
 - /engine/userguide/containers/dockervolumes/
 - /engine/userguide/dockervolumes/
-description: How to manage data inside your Docker containers.
-keywords:
-- Examples, Usage, volume, docker, documentation, user guide, data,  volumes
 title: Manage data in containers
 ---
 

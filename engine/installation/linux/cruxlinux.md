@@ -1,9 +1,8 @@
 ---
+description: Docker installation on CRUX Linux.
+keywords: crux linux, Docker, documentation,  installation
 redirect_from:
 - /engine/installation/cruxlinux/
-description: Docker installation on CRUX Linux.
-keywords:
-- crux linux, Docker, documentation,  installation
 title: Install Docker on CRUX Linux
 ---
 

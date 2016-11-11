@@ -1,10 +1,9 @@
 ---
+description: Review of the Docker Daemon attack surface
+keywords: Docker, Docker documentation,  security
 redirect_from:
 - /engine/articles/security/
 - /security/security/
-description: Review of the Docker Daemon attack surface
-keywords:
-- Docker, Docker documentation,  security
 title: Docker security
 ---
 

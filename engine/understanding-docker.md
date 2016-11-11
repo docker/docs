@@ -1,12 +1,11 @@
 ---
+description: Docker explained in depth
+keywords: docker, introduction, documentation, about, technology,  understanding
 redirect_from:
 - /introduction/understanding-docker/
 - /engine/userguide/basics/
 - /engine/quickstart.md
 - /engine/introduction/understanding-docker/
-description: Docker explained in depth
-keywords:
-- docker, introduction, documentation, about, technology,  understanding
 title: Docker Overview
 ---
 

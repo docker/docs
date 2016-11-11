@@ -1,9 +1,8 @@
 ---
+description: Instructions for installing Docker on CentOS
+keywords: Docker, Docker documentation, requirements, linux, centos, epel, docker.io,  docker-io
 redirect_from:
 - /engine/installation/centos/
-description: Instructions for installing Docker on CentOS
-keywords:
-- Docker, Docker documentation, requirements, linux, centos, epel, docker.io,  docker-io
 title: Install Docker on CentOS
 ---
 

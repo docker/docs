@@ -1,9 +1,8 @@
 ---
+description: Most frequently asked questions.
+keywords: faq, questions, documentation,  docker
 redirect_from:
 - /engine/misc/faq/
-description: Most frequently asked questions.
-keywords:
-- faq, questions, documentation,  docker
 title: Docker Engine frequently asked questions (FAQ)
 ---
 

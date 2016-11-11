@@ -1,9 +1,8 @@
 ---
+description: Describes how to format tags for.
+keywords: docker, logging, driver, syslog, Fluentd, gelf, journald
 redirect_from:
 - /engine/reference/logging/log_tags/
-description: Describes how to format tags for.
-keywords:
-- docker, logging, driver, syslog, Fluentd, gelf, journald
 title: Log tags for logging driver
 ---
 

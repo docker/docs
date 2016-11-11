@@ -1,9 +1,8 @@
 ---
+description: Controlling and configuring Docker using systemd
+keywords: docker, daemon, systemd,  configuration
 redirect_from:
 - /engine/articles/systemd/
-description: Controlling and configuring Docker using systemd
-keywords:
-- docker, daemon, systemd,  configuration
 title: Control and configure Docker with systemd
 ---
 

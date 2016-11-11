@@ -1,7 +1,6 @@
 ---
 description: Docker networking
-keywords:
-- network, networking, bridge, docker,  documentation
+keywords: network, networking, bridge, docker,  documentation
 title: Default bridge network
 ---
 

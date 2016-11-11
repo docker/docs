@@ -1,7 +1,6 @@
 ---
 description: How to work with docker networks
-keywords:
-- commands, Usage, network, docker, cluster
+keywords: commands, Usage, network, docker, cluster
 title: Work with network commands
 ---
 

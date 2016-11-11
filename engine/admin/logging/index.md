@@ -1,9 +1,8 @@
 ---
+description: Logging and Logging Drivers
+keywords: ' docker, logging, driver'
 redirect_from:
 - /engine/reference/logging/
-description: Logging and Logging Drivers
-keywords:
-- ' docker, logging, driver'
 title: Logging drivers
 ---
 

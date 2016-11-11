@@ -1,7 +1,6 @@
 ---
 description: How to keep containers running when the daemon isn't available.
-keywords:
-- docker, upgrade, daemon, dockerd, live-restore, daemonless container
+keywords: docker, upgrade, daemon, dockerd, live-restore, daemonless container
 title: Keep containers alive during daemon downtime
 ---
 

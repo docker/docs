@@ -1,9 +1,8 @@
 ---
+description: How to set up and run a local registry mirror
+keywords: docker, registry, mirror,  examples
 redirect_from:
 - /engine/articles/registry_mirror/
-description: How to set up and run a local registry mirror
-keywords:
-- docker, registry, mirror,  examples
 title: Run a local registry mirror
 ---
 

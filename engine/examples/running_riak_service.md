@@ -1,7 +1,6 @@
 ---
 description: Build a Docker image with Riak pre-installed
-keywords:
-- docker, example, package installation, networking,  riak
+keywords: docker, example, package installation, networking,  riak
 title: Dockerize a Riak service
 ---
 

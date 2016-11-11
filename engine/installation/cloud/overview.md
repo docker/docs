@@ -1,9 +1,8 @@
 ---
+description: Installation instructions for Docker on cloud.
+keywords: cloud, docker, machine, documentation,  installation
 redirect_from:
 - /engine/installation/cloud/cloud/
-description: Installation instructions for Docker on cloud.
-keywords:
-- cloud, docker, machine, documentation,  installation
 title: Choose an installation method
 ---
 

@@ -1,8 +1,7 @@
 ---
 description: Example of using Docker Machine to install Docker Engine on a cloud provider, using Digital Ocean.
-keywords:
-- cloud, docker, machine, documentation,  installation, digitalocean
-title: "Example: Use Docker Machine to provision cloud hosts"
+keywords: cloud, docker, machine, documentation, installation, digitalocean
+title: 'Example: Use Docker Machine to provision cloud hosts'
 ---
 
 Docker Machine driver plugins are available for many cloud platforms, so you can use Machine to provision cloud hosts. When you use Docker Machine for provisioning, you create cloud hosts with Docker Engine installed on them.
