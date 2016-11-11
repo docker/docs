@@ -30,7 +30,9 @@ environment.
 
     Create or modify `/etc/docker/daemon.json` on the client machine and add:
      
-    ```{ "insecure-registries":["myregistry.example.com:5000"] }```
+    ```
+    { "insecure-registries":["myregistry.example.com:5000"] }
+    ```
 
     **If using less than version 1.12**
     
