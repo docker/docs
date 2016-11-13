@@ -7,7 +7,7 @@ redirect_from:
 title: Load-balance the service
 ---
 
-To load-balance a your application, you need to deploy a load-balancing service.
+To load-balance your application, you need to deploy a load-balancing service.
 This service distributes incoming requests to all of the available containers in
 the application.
 
