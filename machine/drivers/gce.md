@@ -52,6 +52,21 @@ list of image URLs run:
 
     gcloud compute images list --uri
 
+Google Compute Engine supports [image families](https://cloud.google.com/compute/docs/images#image_families).
+An image family is like an image alias that always points to the latest image in the family. To create an
+instance from an image family, set `--google-machine-image` to the family's URL.
+
+The following command will show images and which family they belong to (if any):
+
+    gcloud compute images list
+
+To obtain a family URL, replace `<PROJECT>` and `<FAMILY>` in the following template.
+
+    https://www.googleapis.com/compute/v1/projects/<PROJECT>/global/images/family/<FAMILY>
+
+For example, to create an instance from the latest Ubuntu 16 LTS image, specify
+`https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts`.
+
 #### Environment variables and default values
 
 | CLI option                 | Environment variable     | Default                              |
