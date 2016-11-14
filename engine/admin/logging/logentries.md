@@ -1,8 +1,9 @@
 ---
-redirect_from: "/engine/reference/logging/logentries/"
-title: "Logentries logging driver"
-description: "Describes how to use the logentries logging driver."
-keywords: ["logentries, docker, logging, driver"]
+redirect_from: 
+- /engine/reference/logging/logentries/
+title: Logentries logging driver
+description: Describes how to use the logentries logging driver.
+keywords: logentries, docker, logging, driver
 ---
 
 The `logentries` logging driver sends container logs to the
