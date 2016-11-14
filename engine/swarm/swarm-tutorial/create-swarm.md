@@ -10,6 +10,10 @@ machines.
 
 1. Open a terminal and ssh into the machine where you want to run your manager
 node. For example, the tutorial uses a machine named `manager1`.
+    
+    ```bash
+    docker-machine ssh manager1
+    ```
 
 2.  Run the following command to create a new swarm:
 
