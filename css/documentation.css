@@ -137,7 +137,8 @@ div.docsidebarnav_section.affix ul {
     line-height: 15px;
     border-radius: 0;
     background-color: #fff;
-		color: rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
 }
 .docsidebarnav_section ul li a:hover {
 		background: rgba(0, 0, 0, 0.05);
