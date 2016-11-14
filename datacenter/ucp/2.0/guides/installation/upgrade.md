@@ -4,6 +4,9 @@ description: Learn how to upgrade Docker Universal Control Plane with minimal im
   to your users.
 keywords:
 - Docker, UCP, upgrade, update
+redirect_from:
+- /ucp/upgrade-ucp/
+- /ucp/installation/upgrade/
 ---
 
 This page guides you in upgrading Docker Universal Control Plane (UCP) to
