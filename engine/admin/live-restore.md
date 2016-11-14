@@ -72,3 +72,6 @@ You can modify the kernel's buffer size by changing `/proc/sys/fs/pipe-max-size`
 The live restore option is not compatible with Docker Engine swarm mode. When
 the Docker Engine runs in swarm mode, the orchestration feature manages tasks
 and keeps containers running according to a service specification.
+
+> **Note**: The live restore option is only supported on Linux.
+
