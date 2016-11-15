@@ -73,6 +73,7 @@ packages from the Docker repository:
     | Trusty 14.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-trusty main` |
     | Wily 15.10          | `deb https://apt.dockerproject.org/repo ubuntu-wily main`   |
     | Xenial 16.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-xenial main` |
+    | Yakkety 16.10 (LTS) | `deb https://apt.dockerproject.org/repo ubuntu-yakkety main` |
 
 
     >**Note**: Docker does not provide packages for all architectures. Binary artifacts
