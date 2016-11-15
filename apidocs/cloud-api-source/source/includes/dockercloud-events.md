@@ -83,17 +83,23 @@ events.run_forever()
 ```go
 import "github.com/docker/go-dockercloud/dockercloud"
 
-c := make(chan dockercloud.Event)
-e := make(chan error)
+// Listens for container events only
+myFilter := dockercloud.NewStreamFilter(&dockercloud.EventFilter{Type: "container"})
 
-go dockercloud.Events(c, e)
+stream := dockercloud.NewStream(myFilter)
+
+if err := stream.Connect(); err == nil {
+	go stream.RunForever()
+} else {
+	log.Print("Connect err: " + err.Error())
+}
 
 for {
 	select {
-		case event := <-c:
-			log.Println(event)
-		case err := <-e:
-			log.Println(err)
+	case event := <-stream.MessageChan:
+		log.Println(event)
+	case err := <-stream.ErrorChan:
+		log.Println(err)
 	}
 }
 ```
@@ -119,3 +125,11 @@ Available in Docker Cloud's **STREAM API**
 ### HTTP Request
 
 `GET /api/audit/v1/[optional_namespace/]events/`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+type | Filter by type
+object | Filter by object resource URI
+parent | Filter by object parents
