@@ -59,7 +59,7 @@ As an example, to create a backup of a DTR node, you can use:
 
 ```bash
 # Create the backup
-$ docker run -i --rm docker/dtr:2.1.0-beta3 backup \
+$ docker run -i --rm docker/dtr backup \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \
   --existing-replica-id <replica-id> \
@@ -109,7 +109,7 @@ state from an existing backup:
 ```bash
 # Install and restore configurations from an existing backup
 $ docker run -i --rm \
-  docker/dtr:2.1.0-beta3 restore \
+  docker/dtr restore \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \  
   --ucp-username <ucp-admin> \
