@@ -111,7 +111,7 @@ replicas:
 
     ```bash
     $ docker run -it --rm \
-      docker/dtr:2.1.0-beta3 join \
+      docker/dtr join \
       --ucp-node <ucp-node-name> \
       --ucp-insecure-tls
     ```

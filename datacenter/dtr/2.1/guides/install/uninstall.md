@@ -17,7 +17,7 @@ To see what options are available in the uninstall command, check the
 [uninstall command reference](../../reference/cli/remove.md), or run:
 
 ```bash
-$ docker run -it --rm docker/dtr:2.1.0-beta3 remove --help
+$ docker run -it --rm docker/dtr remove --help
 ```
 
 To remove a replica safely, you must tell the bootstrapper about one healthy replica
@@ -33,7 +33,7 @@ remove a DTR replica from a cluster with multiple replicas:
 ```bash
 
 $ docker run -it --rm \
-  docker/dtr:2.1.0-beta3 remove \
+  docker/dtr remove \
   --ucp-insecure-tls
 
 existing-replica-id (ID of an existing replica in a cluster): 7ae3cb044b70
