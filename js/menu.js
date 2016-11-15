@@ -41,12 +41,15 @@ function hookupTOCEvents()
   });
 }
 jQuery(document).ready(function(){
+  /*
     $.getJSON( "/toc.txt", function( data ) {
       tocData = data;
       renderTree(data.toc);
       $(".nav-sub").html(treeOutput.join(''));
       hookupTOCEvents();
     });
+    */
+    hookupTOCEvents();
     $("#TableOfContents ul").empty();
 
     var prevH2Item = null;
