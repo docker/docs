@@ -6,7 +6,7 @@ redirect_from:
 title: Legacy container links
 ---
 
-The information in this section explains legacy container links within the Docker default bridge. This is a `bridge` network named `bridge` created automatically when you install Docker.
+The information in this section explains legacy container links within the Docker default `bridge` network which is created automatically when you install Docker.
 
 Before the [Docker networks feature](../index.md), you could use the
 Docker link feature to allow containers to discover each other and securely
@@ -17,6 +17,11 @@ behave differently between default `bridge` network and
 
 This section briefly discusses connecting via a network port and then goes into
 detail on container linking in default `bridge` network.
+
+>**Warning**: The `--link` flag is a deprecated legacy feature of Docker. It may eventually
+be removed. Unless you absolutely need to continue using it, we recommend that you use
+user-defined networks to facilitate communication between two containers instead of using
+`--link`. 
 
 ## Connect using network port mapping
 
