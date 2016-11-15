@@ -1,7 +1,6 @@
 ---
 description: Install Docker Universal Control Plane.
-keywords:
-- install, ucp
+keywords: install, ucp
 title: docker/ucp install
 ---
 

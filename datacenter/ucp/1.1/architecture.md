@@ -1,9 +1,8 @@
 ---
+description: Learn about the architecture of Docker Universal Control Plane.
+keywords: docker, ucp, architecture
 redirect_from:
 - /ucp/architecture/
-description: Learn about the architecture of Docker Universal Control Plane.
-keywords:
-- docker, ucp, architecture
 title: UCP architecture
 ---
 

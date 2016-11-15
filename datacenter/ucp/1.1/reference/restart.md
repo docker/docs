@@ -1,7 +1,6 @@
 ---
 description: Restart Docker Universal Control Plane containers.
-keywords:
-- install, ucp, restart
+keywords: install, ucp, restart
 title: docker/ucp restart
 ---
 

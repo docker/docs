@@ -1,7 +1,6 @@
 ---
 description: Docker Trusted Registry remove command reference.
-keywords:
-- docker, registry, reference, remove
+keywords: docker, registry, reference, remove
 title: docker/dtr remove
 ---
 

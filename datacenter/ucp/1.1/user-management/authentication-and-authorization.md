@@ -1,11 +1,10 @@
 ---
+description: Learn how to manage permissions in Docker Universal Control Plane.
+keywords: authorization, authentication, users, teams, UCP
 redirect_from:
 - /ucp/manage/monitor-manage-users/
 - /ucp/user-management/manage-users/
 - /ucp/user-management/authentication-and-authorization/
-description: Learn how to manage permissions in Docker Universal Control Plane.
-keywords:
-- authorization, authentication, users, teams, UCP
 title: Authentication and authorization
 ---
 

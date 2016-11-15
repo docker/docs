@@ -1,10 +1,9 @@
 ---
-redirect_from:
-- /ucp/configuration/use-externally-signed-certs/
 description: Learn how to configure Docker Universal Control Plane to use your own
   certificates.
-keywords:
-- Universal Control Plane, UCP, certificate, authentiation, tls
+keywords: Universal Control Plane, UCP, certificate, authentiation, tls
+redirect_from:
+- /ucp/configuration/use-externally-signed-certs/
 title: Use externally-signed certificates
 ---
 

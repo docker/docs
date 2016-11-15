@@ -1,7 +1,6 @@
 ---
 description: Joins a node to an existing Docker Universal Control Plane cluster.
-keywords:
-- join, ucp
+keywords: join, ucp
 title: docker/ucp join
 ---
 

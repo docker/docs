@@ -1,11 +1,9 @@
 ---
+description: Learn about the Docker Universal Control Plane architecture, and the requirements to install it on production.
+keywords: docker, ucp, install, checklist
 redirect_from:
 - /ucp/plan-production-install/
 - /ucp/installation/plan-production-install/
-description: Learn about the Docker Universal Control Plane architecture, and the
-  requirements to install it on production.
-keywords:
-- docker, ucp, install, checklist
 title: Plan a production installation
 ---
 
