@@ -631,6 +631,8 @@ toc:
       title: Prior CS Engine release notes
 - sectiontitle: Docker Datacenter
   section:
+  - path: /datacenter/try/
+    title: Try Docker Datacenter
   - sectiontitle: Universal Control Plane 2.0
     section:
     - path: /datacenter/ucp/2.0/guides/
