@@ -1,7 +1,6 @@
 ---
 description: Dump out TLS certificates.
-keywords:
-- fingerprint, ucp, tool, reference, ucp
+keywords: fingerprint, ucp, tool, reference, ucp
 title: docker/ucp fingerprint
 ---
 

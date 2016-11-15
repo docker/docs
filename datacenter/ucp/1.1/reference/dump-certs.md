@@ -1,7 +1,6 @@
 ---
 description: Dump out public certificates
-keywords:
-- dump-certs, ucp
+keywords: dump-certs, ucp
 title: docker/ucp dump-certs
 ---
 

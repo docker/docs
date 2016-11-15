@@ -1,10 +1,9 @@
 ---
-redirect_from:
-- /ucp/applications/deploy-app-ui/
 description: Learn how to deploy containerized applications on a cluster, with Docker
   Universal Control Plane.
-keywords:
-- ucp, deploy, application
+keywords: ucp, deploy, application
+redirect_from:
+- /ucp/applications/deploy-app-ui/
 title: Deploy an app from the UI
 ---
 

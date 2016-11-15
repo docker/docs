@@ -1,7 +1,6 @@
 ---
 description: Docker Universal Control Plane
-keywords:
-- universal, control, plane, ucp
+keywords: universal, control, plane, ucp
 title: Docker Universal Control Plane
 ---
 

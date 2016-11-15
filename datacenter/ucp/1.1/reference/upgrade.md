@@ -1,7 +1,6 @@
 ---
 description: Upgrade Docker Universal Control Plane.
-keywords:
-- docker, ucp, upgrade
+keywords: docker, ucp, upgrade
 title: docker/ucp upgrade
 ---
 

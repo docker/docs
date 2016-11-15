@@ -1,9 +1,8 @@
 ---
+description: Learn how to set up Docker Trusted Registry for high availability.
+keywords: docker, registry, high-availability, backup, recovery
 redirect_from:
 - /docker-trusted-registry/high-availability/high-availability/
-description: Learn how to set up Docker Trusted Registry for high availability.
-keywords:
-- docker, registry, high-availability, backup, recovery
 title: Set up high availability
 ---
 
