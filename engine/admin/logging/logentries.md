@@ -1,6 +1,4 @@
 ---
-redirect_from: 
-- /engine/reference/logging/logentries/
 title: Logentries logging driver
 description: Describes how to use the logentries logging driver.
 keywords: logentries, docker, logging, driver
