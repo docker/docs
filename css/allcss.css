@@ -28013,6 +28013,7 @@ blockquote p {
 }
 
 .left-off-canvas-menu {
+    display: none;
     -webkit-backface-visibility: hidden;
     background: #134a6a;
     bottom: 0;
