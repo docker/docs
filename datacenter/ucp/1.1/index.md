@@ -2,6 +2,8 @@
 description: Docker Universal Control Plane
 keywords: universal, control, plane, ucp
 title: Docker Universal Control Plane
+redirect_from:
+- /ucp/
 ---
 
 Docker Universal Control Plane (UCP) is the enterprise-grade cluster management
