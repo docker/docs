@@ -1,7 +1,5 @@
 ---
 advisory: experimental
-redirect_from:
-- /engine/extend/
 description: How develop and use a plugin with the managed plugin system
 keywords:
 - API, Usage, plugins, documentation, developer
