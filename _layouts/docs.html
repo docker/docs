@@ -187,7 +187,8 @@ ng\:form {
           <div class="row">
             <div class="col-xs-12 col-sm-3 col-md-2 col-xl-2 docsidebarnav_section">
               <div class="region region-hero-sub"><ul class="nav-sub">
-
+								{% assign tree = site.data.toc.toc %}
+								{% include tree.html %}
 							</ul>
               </div>
             </div>
