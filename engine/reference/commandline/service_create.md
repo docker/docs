@@ -1,18 +1,13 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/service_create/
 description: The service create command description and usage
 keywords:
 - service, create
-menu:
-  main:
-    parent: smn_cli
-title: service create
+title: docker service create
 ---
 
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
-
-# service create
 
 ```Markdown
 Usage:  docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
@@ -217,7 +212,7 @@ volumes in a service:
 
 Bind propagation refers to whether or not mounts created within a given
 bind-mount or named volume can be propagated to replicas of that mount. Consider
-a mount point `/mnt`, which is also mounted on `/tmp`. The propation settings
+a mount point `/mnt`, which is also mounted on `/tmp`. The propagation settings
 control whether a mount on `/tmp/a` would also be available on `/mnt/a`. Each
 propagation setting has a recursive counterpoint. In the case of recursion,
 consider that `/tmp/a` is also mounted as `/foo`. The propagation settings

@@ -1,16 +1,10 @@
 ---
-aliases:
-- /engine/articles/baseimages/
 description: How to create base images
-keywords:
-- Examples, Usage, base image, docker, documentation,  examples
-menu:
-  main:
-    parent: engine_images
+keywords: Examples, Usage, base image, docker, documentation,  examples
+redirect_from:
+- /engine/articles/baseimages/
 title: Create a base image
 ---
-
-# Create a base image
 
 So you want to create your own [*Base Image*](../../reference/glossary.md#base-image)? Great!
 

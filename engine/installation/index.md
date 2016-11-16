@@ -1,20 +1,12 @@
 ---
-aliases:
+description: Lists the installation methods
+keywords: Docker install
+redirect_from:
 - /installation/
 - /engine/installation/linux/frugalware/
 - /engine/installation/frugalware/
-description: Lists the installation methods
-keywords:
-- 'Docker install '
-menu:
-  main:
-    identifier: engine_install
-    parent: engine_use
-    weight: "-81"
-title: Install
+title: Install Docker Engine
 ---
-
-# Install Docker Engine
 
 Docker Engine is supported on Linux, Cloud, Windows, and macOS. Installation instructions are available for the following:
 

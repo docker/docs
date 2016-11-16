@@ -1,17 +1,11 @@
 ---
-aliases:
+description: Work with data volumes
+keywords: data, volumes, create, reuse
+redirect_from:
 - /docker-cloud/tutorials/download-volume-data/
 - /docker-cloud/feature-reference/volumes/
-description: Work with data volumes
-keywords:
-- data, volumes, create, reuse
-menu:
-  main:
-    parent: apps
 title: Work with data volumes
 ---
-
-# Work with data volumes
 
 In Docker Cloud, you can define one or more data volumes for a service.
 **Volumes** are directories that are stored outside of the container's

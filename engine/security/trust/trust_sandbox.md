@@ -1,14 +1,8 @@
 ---
 description: Play in a trust sandbox
-keywords:
-- trust, security, root,  keys, repository, sandbox
-menu:
-  main:
-    parent: smn_content_trust
+keywords: trust, security, root,  keys, repository, sandbox
 title: Play in a content trust sandbox
 ---
-
-# Play in a content trust sandbox
 
 This page explains how to set up and use a sandbox for experimenting with trust.
 The sandbox allows you to configure and try trust operations locally without

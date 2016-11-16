@@ -1,20 +1,14 @@
 ---
-aliases:
+description: Docker explained in depth
+keywords: docker, introduction, documentation, about, technology,  understanding
+redirect_from:
 - /introduction/understanding-docker/
 - /engine/userguide/basics/
 - /engine/quickstart.md
 - /engine/introduction/understanding-docker/
-description: Docker explained in depth
-keywords:
-- docker, introduction, documentation, about, technology,  understanding
-menu:
-  main:
-    parent: engine_use
-    weight: -90
 title: Docker Overview
 ---
 
-# Docker Overview
 Docker is an open platform for developing, shipping, and running applications.
 Docker enables you to separate your applications from your infrastructure so
 you can deliver software quickly. With Docker, you can manage your infrastructure
@@ -100,8 +94,8 @@ Docker uses a client-server architecture. The Docker *client* talks to the
 Docker *daemon*, which does the heavy lifting of building, running, and
 distributing your Docker containers. The Docker client and daemon *can*
 run on the same system, or you can connect a Docker client to a remote Docker
-daemon. The Docker client and daemon communicate via sockets or through a
-REST API.
+daemon. The Docker client and daemon communicate using a REST API, over UNIX
+sockets or a network interface.
 
 ![Docker Architecture Diagram](article-img/architecture.svg)
 

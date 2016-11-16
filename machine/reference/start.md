@@ -1,15 +1,8 @@
 ---
 description: Start a machine
-keywords:
-- machine, start, subcommand
-menu:
-  main:
-    identifier: machine.start
-    parent: smn_machine_subcmds
-title: start
+keywords: machine, start, subcommand
+title: docker-machine start
 ---
-
-# start
 
 ```none
 Usage: docker-machine start [arg...]

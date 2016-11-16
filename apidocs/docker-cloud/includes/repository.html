@@ -36,14 +36,16 @@
 <p>Example</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"in_use"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quay.io/tutum/ubuntu"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"registry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/repo/v1/registry/quay.io/"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/repo/v1/repository/quay.io/tutum/ubuntu/"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"in_use"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my.registry.com/myrepo"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"registry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/repo/v1/user_namespace/registry/my.registry.com/"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/repo/v1/user_namespace/repository/my.registry.com/myrepo/"</span><span class="p">,</span><span class="w">
 </span><span class="err">}</span><span class="w">
 </span></code></pre>
 
 <p>The <code class="prettyprint">repository</code> endpoint is used to add and remove existing repositories on third party registries to be used in deployments and builds.</p>
+
+<p>This is a <a href="#namespaced-endpoints">namespaced endpoint</a>.</p>
 
 <h3 id="attributes">Attributes</h3>
 
@@ -59,7 +61,7 @@
 </tr>
 <tr>
 <td>name</td>
-<td>Name of the repository, i.e. <code class="prettyprint">quay.io/tutum/ubuntu</code></td>
+<td>Name of the repository, i.e. <code class="prettyprint">my.registry.com/myrepo</code></td>
 </tr>
 <tr>
 <td>in_use</td>
@@ -102,7 +104,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/repo/v1/repository/</code></p>
+<p><code class="prettyprint">GET /api/repo/v1/[optional_namespace/]repository/</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -155,7 +157,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/repo/v1/repository/</code></p>
+<p><code class="prettyprint">POST /api/repo/v1/[optional_namespace/]repository/</code></p>
 
 <h3 id="json-parameters">JSON Parameters</h3>
 
@@ -167,7 +169,7 @@
 </thead><tbody>
 <tr>
 <td>name</td>
-<td>Name of the repository, i.e. &lsquo;quay.io/tutum/hello-world&rsquo;</td>
+<td>Name of the repository, i.e. &lsquo;my.registry.com/myrepo&rsquo;</td>
 </tr>
 <tr>
 <td>username</td>
@@ -210,7 +212,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/repo/v1/repository/(name)/</code></p>
+<p><code class="prettyprint">GET /api/repo/v1/[optional_namespace/]repository/(name)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -253,7 +255,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PATCH /api/repo/v1/repository/(name)/</code></p>
+<p><code class="prettyprint">PATCH /api/repo/v1/[optional_namespace/]repository/(name)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -319,7 +321,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">DELETE /api/repo/v1/repository/registry.local/user1/image1/</code></p>
+<p><code class="prettyprint">DELETE /api/repo/v1/[optional_namespace/]repository/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 

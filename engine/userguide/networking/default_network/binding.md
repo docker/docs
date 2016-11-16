@@ -1,14 +1,8 @@
 ---
 description: expose, port, docker, bind publish
-keywords:
-- Examples, Usage, network, docker, documentation, user guide, multihost, cluster
-menu:
-  main:
-    parent: smn_networking_def
+keywords: Examples, Usage, network, docker, documentation, user guide, multihost, cluster
 title: Bind container ports to the host
 ---
-
-# Bind container ports to the host
 
 The information in this section explains binding container ports within the Docker default bridge. This is a `bridge` network named `bridge` created automatically when you install Docker.
 

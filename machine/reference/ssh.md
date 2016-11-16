@@ -1,14 +1,8 @@
 ---
 description: Log into or run a command on a machine using SSH.
-keywords:
-- machine, ssh, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: ssh
+keywords: machine, ssh, subcommand
+title: docker-machine ssh
 ---
-
-# ssh
 
 Log into or run a command on a machine using SSH.
 

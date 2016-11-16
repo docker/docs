@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/info/
 description: The info command description and usage
 keywords:
 - display, docker, information
-menu:
-  main:
-    parent: smn_cli
-title: info
+title: docker info
 ---
-
-# info
 
 ```markdown
 Usage:  docker info
@@ -56,7 +51,7 @@ storage driver and a node that is part of a 2-node swarm:
     Plugins:
      Volume: local
      Network: bridge null host overlay
-    Swarm: 
+    Swarm:
      NodeID: 0gac67oclbxq7
      Is Manager: true
      Managers: 2

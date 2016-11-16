@@ -1,13 +1,10 @@
 ---
-description: Docker documentation Search
-keywords:
-- Search, Docker, documentation, manual, guide, reference, api
-notoc: true
-title: Search the Docker Documentation
+description: Docker documentation search results
+keywords: Search, Docker, documentation, manual, guide, reference, api
 noratings: true
+notoc: true
+title: Search results
 ---
-
-# Search Results
 
 <style type='text/css'>
 #my-cse1 { all: initial !important; all: default !important; }

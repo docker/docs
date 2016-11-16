@@ -1,14 +1,8 @@
 ---
 description: Learn how to configure DNS in user-defined networks
-keywords:
-- docker, DNS, network
-menu:
-  main:
-    parent: smn_networking
-title: Configure container DNS in user-defined networks
+keywords: docker, DNS, network
+title: Embedded DNS server in user-defined networks
 ---
-
-# Embedded DNS server in user-defined networks
 
 The information in this section covers the embedded DNS server operation for
 containers in user-defined networks. DNS lookup for containers connected to

@@ -1,18 +1,12 @@
 ---
 advisory: experimental
-aliases:
+redirect_from:
 - /engine/extend/
 description: How develop and use a plugin with the managed plugin system
 keywords:
 - API, Usage, plugins, documentation, developer
-menu:
-  main:
-    parent: engine_extend
-    weight: 1
-title: Managed plugin system
+title: Docker Engine managed plugin system
 ---
-
-# Docker Engine managed plugin system
 
 This document describes the plugin system available today in the **experimental
 build** of Docker 1.12:

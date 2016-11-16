@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/network_disconnect/
 description: The network disconnect command description and usage
 keywords:
 - network, disconnect, user-defined
-menu:
-  main:
-    parent: smn_cli
-title: network disconnect
+title: docker network disconnect
 ---
-
-# network disconnect
 
 ```markdown
 Usage:  docker network disconnect [OPTIONS] NETWORK CONTAINER

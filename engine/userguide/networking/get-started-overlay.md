@@ -1,15 +1,8 @@
 ---
 description: Use overlay for multi-host networking
-keywords:
-- Examples, Usage, network, docker, documentation, user guide, multihost, cluster
-menu:
-  main:
-    parent: smn_networking
-    weight: -3
+keywords: Examples, Usage, network, docker, documentation, user guide, multihost, cluster
 title: Get started with multi-host networking
 ---
-
-# Get started with multi-host networking
 
 This article uses an example to explain the basics of creating a multi-host
 network. Docker Engine supports multi-host networking out-of-the-box through the

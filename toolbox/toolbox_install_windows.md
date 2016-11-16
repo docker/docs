@@ -1,15 +1,8 @@
 ---
 description: How to install Toolbox on Mac
-keywords:
-- docker, documentation, install, toolbox, win
-menu:
-  main:
-    parent: workw_toolbox
-    weight: -5
-title: Install Toolbox on Windows
+keywords: docker, documentation, install, toolbox, win
+title: Install Docker Toolbox on Windows
 ---
-
-# Install Docker for Windows
 
 Windows users use Docker Toolbox to install Docker software. Docker Toolbox includes the following Docker tools:
 

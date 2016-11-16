@@ -1,15 +1,8 @@
 ---
 description: Basic workflow for Docker contributions
-keywords:
-- contribute, pull request, review, workflow, beginner, squash,  commit
-menu:
-  main:
-    parent: smn_workflow
-    weight: 5
+keywords: contribute, pull request, review, workflow, beginner, squash,  commit
 title: Participate in the PR review
 ---
-
-# Participate in the PR review
 
 Creating a pull request is nearly the end of the contribution process. At this
 point, your code is reviewed both by our continuous integration (CI) systems and
@@ -55,7 +48,7 @@ need to update your pull request with additional changes.
 
 To update your existing pull request:
 
-1. Checkout the PR branch in your local `docker-fork` repository.  
+1. Checkout the PR branch in your local `docker-fork` repository.
 
     This is the branch associated with your request.
 
@@ -128,7 +121,7 @@ updates its development binaries after each merge to `master`.
 Once you've verified everything merged, feel free to delete your feature branch
 from your fork. For information on how to do this,
 <a href="https://help.github.com/articles/deleting-unused-branches/" target="_blank">
-see the GitHub help on deleting branches</a>.  
+see the GitHub help on deleting branches</a>.
 
 ## Where to go next
 

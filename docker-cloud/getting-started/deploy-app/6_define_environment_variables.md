@@ -1,18 +1,11 @@
 ---
-aliases:
+description: Define environment variables
+keywords: Python, service, environment, service
+redirect_from:
 - /docker-cloud/getting-started/python/6_define_environment_variables/
 - /docker-cloud/getting-started/golang/6_define_environment_variables/
-description: Define environment variables
-keywords:
-- Python, service, environment, service
-menu:
-  main:
-    parent: deploy-app
-    weight: -40
 title: Define environment variables
 ---
-
-# Define environment variables
 
 Docker lets you store data such as configuration settings, encryption keys, and external resource addresses in environment variables. Docker Cloud makes it easy to define, share, and update the environment variables for your services.
 

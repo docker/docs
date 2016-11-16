@@ -12,8 +12,8 @@ layout: null
   <loc>https://docs.docker.com/</loc>
   <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
 </url>
-{% for page in site.pages %}<url>
+{% for page in site.pages %}{% unless page.hide_from_sitemap %}<url>
   <loc>https://docs.docker.com{{ page.url }}</loc>
   <lastmod>{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}</lastmod>
-</url>{% endfor %}
+</url>{% endunless %}{% endfor %}
 </urlset>

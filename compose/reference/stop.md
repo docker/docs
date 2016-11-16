@@ -1,15 +1,8 @@
 ---
 description: 'Stops running containers without removing them. '
-keywords:
-- fig, composition, compose, docker, orchestration, cli, stop
-menu:
-  main:
-    identifier: stop.compose
-    parent: smn_compose_cli
-title: stop
+keywords: fig, composition, compose, docker, orchestration, cli, stop
+title: docker-compose stop
 ---
-
-# stop
 
 ```
 Usage: stop [options] [SERVICE...]

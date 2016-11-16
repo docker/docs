@@ -1,16 +1,8 @@
 ---
 description: Becoming a power user of the notary client.
-keywords:
-- docker, notary, notary-client, docker content trust, content trust, power user,
-  advanced
-menu:
-  main:
-    parent: mn_notary
-    weight: 2
-title: Use the Notary client
+keywords: docker, notary, notary-client, docker content trust, content trust, power user, advanced
+title: Use the Notary client for advanced users
 ---
-
-# Use the Notary client for advanced users
 
 This page explains advanced uses of Notary client for users who are running
 their own Notary service. Make sure you have first read and understood how to

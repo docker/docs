@@ -1,18 +1,13 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/node_ls/
 description: The node ls command description and usage
 keywords:
 - node, list
-menu:
-  main:
-    parent: smn_cli
-title: node ls
+title: docker node ls
 ---
 
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
-
-# node ls
 
 ```markdown
 Usage:  docker node ls [OPTIONS]

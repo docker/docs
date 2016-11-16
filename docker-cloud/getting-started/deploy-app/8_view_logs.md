@@ -1,18 +1,11 @@
 ---
-aliases:
+description: View service logs
+keywords: View, logs, Python
+redirect_from:
 - /docker-cloud/getting-started/python/8_view_logs/
 - /docker-cloud/getting-started/golang/8_view_logs/
-description: View service logs
-keywords:
-- View, logs, Python
-menu:
-  main:
-    parent: deploy-app
-    weight: -20
 title: View service logs
 ---
-
-# View service logs
 
 Docker Cloud grants you access to the logs your application writes to `stdout`.
 An internal service multiplexes all the logs from all the containers of a

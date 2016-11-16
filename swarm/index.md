@@ -1,16 +1,8 @@
 ---
 description: 'Swarm: a Docker-native clustering system'
-keywords:
-- docker, swarm,  clustering
-menu:
-  main:
-    identifier: workw_swarm
-    parent: mn_components
-    weight: -75
+keywords: docker, swarm,  clustering
 title: Docker Swarm
 ---
-
-# Docker Swarm
 
 * [Docker Swarm overview](overview.md)
 * [How to get Docker Swarm](get-swarm.md)

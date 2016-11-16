@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/history/
 description: The history command description and usage
 keywords:
 - docker, image, history
-menu:
-  main:
-    parent: smn_cli
-title: history
+title: docker history
 ---
-
-# history
 
 ```markdown
 Usage:  docker history [OPTIONS] IMAGE

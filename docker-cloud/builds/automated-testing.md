@@ -1,17 +1,10 @@
 ---
-aliases:
-- /docker-cloud/feature-reference/automated-testing/
 description: Automated tests
-keywords:
-- Automated, testing, repository
-menu:
-  main:
-    parent: builds
-    weight: -50
+keywords: Automated, testing, repository
+redirect_from:
+- /docker-cloud/feature-reference/automated-testing/
 title: Automated repository tests
 ---
-
-# Automated repository tests
 
 Docker Cloud can automatically test changes pushed to your source code
 repositories using containers. You can enable `Autotest` on [any Docker Cloud repository](repos.md) to run tests at each push to the source code repository,
@@ -80,8 +73,8 @@ Docker repository, regardless of the Autotest settings.
     The following options are available:
 
     * `Off`: No additional test builds. Tests only run if they're configured as part of an automated build.
-    * `Source repository`: Run a test build for any pull requests to branches that match a build rule, but only when the pull request comes from the same source repository.
-    * `Source repository & external pull requests`: Run a test build for any pull requests to branches that match a build rule, including when the pull request originated in an external source repository.
+    * `Internal pull requests`: Run a test build for any pull requests to branches that match a build rule, but only when the pull request comes from the same source repository.
+    * `Internal and external pull requests`: Run a test build for any pull requests to branches that match a build rule, including when the pull request originated in an external source repository.
 
     > **Note**: For security purposes, autotest on _external pull requests_ is
     disabled on public repositories. If you select this option on a public

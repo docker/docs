@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/create/
 description: The create command description and usage
 keywords:
 - docker, create, container
-menu:
-  main:
-    parent: smn_cli
-title: create
+title: docker create
 ---
-
-# create
 
 Creates a new container.
 
@@ -171,8 +166,8 @@ Set storage driver options per container.
 
     $ docker create -it --storage-opt size=120G fedora /bin/bash
 
-This (size) will allow to set the container rootfs size to 120G at creation time. 
-User cannot pass a size less than the Default BaseFS Size. This option is only 
+This (size) will allow to set the container rootfs size to 120G at creation time.
+User cannot pass a size less than the Default BaseFS Size. This option is only
 available for the `devicemapper`, `btrfs`, and `zfs` graph drivers.
 
 ### Specify isolation technology for container (--isolation)

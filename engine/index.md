@@ -1,17 +1,10 @@
 ---
-aliases:
-- /engine/misc/
 description: Engine
-keywords:
-- Engine
-menu:
-  main:
-    identifier: engine_use
-    weight: -85
-title: Docker Engine
+keywords: Engine
+redirect_from:
+- /engine/misc/
+title: About Docker Engine
 ---
-
-# About Docker Engine
 
 **Develop, Ship and Run Any Application, Anywhere**
 

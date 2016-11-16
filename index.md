@@ -1,12 +1,9 @@
 ---
 description: Home page for Docker's documentation
-keywords:
-- Docker, documentation, manual, guide, reference, api
-title: Welcome to the Docs
+keywords: Docker, documentation, manual, guide, reference, api
 layout: docs
+title: Welcome to the Docs
 ---
-
-# Welcome to the Docs
 
 {% include content/docker_elevator_pitch.md %}
 
