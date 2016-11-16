@@ -1,14 +1,8 @@
 ---
 description: Review of security vulnerabilities Docker mitigated
-keywords:
-- Docker, Docker documentation,  security, security non-events
-menu:
-  main:
-    parent: smn_secure_docker
-title: Docker Security Non-events
+keywords: Docker, Docker documentation,  security, security non-events
+title: Docker security non-events
 ---
-
-# Docker Security Non-events
 
 This page lists security vulnerabilities which Docker mitigated, such that
 processes run in Docker containers were never vulnerable to the bug—even before

@@ -1,15 +1,8 @@
 ---
 description: Getting started with Docker Compose and Rails
-keywords:
-- documentation, docs,  docker, compose, orchestration, containers
-menu:
-  main:
-    parent: workw_compose
-    weight: 5
-title: 'Quickstart: Compose and Rails'
+keywords: documentation, docs, docker, compose, orchestration, containers
+title: "Quickstart: Compose and Rails"
 ---
-
-## Quickstart: Docker Compose and Rails
 
 This Quickstart guide will show you how to use Docker Compose to set up and run a Rails/PostgreSQL app. Before starting, you'll need to have [Compose installed](install.md).
 
@@ -41,7 +34,7 @@ Next, create a bootstrap `Gemfile` which just loads Rails. It'll be overwritten 
 
 You'll need an empty `Gemfile.lock` in order to build our `Dockerfile`.
 
-    $ touch Gemfile.lock
+    touch Gemfile.lock
 
 Finally, `docker-compose.yml` is where the magic happens. This file describes
 the services that comprise your app (a database and a web app), how to get each
@@ -68,7 +61,7 @@ to link them together and expose the web app's port.
 With those three files in place, you can now generate the Rails skeleton app
 using `docker-compose run`:
 
-    $ docker-compose run web rails new . --force --database=postgresql --skip-bundle
+    docker-compose run web rails new . --force --database=postgresql --skip-bundle
 
 First, Compose will build the image for the `web` service using the `Dockerfile`. Then it'll run `rails new` inside a new container, using that image. Once it's done, you should have generated a fresh app:
 
@@ -112,8 +105,7 @@ Now that you've got a new `Gemfile`, you need to build the image again. (This,
 and changes to the Dockerfile itself, should be the only times you'll need to
 rebuild.)
 
-    $ docker-compose build
-
+    docker-compose build
 
 ### Connect the database
 
@@ -139,7 +131,7 @@ Replace the contents of `config/database.yml` with the following:
 
 You can now boot the app with:
 
-    $ docker-compose up
+    docker-compose up
 
 If all's well, you should see some PostgreSQL output, and then—after a few
 seconds—the familiar refrain:
@@ -150,7 +142,7 @@ seconds—the familiar refrain:
 
 Finally, you need to create the database. In another terminal, run:
 
-    $ docker-compose run web rake db:create
+    docker-compose run web rake db:create
 
 That's it. Your app should now be running on port 3000 on your Docker daemon. If you're using [Docker Machine](/machine/overview.md), then `docker-machine ip MACHINE_VM` returns the Docker host IP address.
 

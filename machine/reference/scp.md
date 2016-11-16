@@ -1,14 +1,8 @@
 ---
 description: Copy files among machines
-keywords:
-- machine, scp, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: scp
+keywords: machine, scp, subcommand
+title: docker-machine scp
 ---
-
-# scp
 
 Copy files from your local host to a machine, from machine to machine, or from a
 machine to your local host using `scp`.

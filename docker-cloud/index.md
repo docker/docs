@@ -1,15 +1,9 @@
 ---
 description: Docker Cloud
-keywords:
-- Docker, cloud
-menu:
-  main:
-    identifier: docker-cloud
+keywords: Docker, cloud
 notoc: true
-title: Docker Cloud
+title: Welcome to the Docker Cloud docs!
 ---
-
-# Welcome to the Docker Cloud Docs!
 
 <center>
 <img src="images/Docker-Cloud-Blue.png">

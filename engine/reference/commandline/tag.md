@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/tag/
 description: The tag command description and usage
 keywords:
 - tag, name, image
-menu:
-  main:
-    parent: smn_cli
-title: tag
+title: docker tag
 ---
-
-# tag
 
 ```markdown
 Usage:  docker tag IMAGE[:TAG] IMAGE[:TAG]

@@ -1,18 +1,11 @@
 ---
-aliases:
+description: Instructions for installing Docker on Red Hat Enterprise Linux.
+keywords: Docker, Docker documentation, requirements, linux,  rhel
+redirect_from:
 - /engine/installation/rhel/
 - /installation/rhel/
-description: Instructions for installing Docker on Red Hat Enterprise Linux.
-keywords:
-- Docker, Docker documentation, requirements, linux,  rhel
-menu:
-  main:
-    parent: engine_linux
-    weight: -5
-title: Installation on Red Hat Enterprise Linux
+title: Install Docker on Red Hat Enterprise Linux
 ---
-
-# Red Hat Enterprise Linux
 
 Docker is supported on Red Hat Enterprise Linux 7. These instructions install
 Docker using release packages and installation mechanisms managed by Docker,

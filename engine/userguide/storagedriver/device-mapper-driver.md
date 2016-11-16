@@ -1,14 +1,8 @@
 ---
 description: Learn how to optimize your use of device mapper driver.
-keywords:
-- container, storage, driver, device mapper
-menu:
-  main:
-    parent: engine_driver
-title: Device mapper storage in practice
+keywords: container, storage, driver, device mapper
+title: Docker and the Device Mapper storage driver
 ---
-
-# Docker and the Device Mapper storage driver
 
 Device Mapper is a kernel-based framework that underpins many advanced
 volume management technologies on Linux. Docker's `devicemapper` storage driver

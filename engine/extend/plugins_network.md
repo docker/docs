@@ -2,14 +2,8 @@
 description: Network driver plugins.
 keywords:
 - Examples, Usage, plugins, docker, documentation, user guide
-menu:
-  main:
-    parent: engine_extend
-    weight: 5
-title: Docker network driver plugins
+title: Use network plugins
 ---
-
-# Engine network driver plugins
 
 This document describes Docker Engine network driver plugins generally
 available in Docker Engine. To view information on plugins

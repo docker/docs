@@ -7,15 +7,8 @@ keywords:
 - network
 - ingress
 - routing mesh
-menu:
-  main:
-    identifier: ingress-guide
-    parent: engine_swarm
-    weight: 17
 title: Use swarm mode routing mesh
 ---
-
-# Use swarm mode routing mesh
 
 Docker Engine swarm mode makes it easy to publish ports for services to make
 them available to resources outside the swarm. All nodes participate in an

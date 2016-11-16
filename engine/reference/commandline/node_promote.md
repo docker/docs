@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/node_promote/
 description: The node promote command description and usage
 keywords:
 - node, promote
-menu:
-  main:
-    parent: smn_cli
-title: node promote
+title: docker node promote
 ---
-
-# node promote
 
 ```markdown
 Usage:  docker node promote NODE [NODE...]

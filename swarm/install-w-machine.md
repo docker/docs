@@ -1,14 +1,11 @@
 ---
 description: Swarm release notes
-keywords:
-- docker, swarm, clustering, discovery, release,  notes
+keywords: docker, swarm, clustering, discovery, release,  notes
 menu:
   main:
     parent: workw_swarm
-title: Install and use Swarm
+title: Install and Create a Docker Swarm
 ---
-
-# Install and Create a Docker Swarm
 
 You use Docker Swarm to host and schedule a cluster of Docker containers. This section introduces you to Docker Swarm by teaching you how to create a swarm
 on your local machine using Docker Machine and VirtualBox.
@@ -45,14 +42,14 @@ Daemon running on each node. Other discovery service backends such as
 
 	  This example was run a macOS system with Docker Toolbox installed. So, the `docker-vm` virtual machine is in the list.
 
-2.  Create a VirtualBox machine called `local` on your system.  
+2.  Create a VirtualBox machine called `local` on your system.
 
     ```bash
     $ docker-machine create -d virtualbox local
-    INFO[0000] Creating SSH key...                          
-    INFO[0000] Creating VirtualBox VM...                    
-    INFO[0005] Starting VirtualBox VM...                    
-    INFO[0005] Waiting for VM to start...                   
+    INFO[0000] Creating SSH key...
+    INFO[0000] Creating VirtualBox VM...
+    INFO[0005] Starting VirtualBox VM...
+    INFO[0005] Waiting for VM to start...
     INFO[0050] "local" has been created and is now the active machine.
   	INFO[0050] To point your Docker client at it, run this in your shell: eval "$(docker-machine env local)"
     ```
@@ -125,10 +122,10 @@ In this section, you create a swarm manager and two nodes.
 
     ```none
     $ docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://fe0cc96a72cf04dba8c1c4aa79536ec3 swarm-master
-    INFO[0000] Creating SSH key...                          
-    INFO[0000] Creating VirtualBox VM...                    
-    INFO[0005] Starting VirtualBox VM...                    
-    INFO[0005] Waiting for VM to start...                   
+    INFO[0000] Creating SSH key...
+    INFO[0000] Creating VirtualBox VM...
+    INFO[0005] Starting VirtualBox VM...
+    INFO[0005] Waiting for VM to start...
     INFO[0060] "swarm-master" has been created and is now the active machine.
     INFO[0060] To point your Docker client at it, run this in your shell: eval "$(docker-machine env swarm-master)"
     ```
@@ -152,10 +149,10 @@ In this section, you create a swarm manager and two nodes.
 
     ```bash
     $ docker-machine create -d virtualbox --swarm --swarm-discovery token://fe0cc96a72cf04dba8c1c4aa79536ec3 swarm-agent-00
-    INFO[0000] Creating SSH key...                          
-    INFO[0000] Creating VirtualBox VM...                    
-    INFO[0005] Starting VirtualBox VM...                    
-    INFO[0006] Waiting for VM to start...                   
+    INFO[0000] Creating SSH key...
+    INFO[0000] Creating VirtualBox VM...
+    INFO[0005] Starting VirtualBox VM...
+    INFO[0006] Waiting for VM to start...
     INFO[0066] "swarm-agent-00" has been created and is now the active machine.
     INFO[0066] To point your Docker client at it, run this in your shell: eval "$(docker-machine env swarm-agent-00)"
     ```
@@ -211,10 +208,10 @@ your swarm, and start an image on your swarm.
     ```none
     $ docker ps  -a
     CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                                     NAMES
-    78be991b58d1        swarm:latest        "/swarm join --addr    3 minutes ago       Up 2 minutes        2375/tcp                                  swarm-agent-01/swarm-agent        
-    da5127e4f0f9        swarm:latest        "/swarm join --addr    6 minutes ago       Up 6 minutes        2375/tcp                                  swarm-agent-00/swarm-agent        
-    ef395f316c59        swarm:latest        "/swarm join --addr    16 minutes ago      Up 16 minutes       2375/tcp                                  swarm-master/swarm-agent          
-    45821ca5208e        swarm:latest        "/swarm manage --tls   16 minutes ago      Up 16 minutes       2375/tcp, 192.168.99.104:3376->3376/tcp   swarm-master/swarm-agent-master   
+    78be991b58d1        swarm:latest        "/swarm join --addr    3 minutes ago       Up 2 minutes        2375/tcp                                  swarm-agent-01/swarm-agent
+    da5127e4f0f9        swarm:latest        "/swarm join --addr    6 minutes ago       Up 6 minutes        2375/tcp                                  swarm-agent-00/swarm-agent
+    ef395f316c59        swarm:latest        "/swarm join --addr    16 minutes ago      Up 16 minutes       2375/tcp                                  swarm-master/swarm-agent
+    45821ca5208e        swarm:latest        "/swarm manage --tls   16 minutes ago      Up 16 minutes       2375/tcp, 192.168.99.104:3376->3376/tcp   swarm-master/swarm-agent-master
     ```
 
 4.  Run the Docker `hello-world` test image on your swarm.
@@ -247,11 +244,11 @@ your swarm, and start an image on your swarm.
     ```bash
     $ docker ps -a
     CONTAINER ID        IMAGE                COMMAND                CREATED             STATUS                     PORTS                                     NAMES
-    54a8690043dd        hello-world:latest   "/hello"               22 seconds ago      Exited (0) 3 seconds ago                                             swarm-agent-00/modest_goodall     
-    78be991b58d1        swarm:latest         "/swarm join --addr    5 minutes ago       Up 4 minutes               2375/tcp                                  swarm-agent-01/swarm-agent        
-    da5127e4f0f9        swarm:latest         "/swarm join --addr    8 minutes ago       Up 8 minutes               2375/tcp                                  swarm-agent-00/swarm-agent        
-    ef395f316c59        swarm:latest         "/swarm join --addr    18 minutes ago      Up 18 minutes              2375/tcp                                  swarm-master/swarm-agent          
-    45821ca5208e        swarm:latest         "/swarm manage --tls   18 minutes ago      Up 18 minutes              2375/tcp, 192.168.99.104:3376->3376/tcp   swarm-master/swarm-agent-master   
+    54a8690043dd        hello-world:latest   "/hello"               22 seconds ago      Exited (0) 3 seconds ago                                             swarm-agent-00/modest_goodall
+    78be991b58d1        swarm:latest         "/swarm join --addr    5 minutes ago       Up 4 minutes               2375/tcp                                  swarm-agent-01/swarm-agent
+    da5127e4f0f9        swarm:latest         "/swarm join --addr    8 minutes ago       Up 8 minutes               2375/tcp                                  swarm-agent-00/swarm-agent
+    ef395f316c59        swarm:latest         "/swarm join --addr    18 minutes ago      Up 18 minutes              2375/tcp                                  swarm-master/swarm-agent
+    45821ca5208e        swarm:latest         "/swarm manage --tls   18 minutes ago      Up 18 minutes              2375/tcp, 192.168.99.104:3376->3376/tcp   swarm-master/swarm-agent-master
     ```
 
 ## Where to go next

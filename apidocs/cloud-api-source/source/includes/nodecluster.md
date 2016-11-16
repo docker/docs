@@ -14,10 +14,10 @@
     "name": "TestCluster",
     "node_type": "/api/infra/v1/nodetype/aws/t2.micro/",
     "nodes": [
-        "/api/infra/v1/node/75d20367-0948-4f10-8ba4-ffb4d16ed3c6/"
+        "/api/infra/v1/user_namespace/node/75d20367-0948-4f10-8ba4-ffb4d16ed3c6/"
     ],
     "region": "/api/infra/v1/region/aws/us-east-1/",
-    "resource_uri": "/api/infra/v1/nodecluster/5516df0b-721e-4470-b350-741ff22e63a0/",
+    "resource_uri": "/api/infra/v1/user_namespace/nodecluster/5516df0b-721e-4470-b350-741ff22e63a0/",
     "state": "Deployed",
     "tags": [
         {"name": "tag_one"},
@@ -40,6 +40,8 @@
 ```
 
 A node cluster is a group of nodes that share the same provider, region and/or availability zone, and node type. They are on the same private network.
+
+This is a [namespaced endpoint](#namespaced-endpoints).
 
 
 ### Attributes
@@ -128,7 +130,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/infra/v1/nodecluster/`
+`GET /api/infra/v1/[optional_namespace/]nodecluster/`
 
 ### Query Parameters
 
@@ -186,7 +188,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/infra/v1/nodecluster/`
+`POST /api/infra/v1/[optional_namespace/]nodecluster/`
 
 ### JSON Parameters
 
@@ -241,7 +243,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/infra/v1/nodecluster/(uuid)/`
+`GET /api/infra/v1/[optional_namespace/]nodecluster/(uuid)/`
 
 ### Path Parameters
 
@@ -287,7 +289,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/infra/v1/nodecluster/(uuid)/deploy/`
+`POST /api/infra/v1/[optional_namespace/]nodecluster/(uuid)/deploy/`
 
 ### Path Parameters
 
@@ -344,7 +346,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`PATCH /api/infra/v1/nodecluster/(uuid)/`
+`PATCH /api/infra/v1/[optional_namespace/]nodecluster/(uuid)/`
 
 ### Path Parameters
 
@@ -401,7 +403,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`DELETE /api/infra/v1/nodecluster/(uuid)/`
+`DELETE /api/infra/v1/[optional_namespace/]nodecluster/(uuid)/`
 
 ### Path Parameters
 

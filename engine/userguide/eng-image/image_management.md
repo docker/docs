@@ -3,16 +3,9 @@ alias:
 - /reference/api/hub_registry_spec/
 - /userguide/image_management/
 description: Documentation for docker Registry and Registry API
-keywords:
-- docker, registry, api,  hub
-menu:
-  main:
-    parent: engine_images
-    weight: 90
+keywords: docker, registry, api,  hub
 title: Image management
 ---
-
-# Image management
 
 The Docker Engine provides a client which you can use to create images on the command line or through a build process. You can run these images in a container or publish them for others to use. Storing the images you create, searching for images you might want, or publishing images others might use are all elements of image management.
 

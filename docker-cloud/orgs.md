@@ -1,15 +1,8 @@
 ---
 description: Docker Cloud for Organizations and Teams
-keywords:
-- organizations, teams, Docker Cloud, resources, permissions
-menu:
-  main:
-    parent: docker-cloud
-    weight: -98
-title: Organizations and Teams
+keywords: organizations, teams, Docker Cloud, resources, permissions
+title: Organizations and Teams in Docker Cloud
 ---
-
-# Organizations and Teams in Docker Cloud
 
 You can create Organizations in Docker Cloud to share repositories, and infrastructure and applications with coworkers and collaborators.
 

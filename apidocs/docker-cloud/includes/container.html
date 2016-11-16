@@ -40,7 +40,7 @@
     </span><span class="nt">"autorestart"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OFF"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"bindings"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/volume/1863e34d-6a7d-4945-aefc-8f27a4ab1a9e/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/user_namespace/volume/1863e34d-6a7d-4945-aefc-8f27a4ab1a9e/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"host_path"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
             </span><span class="nt">"container_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/data"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"rewritable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
@@ -170,7 +170,7 @@
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_DOCKERCLOUD_API_URL"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cloud.docker.com/api/app/v1/service/c0fed1dc-c528-40c9-aa4c-dc00672ebcbf/"</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cloud.docker.com/api/app/v1/user_namespace/service/c0fed1dc-c528-40c9-aa4c-dc00672ebcbf/"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"container_ports"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -218,9 +218,9 @@
             </span><span class="nt">"endpoints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"3306/tcp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://172.16.0.3:3306"</span><span class="w">
             </span><span class="p">},</span><span class="w">
-            </span><span class="nt">"from_container"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/container/c1dd4e1e-1356-411c-8613-e15146633640/"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"from_container"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/container/c1dd4e1e-1356-411c-8613-e15146633640/"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DB_1"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"to_container"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/container/ba434e1e-1234-411c-8613-e15146633640/"</span><span class="w">
+            </span><span class="nt">"to_container"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/container/ba434e1e-1234-411c-8613-e15146633640/"</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"link_variables"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -256,20 +256,20 @@
     </span><span class="nt">"memory_swap"</span><span class="p">:</span><span class="w"> </span><span class="mi">4096</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"net"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bridge"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"node"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/node/9691c44e-3155-4ca2-958d-c9571aac0a14/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"node"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/infra/v1/user_namespace/node/9691c44e-3155-4ca2-958d-c9571aac0a14/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"pid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"private_ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.7.0.1"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"privileged"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nt">"public_dns"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wordpress-stackable-1.admin.cont.dockerapp.io"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"read_only"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/container/c1dd4e1e-1356-411c-8613-e15146633640/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/container/c1dd4e1e-1356-411c-8613-e15146633640/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"roles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"global"</span><span class="p">],</span><span class="w">
     </span><span class="nt">"run_command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/run-wordpress.sh"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"security_opt"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"label:user:USER"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"label:role:ROLE"</span><span class="w">
     </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/service/adeebc1b-1b81-4af0-b8f2-cefffc69d7fb/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"service"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/service/adeebc1b-1b81-4af0-b8f2-cefffc69d7fb/"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"started_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thu, 16 Oct 2014 12:04:08 +0000"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Running"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"stdin_open"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -283,6 +283,8 @@
 </span></code></pre>
 
 <p>A container is a representation of a Docker container in a node.</p>
+
+<p>This is a <a href="#namespaced-endpoints">namespaced endpoint</a>.</p>
 
 <h3 id="attributes">Attributes</h3>
 
@@ -707,7 +709,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/app/v1/container/</code></p>
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]container/</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -770,7 +772,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/app/v1/container/(uuid)/</code></p>
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]container/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -838,7 +840,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/app/v1/container/(uuid)/logs/</code></p>
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]container/(uuid)/logs/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -910,7 +912,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/container/(uuid)/start/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]container/(uuid)/start/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -960,7 +962,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/container/(uuid)/stop/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]container/(uuid)/stop/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -1011,7 +1013,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/container/(uuid)/redeploy/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]container/(uuid)/redeploy/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -1075,7 +1077,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">DELETE /api/app/v1/container/(uuid)/</code></p>
+<p><code class="prettyprint">DELETE /api/app/v1/[optional_namespace/]container/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -1130,7 +1132,7 @@ container.execute("ls", handler=msg_handler)
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/app/v1/container/(uuid)/exec/</code></p>
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]container/(uuid)/exec/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 

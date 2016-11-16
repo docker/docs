@@ -1,14 +1,8 @@
 ---
 description: Microsoft Hyper-V driver for machine
-keywords:
-- machine, Microsoft Hyper-V, driver
-menu:
-  main:
-    parent: smn_machine_drivers
+keywords: machine, Microsoft Hyper-V, driver
 title: Microsoft Hyper-V
 ---
-
-# Microsoft Hyper-V
 
 Creates a Boot2Docker virtual machine locally on your Windows machine
 using Hyper-V.

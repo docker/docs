@@ -1,15 +1,8 @@
 ---
 description: Create a machine.
-keywords:
-- machine, create, subcommand
-menu:
-  main:
-    identifier: machine.create
-    parent: smn_machine_subcmds
-title: create
+keywords: machine, create, subcommand
+title: docker-machine create
 ---
-
-# create
 
 Create a machine.  Requires the `--driver` flag to indicate which provider
 (VirtualBox, DigitalOcean, AWS, etc.) the machine should be created on, and an

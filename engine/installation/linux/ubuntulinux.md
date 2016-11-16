@@ -1,22 +1,16 @@
 ---
-aliases:
+description: 'Instructions for installing Docker on Ubuntu. '
+keywords: Docker, Docker documentation, requirements, apt, installation,  ubuntu
+redirect_from:
 - /engine/installation/ubuntulinux/
 - /installation/ubuntulinux/
-description: 'Instructions for installing Docker on Ubuntu. '
-keywords:
-- Docker, Docker documentation, requirements, apt, installation,  ubuntu
-menu:
-  main:
-    parent: engine_linux
-    weight: -6
-title: 'Installation on Ubuntu '
+title: Install Docker on Ubuntu
 ---
-
-# Ubuntu
 
 Docker is supported on these Ubuntu operating systems:
 
 - Ubuntu Xenial 16.04 (LTS)
+- Ubuntu Wily 15.10
 - Ubuntu Trusty 14.04 (LTS)
 - Ubuntu Precise 12.04 (LTS)
 
@@ -65,7 +59,7 @@ packages from the Docker repository:
 4.  Add the new `GPG` key.
 
     ```bash
-    $ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+    $ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
     ```
 
 5.  Find the entry for your Ubuntu operating system.
@@ -77,6 +71,7 @@ packages from the Docker repository:
     | ------------------- | ----------------------------------------------------------- |
     | Precise 12.04 (LTS) | `deb https://apt.dockerproject.org/repo ubuntu-precise main`|
     | Trusty 14.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-trusty main` |
+    | Wily 15.10          | `deb https://apt.dockerproject.org/repo ubuntu-wily main`   |
     | Xenial 16.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-xenial main` |
 
 
@@ -131,9 +126,10 @@ From now on when you run `apt-get upgrade`, `APT` pulls from the new repository.
 ### Prerequisites by Ubuntu Version
 
 - Ubuntu Xenial 16.04 (LTS)
+- Ubuntu Wily 15.10
 - Ubuntu Trusty 14.04 (LTS)
 
-For Ubuntu Trusty, and Xenial, it's recommended to install the
+For Ubuntu Trusty, Wily, and Xenial, it's recommended to install the
 `linux-image-extra-*` kernel packages. The `linux-image-extra-*` packages
 allows you use the `aufs` storage driver.
 

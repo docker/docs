@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/kill/
 description: The kill command description and usage
 keywords:
 - container, kill, signal
-menu:
-  main:
-    parent: smn_cli
-title: kill
+title: docker kill
 ---
-
-# kill
 
 ```markdown
 Usage:  docker kill [OPTIONS] CONTAINER [CONTAINER...]

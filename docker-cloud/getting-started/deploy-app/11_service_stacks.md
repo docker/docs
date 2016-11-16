@@ -1,17 +1,10 @@
 ---
-aliases:
-- /docker-cloud/getting-started/python/11_service_stacks/
 description: Stackfiles for your service
-keywords:
-- Python, service, stack
-menu:
-  main:
-    parent: deploy-app
-    weight: -8
+keywords: Python, service, stack
+redirect_from:
+- /docker-cloud/getting-started/python/11_service_stacks/
 title: Stackfiles for your service
 ---
-
-# Stackfiles for your service
 
 A stack is a logical grouping of related services that are usually deployed together and require each other to work as intended. If you are familiar with *fig* or *Docker Compose* then you should feel right at home with **stacks**. You can learn more about stacks [here](../../apps/stacks.md).
 

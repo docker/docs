@@ -1,14 +1,8 @@
 ---
 description: Show client configuration
-keywords:
-- machine, config, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: config
+keywords: machine, config, subcommand
+title: docker-machine config
 ---
-
-# config
 
 ```none
 Usage: docker-machine config [OPTIONS] [arg...]

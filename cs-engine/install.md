@@ -1,20 +1,12 @@
 ---
-aliases:
+description: Learn how to install the commercially supported version of Docker Engine.
+keywords: docker, engine, dtr, install
+redirect_from:
 - /docker-trusted-registry/install/engine-ami-launch/
 - /docker-trusted-registry/install/install-csengine/
 - /docker-trusted-registry/cs-engine/install/
-description: Learn how to install the commercially supported version of Docker Engine.
-keywords:
-- docker, engine, dtr, install
-menu:
-  main:
-    identifier: csengine_install
-    parent: menu_csengine
-    weight: 0
-title: Install CS Docker Engine
+title: Install Commercially Supported Docker Engine
 ---
-
-# Install CS Docker Engine
 
 Follow these instructions to install CS Docker Engine, the commercially
 supported version of Docker Engine.
@@ -22,9 +14,9 @@ supported version of Docker Engine.
 CS Docker Engine can be installed on the following operating systems:
 
 
-* [CentOS 7.1/7.2 & RHEL 7.0/7.1/7.2 (YUM-based systems)](install.md#install-on-centos-7-1-7-2-rhel-7-0-7-1-7-2-yum-based-systems)
-* [Ubuntu 14.04 LTS](install.md#install-on-ubuntu-14-04-lts)
-* [SUSE Linux Enterprise 12](install.md#install-on-suse-linux-enterprise-12-3)
+* [CentOS 7.1/7.2 & RHEL 7.0/7.1/7.2 (YUM-based systems)](install.md#install-on-centos-7172--rhel-707172-yum-based-systems)
+* [Ubuntu 14.04 LTS](install.md#install-on-ubuntu-1404-lts)
+* [SUSE Linux Enterprise 12](install.md#install-on-suse-linux-enterprise-123)
 
 
 ## Install on CentOS 7.1/7.2 & RHEL 7.0/7.1/7.2 (YUM-based systems)
@@ -63,27 +55,31 @@ to update its RHEL kernel.
     $ sudo yum install docker-engine
     ```
 
-6.  Enable the Docker daemon as a service and start it.
+6.  Configure devicemapper:
+
+    By default, the `devicemapper` graph driver does not come pre-configured in a production ready state. Follow the documented step by step instructions to [configure devicemapper with direct-lvm for production](../../engine/userguide/storagedriver/device-mapper-driver/#/for-a-direct-lvm-mode-configuration) in order to achieve the best performance and reliability for your environment.
+
+7.  Enable the Docker daemon as a service and start it.
 
     ```bash
     $ sudo systemctl enable docker.service
     $ sudo systemctl start docker.service
     ```
 
-7.  Confirm the Docker daemon is running:
+8.  Confirm the Docker daemon is running:
 
     ```bash
     $ sudo docker info
     ```
 
-8.  Optionally, add non-sudo access to the Docker socket by adding your user
+9.  Optionally, add non-sudo access to the Docker socket by adding your user
 to the `docker` group.
 
     ```bash
     $ sudo usermod -a -G docker $USER
     ```
 
-9. Log out and log back in to have your new permissions take effect.
+10. Log out and log back in to have your new permissions take effect.
 
 ## Install on Ubuntu 14.04 LTS
 

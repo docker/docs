@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/pull/
 description: The pull command description and usage
 keywords:
 - pull, image, hub, docker
-menu:
-  main:
-    parent: smn_cli
-title: pull
+title: docker pull
 ---
-
-# pull
 
 ```markdown
 Usage:  docker pull [OPTIONS] NAME[:TAG|@DIGEST]
@@ -137,7 +132,7 @@ above, the digest of the image is:
 Docker also prints the digest of an image when *pushing* to a registry. This
 may be useful if you want to pin to a version of the image you just pushed.
 
-A digest takes the place of the tag when pulling an image, for example, to 
+A digest takes the place of the tag when pulling an image, for example, to
 pull the above image by digest, run the following command:
 
 ```bash
@@ -160,7 +155,7 @@ MAINTAINER some maintainer <maintainer@example.com>
 ```
 
 > **Note**: Using this feature "pins" an image to a specific version in time.
-> Docker will therefore not pull updated versions of an image, which may include 
+> Docker will therefore not pull updated versions of an image, which may include
 > security updates. If you want to pull an updated image, you need to change the
 > digest accordingly.
 

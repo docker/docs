@@ -1,14 +1,8 @@
 ---
 description: Upgrade Docker on a machine
-keywords:
-- machine, upgrade, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: upgrade
+keywords: machine, upgrade, subcommand
+title: docker-machine upgrade
 ---
-
-# upgrade
 
 Upgrade a machine to the latest version of Docker. How this upgrade happens
 depends on the underlying distribution used on the created instance.
