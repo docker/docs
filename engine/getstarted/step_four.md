@@ -20,7 +20,7 @@ In this next section, you will improve the `whalesay` image by building a new ve
 
 In this step, you use your favorite text editor to write a short Dockerfile.  A
 Dockerfile describes the software that is "baked" into an image. It isn't just
-ingredients tho, it can tell the software what environment to use or what
+ingredients though, it can tell the software what environment to use or what
 commands to run. Your recipe is going to be very short.
 
 1. Go back to your command terminal window.
