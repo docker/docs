@@ -1,17 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/glossary/
 description: Glossary of terms used around Docker
 keywords:
 - glossary, docker, terms,  definitions
-menu:
-  main:
-    parent: mn_about
-    weight: "50"
-title: Docker Glossary
+title: Docker glossary
 ---
-
-# Glossary
 
 A list of terms used around the Docker project.
 

@@ -1,19 +1,11 @@
 ---
 description: Docker Hub Automated Builds with GitHub
-keywords:
-- Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation,
-  trusted, builds, trusted builds,  automated builds, GitHub
-menu:
-  main:
-    parent: mn_pubhub
-    weight: 9
-title: Automated Builds from GitHub
+keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, documentation, trusted, builds, trusted builds,  automated builds, GitHub
+title: Configure automated builds from GitHub
 ---
 
-# Automated Builds from GitHub
-
-If you've previously linked Docker Hub to your GitHub account,
-you'll be able to skip to [Creating an Automated Build](github.md#creating-an-automated-build).
+If you've previously linked Docker Hub to your GitHub account, you'll be able to
+skip to [Creating an Automated Build](github.md#creating-an-automated-build).
 
 ## Linking Docker Hub to a GitHub account
 
@@ -24,10 +16,11 @@ you'll be able to skip to [Creating an Automated Build](github.md#creating-an-au
 > We do guarantee nothing else will be touched in your account.
 
 In order to set up an Automated Build of a repository on GitHub, you need to
-link [Docker Hub](https://hub.docker.com/account/authorized-services/) to your GitHub account. This will allow the registry to see your GitHub
-repositories.
+link [Docker Hub](https://hub.docker.com/account/authorized-services/) to your
+GitHub account. This will allow the registry to see your GitHub repositories.
 
-To add, remove or view your linked account, go to the "Linked Accounts & Services" section of your Hub profile "Settings".
+To add, remove or view your linked account, go to the "Linked Accounts &
+Services" section of your Hub profile "Settings".
 
 ![authorized-services](images/authorized-services.png)
 
@@ -36,17 +29,16 @@ or "Limited Access" linking.
 
 ![add-authorized-github-service.png](images/add-authorized-github-service.png)
 
-The "Public and Private" option is the easiest to use,
-as it grants the Docker Hub full access to all of your repositories. GitHub
-also allows you to grant access to repositories belonging to your GitHub
-organizations.
+The "Public and Private" option is the easiest to use, as it grants the Docker
+Hub full access to all of your repositories. GitHub also allows you to grant
+access to repositories belonging to your GitHub organizations.
 
-If you choose "Limited Access", Docker Hub only gets permission
-to access your public data and public repositories.
+If you choose "Limited Access", Docker Hub only gets permission to access your
+public data and public repositories.
 
-Follow the onscreen instructions to authorize and link your
-GitHub account to Docker Hub. Once it is linked, you'll be able to
-choose a source repository from which to create the Automatic Build.
+Follow the onscreen instructions to authorize and link your GitHub account to
+Docker Hub. Once it is linked, you'll be able to choose a source repository from
+which to create the Automatic Build.
 
 You will be able to review and revoke Docker Hub's access by visiting the
 [GitHub User's Applications settings](https://github.com/settings/applications).
@@ -59,19 +51,20 @@ You will be able to review and revoke Docker Hub's access by visiting the
 
 ## Auto builds and limited linked GitHub accounts.
 
-If you selected to link your GitHub account with only a "Limited Access" link, then
-after creating your automated build, you will need to either manually trigger a
-Docker Hub build using the "Start a Build" button, or add the GitHub webhook
-manually, as described in [GitHub Service Hooks](github.md#github-service-hooks).
+If you selected to link your GitHub account with only a "Limited Access" link,
+then after creating your automated build, you will need to either manually
+trigger a Docker Hub build using the "Start a Build" button, or add the GitHub
+webhook manually, as described in [GitHub Service
+Hooks](github.md#github-service-hooks).
 
 ## Changing the GitHub user link
 
-If you want to remove, or change the level of linking between your GitHub account
-and the Docker Hub, you need to do this in two places.
+If you want to remove, or change the level of linking between your GitHub
+account and the Docker Hub, you need to do this in two places.
 
-First, remove the "Linked Account" from your Docker Hub "Settings".
-Then go to your GitHub account's Personal settings, and in the "Applications"
-section, "Revoke access".
+First, remove the "Linked Account" from your Docker Hub "Settings". Then go to
+your GitHub account's Personal settings, and in the "Applications" section,
+"Revoke access".
 
 You can now re-link your account at any time.
 
@@ -134,11 +127,13 @@ If your GitHub repository contains links to private submodules, you'll get an
 error message in your build.
 
 Normally, the Docker Hub sets up a deploy key in your GitHub repository.
-Unfortunately, GitHub only allows a repository deploy key to access a single repository.
+Unfortunately, GitHub only allows a repository deploy key to access a single
+repository.
 
-To work around this, you can create a dedicated user account in GitHub and attach
-the automated build's deploy key that account. This dedicated build account
-can be limited to read-only access to just the repositories required to build.
+To work around this, you can create a dedicated user account in GitHub and
+attach the automated build's deploy key that account. This dedicated build
+account can be limited to read-only access to just the repositories required to
+build.
 
 <table class="table table-bordered">
   <thead>

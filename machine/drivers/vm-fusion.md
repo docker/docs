@@ -1,14 +1,8 @@
 ---
 description: VMware Fusion driver for machine
-keywords:
-- machine, VMware Fusion, driver
-menu:
-  main:
-    parent: smn_machine_drivers
+keywords: machine, VMware Fusion, driver
 title: VMware Fusion
 ---
-
-# VMware Fusion
 
 Creates machines locally on [VMware Fusion](http://www.vmware.com/products/fusion). Requires VMware Fusion to be installed.
 

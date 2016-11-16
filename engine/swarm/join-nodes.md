@@ -1,16 +1,8 @@
 ---
 description: Add worker and manager nodes to a swarm
-keywords:
-- guide, swarm mode, node
-menu:
-  main:
-    identifier: join-nodes-guide
-    parent: engine_swarm
-    weight: 13
+keywords: guide, swarm mode, node
 title: Join nodes to a swarm
 ---
-
-# Join nodes to a swarm
 
 When you first create a swarm, you place a single Docker Engine (Engine) into
 swarm mode. To take full advantage of swarm mode you can add nodes to the swarm:

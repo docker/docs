@@ -1,17 +1,12 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/plugin_enable/
 advisory: experimental
 description: the plugin enable command description and usage
 keywords:
 - plugin, enable
-menu:
-  main:
-    parent: smn_cli
-title: plugin enable
+title: docker plugin enable (experimental)
 ---
-
-# plugin enable (experimental)
 
 ```markdown
 Usage:  docker plugin enable PLUGIN

@@ -1,14 +1,8 @@
 ---
 description: Show command help
-keywords:
-- machine, help, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: help
+keywords: machine, help, subcommand
+title: docker-machine help
 ---
-
-# help
 
 ```none
 Usage: docker-machine help [arg...]

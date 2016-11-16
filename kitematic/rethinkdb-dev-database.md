@@ -1,15 +1,8 @@
 ---
 description: Tutorial demonstrating the setup of an RethinkDB database for development
-keywords:
-- docker, documentation, about, technology, kitematic, gui, rethink,  tutorial
-menu:
-  main:
-    parent: toolbox_kitematic
-    weight: 3
-title: Creating a Local RethinkDB Database for Development
+keywords: docker, documentation, about, technology, kitematic, gui, rethink, tutorial
+title: 'Kitematic tutorial: Create a local RethinkDB database for development'
 ---
-
-# Kitematic Tutorial: Creating a Local RethinkDB Database for Development
 
 In this tutorial, you will:
 
@@ -66,4 +59,3 @@ successfully used a RethinkDB container in Kitematic to build a real-time chat
 app. Happy coding!
 
 ![Rethink app preview](images/rethinkdb-preview.png)
-

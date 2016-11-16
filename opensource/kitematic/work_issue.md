@@ -1,15 +1,8 @@
 ---
 description: Explains how to find a Kitematic issue
-keywords:
-- Kitematic, open source, contribute, contributor, tour, development
-menu:
-  main:
-    parent: smn_kitematic_contrib
-    weight: 4
+keywords: Kitematic, open source, contribute, contributor, tour, development
 title: Develop in Kitematic (work on an issue)
 ---
-
-## Develop in Kitematic (work on an issue)
 
 For this tutorial, we will work on issue <a href="https://github.com/docker/kitematic/issues/1191" target="_blank"> #1191</a> which is a request to display the container id in Kitematic for easy identification. (Currently, Kitematic shows the container name but not the id.)
 
@@ -24,7 +17,7 @@ To do this, edit the container `General Settings` layout.
         <div className="settings-panel">
         ...
     ```
-    
+
 
 3.  Above this code we will create a javascript variable that will allow us to display  our container id:
 
@@ -49,7 +42,7 @@ To do this, edit the container `General Settings` layout.
             {rename}
             {shortId}
     ```
-  
+
     At this point, the updated code should look similar to this:
 
     ![Javascript to display container id in kitematic](images/settings-code-example.png)

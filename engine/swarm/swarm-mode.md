@@ -1,16 +1,8 @@
 ---
 description: Run Docker Engine in swarm mode
-keywords:
-- guide, swarm mode, node
-menu:
-  main:
-    identifier: initialize-swarm-guide
-    parent: engine_swarm
-    weight: 12
+keywords: guide, swarm mode, node
 title: Run Docker Engine in swarm mode
 ---
-
-# Run Docker Engine in swarm mode
 
 When you first install and start working with Docker Engine, swarm mode is
 disabled by default. When you enable swarm mode, you work with the concept of

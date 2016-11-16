@@ -1,16 +1,8 @@
 ---
 description: Remove the service from the swarm
-keywords:
-- tutorial, cluster management, swarm, service
-menu:
-  main:
-    identifier: swarm-tutorial-delete-service
-    parent: swarm-tutorial
-    weight: 19
-title: Delete the service
+keywords: tutorial, cluster management, swarm, service
+title: Delete the service running on the swarm
 ---
-
-# Delete the service running on the swarm
 
 The remaining steps in the tutorial don't use the `helloworld` service, so now
 you can delete the service from the swarm.

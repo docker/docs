@@ -40,9 +40,9 @@
   </span><span class="nt">"destroyed_datetime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="nt">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deployment stack"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dockercloud-app"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/stack/7fe7ec85-58be-4904-81da-de2219098d7c/"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"resource_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/app/v1/user_namespace/stack/7fe7ec85-58be-4904-81da-de2219098d7c/"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"services"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"/api/app/v1/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/"</span><span class="w">
+    </span><span class="s2">"/api/app/v1/user_namespace/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Running"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"synchronized"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -51,6 +51,8 @@
 </span></code></pre>
 
 <p>A stack is a logical grouping of closely related services, that may be linked with one another.</p>
+
+<p>This is a <a href="#namespaced-endpoints">namespaced endpoint</a>.</p>
 
 <h3 id="attributes">Attributes</h3>
 
@@ -175,7 +177,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/app/v1/stack/</code></p>
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]stack/</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -249,7 +251,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/stack/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]stack/</code></p>
 
 <h3 id="json-parameters">JSON Parameters</h3>
 
@@ -307,7 +309,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/app/v1/stack/(uuid)/export/</code></p>
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]stack/(uuid)/export/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -354,7 +356,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET /api/app/v1/stack/(uuid)/</code></p>
+<p><code class="prettyprint">GET /api/app/v1/[optional_namespace/]stack/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -426,7 +428,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">PATCH /api/app/v1/stack/(uuid)/</code></p>
+<p><code class="prettyprint">PATCH /api/app/v1/[optional_namespace/]stack/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -490,7 +492,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/stack/(uuid)/stop/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]stack/(uuid)/stop/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -540,7 +542,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/stack/(uuid)/start/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]stack/(uuid)/start/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -592,7 +594,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST /api/app/v1/stack/(uuid)/redeploy/</code></p>
+<p><code class="prettyprint">POST /api/app/v1/[optional_namespace/]stack/(uuid)/redeploy/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 
@@ -656,7 +658,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">DELETE /api/app/v1/stack/(uuid)/</code></p>
+<p><code class="prettyprint">DELETE /api/app/v1/[optional_namespace/]stack/(uuid)/</code></p>
 
 <h3 id="path-parameters">Path Parameters</h3>
 

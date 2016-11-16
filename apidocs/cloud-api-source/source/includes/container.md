@@ -10,7 +10,7 @@
     "autorestart": "OFF",
     "bindings": [
         {
-            "volume": "/api/infra/v1/volume/1863e34d-6a7d-4945-aefc-8f27a4ab1a9e/",
+            "volume": "/api/infra/v1/user_namespace/volume/1863e34d-6a7d-4945-aefc-8f27a4ab1a9e/",
             "host_path": null,
             "container_path": "/data",
             "rewritable": true
@@ -140,7 +140,7 @@
         },
         {
             "key": "DB_DOCKERCLOUD_API_URL",
-            "value": "https://cloud.docker.com/api/app/v1/service/c0fed1dc-c528-40c9-aa4c-dc00672ebcbf/"
+            "value": "https://cloud.docker.com/api/app/v1/user_namespace/service/c0fed1dc-c528-40c9-aa4c-dc00672ebcbf/"
         }
     ],
     "container_ports": [
@@ -188,9 +188,9 @@
     		"endpoints": {
     			"3306/tcp": "tcp://172.16.0.3:3306"
     		},
-    		"from_container": "/api/app/v1/container/c1dd4e1e-1356-411c-8613-e15146633640/",
+    		"from_container": "/api/app/v1/user_namespace/container/c1dd4e1e-1356-411c-8613-e15146633640/",
     		"name": "DB_1",
-    		"to_container": "/api/app/v1/container/ba434e1e-1234-411c-8613-e15146633640/"
+    		"to_container": "/api/app/v1/user_namespace/container/ba434e1e-1234-411c-8613-e15146633640/"
     	}
     ],
     "link_variables": {
@@ -226,20 +226,20 @@
     "memory_swap": 4096,
     "name": "wordpress-stackable",
     "net": "bridge",
-    "node": "/api/infra/v1/node/9691c44e-3155-4ca2-958d-c9571aac0a14/",
+    "node": "/api/infra/v1/user_namespace/node/9691c44e-3155-4ca2-958d-c9571aac0a14/",
     "pid": "none",
     "private_ip": "10.7.0.1",
     "privileged": false,
     "public_dns": "wordpress-stackable-1.admin.cont.dockerapp.io",
     "read_only": true,
-    "resource_uri": "/api/app/v1/container/c1dd4e1e-1356-411c-8613-e15146633640/",
+    "resource_uri": "/api/app/v1/user_namespace/container/c1dd4e1e-1356-411c-8613-e15146633640/",
     "roles": ["global"],
     "run_command": "/run-wordpress.sh",
     "security_opt": [
         "label:user:USER",
         "label:role:ROLE"
     ],
-    "service": "/api/app/v1/service/adeebc1b-1b81-4af0-b8f2-cefffc69d7fb/",
+    "service": "/api/app/v1/user_namespace/service/adeebc1b-1b81-4af0-b8f2-cefffc69d7fb/",
     "started_datetime": "Thu, 16 Oct 2014 12:04:08 +0000",
     "state": "Running",
     "stdin_open": false,
@@ -254,6 +254,8 @@
 
 
 A container is a representation of a Docker container in a node.
+
+This is a [namespaced endpoint](#namespaced-endpoints).
 
 ### Attributes
 
@@ -420,7 +422,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/app/v1/container/`
+`GET /api/app/v1/[optional_namespace/]container/`
 
 ### Query Parameters
 
@@ -472,7 +474,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/app/v1/container/(uuid)/`
+`GET /api/app/v1/[optional_namespace/]container/(uuid)/`
 
 ### Path Parameters
 
@@ -541,7 +543,7 @@ Available in Docker Cloud's **STREAM API**
 
 ### HTTP Request
 
-`GET /api/app/v1/container/(uuid)/logs/`
+`GET /api/app/v1/[optional_namespace/]container/(uuid)/logs/`
 
 ### Path Parameters
 
@@ -600,7 +602,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/container/(uuid)/start/`
+`POST /api/app/v1/[optional_namespace/]container/(uuid)/start/`
 
 ### Path Parameters
 
@@ -651,7 +653,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/container/(uuid)/stop/`
+`POST /api/app/v1/[optional_namespace/]container/(uuid)/stop/`
 
 ### Path Parameters
 
@@ -704,7 +706,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/container/(uuid)/redeploy/`
+`POST /api/app/v1/[optional_namespace/]container/(uuid)/redeploy/`
 
 ### Path Parameters
 
@@ -762,7 +764,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`DELETE /api/app/v1/container/(uuid)/`
+`DELETE /api/app/v1/[optional_namespace/]container/(uuid)/`
 
 ### Path Parameters
 
@@ -819,7 +821,7 @@ Available in Docker Cloud's **STREAM API**
 
 ### HTTP Request
 
-`GET /api/app/v1/container/(uuid)/exec/`
+`GET /api/app/v1/[optional_namespace/]container/(uuid)/exec/`
 
 ### Path Parameters
 

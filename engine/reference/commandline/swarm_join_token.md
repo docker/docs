@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/swarm_join_token/
 description: The swarm join-token command description and usage
 keywords:
 - swarm, join-token
-menu:
-  main:
-    parent: smn_cli
-title: swarm join-token
+title: docker swarm join-token
 ---
-
-# swarm join-token
 
 ```markdown
 Usage:	docker swarm join-token [--rotate] (worker|manager)

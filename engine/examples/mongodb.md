@@ -1,14 +1,8 @@
 ---
-description: Creating a Docker image with MongoDB pre-installed using a Dockerfile
-  and sharing the image on Docker Hub
-keywords:
-- docker, dockerize, dockerizing, article, example, docker.io, platform, package,
-  installation, networking, mongodb, containers, images, image, sharing, dockerfile,
-  build, auto-building,  framework
-title: Dockerizing MongoDB
+description: Creating a Docker image with MongoDB pre-installed using a Dockerfile and sharing the image on Docker Hub
+keywords: docker, dockerize, dockerizing, article, example, docker.io, platform, package, installation, networking, mongodb, containers, images, image, sharing, dockerfile, build, auto-building,  framework
+title: Dockerize MongoDB
 ---
-
-# Dockerizing MongoDB
 
 ## Introduction
 

@@ -1,18 +1,12 @@
 ---
-aliases:
+description: Use the Docker Cloud Agent
+keywords: agent, Cloud, install
+redirect_from:
 - /docker-cloud/feature-reference/byoh/
 - /docker-cloud/tutorials/byoh/
 - /docker-cloud/getting-started/use-byon/
-description: Use the Docker Cloud Agent
-keywords:
-- agent, Cloud, install
-menu:
-  main:
-    parent: infrastructure
 title: Use the Docker Cloud Agent
 ---
-
-# Use the Docker Cloud Agent
 
 Docker Cloud allows you to use any Linux host ("bring your own host") as a node which you can then use to deploy containers. To do this, you install the **Docker Cloud Agent** on your Linux host so that Docker Cloud can remotely manage it.
 

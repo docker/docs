@@ -1,17 +1,10 @@
 ---
-aliases:
-- /engine/installation/debian/
 description: Instructions for installing Docker on Debian.
-keywords:
-- Docker, Docker documentation, installation,  debian
-menu:
-  main:
-    parent: engine_linux
-    weight: -2
-title: Installation on Debian
+keywords: Docker, Docker documentation, installation,  debian
+redirect_from:
+- /engine/installation/debian/
+title: Install Docker on Debian
 ---
-
-# Debian
 
 Docker is supported on the following versions of Debian:
 

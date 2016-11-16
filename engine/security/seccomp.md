@@ -1,15 +1,8 @@
 ---
 description: Enabling seccomp in Docker
-keywords:
-- seccomp, security, docker, documentation
-menu:
-  main:
-    parent: smn_secure_docker
-    weight: 90
+keywords: seccomp, security, docker, documentation
 title: Seccomp security profiles for Docker
 ---
-
-# Seccomp security profiles for Docker
 
 Secure computing mode (Seccomp) is a Linux kernel feature. You can use it to
 restrict the actions available within the container. The `seccomp()` system

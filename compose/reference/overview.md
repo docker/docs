@@ -1,17 +1,10 @@
 ---
-aliases:
-- /compose/reference/docker-compose/
 description: Overview of docker-compose CLI
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  docker-compose
-menu:
-  main:
-    parent: smn_compose_cli
-    weight: -2
+keywords: fig, composition, compose, docker, orchestration, cli,  docker-compose
+redirect_from:
+- /compose/reference/docker-compose/
 title: Overview of docker-compose CLI
 ---
-
-# Overview of docker-compose CLI
 
 This page provides the usage information for the `docker-compose` Command.
 You can also see this information by running `docker-compose --help` from the

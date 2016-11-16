@@ -1,18 +1,12 @@
 ---
 description: Understand container communication
-keywords:
-- docker, container, communication, network
-menu:
-  main:
-    parent: smn_networking_def
+keywords: docker, container, communication, network
 title: Understand container communication
 ---
 
-# Understand container communication
-
 The information in this section explains container communication within the
 Docker default bridge. This is a `bridge` network named `bridge` created
-automatically when you install Docker.  
+automatically when you install Docker.
 
 **Note**: The [Docker networks feature](../index.md) allows you to create user-defined networks in addition to the default bridge network.
 
@@ -90,7 +84,7 @@ the Docker daemon is running with both `--icc=false` and `--iptables=true`
 then, when it sees `docker run` invoked with the `--link=` option, the Docker
 server will insert a pair of `iptables` `ACCEPT` rules so that the new
 container can connect to the ports exposed by the other container -- the ports
-that it mentioned in the `EXPOSE` lines of its `Dockerfile`.  
+that it mentioned in the `EXPOSE` lines of its `Dockerfile`.
 
 > **Note**: The value `CONTAINER_NAME` in `--link=` must either be an
 auto-assigned Docker name like `stupefied_pare` or else the name you assigned

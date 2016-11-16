@@ -1,11 +1,8 @@
 ---
 description: Installation and using Docker via Ansible
-keywords:
-- ansible, installation, usage, docker,  documentation
-title: Using Ansible
+keywords: ansible, installation, usage, docker,  documentation
+title: Use Ansible
 ---
-
-# Using Ansible
 
 > **Note**:
 > Please note this is a community contributed installation path.

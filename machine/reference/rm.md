@@ -1,15 +1,8 @@
 ---
 description: Remove a machine.
-keywords:
-- machine, rm, subcommand
-menu:
-  main:
-    identifier: machine.rm
-    parent: smn_machine_subcmds
-title: rm
+keywords: machine, rm, subcommand
+title: docker-machine rm
 ---
-
-# rm
 
 Remove a machine. This will remove the local reference as well as delete it
 on the cloud provider or virtualization management platform.

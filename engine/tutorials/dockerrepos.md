@@ -1,18 +1,11 @@
 ---
-aliases:
+description: Learn how to use the Docker Hub to manage Docker images and work flow
+keywords: repo, Docker Hub, Docker Hub, registry, index, repositories, usage, pull image, push image, image, documentation
+redirect_from:
 - /engine/userguide/containers/dockerrepos/
 - /engine/userguide/dockerrepos/
-description: Learn how to use the Docker Hub to manage Docker images and work flow
-keywords:
-- repo, Docker Hub, Docker Hub, registry, index, repositories, usage, pull image,
-  push image, image,  documentation
-menu:
-  main:
-    parent: engine_learn_menu
 title: Store images on Docker Hub
 ---
-
-# Store images on Docker Hub
 
 So far you've learned how to use the command line to run Docker on your local
 host. You've learned how to [pull down images](usingdocker.md) to build

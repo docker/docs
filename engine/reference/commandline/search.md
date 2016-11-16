@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/search/
 description: The search command description and usage
 keywords:
 - search, hub, images
-menu:
-  main:
-    parent: smn_cli
-title: search
+title: docker search
 ---
-
-# search
 
 ```markdown
 Usage:  docker search [OPTIONS] TERM
@@ -43,7 +38,7 @@ This example displays images with a name containing 'busybox':
 
     $ docker search busybox
     NAME                             DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
-    busybox                          Busybox base image.                             316       [OK]       
+    busybox                          Busybox base image.                             316       [OK]
     progrium/busybox                                                                 50                   [OK]
     radial/busyboxplus               Full-chain, Internet enabled, busybox made...   8                    [OK]
     odise/busybox-python                                                             2                    [OK]
@@ -76,7 +71,7 @@ at least 3 stars and the description isn't truncated in the output:
 
     $ docker search --stars=3 --no-trunc busybox
     NAME                 DESCRIPTION                                                                               STARS     OFFICIAL   AUTOMATED
-    busybox              Busybox base image.                                                                       325       [OK]       
+    busybox              Busybox base image.                                                                       325       [OK]
     progrium/busybox                                                                                               50                   [OK]
     radial/busyboxplus   Full-chain, Internet enabled, busybox made from scratch. Comes in git and cURL flavors.   8                    [OK]
 
@@ -105,7 +100,7 @@ least 3 stars:
 
     $ docker search --filter stars=3 busybox
     NAME                 DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
-    busybox              Busybox base image.                             325       [OK]       
+    busybox              Busybox base image.                             325       [OK]
     progrium/busybox                                                     50                   [OK]
     radial/busyboxplus   Full-chain, Internet enabled, busybox made...   8                    [OK]
 

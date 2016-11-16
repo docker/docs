@@ -1,16 +1,8 @@
 ---
 description: Deploy a service to the swarm
-keywords:
-- tutorial, cluster management, swarm mode
-menu:
-  main:
-    identifier: deploy-application
-    parent: swarm-tutorial
-    weight: 16
-title: Deploy a service
+keywords: tutorial, cluster management, swarm mode
+title: Deploy a service to the swarm
 ---
-
-# Deploy a service to the swarm
 
 After you [create a swarm](create-swarm.md), you can deploy a service to the
 swarm. For this tutorial, you also [added worker nodes](add-nodes.md), but that

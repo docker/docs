@@ -1,14 +1,8 @@
 ---
 description: Automating content push pulls with trust
-keywords:
-- trust, security, docker,  documentation, automation
-menu:
-  main:
-    parent: smn_content_trust
+keywords: trust, security, docker,  documentation, automation
 title: Automation with content trust
 ---
-
-# Automation with content trust
 
 Your automation systems that pull or build images can also work with trust. Any automation environment must set `DOCKER_TRUST_ENABLED` either manually or in a scripted fashion before processing images.
 
@@ -79,4 +73,3 @@ unable to process Dockerfile: No trust data for notrust
 * [Manage keys for content trust](trust_key_mng.md)
 * [Delegations for content trust](trust_delegation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)
-

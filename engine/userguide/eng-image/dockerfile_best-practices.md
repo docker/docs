@@ -1,19 +1,13 @@
 ---
-aliases:
+description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
+keywords: Examples, Usage, base image, docker, documentation, dockerfile, best practices, hub, official repo
+redirect_from:
+- /articles/dockerfile_best-practices/
 - /engine/articles/dockerfile_best-practices/
 - /docker-cloud/getting-started/intermediate/optimize-dockerfiles/
 - /docker-cloud/tutorials/optimize-dockerfiles/
-description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
-keywords:
-- Examples, Usage, base image, docker, documentation, dockerfile, best practices,
-  hub,  official repo
-menu:
-  main:
-    parent: engine_images
 title: Best practices for writing Dockerfiles
 ---
-
-# Best practices for writing Dockerfiles
 
 Docker can build images automatically by reading the instructions from a
 `Dockerfile`, a text file that contains all the commands, in order, needed to

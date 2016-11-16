@@ -1,17 +1,11 @@
 ---
-aliases:
+description: Create a proxy or load balancer
+keywords: proxy, load, balancer
+redirect_from:
 - /docker-cloud/getting-started/intermediate/load-balance-hello-world/
 - /docker-cloud/tutorials/load-balance-hello-world/
-description: Create a proxy or load balancer
-keywords:
-- proxy, load, balancer
-menu:
-  main:
-    parent: apps
 title: Create a proxy or load balancer
 ---
-
-# Create a proxy or load balancer
 
 When you deploy a web service to multiple containers you might want to load
 balance between the containers using a proxy or load balancer.

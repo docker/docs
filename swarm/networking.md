@@ -1,15 +1,8 @@
 ---
 description: Swarm and container networks
-keywords:
-- docker, swarm, clustering,  networking
-menu:
-  main:
-    parent: workw_swarm
-    weight: 3
+keywords: docker, swarm, clustering,  networking
 title: Swarm and container networks
 ---
-
-# Swarm and container networks
 
 Docker Swarm is fully compatible with Docker's networking features. This
 includes the multi-host networking feature which allows creation of custom

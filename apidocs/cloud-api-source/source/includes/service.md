@@ -26,7 +26,7 @@
         "host_path": null,
         "container_path": null,
         "rewritable": true,
-        "volumes_from": "/api/app/v1/service/2f4f54e5-9d3b-4ac1-85ad-a2d4ff25a179/"
+        "volumes_from": "/api/app/v1/user_namespace/service/2f4f54e5-9d3b-4ac1-85ad-a2d4ff25a179/"
     }
   ],
   "cap_add": [
@@ -53,8 +53,8 @@
     }
   ],
   "containers": [
-    "/api/app/v1/container/6f8ee454-9dc3-4387-80c3-57aac1be3cc6/",
-    "/api/app/v1/container/fdf9c116-7c08-4a60-b0ce-c54ca72c2f25/"
+    "/api/app/v1/user_namespace/container/6f8ee454-9dc3-4387-80c3-57aac1be3cc6/",
+    "/api/app/v1/user_namespace/container/fdf9c116-7c08-4a60-b0ce-c54ca72c2f25/"
   ],
   "cpu_shares": 100,
   "cpuset": "0,1",
@@ -125,14 +125,14 @@
     "WORDPRESS_STACKABLE_PORT_80_TCP_ADDR": "wordpress-stackable-1.admin.cont.dockerapp.io",
     "WORDPRESS_STACKABLE_PORT_80_TCP_PORT": "49153",
     "WORDPRESS_STACKABLE_PORT_80_TCP_PROTO": "tcp",
-    "WORDPRESS_STACKABLE_DOCKERCLOUD_API_URL": "https://cloud.docker.com/api/app/v1/service/adeebc1b-1b81-4af0-b8f2-cefffc69d7fb/"
+    "WORDPRESS_STACKABLE_DOCKERCLOUD_API_URL": "https://cloud.docker.com/api/app/v1/user_namespace/service/adeebc1b-1b81-4af0-b8f2-cefffc69d7fb/"
   },
   "linked_from_service": [],
   "linked_to_service": [
     {
-      "from_service": "/api/app/v1/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/",
+      "from_service": "/api/app/v1/user_namespace/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/",
       "name": "DB",
-      "to_service": "/api/app/v1/service/72f175bd-390b-46e3-9463-830aca32ce3e/"
+      "to_service": "/api/app/v1/user_namespace/service/72f175bd-390b-46e3-9463-830aca32ce3e/"
     }
   ],
   "mac_address": "02:42:ac:11:65:43",
@@ -143,7 +143,7 @@
   "privileged": false,
   "public_dns": "wordpress-stackable.admin.svc.dockerapp.io",
   "read_only": true,
-  "resource_uri": "/api/app/v1/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/",
+  "resource_uri": "/api/app/v1/user_namespace/service/09cbcf8d-a727-40d9-b420-c8e18b7fa55b/",
   "roles": ["global"],
   "run_command": "/run-wordpress.sh",
   "running_num_containers": 1,
@@ -152,7 +152,7 @@
   "sequential_deployment": false,
   "started_datetime": "Mon, 13 Oct 2014 11:01:43 +0000",
   "state": "Partly running",
-  "stack": "/api/app/v1/stack/46aca402-2109-4a70-a378-760cfed43816/",
+  "stack": "/api/app/v1/user_namespace/stack/46aca402-2109-4a70-a378-760cfed43816/",
   "stdin_open": false,
   "stopped_datetime": null,
   "stopped_num_containers": 0,
@@ -172,6 +172,8 @@
 
 
 A service is a template used to deploy one or more containers.
+
+This is a [namespaced endpoint](#namespaced-endpoints).
 
 ### Attributes
 
@@ -346,7 +348,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/app/v1/service/`
+`GET /api/app/v1/[optional_namespace/]service/`
 
 ### Query Parameters
 
@@ -400,7 +402,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/service/`
+`POST /api/app/v1/[optional_namespace/]service/`
 
 ### JSON Parameters
 
@@ -504,7 +506,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/app/v1/service/(uuid)/`
+`GET /api/app/v1/[optional_namespace/]service/(uuid)/`
 
 ### Path Parameters
 
@@ -575,7 +577,7 @@ Available in Docker Cloud's **STREAM API**
 
 ### HTTP Request
 
-`GET /api/app/v1/service/(uuid)/logs/`
+`GET /api/app/v1/[optional_namespace/]service/(uuid)/logs/`
 
 ### Path Parameters
 
@@ -646,7 +648,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`PATCH /api/app/v1/service/(uuid)/`
+`PATCH /api/app/v1/[optional_namespace/]service/(uuid)/`
 
 ### Path Parameters
 
@@ -724,7 +726,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/service/(uuid)/start/`
+`POST /api/app/v1/[optional_namespace/]service/(uuid)/start/`
 
 ### Path Parameters
 
@@ -775,7 +777,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/service/(uuid)/stop/`
+`POST /api/app/v1/[optional_namespace/]service/(uuid)/stop/`
 
 ### Path Parameters
 
@@ -814,7 +816,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/service/(uuid)/scale/`
+`POST /api/app/v1/[optional_namespace/]service/(uuid)/scale/`
 
 ### Path Parameters
 
@@ -867,7 +869,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/service/(uuid)/redeploy/`
+`POST /api/app/v1/[optional_namespace/]service/(uuid)/redeploy/`
 
 ### Path Parameters
 
@@ -924,7 +926,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`DELETE /api/app/v1/service/(uuid)/`
+`DELETE /api/app/v1/[optional_namespace/]service/(uuid)/`
 
 ### Path Parameters
 

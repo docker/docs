@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/volume_ls/
 description: The volume ls command description and usage
 keywords:
 - volume, list
-menu:
-  main:
-    parent: smn_cli
-title: volume ls
+title: docker volume ls
 ---
-
-# volume ls
 
 ```markdown
 Usage:  docker volume ls [OPTIONS]

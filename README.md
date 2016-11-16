@@ -32,7 +32,15 @@ help. If a reviewer realizes you have based your work on the wrong branch, we'll
 let you know so that you can rebase it.
 
 >**Note**: To contribute code to Docker projects, see the
-[Contribution guidelines](opensource/project/who-written-for).
+[Contribution guidelines](https://docs.docker.com/opensource/project/who-written-for/).
+
+### Files not edited here
+
+Files and directories listed in the `path:` keys in
+[`.NOT_EDITED_HERE.yaml`](.NOT_EDITED_HERE.yaml) are maintained in other
+repositories and should not be edited in this one. Pull requests against these
+files will be rejected. Make your edits to the files in the repository and path
+in the `source:` key in the YAML file.
 
 ### Overall doc improvements
 
@@ -93,8 +101,17 @@ The following `vnext` branches currently exist:
   docs for upcoming features in the [docker/kitematic](https://github.com/docker/kitematic/)
   project
 
+## Per-PR staging on Github
 
-## Staging
+For every PR against `master` and all the long-lived branches, a staged version
+of the site is built using Netlify. If the site builds, you will see
+**deploy/netlify — Deploy preview ready**. Otherwise, you will see an error.
+Click **Details** to review the staged site or the errors that prevented it from
+building. Review the staged site and amend your commit if necessary. Reviewers
+will also check the staged site before merging the PR, to protect the integrity
+of [docs.docker.com](http://docs.docker.com/).
+
+## Staging locally
 
 You have three options:
 
@@ -107,7 +124,7 @@ You have three options:
     ```
 
     If you haven't got Docker Compose installed,
-    [follow these installation instructions](/compose/install/).
+    [follow these installation instructions](https://docs.docker.com/compose/install/).
 
     The container runs in the background and incrementally rebuilds the site each
     time a file changes. You can keep your browser open to http://localhost:4000/
@@ -150,7 +167,7 @@ directly on docs.docker.com.
 ## Style guide
 
 If you have questions about how to write for Docker's documentation, please see
-the [style guide](/opensource/doc-style/). The style guide provides
+the [style guide](https://docs.docker.com/opensource/doc-style/). The style guide provides
 guidance about grammar, syntax, formatting, styling, language, or tone. If
 something isn't clear in the guide, please submit an issue to let us know or
 submit a pull request to help us improve it.

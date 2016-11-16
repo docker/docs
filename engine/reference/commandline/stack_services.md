@@ -1,17 +1,12 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/stack_services/
 advisory: experimental
 description: The stack services command description and usage
 keywords:
 - stack, services
-menu:
-  main:
-    parent: smn_cli
-title: stack services
+title: docker stack services (experimental)
 ---
-
-# stack services (experimental)
 
 ```markdown
 Usage:	docker stack services [OPTIONS] STACK
@@ -41,7 +36,7 @@ dn7m7nhhfb9y  myapp_db        1/1       mysql@sha256:a9a5b559f8821fe73d58c3606c8
 
 The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there
 is more than one filter, then pass multiple flags (e.g. `--filter "foo=bar" --filter "bif=baz"`).
-Multiple filter flags are combined as an `OR` filter. 
+Multiple filter flags are combined as an `OR` filter.
 
 The following command shows both the `web` and `db` services:
 

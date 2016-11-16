@@ -1,35 +1,33 @@
 ---
-aliases:
+description: Getting Started
+keywords: mac, beta, alpha, tutorial
+redirect_from:
 - /mackit/
 - /mackit/getting-started/
 - /mac/
 - /mac/started/
 - /docker-for-mac/started/
 - /installation/mac/
-description: Getting Started
-keywords:
-- mac, beta, alpha, tutorial
-menu:
-  main:
-    identifier: docker-mac-getstart
-    parent: pinata_mac_menu
-    weight: 1
-title: Getting Started
+title: Get started with Docker for Mac
 ---
-
-# Getting Started with Docker for Mac
 
 Welcome to Docker for Mac!
 
-Please read through these topics on how to get started. To **give us feedback** on your experience with the app and report bugs or problems, log in to our [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac).
+Please read through these topics on how to get started. To **give us feedback**
+on your experience with the app and report bugs or problems, log in to our
+[Docker for Mac forum](https://forums.docker.com/c/docker-for-mac).
 
->**Already have Docker for Mac?** If you already have Docker for Mac installed, and are ready to get started, skip over to the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
+>**Already have Docker for Mac?** If you already have Docker for Mac installed,
+and are ready to get started, skip over to the [Getting Started with
+Docker](/engine/getstarted/index.md) tutorial.
 
 ## Download Docker for Mac
 
-If you have not already done so, please install Docker for Mac. You can download installers from the stable or beta channel.
+If you have not already done so, please install Docker for Mac. You can download
+installers from the stable or beta channel.
 
-For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-channels).
+For more about stable and beta channels, see the
+[FAQs](faqs.md#stable-and-beta-channels).
 
 <table style="width:100%">
   <tr>
@@ -217,6 +215,11 @@ There are some limitations on the directories that can be shared:
 * They cannot already exist inside of Docker.
 
 See [Namespaces](osxfs.md#namespaces) in the topic on [osxfs file system sharing](osxfs.md) for more information.
+
+>**Tip:** File sharing is required for volume mounting if the project lives
+outside of the `/Users` directory. In that case, share the drive where the
+Dockerfile and volume are located. Otherwise, you will get file not found or
+cannot start service errors at runtime. (See also [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
 #### Privacy
 

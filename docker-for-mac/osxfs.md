@@ -1,67 +1,54 @@
 ---
-aliases:
-- /mackit/osxfs/
 description: OSXFS
-keywords:
-- mac, osxfs
-menu:
-  main:
-    identifier: mac-osxfs
-    parent: pinata_mac_menu
-    weight: 5
-title: 'File system sharing '
+keywords: mac, osxfs
+redirect_from:
+- /mackit/osxfs/
+title: File system sharing (osxfs)
 ---
 
-# File system sharing (osxfs)
-
-`osxfs` is a new shared file system solution, exclusive to Docker for
-Mac. `osxfs` provides a close-to-native
-user experience for bind mounting OS X file system trees into Docker
-containers. To this end, `osxfs` features a number of unique
-capabilities as well as differences from a classical Linux file system.
+`osxfs` is a new shared file system solution, exclusive to Docker for Mac.
+`osxfs` provides a close-to-native user experience for bind mounting OS X file
+system trees into Docker containers. To this end, `osxfs` features a number of
+unique capabilities as well as differences from a classical Linux file system.
 
 ### Case sensitivity
 
-With Docker for Mac, file systems are shared from OS X into containers
-in the same way as they operate in OS X. As a result, if a file system
-on OS X is case-insensitive that behavior is shared by any bind mount
-from OS X into a container. The default OS X file system is HFS+ and,
-during installation, it is installed as case-insensitive by default. To
-get case-sensitive behavior from your bind mounts, you must either
-create and format a ramdisk or external volume as HFS+ with
-case-sensitivity or reformat your OS root partition with HFS+ with
-case-sensitivity. We do not recommend reformatting your root partition
-as some Mac software dubiously relies on case-insensitivity to function.
+With Docker for Mac, file systems are shared from OS X into containers in the
+same way as they operate in OS X. As a result, if a file system on OS X is
+case-insensitive that behavior is shared by any bind mount from OS X into a
+container. The default OS X file system is HFS+ and, during installation, it is
+installed as case-insensitive by default. To get case-sensitive behavior from
+your bind mounts, you must either create and format a ramdisk or external volume
+as HFS+ with case-sensitivity or reformat your OS root partition with HFS+ with
+case-sensitivity. We do not recommend reformatting your root partition as some
+Mac software dubiously relies on case-insensitivity to function.
 
 
 ### Access control
 
-`osxfs`, and therefore Docker, can access only those file system
-resources that the Docker for Mac user has access to. `osxfs` does
-not run as `root`. If the OS X user is an administrator, `osxfs` inherits
-those administrator privileges. We are still evaluating which privileges
-to drop in the file system process to balance security and
-ease-of-use. `osxfs` performs no additional permissions checks and
-enforces no extra access control on accesses made through it. All
-processes in containers can access the same objects in the same way as
-the Docker user who started the containers.
+`osxfs`, and therefore Docker, can access only those file system resources that
+the Docker for Mac user has access to. `osxfs` does not run as `root`. If the OS
+X user is an administrator, `osxfs` inherits those administrator privileges. We
+are still evaluating which privileges to drop in the file system process to
+balance security and ease-of-use. `osxfs` performs no additional permissions
+checks and enforces no extra access control on accesses made through it. All
+processes in containers can access the same objects in the same way as the
+Docker user who started the containers.
 
 ### Namespaces
 
-Much of the OS X file system that is accessible to the user is also
-available to containers using the `-v` bind mount syntax. By default,
-you can share files in `/Users`, `/Volumes`, `/private`, and `/tmp`
-directly. To add or remove directory trees that are exported to Docker,
-use the **File sharing** tab in Docker preferences <img
-src="../images/whale-x.png"> -> **Preferences** -> **File
-sharing**. (See [Preferences](index.md#preferences).) All other paths
-used in `-v` bind mounts are sourced from the Moby Linux VM running the
-Docker containers, so arguments such as `-v
-/var/run/docker.sock:/var/run/docker.sock` should work as expected. If
-an OS X path is not shared and does not exist in the VM, an attempt to
-bind mount it will fail rather than create it in the VM. Paths that
-already exist in the VM and contain files are reserved by Docker and
-cannot be exported from OS X.
+Much of the OS X file system that is accessible to the user is also available to
+containers using the `-v` bind mount syntax. By default, you can share files in
+`/Users`, `/Volumes`, `/private`, and `/tmp` directly. To add or remove
+directory trees that are exported to Docker, use the **File sharing** tab in
+Docker preferences <img src="../images/whale-x.png"> -> **Preferences** ->
+**File sharing**. (See [Preferences](index.md#preferences).) All other paths
+used in `-v` bind mounts are sourced from the Moby Linux VM running the Docker
+containers, so arguments such as `-v /var/run/docker.sock:/var/run/docker.sock`
+should work as expected. If an OS X path is not shared and does not exist in the
+VM, an attempt to bind mount it will fail rather than create it in the VM. Paths
+that already exist in the VM and contain files are reserved by Docker and cannot
+be exported from OS X.
 
 ### Ownership
 
@@ -82,10 +69,10 @@ it until the extended attribute is readable again.
 
 ### File system events
 
-Most `inotify` events are supported in bind mounts, and likely `dnotify`
-and `fanotify` (though they have not been tested) are also supported.
-This means that file system events from OS X are sent into containers
-and trigger any listening processes there.
+Most `inotify` events are supported in bind mounts, and likely `dnotify` and
+`fanotify` (though they have not been tested) are also supported. This means
+that file system events from OS X are sent into containers and trigger any
+listening processes there.
 
 The following are **supported file system events**:
 
@@ -107,10 +94,8 @@ The following are **unsupported file system events**:
 * Close events
 * Unmount events (see <a href="osxfs.md#mounts">Mounts</a>)
 
-Some events may be delivered multiple times. Events are not delivered for bind mounts from symlinks (notably `/tmp` will not deliver inotify events but
-`/private/tmp` will). These limitations do not apply to events between
-containers, only to those events originating in OS X.
-
+Some events may be delivered multiple times. These limitations do not apply to
+events between containers, only to those events originating in OS X.
 
 ### Mounts
 
@@ -123,17 +108,16 @@ under development.
 
 ### Symlinks
 
-Symlinks are shared unmodified. This may cause issues when symlinks
-contain paths that rely on the default case-insensitivity of the
-default OS X file system, HFS+.
+Symlinks are shared unmodified. This may cause issues when symlinks contain
+paths that rely on the default case-insensitivity of the default OS X file
+system, HFS+.
 
 ### File types
 
-Symlinks, hardlinks, socket files, named pipes, regular files, and
-directories are supported. Socket files and named pipes only transmit
-between containers and between OS X processes -- no transmission across
-the hypervisor is supported, yet. Character and block device files are
-not supported.
+Symlinks, hardlinks, socket files, named pipes, regular files, and directories
+are supported. Socket files and named pipes only transmit between containers and
+between OS X processes -- no transmission across the hypervisor is supported,
+yet. Character and block device files are not supported.
 
 ### Extended attributes
 
@@ -339,4 +323,4 @@ engineering work on custom low-level components.
 We appreciate your understanding as we continue development of the product and
 work on all dimensions of performance. We want to continue to work with the
 community on this, so please continue to report issues as you find them. We look
-forward to collaborting with you on ideas and on the source code itself.
+forward to collaborating with you on ideas and on the source code itself.

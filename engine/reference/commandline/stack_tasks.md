@@ -1,17 +1,12 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/stack_tasks/
 advisory: experimental
 description: The stack tasks command description and usage
 keywords:
 - stack, tasks
-menu:
-  main:
-    parent: smn_cli
-title: stack tasks
+title: docker stack tasks (experimental)
 ---
-
-# stack tasks (experimental)
 
 ```markdown
 Usage:  docker stack tasks [OPTIONS] STACK

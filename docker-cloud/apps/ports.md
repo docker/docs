@@ -1,18 +1,14 @@
 ---
-aliases:
-- /docker-cloud/feature-reference/ports/
 description: Publish and expose service or container ports
-keywords:
-- publish, expose, ports, containers, services
-menu:
-  main:
-    parent: apps
+keywords: publish, expose, ports, containers, services
+redirect_from:
+- /docker-cloud/feature-reference/ports/
 title: Publish and expose service or container ports
 ---
 
-# Publish and expose service or container ports
-
-In Docker Cloud you can **publish** or **expose** ports in services and containers, just like you can in Docker Engine (as documented [here](/reference/run/#expose-incoming-ports) ).
+In Docker Cloud you can **publish** or **expose** ports in services and
+containers, just like you can in Docker Engine (as documented
+[here](/reference/run/#expose-incoming-ports) ).
 
 * **Exposed ports** are ports that a container or service is using either to
 provide a service, or listen on. By default, exposed ports in Docker Cloud are

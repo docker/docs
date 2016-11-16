@@ -1,15 +1,8 @@
 ---
 description: Describes how to set up your local machine and repository
-keywords:
-- 'GitHub account, repository, clone, fork, branch, upstream, Git, Go, make '
-menu:
-  main:
-    parent: smn_engine_contrib
-    weight: 4
+keywords: GitHub account, repository, clone, fork, branch, upstream, Git, Go, make
 title: Configure Git for contributing
 ---
-
-# Configure Git for contributing
 
 Work through this page to configure Git and a repository you'll use throughout
 the Contributor Guide. The work you do further in the guide, depends on the work
@@ -223,9 +216,9 @@ the branch to your fork on GitHub:
    On branch dry-run-test
    Untracked files:
      (use "git add <file>..." to include in what will be committed)
- 
+
        TEST.md
- 
+
    nothing added to commit but untracked files present (use "git add" to track)
    ```
 
