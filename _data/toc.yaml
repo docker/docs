@@ -480,23 +480,23 @@ toc:
     - sectiontitle: API Reference
       section:
       - path: /engine/reference/api/docker_remote_api/
-        title: Remote API
+        title: Engine API
       - path: /engine/reference/api/docker_remote_api_v1.24/
-        title: Remote API v1.24
+        title: Engine API v1.24
       - path: /engine/reference/api/docker_remote_api_v1.23/
-        title: Remote API v1.23
+        title: Engine API v1.23
       - path: /engine/reference/api/docker_remote_api_v1.22/
-        title: Remote API v1.22
+        title: Engine API v1.22
       - path: /engine/reference/api/docker_remote_api_v1.21/
-        title: Remote API v1.21
+        title: Engine API v1.21
       - path: /engine/reference/api/docker_remote_api_v1.20/
-        title: Remote API v1.20
+        title: Engine API v1.20
       - path: /engine/reference/api/docker_remote_api_v1.19/
-        title: Remote API v1.19
+        title: Engine API v1.19
       - path: /engine/reference/api/docker_remote_api_v1.18/
-        title: Remote API v1.18
+        title: Engine API v1.18
       - path: /engine/reference/api/remote_api_client_libraries/
-        title: Remote API client libraries
+        title: Engine API client libraries
   - path: /engine/migration/
     title: Migrate to Engine 1.10
   - path: /engine/breaking_changes/

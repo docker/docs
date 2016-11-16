@@ -157,9 +157,9 @@ Deprecated; Use `--engine-failure-retry` instead of `--engine-refresh-retry "<nu
 
 Use `--heartbeat "<interval>s"` to specify the interval, in seconds, between heartbeats the manager sends to the primary manager. These heartbeats indicate that the manager is healthy and reachable. By default, the interval is 60 seconds.
 
-### `--api-enable-cors`, `--cors` — Enable CORS headers in the remote API
+### `--api-enable-cors`, `--cors` — Enable CORS headers in the Engine API
 
-Use `--api-enable-cors` or `--cors` to enable cross-origin resource sharing (CORS) headers in the remote API.
+Use `--api-enable-cors` or `--cors` to enable cross-origin resource sharing (CORS) headers in the Engine API.
 
 ### `--cluster-driver`, `-c` — Cluster driver to use
 
