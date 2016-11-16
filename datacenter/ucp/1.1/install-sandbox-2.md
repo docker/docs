@@ -169,7 +169,7 @@ UCP allows you to deploy and manage "Dockerized" applications in production. An
 application is built using Docker objects, such as images and containers, and
 Docker resources, such as volumes and networks.
 
-UCP deploys and manages these objects and resources using remote API calls to
+UCP deploys and manages these objects and resources using Engine API calls to
 the Engine daemons running on the nodes. For example, the `run` action may
 deploy an image in a Docker container. That image might define a service such as
 an Nginx web server or a database like Postgres.
