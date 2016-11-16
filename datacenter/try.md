@@ -111,3 +111,4 @@ by UCP.
 * [Create and manage users](ucp/2.0/guides/user-management/create-and-manage-users.md)
 * [Deploy an application](ucp/2.0/guides/applications/index.md)
 * [Push an image to DTR](dtr/2.1/guides/repos-and-images/push-an-image.md)
+* [Considerations for a High Availability Deployment](datacenter/ucp/2.0/guides/high-availability/index.md)
