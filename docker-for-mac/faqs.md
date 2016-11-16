@@ -84,11 +84,11 @@ experiment a multi-node swarm. Check out the tutorial at [Get started with swarm
 
 ### How do I connect to the remote Docker Engine API?
 
-You might need to provide the location of the remote API for Docker clients and development tools.
+You might need to provide the location of the Engine API for Docker clients and development tools.
 
 On Docker for Mac, clients can connect to the Docker Engine through a Unix socket: `unix:///var/run/docker.sock`.
 
-See also [Docker Remote API](/engine/reference/api/docker_remote_api.md) and Docker for Mac forums topic [Using pycharm Docker plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617).
+See also [Docker Engine API](/engine/reference/api/docker_remote_api.md) and Docker for Mac forums topic [Using pycharm Docker plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617).
 
 If you are working with applications like [Apache Maven](https://maven.apache.org/) that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables, specify these to connect to Docker instances through Unix sockets. For example:
 
