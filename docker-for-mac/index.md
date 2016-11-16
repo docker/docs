@@ -216,6 +216,11 @@ There are some limitations on the directories that can be shared:
 
 See [Namespaces](osxfs.md#namespaces) in the topic on [osxfs file system sharing](osxfs.md) for more information.
 
+>**Tip:** File sharing is required for volume mounting if the project lives
+outside of the `/Users` directory. In that case, share the drive where the
+Dockerfile and volume are located. Otherwise, you will get file not found or
+cannot start service errors at runtime. (See also [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+
 #### Privacy
 
 You can set Docker for Mac to auto-send diagnostics, crash reports, and usage data. This information can help Docker improve the application and get more context for troubleshooting problems.
