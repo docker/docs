@@ -108,7 +108,23 @@ This Compose file defines two services, `web` and `redis`. The web service:
 * Mounts the project directory on the host to `/code` inside the container allowing you to modify the code without having to rebuild the image.
 * Links the web service to the Redis service.
 
-The `redis` service uses the latest public [Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker Hub registry.
+The `redis` service uses the latest public
+[Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker
+Hub registry.
+
+>**Tip:** If your project is outside of the `Users` directory (`cd ~`), then you
+need to share the drive or location of the Dockerfile and volume you are using.
+If you get runtime errors indicating an application file is not found, a volume
+mount is denied, or a service cannot start, try enabling file or drive sharing.
+Volume mounting requires shared drives for projects that live outside of
+`C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
+Docker for Windows that uses [Linux
+containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers-beta-feature).
+For more information, see [Shared
+Drives](../docker-for-windows/index.md#shared-drives) on Docker for Windows,
+[File sharing](../docker-for-mac/index.md#file-sharing) on Docker for Mac, and
+the general examples on how to [Manage data in
+containers](../engine/tutorials/dockervolumes.md).
 
 ## Step 4: Build and run your app with Compose
 

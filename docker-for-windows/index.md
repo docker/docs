@@ -321,13 +321,27 @@ Share your local drives (volumes) with Docker for Windows, so that they are avai
 
 ![Shared Drives](images/settings-shared-drives.png)
 
-You will be asked to provide your Windows system username and password (domain user) to apply shared drives. You can select an option to have Docker store the credentials so that you don't have to re-enter them every time.
+You will be asked to provide your Windows system username and password (domain
+user) to apply shared drives. You can select an option to have Docker store the
+credentials so that you don't have to re-enter them every time.
 
-Permissions to access shared drives are tied to the credentials you provide here. If you run `docker` commands and tasks under a different username than the one used here to set up sharing, your containers will not have permissions to access the mounted volumes.
+Permissions to access shared drives are tied to the credentials you provide
+here. If you run `docker` commands and tasks under a different username than the
+one used here to set up sharing, your containers will not have permissions to
+access the mounted volumes.
 
->**Tip:** Shared drives are only required for volume mounting [Linux containers](#switch-between-windows-and-linux-containers-beta-feature), not Windows containers.
+>**Tip:** In general, shared drives are only required for volume mounting [Linux
+containers](#switch-between-windows-and-linux-containers-beta-feature), and not
+for Windows containers. However, if the project lives outside of the `\Users`
+directory, you need to share the drive where the Dockerfile and volume are
+located even if you are using [Windows
+containers](#getting-started-with-windows-containers-beta-feature)). Runtime
+errors such as file not found or cannot start service may indicate shared drives
+are needed. (See also [Volume mounting requires shared drives for Linux containers and for any project directories outside of `C:\Users`](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers-and-for-any-project-directories-outside-of-cusers).)
 
-See also [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes) in Troubleshooting.
+See also [Verify domain user has permissions for shared
+drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)
+in Troubleshooting.
 
 #### Firewall rules for shared drives
 
