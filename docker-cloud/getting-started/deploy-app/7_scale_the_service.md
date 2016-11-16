@@ -1,18 +1,11 @@
 ---
-aliases:
+description: Scale the service
+keywords: scale, Python, service
+redirect_from:
 - /docker-cloud/getting-started/python/7_scale_the_service/
 - /docker-cloud/getting-started/golang/7_scale_the_service/
-description: Scale the service
-keywords:
-- scale, Python, service
-menu:
-  main:
-    parent: deploy-app
-    weight: -30
 title: Scale the service
 ---
-
-# Scale the service
 
 Right now, your service is running on a single container. That's great for now.
 

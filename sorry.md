@@ -1,9 +1,7 @@
 ---
-title: "Sorry, we can't find that page :("
+title: "Sorry, we can't find that page"
 noratings: true
 ---
-
-# Sorry, we can't find that page
 
 <script language="JavaScript">
 function populateTicket()

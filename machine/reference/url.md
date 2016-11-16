@@ -1,14 +1,8 @@
 ---
 description: Get the URL of a host
-keywords:
-- machine, url, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: url
+keywords: machine, url, subcommand
+title: docker-machine url
 ---
-
-# url
 
 Get the URL of a host
 

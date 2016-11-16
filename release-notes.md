@@ -1,14 +1,8 @@
 ---
 description: Release notes for Docker
-keywords:
-- docker, documentation, about, technology, understanding,  release
-menu:
-  main:
-    parent: mn_about
+keywords: docker, documentation, about, technology, understanding,  release
 title: Docker Release Notes
 ---
-
-# Release notes
 
 For information about releases and the features they contain, see the [releases
 feed on the Docker

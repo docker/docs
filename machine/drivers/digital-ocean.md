@@ -1,14 +1,8 @@
 ---
 description: Digital Ocean driver for machine
-keywords:
-- machine, Digital Ocean, driver
-menu:
-  main:
-    parent: smn_machine_drivers
+keywords: machine, Digital Ocean, driver
 title: Digital Ocean
 ---
-
-# Digital Ocean
 
 Create Docker machines on [Digital Ocean](https://www.digitalocean.com/).
 

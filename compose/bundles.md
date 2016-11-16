@@ -1,16 +1,9 @@
 ---
 advisory: experimental
-description: Description of Docker and Compose's experimental support for application
-  bundles
-keywords:
-- documentation, docs,  docker, compose, bundles, stacks
-menu:
-  main:
-    parent: workw_compose
-title: Docker Stacks and Distributed Application Bundles
+description: Description of Docker and Compose's experimental support for application bundles
+keywords: documentation, docs,  docker, compose, bundles, stacks
+title: Docker stacks and distributed application bundles (experimental)
 ---
-
-# Docker Stacks and Distributed Application Bundles (experimental)
 
 > **Note**: This is a copy of the [Docker Stacks and Distributed Application
 > Bundles](https://github.com/docker/docker/blob/v1.12.0-rc4/experimental/docker-stacks-and-bundles.md)

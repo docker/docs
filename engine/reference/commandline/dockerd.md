@@ -1,19 +1,12 @@
 ---
-aliases:
-  - /reference/commandline/dockerd/
-aliases:
+redirect_from:
+- /reference/commandline/dockerd/
 - /engine/reference/commandline/daemon/
 description: The daemon command description and usage
 keywords:
 - container, daemon, runtime
-menu:
-  main:
-    parent: smn_cli
-    weight: -1
 title: dockerd
 ---
-
-# daemon
 
 ```markdown
 Usage: dockerd [OPTIONS]

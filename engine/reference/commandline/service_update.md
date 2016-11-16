@@ -1,18 +1,13 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/service_update/
 description: The service update command description and usage
 keywords:
 - service, update
-menu:
-  main:
-    parent: smn_cli
-title: service update
+title: docker service update
 ---
 
 **Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
-
-# service update
 
 ```Markdown
 Usage:  docker service update [OPTIONS] SERVICE

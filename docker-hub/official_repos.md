@@ -1,19 +1,12 @@
 ---
 description: Guidelines for Official Repositories on Docker Hub
-keywords:
-- Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, official,
-  image, documentation
-menu:
-  main:
-    parent: mn_pubhub
-    weight: 15
-title: Official Repositories on Docker Hub
+keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, official,image, documentation
+title: Official repositories on Docker Hub
 ---
 
-# Official Repositories on Docker Hub
-
 The Docker [Official Repositories](https://hub.docker.com/official/) are a
-curated set of Docker repositories that are promoted on Docker Hub. They are designed to:
+curated set of Docker repositories that are promoted on Docker Hub. They are
+designed to:
 
 * Provide essential base OS repositories (for example,
   [ubuntu](https://hub.docker.com/_/ubuntu/),
@@ -72,7 +65,8 @@ these efforts.
 
 ## How do I know the Official Repositories are secure?
 
-Docker provides a preview version of Docker Cloud's [Security Scanning service](/docker-cloud/builds/image-scan/) for all of the
+Docker provides a preview version of Docker Cloud's
+[Security Scanning service](/docker-cloud/builds/image-scan/) for all of the
 Official Repositories located on Docker Hub. These security scan results provide
 valuable information about which images contain security vulnerabilities, which
 you should use to help you choose secure components for your own projects.

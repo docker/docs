@@ -1,15 +1,8 @@
 ---
 description: Create a Swarm node.
-keywords:
-- swarm, create, join
-menu:
-  main:
-    identifier: swarm.join
-    parent: smn_swarm_subcmds
-title: join
+keywords: swarm, create, join
+title: join — Create a Swarm node
 ---
-
-# join — Create a Swarm node
 
 Prerequisite: Before using `join`, establish a discovery backend as described in [this discovery topic](../discovery.md).
 

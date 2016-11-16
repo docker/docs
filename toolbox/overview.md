@@ -1,15 +1,8 @@
 ---
 description: Documentation that provides an overview of Toolbox
-keywords:
-- docker, documentation, about, technology, kitematic, gui, toolbox
-menu:
-  main:
-    parent: workw_toolbox
-    weight: -10
-title: Toolbox Overview
+keywords: docker, documentation, about, technology, kitematic, gui, toolbox
+title: Docker Toolbox Overview
 ---
-
-# Docker Toolbox Overview
 
 Docker Toolbox is an installer for quick setup and launch of a Docker environment on older Mac and Windows systems that do not meet the requirements of the new [Docker for Mac](/docker-for-mac/index.md) and [Docker for Windows](/docker-for-windows/index.md) apps.
 

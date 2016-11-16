@@ -8,15 +8,8 @@ keywords:
 - node
 - tls
 - pki
-menu:
-  main:
-    identifier: how-pki-work
-    parent: how-swarm-works
-    weight: "5"
-title: How PKI works
+title: How PKI works in swarm mode
 ---
-
-# How PKI works in swarm mode
 
 The swarm mode public key infrastructure (PKI) system built into Docker Engine
 makes it simple to securely deploy a container orchestration system. The nodes

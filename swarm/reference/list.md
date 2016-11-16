@@ -1,15 +1,8 @@
 ---
 description: List the nodes in a cluster.
-keywords:
-- swarm, list
-menu:
-  main:
-    identifier: swarm.list
-    parent: smn_swarm_subcmds
-title: list
+keywords: swarm, list
+title: list — List the nodes in a cluster
 ---
-
-# list — List the nodes in a cluster
 
 Use `list` to display a list of the nodes in a cluster.
 

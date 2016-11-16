@@ -1,16 +1,8 @@
 ---
 description: Drain nodes on the swarm
-keywords:
-- tutorial, cluster management, swarm, service, drain
-menu:
-  main:
-    identifier: swarm-tutorial-drain-node
-    parent: swarm-tutorial
-    weight: 21
-title: Drain a node
+keywords: tutorial, cluster management, swarm, service, drain
+title: Drain a node on the swarm
 ---
-
-# Drain a node on the swarm
 
 In earlier steps of the tutorial, all the nodes have been running with `ACTIVE`
 availability. The swarm manager can assign tasks to any `ACTIVE` node, so up to

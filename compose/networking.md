@@ -1,15 +1,8 @@
 ---
 description: How Compose sets up networking between containers
-keywords:
-- documentation, docs,  docker, compose, orchestration, containers, networking
-menu:
-  main:
-    parent: workw_compose
-    weight: 21
+keywords: documentation, docs, docker, compose, orchestration, containers, networking
 title: Networking in Compose
 ---
-
-# Networking in Compose
 
 > **Note:** This document only applies if you're using [version 2 of the Compose file format](compose-file.md#versioning). Networking features are not supported for version 1 (legacy) Compose files.
 

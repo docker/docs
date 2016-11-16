@@ -1,16 +1,8 @@
 ---
 description: Introduction and Overview of Machine
-keywords:
-- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer,
-  virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
-menu:
-  main:
-    parent: workw_machine
-    weight: -90
-title: Machine Overview
+keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
+title: Docker Machine Overview
 ---
-
-# Docker Machine Overview
 
 You can use Docker Machine to:
 

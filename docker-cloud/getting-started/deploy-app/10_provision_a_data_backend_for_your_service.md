@@ -1,18 +1,11 @@
 ---
-aliases:
+description: Provision a data backend for the service
+keywords: provision, Python, service
+redirect_from:
 - /docker-cloud/getting-started/python/10_provision_a_data_backend_for_your_service/
 - /docker-cloud/getting-started/golang/10_provision_a_data_backend_for_your_service/
-description: Provision a data backend for the service
-keywords:
-- provision, Python, service
-menu:
-  main:
-    parent: deploy-app
-    weight: -9
-title: Provision a data backend for the service
+title: Provision a data backend for your service
 ---
-
-# Provision a data backend for a Python service
 
 Docker Cloud offers a large number of data stores in the *Jumpstart* library, including Redis, MongoDB, PostgreSQL, and MySQL.
 

@@ -1,16 +1,11 @@
 ---
-aliases:
+redirect_from:
   - /reference/commandline/unpause/
 description: The unpause command description and usage
 keywords:
 - cgroups, suspend, container
-menu:
-  main:
-    parent: smn_cli
-title: unpause
+title: docker unpause
 ---
-
-# unpause
 
 ```markdown
 Usage:  docker unpause CONTAINER [CONTAINER...]

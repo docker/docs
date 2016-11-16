@@ -1,18 +1,11 @@
 ---
-aliases:
+description: Swarm API
+keywords: docker, swarm, clustering,  api
+redirect_from:
 - /api/swarm-api/
 - /swarm/api/
-description: Swarm API
-keywords:
-- docker, swarm, clustering,  api
-menu:
-  main:
-    parent: workw_swarm
-    weight: 99
 title: Docker Swarm API
 ---
-
-# Docker Swarm API
 
 The Docker Swarm API is mostly compatible with the [Docker Remote
 API](/engine/reference/api/docker_remote_api/). This

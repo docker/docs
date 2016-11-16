@@ -1,14 +1,8 @@
 ---
 description: Show client configuration
-keywords:
-- machine, ip, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: ip
+keywords: machine, ip, subcommand
+title: docker-machine ip
 ---
-
-# ip
 
 Get the IP address of one or more machines.
 

@@ -1,14 +1,8 @@
 ---
 description: Learn how to optimize your use of AUFS driver.
-keywords:
-- 'container, storage, driver, AUFS '
-menu:
-  main:
-    parent: engine_driver
-title: AUFS storage driver in practice
+keywords: 'container, storage, driver, AUFS '
+title: Docker and AUFS in practice
 ---
-
-# Docker and AUFS in practice
 
 AUFS was the first storage driver in use with Docker. As a result, it has a
 long and close history with Docker, is very stable, has a lot of real-world
@@ -93,12 +87,12 @@ of the image's read-only layers the file exists in.
 
 ## Renaming directories with the AUFS storage driver
 
-Calling `rename(2)` for a directory is not fully supported on AUFS. It returns 
-`EXDEV` ("cross-device link not permitted"), even when both of the source and 
-the destination path are on a same AUFS layer, unless the directory has no 
+Calling `rename(2)` for a directory is not fully supported on AUFS. It returns
+`EXDEV` ("cross-device link not permitted"), even when both of the source and
+the destination path are on a same AUFS layer, unless the directory has no
 children.
 
-So your application has to be designed so that it can handle `EXDEV` and fall 
+So your application has to be designed so that it can handle `EXDEV` and fall
 back to a "copy and unlink" strategy.
 
 ## Configure Docker with AUFS
@@ -216,7 +210,7 @@ layer. These latencies increase and are compounded when these files exist below
  many image layers and the files themselves are large.
 
 One final point. Data volumes provide the best and most predictable
-performance. This is because they bypass the storage driver and do not incur 
+performance. This is because they bypass the storage driver and do not incur
 any of the potential overheads introduced by thin provisioning and
 copy-on-write. For this reason, you may want to place heavy write workloads on
 data volumes.
@@ -225,7 +219,7 @@ data volumes.
 
 To summarize the AUFS's aspect which is incompatible with other filesystems:
 
-- The AUFS does not fully support the `rename(2)` system call. Your application 
+- The AUFS does not fully support the `rename(2)` system call. Your application
 needs to detect its failure and fall back to a "copy and unlink" strategy.
 
 ## Related information

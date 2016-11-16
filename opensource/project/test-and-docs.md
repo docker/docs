@@ -1,15 +1,8 @@
 ---
 description: Describes Docker's testing infrastructure
-keywords:
-- make test, make docs, Go tests, gofmt, contributing,  running tests
-menu:
-  main:
-    parent: smn_engine_contrib
-    weight: 6
+keywords: make test, make docs, Go tests, gofmt, contributing,  running tests
 title: Run tests and test documentation
 ---
-
-# Run tests and test documentation
 
 Contributing includes testing your changes. If you change the Docker code, you
 may need to add a new test or modify an existing one. Your contribution could

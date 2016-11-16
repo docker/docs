@@ -1,16 +1,8 @@
 ---
 description: Using Docker Machine to provision hosts on cloud providers
-keywords:
-- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer,
-  virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
-menu:
-  main:
-    parent: workw_machine
-    weight: -60
-title: Provision hosts in the cloud
+keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
+title: Use Docker Machine to provision hosts on cloud providers
 ---
-
-# Use Docker Machine to provision hosts on cloud providers
 
 Docker Machine driver plugins are available for many cloud platforms, so you can use Machine to provision cloud hosts. When you use Docker Machine for provisioning, you create cloud hosts with Docker Engine installed on them.
 

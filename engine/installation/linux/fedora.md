@@ -1,17 +1,10 @@
 ---
-aliases:
-- /engine/installation/fedora/
 description: Instructions for installing Docker on Fedora.
-keywords:
-- Docker, Docker documentation, Fedora, requirements,  linux
-menu:
-  main:
-    parent: engine_linux
-    weight: -3
-title: Installation on Fedora
+keywords: Docker, Docker documentation, Fedora, requirements,  linux
+redirect_from:
+- /engine/installation/fedora/
+title: Install Docker on Fedora
 ---
-
-# Fedora
 
 Docker is supported on Fedora version 22, 23, and 24. These instructions install
 Docker using release packages and installation mechanisms managed by Docker, to

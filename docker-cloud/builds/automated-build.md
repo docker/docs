@@ -1,17 +1,10 @@
 ---
-aliases:
-- /docker-cloud/feature-reference/automated-build/
 description: Automated builds
-keywords:
-- automated, build, images
-menu:
-  main:
-    parent: builds
-    weight: -50
+keywords: automated, build, images
+redirect_from:
+- /docker-cloud/feature-reference/automated-build/
 title: Automated builds
 ---
-
-# Automated builds
 
 > **Note**: Docker Cloud's Build functionality is in BETA.
 
@@ -23,7 +16,7 @@ When you set up automated builds (also called autobuilds), you create a list of
 branches and tags of the images that you want to build. When you push code to a
 source code branch (for example in Github) for one of those listed image tags,
 the push uses a webhook to trigger a new build, which produces a Docker image.
-The built image is then pushed to the Docker Cloud registry or  external
+The built image is then pushed to the Docker Cloud registry or to an external
 registry.
 
 If you have automated tests configured, these run after building but before
@@ -33,6 +26,8 @@ their own. [Learn more about automated image testing here.](automated-testing.md
 
 You can also just use `docker push` to push pre-built images to these
 repositories, even if you have automatic builds set up.
+
+![An automated build dashboard](images/build-dashboard.png)
 
 ## Configure automated build settings
 
@@ -55,8 +50,9 @@ the code repository service where the image's source code is stored.
 
 4. Select the **source repository** to build the Docker images from.
 
-    You might need to specify an organization or user from the source code
-    provider to find the code repository you want to build.
+    You might need to specify an organization or user (the _namespace_) from the
+    source code provider. Once you select a namespace, its source code
+    repositories appear in the **Select repository** dropdown list.
 
 5. Choose where to run your build processes.
 
@@ -80,15 +76,17 @@ the code repository service where the image's source code is stored.
 
     * Enter the name of the **Source** branch or tag you want to build.
 
-        You can enter a name, or use a regex to match which source branch or tag
-        names to build. To learn more, see
-        [regexes](automated-build.md#regexes-and-automated-builds).
+      The first time you configure automated builds, a default tag mapping is set up for you. This default set builds from the `Branch` in your source code called `master`, and creates a Docker image tagged with `latest`.
+
+      You can also use a regex to select which source branches or tags to build.
+      To learn more, see
+      [regexes](automated-build.md#regexes-and-automated-builds).
 
     * Enter the tag to apply to Docker images built from this source.
 
-        If you configured a regex to select the source, you can reference the
-        capture groups and use its result as part of the tag. To learn more, see
-        [regexes](automated-build.md#regexes-and-automated-builds).
+      If you configured a regex to select the source, you can reference the
+      capture groups and use its result as part of the tag. To learn more, see
+      [regexes](automated-build.md#regexes-and-automated-builds).
 
     * Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
 
@@ -96,9 +94,13 @@ the code repository service where the image's source code is stored.
 
     Only branches or tags with autobuild enabled are built, tested, *and* have
     the resulting image pushed to the repository. Branches with autobuild
-    disabled will be built for testing purposes if enabled, but not pushed.
+    disabled will be built for test purposes (if enabled at the repository level), but not pushed.
 
-10. Click **Save** to save the settings, or click **Save and build** to save and
+10. For each branch or tag, enable or disable the **Build Caching** toggle.
+
+    [Build caching](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#/build-cache) can save time if you are building a large image frequently or have many dependencies. You might want to leave build caching disabled to make sure all of your dependencies are resolved at build time, or if you have a large layer that is quicker to build locally.
+
+11. Click **Save** to save the settings, or click **Save and build** to save and
 run an initial test.
 
     A webhook is automatically added to your source code repository to notify
@@ -125,12 +127,10 @@ values used by your service (for example to create service links).
 
 ## Check your active builds
 
-1. To view active builds, go to the repository view and click **Timeline**.
+You can view a summary of the last five builds for a repository from the repository's **General** tab.  You can also click **Timeline** to view a list of all active builds, and expand each build to see their real-time logs. The **Builds** tab also displays a color coded bar chart of the build queue times and durations.
 
-    The Timeline displays the pending, in progress, successful and failed builds
-    for any tag of the repository.
-
-2. Click to expand a timeline entry to check the build logs.
+Both views display the pending, in progress, successful, and failed builds
+for any tag of the repository.
 
 You can click the **Cancel** button for pending builds and builds in progress.
 If a build fails, the cancel button is replaced by a **Retry** button.
@@ -159,7 +159,61 @@ to automatically build.
 
 5. Click **Save** to save your changes.
 
-## Regexes and automated builds
+## Advanced automated build options
+
+At the minimum you need a build rule composed of a source branch (or tag) and
+destination Docker tag to set up an automated build. You can also change where
+the build looks for the Dockerfile, set a path to the files the build will use
+(the build context), set up multiple static tags or branches to build from, and
+use regular expressions (regexes) to dynamically select source code to build and
+create dynamic tags.
+
+All of these options are available from the **Build configuration** screen for
+each repository. Click **Repositories** from the left navigation, click the name
+of the repository you want to edit, click the **Builds** tab, and click
+**Configure Automated builds**.
+
+### Tag and Branch builds
+
+You can configure your automated builds so that pushes to specific branches or tags will trigger a build.
+
+1. In the **Tag mappings** section, click the plus sign to add more sources to build.
+
+2.  Select the **Source type** to build: either a **tag** or a **branch**.
+
+    This tells the build system what type of source to look for in the code
+    repository.
+
+3. Enter the name of the **Source** branch or tag you want to build.
+
+    You can enter a name, or use a regex to match which source branch or tag
+    names to build. To learn more, see
+    [regexes](automated-build.md#regexes-and-automated-builds).
+
+4. Enter the tag to apply to Docker images built from this source.
+
+    If you configured a regex to select the source, you can reference the
+    capture groups and use its result as part of the tag. To learn more, see
+    [regexes](automated-build.md#regexes-and-automated-builds).
+
+5. Repeat steps 2 through 4 for each new tag mapping you set up.
+
+### Set the build context and Dockerfile location
+
+Depending on how the files are arranged in your source code repository, the
+files required to build your images may not be at the repository root. If that's
+the case, you can specify a path where the build looks for the files.
+
+The _build context_ is the path to the files needed for the build, relative to the root of the repository. Enter the path to these files in the **Build context** field. Enter `/` to set the build context as the root of the source code repository.
+
+> **Note**: If you delete the default path `/` from the **Build context** field and leave it blank, the build system uses the path to the Dockerfile as the build context. However, to avoid confusion we recommend that you specify the complete path.
+
+You can specify the **Dockerfile location** as a path relative to the build
+context. If the Dockerfile is at the root of the build context path, leave the
+Dockerfile path set to `/`. (If the build context field is blank, set the path
+to the Dockerfile from the root of the source repository.)
+
+### Regexes and automated builds
 
 You can specify a regular expression (regex) so that only matching branches or
 tags are built. You can also use the results of the regex to create the Docker
@@ -181,7 +235,7 @@ To do this, specify a `branch` build with the regex `/[0-9.]+$/` in the
 **Source** field, and use the formula `version-{sourceref}` in the **Docker
 tag** field.
 
-<!-- Not a priority
+<!-- Capture groups Not a priority
 #### Regex example: build from version number branch and tag with version number
 
 You could also use capture groups to build and label images that come from various sources. For example, you might have
@@ -203,7 +257,8 @@ To work around this, you can set up your automated build using the `SSH_PRIVATE`
 
 1. Generate a SSH keypair that you will use for builds only, and add the public key to your source code provider account.
 
-    This step is optional, but allows you to revoke the build-only keypair without removing other access. <!-- (TODO: Link to instructions for GH & BB ) -->
+    This step is optional, but allows you to revoke the build-only keypair without removing other access.
+
 2. Copy the private half of the keypair to your clipboard.
 3. In Docker Cloud, navigate to the build page for the repository that has linked private submodules. (If necessary, follow the steps [here](automated-build.md#configure-automated-build-settings) to configure the automated build.)
 4. At the bottom of the screen, click the plus sign ( **+** ) next to **Build Environment variables**.

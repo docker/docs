@@ -1,16 +1,10 @@
 ---
-aliases:
-- /docker-cloud/faq/cloud-on-aws-faq/
 description: Docker Cloud on AWS
-keywords:
-- Cloud, AWS, faq
-menu:
-  main:
-    parent: infrastructure
-title: Using Docker Cloud on AWS
+keywords: Cloud, AWS, faq
+redirect_from:
+- /docker-cloud/faq/cloud-on-aws-faq/
+title: Use Docker Cloud on AWS
 ---
-
-# Using Docker Cloud on AWS
 
 This section answers frequently asked questions about using Docker Cloud with Amazon Web Services (AWS).
 

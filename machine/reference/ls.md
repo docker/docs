@@ -1,14 +1,8 @@
 ---
 description: List machines
-keywords:
-- machine, ls, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: ls
+keywords: machine, ls, subcommand
+title: docker-machine ls
 ---
-
-# ls
 
 ```none
 Usage: docker-machine ls [OPTIONS] [arg...]
@@ -103,16 +97,20 @@ The following example uses a template without headers and outputs the `Name` and
 for all running machines:
 
 ```none
+{% raw %}
 $ docker-machine ls --format "{{.Name}}: {{.DriverName}}"
 default: virtualbox
 ec2: amazonec2
+{% endraw %}
 ```
 
 To list all machine names with their driver in a table format you can use:
 
 ```none
+{% raw %}
 $ docker-machine ls --format "table {{.Name}} {{.DriverName}}"
 NAME     DRIVER
 default  virtualbox
 ec2      amazonec2
+{% endraw %}
 ```

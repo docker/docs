@@ -1,17 +1,11 @@
 ---
-aliases:
+description: How to manage data inside your Docker containers.
+keywords: Examples, Usage, volume, docker, documentation, user guide, data,  volumes
+redirect_from:
 - /engine/userguide/containers/dockervolumes/
 - /engine/userguide/dockervolumes/
-description: How to manage data inside your Docker containers.
-keywords:
-- Examples, Usage, volume, docker, documentation, user guide, data,  volumes
-menu:
-  main:
-    parent: engine_learn_menu
 title: Manage data in containers
 ---
-
-# Manage data in containers
 
 So far you've been introduced to some [basic Docker
 concepts](usingdocker.md), seen how to work with [Docker

@@ -1,11 +1,8 @@
 ---
 description: CLI and log output formatting reference
-keywords:
-- format, formatting, output, templates, log
+keywords: format, formatting, output, templates, log
 title: Format command and log output
 ---
-
-# Formatting reference
 
 Docker uses [Go templates](https://golang.org/pkg/text/template/) to allow users manipulate the output format
 of certain commands and log drivers. Each command a driver provides a detailed

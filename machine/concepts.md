@@ -1,17 +1,8 @@
 ---
-description: Understand concepts for Docker Machine, including drivers, base OS, IP
-  addresses, environment variables
-keywords:
-- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer,
-  virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
-menu:
-  main:
-    parent: workw_machine
-    weight: -40
-title: Machine concepts and help
+description: Understand concepts for Docker Machine, including drivers, base OS, IP addresses, environment variables
+keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
+title: Machine concepts and getting help
 ---
-
-# Understand Machine concepts and get help
 
 Docker Machine allows you to provision Docker machines in a variety of environments, including virtual machines that reside on your local system, on cloud providers, or on bare metal servers (physical computers). Docker Machine creates a Docker host, and you use the Docker Engine client as needed to build images and create containers on the host.
 

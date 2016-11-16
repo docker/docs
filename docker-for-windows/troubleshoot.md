@@ -1,28 +1,30 @@
 ---
-aliases:
-- /windows/troubleshoot/
 description: Troubleshooting, logs, and known issues
-keywords:
-- windows, troubleshooting, logs, issues
-menu:
-  main:
-    identifier: docker-windows-troubleshoot
-    parent: pinata_win_menu
-    weight: 3
-title: Logs and Troubleshooting
+keywords: windows, troubleshooting, logs, issues
+redirect_from:
+- /windows/troubleshoot/
+title: Logs and troubleshooting
 ---
 
-#  Logs and Troubleshooting
-
-Here is information about how to diagnose and troubleshoot problems, send logs and communicate with the Docker for Windows team, use our forums and Knowledge Hub, browse and log issues on GitHub, and find workarounds for known problems.
+Here is information about how to diagnose and troubleshoot problems, send logs
+and communicate with the Docker for Windows team, use our forums and Knowledge
+Hub, browse and log issues on GitHub, and find workarounds for known problems.
 
 ## Docker Knowledge Hub
 
-**Looking for help with Docker for Windows?** Check out the [Docker Knowledge Hub](http://success.docker.com/) for knowledge base articles, FAQs, and technical support for various subscription levels.
+**Looking for help with Docker for Windows?** Check out the [Docker Knowledge
+**Hub](http://success.docker.com/) for knowledge base articles, FAQs, and
+**technical support for various subscription levels.
 
 ## Submitting diagnostics, feedback, and GitHub issues
 
-If you encounter problems for which you do not find solutions in this documentation, on [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues), or the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data. See [Diagnose and Feedback](index.md#diagnose-and-feedback) to learn about diagnostics and how to create new issues on GitHub.
+If you encounter problems for which you do not find solutions in this
+documentation, on [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues), or the [Docker for Windows
+forum](https://forums.docker.com/c/docker-for-windows), we can help you
+troubleshoot the log data. See [Diagnose and
+Feedback](index.md#diagnose-and-feedback) to learn about diagnostics and how to
+create new issues on GitHub.
 
 ## Checking the Logs
 
@@ -30,32 +32,63 @@ In addition to using the diagnose and feedback option to submit logs, you can br
 
 ### Use the systray menu to view logs
 
-To view Docker for Windows latest log, click on the `Diagnose & Feedback` menu entry in the systray and then on the `Log file` link. You can see the full history of logs in your `AppData\Local` folder.
+To view Docker for Windows latest log, click on the `Diagnose & Feedback` menu
+entry in the systray and then on the `Log file` link. You can see the full
+history of logs in your `AppData\Local` folder.
 
 ### Use the systray menu to report and issue
 
-If you encounter an issue and the suggested troubleshoot procedures outlined below don't fix it you can generate a diagnostics report. Click on the `Diagnose & Feedback` menu entry in the systray and then on the `Upload diagnostic...` link. This will upload diagnostics to our server and provide you with a unique ID you can use in email or the forum to reference the upload.
+If you encounter an issue and the suggested troubleshoot procedures outlined
+below don't fix it you can generate a diagnostics report. Click on the `Diagnose &
+Feedback` menu entry in the systray and then on the `Upload diagnostic...` link.
+This will upload diagnostics to our server and provide you with a unique ID you
+can use in email or the forum to reference the upload.
 
 ## Troubleshooting
 
 ### inotify on shared drives does not work
 
-Currently, `inotify` does not work on Docker for Windows. This will become evident, for example, when when an application needs to read/write to a container across a mounted drive. This is a known issue that the team is working on. Below is a temporary workaround, and a link to the issue.
+Currently, `inotify` does not work on Docker for Windows. This will become
+evident, for example, when when an application needs to read/write to a
+container across a mounted drive. This is a known issue that the team is working
+on. Below is a temporary workaround, and a link to the issue.
 
-* **Workaround for nodemon and Node.js** - If you are using [nodemon](https://github.com/remy/nodemon) with  `Node.js`, try the fallback polling mode described here: [nodemon isn't restarting node applications](https://github.com/remy/nodemon#application-isnt-restarting)
+* **Workaround for nodemon and Node.js** - If you are using [nodemon](https://github.com/remy/nodemon) with  `Node.js`, try the fallback
+polling mode described here: [nodemon isn't restarting node
+applications](https://github.com/remy/nodemon#application-isnt-restarting)
 
 * **Docker for Windows issue on GitHub** - See the issue [Inotify on shared drives does not work](https://github.com/docker/for-win/issues/56#issuecomment-242135705)
 
+### Volume mounting requires shared drives for Linux containers and for any project directories outside of `C:\Users`
+
+If you are using mounted volumes and get runtime errors indicating an
+application file is not found, a volume mount is denied, or a service cannot
+start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might
+need to enable [shared drives](index.md#shared-drives).
+
+Volume mounting requires shared drives for Windows containers, but also for
+Linux containers if the project lives outside of the `C:\Users` directory. Go to
+<img src="images/whale-x.png"> --> **Settings** --> **Shared Drives** and share
+the drive that contains the Dockerfile and volume.
 
 ### Verify domain user has permissions for shared drives (volumes)
 
->**Tip:** Shared drives are only required for volume mounting [Linux containers](index.md#switch-between-windows-and-linux-containers-beta-feature), not Windows containers.
+>**Tip:** Shared drives are only required for volume mounting [Linux
+containers](index.md#switch-between-windows-and-linux-containers-beta-feature),
+not Windows containers.
 
-Permissions to access shared drives are tied to the username and password you use to set up shared drives. (See [Shared Drives](index.md#shared-drives).) If you run `docker` commands and tasks under a different username than the one used to set up shared drives, your containers will not have permissions to access the mounted volumes. The volumes will show as empty.
+Permissions to access shared drives are tied to the username and password you
+use to set up shared drives. (See [Shared Drives](index.md#shared-drives).) If
+you run `docker` commands and tasks under a different username than the one used
+to set up shared drives, your containers will not have permissions to access the
+mounted volumes. The volumes will show as empty.
 
-The solution to this is to switch to the domain user account and reset credentials on shared drives.
+The solution to this is to switch to the domain user account and reset
+credentials on shared drives.
 
-Here is an example of how to de-bug this problem, given a scenario where you shared the `C` drive as a local user instead of as the domain user. Assume the local user is `samstevens` and the domain user is `merlin`.
+Here is an example of how to de-bug this problem, given a scenario where you
+shared the `C` drive as a local user instead of as the domain user. Assume the
+local user is `samstevens` and the domain user is `merlin`.
 
 1. Make sure you are logged in as the Windows domain user (for our example, `merlin`).
 

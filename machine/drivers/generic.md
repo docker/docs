@@ -1,14 +1,8 @@
 ---
 description: Generic driver for machine
-keywords:
-- machine, Generic, driver
-menu:
-  main:
-    parent: smn_machine_drivers
+keywords: machine, Generic, driver
 title: Generic
 ---
-
-# Generic
 
 Create machines using an existing VM/Host with SSH.
 

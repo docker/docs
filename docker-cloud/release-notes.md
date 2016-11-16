@@ -1,15 +1,8 @@
 ---
 description: Docker Cloud
-keywords:
-- Docker, cloud, release, notes
-menu:
-  main:
-    parent: docker-cloud
-    weight: 100
-title: Release Notes
+keywords: Docker, cloud, release, notes
+title: Docker Cloud release notes
 ---
-
-# Docker Cloud Release Notes
 
 Did you know we also have a [Release notes category](https://forums.docker.com/c/docker-cloud/release-notes) on the Docker Cloud Product forums? Now you do!
 

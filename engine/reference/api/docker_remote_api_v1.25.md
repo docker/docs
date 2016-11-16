@@ -1,18 +1,12 @@
 ---
-aliases:
+redirect_from:
   - /reference/api/docker_remote_api_v1.25/
 description: API Documentation for Docker
 published: false
 keywords:
 - API, Docker, rcli, REST,  documentation
-menu:
-  main:
-    parent: engine_remoteapi
-    weight: -6
-title: Remote API v1.25
+title: Docker Remote API v1.25
 ---
-
-# Docker Remote API v1.25
 
 # 1. Brief introduction
 

@@ -1,15 +1,8 @@
 ---
 description: Kill (abruptly force stop) a machine.
-keywords:
-- machine, kill, subcommand
-menu:
-  main:
-    identifier: machine.kill
-    parent: smn_machine_subcmds
-title: kill
+keywords: machine, kill, subcommand
+title: docker-machine kill
 ---
-
-# kill
 
 ```none
 Usage: docker-machine kill [arg...]

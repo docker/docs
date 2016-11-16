@@ -1,20 +1,11 @@
 ---
-aliases:
+description: How to work with Docker images.
+keywords: documentation, docs, the docker guide, docker guide, docker, docker platform, docker.io, Docker images, Docker image, image management, Docker repos, Docker repositories, docker, docker tag, docker tags, Docker Hub, collaboration
+redirect_from:
 - /engine/userguide/containers/dockerimages/
 - /engine/userguide/dockerimages/
-description: How to work with Docker images.
-keywords:
-- documentation, docs, the docker guide, docker guide, docker, docker platform, docker.io,
-  Docker images, Docker image, image management, Docker repos, Docker repositories,
-  docker, docker tag, docker tags, Docker Hub,  collaboration
-menu:
-  main:
-    parent: engine_learn_menu
-    weight: -4
 title: Build your own images
 ---
-
-# Build your own images
 
 Docker images are the basis of containers. Each time you've used `docker run`
 you told it which image you wanted. In the previous sections of the guide you
@@ -54,7 +45,7 @@ launched a container using that image. When you list images, you get three cruci
 
 > **Tip:**
 > You can use [a third-party dockviz tool](https://github.com/justone/dockviz)
-> or the [Image layers site](https://imagelayers.io/) to display  
+> or the [Image layers site](https://imagelayers.io/) to display
 > visualizations of image data.
 
 A repository potentially holds multiple variants of an image. In the case of
