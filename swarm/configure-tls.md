@@ -327,28 +327,37 @@ listen on TCP port 2376, and only accept connections using TLS.
 
 On `node1` and `node2` (your Swarm nodes), do the following:
 
-1.  Open a terminal on `node1` and elevate to root.
+1.  Open a terminal on `node1`.
 
+2.  Create or edit Docker daemon configuration file, which defaults to
+    `/etc/docker/daemon.json`. If you start Docker with the `--config-file` flag,
+    edit that file instead.
+
+    ```bash
+    sudo nano /etc/docker/daemon.json
     ```
-    $ sudo su
+
+3.  Add the following options. Unless you are starting from an empty file, you
+    do not need to add the braces to the beginning and ending of the file.
+    ```json
+    {
+      "hosts": ["tcp://0.0.0.0:2376"],
+      "tlsverify": "true",
+      "tlscacert": "/home/ubuntu/.certs/ca.pem",
+      "tlscert": "/home/ubuntu/.certs/cert.pem",
+      "tlskey": "/home/ubuntu/.certs/key.pem"
+    }
     ```
 
-2. Edit Docker Engine configuration file.
+    Save and close the file.
 
-    If you are following along with these instructions and using Ubuntu 14.04
-    LTS, the configuration file is `/etc/default/docker`. The Docker Engine
-    configuration file may be different depending on the Linux distribution you
-    are using.
+4.  Restart the Docker Engine daemon.
 
-3. Add the following options to the `DOCKER_OPTS` line.
+    ```bash
+    $ sudo service docker restart
+    ```
 
-         -H tcp://0.0.0.0:2376 --tlsverify --tlscacert=/home/ubuntu/.certs/ca.pem --tlscert=/home/ubuntu/.certs/cert.pem --tlskey=/home/ubuntu/.certs/key.pem
-
-2. Restart the Docker Engine daemon.
-
-         $ service docker restart
-
-3. Repeat the procedure on `node2` as well.
+Repeat the procedure on `node2` as well.
 
 
 ## Step 6: Create a Swarm cluster

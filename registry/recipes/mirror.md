@@ -91,6 +91,15 @@ For example, if your mirror is serving on `http://10.0.0.2:5000`, you would run:
 
     docker --registry-mirror=https://10.0.0.2:5000 daemon
 
-> NOTE: Depending on your local host setup, you may be able to add the
-`--registry-mirror` option to the `DOCKER_OPTS` variable in
-`/etc/default/docker`.
+To add the registry mirror to the Docker daemon's start-up options, add the
+key to the `/etc/docker/daemon.json` configuration file:
+```json
+{
+  "registry-servers": ["http://10.0.0.2:5000"]
+}
+```
+
+Restart Docker for the changes to take effect.
+
+For more information about configuring the Docker daemon, refer to
+[Daemon configuration file](../reference/commandline/dockerd.md#daemon-configuration-file).

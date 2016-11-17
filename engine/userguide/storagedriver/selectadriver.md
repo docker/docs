@@ -81,41 +81,44 @@ backing file system:
 > filesystem.
 
 You can set the storage driver by passing the `--storage-driver=<name>` option
-to the `dockerd` command line, or by setting the option on the
-`DOCKER_OPTS` line in the `/etc/default/docker` file.
+to the `dockerd` command line, or by setting the option in the
+`/etc/docker/daemon.json` configuration file. See the
+[Daemon configuration file reference](../reference/commandline/dockerd.md#daemon-configuration-file).
 
-The following command shows how to start the Docker daemon with the
-`devicemapper` storage driver using the `dockerd` command:
+The following command starts the Docker daemon with the `devicemapper` storage
+driver:
 
-    $ dockerd --storage-driver=devicemapper &
+```bash
+$ dockerd --storage-driver=devicemapper &
 
-    $ docker info
+$ docker info
 
-    Containers: 0
-    Images: 0
-    Storage Driver: devicemapper
-     Pool Name: docker-252:0-147544-pool
-     Pool Blocksize: 65.54 kB
-     Backing Filesystem: extfs
-     Data file: /dev/loop0
-     Metadata file: /dev/loop1
-     Data Space Used: 1.821 GB
-     Data Space Total: 107.4 GB
-     Data Space Available: 3.174 GB
-     Metadata Space Used: 1.479 MB
-     Metadata Space Total: 2.147 GB
-     Metadata Space Available: 2.146 GB
-     Thin Pool Minimum Free Space: 10.74 GB
-     Udev Sync Supported: true
-     Deferred Removal Enabled: false
-     Data loop file: /var/lib/docker/devicemapper/devicemapper/data
-     Metadata loop file: /var/lib/docker/devicemapper/devicemapper/metadata
-     Library Version: 1.02.90 (2014-09-01)
-    Execution Driver: native-0.2
-    Logging Driver: json-file
-    Kernel Version: 3.19.0-15-generic
-    Operating System: Ubuntu 15.04
-    <output truncated>
+Containers: 0
+Images: 0
+Storage Driver: devicemapper
+ Pool Name: docker-252:0-147544-pool
+ Pool Blocksize: 65.54 kB
+ Backing Filesystem: extfs
+ Data file: /dev/loop0
+ Metadata file: /dev/loop1
+ Data Space Used: 1.821 GB
+ Data Space Total: 107.4 GB
+ Data Space Available: 3.174 GB
+ Metadata Space Used: 1.479 MB
+ Metadata Space Total: 2.147 GB
+ Metadata Space Available: 2.146 GB
+ Thin Pool Minimum Free Space: 10.74 GB
+ Udev Sync Supported: true
+ Deferred Removal Enabled: false
+ Data loop file: /var/lib/docker/devicemapper/devicemapper/data
+ Metadata loop file: /var/lib/docker/devicemapper/devicemapper/metadata
+ Library Version: 1.02.90 (2014-09-01)
+Execution Driver: native-0.2
+Logging Driver: json-file
+Kernel Version: 3.19.0-15-generic
+Operating System: Ubuntu 15.04
+<output truncated>
+```
 
 Your choice of storage driver can affect the performance of your containerized
 applications. So it's important to understand the different storage driver

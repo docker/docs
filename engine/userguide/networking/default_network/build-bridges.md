@@ -12,69 +12,121 @@ install Docker.
 create user-defined networks in addition to the default bridge network.
 
 You can set up your own bridge before starting Docker and use `-b BRIDGE` or
-`--bridge=BRIDGE` to tell Docker to use your bridge instead. If you already
+`--bridge=BRIDGE` to configure Docker to use your bridge instead. If you already
 have Docker up and running with its default `docker0` still configured,
 you can directly create your bridge and restart Docker with it or want to begin by
 stopping the service and removing the interface:
 
-```
-# Stopping Docker and removing docker0
+1.  Stop Docker.
 
-$ sudo service docker stop
+    ```bash
+    $ sudo service docker stop
+    ```
 
-$ sudo ip link set dev docker0 down
+2.  Stop the `docker0` bridge.
 
-$ sudo brctl delbr docker0
+    ```bash
+    $ sudo ip link set dev docker0 down
+    ```
+3.  Delete the `docker0` bridge.
 
-$ sudo iptables -t nat -F POSTROUTING
-```
+    ```bash
+    $ sudo brctl delbr docker0
+    ```
 
-Then, before starting the Docker service, create your own bridge and give it
-whatever configuration you want. Here we will create a simple enough bridge
-that we really could just have used the options in the previous section to
-customize `docker0`, but it will be enough to illustrate the technique.
+4.  Flush the `POSTROUTING` table from `iptables`
 
-```
-# Create our own bridge
+    ```bash
+    $ sudo iptables -t nat -F POSTROUTING
+    ```
 
-$ sudo brctl addbr bridge0
+Before restarting the Docker service, create and configure your own bridge, and
+configure Docker to use it. This procedure creates a simple bridge to illustrate
+the technique.
 
-$ sudo ip addr add 192.168.5.1/24 dev bridge0
+1.  Create a bridge called `mybridge0`.
+    ```bash
+    $ sudo brctl addbr mybridge0
+    ```
 
-$ sudo ip link set dev bridge0 up
+2.  Configure the bridge.
 
-# Confirming that our bridge is up and running
+    ```bash
+    $ sudo ip addr add 192.168.5.1/24 dev mybridge0
+    ```
 
-$ ip addr show bridge0
+3.  Start the bridge.
+    ```bash
+    $ sudo ip link set dev mybridge0 up
+    ```
 
-4: bridge0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state UP group default
-    link/ether 66:38:d0:0d:76:18 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.5.1/24 scope global bridge0
-       valid_lft forever preferred_lft forever
+4.  Confirm that the bridge is up and running.
+    ```bash
+    $ ip addr show bridge0
 
-# Tell Docker about it and restart (on Ubuntu)
+    4: bridge0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state UP group default
+        link/ether 66:38:d0:0d:76:18 brd ff:ff:ff:ff:ff:ff
+        inet 192.168.5.1/24 scope global bridge0
+           valid_lft forever preferred_lft forever
+    ```
 
-$ echo 'DOCKER_OPTS="-b=bridge0"' >> /etc/default/docker
+Finally, configure the Docker daemon to use the new bridge. These instructions
+work for configuring Docker on systems that use `upstart` or `systemd`. If you
+have  configured Docker to use a custom configuration file using the
+`--config-file` flag, use that custom file when the instructions below refer to
+`/etc/docker/daemon.json`. For an overview of available options for
+`/etc/docker/daemon.json`, see
+[Daemon configuration file](../reference/commandline/dockerd.md#daemon-configuration-file).
 
-$ sudo service docker start
+1.  Create or edit the `/etc/docker/daemon.json` file on your host.
 
-# Confirming new outgoing NAT masquerade is set up
+    ```bash
+    $ sudo nano /etc/docker/daemon.json
+    ```
 
-$ sudo iptables -t nat -L -n
+2.  Add the following option to use the new bridge. If this is a brand new file,
+    you need to add the curly braces at the beginning and the end. Otherwise, just
+    add the `bridge:` line.
 
-...
-Chain POSTROUTING (policy ACCEPT)
-target     prot opt source               destination
-MASQUERADE  all  --  192.168.5.0/24      0.0.0.0/0
-```
+    ```json
+    {
+      "bridge": "mybridge0"
+    }
+    ```
 
-The result should be that the Docker server starts successfully and is now
-prepared to bind containers to the new bridge. After pausing to verify the
-bridge's configuration, try creating a container -- you will see that its IP
-address is in your new IP address range, which Docker will have auto-detected.
+    Save and close the file.
 
-You can use the `brctl show` command to see Docker add and remove interfaces
-from the bridge as you start and stop containers, and can run `ip addr` and `ip
-route` inside a container to see that it has been given an address in the
-bridge's IP address range and has been told to use the Docker host's IP address
-on the bridge as its default gateway to the rest of the Internet.
+
+3.  Start the Docker daemon.
+
+    ```bash
+    $ sudo service docker start
+    ```
+
+4.  Use the `brctl show` command to verify that the `docker0` bridge does not
+    exist.
+
+5.  Verify that Docker started correctly by running a `hello-world` container.
+
+    ```bash
+    $ docker run hello-world
+    ```
+6.  Confirm that outgoing NAT masquerading is set up.
+
+    ```bash
+    $ sudo iptables -t nat -L -n
+
+    ...
+    Chain POSTROUTING (policy ACCEPT)
+    target     prot opt source               destination
+    MASQUERADE  all  --  192.168.5.0/24      0.0.0.0/0
+    ```
+
+Docker can now bind containers to the new bridge. Try creating a container. Its
+IP address is in your new IP address range, which Docker auto-detects.
+
+Use the `brctl show` command to see the interfaces Docker adds and removes from
+the bridge when you start and stop containers. Run `ip addr` and `ip route`
+commands from within a container to see its address in the bridge's IP address
+range verify that it uses the Docker host's IP address on the bridge as its
+default gateway.
