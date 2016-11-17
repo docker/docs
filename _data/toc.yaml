@@ -769,6 +769,8 @@ toc:
         title: Use your own certificates
       - path: /datacenter/dtr/2.1/guides/configure/configure-storage/
         title: Storage configuration
+      - path: /datacenter/dtr/2.1/guides/configure/use-nfs/
+        title: Use NFS
     - sectiontitle: Monitor and troubleshoot
       section:
       - path: /datacenter/dtr/2.1/guides/monitor-troubleshoot/
