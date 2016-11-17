@@ -10,7 +10,7 @@ This page provides the usage information for the `docker-compose` Command.
 You can also see this information by running `docker-compose --help` from the
 command line.
 
-```
+```none
 Define and run multi-container applications with Docker.
 
 Usage:
