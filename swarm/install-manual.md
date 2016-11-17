@@ -121,20 +121,24 @@ SSH to each node in turn and do the following.
 
         $ curl -sSL https://get.docker.com/ | sh
 
-3. Configure and start Engine so it listens for Swarm nodes on port `2375`.
+3. Edit `/etc/sysconfig/docker` and add `"-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock"`
+   to the `OPTIONS` variable.
 
-        $ sudo docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
+4. Start Docker.
 
-4. Verify that Docker Engine is installed correctly:
+       $ sudo /etc/init.d/docker start
 
-        $ sudo docker run hello-world
+4. Verify that Docker Engine is installed correctly by running a container with the
+   `hello-world` image.
 
-    The output should display a "Hello World" message and other text without any
-    error messages.
+       $ sudo docker run hello-world
+
+   The output should display a "Hello World" message and other text without any
+   error messages.
 
 5. Give the `ec2-user` root privileges:
 
-        $ sudo usermod -aG docker ec2-user
+       $ sudo usermod -aG docker ec2-user
 
 6. Enter `logout`.
 
