@@ -13,16 +13,16 @@ repository and automatically push the built image to your Docker
 repositories.
 
 When you set up automated builds (also called autobuilds), you create a list of
-branches and tags of the images that you want to build. When you push code to a
-source code branch (for example in Github) for one of those listed image tags,
-the push uses a webhook to trigger a new build, which produces a Docker image.
-The built image is then pushed to the Docker Cloud registry or to an external
-registry.
+branches and tags that you want to build into Docker images. When you push code
+to a source code branch (for example in Github) for one of those listed image
+tags, the push uses a webhook to trigger a new build, which produces a Docker
+image. The built image is then pushed to the Docker Cloud registry or to an
+external registry.
 
 If you have automated tests configured, these run after building but before
 pushing to the registry. You can use these tests to create a continuous
-integration workflow. Automated tests do not push images to the registry on
-their own. [Learn more about automated image testing here.](automated-testing.md)
+integration workflow where a build that fails its tests does not push the built
+image. Automated tests do not push images to the registry on their own. [Learn more about automated image testing here.](automated-testing.md)
 
 You can also just use `docker push` to push pre-built images to these
 repositories, even if you have automatic builds set up.
@@ -31,7 +31,7 @@ repositories, even if you have automatic builds set up.
 
 ## Configure automated build settings
 
-You can configure your repositories in Docker Cloud so that they automatically
+You can configure repositories in Docker Cloud so that they automatically
 build an image each time you push new code to your source provider. If you have
 [automated tests](automated-testing.md) configured, the new image is only pushed
 when the tests succeed.
@@ -94,7 +94,8 @@ the code repository service where the image's source code is stored.
 
     Only branches or tags with autobuild enabled are built, tested, *and* have
     the resulting image pushed to the repository. Branches with autobuild
-    disabled will be built for test purposes (if enabled at the repository level), but not pushed.
+    disabled will be built for test purposes (if enabled at the repository
+    level), but the built Docker image is not pushed to the repository.
 
 10. For each branch or tag, enable or disable the **Build Caching** toggle.
 
