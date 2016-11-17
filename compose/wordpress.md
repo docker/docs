@@ -23,7 +23,7 @@ with Docker containers. This quick-start guide demonstrates how to use Compose t
         cd my_wordpress/
 
 3.  Create a `docker-compose.yml` file that will start your
-    `Wordpress` blog and a separate `MySQL` instance with a volume
+    `WordPress` blog and a separate `MySQL` instance with a volume
     mount for data persistence:
 
     ```none
@@ -91,7 +91,7 @@ If you're using [Docker Machine](/machine/), then `docker-machine ip MACHINE_VM`
 
 At this point, WordPress should be running on port `8000` of your Docker Host, and you can complete the "famous five-minute installation" as a WordPress administrator.
 
-**NOTE**: The Wordpress site will not be immediately available on port `8000` because the containers are still being initialized and may take a couple of minutes before the first load.
+**NOTE**: The WordPress site will not be immediately available on port `8000` because the containers are still being initialized and may take a couple of minutes before the first load.
 
 ![Choose language for WordPress install](images/wordpress-lang.png)
 
