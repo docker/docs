@@ -149,6 +149,8 @@ toc:
       title: Run a local registry mirror
     - sectiontitle: Logging
       section:
+      - path: /engine/admin/logging/view_container_logs/
+        title: View a container's logs
       - path: /engine/admin/logging/overview/
         title: Configuring Logging Drivers
       - path: /engine/admin/logging/log_tags/
