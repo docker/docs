@@ -2,7 +2,7 @@ var tocData;
 function hookupTOCEvents()
 {
   // do after tree render
-  $('.expand-menu').on('click touchstart', function(elem) {
+  $('.expand-menu').on('mouseup touchend', function(elem) {
 //      menu = elem.currentTarget.nextElementSibling
     menu = elem.currentTarget.parentElement
     if (menu.classList.contains("menu-closed")) {
