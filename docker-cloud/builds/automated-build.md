@@ -124,18 +124,39 @@ should remain secret.
 the build processes _only_ and should not be confused with the environment
 values used by your service (for example to create service links).
 
-
 ## Check your active builds
 
-You can view a summary of the last five builds for a repository from the repository's **General** tab.  You can also click **Timeline** to view a list of all active builds, and expand each build to see their real-time logs. The **Builds** tab also displays a color coded bar chart of the build queue times and durations.
+A summary of a repository's builds appears both on the repository **General**
+tab, and in the **Builds** tab. The **Builds** tab also displays a color coded
+bar chart of the build queue times and durations. Both views display the
+pending, in progress, successful, and failed builds for any tag of the
+repository.
 
-Both views display the pending, in progress, successful, and failed builds
-for any tag of the repository.
+From either location, you can click a build job to view its build report. The
+build report shows information about the build job including the source
+repository and branch (or tag), the build duration, creation time and location,
+and the user namespace the build occurred in.
 
-You can click the **Cancel** button for pending builds and builds in progress.
-If a build fails, the cancel button is replaced by a **Retry** button.
+![screen showing a build report](images/build-report.png)
 
-![](images/cancel-build.png)
+## Cancel or retry a build
+
+While a build is queued or running, a **Cancel** icon appears next to its build
+report link on the General tab and on the Builds tab. You can also click the
+**Cancel** button from the build report page, or from the Timeline tab's logs
+display for the build.
+
+![list of builds showing the cancel icon](images/build-cancelicon.png)
+
+If a build fails, a **Retry** icon appears next to the build report line on the
+General and Builds tabs, and the build report page and Timeline logs also
+display a **Retry** button.
+
+![Timeline view showing the retry build button](images/retry-build.png)
+
+> **Note**: If you are viewing the build details for a repository that belongs
+to an Organization, the Cancel and Retry buttons only appear if you have `Read & Write` access to the repository.
+
 
 ## Disable an automated build
 
