@@ -17,6 +17,7 @@ function hookupTOCEvents()
   $(".currentPage").each(function(){
     $(this).parentsUntil($('.docsidebarnav_section')).addClass("active").removeClass("menu-closed").addClass("menu-open");
   });
+  $(".left-off-canvas-menu").css("display","block");
 }
 jQuery(document).ready(function(){
     hookupTOCEvents();
