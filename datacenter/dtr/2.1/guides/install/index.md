@@ -22,7 +22,11 @@ Since DTR requires Docker Universal Control Plane (UCP)
 to run, you need to install UCP on all the nodes where you plan to install DTR.
 [Learn how to install UCP](/datacenter/ucp/2.0/guides/installation/index.md).
 
-Make sure all the nodes you plan on installing DTR are being managed by UCP.
+DTR needs to be installed on a worker node that is being managed by UCP.
+You can't install DTR on a standalone Docker Engine.
+
+![](../images/install-dtr-0.png)
+
 
 ## Step 3. Install DTR
 
@@ -68,13 +72,13 @@ browser, navigate to the address were you installed DTR.
 
 After installing DTR, you should configure:
 
-  * The Domain Name used to access DTR,
-  * The certificates used for TLS communication,
-  * The storage backend to store the Docker images.
+  * The certificates used for TLS communication. [Learn more](../configure/configure-storage.md).
+  * The storage backend to store the Docker images. [Lean more](../configure/index.md).
 
   To perform these configurations, navigate to the **Settings** page of DTR.
 
   ![](../images/install-dtr-3.png)
+
 
 ## Step 6. Test pushing and pulling
 
