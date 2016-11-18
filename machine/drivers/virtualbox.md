@@ -81,6 +81,7 @@ upper bound of `192.168.24.254`.
 | `--virtualbox-no-share`              | `VIRTUALBOX_NO_SHARE`              | `false`                  |
 | `--virtualbox-no-dns-proxy`          | `VIRTUALBOX_NO_DNS_PROXY`          | `false`                  |
 | `--virtualbox-no-vtx-check`          | `VIRTUALBOX_NO_VTX_CHECK`          | `false`                  |
+| `--virtualbox-share-folder`          | `VIRTUALBOX_SHARE_FOLDER`          | `/os/users:users`        |
 
 ## Known Issues
 
