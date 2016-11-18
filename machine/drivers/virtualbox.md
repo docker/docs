@@ -37,6 +37,7 @@ The size of the VM's disk can be configured this way:
 -   `--virtualbox-no-share`: Disable the mount of your home directory
 -   `--virtualbox-no-dns-proxy`: Disable proxying all DNS requests to the host (Boolean value, default to false)
 -   `--virtualbox-no-vtx-check`: Disable checking for the availability of hardware virtualization before the vm is started
+-   `--virtualbox-share-folder`: Override the default shared folder in the form "path:name"
 
 The `--virtualbox-boot2docker-url` flag takes a few different forms. By
 default, if no value is specified for this flag, Machine will check locally for
