@@ -77,14 +77,6 @@ Upgrading | The node docker daemon is being upgraded. No actions allowed in this
 Terminating | The node is being terminated in the cloud provider. No actions allowed in this state.
 Terminated | The node has been terminated and is no longer present in the cloud provider. No actions allowed in this state.
 
-### Node Last Metric attributes
-
-Attribute | Description
---------- | -----------
-cpu       | CPU percentage usage
-memory    | Memory usage in bytes
-disk      | Disk storage usage in bytes
-
 
 ## List all nodes
 
