@@ -1260,27 +1260,39 @@ The following daemon options must be configured for each daemon:
 When your daemons use different values for these flags, you can run them on the same host without any problems.
 It is very important to properly understand the meaning of those options and to use them correctly.
 
-- The `-b, --bridge=` flag is set to `docker0` as default bridge network. It is created automatically when you install Docker.
-If you are not using the default, you must create and configure the bridge manually or just set it to 'none': `--bridge=none`
-- `--exec-root` is the path where the container state is stored. The default value is `/var/run/docker`. Specify the path for
-your running daemon here.
-- `--graph` is the path where images are stored. The default value is `/var/lib/docker`. To avoid any conflict with other daemons
-set this parameter separately for each daemon.
-- `-p, --pidfile=/var/run/docker.pid` is the path where the process ID of the daemon is stored. Specify the path for your
-pid file here.
-- `--host=[]` specifies where the Docker daemon will listen for client connections. If unspecified, it defaults to `/var/run/docker.sock`.
-- `--iptables=false` prevents the Docker daemon from adding iptables rules. If
-multiple daemons manage iptables rules, they may overwrite rules set by another
-daemon. Be aware that disabling this option requires you to manually add
-iptables rules to expose container ports. If you prevent Docker from adding
-iptables rules, Docker will also not add IP masquerading rules, even if you set
---ip-masq to true. Without IP masquerading rules, Docker containers will not be
-able to connect to external hosts or the internet when using network other than
-default bridge.
-- `--config-file=/etc/docker/daemon.json` is the path where configuration file is stored. You can use it instead of
-daemon flags. Specify the path for each daemon.
-- `--tls*` Docker daemon supports `--tlsverify` mode that enforces encrypted and authenticated remote connections.
-The `--tls*` options enable use of specific certificates for individual daemons.
+-  The `-b, --bridge=` flag is set to `docker0` as default bridge network. It is created automatically when
+   you install Docker. If you are not using the default, you must create and configure the bridge manually or just set it to    'none': 
+   
+  ```none
+  --bridge=none
+  ```
+
+-  `--exec-root` is the path where the container state is stored. The default value is `/var/run/docker`. Specify
+   the path for your running daemon here.
+
+- `--graph` is the path where images are stored. The default value is `/var/lib/docker`. To avoid any conflict
+   with other daemons set this parameter separately for each daemon.
+
+-  `-p, --pidfile=/var/run/docker.pid` is the path where the process ID of the daemon is stored. Specify the path
+   for your pid file here.
+
+-  `--host=[]` specifies where the Docker daemon will listen for client connections. If unspecified, it
+   defaults to `/var/run/docker.sock`.
+
+-  `--iptables=false` prevents the Docker daemon from adding iptables rules. If
+   multiple daemons manage iptables rules, they may overwrite rules set by another
+   daemon. Be aware that disabling this option requires you to manually add
+   iptables rules to expose container ports. If you prevent Docker from adding
+   iptables rules, Docker will also not add IP masquerading rules, even if you set
+   `--ip-masq` to `true`. Without IP masquerading rules, Docker containers will not be
+   able to connect to external hosts or the internet when using network other than
+   default bridge.
+
+-  `--config-file=/etc/docker/daemon.json` is the path where configuration file is stored. You can use
+   it instead of daemon flags. Specify the path for each daemon.
+
+-  `--tls*` Docker daemon supports `--tlsverify` mode that enforces encrypted and authenticated remote
+   connections. The `--tls*` options enable use of specific certificates for individual daemons.
 
 Example script for a separate “bootstrap” instance of the Docker daemon without network:
 
