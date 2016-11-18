@@ -10,7 +10,7 @@ This quick-start guide demonstrates how to use Docker Compose to set up and run 
 ### Define the project components
 
 For this project, you need to create a Dockerfile, a Python dependencies file,
-and a `docker-compose.yml` file.
+and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extension for this file.)
 
 1. Create an empty project directory.
 
