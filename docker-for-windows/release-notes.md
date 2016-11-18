@@ -22,7 +22,7 @@ about both kinds of releases, and download stable and beta product installers at
 
 ## Stable Release Notes
 
-### Docker for Windows 1.13.3, 2016-11-09 (stable)
+### Docker for Windows 1.12.3, 2016-11-09 (stable)
 
 **New**
 
