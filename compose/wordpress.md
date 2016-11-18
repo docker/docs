@@ -4,8 +4,9 @@ keywords: documentation, docs,  docker, compose, orchestration, containers
 title: "Quickstart: Compose and WordPress"
 ---
 
-You can use Docker Compose to easily run WordPress in an isolated environment built
-with Docker containers. This quick-start guide demonstrates how to use Compose to set up and run WordPress. Before starting, you'll need to have
+You can use Docker Compose to easily run WordPress in an isolated environment
+built with Docker containers. This quick-start guide demonstrates how to use
+Compose to set up and run WordPress. Before starting, you'll need to have
 [Compose installed](install.md).
 
 ### Define the project
@@ -14,7 +15,10 @@ with Docker containers. This quick-start guide demonstrates how to use Compose t
 
     You can name the directory something easy for you to remember. This directory is the context for your application image. The directory should only contain resources to build that image.
 
-    This project directory will contain a `docker-compose.yaml` file which will be complete in itself for a good starter wordpress project.
+    This project directory will contain a `docker-compose.yml` file which will
+    be complete in itself for a good starter wordpress project.
+
+    >**Tip:** You can use either a `.yml` or `.yaml` extension for this file. They both work.
 
 2. Change directories into your project directory.
 
@@ -87,17 +91,22 @@ This pulls the needed images, and starts the wordpress and database containers, 
 
 If you're using [Docker Machine](/machine/), then `docker-machine ip MACHINE_VM` gives you the machine address and you can open `http://MACHINE_VM_IP:8000` in a browser.
 
-At this point, WordPress should be running on port `8000` of your Docker Host, and you can complete the "famous five-minute installation" as a WordPress administrator.
+At this point, WordPress should be running on port `8000` of your Docker Host,
+and you can complete the "famous five-minute installation" as a WordPress
+administrator.
 
-**NOTE**: The WordPress site will not be immediately available on port `8000` because the containers are still being initialized and may take a couple of minutes before the first load.
+**NOTE**: The WordPress site will not be immediately available on port `8000`
+because the containers are still being initialized and may take a couple of
+minutes before the first load.
 
 ![Choose language for WordPress install](images/wordpress-lang.png)
 
 ![WordPress Welcome](images/wordpress-welcome.png)
 
 ### Shutdown/Clean up
-`docker-compose down` will remove the containers and default network, but preserve your wordpress database.
-`docker-compose down --volumes` will remove the containers, default network, and the wordpress database.
+`docker-compose down` will remove the containers and default network, but
+preserve your wordpress database. `docker-compose down --volumes` will remove
+the containers, default network, and the wordpress database.
 
 ## More Compose documentation
 
