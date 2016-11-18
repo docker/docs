@@ -364,15 +364,6 @@ bridge | Creates a new network stack for the container on the docker bridge.
 host | Uses the host network stack inside the container.
 
 
-### Container Last Metric attributes
-
-Attribute | Description
---------- | -----------
-cpu       | CPU percentage usage
-memory    | Memory usage in bytes
-disk      | Disk storage usage in bytes
-
-
 ### Container Link attributes
 
 Attribute | Description
