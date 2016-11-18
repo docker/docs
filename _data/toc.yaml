@@ -1,6 +1,10 @@
 toc:
 - title: Welcome to the Docs
   path: /
+- sectiontitle: Docker ID
+  section:
+  - path: /docker-id/
+    title: Docker ID accounts
 - sectiontitle: Docker Engine
   section:
   - sectiontitle: Install
