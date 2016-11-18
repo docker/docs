@@ -36,7 +36,10 @@ Docker Team:
 
 ![Diagnostic results only](images/settings-diagnostic-results-only.png)
 
-* **Diagnose & Upload** - Runs diagnostics, shows results, and auto-uploads the diagnostic results to Docker. A diagnostic ID is auto-generated. You can refer to this ID when communicating with the Docker Team. Optionally, you can open an issue on GitHub using the uploaded results and ID as a basis.
+* **Diagnose & Upload** - Runs diagnostics, shows results, and auto-uploads the
+diagnostic results to Docker. A diagnostic ID is auto-generated. You can refer
+to this ID when communicating with the Docker Team. Optionally, you can open
+an issue on GitHub using the uploaded results and ID as a basis.
 
 ![Diagnostics & Feedback](images/settings-diagnose-id.png)
 
