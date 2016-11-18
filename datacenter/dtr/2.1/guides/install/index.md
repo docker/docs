@@ -72,13 +72,13 @@ browser, navigate to the address were you installed DTR.
 
 After installing DTR, you should configure:
 
-  * The Domain Name used to access DTR,
-  * The certificates used for TLS communication,
-  * The storage backend to store the Docker images.
+  * The certificates used for TLS communication. [Learn more](../configure/configure-storage.md).
+  * The storage backend to store the Docker images. [Lean more](../configure/index.md).
 
   To perform these configurations, navigate to the **Settings** page of DTR.
 
   ![](../images/install-dtr-3.png)
+
 
 ## Step 6. Test pushing and pulling
 
