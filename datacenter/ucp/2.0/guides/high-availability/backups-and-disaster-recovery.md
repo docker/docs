@@ -46,15 +46,6 @@ $ docker run --rm -i --name ucp \
 
 # Decrypt the backup and list its contents
 $ gpg --decrypt /tmp/backup.tar | tar --list
-
-Enter passphrase: secret
-
-/ucp-client-root-ca/
-./ucp-client-root-ca/cert.pem
-./ucp-client-root-ca/config.json
-./ucp-client-root-ca/key.pem
-./ucp-cluster-root-ca/
-# output snipped
 ```
 
 ## Restore command
@@ -82,6 +73,7 @@ $ docker run --rm -i --name ucp \
 The restore command can be used to create a new UCP cluster from a backup file.
 After the restore operation is complete, the following data will be copied from
 the backup file:
+
 * Users, Teams and Permissions.
 * Cluster Configuration, such as the default Controller Port or the KV store
 timeout.
