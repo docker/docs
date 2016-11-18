@@ -33,7 +33,7 @@ with Docker containers. This quick-start guide demonstrates how to use Compose t
        db:
          image: mysql:5.7
          volumes:
-           - "./.data/db:/var/lib/mysql"
+           - db_data:/var/lib/mysql
          restart: always
          environment:
            MYSQL_ROOT_PASSWORD: wordpress
@@ -45,19 +45,17 @@ with Docker containers. This quick-start guide demonstrates how to use Compose t
          depends_on:
            - db
          image: wordpress:latest
-         links:
-           - db
          ports:
            - "8000:80"
          restart: always
          environment:
            WORDPRESS_DB_HOST: db:3306
            WORDPRESS_DB_PASSWORD: wordpress
+    volumes:
+        db_data:
     ```
 
-    **NOTE**: The folder `./.data/db` will be automatically created in the project directory
-    alongside the `docker-compose.yml` which will persist any updates made by wordpress to the
-    database.
+    **NOTE**: The docker volume `db_data` will persist any updates made by wordpress to the database. [Learn more about docker volumes](../engine/tutorials/dockervolumes.md)
 
 ### Build the project
 
@@ -96,6 +94,10 @@ At this point, WordPress should be running on port `8000` of your Docker Host, a
 ![Choose language for WordPress install](images/wordpress-lang.png)
 
 ![WordPress Welcome](images/wordpress-welcome.png)
+
+### Shutdown/Clean up
+`docker-compose down` will remove the containers and default network, but preserve your wordpress database.
+`docker-compose down --volumes` will remove the containers, default network, and the wordpress database.
 
 ## More Compose documentation
 
