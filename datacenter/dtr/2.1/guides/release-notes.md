@@ -14,7 +14,7 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](install/upgrade.md),
 to upgrade your installation to the latest release.
 
-## DTR 2.1
+## DTR 2.1.0
 
 (10 Nov 2016)
 
@@ -55,3 +55,9 @@ configuring where Docker images are stored
 * Better integration with Filesystem storage driver to store Docker images
 * Improved garbage collection performance and efficiency
 * Improved health checking API for more granularity
+
+**Known issues**
+
+* When upgrading to this version, tag metadata is migrated to DTR's internal
+database. Depending on how many images are stored in DTR this can take some
+time to complete.
