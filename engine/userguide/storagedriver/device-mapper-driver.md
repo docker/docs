@@ -1,7 +1,6 @@
 ---
 description: Learn how to optimize your use of device mapper driver.
-keywords:
-- container, storage, driver, device mapper
+keywords: container, storage, driver, device mapper
 title: Docker and the Device Mapper storage driver
 ---
 

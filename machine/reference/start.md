@@ -1,7 +1,6 @@
 ---
 description: Start a machine
-keywords:
-- machine, start, subcommand
+keywords: machine, start, subcommand
 title: docker-machine start
 ---
 

@@ -1,9 +1,8 @@
 ---
+description: Storage configuration for Docker Trusted Registry
+keywords: docker, documentation, about, technology, understanding, configuration, storage, storage drivers, Azure, S3, Swift,  enterprise, hub, registry
 redirect_from:
 - /docker-trusted-registry/configure/config-storage/
-description: Storage configuration for Docker Trusted Registry
-keywords:
-- docker, documentation, about, technology, understanding, configuration, storage, storage drivers, Azure, S3, Swift,  enterprise, hub, registry
 title: Storage configuration
 ---
 

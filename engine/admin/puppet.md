@@ -1,9 +1,8 @@
 ---
+description: Installing and using Puppet
+keywords: puppet, installation, usage, docker,  documentation
 redirect_from:
 - /engine/articles/puppet/
-description: Installing and using Puppet
-keywords:
-- puppet, installation, usage, docker,  documentation
 title: Use Puppet
 ---
 

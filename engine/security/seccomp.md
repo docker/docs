@@ -1,7 +1,6 @@
 ---
 description: Enabling seccomp in Docker
-keywords:
-- seccomp, security, docker, documentation
+keywords: seccomp, security, docker, documentation
 title: Seccomp security profiles for Docker
 ---
 

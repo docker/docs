@@ -1,7 +1,6 @@
 ---
 description: Learn how to build your own bridge interface
-keywords:
-- docker, bridge, docker0, network
+keywords: docker, bridge, docker0, network
 title: Build your own bridge
 ---
 

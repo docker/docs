@@ -1,7 +1,6 @@
 ---
 description: Dump out the ID of the UCP components running on this engine.
-keywords:
-- docker, ucp, id
+keywords: docker, ucp, id
 title: docker/ucp id
 ---
 

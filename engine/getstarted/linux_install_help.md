@@ -1,10 +1,9 @@
 ---
+description: Getting started with Docker
+keywords: beginner, getting started, Docker, install
 redirect_from:
 - /mac/started/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker, install
-title: "Example: Install Docker on Ubuntu Linux"
+title: 'Example: Install Docker on Ubuntu Linux'
 ---
 
 This installation procedure for users who are unfamiliar with package

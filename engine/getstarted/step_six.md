@@ -1,11 +1,10 @@
 ---
+description: Getting started with Docker
+keywords: beginner, getting started, Docker
 redirect_from:
 - /mac/step_six/
 - /windows/step_six/
 - /linux/step_six/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
 title: Tag, push, and pull your image
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: Remove a machine.
-keywords:
-- machine, rm, subcommand
+keywords: machine, rm, subcommand
 title: docker-machine rm
 ---
 

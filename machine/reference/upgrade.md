@@ -1,7 +1,6 @@
 ---
 description: Upgrade Docker on a machine
-keywords:
-- machine, upgrade, subcommand
+keywords: machine, upgrade, subcommand
 title: docker-machine upgrade
 ---
 

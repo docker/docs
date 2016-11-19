@@ -1,7 +1,6 @@
 ---
 description: Sharing data between 2 couchdb databases
-keywords:
-- docker, example, package installation, networking, couchdb,  data volumes
+keywords: docker, example, package installation, networking, couchdb,  data volumes
 title: Dockerize a CouchDB service
 ---
 

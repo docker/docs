@@ -1,7 +1,6 @@
 ---
 description: Use overlay for multi-host networking
-keywords:
-- Examples, Usage, network, docker, documentation, user guide, multihost, cluster
+keywords: Examples, Usage, network, docker, documentation, user guide, multihost, cluster
 title: Get started with multi-host networking
 ---
 

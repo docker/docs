@@ -1,7 +1,6 @@
 ---
 description: Get the status of a machine
-keywords:
-- machine, status, subcommand
+keywords: machine, status, subcommand
 title: docker-machine status
 ---
 

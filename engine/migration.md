@@ -1,7 +1,6 @@
 ---
 description: Migrate to Engine 1.10
-keywords:
-- docker, documentation, engine, upgrade, migration
+keywords: docker, documentation, engine, upgrade, migration
 title: Migrate to Engine 1.10
 ---
 

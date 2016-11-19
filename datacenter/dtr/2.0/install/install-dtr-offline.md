@@ -1,10 +1,9 @@
 ---
-redirect_from:
-- /docker-trusted-registry/install/install-dtr-offline/
 description: Learn how to install Docker Trusted Registry on a machine with no internet
   access.
-keywords:
-- docker, registry, install, offline
+keywords: docker, registry, install, offline
+redirect_from:
+- /docker-trusted-registry/install/install-dtr-offline/
 title: Install Docker Trusted Registry offline
 ---
 

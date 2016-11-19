@@ -1,10 +1,9 @@
 ---
+description: Docker Universal Control Plane
+keywords: networking, kv, engine-discovery, ucp
 redirect_from:
 - /ucp/networking/
 - /ucp/configuration/multi-host-networking/
-description: Docker Universal Control Plane
-keywords:
-- networking, kv, engine-discovery, ucp
 title: Enable container networking with UCP
 ---
 

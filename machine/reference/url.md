@@ -1,7 +1,6 @@
 ---
 description: Get the URL of a host
-keywords:
-- machine, url, subcommand
+keywords: machine, url, subcommand
 title: docker-machine url
 ---
 

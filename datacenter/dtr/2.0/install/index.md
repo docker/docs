@@ -1,12 +1,11 @@
 ---
+description: Learn how to install Docker Trusted Registry for production.
+keywords: docker, dtr, registry, install
 redirect_from:
 - /docker-trusted-registry/install/dtr-ami-byol-launch/
 - /docker-trusted-registry/install/dtr-ami-bds-launch/
 - /docker-trusted-registry/install/dtr-vhd-azure/
 - /docker-trusted-registry/install/install-dtr/
-description: Learn how to install Docker Trusted Registry for production.
-keywords:
-- docker, dtr, registry, install
 title: Install Docker Trusted Registry
 ---
 

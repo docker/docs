@@ -1,7 +1,6 @@
 ---
 description: Show client configuration
-keywords:
-- machine, config, subcommand
+keywords: machine, config, subcommand
 title: docker-machine config
 ---
 

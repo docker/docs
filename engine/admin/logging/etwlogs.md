@@ -1,7 +1,6 @@
 ---
 description: Describes how to use the etwlogs logging driver.
-keywords:
-- ETW, docker, logging, driver
+keywords: ETW, docker, logging, driver
 title: ETW logging driver
 ---
 

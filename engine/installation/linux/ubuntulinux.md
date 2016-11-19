@@ -1,10 +1,9 @@
 ---
+description: 'Instructions for installing Docker on Ubuntu. '
+keywords: Docker, Docker documentation, requirements, apt, installation,  ubuntu
 redirect_from:
 - /engine/installation/ubuntulinux/
 - /installation/ubuntulinux/
-description: 'Instructions for installing Docker on Ubuntu. '
-keywords:
-- Docker, Docker documentation, requirements, apt, installation,  ubuntu
 title: Install Docker on Ubuntu
 ---
 
@@ -60,7 +59,7 @@ packages from the Docker repository:
 4.  Add the new `GPG` key.
 
     ```bash
-    $ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+    $ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
     ```
 
 5.  Find the entry for your Ubuntu operating system.

@@ -1,7 +1,6 @@
 ---
 description: Docker Trusted Registry dumpcerts command reference.
-keywords:
-- docker, registry, reference, dumpcerts
+keywords: docker, registry, reference, dumpcerts
 title: docker/dtr dumpcerts
 ---
 

@@ -76,6 +76,12 @@ Configure which TLS version is used for TLS communication with the `docker`
 daemon. Defaults to `TLSv1`.
 Supported values are: `TLSv1`, `TLSv1_1`, `TLSv1_2`.
 
+## COMPOSE\_CONVERT\_WINDOWS\_PATHS
+
+Enable path conversion from Windows-style to Unix-style in volume definitions.
+Users of Docker Machine and Docker Toolbox on Windows should always set this.
+
+
 ## Related Information
 
 - [User guide](../index.md)
