@@ -10,17 +10,30 @@
 
 # Make sure directories have the trailing slash, keep the list alphabetical
 
-- path: apidocs/
+overrides:
+- path: /apidocs/
   description: "Auto-generated API docs for Docker Cloud, DTR, UCP. File an issue."
 
-- path: notary/reference/
+- path: /engine/deprecated.md
+  description: Docker Engine deprecation reference
+  source: https://github.com/docker/docker/tree/1.12.x/docs/deprecated.md
+
+- path: /engine/extend/
+  description: References for Docker Engine plugin system
+  source: https://github.com/docker/docker/tree/1.12.x/docs/extend/
+
+- path: /engine/reference/
+  description: Docker Engine CLI and API references
+  source: https://github.com/docker/docker/tree/1.12.x/docs/reference/
+
+- path: /notary/reference/
   description: Reference docs for Docker Notary
-  source: https://github.com/docker/notary/docs/reference/
+  source: https://github.com/docker/notary/tree/master/docs/reference/
 
-- path: registry/configuration.md
+- path: /registry/configuration/
   description: Reference docs for configuring Docker Registry
-  source: https://github.com/docker/distribution/docs/configuration.md
+  source: https://github.com/docker/distribution/tree/master/docs/configuration.md
 
-- path: registry/spec/
+- path: /registry/spec/
   description: Docker Registry API references
-  source: https://github.com/docker/distribution/docs/spec/
+  source: https://github.com/docker/distribution/tree/master/docs/spec/

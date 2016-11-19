@@ -1,3 +1,4 @@
+<!-- relative link basehrefs -->
 {% if page.path contains "index.md" %}
 {% capture basehref %}{{ page.url }}{% endcapture %}
 {% else %}
@@ -12,8 +13,17 @@
 {% endif %}
 {% endfor %}
 {% endif %}
+<!-- edit overrides -->
+{% for override in site.data.not_edited_here.overrides %}
+{% if page.url contains override.path %}
+{% assign overridden="true" %}
+{% capture editsource %}{{ override.source }}{{ page.path }}{% endcapture %}
+{% break %}
+{% endif %}
+{% endfor %}
+{% if overridden != "true" %}{% capture editsource %}https://github.com/docker/docker.github.io/edit/master/{{ page.path }}{% endcapture %}{% endif %}
+<!-- Start of {{ page.path }} -->
 <!DOCTYPE html>
-<!-- {{ page.path }} -->
 <html class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms no-csstransforms3d csstransitions fontface no-generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths retina-display is_not_retina chrome version webkit" lang="en">
 <head>
 <base href="{{ basehref }}"/>
@@ -249,7 +259,7 @@ ng\:form {
 								    <button type="submit" class="search-submit btn btn-default">Search</button>
 								  </form>
 						    </span>
-                <span><a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}" class="button darkblue-btn nomunge" style="color:#FFFFFF; width:100%; margin: 0px;">Edit This Page</a></span>
+                <span><a href="{{ editsource }}" class="button darkblue-btn nomunge" style="color:#FFFFFF; width:100%; margin: 0px;">Edit This Page</a></span>
                 <nav id="TableOfContents">
 								</nav>
                 </section>
