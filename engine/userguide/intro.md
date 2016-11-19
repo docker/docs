@@ -1,10 +1,9 @@
 ---
-redirect_from:
-  - /userguide/
 description: Introduction to user guide
 identifier: engine_guide_intro
-keywords:
-- docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home,  intro
+keywords: docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home, intro
+redirect_from:
+- /userguide/
 title: Engine user guide
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: Play in a trust sandbox
-keywords:
-- trust, security, root,  keys, repository, sandbox
+keywords: trust, security, root,  keys, repository, sandbox
 title: Play in a content trust sandbox
 ---
 

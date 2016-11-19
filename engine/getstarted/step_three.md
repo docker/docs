@@ -1,11 +1,10 @@
 ---
+description: Getting started with Docker
+keywords: beginner, getting started, Docker
 redirect_from:
 - /mac/step_three/
 - /windows/step_three/
 - /linux/step_three/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
 title: Find and run the whalesay image
 ---
 

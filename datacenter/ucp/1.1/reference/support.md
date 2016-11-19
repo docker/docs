@@ -1,7 +1,6 @@
 ---
 description: Generate a support dump for this engine.
-keywords:
-- docker, ucp, support, logs
+keywords: docker, ucp, support, logs
 title: docker/ucp support
 ---
 

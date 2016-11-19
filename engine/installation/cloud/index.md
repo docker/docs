@@ -1,4 +1,6 @@
 ---
+description: Cloud Installations
+keywords: Docker install
 redirect_from:
 - /engine/installation/amazon/
 - /engine/installation/google/
@@ -6,9 +8,6 @@ redirect_from:
 - /engine/installation/azure/
 - /engine/installation/rackspace/
 - /engine/installation/joyent/
-description: Cloud Installations
-keywords:
-- Docker install
 title: Install Engine on cloud hosts
 ---
 

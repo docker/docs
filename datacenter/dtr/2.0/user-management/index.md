@@ -1,9 +1,8 @@
 ---
+description: Learn about the permission levels available on Docker Trusted Registry.
+keywords: docker, registry, security, permissions, users
 redirect_from:
 - /docker-trusted-registry/accounts/
-description: Learn about the permission levels available on Docker Trusted Registry.
-keywords:
-- docker, registry, security, permissions, users
 title: Authentication and authorization
 ---
 

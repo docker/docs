@@ -13,7 +13,6 @@ url: https://docs.docker.com
 
 gems:
   - jekyll-redirect-from
-  - jekyll-gist
   - jekyll-seo-tag
 
 webrick:
@@ -83,8 +82,42 @@ defaults:
   - scope:
       path: "swarm"
     values:
-      assignee: "londoncalling"
+      assignee: "mstanleyjones"
   - scope:
       path: "toolbox"
     values:
       assignee: "londoncalling"
+  -
+    scope:
+      path: "datacenter/dtr/2.0"
+    values:
+      hide_from_sitemap: true
+      this_version: "2.0"
+      latest_version: "2.1"
+  -
+    scope:
+      path: "datacenter/ucp/1.1"
+    values:
+      hide_from_sitemap: true
+      this_version: "1.1"
+      latest_version: "2.0"
+  -
+    scope:
+      path: "apidocs/v1.3.3"
+    values:
+      hide_from_sitemap: true
+  -
+    scope:
+      path: "apidocs/v1.4.0"
+    values:
+      hide_from_sitemap: true
+  -
+    scope:
+      path: "apidocs/v2.0.0"
+    values:
+      hide_from_sitemap: true
+  -
+    scope:
+      path: "apidocs/v2.0.1"
+    values:
+      hide_from_sitemap: true

@@ -1,7 +1,6 @@
 ---
 description: Stop Docker Universal Control Plane containers.
-keywords:
-- install, ucp, stop
+keywords: install, ucp, stop
 title: docker/ucp stop
 ---
 

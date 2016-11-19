@@ -1,7 +1,6 @@
 ---
 description: Drain nodes on the swarm
-keywords:
-- tutorial, cluster management, swarm, service, drain
+keywords: tutorial, cluster management, swarm, service, drain
 title: Drain a node on the swarm
 ---
 

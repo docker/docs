@@ -1,7 +1,6 @@
 ---
 description: Inspect the application
-keywords:
-- tutorial, cluster management, swarm mode
+keywords: tutorial, cluster management, swarm mode
 title: Inspect a service on the swarm
 ---
 

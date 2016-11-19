@@ -1,7 +1,6 @@
 ---
 description: Use macvlan for container networking
-keywords:
-- Examples, Usage, network, docker, documentation, user guide, macvlan, cluster
+keywords: Examples, Usage, network, docker, documentation, user guide, macvlan, cluster
 title: Get started with Macvlan network driver
 ---
 

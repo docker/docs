@@ -1,7 +1,6 @@
 ---
 description: Docker installation on Microsoft Windows
-keywords:
-- Docker, Docker documentation, Windows, requirements, virtualbox,  boot2docker
+keywords: Docker, Docker documentation, Windows, requirements, virtualbox,  boot2docker
 title: Install Docker on Windows
 ---
 

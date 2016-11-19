@@ -1,7 +1,6 @@
 ---
 description: List machines
-keywords:
-- machine, ls, subcommand
+keywords: machine, ls, subcommand
 title: docker-machine ls
 ---
 

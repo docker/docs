@@ -1,7 +1,6 @@
 ---
 description: How do we connect docker containers within and across hosts ?
-keywords:
-- docker, network, IPv6
+keywords: docker, network, IPv6
 title: IPv6 with Docker
 ---
 

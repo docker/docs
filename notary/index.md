@@ -1,7 +1,6 @@
 ---
 description: List of Notary Documentation
-keywords:
-- docker, notary, trust, image, signing, repository, tuf
+keywords: docker, notary, trust, image, signing, repository, tuf
 title: Docker Notary
 ---
 

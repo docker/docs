@@ -1,7 +1,6 @@
 ---
 description: Reference for drivers Docker Machine supports
-keywords:
-- machine, drivers, supports
+keywords: machine, drivers, supports
 title: Drivers
 ---
 

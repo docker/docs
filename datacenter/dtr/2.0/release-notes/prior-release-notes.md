@@ -1,10 +1,9 @@
 ---
+description: Archived release notes for Docker Trusted Registry
+keywords: docker, documentation, about, technology, understanding, enterprise, hub, registry, Docker Trusted Registry, release
 redirect_from:
 - /docker-trusted-registry/prior-release-notes/
 - /docker-trusted-registry/release-notes/prior-release-notes/
-description: Archived release notes for Docker Trusted Registry
-keywords:
-- docker, documentation, about, technology, understanding, enterprise, hub, registry, Docker Trusted Registry, release
 title: DTR release notes archive
 ---
 

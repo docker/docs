@@ -10,6 +10,8 @@ title: Use the Docker Cloud Agent
 
 Docker Cloud allows you to use any Linux host ("bring your own host") as a node which you can then use to deploy containers. To do this, you install the **Docker Cloud Agent** on your Linux host so that Docker Cloud can remotely manage it.
 
+> **Note**: The Docker Cloud Agent only supports x64 architecture at this time. 
+
 The **Docker Cloud Agent** installs its own Docker binary, and automatically removes any prior installation of the Docker Engine packages. See the [Known Limitations](byoh.md#known-limitations) section for more information.
 
 You can still run `docker` CLI commands on a host that is running the Docker Cloud Agent. If you do this, you might see the Docker Cloud system containers that start with `dockercloud/`.

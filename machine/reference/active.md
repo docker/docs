@@ -1,7 +1,6 @@
 ---
 description: Identify active machines
-keywords:
-- machine, active, subcommand
+keywords: machine, active, subcommand
 title: docker-machine active
 ---
 

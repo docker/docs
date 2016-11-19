@@ -1200,11 +1200,12 @@ into the newly created volume.
 
 ## USER
 
-    USER daemon
+    USER daemon[:daemon]
 
 The `USER` instruction sets the user name or UID to use when running the image
 and for any `RUN`, `CMD` and `ENTRYPOINT` instructions that follow it in the
-`Dockerfile`.
+`Dockerfile`. To specify the group ID (GID), add it as a suffix to the UID, 
+separated by a colon. For instance, `MYUSER:MYGROUP`.
 
 ## WORKDIR
 

@@ -1,7 +1,6 @@
 ---
 description: Installing and running an SSHd service on Docker
-keywords:
-- docker, example, package installation,  networking
+keywords: docker, example, package installation,  networking
 title: Dockerize an SSH service
 ---
 

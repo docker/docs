@@ -1,7 +1,6 @@
 ---
 description: How to install Docker Machine
-keywords:
-- machine, orchestration, install, installation, docker, documentation
+keywords: machine, orchestration, install, installation, docker, documentation
 title: Install Docker Machine
 ---
 

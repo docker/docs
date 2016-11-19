@@ -6,6 +6,8 @@ redirect_from:
 title: Logs and troubleshooting
 ---
 
+<!-- /TOC -->
+
 Here is information about how to diagnose and troubleshoot problems, send logs
 and communicate with the Docker for Mac team, use our forums and Knowledge Hub,
 browse and log issues on GitHub, and find workarounds for known problems.
@@ -114,6 +116,17 @@ auto-generated reports on packages.
 <a name="troubleshoot"></a>
 
 ## Troubleshooting
+
+### Volume mounting requires file sharing for any project directories outside of `/Users`
+
+If you are using mounted volumes and get runtime errors indicating an
+application file is not found, a volume mount is denied, or a service cannot
+start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might
+need to enable [file sharing](index.md#file-sharing).
+
+Volume mounting requires shared drives for projects that live outside of the
+`/Users` directory. Go to <img src="images/whale-x.png"> --> **Preferences** -->
+**File sharing** and share the drive that contains the Dockerfile and volume.
 
 ### Recreate or update your containers after Beta 18 upgrade
 

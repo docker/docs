@@ -1,7 +1,6 @@
 ---
 description: Show client configuration
-keywords:
-- machine, ip, subcommand
+keywords: machine, ip, subcommand
 title: docker-machine ip
 ---
 

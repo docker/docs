@@ -1,7 +1,6 @@
 ---
 description: Review of security vulnerabilities Docker mitigated
-keywords:
-- Docker, Docker documentation,  security, security non-events
+keywords: Docker, Docker documentation,  security, security non-events
 title: Docker security non-events
 ---
 

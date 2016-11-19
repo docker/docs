@@ -1,7 +1,6 @@
 ---
 description: Docker Trusted Registry reconfigure command reference.
-keywords:
-- docker, registry, reference, reconfigure
+keywords: docker, registry, reference, reconfigure
 title: docker/dtr reconfigure
 ---
 

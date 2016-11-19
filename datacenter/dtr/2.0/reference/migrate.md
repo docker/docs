@@ -1,7 +1,6 @@
 ---
 description: Learn about the options available on the docker/dtr image.
-keywords:
-- docker, dtr, install, uninstall, configure
+keywords: docker, dtr, install, uninstall, configure
 title: docker/dtr migrate
 ---
 

@@ -1,11 +1,9 @@
 ---
+description: Learn how to upgrade your Docker Trusted Registry to the latest major release.
+keywords: docker, dtr, upgrade, install
 redirect_from:
 - /docker-trusted-registry/install/upgrade/
 - /docker-trusted-registry/upgrade/upgrade-major/
-description: Learn how to upgrade your Docker Trusted Registry to the latest major
-  release.
-keywords:
-- docker, dtr, upgrade, install
 title: Upgrade from 1.4.3
 ---
 

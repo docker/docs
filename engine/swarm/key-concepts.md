@@ -1,7 +1,6 @@
 ---
 description: Introducing key concepts for Docker Engine swarm mode
-keywords:
-- docker, container, cluster, swarm mode
+keywords: docker, container, cluster, swarm mode
 title: Swarm mode key concepts
 ---
 

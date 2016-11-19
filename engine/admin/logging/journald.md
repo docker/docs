@@ -1,9 +1,8 @@
 ---
+description: Describes how to use the fluentd logging driver.
+keywords: Journald, docker, logging, driver
 redirect_from:
 - /engine/reference/logging/journald/
-description: Describes how to use the fluentd logging driver.
-keywords:
-- Journald, docker, logging, driver
 title: Journald logging driver
 ---
 

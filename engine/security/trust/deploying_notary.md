@@ -1,7 +1,6 @@
 ---
 description: Deploying Notary
-keywords:
-- trust, security, notary, deployment
+keywords: trust, security, notary, deployment
 title: Deploying Notary Server with Compose
 ---
 
