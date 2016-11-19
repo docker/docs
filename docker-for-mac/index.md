@@ -119,13 +119,13 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
 ```shell
 	$ docker --version
-	Docker version 1.12.0, build 8eab29e
+	Docker version 1.12.3, build 6b644ec
 
 	$ docker-compose --version
-	docker-compose version 1.8.0, build f3628c7
+	docker-compose version 1.8.1, build 878cff1
 
 	$ docker-machine --version
-	docker-machine version 0.8.0, build b85aac1
+	docker-machine version 0.8.2, build e18a919
 ```
 
 >**Note**: The above is an example. Your output will differ if you are running different (e.g., newer) versions.
