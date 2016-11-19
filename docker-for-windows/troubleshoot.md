@@ -122,15 +122,45 @@ local user is `samstevens` and the domain user is `merlin`.
 
 See also, the related issue on GitHub, [Mounted volumes are empty in the container](https://github.com/docker/for-win/issues/25).
 
+### Local security policies can block shared drives and cause login errors
+
+You need permissions to mount shared drives in order to use the Docker for
+Windows [shared drives](index.md#shared-drives) feature.
+
+If local policy prevents this, you will get errors when you attempt to enable
+shared drives on Docker. This is not something Docker can resolve, you do need
+these permissions to use the feature.
+
+Here are snip-its from example error messages:
+
+```
+Logon failure: the user has not been granted the requested logon type at
+this computer.
+
+[19:53:26.900][SambaShare     ][Error  ] Unable to mount C drive: mount
+error(5): I/O error Refer to the mount.cifs(8) manual page (e.g. man mount.cifs)
+mount: mounting //10.0.75.1/C on /c failed: Invalid argument
+```
+
+See also, <a href="https://github.com/docker/for-win/issues/98">Docker for Windows issue #98</a>.
+
 ### Understand symlinks limitations
 
 Symlinks will work within and across containers. However, symlinks created outside of containers (for example, on the host) will not work. To learn more, see [Are symlinks supported?](faqs.md#are-symlinks-supported) in the FAQs.
 
 ### Avoid unexpected syntax errors, use Unix style line endings for files in containers
 
-Any file destined to run inside a container must use Unix style `\n` line endings. This includes files referenced at the command line for builds and in RUN commands in Docker files.
+Any file destined to run inside a container must use Unix style `\n` line
+endings. This includes files referenced at the command line for builds and in
+RUN commands in Docker files.
 
-Docker containers and `docker build` run in a Unix environment, so files in containers must use Unix style line endings: `\n`, _not_ Windows style: `\r\n`. Keep this in mind when authoring files such as shell scripts using Windows tools, where the default is likely to be Windows style line endings.  These commands ultimately get passed to Unix commands inside a Unix based container (for example, a shell script passed to `/bin/sh`). If Windows style line endings are used, `docker run` will fail with syntax errors.
+Docker containers and `docker build` run in a Unix environment, so files in
+containers must use Unix style line endings: `\n`, _not_ Windows style: `\r\n`.
+Keep this in mind when authoring files such as shell scripts using Windows
+tools, where the default is likely to be Windows style line endings.  These
+commands ultimately get passed to Unix commands inside a Unix based container
+(for example, a shell script passed to `/bin/sh`). If Windows style line endings
+are used, `docker run` will fail with syntax errors.
 
 For an example of this issue and the resolution, see this issue on GitHub: <a href="https://github.com/docker/docker/issues/24388" target="_blank">Docker RUN fails to execute shell script (https://github.com/docker/docker/issues/24388)</a>.
 
@@ -257,14 +287,25 @@ As an immediate workaround to this problem, reset the DNS server to use the Goog
 We are currently investigating this issue.
 
 #### Networking issues on pre Beta 10 versions
-Docker for Windows Beta 10 and later fixed a number of issues around the networking setup.  If you still experience networking issue, this may be related to previous Docker for Windows installations.  In this case, please quit Docker for Windows and perform the following steps:
+Docker for Windows Beta 10 and later fixed a number of issues around the
+networking setup.  If you still experience networking issue, this may be related
+to previous Docker for Windows installations.  In this case, please quit Docker
+for Windows and perform the following steps:
 
 ##### 1. Remove multiple `DockerNAT` VMswitches
-You might have multiple Internal VMSwitches called `DockerNAT`. You can view all VMSwitches either via the `Hyper-V Manager` sub-menu `Virtual Switch Manager` or from an elevated Powershell (run as Administrator) prompt by typing `Get-VMSwitch`. Simply delete all VMSwitches with `DockerNAT` in the name, either via the `Virtual Switch Manager` or by using `Remove-VMSwitch` powershell cmdlet.
+You might have multiple Internal VMSwitches called `DockerNAT`. You can view all
+VMSwitches either via the `Hyper-V Manager` sub-menu `Virtual Switch Manager` or
+from an elevated Powershell (run as Administrator) prompt by typing
+`Get-VMSwitch`. Simply delete all VMSwitches with `DockerNAT` in the name,
+either via the `Virtual Switch Manager` or by using `Remove-VMSwitch` powershell
+cmdlet.
 
 ##### 2. Remove lingering IP addresses
 
-You might have lingering IP addresses on the system. They are supposed to get removed when you remove the associated VMSwitches, but sometimes this fails. Using `Remove-NetIPAddress 10.0.75.1` in an elevated Powershell prompt should remove them.
+You might have lingering IP addresses on the system. They are supposed to get
+removed when you remove the associated VMSwitches, but sometimes this fails.
+Using `Remove-NetIPAddress 10.0.75.1` in an elevated Powershell prompt should
+remove them.
 
 ##### 3. Remove stale NAT configurations
 
@@ -277,21 +318,37 @@ You might have stale Network Adapters on the system. You should remove them with
     $vmNetAdapter = Get-VMNetworkAdapter -ManagementOS -SwitchName DockerNAT
     Get-NetAdapter "vEthernet (DockerNAT)" | ? { $_.DeviceID -ne $vmNetAdapter.DeviceID } | Disable-NetAdapter -Confirm:$False -PassThru | Rename-NetAdapter -NewName "Broken Docker Adapter"
 
-Then you can remove them manually via the `devmgmt.msc` (aka Device Manager). You should see them as disabled Hyper-V Virtual Ethernet Adapter under the Network Adapter section. A right-click and selecting **uninstall** should remove the adapter.
+Then you can remove them manually via the `devmgmt.msc` (aka Device Manager).
+You should see them as disabled Hyper-V Virtual Ethernet Adapter under the
+Network Adapter section. A right-click and selecting **uninstall** should remove
+the adapter.
 
 ### NAT/IP configuration
 
-By default, Docker for Windows uses an internal network prefix of `10.0.75.0/24`. Should this clash with your normal network setup, you can change the prefix from the **Settings** menu. See the [Network](index.md#network) topic under [Settings](index.md#docker-settings).
+By default, Docker for Windows uses an internal network prefix of
+`10.0.75.0/24`. Should this clash with your normal network setup, you can change
+the prefix from the **Settings** menu. See the [Network](index.md#network) topic
+under [Settings](index.md#docker-settings).
 
 #### NAT/IP configuration issues on pre Beta 15 versions
 
-As of Beta 15, Docker for Windows is no longer using a switch with a NAT configuration. The notes below are left here only for older Beta versions.
+As of Beta 15, Docker for Windows is no longer using a switch with a NAT
+configuration. The notes below are left here only for older Beta versions.
 
-As of Beta14, networking for Docker for Windows is configurable through the UI. See the [Network](index.md#network) topic under [Settings](index.md#docker-settings).
+As of Beta14, networking for Docker for Windows is configurable through the UI.
+See the [Network](index.md#network) topic under
+[Settings](index.md#docker-settings).
 
-By default, Docker for Windows uses an internal Hyper-V switch with a NAT configuration with a `10.0.75.0/24` prefix. You can change the prefix used (as well as the DNS server) via the **Settings** menu as described in the [Network](index.md#network) topic.
+By default, Docker for Windows uses an internal Hyper-V switch with a NAT
+configuration with a `10.0.75.0/24` prefix. You can change the prefix used (as
+well as the DNS server) via the **Settings** menu as described in the
+[Network](index.md#network) topic.
 
-If you have additional Hyper-V VMs and they are attached to their own NAT prefixes, the prefixes need to be managed carefully, due to limitation of the Windows NAT implementation. Specifically, Windows currently only allows a single internal NAT prefix. If you need additional prefixes for your other VMs, you can create a larger NAT prefix.
+If you have additional Hyper-V VMs and they are attached to their own NAT
+prefixes, the prefixes need to be managed carefully, due to limitation of the
+Windows NAT implementation. Specifically, Windows currently only allows a single
+internal NAT prefix. If you need additional prefixes for your other VMs, you can
+create a larger NAT prefix.
 
 To create a larger NAT prefix, do the following.
 

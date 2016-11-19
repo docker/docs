@@ -26,7 +26,7 @@ If you are using these build environment variables in a
 `docker-compose.test.yml` file for automated testing, declare them in your `sut`
 service's environment as shown below.
 
-```yml
+```none
 sut:
   build: .
   command: run_tests.sh
