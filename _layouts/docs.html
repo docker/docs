@@ -17,7 +17,7 @@
 {% for override in site.data.not_edited_here.overrides %}
 {% if page.url contains override.path %}
 {% assign overridden="true" %}
-{% assign editsource=override.source %}
+{% capture editsource %}{{ override.source }}{{ page.path }}{% endcapture %}
 {% break %}
 {% endif %}
 {% endfor %}
