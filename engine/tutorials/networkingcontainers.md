@@ -11,64 +11,6 @@ If you are working your way through the user guide, you just built and ran a
 simple application. You've also built in your own images. This section teaches
 you how to network your containers.
 
-## Name a container
-
-You've already seen that each container you create has an automatically
-created name; indeed you've become familiar with our old friend
-`nostalgic_morse` during this guide. You can also name containers
-yourself. This naming provides two useful functions:
-
-*  You can name containers that do specific functions in a way
-   that makes it easier for you to remember them, for example naming a
-   container containing a web application `web`.
-
-*  Names provide Docker with a reference point that allows it to refer to other
-   containers. There are several commands that support this and you'll use one in an exercise later.
-
-You name your container by using the `--name` flag, for example launch a new container called web:
-
-    $ docker run -d -P --name web training/webapp python app.py
-
-Use the `docker ps` command to check the name:
-
-    $ docker ps -l
-
-    CONTAINER ID  IMAGE                  COMMAND        CREATED       STATUS       PORTS                    NAMES
-    aed84ee21bde  training/webapp:latest python app.py  12 hours ago  Up 2 seconds 0.0.0.0:49154->5000/tcp  web
-
-You can also use `docker inspect` with the container's name.
-
-    $ docker inspect web
-
-    [
-       {
-           "Id": "3ce51710b34f5d6da95e0a340d32aa2e6cf64857fb8cdb2a6c38f7c56f448143",
-           "Created": "2015-10-25T22:44:17.854367116Z",
-           "Path": "python",
-           "Args": [
-               "app.py"
-           ],
-           "State": {
-               "Status": "running",
-               "Running": true,
-               "Paused": false,
-               "Restarting": false,
-               "OOMKilled": false,
-      ...
-
-Container names must be unique. That means you can only call one container
-`web`. If you want to re-use a container name you must delete the old container
-(with `docker rm`) before you can reuse the name with a new container. Go ahead and stop and remove your old `web` container.
-
-    $ docker stop web
-
-    web
-
-    $ docker rm web
-
-    web
-
-
 ## Launch a container on the default network
 
 Docker includes support for networking containers through the use of **network

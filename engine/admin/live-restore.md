@@ -10,6 +10,9 @@ containers remain running if the daemon becomes unavailable. The live restore
 option helps reduce container downtime due to daemon crashes, planned outages,
 or upgrades.
 
+> **Note**: Live restore is not supported on Windows containers, but it does work
+for Linux containers running on Windows.
+
 ## Enable the live restore option
 
 There are two ways to enable the live restore setting to keep containers alive
@@ -72,3 +75,4 @@ You can modify the kernel's buffer size by changing `/proc/sys/fs/pipe-max-size`
 The live restore option is not compatible with Docker Engine swarm mode. When
 the Docker Engine runs in swarm mode, the orchestration feature manages tasks
 and keeps containers running according to a service specification.
+

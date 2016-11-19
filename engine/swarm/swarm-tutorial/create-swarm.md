@@ -8,7 +8,7 @@ After you complete the [tutorial setup](index.md) steps, you're ready
 to create a swarm. Make sure the Docker Engine daemon is started on the host
 machines.
 
-1. Open a terminal and ssh into the machine where you want to run your manager
+1.  Open a terminal and ssh into the machine where you want to run your manager
 node. For example, the tutorial uses a machine named `manager1`.
     
     ```bash

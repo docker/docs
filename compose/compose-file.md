@@ -12,6 +12,8 @@ The Compose file is a [YAML](http://yaml.org/) file defining
 [volumes](compose-file.md#volume-configuration-reference).
 The default path for a Compose file is `./docker-compose.yml`.
 
+>**Tip:** You can use either a `.yml` or `.yaml` extension for this file. They both work.
+
 A service definition contains configuration which will be applied to each
 container started for that service, much like passing command-line parameters to
 `docker run`. Likewise, network and volume definitions are analogous to

@@ -1,6 +1,10 @@
 toc:
 - title: Welcome to the Docs
   path: /
+- sectiontitle: Docker ID
+  section:
+  - path: /docker-id/
+    title: Docker ID accounts
 - sectiontitle: Docker Engine
   section:
   - sectiontitle: Install
@@ -205,6 +209,8 @@ toc:
         title: Apply rolling updates
       - path: /engine/swarm/swarm-tutorial/drain-node/
         title: Drain a node
+      - path: /engine/swarm/ingress/
+        title: Use swarm mode routing mesh
     - sectiontitle: How swarm mode works
       section:
       - path: /engine/swarm/how-swarm-mode-works/nodes/
@@ -769,6 +775,8 @@ toc:
         title: Use your own certificates
       - path: /datacenter/dtr/2.1/guides/configure/configure-storage/
         title: Storage configuration
+      - path: /datacenter/dtr/2.1/guides/configure/use-nfs/
+        title: Use NFS
     - sectiontitle: Monitor and troubleshoot
       section:
       - path: /datacenter/dtr/2.1/guides/monitor-troubleshoot/

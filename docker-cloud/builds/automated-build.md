@@ -13,16 +13,16 @@ repository and automatically push the built image to your Docker
 repositories.
 
 When you set up automated builds (also called autobuilds), you create a list of
-branches and tags of the images that you want to build. When you push code to a
-source code branch (for example in Github) for one of those listed image tags,
-the push uses a webhook to trigger a new build, which produces a Docker image.
-The built image is then pushed to the Docker Cloud registry or to an external
-registry.
+branches and tags that you want to build into Docker images. When you push code
+to a source code branch (for example in Github) for one of those listed image
+tags, the push uses a webhook to trigger a new build, which produces a Docker
+image. The built image is then pushed to the Docker Cloud registry or to an
+external registry.
 
 If you have automated tests configured, these run after building but before
 pushing to the registry. You can use these tests to create a continuous
-integration workflow. Automated tests do not push images to the registry on
-their own. [Learn more about automated image testing here.](automated-testing.md)
+integration workflow where a build that fails its tests does not push the built
+image. Automated tests do not push images to the registry on their own. [Learn more about automated image testing here.](automated-testing.md)
 
 You can also just use `docker push` to push pre-built images to these
 repositories, even if you have automatic builds set up.
@@ -31,7 +31,7 @@ repositories, even if you have automatic builds set up.
 
 ## Configure automated build settings
 
-You can configure your repositories in Docker Cloud so that they automatically
+You can configure repositories in Docker Cloud so that they automatically
 build an image each time you push new code to your source provider. If you have
 [automated tests](automated-testing.md) configured, the new image is only pushed
 when the tests succeed.
@@ -94,7 +94,8 @@ the code repository service where the image's source code is stored.
 
     Only branches or tags with autobuild enabled are built, tested, *and* have
     the resulting image pushed to the repository. Branches with autobuild
-    disabled will be built for test purposes (if enabled at the repository level), but not pushed.
+    disabled will be built for test purposes (if enabled at the repository
+    level), but the built Docker image is not pushed to the repository.
 
 10. For each branch or tag, enable or disable the **Build Caching** toggle.
 
@@ -124,18 +125,39 @@ should remain secret.
 the build processes _only_ and should not be confused with the environment
 values used by your service (for example to create service links).
 
-
 ## Check your active builds
 
-You can view a summary of the last five builds for a repository from the repository's **General** tab.  You can also click **Timeline** to view a list of all active builds, and expand each build to see their real-time logs. The **Builds** tab also displays a color coded bar chart of the build queue times and durations.
+A summary of a repository's builds appears both on the repository **General**
+tab, and in the **Builds** tab. The **Builds** tab also displays a color coded
+bar chart of the build queue times and durations. Both views display the
+pending, in progress, successful, and failed builds for any tag of the
+repository.
 
-Both views display the pending, in progress, successful, and failed builds
-for any tag of the repository.
+From either location, you can click a build job to view its build report. The
+build report shows information about the build job including the source
+repository and branch (or tag), the build duration, creation time and location,
+and the user namespace the build occurred in.
 
-You can click the **Cancel** button for pending builds and builds in progress.
-If a build fails, the cancel button is replaced by a **Retry** button.
+![screen showing a build report](images/build-report.png)
 
-![](images/cancel-build.png)
+## Cancel or retry a build
+
+While a build is queued or running, a **Cancel** icon appears next to its build
+report link on the General tab and on the Builds tab. You can also click the
+**Cancel** button from the build report page, or from the Timeline tab's logs
+display for the build.
+
+![list of builds showing the cancel icon](images/build-cancelicon.png)
+
+If a build fails, a **Retry** icon appears next to the build report line on the
+General and Builds tabs, and the build report page and Timeline logs also
+display a **Retry** button.
+
+![Timeline view showing the retry build button](images/retry-build.png)
+
+> **Note**: If you are viewing the build details for a repository that belongs
+to an Organization, the Cancel and Retry buttons only appear if you have `Read & Write` access to the repository.
+
 
 ## Disable an automated build
 

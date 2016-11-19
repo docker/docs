@@ -2,7 +2,7 @@ var tocData;
 function hookupTOCEvents()
 {
   // do after tree render
-  $('.expand-menu').on('click touchstart', function(elem) {
+  $('.expand-menu').on('mouseup touchend', function(elem) {
 //      menu = elem.currentTarget.nextElementSibling
     menu = elem.currentTarget.parentElement
     if (menu.classList.contains("menu-closed")) {
@@ -17,6 +17,7 @@ function hookupTOCEvents()
   $(".currentPage").each(function(){
     $(this).parentsUntil($('.docsidebarnav_section')).addClass("active").removeClass("menu-closed").addClass("menu-open");
   });
+  $(".left-off-canvas-menu").css("display","block");
 }
 jQuery(document).ready(function(){
     hookupTOCEvents();
