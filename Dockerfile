@@ -14,8 +14,7 @@ RUN svn co https://github.com/docker/docker/branches/1.12.x/docs/extend allv/eng
 # Can't use the svn trick to get a single file, use wget instead
 RUN wget -O allv/engine/deprecated.md https://raw.githubusercontent.com/docker/docker/1.12.x/docs/deprecated.md
 # Make a temporary commit for the files we added so we can check out other branches later
-RUN git --git-dir=./allv/.git --work-tree=./allv add engine
-RUN git --git-dir=./allv/.git --work-tree=./allv commit -m "Temporary commit"
+RUN git --git-dir=./allv/.git --work-tree=./allv commit -m "Temporary commit" -a
 
 # Create HTML for master
 RUN jekyll build -s allv -d allvbuild
