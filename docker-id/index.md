@@ -15,7 +15,7 @@ Center, the Docker Forums, and the Docker Success portal.
 
 ## Register for a Docker ID
 
-Your Docker ID becomes your user namespace for hosted Docker services, and becomes your username on the Docker Forums. A Docker ID also
+Your Docker ID becomes your user namespace for hosted Docker services, and becomes your username on the Docker Forums.
 
 1. Go to the [Docker Cloud sign up page](https://cloud.docker.com).
 
