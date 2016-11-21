@@ -294,7 +294,9 @@ To create the `docker` group and add your user:
 		Cannot connect to the Docker daemon. Is 'docker daemon' running on this host?
 
 	Check that the `DOCKER_HOST` environment variable is not set for your shell.
-	If it is, unset it.
+	If it is, unset it. Also make sure that you aren't keeping ssh socket files with a timeout. 
+	You can wait for the sockets files to be removed as per specified timeout or manually delete
+	them before login again into the remote machine.
 
 ### Adjust memory and swap accounting
 
