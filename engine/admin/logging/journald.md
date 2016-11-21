@@ -110,4 +110,5 @@ time-unit.
 If your application needs large-scale logging, configure `RateLimitIntervalSec`
 and `RateLimitBurst` in the `journald` configuration file. By default,
 `systemd` drops messages in excess of 1000 messages per service per 30 seconds.
-For more information about configuring `journald`, see https://www.freedesktop.org/software/systemd/man/journald.conf.html
+For more information about configuring `journald`, see the
+[`journald` documentation](https://www.freedesktop.org/software/systemd/man/journald.conf.html).
