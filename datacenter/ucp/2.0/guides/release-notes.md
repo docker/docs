@@ -13,6 +13,45 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](installation/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.0.1
+
+(22 Nov 2016)
+
+**Features**
+
+* UI/UX
+  * The node details page now shows information about the node's CPU and RAM
+  * Improved applications page to provide more guidance when there are no apps deployed
+
+**Bug Fixes**
+
+* Core
+  * HTTP routing mesh no longer crashes if a routed service fails. It also
+  provides better error messages in the CLI
+
+* docker/ucp image
+  * Install and upgrade timeouts were increased to ensure the swarm managed by
+  UCP is fully operational
+  * Using `--external-server-cert` at install time now correctly preserves
+  pre-existing server certificates
+  * Joining a node that's using a non-default Docker runtime path now works as
+  expected
+
+* UI/UX
+  * Several buttons and links are now hidden if the user has "Read-Only"
+  permissions, e.g. deploy application, create volumes, create images
+  * When importing users from LDAP, the change password fields are no longer
+  displayed in the user profile
+  * When integrating with LDAP, the LDAP reader password is no longer displayed
+  on the UI or HTML
+  * Clarified that service resource constraints use absolute instead on nano CPU
+  shared. This is consistent with the Docker CLI
+  * UI now prompts for confirmation when switching from LDAP to built-in
+  authentication
+  * Improved DTR integration screen, to provide more guidance on how to isntall
+  DTR
+
+
 ## Version 2.0.0
 
 (10 Nov 2016)
