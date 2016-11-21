@@ -70,7 +70,7 @@ To get help with your private key file, instance IP address, and how to log into
         $ cd ~/Desktop/keys/amazon_ec2
         $ ssh -i "my-key-pair.pem" ubuntu@xx.xxx.xxx.xxx
 
-    We'll follow the instructions for installing Docker on Ubuntu at https://docs.docker.com/engine/installation/ubuntulinux/. The next few steps reflect those instructions.
+    We'll follow the instructions for installing Docker on Ubuntu at <a href="https://docs.docker.com/engine/installation/ubuntulinux/" target="_blank">https://docs.docker.com/engine/installation/ubuntulinux/</a>. The next few steps reflect those instructions.
 
 2. Check the kernel version to make sure it's 3.10 or higher.
 
