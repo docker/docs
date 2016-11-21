@@ -5,6 +5,8 @@ toc:
   section:
   - path: /docker-id/
     title: Docker ID accounts
+  - path: /docker-id/api-reference/
+    title: API Reference
 - sectiontitle: Docker Engine
   section:
   - sectiontitle: Install
@@ -495,8 +497,6 @@ toc:
         title: Remote API v1.18
       - path: /engine/reference/api/remote_api_client_libraries/
         title: Remote API client libraries
-      - path: /engine/reference/api/docker_io_accounts_api/
-        title: docker.io accounts API
   - path: /engine/migration/
     title: Migrate to Engine 1.10
   - path: /engine/breaking_changes/
