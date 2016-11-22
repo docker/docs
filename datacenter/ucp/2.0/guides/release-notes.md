@@ -72,6 +72,8 @@ of specific teams
 * Built-in TCP load balancing and service discovery for services
 * Added an HTTP routing mesh for enabling hostname routing for services
 (experimental)
+* The UCP web UI now lets you know when a new version is available, and upgrades
+to the the new version with a single click
 
 **Installer**
 
