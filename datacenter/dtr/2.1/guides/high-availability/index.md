@@ -74,7 +74,7 @@ Make sure you configure your load balancer to:
 
 * Load-balance TCP traffic on ports 80 and 443,
 * Not terminate HTTPS connections,
-* Use the `/load_balancer_status` endpoint on each DTR replica, to check if
+* Use the `/health` endpoint on each DTR replica, to check if
 the replica is healthy and if it should remain on the load balancing pool or
 not.
 
