@@ -26,6 +26,7 @@ upgrade your installation to the latest release.
 **Bug Fixes**
 
 * Core
+  * Fixed an issue with rethinkDB sync that causes timeout failures during upgrades
   * HTTP routing mesh no longer crashes if a routed service fails. It also
   provides better error messages in the CLI
 
