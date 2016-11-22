@@ -27,45 +27,42 @@ supported:
 | `gcplogs`   | Google Cloud Logging driver for Docker. Writes log messages to Google Cloud Logging.                                          |
 | `nats`      | NATS logging driver for Docker. Publishes log entries to a NATS server.                                                       |
 
-The `docker logs` command is available only for the `json-file` and `journald`
+The `docker logs` command is only available for the `json-file` and `journald`
 logging drivers.
 
 The `labels` and `env` options add additional attributes for use with logging
 drivers that accept them. Each option takes a comma-separated list of keys. If
-there is collision between `label` and `env` keys, the value of the `env` takes
-precedence.
+there is a collision between `label` and `env` keys, the value of the `env`
+takes precedence.
 
-To use attributes, specify them when you start the Docker daemon. For example,
-to manually start the daemon with the `json-file` driver, and include additional
-attributes in the output, run the following command:
+Specify attributes when you start the Docker daemon. For example, the following
+command starts the daemon with the `json-file` driver and includes additional
+attributes in the output.
 
 ```bash
-$ dockerd \
-         --log-driver=json-file \
-         --log-opt labels=foo \
-         --log-opt env=foo,fizz
+$ dockerd --log-driver=json-file \
+          --log-opt labels=foo \
+          --log-opt env=foo,fizz
 ```
 
-Then, run a container and specify values for the `labels` or `env`. For
-example, you might use this:
+This command runs a container with specific values for the `labels` or `env`.
 
 ```bash
 $ docker run -dit --label foo=bar -e fizz=buzz alpine sh
 ```
 
-This adds additional fields to the log depending on the driver, e.g. for
-`json-file` that looks like:
+This adds additional fields to the log depending on the driver. If you use
+`json-file`, it might add the attributes as follows:
 
 ```json
 "attrs":{"fizz":"buzz","foo":"bar"}
 ```
 
-
 ## json-file options
 
 The following logging options are supported for the `json-file` logging driver:
 
-```no-highlight
+```none
 --log-opt max-size=[0-9]+[kmg]
 --log-opt max-file=[0-9]+
 --log-opt labels=label1,label2
@@ -88,7 +85,7 @@ from the newest log file.
 
 The following logging options are supported for the `syslog` logging driver:
 
-```no-highlight
+```none
 --log-opt syslog-address=[tcp|udp|tcp+tls]://host:port
 --log-opt syslog-address=unix://path
 --log-opt syslog-address=unixgram://path
@@ -206,7 +203,7 @@ By default, Docker uses the first 12 characters of the container ID to tag log
 messages. Refer to the [log tag option documentation](log_tags.md) for
 customizing the log tag format.
 
-The `labels` and `env` options are supported by the gelf logging
+The `labels` and `env` options are supported by the `gelf` logging
 driver. It adds additional key on the `extra` fields, prefixed by an
 underscore (`_`).
 ```json
@@ -241,24 +238,24 @@ For example, to specify both additional options:
 ```bash
 {% raw %}
 $ docker run -dit \
-    --log-driver=fluentd \
-    --log-opt fluentd-address=localhost:24224 \
-    --log-opt tag="docker.{{.Name}}" \
-    alpine sh
+             --log-driver=fluentd \
+             --log-opt fluentd-address=localhost:24224 \
+             --log-opt tag="docker.{{.Name}}" \
+             alpine sh
 {% endraw %}
 ```
 
-If container cannot connect to the Fluentd daemon on the specified address and
-`fluentd-async-connect` is not enabled, the container stops immediately.
-For detailed information on working with this logging driver,
-see [the fluentd logging driver](fluentd.md)
-
+If cthe ontainer cannot connect to the Fluentd daemon on the specified address
+and `fluentd-async-connect` is not enabled, the container stops immediately. For
+detailed information about working with this logging driver, see [the fluentd
+logging driver](fluentd.md)
 
 ## Amazon CloudWatch Logs options
 
 The Amazon CloudWatch Logs logging driver supports the following options:
 
-```bash
+
+```none
 {% raw %}
 --log-opt awslogs-region=<aws_region>
 --log-opt awslogs-group=<log_group_name>
@@ -267,50 +264,50 @@ The Amazon CloudWatch Logs logging driver supports the following options:
 {% endraw %}
 ```
 
-For detailed information on working with this logging driver, see [the awslogs
-logging driver](awslogs.md) reference documentation.
+For detailed information about working with this logging driver, see
+[the awslogs logging driver](awslogs.md) reference documentation.
 
 ## Splunk options
 
-The Splunk logging driver requires the following options:
+The `splunk`` logging driver requires the following options:
 
-```no-highlight
+```none
 --log-opt splunk-token=<splunk_http_event_collector_token>
 --log-opt splunk-url=https://your_splunk_instance:8088
 ```
 
-For detailed information about working with this logging driver, see the
+For detailed information about working with the `splunk` logging driver, see the
 [Splunk logging driver](splunk.md) reference documentation.
 
 ## ETW logging driver options
 
-The etwlogs logging driver does not require any options to be specified. This
-logging driver forwards each log message as an ETW event. An ETW listener
-can then be created to listen for these events.
+The `etwlogs` logging driver forwards each log message as an ETW event. An ETW
+listener can then be created to listen for these events. This driver does not
+accept any options.
 
 The ETW logging driver is only available on Windows. For detailed information
-on working with this logging driver, see [the ETW logging driver](etwlogs.md)
+about working with this logging driver, see [the ETW logging driver](etwlogs.md)
 reference documentation.
 
 ## Google Cloud Logging options
 
 The Google Cloud Logging driver supports the following options:
 
-```no-highlight
+```none
 --log-opt gcp-project=<gcp_projext>
 --log-opt labels=<label1>,<label2>
 --log-opt env=<envvar1>,<envvar2>
 --log-opt log-cmd=true
 ```
 
-For detailed information about working with this logging driver, see the
-[Google Cloud Logging driver](gcplogs.md). reference documentation.
+For detailed information about working with the Google Cloud logging driver, see
+the [Google Cloud Logging driver](gcplogs.md). reference documentation.
 
 ## NATS logging options
 
 The NATS logging driver supports the following options:
 
-```bash
+```none
 --log-opt labels=<label1>,<label2>
 --log-opt env=<envvar1>,<envvar2>
 --log-opt tag=<tag>
@@ -323,4 +320,5 @@ The NATS logging driver supports the following options:
 --log-opt nats-tls-skip-verify="<value>"
 ```
 
-For detailed information, see [the NATS logging driver](nats.md) reference documentation.
+For detailed information, see [the NATS logging driver](nats.md) reference
+documentation.

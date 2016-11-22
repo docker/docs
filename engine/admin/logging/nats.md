@@ -1,14 +1,8 @@
 ---
 description: Describes how to use NATS for publishing log entries
-keywords:
-- NATS, nats.io, messaging, docker, logging, driver
-menu:
-  main:
-    parent: smn_logging
+keywords: NATS, nats.io, messaging, docker, logging, driver
 title: NATS logging driver
 ---
-
-# NATS Logging driver
 
 Docker logging driver for sending container the logs as events published to NATS in JSON format.
 
@@ -17,12 +11,16 @@ Docker logging driver for sending container the logs as events published to NATS
 You can configure the default logging driver by passing the `--log-driver`
 option to the Docker daemon:
 
-    dockerd --log-driver=nats
+```bash
+$ dockerd --log-driver=nats
+```
 
 You can set the logging driver for a specific container by using the
 `--log-driver` option to `docker run`:
 
-    docker run --log-driver=nats ...
+```bash
+$ docker run --log-driver=nats ...
+```
 
 This log driver does not implement a reader so it is incompatible with `docker logs`.
 
@@ -50,36 +48,41 @@ for NATS:
 Below is an example usage of the driver for sending logs to a node in a
 NATS cluster to the `docker.logs` subject:
 
-```
-  docker run --log-driver=nats \
-        --log-opt nats-subject=docker.logs
-        --log-opt nats-servers=nats://nats-node-1:4222,nats://nats-node-2:4222, nats://nats-node-3:4222
-        your/application
+```bash
+$ docker run --log-driver=nats \
+             --log-opt nats-subject=docker.logs \
+             --log-opt nats-servers=nats://nats-node-1:4222,nats://nats-node-2:4222,nats://nats-node-3:4222 \
+             your/application
 ```
 
 By default, the tag is used as the subject for NATS, so it has to be a valid
 subject in case subject it is left unspecified:
 
-```
-  docker run --log-driver nats \
-        --log-opt tag="docker.{{.ID}}.{{.ImageName}}" your/application
+```bash
+{% raw %}
+$ docker run --log-driver nats \
+             --log-opt tag="docker.{{.ID}}.{{.ImageName}}"
+             your/application
+{% endraw %}
 ```
 
 Secure connection to NATS using TLS can be customized by setting `tls://` scheme
 in the URI and absolute paths to the certs and key files:
 
-```
-  docker run --log-driver nats \
-       --log-opt nats-tls-key=/srv/configs/certs/client-key.pem \
-       --log-opt nats-tls-cert=/srv/configs/certs/client-cert.pem \
-       --log-opt nats-tls-ca-cert=/srv/configs/certs/ca.pem \
-	   --log-opt nats-servers="tls://127.0.0.1:4223,tls://127.0.0.1:4222" your/application
+```bash
+docker run --log-driver nats \
+           --log-opt nats-tls-key=/srv/configs/certs/client-key.pem \
+           --log-opt nats-tls-cert=/srv/configs/certs/client-cert.pem \
+           --log-opt nats-tls-ca-cert=/srv/configs/certs/ca.pem \
+           --log-opt nats-servers="tls://127.0.0.1:4223,tls://127.0.0.1:4222" \
+           your/application
 ```
 
 Skip verify is enabled by default, in order to deactivate we can specify `nats-tls-skip-verify`:
 
-```
+```bash
   docker run --log-driver nats \
-       --log-opt nats-tls-skip-verify \
-       --log-opt nats-servers="tls://127.0.0.1:4223,tls://127.0.0.1:4222" your/application
+             --log-opt nats-tls-skip-verify \
+             --log-opt nats-servers="tls://127.0.0.1:4223,tls://127.0.0.1:4222" \
+             your/application
 ```
