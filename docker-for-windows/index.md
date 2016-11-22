@@ -284,6 +284,44 @@ The next few steps take you through some examples. These are just suggestions fo
 
 **Want more example applications?** - For more example walkthroughs that include setting up services and databases with Docker Compose, see [Example Applications](examples.md).
 
+## Set up tab completion in PowerShell
+
+If you would like to have handy tab completion for Docker commands, you can install the <a href="https://github.com/samneirinck/posh-docker">posh-docker</a> PowerShell Module as follows.
+
+1. Start an "elevated" PowerShell (i.e., run it as administrator).
+
+    To do this, search for PowerShell, right-click, and choose **Run as administrator**.<br>
+
+    ![Run PowerShell as administrator](images/PowerShell-as-admin.png)
+    <br><br>
+    When asked if you want to allow this app to make changes to your device, click **Yes**.
+
+2. Set the [script execution policy](https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.security/set-executionpolicy) to allow downloaded scripts signed by trusted publishers to run on your computer. To do so, type this at the PowerShell prompt.
+    <br>
+    `Set-ExecutionPolicy RemoteSigned`
+    <br>
+    To check that the policy is set properly, run `get-executionpolicy`, which should return `RemoteSigned`.
+    <br>
+3. To enable auto-completion of commands for the current PowerShell only, type:
+
+    `Import-Module posh-docker`
+
+4. To make tab completion persistent across all PowerShell sessions, add the command to a `$PROFILE` by typing these commands at the PowerShell prompt.
+
+        Install-Module -Scope CurrentUser posh-docker -Force
+        Add-Content $PROFILE "`nImport-Module posh-docker"
+
+    This creates a `$PROFILE` if one does not already exist, and adds this line into the file:
+
+    `Import-Module posh-docker`
+
+    <br>
+    To check that the file was properly created, or simply edit it manually, type this in PowerShell:
+
+    `Notepad $PROFILE`
+
+Now, when you press tab after typing the first few letters, Docker commands such as `start`, `stop`, `run`, and their options, along with container and image names should now auto-complete.
+
 ## Docker Settings
 
 When Docker is running, the Docker whale is displayed in the system tray. If it is hidden, click the up arrow in the tray to show it.
