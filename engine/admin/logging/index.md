@@ -14,3 +14,4 @@ title: Logging drivers
 * [Splunk logging driver](splunk.md)
 * [ETW logging driver](etwlogs.md)
 * [Google Cloud Logging driver](gcplogs.md)
+* [NATS Logging driver](nats.md)
