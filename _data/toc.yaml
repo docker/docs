@@ -765,6 +765,8 @@ toc:
         title: Install offline
       - path: /datacenter/dtr/2.1/guides/install/license/
         title: License your deployment
+      - path: /datacenter/dtr/2.1/guides/install/scale-your-deployment/
+        title: Scale your deployment
       - path: /datacenter/dtr/2.1/guides/install/upgrade/
         title: Upgrade
       - path: /datacenter/dtr/2.1/guides/install/uninstall/
