@@ -365,6 +365,8 @@ toc:
       title: Deploy services to a swarm
     - path: /engine/swarm/secrets/
       title: Manage sensitive data with Docker secrets
+    - path: /engine/swarm/swarm_manager_locking.md
+      title: Lock your swarm
     - path: /engine/swarm/networking/
       title: Attach services to an overlay network
     - path: /engine/swarm/admin_guide/
