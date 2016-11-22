@@ -44,7 +44,6 @@ At minimum, each product tier must be represented by a unique tag within a
 repository, however you can also select tags for each tier from several
 different repositories or namespaces.
 
-> **Note**: During the beta period, Docker Store only supports two product tiers. We're working diligently to support more tiers in the future.
 
 **Save and continue**
 
@@ -69,7 +68,6 @@ product tiers you plan to offer on the Docker Store. For example you might have
 a Free tier, a Basic tier, and an Enterprise tier, each represented by a
 different namespace/repo/tag combination.
 
-> **Note**: During the beta period, Docker Store only supports two product tiers. We're working diligently to support more tiers in the future.
 
 Make sure you have read the required **Vendor agreement**, and check the box to
 indicate your agreement.
