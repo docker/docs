@@ -1,7 +1,7 @@
 ---
 description: Using your DockerID to log in to Docker Cloud
 keywords: one, two, three
-title: Docker ID and Docker Cloud settings
+title: Docker Cloud Settings and Docker ID
 ---
 
 Docker Cloud uses your Docker ID for access and access control, and this allows
@@ -10,9 +10,9 @@ you to link your Hub and Cloud accounts.
 If you already have an account on Docker Hub you can use the same credentials to
 log in to Docker Cloud.
 
-If you don't have an existing Docker ID, you can sign up for a new Docker ID
-from the Cloud website, or using the `docker login` command in the Docker CLI.
-The name you choose for your Docker ID becomes part of your account namespace.
+If you don't have a [Docker ID](../docker-id/) yet, you can sign up for one from
+the Cloud website, or using the `docker login` command in the Docker CLI. The
+name you choose for your Docker ID becomes part of your account namespace.
 
 ## Manage cloud services and source providers
 
@@ -25,7 +25,10 @@ Bitbucket from your Docker Cloud account settings.
 
 ## Email addresses
 
-You can associate multiple email addresses with your Docker ID, and one of these addresses becomes the primary address for the account. The primary address is used by Docker to send password reset notifications and other important information, so be sure to keep it updated.
+You can associate multiple email addresses with your Docker ID, and one of these
+becomes the primary address for the account. The primary address is used by
+Docker to send password reset notifications and other important information, so
+be sure to keep it updated.
 
 To add another email address to your Docker ID:
 
