@@ -175,7 +175,7 @@ the other examples.
 The following command creates a named volume, called `my-named-volume`,
 using the `flocker` volume driver (`flocker` is a plugin for multi-host portable volumes)
 and makes it available within the container at `/webapp`. Before running the command,
-[install `flocker`](https://flocker-docs.clusterhq.com/en/latest/docker-integration/manual-install.html).
+[install flocker](https://flocker-docs.clusterhq.com/en/latest/docker-integration/manual-install.html).
 If you do not want to install `flocker`, replace `flocker` with `local` in the example commands
 below to use the `local` driver.
 
