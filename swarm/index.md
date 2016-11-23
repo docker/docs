@@ -4,6 +4,13 @@ keywords: docker, swarm,  clustering
 title: Docker Swarm
 ---
 
+This section refers to standalone Docker Swarm. If you use Docker 1.12 or higher,
+[Swarm mode](../engine/swarm/index.md) is integrated with Docker Engine. Most
+users should use the integrated Swarm mode. Standalone Docker Swarm is not
+integrated into the Docker Engine API and CLI commands..
+
+If you decide to use standalone Docker Swarm, use these links to get started.
+
 * [Docker Swarm overview](overview.md)
 * [How to get Docker Swarm](get-swarm.md)
 * [Evaluate Swarm in a sandbox](install-w-machine.md)
