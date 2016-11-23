@@ -394,15 +394,19 @@ by creating an `overlay` network.
 
 ### The `docker_gwbridge` network
 
-The `docker_gwbrodge` is a local bridge network which is automatically created by Docker
-when you initialize or join a swarm, or when none of a container's networks can provide
-external connectivity, Docker connects the container to the `docker_gwbridge` network
-in addition to the container's other networks, so that the container can connect to
-external networks or other swarm nodes.
+The `docker_gwbridge` is a local bridge network which is automatically created by Docker
+in two different circumstances:
 
-You can create the network ahead of time if you need a custom configuration, but otherwise
-Docker creates it on demand. The following example creates the `docker_gwbridge` network
-with some custom options.
+- When you initialize or join a swarm, Docker creates the `docker_gwbridge` network and
+  uses it for communication among swarm nodes on different hosts.
+
+- When none of a container's networks can provide external connectivity, Docker connect
+  the container to the `docker_gwbridge` network in addition to the container's other
+  networks, so that the container can connect to external networks or other swarm nodes.
+
+You can create the `docker_gwbridge` network ahead of time if you need a custom configuration,
+but otherwise Docker creates it on demand. The following example creates the `docker_gwbridge`
+network with some custom options.
 
 ```bash
 $ docker network create --subnet 172.30.0.0/16 \
