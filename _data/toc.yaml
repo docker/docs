@@ -846,7 +846,7 @@ toc:
   - path: /docker-cloud/overview/
     title: Docker Cloud Overview
   - path: /docker-cloud/dockerid/
-    title: Docker ID and Settings
+    title: Docker Cloud Settings and Docker ID
   - path: /docker-cloud/orgs/
     title: Organizations and Teams
   - sectiontitle: Getting Started
@@ -976,7 +976,7 @@ toc:
   - path: /docker-hub/
     title: Overview of Docker Hub
   - path: /docker-hub/accounts/
-    title: Your Docker ID
+    title: Use Docker Hub with Docker ID
   - path: /docker-hub/orgs/
     title: Teams &amp; Organizations
   - path: /docker-hub/repos/
