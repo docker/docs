@@ -122,7 +122,7 @@ Replace the contents of `config/database.yml` with the following:
     development: &default
       adapter: postgresql
       encoding: unicode
-      database: postgres
+      database: myapp_development
       pool: 5
       username: postgres
       password:
