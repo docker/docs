@@ -31,7 +31,7 @@ which the release page specifies, in your terminal.
 
      The following is an example command illustrating the format:
 
-        $ curl -L "https://github.com/docker/compose/releases/download/1.8.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        $ curl -L "https://github.com/docker/compose/releases/download/1.9.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
      If you have problems installing with `curl`, see
      [Alternative Install Options](install.md#alternative-install-options).
@@ -46,7 +46,7 @@ which the release page specifies, in your terminal.
 7. Test the installation.
 
         $ docker-compose --version
-        docker-compose version: 1.8.1
+        docker-compose version: 1.9.0
 
 
 ## Alternative install options
@@ -69,7 +69,7 @@ to get started.
 Compose can also be run inside a container, from a small bash script wrapper.
 To install compose as a container run:
 
-    $ curl -L https://github.com/docker/compose/releases/download/1.8.1/run.sh > /usr/local/bin/docker-compose
+    $ curl -L https://github.com/docker/compose/releases/download/1.9.0/run.sh > /usr/local/bin/docker-compose
     $ chmod +x /usr/local/bin/docker-compose
 
 ## Master builds
