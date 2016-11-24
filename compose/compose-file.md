@@ -271,6 +271,11 @@ The entrypoint can also be a list, in a manner similar to
         - memory_limit=-1
         - vendor/bin/phpunit
 
+> **Note:** Setting `entrypoint` will both override any default entrypoint set
+> on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
+> clear out any default command on the image - meaning that if there's a `CMD`
+> instruction in the Dockerfile, it will be ignored.
+
 
 ### env_file
 
