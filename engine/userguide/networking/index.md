@@ -3,6 +3,7 @@ description: How do we connect docker containers within and across hosts ?
 keywords: Examples, Usage, network, docker, documentation, user guide, multihost, cluster
 redirect_from:
 - /engine/userguide/networking/dockernetworks/
+- /articles/networking/
 title: Docker container networking
 ---
 
