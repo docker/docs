@@ -30,10 +30,9 @@ full details.
 
 ## Service configuration reference
 
-> **Note:** There are several versions of the Compose file format – version 1
-> (the legacy format, which does not support volumes or networks) and
-> version 2, as well as 2.1 (the most up-to-date). For more information,
-> see the [Versioning](compose-file.md#versioning) section.
+> **Note:** There are several versions of the Compose file format – 1, 2, 2.1
+> and 3. For more information, see the [Versioning](compose-file.md#versioning)
+> section.
 
 This section contains a list of all configuration options supported by a service
 definition.
@@ -186,6 +185,124 @@ Specify a custom container name, rather than a generated default name.
 Because Docker container names must be unique, you cannot scale a service
 beyond 1 container if you have specified a custom name. Attempting to do so
 results in an error.
+
+### deploy
+
+> **[Version 3](compose-file.md#version-3) only.**
+
+Specify configuration related to the deployment and running of services. This
+only takes effect when deploying to a [swarm](/engine/swarm/index.md) with
+[`docker stack deploy`](/engine/reference/commandline/stack_deploy.md), and is
+ignored by `docker-compose up` and `docker-compose run`.
+
+    deploy:
+      replicas: 6
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+Several sub-options are available:
+
+#### mode
+
+Either `global` (exactly one container per swarm node) or `replicated` (a
+specified number of containers). The default is `replicated`.
+
+    mode: global
+
+#### replicas
+
+If the service is `replicated` (which is the default), specify the number of
+containers that should be running at any given time.
+
+    mode: replicated
+    replicas: 6
+
+#### placement
+
+Specify placement constraints. For a full description of the syntax and
+available types of constraints, see the
+[docker service create](engine/reference/commandline/service_create.md#specify-service-constraints-constraint)
+documentation.
+
+    placement:
+      constraints:
+        - node.role == manager
+        - engine.labels.operatingsystem == ubuntu 14.04
+
+#### update_config
+
+Configures how the service should be updated. Useful for configuring rolling
+updates.
+
+- `parallelism`: The number of containers to update at a time.
+- `delay`: The time to wait between updating a group of containers.
+- `failure_action`: What to do if an update fails. One of `continue` or `pause`
+  (default: `pause`).
+- `monitor`: TODO
+- `max_failure_ratio`: TODO
+
+    update_config:
+      parallelism: 2
+      delay: 10s
+
+#### resources
+
+Configures resource constraints. This replaces the older resource constraint
+options in Compose files prior to version 3 (`cpu_shares`, `cpu_quota`,
+`cpuset`, `mem_limit`, `memswap_limit`).
+
+    resources:
+      limits:
+        cpus: '0.001'
+        memory: 50M
+      reservations:
+        cpus: '0.0001'
+        memory: 20M
+
+#### restart_policy
+
+Configures if and how to restart containers when they exit. Replaces
+[`restart`](compose-file.md#restart).
+
+- `condition`: One of `none`, `on-failure` or `any` (default: `any`).
+- `delay`: How long to wait between restart attempts, specified as a
+  [duration](compose-file.md#specifying-durations) (default: 0).
+- `max_attempts`: How many times to attempt to restart a container before giving
+  up (default: never give up).
+- `window`: How long to wait before deciding if a restart has succeeded,
+  specified as a [duration](compose-file.md#specifying-durations) (default:
+  decide immediately).
+
+    restart_policy:
+      condition: on-failure
+      delay: 5s
+      max_attempts: 3
+      window: 120s
+
+#### labels
+
+Specify labels for the service. These labels will *only* be set on the service,
+and *not* on any containers for the service.
+
+    version: "3"
+    services:
+      web:
+        image: web
+        deploy:
+          labels:
+            com.example.description: "This label will appear on the web service"
+
+To set labels on containers instead, use the `labels` key outside of `deploy`:
+
+    version: "3"
+    services:
+      web:
+        image: web
+        labels:
+          com.example.description: "This label will appear on all containers for the web service"
 
 ### devices
 
@@ -422,6 +539,41 @@ A full example:
 Running `id` inside the created container will show that the user belongs to
 the `mail` group, which would not have been the case if `group_add` were not
 used.
+
+### healthcheck
+
+> [Version 3 file format](compose-file.md#version-3) and up.
+
+Configure a check that's run to determine whether or not containers for this
+service are "healthy". See the docs for the
+[HEALTHCHECK Dockerfile instruction](/engine/reference/builder.md#healthcheck)
+for details on how healthchecks work.
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+
+`interval` and `timeout` are specified as
+[durations](compose-file.md#specifying-durations).
+
+`test` must be either a string or a list. If it's a list, the first item must be
+either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
+specifying `CMD-SHELL` followed by that string.
+
+    # Hit the local web app
+    test: ["CMD", "curl", "-f", "http://localhost"]
+
+    # As above, but wrapped in /bin/sh. Both forms below are equivalent.
+    test: ["CMD-SHELL", "curl -f http://localhost && echo 'cool, it works'"]
+    test: curl -f https://localhost && echo 'cool, it works'
+
+To disable any default healthcheck set by the image, you can use `disable:
+true`. This is equivalent to specifying `test: ["NONE"]`.
+
+    healthcheck:
+      disable: true
 
 ### image
 
@@ -724,6 +876,19 @@ Override the default labeling scheme for each container.
       - label:user:USER
       - label:role:ROLE
 
+### stop_grace_period
+
+Specify how to long to wait when attempting to stop a container if it doesn't
+handle SIGTERM (or whatever stop signal has been specified with
+[`stop_signal`](compose-file.md#stop_signal)), before sending SIGKILL. Specified
+as a [duration](compose-file.md#specifying-durations).
+
+    stop_grace_period: 1s
+    stop_grace_period: 1m30s
+
+By default, `stop` waits 10 seconds for the container to exit before sending
+SIGKILL.
+
 ### stop_signal
 
 Sets an alternative signal to stop the container. By default `stop` uses
@@ -787,19 +952,38 @@ If you do not use a host path, you may specify a `volume_driver`.
 
     volume_driver: mydriver
 
-Note that for [version 2 files](compose-file.md#version-2), this driver
-will not apply to named volumes (you should use the `driver` option when
-[declaring the volume](compose-file.md#volume-configuration-reference) instead).
-For [version 1](compose-file.md#version-1), both named volumes and container volumes will
-use the specified driver.
+There are several things to note, depending on which
+[Compose file version](compose-file.md#versioning) you're using:
 
-> Note: No path expansion will be done if you have also specified a
-> `volume_driver`.
+-   `volume_driver` is not supported at all in
+    [version 3](compose-file.md#version-3). Instead of setting the volume driver
+    on the service, define a volume using the
+    [top-level `volumes` option](compose-file.md#volume-configuration-reference)
+    and specify the driver there.
 
-See [Docker Volumes](/engine/tutorials/dockervolumes.md) and
-[Volume Plugins](/engine/extend/plugins_volume.md) for more
+-   You can use `volume_driver` in [version 2 files](compose-file.md#version-2),
+    but it will only apply to anonymous volumes (those specified in the image,
+    or specified under `volumes` without an explicit named volume or host path).
+    To configure the driver for a named volume, use the `driver` key under the
+    entry in the
+    [top-level `volumes` option](compose-file.md#volume-configuration-reference).
+
+-   For [version 1 files](compose-file.md#version-1), both named volumes and
+    container volumes will use the specified driver.
+
+-   No path expansion will be done if you have also specified a `volume_driver`.
+    For example, if you specify a mapping of `./foo:/data`, the `./foo` part
+    will be passed straight to the volume driver without being expanded.
+
+See [Docker Volumes](/engine/userguide/dockervolumes.md) and
+[Volume Plugins](/engine/extend/plugins_volume.md) for more information.
 
 ### volumes_from
+
+> **Removed in [version 3](compose-file.md#version-3).** The best way to share a
+> volume between services is to use the top-level
+> [`volumes` option](compose-file.md#version-configuration-reference) to define
+> a named volume and reference it from each service's `volumes` list.
 
 Mount all of the volumes from another service or container, optionally
 specifying read-only access (``ro``) or read-write (``rw``). If no access level is specified,
@@ -821,6 +1005,13 @@ then read-write will be used.
 >     - container_name:rw
 
 ### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, oom_score_adj, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
+
+> **Note:** Resource constraint options (`cpu_shares`, `cpu_quota`, `cpuset`,
+> `mem_limit`, `memswap_limit`) have been removed in
+> [version 3](compose-file.md#version-3). You should set resource constraints
+> with [deploy.resources](compose-file.md#resources) instead. Note that `deploy`
+> configuration only takes effect when using `docker stack deploy`, and is
+> ignored by `docker-compose`.
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
@@ -855,6 +1046,21 @@ Each of these is a single value, analogous to its
 > * `oom_score_adj`
 
 
+## Specifying durations
+
+Some configuration options, such as the `interval` and `timeout` sub-options for
+[`healthcheck`](compose-file.md#healthcheck), accept a duration as a string in a
+format that looks like this:
+
+    2.5s
+    10s
+    1m30s
+    2h32m
+    5h34m56s
+
+The supported units are `us`, `ms`, `s`, `m` and `h`.
+
+
 ## Volume configuration reference
 
 While it is possible to declare volumes on the fly as part of the service
@@ -864,10 +1070,35 @@ easily retrieved and inspected using the docker command line or API.
 See the [docker volume](/engine/reference/commandline/volume_create.md)
 subcommand documentation for more information.
 
+Here's an example of a two-service setup where a database's data directory is
+shared with another service as a volume so that it can be periodically backed
+up:
+
+    version: "3"
+
+    services:
+      db:
+        image: db
+        volumes:
+          - data-volume:/var/lib/db
+      backup:
+        image: backup-service
+        volumes:
+          - data-volume:/var/lib/backup/data
+
+    volumes:
+      data-volume:
+
+An entry under the top-level `volumes` key can be empty, in which case it will
+use the default driver configured by the Engine (in most cases, this is the
+`local` driver). Optionally, you can configure it with the following keys:
+
 ### driver
 
-Specify which volume driver should be used for this volume. Defaults to
-`local`. The Docker Engine will return an error if the driver is not available.
+Specify which volume driver should be used for this volume. Defaults to whatever
+driver the Docker Engine has been configured to use, which in most cases is
+`local`. If the driver is not available, the Engine will return an error when
+`docker-compose up` tries to create the volume.
 
      driver: foobar
 
@@ -1068,23 +1299,26 @@ refer to it within the Compose file:
 
 ## Versioning
 
-There are currently three versions of the Compose file format:
+There are currently four versions of the Compose file format:
 
 - Version 1, the legacy format. This is specified by omitting a `version` key at
   the root of the YAML.
-- Version 2, the recommended format. This is specified with a `version: '2'` entry
-  at the root of the YAML.
-- Version 2.1, an upgrade over version 2 that takes advantage of the Docker
-  Engine's newest features. Specify with a `version: '2.1'` entry at the root of
+- Version 2. This is specified with a `version: '2'` entry at the root of the
+  YAML.
+- Version 2.1, an upgrade over version 2 that takes advantage of newer Docker
+  Engine features. Specify with a `version: '2.1'` entry at the root of
   the YAML.
+- Version 3, the latest and recommended version, designed to be cross-compatible
+  between Compose and the Docker Engine's [swarm mode](/engine/swarm/index.md).
 
-To move your project from version 1 to 2, see the [Upgrading](compose-file.md#upgrading)
-section.
+To move your project to a later version, see the
+[Upgrading](compose-file.md#upgrading) section.
 
 > **Note:** If you're using
 > [multiple Compose files](extends.md#different-environments) or
 > [extending services](extends.md#extending-services), each file must be of the
-> same version - you cannot mix version 1 and 2 in a single project.
+> same version - you cannot, for example, mix version 1 and 2 in a single
+> project.
 
 Several things differ depending on which version you use:
 
@@ -1107,6 +1341,11 @@ future Compose release.
 Version 1 files cannot declare named
 [volumes](compose-file.md#volume-configuration-reference), [networks](networking.md) or
 [build arguments](compose-file.md#args).
+
+Compose does not take advantage of [networking](networking.md) when you use
+version 1: every container is placed on the default `bridge` network and is
+reachable from every other container at its IP address. You will need to use
+[links](compose-file.md#links) to enable discovery between containers.
 
 Example:
 
@@ -1134,6 +1373,11 @@ of version **1.10.0+**.
 Named [volumes](compose-file.md#volume-configuration-reference) can be declared under the
 `volumes` key, and [networks](compose-file.md#network-configuration-reference) can be declared
 under the `networks` key.
+
+By default, every container joins an application-wide default network, and is
+discoverable at a hostname that's the same as the service name. This means
+[links](compose-file.md#links) are largely unnecessary. For more details, see
+[Networking in Compose](networking.md).
 
 Simple example:
 
@@ -1190,7 +1434,53 @@ Introduces the following additional parameters:
   [networks](compose-file.md#network-configuration-reference)
 - [`userns_mode`](compose-file.md#userns_mode)
 
+### Version 3
+
+Designed to be cross-compatible between Compose and the Docker Engine's
+[swarm mode](/engine/swarm/index.md), version 3 removes several options and adds
+several more.
+
+- Removed: `volume_driver`, `volumes_from`, `cpu_shares`, `cpu_quota`, `cpuset`,
+  `mem_limit`, `memswap_limit`. See the [upgrading](compose-file.md#upgrading)
+  guide for how to migrate away from these.
+
+- Added: [deploy](compose-file.md#deploy),
+  [healthcheck](compose-file.md#healthcheck),
+  [stop_grace_period](compose-file.md#stop-grace-period).
+
 ### Upgrading
+
+#### Version 2.x to 3.x
+
+Between versions 2.x and 3.x, the structure of the Compose file is the same, but
+several options have been removed:
+
+-   `volume_driver`: Instead of setting the volume driver on the service, define
+    a volume using the
+    [top-level `volumes` option](compose-file.md#volume-configuration-reference)
+    and specify the driver there.
+
+        version: "3"
+        services:
+          db:
+            image: postgres
+            volumes:
+              - data:/var/lib/postgresql/data
+        volumes:
+          data:
+            driver: mydriver
+
+-   `volumes_from`: To share a volume between services, define it using the
+    [top-level `volumes` option](compose-file.md#volume-configuration-reference)
+    and reference it from each service that shares it using the
+    [service-level `volumes` option](compose-file.md#volumes-volume-driver).
+
+-   `cpu_shares`, `cpu_quota`, `cpuset`, `mem_limit`, `memswap_limit`: These
+    have been replaced by the [resources](compose-file.md#resources) key under
+    `deploy`. Note that `deploy` configuration only takes effect when using
+    `docker stack deploy`, and is ignored by `docker-compose`.
+
+#### Version 1 to 2.x
 
 In the majority of cases, moving from version 1 to 2 is a very simple process:
 
