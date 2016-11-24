@@ -14,6 +14,18 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](install/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.1.1
+
+(28 Nov 2016)
+
+**Features**
+* Added Support for Scality as S3 compatible object storage by updating to use AWS v4 headers
+
+**Other Improvements**
+* Increase required consecutive failues for healthcheck to report error to 3
+* Fix bootstrapper restore command to work with notary
+* Fix subsequent joins after a failed join
+
 ## DTR 2.1.0
 
 (10 Nov 2016)
