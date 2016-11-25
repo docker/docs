@@ -28,6 +28,7 @@ RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/referen
  && wget -O allv/engine/deprecated.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/deprecated.md \
  && svn co https://github.com/docker/distribution/branches/$DISTRIBUTION_BRANCH/docs/spec allv/registry/spec \
  && wget -O allv/registry/configuration.md https://raw.githubusercontent.com/docker/distribution/$DISTRIBUTION_BRANCH/docs/configuration.md \
+ && wget -O allv/engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
  && jekyll build -s allv -d allvbuild \
  && rm -rf allv
 

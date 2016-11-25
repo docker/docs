@@ -477,26 +477,30 @@ toc:
         title: volume rm
       - path: /engine/reference/commandline/wait/
         title: wait
-    - sectiontitle: API Reference
+  - sectiontitle: Engine API
+    section:
+    - path: /engine/api/v1.25/
+      title: Reference
+    - path: /engine/api/client-libraries/
+      title: Client libraries
+    - sectiontitle: Version history
       section:
-      - path: /engine/reference/api/docker_remote_api/
-        title: Engine API
-      - path: /engine/reference/api/docker_remote_api_v1.24/
-        title: Engine API v1.24
-      - path: /engine/reference/api/docker_remote_api_v1.23/
-        title: Engine API v1.23
-      - path: /engine/reference/api/docker_remote_api_v1.22/
-        title: Engine API v1.22
-      - path: /engine/reference/api/docker_remote_api_v1.21/
-        title: Engine API v1.21
-      - path: /engine/reference/api/docker_remote_api_v1.20/
-        title: Engine API v1.20
-      - path: /engine/reference/api/docker_remote_api_v1.19/
-        title: Engine API v1.19
-      - path: /engine/reference/api/docker_remote_api_v1.18/
-        title: Engine API v1.18
-      - path: /engine/reference/api/remote_api_client_libraries/
-        title: Engine API client libraries
+      - path: /engine/api/version-history/
+        title: Overview
+      - path: /engine/api/v1.24/
+        title: v1.24 reference
+      - path: /engine/api/v1.23/
+        title: v1.23 reference
+      - path: /engine/api/v1.22/
+        title: v1.22 reference
+      - path: /engine/api/v1.21/
+        title: v1.21 reference
+      - path: /engine/api/v1.20/
+        title: v1.20 reference
+      - path: /engine/api/v1.19/
+        title: v1.19 reference
+      - path: /engine/api/v1.18/
+        title: v1.18 reference
   - path: /engine/migration/
     title: Migrate to Engine 1.10
   - path: /engine/breaking_changes/
