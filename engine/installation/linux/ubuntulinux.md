@@ -1,5 +1,5 @@
 ---
-description: 'Instructions for installing Docker on Ubuntu. '
+description: Instructions for installing Docker on Ubuntu
 keywords: Docker, Docker documentation, requirements, apt, installation,  ubuntu
 redirect_from:
 - /engine/installation/ubuntulinux/
