@@ -45,11 +45,11 @@ upgrade your installation to the latest release.
   displayed in the user profile
   * When integrating with LDAP, the LDAP reader password is no longer displayed
   on the UI or HTML
-  * Clarified that service resource constraints use absolute instead on nano CPU
-  shared. This is consistent with the Docker CLI
+  * Clarified that service resource constraints use absolute instead of nano CPU
+  shares. This is consistent with the Docker CLI
   * UI now prompts for confirmation when switching from LDAP to built-in
   authentication
-  * Improved DTR integration screen, to provide more guidance on how to isntall
+  * Improved DTR integration screen, to provide more guidance on how to install
   DTR
 
 
