@@ -1167,7 +1167,7 @@ available with Docker Engine version **1.12.0+**
 
 Introduces the following additional parameters:
 
-- [`link_local_ips`](compose-file.md#link_local_ips)
+- [`link_local_ips`](compose-file.md#linklocalips)
 - [`isolation`](compose-file.md#isolation)
 - `labels` for [volumes](compose-file.md#volume-configuration-reference) and
   [networks](compose-file.md#network-configuration-reference)
