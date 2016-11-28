@@ -559,7 +559,7 @@ Delete the `training/sinatra` image as you don't need it anymore.
 > **Note:** To remove an image from the host, please make sure
 > that there are no containers actively based on it.
 
-## Check sizes of images and containers
+## Check size of images and containers
 
 An image is
 [stored in layers](../userguide/storagedriver/imagesandcontainers.md),
