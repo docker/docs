@@ -73,7 +73,7 @@ of specific teams
 * Added an HTTP routing mesh for enabling hostname routing for services
 (experimental)
 * The UCP web UI now lets you know when a new version is available, and upgrades
-to the the new version with a single click
+to the new version with a single click
 
 **Installer**
 

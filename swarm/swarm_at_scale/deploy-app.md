@@ -296,7 +296,7 @@ the containers at once. This extra credit
 
     In general, Compose starts services in reverse order they appear in the file.
     So, if you want a service to start before all the others, make it the last
-    service in the file file.  This application relies on a volume and a network,
+    service in the file.  This application relies on a volume and a network,
     declare those at the bottom of the file.
 
 3. Check your work against <a href="../docker-compose.yml" target="_blank">this

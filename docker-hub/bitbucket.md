@@ -34,7 +34,7 @@ To get started, log in to Docker Hub and click the "Create &#x25BC;" menu item
 at the top right of the screen. Then select [Create Automated
 Build](https://hub.docker.com/add/automated-build/bitbucket/).
 
-Select the the linked Bitbucket account, and then choose a repository to set up
+Select the linked Bitbucket account, and then choose a repository to set up
 an Automated Build for.
 
 ## The Bitbucket webhook

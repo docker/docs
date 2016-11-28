@@ -67,7 +67,7 @@ To install DTR:
 
 3.  Check that DTR is running.
 
-    In your browser, navigate to the the Docker **Universal Control Plane**
+    In your browser, navigate to the Docker **Universal Control Plane**
     web UI, and navigate to the **Applications** screen. DTR should be listed
     as an application.
 
@@ -143,7 +143,7 @@ replicas:
 
 3.  Check that all replicas are running.
 
-    In your browser, navigate to the the Docker **Universal Control Plane**
+    In your browser, navigate to the Docker **Universal Control Plane**
     web UI, and navigate to the **Applications** screen. All replicas should
     be displayed.
 

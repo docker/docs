@@ -181,7 +181,7 @@ host for the controller works fine.
    ````
 
    Running this `eval` command sends the `docker` commands in the following
-   steps to the Docker Engine on on `node1`.
+   steps to the Docker Engine on `node1`.
 
    c. Verify that `node1` is the active environment.
 

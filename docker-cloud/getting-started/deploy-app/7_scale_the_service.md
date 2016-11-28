@@ -53,7 +53,7 @@ web-2                  ab045c42  ▶ Running  my-username/python-quickstart:late
 
 Use either of the URLs from the `container ps` command to visit one of your service's containers, either using your browser or curl.
 
-In the example output above, the URL `web-1.my-username.cont.dockerapp.io:49162` reaches the web app on the first container, and `web-2.my-username.cont.dockerapp.io:49156` reaches the web app on the the second container.
+In the example output above, the URL `web-1.my-username.cont.dockerapp.io:49162` reaches the web app on the first container, and `web-2.my-username.cont.dockerapp.io:49156` reaches the web app on the second container.
 
 If you use curl to visit the pages, you should see something like this:
 
