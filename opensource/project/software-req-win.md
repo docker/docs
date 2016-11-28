@@ -210,9 +210,8 @@ from GitHub.
 
 4. Go get the `docker/docker` repository.
 
-		$ go.exe get github.com/docker/docker package github.com/docker/docker
-        imports github.com/docker/docker
-        imports github.com/docker/docker: no buildable Go source files in C:\gopath\src\github.com\docker\docker
+		$ go.exe get github.com/docker/docker
+		package github.com/docker/docker: no buildable Go source files in C:\gopath\src\github.com\docker\docker
 
 	In the next steps, you create environment variables for you Go paths.
 
