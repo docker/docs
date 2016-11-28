@@ -276,7 +276,9 @@ ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-comple
 
 * Try out the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
-* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on on building images, running containers, networking, managing data, and storing images on Docker Hub.
+* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on
+  building images, running containers, networking, managing data, and storing
+  images on Docker Hub.
 
 * See [Example Applications](examples.md) for example applications that include setting up services and databases in Docker Compose.
 

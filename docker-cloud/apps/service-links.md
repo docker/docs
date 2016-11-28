@@ -118,7 +118,7 @@ Environment variables specified in the service definition are instantiated in ea
 
 These environment variables are prefixed with the `HOSTNAME_ENV_` in each container.
 
-In our example, if we launch our `my-web-app` service with an environment variable of `WEBROOT=/login`, the following environment variables are set and available available in the proxy containers:
+In our example, if we launch our `my-web-app` service with an environment variable of `WEBROOT=/login`, the following environment variables are set and available in the proxy containers:
 
 | Name              | Value    |
 |:------------------|:---------|

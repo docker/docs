@@ -136,7 +136,7 @@ To enable the networking feature, do the following.
       INFO[0001] Successfully delivered signal to daemon
     ```
 
-    The `host-address` value is the the external address of the node you're
+    The `host-address` value is the external address of the node you're
     operating against. This is the address other nodes when communicating with
     each other across the communication network.
 

@@ -250,7 +250,7 @@ know before you install](index.md#what-to-know-before-you-install).
 
   * Restart your Mac to stop / discard any vestige of the daemon running from the previously installed version.
 
-  * Run the the uninstall commands from the menu.
+  * Run the uninstall commands from the menu.
 
   <p></p>
 

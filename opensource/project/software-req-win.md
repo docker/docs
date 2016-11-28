@@ -99,7 +99,7 @@ you use the manager to install the `tar` and `xz` tools from the collection.
 
 	The system displays the available packages.
 
-8. Click on the the **msys-tar bin** package and choose **Mark for Installation**.
+8. Click on the **msys-tar bin** package and choose **Mark for Installation**.
 
 9. Click on the **msys-xz bin** package and choose **Mark for Installation**.
 

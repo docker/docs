@@ -49,7 +49,7 @@ can use in email or the forum to reference the upload.
 ### inotify on shared drives does not work
 
 Currently, `inotify` does not work on Docker for Windows. This will become
-evident, for example, when when an application needs to read/write to a
+evident, for example, when an application needs to read/write to a
 container across a mounted drive. This is a known issue that the team is working
 on. Below is a temporary workaround, and a link to the issue.
 
