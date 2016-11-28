@@ -143,6 +143,8 @@ toc:
       title: Configuring and running Docker
     - path: /engine/admin/host_integration/
       title: Automatically start containers
+    - path: /engine/admin/resource_constraints/
+      title: Limit a container's resources
     - path: /engine/admin/live-restore/
       title: Keep containers alive during daemon downtime
     - path: /engine/admin/systemd/
