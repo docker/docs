@@ -1,4 +1,4 @@
-{% for item in tree %}{% if item.heading %}{% else %}{% if item.sectiontitle %}<li class="leaf menu-closed"><a href="/" class="expand-menu "><span class="menu-icon" aria-hidden="true"></span>{{ item.sectiontitle }}</a>
+{% for item in tree %}{% if item.heading %}{% else %}{% if item.sectiontitle %}<li class="leaf menu-closed"><a href="javascript:void(0)" class="expand-menu "><span class="menu-icon" aria-hidden="true"></span>{{ item.sectiontitle }}</a>
 <ul class="nav-sub">
   {% assign tree = item.section %}{% include tree.html %}
 </ul>

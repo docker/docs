@@ -1,16 +1,10 @@
 ---
 description: Customizing docker0
-keywords:
-- docker, bridge, docker0, network
-menu:
-  main:
-    parent: smn_networking_def
+keywords: docker, bridge, docker0, network
 title: Customize the docker0 bridge
 ---
 
-# Customize the docker0 bridge
-
-The information in this section explains how to customize the Docker default bridge. This is a `bridge` network named `bridge` created automatically when you install Docker.  
+The information in this section explains how to customize the Docker default bridge. This is a `bridge` network named `bridge` created automatically when you install Docker.
 
 **Note**: The [Docker networks feature](../index.md) allows you to create user-defined networks in addition to the default bridge network.
 

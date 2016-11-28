@@ -1,17 +1,8 @@
 ---
 description: Frequently asked questions
-keywords:
-- windows faqs
-menu:
-  main:
-    identifier: docker-windows-faqs
-    parent: pinata_win_menu
-    weight: 4
-title: FAQs
+keywords: windows faqs
+title: Frequently asked questions (FAQ)
 ---
-
-#  Frequently Asked Questions (FAQs)
-
 
 >**Looking for popular FAQs on Docker for Windows?** Check out the [Docker
 Knowledge Hub](http://success.docker.com/) for knowledge base articles, FAQs,
@@ -156,6 +147,15 @@ cycles. Exit and start Docker to restore connectivity.
 
 Unfortunately, VirtualBox (and other hypervisors like VMWare) cannot run when
 Hyper-V is enabled on Windows.
+
+### How do I run Windows containers on Docker on Windows Server 2016?
+
+See [About Windows containers and Windows Server
+2016](index.md#about-windows-containers-and-windows-server-2016).
+
+A full tutorial is available in [docker/labs](https://github.com/docker/labs) at
+[Getting Started with Windows
+Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
 
 ### Why is Windows 10 Home not supported?
 

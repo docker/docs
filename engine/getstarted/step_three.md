@@ -1,20 +1,12 @@
 ---
-aliases:
+description: Getting started with Docker
+keywords: beginner, getting started, Docker
+redirect_from:
 - /mac/step_three/
 - /windows/step_three/
 - /linux/step_three/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
-menu:
-  main:
-    identifier: getstart_locate
-    parent: tutorial_getstart_menu
-    weight: 3
-title: Find & run the whalesay image
+title: Find and run the whalesay image
 ---
-
-# Find and run the whalesay image
 
 People all over the world create Docker images. You can find these images by
 browsing the Docker Hub. In this next section, you'll search for and find the
@@ -29,15 +21,11 @@ image you'll use in the rest of this getting started.
 	The Docker Hub contains images from individuals like you and official images
 	from organizations like RedHat, IBM, Google, and a whole lot more.
 
-2. Click **Browse & Search**.
-
-    The browser opens the search page.
-
-3. Enter the word `whalesay` in the search bar.
+2. Enter the word `whalesay` in the search bar.
 
     ![Browse Docker Hub](tutimg/image_found.png)
 
-4. Click on the **docker/whalesay** image in the results.
+3. Click on the **docker/whalesay** image in the results.
 
     The browser displays the repository for the **whalesay** image.
 

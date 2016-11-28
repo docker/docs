@@ -1,18 +1,10 @@
 ---
-aliases:
-- /mackit/release-notes/
 description: Change log / release notes per release
-keywords:
-- pinata, alpha, tutorial
-menu:
-  main:
-    identifier: docker-mac-relnotes
-    parent: pinata_mac_menu
-    weight: 10
-title: Release Notes
+keywords: pinata, alpha, tutorial
+redirect_from:
+- /mackit/release-notes/
+title: Docker for Mac release notes
 ---
-
-# Docker for Mac Release Notes
 
 Here are the main improvements and issues per release, starting with the current release. The documentation is always updated for each release.
 
@@ -24,6 +16,71 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 * [Beta Release Notes](release-notes.md#beta-release-notes)
 
 ## Stable Release Notes
+
+### Docker for Mac 1.12.3, 2016-11-09 (stable)
+
+**Upgrades**
+
+- Docker 1.12.3
+- Linux Kernel 4.4.27
+- Notary 0.4.2
+- Docker Machine 0.8.2
+- Docker Compose 1.8.1
+- Kernel vsock driver v7
+- aufs 20160912
+
+**Bug fixes and minor changes**
+
+**General**
+
+- Fixed an issue where the whale animation during setting change was inconsistent
+
+- Fixed an issue where some windows stayed hidden behind another app
+
+- Fixed an issue where the Docker status would continue to be yellow/animated after the VM had started correctly
+
+- Fixed an issue where Docker for Mac was incorrectly reported as updated
+
+- Channel is now displayed in About box
+
+- Crash reports are sent over Bugsnag rather than HockeyApp
+
+- Fixed an issue where some windows did not claim focus correctly
+
+- Added UI when switching channel to prevent user losing containers and settings
+
+- Check disk capacity before toolbox import
+
+- Import certificates in `etc/ssl/certs/ca-certificates.crt`
+
+- disk: make the "flush" behaviour configurable for database-like workloads. This works around a performance regression in 1.12.1.
+
+**Networking**
+
+- Proxy: Fixed application of system or custom proxy settings over container restart
+
+- DNS: reduce the number of UDP sockets consumed on the host
+
+- VPNkit: improve the connection-limiting code to avoid running out of sockets on the host
+
+- UDP: handle diagrams bigger than 2035, up to the configured macOS kernel limit
+
+- UDP: make the forwarding more robust; drop packets and continue rather than stopping
+
+**File sharing**
+
+- osxfs: Fixed the prohibition of chown on read-only or mode 0 files, (fixes
+  [https://github.com/docker/for-mac/issues/117](https://github.com/docker/for-mac/issues/117),
+  [https://github.com/docker/for-mac/issues/263](https://github.com/docker/for-mac/issues/263),
+  [https://github.com/docker/for-mac/issues/633](https://github.com/docker/for-mac/issues/633))
+
+- osxfs: Fixed race causing some reads to run forever
+
+- osxfs: Fixed a simultaneous volume mount race which can result in a crash
+
+**Moby**
+
+- Increase default ulimit for memlock (fixes [https://github.com/docker/for-mac/issues/801](https://github.com/docker/for-mac/issues/801))
 
 ### Docker for Mac 1.12.1, 2016-09-16 (stable)
 
@@ -73,7 +130,7 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 
 * Use Mac System Configuration database to detect DNS
 
-**Filesharing (osxfs)**
+**File sharing (osxfs)**
 
 * Fixed thread leak
 
@@ -107,15 +164,15 @@ This bug fix release contains osxfs improvements. The fixed issues may have
 been seen as failures with apt-get and npm in containers, missed inotify
 events or unexpected unmounts.
 
-* Bug fixes
-    - osxfs: fixed an issue causing access to children of renamed
-      directories to fail (symptoms: npm failures, apt-get failures)
-    - osxfs: fixed an issue causing some ATTRIB and CREATE inotify
-      events to fail delivery and other inotify events to stop
-    - osxfs: fixed an issue causing all inotify events to stop when an
-      ancestor directory of a mounted directory was mounted
-    - osxfs: fixed an issue causing volumes mounted under other mounts
-      to spontaneously unmount
+**Bug fixes**
+
+* osxfs: fixed an issue causing access to children of renamed directories to fail (symptoms: npm failures, apt-get failures)
+
+* osxfs: fixed an issue causing some ATTRIB and CREATE inotify events to fail delivery and other inotify events to stop
+
+* osxfs: fixed an issue causing all inotify events to stop when an ancestor directory of a mounted directory was mounted
+
+* osxfs: fixed an issue causing volumes mounted under other mounts to spontaneously unmount
 
 ### Docker for Mac 1.12.0-a, 2016-08-03 (stable)
 
@@ -144,21 +201,65 @@ events or unexpected unmounts.
 * Docker Compose 1.8.0
 
 ## Beta Release Notes
-<!--
-### Beta 29 Release Notes (2016-10-22 1.12.2-rc3-beta29)
+
+### Beta 30 Release Notes (2016-11-10 1.12.3-beta30)
 
 **New**
 
-TBD
+- Better support for Split DNS VPN configurations
 
 **Upgrades**
 
-TBD
+- Docker Compose 1.9.0-rc4
+- Linux kernel 4.4.30
 
 **Bug fixes and minor changes**
 
-TBD
--->
+- HyperKit: code cleanup and minor fixes
+- VPNKit: improvements to DNS handling
+- Improvements to Logging and Diagnostics
+- osxfs: switched to `libev/kqueue` to improve latency
+
+
+### Beta 29.3 Release Notes (2016-11-02 1.12.3-beta29.3)
+
+**Upgrades**
+
+- Docker Compose 1.9.0-rc2
+- `osxfs`: Fixed a simultaneous volume mount race which can result in a crash
+
+### Beta 29.2 Release Notes (2016-10-27 1.12.2-beta29.2)
+
+**Hotfixes**
+
+- Upgrade to Docker 1.12.3
+
+### Beta 29.1 Release Notes (2016-10-26 1.12.1-beta29.1)
+
+**Hotfixes**
+
+- Fixed missing `/dev/pty/ptmx`
+
+### Beta 29 Release Notes (2016-10-25 1.12.3-rc1-beta29)
+
+**New**
+
+- Overlay2 is now the default storage driver. You must do a factory reset for overlay2 to be automatically used. (#5545)
+
+**Upgrades**
+
+- Docker 1.12.3-rc1
+- Linux kernel 4.4.27
+
+**Bug fixes and minor changes**
+
+- Fix an issue where the whale animation during setting change was inconsistent
+- Fix an issue where some windows stayed hidden behind another app
+- Fix application of system or custom proxy settings over container restart
+- Increase default ulimit for memlock (fixes [https://github.com/docker/for-mac/issues/801](https://github.com/docker/for-mac/issues/801) )
+- Fix an issue where the Docker status would continue to be
+      yellow/animated after the VM had started correctly
+- osxfs: fix the prohibition of chown on read-only or mode 0 files (fixes [https://github.com/docker/for-mac/issues/117](https://github.com/docker/for-mac/issues/117), [https://github.com/docker/for-mac/issues/263](https://github.com/docker/for-mac/issues/263), [https://github.com/docker/for-mac/issues/633](https://github.com/docker/for-mac/issues/633) )
 
 ### Beta 28 Release Notes (2016-10-13 1.12.2-rc3-beta28)
 
@@ -498,7 +599,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-* Documentation moved to [https://docs.docker.com/docker-for-mac/](https://docs.docker.com/docker-for-mac/)
+* Documentation moved to [https://docs.docker.com/docker-for-mac/](/docker-for-mac/)
 * Allow non-admin users to launch the app for the first time (using admin creds)
 * Prompt non-admin users for admin password when needed in Preferences
 * Fixed download links, documentation links
@@ -832,7 +933,7 @@ lead to `Docker.app` not starting on reboot
 
 - VPN/Hostnet: In VPN mode, the `-p` option needs to be explicitly of the form
 `-p <host port>:<container port>`. `-p <port>` and `-P` will not
-work yet.    
+work yet.
 
 **Bug fixes and minor changes**
 
@@ -900,13 +1001,13 @@ work yet.
 **New Features and Upgrades**
 
 - GUI
-  - Add VPN mode/`hostnet` to Preferences
-  - Add disable Time Machine backups of VM disk image to Preferences
+  - Added VPN mode/`hostnet` to Preferences
+  - Added disable Time Machine backups of VM disk image to Preferences
 
 
 - Added `pinata` configuration tool for experimental Preferences
 
-- File System: Add guest-to-guest FIFO and socket file support
+- File System: Added guest-to-guest FIFO and socket file support
 
 - Upgraded Notary to version 0.2
 
@@ -938,7 +1039,7 @@ work yet.
   - Added MixPanel support
 
 
-- Add HockeyApp crash reporting
+- Added HockeyApp crash reporting
 - Improve signal handling on task manager
 - Use ISO timestamps with microsecond precision for logging
 - Clean up logging format
@@ -950,7 +1051,7 @@ work yet.
 
 
 - Hypervisor
-  - Add PID file
+  - Added PID file
   - Networking reliability improvements
 
 

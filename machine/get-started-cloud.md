@@ -1,16 +1,8 @@
 ---
 description: Using Docker Machine to provision hosts on cloud providers
-keywords:
-- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer,
-  virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
-menu:
-  main:
-    parent: workw_machine
-    weight: -60
-title: Provision hosts in the cloud
+keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
+title: Use Docker Machine to provision hosts on cloud providers
 ---
-
-# Use Docker Machine to provision hosts on cloud providers
 
 Docker Machine driver plugins are available for many cloud platforms, so you can use Machine to provision cloud hosts. When you use Docker Machine for provisioning, you create cloud hosts with Docker Engine installed on them.
 
@@ -60,13 +52,13 @@ See <a href="../drivers/" target="_blank">Docker Machine driver reference</a> fo
 
   Several Docker Machine driver plugins for use with other cloud platforms are available from 3rd party contributors. These are use-at-your-own-risk plugins, not maintained by or formally associated with Docker.
 
-  See <a href="https://github.com/docker/machine/blob/master/docs/AVAILABLE_DRIVER_PLUGINS.md" target="_blank">Available driver plugins</a> in the docker/machine repo on GitHub.
+  See <a href="https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md" target="_blank">Available driver plugins</a>.
 
 ## Adding a host without a driver
 
 You can add a host to Docker which only has a URL and no driver. Then you can use the machine name you provide here for an existing host so you don’t have to type out the URL every time you run a Docker command.
 
-    $ docker-machine create --url=tcp://50.134.234.20:2376 custombox
+    $ docker-machine create --driver none --url=tcp://50.134.234.20:2376 custombox
     $ docker-machine ls
     NAME        ACTIVE   DRIVER    STATE     URL
     custombox   *        none      Running   tcp://50.134.234.20:2376

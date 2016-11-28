@@ -1,14 +1,8 @@
 ---
 description: Support the community
-keywords:
-- support, community, users, irc
-menu:
-  main:
-    parent: smn_ways
+keywords: support, community, users, irc
 title: Support the community
 ---
-
-# Support the community
 
 With millions of Docker users all over the world, there's always someone who
 needs a helping hand. Like many open source projects, the Docker project relies

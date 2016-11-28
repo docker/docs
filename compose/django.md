@@ -1,15 +1,8 @@
 ---
 description: Getting started with Docker Compose and Django
-keywords:
-- documentation, docs,  docker, compose, orchestration, containers
-menu:
-  main:
-    parent: workw_compose
-    weight: 4
-title: 'Quickstart: Compose and Django'
+keywords: documentation, docs,  docker, compose, orchestration, containers
+title: "Quickstart: Compose and Django"
 ---
-
-# Quickstart: Docker Compose and Django
 
 This quick-start guide demonstrates how to use Docker Compose to set up and run a simple Django/PostgreSQL app. Before starting, you'll need to have
 [Compose installed](install.md).
@@ -17,7 +10,7 @@ This quick-start guide demonstrates how to use Docker Compose to set up and run 
 ### Define the project components
 
 For this project, you need to create a Dockerfile, a Python dependencies file,
-and a `docker-compose.yml` file.
+and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extension for this file.)
 
 1. Create an empty project directory.
 
@@ -96,7 +89,7 @@ In this step, you create a Django started project by building the image from the
 
 2. Create the Django project using the `docker-compose` command.
 
-        $ docker-compose run web django-admin.py startproject composeexample .
+        docker-compose run web django-admin.py startproject composeexample .
 
     This instructs Compose to run `django-admin.py startproject composeeexample`
     in a container, using the `web` service's image and configuration. Because
@@ -119,7 +112,7 @@ In this step, you create a Django started project by building the image from the
 
   If you are running Docker on Linux, the files `django-admin` created are owned
   by root. This happens because the container runs as the root user. Change the
-  ownership of the the new files.
+  ownership of the new files.
 
           sudo chown -R $USER:$USER .
 

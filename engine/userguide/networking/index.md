@@ -1,18 +1,11 @@
 ---
-aliases:
-- /engine/userguide/networking/dockernetworks/
 description: How do we connect docker containers within and across hosts ?
-keywords:
-- Examples, Usage, network, docker, documentation, user guide, multihost, cluster
-menu:
-  main:
-    identifier: networking_index
-    parent: smn_networking
-    weight: -5
+keywords: Examples, Usage, network, docker, documentation, user guide, multihost, cluster
+redirect_from:
+- /engine/userguide/networking/dockernetworks/
+- /articles/networking/
 title: Docker container networking
 ---
-
-# Understand Docker container networks
 
 This section provides an overview of the default networking behavior that Docker
 Engine delivers natively. It describes the type of networks created by default
@@ -214,7 +207,7 @@ lo        Link encap:Local Loopback
           RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
 ```
 
-Then use `ping`to send three ICMP requests and test the connectivity of the
+Then use `ping` to send three ICMP requests and test the connectivity of the
 containers on this `bridge` network.
 
 ```
@@ -400,6 +393,30 @@ A bridge network is useful in cases where you want to run a relatively small
 network on a single host. You can, however, create significantly larger networks
 by creating an `overlay` network.
 
+### The `docker_gwbridge` network
+
+The `docker_gwbridge` is a local bridge network which is automatically created by Docker
+in two different circumstances:
+
+- When you initialize or join a swarm, Docker creates the `docker_gwbridge` network and
+  uses it for communication among swarm nodes on different hosts.
+
+- When none of a container's networks can provide external connectivity, Docker connect
+  the container to the `docker_gwbridge` network in addition to the container's other
+  networks, so that the container can connect to external networks or other swarm nodes.
+
+You can create the `docker_gwbridge` network ahead of time if you need a custom configuration,
+but otherwise Docker creates it on demand. The following example creates the `docker_gwbridge`
+network with some custom options.
+
+```bash
+$ docker network create --subnet 172.30.0.0/16 \
+                        --opt com.docker.network.bridge.name=docker_gwbridge \
+			--opt com.docker.network.bridge.enable_icc=false \
+			docker_gwbridge
+```
+
+The `docker_gwbridge` network is always present when you use `overlay` networks.
 
 ### An overlay network with Docker Engine swarm mode
 
@@ -549,8 +566,7 @@ server is unable to resolve the request it will be forwarded to any external DNS
 servers configured for the container. To facilitate this when the container is
 created, only the embedded DNS server reachable at `127.0.0.11` will be listed
 in the container's `resolv.conf` file. More information on embedded DNS server on
-user-defined networks can be found in the [embedded DNS server in user-defined networks]
-(configure-dns.md)
+user-defined networks can be found in the [embedded DNS server in user-defined networks](configure-dns.md)
 
 ## Links
 
@@ -568,6 +584,6 @@ functionality in user-defined networks.
 - [Work with network commands](work-with-networks.md)
 - [Get started with multi-host networking](get-started-overlay.md)
 - [Managing Data in Containers](../../tutorials/dockervolumes.md)
-- [Docker Machine overview](https://docs.docker.com/machine)
-- [Docker Swarm overview](https://docs.docker.com/swarm)
+- [Docker Machine overview](/machine)
+- [Docker Swarm overview](/swarm)
 - [Investigate the LibNetwork project](https://github.com/docker/libnetwork)

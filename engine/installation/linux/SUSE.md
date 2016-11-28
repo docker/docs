@@ -1,16 +1,10 @@
 ---
-aliases:
-- /engine/installation/SUSE/
 description: Installation instructions for Docker on openSUSE and on SUSE Linux Enterprise.
-keywords:
-- openSUSE, SUSE Linux Enterprise, SUSE, SLE, docker, documentation,  installation
-menu:
-  main:
-    parent: engine_linux
-title: Installation on openSUSE and SUSE Linux Enterprise
+keywords: openSUSE, SUSE Linux Enterprise, SUSE, SLE, docker, documentation,  installation
+redirect_from:
+- /engine/installation/SUSE/
+title: Install Docker on openSUSE and SUSE Linux Enterprise
 ---
-
-# openSUSE and SUSE Linux Enterprise
 
 This page provides instructions for installing and configuring the latest
 Docker Engine software on openSUSE and SUSE systems.

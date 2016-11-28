@@ -1,16 +1,9 @@
 ---
 description: Manage Builds and Images in Docker Cloud
-keywords:
-- builds, images, Cloud
-menu:
-  main:
-    parent: builds
-    weight: -80
+keywords: builds, images, Cloud
 notoc: true
-title: Builds and Images Overview
+title: Builds and images overview
 ---
-
-# Builds and Images Overview
 
 Docker Cloud provides a hosted registry service where you can create
 repositories to store your Docker images. You can choose to push images to the

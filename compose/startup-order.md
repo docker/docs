@@ -1,14 +1,8 @@
 ---
 description: How to control service startup order in Docker Compose
 keywords: documentation, docs,  docker, compose, startup, order
-menu:
-  main:
-    parent: workw_compose
-    weight: 90
-title: Controlling startup order
+title: Controlling startup order in Compose
 ---
-
-# Controlling startup order in Compose
 
 You can control the order of service startup with the
 [depends_on](compose-file.md#depends-on) option. Compose always starts
@@ -53,9 +47,11 @@ script:
           db:
             image: postgres
 
--   Write your own wrapper script to perform a more application-specific health
+-   Alternatively, write your own wrapper script to perform a more application-specific health
     check. For example, you might want to wait until Postgres is definitely
     ready to accept commands:
+
+    wait-for-postgres.sh
 
         #!/bin/bash
 

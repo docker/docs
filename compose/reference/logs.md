@@ -1,15 +1,8 @@
 ---
 description: Displays log output from services.
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  logs
-menu:
-  main:
-    identifier: logs.compose
-    parent: smn_compose_cli
-title: logs
+keywords: fig, composition, compose, docker, orchestration, cli,  logs
+title: docker-compose logs
 ---
-
-# logs
 
 ```
 Usage: logs [options] [SERVICE...]

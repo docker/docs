@@ -1,16 +1,10 @@
 ---
-aliases:
-- /docker-cloud/faq/cloud-on-packet.net-faq/
 description: Docker Cloud and Packet.net
-keywords:
-- Packet.net, Cloud, drives
-menu:
-  main:
-    parent: infrastructure
-title: Using Docker Cloud and Packet.net
+keywords: Packet.net, Cloud, drives
+redirect_from:
+- /docker-cloud/faq/cloud-on-packet.net-faq/
+title: Use Docker Cloud and Packet.net
 ---
-
-# Using Docker Cloud and Packet.net
 
 This page answers frequently asked questions about using Docker Cloud with Packet.net.
 

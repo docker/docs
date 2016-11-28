@@ -1,16 +1,10 @@
 ---
-aliases:
-- /docker-cloud/feature-reference/triggers/
 description: Use triggers
-keywords:
-- API, triggers, endpoints
-menu:
-  main:
-    parent: apps
+keywords: API, triggers, endpoints
+redirect_from:
+- /docker-cloud/feature-reference/triggers/
 title: Use triggers
 ---
-
-# Use triggers
 
 **Triggers** are API endpoints that redeploy or scale a specific service
 whenever a `POST` HTTP request is sent to them. You can create one or more

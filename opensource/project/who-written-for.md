@@ -1,14 +1,10 @@
 ---
 description: Introduction to project contribution at Docker
-keywords:
-- Gordon, introduction, turtle, machine, libcontainer,  how to
-menu:
-  main:
-    parent: smn_engine_contrib
+keywords: Gordon, introduction, turtle, machine, libcontainer,  how to
+redirect_from:
+- /project/who-written-for/
 title: README first
 ---
-
-# README first
 
 This section of the documentation contains a guide for Docker users who want to
 contribute code or documentation to the Docker Engine project. As a community, we

@@ -1,17 +1,10 @@
 ---
-aliases:
-- /engine/installation/centos/
 description: Instructions for installing Docker on CentOS
-keywords:
-- Docker, Docker documentation, requirements, linux, centos, epel, docker.io,  docker-io
-menu:
-  main:
-    parent: engine_linux
-    weight: -4
-title: Installation on CentOS
+keywords: Docker, Docker documentation, requirements, linux, centos, epel, docker.io,  docker-io
+redirect_from:
+- /engine/installation/centos/
+title: Install Docker on CentOS
 ---
-
-# CentOS
 
 Docker runs on CentOS 7.X. An installation on other binary compatible EL7
 distributions such as Scientific Linux might succeed, but Docker does not test
@@ -154,7 +147,7 @@ learn how to [customize your Systemd Docker daemon options](../../admin/systemd.
 6.  Verify `docker` is installed correctly by running a test image in a container.
 
     ```bash
-    $ sudo docker run hello-world
+    $ sudo docker run --rm hello-world
     ```
 
 If you need to add an HTTP Proxy, set a different directory or partition for the
@@ -198,7 +191,7 @@ To create the `docker` group and add your user:
 5.  Verify that your user is in the docker group by running `docker` without `sudo`.
 
     ```bash
-    $ docker run hello-world
+    $ docker run --rm hello-world
     ```
 
 ## Start the docker daemon at boot

@@ -6,14 +6,16 @@
 
 ```json
 {
-  "url": "/api/app/v1/service/82d4a246-52d8-468d-903d-9da9ef05ff28/trigger/0224815a-c156-44e4-92d7-997c69354438/call/",
+  "url": "/api/app/v1/user_namespace/service/82d4a246-52d8-468d-903d-9da9ef05ff28/trigger/0224815a-c156-44e4-92d7-997c69354438/call/",
   "operation": "REDEPLOY",
   "name": "docker_trigger",
-  "resource_uri": "/api/app/v1/service/82d4a246-52d8-468d-903d-9da9ef05ff28/trigger/0224815a-c156-44e4-92d7-997c69354438/"
+  "resource_uri": "/api/app/v1/user_namespace/service/82d4a246-52d8-468d-903d-9da9ef05ff28/trigger/0224815a-c156-44e4-92d7-997c69354438/"
 }
 ```
 
 Triggers are URLs that will start a redeploy of the service whenever a `POST` request is sent to them. They require no authorization headers, so they should be treated as access tokens. Triggers can be revoked if they are leaked or no longer used for security purposes. See [Triggers](../../docker-cloud/apps/triggers/) for more information.
+
+This is a [namespaced endpoint](#namespaced-endpoints).
 
 
 ### Attributes
@@ -82,13 +84,13 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/app/v1/service/(uuid)/trigger/`
+`GET /api/app/v1/[optional_namespace/]service/(uuid)/trigger/`
 
 ### Path Parameters
 
 Parameter | Description
 --------- | -----------
-uuid | The UUID of the service the triggers are associated to  
+uuid | The UUID of the service the triggers are associated to
 
 
 ## Create a new trigger
@@ -142,7 +144,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/service/(uuid)/trigger/`
+`POST /api/app/v1/[optional_namespace/]service/(uuid)/trigger/`
 
 ### JSON Parameters
 
@@ -193,13 +195,13 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/app/v1/service/(uuid)/trigger/(trigger_uuid)/`
+`GET /api/app/v1/[optional_namespace/]service/(uuid)/trigger/(trigger_uuid)/`
 
 ### Path Parameters
 
 Parameter | Description
 --------- | -----------
-uuid | The UUID of the service the triggers are associated to  
+uuid | The UUID of the service the triggers are associated to
 trigger_uuid | The UUID of the trigger to retrieve
 
 ## Delete a trigger
@@ -243,7 +245,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`DELETE /api/app/v1/service/(uuid)/trigger/(trigger_uuid)/`
+`DELETE /api/app/v1/[optional_namespace/]service/(uuid)/trigger/(trigger_uuid)/`
 
 ### Path Parameters
 
@@ -289,7 +291,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/app/v1/service/(uuid)/trigger/(trigger_uuid)/call/`
+`POST /api/app/v1/[optional_namespace/]service/(uuid)/trigger/(trigger_uuid)/call/`
 
 ### Path Parameters
 

@@ -1,15 +1,8 @@
 ---
 description: Explains how to configure a registry
-keywords:
-- registry, on-prem, images, tags, repository, distribution, configuration
-menu:
-  main:
-    parent: smn_registry
-    weight: 4
-title: Configuring a registry
+keywords: registry, on-prem, images, tags, repository, distribution, configuration
+title: Registry configuration reference
 ---
-
-# Registry Configuration Reference
 
 The Registry configuration is based on a YAML file, detailed below. While it comes with sane default values out of the box, you are heavily encouraged to review it exhaustively before moving your systems to production.
 
@@ -748,7 +741,8 @@ interpretation of the options.
       no
     </td>
     <td>
-      Specify a `duration` by providing an integer and a unit. Valid time units are `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`. For example, `3000s` is a valid duration; there should be no space between the integer and unit. If you do not specify a `duration` or specify an integer without a time unit, this defaults to 20 minutes.
+      {% capture text %}Specify a `duration` by providing an integer and a unit. Valid time units are `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`. For example, `3000s` is a valid duration; there should be no space between the integer and unit. If you do not specify a `duration` or specify an integer without a time unit, this defaults to 20 minutes.{% endcapture %}
+      {{ text | markdownify }}
     </td>
   </tr>
 </table>
@@ -1831,7 +1825,7 @@ conjunction with the S3 storage driver.
     <td>The storage middleware name. Currently <code>cloudfront</code> is an accepted value.</td>
   </tr>
   <tr>
-    <td><code>disabled<code></td>
+    <td><code>disabled</code></td>
     <td>Set to <code>false</code> to easily disable the middleware.</td>
   </tr>
   <tr>
@@ -1859,7 +1853,6 @@ The following example illustrates these values:
                  privatekey: /path/to/asecret.pem
                  keypairid: asecret
                  duration: 60
-
 
 >**Note**: Cloudfront keys exist separately to other AWS keys.  See
 >[the documentation on AWS credentials](http://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html)

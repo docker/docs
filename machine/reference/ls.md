@@ -1,25 +1,21 @@
 ---
 description: List machines
-keywords:
-- machine, ls, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: ls
+keywords: machine, ls, subcommand
+title: docker-machine ls
 ---
 
-# ls
+```none
+Usage: docker-machine ls [OPTIONS] [arg...]
 
-    Usage: docker-machine ls [OPTIONS] [arg...]
+List machines
 
-    List machines
+Options:
 
-    Options:
-
-       --quiet, -q                                  Enable quiet mode
-       --filter [--filter option --filter option]   Filter output based on conditions provided
-       --timeout, -t "10"                           Timeout in seconds, default to 10s
-       --format, -f                                 Pretty-print machines using a Go template
+   --quiet, -q                                  Enable quiet mode
+   --filter [--filter option --filter option]   Filter output based on conditions provided
+   --timeout, -t "10"                           Timeout in seconds, default to 10s
+   --format, -f                                 Pretty-print machines using a Go template
+```
 
 ## Timeout
 
@@ -31,9 +27,11 @@ the -t flag for this purpose with a numerical value in seconds.
 
 ### Example
 
-    $ docker-machine ls -t 12
-    NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER   ERRORS
-    default   -        virtualbox   Running   tcp://192.168.99.100:2376           v1.9.1
+```none
+$ docker-machine ls -t 12
+NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER   ERRORS
+default   -        virtualbox   Running   tcp://192.168.99.100:2376           v1.9.1
+```
 
 ## Filtering
 
@@ -50,25 +48,27 @@ The currently supported filters are:
 
 ### Examples
 
-    $ docker-machine ls
-    NAME   ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER   ERRORS
-    dev    -        virtualbox   Stopped
-    foo0   -        virtualbox   Running   tcp://192.168.99.105:2376           v1.9.1
-    foo1   -        virtualbox   Running   tcp://192.168.99.106:2376           v1.9.1
-    foo2   *        virtualbox   Running   tcp://192.168.99.107:2376           v1.9.1
+```none
+$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER   ERRORS
+dev    -        virtualbox   Stopped
+foo0   -        virtualbox   Running   tcp://192.168.99.105:2376           v1.9.1
+foo1   -        virtualbox   Running   tcp://192.168.99.106:2376           v1.9.1
+foo2   *        virtualbox   Running   tcp://192.168.99.107:2376           v1.9.1
 
-    $ docker-machine ls --filter name=foo0
-    NAME   ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER   ERRORS
-    foo0   -        virtualbox   Running   tcp://192.168.99.105:2376           v1.9.1
+$ docker-machine ls --filter name=foo0
+NAME   ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER   ERRORS
+foo0   -        virtualbox   Running   tcp://192.168.99.105:2376           v1.9.1
 
-    $ docker-machine ls --filter driver=virtualbox --filter state=Stopped
-    NAME   ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER   ERRORS
-    dev    -        virtualbox   Stopped                 v1.9.1
+$ docker-machine ls --filter driver=virtualbox --filter state=Stopped
+NAME   ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER   ERRORS
+dev    -        virtualbox   Stopped                 v1.9.1
 
-    $ docker-machine ls --filter label=com.class.app=foo1 --filter label=com.class.app=foo2
-    NAME   ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER   ERRORS
-    foo1   -        virtualbox   Running   tcp://192.168.99.105:2376           v1.9.1
-    foo2   *        virtualbox   Running   tcp://192.168.99.107:2376           v1.9.1
+$ docker-machine ls --filter label=com.class.app=foo1 --filter label=com.class.app=foo2
+NAME   ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER   ERRORS
+foo1   -        virtualbox   Running   tcp://192.168.99.105:2376           v1.9.1
+foo2   *        virtualbox   Running   tcp://192.168.99.107:2376           v1.9.1
+```
 
 ## Formatting
 
@@ -77,7 +77,7 @@ The formatting option (`--format`) will pretty-print machines using a Go templat
 Valid placeholders for the Go template are listed below:
 
 | Placeholder    | Description                              |
-| -------------- | ---------------------------------------- |
+|:---------------|:-----------------------------------------|
 | .Name          | Machine name                             |
 | .Active        | Is the machine active?                   |
 | .ActiveHost    | Is the machine an active non-swarm host? |
@@ -96,17 +96,21 @@ when using the table directive, will include column headers as well.
 The following example uses a template without headers and outputs the `Name` and `Driver` entries separated by a colon
 for all running machines:
 
-    {% raw %}
-    $ docker-machine ls --format "{{.Name}}: {{.DriverName}}"
-    default: virtualbox
-    ec2: amazonec2
-    {% endraw %}
+```none
+{% raw %}
+$ docker-machine ls --format "{{.Name}}: {{.DriverName}}"
+default: virtualbox
+ec2: amazonec2
+{% endraw %}
+```
 
 To list all machine names with their driver in a table format you can use:
 
-    {% raw %}
-    $ docker-machine ls --format "table {{.Name}} {{.DriverName}}"
-    NAME     DRIVER
-    default  virtualbox
-    ec2      amazonec2
-    {% endraw %}
+```none
+{% raw %}
+$ docker-machine ls --format "table {{.Name}} {{.DriverName}}"
+NAME     DRIVER
+default  virtualbox
+ec2      amazonec2
+{% endraw %}
+```

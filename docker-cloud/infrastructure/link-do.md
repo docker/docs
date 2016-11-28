@@ -1,17 +1,11 @@
 ---
-aliases:
+description: Link your DigitalOcean account
+keywords: link, DigitalOcean, account
+redirect_from:
 - /docker-cloud/getting-started/beginner/link-do/
 - /docker-cloud/getting-started/link-do/
-description: Link your DigitalOcean account
-keywords:
-- link, DigitalOcean, account
-menu:
-  main:
-    parent: infrastructure
-title: Link to DigitalOcean hosts
+title: Link a DigitalOcean account
 ---
-
-# Link your DigitalOcean account
 
 You can link your DigitalOcean account to your Docker Cloud account to deploy **nodes** and **node clusters** using Docker Cloud's Dashboard, API, and CLI.  You must link your DigitalOcean account so that Docker Cloud can interact with DigitalOcean on your behalf to create and manage your **nodes** (droplets).
 
@@ -34,4 +28,4 @@ Once you log in, a message appears prompting you to confirm the link.
 
 ## What's next?
 
-You're ready to start using using DigitalOcean as the infrastructure provider for Docker Cloud! If you came here from the tutorial, click here to [continue the tutorial and deploy your first node](../getting-started/your_first_node.md).
+You're ready to start using DigitalOcean as the infrastructure provider for Docker Cloud! If you came here from the tutorial, click here to [continue the tutorial and deploy your first node](../getting-started/your_first_node.md).

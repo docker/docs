@@ -1,19 +1,12 @@
 ---
-aliases:
+description: Using the Docker Cloud CLI on Linux, Windows, and macOS, installing, updating, uninstall
+keywords: cloud, command-line, CLI
+redirect_from:
 - /docker-cloud/getting-started/intermediate/installing-cli/
 - /docker-cloud/getting-started/installing-cli/
 - /docker-cloud/tutorials/installing-cli/
-description: Using the Docker Cloud CLI on Linux, Windows, and macOS, installing,
-  updating, uninstall
-keywords:
-- cloud, command-line, CLI
-menu:
-  main:
-    parent: docker-cloud
 title: The Docker Cloud CLI
 ---
-
-# The Docker Cloud CLI
 
 Docker Cloud maintains a Command Line Interface (CLI) tool that you can use
 to interact with the service. We highly recommend installing the CLI, as it will
@@ -42,6 +35,8 @@ Open your terminal or command shell and execute the following command:
 ```bash
 $ pip install docker-cloud
 ```
+If you encounter errors on Linux machines, make sure that `python-dev` is installed.
+For example, on Ubuntu, run the following command: `apt-get install python-dev`
 
 #### Install on macOS
 

@@ -1,15 +1,8 @@
 ---
-description: Example of using Docker Machine to install Docker Engine on a cloud provider,
-  using Digital Ocean.
-keywords:
-- cloud, docker, machine, documentation,  installation, digitalocean
-menu:
-  main:
-    parent: install_cloud
+description: Example of using Docker Machine to install Docker Engine on a cloud provider, using Digital Ocean.
+keywords: cloud, docker, machine, documentation, installation, digitalocean
 title: 'Example: Use Docker Machine to provision cloud hosts'
 ---
-
-# Example: Use Docker Machine to provision cloud hosts
 
 Docker Machine driver plugins are available for many cloud platforms, so you can use Machine to provision cloud hosts. When you use Docker Machine for provisioning, you create cloud hosts with Docker Engine installed on them.
 
@@ -110,8 +103,8 @@ To generate your access token:
     ```
     $ docker-machine ls
     NAME             ACTIVE   DRIVER         STATE     URL                         SWARM
-    default          *        virtualbox     Running   tcp://192.168.99.100:2376   
-    docker-sandbox   -        digitalocean   Running   tcp://45.55.139.48:2376   
+    default          *        virtualbox     Running   tcp://192.168.99.100:2376
+    docker-sandbox   -        digitalocean   Running   tcp://45.55.139.48:2376
     ```
 
     Notice that the new cloud server is running but is not the active host. Our command shell is still connected to the default machine, which is currently the active host as indicated by the asterisk (*).
@@ -135,7 +128,7 @@ To generate your access token:
     ```
     $ docker-machine ls
     NAME             ACTIVE   DRIVER         STATE     URL                         SWARM
-    default          -        virtualbox     Running   tcp://192.168.99.100:2376   
+    default          -        virtualbox     Running   tcp://192.168.99.100:2376
     docker-sandbox   *        digitalocean   Running   tcp://45.55.222.72:2376
     ```
 
@@ -207,11 +200,11 @@ If you create a host with Docker Machine, but remove it through the cloud provid
 
 ## Where to go next
 
-* [Docker Machine driver reference](https://docs.docker.com/machine/drivers/)
+* [Docker Machine driver reference](/machine/drivers/)
 
-* [Docker Machine Overview](https://docs.docker.com/machine/overview/)
+* [Docker Machine Overview](/machine/overview/)
 
-* [Use Docker Machine to provision hosts on cloud providers](https://docs.docker.com/machine/get-started-cloud/)
+* [Use Docker Machine to provision hosts on cloud providers](/machine/get-started-cloud/)
 
 * [Install Docker Engine](../../installation/index.md)
 

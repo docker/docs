@@ -1,20 +1,13 @@
 ---
-aliases:
+description: Load-balance the service
+keywords: load, balance, Python
+redirect_from:
 - /docker-cloud/getting-started/python/9_load-balance_the_service/
 - /docker-cloud/getting-started/golang/9_load-balance_the_service/
-description: Load-balance the service
-keywords:
-- load, balance, Python
-menu:
-  main:
-    parent: deploy-app
-    weight: -10
 title: Load-balance the service
 ---
 
-# Load-balance a Python service
-
-To load-balance a your application, you need to deploy a load-balancing service.
+To load-balance your application, you need to deploy a load-balancing service.
 This service distributes incoming requests to all of the available containers in
 the application.
 
@@ -29,7 +22,7 @@ $ docker-cloud service run \
 -p 80:80/tcp \
 --role global \
 --autorestart ALWAYS \
---link-service quickstart-python:web \
+--link-service web:web \
 --name lb \
 dockercloud/haproxy
 ```
@@ -40,7 +33,7 @@ dockercloud/haproxy
 
 **--autorestart ALWAYS** tells Docker Cloud to always [restart the containers](../../apps/autorestart.md) if they stop.
 
-**--link-service quickstart-python:web** links your load balancer service *haproxy* with the service *quickstart-python*, and names the link *web*. (Learn more about Service Linking [here](../../apps/service-links.md).)
+**--link-service web:web** links your load balancer service *haproxy* with the *web* service, and names the link *web*. (Learn more about Service Linking [here](../../apps/service-links.md).)
 
 **--name lb** names the service *lb* (short for *load balancer*).
 

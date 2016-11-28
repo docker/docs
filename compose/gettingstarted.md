@@ -1,15 +1,8 @@
 ---
-description: Getting started with Docker Compose
-keywords:
-- documentation, docs,  docker, compose, orchestration, containers
-menu:
-  main:
-    parent: workw_compose
-    weight: -85
-title: Getting Started
+description: Get started with Docker Compose
+keywords: documentation, docs, docker, compose, orchestration, containers
+title: Get started with Docker Compose
 ---
-
-# Getting Started
 
 On this page you build a simple Python web application running on Docker Compose. The
 application uses the Flask framework and increments a value in Redis. While the
@@ -68,21 +61,21 @@ dependencies the Python application requires, including Python itself.
         RUN pip install -r requirements.txt
         CMD python app.py
 
-  This tells Docker to:
+    This tells Docker to:
 
-  * Build an image starting with the Python 2.7 image.
-  * Add the current directory `.` into the path `/code` in the image.
-  * Set the working directory to `/code`.
-  * Install the Python dependencies.
-  * Set the default command for the container to `python app.py`
-
-  For more information on how to write Dockerfiles, see the [Docker user guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile) and the [Dockerfile reference](/engine/reference/builder.md).
-
+    * Build an image starting with the Python 2.7 image.
+    * Add the current directory `.` into the path `/code` in the image.
+    * Set the working directory to `/code`.
+    * Install the Python dependencies.
+    * Set the default command for the container to `python app.py`
+<br>
+    For more information on how to write Dockerfiles, see the [Docker user guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile) and the [Dockerfile reference](/engine/reference/builder.md).
+<br>
 2. Build the image.
 
         $ docker build -t web .
 
-  This command builds an image named `web` from the contents of the current
+    This command builds an image named `web` from the contents of the current
   directory. The command automatically locates the `Dockerfile`, `app.py`, and
   `requirements.txt` files.
 
@@ -91,7 +84,7 @@ dependencies the Python application requires, including Python itself.
 
 Define a set of services using `docker-compose.yml`:
 
-1. Create a file called docker-compose.yml in your project directory and add
+Create a file called docker-compose.yml in your project directory and add
    the following:
 
 
@@ -115,7 +108,23 @@ This Compose file defines two services, `web` and `redis`. The web service:
 * Mounts the project directory on the host to `/code` inside the container allowing you to modify the code without having to rebuild the image.
 * Links the web service to the Redis service.
 
-The `redis` service uses the latest public [Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker Hub registry.
+The `redis` service uses the latest public
+[Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker
+Hub registry.
+
+>**Tip:** If your project is outside of the `Users` directory (`cd ~`), then you
+need to share the drive or location of the Dockerfile and volume you are using.
+If you get runtime errors indicating an application file is not found, a volume
+mount is denied, or a service cannot start, try enabling file or drive sharing.
+Volume mounting requires shared drives for projects that live outside of
+`C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
+Docker for Windows that uses [Linux
+containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers-beta-feature).
+For more information, see [Shared
+Drives](../docker-for-windows/index.md#shared-drives) on Docker for Windows,
+[File sharing](../docker-for-mac/index.md#file-sharing) on Docker for Mac, and
+the general examples on how to [Manage data in
+containers](../engine/tutorials/dockervolumes.md).
 
 ## Step 4: Build and run your app with Compose
 
@@ -170,14 +179,14 @@ The `docker-compose run` command allows you to run one-off commands for your
 services. For example, to see what environment variables are available to the
 `web` service:
 
-    $ docker-compose run web env
+    docker-compose run web env
 
 See `docker-compose --help` to see other available commands. You can also install [command completion](completion.md) for the bash and zsh shell, which will also show you available commands.
 
 If you started Compose with `docker-compose up -d`, you'll probably want to stop
 your services once you've finished with them:
 
-    $ docker-compose stop
+    docker-compose stop
 
 At this point, you have seen the basics of how Compose works.
 

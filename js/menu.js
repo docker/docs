@@ -1,30 +1,8 @@
 var tocData;
-var treeOutput = new Array();
-function renderTree(tree)
-{
-  for (var i=0; i < tree.length; i++)
-  {
-    if (tree[i].heading)
-    {
-      // render a heading
-    } else {
-      if (tree[i].sectiontitle) {
-        treeOutput.push('<li class="leaf menu-closed"><a href="#" class="expand-menu "><span class="menu-icon" aria-hidden="true"></span>' + tree[i].sectiontitle + '</a>');
-        treeOutput.push('<ul class="nav-sub">');
-        renderTree(tree[i].section);
-        treeOutput.push('</ul>');
-      } else {
-        treeOutput.push('<li class="leaf"><a href="' + tree[i].path +'" class="');
-        if (tree[i].path == window.location.pathname) treeOutput.push('active currentPage');
-        treeOutput.push('">' + tree[i].title + '</a></li>');
-      }
-    }
-  }
-}
 function hookupTOCEvents()
 {
   // do after tree render
-  $('.expand-menu').on('click touchstart', function(elem) {
+  $('.expand-menu').on('mouseup touchend', function(elem) {
 //      menu = elem.currentTarget.nextElementSibling
     menu = elem.currentTarget.parentElement
     if (menu.classList.contains("menu-closed")) {
@@ -39,14 +17,10 @@ function hookupTOCEvents()
   $(".currentPage").each(function(){
     $(this).parentsUntil($('.docsidebarnav_section')).addClass("active").removeClass("menu-closed").addClass("menu-open");
   });
+  $(".left-off-canvas-menu").css("display","block");
 }
 jQuery(document).ready(function(){
-    $.getJSON( "/toc.txt", function( data ) {
-      tocData = data;
-      renderTree(data.toc);
-      $(".nav-sub").html(treeOutput.join(''));
-      hookupTOCEvents();
-    });
+    hookupTOCEvents();
     $("#TableOfContents ul").empty();
 
     var prevH2Item = null;

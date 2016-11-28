@@ -1,15 +1,8 @@
 ---
 description: Swarm and transport layer security
-keywords:
-- docker, swarm, TLS, discovery, security,  certificates
-menu:
-  main:
-    parent: workw_swarm
-    weight: 50
-title: Overview Docker Swarm with TLS
+keywords: docker, swarm, TLS, discovery, security, certificates
+title: Use Docker Swarm with TLS
 ---
-
-# Overview Swarm with TLS
 
 All nodes in a Swarm cluster must bind their Docker daemons to a network port.
 This has obvious security implications. These implications are compounded when
@@ -86,7 +79,7 @@ authentication.
 
 ![](images/trust-diagram.jpg)
 
-The trusted third party in this diagram is the the Certificate Authority (CA)
+The trusted third party in this diagram is the Certificate Authority (CA)
 server. Like the country in the passport example, a CA creates, signs, issues,
 revokes certificates. Trust is established by installing the CA's root
 certificate on the host running the Docker Engine daemon. The Docker Engine CLI then requests
@@ -164,4 +157,4 @@ facing production workloads exposed to untrusted networks.
 ## Related information
 
 * [Configure Docker Swarm for TLS](configure-tls.md)
-* [Docker security](https://docs.docker.com/engine/security/security/)
+* [Docker security](/engine/security/security/)

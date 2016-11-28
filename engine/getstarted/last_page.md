@@ -1,20 +1,12 @@
 ---
-aliases:
+description: Getting started with Docker
+keywords: beginner, getting started, Docker
+redirect_from:
 - /mac/last_page/
 - /windows/last_page/
 - /linux/last_page/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
-menu:
-  main:
-    identifier: getstart_learn_more
-    parent: tutorial_getstart_menu
-    weight: 7
-title: Learning more
+title: Learn more
 ---
-
-# Learning more
 
 This getting started provided very basic essentials for using Docker on Mac, Windows, and Linux. If you want to learn more with regard to end-to-end development, start with the full install instructions and feature overviews, then follow up with more advanced tutorials and user guides.
 

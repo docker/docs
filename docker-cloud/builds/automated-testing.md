@@ -1,21 +1,14 @@
 ---
-aliases:
-- /docker-cloud/feature-reference/automated-testing/
 description: Automated tests
-keywords:
-- Automated, testing, repository
-menu:
-  main:
-    parent: builds
-    weight: -50
+keywords: Automated, testing, repository
+redirect_from:
+- /docker-cloud/feature-reference/automated-testing/
 title: Automated repository tests
 ---
 
-# Automated repository tests
-
-Docker Cloud can automatically test changes pushed to your source code
-repositories using containers. You can enable `Autotest` on [any Docker Cloud repository](repos.md) to run tests at each push to the source code repository,
-similar to a continuous integration testing service.
+Docker Cloud can automatically test changes to your source code repositories
+using containers. You can enable `Autotest` on [any Docker Cloud repository](repos.md) to run tests on each pull request to the source code
+repository to create a continuous integration testing service.
 
 Enabling `Autotest` builds an image for testing purposes, but does **not**
 automatically push the built image to the Docker repository. If you want to push
@@ -29,7 +22,7 @@ tests to be run.
 
 For example:
 
-```yml
+```none
 sut:
   build: .
   command: run_tests.sh
@@ -73,20 +66,21 @@ Docker repository, regardless of the Autotest settings.
 
     * The source code repository
     * the build location
-    * at least one tag mapping
+    * at least one build rule
 
 8. Choose your **Autotest** option.
 
     The following options are available:
 
-    * `Off`: no additional tests. Test commits only to branches that are using Autobuild to build and push images.
-    * `Source Repository`: test commits to all branches of the source code repository, regardless of their Autobuild setting.
-    * `Source Repository & External Pull Requests`: tests commits to all branches of the source code repository, including any pull requests opened against it.
+    * `Off`: No additional test builds. Tests only run if they're configured as part of an automated build.
+    * `Internal pull requests`: Run a test build for any pull requests to branches that match a build rule, but only when the pull request comes from the same source repository.
+    * `Internal and external pull requests`: Run a test build for any pull requests to branches that match a build rule, including when the pull request originated in an external source repository.
 
     > **Note**: For security purposes, autotest on _external pull requests_ is
     disabled on public repositories. If you select this option on a public
-    repository, tests will still run on pushes to the source code repository,
-    but not on pull requests.
+    repository, tests will still run on _internal_ pull requests (for example
+    from one branch into another inside the code repository) but not on for
+    external pull requests.
 
 9. Click **Save** to save the settings, or click **Save and build** to save and
 run an initial test.

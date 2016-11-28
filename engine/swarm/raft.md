@@ -1,16 +1,8 @@
 ---
 description: Raft consensus algorithm in swarm mode
-keywords:
-- docker, container, cluster, swarm, raft
-menu:
-  main:
-    identifier: raft
-    parent: engine_swarm
-    weight: "21"
+keywords: docker, container, cluster, swarm, raft
 title: Raft consensus in swarm mode
 ---
-
-## Raft consensus algorithm
 
 When the Docker Engine runs in swarm mode, manager nodes implement the
 [Raft Consensus Algorithm](http://thesecretlivesofdata.com/raft/) to manage the global cluster state.

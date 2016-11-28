@@ -1,15 +1,8 @@
 ---
 description: How to use Docker's development environment
-keywords:
-- development, inception, container, image Dockerfile, dependencies, Go,  artifacts
-menu:
-  main:
-    parent: smn_engine_contrib
-    weight: 5
+keywords: development, inception, container, image Dockerfile, dependencies, Go,  artifacts
 title: Work with a development container
 ---
-
-# Work with a development container
 
 In this section, you learn to develop like the Docker Engine core team.
 The `docker` repository includes a `Dockerfile` at its root. This file defines
@@ -125,7 +118,7 @@ can take over 15 minutes to complete.
 4. Use `make` to build a development environment image and run it in a container.
 
    ```none
-   $ make BIN_DIR=. shell
+   $ make BIND_DIR=. shell
    ```
 
    The command returns informational messages as it runs. The first build may
@@ -147,7 +140,7 @@ can take over 15 minutes to complete.
    You should see the image's source from the  `/go/src/github.com/docker/docker`
    directory.
 
-     ![List example](images/list_example.png)
+   ![List example](images/list_example.png)
 
 6. Make a `docker` binary.
 
@@ -280,10 +273,11 @@ example, you'll edit the help for the `attach` subcommand.
 7. Rebuild the binary by using the command `hack/make.sh binary` in the docker development container shell.
 
 8. Copy the binaries to **/usr/bin** by entering the following commands in the docker development container shell.
-```
-cp bundles/1.12.0-dev/binary-client/docker* /usr/bin/
-cp bundles/1.12.0-dev/binary-daemon/docker* /usr/bin/
-```
+
+   ```
+   cp bundles/1.12.0-dev/binary-client/docker* /usr/bin/
+   cp bundles/1.12.0-dev/binary-daemon/docker* /usr/bin/
+   ```
 
 9. To view your change, run the `docker attach --help` command in the docker development container shell.
 

@@ -1,23 +1,17 @@
 ---
-aliases:
-- /docker-cloud/feature-reference/service-links/
 description: Service discovery
-keywords:
-- service, discover, links
-menu:
-  main:
-    parent: apps
+keywords: service, discover, links
+redirect_from:
+- /docker-cloud/feature-reference/service-links/
 title: Service discovery and links
 ---
-
-# Service discovery and links
 
 Docker Cloud creates a per-user overlay network which connects all containers across all of the user's hosts. This network connects all of your containers on the `10.7.0.0/16` subnet, and gives every container a local IP. This IP persists on each container even if the container is redeployed and ends up on a different host. Every container can reach any other container on any port within the subnet.
 
 Docker Cloud gives your containers two ways find other services:
 
 * Using service and container names directly as **hostnames**
-* Using **service links**, which are based on [Docker Compose links](https://docs.docker.com/compose/compose-file/#links)
+* Using **service links**, which are based on [Docker Compose links](/compose/compose-file/#links)
 
 **Service and Container Hostnames** update automatically when a service scales up or down or redeploys. As a user, you can configure service names, and Docker Cloud uses these names to find the IP of the services and containers for you. You can use hostnames in your code to provide abstraction that allows you to easily swap service containers or components.
 
@@ -55,7 +49,7 @@ If the container making the query is part of a stack, and there is a local match
 
 ## Using service links for service discovery
 
-Docker Cloud's service linking is modeled on [Docker Compose links](https://docs.docker.com/compose/compose-file/#links) to provide a basic service discovery functionality using directional links recorded in environment variables.
+Docker Cloud's service linking is modeled on [Docker Compose links](/compose/compose-file/#links) to provide a basic service discovery functionality using directional links recorded in environment variables.
 
 When you link a "client" service to a "server" service, Docker Cloud performs the following actions on the "client" service:
 
@@ -124,7 +118,7 @@ Environment variables specified in the service definition are instantiated in ea
 
 These environment variables are prefixed with the `HOSTNAME_ENV_` in each container.
 
-In our example, if we launch our `my-web-app` service with an environment variable of `WEBROOT=/login`, the following environment variables are set and available available in the proxy containers:
+In our example, if we launch our `my-web-app` service with an environment variable of `WEBROOT=/login`, the following environment variables are set and available in the proxy containers:
 
 | Name              | Value    |
 |:------------------|:---------|

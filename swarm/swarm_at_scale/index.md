@@ -1,16 +1,8 @@
 ---
 description: Try Swarm at scale
-keywords:
-- docker, swarm, scale, voting, application,  certificates
-menu:
-  main:
-    identifier: scale_swarm
-    parent: workw_swarm
-    weight: -35
+keywords: docker, swarm, scale, voting, application,  certificates
 title: Try Swarm at scale
 ---
-
-# Try Swarm at scale
 
 Using this example, you deploy a voting application on a Swarm cluster. This
 example illustrates a typical development process. After you establish an

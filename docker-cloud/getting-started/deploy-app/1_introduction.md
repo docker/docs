@@ -1,18 +1,11 @@
 ---
-aliases:
+description: Deploy an app to Docker Cloud
+keywords: deploy, Python, application
+redirect_from:
 - /docker-cloud/getting-started/python/1_introduction/
 - /docker-cloud/getting-started/golang/1_introduction/
-description: Deploy an app to Docker Cloud
-keywords:
-- deploy, Python, application
-menu:
-  main:
-    parent: deploy-app
-    weight: -90
-title: Introduction to Deploying an app in Docker Cloud
+title: Introduction to deploying an app in Docker Cloud
 ---
-
-# Introduction and tutorial prerequisites
 
 In this tutorial you will bring an application to Docker Cloud using either Go or
 Python. This tutorial is intended for more advanced beginners who have some

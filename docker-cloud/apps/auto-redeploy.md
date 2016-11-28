@@ -1,16 +1,10 @@
 ---
-aliases:
-- /docker-cloud/feature-reference/auto-redeploy/
 description: Autoredeploy
-keywords:
-- Autoredeploy, image, store, service
-menu:
-  main:
-    parent: apps
-title: Automatic service redeploy
+keywords: Autoredeploy, image, store, service
+redirect_from:
+- /docker-cloud/feature-reference/auto-redeploy/
+title: Redeploy services automatically
 ---
-
-# Autoredeploy
 
 Docker Cloud's **Autoredeploy** feature allows a service that uses an image
 stored in Docker Hub to automatically redeploy whenever a new image is pushed or

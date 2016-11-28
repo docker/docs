@@ -1,14 +1,8 @@
 ---
 description: IBM Softlayer driver for machine
-keywords:
-- machine, IBM Softlayer, driver
-menu:
-  main:
-    parent: smn_machine_drivers
+keywords: machine, IBM Softlayer, driver
 title: IBM Softlayer
 ---
-
-# IBM Softlayer
 
 Create machines on [Softlayer](http://softlayer.com).
 

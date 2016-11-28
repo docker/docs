@@ -1,14 +1,8 @@
 ---
 description: Learn how to optimize your use of device mapper driver.
-keywords:
-- container, storage, driver, device mapper
-menu:
-  main:
-    parent: engine_driver
-title: Device mapper storage in practice
+keywords: container, storage, driver, device mapper
+title: Docker and the Device Mapper storage driver
 ---
-
-# Docker and the Device Mapper storage driver
 
 Device Mapper is a kernel-based framework that underpins many advanced
 volume management technologies on Linux. Docker's `devicemapper` storage driver
@@ -322,7 +316,7 @@ assumes that the Docker daemon is in the `stopped` state.
     Now that your storage is configured, configure the Docker daemon to use it. There are two ways to do this. You can set options on the command line if you start the daemon there:
 
     ```bash
-    --storage-driver=devicemapper --storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool-tpool --storage-opt=dm.use_deferred_removal=true --storage-opt=dm.use_deferred_deletion=true
+    --storage-driver=devicemapper --storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool --storage-opt=dm.use_deferred_removal=true --storage-opt=dm.use_deferred_deletion=true
     ```
 
     You can also set them for startup in the `daemon.json` configuration, for example:
@@ -375,7 +369,7 @@ If you run into repeated problems with thin pool, you can use the
 `dm.min_free_space` option to tune the Engine behavior. This value ensures that
 operations fail with a warning when the free space is at or near the minimum.
 For information, see <a
-href="../../../reference/commandline/dockerd/#storage-driver-options"
+href="/../../reference/commandline/dockerd/#storage-driver-options"
 target="_blank">the storage driver options in the Engine daemon reference</a>.
 
 

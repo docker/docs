@@ -1,15 +1,8 @@
 ---
 description: Docker Cloud
-keywords:
-- Docker, cloud, release, notes
-menu:
-  main:
-    parent: docker-cloud
-    weight: 100
-title: Release Notes
+keywords: Docker, cloud, release, notes
+title: Docker Cloud release notes
 ---
-
-# Docker Cloud Release Notes
 
 Did you know we also have a [Release notes category](https://forums.docker.com/c/docker-cloud/release-notes) on the Docker Cloud Product forums? Now you do!
 
@@ -55,7 +48,7 @@ The following release notes document changes since [Tutum v0.19.5](https://suppo
 - **Docker Cloud is Generally Available**: all features of Docker Cloud are Generally Available with the exception of the build features which remain in beta.
 - **Docker Hub Registry Integration**: All of your Docker Hub image repositories are available and accessible when you login to Docker Cloud. Changes you make to your repositories are reflected in both Docker Hub and Docker Cloud.
 - **Autoredeploy from Docker Hub**: services that use a repository stored in the Docker Hub now have the [**autoredeploy** option](apps/auto-redeploy.md) available, which allows automatic redeployments on push without setting up webhooks.
-- **Environment variable substitution on CLI**: the `docker-cloud` CLI now substitutes environment variables in stack files, [the same way Docker Compose does it](https://docs.docker.com/compose/compose-file/#variable-substitution:91de898b5f5cdb090642a917d3dedf68).
+- **Environment variable substitution on CLI**: the `docker-cloud` CLI now substitutes environment variables in stack files, [the same way Docker Compose does it](/compose/compose-file/#variable-substitution:91de898b5f5cdb090642a917d3dedf68).
 
 
 ### Changed

@@ -1,16 +1,8 @@
 ---
 description: Reference for drivers Docker Machine supports
-keywords:
-- machine, drivers, supports
-menu:
-  main:
-    identifier: smn_machine_drivers
-    parent: workw_machine
-    weight: 90
+keywords: machine, drivers, supports
 title: Drivers
 ---
-
-# Supported Drivers
 
 -   [Amazon Web Services](aws.md)
 -   [Microsoft Azure](azure.md)

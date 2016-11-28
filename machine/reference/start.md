@@ -1,24 +1,22 @@
 ---
 description: Start a machine
-keywords:
-- machine, start, subcommand
-menu:
-  main:
-    identifier: machine.start
-    parent: smn_machine_subcmds
-title: start
+keywords: machine, start, subcommand
+title: docker-machine start
 ---
 
-# start
+```none
+Usage: docker-machine start [arg...]
 
-    Usage: docker-machine start [arg...]
+Start a machine
 
-    Start a machine
+Description:
+   Argument(s) are one or more machine names.
+```
 
-    Description:
-       Argument(s) are one or more machine names.
 
 For example:
 
-    $ docker-machine start dev
-    Starting VM...
+```none
+$ docker-machine start dev
+Starting VM...
+```
