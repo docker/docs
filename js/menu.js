@@ -1,4 +1,30 @@
-var tocData;
+var metadata;
+var autoCompleteShowing = false;
+var displayingAutcompleteResults = new Array();
+document.onkeydown = checkKey;
+function checkKey(e) {
+  if (autoCompleteShowing) {
+    e = e || window.event;
+    if (e.keyCode == '38') {
+        // up arrow
+    }
+    else if (e.keyCode == '40') {
+        // down arrow
+    }
+    else if (e.keyCode == '37') {
+       // left arrow
+    }
+    else if (e.keyCode == '39') {
+       // right arrow
+    }
+  }
+}
+function highlightMe(inputTxt,keyword)
+{
+  inputTxt = String(inputTxt);
+  simpletext = new RegExp("(" + keyword + ")","gi");
+  return inputTxt.replace(simpletext, "<span style='background-color:yellow'>$1</span>")
+}
 function hookupTOCEvents()
 {
   // do after tree render
@@ -18,9 +44,79 @@ function hookupTOCEvents()
     $(this).parentsUntil($('.docsidebarnav_section')).addClass("active").removeClass("menu-closed").addClass("menu-open");
   });
   $(".left-off-canvas-menu").css("display","block");
+  // console.log(metadata);
+  $("#st-search-input").on('keyup change', function() {
+    var results = new Array();
+    var searchVal = $("#st-search-input").val();
+    var uppercaseSearchVal = searchVal.toUpperCase();
+    //console.log("input changed: ",$("#st-search-input").val());
+    if (searchVal.length > 2) {
+      for (i=0;i<metadata.pages.length;i++) {
+        // search url, description, title, and keywords for search input
+        var thisPage = metadata.pages[i];
+        if (String(thisPage.title).toUpperCase().indexOf(uppercaseSearchVal) > -1) results.push(i);
+        if (thisPage.description != null) if (String(thisPage.description).toUpperCase().indexOf(uppercaseSearchVal) > -1) results.push(i);
+        if (thisPage.url != null) if (String(thisPage.url).toUpperCase().indexOf(uppercaseSearchVal) > -1) results.push(i);
+        if (thisPage.keywords != null) if (String(thisPage.keywords).toUpperCase().indexOf(uppercaseSearchVal) > -1) results.push(i);
+      }
+    }
+    if (results.length > 0)
+    {
+      var lastIndex = -1;
+      var resultsOutput = new Array();
+      var resultsShown  = 0;
+      resultsOutput.push("<ul class='autocompleteList'>")
+      for (i=0; resultsShown < 3 && i < results.length; i++)
+      {
+        if (results[i] != lastIndex) {
+          // show results
+          //console.log("match:",metadata.pages[results[i]]);
+          displayingAutcompleteResults.push(i);
+          resultsOutput.push("<li id='autoTitle" + i + "' class='autocompleteTitle'>")
+          resultsOutput.push("<a href=" + metadata.pages[results[i]].url + ">" + highlightMe(metadata.pages[results[i]].title,searchVal) + "</a>");
+          resultsOutput.push("</li>");
+          resultsOutput.push("<li id='autoUrl" + i + "' class='autocompleteUrl'>")
+          resultsOutput.push(highlightMe(metadata.pages[results[i]].url,searchVal));
+          resultsOutput.push("</li>");
+          /*
+          resultsOutput.push("<li id='autoBreadcrumb" + i + "' class='autocompleteBreadcrumb'>")
+          resultsOutput.push("Breadcrumb: " + breadcrumbString(metadata.pages[results[i]].url));
+          resultsOutput.push("</li>");
+          */
+          if (metadata.pages[results[i]].keywords)
+          {
+          resultsOutput.push("<li id='autoKeywords" + i + "' class='autocompleteKeywords'>")
+          resultsOutput.push("Keywords: <i>" + highlightMe(metadata.pages[results[i]].keywords,searchVal) + "</i>");
+          resultsOutput.push("</li>");
+          }
+          if (metadata.pages[results[i]].description)
+          {
+          resultsOutput.push("<li id='autoDescription" + i + "' class='autocompleteDescription'>")
+          resultsOutput.push("Description: " + highlightMe(metadata.pages[results[i]].description,searchVal));
+          resultsOutput.push("</li>");
+          }
+          resultsShown++;
+        }
+        lastIndex = results[i];
+      }
+      resultsOutput.push("<li class='autocompleteTitle'><a href='/search/?q=" + searchVal + "'><b>See all results...</b></a></li>")
+      resultsOutput.push("</ul>");
+      $("#autocompleteResults").css("display","block");
+      $("#autocompleteResults").html(resultsOutput.join(""));
+      autoCompleteShowing = true;
+    } else {
+      $("#autocompleteResults").css("display","none");
+      $("#autocompleteResults").html("");
+      autoCompleteShowing = false;
+    }
+  });
 }
+
 jQuery(document).ready(function(){
-    hookupTOCEvents();
+    $.getJSON( "/metadata.txt", function( data ) {
+      metadata = data;
+      hookupTOCEvents();
+    });
     $("#TableOfContents ul").empty();
 
     var prevH2Item = null;
@@ -41,14 +137,14 @@ jQuery(document).ready(function(){
           // h4
           currentHeader = 4;
         }
-        console.log("currentHeader ",currentHeader, "lastHeader ",lastHeader, "text ", $(this).text());
+        //console.log("currentHeader ",currentHeader, "lastHeader ",lastHeader, "text ", $(this).text());
         if (currentHeader > lastHeader) {
             // nest further
             output += "<ul>"
         }
         if (currentHeader < lastHeader && lastHeader > 0) {
             // close nesting
-            console.log("Closing nesting because ", lastHeader, "is <", currentHeader);
+            //console.log("Closing nesting because ", lastHeader, "is <", currentHeader);
             for (i=0; i < (lastHeader - currentHeader); i++)
             {
               output += "</ul>"

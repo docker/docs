@@ -1,5 +1,6 @@
 ---
 title: All Page Links
+hide_from_sitemap: true
 ---
 
 {% assign sorted_pages = site.pages | sort:"path" %}
