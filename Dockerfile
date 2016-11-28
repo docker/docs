@@ -7,14 +7,29 @@ RUN git config --global user.name "Gordon"
 # Clone the docs repo
 RUN git clone https://www.github.com/docker/docker.github.io allv
 
-# Get docker/docker ref docs from 1.12.x branch to be used in master builds
+## Branch to pull from, per ref doc
+ENV ENGINE_BRANCH="1.12.x"
+ENV DISTRIBUTION_BRANCH="release/2.5"
+
+# Engine
+# Get docker/docker ref docs from $ENGINE_BRANCH branch to be used in master builds
 # Uses Github Subversion gateway to limit the checkout
-RUN svn co https://github.com/docker/docker/branches/1.12.x/docs/reference allv/engine/reference
-RUN svn co https://github.com/docker/docker/branches/1.12.x/docs/extend allv/engine/extend
+RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/reference allv/engine/reference
+RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend allv/engine/extend
 # Can't use the svn trick to get a single file, use wget instead
-RUN wget -O allv/engine/deprecated.md https://raw.githubusercontent.com/docker/docker/1.12.x/docs/deprecated.md
+RUN wget -O allv/engine/deprecated.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/deprecated.md
 # Make a temporary commit for the files we added so we can check out other branches later
 RUN git --git-dir=./allv/.git --work-tree=./allv add engine
+RUN git --git-dir=./allv/.git --work-tree=./allv commit -m "Temporary commit"
+
+# Distribution
+# Get docker/distribution ref docs from $DISTRIBUTION_BRANCH tag to be used in master builds
+# Uses Github Subversion gateway to limit the checkout
+RUN svn co https://github.com/docker/distribution/branches/$DISTRIBUTION_BRANCH/docs/spec allv/registry/spec
+# Can't use the svn trick to get a single file, use wget instead
+RUN wget -O allv/registry/configuration.md https://raw.githubusercontent.com/docker/distribution/$DISTRIBUTION_BRANCH/docs/configuration.md
+# Make a temporary commit for the files we added so we can check out other branches later
+RUN git --git-dir=./allv/.git --work-tree=./allv add registry
 RUN git --git-dir=./allv/.git --work-tree=./allv commit -m "Temporary commit"
 
 # Create HTML for master

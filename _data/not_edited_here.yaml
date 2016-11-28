@@ -32,8 +32,8 @@ overrides:
 
 - path: /registry/configuration/
   description: Reference docs for configuring Docker Registry
-  source: https://github.com/docker/distribution/tree/master/docs/configuration.md
+  source: https://github.com/docker/distribution/tree/release/2.5/docs/configuration.md
 
 - path: /registry/spec/
   description: Docker Registry API references
-  source: https://github.com/docker/distribution/tree/master/docs/spec/
+  source: https://github.com/docker/distribution/tree/release/2.5/docs/spec/
