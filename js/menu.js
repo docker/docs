@@ -73,7 +73,7 @@ function hookupTOCEvents()
           //console.log("match:",metadata.pages[results[i]]);
           displayingAutcompleteResults.push(i);
           resultsOutput.push("<li id='autoTitle" + i + "' class='autocompleteTitle'>")
-          resultsOutput.push("<a href=" + metadata.pages[results[i]].url + ">" + highlightMe(metadata.pages[results[i]].title,searchVal) + "</a>");
+          resultsOutput.push("<a href='" + metadata.pages[results[i]].url + "'>" + highlightMe(metadata.pages[results[i]].title,searchVal) + "</a>");
           resultsOutput.push("</li>");
           resultsOutput.push("<li id='autoUrl" + i + "' class='autocompleteUrl'>")
           resultsOutput.push(highlightMe(metadata.pages[results[i]].url,searchVal));
