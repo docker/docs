@@ -4,7 +4,7 @@ keywords: docker, opensource
 title: Open source components and licensing
 ---
 
-Docker Desktop Editions are built using open source software software. For
+Docker Desktop Editions are built using open source software. For
 details on the licensing, choose <img src="../images/whale-x.png">
 -->&nbsp;**About** from within the application, then click **Acknowledgements**.
 

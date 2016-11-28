@@ -112,7 +112,7 @@ In this step, you create a Django started project by building the image from the
 
   If you are running Docker on Linux, the files `django-admin` created are owned
   by root. This happens because the container runs as the root user. Change the
-  ownership of the the new files.
+  ownership of the new files.
 
           sudo chown -R $USER:$USER .
 

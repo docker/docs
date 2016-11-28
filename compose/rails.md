@@ -91,7 +91,7 @@ First, Compose will build the image for the `web` service using the `Dockerfile`
 
 If you are running Docker on Linux, the files `rails new`  created are owned by
 root. This happens because the container runs as the root user. Change the
-ownership of the the new files.
+ownership of the new files.
 
       sudo chown -R $USER:$USER .
 
