@@ -1,14 +1,8 @@
 ---
 description: Copy files among machines
-keywords:
-- machine, scp, subcommand
-menu:
-  main:
-    parent: smn_machine_subcmds
-title: scp
+keywords: machine, scp, subcommand
+title: docker-machine scp
 ---
-
-# scp
 
 Copy files from your local host to a machine, from machine to machine, or from a
 machine to your local host using `scp`.
@@ -18,15 +12,17 @@ machine's case, you don't have to specify the name, just the path.
 
 Consider the following example:
 
-    $ cat foo.txt
-    cat: foo.txt: No such file or directory
-    $ docker-machine ssh dev pwd
-    /home/docker
-    $ docker-machine ssh dev 'echo A file created remotely! >foo.txt'
-    $ docker-machine scp dev:/home/docker/foo.txt .
-    foo.txt                                                           100%   28     0.0KB/s   00:00
-    $ cat foo.txt
-    A file created remotely!
+```none
+$ cat foo.txt
+cat: foo.txt: No such file or directory
+$ docker-machine ssh dev pwd
+/home/docker
+$ docker-machine ssh dev 'echo A file created remotely! >foo.txt'
+$ docker-machine scp dev:/home/docker/foo.txt .
+foo.txt                                                           100%   28     0.0KB/s   00:00
+$ cat foo.txt
+A file created remotely!
+```
 
 Just like how `scp` has a `-r` flag for copying files recursively,
 `docker-machine` has a `-r` flag for this feature.

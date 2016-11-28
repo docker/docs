@@ -1,15 +1,8 @@
 ---
 description: Plan for Swarm in production
-keywords:
-- docker, swarm, scale, voting, application,  plan
-menu:
-  main:
-    parent: workw_swarm
-    weight: -45
+keywords: docker, swarm, scale, voting, application, plan
 title: Plan for Swarm in production
 ---
-
-# Plan for Swarm in production
 
 This article provides guidance to help you plan, deploy, and manage Docker
 Swarm clusters in business critical production environments. The following high
@@ -75,7 +68,7 @@ configure your firewalls and other network access control lists.
 - **Custom, cross-host container networks**:
     - **Inbound 7946/tcp** Allows for discovering other container networks.
     - **Inbound 7946/udp** Allows for discovering other container networks.
-    - **Inbound <store-port>/tcp** Network key-value store service port.
+    - **Inbound `<store-port>`/tcp** Network key-value store service port.
     - **4789/udp** For the container overlay network.
 
 

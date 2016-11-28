@@ -1,17 +1,11 @@
 ---
-aliases:
+description: How to manage data inside your Docker containers.
+keywords: Examples, Usage, volume, docker, documentation, user guide, data,  volumes
+redirect_from:
 - /engine/userguide/containers/dockervolumes/
 - /engine/userguide/dockervolumes/
-description: How to manage data inside your Docker containers.
-keywords:
-- Examples, Usage, volume, docker, documentation, user guide, data,  volumes
-menu:
-  main:
-    parent: engine_learn_menu
 title: Manage data in containers
 ---
-
-# Manage data in containers
 
 So far you've been introduced to some [basic Docker
 concepts](usingdocker.md), seen how to work with [Docker
@@ -179,8 +173,11 @@ Volume drivers create volumes by name, instead of by path like in
 the other examples.
 
 The following command creates a named volume, called `my-named-volume`,
-using the `flocker` volume driver, and makes it available within the container
-at `/webapp`:
+using the `flocker` volume driver (`flocker` is a plugin for multi-host portable volumes)
+and makes it available within the container at `/webapp`. Before running the command,
+[install flocker](https://flocker-docs.clusterhq.com/en/latest/docker-integration/manual-install.html).
+If you do not want to install `flocker`, replace `flocker` with `local` in the example commands
+below to use the `local` driver.
 
 ```bash
 $ docker run -d -P \

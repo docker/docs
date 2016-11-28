@@ -1,19 +1,14 @@
 ---
-aliases:
+description: Docker explained in depth
+keywords: docker, introduction, documentation, about, technology,  understanding
+redirect_from:
 - /introduction/understanding-docker/
 - /engine/userguide/basics/
 - /engine/quickstart.md
-description: Docker explained in depth
-keywords:
-- docker, introduction, documentation, about, technology,  understanding
-menu:
-  main:
-    parent: engine_use
-    weight: -90
+- /engine/introduction/understanding-docker/
 title: Docker Overview
 ---
 
-# Docker Overview
 Docker is an open platform for developing, shipping, and running applications.
 Docker enables you to separate your applications from your infrastructure so
 you can deliver software quickly. With Docker, you can manage your infrastructure
@@ -99,8 +94,8 @@ Docker uses a client-server architecture. The Docker *client* talks to the
 Docker *daemon*, which does the heavy lifting of building, running, and
 distributing your Docker containers. The Docker client and daemon *can*
 run on the same system, or you can connect a Docker client to a remote Docker
-daemon. The Docker client and daemon communicate via sockets or through a
-REST API.
+daemon. The Docker client and daemon communicate using a REST API, over UNIX
+sockets or a network interface.
 
 ![Docker Architecture Diagram](article-img/architecture.svg)
 
@@ -207,8 +202,8 @@ existing images and pull them from the registry to a host.
 [Docker Hub](http://hub.docker.com) is a public Docker
 registry which serves a huge collection of existing images and allows you to
 contribute your own. For more information, go to
-[Docker Registry](https://docs.docker.com/registry/overview/) and
-[Docker Trusted Registry](https://docs.docker.com/docker-trusted-registry/overview/).
+[Docker Registry](/registry/overview/) and
+[Docker Trusted Registry](/docker-trusted-registry/overview/).
 
 [Docker store](http://store.docker.com) allows you to buy and sell Docker images.
 For image, you can buy a Docker image containing an application or service from

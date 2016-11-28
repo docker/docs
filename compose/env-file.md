@@ -1,15 +1,8 @@
 ---
-description: Declaring default environment variables in file
-keywords:
-- fig, composition, compose, docker, orchestration, environment, env file
-menu:
-  main:
-    parent: workw_compose
-    weight: 10
-title: Environment file
+description: Declare default environment variables in a file
+keywords: fig, composition, compose, docker, orchestration, environment, env file
+title: Declare default environment variables in file
 ---
-
-# Environment file
 
 Compose supports declaring default environment variables in an environment
 file named `.env` placed in the folder `docker-compose` command is executed from
@@ -28,8 +21,10 @@ file, but can also be used to define the following
 [CLI variables](reference/envvars.md):
 
 - `COMPOSE_API_VERSION`
+- `COMPOSE_CONVERT_WINDOWS_PATHS`
 - `COMPOSE_FILE`
 - `COMPOSE_HTTP_TIMEOUT`
+- `COMPOSE_TLS_VERSION`
 - `COMPOSE_PROJECT_NAME`
 - `DOCKER_CERT_PATH`
 - `DOCKER_HOST`

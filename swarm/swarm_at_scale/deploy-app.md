@@ -1,17 +1,10 @@
 ---
-aliases:
-- /swarm/swarm_at_scale/04-deploy-app/
 description: Try Swarm at scale
-keywords:
-- docker, swarm, scale, voting, application,  certificates
-menu:
-  main:
-    parent: scale_swarm
-    weight: -80
+keywords: docker, swarm, scale, voting, application, certificates
+redirect_from:
+- /swarm/swarm_at_scale/04-deploy-app/
 title: Deploy the application
 ---
-
-# Deploy the application
 
 You've [deployed the load balancer, the discovery backend, and a Swarm
 cluster](deploy-infra.md) so now you can build and deploy the voting application
@@ -98,7 +91,7 @@ command below, look for the value constraint.
 
 1. Start a Postgres database container.
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -v db-data:/var/lib/postgresql/data \
    -e constraint:com.function==dbstore \
@@ -108,7 +101,7 @@ command below, look for the value constraint.
 
 6. Start the Redis container.
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -p 6379:6379 \
    -e constraint:com.function==dbstore \
@@ -120,7 +113,7 @@ command below, look for the value constraint.
 
 7. Start the worker application
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -e constraint:com.function==worker01 \
    --net="voteapp" \
@@ -130,7 +123,7 @@ command below, look for the value constraint.
 
 6. Start the results application.
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -p 80:80 \
    --label=interlock.hostname=results \
@@ -142,7 +135,7 @@ command below, look for the value constraint.
 
 7. Start the voting application twice; once on each frontend node.
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -p 80:80 \
    --label=interlock.hostname=vote \
@@ -154,7 +147,7 @@ command below, look for the value constraint.
 
     And again on the other frontend node.
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -p 80:80 \
    --label=interlock.hostname=vote \
@@ -282,7 +275,7 @@ the containers at once. This extra credit
     in the `docker-compose.yml` file. For example,
     this command:
 
-   ```bash
+   ```none
    $ docker -H $(docker-machine ip manager):3376 run -t -d \
    -e constraint:com.function==worker01 \
    --net="voteapp" \
@@ -303,7 +296,7 @@ the containers at once. This extra credit
 
     In general, Compose starts services in reverse order they appear in the file.
     So, if you want a service to start before all the others, make it the last
-    service in the file file.  This application relies on a volume and a network,
+    service in the file.  This application relies on a volume and a network,
     declare those at the bottom of the file.
 
 3. Check your work against <a href="../docker-compose.yml" target="_blank">this

@@ -1,16 +1,8 @@
 ---
 description: Docker installation on macOS
-keywords:
-- Docker, Docker documentation, requirements, boot2docker, VirtualBox, SSH, Linux,
-  osx, os x, macOS,  Mac
-menu:
-  main:
-    parent: engine_install
-    weight: "-90"
-title: Installation on macOS
+keywords: Docker, Docker documentation, requirements, boot2docker, VirtualBox, SSH, Linux, osx, os x, macOS, Mac
+title: Install Docker on macOS
 ---
-
-# macOS
 
 You have two options for installing Docker on Mac:
 
@@ -21,7 +13,7 @@ You have two options for installing Docker on Mac:
 
 Docker for Mac is our newest offering for the Mac. It runs as a native Mac application and uses <a href="https://github.com/mist64/xhyve/" target="_blank">xhyve</a> to virtualize the Docker Engine environment and Linux kernel-specific features for the Docker daemon.
 
-Go to [Getting Started with Docker for Mac](https://docs.docker.com/docker-for-mac/) for download and install instructions, and to learn all about Docker for Mac.
+Go to [Getting Started with Docker for Mac](/docker-for-mac/) for download and install instructions, and to learn all about Docker for Mac.
 
 **Requirements**
 
@@ -52,6 +44,6 @@ Your Mac must be running macOS 10.8 "Mountain Lion" or newer to install the Dock
 
 * You can find more extensive examples in [Learn by example](../tutorials/index.md) and in the [Docker Engine User Guide](../userguide/index.md).
 
-* If you are interested in using the Kitematic GUI, see the [Kitematic user guide](https://docs.docker.com/kitematic/userguide/).
+* If you are interested in using the Kitematic GUI, see the [Kitematic user guide](/kitematic/userguide/).
 
 > **Note**: The Boot2Docker command line was deprecated several releases back in favor of Docker Machine, and now Docker for Mac.

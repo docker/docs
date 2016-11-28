@@ -1,16 +1,8 @@
 ---
 description: 'Docker Security Scanning: automatic image scanning'
-keywords:
-- Docker, docker, scan, scanning, security, registry, plans, Docker Cloud, docs, documentation,
-  trusted, builds, trusted builds, automated builds
-menu:
-  main:
-    parent: builds
-    weight: -55
+keywords: Docker, docker, scan, scanning, security, registry, plans, Docker Cloud, docs, documentation, trusted, builds, trusted builds, automated builds
 title: Docker Security Scanning
 ---
-
-# Docker Security Scanning
 
 Docker Cloud and Docker Hub can scan images in private repositories to verify
 that they are free from known security vulnerabilities or exposures, and report
@@ -188,4 +180,4 @@ components.
 ## Related information
 
 * [Learn about CVE and how it compiles data](https://cve.mitre.org/about/index.html).
-* [How to create a Docker Official image](https://docs.docker.com/docker-hub/official_repos/)
+* [How to create a Docker Official image](/docker-hub/official_repos/)

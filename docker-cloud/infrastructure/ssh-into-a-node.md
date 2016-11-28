@@ -1,18 +1,12 @@
 ---
-aliases:
+description: SSHing into a Docker Cloud-managed node
+keywords: ssh, Cloud, node
+redirect_from:
 - /docker-cloud/getting-started/intermediate/ssh-into-a-node/
 - /docker-cloud/tutorials/ssh-into-a-node/
 - /docker-cloud/faq/how-ssh-nodes/
-description: SSHing into a Docker Cloud-managed node
-keywords:
-- ssh, Cloud, node
-menu:
-  main:
-    parent: infrastructure
 title: SSH into a Docker Cloud-managed node
 ---
-
-# SSHing into a Docker Cloud-managed node
 
 You can use add a public SSH key to the *authorized_keys* file in each of your nodes so you can access Docker Cloud provisioned nodes. The quickest way to do this is to run our **<a href="https://hub.docker.com/r/dockercloud/authorizedkeys" target="_blank">dockercloud/authorizedkeys</a>)** container image.
 

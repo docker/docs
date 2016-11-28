@@ -1,14 +1,8 @@
 ---
 description: Play in a trust sandbox
-keywords:
-- trust, security, root,  keys, repository, sandbox
-menu:
-  main:
-    parent: smn_content_trust
+keywords: trust, security, root,  keys, repository, sandbox
 title: Play in a content trust sandbox
 ---
-
-# Play in a content trust sandbox
 
 This page explains how to set up and use a sandbox for experimenting with trust.
 The sandbox allows you to configure and try trust operations locally without
@@ -27,7 +21,7 @@ This sandbox requires you to install two Docker tools: Docker Engine >= 1.10.0
 and Docker Compose >= 1.6.0. To install the Docker Engine, choose from the
 [list of supported platforms](../../installation/index.md). To install
 Docker Compose, see the
-[detailed instructions here](https://docs.docker.com/compose/install/).
+[detailed instructions here](/compose/install/).
 
 Finally, you'll need to have a text editor installed on your local system or VM.
 
@@ -83,7 +77,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
         version: "2"
         services:
           notaryserver:
-            image: dockersecurity/notary_autobuilds:server-latest
+            image: dockersecurity/notary_autobuilds:server-v0.4.2
             volumes:
               - notarycerts:/go/src/github.com/docker/notary/fixtures
             networks:

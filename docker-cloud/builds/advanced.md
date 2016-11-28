@@ -1,15 +1,8 @@
 ---
 description: Automated builds
-keywords:
-- automated, build, images
-menu:
-  main:
-    parent: builds
-    weight: -40
+keywords: automated, build, images
 title: Advanced options for Autobuild and Autotest
 ---
-
-# Advanced options for Autobuild and Autotest
 
 The following options allow you to customize your automated build and automated test processes.
 
@@ -27,13 +20,13 @@ processes and do not affect your service's run environment.
 * `COMMIT_MSG`: the message from the commit being tested and built.
 * `DOCKER_REPO`: the name of the Docker repository being built.
 * `DOCKER_TAG`: the Docker repository tag being built.
-* `IMAGE_NAME`: the name and tag of the Docker repository being built. (This variable is a combination of `DOCKER_REPO`/`DOCKER_TAG`.)
+* `IMAGE_NAME`: the name and tag of the Docker repository being built. (This variable is a combination of `DOCKER_REPO`:`DOCKER_TAG`.)
 
-If you are using these environment variables in a `docker-compose.test.yml` file
-for automated testing, declare them in your `sut` service's environment as shows
-below.
+If you are using these build environment variables in a
+`docker-compose.test.yml` file for automated testing, declare them in your `sut`
+service's environment as shown below.
 
-```yml
+```none
 sut:
   build: .
   command: run_tests.sh
@@ -81,7 +74,7 @@ The following hooks are available:
 
 #### Override the "build" phase to set variables
 
-Docker Cloud allows you to define build environment variables in the UI which you can then reference in hooks.
+Docker Cloud allows you to define build environment variables either in the hook files, or from the automated build UI (which you can then reference in hooks).
 
 In the following example, we define a build hook that uses `docker build` arguments to set the variable `CUSTOM` based on the value of variable we defined using the Docker Cloud build settings. `$IMAGE_NAME` is a variable that we provide with the name of the image being built.
 

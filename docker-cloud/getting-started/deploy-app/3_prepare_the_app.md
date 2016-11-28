@@ -1,18 +1,11 @@
 ---
-aliases:
+description: Prepare the application
+keywords: Python, prepare, application
+redirect_from:
 - /docker-cloud/getting-started/python/3_prepare_the_app/
 - /docker-cloud/getting-started/golang/3_prepare_the_app/
-description: Prepare the application
-keywords:
-- Python, prepare, application
-menu:
-  main:
-    parent: deploy-app
-    weight: -70
 title: Prepare the application
 ---
-
-# Prepare the application
 
 In this step, you will prepare a simple application that can be deployed.
 Run the following command to clone the sample application. You can use
@@ -42,13 +35,13 @@ Next, we have to build this application to create an image. Run the following co
 **Python quickstart**
 
 ```bash
-$ docker build --tag quickstart-python
+$ docker build --tag quickstart-python .
 ```
 
 **Go quickstart**
 
 ```bash
-$ docker build --tag quickstart-go
+$ docker build --tag quickstart-go .
 ```
 
 Next, we [Push the Docker image to Docker Cloud's Registry](4_push_to_cloud_registry.md).

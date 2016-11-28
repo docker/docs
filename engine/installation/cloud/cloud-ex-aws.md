@@ -1,16 +1,8 @@
 ---
-description: Example of a manual install of Docker Engine on a cloud provider, using
-  Amazon Web Services (AWS) EC2. Shows how to create an EC2 instance, and install
-  Docker Engine on it.
-keywords:
-- cloud, docker, machine, documentation,  installation, AWS, EC2
-menu:
-  main:
-    parent: install_cloud
-title: 'Example: Manual install on cloud provider'
+description: Example of a manual install of Docker Engine on a cloud provider, using Amazon Web Services (AWS) EC2. Shows how to create an EC2 instance, and install Docker Engine on it.
+keywords: cloud, docker, machine, documentation, installation, AWS, EC2
+title: 'Example: Manual installation on a cloud provider'
 ---
-
-# Example: Manual install on cloud provider
 
 You can install Docker Engine directly to servers you have on cloud providers.  This example shows how to create an <a href="https://aws.amazon.com/" target="_blank"> Amazon Web Services (AWS)</a> EC2 instance, and install Docker Engine on it.
 
@@ -78,7 +70,7 @@ To get help with your private key file, instance IP address, and how to log into
         $ cd ~/Desktop/keys/amazon_ec2
         $ ssh -i "my-key-pair.pem" ubuntu@xx.xxx.xxx.xxx
 
-    We'll follow the instructions for installing Docker on Ubuntu at https://docs.docker.com/engine/installation/ubuntulinux/. The next few steps reflect those instructions.
+    We'll follow the instructions for installing Docker on Ubuntu [the instructions for installing Docker on Ubuntu](/engine/installation/linux/ubuntulinux.md). The next few steps reflect those instructions.
 
 2. Check the kernel version to make sure it's 3.10 or higher.
 
@@ -110,7 +102,7 @@ To get help with your private key file, instance IP address, and how to log into
 
         ubuntu@ip-xxx-xx-x-xxx:~$ sudo apt-get purge lxc-docker
         Reading package lists... Done
-        Building dependency tree       
+        Building dependency tree
         Reading state information... Done
         Package 'lxc-docker' is not installed, so not removed
         0 upgraded, 0 newly installed, 0 to remove and 139 not upgraded.
@@ -147,7 +139,7 @@ For Ubuntu Trusty (and some other versions), it’s recommended to install the `
 
         ubuntu@ip-xxx-xx-x-xxx:~$ sudo apt-get install docker-engine
         Reading package lists... Done
-        Building dependency tree       
+        Building dependency tree
         Reading state information... Done
         The following extra packages will be installed:
         aufs-tools cgroup-lite git git-man liberror-perl
@@ -199,11 +191,11 @@ For Ubuntu Trusty (and some other versions), it’s recommended to install the `
 
 ## Where to go next
 
-_Looking for a quicker way to do Docker cloud installs and provision multiple hosts?_ You can use [Docker Machine](https://docs.docker.com/machine/overview/) to provision hosts.
+_Looking for a quicker way to do Docker cloud installs and provision multiple hosts?_ You can use [Docker Machine](/machine/overview/) to provision hosts.
 
-  * [Use Docker Machine to provision hosts on cloud providers](https://docs.docker.com/machine/get-started-cloud/)
+  * [Use Docker Machine to provision hosts on cloud providers](/machine/get-started-cloud/)
 
-  * [Docker Machine driver reference](https://docs.docker.com/machine/drivers/)
+  * [Docker Machine driver reference](/machine/drivers/)
 
 *  [Install Docker Engine](../index.md)
 

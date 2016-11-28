@@ -1,35 +1,33 @@
 ---
-aliases:
+description: Getting Started
+keywords: mac, beta, alpha, tutorial
+redirect_from:
 - /mackit/
 - /mackit/getting-started/
 - /mac/
 - /mac/started/
 - /docker-for-mac/started/
 - /installation/mac/
-description: Getting Started
-keywords:
-- mac, beta, alpha, tutorial
-menu:
-  main:
-    identifier: docker-mac-getstart
-    parent: pinata_mac_menu
-    weight: 1
-title: Getting Started
+title: Get started with Docker for Mac
 ---
-
-# Getting Started with Docker for Mac
 
 Welcome to Docker for Mac!
 
-Please read through these topics on how to get started. To **give us feedback** on your experience with the app and report bugs or problems, log in to our [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac).
+Please read through these topics on how to get started. To **give us feedback**
+on your experience with the app and report bugs or problems, log in to our
+[Docker for Mac forum](https://forums.docker.com/c/docker-for-mac).
 
->**Already have Docker for Mac?** If you already have Docker for Mac installed, and are ready to get started, skip over to the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
+>**Already have Docker for Mac?** If you already have Docker for Mac installed,
+and are ready to get started, skip over to the [Getting Started with
+Docker](/engine/getstarted/index.md) tutorial.
 
 ## Download Docker for Mac
 
-If you have not already done so, please install Docker for Mac. You can download installers from the stable or beta channel.
+If you have not already done so, please install Docker for Mac. You can download
+installers from the stable or beta channel.
 
-For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-channels).
+For more about stable and beta channels, see the
+[FAQs](faqs.md#stable-and-beta-channels).
 
 <table style="width:100%">
   <tr>
@@ -55,30 +53,39 @@ For more about stable and beta channels, see the [FAQs](faqs.md#stable-and-beta-
 
 >**Important Notes**:
 >
->* Docker for Mac requires macOS 10.10.3 Yosemite or newer running on a 2010 or newer Mac, with Intel's hardware support for MMU virtualization. Please see [What to know before you install](index.md#what-to-know-before-you-install) for a full list of prerequisites.
+>- Docker for Mac requires macOS 10.10.3 Yosemite or newer running on a 2010 or
+>    newer Mac, with Intel's  hardware support for MMU virtualization. Please see
+>    [What to know before you install](index.md#what-to-know-before-you-install)
+>    for a full list of prerequisites.
 >
->* <font color="#CC3366">You can switch between beta and stable versions, but _you must have only one app installed at a time_.</font> Also, you will need to save images and export containers you want to keep before uninstalling the current version before installing another. For more about this, see the [FAQs about beta and stable channels](faqs.md#stable-and-beta-channels).
+>- You can switch between beta and stable versions, but you must have only one
+>    app installed at a time. Also, you will need to save images and export
+>    containers you want to keep before uninstalling the current version before
+>    installing another. For more about this, see the
+>    [FAQs about beta and stable channels](faqs.md#stable-and-beta-channels).
 
 ##  What to know before you install
 
-
 * **README FIRST for Docker Toolbox and Docker Machine users**: If you are already running Docker on your machine, first read [Docker for Mac vs. Docker Toolbox](docker-toolbox.md) to understand the impact of this installation on your existing setup, how to set your environment for Docker for Mac, and how the two products can coexist.
-
+<p />
 *  **Relationship to Docker Machine**: Installing Docker for Mac does not affect machines you created with Docker Machine. You'll get the option to copy containers and images from your local `default` machine (if one exists) to the new Docker for Mac <a href="https://github.com/docker/HyperKit/" target="_blank">HyperKit</a> VM. When you are running Docker for Mac, you do not need Docker Machine nodes running at all locally (or anywhere else). With Docker for Mac, you have a new, native virtualization system running (HyperKit) which takes the place of the VirtualBox system. To learn more, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
-
-* **System Requirements**: Docker for Mac will launch only if all these requirements are met.
+<p />
+* **System Requirements**: Docker for Mac will launch only if all of these requirements are met.
 
 	- Mac must be a 2010 or newer model, with Intel's hardware support for memory management unit (MMU) virtualization; i.e., Extended Page Tables (EPT)
 
-	- macOS 10.10.3 Yosemite or newer
+  - OS X El Capitan 10.11 and newer macOS releases are supported. At a minimum, Docker for Mac requires macOS Yosemite 10.10.3 or newer, with the caveat that going forward 10.10.x is a use-at-your-own risk proposition.
 
-	- At least 4GB of RAM
+  - Starting with Docker for Mac stable release 1.13 (upcoming), and concurrent Beta releases, we will no longer address issues specific to OS X Yosemite 10.10. In future releases, Docker for Mac could stop working on OS X Yosemite 10.10 due to the deprecated status of this OS X version. We recommend upgrading to the latest version of macOS.
 
-	- VirtualBox prior to version 4.3.30 must NOT be installed (it is incompatible with Docker for Mac)
+  - At least 4GB of RAM
 
-	> **Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of HyperKit.
+  - VirtualBox prior to version 4.3.30 must NOT be installed (it is incompatible with Docker for Mac)
 
-* **What the install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+  >**Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of HyperKit.
+
+<p />
+* **What the install includes**: The installation provides [Docker Engine](/engine/userguide/intro/), Docker CLI client, [Docker Compose](/compose/overview/), and [Docker Machine](/machine/overview/).
 
 ## Step 1. Install and Run Docker for Mac
 
@@ -114,13 +121,13 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
 ```shell
 	$ docker --version
-	Docker version 1.12.0, build 8eab29e
+	Docker version 1.12.3, build 6b644ec
 
 	$ docker-compose --version
-	docker-compose version 1.8.0, build f3628c7
+	docker-compose version 1.8.1, build 878cff1
 
 	$ docker-machine --version
-	docker-machine version 0.8.0, build b85aac1
+	docker-machine version 0.8.2, build e18a919
 ```
 
 >**Note**: The above is an example. Your output will differ if you are running different (e.g., newer) versions.
@@ -152,7 +159,7 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
 4. Stop or remove containers and images.
 
-    The `nginx` webserver will continue to run in the container on that port until you stop and/or remove the container. If you want to stop the webserver, type: `docker stop webserver` and start it again with `docker start webserver`.
+    The `nginx` webserver will continue to run in the container on that port until you stop and/or remove the container. If you want to stop the webserver, type: `docker stop webserver` and start it again with `docker start webserver`. A stopped container will not show up with `docker ps`; for that, you need to run `docker ps -a`.
 
     To stop and remove the running container with a single command, type: `docker rm -f webserver`. This will remove the container, but not the `nginx` image. You can list local images with `docker images`. You might want to keep some images around so that you don't have to pull them again from Docker Hub. To remove an image you no longer need, use `docker rmi <imageID>|<imageName>`. For example, `docker rmi nginx`.
 
@@ -181,9 +188,9 @@ Choose <img src="images/whale-x.png"> --> **Preferences** from the menu bar. You
 ![Advanced Preference settings-advanced](images/settings-advanced.png)
 
 * **Adding registries** - As an alternative to using [Docker Hub](https://hub.docker.com/) to store your public or private images or [Docker
-Trusted Registry](https://docs.docker.com/docker-trusted-registry/overview/),
+Trusted Registry](/docker-trusted-registry/overview/),
 you can use Docker to set up your own insecure
-[registry](https://docs.docker.com/registry/introduction/). Add URLs for
+[registry](/registry/introduction/). Add URLs for
 insecure registries and registry mirrors on which to host your images. (See
 also, [How do I add custom CA
 certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in the FAQs.)
@@ -210,6 +217,11 @@ There are some limitations on the directories that can be shared:
 * They cannot already exist inside of Docker.
 
 See [Namespaces](osxfs.md#namespaces) in the topic on [osxfs file system sharing](osxfs.md) for more information.
+
+>**Tip:** File sharing is required for volume mounting if the project lives
+outside of the `/Users` directory. In that case, share the drive where the
+Dockerfile and volume are located. Otherwise, you will get file not found or
+cannot start service errors at runtime. (See also [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
 #### Privacy
 
@@ -264,7 +276,9 @@ ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-comple
 
 * Try out the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
-* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on on building images, running containers, networking, managing data, and storing images on Docker Hub.
+* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on
+  building images, running containers, networking, managing data, and storing
+  images on Docker Hub.
 
 * See [Example Applications](examples.md) for example applications that include setting up services and databases in Docker Compose.
 

@@ -1,19 +1,11 @@
 ---
-aliases:
+description: A simple 'Hello world' exercise that introduced you to Docker.
+keywords: docker guide, docker, docker platform, how to, dockerize, dockerizing apps, dockerizing applications, container, containers
+redirect_from:
 - /engine/userguide/containers/dockerizing/
 - /engine/userguide/dockerizing/
-description: A simple 'Hello world' exercise that introduced you to Docker.
-keywords:
-- docker guide, docker, docker platform, how to, dockerize, dockerizing apps, dockerizing
-  applications, container,  containers
-menu:
-  main:
-    parent: engine_learn_menu
-    weight: -6
 title: Hello world in a container
 ---
-
-# Hello world in a container
 
 *So what's this Docker thing all about?*
 
@@ -69,7 +61,7 @@ In this example:
 * `ubuntu` is the image you would like to run.
 * `-t` flag assigns a pseudo-tty or terminal inside the new container.
 * `-i` flag allows you to make an interactive connection by
-grabbing the standard in (`STDIN`) of the container.
+grabbing the standard input (`STDIN`) of the container.
 * `/bin/bash` launches a Bash shell inside our container.
 
 The container launches. We can see there is a
@@ -89,7 +81,7 @@ Let's try running some commands inside the container:
 
 In this example:
 
-* `pwd` displays the current directory, the `/` root directory.  
+* `pwd` displays the current directory, the `/` root directory.
 * `ls` displays the directory listing of the root directory of a typical Linux file system.
 
 Now, you can play around inside this container. When completed, run the `exit` command or enter Ctrl-D
@@ -199,7 +191,7 @@ ran an *interactive container* that ran in the foreground. You also ran a
 about several Docker commands:
 
 * `docker ps` - Lists containers.
-* `docker logs` - Shows us the standard output of a container.
+* `docker logs` - Shows the standard output of a container.
 * `docker stop` - Stops running containers.
 
 Now, you have the basis learn more about Docker and how to do some more advanced

@@ -1,15 +1,8 @@
 ---
 description: Restarts Docker Compose services.
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  restart
-menu:
-  main:
-    identifier: restart.compose
-    parent: smn_compose_cli
-title: restart
+keywords: fig, composition, compose, docker, orchestration, cli,  restart
+title: docker-compose restart
 ---
-
-# restart
 
 ```
 Usage: restart [options] [SERVICE...]

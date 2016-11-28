@@ -1,20 +1,11 @@
 ---
-aliases:
+description: Archived release notes for commercially supported Docker Engine
+keywords: docker, documentation, about, technology, understanding, enterprise, hub, registry, release, commercially supported Docker Engine
+redirect_from:
 - /docker-trusted-registry/cse-prior-release-notes/
 - /docker-trusted-registry/cs-engine/release-notes/prior-release-notes/
-description: Archived release notes for commercially supported Docker Engine
-keywords:
-- docker, documentation, about, technology, understanding, enterprise, hub, registry,release,
-  commercially supported Docker Engine
-menu:
-  main:
-    identifier: csengine_prior_release_notes
-    parent: menu_csengine_release_notes
-    weight: 10
-title: Prior CS Engine release notes
+title: Release notes archive for Commercially Supported Docker Engine.
 ---
-
-# CS Engine release notes archive
 
 This document contains the previous versions of the commercially supported
 Docker Engine release notes. It includes issues, fixes, and new features.
@@ -340,5 +331,5 @@ Because this addition is preventative, no CVE-ID is requested.
 ## CS Engine 1.6.0-cs2
 (23 Apr 2015)
 
-First release, see the [Docker Engine 1.6.0 Release notes](https://docs.docker.com/v1.6/release-notes/)
+First release, see the [Docker Engine 1.6.0 Release notes](/v1.6/release-notes/)
   for more details.

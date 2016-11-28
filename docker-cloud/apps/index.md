@@ -1,15 +1,8 @@
 ---
 description: Manage your Docker Cloud Applications
-keywords:
-- applications, reference, Cloud
-menu:
-  main:
-    parent: apps
-    weight: -99
+keywords: applications, reference, Cloud
 title: Applications in Docker Cloud
 ---
-
-# Applications in Docker Cloud
 
 Applications in Docker Cloud are usually several Services linked together using
 the specifications from a [Stackfile](stacks.md) or a Compose file. You can also

@@ -1,15 +1,8 @@
 ---
 description: Describes Docker's testing infrastructure
-keywords:
-- make test, make docs, Go tests, gofmt, contributing,  running tests
-menu:
-  main:
-    parent: smn_engine_contrib
-    weight: 6
+keywords: make test, make docs, Go tests, gofmt, contributing,  running tests
 title: Run tests and test documentation
 ---
-
-# Run tests and test documentation
 
 Contributing includes testing your changes. If you change the Docker code, you
 may need to add a new test or modify an existing one. Your contribution could
@@ -69,7 +62,7 @@ testing:
 Running the entire test suite on your current repository can take over half an
 hour. To run the test suite, do the following:
 
-1. Open a terminal on your local host.
+1.  Open a terminal on your local host.
 
 2.  Change to the root your Docker repository.
 
@@ -115,7 +108,7 @@ command line with multiple targets that does the same thing.
 
 Try this now.
 
-1. Open a terminal and change to the `docker-fork` root.
+1.  Open a terminal and change to the `docker-fork` root.
 
 2.  Start a Docker development image.
 
@@ -124,7 +117,7 @@ Try this now.
 
     ```bash
     $ docker run --privileged --rm -ti -v `pwd`:/go/src/github.com/docker/docker dry-run-test /bin/bash
-      ```
+    ```
 
 3.  Run the tests using the `hack/make.sh` script.
 
@@ -276,7 +269,7 @@ directly requires you to install some prerequisites, but is faster on each build
 
 The easiest way to build the docs locally on macOS, Windows, or Linux is to use
 `docker-compose`. If you have not yet installed `docker-compose`,
-[follow these installation instructions](https://docs.docker.com/compose/install/).
+[follow these installation instructions](/compose/install/).
 
 In the root of the repository, issue the following command:
 

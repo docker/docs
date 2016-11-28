@@ -1,16 +1,10 @@
 ---
-aliases:
-- /engine/installation/archlinux/
 description: Installation instructions for Docker on ArchLinux.
-keywords:
-- arch linux, docker, documentation,  installation
-menu:
-  main:
-    parent: engine_linux
-title: Installation on Arch Linux
+keywords: arch linux, docker, documentation,  installation
+redirect_from:
+- /engine/installation/archlinux/
+title: Install Docker on Arch Linux
 ---
-
-# Arch Linux
 
 Installing on Arch Linux can be handled via the package in community:
 
@@ -87,6 +81,7 @@ IPForward=kernel
 ```
 
 This configuration allows IP forwarding from the container as expected.
+
 ## Uninstallation
 
 To uninstall the Docker package:

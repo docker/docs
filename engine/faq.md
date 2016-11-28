@@ -1,18 +1,10 @@
 ---
-aliases:
-- /engine/misc/faq/
 description: Most frequently asked questions.
-keywords:
-- faq, questions, documentation,  docker
-menu:
-  main:
-    identifier: engine_faq
-    parent: engine_use
-    weight: 80
-title: FAQ
+keywords: faq, questions, documentation,  docker
+redirect_from:
+- /engine/misc/faq/
+title: Docker Engine frequently asked questions (FAQ)
 ---
-
-# Frequently Asked Questions (FAQ)
 
 If you don't see your question here, feel free to submit new ones to
 <docs@docker.com>.  Or, you can fork [the
@@ -107,7 +99,7 @@ offers a high-level tool with several powerful functionalities:
  where thousands of people have uploaded useful images: anything from Redis,
  CouchDB, PostgreSQL to IRC bouncers to Rails app servers to Hadoop to base
  images for various Linux distros. The
- [*registry*](https://docs.docker.com/registry/) also
+ [*registry*](/registry/) also
  includes an official "standard library" of useful containers maintained by the
  Docker team. The registry itself is open-source, so anyone can deploy their own
  registry to store and transfer private containers, for internal server

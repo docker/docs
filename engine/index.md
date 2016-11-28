@@ -1,17 +1,10 @@
 ---
-aliases:
-- /engine/misc/
 description: Engine
-keywords:
-- Engine
-menu:
-  main:
-    identifier: engine_use
-    weight: -85
-title: Docker Engine
+keywords: Engine
+redirect_from:
+- /engine/misc/
+title: About Docker Engine
 ---
-
-# About Docker Engine
 
 **Develop, Ship and Run Any Application, Anywhere**
 
@@ -98,7 +91,7 @@ implementation, check out the [Docker User Guide](userguide/index.md).
 ## Release notes
 
 A summary of the changes in each release in the current series can now be found
-on the separate [Release Notes page](https://docs.docker.com/release-notes)
+on the separate [Release Notes page](/release-notes)
 
 ## Feature Deprecation Policy
 

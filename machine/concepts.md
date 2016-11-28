@@ -1,17 +1,8 @@
 ---
-description: Understand concepts for Docker Machine, including drivers, base OS, IP
-  addresses, environment variables
-keywords:
-- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer,
-  virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
-menu:
-  main:
-    parent: workw_machine
-    weight: -40
-title: Machine concepts and help
+description: Understand concepts for Docker Machine, including drivers, base OS, IP addresses, environment variables
+keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
+title: Machine concepts and getting help
 ---
-
-# Understand Machine concepts and get help
 
 Docker Machine allows you to provision Docker machines in a variety of environments, including virtual machines that reside on your local system, on cloud providers, or on bare metal servers (physical computers). Docker Machine creates a Docker host, and you use the Docker Engine client as needed to build images and create containers on the host.
 
@@ -41,6 +32,22 @@ command-line to point to that machine. The `docker-machine env <machine-name>`
 subcommand outputs the configuration command you should use.
 
 For a complete list of `docker-machine` subcommands, see the [Docker Machine subcommand reference](reference/index.md).
+
+## Custom root Certificate Authority for Registry
+
+Users using their own Docker Registry will experience `x509: certificate signed by unknown authority` 
+error messages if their registry is signed by custom root Certificate Authority and it is 
+not registered with Docker Engine. As discussed in the [Docker Engine documentation](https://docs.docker.com/engine/security/certificates/#/understanding-the-configuration)
+certificates should be placed at `/etc/docker/certs.d/hostname/ca.crt` 
+where `hostname` is your Registry server's hostname.
+
+```console
+docker-machine scp certfile default:ca.crt
+docker-machine ssh default
+sudo mv ~/ca.crt /etc/docker/certs.d/hostname/ca.crt
+exit
+docker-machine restart
+```
 
 ## Crash Reporting
 

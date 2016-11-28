@@ -1,16 +1,8 @@
 ---
 description: Deploy a service to the swarm
-keywords:
-- tutorial, cluster management, swarm mode
-menu:
-  main:
-    identifier: deploy-application
-    parent: swarm-tutorial
-    weight: 16
-title: Deploy a service
+keywords: tutorial, cluster management, swarm mode
+title: Deploy a service to the swarm
 ---
-
-# Deploy a service to the swarm
 
 After you [create a swarm](create-swarm.md), you can deploy a service to the
 swarm. For this tutorial, you also [added worker nodes](add-nodes.md), but that
@@ -19,7 +11,7 @@ is not a requirement to deploy a service.
 1. Open a terminal and ssh into the machine where you run your manager node. For
 example, the tutorial uses a machine named `manager1`.
 
-2.  Run the the following command:
+2.  Run the following command:
 
     ```bash
     $ docker service create --replicas 1 --name helloworld alpine ping docker.com

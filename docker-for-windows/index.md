@@ -1,30 +1,21 @@
 ---
-aliases:
+description: Getting Started
+keywords: windows, beta, alpha, tutorial
+redirect_from:
 - /winkit/getting-started/
 - /winkit/
 - /windows/
 - /windows/started/
 - /docker-for-windows/started/
 - /installation/windows/
-description: Getting Started
-keywords:
-- windows, beta, alpha, tutorial
-menu:
-  main:
-    identifier: docker-win-getstart
-    parent: pinata_win_menu
-    weight: 1
-title: Getting Started
+title: Get started with Docker for Windows
 ---
-
-# Getting Started with Docker for Windows
 
 Welcome to Docker for Windows!
 
 Please read through these topics on how to get started. To **give us your feedback** on your experience with the app and report bugs or problems, log in to our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows).
 
 >**Already have Docker for Windows?** If you already have Docker for Windows installed, and are ready to get started, skip over to the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
-
 
 ## Download Docker for Windows
 
@@ -52,27 +43,61 @@ If you have not already done so, please install Docker for Windows. You can down
   </tr>
 </table>
 
->**Important Notes**:
+>**Important Notes:**
 >
->* Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please see [What to know before you install](index.md#what-to-know-before-you-install) for a full list of prerequisites.
+>- Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education
+>  (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please
+>  see [What to know before you install](index.md#what-to-know-before-you-install)
+>  for a full list of prerequisites.
 >
->* <font color="#CC3366">You can switch between beta and stable versions, but _you must have only one app installed at a time_.</font> Also, you will need to save images and export containers you want to keep before uninstalling the current version before installing another. For more about this, see the [FAQs about beta and stable channels](faqs.md#questions-about-stable-and-beta-channels).
+>- You can switch between beta and stable versions, but you must have only one
+>   app installed at a time. Also, you will need to save images and export
+>  containers you want to keep before uninstalling the current version before
+>  installing another. For more about this, see the
+>  [FAQs about beta and stable channels](faqs.md#questions-about-stable-and-beta-channels).
 
 ##  What to know before you install
 
-* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run. After Hyper-V is enabled, VirtualBox will no longer work, but any VirtualBox VM images will remain. VirtualBox VMs created with `docker-machine` (including the `default` one typically created during Toolbox install) will no longer start. These VMs cannot be used side-by-side with Docker for Windows. However, you can still use `docker-machine` to manage remote VMs.
-
+* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run. After Hyper-V is enabled,
+VirtualBox will no longer work, but any VirtualBox VM images will remain.
+VirtualBox VMs created with `docker-machine` (including the `default` one
+typically created during Toolbox install) will no longer start. These VMs cannot
+be used side-by-side with Docker for Windows. However, you can still use
+`docker-machine` to manage remote VMs.
+<p />
 * The current version of Docker for Windows runs on 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later). In the future we will support more versions of Windows 10.
+<p />
+* Containers and images created with Docker for Windows are shared between all user accounts on machines where it is installed. This is because all
+Windows accounts will use the same VM to build and run containers. In the
+future, Docker for Windows will better isolate user content.
+<p />
+* The Hyper-V package must be enabled for Docker for Windows to work. The Docker for Windows installer will enable it for you, if needed. (This requires a
+reboot). If your system does not satisfy these requirements, you can install
+[Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of
+Hyper-V.
+<p />
+* Virtualization must be enabled. Typically, virtualization is enabled by default. (Note that this is different from having Hyper-V enabled.) For more
+detail see [Virtualization must be
+enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
+<p />
+* **What the Docker for Windows install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
 
-* Containers and images created with Docker for Windows are shared between all user accounts on machines where it is installed. This is because all Windows accounts will use the same VM to build and run containers. In the future, Docker for Windows will better isolate user content.
+### About Windows containers and Windows Server 2016
 
-* The Hyper-V package must be enabled for Docker for Windows to work. The Docker for Windows installer will enable it for you, if needed. (This requires a reboot).
+Looking for information on using Windows containers?
 
-  >**Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of Hyper-V.
-
-* Virtualization must be enabled. Typically, virtualization is enabled by default. (Note that this is different from having Hyper-V enabled.) For more detail see [Virtualization must be enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
-
-* **What the install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
+provides a tutorial on how to set up and run Windows containers on Windows 10 or
+with Windows Server 2016. It shows you how to use a MusicStore application with
+Windows containers.
+<p />
+* [Setup - Windows Server 2016 (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/Setup-Server2016.md) specifically describes environment setup.
+<p />
+* [Switch
+between Windows and Linux containers (Beta
+feature)](index.md#switch-between-windows-and-linux-containers-beta-feature) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
+<p />
+* Docker Container Platform for Windows Server 2016 [articles and blog posts](https://www.docker.com/microsoft) on the Docker website
 
 ## Step 1. Install Docker for Windows
 
@@ -259,6 +284,44 @@ The next few steps take you through some examples. These are just suggestions fo
 
 **Want more example applications?** - For more example walkthroughs that include setting up services and databases with Docker Compose, see [Example Applications](examples.md).
 
+## Set up tab completion in PowerShell
+
+If you would like to have handy tab completion for Docker commands, you can install the <a href="https://github.com/samneirinck/posh-docker">posh-docker</a> PowerShell Module as follows.
+
+1. Start an "elevated" PowerShell (i.e., run it as administrator).
+
+    To do this, search for PowerShell, right-click, and choose **Run as administrator**.<br>
+
+    ![Run PowerShell as administrator](images/PowerShell-as-admin.png)
+    <br><br>
+    When asked if you want to allow this app to make changes to your device, click **Yes**.
+
+2. Set the [script execution policy](https://msdn.microsoft.com/en-us/powershell/reference/5.1/microsoft.powershell.security/set-executionpolicy) to allow downloaded scripts signed by trusted publishers to run on your computer. To do so, type this at the PowerShell prompt.
+    <br>
+    `Set-ExecutionPolicy RemoteSigned`
+    <br>
+    To check that the policy is set properly, run `get-executionpolicy`, which should return `RemoteSigned`.
+    <br>
+3. To enable auto-completion of commands for the current PowerShell only, type:
+
+    `Import-Module posh-docker`
+
+4. To make tab completion persistent across all PowerShell sessions, add the command to a `$PROFILE` by typing these commands at the PowerShell prompt.
+
+        Install-Module -Scope CurrentUser posh-docker -Force
+        Add-Content $PROFILE "`nImport-Module posh-docker"
+
+    This creates a `$PROFILE` if one does not already exist, and adds this line into the file:
+
+    `Import-Module posh-docker`
+
+    <br>
+    To check that the file was properly created, or simply edit it manually, type this in PowerShell:
+
+    `Notepad $PROFILE`
+
+Now, when you press tab after typing the first few letters, Docker commands such as `start`, `stop`, `run`, and their options, along with container and image names should now auto-complete.
+
 ## Docker Settings
 
 When Docker is running, the Docker whale is displayed in the system tray. If it is hidden, click the up arrow in the tray to show it.
@@ -296,13 +359,42 @@ Share your local drives (volumes) with Docker for Windows, so that they are avai
 
 ![Shared Drives](images/settings-shared-drives.png)
 
-You will be asked to provide your Windows system username and password (domain user) to apply shared drives. You can select an option to have Docker store the credentials so that you don't have to re-enter them every time.
+You will be asked to provide your Windows system username and password (domain
+user) to apply shared drives. You can select an option to have Docker store the
+credentials so that you don't have to re-enter them every time.
 
-Permissions to access shared drives are tied to the credentials you provide here. If you run `docker` commands and tasks under a different username than the one used here to set up sharing, your containers will not have permissions to access the mounted volumes.
+Permissions to access shared drives are tied to the credentials you provide
+here. If you run `docker` commands and tasks under a different username than the
+one used here to set up sharing, your containers will not have permissions to
+access the mounted volumes.
 
->**Tip:** Shared drives are only required for volume mounting [Linux containers](#switch-between-windows-and-linux-containers-beta-feature), not Windows containers.
+>**Tip:** In general, shared drives are only required for volume mounting [Linux
+containers](#switch-between-windows-and-linux-containers-beta-feature), and not
+for Windows containers. However, if the project lives outside of the `\Users`
+directory, you need to share the drive where the Dockerfile and volume are
+located even if you are using [Windows
+containers](#getting-started-with-windows-containers-beta-feature)). Runtime
+errors such as file not found or cannot start service may indicate shared drives
+are needed. (See also [Volume mounting requires shared drives for Linux containers and for any project directories outside of `C:\Users`](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers-and-for-any-project-directories-outside-of-cusers).)
 
-See also [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes) in Troubleshooting.
+See also [Verify domain user has permissions for shared
+drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)
+in Troubleshooting.
+
+#### Firewall rules for shared drives
+
+Shared drives require port 445 to be open between the host machine and the virtual
+machine that runs Linux containers.
+
+>**Note**: In Docker for Windows Beta 29 and higher,
+Docker detects if port 445 is closed and shows the following message when you
+try to add a shared drive: ![Port 445 blocked](images/drive_sharing_firewall_blocked.png)
+
+
+To share the drive, allow connections between the Windows host machine and the
+virtual machine in Windows Firewall or your third party firewall software. You
+do not need to open port 445 on any other network. By default, allow connections
+to 10.0.75.1 port 445 (the Windows host) from 10.0.75.2 (the virtual machine).
 
 ### Advanced
 
@@ -350,7 +442,7 @@ no_proxy=*.local, 169.254/16
 
 You can see from the above output that the `HTTP_PROXY`, `http_proxy` and `no_proxy` environment variables are set.
 When your proxy configuration changes, Docker restarts automatically to pick up the new settings.
-If you have containers that you wish to keep running across restarts, you should consider using [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies-restart)
+If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart)
 
 ### Docker daemon
 You can configure options on the Docker daemon in the given JSON configuration file, and determine how your containers will run.
@@ -377,7 +469,7 @@ If you are interested in working with Windows containers, here are some guides t
 
 * [Build and Run Your First Windows Server Container (Blog Post)](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/) gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
 
-* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/tree/master/windows/windows-containers) shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md) application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
+* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md) shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md) application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
 
   >**Disclaimer:** This lab is still in work, and is based off of the blog, but you can test and leverage the example walkthroughs now, if you want to start experimenting. Please checking back as the lab evolves.
 

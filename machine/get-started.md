@@ -1,15 +1,8 @@
 ---
 description: Get started with Docker Machine and a local VM
-keywords:
-- docker, machine, virtualbox, local
-menu:
-  main:
-    parent: workw_machine
-    weight: -70
-title: Get started with a local VM
+keywords: docker, machine, virtualbox, local
+title: Get started with Docker Machine and a local VM
 ---
-
-# Get started with Docker Machine and a local VM
 
 Let's take a look at using `docker-machine` to create, use and manage a
 Docker host inside of a local virtual machine.
@@ -19,32 +12,31 @@ Docker host inside of a local virtual machine.
 With the advent of [Docker for Mac](/docker-for-mac/index.md) and [Docker for
 Windows](/docker-for-windows/index.md) as replacements for [Docker
 Toolbox](/toolbox/overview.md), we recommend that you use these for your primary
-Docker workflows.
+Docker workflows. You can use these applications to run Docker natively on your local system without using Docker Machine at all. (See [Docker for Mac vs. Docker Toolbox](docker-for-mac/docker-toolbox.md) for an explanation on the Mac side.)
 
-However, Docker Machine is still available to create and manage machines for
+However, if you want to create _multiple_ local machines, you need Docker Machine, which is still available to create and manage machines for
 power users or multi-node experimentation. Both Docker for Mac and Docker for
 Windows include the newest version of Docker Machine, so when you install either
 of these, you get `docker-machine`.
 
-The new solutions come with their own native virtualization solutions instead of
-Oracle VirtualBox, so keep the following considerations in mind when using
+The new solutions come with their own native virtualization solutions rather
+than Oracle VirtualBox, so keep the following considerations in mind when using
 Machine to create local VMs.
 
-- **Docker for Mac**: You can create additional `docker-machine` machines using the
-  `virtualbox` driver.
-- **Docker for Windows**: You can create additional `docker-machine` machines using
-  the `hyperv` driver instead of the `virtualbox` driver.
+* **Docker for Mac** - You can use `docker-machine --create` with the `virtualbox` driver to create additional local machines.
+
+* **Docker for Windows** - You can use `docker-machine --create` with the `hyperv` driver to create additional local machines.
 
 #### If you are using Docker for Windows
 
 Docker for Windows uses [Microsoft
 Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/windows_welcome)
-for virtualization, and Hyper-V is not compatible with Oracle VirtualBox, which
-is the default driver for `docker-machine`. Therefore, if you use Docker
-for Windows, you must use the `hyperv` driver when creating machines using
-`docker-machine` See the
-[Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md) for more
-information.
+for virtualization, and Hyper-V is not compatible with Oracle VirtualBox.
+Therefore, you cannot run the two solutions simultaneously. But you can still
+use `docker-machine` to create more local VMs by using the Microsoft Hyper-V driver.
+
+* If you are using Docker for Windows, the only prerequisite is to have Docker for Windows installed. If you want to create multiple local machines, use the Microsoft `hyperv` driver to create them. (See the [Docker Machine driver for Microsoft
+Hyper-V](drivers/hyper-v.md).)
 
 #### If you are using Docker for Mac
 

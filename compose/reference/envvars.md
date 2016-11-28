@@ -1,15 +1,8 @@
 ---
-description: CLI Environment Variables
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  reference
-menu:
-  main:
-    parent: smn_compose_cli
-    weight: -1
-title: CLI Environment Variables
+description: Compose CLI environment variables
+keywords: fig, composition, compose, docker, orchestration, cli, reference
+title: Compose CLI environment variables
 ---
-
-# CLI Environment Variables
 
 Several environment variables are available for you to configure the Docker Compose command-line behaviour.
 
@@ -21,7 +14,10 @@ Docker command-line client. If you're using `docker-machine`, then the `eval "$(
 
 ## COMPOSE\_PROJECT\_NAME
 
-Sets the project name. This value is prepended along with the service name to the container container on start up. For example, if you project name is `myapp` and it includes two services `db` and `web` then compose starts containers named  `myapp_db_1` and `myapp_web_1` respectively.
+Sets the project name. This value is prepended along with the service name to
+the container on start up. For example, if you project name is `myapp` and it
+includes two services `db` and `web` then compose starts containers named
+`myapp_db_1` and `myapp_web_1` respectively.
 
 Setting this is optional. If you do not set this, the `COMPOSE_PROJECT_NAME`
 defaults to the `basename` of the project directory. See also the `-p`
@@ -82,6 +78,12 @@ it failed. Defaults to 60 seconds.
 Configure which TLS version is used for TLS communication with the `docker`
 daemon. Defaults to `TLSv1`.
 Supported values are: `TLSv1`, `TLSv1_1`, `TLSv1_2`.
+
+## COMPOSE\_CONVERT\_WINDOWS\_PATHS
+
+Enable path conversion from Windows-style to Unix-style in volume definitions.
+Users of Docker Machine and Docker Toolbox on Windows should always set this.
+
 
 ## Related Information
 
