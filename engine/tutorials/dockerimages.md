@@ -572,12 +572,14 @@ Delete the `training/sinatra` image as you don't need it anymore.
 
 An image is
 [stored in layers](../userguide/storagedriver/imagesandcontainers.md),
-and shared with other images, the real disk usage depends on existing layers
-on your host. A container is running on
+shared with other images on the host, so the real disk usage depends on
+how much layer overlap is happening between images on a host.
+
+A container runs on
 [a writable layer](../userguide/storagedriver/imagesandcontainers.md#/container-and-layers)
 on top of a readonly rootfs.
 
-You can figure the size of image layers with `docker history` command.
+Use `docker history` to see the size of image layers on your host:
 
     $ docker history centos:centos7
 
@@ -587,7 +589,7 @@ You can figure the size of image layers with `docker history` command.
     <missing>           6 weeks ago         /bin/sh -c #(nop) ADD file:44ef4e10b27d8c464a   196.7 MB
     <missing>           10 weeks ago        /bin/sh -c #(nop) MAINTAINER https://github.c   0 B
 
-Also, you can check the sizes of containers by performing `docker ps` command with `-s`.
+Check the size of containers with `docker ps -s`:
 
     $ docker ps -s
 
