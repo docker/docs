@@ -19,12 +19,16 @@ to upgrade your installation to the latest release.
 (28 Nov 2016)
 
 **Features**
-* Added Support for Scality as S3 compatible object storage by updating to use AWS v4 headers
+
+* Updated backend storage configuration to use AWS v4 headers
+* Added support for Scality, an Amazon S3 compatible object storage
 
 **Other Improvements**
-* Increase required consecutive failues for healthcheck to report error to 3
-* Fix bootstrapper restore command to work with notary
+
+* Health check now reports failures after 3 consecutive failures
+* Restore command now restores Notary server data
 * Fix subsequent joins after a failed join
+
 
 ## DTR 2.1.0
 
