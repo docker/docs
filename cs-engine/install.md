@@ -97,32 +97,17 @@ to the `docker` group.
     $ sudo apt-get update && sudo apt-get install apt-transport-https
     ```
 
-4.  Install additional virtual drivers not in the base image.
+4.  Install additional kernel modules to add AUFS support.
 
     ```bash
-    $ sudo apt-get install -y linux-image-extra-virtual
+    $ sudo apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
     ```
-
-    You may need to reboot your server after updating the LTS kernel.
 
 5.  Add the repository for the new version:
 
     ```bash
     $ echo "deb https://packages.docker.com/1.12/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
     ```
-
-    This adds the repository of the latest version of CS Docker Engine for the
-    Ubuntu Trusty distribution. Change the "ubuntu-trusty" string to the
-    distribution you're using:
-
-    * debian-jessie (Debian 8)
-    * debian-stretch (future release)
-    * debian-wheezy (Debian 7)
-    * ubuntu-precise (Ubuntu 12.04)
-    * ubuntu-trusty (Ubuntu 14.04)
-    * ubuntu-utopic (Ubuntu 14.10)
-    * ubuntu-vivid (Ubuntu 15.04)
-    * ubuntu-wily (Ubuntu 15.10)
 
 6.  Run the following to install commercially supported Docker Engine and its
 dependencies:
