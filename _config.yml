@@ -40,7 +40,7 @@ defaults:
     values:
       assignee: "joaofnfernandes"
       ucp_latest_version: "2.0.1"
-      dtr_latest_version: "2.1.0"
+      dtr_latest_version: "2.1.1"
   - scope:
       path: "docker-cloud"
     values:
