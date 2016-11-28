@@ -13,6 +13,7 @@ Docker is supported on these Ubuntu operating systems:
 - Ubuntu Wily 15.10
 - Ubuntu Trusty 14.04 (LTS)
 - Ubuntu Precise 12.04 (LTS)
+- Ubuntu Yakkety 16.10 (LTS)
 
 This page instructs you to install using Docker-managed release packages and
 installation mechanisms. Using these packages ensures you get the latest official
