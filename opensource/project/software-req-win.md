@@ -1,8 +1,6 @@
-
 ---
 description: How to set up a server to test Docker Engine on Windows
-keywords:
-- development, inception, container, image Dockerfile, dependencies, Go, artifacts, windows
+keywords: development, inception, container, image Dockerfile, dependencies, Go, artifacts, windows
 title: Building and testing Docker on Windows
 ---
 
