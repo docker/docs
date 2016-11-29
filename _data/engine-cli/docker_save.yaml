@@ -1,0 +1,10 @@
+command: docker save
+short: Save one or more images to a tar archive (streamed to STDOUT by default)
+long: Save one or more images to a tar archive (streamed to STDOUT by default)
+usage: docker save [OPTIONS] IMAGE [IMAGE...]
+pname: docker
+plink: docker.yaml
+options:
+- option: output
+  shorthand: o
+  description: Write to a file, instead of STDOUT

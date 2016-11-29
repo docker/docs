@@ -1,0 +1,10 @@
+command: docker node rm
+short: Remove one or more nodes from the swarm
+long: Remove one or more nodes from the swarm
+usage: docker node rm [OPTIONS] NODE [NODE...]
+pname: docker node
+plink: docker_node.yaml
+options:
+- option: force
+  default_value: "false"
+  description: Force remove an active node

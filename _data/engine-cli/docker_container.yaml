@@ -1,0 +1,8 @@
+command: docker container
+short: Manage containers
+long: Manage containers
+usage: docker container
+pname: docker
+plink: docker.yaml
+cname: docker container wait
+clink: docker_container_wait.yaml

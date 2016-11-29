@@ -1,0 +1,6 @@
+command: docker service rm
+short: Remove one or more services
+long: Remove one or more services
+usage: docker service rm SERVICE [SERVICE...]
+pname: docker service
+plink: docker_service.yaml

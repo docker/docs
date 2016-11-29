@@ -1,0 +1,93 @@
+command: docker service create
+short: Create a new service
+long: Create a new service
+usage: docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
+pname: docker service
+plink: docker_service.yaml
+options:
+- option: constraint
+  default_value: '[]'
+  description: Placement constraints
+- option: container-label
+  default_value: '[]'
+  description: Container labels
+- option: endpoint-mode
+  description: Endpoint mode (vip or dnsrr)
+- option: env
+  shorthand: e
+  default_value: '[]'
+  description: Set environment variables
+- option: group-add
+  default_value: '[]'
+  description: Add additional user groups to the container
+- option: label
+  shorthand: l
+  default_value: '[]'
+  description: Service labels
+- option: limit-cpu
+  default_value: "0.000"
+  description: Limit CPUs
+- option: limit-memory
+  default_value: 0 B
+  description: Limit Memory
+- option: log-driver
+  description: Logging driver for service
+- option: log-opt
+  default_value: '[]'
+  description: Logging driver options
+- option: mode
+  default_value: replicated
+  description: Service mode (replicated or global)
+- option: mount
+  description: Attach a mount to the service
+- option: name
+  description: Service name
+- option: network
+  default_value: '[]'
+  description: Network attachments
+- option: publish
+  shorthand: p
+  default_value: '[]'
+  description: Publish a port as a node port
+- option: replicas
+  default_value: none
+  description: Number of tasks
+- option: reserve-cpu
+  default_value: "0.000"
+  description: Reserve CPUs
+- option: reserve-memory
+  default_value: 0 B
+  description: Reserve Memory
+- option: restart-condition
+  description: Restart when condition is met (none, on-failure, or any)
+- option: restart-delay
+  default_value: none
+  description: Delay between restart attempts
+- option: restart-max-attempts
+  default_value: none
+  description: Maximum number of restarts before giving up
+- option: restart-window
+  default_value: none
+  description: Window used to evaluate the restart policy
+- option: stop-grace-period
+  default_value: none
+  description: Time to wait before force killing a container
+- option: update-delay
+  default_value: "0"
+  description: Delay between updates
+- option: update-failure-action
+  default_value: pause
+  description: Action on update failure (pause|continue)
+- option: update-parallelism
+  default_value: "1"
+  description: |
+    Maximum number of tasks updated simultaneously (0 to update all at once)
+- option: user
+  shorthand: u
+  description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+- option: with-registry-auth
+  default_value: "false"
+  description: Send registry authentication details to swarm agents
+- option: workdir
+  shorthand: w
+  description: Working directory inside the container

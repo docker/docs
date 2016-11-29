@@ -1,0 +1,6 @@
+command: docker tag
+short: Tag an image into a repository
+long: Tag an image into a repository
+usage: docker tag IMAGE[:TAG] IMAGE[:TAG]
+pname: docker
+plink: docker.yaml
