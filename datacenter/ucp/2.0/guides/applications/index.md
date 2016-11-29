@@ -22,7 +22,7 @@ There, click the **Compose Application** button, to deploy a new application.
 The WordPress application we're going to deploy is composed of two services:
 
 * wordpress: The container that runs Apache, PHP, and WordPress.
-* db: A MariaDB database used for data persistence.
+* db: A MySQL database used for data persistence.
 
 ```yml
 version: '2'
