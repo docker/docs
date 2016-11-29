@@ -13,7 +13,6 @@ Docker is supported on these Ubuntu operating systems:
 - Ubuntu Wily 15.10
 - Ubuntu Trusty 14.04 (LTS)
 - Ubuntu Precise 12.04 (LTS)
-- Ubuntu Yakkety 16.10 (LTS)
 
 This page instructs you to install Docker on Ubuntu, using packages provided by
 Docker. Using these packages ensures you get the latest official
@@ -77,7 +76,6 @@ To set `APT` to use packages from the Docker repository:
     | Trusty 14.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-trusty main` |
     | Wily 15.10          | `deb https://apt.dockerproject.org/repo ubuntu-wily main`   |
     | Xenial 16.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-xenial main` |
-    | Yakkety 16.10 (LTS) | `deb https://apt.dockerproject.org/repo ubuntu-yakkety main` |
 
 
     >**Note**: Docker does not provide packages for all architectures. Binary artifacts
