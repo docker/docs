@@ -1,0 +1,8 @@
+command: docker node
+short: Manage Swarm nodes
+long: Manage Swarm nodes
+usage: docker node
+pname: docker
+plink: docker.yaml
+cname: docker node update
+clink: docker_node_update.yaml

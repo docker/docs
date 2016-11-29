@@ -1,0 +1,8 @@
+command: docker image
+short: Manage images
+long: Manage images
+usage: docker image
+pname: docker
+plink: docker.yaml
+cname: docker image tag
+clink: docker_image_tag.yaml

@@ -1,0 +1,16 @@
+command: docker service ps
+short: List the tasks of a service
+long: List the tasks of a service
+usage: docker service ps [OPTIONS] SERVICE
+pname: docker service
+plink: docker_service.yaml
+options:
+- option: filter
+  shorthand: f
+  description: Filter output based on conditions provided
+- option: no-resolve
+  default_value: "false"
+  description: Do not map IDs to Names
+- option: no-trunc
+  default_value: "false"
+  description: Do not truncate output

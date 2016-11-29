@@ -1,0 +1,10 @@
+command: docker push
+short: Push an image or a repository to a registry
+long: Push an image or a repository to a registry
+usage: docker push [OPTIONS] NAME[:TAG]
+pname: docker
+plink: docker.yaml
+options:
+- option: disable-content-trust
+  default_value: "true"
+  description: Skip image verification
