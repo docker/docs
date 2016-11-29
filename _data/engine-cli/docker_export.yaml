@@ -1,0 +1,10 @@
+command: docker export
+short: Export a container's filesystem as a tar archive
+long: Export a container's filesystem as a tar archive
+usage: docker export [OPTIONS] CONTAINER
+pname: docker
+plink: docker.yaml
+options:
+- option: output
+  shorthand: o
+  description: Write to a file, instead of STDOUT
