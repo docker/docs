@@ -1,0 +1,18 @@
+command: docker swarm update
+short: Update the swarm
+long: Update the swarm
+usage: docker swarm update [OPTIONS]
+pname: docker swarm
+plink: docker_swarm.yaml
+options:
+- option: cert-expiry
+  default_value: 2160h0m0s
+  description: Validity period for node certificates
+- option: dispatcher-heartbeat
+  default_value: 5s
+  description: Dispatcher heartbeat period
+- option: external-ca
+  description: Specifications of one or more certificate signing endpoints
+- option: task-history-limit
+  default_value: "5"
+  description: Task history retention limit

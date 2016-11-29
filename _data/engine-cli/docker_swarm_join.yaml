@@ -1,0 +1,14 @@
+command: docker swarm join
+short: Join a swarm as a node and/or manager
+long: Join a swarm as a node and/or manager
+usage: docker swarm join [OPTIONS] HOST:PORT
+pname: docker swarm
+plink: docker_swarm.yaml
+options:
+- option: advertise-addr
+  description: 'Advertised address (format: <ip|interface>[:port])'
+- option: listen-addr
+  default_value: 0.0.0.0:2377
+  description: 'Listen address (format: <ip|interface>[:port])'
+- option: token
+  description: Token for entry into the swarm

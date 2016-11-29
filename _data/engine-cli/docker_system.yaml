@@ -1,0 +1,8 @@
+command: docker system
+short: Manage Docker
+long: Manage Docker
+usage: docker system
+pname: docker
+plink: docker.yaml
+cname: docker system prune
+clink: docker_system_prune.yaml
