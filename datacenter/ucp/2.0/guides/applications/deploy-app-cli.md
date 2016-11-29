@@ -26,7 +26,7 @@ client certificates.
 The WordPress application we're going to deploy is composed of two services:
 
 * wordpress: The container that runs Apache, PHP, and WordPress.
-* db: A MariaDB database used for data persistence.
+* db: A MySQL database used for data persistence.
 
 <!-- would be better if this was a docker-compose v2 file-->
 
@@ -34,17 +34,32 @@ After setting up your terminal to authenticate using client certificates,
 create a file named `docker-compose.yml` with the following service definition:
 
 ```yml
-wordpress:
-  image: wordpress
-  links:
-    - db:mysql
-  ports:
-    - 8080:80
+version: '2'
 
-db:
-  image: mariadb
-  environment:
-    MYSQL_ROOT_PASSWORD: example
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: wordpress
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
+
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     ports:
+       - "8000:80"
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_PASSWORD: wordpress
+volumes:
+    db_data:
 ```
 
 In your command line, navigate to the place where you've created the
