@@ -185,6 +185,10 @@ toc:
       title: Runtime metrics
     - path: /engine/admin/ambassador_pattern_linking/
       title: Link via an ambassador container
+  - sectiontitle: Troubleshoot Docker Engine
+    section:
+    - path: /engine/admin/troubleshooting_volume_errors.md
+      title: Troubleshoot volume problems
   - sectiontitle: Manage a swarm
     section:
     - path: /engine/swarm/
