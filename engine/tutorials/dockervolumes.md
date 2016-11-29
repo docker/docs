@@ -190,10 +190,11 @@ You may also use the `docker volume create` command, to create a volume before
 using it in a container.
 
 The following example also creates the `my-named-volume` volume, this time
-using the `docker volume create` command.
+using the `docker volume create` command. Options are specified as key-value
+pairs in the format `o=<key>=<value>`.
 
 ```bash
-$ docker volume create -d flocker -o size=20GB my-named-volume
+$ docker volume create -d flocker --opt o=size=20GB my-named-volume
 
 $ docker run -d -P \
   -v my-named-volume:/webapp \
