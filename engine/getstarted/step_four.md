@@ -20,7 +20,7 @@ In this next section, you will improve the `whalesay` image by building a new ve
 
 In this step, you use your favorite text editor to write a short Dockerfile.  A
 Dockerfile describes the software that is "baked" into an image. It isn't just
-ingredients tho, it can tell the software what environment to use or what
+ingredients though, it can tell the software what environment to use or what
 commands to run. Your recipe is going to be very short.
 
 1. Go back to your command terminal window.
@@ -41,12 +41,12 @@ commands to run. Your recipe is going to be very short.
 
         $ touch Dockerfile
 
-    The command appears to do nothing but it actually creates the Dockerfile in the current directory.  Just type `ls Dockerfile` to see it.
+    The command appears to do nothing but it actually creates the Dockerfile in the current directory.  Just type `ls` to see it.
 
         $ ls
         Dockerfile
 
-5. Open the `Dockerfile` in a visual text editor like <a href="https://atom.io/" target="_blank">Atom</a> or <a href="https://www.sublimetext.com/" target="_blank">Sublime</a>, or a text based editor like `vi`, or <a href="https://www.nano-editor.org/" target="_blank">nano</a>.
+5. Open the `Dockerfile` in a visual text editor like <a href="https://atom.io/" target="_blank">Atom</a> or <a href="https://www.sublimetext.com/" target="_blank">Sublime</a>, or a text based editor like <a href="http://ex-vi.sourceforge.net/" target="_blank">vi</a>, or <a href="https://www.nano-editor.org/" target="_blank">nano</a>.
 
 6. Add a line to the file like this:
 

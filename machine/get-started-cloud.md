@@ -1,7 +1,6 @@
 ---
 description: Using Docker Machine to provision hosts on cloud providers
-keywords:
-- docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
+keywords: docker, machine, amazonec2, azure, digitalocean, google, openstack, rackspace, softlayer, virtualbox, vmwarefusion, vmwarevcloudair, vmwarevsphere, exoscale
 title: Use Docker Machine to provision hosts on cloud providers
 ---
 
@@ -53,7 +52,7 @@ See <a href="../drivers/" target="_blank">Docker Machine driver reference</a> fo
 
   Several Docker Machine driver plugins for use with other cloud platforms are available from 3rd party contributors. These are use-at-your-own-risk plugins, not maintained by or formally associated with Docker.
 
-  See <a href="https://github.com/docker/machine/blob/master/docs/AVAILABLE_DRIVER_PLUGINS.md" target="_blank">Available driver plugins</a> in the docker/machine repo on GitHub.
+  See <a href="https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md" target="_blank">Available driver plugins</a>.
 
 ## Adding a host without a driver
 

@@ -56,6 +56,9 @@ to link them together and expose the web app's port.
         depends_on:
           - db
 
+>**Tip:** You can use either a `.yml` or `.yaml` extension for this file.
+
+
 ### Build the project
 
 With those three files in place, you can now generate the Rails skeleton app
@@ -88,7 +91,7 @@ First, Compose will build the image for the `web` service using the `Dockerfile`
 
 If you are running Docker on Linux, the files `rails new`  created are owned by
 root. This happens because the container runs as the root user. Change the
-ownership of the the new files.
+ownership of the new files.
 
       sudo chown -R $USER:$USER .
 

@@ -42,7 +42,7 @@ for an ordinary speaker of English with a basic university education. If your
 prose is simple, clear, and straightforward it will translate readily.
 
 One way to think about this is to assume Docker’s users are generally university
-educated and read at at least a "16th" grade level (meaning they have a
+educated and read at least a "16th" grade level (meaning they have a
 university degree). You can use a [readability
 tester](https://readability-score.com/) to help guide your judgement. For
 example, the readability score for the phrase "Containers should be ephemeral"

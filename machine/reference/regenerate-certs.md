@@ -1,7 +1,6 @@
 ---
 description: Regenerate and update TLS certificates
-keywords:
-- machine, regenerate-certs, subcommand
+keywords: machine, regenerate-certs, subcommand
 title: docker-machine regenerate-certs
 ---
 

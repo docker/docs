@@ -1,10 +1,9 @@
 ---
+description: How to setup and run Docker with HTTPS
+keywords: docker, docs, article, example, https, daemon, tls, ca,  certificate
 redirect_from:
 - /engine/articles/https/
 - /articles/https/
-description: How to setup and run Docker with HTTPS
-keywords:
-- docker, docs, article, example, https, daemon, tls, ca,  certificate
 title: Protect the Docker daemon socket
 ---
 
@@ -79,7 +78,7 @@ Since TLS connections can be made via IP address as well as DNS name, they need
 to be specified when creating the certificate. For example, to allow connections
 using `10.10.10.20` and `127.0.0.1`:
 
-    $ echo subjectAltName = IP:10.10.10.20,IP:127.0.0.1 > extfile.cnf
+    $ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 > extfile.cnf
 
     $ openssl x509 -req -days 365 -sha256 -in server.csr -CA ca.pem -CAkey ca-key.pem \
       -CAcreateserial -out server-cert.pem -extfile extfile.cnf

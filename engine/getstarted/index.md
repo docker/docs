@@ -1,12 +1,11 @@
 ---
+description: Getting started with Docker
+keywords: beginner, getting started, Docker
 redirect_from:
 - /mac/started/
 - /windows/started/
 - /linux/started/
 - /getting-started/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
 title: Get started with Docker
 ---
 

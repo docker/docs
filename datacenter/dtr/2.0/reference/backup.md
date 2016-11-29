@@ -1,7 +1,6 @@
 ---
 description: Docker Trusted Registry backup command reference.
-keywords:
-- docker, registry, reference, backup
+keywords: docker, registry, reference, backup
 title: docker/dtr backup
 ---
 

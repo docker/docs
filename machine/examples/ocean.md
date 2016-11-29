@@ -1,7 +1,6 @@
 ---
 description: Using Docker Machine to provision hosts on Digital Ocean
-keywords:
-- docker, machine, cloud, digital ocean
+keywords: docker, machine, cloud, digital ocean
 title: Digital Ocean example
 ---
 

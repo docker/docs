@@ -1,7 +1,6 @@
 ---
 description: Learn how to optimize your use of OverlayFS driver.
-keywords:
-- container, storage, driver, OverlayFS
+keywords: container, storage, driver, OverlayFS
 title: Docker and OverlayFS in practice
 ---
 

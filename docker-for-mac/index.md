@@ -70,15 +70,17 @@ For more about stable and beta channels, see the
 <p />
 *  **Relationship to Docker Machine**: Installing Docker for Mac does not affect machines you created with Docker Machine. You'll get the option to copy containers and images from your local `default` machine (if one exists) to the new Docker for Mac <a href="https://github.com/docker/HyperKit/" target="_blank">HyperKit</a> VM. When you are running Docker for Mac, you do not need Docker Machine nodes running at all locally (or anywhere else). With Docker for Mac, you have a new, native virtualization system running (HyperKit) which takes the place of the VirtualBox system. To learn more, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 <p />
-* **System Requirements**: Docker for Mac will launch only if all these requirements are met.
+* **System Requirements**: Docker for Mac will launch only if all of these requirements are met.
 
 	- Mac must be a 2010 or newer model, with Intel's hardware support for memory management unit (MMU) virtualization; i.e., Extended Page Tables (EPT)
 
-	- macOS 10.10.3 Yosemite or newer
+  - OS X El Capitan 10.11 and newer macOS releases are supported. At a minimum, Docker for Mac requires macOS Yosemite 10.10.3 or newer, with the caveat that going forward 10.10.x is a use-at-your-own risk proposition.
 
-	- At least 4GB of RAM
+  - Starting with Docker for Mac stable release 1.13 (upcoming), and concurrent Beta releases, we will no longer address issues specific to OS X Yosemite 10.10. In future releases, Docker for Mac could stop working on OS X Yosemite 10.10 due to the deprecated status of this OS X version. We recommend upgrading to the latest version of macOS.
 
-	- VirtualBox prior to version 4.3.30 must NOT be installed (it is incompatible with Docker for Mac)
+  - At least 4GB of RAM
+
+  - VirtualBox prior to version 4.3.30 must NOT be installed (it is incompatible with Docker for Mac)
 
   >**Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of HyperKit.
 
@@ -119,13 +121,13 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
 ```shell
 	$ docker --version
-	Docker version 1.12.0, build 8eab29e
+	Docker version 1.12.3, build 6b644ec
 
 	$ docker-compose --version
-	docker-compose version 1.8.0, build f3628c7
+	docker-compose version 1.8.1, build 878cff1
 
 	$ docker-machine --version
-	docker-machine version 0.8.0, build b85aac1
+	docker-machine version 0.8.2, build e18a919
 ```
 
 >**Note**: The above is an example. Your output will differ if you are running different (e.g., newer) versions.
@@ -157,7 +159,7 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
 4. Stop or remove containers and images.
 
-    The `nginx` webserver will continue to run in the container on that port until you stop and/or remove the container. If you want to stop the webserver, type: `docker stop webserver` and start it again with `docker start webserver`.
+    The `nginx` webserver will continue to run in the container on that port until you stop and/or remove the container. If you want to stop the webserver, type: `docker stop webserver` and start it again with `docker start webserver`. A stopped container will not show up with `docker ps`; for that, you need to run `docker ps -a`.
 
     To stop and remove the running container with a single command, type: `docker rm -f webserver`. This will remove the container, but not the `nginx` image. You can list local images with `docker images`. You might want to keep some images around so that you don't have to pull them again from Docker Hub. To remove an image you no longer need, use `docker rmi <imageID>|<imageName>`. For example, `docker rmi nginx`.
 
@@ -216,6 +218,11 @@ There are some limitations on the directories that can be shared:
 
 See [Namespaces](osxfs.md#namespaces) in the topic on [osxfs file system sharing](osxfs.md) for more information.
 
+>**Tip:** File sharing is required for volume mounting if the project lives
+outside of the `/Users` directory. In that case, share the drive where the
+Dockerfile and volume are located. Otherwise, you will get file not found or
+cannot start service errors at runtime. (See also [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+
 #### Privacy
 
 You can set Docker for Mac to auto-send diagnostics, crash reports, and usage data. This information can help Docker improve the application and get more context for troubleshooting problems.
@@ -269,7 +276,9 @@ ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-comple
 
 * Try out the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
-* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on on building images, running containers, networking, managing data, and storing images on Docker Hub.
+* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on
+  building images, running containers, networking, managing data, and storing
+  images on Docker Hub.
 
 * See [Example Applications](examples.md) for example applications that include setting up services and databases in Docker Compose.
 

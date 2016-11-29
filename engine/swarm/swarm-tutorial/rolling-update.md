@@ -1,7 +1,6 @@
 ---
 description: Apply rolling updates to a service on the swarm
-keywords:
-- tutorial, cluster management, swarm, service, rolling-update
+keywords: tutorial, cluster management, swarm, service, rolling-update
 title: Apply rolling updates to a service
 ---
 

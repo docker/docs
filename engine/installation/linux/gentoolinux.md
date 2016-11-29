@@ -1,9 +1,8 @@
 ---
+description: Installation instructions for Docker on Gentoo.
+keywords: gentoo linux, docker, documentation,  installation
 redirect_from:
 - /engine/installation/gentoolinux/
-description: Installation instructions for Docker on Gentoo.
-keywords:
-- gentoo linux, docker, documentation,  installation
 title: Install Docker on Gentoo
 ---
 

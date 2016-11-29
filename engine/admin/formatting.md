@@ -1,7 +1,6 @@
 ---
 description: CLI and log output formatting reference
-keywords:
-- format, formatting, output, templates, log
+keywords: format, formatting, output, templates, log
 title: Format command and log output
 ---
 
@@ -59,4 +58,6 @@ Title capitalizes a string.
 
 Upper turms a string into its upper case representation.
 
+  {% raw %}
 	$ docker inspect --format "{{upper .Name}}" container
+	{% endraw %}

@@ -48,7 +48,7 @@ POST "/images/create" : "docker import" flow not implement
             <code>GET "/containers/{name:.*}/json"</code>
         </td>
         <td>
-            <code>HostIP</code> replaced by the the actual Node's IP if <code>HostIP</code> is <code>0.0.0.0</code>
+            <code>HostIP</code> replaced by the actual Node's IP if <code>HostIP</code> is <code>0.0.0.0</code>
         </td>
     </tr>
     <tr>
@@ -64,7 +64,7 @@ POST "/images/create" : "docker import" flow not implement
             <code>GET "/containers/json"</code>
         </td>
         <td>
-            <code>HostIP</code> replaced by the the actual Node's IP if <code>HostIP</code> is <code>0.0.0.0</code>
+            <code>HostIP</code> replaced by the actual Node's IP if <code>HostIP</code> is <code>0.0.0.0</code>
         </td>
     </tr>
     <tr>

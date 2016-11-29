@@ -1,7 +1,6 @@
 ---
 description: Microsoft Hyper-V driver for machine
-keywords:
-- machine, Microsoft Hyper-V, driver
+keywords: machine, Microsoft Hyper-V, driver
 title: Microsoft Hyper-V
 ---
 

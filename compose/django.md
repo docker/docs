@@ -10,7 +10,7 @@ This quick-start guide demonstrates how to use Docker Compose to set up and run 
 ### Define the project components
 
 For this project, you need to create a Dockerfile, a Python dependencies file,
-and a `docker-compose.yml` file.
+and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extension for this file.)
 
 1. Create an empty project directory.
 
@@ -112,7 +112,7 @@ In this step, you create a Django started project by building the image from the
 
   If you are running Docker on Linux, the files `django-admin` created are owned
   by root. This happens because the container runs as the root user. Change the
-  ownership of the the new files.
+  ownership of the new files.
 
           sudo chown -R $USER:$USER .
 

@@ -1,9 +1,8 @@
 ---
+description: Installation and using Docker via Chef
+keywords: chef, installation, usage, docker,  documentation
 redirect_from:
 - /engine/articles/chef/
-description: Installation and using Docker via Chef
-keywords:
-- chef, installation, usage, docker,  documentation
 title: Use Chef
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: Enabling AppArmor in Docker
-keywords:
-- AppArmor, security, docker, documentation
+keywords: AppArmor, security, docker, documentation
 title: AppArmor security profiles for Docker
 ---
 

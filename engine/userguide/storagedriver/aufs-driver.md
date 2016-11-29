@@ -1,7 +1,6 @@
 ---
 description: Learn how to optimize your use of AUFS driver.
-keywords:
-- 'container, storage, driver, AUFS '
+keywords: 'container, storage, driver, AUFS '
 title: Docker and AUFS in practice
 ---
 

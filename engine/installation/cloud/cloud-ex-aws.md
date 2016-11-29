@@ -1,8 +1,7 @@
 ---
 description: Example of a manual install of Docker Engine on a cloud provider, using Amazon Web Services (AWS) EC2. Shows how to create an EC2 instance, and install Docker Engine on it.
-keywords:
-- cloud, docker, machine, documentation,  installation, AWS, EC2
-title: "Example: Manual installation on a cloud provider"
+keywords: cloud, docker, machine, documentation, installation, AWS, EC2
+title: 'Example: Manual installation on a cloud provider'
 ---
 
 You can install Docker Engine directly to servers you have on cloud providers.  This example shows how to create an <a href="https://aws.amazon.com/" target="_blank"> Amazon Web Services (AWS)</a> EC2 instance, and install Docker Engine on it.
@@ -71,7 +70,7 @@ To get help with your private key file, instance IP address, and how to log into
         $ cd ~/Desktop/keys/amazon_ec2
         $ ssh -i "my-key-pair.pem" ubuntu@xx.xxx.xxx.xxx
 
-    We'll follow the instructions for installing Docker on Ubuntu at https://docs.docker.com/engine/installation/ubuntulinux/. The next few steps reflect those instructions.
+    We'll follow the instructions for installing Docker on Ubuntu [the instructions for installing Docker on Ubuntu](/engine/installation/linux/ubuntulinux.md). The next few steps reflect those instructions.
 
 2. Check the kernel version to make sure it's 3.10 or higher.
 

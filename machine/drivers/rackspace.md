@@ -1,7 +1,6 @@
 ---
 description: Rackspace driver for machine
-keywords:
-- machine, Rackspace, driver
+keywords: machine, Rackspace, driver
 title: Rackspace
 ---
 

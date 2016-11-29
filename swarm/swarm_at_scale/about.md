@@ -1,8 +1,6 @@
 ---
 description: Try Swarm at scale
 keywords: docker, swarm, scale, voting, application, architecture
-redirect_from:
-- /swarm/swarm_at_scale/about/
 title: Learn the application architecture
 ---
 

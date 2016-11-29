@@ -1,7 +1,6 @@
 ---
 description: Raft consensus algorithm in swarm mode
-keywords:
-- docker, container, cluster, swarm, raft
+keywords: docker, container, cluster, swarm, raft
 title: Raft consensus in swarm mode
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: Copy files among machines
-keywords:
-- machine, scp, subcommand
+keywords: machine, scp, subcommand
 title: docker-machine scp
 ---
 

@@ -1,11 +1,10 @@
 ---
+description: Lists the installation methods
+keywords: Docker install
 redirect_from:
 - /installation/
 - /engine/installation/linux/frugalware/
 - /engine/installation/frugalware/
-description: Lists the installation methods
-keywords:
-- Docker install
 title: Install Docker Engine
 ---
 

@@ -1,8 +1,7 @@
 ---
 description: machine
+keywords: machine, orchestration, install, installation, docker, documentation
 published: false
-keywords:
-- machine, orchestration, install, installation, docker, documentation
 title: Machine driver specification v1
 ---
 

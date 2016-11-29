@@ -1,7 +1,6 @@
 ---
 description: Docker installation on macOS
-keywords:
-- Docker, Docker documentation, requirements, boot2docker, VirtualBox, SSH, Linux, osx, os x, macOS,  Mac
+keywords: Docker, Docker documentation, requirements, boot2docker, VirtualBox, SSH, Linux, osx, os x, macOS, Mac
 title: Install Docker on macOS
 ---
 

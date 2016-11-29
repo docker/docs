@@ -66,7 +66,7 @@ option, find the published port on the service detail page.
 ### Using the API/CLI
 
 See the API and CLI documentation [here](/apidocs/docker-cloud.md#service) on
-how to launch a service with a a published port.
+how to launch a service with a published port.
 
 
 ## Check which ports a service has published
@@ -81,7 +81,7 @@ Ports that are exposed internally display with a closed (locked) padlock
 icon and published ports (that are exposed to the internet) show an open
 (unlocked) padlock icon.
 
-* Exposed ports are listed as as **container port/protocol**
+* Exposed ports are listed as **container port/protocol**
 * Published ports are listed as **node port**->**container port/protocol** -->
 
 ![](images/ports-published.png)

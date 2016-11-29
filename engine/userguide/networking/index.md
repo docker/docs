@@ -1,9 +1,9 @@
 ---
+description: How do we connect docker containers within and across hosts ?
+keywords: Examples, Usage, network, docker, documentation, user guide, multihost, cluster
 redirect_from:
 - /engine/userguide/networking/dockernetworks/
-description: How do we connect docker containers within and across hosts ?
-keywords:
-- Examples, Usage, network, docker, documentation, user guide, multihost, cluster
+- /articles/networking/
 title: Docker container networking
 ---
 
@@ -397,6 +397,30 @@ A bridge network is useful in cases where you want to run a relatively small
 network on a single host. You can, however, create significantly larger networks
 by creating an `overlay` network.
 
+### The `docker_gwbridge` network
+
+The `docker_gwbridge` is a local bridge network which is automatically created by Docker
+in two different circumstances:
+
+- When you initialize or join a swarm, Docker creates the `docker_gwbridge` network and
+  uses it for communication among swarm nodes on different hosts.
+
+- When none of a container's networks can provide external connectivity, Docker connect
+  the container to the `docker_gwbridge` network in addition to the container's other
+  networks, so that the container can connect to external networks or other swarm nodes.
+
+You can create the `docker_gwbridge` network ahead of time if you need a custom configuration,
+but otherwise Docker creates it on demand. The following example creates the `docker_gwbridge`
+network with some custom options.
+
+```bash
+$ docker network create --subnet 172.30.0.0/16 \
+                        --opt com.docker.network.bridge.name=docker_gwbridge \
+			--opt com.docker.network.bridge.enable_icc=false \
+			docker_gwbridge
+```
+
+The `docker_gwbridge` network is always present when you use `overlay` networks.
 
 ### An overlay network with Docker Engine swarm mode
 

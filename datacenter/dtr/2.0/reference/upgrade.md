@@ -1,7 +1,6 @@
 ---
 description: Docker Trusted Registry upgrade command reference.
-keywords:
-- docker, registry, restore, upgrade
+keywords: docker, registry, restore, upgrade
 title: docker/dtr upgrade
 ---
 

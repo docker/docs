@@ -1,11 +1,10 @@
 ---
+description: Getting started with Docker
+keywords: beginner, getting started, Docker
 redirect_from:
 - /mac/step_two/
 - /windows/step_two/
 - /linux/step_two/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
 title: Learn about images and containers
 ---
 

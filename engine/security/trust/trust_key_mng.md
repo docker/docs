@@ -1,7 +1,6 @@
 ---
 description: Manage keys for content trust
-keywords:
-- trust, security, root,  keys, repository
+keywords: trust, security, root,  keys, repository
 title: Manage keys for content trust
 ---
 

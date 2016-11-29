@@ -1,9 +1,8 @@
 ---
+description: Installation instructions for Docker on openSUSE and on SUSE Linux Enterprise.
+keywords: openSUSE, SUSE Linux Enterprise, SUSE, SLE, docker, documentation,  installation
 redirect_from:
 - /engine/installation/SUSE/
-description: Installation instructions for Docker on openSUSE and on SUSE Linux Enterprise.
-keywords:
-- openSUSE, SUSE Linux Enterprise, SUSE, SLE, docker, documentation,  installation
 title: Install Docker on openSUSE and SUSE Linux Enterprise
 ---
 

@@ -94,11 +94,8 @@ The following are **unsupported file system events**:
 * Close events
 * Unmount events (see <a href="osxfs.md#mounts">Mounts</a>)
 
-Some events may be delivered multiple times. Events are not delivered for bind
-mounts from symlinks (notably `/tmp` will not deliver inotify events but
-`/private/tmp` will). These limitations do not apply to events between
-containers, only to those events originating in OS X.
-
+Some events may be delivered multiple times. These limitations do not apply to
+events between containers, only to those events originating in OS X.
 
 ### Mounts
 
@@ -166,21 +163,21 @@ GB/s. With large sequential IO operations, `osxfs` can achieve throughput of
 around 250 MB/s which, while not native speed, will not be the bottleneck for
 most applications which perform acceptably on HDDs.
 
-Latency is the time it takes for a file system system call to complete. For
-instance, the time between a thread issuing write in a container and resuming
-with the number of bytes written. With a classical block-based file system, this
-latency is typically under 10μs (microseconds). With `osxfs`, latency is
-presently around 200μs for most operations or 20x slower. For workloads which
-demand many sequential roundtrips, this results in significant observable
-slowdown. To reduce the latency, we need to shorten the data path from a Linux
-system call to OS X and back again. This requires tuning each component in the
-data path in turn -- some of which require significant engineering effort. Even
-if we achieve a huge latency reduction of 100μs/roundtrip, we will still "only"
-see a doubling of performance. This is typical of performance engineering, which
-requires significant effort to analyze slowdowns and develop optimized
-components. We know how we can likely halve the roundtrip time but we haven't
-implemented those improvements yet (more on this below in [What you can
-do](osxfs.md#what-you-can-do)).
+Latency is the time it takes for a file system call to complete. For instance,
+the time between a thread issuing write in a container and resuming with the
+number of bytes written. With a classical block-based file system, this latency
+is typically under 10μs (microseconds). With `osxfs`, latency is presently
+around 200μs for most operations or 20x slower. For workloads which demand many
+sequential roundtrips, this results in significant observable slowdown. To
+reduce the latency, we need to shorten the data path from a Linux system call to
+OS X and back again. This requires tuning each component in the data path in
+turn -- some of which require significant engineering effort. Even if we achieve
+a huge latency reduction of 100μs/roundtrip, we will still "only" see a doubling
+of performance. This is typical of performance engineering, which requires
+significant effort to analyze slowdowns and develop optimized components. We
+know how we can likely halve the roundtrip time but we haven't implemented those
+improvements yet (more on this below in
+[What you can do](osxfs.md#what-you-can-do)).
 
 There is hope for significant performance improvement in the near term despite
 these fundamental communication channel properties, which are difficult to
@@ -326,4 +323,4 @@ engineering work on custom low-level components.
 We appreciate your understanding as we continue development of the product and
 work on all dimensions of performance. We want to continue to work with the
 community on this, so please continue to report issues as you find them. We look
-forward to collaborting with you on ideas and on the source code itself.
+forward to collaborating with you on ideas and on the source code itself.

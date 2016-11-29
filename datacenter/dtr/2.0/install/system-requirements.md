@@ -1,9 +1,8 @@
 ---
+description: Learn about the system requirements for installing Docker Trusted Registry.
+keywords: docker, DTR, architecture, requirements
 redirect_from:
 - /docker-trusted-registry/install/system-requirements/
-description: Learn about the system requirements for installing Docker Trusted Registry.
-keywords:
-- docker, DTR, architecture, requirements
 title: Docker Trusted Registry system requirements
 ---
 
@@ -12,7 +11,7 @@ Before installing, be sure your infrastructure has these requirements.
 
 ## Software requirements
 
-To install DTR on a node, that node node must be part of a Docker Universal
+To install DTR on a node, that node must be part of a Docker Universal
 Control Plane 1.1 cluster.
 
 ## Ports used

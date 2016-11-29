@@ -1,7 +1,6 @@
 ---
 description: Use trusted images
-keywords:
-- trust, security, docker,  index
+keywords: trust, security, docker,  index
 title: Use trusted images
 ---
 

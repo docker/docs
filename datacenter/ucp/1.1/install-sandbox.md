@@ -53,7 +53,7 @@ the correct ones for you environment. -->
 >**Note**: The command examples in this page were tested for a macOS environment.
 If you are in another, you may need to adjust to use analogous commands for your environment.
 
-## Step 2. Verify the prerequisites
+## Verify the prerequisites
 
 This example requires that you have:
 
@@ -181,7 +181,7 @@ host for the controller works fine.
    ````
 
    Running this `eval` command sends the `docker` commands in the following
-   steps to the Docker Engine on on `node1`.
+   steps to the Docker Engine on `node1`.
 
    c. Verify that `node1` is the active environment.
 

@@ -1,10 +1,9 @@
 ---
-redirect_from:
-- /ucp/user-management/permission-levels/
 description: Learn about the permission levels available in Docker Universal Control
   Plane.
-keywords:
-- authorization, authentication, users, teams, UCP
+keywords: authorization, authentication, users, teams, UCP
+redirect_from:
+- /ucp/user-management/permission-levels/
 title: Permission levels
 ---
 

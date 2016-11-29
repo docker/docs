@@ -1,7 +1,6 @@
 ---
 description: How to keep containers running when the daemon isn't available.
-keywords:
-- docker, upgrade, daemon, dockerd, live-restore, daemonless container
+keywords: docker, upgrade, daemon, dockerd, live-restore, daemonless container
 title: Keep containers alive during daemon downtime
 ---
 
@@ -10,6 +9,9 @@ Starting with Docker Engine 1.12, you can configure the daemon so that
 containers remain running if the daemon becomes unavailable. The live restore
 option helps reduce container downtime due to daemon crashes, planned outages,
 or upgrades.
+
+> **Note**: Live restore is not supported on Windows containers, but it does work
+for Linux containers running on Windows.
 
 ## Enable the live restore option
 
@@ -73,3 +75,4 @@ You can modify the kernel's buffer size by changing `/proc/sys/fs/pipe-max-size`
 The live restore option is not compatible with Docker Engine swarm mode. When
 the Docker Engine runs in swarm mode, the orchestration feature manages tasks
 and keeps containers running according to a service specification.
+

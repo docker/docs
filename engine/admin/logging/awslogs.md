@@ -1,9 +1,8 @@
 ---
+description: Describes how to use the Amazon CloudWatch Logs logging driver.
+keywords: AWS, Amazon, CloudWatch, logging, driver
 redirect_from:
 - /engine/reference/logging/awslogs/
-description: Describes how to use the Amazon CloudWatch Logs logging driver.
-keywords:
-- AWS, Amazon, CloudWatch, logging, driver
 title: Amazon CloudWatch Logs logging driver
 ---
 
