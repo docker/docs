@@ -1,11 +1,9 @@
 ---
+description: Learn how to integrate UCP with an LDAP service, so that you can manage users from a single place.
+keywords: LDAP, authentication, user management
 redirect_from:
 - /docker-trusted-registry/configure/config-auth/
 - /ucp/configuration/ldap-integration/
-description: Learn how to integrate UCP with an LDAP service, so that you can manage
-  users from a single place.
-keywords:
-- LDAP, authentication, user management
 title: Integrate with LDAP
 ---
 

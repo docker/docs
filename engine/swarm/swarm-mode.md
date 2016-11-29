@@ -1,7 +1,6 @@
 ---
 description: Run Docker Engine in swarm mode
-keywords:
-- guide, swarm mode, node
+keywords: guide, swarm mode, node
 title: Run Docker Engine in swarm mode
 ---
 
@@ -71,10 +70,10 @@ to the Swarmkit API and overlay networking. The other nodes on the swarm must be
 able to access the manager node on its advertise address IP address.
 
 If you don't specify an advertise address, Docker checks if the system has a
-single IP address. If so, Docker uses the IP address with with the listening
-port `2377` by default. If the system has multiple IP addresses, you must
-specify the correct  `--advertise-addr` to enable inter-manager communication
-and overlay networking:
+single IP address. If so, Docker uses the IP address with the listening port
+`2377` by default. If the system has multiple IP addresses, you must specify the
+correct  `--advertise-addr` to enable inter-manager communication and overlay
+networking:
 
 ```bash
 $ docker swarm init --advertise-addr <MANAGER-IP>
@@ -136,7 +135,7 @@ SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacr
 
 Be careful with the join tokens because they are the secrets necessary to join
 the swarm. In particular, checking a secret into version control is a bad
-practice because it would allow anyone with access to the the application source
+practice because it would allow anyone with access to the application source
 code to add new nodes to the swarm. Manager tokens are especially sensitive
 because they allow a new manager node to join and gain control over the whole
 swarm.

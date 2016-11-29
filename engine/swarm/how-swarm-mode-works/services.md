@@ -1,7 +1,6 @@
 ---
 description: How swarm mode services work
-keywords:
-- docker, container, cluster, swarm mode, node
+keywords: docker, container, cluster, swarm mode, node
 title: How services work
 ---
 
@@ -91,5 +90,5 @@ in gray.
 
 ## Learn More
 
-* Read about how swarm mode [nodes](services.md) work.
+* Read about how swarm mode [nodes](nodes.md) work.
 * Learn how [PKI](pki.md) works in swarm mode.

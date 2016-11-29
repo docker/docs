@@ -1,7 +1,6 @@
 ---
 description: Shows a list of available commands for Docker Universal Control Plane.
-keywords:
-- help, ucp
+keywords: help, ucp
 title: docker/ucp help
 ---
 

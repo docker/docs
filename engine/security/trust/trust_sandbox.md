@@ -1,7 +1,6 @@
 ---
 description: Play in a trust sandbox
-keywords:
-- trust, security, root,  keys, repository, sandbox
+keywords: trust, security, root,  keys, repository, sandbox
 title: Play in a content trust sandbox
 ---
 
@@ -78,7 +77,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
         version: "2"
         services:
           notaryserver:
-            image: dockersecurity/notary_autobuilds:server-latest
+            image: dockersecurity/notary_autobuilds:server-v0.4.2
             volumes:
               - notarycerts:/go/src/github.com/docker/notary/fixtures
             networks:

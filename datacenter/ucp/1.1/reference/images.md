@@ -1,7 +1,6 @@
 ---
 description: Verify the UCP images on this Docker Engine.
-keywords:
-- images, ucp, images
+keywords: images, ucp, images
 title: docker/ucp images
 ---
 

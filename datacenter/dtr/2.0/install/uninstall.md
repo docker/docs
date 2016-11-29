@@ -1,9 +1,8 @@
 ---
+description: Learn how to uninstall your Docker Trusted Registry installation.
+keywords: docker, dtr, install, uninstall
 redirect_from:
 - /docker-trusted-registry/install/uninstall/
-description: Learn how to uninstall your Docker Trusted Registry installation.
-keywords:
-- docker, dtr, install, uninstall
 title: Uninstall Docker Trusted Registry
 ---
 

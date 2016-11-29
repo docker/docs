@@ -1,7 +1,6 @@
 ---
 description: Add worker and manager nodes to a swarm
-keywords:
-- guide, swarm mode, node
+keywords: guide, swarm mode, node
 title: Join nodes to a swarm
 ---
 

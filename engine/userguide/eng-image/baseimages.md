@@ -1,9 +1,8 @@
 ---
+description: How to create base images
+keywords: Examples, Usage, base image, docker, documentation,  examples
 redirect_from:
 - /engine/articles/baseimages/
-description: How to create base images
-keywords:
-- Examples, Usage, base image, docker, documentation,  examples
 title: Create a base image
 ---
 

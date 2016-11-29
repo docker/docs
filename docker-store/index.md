@@ -4,10 +4,10 @@ keywords: Docker, docker, store, purchase images
 title: Docker Store overview
 ---
 
-<center> <b>The Docker Store is now in public Beta!</b><br/> You can also <a
-href="https://success.docker.com/Store">learn more about publishing</a>, or <a
-href="https://store.docker.com/publisher/signup">apply to be a publisher</a>.
-</center>
+**The Docker Store is now generally available!**
+
+You can [learn more about publishing](https://success.docker.com/Store),
+or [apply to be a publisher](https://store.docker.com/publisher/signup).
 
 -----------------
 
@@ -62,21 +62,3 @@ versions may offer smaller base image sizes, or address specific security
 vulnerabilities.
 
 To see a list of an image's versions, click **View all versions**.
-
-
-
-
-<!-- comment out until more than 1 page
-
-# Welcome to the Docker Store Documentation
-
-The Docker Store is in private Beta. [Sign up today](https://store.docker.com/beta)!
-
-* [Use the Docker Store](get-images.md)
-  * Log in, your account  billing info
-  * Find an image (search and browse)
-  * Pull an image
-* [Publisher Hub](publish.md)
-  * How to become a publisher
-  * Publisher expectations
--->

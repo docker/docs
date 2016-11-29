@@ -1,10 +1,9 @@
 ---
+description: A simple 'Hello world' exercise that introduced you to Docker.
+keywords: docker guide, docker, docker platform, how to, dockerize, dockerizing apps, dockerizing applications, container, containers
 redirect_from:
 - /engine/userguide/containers/dockerizing/
 - /engine/userguide/dockerizing/
-description: A simple 'Hello world' exercise that introduced you to Docker.
-keywords:
-- docker guide, docker, docker platform, how to, dockerize, dockerizing apps, dockerizing applications, container,  containers
 title: Hello world in a container
 ---
 

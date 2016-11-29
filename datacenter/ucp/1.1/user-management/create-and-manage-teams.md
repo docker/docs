@@ -1,10 +1,9 @@
 ---
-redirect_from:
-- /ucp/user-management/create-and-manage-teams/
 description: Learn how to create and manage user permissions, using teams in your
   Docker Universal Control Plane cluster.
-keywords:
-- authorize, authentication, users, teams, UCP, Docker
+keywords: authorize, authentication, users, teams, UCP, Docker
+redirect_from:
+- /ucp/user-management/create-and-manage-teams/
 title: Create and manage teams
 ---
 

@@ -1,9 +1,8 @@
 ---
+description: Instructions for installing Docker on Debian.
+keywords: Docker, Docker documentation, installation,  debian
 redirect_from:
 - /engine/installation/debian/
-description: Instructions for installing Docker on Debian.
-keywords:
-- Docker, Docker documentation, installation,  debian
 title: Install Docker on Debian
 ---
 

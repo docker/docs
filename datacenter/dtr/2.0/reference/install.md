@@ -1,7 +1,6 @@
 ---
 description: Docker Trusted Registry install command reference.
-keywords:
-- docker, registry, reference, install
+keywords: docker, registry, reference, install
 title: docker/dtr install
 ---
 

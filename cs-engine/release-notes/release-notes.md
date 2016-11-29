@@ -1,10 +1,9 @@
 ---
+description: Commercially supported Docker Engine release notes
+keywords: docker, documentation, about, technology, understanding, enterprise, hub, registry, Commercially Supported Docker Engine, release notes
 redirect_from:
 - /docker-trusted-registry/cse-release-notes/
 - /docker-trusted-registry/cs-engine/release-notes/release-notes/
-description: Commercially supported Docker Engine release notes
-keywords:
-- docker, documentation, about, technology, understanding, enterprise, hub, registry, Commercially Supported Docker Engine, release notes
 title: Commercially Supported Engine release notes
 ---
 
@@ -21,6 +20,16 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
+
+## CS Engine 1.12.3-cs4
+(11 Nov 2016)
+
+This releases addresses the following issues:
+
+* [#27370](https://github.com/docker/docker/issues/27370) Fix `--net-alias` for
+`--attachable` networks
+* [#28051](https://github.com/docker/docker/issues/28051) Fix an issue removing
+a `--attachable` network by ID.
 
 ## CS Engine 1.12.3-cs3
 (27 Oct 2016)

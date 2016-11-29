@@ -1,11 +1,10 @@
 ---
+description: Getting started with Docker
+keywords: beginner, getting started, Docker, install
 redirect_from:
 - /mac/step_one/
 - /windows/step_one/
 - /linux/step_one/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker, install
 title: Install Docker and run hello-world
 ---
 

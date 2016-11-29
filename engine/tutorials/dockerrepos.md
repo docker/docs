@@ -1,10 +1,9 @@
 ---
+description: Learn how to use the Docker Hub to manage Docker images and work flow
+keywords: repo, Docker Hub, Docker Hub, registry, index, repositories, usage, pull image, push image, image, documentation
 redirect_from:
 - /engine/userguide/containers/dockerrepos/
 - /engine/userguide/dockerrepos/
-description: Learn how to use the Docker Hub to manage Docker images and work flow
-keywords:
-- repo, Docker Hub, Docker Hub, registry, index, repositories, usage, pull image, push image, image,  documentation
 title: Store images on Docker Hub
 ---
 

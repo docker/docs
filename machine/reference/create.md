@@ -1,7 +1,6 @@
 ---
 description: Create a machine.
-keywords:
-- machine, create, subcommand
+keywords: machine, create, subcommand
 title: docker-machine create
 ---
 
@@ -208,8 +207,7 @@ you can use Machine to specify how the created Swarm master should be
 configured. There is a `--swarm-strategy` flag, which you can use to specify
 the [scheduling strategy](/swarm/scheduler/strategy.md)
 which Docker Swarm should use (Machine defaults to the `spread` strategy).
-There is also a general purpose `--swarm-opt` option which works similar to how
-the aforementioned `--engine-opt` option does, except that it specifies options
+There is also a general purpose `--swarm-opt` option which works similar to the aforementioned `--engine-opt` option, except that it specifies options
 for the `swarm manage` command (used to boot a master node) instead of the base
 command. You can use this to configure features that power users might be
 interested in, such as configuring the heartbeat interval or Swarm's willingness
@@ -229,7 +227,7 @@ $ docker-machine create -d virtualbox \
     --swarm-master \
     --swarm-discovery token://<token> \
     --swarm-strategy binpack \
-    --swarm-opt heartbeat=5 \
+    --swarm-opt heartbeat=5s \
     upbeat
 ```
 

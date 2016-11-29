@@ -1,7 +1,6 @@
 ---
 description: Regenerate certificates for Docker Universal Control Plane.
-keywords:
-- install, ucp
+keywords: install, ucp
 title: docker/ucp regen-certs
 ---
 

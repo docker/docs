@@ -1,10 +1,9 @@
 ---
+description: Learn how to troubleshoot your DTR installation.
+keywords: docker, registry, monitor, troubleshoot
 redirect_from:
 - /docker-trusted-registry/adminguide/
 - /docker-trusted-registry/monitor/troubleshoot
-description: Learn how to troubleshoot your DTR installation.
-keywords:
-- docker, registry, monitor, troubleshoot
 title: Troubleshoot Docker Trusted Registry
 ---
 
@@ -19,7 +18,7 @@ docker run -it --rm --net dtr-ol --name overlay-test1 --entrypoint sh docker/dtr
 docker run -it --rm --net dtr-ol --name overlay-test2 --entrypoint ping docker/dtr -c 3 overlay-test1
 ```
 
-You can create new new overlay network for this test with `docker network create
+You can create new overlay network for this test with `docker network create
 -d overaly network-name`. You can also use any images that contain `sh` and
 `ping` for this test.
 

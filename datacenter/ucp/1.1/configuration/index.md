@@ -1,7 +1,6 @@
 ---
 description: Learn how to configure Docker Universal Control Plane on production.
-keywords:
-- docker, ucp, install, configuration
+keywords: docker, ucp, install, configuration
 title: UCP configuration
 ---
 

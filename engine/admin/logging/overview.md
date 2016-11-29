@@ -1,9 +1,8 @@
 ---
+description: Configure logging driver.
+keywords: docker, logging, driver, Fluentd
 redirect_from:
 - /engine/reference/logging/overview/
-description: Configure logging driver.
-keywords:
-- docker, logging, driver, Fluentd
 title: Configure logging drivers
 ---
 
@@ -217,8 +216,8 @@ compresses each log message. The accepted values are `gzip`, `zlib` and `none`.
 `gzip` is chosen by default.
 
 The `gelf-compression-level` option can be used to change the level of
-compresssion when `gzip` or `zlib` is selected as `gelf-compression-type`.
-Accepted value must be from from -1 to 9 (BestCompression). Higher levels
+compression when `gzip` or `zlib` is selected as `gelf-compression-type`.
+Accepted value must be from -1 to 9 (BestCompression). Higher levels
 typically run slower but compress more. Default value is 1 (BestSpeed).
 
 ## Fluentd options

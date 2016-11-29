@@ -1,11 +1,10 @@
 ---
+description: Learn how to install the commercially supported version of Docker Engine.
+keywords: docker, engine, dtr, install
 redirect_from:
 - /docker-trusted-registry/install/engine-ami-launch/
 - /docker-trusted-registry/install/install-csengine/
 - /docker-trusted-registry/cs-engine/install/
-description: Learn how to install the commercially supported version of Docker Engine.
-keywords:
-- docker, engine, dtr, install
 title: Install Commercially Supported Docker Engine
 ---
 
@@ -15,9 +14,9 @@ supported version of Docker Engine.
 CS Docker Engine can be installed on the following operating systems:
 
 
-* [CentOS 7.1/7.2 & RHEL 7.0/7.1/7.2 (YUM-based systems)](install.md#install-on-centos-7-1-7-2-rhel-7-0-7-1-7-2-yum-based-systems)
-* [Ubuntu 14.04 LTS](install.md#install-on-ubuntu-14-04-lts)
-* [SUSE Linux Enterprise 12](install.md#install-on-suse-linux-enterprise-12-3)
+* [CentOS 7.1/7.2 & RHEL 7.0/7.1/7.2 (YUM-based systems)](install.md#install-on-centos-7172--rhel-707172-yum-based-systems)
+* [Ubuntu 14.04 LTS](install.md#install-on-ubuntu-1404-lts)
+* [SUSE Linux Enterprise 12](install.md#install-on-suse-linux-enterprise-123)
 
 
 ## Install on CentOS 7.1/7.2 & RHEL 7.0/7.1/7.2 (YUM-based systems)
@@ -98,32 +97,17 @@ to the `docker` group.
     $ sudo apt-get update && sudo apt-get install apt-transport-https
     ```
 
-4.  Install additional virtual drivers not in the base image.
+4.  Install additional kernel modules to add AUFS support.
 
     ```bash
-    $ sudo apt-get install -y linux-image-extra-virtual
+    $ sudo apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
     ```
-
-    You may need to reboot your server after updating the LTS kernel.
 
 5.  Add the repository for the new version:
 
     ```bash
     $ echo "deb https://packages.docker.com/1.12/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
     ```
-
-    This adds the repository of the latest version of CS Docker Engine for the
-    Ubuntu Trusty distribution. Change the "ubuntu-trusty" string to the
-    distribution you're using:
-
-    * debian-jessie (Debian 8)
-    * debian-stretch (future release)
-    * debian-wheezy (Debian 7)
-    * ubuntu-precise (Ubuntu 12.04)
-    * ubuntu-trusty (Ubuntu 14.04)
-    * ubuntu-utopic (Ubuntu 14.10)
-    * ubuntu-vivid (Ubuntu 15.04)
-    * ubuntu-wily (Ubuntu 15.10)
 
 6.  Run the following to install commercially supported Docker Engine and its
 dependencies:

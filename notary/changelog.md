@@ -1,7 +1,6 @@
 ---
 description: Notary release changelog
-keywords:
-- docker, notary, changelog, notary changelog, notary releases, releases, notary versions, versions
+keywords: docker, notary, changelog, notary changelog, notary releases, releases, notary versions, versions
 title: Notary Changelog
 ---
 

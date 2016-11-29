@@ -1,9 +1,8 @@
 ---
+description: Installation instructions for Docker on Oracle Linux.
+keywords: Docker, Docker documentation, requirements, linux, rhel, centos, oracle,  ol
 redirect_from:
 - /engine/installation/oracle/
-description: Installation instructions for Docker on Oracle Linux.
-keywords:
-- Docker, Docker documentation, requirements, linux, rhel, centos, oracle,  ol
 title: Install Docker on Oracle Linux
 ---
 

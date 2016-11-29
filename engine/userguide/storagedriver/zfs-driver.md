@@ -1,7 +1,6 @@
 ---
 description: Learn how to optimize your use of ZFS driver.
-keywords:
-- 'container, storage, driver, ZFS '
+keywords: 'container, storage, driver, ZFS '
 title: Docker and ZFS in practice
 ---
 
@@ -121,7 +120,7 @@ you want to keep, `push` them Docker Hub or your private Docker Trusted
 Registry before attempting this procedure.
 
 Stop the Docker daemon. Then, ensure that you have a spare block device at
-`/dev/xvdb`. The device identifier may be be different in your environment and
+`/dev/xvdb`. The device identifier may be different in your environment and
 you should substitute your own values throughout the procedure.
 
 ### Install Zfs on Ubuntu 16.04 LTS

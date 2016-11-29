@@ -1,9 +1,8 @@
 ---
+description: Learn how to set up Docker Trusted Registry for high availability.
+keywords: docker, registry, high-availability, backup, recovery
 redirect_from:
 - /docker-trusted-registry/high-availability/high-availability/
-description: Learn how to set up Docker Trusted Registry for high availability.
-keywords:
-- docker, registry, high-availability, backup, recovery
 title: Set up high availability
 ---
 
@@ -58,7 +57,7 @@ they have dedicated resources for them.
 It also makes it easier to implement backup policies and disaster recovery
 plans for UCP and DTR.
 
-To have have high-availability on UCP and DTR, you need a minimum of:
+To have high-availability on UCP and DTR, you need a minimum of:
 
 * 3 dedicated nodes to install UCP with high availability,
 * 3 dedicated nodes to install DTR with high availability,
@@ -69,7 +68,7 @@ To have have high-availability on UCP and DTR, you need a minimum of:
 
 ## Load balancing
 
-DTR does not provide a load balancing service. You can use use an on-premises
+DTR does not provide a load balancing service. You can use an on-premises
 or cloud-based load balancer to balance requests across multiple DTR replicas.
 
 Make sure you configure your load balancer to:

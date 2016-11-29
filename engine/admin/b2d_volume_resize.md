@@ -1,8 +1,7 @@
 ---
 description: Resizing a Boot2Docker volume in VirtualBox with GParted
+keywords: boot2docker, volume,  virtualbox
 published: false
-keywords:
-- boot2docker, volume,  virtualbox
 title: Resize a Boot2Docker volume
 ---
 

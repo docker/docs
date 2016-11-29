@@ -1,11 +1,10 @@
 ---
+description: Getting started with Docker
+keywords: beginner, getting started, Docker
 redirect_from:
 - /mac/last_page/
 - /windows/last_page/
 - /linux/last_page/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
 title: Learn more
 ---
 
@@ -55,8 +54,3 @@ Depending on your interest, the Docker documentation contains a wealth of inform
     </td>
   </tr>
 </table>
-
-
-
-
-&nbsp;

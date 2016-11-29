@@ -1,7 +1,6 @@
 ---
 description: Show command help
-keywords:
-- machine, help, subcommand
+keywords: machine, help, subcommand
 title: docker-machine help
 ---
 
