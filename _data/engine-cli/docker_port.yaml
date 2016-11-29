@@ -1,0 +1,6 @@
+command: docker port
+short: List port mappings or a specific mapping for the container
+long: List port mappings or a specific mapping for the container
+usage: docker port CONTAINER [PRIVATE_PORT[/PROTO]]
+pname: docker
+plink: docker.yaml

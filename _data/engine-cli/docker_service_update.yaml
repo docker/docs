@@ -1,0 +1,109 @@
+command: docker service update
+short: Update a service
+long: Update a service
+usage: docker service update [OPTIONS] SERVICE
+pname: docker service
+plink: docker_service.yaml
+options:
+- option: args
+  description: Service command args
+- option: constraint-add
+  default_value: '[]'
+  description: Add or update placement constraints
+- option: constraint-rm
+  default_value: '[]'
+  description: Remove a constraint
+- option: container-label-add
+  default_value: '[]'
+  description: Add or update container labels
+- option: container-label-rm
+  default_value: '[]'
+  description: Remove a container label by its key
+- option: endpoint-mode
+  description: Endpoint mode (vip or dnsrr)
+- option: env-add
+  default_value: '[]'
+  description: Add or update environment variables
+- option: env-rm
+  default_value: '[]'
+  description: Remove an environment variable
+- option: group-add
+  default_value: '[]'
+  description: Add additional user groups to the container
+- option: group-rm
+  default_value: '[]'
+  description: Remove previously added user groups from the container
+- option: image
+  description: Service image tag
+- option: label-add
+  default_value: '[]'
+  description: Add or update service labels
+- option: label-rm
+  default_value: '[]'
+  description: Remove a label by its key
+- option: limit-cpu
+  default_value: "0.000"
+  description: Limit CPUs
+- option: limit-memory
+  default_value: 0 B
+  description: Limit Memory
+- option: log-driver
+  description: Logging driver for service
+- option: log-opt
+  default_value: '[]'
+  description: Logging driver options
+- option: mount-add
+  description: Add or update a mount on a service
+- option: mount-rm
+  default_value: '[]'
+  description: Remove a mount by its target path
+- option: name
+  description: Service name
+- option: publish-add
+  default_value: '[]'
+  description: Add or update a published port
+- option: publish-rm
+  default_value: '[]'
+  description: Remove a published port by its target port
+- option: replicas
+  default_value: none
+  description: Number of tasks
+- option: reserve-cpu
+  default_value: "0.000"
+  description: Reserve CPUs
+- option: reserve-memory
+  default_value: 0 B
+  description: Reserve Memory
+- option: restart-condition
+  description: Restart when condition is met (none, on-failure, or any)
+- option: restart-delay
+  default_value: none
+  description: Delay between restart attempts
+- option: restart-max-attempts
+  default_value: none
+  description: Maximum number of restarts before giving up
+- option: restart-window
+  default_value: none
+  description: Window used to evaluate the restart policy
+- option: stop-grace-period
+  default_value: none
+  description: Time to wait before force killing a container
+- option: update-delay
+  default_value: "0"
+  description: Delay between updates
+- option: update-failure-action
+  default_value: pause
+  description: Action on update failure (pause|continue)
+- option: update-parallelism
+  default_value: "1"
+  description: |
+    Maximum number of tasks updated simultaneously (0 to update all at once)
+- option: user
+  shorthand: u
+  description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+- option: with-registry-auth
+  default_value: "false"
+  description: Send registry authentication details to swarm agents
+- option: workdir
+  shorthand: w
+  description: Working directory inside the container

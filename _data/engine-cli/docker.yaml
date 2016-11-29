@@ -1,0 +1,3 @@
+command: docker
+cname: docker wait
+clink: docker_wait.yaml

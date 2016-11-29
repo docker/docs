@@ -1,0 +1,13 @@
+command: docker service inspect
+short: Display detailed information on one or more services
+long: Display detailed information on one or more services
+usage: docker service inspect [OPTIONS] SERVICE [SERVICE...]
+pname: docker service
+plink: docker_service.yaml
+options:
+- option: format
+  shorthand: f
+  description: Format the output using the given go template
+- option: pretty
+  default_value: "false"
+  description: Print the information in a human friendly format.

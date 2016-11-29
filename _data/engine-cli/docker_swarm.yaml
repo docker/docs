@@ -1,0 +1,8 @@
+command: docker swarm
+short: Manage Swarm
+long: Manage Swarm
+usage: docker swarm
+pname: docker
+plink: docker.yaml
+cname: docker swarm update
+clink: docker_swarm_update.yaml

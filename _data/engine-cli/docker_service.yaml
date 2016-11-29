@@ -1,0 +1,8 @@
+command: docker service
+short: Manage services
+long: Manage services
+usage: docker service
+pname: docker
+plink: docker.yaml
+cname: docker service update
+clink: docker_service_update.yaml

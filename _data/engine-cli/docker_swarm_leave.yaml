@@ -1,0 +1,10 @@
+command: docker swarm leave
+short: Leave the swarm (workers only)
+long: Leave the swarm (workers only)
+usage: docker swarm leave [OPTIONS]
+pname: docker swarm
+plink: docker_swarm.yaml
+options:
+- option: force
+  default_value: "false"
+  description: Force this node to leave the swarm, ignoring warnings
