@@ -13,8 +13,16 @@ selected driver.
 
 The container can have a different logging driver than the Docker daemon. Use
 the `--log-driver=VALUE` with the `docker run` command to configure the
-container's logging driver. If the `--log-driver` option is not set, docker
-uses the daemon's default logging driver (`json-file` unless otherwise set).
+container's logging driver. If the `--log-driver` option is not set, containers
+use the daemon's default logging driver, which defaults to `json-file`. To check
+the default logging driver for your Docker daemon, search for `Logging Driver` in the
+output of the `docker info` command:
+
+```bash
+$ docker info |grep Logging
+
+Logging Driver: json-file
+```
 
 The following options are supported:
 
