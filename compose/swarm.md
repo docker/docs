@@ -82,15 +82,15 @@ all three services end up on the same node:
         image: foo
         volumes_from: ["bar"]
         network_mode: "service:baz"
-        labels:
+        environment:
           - "constraint:node==node-1"
       bar:
         image: bar
-        labels:
+        environment:
           - "constraint:node==node-1"
       baz:
         image: baz
-        labels:
+        environment:
           - "constraint:node==node-1"
 
 ### Host ports and recreating containers
