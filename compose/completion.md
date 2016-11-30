@@ -16,7 +16,7 @@ On a Mac, install with `brew install bash-completion`
 
 Place the completion script in `/etc/bash_completion.d/` (`/usr/local/etc/bash_completion.d/` on a Mac), using e.g.
 
-     curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose
+     curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 
 Completion will be available upon next login.
 

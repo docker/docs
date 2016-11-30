@@ -1,7 +1,9 @@
 ---
-title: Try Docker Datacenter
+title: Deploy DDC on Linux servers
 description: Learn how to  get a trial license and install Docker Datacenter
 keywords: docker, datacenter, install, orchestration
+redirect_from:
+- /datacenter/try/
 ---
 
 The best way to try Docker Datacenter for yourself is to get the [30-day
@@ -23,7 +25,7 @@ Also make sure the hosts are running one of these operating systems:
 * Ubuntu 14.04 LTS
 * SUSE Linux Enterprise 12
 
-[Learn more about the Docker Datacenter system requirements](ucp/2.0/guides/installation/system-requirements.md)
+[Learn more about the Docker Datacenter system requirements](../ucp/2.0/guides/installation/system-requirements.md)
 
 
 ### Step 2: Install CS Docker Engine
@@ -37,7 +39,7 @@ Log in into each node using ssh, and install CS Docker Engine:
 curl -SLf https://packages.docker.com/1.12/install.sh | sh
 ```
 
-[You can also install CS Docker Engine using a package manager](../cs-engine/install.md)
+[You can also install CS Docker Engine using a package manager](../../cs-engine/install.md)
 
 ### Step 3: Install Universal Control Plane
 
@@ -62,7 +64,7 @@ for any necessary configuration values.
 Now that UCP is installed, you need to license it. In your browser, navigate
 to the UCP web UI and upload your license.
 
-![](ucp/2.0/guides/images/try-ddc-1.png)
+![](../images/try-ddc-1.png)
 
 [Get a free trial license if you don't have one](https://store.docker.com/bundles/docker-datacenter).
 
@@ -72,11 +74,11 @@ Join more nodes so that you can manage them from UCP.
 Go to the **UCP web UI**, navigate to the **Resources** page, and go to
 the **Nodes** section.
 
-![](ucp/2.0/guides/images/try-ddc-2.png)
+![](../images/try-ddc-2.png)
 
 Click the **Add Node button** to add a new node.
 
-![](ucp/2.0/guides/images/try-ddc-3.png)
+![](../images/try-ddc-3.png)
 
 
 Check the 'Add node as a manager' option to join the node as a manager
@@ -108,7 +110,7 @@ by UCP.
 
 ## Where to go next
 
-* [Create and manage users](ucp/2.0/guides/user-management/create-and-manage-users.md)
-* [Deploy an application](ucp/2.0/guides/applications/index.md)
-* [Push an image to DTR](dtr/2.1/guides/repos-and-images/push-an-image.md)
-* [Considerations for a High Availability Deployment](ucp/2.0/guides/high-availability/index.md)
+* [Create and manage users](../ucp/2.0/guides/user-management/create-and-manage-users.md)
+* [Deploy an application](../ucp/2.0/guides/applications/index.md)
+* [Push an image to DTR](../dtr/2.1/guides/repos-and-images/push-an-image.md)
+* [Considerations for a High Availability Deployment](../ucp/2.0/guides/high-availability/index.md)

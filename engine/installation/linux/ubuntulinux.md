@@ -1,5 +1,5 @@
 ---
-description: 'Instructions for installing Docker on Ubuntu. '
+description: Instructions for installing Docker on Ubuntu
 keywords: Docker, Docker documentation, requirements, apt, installation,  ubuntu
 redirect_from:
 - /engine/installation/ubuntulinux/
@@ -618,4 +618,4 @@ following command:
 $ rm -rf /var/lib/docker
 ```
 
-You must delete any customized configuration files manually.
+You must delete any edited configuration files manually.
