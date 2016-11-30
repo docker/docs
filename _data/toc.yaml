@@ -143,6 +143,8 @@ toc:
       title: Configuring and running Docker
     - path: /engine/admin/host_integration/
       title: Automatically start containers
+    - path: /engine/admin/resource_constraints/
+      title: Limit a container's resources
     - path: /engine/admin/live-restore/
       title: Keep containers alive during daemon downtime
     - path: /engine/admin/systemd/
@@ -183,6 +185,10 @@ toc:
       title: Runtime metrics
     - path: /engine/admin/ambassador_pattern_linking/
       title: Link via an ambassador container
+  - sectiontitle: Troubleshoot Docker Engine
+    section:
+    - path: /engine/admin/troubleshooting_volume_errors.md
+      title: Troubleshoot volume problems
   - sectiontitle: Manage a swarm
     section:
     - path: /engine/swarm/
@@ -637,8 +643,10 @@ toc:
       title: Prior CS Engine release notes
 - sectiontitle: Docker Datacenter
   section:
-  - path: /datacenter/try/
-    title: Try Docker Datacenter
+  - path: /datacenter/install/aws/
+    title: Deploy Datacenter on AWS
+  - path: /datacenter/install/linux/
+    title: Deploy Datacenter on Linux
   - sectiontitle: Universal Control Plane 2.0
     section:
     - path: /datacenter/ucp/2.0/guides/
@@ -765,6 +773,8 @@ toc:
         title: Install offline
       - path: /datacenter/dtr/2.1/guides/install/license/
         title: License your deployment
+      - path: /datacenter/dtr/2.1/guides/install/scale-your-deployment/
+        title: Scale your deployment
       - path: /datacenter/dtr/2.1/guides/install/upgrade/
         title: Upgrade
       - path: /datacenter/dtr/2.1/guides/install/uninstall/
