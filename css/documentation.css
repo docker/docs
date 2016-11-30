@@ -346,3 +346,17 @@ color: #F04124;
 }
 
 /* end search */
+
+/* begin reading_time */
+
+span.reading-time {
+  font-style: italic;
+  font-size: 80%;
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #999;
+}
+
+span.reading-time-label {
+}
