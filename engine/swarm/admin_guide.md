@@ -22,6 +22,7 @@ This article covers the following swarm administration tasks:
 * [Troubleshooting a manager node](#troubleshoot-a-manager-node)
 * [Forcefully removing a node](#force-remove-a-node)
 * [Recovering from disaster](#recover-from-disaster)
+* [Forcing the swarm to rebalance](#forcing-the-swarm-to-rebalance)
 
 Refer to [How nodes work](how-swarm-mode-works/nodes.md)
 for a brief overview of Docker Swarm mode and the difference between manager and
@@ -255,7 +256,7 @@ manager node of a single-node swarm. It discards swarm membership information
 that existed before the loss of the quorum but it retains data necessary to the
 Swarm such as services, tasks and the list of worker nodes.
 
-### Forcing the swarm to rebalance
+## Forcing the swarm to rebalance
 
 Generally, you do not need to force the swarm to rebalance its tasks. When you
 add a new node to a swarm, or a node reconnects to the swarm after a
