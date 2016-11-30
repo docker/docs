@@ -1,24 +1,19 @@
 var metadata;
 var autoCompleteShowing = false;
 var displayingAutcompleteResults = new Array();
-document.onkeydown = checkKey;
-function checkKey(e) {
-  if (autoCompleteShowing) {
-    e = e || window.event;
-    if (e.keyCode == '38') {
-        // up arrow
-    }
-    else if (e.keyCode == '40') {
-        // down arrow
-    }
-    else if (e.keyCode == '37') {
-       // left arrow
-    }
-    else if (e.keyCode == '39') {
-       // right arrow
-    }
-  }
+var autoCompleteShowingID = 0;
+var lastSearch = "";
+var autoCompleteResultLimit = 3;
+function loadPage(url)
+{
+  window.location.replace(url);
+  window.location.href = url;
 }
+$(document).on("keypress", function(event) {
+    if (event.keyCode == 13) {
+        event.preventDefault();
+    }
+});
 function highlightMe(inputTxt,keyword)
 {
   inputTxt = String(inputTxt);
@@ -45,70 +40,131 @@ function hookupTOCEvents()
   });
   $(".left-off-canvas-menu").css("display","block");
   // console.log(metadata);
-  $("#st-search-input").on('keyup change', function() {
-    var results = new Array();
-    var searchVal = $("#st-search-input").val();
-    var uppercaseSearchVal = searchVal.toUpperCase();
-    //console.log("input changed: ",$("#st-search-input").val());
-    if (searchVal.length > 2) {
-      for (i=0;i<metadata.pages.length;i++) {
-        // search url, description, title, and keywords for search input
-        var thisPage = metadata.pages[i];
-        if (String(thisPage.title).toUpperCase().indexOf(uppercaseSearchVal) > -1) results.push(i);
-        if (thisPage.description != null) if (String(thisPage.description).toUpperCase().indexOf(uppercaseSearchVal) > -1) results.push(i);
-        if (thisPage.url != null) if (String(thisPage.url).toUpperCase().indexOf(uppercaseSearchVal) > -1) results.push(i);
-        if (thisPage.keywords != null) if (String(thisPage.keywords).toUpperCase().indexOf(uppercaseSearchVal) > -1) results.push(i);
-      }
-    }
-    if (results.length > 0)
+  $("#st-search-input").on('keyup change', function(e) {
+    e = e || window.event;
+    if (autoCompleteShowing)
     {
-      var lastIndex = -1;
-      var resultsOutput = new Array();
-      var resultsShown  = 0;
-      resultsOutput.push("<ul class='autocompleteList'>")
-      for (i=0; resultsShown < 3 && i < results.length; i++)
-      {
-        if (results[i] != lastIndex) {
-          // show results
-          //console.log("match:",metadata.pages[results[i]]);
-          displayingAutcompleteResults.push(i);
-          resultsOutput.push("<li id='autoTitle" + i + "' class='autocompleteTitle'>")
-          resultsOutput.push("<a href=" + metadata.pages[results[i]].url + ">" + highlightMe(metadata.pages[results[i]].title,searchVal) + "</a>");
-          resultsOutput.push("</li>");
-          resultsOutput.push("<li id='autoUrl" + i + "' class='autocompleteUrl'>")
-          resultsOutput.push(highlightMe(metadata.pages[results[i]].url,searchVal));
-          resultsOutput.push("</li>");
-          /*
-          resultsOutput.push("<li id='autoBreadcrumb" + i + "' class='autocompleteBreadcrumb'>")
-          resultsOutput.push("Breadcrumb: " + breadcrumbString(metadata.pages[results[i]].url));
-          resultsOutput.push("</li>");
-          */
-          if (metadata.pages[results[i]].keywords)
+      if (e.keyCode == '38') {
+          // up arrow
+          if (autoCompleteShowingID > -1)
           {
-          resultsOutput.push("<li id='autoKeywords" + i + "' class='autocompleteKeywords'>")
-          resultsOutput.push("Keywords: <i>" + highlightMe(metadata.pages[results[i]].keywords,searchVal) + "</i>");
-          resultsOutput.push("</li>");
+            // go up a result
+            $("#autoCompleteResult" + autoCompleteShowingID).removeClass("autocompleteSelected");
+            autoCompleteShowingID = autoCompleteShowingID - 1;
+            $("#autoCompleteResult" + autoCompleteShowingID).addClass("autocompleteSelected");
+            $("#autoSeeAll").removeClass("autocompleteSelected");
+          } else {
+            // de-selection auto-complete; reverting to raw search
+            $("#autoCompleteResult0").removeClass("autocompleteSelected");
+            autoCompleteShowingID = -1;
           }
-          if (metadata.pages[results[i]].description)
+      } else if (e.keyCode == '40') {
+          // down arrow
+          if (autoCompleteShowingID < (displayingAutcompleteResults.length - 1))
           {
-          resultsOutput.push("<li id='autoDescription" + i + "' class='autocompleteDescription'>")
-          resultsOutput.push("Description: " + highlightMe(metadata.pages[results[i]].description,searchVal));
-          resultsOutput.push("</li>");
+            // go down to the next result
+            $("#autoCompleteResult" + autoCompleteShowingID).removeClass("autocompleteSelected");
+            autoCompleteShowingID = autoCompleteShowingID + 1;
+            $("#autoCompleteResult" + autoCompleteShowingID).addClass("autocompleteSelected");
+          } else {
+            // select "See all results..." and go no further
+            $("#autoCompleteResult" + autoCompleteShowingID).removeClass("autocompleteSelected");
+            $("#autoSeeAll").addClass("autocompleteSelected");
+            autoCompleteShowingID = autoCompleteResultLimit;
           }
-          resultsShown++;
+      } else if (e.keyCode == '13') {
+        // return key
+        e.preventDefault();
+        if (autoCompleteShowingID==autoCompleteResultLimit || autoCompleteShowingID == -1 || autoCompleteShowing == false)
+        {
+          // "see all" is selected or they don't have an autocomplete result selected
+          loadPage("/search/?q=" + $("#st-search-input").val());
+        } else {
+          // an autocomplete result is selected
+          loadPage(metadata.pages[displayingAutcompleteResults[autoCompleteShowingID]].url);
         }
-        lastIndex = results[i];
       }
-      resultsOutput.push("<li class='autocompleteTitle'><a href='/search/?q=" + searchVal + "'><b>See all results...</b></a></li>")
-      resultsOutput.push("</ul>");
-      $("#autocompleteResults").css("display","block");
-      $("#autocompleteResults").html(resultsOutput.join(""));
-      autoCompleteShowing = true;
-    } else {
-      $("#autocompleteResults").css("display","none");
-      $("#autocompleteResults").html("");
-      autoCompleteShowing = false;
+      //console.log('autoCompleteShowingID:',autoCompleteShowingID,'displayingAutcompleteResults[id]:',displayingAutcompleteResults[autoCompleteShowingID],'metadata.pages[id].url:',metadata.pages[displayingAutcompleteResults[autoCompleteShowingID]].url);
     }
+    var searchVal = $("#st-search-input").val();
+    if (lastSearch != searchVal)
+    {
+      displayingAutcompleteResults = [];
+      var results = new Array();
+      var uppercaseSearchVal = searchVal.toUpperCase();
+      //console.log("input changed: ",$("#st-search-input").val());
+      if (searchVal.length > 2) {
+        for (i=0;i<metadata.pages.length;i++) {
+          // search url, description, title, and keywords for search input
+          var thisPage = metadata.pages[i];
+          if (String(thisPage.title).toUpperCase().indexOf(uppercaseSearchVal) > -1) results.push(i);
+          if (thisPage.description != null) if (String(thisPage.description).toUpperCase().indexOf(uppercaseSearchVal) > -1) results.push(i);
+          if (thisPage.url != null) if (String(thisPage.url).toUpperCase().indexOf(uppercaseSearchVal) > -1) results.push(i);
+          if (thisPage.keywords != null) if (String(thisPage.keywords).toUpperCase().indexOf(uppercaseSearchVal) > -1) results.push(i);
+        }
+      }
+      if (results.length > 0)
+      {
+        var lastIndex = -1;
+        var resultsOutput = new Array();
+        var resultsShown  = 0;
+        var highlightHTML = "";
+        resultsOutput.push("<div id='autoContainer'>")
+        for (i=0; resultsShown < autoCompleteResultLimit && i < results.length; i++)
+        {
+          if (results[i] != lastIndex) {
+            // show results
+            //console.log("match:",metadata.pages[results[i]]);
+            displayingAutcompleteResults.push(results[i]); //log results to global array
+            if (lastIndex==-1) {
+              //first result!
+              autoCompleteShowingID = -1;
+            } else {
+              highlightHTML = "";
+            }
+            resultsOutput.push("<div id='autoCompleteResult" + resultsShown + "'" + highlightHTML + " onclick='loadPage(\"" + metadata.pages[results[i]].url + "\")'>");
+            resultsOutput.push("<ul class='autocompleteList'>");
+            resultsOutput.push("<li id='autoTitle" + resultsShown + "' class='autocompleteTitle'>")
+            resultsOutput.push("<a href=" + metadata.pages[results[i]].url + ">" + highlightMe(metadata.pages[results[i]].title,searchVal) + "</a>");
+            resultsOutput.push("</li>");
+            resultsOutput.push("<li id='autoUrl" + resultsShown + "' class='autocompleteUrl'>")
+            resultsOutput.push(highlightMe(metadata.pages[results[i]].url,searchVal));
+            resultsOutput.push("</li>");
+            /*
+            resultsOutput.push("<li id='autoBreadcrumb" + i + "' class='autocompleteBreadcrumb'>")
+            resultsOutput.push("Breadcrumb: " + breadcrumbString(metadata.pages[results[i]].url));
+            resultsOutput.push("</li>");
+            */
+            if (metadata.pages[results[i]].keywords)
+            {
+            resultsOutput.push("<li id='autoKeywords" + resultsShown + "' class='autocompleteKeywords'>")
+            resultsOutput.push("Keywords: <i>" + highlightMe(metadata.pages[results[i]].keywords,searchVal) + "</i>");
+            resultsOutput.push("</li>");
+            }
+            if (metadata.pages[results[i]].description)
+            {
+            resultsOutput.push("<li id='autoDescription" + resultsShown + "' class='autocompleteDescription'>")
+            resultsOutput.push("Description: " + highlightMe(metadata.pages[results[i]].description,searchVal));
+            resultsOutput.push("</li>");
+            }
+            resultsOutput.push("</ul>");
+            resultsOutput.push("</div>")
+            resultsShown++;
+          }
+          lastIndex = results[i];
+        }
+        resultsOutput.push("<ul class='autocompleteList'><li class='autocompleteTitle' id='autoSeeAll'><a href='/search/?q=" + searchVal + "'><b>See all results...</b></a></li></ul>")
+        resultsOutput.push("</div>");
+        $("#autocompleteResults").css("display","block");
+        $("#autocompleteResults").html(resultsOutput.join(""));
+        autoCompleteShowing = true;
+      } else {
+        $("#autocompleteResults").css("display","none");
+        $("#autocompleteResults").html("");
+        autoCompleteShowing = false;
+      }
+      lastSearch = searchVal;
+    } // if searchVal != lastSearch
   });
 }
 
