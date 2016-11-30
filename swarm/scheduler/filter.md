@@ -166,7 +166,7 @@ ubuntu              14.04               a5a467fddcb8        11 days ago         
 
 ### Use the health filter
 
-The node `health` filter prevents the scheduler form running containers
+The node `health` filter prevents the scheduler from running containers
 on unhealthy nodes. A node is considered unhealthy if the node is down or it
 can't communicate with the cluster store.
 
