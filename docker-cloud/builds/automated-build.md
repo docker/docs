@@ -66,31 +66,17 @@ the code repository service where the image's source code is stored.
 
 6. Optionally, enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
 
-8.  In the **Build Rules** section, enter one or more sources to build.
+8.  Review the default **Build Rules**, and optionally click the **plus sign** to add and configure more build rules.
 
-    For each source:
+    _Build rules_ control what Docker Cloud builds into images from the contents
+    of the source code repository, and how the resulting images are tagged
+    within the Docker repository.
 
-    * Select the **Source type** to build either a **tag** or a
-    **branch**. This tells the build system what to look for in the source code
-    repository.
+    A default build rule is set up for you, which you can edit or delete. This
+    default set builds from the `Branch` in your source code repository called
+    `master`, and creates a Docker image tagged with `latest`.
 
-    * Enter the name of the **Source** branch or tag you want to build.
-
-      The first time you configure automated builds, a default tag mapping is set up for you. This default set builds from the `Branch` in your source code called `master`, and creates a Docker image tagged with `latest`.
-
-      You can also use a regex to select which source branches or tags to build.
-      To learn more, see
-      [regexes](automated-build.md#regexes-and-automated-builds).
-
-    * Enter the tag to apply to Docker images built from this source.
-
-      If you configured a regex to select the source, you can reference the
-      capture groups and use its result as part of the tag. To learn more, see
-      [regexes](automated-build.md#regexes-and-automated-builds).
-
-    * Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
-
-9. For each branch or tag, enable or disable the **Autobuild** toggle.
+9.  For each branch or tag, enable or disable the **Autobuild** toggle.
 
     Only branches or tags with autobuild enabled are built, tested, *and* have
     the resulting image pushed to the repository. Branches with autobuild
@@ -107,6 +93,38 @@ run an initial test.
     A webhook is automatically added to your source code repository to notify
     Docker Cloud on every push. Only pushes to branches that are listed as the
     source for one or more tags will trigger a build.
+
+### Set up build rules
+
+
+By default when you set up autobuilds, a basic build rule is created for you. This default rule watches for changes to the `master` branch in your source code repository, and builds the `master` branch into a Docker image tagged with `latest`. You
+
+
+8.  In the **Build Rules** section, enter one or more sources to build.
+
+    For each source:
+
+    * Select the **Source type** to build either a **tag** or a
+    **branch**. This tells the build system what to look for in the source code
+    repository.
+
+    * Enter the name of the **Source** branch or tag you want to build.
+
+      The first time you configure automated builds, a default build rule is set up for you. This default set builds from the `Branch` in your source code called `master`, and creates a Docker image tagged with `latest`.
+
+      You can also use a regex to select which source branches or tags to build.
+      To learn more, see
+      [regexes](automated-build.md#regexes-and-automated-builds).
+
+    * Enter the tag to apply to Docker images built from this source.
+
+      If you configured a regex to select the source, you can reference the
+      capture groups and use its result as part of the tag. To learn more, see
+      [regexes](automated-build.md#regexes-and-automated-builds).
+
+    * Specify the **Dockerfile location** as a path relative to the root of the source code repository. (If the Dockerfile is at the repository root, leave this path set to `/`.)
+
+
 
 ### Environment variables for builds
 
@@ -199,7 +217,7 @@ of the repository you want to edit, click the **Builds** tab, and click
 
 You can configure your automated builds so that pushes to specific branches or tags will trigger a build.
 
-1. In the **Tag mappings** section, click the plus sign to add more sources to build.
+1. In the **Build Rules** section, click the plus sign to add more sources to build.
 
 2.  Select the **Source type** to build: either a **tag** or a **branch**.
 
@@ -218,7 +236,7 @@ You can configure your automated builds so that pushes to specific branches or t
     capture groups and use its result as part of the tag. To learn more, see
     [regexes](automated-build.md#regexes-and-automated-builds).
 
-5. Repeat steps 2 through 4 for each new tag mapping you set up.
+5. Repeat steps 2 through 4 for each new build rule you set up.
 
 ### Set the build context and Dockerfile location
 
@@ -242,10 +260,11 @@ tags are built. You can also use the results of the regex to create the Docker
 tag that is applied to the built image.
 
 You can use the variable `{sourceref}` to use the branch or tag name that
-matched the regex. (The variable includes the whole source name, not just the
-portion that matched the regex.) You can also use up to nine regular expression
-capture groups (expressions enclosed in parentheses) to select a source to
-build, and reference these in the Docker Tag field using `{\1}` through `{\9}`.
+matched the regex in the Docker tag applied to the resulting built image. (The
+variable includes the whole source name, not just the portion that matched the
+regex.) You can also use up to nine regular expression capture groups
+(expressions enclosed in parentheses) to select a source to build, and reference
+these in the Docker Tag field using `{\1}` through `{\9}`.
 
 **Regex example: build from version number branch and tag with version number**
 
@@ -263,6 +282,25 @@ tag** field.
 You could also use capture groups to build and label images that come from various sources. For example, you might have
 
 `/(alice|bob)-v([0-9.]+)/` -->
+
+### Create multiple Docker tags from a single build
+
+By default, each build rule builds a source branch or tag into a Docker image,
+and then tags that image with a single tag. However, you can also create several
+tagged Docker images from a single build rule.
+
+To create multiple tags from a single build rule, enter a comma-separated list
+of tags in the **Docker tag** field in the build rule. If an image with that tag
+already exists, Docker Cloud overwrites the image when the build completes
+successfully. If you have automated tests configured, the build must pass these
+tests as well before the image is overwritten. You can use both regex references
+and plain text values in this field simultaneously.
+
+For example if you want to update the image tagged with `latest` at the same
+time as you a tag an image for a specific version, you could enter
+`{sourceref},latest` in the Docker Tag field.
+
+If you need to update a tag _in another repository_, use [a post_build hook](advanced.md#push-to-multiple-tags) to push to a second repository.
 
 ## Build repositories with linked private submodules
 
