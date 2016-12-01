@@ -1,0 +1,3 @@
+#!/bin/bash
+docker build -t pre_build_tests `pwd`/hooks/tests
+docker run -v `pwd`:/docs pre_build_tests
