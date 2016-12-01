@@ -165,6 +165,7 @@ following distributions support the driver:
 * Ubuntu 12.04
 * Ubuntu 14.04
 * Debian
+* Arch Linux
 
 Docker hosts running the `devicemapper` storage driver default to a
 configuration mode known as `loop-lvm`. This mode uses sparse files to build
@@ -471,7 +472,7 @@ The `Data Space` values show that the pool is 100GB total. This example extends 
    -rw------- 1 root root 2.0G Mar 31 11:17 metadata
    ```
 
-2. Truncate `data` file to the size of the `metadata` file (approximage 200GB).
+2. Truncate `data` file to the size of the `metadata` file (approximately 200GB).
 
    ```bash
    $ sudo truncate -s 214748364800 /var/lib/docker/devicemapper/devicemapper/data
