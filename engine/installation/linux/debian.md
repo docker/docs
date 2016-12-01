@@ -67,7 +67,7 @@ from the new repository:
  4. Update package information, ensure that APT works with the `https` method, and that CA certificates are installed.
 
          $ apt-get update
-         $ apt-get install apt-transport-https ca-certificates
+         $ apt-get install apt-transport-https ca-certificates gnupg2
 
  5. Add the new `GPG` key.
 
