@@ -9,6 +9,14 @@
   list-style-type: none;
   width: 400px;
   padding:0px;
+  margin-bottom: 0px;
+}
+.autoCompleteResult {
+  border-bottom: 1px solid #6db9d1;
+  padding-bottom: 10px;
+}
+#autocompleteShowAll {
+  padding-bottom: 10px;
 }
 .autocompleteList li {
   width: 380px;

@@ -52,7 +52,7 @@ function hookupTOCEvents()
             $("#autoCompleteResult" + autoCompleteShowingID).removeClass("autocompleteSelected");
             autoCompleteShowingID = autoCompleteShowingID - 1;
             $("#autoCompleteResult" + autoCompleteShowingID).addClass("autocompleteSelected");
-            $("#autoSeeAll").removeClass("autocompleteSelected");
+            $("#autocompleteShowAll").removeClass("autocompleteSelected");
           } else {
             // de-selection auto-complete; reverting to raw search
             $("#autoCompleteResult0").removeClass("autocompleteSelected");
@@ -69,7 +69,7 @@ function hookupTOCEvents()
           } else {
             // select "See all results..." and go no further
             $("#autoCompleteResult" + autoCompleteShowingID).removeClass("autocompleteSelected");
-            $("#autoSeeAll").addClass("autocompleteSelected");
+            $("#autocompleteShowAll").addClass("autocompleteSelected");
             autoCompleteShowingID = autoCompleteResultLimit;
           }
       } else if (e.keyCode == '13') {
@@ -108,52 +108,55 @@ function hookupTOCEvents()
         var lastIndex = -1;
         var resultsOutput = new Array();
         var resultsShown  = 0;
-        var highlightHTML = "";
+        var resultsFound = 0;
         resultsOutput.push("<div id='autoContainer'>")
-        for (i=0; resultsShown < autoCompleteResultLimit && i < results.length; i++)
+        for (i=0; i < results.length; i++)
         {
           if (results[i] != lastIndex) {
             // show results
             //console.log("match:",metadata.pages[results[i]]);
-            displayingAutcompleteResults.push(results[i]); //log results to global array
-            if (lastIndex==-1) {
-              //first result!
-              autoCompleteShowingID = -1;
-            } else {
-              highlightHTML = "";
-            }
-            resultsOutput.push("<div id='autoCompleteResult" + resultsShown + "'" + highlightHTML + " onclick='loadPage(\"" + metadata.pages[results[i]].url + "\")'>");
-            resultsOutput.push("<ul class='autocompleteList'>");
-            resultsOutput.push("<li id='autoTitle" + resultsShown + "' class='autocompleteTitle'>")
-            resultsOutput.push("<a href=" + metadata.pages[results[i]].url + ">" + highlightMe(metadata.pages[results[i]].title,searchVal) + "</a>");
-            resultsOutput.push("</li>");
-            resultsOutput.push("<li id='autoUrl" + resultsShown + "' class='autocompleteUrl'>")
-            resultsOutput.push(highlightMe(metadata.pages[results[i]].url,searchVal));
-            resultsOutput.push("</li>");
-            /*
-            resultsOutput.push("<li id='autoBreadcrumb" + i + "' class='autocompleteBreadcrumb'>")
-            resultsOutput.push("Breadcrumb: " + breadcrumbString(metadata.pages[results[i]].url));
-            resultsOutput.push("</li>");
-            */
-            if (metadata.pages[results[i]].keywords)
+            resultsFound++;
+            if (resultsShown < autoCompleteResultLimit)
             {
-            resultsOutput.push("<li id='autoKeywords" + resultsShown + "' class='autocompleteKeywords'>")
-            resultsOutput.push("Keywords: <i>" + highlightMe(metadata.pages[results[i]].keywords,searchVal) + "</i>");
-            resultsOutput.push("</li>");
+              displayingAutcompleteResults.push(results[i]); //log results to global array
+              if (lastIndex==-1) {
+                //first result!
+                autoCompleteShowingID = -1;
+              }
+              resultsOutput.push("<div class='autoCompleteResult' id='autoCompleteResult" + resultsShown + "' onclick='loadPage(\"" + metadata.pages[results[i]].url + "\")'>");
+              resultsOutput.push("<ul class='autocompleteList'>");
+              resultsOutput.push("<li id='autoTitle" + resultsShown + "' class='autocompleteTitle'>")
+              resultsOutput.push("<a href=" + metadata.pages[results[i]].url + ">" + highlightMe(metadata.pages[results[i]].title,searchVal) + "</a>");
+              resultsOutput.push("</li>");
+              resultsOutput.push("<li id='autoUrl" + resultsShown + "' class='autocompleteUrl'>")
+              resultsOutput.push(highlightMe(metadata.pages[results[i]].url,searchVal));
+              resultsOutput.push("</li>");
+              /*
+              resultsOutput.push("<li id='autoBreadcrumb" + i + "' class='autocompleteBreadcrumb'>")
+              resultsOutput.push("Breadcrumb: " + breadcrumbString(metadata.pages[results[i]].url));
+              resultsOutput.push("</li>");
+              */
+              if (metadata.pages[results[i]].keywords)
+              {
+              resultsOutput.push("<li id='autoKeywords" + resultsShown + "' class='autocompleteKeywords'>")
+              resultsOutput.push("<b>Keywords</b>: <i>" + highlightMe(metadata.pages[results[i]].keywords,searchVal) + "</i>");
+              resultsOutput.push("</li>");
+              }
+              if (metadata.pages[results[i]].description)
+              {
+              resultsOutput.push("<li id='autoDescription" + resultsShown + "' class='autocompleteDescription'>")
+              resultsOutput.push("<b>Description</b>: " + highlightMe(metadata.pages[results[i]].description,searchVal));
+              resultsOutput.push("</li>");
+              }
+              resultsOutput.push("</ul>");
+              resultsOutput.push("</div>")
+              resultsShown++;
             }
-            if (metadata.pages[results[i]].description)
-            {
-            resultsOutput.push("<li id='autoDescription" + resultsShown + "' class='autocompleteDescription'>")
-            resultsOutput.push("Description: " + highlightMe(metadata.pages[results[i]].description,searchVal));
-            resultsOutput.push("</li>");
-            }
-            resultsOutput.push("</ul>");
-            resultsOutput.push("</div>")
-            resultsShown++;
           }
           lastIndex = results[i];
         }
-        resultsOutput.push("<ul class='autocompleteList'><li class='autocompleteTitle' id='autoSeeAll'><a href='/search/?q=" + searchVal + "'><b>See all results...</b></a></li></ul>")
+        var resultsShownText = (resultsShown > 1) ? resultsShown + " of " + resultsFound + " matches" : "match";
+        resultsOutput.push("<div id='autocompleteShowAll'><ul class='autocompleteList'><li class='autocompleteTitle' id='autoSeeAll'><a href='/search/?q=" + searchVal + "'><b>Showing top " + resultsShownText + ". See all results...</b></a></li></ul></div>")
         resultsOutput.push("</div>");
         $("#autocompleteResults").css("display","block");
         $("#autocompleteResults").html(resultsOutput.join(""));
