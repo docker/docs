@@ -7,11 +7,12 @@ title: Add nodes to the swarm
 Once you've [created a swarm](create-swarm.md) with a manager node, you're ready
 to add worker nodes.
 
-1. Open a terminal and ssh into the machine where you want to run a worker node.
-This tutorial uses the name `worker1`.
+1.  Open a terminal and ssh into the machine where you want to run a worker node.
+    This tutorial uses the name `worker1`.
 
-2. Run the command produced by the `docker swarm init` output from the
-[Create a swarm](create-swarm.md) tutorial step to create a worker node joined to the existing swarm:
+2.  Run the command produced by the `docker swarm init` output from the
+    [Create a swarm](create-swarm.md) tutorial step to create a worker node
+    joined to the existing swarm:
 
     ```bash
     $ docker swarm join \
@@ -19,27 +20,25 @@ This tutorial uses the name `worker1`.
       192.168.99.100:2377
 
     This node joined a swarm as a worker.
-    ```
 
     If you don't have the command available, you can run the following command
     on a manager node to retrieve the join command for a worker:
 
-    ```bash
     $ docker swarm join-token worker
 
     To add a worker to this swarm, run the following command:
 
-        docker swarm join \
+    $ docker swarm join \
         --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c \
         192.168.99.100:2377
     ```
 
-3. Open a terminal and ssh into the machine where you want to run a second
-worker node. This tutorial uses the name `worker2`.
+3.  Open a terminal and ssh into the machine where you want to run a second
+    worker node. This tutorial uses the name `worker2`.
 
-4. Run the command produced by the `docker swarm init` output from the
-[Create a swarm](create-swarm.md) tutorial step to create a second worker node
-joined to the existing swarm:
+4.  Run the command produced by the `docker swarm init` output from the
+    [Create a swarm](create-swarm.md) tutorial step to create a second worker node
+    joined to the existing swarm:
 
     ```bash
     $ docker swarm join \
@@ -49,8 +48,8 @@ joined to the existing swarm:
     This node joined a swarm as a worker.
     ```
 
-5. Open a terminal and ssh into the machine where the manager node runs and run
-the `docker node ls` command to see the worker nodes:
+5.  Open a terminal and ssh into the machine where the manager node runs and run
+    the `docker node ls` command to see the worker nodes:
 
     ```bash
     ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS

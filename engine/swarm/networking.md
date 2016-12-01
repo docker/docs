@@ -49,7 +49,7 @@ different nodes. For more information, refer to [Docker swarm mode overlay netwo
 The `--subnet` flag specifies the subnet for use with the overlay network. When
 you don't specify a subnet, the swarm manager automatically chooses a subnet and
 assigns it to the network. On some older kernels, including kernel 3.10,
-automatically assigned adresses may overlap with another subnet in your
+automatically assigned addresses may overlap with another subnet in your
 infrastructure. Such overlaps can cause connectivity issues or failures with containers connected to the network.
 
 Before you attach a service to the network, the network only extends to manager
@@ -292,7 +292,7 @@ Address 3: 10.0.9.9 my-dnsrr-service.2.am6fx47p3bropyy2dy4f8hofb.my-network
 
 ## Confirm VIP connectivity
 
-In genaral we recommend you use `dig`, `nslookup`, or another DNS query tool to
+In general we recommend you use `dig`, `nslookup`, or another DNS query tool to
 test access to the service name via DNS. Because a VIP is a logical IP, `ping`
 is not the right tool to confirm VIP connectivity.
 

@@ -28,25 +28,32 @@ The `docker logs` command is not available for this logging driver.
 
 Some options are supported by specifying `--log-opt` as many times as needed:
 
+{% raw %}
  - `fluentd-address`: specify a socket address to connect to the Fluentd daemon, ex `fluentdhost:24224` or `unix:///path/to/fluentd.sock`
  - `tag`: specify tag for fluentd message, which interpret some markup, ex `{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`
-
+{% endraw %}
 
 Configure the default logging driver by passing the
 `--log-driver` option to the Docker daemon:
 
-    dockerd --log-driver=fluentd
+```bash
+$ dockerd --log-driver=fluentd
+```
 
 To set the logging driver for a specific container, pass the
 `--log-driver` option to `docker run`:
 
-    docker run --log-driver=fluentd ...
+```bash
+$ docker run --log-driver=fluentd ...
+```
 
 Before using this logging driver, launch a Fluentd daemon. The logging driver
 connects to this daemon through `localhost:24224` by default. Use the
 `fluentd-address` option to connect to a different address.
 
-    docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+```bash
+$ docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+```
 
 If container cannot connect to the Fluentd daemon, the container stops
 immediately unless the `fluentd-async-connect` option is used.
@@ -60,10 +67,13 @@ Users can use the `--log-opt NAME=VALUE` flag to specify additional Fluentd logg
 By default, the logging driver connects to `localhost:24224`. Supply the
 `fluentd-address` option to connect to a different address. `tcp`(default) and `unix` sockets are supported.
 
-    docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
-    docker run --log-driver=fluentd --log-opt fluentd-address=tcp://fluentdhost:24224
-    docker run --log-driver=fluentd --log-opt fluentd-address=unix:///path/to/fluentd.sock
+```bash
+$ docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
 
+$ docker run --log-driver=fluentd --log-opt fluentd-address=tcp://fluentdhost:24224
+
+$ docker run --log-driver=fluentd --log-opt fluentd-address=unix:///path/to/fluentd.sock
+```
 Two of the above specify the same address, because `tcp` is default.
 
 ### tag
@@ -95,20 +105,30 @@ aggregate store.
 
 ### Testing container loggers
 
-1. Write a configuration file (`test.conf`) to dump input logs:
+1.  Write a configuration file (`test.conf`) to dump input logs:
 
-        <source>
-          @type forward
-        </source>
+    ```xml
+    <source>
+      @type forward
+    </source>
 
-        <match docker.**>
-          @type stdout
-        </match>
+    <match docker.**>
+      @type stdout
+    </match>
+    ```
 
-2. Launch Fluentd container with this configuration file:
+2.  Launch Fluentd container with this configuration file:
 
-        $ docker run -it -p 24224:24224 -v /path/to/conf/test.conf:/fluentd/etc/test.conf -e FLUENTD_CONF=test.conf fluent/fluentd:latest
+    ```bash
+    $ docker run -it \
+            -p 24224:24224 \
+            -v /path/to/conf/test.conf:/fluentd/etc/test.conf \
+            -e FLUENTD_CONF=test.conf \
+            fluent/fluentd:latest
+    ```
 
-3. Start one or more containers with the `fluentd` logging driver:
+3.  Start one or more containers with the `fluentd` logging driver:
 
-        $ docker run --log-driver=fluentd your/application
+    ```bash
+    $ docker run --log-driver=fluentd your/application
+    ```
