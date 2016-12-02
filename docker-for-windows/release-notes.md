@@ -208,6 +208,35 @@ about both kinds of releases, and download stable and beta product installers at
 
 ## Beta Release Notes
 
+### Beta 31 Release Notes (2016-12-01 1.13.0-rc2-beta31)
+
+**New**
+
+- HTTP/HTTPS proxy settings are used by the Windows Container daemon to pull images
+- TRIM support for disk (shrinks virtual disk)
+- VM's time synchronization is forced after the host wakes from sleep mode
+
+**Upgrades**
+
+- Docker 1.13.0-rc2
+- Dockerd 1.13.0-rc2 (Windows Containers)
+- Docker Compose 1.9.0
+- Docker Machine 0.9.0-rc1
+- Linux kernel 4.8.10
+
+**Bug fixes and minor changes**
+
+- VPNKit: don't permute resource records in responses
+- VPNKit: reduced the amount of log spam
+- Optimized boot process
+- Diagnostics are improved and faster
+- Log the error when the GUI fails to initialize
+- Trend Micro Office Scan made the API proxy think no drive was shared, fixed
+- Show a link to the virtualizaton documentation
+- Flush logs to file more often
+- Fixed the URL to the SMB/firewall documentation
+- Properly remove duplicate firewall rules
+
 ### Beta 30 Release Notes (2016-11-10 1.12.3-beta30)
 
 **Upgrades**
