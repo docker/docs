@@ -1,4 +1,0 @@
-#!/bin/bash -xe
-docker build -t pre_build_tests `pwd`/hooks/tests
-docker run --rm -v `pwd`:/docs pre_build_tests
-docker rmi pre_build_tests
