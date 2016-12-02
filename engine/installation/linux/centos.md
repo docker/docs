@@ -181,7 +181,7 @@ To create the `docker` group and add your user:
 3.  Add your user to `docker` group.
 
     ```bash
-    $ sudo usermod -aG docker your_username`
+    $ sudo usermod -aG docker your_username
     ```
 
 4.  Log out and log back in.
@@ -211,13 +211,15 @@ You can uninstall the Docker software with `yum`.
     ```bash
     $ yum list installed | grep docker
 
-    docker-engine.x86_64     1.7.1-0.1.el7@/docker-engine-1.7.1-0.1.el7.x86_64
+    docker-engine.x86_64                   1.12.3-1.el7.centos             @dockerrepo
+    docker-engine-selinux.noarch           1.12.3-1.el7.centos             @dockerrepo
     ```
 
 2.  Remove the package.
 
     ```bash
     $ sudo yum -y remove docker-engine.x86_64
+    $ sudo yum -y remove docker-engine-selinux.noarch
     ```
 
 	This command does not remove images, containers, volumes, or user-created
@@ -230,3 +232,4 @@ You can uninstall the Docker software with `yum`.
     ```
 
 4. Locate and delete any user-created configuration files.
+
