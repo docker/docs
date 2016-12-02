@@ -3,6 +3,6 @@ wrappedNode(label: 'linux && x86_64') {
   stage "checkout"
   checkout scm
   stage "test"
-  sh "ls -al"
-  bash hooks/pre_build
+  sh "chmod +x hooks/pre_build"
+  sh "hooks/pre_build"
 }
