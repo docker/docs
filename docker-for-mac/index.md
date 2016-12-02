@@ -159,45 +159,128 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
 4. Stop or remove containers and images.
 
-    The `nginx` webserver will continue to run in the container on that port until you stop and/or remove the container. If you want to stop the webserver, type: `docker stop webserver` and start it again with `docker start webserver`. A stopped container will not show up with `docker ps`; for that, you need to run `docker ps -a`.
+    The `nginx` webserver will continue to run in the container on that port
+    until you stop and/or remove the container. If you want to stop the
+    webserver, type: `docker stop webserver` and start it again with `docker
+    start webserver`. A stopped container will not show up with `docker ps`; for
+    that, you need to run `docker ps -a`.
 
-    To stop and remove the running container with a single command, type: `docker rm -f webserver`. This will remove the container, but not the `nginx` image. You can list local images with `docker images`. You might want to keep some images around so that you don't have to pull them again from Docker Hub. To remove an image you no longer need, use `docker rmi <imageID>|<imageName>`. For example, `docker rmi nginx`.
+    To stop and remove the running container with a single command, type:
+    `docker rm -f webserver`. This will remove the container, but not the
+    `nginx` image. You can list local images with `docker images`. You might
+    want to keep some images around so that you don't have to pull them again
+    from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
 
 **Want more example applications?** - For more example walkthroughs that include setting up  services and databases in Docker Compose, see [Example Applications](examples.md).
 
 ## Preferences
 
-Choose <img src="images/whale-x.png"> --> **Preferences** from the menu bar. You can set the following runtime options.
+Choose <img src="images/whale-x.png"> --> **Preferences** from the menu bar. You
+can set the following runtime options.
 
 #### General
 
 ![Preferences](images/settings.png)
 
-* Docker for Mac is set to **automatically start** when you log in. Uncheck the login autostart option if you don't want Docker to start when you open your session.
+##### Auto-start, update, and backups
 
-* Docker for Mac is set to **check for updates** automatically and notify you when an update is available. If an update is found, click **OK** to accept and install it (or cancel to keep the current version). If you disable the check for updates, you can still find out about updates manually by choosing <img src="images/whale-x.png"> -> **Check for Updates**
+* Docker for Mac is set to **automatically start** when you log in. Uncheck the login autostart option if you don't want Docker to start when you open your
+session.
+
+* Docker for Mac is set to **check for updates** automatically and notify you when an update is available. If an update is found, click **OK** to accept and
+install it (or cancel to keep the current version). If you disable the check for
+updates, you can still find out about updates manually by choosing <img
+src="images/whale-x.png"> -> **Check for Updates**
 
 * Check **Exclude VM from Time Machine backups** to prevent Time Machine from backing up the Docker for Mac virtual machine.
 
-* **CPUs** - By default, Docker for Mac is set to use 2 processors. You can increase processing power for the app by setting this to a higher number, or lower it to have Docker for Mac use fewer computing resources.
+  >**Tip: Beta dialogs** &mdash;  Starting with Beta 31, an option to auto-send
+  usage data is also on the General dialog. In Stable releases, the option is
+  still on the Privacy tab. For now, both Stable and Beta users can read more
+  about usage data settings in the [Privacy](#Privacy) topic.
 
-* **Memory** - By default, Docker for Mac is set to use `2` GB runtime memory, allocated from the total available memory on your Mac. You can increase the RAM on the app to get faster performance by setting this number higher (for example to `3`) or lower (to `1`) if you want Docker for Mac to use less memory.
+##### CPUs
+
+By default, Docker for Mac is set to use 2 processors. You can increase
+processing power for the app by setting this to a higher number, or lower it to
+have Docker for Mac use fewer computing resources.
+
+##### Memory
+
+By default, Docker for Mac is set to use `2` GB runtime memory, allocated from
+the total available memory on your Mac. You can increase the RAM on the app to
+get faster performance by setting this number higher (for example to `3`) or
+lower (to `1`) if you want Docker for Mac to use less memory.
+
+>**Tip: Beta dialogs** &mdash; Starting with Beta 31, CPUs and Memory settings
+are on the Advanced dialog, as shown here.
+>
+>![CPUs and Memory settings UI
+starting at Beta 31](images/settings-advanced-beta.png)
 
 #### Advanced
 
 ![Advanced Preference settings-advanced](images/settings-advanced.png)
 
-* **Adding registries** - As an alternative to using [Docker Hub](https://hub.docker.com/) to store your public or private images or [Docker
-Trusted Registry](/docker-trusted-registry/overview/),
-you can use Docker to set up your own insecure
-[registry](/registry/introduction/). Add URLs for
-insecure registries and registry mirrors on which to host your images. (See
-also, [How do I add custom CA
-certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in the FAQs.)
+##### Custom Registries
 
-* **HTTP proxy settings** - Docker for Mac will detect HTTP/HTTPS Proxy Settings and automatically propagate these to Docker and to your containers.
-For example, if you set your proxy settings to `http://proxy.example.com`, Docker will use this proxy when pulling containers.
+As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
+public or private images or [Docker Trusted
+Registry](/docker-trusted-registry/overview/), you can use Docker to set up your
+own insecure [registry](/registry/introduction/). Add URLs for insecure
+registries and registry mirrors on which to host your images. (See also, [How do
+I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in
+the FAQs.)
 
+>**Tip: Beta dialogs** &mdash;  Starting with Beta 31, options to set up your
+own registries are available as part of a new daemon tab. See [Docker
+daemon](#docker-daemon-beta-feature)).
+
+##### HTTP proxy settings
+
+Docker for Mac will detect HTTP/HTTPS Proxy Settings and automatically propagate
+these to Docker and to your containers. For example, if you set your proxy
+settings to `http://proxy.example.com`, Docker will use this proxy when pulling
+containers.
+
+>**Tip: Beta dialogs** &mdash;  Starting with Beta 31, HTTP proxy settings are provided on a dedicated dialog, as shown below.
+>
+>![Proxies settings](images/settings-proxies-beta.png)
+
+#### Docker Daemon (Beta feature)
+
+Starting with Beta 31, configuration options on the Docker daemon move to their
+own **Daemon** tab, including basic and advanced options.
+
+##### Daemon Basic (experimental mode and registries)
+
+By default, Docker for Mac Beta releases use the experimental version of Docker
+Engine, described in the <a
+href="https://github.com/docker/docker/tree/master/experimental"
+target="_blank">Docker Experimental Features README</a> on GitHub. Starting with
+Beta 31, you can toggle **experimental mode** on and off. If you toggle it off,
+Docker for Mac Beta uses the current generally available release of Docker
+Engine, the same as Stable Docker for Mac versions uses.
+
+You can use Docker to set up your own insecure
+[registry](/registry/introduction/). For details on this, see [Custom
+Registries](#custom-registries).
+
+![Daemon](images/settings-advanced-experimental-beta.png)
+
+##### Daemon Advanced (JSON configuration file)
+
+On the **Daemon -> Advanced dialog**, you can directly configure the daemon from
+the JSON file, and determine entirely how your containers will run. For a full
+list of options on the Docker daemon, see <a
+href="https://docs.docker.com/engine/reference/commandline/dockerd/"
+target="_blank">daemon</a> in the Docker Engine command line reference.
+
+After editing the daemon configuration , click **Apply & Restart** to save it
+and reboot Docker. Or, to cancel changes, click another preference tab, then
+choose to discard or not apply changes when asked.
+
+![Docker Daemon](images/settings-daemon-beta.png)
 
 #### File sharing
 
@@ -230,6 +313,8 @@ You can set Docker for Mac to auto-send diagnostics, crash reports, and usage da
 Uncheck any of the options to opt out and prevent auto-send of data. Docker may prompt for more information in some cases, even with auto-send enabled.
 
 ![Privacy](images/privacy.png)
+
+>**Tip: Beta dialogs** &mdash;  Starting with Beta 31, options to enable or disable auto-send of usage data are on the [General](#general) dialog.
 
 Also, you can enable or disable these auto-reporting settings with one click on the information popup when you first start Docker.
 
