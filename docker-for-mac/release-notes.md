@@ -202,6 +202,33 @@ events or unexpected unmounts.
 
 ## Beta Release Notes
 
+### Beta 31 Release Notes (2016-12-01 1.13.0-rc2-beta31)
+
+**New**
+
+- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [[Daemon Advanced (JSON configuration file)](index.md#daemon-advanced-json-configuration-file).
+
+- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](index.md#daemon-basic-experimental-mode-and-registries).
+
+**Upgrades**
+
+- Docker 1.13.0-rc2
+- Docker Compose 1.9.0
+- Docker Machine 0.9.0-rc1
+- Linux kernel 4.8.10
+
+**Bug fixes and minor improvements**
+
+- Fixed bug where search domain could be read as `DomainName`
+- VPNKit: don't permute resource records in responses
+- VPNKit: reduced the amount of log spam
+- Dedicated preference pane for HTTP proxy settings
+- Dedicated preference pane for CPU & Memory computing resources
+- Privacy settings moved to the general preference pane
+- Fixed an issue where proxy settings were erased if registries or mirrors changed.
+- Tab key is now cycling through tabs while setting proxy parameters
+- Fixed an issue where the preference pane disappeared when the welcome whale menu was closed
+
 ### Beta 30 Release Notes (2016-11-10 1.12.3-beta30)
 
 **New**
