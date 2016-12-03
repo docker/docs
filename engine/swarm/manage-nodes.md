@@ -134,6 +134,20 @@ The labels you set for nodes using docker node update apply only to the node
 entity within the swarm. Do not confuse them with the docker daemon labels for
 [dockerd](../userguide/labels-custom-metadata.md#daemon-labels).
 
+Therefore, node labels can be used to limit critical tasks to nodes that meet
+certain requirements.  For example, schedule only on machines where special
+workloads should be run, such as machines that meet [PCI-SS
+compliance](https://www.pcisecuritystandards.org/).
+
+A compromised worker could not compromise these special workloads because it
+cannot change node labels.
+
+Engine labels, however, are still useful because some features that do not
+affect secure orchestration of containers might be better off set in a
+decentralized manner. For instance, an engine could have a label to indicate
+that it has a certain type of disk device, which may not be relevant to security
+directly. These labels are more easily "trusted" by the swarm orchestrator.
+
 Refer to the `docker service create` [CLI reference](../reference/commandline/service_create.md)
 for more information about service constraints.
 
