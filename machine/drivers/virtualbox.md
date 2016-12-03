@@ -41,9 +41,12 @@ The size of the VM's disk can be configured this way:
 -   `--virtualbox-hostonly-nictype`: Host Only Network Adapter Type. Possible values are are '82540EM' (Intel PRO/1000), 'Am79C973' (PCnet-FAST III) and 'virtio' Paravirtualized network adapter.
 -   `--virtualbox-hostonly-nicpromisc`: Host Only Network Adapter Promiscuous Mode. Possible options are deny , allow-vms, allow-all
 -   `--virtualbox-hostonly-no-dhcp`: Disable the Host Only DHCP Server
+-   `--virtualbox-nat-nictype`: Specify the NAT Network Adapter Type. Possible values are are '82540EM' (Intel PRO/1000), 'Am79C973' (PCnet-FAST III) and 'virtio' Paravirtualized network adapter.
 -   `--virtualbox-no-share`: Disable the mount of your home directory
 -   `--virtualbox-no-dns-proxy`: Disable proxying all DNS requests to the host (Boolean value, default to false)
 -   `--virtualbox-no-vtx-check`: Disable checking for the availability of hardware virtualization before the vm is started
+-   `--virtualbox-ui-type`: Specify the UI Type: (gui|sdl|headless|separate)
+-   `--virtualbox-share-folder`: Mount the specified directory instead of the default home location. Format: dir:name
 
 The `--virtualbox-boot2docker-url` flag takes a few different forms. By
 default, if no value is specified for this flag, Machine will check locally for
@@ -85,9 +88,12 @@ upper bound of `192.168.24.254`.
 | `--virtualbox-hostonly-nictype`      | `VIRTUALBOX_HOSTONLY_NIC_TYPE`     | `82540EM`                |
 | `--virtualbox-hostonly-nicpromisc`   | `VIRTUALBOX_HOSTONLY_NIC_PROMISC`  | `deny`                   |
 | `--virtualbox-hostonly-no-dhcp`      | `VIRTUALBOX_HOSTONLY_NO_DHCP`      | `false`                  |
+| `--virtualbox-nat-nictype`           | `VIRTUALBOX_NAT_NICTYPE`           | `82540EM`                |
 | `--virtualbox-no-share`              | `VIRTUALBOX_NO_SHARE`              | `false`                  |
 | `--virtualbox-no-dns-proxy`          | `VIRTUALBOX_NO_DNS_PROXY`          | `false`                  |
 | `--virtualbox-no-vtx-check`          | `VIRTUALBOX_NO_VTX_CHECK`          | `false`                  |
+| `--virtualbox-ui-type`               | `VIRTUALBOX_UI_TYPE`               | `headless`               |
+| `--virtualbox-share-folder`          | `VIRTUALBOX_SHARE_FOLDER`          | -                        |
 
 ## Known Issues
 

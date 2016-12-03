@@ -26,7 +26,7 @@ to authenticate with AWS:
 1.  EC2 Instance Role
 
 For more information, see the [AWS SDK for Go Developer's Guide](http://docs.aws.amazon.com/sdk-for-go/v1/developerguide/configuring-sdk.html).
- 
+
 ### Command line flags
 
 The first way to specify credentials is with the flags `--amazonec2-access-key` and `--amazonec2-secret-key` on the command line:
@@ -90,39 +90,45 @@ assigned to the instance if they are configured.
 -   `--amazonec2-use-ebs-optimized-instance`: Create an EBS Optimized Instance, instance type must support it.
 -   `--amazonec2-ssh-keypath`: Path to Private Key file to use for instance. Matching public key with .pub extension should exist
 -   `--amazonec2-retries`:  Set retry count for recoverable failures (use -1 to disable)
+-   `--amazonec2-endpoint`:  Optional endpoint URL (hostname only or fully qualified URI)
+-   `--amazonec2-insecure-transport`:  Disable SSL when sending requests
+-   `--amazonec2-userdata`:  path to file with cloud-init user data
 
 
 #### Environment variables and default values:
 
-| CLI option                               | Environment variable    | Default          |
-| ---------------------------------------- | ----------------------- | ---------------- |
-| `--amazonec2-access-key`                 | `AWS_ACCESS_KEY_ID`     | -                |
-| `--amazonec2-secret-key`                 | `AWS_SECRET_ACCESS_KEY` | -                |
-| `--amazonec2-session-token`              | `AWS_SESSION_TOKEN`     | -                |
-| `--amazonec2-ami`                        | `AWS_AMI`               | `ami-c60b90d1`   |
-| `--amazonec2-region`                     | `AWS_DEFAULT_REGION`    | `us-east-1`      |
-| `--amazonec2-vpc-id`                     | `AWS_VPC_ID`            | -                |
-| `--amazonec2-zone`                       | `AWS_ZONE`              | `a`              |
-| `--amazonec2-subnet-id`                  | `AWS_SUBNET_ID`         | -                |
-| `--amazonec2-security-group`             | `AWS_SECURITY_GROUP`    | `docker-machine` |
-| `--amazonec2-open-port`                  | -                       | -                |
-| `--amazonec2-tags`                       | `AWS_TAGS`              | -                |
-| `--amazonec2-instance-type`              | `AWS_INSTANCE_TYPE`     | `t2.micro`       |
-| `--amazonec2-keypair-name`               | `AWS_KEYPAIR_NAME`      | -                |
-| `--amazonec2-device-name`                | `AWS_DEVICE_NAME`       | `/dev/sda1`      |
-| `--amazonec2-root-size`                  | `AWS_ROOT_SIZE`         | `16`             |
-| `--amazonec2-volume-type`                | `AWS_VOLUME_TYPE`       | `gp2`            |
-| `--amazonec2-iam-instance-profile`       | `AWS_INSTANCE_PROFILE`  | -                |
-| `--amazonec2-ssh-user`                   | `AWS_SSH_USER`          | `ubuntu`         |
-| `--amazonec2-request-spot-instance`      | -                       | `false`          |
-| `--amazonec2-spot-price`                 | -                       | `0.50`           |
-| `--amazonec2-block-duration-minutes`     | -                       | -                |
-| `--amazonec2-use-private-address`        | -                       | `false`          |
-| `--amazonec2-private-address-only`       | -                       | `false`          |
-| `--amazonec2-monitoring`                 | -                       | `false`          |
-| `--amazonec2-use-ebs-optimized-instance` | -                       | `false`          |
-| `--amazonec2-ssh-keypath`                | `AWS_SSH_KEYPATH`       | -                |
-| `--amazonec2-retries`                    | -                       | `5`              |
+| CLI option                               | Environment variable     | Default          |
+| ---------------------------------------- | ------------------------ | ---------------- |
+| `--amazonec2-access-key`                 | `AWS_ACCESS_KEY_ID`      | -                |
+| `--amazonec2-secret-key`                 | `AWS_SECRET_ACCESS_KEY`  | -                |
+| `--amazonec2-session-token`              | `AWS_SESSION_TOKEN`      | -                |
+| `--amazonec2-ami`                        | `AWS_AMI`                | `ami-c60b90d1`   |
+| `--amazonec2-region`                     | `AWS_DEFAULT_REGION`     | `us-east-1`      |
+| `--amazonec2-vpc-id`                     | `AWS_VPC_ID`             | -                |
+| `--amazonec2-zone`                       | `AWS_ZONE`               | `a`              |
+| `--amazonec2-subnet-id`                  | `AWS_SUBNET_ID`          | -                |
+| `--amazonec2-security-group`             | `AWS_SECURITY_GROUP`     | `docker-machine` |
+| `--amazonec2-open-port`                  | -                        | -                |
+| `--amazonec2-tags`                       | `AWS_TAGS`               | -                |
+| `--amazonec2-instance-type`              | `AWS_INSTANCE_TYPE`      | `t2.micro`       |
+| `--amazonec2-keypair-name`               | `AWS_KEYPAIR_NAME`       | -                |
+| `--amazonec2-device-name`                | `AWS_DEVICE_NAME`        | `/dev/sda1`      |
+| `--amazonec2-root-size`                  | `AWS_ROOT_SIZE`          | `16`             |
+| `--amazonec2-volume-type`                | `AWS_VOLUME_TYPE`        | `gp2`            |
+| `--amazonec2-iam-instance-profile`       | `AWS_INSTANCE_PROFILE`   | -                |
+| `--amazonec2-ssh-user`                   | `AWS_SSH_USER`           | `ubuntu`         |
+| `--amazonec2-request-spot-instance`      | -                        | `false`          |
+| `--amazonec2-spot-price`                 | -                        | `0.50`           |
+| `--amazonec2-block-duration-minutes`     | -                        | -                |
+| `--amazonec2-use-private-address`        | -                        | `false`          |
+| `--amazonec2-private-address-only`       | -                        | `false`          |
+| `--amazonec2-monitoring`                 | -                        | `false`          |
+| `--amazonec2-use-ebs-optimized-instance` | -                        | `false`          |
+| `--amazonec2-ssh-keypath`                | `AWS_SSH_KEYPATH`        | -                |
+| `--amazonec2-retries`                    | -                        | `5`              |
+| `--amazonec2-endpoint`                   | `AWS_ENDPOINT`           | -                |
+| `--amazonec2-insecure-transport`         | `AWS_INSECURE_TRANSPORT` | -                |
+| `--amazonec2-userdata`                   | `AWS_USERDATA`           | -                |
 
 ## Default AMIs
 
@@ -177,7 +183,7 @@ To create a machine with a non-default vpc-id:
 This example assumes the VPC ID was found in the `a` availability zone. Use the`--amazonec2-zone` flag to specify a zone other than the `a` zone. For example, `--amazonec2-zone c` signifies `us-east1-c`.
 
 ## VPC Connectivity
-Machine uses SSH to complete the set up of instances in EC2 and requires the ability to access the instance directly.  
+Machine uses SSH to complete the set up of instances in EC2 and requires the ability to access the instance directly.
 
 If you use the flag `--amazonec2-private-address-only`, you will need to ensure that you have some method of accessing the new instance from within the internal network of the VPC (e.g. a corporate VPN to the VPC, a VPN instance inside the VPC or using Docker-machine from an instance within your VPC).
 

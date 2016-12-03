@@ -22,13 +22,14 @@ Create machines on [Rackspace cloud](http://www.rackspace.com/cloud)
 -   `--rackspace-api-key`: **required** Rackspace API key.
 -   `--rackspace-region`: **required** Rackspace region name.
 -   `--rackspace-endpoint-type`: Rackspace endpoint type (`adminURL`, `internalURL` or the default `publicURL`).
--   `--rackspace-image-id`: Rackspace image ID. Default: Ubuntu 15.10 (Wily Werewolf) (PVHVM).
+-   `--rackspace-image-id`: Rackspace image ID. Default: Ubuntu 16.04 LTS (Xenial Xerus) (PVHVM).
 -   `--rackspace-flavor-id`: Rackspace flavor ID. Default: General Purpose 1GB.
 -   `--rackspace-ssh-user`: SSH user for the newly booted machine.
 -   `--rackspace-ssh-port`: SSH port for the newly booted machine.
 -   `--rackspace-docker-install`: Set if Docker has to be installed on the machine.
+-   `--rackspace-active-timeout`: Rackspace active timeout
 
-The Rackspace driver will use `59a3fadd-93e7-4674-886a-64883e17115f` (Ubuntu 15.10) by default.
+The Rackspace driver will use `821ba5f4-712d-4ec8-9c65-a3fa4bc500f9` (Ubuntu 16.04 LTS) by default.
 
 #### Environment variables and default values
 
@@ -36,10 +37,11 @@ The Rackspace driver will use `59a3fadd-93e7-4674-886a-64883e17115f` (Ubuntu 15.
 | ---------------------------- | -------------------- | -------------------------------------- |
 | **`--rackspace-username`**   | `OS_USERNAME`        | -                                      |
 | **`--rackspace-api-key`**    | `OS_API_KEY`         | -                                      |
-| **`--rackspace-region`**     | `OS_REGION_NAME`     | -                                      |
+| **`--rackspace-region`**     | `OS_REGION_NAME`     | `IAD` (Northern Virginia)              |
 | `--rackspace-endpoint-type`  | `OS_ENDPOINT_TYPE`   | `publicURL`                            |
-| `--rackspace-image-id`       | -                    | `59a3fadd-93e7-4674-886a-64883e17115f` |
+| `--rackspace-image-id`       | `OS_IMAGE_ID`        | `821ba5f4-712d-4ec8-9c65-a3fa4bc500f9` |
 | `--rackspace-flavor-id`      | `OS_FLAVOR_ID`       | `general1-1`                           |
-| `--rackspace-ssh-user`       | -                    | `root`                                 |
-| `--rackspace-ssh-port`       | -                    | `22`                                   |
+| `--rackspace-ssh-user`       | `OS_SSH_USER`        | `root`                                 |
+| `--rackspace-ssh-port`       | `OS_SSH_PORT`        | `22`                                   |
 | `--rackspace-docker-install` | -                    | `true`                                 |
+| `--rackspace-active-timeout` | `OS_ACTIVE_TIMEOUT`  | `300`                                  |
