@@ -145,7 +145,7 @@ You can also inspect your container to see where it is connected:
     {"my-bridge-network":{"NetworkID":"7d86d31b1478e7cca9ebed7e73aa0fdeec46c5ca29497431d3007d2d9e15ed99",
     "EndpointID":"508b170d56b2ac9e4ef86694b0a76a22dd3df1983404f7321da5649645bf7043","Gateway":"172.18.0.1","IPAddress":"172.18.0.2","IPPrefixLen":16,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"02:42:ac:11:00:02"}}
 
-Now, go ahead and start your by now familiar web application. This time leave off the `-P` flag and also don't specify a network.
+Now, go ahead and start your by now familiar web application. This time don't specify a network.
 
     $ docker run -d --name web training/webapp python app.py
 
