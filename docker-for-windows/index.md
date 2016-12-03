@@ -80,6 +80,8 @@ Hyper-V.
 detail see [Virtualization must be
 enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
 <p />
+* Nested virtualization scenarios, such as running Docker for Windows on a VMWare or Parallels instance, might work, but come with no guarantees (i.e., not officially supported).
+<p />
 * **What the Docker for Windows install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
 
 ### About Windows containers and Windows Server 2016
