@@ -40,13 +40,13 @@ The `docker-machine create` command typically requires that you specify, at a mi
 
 For convenience, `docker-machine` will use sensible defaults for choosing settings such as the image that the server is based on, but you override the defaults using the respective flags (e.g. `--digitalocean-image`). This is useful if, for example, you want to create a cloud server with a lot of memory and CPUs (by default `docker-machine` creates a small server).
 
-For a full list of the flags/settings available and their defaults, see the output of `docker-machine create -h` at the command line, the <a href="../reference/create/" target="_blank">create</a> command in the Machine <a href="../reference/" target="_blank">command line reference</a>, and <a href="https://docs.docker.com/machine/drivers/os-base/" target="_blank">driver options and operating system defaults</a> in the Machine driver reference.
+For a full list of the flags/settings available and their defaults, see the output of `docker-machine create -h` at the command line, the <a href="../machine/reference/create/" target="_blank">create</a> command in the Machine <a href="../machine/reference/" target="_blank">command line reference</a>, and <a href="https://docs.docker.com/machine/drivers/os-base/" target="_blank">driver options and operating system defaults</a> in the Machine driver reference.
 
 ## Drivers for cloud providers
 
 When you install Docker Machine, you get a set of drivers for various cloud providers (like Amazon Web Services, Digital Ocean, or Microsoft Azure) and local providers (like Oracle VirtualBox, VMWare Fusion, or Microsoft Hyper-V).
 
-See <a href="../drivers/" target="_blank">Docker Machine driver reference</a> for details on the drivers, including required flags and configuration options (which vary by provider).
+See <a href="../machine/drivers/" target="_blank">Docker Machine driver reference</a> for details on the drivers, including required flags and configuration options (which vary by provider).
 
 ## 3rd-party driver plugins
 
