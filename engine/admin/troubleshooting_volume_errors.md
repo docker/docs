@@ -1,7 +1,6 @@
 ---
 description: Troubleshooting volume errors
-keywords:
-- cadvisor, troubleshooting, volumes, bind-mounts
+keywords: cadvisor, troubleshooting, volumes, bind-mounts
 title: Troubleshoot volume errors
 ---
 

@@ -1,10 +1,6 @@
 ---
 description: Lists the installation methods
-keywords:
-- docker
-- engine
-- install
-- linux
+keywords: docker, engine, install, linux
 title: Install Docker on Linux distributions
 ---
 
