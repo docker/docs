@@ -138,15 +138,16 @@ function hookupTOCEvents()
           return b.score - a.score;
         });
       }
-      //console.log(rankedResults);
       if (results.length > 0)
       {
         autoCompleteShowingID = -1;
         var resultsShown = 0;
         var resultsOutput = new Array();
         resultsOutput.push("<div id='autoContainer'>")
-        for (i=0; i < autoCompleteResultLimit; i++)
+        //console.log(results);
+        for (i=0; i < autoCompleteResultLimit && i < results.length; i++)
         {
+          //console.log(i, "of", autoCompleteResultLimit, "is underway");
           displayingAutcompleteResults.push(results[i].topic); //log results to global array
           resultsOutput.push("<div class='autoCompleteResult' id='autoCompleteResult" + i + "' onclick='loadPage(\"" + metadata.pages[results[i].topic].url + "\")'>");
           resultsOutput.push("<ul class='autocompleteList'>");
