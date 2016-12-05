@@ -9,7 +9,7 @@ redirect_from:
 title: Get started with Docker
 ---
 
-This tutorial is a for non-technical users who are interested in learning more about Docker. By following these steps, you'll learn fundamental Docker features while working through some simple tasks.
+This is a tutorial for non-technical users who are interested in learning more about Docker. By following these steps, you'll learn fundamental Docker features while working through some simple tasks.
 
 Depending on how you got here, you may or may not have already downloaded Docker for your platform and installed it.
 
