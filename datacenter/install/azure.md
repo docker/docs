@@ -38,9 +38,9 @@ and [Swarm Raft Page](https://docs.docker.com/engine/swarm/raft/).
 * Uses the [Docker CS 1.12 Engine support for OMS Linux Agents](https://github.com/Microsoft/OMS-Agent-for-Linux/releases)
 * Latest [docker-compose](https://github.com/docker/compose/releases) and [docker-machine](https://github.com/docker/machine/releases) available.
 * Dashboard URL
- * http://|UCP Controller Nodes LoadBalancer Full DNS IP name|.|region of the Resource Group|.cloudapp.azure.com
+ http://|UCP Controller Nodes LoadBalancer Full DNS IP name|.|region of the Resource Group|.cloudapp.azure.com
    * The Above is the FQDN of the LBR or Public IP for UCP Controller or Managers
- * http://|DTR worker Nodes LoadBalancer Full DNS IP name|.|region of the Resource Group|.cloudapp.azure.com
+http://|DTR worker Nodes LoadBalancer Full DNS IP name|.|region of the Resource Group|.cloudapp.azure.com
    * The Above is the FQDN of the LBR or Public IP for DTR
 * All passwords have been disabled in the nodes and one can only use public rsa_id to ssh to the nodes.
 
@@ -56,7 +56,7 @@ A Minimal Fresh topology with minimum 3 Worker Managers, minimum 2 worker nodes,
 ![Azure DDC Miminal Topology](../images/MinimalFresh2.png)
 
 ##### The Minimal Topology (Minimum 3 Worker Manager Nodes for valid Raft HA and minimum 2 worker nodes with 2 extra for DTR and Replica)
- As from https://resources.azure.com 
+ As from [https://resources.azure.com](https://resources.azure.com) 
  
 <img src="../images/MinimalTopology.png" width="416" height="800" />
  
