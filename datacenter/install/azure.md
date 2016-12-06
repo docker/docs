@@ -36,11 +36,11 @@ and [Swarm Raft Page](https://docs.docker.com/engine/swarm/raft/).
 * **Uses the new public tar.gz from ~~[here](https://packages.docker.com/caas/ucp-2.0.0-beta1_dtr-2.1.0-beta1.tar.gz)~~ ~~[here](https://s3.amazonaws.com/packages.docker.com/caas/ucp-2.0.0-beta3_dtr-2.1.0-beta3.tar.gz)~~ ~~[here](https://packages.docker.com/caas/ucp-2.0.0-beta3_dtr-2.1.0-beta3.tar.gz)~~ ~~[here](https://packages.docker.com/caas/ucp-2.0.0-beta4_dtr-2.1.0-beta4.tar.gz)~~ ~~[Now GAed here](https://packages.docker.com/caas/ucp-2.0.0_dtr-2.1.0.tar.gz)~~ ~~[Now GAed and with ucp:2.0.1 here](https://packages.docker.com/caas/ucp-2.0.1_dtr-2.1.0.tar.gz)~~ [Now GAed and with ucp:2.0.1 and dtr:2.1.1 here](https://packages.docker.com/caas/ucp-2.0.1_dtr-2.1.1.tar.gz) for changes using the Raft Protocol and Auto HA for private beta (to be GAed DDC) and native swarm mode orchestration on MS Azure. DDC ~~Private Beta docs are [here](https://beta.docker.com/docs/ddc) and~~ GA Guides are [here](https://docs.docker.com/datacenter/)**
 * New [Go-based Linux CustomScript Extension being used](https://github.com/Azure/custom-script-extension-linux) 
 * Uses the [Docker CS 1.12 Engine support for OMS Linux Agents](https://github.com/Microsoft/OMS-Agent-for-Linux/releases)
-* Latest [docker-compose](https://github.com/docker/machine/releases) and [docker-machine](https://github.com/docker/machine/releases) available.
+* Latest [docker-compose](https://github.com/docker/compose/releases) and [docker-machine](https://github.com/docker/machine/releases) available.
 * Dashboard URL
- * http://{{UCP Controller Nodes LoadBalancer Full DNS IP name}}.{{region of the Resource Group}}.cloudapp.azure.com
+ * http://|UCP Controller Nodes LoadBalancer Full DNS IP name|.|region of the Resource Group|.cloudapp.azure.com
    * The Above is the FQDN of the LBR or Public IP for UCP Controller or Managers
- * http://{{DTR worker Nodes LoadBalancer Full DNS IP name}}.{{region of the Resource Group}}.cloudapp.azure.com
+ * http://|DTR worker Nodes LoadBalancer Full DNS IP name|.|region of the Resource Group|.cloudapp.azure.com
    * The Above is the FQDN of the LBR or Public IP for DTR
 * All passwords have been disabled in the nodes and one can only use public rsa_id to ssh to the nodes.
 
