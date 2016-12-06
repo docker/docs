@@ -1,9 +1,8 @@
 ---
-title: Install Docker Trusted Registry offline
 description: Learn how to install Docker Trusted Registry on a machine with no internet
   access.
-keywords:
-- docker, registry, install, offline
+keywords: docker, registry, install, offline
+title: Install Docker Trusted Registry offline
 ---
 
 The procedure to install Docker Trusted Registry on a node is the same,

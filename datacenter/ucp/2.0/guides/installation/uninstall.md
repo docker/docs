@@ -1,8 +1,7 @@
 ---
-title: Uninstall UCP
 description: Learn how to uninstall a Docker Universal Control Plane cluster.
-keywords:
-- docker, ucp, uninstall
+keywords: docker, ucp, uninstall
+title: Uninstall UCP
 ---
 
 Docker UCP is designed to scale as your applications grow in size and usage.

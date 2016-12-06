@@ -1,8 +1,7 @@
 ---
-title: Web-based access
 description: Learn how to access Docker Universal Control Plane from the web browser.
-keywords:
-- docker, ucp, web, administration
+keywords: docker, ucp, web, administration
+title: Web-based access
 ---
 
 Docker Universal Control Plane allows you to manage your cluster in a visual

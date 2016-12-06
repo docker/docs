@@ -1,8 +1,7 @@
 ---
-title: docker/dtr overview
-keywords:
-- docker, dtr, install, uninstall, configure
 description: Learn about the commands available in the docker/dtr image.
+keywords: docker, dtr, install, uninstall, configure
+title: docker/dtr overview
 ---
 
 This tool has commands to install, configure, and backup Docker
@@ -34,4 +33,3 @@ docker run -it --rm docker/dtr \
 |`upgrade`| Upgrade a v2.0.0 or later cluster to this version of DTR|
 |`dumpcerts`| Dump out the TLS certificates used by this DTR instance|
 |`images`| Lists all the images necessary to install DTR|
-

@@ -1,8 +1,7 @@
 ---
-title: Pull an image from DTR
 description: Learn how to pull an image from Docker Trusted Registry.
-keywords:
-- docker, registry, images, pull
+keywords: docker, registry, images, pull
+title: Pull an image from DTR
 ---
 
 Pulling an image from Docker Trusted Registry is the same as pulling an image

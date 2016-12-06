@@ -1,8 +1,7 @@
 ---
-title: Troubleshoot Docker Trusted Registry
 description: Learn how to troubleshoot your DTR installation.
-keywords:
-- docker, registry, monitor, troubleshoot
+keywords: docker, registry, monitor, troubleshoot
+title: Troubleshoot Docker Trusted Registry
 ---
 
 High availability in DTR depends on having overlay networking working in UCP.

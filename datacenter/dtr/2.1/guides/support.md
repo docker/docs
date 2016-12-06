@@ -1,10 +1,8 @@
 ---
-title: Get support for DTR
 description: Your Docker subscription gives you access to prioritized support. You
   can file tickets via email, your the support portal.
-keywords:
-- Docker, support
-- help
+keywords: Docker, support, help
+title: Get support for DTR
 ---
 
 Your Docker Data Center, or Docker Trusted Registry subscription gives you

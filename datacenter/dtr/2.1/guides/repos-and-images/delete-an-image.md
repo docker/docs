@@ -1,8 +1,7 @@
 ---
-title: Delete an image
 description: Learn how to delete images from your repositories on Docker Trusted Registry.
-keywords:
-- docker, registry, repository, delete, image
+keywords: docker, registry, repository, delete, image
+title: Delete an image
 ---
 
 To delete an image, go to the **DTR web UI**, and navigate to the image

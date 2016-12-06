@@ -1,8 +1,7 @@
 ---
-title: docker/ucp id
 description: Print the ID of UCP running on this node
-keywords:
-- docker, dtr, cli, id
+keywords: docker, dtr, cli, id
+title: docker/ucp id
 ---
 
 Print the ID of UCP running on this node
@@ -26,4 +25,3 @@ matches what you see when running the 'docker info' command while using
 a client bundle.
 
 This ID is used by other commands as confirmation.
-

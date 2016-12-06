@@ -1,8 +1,7 @@
 ---
-title: Integrate with Docker Trusted Registry
 description: Integrate UCP with Docker Trusted Registry
-keywords:
-- trusted, registry, integrate, UCP, DTR
+keywords: trusted, registry, integrate, UCP, DTR
+title: Integrate with Docker Trusted Registry
 ---
 
 Docker UCP integrates out of the box with Docker Trusted Registry (DTR). This

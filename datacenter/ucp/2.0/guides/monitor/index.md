@@ -1,9 +1,8 @@
 ---
-title: Monitor your cluster
 description: Monitor your Docker Universal Control Plane installation, and learn how
   to troubleshoot it.
-keywords:
-- Docker, UCP, troubleshoot
+keywords: Docker, UCP, troubleshoot
+title: Monitor your cluster
 ---
 
 This article gives you an overview of how to monitor your Docker UCP
