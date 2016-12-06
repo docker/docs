@@ -1279,6 +1279,16 @@ string. In the example above, if `EXTERNAL_PORT` is not set, the value for the
 port mapping is `:5000` (which is of course an invalid port mapping, and will
 result in an error when attempting to create the container).
 
+You can set default values for environment variables using a
+[`.env` file](env-file.md), which Compose will automatically look for. Values
+set in the shell environment will override those set in the `.env` file.
+
+    $ unset EXTERNAL_PORT
+    $ echo "EXTERNAL_PORT=6000" > .env
+    $ docker-compose up          # EXTERNAL_PORT will be 6000
+    $ export EXTERNAL_PORT=7000
+    $ docker-compose up          # EXTERNAL_PORT will be 7000
+
 Both `$VARIABLE` and `${VARIABLE}` syntax are supported.
 Additionally when using the [2.1 file format](compose-file.md#version-21), it
 is possible to provide inline default values using typical shell syntax:
