@@ -145,7 +145,7 @@ To install the `linux-image-extra-*` packages:
     $ sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual
     ```
 
-4.  Go ahead and [install Docker](ubuntulinux.md#install).
+4.  Go ahead and [install Docker](ubuntulinux.md#install-the-latest-version).
 
 #### Ubuntu Precise 12.04 (LTS)
 
@@ -186,7 +186,7 @@ To upgrade your kernel and install the additional packages, do the following:
     ```
 
 5.  After your system reboots, go ahead and
-    [install Docker](ubuntulinux.md#install).
+    [install Docker](ubuntulinux.md#install-the-latest-version).
 
 ## Install the latest version
 
