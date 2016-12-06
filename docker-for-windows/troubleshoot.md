@@ -50,8 +50,7 @@ can use in email or the forum to reference the upload.
 
 Currently, `inotify` does not work on Docker for Windows. This will become
 evident, for example, when an application needs to read/write to a
-container across a mounted drive. This is a known issue that the team is working
-on. Below is a temporary workaround, and a link to the issue.
+container across a mounted drive. Instead of relying on filesystem inotify, we recommend using polling features for your framework or programming language.
 
 * **Workaround for nodemon and Node.js** - If you are using [nodemon](https://github.com/remy/nodemon) with  `Node.js`, try the fallback
 polling mode described here: [nodemon isn't restarting node
