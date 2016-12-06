@@ -39,8 +39,11 @@ and [Swarm Raft Page](https://docs.docker.com/engine/swarm/raft/).
 * Latest [docker-compose](https://github.com/docker/compose/releases) and [docker-machine](https://github.com/docker/machine/releases) available.
 * Dashboard URL
  http://|UCP Controller Nodes LoadBalancer Full DNS IP name|.|region of the Resource Group|.cloudapp.azure.com
+ 
    * The Above is the FQDN of the LBR or Public IP for UCP Controller or Managers
+
 http://|DTR worker Nodes LoadBalancer Full DNS IP name|.|region of the Resource Group|.cloudapp.azure.com
+
    * The Above is the FQDN of the LBR or Public IP for DTR
 * All passwords have been disabled in the nodes and one can only use public rsa_id to ssh to the nodes.
 
