@@ -3,6 +3,7 @@ title: Deploy DDC on Azure
 description: Learn how to deploy Docker Datacenter with one click, using an ARM (ARM Resource Manager) Template.
 keywords: docker, datacenter, install, orchestration, management, azure, swarm
 ---
+ Azure Docker DataCenter Templates for the to-be GAed (Now GAed) Docker DataCenter with  ucp:2.0.0-Beta4 (native Swarm with Raft) / now GAed as ucp:2.0.1 and dtr:2.1.0-Beta4 (now GAed as dtr:2.1.1) for Azure initially based on the "legacy" Docker DataCenter 1.x Azure MarketPlace Gallery Templates (1.0.9). Please change parameter DDC Version from default ucp-2.0.1_dtr-2.1.1 to ucp-2.0.0-beta4_dtr-2.1.0-beta4 in the GUI to use Beta4 with the right beta license. For ucp-2.0.1_dtr-2.1.1 GAed, Trial license would suffice.
 Table of Contents
 =================
 
@@ -94,5 +95,5 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 ![OMS Fluentd](../images/OMS.png)
 
 
-:heart: ![Azure Subscription Icon](../images/Azure.png) :penguin: :whale:
+![Azure Subscription Icon](../images/Azure.png) :penguin: :whale:
 
