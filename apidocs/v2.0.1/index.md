@@ -1,13 +1,7 @@
 ---
-description: v2.0.1 API
-keywords:
-- Docker, DTR, API, v2.0.1
-menu:
-  main:
-    parent: smn_dtrapi
 title: v2.0.1 API
-type: _default
-weight: 101
+description: v2.0.1 API
+keywords: Docker, DTR, API, v2.0.1
 ---
 
 <div class="swagger-section">
