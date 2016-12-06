@@ -645,6 +645,8 @@ toc:
   section:
   - path: /datacenter/install/aws/
     title: Deploy Datacenter on AWS
+  - path: /datacenter/install/azure/
+    title: Deploy Datacenter on Azure
   - path: /datacenter/install/linux/
     title: Deploy Datacenter on Linux
   - sectiontitle: Universal Control Plane 2.0
