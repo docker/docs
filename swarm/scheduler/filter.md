@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Swarm filters
 keywords: docker, swarm, clustering, filters
 title: Swarm filters

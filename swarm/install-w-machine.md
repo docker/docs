@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Swarm release notes
 keywords: docker, swarm, clustering, discovery, release,  notes
 menu:
