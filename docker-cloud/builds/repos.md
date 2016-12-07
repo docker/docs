@@ -56,7 +56,7 @@ information.
 
 ## Change repository privacy settings
 
-Repositories in Docker Cloud can be either public or private. Public repositories are visible from the Docker Store's Community Content section, and can also be searched for from Docker Cloud's **Create Service** wizard. Private repositories are only visible to the user account that created it.
+Repositories in Docker Cloud can be either public or private. Public repositories are visible from the Docker Store's Community Content section, and can also be searched for from Docker Cloud's **Create Service** wizard. Private repositories are only visible to the user account that created it (unless it belongs to an Organization, see below).
 
 If a private repository belongs to an [Organization](../orgs.md), members of the `Owners` team configure access. Only members of the `Owners` team can change an organization's repository privacy settings.
 
@@ -66,7 +66,9 @@ To change a repository's privacy settings:
 
 1. Navigate to the repository in Docker Cloud.
 2. Click the **Settings** tab.
-3. Select the privacy setting you want, and click **Save**.
+3. Click the **Make public** or **Make private** button.
+4. In the dialog that appears, enter the name of the repository to confirm the change.
+5. Click the button to save the change.
 
 ## Delete a repository
 
@@ -89,8 +91,8 @@ To delete a repository:
 3. Enter the name of the repository to confirm deletion, and click **Delete**.
 
 External (third-party) repositories cannot be deleted from within Docker Cloud,
-however you can remove them using the same process for a repository in Docker
-Cloud. The link is removed, but images in the external repository are not
+however you can remove a link to them using the same process for a repository in
+Docker Cloud. The link is removed, but images in the external repository are not
 deleted.
 
 > **Note**: If the repository to be deleted or removed belongs to an [Organization](../orgs.md), only members of the `Owners` team can delete it.
