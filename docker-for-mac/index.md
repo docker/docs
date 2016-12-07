@@ -120,14 +120,14 @@ For more about stable and beta channels, see the
 Run these commands to test if your versions of `docker`, `docker-compose`, and `docker-machine` are up-to-date and compatible with `Docker.app`.
 
 ```shell
-	$ docker --version
-	Docker version 1.12.3, build 6b644ec
+$ docker --version
+Docker version 1.13.0-rc3, build 4d92237
 
-	$ docker-compose --version
-	docker-compose version 1.8.1, build 878cff1
+$ docker-compose --version
+docker-compose version 1.9.0, build 2585387
 
-	$ docker-machine --version
-	docker-machine version 0.8.2, build e18a919
+$ docker-machine --version
+docker-machine version 0.9.0-rc2, build 7b19591
 ```
 
 >**Note**: The above is an example. Your output will differ if you are running different (e.g., newer) versions.
@@ -178,11 +178,11 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 Choose <img src="images/whale-x.png"> --> **Preferences** from the menu bar. You
 can set the following runtime options.
 
-#### General
+### General
 
 ![Preferences](images/settings.png)
 
-##### Auto-start, update, and backups
+#### Auto-start, update, and backups
 
 * Docker for Mac is set to **automatically start** when you log in. Uncheck the login autostart option if you don't want Docker to start when you open your
 session.
@@ -199,13 +199,13 @@ src="images/whale-x.png"> -> **Check for Updates**
   still on the Privacy tab. For now, both Stable and Beta users can read more
   about usage data settings in the [Privacy](#Privacy) topic.
 
-##### CPUs
+#### CPUs
 
 By default, Docker for Mac is set to use 2 processors. You can increase
 processing power for the app by setting this to a higher number, or lower it to
 have Docker for Mac use fewer computing resources.
 
-##### Memory
+#### Memory
 
 By default, Docker for Mac is set to use `2` GB runtime memory, allocated from
 the total available memory on your Mac. You can increase the RAM on the app to
@@ -218,11 +218,11 @@ are on the Advanced dialog, as shown here.
 >![CPUs and Memory settings UI
 starting at Beta 31](images/settings-advanced-beta.png)
 
-#### Advanced
+### Advanced
 
 ![Advanced Preference settings-advanced](images/settings-advanced.png)
 
-##### Custom Registries
+#### Custom Registries
 
 As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
 public or private images or [Docker Trusted
@@ -236,7 +236,7 @@ the FAQs.)
 own registries are available as part of a new daemon tab. See [Docker
 daemon](#docker-daemon-beta-feature)).
 
-##### HTTP proxy settings
+#### HTTP proxy settings
 
 Docker for Mac will detect HTTP/HTTPS Proxy Settings and automatically propagate
 these to Docker and to your containers. For example, if you set your proxy
@@ -247,12 +247,12 @@ containers.
 >
 >![Proxies settings](images/settings-proxies-beta.png)
 
-#### Docker Daemon (Beta feature)
+### Docker Daemon (Beta feature)
 
 Starting with Beta 31, configuration options on the Docker daemon move to their
 own **Daemon** tab, including basic and advanced options.
 
-##### Daemon Basic (experimental mode and registries)
+#### Daemon Basic (experimental mode and registries)
 
 By default, Docker for Mac Beta releases use the experimental version of Docker
 Engine, described in the <a
@@ -262,13 +262,38 @@ Beta 31, you can toggle **experimental mode** on and off. If you toggle it off,
 Docker for Mac Beta uses the current generally available release of Docker
 Engine, the same as Stable Docker for Mac versions uses.
 
+You can check whether you are running experimental mode or not by typing `docker
+version` on the command line. Experimental mode is listed under `Server` data.
+If `Experimental` is `true`, the Docker is running in experimental mode, as
+shown here. (If `false`, Experimental mode is off.)
+
+```bash
+$ docker version
+Client:
+ Version:      1.13.0-rc3
+ API version:  1.25
+ Go version:   go1.7.3
+ Git commit:   4d92237
+ Built:        Tue Dec  6 01:15:44 2016
+ OS/Arch:      darwin/amd64
+
+Server:
+ Version:      1.13.0-rc3
+ API version:  1.25 (minimum version 1.12)
+ Go version:   go1.7.3
+ Git commit:   4d92237
+ Built:        Tue Dec  6 01:15:44 2016
+ OS/Arch:      linux/amd64
+ Experimental: true
+```
+
 You can use Docker to set up your own insecure
 [registry](/registry/introduction/). For details on this, see [Custom
 Registries](#custom-registries).
 
 ![Daemon](images/settings-advanced-experimental-beta.png)
 
-##### Daemon Advanced (JSON configuration file)
+#### Daemon Advanced (JSON configuration file)
 
 On the **Daemon -> Advanced dialog**, you can directly configure the daemon from
 the JSON file, and determine entirely how your containers will run. For a full
@@ -282,7 +307,7 @@ choose to discard or not apply changes when asked.
 
 ![Docker Daemon](images/settings-daemon-beta.png)
 
-#### File sharing
+### File sharing
 
 You can decide which directories on your Mac to share with containers.
 
@@ -306,7 +331,7 @@ outside of the `/Users` directory. In that case, share the drive where the
 Dockerfile and volume are located. Otherwise, you will get file not found or
 cannot start service errors at runtime. (See also [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
-#### Privacy
+### Privacy
 
 You can set Docker for Mac to auto-send diagnostics, crash reports, and usage data. This information can help Docker improve the application and get more context for troubleshooting problems.
 
