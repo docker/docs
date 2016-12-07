@@ -1083,8 +1083,8 @@ toc:
         title: Get support
 - sectiontitle: Docker Cloud
   section:
-  - path: /docker-cloud/overview/
-    title: Docker Cloud Overview
+  - path: /docker-cloud/
+    title: About Docker Cloud
   - path: /docker-cloud/dockerid/
     title: Docker Cloud Settings and Docker ID
   - path: /docker-cloud/orgs/
