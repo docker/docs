@@ -128,7 +128,7 @@ virtual network setup, filesystem management, etc. That is, most likely,
 pieces of the Docker engine itself will run inside of containers.
 
 Finally, if you run Docker on a server, it is recommended to run
-exclusively Docker in the server, and move all other services within
+exclusively Docker on the server, and move all other services within
 containers controlled by Docker. Of course, it is fine to keep your
 favorite admin tools (probably at least an SSH server), as well as
 existing monitoring/supervision processes, such as NRPE and collectd.
