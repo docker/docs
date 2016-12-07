@@ -20,7 +20,7 @@ upgrade your installation to the latest release.
   * The node details page now shows information about the node's CPU and RAM
   * Improved applications page to provide more guidance when there are no apps deployed
 
-**Bug Fixes**
+**Bug fixes**
 
 * Core
   * Fixed an issue with rethinkDB sync that causes timeout failures during upgrades
@@ -48,6 +48,15 @@ upgrade your installation to the latest release.
   authentication
   * Improved DTR integration screen, to provide more guidance on how to install
   DTR
+
+**Known issues**
+
+* When deploying applications from the UI or CLI with the compose file format
+2.1, overlay networks will not be created in attachable mode, so containers
+will fail to attach to that network. As a workaround you can create the networks
+upfront and make them attachable, and change your compose file to use those
+networks.
+
 
 
 ## Version 2.0.0
@@ -99,3 +108,11 @@ platform
 * Improved support dump with more system information, readable file formats,
 and container names/IDs
 * LDAP/AD now lists up to 1 million users
+
+**Known issues**
+
+* When deploying applications from the UI or CLI with the compose file format
+2.1, overlay networks will not be created in attachable mode, so containers
+will fail to attach to that network. As a workaround you can create the networks
+upfront and make them attachable, and change your compose file to use those
+networks.
