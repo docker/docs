@@ -1,7 +1,6 @@
 ---
 description: Configuring the Notary client, server and signer.
-keywords:
-- docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer
+keywords: docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer
 title: Notary client configuration file
 ---
 
