@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"testing"
 )
@@ -84,6 +85,52 @@ func testFrontMatterKeywords(mdBytes []byte) error {
 
 	if _, ok := keywords.(string); !ok {
 		return errors.New("keywords should be a comma separated string")
+	}
+
+	return nil
+}
+
+// TestURLs tests if we're not using absolute paths for URLs
+// when pointing to local pages.
+func TestURLs(t *testing.T) {
+	filepath.Walk("/docs", func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			t.Error(err.Error(), "-", path)
+		}
+		published, mdBytes, err := isPublishedMarkdown(path)
+		if err != nil {
+			t.Error(err.Error(), "-", path)
+		}
+		if published == false {
+			return nil
+		}
+		err = testURLs(mdBytes)
+		if err != nil {
+			t.Error(err.Error(), "-", path)
+		}
+		return nil
+	})
+}
+
+// testURLs tests if we're not using absolute paths for URLs
+// when pointing to local pages.
+func testURLs(mdBytes []byte) error {
+	_, md, err := frontparser.ParseFrontmatterAndContent(mdBytes)
+	if err != nil {
+		return err
+	}
+
+	regularExpression, err := regexp.Compile(`\[[^\]]+\]\(([^\)]+)\)`)
+	if err != nil {
+		return err
+	}
+
+	submatches := regularExpression.FindAllStringSubmatch(string(md), -1)
+
+	for _, submatch := range submatches {
+		if strings.Contains(submatch[1], "docs.docker.com") {
+			return errors.New("found absolute link (" + strings.TrimSpace(submatch[1]) + ")")
+		}
 	}
 
 	return nil
