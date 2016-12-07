@@ -1,8 +1,8 @@
 ---
+description: Learn how to scale Docker Universal Control Plane cluster, by adding
+  and removing nodes.
+keywords: UCP, cluster, scale
 title: Scale your cluster
-description: Learn how to scale Docker Universal Control Plane cluster, by adding and removing nodes.
-keywords:
-- UCP, cluster, scale
 ---
 
 Docker UCP is designed for scaling horizontally as your applications grow in

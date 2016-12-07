@@ -1,8 +1,7 @@
 ---
-title: docker/dtr install
-keywords:
-- docker, dtr, cli, install
 description: Install Docker Trusted Registry on this Docker Engine
+keywords: docker, dtr, cli, install
+title: docker/dtr install
 ---
 
 Install Docker Trusted Registry on this Docker Engine
@@ -56,4 +55,3 @@ the 'join' command.
 |`--replica-id`|Specify the replica ID. Must be unique per replica, leave blank for random|
 |`--unsafe`|Enable this flag to skip safety checks when installing or joining|
 |`--extra-envs`|List of extra environment variables to use for deploying the DTR containers for the replica. This can be used to specify swarm constraints. Separate the environment variables with ampersands (&). You can escape actual ampersands with backslashes (\). Can't be used in combination with --ucp-node|
-

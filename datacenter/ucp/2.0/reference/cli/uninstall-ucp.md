@@ -1,8 +1,7 @@
 ---
-title: docker/ucp uninstall-ucp
 description: Uninstall UCP from this swarm
-keywords:
-- docker, dtr, cli, uninstall-ucp
+keywords: docker, dtr, cli, uninstall-ucp
+title: docker/ucp uninstall-ucp
 ---
 
 Uninstall UCP from this swarm

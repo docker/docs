@@ -1,8 +1,7 @@
 ---
-title: Troubleshoot cluster configurations
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
-keywords:
-- ectd, key, value, store, ucp
+keywords: ectd, key, value, store, ucp
+title: Troubleshoot cluster configurations
 ---
 
 Docker UCP persists configuration data on an [etcd](https://coreos.com/etcd/)

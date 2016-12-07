@@ -1,8 +1,7 @@
 ---
-title: docker/dtr remove
-keywords:
-- docker, dtr, cli, remove
 description: Remove a replica from a DTR cluster
+keywords: docker, dtr, cli, remove
+title: docker/dtr remove
 ---
 
 Remove a replica from a DTR cluster
@@ -36,4 +35,3 @@ DTR containers, and deletes all DTR volumes.
 |`--force-remove`|Force removal of replica even if it can break your cluster's state. Necessary only when --existing-replica-id == --replica-id.|
 |`--replica-id`|Specify the replica ID. Must be unique per replica, leave blank for random|
 |`--existing-replica-id`|ID of an existing replica in a cluster|
-

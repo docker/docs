@@ -1,9 +1,8 @@
 ---
-title: Plan a production installation
 description: Learn about the Docker Universal Control Plane architecture, and the
   requirements to install it on production.
-keywords:
-- docker, ucp, install, checklist
+keywords: docker, ucp, install, checklist
+title: Plan a production installation
 ---
 
 Docker Universal Control Plane can be installed on-premises, or

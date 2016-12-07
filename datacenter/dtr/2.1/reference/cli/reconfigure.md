@@ -1,8 +1,7 @@
 ---
-title: docker/dtr reconfigure
-keywords:
-- docker, dtr, cli, reconfigure
 description: Change DTR configurations
+keywords: docker, dtr, cli, reconfigure
+title: docker/dtr reconfigure
 ---
 
 Change DTR configurations
@@ -56,4 +55,3 @@ effect. To have no down time, configure your DTR for high-availability.
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
 |`--nfs-storage-url`|URL (with IP address or hostname) of the NFS mount if using NFS (e.g. nfs://<ip address>/<mount point>)|
 |`--existing-replica-id`|ID of an existing replica in a cluster|
-

@@ -1,12 +1,6 @@
 ---
 description: Use the routing mesh to publish services externally to a swarm
-keywords:
-- guide
-- swarm mode
-- swarm
-- network
-- ingress
-- routing mesh
+keywords: guide, swarm mode, swarm, network, ingress, routing mesh
 title: Use swarm mode routing mesh
 ---
 

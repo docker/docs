@@ -1,8 +1,7 @@
 ---
-title: Upgrade DTR
 description: Learn how to upgrade your Docker Trusted Registry
-keywords:
-- docker, dtr, upgrade, install
+keywords: docker, dtr, upgrade, install
+title: Upgrade DTR
 ---
 
 The first step in upgrading to a new minor version or patch release of DTR 2.0,

@@ -1,8 +1,7 @@
 ---
-title: docker/dtr upgrade
-keywords:
-- docker, dtr, cli, upgrade
 description: Upgrade a v2.0.0 or later cluster to this version of DTR
+keywords: docker, dtr, cli, upgrade
+title: docker/dtr upgrade
 ---
 
 Upgrade a v2.0.0 or later cluster to this version of DTR
@@ -51,4 +50,3 @@ this bootstrapper.
 |`--ucp-insecure-tls`|Disable TLS verification for UCP|
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
 |`--existing-replica-id`|ID of an existing replica in a cluster|
-

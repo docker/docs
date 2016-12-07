@@ -1,8 +1,7 @@
 ---
-title: docker/ucp support
 description: Create a support dump for this UCP node
-keywords:
-- docker, dtr, cli, support
+keywords: docker, dtr, cli, support
+title: docker/ucp support
 ---
 
 Create a support dump for this UCP node
@@ -22,4 +21,3 @@ docker run --rm \
 ## Description
 
 This command creates a support dump file for this node, and prints it to stdout.
-

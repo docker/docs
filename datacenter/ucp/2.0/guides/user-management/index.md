@@ -1,8 +1,7 @@
 ---
-title: Authentication and authorization
 description: Learn how to manage permissions in Docker Universal Control Plane.
-keywords:
-- authorization, authentication, users, teams, UCP
+keywords: authorization, authentication, users, teams, UCP
+title: Authentication and authorization
 ---
 
 With Docker Universal Control Plane you get to control who can create and edit

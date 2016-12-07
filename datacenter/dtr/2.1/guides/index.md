@@ -1,7 +1,6 @@
 ---
 description: Learn how to install, configure, and use Docker Trusted Registry.
-keywords:
-- docker, registry, repository, images
+keywords: docker, registry, repository, images
 title: Docker Trusted Registry overview
 ---
 

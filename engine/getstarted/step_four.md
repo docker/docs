@@ -4,8 +4,7 @@ redirect_from:
 - /windows/step_four/
 - /linux/step_four/
 description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
+keywords: beginner, getting started, Docker
 title: Build your own image
 ---
 

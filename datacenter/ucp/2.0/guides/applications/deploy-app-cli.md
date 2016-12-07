@@ -1,9 +1,8 @@
 ---
-title: Deploy an app from the CLI
 description: Learn how to deploy containerized applications on a swarm, with Docker
   Universal Control Plane.
-keywords:
-- deploy, application
+keywords: deploy, application
+title: Deploy an app from the CLI
 ---
 
 With Docker Universal Control Plane you can deploy your apps from the CLI,

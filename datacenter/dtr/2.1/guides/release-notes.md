@@ -1,11 +1,10 @@
 ---
-title: Docker Trusted Registry release notes
 description: Docker Trusted Registry release notes
-keywords:
-- docker trusted registry, whats new, release notes
+keywords: docker trusted registry, whats new, release notes
 redirect_from:
 - /docker-trusted-registry/release-notes/release-notes/
 - /docker-trusted-registry/release-notes/
+title: Docker Trusted Registry release notes
 ---
 
 Here you can learn about new features, bug fixes, breaking changes and
