@@ -58,17 +58,16 @@ applications](https://github.com/remy/nodemon#application-isnt-restarting)
 
 * **Docker for Windows issue on GitHub** - See the issue [Inotify on shared drives does not work](https://github.com/docker/for-win/issues/56#issuecomment-242135705)
 
-### Volume mounting requires shared drives for Linux containers and for any project directories outside of `C:\Users`
+### Volume mounting requires shared drives for Linux containers
 
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, a volume mount is denied, or a service cannot
-start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might
-need to enable [shared drives](index.md#shared-drives).
+start (e.g., with [Docker Compose](/compose/gettingstarted.md)), you might need
+to enable [shared drives](index.md#shared-drives).
 
-Volume mounting requires shared drives for Windows containers, but also for
-Linux containers if the project lives outside of the `C:\Users` directory. Go to
-<img src="images/whale-x.png"> --> **Settings** --> **Shared Drives** and share
-the drive that contains the Dockerfile and volume.
+Volume mounting requires shared drives for Linux containers (not for Windows
+containers). Go to <img src="images/whale-x.png"> --> **Settings** --> **Shared
+Drives** and share the drive that contains the Dockerfile and volume.
 
 ### Verify domain user has permissions for shared drives (volumes)
 

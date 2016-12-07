@@ -133,14 +133,14 @@ Congratulations! You are up and running with Docker for Windows.
 
 Start your favorite shell (`cmd.exe`, PowerShell, or other) to check your versions of `docker` and `docker-compose`, and verify the installation.
 
-      PS C:\Users\samstevens> docker --version
-      Docker version 1.12.0, build 8eab29e, experimental
+      PS C:\Users\Vicky> docker --version
+      Docker version 1.13.0-rc3, build 4d92237
 
-      PS C:\Users\samstevens> docker-compose --version
-      docker-compose version 1.8.0, build d988a55
+      PS C:\Users\Vicky> docker-compose --version
+      docker-compose version 1.9.0, build 2585387
 
-      PS C:\Users\samstevens> docker-machine --version
-      docker-machine version 0.8.0, build b85aac1
+      PS C:\Users\Vicky> docker-machine --version
+      docker-machine version 0.9.0-rc2, build 7b19591
 
 ## Step 4. Explore the application and run examples
 
@@ -152,27 +152,26 @@ The next few steps take you through some examples. These are just suggestions fo
 
     Here is the output of `docker ps` run in a powershell. (In this example, no containers are running yet.)
 
-          PS C:\Users\samstevens> docker ps
+          PS C:\Users\Vicky> docker ps
           CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 
     Here is an example of command output for  `docker version`.
 
           PS C:\Users\Vicky> docker version
           Client:
-          Version:      1.12.0
-          API version:  1.24
-          Go version:   go1.6.3
-          Git commit:   8eab29e
-          Built:        Thu Jul 28 21:04:48 2016
+          Version:      1.13.0-rc3
+          API version:  1.25
+          Go version:   go1.7.3
+          Git commit:   4d92237
+          Built:        Tue Dec  6 01:15:44 2016
           OS/Arch:      windows/amd64
-          Experimental: true
 
           Server:
-          Version:      1.12.0
-          API version:  1.24
-          Go version:   go1.6.3
-          Git commit:   8eab29e
-          Built:        Thu Jul 28 21:04:48 2016
+          Version:      1.13.0-rc3
+          API version:  1.25 (minimum version 1.12)
+          Go version:   go1.7.3
+          Git commit:   4d92237
+          Built:        Tue Dec  6 01:15:44 2016
           OS/Arch:      linux/amd64
           Experimental: true
 
@@ -184,42 +183,52 @@ The next few steps take you through some examples. These are just suggestions fo
           Paused: 0
           Stopped: 0
           Images: 0
-          Server Version: 1.12.0
-          Storage Driver: aufs
-          Root Dir: /var/lib/docker/aufs
-          Backing Filesystem: extfs
-          Dirs: 0
-          Dirperm1 Supported: true
+          Server Version: 1.13.0-rc3
+          Storage Driver: overlay2
+            Backing Filesystem: extfs
+            Supports d_type: true
+            Native Overlay Diff: true
           Logging Driver: json-file
           Cgroup Driver: cgroupfs
           Plugins:
-          Volume: local
-          Network: host bridge null overlay
+            Volume: local
+            Network: bridge host macvlan null overlay
           Swarm: inactive
           Runtimes: runc
           Default Runtime: runc
-          Security Options: seccomp
-          Kernel Version: 4.4.16-moby
+          Init Binary: docker-init
+          containerd version: 03e5862ec0d8d3b3f750e19fca3ee367e13c090e
+          runc version: 51371867a01c467f08af739783b8beafc154c4d7
+          init version: 949e6fa
+          Security Options:
+            seccomp
+              Profile: default
+          Kernel Version: 4.8.12-moby
           Operating System: Alpine Linux v3.4
           OSType: linux
           Architecture: x86_64
           CPUs: 2
-          Total Memory: 1.95 GiB
+          Total Memory: 1.934 GiB
           Name: moby
-          ID: BG6O:2VMH:OLNV:DDLF:SCSV:URRH:BW6M:INBW:OLAC:J7PX:XZVL:ADNB
+          ID: EODE:VBXI:Y4EL:JXRJ:STRS:HCAI:LDLF:P4KW:B5XU:QPNE:LKTM:RG32
           Docker Root Dir: /var/lib/docker
           Debug Mode (client): false
-          Debug Mode (server): false
+          Debug Mode (server): true
+            File Descriptors: 13
+            Goroutines: 21
+            System Time: 2016-12-07T19:02:41.3287973Z
+            EventsListeners: 0
           Registry: https://index.docker.io/v1/
           Experimental: true
           Insecure Registries:
-          127.0.0.0/8
+            127.0.0.0/8
+          Live Restore Enabled: false
 
     >**Note:** The outputs above are examples. Your output for commands like `docker version` and `docker info` will vary depending on your product versions (e.g., as you install newer versions).
 
 3.  Run `docker run hello-world` to test pulling an image from Docker Hub and starting a container.
 
-          PS C:\Users\samstevens> docker run hello-world
+          PS C:\Users\Vicky> docker run hello-world
 
           Hello from Docker.
           This message shows that your installation appears to be working correctly.
@@ -234,7 +243,7 @@ The next few steps take you through some examples. These are just suggestions fo
 
           $ docker run -it ubuntu bash
 
-          PS C:\Users\samstevens> docker run -it ubuntu bash
+          PS C:\Users\Vicky> docker run -it ubuntu bash
           Unable to find image 'ubuntu:latest' locally
           latest: Pulling from library/ubuntu
           5a132a7e7af1: Pull complete
@@ -252,7 +261,7 @@ The next few steps take you through some examples. These are just suggestions fo
 
       This will download the `nginx` container image and start it. Here is the output of running this command in a powershell.
 
-          PS C:\Users\samstevens> docker run -d -p 80:80 --name webserver nginx
+          PS C:\Users\Vicky> docker run -d -p 80:80 --name webserver nginx
           Unable to find image 'nginx:latest' locally
           latest: Pulling from library/nginx
 
@@ -272,7 +281,7 @@ The next few steps take you through some examples. These are just suggestions fo
 
 7.  Run `docker ps` while your webserver is running to see details on the container.
 
-          PS C:\Users\samstevens> docker ps
+          PS C:\Users\Vicky> docker ps
           CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS
           NAMES
           dfe13c68b3b8        nginx               "nginx -g 'daemon off"   3 days ago          Up 45 seconds       0.0.0.0:80->80/tcp, 443/tc
@@ -370,14 +379,12 @@ here. If you run `docker` commands and tasks under a different username than the
 one used here to set up sharing, your containers will not have permissions to
 access the mounted volumes.
 
->**Tip:** In general, shared drives are only required for volume mounting [Linux
+>**Tip:** Shared drives are only required for volume mounting [Linux
 containers](#switch-between-windows-and-linux-containers-beta-feature), and not
-for Windows containers. However, if the project lives outside of the `\Users`
-directory, you need to share the drive where the Dockerfile and volume are
-located even if you are using [Windows
-containers](#getting-started-with-windows-containers-beta-feature)). Runtime
-errors such as file not found or cannot start service may indicate shared drives
-are needed. (See also [Volume mounting requires shared drives for Linux containers and for any project directories outside of `C:\Users`](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers-and-for-any-project-directories-outside-of-cusers).)
+for Windows containers. For Linux containers, you need to share the drive where your project is located (i.e., where the Dockerfile and
+volume are located). Runtime errors such as file not found or cannot start
+service may indicate shared drives are needed. (See also [Volume mounting
+requires shared drives for Linux containers](troubleshoot.md#volume-mounting-requires-shared-drives-for-linux-containers).)
 
 See also [Verify domain user has permissions for shared
 drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)
@@ -449,9 +456,17 @@ If you have containers that you wish to keep running across restarts, you should
 ### Docker daemon
 You can configure options on the Docker daemon in the given JSON configuration file, and determine how your containers will run.
 
+![Docker Daemon](images/docker-daemon.png)
+
 For a full list of options on the Docker daemon, see <a href="https://docs.docker.com/engine/reference/commandline/dockerd/" target="_blank">daemon</a> in the Docker Engine command line reference.
 
-![Docker Daemon](images/docker-daemon.png)
+In that topic, see also:
+
+* [Daemon configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/daemon-configuration-file)
+
+* [Linux configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/linux-configuration-file)
+
+* [Windows configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/windows-configuration-file)
 
 Note that updating these settings requires a reconfiguration and reboot of the Linux VM.
 
@@ -463,17 +478,50 @@ Microsoft Developer Network has preliminary/draft information on Windows contain
 
 This feature is not yet available on stable builds.
 
-See also [Shared Drives](#shared-drives)
-
-#### Getting started with Windows containers (Beta feature)
+#### Getting started with Windows containers
 
 If you are interested in working with Windows containers, here are some guides to help you get started.
 
 * [Build and Run Your First Windows Server Container (Blog Post)](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/) gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
 
-* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md) shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md) application with Windows containers. The MusicStore is a standard .NET application and, [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
+* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
+shows you how to use the
+[MusicStore](https://github.com/aspnet/MusicStore/blob/dev/README.md)
+application with Windows containers. The MusicStore is a standard .NET
+application and, [forked here to use
+containers](https://github.com/friism/MusicStore), is a good example of a
+multi-container application.
 
   >**Disclaimer:** This lab is still in work, and is based off of the blog, but you can test and leverage the example walkthroughs now, if you want to start experimenting. Please checking back as the lab evolves.
+
+#### About the Docker Windows containers specific dialogs
+
+When you switch to Windows containers, the Settings panel updates to show only
+those [dialogs](#docker-settings) that are active and apply to your Windows
+containers:
+
+  * [General](#general)
+  * [Proxies](#proxies)
+  * [Docker daemon](#docker-daemon)
+  * [Diagnose and Feedback](#diagnose-and-feedback)
+  * [Reset](#reset)
+
+(Per the release notes, these dialogs are newly implemented for Windows
+containers mode in [Beta
+32](release-notes.md#beta-32-release-notes-2016-12-07-1130-rc3-beta32)).
+
+Keep in mind that if you set proxies or daemon configuration in Windows
+containers mode, these apply only on Windows containers. If you switch back to
+Linux containers, proxies and daemon configurations return to what you had set
+for Linux containers. Your Windows container settings are retained and become
+available again when you switch back.
+
+The following settings are **_not available in Windows containers mode_**,
+because they do not apply to Windows containers:
+
+  * [Shared Drives](#shared-drives)
+  * [Network](#network)
+  * [Advanced (CPU and Memory configuration)](#advanced)
 
 ### Diagnose and Feedback
 

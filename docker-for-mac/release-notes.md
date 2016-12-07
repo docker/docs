@@ -202,6 +202,25 @@ events or unexpected unmounts.
 
 ## Beta Release Notes
 
+### Beta 32 Release Notes (2016-12-07 1.13.0-rc3-beta32)
+
+**New**
+
+- Support for arm, aarch64, ppc64le architectures using qemu
+
+**Upgrades**
+
+- Docker 1.13.0-rc3
+- Docker Machine 0.9.0-rc2
+- Linux Kernel 4.8.12
+
+**Bug fixes and minor improvements**
+
+- VPNKit: Improved diagnostics
+- Fix vsock deadlock under heavy write load
+- On the beta channel you can't opt-out of analytics
+- If you opt-out of analytics, you're prompted for approval before a bug report is sent
+
 ### Beta 31 Release Notes (2016-12-01 1.13.0-rc2-beta31)
 
 **New**

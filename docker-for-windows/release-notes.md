@@ -208,6 +208,39 @@ about both kinds of releases, and download stable and beta product installers at
 
 ## Beta Release Notes
 
+### Beta 32 Release Notes (2016-12-07 1.13.0-rc3-beta32)
+
+>**Important Note**:
+>
+>  Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**New**
+
+- Windows containers settings panel and options are working. In previous releases, settings were not implemented for [Windows containers
+mode](index.md#switch-between-windows-and-linux-containers-beta-feature). (See
+[About the Docker Windows containers specific
+dialogs](index.md#about-the-docker-windows-containers-specific-dialogs).)
+- Windows containers: Restart from the settings panel works
+- Windows containers: Factory default
+- Windows containers: `Daemon.json` can be modified
+- Windows containers: Proxy settings can be modified
+- Support for arm, aarch64, ppc64le architectures using qemu
+
+**Upgrades**
+
+- Docker 1.13.0-rc3
+- Docker Machine 0.9.0-rc2
+- Linux Kernel 4.8.12
+
+**Bug fixes and minor changes**
+
+- Time drifts between Windows and Linux containers should disapear
+- VPNKit: Improved diagnostics
+- Improvements in drive sharing code
+- Removed the legacy "Disable oplocks" trick for enabling Windows Containers on older insider previews
+
+
+
 ### Beta 31 Release Notes (2016-12-01 1.13.0-rc2-beta31)
 
 **New**
