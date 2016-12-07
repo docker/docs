@@ -32,8 +32,7 @@ script:
     wrapper scripts which you can include in your application's image and will
     poll a given host and port until it's accepting TCP connections.
 
-    Supposing your application's image has a `CMD` set in its Dockerfile, you
-    can wrap it by setting the entrypoint in `docker-compose.yml`:
+    For example, to use `wait-for-it.sh` to wrap your service's command:
 
         version: "2"
         services:
@@ -43,7 +42,7 @@ script:
               - "80:8000"
             depends_on:
               - "db"
-            entrypoint: ./wait-for-it.sh db:5432
+            command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
           db:
             image: postgres
 
@@ -51,9 +50,8 @@ script:
     check. For example, you might want to wait until Postgres is definitely
     ready to accept commands:
 
-    wait-for-postgres.sh
-
         #!/bin/bash
+        # wait-for-postgres.sh
 
         set -e
 
@@ -70,7 +68,7 @@ script:
         exec $cmd
 
     You can use this as a wrapper script as in the previous example, by setting
-    `entrypoint: ./wait-for-postgres.sh db`.
+    `command: ["./wait-for-postgres.sh", "db", "python", "app.py"]`.
 
 
 ## Compose documentation
