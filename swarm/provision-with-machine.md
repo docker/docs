@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Provision with Machine
 keywords: docker, Swarm, clustering, provision, Machine
 title: Provision a Swarm cluster with Docker Machine

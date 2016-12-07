@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: How to use Compose and Swarm together to deploy apps to multi-host clusters
 keywords: documentation, docs,  docker, compose, orchestration, containers, swarm
 title: Use Compose with Swarm

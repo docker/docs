@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Create a Swarm manager.
 keywords: swarm, create
 title: create — Create a discovery token

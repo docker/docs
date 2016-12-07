@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: 'Swarm: a Docker-native clustering system'
 keywords: docker, swarm, clustering, scheduling
 title: Advanced Scheduling
