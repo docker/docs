@@ -87,10 +87,9 @@
 		margin: 0;
 		padding: 10px 20px;
 }
-#DocumentationText blockquote p strong {
+/*#DocumentationText blockquote p strong {
     color: #6db9d1;
-    /* most Note's have a non-strong ':' display: block;*/
-}
+}*/
 #DocumentationText blockquote ol, #DocumentationText blockquote ul {
   padding-left: 20px !important;
 }
