@@ -1,8 +1,7 @@
 ---
-title: docker/dtr restore
-keywords:
-- docker, dtr, cli, restore
 description: Create a new DTR cluster from an existing backup
+keywords: docker, dtr, cli, restore
+title: docker/dtr restore
 ---
 
 Create a new DTR cluster from an existing backup
@@ -65,4 +64,3 @@ the 'join' command.
 |`--ucp-node`|Specify the host to install Docker Trusted Registry|
 |`--replica-id`|Specify the replica ID. Must be unique per replica, leave blank for random|
 |`--config-only`|Backup/restore only the configurations of DTR and not the database|
-

@@ -1,8 +1,8 @@
 ---
-title: Use your own certificates
 description: Trusted Registry configuration options
-keywords:
-- docker, documentation, about, technology, install, enterprise, hub, CS engine, Docker Trusted Registry, configure, storage, backend, drivers
+keywords: docker, documentation, about, technology, install, enterprise, hub, CS engine,
+  Docker Trusted Registry, configure, storage, backend, drivers
+title: Use your own certificates
 ---
 
 By default the DTR services are exposed using HTTPS, to ensure all

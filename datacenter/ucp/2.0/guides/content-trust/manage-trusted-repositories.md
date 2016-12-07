@@ -1,8 +1,7 @@
 ---
-title: Manage trusted repositories
 description: Learn how to use the Notary CLI client to manage trusted repositories
-keywords:
-- UCP, trust, notary, registry, security
+keywords: UCP, trust, notary, registry, security
+title: Manage trusted repositories
 ---
 
 Once you install the Notary CLI client, you can use it to manage your signing

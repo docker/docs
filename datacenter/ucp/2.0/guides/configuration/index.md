@@ -1,9 +1,8 @@
 ---
-title: Use externally-signed certificates
 description: Learn how to configure Docker Universal Control Plane to use your own
   certificates.
-keywords:
-- Universal Control Plane, UCP, certificate, authentiation, tls
+keywords: Universal Control Plane, UCP, certificate, authentiation, tls
+title: Use externally-signed certificates
 ---
 
 By default the UCP web UI is exposed using HTTPS, to ensure all

@@ -1,8 +1,7 @@
 ---
-title: Monitor Docker Trusted Registry
 description: Learn how to monitor your DTR installation.
-keywords:
-- docker, registry, monitor, troubleshoot
+keywords: docker, registry, monitor, troubleshoot
+title: Monitor Docker Trusted Registry
 ---
 
 Docker Trusted Registry is a Dockerized application. To monitor it, you can

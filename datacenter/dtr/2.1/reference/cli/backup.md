@@ -1,8 +1,7 @@
 ---
-title: docker/dtr backup
-keywords:
-- docker, dtr, cli, backup
 description: Backup a DTR cluster to a tar file and stream it to stdout
+keywords: docker, dtr, cli, backup
+title: docker/dtr backup
 ---
 
 Backup a DTR cluster to a tar file and stream it to stdout
@@ -45,4 +44,3 @@ stored securely.
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
 |`--existing-replica-id`|ID of an existing replica in a cluster|
 |`--config-only`|Backup/restore only the configurations of DTR and not the database|
-

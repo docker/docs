@@ -1,8 +1,7 @@
 ---
-title: Uninstall Docker Trusted Registry
 description: Learn how to uninstall your Docker Trusted Registry installation.
-keywords:
-- docker, dtr, install, uninstall
+keywords: docker, dtr, install, uninstall
+title: Uninstall Docker Trusted Registry
 ---
 
 Use the `remove` command, to remove a DTR replica from an existing deployment.

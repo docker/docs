@@ -1,8 +1,7 @@
 ---
-title: docker/dtr dumpcerts
-keywords:
-- docker, dtr, cli, dumpcerts
 description: Dump out the TLS certificates used by this DTR instance
+keywords: docker, dtr, cli, dumpcerts
+title: docker/dtr dumpcerts
 ---
 
 Dump out the TLS certificates used by this DTR instance
@@ -34,4 +33,3 @@ communicating across replicas with TLS.
 |`--ucp-insecure-tls`|Disable TLS verification for UCP|
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
 |`--existing-replica-id`|ID of an existing replica in a cluster|
-

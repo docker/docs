@@ -1,9 +1,8 @@
 ---
-title: Permission levels
 description: Learn about the permission levels available in Docker Universal Control
   Plane.
-keywords:
-- authorization, authentication, users, teams, UCP
+keywords: authorization, authentication, users, teams, UCP
+title: Permission levels
 ---
 
 Docker Universal Control Plane has two types of users: administrators and

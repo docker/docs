@@ -1,9 +1,8 @@
 ---
-title: Set up high availability
 description: Docker Universal Control plane has support for high availability. Learn
   how to set up your installation to ensure it tolerates failures.
-keywords:
-- docker, ucp, high-availability, replica
+keywords: docker, ucp, high-availability, replica
+title: Set up high availability
 ---
 
 Docker Universal Control Plane is designed for high availability (HA). You can

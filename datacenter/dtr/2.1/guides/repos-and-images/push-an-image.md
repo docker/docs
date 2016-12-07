@@ -1,7 +1,6 @@
 ---
 description: Learn how to push an image to Docker Trusted Registry.
-keywords:
-- docker, registry, images, pull
+keywords: docker, registry, images, pull
 title: Push an image to DTR
 ---
 

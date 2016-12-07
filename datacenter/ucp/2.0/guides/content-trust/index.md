@@ -1,8 +1,8 @@
 ---
+description: Configure a Docker Universal Plane cluster to only allow running applications
+  that use images you trust.
+keywords: docker, ucp, backup, restore, recovery
 title: Run only the images you trust
-description: Configure a Docker Universal Plane cluster to only allow running applications that use images you trust.
-keywords:
-- docker, ucp, backup, restore, recovery
 ---
 
 With Docker Universal Control Plane you can enforce applications to only use

@@ -1,9 +1,8 @@
 ---
-title: Backups and disaster recovery
 description: Learn how to backup your Docker Trusted Registry cluster, and to recover
   your cluster from an existing backup.
-keywords:
-- docker, registry, high-availability, backup, recovery
+keywords: docker, registry, high-availability, backup, recovery
+title: Backups and disaster recovery
 ---
 
 When you decide to start using Docker Trusted Registry on a production
