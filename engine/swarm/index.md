@@ -70,15 +70,23 @@ deployment to different sets of nodes. If anything goes wrong, you can
 roll-back a task to a previous version of the service.
 
 ## What's next?
+
+### Swarm mode key concepts and tutorial
+
 * Learn swarm mode [key concepts](key-concepts.md).
-* Get started with the [swarm mode tutorial](swarm-tutorial/index.md).
-* Explore swarm mode CLI commands:
-    * [swarm init](../reference/commandline/swarm_init.md)
-    * [swarm join](../reference/commandline/swarm_join.md)
-    * [service create](../reference/commandline/service_create.md)
-    * [service inspect](../reference/commandline/service_inspect.md)
-    * [service ls](../reference/commandline/service_ls.md)
-    * [service rm](../reference/commandline/service_rm.md)
-    * [service scale](../reference/commandline/service_scale.md)
-    * [service ps](../reference/commandline/service_ps.md)
-    * [service update](../reference/commandline/service_update.md)
+
+* Get started with the [Swarm mode tutorial](swarm-tutorial/index.md).
+
+### Swarm mode CLI commands
+
+Explore swarm mode CLI commands
+
+* [swarm init](../reference/commandline/swarm_init.md)
+* [swarm join](../reference/commandline/swarm_join.md)
+* [service create](../reference/commandline/service_create.md)
+* [service inspect](../reference/commandline/service_inspect.md)
+* [service ls](../reference/commandline/service_ls.md)
+* [service rm](../reference/commandline/service_rm.md)
+* [service scale](../reference/commandline/service_scale.md)
+* [service ps](../reference/commandline/service_ps.md)
+* [service update](../reference/commandline/service_update.md)

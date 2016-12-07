@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide-from-sitemap: true
 description: Try Swarm at scale
 keywords: docker, swarm, scale, voting, application, certificates
 redirect_from:
