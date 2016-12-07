@@ -255,8 +255,11 @@ ng\:form {
 						<div class="hidden-xs hidden-sm col-md-2 col-xl-1 tableofcontents_section">
                 <section class="section" id="TableOfContentsSection">
 						    <span class="title_section">
-								  <form class="search-form form-inline ng-pristine ng-valid" action="/search/">
-								    <span class="algolia-autocomplete" style="position: relative; display: inline-block; direction: ltr;"><input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="Search the docs" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: Geomanist, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="ds-dropdown-menu" style="position: absolute; top: 100%; z-index: 100; left: 0px; right: auto; display: none;"><div class="ds-dataset-0"></div></span></span>
+								  <form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="/search/">
+											<input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="Search the docs" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+											<div id="autocompleteContainer">
+			                	<div id="autocompleteResults"></div>
+			                </div>
 								    <button type="submit" class="search-submit btn btn-default">Search</button>
 								  </form>
 						    </span>
