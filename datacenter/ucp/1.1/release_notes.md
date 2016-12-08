@@ -12,6 +12,27 @@ known issues for each UCP version.
 You can then use [the upgrade instructions](installation/upgrade.md), to
 upgrade your installation to the latest release.
 
+
+## Version 1.1.5
+
+(8 Dec 2016)
+
+Note: UCP 1.1.5 supports Docker Engine 1.12 but does not use the built-in
+orchestration capabilities provided by the Docker Engine with swarm mode enabled.
+When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
+cluster using the older Docker Swarm v1.2.
+
+**Bug fixes**
+
+* Fixed an issue where containers created using a network alias would be
+rescheduled to another node on a `on-node-failure` event, but have incorrect
+DNS entries
+* Errors during an LDAP synchronization are now displayed in the UI
+* UCP is now correctly configured after the controller service is restarted
+* Usernames from both LDAP and managed users are now correctly normalized during
+the authentication process.
+
+
 ## Version 1.1.4
 
 (29 Sept 2016)
