@@ -38,7 +38,7 @@ Follow these steps:
    | [docker/machine](https://github.com/docker/machine) | Software for the easy and quick creation of Docker hosts on your computer, on cloud providers, and inside your own data center. |
    | [kitematic/kitematic](https://github.com/kitematic/kitematic) | Kitematic is a simple application for managing Docker containers on macOS and Windows. |
    | [docker/swarm](https://github.com/docker/swarm) | Native clustering for Docker; manage several Docker hosts as a single, virtual host. |
-   | [docker/compose](ttps://github.com/docker/compose) | Define and run complex applications using one or many interlinked containers. |
+   | [docker/compose](https://github.com/docker/compose) | Define and run complex applications using one or many interlinked containers. |
 
    See <a href="https://github.com/docker" target="_blank">the complete list of Docker repositories</a> on GitHub.
 
