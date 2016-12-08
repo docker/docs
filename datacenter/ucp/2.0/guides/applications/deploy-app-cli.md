@@ -13,8 +13,8 @@ application.
 
 Docker UCP secures your Docker swarm with role-based access control, so that only
 authorized users can deploy applications. To be able to run
-Docker commands on a swarm managed by UCP, you need to authenticate your
-requests using client certificates.
+Docker commands on a swarm managed by UCP, you need to configure your Docker CLI
+client to authenticate to UCP using client certificates.
 
 [Learn how to set your CLI to use client certificates](../access-ucp/cli-based-access.md).
 
@@ -25,7 +25,7 @@ The WordPress application we're going to deploy is composed of two services:
 * wordpress: The service that runs Apache, PHP, and WordPress.
 * db: A MariaDB database used for data persistence.
 
-After setting up your terminal to authenticate using client certificates,
+After setting up your Docker CLI client to authenticate using client certificates,
 create a file named `docker-compose.yml` with the following service definition:
 
 ```none
@@ -58,14 +58,14 @@ volumes:
 ```
 
 In your command line, navigate to the place where you've created the
-`docker-compose.yml` file and run:
+`docker-compose.yml` file and deploy the application to UCP by running:
 
 ```bash
 $ docker-compose --project-name wordpress up -d
 ```
 
-Test that the WordPress service is up and running, and find where you can
-reach it.
+Test that the WordPress service is up and running, and find on which node it
+was deployed.
 
 ```bash
 $ docker-compose --project-name wordpress ps
@@ -76,7 +76,7 @@ wordpress_db_1          docker-entrypoint.sh mysqld      Up      3306/tcp
 wordpress_wordpress_1   docker-entrypoint.sh apach ...   Up      172.31.18.153:8000->80/tcp
 ```
 
-In this example, WordPress can be accessed at 172.31.18.153:8000. Navigate to
+In this example, WordPress was deployed to 172.31.18.153:8000. Navigate to
 this address in your browser, to start using the WordPress app you just
 deployed.
 

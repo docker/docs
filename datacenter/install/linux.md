@@ -33,7 +33,7 @@ Also make sure the hosts are running one of these operating systems:
 Install the commercially supported Docker Engine on all hosts you want to manage
 with Docker Datacenter.
 
-Log in into each node using ssh, and install CS Docker Engine:
+Log in into each host using ssh, and install CS Docker Engine:
 
 ```bash
 curl -SLf https://packages.docker.com/1.12/install.sh | sh
@@ -58,6 +58,8 @@ docker run --rm -it --name ucp \
 
 This runs the install command in interactive mode, so that you're prompted
 for any necessary configuration values.
+
+[Learn more about the UCP installation](../ucp/2.9/guides/installation/index.md)
 
 ### Step 4: License your installation
 
@@ -110,7 +112,5 @@ by UCP.
 
 ## Where to go next
 
-* [Create and manage users](../ucp/2.0/guides/user-management/create-and-manage-users.md)
 * [Deploy an application](../ucp/2.0/guides/applications/index.md)
-* [Push an image to DTR](../dtr/2.1/guides/repos-and-images/push-an-image.md)
-* [Considerations for a High Availability Deployment](../ucp/2.0/guides/high-availability/index.md)
+* [Considerations for high availability](../ucp/2.0/guides/high-availability/index.md)

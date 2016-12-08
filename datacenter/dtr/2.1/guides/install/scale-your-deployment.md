@@ -20,9 +20,9 @@ you're going to install these replicas also need to be managed by UCP.
 
 To add replicas to an existing DTR deployment:
 
-1. Load your UCP user bundle.
+1. Use ssh to log into a node that is already part of UCP.
 
-2.  Run the join command.
+2.  Run the DTR join command:
 
     ```none
     docker run -it --rm \
@@ -39,7 +39,10 @@ To add replicas to an existing DTR deployment:
 
 ## Remove existing replicas
 
-To remove a DTR replica from a deployment, run:
+To remove a DTR replica from your deployment:
+
+1. Use ssh to log into a node that is already part of UCP.
+2.  Run the DTR remove command:
 
 ```none
 docker run -it --rm \
