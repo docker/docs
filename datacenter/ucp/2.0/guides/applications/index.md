@@ -11,7 +11,7 @@ WordPress application.
 
 ## Deploy WordPress
 
-On your browser, **log in** to UCP, and navigate to the **Applications** page.
+In your browser, **log in** to UCP, and navigate to the **Applications** page.
 There, click the **Deploy compose.yml** button, to deploy a new application.
 
 ![](../images/deploy-app-ui-1.png)
