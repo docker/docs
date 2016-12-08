@@ -1,7 +1,8 @@
 ### Problem description
 
-<!-- Briefly describe the problem that you found. Only documentation issues should be filed here. 
-     For general questions, go to https://forums.docker.com/. -->
+<!--Briefly describe the problem that you found.
+    Only DOCUMENTATION issues should be filed here.
+    For general questions, go to https://forums.docker.com/. -->
 
 ### Problem location
 
