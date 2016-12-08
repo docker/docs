@@ -38,7 +38,7 @@ The following illustrates a configuration with multiple certs:
 
 ```
     /etc/docker/certs.d/        <-- Certificate directory
-    └── localhost               <-- Hostname
+    └── localhost:5000          <-- Hostname:port
        ├── client.cert          <-- Client certificate
        ├── client.key           <-- Client key
        └── localhost.crt        <-- Certificate authority that signed
