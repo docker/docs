@@ -56,11 +56,20 @@ information.
 
 ## Change repository privacy settings
 
-Repositories in Docker Cloud can be either public or private. Public repositories are visible from the Docker Store's Community Content section, and can also be searched for from Docker Cloud's **Create Service** wizard. Private repositories are only visible to the user account that created it (unless it belongs to an Organization, see below).
+Repositories in Docker Cloud can be either public or private. Public
+repositories are visible from the Docker Store's Community Content section, and
+can also be searched for from Docker Cloud's **Create Service** wizard. Private
+repositories are only visible to the user account that created it (unless it
+belongs to an Organization, see below).
 
-If a private repository belongs to an [Organization](../orgs.md), members of the `Owners` team configure access. Only members of the `Owners` team can change an organization's repository privacy settings.
+> **Note**: These _privacy_ settings are separate from the [repository _access_ permissions](../orgs.md#change-team-permissions-for-an-individual-repository) available for repositories shared among members of an [organization](../orgs.md).
 
-Each Docker Cloud account comes with one free private repository. Additional private repositories are available for subscribers on paid plans.
+If a private repository belongs to an [Organization](../orgs.md), members of the
+`Owners` team configure access. Only members of the `Owners` team can change an
+organization's repository privacy settings.
+
+Each Docker Cloud account comes with one free private repository. Additional
+private repositories are available for subscribers on paid plans.
 
 To change a repository's privacy settings:
 
