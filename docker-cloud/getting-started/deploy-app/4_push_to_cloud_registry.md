@@ -36,14 +36,12 @@ $ docker push $DOCKER_ID_USER/quickstart-python
 ```
 $ docker push $DOCKER_ID_USER/quickstart-go
 ```
-## Verify the image location
-After the push command completes, verify that the image is now in Docker Cloud's registry. Do this by running the `docker-cloud repository ls` command. You should see only one of the images below.
 
-```
-$ docker-cloud repository ls
-NAME                                    DESCRIPTION
-my-username/quickstart-python
-my-username/quickstart-go
-```
+## Verify the image location
+
+After the push command completes, verify that the image is now in Docker Cloud's
+registry. Do this by logging in to [Docker Cloud](https://cloud.docker.com) and
+clicking  **Repositories** in the left navigation. Your image should appear in
+the repository list.
 
 Next: [Deploy the app as a Docker Cloud service](5_deploy_the_app_as_a_service.md).
