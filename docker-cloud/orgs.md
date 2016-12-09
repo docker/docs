@@ -148,17 +148,45 @@ Optionally, override the default access level for specific repositories. -->
 
     > **Note**: An organization can have public repositories which are visible to **all** users (including those outside the organization). Team members can view public repositories even if you have not given them `View` permission. You can use team permissions to grant write and admin access to public repositories.
 
+### Change team permissions for an individual repository
 
-#### Docker Cloud team permission reference
+You can also grant teams access to a repository from the repository's
+**Permissions** page rather than from each team's permissions settings. You
+might do this if you create repositories after you have already configured your
+teams, and want to grant access to several teams at the same time.
+
+If the organization's repository is private, you must explicitly grant any access that your team members require. If the repository is public, all users are granted read-only access by default.
+
+Members of the organization's `Owners` team, and members of any team with `admin` access to the repository can change the repository's access permissions.
+
+To grant a team access to an organization's repository:
+
+1. Navigate to the organization's repository.
+2. Click the **Permissions** tab.
+3. Select the name of the team you want to add from the drop down menu.
+5. Choose the access level the team should have.
+6. Click the **plus sign** to add the selected team and permission setting.
+
+     Your choice is saved immediately.
+
+7. Repeat this process for each team to which you want to grant access.
+
+To edit a team's permission level, select a new setting in the **Permission** drop down menu.
+
+To remove a team's access to the repository, click the **trashcan** icon next to the team's access permission line.
+
+> **Note**: If the organization's repository is _public_, team members without explicit access permissions will still have read-only access to the repository. If the repository is _private_, removing a team's access completely prevents the team members from seeing the repository.
+
+### Docker Cloud team permission reference
 
 **General access levels**:
 
 * **No access**: no access at all. The resource is not visible to members of this team.
 * **Read only**: users can view the resource and its configuration, but cannot perform actions on the resource.
 * **Read and Write**: users can view *and change* the resource and its configuration.
-* **Admin**: users can view, and edit the resource and its configuration, and can create or delete new instances of the resource.
+* **Admin**: users can view, and edit the resource and its configuration, and can create or delete new instances of the resource*.
 
-> **Note**: Only users who are members of the `Owners` team can create _new_ repositories.
+> **Note&#42;**: Only users who are members of the `Owners` team can create _new_ repositories.
 
 | Permission level | Access |
 | ------------- | ------------- |
@@ -203,9 +231,9 @@ If you're a member of the `Owners` team, you can create these resources when
 logged in as the Organization, and manage which Teams can view, edit, and create
 and delete each resource.
 
-#### Link a service provider to an Organization:
+#### Link a service provider to an Organization
 
-1. Log in to Docker Cloud  as a member of the `Owners` team.
+1. Log in to Docker Cloud as a member of the `Owners` team.
 
 2. Switch to the Organization account by selecting it from the user icon menu at the top right.
 
@@ -215,14 +243,35 @@ and delete each resource.
 
     The steps are the same as when you perform these actions as an individual user.
 
+#### Create repositories
+
+When a member of the `Owners` team creates a repository for an organization,
+they can configure which teams within the organization can access the
+repository. No access controls are configured by default on repository creation.
+If the repository is _private_, this leaves it accessible only to members of the
+`Owners` team until other teams are granted access.
+
+> **Tip**: Members of the `Owners` team can configure this default from the **Default privacy** section of the organization's **Cloud Settings** page.
+
+1. Log in to Docker Cloud as a member of the `Owners` team.
+
+2. Switch to the Organization account by selecting it from the user icon menu at the top right.
+
+3. [Create the repository](builds/repos.md#create-a-new-repository-in-docker-cloud) as usual.
+
+4. Once the repository has been created, navigate to it and click **Permissions**.
+
+5. [Grant access](#change-team-permissions-for-an-individual-repository) to any teams that will require access to the repository.
+
 #### Manage organization settings
 
-From the Organization's Cloud settings page you can also manage the
+From the Organization's **Cloud Settings** page you can also manage the
 Organization's Plan and billing account information, notifications, and API
 keys.
 
 #### Create organization resources
 
-To create resources for an Organization, log in to Docker Cloud and switch to the
-Organization account. Create the repositories, services, stacks, or node
-clusters as you would for any other account.
+To create resources for an Organization such as services and node clusters, log
+in to Docker Cloud and switch to the Organization account. Create the
+repositories, services, stacks, or node clusters as you would for any other
+account.
