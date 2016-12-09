@@ -1,4 +1,5 @@
 ---
+advisory: toolbox
 description: FAQs, troubleshooting, and tips index for Toolbox installs
 identifier: toolbox_overview_faqs
 keywords: docker, documentation, about, technology, kitematic, gui, toolbox

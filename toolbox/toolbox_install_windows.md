@@ -1,4 +1,5 @@
 ---
+advisory: toolbox
 description: How to install Toolbox on Mac
 keywords: docker, documentation, install, toolbox, win
 title: Install Docker Toolbox on Windows
