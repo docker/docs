@@ -1,4 +1,5 @@
 ---
+advisory: kitematic
 description: Tutorial demonstrating the setup of a Minecraft server using Docker and Kitematic
 keywords: docker, documentation, about, technology, kitematic, gui, minecraft, tutorial
 title: 'Kitematic tutorial: Set up a Minecraft server'

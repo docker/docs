@@ -1,4 +1,5 @@
 ---
+advisory: kitematic
 description: Documentation covering common questions users have about Kitematic
 keywords: docker, documentation, about, technology, kitematic,  gui
 title: 'Kitematic: Frequently asked questions (FAQ)'
