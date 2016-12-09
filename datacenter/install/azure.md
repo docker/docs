@@ -19,7 +19,9 @@ Table of Contents
       * [Patches and pull requests](#patches-and-pull-requests)
       * [<del>Pre-Req and or</del> Optional](#pre-req-and-or-optional)
          * [Fluentd usage](#fluentd-usage)
-
+      * [Optional Usage of Azure Container Registry](#optional-usage-of-azure-container-registry)
+         * [Create ACR](#create-acr)
+         * [Create Service Principal tag image and push to ACR](#create-service-principal-tag-image-and-push-to-acr)
 
 ### Azure Docker Datacenter
 
@@ -100,6 +102,98 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 
 ##### Fluentd usage
 ![OMS Fluentd](../images/OMS.png)
+
+
+#### Optional Usage of Azure Container Registry
+
+Credits : [Ahmet's Blog](https://ahmetalpbalkan.com/blog/azure-container-registry/), [New Azure cli 2.0 Preview](https://github.com/Azure/azure-cli/).
+* Please visit the [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) Page.
+* Please refer to the [Documentation](https://docs.microsoft.com/en-us/azure/container-registry/).
+
+##### Create ACR
+* Create Dockerized new Azure cli
+ * <code> $ docker run -dti -v ${HOME}:/home/azureuser --restart=always --name=azure-cli-python azuresdk/azure-cli-python </code>
+* Login to Azure from the cli docker instance
+ * <code> $ docker exec -ti azure-cli-python bash -c "az login && bash" </code>
+ * Please view output below. Subscription Id, Tenant Id and names are representational.
+  * To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code XXXXX to authenticate.
+```json
+[
+{
+    "cloudName": "AzureCloud",
+    "id": "123a1234-1b23-1e00-11c3-123456789d12",
+    "isDefault": true,
+    "name": "Microsoft Azure Subscription Name",
+    "state": "Enabled",
+    "tenantId": "12f123bf-12f1-12af-12ab-1d3cd456db78",
+    "user": {
+      "name": "ab@company.com",
+      "type": "user"
+    }
+  }
+]
+  ```
+  
+* create a resource group via new azure cli from inside the container logged into azure 
+ * <code> bash-4.3# az group create -n acr -l southcentralus </code>
+```json
+{
+  "id": "/subscriptions/123a1234-1b23-1e00-11c3-123456789d12/resourceGroups/acr",
+  "location": "southcentralus",
+  "managedBy": null,
+  "name": "acr",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null
+}
+```
+
+* Create the acr instance
+ * <code> bash-4.3# az acr create -n acr12345 -g acr -l southcentralus </code>
+  * Subscription Id, App Id, registry Name, Login Server are representational
+  * ACR is available presently in eastus, westus and southcentralus
+```json
+Create a new service principal and assign access:
+  az ad sp create-for-rbac --scopes /subscriptions/123a1234-1b23-1e00-11c3-123456789d12/resourcegroups/acr/providers/Microsoft.ContainerRegistry/registries/acr12345 --role Owner --password <password>
+
+Use an existing service principal and assign access:
+  az role assignment create --scope /subscriptions/123a1234-1b23-1e00-11c3-123456789d12/resourcegroups/acr/providers/Microsoft.ContainerRegistry/registries/acr12345 --role Owner --assignee <app-id>
+{
+  "adminUserEnabled": false,
+  "creationDate": "2016-12-09T03:45:14.843041+00:00",
+  "id": "/subscriptions/123a1234-1b23-1e00-11c3-123456789d12/resourcegroups/acr/providers/Microsoft.ContainerRegistry/registries/acr12345",
+  "location": "southcentralus",
+  "loginServer": "acr12345-microsoft.azurecr.io",
+  "name": "acr12345",
+  "storageAccount": {
+    "accessKey": null,
+    "name": "acr123456789"
+  },
+  "tags": {},
+  "type": "Microsoft.ContainerRegistry/registries"
+}
+```
+##### Create Service Principal tag image and push to ACR
+
+* Subscription Id, App Id, registry Name, Login Server are representational
+* <code> bash-4.3# az ad sp create-for-rbac -scopes /subscriptions/123a1234-1b23-1e00-11c3-123456789d12/resourcegroups/acr/providers/Microsoft.ContainerRegistry/registries/acr12345 --role Owner --password bangbaM23# </code>
+```json
+Retrying role assignment creation: 1/24
+Retrying role assignment creation: 2/24
+{
+  "appId": "ab123cd5-b1ab-1234-abab-a2bcd90abcde",
+  "name": "http://azure-cli-2016-12-09-03-46-57",
+  "password": "bangbaM23#",
+  "tenant": "12f123bf-12f1-12af-12ab-1d3cd456db78"
+}
+```
+
+* Login <code>$ docker login -u ab123cd5-b1ab-1234-abab-a2bcd90abcde -p bangbaM23# acr12345-microsoft.azurecr.io</code>
+* Pull a public image <code>$ docker pull dwaiba/azureiot-nodered </code>
+* Tag for new ACR <code> $ docker tag dwaiba/azureiot-nodered acr12345-microsoft.azurecr.io/ab123cd5-b1ab-1234-abab-a2bcd90abcde/azureiot-nodered:latest</code>
+* Push to ACR <code> $ docker push acr12345-microsoft.azurecr.io/ab123cd5-b1ab-1234-abab-a2bcd90abcde/azureiot-nodered:latest </code>
+* Run it <code>$ docker run -dti -p 1880:1880 -p 1881:1881 acr12345-microsoft.azurecr.io/ab123cd5-b1ab-1234-abab-a2bcd90abcde/azureiot-nodered:latest</code>
 
 
 ![Azure Subscription Icon](../images/Azure.png)
