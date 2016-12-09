@@ -31,7 +31,7 @@ that need sign the image, before it is trusted to run in the UCP cluster. If
 you specify multiple teams, the image needs to be signed by a member of each
 team, or someone that is a member of all those teams.
 If you don't specify any team, the image will be trusted as long as it is signed
-by any UCP user.
+by any UCP user whose keys are trusted in a Notary delegation role.
 
 ## Set up the Docker Notary CLI client
 
