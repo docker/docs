@@ -229,7 +229,7 @@ routing information about the Docker subnets. When you add or remove a host to
 this environment you just have to update the routing table in the router - not
 on every host.
 
-![](images/ipv6_routed_network_example.svg)
+![](images/ipv6_routed_network_example.png)
 
 In this scenario containers of the same host can communicate directly with each
 other. The traffic between containers on different hosts will be routed via
