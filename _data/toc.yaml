@@ -725,6 +725,8 @@ toc:
         title: Run only images you trust
       - path: /datacenter/ucp/2.0/guides/content-trust/manage-trusted-repositories/
         title: Manage trusted repositories
+      - path: /datacenter/ucp/2.0/guides/content-trust/continuous-integration/
+        title: Use trusted images for continuous integration
     - sectiontitle: CLI reference
       section:
       - path: /datacenter/ucp/2.0/reference/cli/
