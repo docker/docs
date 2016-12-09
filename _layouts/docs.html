@@ -92,7 +92,7 @@ ng\:form {
 <link id="mktoForms2ThemeStyle" rel="stylesheet" type="text/css" href="/css/forms2-theme-simple.css">
 {% seo %}
 {% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
-{% if page.this_version and page.latest_version %}<link rel="canonical" href="https://docs.docker.com{{ page.url | replace_first: page.this_version, page.latest_version }}" />{% endif %}
+{% if page.product_version and page.latest_version %}<link rel="canonical" href="https://docs.docker.com{{ page.url | replace_first: page.product_version, page.latest_version }}" />{% endif %}
 </head>
 <body class="html front not-logged-in no-sidebars page-node page-node- page-node-1 node-type-front-page path-docker ng-scope short retina-display all_loaded" ng-app="Docker" ng-controller="DockerController" style="">
 <div class="off-canvas-wrap" data-offcanvas="" style="min-height: 548px;">
