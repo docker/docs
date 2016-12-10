@@ -278,15 +278,14 @@ environments, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 
 <p></p>
 
-* If you see errors like `Bind for 0.0.0.0:8080 failed: port is already allocated` or
-  `listen tcp:0.0.0.0:8080: bind: address is already in use`:
+* If you see errors like `Bind for 0.0.0.0:8080 failed: port is already allocated` or `listen tcp:0.0.0.0:8080: bind: address is already in use`:
 
-	  These errors are often caused by some other software on the Mac using those ports.
-		Run `lsof -i tcp:8080` to discover the name and pid of the other process and
-		decide whether to shut the other process down, or to use a different port in
-		your docker app.
+  * These errors are often caused by some other software on the Mac using those
+ports.
 
-See also [Known Issues](troubleshoot.md#known-issues) on this page, and the [FAQs](faqs.md) topic.
+  * Run `lsof -i tcp:8080` to discover the name and pid of the other process and
+decide whether to shut the other process down, or to use a different port in
+your docker app.
 
 ## Known issues
 
@@ -343,12 +342,15 @@ Alternatively you could create a plain-text TCP proxy on localhost:1234 using:
   - Zend Framework
   - PHP applications that use [Composer](https://getcomposer.org) to install dependencies in a ```vendor``` folder<br><br>
 
-  As a work-around for this behavior, you can put vendor or third-party library directories in Docker volumes, perform temporary file system
-    operations outside of `osxfs` mounts, and use third-party tools like
-    Unison or `rsync` to synchronize between container directories and
-    bind-mounted directories. We are actively working on `osxfs`
-    performance using a number of different techniques. To learn more, please see the topic on [Performance issues, solutions, and roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
+  As a work-around for this behavior, you can put vendor or third-party library
+directories in Docker volumes, perform temporary file system operations outside
+of `osxfs` mounts, and use third-party tools like Unison or `rsync` to
+synchronize between container directories and bind-mounted directories. We are
+actively working on `osxfs` performance using a number of different techniques.
+To learn more, please see the topic on [Performance issues, solutions, and
+roadmap](osxfs.md#performance-issues-solutions-and-roadmap).
 
+<p></p>
 
 * If your system does not have access to an NTP server, then after a hibernate the time seen by Docker for Mac may be considerably out of sync with the host. Furthermore, the time may slowly drift out of sync during use. To manually reset the time after hibernation, run:
 
