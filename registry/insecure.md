@@ -54,7 +54,7 @@ This is more secure than the insecure registry solution.  You must configure eve
       -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key \
       -x509 -days 365 -out certs/domain.crt
 
-2. Be sure to use the name `myregistrydomain.com` as a CN.
+2. When prompted for the CN, enter the name (plus domain) of your registry. For example,  use the name `my-registry.example.com` as a CN.
 
 3. Use the result to [start your registry with TLS enabled](./deploying.md#get-a-certificate)
 
