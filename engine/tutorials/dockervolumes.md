@@ -108,10 +108,6 @@ The `host-dir` can either be an absolute path or a `name` value. If you
 supply an absolute path for the `host-dir`, Docker bind-mounts to the path
 you specify. If you supply a `name`, Docker creates a named volume by that `name`.
 
-> **Note:**
-> The `VOLUME` instruction in a `Dockerfile` does not support
-> passing a `host-dir`.
-
 A `name` value must start with an alphanumeric character,
 followed by `a-z0-9`, `_` (underscore), `.` (period) or `-` (hyphen).
 An absolute path starts with a `/` (forward slash).
@@ -158,9 +154,11 @@ Here you've mounted the same `/src/webapp` directory but you've added the `ro`
 option to specify that the mount should be read-only.
 
 >**Note**: The host directory is, by its nature, host-dependent. For this
->reason, you can't mount a host directory from `Dockerfile` because built images
+>reason, you can't mount a host directory from `Dockerfile`, the `VOLUME`
+instruction does not support passing a `host-dir`, because built images
 >should be portable. A host directory wouldn't be available on all potential
 >hosts.
+
 
 ### Mount a shared-storage volume as a data volume
 
