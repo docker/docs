@@ -6,7 +6,7 @@ title: Use externally-signed certificates
 ---
 
 By default the UCP web UI is exposed using HTTPS, to ensure all
-communications between clients and the cluster are encrypted. Since UCP
+communications between clients and UCP are encrypted. Since UCP
 controllers use self-signed certificates for this, when a client accesses
 UCP their browsers won't trust this certificate, so the browser displays a
 warning message.

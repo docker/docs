@@ -13,41 +13,45 @@ is that instead of pulling the UCP images from Docker Hub, you use a
 computer that is connected to the internet to download a single package with
 all the images. Then you copy that package to the host where you’ll install UCP.
 
+## Versions available
 
-1.  Get the UCP package.
+{% include components/ddc_url_list.html %}
 
-    Use a computer with internet access to download a single package with all
-    Docker Datacenter components:
+## Download the offline package
 
-    ```bash
-    $ wget https://packages.docker.com/caas/ucp-{{ page.ucp_latest_version }}_dtr-{{ page.dtr_latest_version }}.tar.gz -O docker-datacenter.tar.gz
-    ```
+Use a computer with internet access to download a single package with all
+Docker Datacenter components:
 
-2.  Transfer the package to the offline nodes.
+```bash
+$ wget <package-url> -O docker-datacenter.tar.gz
+```
 
-    Now that you have the UCP package in your machine, you can transfer it to the
-    host that you want to manage with UCP. For each host:
+Now that you have the package in your local machine, you can transfer it to
+the machines where you want to install UCP.
+
+For each machine that you want to manage with UCP:
+
+1.  Copy the Docker Datacenter package to that machine.
 
     ```bash
     $ scp docker-datacenter.tar.gz <user>@<host>:/tmp
     ```
 
-3. Login into the hosts where you transferred the images.
+2.  Use ssh to login into the hosts where you transferred the package.
 
-4.  Load the UCP images.
+3.  Load the Docker Datacenter images.
 
-    Once the UCP package is transferred to the hosts, you can use the
-    `docker load` command, to load the images from the tar archive. On each
-    host, run:
+    Once the package is transferred to the hosts, you can use the
+    `docker load` command, to load the Docker images from the tar archive:
 
     ```bash
     $ docker load < docker-datacenter.tar.gz
     ```
 
-5.  Install Docker UCP.
+## Install UCP
 
-    Now that the offline hosts have all the images needed to install UCP,
-    you can [install Docker UCP that host](index.md).
+Now that the offline hosts have all the images needed to install UCP,
+you can [install Docker UCP on that host](index.md).
 
 
 ## Where to go next
