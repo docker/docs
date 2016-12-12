@@ -28,7 +28,7 @@ $ docker-cloud service redeploy redis
 
 Check the container status using the `container ps` command, and wait until the new container is running again. In the example below you can see the original container in the "Terminated" state, and the new container that is "Starting".
 
-```
+```none
 $ docker-cloud container ps --service redis
 NAME     UUID      STATUS        IMAGE                RUN COMMAND      EXIT CODE  DEPLOYED        PORTS
 redis-1  5ddc0d66  ✘ Terminated  redis:staging        /run.sh                  0  15 minutes ago  6379/tcp
@@ -37,7 +37,7 @@ redis-1  3eff67a9  ⚙ Starting    redis:staging        /run.sh
 
 Once the container is running, get the web endpoint using `container ps`, then try curling or visiting the web endpoint again
 
-```
+```none
 $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
 <h3>Hello Friendly Users!</h3><b>Hostname:</b> web-1<br/><b>Visits:</b> 1%
 ```
@@ -46,11 +46,14 @@ The Redis cache service redeployment caused the counter to reset.
 
 #### Enabling persistence
 
-The specific Redis image (*redis*) in this tutorial supports data persistence. This is not a common requirement for a Redis cache and it's not enabled by default in most images. However to activate this in *our* image, you only need to set two environment variables.
+The specific Redis image (*redis*) in this tutorial supports data persistence.
+This is not a common requirement for a Redis cache and it's not enabled by
+default in most images. However to activate this in *our* image, you only need
+to set two environment variables.
 
 Run the following command to create and set these two environment variables.
 
-```
+```none
 $ docker-cloud service set \
 -e REDIS_APPENDONLY=yes \
 -e REDIS_APPENDFSYNC=always \
@@ -63,11 +66,13 @@ open source `redis` image <a href="https://github.com/docker-library/redis/" tar
 
 With these settings, Redis can create and store its data in a volume. The volume is in `/data`.
 
-Visit the web endpoint a few more times to make sure that the cache is working as expected. Then redeploy the Redis service to see if the counter resets, or if it persists even after the container is terminated and re-created.
+Visit the web endpoint a few more times to make sure that the cache is working
+as expected. Then redeploy the Redis service to see if the counter resets, or if
+it persists even after the container is terminated and re-created.
 
 Curl the service to increment the counter:
 
-```
+```none
 $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
 <h3>Hello Python users!!</h3><b>Hostname:</b> web-1<br/><b>Visits:</b> 1%
 $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
@@ -78,13 +83,13 @@ $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
 
 Next, redeploy the service using the `service redeploy` command:
 
-```
+```none
 $ docker-cloud service redeploy redis
 ```
 
 Check the service status:
 
-```
+```none
 $ docker-cloud container ps --service redis
 NAME     UUID      STATUS        IMAGE                RUN COMMAND      EXIT CODE  DEPLOYED        PORTS
 cache-1  8193cc1b  ✘ Terminated  redis:staging        /run.sh                  0  10 minutes ago  6379/tcp
@@ -93,7 +98,7 @@ cache-1  61f63d97  ▶ Running     redis:staging        /run.sh                 
 
 Once the service is running again, curl the web page again to see what the counter value is.
 
-```
+```none
 $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
 <h3>Hello Python users!!</h3><b>Hostname:</b> web-3<br/><b>Visits:</b> 4%
 ```

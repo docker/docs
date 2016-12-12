@@ -58,9 +58,13 @@ web-2                  ab045c42  ▶ Running  my-username/quickstart-python:late
 lb-1                   9793e58b  ▶ Running  dockercloud/haproxy:latest                           /run.sh                   14 minutes ago  443/tcp, lb-1.my-username.cont.dockerapp.io:80->80/tcp
 ```
 
-You should notice an URL endpoint in the *PORT* column for haproxy-1. In the example above this is `lb-1.my-username.cont.dockerapp.io:80`. Open the `lb-1` URL in your browser or curl from the CLI.
+You should notice an URL endpoint in the *PORT* column for haproxy-1. In the
+example above this is `lb-1.my-username.cont.dockerapp.io:80`. Open the `lb-1`
+URL in your browser or curl from the CLI.
 
-If you refresh or run curl multiple times you should see requests distributed between the two containers of in the `web` service. You can see which container responds to your request in the `Hostname` section of the response.
+If you refresh or run curl multiple times you should see requests distributed
+between the two containers of in the `web` service. You can see which container
+responds to your request in the `Hostname` section of the response.
 
 ```none
 $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io
