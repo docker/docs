@@ -41,10 +41,27 @@ fault-tolerant. However, additional manager nodes reduce write performance
 because more nodes must acknowledge proposals to update the swarm state.
 This means more network round-trip traffic.
 
-Raft requires a majority of managers, also called a quorum, to agree on proposed
-updates to the swarm. A quorum of managers must also agree on node additions
-and removals. Membership operations are subject to the same constraints as state
-replication.
+Raft requires a majority of managers, also called the quorum, to agree on
+proposed updates to the swarm, such as node additions or removals. Membership
+operations are subject to the same constraints as state replication.
+
+### Maintaining the quorum of managers
+
+If the swarm loses the quorum of managers, the swarm cannot perform management
+tasks. If your swarm has multiple managers, always have more than two. In order
+to maintain quorum, a majority of managers must be available. An odd number of
+managers is recommended, because the next even number does not make the quorum
+easier to keep. For instance, whether you have 3 or 4 managers, you can still
+only lose 1 manager and maintain the quorum. If you have 5 or 6 managers, you
+can still only lose two.
+
+Even if a swarm loses the quorum of managers, swarm tasks on existing worker
+nodes continue to run. However, swarm nodes cannot be added, updated, or
+removed, and new or existing tasks cannot be started, stopped, moved, or
+updated.
+
+See [Recovering from losing the quorum](recovering-from-losing-the-quorum) for
+troubleshooting steps if you do lose the quorum of managers.
 
 ## Use a static IP for manager node advertise address
 
@@ -65,8 +82,8 @@ Dynamic IP addresses are OK for worker nodes.
 
 You should maintain an odd number of managers in the swarm to support manager
 node failures. Having an odd number of managers ensures that during a network
-partition, there is a higher chance that a quorum remains available to process
-requests if the network is partitioned into two sets. Keeping a quorum is not
+partition, there is a higher chance that the quorum remains available to process
+requests if the network is partitioned into two sets. Keeping the quorum is not
 guaranteed if you encounter more than two network partitions.
 
 | Swarm Size |  Majority  |  Fault Tolerance  |
@@ -104,7 +121,7 @@ In addition to maintaining an odd number of manager nodes, pay attention to
 datacenter topology when placing managers. For optimal fault-tolerance, distribute
 manager nodes across a minimum of 3 availability-zones to support failures of an
 entire set of machines or common maintenance scenarios. If you suffer a failure
-in any of those zones, the swarm should maintain a quorum of manager nodes
+in any of those zones, the swarm should maintain the quorum of manager nodes
 available to process requests and rebalance workloads.
 
 | Swarm manager nodes |  Repartition (on 3 Availability zones) |
@@ -232,29 +249,51 @@ you demote or remove a manager
 ## Recover from disaster
 
 Swarm is resilient to failures and the swarm can recover from any number
-of temporary node failures (machine reboots or crash with restart).
+of temporary node failures (machine reboots or crash with restart) or other
+transient errors. However, a swarm cannot automatically recover if it loses a
+quorum. Tasks on existing worker nodes will continue to run, but administrative
+tasks are not possible, including scaling or updating services and joining or
+removing nodes from the swarm. The best way to recover is to bring the missing
+manager nodes back online. If that is not possible, continue reading for some
+options for recovering your swarm.
 
-In a swarm of `N` managers, there must be a quorum of manager nodes greater than
-50% of the total number of managers (or `(N/2)+1`) in order for the swarm to
-process requests and remain available. This means the swarm can tolerate up to
-`(N-1)/2` permanent failures beyond which requests involving swarm management
-cannot be processed. These types of failures include data corruption or hardware
-failures.
+In a swarm of `N` managers, a quorum (a majority) of manager nodes must always
+be available. For example, in a swarm with 5 managers, a minimum of 3 must be
+operational and in communication with each other. In other words, the swarm can
+tolerate up to `(N-1)/2` permanent failures beyond which requests involving
+swarm management cannot be processed. These types of failures include data
+corruption or hardware failures.
 
-Even if you follow the guidelines here, it is possible that you can lose a
-quorum of manager nodes. If you can't recover the quorum by conventional
-means such as restarting faulty nodes, you can recover the swarm by running
-`docker swarm init --force-new-cluster` on a manager node.
+### Recovering from losing the quorum
+
+If you lose the quorum of managers, you cannot administer the swarm. If you have
+lost the quorum and you attempt to perform any management operation on the swarm,
+an error occurs:
+
+```no-highlight
+Error response from daemon: rpc error: code = 4 desc = context deadline exceeded
+```
+
+The best way to recover from losing the quorum is to bring the failed nodes back
+online. If you can't do that, the only way to recover from this state is to use
+the `--force-new-cluster` action from a manager node. This removes all managers
+except the manager the command was run from. The quorum is achieved because
+there is now only one manager. Promote nodes to be managers until you have the
+desired number of managers.
 
 ```bash
 # From the node to recover
 docker swarm init --force-new-cluster --advertise-addr node01:2377
 ```
 
-The `--force-new-cluster` flag puts the Docker Engine into swarm mode as a
-manager node of a single-node swarm. It discards swarm membership information
-that existed before the loss of the quorum but it retains data necessary to the
-Swarm such as services, tasks and the list of worker nodes.
+When you run the `docker swarm init` command with the `--force-new-cluster`
+flag, the Docker Engine where you run the command becomes the manager node of a
+single-node swarm which is capable of managing and running services. The manager
+has all the previous information about services and tasks, worker nodes are
+still part of the swarm, and services are still running. You will need to add or
+re-add  manager nodes to achieve your previous task distribution and ensure that
+you have enough managers to maintain high availability and prevent losing the
+quorum.
 
 ## Forcing the swarm to rebalance
 
@@ -268,11 +307,16 @@ balance across the swarm. When new tasks start, or when a node with running
 tasks becomes unavailable, those tasks are given to less busy nodes. The goal
 is eventual balance, with minimal disruption to the end user.
 
-If you are concerned about an even balance of load and don't mind disrupting
-running tasks, you can force your swarm to re-balance by temporarily scaling
-the service upward.
+In Docker 1.13 and higher, you can use the `--force` or `-f` flag with the
+`docker service update` command to force the service to redistribute its tasks
+across the available worker nodes. This will cause the service tasks to restart.
+Client applications may be disrupted. If you have configured it, your service
+will use a [rolling update](swarm-tutorial.md#rolling-update).
 
-Use `docker service inspect --pretty <servicename>` to see the configured scale
+If you use an earlier version and you want to achieve an even balance of load
+across workers and don't mind disrupting running tasks, you can force your swarm
+to re-balance by temporarily scaling the service upward. Use
+`docker service inspect --pretty <servicename>` to see the configured scale
 of a service. When you use `docker service scale`, the nodes with the lowest
 number of tasks are targeted to receive the new workloads. There may be multiple
 under-loaded nodes in your swarm. You may need to scale the service up by modest
