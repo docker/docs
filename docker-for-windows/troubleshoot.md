@@ -46,10 +46,6 @@ can use in email or the forum to reference the upload.
 
 ## Troubleshooting
 
-### Containerized web server apps expect requests from host machine IP not container IP
-
-By default, a containerized web server will expect requests from the host machine IP `localhost`, not the container IP. For more information, see the issue [Container "does not send any data" when request is sent](https://github.com/docker/for-win/issues/197).
-
 ### inotify on shared drives does not work
 
 Currently, `inotify` does not work on Docker for Windows. This will become
