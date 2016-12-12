@@ -13,6 +13,23 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](install/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.1.2
+
+(8 Dec 2016)
+
+**Features**
+
+* The web UI now alerts when no backups have been made in a week
+* Google Cloud Storage driver now throttles data if there's heavy load
+
+
+**Bug fixes**
+
+* Restore operation now prints logs
+* Upgraded alpine images used by the DTR services to fix security vulnerabilities
+* Upgrading from 2.0 to 2.1 no longer makes tags disappear
+
+
 ## DTR 2.1.1
 
 (28 Nov 2016)
