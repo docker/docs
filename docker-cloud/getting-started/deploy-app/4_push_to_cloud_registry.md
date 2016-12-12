@@ -16,11 +16,13 @@ In step 2, you set your Docker Cloud username as an environment variable called 
 First tag the image. Tags in this case denote different builds of an image.
 
 **Python quickstart**
+
 ```bash
 $ docker tag quickstart-python $DOCKER_ID_USER/quickstart-python
 ```
 
 **Go quickstart**
+
 ```bash
 $ docker tag quickstart-go $DOCKER_ID_USER/quickstart-go
 ```
@@ -28,11 +30,13 @@ $ docker tag quickstart-go $DOCKER_ID_USER/quickstart-go
 Next, push the tagged image to the repository.
 
 **Python quickstart**
+
 ```
 $ docker push $DOCKER_ID_USER/quickstart-python
 ```
 
 **Go quickstart**
+
 ```
 $ docker push $DOCKER_ID_USER/quickstart-go
 ```

@@ -40,9 +40,12 @@ $ docker-cloud service set --env NAME="Friendly Users" --redeploy web
 
 ## Check endpoint status
 
-Execute `docker-cloud container ps` again to see the container's new endpoint. You should now see two `web-1` containers, one with a status of **terminated** (that's the original container) and another one either **starting** or already **running**.
+Execute `docker-cloud container ps` again to see the container's new endpoint.
+You should now see two `web-1` containers, one with a status of **terminated**
+(that's the original container) and another one either **starting** or already
+**running**.
 
-```
+```none
 $ docker-cloud container ps
 NAME                         UUID      STATUS        IMAGE                                          RUN COMMAND      EXIT CODE  DEPLOYED        PORTS
 web-1                        a2ff2247  ✘ Terminated  my-username/quickstart-python:latest           python app.py               40 minutes ago  web-1.my-username.cont.dockerapp.io:49165->80/tcp
@@ -53,7 +56,7 @@ Now curl the new endpoint to see the updated greeting.
 
 > **Note**: If `docker-cloud container ps` doesn't show an endpoint for the container yet, wait until the container status changes to **running**.
 
-```
+```none
 $ curl web-1.$DOCKER_ID_USER.cont.dockerapp.io:49162
 Hello Friendly Users!</br>Hostname: e360d05cdb81</br>Counter: Redis Cache not found, counter disabled.%
 ```
@@ -62,11 +65,13 @@ Your service now returns `Hello Friendly Users!`. Great! You've modified your se
 
 ### Environment Variables and the Dockerfile
 
-Environment variables can also be set in the Dockerfile, and modified at runtime (like you just did).
+Environment variables can also be set in the Dockerfile, and modified at runtime
+(like you just did).
 
-Wondering where the default value for the **NAME** environment variable is set? Look in the quickstart's Dockerfile.
+Wondering where the default value for the **NAME** environment variable is set?
+Look in the quickstart's Dockerfile.
 
-```
+```none
 # Environment Variables
 ENV NAME World
 ```
