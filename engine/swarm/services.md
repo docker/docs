@@ -66,7 +66,19 @@ $ docker service create --name helloworld alpine ping docker.com
 9uk4639qpg7npwf3fn2aasksr
 ```
 
-## Configure the runtime environment
+## Configuring services
+
+When you create a service, you can specify many different configuration options
+and constraints. See the output of `docker service create --help` for a full
+listing of them. Some common configuration options are described below.
+
+Created services do not always run right away. A service can be in a pending
+state if its image is unavailable, no node meets the requirements you configure
+for the service, or other reasons. See
+[Pending services](how-swarm-mode-works/services.md#pending-services) for more
+information.
+
+### Configure the runtime environment
 
 You can configure the following options for the runtime environment in the
 container:
@@ -87,7 +99,7 @@ $ docker service create --name helloworld \
 9uk4639qpg7npwf3fn2aasksr
 ```
 
-## Control service scale and placement
+### Control service scale and placement
 
 Swarm mode has two types of services, replicated and global. For replicated
 services, you specify the number of replica tasks for the swarm manager to
@@ -117,15 +129,22 @@ deploys a service to the node. You can apply constraints to the
 service based upon node attributes and metadata or engine metadata. For more
 information on constraints, refer to the `docker service create` [CLI  reference](../reference/commandline/service_create.md).
 
+### Reserving memory or number of CPUs for a service
 
-## Configure service networking options
+To reserve a given amount of memory or number of CPUs for a service, use the
+`--reserve-memory` or `--reserve-cpu` flags. If no available nodes can satisfy
+the requirement (for instance, if you request 4 CPUs and no node in the swarm
+has 4 CPUs), the service remains in a pending state until a node is available to
+run its tasks.
+
+### Configure service networking options
 
 Swarm mode lets you network services in a couple of ways:
 
 * publish ports externally to the swarm using ingress networking
 * connect services and tasks within the swarm using overlay networks
 
-### Publish ports externally to the swarm
+#### Publish ports externally to the swarm
 
 You publish service ports externally to the swarm using the `--publish<TARGET-PORT>:<SERVICE-PORT>`
 flag. When you publish a service port, the swarm
@@ -174,7 +193,7 @@ Commercial support is available at
 </html>
 ```
 
-### Add an overlay network
+#### Add an overlay network
 
 Use overlay networks to connect one or more services within the swarm.
 
@@ -209,7 +228,7 @@ For more information on overlay networking and service discovery, refer to
 [Attach services to an overlay network](networking.md). See also
 [Docker swarm mode overlay network security model](../userguide/networking/overlay-security-model.md).
 
-## Configure update behavior
+### Configure update behavior
 
 When you create a service, you can specify a rolling update behavior for how the
 swarm should apply changes to the service when you run `docker service update`.
@@ -247,7 +266,7 @@ $ docker service create \
 0u6a4s31ybk7yw2wyvtikmu50
 ```
 
-## Configure mounts
+### Configure mounts
 
 You can create two types of mounts for services in a swarm, `volume` mounts or
 `bind` mounts. You pass the `--mount` flag when you create a service. The
