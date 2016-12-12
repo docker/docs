@@ -7,50 +7,53 @@ redirect_from:
 title: Install Docker Trusted Registry offline
 ---
 
-The procedure to install Docker Trusted Registry on a node is the same,
-whether that node has access to the internet or not.
+The procedure to install Docker Trusted Registry on a host is the same,
+whether that host has access to the internet or not.
 
-The only difference when installing DTR on an offline node, is that instead
-of pulling the DTR images from Docker Hub, you use a computer that is connected
-to the internet to download a single package with all DTR images. Then you
-copy that package to the nodes where you’ll install DTR.
+The only difference when installing on an offline host,
+is that instead of pulling the UCP images from Docker Hub, you use a
+computer that is connected to the internet to download a single package with
+all the images. Then you copy that package to the host where you’ll install DTR.
 
-1.  Get the DTR package.
+## Versions available
 
-    Use a computer with internet access to download a single package with all
-    Docker Datacenter components:
+{% include components/ddc_url_list.html %}
 
-    ```none
-    $ wget https://packages.docker.com/caas/ucp-1.1.4_dtr-2.0.4.tar.gz -O docker-datacenter.tar.gz
+## Download the offline package
+
+Use a computer with internet access to download a single package with all
+Docker Datacenter components:
+
+```bash
+$ wget <package-url> -O docker-datacenter.tar.gz
+```
+
+Now that you have the package in your local machine, you can transfer it to
+the machines where you want to install DTR.
+
+For each machine where you want to install DTR:
+
+1.  Copy the Docker Datacenter package to that machine.
+
+    ```bash
+    $ scp docker-datacenter.tar.gz <user>@<host>:/tmp
     ```
 
-2.  Transfer the package to the offline node.
+2.  Use ssh to login into the hosts where you transferred the package.
 
-    Now that you have the DTR package file, transfer it to the node where you
-    want to install Docker Trusted Registry. You can use the `scp` command
-    for this.
+3.  Load the Docker Datacenter images.
 
-    ```none
-    $ scp docker-datacenter.tag.gz $USER@$DTR_HOST:/tmp
+    Once the package is transferred to the hosts, you can use the
+    `docker load` command, to load the Docker images from the tar archive:
+
+    ```bash
+    $ docker load < docker-datacenter.tar.gz
     ```
 
-3.  Login into the host where you transferred the images.
+## Install DTR
 
-4.  Load the UCP images.
-
-    Once the package is on the node where you want to install DTR, you can use
-    the `docker load` command, to load the images from the .tar file.
-
-    ```none
-    $ docker load < /tmp/docker-datacenter.tar.gz
-    ```
-
-5.  Install DTR.
-
-    Now that the offline node has all the images needed to install UCP,
-    you can [install DTR that host](index.md). Make sure to
-    also copy the images to any other nodes you want to install DTR
-    replicas onto.
+Now that the offline hosts have all the images needed to install DTR,
+you can [install DTR on that host](index.md).
 
 
 ## Where to go next
