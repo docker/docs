@@ -11,7 +11,7 @@ Right now, your service is running on a single container. That's great for now.
 
 You can check how many containers are running using the `docker-cloud container ps` command.
 
-```
+```none
 $ docker-cloud container ps
 NAME                   UUID      STATUS     IMAGE                                          RUN COMMAND          EXIT CODE  DEPLOYED     PORTS
 web-1                  6c89f20e  ▶ Running  my-username/python-quickstart:latest           python app.py                   1 hour ago   web-1.my-username.cont.dockerapp.io:49162->80/tcp
@@ -27,7 +27,7 @@ In this example, you can see we're scaling the service called `web` to `2` conta
 
 Run `service ps` again, and you should see now see your service scaling:
 
-```
+```none
 $ docker-cloud service ps
 NAME                 UUID      STATUS     IMAGE                                          DEPLOYED
 web                  68a6fb2c  ⚙ Scaling  my-username/python-quickstart:latest           1 hour ago
@@ -35,7 +35,7 @@ web                  68a6fb2c  ⚙ Scaling  my-username/python-quickstart:latest
 
 If you run `container ps` you should see multiple containers:
 
-```
+```none
 $ docker-cloud container ps
 NAME                   UUID      STATUS      IMAGE                                          RUN COMMAND          EXIT CODE  DEPLOYED     PORTS
 web-1                  6c89f20e  ▶ Running   my-username/python-quickstart:latest           python app.py                   1 hour ago   web-1.my-username.cont.dockerapp.io:49162->80/tcp
@@ -44,7 +44,7 @@ web-2                  ab045c42  ⚙ Starting  my-username/python-quickstart:lat
 
 Containers aren't assigned a *PORT* until they are *running*, so you have to wait until the Service status goes from *Scaling* to *Running* to see what port is assigned to them.
 
-```
+```none
 $ docker-cloud container ps
 NAME                   UUID      STATUS     IMAGE                                          RUN COMMAND          EXIT CODE  DEPLOYED      PORTS
 web-1                  6c89f20e  ▶ Running  my-username/python-quickstart:latest           python app.py                   1 hour ago    web-1.my-username.cont.dockerapp.io:49162->80/tcp
@@ -57,7 +57,7 @@ In the example output above, the URL `web-1.my-username.cont.dockerapp.io:49162`
 
 If you use curl to visit the pages, you should see something like this:
 
-```
+```none
 $ curl web-1.$DOCKER_ID_USER.cont.dockerapp.io:49166
 Hello Python Users!</br>Hostname: web-1</br>Counter: Redis Cache not found, counter disabled.%
 $ curl web-2.$DOCKER_ID_USER.cont.dockerapp.io:49156
