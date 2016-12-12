@@ -82,7 +82,7 @@ enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
 <p />
 * Nested virtualization scenarios, such as running Docker for Windows on a VMWare or Parallels instance, might work, but come with no guarantees (i.e., not officially supported).
 <p />
-* **What the Docker for Windows install includes**: The installation provides [Docker Engine](https://docs.docker.com/engine/userguide/intro/), Docker CLI client, [Docker Compose](https://docs.docker.com/compose/overview/), and [Docker Machine](https://docs.docker.com/machine/overview/).
+* **What the Docker for Windows install includes**: The installation provides [Docker Engine](/engine/userguide/intro/), Docker CLI client, [Docker Compose](/compose/overview/), and [Docker Machine](/machine/overview/).
 
 ### About Windows containers and Windows Server 2016
 
@@ -458,15 +458,15 @@ You can configure options on the Docker daemon in the given JSON configuration f
 
 ![Docker Daemon](images/docker-daemon.png)
 
-For a full list of options on the Docker daemon, see <a href="https://docs.docker.com/engine/reference/commandline/dockerd/" target="_blank">daemon</a> in the Docker Engine command line reference.
+For a full list of options on the Docker daemon, see [daemon](/engine/reference/commandline/dockerd/) in the Docker Engine command line reference.
 
 In that topic, see also:
 
-* [Daemon configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/daemon-configuration-file)
+* [Daemon configuration file](/engine/reference/commandline/dockerd/daemon-configuration-file)
 
-* [Linux configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/linux-configuration-file)
+* [Linux configuration file](/engine/reference/commandline/dockerd/linux-configuration-file)
 
-* [Windows configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/windows-configuration-file)
+* [Windows configuration file](/engine/reference/commandline/dockerd/windows-configuration-file)
 
 Note that updating these settings requires a reconfiguration and reboot of the Linux VM.
 
