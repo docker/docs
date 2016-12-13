@@ -9,8 +9,15 @@ RUN git clone https://www.github.com/docker/docker.github.io temp; \
 		&& mkdir -p allvbuild/${VER} \
 		&& jekyll build -s temp -d allvbuild/${VER} \
 		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/'"$VER"'/#g' \
+		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/'"$VER"'/#g' \
+		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="http://docs.docker.com/#href="/'"$VER"'/#g' \
+		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com#href="/'"$VER"'/#g' \
+		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="http://docs.docker.com#href="/'"$VER"'/#g' \
 		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/'"$VER"'/#g' \
-		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/'"$VER"'/#g'; \
+		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="https://docs.docker.com/#src="/'"$VER"'/#g' \
+		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="http://docs.docker.com/#src="/'"$VER"'/#g' \
+		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="https://docs.docker.com#src="/'"$VER"'/#g' \
+		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="http://docs.docker.com#src="/'"$VER"'/#g'; \
 	done; \
 	rm -rf temp
 
