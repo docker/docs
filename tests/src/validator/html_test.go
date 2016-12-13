@@ -66,43 +66,37 @@ func testURLs(htmlBytes []byte) error {
 			return nil
 		case html.StartTagToken:
 			t := z.Token()
+
+			url := ""
+
 			// check tag types
 			switch t.Data {
 			case "a":
 				countLinks++
-				ok, _ := getHref(t)
+				ok, href := getHref(t)
 				// skip, it may just be an anchor
 				if !ok {
 					break
 				}
+				url = href
 
 			case "img":
 				countImages++
-				ok, _ := getSrc(t)
+				ok, src := getSrc(t)
 				if !ok {
 					return errors.New("img with no src: " + t.String())
+				}
+				url = src
+			}
+
+			// there's an url to test!
+			if url != "" {
+				if strings.Contains(url, "docs.docker.com") {
+					return errors.New("found absolute link: " + t.String())
 				}
 			}
 		}
 	}
-
-	// _, md, err := frontparser.ParseFrontmatterAndContent(mdBytes)
-	// if err != nil {
-	// 	return err
-	// }
-
-	// regularExpression, err := regexp.Compile(`\[[^\]]+\]\(([^\)]+)\)`)
-	// if err != nil {
-	// 	return err
-	// }
-
-	// submatches := regularExpression.FindAllStringSubmatch(string(md), -1)
-
-	// for _, submatch := range submatches {
-	// 	if strings.Contains(submatch[1], "docs.docker.com") {
-	// 		return errors.New("found absolute link (" + strings.TrimSpace(submatch[1]) + ")")
-	// 	}
-	// }
 
 	return nil
 }
