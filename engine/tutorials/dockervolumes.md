@@ -4,6 +4,7 @@ keywords: Examples, Usage, volume, docker, documentation, user guide, data,  vol
 redirect_from:
 - /engine/userguide/containers/dockervolumes/
 - /engine/userguide/dockervolumes/
+- /userguide/dockervolumes/
 title: Manage data in containers
 ---
 
