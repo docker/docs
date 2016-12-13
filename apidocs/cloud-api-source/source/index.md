@@ -97,6 +97,13 @@ Examples:
 - The user wants to operate on the node cluster list endpoint in an organization called `exampleorg` (which they have permission to see):
     - https://cloud.docker.com/api/infra/v1/exampleorg/nodecluster/
 
+### Namespaced endpoints in the docker-cloud CLI
+
+If you are using namespaces with the `docker-cloud` CLI, set them by changing
+the value of the `DOCKERCLOUD_NAMESPACE` environment variable. You can either
+set this globally, or specify it before each CLI command. To learn more, see the
+[Docker Cloud CLI README](https://github.com/docker/dockercloud-cli#namespace).
+
 ## Stream API
 
 ```python
