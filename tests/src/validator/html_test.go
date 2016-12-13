@@ -91,7 +91,7 @@ func testURLs(htmlBytes []byte) error {
 
 			// there's an url to test!
 			if url != "" {
-				if strings.Contains(url, "docs.docker.com") {
+				if strings.HasPrefix(url, "http://docs.docker.com") || strings.HasPrefix(url, "https://docs.docker.com") {
 					return errors.New("found absolute link: " + t.String())
 				}
 			}
