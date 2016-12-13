@@ -32,4 +32,4 @@ RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/referen
  && rm -rf allv
 
 # Serve the site, which is now all static HTML
-CMD jekyll serve -s /usr/src/app/allvbuild -d /_site --no-watch -H 0.0.0.0 -P 4000
+CMD jekyll serve -s /usr/src/app/allvbuild --no-watch -H 0.0.0.0 -P 4000
