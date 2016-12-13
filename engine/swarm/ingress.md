@@ -77,7 +77,7 @@ $ docker service inspect --format="{{json .Endpoint.Spec.Ports}}" my-web
 The output shows the `<TARGET-PORT>` from the containers and the
 `<PUBLISHED-PORT>` where nodes listen for requests for the service.
 
-### Publish a port for TCP only or UCP only
+### Publish a port for TCP only or UDP only
 
 By default, when you publish a port, it is a TCP port. You can
 specifically publish a UDP port instead of or in addition to a TCP port. When
