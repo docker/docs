@@ -1,6 +1,8 @@
 ---
 description: Uninstall a UCP controller and nodes
 keywords: uninstall, ucp
+redirect_from:
+- /ucp/reference/uninstall/
 title: docker/ucp uninstall
 ---
 
