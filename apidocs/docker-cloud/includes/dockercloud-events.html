@@ -189,17 +189,23 @@
 </code></pre>
 <pre class="highlight go"><code><span class="k">import</span><span class="x"> </span><span class="s">"github.com/docker/go-dockercloud/dockercloud"</span><span class="x">
 
-</span><span class="n">c</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">make</span><span class="p">(</span><span class="k">chan</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">Event</span><span class="p">)</span><span class="x">
-</span><span class="n">e</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="nb">make</span><span class="p">(</span><span class="k">chan</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x">
+</span><span class="c">// Listens for container events only</span><span class="x">
+</span><span class="n">myFilter</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">NewStreamFilter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dockercloud</span><span class="o">.</span><span class="n">EventFilter</span><span class="p">{</span><span class="n">Type</span><span class="o">:</span><span class="x"> </span><span class="s">"container"</span><span class="p">})</span><span class="x">
 
-</span><span class="k">go</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">Events</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="x"> </span><span class="n">e</span><span class="p">)</span><span class="x">
+</span><span class="n">stream</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">dockercloud</span><span class="o">.</span><span class="n">NewStream</span><span class="p">(</span><span class="n">myFilter</span><span class="p">)</span><span class="x">
+
+</span><span class="k">if</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="n">stream</span><span class="o">.</span><span class="n">Connect</span><span class="p">();</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">==</span><span class="x"> </span><span class="no">nil</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="k">go</span><span class="x"> </span><span class="n">stream</span><span class="o">.</span><span class="n">RunForever</span><span class="p">()</span><span class="x">
+</span><span class="p">}</span><span class="x"> </span><span class="k">else</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">log</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="s">"Connect err: "</span><span class="x"> </span><span class="o">+</span><span class="x"> </span><span class="n">err</span><span class="o">.</span><span class="n">Error</span><span class="p">())</span><span class="x">
+</span><span class="p">}</span><span class="x">
 
 </span><span class="k">for</span><span class="x"> </span><span class="p">{</span><span class="x">
     </span><span class="k">select</span><span class="x"> </span><span class="p">{</span><span class="x">
-        </span><span class="k">case</span><span class="x"> </span><span class="n">event</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="o">&lt;-</span><span class="n">c</span><span class="o">:</span><span class="x">
-            </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="x">
-        </span><span class="k">case</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="o">&lt;-</span><span class="n">e</span><span class="o">:</span><span class="x">
-            </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
+    </span><span class="k">case</span><span class="x"> </span><span class="n">event</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="o">&lt;-</span><span class="n">stream</span><span class="o">.</span><span class="n">MessageChan</span><span class="o">:</span><span class="x">
+        </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="x">
+    </span><span class="k">case</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="o">:=</span><span class="x"> </span><span class="o">&lt;-</span><span class="n">stream</span><span class="o">.</span><span class="n">ErrorChan</span><span class="o">:</span><span class="x">
+        </span><span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="x">
     </span><span class="p">}</span><span class="x">
 </span><span class="p">}</span><span class="x">
 </span></code></pre>
@@ -221,6 +227,28 @@
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET /api/audit/v1/[optional_namespace/]events/</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>Filter by type</td>
+</tr>
+<tr>
+<td>object</td>
+<td>Filter by object resource URI</td>
+</tr>
+<tr>
+<td>parent</td>
+<td>Filter by object parents</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
