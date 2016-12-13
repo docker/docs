@@ -5,16 +5,17 @@ keywords: docker, ucp, install, checklist
 title: Plan a production installation
 ---
 
-Docker Universal Control Plane can be installed on-premises, or
-on a virtual private cloud.
-This article explains what you need to consider before deploying
-Docker Universal Control Plane.
+Docker Universal Control Plane helps you manage your container cluster from a
+centralized place. This article explains what you need to consider before
+deploying Docker Universal Control Plane for production.
 
 ## System requirements
 
-Before installing UCP, you should make sure all nodes of your cluster
-comply with the [system requirements](system-requirements.md).
+Before installing UCP you should make sure that all nodes (physical or virtual
+machines) that you'll manage with UCP:
 
+* [Comply the the system requirements](system-requirements.md)
+* Are running the same version of CS Docker Engine
 
 ## Hostname strategy
 

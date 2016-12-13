@@ -36,9 +36,9 @@ x509: certificate signed by unknown authority
 
 ## 1. Configure your local computer
 
-If you want to use your local computer to interact with DTR, you also need to
-configure configure it to trust the DTR TLS certificates. This depends on the
-operating system:
+If you want to use your local computer to interact with DTR, you need to
+configure it to trust the DTR TLS certificates. This depends on the operating
+system:
 
 * For macOS:
 
@@ -56,7 +56,7 @@ operating system:
 
   ```bash
   # Download the DTR CA certificate
-  $ sudo curl -k https://<dtr-domain-name>/ca -o /usr/local/share/ca-certificates/<dtr-domain-name>.crt
+  $ sudo curl -k https://<dtr-url>/ca -o /usr/local/share/ca-certificates/<dtr-domain-name>.crt
 
   # Refresh the list of certificates to trust
   $ sudo update-ca-certificates
@@ -69,7 +69,7 @@ operating system:
 
   ```bash
   # Download the DTR CA certificate
-  $ sudo curl -k https://<dtr-domain-name>/ca -o /etc/pki/ca-trust/source/anchors/<dtr-domain-name>.crt
+  $ sudo curl -k https://<dtr-url>/ca -o /etc/pki/ca-trust/source/anchors/<dtr-domain-name>.crt
 
   # Refresh the list of certificates to trust
   $ sudo update-ca-trust
@@ -78,12 +78,12 @@ operating system:
   $ sudo /bin/systemctl restart docker.service
   ```
 
-## 2. Test your setup
+## 2. Test your local setup
 
 The best way to confirm that your computer is correctly configured, is by
 trying to pull and push images from your local Docker installation to DTR.
 
-1. Create a test repository on DTR.
+1.  Create a test repository on DTR.
 
     Navigate to the **DTR web UI**, and create a new **hello-world** repository
     so that you can push and pull images. Set it as **private**, and save
@@ -91,28 +91,24 @@ trying to pull and push images from your local Docker installation to DTR.
 
     ![](../images/dtr-integration-1.png)
 
-2. Use a [UCP client bundle](../access-ucp/cli-based-access.md) to run docker
-commands in the UCP cluster.
+2.  Pull the `hello-world` image from Docker Store, re-tag it, and push it to the
+DTR repository you created.
 
-3.  Pull an image from Docker Hub:
+    ```none
+    # Pull hello-world from Docker Store
+    docker pull hello-world:latest
 
-    ```bash
-    $ docker pull hello-world
+    # Re-tag it
+    docker tag hello-world:latest <dtr-domain>/<user>/hello-world:latest
+
+    # Log into DTR
+    docker login <dtr-domain>
+
+    # Push your image to DTR
+    docker push <dtr-domain>/<user>/hello-world:latest
     ```
 
-4.  Retag the image:
-
-    ```bash
-    $ docker tag hello-world:latest <dtr-domain-name>/<username>/hello-world:1
-    ```
-
-5.  Push the image from the UCP node to your private registry:
-
-    ```bash
-    $ docker push <dtr-domain-name>/<username>/hello-world:1
-    ```
-
-6.  Validate that your image is now stored on DTR.
+3.  Validate that your image is now stored in DTR.
 
     When successfully pushing the image you should see a result like:
 
@@ -128,31 +124,19 @@ commands in the UCP cluster.
     ![](../images/dtr-integration-2.png)
 
 
+## 3. Configure UCP Docker Engines
 
-
-
-## 1. Configure UCP Docker Engines
+You also need to configure the Docker Engine on every UCP node to trust the
+DTR TLS certificates. This allows you do deploy services to UCP using images
+that are stored in DTR.
 
 For each UCP node:
 
 1.  Log into the node as an administrator, using ssh
-2.  Configure the system to trust the DTR TLS certificates. This depends on
-the operating system.
+2.  Configure the system to trust the DTR TLS certificates, following the same
+steps as you used to configure your local computer.
 
-## Troubleshooting
-
-When one of the components is misconfigured, and doesn't trust the root CA
-certificate of the other components, you'll get an error like:
-
-```none
-$ docker push dtr/username/hello-world:1
-
-The push refers to a repository [dtr/username/hello-world]
-Get https://dtr/v1/_ping: x509: certificate signed by unknown authority
-```
 
 ## Where to go next
 
-* [Monitor your cluster](../monitor/index.md)
-* [Troubleshoot your cluster](../monitor/troubleshoot.md)
-* [Run only signed images](../content-trust/index.md)
+* [Use externally-signed certificates](index.md)

@@ -56,8 +56,7 @@ backup command to learn about all the available flags.
 
 As an example, to create a backup of a DTR node, you can use:
 
-```bash
-# Create the backup
+```none
 $ docker run -i --rm docker/dtr backup \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \
@@ -76,7 +75,7 @@ Where:
 To validate that the backup was correctly performed, you can print the contents
 of the tar file created:
 
-```bash
+```none
 $ tar -tf /tmp/backup.tar
 ```
 
@@ -105,7 +104,7 @@ backup command to learn about all the available flags.
 As an example, to install DTR on the host and restore its
 state from an existing backup:
 
-```bash
+```none
 # Install and restore configurations from an existing backup
 $ docker run -i --rm \
   docker/dtr restore \
