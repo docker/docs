@@ -7,8 +7,6 @@ title: Install UCP for production
 Docker Universal Control Plane (UCP) is a containerized application that can be
 installed on-premise or on a cloud infrastructure.
 
-If you're installing Docker Datacenter on Azure, [follow this guide](https://success.docker.com/?cid=ddc-on-azure).
-
 ## Step 1: Validate the system requirements
 
 The first step to installing UCP, is ensuring your
@@ -17,9 +15,19 @@ infrastructure has all the [requirements UCP needs to run](system-requirements.m
 
 ## Step 2: Install CS Docker on all nodes
 
-UCP is a containerized application that requires CS Docker Engine 1.12.0 or
-above to run. Start by installing CS Docker Engine on all hosts that you want to
-manage with UCP.
+UCP is a containerized application that requires the commercially supported
+Docker Engine to run.
+
+For each host that you plan to manage with UCP:
+
+1.  Log in into that host using ssh.
+2.  Install CS Docker Engine:
+
+    ```bash
+    curl -SLf https://packages.docker.com/1.12/install.sh | sh
+    ```
+
+    [You can also install CS Docker Engine using a package manager](/cs-engine/install.md)
 
 Make sure you install the same CS Docker Engine version on all the nodes. Also,
 if you're creating virtual machine templates with CS Docker Engine  already
@@ -79,12 +87,12 @@ If you don't have a license yet, [learn how to get a free trial license](license
 
 ## Step 6: Join manager nodes
 
-Skip this step if you don't want your UCP swarm to be highly available.
+Skip this step if you don't want UCP to be highly available.
 
-To make your UCP swarm fault-tolerant and highly available, you
-can join more manager nodes to your it. Manager nodes are the nodes in the
-swarm that perform the orchestration and swarm management tasks, and
-dispatch tasks for worker nodes to execute.
+To make your Docker swarm and UCP fault-tolerant and highly available, you can
+join more manager nodes to your it. Manager nodes are the nodes in the swarm
+that perform the orchestration and swarm management tasks, and dispatch tasks
+for worker nodes to execute.
 [Learn more about high-availability](../high-availability/index.md).
 
 To join manager nodes to the swarm, go to the **UCP web UI**, navigate to

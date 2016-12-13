@@ -21,3 +21,7 @@ browser, Administrators can:
 
 Non-admin users can only see and change the images, networks, volumes, and
 containers, they are granted access.
+
+# Where to go next
+
+* [Access UCP from the CLI](cli-based-access.md)
