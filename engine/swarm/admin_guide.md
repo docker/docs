@@ -60,7 +60,7 @@ nodes continue to run. However, swarm nodes cannot be added, updated, or
 removed, and new or existing tasks cannot be started, stopped, moved, or
 updated.
 
-See [Recovering from losing the quorum](recovering-from-losing-the-quorum) for
+See [Recovering from losing the quorum](#recovering-from-losing-the-quorum) for
 troubleshooting steps if you do lose the quorum of managers.
 
 ## Use a static IP for manager node advertise address
