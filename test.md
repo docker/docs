@@ -158,12 +158,12 @@ Some tables in markdown and html.
   </tr>
   <tr valign="top">
   <td width="50%">
-  <a class="button darkblue-btn" href="https://docs.docker.com/">Go to the docs!</a><br><br>
-  <a href="https://docs.docker.com/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a>
+  <a class="button darkblue-btn" href="/">Go to the docs!</a><br><br>
+  <a href="/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a>
   </td>
   <td width="50%">
-  <a class="button darkblue-btn" href="https://docs.docker.com/">Go to the docs!</a><br><br>
-  <a href="https://docs.docker.com/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a>
+  <a class="button darkblue-btn" href="/">Go to the docs!</a><br><br>
+  <a href="/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a>
   </td>
   </tr>
 </table>

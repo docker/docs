@@ -47,6 +47,6 @@ title: Welcome to the Docker Cloud docs!
     <td class="plain" colspan="2"><p>Learn how to link to your hosts, upgrade the Docker Cloud agent, and manage container distribution. See the <a href="infrastructure/cloud-on-aws-faq.md">AWS FAQ</a> and <a href="infrastructure/cloud-on-packet.net-faq.md">Packet.net FAQ</a></p></td>
   </tr>
   <tr>
-    <td class="bluebar" colspan="2"> <a href="https://docs.docker.com/apidocs/docker-cloud/">API Docs</a> &nbsp;&nbsp; ● &nbsp;&nbsp; <a href="docker-errors-faq.md">Frequently Asked Questions</a> &nbsp;&nbsp; ● &nbsp;&nbsp; <a href="release-notes.md">Release Notes</a></td>
+    <td class="bluebar" colspan="2"> <a href="/apidocs/docker-cloud/">API Docs</a> &nbsp;&nbsp; ● &nbsp;&nbsp; <a href="docker-errors-faq.md">Frequently Asked Questions</a> &nbsp;&nbsp; ● &nbsp;&nbsp; <a href="release-notes.md">Release Notes</a></td>
   </tr>
 </table>

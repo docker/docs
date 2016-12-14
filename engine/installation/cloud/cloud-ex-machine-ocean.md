@@ -42,11 +42,11 @@ To generate your access token:
 
 1. If you have not done so already, install Docker Machine on your local host.
 
-  * <a href="https://docs.docker.com/engine/installation/mac/" target="_blank"> How to install Docker Machine on macOS</a>
+  * <a href="/engine/installation/mac/" target="_blank"> How to install Docker Machine on macOS</a>
 
-  * <a href="https://docs.docker.com/engine/installation/windows/" target="_blank">How to install Docker Machine on Windows</a>
+  * <a href="/engine/installation/windows/" target="_blank">How to install Docker Machine on Windows</a>
 
-  * <a href="https://docs.docker.com/machine/install-machine/" target="_blank">Install Docker Machine directly</a> (e.g., on Linux)
+  * <a href="/machine/install-machine/" target="_blank">Install Docker Machine directly</a> (e.g., on Linux)
 
 2. At a command terminal, use `docker-machine ls` to get a list of Docker Machines and their status.
 
@@ -178,7 +178,7 @@ To generate your access token:
 
 #### Understand the defaults and options on the create command
 
-For convenience, `docker-machine` will use sensible defaults for choosing settings such as the image that the server is based on, but you override the defaults using the respective flags (e.g. `--digitalocean-image`). This is useful if, for example, you want to create a cloud server with a lot of memory and CPUs (by default `docker-machine` creates a small server). For a full list of the flags/settings available and their defaults, see the output of `docker-machine create -h` at the command line. See also <a href="https://docs.docker.com/machine/drivers/os-base/" target="_blank">Driver options and operating system defaults</a> and information about the <a href="https://docs.docker.com/machine/reference/create/" target="_blank">create</a> command in the Docker Machine documentation.
+For convenience, `docker-machine` will use sensible defaults for choosing settings such as the image that the server is based on, but you override the defaults using the respective flags (e.g. `--digitalocean-image`). This is useful if, for example, you want to create a cloud server with a lot of memory and CPUs (by default `docker-machine` creates a small server). For a full list of the flags/settings available and their defaults, see the output of `docker-machine create -h` at the command line. See also <a href="/machine/drivers/os-base/" target="_blank">Driver options and operating system defaults</a> and information about the <a href="/machine/reference/create/" target="_blank">create</a> command in the Docker Machine documentation.
 
 
 ### Step 5. Use Machine to remove the Droplet
