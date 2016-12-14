@@ -16,7 +16,7 @@ This tutorial assumes that you have:
 
 - a free <a href="https://hub.docker.com/" target="_blank">Docker ID account</a>.
 - at least one node running. If you don't have any nodes set up in Docker Cloud yet, [start here](../../getting-started/your_first_node.md) to set these up.
-- (optional) Docker Engine installed - see the installation guides for <a href="https://docs.docker.com/installation/#installation" target="_blank">macOS, Windows and Linux</a>.
+- (optional) Docker Engine installed - see the installation guides for <a href="/installation/#installation" target="_blank">macOS, Windows and Linux</a>.
 
 Let's get started!
 

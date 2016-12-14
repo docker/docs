@@ -9,7 +9,7 @@ title: 'Example: Install Docker on Ubuntu Linux'
 This installation procedure for users who are unfamiliar with package
 managers, and just want to try out the Getting Started tutorial while running Docker on Linux. If you are comfortable with package managers, prefer not to use
 `curl`, or have problems installing and want to troubleshoot, please use our
-`apt` and `yum` <a href="https://docs.docker.com/engine/installation/"
+`apt` and `yum` <a href="/engine/installation/"
 target="_blank">repositories instead for your installation</a>.
 
 1. Log into your Ubuntu installation as a user with `sudo` privileges.

@@ -6,16 +6,16 @@ title: Install Docker Machine
 
 On macOS and Windows, Machine is installed along with other Docker products when
 you install the Docker Toolbox. For details on installing Docker Toolbox, see
-the <a href="https://docs.docker.com/installation/mac/" target="_blank">macOS
+the <a href="/installation/mac/" target="_blank">macOS
 installation</a> instructions or <a
-href="https://docs.docker.com/docker-for-windows/" target="_blank">Windows
+href="/docker-for-windows/" target="_blank">Windows
 installation</a> instructions.
 
 If you want only Docker Machine, you can install the Machine binaries directly by following the instructions in the next section. You can find the latest versions of the binaries are on the <a href="https://github.com/docker/machine/releases/" target="_blank"> docker/machine release page</a> on GitHub.
 
 ## Installing Machine Directly
 
-1.  Install <a href="https://docs.docker.com/installation/"
+1.  Install <a href="/installation/"
     target="_blank">the Docker binary</a>.
 
 2.  Download the Docker Machine binary and extract it to your PATH.
@@ -61,5 +61,5 @@ You can find additional documentation in the comments at the <a href="https://gi
 -   [Docker Machine overview](overview.md)
 -   Create and run a Docker host on your [local system using virtualization](get-started.md)
 -   Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
--   <a href="https://docs.docker.com/machine/drivers/" target="_blank">Docker Machine driver reference</a>
--   <a href="https://docs.docker.com/machine/reference/" target="_blank">Docker Machine subcommand reference</a>
+-   <a href="/machine/drivers/" target="_blank">Docker Machine driver reference</a>
+-   <a href="/machine/reference/" target="_blank">Docker Machine subcommand reference</a>

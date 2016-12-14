@@ -92,7 +92,7 @@ The coexistence setup works as is as long as your VirtualBox VMs provisioned wit
 
 Ideally, the Docker CLI client and Docker Engine should be the same version. Mismatches between client and server, and among host machines you might have created with Docker Machine can cause problems (client can't talk to the server or host machines).
 
-If you already have <a href="https://docs.docker.com/toolbox/overview/" target="_blank">Docker Toolbox</a> installed, and then install Docker for Mac, you might get a newer version of the Docker client. Run `docker version` in a command shell to see client and server versions. In this example, the client installed with Docker for Mac is `Version: 1.11.1` and the server (which was installed earlier with Toolbox) is Version: 1.11.0.
+If you already have <a href="/toolbox/overview/" target="_blank">Docker Toolbox</a> installed, and then install Docker for Mac, you might get a newer version of the Docker client. Run `docker version` in a command shell to see client and server versions. In this example, the client installed with Docker for Mac is `Version: 1.11.1` and the server (which was installed earlier with Toolbox) is Version: 1.11.0.
 
     $ docker version
     Client:
