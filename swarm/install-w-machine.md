@@ -103,7 +103,7 @@ manager orchestrates and schedules containers on the entire cluster. The swarm
 manager rules a set of agents (also called nodes or Docker nodes).
 
 Swarm agents are responsible for hosting containers. They are regular docker
-daemons and you can communicate with them using the Docker remote API.
+daemons and you can communicate with them using the Docker Engine API.
 
 In this section, you create a swarm manager and two nodes.
 

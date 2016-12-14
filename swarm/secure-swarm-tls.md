@@ -92,11 +92,11 @@ the Docker Engine daemon automatically trusts any certificates signed by the CA.
 certificate is in order (the certificate has not expired or been revoked etc.)
 the Docker Engine daemon accepts commands from this trusted Docker Engine CLI.
 
-The Docker Engine CLI is simply a client that uses the Docker Engine Remote API to
-communicate with the Docker Engine daemon. Any client that uses this Docker Engine Remote API can use
+The Docker Engine CLI is simply a client that uses the Docker Engine API to
+communicate with the Docker Engine daemon. Any client that uses this Docker Engine API can use
 TLS. For example, Docker Engine clients such as 'Docker Universal Control Plane'
 (UCP) have TLS support built-in. Other, third party products, that use Docker Engine
-Remote API, can also be configured this way.
+API, can also be configured this way.
 
 ## TLS modes with Docker and Swarm
 
