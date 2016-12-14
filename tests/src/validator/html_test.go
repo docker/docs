@@ -7,6 +7,7 @@ import (
 	"golang.org/x/net/html"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"testing"
 )
@@ -22,6 +23,16 @@ func TestURLs(t *testing.T) {
 	filepath.Walk("/usr/src/app/allvbuild", func(path string, info os.FileInfo, err error) error {
 
 		relPath := strings.TrimPrefix(path, "/usr/src/app/allvbuild")
+
+		isArchive, err := regexp.MatchString(`^/v[0-9]+\.[0-9]+/.*`, relPath)
+		if err != nil {
+			t.Error(err.Error(), "-", relPath)
+		}
+		// skip archives for now, only test URLs in current version
+		// TODO: test archives
+		if isArchive {
+			return nil
+		}
 
 		if err != nil {
 			t.Error(err.Error(), "-", relPath)
@@ -44,9 +55,9 @@ func TestURLs(t *testing.T) {
 		return nil
 	})
 
-	fmt.Println("found", count, "html files")
-	fmt.Println("found", countLinks, "links")
-	fmt.Println("found", countImages, "images")
+	fmt.Println("found", count, "html files (excluding archives)")
+	fmt.Println("found", countLinks, "links (excluding archives)")
+	fmt.Println("found", countImages, "images (excluding archives)")
 }
 
 // testURLs tests if we're not using absolute paths for URLs
