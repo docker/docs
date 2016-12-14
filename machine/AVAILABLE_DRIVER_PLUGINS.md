@@ -200,10 +200,10 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
         "https://github.com/packethost/docker-machine-driver-packet">https://github.com/packethost/docker-machine-driver-packet</a>
       </td>
       <td>
-        <a href="https://github.com/betawaffle">betawaffle</a>
+        <a href="https://github.com/crunchywelch">crunchywelch</a>
       </td>
       <td>
-        <a href="mailto:andy@packet.net">andy@packet.net</a>
+        <a href="mailto:welch@packet.net">welch@packet.net</a>
       </td>
     </tr>
     <tr>
