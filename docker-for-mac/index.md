@@ -213,7 +213,7 @@ get faster performance by setting this number higher (for example to `3`) or
 lower (to `1`) if you want Docker for Mac to use less memory.
 
 >**Tip: Beta dialogs** &mdash; Starting with Beta 31, CPUs and Memory settings
-are on the Advanced dialog, as shown here.
+are on the Advanced dialog. Starting with Beta 33, you can specify the storage location of the Linux volume. These settings are shown below.
 >
 >![CPUs and Memory settings UI
 starting at Beta 31](images/settings-advanced-beta.png)
