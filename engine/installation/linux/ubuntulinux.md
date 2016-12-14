@@ -468,7 +468,7 @@ WARNING: Local (127.0.0.1) DNS resolver found in resolv.conf and containers
 can't use it. Using default external servers : [8.8.8.8 8.8.4.4]
 ```
 
-If you don't use `dnsmasq` or NetworkManaager or have never seen this warning,
+If you don't use `dnsmasq` or NetworkManager or have never seen this warning,
 you can skip the rest of this section. To see if you use `dnsmasq`, use the
 following command:
 
