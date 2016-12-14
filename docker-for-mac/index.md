@@ -298,7 +298,7 @@ Registries](#custom-registries).
 On the **Daemon -> Advanced dialog**, you can directly configure the daemon from
 the JSON file, and determine entirely how your containers will run. For a full
 list of options on the Docker daemon, see <a
-href="https://docs.docker.com/engine/reference/commandline/dockerd/"
+href="/engine/reference/commandline/dockerd/"
 target="_blank">daemon</a> in the Docker Engine command line reference.
 
 After editing the daemon configuration , click **Apply & Restart** to save it

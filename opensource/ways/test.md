@@ -26,10 +26,10 @@ problems.
 
 Testing documentation is relatively easy:
 
-## Step 1.  Find a page in <a href="http://docs.docker.com/" target="_blank">Docker's documentation</a> that contains a procedure or example you want to test.
+## Step 1.  Find a page in <a href="/" target="_blank">Docker's documentation</a> that contains a procedure or example you want to test.
 
 You should choose something that _should work_ on your machine. For example,
-<a href="http://docs.docker.com/articles/baseimages/" target="_blank">creating
+<a href="/articles/baseimages/" target="_blank">creating
 a base image</a> is something anyone with Docker can do. While <a
 href="https://kitematic.com/docs/managing-volumes/" target="_blank">changing
 volume directories in Kitematic</a> requires a Mac and Docker's Kitematic
@@ -47,6 +47,6 @@ What to look for:
 
 # Test code in the Docker
 
-If you are interested in writing or fixing test code for the Docker project, learn  about  <a href="https://docs.docker.com/opensource/project/test-and-docs/" target="_blank">our test infrastructure</a>.
+If you are interested in writing or fixing test code for the Docker project, learn  about  <a href="/opensource/project/test-and-docs/" target="_blank">our test infrastructure</a>.
 
 View <a href="https://goo.gl/JWuQPJ" target="_blank"> our open test issues</a> in Docker for something to work on. Or, create one of your own.
