@@ -67,7 +67,7 @@ If you need several VMs and want to manage the version of the Docker client or s
 
           $ env | grep DOCKER
 
-  If you are using a Bash shell, you can use `unset ${!DOCKER_*}` to unset all DOCKER environment variables at once. (This will not work in other shells such as `.zsh`; you will need to unset each variable individually.)
+  If you are using a Bash shell, you can use `unset ${!DOCKER_*}` to unset all DOCKER environment variables at once. (This will not work in other shells such as `zsh`; you will need to unset each variable individually.)
 
 >**Note**: If you have a shell script as part of your profile that sets these `DOCKER` environment variables automatically each time you open a command window, then you will need to unset these each time you want to use Docker for Mac.
 
