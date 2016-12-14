@@ -208,6 +208,23 @@ about both kinds of releases, and download stable and beta product installers at
 
 ## Beta Release Notes
 
+### Beta 33 Release Notes (2016-12-14 1.13.0-rc3-beta33)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**New**
+
+- VHDX file containing images and non-host mounted volumes can be moved (using "advanced" tab in the UI)
+
+**Upgrades**
+
+- Linux Kernel 4.8.14
+
+**Bug fixes and minor changes**
+
+- Bugsnag reports should work again
+- Fixed a memory leak related to logs and Windows Containers
+
 ### Beta 32 Release Notes (2016-12-07 1.13.0-rc3-beta32)
 
 >**Important Note**:
