@@ -160,7 +160,7 @@ trusted repository.
 Valid delegation roles take the form of `targets/<delegation>`, where
 `<delegation>` does not include further slashes.
 
-You will need to add the key to at least one other delegation in order for UCP to honor the signed content:
+You will need to add the key to at least one delegation in addition to the `targets/releases` delegation in order for UCP to honor the signed content:
 
 ```bash
 $ notary delegation add -p <dtr_url>/<account>/<repository> targets/devops --all-paths user1.pem user2.pem
