@@ -362,21 +362,6 @@ Alternatively, you can use a different NAT name and NAT prefix and adjust the NA
 
 >**Note**: You also need to adjust your existing VMs to use IP addresses from within the new NAT prefix.
 
-
-### Host filesystem Sharing
-
-The Linux VM used for Docker for Windows uses SMB/CIFS mounting of the host filesystem. In order to use this feature you must explicitly enable it via the `Settings` menu. You will get prompted for your Username and Password.
-
-Unfortunately, this setup does not support passwords which contain Unicode characters, so your password must be 8-bit ASCII only.
-
-The setup also does not support empty password, so you should set a password if you want to use the host filesystem sharing feature.  Beta 11 and newer of Docker for Windows will display a warning, but versions earlier will not.
-
-Note, releases of Docker for Windows prior to Beta 11 also did not support spaces in the password and username, but this has been fixed with Beta 11.
-
-Please make sure that "File and printer sharing" is enabled in `Control Panel\Network and Internet\Network and Sharing Center\Advanced sharing settings`.
-
-![Sharing settings](images/win-file-and-printer-sharing.png)
-
 ## Workarounds
 
 ### `inotify` currently does not work on Docker for Windows
