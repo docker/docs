@@ -73,8 +73,24 @@ For simplicity in this tutorial, we use an environment variable for your Docker 
 
 If you don't want to do this, make sure you substitute your username for $DOCKER_ID_USER whenever you see it in the example commands.
 
-```bash
+```none
 $ export DOCKER_ID_USER=my-username
 ```
+
+**If you are running the tutorial with an organization's resources:**
+
+By default, the `docker-cloud` CLI uses your default user namespace, meaning the
+repositories, nodes, and services associated with your individual Docker ID
+account name. To use the CLI to interact with objects that belong to an
+[organization](../../orgs.md), prefix these commands with
+`DOCKERCLOUD_NAMESPACE=my-organization`, or set this variable as in the example below.
+
+```none
+$ export `DOCKERCLOUD_NAMESPACE=my-organization`
+```
+
+
+ See the [CLI documentation](../../installing-cli.md#use-the-docker-cloud-cli-with-an-organization) for more information.
+
 
 Next up, we'll [Prepare the app](3_prepare_the_app.md).
