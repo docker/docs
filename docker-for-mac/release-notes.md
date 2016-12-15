@@ -202,7 +202,7 @@ events or unexpected unmounts.
 
 ## Beta Release Notes
 
-### Beta 33 Release Notes (2016-12-14 1.13.0-rc3-beta33)
+### Beta 33 Release Notes (2016-12-15 1.13.0-rc3-beta33)
 
 >**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
 
