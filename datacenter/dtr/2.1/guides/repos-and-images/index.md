@@ -13,8 +13,8 @@ self-signed certificates, you need to configure your Docker Engine to trust DTR.
 Otherwise, when you try to login or push and pull images to DTR, you'll get an
 error:
 
-```bash
-$ docker login <dtr-domain-name>
+```none
+$ docker login dtr.example.org
 
 x509: certificate signed by unknown authority
 ```
@@ -24,6 +24,19 @@ by DTR is to get the DTR CA certificate. Then you configure your operating
 system to trust that certificate.
 
 ## Configure your host
+
+### macOS
+
+In your browser navigate to `https://<dtr-url>/ca` to download the TLS
+certificate used by DTR. Then
+[add that certificate to the macOS trust store](https://support.apple.com/kb/PH18677?locale=en_US).
+
+### Windows
+
+In your browser navigate to `https://<dtr-url>/ca` to download the TLS
+certificate used by DTR. Then
+[add that certificate to the Windows trust store](https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx).
+
 
 ### Ubuntu/ Debian
 
@@ -90,7 +103,7 @@ To validate that your Docker daemon trusts DTR, trying authenticating against
 DTR.
 
 ```bash
-$ docker login <dtr-domain-name>
+docker login dtr.example.org
 ```
 
 ## Where to go next
