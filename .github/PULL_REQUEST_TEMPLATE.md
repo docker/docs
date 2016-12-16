@@ -19,7 +19,7 @@
     this doesn't apply to this PR, you can remove this whole section.
     Set a milestone if appropriate. -->
 
-### Related issues (optinoal)
+### Related issues (optional)
 
 <!--Refer to related PRs or issues: #1234, or 'Fixes #1234' or 'Closes #1234'.
     Or link to full URLs to issues or pull requests in other Github projects -->
