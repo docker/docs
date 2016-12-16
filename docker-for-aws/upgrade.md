@@ -23,7 +23,7 @@ If you submit your email address at [https://beta.docker.com/](beta.docker.com) 
 
 To initiate an update, use either the AWS Console of the AWS cli to initiate a stack update. Use the S3 template URL for the new release and complete the update wizard. This will initiate a rolling upgrade of the Docker swarm, and service state will be maintained during and after the upgrade. Appropriately scaled services should not experience downtime during an upgrade.
 
-![Upgrade in AWS console](/img/aws/cloudformation_update.png)
+![Upgrade in AWS console](/img/cloudformation_update.png)
 
 Note that single containers started (for example) with `docker run -d` are **not** preserved during an upgrade. This is because the're not Docker Swarm objects, but are known only to the individual Docker engines.
 
