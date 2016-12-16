@@ -293,47 +293,47 @@ the connection:
 
 6. Inspect the network resources used by `container2`. If you have Python
    installed, you can pretty print the output.
+   
+   ```bash
+   $ docker inspect --format='{{json .NetworkSettings.Networks}}'  container2 | python -m json.tool
 
-    ```bash
-    $ docker inspect --format='{{json .NetworkSettings.Networks}}'  container2 | python -m json.tool
+   {
+       "bridge": {
+           "NetworkID":"7ea29fc1412292a2d7bba362f9253545fecdfa8ce9a6e37dd10ba8bee7129812",
+           "EndpointID": "0099f9efb5a3727f6a554f176b1e96fca34cae773da68b3b6a26d046c12cb365",
+           "Gateway": "172.17.0.1",
+           "GlobalIPv6Address": "",
+           "GlobalIPv6PrefixLen": 0,
+           "IPAMConfig": null,
+           "IPAddress": "172.17.0.3",
+           "IPPrefixLen": 16,
+           "IPv6Gateway": "",
+           "MacAddress": "02:42:ac:11:00:03"
+       },
+       "isolated_nw": {
+           "NetworkID":"1196a4c5af43a21ae38ef34515b6af19236a3fc48122cf585e3f3054d509679b",
+           "EndpointID": "11cedac1810e864d6b1589d92da12af66203879ab89f4ccd8c8fdaa9b1c48b1d",
+           "Gateway": "172.25.0.1",
+           "GlobalIPv6Address": "",
+           "GlobalIPv6PrefixLen": 0,
+           "IPAMConfig": null,
+           "IPAddress": "172.25.0.2",
+           "IPPrefixLen": 16,
+           "IPv6Gateway": "",
+           "MacAddress": "02:42:ac:19:00:02"
+       }
+   }
+   ```
 
-    {
-        "bridge": {
-            "NetworkID":"7ea29fc1412292a2d7bba362f9253545fecdfa8ce9a6e37dd10ba8bee7129812",
-            "EndpointID": "0099f9efb5a3727f6a554f176b1e96fca34cae773da68b3b6a26d046c12cb365",
-            "Gateway": "172.17.0.1",
-            "GlobalIPv6Address": "",
-            "GlobalIPv6PrefixLen": 0,
-            "IPAMConfig": null,
-            "IPAddress": "172.17.0.3",
-            "IPPrefixLen": 16,
-            "IPv6Gateway": "",
-            "MacAddress": "02:42:ac:11:00:03"
-        },
-        "isolated_nw": {
-            "NetworkID":"1196a4c5af43a21ae38ef34515b6af19236a3fc48122cf585e3f3054d509679b",
-            "EndpointID": "11cedac1810e864d6b1589d92da12af66203879ab89f4ccd8c8fdaa9b1c48b1d",
-            "Gateway": "172.25.0.1",
-            "GlobalIPv6Address": "",
-            "GlobalIPv6PrefixLen": 0,
-            "IPAMConfig": null,
-            "IPAddress": "172.25.0.2",
-            "IPPrefixLen": 16,
-            "IPv6Gateway": "",
-            "MacAddress": "02:42:ac:19:00:02"
-        }
-    }
-    ```
+   Notice that `container2` belongs to two networks.  It joined the default `bridge`
+   network when you launched it and you connected it to the `isolated_nw` in
+   step 3.
 
-    Notice that `container2` belongs to two networks.  It joined the default `bridge`
-    network when you launched it and you connected it to the `isolated_nw` in
-    step 3.
+   ![](images/working.png)
 
-    ![](images/working.png)
+    eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:03
 
-eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:03
-
-eth1      Link encap:Ethernet  HWaddr 02:42:AC:15:00:02
+    eth1    Link encap:Ethernet  HWaddr 02:42:AC:15:00:02
 
 7.  Use the `docker attach` command to connect to the running `container2` and
     examine its networking stack:
@@ -377,7 +377,7 @@ eth1      Link encap:Ethernet  HWaddr 02:42:AC:15:00:02
               RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
     ```
 
-7.  The Docker embedded DNS server enables name resolution for containers
+8.  The Docker embedded DNS server enables name resolution for containers
     connected to a given network. This means that any connected container can
     ping another container on the same network by its container name. From
     within `container2`, you can ping `container3` by name.
@@ -422,7 +422,7 @@ eth1      Link encap:Ethernet  HWaddr 02:42:AC:15:00:02
 
     Detach from `container2` and leave it running using `CTRL-p CTRL-q`.
 
-8.  Currently, `container2` is attached to both `bridge` and `isolated_nw`
+9.  Currently, `container2` is attached to both `bridge` and `isolated_nw`
     networks, so it can communicate with both `container1` and `container3`.
     However, `container3` and `container1` do not have any networks in common,
     so they cannot communicate. To verify this, attach to `container3` and try
@@ -516,40 +516,39 @@ The following example briefly describes how to use `--link`.
 2.  Create another container named `container5`, and link it to `container4`
     using the alias `c4`.
 
+    ```bash
+    $ docker run --network=isolated_nw -itd --name=container5 --link container4:c4 busybox
 
-  ```bash
-  $ docker run --network=isolated_nw -itd --name=container5 --link container4:c4 busybox
+    72eccf2208336f31e9e33ba327734125af00d1e1d2657878e2ee8154fbb23c7a
+    ```
 
-  72eccf2208336f31e9e33ba327734125af00d1e1d2657878e2ee8154fbb23c7a
-  ```
+    Now attach to `container4` and try to ping `c5` and `container5`.
 
-  Now attach to `container4` and try to ping `c5` and `container5`.
+    ```bash
+    $ docker attach container4
 
-  ```bash
-  $ docker attach container4
+    / # ping -w 4 c5
+    PING c5 (172.25.0.5): 56 data bytes
+    64 bytes from 172.25.0.5: seq=0 ttl=64 time=0.070 ms
+    64 bytes from 172.25.0.5: seq=1 ttl=64 time=0.080 ms
+    64 bytes from 172.25.0.5: seq=2 ttl=64 time=0.080 ms
+    64 bytes from 172.25.0.5: seq=3 ttl=64 time=0.097 ms
 
-  / # ping -w 4 c5
-  PING c5 (172.25.0.5): 56 data bytes
-  64 bytes from 172.25.0.5: seq=0 ttl=64 time=0.070 ms
-  64 bytes from 172.25.0.5: seq=1 ttl=64 time=0.080 ms
-  64 bytes from 172.25.0.5: seq=2 ttl=64 time=0.080 ms
-  64 bytes from 172.25.0.5: seq=3 ttl=64 time=0.097 ms
+    --- c5 ping statistics ---
+    4 packets transmitted, 4 packets received, 0% packet loss
+    round-trip min/avg/max = 0.070/0.081/0.097 ms
 
-  --- c5 ping statistics ---
-  4 packets transmitted, 4 packets received, 0% packet loss
-  round-trip min/avg/max = 0.070/0.081/0.097 ms
+    / # ping -w 4 container5
+    PING container5 (172.25.0.5): 56 data bytes
+    64 bytes from 172.25.0.5: seq=0 ttl=64 time=0.070 ms
+    64 bytes from 172.25.0.5: seq=1 ttl=64 time=0.080 ms
+    64 bytes from 172.25.0.5: seq=2 ttl=64 time=0.080 ms
+    64 bytes from 172.25.0.5: seq=3 ttl=64 time=0.097 ms
 
-  / # ping -w 4 container5
-  PING container5 (172.25.0.5): 56 data bytes
-  64 bytes from 172.25.0.5: seq=0 ttl=64 time=0.070 ms
-  64 bytes from 172.25.0.5: seq=1 ttl=64 time=0.080 ms
-  64 bytes from 172.25.0.5: seq=2 ttl=64 time=0.080 ms
-  64 bytes from 172.25.0.5: seq=3 ttl=64 time=0.097 ms
-
-  --- container5 ping statistics ---
-  4 packets transmitted, 4 packets received, 0% packet loss
-  round-trip min/avg/max = 0.070/0.081/0.097 ms
-  ```
+    --- container5 ping statistics ---
+    4 packets transmitted, 4 packets received, 0% packet loss
+    round-trip min/avg/max = 0.070/0.081/0.097 ms
+    ```
     Detach from `container4` and leave it running using `CTRL-p CTRL-q`.
 
 3.  Finally, attach to `container5` and verify that you can ping `container4`.
@@ -600,7 +599,7 @@ The following example illustrates these points.
     ```bash
     $ docker network create -d bridge --subnet 172.26.0.0/24 local_alias
     76b7dc932e037589e6553f59f76008e5b76fa069638cd39776b890607f567aaa
-```
+    ```
 
 2.  Next, connect `container4` and `container5` to the new network `local_alias`
     with the aliases `foo` and `bar`:
@@ -638,7 +637,7 @@ The following example illustrates these points.
     4 packets transmitted, 4 packets received, 0% packet loss
     round-trip min/avg/max = 0.070/0.081/0.097 ms
     ```
-
+    
     Both pings succeed, but the subnets are different, which means that the
     networks are different.
 
@@ -764,6 +763,7 @@ The following example illustrates this limitation.
     4 packets transmitted, 4 packets received, 0% packet loss
     round-trip min/avg/max = 0.070/0.081/0.097 ms
     ```
+    
     Detach from `container4` and leave it running using `CTRL-p CTRL-q`.
 
     ```bash
@@ -842,7 +842,7 @@ network. This example illustrates how this works.
     64 bytes from 172.25.0.7: seq=2 ttl=64 time=0.072 ms
     64 bytes from 172.25.0.7: seq=3 ttl=64 time=0.101 ms
     ...
-  ```
+    ```
 
     The `app` alias now resolves to the IP address of `container7`.
 
@@ -1052,6 +1052,7 @@ remove a network. If a network has connected endpoints, an error occurs.
         }
     ]
     ```
+    
 3.  Remove the `isolated_nw` network.
     ```bash
     $ docker network rm isolated_nw
@@ -1059,17 +1060,17 @@ remove a network. If a network has connected endpoints, an error occurs.
 
 4.  List all your networks to verify that `isolated_nw` no longer exists:
 
-```bash
-$ docker network ls
+    ```bash
+    $ docker network ls
 
-NETWORK ID          NAME                DRIVER              SCOPE
-4bb8c9bf4292        bridge              bridge              local
-43575911a2bd        host                host                local
-76b7dc932e03        local_alias         bridge              local
-b1a086897963        my-network          bridge              local
-3eb020e70bfd        none                null                local
-69568e6336d8        simple-network      bridge              local
-```
+    NETWORK ID          NAME                DRIVER              SCOPE
+    4bb8c9bf4292        bridge              bridge              local
+    43575911a2bd        host                host                local
+    76b7dc932e03        local_alias         bridge              local
+    b1a086897963        my-network          bridge              local
+    3eb020e70bfd        none                null                local
+    69568e6336d8        simple-network      bridge              local
+    ```
 
 ## Related information
 
