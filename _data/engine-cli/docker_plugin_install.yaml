@@ -1,0 +1,13 @@
+command: docker plugin install
+short: Install a plugin
+long: Install a plugin
+usage: docker plugin install [OPTIONS] PLUGIN [KEY=VALUE...]
+pname: docker plugin
+plink: docker_plugin.yaml
+options:
+- option: disable
+  default_value: "false"
+  description: Do not enable the plugin on install
+- option: grant-all-permissions
+  default_value: "false"
+  description: Grant all permissions necessary to run the plugin

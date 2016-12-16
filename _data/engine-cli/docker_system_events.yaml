@@ -9,7 +9,7 @@ options:
   shorthand: f
   description: Filter output based on conditions provided
 - option: format
-  description: Format the output using the given go template
+  description: Format the output using the given Go template
 - option: since
   description: Show all events created since timestamp
 - option: until

@@ -1,5 +1,5 @@
 command: docker logout
-short: Log out from a Docker registry.
+short: Log out from a Docker registry
 long: |-
   Log out from a Docker registry.
   If no server is specified, the default is defined by the daemon.

@@ -7,20 +7,30 @@ plink: docker_swarm.yaml
 options:
 - option: advertise-addr
   description: 'Advertised address (format: <ip|interface>[:port])'
+- option: autolock
+  default_value: "false"
+  description: |
+    Enable manager autolocking (requiring an unlock key to start a stopped manager)
 - option: cert-expiry
   default_value: 2160h0m0s
-  description: Validity period for node certificates
+  description: Validity period for node certificates (ns|us|ms|s|m|h)
 - option: dispatcher-heartbeat
   default_value: 5s
-  description: Dispatcher heartbeat period
+  description: Dispatcher heartbeat period (ns|us|ms|s|m|h)
 - option: external-ca
   description: Specifications of one or more certificate signing endpoints
 - option: force-new-cluster
   default_value: "false"
-  description: Force create a new cluster from current state.
+  description: Force create a new cluster from current state
 - option: listen-addr
   default_value: 0.0.0.0:2377
   description: 'Listen address (format: <ip|interface>[:port])'
+- option: max-snapshots
+  default_value: "0"
+  description: Number of additional Raft snapshots to retain
+- option: snapshot-interval
+  default_value: "10000"
+  description: Number of log entries between Raft snapshots
 - option: task-history-limit
   default_value: "5"
   description: Task history retention limit
