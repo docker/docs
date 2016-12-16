@@ -194,6 +194,6 @@ about several Docker commands:
 * `docker logs` - Shows the standard output of a container.
 * `docker stop` - Stops running containers.
 
-Now, you have the basis learn more about Docker and how to do some more advanced
+Now, you have the basis to learn more about Docker and how to do some more advanced
 tasks. Go to ["*Run a simple application*"](usingdocker.md) to actually build a
 web application with the Docker client.
