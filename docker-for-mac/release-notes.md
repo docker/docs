@@ -202,6 +202,14 @@ events or unexpected unmounts.
 
 ## Beta Release Notes
 
+### Beta 33.1 Release Notes (2016-12-16 1.13.0-rc3-beta33.1)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**Hotfix**
+
+- Fixed issue where sometimes TRIM would cause the VM to hang
+
 ### Beta 33 Release Notes (2016-12-15 1.13.0-rc3-beta33)
 
 >**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
@@ -222,7 +230,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor improvements**
 
-- Kernel boots with vsyscall=emulate arg and CONFIG_LEGACY_VSYSCALL is set to NONE in Moby
+- Kernel boots with `vsyscall=emulate arg` and `CONFIG_LEGACY_VSYSCALL` is set to `NONE` in Moby
 
 ### Beta 32 Release Notes (2016-12-07 1.13.0-rc3-beta32)
 
