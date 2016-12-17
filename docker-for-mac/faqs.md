@@ -21,9 +21,9 @@ This topic also has more information about the two channels.
 
 A: Two different download channels are available for Docker for Mac:
 
-* The stable channel provides a general availability release-ready installer for a fully baked and tested, more reliable app. The stable version of Docker for Mac comes with the latest released version of Docker Engine. The release schedule is synched with Docker Engine releases and hotfixes.
+* The **stable channel** provides a general availability release-ready installer for a fully baked and tested, more reliable app. The stable version of Docker for Mac comes with the latest released version of Docker Engine. The release schedule is synched with Docker Engine releases and hotfixes. On the stable channel, you can select whether to send usage statistics and other data.
 
-* The beta channel provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of Docker Engine. Bugs, crashes and issues are more likely to occur with the beta app, but you get a chance to preview new functionality, experiment, and provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month.
+* The **beta channel** provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of Docker Engine. Bugs, crashes and issues are more likely to occur with the beta app, but you get a chance to preview new functionality, experiment, and provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month. Usage statistics and crash reports are sent by default. You do not have the option to disable this on the beta channel.
 
 **Q: Can I switch back and forth between stable and beta versions of Docker for Mac?**
 
