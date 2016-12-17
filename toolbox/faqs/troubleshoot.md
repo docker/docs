@@ -84,6 +84,7 @@ Set the environment variables for the command window.
 Run `docker-machine ls` to verify that the new machine is running and that this command window is configured to talk to it, as indicated by an asterisk for the active machine (__*__).
 
 <a name="machine-http-proxy-solutions"></a>
+
 ## HTTP proxies and connectivity errors
 
 A special brand of connectivity errors can be caused by HTTP proxy. If you install Docker Toolbox on a system using a virtual private network (VPN) that uses an HTTP proxy (such as a corporate network), you might encounter errors when the client attempts to connect to the server.
