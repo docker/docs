@@ -304,9 +304,9 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
 > build. Use the [args](compose-file.md#args) sub-option of `build` to define build-time
 > environment variables.
 
-> ""Note:** The value of `VAL` is taken literally and no processing is done on it. So for
-example if the value is quoted (as is often the case of shell variables) the value
-of `VAR` **will** contain quotes when used.
+The value of `VAL` is used as is and not modified at all. For example if the value is surrounded
+by quotes (as is often the case of shell variables), the quotes will be included in the
+value passed to Compose.
 
 ### environment
 
