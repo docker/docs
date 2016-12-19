@@ -31,7 +31,7 @@ Here are some key points to know about Docker for Mac before you get started:
 
 * The Docker for Mac application does not use `docker-machine` to provision that VM; but rather creates and manages it directly.
 
-* At installation time, Docker for Mac provisions an HyperKit VM based on Alpine Linux, running Docker Engine. It exposes the docker API on a socket in `/var/tmp/docker.sock`. Since this is the default location where `docker` will look if no environment variables are set, you can start using `docker` and `docker-compose` without setting any environment variables.
+* At installation time, Docker for Mac provisions an HyperKit VM based on Alpine Linux, running Docker Engine. It exposes the docker API on a socket in `/var/run/docker.sock`. Since this is the default location where `docker` will look if no environment variables are set, you can start using `docker` and `docker-compose` without setting any environment variables.
 
 This setup is shown in the following diagram.
 
