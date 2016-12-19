@@ -11,6 +11,10 @@ options:
   description: 'Detached mode: run command in the background'
 - option: detach-keys
   description: Override the key sequence for detaching a container
+- option: env
+  shorthand: e
+  default_value: '[]'
+  description: Set environment variables
 - option: interactive
   shorthand: i
   default_value: "false"

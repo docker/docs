@@ -11,15 +11,43 @@ options:
 - option: container-label
   default_value: '[]'
   description: Container labels
+- option: dns
+  default_value: '[]'
+  description: Set custom DNS servers
+- option: dns-option
+  default_value: '[]'
+  description: Set DNS options
+- option: dns-search
+  default_value: '[]'
+  description: Set custom DNS search domains
 - option: endpoint-mode
   description: Endpoint mode (vip or dnsrr)
 - option: env
   shorthand: e
   default_value: '[]'
   description: Set environment variables
-- option: group-add
+- option: env-file
   default_value: '[]'
-  description: Add additional user groups to the container
+  description: Read in a file of environment variables
+- option: group
+  default_value: '[]'
+  description: Set one or more supplementary user groups for the container
+- option: health-cmd
+  description: Command to run to check health
+- option: health-interval
+  default_value: none
+  description: Time between running the check (ns|us|ms|s|m|h)
+- option: health-retries
+  default_value: "0"
+  description: Consecutive failures needed to report unhealthy
+- option: health-timeout
+  default_value: none
+  description: Maximum time to allow one check to run (ns|us|ms|s|m|h)
+- option: host
+  default_value: '[]'
+  description: Set one or more custom host-to-IP mappings (host:ip)
+- option: hostname
+  description: Container hostname
 - option: label
   shorthand: l
   default_value: '[]'
@@ -39,15 +67,17 @@ options:
   default_value: replicated
   description: Service mode (replicated or global)
 - option: mount
-  description: Attach a mount to the service
+  description: Attach a filesystem mount to the service
 - option: name
   description: Service name
 - option: network
   default_value: '[]'
   description: Network attachments
+- option: no-healthcheck
+  default_value: "false"
+  description: Disable any container-specified HEALTHCHECK
 - option: publish
   shorthand: p
-  default_value: '[]'
   description: Publish a port as a node port
 - option: replicas
   default_value: none
@@ -62,22 +92,36 @@ options:
   description: Restart when condition is met (none, on-failure, or any)
 - option: restart-delay
   default_value: none
-  description: Delay between restart attempts
+  description: Delay between restart attempts (ns|us|ms|s|m|h)
 - option: restart-max-attempts
   default_value: none
   description: Maximum number of restarts before giving up
 - option: restart-window
   default_value: none
-  description: Window used to evaluate the restart policy
+  description: Window used to evaluate the restart policy (ns|us|ms|s|m|h)
+- option: secret
+  description: Specify secrets to expose to the service
 - option: stop-grace-period
   default_value: none
-  description: Time to wait before force killing a container
+  description: |
+    Time to wait before force killing a container (ns|us|ms|s|m|h)
+- option: tty
+  shorthand: t
+  default_value: "false"
+  description: Allocate a pseudo-TTY
 - option: update-delay
   default_value: "0"
-  description: Delay between updates
+  description: Delay between updates (ns|us|ms|s|m|h) (default 0s)
 - option: update-failure-action
   default_value: pause
   description: Action on update failure (pause|continue)
+- option: update-max-failure-ratio
+  default_value: "0"
+  description: Failure rate to tolerate during an update
+- option: update-monitor
+  default_value: "0"
+  description: |
+    Duration after each task update to monitor for failure (ns|us|ms|s|m|h) (default 0s)
 - option: update-parallelism
   default_value: "1"
   description: |

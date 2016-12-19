@@ -14,3 +14,7 @@ options:
 - option: no-trunc
   default_value: "false"
   description: Do not truncate output
+- option: quiet
+  shorthand: q
+  default_value: "false"
+  description: Only display task IDs

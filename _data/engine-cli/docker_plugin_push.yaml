@@ -1,0 +1,6 @@
+command: docker plugin push
+short: Push a plugin to a registry
+long: Push a plugin to a registry
+usage: docker plugin push PLUGIN[:TAG]
+pname: docker plugin
+plink: docker_plugin.yaml
