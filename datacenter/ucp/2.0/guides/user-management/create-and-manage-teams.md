@@ -13,32 +13,20 @@ A team defines the permissions users have for resources that have the label
 To create a new team, go to the **UCP web UI**, and navigate to the
 **Users & Teams** page.
 
-![](../images/create-and-manage-teams-1.png)
+![](../images/create-and-manage-teams-1.png){: .with-border}
 
-Click the **Create** button to create a new team.
+Click the **Create** button to create a new team, and assign it a name.
 
-![](../images/create-and-manage-teams-2.png)
-
-Give a name to the team, and choose if the team is managed by UCP, or
-discovered from an LDAP service:
-
-* Managed: You'll manage the team and manually define the users that are part
-of the team.
-* Discovered: When integrating with an LDAP service, you can map a team to
-an LDAP group. When a user is added to the LDAP group, it is automatically added
-to the UCP team.
+![](../images/create-and-manage-teams-2.png){: .with-border}
 
 ## Add users to a team
 
-If you've created a managed team, you can now add and remove users from the
-team.
+You can now add and remove users from the team.
 Navigate to the **Members** tab, and click the **Add User to Team** button.
 Then choose the list of users that you want to add to the team.
 
-![](../images/create-and-manage-teams-3.png)
+![](../images/create-and-manage-teams-3.png){: .with-border}
 
-If you've created a discovered team, users are automatically added and removed
-from the team the next time UCP synchronizes with the LDAP server.
 
 ## Manage team permissions
 
@@ -46,11 +34,12 @@ To manage the permissions of the team, click the **Permissions** tab.
 Here you can specify a list of labels and the permission level users will have
 for resources with those labels.
 
-![](../images/create-and-manage-teams-4.png)
+![](../images/create-and-manage-teams-4.png){: .with-border}
 
 In the example above, members of the 'Operations' team have permissions to
 create and edit resources that have the labels
-`com.docker.ucp.access.label=crm` or `com.docker.ucp.access.label=billing`.
+`com.docker.ucp.access.label=operations` applied, but can only view resources
+that have the `com.docker.ucp.access.label=blog` label.
 
 There are four permission levels available:
 
