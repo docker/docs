@@ -5,6 +5,8 @@ keywords: docker, registry, install, offline
 title: Install Docker Trusted Registry offline
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 The procedure to install Docker Trusted Registry on a host is the same,
 whether that host has access to the internet or not.
 

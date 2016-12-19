@@ -4,6 +4,8 @@ keywords: docker, registry, high-availability, backup, recovery
 title: Set up high availability
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 Docker Trusted Registry (DTR) is designed for high availability.
 
 When you first install DTR, you create a cluster with a single DTR replica.

@@ -4,6 +4,8 @@ keywords: docker, registry, security, permissions, users
 title: Authentication and authorization
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 With DTR you get to control which users have access to your image repositories.
 
 By default, anonymous users can only pull images from public repositories.

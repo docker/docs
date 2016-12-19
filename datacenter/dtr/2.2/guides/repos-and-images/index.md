@@ -5,6 +5,8 @@ keywords: docker, registry, TLS, certificates
 title: Configure your Docker Engine
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 By default Docker Engine uses TLS when pushing and pulling images to an
 image registry like Docker Trusted Registry.
 

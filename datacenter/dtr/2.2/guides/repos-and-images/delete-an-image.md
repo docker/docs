@@ -4,6 +4,8 @@ keywords: docker, registry, repository, delete, image
 title: Delete an image
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 To delete an image, go to the **DTR web UI**, and navigate to the image
 **repository** you want to delete. In the **Tags** tab, select all the image
 tags you want to delete, and click the **Delete button**.

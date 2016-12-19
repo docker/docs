@@ -7,6 +7,8 @@ redirect_from:
 title: Docker Trusted Registry release notes
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 Here you can learn about new features, bug fixes, breaking changes and
 known issues for each DTR version.
 

@@ -4,6 +4,8 @@ keywords: docker, registry, images, pull
 title: Pull an image from DTR
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 Pulling an image from Docker Trusted Registry is the same as pulling an image
 from Docker Hub. Since DTR is secure by default, you always need to authenticate
 before pulling images.

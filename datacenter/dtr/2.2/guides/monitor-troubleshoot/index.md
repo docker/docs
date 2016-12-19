@@ -4,6 +4,8 @@ keywords: docker, registry, monitor, troubleshoot
 title: Monitor Docker Trusted Registry
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 Docker Trusted Registry is a Dockerized application. To monitor it, you can
 use the same tools and techniques you're already using to monitor other
 containerized applications running on your cluster. One way to monitor

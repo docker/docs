@@ -5,6 +5,8 @@ keywords: docker, registry, security, permissions, teams
 title: Create and manage teams
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 You can extend the user's default permissions by granting them fine-grain
 permissions over image repositories. You do this by adding the user to a team.
 A team defines the permissions a set of users have for a set of repositories.

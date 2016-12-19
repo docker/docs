@@ -4,6 +4,8 @@ keywords: docker, registry, monitor, troubleshoot
 title: Troubleshoot Docker Trusted Registry
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 High availability in DTR depends on having overlay networking working in UCP.
 To manually test that overlay networking is working in UCP run the following
 commands on two different UCP machines.

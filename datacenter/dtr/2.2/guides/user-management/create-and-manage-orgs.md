@@ -5,6 +5,8 @@ keywords: docker, registry, security, permissions, organizations
 title: Create and manage organizations
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 When a user creates a repository, only that user has permissions to make changes
 to the repository.
 

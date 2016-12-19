@@ -4,6 +4,8 @@ keywords: docker, registry, security, permissions, users
 title: Create and manage users
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 When using the Docker Datacenter built-in authentication, you can create users
 to grant them fine-grained permissions.
 Users are shared across Docker Datacenter. When you create a new user in
