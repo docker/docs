@@ -80,7 +80,7 @@ In this example, WordPress was deployed to 172.31.18.153:8000. Navigate to
 this address in your browser, to start using the WordPress app you just
 deployed.
 
-![](../images/deploy-app-cli-1.png)
+![](../images/deploy-app-cli-1.png){: .with-border}
 
 ## Where to go next
 

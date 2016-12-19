@@ -29,7 +29,7 @@ controller node.
 To download a client certificate bundle, log into the **UCP web UI**, and
 navigate to your user **profile page**.
 
-![](../images/cli-based-access-1.png)
+![](../images/cli-based-access-1.png){: .with-border}
 
 Click the **Create a Client Bundle** button, to download the certificate bundle.
 

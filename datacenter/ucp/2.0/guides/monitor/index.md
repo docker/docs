@@ -5,78 +5,65 @@ keywords: Docker, UCP, troubleshoot
 title: Monitor your cluster
 ---
 
-This article gives you an overview of how to monitor your Docker UCP
-cluster. Here you'll also find the information you need to troubleshoot
-if something goes wrong.
-
+This article gives you an overview of how to monitor your Docker UCP.
 
 ## Check the cluster status from the UI
 
 To monitor your UCP cluster, the first thing to check is the **Nodes**
 screen on the UCP web app.
 
-![UCP dashboard](../images/monitor-ucp-1.png)
+![UCP dashboard](../images/monitor-ucp-1.png){: .with-border}
 
 In the nodes screen you can see if all the nodes in the cluster are healthy, or
 if there is any problem.
 
-You can also check the state of individual UCP containers by navigating to the
-**Containers** page. By default the Containers screen doesn't display system
-containers. On the filter dropdown choose **Show all containers** to see all
-the UCP components.
+If you're an administrator you can also check the state and logs of the
+UCP internal services.
 
-![UCP dashboard](../images/monitor-ucp-2.png)
+To check the state of the `ucp-agent` service, navigate to the **Services** page
+and toggle the **Show system services** option.
 
-You can click on a container to see more details like configurations and logs.
+![](../images/monitor-ucp-2.png){: .with-border}
 
+The `ucp-agent` service monitors the node where it is running, deploys other
+UCP internal components, and ensures they keep running. The UCP components that
+are deployed on a node, depend on whether the node is a manager or worker.
+[Learn more about the UCP architecture](../architecture.md)
+
+To check the state and logs of other UCP internal components, go to the
+**Containers** page, and appply the **System containers** filter.
+This can help validate that all UCP internal components are up and running.
+
+![](../images/monitor-ucp-3.png){: .with-border}
+
+It's normal for the `ucp-reconcile` to be stopped. This container only runs when
+the `ucp-agent` detects that a UCP internal component should be running but for
+some reason it's not. In this case the `ucp-agent` starts the `ucp-reconcile`
+service to start all UCP services that need to be running. Once that is done,
+the `ucp-agent` stops.
 
 ## Check the cluster status from the CLI
 
-You can also monitor the status of a UCP cluster, using the Docker CLI client.
+You can also monitor the status of a UCP cluster using the Docker CLI client.
+There are two ways to do this, using a
+[client certificate bundle](../access-ucp/cli-based-access.md), or logging into
+one of the manager nodes using ssh.
 
-1. Get a client certificate bundle.
+Then you can use regular Docker CLI commands to check the status and logs
+of the [UCP internal services and containers](../architecture.md).
 
-    When using the Docker CLI client you need to authenticate using client
-    certificates.
-    [Learn how to use client certificates](../access-ucp/cli-based-access.md).
+## Automated status checking
 
-    If your client certificate bundle is for a non-admin user, you won't have
-    permissions to execute all docker commands, or see all information about
-    the cluster.
+You can use the `https://<ucp-url>/_ping` endpoint to perform automated
+monitoring tasks. When you access this endpoint, UCP validates that all its
+internal components are working, and returns the following HTTP error codes:
 
-2.  Use the `docker info` command to check the cluster status.
+* 200, if all components are healthy
+* 500, if one or more components are not healthy
 
-    ```bash
-    $ docker info
-
-    Containers: 11
-    Nodes: 2
-     ucp: 192.168.99.100:12376
-      └ Status: Healthy
-     ucp-node: 192.168.99.101:12376
-      └ Status: Healthy
-    Cluster Managers: 1
-     192.168.99.104: Healthy
-      └ Orca Controller: https://192.168.99.100:443
-      └ Swarm Manager: tcp://192.168.99.100:3376
-      └ KV: etcd://192.168.99.100:12379
-    ```
-
-3.  Check the container logs
-
-    With an admin user certificate bundle, you can run docker commands directly
-    on the Docker Engine or Swarm Manager of a node. In this example, we are
-    connecting directly to the Docker Engine running on the UCP controller, and
-    requesting the logs of the ucp-kv container.
-
-    ```bash
-    $ docker -H tcp://192.168.99.101:12376 logs ucp-kv
-
-    2016-04-18 22:40:51.553912 I | etcdserver: start to snapshot (applied: 40004, lastsnap: 30003)
-    2016-04-18 22:40:51.561682 I | etcdserver: saved snapshot at index 40004
-    2016-04-18 22:40:51.561927 I | etcdserver: compacted raft log at 35004
-    ```
-
+If you're accessing this endpoint through a load balancer, you'll have no way to
+know which UCP manager node is not healthy. So make sure you make a request
+directly to each manager node.
 
 ## Where to go next
 

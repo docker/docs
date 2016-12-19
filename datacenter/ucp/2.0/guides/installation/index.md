@@ -59,7 +59,7 @@ To install UCP:
 
 2.  Run the following command:
 
-    ```bash
+    ```none
     # Pull the latest version of UCP
     $ docker pull docker/ucp:latest
 
@@ -79,9 +79,10 @@ To install UCP:
 ## Step 5: License your installation
 
 Now that UCP is installed, you need to license it. In your browser, navigate
-to the UCP web UI and upload your license.
+to the UCP web UI, login with your administrator credentials and upload your
+license.
 
-![](../images/install-production-1.png)
+![](../images/install-production-1.png){: .with-border}
 
 If you don't have a license yet, [learn how to get a free trial license](license.md).
 
@@ -98,11 +99,11 @@ for worker nodes to execute.
 To join manager nodes to the swarm, go to the **UCP web UI**, navigate to
 the **Resources** page, and go to the **Nodes** section.
 
-![](../images/install-production-2.png)
+![](../images/install-production-2.png){: .with-border}
 
 Click the **Add Node button** to add a new node.
 
-![](../images/install-production-3.png)
+![](../images/install-production-3.png){: .with-border}
 
 Check the 'Add node as a manager' to turn this node into a manager and replicate
 UCP for high-availability.
@@ -116,7 +117,7 @@ can reach it.
 For each manager node that you want to join to UCP, login into that
 node using ssh, and run the join command that is displayed on UCP.
 
-![](../images/install-production-4.png)
+![](../images/install-production-4.png){: .with-border}
 
 After you run the join command in the node, the node starts being displayed
 in UCP.

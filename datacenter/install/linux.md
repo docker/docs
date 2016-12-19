@@ -64,9 +64,10 @@ for any necessary configuration values.
 ### Step 4: License your installation
 
 Now that UCP is installed, you need to license it. In your browser, navigate
-to the UCP web UI and upload your license.
+to the UCP web UI, login with your administrator credentials and upload your
+license.
 
-![](../images/try-ddc-1.png)
+![](../images/try-ddc-1.png){: .with-border}
 
 [Get a free trial license if you don't have one](https://store.docker.com/bundles/docker-datacenter).
 
@@ -76,11 +77,11 @@ Join more nodes so that you can manage them from UCP.
 Go to the **UCP web UI**, navigate to the **Resources** page, and go to
 the **Nodes** section.
 
-![](../images/try-ddc-2.png)
+![](../images/try-ddc-2.png){: .with-border}
 
 Click the **Add Node button** to add a new node.
 
-![](../images/try-ddc-3.png)
+![](../images/try-ddc-3.png){: .with-border}
 
 
 Check the 'Add node as a manager' option to join the node as a manager
