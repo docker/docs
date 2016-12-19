@@ -276,7 +276,6 @@ The entrypoint can also be a list, in a manner similar to
 > clear out any default command on the image - meaning that if there's a `CMD`
 > instruction in the Dockerfile, it will be ignored.
 
-
 ### env_file
 
 Add environment variables from a file. Can be a single value or a list.
@@ -303,6 +302,10 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
 > defined in environment files will _not_ be automatically visible during the
 > build. Use the [args](compose-file.md#args) sub-option of `build` to define build-time
 > environment variables.
+
+The value of `VAL` is used as is and not modified at all. For example if the value is
+surrounded by quotes (as is often the case of shell variables), the quotes will be
+included in the value passed to Compose.
 
 ### environment
 
