@@ -513,42 +513,70 @@ toc:
     title: Deprecated Engine Features
   - path: /engine/faq/
     title: FAQ
-- sectiontitle: Docker for Mac
+- sectiontitle: Get Docker
   section:
-  - path: /docker-for-mac/
-    title: Getting Started
-  - path: /docker-for-mac/docker-toolbox/
-    title: Docker for Mac vs. Docker Toolbox
-  - path: /docker-for-mac/multi-arch/
-    title: Leveraging Multi-CPU Architecture Support
-  - path: /docker-for-mac/networking/
-    title: Networking
-  - path: /docker-for-mac/osxfs/
-    title: File system sharing
-  - path: /docker-for-mac/troubleshoot/
-    title: Logs and Troubleshooting
-  - path: /docker-for-mac/faqs/
-    title: FAQs
-  - path: /docker-for-mac/examples/
-    title: Example Applications
-  - path: /docker-for-mac/opensource/
-    title: Open Source Licensing
-  - path: /docker-for-mac/release-notes/
-    title: Release Notes
-- sectiontitle: Docker for Windows
-  section:
-  - path: /docker-for-windows/
-    title: Getting Started
-  - path: /docker-for-windows/troubleshoot/
-    title: Logs and Troubleshooting
-  - path: /docker-for-windows/faqs/
-    title: FAQs
-  - path: /docker-for-windows/examples/
-    title: Example Applications
-  - path: /docker-for-windows/opensource/
-    title: Open Source Licensing
-  - path: /docker-for-windows/release-notes/
-    title: Release Notes
+  - sectiontitle: Docker for Mac
+    section:
+    - path: /docker-for-mac/
+      title: Getting Started
+    - path: /docker-for-mac/docker-toolbox/
+      title: Docker for Mac vs. Docker Toolbox
+    - path: /docker-for-mac/multi-arch/
+      title: Leveraging Multi-CPU Architecture Support
+    - path: /docker-for-mac/networking/
+      title: Networking
+    - path: /docker-for-mac/osxfs/
+      title: File system sharing
+    - path: /docker-for-mac/troubleshoot/
+      title: Logs and Troubleshooting
+    - path: /docker-for-mac/faqs/
+      title: FAQs
+    - path: /docker-for-mac/examples/
+      title: Example Applications
+    - path: /docker-for-mac/opensource/
+      title: Open Source Licensing
+    - path: /docker-for-mac/release-notes/
+      title: Release Notes
+  - sectiontitle: Docker for Windows
+    section:
+    - path: /docker-for-windows/
+      title: Getting Started
+    - path: /docker-for-windows/troubleshoot/
+      title: Logs and Troubleshooting
+    - path: /docker-for-windows/faqs/
+      title: FAQs
+    - path: /docker-for-windows/examples/
+      title: Example Applications
+    - path: /docker-for-windows/opensource/
+      title: Open Source Licensing
+    - path: /docker-for-windows/release-notes/
+      title: Release Notes
+  - sectiontitle: Docker for AWS
+    section:
+    - path: /docker-for-aws/
+      title: Setup & Prerequisites
+    - path: /docker-for-aws/scaling/
+      title: Scaling
+    - path: /docker-for-aws/upgrade/
+      title: Upgrading
+    - path: /docker-for-aws/faqs/
+      title: FAQs
+    - path: /docker-for-aws/opensource/
+      title: Open Source Licensing
+    - path: /docker-for-aws/release-notes/
+      title: Release Notes
+  - sectiontitle: Docker for Azure
+    section:
+    - path: /docker-for-azure/
+      title: Setup & Prerequisites
+    - path: /docker-for-azure/upgrade/
+      title: Upgrading
+    - path: /docker-for-azure/faqs/
+      title: FAQs
+    - path: /docker-for-azure/opensource/
+      title: Open Source Licensing
+    - path: /docker-for-azure/release-notes/
+      title: Release Notes
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
