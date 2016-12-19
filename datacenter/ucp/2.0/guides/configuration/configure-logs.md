@@ -14,7 +14,7 @@ You can configure UCP for sending logs to a remote logging service:
 3. Set the information about your logging server, and click
 **Enable Remote Logging**
 
-![](../images/settings-log.png)
+![](../images/configure-logs-1.png){: .with-border}
 
 ## Example: Setting up an ELK stack
 

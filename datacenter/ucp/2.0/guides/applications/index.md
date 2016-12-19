@@ -14,7 +14,7 @@ WordPress application.
 In your browser, **log in** to UCP, and navigate to the **Applications** page.
 There, click the **Deploy compose.yml** button, to deploy a new application.
 
-![](../images/deploy-app-ui-1.png)
+![](../images/deploy-app-ui-1.png){: .with-border}
 
 The WordPress application we're going to deploy is composed of two services:
 
@@ -54,25 +54,25 @@ Name the application 'wordpress', and paste the docker-compose.yml definition.
 You can also upload a docker-compose.yml file from your machine, by clicking on
 the 'Upload an existing docker-compose.yml' link.
 
-![](../images/deploy-app-ui-2.png)
+![](../images/deploy-app-ui-2.png){: .with-border}
 
 Click the **Create** button, to create the WordPress application.
 
 Once UCP deploys the WordPress application, you can
 **click on the wordpress_wordpress_1** container, to see its details.
 
-![](../images/deploy-app-ui-3.png)
+![](../images/deploy-app-ui-3.png){: .with-border}
 
 In the container details page, search for the **Ports** the container is
 exposing.
 
-![](../images/deploy-app-ui-4.png)
+![](../images/deploy-app-ui-4.png){: .with-border}
 
 In this example, WordPress can be accessed at `172.31.18.152:8000`.
 Navigate to this address in your browser, to start using the WordPress app you
 just deployed.
 
-![](../images/deploy-app-ui-5.png)
+![](../images/deploy-app-ui-5.png){: .with-border}
 
 
 ## Limitations
@@ -85,7 +85,7 @@ Compose keywords are not supported:
 * dockerfile
 * env_file
 
-![](../images/deploy-app-ui-6.png)
+![](../images/deploy-app-ui-6.png){: .with-border}
 
 To overcome these limitations, you can
 [deploy your apps from the CLI](deploy-app-cli.md).
