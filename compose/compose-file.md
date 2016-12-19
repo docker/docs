@@ -304,6 +304,10 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
 > build. Use the [args](compose-file.md#args) sub-option of `build` to define build-time
 > environment variables.
 
+> ""Note:** The value of `VAL` is taken literally and no processing is done on it. So for
+example if the value is quoted (as is often the case of shell variables) the value
+of `VAR` **will** contain quotes when used.
+
 ### environment
 
 Add environment variables. You can use either an array or a dictionary. Any
