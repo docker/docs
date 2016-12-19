@@ -71,7 +71,9 @@ from the new repository:
 
  5. Add the new `GPG` key.
 
-         $ apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+         $ sudo apt-key adv \
+               --keyserver hkp://ha.pool.sks-keyservers.net:80 \
+               --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
  6. Open the `/etc/apt/sources.list.d/docker.list` file in your favorite editor.
 
