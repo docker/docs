@@ -35,7 +35,7 @@ Otherwise execute the following command:
 
     $ sudo SUSEConnect -p sle-module-containers/12/x86_64 -r ''
 
-    >**Note:** currently the `-r ''` flag is required to avoid a known limitation of `SUSEConnect`.
+> **Note:** currently the `-r ''` flag is required to avoid a known limitation of `SUSEConnect`.
 
 The [Virtualization:containers project](https://build.opensuse.org/project/show/Virtualization:containers)
 on the [Open Build Service](https://build.opensuse.org/) contains also bleeding
