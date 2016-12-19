@@ -39,7 +39,7 @@ The value of the `DEBUG` variable in the container will be taken from the value 
 
 ## The “env_file” configuration option
 
-You can pass multiple environment variables from an external file through to a service's containers with the ['env_file' option](compose-file.md#env-file), just like with `docker run --env-file=FILE ...`:
+You can pass multiple environment variables from an external file through to a service's containers with the ['env_file' option](compose-file.md#envfile), just like with `docker run --env-file=FILE ...`:
 
     web:
       env_file:
