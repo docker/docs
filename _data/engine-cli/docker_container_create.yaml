@@ -14,7 +14,8 @@ options:
   description: Attach to STDIN, STDOUT or STDERR
 - option: blkio-weight
   default_value: "0"
-  description: Block IO (relative weight), between 10 and 1000
+  description: |
+    Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)
 - option: blkio-weight-device
   default_value: '[]'
   description: Block IO weight (relative device weight)
@@ -28,6 +29,9 @@ options:
   description: Optional parent cgroup for the container
 - option: cidfile
   description: Write the container ID to the file
+- option: cpu-count
+  default_value: "0"
+  description: CPU count (Windows only)
 - option: cpu-percent
   default_value: "0"
   description: CPU percent (Windows only)
@@ -37,10 +41,19 @@ options:
 - option: cpu-quota
   default_value: "0"
   description: Limit CPU CFS (Completely Fair Scheduler) quota
+- option: cpu-rt-period
+  default_value: "0"
+  description: Limit CPU real-time period in microseconds
+- option: cpu-rt-runtime
+  default_value: "0"
+  description: Limit CPU real-time runtime in microseconds
 - option: cpu-shares
   shorthand: c
   default_value: "0"
   description: CPU shares (relative weight)
+- option: cpus
+  default_value: "0.000"
+  description: Number of CPUs
 - option: cpuset-cpus
   description: CPUs in which to allow execution (0-3, 0,1)
 - option: cpuset-mems
@@ -71,6 +84,9 @@ options:
 - option: dns-opt
   default_value: '[]'
   description: Set DNS options
+- option: dns-option
+  default_value: '[]'
+  description: Set DNS options
 - option: dns-search
   default_value: '[]'
   description: Set custom DNS search domains
@@ -93,13 +109,14 @@ options:
   description: Command to run to check health
 - option: health-interval
   default_value: "0"
-  description: Time between running the check
+  description: Time between running the check (ns|us|ms|s|m|h) (default 0s)
 - option: health-retries
   default_value: "0"
   description: Consecutive failures needed to report unhealthy
 - option: health-timeout
   default_value: "0"
-  description: Maximum time to allow one check to run
+  description: |
+    Maximum time to allow one check to run (ns|us|ms|s|m|h) (default 0s)
 - option: help
   default_value: "false"
   description: Print usage
@@ -221,6 +238,9 @@ options:
 - option: stop-signal
   default_value: SIGTERM
   description: Signal to stop a container, SIGTERM by default
+- option: stop-timeout
+  default_value: "0"
+  description: Timeout (in seconds) to stop a container
 - option: storage-opt
   default_value: '[]'
   description: Storage driver options for the container

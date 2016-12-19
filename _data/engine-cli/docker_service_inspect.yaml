@@ -7,7 +7,7 @@ plink: docker_service.yaml
 options:
 - option: format
   shorthand: f
-  description: Format the output using the given go template
+  description: Format the output using the given Go template
 - option: pretty
   default_value: "false"
   description: Print the information in a human friendly format.

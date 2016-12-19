@@ -9,6 +9,10 @@ options:
   shorthand: a
   default_value: "false"
   description: Attach STDOUT/STDERR and forward signals
+- option: checkpoint
+  description: Restore from this checkpoint
+- option: checkpoint-dir
+  description: Use a custom checkpoint storage directory
 - option: detach-keys
   description: Override the key sequence for detaching a container
 - option: interactive

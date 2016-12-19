@@ -66,7 +66,7 @@ plink: docker_network.yaml
 options:
 - option: filter
   shorthand: f
-  description: Provide filter values (i.e. 'dangling=true')
+  description: Provide filter values (e.g. 'driver=bridge')
 - option: format
   description: Pretty-print networks using a Go template
 - option: no-trunc

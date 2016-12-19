@@ -1,0 +1,26 @@
+command: docker service logs
+short: Fetch the logs of a service
+long: Fetch the logs of a service
+usage: docker service logs [OPTIONS] SERVICE
+pname: docker service
+plink: docker_service.yaml
+options:
+- option: details
+  default_value: "false"
+  description: Show extra details provided to logs
+- option: follow
+  shorthand: f
+  default_value: "false"
+  description: Follow log output
+- option: no-resolve
+  default_value: "false"
+  description: Do not map IDs to Names
+- option: since
+  description: Show logs since timestamp
+- option: tail
+  default_value: all
+  description: Number of lines to show from the end of the logs
+- option: timestamps
+  shorthand: t
+  default_value: "false"
+  description: Show timestamps

@@ -7,7 +7,7 @@ plink: docker_container.yaml
 options:
 - option: format
   shorthand: f
-  description: Format the output using the given go template
+  description: Format the output using the given Go template
 - option: size
   shorthand: s
   default_value: "false"

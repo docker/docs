@@ -7,4 +7,4 @@ plink: docker_system.yaml
 options:
 - option: format
   shorthand: f
-  description: Format the output using the given go template
+  description: Format the output using the given Go template

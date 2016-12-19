@@ -50,6 +50,10 @@ options:
 - option: memory-swap
   description: |
     Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+- option: network
+  default_value: default
+  description: |
+    Set the networking mode for the RUN instructions during build
 - option: no-cache
   default_value: "false"
   description: Do not use cache when building the image
@@ -68,6 +72,9 @@ options:
   description: Security options
 - option: shm-size
   description: Size of /dev/shm, default value is 64MB
+- option: squash
+  default_value: "false"
+  description: Squash newly built layers into a single new layer
 - option: tag
   shorthand: t
   default_value: '[]'
