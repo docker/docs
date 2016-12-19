@@ -38,13 +38,15 @@ To set up Docker for Azure, a [Service Principal](https://azure.microsoft.com/en
 Ensure the latest version of `docker4x/create-sp-azure` has been downloaded to your local environment: `docker pull docker4x/create-sp-azure:latest`
 
 Then run the sp-azure script with the following arguments:
-```
-    docker run -ti docker4x/create-sp-azure sp-name rg-name rg-region
-    ...
-    Your access credentials =============================
-    AD App ID:       <app-id>
-    AD App Secret:   <secret>
-    AD Tenant ID:   <tenant-id>
+
+```bash
+$ docker run -ti docker4x/create-sp-azure sp-name rg-name rg-region
+
+...
+Your access credentials =============================
+AD App ID:       <app-id>
+AD App Secret:   <secret>
+AD Tenant ID:   <tenant-id>
 ```
 
 If you have multiple Azure subscriptions, make sure you're creating the Service Principal with subscription ID that you shared with Docker when signing up for the beta.
@@ -66,9 +68,11 @@ Docker for Azure uses SSH for accessing the Docker swarm once it's deployed. Dur
     ssh-keygen -y -f my-key.pem
 
 ### Installing with the CLI
+
 You can also invoke the Docker for Azure template from the Azure CLI:
 
 Here is an example of how to use the CLI. Make sure you populate all of the parameters and their values:
-```
+
+```bash
 $ azure group create  --name DockerGroup --location centralus --deployment-name docker.template --template-file <templateurl>
 ```

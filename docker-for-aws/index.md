@@ -82,6 +82,7 @@ Go to the [Release Notes](release-notes.md) page, and click on the "launch stack
 You can also invoke the Docker for AWS CloudFormation template from the AWS CLI:
 
 Here is an example of how to use the CLI. Make sure you populate all of the parameters and their values:
+
 ```bash
 $ aws cloudformation create-stack --stack-name teststack --template-url <templateurl> --parameters ParameterKey=KeyName,ParameterValue=<keyname> ParameterKey=InstanceType,ParameterValue=t2.micro ParameterKey=ManagerInstanceType,ParameterValue=t2.micro ParameterKey=ClusterSize,ParameterValue=1 --capabilities CAPABILITY_IAM
 ```

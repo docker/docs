@@ -47,6 +47,6 @@ By default when you SSH into a manager, you will be logged in as the regular use
 For example to ping one of the nodes, after finding its IP via the Azure/AWS portal (e.g. 10.0.0.4), you could run:
 ```
 $ sudo ping 10.0.0.4
-``` 
+```
 
 Note that access to Docker for AWS and Azure happens through a shell container that itself runs on Docker.
