@@ -101,7 +101,7 @@ The following `vnext` branches currently exist:
   docs for upcoming features in the [docker/kitematic](https://github.com/docker/kitematic/)
   project
 
-## Per-PR staging on Github
+## Per-PR staging on GitHub
 
 For every PR against `master` and all the long-lived branches, a staged version
 of the site is built using Netlify. If the site builds, you will see
@@ -136,10 +136,41 @@ You have three options:
     docker-compose down
     ```
 
-2.  Use Jekyll directly. Clone this repo, [install Ruby 2.3 or higher
-    (required)](https://www.ruby-lang.org/en/documentation/installation/),
-    [install the GitHub Pages Ruby gem](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/),
-    then run `jekyll serve` from within the directory.
+2.  Use Jekyll directly. 
+
+    a. Clone this repo by running:
+
+       ```bash
+       git clone https://github.com/docker/docker.github.io.git
+       ```
+ 
+    b. Install Ruby 2.3 or later as described in [Installing Ruby]
+       (https://www.ruby-lang.org/en/documentation/installation/).
+    
+    c. Install Bundler:
+
+       ```bash
+       gem install bundler
+       ```
+       
+    d. If you use Ubuntu, install packages required for the Nokogiri HTML
+       parser:
+
+       ```bash
+       sudo apt-get install ruby-dev zlib1g-dev liblzma-dev
+       ```
+
+    e. Install Jekyll and other required dependencies:
+
+       ```bash
+       bundle install
+       ```
+    
+       >**Note**: You may have to install some packages manually.   
+
+    f. Change the directory to `docker.github.io`.
+
+    g. Use the `jekyll serve` command to continuously build the HTML output.
 
     The `jekyll serve` process runs in the foreground, and starts a web server
     running on http://localhost:4000/ by default. To stop it, use `CTRL+C`.
