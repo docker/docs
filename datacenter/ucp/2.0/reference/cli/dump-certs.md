@@ -14,7 +14,7 @@ docker run --rm \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp \
-    uninstall-ucp [command options]
+    dump-certs [command options]
 
 ```
 
