@@ -735,6 +735,16 @@ limit as an integer or soft/hard limits as a mapping.
         soft: 20000
         hard: 40000
 
+### userns_mode
+
+> [Added in version 2.1 file format](compose-file.md#version-21).
+
+    userns_mode: "host"
+
+Disables the user namespace for this service, if Docker daemon is configured with user namespaces.
+See [dockerd](/engine/reference/commandline/dockerd.md#disable-user-namespace-for-a-container) for
+more information.
+
 ### volumes, volume\_driver
 
 Mount paths or named volumes, optionally specifying a path on the host machine
@@ -1169,6 +1179,7 @@ Introduces the following additional parameters:
 - [`isolation`](compose-file.md#isolation)
 - `labels` for [volumes](compose-file.md#volume-configuration-reference) and
   [networks](compose-file.md#network-configuration-reference)
+- [`userns_mode`](compose-file.md#userns_mode)
 
 ### Upgrading
 
