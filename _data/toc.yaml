@@ -479,10 +479,14 @@ toc:
         title: wait
   - sectiontitle: Engine API
     section:
+    - path: /engine/api/
+      title: Overview
+    - path: /engine/api/getting-started/
+      title: Getting started
+    - path: /engine/api/sdks/
+      title: SDKs
     - path: /engine/api/v1.25/
       title: Reference
-    - path: /engine/api/client-libraries/
-      title: Client libraries
     - sectiontitle: Version history
       section:
       - path: /engine/api/version-history/
