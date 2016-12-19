@@ -4,6 +4,8 @@ keywords: docker, dtr, registry, install
 title: Install Docker Trusted Registry
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 Docker Trusted Registry (DTR) is a containerized application that runs on a
 swarm managed by Docker Universal Control Plane (UCP). It can be installed
 on-premises or on a cloud infrastructure.

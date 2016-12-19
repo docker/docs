@@ -5,6 +5,8 @@ keywords: docker, documentation, about, technology, install, enterprise, hub, CS
 title: Use your own certificates
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 By default the DTR services are exposed using HTTPS, to ensure all
 communications between clients and DTR is encrypted. Since DTR
 replicas use self-signed certificates for this, when a client accesses

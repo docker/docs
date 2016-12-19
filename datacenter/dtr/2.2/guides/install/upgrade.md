@@ -4,6 +4,8 @@ keywords: docker, dtr, upgrade, install
 title: Upgrade DTR
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 The first step in upgrading to a new minor version or patch release of DTR 2.0,
 is ensuring you're running DTR 2.0. If that's not the case, start by upgrading
 your installation to version 2.0.0, and then upgrade to the latest version

@@ -5,6 +5,8 @@ keywords: docker, registry, high-availability, backup, recovery
 title: Backups and disaster recovery
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 When you decide to start using Docker Trusted Registry on a production
 setting, you should [configure it for high availability](index.md).
 
@@ -109,7 +111,7 @@ state from an existing backup:
 $ docker run -i --rm \
   docker/dtr restore \
   --ucp-url <ucp-url> \
-  --ucp-insecure-tls \  
+  --ucp-insecure-tls \
   --ucp-username <ucp-admin> \
   --ucp-password <ucp-password> \
   --dtr-load-balancer <dtr-domain-name> < /tmp/backup.tar

@@ -4,6 +4,8 @@ keywords: docker, registry, security, permissions
 title: Permission levels
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 Docker Trusted Registry allows you to define fine-grain permissions over image
 repositories.
 

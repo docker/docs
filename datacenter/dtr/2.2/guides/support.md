@@ -5,6 +5,8 @@ keywords: Docker, support, help
 title: Get support for DTR
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 Your Docker Data Center, or Docker Trusted Registry subscription gives you
 access to prioritized support. The service levels depend on your subscription.
 

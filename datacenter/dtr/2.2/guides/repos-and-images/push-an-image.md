@@ -4,6 +4,8 @@ keywords: docker, registry, images, pull
 title: Push an image to DTR
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 Pushing an image to Docker Trusted Registry is the same as pushing an image
 to Docker Hub.
 Since DTR is secure by default, you need to create the image repository before

@@ -5,6 +5,8 @@ keywords: docker, documentation, about, technology, understanding, configuration
 title: Configure where images are stored
 ---
 
+<!-- TODO: review page for v2.2 -->
+
 After installing Docker Trusted Registry, one of your first tasks is to
 designate and configure the Trusted Registry storage backend. This document provides the following:
 
@@ -60,7 +62,7 @@ adequate space available. To do so, you can run the following commands:
 ### Amazon S3
 
 S3 stores data as objects within “buckets” where you read, write, and delete
-objects in that container. It too, has a `rootdirectory` parameter. If you select this option, there will be some tasks that you need to first perform [on AWS](https://aws.amazon.com/s3/getting-started/).   
+objects in that container. It too, has a `rootdirectory` parameter. If you select this option, there will be some tasks that you need to first perform [on AWS](https://aws.amazon.com/s3/getting-started/).
 
 1. You must create an S3 bucket, and write down its name and the AWS zone it
 runs on.
