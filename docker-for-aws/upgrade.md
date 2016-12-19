@@ -14,7 +14,7 @@ To upgrade, apply a new version of the AWS Cloudformation template that powers D
 
  * We recommend only attempting upgrades of swarms with at least 3 managers. A 1-manager swarm may not be able to maintain quorum during the upgrade
  * You can only upgrade one version at a time. Skipping a version during an upgrade is not supported. Downgrades are not tested.
- 
+
 ## Upgrading
 
 New releases are announced on [Release Notes](release-notes.md) page.

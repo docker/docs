@@ -10,7 +10,6 @@ Docker for Azure supports upgrading from one version to the next. To upgrade, ap
  * Upgrading service containers in the manager and worker nodes
  * Changing any other resources in the Azure Resource Group that hosts Docker for Azure
 
-
 ## Prerequisites
 
  * We recommend only attempting upgrades of swarms with at least 3 managers. A 1-manager swarm may not be able to maintain quorum during the upgrade
