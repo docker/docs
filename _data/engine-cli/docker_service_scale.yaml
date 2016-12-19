@@ -1,6 +1,6 @@
 command: docker service scale
-short: Scale one or multiple services
-long: Scale one or multiple services
+short: Scale one or multiple replicated services
+long: Scale one or multiple replicated services
 usage: docker service scale SERVICE=REPLICAS [SERVICE=REPLICAS...]
 pname: docker service
 plink: docker_service.yaml

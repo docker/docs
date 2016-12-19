@@ -1,5 +1,5 @@
 command: docker login
-short: Log in to a Docker registry.
+short: Log in to a Docker registry
 long: |-
   Log in to a Docker registry.
   If no server is specified, the default is defined by the daemon.
@@ -7,9 +7,6 @@ usage: docker login [OPTIONS] [SERVER]
 pname: docker
 plink: docker.yaml
 options:
-- option: email
-  shorthand: e
-  description: Email
 - option: password
   shorthand: p
   description: Password

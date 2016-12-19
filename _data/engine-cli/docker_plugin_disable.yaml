@@ -1,0 +1,6 @@
+command: docker plugin disable
+short: Disable a plugin
+long: Disable a plugin
+usage: docker plugin disable PLUGIN
+pname: docker plugin
+plink: docker_plugin.yaml

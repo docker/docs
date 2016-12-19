@@ -1,0 +1,10 @@
+command: docker plugin enable
+short: Enable a plugin
+long: Enable a plugin
+usage: docker plugin enable [OPTIONS] PLUGIN
+pname: docker plugin
+plink: docker_plugin.yaml
+options:
+- option: timeout
+  default_value: "0"
+  description: HTTP client timeout (in seconds)

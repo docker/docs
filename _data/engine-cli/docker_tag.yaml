@@ -1,6 +1,6 @@
 command: docker tag
-short: Tag an image into a repository
-long: Tag an image into a repository
-usage: docker tag IMAGE[:TAG] IMAGE[:TAG]
+short: Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+long: Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+usage: docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 pname: docker
 plink: docker.yaml

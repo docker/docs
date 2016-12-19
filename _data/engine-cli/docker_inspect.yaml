@@ -1,13 +1,13 @@
 command: docker inspect
-short: Return low-level information on a container, image or task
-long: Return low-level information on a container, image or task
-usage: docker inspect [OPTIONS] CONTAINER|IMAGE|TASK [CONTAINER|IMAGE|TASK...]
+short: Return low-level information on Docker objects
+long: Return low-level information on Docker objects
+usage: docker inspect [OPTIONS] NAME|ID [NAME|ID...]
 pname: docker
 plink: docker.yaml
 options:
 - option: format
   shorthand: f
-  description: Format the output using the given go template
+  description: Format the output using the given Go template
 - option: size
   shorthand: s
   default_value: "false"

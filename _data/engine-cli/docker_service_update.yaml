@@ -9,35 +9,76 @@ options:
   description: Service command args
 - option: constraint-add
   default_value: '[]'
-  description: Add or update placement constraints
+  description: Add or update a placement constraint
 - option: constraint-rm
   default_value: '[]'
   description: Remove a constraint
 - option: container-label-add
   default_value: '[]'
-  description: Add or update container labels
+  description: Add or update a container label
 - option: container-label-rm
   default_value: '[]'
   description: Remove a container label by its key
+- option: dns-add
+  default_value: '[]'
+  description: Add or update a custom DNS server
+- option: dns-option-add
+  default_value: '[]'
+  description: Add or update a DNS option
+- option: dns-option-rm
+  default_value: '[]'
+  description: Remove a DNS option
+- option: dns-rm
+  default_value: '[]'
+  description: Remove a custom DNS server
+- option: dns-search-add
+  default_value: '[]'
+  description: Add or update a custom DNS search domain
+- option: dns-search-rm
+  default_value: '[]'
+  description: Remove a DNS search domain
 - option: endpoint-mode
   description: Endpoint mode (vip or dnsrr)
 - option: env-add
   default_value: '[]'
-  description: Add or update environment variables
+  description: Add or update an environment variable
 - option: env-rm
   default_value: '[]'
   description: Remove an environment variable
+- option: force
+  default_value: "false"
+  description: Force update even if no changes require it
 - option: group-add
   default_value: '[]'
-  description: Add additional user groups to the container
+  description: Add an additional supplementary user group to the container
 - option: group-rm
   default_value: '[]'
-  description: Remove previously added user groups from the container
+  description: |
+    Remove a previously added supplementary user group from the container
+- option: health-cmd
+  description: Command to run to check health
+- option: health-interval
+  default_value: none
+  description: Time between running the check (ns|us|ms|s|m|h)
+- option: health-retries
+  default_value: "0"
+  description: Consecutive failures needed to report unhealthy
+- option: health-timeout
+  default_value: none
+  description: Maximum time to allow one check to run (ns|us|ms|s|m|h)
+- option: host-add
+  default_value: '[]'
+  description: Add or update a custom host-to-IP mapping (host:ip)
+- option: host-rm
+  default_value: '[]'
+  description: Remove a custom host-to-IP mapping (host:ip)
+- option: hostname
+  description: Container hostname
 - option: image
   description: Service image tag
 - option: label-add
   default_value: '[]'
-  description: Add or update service labels
+  description: Add or update a service label
 - option: label-rm
   default_value: '[]'
   description: Remove a label by its key
@@ -57,13 +98,12 @@ options:
 - option: mount-rm
   default_value: '[]'
   description: Remove a mount by its target path
-- option: name
-  description: Service name
+- option: no-healthcheck
+  default_value: "false"
+  description: Disable any container-specified HEALTHCHECK
 - option: publish-add
-  default_value: '[]'
   description: Add or update a published port
 - option: publish-rm
-  default_value: '[]'
   description: Remove a published port by its target port
 - option: replicas
   default_value: none
@@ -78,22 +118,42 @@ options:
   description: Restart when condition is met (none, on-failure, or any)
 - option: restart-delay
   default_value: none
-  description: Delay between restart attempts
+  description: Delay between restart attempts (ns|us|ms|s|m|h)
 - option: restart-max-attempts
   default_value: none
   description: Maximum number of restarts before giving up
 - option: restart-window
   default_value: none
-  description: Window used to evaluate the restart policy
+  description: Window used to evaluate the restart policy (ns|us|ms|s|m|h)
+- option: rollback
+  default_value: "false"
+  description: Rollback to previous specification
+- option: secret-add
+  description: Add or update a secret on a service
+- option: secret-rm
+  default_value: '[]'
+  description: Remove a secret
 - option: stop-grace-period
   default_value: none
-  description: Time to wait before force killing a container
+  description: |
+    Time to wait before force killing a container (ns|us|ms|s|m|h)
+- option: tty
+  shorthand: t
+  default_value: "false"
+  description: Allocate a pseudo-TTY
 - option: update-delay
   default_value: "0"
-  description: Delay between updates
+  description: Delay between updates (ns|us|ms|s|m|h) (default 0s)
 - option: update-failure-action
   default_value: pause
   description: Action on update failure (pause|continue)
+- option: update-max-failure-ratio
+  default_value: "0"
+  description: Failure rate to tolerate during an update
+- option: update-monitor
+  default_value: "0"
+  description: |
+    Duration after each task update to monitor for failure (ns|us|ms|s|m|h) (default 0s)
 - option: update-parallelism
   default_value: "1"
   description: |
