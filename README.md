@@ -152,6 +152,7 @@ You have three options:
        ```bash
        gem install bundler
        ```
+       
     d. If you use Ubuntu, install packages required for the Nokogiri HTML
        parser:
 
