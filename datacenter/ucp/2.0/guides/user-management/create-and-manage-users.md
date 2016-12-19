@@ -12,11 +12,11 @@ cluster.
 To create a new user, go to the **UCP web UI**, and navigate to the
 **Users & Teams** page.
 
-![](../images/create-users-1.png)
+![](../images/create-users-1.png){: .with-border}
 
 Click the **Create User** button, and fill-in the user information.
 
-![](../images/create-users-2.png)
+![](../images/create-users-2.png){: .with-border}
 
 Check the 'Is a UCP admin' option, if you want to grant permissions for the
 user to change cluster configurations. Also, assign the user with a default
