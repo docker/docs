@@ -1,29 +1,28 @@
 ---
-description: Learn how to backup your Docker Trusted Registry cluster, and to recover
-  your cluster from an existing backup.
+description: Learn how to back up your Docker Trusted Registry cluster, and to recover your cluster from an existing backup.
 keywords: docker, registry, high-availability, backup, recovery
-title: Backups and disaster recovery
+title: DTR backups and recovery
 ---
 
 <!-- TODO: review page for v2.2 -->
 
-When you decide to start using Docker Trusted Registry on a production
-setting, you should [configure it for high availability](index.md).
+When you use Docker Trusted Registry on a production setting, you should first
+[configure it for high availability](index.md).
 
 The next step is creating a backup policy and disaster recovery plan.
 
-## DTR data persistency
+## DTR data persistence
 
 Docker Trusted Registry persists:
 
-* Configurations: the cluster configurations are stored on a key-value store
+* **Configurations**: the cluster configurations are stored on a key-value store
 that is replicated through all DTR replicas.
-* Repository metadata: the information about the repositories and
+* **Repository metadata**: the information about the repositories and
 images deployed. This information is replicated through all DTR replicas.
-* Certificates and keys: the certificates, public keys, and private keys that
-are used for mutual TLS communication.
+* **Certificates and keys**: the certificates, public keys, and private keys
+that are used for mutual TLS communication.
 
-This data is persisted on the host where DTR is running, using named volumes.
+This data persists using named volumes on the host where DTR is running.
 [Learn more about DTR named volumes](../architecture.md).
 
 DTR also persists Docker images on the filesystem of the host running DTR, or

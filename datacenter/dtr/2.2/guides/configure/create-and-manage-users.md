@@ -1,7 +1,7 @@
 ---
 description: Learn how to manage user permissions in Docker Trusted Registry.
 keywords: docker, registry, security, permissions, users
-title: Create and manage users
+title: Create and manage users in DTR
 ---
 
 <!-- TODO: review page for v2.2 -->

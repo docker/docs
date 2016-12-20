@@ -1,7 +1,7 @@
 ---
 description: Learn how to push an image to Docker Trusted Registry.
 keywords: docker, registry, images, pull
-title: Push an image to DTR
+title: Work with images in DTR
 ---
 
 <!-- TODO: review page for v2.2 -->
@@ -65,6 +65,36 @@ Go back to the **DTR web UI** to validate that the tag was successfully pushed.
 
 ![](../images/push-an-image-3.png)
 
-## Where to go next
+## Pull an image from DTR
 
-* [Pull an image from DTR](pull-an-image.md)
+Pulling an image from Docker Trusted Registry is the same as pulling an image
+from Docker Hub. Since DTR is secure by default, you always need to authenticate
+before pulling images.
+
+In this example, DTR can be accessed at dtr.company.org, and the user
+was granted permissions to access the Java, Python, and Golang repositories.
+
+![](../images/pull-an-image-1.png)
+
+Click on the repository to see its details.
+
+![](../images/pull-an-image-2.png)
+
+To pull the 1.7 tag of the dave.lauper/golang image, run:
+
+```bash
+$ docker login dtr.company.org
+$ docker pull dtr.company.org/dave.lauper/golang:1.7
+```
+
+## Delete an image in DTR
+
+To delete an image, go to the **DTR web UI**, and navigate to the image
+**repository** you want to delete. In the **Tags** tab, select all the image
+tags you want to delete, and click the **Delete button**.
+
+![](../images/delete-an-image-1.png)
+
+You can also delete all image versions, by deleting the repository. For that,
+in the image **repository**, navigate to the **Settings** tab, and click the
+**Delete** button.

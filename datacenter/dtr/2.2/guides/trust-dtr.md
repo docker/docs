@@ -2,7 +2,7 @@
 description: Learn how to configure your Docker Engine to push and pull images from
   Docker Trusted Registry.
 keywords: docker, registry, TLS, certificates
-title: Configure your Docker Engine
+title: Configure your Docker Engine with DTR
 ---
 
 <!-- TODO: review page for v2.2 -->
@@ -10,10 +10,9 @@ title: Configure your Docker Engine
 By default Docker Engine uses TLS when pushing and pulling images to an
 image registry like Docker Trusted Registry.
 
-If DTR is using the default configurations or was configured to use
-self-signed certificates, you need to configure your Docker Engine to trust DTR.
-Otherwise, when you try to login or push and pull images to DTR, you'll get an
-error:
+If DTR is using the default configurations or was configured to use self-signed
+certificates, you need to configure your Docker Engine to trust DTR. Otherwise,
+when you try to log in, push to, or pull images from DTR, you'll get an error:
 
 ```none
 $ docker login dtr.example.org

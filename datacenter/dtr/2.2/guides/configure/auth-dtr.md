@@ -1,7 +1,7 @@
 ---
 description: Learn about the permission levels available on Docker Trusted Registry.
 keywords: docker, registry, security, permissions, users
-title: Authentication and authorization
+title: Authentication and authorization in DTR
 ---
 
 <!-- TODO: review page for v2.2 -->

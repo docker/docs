@@ -1,7 +1,7 @@
 ---
 description: Learn about the permission levels available in Docker Trusted Registry.
 keywords: docker, registry, security, permissions
-title: Permission levels
+title: Permission levels in DTR
 ---
 
 <!-- TODO: review page for v2.2 -->
