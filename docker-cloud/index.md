@@ -1,9 +1,16 @@
 ---
 description: Docker Cloud
-keywords: Docker, cloud, overview
+keywords: Docker, cloud
+notoc: true
+title: Welcome to the Docker Cloud docs!
 redirect_from:
-  - docker-cloud/overview
-title: Docker Cloud Documentation
+- /engine/installation/cloud/cloud/
+- /engine/installation/cloud/
+- /engine/installation/cloud/overview/
+- /engine/installation/google/
+- /engine/installation/softlayer/
+- /engine/installation/rackspace/
+- /engine/installation/joyent/
 ---
 <style type="text/css">
 .tg td {
@@ -28,7 +35,7 @@ title: Docker Cloud Documentation
 </style>
 
 <center>
-<div class="whale"><a href="https://cloud.docker.com/" target="_blank"><img src="images/Docker-Cloud-Blue.svg" height="150" width="150" fill="#1488C6" alt="Docker Cloud logo" title="Let's go! Click to go to Docker Cloud." float="right"></a></div>
+<div class="whale"><a href="https://cloud.docker.com/" target="_blank" class="_"><img src="images/Docker-Cloud-Blue.svg" height="150" width="150" fill="#1488C6" alt="Docker Cloud logo" title="Let's go! Click to go to Docker Cloud." float="right"></a></div>
 </center>
 
 Docker Cloud provides a hosted [registry service](builds/repos.md) with
