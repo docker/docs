@@ -41,7 +41,7 @@ logging driver options:
 | `splunk-verify-connection`  | optional | Verify on start, that docker can connect to Splunk server. Defaults to true.                                                                                                                                            |
 | `splunk-gzip`               | optional | Enable/disable gzip compression to send events to Splunk Enterprise or Splunk Cloud instance. Defaults to false.                                                                                                         |
 | `splunk-gzip-level`         | optional | Set compression level for gzip. Valid values are -1 (default), 0 (no compression), 1 (best speed) ... 9 (best compression). Defaults to [DefaultCompression](https://golang.org/pkg/compress/gzip/#DefaultCompression). |
-| `tag`                       | optional | Specify tag for message, which interpret some markup. Default value is `{{.ID}}` (12 characters of the container ID). Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format.      |
+| `tag`                       | optional | Specify tag for message, which interpret some markup. Default value is {% raw %}`{{.ID}}`{% endraw %} (12 characters of the container ID). Refer to the [log tag option documentation](log_tags.md) for customizing the log tag format.      |
 | `labels`                    | optional | Comma-separated list of keys of labels, which should be included in message, if these labels are specified for container.                                                                                               |
 | `env`                       | optional | Comma-separated list of keys of environment variables, which should be included in message, if these variables are specified for container.                                                                             |
 
@@ -75,7 +75,7 @@ $ docker run --log-driver=splunk \
 By default Logging Driver sends messages as `inline` format, where each message
 will be embedded as a string, for example
 
-```
+```none
 {
     "attrs": {
         "env1": "val1",
@@ -102,7 +102,7 @@ will try to parse every line as a JSON object and send it as embedded object. In
 case if it cannot parse it - message will be send as `inline`. For example
 
 
-```
+```none
 {
     "attrs": {
         "env1": "val1",
@@ -129,7 +129,7 @@ Third format is a `raw` message. You can specify it by using
 `--log-opt splunk-format=raw`. Attributes (environment variables and labels) and
 tag will be prefixed to the message. For example
 
-```
+```none
 MyImage/MyContainer env1=val1 label1=label1 my message
 MyImage/MyContainer env1=val1 label1=label1 {"foo": "bar"}
 ```
