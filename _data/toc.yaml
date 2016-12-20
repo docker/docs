@@ -1,6 +1,96 @@
 toc:
 - title: Welcome to the Docs
   path: /
+- sectiontitle: Get Docker
+  section:
+  - path: /engine/installation/
+    title: Install Docker Engine
+  - sectiontitle: Docker for Mac
+    section:
+    - path: /docker-for-mac/
+      title: Getting Started
+    - path: /docker-for-mac/docker-toolbox/
+      title: Docker for Mac vs. Docker Toolbox
+    - path: /docker-for-mac/multi-arch/
+      title: Leveraging Multi-CPU Architecture Support
+    - path: /docker-for-mac/networking/
+      title: Networking
+    - path: /docker-for-mac/osxfs/
+      title: File system sharing
+    - path: /docker-for-mac/troubleshoot/
+      title: Logs and Troubleshooting
+    - path: /docker-for-mac/faqs/
+      title: FAQs
+    - path: /docker-for-mac/examples/
+      title: Example Applications
+    - path: /docker-for-mac/opensource/
+      title: Open Source Licensing
+    - path: /docker-for-mac/release-notes/
+      title: Release Notes
+  - sectiontitle: Docker for Windows
+    section:
+    - path: /docker-for-windows/
+      title: Getting Started
+    - path: /docker-for-windows/troubleshoot/
+      title: Logs and Troubleshooting
+    - path: /docker-for-windows/faqs/
+      title: FAQs
+    - path: /docker-for-windows/examples/
+      title: Example Applications
+    - path: /docker-for-windows/opensource/
+      title: Open Source Licensing
+    - path: /docker-for-windows/release-notes/
+      title: Release Notes
+  - sectiontitle: Docker for Linux
+    section:
+    - path: /engine/installation/linux/ubuntulinux/
+      title: Installation on Ubuntu
+    - path: /engine/installation/linux/rhel/
+      title: Installation on Red Hat Enterprise Linux
+    - path: /engine/installation/linux/centos/
+      title: Installation on CentOS
+    - path: /engine/installation/linux/fedora/
+      title: Installation on Fedora
+    - path: /engine/installation/linux/debian/
+      title: Installation on Debian
+    - path: /engine/installation/linux/archlinux/
+      title: Installation on Arch Linux
+    - path: /engine/installation/linux/cruxlinux/
+      title: Installation on CRUX Linux
+    - path: /engine/installation/linux/gentoolinux/
+      title: Installation on Gentoo
+    - path: /engine/installation/linux/oracle/
+      title: Installation on Oracle Linux
+    - path: /engine/installation/linux/SUSE/
+      title: Installation on openSUSE and SUSE Linux Enterprise
+    - path: /engine/installation/binaries/
+      title: Installation from binaries
+  - sectiontitle: Docker for AWS
+    section:
+    - path: /docker-for-aws/
+      title: Setup & Prerequisites
+    - path: /docker-for-aws/scaling/
+      title: Scaling
+    - path: /docker-for-aws/upgrade/
+      title: Upgrading
+    - path: /docker-for-aws/faqs/
+      title: FAQs
+    - path: /docker-for-aws/opensource/
+      title: Open Source Licensing
+    - path: /docker-for-aws/release-notes/
+      title: Release Notes
+  - sectiontitle: Docker for Azure
+    section:
+    - path: /docker-for-azure/
+      title: Setup & Prerequisites
+    - path: /docker-for-azure/upgrade/
+      title: Upgrading
+    - path: /docker-for-azure/faqs/
+      title: FAQs
+    - path: /docker-for-azure/opensource/
+      title: Open Source Licensing
+    - path: /docker-for-azure/release-notes/
+      title: Release Notes
 - sectiontitle: Docker ID
   section:
   - path: /docker-id/
@@ -9,44 +99,6 @@ toc:
     title: API Reference
 - sectiontitle: Docker Engine
   section:
-  - sectiontitle: Install
-    section:
-    - path: /engine/installation/mac/
-      title: Installation on macOS
-    - path: /engine/installation/windows/
-      title: Installation on Windows
-    - sectiontitle: On Linux distributions
-      section:
-      - path: /engine/installation/linux/ubuntulinux/
-        title: Installation on Ubuntu
-      - path: /engine/installation/linux/rhel/
-        title: Installation on Red Hat Enterprise Linux
-      - path: /engine/installation/linux/centos/
-        title: Installation on CentOS
-      - path: /engine/installation/linux/fedora/
-        title: Installation on Fedora
-      - path: /engine/installation/linux/debian/
-        title: Installation on Debian
-      - path: /engine/installation/linux/archlinux/
-        title: Installation on Arch Linux
-      - path: /engine/installation/linux/cruxlinux/
-        title: Installation on CRUX Linux
-      - path: /engine/installation/linux/gentoolinux/
-        title: Installation on Gentoo
-      - path: /engine/installation/linux/oracle/
-        title: Installation on Oracle Linux
-      - path: /engine/installation/linux/SUSE/
-        title: Installation on openSUSE and SUSE Linux Enterprise
-      - sectiontitle: On cloud providers
-        section:
-        - path: /engine/installation/cloud/overview/
-          title: Choose how to install
-        - path: /engine/installation/cloud/cloud-ex-aws/
-          title: "Example: Manual install on cloud provider"
-        - path: /engine/installation/cloud/cloud-ex-machine-ocean/
-          title: "Example: Use Docker Machine to provision cloud hosts"
-      - path: /engine/installation/binaries/
-        title: Installation from binaries
   - sectiontitle: Get Started with Docker
     section:
     - path: /engine/getstarted/
@@ -513,70 +565,6 @@ toc:
     title: Deprecated Engine Features
   - path: /engine/faq/
     title: FAQ
-- sectiontitle: Get Docker
-  section:
-  - sectiontitle: Docker for Mac
-    section:
-    - path: /docker-for-mac/
-      title: Getting Started
-    - path: /docker-for-mac/docker-toolbox/
-      title: Docker for Mac vs. Docker Toolbox
-    - path: /docker-for-mac/multi-arch/
-      title: Leveraging Multi-CPU Architecture Support
-    - path: /docker-for-mac/networking/
-      title: Networking
-    - path: /docker-for-mac/osxfs/
-      title: File system sharing
-    - path: /docker-for-mac/troubleshoot/
-      title: Logs and Troubleshooting
-    - path: /docker-for-mac/faqs/
-      title: FAQs
-    - path: /docker-for-mac/examples/
-      title: Example Applications
-    - path: /docker-for-mac/opensource/
-      title: Open Source Licensing
-    - path: /docker-for-mac/release-notes/
-      title: Release Notes
-  - sectiontitle: Docker for Windows
-    section:
-    - path: /docker-for-windows/
-      title: Getting Started
-    - path: /docker-for-windows/troubleshoot/
-      title: Logs and Troubleshooting
-    - path: /docker-for-windows/faqs/
-      title: FAQs
-    - path: /docker-for-windows/examples/
-      title: Example Applications
-    - path: /docker-for-windows/opensource/
-      title: Open Source Licensing
-    - path: /docker-for-windows/release-notes/
-      title: Release Notes
-  - sectiontitle: Docker for AWS
-    section:
-    - path: /docker-for-aws/
-      title: Setup & Prerequisites
-    - path: /docker-for-aws/scaling/
-      title: Scaling
-    - path: /docker-for-aws/upgrade/
-      title: Upgrading
-    - path: /docker-for-aws/faqs/
-      title: FAQs
-    - path: /docker-for-aws/opensource/
-      title: Open Source Licensing
-    - path: /docker-for-aws/release-notes/
-      title: Release Notes
-  - sectiontitle: Docker for Azure
-    section:
-    - path: /docker-for-azure/
-      title: Setup & Prerequisites
-    - path: /docker-for-azure/upgrade/
-      title: Upgrading
-    - path: /docker-for-azure/faqs/
-      title: FAQs
-    - path: /docker-for-azure/opensource/
-      title: Open Source Licensing
-    - path: /docker-for-azure/release-notes/
-      title: Release Notes
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/

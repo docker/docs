@@ -8,7 +8,8 @@ redirect_from:
 title: Install Docker Engine
 ---
 
-Docker Engine is supported on Linux, Cloud, Windows, and macOS. Installation instructions are available for the following:
+Docker Engine is supported on Linux, Cloud, Windows, and macOS. Installation
+instructions are available for the following:
 
 ## On Linux
 * [Arch Linux](linux/archlinux.md)
@@ -23,22 +24,43 @@ Docker Engine is supported on Linux, Cloud, Windows, and macOS. Installation ins
 * [openSUSE and SUSE Linux Enterprise](linux/SUSE.md)
 * [Ubuntu](linux/ubuntulinux.md)
 
-If your linux distribution is not listed above, don't give up yet. To try out Docker on a distribution that is not listed above, go here: [Installation from binaries](binaries.md).
+If your linux distribution is not listed above, don't give up yet. To try out
+Docker on a distribution that is not listed above, go here:
+[Installation from binaries](binaries.md).
 
-## On Cloud
-* [Choose how to Install](cloud/overview.md)
-* [Example: Manual install on a cloud provider](cloud/cloud-ex-aws.md)
-* [Example: Use Docker Machine to provision cloud hosts](cloud/cloud-ex-machine-ocean.md)
 
 ## On macOS and Windows
-* [macOS](mac.md)
-* [Windows](windows.md)
 
-## The Docker Archives
-Instructions for installing prior releases of Docker can be found in the following docker archives:
-[Docker v1.7](/v1.7/), [Docker v1.6](/v1.6/), [Docker v1.5](/v1.5/), and [Docker v1.4](/v1.4/).
+* [Docker for Mac](/docker-for-mac/)
+* [Docker for Windows](/docker-for-windows/)
 
-## Where to go after installing
-* [About Docker Engine](../index.md)
-* [Support](https://www.docker.com/support/)
-* [Training](https://training.docker.com//)
+
+## On Cloud
+
+You can use Docker Cloud to automatically provision and manage your cloud
+instances:
+
+* [Amazon Web Services setup guide](link-aws.md)
+* [DigitalOcean setup guide](link-do.md)
+* [Microsoft Azure setup guide](link-azure.md)
+* [Packet setup guide](link-packet.md)
+* [SoftLayer setup guide](link-softlayer.md)
+* [Use the Docker Cloud Agent to Bring your Own Host](byoh.md)
+
+You can also use our official Docker Editions if you'd like to manually manage
+your cloud instances:
+
+* [Docker for AWS](/docker-for-aws/)
+* [Docker for Azure](/docker-for-azure/)
+
+
+## Prior releases
+
+Instructions for installing prior releases of Docker can be found in the
+[Docker archives](/docsarchive/).
+
+
+## Get started
+
+After setting up Docker, try learning the basics over at
+[Getting started with Docker](/engine/getstarted/).

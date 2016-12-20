@@ -2,6 +2,8 @@
 description: Setup & Prerequisites
 keywords: azure, microsoft, iaas, tutorial
 title: Docker for Azure Setup & Prerequisites
+redirect_from:
+- /engine/installation/azure/
 ---
 
 ## Prerequisites
