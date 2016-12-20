@@ -85,7 +85,7 @@ Click the **Add Node button** to add a new node.
 
 
 Check the 'Add node as a manager' option to join the node as a manager
-to provide replication and make UCP highly available. For an highly available
+to provide replication and make UCP highly available. For a highly available
 installation, make sure you have 3, 5, or 7 manager nodes.
 
 Copy the command to your clipboard, and run in on every node that you want
