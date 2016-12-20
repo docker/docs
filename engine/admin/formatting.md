@@ -22,41 +22,51 @@ list of elements they support in their templates:
 Docker provides a set of basic functions to manipulate template elements.
 This is the complete list of the available functions with examples:
 
-### Join
+### `join`
 
-Join concatenates a list of strings to create a single string.
+`join` concatenates a list of strings to create a single string.
 It puts a separator between each element in the list.
 
+	{% raw %}
 	$ docker ps --format '{{join .Names " or "}}'
+	{% endraw %}
 
-### Json
+### `json`
 
-Json encodes an element as a json string.
-
-	$ docker inspect --format '{{json .Mounts}}' container
-
-### Lower
-
-Lower turns a string into its lower case representation.
-
-	$ docker inspect --format "{{lower .Name}}" container
-
-### Split
-
-Split slices a string into a list of strings separated by a separator.
+`json` encodes an element as a json string.
 
 	{% raw %}
-	# docker inspect --format '{{split (join .Names "/") "/"}}' container
-    {% endraw %}
+	$ docker inspect --format '{{json .Mounts}}' container
+	{% endraw %}
 
-### Title
+### `lower`
 
-Title capitalizes a string.
+`lower` transforms a string into its lowercase representation.
 
+	{% raw %}
+	$ docker inspect --format "{{lower .Name}}" container
+	{% endraw %}
+
+### `split`
+
+`split` slices a string into a list of strings separated by a separator.
+
+	{% raw %}
+	$ docker inspect --format '{{split (join .Names "/") "/"}}' container
+  {% endraw %}
+
+### `title`
+
+`title` capitalizes the first character of a string.
+
+	{% raw %}
 	$ docker inspect --format "{{title .Name}}" container
+	{% endraw %}
 
-### Upper
+### `upper`
 
-Upper turms a string into its upper case representation.
+`upper` transforms a string into its uppercase representation.
 
+	{% raw %}
 	$ docker inspect --format "{{upper .Name}}" container
+	{% endraw %}
