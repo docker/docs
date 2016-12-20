@@ -864,7 +864,7 @@ The `osxfs` file system now persists ownership changes in an extended attribute.
 * More reliable DNS forwarding over UDP and TCP
 * UDP ports can be proxied over vsock
 * Fixed EADDRINUSE (manifesting as errno 526) when ports are re-used
-* Send ICMP when asked to not fragment and we can’t guarantee it
+* Send ICMP when asked to not fragment and we can't guarantee it
 * Fixed parsing of UDP datagrams with IP socket options
 * Drop abnormally large ethernet frames
 * Improved HyperKit logging
@@ -1121,9 +1121,9 @@ work yet.
 - Clean up logging format
 
 - Packaging
-  - Create /usr/local if it doesn’t exist
+  - Create /usr/local if it doesn't exist
   - docker-uninstall improvements
-  - Remove docker-select as it’s no longer used
+  - Remove docker-select as it's no longer used
 
 
 - Hypervisor
