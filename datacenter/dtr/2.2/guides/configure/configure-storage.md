@@ -2,7 +2,7 @@
 description: Storage configuration for Docker Trusted Registry
 keywords: docker, documentation, about, technology, understanding, configuration,
   storage, storage drivers, Azure, S3, Swift, enterprise, hub, registry
-title: Configure where images are stored
+title: Configure DTR image storage
 ---
 
 <!-- TODO: review page for v2.2 -->
@@ -90,7 +90,7 @@ setting IAM policies using the command line or the console, review the AWS
 The following example describes the minimum permissions set which allows
 Trusted Registry users to access, push, pull, and delete images.
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [

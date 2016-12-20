@@ -2,7 +2,7 @@
 description: Learn how to set up organizations to enforce security in Docker Trusted
   Registry.
 keywords: docker, registry, security, permissions, organizations
-title: Create and manage organizations
+title: Create and manage organizations in DTR
 ---
 
 <!-- TODO: review page for v2.2 -->
@@ -11,8 +11,8 @@ When a user creates a repository, only that user has permissions to make changes
 to the repository.
 
 For team workflows, where multiple users have permissions to manage a set of
-common repositories, create an organization. By default, DTR has one organization
-called 'docker-datacenter', that is shared between DTR and UCP.
+common repositories, create an organization. By default, DTR has one
+organization called 'docker-datacenter', that is shared between DTR and UCP.
 
 To create a new organization, navigate to the **DTR web UI**, and go to the
 **Organizations** page.
