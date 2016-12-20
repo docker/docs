@@ -33,7 +33,12 @@ software. To find out what version of the OS you have:
     If you aren't using a supported version, you could consider upgrading your
     operating system.
 
-    If you have macOS 10.10.3 Yosemite or newer, consider using [Docker for Mac](/docker-for-mac/) instead. It runs natively on the Mac, so there is no need for a pre-configured Docker QuickStart shell. It uses xhyve for virtualization, instead of VirutalBox. Full install prerequisites are provided in the Docker for Mac topic in [Docker for Mac](/docker-for-mac/#what-to-know-before-you-install).
+    If you have macOS 10.10.3 Yosemite or newer, consider using [Docker for
+    Mac](/docker-for-mac/) instead. It runs natively on the Mac, so there is no
+    need for a pre-configured Docker QuickStart shell. It uses the native macOS
+    Hypervisor framework for virtualization, instead of Oracle VirutalBox. Full
+    install prerequisites are provided in the Docker for Mac topic in [Docker
+    for Mac](/docker-for-mac/#what-to-know-before-you-install).
 
 ## Step 2: Install Docker Toolbox
 
