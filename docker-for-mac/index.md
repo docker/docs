@@ -222,7 +222,7 @@ starting at Beta 31](images/settings-advanced-beta.png)
 
 ![Advanced Preference settings-advanced](images/settings-advanced.png)
 
-#### Custom Registries
+#### Custom registries
 
 As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
 public or private images or [Docker Trusted
@@ -262,7 +262,7 @@ Engine, the same as Stable Docker for Mac versions uses.
 
 You can check whether you are running experimental mode or not by typing `docker
 version` on the command line. Experimental mode is listed under `Server` data.
-If `Experimental` is `true`, the Docker is running in experimental mode, as
+If `Experimental` is `true`, then Docker is running in experimental mode, as
 shown here. (If `false`, Experimental mode is off.)
 
 ```bash
@@ -285,8 +285,8 @@ Server:
  Experimental: true
 ```
 
-You can use Docker to set up your own insecure
-[registry](/registry/introduction/). For details on this, see [Custom
+You can use Docker to set up your own
+[registries](/registry/introduction/). For details on this, see [Custom
 Registries](#custom-registries).
 
 ![Daemon](images/settings-advanced-experimental-beta.png)
