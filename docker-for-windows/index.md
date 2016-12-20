@@ -8,6 +8,7 @@ redirect_from:
 - /windows/started/
 - /docker-for-windows/started/
 - /installation/windows/
+- /engine/installation/windows/
 title: Get started with Docker for Windows
 ---
 

@@ -4,6 +4,7 @@ keywords: link, DigitalOcean, account
 redirect_from:
 - /docker-cloud/getting-started/beginner/link-do/
 - /docker-cloud/getting-started/link-do/
+- /engine/installation/cloud/cloud-ex-machine-ocean/
 title: Link a DigitalOcean account
 ---
 

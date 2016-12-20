@@ -3,6 +3,14 @@ description: Docker Cloud
 keywords: Docker, cloud
 notoc: true
 title: Welcome to the Docker Cloud docs!
+redirect_from:
+- /engine/installation/cloud/cloud/
+- /engine/installation/cloud/
+- /engine/installation/cloud/overview/
+- /engine/installation/google/
+- /engine/installation/softlayer/
+- /engine/installation/rackspace/
+- /engine/installation/joyent/
 ---
 
 <center>
