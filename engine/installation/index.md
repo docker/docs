@@ -30,7 +30,6 @@ Docker on a different Linux distribution, consider
 * [Docker for Mac](/docker-for-mac/)
 * [Docker for Windows](/docker-for-windows/)
 
-
 ## On Cloud
 
 You can use Docker Cloud to automatically provision and manage your cloud
@@ -49,12 +48,10 @@ your cloud instances:
 * [Docker for AWS](/docker-for-aws/)
 * [Docker for Azure](/docker-for-azure/)
 
-
 ## Prior releases
 
 Instructions for installing prior releases of Docker can be found in the
 [Docker archives](/docsarchive/).
-
 
 ## Get started
 
