@@ -191,9 +191,11 @@ example as:
 
 Next, inspect your linked containers with `docker inspect`:
 
+    {% raw %}
     $ docker inspect -f "{{ .HostConfig.Links }}" web
 
     [/db:/web/db]
+    {% endraw %}
 
 You can see that the `web` container is now linked to the `db` container
 `web/db`. Which allows it to access information about the `db` container.

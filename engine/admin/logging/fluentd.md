@@ -29,7 +29,7 @@ The `docker logs` command is not available for this logging driver.
 Some options are supported by specifying `--log-opt` as many times as needed:
 
  - `fluentd-address`: specify a socket address to connect to the Fluentd daemon, ex `fluentdhost:24224` or `unix:///path/to/fluentd.sock`
- - `tag`: specify tag for fluentd message, which interpret some markup, ex `{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`
+ - `tag`: specify tag for fluentd message, which interpret some markup, ex {% raw %}`{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`{% endraw %}
 
 
 Configure the default logging driver by passing the
