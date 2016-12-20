@@ -2,6 +2,7 @@ wrappedNode(label: 'linux && x86_64') {
   deleteDir()
   stage "checkout"
   checkout scm
+  sh "git submodule update --init --recursive"
   stage "test"
 
   /* Jekyll creates html files to implement client side redirects.
