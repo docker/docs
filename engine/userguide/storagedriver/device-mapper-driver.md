@@ -217,10 +217,13 @@ assumes that the Docker daemon is in the `stopped` state.
 
 1. Log in to the Docker host you want to configure and stop the Docker daemon.
 
-2. Install the LVM2 package.
+2. Install the LVM2 and `thin-provisioning-tools` packages.
 
    The LVM2 package includes the userspace toolset that provides logical volume
    management facilities on linux.
+
+	 The `thin-provisioning-tools` package allows you to activate and manage your
+	 pool.
 
 3. Create a physical volume replacing `/dev/xvdf` with your block device.
 
@@ -371,7 +374,7 @@ If you run into repeated problems with thin pool, you can use the
 operations fail with a warning when the free space is at or near the minimum.
 For information, see <a
 href="/../../reference/commandline/dockerd/#storage-driver-options"
-target="_blank">the storage driver options in the Engine daemon reference</a>.
+target="_blank">the storage driver options in the Engine daemon reference</a>.<!-- fix_-->
 
 
 ### Examine devicemapper structures on the host
