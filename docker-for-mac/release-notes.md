@@ -17,6 +17,17 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 
 ## Stable Release Notes
 
+### Docker for Mac 1.12.5, 2016-12-20 (stable)
+
+**Upgrades**
+
+- Docker 1.12.5
+- Docker Compose 1.9.0
+
+### Skipped Docker for Mac 1.12.4 (stable)
+
+We did not distribute a 1.12.4 stable release
+
 ### Docker for Mac 1.12.3, 2016-11-09 (stable)
 
 **Upgrades**
@@ -201,6 +212,28 @@ events or unexpected unmounts.
 * Docker Compose 1.8.0
 
 ## Beta Release Notes
+
+### Beta 34 Release Notes (2016-12-20 1.13.0-rc4-beta34)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**New**
+
+- Change UI for path location and open finder
+- Trim compact on reboot
+- Use more DNS servers, respect order
+
+**Upgrades**
+
+- Docker 1.13.0-rc4
+- Linux Kernel 4.8.15
+
+**Bug fixes and minor improvements**
+
+- New Daemon icon
+- Support Copy/Paste in About box
+- Fix advanced daemon check json changes
+- Auto update polling every 24h
 
 ### Beta 33.1 Release Notes (2016-12-16 1.13.0-rc3-beta33.1)
 

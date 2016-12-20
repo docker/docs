@@ -462,19 +462,98 @@ For a full list of options on the Docker daemon, see <a href="https://docs.docke
 
 In that topic, see also:
 
-* [Daemon configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/daemon-configuration-file)
+* [Daemon configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/#/daemon-configuration-file)
 
-* [Linux configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/linux-configuration-file)
+* [Linux configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/#/linux-configuration-file)
 
-* [Windows configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/windows-configuration-file)
+* [Windows configuration file](https://docs.docker.com/engine/reference/commandline/dockerd/#/windows-configuration-file)
 
 Note that updating these settings requires a reconfiguration and reboot of the Linux VM.
 
+#### Docker daemon basic and advanced (Beta features)
+
+Starting with Beta 34, you can configure some **Basic** options on the daemon
+with interactive settings, or switch to **Advanced** to edit the JSON directly.
+
+Note that the settings offered on **Basic** dialog can be configured directly in
+the JSON. This version just surfaces some of the commmon settings to make it
+easier to configure them.
+
+* [Experimental mode](#experimental-mode)
+* [Custom registries](#custom-registries)
+* [Edit the daemon configuration file](#edit-the-daemon-configuration-file)
+
+![Docker Daemon](images/docker-daemon_basic.png)
+
+##### Experimental mode
+
+By default, Docker for Windows Beta releases use the experimental version of
+Docker Engine, described in the [Docker Experimental Features
+README](https://github.com/docker/docker/tree/master/experimental) on GitHub.
+Starting with Beta 34, you can toggle **experimental mode** on and off via the
+**Basic** Daemon settings. If you toggle it off, Docker for Windows Beta uses the
+current generally available release of Docker Engine, the same as Stable Docker
+for Windows versions uses.
+
+You can check whether you are running experimental mode or not by typing `docker
+version` in a PowerShell. Experimental mode is listed under `Server` data.
+If `Experimental` is `true`, then Docker is running in experimental mode, as
+shown here. (If `false`, Experimental mode is off.)
+
+```bash
+PS C:\Users\Vicky> docker version
+Client:
+ Version:      1.13.0-rc4
+ API version:  1.25
+ Go version:   go1.7.3
+ Git commit:   88862e7
+ Built:        Sat Dec 17 01:34:17 2016
+ OS/Arch:      windows/amd64
+
+Server:
+ Version:      1.13.0-rc4
+ API version:  1.25 (minimum version 1.12)
+ Go version:   go1.7.3
+ Git commit:   88862e7
+ Built:        Sat Dec 17 01:34:17 2016
+ OS/Arch:      linux/amd64
+ Experimental: true
+```
+
+##### Custom registries
+
+Also starting with with Beta 34, you can set up your own
+[registries](/registry/introduction/) on the **Basic** Daemon settings.
+
+As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
+public or private images or [Docker Trusted
+Registry](/docker-trusted-registry/overview/), you can use Docker to set up your
+own insecure [registry](/registry/introduction/). Add URLs for insecure
+registries and registry mirrors on which to host your images. (See also, [How do
+I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in
+the FAQs.)
+
+##### Edit the daemon configuration file
+
+The **Advanced** daemon settings provide the original option to directly edit
+the JSON configuration file for the <a
+href="https://docs.docker.com/engine/reference/commandline/dockerd/"
+target="_blank">daemon</a>. (This is the only option currently available on stable releases, as described in [Docker daemon](#docker-daemon).)
+
+![Docker Daemon](images/docker-daemon_advanced.png)
+
+Note that updating these settings requires a reconfiguration and reboot of the
+Linux VM.
+
 ### Switch between Windows and Linux containers (Beta feature)
 
-Starting with Beta 26, you can select which daemon (Linux or Windows) the Docker CLI talks to. Select **Switch to Windows containers** to toggle to Windows containers. Select **Switch to Linux containers**.
+Starting with Beta 26, you can select which daemon (Linux or Windows) the Docker
+CLI talks to. Select **Switch to Windows containers** to toggle to Windows
+containers. Select **Switch to Linux containers**.
 
-Microsoft Developer Network has preliminary/draft information on Windows containers [here](https://msdn.microsoft.com/en-us/virtualization/windowscontainers/about/about_overview).
+Microsoft Developer Network has preliminary/draft information on Windows
+containers
+[here](https://msdn.microsoft.com/en-us/virtualization/windowscontainers/about/about_overview).
 
 This feature is not yet available on stable builds.
 

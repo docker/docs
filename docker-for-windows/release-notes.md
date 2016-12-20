@@ -22,6 +22,17 @@ about both kinds of releases, and download stable and beta product installers at
 
 ## Stable Release Notes
 
+### Docker for Windows 1.12.5, 2016-12-20 (stable)
+
+**Upgrades**
+
+- Docker 1.12.5
+- Docker Compose 1.9.0
+
+### Skipped Docker for Windows 1.12.4 (stable)
+
+We did not distribute a 1.12.4 stable release
+
 ### Docker for Windows 1.12.3, 2016-11-09 (stable)
 
 **New**
@@ -207,6 +218,25 @@ about both kinds of releases, and download stable and beta product installers at
 * Docker Compose 1.8.0
 
 ## Beta Release Notes
+
+### Beta 34 Release Notes (2016-12-20 1.13.0-rc4-beta34)
+
+**New**
+
+- Basic UI for Daemon.json editing
+
+**Upgrades**
+
+- Docker 1.13.0-rc4
+- Linux Kernel 4.8.15
+
+**Bug fixes and minor changes**
+
+- Improved Proxy UI
+- Better diagnostics of Windows containers
+- Default Experimental/Debug flags are now set on beta for Windows Containers
+- Windows Containers Reset to default script improvements
+- About Box is now Copy/Paste enabled
 
 ### Beta 33 Release Notes (2016-12-15 1.13.0-rc3-beta33)
 
