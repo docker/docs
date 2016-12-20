@@ -9,23 +9,33 @@ Docker UCP is designed for scaling horizontally as your applications grow in
 size and usage. You can add or remove nodes from the UCP cluster to make it
 scale to your needs.
 
-UCP leverages the Docker Engine functionality to run multiple Docker Engines
-in swarm mode. When you join a node to your cluster, you can join the node as a
-manager or worker:
+![](../images/scale-your-cluster-1.svg)
 
-* Manager node
+Since UCP leverages the clustering functionality provided by Docker Engine,
+you use the [docker swarm join](/engine/swarm/swarm-tutorial/add-nodes.md)
+command to add more nodes to your cluster. When joining new nodes, the UCP
+services automatically start running in that node.
+
+When joining a node a a cluster you can specify its role: manager or worker.
+
+* **Manager nodes**
 
     Manager nodes are responsible for cluster management functionality and
-    dispatching tasks to worker nodes.
-    Having multiple manager nodes allows your cluster to be highly-available
-    and tolerate node failures. It also allows you to load-balance user requests
-    to the cluster.
-    [Learn more about high-availability](../high-availability/index.md).
+    dispatching tasks to worker nodes. Having multiple manager nodes allows
+    your cluster to be highly-available and tolerate node failures.
 
-* Worker nodes
+    Manager nodes also run all UCP components in a replicated way, so by adding
+    additional manager nodes you're also making UCP highly available.
+    [Learn more about the UCP architecture.](../architecture.md)
 
-    Worker nodes receive and execute tasks dispatched to them. Having multiple
-    worker nodes allows you to scale the computing capacity of your cluster.
+* **Worker nodes**
+
+    Worker nodes receive and execute your services and applications. Having
+    multiple worker nodes allows you to scale the computing capacity of your
+    cluster.
+
+    When deploying Docker Trusted Registry in your cluster, you deploy it to a
+    worker node.
 
 
 ## Join nodes to the cluster
