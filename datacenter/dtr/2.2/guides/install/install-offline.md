@@ -17,8 +17,6 @@ all the images. Then you copy that package to the host where you’ll install DT
 
 ## Versions available
 
-{% include components/ddc_url_list.html %}
-
 ## Download the offline package
 
 Use a computer with internet access to download a single package with all
