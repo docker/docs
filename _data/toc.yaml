@@ -1157,6 +1157,12 @@ toc:
         title: Deploy an app from the UI
       - path: /datacenter/ucp/2.1/guides/applications/deploy-app-cli/
         title: Deploy an app from the CLI
+    - sectiontitle: Secrets management
+      section:
+      - path: /datacenter/ucp/2.1/guides/secrets/
+        title: Manage secrets
+      - path: /datacenter/ucp/2.1/guides/secrets/grant-revoke-access/
+        title: Grant access to secrets
     - sectiontitle: Content trust
       section:
       - path: /datacenter/ucp/2.1/guides/content-trust/
