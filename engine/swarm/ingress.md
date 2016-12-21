@@ -119,7 +119,7 @@ the swarm. The swarm nodes can reside on a private network that is accessible to
 the proxy server, but that is not publicly accessible.
 
 You can configure the load balancer to balance requests between every node in
-the swarm even if the there are no tasks scheduled on the node. For example, you
+the swarm even if there are no tasks scheduled on the node. For example, you
 could have the following HAProxy configuration in `/etc/haproxy/haproxy.cfg`:
 
 ```bash
