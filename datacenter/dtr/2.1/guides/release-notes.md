@@ -13,6 +13,21 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](install/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.1.3
+
+(20 Dec 2016)
+
+**Bug fixes**
+
+* docker/dtr image
+  * Restore command now correctly prints error messages
+  * Improved join command to retry after failure
+* DTR web UI
+  * UI now renders correctly when hiding the left navigation bar
+  * You can now create organizations that use hyphens in their name
+  * DTR now displays a UI banner when migrating tag data
+  * Tag and manifest tags now render faster
+
 ## DTR 2.1.2
 
 (8 Dec 2016)
