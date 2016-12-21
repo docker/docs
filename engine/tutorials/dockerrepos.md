@@ -58,7 +58,7 @@ name, user name, or description:
 
 There you can see two example results: `centos` and `tianon/centos`. The second
 result shows that it comes from the public repository of a user, named
-`tianon/`, while the first result, `centos`, doesn't explicitly list a
+`tianon`, while the first result, `centos`, doesn't explicitly list a
 repository which means that it comes from the trusted top-level namespace for
 [Official Repositories](/docker-hub/official_repos/). The `/` character separates
 a user's repository from the image name.
