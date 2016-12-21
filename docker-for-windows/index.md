@@ -557,7 +557,7 @@ the FAQs.)
 
 The **Advanced** daemon settings provide the original option to directly edit
 the JSON configuration file for the <a
-href="https://docs.docker.com/engine/reference/commandline/dockerd/"
+href="/engine/reference/commandline/dockerd/"
 target="_blank">daemon</a>. (This is the only option currently available on stable releases, as described in [Docker daemon](#docker-daemon).)
 
 ![Docker Daemon](images/docker-daemon_advanced.png)
