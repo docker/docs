@@ -524,7 +524,7 @@ toc:
       - path: /engine/reference/commandline/node_rm/
         title: docker node rm
       - path: /engine/reference/commandline/node_update/
-      title: docker node update
+        title: docker node update
     - path: /engine/reference/commandline/pause/
       title: docker pause
     - sectiontitle: docker plugin *
