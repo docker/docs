@@ -123,7 +123,7 @@ Now that your UCP controller is installed, you need to license it.
 
 ## Step 7: Backup the controller CAs
 
-For an highly available installation, you can add more controller nodes to
+For a highly available installation, you can add more controller nodes to
 the UCP cluster. The controller nodes are replicas of each other.
 
 For this, you need to make the CAs on each controller node use the same
@@ -149,7 +149,7 @@ To create a backup of the CAs used on the controller node:
 
 This step is optional.
 
-For an highly available installation, you can add more controller nodes to
+For a highly available installation, you can add more controller nodes to
 the UCP cluster. For that, use the `docker/ucp join --replica` command.
 [Learn more about the join command](../reference/join.md).
 
