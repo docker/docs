@@ -14,7 +14,7 @@ deploying Docker Universal Control Plane for production.
 Before installing UCP you should make sure that all nodes (physical or virtual
 machines) that you'll manage with UCP:
 
-* [Comply the the system requirements](system-requirements.md)
+* [Comply the system requirements](system-requirements.md)
 * Are running the same version of CS Docker Engine
 
 ## Hostname strategy
