@@ -64,7 +64,7 @@ Here are the required configuration parameters for the Cloudformation template:
 
 **KeyName**
 SSH key that will be used when you SSH into the manager nodes. The key needs to
-be configured in same region you launch the Cloudformation template in.
+be configured in the same region you launch the Cloudformation template in.
 
 **InstanceType**
 The EC2 instance type for your Worker nodes
@@ -236,7 +236,7 @@ Once you download the bundle and load it, run the following command:
       --dtr-external-url https://$DTR_URL:443
     ```
 
-    Once you run this Docker container, you'll be requested to Choose a replica
+    Once you run this Docker container, you'll be requested to choose a replica
     to reconfigure. Press **Enter** to proceed with the chosen one.
 
 8.  Now you may access UCP and DTR with your own custom DNS names
@@ -331,7 +331,7 @@ Additionally, you can deploy Interlock on any or all of the worker nodes to
 dynamically register your applications and loadbalance traffic to them using an
 L7 reverse proxy (e.g NGINX). Once you successfully deploy Interlock and NGINX,
 you can create DNS records for your applications using the
-**DefaultExternalTarget** IP. Full documentations is available
+**DefaultExternalTarget** IP. Full documentations are available
 [here](https://success.docker.com/Datacenter/Apply/Docker_Reference_Architecture%3A_Universal_Control_Plane_2.0_Service_Discovery_and_Load_Balancing#Non_Swarm_Mode_Containers).
 
 
