@@ -371,7 +371,7 @@ toc:
       title: docker build
     - path: /engine/reference/commandline/commit/
       title: docker commit
-    - sectiontitle: container *
+    - sectiontitle: docker container *
       section:
       - path: /engine/reference/commandline/container/
         title: docker container
@@ -487,7 +487,7 @@ toc:
       title: docker logout
     - path: /engine/reference/commandline/logs/
       title: docker logs
-    - sectiontitle: network *
+    - sectiontitle: docker network *
       section:
       - path: /engine/reference/commandline/network/
         title: docker network
