@@ -10,7 +10,7 @@ High availability in DTR depends on having overlay networking working in UCP.
 To manually test that overlay networking is working in UCP run the following
 commands on two different UCP machines.
 
-```
+```none
 docker run -it --rm --net dtr-ol --name overlay-test1 --entrypoint sh docker/dtr
 docker run -it --rm --net dtr-ol --name overlay-test2 --entrypoint ping docker/dtr -c 3 overlay-test1
 ```
