@@ -355,180 +355,326 @@ toc:
       title: Dockerizing an SSH service
     - path: /engine/examples/apt-cacher-ng/
       title: Dockerizing an apt-cacher-ng service
-  - sectiontitle: Engine reference
+  - path: /engine/reference/builder/
+    title: Dockerfile reference
+  - path: /engine/reference/run/
+    title: Docker run reference
+  - path: /engine/reference/commandline/cli/
+    title: Use the Docker command line
+  - path: /engine/reference/commandline/dockerd/
+    title: Daemon CLI reference
+  - sectiontitle: Engine CLI reference
     section:
-    - path: /engine/reference/builder/
-      title: Dockerfile reference
-    - path: /engine/reference/run/
-      title: Docker run reference
-    - sectiontitle: Command line reference
+    - path: /engine/reference/commandline/docker/
+      title: docker (base command)
+    - path: /engine/reference/commandline/attach/
+      title: docker attach
+    - path: /engine/reference/commandline/build/
+      title: docker build
+    - path: /engine/reference/commandline/commit/
+      title: docker commit
+    - sectiontitle: container *
       section:
-      - path: /engine/reference/commandline/
-        title: Docker commands
-      - path: /engine/reference/commandline/cli/
-        title: Use the Docker command line
-      - path: /engine/reference/commandline/dockerd/
-        title: dockerd
-      - path: /engine/reference/commandline/attach/
-        title: attach
-      - path: /engine/reference/commandline/build/
-        title: build
-      - path: /engine/reference/commandline/commit/
-        title: commit
-      - path: /engine/reference/commandline/cp/
-        title: cp
-      - path: /engine/reference/commandline/create/
-        title: create
-      - path: /engine/reference/commandline/deploy/
-        title: deploy
-      - path: /engine/reference/commandline/diff/
-        title: diff
-      - path: /engine/reference/commandline/events/
-        title: events
-      - path: /engine/reference/commandline/exec/
-        title: exec
-      - path: /engine/reference/commandline/export/
-        title: export
-      - path: /engine/reference/commandline/history/
-        title: history
-      - path: /engine/reference/commandline/images/
-        title: images
-      - path: /engine/reference/commandline/import/
-        title: import
-      - path: /engine/reference/commandline/info/
-        title: info
-      - path: /engine/reference/commandline/inspect/
-        title: inspect
-      - path: /engine/reference/commandline/kill/
-        title: kill
-      - path: /engine/reference/commandline/load/
-        title: load
-      - path: /engine/reference/commandline/login/
-        title: login
-      - path: /engine/reference/commandline/logout/
-        title: logout
-      - path: /engine/reference/commandline/logs/
-        title: logs
+      - path: /engine/reference/commandline/container/
+        title: docker container
+      - path: /engine/reference/commandline/container_attach/
+        title: docker container attach
+      - path: /engine/reference/commandline/container_commit/
+        title: docker container commit
+      - path: /engine/reference/commandline/container_cp/
+        title: docker container cp
+      - path: /engine/reference/commandline/container_create/
+        title: docker container create
+      - path: /engine/reference/commandline/container_diff/
+        title: docker container diff
+      - path: /engine/reference/commandline/container_exec/
+        title: docker container exec
+      - path: /engine/reference/commandline/container_export/
+        title: docker container export
+      - path: /engine/reference/commandline/container_inspect/
+        title: docker container inspect
+      - path: /engine/reference/commandline/container_kill/
+        title: docker container kill
+      - path: /engine/reference/commandline/container_logs/
+        title: docker container logs
+      - path: /engine/reference/commandline/container_ls/
+        title: docker container ls
+      - path: /engine/reference/commandline/container_pause/
+        title: docker container pause
+      - path: /engine/reference/commandline/container_port/
+        title: docker container port
+      - path: /engine/reference/commandline/container_prune/
+        title: docker container prune
+      - path: /engine/reference/commandline/container_rename/
+        title: docker container rename
+      - path: /engine/reference/commandline/container_restart/
+        title: docker container restart
+      - path: /engine/reference/commandline/container_rm/
+        title: docker container rm
+      - path: /engine/reference/commandline/container_run/
+        title: docker container run
+      - path: /engine/reference/commandline/container_start/
+        title: docker container start
+      - path: /engine/reference/commandline/container_stats/
+        title: docker container stats
+      - path: /engine/reference/commandline/container_stop/
+        title: docker container stop
+      - path: /engine/reference/commandline/container_top/
+        title: docker container top
+      - path: /engine/reference/commandline/container_unpause/
+        title: docker container unpause
+      - path: /engine/reference/commandline/container_update/
+        title: docker container update
+      - path: /engine/reference/commandline/container_wait/
+        title: docker container wait
+    - path: /engine/reference/commandline/cp/
+      title: docker cp
+    - path: /engine/reference/commandline/create/
+      title: docker create
+    - path: /engine/reference/commandline/deploy/
+      title: docker deploy
+    - path: /engine/reference/commandline/diff/
+      title: docker diff
+    - path: /engine/reference/commandline/events/
+      title: docker events
+    - path: /engine/reference/commandline/exec/
+      title: docker exec
+    - path: /engine/reference/commandline/export/
+      title: docker export
+    - path: /engine/reference/commandline/history/
+      title: docker history
+    - sectiontitle: docker image *
+      section:
+      - path: /engine/reference/commandline/image/
+        title: docker image
+      - path: /engine/reference/commandline/image_build/
+        title: docker image build
+      - path: /engine/reference/commandline/image_history/
+        title: docker image history
+      - path: /engine/reference/commandline/image_import/
+        title: docker image import
+      - path: /engine/reference/commandline/image_inspect/
+        title: docker image inspect
+      - path: /engine/reference/commandline/image_load/
+        title: docker image load
+      - path: /engine/reference/commandline/image_ls/
+        title: docker image ls
+      - path: /engine/reference/commandline/image_prune/
+        title: docker image prune
+      - path: /engine/reference/commandline/image_pull/
+        title: docker image pull
+      - path: /engine/reference/commandline/image_push/
+        title: docker image push
+      - path: /engine/reference/commandline/image_rm/
+        title: docker image rm
+      - path: /engine/reference/commandline/image_save/
+        title: docker image save
+      - path: /engine/reference/commandline/image_tag/
+        title: docker image tag
+    - path: /engine/reference/commandline/images/
+      title: docker images
+    - path: /engine/reference/commandline/import/
+      title: docker import
+    - path: /engine/reference/commandline/info/
+      title: docker info
+    - path: /engine/reference/commandline/inspect/
+      title: docker inspect
+    - path: /engine/reference/commandline/kill/
+      title: docker kill
+    - path: /engine/reference/commandline/load/
+      title: docker load
+    - path: /engine/reference/commandline/login/
+      title: docker login
+    - path: /engine/reference/commandline/logout/
+      title: docker logout
+    - path: /engine/reference/commandline/logs/
+      title: docker logs
+    - sectiontitle: network *
+      section:
+      - path: /engine/reference/commandline/network/
+        title: docker network
       - path: /engine/reference/commandline/network_connect/
-        title: network connect
+        title: docker network connect
       - path: /engine/reference/commandline/network_create/
-        title: network create
+        title: docker network create
       - path: /engine/reference/commandline/network_disconnect/
-        title: network disconnect
+        title: docker network disconnect
       - path: /engine/reference/commandline/network_inspect/
-        title: network inspect
+        title: docker network inspect
       - path: /engine/reference/commandline/network_ls/
-        title: network ls
+        title: docker network ls
+      - path: /engine/reference/commandline/network_prune/
+        title: docker network prune
       - path: /engine/reference/commandline/network_rm/
-        title: network rm
+        title: docker network rm
+    - sectiontitle: docker node *
+      section:
+      - path: /engine/reference/commandline/node/
+        title: docker node
       - path: /engine/reference/commandline/node_demote/
-        title: node demote
+        title: docker node demote
       - path: /engine/reference/commandline/node_inspect/
-        title: node inspect
+        title: docker node inspect
       - path: /engine/reference/commandline/node_ls/
-        title: node ls
+        title: docker node ls
       - path: /engine/reference/commandline/node_promote/
-        title: node promote
+        title: docker node promote
       - path: /engine/reference/commandline/node_ps/
-        title: node ps
+        title: docker node ps
       - path: /engine/reference/commandline/node_rm/
-        title: node rm
+        title: docker node rm
       - path: /engine/reference/commandline/node_update/
-        title: node update
-      - path: /engine/reference/commandline/pause/
-        title: pause
+      title: docker node update
+    - path: /engine/reference/commandline/pause/
+      title: docker pause
+    - sectiontitle: docker plugin *
+      section:
+      - path: /engine/reference/commandline/plugin/
+        title: docker plugin
+      - path: /engine/reference/commandline/plugin_create/
+        title: docker plugin disable
       - path: /engine/reference/commandline/plugin_disable/
-        title: plugin disable
+        title: docker plugin disable
       - path: /engine/reference/commandline/plugin_enable/
-        title: plugin enable
+        title: docker plugin enable
       - path: /engine/reference/commandline/plugin_inspect/
-        title: plugin inspect
+        title: docker plugin inspect
       - path: /engine/reference/commandline/plugin_install/
-        title: plugin install
+        title: docker plugin install
       - path: /engine/reference/commandline/plugin_ls/
-        title: plugin ls
+        title: docker plugin ls
       - path: /engine/reference/commandline/plugin_rm/
-        title: plugin rm
-      - path: /engine/reference/commandline/port/
-        title: port
-      - path: /engine/reference/commandline/ps/
-        title: ps
-      - path: /engine/reference/commandline/pull/
-        title: pull
-      - path: /engine/reference/commandline/push/
-        title: push
-      - path: /engine/reference/commandline/rename/
-        title: rename
-      - path: /engine/reference/commandline/restart/
-        title: restart
-      - path: /engine/reference/commandline/rm/
-        title: rm
-      - path: /engine/reference/commandline/rmi/
-        title: rmi
-      - path: /engine/reference/commandline/run/
-        title: run
-      - path: /engine/reference/commandline/save/
-        title: save
-      - path: /engine/reference/commandline/search/
-        title: search
+        title: docker plugin rm
+      - path: /engine/reference/commandline/plugin_set/
+        title: docker plugin set
+    - path: /engine/reference/commandline/port/
+      title: docker port
+    - path: /engine/reference/commandline/ps/
+      title: docker ps
+    - path: /engine/reference/commandline/pull/
+      title: docker pull
+    - path: /engine/reference/commandline/push/
+      title: docker push
+    - path: /engine/reference/commandline/rename/
+      title: docker rename
+    - path: /engine/reference/commandline/restart/
+      title: docker restart
+    - path: /engine/reference/commandline/rm/
+      title: docker rm
+    - path: /engine/reference/commandline/rmi/
+      title: docker rmi
+    - path: /engine/reference/commandline/run/
+      title: docker run
+    - path: /engine/reference/commandline/save/
+      title: docker save
+    - path: /engine/reference/commandline/search/
+      title: docker search
+    - sectiontitle: docker secret *
+      section:
+      - path: /engine/reference/commandline/secret/
+        title: docker secret
+      - path: /engine/reference/commandline/secret_create/
+        title: docker secret create
+      - path: /engine/reference/commandline/secret_inspect/
+        title: docker secret inspect
+      - path: /engine/reference/commandline/secret_ls/
+        title: docker secret ls
+      - path: /engine/reference/commandline/secret_rm/
+        title: docker secret rm
+    - sectiontitle: docker service *
+      section:
+      - path: /engine/reference/commandline/service/
+        title: docker service
       - path: /engine/reference/commandline/service_create/
-        title: service create
+        title: docker service create
       - path: /engine/reference/commandline/service_inspect/
-        title: service inspect
+        title: docker service inspect
+      - path: /engine/reference/commandline/service_logs/
+        title: docker service logs
       - path: /engine/reference/commandline/service_ls/
-        title: service ls
+        title: docker service ls
       - path: /engine/reference/commandline/service_ps/
-        title: service ps
+        title: docker service ps
       - path: /engine/reference/commandline/service_rm/
-        title: service rm
+        title: docker service rm
       - path: /engine/reference/commandline/service_scale/
-        title: service scale
+        title: docker service scale
       - path: /engine/reference/commandline/service_update/
-        title: service update
+        title: docker service update
+    - sectiontitle: docker stack *
+      section:
+      - path: /engine/reference/commandline/stack/
+        title: docker stack
       - path: /engine/reference/commandline/stack_config/
-        title: stack config
+        title: docker stack config
       - path: /engine/reference/commandline/stack_deploy/
-        title: stack deploy
+        title: docker stack deploy
       - path: /engine/reference/commandline/stack_rm/
-        title: stack rm
+        title: docker stack rm
       - path: /engine/reference/commandline/stack_services/
-        title: stack services
-      - path: /engine/reference/commandline/start/
-        title: start
-      - path: /engine/reference/commandline/stats/
-        title: stats
-      - path: /engine/reference/commandline/stop/
-        title: stop
+        title: docker stack services
+      - path: /engine/reference/commandline/stack_tasks/
+        title: docker stack tasks
+    - path: /engine/reference/commandline/start/
+      title: docker start
+    - path: /engine/reference/commandline/stats/
+      title: docker stats
+    - path: /engine/reference/commandline/stop/
+      title: docker stop
+    - sectiontitle: docker swarm *
+      setcion:
+      - path: /engine/reference/commandline/swarm/
+        title: docker swarm
       - path: /engine/reference/commandline/swarm_init/
-        title: swarm init
+        title: docker swarm init
+      - path: /engine/reference/commandline/swarm_join-token/
+        title: docker swarm join-token
       - path: /engine/reference/commandline/swarm_join/
-        title: swarm join
-      - path: /engine/reference/commandline/swarm_join_token/
-        title: swarm join-token
+        title: docker swarm join
       - path: /engine/reference/commandline/swarm_leave/
-        title: swarm leave
+        title: docker swarm leave
+      - path: /engine/reference/commandline/swarm_unlock-key/
+        title: docker swarm unlock-key
+      - path: /engine/reference/commandline/swarm_unlock/
+        title: docker swarm unlock
       - path: /engine/reference/commandline/swarm_update/
-        title: swarm update
-      - path: /engine/reference/commandline/tag/
-        title: tag
-      - path: /engine/reference/commandline/top/
-        title: top
-      - path: /engine/reference/commandline/unpause/
-        title: unpause
-      - path: /engine/reference/commandline/update/
-        title: update
-      - path: /engine/reference/commandline/version/
-        title: version
+        title: docker swarm update
+    - sectiontitle: docker system *
+      section:
+      - path: /engine/reference/commandline/system/
+        title: docker system
+      - path: /engine/reference/commandline/system_df/
+        title: docker system df
+      - path: /engine/reference/commandline/system_events/
+        title: docker system events
+      - path: /engine/reference/commandline/system_info/
+        title: docker system info
+      - path: /engine/reference/commandline/system_prune/
+        title: docker system prune
+    - path: /engine/reference/commandline/tag/
+      title: docker tag
+    - path: /engine/reference/commandline/top/
+      title: docker top
+    - path: /engine/reference/commandline/unpause/
+      title: docker unpause
+    - path: /engine/reference/commandline/update/
+      title: docker update
+    - path: /engine/reference/commandline/version/
+      title: docker version
+    - sectiontitle: docker volume *
+      section:
       - path: /engine/reference/commandline/volume_create/
-        title: volume create
+        title: docker volume create
       - path: /engine/reference/commandline/volume_inspect/
-        title: volume inspect
+        title: docker volume inspect
       - path: /engine/reference/commandline/volume_ls/
-        title: volume ls
+        title: docker volume ls
+      - path: /engine/reference/commandline/volume_prune/
+        title: docker volume ls
       - path: /engine/reference/commandline/volume_rm/
-        title: volume rm
-      - path: /engine/reference/commandline/wait/
-        title: wait
+        title: docker volume rm
+    - path: /engine/reference/commandline/wait/
+      title: docker wait
   - sectiontitle: Engine API
     section:
     - path: /engine/api/
@@ -557,14 +703,14 @@ toc:
         title: v1.19 reference
       - path: /engine/api/v1.18/
         title: v1.18 reference
-  - path: /engine/migration/
-    title: Migrate to Engine 1.10
-  - path: /engine/breaking_changes/
-    title: Breaking changes
-  - path: /engine/deprecated/
-    title: Deprecated Engine Features
-  - path: /engine/faq/
-    title: FAQ
+    - path: /engine/migration/
+      title: Migrate to Engine 1.10
+    - path: /engine/breaking_changes/
+      title: Breaking changes
+    - path: /engine/deprecated/
+      title: Deprecated Engine Features
+    - path: /engine/faq/
+      title: FAQ
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
