@@ -68,7 +68,7 @@ You can cancel a subscription at any time, however you will still be billed
 for the full month, and have access to the subscription content until the end of
 that billing period.
 
-We do not offer refunds. If you believe that you’ve been billed in error,
+We do not offer refunds. If you believe that you've been billed in error,
 contact our [Billing Support team](mailto:billing@docker.com).
 
 ### How do I download the licenses my organization has purchased?
