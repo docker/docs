@@ -126,7 +126,7 @@ Virtual Box VM, it maintains its configuration between uses.
                      \    \         __/
                       \____\_______/
 
-        The Docker Quick Start Terminal is configured to use Docker with the “default” VM.
+        The Docker Quick Start Terminal is configured to use Docker with the "default" VM.
 
 3.  Click your mouse in the terminal window to make it active.
 
@@ -199,7 +199,7 @@ To uninstall Toolbox on a Mac, do the following:
     Successfully removed my-docker-machine
     ```
 
-3.  Remove the Docker Quickstart Terminal and Kitematic from your “Applications” folder.
+3.  Remove the Docker Quickstart Terminal and Kitematic from your "Applications" folder.
 
 4.  Remove the `docker`, `docker-compose`, and `docker-machine` commands from the `/usr/local/bin` folder.
 

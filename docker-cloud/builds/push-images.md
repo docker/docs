@@ -37,7 +37,7 @@ Follow the <a href="/installation/" target="_blank">official installation instr
 
 3. Tag your image using `docker tag`.
 
-    In the example below replace `my_image` with your image’s name, and `DOCKER_ID_USER` with your Docker Cloud username if needed.
+    In the example below replace `my_image` with your image's name, and `DOCKER_ID_USER` with your Docker Cloud username if needed.
     ```
     $ docker tag my_image $DOCKER_ID_USER/my_image
     ```
