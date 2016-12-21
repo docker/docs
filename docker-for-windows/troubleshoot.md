@@ -13,8 +13,8 @@ Hub, browse and log issues on GitHub, and find workarounds for known problems.
 ## Docker Knowledge Hub
 
 **Looking for help with Docker for Windows?** Check out the [Docker Knowledge
-**Hub](http://success.docker.com/) for knowledge base articles, FAQs, and
-**technical support for various subscription levels.
+Hub](http://success.docker.com/) for knowledge base articles, FAQs, and
+technical support for various subscription levels.
 
 ## Submitting diagnostics, feedback, and GitHub issues
 
