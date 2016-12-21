@@ -1,37 +1,15 @@
-<!--[metadata]>
-+++
-title = "stack ls"
-description = "The stack ls command description and usage"
-keywords = ["stack, ls"]
-advisory = "experimental"
-[menu.main]
-parent = "smn_cli"
-+++
-<![end-metadata]-->
+---
+datafolder: engine-cli
+datafile: docker_stack_ls
+title: docker stack ls
+---
 
-# stack ls (experimental)
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-```markdown
-Usage:	docker stack ls
+https://www.github.com/docker/docker
+-->
 
-List stacks
-```
-
-Lists the stacks.
-
-For example, the following command shows all stacks and some additional information:
-
-```bash
-$ docker stack ls
-
-ID                 SERVICES
-vossibility-stack  6
-myapp              2
-```
-
-## Related information
-
-* [stack config](stack_config.md)
-* [stack deploy](stack_deploy.md)
-* [stack rm](stack_rm.md)
-* [stack tasks](stack_tasks.md)
+{% include cli.md %}
