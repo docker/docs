@@ -232,7 +232,7 @@ each message means.
     Removing intermediate container 05d4eda04526
     ```
 
-    When the `RUN` command finishes, a new layer is created and the imtermediate
+    When the `RUN` command finishes, a new layer is created and the intermediate
     container is removed.
 
 4.  A new intermediate container is created, and Docker adds a layer for the
