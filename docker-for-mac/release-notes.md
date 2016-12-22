@@ -60,7 +60,7 @@ We did not distribute a 1.12.4 stable release
 
 - Added UI when switching channel to prevent user losing containers and settings
 
-- Check disk capacity before toolbox import
+- Check disk capacity before Toolbox import
 
 - Import certificates in `etc/ssl/certs/ca-certificates.crt`
 
@@ -212,6 +212,18 @@ events or unexpected unmounts.
 * Docker Compose 1.8.0
 
 ## Beta Release Notes
+
+### Beta 34.1 Release Notes (2016-12-22 1.13.0-rc4-beta34.1)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**Hotfix**
+
+- Fixed issue where Docker would fail to start after importing containers from Toolbox
+
+**Upgrades**
+
+- qcow-tool 0.7.2
 
 ### Beta 34 Release Notes (2016-12-20 1.13.0-rc4-beta34)
 
