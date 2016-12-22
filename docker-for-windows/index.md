@@ -331,24 +331,40 @@ If you would like to have handy tab completion for Docker commands, you can inst
 
     `Notepad $PROFILE`
 
-Now, when you press tab after typing the first few letters, Docker commands such as `start`, `stop`, `run`, and their options, along with container and image names should now auto-complete.
+Now, when you press tab after typing the first few letters, Docker commands such
+as `start`, `stop`, `run`, and their options, along with container and image
+names should now auto-complete.
 
 ## Docker Settings
 
-When Docker is running, the Docker whale is displayed in the system tray. If it is hidden, click the up arrow in the tray to show it.
+When Docker is running, the Docker whale is displayed. By default, the Docker
+whale icon is placed in the Notifications area. If it is hidden, click the up
+arrow on the taskbar to show it.
 
-![Showing hidden apps in the system tray](images/whale-systray.png)
+>**Tip:** You can pin the whale outside of the notification box so that it is
+always visible on the taskbar. To do this, drag-and-drop the whale icon. Or,
+right-click an empty porition of the taskbar, select Settings, and choose
+display options through taskbar settings for notifications.
+>
+![whale pinned to taskbar](images/whale-taskbar.png)
+
+![Showing hidden apps in the taskbar](images/whale-systray.png)
 
 To get a popup menu with application options, right-click the whale:
 
 ![Docker for Windows popup menu](images/config-popup-menu-win.png)
 
-The **Settings** dialogs provide options to allow Docker auto-start, automatically check for updates, share local drives with Docker containers, enable VPN compatibility, manage CPUs and memory Docker uses, restart Docker, or perform a factory reset.
+The **Settings** dialogs provide options to allow Docker auto-start,
+automatically check for updates, share local drives with Docker containers,
+enable VPN compatibility, manage CPUs and memory Docker uses, restart Docker, or
+perform a factory reset.
 
-**Beta 26 and newer** include an option to switch between Windows and Linux conatiners. See [Switch between Windows and Linux containers (Beta feature)](index.md#switch-between-windows-and-linux-containers-beta-feature). This is not yet available on stable builds.
+**Beta 26 and newer** include an option to switch between Windows and Linux
+**conatiners. See [Switch between Windows and Linux containers (Beta
+**feature)](index.md#switch-between-windows-and-linux-containers-beta-feature).
+**This is not yet available on stable builds.
 
 ![Beta 26 popup with switch for Windows or Linux containers](images/config-popup-menu-win-switch-containers.png)
-
 
 ### General
 
@@ -356,7 +372,11 @@ The **Settings** dialogs provide options to allow Docker auto-start, automatical
 
 * **Start Docker when you log in** - Automatically start the Docker for Windows application upon Windows system login.
 
-* **Check for updates when the application starts** - Docker for Windows is set to automatically check for updates and notify you when an update is available. If an update is found, click **OK** to accept and install it (or cancel to keep the current version). Uncheck this option if you do not want notifications of version upgrades. You can still find out about updates manually by choosing **Check for Updates** from the menu.
+* **Check for updates when the application starts** - Docker for Windows is set to automatically check for updates and notify you when an update is available.
+If an update is found, click **OK** to accept and install it (or cancel to keep
+the current version). Uncheck this option if you do not want notifications of
+version upgrades. You can still find out about updates manually by choosing
+**Check for Updates** from the menu.
 
 * **Send usage statistics** - You can set Docker for Windows to auto-send diagnostics, crash reports, and usage data. This information can help Docker improve the application and get more context for troubleshooting problems.
 
