@@ -112,7 +112,7 @@ $ docker run -i --rm \
   --ucp-insecure-tls \  
   --ucp-username <ucp-admin> \
   --ucp-password <ucp-password> \
-  --dtr-load-balancer <dtr-domain-name> < /tmp/backup.tar
+  --dtr-external-url <dtr-url> < /tmp/backup.tar
 ```
 
 Where:
@@ -120,7 +120,7 @@ Where:
 * `--ucp-url` is the address of UCP,
 * `--ucp-insecure-tls` is to trust the UCP TLS certificate,
 * `--ucp-username`, and `--ucp-password` are the credentials of a UCP administrator,
-* `--dtr-load-balancer` is the domain name or ip where DTR can be reached.
+* `--dtr-external-url` is the domain name or ip where DTR can be reached.
 
 
 ## Where to go next
