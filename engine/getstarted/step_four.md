@@ -104,7 +104,7 @@ creating an image which runs on Linux.
 ## Step 2: Build an image from your Dockerfile
 
 While you are in the `mydockerbuild` directory, build the image using the
-`docker build` image. The `-t` parameter gives your image a tag, so you can
+`docker build` command. The `-t` parameter gives your image a tag, so you can
 run it more easily later. Don't forget the `.` command, which tells the
 `docker build` command to look in the current directory for a file called
 `Dockerfile`. This command works the same in Linux, macOS, or Windows.
