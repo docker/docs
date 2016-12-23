@@ -16,6 +16,9 @@ WORKDIR /usr/share/nginx/
 ENV ENGINE_BRANCH="1.12.x"
 ENV DISTRIBUTION_BRANCH="release/2.5"
 
+## File patterns to remove
+ENV CLEANUP="*.bak *.diff *.original *.orig *.psd *.tmp swagger-ui.js"
+
 # Get the branch contents without history
 RUN echo "Started $VERSION, from branch $BRANCH, using base-url $BASEURL" \
     && git clone --depth 1 --branch $BRANCH https://github.com/docker/docker.github.io docs_src \
@@ -33,9 +36,16 @@ RUN echo "Started $VERSION, from branch $BRANCH, using base-url $BASEURL" \
       \
       # remove api.md.tmp as it stresses out Liquid
       rm docs_src/registry/spec/api.md.tmpl; \
-    fi \
+    fi; \
     \
-    && jekyll build -s docs_src -d html \
+    # Remove some cluter
+    \
+    for PATTERN in ${CLEANUP}; do \
+      echo "Cleaning up ($PATTERN)" \
+      && find ./docs_src/ -type f -name "$PATTERN" -delete; \
+    done; \
+    \
+    jekyll build -s docs_src -d html \
     && rm -rf docs_src \
     \
     # Replace / rewrite some URLs so that links in the archive go to the correct
