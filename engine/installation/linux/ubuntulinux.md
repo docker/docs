@@ -89,7 +89,7 @@ To set `APT` to use packages from the Docker repository:
     for the placeholder `<REPO>`.
 
     ```bash
-    $ echo "<REPO>" | sudo tee /etc/apt/sources.list.d/docker.list
+    $ echo "REPO" | sudo tee /etc/apt/sources.list.d/docker.list
     ```
 
 7.  Update the `APT` package index.
