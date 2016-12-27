@@ -478,7 +478,7 @@ You can configure options on the Docker daemon in the given JSON configuration f
 
 ![Docker Daemon](images/docker-daemon.png)
 
-For a full list of options on the Docker daemon, see [daemon](/engine/reference/commandline/dockerd/) in the Docker Engine command line reference.
+For a full list of options on the Docker daemon, see [daemon](/engine/reference/commandline/dockerd/){:target="_blank"} in the Docker Engine command line reference.
 
 In that topic, see also:
 
