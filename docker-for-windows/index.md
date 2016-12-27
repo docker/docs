@@ -103,13 +103,13 @@ Congratulations! You are up and running with Docker for Windows.
 
 Start your favorite shell (`cmd.exe`, PowerShell, or other) to check your versions of `docker` and `docker-compose`, and verify the installation.
 
-      PS C:\Users\samstevens> docker --version
+      PS C:\Users\jdoe> docker --version
       Docker version 1.12.0, build 8eab29e, experimental
 
-      PS C:\Users\samstevens> docker-compose --version
+      PS C:\Users\jdoe> docker-compose --version
       docker-compose version 1.8.0, build d988a55
 
-      PS C:\Users\samstevens> docker-machine --version
+      PS C:\Users\jdoe> docker-machine --version
       docker-machine version 0.8.0, build b85aac1
 
 ## Step 4. Explore the application and run examples
@@ -122,12 +122,12 @@ The next few steps take you through some examples. These are just suggestions fo
 
     Here is the output of `docker ps` run in a powershell. (In this example, no containers are running yet.)
 
-          PS C:\Users\samstevens> docker ps
+          PS C:\Users\jdoe> docker ps
           CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 
     Here is an example of command output for  `docker version`.
 
-          PS C:\Users\Vicky> docker version
+          PS C:\Users\jdoe> docker version
           Client:
           Version:      1.12.0
           API version:  1.24
@@ -148,7 +148,7 @@ The next few steps take you through some examples. These are just suggestions fo
 
     Here is an example of command output for  `docker info`.
 
-          PS C:\Users\Vicky> docker info
+          PS C:\Users\jdoe> docker info
           Containers: 0
           Running: 0
           Paused: 0
@@ -189,7 +189,7 @@ The next few steps take you through some examples. These are just suggestions fo
 
 3.  Run `docker run hello-world` to test pulling an image from Docker Hub and starting a container.
 
-          PS C:\Users\samstevens> docker run hello-world
+          PS C:\Users\jdoe> docker run hello-world
 
           Hello from Docker.
           This message shows that your installation appears to be working correctly.
@@ -200,11 +200,13 @@ The next few steps take you through some examples. These are just suggestions fo
           3. The Docker daemon created a new container from that image which runs the executable that produces the output you are currently reading.
           4. The Docker daemon streamed that output to the Docker client, which sent it to your terminal.
 
-4. Try something more ambitious, and run an Ubuntu container in a Bash shell.
+4. Try something more ambitious, and run an Ubuntu container with this command.
 
-          $ docker run -it ubuntu bash
+          docker run -it ubuntu bash
 
-          PS C:\Users\samstevens> docker run -it ubuntu bash
+      This will download the `ubuntu` container image and start it. Here is the output of running this command in a powershell.
+
+          PS C:\Users\jdoe> docker run -it ubuntu bash
           Unable to find image 'ubuntu:latest' locally
           latest: Pulling from library/ubuntu
           5a132a7e7af1: Pull complete
@@ -214,15 +216,15 @@ The next few steps take you through some examples. These are just suggestions fo
           Digest: sha256:4e85ebe01d056b43955250bbac22bdb8734271122e3c78d21e55ee235fc6802d
           Status: Downloaded newer image for ubuntu:latest
 
-    Type `exit` to stop the container and close the Bash shell.
+      Type `exit` to stop the container and close the powershell.
 
-5. For the pièce de résistance, start a Dockerized webserver with this command:
+5. Start a Dockerized webserver with this command:
 
           docker run -d -p 80:80 --name webserver nginx
 
       This will download the `nginx` container image and start it. Here is the output of running this command in a powershell.
 
-          PS C:\Users\samstevens> docker run -d -p 80:80 --name webserver nginx
+          PS C:\Users\jdoe> docker run -d -p 80:80 --name webserver nginx
           Unable to find image 'nginx:latest' locally
           latest: Pulling from library/nginx
 
@@ -242,7 +244,7 @@ The next few steps take you through some examples. These are just suggestions fo
 
 7.  Run `docker ps` while your webserver is running to see details on the container.
 
-          PS C:\Users\samstevens> docker ps
+          PS C:\Users\jdoe> docker ps
           CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS
           NAMES
           dfe13c68b3b8        nginx               "nginx -g 'daemon off"   3 days ago          Up 45 seconds       0.0.0.0:80->80/tcp, 443/tc
@@ -334,8 +336,8 @@ For example, if you set your proxy settings to `http://proxy.example.com`, Docke
 
 When you start a container, you will see that your proxy settings propagate into the containers. For example:
 
-```
-$ docker run -it alpine env
+```powershell
+PS C:\Users\jdoe> docker run -it alpine env
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=b7edf988b2b5
 TERM=xterm
