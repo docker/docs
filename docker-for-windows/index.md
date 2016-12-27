@@ -82,7 +82,7 @@ enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
 <p />
 * Nested virtualization scenarios, such as running Docker for Windows on a VMWare or Parallels instance, might work, but come with no guarantees (i.e., not officially supported).
 <p />
-* **What the Docker for Windows install includes**: The installation provides [Docker Engine](/engine/userguide/intro/), Docker CLI client, [Docker Compose](/compose/overview/), and [Docker Machine](/machine/overview/).
+* **What the Docker for Windows install includes**: The installation provides [Docker Engine](/engine/userguide/intro.md), Docker CLI client, [Docker Compose](/compose/overview/), and [Docker Machine](/machine/overview.md).
 
 ### About Windows containers and Windows Server 2016
 
@@ -543,7 +543,7 @@ Server:
 ##### Custom registries
 
 Also starting with with Beta 34, you can set up your own
-[registries](/registry/introduction/) on the **Basic** Daemon settings.
+[registries](/registry/introduction.md) on the **Basic** Daemon settings.
 
 As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
 public or private images or [Docker Trusted
