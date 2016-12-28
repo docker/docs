@@ -410,6 +410,12 @@ See also [Verify domain user has permissions for shared
 drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)
 in Troubleshooting.
 
+>**Note:** You can share local drives with your _containers_ but not with Docker
+Machine nodes. See [Can I share local drives and filesystem with my
+Docker Machine
+VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms) in
+the FAQs.
+
 #### Firewall rules for shared drives
 
 Shared drives require port 445 to be open between the host machine and the virtual

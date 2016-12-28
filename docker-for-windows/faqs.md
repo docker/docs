@@ -148,6 +148,21 @@ cycles. Exit and start Docker to restore connectivity.
 Unfortunately, VirtualBox (and other hypervisors like VMWare) cannot run when
 Hyper-V is enabled on Windows.
 
+### Can I share local drives and filesystem with my Docker Machine VMs?
+
+No, you cannot share local drives with Docker Machine nodes when using Docker
+for Windows with Hyper-V. Shared drives can be made available to containers, but
+Docker for Windows does not support mounts for nodes you created with
+`docker-machine`.
+
+For more about sharing local drives with containers using Docker for Windows,
+see [Shared Drives](index.md#shared-drives) in the Getting Started topic.
+
+To learn more about using Docker for Windows and Docker Machine, see [What to
+know before you install](index.md#what-to-know-before-you-install) in the
+Getting Started topic. For more about Docker Machine itself, see [What is Docker
+Machine?](/machine/overview.md#what-is-docker-machine)
+
 ### How do I run Windows containers on Docker on Windows Server 2016?
 
 See [About Windows containers and Windows Server
