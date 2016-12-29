@@ -37,7 +37,7 @@ For a complete list of `docker-machine` subcommands, see the [Docker Machine sub
 
 Users using their own Docker Registry will experience `x509: certificate signed by unknown authority` 
 error messages if their registry is signed by custom root Certificate Authority and it is 
-not registered with Docker Engine. As discussed in the [Docker Engine documentation](https://docs.docker.com/engine/security/certificates/#/understanding-the-configuration)
+not registered with Docker Engine. As discussed in the [Docker Engine documentation](/engine/security/certificates/#/understanding-the-configuration)
 certificates should be placed at `/etc/docker/certs.d/hostname/ca.crt` 
 where `hostname` is your Registry server's hostname.
 
