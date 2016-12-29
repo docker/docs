@@ -166,7 +166,7 @@ options. Using `extends` you can define a common set of service options in one
 place and refer to it from anywhere.
 
 > **Note:** `links`, `volumes_from`, and `depends_on` are never shared between
-> services using >`extends`. These exceptions exist to avoid
+> services using `extends`. These exceptions exist to avoid
 > implicit dependencies&mdash;you always define `links` and `volumes_from`
 > locally. This ensures dependencies between services are clearly visible when
 > reading the current file. Defining these locally also ensures changes to the
