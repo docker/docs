@@ -54,11 +54,9 @@ Below is an example of the logging options required to log to the default
 logging destination which is discovered by querying the GCE metadata server.
 
     docker run --log-driver=gcplogs \
-        --log-opt labels=location
-        --log-opt env=TEST
-        --log-opt gcp-log-cmd=true
-        --env "TEST=false"
-        --label location=west
+        --log-opt gcp-log-cmd=true \
+        --env "TEST=false" \
+        --label location=west \
         your/application
 
 This configuration also directs the driver to include in the payload the label
