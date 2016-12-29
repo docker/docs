@@ -125,7 +125,7 @@ is `https://get.docker.com/builds/Linux/x86_64/docker-1.11.0.tgz`.
 > **Note** These instructions are for Docker Engine 1.11 and up. Engine 1.10 and
 > under consists of a single binary, and instructions for those versions are
 > different. To install version 1.10 or below, follow the instructions in the
-> [1.10 documentation](https://docs.docker.com/v1.10/engine/installation/binaries/){:target="_blank"}.
+> [1.10 documentation](/v1.10/engine/installation/binaries/){:target="_blank"}.
 
 #### Verify downloaded files
 

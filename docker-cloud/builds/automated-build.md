@@ -85,7 +85,7 @@ the code repository service where the image's source code is stored.
 
 10. For each branch or tag, enable or disable the **Build Caching** toggle.
 
-    [Build caching](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#/build-cache) can save time if you are building a large image frequently or have many dependencies. You might want to leave build caching disabled to make sure all of your dependencies are resolved at build time, or if you have a large layer that is quicker to build locally.
+    [Build caching](/engine/userguide/eng-image/dockerfile_best-practices/#/build-cache) can save time if you are building a large image frequently or have many dependencies. You might want to leave build caching disabled to make sure all of your dependencies are resolved at build time, or if you have a large layer that is quicker to build locally.
 
 11. Click **Save** to save the settings, or click **Save and build** to save and
 run an initial test.

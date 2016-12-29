@@ -31,7 +31,7 @@ by Docker.
 When you deploy UCP, it starts running a globally scheduled service called
 `ucp-agent`. This service monitors the node where it is running and starts
 and stops UCP services, based on whether that node is a
-[manager or a worker node](https://docs.docker.com/engine/swarm/key-concepts/).
+[manager or a worker node](/engine/swarm/key-concepts/).
 
 If the node is a:
 
