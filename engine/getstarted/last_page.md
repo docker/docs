@@ -52,4 +52,8 @@ Depending on your interest, the Docker documentation contains a wealth of inform
     <td class="tg-031e">How to run a multi-container application with Compose</td>
     <td class="tg-031e"><a href="/compose/">Docker Compose documentation</a></td>
   </tr>
+  <tr>
+    <td class="tg-031e">A tutorial on Docker Swarm, which provides clustering capabilities to scale applications across multiple Docker nodes </td>
+    <td class="tg-031e"><a href="/engine/swarm/swarm-tutorial/index.md">Getting started with swarm mode</a></td>
+  </tr>
 </table>
