@@ -1,15 +1,8 @@
 ---
-description: help
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  help
-menu:
-  main:
-    identifier: help.compose
-    parent: smn_compose_cli
-title: help
+description: docker-compose help
+keywords: fig, composition, compose, docker, orchestration, cli, help
+title: docker-compose help
 ---
-
-# help
 
 ```
 Usage: help COMMAND

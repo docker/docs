@@ -1,15 +1,10 @@
 ---
+advisory: toolbox
 description: Troubleshooting connectivity and certificate issues
-keywords:
-- beginner, getting started, FAQs, troubleshooting, Docker
-menu:
-  main:
-    parent: workw_toolbox
-    weight: 4
+keywords: beginner, getting started, FAQs, troubleshooting, Docker
 title: Troubleshooting
 ---
 
-# Troubleshooting
 Typically, the QuickStart works out-of-the-box, but some scenarios can cause problems.
 
 ## Example errors
@@ -89,6 +84,7 @@ Set the environment variables for the command window.
 Run `docker-machine ls` to verify that the new machine is running and that this command window is configured to talk to it, as indicated by an asterisk for the active machine (__*__).
 
 <a name="machine-http-proxy-solutions"></a>
+
 ## HTTP proxies and connectivity errors
 
 A special brand of connectivity errors can be caused by HTTP proxy. If you install Docker Toolbox on a system using a virtual private network (VPN) that uses an HTTP proxy (such as a corporate network), you might encounter errors when the client attempts to connect to the server.
@@ -143,7 +139,7 @@ You can add your machine addresses as values for a `NO_PROXY` setting, and also 
 
   When you move to a different network (for example, leave the office's corporate network and return home), remove or comment out these proxy settings in `/var/lib/boot2docker/profile` and restart Docker.
 
-#### Create machines manually using --engine env to specify proxy settings  
+#### Create machines manually using --engine env to specify proxy settings
 
 Rather than reconfigure automatically-created machines, you can delete them and create your `default` machine and others manually with the `docker-machine create` command, using the `--engine env` flag to specify the proxy settings you want.
 
@@ -156,6 +152,6 @@ Here is an example of creating a `default` machine with proxies set to `http://e
     default
 
 
-To learn more about using `docker-machine create`, see the [create](https://docs.docker.com/machine/reference/create/) command in the [Docker Machine](https://docs.docker.com/machine/overview/) reference.
+To learn more about using `docker-machine create`, see the [create](/machine/reference/create/) command in the [Docker Machine](/machine/overview/) reference.
 
 &nbsp;

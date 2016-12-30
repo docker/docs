@@ -1,23 +1,14 @@
 ---
+advisory: kitematic
 description: Information about known issues in Kitematic
-keywords:
-- docker, documentation, about, technology, kitematic,  gui
-menu:
-  main:
-    parent: toolbox_kitematic
-    weight: 5
-title: Known Issues
+keywords: docker, documentation, about, technology, kitematic,  gui
+title: 'Kitematic: Known issues'
 ---
 
-# Kitematic: Known Issues
+The most common errors with Kitematic occur at the setup stage since creating a
+VM reliably with VirtualBox can be tricky. We are working on this problem.
 
-
-Kitematic is in beta, so we're still working out the kinks. The most common
-errors occur at the setup stage since creating a VM reliably with VirtualBox can
-be tricky. We are working on this problem.
-
-In the meantime, below are a list of common errors and solutions that work for
-most people.
+Below are a list of common errors and solutions that work for most people.
 
 ## Setup Error or Hanging at 99%
 

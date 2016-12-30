@@ -1,15 +1,8 @@
 ---
 description: Configuring the notary client, server and signer.
-keywords:
-- docker, notary, notary-client, notary-server, notary server, notary-signer, notary
-  signer
-menu:
-  main:
-    parent: mn_notary_config
-title: Server Configuration
+keywords: docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer
+title: Notary server configuration file
 ---
-
-# Notary server configuration file
 
 This document is for those who are [running their own Notary service](../running_a_service.md) who
 want to specify custom options.
@@ -242,7 +235,7 @@ DB storage example:
 		<td valign="top">yes if not <code>memory</code></td>
 		<td valign="top">The <a href="https://github.com/go-sql-driver/mysql">
 			the Data Source Name used to access the DB.</a>
-			(note: please include <code>parseTime=true</code> as part of the the DSN)</td>
+			(note: please include <code>parseTime=true</code> as part of the DSN)</td>
 	</tr>
 </table>
 

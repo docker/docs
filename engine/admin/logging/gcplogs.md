@@ -1,16 +1,11 @@
 ---
 description: Describes how to use the Google Cloud Logging driver.
-keywords:
-- gcplogs, google, docker, logging, driver
-menu:
-  main:
-    parent: smn_logging
+keywords: gcplogs, google, docker, logging, driver
 title: Google Cloud Logging driver
 ---
 
-# Google Cloud Logging driver
-
-The Google Cloud Logging driver sends container logs to <a href="https://cloud.google.com/logging/docs/" target="_blank">Google Cloud
+The Google Cloud Logging driver sends container logs to <a
+href="https://cloud.google.com/logging/docs/" target="_blank">Google Cloud
 Logging</a>.
 
 ## Usage
@@ -28,14 +23,16 @@ You can set the logging driver for a specific container by using the
 This log driver does not implement a reader so it is incompatible with
 `docker logs`.
 
-If Docker detects that it is running in a Google Cloud Project, it will discover configuration
-from the <a href="https://cloud.google.com/compute/docs/metadata" target="_blank">instance metadata service</a>.
-Otherwise, the user must specify which project to log to using the `--gcp-project`
-log option and Docker will attempt to obtain credentials from the
-<a href="https://developers.google.com/identity/protocols/application-default-credentials" target="_blank">Google Application Default Credential</a>.
-The `--gcp-project` takes precedence over information discovered from the metadata server
-so a Docker daemon running in a Google Cloud Project can be overridden to log to a different
-Google Cloud Project using `--gcp-project`.
+If Docker detects that it is running in a Google Cloud Project, it will discover
+configuration from the <a href="https://cloud.google.com/compute/docs/metadata"
+target="_blank">instance metadata service</a>. Otherwise, the user must specify
+which project to log to using the `--gcp-project` log option and Docker will
+attempt to obtain credentials from the <a
+href="https://developers.google.com/identity/protocols/application-default-credentials"
+target="_blank">Google Application Default Credential</a>. The `--gcp-project`
+takes precedence over information discovered from the metadata server so a
+Docker daemon running in a Google Cloud Project can be overridden to log to a
+different Google Cloud Project using `--gcp-project`.
 
 ## gcplogs options
 

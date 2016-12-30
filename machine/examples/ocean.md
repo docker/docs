@@ -1,15 +1,8 @@
 ---
 description: Using Docker Machine to provision hosts on Digital Ocean
-keywords:
-- docker, machine, cloud, digital ocean
-menu:
-  main:
-    parent: cloud_examples
-    weight: 1
-title: Provision Digital Ocean Droplets
+keywords: docker, machine, cloud, digital ocean
+title: Digital Ocean example
 ---
-
-# Digital Ocean example
 
 Follow along with this example to create a Dockerized <a href="https://digitalocean.com" target="_blank">Digital Ocean</a> Droplet (cloud host).
 
@@ -21,45 +14,48 @@ If you have not done so already, go to <a href="https://digitalocean.com" target
 
 To generate your access token:
 
-  1. Go to the Digital Ocean administrator console and click **API** in the header.
+1.  Go to the Digital Ocean administrator console and click **API** in the header.
 
-  ![Click API in Digital Ocean console](../img/ocean_click_api.png)
+    ![Click API in Digital Ocean console](../img/ocean_click_api.png)
 
-  2. Click **Generate New Token** to get to the token generator.
+2.  Click **Generate New Token** to get to the token generator.
 
-  ![Generate token](../img/ocean_gen_token.png)
+    ![Generate token](../img/ocean_gen_token.png)
 
-  3. Give the token a clever name (e.g. "machine"), make sure the **Write (Optional)** checkbox is checked, and click **Generate Token**.
+3.  Give the token a clever name (e.g. "machine"), make sure the **Write (Optional)** checkbox is checked, and click **Generate Token**.
 
-  ![Name and generate token](../img/ocean_token_create.png)
+    ![Name and generate token](../img/ocean_token_create.png)
 
-  4. Grab (copy to clipboard) the generated big long hex string and store it somewhere safe.
+4.  Grab (copy to clipboard) the generated big long hex string and store it somewhere safe.
 
-  ![Copy and save personal access token](../img/ocean_save_token.png)
+    ![Copy and save personal access token](../img/ocean_save_token.png)
 
-  This is the personal access token you'll use in the next step to create your cloud server.
+    This is the personal access token you'll use in the next step to create your cloud server.
 
 ### Step 3. Use Machine to create the Droplet
 
-1. Run `docker-machine create` with the `digitalocean` driver and pass your key to the `--digitalocean-access-token` flag, along with a name for the new cloud server.
+
+1.  Run `docker-machine create` with the `digitalocean` driver and pass your key to the `--digitalocean-access-token` flag, along with a name for the new cloud server.
 
     For this example, we'll call our new Droplet "docker-sandbox".
 
-        $ docker-machine create --driver digitalocean --digitalocean-access-token xxxxx docker-sandbox
-        Running pre-create checks...
-        Creating machine...
-        (docker-sandbox) OUT | Creating SSH key...
-        (docker-sandbox) OUT | Creating Digital Ocean droplet...
-        (docker-sandbox) OUT | Waiting for IP address to be assigned to the Droplet...
-        Waiting for machine to be running, this may take a few minutes...
-        Machine is running, waiting for SSH to be available...
-        Detecting operating system of created instance...
-        Detecting the provisioner...
-        Provisioning created instance...
-        Copying certs to the local machine directory...
-        Copying certs to the remote machine...
-        Setting Docker configuration on the remote daemon...
-        To see how to connect Docker to this machine, run: docker-machine env docker-sandbox
+    ```none
+    $ docker-machine create --driver digitalocean --digitalocean-access-token xxxxx docker-sandbox
+    Running pre-create checks...
+    Creating machine...
+    (docker-sandbox) OUT | Creating SSH key...
+    (docker-sandbox) OUT | Creating Digital Ocean droplet...
+    (docker-sandbox) OUT | Waiting for IP address to be assigned to the Droplet...
+    Waiting for machine to be running, this may take a few minutes...
+    Machine is running, waiting for SSH to be available...
+    Detecting operating system of created instance...
+    Detecting the provisioner...
+    Provisioning created instance...
+    Copying certs to the local machine directory...
+    Copying certs to the remote machine...
+    Setting Docker configuration on the remote daemon...
+    To see how to connect Docker to this machine, run: docker-machine env docker-sandbox
+    ```
 
       When the Droplet is created, Docker generates a unique SSH key and stores it on your local system in `~/.docker/machines`. Initially, this is used to provision the host. Later, it's used under the hood to access the Droplet directly with the `docker-machine ssh` command. Docker Engine is installed on the cloud server and the daemon is configured to accept remote connections over TCP using TLS for authentication.
 

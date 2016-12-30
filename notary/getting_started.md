@@ -1,16 +1,8 @@
 ---
-description: Performing basic operation to use Notary in tandem with Docker Content
-  Trust.
-keywords:
-- docker, Notary, notary-client, docker content trust, content trust
-menu:
-  main:
-    parent: mn_notary
-    weight: 1
-title: Getting started with Notary
+description: Performing basic operation to use Notary in tandem with Docker Content Trust.
+keywords: docker, Notary, notary-client, docker content trust, content trust
+title: Getting started with Docker Notary
 ---
-
-# Getting started with Docker Notary
 
 This document describes basic use of the Notary CLI as a tool supporting Docker
 Content Trust. For more advanced use cases, you must [run your own Notary
@@ -32,7 +24,7 @@ freshness of your content.
 
 ## Install Notary
 
-You can download precompiled notary binary for 64 bit Linux or Mac OS X from the
+You can download precompiled notary binary for 64 bit Linux or macOS from the
 Notary repository's
 <a href="https://github.com/docker/notary/releases" target="_blank">releases page on
 GitHub</a>. Windows is not officially

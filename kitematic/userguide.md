@@ -1,15 +1,9 @@
 ---
-description: Documentation that provides an overview of Kitematic and installation
-  instructions
-keywords:
-- docker, documentation, about, technology, kitematic, gui
-menu:
-  main:
-    parent: toolbox_kitematic
-title: 'Kitematic User Guide: Intro & Overview'
+advisory: kitematic
+description: Documentation that provides an overview of Kitematic and installation instructions
+keywords: docker, documentation, about, technology, kitematic, gui
+title: Kitematic user guide
 ---
-
-# Kitematic user guide
 
 ## Overview
 
@@ -17,7 +11,7 @@ Kitematic is an open source project built to simplify and streamline using
 Docker on a Mac or Windows (coming soon) PC. Kitematic automates the Docker
 installation and setup process and provides an intuitive graphical user
 interface (GUI) for running Docker containers.  Kitematic integrates with
-[Docker Machine](https://docs.docker.com/machine/) to provision a VirtualBox VM
+[Docker Machine](/machine/) to provision a VirtualBox VM
 and install the Docker Engine locally on your machine.
 
 Once installed, the Kitematic GUI launches and from the home screen you will be
@@ -30,8 +24,7 @@ and configuring volumes.  You can use Kitematic to change environment variables,
 stream logs, and single click terminal into your Docker container all from the
 GUI.
 
-First, if you haven't yet done so, [download and start
-Kitematic](index.md).
+First, if you haven't yet done so, download and start Kitematic by installing [Docker Toolbox](/toolbox/overview.md#ready-to-get-started).
 
 ## Container list
 
@@ -162,7 +155,7 @@ Kitematic will prompt you to confirm that you want to delete.
 
 To see the complete list of exposed ports, go to "Settings" then "Ports". This
 page lists all the container ports exposed, and the IP address and host-only
-network port that you can access use to access that container from your OS X
+network port that you can access use to access that container from your macOS
 system.
 
 ## Docker Command-line Access

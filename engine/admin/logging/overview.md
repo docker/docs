@@ -1,23 +1,30 @@
 ---
-aliases:
-- /engine/reference/logging/overview/
 description: Configure logging driver.
-keywords:
-- docker, logging, driver, Fluentd
-menu:
-  main:
-    parent: smn_logging
-    weight: -99
-title: Configuring Logging Drivers
+keywords: docker, logging, driver, Fluentd
+redirect_from:
+- /engine/reference/logging/overview/
+title: Configure logging drivers
 ---
 
-# Configure logging drivers
+Docker comes with support of multiple logging mechanisms. Use the
+`--log-driver=VALUE` when starting the `dockerd` daemon to set default logging
+driver. You can use the `--log-opt NAME=VALUE` flag to specify extra options for
+selected driver.
 
 The container can have a different logging driver than the Docker daemon. Use
 the `--log-driver=VALUE` with the `docker run` command to configure the
-container's logging driver. If the `--log-driver` option is not set, docker
-uses the default (`json-file`) logging driver. The following options are
-supported:
+container's logging driver. If the `--log-driver` option is not set, containers
+use the daemon's default logging driver, which defaults to `json-file`. To check
+the default logging driver for your Docker daemon, search for `Logging Driver` in the
+output of the `docker info` command:
+
+```bash
+$ docker info |grep Logging
+
+Logging Driver: json-file
+```
+
+The following options are supported:
 
 | Driver      | Description                                                                                                                   |
 |-------------|-------------------------------------------------------------------------------------------------------------------------------|
@@ -32,7 +39,7 @@ supported:
 | `etwlogs`   | ETW logging driver for Docker on Windows. Writes log messages as ETW events.                                                  |
 | `gcplogs`   | Google Cloud Logging driver for Docker. Writes log messages to Google Cloud Logging.                                          |
 
-The `docker logs`command is available only for the `json-file` and `journald`
+The `docker logs` command is available only for the `json-file` and `journald`
 logging drivers.
 
 The `labels` and `env` options add additional attributes for use with logging
@@ -46,9 +53,9 @@ attributes in the output, run the following command:
 
 ```bash
 $ dockerd \
-    --log-driver=json-file \
-    --log-opt labels=foo \
-    --log-opt env=foo,fizz
+         --log-driver=json-file \
+         --log-opt labels=foo \
+         --log-opt env=foo,fizz
 ```
 
 Then, run a container and specify values for the `labels` or `env`. For
@@ -70,7 +77,7 @@ This adds additional fields to the log depending on the driver, e.g. for
 
 The following logging options are supported for the `json-file` logging driver:
 
-```bash
+```no-highlight
 --log-opt max-size=[0-9]+[kmg]
 --log-opt max-file=[0-9]+
 --log-opt labels=label1,label2
@@ -93,7 +100,7 @@ from the newest log file.
 
 The following logging options are supported for the `syslog` logging driver:
 
-```bash
+```no-highlight
 --log-opt syslog-address=[tcp|udp|tcp+tls]://host:port
 --log-opt syslog-address=unix://path
 --log-opt syslog-address=unixgram://path
@@ -186,7 +193,7 @@ driver, see [the journald logging driver](journald.md) reference documentation.
 
 The GELF logging driver supports the following options:
 
-```bash
+```no-highlight
 --log-opt gelf-address=udp://host:port
 --log-opt tag="database"
 --log-opt labels=label1,label2
@@ -202,9 +209,9 @@ must specify a `port` value. The following example shows how to connect the
 
 ```bash
 $ docker run -dit \
-    --log-driver=gelf \
-    --log-opt gelf-address=udp://192.168.0.42:12201 \
-    alpine sh
+             --log-driver=gelf \
+             --log-opt gelf-address=udp://192.168.0.42:12201 \
+             alpine sh
 ```
 
 By default, Docker uses the first 12 characters of the container ID to tag log
@@ -214,19 +221,19 @@ customizing the log tag format.
 The `labels` and `env` options are supported by the gelf logging
 driver. It adds additional key on the `extra` fields, prefixed by an
 underscore (`_`).
-
-    // […]
-    "_foo": "bar",
-    "_fizz": "buzz",
-    // […]
-
+```json
+// […]
+"_foo": "bar",
+"_fizz": "buzz",
+// […]
+```
 The `gelf-compression-type` option can be used to change how the GELF driver
 compresses each log message. The accepted values are `gzip`, `zlib` and `none`.
 `gzip` is chosen by default.
 
 The `gelf-compression-level` option can be used to change the level of
 compression when `gzip` or `zlib` is selected as `gelf-compression-type`.
-Accepted value must be from from -1 to 9 (BestCompression). Higher levels
+Accepted value must be from -1 to 9 (BestCompression). Higher levels
 typically run slower but compress more. Default value is 1 (BestSpeed).
 
 ## Fluentd options
@@ -261,7 +268,7 @@ see [the fluentd logging driver](fluentd.md)
 
 The Amazon CloudWatch Logs logging driver supports the following options:
 
-```bash
+```no-highlight
 --log-opt awslogs-region=<aws_region>
 --log-opt awslogs-group=<log_group_name>
 --log-opt awslogs-stream=<log_stream_name>
@@ -274,7 +281,7 @@ logging driver](awslogs.md) reference documentation.
 
 The Splunk logging driver requires the following options:
 
-```bash
+```no-highlight
 --log-opt splunk-token=<splunk_http_event_collector_token>
 --log-opt splunk-url=https://your_splunk_instance:8088
 ```
@@ -296,7 +303,7 @@ reference documentation.
 
 The Google Cloud Logging driver supports the following options:
 
-```bash
+```no-highlight
 --log-opt gcp-project=<gcp_projext>
 --log-opt labels=<label1>,<label2>
 --log-opt env=<envvar1>,<envvar2>

@@ -1,16 +1,10 @@
 ---
-aliases:
-- /docker-cloud/feature-reference/deploy-tags/
 description: Deployment tags
-keywords:
-- Deployment, tags, services
-menu:
-  main:
-    parent: apps
+keywords: Deployment, tags, services
+redirect_from:
+- /docker-cloud/feature-reference/deploy-tags/
 title: Deployment tags
 ---
-
-# Deployment tags
 
 You can use **Deployment tags** to make sure certain services are deployed only
 to specific nodes. Tagged services only deploy to nodes that match **all** of

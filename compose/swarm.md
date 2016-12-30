@@ -1,14 +1,10 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: How to use Compose and Swarm together to deploy apps to multi-host clusters
-keywords:
-- documentation, docs,  docker, compose, orchestration, containers, swarm
-menu:
-  main:
-    parent: workw_compose
-title: Using Compose with Swarm
+keywords: documentation, docs,  docker, compose, orchestration, containers, swarm
+title: Use Compose with Swarm
 ---
-
-# Using Compose with Swarm
 
 Docker Compose and [Docker Swarm](/swarm/overview.md) aim to have full integration, meaning
 you can point a Compose app at a Swarm cluster and have it all just work as if
@@ -25,15 +21,14 @@ format](compose-file.md#versioning) you are using:
 
     - subject to the [limitations](swarm.md#limitations) described below,
 
-    - as long as the Swarm cluster is configured to use the [overlay driver](https://docs.docker.com/engine/userguide/networking/dockernetworks/#an-overlay-network),
+    - as long as the Swarm cluster is configured to use the [overlay driver](/engine/userguide/networking/dockernetworks/#an-overlay-network),
       or a custom driver which supports multi-host networking.
 
-Read [Get started with multi-host networking](https://docs.docker.com/engine/userguide/networking/get-started-overlay/) to see how to
+Read [Get started with multi-host networking](/engine/userguide/networking/get-started-overlay/) to see how to
 set up a Swarm cluster with [Docker Machine](/machine/overview.md) and the overlay driver. Once you've got it running, deploying your app to it should be as simple as:
 
     $ eval "$(docker-machine env --swarm <name of swarm master machine>)"
     $ docker-compose up
-
 
 ## Limitations
 
@@ -141,7 +136,6 @@ There are two viable workarounds for this problem:
         $ docker-compose stop web
         $ docker-compose rm -f web
         $ docker-compose up web
-
 
 ## Scheduling containers
 

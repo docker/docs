@@ -1,15 +1,8 @@
 ---
 description: Fun stuff to do with your registry
-keywords:
-- registry, on-prem, images, tags, repository, distribution, recipes, advanced
-menu:
-  main:
-    parent: smn_recipes
-    weight: -10
+keywords: registry, on-prem, images, tags, repository, distribution, recipes, advanced
 title: Recipes Overview
 ---
-
-# Recipes
 
 You will find here a list of "recipes", end-to-end scenarios for exotic or otherwise advanced use-cases.
 
@@ -33,5 +26,5 @@ At this point, it's assumed that:
 
  * [using Apache as an authenticating proxy](apache.md)
  * [using Nginx as an authenticating proxy](nginx.md)
- * [running a Registry on OS X](osx-setup-guide.md)
+ * [running a Registry on macOS](osx-setup-guide.md)
  * [mirror the Docker Hub](mirror.md)

@@ -1,17 +1,11 @@
 ---
-aliases:
+description: Upgrade Docker Engine on a node
+keywords: upgrade, engine, node
+redirect_from:
 - /docker-cloud/feature-reference/docker-upgrade/
 - /docker-cloud/tutorials/docker-upgrade/
-description: Upgrade Docker Engine on a node
-keywords:
-- upgrade, engine, node
-menu:
-  main:
-    parent: infrastructure
 title: Upgrade Docker Engine on a node
 ---
-
-# Upgrade Docker Engine on a node
 
 Docker Cloud helps you manage nodes that have Docker Engine installed on them.
 You can upgrade the version of Docker Engine on your nodes when new versions are

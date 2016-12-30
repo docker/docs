@@ -1,18 +1,11 @@
 ---
-aliases:
+description: Push images to Docker Cloud
+keywords: images, private, registry
+redirect_from:
 - /docker-cloud/getting-started/intermediate/pushing-images-to-dockercloud/
 - /docker-cloud/tutorials/pushing-images-to-dockercloud/
-description: Push images to Docker Cloud
-keywords:
-- images, private, registry
-menu:
-  main:
-    parent: builds
-    weight: -60
 title: Push images to Docker Cloud
 ---
-
-# Push images to Docker Cloud
 
 Docker Cloud uses Docker Hub as its native registry for storing both public and
 private repositories. Once you push your images to Docker Hub, they will be
@@ -22,7 +15,7 @@ Images pushed to Docker Hub automatically appear for you in the **Launch new
 service** wizard.
 
 > **Note**: You must use Docker Engine 1.6 or later to push to Docker Hub.
-Follow the <a href="http://docs.docker.com/installation/" target="_blank">official installation instructions</a> depending on your system.
+Follow the <a href="/installation/" target="_blank">official installation instructions</a> depending on your system.
 
 1. In a terminal window, set the environment variable **DOCKER_ID_USER** as *your username* in Docker Cloud.
 
@@ -44,7 +37,7 @@ Follow the <a href="http://docs.docker.com/installation/" target="_blank">offic
 
 3. Tag your image using `docker tag`.
 
-    In the example below replace `my_image` with your image’s name, and `DOCKER_ID_USER` with your Docker Cloud username if needed.
+    In the example below replace `my_image` with your image's name, and `DOCKER_ID_USER` with your Docker Cloud username if needed.
     ```
     $ docker tag my_image $DOCKER_ID_USER/my_image
     ```

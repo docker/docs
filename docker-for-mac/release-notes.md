@@ -1,18 +1,10 @@
 ---
-aliases:
-- /mackit/release-notes/
 description: Change log / release notes per release
-keywords:
-- pinata, alpha, tutorial
-menu:
-  main:
-    identifier: docker-mac-relnotes
-    parent: pinata_mac_menu
-    weight: 10
-title: Release Notes
+keywords: pinata, alpha, tutorial
+redirect_from:
+- /mackit/release-notes/
+title: Docker for Mac release notes
 ---
-
-# Docker for Mac Release Notes
 
 Here are the main improvements and issues per release, starting with the current release. The documentation is always updated for each release.
 
@@ -25,11 +17,87 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 
 ## Stable Release Notes
 
+### Docker for Mac 1.12.5, 2016-12-20 (stable)
+
+**Upgrades**
+
+- Docker 1.12.5
+- Docker Compose 1.9.0
+
+### Skipped Docker for Mac 1.12.4 (stable)
+
+We did not distribute a 1.12.4 stable release
+
+### Docker for Mac 1.12.3, 2016-11-09 (stable)
+
+**Upgrades**
+
+- Docker 1.12.3
+- Linux Kernel 4.4.27
+- Notary 0.4.2
+- Docker Machine 0.8.2
+- Docker Compose 1.8.1
+- Kernel vsock driver v7
+- aufs 20160912
+
+**Bug fixes and minor changes**
+
+**General**
+
+- Fixed an issue where the whale animation during setting change was inconsistent
+
+- Fixed an issue where some windows stayed hidden behind another app
+
+- Fixed an issue where the Docker status would continue to be yellow/animated after the VM had started correctly
+
+- Fixed an issue where Docker for Mac was incorrectly reported as updated
+
+- Channel is now displayed in About box
+
+- Crash reports are sent over Bugsnag rather than HockeyApp
+
+- Fixed an issue where some windows did not claim focus correctly
+
+- Added UI when switching channel to prevent user losing containers and settings
+
+- Check disk capacity before Toolbox import
+
+- Import certificates in `etc/ssl/certs/ca-certificates.crt`
+
+- disk: make the "flush" behaviour configurable for database-like workloads. This works around a performance regression in 1.12.1.
+
+**Networking**
+
+- Proxy: Fixed application of system or custom proxy settings over container restart
+
+- DNS: reduce the number of UDP sockets consumed on the host
+
+- VPNkit: improve the connection-limiting code to avoid running out of sockets on the host
+
+- UDP: handle diagrams bigger than 2035, up to the configured macOS kernel limit
+
+- UDP: make the forwarding more robust; drop packets and continue rather than stopping
+
+**File sharing**
+
+- osxfs: Fixed the prohibition of chown on read-only or mode 0 files, (fixes
+  [https://github.com/docker/for-mac/issues/117](https://github.com/docker/for-mac/issues/117),
+  [https://github.com/docker/for-mac/issues/263](https://github.com/docker/for-mac/issues/263),
+  [https://github.com/docker/for-mac/issues/633](https://github.com/docker/for-mac/issues/633))
+
+- osxfs: Fixed race causing some reads to run forever
+
+- osxfs: Fixed a simultaneous volume mount race which can result in a crash
+
+**Moby**
+
+- Increase default ulimit for memlock (fixes [https://github.com/docker/for-mac/issues/801](https://github.com/docker/for-mac/issues/801))
+
 ### Docker for Mac 1.12.1, 2016-09-16 (stable)
 
 **New**
 
-* Support for OSX 10.12 Sierra
+* Support for macOS 10.12 Sierra
 
 **Upgrades**
 
@@ -73,7 +141,7 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn a
 
 * Use Mac System Configuration database to detect DNS
 
-**Filesharing (OSXFS)**
+**File sharing (osxfs)**
 
 * Fixed thread leak
 
@@ -107,15 +175,15 @@ This bug fix release contains osxfs improvements. The fixed issues may have
 been seen as failures with apt-get and npm in containers, missed inotify
 events or unexpected unmounts.
 
-* Bug fixes
-    - osxfs: fixed an issue causing access to children of renamed
-      directories to fail (symptoms: npm failures, apt-get failures)
-    - osxfs: fixed an issue causing some ATTRIB and CREATE inotify
-      events to fail delivery and other inotify events to stop
-    - osxfs: fixed an issue causing all inotify events to stop when an
-      ancestor directory of a mounted directory was mounted
-    - osxfs: fixed an issue causing volumes mounted under other mounts
-      to spontaneously unmount
+**Bug fixes**
+
+* osxfs: fixed an issue causing access to children of renamed directories to fail (symptoms: npm failures, apt-get failures)
+
+* osxfs: fixed an issue causing some ATTRIB and CREATE inotify events to fail delivery and other inotify events to stop
+
+* osxfs: fixed an issue causing all inotify events to stop when an ancestor directory of a mounted directory was mounted
+
+* osxfs: fixed an issue causing volumes mounted under other mounts to spontaneously unmount
 
 ### Docker for Mac 1.12.0-a, 2016-08-03 (stable)
 
@@ -144,6 +212,175 @@ events or unexpected unmounts.
 * Docker Compose 1.8.0
 
 ## Beta Release Notes
+
+### Beta 34.1 Release Notes (2016-12-22 1.13.0-rc4-beta34.1)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**Hotfix**
+
+- Fixed issue where Docker would fail to start after importing containers from Toolbox
+
+**Upgrades**
+
+- qcow-tool 0.7.2
+
+### Beta 34 Release Notes (2016-12-20 1.13.0-rc4-beta34)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**New**
+
+- Change UI for path location and open finder
+- Trim compact on reboot
+- Use more DNS servers, respect order
+
+**Upgrades**
+
+- Docker 1.13.0-rc4
+- Linux Kernel 4.8.15
+
+**Bug fixes and minor improvements**
+
+- New Daemon icon
+- Support Copy/Paste in About box
+- Fix advanced daemon check json changes
+- Auto update polling every 24h
+
+### Beta 33.1 Release Notes (2016-12-16 1.13.0-rc3-beta33.1)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**Hotfix**
+
+- Fixed issue where sometimes TRIM would cause the VM to hang
+
+### Beta 33 Release Notes (2016-12-15 1.13.0-rc3-beta33)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**New**
+
+- You can now edit filesharing paths
+- Memory can be allocated with 256 MiB steps
+- The storage location of the Linux volume can now be moved
+- More explicit proxy settings
+- Proxy can now be completly disabled
+- You can switch daemon tabs without losing your settings
+- You can't edit settings while docker is restarting
+
+**Upgrades**
+
+- Linux Kernel 4.8.14
+
+**Bug fixes and minor improvements**
+
+- Kernel boots with `vsyscall=emulate arg` and `CONFIG_LEGACY_VSYSCALL` is set to `NONE` in Moby
+
+### Beta 32 Release Notes (2016-12-07 1.13.0-rc3-beta32)
+
+**New**
+
+- Support for arm, aarch64, ppc64le architectures using qemu
+
+**Upgrades**
+
+- Docker 1.13.0-rc3
+- Docker Machine 0.9.0-rc2
+- Linux Kernel 4.8.12
+
+**Bug fixes and minor improvements**
+
+- VPNKit: Improved diagnostics
+- Fix vsock deadlock under heavy write load
+- On the beta channel you can't opt-out of analytics
+- If you opt-out of analytics, you're prompted for approval before a bug report is sent
+
+### Beta 31 Release Notes (2016-12-01 1.13.0-rc2-beta31)
+
+**New**
+
+- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json). See [[Daemon Advanced (JSON configuration file)](index.md#daemon-advanced-json-configuration-file).
+
+- Docker Experimental mode can be toggled. See [Daemon Basic (experimental mode and registries)](index.md#daemon-basic-experimental-mode-and-registries).
+
+**Upgrades**
+
+- Docker 1.13.0-rc2
+- Docker Compose 1.9.0
+- Docker Machine 0.9.0-rc1
+- Linux kernel 4.8.10
+
+**Bug fixes and minor improvements**
+
+- Fixed bug where search domain could be read as `DomainName`
+- VPNKit: don't permute resource records in responses
+- VPNKit: reduced the amount of log spam
+- Dedicated preference pane for HTTP proxy settings
+- Dedicated preference pane for CPU & Memory computing resources
+- Privacy settings moved to the general preference pane
+- Fixed an issue where proxy settings were erased if registries or mirrors changed.
+- Tab key is now cycling through tabs while setting proxy parameters
+- Fixed an issue where the preference pane disappeared when the welcome whale menu was closed
+
+### Beta 30 Release Notes (2016-11-10 1.12.3-beta30)
+
+**New**
+
+- Better support for Split DNS VPN configurations
+
+**Upgrades**
+
+- Docker Compose 1.9.0-rc4
+- Linux kernel 4.4.30
+
+**Bug fixes and minor changes**
+
+- HyperKit: code cleanup and minor fixes
+- VPNKit: improvements to DNS handling
+- Improvements to Logging and Diagnostics
+- osxfs: switched to `libev/kqueue` to improve latency
+
+
+### Beta 29.3 Release Notes (2016-11-02 1.12.3-beta29.3)
+
+**Upgrades**
+
+- Docker Compose 1.9.0-rc2
+- `osxfs`: Fixed a simultaneous volume mount race which can result in a crash
+
+### Beta 29.2 Release Notes (2016-10-27 1.12.2-beta29.2)
+
+**Hotfixes**
+
+- Upgrade to Docker 1.12.3
+
+### Beta 29.1 Release Notes (2016-10-26 1.12.1-beta29.1)
+
+**Hotfixes**
+
+- Fixed missing `/dev/pty/ptmx`
+
+### Beta 29 Release Notes (2016-10-25 1.12.3-rc1-beta29)
+
+**New**
+
+- Overlay2 is now the default storage driver. You must do a factory reset for overlay2 to be automatically used. (#5545)
+
+**Upgrades**
+
+- Docker 1.12.3-rc1
+- Linux kernel 4.4.27
+
+**Bug fixes and minor changes**
+
+- Fix an issue where the whale animation during setting change was inconsistent
+- Fix an issue where some windows stayed hidden behind another app
+- Fix application of system or custom proxy settings over container restart
+- Increase default ulimit for memlock (fixes [https://github.com/docker/for-mac/issues/801](https://github.com/docker/for-mac/issues/801) )
+- Fix an issue where the Docker status would continue to be
+      yellow/animated after the VM had started correctly
+- osxfs: fix the prohibition of chown on read-only or mode 0 files (fixes [https://github.com/docker/for-mac/issues/117](https://github.com/docker/for-mac/issues/117), [https://github.com/docker/for-mac/issues/263](https://github.com/docker/for-mac/issues/263), [https://github.com/docker/for-mac/issues/633](https://github.com/docker/for-mac/issues/633) )
 
 ### Beta 28 Release Notes (2016-10-13 1.12.2-rc3-beta28)
 
@@ -214,7 +451,7 @@ events or unexpected unmounts.
 
 **Known Issues**
 
-* `Docker.app` sometimes uses 200% CPU after OS X wakes up from sleep mode. The
+* `Docker.app` sometimes uses 200% CPU after macOS wakes up from sleep mode. The
 issue is being investigated. The workaround is to restart Docker.app.
 
 * There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and
@@ -229,7 +466,7 @@ available in [Known Issues](troubleshoot.md#known-issues) in Troubleshooting.
 
 **Upgrades**
 
-* Experimental support for OSX 10.12 Sierra (beta)
+* Experimental support for macOS 10.12 Sierra (beta)
 
 **Bug fixes and minor changes**
 
@@ -243,7 +480,7 @@ available in [Known Issues](troubleshoot.md#known-issues) in Troubleshooting.
 investigated. This includes failure to launch the app and being unable to
 upgrade to a new version.
 
-* Docker.app sometimes uses 200% CPU after OS X wakes up from sleep mode. The
+* Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The
 issue is being investigated. The workaround is to restart Docker.app
 
 * There are a number of issues with the performance of directories bind-mounted
@@ -281,7 +518,7 @@ Issues](troubleshoot.md#known-issues) in Troubleshooting.
 * Several problems have been reported on macOS 10.12 Sierra and are being investigated. This includes failure to launch the app and being unable to
 upgrade to a new version.
 
-* `Docker.app` sometimes uses 200% CPU after OS X wakes up from sleep mode.  The issue is being investigated. The workaround is to restart `Docker.app`.
+* `Docker.app` sometimes uses 200% CPU after macOS wakes up from sleep mode.  The issue is being investigated. The workaround is to restart `Docker.app`.
 
 * There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large
 directories are currently slow. Additionally, containers that perform large
@@ -308,9 +545,9 @@ trees, may suffer from poor performance. For more information and workarounds, s
 
 **Known issues**
 
-*  Docker for Mac is not supported on OSX 10.12 Sierra
+*  Docker for Mac is not supported on macOS 10.12 Sierra
 
-* Docker.app sometimes uses 200% CPU after OS X wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
+* Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
 * There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see the bullet on [performance of bind-mounted directories](troubleshoot.md#bind-mounted-dirs) in [Known Issues](troubleshoot.md#known-issues) in Troubleshooting.
 
@@ -333,7 +570,7 @@ trees, may suffer from poor performance. For more information and workarounds, s
 
 **Known issues**
 
-* Docker.app sometimes uses 200% CPU after OS X wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
+* Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
 * There are a number of issues with the performance of directories bind-mounted with `osxfs`. In particular, writes of small blocks and traversals of large directories are currently slow. Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. More information is available in [Known Issues](troubleshoot.md#known-issues) in [Troubleshooting](troubleshoot.md)
 
@@ -380,7 +617,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* Docker.app sometimes uses 200% CPU after OS X wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
+* Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
 * There are a number of issues with the performance of directories bind-mounted with `osxfs`.  In particular, writes of small blocks, and traversals of large directories are currently slow.  Additionally, containers that perform large numbers of directory operations, such as repeated scans of large directory trees, may suffer from poor performance. For more information and workarounds, see [Known Issues](troubleshoot.md#known-issues) in [Logs and Troubleshooting](troubleshoot.md).
 
@@ -399,7 +636,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-*  `Docker.app` sometimes uses 200% CPU after OS X wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker for Mac (`Docker.app`).
+*  `Docker.app` sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker for Mac (`Docker.app`).
 
 ### Beta 19 Release Notes (2016-07-14 1.12.0-rc4-beta19)
 
@@ -483,7 +720,7 @@ events or unexpected unmounts.
 
 **Bug fixes and minor changes**
 
-* Documentation moved to [https://docs.docker.com/docker-for-mac/](https://docs.docker.com/docker-for-mac/)
+* Documentation moved to [https://docs.docker.com/docker-for-mac/](/docker-for-mac/)
 * Allow non-admin users to launch the app for the first time (using admin creds)
 * Prompt non-admin users for admin password when needed in Preferences
 * Fixed download links, documentation links
@@ -548,7 +785,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* `Docker.app` sometimes uses 200% CPU after OS X wakes up from sleep mode with OSX 10.10. The issue is being investigated. The workaround is to restart `Docker.app`.
+* `Docker.app` sometimes uses 200% CPU after macOS wakes up from sleep mode with macOS 10.10. The issue is being investigated. The workaround is to restart `Docker.app`.
 
 **Bug fixes and minor changes**
 
@@ -579,7 +816,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* Docker.app sometimes uses 200% CPU after OS X wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app.
+* Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app.
 
 **Bug fixes and minor changes**
 
@@ -598,7 +835,7 @@ events or unexpected unmounts.
 
 **Known issues**
 
-* Docker.app sometimes uses 200% CPU after OS X wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app.
+* Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app.
 
 **Bug fixes and minor changes**
 
@@ -609,7 +846,7 @@ events or unexpected unmounts.
 
 **New**
 
-The `osxfs` file system now persists ownership changes in an extended attribute. (See the topic on [ownership](osxfs.md#ownership) in [Sharing the OS X file system with Docker containers](osxfs.md).)
+The `osxfs` file system now persists ownership changes in an extended attribute. (See the topic on [ownership](osxfs.md#ownership) in [Sharing the macOS file system with Docker containers](osxfs.md).)
 
 **Upgrades**
 
@@ -659,7 +896,7 @@ The `osxfs` file system now persists ownership changes in an extended attribute.
 
 **Known issues**
 
-* Docker.app sometimes uses 200% CPU after OS X wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app.
+* Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app.
 
 **Bug fixes and minor changes**
 
@@ -672,7 +909,7 @@ The `osxfs` file system now persists ownership changes in an extended attribute.
 * More reliable DNS forwarding over UDP and TCP
 * UDP ports can be proxied over vsock
 * Fixed EADDRINUSE (manifesting as errno 526) when ports are re-used
-* Send ICMP when asked to not fragment and we can’t guarantee it
+* Send ICMP when asked to not fragment and we can't guarantee it
 * Fixed parsing of UDP datagrams with IP socket options
 * Drop abnormally large ethernet frames
 * Improved HyperKit logging
@@ -694,7 +931,7 @@ The `osxfs` file system now persists ownership changes in an extended attribute.
 
 **Known issues**
 
-* Docker.app sometimes uses 200% CPU after OS X wakes up from sleep mode. The issue is being investigated. The workaround is to restart `Docker.app`
+* Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart `Docker.app`
 
 **Bug fixes and minor changes**
 
@@ -723,7 +960,7 @@ The `osxfs` file system now persists ownership changes in an extended attribute.
 
 **Known issues**
 
-* Docker.app sometimes uses 200% CPU after OS X wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
+* Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app
 
 * If VPN mode is enabled and then disabled and then re-enabled again, `docker ps` will block for 90s
 
@@ -747,7 +984,7 @@ The `osxfs` file system now persists ownership changes in an extended attribute.
 
 **Known issues**
 
-* `Docker.app` sometimes uses 200% CPU after OS X wakes up from sleep mode.
+* `Docker.app` sometimes uses 200% CPU after macOS wakes up from sleep mode.
 The issue is being investigated. The workaround is to restart
 `Docker.app`.
 
@@ -783,7 +1020,7 @@ lead to `Docker.app` not starting on reboot
 
 - There is a race on startup between docker and networking which can lead to Docker.app not starting on reboot. The workaround is to restart the application manually.
 
-- Docker.app sometimes uses 200% CPU after OS X wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app.
+- Docker.app sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart Docker.app.
 
 - In VPN mode, the `-p` option needs to be explicitly of the form `-p <host port>:<container port>`. `-p <port>` and `-P` will not work yet.
 
@@ -813,11 +1050,11 @@ lead to `Docker.app` not starting on reboot
 
 - There is a race on startup between Docker and networking that can lead to `Docker.app` not starting on reboot. The workaround is to restart the application manually.
 
-- `Docker.app` sometimes uses 200% CPU after OS X wakes up from sleep mode. The issue is being investigated. The workaround is to restart `Docker.app`.
+- `Docker.app` sometimes uses 200% CPU after macOS wakes up from sleep mode. The issue is being investigated. The workaround is to restart `Docker.app`.
 
 - VPN/Hostnet: In VPN mode, the `-p` option needs to be explicitly of the form
 `-p <host port>:<container port>`. `-p <port>` and `-P` will not
-work yet.    
+work yet.
 
 **Bug fixes and minor changes**
 
@@ -825,7 +1062,7 @@ work yet.
 
 - `docker ps` shows IP address rather than `docker.local`
 
-- Re-enabled support for OS X Yosemite version 10.10
+- Re-enabled support for macOS Yosemite version 10.10
 
 - Ensured binaries are built for 10.10 rather than 10.11
 
@@ -838,7 +1075,7 @@ work yet.
 
 **New Features and Upgrades**
 
-- Improved file sharing write speed in OSXFS
+- Improved file sharing write speed in osxfs
 
 - User space networking: Renamed `bridged` mode to `nat` mode
 
@@ -851,8 +1088,8 @@ work yet.
 - GUI: Auto update automatically checks for new versions again
 
 - File System
-  - Fixed OSXFS chmod on sockets
-  - FixED OSXFS EINVAL from `open` using O_NOFOLLOW
+  - Fixed osxfs chmod on sockets
+  - FixED osxfs EINVAL from `open` using O_NOFOLLOW
 
 
 - Hypervisor stability fixes, resynced with upstream repository
@@ -885,13 +1122,13 @@ work yet.
 **New Features and Upgrades**
 
 - GUI
-  - Add VPN mode/`hostnet` to Preferences
-  - Add disable Time Machine backups of VM disk image to Preferences
+  - Added VPN mode/`hostnet` to Preferences
+  - Added disable Time Machine backups of VM disk image to Preferences
 
 
 - Added `pinata` configuration tool for experimental Preferences
 
-- File System: Add guest-to-guest FIFO and socket file support
+- File System: Added guest-to-guest FIFO and socket file support
 
 - Upgraded Notary to version 0.2
 
@@ -923,19 +1160,19 @@ work yet.
   - Added MixPanel support
 
 
-- Add HockeyApp crash reporting
+- Added HockeyApp crash reporting
 - Improve signal handling on task manager
 - Use ISO timestamps with microsecond precision for logging
 - Clean up logging format
 
 - Packaging
-  - Create /usr/local if it doesn’t exist
+  - Create /usr/local if it doesn't exist
   - docker-uninstall improvements
-  - Remove docker-select as it’s no longer used
+  - Remove docker-select as it's no longer used
 
 
 - Hypervisor
-  - Add PID file
+  - Added PID file
   - Networking reliability improvements
 
 

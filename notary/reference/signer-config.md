@@ -1,15 +1,8 @@
 ---
 description: Configuring the notary client, server and signer.
-keywords:
-- docker, notary, notary-client, notary-server, notary server, notary-signer, notary
-  signer
-menu:
-  main:
-    parent: mn_notary_config
-title: Signer Configuration
+keywords: docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer
+title: Notary signer configuration file
 ---
-
-# Notary signer configuration file
 
 This document is for those who are [running their own Notary service](../running_a_service.md) who
 want to specify custom options.
@@ -191,7 +184,9 @@ For example, the configuration above specifies the default password alias to be
 
 If this configuration is used, then you must:
 
-`export NOTARY_SIGNER_PASSWORDALIAS1=mypassword`
+```
+export NOTARY_SIGNER_PASSWORDALIAS1=mypassword
+```
 
 so that that Notary signer knows to encrypt all keys with the passphrase
 `mypassword`, and to decrypt any private key stored with password alias

@@ -1,14 +1,8 @@
 ---
 description: Explains how to use the Google Cloud Storage drivers
-keywords:
-- registry, service, driver, images, storage,  gcs, google, cloud
-menu:
-  main:
-    parent: smn_storagedrivers
-title: GCS storage driver
+keywords: registry, service, driver, images, storage,  gcs, google, cloud
+title: Google Cloud Storage driver
 ---
-
-# Google Cloud Storage driver
 
 An implementation of the `storagedriver.StorageDriver` interface which uses Google Cloud for object storage.
 
@@ -63,6 +57,7 @@ An implementation of the `storagedriver.StorageDriver` interface which uses Goog
     </td>
     <td>
       This is the chunk size used for uploading large blobs, must be a multiple of 256*1024.
+    </td>
   </tr>
 
 </table>

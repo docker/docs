@@ -1,45 +1,44 @@
 ---
+advisory: toolbox
 description: How to install Toolbox on Mac
-keywords:
-- docker, documentation, install, toolbox, mac
-menu:
-  main:
-    parent: workw_toolbox
-    weight: -7
-title: Install Toolbox on Mac
+keywords: docker, documentation, install, toolbox, mac
+title: Install Docker Toolbox on macOS
 ---
 
-# Install Docker Toolbox on Mac OS X
-
-Mac OS X users use Docker Toolbox to install Docker software. Docker Toolbox includes the following Docker tools:
+macOS users use Docker Toolbox to install Docker software. Docker Toolbox includes the following Docker tools:
 
 * Docker CLI client for running Docker Engine to create images and containers
-* Docker Machine so you can run Docker Engine commands from Mac OS X terminals
+* Docker Machine so you can run Docker Engine commands from macOS terminals
 * Docker Compose for running the `docker-compose` command
 * Kitematic, the Docker GUI
 * the Docker QuickStart shell preconfigured for a Docker command-line environment
 * Oracle VM VirtualBox
 
 Because the Docker Engine daemon uses Linux-specific kernel features, you can't
-run Docker Engine natively in OS X. Instead, you must use the Docker Machine
+run Docker Engine natively in macOS. Instead, you must use the Docker Machine
 command,  `docker-machine`,  to create and attach to a small Linux VM on your
 machine. This VM hosts Docker Engine for you on your Mac.
 
 ## Step 1: Check your version
 
-Your Mac must be running OS X 10.8 "Mountain Lion" or newer to run Docker
+Your Mac must be running macOS 10.8 "Mountain Lion" or newer to run Docker
 software. To find out what version of the OS you have:
 
 1. Choose **About this Mac** from the Apple menu.
 
-    The version number appears directly below the words `OS X`.
+    The version number appears directly below the words `macOS`.
 
 2. If you have the correct version, go to the next step.
 
     If you aren't using a supported version, you could consider upgrading your
     operating system.
 
-    If you have Mac OS X 10.10.3 Yosemite or newer, consider using [Docker for Mac](https://docs.docker.com/docker-for-mac/) instead. It runs natively on the Mac, so there is no need for a pre-configured Docker QuickStart shell. It uses xhyve for virtualization, instead of VirutalBox. Full install prerequisites are provided in the Docker for Mac topic in [Docker for Mac](https://docs.docker.com/docker-for-mac/#what-to-know-before-you-install).
+    If you have macOS 10.10.3 Yosemite or newer, consider using [Docker for
+    Mac](/docker-for-mac/) instead. It runs natively on the Mac, so there is no
+    need for a pre-configured Docker QuickStart shell. It uses the native macOS
+    Hypervisor framework for virtualization, instead of Oracle VirutalBox. Full
+    install prerequisites are provided in the Docker for Mac topic in [Docker
+    for Mac](/docker-for-mac/#what-to-know-before-you-install).
 
 ## Step 2: Install Docker Toolbox
 
@@ -127,7 +126,7 @@ Virtual Box VM, it maintains its configuration between uses.
                      \    \         __/
                       \____\_______/
 
-        The Docker Quick Start Terminal is configured to use Docker with the “default” VM.
+        The Docker Quick Start Terminal is configured to use Docker with the "default" VM.
 
 3.  Click your mouse in the terminal window to make it active.
 
@@ -200,7 +199,7 @@ To uninstall Toolbox on a Mac, do the following:
     Successfully removed my-docker-machine
     ```
 
-3.  Remove the Docker Quickstart Terminal and Kitematic from your “Applications” folder.
+3.  Remove the Docker Quickstart Terminal and Kitematic from your "Applications" folder.
 
 4.  Remove the `docker`, `docker-compose`, and `docker-machine` commands from the `/usr/local/bin` folder.
 

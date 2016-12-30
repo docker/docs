@@ -1,15 +1,10 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Create a Swarm manager.
-keywords:
-- swarm, create
-menu:
-  main:
-    identifier: swarm.create
-    parent: smn_swarm_subcmds
-title: create
+keywords: swarm, create
+title: create — Create a discovery token
 ---
-
-# create  — Create a discovery token
 
 The `create` command uses Docker Hub's hosted discovery backend to create a unique *discovery token* for your cluster. For example:
 

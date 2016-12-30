@@ -1,15 +1,8 @@
 ---
 description: Create a Swarm manager.
-keywords:
-- swarm, create, manage
-menu:
-  main:
-    identifier: swarm.manage
-    parent: smn_swarm_subcmds
-title: manage
+keywords: swarm, create, manage
+title: manage  — Create a Swarm manager
 ---
-
-# manage  — Create a Swarm manager
 
 Prerequisite: Before using `manage` to create a Swarm manager, establish a discovery backend as described in [this discovery topic](../discovery.md).
 
@@ -110,7 +103,7 @@ The environment variable for `--host` is `$SWARM_HOST`.
 
 ### `--replication` — Enable Swarm manager replication
 
-Enable Swarm manager replication between the *primary* and *secondary* managers in a high-availability cluster. Replication mirrors cluster information from the primary to the secondary managers so that, if the primary manager fails, a secondary can become the primary manager.  
+Enable Swarm manager replication between the *primary* and *secondary* managers in a high-availability cluster. Replication mirrors cluster information from the primary to the secondary managers so that, if the primary manager fails, a secondary can become the primary manager.
 
 ### `--replication-ttl` — Leader lock release time on failure
 

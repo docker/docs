@@ -1,16 +1,8 @@
 ---
 description: Getting Started tutorial for Docker Engine swarm mode
-keywords:
-- tutorial, cluster management, swarm mode
-menu:
-  main:
-    identifier: tutorial-setup
-    parent: swarm-tutorial
-    weight: 11
-title: Set up for the tutorial
+keywords: tutorial, cluster management, swarm mode
+title: Getting started with swarm mode
 ---
-
-# Getting started with swarm mode
 
 This tutorial introduces you to the features of Docker Engine Swarm mode. You
 may want to familiarize yourself with the [key concepts](../key-concepts.md)
@@ -25,7 +17,7 @@ The tutorial guides you through the following activities:
 
 This tutorial uses Docker Engine CLI commands entered on the command line of a
 terminal window. You should be able to install Docker on networked machines and
-be comfortable running commands in the shell of your choice.
+be comfortable with running commands in the shell of your choice.
 
 If you are brand new to Docker, see [About Docker Engine](../../index.md).
 
@@ -104,7 +96,7 @@ the IP address.
 Because other nodes contact the manager node on its IP address, you should use a
 fixed IP address.
 
-You can run `ifconfig` on Linux or Mac OS X to see a list of the
+You can run `ifconfig` on Linux or macOS to see a list of the
 available network interfaces.
 
 If you are using Docker Machine, you can get the manager IP with either
@@ -120,6 +112,9 @@ The following ports must be available. On some systems, these ports are open by 
 * **TCP port 2377** for cluster management communications
 * **TCP** and **UDP port 7946** for communication among nodes
 * **TCP** and **UDP port 4789** for overlay network traffic
+
+If you are planning on creating an overlay network with encryption (`--opt encrypted`),
+you will also need to ensure protocol 50 (ESP) is open.
 
 ## What's next?
 

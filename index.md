@@ -1,12 +1,9 @@
 ---
 description: Home page for Docker's documentation
-keywords:
-- Docker, documentation, manual, guide, reference, api
-title: Welcome to the Docs
+keywords: Docker, documentation, manual, guide, reference, api
 layout: docs
+title: Welcome to the Docs
 ---
-
-# Welcome to the Docs
 
 {% include content/docker_elevator_pitch.md %}
 
@@ -23,7 +20,7 @@ layout: docs
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
 	<h3><a href="/docker-for-mac/">Docker for Mac</a></h3>
-		<p>A native application using the OS X sandbox security model which delivers all Docker tools to your Mac.</p>
+		<p>A native application using the macOS sandbox security model which delivers all Docker tools to your Mac.</p>
 	</div>
 	</div>
 </li>
@@ -125,7 +122,7 @@ layout: docs
 	<h3><a href="/machine/install-machine/">Docker Machine</a></h3>
 		<p>
     Automate container provisioning on your network or in
-    the cloud. Available for Windows, Mac OS X, or Linux.</p>
+    the cloud. Available for Windows, macOS, or Linux.</p>
 	</div>
 	</div>
 </li>

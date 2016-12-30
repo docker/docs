@@ -1,15 +1,8 @@
 ---
 description: CLI and log output formatting reference
-keywords:
-- format, formatting, output, templates, log
-menu:
-  main:
-    parent: engine_admin
-    weight: 7
+keywords: format, formatting, output, templates, log
 title: Format command and log output
 ---
-
-# Formatting reference
 
 Docker uses [Go templates](https://golang.org/pkg/text/template/) to allow users manipulate the output format
 of certain commands and log drivers. Each command a driver provides a detailed
@@ -58,7 +51,7 @@ Lower turns a string into its lower case representation.
 Split slices a string into a list of strings separated by a separator.
 
 	{% raw %}
-	# docker inspect --format '{{split (join .Names "/") "/"}}' container
+	$ docker inspect --format '{{split (join .Names "/") "/"}}' container
 	{% endraw %}
 
 ### Title

@@ -1,22 +1,14 @@
 ---
 description: Becoming a power user of the notary client.
-keywords:
-- docker, notary, notary-client, docker content trust, content trust, power user,
-  advanced
-menu:
-  main:
-    parent: mn_notary
-    weight: 2
-title: Use the Notary client
+keywords: docker, notary, notary-client, docker content trust, content trust, power user, advanced
+title: Use the Notary client for advanced users
 ---
-
-# Use the Notary client for advanced users
 
 This page explains advanced uses of Notary client for users who are running
 their own Notary service. Make sure you have first read and understood how to
 [run your own Notary service](running_a_service.md) before continuing.
 
-#### An important note about the examples
+## An important note about the examples
 
 This document's command examples omit the `-s` and `-d` flags. If you do not
 know what these options do, please read the [Getting
@@ -57,6 +49,7 @@ algorithm:
 ## Add and remove Targets
 
 It's simple to add targets to a trusted collection with notary CLI:
+
 ```
 $ notary add example.com/collection v1 my_file.txt
 ```
@@ -67,6 +60,7 @@ file path and one or more checksums of the contents.
 Note that this is an offline command, and we must run a `notary publish example.com/collection` for the add to take effect.
 
 To remove targets, we use the `notary remove` command, specifying the GUN and target name.
+
 ```
 $ notary remove example.com/collection v1
 ```
@@ -247,7 +241,7 @@ To use the `targets/releases` role for pushing and pulling images with content t
 follow the steps above to add and publish the delegation role with notary.
 When adding the delegation, the `--all-paths` flag should be used to allow signing all tags.
 
-# Files and state on disk
+## Files and state on disk
 
 Notary stores state in its `trust_dir` directory, which is `~/.notary` by
 default or usually `~/.docker/trust` when enabling docker content trust. Within this

@@ -1,15 +1,10 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Swarm filters
-keywords:
-- docker, swarm, clustering,  filters
-menu:
-  main:
-    parent: swarm_sched
-    weight: 4
-title: Filters
+keywords: docker, swarm, clustering, filters
+title: Swarm filters
 ---
-
-# Swarm filters
 
 Filters tell Docker Swarm scheduler which nodes to use when creating and running
 a container.
@@ -173,7 +168,7 @@ ubuntu              14.04               a5a467fddcb8        11 days ago         
 
 ### Use the health filter
 
-The node `health` filter prevents the scheduler form running containers
+The node `health` filter prevents the scheduler from running containers
 on unhealthy nodes. A node is considered unhealthy if the node is down or it
 can't communicate with the cluster store.
 

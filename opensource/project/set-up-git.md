@@ -1,15 +1,8 @@
 ---
 description: Describes how to set up your local machine and repository
-keywords:
-- 'GitHub account, repository, clone, fork, branch, upstream, Git, Go, make '
-menu:
-  main:
-    parent: smn_engine_contrib
-    weight: 4
+keywords: GitHub account, repository, clone, fork, branch, upstream, Git, Go, make
 title: Configure Git for contributing
 ---
-
-# Configure Git for contributing
 
 Work through this page to configure Git and a repository you'll use throughout
 the Contributor Guide. The work you do further in the guide, depends on the work
@@ -55,39 +48,39 @@ target="_blank">docker/docker repository</a>.
 
 5. Open a terminal window on your local host and change to your home directory.
 
-    ```bash
-    $ cd ~
-    ```
+   ```bash
+   $ cd ~
+   ```
 
     In Windows, you'll work in your Docker Quickstart Terminal window instead of
     Powershell or a `cmd` window.
 
 6. Create a `repos` directory.
 
-    ```bash
-    $ mkdir repos
-    ```
+   ```bash
+   $ mkdir repos
+   ```
 
 7. Change into your `repos` directory.
 
-    ```bash
-    $ cd repos
-    ```
+   ```bash
+   $ cd repos
+   ```
 
 8. Clone the fork to your local host into a repository called `docker-fork`.
 
-    ```bash
-    $ git clone https://github.com/moxiegirl/docker.git docker-fork
-    ```
+   ```bash
+   $ git clone https://github.com/moxiegirl/docker.git docker-fork
+   ```
 
     Naming your local repo `docker-fork` should help make these instructions
     easier to follow; experienced coders don't typically change the name.
 
 9. Change directory into your new `docker-fork` directory.
 
-    ```bash
-    $ cd docker-fork
-    ```
+   ```bash
+   $ cd docker-fork
+   ```
 
     Take a moment to familiarize yourself with the repository's contents. List
     the contents.
@@ -117,55 +110,55 @@ To configure your username, email, and add a remote:
 
 1. Change to the root of your `docker-fork` repository.
 
-    ```bash
-    $ cd docker-fork
-    ```
+   ```bash
+   $ cd docker-fork
+   ```
 
 2. Set your `user.name` for the repository.
 
-    ```bash
-    $ git config --local user.name "FirstName LastName"
-    ```
+   ```bash
+   $ git config --local user.name "FirstName LastName"
+   ```
 
 3. Set your `user.email` for the repository.
 
-    ```bash
-    $ git config --local user.email "emailname@mycompany.com"
-    ```
+   ```bash
+   $ git config --local user.email "emailname@mycompany.com"
+   ```
 
 4. Set your local repo to track changes upstream, on the `docker` repository.
 
-    ```bash
-    $ git remote add upstream https://github.com/docker/docker.git
-    ```
+   ```bash
+   $ git remote add upstream https://github.com/docker/docker.git
+   ```
 
 5. Check the result in your `git` configuration.
 
-    ```bash
-    $ git config --local -l
-    core.repositoryformatversion=0
-    core.filemode=true
-    core.bare=false
-    core.logallrefupdates=true
-    remote.origin.url=https://github.com/moxiegirl/docker.git
-    remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
-    branch.master.remote=origin
-    branch.master.merge=refs/heads/master
-    user.name=Mary Anthony
-    user.email=mary@docker.com
-    remote.upstream.url=https://github.com/docker/docker.git
-    remote.upstream.fetch=+refs/heads/*:refs/remotes/upstream/*
-    ```
+   ```bash
+   $ git config --local -l
+   core.repositoryformatversion=0
+   core.filemode=true
+   core.bare=false
+   core.logallrefupdates=true
+   remote.origin.url=https://github.com/moxiegirl/docker.git
+   remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+   branch.master.remote=origin
+   branch.master.merge=refs/heads/master
+   user.name=Mary Anthony
+   user.email=mary@docker.com
+   remote.upstream.url=https://github.com/docker/docker.git
+   remote.upstream.fetch=+refs/heads/*:refs/remotes/upstream/*
+   ```
 
 	To list just the remotes use:
 
-    ```bash
-    $ git remote -v
-    origin	https://github.com/moxiegirl/docker.git (fetch)
-    origin	https://github.com/moxiegirl/docker.git (push)
-    upstream	https://github.com/docker/docker.git (fetch)
-    upstream	https://github.com/docker/docker.git (push)
-    ```
+   ```bash
+   $ git remote -v
+   origin	https://github.com/moxiegirl/docker.git (fetch)
+   origin	https://github.com/moxiegirl/docker.git (push)
+   upstream https://github.com/docker/docker.git (fetch)
+   upstream https://github.com/docker/docker.git (push)
+   ```
 
 ## Task 3. Create and push a branch
 
@@ -179,32 +172,34 @@ the branch to your fork on GitHub:
 
 1. Open a terminal and go to the root of your `docker-fork`.
 
-    ```bash
-    $ cd docker-fork
-    ```
+   ```bash
+   $ cd docker-fork
+   ```
 
 2. Create a `dry-run-test` branch.
 
-    ```bash
-    $ git checkout -b dry-run-test
-    ```
+   ```bash
+   $ git checkout -b dry-run-test
+   ```
 
     This command creates the branch and switches the repository to it.
 
 3. Verify you are in your new branch.
 
-        $ git branch
-        * dry-run-test
-          master
+   ```bash
+   $ git branch
+   * dry-run-test
+     master
+   ```
 
     The current branch has an * (asterisk) marker. So, these results shows you
     are on the right branch.
 
 4. Create a `TEST.md` file in the repository's root.
 
-    ```bash
-    $ touch TEST.md
-    ```
+   ```bash
+   $ touch TEST.md
+   ```
 
 5. Edit the file and add your email and location.
 
@@ -216,43 +211,43 @@ the branch to your fork on GitHub:
 
 7. Check the status of your branch.
 
-    ```bash
-    $ git status
-    On branch dry-run-test
-    Untracked files:
-      (use "git add <file>..." to include in what will be committed)
+   ```bash
+   $ git status
+   On branch dry-run-test
+   Untracked files:
+     (use "git add <file>..." to include in what will be committed)
 
-        TEST.md
+       TEST.md
 
-    nothing added to commit but untracked files present (use "git add" to track)
-    ```
+   nothing added to commit but untracked files present (use "git add" to track)
+   ```
 
 	You've only changed the one file. It is untracked so far by git.
 
 8. Add your file.
 
-    ```bash
-    $ git add TEST.md
-    ```
+   ```bash
+   $ git add TEST.md
+   ```
 
     That is the only _staged_ file. Stage is fancy word for work that Git is
     tracking.
 
 9. Sign and commit your change.
 
-    ```
-    $ git commit -s -m "Making a dry run test."
-    [dry-run-test 6e728fb] Making a dry run test
-     1 file changed, 1 insertion(+)
-     create mode 100644 TEST.md
-    ```
+   ```bash
+   $ git commit -s -m "Making a dry run test."
+   [dry-run-test 6e728fb] Making a dry run test
+    1 file changed, 1 insertion(+)
+    create mode 100644 TEST.md
+   ```
 
     Commit messages should have a short summary sentence of no more than 50
     characters. Optionally, you can also include a more detailed explanation
     after the summary. Separate the summary from any explanation with an empty
     line.
 
-8. Push your changes to GitHub.
+10. Push your changes to GitHub.
 
     ```bash
     $ git push --set-upstream origin dry-run-test
@@ -263,19 +258,21 @@ the branch to your fork on GitHub:
     Git prompts you for your GitHub username and password. Then, the command
     returns a result.
 
-        Counting objects: 13, done.
-        Compressing objects: 100% (2/2), done.
-        Writing objects: 100% (3/3), 320 bytes | 0 bytes/s, done.
-        Total 3 (delta 1), reused 0 (delta 0)
-        To https://github.com/moxiegirl/docker.git
-         * [new branch]      dry-run-test -> dry-run-test
-        Branch dry-run-test set up to track remote branch dry-run-test from origin.
+    ```bash
+    Counting objects: 13, done.
+    Compressing objects: 100% (2/2), done.
+    Writing objects: 100% (3/3), 320 bytes | 0 bytes/s, done.
+    Total 3 (delta 1), reused 0 (delta 0)
+    To https://github.com/moxiegirl/docker.git
+     * [new branch]      dry-run-test -> dry-run-test
+    Branch dry-run-test set up to track remote branch dry-run-test from origin.
+    ```
 
-9. Open your browser to GitHub.
+11. Open your browser to GitHub.
 
-10. Navigate to your Docker fork.
+12. Navigate to your Docker fork.
 
-11. Make sure the `dry-run-test` branch exists, that it has your commit, and the
+13. Make sure the `dry-run-test` branch exists, that it has your commit, and the
 commit is signed.
 
     ![Branch Signature](images/branch-sig.png)

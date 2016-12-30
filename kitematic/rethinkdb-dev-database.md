@@ -1,15 +1,9 @@
 ---
+advisory: kitematic
 description: Tutorial demonstrating the setup of an RethinkDB database for development
-keywords:
-- docker, documentation, about, technology, kitematic, gui, rethink,  tutorial
-menu:
-  main:
-    parent: toolbox_kitematic
-    weight: 3
-title: Creating a Local RethinkDB Database for Development
+keywords: docker, documentation, about, technology, kitematic, gui, rethink, tutorial
+title: 'Kitematic tutorial: Create a local RethinkDB database for development'
 ---
-
-# Kitematic Tutorial: Creating a Local RethinkDB Database for Development
 
 In this tutorial, you will:
 
@@ -44,7 +38,7 @@ for you). This means you can now reach RethinkDB via a client driver at
 ### (Advanced) Saving Data into RethinkDB with a local Node.js App
 
 Now, you'll create the RethinkDB example chat application running on your local
-OS X system to test drive your new containerized database.
+macOS system to test drive your new containerized database.
 
 First, if you don't have it yet, [download and install
 Node.js](http://nodejs.org/).
@@ -66,4 +60,3 @@ successfully used a RethinkDB container in Kitematic to build a real-time chat
 app. Happy coding!
 
 ![Rethink app preview](images/rethinkdb-preview.png)
-

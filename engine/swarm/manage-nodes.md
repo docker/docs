@@ -1,16 +1,8 @@
 ---
 description: Manage existing nodes in a swarm
-keywords:
-- guide, swarm mode, node
-menu:
-  main:
-    identifier: manage-nodes-guide
-    parent: engine_swarm
-    weight: 14
+keywords: guide, swarm mode, node
 title: Manage nodes in a swarm
 ---
-
-# Manage nodes in a swarm
 
 As part of the swarm management lifecycle, you may need to view or update a node as follows:
 
@@ -95,9 +87,9 @@ Engine Version:         1.12.0-dev
 
 You can modify node attributes as follows:
 
-* [change node availability](manage-nodes.md#change-node-availability)
-* [add or remove label metadata](manage-nodes.md#add-or-remove-label-metadata)
-* [change a node role](manage-nodes.md#promote-or-demote-a-node)
+* [change node availability](#change-node-availability)
+* [add or remove label metadata](#add-or-remove-label-metadata)
+* [change a node role](#promote-or-demote-a-node)
 
 ### Change node availability
 
@@ -117,7 +109,7 @@ $ docker node update --availability drain node-1
 node-1
 ```
 
-See [list nodes](manage-nodes.md#list-nodes) for descriptions of the different availability
+See [list nodes](#list-nodes) for descriptions of the different availability
 options.
 
 ### Add or remove label metadata
@@ -142,6 +134,20 @@ The labels you set for nodes using docker node update apply only to the node
 entity within the swarm. Do not confuse them with the docker daemon labels for
 [dockerd](../userguide/labels-custom-metadata.md#daemon-labels).
 
+Therefore, node labels can be used to limit critical tasks to nodes that meet
+certain requirements.  For example, schedule only on machines where special
+workloads should be run, such as machines that meet [PCI-SS
+compliance](https://www.pcisecuritystandards.org/).
+
+A compromised worker could not compromise these special workloads because it
+cannot change node labels.
+
+Engine labels, however, are still useful because some features that do not
+affect secure orchestration of containers might be better off set in a
+decentralized manner. For instance, an engine could have a label to indicate
+that it has a certain type of disk device, which may not be relevant to security
+directly. These labels are more easily "trusted" by the swarm orchestrator.
+
 Refer to the `docker service create` [CLI reference](../reference/commandline/service_create.md)
 for more information about service constraints.
 
@@ -151,9 +157,9 @@ You can promote a worker node to the manager role. This is useful when a
 manager node becomes unavailable or if you want to take a manager offline for
 maintenance. Similarly, you can demote a manager node to the worker role.
 
-Regardless of your reason to promote or demote a node, you should always
-maintain an odd number of manager nodes in the swarm. For more information refer
-to the [Swarm administration guide](admin_guide.md).
+>**Note: Maintaining a quorum** Regardless of your reason to promote or demote
+a node, you must always maintain a quorum of manager nodes in the
+swarm. For more information refer to the [Swarm administration guide](admin_guide.md).
 
 To promote a node or set of nodes, run `docker node promote` from a manager
 node:

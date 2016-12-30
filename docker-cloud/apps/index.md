@@ -1,15 +1,8 @@
 ---
 description: Manage your Docker Cloud Applications
-keywords:
-- applications, reference, Cloud
-menu:
-  main:
-    parent: apps
-    weight: -99
+keywords: applications, reference, Cloud
 title: Applications in Docker Cloud
 ---
-
-# Applications in Docker Cloud
 
 Applications in Docker Cloud are usually several Services linked together using
 the specifications from a [Stackfile](stacks.md) or a Compose file. You can also
@@ -28,7 +21,7 @@ each time its underlying services are updated.
 * [Redeploy running services](service-redeploy.md)
 * [Scale your service](service-scaling.md)
 * [Service API Roles](api-roles.md)
-* [Service discovery](service-links.md)
+* [Service discovery and links](service-links.md)
 * [Work with data volumes](volumes.md)
 * [Create a proxy or load balancer](load-balance-hello-world.md)
 

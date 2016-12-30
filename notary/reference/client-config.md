@@ -1,16 +1,8 @@
 ---
 description: Configuring the Notary client, server and signer.
-keywords:
-- docker, notary, notary-client, notary-server, notary server, notary-signer, notary
-  signer
-menu:
-  main:
-    parent: mn_notary_config
-    weight: 4
-title: Client Configuration
+keywords: docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer
+title: Notary client configuration file
 ---
-
-# Notary client configuration file
 
 This document is for power users of the [Notary client](../advanced_usage.md)
 who want to facilitate CLI interaction or specify custom options.

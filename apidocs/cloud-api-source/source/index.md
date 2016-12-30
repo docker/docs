@@ -78,6 +78,32 @@ HTTP responses are given in JSON format, so the following `Accept` header is req
 
 `Accept: application/json`
 
+### Namespaced endpoints
+
+Endpoints that are labeled as "namespaced" allow the users to operate over
+different namespaces, for example over an individual user namespace, or the
+namespace of an organization the user is a member of. A namespace identifies the
+owner of the resource.
+
+The namespace is optional. If left blank, it defaults to the authenticated user
+in the request. The namespace is set before the resource in the URL schema:
+`https://cloud.docker.com/api/<subsystem>/<version>/(optional_namespace/)<resource>/`
+
+Examples:
+
+- The user `exampleuser` wants to operate on the node cluster list endpoint in their own namespace. They can use either of the following urls:
+    - https://cloud.docker.com/api/infra/v1/nodecluster/  (namespace omitted, so will use the user authenticated in the request)
+    - https://cloud.docker.com/api/infra/v1/exampleuser/nodecluster/
+- The user wants to operate on the node cluster list endpoint in an organization called `exampleorg` (which they have permission to see):
+    - https://cloud.docker.com/api/infra/v1/exampleorg/nodecluster/
+
+### Namespaced endpoints in the docker-cloud CLI
+
+If you are using namespaces with the `docker-cloud` CLI, set them by changing
+the value of the `DOCKERCLOUD_NAMESPACE` environment variable. You can either
+set this globally, or specify it before each CLI command. To learn more, see the
+[Docker Cloud CLI README](https://github.com/docker/dockercloud-cli#namespace).
+
 ## Stream API
 
 ```python

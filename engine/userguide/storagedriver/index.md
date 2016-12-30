@@ -1,16 +1,8 @@
 ---
 description: Learn how select the proper storage driver for your container.
-keywords:
-- container, storage, driver, AUFS, btfs, devicemapper,zvfs
-menu:
-  main:
-    identifier: engine_driver
-    parent: engine_guide
-    weight: 7
+keywords: container, storage, driver, AUFS, btfs, devicemapper,zvfs
 title: Docker storage drivers
 ---
-
-# Docker storage drivers
 
 Docker relies on driver technology to manage the storage and interactions associated with images and the containers that run them. This section contains the following pages:
 

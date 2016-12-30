@@ -1,15 +1,10 @@
 ---
 description: Basic workflow for Docker contributions
-keywords:
-- contribute, issue, review, workflow, beginner, expert, squash, commit
-menu:
-  main:
-    parent: smn_workflow
-    weight: 2
+keywords: contribute, issue, review, workflow, beginner, expert, squash, commit
 title: Find and claim an issue
 ---
 
-<!-- 
+<!--
 note: don't use blank lines inside the style-block;
 hugo converts them to paragraphs, causing the styles to be ignored
 -->
@@ -39,9 +34,6 @@ hugo converts them to paragraphs, causing the styles to be ignored
 .gh-label.kinddocs { background-color: #B5E9D5; color: #333333; }
 </style>
 
-
-# Find and claim an issue
-
 As a contributor, you can work on any open issue you want. You can view
 issues in the Issues tab in every repository. If you are new to
 contributing, use the filter option to find suitable issues. You can
@@ -56,7 +48,6 @@ experience, and priority. You can filter using one or more labels. The
 kind and experience labels are useful for new contributors.
 
 The following table describes the kind labels.
-<strong class="foobar">kind/bug</strong>
 
 <table>
   <thead>
@@ -233,9 +224,6 @@ To sync your repository:
         Resolving deltas: 100% (79/79), done.
 	    From github.com:docker/docker
 	     * branch            master     -> FETCH_HEAD
-
-    This command says get all the changes from the `master` branch belonging to
-    the `upstream` remote.
 
 7. Rebase your local master with the `upstream/master`.
 

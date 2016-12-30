@@ -1,15 +1,8 @@
 ---
 description: Docker networking
-keywords:
-- network, networking, bridge, docker,  documentation
-menu:
-  main:
-    identifier: smn_networking_def
-    parent: smn_networking
+keywords: network, networking, bridge, docker,  documentation
 title: Default bridge network
 ---
-
-# Docker default bridge network
 
 With the introduction of the Docker networks feature, you can create your own
 user-defined networks. The Docker default bridge is created when you install
@@ -21,5 +14,5 @@ in this section are related to interacting with that default bridge network.
 - [Binding container ports to the host](binding.md)
 - [Build your own bridge](build-bridges.md)
 - [Configure container DNS](configure-dns.md)
-- [Customize the docker0 bridge](custom-docker0.md)  
-- [IPv6 with Docker](ipv6.md)  
+- [Customize the docker0 bridge](custom-docker0.md)
+- [IPv6 with Docker](ipv6.md)

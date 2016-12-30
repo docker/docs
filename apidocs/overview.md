@@ -1,17 +1,8 @@
 ---
 description: Learn how to use DTR APIs.
-keywords:
-- docker, registry, DTR, APIs
-menu:
-  main:
-    identifier: dtr_api_overview
-    parent: smn_dtrapi
-    weight: 0
-title: Overview
-type: _default
+keywords: docker, registry, DTR, APIs
+title: API overview
 ---
-
-# API Overview
 
 Docker Trusted Registry has an experimental API that you can use to manage
 DTR repositories, permissions, and settings.

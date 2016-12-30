@@ -1,17 +1,8 @@
 ---
 description: Frequently asked questions
-keywords:
-- windows faqs
-menu:
-  main:
-    identifier: docker-windows-faqs
-    parent: pinata_win_menu
-    weight: 4
-title: FAQs
+keywords: windows faqs
+title: Frequently asked questions (FAQ)
 ---
-
-#  Frequently Asked Questions (FAQs)
-
 
 >**Looking for popular FAQs on Docker for Windows?** Check out the [Docker
 Knowledge Hub](http://success.docker.com/) for knowledge base articles, FAQs,
@@ -30,15 +21,15 @@ This topic also has more information about the two channels.
 
 A: Two different download channels are available for Docker for Windows:
 
-* The stable channel provides a general availability release-ready installer for a fully baked and tested, more reliable app. The stable version of Docker
+* The **stable channel** provides a general availability release-ready installer for a fully baked and tested, more reliable app. The stable version of Docker
 for Windows comes with the latest released version of Docker Engine.  The
-release schedule is synched with Docker Engine releases and hotfixes.
+release schedule is synched with Docker Engine releases and hotfixes.  On the stable channel, you can select whether to send usage statistics and other data.
 
-* The beta channel provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of
+* The **beta channel** provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of
 Docker Engine. Bugs, crashes and issues are more likely to occur with the beta
 app, but you get a chance to preview new functionality, experiment, and provide
 feedback as the apps evolve. Releases are typically more frequent than for
-stable, often one or more per month.
+stable, often one or more per month.  Usage statistics and crash reports are sent by default. You do not have the option to disable this on the beta channel.
 
 **Q: Can I switch back and forth between stable and beta versions of Docker for Windows?**
 
@@ -156,6 +147,30 @@ cycles. Exit and start Docker to restore connectivity.
 
 Unfortunately, VirtualBox (and other hypervisors like VMWare) cannot run when
 Hyper-V is enabled on Windows.
+
+### Can I share local drives and filesystem with my Docker Machine VMs?
+
+No, you cannot share local drives with Docker Machine nodes when using Docker
+for Windows with Hyper-V. Shared drives can be made available to containers, but
+Docker for Windows does not support mounts for nodes you created with
+`docker-machine`.
+
+For more about sharing local drives with containers using Docker for Windows,
+see [Shared Drives](index.md#shared-drives) in the Getting Started topic.
+
+To learn more about using Docker for Windows and Docker Machine, see [What to
+know before you install](index.md#what-to-know-before-you-install) in the
+Getting Started topic. For more about Docker Machine itself, see [What is Docker
+Machine?](/machine/overview.md#what-is-docker-machine)
+
+### How do I run Windows containers on Docker on Windows Server 2016?
+
+See [About Windows containers and Windows Server
+2016](index.md#about-windows-containers-and-windows-server-2016).
+
+A full tutorial is available in [docker/labs](https://github.com/docker/labs) at
+[Getting Started with Windows
+Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
 
 ### Why is Windows 10 Home not supported?
 

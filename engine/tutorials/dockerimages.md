@@ -1,20 +1,11 @@
 ---
-aliases:
+description: How to work with Docker images.
+keywords: documentation, docs, the docker guide, docker guide, docker, docker platform, docker.io, Docker images, Docker image, image management, Docker repos, Docker repositories, docker, docker tag, docker tags, Docker Hub, collaboration
+redirect_from:
 - /engine/userguide/containers/dockerimages/
 - /engine/userguide/dockerimages/
-description: How to work with Docker images.
-keywords:
-- documentation, docs, the docker guide, docker guide, docker, docker platform, docker.io,
-  Docker images, Docker image, image management, Docker repos, Docker repositories,
-  docker, docker tag, docker tags, Docker Hub,  collaboration
-menu:
-  main:
-    parent: engine_learn_menu
-    weight: -4
 title: Build your own images
 ---
-
-# Build your own images
 
 Docker images are the basis of containers. Each time you've used `docker run`
 you told it which image you wanted. In the previous sections of the guide you
@@ -54,7 +45,7 @@ launched a container using that image. When you list images, you get three cruci
 
 > **Tip:**
 > You can use [a third-party dockviz tool](https://github.com/justone/dockviz)
-> or the [Image layers site](https://imagelayers.io/) to display  
+> or the [Image layers site](https://imagelayers.io/) to display
 > visualizations of image data.
 
 A repository potentially holds multiple variants of an image. In the case of
@@ -136,7 +127,7 @@ You can see the command returns a lot of images that use the term `sinatra`.
 You've received a list of image names, descriptions, Stars (which measure the
 social popularity of images - if a user likes an image then they can "star" it),
 and the Official and Automated build statuses. [Official
-Repositories](https://docs.docker.com/docker-hub/official_repos) are a carefully
+Repositories](/docker-hub/official_repos) are a carefully
 curated set of Docker repositories supported by Docker, Inc.  Automated
 repositories are [Automated Builds](dockerrepos.md#automated-builds) that allow
 you to validate the source and content of an image.
@@ -189,7 +180,7 @@ you'd like to update.
 
 Inside our running container first let's update Ruby:
 
-    root@0b2616b0e5a8:/# apt-get install -y ruby2.0-dev
+    root@0b2616b0e5a8:/# apt-get install -y ruby2.0-dev ruby2.0
 
 Now let's add the `json` gem.
 
@@ -567,6 +558,35 @@ Delete the `training/sinatra` image as you don't need it anymore.
 
 > **Note:** To remove an image from the host, please make sure
 > that there are no containers actively based on it.
+
+## Check size of images and containers
+
+An image is
+[stored in layers](../userguide/storagedriver/imagesandcontainers.md),
+shared with other images on the host, so the real disk usage depends on
+how much layer overlap is happening between images on a host.
+
+A container runs on
+[a writable layer](../userguide/storagedriver/imagesandcontainers.md#/container-and-layers)
+on top of a readonly rootfs.
+
+Use `docker history` to see the size of image layers on your host:
+
+    $ docker history centos:centos7
+
+    IMAGE               CREATED             CREATED BY                                      SIZE
+    970633036444        6 weeks ago         /bin/sh -c #(nop) CMD ["/bin/bash"]             0 B
+    <missing>           6 weeks ago         /bin/sh -c #(nop) LABEL name=CentOS Base Imag   0 B
+    <missing>           6 weeks ago         /bin/sh -c #(nop) ADD file:44ef4e10b27d8c464a   196.7 MB
+    <missing>           10 weeks ago        /bin/sh -c #(nop) MAINTAINER https://github.c   0 B
+
+Check the size of containers with `docker ps -s`:
+
+    $ docker ps -s
+
+    CONTAINER ID        IMAGE                                                          COMMAND                  CREATED              STATUS              PORTS                    NAMES               SIZE
+    cb7827c19ef7        docker-docs:is-11160-explain-image-container-size-prediction   "hugo server --port=8"   About a minute ago   Up About a minute   0.0.0.0:8000->8000/tcp   evil_hodgkin        0 B (virtual 949.2 MB)
+
 
 # Next steps
 

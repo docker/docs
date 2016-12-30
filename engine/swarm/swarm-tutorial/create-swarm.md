@@ -1,23 +1,19 @@
 ---
 description: Initialize the swarm
-keywords:
-- tutorial, cluster management, swarm mode
-menu:
-  main:
-    identifier: initialize-swarm
-    parent: swarm-tutorial
-    weight: 12
+keywords: tutorial, cluster management, swarm mode
 title: Create a swarm
 ---
-
-# Create a swarm
 
 After you complete the [tutorial setup](index.md) steps, you're ready
 to create a swarm. Make sure the Docker Engine daemon is started on the host
 machines.
 
-1. Open a terminal and ssh into the machine where you want to run your manager
+1.  Open a terminal and ssh into the machine where you want to run your manager
 node. For example, the tutorial uses a machine named `manager1`.
+
+    ```bash
+    docker-machine ssh manager1
+    ```
 
 2.  Run the following command to create a new swarm:
 

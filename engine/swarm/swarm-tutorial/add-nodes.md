@@ -1,16 +1,8 @@
 ---
 description: Add nodes to the swarm
-keywords:
-- tutorial, cluster management, swarm
-menu:
-  main:
-    identifier: add-nodes
-    parent: swarm-tutorial
-    weight: 13
+keywords: tutorial, cluster management, swarm
 title: Add nodes to the swarm
 ---
-
-# Add nodes to the swarm
 
 Once you've [created a swarm](create-swarm.md) with a manager node, you're ready
 to add worker nodes.

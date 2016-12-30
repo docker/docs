@@ -19,11 +19,11 @@
 	"last_seen": "Thu, 25 Sep 2014 13:14:44 +0000",
 	"memory": 1792,
 	"nickname": "fc1a5bb9-user.node.dockerapp.io",
-	"node_cluster": "/api/infra/v1/nodecluster/d787a4b7-d525-4061-97a0-f423e8f1d229/",
-	"node_type": "/api/infra/v1/nodetype/testing-provider/testing-type/",
+	"node_cluster": "/api/infra/v1/user_namespace/nodecluster/d787a4b7-d525-4061-97a0-f423e8f1d229/",
+	"node_type": "/api/infra/v1/user_namespace/nodetype/testing-provider/testing-type/",
 	"public_ip": "10.45.2.11",
 	"region": "/api/infra/v1/region/testing-provider/testing-region/",
-	"resource_uri": "/api/infra/v1/node/fc1a5bb9-17f5-4819-b667-8c7cd819e949/",
+	"resource_uri": "/api/infra/v1/user_namespace/node/fc1a5bb9-17f5-4819-b667-8c7cd819e949/",
 	"state": "Deployed",
 	"tags": [
 		{"name": "tag_one"},
@@ -35,6 +35,8 @@
 ```
 
 A node is a virtual machine provided by a cloud provider where containers can be deployed.
+
+This is a [namespaced endpoint](#namespaced-endpoints).
 
 ### Attributes
 
@@ -74,14 +76,6 @@ Unreachable | The node is deployed but Docker Cloud cannot connect to the docker
 Upgrading | The node docker daemon is being upgraded. No actions allowed in this state.
 Terminating | The node is being terminated in the cloud provider. No actions allowed in this state.
 Terminated | The node has been terminated and is no longer present in the cloud provider. No actions allowed in this state.
-
-### Node Last Metric attributes
-
-Attribute | Description
---------- | -----------
-cpu       | CPU percentage usage
-memory    | Memory usage in bytes
-disk      | Disk storage usage in bytes
 
 
 ## List all nodes
@@ -123,7 +117,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/infra/v1/node/`
+`GET /api/infra/v1/[optional_namespace/]node/`
 
 ### Query Parameters
 
@@ -177,7 +171,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`GET /api/infra/v1/node/(uuid)/`
+`GET /api/infra/v1/[optional_namespace/]node/(uuid)/`
 
 ### Path Parameters
 
@@ -232,7 +226,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`PATCH /api/infra/v1/node/(uuid)/`
+`PATCH /api/infra/v1/[optional_namespace/]node/(uuid)/`
 
 ### Path Parameters
 
@@ -290,7 +284,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/infra/v1/node/(uuid)/docker-upgrade/`
+`POST /api/infra/v1/[optional_namespace/]node/(uuid)/docker-upgrade/`
 
 ### Path Parameters
 
@@ -316,7 +310,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`POST /api/infra/v1/node/(uuid)/health-check/`
+`POST /api/infra/v1/[optional_namespace/]node/(uuid)/health-check/`
 
 ### Path Parameters
 
@@ -367,7 +361,7 @@ Available in Docker Cloud's **REST API**
 
 ### HTTP Request
 
-`DELETE /api/infra/v1/node/(uuid)/`
+`DELETE /api/infra/v1/[optional_namespace/]node/(uuid)/`
 
 ### Path Parameters
 

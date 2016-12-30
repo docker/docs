@@ -1,14 +1,10 @@
 ---
 description: Introduction to project contribution at Docker
-keywords:
-- Gordon, introduction, turtle, machine, libcontainer,  how to
-menu:
-  main:
-    parent: smn_engine_contrib
+keywords: Gordon, introduction, turtle, machine, libcontainer,  how to
+redirect_from:
+- /project/who-written-for/
 title: README first
 ---
-
-# README first
 
 This section of the documentation contains a guide for Docker users who want to
 contribute code or documentation to the Docker Engine project. As a community, we
@@ -61,5 +57,5 @@ Please feel free to skim past information you find obvious or boring.
 ## How to get started
 
 Start by getting the software you require. If you are on Mac or Linux, go to
-[get the required software for Linux or OS X](software-required.md). If you are
+[get the required software for Linux or macOS](software-required.md). If you are
 on Windows, see [get the required software for Windows](software-req-win.md).

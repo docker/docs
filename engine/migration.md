@@ -1,15 +1,8 @@
 ---
 description: Migrate to Engine 1.10
-keywords:
-- docker, documentation, engine, upgrade, migration
-menu:
-  main:
-    parent: engine_use
-    weight: 79
+keywords: docker, documentation, engine, upgrade, migration
 title: Migrate to Engine 1.10
 ---
-
-# Migrate to Engine 1.10
 
 Starting from version 1.10 of Docker Engine, we completely change the way image
 data is addressed on disk. Previously, every image and layer used a randomly

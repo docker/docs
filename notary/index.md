@@ -1,16 +1,8 @@
 ---
 description: List of Notary Documentation
-keywords:
-- docker, notary, trust, image, signing, repository, tuf
-menu:
-  main:
-    identifier: mn_notary
-    parent: mn_components
-    weight: 4
+keywords: docker, notary, trust, image, signing, repository, tuf
 title: Docker Notary
 ---
-
-# List of Notary Documentation
 
 * [Getting Started](getting_started.md)
 * [Advanced Usage](advanced_usage.md)

@@ -1,19 +1,12 @@
 ---
-aliases:
+description: Using the Docker Cloud CLI on Linux, Windows, and macOS, installing, updating, uninstall
+keywords: cloud, command-line, CLI
+redirect_from:
 - /docker-cloud/getting-started/intermediate/installing-cli/
 - /docker-cloud/getting-started/installing-cli/
 - /docker-cloud/tutorials/installing-cli/
-description: Using the Docker Cloud CLI on Linux, Windows, and Mac OS X, installing,
-  updating, uninstall
-keywords:
-- cloud, command-line, CLI
-menu:
-  main:
-    parent: docker-cloud
 title: The Docker Cloud CLI
 ---
-
-# The Docker Cloud CLI
 
 Docker Cloud maintains a Command Line Interface (CLI) tool that you can use
 to interact with the service. We highly recommend installing the CLI, as it will
@@ -29,11 +22,13 @@ Install the docker-cloud CLI either by running a Docker container, or by using t
 
 If you have Docker Engine installed locally, you can simply run the following command regardless of which operating system you are using.
 
-```
+```none
 docker run dockercloud/cli -h
 ```
 
-This runs a container that installs the docker-cloud CLI for you. Learn more about this container [here](https://github.com/docker/dockercloud-cli#docker-image).
+This runs a container that installs the docker-cloud CLI for you. Learn more
+about this container
+[here](https://github.com/docker/dockercloud-cli#docker-image).
 
 #### Install for Linux or Windows
 
@@ -42,10 +37,12 @@ Open your terminal or command shell and execute the following command:
 ```bash
 $ pip install docker-cloud
 ```
+If you encounter errors on Linux machines, make sure that `python-dev` is installed.
+For example, on Ubuntu, run the following command: `apt-get install python-dev`
 
-#### Install on Mac OS X
+#### Install on macOS
 
-We recommend installing Docker CLI for OS X using Homebrew. If you don't have `brew` installed, follow the instructions here: <a href="http://brew.sh" target="_blank">http://brew.sh</a>
+We recommend installing Docker CLI for macOS using Homebrew. If you don't have `brew` installed, follow the instructions here: <a href="http://brew.sh" target="_blank">http://brew.sh</a>
 
 Once Homebrew is installed, open Terminal and run the following command:
 
@@ -68,7 +65,7 @@ First, you should log in using the `docker` CLI and the `docker login` command.
 Your Docker ID, which you also use to log in to Docker Hub, is also used for
 logging in to Docker Cloud.
 
-```bash
+```none
 $ docker login
 Username: user
 Password:
@@ -80,19 +77,44 @@ Login succeeded!
 
 See the [Developer documentation](/apidocs/docker-cloud.md) for more information on using the CLI and our APIs.
 
+
+## Use the docker-cloud CLI with an organization
+
+When you use the docker-cloud CLI, it authenticates against the Docker Cloud
+service with the user credentials saved by the `docker login` command. To use
+the CLI to interact with objects belonging to an [Organization](orgs.md), you
+must override the `DOCKERCLOUD_NAMESPACE` environment variable that sets this
+user.
+
+For example:
+
+```none
+$ export DOCKERCLOUD_NAMESPACE=myorganization
+```
+
+You can also set the `DOCKERCLOUD_NAMESPACE` variable before each CLI command.
+for example:
+
+```none
+$ DOCKERCLOUD_NAMESPACE=myteam docker container ps
+```
+
+To learn more, see the [Docker Cloud CLI README](https://github.com/docker/dockercloud-cli#namespace).
+
+
 ## Upgrade the docker-cloud CLI
 
 Periodically, Docker will add new features and fix bugs in the existing CLI. To use these new features, you must upgrade the CLI.
 
 #### Upgrade on the docker-cloud CLI on Linux or Windows
 
-```
+```none
 $ pip install -U docker-cloud
 ```
 
-#### Upgrade the docker-cloud CLI on Mac OS X
+#### Upgrade the docker-cloud CLI on macOS
 
-```
+```none
 $ brew update && brew upgrade docker-cloud
 ```
 
@@ -105,14 +127,14 @@ with other applications on your system, you may want to uninstall and reinstall.
 
 Open your terminal or command shell and execute the following command:
 
-```
+```none
 $ pip uninstall docker-cloud
 ```
 
-#### Uninstall on Mac OS X
+#### Uninstall on macOS
 
 Open your Terminal application and execute the following command:
 
-```
+```none
 $ brew uninstall docker-cloud
 ```

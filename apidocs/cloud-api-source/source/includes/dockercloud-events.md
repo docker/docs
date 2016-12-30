@@ -9,9 +9,9 @@
 	"type": "action",
 	"action": "update",
 	"parents": [
-		"/api/app/v1/container/0b0e3538-88df-4f07-9aed-3a3cc4175076/"
+		"/api/app/v1/user_namespace/container/0b0e3538-88df-4f07-9aed-3a3cc4175076/"
 	],
-	"resource_uri": "/api/app/v1/action/49f0efe8-a704-4a10-b02f-f96344fabadd/",
+	"resource_uri": "/api/app/v1/user_namespace/action/49f0efe8-a704-4a10-b02f-f96344fabadd/",
 	"state": "Success",
 	"uuid": "093ba3bb-08dd-48f0-8f12-4d3b85ef85b3",
 	"datetime": "2016-02-01T16:47:28Z"
@@ -27,6 +27,7 @@ Docker Cloud events are generated every time any of the following objects is cre
 * Node
 * Action
 
+This is a [namespaced endpoint](#namespaced-endpoints).
 
 ### Attributes
 
@@ -82,17 +83,23 @@ events.run_forever()
 ```go
 import "github.com/docker/go-dockercloud/dockercloud"
 
-c := make(chan dockercloud.Event)
-e := make(chan error)
+// Listens for container events only
+myFilter := dockercloud.NewStreamFilter(&dockercloud.EventFilter{Type: "container"})
 
-go dockercloud.Events(c, e)
+stream := dockercloud.NewStream(myFilter)
+
+if err := stream.Connect(); err == nil {
+	go stream.RunForever()
+} else {
+	log.Print("Connect err: " + err.Error())
+}
 
 for {
 	select {
-		case event := <-c:
-			log.Println(event)
-		case err := <-e:
-			log.Println(err)
+	case event := <-stream.MessageChan:
+		log.Println(event)
+	case err := <-stream.ErrorChan:
+		log.Println(err)
 	}
 }
 ```
@@ -117,4 +124,12 @@ Available in Docker Cloud's **STREAM API**
 
 ### HTTP Request
 
-`GET /api/audit/v1/events/`
+`GET /api/audit/v1/[optional_namespace/]events/`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+type | Filter by type
+object | Filter by object resource URI
+parent | Filter by object parents

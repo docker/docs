@@ -1,24 +1,17 @@
 ---
-aliases:
-- /engine/articles/host_integration/
 description: How to generate scripts for upstart, systemd, etc.
-keywords:
-- systemd, upstart, supervisor, docker, documentation,  host integration
-menu:
-  main:
-    parent: engine_admin
-    weight: "5"
-title: Automatically start containers
+keywords: systemd, upstart, supervisor, docker, documentation,  host integration
+redirect_from:
+- /engine/articles/host_integration/
+title: Start containers automatically
 ---
 
-# Automatically start containers
-
-As of Docker 1.2,
-[restart policies](../reference/run.md#restart-policies-restart) are the
-built-in Docker mechanism for restarting containers when they exit. If set,
-restart policies will be used when the Docker daemon starts up, as typically
-happens after a system boot. Restart policies will ensure that linked containers
-are started in the correct order.
+As of Docker 1.2, [restart
+policies](../reference/run.md#restart-policies-restart) are the built-in Docker
+mechanism for restarting containers when they exit. If set, restart policies
+will be used when the Docker daemon starts up, as typically happens after a
+system boot. Restart policies will ensure that linked containers are started in
+the correct order.
 
 If restart policies don't suit your needs (i.e., you have non-Docker processes
 that depend on Docker containers), you can use a process manager like
@@ -85,7 +78,8 @@ in the `/etc/systemd/system` directory, e.g.
 If you need to pass options to the redis container (such as `--env`),
 then you'll need to use `docker run` rather than `docker start`. This will
 create a new container every time the service is started, which will be stopped
-and removed when the service is stopped.
+and removed when the service is stopped. Make sure you don't use "`-d`" for
+"detached mode". The command run from "`ExecStart`" needs to run in the foreground.
 
     [Service]
     ...

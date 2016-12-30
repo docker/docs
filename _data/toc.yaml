@@ -1,12 +1,16 @@
 toc:
 - title: Welcome to the Docs
   path: /
+- sectiontitle: Docker ID
+  section:
+  - path: /docker-id/
+    title: Docker ID accounts
 - sectiontitle: Docker Engine
   section:
   - sectiontitle: Install
     section:
     - path: /engine/installation/mac/
-      title: Installation on Mac OS X
+      title: Installation on macOS
     - path: /engine/installation/windows/
       title: Installation on Windows
     - sectiontitle: On Linux distributions
@@ -25,8 +29,6 @@ toc:
         title: Installation on Arch Linux
       - path: /engine/installation/linux/cruxlinux/
         title: Installation on CRUX Linux
-      - path: /engine/installation/linux/frugalware/
-        title: Installation on FrugalWare
       - path: /engine/installation/linux/gentoolinux/
         title: Installation on Gentoo
       - path: /engine/installation/linux/oracle/
@@ -111,6 +113,8 @@ toc:
         title: Work with network commands
       - path: /engine/userguide/networking/get-started-overlay/
         title: Get started with multi-host networking
+      - path: /engine/userguide/networking/get-started-macvlan/
+        title: Get started with macvlan network driver
       - path: /engine/userguide/networking/overlay-security-model/
         title: Swarm mode overlay network security model
       - path: /engine/userguide/networking/configure-dns/
@@ -139,6 +143,8 @@ toc:
       title: Configuring and running Docker
     - path: /engine/admin/host_integration/
       title: Automatically start containers
+    - path: /engine/admin/resource_constraints/
+      title: Limit a container's resources
     - path: /engine/admin/live-restore/
       title: Keep containers alive during daemon downtime
     - path: /engine/admin/systemd/
@@ -167,6 +173,8 @@ toc:
         title: Splunk logging driver
     - path: /engine/admin/dsc/
       title: PowerShell DSC Usage
+    - path: /engine/admin/ansible/
+      title: Using Ansible
     - path: /engine/admin/chef/
       title: Using Chef
     - path: /engine/admin/puppet/
@@ -177,6 +185,10 @@ toc:
       title: Runtime metrics
     - path: /engine/admin/ambassador_pattern_linking/
       title: Link via an ambassador container
+  - sectiontitle: Troubleshoot Docker Engine
+    section:
+    - path: /engine/admin/troubleshooting_volume_errors.md
+      title: Troubleshoot volume problems
   - sectiontitle: Manage a swarm
     section:
     - path: /engine/swarm/
@@ -203,6 +215,8 @@ toc:
         title: Apply rolling updates
       - path: /engine/swarm/swarm-tutorial/drain-node/
         title: Drain a node
+      - path: /engine/swarm/ingress/
+        title: Use swarm mode routing mesh
     - sectiontitle: How swarm mode works
       section:
       - path: /engine/swarm/how-swarm-mode-works/nodes/
@@ -253,6 +267,8 @@ toc:
       title: Seccomp security profiles for Docker
   - sectiontitle: Extend Engine
     section:
+    - path: /engine/extend/
+      title: Managed plugin system
     - path: /engine/extend/plugins_authorization/
       title: Access authorization plugin
     - path: /engine/extend/plugins/
@@ -625,232 +641,452 @@ toc:
       title: CS Engine release notes
     - path: /cs-engine/release-notes/prior-release-notes/
       title: Prior CS Engine release notes
-- sectiontitle: Universal Control Plane
+- sectiontitle: Docker Datacenter
   section:
-  - path: /ucp/overview/
-    title: Universal Control Plane overview
-  - path: /ucp/install-sandbox/
-    title: Evaluate UCP in a sandbox
-  - path: /ucp/architecture/
-    title: Architecture
-  - sectiontitle: Installation
+  - path: /datacenter/install/aws/
+    title: Deploy Datacenter on AWS
+  - path: /datacenter/install/linux/
+    title: Deploy Datacenter on Linux
+  - sectiontitle: Universal Control Plane 2.0
     section:
-    - path: /ucp/installation/system-requirements/
-      title: System requirements
-    - path: /ucp/installation/plan-production-install/
-      title: Plan a production installation
-    - path: /ucp/installation/install-production/
-      title: Install UCP for production
-    - path: /ucp/installation/install-offline/
-      title: Install offline
-    - path: /ucp/installation/license/
-      title: License UCP
-    - path: /ucp/installation/upgrade/
-      title: Upgrade UCP
-    - path: /ucp/installation/uninstall/
-      title: Uninstall UCP
-    - sectiontitle: UCP tool reference
+    - path: /datacenter/ucp/2.0/guides/
+      title: Universal Control Plane overview
+    - path: /datacenter/ucp/2.0/guides/architecture/
+      title: Architecture
+    - sectiontitle: Installation
       section:
-      - path: /ucp/reference/backup/
+      - path: /datacenter/ucp/2.0/guides/installation/system-requirements/
+        title: System requirements
+      - path: /datacenter/ucp/2.0/guides/installation/plan-production-install/
+        title: Plan a production installation
+      - path: /datacenter/ucp/2.0/guides/installation/
+        title: Install UCP for production
+      - path: /datacenter/ucp/2.0/guides/installation/install-offline/
+        title: Install offline
+      - path: /datacenter/ucp/2.0/guides/installation/license/
+        title: License UCP
+      - path: /datacenter/ucp/2.0/guides/installation/scale-your-cluster/
+        title: Scale your cluster
+      - path: /datacenter/ucp/2.0/guides/installation/upgrade/
+        title: Upgrade UCP
+      - path: /datacenter/ucp/2.0/guides/installation/uninstall/
+        title: Uninstall UCP
+    - sectiontitle: Access UCP
+      section:
+      - path: /datacenter/ucp/2.0/guides/access-ucp/
+        title: Web-based access
+      - path: /datacenter/ucp/2.0/guides/access-ucp/cli-based-access/
+        title: CLI-based access
+    - sectiontitle: Configuration
+      section:
+      - path: /datacenter/ucp/2.0/guides/configuration/
+        title: Use externally-signed certificates
+      - path: /datacenter/ucp/2.0/guides/configuration/configure-logs/
+        title: Configure UCP logging
+      - path: /datacenter/ucp/2.0/guides/configuration/integrate-with-dtr/
+        title: Integrate with Docker Trusted Registry
+      - path: /datacenter/ucp/2.0/guides/configuration/integrate-with-ldap/
+        title: Integrate with LDAP
+      - path: /datacenter/ucp/2.0/guides/configuration/route-hostnames/
+        title: Route hostnames to services
+    - sectiontitle: Monitor and troubleshoot
+      section:
+      - path: /datacenter/ucp/2.0/guides/monitor/
+        title: Monitor your cluster
+      - path: /datacenter/ucp/2.0/guides/monitor/troubleshoot/
+        title: Troubleshoot your cluster
+      - path: /datacenter/ucp/2.0/guides/monitor/troubleshoot-configurations/
+        title: Troubleshoot cluster configurations
+    - sectiontitle: High-availability
+      section:
+      - path: /datacenter/ucp/2.0/guides/high-availability/
+        title: Set up high availability
+      - path: /datacenter/ucp/2.0/guides/high-availability/backups-and-disaster-recovery/
+        title: Backups and disaster recovery
+    - sectiontitle: User management
+      section:
+      - path: /datacenter/ucp/2.0/guides/user-management/
+        title: Authentication and authorization
+      - path: /datacenter/ucp/2.0/guides/user-management/create-and-manage-users/
+        title: Create and manage users
+      - path: /datacenter/ucp/2.0/guides/user-management/create-and-manage-teams/
+        title: Create and manage teams
+      - path: /datacenter/ucp/2.0/guides/user-management/permission-levels/
+        title: Permission levels
+    - sectiontitle: Applications
+      section:
+      - path: /datacenter/ucp/2.0/guides/applications/
+        title: Deploy an app from the UI
+      - path: /datacenter/ucp/2.0/guides/applications/deploy-app-cli/
+        title: Deploy an app from the CLI
+    - sectiontitle: Content trust
+      section:
+      - path: /datacenter/ucp/2.0/guides/content-trust/
+        title: Run only images you trust
+      - path: /datacenter/ucp/2.0/guides/content-trust/manage-trusted-repositories/
+        title: Manage trusted repositories
+      - path: /datacenter/ucp/2.0/guides/content-trust/continuous-integration/
+        title: Use trusted images for continuous integration
+    - sectiontitle: CLI reference
+      section:
+      - path: /datacenter/ucp/2.0/reference/cli/
+        title: docker/ucp overview
+      - path: /datacenter/ucp/2.0/reference/cli/backup/
         title: backup
-      - path: /ucp/reference/dump-certs/
+      - path: /datacenter/ucp/2.0/reference/cli/dump-certs/
         title: dump-certs
-      - path: /ucp/reference/engine-discovery/
-        title: engine-discovery
-      - path: /ucp/reference/fingerprint/
+      - path: /datacenter/ucp/2.0/reference/cli/fingerprint/
         title: fingerprint
-      - path: /ucp/reference/help/
-        title: help
-      - path: /ucp/reference/id/
+      - path: /datacenter/ucp/2.0/reference/cli/id/
         title: id
-      - path: /ucp/reference/images/
+      - path: /datacenter/ucp/2.0/reference/cli/images/
         title: images
-      - path: /ucp/reference/install/
+      - path: /datacenter/ucp/2.0/reference/cli/install/
         title: install
-      - path: /ucp/reference/join/
-        title: join
-      - path: /ucp/reference/regen-certs/
-        title: regen-certs.md
-      - path: /ucp/reference/restart/
+      - path: /datacenter/ucp/2.0/reference/cli/restart/
         title: restart
-      - path: /ucp/reference/restore/
+      - path: /datacenter/ucp/2.0/reference/cli/restore/
         title: restore
-      - path: /ucp/reference/stop/
+      - path: /datacenter/ucp/2.0/reference/cli/stop/
         title: stop
-      - path: /ucp/reference/support/
+      - path: /datacenter/ucp/2.0/reference/cli/support/
         title: support
-      - path: /ucp/reference/uninstall/
-        title: uninstall
-      - path: /ucp/reference/upgrade/
+      - path: /datacenter/ucp/2.0/reference/cli/uninstall-ucp/
+        title: uninstall-ucp
+      - path: /datacenter/ucp/2.0/reference/cli/upgrade/
         title: upgrade
-  - sectiontitle: Access UCP
+    - path: /datacenter/ucp/2.0/guides/support/
+      title: Get support
+    - path: /datacenter/ucp/2.0/guides/release-notes/
+      title: Release Notes
+  - sectiontitle: Docker Trusted Registry 2.1
     section:
-    - path: /ucp/access-ucp/web-based-access/
-      title: Web-based access
-    - path: /ucp/access-ucp/cli-based-access/
-      title: CLI-based access
-  - sectiontitle: Configuration
-    section:
-    - path: /ucp/configuration/use-externally-signed-certs/
-      title: Use externally-signed certificates
-    - path: /ucp/configuration/configure-logs/
-      title: Configure UCP logging
-    - path: /ucp/configuration/dtr-integration/
-      title: Integrate with Docker Trusted Registry
-    - path: /ucp/configuration/ldap-integration/
-      title: Integrate with LDAP
-    - path: /ucp/configuration/multi-host-networking/
-      title: Set up container networking
-  - sectiontitle: Monitor and troubleshoot
-    section:
-    - path: /ucp/monitor/monitor-ucp/
-      title: Monitor your cluster
-    - path: /ucp/monitor/troubleshoot-ucp/
-      title: Troubleshoot your cluster
-    - path: /ucp/monitor/troubleshoot-configurations/
-      title: Troubleshoot cluster configurations
-  - sectiontitle: High-availability
-    section:
-    - path: /ucp/high-availability/set-up-high-availability/
-      title: Set up high availability
-    - path: /ucp/high-availability/replicate-cas/
-      title: Replicate CAs for high availability
-    - path: /ucp/high-availability/backups-and-disaster-recovery/
-      title: Backups and disaster recovery
-  - sectiontitle: User management
-    section:
-    - path: /ucp/user-management/authentication-and-authorization/
-      title: Authentication and authorization
-    - path: /ucp/user-management/create-and-manage-users/
-      title: Create and manage users
-    - path: /ucp/user-management/create-and-manage-teams/
-      title: Create and manage teams
-    - path: /ucp/user-management/permission-levels/
-      title: Permission levels
-  - sectiontitle: Applications
-    section:
-    - path: /ucp/applications/deploy-app-ui/
-      title: Deploy an app from the UI
-    - path: /ucp/applications/deploy-app-cli/
-      title: Deploy an app from the CLI
-  - path: /ucp/support/
-    title: Get support
-  - path: /ucp/release_notes/
-    title: Release Notes
-- sectiontitle: Docker Trusted Registry
-  section:
-  - path: /docker-trusted-registry/
-    title: Docker Trusted Registry overview
-  - path: /docker-trusted-registry/architecture/
-    title: Architecture
-  - sectiontitle: Installation
-    section:
-    - path: /docker-trusted-registry/install/system-requirements/
-      title: System requirements
-    - path: /docker-trusted-registry/install/
-      title: Install Docker Trusted Registry
-    - path: /docker-trusted-registry/install/install-dtr-offline/
-      title: Install offline
-    - path: /docker-trusted-registry/install/license/
-      title: License DTR
-    - sectiontitle: Upgrade
+    - path: /datacenter/dtr/2.1/guides/
+      title: Docker Trusted Registry overview
+    - path: /datacenter/dtr/2.1/guides/architecture/
+      title: Architecture
+    - sectiontitle: Installation
       section:
-      - path: /docker-trusted-registry/install/upgrade/upgrade-major/
-        title: Upgrade from 1.4.3
-      - path: /docker-trusted-registry/install/upgrade/
-        title: Upgrade from 2.0.0
-    - path: /docker-trusted-registry/install/uninstall/
-      title: Uninstall
-    - sectiontitle: docker/dtr image reference
+      - path: /datacenter/dtr/2.1/guides/install/system-requirements/
+        title: System requirements
+      - path: /datacenter/dtr/2.1/guides/install/
+        title: Install Docker Trusted Registry
+      - path: /datacenter/dtr/2.1/guides/install/install-offline/
+        title: Install offline
+      - path: /datacenter/dtr/2.1/guides/install/license/
+        title: License your deployment
+      - path: /datacenter/dtr/2.1/guides/install/scale-your-deployment/
+        title: Scale your deployment
+      - path: /datacenter/dtr/2.1/guides/install/upgrade/
+        title: Upgrade
+      - path: /datacenter/dtr/2.1/guides/install/uninstall/
+        title: Uninstall
+    - sectiontitle: Configuration
       section:
-      - path: /docker-trusted-registry/reference/
-        title: Overview
-      - path: /docker-trusted-registry/reference/backup/
-        title: backup
-      - path: /docker-trusted-registry/reference/dumpcerts/
-        title: dumpcerts
-      - path: /docker-trusted-registry/reference/install/
-        title: install
-      - path: /docker-trusted-registry/reference/join/
-        title: join
-      - path: /docker-trusted-registry/reference/migrate/
-        title: migrate
-      - path: /docker-trusted-registry/reference/reconfigure/
-        title: reconfigure
-      - path: /docker-trusted-registry/reference/remove/
-        title: remove
-      - path: /docker-trusted-registry/reference/restore/
-        title: restore
-  - sectiontitle: Configuration
+      - path: /datacenter/dtr/2.1/guides/configure/
+        title: Use your own certificates
+      - path: /datacenter/dtr/2.1/guides/configure/configure-storage/
+        title: Storage configuration
+      - path: /datacenter/dtr/2.1/guides/configure/use-nfs/
+        title: Use NFS
+    - sectiontitle: Monitor and troubleshoot
+      section:
+      - path: /datacenter/dtr/2.1/guides/monitor-troubleshoot/
+        title: Monitor DTR
+      - path: /datacenter/dtr/2.1/guides/monitor-troubleshoot/troubleshoot/
+        title: Troubleshoot DTR
+    - sectiontitle: High-availability
+      section:
+      - path: /datacenter/dtr/2.1/guides/high-availability/
+        title: Set up high availability
+      - path: /datacenter/dtr/2.1/guides/high-availability/backups-and-disaster-recovery/
+        title: Backups and disaster recovery
+    - sectiontitle: User management
+      section:
+      - path: /datacenter/dtr/2.1/guides/user-management/
+        title: Authentication and authorization
+      - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-users/
+        title: Create and manage users
+      - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-orgs/
+        title: Create and manage organizations
+      - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-teams/
+        title: Create and manage teams
+      - path: /datacenter/dtr/2.1/guides/user-management/permission-levels/
+        title: Permission levels
+    - sectiontitle: Repositories and images
+      section:
+      - path: /datacenter/dtr/2.1/guides/repos-and-images/
+        title: Configure your Docker Engine
+      - path: /datacenter/dtr/2.1/guides/repos-and-images/pull-an-image/
+        title: Pull an image
+      - path: /datacenter/dtr/2.1/guides/repos-and-images/push-an-image/
+        title: Push an image
+      - path: /datacenter/dtr/2.1/guides/repos-and-images/delete-an-image/
+        title: Delete an image
+    - sectiontitle: API and CLI reference
+      section:
+      - path: /datacenter/dtr/2.1/reference/api/
+        title: API reference
+      - sectiontitle: CLI reference
+        section:
+        - path: /datacenter/dtr/2.1/reference/cli/
+          title: Overview
+        - path: /datacenter/dtr/2.1/reference/cli/backup/
+          title: backup
+        - path: /datacenter/dtr/2.1/reference/cli/dumpcerts/
+          title: dumpcerts
+        - path: /datacenter/dtr/2.1/reference/cli/images/
+          title: images
+        - path: /datacenter/dtr/2.1/reference/cli/install/
+          title: install
+        - path: /datacenter/dtr/2.1/reference/cli/join/
+          title: join
+        - path: /datacenter/dtr/2.1/reference/cli/reconfigure/
+          title: reconfigure
+        - path: /datacenter/dtr/2.1/reference/cli/remove/
+          title: remove
+        - path: /datacenter/dtr/2.1/reference/cli/restore/
+          title: restore
+        - path: /datacenter/dtr/2.1/reference/cli/upgrade/
+          title: upgrade
+    - path: /datacenter/dtr/2.1/guides/release-notes/
+      title: Release notes
+    - path: /datacenter/dtr/2.1/guides/support/
+      title: Get support
+  - sectiontitle: Previous versions
     section:
-    - path: /docker-trusted-registry/configure/configuration/
-      title: Configuration overview
-    - path: /docker-trusted-registry/configure/config-general/
-      title: Configure general settings
-    - path: /docker-trusted-registry/configure/config-security/
-      title: Security configuration
-    - path: /docker-trusted-registry/configure/config-storage/
-      title: Storage configuration
-  - sectiontitle: Monitor and troubleshoot
-    section:
-    - path: /docker-trusted-registry/monitor-troubleshoot/
-      title: Monitor DTR
-    - path: /docker-trusted-registry/monitor-troubleshoot/troubleshoot/
-      title: Troubleshoot DTR
-  - sectiontitle: High-availability
-    section:
-    - path: /docker-trusted-registry/high-availability/
-      title: Set up high availability
-    - path: /docker-trusted-registry/high-availability/backups-and-disaster-recovery/
-      title: Backups and disaster recovery
-  - sectiontitle: User management
-    section:
-    - path: /docker-trusted-registry/user-management/
-      title: Authentication and authorization
-    - path: /docker-trusted-registry/user-management/create-and-manage-users/
-      title: Create and manage users
-    - path: /docker-trusted-registry/user-management/create-and-manage-orgs/
-      title: Create and manage organizations
-    - path: /docker-trusted-registry/user-management/create-and-manage-teams/
-      title: Create and manage teams
-    - path: /docker-trusted-registry/user-management/permission-levels/
-      title: Permission levels
-  - sectiontitle: Repositories and images
-    section:
-    - path: /docker-trusted-registry/repos-and-images/
-      title: Configure your Docker Engine
-    - path: /docker-trusted-registry/repos-and-images/pull-an-image/
-      title: Pull an image
-    - path: /docker-trusted-registry/repos-and-images/push-an-image/
-      title: Push an image
-    - path: /docker-trusted-registry/repos-and-images/delete-an-image/
-      title: Delete an image
-  - sectiontitle: DTR APIs
-    section:
-    - path: /apidocs/overview/
-      title: Overview
-    - path: /apidocs/v1.3.3/
-      title: v1.3.3 API
-    - path: /apidocs/v1.4.0/
-      title: v1.4.0 API
-    - path: /apidocs/v2.0.0/
-      title: v2.0.0 API
-    - path: /apidocs/v2.0.1/
-      title: v2.0.1 API
-  - sectiontitle: Release notes
-    section:
-    - path: /docker-trusted-registry/release-notes/
-      title: Trusted Registry release notes
-    - path: /docker-trusted-registry/release-notes/prior-release-notes/
-      title: Prior Trusted Registry release notes
-  - path: /docker-trusted-registry/support/
-    title: Get support
+    - sectiontitle: Universal Control Plane 1.0
+      section:
+      - path: /datacenter/ucp/1.1/overview/
+        title: Universal Control Plane overview
+      - path: /datacenter/ucp/1.1/install-sandbox/
+        title: Install DDC in a sandbox for evaluation
+      - path: /datacenter/ucp/1.1/install-sandbox-2/
+        title: Evaluate DDC in a sandbox deployment
+      - path: /datacenter/ucp/1.1/architecture/
+        title: Architecture
+      - sectiontitle: Installation
+        section:
+        - path: /datacenter/ucp/1.1/installation/system-requirements/
+          title: System requirements
+        - path: /datacenter/ucp/1.1/installation/plan-production-install/
+          title: Plan a production installation
+        - path: /datacenter/ucp/1.1/installation/install-production/
+          title: Install UCP for production
+        - path: /datacenter/ucp/1.1/installation/install-offline/
+          title: Install offline
+        - path: /datacenter/ucp/1.1/installation/license/
+          title: License UCP
+        - path: /datacenter/ucp/1.1/installation/upgrade/
+          title: Upgrade UCP
+        - path: /datacenter/ucp/1.1/installation/uninstall/
+          title: Uninstall UCP
+        - sectiontitle: UCP tool reference
+          section:
+          - path: /datacenter/ucp/1.1/reference/backup/
+            title: backup
+          - path: /datacenter/ucp/1.1/reference/dump-certs/
+            title: dump-certs
+          - path: /datacenter/ucp/1.1/reference/engine-discovery/
+            title: engine-discovery
+          - path: /datacenter/ucp/1.1/reference/fingerprint/
+            title: fingerprint
+          - path: /datacenter/ucp/1.1/reference/help/
+            title: help
+          - path: /datacenter/ucp/1.1/reference/id/
+            title: id
+          - path: /datacenter/ucp/1.1/reference/images/
+            title: images
+          - path: /datacenter/ucp/1.1/reference/install/
+            title: install
+          - path: /datacenter/ucp/1.1/reference/join/
+            title: join
+          - path: /datacenter/ucp/1.1/reference/regen-certs/
+            title: regen-certs.md
+          - path: /datacenter/ucp/1.1/reference/restart/
+            title: restart
+          - path: /datacenter/ucp/1.1/reference/restore/
+            title: restore
+          - path: /datacenter/ucp/1.1/reference/stop/
+            title: stop
+          - path: /datacenter/ucp/1.1/reference/support/
+            title: support
+          - path: /datacenter/ucp/1.1/reference/uninstall/
+            title: uninstall
+          - path: /datacenter/ucp/1.1/reference/upgrade/
+            title: upgrade
+      - sectiontitle: Access UCP
+        section:
+        - path: /datacenter/ucp/1.1/access-ucp/web-based-access/
+          title: Web-based access
+        - path: /datacenter/ucp/1.1/access-ucp/cli-based-access/
+          title: CLI-based access
+      - sectiontitle: Configuration
+        section:
+        - path: /datacenter/ucp/1.1/configuration/use-externally-signed-certs/
+          title: Use externally-signed certificates
+        - path: /datacenter/ucp/1.1/configuration/configure-logs/
+          title: Configure UCP logging
+        - path: /datacenter/ucp/1.1/configuration/dtr-integration/
+          title: Integrate with Docker Trusted Registry
+        - path: /datacenter/ucp/1.1/configuration/ldap-integration/
+          title: Integrate with LDAP
+        - path: /datacenter/ucp/1.1/configuration/multi-host-networking/
+          title: Set up container networking
+      - sectiontitle: Monitor and troubleshoot
+        section:
+        - path: /datacenter/ucp/1.1/monitor/monitor-ucp/
+          title: Monitor your cluster
+        - path: /datacenter/ucp/1.1/monitor/troubleshoot-ucp/
+          title: Troubleshoot your cluster
+        - path: /datacenter/ucp/1.1/monitor/troubleshoot-configurations/
+          title: Troubleshoot cluster configurations
+      - sectiontitle: High-availability
+        section:
+        - path: /datacenter/ucp/1.1/high-availability/set-up-high-availability/
+          title: Set up high availability
+        - path: /datacenter/ucp/1.1/high-availability/replicate-cas/
+          title: Replicate CAs for high availability
+        - path: /datacenter/ucp/1.1/high-availability/backups-and-disaster-recovery/
+          title: Backups and disaster recovery
+      - sectiontitle: User management
+        section:
+        - path: /datacenter/ucp/1.1/user-management/authentication-and-authorization/
+          title: Authentication and authorization
+        - path: /datacenter/ucp/1.1/user-management/create-and-manage-users/
+          title: Create and manage users
+        - path: /datacenter/ucp/1.1/user-management/create-and-manage-teams/
+          title: Create and manage teams
+        - path: /datacenter/ucp/1.1/user-management/permission-levels/
+          title: Permission levels
+      - sectiontitle: Applications
+        section:
+        - path: /datacenter/ucp/1.1/applications/deploy-app-ui/
+          title: Deploy an app from the UI
+        - path: /datacenter/ucp/1.1/applications/deploy-app-cli/
+          title: Deploy an app from the CLI
+      - path: /datacenter/ucp/1.1/support/
+        title: Get support
+      - path: /datacenter/ucp/1.1/release_notes/
+        title: Release Notes
+    - sectiontitle: Docker Trusted Registry 2.0
+      section:
+      - path: /datacenter/dtr/2.0/
+        title: Docker Trusted Registry overview
+      - path: /datacenter/dtr/2.0/architecture/
+        title: Architecture
+      - sectiontitle: Installation
+        section:
+        - path: /datacenter/dtr/2.0/install/system-requirements/
+          title: System requirements
+        - path: /datacenter/dtr/2.0/install/
+          title: Install Docker Trusted Registry
+        - path: /datacenter/dtr/2.0/install/install-dtr-offline/
+          title: Install offline
+        - path: /datacenter/dtr/2.0/install/license/
+          title: License DTR
+        - sectiontitle: Upgrade
+          section:
+          - path: /datacenter/dtr/2.0/install/upgrade/upgrade-major/
+            title: Upgrade from 1.4.3
+          - path: /datacenter/dtr/2.0/install/upgrade/
+            title: Upgrade from 2.0.0
+        - path: /datacenter/dtr/2.0/install/uninstall/
+          title: Uninstall
+        - sectiontitle: docker/dtr image reference
+          section:
+          - path: /datacenter/dtr/2.0/reference/
+            title: Overview
+          - path: /datacenter/dtr/2.0/reference/backup/
+            title: backup
+          - path: /datacenter/dtr/2.0/reference/dumpcerts/
+            title: dumpcerts
+          - path: /datacenter/dtr/2.0/reference/images/
+            title: images
+          - path: /datacenter/dtr/2.0/reference/install/
+            title: install
+          - path: /datacenter/dtr/2.0/reference/join/
+            title: join
+          - path: /datacenter/dtr/2.0/reference/migrate/
+            title: migrate
+          - path: /datacenter/dtr/2.0/reference/reconfigure/
+            title: reconfigure
+          - path: /datacenter/dtr/2.0/reference/remove/
+            title: remove
+          - path: /datacenter/dtr/2.0/reference/restore/
+            title: restore
+          - path: /datacenter/dtr/2.0/reference/upgrade/
+            title: upgrade
+      - sectiontitle: Configuration
+        section:
+        - path: /datacenter/dtr/2.0/configure/configuration/
+          title: Configuration overview
+        - path: /datacenter/dtr/2.0/configure/config-general/
+          title: Configure general settings
+        - path: /datacenter/dtr/2.0/configure/config-security/
+          title: Security configuration
+        - path: /datacenter/dtr/2.0/configure/config-storage/
+          title: Storage configuration
+      - sectiontitle: Monitor and troubleshoot
+        section:
+        - path: /datacenter/dtr/2.0/monitor-troubleshoot/
+          title: Monitor DTR
+        - path: /datacenter/dtr/2.0/monitor-troubleshoot/troubleshoot/
+          title: Troubleshoot DTR
+      - sectiontitle: High-availability
+        section:
+        - path: /datacenter/dtr/2.0/high-availability/
+          title: Set up high availability
+        - path: /datacenter/dtr/2.0/high-availability/backups-and-disaster-recovery/
+          title: Backups and disaster recovery
+      - sectiontitle: User management
+        section:
+        - path: /datacenter/dtr/2.0/user-management/
+          title: Authentication and authorization
+        - path: /datacenter/dtr/2.0/user-management/create-and-manage-users/
+          title: Create and manage users
+        - path: /datacenter/dtr/2.0/user-management/create-and-manage-orgs/
+          title: Create and manage organizations
+        - path: /datacenter/dtr/2.0/user-management/create-and-manage-teams/
+          title: Create and manage teams
+        - path: /datacenter/dtr/2.0/user-management/permission-levels/
+          title: Permission levels
+      - sectiontitle: Repositories and images
+        section:
+        - path: /datacenter/dtr/2.0/repos-and-images/
+          title: Configure your Docker Engine
+        - path: /datacenter/dtr/2.0/repos-and-images/pull-an-image/
+          title: Pull an image
+        - path: /datacenter/dtr/2.0/repos-and-images/push-an-image/
+          title: Push an image
+        - path: /datacenter/dtr/2.0/repos-and-images/delete-an-image/
+          title: Delete an image
+      - sectiontitle: DTR APIs
+        section:
+        - path: /apidocs/overview/
+          title: Overview
+        - path: /apidocs/v1.3.3/
+          title: v1.3.3 API
+        - path: /apidocs/v1.4.0/
+          title: v1.4.0 API
+        - path: /apidocs/v2.0.0/
+          title: v2.0.0 API
+        - path: /apidocs/v2.0.1/
+          title: v2.0.1 API
+      - sectiontitle: Release notes
+        section:
+        - path: /datacenter/dtr/2.0/release-notes/
+          title: Trusted Registry release notes
+        - path: /datacenter/dtr/2.0/release-notes/prior-release-notes/
+          title: Prior Trusted Registry release notes
+      - path: /datacenter/dtr/2.0/support/
+        title: Get support
 - sectiontitle: Docker Cloud
   section:
-  - path: /docker-cloud/overview/
-    title: Docker Cloud Overview
+  - path: /docker-cloud/
+    title: About Docker Cloud
   - path: /docker-cloud/dockerid/
-    title: Docker ID and Settings
+    title: Docker Cloud Settings and Docker ID
   - path: /docker-cloud/orgs/
     title: Organizations and Teams
   - sectiontitle: Getting Started
@@ -980,7 +1216,7 @@ toc:
   - path: /docker-hub/
     title: Overview of Docker Hub
   - path: /docker-hub/accounts/
-    title: Your Docker ID
+    title: Use Docker Hub with Docker ID
   - path: /docker-hub/orgs/
     title: Teams &amp; Organizations
   - path: /docker-hub/repos/
@@ -1065,6 +1301,8 @@ toc:
       title: Amazon Web Services
     - path: /machine/drivers/digital-ocean/
       title: Digital Ocean
+    - path: /machine/drivers/exoscale/
+      title: Exoscale
     - path: /machine/drivers/generic/
       title: Generic
     - path: /machine/drivers/gce/
@@ -1087,14 +1325,14 @@ toc:
       title: VMware vCloud Air
     - path: /machine/drivers/vsphere/
       title: VMware vSphere
-    - path: /machine/drivers/exoscale/
-      title: exoscale
   - path: /machine/completion/
     title: Command-line Completion
 - sectiontitle: Docker Store
   section:
   - path: /docker-store/
     title: Docker Store Overview
+  - path: /docker-store/publish/
+    title: Submit a product to Docker Store
   - path: /docker-store/faq/
     title: Docker Store FAQs
 - sectiontitle: Docker Toolbox
@@ -1206,7 +1444,7 @@ toc:
         - path: /registry/recipes/mirror/
           title: Mirroring Docker Hub
         - path: /registry/recipes/osx-setup-guide/
-          title: Running on OS X
+          title: Running on macOS
       - sectiontitle: Reference
         section:
         - path: /registry/spec/
@@ -1355,5 +1593,24 @@ toc:
     title: Docker Release Notes
   - path: /engine/reference/glossary/
     title: Docker Glossary
-- title: Docs archive
+- sectiontitle: Docs archive
+  section:
+  - path: /docsarchive/
+    title: View the docs archives
+  - path: /v1.4
+    title: v1.4
+  - path: /v1.5
+    title: v1.5
+  - path: /v1.6
+    title: v1.6
+  - path: /v1.7
+    title: v1.7
+  - path: /v1.8
+    title: v1.8
+  - path: /v1.9
+    title: v1.9
+  - path: /v1.10
+    title: v1.10
+  - path: /v1.11
+    title: v1.11
   path: /docsarchive/

@@ -1,20 +1,14 @@
 ---
-aliases:
+description: Provision a data backend for the service
+keywords: provision, Python, service
+redirect_from:
 - /docker-cloud/getting-started/python/10_provision_a_data_backend_for_your_service/
 - /docker-cloud/getting-started/golang/10_provision_a_data_backend_for_your_service/
-description: Provision a data backend for the service
-keywords:
-- provision, Python, service
-menu:
-  main:
-    parent: deploy-app
-    weight: -9
-title: Provision a data backend for the service
+title: Provision a data backend for your service
 ---
 
-# Provision a data backend for a Python service
-
-Docker Cloud offers a large number of data stores in the *Jumpstart* library, including Redis, MongoDB, PostgreSQL, and MySQL.
+Docker Cloud offers a large number of data stores in the *Jumpstart* library,
+including Redis, MongoDB, PostgreSQL, and MySQL.
 
 You may have noticed that your app has a visit counter that's been disabled up
 until now. In this step you'll add a data backend that your service will use. In
@@ -25,7 +19,7 @@ The first step is to provision the data service itself. Run this command to
 create and run the Redis service using the <a href="https://github.com/docker-library/redis/" target ="_blank">redis</a>
 image:
 
-```
+```none
 $ docker-cloud service run \
 --env REDIS_PASS="password" \
 --name redis \
@@ -35,7 +29,7 @@ redis
 
 Use `docker-cloud service ps` to check if your new redis service is *running*. This might take a minute or two.
 
-```
+```none
 $ docker-cloud service ps
 NAME                 UUID      STATUS            IMAGE                                          DEPLOYED
 redis                89806f93  ▶ Running         redis:latest                                   29 minutes ago
@@ -57,7 +51,7 @@ Next, visit or `curl` the load balanced web endpoint again. You'll notice that t
 
 If you're using curl, you should see the counter incrementing like this:
 
-```
+```none
 $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io
 Hello World</br>Hostname: web-1</br>Counter: 1%
 $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io
