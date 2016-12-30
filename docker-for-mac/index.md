@@ -13,21 +13,20 @@ title: Get started with Docker for Mac
 
 Welcome to Docker for Mac!
 
-Please read through these topics on how to get started. To **give us feedback**
-on your experience with the app and report bugs or problems, log in to our
-[Docker for Mac forum](https://forums.docker.com/c/docker-for-mac).
+Docker is a full development platform for creating containerized apps, and
+Docker for Mac is the best way to get started with Docker on a Mac.
 
->**Already have Docker for Mac?** If you already have Docker for Mac installed,
-and are ready to get started, skip over to the [Getting Started with
-Docker](/engine/getstarted/index.md) tutorial.
+>**Already have Docker for Mac?** If you already have Docker for Mac installed, and are ready to get started, skip down to [Step 2. Check versions of Docker
+Engine, Compose, and
+Machine](#step-2-check-versions-of-docker-engine-compose-and-machine) to work
+through the rest of the Docker for Mac tour, or jump over to the standard
+[Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
 ## Download Docker for Mac
 
 If you have not already done so, please install Docker for Mac. You can download
-installers from the stable or beta channel.
-
-For more about stable and beta channels, see the
-[FAQs](faqs.md#stable-and-beta-channels).
+installers from the stable or beta channel. For more about stable and beta
+channels, see the [FAQs](faqs.md#stable-and-beta-channels).
 
 <table style="width:100%">
   <tr>
@@ -378,6 +377,23 @@ ln -s /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion /us
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion /usr/local/etc/bash_completion.d/docker-machine
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion /usr/local/etc/bash_completion.d/docker-compose
 ```
+
+## Giving feedback and getting help
+
+To get help from the community, review current user topics, join or start a
+discussion, log on to our [Docker for Mac
+forum](https://forums.docker.com/c/docker-for-mac).
+
+To report bugs or problems, log on to [Docker for Mac issues on
+GitHub](https://github.com/docker/for-mac/issues), where you can review
+community reported issues, and file new ones. See [Diagnose problems, send
+feedback, and create GitHub
+issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
+As a part of reporting issues on GitHub, we can help you troubleshoot the log
+data.
+
+To give us feedback on the documentation or update it yourself, use the Feedback
+options at the bottom of each docs page.
 
 ## Where to go next
 
