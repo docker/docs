@@ -1,15 +1,10 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Swarm and container networks
-keywords:
-- docker, swarm, clustering,  networking
-menu:
-  main:
-    parent: workw_swarm
-    weight: 3
+keywords: docker, swarm, clustering,  networking
 title: Swarm and container networks
 ---
-
-# Swarm and container networks
 
 Docker Swarm is fully compatible with Docker's networking features. This
 includes the multi-host networking feature which allows creation of custom
@@ -17,9 +12,9 @@ container networks that span multiple Docker hosts.
 
 Before using Swarm with a custom network, read through the conceptual
 information in [Docker container
-networking](https://docs.docker.com/engine/userguide/networking/dockernetworks/).
+networking](/engine/userguide/networking/dockernetworks/).
 You should also have walked through the [Get started with multi-host
-networking](https://docs.docker.com/engine/userguide/networking/get-started-overlay/)
+networking](/engine/userguide/networking/get-started-overlay/)
 example.
 
 ## Create a custom network in a Swarm cluster

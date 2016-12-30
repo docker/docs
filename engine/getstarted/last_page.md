@@ -1,20 +1,12 @@
 ---
-aliases:
+description: Getting started with Docker
+keywords: beginner, getting started, Docker
+redirect_from:
 - /mac/last_page/
 - /windows/last_page/
 - /linux/last_page/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker
-menu:
-  main:
-    identifier: getstart_learn_more
-    parent: tutorial_getstart_menu
-    weight: 7
-title: Learning more
+title: Learn more
 ---
-
-# Learning more
 
 This getting started provided very basic essentials for using Docker on Mac, Windows, and Linux. If you want to learn more with regard to end-to-end development, start with the full install instructions and feature overviews, then follow up with more advanced tutorials and user guides.
 
@@ -59,5 +51,9 @@ Depending on your interest, the Docker documentation contains a wealth of inform
   <tr>
     <td class="tg-031e">How to run a multi-container application with Compose</td>
     <td class="tg-031e"><a href="/compose/">Docker Compose documentation</a></td>
+  </tr>
+  <tr>
+    <td class="tg-031e">A tutorial on Docker Swarm, which provides clustering capabilities to scale applications across multiple Docker nodes </td>
+    <td class="tg-031e"><a href="/engine/swarm/swarm-tutorial/index.md">Getting started with swarm mode</a></td>
   </tr>
 </table>

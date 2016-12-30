@@ -1,18 +1,12 @@
 ---
 description: Learn how to connect Docker containers together.
-keywords:
-- Examples, Usage, user guide, links, linking, docker, documentation, examples, names,
-  name, container naming, port, map, network port,  network
-menu:
-  main:
-    parent: smn_networking_def
-    weight: -2
+keywords: Examples, Usage, user guide, links, linking, docker, documentation, examples, names, name, container naming, port, map, network port, network
+redirect_from:
+- /userguide/dockerlinks/
 title: Legacy container links
 ---
 
-# Legacy container links
-
-The information in this section explains legacy container links within the Docker default bridge. This is a `bridge` network named `bridge` created automatically when you install Docker.
+The information in this section explains legacy container links within the Docker default `bridge` network which is created automatically when you install Docker.
 
 Before the [Docker networks feature](../index.md), you could use the
 Docker link feature to allow containers to discover each other and securely
@@ -23,6 +17,14 @@ behave differently between default `bridge` network and
 
 This section briefly discusses connecting via a network port and then goes into
 detail on container linking in default `bridge` network.
+
+>**Warning**: The `--link` flag is a deprecated legacy feature of Docker. It may eventually
+be removed. Unless you absolutely need to continue using it, we recommend that you use
+user-defined networks to facilitate communication between two containers instead of using
+`--link`. One feature that user-defined networks do not support that you can do
+with `--link` is sharing environmental variables between containers. However,
+you can use other mechanisms such as volumes to share environment variables
+between containers in a more controlled way.
 
 ## Connect using network port mapping
 
@@ -100,8 +102,7 @@ configurations. For example, if you've bound the container port to the
 
 > **Note**:
 > This section covers the legacy link feature in the default `bridge` network.
-> Please refer to [linking containers in user-defined networks]
-> (../work-with-networks.md#linking-containers-in-user-defined-networks)
+> Please refer to [linking containers in user-defined networks](../work-with-networks.md#linking-containers-in-user-defined-networks)
 > for more information on links in user-defined networks.
 
 Network port mappings are not the only way Docker containers can connect to one

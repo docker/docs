@@ -1,18 +1,10 @@
 ---
-aliases:
-- /mackit/faqs/
 description: Frequently asked questions
-keywords:
-- mac faqs
-menu:
-  main:
-    identifier: docker-mac-faqs
-    parent: pinata_mac_menu
-    weight: 7
-title: FAQs
+keywords: mac faqs
+redirect_from:
+- /mackit/faqs/
+title: Frequently asked questions (FAQ)
 ---
-
-#  Frequently Asked Questions (FAQs)
 
 **Looking for popular FAQs on Docker for Mac?** Check out the [Docker Knowledge Hub](http://success.docker.com/) for knowledge base articles, FAQs, technical support for various subscription levels, and more.
 
@@ -20,7 +12,8 @@ title: FAQs
 
 **Q: How do I get the stable or beta version of Docker for Mac?**
 
-A: Use the download links for the channels given in the topic [Download Docker for Mac](index.md#download-docker-for-mac).
+A: Use the download links for the channels given in the topic [Download Docker
+for Mac](index.md#download-docker-for-mac).
 
 This topic also has more information about the two channels.
 
@@ -28,15 +21,23 @@ This topic also has more information about the two channels.
 
 A: Two different download channels are available for Docker for Mac:
 
-* The stable channel provides a general availability release-ready installer for a fully baked and tested, more reliable app. The stable version of Docker for Mac comes with the latest released version of Docker Engine. The release schedule is synched with Docker Engine releases and hotfixes.
+* The **stable channel** provides a general availability release-ready installer for a fully baked and tested, more reliable app. The stable version of Docker for Mac comes with the latest released version of Docker Engine. The release schedule is synched with Docker Engine releases and hotfixes. On the stable channel, you can select whether to send usage statistics and other data.
 
-* The beta channel provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of Docker Engine. Bugs, crashes and issues are more likely to occur with the beta app, but you get a chance to preview new functionality, experiment, and provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month.
+* The **beta channel** provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of Docker Engine. Bugs, crashes and issues are more likely to occur with the beta app, but you get a chance to preview new functionality, experiment, and provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month. Usage statistics and crash reports are sent by default. You do not have the option to disable this on the beta channel.
 
 **Q: Can I switch back and forth between stable and beta versions of Docker for Mac?**
 
-A: Yes, you can switch between versions to try out the betas to see what's new, then go back to stable for other work. However, **you can have only one app installed at a time**. Switching back and forth between stable and beta apps can destabilize your development environment, particularly in cases where you switch from a newer (beta) channel to older (stable).
+A: Yes, you can switch between versions to try out the betas to see what's new,
+then go back to stable for other work. However, **you can have only one app
+installed at a time**. Switching back and forth between stable and beta apps can
+destabilize your development environment, particularly in cases where you switch
+from a newer (beta) channel to older (stable).
 
-For example, containers created with a newer beta version of Docker for Mac may not work after you switch back to stable because they may have been created leveraging beta features that aren't in stable yet. Just keep this in mind as you create and work with beta containers, perhaps in the spirit of a playground space where you are prepared to troubleshoot or start over.
+For example, containers created with a newer beta version of Docker for Mac may
+not work after you switch back to stable because they may have been created
+leveraging beta features that aren't in stable yet. Just keep this in mind as
+you create and work with beta containers, perhaps in the spirit of a playground
+space where you are prepared to troubleshoot or start over.
 
 <font color="#CC3366">To safely switch between beta and stable versions be sure to save images and export the containers you need, then uninstall the current version before installing another. The workflow is described in more detail below.</font><br>
 
@@ -53,8 +54,8 @@ Do the following each time:
 ### What is Docker.app?
 
 `Docker.app` is Docker for Mac, a bundle of Docker client, and Docker
-Engine. `Docker.app` uses the OS X
-Hypervisor.framework (part of MacOS X 10.10 Yosemite and higher)
+Engine. `Docker.app` uses the macOS
+Hypervisor.framework (part of macOS 10.10 Yosemite and higher)
 to run containers, meaning that _**no separate VirtualBox is required**_.
 
 ### What kind of feedback are we looking for?
@@ -116,13 +117,28 @@ Networking topic.
 
 ### How do I add custom CA certificates?
 
-Starting with Docker for Mac 1.12.1, 2016-09-16 (stable) and Beta 27 Release Notes (2016-09-28 1.12.2-rc1-beta27), all trusted certificate authorities (CAs) (root or intermediate) are supported.
+Starting with Docker for Mac Beta 27 and Stable 1.12.3, all trusted certificate authorities (CAs) (root or intermediate) are supported.
 
-Docker for Mac creates a certificate bundle of all user-trusted CAs based on the Mac Keychain, and appends it to Moby trusted certificates. So if an enterprise SSL certificate is trusted by the user on the host, it will be trusted by Docker for Mac.
+Docker for Mac creates a certificate bundle of all user-trusted CAs based on the
+Mac Keychain, and appends it to Moby trusted certificates. So if an enterprise
+SSL certificate is trusted by the user on the host, it will be trusted by Docker
+for Mac.
+
+To manually add a custom, self-signed certificate, start by adding
+the certificate to the Mac’s keychain, which will be picked up by Docker for
+Mac. Here is an example.
+
+```
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
+```
+
+For a complete explanation of how to do this, see the blog post [Adding Self-signed Registry Certs
+to Docker & Docker for
+Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/).
 
 ### What are system requirements for Docker for Mac?
 
-Note that you need a Mac that supports hardware virtualization, which is most non ancient ones; i.e., use OS X `10.10.3+` or `10.11` (OS X Yosemite or OS X El Capitan). See also "What to know before you install" in [Getting Started](index.md).
+Note that you need a Mac that supports hardware virtualization, which is most non ancient ones; i.e., use macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also "What to know before you install" in [Getting Started](index.md).
 
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 
@@ -140,7 +156,7 @@ Toolbox Mac topics.
 
 ### What is HyperKit?
 
-HyperKit is a hypervisor built on top of the Hypervisor.framework in OS X 10.10 Yosemite and higher. It runs entirely in userspace and has no other dependencies.
+HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS 10.10 Yosemite and higher. It runs entirely in userspace and has no other dependencies.
 
 We use HyperKit to eliminate the need for other VM products, such as Oracle Virtualbox or VMWare Fusion.
 

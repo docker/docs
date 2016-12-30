@@ -1,36 +1,28 @@
 ---
-description: Getting started with Docker Compose
-keywords:
-- documentation, docs,  docker, compose, orchestration, containers
-menu:
-  main:
-    parent: workw_compose
-    weight: -85
-title: Getting Started
+description: Get started with Docker Compose
+keywords: documentation, docs, docker, compose, orchestration, containers
+title: Get started with Docker Compose
 ---
 
-# Getting Started
-
-On this page you build a simple Python web application running on Docker Compose. The
-application uses the Flask framework and increments a value in Redis. While the
-sample uses Python, the concepts demonstrated here should be understandable even
-if you're not familiar with it.
+On this page you build a simple Python web application running on Docker
+Compose. The application uses the Flask framework and maintains a hit counter in
+Redis. While the sample uses Python, the concepts demonstrated here should be
+understandable even if you're not familiar with it.
 
 ## Prerequisites
 
-Make sure you have already
-[installed both Docker Engine and Docker Compose](install.md). You
-don't need to install Python, it is provided by a Docker image.
+Make sure you have already [installed both Docker Engine and Docker
+Compose](install.md). You don't need to install Python or Redis, as both are
+provided by Docker images.
 
 ## Step 1: Setup
 
-1. Create a directory for the project:
+1.  Create a directory for the project:
 
         $ mkdir composetest
         $ cd composetest
 
-2. With your favorite text editor create a file called `app.py` in your project
-   directory.
+2.  Create a file called `app.py` in your project directory and paste this in:
 
         from flask import Flask
         from redis import Redis
@@ -40,82 +32,90 @@ don't need to install Python, it is provided by a Docker image.
 
         @app.route('/')
         def hello():
-            redis.incr('hits')
-            return 'Hello World! I have been seen %s times.' % redis.get('hits')
+            count = redis.incr('hits')
+            return 'Hello World! I have been seen {} times.\n'.format(count)
 
         if __name__ == "__main__":
             app.run(host="0.0.0.0", debug=True)
 
-3. Create another file called `requirements.txt` in your project directory and
-   add the following:
+3.  Create another file called `requirements.txt` in your project directory and
+    paste this in:
 
         flask
         redis
 
-   These define the applications dependencies.
-
-## Step 2: Create a Docker image
-
-In this step, you build a new Docker image. The image contains all the
-dependencies the Python application requires, including Python itself.
-
-1. In your project directory create a file named `Dockerfile` and add the
-   following:
-
-        FROM python:2.7
-        ADD . /code
-        WORKDIR /code
-        RUN pip install -r requirements.txt
-        CMD python app.py
-
-  This tells Docker to:
-
-  * Build an image starting with the Python 2.7 image.
-  * Add the current directory `.` into the path `/code` in the image.
-  * Set the working directory to `/code`.
-  * Install the Python dependencies.
-  * Set the default command for the container to `python app.py`
-
-  For more information on how to write Dockerfiles, see the [Docker user guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile) and the [Dockerfile reference](/engine/reference/builder.md).
-
-2. Build the image.
-
-        $ docker build -t web .
-
-  This command builds an image named `web` from the contents of the current
-  directory. The command automatically locates the `Dockerfile`, `app.py`, and
-  `requirements.txt` files.
+   These define the application's dependencies.
 
 
-## Step 3: Define services
+## Step 2: Create a Dockerfile
 
-Define a set of services using `docker-compose.yml`:
+In this step, you write a Dockerfile that builds a Docker image. The image
+contains all the dependencies the Python application requires, including Python
+itself.
 
-1. Create a file called docker-compose.yml in your project directory and add
-   the following:
+In your project directory, create a file named `Dockerfile` and paste the
+following:
+
+    FROM python:3.4-alpine
+    ADD . /code
+    WORKDIR /code
+    RUN pip install -r requirements.txt
+    CMD ["python", "app.py"]
+
+This tells Docker to:
+
+* Build an image starting with the Python 3.4 image.
+* Add the current directory `.` into the path `/code` in the image.
+* Set the working directory to `/code`.
+* Install the Python dependencies.
+* Set the default command for the container to `python app.py`
+
+For more information on how to write Dockerfiles, see the [Docker user
+guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
+and the [Dockerfile reference](/engine/reference/builder.md).
 
 
-        version: '2'
-        services:
-          web:
-            build: .
-            ports:
-             - "5000:5000"
-            volumes:
-             - .:/code
-            depends_on:
-             - redis
-          redis:
-            image: redis
+## Step 3: Define services in a Compose file
+
+Create a file called `docker-compose.yml` in your project directory and paste
+the following:
+
+    version: '2'
+    services:
+      web:
+        build: .
+        ports:
+         - "5000:5000"
+        volumes:
+         - .:/code
+      redis:
+        image: "redis:alpine"
 
 This Compose file defines two services, `web` and `redis`. The web service:
 
-* Builds from the `Dockerfile` in the current directory.
-* Forwards the exposed port 5000 on the container to port 5000 on the host machine.
-* Mounts the project directory on the host to `/code` inside the container allowing you to modify the code without having to rebuild the image.
-* Links the web service to the Redis service.
+* Uses an image that's built from the `Dockerfile` in the current directory.
+* Forwards the exposed port 5000 on the container to port 5000 on the host
+  machine.
+* Mounts the project directory on the host to `/code` inside the container,
+  allowing you to modify the code without having to rebuild the image.
 
-The `redis` service uses the latest public [Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker Hub registry.
+The `redis` service uses a public
+[Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker
+Hub registry.
+
+>**Tip:** If your project is outside of the `Users` directory (`cd ~`), then you
+need to share the drive or location of the Dockerfile and volume you are using.
+If you get runtime errors indicating an application file is not found, a volume
+mount is denied, or a service cannot start, try enabling file or drive sharing.
+Volume mounting requires shared drives for projects that live outside of
+`C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
+Docker for Windows that uses [Linux
+containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers-beta-feature).
+For more information, see [Shared
+Drives](../docker-for-windows/index.md#shared-drives) on Docker for Windows,
+[File sharing](../docker-for-mac/index.md#file-sharing) on Docker for Mac, and
+the general examples on how to [Manage data in
+containers](../engine/tutorials/dockervolumes.md).
 
 ## Step 4: Build and run your app with Compose
 
@@ -151,7 +151,22 @@ The `redis` service uses the latest public [Redis](https://registry.hub.docker.c
 
    The number should increment.
 
-## Step 5: Experiment with some other commands
+
+## Step 5: Update the application
+
+Because the application code is mounted into the container using a volume, you
+can make changes to its code and see the changes instantly, without having to
+rebuild the image.
+
+1.  Change the greeting in `app.py` and save it. For example:
+
+        return 'Hello from Docker! I have been seen {} times.\n'.format(count)
+
+2.  Refresh the app in your browser. The greeting should be updated, and the
+    counter should still be incrementing.
+
+
+## Step 6: Experiment with some other commands
 
 If you want to run your services in the background, you can pass the `-d` flag
 (for "detached" mode) to `docker-compose up` and use `docker-compose ps` to
@@ -160,6 +175,7 @@ see what is currently running:
     $ docker-compose up -d
     Starting composetest_redis_1...
     Starting composetest_web_1...
+
     $ docker-compose ps
     Name                 Command            State       Ports
     -------------------------------------------------------------------
@@ -178,6 +194,12 @@ If you started Compose with `docker-compose up -d`, you'll probably want to stop
 your services once you've finished with them:
 
     $ docker-compose stop
+
+You can bring everything down, removing the containers entirely, with the `down`
+command. Pass `--volumes` to also remove the data volume used by the Redis
+container:
+
+    $ docker-compose down --volumes
 
 At this point, you have seen the basics of how Compose works.
 

@@ -1,15 +1,9 @@
 ---
+advisory: toolbox
 description: How to install Toolbox on Mac
-keywords:
-- docker, documentation, install, toolbox, win
-menu:
-  main:
-    parent: workw_toolbox
-    weight: -5
-title: Install Toolbox on Windows
+keywords: docker, documentation, install, toolbox, win
+title: Install Docker Toolbox on Windows
 ---
-
-# Install Docker for Windows
 
 Windows users use Docker Toolbox to install Docker software. Docker Toolbox includes the following Docker tools:
 
@@ -33,9 +27,17 @@ To verify your machine meets these requirements, do the following:
 1. Right click the windows message and choose **System**.
 
     If you aren't using a supported version, you could consider upgrading your
-    operating system.
+  operating system.
 
-    If you have a newer system, specifically 64bit Windows 10 Pro, with Enterprise and Education (1511 November update, Build 10586 or later), consider using [Docker for Windows](https://docs.docker.com/docker-for-windows) instead. It runs natively on the Windows, so there is no need for a pre-configured Docker QuickStart shell. It also uses Hyper-V for virtualization, so the instructions below for checking virtualization will be out of date for newer Windows systems. Full install prerequisites are provided in the Docker for Windows topic in [What to know before you install](https://docs.docker.com/docker-for-windows/#what-to-know-before-you-install).
+    If you have a newer system, specifically 64bit Windows 10 Pro, with
+    Enterprise and Education (1511 November update, Build 10586 or later),
+    consider using [Docker for Windows](/docker-for-windows) instead. It runs
+    natively on the Windows, so there is no need for a pre-configured Docker
+    QuickStart shell. It also uses Hyper-V for virtualization, so the
+    instructions below for checking virtualization will be out of date for newer
+    Windows systems. Full install prerequisites are provided in the Docker for
+    Windows topic in [What to know before you
+    install](/docker-for-windows/#what-to-know-before-you-install).
 
 2.  Make sure your Windows system supports Hardware Virtualization Technology and that virtualization is enabled.
 
@@ -195,7 +197,7 @@ To uninstall Toolbox on Windows, do the following:
     Successfully removed my-docker-machine
     ```
 
-3. Uninstall Docker Toolbox using Window’s standard process for uninstalling programs through the control panel.
+3. Uninstall Docker Toolbox using Window's standard process for uninstalling programs through the control panel.
 
     >**Note:** This process does not remove the `docker-install.exe` file. You must delete that file yourself.
 

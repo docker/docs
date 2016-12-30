@@ -1,7 +1,7 @@
 # Docs @ Docker
 
 Welcome to the repo for our documentation. This is the source for the URL
-served at docs.docker.com.
+served at https://docs.docker.com/.
 
 Feel free to send us pull requests and file issues. Our docs are completely
 open source and we deeply appreciate contributions from our community!
@@ -32,7 +32,15 @@ help. If a reviewer realizes you have based your work on the wrong branch, we'll
 let you know so that you can rebase it.
 
 >**Note**: To contribute code to Docker projects, see the
-[Contribution guidelines](opensource/project/who-written-for).
+[Contribution guidelines](https://docs.docker.com/opensource/project/who-written-for/).
+
+### Files not edited here
+
+Files and directories listed in the `path:` keys in
+[`.NOT_EDITED_HERE.yaml`](.NOT_EDITED_HERE.yaml) are maintained in other
+repositories and should not be edited in this one. Pull requests against these
+files will be rejected. Make your edits to the files in the repository and path
+in the `source:` key in the YAML file.
 
 ### Overall doc improvements
 
@@ -93,10 +101,19 @@ The following `vnext` branches currently exist:
   docs for upcoming features in the [docker/kitematic](https://github.com/docker/kitematic/)
   project
 
+## Per-PR staging on GitHub
 
-## Staging
+For every PR against `master` and all the long-lived branches, a staged version
+of the site is built using Netlify. If the site builds, you will see
+**deploy/netlify — Deploy preview ready**. Otherwise, you will see an error.
+Click **Details** to review the staged site or the errors that prevented it from
+building. Review the staged site and amend your commit if necessary. Reviewers
+will also check the staged site before merging the PR, to protect the integrity
+of [docs.docker.com](http://docs.docker.com/).
 
-You have two options:
+## Staging locally
+
+You have three options:
 
 1.  Clone this repo and run our staging container:
 
@@ -119,10 +136,41 @@ You have two options:
     docker-compose down
     ```
 
-2.  Use Jekyll directly. Clone this repo, [install Ruby 2.3 or higher
-    (required)](https://www.ruby-lang.org/en/documentation/installation/),
-    [install the GitHub Pages Ruby gem](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/),
-    then run `jekyll serve` from within the directory.
+2.  Use Jekyll directly. 
+
+    a. Clone this repo by running:
+
+       ```bash
+       git clone https://github.com/docker/docker.github.io.git
+       ```
+ 
+    b. Install Ruby 2.3 or later as described in [Installing Ruby]
+       (https://www.ruby-lang.org/en/documentation/installation/).
+    
+    c. Install Bundler:
+
+       ```bash
+       gem install bundler
+       ```
+       
+    d. If you use Ubuntu, install packages required for the Nokogiri HTML
+       parser:
+
+       ```bash
+       sudo apt-get install ruby-dev zlib1g-dev liblzma-dev
+       ```
+
+    e. Install Jekyll and other required dependencies:
+
+       ```bash
+       bundle install
+       ```
+    
+       >**Note**: You may have to install some packages manually.   
+
+    f. Change the directory to `docker.github.io`.
+
+    g. Use the `jekyll serve` command to continuously build the HTML output.
 
     The `jekyll serve` process runs in the foreground, and starts a web server
     running on http://localhost:4000/ by default. To stop it, use `CTRL+C`.

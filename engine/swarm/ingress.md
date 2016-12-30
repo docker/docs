@@ -1,21 +1,8 @@
 ---
 description: Use the routing mesh to publish services externally to a swarm
-keywords:
-- guide
-- swarm mode
-- swarm
-- network
-- ingress
-- routing mesh
-menu:
-  main:
-    identifier: ingress-guide
-    parent: engine_swarm
-    weight: 17
+keywords: guide, swarm mode, swarm, network, ingress, routing mesh
 title: Use swarm mode routing mesh
 ---
-
-# Use swarm mode routing mesh
 
 Docker Engine swarm mode makes it easy to publish ports for services to make
 them available to resources outside the swarm. All nodes participate in an
@@ -79,14 +66,45 @@ $ docker service update \
 You can use `docker service inspect` to view the service's published port. For
 instance:
 
-```bash{% raw %}
+```bash
+{% raw %}
 $ docker service inspect --format="{{json .Endpoint.Spec.Ports}}" my-web
 
 [{"Protocol":"tcp","TargetPort":80,"PublishedPort":8080}]
-{% endraw %}```
+{% endraw %}
+```
 
 The output shows the `<TARGET-PORT>` from the containers and the
 `<PUBLISHED-PORT>` where nodes listen for requests for the service.
+
+### Publish a port for TCP only or UDP only
+
+By default, when you publish a port, it is a TCP port. You can
+specifically publish a UDP port instead of or in addition to a TCP port. When
+you publish both TCP and UDP ports, Docker 1.12.2 and earlier require you to
+add the suffix `/tcp` for TCP ports. Otherwise it is optional.
+
+#### TCP only
+
+The following two commands are equivalent.
+
+```bash
+$ docker service create --name dns-cache -p 53:53 dns-cache
+
+$ docker service create --name dns-cache -p 53:53/tcp dns-cache
+```
+
+#### TCP and UDP
+
+```bash
+$ docker service create --name dns-cache -p 53:53/tcp -p 53:53/udp dns-cache
+```
+
+#### UDP only
+
+```bash
+$ docker service create --name dns-cache -p 53:53/udp dns-cache
+```
 
 ## Configure an external load balancer
 
@@ -101,7 +119,7 @@ the swarm. The swarm nodes can reside on a private network that is accessible to
 the proxy server, but that is not publicly accessible.
 
 You can configure the load balancer to balance requests between every node in
-the swarm even if the there are no tasks scheduled on the node. For example, you
+the swarm even if there are no tasks scheduled on the node. For example, you
 could have the following HAProxy configuration in `/etc/haproxy/haproxy.cfg`:
 
 ```bash

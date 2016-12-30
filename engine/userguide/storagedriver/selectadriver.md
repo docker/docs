@@ -1,18 +1,11 @@
 ---
 description: Learn how select the proper storage driver for your container.
-keywords:
-- container, storage, driver, AUFS, btfs, devicemapper,zvfs
-menu:
-  main:
-    parent: engine_driver
-    weight: -1
+keywords: container, storage, driver, AUFS, btfs, devicemapper,zvfs
 title: Select a storage driver
 ---
 
-# Select a storage driver
-
 This page describes Docker's storage driver feature. It lists the storage
-driver's that Docker supports and the basic commands associated with managing
+drivers that Docker supports and the basic commands associated with managing
 them. Finally, this page provides guidance on choosing a storage driver.
 
 The material on this page is intended for readers who already have an
@@ -168,7 +161,7 @@ your system. Stability is an important factor influencing which storage driver
 is used by default. Straying from this default may increase your chances of
 encountering bugs and nuances.
 - **Follow the configuration specified on the CS Engine
-[compatibility matrix](https://www.docker.com/compatibility-maintenance)**. The
+[compatibility matrix](https://success.docker.com/Help/Compatibility_Matrix)**. The
  CS Engine is the commercially supported version of the Docker Engine. It's
 code-base is identical to the open source Engine, but it has a limited set of
 supported configurations. These *supported configurations* use the most stable

@@ -1,15 +1,8 @@
 ---
 description: Migrate from Boot2Docker to Docker Machine
-keywords:
-- machine, commands, boot2docker, migrate, docker
-menu:
-  main:
-    parent: workw_machine
-    weight: -30
+keywords: machine, commands, boot2docker, migrate, docker
 title: Migrate from Boot2Docker to Machine
 ---
-
-# Migrate from Boot2Docker to Docker Machine
 
 If you were using Boot2Docker previously, you have a pre-existing Docker
 `boot2docker-vm` VM on your local system.  To allow Docker Machine to manage
@@ -21,7 +14,7 @@ this older VM, you must migrate it.
 
         $ docker-machine create -d virtualbox --virtualbox-import-boot2docker-vm boot2docker-vm docker-vm
 
-3.  Use the `docker-machine` command to interact with the migrated VM.  
+3.  Use the `docker-machine` command to interact with the migrated VM.
 
 ## Subcommand comparison
 

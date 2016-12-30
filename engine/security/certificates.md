@@ -1,17 +1,10 @@
 ---
-aliases:
-- /engine/articles/certificates/
 description: How to set up and use certificates with a registry to verify access
-keywords:
-- Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls,
-  documentation, examples, articles,  tutorials
-menu:
-  main:
-    parent: smn_secure_docker
-title: Using certificates for repository client verification
+keywords: Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls, documentation, examples, articles, tutorials
+redirect_from:
+- /engine/articles/certificates/
+title: Verify repository client with certificates
 ---
-
-# Using certificates for repository client verification
 
 In [Running Docker with HTTPS](https.md), you learned that, by default,
 Docker runs via a non-networked Unix socket and TLS must be enabled in order
@@ -45,7 +38,7 @@ The following illustrates a configuration with multiple certs:
 
 ```
     /etc/docker/certs.d/        <-- Certificate directory
-    └── localhost               <-- Hostname
+    └── localhost:5000          <-- Hostname:port
        ├── client.cert          <-- Client certificate
        ├── client.key           <-- Client key
        └── localhost.crt        <-- Certificate authority that signed
@@ -67,7 +60,7 @@ key and then use the key to create the certificate.
 
 > **Note:**
 > These TLS commands will only generate a working set of certificates on Linux.
-> The version of OpenSSL in Mac OS X is incompatible with the type of
+> The version of OpenSSL in macOS is incompatible with the type of
 > certificate Docker requires.
 
 ## Troubleshooting tips

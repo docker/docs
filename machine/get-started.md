@@ -1,15 +1,8 @@
 ---
 description: Get started with Docker Machine and a local VM
-keywords:
-- docker, machine, virtualbox, local
-menu:
-  main:
-    parent: workw_machine
-    weight: -70
-title: Get started with a local VM
+keywords: docker, machine, virtualbox, local
+title: Get started with Docker Machine and a local VM
 ---
-
-# Get started with Docker Machine and a local VM
 
 Let's take a look at using `docker-machine` to create, use and manage a
 Docker host inside of a local virtual machine.
@@ -19,38 +12,37 @@ Docker host inside of a local virtual machine.
 With the advent of [Docker for Mac](/docker-for-mac/index.md) and [Docker for
 Windows](/docker-for-windows/index.md) as replacements for [Docker
 Toolbox](/toolbox/overview.md), we recommend that you use these for your primary
-Docker workflows.
+Docker workflows. You can use these applications to run Docker natively on your local system without using Docker Machine at all. (See [Docker for Mac vs. Docker Toolbox](docker-for-mac/docker-toolbox.md) for an explanation on the Mac side.)
 
-However, Docker Machine is still available to create and manage machines for
+However, if you want to create _multiple_ local machines, you need Docker Machine, which is still available to create and manage machines for
 power users or multi-node experimentation. Both Docker for Mac and Docker for
 Windows include the newest version of Docker Machine, so when you install either
 of these, you get `docker-machine`.
 
 The new solutions come with their own native virtualization solutions rather
-than using Oracle VirtualBox, so there are new considerations to keep in mind
-when using Machine to create local VMs. Docker for Mac allows for the creation
-of additional `docker-machine` based `virtualbox` machines without issue, but in
-the case of Docker for Windows, you will need to use the `hyperv` driver
-instead.
+than Oracle VirtualBox, so keep the following considerations in mind when using
+Machine to create local VMs.
 
+* **Docker for Mac** - You can use `docker-machine --create` with the `virtualbox` driver to create additional local machines.
+
+* **Docker for Windows** - You can use `docker-machine --create` with the `hyperv` driver to create additional local machines.
 
 #### If you are using Docker for Windows
 
 Docker for Windows uses [Microsoft
 Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/windows_welcome)
-for virtualization, and Hyper-V and Oracle VirtualBox are incompatible.
+for virtualization, and Hyper-V is not compatible with Oracle VirtualBox.
 Therefore, you cannot run the two solutions simultaneously. But you can still
-use `docker-machine` to create local VMs by using the Microsoft Hyper-V driver.
+use `docker-machine` to create more local VMs by using the Microsoft Hyper-V driver.
 
-* If you are using Docker for Windows, the only prequisite is to have Docker for Windows installed. You will use the Microsoft `hyperv` driver to create
-local machines. (See the [Docker Machine driver for Microsoft
+* If you are using Docker for Windows, the only prerequisite is to have Docker for Windows installed. If you want to create multiple local machines, use the Microsoft `hyperv` driver to create them. (See the [Docker Machine driver for Microsoft
 Hyper-V](drivers/hyper-v.md).)
 
 #### If you are using Docker for Mac
 
 Docker for Mac uses [HyperKit](https://github.com/docker/HyperKit/), a
-lightweight OS X virtualization solution built on top of the
-[Hypervisor.framework](https://developer.apple.com/reference/hypervisor) in OS X
+lightweight macOS virtualization solution built on top of the
+[Hypervisor.framework](https://developer.apple.com/reference/hypervisor) in macOS
 10.10 Yosemite and higher.
 
 Currently, there is no `docker-machine create` driver for HyperKit, so you will
@@ -80,8 +72,8 @@ Microsoft Hyper-V](drivers/hyper-v.md).)
 * Make sure you have <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">the latest VirtualBox</a> correctly installed on your system. If
 you used <a href="https://www.docker.com/products/docker-toolbox"
 target="_blank">Toolbox</a> for <a
-href="https://docs.docker.com/engine/installation/mac/" target="_blank">Mac</a>
-or <a href="https://docs.docker.com/engine/installation/windows/"
+href="/engine/installation/mac/" target="_blank">Mac</a>
+or <a href="/engine/installation/windows/"
 target="_blank">Windows</a> to install Docker Machine, VirtualBox is
 automatically installed.
 <br />
@@ -172,7 +164,7 @@ choose another name for this new machine.
 
       **Note**: If you are using `fish`, or a Windows shell such as
       Powershell/`cmd.exe` the above method will not work as described.
-      Instead, see <a href="https://docs.docker.com/machine/reference/env/" target="_blank">the `env` command's documentation</a>
+      Instead, see <a href="/machine/reference/env/" target="_blank">the `env` command's documentation</a>
       to learn how to set the environment variables for your shell.
 
     This sets environment variables for the current shell that the Docker client will read which specify the TLS settings. You need to do this each time you open a new shell or restart your machine.
@@ -291,7 +283,7 @@ default)` in their shell profiles (e.g., the `~/.bash_profile` file). However,
 this fails if the `default` machine is not running. If desired, you can
 configure your system to start the `default` machine automatically.
 
-Here is an example of how to configure this on OS X.
+Here is an example of how to configure this on macOS.
 
 Create a file called `com.docker.machine.default.plist` under `~/Library/LaunchAgents` with the following content:
 

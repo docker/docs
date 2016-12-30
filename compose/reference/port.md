@@ -1,15 +1,8 @@
 ---
 description: Prints the public port for a port binding.s
-keywords:
-- fig, composition, compose, docker, orchestration, cli,  port
-menu:
-  main:
-    identifier: port.compose
-    parent: smn_compose_cli
-title: port
+keywords: fig, composition, compose, docker, orchestration, cli,  port
+title: docker-compose port
 ---
-
-# port
 
 ```
 Usage: port [options] SERVICE PRIVATE_PORT

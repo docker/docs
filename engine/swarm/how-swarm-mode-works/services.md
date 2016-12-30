@@ -1,16 +1,8 @@
 ---
 description: How swarm mode services work
-keywords:
-- docker, container, cluster, swarm mode, node
-menu:
-  main:
-    identifier: how-services-work
-    parent: how-swarm-works
-    weight: "4"
+keywords: docker, container, cluster, swarm mode, node
 title: How services work
 ---
-
-# How services work
 
 To deploy an application image when Docker Engine is in swarm mode, you create a
 service. Frequently a service will be the image for a microservice within the
@@ -68,13 +60,43 @@ The underlying logic of Docker swarm mode is a general purpose scheduler and
 orchestrator.  The service and task abstractions themselves are unaware of the
 containers they implement.  Hypothetically, you could implement other types of
 tasks such as virtual machine tasks or non-containerized process tasks.  The
-scheduler and orchestrator are agnostic about they type of task. However, the
+scheduler and orchestrator are agnostic about the type of task. However, the
 current version of Docker only supports container tasks.
 
 The diagram below shows how swarm mode accepts service create requests and
 schedules tasks to worker nodes.
 
 ![services flow](../images/service-lifecycle.png)
+
+### Pending services
+
+A service may be configured in such a way that no node currently in the
+swarm can run its tasks. In this case, the service remains in state `pending`.
+Here are a few examples of when a service might remain in state `pending`.
+
+**Note**: If your only intention is to prevent a service from
+being deployed, scale the service to 0 instead of trying to configure it in
+such a way that it will remain in `pending`.
+
+- If all nodes are paused or drained, and you create a service, it will be
+  pending until a node becomes available. In reality, the first node to become
+  available will get all of the tasks, so this is not a good thing to do in a
+  production environment.
+
+- You can reserve a specific amount of memory for a service. If no node in the
+  swarm has the required amount of memory, the service will remain in a pending
+  state until a node is available which can run its tasks. If you specify a very
+  large value, such as 500 GB, the task will be pending forever, unless you
+  really have a node which can satisfy it.
+
+- You can impose placement constraints on the service, and the constraints may
+  not be able to be honored at a given time.
+
+This behavior illustrates that the requirements and configuration of your tasks
+are not tightly tied to the current state of the swarm. As the administrator of
+a swarm, you declare the desired state of your swarm, and the manager works with
+the nodes in the swarm to create that state. You do not need to micro-manage the
+tasks on the swarm.
 
 ## Replicated and global services
 

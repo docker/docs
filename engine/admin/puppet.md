@@ -1,17 +1,10 @@
 ---
-aliases:
-- /engine/articles/puppet/
 description: Installing and using Puppet
-keywords:
-- puppet, installation, usage, docker,  documentation
-menu:
-  main:
-    parent: engine_admin
-    weight: "12"
-title: Using Puppet
+keywords: puppet, installation, usage, docker,  documentation
+redirect_from:
+- /engine/articles/puppet/
+title: Use Puppet
 ---
-
-# Using Puppet
 
 > *Note:* Please note this is a community contributed installation path. The
 > only `official` installation is using the

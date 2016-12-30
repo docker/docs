@@ -1,13 +1,7 @@
 ---
-description: v1.3.3 API
-keywords:
-- Docker, DTR, API, v1.3.3
-menu:
-  main:
-    parent: smn_dtrapi
 title: v1.3.3 API
-type: _default
-weight: 101
+description: v1.3.3 API
+keywords: Docker, DTR, API, v1.3.3
 ---
 
 <div class="swagger-section">

@@ -1,19 +1,8 @@
 ---
 description: Use swarm mode networking features
-keywords:
-- guide
-- swarm mode
-- swarm
-- network
-menu:
-  main:
-    identifier: networking-guide
-    parent: engine_swarm
-    weight: 16
+keywords: guide, swarm mode, swarm, network
 title: Attach services to an overlay network
 ---
-
-# Attach services to an overlay network
 
 Docker Engine swarm mode natively supports **overlay networks**, so you can
 enable container-to-container networks. When you use swarm mode, you don't need

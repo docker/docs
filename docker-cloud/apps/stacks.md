@@ -1,16 +1,10 @@
 ---
-aliases:
-- /docker-cloud/feature-reference/stacks/
 description: Manage service stacks
-keywords:
-- service, stack, yaml
-menu:
-  main:
-    parent: apps
+keywords: service, stack, yaml
+redirect_from:
+- /docker-cloud/feature-reference/stacks/
 title: Manage service stacks
 ---
-
-# Manage service stacks
 
 A **stack** is a collection of services that make up an application in a specific environment. A **stack file** is a file in YAML format, similar to a `docker-compose.yml` file, that defines one or more services. The YAML reference is documented [here](stack-yaml-reference.md).
 

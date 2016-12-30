@@ -1,17 +1,10 @@
 ---
-description: Running a Swarm container on Docker Engine. Run a Swarm binary on the
-  host OS without Docker Engine.
-keywords:
-- docker, Swarm, container, binary, clustering, install, installation
-menu:
-  main:
-    identifier: how-to-get-and-run-Swarm
-    parent: workw_swarm
-    weight: -90
-title: How to get Swarm
+advisory: swarm-standalone
+hide_from_sitemap: true
+description: Running a Swarm container on Docker Engine. Run a Swarm binary on the host OS without Docker Engine.
+keywords: docker, Swarm, container, binary, clustering, install, installation
+title: Get Docker Swarm
 ---
-
-# How to get Docker Swarm
 
 You can create a Docker Swarm cluster using the `swarm` executable image from a
 container or using an executable `swarm` binary you install on your system. This
@@ -34,7 +27,7 @@ The first time you use any image, Docker Engine checks to see if you already hav
 
         $ docker-machine ls
         NAME      ACTIVE   URL          STATE     URL                         SWARM   DOCKER    ERRORS
-        default   *       virtualbox   Running   tcp://192.168.99.100:2376           v1.9.1    
+        default   *       virtualbox   Running   tcp://192.168.99.100:2376           v1.9.1
 
     This shows an environment running an Engine host on the `default` instance.
 

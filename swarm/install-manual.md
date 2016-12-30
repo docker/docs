@@ -1,15 +1,10 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Deploying Swarm on AWS EC2 AMI's in a VPC
-keywords:
-- docker, swarm, clustering, examples, Amazon, AWS EC2
-menu:
-  main:
-    parent: workw_swarm
-    weight: -40
+keywords: docker, swarm, clustering, examples, Amazon, AWS EC2
 title: Build a Swarm cluster for production
 ---
-
-# Build a Swarm cluster for production
 
 This page teaches you to deploy a high-availability Docker Swarm cluster.
 Although the example installation uses the Amazon Web Services (AWS) platform,
@@ -128,20 +123,24 @@ SSH to each node in turn and do the following.
 
         $ curl -sSL https://get.docker.com/ | sh
 
-3. Configure and start Engine so it listens for Swarm nodes on port `2375`.
+3. Edit `/etc/sysconfig/docker` and add `"-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock"`
+   to the `OPTIONS` variable.
 
-        $ sudo docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
+4. Start Docker.
 
-4. Verify that Docker Engine is installed correctly:
+       $ sudo /etc/init.d/docker start
 
-        $ sudo docker run hello-world
+4. Verify that Docker Engine is installed correctly by running a container with the
+   `hello-world` image.
 
-    The output should display a "Hello World" message and other text without any
-    error messages.
+       $ sudo docker run hello-world
+
+   The output should display a "Hello World" message and other text without any
+   error messages.
 
 5. Give the `ec2-user` root privileges:
 
-        $ sudo usermod -aG docker ec2-user
+       $ sudo usermod -aG docker ec2-user
 
 6. Enter `logout`.
 
@@ -177,9 +176,9 @@ host as one of the Swarm managers.
 
 2. From the output, copy the `eth0` IP address from `inet addr`.
 
-3. Paste the launch command into the command line:
+3. To set up a discovery backend, use the following command, replacing `<consul0_ip>` with the IP address from the previous command:
 
-        $ docker run -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap
+        $ docker run -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap -advertise=<consul0_ip>
 
 4. Enter `docker ps`.
 
@@ -302,7 +301,7 @@ They will display corresponding entries for the change in leadership.
 
 ## Additional Resources
 
-- [Installing Docker Engine on a cloud provider](http://docs.docker.com/engine/installation/cloud/cloud-ex-aws/)
+- [Installing Docker Engine on a cloud provider](/engine/installation/cloud/cloud-ex-aws/)
 - [High availability in Docker Swarm](multi-manager-setup.md)
 - [Discovery](discovery.md)
 - [High-availability cluster using a trio of consul nodes](https://hub.docker.com/r/progrium/consul/)

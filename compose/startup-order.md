@@ -1,14 +1,8 @@
 ---
 description: How to control service startup order in Docker Compose
 keywords: documentation, docs,  docker, compose, startup, order
-menu:
-  main:
-    parent: workw_compose
-    weight: 90
-title: Controlling startup order
+title: Controlling startup order in Compose
 ---
-
-# Controlling startup order in Compose
 
 You can control the order of service startup with the
 [depends_on](compose-file.md#depends-on) option. Compose always starts
@@ -38,8 +32,7 @@ script:
     wrapper scripts which you can include in your application's image and will
     poll a given host and port until it's accepting TCP connections.
 
-    Supposing your application's image has a `CMD` set in its Dockerfile, you
-    can wrap it by setting the entrypoint in `docker-compose.yml`:
+    For example, to use `wait-for-it.sh` to wrap your service's command:
 
         version: "2"
         services:
@@ -49,15 +42,16 @@ script:
               - "80:8000"
             depends_on:
               - "db"
-            entrypoint: ./wait-for-it.sh db:5432
+            command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
           db:
             image: postgres
 
--   Write your own wrapper script to perform a more application-specific health
+-   Alternatively, write your own wrapper script to perform a more application-specific health
     check. For example, you might want to wait until Postgres is definitely
     ready to accept commands:
 
         #!/bin/bash
+        # wait-for-postgres.sh
 
         set -e
 
@@ -74,7 +68,7 @@ script:
         exec $cmd
 
     You can use this as a wrapper script as in the previous example, by setting
-    `entrypoint: ./wait-for-postgres.sh db`.
+    `command: ["./wait-for-postgres.sh", "db", "python", "app.py"]`.
 
 
 ## Compose documentation

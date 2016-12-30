@@ -1,20 +1,12 @@
 ---
-aliases:
+description: Getting started with Docker
+keywords: beginner, getting started, Docker, install
+redirect_from:
 - /mac/step_one/
 - /windows/step_one/
 - /linux/step_one/
-description: Getting started with Docker
-keywords:
-- beginner, getting started, Docker, install
-menu:
-  main:
-    identifier: getstart_all_install
-    parent: tutorial_getstart_menu
-    weight: 1
 title: Install Docker and run hello-world
 ---
-
-# Install Docker
 
 - [Step 1: Get Docker](step_one.md#step-1-get-docker)
 - [Step 2: Install Docker](step_one.md#step-2-install-docker)
@@ -32,7 +24,7 @@ Docker for Mac is our newest offering for the Mac. It runs as a native Mac appli
 
 - Mac must be a 2010 or newer model, with Intel's hardware support for memory management unit (MMU) virtualization; i.e., Extended Page Tables (EPT)
 
-- OS X 10.10.3 Yosemite or newer
+- macOS 10.10.3 Yosemite or newer
 
 - At least 4GB of RAM
 
@@ -69,9 +61,9 @@ For full instructions on getting Docker for various Linux distributions, see [In
 
 ## Step 2: Install Docker
 
-- **Docker for Mac** - Install instructions are at [Getting Started with Docker for Mac](https://docs.docker.com/docker-for-mac/).
+- **Docker for Mac** - Install instructions are at [Getting Started with Docker for Mac](/docker-for-mac/).
 
-- **Docker for Windows** - Install instructions are at [Getting Started with Docker for Windows](https://docs.docker.com/docker-for-windows/).
+- **Docker for Windows** - Install instructions are at [Getting Started with Docker for Windows](/docker-for-windows/).
 
 - **Docker Toolbox** - Install instructions are at [Docker Toolbox Overview](/toolbox/overview.md).
 

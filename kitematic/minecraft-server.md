@@ -1,16 +1,9 @@
 ---
-description: Tutorial demonstrating the setup of a Minecraft server using Docker and
-  Kitematic
-keywords:
-- docker, documentation, about, technology, kitematic, gui, minecraft,  tutorial
-menu:
-  main:
-    parent: toolbox_kitematic
-    weight: 2
-title: Set up a Minecraft Server
+advisory: kitematic
+description: Tutorial demonstrating the setup of a Minecraft server using Docker and Kitematic
+keywords: docker, documentation, about, technology, kitematic, gui, minecraft, tutorial
+title: 'Kitematic tutorial: Set up a Minecraft server'
 ---
-
-# Kitematic tutorial: Set up a Minecraft server
 
 This is a quick tutorial demonstrating how to set up a local Minecraft server
 using Kitematic and Docker.

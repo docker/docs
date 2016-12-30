@@ -1,14 +1,9 @@
 ---
-aliases:
-- /engine/userguide/containers/
 description: Explains how to work with containers
-identifier: engine_learn
-keywords:
-- docker, introduction, documentation, about, technology, docker.io, user, guide,
-  user's, manual, platform, framework, home,  intro
-parent: engine_learn_menu
-title: Learn by example
-weight: "-80"
+keywords: docker, introduction, documentation, about, technology, docker.io, user, guide, user's, manual, platform, framework, home, intro
+redirect_from:
+- /engine/userguide/containers/
+title: Engine tutorials
 ---
 
 # Learn by example

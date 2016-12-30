@@ -1,15 +1,8 @@
 ---
-description: Example of using Docker Machine to install Docker Engine on a cloud provider,
-  using Digital Ocean.
-keywords:
-- cloud, docker, machine, documentation,  installation, digitalocean
-menu:
-  main:
-    parent: install_cloud
+description: Example of using Docker Machine to install Docker Engine on a cloud provider, using Digital Ocean.
+keywords: cloud, docker, machine, documentation, installation, digitalocean
 title: 'Example: Use Docker Machine to provision cloud hosts'
 ---
-
-# Example: Use Docker Machine to provision cloud hosts
 
 Docker Machine driver plugins are available for many cloud platforms, so you can use Machine to provision cloud hosts. When you use Docker Machine for provisioning, you create cloud hosts with Docker Engine installed on them.
 
@@ -49,11 +42,11 @@ To generate your access token:
 
 1. If you have not done so already, install Docker Machine on your local host.
 
-  * <a href="https://docs.docker.com/engine/installation/mac/" target="_blank"> How to install Docker Machine on Mac OS X</a>
+  * <a href="/engine/installation/mac/" target="_blank"> How to install Docker Machine on macOS</a>
 
-  * <a href="https://docs.docker.com/engine/installation/windows/" target="_blank">How to install Docker Machine on Windows</a>
+  * <a href="/engine/installation/windows/" target="_blank">How to install Docker Machine on Windows</a>
 
-  * <a href="https://docs.docker.com/machine/install-machine/" target="_blank">Install Docker Machine directly</a> (e.g., on Linux)
+  * <a href="/machine/install-machine/" target="_blank">Install Docker Machine directly</a> (e.g., on Linux)
 
 2. At a command terminal, use `docker-machine ls` to get a list of Docker Machines and their status.
 
@@ -110,8 +103,8 @@ To generate your access token:
     ```
     $ docker-machine ls
     NAME             ACTIVE   DRIVER         STATE     URL                         SWARM
-    default          *        virtualbox     Running   tcp://192.168.99.100:2376   
-    docker-sandbox   -        digitalocean   Running   tcp://45.55.139.48:2376   
+    default          *        virtualbox     Running   tcp://192.168.99.100:2376
+    docker-sandbox   -        digitalocean   Running   tcp://45.55.139.48:2376
     ```
 
     Notice that the new cloud server is running but is not the active host. Our command shell is still connected to the default machine, which is currently the active host as indicated by the asterisk (*).
@@ -135,7 +128,7 @@ To generate your access token:
     ```
     $ docker-machine ls
     NAME             ACTIVE   DRIVER         STATE     URL                         SWARM
-    default          -        virtualbox     Running   tcp://192.168.99.100:2376   
+    default          -        virtualbox     Running   tcp://192.168.99.100:2376
     docker-sandbox   *        digitalocean   Running   tcp://45.55.222.72:2376
     ```
 
@@ -185,7 +178,7 @@ To generate your access token:
 
 #### Understand the defaults and options on the create command
 
-For convenience, `docker-machine` will use sensible defaults for choosing settings such as the image that the server is based on, but you override the defaults using the respective flags (e.g. `--digitalocean-image`). This is useful if, for example, you want to create a cloud server with a lot of memory and CPUs (by default `docker-machine` creates a small server). For a full list of the flags/settings available and their defaults, see the output of `docker-machine create -h` at the command line. See also <a href="https://docs.docker.com/machine/drivers/os-base/" target="_blank">Driver options and operating system defaults</a> and information about the <a href="https://docs.docker.com/machine/reference/create/" target="_blank">create</a> command in the Docker Machine documentation.
+For convenience, `docker-machine` will use sensible defaults for choosing settings such as the image that the server is based on, but you override the defaults using the respective flags (e.g. `--digitalocean-image`). This is useful if, for example, you want to create a cloud server with a lot of memory and CPUs (by default `docker-machine` creates a small server). For a full list of the flags/settings available and their defaults, see the output of `docker-machine create -h` at the command line. See also <a href="/machine/drivers/os-base/" target="_blank">Driver options and operating system defaults</a> and information about the <a href="/machine/reference/create/" target="_blank">create</a> command in the Docker Machine documentation.
 
 
 ### Step 5. Use Machine to remove the Droplet
@@ -207,11 +200,11 @@ If you create a host with Docker Machine, but remove it through the cloud provid
 
 ## Where to go next
 
-* [Docker Machine driver reference](https://docs.docker.com/machine/drivers/)
+* [Docker Machine driver reference](/machine/drivers/)
 
-* [Docker Machine Overview](https://docs.docker.com/machine/overview/)
+* [Docker Machine Overview](/machine/overview/)
 
-* [Use Docker Machine to provision hosts on cloud providers](https://docs.docker.com/machine/get-started-cloud/)
+* [Use Docker Machine to provision hosts on cloud providers](/machine/get-started-cloud/)
 
 * [Install Docker Engine](../../installation/index.md)
 

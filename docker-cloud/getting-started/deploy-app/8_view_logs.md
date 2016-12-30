@@ -1,18 +1,11 @@
 ---
-aliases:
+description: View service logs
+keywords: View, logs, Python
+redirect_from:
 - /docker-cloud/getting-started/python/8_view_logs/
 - /docker-cloud/getting-started/golang/8_view_logs/
-description: View service logs
-keywords:
-- View, logs, Python
-menu:
-  main:
-    parent: deploy-app
-    weight: -20
 title: View service logs
 ---
-
-# View service logs
 
 Docker Cloud grants you access to the logs your application writes to `stdout`.
 An internal service multiplexes all the logs from all the containers of a
@@ -21,7 +14,7 @@ service logs` command with the name of the service.
 
 If we run `docker-cloud service logs web`, you'll see logs for both *web-1* and *web-2*, like the example below.
 
-```
+```none
 $ docker-cloud service logs web
 [web-1] 2015-01-13T22:45:37.250431077Z  * Running on http://0.0.0.0:80/
 [web-1] 2015-01-07T17:20:19.076174813Z 83.50.33.64 - - [07/Jan/2015 17:20:19] "GET / HTTP/1.1" 200 -
@@ -33,7 +26,7 @@ $ docker-cloud service logs web
 
 To see a specific container's logs, use the `container logs` and the specific container's name. To learn more about service and container hostnames, see [Service Discovery](../../apps/service-links.md#using-service-and-container-names-as-hostnames).
 
-```
+```none
 $ docker-cloud container logs web-1
 2015-01-07T17:18:24.550419508Z  * Running on http://0.0.0.0:80/
 2015-01-07T17:20:19.076174813Z 83.50.33.64 - - [07/Jan/2015 17:20:19] "GET / HTTP/1.1" 200 -

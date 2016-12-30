@@ -1,16 +1,10 @@
 ---
-aliases:
-- /engine/installation/SUSE/
 description: Installation instructions for Docker on openSUSE and on SUSE Linux Enterprise.
-keywords:
-- openSUSE, SUSE Linux Enterprise, SUSE, SLE, docker, documentation,  installation
-menu:
-  main:
-    parent: engine_linux
-title: Installation on openSUSE and SUSE Linux Enterprise
+keywords: openSUSE, SUSE Linux Enterprise, SUSE, SLE, docker, documentation,  installation
+redirect_from:
+- /engine/installation/SUSE/
+title: Install Docker on openSUSE and SUSE Linux Enterprise
 ---
-
-# openSUSE and SUSE Linux Enterprise
 
 This page provides instructions for installing and configuring the latest
 Docker Engine software on openSUSE and SUSE systems.
@@ -41,7 +35,7 @@ Otherwise execute the following command:
 
     $ sudo SUSEConnect -p sle-module-containers/12/x86_64 -r ''
 
-    >**Note:** currently the `-r ''` flag is required to avoid a known limitation of `SUSEConnect`.
+> **Note:** currently the `-r ''` flag is required to avoid a known limitation of `SUSEConnect`.
 
 The [Virtualization:containers project](https://build.opensuse.org/project/show/Virtualization:containers)
 on the [Open Build Service](https://build.opensuse.org/) contains also bleeding

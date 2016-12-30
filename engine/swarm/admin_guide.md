@@ -1,18 +1,10 @@
 ---
-aliases:
-- /engine/swarm/manager-administration-guide/
 description: Manager administration guide
-keywords:
-- docker, container, swarm, manager, raft
-menu:
-  main:
-    identifier: manager_admin_guide
-    parent: engine_swarm
-    weight: "20"
-title: Swarm administration guide
+keywords: docker, container, swarm, manager, raft
+redirect_from:
+- /engine/swarm/manager-administration-guide/
+title: Administer and maintain a swarm of Docker Engines
 ---
-
-# Administer and maintain a swarm of Docker Engines
 
 When you run a swarm of Docker Engines, **manager nodes** are the key components
 for managing the swarm and storing the swarm state. It is important to
@@ -21,15 +13,16 @@ maintain the swarm.
 
 This article covers the following swarm administration tasks:
 
-* [Using a static IP for manager node advertise address](admin_guide.md#use-a-static-ip-for-manager-node-advertise-address)
-* [Adding manager nodes for fault tolerance](admin_guide.md#add-manager-nodes-for-fault-tolerance)
-* [Distributing manager nodes](admin_guide.md#distribute-manager-nodes)
-* [Running manager-only nodes](admin_guide.md#run-manager-only-nodes)
-* [Backing up the swarm state](admin_guide.md#back-up-the-swarm-state)
-* [Monitoring the swarm health](admin_guide.md#monitor-swarm-health)
-* [Troubleshooting a manager node](admin_guide.md#troubleshoot-a-manager-node)
-* [Forcefully removing a node](admin_guide.md#force-remove-a-node)
-* [Recovering from disaster](admin_guide.md#recover-from-disaster)
+* [Using a static IP for manager node advertise address](#use-a-static-ip-for-manager-node-advertise-address)
+* [Adding manager nodes for fault tolerance](#add-manager-nodes-for-fault-tolerance)
+* [Distributing manager nodes](#distribute-manager-nodes)
+* [Running manager-only nodes](#run-manager-only-nodes)
+* [Backing up the swarm state](#back-up-the-swarm-state)
+* [Monitoring the swarm health](#monitor-swarm-health)
+* [Troubleshooting a manager node](#troubleshoot-a-manager-node)
+* [Forcefully removing a node](#force-remove-a-node)
+* [Recovering from disaster](#recover-from-disaster)
+* [Forcing the swarm to rebalance](#forcing-the-swarm-to-rebalance)
 
 Refer to [How nodes work](how-swarm-mode-works/nodes.md)
 for a brief overview of Docker Swarm mode and the difference between manager and
@@ -48,10 +41,27 @@ fault-tolerant. However, additional manager nodes reduce write performance
 because more nodes must acknowledge proposals to update the swarm state.
 This means more network round-trip traffic.
 
-Raft requires a majority of managers, also called a quorum, to agree on proposed
-updates to the swarm. A quorum of managers must also agree on node additions
-and removals. Membership operations are subject to the same constraints as state
-replication.
+Raft requires a majority of managers, also called the quorum, to agree on
+proposed updates to the swarm, such as node additions or removals. Membership
+operations are subject to the same constraints as state replication.
+
+### Maintaining the quorum of managers
+
+If the swarm loses the quorum of managers, the swarm cannot perform management
+tasks. If your swarm has multiple managers, always have more than two. In order
+to maintain quorum, a majority of managers must be available. An odd number of
+managers is recommended, because the next even number does not make the quorum
+easier to keep. For instance, whether you have 3 or 4 managers, you can still
+only lose 1 manager and maintain the quorum. If you have 5 or 6 managers, you
+can still only lose two.
+
+Even if a swarm loses the quorum of managers, swarm tasks on existing worker
+nodes continue to run. However, swarm nodes cannot be added, updated, or
+removed, and new or existing tasks cannot be started, stopped, moved, or
+updated.
+
+See [Recovering from losing the quorum](#recovering-from-losing-the-quorum) for
+troubleshooting steps if you do lose the quorum of managers.
 
 ## Use a static IP for manager node advertise address
 
@@ -72,8 +82,8 @@ Dynamic IP addresses are OK for worker nodes.
 
 You should maintain an odd number of managers in the swarm to support manager
 node failures. Having an odd number of managers ensures that during a network
-partition, there is a higher chance that a quorum remains available to process
-requests if the network is partitioned into two sets. Keeping a quorum is not
+partition, there is a higher chance that the quorum remains available to process
+requests if the network is partitioned into two sets. Keeping the quorum is not
 guaranteed if you encounter more than two network partitions.
 
 | Swarm Size |  Majority  |  Fault Tolerance  |
@@ -91,7 +101,7 @@ guaranteed if you encounter more than two network partitions.
 For example, in a swarm with *5 nodes*, if you lose *3 nodes*, you don't have a
 quorum. Therefore you can't add or remove nodes until you recover one of the
 unavailable manager nodes or recover the swarm with disaster recovery
-commands. See [Recover from disaster](admin_guide.md#recover-from-disaster).
+commands. See [Recover from disaster](#recover-from-disaster).
 
 While it is possible to scale a swarm down to a single manager node, it is
 impossible to demote the last manager node. This ensures you maintain access to
@@ -111,7 +121,7 @@ In addition to maintaining an odd number of manager nodes, pay attention to
 datacenter topology when placing managers. For optimal fault-tolerance, distribute
 manager nodes across a minimum of 3 availability-zones to support failures of an
 entire set of machines or common maintenance scenarios. If you suffer a failure
-in any of those zones, the swarm should maintain a quorum of manager nodes
+in any of those zones, the swarm should maintain the quorum of manager nodes
 available to process requests and rebalance workloads.
 
 | Swarm manager nodes |  Repartition (on 3 Availability zones) |
@@ -154,7 +164,7 @@ directory:
 ```
 
 Back up the `raft` data directory often so that you can use it in case of
-[disaster recovery](admin_guide.md#recover-from-disaster). Then you can take the `raft`
+[disaster recovery](#recover-from-disaster). Then you can take the `raft`
 directory of one of the manager nodes to restore to a new swarm.
 
 ## Monitor swarm health
@@ -239,37 +249,83 @@ you demote or remove a manager
 ## Recover from disaster
 
 Swarm is resilient to failures and the swarm can recover from any number
-of temporary node failures (machine reboots or crash with restart).
+of temporary node failures (machine reboots or crash with restart) or other
+transient errors. However, a swarm cannot automatically recover if it loses a
+quorum. Tasks on existing worker nodes will continue to run, but administrative
+tasks are not possible, including scaling or updating services and joining or
+removing nodes from the swarm. The best way to recover is to bring the missing
+manager nodes back online. If that is not possible, continue reading for some
+options for recovering your swarm.
 
-In a swarm of `N` managers, there must be a quorum of manager nodes greater than
-50% of the total number of managers (or `(N/2)+1`) in order for the swarm to
-process requests and remain available. This means the swarm can tolerate up to
-`(N-1)/2` permanent failures beyond which requests involving swarm management
-cannot be processed. These types of failures include data corruption or hardware
-failures.
+In a swarm of `N` managers, a quorum (a majority) of manager nodes must always
+be available. For example, in a swarm with 5 managers, a minimum of 3 must be
+operational and in communication with each other. In other words, the swarm can
+tolerate up to `(N-1)/2` permanent failures beyond which requests involving
+swarm management cannot be processed. These types of failures include data
+corruption or hardware failures.
 
-Even if you follow the guidelines here, it is possible that you can lose a
-quorum of manager nodes. If you can't recover the quorum by conventional
-means such as restarting faulty nodes, you can recover the swarm by running
-`docker swarm init --force-new-cluster` on a manager node.
+### Recovering from losing the quorum
+
+If you lose the quorum of managers, you cannot administer the swarm. If you have
+lost the quorum and you attempt to perform any management operation on the swarm,
+an error occurs:
+
+```no-highlight
+Error response from daemon: rpc error: code = 4 desc = context deadline exceeded
+```
+
+The best way to recover from losing the quorum is to bring the failed nodes back
+online. If you can't do that, the only way to recover from this state is to use
+the `--force-new-cluster` action from a manager node. This removes all managers
+except the manager the command was run from. The quorum is achieved because
+there is now only one manager. Promote nodes to be managers until you have the
+desired number of managers.
 
 ```bash
 # From the node to recover
 docker swarm init --force-new-cluster --advertise-addr node01:2377
 ```
 
-The `--force-new-cluster` flag puts the Docker Engine into swarm mode as a
-manager node of a single-node swarm. It discards swarm membership information
-that existed before the loss of the quorum but it retains data necessary to the
-Swarm such as services, tasks and the list of worker nodes.
+When you run the `docker swarm init` command with the `--force-new-cluster`
+flag, the Docker Engine where you run the command becomes the manager node of a
+single-node swarm which is capable of managing and running services. The manager
+has all the previous information about services and tasks, worker nodes are
+still part of the swarm, and services are still running. You will need to add or
+re-add  manager nodes to achieve your previous task distribution and ensure that
+you have enough managers to maintain high availability and prevent losing the
+quorum.
 
-### Joining a previously failed node
+## Forcing the swarm to rebalance
 
-If a node becomes unavailable, it cannot communicate with the rest of the swarm
-and its workload is redistributed among the other nodes.
-If access to that node is restored, it will join the swarm automatically, but it
-will join with no workload because the containers it was assigned have been
-reassigned. The node will only receive new workloads when the swarm is rebalanced.
-To force the swarm to be rebalanced, you can
-[update](../reference/commandline/service_update/) or
-[scale](../reference/commandline/service_scale/) the service.
+Generally, you do not need to force the swarm to rebalance its tasks. When you
+add a new node to a swarm, or a node reconnects to the swarm after a
+period of unavailability, the swarm does not automatically give a workload to
+the idle node. This is a design decision. If the swarm periodically shifted tasks
+to different nodes for the sake of balance, the clients using those tasks would
+be disrupted. The goal is to avoid disrupting running services for the sake of
+balance across the swarm. When new tasks start, or when a node with running
+tasks becomes unavailable, those tasks are given to less busy nodes. The goal
+is eventual balance, with minimal disruption to the end user.
+
+In Docker 1.13 and higher, you can use the `--force` or `-f` flag with the
+`docker service update` command to force the service to redistribute its tasks
+across the available worker nodes. This will cause the service tasks to restart.
+Client applications may be disrupted. If you have configured it, your service
+will use a [rolling update](swarm-tutorial.md#rolling-update).
+
+If you use an earlier version and you want to achieve an even balance of load
+across workers and don't mind disrupting running tasks, you can force your swarm
+to re-balance by temporarily scaling the service upward. Use
+`docker service inspect --pretty <servicename>` to see the configured scale
+of a service. When you use `docker service scale`, the nodes with the lowest
+number of tasks are targeted to receive the new workloads. There may be multiple
+under-loaded nodes in your swarm. You may need to scale the service up by modest
+increments a few times to achieve the balance you want across all the nodes.
+
+When the load is balanced to your satisfaction, you can scale the service back
+down to the original scale. You can use `docker service ps` to assess the current
+balance of your service across nodes.
+
+See also
+[`docker service scale`](../reference/commandline/service_scale.md) and
+[`docker service ps`](../reference/commandline/service_ps.md).

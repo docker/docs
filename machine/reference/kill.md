@@ -1,29 +1,26 @@
 ---
 description: Kill (abruptly force stop) a machine.
-keywords:
-- machine, kill, subcommand
-menu:
-  main:
-    identifier: machine.kill
-    parent: smn_machine_subcmds
-title: kill
+keywords: machine, kill, subcommand
+title: docker-machine kill
 ---
 
-# kill
+```none
+Usage: docker-machine kill [arg...]
 
-    Usage: docker-machine kill [arg...]
+Kill (abruptly force stop) a machine
 
-    Kill (abruptly force stop) a machine
-
-    Description:
-       Argument(s) are one or more machine names.
+Description:
+   Argument(s) are one or more machine names.
+```
 
 For example:
 
-    $ docker-machine ls
-    NAME   ACTIVE   DRIVER       STATE     URL
-    dev    *        virtualbox   Running   tcp://192.168.99.104:2376
-    $ docker-machine kill dev
-    $ docker-machine ls
-    NAME   ACTIVE   DRIVER       STATE     URL
-    dev    *        virtualbox   Stopped
+```none
+$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+dev    *        virtualbox   Running   tcp://192.168.99.104:2376
+$ docker-machine kill dev
+$ docker-machine ls
+NAME   ACTIVE   DRIVER       STATE     URL
+dev    *        virtualbox   Stopped
+```

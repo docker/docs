@@ -1,16 +1,10 @@
 ---
-aliases:
-- /engine/articles/baseimages/
 description: How to create base images
-keywords:
-- Examples, Usage, base image, docker, documentation,  examples
-menu:
-  main:
-    parent: engine_images
+keywords: Examples, Usage, base image, docker, documentation,  examples
+redirect_from:
+- /engine/articles/baseimages/
 title: Create a base image
 ---
-
-# Create a base image
 
 So you want to create your own [*Base Image*](../../reference/glossary.md#base-image)? Great!
 
@@ -72,4 +66,4 @@ There are lots more resources available to help you write your 'Dockerfile`.
 * There's a [complete guide to all the instructions](../../reference/builder.md) available for use in a `Dockerfile` in the reference section.
 * To help you write a clear, readable, maintainable `Dockerfile`, we've also
 written a [`Dockerfile` Best Practices guide](dockerfile_best-practices.md).
-* If your goal is to create a new Official Repository, be sure to read up on Docker's [Official Repositories](https://docs.docker.com/docker-hub/official_repos/).
+* If your goal is to create a new Official Repository, be sure to read up on Docker's [Official Repositories](/docker-hub/official_repos/).

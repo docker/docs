@@ -1,14 +1,8 @@
 ---
 description: Learn how to optimize your use of AUFS driver.
-keywords:
-- 'container, storage, driver, AUFS '
-menu:
-  main:
-    parent: engine_driver
-title: AUFS storage driver in practice
+keywords: 'container, storage, driver, AUFS '
+title: Docker and AUFS in practice
 ---
-
-# Docker and AUFS in practice
 
 AUFS was the first storage driver in use with Docker. As a result, it has a
 long and close history with Docker, is very stable, has a lot of real-world
@@ -93,12 +87,12 @@ of the image's read-only layers the file exists in.
 
 ## Renaming directories with the AUFS storage driver
 
-Calling `rename(2)` for a directory is not fully supported on AUFS. It returns 
-`EXDEV` ("cross-device link not permitted"), even when both of the source and 
-the destination path are on a same AUFS layer, unless the directory has no 
+Calling `rename(2)` for a directory is not fully supported on AUFS. It returns
+`EXDEV` ("cross-device link not permitted"), even when both of the source and
+the destination path are on a same AUFS layer, unless the directory has no
 children.
 
-So your application has to be designed so that it can handle `EXDEV` and fall 
+So your application has to be designed so that it can handle `EXDEV` and fall
 back to a "copy and unlink" strategy.
 
 ## Configure Docker with AUFS
@@ -191,7 +185,7 @@ also in this directory.
 A container's thin writable layer is stored in a directory under
 `/var/lib/docker/aufs/diff/`. With Docker 1.10 and higher, container IDs no
 longer correspond to directory names. However, the containers thin writable
-layer still exists under here and is stacked by AUFS as the top writable layer
+layer still exists here and is stacked by AUFS as the top writable layer
 and is where all changes to the container are stored. The directory exists even
  if the container is stopped. This means that restarting a container will not
 lose changes made to it. Once a container is deleted, it's thin writable layer
@@ -211,12 +205,12 @@ containers uses the systems page cache very efficiently.
 
 - The AUFS storage driver can introduce significant latencies into container
 write performance. This is because the first time a container writes to any
-file, the file has be located and copied into the containers top writable
+file, the file has to be located and copied into the containers top writable
 layer. These latencies increase and are compounded when these files exist below
  many image layers and the files themselves are large.
 
 One final point. Data volumes provide the best and most predictable
-performance. This is because they bypass the storage driver and do not incur 
+performance. This is because they bypass the storage driver and do not incur
 any of the potential overheads introduced by thin provisioning and
 copy-on-write. For this reason, you may want to place heavy write workloads on
 data volumes.
@@ -225,7 +219,7 @@ data volumes.
 
 To summarize the AUFS's aspect which is incompatible with other filesystems:
 
-- The AUFS does not fully support the `rename(2)` system call. Your application 
+- The AUFS does not fully support the `rename(2)` system call. Your application
 needs to detect its failure and fall back to a "copy and unlink" strategy.
 
 ## Related information

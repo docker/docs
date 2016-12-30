@@ -1,15 +1,8 @@
 ---
 description: Docker Compose FAQ
 keywords: documentation, docs,  docker, compose, faq
-menu:
-  main:
-    identifier: faq.compose
-    parent: workw_compose
-    weight: 90
-title: Frequently Asked Questions
+title: Frequently asked questions
 ---
-
-# Frequently asked questions
 
 If you don’t see your question here, feel free to drop by `#docker-compose` on
 freenode IRC and ask the community.

@@ -1,15 +1,9 @@
 ---
+advisory: kitematic
 description: Documentation covering common questions users have about Kitematic
-keywords:
-- docker, documentation, about, technology, kitematic,  gui
-menu:
-  main:
-    parent: toolbox_kitematic
-    weight: 5
-title: Frequently Asked Questions
+keywords: docker, documentation, about, technology, kitematic,  gui
+title: 'Kitematic: Frequently asked questions (FAQ)'
 ---
-
-# Kitematic: Frequently Asked Questions
 
 ### Is Kitematic Open Source?
 
@@ -29,7 +23,7 @@ the Docker Remote API.
 
 ### Which platforms does Kitematic support?
 
-Right now Kitematic works on Mac OS X and Windows. Linux is planned in the
+Right now Kitematic works on macOS and Windows. Linux is planned in the
 future.  Review our product <a
 href="https://github.com/kitematic/kitematic/blob/master/ROADMAP.md">roadmap</a>.
 

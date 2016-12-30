@@ -1,16 +1,8 @@
 ---
 description: Manage network in Docker Cloud
-keywords:
-- nodes, hosts, infrastructure, Cloud
-menu:
-  main:
-    parent: infrastructure
-    weight: -80
-notoc: false
-title: Docker Cloud network overview
+keywords: nodes, hosts, infrastructure, Cloud
+title: Docker Cloud infrastructure overview
 ---
-
-# Docker Cloud infrastructure overview
 
 Docker Cloud uses an agent and system containers to deploy and manage nodes (hosts) on your behalf. All nodes accessible to your account are connected by an overlay or mesh network, regardless of host or cloud service provider.
 
@@ -58,7 +50,7 @@ Docker Cloud uses system containers to do the following:
 
 ## Internal overlay network
 
-Docker Cloud creates a per-user overlay network which connects all containers across all of the user’s hosts. This network connects all of your containers on the `10.7.0.0/16` subnet, and gives every container a local IP. This IP persists on each container even if the container is redeployed and ends up on a different host. Every container can reach any other container on any port within the subnet.
+Docker Cloud creates a per-user overlay network which connects all containers across all of the user's hosts. This network connects all of your containers on the `10.7.0.0/16` subnet, and gives every container a local IP. This IP persists on each container even if the container is redeployed and ends up on a different host. Every container can reach any other container on any port within the subnet.
 
 ## External access
 

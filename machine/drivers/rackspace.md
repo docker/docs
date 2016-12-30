@@ -1,14 +1,8 @@
 ---
 description: Rackspace driver for machine
-keywords:
-- machine, Rackspace, driver
-menu:
-  main:
-    parent: smn_machine_drivers
+keywords: machine, Rackspace, driver
 title: Rackspace
 ---
-
-# Rackspace
 
 Create machines on [Rackspace cloud](http://www.rackspace.com/cloud)
 

@@ -1,14 +1,8 @@
 ---
 description: Oracle VirtualBox driver for machine
-keywords:
-- machine, Oracle VirtualBox, driver
-menu:
-  main:
-    parent: smn_machine_drivers
+keywords: machine, Oracle VirtualBox, driver
 title: Oracle VirtualBox
 ---
-
-# Oracle VirtualBox
 
 Create machines locally using [VirtualBox](https://www.virtualbox.org/).
 This driver requires VirtualBox 5+ to be installed on your host.
@@ -43,6 +37,7 @@ The size of the VM's disk can be configured this way:
 -   `--virtualbox-no-share`: Disable the mount of your home directory
 -   `--virtualbox-no-dns-proxy`: Disable proxying all DNS requests to the host (Boolean value, default to false)
 -   `--virtualbox-no-vtx-check`: Disable checking for the availability of hardware virtualization before the vm is started
+-   `--virtualbox-share-folder`: Mount the specified directory instead of the default home location. Format: `dir:name`
 
 The `--virtualbox-boot2docker-url` flag takes a few different forms. By
 default, if no value is specified for this flag, Machine will check locally for
@@ -86,6 +81,7 @@ upper bound of `192.168.24.254`.
 | `--virtualbox-no-share`              | `VIRTUALBOX_NO_SHARE`              | `false`                  |
 | `--virtualbox-no-dns-proxy`          | `VIRTUALBOX_NO_DNS_PROXY`          | `false`                  |
 | `--virtualbox-no-vtx-check`          | `VIRTUALBOX_NO_VTX_CHECK`          | `false`                  |
+| `--virtualbox-share-folder`          | `VIRTUALBOX_SHARE_FOLDER`          | `~:users`        |
 
 ## Known Issues
 

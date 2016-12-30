@@ -1,14 +1,8 @@
 ---
 description: Amazon Web Services driver for machine
-keywords:
-- machine, Amazon Web Services, driver
-menu:
-  main:
-    parent: smn_machine_drivers
+keywords: machine, Amazon Web Services, driver
 title: Amazon Web Services
 ---
-
-# Amazon Web Services
 
 Create machines on [Amazon Web Services](http://aws.amazon.com).
 
@@ -72,7 +66,6 @@ You can use environment variables:
 -   `--amazonec2-use-ebs-optimized-instance`: Create an EBS Optimized Instance, instance type must support it.
 -   `--amazonec2-ssh-keypath`: Path to Private Key file to use for instance. Matching public key with .pub extension should exist
 -   `--amazonec2-retries`:  Set retry count for recoverable failures (use -1 to disable)
--   `--amazonec2-userdata`: Path to custom User Data file.
 
 
 #### Environment variables and default values:
@@ -103,17 +96,17 @@ You can use environment variables:
 | `--amazonec2-use-ebs-optimized-instance` | -                       | `false`          |
 | `--amazonec2-ssh-keypath`                | `AWS_SSH_KEYPATH`       | -                |
 | `--amazonec2-retries`                    | -                       | `5`              |
-| `--amazonec2-user-data`                  | `AWS_USERDATA`          | -                |
 
 ## Default AMIs
 
-By default, the Amazon EC2 driver will use a daily image of Ubuntu 15.10.
+By default, the Amazon EC2 driver will use a daily image of Ubuntu 16.04 LTS.
 
 | Region         | AMI ID       |
 | -------------- | ------------ |
 | ap-northeast-1 | ami-b36d4edd |
 | ap-southeast-1 | ami-1069af73 |
 | ap-southeast-2 | ami-1d336a7e |
+| ca-central-1   | ami-ca6ddfae |
 | cn-north-1     | ami-79eb2214 |
 | eu-west-1      | ami-8aa67cf9 |
 | eu-central-1   | ami-ab0210c7 |
@@ -155,9 +148,9 @@ To create a machine with a non-default vpc-id:
 This example assumes the VPC ID was found in the `a` availability zone. Use the`--amazonec2-zone` flag to specify a zone other than the `a` zone. For example, `--amazonec2-zone c` signifies `us-east1-c`.
 
 ## VPC Connectivity
-Machine uses SSH to complete the set up of instances in EC2 and requires the ability to access the instance directly.  
+Machine uses SSH to complete the set up of instances in EC2 and requires the ability to access the instance directly.
 
-If you use the flag `--amazonec2-private-address-only`, you will need to ensure that you have some method of accessing the new instance from within the internal network of the VPC (e.g. a corporate VPN to the VPC, a VPN instance inside the VPC or using Docker-machine from an instance within your VPC). 
+If you use the flag `--amazonec2-private-address-only`, you will need to ensure that you have some method of accessing the new instance from within the internal network of the VPC (e.g. a corporate VPN to the VPC, a VPN instance inside the VPC or using Docker-machine from an instance within your VPC).
 
 Configuration of VPCs is beyond the scope of this guide, however the first step in troubleshooting is ensuring if you are using private subnets that you follow the design guidance in the [AWS VPC User Guide](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Scenario2.html) and have some form of NAT available so that the set up process can access the internet to complete set up.
 

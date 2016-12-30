@@ -1,14 +1,8 @@
 ---
 description: Docker Store frequently asked questions
-keywords:
-- Docker, docker, store, purchase images
-menu:
-  main:
-    parent: docker-store
-title: Docker Store FAQs
+keywords: Docker, docker, store, purchase images
+title: Docker Store frequently asked questions (FAQ)
 ---
-
-# Docker Store Frequently Asked Questions
 
 ### How do I log in to the Docker Store?
 
@@ -61,7 +55,7 @@ each month, and the charge will come from Docker, Inc. Your billing cycle is a
 If your payment failed because the card expired or was canceled, you need to
 update your credit card information or add an additional card.
 
-Click the user icon menu menu in the upper right corner, and click
+Click the user icon menu in the upper right corner, and click
 **Billing**. Click the **Payment methods** tab to update your credit card and
 contact information.
 
@@ -74,7 +68,7 @@ You can cancel a subscription at any time, however you will still be billed
 for the full month, and have access to the subscription content until the end of
 that billing period.
 
-We do not offer refunds. If you believe that you’ve been billed in error,
+We do not offer refunds. If you believe that you've been billed in error,
 contact our [Billing Support team](mailto:billing@docker.com).
 
 ### How do I download the licenses my organization has purchased?
