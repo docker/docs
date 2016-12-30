@@ -509,7 +509,7 @@ at `/etc/docker/daemon.json`.
 
 2.  Add a `dns` key with one or more IP addresses as values. If the file has
     existing contents, you only need to add or edit the `dns` line.
-    ```json
+    ```bash
     {
     	"dns": ["8.8.8.8", "8.8.4.4"]
     }
