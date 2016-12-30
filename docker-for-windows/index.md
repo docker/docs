@@ -10,16 +10,23 @@ redirect_from:
 - /installation/windows/
 title: Get started with Docker for Windows
 ---
-
 Welcome to Docker for Windows!
 
-Please read through these topics on how to get started. To **give us your feedback** on your experience with the app and report bugs or problems, log in to our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows).
+Docker is a full development platform for creating containerized apps, and
+Docker for Windows is the best way to get started with Docker on Windows
+systems.
 
->**Already have Docker for Windows?** If you already have Docker for Windows installed, and are ready to get started, skip over to the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
+>**Already have Docker for Windows?** If you already have Docker for Windows installed, and are ready to get started, skip down to [Step 3. Check versions of
+Docker Engine, Compose, and
+Machine](#step-3-check-versions-of-docker-engine-compose-and-machine) to work
+through the rest of the Docker for Windows tour, or jump over to the standard
+[Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
 ## Download Docker for Windows
 
-If you have not already done so, please install Docker for Windows. You can download installers from the stable or beta channel.  For more about stable and beta channels, see the [FAQs](faqs.md#questions-about-stable-and-beta-channels).
+If you have not already done so, please install Docker for Windows. You can
+download installers from the stable or beta channel.  For more about stable and
+beta channels, see the [FAQs](faqs.md#questions-about-stable-and-beta-channels).
 
 <table style="width:100%">
   <tr>
@@ -627,6 +634,22 @@ because they do not apply to Windows containers:
   * [Shared Drives](#shared-drives)
   * [Network](#network)
   * [Advanced (CPU and Memory configuration)](#advanced)
+
+
+### Giving feedback and getting help
+
+To get help from the community, review current user topics, join or start a
+discussion, log on to our [Docker for Windows
+forum](https://forums.docker.com/c/docker-for-windows).
+
+To report bugs or problems, log on to [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues), where you can review
+community reported issues, and file new ones. As a part of reporting issues on
+GitHub, we can help you troubleshoot the log data. See the [Diagnose and
+Feedback](#diagnose-and-feedback) topic below.
+
+To give feedback on the documentation or update it yourself, use the Feedback
+options at the bottom of each docs page.
 
 ### Diagnose and Feedback
 
