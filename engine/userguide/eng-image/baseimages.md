@@ -55,6 +55,17 @@ While `scratch` appears in Docker's repository on the hub, you can't pull it, ru
     ADD hello /
     CMD ["/hello"]
 
+Assuming you built the "hello" executable example [from the Docker GitHub example C-source code](https://github.com/docker-library/hello-world/blob/master/hello.c), and you compiled it with the `-static` flag, you can then build this Docker image using: `docker build --tag hello .`  
+
+NOTE: Because Docker for Mac and Dcoker for Windows use a Linux VM, you must compile this code using a Linux toolchain to end up with a Linux binary.  Not to worry, you can quickly pull down a Linux image and a build environment and build within it:
+
+    $ docker run --rm -it -v $PWD:/build ubuntu:16:04
+    container# apt-get install build-essential
+    container# cd /build
+    container# gcc -o hello -static hello.c
+
+Then you can run it (on Linux, Mac, or Windows) using: `docker run hello`
+
 This example creates the hello-world image used in the tutorials.
 If you want to test it out, you can clone [the image repo](https://github.com/docker-library/hello-world)
 
