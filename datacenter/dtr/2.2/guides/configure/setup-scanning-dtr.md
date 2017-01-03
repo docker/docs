@@ -9,8 +9,8 @@ This page explains how to set up and enable Docker Security Scanning on an exist
 ## Prerequisites
 
 These instructions assume that you have already installed Docker Trusted
-Registry, and have access to an account on the DTR instance with `administrator`
-credentials.
+Registry, and have access to an account on the DTR instance with administrator
+access.
 
 Before you begin, make sure that you or your organization has purchased a DTR
 license that includes Docker Security Scanning, and that your Docker ID can
@@ -73,7 +73,7 @@ To enable security scanning in DTR:
     manually upload a `.tar` file containing the security database.
 
     - If you are using `Online` mode, the DTR instance will contact a Docker server, download the latest vulnerability database, and install it. Scanning can begin once this process completes.<!--(TODO: no completion or confirmation message?) -->
-    - If you are using `Offline` mode, use the instructions in [Update scanning database - offline mode](#update-scanning-database-offline-mode) to upload an initial security database.
+    - If you are using `Offline` mode, use the instructions in [Update scanning database - offline mode](#update-cve-database-offline-mode) to upload an initial security database.
 
 By default when Security Scanning is enabled, new repositories will automatically scan on `docker push`. If you had existing repositories before you enabled security scanning, you might want to [change repository scanning behavior](#set-repository-scanning-mode).
 
@@ -84,16 +84,15 @@ Two modes are available when Security Scanning is enabled:
 - `Scan on push & Scan manually`: the image is re-scanned on each `docker push` to the repository, and whenever a user with `write` access clicks the **Start Scan** links or **Scan** button.
 - `Scan manually`: the image is scanned only when a user with `write` access clicks the **Start Scan** links or **Scan** button.
 
-**New** repositories are set to `Scan on push & Scan manually` by default, but
+By default, _new_ repositories are set to `Scan on push & Scan manually`, but
 you can change this setting during repository creation.
 
-Any repositories that existed before scanning was enabled are set to `Scan manually` mode by default. You can change this setting from the repository
-settings if the repositories are still in use.
+Any repositories that existed before scanning was enabled are set to `Scan manually` mode by default. If these repositories are still in use, you can change this setting from each repository's **Settings** page.
 
 > **Note**: To change an individual repository's scanning mode, you must have
-`write` or `administrator` access to the repo.
+`write` or `admin` access to the repo.
 
-To change the repository scanning mode:
+To change an individual repository's scanning mode:
 
 1. Navigate to the repository, and click the **Settings** tab.
 2. Scroll down to the **Image scanning** section.
@@ -108,11 +107,11 @@ components in your images, and quickly generates an updated report.
 
 Users with administrator access to DTR can check when the CVE database was last updated from the **Security** tab in the DTR **Settings** pages.
 
-### Update scanning database - online mode
+### Update CVE database - online mode
 
 By default Docker Security Scanning checks automatically for updates to the
 vulnerability database, and downloads them when available. If your installation
-does not have access to the public internet, use the [Offline mode instructions below](TODO).
+does not have access to the public internet, use the [Offline mode instructions below](#update-cve-database-offline-mode).
 
 To ensure that DTR can access these updates, make sure that the host can reach
 `https://dss-cve-updates.docker.com/` on port 443 using https.
@@ -132,9 +131,9 @@ Your choice is saved automatically.
 
 > **Tip**: DTR also checks for CVE database updates when scanning is first enabled, and when you switch update modes. If you need to check for a CVE database update immediately, you can briefly switch modes from online to offline and back again.
 
-### Update scanning database - offline mode
+### Update CVE database - offline mode
 
-To update the CVE database for your DTR instance when it cannot contact the update server you will download and install a `.tar` file. This file contains the database updates. Contact your Docker Support representative for an updated database file.
+To update the CVE database for your DTR instance when it cannot contact the update server, you download and install a `.tar` file that contains the database updates. Contact your Docker Support representative for an updated database file.
 
 <!-- TODO: update when Store updates available.
 1. Log in to the Docker Store.
