@@ -1085,94 +1085,94 @@ toc:
       title: Release notes
     - path: /datacenter/dtr/2.1/guides/support/
       title: Get support
-
-  - sectiontitle: Beta versions
+  - sectiontitle: (BETA) Docker Trusted Registry 2.2
     section:
-    - sectiontitle: Docker Trusted Registry 2.2
+    - path: /datacenter/dtr/2.2/guides/
+      title: Docker Trusted Registry 2.2 overview
+    - path: /datacenter/dtr/2.2/guides/architecture/
+      title: Architecture
+    - sectiontitle: Install DTR 2.2
       section:
-      - path: /datacenter/dtr/2.2/guides/
-        title: Docker Trusted Registry 2.2 overview
-      - path: /datacenter/dtr/2.2/guides/architecture/
-        title: Architecture
-      - sectiontitle: Install DTR 2.2
+      - path: /datacenter/dtr/2.2/guides/install/system-requirements/
+        title: System requirements
+      - path: /datacenter/dtr/2.2/guides/install/
+        title: Install Docker Trusted Registry
+      - path: /datacenter/dtr/2.2/guides/install/install-offline/
+        title: Install offline
+      - path: /datacenter/dtr/2.2/guides/install/license/
+        title: License your deployment
+      - path: /datacenter/dtr/2.2/guides/install/scale-your-deployment/
+        title: Scale your deployment
+      - path: /datacenter/dtr/2.2/guides/install/upgrade/
+        title: Upgrade
+      - path: /datacenter/dtr/2.2/guides/install/uninstall/
+        title: Uninstall
+    - sectiontitle: Configure DTR 2.2
+      section:
+      - path: /datacenter/dtr/2.2/guides/configure/tls-certs/
+        title: Set up TLS certificates for DTR
+      - path: /datacenter/dtr/2.2/guides/configure/auth-dtr/
+        title: Authentication and authorization in DTR
+      - path: /datacenter/dtr/2.2/guides/configure/configure-storage/
+        title: Configure DTR image storage
+      - path: /datacenter/dtr/2.2/guides/configure/use-nfs/
+        title: Use NFS
+      - path: /datacenter/dtr/2.2/guides/configure/high-availability/
+        title: Set up high availability
+      - path: /datacenter/dtr/2.2/guides/configure/setup-scanning-dtr/
+        title: Set up Docker Security Scanning
+      - path: /datacenter/dtr/2.2/guides/configurey/backup-and-recovery/
+        title: DTR backups and recovery
+      - path: /datacenter/dtr/2.2/guides/user-management/create-and-manage-users/
+        title: Create and manage users
+      - path: /datacenter/dtr/2.2/guides/user-management/create-and-manage-orgs/
+        title: Create and manage organizations
+      - path: /datacenter/dtr/2.2/guides/user-management/create-and-manage-teams/
+        title: Create and manage teams
+      - path: /datacenter/dtr/2.2/guides/user-management/permission-levels/
+        title: Permission levels
+    - sectiontitle: Monitor and troubleshoot
+      section:
+      - path: /datacenter/dtr/2.2/guides/monitor-troubleshoot/
+        title: Monitor DTR
+      - path: /datacenter/dtr/2.2/guides/monitor-troubleshoot/troubleshoot/
+        title: Troubleshoot DTR
+    - path: /datacenter/dtr/2.2/guides/trust-dtr/
+      title: Configure your Docker Engine with DTR
+    - path: /datacenter/dtr/2.2/guides/work-images-dtr/
+      title: Work with images in DTR
+    - path: /datacenter/dtr/2.2/guides/security-scan-dtr/
+      title: Docker Security Scanning in DTR
+    - sectiontitle: API and CLI reference
+      section:
+      - path: /datacenter/dtr/2.2/reference/api/
+        title: API reference
+      - sectiontitle: CLI reference
         section:
-        - path: /datacenter/dtr/2.2/guides/install/system-requirements/
-          title: System requirements
-        - path: /datacenter/dtr/2.2/guides/install/
-          title: Install Docker Trusted Registry
-        - path: /datacenter/dtr/2.2/guides/install/install-offline/
-          title: Install offline
-        - path: /datacenter/dtr/2.2/guides/install/license/
-          title: License your deployment
-        - path: /datacenter/dtr/2.2/guides/install/scale-your-deployment/
-          title: Scale your deployment
-        - path: /datacenter/dtr/2.2/guides/install/upgrade/
-          title: Upgrade
-        - path: /datacenter/dtr/2.2/guides/install/uninstall/
-          title: Uninstall
-      - sectiontitle: Configure DTR 2.2
-        section:
-        - path: /datacenter/dtr/2.2/guides/configure/tls-certs/
-          title: Set up TLS certificates for DTR
-        - path: /datacenter/dtr/2.2/guides/configure/auth-dtr/
-          title: Authentication and authorization in DTR
-        - path: /datacenter/dtr/2.2/guides/configure/configure-storage/
-          title: Configure DTR image storage
-        - path: /datacenter/dtr/2.2/guides/configure/use-nfs/
-          title: Use NFS
-        - path: /datacenter/dtr/2.2/guides//configure/high-availability/
-          title: Set up high availability
-        - path: /datacenter/dtr/2.2/guides/configurey/backup-and-recovery/
-          title: DTR backups and recovery
-        - path: /datacenter/dtr/2.2/guides/user-management/create-and-manage-users/
-          title: Create and manage users
-        - path: /datacenter/dtr/2.2/guides/user-management/create-and-manage-orgs/
-          title: Create and manage organizations
-        - path: /datacenter/dtr/2.2/guides/user-management/create-and-manage-teams/
-          title: Create and manage teams
-        - path: /datacenter/dtr/2.2/guides/user-management/permission-levels/
-          title: Permission levels
-      - sectiontitle: Monitor and troubleshoot
-        section:
-        - path: /datacenter/dtr/2.2/guides/monitor-troubleshoot/
-          title: Monitor DTR
-        - path: /datacenter/dtr/2.2/guides/monitor-troubleshoot/troubleshoot/
-          title: Troubleshoot DTR
-      - path: /datacenter/dtr/2.2/guides/trust-dtr/
-        title: Configure your Docker Engine with DTR
-      - path: /datacenter/dtr/2.2/guides/work-images-dtr/
-        title: Work with images in DTR
-      - sectiontitle: API and CLI reference
-        section:
-        - path: /datacenter/dtr/2.2/reference/api/
-          title: API reference
-        - sectiontitle: CLI reference
-          section:
-          - path: /datacenter/dtr/2.2/reference/cli/
-            title: Overview
-          - path: /datacenter/dtr/2.2/reference/cli/backup/
-            title: backup
-          - path: /datacenter/dtr/2.2/reference/cli/dumpcerts/
-            title: dumpcerts
-          - path: /datacenter/dtr/2.2/reference/cli/images/
-            title: images
-          - path: /datacenter/dtr/2.2/reference/cli/install/
-            title: install
-          - path: /datacenter/dtr/2.2/reference/cli/join/
-            title: join
-          - path: /datacenter/dtr/2.2/reference/cli/reconfigure/
-            title: reconfigure
-          - path: /datacenter/dtr/2.2/reference/cli/remove/
-            title: remove
-          - path: /datacenter/dtr/2.2/reference/cli/restore/
-            title: restore
-          - path: /datacenter/dtr/2.2/reference/cli/upgrade/
-            title: upgrade
-      - path: /datacenter/dtr/2.2/guides/release-notes/
-        title: Release notes
-      - path: /datacenter/dtr/2.2/guides/support/
-        title: Get support
-
+        - path: /datacenter/dtr/2.2/reference/cli/
+          title: Overview
+        - path: /datacenter/dtr/2.2/reference/cli/backup/
+          title: backup
+        - path: /datacenter/dtr/2.2/reference/cli/dumpcerts/
+          title: dumpcerts
+        - path: /datacenter/dtr/2.2/reference/cli/images/
+          title: images
+        - path: /datacenter/dtr/2.2/reference/cli/install/
+          title: install
+        - path: /datacenter/dtr/2.2/reference/cli/join/
+          title: join
+        - path: /datacenter/dtr/2.2/reference/cli/reconfigure/
+          title: reconfigure
+        - path: /datacenter/dtr/2.2/reference/cli/remove/
+          title: remove
+        - path: /datacenter/dtr/2.2/reference/cli/restore/
+          title: restore
+        - path: /datacenter/dtr/2.2/reference/cli/upgrade/
+          title: upgrade
+    - path: /datacenter/dtr/2.2/guides/release-notes/
+      title: Release notes
+    - path: /datacenter/dtr/2.2/guides/support/
+      title: Get support
   - sectiontitle: Previous versions
     section:
     - sectiontitle: Universal Control Plane 1.0
