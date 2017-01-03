@@ -43,7 +43,7 @@ terminates, the task terminates.
 
 A task is the atomic unit of scheduling within a swarm.  When you declare a
 desired service state by creating or updating a service, the orchestrator
-realizes the desired state by scheduling tasks. For instance, the you define a
+realizes the desired state by scheduling tasks. For instance, you define a
 service that instructs the orchestrator to keep three instances of a HTTP
 listener running at all times. The orchestrator responds by creating three
 tasks. Each task is a slot that the scheduler fills by spawning a container. The
