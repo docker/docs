@@ -1,6 +1,6 @@
 ---
 description: Enable and configure Docker Security Scanning for Docker Trusted Registry.
-keywords: docker, registry, high-availability, backup, recovery
+keywords: docker, registry, scanning, security scan, vulnerability, CVE
 title: Set up Security Scanning in DTR
 ---
 
