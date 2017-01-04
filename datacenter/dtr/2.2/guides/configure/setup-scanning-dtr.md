@@ -158,6 +158,8 @@ To manually update the DTR CVE database from a `.tar` file:
 DTR installs the new CVE database, and begins checking already indexed images
 for components that match new or updated vulnerabilities.
 
+> **Tip**: The Upload button is unavailable while DTR applies CVE database updates.
+
 ## Enable or disable automatic database updates
 
 To change the update mode:
