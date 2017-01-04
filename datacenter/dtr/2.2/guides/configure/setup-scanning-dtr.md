@@ -21,7 +21,7 @@ action is needed. If you are using a license associated with an organization
 account, you may need to make sure your Docker ID is a member of the `Owners`
 team. Only `Owners` team members can download license files for an Organization.
 
-If you will be allowing the Security Scanning module to update itself
+If you will be allowing the Security Scanning database to update itself
 automatically, make sure that the server hosting your DTR instance can access
 `https://dss-cve-updates.docker.com/` on the standard https port 443.
 

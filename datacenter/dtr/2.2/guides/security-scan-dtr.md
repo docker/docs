@@ -55,7 +55,7 @@ To start a security scan:
 1. Navigate to the repository.
 2. Click the **Images** tab.
 3. Locate the image tag that you want to scan.
-3. In the **Vulnerabilities** column, click **Start a scan**.
+4. In the **Vulnerabilities** column, click **Start a scan**.
 
 DTR begins the scanning process. You may need to refresh the page to see the results once the scan is complete.
 
