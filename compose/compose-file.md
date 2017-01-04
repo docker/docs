@@ -544,6 +544,11 @@ returns an error if it encounters one.
 For more on `extends`, see the
 [the extends documentation](extends.md#extending-services).
 
+> **Note:** This option is not yet supported when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file. Use `docker-compose config` to generate a
+> configuration with all `extends` options resolved, and deploy from that.
+
 ### external_links
 
 Link to containers started outside this `docker-compose.yml` or even outside
