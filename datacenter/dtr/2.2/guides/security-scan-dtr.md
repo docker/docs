@@ -20,7 +20,11 @@ have purchased the Security Scanning feature or it may be disabled.
 Scans run either on demand when a user clicks the **Start Scan** links or **Scan** button, or automatically on any `docker push` to the repository.
 
 First the scanner performs a binary scan on each layer of the image, identifies
-the software components in each layer, and indexes the SHA of each component.
+the software components in each layer, and indexes the SHA of each component. A
+binary scan evaluates the components on a bit-by-bit level, so vulnerable
+components are discovered no matter what they're named, even if they're
+statically-linked, and regardless of if they're included on a distribution
+manifest.
 
 The scan then compares the SHA of each component against the Common
 Vulnerabilities and Exposures (CVE®) database installed on your DTR instance.
