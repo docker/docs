@@ -66,6 +66,10 @@ This will result in an image named `webapp` and tagged `tag`, built from `./dir`
 > 2.   Using `build` together with `image` is not allowed. Attempting to do so
 >     results in an error.
 
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
+
 #### context
 
 > [Version 2 file format](compose-file.md#version-2) and up. In version 1, just use
@@ -157,6 +161,10 @@ See `man 7 capabilities` for a full list.
       - NET_ADMIN
       - SYS_ADMIN
 
+> **Note:** These options are ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
+
 ### command
 
 Override the default command.
@@ -173,6 +181,10 @@ The command can also be a list, in a manner similar to
 Specify an optional parent cgroup for the container.
 
     cgroup_parent: m-executor-abcd
+
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
 
 ### container_name
 
@@ -310,6 +322,10 @@ client create option.
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
 
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
+
 ### depends_on
 
 Express dependency between services, which has two effects:
@@ -349,6 +365,10 @@ Custom DNS servers. Can be a single value or a list.
       - 8.8.8.8
       - 9.9.9.9
 
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
+
 ### dns_search
 
 Custom DNS search domains. Can be a single value or a list.
@@ -357,6 +377,10 @@ Custom DNS search domains. Can be a single value or a list.
     dns_search:
       - dc1.example.com
       - dc2.example.com
+
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
 
 ### tmpfs
 
@@ -368,6 +392,10 @@ Mount a temporary file system inside the container. Can be a single value or a l
     tmpfs:
       - /run
       - /tmp
+
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
 
 ### entrypoint
 
@@ -491,6 +519,10 @@ container name and the link alias (`CONTAINER:ALIAS`).
 > **Note:** If you're using the [version 2 file format](compose-file.md#version-2), the
 > externally-created containers must be connected to at least one of the same
 > networks as the service which is linking to them.
+
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
 
 ### extra_hosts
 
@@ -631,6 +663,10 @@ Links also express dependency between services in the same way as
 > links between them must share at least one network in common in order to
 > communicate.
 
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
+
 ### logging
 
 > [Version 2 file format](compose-file.md#version-2) and up. In version 1, use
@@ -710,6 +746,10 @@ the special form `service:[service name]`.
     network_mode: "none"
     network_mode: "service:[service name]"
     network_mode: "container:[container name/id]"
+
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
 
 ### networks
 
@@ -867,6 +907,10 @@ Override the default labeling scheme for each container.
       - label:user:USER
       - label:role:ROLE
 
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
+
 ### stop_grace_period
 
 Specify how to long to wait when attempting to stop a container if it doesn't
@@ -888,6 +932,10 @@ SIGTERM. Setting an alternative signal using `stop_signal` will cause
 
     stop_signal: SIGUSR1
 
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
+
 ### sysctls
 
 > [Added in version 2.1 file format](compose-file.md#version-21).
@@ -902,6 +950,10 @@ dictionary.
     sysctls:
       - net.core.somaxconn=1024
       - net.ipv4.tcp_syncookies=0
+
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
 
 ### ulimits
 
@@ -925,6 +977,9 @@ Disables the user namespace for this service, if Docker daemon is configured wit
 See [dockerd](/engine/reference/commandline/dockerd.md#disable-user-namespace-for-a-container) for
 more information.
 
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
 
 ### volumes, volume\_driver
 
@@ -1051,6 +1106,11 @@ Each of these is a single value, analogous to its
 > **Note:** The following options are only available for
 > [version 2](compose-file.md#version-2) and up:
 > * `oom_score_adj`
+
+> **Note:** The `domainname`, `ipc`, `mac_address`, `privileged`, `read_only`,
+> `restart` and `shm_size` options are ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
 
 
 ## Specifying durations
