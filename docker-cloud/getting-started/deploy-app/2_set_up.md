@@ -15,13 +15,13 @@ Install the docker-cloud CLI using the package manager for your system.
 
 #### Install using a Docker container
 
-If you have Docker Engine installed locally, you can simply run the following command regardless of which operating system you are using.
+If you have Docker Engine installed locally, you can run the following `docker` command in your shell regardless of which operating system you are using.
 
-```
+```none
 docker run dockercloud/cli -h
 ```
 
-This runs a container that installs the docker-cloud CLI for you. Learn more about this container [here](https://github.com/docker/dockercloud-cli#docker-image).
+The command runs a container that installs the separate `docker-cloud` CLI for you. Learn more about this container [here](https://github.com/docker/dockercloud-cli#docker-image).
 
 #### Install for Linux or Windows
 
