@@ -77,7 +77,7 @@ To see usage for a specific command, specify the command with the `--help` flag:
 
 > **Note:**
 > For further details and examples of each command, see the
-> [command reference](../reference/commandline/cli.md) in this guide.
+> [command reference](../reference/commandline/) in this guide.
 
 ## Run a web application in Docker
 
