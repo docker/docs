@@ -1,6 +1,6 @@
 ---
 description: Docker Security Scanning for Docker Trusted Registry.
-keywords: docker, registry, high-availability, backup, recovery
+keywords: docker, registry, scanning, security scan, vulnerability, CVE
 title: Docker Security Scanning in DTR
 ---
 
@@ -14,6 +14,22 @@ security scan results available on your repositories, your organization may not
 have purchased the Security Scanning feature or it may be disabled.
 
 > **Tip**: Only users with write access to a repository can manually start a scan. Users with read-only access can view the scan results, but cannot start a new scan.
+
+## The Docker Security Scan process
+
+Scans run either on demand when a user clicks the **Start Scan** links or **Scan** button, or automatically on any `docker push` to the repository.
+
+First the scanner performs a binary scan on each layer of the image, identifies
+the software components in each layer, and indexes the SHA of each component.
+
+The scan then compares the SHA of each component against the Common
+Vulnerabilities and Exposures (CVE®) database installed on your DTR instance.
+The CVE database is a "dictionary" of known information security
+vulnerabilities. When the CVE database is updated, the service reviews the
+indexed components for any that match newly discovered vulnerabilities.
+
+Most scans complete within an hour, however larger repositories may take longer
+to scan depending on your system resources.
 
 ## Security scan on push
 
@@ -117,18 +133,3 @@ components that provide the same functionality. When you have updated the source
 code, run a build to create a new image, tag the image, and push the updated
 image to your DTR instance. You can then re-scan the image to confirm that you
 have addressed the vulnerabilities.
-
-## The Docker Security Scan process
-
-Scans run either on demand when a user clicks the **Start Scan** links or **Scan** button, or automatically on any `docker push` to the repository.
-
-Most scans complete within an hour, however larger repositories may take longer
-to scan depending on your system resources. The scan traverses each layer of the
-image, identifies the software components in each layer, and indexes the SHA of
-each component.
-
-The scan compares the SHA of each component against the Common Vulnerabilities
-and Exposures (CVE®) database installed on your DTR instance. The CVE database
-is a "dictionary" of known information security vulnerabilities. When the CVE
-database is updated, the service reviews the indexed components for any that
-match newly discovered vulnerabilities.
