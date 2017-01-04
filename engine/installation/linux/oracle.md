@@ -156,13 +156,7 @@ Linux Administrator's Solution
 Guide](http://docs.oracle.com/cd/E37670_01/E37355/html/index.html) for details
 on how to create and mount btrfs filesystems.
 
-To enable btrfs support on Oracle Linux:
-
-1. Ensure that `/var/lib/docker` is on a btrfs filesystem.
-
-2. Edit `/etc/sysconfig/docker` and add `-s btrfs` to the `OTHER_ARGS` field.
-
-3. Restart the Docker daemon:
+To enable btrfs support on Oracle Linux, ensure that `/var/lib/docker` is on a btrfs filesystem.
 
 ## Uninstallation
 
@@ -177,21 +171,6 @@ and volumes run the following command:
     $ rm -rf /var/lib/docker
 
 You must delete the user created configuration files manually.
-
-## Known issues
-
-### Docker unmounts btrfs filesystem on shutdown
-If you're running Docker using the btrfs storage engine and you stop the Docker
-service, it will unmount the btrfs filesystem during the shutdown process. You
-should ensure the filesystem is mounted properly prior to restarting the Docker
-service.
-
-On Oracle Linux 7, you can use a `systemd.mount` definition and modify the
-Docker `systemd.service` to depend on the btrfs mount defined in systemd.
-
-### SElinux support on Oracle Linux 7
-SElinux must be set to `Permissive` or `Disabled` in `/etc/sysconfig/selinux` to
-use the btrfs storage engine on Oracle Linux 7.
 
 ## Further issues?
 
