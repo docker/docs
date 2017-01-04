@@ -105,10 +105,10 @@ real-world example, continue to
 [Intermediate example: Use secrets with a Nginx service](#intermediate-example-use-secrets-with-a-nginx-service).
 
 1.  Add a secret to Docker. The `docker secret create` command reads standard
-    input.
+    input because the `-f` flag is set to `-`.
 
     ```bash
-    $ echo "This is a secret" | docker secret create my_secret_data
+    $ echo "This is a secret" | docker secret create my_secret_data -f -
     ```
 
 2.  Create a `redis` service and grant it access to the secret. By default,
@@ -337,14 +337,17 @@ generate the site key and certificate, name the files `site.key` and
 2.  Create three secrets, representing the key, the certificate, and the
     `site.conf`. You can store any file as a secret as long as it is smaller
     than 500 KB. This allows you to decouple the key, certificate, and
-    configuration from the services that will use them.
+    configuration from the services that will use them. In each of these
+    commands, the `-f` flag takes the path to the file containing the secret
+    on the host machine's filesystem. In these examples, the secret name and
+    the file name are the same.
 
     ```bash
-    $ cat site.key | docker secret create site.key
+    $ docker secret create site.key -f site.key
 
-    $ cat site.crt | docker secret create site.crt
+    $ docker secret create site.crt -f site.crt
 
-    $ cat site.conf | docker create site.conf
+    $ docker secret create site.conf -f site.conf
     ```
 
     ```bash
@@ -521,8 +524,11 @@ line.
     > can later add a new version, update the service to use it, then remove the
     > old version.
 
+    The `-f` flag is set to `-`, which indicates that the input is read from
+    STDIN.
+
     ```bash
-    $ openssl rand -base64 20 | docker secret create mysql_password
+    $ openssl rand -base64 20 | docker secret create mysql_password -f -
 
     l1vinzevzhj4goakjap5ya409
     ```
@@ -535,7 +541,7 @@ line.
     bootstrap the `mysql` service.
 
     ```bash
-    $ openssl rand -base64 20 | docker secret create mysql_root_password
+    $ openssl rand -base64 20 | docker secret create mysql_root_password -f -
     ```
 
     List the secrets managed by Docker using `docker secret ls`:
@@ -570,7 +576,9 @@ line.
     - The secrets are each mounted in a `tmpfs` filesystem at
       `/run/secrets/mysql_password` and `/run/secrets/mysql_root_password`.
       They are never exposed as environment variables, nor can they be committed
-      to an image if the `docker commit` command is run.
+      to an image if the `docker commit` command is run. The `mysql_password`
+      secret is the one used the non-privileged WordPress container will use to
+      connect to MySQL.
     - Sets the environment variables `MYSQL_PASSWORD_FILE` and
       `MYSQL_ROOT_PASSWORD_FILE` to point to the
       files `/run/secrets/mysql_password` and `/run/secrets/mysql_root_password`.
@@ -704,13 +712,13 @@ use it, then remove the old secret.
 queries or commands, as opposed to just changing a single environment variable
 or a file, since the image only sets the MySQL password if the database doesn’t
 already exist, and MySQL stores the password within a MySQL database by default.
-Rotating passwords or other secrets will often involve additional steps outside
-of Docker.
+Rotating passwords or other secrets may involve additional steps outside of
+Docker.
 
 1.  Create the new password and store it as a  secret named `mysql_password_v2`.
 
     ```bash
-    $ openssl rand -base64 20 | docker secret create mysql_password_v2
+    $ openssl rand -base64 20 | docker secret create mysql_password_v2 -f -
     ```
 
 2.  Update the MySQL service to give it access to both the old and new secrets.
@@ -733,12 +741,14 @@ of Docker.
     `/run/secrets/mysql_password`.
 
     Even though the MySQL service has access to both the old and new secrets
-    now, the MySQL root password has not yet been changed.
+    now, the MySQL password for the WordPress user has not yet been changed.
 
-3.  Now, change the MySQL password for the `wordpress` user using the `mysql`
-    CLI. This command reads the old and new password from the files in
-    `/run/secrets` but does not expose them on the command line or save them in
-    the shell history.
+    > **Note**: This example does not rottate the MySQL `root` password.
+
+3.  Now, change the MySQL password for the `wordpress` user using the
+    `mysqladmin` CLI. This command reads the old and new password from the files
+    in `/run/secrets` but does not expose them on the command line or save them
+    in the shell history.
 
     Do this quickly and move on to the next step, because WordPress will lose
     the ability to connect to MySQL.
