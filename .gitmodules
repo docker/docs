@@ -8,6 +8,6 @@
 	branch = 45e771701b814666a7eb299e6c7a57d0b1799e91
 [submodule "tests/src/gopkg.in/yaml.v2"]
 	path = tests/src/gopkg.in/yaml.v2
-	url = https://gopkg.in/yaml.v2
+	url = https://github.com/go-yaml/yaml.git
 	branch = a5b47d31c556af34a302ce5d659e6fea44d90de0
 
