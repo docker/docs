@@ -148,6 +148,6 @@ and volumes run the following command:
 
 You must delete the user created configuration files manually.
 
-## What next?
+## Next steps
 
 Continue with the [User Guide](../../userguide/index.md).
