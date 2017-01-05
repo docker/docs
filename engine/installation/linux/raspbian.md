@@ -9,7 +9,7 @@ title: Install on Raspbian
 Docker is supported on the following versions of Raspbian:
 
  - *Raspbian Jessie*
- 
+
  >**Note**: If you previously installed Docker using `APT`, make sure you update
  your `APT` sources to the new `APT` repository.
 
@@ -148,6 +148,6 @@ and volumes run the following command:
 
 You must delete the user created configuration files manually.
 
-## What next?
+## Next steps
 
 Continue with the [User Guide](../../userguide/index.md).
