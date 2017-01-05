@@ -1091,23 +1091,23 @@ toc:
       title: Universal Control Plane overview
     - path: /datacenter/ucp/2.1/guides/architecture/
       title: Architecture
-    - sectiontitle: Installation
+    - sectiontitle: Install UCP 2.1
       section:
-      - path: /datacenter/ucp/2.1/guides/installation/system-requirements/
+      - path: /datacenter/ucp/2.1/guides/install/system-requirements/
         title: System requirements
-      - path: /datacenter/ucp/2.1/guides/installation/plan-production-install/
+      - path: /datacenter/ucp/2.1/guides/install/plan-production-install/
         title: Plan a production installation
-      - path: /datacenter/ucp/2.1/guides/installation/
+      - path: /datacenter/ucp/2.1/guides/install/
         title: Install UCP for production
-      - path: /datacenter/ucp/2.1/guides/installation/install-offline/
+      - path: /datacenter/ucp/2.1/guides/install/install-offline/
         title: Install offline
-      - path: /datacenter/ucp/2.1/guides/installation/license/
+      - path: /datacenter/ucp/2.1/guides/install/license/
         title: License UCP
-      - path: /datacenter/ucp/2.1/guides/installation/scale-your-cluster/
+      - path: /datacenter/ucp/2.1/guides/install/scale-your-cluster/
         title: Scale your cluster
-      - path: /datacenter/ucp/2.1/guides/installation/upgrade/
+      - path: /datacenter/ucp/2.1/guides/install/upgrade/
         title: Upgrade UCP
-      - path: /datacenter/ucp/2.1/guides/installation/uninstall/
+      - path: /datacenter/ucp/2.1/guides/install/uninstall/
         title: Uninstall UCP
     - sectiontitle: Access UCP
       section:
@@ -1115,32 +1115,30 @@ toc:
         title: Web-based access
       - path: /datacenter/ucp/2.1/guides/access-ucp/cli-based-access/
         title: CLI-based access
-    - sectiontitle: Configuration
+    - sectiontitle: Configure UCP 2.1
       section:
-      - path: /datacenter/ucp/2.1/guides/configuration/
+      - path: /datacenter/ucp/2.1/guides/configure/
         title: Use externally-signed certificates
-      - path: /datacenter/ucp/2.1/guides/configuration/configure-logs/
+      - path: /datacenter/ucp/2.1/guides/configure/configure-logs/
         title: Configure UCP logging
-      - path: /datacenter/ucp/2.1/guides/configuration/integrate-with-dtr/
+      - path: /datacenter/ucp/2.1/guides/configure/integrate-with-dtr/
         title: Integrate with Docker Trusted Registry
-      - path: /datacenter/ucp/2.1/guides/configuration/integrate-with-ldap/
+      - path: /datacenter/ucp/2.1/guides/configure/integrate-with-ldap/
         title: Integrate with LDAP
-      - path: /datacenter/ucp/2.1/guides/configuration/route-hostnames/
+      - path: /datacenter/ucp/2.1/guides/configure/route-hostnames/
         title: Route hostnames to services
+      - path: /datacenter/ucp/2.1/guides/configure/high-availability/
+        title: Set up high availability
+      - path: /datacenter/ucp/2.1/guides/configure/backup-and-recover/
+        title: Backups and disaster recovery
     - sectiontitle: Monitor and troubleshoot
       section:
-      - path: /datacenter/ucp/2.1/guides/monitor/
+      - path: /datacenter/ucp/2.1/guides/monitor-troubleshoot/
         title: Monitor your cluster
-      - path: /datacenter/ucp/2.1/guides/monitor/troubleshoot/
+      - path: /datacenter/ucp/2.1/guides/monitor-troubleshoot/troubleshoot/
         title: Troubleshoot your cluster
-      - path: /datacenter/ucp/2.1/guides/monitor/troubleshoot-configurations/
+      - path: /datacenter/ucp/2.1/guides/monitor-troubleshoot/troubleshoot-configurations/
         title: Troubleshoot cluster configurations
-    - sectiontitle: High-availability
-      section:
-      - path: /datacenter/ucp/2.1/guides/high-availability/
-        title: Set up high availability
-      - path: /datacenter/ucp/2.1/guides/high-availability/backups-and-disaster-recovery/
-        title: Backups and disaster recovery
     - sectiontitle: User management
       section:
       - path: /datacenter/ucp/2.1/guides/user-management/

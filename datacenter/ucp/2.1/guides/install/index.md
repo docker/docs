@@ -133,5 +133,5 @@ option.
 
 ## Where to go next
 
-* [Use externally-signed certificates](../configuration/index.md)
-* [Integrate with LDAP](../configuration/integrate-with-ldap.md)
+* [Use externally-signed certificates](../configure/index.md)
+* [Integrate with LDAP](../configure/integrate-with-ldap.md)
