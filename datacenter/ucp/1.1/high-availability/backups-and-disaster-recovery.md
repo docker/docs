@@ -62,12 +62,24 @@ Enter passphrase: secret
 ## Restore command
 
 The example below shows how to restore a UCP controller node from an existing
-backup:
+backup.
 
-```bash
+First find out the Id of the UCP replica you want to restore:
+
+```none
+$ docker run --rm --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock  \
+  docker/ucp id
+```
+
+Then, run the restore command:
+
+```none
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
-  docker/ucp restore < backup.tar
+  docker/ucp restore \
+    --passphrase "secret" \
+    --id <replica-id> < backup.tar
 ```
 
 
