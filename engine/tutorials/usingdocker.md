@@ -38,19 +38,19 @@ daemon you are using, but also the version of Go (the programming
 language powering Docker).
 
     Client:
-     Version:      1.12.2
+     Version:      1.12.5
      API version:  1.24
-     Go version:   go1.6.3
-     Git commit:   bb80604
-     Built:        Tue Oct 11 17:00:50 2016
+     Go version:   go1.6.4
+     Git commit:   7392c3b
+     Built:        Fri Dec 16 02:42:17 2016
      OS/Arch:      windows/amd64
 
     Server:
-     Version:      1.12.3
+     Version:      1.12.5
      API version:  1.24
-     Go version:   go1.6.3
-     Git commit:   6b644ec
-     Built:        Wed Oct 26 23:26:11 2016
+     Go version:   go1.6.4
+     Git commit:   7392c3b
+     Built:        Fri Dec 16 02:42:17 2016
      OS/Arch:      linux/amd64
 
 ## Get Docker command help
