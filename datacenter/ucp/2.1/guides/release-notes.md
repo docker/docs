@@ -7,7 +7,7 @@ title: UCP release notes
 
 Here you can learn about new features, bug fixes, breaking changes and
 known issues for the latest UCP version.
-You can then use [the upgrade instructions](installation/upgrade.md), to
+You can then use [the upgrade instructions](install/upgrade.md), to
 upgrade your installation to the latest release.
 
 ## Version 2.0.1

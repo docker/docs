@@ -129,5 +129,5 @@ from your UCP profile page.
 
 ## Where to go next
 
-* [System requirements](installation/index.md)
-* [Plan a production installation](installation/plan-production-install.md)
+* [System requirements](install/index.md)
+* [Plan a production installation](install/plan-production-install.md)
