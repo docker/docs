@@ -219,6 +219,15 @@ We did not distribute a 1.12.4 stable release
 
 ## Beta Release Notes
 
+### Beta 35 Release Notes (2017-01-06 1.13.0-rc5-beta35)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**Upgrades**
+
+- Docker 1.13.0-rc5
+- Docker Compose 1.10-rc1
+
 ### Beta 34 Release Notes (2016-12-20 1.13.0-rc4-beta34)
 
 **New**
