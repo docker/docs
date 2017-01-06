@@ -17,7 +17,7 @@ initializing a swarm or joining an existing swarm.
 A **swarm** is a cluster of Docker engines, or _nodes_, where you deploy
 [services](key-concepts.md#services-and-tasks). The Docker Engine CLI and API
 include commands to manage swarm nodes (e.g., add or remove nodes), and deploy
-and orchestrate services accross the swarm.
+and orchestrate services across the swarm.
 
 When you run Docker without using swarm mode, you execute container
 commands. When you run the Docker in swarm mode, you orchestrate services. You can run swarm services and standalone containers on the same Docker instances.
