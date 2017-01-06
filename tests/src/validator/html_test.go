@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"golang.org/x/net/html"
+	"net/url"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -48,7 +49,7 @@ func TestURLs(t *testing.T) {
 
 		count++
 
-		err = testURLs(htmlBytes)
+		err = testURLs(htmlBytes, path)
 		if err != nil {
 			t.Error(err.Error(), "-", relPath)
 		}
@@ -62,7 +63,7 @@ func TestURLs(t *testing.T) {
 
 // testURLs tests if we're not using absolute paths for URLs
 // when pointing to local pages.
-func testURLs(htmlBytes []byte) error {
+func testURLs(htmlBytes []byte, htmlPath string) error {
 
 	reader := bytes.NewReader(htmlBytes)
 
@@ -78,7 +79,7 @@ func testURLs(htmlBytes []byte) error {
 		case html.StartTagToken:
 			t := z.Token()
 
-			url := ""
+			urlStr := ""
 
 			// check tag types
 			switch t.Data {
@@ -89,7 +90,7 @@ func testURLs(htmlBytes []byte) error {
 				if !ok {
 					break
 				}
-				url = href
+				urlStr = href
 
 			case "img":
 				countImages++
@@ -97,19 +98,62 @@ func testURLs(htmlBytes []byte) error {
 				if !ok {
 					return errors.New("img with no src: " + t.String())
 				}
-				url = src
+				urlStr = src
 			}
 
 			// there's an url to test!
-			if url != "" {
-				if strings.HasPrefix(url, "http://docs.docker.com") || strings.HasPrefix(url, "https://docs.docker.com") {
+			if urlStr != "" {
+				u, err := url.Parse(urlStr)
+				if err != nil {
+					return errors.New("can't parse url: " + t.String())
+				}
+				// test with github.com
+				if u.Scheme != "" && u.Host == "docs.docker.com" {
 					return errors.New("found absolute link: " + t.String())
+				}
+
+				// relative link
+				if u.Scheme == "" {
+					p := filepath.Join(htmlPath, mdToHtmlPath(u.Path))
+					if _, err := os.Stat(p); os.IsNotExist(err) {
+
+						fail := true
+
+						// index.html could mean there's a corresponding index.md meaning built the correct path
+						// but Jekyll actually creates index.html files for all md files.
+						// foo.md -> foo/index.html
+						// it does this to prettify urls, content of foo.md would then be rendered here:
+						// http://domain.com/foo/ (instead of http://domain.com/foo.html)
+						// so if there's an error, let's see if index.md exists, otherwise retry from parent folder
+						if filepath.Base(htmlPath) == "index.html" {
+							// retry from parent folder
+							p = filepath.Join(filepath.Dir(htmlPath), "..", mdToHtmlPath(u.Path))
+							if _, err := os.Stat(p); err == nil {
+								fail = false
+							}
+						}
+
+						if fail {
+							return errors.New("relative link to non-existent resource: " + t.String())
+						}
+					}
 				}
 			}
 		}
 	}
 
 	return nil
+}
+
+func mdToHtmlPath(mdPath string) string {
+	if strings.HasSuffix(mdPath, ".md") == false {
+		// file is not a markdown, don't change anything
+		return mdPath
+	}
+	if strings.HasSuffix(mdPath, "index.md") {
+		return strings.TrimSuffix(mdPath, "md") + "html"
+	}
+	return strings.TrimSuffix(mdPath, ".md") + "/index.html"
 }
 
 // helpers
