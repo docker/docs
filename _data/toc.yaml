@@ -1261,6 +1261,8 @@ toc:
       title: Cache Docker images
     - path: /datacenter/dtr/2.2/guides/security-scan-dtr/
       title: Docker Security Scanning in DTR
+    - path: /datacenter/dtr/2.2/guides/webhooks/
+      title: Create and manage webhooks
     - sectiontitle: API and CLI reference
       section:
       - path: /datacenter/dtr/2.2/reference/api/
