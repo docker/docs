@@ -293,7 +293,7 @@ to revert to the previous configuration.
 This section contains optional procedures for configuring Ubuntu to work better
 with Docker.
 
-* [Manager Docker as a non-root user](ubuntulinux.md#manage-docker-as-a-non-root-user)
+* [Manage Docker as a non-root user](ubuntulinux.md#manage-docker-as-a-non-root-user)
 * [Adjust memory and swap accounting](ubuntulinux.md#adjust-memory-and-swap-accounting)
 * [Enable UFW forwarding](ubuntulinux.md#enable-ufw-forwarding)
 * [Configure a DNS server for use by Docker](ubuntulinux.md#configure-a-dns-server-for-use-by-docker)
