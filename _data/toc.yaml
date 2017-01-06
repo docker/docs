@@ -1257,6 +1257,8 @@ toc:
       title: Configure your Docker Engine with DTR
     - path: /datacenter/dtr/2.2/guides/work-images-dtr/
       title: Work with images in DTR
+    - path: /datacenter/dtr/2.2/guides/cache-docker-images/
+      title: Cache Docker images
     - path: /datacenter/dtr/2.2/guides/security-scan-dtr/
       title: Docker Security Scanning in DTR
     - sectiontitle: API and CLI reference
