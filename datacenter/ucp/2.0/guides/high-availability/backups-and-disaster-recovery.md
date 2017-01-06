@@ -56,16 +56,7 @@ backup:
 ```bash
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
-  docker/ucp restore < backup.tar
-```
-
-The restore command may also be invoked in interactive mode:
-
-```bash
-$ docker run --rm -i --name ucp \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /path/to/backup.tar:/config/backup.tar \
-  docker/ucp restore -i
+  docker/ucp restore --passphrase "secret" < backup.tar
 ```
 
 ## Restore your cluster
