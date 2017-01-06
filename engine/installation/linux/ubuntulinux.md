@@ -596,7 +596,7 @@ updates Docker if a new version is available.
 
 ```bash
 $ sudo apt-get update
-$ sudo apt-get upgrade docker-engine
+$ sudo apt-get install docker-engine
 ```
 
 ## Uninstallation
