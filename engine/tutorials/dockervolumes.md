@@ -10,8 +10,7 @@ title: Manage data in containers
 
 So far you've been introduced to some [basic Docker
 concepts](usingdocker.md), seen how to work with [Docker
-images](dockerimages.md) as well as learned about [networking and
-links between containers](../userguide/networking/default_network/dockerlinks.md). In this
+images](dockerimages.md) as well as learned about [how to network your containers](networkingcontainers.md). In this
 section you're going to learn how you can manage data inside and between your
 Docker containers.
 
