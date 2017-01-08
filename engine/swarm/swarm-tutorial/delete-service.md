@@ -45,6 +45,7 @@ removed the service. The CLI returns a message that the service is not found:
        CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               
 
     ```
+
 ## What's next?
 
 In the next step of the tutorial, you set up a new service and apply a
