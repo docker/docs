@@ -16,7 +16,7 @@ After you uninstall UCP from the cluster, you'll no longer be able to enforce
 role-based access control to the cluster, or have a centralized way to monitor
 and manage the cluster.
 
-WARNING: After uninstalling UCP from the cluster, you will no longer be able to
+After uninstalling UCP from the cluster, you will no longer be able to
 join new nodes using `docker swarm join` unless you reinstall UCP.
 
 To uninstall UCP, log in into a manager node using ssh, and run:

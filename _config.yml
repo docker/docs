@@ -95,6 +95,12 @@ defaults:
       assignee: "londoncalling"
   -
     scope:
+      path: "datacenter/dtr/2.2"
+    values:
+      ucp_version: "2.1"
+      dtr_version: "2.2"
+  -
+    scope:
       path: "datacenter/dtr/2.1"
     values:
       ucp_version: "2.0"
@@ -106,6 +112,12 @@ defaults:
       hide_from_sitemap: true
       ucp_version: "1.1"
       dtr_version: "2.0"
+  -
+    scope:
+      path: "datacenter/ucp/2.1"
+    values:
+      ucp_version: "2.1"
+      dtr_version: "2.2"
   -
     scope:
       path: "datacenter/ucp/2.0"

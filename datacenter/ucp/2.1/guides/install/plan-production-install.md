@@ -15,11 +15,11 @@ Before installing UCP you should make sure that all nodes (physical or virtual
 machines) that you'll manage with UCP:
 
 * [Comply the the system requirements](system-requirements.md)
-* Are running the same version of CS Docker Engine
+* Are running the same version of Docker Engine
 
 ## Hostname strategy
 
-Docker UCP requires CS Docker Engine to run. Before installing the commercially
+Docker UCP requires Docker Engine to run. Before installing the commercially
 supported Docker Engine on your cluster nodes, you should plan for a common
 hostname strategy.
 
@@ -28,13 +28,12 @@ Domain Names (FQDN) likes `engine01.docker.vm`. Independently of your choice,
 ensure your naming strategy is consistent across the cluster, since Docker
 Engine and UCP use hostnames.
 
-As an example, if your cluster has 4 hosts you can name them:
+As an example, if your cluster has 3 hosts you can name them:
 
-```bash
-engine01.docker.vm
-engine02.docker.vm
-engine03.docker.vm
-engine04.docker.vm
+```none
+node1.company.example.org
+node2.company.example.org
+node3.company.example.org
 ```
 
 ## Static IP addresses
@@ -90,10 +89,9 @@ reach the UCP controller,
 You can have a certificate for each controller, with a common SAN. As an
 example, on a three node cluster you can have:
 
-* engine01.docker.vm with SAN ducp.docker.vm
-* engine02.docker.vm with SAN ducp.docker.vm
-* engine03.docker.vm with SAN ducp.docker.vm
-
+* node1.company.example.org with SAN ucp.company.org
+* node2.company.example.org with SAN ucp.company.org
+* node3.company.example.org with SAN ucp.company.org
 
 Alternatively, you can also install UCP with a single externally-signed
 certificate for all controllers rather than one for each controller node.
