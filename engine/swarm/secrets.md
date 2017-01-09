@@ -105,10 +105,11 @@ real-world example, continue to
 [Intermediate example: Use secrets with a Nginx service](#intermediate-example-use-secrets-with-a-nginx-service).
 
 1.  Add a secret to Docker. The `docker secret create` command reads standard
-    input because the `-f` flag is set to `-`.
+    input because the last argument, which represents the file to read the
+    secret from, is set to `-`.
 
     ```bash
-    $ echo "This is a secret" | docker secret create my_secret_data -f -
+    $ echo "This is a secret" | docker secret create my_secret_data -
     ```
 
 2.  Create a `redis` service and grant it access to the secret. By default,
@@ -338,16 +339,16 @@ generate the site key and certificate, name the files `site.key` and
     `site.conf`. You can store any file as a secret as long as it is smaller
     than 500 KB. This allows you to decouple the key, certificate, and
     configuration from the services that will use them. In each of these
-    commands, the `-f` flag takes the path to the file containing the secret
-    on the host machine's filesystem. In these examples, the secret name and
-    the file name are the same.
+    commands, the last argument represents the path to the file to read the
+    secret from on the host machine's filesystem. In these examples, the secret
+    name and the file name are the same.
 
     ```bash
-    $ docker secret create site.key -f site.key
+    $ docker secret create site.key site.key
 
-    $ docker secret create site.crt -f site.crt
+    $ docker secret create site.crt site.crt
 
-    $ docker secret create site.conf -f site.conf
+    $ docker secret create site.conf site.conf
     ```
 
     ```bash
@@ -524,11 +525,11 @@ line.
     > can later add a new version, update the service to use it, then remove the
     > old version.
 
-    The `-f` flag is set to `-`, which indicates that the input is read from
-    STDIN.
+    The last argument is set to `-`, which indicates that the input is read from
+    standard input.
 
     ```bash
-    $ openssl rand -base64 20 | docker secret create mysql_password -f -
+    $ openssl rand -base64 20 | docker secret create mysql_password -
 
     l1vinzevzhj4goakjap5ya409
     ```
@@ -541,7 +542,7 @@ line.
     bootstrap the `mysql` service.
 
     ```bash
-    $ openssl rand -base64 20 | docker secret create mysql_root_password -f -
+    $ openssl rand -base64 20 | docker secret create mysql_root_password -
     ```
 
     List the secrets managed by Docker using `docker secret ls`:
@@ -718,7 +719,7 @@ Docker.
 1.  Create the new password and store it as a  secret named `mysql_password_v2`.
 
     ```bash
-    $ openssl rand -base64 20 | docker secret create mysql_password_v2 -f -
+    $ openssl rand -base64 20 | docker secret create mysql_password_v2 -
     ```
 
 2.  Update the MySQL service to give it access to both the old and new secrets.
