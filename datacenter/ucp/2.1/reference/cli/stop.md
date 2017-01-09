@@ -1,21 +1,10 @@
 ---
-description: Stop UCP components running on this node
-keywords: docker, dtr, cli, stop
 title: docker/ucp stop
+description: Stop UCP components running on this node
+keywords: docker, ucp, cli, stop
 ---
 
 Stop UCP components running on this node
-
-## Usage
-
-```bash
-docker run -it --rm \
-    --name ucp \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    docker/ucp \
-    stop [command options]
-
-```
 
 ## Options
 

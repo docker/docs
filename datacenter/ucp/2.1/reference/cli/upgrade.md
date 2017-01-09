@@ -1,27 +1,19 @@
 ---
-description: Upgrade the UCP components on this node
-keywords: docker, dtr, cli, upgrade
 title: docker/ucp upgrade
+description: Upgrade the UCP components on this node
+keywords: docker, ucp, cli, upgrade
 ---
 
 Upgrade the UCP components on this node
-
-## Usage
-
-```bash
-docker run -it --rm docker/ucp \
-  upgrade [command options]
-
-```
 
 ## Description
 
 This commands upgrades the UCP running on this node.
 To upgrade UCP:
 
-* Upgrade the Docker Engine in all nodes (optional)
-* Run the upgrade command in all manager nodes
-* Run the upgrade command in all worker nodes
+  * Upgrade the Docker Engine in all nodes (optional)
+  * Run the upgrade command in all manager nodes
+  * Run the upgrade command in all worker nodes
 
 After upgrading UCP in a node, go to the UCP web UI and confirm the node is
 healthy, before upgrading other nodes.
