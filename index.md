@@ -90,11 +90,11 @@ title: Welcome to the Docs
 </li>
 <li>
 <div class="media_image">
-	<a href="/docker-trusted-registry/"><img src="/images/icon-registry@2X.png" alt="Docker Trusted Registry"></a>
+	<a href="/datacenter/dtr/2.1/guides/index.md"><img src="/images/icon-registry@2X.png" alt="Docker Trusted Registry"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/docker-trusted-registry/">Docker Trusted Registry</a></h3>
+	<h3><a href="/datacenter/dtr/2.1/guides/index.md">Docker Trusted Registry</a></h3>
 		<p>
     (DTR) stores and signs your images.</p>
 	</div>
@@ -102,11 +102,11 @@ title: Welcome to the Docs
 </li>
 <li>
 <div class="media_image">
-	<a href="/ucp/overview/"><img src="/images/icon-ucp@2X.png" alt="Docker Universal Control Plane"></a>
+	<a href="/datacenter/ucp/2.0/guides/index.md"><img src="/images/icon-ucp@2X.png" alt="Docker Universal Control Plane"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/ucp/overview/">Docker Universal Control Plane</a></h3>
+	<h3><a href="/datacenter/ucp/2.0/guides/index.md">Docker Universal Control Plane</a></h3>
 		<p>
     (UCP) Manage a cluster of on-premises Docker hosts as if they were a single machine.
     </p>
