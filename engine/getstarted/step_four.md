@@ -79,7 +79,7 @@ creating an image which runs on Linux.
 
     The `whalesay` image is based on Ubuntu, which uses `apt-get` to install
     packages. These two commands refresh the list of packages available to the
-    image and install the `fortunes` program into it. The `fortunes` program has
+    image and install the `fortunes` program into it. The `fortunes` program
     prints out wise sayings for our whale to say.
 
 6.  Add a `CMD` statement, which tells the image the final command to run after
