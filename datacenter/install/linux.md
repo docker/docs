@@ -59,7 +59,7 @@ docker run --rm -it --name ucp \
 This runs the install command in interactive mode, so that you're prompted
 for any necessary configuration values.
 
-[Learn more about the UCP installation](../ucp/2.9/guides/installation/index.md)
+[Learn more about the UCP installation](../ucp/2.0/guides/installation/index.md)
 
 ### Step 4: License your installation
 

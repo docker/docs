@@ -132,7 +132,7 @@ documentation.
 
   * Users, depending on their roles, can access account information through the Trusted Registry UI.
 
-  * View new API documentation through the Trusted Registry UI. You can also view this [documentation](/docker-trusted-registry/index.md) from Docker, Inc. docs section.
+  * View new API documentation through the Trusted Registry UI. You can also view this documentation from Docker, Inc. docs section.
 
 * New APIs
 
