@@ -52,7 +52,7 @@ func TestURLs(t *testing.T) {
 
 		err = testURLs(htmlBytes, path)
 		if err != nil {
-			t.Error(err.Error(), "-", relPath)
+			t.Error(relPath + err.Error())
 		}
 		return nil
 	})
@@ -70,13 +70,17 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 
 	z := html.NewTokenizer(reader)
 
-	for {
+	urlErrors := ""
+	// fmt.Println("urlErrors:", urlErrors)
+	done := false
+
+	for !done {
 		tt := z.Next()
 
 		switch tt {
 		case html.ErrorToken:
 			// End of the document, we're done
-			return nil
+			done = true
 		case html.StartTagToken:
 			t := z.Token()
 
@@ -97,7 +101,8 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 				countImages++
 				ok, src := getSrc(t)
 				if !ok {
-					return errors.New("img with no src: " + t.String())
+					urlErrors += "\nimg with no src: " + t.String()
+					break
 				}
 				urlStr = src
 			}
@@ -106,11 +111,14 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 			if urlStr != "" {
 				u, err := url.Parse(urlStr)
 				if err != nil {
-					return errors.New("can't parse url: " + t.String())
+					urlErrors += "\ncan't parse url: " + t.String()
+					break
+					// return errors.New("can't parse url: " + t.String())
 				}
 				// test with github.com
 				if u.Scheme != "" && u.Host == "docs.docker.com" {
-					return errors.New("found absolute link: " + t.String())
+					urlErrors += "\nabsolute: " + t.String()
+					break
 				}
 
 				// relative link
@@ -146,7 +154,8 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 						}
 
 						if fail {
-							return errors.New("relative link to non-existent resource: " + t.String())
+							urlErrors += "\nbroken: " + t.String()
+							break
 						}
 					}
 				}
@@ -154,6 +163,10 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 		}
 	}
 
+	// fmt.Println("urlErrors:", urlErrors)
+	if urlErrors != "" {
+		return errors.New(urlErrors)
+	}
 	return nil
 }
 
