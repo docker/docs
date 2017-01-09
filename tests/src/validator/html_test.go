@@ -15,15 +15,16 @@ import (
 
 var countLinks = 0
 var countImages = 0
+var htmlContentRootPath = "/usr/src/app/allvbuild"
 
 // TestURLs tests if we're not using absolute paths for URLs
 // when pointing to local pages.
 func TestURLs(t *testing.T) {
 	count := 0
 
-	filepath.Walk("/usr/src/app/allvbuild", func(path string, info os.FileInfo, err error) error {
+	filepath.Walk(htmlContentRootPath, func(path string, info os.FileInfo, err error) error {
 
-		relPath := strings.TrimPrefix(path, "/usr/src/app/allvbuild")
+		relPath := strings.TrimPrefix(path, htmlContentRootPath)
 
 		isArchive, err := regexp.MatchString(`^/v[0-9]+\.[0-9]+/.*`, relPath)
 		if err != nil {
@@ -114,8 +115,18 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 
 				// relative link
 				if u.Scheme == "" {
-					p := filepath.Join(htmlPath, mdToHtmlPath(u.Path))
-					if _, err := os.Stat(p); os.IsNotExist(err) {
+
+					resourcePath := ""
+					resourcePathIsAbs := false
+
+					if filepath.IsAbs(u.Path) {
+						resourcePath = filepath.Join(htmlContentRootPath, mdToHtmlPath(u.Path))
+						resourcePathIsAbs = true
+					} else {
+						resourcePath = filepath.Join(filepath.Dir(htmlPath), mdToHtmlPath(u.Path))
+					}
+
+					if _, err := os.Stat(resourcePath); os.IsNotExist(err) {
 
 						fail := true
 
@@ -125,10 +136,11 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 						// it does this to prettify urls, content of foo.md would then be rendered here:
 						// http://domain.com/foo/ (instead of http://domain.com/foo.html)
 						// so if there's an error, let's see if index.md exists, otherwise retry from parent folder
-						if filepath.Base(htmlPath) == "index.html" {
+						// (only if the resource path is not absolute)
+						if !resourcePathIsAbs && filepath.Base(htmlPath) == "index.html" {
 							// retry from parent folder
-							p = filepath.Join(filepath.Dir(htmlPath), "..", mdToHtmlPath(u.Path))
-							if _, err := os.Stat(p); err == nil {
+							resourcePath = filepath.Join(filepath.Dir(htmlPath), "..", mdToHtmlPath(u.Path))
+							if _, err := os.Stat(resourcePath); err == nil {
 								fail = false
 							}
 						}
