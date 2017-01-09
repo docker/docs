@@ -4,8 +4,6 @@ keywords: docker, dtr, install, license
 title: License Docker Trusted Registry
 ---
 
-<!-- TODO: review page for v2.2 -->
-
 By default, you don't need to license your Docker Trusted Registry. When
 installing DTR, it automatically starts using the same license file used on
 your Docker Universal Control Plane cluster.

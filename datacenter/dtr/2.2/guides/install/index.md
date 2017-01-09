@@ -4,8 +4,6 @@ keywords: docker, dtr, registry, install
 title: Install Docker Trusted Registry
 ---
 
-<!-- TODO: review page for v2.2 -->
-
 Docker Trusted Registry (DTR) is a containerized application that runs on a
 swarm managed by Docker Universal Control Plane (UCP). It can be installed
 on-premises or on a cloud infrastructure.
@@ -21,7 +19,7 @@ infrastructure has all the [requirements DTR needs to run](system-requirements.m
 
 Since DTR requires Docker Universal Control Plane (UCP)
 to run, you need to install UCP on all the nodes where you plan to install DTR.
-[Learn how to install UCP](/datacenter/ucp/2.0/guides/installation/index.md).
+[Learn how to install UCP](/datacenter/ucp/2.1/guides/installation/index.md).
 
 DTR needs to be installed on a worker node that is being managed by UCP.
 You can't install DTR on a standalone Docker Engine.
@@ -38,22 +36,21 @@ Run the following command to install DTR:
 
 ```none
 # Pull the latest version of DTR
-$ docker pull docker/dtr
+$ docker pull docker/dtr:2.2.0-beta1
 
 # Install DTR
 $ docker run -it --rm \
-  docker/dtr install \
+  docker/dtr:2.2.0-beta1 install \
   --ucp-node <ucp-node-name> \
   --ucp-insecure-tls
 ```
 
 Where the `--ucp-node` is the hostname of the UCP node where you want to deploy
-DTR. `--ucp-insecure-tls` tells the installer to trust the certificates used
+DTR. `--ucp-insecure-tls` tells the installer to trust the TLS certificates used
 by UCP.
 
 The install command has other flags for customizing DTR at install time.
 Check the [reference documentation to learn more](../../reference/cli/install.md).
-
 
 ## Step 4. Check that DTR is running
 
@@ -113,7 +110,7 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command:
 
     ```none
     docker run -it --rm \
-      docker/dtr join \
+      docker/dtr:2.2.0-beta1 join \
       --ucp-node <ucp-node-name> \
       --ucp-insecure-tls
     ```

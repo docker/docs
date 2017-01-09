@@ -4,8 +4,6 @@ description: Lean how to scale Docker Trusted Registry by adding and removing re
 keywords: docker, dtr, install, deploy
 ---
 
-<!-- TODO: review page for v2.2 -->
-
 Docker Trusted Registry is designed to scale horizontally as your usage
 increases. You can add or remove replicas to make DTR scale to your needs
 or for high availability.
@@ -22,13 +20,13 @@ you're going to install these replicas also need to be managed by UCP.
 
 To add replicas to an existing DTR deployment:
 
-1. Use ssh to log into a node that is already part of UCP.
+1. Use ssh to log into any node that is already part of UCP.
 
 2.  Run the DTR join command:
 
     ```none
     docker run -it --rm \
-      docker/dtr join \
+      docker/dtr:2.2.0-beta1 join \
       --ucp-node <ucp-node-name> \
       --ucp-insecure-tls
     ```
@@ -43,12 +41,12 @@ To add replicas to an existing DTR deployment:
 
 To remove a DTR replica from your deployment:
 
-1. Use ssh to log into a node that is already part of UCP.
+1. Use ssh to log into any node that is part of UCP.
 2.  Run the DTR remove command:
 
 ```none
 docker run -it --rm \
-  docker/dtr remove \
+  docker/dtr:2.2.0-beta1 remove \
   --ucp-insecure-tls
 ```
 

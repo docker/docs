@@ -4,36 +4,27 @@ keywords: docker, dtr, install, uninstall
 title: Uninstall Docker Trusted Registry
 ---
 
-<!-- TODO: review page for v2.2 -->
+Uninstalling DTR is a two-step process. You first scale your DTR deployment down
+to a single replica. Then you uninstall the last DTR replica, which permanently
+removes DTR and deletes all its data.
 
-Use the `remove` command, to remove a DTR replica from an existing deployment.
-To uninstall a DTR cluster you remove all DTR replicas one at a time.
+Start by [scaling down your DTR deployment](scale-your-deployment.md) to a
+single replica.
 
-The remove command informs the DTR cluster that the node is about to be removed,
-then it removes the replica, stops and removes all DTR containers from that node,
-and deletes all DTR volumes.
+When your DTR deployment is down to a single replica, you can use the
+`docker/dtr destroy` command to permanently remove DTR and all its data:
 
-To uninstall a DTR replica, run:
+1. Use ssh to log into any node that is part of UCP.
+2. Uninstall DTR:
 
 ```none
 docker run -it --rm \
-  docker/dtr remove \
+  docker/dtr:2.2.0-beta1 destroy \
   --ucp-insecure-tls
 ```
 
-You will be prompted for:
-
-* Existing replica id: the id of any healthy DTR replica of that cluster
-* Replica id: the id of the DTR replica you want to remove. It can be the id of an
-unhealthy replica that you want to remove from your deployment
-* UCP username and password: the administrator credentials for UCP
-
-To ensure you don't loose data, DTR will not remove the last replica from your
-deployment. To confirm you really want to remove that replica, use the
-`--force-remove` flag.
-
-To see what options are available in the uninstall command, check the
-[uninstall command reference documentation](../../reference/cli/remove.md).
+To see what options are available in the destroy command, check the
+[destroy command reference documentation](../../reference/cli/destroy.md).
 
 ## Where to go next
 

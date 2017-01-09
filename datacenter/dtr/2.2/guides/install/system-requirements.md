@@ -4,16 +4,13 @@ keywords: docker, DTR, architecture, requirements
 title: Docker Trusted Registry system requirements
 ---
 
-<!-- TODO: review page for v2.2 -->
-
 Docker Trusted Registry can be installed on-premises or on the cloud.
 Before installing, be sure your infrastructure has these requirements.
 
 ## Software requirements
 
 You can only install DTR on a node that is being managed by Docker Universal
-Control Plane 2.0.
-
+Control Plane 2.1.
 
 ## Ports used
 
