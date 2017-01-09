@@ -1,10 +1,10 @@
 ---
-description: Lists all the images necessary to install DTR
-keywords: docker, dtr, cli, images
 title: docker/dtr images
+keywords: docker, dtr, cli, images
+description: List all the images necessary to install DTR
 ---
 
-Lists all the images necessary to install DTR
+List all the images necessary to install DTR
 
 ## Usage
 
@@ -17,3 +17,6 @@ docker run -it --rm docker/dtr \
 
 
 This command lists all the images necessary to install DTR.
+
+
+
