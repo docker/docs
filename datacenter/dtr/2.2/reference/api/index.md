@@ -1,7 +1,7 @@
 ---
 description: Learn how to use the Docker Trusted Registry REST API
 keywords: dtr, api, reference
-title: Docker Trusted Registry 2.1 API
+title: Docker Trusted Registry 2.2 API
 ---
 
 <div class="swagger-section">
