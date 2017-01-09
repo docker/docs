@@ -70,6 +70,12 @@ $ docker service create --name helloworld alpine ping docker.com
 9uk4639qpg7npwf3fn2aasksr
 ```
 
+## Grant a service access to secrets
+
+To create a service with access to Docker-managed secrets, use the `--secret`
+flag. For more information, see
+[Manage sensitive strings (secrets) for Docker services](secrets.md)
+
 ### Specify the image version the service should use
 
 When you create a service without specifying any details about the version of
