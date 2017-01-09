@@ -435,8 +435,6 @@ toc:
         title: stack rm
       - path: /engine/reference/commandline/stack_services/
         title: stack services
-      - path: /engine/reference/commandline/stack_tasks/
-        title: stack tasks
       - path: /engine/reference/commandline/start/
         title: start
       - path: /engine/reference/commandline/stats/
