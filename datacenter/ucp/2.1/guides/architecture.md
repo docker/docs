@@ -69,8 +69,12 @@ persist the state of UCP. These are the UCP services running on manager nodes:
 | ucp-cluster-root-ca | A certificate authority used for TLS communication between UCP components                                                                                                                         |
 | ucp-controller      | The UCP web server                                                                                                                                                                                |
 | ucp-kv              | Used to store the UCP configurations. Don't use it in your applications, since it's for internal use only                                                                                         |
+| ucp-metrics         | Used to collect and process metrics for a node, like the disk space available                                                                                                                     |
 | ucp-proxy           | A TLS proxy. It allows secure access to the local Docker Engine to UCP components                                                                                                                 |
 | ucp-swarm-manager   | Used to provide backwards-compatibility with Docker Swarm                                                                                                                                         |
+
+
+
 
 ### UCP components in worker nodes
 
@@ -100,7 +104,10 @@ Docker UCP uses these named volumes to persist data in all nodes where it runs:
 | ucp-controller-server-certs | Certificate and keys for the UCP web server running in the node                          |
 | ucp-kv                      | UCP configuration data                                                                   |
 | ucp-kv-certs                | Certificates and keys for the key-value store                                            |
+| ucp-metrics-data            | Monitoring data gathered by UCP                                                          |
+| ucp-metrics-inventory       | Configuration file used by the ucp-metrics service                                       |
 | ucp-node-certs              | Certificate and keys for node communication                                              |
+
 
 You can customize the volume driver used for these volumes, by creating
 the volumes before installing UCP. During the installation, UCP checks which

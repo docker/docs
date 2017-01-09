@@ -21,16 +21,16 @@ Docker Engine to run.
 For each host that you plan to manage with UCP:
 
 1.  Log in into that host using ssh.
-2.  Install CS Docker Engine:
+2.  Install Docker Engine 1.13:
 
     ```bash
-    curl -SLf https://packages.docker.com/1.12/install.sh | sh
+    curl -fsSL https://test.docker.com/ | sh
     ```
 
-    [You can also install CS Docker Engine using a package manager](/cs-engine/install.md)
+    [You can also install Docker Engine using a package manager](/engine/installation.md)
 
-Make sure you install the same CS Docker Engine version on all the nodes. Also,
-if you're creating virtual machine templates with CS Docker Engine  already
+Make sure you install the same Docker Engine version on all the nodes. Also,
+if you're creating virtual machine templates with Docker Engine  already
 installed, make sure the `/etc/docker/key.json` file is not included in the
 virtual machine image. When provisioning the virtual machine, restart the Docker
 daemon to generate a new `/etc/docker/key.json` file.
@@ -61,12 +61,12 @@ To install UCP:
 
     ```none
     # Pull the latest version of UCP
-    $ docker pull docker/ucp:latest
+    $ docker pull docker/ucp:2.1.0-beta1
 
     # Install UCP
     $ docker run --rm -it --name ucp \
       -v /var/run/docker.sock:/var/run/docker.sock \
-      docker/ucp install \
+      docker/ucp:2.1.0-beta1 install \
       --host-address <node-ip-address> \
       --interactive
     ```
@@ -84,7 +84,10 @@ license.
 
 ![](../images/install-production-1.png){: .with-border}
 
-If you don't have a license yet, [learn how to get a free trial license](license.md).
+If you're registered in the beta program and don't have a license yet, you
+can get it from your [Docker Store subscriptions](https://store.docker.com/?overlay=subscriptions).
+
+<!-- If you don't have a license yet, [learn how to get a free trial license](license.md). -->
 
 ## Step 6: Join manager nodes
 

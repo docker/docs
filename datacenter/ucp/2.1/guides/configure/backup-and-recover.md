@@ -13,15 +13,14 @@ The next step is creating a backup policy and disaster recovery plan.
 
 ## Backup policy
 
-Docker UCP nodes persist data using [named volumes](../architecture.md).
+As part of your backup policy you should regularly create backups of UCP.
+To create a backup of UCP, use the `docker/ucp backup` command. This creates
+a tar archive with the contents of the [volumes used by UCP](../architecture.md)
+to persist data, and streams it to stdout.
 
-As part of your backup policy you should regularly create backups of the
-controller nodes. Since the nodes used for running user containers don't
-persist data, you can decide not to create any backups for them.
-
-To perform a backup of a UCP controller node, use the `docker/ucp backup`
-command. This creates a tar archive with the contents of the volumes used by
-UCP on that node, and streams it to stdout.
+You need to run the backup command on a UCP manager node. Since UCP stores
+the same data on all manager nodes, you only need to create a backup of a
+single node.
 
 To create a consistent backup, the backup command temporarily stops the UCP
 containers running on the node where the backup is being performed. User

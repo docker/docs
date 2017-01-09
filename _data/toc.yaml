@@ -1106,7 +1106,7 @@ toc:
       - path: /datacenter/ucp/2.1/guides/install/scale-your-cluster/
         title: Scale your cluster
       - path: /datacenter/ucp/2.1/guides/install/upgrade/
-        title: Upgrade UCP
+        title: Upgrade to UCP 2.1
       - path: /datacenter/ucp/2.1/guides/install/uninstall/
         title: Uninstall UCP
     - sectiontitle: Access UCP
