@@ -11,3 +11,9 @@ here, you'll need to find the string by searching this repo:
 https://www.github.com/docker/docker
 -->
 {% include cli.md %}
+
+## Examples
+
+```bash
+$ docker network disconnect multi-host-network container1
+```
