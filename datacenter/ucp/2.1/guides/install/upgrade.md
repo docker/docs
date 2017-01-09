@@ -53,13 +53,13 @@ You can upgrade UCP from the web UI or the CLI.
 To upgrade from the CLI, log into a UCP manager node using ssh, and run:
 
 ```
-# Check on Docker Hub which versions are available
-$ docker pull docker/ucp:<version>
+# Get the latest version of UCP
+$ docker pull docker/ucp:2.1.0-beta1
 
 $ docker run --rm -it \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  docker/ucp:<version> \
+  docker/ucp:2.1.0-beta1 \
   upgrade --interactive
 ```
 
