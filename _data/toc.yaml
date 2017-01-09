@@ -289,6 +289,8 @@ toc:
       title: Manage nodes in a swarm
     - path: /engine/swarm/services/
       title: Deploy services to a swarm
+    - path: /engine/swarm/secrets/
+      title: Manage sensitive data with Docker secrets
     - path: /engine/swarm/networking/
       title: Attach services to an overlay network
     - path: /engine/swarm/admin_guide/
