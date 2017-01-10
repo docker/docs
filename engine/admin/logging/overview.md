@@ -80,9 +80,14 @@ The following logging options are supported for the `json-file` logging driver:
 ```no-highlight
 --log-opt max-size=[0-9]+[kmg]
 --log-opt max-file=[0-9]+
+--log-opt tag="webapp"
 --log-opt labels=label1,label2
 --log-opt env=env1,env2
 ```
+
+By default, Docker uses the first 12 characters of the container ID to tag log
+messages. Refer to the [log tag option documentation](log_tags.md) for
+customizing the log tag format.
 
 Logs that reach `max-size` are rolled over. You can set the size in
 kilobytes(k), megabytes(m), or gigabytes(g). eg `--log-opt max-size=50m`. If
