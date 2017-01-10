@@ -14,8 +14,6 @@ See the
 [Docker Engine documentation on overlay networks](/engine/swarm/networking.md)
 for more information on what Docker Engine provides.
 
-This feature is currently experimental.
-
 ## Enable the HTTP routing mesh
 
 To enable the HTTP routing mesh, go to the **UCP web UI**, navigate to the
@@ -54,6 +52,25 @@ This service must meet three criteria:
 * The service must have one or more labels prefixed with
   `com.docker.ucp.mesh.http` to specify the ports to route (see the syntax
   below)
+
+These options can be configured using the UCP UI, or can be entered manually
+using the `docker service` command.
+
+### Route to a service using the UI
+
+<!-- todo: expand, add screenshots -->
+
+When using the wizard to create services in the UCP UI, you may enable the HTTP
+routing mesh for a service by pubblishing a port, and filling in the options
+relating to "Routing Mesh Host".
+
+### Route to a service using the CLI
+
+The key of the label must begin with `com.docker.ucp.mesh.http`. For multiple
+labels, some examples could be `com.docker.ucp.mesh.http.80` and
+`com.docker.ucp.mesh.http.443`. Here `80` and `443` are used to differentiate
+the HRM labels via port numbers. You can use whatever values you want, just
+make sure they are different from each other and you can keep track of them.
 
 Labels with the prefix `com.docker.ucp.mesh.http` allow you to configure a
 single hostname and port to route to a service. If you wish to route multiple
@@ -171,5 +188,8 @@ renamed might use this functionality. The following labels accomplish this for
 
 ## Troubleshoot
 
-Check the logs of the `ucp-controller` containers on your UCP controller nodes
-for logging from the HTTP routing mesh.
+If a service is not configured properly for use of the HTTP routing mesh, this
+information is available in the UI when inspecting the service.
+
+More logging from the HTTP routing mesh is available in the logs of the
+`ucp-controller` containers on your UCP controller nodes.
