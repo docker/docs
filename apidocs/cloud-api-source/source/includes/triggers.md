@@ -13,7 +13,7 @@
 }
 ```
 
-Triggers are URLs that will start a redeploy of the service whenever a `POST` request is sent to them. They require no authorization headers, so they should be treated as access tokens. Triggers can be revoked if they are leaked or no longer used for security purposes. See [Triggers](../../docker-cloud/apps/triggers/) for more information.
+Triggers are URLs that will start a redeploy of the service whenever a `POST` request is sent to them. They require no authorization headers, so they should be treated as access tokens. Triggers can be revoked if they are leaked or no longer used for security purposes. See [Triggers](/docker-cloud/apps/triggers/) for more information.
 
 This is a [namespaced endpoint](#namespaced-endpoints).
 
