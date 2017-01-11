@@ -12,7 +12,7 @@ Docker host inside of a local virtual machine.
 With the advent of [Docker for Mac](/docker-for-mac/index.md) and [Docker for
 Windows](/docker-for-windows/index.md) as replacements for [Docker
 Toolbox](/toolbox/overview.md), we recommend that you use these for your primary
-Docker workflows. You can use these applications to run Docker natively on your local system without using Docker Machine at all. (See [Docker for Mac vs. Docker Toolbox](docker-for-mac/docker-toolbox.md) for an explanation on the Mac side.)
+Docker workflows. You can use these applications to run Docker natively on your local system without using Docker Machine at all. (See [Docker for Mac vs. Docker Toolbox](/docker-for-mac/docker-toolbox.md) for an explanation on the Mac side.)
 
 However, if you want to create _multiple_ local machines, you need Docker Machine, which is still available to create and manage machines for
 power users or multi-node experimentation. Both Docker for Mac and Docker for
