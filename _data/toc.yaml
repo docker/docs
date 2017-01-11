@@ -863,16 +863,26 @@ toc:
     title: Frequently Asked Questions
 - sectiontitle: CS Docker Engine
   section:
-  - path: /cs-engine/install/
-    title: Install CS Docker Engine
-  - path: /cs-engine/upgrade/
-    title: Upgrade
-  - sectiontitle: Release notes
+  - sectiontitle: 1.13 Beta
     section:
-    - path: /cs-engine/release-notes/release-notes/
-      title: CS Engine release notes
-    - path: /cs-engine/release-notes/prior-release-notes/
-      title: Prior CS Engine release notes
+    - path: /cs-engine/1.13/
+      title: Install
+    - path: /cs-engine/1.13/upgrade/
+      title: Upgrade
+    - path: /cs-engine/1.13/release-notes/
+      title: Release notes
+  - sectiontitle: 1.12
+    section:
+    - path: /cs-engine/1.12/install/
+      title: Install CS Docker Engine
+    - path: /cs-engine/1.12/upgrade/
+      title: Upgrade
+    - sectiontitle: Release notes
+      section:
+      - path: /cs-engine/1.12/release-notes/release-notes/
+        title: CS Engine release notes
+      - path: /cs-engine/1.12/release-notes/prior-release-notes/
+        title: Prior CS Engine release notes
 - sectiontitle: Docker Datacenter
   section:
   - path: /datacenter/install/aws/

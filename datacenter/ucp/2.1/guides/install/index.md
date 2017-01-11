@@ -24,10 +24,10 @@ For each host that you plan to manage with UCP:
 2.  Install Docker Engine 1.13:
 
     ```bash
-    curl -fsSL https://test.docker.com/ | sh
+    curl -SLf https://packages.docker.com/1.13/install.sh  | repo=testing sh
     ```
 
-    [You can also install Docker Engine using a package manager](/engine/installation.md)
+    [You can also install Docker Engine using a package manager](/cs-engine/1.13/index.md)
 
 Make sure you install the same Docker Engine version on all the nodes. Also,
 if you're creating virtual machine templates with Docker Engine  already

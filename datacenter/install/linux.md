@@ -14,18 +14,18 @@ Linux servers. Make sure all the hosts you want to manage in with Docker
 Datacenter have a minimum of:
 
 * Linux kernel version 3.10 or higher
-* CS Docker Engine version 1.12.1 or higher
+* Docker Engine version 1.13.0 or higher
 * 2.00 GB of RAM
 * 3.00 GB of available disk space
 
 Also make sure the hosts are running one of these operating systems:
 
 * CentOS 7.1 or 7.2
-* Red Hat Enterprise Linux 7.0, 7.1, or 7.2
-* Ubuntu 14.04 LTS
+* Red Hat Enterprise Linux 7.0, 7.1, 7.2, or 7.3
+* Ubuntu 14.04 LTS or 16.04 LTS
 * SUSE Linux Enterprise 12
 
-[Learn more about the Docker Datacenter system requirements](../ucp/2.0/guides/installation/system-requirements.md)
+[Learn more about the Docker Datacenter system requirements](../ucp/2.1/guides/install/system-requirements.md)
 
 
 ### Step 2: Install CS Docker Engine
@@ -36,10 +36,10 @@ with Docker Datacenter.
 Log in into each host using ssh, and install CS Docker Engine:
 
 ```bash
-curl -SLf https://packages.docker.com/1.12/install.sh | sh
+curl -SLf https://packages.docker.com/1.13/install.sh  | repo=testing sh
 ```
 
-[You can also install CS Docker Engine using a package manager](../../cs-engine/install.md)
+[You can also install CS Docker Engine using a package manager](/cs-engine/1.13/index.md)
 
 ### Step 3: Install Universal Control Plane
 
@@ -59,7 +59,8 @@ docker run --rm -it --name ucp \
 This runs the install command in interactive mode, so that you're prompted
 for any necessary configuration values.
 
-[Learn more about the UCP installation](../ucp/2.0/guides/installation/index.md)
+[Learn more about the UCP installation](../ucp/2.1/guides/admin/install/index.md)
+
 
 ### Step 4: License your installation
 
@@ -113,5 +114,5 @@ by UCP.
 
 ## Where to go next
 
-* [Deploy an application](../ucp/2.0/guides/applications/index.md)
-* [Considerations for high availability](../ucp/2.0/guides/high-availability/index.md)
+* [Deploy an application](../ucp/2.1/guides/applications/index.md)
+* [Considerations for high availability](../ucp/2.1/guides/configure/high-availability.md)
