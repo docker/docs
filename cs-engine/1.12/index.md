@@ -3,6 +3,7 @@ description: Learn more about the Commercially Supported Docker Engine.
 keywords: docker, engine, documentation
 redirect_from:
 - /docker-trusted-registry/cs-engine/
+- /cs-engine/
 title: Commercially Supported Docker Engine
 ---
 
