@@ -17,7 +17,7 @@ docker/machine release page</a> on GitHub.
 
 ## Installing Machine Directly
 
-1.  Install <a href="/installation/"
+1.  Install <a href="/engine/installation/"
     target="_blank">the Docker binary</a>.
 
 2.  Download the Docker Machine binary and extract it to your PATH.

@@ -21,7 +21,7 @@ format](compose-file.md#versioning) you are using:
 
     - subject to the [limitations](swarm.md#limitations) described below,
 
-    - as long as the Swarm cluster is configured to use the [overlay driver](/engine/userguide/networking/dockernetworks/#an-overlay-network),
+    - as long as the Swarm cluster is configured to use the [overlay driver](/engine/userguide/networking/#an-overlay-network-with-docker-engine-swarm-mode),
       or a custom driver which supports multi-host networking.
 
 Read [Get started with multi-host networking](/engine/userguide/networking/get-started-overlay/) to see how to
