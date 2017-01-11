@@ -100,7 +100,7 @@ above configuration options.
 
 - Click on **Launch Stack** below. This link will take you to AWS cloudformation portal.
 
-	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=DockerDatacenter&templateURL=https://s3-us-west-2.amazonaws.com/ddc-on-aws-public/aws/aws-v1.12.3-cs4-beta12-ddc.json)
+	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?templateURL=https://s3.amazonaws.com/packages.docker.com/caas/docker/docker_for_aws_ddc_2.1.0-beta1.json)
 
 - Confirm your AWS Region that you'd like to launch this stack in (top right corner)
 - Provide the required parameters and click **Next** (see below)
