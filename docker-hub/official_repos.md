@@ -17,7 +17,7 @@ designed to:
   stores, and other services, similar to what a Platform-as-a-Service (PAAS)
   would offer.
 
-* Exemplify [`Dockerfile` best practices](/articles/dockerfile_best-practices)
+* Exemplify [`Dockerfile` best practices](/engine/userguide/eng-image/dockerfile_best-practices/)
   and provide clear documentation to serve as a reference for other `Dockerfile`
   authors.
 
