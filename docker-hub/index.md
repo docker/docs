@@ -19,7 +19,7 @@ Log in to Docker Hub and Docker Cloud using [your free Docker ID](accounts.md).
 
 Docker Hub provides the following major features:
 
-* [Image Repositories](repos.md): Find, manage, and push and pull images from community, official, and private image libraries.
+* [Image Repositories](repos.md): Find, manage, push and pull images from community, official, and private image libraries.
 * [Automated Builds](builds.md): Automatically create new images when you make changes to a source code repository.
 * [Webhooks](webhooks.md): A feature of Automated Builds, Webhooks let you trigger actions after a successful push to a repository.
 * [Organizations](orgs.md): Create work groups to manage access to image repositories.
