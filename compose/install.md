@@ -14,7 +14,7 @@ To install Compose, do the following:
 
      * <a href="/engine/installation/windows/" target="_blank">Windows installation</a>
 
-     * <a href="/engine/installation/ubuntulinux/" target="_blank">Ubuntu installation</a>
+     * <a href="/engine/installation/linux/ubuntulinux/" target="_blank">Ubuntu installation</a>
 
      * <a href="/engine/installation/" target="_blank">other system installations</a>
 

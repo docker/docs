@@ -29,7 +29,7 @@ Testing documentation is relatively easy:
 ## Step 1.  Find a page in <a href="/" target="_blank">Docker's documentation</a> that contains a procedure or example you want to test.
 
 You should choose something that _should work_ on your machine. For example,
-<a href="/articles/baseimages/" target="_blank">creating
+<a href="/engine/userguide/eng-image/baseimages/" target="_blank">creating
 a base image</a> is something anyone with Docker can do. While <a
 href="https://kitematic.com/docs/managing-volumes/" target="_blank">changing
 volume directories in Kitematic</a> requires a Mac and Docker's Kitematic

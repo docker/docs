@@ -503,7 +503,7 @@ Logging configuration for the service.
 
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
-([documented here](/engine/reference/logging/overview.md)).
+([documented here](/engine/admin/logging/overview.md)).
 
 The default value is json-file.
 
@@ -787,7 +787,7 @@ use the specified driver.
 > Note: No path expansion will be done if you have also specified a
 > `volume_driver`.
 
-See [Docker Volumes](/engine/userguide/dockervolumes.md) and
+See [Docker Volumes](/engine/tutorials/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more
 
 ### volumes_from

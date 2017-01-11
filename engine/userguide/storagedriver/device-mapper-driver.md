@@ -373,8 +373,8 @@ If you run into repeated problems with thin pool, you can use the
 `dm.min_free_space` option to tune the Engine behavior. This value ensures that
 operations fail with a warning when the free space is at or near the minimum.
 For information, see <a
-href="/../../reference/commandline/dockerd/#storage-driver-options"
-target="_blank">the storage driver options in the Engine daemon reference</a>.<!-- fix_-->
+href="/engine/reference/commandline/dockerd/#storage-driver-options"
+target="_blank">the storage driver options in the Engine daemon reference</a>.
 
 
 ### Examine devicemapper structures on the host
