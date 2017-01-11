@@ -6,47 +6,33 @@
 
 - ucp-version: "2.0"
   tar-files:
-    - ucp-version: "2.0.1"
-      dtr-version: "2.1.3"
+    - description: "UCP 2.0.1, DTR 2.1.3"
       url: https://packages.docker.com/caas/ucp-2.0.1_dtr-2.1.3.tar.gz
-    - ucp-version: "2.0.1"
-      dtr-version: "2.1.2"
+    - description: "UCP 2.0.1, DTR 2.1.2"
       url: https://packages.docker.com/caas/ucp-2.0.1_dtr-2.1.2.tar.gz
-    - ucp-version: "2.0.1"
-      dtr-version: "2.1.1"
+    - description: "UCP 2.0.1, DTR 2.1.1"
       url: https://packages.docker.com/caas/ucp-2.0.1_dtr-2.1.1.tar.gz
-    - ucp-version: "2.0.1"
-      dtr-version: "2.1.0"
+    - description: "UCP 2.0.1, DTR 2.1.0"
       url: https://packages.docker.com/caas/ucp-2.0.1_dtr-2.1.0.tar.gz
-    - ucp-version: "2.0.0"
-      dtr-version: "2.1.0"
+    - description: "UCP 2.0.0, DTR 2.1.0"
       url: https://packages.docker.com/caas/ucp-2.0.0_dtr-2.1.0.tar.gz
 - ucp-version: "1.1"
   tar-files:
-    - ucp-version: "1.1.5"
-      dtr-version: "2.0.4"
+    - description: "UCP 1.1.5, DTR 2.0.4"
       url: https://packages.docker.com/caas/ucp-1.1.5_dtr-2.0.4.tar.gz
-    - ucp-version: "1.1.4"
-      dtr-version: "2.0.4"
+    - description: "UCP 1.1.4, DTR 2.0.4"
       url: https://packages.docker.com/caas/ucp-1.1.4_dtr-2.0.4.tar.gz
-    - ucp-version: "1.1.4"
-      dtr-version: "2.0.3"
+    - description: "UCP 1.1.4, DTR 2.0.3"
       url: https://packages.docker.com/caas/ucp-1.1.4_dtr-2.0.3.tar.gz
-    - ucp-version: "1.1.3"
-      dtr-version: "2.0.3"
+    - description: "UCP 1.1.3, DTR 2.0.3"
       url: https://packages.docker.com/caas/ucp-1.1.3_dtr-2.0.3.tar.gz
-    - ucp-version: "1.1.2"
-      dtr-version: "2.0.3"
+    - description: "UCP 1.1.2, DTR 2.0.3"
       url: https://packages.docker.com/caas/ucp-1.1.2_dtr-2.0.3.tar.gz
-    - ucp-version: "1.1.2"
-      dtr-version: "2.0.2"
+    - description: "UCP 1.1.2, DTR 2.0.2"
       url: https://packages.docker.com/caas/ucp-1.1.2_dtr-2.0.2.tar.gz
-    - ucp-version: "1.1.1"
-      dtr-version: "2.0.2"
+    - description: "UCP 1.1.1, DTR 2.0.2"
       url: https://packages.docker.com/caas/ucp-1.1.1_dtr-2.0.2.tar.gz
-    - ucp-version: "1.1.1"
-      dtr-version: "2.0.1"
+    - description: "UCP 1.1.1, DTR 2.0.1"
       url: https://packages.docker.com/caas/ucp-1.1.1_dtr-2.0.1.tar.gz
-    - ucp-version: "1.1.0"
-      dtr-version: "2.0.0"
+    - description: "UCP 1.1.0, DTR 2.0.0"
       url: https://packages.docker.com/caas/ucp-1.1.0_dtr-2.0.0.tar.gz

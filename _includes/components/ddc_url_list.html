@@ -6,7 +6,7 @@
       <div class="list-group center-block">
         {% for tar-file in data.tar-files %}
           <a href="{{ tar-file.url }}" target="_blank" class="list-group-item">
-            UCP {{ tar-file.ucp-version }}, DTR {{ tar-file.dtr-version }}
+            {{ tar-file.description }}
             <span class="badge"><span class="glyphicon glyphicon-chevron-right"></span></span>
           </a>
         {% endfor %}
