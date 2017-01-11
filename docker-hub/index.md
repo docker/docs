@@ -15,7 +15,7 @@ workflow automation throughout the development pipeline.
 
 Log in to Docker Hub and Docker Cloud using [your free Docker ID](accounts.md).
 
-![Getting started with Docker Hub](./images/getting-started.png)
+![Getting started with Docker Hub](images/getting-started.png)
 
 Docker Hub provides the following major features:
 
@@ -57,7 +57,7 @@ the repositories you can access and their status, view your "Dashboard" page on
 [Docker Hub](https://hub.docker.com).
 
 You can find more information on working with Docker images in the
-[Docker userguide](/userguide/dockerimages/).
+[Docker userguide](/engine/userguide/dockerimages/).
 
 ### Use Official Repositories
 
@@ -88,5 +88,5 @@ or you can create private repositories with limited access you control.
 
 ### Docker commands and Docker Hub
 
-Docker itself provides access to Docker Hub services via the [`docker search`](/reference/commandline/search),
-[`pull`](/reference/commandline/pull), [`login`](/reference/commandline/login), and [`push`](/reference/commandline/push) commands.
+Docker itself provides access to Docker Hub services via the [`docker search`](/engine/reference/commandline/search),
+[`pull`](/engine/reference/commandline/pull), [`login`](/engine/reference/commandline/login), and [`push`](/engine/reference/commandline/push) commands.
