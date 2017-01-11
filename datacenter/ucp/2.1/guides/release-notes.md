@@ -53,6 +53,15 @@ Docker Engine 1.13 in the nodes that you plan to manage with UCP.
   * When creating a user, pressing enter on keyboard no longer causes problems
 	* Fixed assorted icon and text visibility glitches
 
+**Known Issues**
+
+* Promoting a worker to manager causes the promotion process to hang or take a 
+very long time, because the node will not pull the `ucp-metrics` image correctly. 
+The workaround is to use `docker pull docker/ucp-metrics:2.1.0-beta1` on all 
+nodes that you plan to promote to manager. 
+* Dashboard metrics may show inaccurately high usage values when using an AWS template
+based deployment
+
 **Version Compatibility**
 
 UCP 2.1 requires minimum versions of the following Docker components:
