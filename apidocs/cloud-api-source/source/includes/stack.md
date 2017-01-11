@@ -157,7 +157,7 @@ Content-Type: application/json
 docker-cloud stack create --name hello-world -f docker-compose.yml
 ```
 
-Creates a new stack without starting it. Note that the JSON syntax is abstracted by both, the Docker Cloud CLI and our UI, in order to use [Stack YAML files](../../docker-cloud/apps/stack-yaml-reference/).
+Creates a new stack without starting it. Note that the JSON syntax is abstracted by both, the Docker Cloud CLI and our UI, in order to use [Stack YAML files](/docker-cloud/apps/stack-yaml-reference/).
 
 ### Endpoint Type
 
@@ -210,7 +210,7 @@ Accept: application/json
 docker-cloud stack export 46aca402
 ```
 
-Get a JSON representation of the stack following the [Stack YAML representation](../../docker-cloud/apps/stacks/).
+Get a JSON representation of the stack following the [Stack YAML representation](/docker-cloud/apps/stacks/).
 
 ### Endpoint Type
 
