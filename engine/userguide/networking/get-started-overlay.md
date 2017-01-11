@@ -142,7 +142,7 @@ that machine options that are needed by the `overlay` network driver.
 		--engine-opt="cluster-advertise=eth1:2376" \
 		mhs-demo0
 
-	At creation time, you supply the Engine `daemon` with the ` --cluster-store` option. This option tells the Engine the location of the key-value store for the `overlay` network. The bash expansion `$(docker-machine ip mh-keystore)` resolves to the IP address of the Consul server you created in "STEP 1". The `--cluster-advertise` option advertises the machine on the network.
+	At creation time, you supply the Engine `daemon` with the `--cluster-store` option. This option tells the Engine the location of the key-value store for the `overlay` network. The bash expansion `$(docker-machine ip mh-keystore)` resolves to the IP address of the Consul server you created in "STEP 1". The `--cluster-advertise` option advertises the machine on the network.
 
 2. Create another host and add it to the swarm cluster.
 
