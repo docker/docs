@@ -506,7 +506,7 @@ In that topic, see also:
 
 * [Linux configuration file](/engine/reference/commandline/dockerd/#/linux-configuration-file)
 
-* [Windows configuration file](/reference/commandline/dockerd/#/windows-configuration-file)
+* [Windows configuration file](/engine/reference/commandline/dockerd/#/windows-configuration-file)
 
 Note that updating these settings requires a reconfiguration and reboot of the Linux VM.
 

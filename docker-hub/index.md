@@ -57,7 +57,7 @@ the repositories you can access and their status, view your "Dashboard" page on
 [Docker Hub](https://hub.docker.com).
 
 You can find more information on working with Docker images in the
-[Docker userguide](/engine/userguide/dockerimages/).
+[Docker userguide](/engine/tutorials/dockerimages/).
 
 ### Use Official Repositories
 
