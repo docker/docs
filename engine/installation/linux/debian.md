@@ -61,13 +61,13 @@ from the new repository:
 
  3. Purge any older repositories.
 
-         $ apt-get purge "lxc-docker*"
-         $ apt-get purge "docker.io*"
+         $ sudo apt-get purge "lxc-docker*"
+         $ sudo apt-get purge "docker.io*"
 
  4. Update package information, ensure that APT works with the `https` method, and that CA certificates are installed.
 
-         $ apt-get update
-         $ apt-get install apt-transport-https ca-certificates gnupg2
+         $ sudo apt-get update
+         $ sudo apt-get install apt-transport-https ca-certificates gnupg2
 
  5. Add the new `GPG` key.
 
@@ -106,7 +106,7 @@ from the new repository:
 
  10. Update the `APT` package index.
 
-         $ apt-get update
+         $ sudo apt-get update
 
  11. Verify that `APT` is pulling from the right repository.
 
@@ -175,7 +175,7 @@ use the `-G` flag to specify an alternative group.
 
 To install the latest version of Docker with `apt-get`:
 
-    $ apt-get upgrade docker-engine
+    $ sudo apt-get upgrade docker-engine
 
 ## Uninstall
 
@@ -191,7 +191,7 @@ The above commands will not remove images, containers, volumes, or user created
 configuration files on your host. If you wish to delete all images, containers,
 and volumes run the following command:
 
-    $ rm -rf /var/lib/docker
+    $ sudo rm -rf /var/lib/docker
 
 You must delete the user created configuration files manually.
 
