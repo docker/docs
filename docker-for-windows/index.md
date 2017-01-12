@@ -329,16 +329,16 @@ If you would like to have handy tab completion for Docker commands, you can inst
     <br>
 3. To enable auto-completion of commands for the current PowerShell only, type:
 
-    `Import-Module posh-docker`
+    `Install-Module posh-docker`
 
 4. To make tab completion persistent across all PowerShell sessions, add the command to a `$PROFILE` by typing these commands at the PowerShell prompt.
 
         Install-Module -Scope CurrentUser posh-docker -Force
-        Add-Content $PROFILE "`nImport-Module posh-docker"
+        Add-Content $PROFILE "`nInstall-Module posh-docker"
 
     This creates a `$PROFILE` if one does not already exist, and adds this line into the file:
 
-    `Import-Module posh-docker`
+    `Install-Module posh-docker`
 
     <br>
     To check that the file was properly created, or simply edit it manually, type this in PowerShell:
