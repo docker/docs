@@ -45,6 +45,11 @@ created
 * The garbage collection settings now show the correct cron values
 * You can now specify DTR to use port 443 when installing DTR
 
+**Deprecation**
+
+The `/load_balancer_status` is deprecated and is going to be removed in future
+versions. Use the `/health` endpoint instead.
+
 **Known issues**
 
 * When viewing the result of a security scan, clicking on a layer sometimes

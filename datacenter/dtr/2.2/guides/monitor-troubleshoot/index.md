@@ -34,9 +34,6 @@ is healthy or not:
 * `/health`: Checks if the several components of a DTR replica are healthy, and
 returns a simple json response. This is useful for load balancing or other
 automated health check tasks.
-* `/load_balancer_status`: Checks if the several components of a DTR replica
-can be reached, and displays that information in a table. This is useful for
-an administrator to gauge the status of a DTR replica.
 * `/nginx_status`: Returns the number of connections being handled by the
 NGINX front-end used by DTR.
 * `/api/v0/meta/cluster_status`: Returns extensive information about all DTR
