@@ -25,16 +25,20 @@ Toolbox includes these Docker tools:
 
 * Oracle VirtualBox
 
-## Ready to get started?
+## Get Docker Toolbox
 
-Go to the <a href="https://www.docker.com/products/docker-toolbox" target="_blank">Docker Toolbox</a> product page and download Toolbox for Mac or Windows.
+1. Get the latest installers from the [Toolbox releases
+page](https://github.com/docker/toolbox/releases/):
 
-Choose the install instructions for your platform, and follow the steps:
+    * For Mac, download and run the "Latest release" `.pkg` installer (`DockerToolbox-<version>.pkg`)
 
-* [Install Docker Toolbox on macOS](toolbox_install_mac.md)
+    * For Windows, download and run the "Latest release" `.exe` installer (`DockerToolbox-<version>.exe`)
 
-* [Install Docker Toolbox for Windows](toolbox_install_windows.md)
+2. Choose the install instructions for your platform, and follow the steps:
 
+    * [Install Docker Toolbox on macOS](toolbox_install_mac.md)
+
+    * [Install Docker Toolbox for Windows](toolbox_install_windows.md)
 
 ## Next Steps
 
