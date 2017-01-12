@@ -716,6 +716,7 @@ port (a random host port will be chosen).
      - "49100:22"
      - "127.0.0.1:8001:8001"
      - "127.0.0.1:5000-5010:5000-5010"
+     - "6060:6060/udp"
 
 ### security_opt
 
