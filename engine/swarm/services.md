@@ -53,8 +53,7 @@ anixjtol6wdf  my_web  1/1       nginx
 ```
 
 To make the web server accessible from outside the swarm, you need to
-[publish the port](#publish-ports-externally-to-the-swarm) where the swarm
-listens for web requests.
+[publish the port](#publish-ports) where the swarm listens for web requests.
 
 You can include a command to run inside containers after the image:
 
@@ -261,27 +260,58 @@ information on constraints, refer to the `docker service create` [CLI  reference
 
 Swarm mode lets you network services in a couple of ways:
 
-* publish ports externally to the swarm using ingress networking
+* publish ports externally to the swarm using ingress networking or directly on
+  each swarm node
 * connect services and tasks within the swarm using overlay networks
 
-### Publish ports externally to the swarm
+### Publish ports
 
-You publish service ports externally to the swarm using the `--publish
-<TARGET-PORT>:<SERVICE-PORT>` flag. When you publish a service port, the swarm
-makes the service accessible at the target port on every node regardless if
-there is a task for the service running on the node.
+When you create a swarm service, you can publish that service's ports to hosts
+outside the swarm in two ways:
 
-For example, imagine you want to deploy a 3-replica nginx service to a 10-node
-swarm as follows:
+- [You can rely on the routing mesh](#publish-a services-ports-using-the-routing-mesh).
+  When you publish a service port, the swarm makes the service accessible at the
+  target port on every node, regardless of whether there is a task for the
+  service running on that node or not. This is less complex and is the right
+  choice for many types of services.
+
+- [You can publish a service task's port directly on the swarm node](#publish-a-services-ports-directly-on-the-swarm-node)
+  where that service is running. This feature is available in Docker 1.13 and
+  higher. This bypasses the routing mesh and provides the maximum flexibility,
+  including the ability for you to develop your own routing framework. However,
+  you are responsible for keeping track of where each task is running and
+  routing requests to the tasks, and load-balancing across the nodes.
+
+Keep reading for more information and use cases for each of these methods.
+
+#### Publish a service's ports using the routing mesh
+
+To publish a service's ports externally to the swarm, use the `--publish
+<TARGET-PORT>:<SERVICE-PORT>` flag. The swarm
+makes the service accessible at the target port **on every swarm node**. If an
+external host connects to that port on any swarm node, the routing mesh routes
+it to a task. The external host does not need to know the IP addresses or
+internally-used ports of the service tasks to interact with the service. When
+a user or process connects to a service, any worker node running a service task
+may respond.
+
+##### Example: Run a three-task Nginx service on 10-node swarm
+
+Imagine that you have a 10-node swarm, and you deploy an Nginx service running
+three tasks on a 10-node swarm:
 
 ```bash
-docker service create --name my_web --replicas 3 --publish 8080:80 nginx
+$ docker service create --name my_web \
+                        --replicas 3 \
+                        --publish 8080:80 \
+                        nginx
 ```
 
-The scheduler will deploy nginx tasks to a maximum of 3 nodes. However, the
-swarm makes nginx port 80 from the task container accessible at port 8080 on any
-node in the swarm. You can direct `curl` at port 8080 of any node in the swarm
-to access the web server:
+Three tasks will run on up to three nodes. You don't need to know which nodes
+are running the tasks, as long as exactly three tasks are running at all times.
+Connecting to port 8080 on **any** of the 10 nodes will connect you to one of
+the three `nginx` tasks. You can test this using `curl` (the HTML output is
+truncated):
 
 ```bash
 $ curl localhost:8080
@@ -290,28 +320,63 @@ $ curl localhost:8080
 <html>
 <head>
 <title>Welcome to nginx!</title>
-<style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
+...truncated...
 </html>
 ```
+
+Subsequent connections may be routed to the same swarm node or a different one.
+
+#### Publish a service's ports directly on the swarm node
+
+Using the routing mesh may not be the right choice for your application if you
+need to make routing decisions based on application state or you need total
+control of the process for routing requests to your service's tasks. To publish
+a service's port directly on the node where it is running, use the `mode=host`
+option to the `--publish` flag.
+
+> **Note**: If you publish a service's ports directly on the swarm node using
+> `mode=host` and also set `published=<PORT>` this creates an implicit
+> limitation that you can only run one task for that service on a given swarm
+> node. In addition, if you use `mode=host` and you do not use the
+> `--mode=global` flag on `docker service  create`, it will be difficult to know
+> which nodes are running the service in order to route work to them.
+
+##### Example: Run a `cadvisor` monitoring service on every swarm node
+
+[Google cAdvisor](https://hub.docker.com/r/google/cadvisor/) is a tool for
+monitoring Linux hosts which run containers. Typically, cAdvisor is run as a
+stand-alone container, because it is designed to monitor a given Docker Engine
+instance. If you run cAdvisor as a service using the routing mesh, connecting
+to the cAdvisor port on any swarm node will show you the statistics for
+(effectively) **a random swarm node** running the service. This is probably not
+what you want.
+
+The following example runs cAdvisor as a service on each node in your swarm and
+exposes cAdvisor port locally on each swarm node. Connecting to the cAdvisor
+port on a given node will show you **that node's** statistics. In practice, this
+is similar to running a single stand-alone cAdvisor container on each node, but
+without the need to manually administer those containers.
+
+```bash
+$ docker service create \
+  --mode global \
+  --mount type=bind,source=/,destination=/rootfs,ro=1 \
+  --mount type=bind,source=/var/run,destination=/var/run \
+  --mount type=bind,source=/sys,destination=/sys,ro=1 \
+  --mount type=bind,source=/var/lib/docker/,destination=/var/lib/docker,ro=1 \
+  --publish mode=host,target=8080,published=8080 \
+  --name=cadvisor \
+  google/cadvisor:latest
+```
+
+You can reach cAdvisor on port 8080 of every swarm node. If you add a node to
+the swarm, a cAdvisor task will be started on it. You cannot start another
+service or container on any swarm node which binds to port 8080.
+
+> **Note**: This is a naive example that works well for system monitoring
+> applications and similar types of software. Creating an application-layer
+> routing framework for a multi-tiered service is complex and out of scope for
+> this topic.
 
 ### Add an overlay network
 
