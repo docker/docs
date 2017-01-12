@@ -78,14 +78,17 @@ flag. For more information, see
 ### Specify the image version the service should use
 
 When you create a service without specifying any details about the version of
-the image to use, the service uses the latest version available in Docker Hub
-or your registry. You can force the service to use a specific version of
-the image in a few different ways, depending on your desired outcome.
+the image to use, the service uses the version tagged with the `latest` tag.
+You can force the service to use a specific version of the image in a few
+different ways, depending on your desired outcome.
 
 An image version can be expressed in several different ways:
 
-- If you specify a tag, the manager resolves that tag to a digest, and directs
-  workers to uses that version.
+- If you specify a tag, the manager (or the Docker client, if you use
+  [content trust](#image_resolution_with_trust)) resolves that tag to a digest.
+  When the request to create a container task is received on a worker node, the
+  worker node only sees the digest, not the tag.
+
   ```bash
   $ docker service create --name="myservice" ubuntu:16.04
   ```
@@ -100,7 +103,11 @@ An image version can be expressed in several different ways:
   prevent different service replica tasks from using different image versions.
 
 - If you don't specify a version at all, by convention the image's `latest` tag
-  is resolved to a digest. The following two commands are equivalent:
+  is resolved to a digest. Workers use the image at this digest when creating
+  the service task.
+
+  Thus, the following two commands are equivalent:
+
   ```bash
   $ docker service create --name="myservice" ubuntu
 
@@ -108,17 +115,27 @@ An image version can be expressed in several different ways:
   ```
 
 - If you specify a digest directly, that exact version of the image is always
-  used.
+  used when creating service tasks.
+
   ```bash
-  $ docker service create --name="myservice" ubuntu:16.04@sha256:35bc48a1ca97c3971611dc4662d08d131869daa692acb281c7e9e052924e38b1
+  $ docker service create \
+      --name="myservice" \
+      ubuntu:16.04@sha256:35bc48a1ca97c3971611dc4662d08d131869daa692acb281c7e9e052924e38b1
   ```
 
-When you create a service, the swarm manager resolves the
-image's tag to the specific digest it points to at the time of service creation.
-If the manager is able to resolve the tag to a digest, worker nodes for that
-service will use that specific digest unless the service is explicitly updated.
-This feature is particularly important if you do use often-change tags such as
-`latest`, to be sure that all service tasks use the same version of the image.
+When you create a service, the image's tag is resolved to the specific digest
+the tag points to **at the time of service creation**. Worker nodes for that
+service will use that specific digest forever unless the service is explicitly
+updated. This feature is particularly important if you do use often-changing tags
+such as `latest`, because it ensures that all service tasks use the same version
+of the image.
+
+> **Note**: If [content trust](security/trust/content_trust.md) is enabled, the
+> client actually resolves the image's tag to a digest before contacting the
+> swarm manager, in order to verify that the image is signed. Thus, if you use
+> content trust, the swarm manager receives the request pre-resolved. In this
+> case, if the client cannot resolve the image to a digest, the request fails.
+{: id="image_resolution_with_trust" }
 
 If the manager is not able to resolve the tag to a digest, each worker
 node is responsible for resolving the tag to a digest, and different nodes may
@@ -126,13 +143,13 @@ use different versions of the image. If this happens, a warning like the
 following will be logged, substituting the placeholders for real information.
 
 ```none
-unable to pin image <image_name> to digest: <reason>
+unable to pin image <IMAGE-NAME> to digest: <REASON>
 ```
 
-To see an image's current digest, issue the command `docker inspect
-<image>:<tag>` and look for the `RepoDigests` line. The following is the current
-digest for `ubuntu:latest` at the time this content was written. The output is
-truncated for clarity.
+To see an image's current digest, issue the command
+`docker inspect <IMAGE>:<TAG>` and look for the `RepoDigests` line. The
+following is the current digest for `ubuntu:latest` at the time this content
+was written. The output is truncated for clarity.
 
 ```bash
 $ docker inspect ubuntu:latest
@@ -156,14 +173,18 @@ Each tag represents a digest, similar to a Git hash. Some tags, such as
 `latest`, are updated often to point to a new digest. Others, such as
 `ubuntu:16.04`, represent a released software version and are not expected to
 update to point to a new digest often if at all. In Docker 1.13 and higher, when
-you create a service, it is constrained to run a specific digest of an image
-until you update the service using `service update` with the `--image` flag. If
-you use an older version of Docker Engine, you must remove and re-create the
-service to update its image.
+you create a service, it is constrained to create tasks using a specific digest\
+of an image until you update the service using `service update` with the
+`--image` flag. If you use an older version of Docker Engine, you must remove
+and re-create the service to update its image.
 
 When you run `service update` with the `--image` flag, the swarm manager queries
 Docker Hub or your private Docker registry for the digest the tag currently
 points to and updates the service tasks to use that digest.
+
+> **Note**: If you use [content trust](#image_resolution_with_trust), the Docker
+> client resolves image and the swarm manager receives the image and digest,
+>  rather than a tag.
 
 Usually, the manager is able to resolve the tag to a new digest and the service
 updates, redeploying each task to use the new image. If the manager is unable to
@@ -238,7 +259,10 @@ the number of replica tasks you want to start using the `--replicas` flag. For
 example, to start a replicated nginx service with 3 replica tasks:
 
 ```bash
-$ docker service create --name my_web --replicas 3 nginx
+$ docker service create \
+  --name my_web \
+  --replicas 3 \
+  nginx
 ```
 
 To start a global service on each available node, pass `--mode global` to
@@ -247,7 +271,10 @@ places a task for the global service on the new node. For example to start a
 service that runs alpine on every node in the swarm:
 
 ```bash
-$ docker service create --name myservice --mode global alpine top
+$ docker service create \
+  --name myservice \
+  --mode global \
+  alpine top
 ```
 
 Service constraints let you set criteria for a node to meet before the scheduler
