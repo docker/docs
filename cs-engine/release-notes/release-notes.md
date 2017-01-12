@@ -69,6 +69,11 @@ This release addresses the following issues:
 to connect to swarm-mode overlay network
 * Various bug fixes in swarm mode networking
 
+## CS Engine 1.11.2-cs6
+(12 Jan 2017)
+
+Bumps RunC version to address CVE-2016-9962.
+
 ## CS Engine 1.11.2-cs5
 (13 Sep 2016)
 
