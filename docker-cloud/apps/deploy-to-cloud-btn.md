@@ -21,7 +21,7 @@ The button redirects the user to the **Launch new Stack** wizard, with the stack
 
 The user can still modify the stack definition before deployment.
 
-Note: In order for the **Deploy to Docker Cloud** deployment to work correctly, users must be logged into Docker Cloud prior to clicking the button otherwise a 404 error will be returned.
+> **Note**: You must be logged in to Docker Cloud for the **Deploy to Docker Cloud** button deployment to work correctly. If you are not logged in, you'll see a 404 error instead. 
 
 ## Adding the 'Deploy to Docker Cloud' button in GitHub
 
