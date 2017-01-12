@@ -21,6 +21,7 @@ Each filter has a name that identifies it. The node filters are:
 * `constraint`
 * `health`
 * `containerslots`
+* `whitelist`
 
 The container configuration filters are:
 
@@ -42,10 +43,10 @@ $ swarm manage --filter=health --filter=dependency
 
 ## Node filters
 
-When creating a container or building an image, you use a `constraint` or
-`health` filter to select a subset of nodes to consider for scheduling.
-If a node in Swarm cluster has a label with key `containerslots`
-and a number-value, Swarm will not launch more containers than the given number.
+When creating a container or building an image, you can use a `constraint`,
+`whitelist`, or `health` filter to select a subset of nodes to consider for
+scheduling. If a node in a swarm has a label with key `containerslots`
+and an integer, Swarm will only launch that integer number of containers.
 
 ### Use a constraint filter
 
@@ -72,7 +73,7 @@ practical applications:
 
 * Schedule based on specific host properties, for example,`storage=ssd` schedules
   containers on specific hardware.
-* Force containers to run in a given location, for example region=us-east`.
+* Force containers to run on nodes with a given metadata value.
 * Create logical cluster partitions by splitting a cluster into
   sub-clusters with different properties, for example `environment=production`.
 
@@ -164,6 +165,18 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 dockerswarm/swarm   manager             8c2c56438951        2 days ago          795.7 MB
 ouruser/sinatra     v2                  cd70495a1514        35 seconds ago      318.7 MB
 ubuntu              14.04               a5a467fddcb8        11 days ago         187.9 MB
+```
+
+### Use the whitelist filter
+
+The node `whitelist` filter configures the scheduler to only consider a specific
+list of nodes for running containers on. The whitelist is comprised of a list of
+node names separated  by the `|` character. For example, the following
+command instructs the scheduler to deploy a `mysql` container on one of three
+possible nodes:
+
+```bash
+$ docker tcp://<manager_ip:manager_port>  run -d -P -e whitelist:node==node1|node2|node3 --name db mysql
 ```
 
 ### Use the health filter
