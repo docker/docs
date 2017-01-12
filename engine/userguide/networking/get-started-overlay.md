@@ -373,7 +373,7 @@ to have external connectivity outside of their cluster.
 ### Extra Credit with Docker Compose
 
 Please refer to the Networking feature introduced in
-[Compose V2 format](https://docs.docker.com/compose/networking/)
+[Compose V2 format](/compose/networking/)
 and execute the multi-host networking scenario in the swarm cluster used above.
 
 ## Related information
