@@ -38,10 +38,10 @@ Toolbox includes these Docker tools:
         Toolbox for Windows</th>
       </tr>
       <tr valign="top">
-        <td width="50%">
+        <td width="50%" style="font-size: medium; font-family: arial;  text-align: center">
         <a class="button darkblue-btn" href="https://download.docker.com/mac/stable/DockerToolbox.pkg">Get Docker Toolbox for Mac</a>
         </td>
-        <td width="50%">
+        <td width="50%" style="font-size: medium; font-family: arial;  text-align: center">
         <a class="button darkblue-btn" href="https://download.docker.com/win/stable/DockerToolbox.exe">Get Docker Toolbox for Windows</a>
         </td>
       </tr>

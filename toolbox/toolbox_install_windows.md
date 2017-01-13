@@ -216,8 +216,29 @@ To uninstall Toolbox on Windows, do the following:
     Successfully removed my-docker-machine
     ```
 
+    This step is optional because if you plan
+    to re-install Docker Machine as a part
+    of [Docker for
+    Windows](/docker-for-windows/index.md), you can import and
+    continue to manage those machines
+    through Docker.
+
 3. Uninstall Docker Toolbox using Window's standard process for uninstalling programs through the control panel.
 
     >**Note:** This process does not remove the `docker-install.exe` file. You must delete that file yourself.
 
-&nbsp;
+5. Optionally, remove the
+`C:\Users\<your-user>\.docker` directory.
+
+    If you want to remove Docker entirely, you
+    can verify that the uninstall removed
+    the `.docker` directory under your user path.
+    If it is still there, remove it manually.
+    This directory stores some Docker
+    program configuration and/or state
+    (e.g., information about created machines such
+    as certificates).  Removing this directory
+    is typically not necessary.
+
+6. Uninstall Oracle VirtualBox, which is
+  installed as a part of the Toolbox install.
