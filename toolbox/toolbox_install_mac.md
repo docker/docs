@@ -217,6 +217,11 @@ To uninstall Toolbox on a Mac, do the following:
     Successfully removed my-docker-machine
     ```
 
+    This step is optional because if you plan
+    to re-install Docker Machine as a part
+    of [Docker for Mac](/docker-for-mac/index.md), you can import and
+    continue to manage those machines through Docker.
+
 3.  Remove the Docker Quickstart Terminal and Kitematic from your "Applications" folder.
 
 4.  Remove the `docker`, `docker-compose`, and `docker-machine` commands from the `/usr/local/bin` folder.
@@ -226,3 +231,16 @@ To uninstall Toolbox on a Mac, do the following:
     $ rm /usr/local/bin/docker-compose
     $ rm /usr/local/bin/docker-machine
     ```
+
+5. Optionally, remove the `~/.docker` directory.
+
+    If you want to remove Docker entirely, you
+    can remove the `~/.docker` directory
+    recursively. This directory stores some
+    Docker program configuration and/or state
+    (e.g., information about created machines such
+    as certificates). Removing this directory
+    is typically not necessary.
+
+6. Uninstall Oracle VirtualBox, which is
+installed as a part of the Toolbox install.
