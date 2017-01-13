@@ -136,18 +136,15 @@ For a complete explanation of how to do this, see the blog post [Adding Self-sig
 to Docker & Docker for
 Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/).
 
-### What are system requirements for Docker for Mac?
-
-Note that you need a Mac that supports hardware virtualization, which is most non ancient ones; i.e., use macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also "What to know before you install" in [Getting Started](index.md).
-
 ### How do I reduce the size of Docker.qcow2?
 
 By default Docker for Mac stores containers and images in a file
 `~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2`.
 This file grows on-demand up to a default maximum file size of 64GiB.
 
-In Docker 1.12 the only way to free space on the host is to delete this file and
-restart the app. Unfortunately this removes all images and containers.
+In Docker 1.12 the only way to free space on the host is to delete
+this file and restart the app. Unfortunately this removes all images
+and containers.
 
 In Docker 1.13 there is preliminary support for "TRIM" to non-destructively
 free space on the host. First free space within the `Docker.qcow2` by
@@ -159,18 +156,26 @@ removing unneeded containers and images using
   volumes not used by at least one container and all images without at least one
   referring container.
 
-Note the `Docker.qcow2` will not shrink in size immediately. In 1.13 a background
-`cron` job runs `fstrim` every 15 minutes. If the space needs to be reclaimed
-sooner, run this command:
+Note the `Docker.qcow2` will not shrink in size immediately.
+In 1.13 a background `cron` job runs `fstrim` every 15 minutes.
+If the space needs to be reclaimed sooner, run this command:
 
 ```
 docker run --rm -it --privileged --pid=host walkerlee/nsenter -t 1 -m -u -i -n fstrim /var
 ```
 
-Once the `fstrim` has completed, restart the app. When the app
-shuts down it will compact the file and the space will be freed. Note the app
-will take longer to restart than usual because it must wait for the compaction
-to complete.
+Once the `fstrim` has completed, restart the app. When the app shuts down it
+will compact the file and the space will be freed. Note the app will
+take longer to restart than usual because it must wait for the
+compaction to complete.
+
+For background conversation thread on this, see [Docker.qcow2 never shrinks
+..](https://github.com/docker/for-mac/issues/371) on Docker for Mac GitHub
+issues.
+
+### What are system requirements for Docker for Mac?
+
+Note that you need a Mac that supports hardware virtualization, which is most non ancient ones; i.e., use macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also "What to know before you install" in [Getting Started](index.md).
 
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 
