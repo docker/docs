@@ -227,10 +227,11 @@ We did not distribute a 1.12.4 stable release
 
 - Docker 1.13.0-rc6
 - Docker Compose 1.10-rc2
+- Linux Kernel 4.9.2
 
 **Bug fixes and minor improvements**
 
-- Revert to Linux 4.4.41 LTS kernel to resolve fuse cache issues
+- Uninstall should be more reliable
 
 ### Beta 35 Release Notes (2017-01-06 1.13.0-rc5-beta35)
 
