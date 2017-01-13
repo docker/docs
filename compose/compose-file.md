@@ -342,6 +342,36 @@ Simple example:
 > for a service to be ready, see [Controlling startup order](startup-order.md)
 > for more on this problem and strategies for solving it.
 
+> **[Version 2.1](compose-file.md#version-21) file format only.**
+
+With Compose 1.10, it is now possible to indicate you want a dependency to wait
+for another container to be "healthy" (i.e. its healthcheck advertises a
+successful state) before starting.
+
+Example:
+
+    version: '2.1'
+    services:
+      web:
+        build: .
+        depends_on:
+          db:
+            condition: service_healthy
+          redis:
+            condition: service_started
+      redis:
+        image: redis
+      db:
+        image: redis
+        healthcheck:
+          test: "exit 0"
+
+In the above example, Compose will wait for the `redis` service to be started
+(legacy behavior) and the `db` service to be healthy before starting `web`.
+
+See the [healthcheck section](compose-file.md#healthcheck) for complementary
+information.
+
 ### dns
 
 Custom DNS servers. Can be a single value or a list.
@@ -542,7 +572,7 @@ used.
 
 ### healthcheck
 
-> [Version 3 file format](compose-file.md#version-3) and up.
+> [Version 2.1 file format](compose-file.md#version-21) and up.
 
 Configure a check that's run to determine whether or not containers for this
 service are "healthy". See the docs for the
@@ -878,7 +908,9 @@ Override the default labeling scheme for each container.
 
 ### stop_grace_period
 
-Specify how to long to wait when attempting to stop a container if it doesn't
+> [Added in version 2 file format](compose-file.md#version-2)
+
+Specify how long to wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whatever stop signal has been specified with
 [`stop_signal`](compose-file.md#stop_signal)), before sending SIGKILL. Specified
 as a [duration](compose-file.md#specifying-durations).
@@ -1449,6 +1481,8 @@ Introduces the following additional parameters:
 - `labels` for [volumes](compose-file.md#volume-configuration-reference) and
   [networks](compose-file.md#network-configuration-reference)
 - [`userns_mode`](compose-file.md#userns_mode)
+- [`healthcheck`](compose-file.md#healthcheck),
+- [`sysctls`](compose-file.md#sysctls)
 
 ### Version 3
 
@@ -1460,10 +1494,7 @@ several more.
   `mem_limit`, `memswap_limit`. See the [upgrading](compose-file.md#upgrading)
   guide for how to migrate away from these.
 
-- Added: [deploy](compose-file.md#deploy),
-  [healthcheck](compose-file.md#healthcheck),
-  [stop_grace_period](compose-file.md#stop-grace-period).
-- [`sysctls`](compose-file.md#sysctls)
+- Added: [deploy](compose-file.md#deploy)
 
 ### Upgrading
 
