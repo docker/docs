@@ -61,7 +61,7 @@ using the `docker service` command.
 <!-- todo: expand, add screenshots -->
 
 When using the wizard to create services in the UCP UI, you may enable the HTTP
-routing mesh for a service by pubblishing a port, and filling in the options
+routing mesh for a service by publishing a port, and filling in the options
 relating to "Routing Mesh Host".
 
 ### Route to a service using the CLI
