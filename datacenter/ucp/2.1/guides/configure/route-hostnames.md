@@ -74,7 +74,7 @@ make sure they are different from each other and you can keep track of them.
 
 Labels with the prefix `com.docker.ucp.mesh.http` allow you to configure a
 single hostname and port to route to a service. If you wish to route multiple
-ports or hostnames to the same service, then multiple of labels with the prefix
+ports or hostnames to the same service, then multiple labels with the prefix
 `com.docker.ucp.mesh.http` may be created.
 
 The syntax of this label is as follows:
