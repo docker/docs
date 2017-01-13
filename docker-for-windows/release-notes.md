@@ -219,6 +219,19 @@ We did not distribute a 1.12.4 stable release
 
 ## Beta Release Notes
 
+### Beta 36 Release Notes (2017-01-12 1.13.0-rc6-beta36)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**Upgrades**
+
+- Docker 1.13.0-rc6
+- Docker Compose 1.10-rc2
+
+**Bug fixes and minor improvements**
+
+- Revert to Linux 4.4.41 LTS kernel to resolve fuse cache issues
+
 ### Beta 35 Release Notes (2017-01-06 1.13.0-rc5-beta35)
 
 >**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
