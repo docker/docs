@@ -21,7 +21,7 @@ Macvlan offers a number of unique features and plenty of room for further innova
  - To check your current kernel version, use `uname -r` to display your kernel version
  - Macvlan Linux kernel v3.9–3.19 and 4.0+
 
-## MacVlan Bridge Mode Example Usage
+## Macvlan Bridge Mode Example Usage
 
 Macvlan Bridge mode has a unique MAC address per container used to track MAC to port mappings by the Docker host.
 
