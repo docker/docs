@@ -148,7 +148,7 @@ and containers.
 
 In Docker 1.13 there is preliminary support for "TRIM" to non-destructively
 free space on the host. First free space within the `Docker.qcow2` by
-removing unneeded containers and images using
+removing unneeded containers and images with the following commands:
 
 - `docker ps -a`: list all containers
 - `docker image ls`: list all images
@@ -164,9 +164,9 @@ If the space needs to be reclaimed sooner, run this command:
 docker run --rm -it --privileged --pid=host walkerlee/nsenter -t 1 -m -u -i -n fstrim /var
 ```
 
-Once the `fstrim` has completed, restart the app. When the app shuts down it
-will compact the file and the space will be freed. Note the app will
-take longer to restart than usual because it must wait for the
+Once the `fstrim` has completed, restart the app. When the app shuts down, it
+will compact the file and free up space. The app will
+take longer than usual to restart because it must wait for the
 compaction to complete.
 
 For background conversation thread on this, see [Docker.qcow2 never shrinks
