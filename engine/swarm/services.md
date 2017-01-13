@@ -350,10 +350,9 @@ $ docker service create --name my_web \
 ```
 
 Three tasks will run on up to three nodes. You don't need to know which nodes
-are running the tasks, as long as exactly three tasks are running at all times.
-Connecting to port 8080 on **any** of the 10 nodes will connect you to one of
-the three `nginx` tasks. You can test this using `curl` (the HTML output is
-truncated):
+are running the tasks; connecting to port 8080 on **any** of the 10 nodes will
+connect you to one of the three `nginx` tasks. You can test this using `curl`
+(the HTML output is truncated):
 
 ```bash
 $ curl localhost:8080
