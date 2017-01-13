@@ -65,6 +65,9 @@ To set `APT` to use packages from the Docker repository:
                    --keyserver hkp://ha.pool.sks-keyservers.net:80 \
                    --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
     ```
+    
+    If the above keyserver is not available, try `hkp://pgp.mit.edu:80` or 
+    `hkp://keyserver.ubuntu.com:80`.
 
 5.  Find the entry in the table below which corresponds to your Ubuntu version.
     This determines where APT will search for Docker packages. When possible,
