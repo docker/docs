@@ -6,7 +6,7 @@
     These are maintained in upstream repos and changes here will be lost.
 
     Help us merge your changes more quickly by adding details and setting metadata
-    (such as labels, milestones, and reviewers) over at the left-hand side.-->
+    (such as labels, milestones, and reviewers) over at the right-hand side.-->
 
 ### Proposed changes
 
