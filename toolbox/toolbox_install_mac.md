@@ -5,7 +5,17 @@ keywords: docker, documentation, install, toolbox, mac
 title: Install Docker Toolbox on macOS
 ---
 
-macOS users use Docker Toolbox to install Docker software. Docker Toolbox includes the following Docker tools:
+Docker Toolbox provides a way to use Docker on older Macs
+that do not meet
+minimal system requirements for [Docker for Mac](/docker-for-mac/index.md).
+
+If you have not done so already, download the installer here:
+
+<a class="button darkblue-btn" href="https://download.docker.com/mac/stable/DockerToolbox.pkg">Get Docker Toolbox for Mac</a>
+
+## What you get and how it works
+
+Docker Toolbox includes the following Docker tools:
 
 * Docker CLI client for running Docker Engine to create images and containers
 * Docker Machine so you can run Docker Engine commands from macOS terminals
@@ -14,10 +24,18 @@ macOS users use Docker Toolbox to install Docker software. Docker Toolbox includ
 * the Docker QuickStart shell preconfigured for a Docker command-line environment
 * Oracle VM VirtualBox
 
-Because the Docker Engine daemon uses Linux-specific kernel features, you can't
-run Docker Engine natively in macOS. Instead, you must use the Docker Machine
-command,  `docker-machine`,  to create and attach to a small Linux VM on your
-machine. This VM hosts Docker Engine for you on your Mac.
+Because the Docker Engine daemon uses Linux-specific
+kernel features, you can't run Docker Engine natively on
+macOS with Docker Toolbox. Instead, you must use the
+Docker Machine command,  `docker-machine`,  to create and
+attach to a small Linux VM on your machine. This VM hosts
+Docker Engine for you on your Mac.
+
+>**Tip:** One of the advantages of the newer
+[Docker for Mac](/docker-for-mac/index.md) solution is that
+it uses native virtualization and does not require
+VirtualBox to run Docker.
+
 
 ## Step 1: Check your version
 
