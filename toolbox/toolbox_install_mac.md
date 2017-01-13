@@ -11,7 +11,13 @@ minimal system requirements for [Docker for Mac](/docker-for-mac/index.md).
 
 If you have not done so already, download the installer here:
 
-<a class="button darkblue-btn" href="https://download.docker.com/mac/stable/DockerToolbox.pkg">Get Docker Toolbox for Mac</a>
+<table style="width:50%; border: 0">
+  <tr valign="top">
+    <td width="100%" style="font-size: medium; font-family: arial;  text-align: center; background-color: #F9FAFB">
+    <a class="button darkblue-btn" href="https://download.docker.com/mac/stable/DockerToolbox.pkg">Get Docker Toolbox for Mac</a>
+    </td>
+  </tr>
+</table>
 
 ## What you get and how it works
 
@@ -244,3 +250,15 @@ To uninstall Toolbox on a Mac, do the following:
 
 6. Uninstall Oracle VirtualBox, which is
 installed as a part of the Toolbox install.
+
+## Next Steps
+
+* Try out the examples in the [Getting Started](/engine/getstarted/index.md) tutorial.
+
+* Dig in deeper with [more tutorials and examples](/engine/tutorials/index.md) on building images, running containers, networking, managing data, and storing images on Docker Hub.
+
+* [Learn about Kitematic](/kitematic/userguide.md)
+
+* [Learn about Docker Machine](/machine/overview.md)
+
+* [Learn about Docker Compose](/compose/overview.md)
