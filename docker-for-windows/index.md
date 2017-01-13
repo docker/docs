@@ -567,7 +567,7 @@ Also starting with with Beta 34, you can set up your own
 
 As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
 public or private images or [Docker Trusted
-Registry](/datacenter/dtr/2.1/index.md), you can use Docker to set up your
+Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up your
 own insecure [registry](/registry/introduction/). Add URLs for insecure
 registries and registry mirrors on which to host your images. (See also, [How do
 I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in
