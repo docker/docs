@@ -206,7 +206,7 @@ contribute your own. For more information, go to
 [Docker Trusted Registry](/datacenter/dtr/2.1/guides/index.md).
 
 [Docker store](http://store.docker.com) allows you to buy and sell Docker images.
-For image, you can buy a Docker image containing an application or service from
+For instance, you can buy a Docker image containing an application or service from
 the software vendor, and use the image to deploy the application into your
 testing, staging, and production environments, and upgrade the application by pulling
 the new version of the image and redeploying the containers. Docker Store is currently
