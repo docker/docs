@@ -68,11 +68,12 @@ which also installs via the `yum` package manager.
     $ sudo yum install docker-engine
     ```
 
-5.  Enable the service.
+5.  Enable the service & Reboot
 
     ```bash
     $ sudo systemctl enable docker.service
     ```
+    $sudo reboot
 
 6.  Start the Docker daemon.
 
