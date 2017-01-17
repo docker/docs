@@ -224,4 +224,4 @@ future release. Configure user authentication in UCP.
 ## Prior versions
 
 You can find the release notes for older versions of DTR on the
-[relese notes archive](prior-release-notes.md).
+[release notes archive](prior-release-notes.md).
