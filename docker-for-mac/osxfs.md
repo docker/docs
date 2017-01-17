@@ -200,9 +200,7 @@ associated issues and on reducing the file system data path latency. This
 requires significant analysis of file system traces and speculative development
 of system improvements to try to address specific performance issues. Perhaps
 surprisingly, application workload can have a huge effect on performance. As an
-example, here are two different use cases contributed on the [forum topic]([File
-access in mounted volumes extremely
-slow](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/)))
+example, here are two different use cases contributed on the [forum topic](https://forums.docker.com/t/file-access-in-mounted-volumes-extremely-slow-cpu-bound/)
 and how their performance differs and suffers due to latency, caching, and
 coherence:
 
