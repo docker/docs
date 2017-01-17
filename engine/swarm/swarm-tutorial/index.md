@@ -114,7 +114,7 @@ The following ports must be available. On some systems, these ports are open by 
 * **TCP** and **UDP port 4789** for overlay network traffic
 
 If you are planning on creating an overlay network with encryption (`--opt encrypted`),
-you will also need to ensure protocol 50 (ESP) is open.
+you will also need to ensure port 50 (ESP) is open.
 
 ## What's next?
 
