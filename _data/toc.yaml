@@ -59,6 +59,16 @@ toc:
       title: Tag, push, &amp; pull your image
     - path: /engine/getstarted/last_page/
       title: Learning more
+  - sectiontitle: Deploy a multi-service app to Swarm
+    section:
+    - path: /engine/getstarted-voting-app/
+      title: Voting app example and setup
+    - path: /engine/getstarted-voting-app/node-setup/
+      title: Set up Dockerized machines
+    - path: /engine/getstarted-voting-app/create-swarm/
+      title: Create a swarm
+    - path: /engine/getstarted-voting-app/deploy-app/
+      title: Deploy the app
   - sectiontitle: Learn by example
     section:
     - path: /engine/tutorials/dockerizing/
