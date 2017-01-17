@@ -22,7 +22,7 @@ Docker for Windows or Docker for Linux.
 Once you have Docker installed, you can run `docker hello-world`
 or other commands described in the newcomer tutorial to [verify your
 installation]
-(/engine/getstarted/step_one.md#step-3-verify-your-installation.md).
+(/engine/getstarted/step_one.md#step-3-verify-your-installation).
 If you are totally new to Docker, you might continue through the full [newcomer
 tutorial](/engine/getstarted/index.md) first, then come back.
 

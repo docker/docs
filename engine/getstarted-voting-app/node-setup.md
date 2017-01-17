@@ -84,11 +84,11 @@ As noted in the last line of output of the `docker-machine create` command, you 
 
         $ eval $(docker-machine env manager)
 
-    This sets environment variables for the current shell that the Docker client will read which specify the TLS settings. You need to do this each time you open a new shell or restart your machine.
+      This sets environment variables for the current shell that the Docker client will read which specify the TLS settings. You need to do this each time you open a new shell or restart your machine.
 
-    **Note**: If you are using `fish`, or a Windows shell such as
-    Powershell/`cmd.exe` the above method will not work as described.
-    Instead, see the [env command reference documentation](/machine/reference/env.md) to learn how to set the environment variables for your shell.
+      **Note**: If you are using `fish`, or a Windows shell such as
+      Powershell/`cmd.exe` the above method will not work as described.
+      Instead, see the [env command reference documentation](/machine/reference/env.md) to learn how to set the environment variables for your shell.
 
 3. Run `docker-machine ls` again.
 
