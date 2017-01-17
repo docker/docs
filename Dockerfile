@@ -29,6 +29,7 @@ RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/referen
  && svn co https://github.com/docker/distribution/branches/$DISTRIBUTION_BRANCH/docs/spec allv/registry/spec \
  && wget -O allv/registry/configuration.md https://raw.githubusercontent.com/docker/distribution/$DISTRIBUTION_BRANCH/docs/configuration.md \
  && rm -rf allv/apidocs/cloud-api-source \
+ && rm -rf allv/tests \
  && jekyll build -s allv -d allvbuild \
  && find allvbuild/engine/reference -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
  && find allvbuild/engine/extend -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \

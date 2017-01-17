@@ -66,11 +66,11 @@ title: Docker Documentation
 <ul class="items widthcol2 media">
 <li>
 <div class="media_image">
-	<a href="/docker-hub/overview/"><img src="/images/icon-hub@2X.png" alt="Docker Hub"></a>
+	<a href="/docker-hub/index.md"><img src="/images/icon-hub@2X.png" alt="Docker Hub"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/docker-hub/overview/">Docker Hub</a></h3>
+	<h3><a href="/docker-hub/index.md">Docker Hub</a></h3>
 		<p>
     A hosted registry service for managing and building images.</p>
 	</div>
@@ -78,11 +78,11 @@ title: Docker Documentation
 </li>
 <li>
 <div class="media_image">
-	<a href="/docker-cloud/overview/"><img src="/images/icon-cloud@2X.png" alt="Docker Cloud"></a>
+	<a href="/docker-cloud/index.md"><img src="/images/icon-cloud@2X.png" alt="Docker Cloud"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/docker-cloud/overview/">Docker Cloud</a></h3>
+	<h3><a href="/docker-cloud/index.md">Docker Cloud</a></h3>
 		<p>
     A hosted service for building, testing, and deploying Docker images to your hosts.</p>
 	</div>

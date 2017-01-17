@@ -271,7 +271,7 @@ toc:
       title: Managed plugin system
     - path: /engine/extend/plugins_authorization/
       title: Access authorization plugin
-    - path: /engine/extend/plugins/
+    - path: /engine/extend/legacy_plugins/
       title: Extending Engine with plugins
     - path: /engine/extend/plugins_network/
       title: Docker network driver plugins
@@ -435,8 +435,6 @@ toc:
         title: stack rm
       - path: /engine/reference/commandline/stack_services/
         title: stack services
-      - path: /engine/reference/commandline/stack_tasks/
-        title: stack tasks
       - path: /engine/reference/commandline/start/
         title: start
       - path: /engine/reference/commandline/stats/
