@@ -156,7 +156,7 @@ Suppose you want to test two Python applications: both bound to port 5000 inside
 their own containers. Without Docker's port mapping you could only access one at
 a time on the Docker host.
 
-So you can now browse to port 49155 in a web browser to see the application.
+So you can now browse to port 80 in a web browser to see the application.
 
 ![Screenshot of the running web application](webapp1.png).
 
