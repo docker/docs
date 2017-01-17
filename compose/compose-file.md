@@ -636,11 +636,11 @@ In the example below, three services are provided (`web`, `worker`, and `db`), a
 
 Specify a static IP address for containers for this service when joining the network.
 
-The corresponding network configuration in the [top-level networks section](compose-file.md#network-configuration-reference) must have an `ipam` block with subnet and gateway configurations covering each static address. If IPv6 addressing is desired, the `com.docker.network.enable_ipv6` driver option must be set to `true`.
+The corresponding network configuration in the [top-level networks section](compose-file.md#network-configuration-reference) must have an `ipam` block with subnet and gateway configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](compose-file.md#enableipv6) option must be set.
 
 An example:
 
-    version: '2'
+    version: '2.1'
 
     services:
       app:
@@ -654,8 +654,7 @@ An example:
     networks:
       app_net:
         driver: bridge
-        driver_opts:
-          com.docker.network.enable_ipv6: "true"
+        enable_ipv6: true
         ipam:
           driver: default
           config:
