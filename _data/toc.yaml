@@ -91,15 +91,11 @@ toc:
       title: Open Source Licensing
     - path: /docker-for-azure/release-notes/
       title: Release Notes
-- sectiontitle: Docker ID
+- sectiontitle: Get Started
   section:
-  - path: /docker-id/
-    title: Docker ID accounts
-  - path: /docker-id/api-reference/
-    title: API Reference
-- sectiontitle: Docker Engine
-  section:
-  - sectiontitle: Get Started with Docker
+  - path: /learn/
+    title: Learn Docker
+  - sectiontitle: Docker basics
     section:
     - path: /engine/getstarted/
       title: Get Started with Docker
@@ -117,7 +113,7 @@ toc:
       title: Tag, push, &amp; pull your image
     - path: /engine/getstarted/last_page/
       title: Learning more
-  - sectiontitle: Deploy a multi-service app to Swarm
+  - sectiontitle: Define and deploy your app
     section:
     - path: /engine/getstarted-voting-app/
       title: Tour the voting app sample
@@ -133,18 +129,58 @@ toc:
       title: Customize the app and redploy
   - sectiontitle: Learn by example
     section:
-    - path: /engine/tutorials/dockerizing/
-      title: Hello world in a container
-    - path: /engine/tutorials/usingdocker/
-      title: Run a simple application
-    - path: /engine/tutorials/dockerimages/
-      title: Build your own images
     - path: /engine/tutorials/networkingcontainers/
       title: Network containers
     - path: /engine/tutorials/dockervolumes/
       title: Manage data in containers
-    - path: /engine/tutorials/dockerrepos/
-      title: Store images on Docker Hub
+      
+- sectiontitle: Docker ID
+  section:
+  - path: /docker-id/
+    title: Docker ID accounts
+  - path: /docker-id/api-reference/
+    title: API Reference
+
+- sectiontitle: Docker Engine
+  section:
+  - sectiontitle: Install
+    section:
+    - path: /engine/installation/mac/
+      title: Installation on macOS
+    - path: /engine/installation/windows/
+      title: Installation on Windows
+    - sectiontitle: On Linux distributions
+      section:
+      - path: /engine/installation/linux/ubuntulinux/
+        title: Installation on Ubuntu
+      - path: /engine/installation/linux/rhel/
+        title: Installation on Red Hat Enterprise Linux
+      - path: /engine/installation/linux/centos/
+        title: Installation on CentOS
+      - path: /engine/installation/linux/fedora/
+        title: Installation on Fedora
+      - path: /engine/installation/linux/debian/
+        title: Installation on Debian
+      - path: /engine/installation/linux/archlinux/
+        title: Installation on Arch Linux
+      - path: /engine/installation/linux/cruxlinux/
+        title: Installation on CRUX Linux
+      - path: /engine/installation/linux/gentoolinux/
+        title: Installation on Gentoo
+      - path: /engine/installation/linux/oracle/
+        title: Installation on Oracle Linux
+      - path: /engine/installation/linux/SUSE/
+        title: Installation on openSUSE and SUSE Linux Enterprise
+      - sectiontitle: On cloud providers
+        section:
+        - path: /engine/installation/cloud/overview/
+          title: Choose how to install
+        - path: /engine/installation/cloud/cloud-ex-aws/
+          title: "Example: Manual install on cloud provider"
+        - path: /engine/installation/cloud/cloud-ex-machine-ocean/
+          title: "Example: Use Docker Machine to provision cloud hosts"
+      - path: /engine/installation/binaries/
+        title: Installation from binaries
   - sectiontitle: User Guide
     section:
     - path: /engine/userguide/intro/
