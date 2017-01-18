@@ -9,10 +9,11 @@ to create a swarm. Make sure the Docker Engine daemon is started on the host
 machines.
 
 1.  Open a terminal and ssh into the machine where you want to run your manager
-node. For example, the tutorial uses a machine named `manager1`.
+    node. This tutorial uses a machine named `manager1`. If you use Docker Machine,
+    you can connect to it via SSH using the following command:
 
     ```bash
-    docker-machine ssh manager1
+    $ docker-machine ssh manager1
     ```
 
 2.  Run the following command to create a new swarm:
