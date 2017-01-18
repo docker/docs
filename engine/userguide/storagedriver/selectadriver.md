@@ -63,7 +63,7 @@ plan to use for your Docker host's local storage area. Some storage drivers can
 drivers require the backing filesystem to be the same as the storage driver.
 For example, the `btrfs` storage driver on a Btrfs backing filesystem. The
 following table lists each storage driver and whether it must match the host's
-backing file system:
+backing filesystem:
 
 |Storage driver |Commonly used on |Disabled on                                         |
 |---------------|-----------------|----------------------------------------------------|
