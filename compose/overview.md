@@ -95,7 +95,9 @@ runs, if it finds any containers from previous runs, it copies the volumes from
 the old container to the new container. This process ensures that any data
 you've created in volumes isn't lost.
 
-If you use `docker-compose` on a Windows machine, See [Environment variables](reference/envvars.md) and adjust the nessecary environment variables for you specific needs
+If you use `docker-compose` on a Windows machine, See [Environment
+variables](reference/envvars.md) and adjust the necessary environment variables
+for you specific needs
 
 
 ### Only recreate containers that have changed
