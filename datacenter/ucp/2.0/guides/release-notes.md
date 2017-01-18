@@ -10,6 +10,78 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](installation/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 2.0.2
+
+(18 Jan 2017)
+
+**Security update**
+
+This patch contains the following security-related updates:
+
+* Fixed an issue by which a high number of ping requests could result in temporarily
+unresponsive UCP services
+* Fixed an issue by which non-admin users with "View-Only" permissions could use
+the undocumented private API to restart/stop/delete containers.
+* Only admins are now allowed to tag, save, and load images as UCP/DTR system images
+* UCP will now warn admins during installation if there is an open TCP port which
+could be used to perform unauthorized actions on the cluster
+
+These issues affect UCP version 2.0.1 and 2.0.0. THey were discovered by our
+development team during internal testing.
+
+We've revised our guidelines on access control permissions as well. Read the 
+[permissions levels section](user-management/permission-levels.md) for more details.
+
+**Features**
+
+* Core
+	* Label-based access control now supported for volumes.
+	(NOTE: unlike other resources controlled via label-based access control, a
+	volume without a label is accessible by all UCP users with Restricted Control
+	or higher default permissions.)
+	* Authentication now supports LDAP servers that don't use `memberOf`. Instead
+	can look within LDAP groups and sync members in that group.
+
+* docker/ucp image
+	* Can now add input the text of a license file at install time with the flag
+	`--license "cat <license_name>.lic"`
+
+* UI/UX
+	* Can now configure labels, drives, and other options when mounting volumes
+	while using Deploy Service wizard
+	* Task errors are now shown in each service's details page in the GUI
+	* Can now add individual container labels when using Deploy Service wizard
+
+**Bug Fixes**
+
+* Core
+	* Setting `network_mode=host` or `--net=host` no longer causes container
+	scheduling and websocket errors.
+	* Inspecting networks now correctly shows attached containers across the entire
+	cluster
+	* UCP now prompts you to rename overlay networks which have illegal characters
+	during an upgrade of the cluster
+	* HTTP Routing Mesh now correctly upgrades to latest version when UCP is upgraded
+	* UCP images now pulled correctly on worker nodes when using Docker for Azure template
+
+	* UCP now correctly ensures that a non-admin user designated as an LDAP recovery
+	admin is promoted to admin status within the platform
+
+
+* UI/UX
+	* Fixed an issue preventing non-admins from creating volumes in the GUI
+	* Fixed hyperlink in banner for upgrading UCP
+	* SANs added during installation with `--interactive` flag now appear correctly
+	in each manager node's details page in the GUI
+	* Clarified banner warning provided mid-upgrade when certain nodes are running
+	different versions of UCP
+	* Fixed an error where "Show System Services" toggle did not function correctly
+	* Users now prevented from using "Drain" option on manager nodes
+
+* docker/ucp image
+	* Fixed an issue preventing `stop` and `restart` commands from working correctly
+	* UCP install no longer occasionally stalls with error "failed to change temp password"
+
 ## Version 2.0.1
 
 (22 Nov 2016)
@@ -56,8 +128,6 @@ upgrade your installation to the latest release.
 will fail to attach to that network. As a workaround you can create the networks
 upfront and make them attachable, and change your compose file to use those
 networks.
-
-
 
 ## Version 2.0.0
 
