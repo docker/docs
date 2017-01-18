@@ -12,6 +12,32 @@ known issues for each UCP version.
 You can then use [the upgrade instructions](installation/upgrade.md), to
 upgrade your installation to the latest release.
 
+## Version 1.1.6
+
+(18 Jan 2017)
+
+Note: UCP 1.1.6 supports Docker Engine 1.12 but does not use the built-in
+orchestration capabilities provided by the Docker Engine with swarm mode enabled.
+When installing this UCP version on a Docker Engine 1.12 host, UCP creates a
+cluster using the older Docker Swarm v1.2.
+
+**Security Update**
+
+This patch contains the following security-related updates:
+
+* Fixed an issue by which a high number of ping requests could result in temporarily
+unresponsive UCP services
+* Fixed an issue by which non-admin users with "View-Only" permissions could use
+the undocumented private API to restart/stop/delete containers.
+* Only admins are now allowed to tag, save, and load images as UCP/DTR system images
+* UCP will now warn admins during installation if there is an open TCP port which
+could be used to perform unauthorized actions on the cluster
+
+These issues affect UCP version 1.1.5 and below. THey were discovered by our
+development team during internal testing.
+
+We've revised our guidelines on access control permissions as well. Read 
+the [permissions levels section](user-management/permission-levels.md) for more details.
 
 ## Version 1.1.5
 
