@@ -27,7 +27,7 @@ function loadPage(url)
 }
 $(document).on("keypress", function(event) {
     if (event.keyCode == 13) {
-        event.preventDefault();
+      if(autoCompleteShowing) event.preventDefault();
     }
 });
 function highlightMe(inputTxt,keyword)

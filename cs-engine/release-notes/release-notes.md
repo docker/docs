@@ -16,7 +16,7 @@ back-ported fixes (security-related and priority defects) from the open source.
 It incorporates defect fixes that you can use in environments where new features
 cannot be adopted as quickly for consistency and compatibility reasons.
 
-#### Prior versions
+## Prior versions
 
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
