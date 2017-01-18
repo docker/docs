@@ -188,13 +188,7 @@ To create the `docker` group and add your user:
 
     This ensures your user is running with the correct permissions.
 
-5.  Restart the `docker` daemon.
-
-    ```bash
-    $ sudo service docker restart
-    ```    
-
-6.  Verify that your user is in the docker group by running `docker` without `sudo`.
+5.  Verify that your user is in the docker group by running `docker` without `sudo`.
 
     ```bash
     $ docker run --rm hello-world
