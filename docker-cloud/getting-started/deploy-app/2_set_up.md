@@ -105,7 +105,7 @@ account name. To use the CLI to interact with objects that belong to an
 `DOCKERCLOUD_NAMESPACE=my-organization`, or set this variable as in the example below.
 
 ```none
-$ export `DOCKERCLOUD_NAMESPACE=my-organization`
+$ export DOCKERCLOUD_NAMESPACE=my-organization
 ```
 
 
