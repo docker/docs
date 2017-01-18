@@ -4,6 +4,8 @@ description: Learn how to deploy Docker Datacenter with one click, using an Amaz
 keywords: docker, datacenter, install, orchestration, management
 ---
 
+{% assign template_url = "https://console.aws.amazon.com/cloudformation/home?#/stacks/new?templateURL=https://s3.amazonaws.com/packages.docker.com/caas/docker/docker_for_aws_ddc_2.1.0-beta1.json" %}
+
 Docker Datacenter on Docker for AWS is a one-click deploy of highly-scalable
 Docker Datacenter (Universal Control Plane and Docker Trusted Registry) based
 on Docker and AWS best-practices. It is based on
@@ -100,7 +102,7 @@ above configuration options.
 
 - Click on **Launch Stack** below. This link will take you to AWS cloudformation portal.
 
-	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?templateURL=https://s3.amazonaws.com/packages.docker.com/caas/docker/docker_for_aws_ddc_2.1.0-beta1.json)
+	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)]({{ template_url }})
 
 - Confirm your AWS Region that you'd like to launch this stack in (top right corner)
 - Provide the required parameters and click **Next** (see below)
@@ -132,7 +134,7 @@ run the command directly using it.
   ParameterKey=DDCUsernameSet,ParameterValue=<DDC_USERNAME> \
   ParameterKey=DDCPasswordSet,ParameterValue=<DDC_PASSWORD> \
   ParameterKey=License,ParameterValue=<YOUR_DDC_LICENSE_S3_URL> \
-  --template-url https://s3-us-west-2.amazonaws.com/ddc-on-aws-public/aws/aws-v1.12.3-cs4-beta12-ddc.json
+  --template-url "{{ template_url }}"
   ```
 
 - Once successfully created ( it does take between 10-15 mins), you can get
