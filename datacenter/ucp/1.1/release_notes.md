@@ -33,7 +33,7 @@ the undocumented private API to restart/stop/delete containers.
 * UCP will now warn admins during installation if there is an open TCP port which
 could be used to perform unauthorized actions on the cluster
 
-These issues affect UCP version 1.1.5 and below. THey were discovered by our
+These issues affect UCP version 1.1.5 and below. They were discovered by our
 development team during internal testing.
 
 We've revised our guidelines on access control permissions as well. Read 
