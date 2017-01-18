@@ -108,7 +108,7 @@ This command consists of the following parts:
 
 ## View the web application container
 
-Now you can see your running container using the `docker ps` command.
+Now you can see your running container using the `docker ps` command. This command shows you the container's ID, and also gives you a randomly-genernated name you can use instead.
 
     $ docker ps -l
 
