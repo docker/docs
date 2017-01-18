@@ -15,6 +15,10 @@ Not at this time, but it is on our roadmap for future releases.
 
 Docker for Azure should work with all supported Azure Marketplace regions.
 
+## Where are my container logs?
+
+All container logs are aggregated within the `xxxxlog` storage account.
+
 ## I have a problem/bug where do I report it?
 
 Send an email to <docker-for-iaas@docker.com> or post to the [Docker for Azure](https://github.com/docker/for-azure) GitHub repositories.

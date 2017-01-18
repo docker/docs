@@ -55,6 +55,10 @@ All of Amazons regions have at least 2 AZ's, and some have more. To make sure Do
 As part of the prerequisites, you need to have an SSH key uploaded to the AWS region you are trying to deploy to.
 For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 
+## Where are my container logs?
+
+All container logs are aggregated within [AWS CloudWatch](https://aws.amazon.com/cloudwatch/).
+
 ## I have a problem/bug where do I report it?
 
 Send an email to <docker-for-iaas@docker.com> or post to the [Docker for AWS](https://github.com/docker/for-aws) GitHub repositories.

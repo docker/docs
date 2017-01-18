@@ -41,7 +41,7 @@ This could have led to a potential man in the middle (MITM) attack. The ssh host
 - The SSH ELB for SSH'ing into the managers has been removed because it is no longer possible to SSH into the managers without getting a security warning
 - Multiple managers can be deployed
 - All container logs can be found in the `xxxxlog` storage account
-- Each Manager can be SSH'd into by following our deploy [guide](deploy.md)
+- You can connect to each manager using SSH by following our deploy [guide](deploy.md)
 
 ## 1.12.2-beta9
 
