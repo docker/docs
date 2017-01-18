@@ -102,7 +102,7 @@ By default, the `docker-cloud` CLI uses your default user namespace, meaning the
 repositories, nodes, and services associated with your individual Docker ID
 account name. To use the CLI to interact with objects that belong to an
 [organization](../../orgs.md), prefix these commands with
-`DOCKERCLOUD_NAMESPACE=my-organization`, or set this variable as in the example below.
+DOCKERCLOUD_NAMESPACE=my-organization, or set this variable as in the example below.
 
 ```none
 $ export `DOCKERCLOUD_NAMESPACE=my-organization`
