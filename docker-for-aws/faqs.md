@@ -75,7 +75,7 @@ _Please note that your output will be slightly different from the above, dependi
 
 ## Analytics
 
-The beta versions of Docker for AWS and Azure send anonymized analytics to Docker. These analytics are used to monitor beta adoption and are critical to improve Docker for AWS and Azure.
+Docker for AWS sends anonymized minimal analytics to Docker (heartbeat). These analytics are used to monitor adoption and are critical to improve Docker for AWS.
 
 ## How to run administrative commands?
 

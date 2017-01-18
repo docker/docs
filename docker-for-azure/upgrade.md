@@ -4,24 +4,22 @@ keywords: azure, microsoft, iaas, tutorial
 title: Docker for Azure Upgrades
 ---
 
-Docker for Azure supports upgrading from one beta version to the next. Upgrades are done by applying a new version of the Azure ARM template that powers Docker for Azure. An upgrade of Docker for Azure involves:
+Docker for Azure supports upgrading from one version to the next. Upgrades are done by applying a new version of the Azure ARM template that powers Docker for Azure. An upgrade of Docker for Azure involves:
 
  * Upgrading the VHD backing the manager and worker nodes (the Docker engine ships in the VHD)
  * Upgrading service containers in the manager and worker nodes
  * Changing any other resources in the Azure Resource Group that hosts Docker for Azure
 
-To be notified of updates, submit your email address at [https://beta.docker.com/](https://beta.docker.com/).
 
 ## Prerequisites
 
  * We recommend only attempting upgrades of swarms with at least 3 managers. A 1-manager swarm may not be able to maintain quorum during the upgrade
- * Upgrades are only supported from one version to the next version, for example beta-13 to beta-14. Skipping a version during an upgrade is not supported. Downgrades are not tested.
- * Please make sure there are no nodes in the swarm in "down" status. If there are such nodes in the swarm, please remove them from the swarm using
-    docker node rm node-id
+ * Upgrades are only supported from one version to the next version. Skipping a version during an upgrade is not supported. Downgrades are not tested.
+ * Please make sure there are no nodes in the swarm in "down" status. If there are such nodes in the swarm, please remove them from the swarm using docker node rm node-id
 
 ## Upgrading
 
-If you submit your email address at [https://beta.docker.com/](beta.docker.com) Docker will notify you of new releases by email. New releases are also posted on the [Release Notes](https://beta.docker.com/docs/azure/release-notes/) page.
+New releases are also posted on the [Release Notes](release-notes.md) page.
 
 To initiate an upgrade, SSH into a manager node and issue the following command:
 

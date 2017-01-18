@@ -7,18 +7,19 @@ redirect_from:
 - /engine/installation/amazon/
 ---
 
+
 ## Prerequisites
 
-- Access to an AWS account with permissions to use CloudFormation and creating the following objects
+- Access to an AWS account with permissions to use CloudFormation and creating the following objects. [Full set of required permissions](iam-permissions.md).
     - EC2 instances + Auto Scaling groups
     - IAM profiles
     - DynamoDB Tables
     - SQS Queue
-    - VPC + subnets
+    - VPC + subnets and security groups
     - ELB
     - CloudWatch Log Group
 - SSH key in AWS in the region where you want to deploy (required to access the completed Docker install)
-- AWS account that support EC2-VPC (See the [FAQ for details about EC2-Classic](../faq/aws.md))
+- AWS account that support EC2-VPC (See the [FAQ for details about EC2-Classic](faqs.md))
 
 For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 
@@ -38,7 +39,7 @@ The EC2 instance type for your worker nodes.
 The EC2 instance type for your manager nodes. The larger your swarm, the larger the instance size you should use.
 
 #### ClusterSize
-The number of workers you want in your swarm (1-1000).
+The number of workers you want in your swarm (0-1000).
 
 #### ManagerSize
 The number of Managers in your swarm. You can pick either 1, 3 or 5 managers. We only recommend 1 manager for testing and dev setups. There are no failover guarantees with 1 manager — if the single manager fails the swarm will go down as well. Additionally, upgrading single-manager swarms is not currently guaranteed to succeed.
@@ -81,7 +82,7 @@ Go to the [Release Notes](release-notes.md) page, and click on the "launch stack
 You can also invoke the Docker for AWS CloudFormation template from the AWS CLI:
 
 Here is an example of how to use the CLI. Make sure you populate all of the parameters and their values:
-```
+```bash
 $ aws cloudformation create-stack --stack-name teststack --template-url <templateurl> --parameters ParameterKey=KeyName,ParameterValue=<keyname> ParameterKey=InstanceType,ParameterValue=t2.micro ParameterKey=ManagerInstanceType,ParameterValue=t2.micro ParameterKey=ClusterSize,ParameterValue=1 --capabilities CAPABILITY_IAM
 ```
 
@@ -91,7 +92,7 @@ To fully automate installs, you can use the [AWS Cloudformation API](http://docs
 
 Docker for AWS starts with a CloudFormation template that will create everything that you need from scratch. There are only a few prerequisites that are listed above.
 
-It first starts off by creating a new VPC along with subnets and security groups. Once the networking is set up, it will create two Auto Scaling Groups, one for the managers and one for the workers, and set the desired capacity that was selected in the CloudFormation setup form. The managers will start up first and create a Swarm manager quorum using Raft. The workers will then start up and join the swarm one by one, until all of the workers are up and running. At this point you will have x number of managers and y number of workers in your swarm, that are ready to handle your application deployments. See the [deployment](../deploy.md) docs for your next steps.
+It first starts off by creating a new VPC along with subnets and security groups. Once the networking is set up, it will create two Auto Scaling Groups, one for the managers and one for the workers, and set the desired capacity that was selected in the CloudFormation setup form. The managers will start up first and create a Swarm manager quorum using Raft. The workers will then start up and join the swarm one by one, until all of the workers are up and running. At this point you will have x number of managers and y number of workers in your swarm, that are ready to handle your application deployments. See the [deployment](deploy.md) docs for your next steps.
 
 If you increase the number of instances running in your worker Auto Scaling Group (via the AWS console, or updating the CloudFormation configuration), the new nodes that will start up will automatically join the swarm.
 
