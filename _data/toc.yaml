@@ -1,7 +1,7 @@
 toc:
 - title: Welcome to the Docs
   path: /
-- sectiontitle: Get Started
+- sectiontitle: Get started
   section:
   - sectiontitle: Docker basics
     section:
@@ -21,7 +21,7 @@ toc:
       title: Tag, push, &amp; pull your image
     - path: /engine/getstarted/last_page/
       title: Learning more
-  - sectiontitle: Configure and deploy your app
+  - sectiontitle: Declare and deploy your app
     section:
     - path: /engine/getstarted-voting-app/
       title: Tour the voting app sample
