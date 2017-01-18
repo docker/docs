@@ -82,7 +82,7 @@ Options:
 
 > **Note:**
 > For further details and examples of each command, see the
-> [command reference](../reference/commandline/cli.md) in this guide.
+> [command reference](../reference/commandline/) in this guide.
 
 ## Run a web application in Docker
 
