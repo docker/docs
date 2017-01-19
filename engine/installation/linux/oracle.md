@@ -44,8 +44,8 @@ You can install Docker in different ways, depending on your needs:
   upgrades completely manually.
 
 - Some users cannot use third-party repositories, and must rely on
-  the version of Docker in the Red Hat repositories. This version of Docker may
-  be out of date. Those users should consult the Red Hat documentation and not
+  the version of Docker in the Oracle repositories. This version of Docker may
+  be out of date. Those users should consult the Oracle documentation and not
   follow these procedures.
 
 ### Install using the repository
