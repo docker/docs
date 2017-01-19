@@ -4,17 +4,24 @@ keywords: aws, amazon, iaas, release
 title: Docker for AWS Release Notes
 ---
 
+## 1.13.0-1
+Release date: 1/18/2017
+
+<a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/stable/Docker.tmpl" data-rel="Stable-1" target="blank" id="aws-deploy">![Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)</a>
+
+### New
+- Docker Engine upgraded to [Docker 1.13.0](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Change ELB health check from TCP to HTTP
+
 ## 1.13.0-rc3-beta13
 Release date: 12/06/2016
-
-<a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://docker-for-aws.s3.amazonaws.com/aws/beta/latest.json" data-rel="Beta-13" target="blank" id="aws-deploy">![Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)</a>
 
 ### New
 - Docker Engine upgraded to [Docker 1.13.0-rc3](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 - New option to decide if you want to send container logs to CloudWatch. (previously it was always on)
 - SSH access has been added to the worker nodes
 - The Docker daemon no longer listens on port 2375
-- Added a `swarm-exec` to execute a docker command across all of the swarm nodes. See [Executing Docker commands in all swarm nodes](../deploy#execute-docker-commands-in-all-swarm-nodes) for more details.
+- Added a `swarm-exec` to execute a docker command across all of the swarm nodes. See [Executing Docker commands in all swarm nodes](deploy.md#execute-docker-commands-in-all-swarm-nodes) for more details.
 
 ## 1.13.0-rc2-beta12
 Release date: 11/23/2016

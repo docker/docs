@@ -67,6 +67,8 @@ toc:
     section:
     - path: /docker-for-aws/
       title: Setup & Prerequisites
+    - path: /docker-for-aws/iam-permissions/
+      title: IAM Permissions
     - path: /docker-for-aws/scaling/
       title: Scaling
     - path: /docker-for-aws/upgrade/
