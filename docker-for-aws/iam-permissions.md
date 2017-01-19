@@ -12,7 +12,7 @@ If you create and use an IAM role with these permissions for creating the stack,
 This feature is called [AWS CloudFormation Service Role](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-servicerole.html?icmpid=docs_cfn_console)
 follow the link for more information.
 
-```
+```none
 {% raw %}
 {
     "Version": "2012-10-17",
