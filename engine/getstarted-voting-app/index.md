@@ -58,6 +58,24 @@ Each service will run in its own container. Using swarm mode,
 we can also scale the application to deploy replicas
 of containerized services distributed across multiple nodes.
 
+Here is an example of one of the services fully defined:
+
+```
+vote:
+  image: dockersamples/examplevotingapp_vote:before
+  ports:
+    - 5000:80
+  networks:
+    - frontend
+  depends_on:
+    - redis
+  deploy:
+    replicas: 2
+    update_config:
+      parallelism: 2
+    restart_policy:
+      condition: on-failure
+```
 
 The `image` key defines which image the service will use. The `vote` service
 uses `dockersamples/examplevotingapp_vote:before`.
@@ -65,6 +83,10 @@ uses `dockersamples/examplevotingapp_vote:before`.
 The `depends_on` key allows you to specify that a service is only
 deployed after another service. In our example, `vote` only deploys
 after `redis`.
+
+The `deploy` key specifies aspects of a swarm deployment, as described below in
+[Compose v.3 features and
+compatibility](#compose-v3-features-and-compatibility).
 
 ## docker-stack.yml
 
@@ -76,8 +98,8 @@ To follow along with the example, you need only have
 Docker running and the copy of `docker-stack.yml` we
 provide here. This file defines all the services shown
 in the [table above](#anatomy-of-the-voting-app), their
-base images, configuration details such as ports
-and dependencies, and the swarm configuration.
+base images, configuration details such as ports and networks,
+application dependencies, and the swarm configuration.
 
 ```
 version: "3"
@@ -176,7 +198,7 @@ with this `docker-stack.yml` file to pull the referenced images and launch the
 services in a swarm as configured in the `.yml`.
 
 Note that at the top of the `docker-stack.yml` file, the version is indicated as
-`version: "3" `. This voting app example relies on Compose version 3, which is
+`version: "3" `. The voting app example relies on Compose version 3, which is
 designed to be cross-compatible with Compose and Docker Engine swarm mode.
 
 Before we get started, let's take a look at some aspects of Compose files and
@@ -186,7 +208,7 @@ this walkthrough.
 - [docker-stack.yml](#docker-stackyml)
   - [deploy key](#deploy-key)
 - [docker stack deploy command](#docker-stack-deploy-command)
-- [Application stacks and services](#application-stacks-and-services)
+- [Application stacks and services](#application-stack-and-services)
 
 ### docker-stack.yml
 
@@ -195,7 +217,7 @@ v.3.
 
 #### deploy key
 
-The `deploy` key is new in v.3, and allows you to specify various properties of
+The `deploy` key allows you to specify various properties of
 a swarm deployment.
 
 For example, the voting app configuration uses this to
@@ -219,21 +241,24 @@ with `docker stack deploy`.
 * It can take the place of running `docker compose up` to deploy
 v.3 compatible applications.
 
-### Application stack and services
+### Application stacks and services
 
 Taken together, these new features and deployment options can help when
 mapping out distributed applications and clustering strategies. Rather than
-thinking about running individual containers, perse, we can start to model
-Docker deployments as an application stack and services.
+thinking about running individual containers, we can start to model
+Docker deployments as application stacks and services.
 
-For more about `docker-stack.yml` and the `docker stack deploy` command, see
-[deploy](/compose/compose-file.md#deploy) in the [Compose file
-reference](/compose/compose-file.md).
+### Compose file reference
 
-For more about what's new in Compose v.3, see
-[Versioning](/compose/compose-file.md#versioning)) and
-[Upgrading](/compose/compose-file.md#upgrading)) in the [Compose file
-reference](/compose/compose-file.md)
+To learn more, see these topics in the [Compose file
+reference](/compose/compose-file.md):
+
+* For more about `docker-stack.yml` and the `docker stack deploy` command, see
+[deploy](/compose/compose-file.md#deploy).
+
+* For more on what's new in Compose v.3, see
+[Versioning](/compose/compose-file.md#versioning), [Version 3](/compose/compose-file.md#version-3), and
+[Upgrading](/compose/compose-file.md#upgrading).
 
 ## What's next?
 
