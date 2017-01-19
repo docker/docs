@@ -12,22 +12,18 @@ Docker Engine is supported on Linux, Cloud, Windows, and macOS. Installation
 instructions are available for the following:
 
 ## On Linux
-* [Arch Linux](linux/archlinux.md)
 * [CentOS](linux/centos.md)
-* [CRUX Linux](linux/cruxlinux.md)
 * [Debian](linux/debian.md)
 * [Fedora](linux/fedora.md)
-* [Gentoo](linux/gentoolinux.md)
 * [Oracle Linux](linux/oracle.md)
-* [Raspbian](linux/raspbian.md)
 * [Red Hat Enterprise Linux](linux/rhel.md)
 * [openSUSE and SUSE Linux Enterprise](linux/SUSE.md)
 * [Ubuntu](linux/ubuntulinux.md)
+* [Other Linux distributions](linux/other.md)
 
 If your linux distribution is not listed above, don't give up yet. To try out
-Docker on a distribution that is not listed above, go here:
-[Installation from binaries](binaries.md).
-
+Docker on a different Linux distribution, consider
+[installing from binaries](binaries.md).
 
 ## On macOS and Windows
 

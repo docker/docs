@@ -1,12 +1,14 @@
 ---
-description: Instructions for installing Docker on Debian
-keywords: Docker, Docker documentation, requirements, apt, installation, debian, install, uninstall, upgrade, update
+description: Instructions for installing Docker on Ubuntu
+keywords: Docker, Docker documentation, requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
 redirect_from:
-- /engine/installation/debian/
-title: Get Docker for Debian
+- /engine/installation/ubuntulinux/
+- /installation/ubuntulinux/
+- /engine/installation/linux/ubuntulinux/
+title: Get Docker for Ubuntu
 ---
 
-To get started with Docker on Debian, make sure you
+To get started with Docker on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
 
@@ -14,31 +16,17 @@ To get started with Docker on Debian, make sure you
 
 ### OS requirements
 
-To install Docker, you need the 64-bit version of one of these Debian versions:
+To install Docker, you need the 64-bit version of one of these Ubuntu versions:
 
-- Stretch (testing)
-- Jessie 8.0 (LTS)
-- Wheezy 7.7 (LTS)
-
-#### Extra steps for Wheezy 7.7
-
-- You need at least version 3.10 of the Linux kernel. Debian Wheezy ships with
-  version 3.2, so you may need to
-  [update the kernel](https://wiki.debian.org/HowToUpgradeKernel){: target="_blank" class="_" }.
-  To check your kernel version:
-
-  ```bash
-  $ uname -r
-  ```
-
-- Enable the `backports` repository. See the
-  [Debian documentation](https://backports.debian.org/Instructions/){: target="_blank" class"_"}.
+- Yakkety 16.10
+- Xenial 16.04 (LTS)
+- Trusty 14.04 (LTS)
 
 ### Recommended extra packages
 
 You need `curl` if you don't have it. Unless you have a strong reason not to,
 install the `linux-image-extra-*` packages, which allow Docker to use the `aufs`
-storage drivers. **This applies to all versions of Debian**.
+storage drivers. **This applies to all versions of Ubuntu**.
 
 ```bash
 $ sudo apt-get update
@@ -75,20 +63,9 @@ Docker from the repository.
 
 1.  Install packages to allow `apt` to use a repository over HTTPS:
 
-    **Jessie or Stretch**:
-
     ```bash
     $ sudo apt-get install apt-transport-https \
-                           ca-certificates \
-                           software-properties-common
-    ```
-
-    **Wheezy**:
-
-    ```bash
-    $ sudo apt-get install apt-transport-https \
-                           ca-certificates \
-                           python-software-properties
+                           ca-certificates
     ```
 
 2.  Add Docker's official GPG key:
@@ -142,24 +119,25 @@ Docker from the repository.
     ```
 
     > **Warning**: If you have both stable and unstable repositories enabled,
-    > updating to the latest version of Docker by not specifying a version in
-    > the `apt-get install` or `apt-get update` command will always install the
+    > installing or updating without specifying a version in the
+    > `apt-get install` or `apt-get update` command will always install the
     > highest possible version, which will almost certainly be an unstable one.
 
 3.  On production systems, you should install a specific version of Docker
-    instead of always using the latest. List the available versions:
+    instead of always using the latest. List the available versions.
 
     ```bash
     $ apt-cache madison docker-engine
-    docker-engine | 1.13.0-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
-    docker-engine | 1.12.3-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
-    docker-engine | 1.12.2-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
-    docker-engine | 1.12.1-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
-    docker-engine | 1.12.0-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
+
+    docker-engine | 1.13.0-0~xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
+    docker-engine | 1.12.3-0~xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
+    docker-engine | 1.12.2-0~xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
+    docker-engine | 1.12.1-0~xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
+    docker-engine | 1.12.0-0~xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled,
-    and will be specific to your version of Debian (indicated by the `stretch`
+    and will be specific to your version of Ubuntu (indicated by the `xenial`
     suffix on the version, in this example). Choose a specific version to
     install. The second column is the version string. The third column is the
     repository name, which indicates which repository the package is from and
@@ -201,7 +179,7 @@ a new file each time you want to upgrade Docker.
 
 1.  Go to [https://apt.dockerproject.org/repo/pool/main/d/docker-engine/](https://apt.dockerproject.org/repo/pool/main/d/docker-engine/)
     and download the `.deb` file for the Docker version you want to install and
-    for your version of Debian.
+    for your version of Ubuntu.
 
     > **Note**: To install a testing version, change the word `main` in the
     > URL to `testing`. Do not use unstable versions of Docker in production
