@@ -5,6 +5,7 @@ redirect_from:
 - /mac/step_three/
 - /windows/step_three/
 - /linux/step_three/
+- /engine/tutorials/usingdocker/
 title: Find and run the whalesay image
 ---
 
@@ -66,15 +67,15 @@ Make sure Docker is running. On Docker for Mac and Docker for Windows, this is i
          -----
             \
              \
-              \     
-                            ##        .            
-                      ## ## ##       ==            
-                   ## ## ## ##      ===            
-               /""""""""""""""""___/ ===        
-          ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~   
-               \______ o          __/            
-                \    \        __/             
-                  \____\______/   
+              \
+                            ##        .
+                      ## ## ##       ==
+                   ## ## ## ##      ===
+               /""""""""""""""""___/ ===
+          ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+               \______ o          __/
+                \    \        __/
+                  \____\______/
 
 	The first time you run a software image, the `docker` command looks for it
 	on your local system. If the image isn't there, then `docker` gets it from
@@ -108,15 +109,15 @@ Make sure Docker is running. On Docker for Mac and Docker for Windows, this is i
          ---------
             \
              \
-              \     
-                            ##        .            
-                      ## ## ##       ==            
-                   ## ## ## ##      ===            
-               /""""""""""""""""___/ ===        
-          ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~   
-               \______ o          __/            
-                \    \        __/             
-                  \____\______/   
+              \
+                            ##        .
+                      ## ## ##       ==
+                   ## ## ## ##      ===
+               /""""""""""""""""___/ ===
+          ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+               \______ o          __/
+                \    \        __/
+                  \____\______/
 
 ## Where to go next
 
