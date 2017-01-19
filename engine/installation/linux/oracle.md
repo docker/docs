@@ -67,12 +67,23 @@ Docker from the repository.
     $ sudo yum install -y yum-utils
     ```
 
-2.  Use the following command to set up the **stable** repository:
+2.  Use one of the following commands to set up the **stable** repository,
+    depending on your version of Oracle Linux:
+
+    **Oracle Linux 7**:
 
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        https://docs.docker.com/engine/installation/linux/repo_files/oracle/docker.repo
+        https://docs.docker.com/engine/installation/linux/repo_files/oracle/docker-ol7.repo
+    ```
+
+    **Oracle Linux 6**:
+
+    ```bash
+    $ sudo yum-config-manager \
+        --add-repo \
+        https://docs.docker.com/engine/installation/linux/repo_files/oracle/docker-ol6.repo
     ```
 
 3.  **Optional**: Enable the **testing** repository. This repository is included
