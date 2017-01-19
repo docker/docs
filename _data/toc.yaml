@@ -3,6 +3,8 @@ toc:
   path: /
 - sectiontitle: Get started
   section:
+  - path: /learn/
+    title: Learn Docker
   - sectiontitle: Docker basics
     section:
     - path: /engine/getstarted/
