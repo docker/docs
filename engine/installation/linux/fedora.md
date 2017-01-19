@@ -117,7 +117,7 @@ Docker from the repository.
 3.  On production systems, you should install a specific version of Docker
     instead of always using the latest. List the available versions.
     This example uses the `sort -r` command to sort the results by version
-    number, highest to lowest.
+    number, highest to lowest, and is truncated.
 
     > **Note**: This `dnf list` command only shows binary packages. To show
     > source packages as well, omit the `.x86_64` from the package name.
@@ -126,17 +126,9 @@ Docker from the repository.
     $ dnf list docker-engine.x86_64  --showduplicates |sort -r
 
     docker-engine.x86_64  1.13.0-1.fc24                               docker-main
-    docker-engine.x86_64  1.13.0-0.5.rc5.fc24                         docker-testing
-    docker-engine.x86_64  1.13.0-0.4.rc4.fc24                         docker-testing
-    docker-engine.x86_64  1.13.0-0.3.rc3.fc24                         docker-testing
-    docker-engine.x86_64  1.13.0-0.2.rc2.fc24                         docker-testing
-    docker-engine.x86_64  1.13.0-0.1.rc1.fc24                         docker-testing
     docker-engine.x86_64  1.12.5-1.fc24                               docker-main   
     docker-engine.x86_64  1.12.4-1.fc24                               docker-main   
     docker-engine.x86_64  1.12.3-1.fc24                               docker-main   
-    docker-engine.x86_64  1.12.2-1.fc24                               docker-main   
-    docker-engine.x86_64  1.12.1-1.fc24                               docker-main   
-    docker-engine.x86_64  1.12.0-1.fc24                               docker-main   
     ```
 
     The contents of the list depend upon which repositories are enabled, and
