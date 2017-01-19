@@ -58,6 +58,14 @@ Each service will run in its own container. Using swarm mode,
 we can also scale the application to deploy replicas
 of containerized services distributed across multiple nodes.
 
+
+The `image` key defines which image the service will use. The `vote` service
+uses `dockersamples/examplevotingapp_vote:before`.
+
+The `depends_on` key allows you to specify that a service is only
+deployed after another service. In our example, `vote` only deploys
+after `redis`.
+
 ## docker-stack.yml
 
 We'll deploy the app using `docker-stack.yml`, which is a
@@ -167,20 +175,16 @@ To deploy the voting application, we will use the `docker-stack deploy` command
 with this `docker-stack.yml` file to pull the referenced images and launch the
 services in a swarm as configured in the `.yml`.
 
-Note that at the top of the `docker-stack.yml` file, the
-version is indicated as `version: "3" `. This voting app
-example relies on Compose version 3 features.
+Note that at the top of the `docker-stack.yml` file, the version is indicated as
+`version: "3" `. This voting app example relies on Compose version 3, which is
+designed to be cross-compatible with Compose and Docker Engine swarm mode.
 
-Before we get started, let's take
-a look at some aspects of Compose files and deployment
-options that are new in Compose v.3, and that we want
-to highlight in this walkthrough.
+Before we get started, let's take a look at some aspects of Compose files and
+deployment options that are new in Compose v.3, and that we want to highlight in
+this walkthrough.
 
 - [docker-stack.yml](#docker-stackyml)
-  - [services key](#services-key)
-  - [image key](#image-key)
   - [deploy key](#deploy-key)
-  - [depends_on key](#dependson-key)
 - [docker stack deploy command](#docker-stack-deploy-command)
 - [Application stacks and services](#application-stacks-and-services)
 
@@ -188,35 +192,6 @@ to highlight in this walkthrough.
 
 `docker-stack.yml` is a new type of Compose file only compatible with Compose
 v.3.
-
-#### services key
-
-`services` is a new top-level key, under which there is a separate key for each
-of the services.
-
-Here is an example of one of the services:
-
-```
-vote:
-  image: dockersamples/examplevotingapp_vote:before
-  ports:
-    - 5000:80
-  networks:
-    - frontend
-  depends_on:
-    - redis
-  deploy:
-    replicas: 2
-    update_config:
-      parallelism: 2
-    restart_policy:
-      condition: on-failure
-```
-
-#### image key
-
-The `image` key defines which image the service will use. The `vote` service
-uses `dockersamples/examplevotingapp_vote:before`.
 
 #### deploy key
 
@@ -229,12 +204,6 @@ be deployed to the swarm).
 
 The voting app also uses the `deploy` key to
 constrain some services to run only on the manager node.
-
-#### depends_on key
-
-The `depends_on` key allows you to specify that a service is only
-deployed after another service. In our example, `vote` only deploys
-after `redis`.
 
 ### docker stack deploy command
 
@@ -250,14 +219,21 @@ with `docker stack deploy`.
 * It can take the place of running `docker compose up` to deploy
 v.3 compatible applications.
 
-### Application stacks and services
+### Application stack and services
 
 Taken together, these new features and deployment options can help when
 mapping out distributed applications and clustering strategies. Rather than
 thinking about running individual containers, perse, we can start to model
-Docker deployments as application stacks and services.
+Docker deployments as an application stack and services.
 
-For more about `docker-stack.yml` and the `docker stack deploy` command, see [deploy](/compose/compose-file.md#deploy) in the [Compose file reference](/compose/compose-file.md).
+For more about `docker-stack.yml` and the `docker stack deploy` command, see
+[deploy](/compose/compose-file.md#deploy) in the [Compose file
+reference](/compose/compose-file.md).
+
+For more about what's new in Compose v.3, see
+[Versioning](/compose/compose-file.md#versioning)) and
+[Upgrading](/compose/compose-file.md#upgrading)) in the [Compose file
+reference](/compose/compose-file.md)
 
 ## What's next?
 
