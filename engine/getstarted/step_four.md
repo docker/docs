@@ -3,6 +3,7 @@ redirect_from:
 - /mac/step_four/
 - /windows/step_four/
 - /linux/step_four/
+- /engine/tutorials/dockerimages/
 description: Getting started with Docker
 keywords: beginner, getting started, Docker
 title: Build your own image

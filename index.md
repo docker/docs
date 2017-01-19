@@ -8,15 +8,13 @@ title: Docker Documentation
 Docker packages your app with its dependencies, freeing you from worrying about your
 system configuration, and making your app more portable.
 
-[Get Docker](/engine/installation/){: class="button darkblue-btn"}
-
 <table><tr><td width="50%">
 {% capture basics %}
 ## Learn the basics of Docker
 
-The basic tutorial teaches you about how to build, push, and pull images, and
-run them as containers. This tutorial stops short of teaching you how to deploy
-applications.
+The basic tutorial teaches you about how to build, push, and pull Docker images,
+and run them as containers. This tutorial stops short of teaching you how to
+deploy applications.
 
 [Start the basic tutorial](/engine/getstarted/){: class="button darkblue-btn"}
 {% endcapture %}{{ basics | markdownify }}
@@ -25,7 +23,8 @@ applications.
 ## Define and deploy applications
 
 The application tutorial teaches you how to relate containers to each other and
-define them as part of an application that is ready to deploy at scale.
+define them as part of an application that is ready to deploy at scale in a
+production environment.
 
 [Start the application tutorial](/engine/getstarted-voting-app/){: class="button darkblue-btn"}
 {% endcapture %}{{ apps | markdownify }}
