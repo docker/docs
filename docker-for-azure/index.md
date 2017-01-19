@@ -61,6 +61,8 @@ If the script fails, it's typically because your Azure user account doesn't have
 
 When setting up the ARM template, you will be prompted for the App ID (a UUID) and the app secret. If you specified the resource group name and location parameters, please choose the option to deploy the template into an existing resource group and pass the same name and region/location that were passed above to create-sp-azure.
 
+<img src="img/service-principal.png" />
+
 ### SSH Key
 
 Docker for Azure uses SSH for accessing the Docker swarm once it's deployed. During setup, you will be prompted for a SSH public key. If you don't have a SSH key, you can generate one with `puttygen` or `ssh-keygen`. You only need the public key component to set up Docker for Azure. Here's how to get the public key from a .pem file:
