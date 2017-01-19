@@ -1,6 +1,6 @@
 ---
 description: Instructions for installing Docker on Oracle Linux
-keywords: Docker, Docker documentation, requirements, installation, oracle, oel, rpm, install, uninstall, upgrade, update
+keywords: Docker, Docker documentation, requirements, installation, oracle, ol, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/oracle/
 title: Get Docker for Oracle Linux
@@ -14,9 +14,13 @@ To get started with Docker on Oracle Linux, make sure you
 
 ### OS requirements
 
-To install Docker, you need the 64-bit version of Oracle Linux 6 or 7, running
-the Unbreakable Enterprise Kernel Release 4 (4.1.12) or higher. This kernel
-supports the Docker `btrfs` storage engine.
+To install Docker, you need the 64-bit version of Oracle Linux 6 or 7.
+
+To use `btrfs`, you need to install the Unbreakable Enterprise Kernel (UEK)
+version 4.1.12 or higher. running the Unbreakable Enterprise Kernel Release 4
+(4.1.12) or higher. For Oracle Linux 6, you need to enable extra repositories
+to install UEK4. See
+[Obtaining and installing the UEK packages](https://docs.oracle.com/cd/E37670_01/E37355/html/ol_obtain_uek.html){: target="_blank" class="_" }.
 
 ### Remove unofficial Docker packages
 
@@ -56,15 +60,33 @@ Docker from the repository.
 
 #### Set up the repository
 
-1.  Use the following command to set up the **stable** repository:
+1.  Install the `yum-utils` plugin, which provides the `yum-config-manager`
+    plugin.
+
+    ```bash
+    $ sudo yum install -y yum-utils
+    ```
+
+2.  Use one of the following commands to set up the **stable** repository,
+    depending on your version of Oracle Linux:
+
+    **Oracle Linux 7**:
 
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        https://docs.docker.com/engine/installation/linux/repo_files/oracle/docker.repo
+        https://docs.docker.com/engine/installation/linux/repo_files/oracle/docker-ol7.repo
     ```
 
-2.  **Optional**: Enable the **testing** repository. This repository is included
+    **Oracle Linux 6**:
+
+    ```bash
+    $ sudo yum-config-manager \
+        --add-repo \
+        https://docs.docker.com/engine/installation/linux/repo_files/oracle/docker-ol6.repo
+    ```
+
+3.  **Optional**: Enable the **testing** repository. This repository is included
     in the `docker.repo` file above but is disabled by default. You can enable
     it alongside the stable repository. Do not use unstable repositories on
     on production systems or for non-testing workloads.
@@ -75,16 +97,16 @@ Docker from the repository.
     > which will almost certainly be an unstable one.
 
     ```bash
-    $ sudo yum-config-manager --set-enabled docker-testing
+    $ sudo yum-config-manager --enablerepo docker-testing
     ```
 
     You can disable the `testing` repository by running the `yum-config-manager`
-    command with the `--set-disabled` flag. To re-enable it, use the
+    command with the `--disablerepo` flag. To re-enable it, use the
     `--set-enabled` flag. The following command disables the `testing`
     repository.
 
     ```bash
-    $ sudo yum-config-manager --set-disabled docker-testing
+    $ sudo yum-config-manager --disablerepo docker-testing
     ```
 
 #### Install Docker
@@ -94,7 +116,27 @@ Docker from the repository.
     ```bash
     $ sudo yum -y check-update
     ```
-2.  Install the latest version of Docker, or go to the next step to install a
+
+2.  Verify and import Docker's public key, which is used to sign packages in
+    Docker's repository.
+
+    First, verify that the fingerprint is `58118E89F3A912897C070ADBF76221572C52609D`:
+
+    ```bash
+    $ curl -s https://yum.dockerproject.org/gpg | gpg --quiet --with-fingerprint
+
+    pub  4096R/2C52609D 2015-07-14
+          Key fingerprint = 5811 8E89 F3A9 1289 7C07  0ADB F762 2157 2C52 609D
+    uid                            Docker Release Tool (releasedocker) <docker@docker.com>
+    ```
+
+    If the fingerprint matches, import the key:
+
+    ```bash
+    $ sudo rpm --import https://yum.dockerproject.org/gpg
+    ```
+
+3.  Install the latest version of Docker, or go to the next step to install a
     specific version.
 
     ```bash
@@ -106,29 +148,21 @@ Docker from the repository.
     > `yum install` or `yum upgrade` command will always install the highest
     > available version, which will almost certainly be an unstable one.
 
-3.  On production systems, you should install a specific version of Docker
+4.  On production systems, you should install a specific version of Docker
     instead of always using the latest. List the available versions.
     This example uses the `sort -r` command to sort the results by version
-    number, highest to lowest.
+    number, highest to lowest. The output is truncated.
 
     > **Note**: This `yum list` command only shows binary packages. To show
     > source packages as well, omit the `.x86_64` from the package name.
 
     ```bash
-    $ yum list docker-engine.x86_64  --showduplicates |sort -r
+    $ yum list docker-engine.x86_64  --showduplicates |sort -nr
 
-    docker-engine.x86_64  1.13.0-1.el7                               docker-main
-    docker-engine.x86_64  1.13.0-0.5.rc5.el7                         docker-testing
-    docker-engine.x86_64  1.13.0-0.4.rc4.el7                         docker-testing
-    docker-engine.x86_64  1.13.0-0.3.rc3.el7                         docker-testing
-    docker-engine.x86_64  1.13.0-0.2.rc2.el7                         docker-testing
-    docker-engine.x86_64  1.13.0-0.1.rc1.el7                         docker-testing
-    docker-engine.x86_64  1.12.5-1.el7                               docker-main   
-    docker-engine.x86_64  1.12.4-1.el7                               docker-main   
-    docker-engine.x86_64  1.12.3-1.el7                               docker-main   
-    docker-engine.x86_64  1.12.2-1.el7                               docker-main   
-    docker-engine.x86_64  1.12.1-1.el7                               docker-main   
-    docker-engine.x86_64  1.12.0-1.el7                               docker-main   
+    docker-engine.x86_64  1.13.0-1.el6                                docker-main   
+    docker-engine.x86_64  1.12.3-1.el6                                docker-main   
+    docker-engine.x86_64  1.12.2-1.el6                                docker-main   
+    docker-engine.x86_64  1.12.1-1.el6                                docker-main    
     ```
 
     The contents of the list depend upon which repositories you have enabled,
@@ -144,9 +178,24 @@ Docker from the repository.
     $ sudo yum -y install docker-engine-<VERSION_STRING>
     ```
 
-    The Docker daemon starts automatically.
+    The Docker daemon does not start automatically.
 
-4.  Verify that `docker` is installed correctly by running the `hello-world`
+5.  Start the Docker daemon. Use `systemctl` on Oracle Linux 7 or `service` on
+    Oracle Linux 6.
+
+    **Oracle Linux 7**:
+
+    ```bash
+    $ sudo systemctl start docker
+    ```
+
+    **Oracle Linux 6**:
+
+    ```bash
+    $ sudo service docker start
+    ```
+
+6.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -187,9 +236,24 @@ a new file each time you want to upgrade Docker.
     $ sudo yum install /path/to/package.rpm
     ```
 
-    The Docker daemon starts automatically.
+    The Docker daemon does not start automatically.
 
-3.  Verify that `docker` is installed correctly by running the `hello-world`
+4.  Start the Docker daemon. Use `systemctl` on Oracle Linux 7 or `service` on
+    Oracle Linux 6.
+
+    **Oracle Linux 7**:
+
+    ```bash
+    $ sudo systemctl start docker
+    ```
+
+    **Oracle Linux 6**:
+
+    ```bash
+    $ sudo service docker start
+    ```
+
+5.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -210,7 +274,6 @@ To upgrade Docker, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `yum -y upgrade`
 instead of `yum -y install`, and pointing to the new file.
 
-
 ## Uninstall Docker
 
 1.  Uninstall the Docker package:
@@ -226,6 +289,11 @@ instead of `yum -y install`, and pointing to the new file.
     ```bash
     $ sudo rm -rf /var/lib/docker
     ```
+
+    > **Note**: This won't work when the `btrfs` graph driver has been used,
+    > because the `rm -rf` command cannot remove the subvolumes that Docker
+    > creates. See the output of `man btrfs-subvolume` for information on
+    > removing `btrfs` subvolumes.
 
 You must delete any edited configuration files manually.
 

@@ -11,9 +11,10 @@ If you want to try Docker or use it in a testing environment, but you're not on
 a supported platform, you can try installing from static binaries.
 **This is strongly discouraged in production environments.**
 
-Static binaries for the `dockerd` (Docker daemon) binary are only available for
-Linux. Static binaries for the `docker` (Docker client) binary are available for
-Linux, MacOS, and Windows.
+Static binaries for the Docker daemon binary are only available for Linux (as
+`dockerd`) and Windows Server 2016 or Windows 10 (as `dockerd.exe`). Static
+binaries for the Docker client are available for Linux and macOS (as `docker`),
+and Windows Server 2016 or Windows 10 (as `docker.exe`).
 
 ## Install daemon and client binaries on Linux
 
@@ -131,11 +132,7 @@ The macOS binary includes the Docker client only. It does not include the
     $ sudo cp docker/docker /usr/local/bin/
     ```
 
-4.  To connect the `docker` client to a remote host, either set the
-    `DOCKER_HOST` environment variable to the hostname or IP address of the
-    Docker daemon or add the `-H <hostname|IP>` option to each `docker` command.
-
-5.  Verify that Docker is installed correctly by running the `hello-world`
+4.  Verify that Docker is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -156,36 +153,24 @@ You can install Docker from binaries on Windows Server 2016 or Windows 10.
 - To install the client only, download the 32-bit binary. The archive includes
   `i386` in the file name.
 
-
-1.  Download the static binary archive. You can download either the latest
-    release binaries or a specific version. To find the download link, see the
-    [release notes](https://github.com/docker/docker/releases) for the version
-    of Docker you want to install.
-
-2.  Extract the archive using OS utilities. A `docker` directory is created,
-    and contains a `docker.exe` binary and a `dockerd.exe` binary if you
-    downloaded the 64-bit version.
-
-
-3.  **Optional**: Move the binaries to a directory on your executable path. If
-    you skip this step, you must provide the path to the
-    executable when you invoke `docker` or `dockerd` commands.
-
-4.  If you downloaded the 64-bit archive, you can start the `dockerd` daemon.
+1.  Use the following PowerShell commands to install and start Docker:
 
     ```none
-    C:\> dockerd
+    Invoke-WebRequest https://get.docker.com/builds/Windows/x86_64/docker-1.13.0.zip -UseBasicParsing -OutFile docker.zip
+    Expand-Archive docker.zip -DestinationPath $Env:ProgramFiles
+    Remove-Item -Force docker.zip
+
+    dockerd --register-service
+
+    Start-Service docker
     ```
 
-5.  Verify that Docker is installed correctly by running the `hello-world`
+2.  Verify that Docker is installed correctly by running the `hello-world`
     image.
 
-    > **Note**: To connect the `docker` client to a remote host, either set the
-    > `DOCKER_HOST` environment variable to the hostname or IP address of the
-    > Docker daemon or add the `-H <hostname|IP>` option to each `docker` command.
 
     ```none
-    C:\> docker run hello-world
+    docker run hello-world:nanoserver
     ```
 
     This command downloads a test image and runs it in a container. When the
