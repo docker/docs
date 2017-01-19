@@ -130,59 +130,17 @@ toc:
       title: Customize the app and redploy
   - sectiontitle: Learn by example
     section:
-    - path: /engine/tutorials/dockerizing/
-      title: Hello world in a container
-    - path: /engine/tutorials/usingdocker/
-      title: Run a simple application
-    - path: /engine/tutorials/dockerimages/
-      title: Build your own images
     - path: /engine/tutorials/networkingcontainers/
       title: Network containers
     - path: /engine/tutorials/dockervolumes/
       title: Manage data in containers
-    - path: /engine/tutorials/dockerrepos/
-      title: Store images on Docker Hub
- 
+
 - sectiontitle: Docker ID
   section:
   - path: /docker-id/
     title: Docker ID accounts
   - path: /docker-id/api-reference/
     title: API Reference
-- sectiontitle: Docker Engine
-  section:
-  - sectiontitle: Get Started with Docker
-    section:
-    - path: /engine/getstarted/
-      title: Get Started with Docker
-    - path: /engine/getstarted/step_one/
-      title: Install Docker and run hello-world
-    - path: /engine/getstarted/step_two/
-      title: Understand images &amp; containers
-    - path: /engine/getstarted/step_three/
-      title: Find &amp; run the whalesay image
-    - path: /engine/getstarted/step_four/
-      title: Build your own image
-    - path: /engine/getstarted/step_five/
-      title: Create a Docker Hub account &amp; repository
-    - path: /engine/getstarted/step_six/
-      title: Tag, push, &amp; pull your image
-    - path: /engine/getstarted/last_page/
-      title: Learning more
-  - sectiontitle: Learn by example
-    section:
-    - path: /engine/tutorials/dockerizing/
-      title: Hello world in a container
-    - path: /engine/tutorials/usingdocker/
-      title: Run a simple application
-    - path: /engine/tutorials/dockerimages/
-      title: Build your own images
-    - path: /engine/tutorials/networkingcontainers/
-      title: Network containers
-    - path: /engine/tutorials/dockervolumes/
-      title: Manage data in containers
-    - path: /engine/tutorials/dockerrepos/
-      title: Store images on Docker Hub
 
 - sectiontitle: Docker Engine
   section:

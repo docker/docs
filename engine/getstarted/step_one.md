@@ -5,6 +5,7 @@ redirect_from:
 - /mac/step_one/
 - /windows/step_one/
 - /linux/step_one/
+- /engine/tutorials/dockerizing/
 title: Install Docker and run hello-world
 ---
 
