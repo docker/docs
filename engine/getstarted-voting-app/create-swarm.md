@@ -4,7 +4,7 @@ keywords: multi-container, services, swarm mode, cluster, voting app
 title: Create a swarm
 ---
 
-Now, we'll add our Docker machines to a swarm.
+Now, we'll add our Docker machines to a [swarm](/engine/swarm/index.md).
 
 ## Initialize the swarm
 
