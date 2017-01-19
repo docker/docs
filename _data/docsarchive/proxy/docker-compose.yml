@@ -1,0 +1,25 @@
+version: "2"
+services:
+  main:
+    image: proxy
+    build: .
+    ports:
+     - "4000:80"
+  docs-current:
+    image: docs:latest
+  docs-archive-1.4:
+    image: docs:v1.4
+  docs-archive-1.5:
+    image: docs:v1.5
+  docs-archive-1-6:
+    image: docs:v1.6
+  docs-archive-1-7:
+    image: docs:v1.7
+  docs-archive-1-8:
+    image: docs:v1.8
+  docs-archive-1-9:
+    image: docs:v1.9
+  docs-archive-1-10:
+    image: docs:v1.10
+  docs-archive-1-11:
+    image: docs:v1.11
