@@ -1,8 +1,7 @@
 ---
-title: docker/ucp dump-certs
 description: Print the public certificates used by this UCP web server
-keywords:
-- docker, dtr, cli, dump-certs
+keywords: docker, dtr, cli, dump-certs
+title: docker/ucp dump-certs
 ---
 
 Print the public certificates used by this UCP web server
@@ -15,7 +14,7 @@ docker run --rm \
     --name ucp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     docker/ucp \
-    uninstall-ucp [command options]
+    dump-certs [command options]
 
 ```
 

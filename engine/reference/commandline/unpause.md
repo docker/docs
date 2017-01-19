@@ -1,24 +1,15 @@
 ---
-redirect_from:
-  - /reference/commandline/unpause/
-description: The unpause command description and usage
-keywords:
-- cgroups, suspend, container
+datafolder: engine-cli
+datafile: docker_unpause
 title: docker unpause
 ---
 
-```markdown
-Usage:  docker unpause CONTAINER [CONTAINER...]
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-Unpause all processes within one or more containers
+https://www.github.com/docker/docker
+-->
 
-Options:
-      --help   Print usage
-```
-
-The `docker unpause` command uses the cgroups freezer to un-suspend all
-processes in a container.
-
-See the
-[cgroups freezer documentation](https://www.kernel.org/doc/Documentation/cgroup-v1/freezer-subsystem.txt)
-for further details.
+{% include cli.md %}

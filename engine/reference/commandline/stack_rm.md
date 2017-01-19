@@ -1,31 +1,15 @@
 ---
-redirect_from:
-  - /reference/commandline/stack_rm/
-advisory: experimental
-description: The stack rm command description and usage
-keywords:
-- stack, rm, remove, down
-title: docker stack rm (experimental)
+datafolder: engine-cli
+datafile: docker_stack_rm
+title: docker stack rm
 ---
 
-```markdown
-Usage:  docker stack rm STACK
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-Remove the stack
+https://www.github.com/docker/docker
+-->
 
-Aliases:
-  rm, remove, down
-
-Options:
-      --help   Print usage
-```
-
-Remove the stack from the swarm. This command has to be run targeting
-a manager node.
-
-## Related information
-
-* [stack config](stack_config.md)
-* [stack deploy](stack_deploy.md)
-* [stack services](stack_services.md)
-* [stack tasks](stack_tasks.md)
+{% include cli.md %}

@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: High availability in Swarm
 keywords: docker, swarm,  clustering
 title: High availability in Docker Swarm

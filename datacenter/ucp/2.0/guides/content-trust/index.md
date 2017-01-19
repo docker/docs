@@ -1,8 +1,8 @@
 ---
+description: Configure a Docker Universal Plane cluster to only allow running applications
+  that use images you trust.
+keywords: docker, ucp, backup, restore, recovery
 title: Run only the images you trust
-description: Configure a Docker Universal Plane cluster to only allow running applications that use images you trust.
-keywords:
-- docker, ucp, backup, restore, recovery
 ---
 
 With Docker Universal Control Plane you can enforce applications to only use
@@ -31,7 +31,7 @@ that need sign the image, before it is trusted to run in the UCP cluster. If
 you specify multiple teams, the image needs to be signed by a member of each
 team, or someone that is a member of all those teams.
 If you don't specify any team, the image will be trusted as long as it is signed
-by any UCP user.
+by any UCP user whose keys are trusted in a Notary delegation role.
 
 ## Set up the Docker Notary CLI client
 
@@ -159,6 +159,12 @@ trusted repository.
 
 Valid delegation roles take the form of `targets/<delegation>`, where
 `<delegation>` does not include further slashes.
+
+You will need to add the key to at least one delegation in addition to the `targets/releases` delegation in order for UCP to honor the signed content:
+
+```bash
+$ notary delegation add -p <dtr_url>/<account>/<repository> targets/devops --all-paths user1.pem user2.pem
+```
 
 Before delegation role users can publish signed content with Notary or
 Docker Content Trust, they must import the private key associated with the user certificate:

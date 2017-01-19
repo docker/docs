@@ -62,7 +62,7 @@ public_ip | The public IP allocated to the node
 tunnel | If the node does not accept incoming connections to port 2375, the address of the reverse tunnel to access the docker daemon, or `null` otherwise
 deployed_datetime | The date and time when this node cluster was deployed
 destroyed_datetime | The date and time when this node cluster was terminated (if applicable)
-tags | List of tags to identify the node when deploying services (see [Tags](../../docker-cloud/apps/deploy-tags/) for more information)
+tags | List of tags to identify the node when deploying services (see [Tags](/docker-cloud/apps/deploy-tags/) for more information)
 nickname | A user-friendly name for the node (`external_fqdn` by default)
 
 
@@ -76,14 +76,6 @@ Unreachable | The node is deployed but Docker Cloud cannot connect to the docker
 Upgrading | The node docker daemon is being upgraded. No actions allowed in this state.
 Terminating | The node is being terminated in the cloud provider. No actions allowed in this state.
 Terminated | The node has been terminated and is no longer present in the cloud provider. No actions allowed in this state.
-
-### Node Last Metric attributes
-
-Attribute | Description
---------- | -----------
-cpu       | CPU percentage usage
-memory    | Memory usage in bytes
-disk      | Disk storage usage in bytes
 
 
 ## List all nodes
@@ -284,7 +276,7 @@ Accept: application/json
 docker-cloud node upgrade 7eaf7fff
 ```
 
-Upgrades the docker daemon of the node. This will restart your containers on that node. See [Docker upgrade](../../docker-cloud/infrastructure/docker-upgrade/) for more information.
+Upgrades the docker daemon of the node. This will restart your containers on that node. See [Docker upgrade](/docker-cloud/infrastructure/docker-upgrade/) for more information.
 
 ### Endpoint Type
 

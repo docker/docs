@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: How to use Compose and Swarm together to deploy apps to multi-host clusters
 keywords: documentation, docs,  docker, compose, orchestration, containers, swarm
 title: Use Compose with Swarm
@@ -19,7 +21,7 @@ format](compose-file.md#versioning) you are using:
 
     - subject to the [limitations](swarm.md#limitations) described below,
 
-    - as long as the Swarm cluster is configured to use the [overlay driver](/engine/userguide/networking/dockernetworks/#an-overlay-network),
+    - as long as the Swarm cluster is configured to use the [overlay driver](/engine/userguide/networking/#an-overlay-network-with-docker-engine-swarm-mode),
       or a custom driver which supports multi-host networking.
 
 Read [Get started with multi-host networking](/engine/userguide/networking/get-started-overlay/) to see how to
@@ -82,15 +84,15 @@ all three services end up on the same node:
         image: foo
         volumes_from: ["bar"]
         network_mode: "service:baz"
-        labels:
+        environment:
           - "constraint:node==node-1"
       bar:
         image: bar
-        labels:
+        environment:
           - "constraint:node==node-1"
       baz:
         image: baz
-        labels:
+        environment:
           - "constraint:node==node-1"
 
 ### Host ports and recreating containers

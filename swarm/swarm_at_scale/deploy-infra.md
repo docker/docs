@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Try Swarm at scale
 keywords: docker, swarm, scale, voting, application, certificates
 redirect_from:
@@ -22,7 +24,7 @@ While this example uses Docker Machine, this is only one example of an
 infrastructure you can use. You can create the environment design on whatever
 infrastructure you wish. For example, you could place the application on another
 public cloud platform such as Azure or DigitalOcean, on premises in your data
-center, or even in in a test environment on your laptop.
+center, or even in a test environment on your laptop.
 
 Finally, these instructions use some common `bash` command substitution techniques to
 resolve some values, for example:

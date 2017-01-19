@@ -21,15 +21,15 @@ This topic also has more information about the two channels.
 
 A: Two different download channels are available for Docker for Windows:
 
-* The stable channel provides a general availability release-ready installer for a fully baked and tested, more reliable app. The stable version of Docker
+* The **stable channel** provides a general availability release-ready installer for a fully baked and tested, more reliable app. The stable version of Docker
 for Windows comes with the latest released version of Docker Engine.  The
-release schedule is synched with Docker Engine releases and hotfixes.
+release schedule is synched with Docker Engine releases and hotfixes.  On the stable channel, you can select whether to send usage statistics and other data.
 
-* The beta channel provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of
+* The **beta channel** provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of
 Docker Engine. Bugs, crashes and issues are more likely to occur with the beta
 app, but you get a chance to preview new functionality, experiment, and provide
 feedback as the apps evolve. Releases are typically more frequent than for
-stable, often one or more per month.
+stable, often one or more per month.  Usage statistics and crash reports are sent by default. You do not have the option to disable this on the beta channel.
 
 **Q: Can I switch back and forth between stable and beta versions of Docker for Windows?**
 
@@ -103,13 +103,13 @@ swarm mode](/engine/swarm/swarm-tutorial/index.md).
 
 ### How do I connect to the remote Docker Engine API?
 
-You might need to provide the location of the remote API for Docker clients and development tools.
+You might need to provide the location of the Engine API for Docker clients and development tools.
 
 On Docker for Windows, clients can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL: `http://localhost:2375`.
 
 This sets `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables to the given values (for the named pipe or TCP socket, whichever you use).
 
-See also [Docker Remote API](/engine/reference/api/docker_remote_api.md) and the Docker for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988).
+See also [Docker Engine API](/engine/reference/api/) and the Docker for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988).
 
 ### Why doesn't `nodemon` pick up file changes in a container mounted on a shared drive?
 
@@ -147,6 +147,21 @@ cycles. Exit and start Docker to restore connectivity.
 
 Unfortunately, VirtualBox (and other hypervisors like VMWare) cannot run when
 Hyper-V is enabled on Windows.
+
+### Can I share local drives and filesystem with my Docker Machine VMs?
+
+No, you cannot share local drives with Docker Machine nodes when using Docker
+for Windows with Hyper-V. Shared drives can be made available to containers, but
+Docker for Windows does not support mounts for nodes you created with
+`docker-machine`.
+
+For more about sharing local drives with containers using Docker for Windows,
+see [Shared Drives](index.md#shared-drives) in the Getting Started topic.
+
+To learn more about using Docker for Windows and Docker Machine, see [What to
+know before you install](index.md#what-to-know-before-you-install) in the
+Getting Started topic. For more about Docker Machine itself, see [What is Docker
+Machine?](/machine/overview.md#what-is-docker-machine)
 
 ### How do I run Windows containers on Docker on Windows Server 2016?
 

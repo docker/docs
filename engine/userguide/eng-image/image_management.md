@@ -31,7 +31,7 @@ different tagged versions. For example, the image `distribution/registry`, with
 tags `2.0` and `latest`. Users interact with a registry by using docker push and
 pull commands such as, `docker pull myregistry.com/stevvooe/batman:voice`.
 
-The Docker Hub has its own registry which, like the Hub itself, is run and managed by Docker. However, there are other ways to obtain a registry. You can purchase the [Docker Trusted Registry](/docker-trusted-registry) product to run on your company's network. Alternatively, you can use the Docker Registry component to build a private registry. For information about using a registry, see overview for the [Docker Registry](/registry).
+The Docker Hub has its own registry which, like the Hub itself, is run and managed by Docker. However, there are other ways to obtain a registry. You can purchase the [Docker Trusted Registry](/datacenter/dtr/2.1/guides/index.md) product to run on your company's network. Alternatively, you can use the Docker Registry component to build a private registry. For information about using a registry, see overview for the [Docker Registry](/registry).
 
 
 ## Content Trust

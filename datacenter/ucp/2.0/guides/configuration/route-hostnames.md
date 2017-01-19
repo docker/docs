@@ -1,8 +1,7 @@
 ---
-title: Enable container networking with UCP
 description: Docker Universal Control Plane
-keywords:
-- networking, kv, engine-discovery, ucp
+keywords: networking, kv, engine-discovery, ucp
+title: Enable container networking with UCP
 ---
 
 UCP provides an HTTP routing mesh, that extends the networking capabilities

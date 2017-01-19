@@ -1,9 +1,8 @@
 ---
-title: Integrate with LDAP
 description: Learn how to integrate UCP with an LDAP service, so that you can manage
   users from a single place.
-keywords:
-- LDAP, authentication, user management
+keywords: LDAP, authentication, user management
+title: Integrate with LDAP
 ---
 
 Docker UCP integrates with LDAP services, so that you can manage users from a
@@ -15,7 +14,7 @@ To configure UCP to authenticate users using an LDAP service, go to
 the **UCP web UI**, navigate to the **Settings** page, and click the **Auth**
 tab.
 
-![](../images/ldap-integration-1.png)
+![](../images/ldap-integration-1.png){: .with-border}
 
 Then configure your LDAP integration.
 
@@ -83,7 +82,6 @@ Once you've configure the LDAP integration, UCP synchronizes users based on the
 interval you've defined. When the synchronization runs, UCP stores logs that
 can help you troubleshoot when something goes wrong.
 
-![](../images/ldap-integration-2.png)
 
 You can also manually synchronize users by clicking the **Sync Now** button.
 

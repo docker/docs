@@ -21,7 +21,7 @@ each time its underlying services are updated.
 * [Redeploy running services](service-redeploy.md)
 * [Scale your service](service-scaling.md)
 * [Service API Roles](api-roles.md)
-* [Service discovery](service-links.md)
+* [Service discovery and links](service-links.md)
 * [Work with data volumes](volumes.md)
 * [Create a proxy or load balancer](load-balance-hello-world.md)
 

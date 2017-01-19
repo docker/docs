@@ -7,37 +7,40 @@ title: Swarm mode key concepts
 This topic introduces some of the concepts unique to the cluster management and
 orchestration features of Docker Engine 1.12.
 
-## Swarm
+## What is a swarm?
 
 The cluster management and orchestration features embedded in the Docker Engine
-are built using **SwarmKit**. Engines participating in a cluster are
-running in **swarm mode**. You enable swarm mode for the Engine by either
+are built using **SwarmKit**. Docker engines participating in a cluster are
+running in **swarm mode**. You enable swarm mode for an engine by either
 initializing a swarm or joining an existing swarm.
 
-A **swarm** is a cluster of Docker Engines where you deploy
-[services](key-concepts.md#Services-and-tasks). The Docker Engine CLI includes the commands for
-swarm management, such as adding and removing nodes. The CLI also includes the
-commands you need to deploy services to the swarm and manage service
-orchestration.
+A **swarm** is a cluster of Docker engines, or _nodes_, where you deploy
+[services](key-concepts.md#services-and-tasks). The Docker Engine CLI and API
+include commands to manage swarm nodes (e.g., add or remove nodes), and deploy
+and orchestrate services across the swarm.
 
-When you run Docker Engine outside of swarm mode, you execute container
-commands. When you run the Engine in swarm mode, you orchestrate services.
+When you run Docker without using swarm mode, you execute container
+commands. When you run the Docker in swarm mode, you orchestrate services. You can run swarm services and standalone containers on the same Docker instances.
 
-## Node
+## What is a node?
 
-A **node** is an instance of the Docker Engine participating in the swarm.
+A **node** is an instance of the Docker engine participating in the swarm. You can also think of this as a Docker node. You can run one or more nodes on a single physical computer or cloud server, but production swarm deployments typically include Docker nodes distributed across multiple physical and cloud machines.
 
 To deploy your application to a swarm, you submit a service definition to a
 **manager node**. The manager node dispatches units of work called
-[tasks](key-concepts.md#Services-and-tasks) to worker nodes.
+[tasks](#Services-and-tasks) to worker nodes.
 
 Manager nodes also perform the orchestration and cluster management functions
-required to maintain the desired state of the swarm. Manager nodes elect a single leader to conduct orchestration tasks.
+required to maintain the desired state of the swarm. Manager nodes elect a
+single leader to conduct orchestration tasks.
 
-**Worker nodes** receive and execute tasks dispatched from manager nodes. By
-default manager nodes are also worker nodes, but you can configure managers to
-be manager-only nodes. The agent notifies the manager node of the current
-state of its assigned tasks so the manager can maintain the desired state.
+**Worker nodes** receive and execute tasks dispatched from manager nodes.
+By default manager nodes also run services as worker nodes, but you can
+configure them to run manager tasks exclusively and be manager-only
+nodes. An agent runs on each worker node and reports on the tasks assigned to
+it. The worker node notifies the manager node of the current state of its
+assigned tasks so that the manager can maintain the desired state of each
+worker.
 
 ## Services and tasks
 

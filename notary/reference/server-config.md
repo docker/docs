@@ -1,7 +1,6 @@
 ---
 description: Configuring the notary client, server and signer.
-keywords:
-- docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer
+keywords: docker, notary, notary-client, notary-server, notary server, notary-signer, notary signer
 title: Notary server configuration file
 ---
 
@@ -236,7 +235,7 @@ DB storage example:
 		<td valign="top">yes if not <code>memory</code></td>
 		<td valign="top">The <a href="https://github.com/go-sql-driver/mysql">
 			the Data Source Name used to access the DB.</a>
-			(note: please include <code>parseTime=true</code> as part of the the DSN)</td>
+			(note: please include <code>parseTime=true</code> as part of the DSN)</td>
 	</tr>
 </table>
 

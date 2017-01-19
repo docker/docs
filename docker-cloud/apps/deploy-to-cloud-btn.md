@@ -7,7 +7,12 @@ redirect_from:
 title: Add a "Deploy to Docker Cloud" button
 ---
 
-The **Deploy to Docker Cloud** button allows developers to deploy stacks with one click in Docker Cloud. The button is intended to be added to `README.md` files in public GitHub repositories, although it can be used anywhere else.
+The **Deploy to Docker Cloud** button allows developers to deploy stacks with
+one click in Docker Cloud as long as they are logged in. The button is intended
+to be added to `README.md` files in public GitHub repositories, although it can
+be used anywhere else.
+
+> **Note**: You must be _logged in_ to Docker Cloud for the button to work correctly. If you are not logged in, you'll see a 404 error instead.
 
 This is an example button to deploy our <a href="https://github.com/docker/dockercloud-quickstart-python" target="_blank">python quickstart</a>:
 
@@ -20,6 +25,7 @@ The button redirects the user to the **Launch new Stack** wizard, with the stack
 * `fig.yml`
 
 The user can still modify the stack definition before deployment.
+
 
 
 ## Adding the 'Deploy to Docker Cloud' button in GitHub

@@ -45,19 +45,74 @@ more, see the [organizations and teams documentation](../orgs.md#set-team-permis
 
 ## Edit an existing repository in Docker Cloud
 
-You can edit your repositories in Docker Cloud to change the description and
-build configuration.
+You can edit repositories in Docker Cloud to change the description and build configuration.
 
-From the General page, you can edit the repository's short description, or click to edit the version of the ReadMe displayed on the repository page.
+From the **General** page, you can edit the repository's short description, or click to edit the version of the ReadMe displayed on the repository page.
 
 > **Note**: Edits to the Docker Cloud **ReadMe** are not reflected in the source code linked to a repository.
 
-To run a build, or to set up or change automated build settings, click the Builds tab, and click **Configure Automated Builds**. See the documentation on [configuring automated build settings](automated-build.md#configure-automated-build-settings) for more
+To run a build, or to set up or change automated build settings, click the **Builds** tab, and click **Configure Automated Builds**. See the documentation on [configuring automated build settings](automated-build.md#configure-automated-build-settings) for more
 information.
+
+## Change repository privacy settings
+
+Repositories in Docker Cloud can be either public or private. Public
+repositories are visible from the Docker Store's Community Content section, and
+can also be searched for from Docker Cloud's **Create Service** wizard. Private
+repositories are only visible to the user account that created it (unless it
+belongs to an Organization, see below).
+
+> **Note**: These _privacy_ settings are separate from the [repository _access_ permissions](../orgs.md#change-team-permissions-for-an-individual-repository) available for repositories shared among members of an [organization](../orgs.md).
+
+If a private repository belongs to an [Organization](../orgs.md), members of the
+`Owners` team configure access. Only members of the `Owners` team can change an
+organization's repository privacy settings.
+
+Each Docker Cloud account comes with one free private repository. Additional
+private repositories are available for subscribers on paid plans.
+
+To change a repository's privacy settings:
+
+1. Navigate to the repository in Docker Cloud.
+2. Click the **Settings** tab.
+3. Click the **Make public** or **Make private** button.
+4. In the dialog that appears, enter the name of the repository to confirm the change.
+5. Click the button to save the change.
+
+## Delete a repository
+
+When you delete a repository in Docker Cloud, all of the images in that
+repository are also deleted.
+
+If automated builds are configured for the repository, the build rules and
+settings are deleted along with any Docker Security Scan results. However, this
+does not affect the code in the linked source code repository, and does not
+remove the source code provider link.
+
+If you are running a service from deleted repository , the service will continue
+to run, but cannot be scaled up or redeployed. If any builds use the Docker
+`FROM` directive and reference a deleted repository, those builds will fail.
+
+To delete a repository:
+
+1. Navigate to the repository, and click the **Settings** tab.
+2. Click **Delete**.
+3. Enter the name of the repository to confirm deletion, and click **Delete**.
+
+External (third-party) repositories cannot be deleted from within Docker Cloud,
+however you can remove a link to them using the same process for a repository in
+Docker Cloud. The link is removed, but images in the external repository are not
+deleted.
+
+> **Note**: If the repository to be deleted or removed belongs to an [Organization](../orgs.md), only members of the `Owners` team can delete it.
+
 
 ## Link to a repository from a third party registry
 
-You can link to repositories hosted on a third party registry. This allows you to deploy images from the third party registry to your nodes in Docker Cloud, and also allows you to enable automated builds which push built images back to the registry.
+You can link to repositories hosted on a third party registry. This allows you
+to deploy images from the third party registry to nodes in Docker Cloud, and
+also allows you to enable automated builds which push built images back to the
+registry.
 
 > **Note**: To link to a repository that you want to share with an organization, contact a member of the organization's `Owners` team. Only the Owners team can import new external registry repositories for an organization.
 

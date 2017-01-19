@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Swarm API
 keywords: docker, swarm, clustering,  api
 redirect_from:
@@ -10,7 +12,7 @@ title: Docker Swarm API
 The Docker Swarm API is mostly compatible with the [Docker Remote
 API](/engine/reference/api/docker_remote_api/). This
 document is an overview of the differences between the Swarm API and the Docker
-Remote API.
+Engine API.
 
 ## Missing endpoints
 
@@ -48,7 +50,7 @@ POST "/images/create" : "docker import" flow not implement
             <code>GET "/containers/{name:.*}/json"</code>
         </td>
         <td>
-            <code>HostIP</code> replaced by the the actual Node's IP if <code>HostIP</code> is <code>0.0.0.0</code>
+            <code>HostIP</code> replaced by the actual Node's IP if <code>HostIP</code> is <code>0.0.0.0</code>
         </td>
     </tr>
     <tr>
@@ -64,7 +66,7 @@ POST "/images/create" : "docker import" flow not implement
             <code>GET "/containers/json"</code>
         </td>
         <td>
-            <code>HostIP</code> replaced by the the actual Node's IP if <code>HostIP</code> is <code>0.0.0.0</code>
+            <code>HostIP</code> replaced by the actual Node's IP if <code>HostIP</code> is <code>0.0.0.0</code>
         </td>
     </tr>
     <tr>

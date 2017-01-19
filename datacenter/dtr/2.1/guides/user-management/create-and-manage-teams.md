@@ -1,9 +1,8 @@
 ---
-title: Create and manage teams
 description: Learn how to manage teams to enforce fine-grain access control in Docker
   Trusted Registry.
-keywords:
-- docker, registry, security, permissions, teams
+keywords: docker, registry, security, permissions, teams
+title: Create and manage teams
 ---
 
 You can extend the user's default permissions by granting them fine-grain
@@ -13,7 +12,7 @@ A team defines the permissions a set of users have for a set of repositories.
 To create a new team, go to the **DTR web UI**, and navigate to the
 **Organizations** page.
 Then **click the organization** where you want to create the team. In this
-example, we'll create the 'billing' team team under the 'whale' organization.
+example, we'll create the 'billing' team under the 'whale' organization.
 
 ![](../images/create-and-manage-teams-1.png)
 

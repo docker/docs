@@ -1,8 +1,7 @@
 ---
-title: License Docker Trusted Registry
 description: Learn how to license your Docker Trusted Registry installation.
-keywords:
-- docker, dtr, install, license
+keywords: docker, dtr, install, license
+title: License Docker Trusted Registry
 ---
 
 By default, you don't need to license your Docker Trusted Registry. When

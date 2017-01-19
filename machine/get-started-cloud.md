@@ -40,19 +40,19 @@ The `docker-machine create` command typically requires that you specify, at a mi
 
 For convenience, `docker-machine` will use sensible defaults for choosing settings such as the image that the server is based on, but you override the defaults using the respective flags (e.g. `--digitalocean-image`). This is useful if, for example, you want to create a cloud server with a lot of memory and CPUs (by default `docker-machine` creates a small server).
 
-For a full list of the flags/settings available and their defaults, see the output of `docker-machine create -h` at the command line, the <a href="../reference/create/" target="_blank">create</a> command in the Machine <a href="../reference/" target="_blank">command line reference</a>, and <a href="https://docs.docker.com/machine/drivers/os-base/" target="_blank">driver options and operating system defaults</a> in the Machine driver reference.
+For a full list of the flags/settings available and their defaults, see the output of `docker-machine create -h` at the command line, the <a href="../machine/reference/create/" target="_blank">create</a> command in the Machine <a href="../machine/reference/" target="_blank">command line reference</a>, and <a href="/machine/drivers/os-base/" target="_blank">driver options and operating system defaults</a> in the Machine driver reference.
 
 ## Drivers for cloud providers
 
 When you install Docker Machine, you get a set of drivers for various cloud providers (like Amazon Web Services, Digital Ocean, or Microsoft Azure) and local providers (like Oracle VirtualBox, VMWare Fusion, or Microsoft Hyper-V).
 
-See <a href="../drivers/" target="_blank">Docker Machine driver reference</a> for details on the drivers, including required flags and configuration options (which vary by provider).
+See <a href="../machine/drivers/" target="_blank">Docker Machine driver reference</a> for details on the drivers, including required flags and configuration options (which vary by provider).
 
 ## 3rd-party driver plugins
 
   Several Docker Machine driver plugins for use with other cloud platforms are available from 3rd party contributors. These are use-at-your-own-risk plugins, not maintained by or formally associated with Docker.
 
-  See <a href="https://github.com/docker/machine/blob/master/docs/AVAILABLE_DRIVER_PLUGINS.md" target="_blank">Available driver plugins</a> in the docker/machine repo on GitHub.
+  See <a href="https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md" target="_blank">Available driver plugins</a>.
 
 ## Adding a host without a driver
 
@@ -65,11 +65,11 @@ You can add a host to Docker which only has a URL and no driver. Then you can us
 
 ## Using Machine to provision Docker Swarm clusters
 
-Docker Machine can also provision <a href="https://docs.docker.com/swarm/overview/" target="_blank">Docker Swarm</a> clusters. This can be used with any driver and will be secured with TLS.
+Docker Machine can also provision <a href="/swarm/overview/" target="_blank">Docker Swarm</a> clusters. This can be used with any driver and will be secured with TLS.
 
-* To get started with Swarm, see <a href="https://docs.docker.com/swarm/get-swarm/" target="_blank">How to get Docker Swarm</a>.
+* To get started with Swarm, see <a href="/swarm/get-swarm/" target="_blank">How to get Docker Swarm</a>.
 
-* To learn how to use Machine to provision a Swarm cluster, see <a href="https://docs.docker.com/swarm/provision-with-machine/" target="_blank">Provision a Swarm cluster with Docker Machine</a>.
+* To learn how to use Machine to provision a Swarm cluster, see <a href="/swarm/provision-with-machine/" target="_blank">Provision a Swarm cluster with Docker Machine</a>.
 
 ## Where to go next
 -   Example: Provision Dockerized [Digital Ocean Droplets](examples/ocean.md)

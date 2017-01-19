@@ -1,34 +1,16 @@
 ---
-redirect_from:
-  - /reference/commandline/service_inspect/
-description: The service inspect command description and usage
-keywords:
-- service, inspect
+datafolder: engine-cli
+datafile: docker_service_inspect
 title: docker service inspect
 ---
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-**Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
-
-```Markdown
-Usage:  docker service inspect [OPTIONS] SERVICE [SERVICE...]
-
-Display detailed information on one or more services
-
-Options:
-  -f, --format string   Format the output using the given go template
-      --help            Print usage
-      --pretty          Print the information in a human friendly format.
-```
-
-
-Inspects the specified service. This command has to be run targeting a manager
-node.
-
-By default, this renders all results in a JSON array. If a format is specified,
-the given template will be executed for each result.
-
-Go's [text/template](http://golang.org/pkg/text/template/) package
-describes all the details of the format.
+https://www.github.com/docker/docker
+-->
+{% include cli.md %}
 
 ## Examples
 
@@ -40,8 +22,8 @@ For example, given the following service;
 
 ```bash
 $ docker service ls
-ID            NAME      REPLICAS  IMAGE         COMMAND
-dmu1ept4cxcf  redis     3/3       redis:3.0.6
+ID            NAME   MODE        REPLICAS  IMAGE
+dmu1ept4cxcf  redis  replicated  3/3       redis:3.0.6
 ```
 
 Both `docker service inspect redis`, and `docker service inspect dmu1ept4cxcf`
@@ -114,7 +96,7 @@ ID:		c8wgl7q4ndfd52ni6qftkvnnp
 Name:		frontend
 Labels:
  - org.example.projectname=demo-app
-Mode:		REPLICATED
+Service Mode:	REPLICATED
  Replicas:		5
 Placement:
 UpdateConfig:
@@ -122,12 +104,15 @@ UpdateConfig:
 ContainerSpec:
  Image:		nginx:alpine
 Resources:
+Endpoint Mode:  vip
 Ports:
  Name =
  Protocol = tcp
  TargetPort = 443
  PublishedPort = 4443
 ```
+
+You can also use `--format pretty` for the same effect.
 
 
 ### Finding the number of tasks running as part of a service
@@ -136,17 +121,9 @@ The `--format` option can be used to obtain specific information about a
 service. For example, the following command outputs the number of replicas
 of the "redis" service.
 
-```bash{% raw %}
+```bash
+{% raw %}
 $ docker service inspect --format='{{.Spec.Mode.Replicated.Replicas}}' redis
 10
-{% endraw %}```
-
-
-## Related information
-
-* [service create](service_create.md)
-* [service ls](service_ls.md)
-* [service rm](service_rm.md)
-* [service scale](service_scale.md)
-* [service ps](service_ps.md)
-* [service update](service_update.md)
+{% endraw %}
+```

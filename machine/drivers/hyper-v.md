@@ -48,7 +48,7 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 | `--hyperv-memory`            | `HYPERV_MEMORY`            | `1024`                   |
 | `--hyperv-cpu-count`         | `HYPERV_CPU_COUNT`         | `1`                      |
 | `--hyperv-static-macaddress` | `HYPERV_STATIC_MACADDRESS` | _undefined_              |
-| `--hyperv-cpu-count`         | `HYPERV_VLAN_ID`           | _undefined_              |
+| `--hyperv-vlan-id`           | `HYPERV_VLAN_ID`           | _undefined_              |
 
 ## Example
 

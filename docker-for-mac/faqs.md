@@ -21,9 +21,9 @@ This topic also has more information about the two channels.
 
 A: Two different download channels are available for Docker for Mac:
 
-* The stable channel provides a general availability release-ready installer for a fully baked and tested, more reliable app. The stable version of Docker for Mac comes with the latest released version of Docker Engine. The release schedule is synched with Docker Engine releases and hotfixes.
+* The **stable channel** provides a general availability release-ready installer for a fully baked and tested, more reliable app. The stable version of Docker for Mac comes with the latest released version of Docker Engine. The release schedule is synched with Docker Engine releases and hotfixes. On the stable channel, you can select whether to send usage statistics and other data.
 
-* The beta channel provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of Docker Engine. Bugs, crashes and issues are more likely to occur with the beta app, but you get a chance to preview new functionality, experiment, and provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month.
+* The **beta channel** provides an installer with new features we are working on, but is not necessarily fully tested. It comes with the experimental version of Docker Engine. Bugs, crashes and issues are more likely to occur with the beta app, but you get a chance to preview new functionality, experiment, and provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month. Usage statistics and crash reports are sent by default. You do not have the option to disable this on the beta channel.
 
 **Q: Can I switch back and forth between stable and beta versions of Docker for Mac?**
 
@@ -84,11 +84,11 @@ experiment a multi-node swarm. Check out the tutorial at [Get started with swarm
 
 ### How do I connect to the remote Docker Engine API?
 
-You might need to provide the location of the remote API for Docker clients and development tools.
+You might need to provide the location of the Engine API for Docker clients and development tools.
 
 On Docker for Mac, clients can connect to the Docker Engine through a Unix socket: `unix:///var/run/docker.sock`.
 
-See also [Docker Remote API](/engine/reference/api/docker_remote_api.md) and Docker for Mac forums topic [Using pycharm Docker plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617).
+See also [Docker Engine API](/engine/reference/api/docker_remote_api.md) and Docker for Mac forums topic [Using pycharm Docker plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617).
 
 If you are working with applications like [Apache Maven](https://maven.apache.org/) that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables, specify these to connect to Docker instances through Unix sockets. For example:
 
@@ -117,9 +117,61 @@ Networking topic.
 
 ### How do I add custom CA certificates?
 
-Starting with Docker for Mac Beta 27 Release Notes (2016-09-28 1.12.2-rc1-beta27) and follow-on Beta releases, all trusted certificate authorities (CAs) (root or intermediate) are supported. (**Note:** Custom CA certificates are not yet supported on stable releases.)
+Starting with Docker for Mac Beta 27 and Stable 1.12.3, all trusted certificate authorities (CAs) (root or intermediate) are supported.
 
-Docker for Mac creates a certificate bundle of all user-trusted CAs based on the Mac Keychain, and appends it to Moby trusted certificates. So if an enterprise SSL certificate is trusted by the user on the host, it will be trusted by Docker for Mac.
+Docker for Mac creates a certificate bundle of all user-trusted CAs based on the
+Mac Keychain, and appends it to Moby trusted certificates. So if an enterprise
+SSL certificate is trusted by the user on the host, it will be trusted by Docker
+for Mac.
+
+To manually add a custom, self-signed certificate, start by adding
+the certificate to the Mac’s keychain, which will be picked up by Docker for
+Mac. Here is an example.
+
+```
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
+```
+
+For a complete explanation of how to do this, see the blog post [Adding Self-signed Registry Certs
+to Docker & Docker for
+Mac](http://container-solutions.com/adding-self-signed-registry-certs-docker-mac/).
+
+### How do I reduce the size of Docker.qcow2?
+
+By default Docker for Mac stores containers and images in a file
+`~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2`.
+This file grows on-demand up to a default maximum file size of 64GiB.
+
+In Docker 1.12 the only way to free space on the host is to delete
+this file and restart the app. Unfortunately this removes all images
+and containers.
+
+In Docker 1.13 there is preliminary support for "TRIM" to non-destructively
+free space on the host. First free space within the `Docker.qcow2` by
+removing unneeded containers and images with the following commands:
+
+- `docker ps -a`: list all containers
+- `docker image ls`: list all images
+- `docker system prune`: (new in 1.13): deletes all stopped containers, all
+  volumes not used by at least one container and all images without at least one
+  referring container.
+
+Note the `Docker.qcow2` will not shrink in size immediately.
+In 1.13 a background `cron` job runs `fstrim` every 15 minutes.
+If the space needs to be reclaimed sooner, run this command:
+
+```
+docker run --rm -it --privileged --pid=host walkerlee/nsenter -t 1 -m -u -i -n fstrim /var
+```
+
+Once the `fstrim` has completed, restart the app. When the app shuts down, it
+will compact the file and free up space. The app will
+take longer than usual to restart because it must wait for the
+compaction to complete.
+
+For background conversation thread on this, see [Docker.qcow2 never shrinks
+..](https://github.com/docker/for-mac/issues/371) on Docker for Mac GitHub
+issues.
 
 ### What are system requirements for Docker for Mac?
 

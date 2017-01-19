@@ -9,7 +9,7 @@ title: Install on Raspbian
 Docker is supported on the following versions of Raspbian:
 
  - *Raspbian Jessie*
- 
+
  >**Note**: If you previously installed Docker using `APT`, make sure you update
  your `APT` sources to the new `APT` repository.
 
@@ -85,7 +85,7 @@ Before installing Docker, make sure you have set your `APT` repository correctly
 
 4. Verify `docker` is installed correctly.
 
-        $ sudo docker run hello-world
+        $ sudo docker run armhf/hello-world
 
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message. Then, it exits.
@@ -148,6 +148,6 @@ and volumes run the following command:
 
 You must delete the user created configuration files manually.
 
-## What next?
+## Next steps
 
 Continue with the [User Guide](../../userguide/index.md).

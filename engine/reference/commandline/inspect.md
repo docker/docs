@@ -1,93 +1,312 @@
 ---
-redirect_from:
-  - /reference/commandline/inspect/
-description: The inspect command description and usage
-keywords:
-- inspect, container, json
+datafolder: engine-cli
+datafile: docker_inspect
 title: docker inspect
 ---
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-```markdown
-Usage:  docker inspect [OPTIONS] CONTAINER|IMAGE|TASK [CONTAINER|IMAGE|TASK...]
-
-Return low-level information on a container, image or task
-
-  -f, --format       Format the output using the given go template
-  --help             Print usage
-  -s, --size         Display total file sizes if the type is container
-                     values are "image" or "container" or "task
-  --type             Return JSON for specified type, (e.g image, container or task)
-```
-
-By default, this will render all results in a JSON array. If the container and
-image have the same name, this will return container JSON for unspecified type.
-If a format is specified, the given template will be executed for each result.
-
-Go's [text/template](http://golang.org/pkg/text/template/) package
-describes all the details of the format.
+https://www.github.com/docker/docker
+-->
+{% include cli.md %}
 
 ## Examples
 
-**Get an instance's IP address:**
+Get information about an image when image name conflicts with the container name,
+e.g. both image and container are named rhel7:
 
-For the most part, you can pick out any field from the JSON in a fairly
-straightforward manner.
+    $ docker inspect --type=image rhel7
+    [
+    {
+     "Id": "fe01a428b9d9de35d29531e9994157978e8c48fa693e1bf1d221dffbbb67b170",
+     "Parent": "10acc31def5d6f249b548e01e8ffbaccfd61af0240c17315a7ad393d022c5ca2",
+     ....
+    }
+    ]
 
-    {% raw %}
-    $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $INSTANCE_ID
-    {% endraw %}
+### Getting information on a container
 
-**Get an instance's MAC address:**
+To get information on a container use its ID or instance name:
 
-For the most part, you can pick out any field from the JSON in a fairly
-straightforward manner.
+    $ docker inspect d2cc496561d6
+    [{
+    "Id": "d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47",
+    "Created": "2015-06-08T16:18:02.505155285Z",
+    "Path": "bash",
+    "Args": [],
+    "State": {
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2015-06-08T16:18:03.643865954Z",
+        "FinishedAt": "2015-06-08T16:57:06.448552862Z"
+    },
+    "Image": "ded7cd95e059788f2586a51c275a4f151653779d6a7f4dad77c2bd34601d94e4",
+    "NetworkSettings": {
+        "Bridge": "",
+        "SandboxID": "6b4851d1903e16dd6a567bd526553a86664361f31036eaaa2f8454d6f4611f6f",
+        "HairpinMode": false,
+        "LinkLocalIPv6Address": "",
+        "LinkLocalIPv6PrefixLen": 0,
+        "Ports": {},
+        "SandboxKey": "/var/run/docker/netns/6b4851d1903e",
+        "SecondaryIPAddresses": null,
+        "SecondaryIPv6Addresses": null,
+        "EndpointID": "7587b82f0dada3656fda26588aee72630c6fab1536d36e394b2bfbcf898c971d",
+        "Gateway": "172.17.0.1",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "IPAddress": "172.17.0.2",
+        "IPPrefixLen": 16,
+        "IPv6Gateway": "",
+        "MacAddress": "02:42:ac:12:00:02",
+        "Networks": {
+            "bridge": {
+                "NetworkID": "7ea29fc1412292a2d7bba362f9253545fecdfa8ce9a6e37dd10ba8bee7129812",
+                "EndpointID": "7587b82f0dada3656fda26588aee72630c6fab1536d36e394b2bfbcf898c971d",
+                "Gateway": "172.17.0.1",
+                "IPAddress": "172.17.0.2",
+                "IPPrefixLen": 16,
+                "IPv6Gateway": "",
+                "GlobalIPv6Address": "",
+                "GlobalIPv6PrefixLen": 0,
+                "MacAddress": "02:42:ac:12:00:02"
+            }
+        }
 
-    {% raw %}
-    $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}' $INSTANCE_ID
-    {% endraw %}
+    },
+    "ResolvConfPath": "/var/lib/docker/containers/d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47/resolv.conf",
+    "HostnamePath": "/var/lib/docker/containers/d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47/hostname",
+    "HostsPath": "/var/lib/docker/containers/d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47/hosts",
+    "LogPath": "/var/lib/docker/containers/d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47/d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47-json.log",
+    "Name": "/adoring_wozniak",
+    "RestartCount": 0,
+    "Driver": "devicemapper",
+    "MountLabel": "",
+    "ProcessLabel": "",
+    "Mounts": [
+      {
+        "Source": "/data",
+        "Destination": "/data",
+        "Mode": "ro,Z",
+        "RW": false
+	"Propagation": ""
+      }
+    ],
+    "AppArmorProfile": "",
+    "ExecIDs": null,
+    "HostConfig": {
+        "Binds": null,
+        "ContainerIDFile": "",
+        "Memory": 0,
+        "MemorySwap": 0,
+        "CpuShares": 0,
+        "CpuPeriod": 0,
+        "CpusetCpus": "",
+        "CpusetMems": "",
+        "CpuQuota": 0,
+        "BlkioWeight": 0,
+        "OomKillDisable": false,
+        "Privileged": false,
+        "PortBindings": {},
+        "Links": null,
+        "PublishAllPorts": false,
+        "Dns": null,
+        "DnsSearch": null,
+        "DnsOptions": null,
+        "ExtraHosts": null,
+        "VolumesFrom": null,
+        "Devices": [],
+        "NetworkMode": "bridge",
+        "IpcMode": "",
+        "PidMode": "",
+        "UTSMode": "",
+        "CapAdd": null,
+        "CapDrop": null,
+        "RestartPolicy": {
+            "Name": "no",
+            "MaximumRetryCount": 0
+        },
+        "SecurityOpt": null,
+        "ReadonlyRootfs": false,
+        "Ulimits": null,
+        "LogConfig": {
+            "Type": "json-file",
+            "Config": {}
+        },
+        "CgroupParent": ""
+    },
+    "GraphDriver": {
+        "Name": "devicemapper",
+        "Data": {
+            "DeviceId": "5",
+            "DeviceName": "docker-253:1-2763198-d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47",
+            "DeviceSize": "171798691840"
+        }
+    },
+    "Config": {
+        "Hostname": "d2cc496561d6",
+        "Domainname": "",
+        "User": "",
+        "AttachStdin": true,
+        "AttachStdout": true,
+        "AttachStderr": true,
+        "ExposedPorts": null,
+        "Tty": true,
+        "OpenStdin": true,
+        "StdinOnce": true,
+        "Env": null,
+        "Cmd": [
+            "bash"
+        ],
+        "Image": "fedora",
+        "Volumes": null,
+        "VolumeDriver": "",
+        "WorkingDir": "",
+        "Entrypoint": null,
+        "NetworkDisabled": false,
+        "MacAddress": "",
+        "OnBuild": null,
+        "Labels": {},
+        "Memory": 0,
+        "MemorySwap": 0,
+        "CpuShares": 0,
+        "Cpuset": "",
+        "StopSignal": "SIGTERM"
+    }
+    }
+    ]
+### Getting the IP address of a container instance
 
-**Get an instance's log path:**
+To get the IP address of a container use:
 
-    {% raw %}
-    $ docker inspect --format='{{.LogPath}}' $INSTANCE_ID
-    {% endraw %}
+```bash
+{% raw %}
+$ docker inspect \
+  --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
+  d2cc496561d6
 
-**Get a Task's image name:**
+172.17.0.2
+{% endraw %}
+```
 
-    {% raw %}
-    $ docker inspect --format='{{.Container.Spec.Image}}' $INSTANCE_ID
-    {% endraw %}
-
-**List all port bindings:**
+### Listing all port bindings
 
 One can loop over arrays and maps in the results to produce simple text
 output:
 
-    {% raw %}
-    $ docker inspect --format='{{range $p, $conf := .NetworkSettings.Ports}} {{$p}} -> {{(index $conf 0).HostPort}} {{end}}' $INSTANCE_ID
-    {% endraw %}
+```bash
+{% raw %}
+$ docker inspect \
+  --format='{{range $p, $conf := .NetworkSettings.Ports}} \
+  {{$p}} -> {{(index $conf 0).HostPort}} {{end}}' \
+  d2cc496561d6
 
-**Find a specific port mapping:**
+  80/tcp -> 80
+{% endraw %}
+```
 
-The `.Field` syntax doesn't work when the field name begins with a
-number, but the template language's `index` function does. The
-`.NetworkSettings.Ports` section contains a map of the internal port
-mappings to a list of external address/port objects. To grab just the
-numeric public port, you use `index` to find the specific port map, and
-then `index` 0 contains the first object inside of that. Then we ask for
-the `HostPort` field to get the public address.
+You can get more information about how to write a Go template from:
+https://golang.org/pkg/text/template/.
 
-    {% raw %}
-    $ docker inspect --format='{{(index (index .NetworkSettings.Ports "8787/tcp") 0).HostPort}}' $INSTANCE_ID
-    {% endraw %}
+### Getting size information on a container
 
-**Get a subsection in JSON format:**
+```bash
+$ docker inspect -s d2cc496561d6
 
-If you request a field which is itself a structure containing other
-fields, by default you get a Go-style dump of the inner values.
-Docker adds a template function, `json`, which can be applied to get
-results in JSON format.
+[
+{
+....
+"SizeRw": 0,
+"SizeRootFs": 972,
+....
+}
+]
+```
+### Getting information on an image
 
-    {% raw %}
-    $ docker inspect --format='{{json .Config}}' $INSTANCE_ID
-    {% endraw %}
+Use an image's ID or name (e.g., repository/name[:tag]) to get information
+about the image:
+
+```bash
+$ docker inspect ded7cd95e059
+
+[{
+"Id": "ded7cd95e059788f2586a51c275a4f151653779d6a7f4dad77c2bd34601d94e4",
+"Parent": "48ecf305d2cf7046c1f5f8fcbcd4994403173441d4a7f125b1bb0ceead9de731",
+"Comment": "",
+"Created": "2015-05-27T16:58:22.937503085Z",
+"Container": "76cf7f67d83a7a047454b33007d03e32a8f474ad332c3a03c94537edd22b312b",
+"ContainerConfig": {
+    "Hostname": "76cf7f67d83a",
+    "Domainname": "",
+    "User": "",
+    "AttachStdin": false,
+    "AttachStdout": false,
+    "AttachStderr": false,
+    "ExposedPorts": null,
+    "Tty": false,
+    "OpenStdin": false,
+    "StdinOnce": false,
+    "Env": null,
+    "Cmd": [
+        "/bin/sh",
+        "-c",
+        "#(nop) ADD file:4be46382bcf2b095fcb9fe8334206b584eff60bb3fad8178cbd97697fcb2ea83 in /"
+    ],
+    "Image": "48ecf305d2cf7046c1f5f8fcbcd4994403173441d4a7f125b1bb0ceead9de731",
+    "Volumes": null,
+    "VolumeDriver": "",
+    "WorkingDir": "",
+    "Entrypoint": null,
+    "NetworkDisabled": false,
+    "MacAddress": "",
+    "OnBuild": null,
+    "Labels": {}
+},
+"DockerVersion": "1.6.0",
+"Author": "Lokesh Mandvekar \u003clsm5@fedoraproject.org\u003e",
+"Config": {
+    "Hostname": "76cf7f67d83a",
+    "Domainname": "",
+    "User": "",
+    "AttachStdin": false,
+    "AttachStdout": false,
+    "AttachStderr": false,
+    "ExposedPorts": null,
+    "Tty": false,
+    "OpenStdin": false,
+    "StdinOnce": false,
+    "Env": null,
+    "Cmd": null,
+    "Image": "48ecf305d2cf7046c1f5f8fcbcd4994403173441d4a7f125b1bb0ceead9de731",
+    "Volumes": null,
+    "VolumeDriver": "",
+    "WorkingDir": "",
+    "Entrypoint": null,
+    "NetworkDisabled": false,
+    "MacAddress": "",
+    "OnBuild": null,
+    "Labels": {}
+},
+"Architecture": "amd64",
+"Os": "linux",
+"Size": 186507296,
+"VirtualSize": 186507296,
+"GraphDriver": {
+    "Name": "devicemapper",
+    "Data": {
+        "DeviceId": "3",
+        "DeviceName": "docker-253:1-2763198-ded7cd95e059788f2586a51c275a4f151653779d6a7f4dad77c2bd34601d94e4",
+        "DeviceSize": "171798691840"
+    }
+}
+}]
+```

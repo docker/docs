@@ -11,7 +11,7 @@ is not a requirement to deploy a service.
 1. Open a terminal and ssh into the machine where you run your manager node. For
 example, the tutorial uses a machine named `manager1`.
 
-2.  Run the the following command:
+2.  Run the following command:
 
     ```bash
     $ docker service create --replicas 1 --name helloworld alpine ping docker.com
@@ -25,7 +25,7 @@ example, the tutorial uses a machine named `manager1`.
     * The arguments `alpine ping docker.com` define the service as an Alpine
     Linux container that executes the command `ping docker.com`.
 
-3.  Run `docker service ls` to see the list of running services:
+3. Run `docker service ls` to see the list of running services:
 
     ```
     $ docker service ls

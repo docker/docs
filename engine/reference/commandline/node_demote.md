@@ -1,29 +1,13 @@
 ---
-redirect_from:
-  - /reference/commandline/node_demote/
-description: The node demote command description and usage
-keywords:
-- node, demote
+datafolder: engine-cli
+datafile: docker_node_demote
 title: docker node demote
 ---
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-```markdown
-Usage:  docker node demote NODE [NODE...]
-
-Demote one or more nodes from manager in the swarm
-
-Options:
-      --help   Print usage
-
-```
-
-Demotes an existing manager so that it is no longer a manager. This command targets a docker engine that is a manager in the swarm.
-
-
-```bash
-$ docker node demote <node name>
-```
-
-## Related information
-
-* [node promote](node_promote.md)
+https://www.github.com/docker/docker
+-->
+{% include cli.md %}

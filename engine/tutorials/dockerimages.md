@@ -256,7 +256,6 @@ building your own Sinatra image for your fictitious development team.
 
     # This is a comment
     FROM ubuntu:14.04
-    MAINTAINER Kate Smith <ksmith@example.com>
     RUN apt-get update && apt-get install -y ruby ruby-dev
     RUN gem install sinatra
 
@@ -268,7 +267,7 @@ is capitalized.
 > **Note:** You use `#` to indicate a comment
 
 The first instruction `FROM` tells Docker what the source of our image is, in
-this case you're basing our new image on an Ubuntu 14.04 image. The instruction uses the `MAINTAINER` instruction to specify who maintains the new image.
+this case you're basing our new image on an Ubuntu 14.04 image.
 
 Lastly, you've specified two `RUN` instructions. A `RUN` instruction executes
 a command inside the image, for example installing a package. Here you're
@@ -285,10 +284,7 @@ Now let's take our `Dockerfile` and use the `docker build` command to build an i
     Sending build context to Docker daemon
     Step 1 : FROM ubuntu:14.04
      ---> e54ca5efa2e9
-    Step 2 : MAINTAINER Kate Smith <ksmith@example.com>
-     ---> Using cache
-     ---> 851baf55332b
-    Step 3 : RUN apt-get update && apt-get install -y ruby ruby-dev
+    Step 2 : RUN apt-get update && apt-get install -y ruby ruby-dev
      ---> Running in 3a2558904e9b
     Selecting previously unselected package libasan0:amd64.
     (Reading database ... 11518 files and directories currently installed.)
@@ -423,7 +419,7 @@ Now let's take our `Dockerfile` and use the `docker build` command to build an i
     Running hooks in /etc/ca-certificates/update.d....done.
      ---> c55c31703134
     Removing intermediate container 3a2558904e9b
-    Step 4 : RUN gem install sinatra
+    Step 3 : RUN gem install sinatra
      ---> Running in 6b81cb6313e5
     unable to convert "\xC3" to UTF-8 in conversion from ASCII-8BIT to UTF-8 to US-ASCII for README.rdoc, skipping
     unable to convert "\xC3" to UTF-8 in conversion from ASCII-8BIT to UTF-8 to US-ASCII for README.rdoc, skipping
@@ -464,7 +460,7 @@ step-by-step. You can see that each step creates a new container, runs
 the instruction inside that container and then commits that change -
 just like the `docker commit` work flow you saw earlier. When all the
 instructions have executed you're left with the `97feabe5d2ed` image
-(also helpfully tagged as `ouruser/sinatra:v2`) and all intermediate
+(also helpfuly tagged as `ouruser/sinatra:v2`) and all intermediate
 containers will get removed to clean things up.
 
 > **Note:**
@@ -558,6 +554,35 @@ Delete the `training/sinatra` image as you don't need it anymore.
 
 > **Note:** To remove an image from the host, please make sure
 > that there are no containers actively based on it.
+
+## Check size of images and containers
+
+An image is
+[stored in layers](../userguide/storagedriver/imagesandcontainers.md),
+shared with other images on the host, so the real disk usage depends on
+how much layer overlap is happening between images on a host.
+
+A container runs on
+[a writable layer](../userguide/storagedriver/imagesandcontainers.md#/container-and-layers)
+on top of a readonly rootfs.
+
+Use `docker history` to see the size of image layers on your host:
+
+    $ docker history centos:centos7
+
+    IMAGE               CREATED             CREATED BY                                      SIZE
+    970633036444        6 weeks ago         /bin/sh -c #(nop) CMD ["/bin/bash"]             0 B
+    <missing>           6 weeks ago         /bin/sh -c #(nop) LABEL name=CentOS Base Imag   0 B
+    <missing>           6 weeks ago         /bin/sh -c #(nop) ADD file:44ef4e10b27d8c464a   196.7 MB
+    <missing>           10 weeks ago        /bin/sh -c #(nop) MAINTAINER https://github.c   0 B
+
+Check the size of containers with `docker ps -s`:
+
+    $ docker ps -s
+
+    CONTAINER ID        IMAGE                                                          COMMAND                  CREATED              STATUS              PORTS                    NAMES               SIZE
+    cb7827c19ef7        docker-docs:is-11160-explain-image-container-size-prediction   "hugo server --port=8"   About a minute ago   Up About a minute   0.0.0.0:8000->8000/tcp   evil_hodgkin        0 B (virtual 949.2 MB)
+
 
 # Next steps
 

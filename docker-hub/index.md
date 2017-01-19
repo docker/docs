@@ -15,11 +15,11 @@ workflow automation throughout the development pipeline.
 
 Log in to Docker Hub and Docker Cloud using [your free Docker ID](accounts.md).
 
-![Getting started with Docker Hub](./images/getting-started.png)
+![Getting started with Docker Hub](images/getting-started.png)
 
 Docker Hub provides the following major features:
 
-* [Image Repositories](repos.md): Find, manage, and push and pull images from community, official, and private image libraries.
+* [Image Repositories](repos.md): Find and pull images from community and official libraries, and manage, push to, and pull from private image libraries to which you have access.
 * [Automated Builds](builds.md): Automatically create new images when you make changes to a source code repository.
 * [Webhooks](webhooks.md): A feature of Automated Builds, Webhooks let you trigger actions after a successful push to a repository.
 * [Organizations](orgs.md): Create work groups to manage access to image repositories.
@@ -57,7 +57,7 @@ the repositories you can access and their status, view your "Dashboard" page on
 [Docker Hub](https://hub.docker.com).
 
 You can find more information on working with Docker images in the
-[Docker userguide](/userguide/dockerimages/).
+[Docker userguide](/engine/tutorials/dockerimages/).
 
 ### Use Official Repositories
 
@@ -88,5 +88,5 @@ or you can create private repositories with limited access you control.
 
 ### Docker commands and Docker Hub
 
-Docker itself provides access to Docker Hub services via the [`docker search`](/reference/commandline/search),
-[`pull`](/reference/commandline/pull), [`login`](/reference/commandline/login), and [`push`](/reference/commandline/push) commands.
+Docker itself provides access to Docker Hub services via the [`docker search`](/engine/reference/commandline/search),
+[`pull`](/engine/reference/commandline/pull), [`login`](/engine/reference/commandline/login), and [`push`](/engine/reference/commandline/push) commands.

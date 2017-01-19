@@ -1,9 +1,8 @@
 ---
-title: Create and manage organizations
 description: Learn how to set up organizations to enforce security in Docker Trusted
   Registry.
-keywords:
-- docker, registry, security, permissions, organizations
+keywords: docker, registry, security, permissions, organizations
+title: Create and manage organizations
 ---
 
 When a user creates a repository, only that user has permissions to make changes

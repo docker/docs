@@ -1,57 +1,13 @@
 ---
-redirect_from:
-  - /reference/commandline/plugin_enable/
-advisory: experimental
-description: the plugin enable command description and usage
-keywords:
-- plugin, enable
-title: docker plugin enable (experimental)
+datafolder: engine-cli
+datafile: docker_plugin_enable
+title: docker plugin enable
 ---
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-```markdown
-Usage:  docker plugin enable PLUGIN
-
-Enable a plugin
-
-Options:
-      --help   Print usage
-```
-
-Enables a plugin. The plugin must be installed before it can be enabled,
-see [`docker plugin install`](plugin_install.md).
-
-
-The following example shows that the `no-remove` plugin is installed,
-but disabled ("inactive"):
-
-```bash
-$ docker plugin ls
-
-NAME                    VERSION             ACTIVE
-tiborvass/no-remove     latest              false
-```
-
-To enable the plugin, use the following command:
-
-```bash
-$ docker plugin enable tiborvass/no-remove
-
-tiborvass/no-remove
-```
-
-After the plugin is enabled, it appears as "active" in the list of plugins:
-
-```bash
-$ docker plugin ls
-
-NAME                    VERSION             ACTIVE
-tiborvass/no-remove     latest              true
-```
-
-## Related information
-
-* [plugin ls](plugin_ls.md)
-* [plugin disable](plugin_disable.md)
-* [plugin inspect](plugin_inspect.md)
-* [plugin install](plugin_install.md)
-* [plugin rm](plugin_rm.md)
+https://www.github.com/docker/docker
+-->
+{% include cli.md %}

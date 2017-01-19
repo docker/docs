@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Swarm rescheduling
 keywords: docker, swarm, clustering, rescheduling
 title: Swarm rescheduling
@@ -19,7 +21,7 @@ container when a node fails.
 To set the `on-node-failure` policy with a `reschedule` environment variable:
 
 ```bash
-$ docker run -d -e "reschedule=on-node-failure" redis
+$ docker run -d -e "reschedule:on-node-failure" redis
 ```
 
 To set the same policy with a `com.docker.swarm.reschedule-policies` label:

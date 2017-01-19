@@ -2,7 +2,7 @@
 description: Home page for Docker's documentation
 keywords: Docker, documentation, manual, guide, reference, api
 layout: docs
-title: Welcome to the Docs
+title: Docker Documentation
 ---
 
 Docker packages your app with its dependencies, freeing you from worrying about your
@@ -90,11 +90,11 @@ define them as part of an application that is ready to deploy at scale.
 <ul class="items widthcol2 media">
 <li>
 <div class="media_image">
-	<a href="/docker-hub/overview/"><img src="/images/icon-hub@2X.png" alt="Docker Hub"></a>
+	<a href="/docker-hub/index.md"><img src="/images/icon-hub@2X.png" alt="Docker Hub"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/docker-hub/overview/">Docker Hub</a></h3>
+	<h3><a href="/docker-hub/index.md">Docker Hub</a></h3>
 		<p>
     A hosted registry service for managing and building images.</p>
 	</div>
@@ -102,11 +102,11 @@ define them as part of an application that is ready to deploy at scale.
 </li>
 <li>
 <div class="media_image">
-	<a href="/docker-cloud/overview/"><img src="/images/icon-cloud@2X.png" alt="Docker Cloud"></a>
+	<a href="/docker-cloud/index.md"><img src="/images/icon-cloud@2X.png" alt="Docker Cloud"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/docker-cloud/overview/">Docker Cloud</a></h3>
+	<h3><a href="/docker-cloud/index.md">Docker Cloud</a></h3>
 		<p>
     A hosted service for building, testing, and deploying Docker images to your hosts.</p>
 	</div>
@@ -114,11 +114,11 @@ define them as part of an application that is ready to deploy at scale.
 </li>
 <li>
 <div class="media_image">
-	<a href="/docker-trusted-registry/"><img src="/images/icon-registry@2X.png" alt="Docker Trusted Registry"></a>
+	<a href="/datacenter/dtr/2.1/guides/index.md"><img src="/images/icon-registry@2X.png" alt="Docker Trusted Registry"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/docker-trusted-registry/">Docker Trusted Registry</a></h3>
+	<h3><a href="/datacenter/dtr/2.1/guides/index.md">Docker Trusted Registry</a></h3>
 		<p>
     (DTR) stores and signs your images.</p>
 	</div>
@@ -126,11 +126,11 @@ define them as part of an application that is ready to deploy at scale.
 </li>
 <li>
 <div class="media_image">
-	<a href="/ucp/overview/"><img src="/images/icon-ucp@2X.png" alt="Docker Universal Control Plane"></a>
+	<a href="/datacenter/ucp/2.0/guides/index.md"><img src="/images/icon-ucp@2X.png" alt="Docker Universal Control Plane"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/ucp/overview/">Docker Universal Control Plane</a></h3>
+	<h3><a href="/datacenter/ucp/2.0/guides/index.md">Docker Universal Control Plane</a></h3>
 		<p>
     (UCP) Manage a cluster of on-premises Docker hosts as if they were a single machine.
     </p>

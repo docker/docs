@@ -6,9 +6,9 @@ redirect_from:
 title: Automated repository tests
 ---
 
-Docker Cloud can automatically test changes pushed to your source code
-repositories using containers. You can enable `Autotest` on [any Docker Cloud repository](repos.md) to run tests at each push to the source code repository,
-similar to a continuous integration testing service.
+Docker Cloud can automatically test changes to your source code repositories
+using containers. You can enable `Autotest` on [any Docker Cloud repository](repos.md) to run tests on each pull request to the source code
+repository to create a continuous integration testing service.
 
 Enabling `Autotest` builds an image for testing purposes, but does **not**
 automatically push the built image to the Docker repository. If you want to push
@@ -16,13 +16,12 @@ built images to your Docker Cloud repository, enable [Automated Builds](automate
 
 ## Set up automated test files
 
-To set up your automated tests, create a `docker-compose.test.yml` file in the
-root of your source code repository which defines a `sut` service that lists the
-tests to be run.
+To set up your automated tests, create a `docker-compose.test.yml` file which defines a `sut` service that lists the
+tests to be run. The `docker-compose.test.yml` file should be located in the same directory that contains the Dockerfile used to build the image.
 
 For example:
 
-```yml
+```none
 sut:
   build: .
   command: run_tests.sh
@@ -78,8 +77,9 @@ Docker repository, regardless of the Autotest settings.
 
     > **Note**: For security purposes, autotest on _external pull requests_ is
     disabled on public repositories. If you select this option on a public
-    repository, tests will still run on pushes to the source code repository,
-    but not on pull requests.
+    repository, tests will still run on _internal_ pull requests (for example
+    from one branch into another inside the code repository) but not on for
+    external pull requests.
 
 9. Click **Save** to save the settings, or click **Save and build** to save and
 run an initial test.

@@ -3,6 +3,7 @@ description: Learn about the permission levels available on Docker Trusted Regis
 keywords: docker, registry, security, permissions, users
 redirect_from:
 - /docker-trusted-registry/accounts/
+- /docker-trusted-registry/user-management/
 title: Authentication and authorization
 ---
 

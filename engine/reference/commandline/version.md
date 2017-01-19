@@ -1,33 +1,27 @@
 ---
-redirect_from:
-  - /reference/commandline/version/
-description: The version command description and usage
-keywords:
-- version, architecture, api
+datafolder: engine-cli
+datafile: docker_version
 title: docker version
 ---
 
-```markdown
-Usage:  docker version [OPTIONS]
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-Show the Docker version information
+https://www.github.com/docker/docker
+-->
 
-Options:
-  -f, --format string   Format the output using the given go template
-      --help            Print usage
-```
-
-By default, this will render all version information in an easy to read
-layout. If a format is specified, the given template will be executed instead.
-
-Go's [text/template](http://golang.org/pkg/text/template/) package
-describes all the details of the format.
+{% include cli.md %}
 
 ## Examples
 
-**Default output:**
+### Display Docker version information
 
-    $ docker version
+The default output:
+
+```bash
+$ docker version
 	Client:
 	 Version:      1.8.0
 	 API version:  1.20
@@ -43,17 +37,26 @@ describes all the details of the format.
 	 Git commit:   f5bae0a
 	 Built:        Tue Jun 23 17:56:00 UTC 2015
 	 OS/Arch:      linux/amd64
+```
 
-**Get server version:**
+Get server version:
 
-    {% raw %}
-    $ docker version --format '{{.Server.Version}}'
+```bash
+{% raw %}
+$ docker version --format '{{.Server.Version}}'
+
 	1.8.0
-    {% endraw %}
+{% endraw %}
+```
 
-**Dump raw data:**
+Dump raw data:
 
-    {% raw %}
-    $ docker version --format '{{json .}}'
-    {"Client":{"Version":"1.8.0","ApiVersion":"1.20","GitCommit":"f5bae0a","GoVersion":"go1.4.2","Os":"linux","Arch":"amd64","BuildTime":"Tue Jun 23 17:56:00 UTC 2015"},"ServerOK":true,"Server":{"Version":"1.8.0","ApiVersion":"1.20","GitCommit":"f5bae0a","GoVersion":"go1.4.2","Os":"linux","Arch":"amd64","KernelVersion":"3.13.2-gentoo","BuildTime":"Tue Jun 23 17:56:00 UTC 2015"}}
-    {% endraw %}
+To view all available fields, you can use the format `{% raw %}{{json .}}{% endraw %}`.
+
+```bash
+{% raw %}
+$ docker version --format '{{json .}}'
+
+{"Client":{"Version":"1.8.0","ApiVersion":"1.20","GitCommit":"f5bae0a","GoVersion":"go1.4.2","Os":"linux","Arch":"amd64","BuildTime":"Tue Jun 23 17:56:00 UTC 2015"},"ServerOK":true,"Server":{"Version":"1.8.0","ApiVersion":"1.20","GitCommit":"f5bae0a","GoVersion":"go1.4.2","Os":"linux","Arch":"amd64","KernelVersion":"3.13.2-gentoo","BuildTime":"Tue Jun 23 17:56:00 UTC 2015"}}
+{% endraw %}
+```

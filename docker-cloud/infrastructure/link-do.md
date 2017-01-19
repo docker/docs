@@ -4,6 +4,7 @@ keywords: link, DigitalOcean, account
 redirect_from:
 - /docker-cloud/getting-started/beginner/link-do/
 - /docker-cloud/getting-started/link-do/
+- /engine/installation/cloud/cloud-ex-machine-ocean/
 title: Link a DigitalOcean account
 ---
 
@@ -28,4 +29,4 @@ Once you log in, a message appears prompting you to confirm the link.
 
 ## What's next?
 
-You're ready to start using using DigitalOcean as the infrastructure provider for Docker Cloud! If you came here from the tutorial, click here to [continue the tutorial and deploy your first node](../getting-started/your_first_node.md).
+You're ready to start using DigitalOcean as the infrastructure provider for Docker Cloud! If you came here from the tutorial, click here to [continue the tutorial and deploy your first node](../getting-started/your_first_node.md).

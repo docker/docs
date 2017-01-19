@@ -1,8 +1,7 @@
 ---
-title: docker/dtr join
-keywords:
-- docker, dtr, cli, join
 description: Add a new replica to an existing DTR cluster
+keywords: docker, dtr, cli, join
+title: docker/dtr join
 ---
 
 Add a new replica to an existing DTR cluster
@@ -39,4 +38,3 @@ the cluster.
 |`--replica-https-port`|Specify the public HTTPS port for the DTR replica; 0 means unchanged/default|
 |`--skip-network-test`|Enable this flag to skip the overlay networking test|
 |`--extra-envs`|List of extra environment variables to use for deploying the DTR containers for the replica. This can be used to specify swarm constraints. Separate the environment variables with ampersands (&). You can escape actual ampersands with backslashes (\). Can't be used in combination with --ucp-node|
-

@@ -41,7 +41,7 @@ structure that hooks into the wider Unix filesystem.
 
 Subvolumes are natively copy-on-write and have space allocated to them
 on-demand from an underlying storage pool. They can also be nested and snapped.
- The diagram blow shows 4 subvolumes. 'Subvolume 2' and 'Subvolume 3' are
+ The diagram below shows 4 subvolumes. 'Subvolume 2' and 'Subvolume 3' are
 nested, whereas 'Subvolume 4' shows its own internal directory tree.
 
 ![](images/btfs_subvolume.jpg)
@@ -260,6 +260,7 @@ daemon` at startup, or adding it to the `DOCKER_OPTS` line to the Docker config
 
 Your Docker host is now configured to use the `btrfs` storage driver.
 
+
 ## Btrfs and Docker performance
 
 There are several factors that influence Docker's performance under the `btrfs`
@@ -310,6 +311,24 @@ performance. This is because they bypass the storage driver and do not incur
 any of the potential overheads introduced by thin provisioning and
 copy-on-write. For this reason, you should place heavy write workloads on data
 volumes.
+
+- **Balance BTRFS**. Enable a cronjob to rebalance your BTRFS devices. e.g. 
+Spread the subvolume's blocks evenly across your raid devices, and reclaim 
+unused blocks. Without doing this, snapshots and subvolumes that docker 
+removes will leave allocated blocks fillingup the BTRFS root volume. Once full 
+you won't be able to re-balance, resulting in a potentially unrecoverable 
+state without adding an additional storage device. If you would rather not 
+automate this with crond, another option is to run a re-balance manually 
+outside peak use times since the operation can be disk I/O intensive. This 
+command will claim all chunks that are 1% used or less:
+
+  $ sudo btrfs filesystem balance start -dusage=1 /var/lib/docker
+
+  Dumping filters: flags 0x1, state 0x0, force is off
+  DATA (flags 0x2): balancing, usage=1
+  Done, had to relocate 673 out of 842 chunks
+
+More information on this topic can be read on the [BTRFS Wiki](https://btrfs.wiki.kernel.org/index.php/Balance_Filters#Balancing_to_fix_filesystem_full_errors).
 
 ## Related Information
 

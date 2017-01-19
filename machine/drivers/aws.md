@@ -99,13 +99,14 @@ You can use environment variables:
 
 ## Default AMIs
 
-By default, the Amazon EC2 driver will use a daily image of Ubuntu 15.10.
+By default, the Amazon EC2 driver will use a daily image of Ubuntu 16.04 LTS.
 
 | Region         | AMI ID       |
 | -------------- | ------------ |
 | ap-northeast-1 | ami-b36d4edd |
 | ap-southeast-1 | ami-1069af73 |
 | ap-southeast-2 | ami-1d336a7e |
+| ca-central-1   | ami-ca6ddfae |
 | cn-north-1     | ami-79eb2214 |
 | eu-west-1      | ami-8aa67cf9 |
 | eu-central-1   | ami-ab0210c7 |

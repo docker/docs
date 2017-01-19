@@ -1,34 +1,19 @@
 ---
-redirect_from:
-  - /reference/commandline/network_disconnect/
-description: The network disconnect command description and usage
-keywords:
-- network, disconnect, user-defined
+datafolder: engine-cli
+datafile: docker_network_disconnect
 title: docker network disconnect
 ---
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-```markdown
-Usage:  docker network disconnect [OPTIONS] NETWORK CONTAINER
+https://www.github.com/docker/docker
+-->
+{% include cli.md %}
 
-Disconnect a container from a network
-
-Options:
-  -f, --force   Force the container to disconnect from a network
-      --help    Print usage
-```
-
-Disconnects a container from a network. The container must be running to disconnect it from the network.
+## Examples
 
 ```bash
-  $ docker network disconnect multi-host-network container1
+$ docker network disconnect multi-host-network container1
 ```
-
-
-## Related information
-
-* [network inspect](network_inspect.md)
-* [network connect](network_connect.md)
-* [network create](network_create.md)
-* [network ls](network_ls.md)
-* [network rm](network_rm.md)
-* [Understand Docker container networks](../../userguide/networking/index.md)

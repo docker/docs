@@ -11,7 +11,7 @@
 }
 ```
 
-Tags are used to target the deployment of services to a specific set of nodes. [Learn more](../../docker-cloud/apps/deploy-tags/)
+Tags are used to target the deployment of services to a specific set of nodes. [Learn more](/docker-cloud/apps/deploy-tags/)
 
 ### Attributes
 

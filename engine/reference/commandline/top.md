@@ -1,17 +1,15 @@
 ---
-redirect_from:
-  - /reference/commandline/top/
-description: The top command description and usage
-keywords:
-- container, running, processes
+datafolder: engine-cli
+datafile: docker_top
 title: docker top
 ---
 
-```markdown
-Usage:  docker top CONTAINER [ps OPTIONS]
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-Display the running processes of a container
+https://www.github.com/docker/docker
+-->
 
-Options:
-      --help   Print usage
-```
+{% include cli.md %}

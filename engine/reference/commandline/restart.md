@@ -1,18 +1,13 @@
 ---
-redirect_from:
-  - /reference/commandline/restart/
-description: The restart command description and usage
-keywords:
-- restart, container, Docker
+datafolder: engine-cli
+datafile: docker_restart
 title: docker restart
 ---
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-```markdown
-Usage:  docker restart [OPTIONS] CONTAINER [CONTAINER...]
-
-Restart one or more containers
-
-Options:
-      --help       Print usage
-  -t, --time int   Seconds to wait for stop before killing the container (default 10)
-```
+https://www.github.com/docker/docker
+-->
+{% include cli.md %}

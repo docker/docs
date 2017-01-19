@@ -1,8 +1,12 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: 'Swarm: a Docker-native clustering system'
 keywords: docker, swarm,  clustering
 title: Docker Swarm
 ---
+
+If you decide to use standalone Docker Swarm, use these links to get started.
 
 * [Docker Swarm overview](overview.md)
 * [How to get Docker Swarm](get-swarm.md)

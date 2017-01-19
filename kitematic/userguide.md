@@ -1,4 +1,5 @@
 ---
+advisory: kitematic
 description: Documentation that provides an overview of Kitematic and installation instructions
 keywords: docker, documentation, about, technology, kitematic, gui
 title: Kitematic user guide
@@ -23,8 +24,7 @@ and configuring volumes.  You can use Kitematic to change environment variables,
 stream logs, and single click terminal into your Docker container all from the
 GUI.
 
-First, if you haven't yet done so, [download and start
-Kitematic](index.md).
+First, if you haven't yet done so, download and start Kitematic by installing [Docker Toolbox](/toolbox/overview.md#ready-to-get-started).
 
 ## Container list
 

@@ -1,8 +1,8 @@
 ---
-title: Configure where images are stored
 description: Storage configuration for Docker Trusted Registry
-keywords:
-- docker, documentation, about, technology, understanding, configuration, storage, storage drivers, Azure, S3, Swift,  enterprise, hub, registry
+keywords: docker, documentation, about, technology, understanding, configuration,
+  storage, storage drivers, Azure, S3, Swift, enterprise, hub, registry
+title: Configure where images are stored
 ---
 
 After installing Docker Trusted Registry, one of your first tasks is to

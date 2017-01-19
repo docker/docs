@@ -97,6 +97,13 @@ Examples:
 - The user wants to operate on the node cluster list endpoint in an organization called `exampleorg` (which they have permission to see):
     - https://cloud.docker.com/api/infra/v1/exampleorg/nodecluster/
 
+### Namespaced endpoints in the docker-cloud CLI
+
+If you are using namespaces with the `docker-cloud` CLI, set them by changing
+the value of the `DOCKERCLOUD_NAMESPACE` environment variable. You can either
+set this globally, or specify it before each CLI command. To learn more, see the
+[Docker Cloud CLI README](https://github.com/docker/dockercloud-cli#namespace).
+
 ## Stream API
 
 ```python
@@ -152,6 +159,6 @@ The Stream API requires the same authentication mechanism as the REST API:
 
 > The CLI and the SDKs will detect this environment variable and automatically use it
 
-If you give an [API role](../../docker-cloud/apps/api-roles/) to a container, the environment variable `DOCKERCLOUD_AUTH` inside the container will have the contents of the `Authorization` header that you can use to authenticate against the REST or Stream APIs:
+If you give an [API role](/docker-cloud/apps/api-roles/) to a container, the environment variable `DOCKERCLOUD_AUTH` inside the container will have the contents of the `Authorization` header that you can use to authenticate against the REST or Stream APIs:
 
 `curl -H "Authorization: $DOCKERCLOUD_AUTH" https://cloud.docker.com/api/app/v1/service/`

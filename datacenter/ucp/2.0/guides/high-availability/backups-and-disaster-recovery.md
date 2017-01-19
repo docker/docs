@@ -1,8 +1,8 @@
 ---
+description: Learn how to backup your Docker Universal Control Plane cluster, and
+  to recover your cluster from an existing backup.
+keywords: docker, ucp, backup, restore, recovery
 title: Backups and disaster recovery
-description: Learn how to backup your Docker Universal Control Plane cluster, and to recover your cluster from an existing backup.
-keywords:
-- docker, ucp, backup, restore, recovery
 ---
 
 When you decide to start using Docker Universal Control Plane on a production
@@ -37,7 +37,7 @@ across multiple UCP controller nodes.
 
 The example below shows how to create a backup of a UCP controller node:
 
-```bash
+```none
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
@@ -46,15 +46,6 @@ $ docker run --rm -i --name ucp \
 
 # Decrypt the backup and list its contents
 $ gpg --decrypt /tmp/backup.tar | tar --list
-
-Enter passphrase: secret
-
-/ucp-client-root-ca/
-./ucp-client-root-ca/cert.pem
-./ucp-client-root-ca/config.json
-./ucp-client-root-ca/key.pem
-./ucp-cluster-root-ca/
-# output snipped
 ```
 
 ## Restore command
@@ -62,19 +53,10 @@ Enter passphrase: secret
 The example below shows how to restore a UCP controller node from an existing
 backup:
 
-```bash
+```none
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
-  docker/ucp restore < backup.tar
-```
-
-The restore command may also be invoked in interactive mode:
-
-```bash
-$ docker run --rm -i --name ucp \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /path/to/backup.tar:/config/backup.tar \
-  docker/ucp restore -i
+  docker/ucp restore --passphrase "secret" < backup.tar
 ```
 
 ## Restore your cluster
@@ -82,6 +64,7 @@ $ docker run --rm -i --name ucp \
 The restore command can be used to create a new UCP cluster from a backup file.
 After the restore operation is complete, the following data will be copied from
 the backup file:
+
 * Users, Teams and Permissions.
 * Cluster Configuration, such as the default Controller Port or the KV store
 timeout.

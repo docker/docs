@@ -1,20 +1,15 @@
 ---
-redirect_from:
-  - /reference/commandline/start/
-description: The start command description and usage
-keywords:
-- Start, container, stopped
+datafolder: engine-cli
+datafile: docker_start
 title: docker start
 ---
 
-```markdown
-Usage:  docker start [OPTIONS] CONTAINER [CONTAINER...]
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-Start one or more stopped containers
+https://www.github.com/docker/docker
+-->
 
-Options:
-  -a, --attach               Attach STDOUT/STDERR and forward signals
-      --detach-keys string   Override the key sequence for detaching a container
-      --help                 Print usage
-  -i, --interactive          Attach container's STDIN
-```
+{% include cli.md %}

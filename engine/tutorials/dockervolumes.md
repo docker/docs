@@ -4,13 +4,13 @@ keywords: Examples, Usage, volume, docker, documentation, user guide, data,  vol
 redirect_from:
 - /engine/userguide/containers/dockervolumes/
 - /engine/userguide/dockervolumes/
+- /userguide/dockervolumes/
 title: Manage data in containers
 ---
 
 So far you've been introduced to some [basic Docker
 concepts](usingdocker.md), seen how to work with [Docker
-images](dockerimages.md) as well as learned about [networking and
-links between containers](../userguide/networking/default_network/dockerlinks.md). In this
+images](dockerimages.md) as well as learned about [how to network your containers](networkingcontainers.md). In this
 section you're going to learn how you can manage data inside and between your
 Docker containers.
 
@@ -28,7 +28,7 @@ containers that bypasses the [*Union File System*](../reference/glossary.md#unio
 - Volumes are initialized when a container is created. If the container's
   base image contains data at the specified mount point, that existing data is
   copied into the new volume upon volume initialization. (Note that this does
-  not apply when [mounting a host directory](dockervolumes.md#mount-a-host-directory-as-a-data-volume).)
+  not apply when [mounting a host directory](#mount-a-host-directory-as-a-data-volume).)
 - Data volumes can be shared and reused among containers.
 - Changes to a data volume are made directly.
 - Changes to a data volume will not be included when you update an image.
@@ -127,7 +127,7 @@ docker run -v /Users/<path>:/<container path> ...
 On Windows, mount directories using:
 
 ```bash
-docker run -v c:\<path>:/c:\<container path>
+docker run -v //c/<path>:/<container path>
 ```
 
 All other paths come from your virtual machine's filesystem, so if you want
@@ -153,9 +153,11 @@ Here you've mounted the same `/src/webapp` directory but you've added the `ro`
 option to specify that the mount should be read-only.
 
 >**Note**: The host directory is, by its nature, host-dependent. For this
->reason, you can't mount a host directory from `Dockerfile` because built images
+>reason, you can't mount a host directory from `Dockerfile`, the `VOLUME`
+instruction does not support passing a `host-dir`, because built images
 >should be portable. A host directory wouldn't be available on all potential
 >hosts.
+
 
 ### Mount a shared-storage volume as a data volume
 
@@ -173,8 +175,11 @@ Volume drivers create volumes by name, instead of by path like in
 the other examples.
 
 The following command creates a named volume, called `my-named-volume`,
-using the `flocker` volume driver, and makes it available within the container
-at `/webapp`:
+using the `flocker` volume driver (`flocker` is a plugin for multi-host portable volumes)
+and makes it available within the container at `/webapp`. Before running the command,
+[install flocker](https://flocker-docs.clusterhq.com/en/latest/docker-integration/manual-install.html).
+If you do not want to install `flocker`, replace `flocker` with `local` in the example commands
+below to use the `local` driver.
 
 ```bash
 $ docker run -d -P \
@@ -187,10 +192,11 @@ You may also use the `docker volume create` command, to create a volume before
 using it in a container.
 
 The following example also creates the `my-named-volume` volume, this time
-using the `docker volume create` command.
+using the `docker volume create` command. Options are specified as key-value
+pairs in the format `o=<key>=<value>`.
 
 ```bash
-$ docker volume create -d flocker -o size=20GB my-named-volume
+$ docker volume create -d flocker --opt o=size=20GB my-named-volume
 
 $ docker run -d -P \
   -v my-named-volume:/webapp \

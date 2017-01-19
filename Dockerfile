@@ -1,62 +1,39 @@
 FROM starefossen/github-pages
 
-RUN git clone https://www.github.com/docker/docker.github.io allv
-RUN jekyll build -s allv -d allvbuild
+ENV VERSIONS="v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11"
 
-RUN git --git-dir=./allv/.git --work-tree=./allv checkout v1.4
-RUN mkdir allvbuild/v1.4
-RUN jekyll build -s allv -d allvbuild/v1.4
-RUN find allvbuild/v1.4 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/v1.4/#g'
-RUN find allvbuild/v1.4 -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/v1.4/#g'
-RUN find allvbuild/v1.4 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/v1.4/#g'
+# Create archive; check out each version, create HTML, tweak links
+RUN git clone https://www.github.com/docker/docker.github.io temp; \
+ for VER in $VERSIONS; do \
+		git --git-dir=./temp/.git --work-tree=./temp checkout ${VER} \
+		&& mkdir -p allvbuild/${VER} \
+		&& jekyll build -s temp -d allvbuild/${VER} \
+		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/'"$VER"'/#g' \
+		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/'"$VER"'/#g' \
+		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/'"$VER"'/#g'; \
+	done; \
+	rm -rf temp
 
-RUN git --git-dir=./allv/.git --work-tree=./allv checkout v1.5
-RUN mkdir allvbuild/v1.5
-RUN jekyll build -s allv -d allvbuild/v1.5
-RUN find allvbuild/v1.5 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/v1.5/#g'
-RUN find allvbuild/v1.5 -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/v1.5/#g'
-RUN find allvbuild/v1.5 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/v1.5/#g'
+COPY . allv
 
-RUN git --git-dir=./allv/.git --work-tree=./allv checkout v1.6
-RUN mkdir allvbuild/v1.6
-RUN jekyll build -s allv -d allvbuild/v1.6
-RUN find allvbuild/v1.6 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/v1.6/#g'
-RUN find allvbuild/v1.6 -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/v1.6/#g'
-RUN find allvbuild/v1.6 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/v1.6/#g'
+## Branch to pull from, per ref doc
+ENV ENGINE_BRANCH="1.13.x"
+ENV DISTRIBUTION_BRANCH="release/2.5"
 
-RUN git --git-dir=./allv/.git --work-tree=./allv checkout v1.7
-RUN mkdir allvbuild/v1.7
-RUN jekyll build -s allv -d allvbuild/v1.7
-RUN find allvbuild/v1.7 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/v1.7/#g'
-RUN find allvbuild/v1.7 -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/v1.7/#g'
-RUN find allvbuild/v1.7 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/v1.7/#g'
+# The statements below pull reference docs from upstream locations,
+# then build the whole site to static HTML using Jekyll
 
-RUN git --git-dir=./allv/.git --work-tree=./allv checkout v1.8
-RUN mkdir allvbuild/v1.8
-RUN jekyll build -s allv -d allvbuild/v1.8
-RUN find allvbuild/v1.8 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/v1.8/#g'
-RUN find allvbuild/v1.8 -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/v1.8/#g'
-RUN find allvbuild/v1.8 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/v1.8/#g'
+RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend allv/engine/extend \
+ && wget -O allv/engine/deprecated.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/deprecated.md \
+ && svn co https://github.com/docker/distribution/branches/$DISTRIBUTION_BRANCH/docs/spec allv/registry/spec \
+ && wget -O allv/registry/configuration.md https://raw.githubusercontent.com/docker/distribution/$DISTRIBUTION_BRANCH/docs/configuration.md \
+ && rm -rf allv/apidocs/cloud-api-source \
+ && rm -rf allv/tests \
+ && wget -O allv/engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
+ && jekyll build -s allv -d allvbuild \
+ && find allvbuild/engine/reference -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
+ && find allvbuild/engine/extend -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
+ && rm -rf allv
 
-RUN git --git-dir=./allv/.git --work-tree=./allv checkout v1.9
-RUN mkdir allvbuild/v1.9
-RUN jekyll build -s allv -d allvbuild/v1.9
-RUN find allvbuild/v1.9 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/v1.9/#g'
-RUN find allvbuild/v1.9 -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/v1.9/#g'
-RUN find allvbuild/v1.9 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/v1.9/#g'
-
-RUN git --git-dir=./allv/.git --work-tree=./allv checkout v1.10
-RUN mkdir allvbuild/v1.10
-RUN jekyll build -s allv -d allvbuild/v1.10
-RUN find allvbuild/v1.10 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/v1.10/#g'
-RUN find allvbuild/v1.10 -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/v1.10/#g'
-RUN find allvbuild/v1.10 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/v1.10/#g'
-
-RUN git --git-dir=./allv/.git --work-tree=./allv checkout v1.11
-RUN mkdir allvbuild/v1.11
-RUN jekyll build -s allv -d allvbuild/v1.11
-RUN find allvbuild/v1.11 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/v1.11/#g'
-RUN find allvbuild/v1.11 -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/v1.11/#g'
-RUN find allvbuild/v1.11 -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/v1.11/#g'
-
-CMD jekyll serve -s /usr/src/app/allvbuild -d /_site --no-watch -H 0.0.0.0 -P 4000
+# Serve the site, which is now all static HTML
+CMD jekyll serve -s /usr/src/app/allvbuild --no-watch -H 0.0.0.0 -P 4000

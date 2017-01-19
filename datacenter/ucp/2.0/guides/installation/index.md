@@ -1,14 +1,11 @@
 ---
-title: Install UCP for production
 description: Learn how to install Docker Universal Control Plane on production
-keywords:
-- Universal Control Plane, UCP, install
+keywords: Universal Control Plane, UCP, install
+title: Install UCP for production
 ---
 
 Docker Universal Control Plane (UCP) is a containerized application that can be
 installed on-premise or on a cloud infrastructure.
-
-If you're installing Docker Datacenter on Azure, [follow this guide](https://success.docker.com/?cid=ddc-on-azure).
 
 ## Step 1: Validate the system requirements
 
@@ -18,9 +15,19 @@ infrastructure has all the [requirements UCP needs to run](system-requirements.m
 
 ## Step 2: Install CS Docker on all nodes
 
-UCP is a containerized application that requires CS Docker Engine 1.12.0 or
-above to run. Start by installing CS Docker Engine on all hosts that you want to
-manage with UCP.
+UCP is a containerized application that requires the commercially supported
+Docker Engine to run.
+
+For each host that you plan to manage with UCP:
+
+1.  Log in into that host using ssh.
+2.  Install CS Docker Engine:
+
+    ```bash
+    curl -SLf https://packages.docker.com/1.12/install.sh | sh
+    ```
+
+    [You can also install CS Docker Engine using a package manager](/cs-engine/install.md)
 
 Make sure you install the same CS Docker Engine version on all the nodes. Also,
 if you're creating virtual machine templates with CS Docker Engine  already
@@ -52,7 +59,7 @@ To install UCP:
 
 2.  Run the following command:
 
-    ```bash
+    ```none
     # Pull the latest version of UCP
     $ docker pull docker/ucp:latest
 
@@ -72,30 +79,31 @@ To install UCP:
 ## Step 5: License your installation
 
 Now that UCP is installed, you need to license it. In your browser, navigate
-to the UCP web UI and upload your license.
+to the UCP web UI, login with your administrator credentials and upload your
+license.
 
-![](../images/install-production-1.png)
+![](../images/install-production-1.png){: .with-border}
 
 If you don't have a license yet, [learn how to get a free trial license](license.md).
 
 ## Step 6: Join manager nodes
 
-Skip this step if you don't want your UCP swarm to be highly available.
+Skip this step if you don't want UCP to be highly available.
 
-To make your UCP swarm fault-tolerant and highly available, you
-can join more manager nodes to your it. Manager nodes are the nodes in the
-swarm that perform the orchestration and swarm management tasks, and
-dispatch tasks for worker nodes to execute.
+To make your Docker swarm and UCP fault-tolerant and highly available, you can
+join more manager nodes to your it. Manager nodes are the nodes in the swarm
+that perform the orchestration and swarm management tasks, and dispatch tasks
+for worker nodes to execute.
 [Learn more about high-availability](../high-availability/index.md).
 
 To join manager nodes to the swarm, go to the **UCP web UI**, navigate to
 the **Resources** page, and go to the **Nodes** section.
 
-![](../images/install-production-2.png)
+![](../images/install-production-2.png){: .with-border}
 
 Click the **Add Node button** to add a new node.
 
-![](../images/install-production-3.png)
+![](../images/install-production-3.png){: .with-border}
 
 Check the 'Add node as a manager' to turn this node into a manager and replicate
 UCP for high-availability.
@@ -109,7 +117,7 @@ can reach it.
 For each manager node that you want to join to UCP, login into that
 node using ssh, and run the join command that is displayed on UCP.
 
-![](../images/install-production-4.png)
+![](../images/install-production-4.png){: .with-border}
 
 After you run the join command in the node, the node starts being displayed
 in UCP.

@@ -1,0 +1,6 @@
+command: docker stack ls
+short: List stacks
+long: List stacks
+usage: docker stack ls
+pname: docker stack
+plink: docker_stack.yaml

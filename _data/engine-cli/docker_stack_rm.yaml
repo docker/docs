@@ -1,0 +1,6 @@
+command: docker stack rm
+short: Remove the stack
+long: Remove the stack
+usage: docker stack rm STACK
+pname: docker stack
+plink: docker_stack.yaml

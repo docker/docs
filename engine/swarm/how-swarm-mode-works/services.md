@@ -43,7 +43,7 @@ terminates, the task terminates.
 
 A task is the atomic unit of scheduling within a swarm.  When you declare a
 desired service state by creating or updating a service, the orchestrator
-realizes the desired state by scheduling tasks. For instance, the you define a
+realizes the desired state by scheduling tasks. For instance, you define a
 service that instructs the orchestrator to keep three instances of a HTTP
 listener running at all times. The orchestrator responds by creating three
 tasks. Each task is a slot that the scheduler fills by spawning a container. The
@@ -53,20 +53,50 @@ that spawns a new container.
 
 A task is a one-directional mechanism. It progresses monotonically through a
 series of states: assigned, prepared, running, etc.  If the task fails the
-scheduler removes the task and its container and then creates a new task to
+orchestrator removes the task and its container and then creates a new task to
 replace it according to the desired state specified by the service.
 
 The underlying logic of Docker swarm mode is a general purpose scheduler and
 orchestrator.  The service and task abstractions themselves are unaware of the
 containers they implement.  Hypothetically, you could implement other types of
 tasks such as virtual machine tasks or non-containerized process tasks.  The
-scheduler and orchestrator are agnostic about they type of task. However, the
+scheduler and orchestrator are agnostic about the type of task. However, the
 current version of Docker only supports container tasks.
 
 The diagram below shows how swarm mode accepts service create requests and
 schedules tasks to worker nodes.
 
 ![services flow](../images/service-lifecycle.png)
+
+### Pending services
+
+A service may be configured in such a way that no node currently in the
+swarm can run its tasks. In this case, the service remains in state `pending`.
+Here are a few examples of when a service might remain in state `pending`.
+
+**Note**: If your only intention is to prevent a service from
+being deployed, scale the service to 0 instead of trying to configure it in
+such a way that it will remain in `pending`.
+
+- If all nodes are paused or drained, and you create a service, it will be
+  pending until a node becomes available. In reality, the first node to become
+  available will get all of the tasks, so this is not a good thing to do in a
+  production environment.
+
+- You can reserve a specific amount of memory for a service. If no node in the
+  swarm has the required amount of memory, the service will remain in a pending
+  state until a node is available which can run its tasks. If you specify a very
+  large value, such as 500 GB, the task will be pending forever, unless you
+  really have a node which can satisfy it.
+
+- You can impose placement constraints on the service, and the constraints may
+  not be able to be honored at a given time.
+
+This behavior illustrates that the requirements and configuration of your tasks
+are not tightly tied to the current state of the swarm. As the administrator of
+a swarm, you declare the desired state of your swarm, and the manager works with
+the nodes in the swarm to create that state. You do not need to micro-manage the
+tasks on the swarm.
 
 ## Replicated and global services
 

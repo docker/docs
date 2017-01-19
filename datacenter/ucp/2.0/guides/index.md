@@ -1,66 +1,74 @@
 ---
-title: Universal Control Plane overview
 description: Learn about Docker Universal Control Plane, the enterprise-grade cluster
   management solution from Docker.
-keywords:
-- docker, ucp, overview, orchestration, clustering
+keywords: docker, ucp, overview, orchestration, clustering
+title: Universal Control Plane overview
 ---
 
 Docker Universal Control Plane (UCP) is the enterprise-grade cluster management
-solution from Docker. You install it behind your firewall, and it helps you
-manage your whole cluster from a single place.
+solution from Docker. You install it on-premises or in your virtual private
+cloud, and it helps you manage your Docker cluster and applications from a
+single place.
 
-![](images/overview-1.png)
+![](images/overview-1.png){: .with-border}
 
 ## Centralized cluster management
 
-Docker UCP can be installed on-premises, or on a virtual private cloud.
-And with it, you can manage thousands of nodes as if they were a single one.
-You can monitor and manage your cluster using a graphical UI.
+With Docker you can join up to thousands of physical or virtual machines
+together to create a container cluster, allowing you to deploy your applications
+at scale. Docker Universal Control Plane extends the functionality provided
+by Docker to make it easier to manage your cluster from a centralized place.
 
-![](images/overview-2.png)
+You can manage and monitor your container cluster using a graphical UI.
+
+![](images/overview-2.png){: .with-border}
 
 Since UCP exposes the standard Docker API, you can continue using the tools
-you already know, to manage a whole cluster.
+you already know, including the Docker CLI client, to deploy and manage your
+applications.
 
 As an example, you can use the `docker info` command to check the
-status of the cluster:
+status of a Docker cluster managed by UCP:
 
 ```bash
 $ docker info
 
 Containers: 30
 Images: 24
-Server Version: swarm/1.1.3
+Server Version: ucp/2.0.1
 Role: primary
 Strategy: spread
-Filters: health, port, dependency, affinity, constraint
+Filters: health, port, containerslots, dependency, affinity, constraint
 Nodes: 2
-  ucp: 192.168.99.103:12376
+  ucp-node-1: 192.168.99.100:12376
     └ Status: Healthy
     └ Containers: 20
-  ucp-replica: 192.168.99.102:12376
+  ucp-node-2: 192.168.99.101:12376
     └ Status: Healthy
     └ Containers: 10
 ```
 
 ## Deploy, manage, and monitor
 
-With Docker UCP you can manage the nodes of your infrastructure. You can also
-manage apps, containers, networks, images, and volumes, in a transparent way.
+With Docker UCP you can manage from a centralized place all the computing
+resources you have available like nodes, volumes, and networks.
+
+You can also deploy and monitor your applications and services.
 
 ## Built-in security and access control
 
-Docker UCP has its own built-in authentication mechanism, and supports LDAP
-and Active Directory. It also supports Role Based Access Control (RBAC).
-This ensures that only authorized users can access and make changes to cluster.
+Docker UCP has its own built-in authentication mechanism and integrates with
+LDAP services. It also has Role Based Access Control (RBAC), so that you can
+control who can access and make changes to your cluster and applications.
 
-![](images/overview-3.png)
+![](images/overview-3.png){: .with-border}
 
-Docker UCP also integrates with Docker Trusted Registry and Docker Content
-Trust. This allows you to keep your images stored behind your firewall,
-where they are safe. It also allows you to sign those images to ensure that
-the images you deploy have not been altered in any way.
+Docker UCP integrates with Docker Trusted Registry so that you can keep the
+Docker images you use for your applications behind your firewall, where they
+are safe and can't be tampered.
+
+You can also enforce security policies and only allow running applications
+that use Docker images you know and trust.
 
 ## Where to go next
 

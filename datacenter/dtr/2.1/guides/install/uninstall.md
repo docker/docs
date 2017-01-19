@@ -1,60 +1,39 @@
 ---
-title: Uninstall Docker Trusted Registry
 description: Learn how to uninstall your Docker Trusted Registry installation.
-keywords:
-- docker, dtr, install, uninstall
+keywords: docker, dtr, install, uninstall
+title: Uninstall Docker Trusted Registry
 ---
 
-Use the `remove` command, to remove a DTR replica from a cluster.
+Use the `remove` command, to remove a DTR replica from an existing deployment.
 To uninstall a DTR cluster you remove all DTR replicas one at a time.
-The remove command:
 
-* Removes the replica from the cluster,
-* Stops and removes all DTR containers,
-* Deletes all DTR volumes.
+The remove command informs the DTR cluster that the node is about to be removed,
+then it removes the replica, stops and removes all DTR containers from that node,
+and deletes all DTR volumes.
 
-To see what options are available in the uninstall command, check the
-[uninstall command reference](../../reference/cli/remove.md), or run:
+To uninstall a DTR replica, run:
 
-```bash
-$ docker run -it --rm docker/dtr remove --help
-```
-
-To remove a replica safely, you must tell the bootstrapper about one healthy replica
-using the `--existing-replica-id` flag and the replica to remove with the
-`--replica-id` flag. It uses the healthy replica to safely inform your DTR cluster
-that the replica is about to be removed before it performs the actual removal.
-
-## Example
-
-The following example illustrates how use the remove command interactively to
-remove a DTR replica from a cluster with multiple replicas:
-
-```bash
-
-$ docker run -it --rm \
+```none
+docker run -it --rm \
   docker/dtr remove \
   --ucp-insecure-tls
-
-existing-replica-id (ID of an existing replica in a cluster): 7ae3cb044b70
-replica-id (Specify the replica Id. Must be unique per replica, leave blank for random): a701a510126c
-ucp-username (Specify the UCP admin username): $UCP_ADMIN
-ucp-password: $UCP_PASSWORD
-ucp-url (Specify the UCP host using the host[:port] format): $UCP_HOST
 ```
 
-Where:
+You will be prompted for:
 
-* existing-replica-id: is the id of any healthy DTR replica of that cluster,
-* replica-id: is the id of the DTR replica you want to remove,
-* ucp-username and ucp-password: are the username and password of a UCP administrator.
+* Existing replica id: the id of any healthy DTR replica of that cluster
+* Replica id: the id of the DTR replica you want to remove. It can be the id of an
+unhealthy replica that you want to remove from your deployment
+* UCP username and password: the administrator credentials for UCP
 
+To ensure you don't loose data, DTR will not remove the last replica from your
+deployment. To confirm you really want to remove that replica, use the
+`--force-remove` flag.
 
-Now you can confirm on Docker Universal Control Plane that the DTR replica
-`a701a510126c` no longer exists.
-
+To see what options are available in the uninstall command, check the
+[uninstall command reference documentation](../../reference/cli/remove.md).
 
 ## Where to go next
 
+* [Scale your deployment](scale-your-deployment.md)
 * [Install DTR](index.md)
-* [Install DTR offline](install-offline.md)

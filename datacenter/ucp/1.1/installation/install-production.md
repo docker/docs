@@ -25,7 +25,7 @@ above to run. It is recommended to install the exact same version of the
 CS Docker Engine on all nodes.
 
 So on each host that you want to be part of the UCP cluster,
-[install CS Docker Engine 1.10.0 or above](/docker-trusted-registry/cs-engine/install/).
+[install CS Docker Engine 1.10.0 or above](/cs-engine/install.md).
 In the case where you are creating a VM template with CS Engine already
 installed, make sure that `/etc/docker/key.json` is not included in the image.
 You can do this by simply removing `/etc/docker/key.json`. You can then restart
@@ -123,7 +123,7 @@ Now that your UCP controller is installed, you need to license it.
 
 ## Step 7: Backup the controller CAs
 
-For an highly available installation, you can add more controller nodes to
+For a highly available installation, you can add more controller nodes to
 the UCP cluster. The controller nodes are replicas of each other.
 
 For this, you need to make the CAs on each controller node use the same
@@ -149,7 +149,7 @@ To create a backup of the CAs used on the controller node:
 
 This step is optional.
 
-For an highly available installation, you can add more controller nodes to
+For a highly available installation, you can add more controller nodes to
 the UCP cluster. For that, use the `docker/ucp join --replica` command.
 [Learn more about the join command](../reference/join.md).
 

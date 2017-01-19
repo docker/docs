@@ -1,23 +1,18 @@
 ---
-redirect_from:
-  - /reference/commandline/network_inspect/
-description: The network inspect command description and usage
-keywords:
-- network, inspect, user-defined
+datafolder: engine-cli
+datafile: docker_network_inspect
 title: docker network inspect
 ---
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-```markdown
-Usage:  docker network inspect [OPTIONS] NETWORK [NETWORK...]
+https://www.github.com/docker/docker
+-->
+{% include cli.md %}
 
-Display detailed information on one or more networks
-
-Options:
-  -f, --format string   Format the output using the given go template
-      --help            Print usage
-```
-
-Returns information about one or more networks. By default, this command renders all results in a JSON object. For example, if you connect two containers to the default `bridge` network:
+## Exaples
 
 ```bash
 $ sudo docker run -itd --name=container1 busybox
@@ -28,13 +23,10 @@ bda12f8922785d1f160be70736f26c1e331ab8aaf8ed8d56728508f2e2fd4727
 ```
 
 The `network inspect` command shows the containers, by id, in its
-results. For networks backed by multi-host network driver, such as Overlay,
-this command also shows the container endpoints in other hosts in the
-cluster. These endpoints are represented as "ep-{endpoint-id}" in the output.
-You can specify an alternate format to execute a given
+results. You can specify an alternate format to execute a given
 template for each result. Go's
-[text/template](http://golang.org/pkg/text/template/) package describes all the
-details of the format.
+[text/template](http://golang.org/pkg/text/template/) package
+describes all the details of the format.
 
 ```bash
 $ sudo docker network inspect bridge
@@ -99,7 +91,7 @@ $ docker network inspect simple-network
             "Config": [
                 {
                     "Subnet": "172.22.0.0/16",
-                    "Gateway": "172.22.0.1/16"
+                    "Gateway": "172.22.0.1"
                 }
             ]
         },
@@ -108,12 +100,3 @@ $ docker network inspect simple-network
     }
 ]
 ```
-
-## Related information
-
-* [network disconnect ](network_disconnect.md)
-* [network connect](network_connect.md)
-* [network create](network_create.md)
-* [network ls](network_ls.md)
-* [network rm](network_rm.md)
-* [Understand Docker container networks](../../userguide/networking/index.md)

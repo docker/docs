@@ -95,7 +95,7 @@ You can name your local images either when you build it, using
 by re-tagging an existing local image `docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`,
 or by using `docker commit <exiting-container> <hub-user>/<repo-name>[:<tag>]` to commit
 changes.
-See [Working with Docker images](/userguide/dockerimages) for a detailed description.
+See [Working with Docker images](/engine/tutorials/dockerimages/) for a detailed description.
 
 Now you can push this repository to the registry designated by its name or tag.
 
@@ -139,8 +139,7 @@ want to keep private, either to your own account or within an organization or
 team.
 
 To work with a private repository on [Docker Hub](https://hub.docker.com), you
-will need to add one via the [Add
-Repository](https://hub.docker.com/add/repository/) button. You get one private
+will need to add one using the [Add Repository](https://hub.docker.com/add/repository/) button. You get one private
 repository for free with your Docker Hub user account (not usable for
 organizations you're a member of). If you need more accounts you can upgrade
 your [Docker Hub](https://hub.docker.com/account/billing-plans/) plan.

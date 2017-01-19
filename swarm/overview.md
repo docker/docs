@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: 'Swarm: a Docker-native clustering system'
 keywords: docker, swarm, clustering
 title: Docker Swarm overview
@@ -73,4 +75,4 @@ like-minded individuals, we have a number of open channels for communication.
 
 * To contribute code or documentation changes: please submit a [pull request on Github](https://github.com/docker/swarm/pulls).
 
-For more information and resources, please visit the [Getting Help project page](/project/get-help/).
+For more information and resources, please visit the [Getting Help project page](/opensource/get-help/).

@@ -37,7 +37,7 @@ as follows:
 * designates the current node as a leader manager node for the swarm.
 * names the node with the machine hostname.
 * configures the manager to listen on an active network interface on port 2377.
-* sets the current node to `Active` availability, meaning it can receive tasks
+* sets the current node to `Active` availability, meanining it can receive tasks
 from the scheduler.
 * starts an internal distributed data store for Engines participating in the
 swarm to maintain a consistent view of the swarm and all services running on it.
@@ -70,10 +70,10 @@ to the Swarmkit API and overlay networking. The other nodes on the swarm must be
 able to access the manager node on its advertise address IP address.
 
 If you don't specify an advertise address, Docker checks if the system has a
-single IP address. If so, Docker uses the IP address with with the listening
-port `2377` by default. If the system has multiple IP addresses, you must
-specify the correct  `--advertise-addr` to enable inter-manager communication
-and overlay networking:
+single IP address. If so, Docker uses the IP address with the listening port
+`2377` by default. If the system has multiple IP addresses, you must specify the
+correct  `--advertise-addr` to enable inter-manager communication and overlay
+networking:
 
 ```bash
 $ docker swarm init --advertise-addr <MANAGER-IP>
@@ -84,7 +84,7 @@ reach the first manager node is not the same address the manager sees as its
 own. For instance, in a cloud setup that spans different regions, hosts have
 both internal addresses for access within the region and external addresses that
 you use for access from outside that region. In this case, specify the external
-address with `--advertise-addr` so that the node can propagate that information
+address with `--advertise-addr` so that the node can propogate that information
 to other nodes that subsequently connect to it.
 
 Refer to the `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md)
@@ -135,7 +135,7 @@ SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacr
 
 Be careful with the join tokens because they are the secrets necessary to join
 the swarm. In particular, checking a secret into version control is a bad
-practice because it would allow anyone with access to the the application source
+practice because it would allow anyone with access to the application source
 code to add new nodes to the swarm. Manager tokens are especially sensitive
 because they allow a new manager node to join and gain control over the whole
 swarm.

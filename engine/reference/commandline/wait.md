@@ -1,17 +1,15 @@
 ---
-redirect_from:
-  - /reference/commandline/wait/
-description: The wait command description and usage
-keywords:
-- container, stop, wait
+datafolder: engine-cli
+datafile: docker_wait
 title: docker wait
 ---
 
-```markdown
-Usage:  docker wait CONTAINER [CONTAINER...]
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-Block until a container stops, then print its exit code
+https://www.github.com/docker/docker
+-->
 
-Options:
-      --help   Print usage
-```
+{% include cli.md %}

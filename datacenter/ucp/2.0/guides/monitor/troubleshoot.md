@@ -1,8 +1,7 @@
 ---
-title: Troubleshoot your cluster
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
-keywords:
-- docker, ucp, troubleshoot
+keywords: docker, ucp, troubleshoot
+title: Troubleshoot your cluster
 ---
 
 If you detect problems in your UCP cluster, you can start your troubleshooting
@@ -17,7 +16,7 @@ page of UCP. By default the UCP system containers are hidden. Click the
 **Show all containers** option for the UCP system containers to be listed as
 well.
 
-![](../images/troubleshoot-ucp-1.png)
+![](../images/troubleshoot-ucp-1.png){: .with-border}
 
 You can click on a container to see more details like its configurations and
 logs.

@@ -12,6 +12,8 @@ The Compose file is a [YAML](http://yaml.org/) file defining
 [volumes](compose-file.md#volume-configuration-reference).
 The default path for a Compose file is `./docker-compose.yml`.
 
+>**Tip:** You can use either a `.yml` or `.yaml` extension for this file. They both work.
+
 A service definition contains configuration which will be applied to each
 container started for that service, much like passing command-line parameters to
 `docker run`. Likewise, network and volume definitions are analogous to
@@ -444,6 +446,10 @@ The entrypoint can also be a list, in a manner similar to
         - memory_limit=-1
         - vendor/bin/phpunit
 
+> **Note:** Setting `entrypoint` will both override any default entrypoint set
+> on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
+> clear out any default command on the image - meaning that if there's a `CMD`
+> instruction in the Dockerfile, it will be ignored.
 
 ### env_file
 
@@ -471,6 +477,10 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
 > defined in environment files will _not_ be automatically visible during the
 > build. Use the [args](compose-file.md#args) sub-option of `build` to define build-time
 > environment variables.
+
+The value of `VAL` is used as is and not modified at all. For example if the value is
+surrounded by quotes (as is often the case of shell variables), the quotes will be
+included in the value passed to Compose.
 
 ### environment
 
@@ -716,7 +726,7 @@ Logging configuration for the service.
 
 The `driver`  name specifies a logging driver for the service's
 containers, as with the ``--log-driver`` option for docker run
-([documented here](/engine/reference/logging/overview.md)).
+([documented here](/engine/admin/logging/overview.md)).
 
 The default value is json-file.
 
@@ -853,11 +863,11 @@ In the example below, three services are provided (`web`, `worker`, and `db`), a
 
 Specify a static IP address for containers for this service when joining the network.
 
-The corresponding network configuration in the [top-level networks section](compose-file.md#network-configuration-reference) must have an `ipam` block with subnet and gateway configurations covering each static address. If IPv6 addressing is desired, the `com.docker.network.enable_ipv6` driver option must be set to `true`.
+The corresponding network configuration in the [top-level networks section](compose-file.md#network-configuration-reference) must have an `ipam` block with subnet and gateway configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](compose-file.md#enableipv6) option must be set.
 
 An example:
 
-    version: '2'
+    version: '2.1'
 
     services:
       app:
@@ -871,8 +881,7 @@ An example:
     networks:
       app_net:
         driver: bridge
-        driver_opts:
-          com.docker.network.enable_ipv6: "true"
+        enable_ipv6: true
         ipam:
           driver: default
           config:
@@ -1073,6 +1082,7 @@ There are several things to note, depending on which
 -   No path expansion will be done if you have also specified a `volume_driver`.
     For example, if you specify a mapping of `./foo:/data`, the `./foo` part
     will be passed straight to the volume driver without being expanded.
+
 
 See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
@@ -1532,7 +1542,7 @@ available with Docker Engine version **1.12.0+**
 
 Introduces the following additional parameters:
 
-- [`link_local_ips`](compose-file.md#link_local_ips)
+- [`link_local_ips`](compose-file.md#linklocalips)
 - [`isolation`](compose-file.md#isolation)
 - `labels` for [volumes](compose-file.md#volume-configuration-reference) and
   [networks](compose-file.md#network-configuration-reference)
@@ -1690,6 +1700,16 @@ If an environment variable is not set, Compose substitutes with an empty
 string. In the example above, if `EXTERNAL_PORT` is not set, the value for the
 port mapping is `:5000` (which is of course an invalid port mapping, and will
 result in an error when attempting to create the container).
+
+You can set default values for environment variables using a
+[`.env` file](env-file.md), which Compose will automatically look for. Values
+set in the shell environment will override those set in the `.env` file.
+
+    $ unset EXTERNAL_PORT
+    $ echo "EXTERNAL_PORT=6000" > .env
+    $ docker-compose up          # EXTERNAL_PORT will be 6000
+    $ export EXTERNAL_PORT=7000
+    $ docker-compose up          # EXTERNAL_PORT will be 7000
 
 Both `$VARIABLE` and `${VARIABLE}` syntax are supported.
 Additionally when using the [2.1 file format](compose-file.md#version-21), it

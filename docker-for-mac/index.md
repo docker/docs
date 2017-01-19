@@ -8,26 +8,26 @@ redirect_from:
 - /mac/started/
 - /docker-for-mac/started/
 - /installation/mac/
+- /engine/installation/mac/
 title: Get started with Docker for Mac
 ---
 
 Welcome to Docker for Mac!
 
-Please read through these topics on how to get started. To **give us feedback**
-on your experience with the app and report bugs or problems, log in to our
-[Docker for Mac forum](https://forums.docker.com/c/docker-for-mac).
+Docker is a full development platform for creating containerized apps, and
+Docker for Mac is the best way to get started with Docker on a Mac.
 
->**Already have Docker for Mac?** If you already have Docker for Mac installed,
-and are ready to get started, skip over to the [Getting Started with
-Docker](/engine/getstarted/index.md) tutorial.
+>**Already have Docker for Mac?** If you already have Docker for Mac installed, and are ready to get started, skip down to [Step 2. Check versions of Docker
+Engine, Compose, and
+Machine](#step-2-check-versions-of-docker-engine-compose-and-machine) to work
+through the rest of the Docker for Mac tour, or jump over to the standard
+[Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
 ## Download Docker for Mac
 
 If you have not already done so, please install Docker for Mac. You can download
-installers from the stable or beta channel.
-
-For more about stable and beta channels, see the
-[FAQs](faqs.md#stable-and-beta-channels).
+installers from the stable or beta channel. For more about stable and beta
+channels, see the [FAQs](faqs.md#stable-and-beta-channels).
 
 <table style="width:100%">
   <tr>
@@ -35,9 +35,9 @@ For more about stable and beta channels, see the
     <th style="font-size: x-large; font-family: arial">Beta channel</th>
   </tr>
   <tr valign="top">
-    <td width="50%">This installer is fully baked and tested, and comes with the latest GA version of Docker Engine. <br><br>This is the best channel to use if you want a reliable platform to work with. <br><br>These releases follow a version schedule with a longer lead time than the betas, synched with Docker Engine releases and hotfixes.
+    <td width="50%">This installer is fully baked and tested, and comes with the latest GA version of Docker Engine. <br><br>This is the best channel to use if you want a reliable platform to work with. <br><br>These releases follow a version schedule with a longer lead time than the betas, synched with Docker Engine releases and hotfixes.<br><br>On the stable channel, you can select whether to send usage statistics and other data.
     </td>
-    <td width="50%">This installer offers cutting edge features and comes with the experimental version of Docker Engine, which is described in the <a href="https://github.com/docker/docker/tree/master/experimental" target="_blank">Docker Experimental Features README</a> on GitHub.<br><br>This is the best channel to use if you want to experiment with features we are working on as they become available, and can weather some instability and bugs. This channel is a continuation of the beta program, where you can provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month.</td>
+    <td width="50%">This installer offers cutting edge features and comes with the experimental version of Docker Engine, described in the <a href="https://github.com/docker/docker/tree/master/experimental">Docker Experimental Features README</a> on GitHub.<br><br>This is the best channel to use if you want to experiment with features under development, and can weather some instability and bugs. This channel is a continuation of the beta program, where you can provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month. <br><br>We collect usage data on betas across the board.</td>
   </tr>
   <tr valign="top">
   <td width="50%">
@@ -53,10 +53,10 @@ For more about stable and beta channels, see the
 
 >**Important Notes**:
 >
->- Docker for Mac requires macOS 10.10.3 Yosemite or newer running on a 2010 or
->    newer Mac, with Intel's  hardware support for MMU virtualization. Please see
+>- Docker for Mac requires OS X El Capitan 10.11 or newer macOS release running on a 2010 or
+>    newer Mac, with Intel's  hardware support for MMU virtualization. The app will run on 10.10.3 Yosemite, but with limited support. Please see
 >    [What to know before you install](index.md#what-to-know-before-you-install)
->    for a full list of prerequisites.
+>    for a full explanation and list of prerequisites.
 >
 >- You can switch between beta and stable versions, but you must have only one
 >    app installed at a time. Also, you will need to save images and export
@@ -70,15 +70,17 @@ For more about stable and beta channels, see the
 <p />
 *  **Relationship to Docker Machine**: Installing Docker for Mac does not affect machines you created with Docker Machine. You'll get the option to copy containers and images from your local `default` machine (if one exists) to the new Docker for Mac <a href="https://github.com/docker/HyperKit/" target="_blank">HyperKit</a> VM. When you are running Docker for Mac, you do not need Docker Machine nodes running at all locally (or anywhere else). With Docker for Mac, you have a new, native virtualization system running (HyperKit) which takes the place of the VirtualBox system. To learn more, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 <p />
-* **System Requirements**: Docker for Mac will launch only if all these requirements are met.
+* **System Requirements**: Docker for Mac will launch only if all of these requirements are met.
 
-	- Mac must be a 2010 or newer model, with Intel's hardware support for memory management unit (MMU) virtualization; i.e., Extended Page Tables (EPT)
+	- Mac must be a 2010 or newer model, with Intel's hardware support for memory management unit (MMU) virtualization; i.e., Extended Page Tables (EPT) and Unrestricted Mode.
 
-	- macOS 10.10.3 Yosemite or newer
+  - OS X El Capitan 10.11 and newer macOS releases are supported. At a minimum, Docker for Mac requires macOS Yosemite 10.10.3 or newer, with the caveat that going forward 10.10.x is a use-at-your-own risk proposition.
 
-	- At least 4GB of RAM
+  - Starting with Docker for Mac stable release 1.13 (upcoming), and concurrent Beta releases, we will no longer address issues specific to OS X Yosemite 10.10. In future releases, Docker for Mac could stop working on OS X Yosemite 10.10 due to the deprecated status of this OS X version. We recommend upgrading to the latest version of macOS.
 
-	- VirtualBox prior to version 4.3.30 must NOT be installed (it is incompatible with Docker for Mac)
+  - At least 4GB of RAM
+
+  - VirtualBox prior to version 4.3.30 must NOT be installed (it is incompatible with Docker for Mac)
 
   >**Note**: If your system does not satisfy these requirements, you can install [Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of HyperKit.
 
@@ -118,14 +120,14 @@ For more about stable and beta channels, see the
 Run these commands to test if your versions of `docker`, `docker-compose`, and `docker-machine` are up-to-date and compatible with `Docker.app`.
 
 ```shell
-	$ docker --version
-	Docker version 1.12.0, build 8eab29e
+$ docker --version
+Docker version 1.13.0-rc3, build 4d92237
 
-	$ docker-compose --version
-	docker-compose version 1.8.0, build f3628c7
+$ docker-compose --version
+docker-compose version 1.9.0, build 2585387
 
-	$ docker-machine --version
-	docker-machine version 0.8.0, build b85aac1
+$ docker-machine --version
+docker-machine version 0.9.0-rc2, build 7b19591
 ```
 
 >**Note**: The above is an example. Your output will differ if you are running different (e.g., newer) versions.
@@ -157,47 +159,153 @@ Run these commands to test if your versions of `docker`, `docker-compose`, and `
 
 4. Stop or remove containers and images.
 
-    The `nginx` webserver will continue to run in the container on that port until you stop and/or remove the container. If you want to stop the webserver, type: `docker stop webserver` and start it again with `docker start webserver`.
+    The `nginx` webserver will continue to run in the container on that port
+    until you stop and/or remove the container. If you want to stop the
+    webserver, type: `docker stop webserver` and start it again with `docker
+    start webserver`. A stopped container will not show up with `docker ps`; for
+    that, you need to run `docker ps -a`.
 
-    To stop and remove the running container with a single command, type: `docker rm -f webserver`. This will remove the container, but not the `nginx` image. You can list local images with `docker images`. You might want to keep some images around so that you don't have to pull them again from Docker Hub. To remove an image you no longer need, use `docker rmi <imageID>|<imageName>`. For example, `docker rmi nginx`.
+    To stop and remove the running container with a single command, type:
+    `docker rm -f webserver`. This will remove the container, but not the
+    `nginx` image. You can list local images with `docker images`. You might
+    want to keep some images around so that you don't have to pull them again
+    from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
 
 **Want more example applications?** - For more example walkthroughs that include setting up  services and databases in Docker Compose, see [Example Applications](examples.md).
 
 ## Preferences
 
-Choose <img src="images/whale-x.png"> --> **Preferences** from the menu bar. You can set the following runtime options.
+Choose <img src="images/whale-x.png"> --> **Preferences** from the menu bar. You
+can set the following runtime options.
 
-#### General
+### General
 
 ![Preferences](images/settings.png)
 
-* Docker for Mac is set to **automatically start** when you log in. Uncheck the login autostart option if you don't want Docker to start when you open your session.
+#### Auto-start, update, and backups
 
-* Docker for Mac is set to **check for updates** automatically and notify you when an update is available. If an update is found, click **OK** to accept and install it (or cancel to keep the current version). If you disable the check for updates, you can still find out about updates manually by choosing <img src="images/whale-x.png"> -> **Check for Updates**
+* Docker for Mac is set to **automatically start** when you log in. Uncheck the login autostart option if you don't want Docker to start when you open your
+session.
+
+* Docker for Mac is set to **check for updates** automatically and notify you when an update is available. If an update is found, click **OK** to accept and
+install it (or cancel to keep the current version). If you disable the check for
+updates, you can still find out about updates manually by choosing <img
+src="images/whale-x.png"> -> **Check for Updates**
 
 * Check **Exclude VM from Time Machine backups** to prevent Time Machine from backing up the Docker for Mac virtual machine.
 
-* **CPUs** - By default, Docker for Mac is set to use 2 processors. You can increase processing power for the app by setting this to a higher number, or lower it to have Docker for Mac use fewer computing resources.
+  >**Tip: Beta dialogs** &mdash;  Starting with Beta 31, an option to auto-send
+  usage data is also on the General dialog. In Stable releases, the option is
+  still on the Privacy tab. For now, both Stable and Beta users can read more
+  about usage data settings in the [Privacy](#Privacy) topic.
 
-* **Memory** - By default, Docker for Mac is set to use `2` GB runtime memory, allocated from the total available memory on your Mac. You can increase the RAM on the app to get faster performance by setting this number higher (for example to `3`) or lower (to `1`) if you want Docker for Mac to use less memory.
+#### CPUs
 
-#### Advanced
+By default, Docker for Mac is set to use 2 processors. You can increase
+processing power for the app by setting this to a higher number, or lower it to
+have Docker for Mac use fewer computing resources.
+
+#### Memory
+
+By default, Docker for Mac is set to use `2` GB runtime memory, allocated from
+the total available memory on your Mac. You can increase the RAM on the app to
+get faster performance by setting this number higher (for example to `3`) or
+lower (to `1`) if you want Docker for Mac to use less memory.
+
+>**Tip: Beta dialogs** &mdash; Starting with Beta 31, **CPUs** and **Memory** settings
+are on the Advanced dialog. Starting with Beta 33, you can specify the **storage location** of the Linux volume; i.e., where containers and images are stored. These settings are shown below.
+>
+>![CPUs and Memory settings UI
+starting at Beta 31](images/settings-advanced-beta.png)
+
+### Advanced
 
 ![Advanced Preference settings-advanced](images/settings-advanced.png)
 
-* **Adding registries** - As an alternative to using [Docker Hub](https://hub.docker.com/) to store your public or private images or [Docker
-Trusted Registry](/docker-trusted-registry/overview/),
-you can use Docker to set up your own insecure
-[registry](/registry/introduction/). Add URLs for
-insecure registries and registry mirrors on which to host your images. (See
-also, [How do I add custom CA
-certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in the FAQs.)
+#### Custom registries
 
-* **HTTP proxy settings** - Docker for Mac will detect HTTP/HTTPS Proxy Settings and automatically propagate these to Docker and to your containers.
-For example, if you set your proxy settings to `http://proxy.example.com`, Docker will use this proxy when pulling containers.
+As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
+public or private images or [Docker Trusted
+Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up your
+own insecure [registry](/registry/introduction/). Add URLs for insecure
+registries and registry mirrors on which to host your images. (See also, [How do
+I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in
+the FAQs.)
 
+>**Tip: Beta dialogs** &mdash;  Starting with Beta 31, options to set up your
+own registries are available as part of a new daemon tab. See [Docker
+daemon](#docker-daemon-beta-feature)).
 
-#### File sharing
+#### HTTP proxy settings
+
+Docker for Mac will detect HTTP/HTTPS Proxy Settings and automatically propagate
+these to Docker and to your containers. For example, if you set your proxy
+settings to `http://proxy.example.com`, Docker will use this proxy when pulling
+containers.
+
+>**Tip: Beta dialogs** &mdash;  Starting with Beta 31, HTTP proxy settings are provided on a dedicated dialog, as shown below.
+>
+>![Proxies settings](images/settings-proxies-beta.png)
+
+### Docker Daemon (Beta feature)
+
+Starting with Beta 31, configuration options on the Docker daemon move to their
+own **Daemon** tab, including basic and advanced options.
+
+#### Daemon Basic (experimental mode and registries)
+
+By default, Docker for Mac Beta releases use the experimental version of Docker
+Engine, described in the [Docker Experimental Features README](https://github.com/docker/docker/tree/master/experimental) on GitHub. Starting with
+Beta 31, you can toggle **experimental mode** on and off. If you toggle it off,
+Docker for Mac Beta uses the current generally available release of Docker
+Engine, the same as Stable Docker for Mac versions uses.
+
+You can check whether you are running experimental mode or not by typing `docker
+version` on the command line. Experimental mode is listed under `Server` data.
+If `Experimental` is `true`, then Docker is running in experimental mode, as
+shown here. (If `false`, Experimental mode is off.)
+
+```bash
+$ docker version
+Client:
+ Version:      1.13.0-rc3
+ API version:  1.25
+ Go version:   go1.7.3
+ Git commit:   4d92237
+ Built:        Tue Dec  6 01:15:44 2016
+ OS/Arch:      darwin/amd64
+
+Server:
+ Version:      1.13.0-rc3
+ API version:  1.25 (minimum version 1.12)
+ Go version:   go1.7.3
+ Git commit:   4d92237
+ Built:        Tue Dec  6 01:15:44 2016
+ OS/Arch:      linux/amd64
+ Experimental: true
+```
+
+You can use Docker to set up your own
+[registries](/registry/introduction/). For details on this, see [Custom
+Registries](#custom-registries).
+
+![Daemon](images/settings-advanced-experimental-beta.png)
+
+#### Daemon Advanced (JSON configuration file)
+
+On the **Daemon -> Advanced dialog**, you can directly configure the daemon from
+the JSON file, and determine entirely how your containers will run. For a full
+list of options on the Docker daemon, see <a
+href="/engine/reference/commandline/dockerd/"
+target="_blank">daemon</a> in the Docker Engine command line reference.
+
+After editing the daemon configuration , click **Apply & Restart** to save it
+and reboot Docker. Or, to cancel changes, click another preference tab, then
+choose to discard or not apply changes when asked.
+
+![Docker Daemon](images/settings-daemon-beta.png)
+
+### File sharing
 
 You can decide which directories on your Mac to share with containers.
 
@@ -221,13 +329,15 @@ outside of the `/Users` directory. In that case, share the drive where the
 Dockerfile and volume are located. Otherwise, you will get file not found or
 cannot start service errors at runtime. (See also [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
 
-#### Privacy
+### Privacy
 
 You can set Docker for Mac to auto-send diagnostics, crash reports, and usage data. This information can help Docker improve the application and get more context for troubleshooting problems.
 
 Uncheck any of the options to opt out and prevent auto-send of data. Docker may prompt for more information in some cases, even with auto-send enabled.
 
 ![Privacy](images/privacy.png)
+
+>**Tip: Beta dialogs** &mdash;  Starting with Beta 31, options to enable or disable auto-send of usage data are on the [General](#general) dialog.
 
 Also, you can enable or disable these auto-reporting settings with one click on the information popup when you first start Docker.
 
@@ -264,17 +374,35 @@ To activate bash completion, these files need to be copied or symlinked to
 your bash_completion.d directory. For example, if you use <a href="http://brew.sh/" target="_blank">Homebrew</a>:
 
 ```
-cd /usr/local/etc/bash_completion.d
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion
-ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion /usr/local/etc/bash_completion.d/docker
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker-machine.bash-completion /usr/local/etc/bash_completion.d/docker-machine
+ln -s /Applications/Docker.app/Contents/Resources/etc/docker-compose.bash-completion /usr/local/etc/bash_completion.d/docker-compose
 ```
+
+## Giving feedback and getting help
+
+To get help from the community, review current user topics, join or start a
+discussion, log on to our [Docker for Mac
+forum](https://forums.docker.com/c/docker-for-mac).
+
+To report bugs or problems, log on to [Docker for Mac issues on
+GitHub](https://github.com/docker/for-mac/issues), where you can review
+community reported issues, and file new ones. See [Diagnose problems, send
+feedback, and create GitHub
+issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
+As a part of reporting issues on GitHub, we can help you troubleshoot the log
+data.
+
+To give us feedback on the documentation or update it yourself, use the Feedback
+options at the bottom of each docs page.
 
 ## Where to go next
 
 * Try out the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
-* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on on building images, running containers, networking, managing data, and storing images on Docker Hub.
+* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on
+  building images, running containers, networking, managing data, and storing
+  images on Docker Hub.
 
 * See [Example Applications](examples.md) for example applications that include setting up services and databases in Docker Compose.
 

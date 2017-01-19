@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Swarm and transport layer security
 keywords: docker, swarm, TLS, discovery, security, certificates
 title: Use Docker Swarm with TLS
@@ -79,7 +81,7 @@ authentication.
 
 ![](images/trust-diagram.jpg)
 
-The trusted third party in this diagram is the the Certificate Authority (CA)
+The trusted third party in this diagram is the Certificate Authority (CA)
 server. Like the country in the passport example, a CA creates, signs, issues,
 revokes certificates. Trust is established by installing the CA's root
 certificate on the host running the Docker Engine daemon. The Docker Engine CLI then requests
@@ -92,11 +94,11 @@ the Docker Engine daemon automatically trusts any certificates signed by the CA.
 certificate is in order (the certificate has not expired or been revoked etc.)
 the Docker Engine daemon accepts commands from this trusted Docker Engine CLI.
 
-The Docker Engine CLI is simply a client that uses the Docker Engine Remote API to
-communicate with the Docker Engine daemon. Any client that uses this Docker Engine Remote API can use
+The Docker Engine CLI is simply a client that uses the Docker Engine API to
+communicate with the Docker Engine daemon. Any client that uses this Docker Engine API can use
 TLS. For example, Docker Engine clients such as 'Docker Universal Control Plane'
 (UCP) have TLS support built-in. Other, third party products, that use Docker Engine
-Remote API, can also be configured this way.
+API, can also be configured this way.
 
 ## TLS modes with Docker and Swarm
 

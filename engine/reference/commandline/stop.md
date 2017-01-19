@@ -1,21 +1,15 @@
 ---
-redirect_from:
-  - /reference/commandline/stop/
-description: The stop command description and usage
-keywords:
-- stop, SIGKILL, SIGTERM
+datafolder: engine-cli
+datafile: docker_stop
 title: docker stop
 ---
 
-```markdown
-Usage:  docker stop [OPTIONS] CONTAINER [CONTAINER...]
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-Stop one or more running containers
+https://www.github.com/docker/docker
+-->
 
-Options:
-      --help       Print usage
-  -t, --time int   Seconds to wait for stop before killing it (default 10)
-```
-
-The main process inside the container will receive `SIGTERM`, and after a grace
-period, `SIGKILL`.
+{% include cli.md %}

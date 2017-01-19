@@ -1,8 +1,7 @@
 ---
-title: Permission levels
 description: Learn about the permission levels available in Docker Trusted Registry.
-keywords:
-- docker, registry, security, permissions
+keywords: docker, registry, security, permissions
+title: Permission levels
 ---
 
 Docker Trusted Registry allows you to define fine-grain permissions over image

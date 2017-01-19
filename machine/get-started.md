@@ -12,7 +12,7 @@ Docker host inside of a local virtual machine.
 With the advent of [Docker for Mac](/docker-for-mac/index.md) and [Docker for
 Windows](/docker-for-windows/index.md) as replacements for [Docker
 Toolbox](/toolbox/overview.md), we recommend that you use these for your primary
-Docker workflows. You can use these applications to run Docker natively on your local system without using Docker Machine at all. (See [Docker for Mac vs. Docker Toolbox](docker-for-mac/docker-toolbox.md) for an explanation on the Mac side.)
+Docker workflows. You can use these applications to run Docker natively on your local system without using Docker Machine at all. (See [Docker for Mac vs. Docker Toolbox](/docker-for-mac/docker-toolbox.md) for an explanation on the Mac side.)
 
 However, if you want to create _multiple_ local machines, you need Docker Machine, which is still available to create and manage machines for
 power users or multi-node experimentation. Both Docker for Mac and Docker for
@@ -72,8 +72,8 @@ Microsoft Hyper-V](drivers/hyper-v.md).)
 * Make sure you have <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">the latest VirtualBox</a> correctly installed on your system. If
 you used <a href="https://www.docker.com/products/docker-toolbox"
 target="_blank">Toolbox</a> for <a
-href="https://docs.docker.com/engine/installation/mac/" target="_blank">Mac</a>
-or <a href="https://docs.docker.com/engine/installation/windows/"
+href="/engine/installation/mac/" target="_blank">Mac</a>
+or <a href="/engine/installation/windows/"
 target="_blank">Windows</a> to install Docker Machine, VirtualBox is
 automatically installed.
 <br />
@@ -164,7 +164,7 @@ choose another name for this new machine.
 
       **Note**: If you are using `fish`, or a Windows shell such as
       Powershell/`cmd.exe` the above method will not work as described.
-      Instead, see <a href="https://docs.docker.com/machine/reference/env/" target="_blank">the `env` command's documentation</a>
+      Instead, see <a href="/machine/reference/env/" target="_blank">the `env` command's documentation</a>
       to learn how to set the environment variables for your shell.
 
     This sets environment variables for the current shell that the Docker client will read which specify the TLS settings. You need to do this each time you open a new shell or restart your machine.

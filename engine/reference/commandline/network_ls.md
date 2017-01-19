@@ -1,52 +1,41 @@
 ---
-redirect_from:
-  - /reference/commandline/network_ls/
-description: The network ls command description and usage
-keywords:
-- network, list, user-defined
+datafolder: engine-cli
+datafile: docker_network_ls
 title: docker network ls
 ---
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-```markdown
-Usage:  docker network ls [OPTIONS]
+https://www.github.com/docker/docker
+-->
+{% include cli.md %}
 
-List networks
-
-Aliases:
-  ls, list
-
-Options:
-  -f, --filter value   Provide filter values (i.e. 'dangling=true') (default [])
-      --help           Print usage
-      --no-trunc       Do not truncate the output
-  -q, --quiet          Only display network IDs
-```
-
-Lists all the networks the Engine `daemon` knows about. This includes the
-networks that span across multiple hosts in a cluster, for example:
+## Examples
 
 ```bash
-    $ sudo docker network ls
-    NETWORK ID          NAME                DRIVER
-    7fca4eb8c647        bridge              bridge
-    9f904ee27bf5        none                null
-    cf03ee007fb4        host                host
-    78b03ee04fc4        multi-host          overlay
+    $ docker network ls
+    NETWORK ID          NAME                DRIVER          SCOPE
+    7fca4eb8c647        bridge              bridge          local
+    9f904ee27bf5        none                null            local
+    cf03ee007fb4        host                host            local
+    78b03ee04fc4        multi-host          overlay         swarm
 ```
 
 Use the `--no-trunc` option to display the full network id:
 
 ```bash
-docker network ls --no-trunc
+$ docker network ls --no-trunc
 NETWORK ID                                                         NAME                DRIVER
-18a2866682b85619a026c81b98a5e375bd33e1b0936a26cc497c283d27bae9b3   none                null
-c288470c46f6c8949c5f7e5099b5b7947b07eabe8d9a27d79a9cbf111adcbf47   host                host
-7b369448dccbf865d397c8d2be0cda7cf7edc6b0945f77d2529912ae917a0185   bridge              bridge
-95e74588f40db048e86320c6526440c504650a1ff3e9f7d60a497c4d2163e5bd   foo                 bridge
+18a2866682b85619a026c81b98a5e375bd33e1b0936a26cc497c283d27bae9b3   none                null                
+c288470c46f6c8949c5f7e5099b5b7947b07eabe8d9a27d79a9cbf111adcbf47   host                host                
+7b369448dccbf865d397c8d2be0cda7cf7edc6b0945f77d2529912ae917a0185   bridge              bridge              
+95e74588f40db048e86320c6526440c504650a1ff3e9f7d60a497c4d2163e5bd   foo                 bridge    
 63d1ff1f77b07ca51070a8c227e962238358bd310bde1529cf62e6c307ade161   dev                 bridge
 ```
 
-## Filtering
+### Filtering
 
 The filtering flag (`-f` or `--filter`) format is a `key=value` pair. If there
 is more than one filter, then pass multiple flags (e.g. `--filter "foo=bar" --filter "bif=baz"`).
@@ -109,7 +98,7 @@ The following filter matches networks with the `usage` label regardless of its v
 ```bash
 $ docker network ls -f "label=usage"
 NETWORK ID          NAME                DRIVER
-db9db329f835        test1               bridge
+db9db329f835        test1               bridge              
 f6e212da9dfd        test2               bridge
 ```
 
@@ -166,11 +155,16 @@ $ docker network rm `docker network ls --filter type=custom -q`
 A warning will be issued when trying to remove a network that has containers
 attached.
 
-## Related information
+### Format
 
-* [network disconnect ](network_disconnect.md)
-* [network connect](network_connect.md)
-* [network create](network_create.md)
-* [network inspect](network_inspect.md)
-* [network rm](network_rm.md)
-* [Understand Docker container networks](../../userguide/networking/index.md)
+Format uses a Go template to print the output. The following variables are
+supported:
+
+* .ID - Network ID
+* .Name - Network name
+* .Driver - Network driver
+* .Scope - Network scope (local, global)
+* .IPv6 - Whether IPv6 is enabled on the network or not
+* .Internal - Whether the network is internal or not
+* .Labels - All labels assigned to the network
+* .Label - Value of a specific label for this network. For example `{% raw %}{{.Label "project.version"}}{% endraw %}`

@@ -20,13 +20,13 @@ processes and do not affect your service's run environment.
 * `COMMIT_MSG`: the message from the commit being tested and built.
 * `DOCKER_REPO`: the name of the Docker repository being built.
 * `DOCKER_TAG`: the Docker repository tag being built.
-* `IMAGE_NAME`: the name and tag of the Docker repository being built. (This variable is a combination of `DOCKER_REPO`/`DOCKER_TAG`.)
+* `IMAGE_NAME`: the name and tag of the Docker repository being built. (This variable is a combination of `DOCKER_REPO`:`DOCKER_TAG`.)
 
 If you are using these build environment variables in a
 `docker-compose.test.yml` file for automated testing, declare them in your `sut`
 service's environment as shown below.
 
-```yml
+```none
 sut:
   build: .
   command: run_tests.sh
@@ -86,7 +86,7 @@ docker build --build-arg CUSTOM=$VAR -t $IMAGE_NAME
 used by the builder, so you must include a similar build command in the hook or
 the automated build will fail.
 
-To learn more about Docker build-time variables, see the [docker build documentation]( https://docs.docker.com/engine/reference/commandline/build/#/set-build-time-variables---build-arg).
+To learn more about Docker build-time variables, see the [docker build documentation](/engine/reference/commandline/build/#/set-build-time-variables---build-arg).
 
 #### Two-phase build
 

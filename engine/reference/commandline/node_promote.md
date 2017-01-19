@@ -1,28 +1,13 @@
 ---
-redirect_from:
-  - /reference/commandline/node_promote/
-description: The node promote command description and usage
-keywords:
-- node, promote
+datafolder: engine-cli
+datafile: docker_node_promote
 title: docker node promote
 ---
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-```markdown
-Usage:  docker node promote NODE [NODE...]
-
-Promote one or more nodes to manager in the swarm
-
-Options:
-      --help   Print usage
-```
-
-Promotes a node to manager. This command targets a docker engine that is a manager in the swarm.
-
-
-```bash
-$ docker node promote <node name>
-```
-
-## Related information
-
-* [node demote](node_demote.md)
+https://www.github.com/docker/docker
+-->
+{% include cli.md %}

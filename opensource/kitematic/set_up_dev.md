@@ -136,7 +136,7 @@ You can set your signature globally or locally.
     ```
 
 (To learn more, see <a
-href="http://docs.docker.com/opensource/project/set-up-git/#set-your-signature-and-an-upstream-remote" target="_blank"> Set up your signature and an upstream remote</a>.)
+href="/opensource/project/set-up-git/#set-your-signature-and-an-upstream-remote" target="_blank"> Set up your signature and an upstream remote</a>.)
 
 ## Install dependencies, start Kitematic, and verify your setup
 Your Node.js install includes npm for package management. You'll use it to install supporting packages and start the app.

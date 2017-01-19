@@ -97,43 +97,68 @@ back to a "copy and unlink" strategy.
 
 ## Configure Docker with AUFS
 
+### Prerequisites
+
 You can only use the AUFS storage driver on Linux systems with AUFS installed.
 Use the following command to determine if your system supports AUFS.
 
-    $ grep aufs /proc/filesystems
+```bash
+$ grep aufs /proc/filesystems
 
-    nodev   aufs
+nodev   aufs
+```
 
-This output indicates the system supports AUFS. Once you've verified your
-system supports AUFS, you can must instruct the Docker daemon to use it. You do
-this from the command line with the `dockerd` command:
+This output indicates the system supports AUFS. If you get no output, your system does
+not support AUFS. To address this:
 
-    $ sudo dockerd --storage-driver=aufs &
+- Upgrade your host system's kernel to 3.13 or higher. It is recommended to intall the
+  kernel headers when you upgrade.
 
+- **Ubuntu or Debian**: In addition to updating the kernel if necessary, install the
+  `linux-image-extra-*` packages:
+  
+  ```bash
+  $ sudo apt-get install linux-image-extra-$(uname -r) \
+                         linux-image-extra-virtual
+  ```
 
-Alternatively, you can edit the Docker config file and add the
+### Configuration
+
+When you have verified that you meet the prerequisites, instruct the Docker daemon to use
+AUFS by starting the Docker daemon with the flag `--storage-driver=aufs`:
+
+```bash
+$ sudo dockerd --storage-driver=aufs &
+```
+
+To make the change permanent, you can edit the Docker configuration file and add the
 `--storage-driver=aufs` option to the `DOCKER_OPTS` line.
 
-    # Use DOCKER_OPTS to modify the daemon startup options.
-    DOCKER_OPTS="--storage-driver=aufs"
+```none
+# Use DOCKER_OPTS to modify the daemon startup options.
+DOCKER_OPTS="--storage-driver=aufs"
+```
 
-Once your daemon is running, verify the storage driver with the `docker info`
-command.
+After the daemon starts, verify the default storage driver using the `docker info`
+command:
 
-    $ sudo docker info
+```bash
+$ sudo docker info
 
-    Containers: 1
-    Images: 4
-    Storage Driver: aufs
-     Root Dir: /var/lib/docker/aufs
-     Backing Filesystem: extfs
-     Dirs: 6
-     Dirperm1 Supported: false
-    Execution Driver: native-0.2
-    ...output truncated...
+Containers: 1
+Images: 4
+Storage Driver: aufs
+ Root Dir: /var/lib/docker/aufs
+ Backing Filesystem: extfs
+ Dirs: 6
+ Dirperm1 Supported: false
+Execution Driver: native-0.2
+...output truncated...
+```
 
-The output above shows that the Docker daemon is running the AUFS storage
-driver on top of an existing `ext4` backing filesystem.
+Look for the `Storage Driver` line. If its value is `aufs`, the Docker daemon is
+using the AUFS storage driver on top of the filesystem listed on the
+`Backing Filesystem` line.
 
 ## Local storage and AUFS
 

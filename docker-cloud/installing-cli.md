@@ -18,35 +18,59 @@ necessary.
 
 Install the docker-cloud CLI either by running a Docker container, or by using the package manager for your system.
 
-#### Install using a Docker container
+#### Run the CLI in a Docker container
 
-If you have Docker Engine installed locally, you can simply run the following command regardless of which operating system you are using.
+If you have Docker Engine installed locally, you can run the following `docker`
+command in your shell regardless of which operating system you are using.
 
-```
+```none
 docker run dockercloud/cli -h
 ```
 
-This runs a container that installs the docker-cloud CLI for you. Learn more about this container [here](https://github.com/docker/dockercloud-cli#docker-image).
+This command runs the `docker-cloud` CLI image in a container for you. Learn
+more about how to use this container
+[here](https://github.com/docker/dockercloud-cli#docker-image).
 
 #### Install for Linux or Windows
 
-Open your terminal or command shell and execute the following command:
+You can install the CLI locally using the [pip](https://pip.pypa.io/en/stable/)
+package manager, which is a package manager for
+[Python](https://www.python.org/) applications.
+
+* If you already have 2.x or Python 3.x installed, you probably have `pip` and
+`setuptools`, but will need to upgrade per the instructions
+[here](https://packaging.python.org/installing/).
+
+* If you do not have Python or `pip` installed, you can either [install
+Python](https://wiki.python.org/moin/BeginnersGuide/Download) or use this
+[standalone pip
+installer](https://pip.pypa.io/en/latest/installing/#installing-with-get-pip-py). You do not need Python for our purposes, just `pip`.
+
+Now that you have `pip`, open a shell or terminal
+window and run the following command to install the docker-cloud CLI:
 
 ```bash
 $ pip install docker-cloud
 ```
-If you encounter errors on Linux machines, make sure that `python-dev` is installed.
-For example, on Ubuntu, run the following command: `apt-get install python-dev`
+
+If you encounter errors on Linux machines, make sure that `python-dev` is
+installed. For example, on Ubuntu, run the following command: `apt-get install
+python-dev`
 
 #### Install on macOS
 
-We recommend installing Docker CLI for macOS using Homebrew. If you don't have `brew` installed, follow the instructions here: <a href="http://brew.sh" target="_blank">http://brew.sh</a>
+We recommend installing Docker CLI for macOS using Homebrew. If you don't have
+`brew` installed, follow the instructions here: <a href="http://brew.sh"
+target="_blank">http://brew.sh</a>
 
 Once Homebrew is installed, open Terminal and run the following command:
 
 ```bash
 $ brew install docker-cloud
 ```
+
+> **Note:** You can also use [pip](https://pip.pypa.io/en/stable/) to install on macOS, but we suggest Homebrew since it is a package manager designed for the
+Mac.
 
 #### Validate the installation
 
@@ -63,7 +87,7 @@ First, you should log in using the `docker` CLI and the `docker login` command.
 Your Docker ID, which you also use to log in to Docker Hub, is also used for
 logging in to Docker Cloud.
 
-```bash
+```none
 $ docker login
 Username: user
 Password:
@@ -75,19 +99,44 @@ Login succeeded!
 
 See the [Developer documentation](/apidocs/docker-cloud.md) for more information on using the CLI and our APIs.
 
+
+## Use the docker-cloud CLI with an organization
+
+When you use the docker-cloud CLI, it authenticates against the Docker Cloud
+service with the user credentials saved by the `docker login` command. To use
+the CLI to interact with objects belonging to an [Organization](orgs.md), you
+must override the `DOCKERCLOUD_NAMESPACE` environment variable that sets this
+user.
+
+For example:
+
+```none
+$ export DOCKERCLOUD_NAMESPACE=myorganization
+```
+
+You can also set the `DOCKERCLOUD_NAMESPACE` variable before each CLI command.
+for example:
+
+```none
+$ DOCKERCLOUD_NAMESPACE=myteam docker container ps
+```
+
+To learn more, see the [Docker Cloud CLI README](https://github.com/docker/dockercloud-cli#namespace).
+
+
 ## Upgrade the docker-cloud CLI
 
 Periodically, Docker will add new features and fix bugs in the existing CLI. To use these new features, you must upgrade the CLI.
 
 #### Upgrade on the docker-cloud CLI on Linux or Windows
 
-```
+```none
 $ pip install -U docker-cloud
 ```
 
 #### Upgrade the docker-cloud CLI on macOS
 
-```
+```none
 $ brew update && brew upgrade docker-cloud
 ```
 
@@ -100,7 +149,7 @@ with other applications on your system, you may want to uninstall and reinstall.
 
 Open your terminal or command shell and execute the following command:
 
-```
+```none
 $ pip uninstall docker-cloud
 ```
 
@@ -108,6 +157,6 @@ $ pip uninstall docker-cloud
 
 Open your Terminal application and execute the following command:
 
-```
+```none
 $ brew uninstall docker-cloud
 ```

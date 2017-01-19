@@ -1,9 +1,8 @@
 ---
-title: Backups and disaster recovery
 description: Learn how to backup your Docker Trusted Registry cluster, and to recover
   your cluster from an existing backup.
-keywords:
-- docker, registry, high-availability, backup, recovery
+keywords: docker, registry, high-availability, backup, recovery
+title: Backups and disaster recovery
 ---
 
 When you decide to start using Docker Trusted Registry on a production
@@ -57,8 +56,7 @@ backup command to learn about all the available flags.
 
 As an example, to create a backup of a DTR node, you can use:
 
-```bash
-# Create the backup
+```none
 $ docker run -i --rm docker/dtr backup \
   --ucp-url <ucp-url> \
   --ucp-insecure-tls \
@@ -77,7 +75,7 @@ Where:
 To validate that the backup was correctly performed, you can print the contents
 of the tar file created:
 
-```bash
+```none
 $ tar -tf /tmp/backup.tar
 ```
 
@@ -106,7 +104,7 @@ backup command to learn about all the available flags.
 As an example, to install DTR on the host and restore its
 state from an existing backup:
 
-```bash
+```none
 # Install and restore configurations from an existing backup
 $ docker run -i --rm \
   docker/dtr restore \
@@ -114,7 +112,7 @@ $ docker run -i --rm \
   --ucp-insecure-tls \  
   --ucp-username <ucp-admin> \
   --ucp-password <ucp-password> \
-  --dtr-load-balancer <dtr-domain-name> < /tmp/backup.tar
+  --dtr-external-url <dtr-url> < /tmp/backup.tar
 ```
 
 Where:
@@ -122,7 +120,7 @@ Where:
 * `--ucp-url` is the address of UCP,
 * `--ucp-insecure-tls` is to trust the UCP TLS certificate,
 * `--ucp-username`, and `--ucp-password` are the credentials of a UCP administrator,
-* `--dtr-load-balancer` is the domain name or ip where DTR can be reached.
+* `--dtr-external-url` is the domain name or ip where DTR can be reached.
 
 
 ## Where to go next

@@ -1,48 +1,15 @@
 ---
-redirect_from:
-  - /reference/commandline/service_rm/
-description: The service rm command description and usage
-keywords:
-- service, rm
+datafolder: engine-cli
+datafile: docker_service_rm
 title: docker service rm
 ---
 
-**Warning:** this command is part of the Swarm management feature introduced in Docker 1.12, and might be subject to non backward-compatible changes.
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-```Markdown
-Usage:	docker service rm [OPTIONS] SERVICE [SERVICE...]
+https://www.github.com/docker/docker
+-->
 
-Remove one or more services
-
-Aliases:
-  rm, remove
-
-Options:
-      --help   Print usage
-```
-
-Removes the specified services from the swarm. This command has to be run
-targeting a manager node.
-
-For example, to remove the redis service:
-
-```bash
-$ docker service rm redis
-redis
-$ docker service ls
-ID            NAME   SCALE  IMAGE        COMMAND
-```
-
-> **Warning**: Unlike `docker rm`, this command does not ask for confirmation
-> before removing a running service.
-
-
-
-## Related information
-
-* [service create](service_create.md)
-* [service inspect](service_inspect.md)
-* [service ls](service_ls.md)
-* [service scale](service_scale.md)
-* [service ps](service_ps.md)
-* [service update](service_update.md)
+{% include cli.md %}

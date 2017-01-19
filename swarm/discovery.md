@@ -1,4 +1,6 @@
 ---
+advisory: swarm-standalone
+hide_from_sitemap: true
 description: Swarm discovery
 keywords: docker, swarm, clustering,  discovery
 title: Docker Swarm discovery
@@ -179,7 +181,7 @@ swarm is connected to the public internet. To create your cluster:
 
 2. Create each node and join them to the cluster.
 
-    On each of your nodes, start the swarm agent. The node IP address doesn't have to be public (eg. 192.168.0.X) but the the Swarm manager must be able to access it.
+    On each of your nodes, start the swarm agent. The node IP address doesn't have to be public (eg. 192.168.0.X) but the Swarm manager must be able to access it.
 
         $ swarm join --advertise=<node_ip:2375> token://<cluster_id>
 

@@ -31,7 +31,7 @@ Here are some key points to know about Docker for Mac before you get started:
 
 * The Docker for Mac application does not use `docker-machine` to provision that VM; but rather creates and manages it directly.
 
-* At installation time, Docker for Mac provisions an HyperKit VM based on Alpine Linux, running Docker Engine. It exposes the docker API on a socket in `/var/tmp/docker.sock`. Since this is the default location where `docker` will look if no environment variables are set, you can start using `docker` and `docker-compose` without setting any environment variables.
+* At installation time, Docker for Mac provisions an HyperKit VM based on Alpine Linux, running Docker Engine. It exposes the docker API on a socket in `/var/run/docker.sock`. Since this is the default location where `docker` will look if no environment variables are set, you can start using `docker` and `docker-compose` without setting any environment variables.
 
 This setup is shown in the following diagram.
 
@@ -67,7 +67,7 @@ If you need several VMs and want to manage the version of the Docker client or s
 
           $ env | grep DOCKER
 
-  If you are using a Bash shell, you can use `unset ${!DOCKER_*}` to unset all DOCKER environment variables at once. (This will not work in other shells such as `.zsh`; you will need to unset each variable individually.)
+  If you are using a Bash shell, you can use `unset ${!DOCKER_*}` to unset all DOCKER environment variables at once. (This will not work in other shells such as `zsh`; you will need to unset each variable individually.)
 
 >**Note**: If you have a shell script as part of your profile that sets these `DOCKER` environment variables automatically each time you open a command window, then you will need to unset these each time you want to use Docker for Mac.
 
@@ -92,7 +92,7 @@ The coexistence setup works as is as long as your VirtualBox VMs provisioned wit
 
 Ideally, the Docker CLI client and Docker Engine should be the same version. Mismatches between client and server, and among host machines you might have created with Docker Machine can cause problems (client can't talk to the server or host machines).
 
-If you already have <a href="https://docs.docker.com/toolbox/overview/" target="_blank">Docker Toolbox</a> installed, and then install Docker for Mac, you might get a newer version of the Docker client. Run `docker version` in a command shell to see client and server versions. In this example, the client installed with Docker for Mac is `Version: 1.11.1` and the server (which was installed earlier with Toolbox) is Version: 1.11.0.
+If you already have <a href="/toolbox/overview/" target="_blank">Docker Toolbox</a> installed, and then install Docker for Mac, you might get a newer version of the Docker client. Run `docker version` in a command shell to see client and server versions. In this example, the client installed with Docker for Mac is `Version: 1.11.1` and the server (which was installed earlier with Toolbox) is Version: 1.11.0.
 
     $ docker version
     Client:

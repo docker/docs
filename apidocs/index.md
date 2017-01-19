@@ -1,7 +1,6 @@
 ---
 description: Learn how to use DTR APIs.
-keywords:
-- docker, registry, DTR, APIs
+keywords: docker, registry, DTR, APIs
 title: DTR APIs
 ---
 

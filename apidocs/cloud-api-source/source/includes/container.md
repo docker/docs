@@ -297,20 +297,20 @@ extra_hosts | List of container hostname mappings
 secuirty_opt | Labeling scheme of this container
 entrypoint | Entrypoint used on the container on launch
 run_command | Run command used on the container on launch
-cpu_shares | The relative CPU priority of the container (see [Runtime Constraints on CPU and Memory](../../engine/reference/run/#runtime-constraints-on-cpu-and-memory) for more information)
+cpu_shares | The relative CPU priority of the container (see [Runtime Constraints on CPU and Memory](/engine/reference/run/#runtime-constraints-on-cpu-and-memory) for more information)
 cpuset | CPUs in which execution is allowed
-memory | The memory limit of the container in MB (see [Runtime Constraints on CPU and Memory](../../engine/reference/run/#runtime-constraints-on-cpu-and-memory) for more information)
+memory | The memory limit of the container in MB (see [Runtime Constraints on CPU and Memory](/engine/reference/run/#runtime-constraints-on-cpu-and-memory) for more information)
 memory_swap | Total memory limit (memory + swap) of the container in MB
-autorestart | Whether to restart the container automatically if it stops (see [Crash recovery](../../docker-cloud/apps/autorestart/) for more information)
-autodestroy | Whether to terminate the container automatically if it stops (see [Autodestroy](../../docker-cloud/apps/auto-destroy/) for more information)
-roles | List of Docker Cloud roles asigned to this container (see [API roles](../../docker-cloud/apps/api-roles/) for more information))
-linked_to_container | List of IP addresses of the linked containers (see table `Container Link attributes` below and [Service links](../../docker-cloud/apps/service-links/) for more information)
+autorestart | Whether to restart the container automatically if it stops (see [Crash recovery](/docker-cloud/apps/autorestart/) for more information)
+autodestroy | Whether to terminate the container automatically if it stops (see [Autodestroy](/docker-cloud/apps/auto-destroy/) for more information)
+roles | List of Docker Cloud roles asigned to this container (see [API roles](/docker-cloud/apps/api-roles/) for more information))
+linked_to_container | List of IP addresses of the linked containers (see table `Container Link attributes` below and [Service links](/docker-cloud/apps/service-links/) for more information)
 link_variables | List of environment variables that would be exposed in any container that is linked to this one
-privileged | Whether the container has Docker's `privileged` flag set or not (see [Runtime privilege](../../engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration) for more information)
+privileged | Whether the container has Docker's `privileged` flag set or not (see [Runtime privilege](/engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration) for more information)
 read_only | Whether the container filesystem is read-only or not
 private_ip | IP address of the container on the overlay network. This IP will be reachable from any other container.
-net | Network mode set on the container (see table `Network Modes` below, more information ../../reference/run/#network-settings)
-pid | PID (Process) Namespace mode for the container (more information ../../reference/run/#pid-settings-pid)
+net | Network mode set on the container (see table `Network Modes` below, [more information](/engine/reference/run/#network-settings))
+pid | PID (Process) Namespace mode for the container ([more information](/engine/reference/run/#pid-settings-pid))
 
 
 ### Container Binding attributes
@@ -362,15 +362,6 @@ Strategy | Description
 -------- | -----------
 bridge | Creates a new network stack for the container on the docker bridge.
 host | Uses the host network stack inside the container.
-
-
-### Container Last Metric attributes
-
-Attribute | Description
---------- | -----------
-cpu       | CPU percentage usage
-memory    | Memory usage in bytes
-disk      | Disk storage usage in bytes
 
 
 ### Container Link attributes

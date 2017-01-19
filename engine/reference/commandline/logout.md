@@ -1,22 +1,21 @@
 ---
-redirect_from:
-  - /reference/commandline/logout/
-description: The logout command description and usage
-keywords:
-- logout, docker, registry
+datafolder: engine-cli
+datafile: docker_logout
 title: docker logout
 ---
+<!--
+Sorry, but the contents of this page are automatically generated from
+Docker's source code. If you want to suggest a change to the text that appears
+here, you'll need to find the string by searching this repo:
 
-```markdown
-Usage:  docker logout [SERVER]
+https://www.github.com/docker/docker
+-->
+{% include cli.md %}
 
-Log out from a Docker registry.
-If no server is specified, the default is defined by the daemon.
+## Examples
 
-Options:
-      --help   Print usage
+### Log out from a registry on your localhost
+
+```bash
+$ docker logout localhost:8080
 ```
-
-For example:
-
-    $ docker logout localhost:8080

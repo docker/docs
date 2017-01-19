@@ -77,7 +77,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
         version: "2"
         services:
           notaryserver:
-            image: dockersecurity/notary_autobuilds:server-latest
+            image: dockersecurity/notary_autobuilds:server-v0.4.2
             volumes:
               - notarycerts:/go/src/github.com/docker/notary/fixtures
             networks:

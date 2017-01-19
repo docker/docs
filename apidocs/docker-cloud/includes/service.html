@@ -8,6 +8,12 @@
 
     <link href="../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script type="text/javascript">
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+    analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
+    analytics.page();
+    }}();
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
       <script src="../javascripts/all_nosearch.js" type="text/javascript"></script>
 
@@ -238,11 +244,11 @@
 </tr>
 <tr>
 <td>net</td>
-<td>Network mode to set on the containers (see table <code class="prettyprint">Network Modes</code> below, more information ../../docker-cloud/apps/service-links/)</td>
+<td>Network mode to set on the containers (see table <code class="prettyprint">Network Modes</code> below, more information /docker-cloud/apps/service-links/)</td>
 </tr>
 <tr>
 <td>pid</td>
-<td>Set the PID (Process) Namespace mode for the containers (more information ../../reference/run/#pid-settings-pid)</td>
+<td>Set the PID (Process) Namespace mode for the containers (<a href="/engine/reference/run/#pid-settings-pid">more information</a>)</td>
 </tr>
 <tr>
 <td>synchronized</td>
@@ -370,11 +376,11 @@
 </tr>
 <tr>
 <td>sequential_deployment</td>
-<td>Whether the containers for this service should be deployed in sequence, linking each of them to the previous containers (see <a href="../../docker-cloud/apps/service-scaling/">Service scaling</a> for more information)</td>
+<td>Whether the containers for this service should be deployed in sequence, linking each of them to the previous containers (see <a href="/docker-cloud/apps/service-scaling/">Service scaling</a> for more information)</td>
 </tr>
 <tr>
 <td>cpu_shares</td>
-<td>The relative CPU priority of the containers of the service (see <a href="../../engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
+<td>The relative CPU priority of the containers of the service (see <a href="/engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
 </tr>
 <tr>
 <td>cpuset</td>
@@ -382,7 +388,7 @@
 </tr>
 <tr>
 <td>memory</td>
-<td>The memory limit of the containers of the service in MB (see <a href="../../engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
+<td>The memory limit of the containers of the service in MB (see <a href="/engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
 </tr>
 <tr>
 <td>memory_swap</td>
@@ -402,15 +408,15 @@
 </tr>
 <tr>
 <td>autorestart</td>
-<td>Whether to restart the containers of the service automatically if they stop (see <a href="../../docker-cloud/apps/autorestart/">Crash recovery</a> for more information)</td>
+<td>Whether to restart the containers of the service automatically if they stop (see <a href="/docker-cloud/apps/autorestart/">Crash recovery</a> for more information)</td>
 </tr>
 <tr>
 <td>autodestroy</td>
-<td>Whether to terminate the containers of the service automatically if they stop (see <a href="../../docker-cloud/apps/auto-destroy/">Autodestroy</a> for more information)</td>
+<td>Whether to terminate the containers of the service automatically if they stop (see <a href="/docker-cloud/apps/auto-destroy/">Autodestroy</a> for more information)</td>
 </tr>
 <tr>
 <td>roles</td>
-<td>List of Docker Cloud roles assigned to this service (see <a href="../../docker-cloud/apps/service-links/">Service links</a> for more information)</td>
+<td>List of Docker Cloud roles assigned to this service (see <a href="/docker-cloud/apps/service-links/">Service links</a> for more information)</td>
 </tr>
 <tr>
 <td>link_variables</td>
@@ -418,7 +424,7 @@
 </tr>
 <tr>
 <td>privileged</td>
-<td>Whether to start the containers with Docker&rsquo;s <code class="prettyprint">privileged</code> flag set or not, which allows containers to access all devices on the host among other things (see <a href="../../engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege</a> for more information)</td>
+<td>Whether to start the containers with Docker&rsquo;s <code class="prettyprint">privileged</code> flag set or not, which allows containers to access all devices on the host among other things (see <a href="/engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege</a> for more information)</td>
 </tr>
 <tr>
 <td>read_only</td>
@@ -426,15 +432,15 @@
 </tr>
 <tr>
 <td>deployment_strategy</td>
-<td>Container distribution among nodes (see table <code class="prettyprint">Deployment strategies</code> below and <a href="../../docker-cloud/infrastructure/deployment-strategies/">Deployment strategies</a> for more information)</td>
+<td>Container distribution among nodes (see table <code class="prettyprint">Deployment strategies</code> below and <a href="/docker-cloud/infrastructure/deployment-strategies/">Deployment strategies</a> for more information)</td>
 </tr>
 <tr>
 <td>tags</td>
-<td>List of tags to be used to deploy the service (see <a href="../../docker-cloud/apps/deploy-tags/">Tags</a> for more information)</td>
+<td>List of tags to be used to deploy the service (see <a href="/docker-cloud/apps/deploy-tags/">Tags</a> for more information)</td>
 </tr>
 <tr>
 <td>autoredeploy</td>
-<td>Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (see <a href="../../docker-cloud/apps/auto-redeploy/">Docker Cloud&rsquo;s private registry</a> for more information)</td>
+<td>Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (see <a href="/docker-cloud/apps/auto-redeploy/">Docker Cloud&rsquo;s private registry</a> for more information)</td>
 </tr>
 <tr>
 <td>nickname</td>
@@ -774,35 +780,35 @@
 </tr>
 <tr>
 <td>autorestart</td>
-<td>(optional) Whether the containers for this service should be restarted if they stop, i.e. <code class="prettyprint">ALWAYS</code> (default: <code class="prettyprint">OFF</code>, possible values: <code class="prettyprint">OFF</code>, <code class="prettyprint">ON_FAILURE</code>, <code class="prettyprint">ALWAYS</code>) (see <a href="../../docker-cloud/apps/autorestart/">Crash recovery</a> for more information)</td>
+<td>(optional) Whether the containers for this service should be restarted if they stop, i.e. <code class="prettyprint">ALWAYS</code> (default: <code class="prettyprint">OFF</code>, possible values: <code class="prettyprint">OFF</code>, <code class="prettyprint">ON_FAILURE</code>, <code class="prettyprint">ALWAYS</code>) (see <a href="/docker-cloud/apps/autorestart/">Crash recovery</a> for more information)</td>
 </tr>
 <tr>
 <td>autodestroy</td>
-<td>(optional) Whether the containers should be terminated if they stop, i.e. <code class="prettyprint">OFF</code> (default: <code class="prettyprint">OFF</code>, possible values: <code class="prettyprint">OFF</code>, <code class="prettyprint">ON_SUCCESS</code>, <code class="prettyprint">ALWAYS</code>) (see <a href="../../docker-cloud/apps/auto-destroy/">Autodestroy</a> for more information)</td>
+<td>(optional) Whether the containers should be terminated if they stop, i.e. <code class="prettyprint">OFF</code> (default: <code class="prettyprint">OFF</code>, possible values: <code class="prettyprint">OFF</code>, <code class="prettyprint">ON_SUCCESS</code>, <code class="prettyprint">ALWAYS</code>) (see <a href="/docker-cloud/apps/auto-destroy/">Autodestroy</a> for more information)</td>
 </tr>
 <tr>
 <td>sequential_deployment</td>
-<td>(optional) Whether the containers should be launched and scaled in sequence, i.e. <code class="prettyprint">true</code> (default: <code class="prettyprint">false</code>) (see <a href="../../docker-cloud/apps/service-scaling/">Service scaling</a> for more information)</td>
+<td>(optional) Whether the containers should be launched and scaled in sequence, i.e. <code class="prettyprint">true</code> (default: <code class="prettyprint">false</code>) (see <a href="/docker-cloud/apps/service-scaling/">Service scaling</a> for more information)</td>
 </tr>
 <tr>
 <td>roles</td>
-<td>(optional) A list of Docker Cloud API roles to grant the service, i.e. <code class="prettyprint">[&quot;global&quot;]</code> (default: <code class="prettyprint">[]</code>, possible values: <code class="prettyprint">global</code>) (see <a href="../../docker-cloud/apps/service-links/">Service links</a> for more information)</td>
+<td>(optional) A list of Docker Cloud API roles to grant the service, i.e. <code class="prettyprint">[&quot;global&quot;]</code> (default: <code class="prettyprint">[]</code>, possible values: <code class="prettyprint">global</code>) (see <a href="/docker-cloud/apps/service-links/">Service links</a> for more information)</td>
 </tr>
 <tr>
 <td>privileged</td>
-<td>(optional) Whether to start the containers with Docker&rsquo;s <code class="prettyprint">privileged</code> flag set or not, i.e. <code class="prettyprint">false</code> (default: <code class="prettyprint">false</code>) (see <a href="../../engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege</a> for more information)</td>
+<td>(optional) Whether to start the containers with Docker&rsquo;s <code class="prettyprint">privileged</code> flag set or not, i.e. <code class="prettyprint">false</code> (default: <code class="prettyprint">false</code>) (see <a href="/engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege</a> for more information)</td>
 </tr>
 <tr>
 <td>deployment_strategy</td>
-<td>(optional) Container distribution among nodes (default: <code class="prettyprint">EMPTIEST_NODE</code>, see table <code class="prettyprint">Deployment strategies</code> above and <a href="../../docker-cloud/infrastructure/deployment-strategies/">Deployment strategies</a> for more information)</td>
+<td>(optional) Container distribution among nodes (default: <code class="prettyprint">EMPTIEST_NODE</code>, see table <code class="prettyprint">Deployment strategies</code> above and <a href="/docker-cloud/infrastructure/deployment-strategies/">Deployment strategies</a> for more information)</td>
 </tr>
 <tr>
 <td>tags</td>
-<td>(optional) A list of tags to be used to deploy the service (see <a href="../../docker-cloud/apps/deploy-tags/">Tags</a> for more information) (default: <code class="prettyprint">[]</code>)</td>
+<td>(optional) A list of tags to be used to deploy the service (see <a href="/docker-cloud/apps/deploy-tags/">Tags</a> for more information) (default: <code class="prettyprint">[]</code>)</td>
 </tr>
 <tr>
 <td>autoredeploy</td>
-<td>(optional) Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (default: <code class="prettyprint">false</code>) (see <a href="../../docker-cloud/apps/auto-redeploy/">Docker Cloud&rsquo;s private registry</a> for more information)</td>
+<td>(optional) Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (default: <code class="prettyprint">false</code>) (see <a href="/docker-cloud/apps/auto-redeploy/">Docker Cloud&rsquo;s private registry</a> for more information)</td>
 </tr>
 <tr>
 <td>net</td>
@@ -1118,11 +1124,11 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 </thead><tbody>
 <tr>
 <td>autorestart</td>
-<td>(optional) Whether the containers for this service should be restarted if they stop, i.e. <code class="prettyprint">ALWAYS</code> (possible values: <code class="prettyprint">OFF</code>, <code class="prettyprint">ON_FAILURE</code>, <code class="prettyprint">ALWAYS</code>) (see <a href="../../docker-cloud/apps/autorestart/">Crash recovery</a> for more information)</td>
+<td>(optional) Whether the containers for this service should be restarted if they stop, i.e. <code class="prettyprint">ALWAYS</code> (possible values: <code class="prettyprint">OFF</code>, <code class="prettyprint">ON_FAILURE</code>, <code class="prettyprint">ALWAYS</code>) (see <a href="/docker-cloud/apps/autorestart/">Crash recovery</a> for more information)</td>
 </tr>
 <tr>
 <td>autodestroy</td>
-<td>(optional) Whether the containers should be terminated if they stop, i.e. <code class="prettyprint">OFF</code> (possible values: <code class="prettyprint">OFF</code>, <code class="prettyprint">ON_SUCCESS</code>, <code class="prettyprint">ALWAYS</code>) (see <a href="../../docker-cloud/apps/auto-destroy/">Autodestroy</a> for more information)</td>
+<td>(optional) Whether the containers should be terminated if they stop, i.e. <code class="prettyprint">OFF</code> (possible values: <code class="prettyprint">OFF</code>, <code class="prettyprint">ON_SUCCESS</code>, <code class="prettyprint">ALWAYS</code>) (see <a href="/docker-cloud/apps/auto-destroy/">Autodestroy</a> for more information)</td>
 </tr>
 <tr>
 <td>container_envvars</td>
@@ -1134,7 +1140,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 </tr>
 <tr>
 <td>cpu_shares</td>
-<td>(optional) The relative CPU priority of the containers the service describes (see <a href="../../engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
+<td>(optional) The relative CPU priority of the containers the service describes (see <a href="/engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
 </tr>
 <tr>
 <td>entrypoint</td>
@@ -1150,15 +1156,15 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 </tr>
 <tr>
 <td>memory</td>
-<td>(optional) The memory limit of the containers of the service in MB (see <a href="../../engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
+<td>(optional) The memory limit of the containers of the service in MB (see <a href="/engine/reference/run/#runtime-constraints-on-cpu-and-memory">Runtime Constraints on CPU and Memory</a> for more information)</td>
 </tr>
 <tr>
 <td>privileged</td>
-<td>(optional) Whether to start the containers with Docker&rsquo;s <code class="prettyprint">privileged</code> flag set or not, i.e. <code class="prettyprint">false</code> (see <a href="../../engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege</a> for more information)</td>
+<td>(optional) Whether to start the containers with Docker&rsquo;s <code class="prettyprint">privileged</code> flag set or not, i.e. <code class="prettyprint">false</code> (see <a href="/engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration">Runtime privilege</a> for more information)</td>
 </tr>
 <tr>
 <td>roles</td>
-<td>(optional) A list of Docker Cloud API roles to grant the service, i.e. <code class="prettyprint">[&quot;global&quot;]</code> (possible values: <code class="prettyprint">global</code>) (see <a href="../../docker-cloud/apps/service-links/">Service links</a> for more information)</td>
+<td>(optional) A list of Docker Cloud API roles to grant the service, i.e. <code class="prettyprint">[&quot;global&quot;]</code> (possible values: <code class="prettyprint">global</code>) (see <a href="/docker-cloud/apps/service-links/">Service links</a> for more information)</td>
 </tr>
 <tr>
 <td>run_command</td>
@@ -1166,7 +1172,7 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 </tr>
 <tr>
 <td>sequential_deployment</td>
-<td>(optional) Whether the containers should be launched and scaled in sequence, i.e. <code class="prettyprint">true</code> (see <a href="../../docker-cloud/apps/service-scaling/">Service scaling</a> for more information)</td>
+<td>(optional) Whether the containers should be launched and scaled in sequence, i.e. <code class="prettyprint">true</code> (see <a href="/docker-cloud/apps/service-scaling/">Service scaling</a> for more information)</td>
 </tr>
 <tr>
 <td>tags</td>
@@ -1178,11 +1184,11 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
 </tr>
 <tr>
 <td>deployment_strategy</td>
-<td>(optional) Container distribution among nodes. A service cannot be updated to or from a deployment strategy of <code class="prettyprint">EVERY_NODE</code>. (See table <code class="prettyprint">Deployment strategies</code> above and <a href="../../docker-cloud/infrastructure/deployment-strategies/">Deployment strategies</a> for more information)</td>
+<td>(optional) Container distribution among nodes. A service cannot be updated to or from a deployment strategy of <code class="prettyprint">EVERY_NODE</code>. (See table <code class="prettyprint">Deployment strategies</code> above and <a href="/docker-cloud/infrastructure/deployment-strategies/">Deployment strategies</a> for more information)</td>
 </tr>
 <tr>
 <td>autoredeploy</td>
-<td>Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (see <a href="../../docker-cloud/apps/auto-redeploy/">Docker Cloud&rsquo;s private registry</a> for more information)</td>
+<td>Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (see <a href="/docker-cloud/apps/auto-redeploy/">Docker Cloud&rsquo;s private registry</a> for more information)</td>
 </tr>
 <tr>
 <td>net</td>
@@ -1461,21 +1467,6 @@ docker-cloud tag <span class="nb">set</span> -t tag-2 7eaf7fff
       </div>
       <div class="dark-box">
       </div>
-    </div>
-    <div class="google-analytics">
-      <!-- Google Tag Manager -->
-      <noscript>
-      <iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLGFZV"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe>
-      </noscript>
-      <script>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-WLGFZV');
-      </script>
-    <!-- End Google Tag Manager -->
     </div>
   </body>
 </html>
