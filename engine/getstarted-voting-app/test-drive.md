@@ -1,7 +1,7 @@
 ---
 description: Setup for voting app example
 keywords: multi-container, services, swarm mode, cluster, voting app, docker-stack.yml, docker stack deploy
-title: Try out the voting app
+title: Try it out and vote
 ---
 
 Now that the app is up and running, let's try it out.
