@@ -1,7 +1,7 @@
 ---
 description: Customize the voting app
 keywords: multi-container, services, swarm mode, cluster, voting app, docker-stack.yml, docker stack deploy
-title: Customize the app and redeploy
+title: Tour the voting app sample
 ---
 
 
@@ -22,6 +22,7 @@ Go back to `docker-stack.yml` and replace the `before` tags on both the `vote` a
 ![before tags for vote and result in yml](images/customize-before.png)
 
 ![after tags for vote and result in yml](images/customize-after.png)
+
 
 ## Redeploy
 
@@ -68,20 +69,26 @@ did not change.
 
 ## Resources
 
-The source code for the voting app and a deeper dive example walkthrough will be made available at [Docker Labs](https://github.com/docker/labs).
+* A deeper dive voting app walkthrough is available on
+[Docker Labs](https://github.com/docker/labs/) as [Deploying an app to a Swarm]
+(https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md).
+The lab walkthrough provides more technical detail on deployment configuration,
+Compose file keys, the application, stack and services concepts, and
+networking.
 
-The lab walkthrough provides more technical detail on deployment configuration, Compose file keys, the application and stack and services concepts, and networking.
+* [Source code for the Voting App](https://github.com/docker/example-voting-app) (to go along with the lab walkthrough) is also available on Docker Labs.
 
-The images you used are available on Docker Hub. When you ran `docker-stack.yml` you pulled those images from Docker Hub.
+* The images you used are available on [Docker Hub](https://hub.docker.com/). When you ran `docker-stack.yml` you pulled those images from Docker Hub.
 
-For information on how to build your own images, see:
+* To learn how to build your own images, see
+[Build your own image](/engine/getstarted/step_four.md) in Get Started with
+Docker and topics on images in [Learn by example](/engine/tutorials/index.md).
 
-*   [Build your own image](/engine/getstarted/step_four.md) in the [Get Started with Docker tutorial](/engine/getstarted/index.md)
+* For more about `docker-stack.yml` and the `docker stack deploy` command,
+see [deploy](/compose/compose-file.md#deploy) in the [Compose file
+reference](/compose/compose-file.md) and [`docker stack
+deploy`](/engine/reference/commandline/stack_deploy.md) in the Docker Engine
+command line reference.
 
-*   [Build your own images](/engine/tutorials/dockerimages.md) in the [Learn by example](/engine/tutorials/index.md) tutorials
-
-*   [Docker Labs](https://github.com/docker/labs)
-
-For more about `docker-stack.yml` and the `docker stack deploy` command, see [deploy](/compose/compose-file.md#deploy) in the [Compose file reference](/compose/compose-file.md).
-
-To learn more about swarm mode, start with the [Swarm mode overview](/engine/swarm/overview.md).
+* To learn more about swarm mode, start with the
+[Swarm mode overview](/engine/swarm/index.md).
