@@ -23,7 +23,7 @@ If you `redeploy` the Redis service you created earlier, you'll see that the cou
 Let's try that. First, redeploy the redis service to reset the counter.
 
 ```bash
-$ docker-cloud service redeploy redis
+$ docker-cloud service redeploy redis --not-reuse-volumes
 ```
 
 Check the container status using the `container ps` command, and wait until the new container is running again. In the example below you can see the original container in the "Terminated" state, and the new container that is "Starting".
