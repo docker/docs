@@ -1,7 +1,7 @@
 ---
 description: Customize the voting app
 keywords: multi-container, services, swarm mode, cluster, voting app, docker-stack.yml, docker stack deploy
-title: Customize the app and redeploy
+title: Tour the voting app sample
 ---
 
 
@@ -22,6 +22,7 @@ Go back to `docker-stack.yml` and replace the `before` tags on both the `vote` a
 ![before tags for vote and result in yml](images/customize-before.png)
 
 ![after tags for vote and result in yml](images/customize-after.png)
+
 
 ## Redeploy
 
