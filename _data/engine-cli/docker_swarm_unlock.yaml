@@ -1,0 +1,6 @@
+command: docker swarm unlock
+short: Unlock swarm
+long: Unlock swarm
+usage: docker swarm unlock
+pname: docker swarm
+plink: docker_swarm.yaml

@@ -1,0 +1,6 @@
+command: docker rename
+short: Rename a container
+long: Rename a container
+usage: docker rename CONTAINER NEW_NAME
+pname: docker
+plink: docker.yaml

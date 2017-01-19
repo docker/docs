@@ -28,10 +28,8 @@ The `docker logs` command is not available for this logging driver.
 
 Some options are supported by specifying `--log-opt` as many times as needed:
 
- {% raw %}
- - `fluentd-address`: specify `host:port` to connect `localhost:24224`
- - `tag`: specify tag for fluentd message, which interpret some markup, ex `{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`
- {% endraw %}
+ - `fluentd-address`: specify a socket address to connect to the Fluentd daemon, ex `fluentdhost:24224` or `unix:///path/to/fluentd.sock`
+ - `tag`: specify tag for fluentd message, which interpret some markup, ex {% raw %}`{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`{% endraw %}
 
 
 Configure the default logging driver by passing the
@@ -48,7 +46,7 @@ Before using this logging driver, launch a Fluentd daemon. The logging driver
 connects to this daemon through `localhost:24224` by default. Use the
 `fluentd-address` option to connect to a different address.
 
-    docker run --log-driver=fluentd --log-opt fluentd-address=myhost.local:24224
+    docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
 
 If container cannot connect to the Fluentd daemon, the container stops
 immediately unless the `fluentd-async-connect` option is used.
@@ -60,9 +58,13 @@ Users can use the `--log-opt NAME=VALUE` flag to specify additional Fluentd logg
 ### fluentd-address
 
 By default, the logging driver connects to `localhost:24224`. Supply the
-`fluentd-address` option to connect to a different address.
+`fluentd-address` option to connect to a different address. `tcp`(default) and `unix` sockets are supported.
 
-    docker run --log-driver=fluentd --log-opt fluentd-address=myhost.local:24224
+    docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+    docker run --log-driver=fluentd --log-opt fluentd-address=tcp://fluentdhost:24224
+    docker run --log-driver=fluentd --log-opt fluentd-address=unix:///path/to/fluentd.sock
+
+Two of the above specify the same address, because `tcp` is default.
 
 ### tag
 

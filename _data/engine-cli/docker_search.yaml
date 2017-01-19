@@ -1,0 +1,23 @@
+command: docker search
+short: Search the Docker Hub for images
+long: Search the Docker Hub for images
+usage: docker search [OPTIONS] TERM
+pname: docker
+plink: docker.yaml
+options:
+- option: automated
+  default_value: "false"
+  description: Only show automated builds
+- option: filter
+  shorthand: f
+  description: Filter output based on conditions provided
+- option: limit
+  default_value: "25"
+  description: Max number of search results
+- option: no-trunc
+  default_value: "false"
+  description: Don't truncate output
+- option: stars
+  shorthand: s
+  default_value: "0"
+  description: Only displays with at least x stars

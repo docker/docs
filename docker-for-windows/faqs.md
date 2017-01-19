@@ -103,13 +103,13 @@ swarm mode](/engine/swarm/swarm-tutorial/index.md).
 
 ### How do I connect to the remote Docker Engine API?
 
-You might need to provide the location of the remote API for Docker clients and development tools.
+You might need to provide the location of the Engine API for Docker clients and development tools.
 
 On Docker for Windows, clients can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL: `http://localhost:2375`.
 
 This sets `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables to the given values (for the named pipe or TCP socket, whichever you use).
 
-See also [Docker Remote API](/engine/reference/api/docker_remote_api.md) and the Docker for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988).
+See also [Docker Engine API](/engine/reference/api/) and the Docker for Windows forums topic [How to find the remote API](https://forums.docker.com/t/how-to-find-the-remote-api/20988).
 
 ### Why doesn't `nodemon` pick up file changes in a container mounted on a shared drive?
 

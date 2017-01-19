@@ -9,8 +9,8 @@ title: Install Docker on Ubuntu
 
 Docker is supported on these Ubuntu operating systems:
 
+- Ubuntu Yakkety 16.10
 - Ubuntu Xenial 16.04 (LTS)
-- Ubuntu Wily 15.10
 - Ubuntu Trusty 14.04 (LTS)
 - Ubuntu Precise 12.04 (LTS)
 
@@ -20,8 +20,8 @@ release of Docker. If you are required to install using Ubuntu-managed packages,
 consult the Ubuntu documentation. Some files and commands may be different if
 you use Ubuntu-managed packages.
 
->**Note**: Ubuntu Utopic 14.10 and 15.04 exist in Docker's `APT` repository but
-are no longer officially supported.
+>**Note**: Ubuntu Utopic 14.10, 15.10, and 15.04 exist in Docker's `APT`
+repository but are no longer officially supported.
 
 ## Prerequisites
 
@@ -73,12 +73,12 @@ To set `APT` to use packages from the Docker repository:
     This determines where APT will search for Docker packages. When possible,
     run a long-term support (LTS) edition of Ubuntu.
 
-    | Ubuntu version      | Repository                                                  |
-    | ------------------- | ----------------------------------------------------------- |
-    | Precise 12.04 (LTS) | `deb https://apt.dockerproject.org/repo ubuntu-precise main`|
-    | Trusty 14.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-trusty main` |
-    | Wily 15.10          | `deb https://apt.dockerproject.org/repo ubuntu-wily main`   |
-    | Xenial 16.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-xenial main` |
+    | Ubuntu version      | Repository                                                   |
+    | ------------------- | ------------------------------------------------------------ |
+    | Precise 12.04 (LTS) | `deb https://apt.dockerproject.org/repo ubuntu-precise main` |
+    | Trusty 14.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-trusty main`  |
+    | Xenial 16.04 (LTS)  | `deb https://apt.dockerproject.org/repo ubuntu-xenial main`  |
+    | Yakkety 16.10       | `deb https://apt.dockerproject.org/repo ubuntu-yakkety main` |
 
 
     >**Note**: Docker does not provide packages for all architectures. Binary artifacts
@@ -127,10 +127,13 @@ From now on when you run `apt-get upgrade`, `APT` pulls from the new repository.
 
 ### Prerequisites by Ubuntu Version
 
-#### Ubuntu Xenial 16.04 (LTS), Wily 15.10, Trusty 14.04 (LTS)
+- Ubuntu Yakkety 16.10
+- Ubuntu Xenial 16.04 (LTS)
+- Ubuntu Trusty 14.04 (LTS)
 
-For Ubuntu Trusty, Wily, and Xenial, install the `linux-image-extra-*` kernel
-packages, which allows you use the `aufs` storage driver.
+For Ubuntu Trusty, Yakkety, and Xenial, it's recommended to install the
+`linux-image-extra-*` kernel packages. The `linux-image-extra-*` packages
+allows you use the `aufs` storage driver.
 
 To install the `linux-image-extra-*` packages:
 

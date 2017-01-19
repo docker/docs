@@ -1,0 +1,10 @@
+command: docker plugin inspect
+short: Display detailed information on one or more plugins
+long: Display detailed information on one or more plugins
+usage: docker plugin inspect [OPTIONS] PLUGIN|ID [PLUGIN|ID...]
+pname: docker plugin
+plink: docker_plugin.yaml
+options:
+- option: format
+  shorthand: f
+  description: Format the output using the given Go template

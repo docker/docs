@@ -49,8 +49,7 @@ anixjtol6wdf  my_web  1/1       nginx
 ```
 
 To make the web server accessible from outside the swarm, you need to
-[publish the port](services.md#publish-ports-externally-to-the-swarm) where the swarm
-listens for web requests.
+[publish the port](#publish-ports) where the swarm listens for web requests.
 
 You can include a command to run inside containers after the image:
 
@@ -66,7 +65,7 @@ $ docker service create --name helloworld alpine ping docker.com
 9uk4639qpg7npwf3fn2aasksr
 ```
 
-## Configuring services
+## Configure services
 
 When you create a service, you can specify many different configuration options
 and constraints. See the output of `docker service create --help` for a full
@@ -99,6 +98,162 @@ $ docker service create --name helloworld \
 9uk4639qpg7npwf3fn2aasksr
 ```
 
+### Grant a service access to secrets
+
+To create a service with access to Docker-managed secrets, use the `--secret`
+flag. For more information, see
+[Manage sensitive strings (secrets) for Docker services](secrets.md)
+
+### Specify the image version the service should use
+
+When you create a service without specifying any details about the version of
+the image to use, the service uses the version tagged with the `latest` tag.
+You can force the service to use a specific version of the image in a few
+different ways, depending on your desired outcome.
+
+An image version can be expressed in several different ways:
+
+- If you specify a tag, the manager (or the Docker client, if you use
+  [content trust](#image_resolution_with_trust)) resolves that tag to a digest.
+  When the request to create a container task is received on a worker node, the
+  worker node only sees the digest, not the tag.
+
+  ```bash
+  $ docker service create --name="myservice" ubuntu:16.04
+  ```
+
+  Some tags represent discrete releases, such as `ubuntu:16.04`. Tags like this
+  will almost always resolve to a stable digest over time. It is recommended
+  that you use this kind of tag when possible.
+
+  Other types of tags, such as `latest` or `nightly`, may resolve to a new
+  digest often, depending on how often an image's author updates the tag. It is
+  not recommended to run services using a tag which is updated frequently, to
+  prevent different service replica tasks from using different image versions.
+
+- If you don't specify a version at all, by convention the image's `latest` tag
+  is resolved to a digest. Workers use the image at this digest when creating
+  the service task.
+
+  Thus, the following two commands are equivalent:
+
+  ```bash
+  $ docker service create --name="myservice" ubuntu
+
+  $ docker service create --name="myservice" ubuntu:latest
+  ```
+
+- If you specify a digest directly, that exact version of the image is always
+  used when creating service tasks.
+
+  ```bash
+  $ docker service create \
+      --name="myservice" \
+      ubuntu:16.04@sha256:35bc48a1ca97c3971611dc4662d08d131869daa692acb281c7e9e052924e38b1
+  ```
+
+When you create a service, the image's tag is resolved to the specific digest
+the tag points to **at the time of service creation**. Worker nodes for that
+service will use that specific digest forever unless the service is explicitly
+updated. This feature is particularly important if you do use often-changing tags
+such as `latest`, because it ensures that all service tasks use the same version
+of the image.
+
+> **Note**: If [content trust](security/trust/content_trust.md) is enabled, the
+> client actually resolves the image's tag to a digest before contacting the
+> swarm manager, in order to verify that the image is signed. Thus, if you use
+> content trust, the swarm manager receives the request pre-resolved. In this
+> case, if the client cannot resolve the image to a digest, the request fails.
+{: id="image_resolution_with_trust" }
+
+If the manager is not able to resolve the tag to a digest, each worker
+node is responsible for resolving the tag to a digest, and different nodes may
+use different versions of the image. If this happens, a warning like the
+following will be logged, substituting the placeholders for real information.
+
+```none
+unable to pin image <IMAGE-NAME> to digest: <REASON>
+```
+
+To see an image's current digest, issue the command
+`docker inspect <IMAGE>:<TAG>` and look for the `RepoDigests` line. The
+following is the current digest for `ubuntu:latest` at the time this content
+was written. The output is truncated for clarity.
+
+```bash
+$ docker inspect ubuntu:latest
+```
+
+```json
+"RepoDigests": [
+    "ubuntu@sha256:35bc48a1ca97c3971611dc4662d08d131869daa692acb281c7e9e052924e38b1"
+],
+```
+
+After you create a service, its image is never updated unless you explicitly run
+`docker service update` with the `--image` flag as described below. Other update
+operations such as scaling the service, adding or removing networks or volumes,
+renaming the service, or any other type of update operation do not update the
+service's image.
+
+### Update a service's image after creation
+
+Each tag represents a digest, similar to a Git hash. Some tags, such as
+`latest`, are updated often to point to a new digest. Others, such as
+`ubuntu:16.04`, represent a released software version and are not expected to
+update to point to a new digest often if at all. In Docker 1.13 and higher, when
+you create a service, it is constrained to create tasks using a specific digest\
+of an image until you update the service using `service update` with the
+`--image` flag. If you use an older version of Docker Engine, you must remove
+and re-create the service to update its image.
+
+When you run `service update` with the `--image` flag, the swarm manager queries
+Docker Hub or your private Docker registry for the digest the tag currently
+points to and updates the service tasks to use that digest.
+
+> **Note**: If you use [content trust](#image_resolution_with_trust), the Docker
+> client resolves image and the swarm manager receives the image and digest,
+>  rather than a tag.
+
+Usually, the manager is able to resolve the tag to a new digest and the service
+updates, redeploying each task to use the new image. If the manager is unable to
+resolve the tag or some other problem occurs, the next two sections outline what
+to expect.
+
+#### If the manager resolves the tag
+
+If the swarm manager can resolve the image tag to a digest, it instructs the
+worker nodes to redeploy the tasks and use the image at that digest.
+
+- If a worker has cached the image at that digest, it uses it.
+
+- If not, it attempts to pull the image from Docker Hub or the private registry.
+
+  - If it succeeds, the task is deployed using the new image.
+
+  - If the worker fails to pull the image, the service fails to deploy on that
+    worker node. Docker tries again to deploy the task, possibly on a different
+    worker node.
+
+#### If the manager cannot resolve the tag
+
+If the swarm manager cannot resolve the image to a digest, all is not lost:
+
+- The manager instructs the worker nodes to redeploy the tasks using the image
+  at that tag.
+
+- If the worker has a locally cached image that resolves to that tag, it uses
+  that image.
+
+- If the worker does not have a locally cached image that resolves to the tag,
+  the worker tries to connect to Docker Hub or the private registry to pull the
+  image at that tag.
+
+  - If this succeeds, the worker uses that image.
+
+  - If this fails, the task fails to deploy and the manager tries again to deploy
+    the task, possibly on a different worker node.
+
 ### Control service scale and placement
 
 Swarm mode has two types of services, replicated and global. For replicated
@@ -112,7 +267,10 @@ the number of replica tasks you want to start using the `--replicas` flag. For
 example, to start a replicated nginx service with 3 replica tasks:
 
 ```bash
-$ docker service create --name my_web --replicas 3 nginx
+$ docker service create \
+  --name my_web \
+  --replicas 3 \
+  nginx
 ```
 
 To start a global service on each available node, pass `--mode global` to
@@ -121,7 +279,10 @@ places a task for the global service on the new node. For example to start a
 service that runs alpine on every node in the swarm:
 
 ```bash
-$ docker service create --name myservice --mode global alpine top
+$ docker service create \
+  --name myservice \
+  --mode global \
+  alpine top
 ```
 
 Service constraints let you set criteria for a node to meet before the scheduler
@@ -141,27 +302,57 @@ run its tasks.
 
 Swarm mode lets you network services in a couple of ways:
 
-* publish ports externally to the swarm using ingress networking
+* publish ports externally to the swarm using ingress networking or directly on
+  each swarm node
 * connect services and tasks within the swarm using overlay networks
 
-#### Publish ports externally to the swarm
+### Publish ports
 
-You publish service ports externally to the swarm using the `--publish<TARGET-PORT>:<SERVICE-PORT>`
-flag. When you publish a service port, the swarm
-makes the service accessible at the target port on every node regardless if
-there is a task for the service running on the node.
+When you create a swarm service, you can publish that service's ports to hosts
+outside the swarm in two ways:
 
-For example, imagine you want to deploy a 3-replica nginx service to a 10-node
-swarm as follows:
+- [You can rely on the routing mesh](#publish-a services-ports-using-the-routing-mesh).
+  When you publish a service port, the swarm makes the service accessible at the
+  target port on every node, regardless of whether there is a task for the
+  service running on that node or not. This is less complex and is the right
+  choice for many types of services.
+
+- [You can publish a service task's port directly on the swarm node](#publish-a-services-ports-directly-on-the-swarm-node)
+  where that service is running. This feature is available in Docker 1.13 and
+  higher. This bypasses the routing mesh and provides the maximum flexibility,
+  including the ability for you to develop your own routing framework. However,
+  you are responsible for keeping track of where each task is running and
+  routing requests to the tasks, and load-balancing across the nodes.
+
+Keep reading for more information and use cases for each of these methods.
+
+#### Publish a service's ports using the routing mesh
+
+To publish a service's ports externally to the swarm, use the `--publish
+<TARGET-PORT>:<SERVICE-PORT>` flag. The swarm
+makes the service accessible at the target port **on every swarm node**. If an
+external host connects to that port on any swarm node, the routing mesh routes
+it to a task. The external host does not need to know the IP addresses or
+internally-used ports of the service tasks to interact with the service. When
+a user or process connects to a service, any worker node running a service task
+may respond.
+
+##### Example: Run a three-task Nginx service on 10-node swarm
+
+Imagine that you have a 10-node swarm, and you deploy an Nginx service running
+three tasks on a 10-node swarm:
 
 ```bash
-docker service create --name my_web --replicas 3 --publish 8080:80 nginx
+$ docker service create --name my_web \
+                        --replicas 3 \
+                        --publish 8080:80 \
+                        nginx
 ```
 
-The scheduler will deploy nginx tasks to a maximum of 3 nodes. However, the
-swarm makes nginx port 80 from the task container accessible at port 8080 on any
-node in the swarm. You can direct `curl` at port 8080 of any node in the swarm
-to access the web server:
+Three tasks will run on up to three nodes. You don't need to know which nodes
+are running the tasks; connecting to port 8080 on **any** of the 10 nodes will
+connect you to one of the three `nginx` tasks. You can test this using `curl`
+(the HTML output is truncated):
 
 ```bash
 $ curl localhost:8080
@@ -170,30 +361,65 @@ $ curl localhost:8080
 <html>
 <head>
 <title>Welcome to nginx!</title>
-<style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
+...truncated...
 </html>
 ```
 
-#### Add an overlay network
+Subsequent connections may be routed to the same swarm node or a different one.
+
+#### Publish a service's ports directly on the swarm node
+
+Using the routing mesh may not be the right choice for your application if you
+need to make routing decisions based on application state or you need total
+control of the process for routing requests to your service's tasks. To publish
+a service's port directly on the node where it is running, use the `mode=host`
+option to the `--publish` flag.
+
+> **Note**: If you publish a service's ports directly on the swarm node using
+> `mode=host` and also set `published=<PORT>` this creates an implicit
+> limitation that you can only run one task for that service on a given swarm
+> node. In addition, if you use `mode=host` and you do not use the
+> `--mode=global` flag on `docker service  create`, it will be difficult to know
+> which nodes are running the service in order to route work to them.
+
+##### Example: Run a `cadvisor` monitoring service on every swarm node
+
+[Google cAdvisor](https://hub.docker.com/r/google/cadvisor/) is a tool for
+monitoring Linux hosts which run containers. Typically, cAdvisor is run as a
+stand-alone container, because it is designed to monitor a given Docker Engine
+instance. If you run cAdvisor as a service using the routing mesh, connecting
+to the cAdvisor port on any swarm node will show you the statistics for
+(effectively) **a random swarm node** running the service. This is probably not
+what you want.
+
+The following example runs cAdvisor as a service on each node in your swarm and
+exposes cAdvisor port locally on each swarm node. Connecting to the cAdvisor
+port on a given node will show you **that node's** statistics. In practice, this
+is similar to running a single stand-alone cAdvisor container on each node, but
+without the need to manually administer those containers.
+
+```bash
+$ docker service create \
+  --mode global \
+  --mount type=bind,source=/,destination=/rootfs,ro=1 \
+  --mount type=bind,source=/var/run,destination=/var/run \
+  --mount type=bind,source=/sys,destination=/sys,ro=1 \
+  --mount type=bind,source=/var/lib/docker/,destination=/var/lib/docker,ro=1 \
+  --publish mode=host,target=8080,published=8080 \
+  --name=cadvisor \
+  google/cadvisor:latest
+```
+
+You can reach cAdvisor on port 8080 of every swarm node. If you add a node to
+the swarm, a cAdvisor task will be started on it. You cannot start another
+service or container on any swarm node which binds to port 8080.
+
+> **Note**: This is a naive example that works well for system monitoring
+> applications and similar types of software. Creating an application-layer
+> routing framework for a multi-tiered service is complex and out of scope for
+> this topic.
+
+### Add an overlay network
 
 Use overlay networks to connect one or more services within the swarm.
 
@@ -266,7 +492,40 @@ $ docker service create \
 0u6a4s31ybk7yw2wyvtikmu50
 ```
 
-### Configure mounts
+The `--update-max-failure-ratio` flag controls what fraction of tasks can fail
+during an update before the update as a whole is considered to have failed. For
+example, with `--update-max-failure-ratio 0.1 --update-failure-action pause`,
+after 10% of the tasks being updated fail, the update will be paused.
+
+An individual task update is considered to have failed if the task doesn't
+start up, or if it stops running within the monitoring period specified with
+the `--update-monitor` flag. The default value for `--update-monitor` is 30
+seconds, which means that a task failing in the first 30 seconds after its
+started counts towards the service update failure threshold, and a failure
+after that is not counted.
+
+## Roll back to the previous version of a service
+
+In case the updated version of a service doesn't function as expected, it's
+possible to roll back to the previous version of the service using
+`docker service update`'s `--rollback` flag. This will revert the service
+to the configuration that was in place before the most recent
+`docker service update` command.
+
+Other options can be combined with `--rollback`; for example,
+`--update-delay 0s` to execute the rollback without a delay between tasks:
+
+```bash
+$ docker service update \
+  --rollback \
+  --update-delay 0s
+  my_web
+
+my_web
+
+```
+
+## Configure mounts
 
 You can create two types of mounts for services in a swarm, `volume` mounts or
 `bind` mounts. You pass the `--mount` flag when you create a service. The

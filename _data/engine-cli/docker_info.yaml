@@ -1,0 +1,10 @@
+command: docker info
+short: Display system-wide information
+long: Display system-wide information
+usage: docker info [OPTIONS]
+pname: docker
+plink: docker.yaml
+options:
+- option: format
+  shorthand: f
+  description: Format the output using the given Go template

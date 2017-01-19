@@ -2,7 +2,6 @@
 description: Configure logging driver.
 keywords: docker, logging, driver, Fluentd
 redirect_from:
-- /engine/reference/logging/overview/
 title: Configure logging drivers
 ---
 
@@ -46,9 +45,11 @@ is using the `json-file` logging driver, run the following `docker inspect`
 command, substituting the container name or ID for `<CONTAINER>`:
 
 ```bash
+{% raw %}
 $ docker inspect -f '{{.HostConfig.LogConfig.Type}}' <CONTAINER>
 
 json-file
+{% endraw %}
 ```
 
 ## Supported logging drivers
@@ -68,13 +69,12 @@ for its configurable options, if applicable.
 | `splunk`    | Writes log messages to `splunk` using the HTTP Event Collector.|
 | `etwlogs`   | Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms. |
 | `gcplogs`   | Writes log messages to Google Cloud Platform (GCP) Logging.    |
+| `nats`      | NATS logging driver for Docker. Publishes log entries to a NATS server.|
 
 ## Limitations of logging drivers
 
 - The `docker logs` command is not available for drivers other than `json-file`
   and `journald`.
-
--
 
 ## Examples
 
@@ -273,17 +273,12 @@ of each message.
 ```bash
 {% raw %}
 $ docker run -dit \
-    --log-driver=fluentd \
-    --log-opt fluentd-address=localhost:24224 \
-    --log-opt tag="docker.{{.Name}}" \
-    alpine sh
+             --log-driver=fluentd \
+             --log-opt fluentd-address=localhost:24224 \
+             --log-opt tag="docker.{{.Name}}" \
+             alpine sh
 {% endraw %}
 ```
-
-> **Note**: If the container cannot connect to the Fluentd daemon on the
-specified address and `fluentd-async-connect` is set to `false`, the container
-stops immediately.
-
 
 For detailed information on working with the `fluentd` logging driver, see
 [the fluentd logging driver](fluentd.md)
@@ -334,7 +329,6 @@ The `splunk` logging driver **requires** the following options:
 | `splunk-token`  | The Splunk HTTP Event Collector token. | `--log-opt splunk-token=<splunk_http_event_collector_token>` |
 | `splunk-url`    | Path to your Splunk Enterprise or Splunk Cloud instance (including port and scheme used by HTTP Event Collector).| `--log-opt splunk-url=https://your_splunk_instance:8088` |
 
-
 The `splunk` logging driver **allows** the following options:
 
 | Option                 | Description                     | Example value                             |
@@ -345,7 +339,7 @@ The `splunk` logging driver **allows** the following options:
 | `splunk-capath`             | Path to root certificate.  | `--log-opt splunk-capath=/path/to/cert/cacert.pem` |
 | `splunk-caname`             | Name to use for validating server certificate. Defaults to the hostname of the `splunk-url`. | `--log-opt splunk-caname=SplunkServerDefaultCert` |
 | `splunk-insecureskipverify` | Ignore server certificate validation. | `--log-opt splunk-insecureskipverify=false` |
-| `tag`                       | Specify tag for message, which interpret some markup. Default value is `{{.ID}}` (12 characters of the container ID). Refer to the [log tag option documentation](log_tags.md) for information about customizing the log tag format. | {% raw %}`--log-opt tag="{{.Name}}/{{.FullID}}"`{% endraw %} |
+| `tag`                       | Specify tag for message, which interpret some markup. Default value is {% raw %}`{{.ID}}`{% endraw %} (12 characters of the container ID). Refer to the [log tag option documentation](log_tags.md) for information about customizing the log tag format. | {% raw %}`--log-opt tag="{{.Name}}/{{.FullID}}"`{% endraw %} |
 | `labels`                    | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
 | `env`                       | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md). | `--log-opt env=os,customer` |
 
@@ -378,9 +372,9 @@ For detailed information about working with the `splunk` logging driver, see the
 
 ### Options
 
-The etwlogs logging driver does not require any options to be specified. This
-logging driver forwards each log message as an ETW event. An ETW listener
-can then be created to listen for these events.
+The `etwlogs` logging driver forwards each log message as an ETW event. An ETW
+listener can then be created to listen for these events. This driver does not
+accept any options.
 
 ### Examples
 
@@ -391,7 +385,7 @@ $ docker run \
 ```
 
 The ETW logging driver is only available on Windows. For detailed information
-on working with this logging driver, see [the ETW logging driver](etwlogs.md)
+about working with this logging driver, see [the ETW logging driver](etwlogs.md)
 reference documentation.
 
 ## `gcplogs`
@@ -408,7 +402,6 @@ options:
 | `labels`               | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
 | `env`                  | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md). | `--log-opt env=os,customer` |
 
-
 ### Examples
 
 This example logs the start command and sets a label and an environment
@@ -423,5 +416,25 @@ $ docker run --log-driver=gcplogs \
     your/application \
 ```
 
-For detailed information about working with this logging driver, see the
-[Google Cloud Logging driver](gcplogs.md). reference documentation.
+For detailed information about working with the Google Cloud logging driver, see
+the [Google Cloud Logging driver](gcplogs.md). reference documentation.
+
+## NATS logging options
+
+The NATS logging driver supports the following options:
+
+```none
+--log-opt labels=<label1>,<label2>
+--log-opt env=<envvar1>,<envvar2>
+--log-opt tag=<tag>
+--log-opt nats-servers="<comma separated list of nats servers uris>"
+--log-opt nats-max-reconnect="<max attempts to connect to a server>"
+--log-opt nats-subject="<subject where logs are sent>"
+--log-opt nats-tls-ca-cert="<absolute path to cert>"
+--log-opt nats-tls-cert="<absolute path to cert>"
+--log-opt nats-tls-key="<absolute path to cert>"
+--log-opt nats-tls-skip-verify="<value>"
+```
+
+For detailed information, see [the NATS logging driver](nats.md) reference
+documentation.

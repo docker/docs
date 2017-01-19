@@ -88,85 +88,93 @@ by viewing `/proc/<PID>/status` on the host machine.
 
 By default, each container's access to the host machine's CPU cycles is unlimited.
 You can set various constraints to limit a given container's access to the host
-machine's CPU cycles.
+machine's CPU cycles. Most users will use and configure the
+[default CFS scheduler](#configure-the-default-cfs-scheduler). In Docker 1.13
+and higher, you can also configure the
+[realtime scheduler](#configure-the-realtime-scheduler).
+
+### Configure the default CFS scheduler
+
+The CFS is the Linux kernel CPU scheduler for normal Linux processes. Several
+runtime flags allow you to configure the amount of access to CPU resources your
+container has. When you use these settings, Docker modifies the settings for the
+the container's cgroup on the host machine.
 
 | Option                | Description                 |
 |-----------------------|-----------------------------|
+| `--cpus=<value>`      | Specify how much of the available CPU resources a container can use. For instance, if the host machine has two CPUs and you set `--cpus="1.5"`, the container will be guaranteed to be able to access at most one and a half of the CPUs. This is the equivalent of setting `--cpu-period="100000"` and `--cpu-quota="150000"`. Available in Docker 1.13 and higher. |
+| `--cpu-period=<value>`| Specify the CPU CFS scheduler period, which is used alongside  `--cpu-quota`. Defaults to 1 second, expressed in micro-seconds. Most users do not change this from the default. If you use Docker 1.13 or higher, use `--cpus` instead. |
+| `--cpu-quota=<value>`: impose a CPU CFS quota on the container. The number of microseconds per `--cpu-period` that the container is guaranteed CPU access. In other words, `cpu-quota / cpu-period`. If you use Docker 1.13 or higher, use `--cpus` instead. |
+| `--cpuset-cpus`: limit the specific CPUs or cores a container can use. A comma-separated list or hyphen-separated range of CPUs a container can use, if you have more than one CPU. The first CPU is numbered 0. A valid value might be `0-3` (to use the first, second, third, and fourth CPU) or `1,3` (to use the second and fourth CPU). |
 | `--cpu-shares` | Set this flag to a value greater or less than the default of 1024 to increase or reduce the container's weight, and give it access to a greater or lesser proportion of the host machine's CPU cycles. This is only enforced when CPU cycles are constrained. When plenty of CPU cycles are available, all containers use as much CPU as they need. In that way, this is a soft limit. `--cpu-shares` does not prevent containers from being scheduled in swarm mode. It prioritizes container CPU resources for the available CPU cycles. It does not guarantee or reserve any specific CPU access. |
-| `--cpu-period` | The scheduling period of one logical CPU on a container. `--cpu-period` defaults to a time value of 100000 (100 ms). |
-| `--cpu-quota` | maximum amount of time that a container can be scheduled during the period set by `--cpu-period`. |
-| `--cpuset-cpus` | Use this option to pin your container to one or more CPU cores, separated by commas. |
 
-### Example with `--cpu-period` and `--cpu-qota`
+If you have 1 CPU, each of the following commands will guarantee the container at
+most 50% of the CPU every second.
 
-If you have 1 vCPU system and your container runs with `--cpu-period=100000` and
-`--cpu-quota=50000`, the container can consume up to 50% of 1 CPU.
+**Docker 1.13 and higher**:
 
 ```bash
-$ docker run -ti --cpu-period=10000 --cpu-quota=50000 busybox
+docker run -it --cpus=".5" ubuntu /bin/bash
 ```
 
-If you have a 4 vCPU system your container runs with `--cpu-period=100000` and
-`--cpu-quota=200000`, your container can consume up to 2 logical CPUs (200% of
-`--cpu-period`).
+**Docker 1.12 and lower**:
 
 ```bash
-$ docker run -ti --cpu-period=100000 --cpu-quota=200000
+$ docker run -it --cpu-period=100000 --cpu-quota=50000 ubuntu /bin/bash
 ```
 
-### Example with `--cpuset-cpus`
+### Configure the realtime scheduler
 
-To give a container access to exactly 4 CPUs, issue a command like the
-following:
+In Docker 1.13 and higher, you can configure your container to use the
+realtime scheduler, for tasks which cannot use the CFS scheduler. You need to
+[make sure the host machine's kernel is configured correctly](#configure-the-host-machines-kernel)
+before you can [configure the Docker daemon](#configure-the-docker-daemon) or
+[configure individuyal containers](#configure-individual-containers).
+
+>**Warning**: CPU scheduling and prioritization are advanced kernel-level
+features. Most users do not need to change these values from their defaults.
+Setting these values incorrectly can cause your host system to become unstable
+or unusable.
+
+#### Configure the host machine's kernel
+
+Verify that `CONFIG_RT_GROUP_SCHED` is enabled in the Linux kernel by running
+`zcat /proc/config.gz | grep CONFIG_RT_GROUP_SCHED` or by checking for the
+existence of the file `/sys/fs/cgroup/cpu.rt_runtime_us`. For guidance on
+configuring the kernel realtime scheduler, consult the documentation for your
+operating system.
+
+#### Configure the Docker daemon
+
+To run containers using the realtime scheduler, run the Docker daemon with
+the `--cpu-rt-runtime` flag set to the maximum number of microseconds reserved
+for realtime tasks per runtime period. For instance, with the default period of
+10000 microseconds (1 second), setting `--cpu-rt-runtime=95000` ensures that
+containers using the realtime scheduler can run for 95000 microseconds for every
+10000-microsecond period, leaving at least 5000 microseconds available for
+non-realtime tasks. To make this configuration permanent on systems which use
+`systemd`, see [Control and configure Docker with systemd](systemd.md).
+
+#### Configure individual containers
+
+You can pass several flags to control a container's CPU priority when you
+start the container using `docker run`. Consult your operating system's
+documentation or the `ulimit` command for information on appropriate values.
+
+| Option                    | Description                 |
+|---------------------------|-----------------------------|
+| `--cap-add=sys_nice`      | Grants the container the `CAP_SYS_NICE` capability, which allows the container to raise process `nice` values, set real-time scheduling policies, set CPU affinity, and other operations. |
+| `--cpu-rt-runtime=<value>`| The maximum number of microseconds the container can run at realtime priority within the Docker daemon's realtime scheduler period. You also need the `--cap-add=sys_nice` flag. |
+| `--ulimit rtprio=<value>` | The maximum realtime priority allowed for the container. You also need the `--cap-add=sys_nice` flag. |
+
+The following example command sets each of these three flags on a `debian:jessie`
+container.
 
 ```bash
-$ docker run -ti --cpuset-cpus=4 busybox
+$ docker run --it --cpu-rt-runtime=95000 \
+                  --ulimit rtprio=99 \
+                  --cap-add=sys_nice \
+                  debian:jessie
 ```
 
-## Block IO (blkio)
-
-Two option are available for tuning a given container's access to direct block IO
-devices. You can also specify bandwidth limits in terms of bytes per second or
-IO operations per second.
-
-| Option                | Description                 |
-|-----------------------|-----------------------------|
-| `blkio-weight` | By default, each container can use the same proportion of block IO bandwidth (blkio). The default weight is 500. To raise or lower the proportion of blkio used by a given container, set the `--blkio-weight` flag to a value between 10 and 1000. This setting affects all block IO devices equally. |
-| `blkio-weight-device` | The same as `--blkio-weight`, but you can set a weight per device, using the syntax `--blkio-weight-device="DEVICE_NAME:WEIGHT"` The DEVICE_NAME:WEIGHT is a string containing a colon-separated device name and weight. |
-| `--device-read-bps` and `--device-write-bps` | Limits the read or write rate to or from a device by size, using a suffix of `kb`, `mb`, or `gb`. |
-| `--device-read-iops` or `--device-write-iops` | Limits the read or write rate to or from a device by IO operations per second. |
-
-
-### Block IO weight examples
-
->**Note**: The `--blkio-weight` flag only affects direct IO and has no effect on
-buffered IO.
-
-If you specify both the `--blkio-weight` and `--blkio-weight-device`, Docker
-uses `--blkio-weight` as the default weight and uses `--blkio-weight-device` to
-override the default on the named device.
-
-To set a container's device weight for `/dev/sda` to 200 and not specify a
-default `blkio-weight`:
-
-```bash
-$ docker run -it \
-  --blkio-weight-device "/dev/sda:200" \
-  ubuntu
-```
-
-### Block bandwidth limit examples
-
-This example limits the `ubuntu` container to a maximum write speed of 1mbps to
-`/dev/sda`:
-
-```bash
-$ docker run -it --device-write-bps /dev/sda:1mb ubuntu
-```
-
-This example limits the `ubuntu` container to a maximum read rate of 1000 IO
-operations per second from `/dev/sda`:
-
-```bash
-$ docker run -ti --device-read-iops /dev/sda:1000 ubuntu
-```
+If the kernel or Docker daemon is not configured correctly, an error will occur.

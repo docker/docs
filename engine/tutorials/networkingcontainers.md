@@ -78,7 +78,8 @@ $ docker network inspect bridge
             "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
             "com.docker.network.bridge.name": "docker0",
             "com.docker.network.driver.mtu": "9001"
-        }
+        },
+        "Labels": {}
     }
 ]
 ```
@@ -120,12 +121,13 @@ If you inspect the network, you'll find that it has nothing in it.
                 "Config": [
                     {
                         "Subnet": "172.18.0.0/16",
-                        "Gateway": "172.18.0.1/16"
+                        "Gateway": "172.18.0.1"
                     }
                 ]
             },
             "Containers": {},
-            "Options": {}
+            "Options": {},
+            "Labels": {}
         }
     ]
 

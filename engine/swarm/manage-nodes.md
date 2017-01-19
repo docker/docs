@@ -6,10 +6,10 @@ title: Manage nodes in a swarm
 
 As part of the swarm management lifecycle, you may need to view or update a node as follows:
 
-* [list nodes in the swarm](manage-nodes.md#list-nodes)
-* [inspect an individual node](manage-nodes.md#inspect-an-individual-node)
-* [update a node](manage-nodes.md#update-a-node)
-* [leave the swarm](manage-nodes.md#leave-the-swarm)
+* [list nodes in the swarm](#list-nodes)
+* [inspect an individual node](#inspect-an-individual-node)
+* [update a node](#update-a-node)
+* [leave the swarm](#leave-the-swarm)
 
 ## List nodes
 
