@@ -147,7 +147,8 @@ Docker from the repository.
     > highest possible version, which will almost certainly be an unstable one.
 
 3.  On production systems, you should install a specific version of Docker
-    instead of always using the latest. List the available versions:
+    instead of always using the latest. This output is truncated. List the
+    available versions:
 
     ```bash
     $ apt-cache madison docker-engine
@@ -155,7 +156,6 @@ Docker from the repository.
     docker-engine | 1.12.3-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
     docker-engine | 1.12.2-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
     docker-engine | 1.12.1-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
-    docker-engine | 1.12.0-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled,

@@ -47,8 +47,8 @@ You can install Docker in different ways, depending on your needs:
 
 - Some users cannot use third-party repositories, and must rely on the version
   of Docker in the OpenSUSE or SLES repositories. This version of Docker may be
-  out of date. Those users should consult the CentOS documentation and not
-  follow these procedures.
+  out of date. Those users should consult the OpenSuSE or SLES documentation and
+  not follow these procedures.
 
 ### Install using the repository
 
@@ -157,20 +157,8 @@ Docker from the repository.
       S | Name          | Type    | Version                               | Arch   | Repository    
       --+---------------+---------+---------------------------------------+--------+---------------
         | docker-engine | package | 1.13.0-1                              | x86_64 | docker-main
-        | docker-engine | package | 1.13.0-0.7.rc7                        | x86_64 | docker-testing
-        | docker-engine | package | 1.13.0-0.6.rc6                        | x86_64 | docker-testing
-        | docker-engine | package | 1.13.0-0.5.rc5                        | x86_64 | docker-testing
-        | docker-engine | package | 1.13.0-0.4.rc4                        | x86_64 | docker-testing
-        | docker-engine | package | 1.13.0-0.3.rc3                        | x86_64 | docker-testing
-        | docker-engine | package | 1.13.0-0.2.rc2                        | x86_64 | docker-testing
-        | docker-engine | package | 1.13.0-0.1.rc1                        | x86_64 | docker-testing
         | docker-engine | package | 1.12.6-1                              | x86_64 | docker-main   
         | docker-engine | package | 1.12.5-1                              | x86_64 | docker-main   
-        | docker-engine | package | 1.12.4-1                              | x86_64 | docker-main   
-        | docker-engine | package | 1.12.3-1                              | x86_64 | docker-main   
-        | docker-engine | package | 1.12.2-1                              | x86_64 | docker-main   
-        | docker-engine | package | 1.12.1-1                              | x86_64 | docker-main   
-        | docker-engine | package | 1.12.0-1                              | x86_64 | docker-main
     ```
 
     The contents of the list depend upon which repositories you have enabled.
