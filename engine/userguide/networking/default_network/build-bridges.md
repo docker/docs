@@ -78,3 +78,8 @@ from the bridge as you start and stop containers, and can run `ip addr` and `ip
 route` inside a container to see that it has been given an address in the
 bridge's IP address range and has been told to use the Docker host's IP address
 on the bridge as its default gateway to the rest of the Internet.
+
+There is another practical solution if you do not want to deal with those commands:
+1- Before the installtion of Docker Engine/UCP, create a virtual interface or extend the netmask of the current interface covering all corporate networks
+2-After you finalize the Docker Engine, swarm or UCP, you will notice that it uses A Class(10.x.x.x/x) or C Class(192.168.x.x/x) rather than 172.x.x.x !!!! Docker installation is smart that it jumps to other network classes.
+3- Revert back your network interface you the initial state ad that's all!! 
