@@ -1,14 +1,14 @@
 ---
 description: overview of voting app example
-keywords: docker-stack.yml, stack deploy, compose, container, multi-container, services, swarm mode, cluster, voting app,
-title: Tour the voting app sample
+keywords: docker-stack.yml, stack deploy, compose, multi-container, services, swarm mode, cluster, voting app,
+title: Define and deploy your app
 ---
 
 This example is built around a web-based voting application that collects,
 tallies, and returns the results of votes (for cats and dogs, or other choices
 you specify). The voting app includes several services, each one running in its
 own container. We'll deploy the app as a _stack_ to introduce some new concepts
-surfaced in [Compose v.3](/compose/compose-file.md), and also use [swarm
+surfaced in [Compose Version 3](/compose/compose-file.md), and also use [swarm
 mode](/engine/swarm/index.md), which is cluster management and orchestration
 capability built into Docker Engine.
 
@@ -19,11 +19,12 @@ Docker](/engine/getstarted/step_one.md#step-1-get-docker) and grab Docker for
 your platform.  You can follow along and run this example using Docker for Mac,
 Docker for Windows or Docker for Linux.
 
-Once you have Docker installed, you can run `docker hello-world`
-or other commands described in the Get Started with Docker tutorial to
-[verify your installation](/engine/getstarted/step_one.md#step-3-verify-your-installation).
-If you are totally new to Docker, you might continue through the full [Get Started with Docker
-tutorial](/engine/getstarted/index.md) first, then come back.
+Once you have Docker installed, you can run `docker hello-world` or other
+commands described in the Get Started with Docker tutorial to [verify your
+installation](/engine/getstarted/step_one.md#step-3-verify-your-installation).
+If you are totally new to Docker, you might continue through the full [Get
+Started with Docker tutorial](/engine/getstarted/index.md) first, then come
+back.
 
 ## What you'll learn and do
 
@@ -38,7 +39,7 @@ the `docker stack deploy` command
 * Use the `visualizer` to explore and understand the runtime app and services
 * Update the `docker-stack.yml` and redeploy the app using a different
 `vote` image to implement a poll on different choices
-* Use features new in Compose v.3, highlighted in the sample app
+* Use features new in Compose Version 3, highlighted in the sample app
 
 ## Anatomy of the voting app
 
@@ -85,21 +86,19 @@ deployed after another service. In our example, `vote` only deploys
 after `redis`.
 
 The `deploy` key specifies aspects of a swarm deployment, as described below in
-[Compose v.3 features and
+[Compose Version 3 features and
 compatibility](#compose-v3-features-and-compatibility).
 
-## docker-stack.yml
+## docker-stack.yml deployment configuration
 
-We'll deploy the app using `docker-stack.yml`, which is a
-type of [Compose file reference](/compose/compose-file.md)
-new in Compose v.3.  
+We'll deploy the app using `docker-stack.yml`, which is a type of [Compose
+file](/compose/compose-file.md) new in Compose Version 3.  
 
-To follow along with the example, you need only have
-Docker running and the copy of `docker-stack.yml` we
-provide here. This file defines all the services shown
-in the [table above](#anatomy-of-the-voting-app), their
-base images, configuration details such as ports and networks,
-application dependencies, and the swarm configuration.
+To follow along with the example, you need only have Docker running and the copy
+of `docker-stack.yml` we provide here. This file defines all the services shown
+in the [table above](#anatomy-of-the-voting-app), their base images,
+configuration details such as ports and networks, application dependencies, and
+the swarm configuration.
 
 ```
 version: "3"
@@ -191,9 +190,9 @@ volumes:
   db-data:
 ```
 
-## Compose v.3 features and compatibility
+## Compose Version 3 features and compatibility
 
-To deploy the voting application, we will use the `docker-stack deploy` command
+To deploy the voting application, we will run the `docker-stack deploy` command
 with this `docker-stack.yml` file to pull the referenced images and launch the
 services in a swarm as configured in the `.yml`.
 
@@ -202,30 +201,31 @@ Note that at the top of the `docker-stack.yml` file, the version is indicated as
 designed to be cross-compatible with Compose and Docker Engine swarm mode.
 
 Before we get started, let's take a look at some aspects of Compose files and
-deployment options that are new in Compose v.3, and that we want to highlight in
+deployment options that are new in Compose Version 3, and that we want to highlight in
 this walkthrough.
 
 - [docker-stack.yml](#docker-stackyml)
   - [deploy key](#deploy-key)
 - [docker stack deploy command](#docker-stack-deploy-command)
-- [Application stacks and services](#application-stack-and-services)
+- [Docker stacks and services](#docker-stacks-and-services)
 
 ### docker-stack.yml
 
-`docker-stack.yml` is a new type of Compose file only compatible with Compose
-v.3.
+`docker-stack.yml` is a new type of [Compose file](/compose/compose-file.md)
+only compatible with Compose Version 3.
 
 #### deploy key
 
-The `deploy` key allows you to specify various properties of
-a swarm deployment.
+The `deploy` key allows you to specify various properties of a swarm deployment.
 
-For example, the voting app configuration uses this to
-create replicas of the `vote` and `result` services (2 containers of each will
-be deployed to the swarm).
+For example, the voting app configuration uses this to create replicas of the
+`vote` and `result` services (2 containers of each will be deployed to the
+swarm).
 
-The voting app also uses the `deploy` key to
-constrain some services to run only on the manager node.
+The voting app also uses the `deploy` key to constrain some services to run only
+on the manager node.
+
+For more about the `deploy key`, see [deploy](/compose/compose-file.md#deploy).
 
 ### docker stack deploy command
 
@@ -239,26 +239,28 @@ builds based on a Dockerfile. You need to use pre-built images
 with `docker stack deploy`.
 
 * It can take the place of running `docker compose up` to deploy
-v.3 compatible applications.
+Version 3 compatible applications.
 
-### Application stacks and services
+See information about the [deploy](/compose/compose-file.md#deploy) key in the
+Compose file reference and [`docker stack
+deploy`](/engine/reference/commandline/stack_deploy.md) in the Docker Engine
+command line reference.
 
-Taken together, these new features and deployment options can help when
+### Docker stacks and services
+
+Taken together, these new Compose features and deployment options can help when
 mapping out distributed applications and clustering strategies. Rather than
-thinking about running individual containers, we can start to model
-Docker deployments as application stacks and services.
+thinking about running individual containers, we can start to model deployments
+as Docker stacks and services.
 
 ### Compose file reference
 
-To learn more, see these topics in the [Compose file
-reference](/compose/compose-file.md):
+For more on what's new in Compose Version 3 and how to upgrade, see these topics
+in the [Compose file reference](/compose/compose-file.md):
 
-* For more about `docker-stack.yml` and the `docker stack deploy` command, see
-[deploy](/compose/compose-file.md#deploy).
-
-* For more on what's new in Compose v.3, see
-[Versioning](/compose/compose-file.md#versioning), [Version 3](/compose/compose-file.md#version-3), and
-[Upgrading](/compose/compose-file.md#upgrading).
+* [Versioning](/compose/compose-file.md#versioning)
+* [Version 3](/compose/compose-file.md#version-3)
+* [Upgrading](/compose/compose-file.md#upgrading)
 
 ## What's next?
 

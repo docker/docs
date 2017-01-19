@@ -68,7 +68,7 @@ This will result in an image named `webapp` and tagged `tag`, built from `./dir`
 
 > **Note:** This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file.
+> with a (version 3) Compose file. The `docker stack` command accepts only pre-built images.
 
 #### context
 
