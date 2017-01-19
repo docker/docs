@@ -23,7 +23,7 @@ the swarm in your AWS console.  Once present on this page, you can see the
 "Public IP" of each manager node in the table and/or "Description" tab if you
 click on the instance.
 
-![](/img/managers.png)
+![](img/managers.png)
 
 ## Connecting via SSH
 
