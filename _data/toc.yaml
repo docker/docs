@@ -43,28 +43,26 @@ toc:
       title: Release Notes
   - sectiontitle: Docker for Linux
     section:
-    - path: /engine/installation/linux/ubuntulinux/
-      title: Installation on Ubuntu
+    - path: /engine/installation/linux/ubuntu/
+      title: Ubuntu
     - path: /engine/installation/linux/rhel/
-      title: Installation on Red Hat Enterprise Linux
+      title: Red Hat Enterprise Linux
     - path: /engine/installation/linux/centos/
-      title: Installation on CentOS
+      title: CentOS
     - path: /engine/installation/linux/fedora/
-      title: Installation on Fedora
+      title: Fedora
     - path: /engine/installation/linux/debian/
-      title: Installation on Debian
-    - path: /engine/installation/linux/archlinux/
-      title: Installation on Arch Linux
-    - path: /engine/installation/linux/cruxlinux/
-      title: Installation on CRUX Linux
-    - path: /engine/installation/linux/gentoolinux/
-      title: Installation on Gentoo
+      title: Debian
     - path: /engine/installation/linux/oracle/
-      title: Installation on Oracle Linux
-    - path: /engine/installation/linux/SUSE/
-      title: Installation on openSUSE and SUSE Linux Enterprise
+      title: Oracle Linux
+    - path: /engine/installation/linux/suse/
+      title: OpenSuSE and SuSE Linux Enterprise
+    - path: /engine/installation/linux/other/
+      title: Other Linux distributions
     - path: /engine/installation/binaries/
       title: Installation from binaries
+    - path: /engine/installation/linux-postinstall/
+      title: Optional post-installation steps
   - sectiontitle: Docker for AWS
     section:
     - path: /docker-for-aws/
