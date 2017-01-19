@@ -36,12 +36,12 @@ Docker on a different Linux distribution, consider
 You can use Docker Cloud to automatically provision and manage your cloud
 instances:
 
-* [Amazon Web Services setup guide](link-aws.md)
-* [DigitalOcean setup guide](link-do.md)
-* [Microsoft Azure setup guide](link-azure.md)
-* [Packet setup guide](link-packet.md)
-* [SoftLayer setup guide](link-softlayer.md)
-* [Use the Docker Cloud Agent to Bring your Own Host](byoh.md)
+* [Amazon Web Services setup guide](/docker-cloud/infrastructure/link-aws.md)
+* [DigitalOcean setup guide](/docker-cloud/infrastructure/link-do.md)
+* [Microsoft Azure setup guide](/docker-cloud/infrastructure/link-azure.md)
+* [Packet setup guide](/docker-cloud/infrastructure/link-packet.md)
+* [SoftLayer setup guide](/docker-cloud/infrastructure/link-softlayer.md)
+* [Use the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md)
 
 You can also use our official Docker Editions if you'd like to manually manage
 your cloud instances:
@@ -59,4 +59,5 @@ Instructions for installing prior releases of Docker can be found in the
 ## Get started
 
 After setting up Docker, try learning the basics over at
-[Getting started with Docker](/engine/getstarted/).
+[Getting started with Docker](/engine/getstarted/), then learn how to deploy
+full-blown applications in our [app tutorial](/engine/getstarted-voting-app/).
