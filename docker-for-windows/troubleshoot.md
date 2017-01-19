@@ -72,7 +72,7 @@ Drives** and share the drive that contains the Dockerfile and volume.
 ### Verify domain user has permissions for shared drives (volumes)
 
 >**Tip:** Shared drives are only required for volume mounting [Linux
-containers](index.md#switch-between-windows-and-linux-containers-beta-feature),
+containers](index.md#switch-between-windows-and-linux-containers),
 not Windows containers.
 
 Permissions to access shared drives are tied to the username and password you
