@@ -29,7 +29,7 @@ storage driver](selectadriver.md#overlay-vs-overlay2).
 >**Note**: Since it was merged into the mainline kernel, the OverlayFS *kernel
 >module* was renamed from "overlayfs" to "overlay". As a result you may see the
 > two terms used interchangeably in some documentation. However, this document
-> uses  "OverlayFS" to refer to the overall filesystem, and `overlay`/`overlay2`
+> uses  "OverlayFS" to refer to the Overlay filesystem, and `overlay`/`overlay2`
 > to refer to Docker's storage-drivers.
 
 ## Image layering and sharing with OverlayFS (`overlay`)
