@@ -45,9 +45,11 @@ is using the `json-file` logging driver, run the following `docker inspect`
 command, substituting the container name or ID for `<CONTAINER>`:
 
 ```bash
+{% raw %}
 $ docker inspect -f '{{.HostConfig.LogConfig.Type}}' <CONTAINER>
 
 json-file
+{% endraw %}
 ```
 
 ## Supported logging drivers
@@ -337,7 +339,7 @@ The `splunk` logging driver **allows** the following options:
 | `splunk-capath`             | Path to root certificate.  | `--log-opt splunk-capath=/path/to/cert/cacert.pem` |
 | `splunk-caname`             | Name to use for validating server certificate. Defaults to the hostname of the `splunk-url`. | `--log-opt splunk-caname=SplunkServerDefaultCert` |
 | `splunk-insecureskipverify` | Ignore server certificate validation. | `--log-opt splunk-insecureskipverify=false` |
-| `tag`                       | Specify tag for message, which interpret some markup. Default value is `{{.ID}}` (12 characters of the container ID). Refer to the [log tag option documentation](log_tags.md) for information about customizing the log tag format. | {% raw %}`--log-opt tag="{{.Name}}/{{.FullID}}"`{% endraw %} |
+| `tag`                       | Specify tag for message, which interpret some markup. Default value is {% raw %}`{{.ID}}`{% endraw %} (12 characters of the container ID). Refer to the [log tag option documentation](log_tags.md) for information about customizing the log tag format. | {% raw %}`--log-opt tag="{{.Name}}/{{.FullID}}"`{% endraw %} |
 | `labels`                    | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
 | `env`                       | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Adds additional key on the `extra` fields, prefixed by an underscore (`_`). Used for advanced [log tag options](log_tags.md). | `--log-opt env=os,customer` |
 
