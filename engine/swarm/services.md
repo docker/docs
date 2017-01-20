@@ -202,7 +202,7 @@ Each tag represents a digest, similar to a Git hash. Some tags, such as
 `latest`, are updated often to point to a new digest. Others, such as
 `ubuntu:16.04`, represent a released software version and are not expected to
 update to point to a new digest often if at all. In Docker 1.13 and higher, when
-you create a service, it is constrained to create tasks using a specific digest\
+you create a service, it is constrained to create tasks using a specific digest
 of an image until you update the service using `service update` with the
 `--image` flag. If you use an older version of Docker Engine, you must remove
 and re-create the service to update its image.
@@ -328,8 +328,7 @@ Keep reading for more information and use cases for each of these methods.
 
 #### Publish a service's ports using the routing mesh
 
-To publish a service's ports externally to the swarm, use the `--publish
-<TARGET-PORT>:<SERVICE-PORT>` flag. The swarm
+To publish a service's ports externally to the swarm, use the `--publish <TARGET-PORT>:<SERVICE-PORT>` flag. The swarm
 makes the service accessible at the target port **on every swarm node**. If an
 external host connects to that port on any swarm node, the routing mesh routes
 it to a task. The external host does not need to know the IP addresses or
