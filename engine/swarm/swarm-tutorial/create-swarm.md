@@ -16,7 +16,7 @@ machines.
     $ docker-machine ssh manager1
     ```
 
-2. Run the following command to create a new swarm:
+2.  Run the following command to create a new swarm:
 
     ```bash
     docker swarm init --advertise-addr <MANAGER-IP>
@@ -52,7 +52,7 @@ Windows](index.md#use-docker-for-mac-or-docker-for-windows) with Swarm.
     join as managers or workers depending on the value for the `--token`
     flag.
 
-2. Run `docker info` to view the current state of the swarm:
+2.  Run `docker info` to view the current state of the swarm:
 
     ```bash
     $ docker info
@@ -70,7 +70,7 @@ Windows](index.md#use-docker-for-mac-or-docker-for-windows) with Swarm.
       ...snip...
     ```
 
-3. Run the `docker node ls` command to view information about nodes:
+3.  Run the `docker node ls` command to view information about nodes:
 
     ```bash
     $ docker node ls
