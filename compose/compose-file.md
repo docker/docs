@@ -236,7 +236,7 @@ containers that should be running at any given time.
 
 Specify placement constraints. For a full description of the syntax and
 available types of constraints, see the
-[docker service create](engine/reference/commandline/service_create.md#specify-service-constraints-constraint)
+[docker service create](/engine/reference/commandline/service_create.md#specify-service-constraints-constraint)
 documentation.
 
     placement:
