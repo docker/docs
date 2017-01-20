@@ -1,7 +1,7 @@
 ---
 description: Customize the voting app
 keywords: multi-container, services, swarm mode, cluster, voting app, docker-stack.yml, docker stack deploy
-title: Tour the voting app sample
+title: Customize the app and redeploy
 ---
 
 
