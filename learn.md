@@ -1,5 +1,7 @@
 ---
 title: Learn Docker
+redirect_from:
+- /engine/quickstart/
 ---
 
 In this section, you can explore various ways to get up to speed on
