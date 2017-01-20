@@ -114,29 +114,15 @@ Docker from the repository.
 1.  Update the `yum` package index.
 
     ```bash
-    $ sudo yum -y check-update
+    $ sudo yum makecache fast
     ```
 
-2.  Verify and import Docker's public key, which is used to sign packages in
-    Docker's repository.
+    If this is the first time you have refreshed the package index since adding
+    the Docker repositories, you will be prompted to accept the GPG key, and
+    the key's fingerprint will be shown. Verify that the fingerprint matches
+    `58118E89F3A912897C070ADBF76221572C52609D` and if so, accept the key.
 
-    First, verify that the fingerprint is `58118E89F3A912897C070ADBF76221572C52609D`:
-
-    ```bash
-    $ curl -s https://yum.dockerproject.org/gpg | gpg --quiet --with-fingerprint
-
-    pub  4096R/2C52609D 2015-07-14
-          Key fingerprint = 5811 8E89 F3A9 1289 7C07  0ADB F762 2157 2C52 609D
-    uid                            Docker Release Tool (releasedocker) <docker@docker.com>
-    ```
-
-    If the fingerprint matches, import the key:
-
-    ```bash
-    $ sudo rpm --import https://yum.dockerproject.org/gpg
-    ```
-
-3.  Install the latest version of Docker, or go to the next step to install a
+2.  Install the latest version of Docker, or go to the next step to install a
     specific version.
 
     ```bash
@@ -148,7 +134,7 @@ Docker from the repository.
     > `yum install` or `yum upgrade` command will always install the highest
     > available version, which will almost certainly be an unstable one.
 
-4.  On production systems, you should install a specific version of Docker
+3.  On production systems, you should install a specific version of Docker
     instead of always using the latest. List the available versions.
     This example uses the `sort -r` command to sort the results by version
     number, highest to lowest. The output is truncated.
@@ -180,7 +166,7 @@ Docker from the repository.
 
     The Docker daemon does not start automatically.
 
-5.  Start the Docker daemon. Use `systemctl` on Oracle Linux 7 or `service` on
+4.  Start the Docker daemon. Use `systemctl` on Oracle Linux 7 or `service` on
     Oracle Linux 6.
 
     **Oracle Linux 7**:
@@ -195,7 +181,7 @@ Docker from the repository.
     $ sudo service docker start
     ```
 
-6.  Verify that `docker` is installed correctly by running the `hello-world`
+5.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -211,7 +197,7 @@ users to run Docker commands and for other optional configuration steps.
 
 #### Upgrade Docker
 
-To upgrade Docker, first run `sudo yum check-update`, then follow the
+To upgrade Docker, first run `sudo yum makecache fast`, then follow the
 [installation instructions](#install-docker), choosing the new version you want
 to install.
 
