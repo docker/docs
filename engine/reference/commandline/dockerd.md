@@ -4,8 +4,7 @@ redirect_from:
 - /reference/commandline/daemon/
 - /engine/reference/commandline/daemon/
 description: The daemon command description and usage
-keywords:
-- container, daemon, runtime
+keywords: container, daemon, runtime
 title: dockerd
 datafolder: dockerd-cli
 datafile: dockerd
