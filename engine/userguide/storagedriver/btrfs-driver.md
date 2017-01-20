@@ -52,7 +52,7 @@ snapshots of snapshots as shown in the diagram below.
 
 ![](images/btfs_snapshots.jpg)
 
-Btfs allocates space to subvolumes and snapshots on demand from an underlying
+Btrfs allocates space to subvolumes and snapshots on demand from an underlying
 pool of storage. The unit of allocation is referred to as a *chunk*, and
 *chunks* are normally ~1GB in size.
 
@@ -137,7 +137,7 @@ point to this new data. The original data is preserved in-place for subvolumes
 and snapshots further up the tree. This behavior is native to copy-on-write
 filesystems like Btrfs and incurs very little overhead.
 
-With Btfs, writing and updating lots of small files can result in slow
+With Btrfs, writing and updating lots of small files can result in slow
 performance. More on this later.
 
 ## Configuring Docker with Btrfs
@@ -302,7 +302,7 @@ To enable these, mount with the `-o ssd` mount option. These optimizations
 include enhanced SSD write performance by avoiding things like *seek
 optimizations* that have no use on SSD media.
 
-    Btfs also supports the TRIM/Discard primitives. However, mounting with the
+    Btrfs also supports the TRIM/Discard primitives. However, mounting with the
 `-o discard` mount option can cause performance issues. Therefore, it is
 recommended you perform your own tests before using this option.
 
