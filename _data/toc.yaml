@@ -169,9 +169,9 @@ toc:
   section:
   - sectiontitle: Install
     section:
-    - path: /engine/installation/mac/
+    - path: /docker-for-mac/
       title: Installation on macOS
-    - path: /engine/installation/windows/
+    - path: /docker-for-windows/
       title: Installation on Windows
     - sectiontitle: On Linux distributions
       section:
@@ -197,11 +197,11 @@ toc:
         title: Installation on openSUSE and SUSE Linux Enterprise
       - sectiontitle: On cloud providers
         section:
-        - path: /engine/installation/cloud/overview/
+        - path: /docker-cloud/
           title: Choose how to install
-        - path: /engine/installation/cloud/cloud-ex-aws/
+        - path: /docker-for-aws/
           title: "Example: Manual install on cloud provider"
-        - path: /engine/installation/cloud/cloud-ex-machine-ocean/
+        - path: /docker-cloud/infrastructure/link-do/
           title: "Example: Use Docker Machine to provision cloud hosts"
       - path: /engine/installation/binaries/
         title: Installation from binaries
