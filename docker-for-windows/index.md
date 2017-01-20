@@ -20,8 +20,7 @@ systems.
 >**Already have Docker for Windows?** If you already have Docker for Windows installed, and are ready to get started, skip down to [Step 3. Check versions of
 Docker Engine, Compose, and
 Machine](#step-3-check-versions-of-docker-engine-compose-and-machine) to work
-through the rest of the Docker for Windows tour, or jump over to the standard
-[Getting Started with Docker](/engine/getstarted/index.md) tutorial.
+through the rest of the Docker for Windows tour, or jump over to getting started tutorials at [Learn Docker](/learn.md).
 
 ## Download Docker for Windows
 
@@ -501,7 +500,7 @@ some of the commmon settings to make it easier to configure them.
 
 ![Docker Daemon](images/docker-daemon_basic.png)
 
-##### Experimental mode
+#### Experimental mode
 
 By default, Docker for Windows Beta releases use the experimental version of
 Docker Engine, described in the [Docker Experimental Features
@@ -536,7 +535,7 @@ Server:
  Experimental: true
 ```
 
-##### Custom registries
+#### Custom registries
 
 Also starting with with Beta 34 and Stable 1.13.0, you can set up your own
 [registries](/registry/introduction.md) on the **Basic** Daemon settings.
@@ -549,12 +548,11 @@ registries and registry mirrors on which to host your images. (See also, [How do
 I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in
 the FAQs.)
 
-##### Edit the daemon configuration file
+#### Edit the daemon configuration file
 
 The **Advanced** daemon settings provide the original option to directly edit
 the JSON configuration file for the <a
-href="/engine/reference/commandline/dockerd/"
-target="_blank">daemon</a>.
+href="/engine/reference/commandline/dockerd/>daemon</a>.
 
 ![Docker Daemon](images/docker-daemon_advanced.png)
 
@@ -581,7 +579,7 @@ Microsoft Developer Network has preliminary/draft information on Windows
 containers
 [here](https://msdn.microsoft.com/en-us/virtualization/windowscontainers/about/about_overview).
 
-For a full list of options on the Docker daemon, see [daemon](/engine/reference/commandline/dockerd/){:target="_blank"} in the Docker Engine command line reference.
+For a full list of options on the Docker daemon, see [daemon](/engine/reference/commandline/dockerd/) in the Docker Engine command line reference.
 
 In that topic, see also:
 
@@ -681,18 +679,13 @@ If you want to go back to using Docker Toolbox, you have to disable the Hyper-V 
 
 * Try out the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
-* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on building images, running containers, networking, managing data, and storing images on Docker Hub.
+* Follow up by working through the voting app example to learn how to [define and deploy a Docker stack](/engine/getstarted-voting-app/index.md) to a
+[swarm](/engine/swarm/index.md). This example shows how to deploy multiple
+containers as services and use new [Compose Version
+3](/compose/compose-file.md#version-3) features.
 
-* See [Example Applications](examples.md) for example applications that include setting up services and databases in Docker Compose.
-
-* Interested in trying out the new [swarm mode](/engine/swarm/index.md) on Docker Engine v1.12?
-
-    See [Get started with swarm mode](/engine/swarm/swarm-tutorial/index.md), a tutorial which includes specifics on how to leverage your Docker for Windows installation to run single and multi-node swarms.
-
-    Also, try out the Swarm examples in [docker labs](https://github.com/docker/labs/tree/master/swarm-mode/beginner-tutorial). Run the `bash script` and follow the accompanying [Docker Swarm Tutorial](https://github.com/docker/labs/blob/master/swarm-mode/beginner-tutorial/README.md). The script uses Docker Machine to create a multi-node swarm, then walks you through various Swarm tasks and commands.
+* Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example walkthroughs and source code.
 
 * For a summary of Docker command line interface (CLI) commands, see [Docker CLI Reference Guide](/engine/reference/index.md).
 
-* Check out the <a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">blog posts</a> on Docker for Mac and Docker for Windows public betas, and <a href="https://blog.docker.com/2016/03/docker-for-mac-windows-beta/">earlier posts</a> on the initial private beta.
-
-* Please give feedback on your experience with the app and report bugs and problems by logging into our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows).
+* Check out the blog post [Introducing Docker 1.13.0](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/).

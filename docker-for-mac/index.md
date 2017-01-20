@@ -20,8 +20,7 @@ Docker for Mac is the best way to get started with Docker on a Mac.
 >**Already have Docker for Mac?** If you already have Docker for Mac installed, and are ready to get started, skip down to [Step 2. Check versions of Docker
 Engine, Compose, and
 Machine](#step-2-check-versions-of-docker-engine-compose-and-machine) to work
-through the rest of the Docker for Mac tour, or jump over to the standard
-[Getting Started with Docker](/engine/getstarted/index.md) tutorial.
+through the rest of the Docker for Mac tour, or jump over to getting started tutorials at [Learn Docker](/learn.md).
 
 ## Download Docker for Mac
 
@@ -68,7 +67,7 @@ channels, see the [FAQs](faqs.md#stable-and-beta-channels).
 
 * **README FIRST for Docker Toolbox and Docker Machine users**: If you are already running Docker on your machine, first read [Docker for Mac vs. Docker Toolbox](docker-toolbox.md) to understand the impact of this installation on your existing setup, how to set your environment for Docker for Mac, and how the two products can coexist.
 <p />
-*  **Relationship to Docker Machine**: Installing Docker for Mac does not affect machines you created with Docker Machine. You'll get the option to copy containers and images from your local `default` machine (if one exists) to the new Docker for Mac <a href="https://github.com/docker/HyperKit/" target="_blank">HyperKit</a> VM. When you are running Docker for Mac, you do not need Docker Machine nodes running at all locally (or anywhere else). With Docker for Mac, you have a new, native virtualization system running (HyperKit) which takes the place of the VirtualBox system. To learn more, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
+*  **Relationship to Docker Machine**: Installing Docker for Mac does not affect machines you created with Docker Machine. You'll get the option to copy containers and images from your local `default` machine (if one exists) to the new Docker for Mac <a href="https://github.com/docker/HyperKit/">HyperKit</a> VM. When you are running Docker for Mac, you do not need Docker Machine nodes running at all locally (or anywhere else). With Docker for Mac, you have a new, native virtualization system running (HyperKit) which takes the place of the VirtualBox system. To learn more, see [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
 <p />
 * **System Requirements**: Docker for Mac will launch only if all of these requirements are met.
 
@@ -182,22 +181,64 @@ can set the following runtime options.
 
 ![Preferences](images/settings.png)
 
-#### Auto-start, update, and backups
+#### Auto-start, update, backups, usage data
 
-* Docker for Mac is set to **automatically start** when you log in. Uncheck the login autostart option if you don't want Docker to start when you open your
-session.
+*  Docker for Mac is set to automatically **start Docker when you log in**.
+Uncheck this option if you don't want Docker to start when you
+open your session.
 
-* Docker for Mac is set to **check for updates** automatically and notify you when an update is available. If an update is found, click **OK** to accept and
-install it (or cancel to keep the current version). If you disable the check for
-updates, you can still find out about updates manually by choosing <img
-src="images/whale-x.png"> -> **Check for Updates**
+* Docker for Mac is set to **automatically check for updates**  and notify
+you when an update is available. If an update is found, click **OK** to
+accept and install it (or cancel to keep the current version). If you
+disable the check for updates, you can still find out about updates manually
+by choosing <img src="images/whale-x.png"> -> **Check for Updates**
 
-* Check **Exclude VM from Time Machine backups** to prevent Time Machine from backing up the Docker for Mac virtual machine.
+* Check **Exclude VM from Time Machine backups** to prevent Time Machine
+from backing up the Docker for Mac virtual machine.
 
-  >**Tip: Beta dialogs** &mdash;  Starting with Beta 31, an option to auto-send
-  usage data is also on the General dialog. In Stable releases, the option is
-  still on the Privacy tab. For now, both Stable and Beta users can read more
-  about usage data settings in the [Privacy](#Privacy) topic.
+* **Send usage statistics** &mdash; You can set Docker for Mac to auto-send diagnostics, crash reports, and usage data. This information can help Docker
+improve the application and get more context for troubleshooting problems.
+Uncheck this to opt out and prevent auto-send of data. Docker may prompt for
+more information in some cases, even with auto-send enabled. Also, you can
+enable or disable these auto-reporting settings with one click on the
+information popup when you first start Docker.
+
+  ![Startup information](images/mac-install-success-docker-wait.png)
+
+
+### File sharing
+
+You can decide which directories on your Mac to share with containers.
+
+* **Add a Directory** - Click `+` and navigate to the directory you
+want to add.
+
+	![File Sharing](images/settings-file-share.png)
+
+* Click **Apply & Restart** to make the directory available to
+  containers using Docker's bind mount (`-v`) feature.
+
+There are some limitations on the directories that can be shared:
+
+* They cannot be a subdirectory of an already shared directory.
+
+* They cannot already exist inside of Docker.
+
+See [Namespaces](osxfs.md#namespaces) in the topic on
+[osxfs file system sharing](osxfs.md) for more information.
+
+>**Tip:** File sharing is required for volume mounting if the project lives
+outside of the `/Users` directory. In that case, share the drive where the
+Dockerfile and volume are located. Otherwise, you will get file not found or
+cannot start service errors at runtime. (See also [Volume mounting requires file
+sharing for any project directories outside of
+`/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
+
+
+### Advanced
+
+![Advanced Preference settings-advanced](images/settings-advanced.png)
+
 
 #### CPUs
 
@@ -212,47 +253,37 @@ the total available memory on your Mac. You can increase the RAM on the app to
 get faster performance by setting this number higher (for example to `3`) or
 lower (to `1`) if you want Docker for Mac to use less memory.
 
->**Tip: Beta dialogs** &mdash; Starting with Beta 31, **CPUs** and **Memory** settings
-are on the Advanced dialog. Starting with Beta 33, you can specify the **storage location** of the Linux volume; i.e., where containers and images are stored. These settings are shown below.
->
->![CPUs and Memory settings UI
-starting at Beta 31](images/settings-advanced-beta.png)
+#### Storage location
 
-### Advanced
+You can specify the **storage location** of the Linux volume; i.e., where
+containers and images are stored.
 
-![Advanced Preference settings-advanced](images/settings-advanced.png)
 
-#### Custom registries
-
-As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
-public or private images or [Docker Trusted
-Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up your
-own insecure [registry](/registry/introduction/). Add URLs for insecure
-registries and registry mirrors on which to host your images. (See also, [How do
-I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in
-the FAQs.)
-
->**Tip: Beta dialogs** &mdash;  Starting with Beta 31, options to set up your
-own registries are available as part of a new daemon tab. See [Docker
-daemon](#docker-daemon-beta-feature)).
-
-#### HTTP proxy settings
+### HTTP proxy settings
 
 Docker for Mac will detect HTTP/HTTPS Proxy Settings and automatically propagate
 these to Docker and to your containers. For example, if you set your proxy
 settings to `http://proxy.example.com`, Docker will use this proxy when pulling
 containers.
 
->**Tip: Beta dialogs** &mdash;  Starting with Beta 31, HTTP proxy settings are provided on a dedicated dialog, as shown below.
->
->![Proxies settings](images/settings-proxies-beta.png)
+![Proxies settings](images/settings-proxies.png)
 
-### Docker Daemon (Beta feature)
+### Docker Daemon
 
-Starting with Beta 31, configuration options on the Docker daemon move to their
-own **Daemon** tab, including basic and advanced options.
+You can configure options on the Docker daemon that determine how your
+containers will run. You can configure some **Basic** options on the daemon with interactive settings, or switch to **Advanced** to edit the JSON directly.
 
-#### Daemon Basic (experimental mode and registries)
+The settings offered on **Basic** dialog can be
+configured directly in the JSON as well. This version just surfaces
+some of the commmon settings to make it easier to configure them.
+
+* [Experimental mode](#experimental-mode)
+* [Custom registries](#custom-registries)
+* [Edit the daemon configuration file](#edit-the-daemon-configuration-file)
+
+![Daemon](images/settings-advanced-experimental-beta.png)
+
+#### Experimental mode
 
 By default, Docker for Mac Beta releases use the experimental version of Docker
 Engine, described in the [Docker Experimental Features README](https://github.com/docker/docker/tree/master/experimental) on GitHub. Starting with
@@ -285,63 +316,29 @@ Server:
  Experimental: true
 ```
 
-You can use Docker to set up your own
-[registries](/registry/introduction/). For details on this, see [Custom
-Registries](#custom-registries).
+#### Custom registries
 
-![Daemon](images/settings-advanced-experimental-beta.png)
+As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
+public or private images or [Docker Trusted
+Registry](/datacenter/dtr/2.1/guides/index.md), you can use Docker to set up
+your own insecure [registry](/registry/introduction/). Add URLs for insecure
+registries and registry mirrors on which to host your images. (See also, [How do
+I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in
+the FAQs.)
 
-#### Daemon Advanced (JSON configuration file)
+#### Edit the daemon configuration file
 
 On the **Daemon -> Advanced dialog**, you can directly configure the daemon from
 the JSON file, and determine entirely how your containers will run. For a full
 list of options on the Docker daemon, see <a
-href="/engine/reference/commandline/dockerd/"
-target="_blank">daemon</a> in the Docker Engine command line reference.
+href="/engine/reference/commandline/dockerd/>daemon</a> in the Docker Engine
+command line reference.
 
 After editing the daemon configuration , click **Apply & Restart** to save it
 and reboot Docker. Or, to cancel changes, click another preference tab, then
 choose to discard or not apply changes when asked.
 
 ![Docker Daemon](images/settings-daemon-beta.png)
-
-### File sharing
-
-You can decide which directories on your Mac to share with containers.
-
-* **Add a Directory** - Click `+` and navigate to the directory you want to add.
-
-	![File Sharing](images/settings-file-share.png)
-
-* Click **Apply & Restart** to make the directory available to
-  containers using Docker's bind mount (`-v`) feature.
-
-There are some limitations on the directories that can be shared:
-
-* They cannot be a subdirectory of an already shared directory.
-
-* They cannot already exist inside of Docker.
-
-See [Namespaces](osxfs.md#namespaces) in the topic on [osxfs file system sharing](osxfs.md) for more information.
-
->**Tip:** File sharing is required for volume mounting if the project lives
-outside of the `/Users` directory. In that case, share the drive where the
-Dockerfile and volume are located. Otherwise, you will get file not found or
-cannot start service errors at runtime. (See also [Volume mounting requires file sharing for any project directories outside of `/Users`](troubleshoot.md#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-users).)
-
-### Privacy
-
-You can set Docker for Mac to auto-send diagnostics, crash reports, and usage data. This information can help Docker improve the application and get more context for troubleshooting problems.
-
-Uncheck any of the options to opt out and prevent auto-send of data. Docker may prompt for more information in some cases, even with auto-send enabled.
-
-![Privacy](images/privacy.png)
-
->**Tip: Beta dialogs** &mdash;  Starting with Beta 31, options to enable or disable auto-send of usage data are on the [General](#general) dialog.
-
-Also, you can enable or disable these auto-reporting settings with one click on the information popup when you first start Docker.
-
-![Startup information](images/mac-install-success-docker-wait.png)
 
 ## Uninstall or reset
 Choose <img src="images/whale-x.png"> --> **Preferences** from the menu bar, then click **Uninstall / Reset** on the Preferences dialog.
@@ -352,7 +349,9 @@ Choose <img src="images/whale-x.png"> --> **Preferences** from the menu bar, the
 
 * **Reset to factory defaults** - Choose this option to reset all options on Docker for Mac to its initial state, the same as when it was first installed.
 
-You can uninstall Docker for Mac from the command line with this command: `<DockerforMacPath> --uninstall`. If Docker is installed in the default location, the following command will provide a clean uninstall.
+You can uninstall Docker for Mac from the command line with this command:
+`<DockerforMacPath> --uninstall`. If Docker is installed in the default
+location, the following command will provide a clean uninstall.
 
 ```shell
 $ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
@@ -370,8 +369,9 @@ If you are using [bash completion](https://www.debian-administration.org/article
 - docker-compose
 may be found inside Docker.app, in the Contents/Resources/etc folder.
 
-To activate bash completion, these files need to be copied or symlinked to
-your bash_completion.d directory. For example, if you use <a href="http://brew.sh/" target="_blank">Homebrew</a>:
+To activate bash completion, these files need to be copied or symlinked to your
+bash_completion.d directory. For example, if you use <a
+href="http://brew.sh/">Homebrew</a>:
 
 ```
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion /usr/local/etc/bash_completion.d/docker
@@ -400,20 +400,13 @@ options at the bottom of each docs page.
 
 * Try out the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
-* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on
-  building images, running containers, networking, managing data, and storing
-  images on Docker Hub.
+* Follow up by working through the voting app example to learn how to [define and deploy a Docker stack](/engine/getstarted-voting-app/index.md) to a
+[swarm](/engine/swarm/index.md). This example shows how to deploy multiple
+containers as services and use new [Compose Version
+3](/compose/compose-file.md#version-3) features.
 
-* See [Example Applications](examples.md) for example applications that include setting up services and databases in Docker Compose.
-
-* Interested in trying out the new [swarm mode](/engine/swarm/index.md) on Docker Engine v1.12?
-
-    See [Get started with swarm mode](/engine/swarm/swarm-tutorial/index.md), a tutorial which includes specifics on how to leverage your Docker for Mac installation to run single and multi-node swarms.
-
-    Also, try out the Swarm examples in [docker labs](https://github.com/docker/labs/tree/master/swarm-mode/beginner-tutorial). Run the `bash script` and follow the accompanying [Docker Swarm Tutorial](https://github.com/docker/labs/blob/master/swarm-mode/beginner-tutorial/README.md). The script uses Docker Machine to create a multi-node swarm, then walks you through various Swarm tasks and commands.
+* Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example walkthroughs and source code.
 
 * For a summary of Docker command line interface (CLI) commands, see [Docker CLI Reference Guide](/engine/reference/index.md).
 
-* Check out the <a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">blog posts</a> on Docker for Mac and Docker for Windows public betas, and <a href="https://blog.docker.com/2016/03/docker-for-mac-windows-beta/">earlier posts</a> on the initial private beta.
-
-* Please give feedback on your experience with the app and report bugs and problems by logging into our [Docker for Mac forum](https://forums.docker.com/c/docker-for-mac).
+* Check out the blog post [Introducing Docker 1.13.0](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/).
