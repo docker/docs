@@ -155,7 +155,7 @@ Linux:
  - Any distribution running version 3.10+ of the Linux kernel
  - Specific instructions are available for most Linux distributions, including
    [RHEL](installation/linux/rhel.md), [Ubuntu](installation/linux/ubuntulinux.md),
-   [SuSE](installation/linux/SUSE.md), and many others.
+   [SuSE](installation/linux/suse.md), and many others.
 
 Microsoft Windows:
  - Windows Server 2016
