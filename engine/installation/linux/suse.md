@@ -58,26 +58,7 @@ Docker from the repository.
 
 #### Set up the repository
 
-1.  Verify and import Docker's public key, which is used to sign packages in
-    Docker's repository.
-
-    First, verify that the fingerprint is `58118E89F3A912897C070ADBF76221572C52609D`:
-
-    ```bash
-    $ curl -s https://yum.dockerproject.org/gpg | gpg --quiet --with-fingerprint
-
-    pub  4096R/2C52609D 2015-07-14
-          Key fingerprint = 5811 8E89 F3A9 1289 7C07  0ADB F762 2157 2C52 609D
-    uid                            Docker Release Tool (releasedocker) <docker@docker.com>
-    ```
-
-    If the fingerprint matches, import the key:
-
-    ```bash
-    $ sudo rpm --import https://yum.dockerproject.org/gpg
-    ```
-
-2.  Use the following command to set up the **stable** repository:
+1.  Use the following command to set up the **stable** repository:
 
     ```bash
     $ sudo zypper addrepo \
@@ -85,7 +66,7 @@ Docker from the repository.
         docker-main
     ```
 
-3.  **Optional**: Enable the **testing** repository. You can enable it alongside
+2.  **Optional**: Enable the **testing** repository. You can enable it alongside
     the stable repository. Do not use unstable repositories on on production
     systems or for non-testing workloads.
 
@@ -115,6 +96,11 @@ Docker from the repository.
     ```bash
     $ sudo zypper refresh
     ```
+
+    If this is the first time you have refreshed the package index since adding
+    the Docker repositories, you will be prompted to accept the GPG key, and
+    the key's fingerprint will be shown. Verify that the fingerprint matches
+    `58118E89F3A912897C070ADBF76221572C52609D` and if so, accept the key.
 
 2.  Install the latest version of Docker, or go to the next step to install a
     specific version.
