@@ -44,7 +44,7 @@ func testTocDotYaml() error {
 		return err
 	}
 
-	return errors.New("test")
+	return nil
 }
 
 // TestURLs checks different things regarding urls (in that order):
@@ -88,9 +88,9 @@ func TestURLs(t *testing.T) {
 
 		count++
 
-		err = testURLs(htmlBytes, path)
+		err = testURLs(htmlBytes, relPath)
 		if err != nil {
-			t.Error(relPath + err.Error())
+			t.Error(relPath + "\n" + err.Error())
 		}
 		return nil
 	})
@@ -110,6 +110,10 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 
 	urlErrors := make([]string, 0)
 
+	// if there's a <base> tag, we should use it to check
+	// if resources pointed by relative links do exist
+	baseTagValue := ""
+
 	done := false
 
 	for !done {
@@ -119,13 +123,22 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 		case html.ErrorToken:
 			// End of the document, we're done
 			done = true
-		case html.StartTagToken:
+
+		case html.StartTagToken, html.SelfClosingTagToken:
 			t := z.Token()
 
 			urlStr := ""
 
 			// check tag types
 			switch t.Data {
+			case "base":
+				ok, href := getHref(t)
+				// ignore if href can't be found
+				if !ok {
+					break
+				}
+				baseTagValue = href
+				break
 			case "a":
 				countLinks++
 				ok, href := getHref(t)
@@ -134,7 +147,7 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 					break
 				}
 				urlStr = href
-
+				break
 			case "img":
 				countImages++
 				ok, src := getSrc(t)
@@ -161,7 +174,12 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 
 				// relative link
 				if u.Scheme == "" {
-					err := checkLinkToLocalResourceValid(cleanPath(u.Path), htmlContentRootPath, filepath.Dir(htmlPath))
+					origin := htmlPath
+					if baseTagValue != "" {
+						origin = baseTagValue
+					}
+
+					err := checkLinkToLocalResourceValid(cleanPath(u.Path), htmlContentRootPath, origin)
 					if err != nil {
 						urlErrors = append(urlErrors, urlStr)
 						break
@@ -186,7 +204,25 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 //		- /foo/index.md -> /foo/index.html
 // - folders:
 // 		- /foo/bar/baz/ -> /foo/bar/baz/index.html
+// cleanPath also removes queries and fragments
+// - /foo/bar?query#fragment -> /foo/bar/index.html
+
 func cleanPath(path string) string {
+
+	if strings.HasPrefix(path, "#") {
+		return ""
+	}
+
+	// remove queries & fragments
+	parts := strings.Split(path, "#")
+	if len(parts) > 1 {
+		path = strings.Join(parts[:len(parts)-1], "#")
+	}
+	parts = strings.Split(path, "?")
+	if len(parts) > 1 {
+		path = strings.Join(parts[:len(parts)-1], "?")
+	}
+
 	if strings.HasSuffix(path, ".md") {
 		if strings.HasSuffix(path, "index.md") {
 			return strings.TrimSuffix(path, "md") + "html"
@@ -235,14 +271,21 @@ func getSrc(t html.Token) (ok bool, src string) {
 // isLinkToLocalResourceValid("/baz", "/www", "foo/bar")
 // will look for "/www/baz"
 func checkLinkToLocalResourceValid(path string, rootFolder string, origin string) error {
+
 	var absPath string
 	if filepath.IsAbs(path) {
 		absPath = filepath.Join(rootFolder, path)
 	} else {
+		// if origin is not a folder, we should select parent directory
+		if filepath.Ext(origin) != "" {
+			origin = filepath.Dir(origin)
+		}
+
 		absPath = filepath.Join(rootFolder, origin, path)
 	}
 
 	if _, err := os.Stat(absPath); os.IsNotExist(err) {
+		// fmt.Println(err.Error())
 		return err
 	}
 
