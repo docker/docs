@@ -17,7 +17,7 @@ RUN git clone https://www.github.com/docker/docker.github.io temp; \
 COPY . allv
 
 ## Branch to pull from, per ref doc
-ENV ENGINE_BRANCH="1.13.x"
+ENV ENGINE_BRANCH="master"
 ENV DISTRIBUTION_BRANCH="release/2.5"
 
 # The statements below pull reference docs from upstream locations,
