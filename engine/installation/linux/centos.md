@@ -54,7 +54,13 @@ Docker from the repository.
 
 #### Set up the repository
 
-1.  Use the following command to set up the **stable** repository:
+1.  Install `yum-utils`, which provides the `yum-config-manager` utility:
+
+    ```bash
+    $ sudo yum install -y yum-utils
+    ```
+
+2.  Use the following command to set up the **stable** repository:
 
     ```bash
     $ sudo yum-config-manager \
@@ -62,7 +68,7 @@ Docker from the repository.
         https://docs.docker.com/engine/installation/linux/repo_files/centos/docker.repo
     ```
 
-2.  **Optional**: Enable the **testing** repository. This repository is included
+3.  **Optional**: Enable the **testing** repository. This repository is included
     in the `docker.repo` file above but is disabled by default. You can enable
     it alongside the stable repository. Do not use unstable repositories on
     on production systems or for non-testing workloads.
