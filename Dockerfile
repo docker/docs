@@ -24,6 +24,7 @@ ENV DISTRIBUTION_BRANCH="release/2.5"
 # then build the whole site to static HTML using Jekyll
 
 RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend allv/engine/extend \
+ && svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/api allv/engine/api/ \
  && wget -O allv/engine/deprecated.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/deprecated.md \
  && svn co https://github.com/docker/distribution/branches/$DISTRIBUTION_BRANCH/docs/spec allv/registry/spec \
  && wget -O allv/registry/configuration.md https://raw.githubusercontent.com/docker/distribution/$DISTRIBUTION_BRANCH/docs/configuration.md \
