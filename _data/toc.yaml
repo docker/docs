@@ -193,7 +193,7 @@ toc:
         title: Installation on Gentoo
       - path: /engine/installation/linux/oracle/
         title: Installation on Oracle Linux
-      - path: /engine/installation/linux/SUSE/
+      - path: /engine/installation/linux/suse/
         title: Installation on openSUSE and SUSE Linux Enterprise
       - sectiontitle: On cloud providers
         section:
