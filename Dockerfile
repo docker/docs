@@ -15,7 +15,7 @@ COPY . md_source
 # then nuke the md_source directory.
 
 ## Branch to pull from, per ref doc
-ENV ENGINE_BRANCH="17.03.x"
+ENV ENGINE_BRANCH="17.04.x"
 ENV DISTRIBUTION_BRANCH="release/2.6"
 
 RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend md_source/engine/extend \
