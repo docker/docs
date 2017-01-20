@@ -7,8 +7,6 @@ redirect_from:
   - /reference/api/docker_remote_api/
 ---
 
-# Docker Engine API and SDKs
-
 The Engine API is the API served by Docker Engine. It allows you to control every aspect of Docker from within your own applications. You to build tools to manage and monitor applications running on Docker, and even use it to build apps on Docker itself.
 
 It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API. For example:
