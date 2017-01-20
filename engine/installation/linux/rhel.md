@@ -99,8 +99,14 @@ Docker from the repository.
 1.  Update the `yum` package index.
 
     ```bash
-    $ sudo yum -y check-update
+    $ sudo yum makecache fast
     ```
+
+    If this is the first time you have refreshed the package index since adding
+    the Docker repositories, you will be prompted to accept the GPG key, and
+    the key's fingerprint will be shown. Verify that the fingerprint matches
+    `58118E89F3A912897C070ADBF76221572C52609D` and if so, accept the key.
+
 2.  Install the latest version of Docker, or go to the next step to install a
     specific version.
 
@@ -160,7 +166,7 @@ users to run Docker commands and for other optional configuration steps.
 
 #### Upgrade Docker
 
-To upgrade Docker, first run `sudo yum check-update`, then follow the
+To upgrade Docker, first run `sudo yum makecache fast`, then follow the
 [installation instructions](#install-docker), choosing the new version you want
 to install.
 
