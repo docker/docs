@@ -1,8 +1,7 @@
 ---
 title: SDKs for Docker Engine API
 description: Client libraries for the Docker Engine API.
-keywords:
-- API, SDK, library, Docker, index, registry, REST, documentation, clients, C#, Erlang, Go, Groovy, Java, JavaScript, Perl, PHP, Python, Ruby, Rust,  Scala
+keywords: API, SDK, library, Docker, index, registry, REST, documentation, clients, C#, Erlang, Go, Groovy, Java, JavaScript, Perl, PHP, Python, Ruby, Rust, Scala
 redirect_from:
   - /engine/api/client-libraries/
   - /engine/reference/api/remote_api_client_libraries/
