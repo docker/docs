@@ -22,6 +22,45 @@ about both kinds of releases, and download stable and beta product installers at
 
 ## Stable Release Notes
 
+### Docker for Windows 1.13.0, 2017-01-19 (stable)
+
+**Upgrades**
+
+- [Docker 1.13.0](https://github.com/docker/docker/releases/tag/v1.13.0)
+- [Docker Compose 1.10](https://github.com/docker/compose/releases/tag/1.10.0)
+- [Docker Machine 0.9.0](https://github.com/docker/machine/releases/tag/v0.9.0)
+- [Notary 0.4.3](https://github.com/docker/notary/releases/tag/v0.4.3)
+- Linux kernel 4.9.4
+
+**New**
+
+- Windows containers
+- Improved UI for Daemon.json editing
+- VHDX file containing images and non-host mounted volumes can be moved
+  (using "advanced" tab in the UI)
+- Support for arm, aarch64, ppc64le architectures using qemu
+- TRIM support for disk (shrinks virtual disk)
+- VM's time synchronization is forced after the host wakes from sleep mode
+- Docker Experimental mode can be toggled
+
+**Bug fixes and minor changes**
+
+- Improved Proxy UI
+- Improvements to Logging and Diagnostics
+- About Box is now Copy/Paste enabled
+- Improvements in drive sharing code
+- Optimized boot process
+- Trend Micro Office Scan made the Api proxy think no drive was shared
+- Show a link to the virtualization documentation
+- Always remove the disk on factory reset
+- VPNKit: Improved diagnostics
+- VPNKit: Forwarded UDP datagrams should have correct source port numbers
+- VPNKit: If one request fails, allow other concurrent requests to succeed.
+  For example this allows IPv4 servers to work even if IPv6 is broken.
+- VPNKit: Fix bug which could cause the connection tracking to
+  underestimate the number of active connections
+- VPNKit: add a local cache of DNS responses
+
 ### Docker for Windows 1.12.5, 2016-12-20 (stable)
 
 **Upgrades**
