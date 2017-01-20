@@ -20,8 +20,7 @@ systems.
 >**Already have Docker for Windows?** If you already have Docker for Windows installed, and are ready to get started, skip down to [Step 3. Check versions of
 Docker Engine, Compose, and
 Machine](#step-3-check-versions-of-docker-engine-compose-and-machine) to work
-through the rest of the Docker for Windows tour, or jump over to the standard
-[Getting Started with Docker](/engine/getstarted/index.md) tutorial.
+through the rest of the Docker for Windows tour, or jump over to getting started tutorials at [Learn Docker](/learn.md).
 
 ## Download Docker for Windows
 
@@ -103,9 +102,7 @@ Windows containers.
 <p />
 * [Setup - Windows Server 2016 (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/Setup-Server2016.md) specifically describes environment setup.
 <p />
-* [Switch
-between Windows and Linux containers (Beta
-feature)](index.md#switch-between-windows-and-linux-containers-beta-feature) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
+* [Switch between Windows and Linux containers](#switch-between-windows-and-linux-containers) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
 <p />
 * Docker Container Platform for Windows Server 2016 [articles and blog posts](https://www.docker.com/microsoft) on the Docker website
 
@@ -367,19 +364,13 @@ display options through taskbar settings for notifications.
 
 To get a popup menu with application options, right-click the whale:
 
+
 ![Docker for Windows popup menu](images/config-popup-menu-win.png)
 
 The **Settings** dialogs provide options to allow Docker auto-start,
 automatically check for updates, share local drives with Docker containers,
 enable VPN compatibility, manage CPUs and memory Docker uses, restart Docker, or
 perform a factory reset.
-
-**Beta 26 and newer** include an option to switch between Windows and Linux
-**conatiners. See [Switch between Windows and Linux containers (Beta
-**feature)](index.md#switch-between-windows-and-linux-containers-beta-feature).
-**This is not yet available on stable builds.
-
-![Beta 26 popup with switch for Windows or Linux containers](images/config-popup-menu-win-switch-containers.png)
 
 ### General
 
@@ -415,7 +406,7 @@ one used here to set up sharing, your containers will not have permissions to
 access the mounted volumes.
 
 >**Tip:** Shared drives are only required for volume mounting [Linux
-containers](#switch-between-windows-and-linux-containers-beta-feature), and not
+containers](#switch-between-windows-and-linux-containers), and not
 for Windows containers. For Linux containers, you need to share the drive where your project is located (i.e., where the Dockerfile and
 volume are located). Runtime errors such as file not found or cannot start
 service may indicate shared drives are needed. (See also [Volume mounting
@@ -495,30 +486,13 @@ When your proxy configuration changes, Docker restarts automatically to pick up 
 If you have containers that you wish to keep running across restarts, you should consider using [restart policies](/engine/reference/run/#restart-policies-restart)
 
 ### Docker daemon
-You can configure options on the Docker daemon in the given JSON configuration file, and determine how your containers will run.
 
-![Docker Daemon](images/docker-daemon.png)
+You can configure options on the Docker daemon that determine how your
+containers will run. You can configure some **Basic** options on the daemon with interactive settings, or switch to **Advanced** to edit the JSON directly.
 
-For a full list of options on the Docker daemon, see [daemon](/engine/reference/commandline/dockerd/){:target="_blank"} in the Docker Engine command line reference.
-
-In that topic, see also:
-
-* [Daemon configuration file](/engine/reference/commandline/dockerd/#/daemon-configuration-file)
-
-* [Linux configuration file](/engine/reference/commandline/dockerd/#/linux-configuration-file)
-
-* [Windows configuration file](/engine/reference/commandline/dockerd/#/windows-configuration-file)
-
-Note that updating these settings requires a reconfiguration and reboot of the Linux VM.
-
-#### Docker daemon basic and advanced (Beta features)
-
-Starting with Beta 34, you can configure some **Basic** options on the daemon
-with interactive settings, or switch to **Advanced** to edit the JSON directly.
-
-Note that the settings offered on **Basic** dialog can be configured directly in
-the JSON. This version just surfaces some of the commmon settings to make it
-easier to configure them.
+The settings offered on **Basic** dialog can be
+configured directly in the JSON as well. This version just surfaces
+some of the commmon settings to make it easier to configure them.
 
 * [Experimental mode](#experimental-mode)
 * [Custom registries](#custom-registries)
@@ -526,15 +500,15 @@ easier to configure them.
 
 ![Docker Daemon](images/docker-daemon_basic.png)
 
-##### Experimental mode
+#### Experimental mode
 
 By default, Docker for Windows Beta releases use the experimental version of
 Docker Engine, described in the [Docker Experimental Features
 README](https://github.com/docker/docker/tree/master/experimental) on GitHub.
-Starting with Beta 34, you can toggle **experimental mode** on and off via the
+Starting with Beta 34 and Stable 1.13.0, you can toggle **experimental mode** on and off via the
 **Basic** Daemon settings. If you toggle it off, Docker for Windows Beta uses the
 current generally available release of Docker Engine, the same as Stable Docker
-for Windows versions uses.
+for Windows versions uses by default.
 
 You can check whether you are running experimental mode or not by typing `docker
 version` in a PowerShell. Experimental mode is listed under `Server` data.
@@ -561,9 +535,9 @@ Server:
  Experimental: true
 ```
 
-##### Custom registries
+#### Custom registries
 
-Also starting with with Beta 34, you can set up your own
+Also starting with with Beta 34 and Stable 1.13.0, you can set up your own
 [registries](/registry/introduction.md) on the **Basic** Daemon settings.
 
 As an alternative to using [Docker Hub](https://hub.docker.com/) to store your
@@ -574,21 +548,30 @@ registries and registry mirrors on which to host your images. (See also, [How do
 I add custom CA certificates?](faqs.md#how-do-i-add-custom-ca-certificates) in
 the FAQs.)
 
-##### Edit the daemon configuration file
+#### Edit the daemon configuration file
 
 The **Advanced** daemon settings provide the original option to directly edit
 the JSON configuration file for the <a
-href="/engine/reference/commandline/dockerd/"
-target="_blank">daemon</a>. (This is the only option currently available on stable releases, as described in [Docker daemon](#docker-daemon).)
+href="/engine/reference/commandline/dockerd/>daemon</a>.
 
 ![Docker Daemon](images/docker-daemon_advanced.png)
+
+For a full list of options on the Docker daemon, see [daemon](/engine/reference/commandline/dockerd/) in the Docker Engine command line reference.
+
+In that topic, see also:
+
+* [Daemon configuration file](/engine/reference/commandline/dockerd/#/daemon-configuration-file)
+
+* [Linux configuration file](/engine/reference/commandline/dockerd/#/linux-configuration-file)
+
+* [Windows configuration file](/engine/reference/commandline/dockerd/#/windows-configuration-file)
 
 Note that updating these settings requires a reconfiguration and reboot of the
 Linux VM.
 
-### Switch between Windows and Linux containers (Beta feature)
+### Switch between Windows and Linux containers
 
-Starting with Beta 26, you can select which daemon (Linux or Windows) the Docker
+Starting with Beta 26 and Stable 1.13.0, you can select which daemon (Linux or Windows) the Docker
 CLI talks to. Select **Switch to Windows containers** to toggle to Windows
 containers. Select **Switch to Linux containers**.
 
@@ -596,7 +579,15 @@ Microsoft Developer Network has preliminary/draft information on Windows
 containers
 [here](https://msdn.microsoft.com/en-us/virtualization/windowscontainers/about/about_overview).
 
-This feature is not yet available on stable builds.
+For a full list of options on the Docker daemon, see [daemon](/engine/reference/commandline/dockerd/) in the Docker Engine command line reference.
+
+In that topic, see also:
+
+* [Daemon configuration file](/engine/reference/commandline/dockerd/#/daemon-configuration-file)
+
+* [Linux configuration file](/engine/reference/commandline/dockerd/#/linux-configuration-file)
+
+* [Windows configuration file](/engine/reference/commandline/dockerd/#/windows-configuration-file)
 
 #### Getting started with Windows containers
 
@@ -626,10 +617,6 @@ containers:
   * [Diagnose and Feedback](#diagnose-and-feedback)
   * [Reset](#reset)
 
-(Per the release notes, these dialogs are newly implemented for Windows
-containers mode in [Beta
-32](release-notes.md#beta-32-release-notes-2016-12-07-1130-rc3-beta32)).
-
 Keep in mind that if you set proxies or daemon configuration in Windows
 containers mode, these apply only on Windows containers. If you switch back to
 Linux containers, proxies and daemon configurations return to what you had set
@@ -642,7 +629,6 @@ because they do not apply to Windows containers:
   * [Shared Drives](#shared-drives)
   * [Network](#network)
   * [Advanced (CPU and Memory configuration)](#advanced)
-
 
 ### Giving feedback and getting help
 
@@ -693,18 +679,13 @@ If you want to go back to using Docker Toolbox, you have to disable the Hyper-V 
 
 * Try out the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
 
-* Dig in deeper with [learn by example](/engine/tutorials/index.md) tutorials on building images, running containers, networking, managing data, and storing images on Docker Hub.
+* Follow up by working through the voting app example to learn how to [define and deploy a Docker stack](/engine/getstarted-voting-app/index.md) to a
+[swarm](/engine/swarm/index.md). This example shows how to deploy multiple
+containers as services and use new [Compose Version
+3](/compose/compose-file.md#version-3) features.
 
-* See [Example Applications](examples.md) for example applications that include setting up services and databases in Docker Compose.
-
-* Interested in trying out the new [swarm mode](/engine/swarm/index.md) on Docker Engine v1.12?
-
-    See [Get started with swarm mode](/engine/swarm/swarm-tutorial/index.md), a tutorial which includes specifics on how to leverage your Docker for Windows installation to run single and multi-node swarms.
-
-    Also, try out the Swarm examples in [docker labs](https://github.com/docker/labs/tree/master/swarm-mode/beginner-tutorial). Run the `bash script` and follow the accompanying [Docker Swarm Tutorial](https://github.com/docker/labs/blob/master/swarm-mode/beginner-tutorial/README.md). The script uses Docker Machine to create a multi-node swarm, then walks you through various Swarm tasks and commands.
+* Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example walkthroughs and source code.
 
 * For a summary of Docker command line interface (CLI) commands, see [Docker CLI Reference Guide](/engine/reference/index.md).
 
-* Check out the <a href="https://blog.docker.com/2016/06/docker-mac-windows-public-beta/">blog posts</a> on Docker for Mac and Docker for Windows public betas, and <a href="https://blog.docker.com/2016/03/docker-for-mac-windows-beta/">earlier posts</a> on the initial private beta.
-
-* Please give feedback on your experience with the app and report bugs and problems by logging into our [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows).
+* Check out the blog post [Introducing Docker 1.13.0](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/).
