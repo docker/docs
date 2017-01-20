@@ -117,7 +117,7 @@ Docker from the repository.
     ```bash
     $ sudo add-apt-repository \
            "deb https://apt.dockerproject.org/repo/ \
-           $(lsb_release -cs) \
+           debian-$(lsb_release -cs) \
            main"
     ```
 
