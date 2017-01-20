@@ -22,7 +22,7 @@ New releases are announced on the [Release Notes](release-notes.md) page.
 
 To initiate an upgrade, SSH into a manager node and issue the following command:
 
-    upgrade.sh url_to_template.json
+    upgrade.sh https://download.docker.com/azure/stable/Docker.tmpl
 
 This will initiate a rolling upgrade of the Docker swarm and service state will be maintained during and after the upgrade. Appropriately scaled services should not experience downtime during an upgrade. Note that single containers started (for example) with `docker run -d` are **not** preserved during an upgrade. This is because they are not Docker Swarm services but are known only to the individual Docker engines.
 
