@@ -15,7 +15,7 @@ instructions are available for the following:
 * [Gentoo](gentoolinux.md)
 * [Oracle Linux](oracle.md)
 * [Red Hat Enterprise Linux](rhel.md)
-* [openSUSE and SUSE Linux Enterprise](SUSE.md)
+* [openSUSE and SUSE Linux Enterprise](suse.md)
 * [Ubuntu](ubuntulinux.md)
 
 If your linux distribution is not listed above, don't give up yet. To try out
