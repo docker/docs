@@ -93,7 +93,7 @@ Docker from the repository.
 
     ```bash
     $ sudo add-apt-repository \
-           "deb https://apt.dockerproject.org/repo \
+           "deb https://apt.dockerproject.org/repo/ \
            ubuntu-$(lsb_release -cs) \
            main"
     ```

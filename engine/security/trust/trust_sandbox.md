@@ -2,6 +2,8 @@
 description: Play in a trust sandbox
 keywords: trust, security, root,  keys, repository, sandbox
 title: Play in a content trust sandbox
+redirect_from:
+- /security/trust/trust_sandbox/
 ---
 
 This page explains how to set up and use a sandbox for experimenting with trust.

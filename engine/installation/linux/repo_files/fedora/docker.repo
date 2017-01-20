@@ -8,7 +8,7 @@ gpgkey=https://yum.dockerproject.org/gpg
 [docker-testing]
 name=Docker Repository
 baseurl=https://yum.dockerproject.org/repo/testing/fedora/$releasever/
-enabled=1
+enabled=0
 gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 

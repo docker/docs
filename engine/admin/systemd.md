@@ -127,7 +127,7 @@ directory:
 ```conf
 [Service]
 ExecStart=
-ExecStart=/usr/bin/dockerd --graph="/mnt/docker-data" --storage-driver=overlay
+ExecStart=/usr/bin/dockerd --graph=/mnt/docker-data --storage-driver=overlay
 ```
 
 You can also set other environment variables in this file, for example, the

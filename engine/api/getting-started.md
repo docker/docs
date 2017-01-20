@@ -540,7 +540,7 @@ $ curl --unix-socket /var/run/docker.sock\
 </section>
 </div>
 
-## What next?
+## Next steps
 
  - [Full documentation for the Python SDK.](https://docker-py.readthedocs.io)
  - [Full documentation for the Go SDK.](https://godoc.org/github.com/docker/docker/client)
