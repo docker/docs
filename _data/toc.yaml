@@ -620,16 +620,12 @@ toc:
       section:
       - path: /engine/reference/commandline/stack/
         title: docker stack
-      - path: /engine/reference/commandline/stack_config/
-        title: docker stack config
       - path: /engine/reference/commandline/stack_deploy/
         title: docker stack deploy
       - path: /engine/reference/commandline/stack_rm/
         title: docker stack rm
       - path: /engine/reference/commandline/stack_services/
         title: docker stack services
-      - path: /engine/reference/commandline/stack_tasks/
-        title: docker stack tasks
     - path: /engine/reference/commandline/start/
       title: docker start
     - path: /engine/reference/commandline/stats/
