@@ -1,7 +1,6 @@
 ---
 description: How to deploy a stack to a swarm
-keywords:
-- guide, swarm mode, composefile, stack, compose, deploy
+keywords: guide, swarm mode, composefile, stack, compose, deploy
 title: Deploy a stack to a swarm
 ---
 
