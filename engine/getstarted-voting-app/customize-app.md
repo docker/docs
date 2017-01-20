@@ -1,7 +1,7 @@
 ---
 description: Customize the voting app
 keywords: multi-container, services, swarm mode, cluster, voting app, docker-stack.yml, docker stack deploy
-title: Tour the voting app sample
+title: Customize the app and redeploy
 ---
 
 
@@ -70,8 +70,7 @@ did not change.
 ## Resources
 
 * A deeper dive voting app walkthrough is available on
-[Docker Labs](https://github.com/docker/labs/) as [Deploying an app to a Swarm]
-(https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md).
+[Docker Labs](https://github.com/docker/labs/) as [Deploying an app to a Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md).
 The lab walkthrough provides more technical detail on deployment configuration,
 Compose file keys, the application, stack and services concepts, and
 networking.

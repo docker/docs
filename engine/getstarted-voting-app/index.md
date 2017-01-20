@@ -1,7 +1,7 @@
 ---
 description: overview of voting app example
 keywords: docker-stack.yml, stack deploy, compose, multi-container, services, swarm mode, cluster, voting app,
-title: Define and deploy your app
+title: Tour the voting app
 ---
 
 This example is built around a web-based voting application that collects,
