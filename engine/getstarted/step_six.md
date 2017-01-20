@@ -6,6 +6,7 @@ redirect_from:
 - /windows/step_six/
 - /linux/step_six/
 - /engine/tutorials/dockerrepos/
+- /userguide/dockerrepos/
 title: Tag, push, and pull your image
 ---
 
