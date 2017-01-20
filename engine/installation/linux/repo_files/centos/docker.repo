@@ -7,8 +7,8 @@ gpgkey=https://yum.dockerproject.org/gpg
 
 [docker-testing]
 name=Docker Repository
-baseurl=https://yum.dockerproject.org/repo/testing/centos/7/
-enabled=1
+baseurl=https://yum.dockerproject.org/repo/testing/centos/$releasever/
+enabled=0
 gpgcheck=1
 gpgkey=https://yum.dockerproject.org/gpg
 
