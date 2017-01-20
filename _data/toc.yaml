@@ -91,8 +91,31 @@ toc:
       title: Open Source Licensing
     - path: /docker-for-azure/release-notes/
       title: Release Notes
-
-- sectiontitle: Get started
+  - sectiontitle: Docker Toolbox (Legacy)
+    section:
+    - path: /toolbox/overview/
+      title: Toolbox Overview
+    - path: /toolbox/toolbox_install_mac/
+      title: Install Toolbox on Mac
+    - path: /toolbox/toolbox_install_windows/
+      title: Install Toolbox on Windows
+    - sectiontitle: Kitematic
+      section:
+      - path: /kitematic/userguide/
+        title: "Kitematic User Guide: Intro &amp; Overview"
+      - path: /kitematic/nginx-web-server/
+        title: Set up an Nginx web server
+      - path: /kitematic/minecraft-server/
+        title: Set up a Minecraft Server
+      - path: /kitematic/rethinkdb-dev-database/
+        title: Creating a Local RethinkDB Database for Development
+      - path: /kitematic/faq/
+        title: Frequently Asked Questions
+      - path: /kitematic/known-issues/
+        title: Known Issues
+    - path: /toolbox/faqs/troubleshoot/
+      title: Troubleshooting
+- sectiontitle: Get Started
   section:
   - path: /learn/
     title: Learn Docker
@@ -1522,30 +1545,6 @@ toc:
     title: Submit a product to Docker Store
   - path: /docker-store/faq/
     title: Docker Store FAQs
-- sectiontitle: Docker Toolbox
-  section:
-  - path: /toolbox/overview/
-    title: Toolbox Overview
-  - path: /toolbox/toolbox_install_mac/
-    title: Install Toolbox on Mac
-  - path: /toolbox/toolbox_install_windows/
-    title: Install Toolbox on Windows
-  - sectiontitle: Kitematic
-    section:
-    - path: /kitematic/userguide/
-      title: "Kitematic User Guide: Intro &amp; Overview"
-    - path: /kitematic/nginx-web-server/
-      title: Set up an Nginx web server
-    - path: /kitematic/minecraft-server/
-      title: Set up a Minecraft Server
-    - path: /kitematic/rethinkdb-dev-database/
-      title: Creating a Local RethinkDB Database for Development
-    - path: /kitematic/faq/
-      title: Frequently Asked Questions
-    - path: /kitematic/known-issues/
-      title: Known Issues
-  - path: /toolbox/faqs/troubleshoot/
-    title: Troubleshooting
 - sectiontitle: Component Projects
   section:
     - sectiontitle: Docker Swarm
