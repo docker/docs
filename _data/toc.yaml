@@ -61,7 +61,7 @@ toc:
       title: Other Linux distributions
     - path: /engine/installation/binaries/
       title: Installation from binaries
-    - path: /engine/installation/linux-postinstall/
+    - path: /engine/installation/linux/linux-postinstall/
       title: Optional post-installation steps
   - sectiontitle: Docker for AWS
     section:
