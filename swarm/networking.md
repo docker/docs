@@ -99,7 +99,8 @@ NETWORK ID          NAME                   DRIVER
 5262bbfe5616        node-1/bridge2         bridge
 ```
 
-`--opt encrypted` is a Docker Swarm-mode only feature. It's not supported in Swarm standalone. Network encryption requires key management which is outside the scope of Swarm.
+`--opt encrypted` is a feature only available in Docker Swarm mode. It's not supported in Swarm standalone.
+Network encryption requires key management, which is outside the scope of Swarm.
 
 ## Remove a network
 
