@@ -4,7 +4,6 @@ keywords: docker, introduction, documentation, about, technology,  understanding
 redirect_from:
 - /introduction/understanding-docker/
 - /engine/userguide/basics/
-- /engine/quickstart.md
 - /engine/introduction/understanding-docker/
 title: Docker Overview
 ---
