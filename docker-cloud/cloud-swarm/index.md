@@ -83,10 +83,7 @@ The manager node pulls the `dockercloud/registration` container and runs it on t
 ### Swarm Registration example
 
 ```none
-$ docker@swarm-m:~$ docker run -ti --rm -e -v /v
-ar/run/docker.sock:/var/run/docker.sock dockercloud/registration
-SwarmID of the node: 1btbwtge4xwjj0mjpdpr7jutn
-DockerVersion of the node: 1.24
+$ docker run -ti --rm -v /var/run/docker.sock:/var/run/docker.sock dockercloud/registration
 Use your Docker ID credentials to authenticate:
 Username: myusername
 Password:
@@ -95,7 +92,7 @@ Available namespaces:
 * myorganization
 * pacificocean
 * sealife
-Enter name for the new cluster [myusername/1btbwtge4xwjj0mjpdpr7jutn]:myswarm
+Enter name for the new cluster [myusername/1btbwtge4xwjj0mjpdpr7jutn]: myusername/myswarm
 Registering this Docker cluster with Docker Cloud...
 Successfully registered the node as myswarm
 You can now access this cluster using the following command in any Docker Engine:
@@ -119,8 +116,6 @@ Swarms that are registered in Docker Cloud appear in the Swarms list. Each line 
 Docker Cloud allows you to connect your local Docker Engine to any swarm you
 have access to in Docker Cloud. To do this, you run a proxy container in your local Docker instance, which connects to a manager node on the target swarm.
 
-> **Note**: To connect to a swarm, you must first be logged in to Docker using a Docker ID which has access to the swarm. Use the `docker login` command from your terminal to log in.
-
 1. Log in to Docker Cloud in your web browser.
 2. Click **Swarms** in the top navigation, and click the name of the swarm you want to connect to.
 3. Copy the command provided in the dialog that appears.
@@ -128,11 +123,14 @@ have access to in Docker Cloud. To do this, you run a proxy container in your lo
 
     The local Docker Engine downloads a containerized Docker Cloud client tool, and connects to the swarm.
 
-5. To complete the connection process, run the `export DOCKER_HOST` command found in the previous command's output.
+5. To complete the connection process, run the `export DOCKER_HOST` command found in the previous command's output, to connect your local shell to the client proxy.
 
-    Be sure to include the client connection port in the URL. For example `export DOCKER_HOST=tcp://swarmID.myusername.docker.cloud:32768`.
+    Be sure to include the client connection port in the URL. For example `export DOCKER_HOST=tcp://127.0.0.1:32768`.
 
-    To switch Docker hosts you can either run the `export` command again to overwrite it, or use `unset DOCKER_HOST`.
+
+To switch Docker hosts you can either run the `export` command again to overwrite it, or use `unset DOCKER_HOST`.
+
+> **Note**: If you are using Docker Machine, be sure to unset `DOCKER_TLS_VERIFY` as described in the [known issues](https://github.com/docker/dockercloud-federation#known-issues).
 
 ## Unregister a swarm from Docker Cloud
 
