@@ -8,9 +8,9 @@ This example is built around a web-based voting application that collects,
 tallies, and returns the results of votes (for cats and dogs, or other choices
 you specify). The voting app includes several services, each one running in its
 own container. We'll deploy the app as a _stack_ to introduce some new concepts
-surfaced in [Compose Version 3](/compose/compose-file.md), and also use [swarm
-mode](/engine/swarm/index.md), which is cluster management and orchestration
-capability built into Docker Engine.
+surfaced in [Compose Version 3](/compose/compose-file.md#version-3), and also
+use [swarm mode](/engine/swarm/index.md), which is cluster management and
+orchestration capability built into Docker Engine.
 
 ## Got Docker?
 
@@ -255,12 +255,11 @@ as Docker stacks and services.
 
 ### Compose file reference
 
-For more on what's new in Compose Version 3 and how to upgrade, see these topics
-in the [Compose file reference](/compose/compose-file.md):
+For more on what's new in Compose Version 3:
 
-* [Versioning](/compose/compose-file.md#versioning)
-* [Version 3](/compose/compose-file.md#version-3)
-* [Upgrading](/compose/compose-file.md#upgrading)
+* [Introducing Docker 1.13.0](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/) blog post from [Docker Core Engineering](https://blog.docker.com/author/core_eng/)
+
+* [Versioning](/compose/compose-file.md#versioning), [Version 3](/compose/compose-file.md#version-3), and  [Upgrading](/compose/compose-file.md#upgrading) in [Compose file reference](/compose/compose-file.md)
 
 ## What's next?
 

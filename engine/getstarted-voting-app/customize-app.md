@@ -69,6 +69,10 @@ did not change.
 
 ## Resources
 
+* [Introducing Docker 1.13.0](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/) blog post
+from [Docker Core Engineering](https://blog.docker.com/author/core_eng/)
+
+
 * A deeper dive voting app walkthrough is available on
 [Docker Labs](https://github.com/docker/labs/) as [Deploying an app to a Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md).
 The lab walkthrough provides more technical detail on deployment configuration,
