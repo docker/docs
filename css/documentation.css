@@ -1,6 +1,12 @@
 /* FIXUP allcss.css */
 /* @media screen and (max-width: 1199px) */
 
+.logo {
+  margin-top: 1px !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
+}
 .autocompleteSelected {
   background-color: #f5f5f5;
 }
