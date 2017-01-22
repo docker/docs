@@ -155,6 +155,7 @@ IPForward=kernel
 # OR
 IPForward=true
 ...
+
 ```
 
 This configuration allows IP forwarding from the container as expected.
