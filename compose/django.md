@@ -83,7 +83,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
 ### Create a Django project
 
-In this step, you create a Django started project by building the image from the build context defined in the previous procedure.
+In this step, you create a Django starter project by building the image from the build context defined in the previous procedure.
 
 1. Change to the root of your project directory.
 
