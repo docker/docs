@@ -35,11 +35,7 @@ wrappedNode(label: 'linux && x86_64') {
 
   sh "docker build -t tests:${tag} `pwd`/tests"
     
-  sh "docker run --rm -v ${filesWithRedirects}:/docs-with-redirects -v ${filesWithoutRedirects}:/docs-without-redirects -v `pwd`:/docs-source tests:${tag} ls /"
-
-  /*
-    sh "docker run --rm -v ${filesWithRedirects}:/docs-with-redirects -v ${filesWithoutRedirects}:/docs-without-redirects -v `pwd`:/docs-source tests:${tag}"
-  */
+  sh "docker run --rm -v ${filesWithRedirects}:/docs-with-redirects -v ${filesWithoutRedirects}:/docs-without-redirects -v `pwd`:/docs-source tests:${tag}"
 
   sh "docker rm -fv docs-with-redirects-${tag} docs-without-redirects-${tag}"
   sh "docker rmi docs-with-redirects:${tag} docs-without-redirects:${tag} tests:${tag}"
