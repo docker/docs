@@ -99,57 +99,57 @@ block (`0x44f`) in an example container.
 
 ![](images/dm_container.jpg)
 
-1. An application makes a read request for block `0x44f` in the container.
+1.  An application makes a read request for block `0x44f` in the container.
 
-	Because the container is a thin snapshot of an image it does not have the
-	data. Instead, it has a pointer (PTR) to where the data is stored in the image
-	snapshot lower down in the image stack.
+    Because the container is a thin snapshot of an image it does not have the
+    data. Instead, it has a pointer (PTR) to where the data is stored in the image
+    snapshot lower down in the image stack.
 
-2. The storage driver follows the pointer to block `0xf33` in the snapshot
-relating to image layer `a005...`.
+2.  The storage driver follows the pointer to block `0xf33` in the snapshot
+    relating to image layer `a005...`.
 
-3. The `devicemapper` copies the contents of block `0xf33` from the image
-snapshot to memory in the container.
+3.  The `devicemapper` copies the contents of block `0xf33` from the image
+    snapshot to memory in the container.
 
-4. The storage driver returns the data to the requesting application.
+4.  The storage driver returns the data to the requesting application.
 
 ## Write examples
 
 With the `devicemapper` driver, writing new data to a container is accomplished
- by an *allocate-on-demand* operation. Updating existing data uses a
+by an *allocate-on-demand* operation. Updating existing data uses a
 copy-on-write operation. Because Device Mapper is a block-based technology
 these operations occur at the block level.
 
 For example, when making a small change to a large file in a container, the
 `devicemapper` storage driver does not copy the entire file. It only copies the
- blocks to be modified. Each block is 64KB.
+blocks to be modified. Each block is 64KB.
 
 ### Writing new data
 
 To write 56KB of new data to a container:
 
-1. An application makes a request to write 56KB of new data to the container.
+1.  An application makes a request to write 56KB of new data to the container.
 
-2. The allocate-on-demand operation allocates a single new 64KB block to the
-container's snapshot.
+2.  The allocate-on-demand operation allocates a single new 64KB block to the
+    container's snapshot.
 
-	If the write operation is larger than 64KB, multiple new blocks are
-	allocated to the container's snapshot.
+    If the write operation is larger than 64KB, multiple new blocks are
+    allocated to the container's snapshot.
 
-3. The data is written to the newly allocated block.
+3.  The data is written to the newly allocated block.
 
 ### Overwriting existing data
 
 To modify existing data for the first time:
 
-1. An application makes a request to modify some data in the container.
+1.  An application makes a request to modify some data in the container.
 
-2. A copy-on-write operation locates the blocks that need updating.
+2.  A copy-on-write operation locates the blocks that need updating.
 
-3. The operation allocates new empty blocks to the container snapshot and
-copies the data into those blocks.
+3.  The operation allocates new empty blocks to the container snapshot and
+    copies the data into those blocks.
 
-4. The modified data is written into the newly allocated blocks.
+4.  The modified data is written into the newly allocated blocks.
 
 The application in the container is unaware of any of these
 allocate-on-demand and copy-on-write operations. However, they may add latency
@@ -513,39 +513,39 @@ The `Data Space` values show that the pool is 100GB total. This example extends 
 
 5.  Reload devicemapper thin pool.
 
-    a. Get the pool name first.
+    a.  Get the pool name first.
 
-       ```bash
-       $ sudo dmsetup status | grep pool
+        ```bash
+        $ sudo dmsetup status | grep pool
 
-       docker-8:1-123141-pool: 0 209715200 thin-pool 91
-       422/524288 18338/1638400 - rw discard_passdown queue_if_no_space -
-       ```
+        docker-8:1-123141-pool: 0 209715200 thin-pool 91
+        422/524288 18338/1638400 - rw discard_passdown queue_if_no_space -
+        ```
 
-       The name is the string before the colon.
+        The name is the string before the colon.
 
-    b. Dump the device mapper table first.
+    b.  Dump the device mapper table first.
 
-       ```bash
-       $ sudo dmsetup table docker-8:1-123141-pool
+        ```bash
+        $ sudo dmsetup table docker-8:1-123141-pool
 
-       0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
-       ```
+        0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
+        ```
 
-    c. Calculate the real total sectors of the thin pool now.
+    c.  Calculate the real total sectors of the thin pool now.
 
-       Change the second number of the table info (i.e. the disk end sector) to
-       reflect the new number of 512 byte sectors in the disk. For example, as the
-       new loop size is 200GB, change the second number to 419430400.
+        Change the second number of the table info (i.e. the disk end sector) to
+        reflect the new number of 512 byte sectors in the disk. For example, as the
+        new loop size is 200GB, change the second number to 419430400.
 
 
-    d. Reload the thin pool with the new sector number
+    d.  Reload the thin pool with the new sector number
 
-       ```bash
-       $ sudo dmsetup suspend docker-8:1-123141-pool \
-       && sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing' \
-       && sudo dmsetup resume docker-8:1-123141-pool
-       ```
+        ```bash
+        $ sudo dmsetup suspend docker-8:1-123141-pool \
+        && sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing' \
+        && sudo dmsetup resume docker-8:1-123141-pool
+        ```
 
 #### The device_tool
 
@@ -587,45 +587,45 @@ disk partition.
 
 3.  Reload devicemapper thin pool.
 
-    a. Get the pool name.
+    a.  Get the pool name.
 
-       ```bash
-       $ sudo dmsetup status | grep pool
+        ```bash
+        $ sudo dmsetup status | grep pool
 
-       docker-253:17-1835016-pool: 0 96460800 thin-pool 51593 6270/1048576 701943/753600 - rw no_discard_passdown queue_if_no_space
-       ```
+        docker-253:17-1835016-pool: 0 96460800 thin-pool 51593 6270/1048576 701943/753600 - rw no_discard_passdown queue_if_no_space
+        ```
 
-       The name is the string before the colon.
+        The name is the string before the colon.
 
-    b. Dump the device mapper table.
+    b.  Dump the device mapper table.
 
-       ```bash
-       $ sudo dmsetup table docker-253:17-1835016-pool
+        ```bash
+        $ sudo dmsetup table docker-253:17-1835016-pool
 
-       0 96460800 thin-pool 252:0 252:1 128 32768 1 skip_block_zeroing
-       ```
+        0 96460800 thin-pool 252:0 252:1 128 32768 1 skip_block_zeroing
+        ```
 
-    c. Calculate the real total sectors of the thin pool now. we can use `blockdev`
-       to get the real size of data lv.
+    c.  Calculate the real total sectors of the thin pool now. we can use `blockdev`
+        to get the real size of data lv.
 
-       Change the second number of the table info (i.e. the number of sectors) to
-       reflect the new number of 512 byte sectors in the disk. For example, as the
-       new data `lv` size is `264132100096` bytes, change the second number to
-       `515883008`.
+        Change the second number of the table info (i.e. the number of sectors) to
+        reflect the new number of 512 byte sectors in the disk. For example, as the
+        new data `lv` size is `264132100096` bytes, change the second number to
+        `515883008`.
 
-       ```bash
-       $ sudo blockdev --getsize64 /dev/vg-docker/data
+        ```bash
+        $ sudo blockdev --getsize64 /dev/vg-docker/data
 
-       264132100096
-       ```
+        264132100096
+        ```
 
-    d. Then reload the thin pool with the new sector number.
+    d.  Then reload the thin pool with the new sector number.
 
-       ```bash
-       $ sudo dmsetup suspend docker-253:17-1835016-pool \
-         && sudo dmsetup reload docker-253:17-1835016-pool --table  '0 515883008 thin-pool 252:0 252:1 128 32768 1        skip_block_zeroing' \
-         && sudo dmsetup resume docker-253:17-1835016-pool
-       ```
+        ```bash
+        $ sudo dmsetup suspend docker-253:17-1835016-pool \
+          && sudo dmsetup reload docker-253:17-1835016-pool --table  '0 515883008 thin-pool 252:0 252:1 128 32768 1        skip_block_zeroing' \
+          && sudo dmsetup resume docker-253:17-1835016-pool
+        ```
 
 ## Device Mapper and Docker performance
 
