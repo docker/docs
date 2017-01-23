@@ -5,6 +5,7 @@ redirect_from:
 - /linux/step_four/
 - /engine/tutorials/dockerimages/
 - /userguide/dockerimages/
+- /engine/userguide/dockerimages/
 description: Getting started with Docker
 keywords: beginner, getting started, Docker
 title: Build your own image
