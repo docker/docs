@@ -180,7 +180,7 @@ You have three options:
 3.  Use Github Pages, with or without a local clone. Fork this repo in GitHub,
     change your fork's repository name to `YOUR_GITHUB_USERNAME.github.io`, and
     make changes to the Markdown files in your `master` branch. Browse to
-    https://<YOUR_GITHUB_USERNAME>.github.io/ to preview the changes.
+    https://\<YOUR_GITHUB_USERNAME\>.github.io/ to preview the changes.
 
 ## Important files
 
