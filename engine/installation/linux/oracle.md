@@ -1,204 +1,290 @@
 ---
-description: Installation instructions for Docker on Oracle Linux.
-keywords: Docker, Docker documentation, requirements, linux, rhel, centos, oracle,  ol
+description: Instructions for installing Docker on Oracle Linux
+keywords: Docker, Docker documentation, requirements, installation, oracle, ol, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/oracle/
-title: Install Docker on Oracle Linux
+title: Get Docker for Oracle Linux
 ---
 
-Docker is supported on Oracle Linux 6 and 7. You do not require an Oracle Linux
-Support subscription to install Docker on Oracle Linux.
+To get started with Docker on Oracle Linux, make sure you
+[meet the prerequisites](#prerequisites), then
+[install Docker](#install-docker).
 
 ## Prerequisites
 
-Due to current Docker limitations, Docker is only able to run only on the x86_64
-architecture. Docker requires the use of the Unbreakable Enterprise Kernel
-Release 4 (4.1.12) or higher on Oracle Linux. This kernel supports the Docker
-btrfs storage engine on both Oracle Linux 6 and 7.
+### OS requirements
 
-## Install
+To install Docker, you need the 64-bit version of Oracle Linux 6 or 7.
 
+To use `btrfs`, you need to install the Unbreakable Enterprise Kernel (UEK)
+version 4.1.12 or higher. running the Unbreakable Enterprise Kernel Release 4
+(4.1.12) or higher. For Oracle Linux 6, you need to enable extra repositories
+to install UEK4. See
+[Obtaining and installing the UEK packages](https://docs.oracle.com/cd/E37670_01/E37355/html/ol_obtain_uek.html){: target="_blank" class="_" }.
 
-> **Note**: The procedure below installs binaries built by Docker. These binaries
-> are not covered by Oracle Linux support. To ensure Oracle Linux support, please
-> follow the installation instructions provided in the
-> [Oracle Linux documentation](https://docs.oracle.com/en/operating-systems/?tab=2).
->
-> The installation instructions for Oracle Linux 6 and 7 can be found in [Chapter 2 of
-> the Docker User&apos;s Guide](https://docs.oracle.com/cd/E52668_01/E75728/html/docker_install_upgrade.html)
+### Remove unofficial Docker packages
 
+Oracle's repositories contain an older version of Docker, with the package name
+`docker` instead of `docker-engine`. If you installed this version of Docker,
+remove it using the following command:
 
-1. Log into your machine as a user with `sudo` or `root` privileges.
-
-2. Make sure your existing yum packages are up-to-date.
-
-        $ sudo yum update
-
-3. Add the yum repo yourself.
-
-    For version 6:
-
-        $ sudo tee /etc/yum.repos.d/docker.repo <<-EOF
-        [dockerrepo]
-        name=Docker Repository
-        baseurl=https://yum.dockerproject.org/repo/main/oraclelinux/6
-        enabled=1
-        gpgcheck=1
-        gpgkey=https://yum.dockerproject.org/gpg
-        EOF
-
-    For version 7:
-
-        $ cat >/etc/yum.repos.d/docker.repo <<-EOF
-        [dockerrepo]
-        name=Docker Repository
-        baseurl=https://yum.dockerproject.org/repo/main/oraclelinux/7
-        enabled=1
-        gpgcheck=1
-        gpgkey=https://yum.dockerproject.org/gpg
-        EOF
-
-4. Install the Docker package.
-
-        $ sudo yum install docker-engine
-
-5. Start the Docker daemon.
-
-     On Oracle Linux 6:
-
-        $ sudo service docker start
-
-     On Oracle Linux 7:
-
-        $ sudo systemctl start docker.service
-
-6. Verify `docker` is installed correctly by running a test image in a container.
-
-        $ sudo docker run hello-world
-
-## Optional configurations
-
-This section contains optional procedures for configuring your Oracle Linux to work
-better with Docker.
-
-* [Create a docker group](oracle.md#create-a-docker-group)
-* [Configure Docker to start on boot](oracle.md#configure-docker-to-start-on-boot)
-* [Use the btrfs storage engine](oracle.md#use-the-btrfs-storage-engine)
-
-### Create a Docker group
-
-The `docker` daemon binds to a Unix socket instead of a TCP port. By default
-that Unix socket is owned by the user `root` and other users can access it with
-`sudo`. For this reason, `docker` daemon always runs as the `root` user.
-
-To avoid having to use `sudo` when you use the `docker` command, create a Unix
-group called `docker` and add users to it. When the `docker` daemon starts, it
-makes the ownership of the Unix socket read/writable by the `docker` group.
-
->**Warning**: The `docker` group is equivalent to the `root` user; For details
->on how this impacts security in your system, see [*Docker Daemon Attack
->Surface*](../../security/security.md#docker-daemon-attack-surface) for details.
-
-To create the `docker` group and add your user:
-
-1. Log into Oracle Linux as a user with `sudo` privileges.
-
-2. Create the `docker` group.
-
-        $ sudo groupadd docker
-
-3. Add your user to `docker` group.
-
-        $ sudo usermod -aG docker username
-
-4. Log out and log back in.
-
-    This ensures your user is running with the correct permissions.
-
-5. Verify your work by running `docker` without `sudo`.
-
-        $ docker run hello-world
-
-	If this fails with a message similar to this:
-
-		Cannot connect to the Docker daemon. Is 'docker daemon' running on this host?
-
-	Check that the `DOCKER_HOST` environment variable is not set for your shell.
-	If it is, unset it.
-
-### Configure Docker to start on boot
-
-You can configure the  Docker daemon to start automatically at boot.
-
-On Oracle Linux 6:
-
-```
-$ sudo chkconfig docker on
+```bash
+$ sudo yum -y remove docker
 ```
 
-On Oracle Linux 7:
+The contents of `/var/lib/docker` are not removed, so any images, containers,
+or volumes you created using the older version of Docker are preserved.
 
-```
-$ sudo systemctl enable docker.service
-```
+## Install Docker
 
-If you need to add an HTTP Proxy, set a different directory or partition for the
-Docker runtime files, or make other customizations, read our systemd article to
-learn how to [customize your systemd Docker daemon options](../../admin/systemd.md).
+You can install Docker in different ways, depending on your needs:
 
-### Use the btrfs storage engine
+- Most users
+  [set up the official Docker repositories](#install-using-the-repository) and
+  install from them, for ease of installation and upgrade tasks. This is the
+  recommended approach.
 
-Docker on Oracle Linux 6 and 7 supports the use of the btrfs storage engine.
-Before enabling btrfs support, ensure that `/var/lib/docker` is stored on a
-btrfs-based filesystem. Review [Chapter
-5](http://docs.oracle.com/cd/E37670_01/E37355/html/ol_btrfs.html) of the [Oracle
-Linux Administrator's Solution
-Guide](http://docs.oracle.com/cd/E37670_01/E37355/html/index.html) for details
-on how to create and mount btrfs filesystems.
+- Some users download the RPM package and install it manually and manage
+  upgrades completely manually.
 
-To enable btrfs support on Oracle Linux:
+- Some users cannot use third-party repositories, and must rely on
+  the version of Docker in the Oracle repositories. This version of Docker may
+  be out of date. Those users should consult the Oracle documentation and not
+  follow these procedures.
 
-1. Ensure that `/var/lib/docker` is on a btrfs filesystem.
+### Install using the repository
 
-2. Edit `/etc/sysconfig/docker` and add `-s btrfs` to the `OTHER_ARGS` field.
+Before you install Docker for the first time on a new host machine, you need to
+set up the Docker repository. Afterward, you can install, update, or downgrade
+Docker from the repository.
 
-3. Restart the Docker daemon:
+#### Set up the repository
 
-## Uninstallation
+1.  Install the `yum-utils` plugin, which provides the `yum-config-manager`
+    plugin.
 
-To uninstall the Docker package:
+    ```bash
+    $ sudo yum install -y yum-utils
+    ```
 
-    $ sudo yum -y remove docker-engine
+2.  Use one of the following commands to set up the **stable** repository,
+    depending on your version of Oracle Linux:
 
-The above command will not remove images, containers, volumes, or user created
-configuration files on your host. If you wish to delete all images, containers,
-and volumes run the following command:
+    **Oracle Linux 7**:
 
-    $ rm -rf /var/lib/docker
+    ```bash
+    $ sudo yum-config-manager \
+        --add-repo \
+        https://docs.docker.com/engine/installation/linux/repo_files/oracle/docker-ol7.repo
+    ```
 
-You must delete the user created configuration files manually.
+    **Oracle Linux 6**:
 
-## Known issues
+    ```bash
+    $ sudo yum-config-manager \
+        --add-repo \
+        https://docs.docker.com/engine/installation/linux/repo_files/oracle/docker-ol6.repo
+    ```
 
-### Docker unmounts btrfs filesystem on shutdown
-If you're running Docker using the btrfs storage engine and you stop the Docker
-service, it will unmount the btrfs filesystem during the shutdown process. You
-should ensure the filesystem is mounted properly prior to restarting the Docker
-service.
+3.  **Optional**: Enable the **testing** repository. This repository is included
+    in the `docker.repo` file above but is disabled by default. You can enable
+    it alongside the stable repository. Do not use unstable repositories on
+    on production systems or for non-testing workloads.
 
-On Oracle Linux 7, you can use a `systemd.mount` definition and modify the
-Docker `systemd.service` to depend on the btrfs mount defined in systemd.
+    > **Warning**: If you have both stable and unstable repositories enabled,
+    > installing or updating without specifying a version in the `yum install`
+    > or `yum update` command will always install the highest possible version,
+    > which will almost certainly be an unstable one.
 
-### SElinux support on Oracle Linux 7
-SElinux must be set to `Permissive` or `Disabled` in `/etc/sysconfig/selinux` to
-use the btrfs storage engine on Oracle Linux 7.
+    ```bash
+    $ sudo yum-config-manager --enablerepo docker-testing
+    ```
 
-## Further issues?
+    You can disable the `testing` repository by running the `yum-config-manager`
+    command with the `--disablerepo` flag. To re-enable it, use the
+    `--set-enabled` flag. The following command disables the `testing`
+    repository.
 
-If you have a current Basic or Premier Support Subscription for Oracle Linux,
-you can report any issues you have with the installation of Docker via a Service
-Request at [My Oracle Support](https://support.oracle.com).
+    ```bash
+    $ sudo yum-config-manager --disablerepo docker-testing
+    ```
 
-If you do not have an Oracle Linux Support Subscription, you can use the [Oracle
-Linux
-Forum](https://community.oracle.com/community/server_%26_storage_systems/linux/oracle_linux) for community-based support.
+#### Install Docker
+
+1.  Update the `yum` package index.
+
+    ```bash
+    $ sudo yum makecache fast
+    ```
+
+    If this is the first time you have refreshed the package index since adding
+    the Docker repositories, you will be prompted to accept the GPG key, and
+    the key's fingerprint will be shown. Verify that the fingerprint matches
+    `58118E89F3A912897C070ADBF76221572C52609D` and if so, accept the key.
+
+2.  Install the latest version of Docker, or go to the next step to install a
+    specific version.
+
+    ```bash
+    $ sudo yum -y install docker-engine
+    ```
+
+    > **Warning**: If you have both stable and unstable repositories enabled,
+    > installing or updating Docker without specifying a version in the
+    > `yum install` or `yum upgrade` command will always install the highest
+    > available version, which will almost certainly be an unstable one.
+
+3.  On production systems, you should install a specific version of Docker
+    instead of always using the latest. List the available versions.
+    This example uses the `sort -r` command to sort the results by version
+    number, highest to lowest. The output is truncated.
+
+    > **Note**: This `yum list` command only shows binary packages. To show
+    > source packages as well, omit the `.x86_64` from the package name.
+
+    ```bash
+    $ yum list docker-engine.x86_64  --showduplicates |sort -nr
+
+    docker-engine.x86_64  1.13.0-1.el6                                docker-main   
+    docker-engine.x86_64  1.12.3-1.el6                                docker-main   
+    docker-engine.x86_64  1.12.2-1.el6                                docker-main   
+    docker-engine.x86_64  1.12.1-1.el6                                docker-main    
+    ```
+
+    The contents of the list depend upon which repositories you have enabled,
+    and will be specific to your version of Oracle Linux (indicated by the
+    `.el7` suffix on the version, in this example). Choose a specific version to
+    install. The second column is the version string. The third column is the
+    repository name, which indicates which repository the package is from and by
+    extension extension its stability level. To install a specific version,
+    append the version string to the package name and separate them by a hyphen
+    (`-`):
+
+    ```bash
+    $ sudo yum -y install docker-engine-<VERSION_STRING>
+    ```
+
+    The Docker daemon does not start automatically.
+
+4.  Start the Docker daemon. Use `systemctl` on Oracle Linux 7 or `service` on
+    Oracle Linux 6.
+
+    **Oracle Linux 7**:
+
+    ```bash
+    $ sudo systemctl start docker
+    ```
+
+    **Oracle Linux 6**:
+
+    ```bash
+    $ sudo service docker start
+    ```
+
+5.  Verify that `docker` is installed correctly by running the `hello-world`
+    image.
+
+    ```bash
+    $ sudo docker run hello-world
+    ```
+
+    This command downloads a test image and runs it in a container. When the
+    container runs, it prints an informational message and exits.
+
+Docker is installed and running. You need to use `sudo` to run Docker commands.
+Continue to [Linux postinstall](linux-postinstall.md) to allow non-privileged
+users to run Docker commands and for other optional configuration steps.
+
+#### Upgrade Docker
+
+To upgrade Docker, first run `sudo yum makecache fast`, then follow the
+[installation instructions](#install-docker), choosing the new version you want
+to install.
+
+### Install from a package
+
+If you cannot use Docker's repository to install Docker, you can download the
+`.rpm` file for your release and install it manually. You will need to download
+a new file each time you want to upgrade Docker.
+
+1.  Go to [https://yum.dockerproject.org/repo/main/oraclelinux/](https://yum.dockerproject.org/repo/main/oraclelinux/)
+    and choose the subdirectory for your Oracle Linux version. Download the
+    `.rpm` file for the Docker version you want to install.
+
+    > **Note**: To install a testing version, change the word `main` in the
+    > URL to `testing`. Do not use unstable versions of Docker in production
+    > or for non-testing workloads.
+
+2.  Install Docker, changing the path below to the path where you downloaded
+    the Docker package.
+
+    ```bash
+    $ sudo yum install /path/to/package.rpm
+    ```
+
+    The Docker daemon does not start automatically.
+
+4.  Start the Docker daemon. Use `systemctl` on Oracle Linux 7 or `service` on
+    Oracle Linux 6.
+
+    **Oracle Linux 7**:
+
+    ```bash
+    $ sudo systemctl start docker
+    ```
+
+    **Oracle Linux 6**:
+
+    ```bash
+    $ sudo service docker start
+    ```
+
+5.  Verify that `docker` is installed correctly by running the `hello-world`
+    image.
+
+    ```bash
+    $ sudo docker run hello-world
+    ```
+
+    This command downloads a test image and runs it in a container. When the
+    container runs, it prints an informational message and exits.
+
+Docker is installed and running. You need to use `sudo` to run Docker commands.
+Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
+non-privileged users to run Docker commands and for other optional configuration
+steps.
+
+#### Upgrade Docker
+
+To upgrade Docker, download the newer package file and repeat the
+[installation procedure](#install-from-a-package), using `yum -y upgrade`
+instead of `yum -y install`, and pointing to the new file.
+
+## Uninstall Docker
+
+1.  Uninstall the Docker package:
+
+    ```bash
+    $ sudo yum remove docker-engine
+    ```
+
+2.  Images, containers, volumes, or customized configuration files on your host
+    are not automatically removed. To delete all images, containers, and
+    volumes:
+
+    ```bash
+    $ sudo rm -rf /var/lib/docker
+    ```
+
+    > **Note**: This won't work when the `btrfs` graph driver has been used,
+    > because the `rm -rf` command cannot remove the subvolumes that Docker
+    > creates. See the output of `man btrfs-subvolume` for information on
+    > removing `btrfs` subvolumes.
+
+You must delete any edited configuration files manually.
+
+## Next steps
+
+- Continue to [Post-installation steps for Linux](linux-postinstall.md)
+
+- Continue with the [User Guide](../../userguide/index.md).

@@ -6,16 +6,70 @@ redirect_from:
 title: Docker for Mac release notes
 ---
 
-Here are the main improvements and issues per release, starting with the current release. The documentation is always updated for each release.
+Here are the main improvements and issues per release, starting with the current
+release. The documentation is always updated for each release.
 
-For system requirements, please see the Getting Started topic on [What to know before you install](index.md#what-to-know-before-you-install).
+For system requirements, please see the Getting Started topic on [What to know
+before you install](index.md#what-to-know-before-you-install).
 
-Release notes for _stable_ and _beta_ releases are listed below. You can learn about both kinds of releases, and download stable and beta product installers at [Download Docker for Mac](index.md#download-docker-for-mac).
+Release notes for _stable_ and _beta_ releases are listed below. You can learn
+about both kinds of releases, and download stable and beta product installers at
+[Download Docker for Mac](index.md#download-docker-for-mac).
 
 * [Stable Release Notes](release-notes.md#stable-release-notes)
 * [Beta Release Notes](release-notes.md#beta-release-notes)
 
 ## Stable Release Notes
+
+### Docker for Mac 1.13.0, 2017-01-19 (stable)
+
+**Upgrades**
+
+- [Docker 1.13.0](https://github.com/docker/docker/releases/tag/v1.13.0)
+- [Docker Compose 1.10](https://github.com/docker/compose/releases/tag/1.10.0)
+- [Docker Machine 0.9.0](https://github.com/docker/machine/releases/tag/v0.9.0)
+- [Notary 0.4.3](https://github.com/docker/notary/releases/tag/v0.4.3)
+- Linux kernel 4.9.4
+- qcow-tool 0.7.2
+
+**New**
+
+- The storage location of the Linux volume can now be moved
+- Reclaim disk size on reboot
+- You can now edit filesharing paths
+- Memory can be allocated with 256 MiB steps
+- Proxy can now be completely disabled
+- Support for arm, aarch64, ppc64le architectures using qemu
+- Dedicated preference pane for advanced configuration of the
+docker daemon (edit `daemon.json`)
+- Docker Experimental mode can be toggled
+- Better support for Split DNS VPN configurations
+- Use more DNS servers, respect order
+
+**Bug fixes and minor changes**
+
+- You cannot edit settings while docker is restarting
+- Support Copy/Paste in About box
+- Auto update polling every 24h
+- Kernel boots with vsyscall=emulate arg and CONFIG_LEGACY_VSYSCALL is set to NONE in Moby
+- Fixed vsock deadlock under heavy write load
+- If you opt-out of analytics, you're prompted for approval before a bug report is sent
+- Fixed bug where search domain could be read as `DomainName`
+- Dedicated preference pane for HTTP proxy settings
+- Dedicated preference pane for CPU & Memory computing resources
+- Privacy settings moved to the general preference pane
+- Fixed an issue where the preference pane disappeared when the welcome whale menu was closed
+- HyperKit: code cleanup and minor fixes
+- Improvements to Logging and Diagnostics
+- osxfs: switch to libev/kqueue to improve latency
+- VPNKit: improvements to DNS handling
+- VPNKit: Improved diagnostics
+- VPNKit: Forwarded UDP datagrams should have correct source port numbers
+- VPNKit: add a local cache of DNS responses
+- VPNKit: If one request fails, allow other concurrent requests to succeed.
+  For example this allows IPv4 servers to work even if IPv6 is broken.
+- VPNKit: Fix bug that could cause the connection tracking to
+underestimate the number of active connections
 
 ### Docker for Mac 1.12.5, 2016-12-20 (stable)
 
@@ -60,7 +114,7 @@ We did not distribute a 1.12.4 stable release
 
 - Added UI when switching channel to prevent user losing containers and settings
 
-- Check disk capacity before toolbox import
+- Check disk capacity before Toolbox import
 
 - Import certificates in `etc/ssl/certs/ca-certificates.crt`
 
@@ -137,7 +191,8 @@ We did not distribute a 1.12.4 stable release
 * Entries from `/etc/hosts` should now resolve from within containers
 
 * Allow ports to be bound on host addresses other than `0.0.0.0` and `127.0.0.1`
-  Fixes issue reported in [https://github.com/docker/for-mac/issues/68](https://github.com/docker/for-mac/issues/68)
+  Fixes issue reported in
+  [https://github.com/docker/for-mac/issues/68](https://github.com/docker/for-mac/issues/68)
 
 * Use Mac System Configuration database to detect DNS
 
@@ -147,7 +202,8 @@ We did not distribute a 1.12.4 stable release
 
 * Fixed a malfunction of new directories that have the same name as an old directory that is still open
 
-* Rename events now trigger DELETE and/or MODIFY `inotify` events (saving with TextEdit works now)
+* Rename events now trigger DELETE and/or MODIFY `inotify` events
+(saving with TextEdit works now)
 
 * Fixed an issue that caused `inotify` failure and crashes
 
@@ -212,6 +268,98 @@ events or unexpected unmounts.
 * Docker Compose 1.8.0
 
 ## Beta Release Notes
+
+### Beta 38 Release Notes (2017-01-20 1.13.0-beta38)
+
+**Upgrades**
+
+- [Docker 1.13.0](https://github.com/docker/docker/releases/tag/v1.13.0)
+- [Docker Compose 1.10](https://github.com/docker/compose/releases/tag/1.10.0)
+- [Docker Machine 0.9.0](https://github.com/docker/machine/releases/tag/v0.9.0)
+- [Notary 0.4.3](https://github.com/docker/notary/releases/tag/v0.4.3)
+- Linux kernel 4.9.4
+- qcow-tool 0.7.2
+
+**New**
+
+- The storage location of the Linux volume can now be moved
+- Reclaim disk size on reboot
+- You can now edit filesharing paths
+- Memory can be allocated with 256 MiB steps
+- Proxy can now be completely disabled
+- Support for arm, aarch64, ppc64le architectures using qemu
+- Dedicated preference pane for advanced configuration of the docker daemon (edit daemon.json)
+- Docker Experimental mode can be toggled
+- Better support for Split DNS VPN configurations
+- Use more DNS servers, respect order
+
+**Bug fixes and minor improvements**
+
+- You can't edit settings while docker is restarting
+- Support Copy/Paste in About box
+- Auto update polling every 24h
+- Kernel boots with vsyscall=emulate arg and CONFIG_LEGACY_VSYSCALL is set to NONE in Moby
+- Fixed vsock deadlock under heavy write load
+- If you opt-out of analytics, you're prompted for approval before a bug report is sent
+- Fixed bug where search domain could be read as `DomainName`
+- Dedicated preference pane for HTTP proxy settings.
+- Dedicated preference pane for CPU & Memory computing resources.
+- Privacy settings moved to the general preference pane
+- Fixed an issue where the preference pane disappeared when the welcome whale menu was closed.
+- HyperKit: code cleanup and minor fixes
+- Improvements to Logging and Diagnostics
+- osxfs: switch to libev/kqueue to improve latency
+- VPNKit: improvements to DNS handling
+- VPNKit: Improved diagnostics
+- VPNKit: Forwarded UDP datagrams should have correct source port numbers
+- VPNKit: add a local cache of DNS responses
+- VPNKit: If one request fails, allow other concurrent requests to succeed.
+  For example this allows IPv4 servers to work even if IPv6 is broken.
+- VPNKit: Fix bug which could cause the connection tracking to
+  underestimate the number of active connections
+
+### Beta 37 Release Notes (2017-01-16 1.13.0-rc7-beta37)
+
+**Upgrades**
+
+- Docker 1.13.0-rc7
+- Notary 0.4.3
+- Linux kernel 4.9.3
+
+### Beta 36 Release Notes (2017-01-12 1.13.0-rc6-beta36)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**Upgrades**
+
+- Docker 1.13.0-rc6
+- Docker Compose 1.10-rc2
+- Linux Kernel 4.9.2
+
+**Bug fixes and minor improvements**
+
+- Uninstall should be more reliable
+
+### Beta 35 Release Notes (2017-01-06 1.13.0-rc5-beta35)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**Upgrades**
+
+- Docker 1.13.0-rc5
+- Docker Compose 1.10-rc1
+
+### Beta 34.1 Release Notes (2016-12-22 1.13.0-rc4-beta34.1)
+
+>**Important Note:** Plugins installed using the experimental "managed plugins" feature in Docker 1.12 must be removed/uninstalled before upgrading.
+
+**Hotfix**
+
+- Fixed issue where Docker would fail to start after importing containers from Toolbox
+
+**Upgrades**
+
+- qcow-tool 0.7.2
 
 ### Beta 34 Release Notes (2016-12-20 1.13.0-rc4-beta34)
 

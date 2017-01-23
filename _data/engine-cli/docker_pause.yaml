@@ -1,0 +1,6 @@
+command: docker pause
+short: Pause all processes within one or more containers
+long: Pause all processes within one or more containers
+usage: docker pause CONTAINER [CONTAINER...]
+pname: docker
+plink: docker.yaml

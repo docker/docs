@@ -16,10 +16,18 @@ back-ported fixes (security-related and priority defects) from the open source.
 It incorporates defect fixes that you can use in environments where new features
 cannot be adopted as quickly for consistency and compatibility reasons.
 
-#### Prior versions
+## Prior versions
 
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
+
+## CS Engine 1.12.6-cs6
+(10 Jan 2017)
+
+Bumps RunC version to address CVE-2016-9962.
+
+Refer to the [detailed list](https://github.com/docker/docker/releases/tag/v1.12.6) of all
+changes since the release of CS Engine 1.12.5-cs5.
 
 ## CS Engine 1.12.5-cs5
 (21 Dec 2016)
@@ -60,6 +68,11 @@ This release addresses the following issues:
 * [#25962](https://github.com/docker/docker/pull/25962) Allow normal containers
 to connect to swarm-mode overlay network
 * Various bug fixes in swarm mode networking
+
+## CS Engine 1.11.2-cs6
+(12 Jan 2017)
+
+Bumps RunC version to address CVE-2016-9962.
 
 ## CS Engine 1.11.2-cs5
 (13 Sep 2016)

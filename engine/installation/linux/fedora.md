@@ -1,251 +1,241 @@
 ---
-description: Instructions for installing Docker on Fedora.
-keywords: Docker, Docker documentation, Fedora, requirements,  linux
+description: Instructions for installing Docker on Fedora
+keywords: Docker, Docker documentation, requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/fedora/
-title: Install Docker on Fedora
+title: Get Docker for Fedora
 ---
 
-Docker is supported on Fedora version 22, 23, and 24. These instructions install
-Docker using release packages and installation mechanisms managed by Docker, to
-be sure that you get the latest version of Docker. If you wish to install using
-Fedora-managed packages, consult your Fedora release documentation.
+To get started with Docker on Fedora, make sure you
+[meet the prerequisites](#prerequisites), then
+[install Docker](#install-docker).
 
 ## Prerequisites
 
-Docker requires a 64-bit OS and version 3.10 or higher of the Linux kernel.
+### OS requirements
 
-To check your current kernel version, open a terminal and use `uname -r` to
-display your kernel version:
+To install Docker, you need the 64-bit version of one of these Fedora versions:
+
+- 24
+- 25
+
+### Remove unofficial Docker packages
+
+Fedora's operating system repositories contain an older version of Docker, with
+the package name `docker` instead of `docker-engine`. If you installed this version
+of Docker, remove it using the following command:
 
 ```bash
-$ uname -r
-3.19.5-100.fc21.x86_64
+$ sudo dnf -y remove docker
 ```
 
-If your kernel is at an older version, you must update it.
+The contents of `/var/lib/docker` are not removed, so any images, containers,
+or volumes you created using the older version of Docker are preserved.
 
-Finally, it is recommended that you fully update your system. Keep in mind
-that your system should be fully patched to fix any potential kernel bugs.
-Any reported kernel bugs may have already been fixed on the latest kernel
-packages.
+## Install Docker
 
-## Install Docker Engine
+You can install Docker in different ways, depending on your needs:
 
-There are two ways to install Docker Engine.  You can [install using the `dnf`
-package manager](fedora.md#install-with-dnf). Or you can use `curl` [with the  `get.docker.com`
-site](fedora.md#install-with-the-script). This second method runs an installation script
-which also installs via the `dnf` package manager.
+- Most users
+  [set up Docker's repositories](#install-using-the-repository) and install
+  from them, for ease of installation and upgrade tasks. This is the
+  recommended approach.
 
-### Install with DNF
+- Some users download the RPM package and install it manually and manage
+  upgrades completely manually.
 
-1. Log into your machine as a user with `sudo` or `root` privileges.
+- Some users cannot use third-party repositories, and must rely on the version
+  of Docker in the Fedora repositories. This version of Docker may be out of
+  date. Those users should consult the Fedora documentation and not follow these
+  procedures.
 
-2.  Make sure your existing packages are up-to-date.
+### Install using the repository
 
-    ```bash
-    $ sudo dnf update
-    ```
+Before you install Docker for the first time on a new host machine, you need to
+set up the Docker repository. Afterward, you can install, update, or downgrade
+Docker from the repository.
 
-3.  Add the `yum` repo.
+#### Set up the repository
 
-    ```bash
-    $ sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
-    [dockerrepo]
-    name=Docker Repository
-    baseurl=https://yum.dockerproject.org/repo/main/fedora/$releasever/
-    enabled=1
-    gpgcheck=1
-    gpgkey=https://yum.dockerproject.org/gpg
-    EOF
-    ```
-
-4.  Install the Docker package.
+1.  Install the `dnf-plugins.core` package which provides the commands to manage
+    your DNF repositories from the command line.
 
     ```bash
-    $ sudo dnf install docker-engine
+    $ sudo dnf -y install dnf-plugins-core
     ```
 
-5.  Enable the service.
+2.  Use the following command to set up the **stable** repository:
 
     ```bash
-    $ sudo systemctl enable docker.service
+    $ sudo dnf config-manager \
+        --add-repo \
+        https://docs.docker.com/engine/installation/linux/repo_files/fedora/docker.repo
     ```
 
-6.  Start the Docker daemon.
+3.  **Optional**: Enable the **testing** repository. This repository is included
+    in the `docker.repo` file above but is disabled by default. You can enable
+    it alongside the stable repository. Do not use unstable repositories on
+    on production systems or for non-testing workloads.
+
+    > **Warning**: If you have both stable and unstable repositories enabled,
+    > updating without specifying a version in the `dnf install` or `dnf update`
+    > command will always install the highest possible version, which will
+    > almost certainly be an unstable one.
 
     ```bash
-    $ sudo systemctl start docker
+    $ sudo dnf config-manager --set-enabled docker-testing
     ```
 
-7. Verify `docker` is installed correctly by running a test image in a container.
-
-        $ sudo docker run --rm hello-world
-
-        Unable to find image 'hello-world:latest' locally
-        latest: Pulling from library/hello-world
-        c04b14da8d14: Pull complete
-        Digest: sha256:0256e8a36e2070f7bf2d0b0763dbabdd67798512411de4cdcf9431a1feb60fd9
-        Status: Downloaded newer image for hello-world:latest
-
-        Hello from Docker!
-        This message shows that your installation appears to be working correctly.
-
-        To generate this message, Docker took the following steps:
-         1. The Docker client contacted the Docker daemon.
-         2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
-         3. The Docker daemon created a new container from that image which runs the
-            executable that produces the output you are currently reading.
-         4. The Docker daemon streamed that output to the Docker client, which sent it
-            to your terminal.
-
-        To try something more ambitious, you can run an Ubuntu container with:
-         $ docker run -it ubuntu bash
-
-        Share images, automate workflows, and more with a free Docker Hub account:
-         https://hub.docker.com
-
-        For more examples and ideas, visit:
-         https://docs.docker.com/engine/userguide/
-
-If you need to add an HTTP Proxy, set a different directory or partition for the
-Docker runtime files, or make other customizations, read our Systemd article to
-learn how to [customize your Systemd Docker daemon options](../../admin/systemd.md).
-
-### Install with the script
-
-You use the same installation procedure for all versions of Fedora.
-
-1. Log into your machine as a user with `sudo` or `root` privileges.
-
-2.  Make sure your existing packages are up-to-date.
+    You can disable the `testing` repository by running the `dnf config-manager`
+    command with the `--set-disabled` flag. To re-enable it, use the
+    `--set-enabled` flag The following command disables the `testing`
+    repository.
 
     ```bash
-    $ sudo dnf update
+    $ sudo dnf config-manager --set-disabled docker-testing
     ```
 
-3.  Run the Docker installation script.
+#### Install Docker
+
+1.  Update the `dnf` package index.
 
     ```bash
-    $ curl -fsSL https://get.docker.com/ | sh
+    $ sudo dnf makecache fast
     ```
 
-    This script adds the `docker.repo` repository and installs Docker.
+    If this is the first time you have refreshed the package index since adding
+    the Docker repositories, you will be prompted to accept the GPG key, and
+    the key's fingerprint will be shown. Verify that the fingerprint matches
+    `58118E89F3A912897C070ADBF76221572C52609D` and if so, accept the key.
 
-4.  Enable the service.
+2.  Install the latest version of Docker, or go to the next step to install a
+    specific version.
 
     ```bash
-    $ sudo systemctl enable docker.service
+    $ sudo dnf -y install docker-engine
     ```
 
-5.  Start the Docker daemon.
+    > **Warning**: If you have both stable and unstable repositories enabled,
+    > installing or updating without specifying a version in the `dnf install`
+    > or `dnf update` command will always install the highest possible version,
+    > which will almost certainly be an unstable one.
+
+3.  On production systems, you should install a specific version of Docker
+    instead of always using the latest. List the available versions.
+    This example uses the `sort -r` command to sort the results by version
+    number, highest to lowest, and is truncated.
+
+    > **Note**: This `dnf list` command only shows binary packages. To show
+    > source packages as well, omit the `.x86_64` from the package name.
 
     ```bash
-    $ sudo systemctl start docker
+    $ dnf list docker-engine.x86_64  --showduplicates |sort -r
+
+    docker-engine.x86_64  1.13.0-1.fc24                               docker-main
+    docker-engine.x86_64  1.12.5-1.fc24                               docker-main   
+    docker-engine.x86_64  1.12.4-1.fc24                               docker-main   
+    docker-engine.x86_64  1.12.3-1.fc24                               docker-main   
     ```
 
-6.  Verify `docker` is installed correctly by running a test image in a container.
+    The contents of the list depend upon which repositories are enabled, and
+    will be specific to your version of Fedora (indicated by the `.fc24` suffix
+    on the version, in this example). Choose a specific version to install. The
+    second column is the version string. The third column is the repository
+    name, which indicates which repository the package is from and by extension
+    its stability level. To install a specific version, append the version
+    string to the package name and separate them by a hyphen (`-`):
+
+    ```bash
+    $ sudo dnf -y install docker-engine-<VERSION_STRING>
+    ```
+
+    The Docker daemon starts automatically.
+
+4.  Verify that `docker` is installed correctly by running the `hello-world`
+    image.
 
     ```bash
     $ sudo docker run hello-world
     ```
 
-If you need to add an HTTP Proxy, set a different directory or partition for the
-Docker runtime files, or make other customizations, read our Systemd article to
-learn how to [customize your Systemd Docker daemon options](../../admin/systemd.md).
+    This command downloads a test image and runs it in a container. When the
+    container runs, it prints an informational message and exits.
 
-## Create a docker group
+Docker is installed and running. You need to use `sudo` to run Docker commands.
+Continue to [Linux postinstall](linux-postinstall.md) to allow non-privileged
+users to run Docker commands and for other optional configuration steps.
 
-The `docker` daemon binds to a Unix socket instead of a TCP port. By default
-that Unix socket is owned by the user `root` and other users can access it with
-`sudo`. For this reason, `docker` daemon always runs as the `root` user.
+#### Upgrade Docker
 
-To avoid having to use `sudo` when you use the `docker` command, create a Unix
-group called `docker` and add users to it. When the `docker` daemon starts, it
-makes the ownership of the Unix socket read/writable by the `docker` group.
+To upgrade Docker, first run `sudo dnf makecache fast`, then follow the
+[installation instructions](#install-docker), choosing the new version you want
+to install.
 
->**Warning**: The `docker` group is equivalent to the `root` user; For details
->on how this impacts security in your system, see [*Docker Daemon Attack
->Surface*](../../security/security.md#docker-daemon-attack-surface) for details.
+### Install from a package
 
-To create the `docker` group and add your user:
+If you cannot use Docker's repository to install Docker, you can download the
+`.rpm` file for your release and install it manually. You will need to download
+a new file each time you want to upgrade Docker.
 
-1. Log into your machine as a user with `sudo` or `root` privileges.
+1.  Go to [https://yum.dockerproject.org/repo/main/fedora/](https://yum.dockerproject.org/repo/main/fedora/)
+    and choose the subdirectory for your Fedora version. Download the `.rpm`
+    file for the Docker version you want to install.
 
-2.  Create the `docker` group.
+    > **Note**: To install a testing version, change the word `main` in the
+    > URL to `testing`. Do not use unstable versions of Docker in production
+    > or for non-testing workloads.
 
-    ```bash
-    $ sudo groupadd docker
-    ```
-
-3.  Add your user to `docker` group.
-
-    ```bash
-    $ sudo usermod -aG docker your_username`
-    ```
-
-4. Log out and log back in.
-
-    This ensures your user is running with the correct permissions.
-
-5.  Verify that your user is in the docker group by running `docker` without `sudo`.
+2.  Install Docker, changing the path below to the path where you downloaded
+    the Docker package.
 
     ```bash
-    $ docker run hello-world
+    $ sudo dnf -y install /path/to/package.rpm
     ```
 
-## Start the docker daemon at boot
+    The Docker daemon starts automatically.
 
-Configure the Docker daemon to start automatically when the host starts:
-
-```bash
-$ sudo systemctl enable docker
-```
-
-## Running Docker with a manually-defined network
-
-If you manually configure your network using `systemd-network` with `systemd` version 219 or higher, containers you start with Docker may be unable to access your network.
-Beginning with version 220, the forwarding setting for a given network (`net.ipv4.conf.<interface>.forwarding`) defaults to *off*. This setting prevents IP forwarding. It also conflicts with Docker which enables the `net.ipv4.conf.all.forwarding` setting within a container.
-
-To work around this, edit the `<interface>.network` file in
-`/usr/lib/systemd/network/` on your Docker host  (ex: `/usr/lib/systemd/network/80-container-host0.network`) add the following block:
-
-```
-[Network]
-...
-IPForward=kernel
-# OR
-IPForward=true
-...
-```
-
-This configuration allows IP forwarding from the container as expected.
-
-## Uninstall
-
-You can uninstall the Docker software with `dnf`.
-
-1.  List the installed Docker packages.
+3.  Verify that `docker` is installed correctly by running the `hello-world`
+    image.
 
     ```bash
-    $ dnf list installed | grep docker
-
-    docker-engine.x86_64     1.7.1-0.1.fc21 @/docker-engine-1.7.1-0.1.fc21.el7.x86_64
+    $ sudo docker run hello-world
     ```
 
-2.  Remove the package.
+    This command downloads a test image and runs it in a container. When the
+    container runs, it prints an informational message and exits.
+
+Docker is installed and running. You need to use `sudo` to run Docker commands.
+Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
+non-privileged users to run Docker commands and for other optional configuration
+steps.
+
+#### Upgrade Docker
+
+To upgrade Docker, download the newer package file and repeat the
+[installation procedure](#install-from-a-package), using `dnf -y upgrade`
+instead of `dnf -y install`, and pointing to the new file.
+
+
+## Uninstall Docker
+
+1.  Uninstall the Docker package:
 
     ```bash
-    $ sudo dnf -y remove docker-engine.x86_64
+    $ sudo dnf -y remove docker-engine
     ```
 
-	This command does not remove images, containers, volumes, or user-created
-	configuration files on your host.
-
-3.  To delete all images, containers, and volumes, run the following command:
+2.  Images, containers, volumes, or customized configuration files on your host
+    are not automatically removed. To delete all images, containers, and
+    volumes:
 
     ```bash
-    $ rm -rf /var/lib/docker
+    $ sudo rm -rf /var/lib/docker
     ```
 
-4. Locate and delete any user-created configuration files.
+You must delete any edited configuration files manually.
+
+## Next steps
+
+- Continue to [Post-installation steps for Linux](linux-postinstall.md)
+
+- Continue with the [User Guide](../../userguide/index.md).

@@ -83,7 +83,7 @@ and a `docker-compose.yml` file. (You can use either a `.yml` or `.yaml` extensi
 
 ### Create a Django project
 
-In this step, you create a Django started project by building the image from the build context defined in the previous procedure.
+In this step, you create a Django starter project by building the image from the build context defined in the previous procedure.
 
 1. Change to the root of your project directory.
 
@@ -91,7 +91,7 @@ In this step, you create a Django started project by building the image from the
 
         docker-compose run web django-admin.py startproject composeexample .
 
-    This instructs Compose to run `django-admin.py startproject composeeexample`
+    This instructs Compose to run `django-admin.py startproject composeexample`
     in a container, using the `web` service's image and configuration. Because
     the `web` image doesn't exist yet, Compose builds it from the current
     directory, as specified by the `build: .` line in `docker-compose.yml`.

@@ -159,6 +159,6 @@ The Stream API requires the same authentication mechanism as the REST API:
 
 > The CLI and the SDKs will detect this environment variable and automatically use it
 
-If you give an [API role](../../docker-cloud/apps/api-roles/) to a container, the environment variable `DOCKERCLOUD_AUTH` inside the container will have the contents of the `Authorization` header that you can use to authenticate against the REST or Stream APIs:
+If you give an [API role](/docker-cloud/apps/api-roles/) to a container, the environment variable `DOCKERCLOUD_AUTH` inside the container will have the contents of the `Authorization` header that you can use to authenticate against the REST or Stream APIs:
 
 `curl -H "Authorization: $DOCKERCLOUD_AUTH" https://cloud.docker.com/api/app/v1/service/`

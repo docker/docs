@@ -1,0 +1,137 @@
+command: docker service create
+short: Create a new service
+long: Create a new service
+usage: docker service create [OPTIONS] IMAGE [COMMAND] [ARG...]
+pname: docker service
+plink: docker_service.yaml
+options:
+- option: constraint
+  default_value: '[]'
+  description: Placement constraints
+- option: container-label
+  default_value: '[]'
+  description: Container labels
+- option: dns
+  default_value: '[]'
+  description: Set custom DNS servers
+- option: dns-option
+  default_value: '[]'
+  description: Set DNS options
+- option: dns-search
+  default_value: '[]'
+  description: Set custom DNS search domains
+- option: endpoint-mode
+  description: Endpoint mode (vip or dnsrr)
+- option: env
+  shorthand: e
+  default_value: '[]'
+  description: Set environment variables
+- option: env-file
+  default_value: '[]'
+  description: Read in a file of environment variables
+- option: group
+  default_value: '[]'
+  description: Set one or more supplementary user groups for the container
+- option: health-cmd
+  description: Command to run to check health
+- option: health-interval
+  default_value: none
+  description: Time between running the check (ns|us|ms|s|m|h)
+- option: health-retries
+  default_value: "0"
+  description: Consecutive failures needed to report unhealthy
+- option: health-timeout
+  default_value: none
+  description: Maximum time to allow one check to run (ns|us|ms|s|m|h)
+- option: host
+  default_value: '[]'
+  description: Set one or more custom host-to-IP mappings (host:ip)
+- option: hostname
+  description: Container hostname
+- option: label
+  shorthand: l
+  default_value: '[]'
+  description: Service labels
+- option: limit-cpu
+  default_value: "0.000"
+  description: Limit CPUs
+- option: limit-memory
+  default_value: 0 B
+  description: Limit Memory
+- option: log-driver
+  description: Logging driver for service
+- option: log-opt
+  default_value: '[]'
+  description: Logging driver options
+- option: mode
+  default_value: replicated
+  description: Service mode (replicated or global)
+- option: mount
+  description: Attach a filesystem mount to the service
+- option: name
+  description: Service name
+- option: network
+  default_value: '[]'
+  description: Network attachments
+- option: no-healthcheck
+  default_value: "false"
+  description: Disable any container-specified HEALTHCHECK
+- option: publish
+  shorthand: p
+  description: Publish a port as a node port
+- option: replicas
+  default_value: none
+  description: Number of tasks
+- option: reserve-cpu
+  default_value: "0.000"
+  description: Reserve CPUs
+- option: reserve-memory
+  default_value: 0 B
+  description: Reserve Memory
+- option: restart-condition
+  description: Restart when condition is met (none, on-failure, or any)
+- option: restart-delay
+  default_value: none
+  description: Delay between restart attempts (ns|us|ms|s|m|h)
+- option: restart-max-attempts
+  default_value: none
+  description: Maximum number of restarts before giving up
+- option: restart-window
+  default_value: none
+  description: Window used to evaluate the restart policy (ns|us|ms|s|m|h)
+- option: secret
+  description: Specify secrets to expose to the service
+- option: stop-grace-period
+  default_value: none
+  description: |
+    Time to wait before force killing a container (ns|us|ms|s|m|h)
+- option: tty
+  shorthand: t
+  default_value: "false"
+  description: Allocate a pseudo-TTY
+- option: update-delay
+  default_value: "0"
+  description: Delay between updates (ns|us|ms|s|m|h) (default 0s)
+- option: update-failure-action
+  default_value: pause
+  description: Action on update failure (pause|continue)
+- option: update-max-failure-ratio
+  default_value: "0"
+  description: Failure rate to tolerate during an update
+- option: update-monitor
+  default_value: "0"
+  description: |
+    Duration after each task update to monitor for failure (ns|us|ms|s|m|h) (default 0s)
+- option: update-parallelism
+  default_value: "1"
+  description: |
+    Maximum number of tasks updated simultaneously (0 to update all at once)
+- option: user
+  shorthand: u
+  description: 'Username or UID (format: <name|uid>[:<group|gid>])'
+- option: with-registry-auth
+  default_value: "false"
+  description: Send registry authentication details to swarm agents
+- option: workdir
+  shorthand: w
+  description: Working directory inside the container

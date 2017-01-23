@@ -11,7 +11,7 @@ Disallow: /v1.10/
 Disallow: /v1.11/
 
 # Docker Datacenter archives
-Disallow: /datacenter/dtr/2.1
+Disallow: /datacenter/dtr/2.0
 Disallow: /datacenter/ucp/1.1
 Disallow: /apidocs/v*
 

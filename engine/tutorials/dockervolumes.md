@@ -10,8 +10,7 @@ title: Manage data in containers
 
 So far you've been introduced to some [basic Docker
 concepts](usingdocker.md), seen how to work with [Docker
-images](dockerimages.md) as well as learned about [networking and
-links between containers](../userguide/networking/default_network/dockerlinks.md). In this
+images](dockerimages.md) as well as learned about [how to network your containers](networkingcontainers.md). In this
 section you're going to learn how you can manage data inside and between your
 Docker containers.
 
@@ -29,7 +28,7 @@ containers that bypasses the [*Union File System*](../reference/glossary.md#unio
 - Volumes are initialized when a container is created. If the container's
   base image contains data at the specified mount point, that existing data is
   copied into the new volume upon volume initialization. (Note that this does
-  not apply when [mounting a host directory](dockervolumes.md#mount-a-host-directory-as-a-data-volume).)
+  not apply when [mounting a host directory](#mount-a-host-directory-as-a-data-volume).)
 - Data volumes can be shared and reused among containers.
 - Changes to a data volume are made directly.
 - Changes to a data volume will not be included when you update an image.
@@ -128,7 +127,7 @@ docker run -v /Users/<path>:/<container path> ...
 On Windows, mount directories using:
 
 ```bash
-docker run -v c:\<path>:/c:\<container path>
+docker run -v //c/<path>:/<container path>
 ```
 
 All other paths come from your virtual machine's filesystem, so if you want

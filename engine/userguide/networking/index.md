@@ -117,7 +117,8 @@ $ docker network inspect bridge
            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
            "com.docker.network.bridge.name": "docker0",
            "com.docker.network.driver.mtu": "9001"
-       }
+       },
+       "Labels": {}
    }
 ]
 ```
@@ -175,7 +176,8 @@ $ docker network inspect bridge
             "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
             "com.docker.network.bridge.name": "docker0",
             "com.docker.network.driver.mtu": "9001"
-        }
+        },
+        "Labels": {}
     }
 ]
 ```
@@ -328,7 +330,8 @@ $ docker network inspect isolated_nw
             ]
         },
         "Containers": {},
-        "Options": {}
+        "Options": {},
+        "Labels": {}
     }
 ]
 
@@ -370,7 +373,8 @@ $ docker network inspect isolated_nw
                 "IPv6Address": ""
             }
         },
-        "Options": {}
+        "Options": {},
+        "Labels": {}
     }
 ]
 ```
@@ -483,7 +487,7 @@ Your key-value store service may require additional ports.
 Check your vendor's documentation and open any required ports.
 
 If you are planning on creating an overlay network with encryption (`--opt encrypted`),
-you will also need to ensure protocol 50 (ESP) is open.
+you will also need to ensure protocol 50 (ESP) traffic is allowed.
 
 Once you have several machines provisioned, you can use Docker Swarm to quickly
 form them into a swarm which includes a discovery service as well.

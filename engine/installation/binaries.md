@@ -4,224 +4,184 @@ keywords: binaries, installation, docker, documentation, linux
 title: Install Docker from binaries
 ---
 
-**This instruction set is meant for hackers who want to try out Docker
-on a variety of environments.**
+> **Note**: You may have been redirected to this page because there is no longer
+> a dynamically-linked Docker package for your Linux distribution.
 
-Before following these directions, you should really check if a packaged
-version of Docker is already available for your distribution. We have
-packages for many distributions, and more keep showing up all the time!
+If you want to try Docker or use it in a testing environment, but you're not on
+a supported platform, you can try installing from static binaries.
+**This is strongly discouraged in production environments.**
 
-## Check runtime dependencies
+Static binaries for the Docker daemon binary are only available for Linux (as
+`dockerd`) and Windows Server 2016 or Windows 10 (as `dockerd.exe`). Static
+binaries for the Docker client are available for Linux and macOS (as `docker`),
+and Windows Server 2016 or Windows 10 (as `docker.exe`).
 
-To run properly, docker needs the following software to be installed at
-runtime:
+## Install daemon and client binaries on Linux
 
- - iptables version 1.4 or later
- - Git version 1.7 or later
- - procps (or similar provider of a "ps" executable)
- - XZ Utils 4.9 or later
- - a [properly mounted](
-   https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount)
-   cgroupfs hierarchy (having a single, all-encompassing "cgroup" mount
-   point [is](https://github.com/docker/docker/issues/2683)
-   [not](https://github.com/docker/docker/issues/3485)
-   [sufficient](https://github.com/docker/docker/issues/4568))
+### Prerequisites
 
-## Check kernel dependencies
+Before attempting to install Docker from binaries, be sure your host machine
+meets the prerequisites:
 
-Docker in daemon mode has specific kernel requirements. For details,
-check your distribution in [*Installation*](index.md#on-linux).
+- A 64-bit installation
+- Version 3.10 or higher of the Linux kernel. The latest version of the kernel
+  available for you platform is recommended.
+- `iptables` version 1.4 or higher
+- `git` version 1.7 or higher
+- A `ps` executable, usually provided by `procps` or a similar package.
+- [XZ Utils](http://tukaani.org/xz/) 4.9 or higher
+- a [properly mounted](
+  https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount)
+  `cgroupfs` hierarchy; a single, all-encompassing `cgroup` mount
+  point is not sufficient. See Github issues
+  [#2683](https://github.com/docker/docker/issues/2683),
+  [#3485](https://github.com/docker/docker/issues/3485),
+  [#4568](https://github.com/docker/docker/issues/4568)).
 
-A 3.10 Linux kernel is the minimum requirement for Docker.
-Kernels older than 3.10 lack some of the features required to run Docker
-containers. These older versions are known to have bugs which cause data loss
-and frequently panic under certain conditions.
+#### Enable AppArmor and SELinux when possible
 
-The latest minor version (3.x.y) of the 3.10 (or a newer maintained version)
-Linux kernel is recommended. Keeping the kernel up to date with the latest
-minor version will ensure critical kernel bugs get fixed.
-
-> **Warning**:
-> Installing custom kernels and kernel packages is probably not
-> supported by your Linux distribution's vendor. Please make sure to
-> ask your vendor about Docker support first before attempting to
-> install custom kernels on your distribution.
-
-> **Warning**:
-> Installing a newer kernel might not be enough for some distributions
-> which provide packages which are too old or incompatible with
-> newer kernels.
-
-Note that Docker also has a client mode, which can run on virtually any
-Linux kernel (it even builds on macOS!).
-
-## Enable AppArmor and SELinux when possible
-
-Please use AppArmor or SELinux if your Linux distribution supports
+It is recommended to use AppArmor or SELinux if your Linux distribution supports
 either of the two. This helps improve security and blocks certain
-types of exploits. Your distribution's documentation should provide
-detailed steps on how to enable the recommended security mechanism.
-
-Some Linux distributions enable AppArmor or SELinux by default and
-they run a kernel which doesn't meet the minimum requirements (3.10
-or newer). Updating the kernel to 3.10 or newer on such a system
-might not be enough to start Docker and run containers.
-Incompatibilities between the version of AppArmor/SELinux user
-space utilities provided by the system and the kernel could prevent
-Docker from running, from starting containers or, cause containers to
-exhibit unexpected behaviour.
+types of exploits. Review the documentation for your Linux distribution for
+instructions for enabling and configuring AppArmor or SELinux.
 
 > **Warning**:
-> If either of the security mechanisms is enabled, it should not be
-> disabled to make Docker or its containers run. This will reduce
-> security in that environment, lose support from the distribution's
-> vendor for the system, and might break regulations and security
-> policies in heavily regulated environments.
+> If either of the security mechanisms is enabled, do not disable it as a
+> work-around to make Docker or its containers run. Instead, configure it
+> correctly to fix any problems.
 
-## Get the Docker Engine binaries
+### Install static binaries
 
-You can download either the latest release binaries or a specific version. View
-the `docker/docker` [Releases page](https://github.com/docker/docker/releases).
+1.  Download the static binary archive. You can download either the latest
+    release binaries or a specific version. To find the download link, see the
+    [release notes](https://github.com/docker/docker/releases) for the version
+    of Docker you want to install. You can choose a `tar.gz` archive or `zip`
+    archive.
 
-A group of download links is included at the bottom of the release notes for
-each version of Docker. You can use these links to download the source code
-archive for that release, binaries for supported platforms, and static binaries
-for unsupported Linux platforms. Use the links listed in the Downloads section
-to download the appropriate binaries.
+2.  Extract the archive using `tar` or `unzip`, depending on the format you
+    downloaded. The `dockerd` and `docker` binaries are extracted.
 
-### Limitations of Windows and macOS binaries
+    ```bash
+    $ tar xzvf /path/to/<FILE>.tar.gz
+    ```
 
-For Windows, the `i386` download contains a 32-bit client-only binary. The
-`x86_64` download contains both client and daemon binaries for 64-bit Windows
-Server 2016 and Windows 10 systems.
+    ```bash
+    $ unzip /path/to/<FILE>.zip
+    ```
 
-The macOS binary only contains a client. You cannot use it to run the `dockerd`
-daemon. If you need to run the daemon, install
-[Docker for Mac](/docker-for-mac/index.md) instead.
+3.  **Optional**: Move the binaries to a directory on your executable path, such
+    as `/usr/bin/`. If you skip this step, you must provide the path to the
+    executable when you invoke `docker` or `dockerd` commands.
 
-### URL patterns for static binaries
+    ```bash
+    $ sudo cp docker/* /usr/bin/
+    ```
 
-The URLs for released binaries are stable and follow a predictable pattern.
-Unfortunately, it is not possible to browse the releases in a directory
-structure. If you do not want to get the links from the release notes for a
-release, you can infer the URL for the binaries by using the following patterns:
+4.  Start the Docker daemon:
 
-| Description            | URL pattern                                                       |
-|------------------------|-------------------------------------------------------------------|
-| Latest Linux 64-bit    | `https://get.docker.com/builds/Linux/x86_64/docker-latest.tgz`    |
-| Latest Linux 32-bit    | `https://get.docker.com/builds/Linux/i386/docker-latest.tgz`      |
-| Specific version Linux 64-bit| `https://get.docker.com/builds/Linux/x86_64/docker-<version>.tgz` |
-| Specific version Linux 32-bit| `https://get.docker.com/builds/Linux/i386/docker-<version>.tgz`   |
-| Latest Windows 64-bit | `https://get.docker.com/builds/Windows/x86_64/docker-latest.zip`     |
-| Latest Windows 32-bit | `https://get.docker.com/builds/Windows/i386/docker-latest.zip`      |
-| Specific version Windows 64-bit | `https://get.docker.com/builds/Windows/x86_64/docker-<version>.zip` |
-| Specific version Windows 32-bit | `https://get.docker.com/builds/Windows/i386/docker-<version>.zip` |
-| Latest MacOS 64-bit   | `https://get.docker.com/builds/Darwin/x86_64/docker-latest.tgz` |
-| Specific version MacOS 64-bit | `https://get.docker.com/builds/Darwin/x86_64/docker-<version>.tgz` |
+    ```bash
+    $ sudo dockerd &
+    ```
 
-For example, the stable URL for the Docker 1.11.0 64-bit static binary for Linux
-is `https://get.docker.com/builds/Linux/x86_64/docker-1.11.0.tgz`.
+    If you need to start the daemon with additional options, modify the above
+    command accordingly.
+>>>>>>> c02c644... Rewrite and reorganize Linux install instructions
 
-> **Note** These instructions are for Docker Engine 1.11 and up. Engine 1.10 and
-> under consists of a single binary, and instructions for those versions are
-> different. To install version 1.10 or below, follow the instructions in the
-> [1.10 documentation](https://docs.docker.com/v1.10/engine/installation/binaries/){:target="_blank"}.
+5.  Verify that Docker is installed correctly by running the `hello-world`
+    image.
 
-#### Verify downloaded files
+    ```bash
+    $ sudo docker run hello-world
+    ```
 
-To verify the integrity of downloaded files, you can get an MD5 or SHA256
-checksum by adding `.md5` or `.sha256` to the end of the URL. For instance,
-to verify the `docker-1.11.0.tgz` link above, use the URL
-`https://get.docker.com/builds/Linux/x86_64/docker-1.11.0.tgz.md5` or
-`https://get.docker.com/builds/Linux/x86_64/docker-1.11.0.tgz.sha256`.
+    This command downloads a test image and runs it in a container. When the
+    container runs, it prints an informational message and exits.
 
-## Install the Linux binaries
+### Next steps
 
-After downloading, you extract the archive, which puts the binaries in a
-directory named `docker` in your current location.
+- Continue to [Post-installation steps for Linux](linux-postinstall.md)
 
-```bash
-$ tar -xvzf docker-latest.tgz
+- Continue with the [User Guide](../../userguide/index.md).
 
-docker/
-docker/docker
-docker/docker-containerd
-docker/docker-containerd-ctr
-docker/docker-containerd-shim
-docker/docker-proxy
-docker/docker-runc
-docker/dockerd
-```
+## Install client binaries on macOS
 
-Engine requires these binaries to be installed in your host's `$PATH`.
-For example, to install the binaries in `/usr/bin`:
+The macOS binary includes the Docker client only. It does not include the
+`dockerd` daemon.
 
-```bash
-$ mv docker/* /usr/bin/
-```
+1.  Download the static binary archive. You can download either the latest
+    release binaries or a specific version. To find the download link, see the
+    [release notes](https://github.com/docker/docker/releases) for the version
+    of Docker you want to install. You can choose a `tar.gz` archive or
+    `zip` archive.
 
-> **Note**: If you already have Engine installed on your host, make sure you
-> stop Engine before installing (`killall docker`), and install the binaries
-> in the same location. You can find the location of the current installation
-> with `dirname $(which docker)`.
+2.  Extract the archive using `tar` or `unzip`, depending on the format you
+    downloaded. The `docker` binary is extracted.
 
-### Run the Engine daemon on Linux
+    ```bash
+    $ tar xzvf /path/to/<FILE>.tar.gz
+    ```
 
-You can manually start the Engine in daemon mode using:
+    ```bash
+    $ unzip /path/to/<FILE>.zip
+    ```
+3.  **Optional**: Move the binaries to a directory on your executable path, such
+    as `/usr/local/bin/`. If you skip this step, you must provide the path to the
+    executable when you invoke `docker` or `dockerd` commands.
 
-```bash
-$ sudo dockerd &
-```
+    ```bash
+    $ sudo cp docker/docker /usr/local/bin/
+    ```
 
-The GitHub repository provides samples of init-scripts you can use to control
-the daemon through a process manager, such as upstart or systemd. You can find
-these scripts in the <a href="https://github.com/docker/docker/tree/master/contrib/init">
-contrib directory</a>.
+4.  Verify that Docker is installed correctly by running the `hello-world`
+    image.
 
-For additional information about running the Engine in daemon mode, refer to
-the [daemon command](../reference/commandline/dockerd.md) in the Engine command
-line reference.
+    ```bash
+    $ sudo docker -H <hostname> run hello-world
+    ```
 
-## Install the macOS binaries
+    This command downloads a test image and runs it in a container. When the
+    container runs, it prints an informational message and exits.
 
-You can extract the downloaded archive either by double-clicking the downloaded
-`.tgz` or on the command line, using `tar -xvzf docker-1.11.0.tgz`. You can run
-the client binary from any location on your filesystem.
 
-## Install the Windows binary
+## Install server and binaries on Windows
 
-You can extract the downloaded archive by double-clicking the downloaded
-`.zip`. You can run the client binary from any location on your filesystem.
+You can install Docker from binaries on Windows Server 2016 or Windows 10.
 
-## Run client commands without root access
+- To install both client and server binaries, download the 64-bit binary. The
+  archive includes `x86.64` in the file name.
 
-On Linux, the `dockerd` daemon always runs as the root user and binds to a Unix
-socket instead of a TCP port. By default that Unix socket is owned by the
-`root` user. This means that by default, you need to use `sudo` to run `docker`
-commands.
+- To install the client only, download the 32-bit binary. The archive includes
+  `i386` in the file name.
 
-If you (or your Docker installer) create a Unix group called `docker` and add
-users to it, the `dockerd` daemon will change the ownership of the Unix socket
-to be readable and writable by members of the `docker` group when the daemon
-starts. The `dockerd` daemon must always run as the root user, but you can run
-`docker` client commands, such as `docker run`, as a non-privileged user.
+1.  Use the following PowerShell commands to install and start Docker:
 
-> **Warning**:
-> Membership in the *docker* group (or the group specified with `-G`) is equivalent
-> to `root` access. See
-> [*Docker Daemon Attack Surface*](../security/security.md#docker-daemon-attack-surface) details.
+    ```none
+    Invoke-WebRequest https://get.docker.com/builds/Windows/x86_64/docker-1.13.0.zip -UseBasicParsing -OutFile docker.zip
+    Expand-Archive docker.zip -DestinationPath $Env:ProgramFiles
+    Remove-Item -Force docker.zip
 
-## Upgrade Docker Engine
+    dockerd --register-service
 
-Before you upgrade your manual installation of Docker Engine on Linux, first
-stop the docker daemon:
+    Start-Service docker
+    ```
 
-```bash
-$ killall dockerd
-```
+2.  Verify that Docker is installed correctly by running the `hello-world`
+    image.
 
-After the Docker daemon stops, move the old binaries out of the way and follow
-the [regular installation steps](binaries.md#get-the-linux-binaries).
+
+    ```none
+    docker run hello-world:nanoserver
+    ```
+
+    This command downloads a test image and runs it in a container. When the
+    container runs, it prints an informational message and exits.
+
+## Upgrade static binaries
+
+To upgrade your manual installation of Docker Engine on Linux, first stop any
+`dockerd` processes running locally, then follow the
+[regular installation steps](#get-the-linux-binaries), overwriting any existing
+`dockerd` or `docker` binaries with the newer versions.
 
 ## Next steps
 

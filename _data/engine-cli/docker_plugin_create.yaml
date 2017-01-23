@@ -1,0 +1,10 @@
+command: docker plugin create
+short: Create a plugin from a rootfs and config
+long: Create a plugin from a rootfs and config
+usage: docker plugin create [OPTIONS] PLUGIN[:tag] PATH-TO-ROOTFS(rootfs + config.json)
+pname: docker plugin
+plink: docker_plugin.yaml
+options:
+- option: compress
+  default_value: "false"
+  description: Compress the context using gzip

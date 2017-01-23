@@ -107,7 +107,7 @@ While it is possible to scale a swarm down to a single manager node, it is
 impossible to demote the last manager node. This ensures you maintain access to
 the swarm and that the swarm can still process requests. Scaling down to a
 single manager is an unsafe operation and is not recommended. If
-the last node leaves the swarm unexpectedly during the demote operation, the
+the last node leaves the swarm unexpetedly during the demote operation, the
 swarm will become unavailable until you reboot the node or restart with
 `--force-new-cluster`.
 
@@ -176,17 +176,21 @@ for more information.
 From the command line, run `docker node inspect <id-node>` to query the nodes.
 For instance, to query the reachability of the node as a manager:
 
-```bash{% raw %}
+```bash
+{% raw %}
 docker node inspect manager1 --format "{{ .ManagerStatus.Reachability }}"
 reachable
-{% endraw %}```
+{% endraw %}
+```
 
 To query the status of the node as a worker that accept tasks:
 
-```bash{% raw %}
+```bash
+{% raw %}
 docker node inspect manager1 --format "{{ .Status.State }}"
 ready
-{% endraw %}```
+{% endraw %}
+```
 
 From those commands, we can see that `manager1` is both at the status
 `reachable` as a manager and `ready` as a worker.

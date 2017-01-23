@@ -185,8 +185,8 @@ image_name | The Docker image name and tag used for the service containers
 name | A user provided name for the service. This name will be inherited by the service containers and will be used in endpoint URLs, environment variable names, etc.
 public_dns | An external FQDN that resolves to all IPs of the nodes where the service containers are running on (as an `A` record with multiple IP entries which will be used by clients in a [round-robin fashion](http://en.wikipedia.org/wiki/Round-robin_DNS)). If the service is not publishing any ports, this FQDN will fail to resolve.
 state | The state of the service (see table `Service states` below)
-net | Network mode to set on the containers (see table `Network Modes` below, more information ../../docker-cloud/apps/service-links/)
-pid | Set the PID (Process) Namespace mode for the containers (more information ../../reference/run/#pid-settings-pid)
+net | Network mode to set on the containers (see table `Network Modes` below, more information /docker-cloud/apps/service-links/)
+pid | Set the PID (Process) Namespace mode for the containers ([more information](/engine/reference/run/#pid-settings-pid))
 synchronized | Flag indicating if the current service definition is synchronized with the current containers.
 deployed_datetime | The date and time of the last deployment of the service (if applicable, `null` otherwise)
 started_datetime | The date and time of the last `start` operation on the service (if applicable, `null` otherwise)
@@ -218,23 +218,23 @@ extra_hosts | List of hostname mappings for containers of this service
 secuirty_opt | Labeling scheme for containers of this service
 entrypoint | Entrypoint to be set on the containers launched as part of the service, which will override the image entrypoint
 run_command | Run command to be set on the containers launched as part of the service, which will override the image run command
-sequential_deployment | Whether the containers for this service should be deployed in sequence, linking each of them to the previous containers (see [Service scaling](../../docker-cloud/apps/service-scaling/) for more information)
-cpu_shares | The relative CPU priority of the containers of the service (see [Runtime Constraints on CPU and Memory](../../engine/reference/run/#runtime-constraints-on-cpu-and-memory) for more information)
+sequential_deployment | Whether the containers for this service should be deployed in sequence, linking each of them to the previous containers (see [Service scaling](/docker-cloud/apps/service-scaling/) for more information)
+cpu_shares | The relative CPU priority of the containers of the service (see [Runtime Constraints on CPU and Memory](/engine/reference/run/#runtime-constraints-on-cpu-and-memory) for more information)
 cpuset | CPUs in which to allow execution
-memory | The memory limit of the containers of the service in MB (see [Runtime Constraints on CPU and Memory](../../engine/reference/run/#runtime-constraints-on-cpu-and-memory) for more information)
+memory | The memory limit of the containers of the service in MB (see [Runtime Constraints on CPU and Memory](/engine/reference/run/#runtime-constraints-on-cpu-and-memory) for more information)
 memory_swap | Total memory limit (memory + swap) of the containers of the service in MB
 linked_from_service | A list of services that are linked to this one (see table `Related services attributes` below)
 linked_to_service | A list of services that the service is linked to (see table `Related services attributes` below)
 bindings | A list of volume bindings that the service has mounted (see table `Service binding attributes` below)
-autorestart | Whether to restart the containers of the service automatically if they stop (see [Crash recovery](../../docker-cloud/apps/autorestart/) for more information)
-autodestroy | Whether to terminate the containers of the service automatically if they stop (see [Autodestroy](../../docker-cloud/apps/auto-destroy/) for more information)
-roles | List of Docker Cloud roles assigned to this service (see [Service links](../../docker-cloud/apps/service-links/) for more information)
+autorestart | Whether to restart the containers of the service automatically if they stop (see [Crash recovery](/docker-cloud/apps/autorestart/) for more information)
+autodestroy | Whether to terminate the containers of the service automatically if they stop (see [Autodestroy](/docker-cloud/apps/auto-destroy/) for more information)
+roles | List of Docker Cloud roles assigned to this service (see [Service links](/docker-cloud/apps/service-links/) for more information)
 link_variables | List of environment variables that would be exposed in the containers if they are linked to this service
-privileged | Whether to start the containers with Docker's `privileged` flag set or not, which allows containers to access all devices on the host among other things (see [Runtime privilege](../../engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration) for more information)
+privileged | Whether to start the containers with Docker's `privileged` flag set or not, which allows containers to access all devices on the host among other things (see [Runtime privilege](/engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration) for more information)
 read_only | Whether the filesystem of every service container is read-only or not (`false` by default)
-deployment_strategy | Container distribution among nodes (see table `Deployment strategies` below and [Deployment strategies](../../docker-cloud/infrastructure/deployment-strategies/) for more information)
-tags | List of tags to be used to deploy the service (see [Tags](../../docker-cloud/apps/deploy-tags/) for more information)
-autoredeploy | Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (see [Docker Cloud's private registry](../../docker-cloud/apps/auto-redeploy/) for more information)
+deployment_strategy | Container distribution among nodes (see table `Deployment strategies` below and [Deployment strategies](/docker-cloud/infrastructure/deployment-strategies/) for more information)
+tags | List of tags to be used to deploy the service (see [Tags](/docker-cloud/apps/deploy-tags/) for more information)
+autoredeploy | Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (see [Docker Cloud's private registry](/docker-cloud/apps/auto-redeploy/) for more information)
 nickname | A user-friendly name for the service (`name` by default)
 
 
@@ -417,14 +417,14 @@ container_ports | (optional) An array of objects with port information to be pub
 container_envvars | (optional) An array of objects with environment variables to be added in the service containers on launch (overriding any image-defined environment variables), i.e. `[{"key": "DB_PASSWORD", "value": "mypass"}]` (default: `[]`) (See table `Service Environment Variable attributes` below)
 linked_to_service | (optional) An array of service resource URIs to link this service to, including the link name, i.e. `[{"to_service": "/api/app/v1/service/80ff1635-2d56-478d-a97f-9b59c720e513/", "name": "db"}]` (default: `[]`) (See table `Related services attributes` below)
 bindings | (optional) An array of bindings this service has to mount, i.e. `[{"volumes_from": "/api/app/v1/service/80ff1635-2d56-478d-a97f-9b59c720e513/", "rewritable": true}]` (default: `[]`) (See table `Related bindings attributes` below)
-autorestart | (optional) Whether the containers for this service should be restarted if they stop, i.e. `ALWAYS` (default: `OFF`, possible values: `OFF`, `ON_FAILURE`, `ALWAYS`) (see [Crash recovery](../../docker-cloud/apps/autorestart/) for more information)
-autodestroy | (optional) Whether the containers should be terminated if they stop, i.e. `OFF` (default: `OFF`, possible values: `OFF`, `ON_SUCCESS`, `ALWAYS`) (see [Autodestroy](../../docker-cloud/apps/auto-destroy/) for more information)
-sequential_deployment | (optional) Whether the containers should be launched and scaled in sequence, i.e. `true` (default: `false`) (see [Service scaling](../../docker-cloud/apps/service-scaling/) for more information)
-roles | (optional) A list of Docker Cloud API roles to grant the service, i.e. `["global"]` (default: `[]`, possible values: `global`) (see [Service links](../../docker-cloud/apps/service-links/) for more information)
-privileged | (optional) Whether to start the containers with Docker's `privileged` flag set or not, i.e. `false` (default: `false`) (see [Runtime privilege](../../engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration) for more information)
-deployment_strategy | (optional) Container distribution among nodes (default: `EMPTIEST_NODE`, see table `Deployment strategies` above and [Deployment strategies](../../docker-cloud/infrastructure/deployment-strategies/) for more information)
-tags | (optional) A list of tags to be used to deploy the service (see [Tags](../../docker-cloud/apps/deploy-tags/) for more information) (default: `[]`)
-autoredeploy | (optional) Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (default: `false`) (see [Docker Cloud's private registry](../../docker-cloud/apps/auto-redeploy/) for more information)
+autorestart | (optional) Whether the containers for this service should be restarted if they stop, i.e. `ALWAYS` (default: `OFF`, possible values: `OFF`, `ON_FAILURE`, `ALWAYS`) (see [Crash recovery](/docker-cloud/apps/autorestart/) for more information)
+autodestroy | (optional) Whether the containers should be terminated if they stop, i.e. `OFF` (default: `OFF`, possible values: `OFF`, `ON_SUCCESS`, `ALWAYS`) (see [Autodestroy](/docker-cloud/apps/auto-destroy/) for more information)
+sequential_deployment | (optional) Whether the containers should be launched and scaled in sequence, i.e. `true` (default: `false`) (see [Service scaling](/docker-cloud/apps/service-scaling/) for more information)
+roles | (optional) A list of Docker Cloud API roles to grant the service, i.e. `["global"]` (default: `[]`, possible values: `global`) (see [Service links](/docker-cloud/apps/service-links/) for more information)
+privileged | (optional) Whether to start the containers with Docker's `privileged` flag set or not, i.e. `false` (default: `false`) (see [Runtime privilege](/engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration) for more information)
+deployment_strategy | (optional) Container distribution among nodes (default: `EMPTIEST_NODE`, see table `Deployment strategies` above and [Deployment strategies](/docker-cloud/infrastructure/deployment-strategies/) for more information)
+tags | (optional) A list of tags to be used to deploy the service (see [Tags](/docker-cloud/apps/deploy-tags/) for more information) (default: `[]`)
+autoredeploy | (optional) Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (default: `false`) (see [Docker Cloud's private registry](/docker-cloud/apps/auto-redeploy/) for more information)
 net | (optional) Set the network mode to the containers (default: `bridge`, possible values: `bridge`, `host`)
 pid | (optional) Set the PID (Process) Namespace mode for the containers (default: `none` value, possible values: `none`, `host`)
 working_dir | (optional) Working directory for running binaries within a container of this service (default: `/`)
@@ -661,23 +661,23 @@ uuid | The UUID of the service to update
 
 Parameter | Description
 --------- | -----------
-autorestart | (optional) Whether the containers for this service should be restarted if they stop, i.e. `ALWAYS` (possible values: `OFF`, `ON_FAILURE`, `ALWAYS`) (see [Crash recovery](../../docker-cloud/apps/autorestart/) for more information)
-autodestroy | (optional) Whether the containers should be terminated if they stop, i.e. `OFF` (possible values: `OFF`, `ON_SUCCESS`, `ALWAYS`) (see [Autodestroy](../../docker-cloud/apps/auto-destroy/) for more information)
+autorestart | (optional) Whether the containers for this service should be restarted if they stop, i.e. `ALWAYS` (possible values: `OFF`, `ON_FAILURE`, `ALWAYS`) (see [Crash recovery](/docker-cloud/apps/autorestart/) for more information)
+autodestroy | (optional) Whether the containers should be terminated if they stop, i.e. `OFF` (possible values: `OFF`, `ON_SUCCESS`, `ALWAYS`) (see [Autodestroy](/docker-cloud/apps/auto-destroy/) for more information)
 container_envvars | (optional) An array of objects with environment variables to be added in the service containers on launch (overriding any image-defined environment variables), i.e. `[{"key": "DB_PASSWORD", "value": "mypass"}]` (See table `Service Environment Variable attributes`)
 container_ports | (optional) An array of objects with port information to be published in the containers for this service, which will be added to the image port information, i.e. `[{"protocol": "tcp", "inner_port": 80, "outer_port": 80}]` (See table `Service Port attributes`)
-cpu_shares | (optional) The relative CPU priority of the containers the service describes (see [Runtime Constraints on CPU and Memory](../../engine/reference/run/#runtime-constraints-on-cpu-and-memory) for more information)
+cpu_shares | (optional) The relative CPU priority of the containers the service describes (see [Runtime Constraints on CPU and Memory](/engine/reference/run/#runtime-constraints-on-cpu-and-memory) for more information)
 entrypoint | (optional) The command prefix used to start the containers of this service, overriding the value specified in the image, i.e. `/usr/sbin/sshd`
 image | (optional) The image used to deploy this service in docker format, i.e. `tutum/hello-world`, `tutum/ubuntu:5.6`. If no tag is indicated, it will be set to `latest` by default
 linked_to_service | (optional) An array of service resource URIs to link this service to, including the link name, i.e. `[{"to_service": "/api/app/v1/service/80ff1635-2d56-478d-a97f-9b59c720e513/", "name": "db"}]` (See table `Related services attributes` below)
-memory | (optional) The memory limit of the containers of the service in MB (see [Runtime Constraints on CPU and Memory](../../engine/reference/run/#runtime-constraints-on-cpu-and-memory) for more information)
-privileged | (optional) Whether to start the containers with Docker's `privileged` flag set or not, i.e. `false` (see [Runtime privilege](../../engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration) for more information)
-roles | (optional) A list of Docker Cloud API roles to grant the service, i.e. `["global"]` (possible values: `global`) (see [Service links](../../docker-cloud/apps/service-links/) for more information)
+memory | (optional) The memory limit of the containers of the service in MB (see [Runtime Constraints on CPU and Memory](/engine/reference/run/#runtime-constraints-on-cpu-and-memory) for more information)
+privileged | (optional) Whether to start the containers with Docker's `privileged` flag set or not, i.e. `false` (see [Runtime privilege](/engine/reference/run/#runtime-privilege-linux-capabilities-and-lxc-configuration) for more information)
+roles | (optional) A list of Docker Cloud API roles to grant the service, i.e. `["global"]` (possible values: `global`) (see [Service links](/docker-cloud/apps/service-links/) for more information)
 run_command | (optional) The command used to start the containers of this service, overriding the value specified in the image, i.e. `/run.sh`
-sequential_deployment | (optional) Whether the containers should be launched and scaled in sequence, i.e. `true` (see [Service scaling](../../docker-cloud/apps/service-scaling/) for more information)
+sequential_deployment | (optional) Whether the containers should be launched and scaled in sequence, i.e. `true` (see [Service scaling](/docker-cloud/apps/service-scaling/) for more information)
 tags | (optional) List of new tags the service will have. This operation replaces the tag list
 target_num_containers | (optional) The number of containers to scale this service to
-deployment_strategy | (optional) Container distribution among nodes. A service cannot be updated to or from a deployment strategy of `EVERY_NODE`. (See table `Deployment strategies` above and [Deployment strategies](../../docker-cloud/infrastructure/deployment-strategies/) for more information)
-autoredeploy | Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (see [Docker Cloud's private registry](../../docker-cloud/apps/auto-redeploy/) for more information)
+deployment_strategy | (optional) Container distribution among nodes. A service cannot be updated to or from a deployment strategy of `EVERY_NODE`. (See table `Deployment strategies` above and [Deployment strategies](/docker-cloud/infrastructure/deployment-strategies/) for more information)
+autoredeploy | Whether to redeploy the containers of the service when its image is updated in Docker Cloud registry (see [Docker Cloud's private registry](/docker-cloud/apps/auto-redeploy/) for more information)
 net | (optional) Set the network mode to the containers (default: `bridge`, possible values: `bridge`, `host`)
 pid | (optional) Set the PID (Process) Namespace mode for the containers (default: `none` value, possible values: `none`, `host`)
 working_dir | (optional) Working directory for running binaries within a container of this service (default: `/`)

@@ -13,6 +13,17 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](install/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.1.4
+
+(17 Jan 2017)
+
+**Bug fixes**
+
+* Fixed garbage collection UI slowdown when changing settings
+* Fixed storage settings UI missing "Save" button when changing storage backends
+* Fixed bug which was showing image tags as "outdated" for Notary signed images
+* Removed `--log-tls-*` options which were not working correctly
+
 ## DTR 2.1.3
 
 (20 Dec 2016)

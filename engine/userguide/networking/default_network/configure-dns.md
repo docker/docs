@@ -105,6 +105,10 @@ Four different options affect container domain name services.
     See documentation for <code>resolv.conf</code> for a list of valid options
     </p></td>
   </tr>
+  <tr>
+    <td><p></p></td>
+    <td><p></p></td>
+  </tr>
 </table>
 
 

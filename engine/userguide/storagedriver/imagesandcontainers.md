@@ -215,7 +215,7 @@ hash. The combination of these four layers makes up the `ubuntu:15.04` Docker
 image.
 
 Each of these layers is stored in its own directory inside the Docker host's
-local storage are.
+local storage area.
 
 Versions of Docker prior to 1.10 stored each layer in a directory with the same
  name as the image layer ID. However, this is not the case for images pulled

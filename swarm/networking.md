@@ -12,7 +12,7 @@ container networks that span multiple Docker hosts.
 
 Before using Swarm with a custom network, read through the conceptual
 information in [Docker container
-networking](/engine/userguide/networking/dockernetworks/).
+networking](/engine/userguide/networking/).
 You should also have walked through the [Get started with multi-host
 networking](/engine/userguide/networking/get-started-overlay/)
 example.
@@ -98,6 +98,9 @@ NETWORK ID          NAME                   DRIVER
 42131321acab        node-1/swarm_network   overlay
 5262bbfe5616        node-1/bridge2         bridge
 ```
+
+`--opt encrypted` is a feature only available in Docker Swarm mode. It's not supported in Swarm standalone.
+Network encryption requires key management, which is outside the scope of Swarm.
 
 ## Remove a network
 

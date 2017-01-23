@@ -60,7 +60,7 @@ target_num_nodes | The desired number of nodes for the node cluster
 current_num_nodes | The actual number of nodes in the node cluster. This may differ from `target_num_nodes` if the node cluster is being deployed or scaled
 deployed_datetime | The date and time when this node cluster was deployed
 destroyed_datetime | The date and time when this node cluster was terminated (if applicable)
-tags | List of tags to identify the node cluster nodes when deploying services (see [Tags](../../docker-cloud/apps/deploy-tags/) for more information)
+tags | List of tags to identify the node cluster nodes when deploying services (see [Tags](/docker-cloud/apps/deploy-tags/) for more information)
 provider_options | Provider-specific extra options for the deployment of the node (see `Provider options` table below for more information)
 nickname | A user-friendly name for the node cluster (`name` by default)
 
@@ -200,7 +200,7 @@ region | (required) The resource URI of the region where the node cluster is to 
 disk | (optional) The size of the volume to create where images and containers will be stored, in GB (default: `60`). Not available for Digital Ocean. To create Softlayer nodes you must select one of the following sizes (in GBs): 10, 20, 25, 30, 40, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 500, 750, 1000, 1500 or 2000
 nickname | (optional) A user-friendly name for the node cluster (`name` by default)
 target_num_nodes | (optional) The desired number of nodes for the node cluster (default: `1`)
-tags | (optional) List of tags of the node cluster to be used when deploying services see [Tags](../../docker-cloud/apps/deploy-tags/) for more information) (default: `[]`)
+tags | (optional) List of tags of the node cluster to be used when deploying services see [Tags](/docker-cloud/apps/deploy-tags/) for more information) (default: `[]`)
 provider_options | Provider-specific extra options for the deployment of the node (see table `Provider options` above for more information)
 
 

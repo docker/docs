@@ -1,0 +1,15 @@
+command: docker deploy
+short: Deploy a new stack or update an existing stack
+long: Deploy a new stack or update an existing stack
+usage: docker deploy [OPTIONS] STACK
+pname: docker
+plink: docker.yaml
+options:
+- option: bundle-file
+  description: Path to a Distributed Application Bundle file
+- option: compose-file
+  shorthand: c
+  description: Path to a Compose file
+- option: with-registry-auth
+  default_value: "false"
+  description: Send registry authentication details to Swarm agents

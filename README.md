@@ -1,7 +1,7 @@
 # Docs @ Docker
 
 Welcome to the repo for our documentation. This is the source for the URL
-served at https://docs.docker.com/.
+served at [https://docs.docker.com/](https://docs.docker.com/).
 
 Feel free to send us pull requests and file issues. Our docs are completely
 open source and we deeply appreciate contributions from our community!
@@ -9,7 +9,7 @@ open source and we deeply appreciate contributions from our community!
 ## Providing feedback
 
 We really want your feedback, and we've made it easy. You can edit, rate, or
-file an issue at the bottom of every page on docs.docker.com.
+file an issue at the bottom of every page on [https://docs.docker.com/](https://docs.docker.com/).
 
 **Please only file issues about the documentation in this repository.** One way
 to think about this is that you should file a bug here if your issue is that you
@@ -17,7 +17,7 @@ don't see something that should be in the docs, or you see something incorrect
 or confusing in the docs.
 
 - If your problem is a general question about how to configure or use Docker,
-  consider asking a question on https://forums.docker.com instead.
+  consider asking a question on [https://forums.docker.com](https://forums.docker.com) instead.
 
 - If you have an idea for a new feature or behavior change in a specific aspect
   of Docker, or have found a bug in part of Docker, please file that issue in
@@ -69,7 +69,7 @@ your work on that project's `vnext` branch.** These branches were created by
 cloning `master` and then importing a project's `master` branch's docs into it
 (at the time of the migration), in a way that preserved the commit history. When
 a project has a release, its `vnext` branch will be merged into `master` and your
-work will be visible on docs.docker.com.
+work will be visible on [https://docs.docker.com/](https://docs.docker.com/).
 
 The following `vnext` branches currently exist:
 
@@ -109,7 +109,7 @@ of the site is built using Netlify. If the site builds, you will see
 Click **Details** to review the staged site or the errors that prevented it from
 building. Review the staged site and amend your commit if necessary. Reviewers
 will also check the staged site before merging the PR, to protect the integrity
-of [docs.docker.com](http://docs.docker.com/).
+of [https://docs.docker.com/](https://docs.docker.com/).
 
 ## Staging locally
 
@@ -145,7 +145,7 @@ You have three options:
        ```
  
     b. Install Ruby 2.3 or later as described in [Installing Ruby]
-       (https://www.ruby-lang.org/en/documentation/installation/).
+    (https://www.ruby-lang.org/en/documentation/installation/).
     
     c. Install Bundler:
 
@@ -180,7 +180,7 @@ You have three options:
 3.  Use Github Pages, with or without a local clone. Fork this repo in GitHub,
     change your fork's repository name to `YOUR_GITHUB_USERNAME.github.io`, and
     make changes to the Markdown files in your `master` branch. Browse to
-    https://<YOUR_GITHUB_USERNAME>.github.io/ to preview the changes.
+    https://\<YOUR_GITHUB_USERNAME\>.github.io/ to preview the changes.
 
 ## Important files
 
@@ -193,7 +193,7 @@ You have three options:
 
 Feel free to link to `../foo.md` so that the docs are readable in GitHub, but keep in mind that Jekyll templating notation
 `{% such as this %}` will render in raw text and not be processed. In general it's best to assume the docs are being read
-directly on docs.docker.com.
+directly on [https://docs.docker.com/](https://docs.docker.com/).
 
 ## Style guide
 

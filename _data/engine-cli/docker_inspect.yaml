@@ -1,0 +1,16 @@
+command: docker inspect
+short: Return low-level information on Docker objects
+long: Return low-level information on Docker objects
+usage: docker inspect [OPTIONS] NAME|ID [NAME|ID...]
+pname: docker
+plink: docker.yaml
+options:
+- option: format
+  shorthand: f
+  description: Format the output using the given Go template
+- option: size
+  shorthand: s
+  default_value: "false"
+  description: Display total file sizes if the type is container
+- option: type
+  description: Return JSON for specified type

@@ -13,6 +13,7 @@ list of elements they support in their templates:
 - [Docker Log Tag formatting](logging/log_tags.md)
 - [Docker Network Inspect formatting](../reference/commandline/network_inspect.md)
 - [Docker PS formatting](../reference/commandline/ps.md#formatting)
+- [Docker Stats formatting](../reference/commandline/stats.md#formatting)
 - [Docker Volume Inspect formatting](../reference/commandline/volume_inspect.md)
 - [Docker Version formatting](../reference/commandline/version.md#examples)
 
@@ -21,50 +22,50 @@ list of elements they support in their templates:
 Docker provides a set of basic functions to manipulate template elements.
 This is the complete list of the available functions with examples:
 
-### Join
+### `join`
 
-Join concatenates a list of strings to create a single string.
+`join` concatenates a list of strings to create a single string.
 It puts a separator between each element in the list.
 
 	{% raw %}
 	$ docker ps --format '{{join .Names " or "}}'
 	{% endraw %}
 
-### Json
+### `json`
 
-Json encodes an element as a json string.
+`json` encodes an element as a json string.
 
 	{% raw %}
 	$ docker inspect --format '{{json .Mounts}}' container
 	{% endraw %}
 
-### Lower
+### `lower`
 
-Lower turns a string into its lower case representation.
+`lower` transforms a string into its lowercase representation.
 
 	{% raw %}
 	$ docker inspect --format "{{lower .Name}}" container
 	{% endraw %}
 
-### Split
+### `split`
 
-Split slices a string into a list of strings separated by a separator.
+`split` slices a string into a list of strings separated by a separator.
 
 	{% raw %}
 	$ docker inspect --format '{{split (join .Names "/") "/"}}' container
-	{% endraw %}
+  {% endraw %}
 
-### Title
+### `title`
 
-Title capitalizes a string.
+`title` capitalizes the first character of a string.
 
 	{% raw %}
 	$ docker inspect --format "{{title .Name}}" container
 	{% endraw %}
 
-### Upper
+### `upper`
 
-Upper turns a string into its upper case representation.
+`upper` transforms a string into its uppercase representation.
 
 	{% raw %}
 	$ docker inspect --format "{{upper .Name}}" container

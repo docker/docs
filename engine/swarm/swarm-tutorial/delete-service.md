@@ -11,7 +11,7 @@ you can delete the service from the swarm.
 run your manager node. For example, the tutorial uses a machine named
 `manager1`.
 
-2.  Run `docker service rm helloworld` to remove the `helloworld` service.
+2. Run `docker service rm helloworld` to remove the `helloworld` service.
 
     ```
     $ docker service rm helloworld
@@ -19,7 +19,7 @@ run your manager node. For example, the tutorial uses a machine named
     helloworld
     ```
 
-3.  Run `docker service inspect <SERVICE-ID>` to verify that the swarm manager
+3. Run `docker service inspect <SERVICE-ID>` to verify that the swarm manager
 removed the service. The CLI returns a message that the service is not found:
 
     ```
@@ -45,6 +45,7 @@ removed the service. The CLI returns a message that the service is not found:
        CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               
 
     ```
+
 ## What's next?
 
 In the next step of the tutorial, you set up a new service and apply a

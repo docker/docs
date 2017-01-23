@@ -21,7 +21,7 @@ Macvlan offers a number of unique features and plenty of room for further innova
  - To check your current kernel version, use `uname -r` to display your kernel version
  - Macvlan Linux kernel v3.9–3.19 and 4.0+
 
-## MacVlan Bridge Mode Example Usage
+## Macvlan Bridge Mode Example Usage
 
 Macvlan Bridge mode has a unique MAC address per container used to track MAC to port mappings by the Docker host.
 
@@ -35,7 +35,7 @@ Macvlan Bridge mode has a unique MAC address per container used to track MAC to 
 
 - The same `docker network` commands apply to the vlan drivers.
 
-- In Macvlan mode, containers on separate networks cannot reach one another without an external process routing between the two networks/subnets. This also applies to multiple subnets within the same `docker network
+- In Macvlan mode, containers on separate networks cannot reach one another without an external process routing between the two networks/subnets. This also applies to multiple subnets within the same docker network.
 
 In the following example, `eth0` on the docker host has an IP on the `172.16.86.0/24` network and a default gateway of `172.16.86.1`. The gateway is an external router with an address of `172.16.86.1`. An IP address is not required on the Docker host interface `eth0` in `bridge` mode, it merely needs to be on the proper upstream network to get forwarded by a network switch or network router.
 

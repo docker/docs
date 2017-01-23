@@ -92,8 +92,6 @@ defaults:
     scope:
       path: "datacenter/dtr/2.1"
     values:
-      product_version: "2.1"
-      latest_version: "2.1"
       ucp_version: "2.0"
       dtr_version: "2.1"
   -
@@ -101,16 +99,12 @@ defaults:
       path: "datacenter/dtr/2.0"
     values:
       hide_from_sitemap: true
-      product_version: "2.0"
-      latest_version: "2.1"
       ucp_version: "1.1"
       dtr_version: "2.0"
   -
     scope:
       path: "datacenter/ucp/2.0"
     values:
-      product_version: "2.0"
-      latest_version: "2.0"
       ucp_version: "2.0"
       dtr_version: "2.1"
   -
@@ -118,8 +112,6 @@ defaults:
       path: "datacenter/ucp/1.1"
     values:
       hide_from_sitemap: true
-      product_version: "1.1"
-      latest_version: "2.0"
       ucp_version: "1.1"
       dtr_version: "2.0"
   -

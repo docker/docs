@@ -7,6 +7,7 @@ title: Docker Toolbox
 
 Available for both Windows and Mac, Docker Toolbox installs the Docker Client, Machine, Compose, and Kitematic.
 
-**Learn about Docker Toolbox**. See [Docker Toolbox Overview](overview.md) for a quick tour of how to install Toolbox, and get started with Docker Machine, Kitematic, and Docker Compose.
+**Learn about Docker Toolbox**. See [Docker Toolbox Overview](overview.md) for a quick tour of Toolbox, and
+how to get started with Docker Machine, Kitematic, and Docker Compose.
 
-**Ready to download Toolbox?**  <a href="https://www.docker.com/products/docker-toolbox">Download Docker Toolbox</a> from products.
+**Ready to download Toolbox?**  See [Install Docker Toolbox on macOS](toolbox_install_mac.md) or [Install Docker Toolbox on Windows](toolbox_install_windows.md) for download and install instructions.

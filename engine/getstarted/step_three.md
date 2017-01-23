@@ -5,6 +5,7 @@ redirect_from:
 - /mac/step_three/
 - /windows/step_three/
 - /linux/step_three/
+- /engine/tutorials/usingdocker/
 title: Find and run the whalesay image
 ---
 
@@ -14,7 +15,7 @@ image you'll use in the rest of this getting started.
 
 ## Step 1: Locate the whalesay image
 
-1. Open your browser and [browse to the Docker Hub](https://hub.docker.com/?utm_source=getting_started_guide&utm_medium=embedded_MacOSX&utm_campaign=find_whalesay).
+1. Open your browser and  <a href="https://hub.docker.com/?utm_source=getting_started_guide&utm_medium=embedded_MacOSX&utm_campaign=find_whalesay" target=_blank> browse to the Docker Hub</a>.
 
     ![Browse Docker Hub](tutimg/browse_and_search.png)
 

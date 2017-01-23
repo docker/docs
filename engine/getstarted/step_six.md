@@ -5,6 +5,8 @@ redirect_from:
 - /mac/step_six/
 - /windows/step_six/
 - /linux/step_six/
+- /engine/tutorials/dockerrepos/
+- /userguide/dockerrepos/
 title: Tag, push, and pull your image
 ---
 
@@ -99,7 +101,7 @@ If you don't already have a terminal open, open one now:
 
 In this last section, you'll pull the image you just pushed to hub. Before you
 do that though, you'll need to remove the original image from your local
-machine. If you left the original image on your machine. Docker would not pull
+machine. If you left the original image on your machine, Docker would not pull
 from the hub &mdash; why would it? The two images are identical.
 
 1. Make sure Docker is running, and open a command line terminal.

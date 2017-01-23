@@ -12,6 +12,11 @@ Docker Engine release notes. It includes issues, fixes, and new features.
 
 Refer to the [detailed list](https://github.com/docker/docker/releases) of all changes since the release of CS Engine 1.10.3-cs3
 
+## CS Engine 1.10.3-cs4
+(12 Jan 2017)
+
+Bumps RunC version to address CVE-2016-9962.
+
 ## CS Engine 1.10.3-cs3
 (25 April 2016)
 

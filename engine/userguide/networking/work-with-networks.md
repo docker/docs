@@ -50,12 +50,13 @@ $ docker network inspect simple-network
             "Config": [
                 {
                     "Subnet": "172.22.0.0/16",
-                    "Gateway": "172.22.0.1/16"
+                    "Gateway": "172.22.0.1"
                 }
             ]
         },
         "Containers": {},
-        "Options": {}
+        "Options": {},
+        "Labels": {}
     }
 ]
 ```
@@ -145,14 +146,15 @@ $ docker network inspect my-network
             "Config": [
                 {
                     "Subnet": "172.23.0.0/16",
-                    "Gateway": "172.23.0.1/16"
+                    "Gateway": "172.23.0.1"
                 }
             ]
         },
         "Containers": {},
         "Options": {
             "com.docker.network.bridge.host_binding_ipv4": "172.23.0.1"
-        }
+        },
+        "Labels": {}
     }
 ]
 
@@ -191,7 +193,7 @@ needed.
     $ docker run -itd --name=container2 busybox
 
     498eaaaf328e1018042c04b2de04036fc04719a6e39a097a4f4866043a2c2152
-```
+    ```
 
 2.  Create an isolated, `bridge` network to test with.
 
@@ -202,7 +204,7 @@ needed.
     ```
 
 3.  Connect `container2` to the network and then `inspect` the network to verify
-the connection:
+    the connection:
 
     ```bash
     $ docker network connect isolated_nw container2
@@ -293,7 +295,7 @@ the connection:
 
 6. Inspect the network resources used by `container2`. If you have Python
    installed, you can pretty print the output.
-   
+
    ```bash
    $ docker inspect --format='{{json .NetworkSettings.Networks}}'  container2 | python -m json.tool
 
@@ -487,8 +489,8 @@ The following example briefly describes how to use `--link`.
     ```
 
     This is a little tricky, because `container5` does not exist yet. When
-   `container5` is created, `container4` will be able to resolve the name `c5` to
-   `container5`'s IP address.
+    `container5` is created, `container4` will be able to resolve the name `c5` to
+    `container5`'s IP address.
 
     >**Note:** Any link between containers created with *legacy link* is static in
     nature and hard-binds the container with the alias. It does not tolerate
@@ -637,7 +639,7 @@ The following example illustrates these points.
     4 packets transmitted, 4 packets received, 0% packet loss
     round-trip min/avg/max = 0.070/0.081/0.097 ms
     ```
-    
+
     Both pings succeed, but the subnets are different, which means that the
     networks are different.
 
@@ -763,7 +765,7 @@ The following example illustrates this limitation.
     4 packets transmitted, 4 packets received, 0% packet loss
     round-trip min/avg/max = 0.070/0.081/0.097 ms
     ```
-    
+
     Detach from `container4` and leave it running using `CTRL-p CTRL-q`.
 
     ```bash
@@ -1052,7 +1054,7 @@ remove a network. If a network has connected endpoints, an error occurs.
         }
     ]
     ```
-    
+
 3.  Remove the `isolated_nw` network.
     ```bash
     $ docker network rm isolated_nw

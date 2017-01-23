@@ -2,10 +2,48 @@
 description: Home page for Docker's documentation
 keywords: Docker, documentation, manual, guide, reference, api
 layout: docs
-title: Welcome to the Docs
+title: Docker Documentation
 ---
 
-{% include content/docker_elevator_pitch.md %}
+Docker packages your app with its dependencies, freeing you from worrying about your
+system configuration, and making your app more portable.
+
+<table>
+<tr valign="top">
+<td width="50%">
+{% capture basics %}
+## Learn the basics of Docker
+
+The basic tutorial introduces Docker concepts, tools, and commands. The examples show you how to build, push,
+and pull Docker images, and run them as containers. This
+tutorial stops short of teaching you how to deploy applications.
+{% endcapture %}{{ basics | markdownify }}
+</td>
+<td width="50%">
+
+{% capture apps %}
+## Define and deploy applications
+
+The define-and-deploy tutorial shows how to relate
+containers to each other and define them as services in an application that is ready to deploy at scale in a
+production environment. Highlights [Compose Version 3 new features](/engine/getstarted-voting-app/index.md#compose-version-3-features-and-compatibility) and swarm mode.
+{% endcapture %}{{ apps | markdownify }}
+
+</td></tr>
+
+<tr valign="top">
+<td width="50%">
+{% capture basics %}
+[Start the basic tutorial](/engine/getstarted/){: class="button darkblue-btn"}
+{% endcapture %}{{ basics | markdownify }}
+</td>
+<td width="50%">
+{% capture apps %}
+[Start the application tutorial](/engine/getstarted-voting-app/){: class="button darkblue-btn"}
+{% endcapture %}{{ apps | markdownify }}
+</td>
+</tr>
+</table>
 
 {% include content/typical_docker_workflow.md %}
 
@@ -66,11 +104,11 @@ title: Welcome to the Docs
 <ul class="items widthcol2 media">
 <li>
 <div class="media_image">
-	<a href="/docker-hub/overview/"><img src="/images/icon-hub@2X.png" alt="Docker Hub"></a>
+	<a href="/docker-hub/index.md"><img src="/images/icon-hub@2X.png" alt="Docker Hub"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/docker-hub/overview/">Docker Hub</a></h3>
+	<h3><a href="/docker-hub/index.md">Docker Hub</a></h3>
 		<p>
     A hosted registry service for managing and building images.</p>
 	</div>
@@ -78,11 +116,11 @@ title: Welcome to the Docs
 </li>
 <li>
 <div class="media_image">
-	<a href="/docker-cloud/overview/"><img src="/images/icon-cloud@2X.png" alt="Docker Cloud"></a>
+	<a href="/docker-cloud/index.md"><img src="/images/icon-cloud@2X.png" alt="Docker Cloud"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/docker-cloud/overview/">Docker Cloud</a></h3>
+	<h3><a href="/docker-cloud/index.md">Docker Cloud</a></h3>
 		<p>
     A hosted service for building, testing, and deploying Docker images to your hosts.</p>
 	</div>
@@ -90,11 +128,11 @@ title: Welcome to the Docs
 </li>
 <li>
 <div class="media_image">
-	<a href="/docker-trusted-registry/"><img src="/images/icon-registry@2X.png" alt="Docker Trusted Registry"></a>
+	<a href="/datacenter/dtr/2.1/guides/index.md"><img src="/images/icon-registry@2X.png" alt="Docker Trusted Registry"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/docker-trusted-registry/">Docker Trusted Registry</a></h3>
+	<h3><a href="/datacenter/dtr/2.1/guides/index.md">Docker Trusted Registry</a></h3>
 		<p>
     (DTR) stores and signs your images.</p>
 	</div>
@@ -102,11 +140,11 @@ title: Welcome to the Docs
 </li>
 <li>
 <div class="media_image">
-	<a href="/ucp/overview/"><img src="/images/icon-ucp@2X.png" alt="Docker Universal Control Plane"></a>
+	<a href="/datacenter/ucp/2.0/guides/index.md"><img src="/images/icon-ucp@2X.png" alt="Docker Universal Control Plane"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/ucp/overview/">Docker Universal Control Plane</a></h3>
+	<h3><a href="/datacenter/ucp/2.0/guides/index.md">Docker Universal Control Plane</a></h3>
 		<p>
     (UCP) Manage a cluster of on-premises Docker hosts as if they were a single machine.
     </p>

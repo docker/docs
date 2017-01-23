@@ -25,10 +25,10 @@ If you are brand new to Docker, see [About Docker Engine](../../index.md).
 
 To run this tutorial, you need the following:
 
-* [three networked host machines](index.md#three-networked-host-machines)
-* [Docker Engine 1.12 or later installed](index.md#docker-engine-1-12-or-newer)
-* [the IP address of the manager machine](index.md#the-ip-address-of-the-manager-machine)
-* [open ports between the hosts](index.md#open-ports-between-the-hosts)
+* [three networked host machines](#three-networked-host-machines)
+* [Docker Engine 1.12 or later installed](#docker-engine-1-12-or-newer)
+* [the IP address of the manager machine](#the-ip-address-of-the-manager-machine)
+* [open ports between the hosts](#open-ports-between-the-hosts)
 
 ### Three networked host machines
 
@@ -51,9 +51,9 @@ Install Docker Engine and verify that the Docker Engine daemon is running on
 each of the machines. You can get the latest version of Docker Engine as
 follows:
 
-* [install Docker Engine on Linux machines](index.md#install-docker-engine-on-linux-machines)
+* [install Docker Engine on Linux machines](#install-docker-engine-on-linux-machines)
 
-* [use Docker for Mac or Docker for Windows](index.md#use-docker-for-mac-or-docker-for-windows)
+* [use Docker for Mac or Docker for Windows](#use-docker-for-mac-or-docker-for-windows)
 
 #### Install Docker Engine on Linux machines
 
@@ -114,7 +114,7 @@ The following ports must be available. On some systems, these ports are open by 
 * **TCP** and **UDP port 4789** for overlay network traffic
 
 If you are planning on creating an overlay network with encryption (`--opt encrypted`),
-you will also need to ensure protocol 50 (ESP) is open.
+you will also need to ensure port 50 (ESP) is open.
 
 ## What's next?
 

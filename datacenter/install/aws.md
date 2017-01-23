@@ -216,7 +216,7 @@ UCP. Then click on **Update**.
 7.  Final step is to reconfigure DTR to use new UCP DNS and certificates.
 You need to run a `reconfigure` operation from the CLI. This step can be done
 from any Docker engine ( local or on the cloud) as long as you have
-UCP [client bundle](../datacenter/ucp/2.0/guides/access-ucp/cli-based-access.md).
+UCP [client bundle](../ucp/2.0/guides/access-ucp/cli-based-access.md).
 Once you download the bundle and load it, run the following command:
 
     ```
@@ -322,7 +322,7 @@ provides multiple advantages to easily deploy and access your application.
 #### Non-Swarm Mode Container Based Applications
 
 If you are deploying non-swarm mode container-based applications, you can
-follow [UCP docs](../datacenter/ucp/2.0/guides/applications/index.md) to
+follow [UCP docs](../ucp/2.0/guides/applications/index.md) to
 deploy your applications. Once you deploy your application on UCP, you can
 access them by using the specific worker node's public IP address and exposed
 port.

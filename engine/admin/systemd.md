@@ -36,9 +36,7 @@ The recommended way is to use a systemd drop-in file (as described in the <a
 target="_blank"
 href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html">systemd.unit</a>
 documentation). These are local files named `<something>.conf` in the
-`/etc/systemd/system/docker.service.d` directory. This could also be
-`/etc/systemd/system/docker.service`, which also works for overriding the
-defaults from `/lib/systemd/system/docker.service`.
+`/etc/systemd/system/docker.service.d` directory.
 
 However, if you had previously used a package which had an `EnvironmentFile`
 (often pointing to `/etc/sysconfig/docker`) then for backwards compatibility,
@@ -129,7 +127,7 @@ directory:
 ```conf
 [Service]
 ExecStart=
-ExecStart=/usr/bin/dockerd --graph="/mnt/docker-data" --storage-driver=overlay
+ExecStart=/usr/bin/dockerd --graph=/mnt/docker-data --storage-driver=overlay
 ```
 
 You can also set other environment variables in this file, for example, the
@@ -160,7 +158,7 @@ you will need to add this configuration in the Docker systemd service file.
 1.  Create a systemd drop-in directory for the docker service:
 
     ```bash
-    $ mkdir /etc/systemd/system/docker.service.d
+    $ mkdir -p /etc/systemd/system/docker.service.d
     ```
 
 2.  Create a file called `/etc/systemd/system/docker.service.d/http-proxy.conf`

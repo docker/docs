@@ -25,7 +25,7 @@ example, the tutorial uses a machine named `manager1`.
     * The arguments `alpine ping docker.com` define the service as an Alpine
     Linux container that executes the command `ping docker.com`.
 
-3.  Run `docker service ls` to see the list of running services:
+3. Run `docker service ls` to see the list of running services:
 
     ```
     $ docker service ls

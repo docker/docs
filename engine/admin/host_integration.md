@@ -78,7 +78,8 @@ in the `/etc/systemd/system` directory, e.g.
 If you need to pass options to the redis container (such as `--env`),
 then you'll need to use `docker run` rather than `docker start`. This will
 create a new container every time the service is started, which will be stopped
-and removed when the service is stopped.
+and removed when the service is stopped. Make sure you don't use "`-d`" for
+"detached mode". The command run from "`ExecStart`" needs to run in the foreground.
 
     [Service]
     ...

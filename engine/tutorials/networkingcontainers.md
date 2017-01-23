@@ -44,8 +44,10 @@ $ docker network inspect bridge
         "Id": "f7ab26d71dbd6f557852c7156ae0574bbf62c42f539b50c8ebde0f728a253b6f",
         "Scope": "local",
         "Driver": "bridge",
+        "EnableIPv6": false,
         "IPAM": {
             "Driver": "default",
+            "Options": null,
             "Config": [
                 {
                     "Subnet": "172.17.0.1/16",
@@ -53,8 +55,10 @@ $ docker network inspect bridge
                 }
             ]
         },
+        "Internal": false,
         "Containers": {
             "3386a527aa08b37ea9232cbcace2d2458d49f44bb05a6b775fba7ddd40d8f92c": {
+                "Name": "networktest",
                 "EndpointID": "647c12443e91faf0fd508b6edfe59c30b642abb60dfab890b4bdccee38750bc1",
                 "MacAddress": "02:42:ac:11:00:02",
                 "IPv4Address": "172.17.0.2/16",
@@ -74,7 +78,8 @@ $ docker network inspect bridge
             "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
             "com.docker.network.bridge.name": "docker0",
             "com.docker.network.driver.mtu": "9001"
-        }
+        },
+        "Labels": {}
     }
 ]
 ```
@@ -116,12 +121,13 @@ If you inspect the network, you'll find that it has nothing in it.
                 "Config": [
                     {
                         "Subnet": "172.18.0.0/16",
-                        "Gateway": "172.18.0.1/16"
+                        "Gateway": "172.18.0.1"
                     }
                 ]
             },
             "Containers": {},
-            "Options": {}
+            "Options": {},
+            "Labels": {}
         }
     ]
 

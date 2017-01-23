@@ -1,0 +1,27 @@
+[docker-main]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/main/fedora/$releasever/
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+
+[docker-testing]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/testing/fedora/$releasever/
+enabled=0
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+
+[docker-beta]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/beta/fedora/$releasever/
+enabled=0
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+
+[docker-nightly]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/nightly/fedora/$releasever/
+enabled=0
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg

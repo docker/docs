@@ -13,16 +13,16 @@
 {% endif %}
 {% endfor %}
 {% endif %}
-<!-- edit overrides -->
-{% for override in site.data.not_edited_here.overrides %}
-{% if page.url contains override.path %}
-{% assign overridden="true" %}
-{% capture editsource %}{{ override.source }}{{ page.path }}{% endcapture %}
-{% break %}
-{% endif %}
+<!-- Logic for 'edit this button' -->
+{% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %}
+{% for entry in site.data.not_edited_here.overrides %}
+	{% if page.url contains entry.path %}
+    {% if entry.source %}{% assign edit_url = entry.source %}{% else %}{% assign edit_url = "" %}{% endif %}
+		{% break %}
+	{% endif %}
 {% endfor %}
-{% if overridden != "true" %}{% capture editsource %}https://github.com/docker/docker.github.io/edit/master/{{ page.path }}{% endcapture %}{% endif %}
-<!-- Start of {{ page.path }} -->
+
+<!-- End of logic for 'edit this button' -->
 <!DOCTYPE html>
 <html class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms no-csstransforms3d csstransitions fontface no-generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths retina-display is_not_retina chrome version webkit" lang="en">
 <head>
@@ -92,7 +92,6 @@ ng\:form {
 <link id="mktoForms2ThemeStyle" rel="stylesheet" type="text/css" href="/css/forms2-theme-simple.css">
 {% seo %}
 {% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
-{% if page.product_version and page.latest_version %}<link rel="canonical" href="https://docs.docker.com{{ page.url | replace_first: page.product_version, page.latest_version }}" />{% endif %}
 </head>
 <body class="html front not-logged-in no-sidebars page-node page-node- page-node-1 node-type-front-page path-docker ng-scope short retina-display all_loaded" ng-app="Docker" ng-controller="DockerController" style="">
 <div class="off-canvas-wrap" data-offcanvas="" style="min-height: 548px;">
@@ -110,7 +109,7 @@ ng\:form {
       <div class="top-right-bg"></div>
       <div class="container">
         <div class="row">
-          <div class="col-xs-2"> <a href="/"><img class="logo" src="/images/logo-docker-main.png"></a> </div>
+          <div class="col-xs-2"> <a href="https://dockercon.smarteventscloud.com/portal/newreg.ww"><img class="logo" src="/images/dockercon-17.png"></a> </div>
           <div class="col-xs-10">
             <ul class="nav-global">
               <li class="first leaf menu-mlid-603"><a href="/" target="_blank">Docs</a></li>
@@ -212,7 +211,9 @@ ng\:form {
 							<div style="text-align: center; margin-top: 50px">
 								<img src="/images/chat.png" alt="chat icon" style="margin-right: 10px">
 								<b>Feedback?</b> Suggestions? Can't find something in the docs?<br/>
-							  <a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}" class="nomunge">Edit this page</a> <span style="color:#D8E0E0">&#9679;</span>
+                {% if edit_url != "" %}
+							    <a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}" class="nomunge">Edit this page</a> <span style="color:#D8E0E0">&#9679;</span>
+                {% endif %}
 								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge">Request docs changes</a> <span style="color:#D8E0E0">&#9679;</span>  <a href="https://www.docker.com/docker-support-services">Get support</a> <br />Rate this page:
 								<div id="pd_rating_holder_8453675"></div>
 								<script type="text/javascript">
@@ -263,7 +264,9 @@ ng\:form {
 								    <button type="submit" class="search-submit btn btn-default">Search</button>
 								  </form>
 						    </span>
-                <span><a href="{{ editsource }}" class="button darkblue-btn nomunge" style="color:#FFFFFF; width:100%; margin: 0px;">Edit This Page</a></span>
+                {% if edit_url != "" %}
+                  <span><a href="{{ edit_url }}" class="button darkblue-btn nomunge" style="color:#FFFFFF; width:100%; margin: 0px;">Edit This Page</a></span>
+                {% endif %}
                 <nav id="TableOfContents">
 								</nav>
                 </section>

@@ -72,7 +72,7 @@ Drives** and share the drive that contains the Dockerfile and volume.
 ### Verify domain user has permissions for shared drives (volumes)
 
 >**Tip:** Shared drives are only required for volume mounting [Linux
-containers](index.md#switch-between-windows-and-linux-containers-beta-feature),
+containers](index.md#switch-between-windows-and-linux-containers),
 not Windows containers.
 
 Permissions to access shared drives are tied to the username and password you
@@ -92,7 +92,7 @@ local user is `samstevens` and the domain user is `merlin`.
 
 2. Run `net share c` to view user permissions for `<host>\<username>, FULL`.
 
-		PS C:\WINDOWS\system32> net share c
+		PS C:\Users\jdoe> net share c
 		Share name        C
 		Path              C:\
 		Remark
@@ -109,7 +109,7 @@ local user is `samstevens` and the domain user is `merlin`.
 
 5. Re-run `net share c`.
 
-		PS C:\WINDOWS\system32> net share c
+		PS C:\Users\jdoe> net share c
 		Share name        C
 		Path              C:\
 		Remark
@@ -186,8 +186,8 @@ To fix existing containers, follow these steps.
 
 1.  Run this command.
 
-    ```bash
-    $ docker run --rm -v /var/lib/docker:/docker cpuguy83/docker112rc3-runtimefix:rc3
+    ```powershell
+    PS C:\Users\jdoe> docker run --rm -v /var/lib/docker:/docker cpuguy83/docker112rc3-runtimefix:rc3
 
     Unable to find image 'cpuguy83/docker112rc3-runtimefix:rc3' locally
     rc3: Pulling from cpuguy83/docker112rc3-runtimefix
@@ -215,8 +215,8 @@ To fix existing containers, follow these steps.
 
 4.  Try to start the container again:
 
-    ```bash
-    $ docker start old-container
+    ```powershell
+    PS C:\Users\jdoe> docker start old-container
     old-container
     ```
 
@@ -274,7 +274,7 @@ Some users have reported problems connecting to Docker Hub on the Docker for Win
 
 Here is an example command and error message:
 
-	PS C:\WINDOWS\system32> docker run hello-world
+	PS C:\Users\jdoe> docker run hello-world
 	Unable to find image 'hello-world:latest' locally
 	Pulling repository docker.io/library/hello-world
 	C:\Program Files\Docker\Docker\Resources\bin\docker.exe: Error while pulling image: Get https://index.docker.io/v1/repositories/library/hello-world/images: dial tcp: lookup index.docker.io on 10.0.75.1:53: no such host.
@@ -313,7 +313,7 @@ You might have stale NAT configurations on the system. You should remove them wi
 
 You might have stale Network Adapters on the system. You should remove them with the following commands on an elevated Powershell prompt:
 
-    $vmNetAdapter = Get-VMNetworkAdapter -ManagementOS -SwitchName DockerNAT
+    PS C:\Users\jdoe> vmNetAdapter = Get-VMNetworkAdapter -ManagementOS -SwitchName DockerNAT
     Get-NetAdapter "vEthernet (DockerNAT)" | ? { $_.DeviceID -ne $vmNetAdapter.DeviceID } | Disable-NetAdapter -Confirm:$False -PassThru | Rename-NetAdapter -NewName "Broken Docker Adapter"
 
 Then you can remove them manually via the `devmgmt.msc` (aka Device Manager).

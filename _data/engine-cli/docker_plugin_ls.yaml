@@ -1,0 +1,10 @@
+command: docker plugin ls
+short: List plugins
+long: List plugins
+usage: docker plugin ls [OPTIONS]
+pname: docker plugin
+plink: docker_plugin.yaml
+options:
+- option: no-trunc
+  default_value: "false"
+  description: Don't truncate output

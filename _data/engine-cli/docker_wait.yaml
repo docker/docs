@@ -1,0 +1,6 @@
+command: docker wait
+short: Block until one or more containers stop, then print their exit codes
+long: Block until one or more containers stop, then print their exit codes
+usage: docker wait CONTAINER [CONTAINER...]
+pname: docker
+plink: docker.yaml

@@ -3,6 +3,8 @@ redirect_from:
 - /mac/step_four/
 - /windows/step_four/
 - /linux/step_four/
+- /engine/tutorials/dockerimages/
+- /userguide/dockerimages/
 description: Getting started with Docker
 keywords: beginner, getting started, Docker
 title: Build your own image
@@ -79,7 +81,7 @@ creating an image which runs on Linux.
 
     The `whalesay` image is based on Ubuntu, which uses `apt-get` to install
     packages. These two commands refresh the list of packages available to the
-    image and install the `fortunes` program into it. The `fortunes` program has
+    image and install the `fortunes` program into it. The `fortunes` program
     prints out wise sayings for our whale to say.
 
 6.  Add a `CMD` statement, which tells the image the final command to run after
@@ -104,7 +106,7 @@ creating an image which runs on Linux.
 ## Step 2: Build an image from your Dockerfile
 
 While you are in the `mydockerbuild` directory, build the image using the
-`docker build` image. The `-t` parameter gives your image a tag, so you can
+`docker build` command. The `-t` parameter gives your image a tag, so you can
 run it more easily later. Don't forget the `.` command, which tells the
 `docker build` command to look in the current directory for a file called
 `Dockerfile`. This command works the same in Linux, macOS, or Windows.
@@ -232,7 +234,7 @@ each message means.
     Removing intermediate container 05d4eda04526
     ```
 
-    When the `RUN` command finishes, a new layer is created and the imtermediate
+    When the `RUN` command finishes, a new layer is created and the intermediate
     container is removed.
 
 4.  A new intermediate container is created, and Docker adds a layer for the
