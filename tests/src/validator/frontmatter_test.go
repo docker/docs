@@ -10,8 +10,8 @@ import (
 
 // TestFrontmatterTitle tests if there's a title present in all
 // published markdown frontmatters.
-func TestFrontMatterTitle(t *testing.T) {
-	filepath.Walk("/docs", func(path string, info os.FileInfo, err error) error {
+func TestFrontmatterTitle(t *testing.T) {
+	filepath.Walk(docsSource, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			t.Error(err.Error(), "-", path)
 		}
@@ -46,7 +46,7 @@ func testFrontMatterTitle(mdBytes []byte) error {
 // TestFrontMatterKeywords tests if keywords are present and correctly
 // formatted in all published markdown frontmatters.
 func TestFrontMatterKeywords(t *testing.T) {
-	filepath.Walk("/docs", func(path string, info os.FileInfo, err error) error {
+	filepath.Walk(docsSource, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			t.Error(err.Error(), "-", path)
 		}

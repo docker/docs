@@ -17,12 +17,11 @@ import (
 
 var countLinks = 0
 var countImages = 0
-var htmlContentRootPath = "/usr/src/app/allvbuild"
 
 // testTocDotYaml tests if there are no broken links in
 // _data/toc.yaml
 func testTocDotYaml() error {
-	tocBytes, err := ioutil.ReadFile("/docs/_data/toc.yaml")
+	tocBytes, err := ioutil.ReadFile(filepath.Join(docsSource, "_data/toc.yaml"))
 	if err != nil {
 		return err
 	}
@@ -60,9 +59,11 @@ func TestURLs(t *testing.T) {
 		return
 	}
 
-	filepath.Walk(htmlContentRootPath, func(path string, info os.FileInfo, err error) error {
+	csv := ""
 
-		relPath := strings.TrimPrefix(path, htmlContentRootPath)
+	filepath.Walk(docsHtmlWithoutRedirects, func(path string, info os.FileInfo, err error) error {
+
+		relPath := strings.TrimPrefix(path, docsHtmlWithoutRedirects)
 
 		isArchive, err := regexp.MatchString(`^/v[0-9]+\.[0-9]+/.*`, relPath)
 		if err != nil {
@@ -88,27 +89,55 @@ func TestURLs(t *testing.T) {
 
 		count++
 
-		err = testURLs(htmlBytes, relPath)
-		if err != nil {
-			t.Error(relPath + "\n" + err.Error())
+		err, redirects := testURLs(htmlBytes, relPath)
+
+		// build csv
+		if err != nil || redirects != "" {
+			csv += "\n" + relPath
 		}
+
+		if err != nil {
+			t.Error(relPath + " (broken links)\n" + err.Error())
+			csv += ",-- broken --"
+			links := strings.Split(err.Error(), ",")
+			for _, link := range links {
+				csv += "\n," + link
+			}
+		}
+		if redirects != "" {
+			if err != nil {
+				csv += "\n,-- redirects --"
+			} else {
+				csv += ",-- redirects --"
+			}
+			links := strings.Split(redirects, ",")
+			for _, link := range links {
+				csv += "\n," + link
+			}
+			// t.Log(relPath + " (redirects)\n" + redirects)
+		}
+
 		return nil
 	})
 
 	fmt.Println("found", count, "html files (excluding archives)")
 	fmt.Println("found", countLinks, "links (excluding archives)")
 	fmt.Println("found", countImages, "images (excluding archives)")
+	if csv != "" {
+		fmt.Println("CSV:\n", csv)
+	}
 }
 
 // testURLs tests if we're not using absolute paths for URLs
 // when pointing to local pages.
-func testURLs(htmlBytes []byte, htmlPath string) error {
+func testURLs(htmlBytes []byte, htmlPath string) (err error, redirects string) {
 
 	reader := bytes.NewReader(htmlBytes)
 
 	z := html.NewTokenizer(reader)
 
 	urlErrors := make([]string, 0)
+	urlRedirects := make([]string, 0)
 
 	// if there's a <base> tag, we should use it to check
 	// if resources pointed by relative links do exist
@@ -179,21 +208,31 @@ func testURLs(htmlBytes []byte, htmlPath string) error {
 						origin = baseTagValue
 					}
 
-					err := checkLinkToLocalResourceValid(cleanPath(u.Path), htmlContentRootPath, origin)
+					err := checkLinkToLocalResourceValid(cleanPath(u.Path), docsHtmlWithoutRedirects, origin)
 					if err != nil {
-						urlErrors = append(urlErrors, urlStr)
-						break
+						// maybe it's a redirect
+						err := checkLinkToLocalResourceValid(cleanPath(u.Path), docsHtmlWithRedirects, origin)
+						if err != nil {
+							urlErrors = append(urlErrors, urlStr)
+						} else {
+							urlRedirects = append(urlRedirects, urlStr)
+						}
 					}
+					break // exit switch
 				}
 			}
 		}
 	}
 
-	// fmt.Println("urlErrors:", urlErrors)
-	if len(urlErrors) > 0 {
-		return errors.New(strings.Join(urlErrors, ","))
+	redirects = ""
+	if len(urlRedirects) > 0 {
+		redirects = strings.Join(urlRedirects, ",")
 	}
-	return nil
+
+	if len(urlErrors) > 0 {
+		return errors.New(strings.Join(urlErrors, ",")), redirects
+	}
+	return nil, redirects
 }
 
 // cleanPath takes a path in parameter and returns path
@@ -403,7 +442,7 @@ func tocLinkChecker(items []interface{}) error {
 				urlErrors = append(urlErrors, path)
 			}
 
-			err = checkLinkToLocalResourceValid(cleanPath(path), htmlContentRootPath, "/all/links/should/be/absolute")
+			err = checkLinkToLocalResourceValid(cleanPath(path), docsHtmlWithoutRedirects, "/all/links/should/be/absolute")
 
 			if err != nil {
 				urlErrors = append(urlErrors, path)
