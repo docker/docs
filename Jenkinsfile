@@ -42,5 +42,5 @@ wrappedNode(label: 'linux && x86_64') {
   */
 
   sh "docker rm -fv docs-with-redirects-${tag} docs-without-redirects-${tag}"
-  sh "docker rmi docs:${tag} tests:${tag}"
+  sh "docker rmi docs-with-redirects:${tag} docs-without-redirects:${tag} tests:${tag}"
 }
