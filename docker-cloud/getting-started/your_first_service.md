@@ -116,6 +116,15 @@ Click the links icon to the right of the endpoint. This opens a new tab and show
 
 **Congratulations!** You've successfully deployed your first service using Docker Cloud.
 
+## Optional cleanup
+
+You probably don't need the `hello-world` container to run for very long after you complete the tutorial. To clean up and remove all of the resources you created during this tutorial:
+
+- Click **Services**, hover over the `hello-world` container and click the selection that box appears, then click the **Terminate** icon to the right of the service information.
+- Click **Node Clusters**, select the node cluster you created, and click the **Terminate** icon at the right end of the cluster information.
+
+Both terminated Services and Node Clusters remain in the UI for about five minutes. After that time, they no longer appear.
+
 ### What's next?
 
 Learn more about [scaling your service](../apps/service-scaling.md), or check out some of our other [Deploy an app tutorial](deploy-app/index.md).
