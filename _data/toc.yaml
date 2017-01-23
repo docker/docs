@@ -150,7 +150,7 @@ toc:
     - path: /engine/getstarted-voting-app/test-drive/
       title: Try out the voting app
     - path: /engine/getstarted-voting-app/customize-app/
-      title: Customize the app and redploy
+      title: Customize the app and redeploy
   - sectiontitle: Learn by example
     section:
     - path: /engine/tutorials/networkingcontainers/
