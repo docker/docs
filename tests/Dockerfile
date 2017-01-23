@@ -5,4 +5,4 @@ COPY src /go/src
 WORKDIR /go/src/validator
 
 # when running the container, MOUNT docs repo in /docs
-CMD ["go", "test", "-v", "-run", "FrontMatter"]
+CMD ["go", "test", "-v"]
