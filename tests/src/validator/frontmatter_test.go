@@ -10,7 +10,7 @@ import (
 
 // TestFrontmatterTitle tests if there's a title present in all
 // published markdown frontmatters.
-func TestFrontmatterTitle(t *testing.T) {
+func TestFrontMatterTitle(t *testing.T) {
 	filepath.Walk("/docs", func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			t.Error(err.Error(), "-", path)
@@ -22,7 +22,7 @@ func TestFrontmatterTitle(t *testing.T) {
 		if published == false {
 			return nil
 		}
-		err = testFrontmatterTitle(mdBytes)
+		err = testFrontMatterTitle(mdBytes)
 		if err != nil {
 			t.Error(err.Error(), "-", path)
 		}
@@ -32,7 +32,7 @@ func TestFrontmatterTitle(t *testing.T) {
 
 // testFrontmatterTitle tests if there's a title present in
 // given markdown file bytes
-func testFrontmatterTitle(mdBytes []byte) error {
+func testFrontMatterTitle(mdBytes []byte) error {
 	fm, _, err := frontparser.ParseFrontmatterAndContent(mdBytes)
 	if err != nil {
 		return err
