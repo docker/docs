@@ -142,7 +142,7 @@ Registry credentials are managed by **docker-login(1)**.
 
 Docker uses the `https://` protocol to communicate with a registry, unless the
 registry is allowed to be accessed over an insecure connection. Refer to the
-[insecure registries](https://docs.docker.com/engine/reference/commandline/daemon/#insecure-registries)
+[insecure registries](/engine/reference/commandline/dockerd.md#insecure-registries)
 section in the online documentation for more information.
 
 

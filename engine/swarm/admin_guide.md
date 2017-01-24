@@ -24,13 +24,13 @@ This article covers the following swarm administration tasks:
 * [Recovering from disaster](#recover-from-disaster)
 * [Forcing the swarm to rebalance](#forcing-the-swarm-to-rebalance)
 
-Refer to [How nodes work](how-swarm-mode-works/nodes.md)
+Refer to [How nodes work](/engine/swarm/how-swarm-mode-works/nodes.md)
 for a brief overview of Docker Swarm mode and the difference between manager and
 worker nodes.
 
 ## Operating manager nodes in a swarm
 
-Swarm manager nodes use the [Raft Consensus Algorithm](raft.md) to manage the
+Swarm manager nodes use the [Raft Consensus Algorithm](/engine/swarm/raft.md) to manage the
 swarm state. You only need to understand some general concepts of Raft in
 order to manage a swarm.
 
@@ -67,7 +67,7 @@ troubleshooting steps if you do lose the quorum of managers.
 
 When initiating a swarm, you have to specify the `--advertise-addr` flag to
 advertise your address to other manager nodes in the swarm. For more
-information, see [Run Docker Engine in swarm mode](swarm-mode.md#configure-the-advertise-address). Because manager nodes are
+information, see [Run Docker Engine in swarm mode](/engine/swarm/swarm-mode.md#configure-the-advertise-address). Because manager nodes are
 meant to be a stable component of the infrastructure, you should use a *fixed
 IP address* for the advertise address to prevent the swarm from becoming
 unstable on machine reboot.
@@ -112,7 +112,7 @@ swarm will become unavailable until you reboot the node or restart with
 `--force-new-cluster`.
 
 You manage swarm membership with the `docker swarm` and `docker node`
-subsystems. Refer to [Add nodes to a swarm](join-nodes.md) for more information
+subsystems. Refer to [Add nodes to a swarm](/engine/swarm/join-nodes.md) for more information
 on how to add worker nodes and promote a worker node to be a manager.
 
 ## Distribute manager nodes
@@ -170,7 +170,8 @@ directory of one of the manager nodes to restore to a new swarm.
 ## Monitor swarm health
 
 You can monitor the health of manager nodes by querying the docker `nodes` API
-in JSON format through the `/nodes` HTTP endpoint. Refer to the [nodes API documentation](../reference/api/docker_remote_api_v1.24.md#36-nodes)
+in JSON format through the `/nodes` HTTP endpoint. Refer to the
+[nodes API documentation](/engine/reference/api/docker_remote_api_v1.24.md#36-nodes)
 for more information.
 
 From the command line, run `docker node inspect <id-node>` to query the nodes.
@@ -229,7 +230,7 @@ To cleanly re-join a manager node to a cluster:
 3. Re-join the node to the swarm with a fresh state using `docker swarm join`.
 
 For more information on joining a manager node to a swarm, refer to
-[Join nodes to a swarm](join-nodes.md).
+[Join nodes to a swarm](/engine/swarm/join-nodes.md).
 
 ## Force remove a node
 
@@ -315,7 +316,7 @@ In Docker 1.13 and higher, you can use the `--force` or `-f` flag with the
 `docker service update` command to force the service to redistribute its tasks
 across the available worker nodes. This will cause the service tasks to restart.
 Client applications may be disrupted. If you have configured it, your service
-will use a [rolling update](swarm-tutorial.md#rolling-update).
+will use a [rolling update](/engine/swarm/swarm-tutorial.md#rolling-update).
 
 If you use an earlier version and you want to achieve an even balance of load
 across workers and don't mind disrupting running tasks, you can force your swarm
@@ -331,5 +332,5 @@ down to the original scale. You can use `docker service ps` to assess the curren
 balance of your service across nodes.
 
 See also
-[`docker service scale`](../reference/commandline/service_scale.md) and
-[`docker service ps`](../reference/commandline/service_ps.md).
+[`docker service scale`](/engine/reference/commandline/service_scale.md) and
+[`docker service ps`](/engine/reference/commandline/service_ps.md).

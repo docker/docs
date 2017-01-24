@@ -40,7 +40,8 @@ $ docker network create \
 By default nodes in the swarm encrypt traffic between themselves and other
 nodes. The optional `--opt encrypted` flag enables an additional layer of
 encryption in the overlay driver for vxlan traffic between containers on
-different nodes. For more information, refer to [Docker swarm mode overlay network security model](../userguide/networking/overlay-security-model.md).
+different nodes. For more information, refer to
+[Docker swarm mode overlay network security model](/engine/userguide/networking/overlay-security-model.md).
 
 The `--subnet` flag specifies the subnet for use with the overlay network. When
 you don't specify a subnet, the swarm manager automatically chooses a subnet and
@@ -296,5 +297,5 @@ is not the right tool to confirm VIP connectivity.
 
 * [Deploy services to a swarm](services.md)
 * [Swarm administration guide](admin_guide.md)
-* [Docker Engine command line reference](../reference/commandline/index.md)
+* [Docker Engine command line reference](/engine/reference/commandline/docker.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)
