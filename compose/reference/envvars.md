@@ -83,7 +83,7 @@ Supported values are: `TLSv1`, `TLSv1_1`, `TLSv1_2`.
 
 Enable path conversion from Windows-style to Unix-style in volume definitions.
 Users of Docker Machine and Docker Toolbox on Windows should always set this. Defaults to `0`
-Supported values: `0`, `1`
+Supported values: `true` or `1` to enable, `false` or `0` to disable.
 
 
 ## Related Information
