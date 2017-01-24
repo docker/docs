@@ -7,6 +7,8 @@ redirect_from:
 - /linux/step_six/
 - /engine/tutorials/dockerrepos/
 - /userguide/dockerrepos/
+- /engine/userguide/dockerimages/
+- /engine/userguide/containers/dockerimages/
 title: Tag, push, and pull your image
 ---
 
