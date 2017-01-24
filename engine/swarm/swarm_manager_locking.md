@@ -1,7 +1,6 @@
 ---
 description: Automatically lock Swarm managers to protect encryption keys
-keywords:
-- swarm, manager, lock, unlock, autolock, encryption
+keywords: swarm, manager, lock, unlock, autolock, encryption
 title: Lock your swarm to protect its encryption key
 ---
 
