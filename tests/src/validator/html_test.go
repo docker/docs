@@ -208,10 +208,10 @@ func testURLs(htmlBytes []byte, htmlPath string) (err error, redirects string) {
 						origin = baseTagValue
 					}
 
-					err := checkLinkToLocalResourceValid(cleanPath(u.Path), docsHtmlWithoutRedirects, origin)
+					err := checkLinkToLocalResource(cleanPath(u.Path), docsHtmlWithoutRedirects, origin)
 					if err != nil {
 						// maybe it's a redirect
-						err := checkLinkToLocalResourceValid(cleanPath(u.Path), docsHtmlWithRedirects, origin)
+						err := checkLinkToLocalResource(cleanPath(u.Path), docsHtmlWithRedirects, origin)
 						if err != nil {
 							urlErrors = append(urlErrors, urlStr)
 						} else {
@@ -309,7 +309,7 @@ func getSrc(t html.Token) (ok bool, src string) {
 // if path is absolute, origin is not used:
 // isLinkToLocalResourceValid("/baz", "/www", "foo/bar")
 // will look for "/www/baz"
-func checkLinkToLocalResourceValid(path string, rootFolder string, origin string) error {
+func checkLinkToLocalResource(path string, rootFolder string, origin string) error {
 
 	var absPath string
 	if filepath.IsAbs(path) {
@@ -320,7 +320,13 @@ func checkLinkToLocalResourceValid(path string, rootFolder string, origin string
 			origin = filepath.Dir(origin)
 		}
 
-		absPath = filepath.Join(rootFolder, origin, path)
+		// intermediary step to address this case:
+		// path: ../../../foo
+		// origin: /bar
+		// rootFolder: /www
+		// result should be: /www/foo, not /www/bar/../../../foo (/foo)
+		absPath = filepath.Clean(filepath.Join(origin, path))
+		absPath = filepath.Join(rootFolder, absPath)
 	}
 
 	if _, err := os.Stat(absPath); os.IsNotExist(err) {
@@ -442,7 +448,7 @@ func tocLinkChecker(items []interface{}) error {
 				urlErrors = append(urlErrors, path)
 			}
 
-			err = checkLinkToLocalResourceValid(cleanPath(path), docsHtmlWithoutRedirects, "/all/links/should/be/absolute")
+			err = checkLinkToLocalResource(cleanPath(path), docsHtmlWithoutRedirects, "/all/links/should/be/absolute")
 
 			if err != nil {
 				urlErrors = append(urlErrors, path)
