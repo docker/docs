@@ -25,7 +25,7 @@ makes the ownership of the Unix socket read/writable by the `docker` group.
 
 > **Warning**: The `docker` group grants privileges equivalent to the `root`
 > user. For details on how this impacts security in your system, see
-> [*Docker Daemon Attack Surface*](../../security/security.md#docker-daemon-attack-surface).
+> [*Docker Daemon Attack Surface*](/engine/security/security.md#docker-daemon-attack-surface).
 
 To create the `docker` group and add your user:
 
@@ -73,7 +73,7 @@ $ sudo systemctl disable docker
 
 If you need to add an HTTP Proxy, set a different directory or partition for the
 Docker runtime files, or make other customizations, see
-[customize your systemd Docker daemon options](../../admin/systemd.md).
+[customize your systemd Docker daemon options](/engine/admin/systemd.md).
 
 ### `upstart`
 
@@ -93,9 +93,9 @@ $ sudo chkconfig docker on
 ## Use a different storage engine
 
 For information about the different storage engines, see
-[Storage drivers](../userguide/storagedriver/index.md). The default storage
-engine and the list of supported storage engines depend on your host's
-Linux distribution and available kernel drivers.
+[Storage drivers](/engine/userguide/storagedriver/imagesandcontainers.md).
+The default storage engine and the list of supported storage engines depend on
+your host's Linux distribution and available kernel drivers.
 
 ## Troubleshooting
 
@@ -403,4 +403,4 @@ use the `btrfs` storage engine on Oracle Linux 7.
 
 ## Next steps
 
-- Continue with the [User Guide](../../userguide/index.md).
+- Continue with the [User Guide](/engine/userguide/index.md).

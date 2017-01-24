@@ -9,8 +9,8 @@ redirect_from:
 title: Docker Swarm API
 ---
 
-The Docker Swarm API is mostly compatible with the [Docker Remote
-API](/engine/reference/api/docker_remote_api/). This
+The Docker Swarm API is mostly compatible with the
+[Docker Remote API](/engine/api/index.md). This
 document is an overview of the differences between the Swarm API and the Docker
 Engine API.
 

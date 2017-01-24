@@ -14,8 +14,11 @@ To create a virtual machine, you supply Docker Machine with the name of the driv
 
 Since Docker runs on Linux, each VM that Docker Machine provisions relies on a
 base operating system. For convenience, there are default base operating
-systems. For the Oracle Virtual Box driver, this base operating system is <a href="https://github.com/boot2docker/boot2docker" target="_blank">boot2docker</a>. For drivers used to connect to cloud providers, the base operating system is Ubuntu 12.04+. You can change this default when you create a machine. The Docker Machine reference includes a complete [list of
-supported operating systems](drivers/os-base.md).
+systems. For the Oracle Virtual Box driver, this base operating system
+is [boot2docker](https://github.com/boot2docker/boot2docker). For drivers used
+to connect to cloud providers, the base operating system is Ubuntu 12.04+. You
+can change this default when you create a machine. The Docker Machine reference
+includes a complete [list of supported operating systems](drivers/os-base.md).
 
 ## IP addresses for Docker hosts
 
@@ -31,14 +34,16 @@ Before you can run a `docker` command on a machine, you need to configure your
 command-line to point to that machine. The `docker-machine env <machine-name>`
 subcommand outputs the configuration command you should use.
 
-For a complete list of `docker-machine` subcommands, see the [Docker Machine subcommand reference](reference/index.md).
+For a complete list of `docker-machine` subcommands, see the
+[Docker Machine subcommand reference](/machine/reference/help.md).
 
 ## Custom root Certificate Authority for Registry
 
-Users using their own Docker Registry will experience `x509: certificate signed by unknown authority` 
-error messages if their registry is signed by custom root Certificate Authority and it is 
-not registered with Docker Engine. As discussed in the [Docker Engine documentation](/engine/security/certificates/#/understanding-the-configuration)
-certificates should be placed at `/etc/docker/certs.d/hostname/ca.crt` 
+Users using their own Docker Registry will experience `x509: certificate signed by unknown authority`
+error messages if their registry is signed by custom root Certificate Authority and it is
+not registered with Docker Engine. As discussed in the
+[Docker Engine documentation](/engine/security/certificates.md#understanding-the-configuration)
+certificates should be placed at `/etc/docker/certs.d/hostname/ca.crt`
 where `hostname` is your Registry server's hostname.
 
 ```console
@@ -78,19 +83,19 @@ Docker Machine is still in its infancy and under active development. If you need
 help, would like to contribute, or simply want to talk about the project with
 like-minded individuals, we have a number of open channels for communication.
 
--   To report bugs or file feature requests: please use the [issue tracker on
-    Github](https://github.com/docker/machine/issues).
--   To talk about the project with people in real time: please join the
-    `#docker-machine` channel on IRC.
--   To contribute code or documentation changes: please [submit a pull request on
-    Github](https://github.com/docker/machine/pulls).
+- To report bugs or file feature requests: please use the
+  [issue tracker on Github](https://github.com/docker/machine/issues).
+- To talk about the project with people in real time: please join the
+  `#docker-machine` channel on IRC.
+- To contribute code or documentation changes: please
+  [submit a pull request on Github](https://github.com/docker/machine/pulls).
 
 For more information and resources, please visit
 [our help page](/opensource/get-help.md).
 
 ## Where to go next
 
--   Create and run a Docker host on your [local system using VirtualBox](get-started.md)
--   Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
--   <a href="../drivers/" target="_blank">Docker Machine driver reference</a>
--   <a href="../reference/" target="_blank">Docker Machine subcommand reference</a>
+- Create and run a Docker host on your [local system using VirtualBox](get-started.md)
+- Provision multiple Docker hosts [on your cloud provider](get-started-cloud.md)
+- [Docker Machine driver reference](/machine/drivers.md){: target="_blank" class="_"}
+- [Docker Machine subcommand reference](/machine/reference/help.md){: target="_blank" class="_"}
