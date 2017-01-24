@@ -192,7 +192,7 @@ volumes:
 
 ## Compose Version 3 features and compatibility
 
-To deploy the voting application, we will run the `docker-stack deploy` command
+To deploy the voting application, we will run the `docker stack deploy` command
 with this `docker-stack.yml` file to pull the referenced images and launch the
 services in a swarm as configured in the `.yml`.
 
