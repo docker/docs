@@ -21,6 +21,18 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
+## CS Engine 1.12.6-cs7
+(24 Jan 2017)
+
+This release addresses the following issues:
+
+* [#28406](https://github.com/docker/docker/issues/28406) Fix conflicts introduced
+by the updated `selinux-policy` base package from RHEL/CentOS 7.3
+* [#26639](https://github.com/docker/docker/issues/26639) Resolves hostnames passed
+to the local volume driver for nfs mount options.
+* [26111](https://github.com/docker/docker/issues/26111) Fix issue with adding
+iptables rules due to xtables lock message change.
+
 ## CS Engine 1.12.6-cs6
 (10 Jan 2017)
 
