@@ -61,6 +61,8 @@ follow the link for more information.
                 "ec2:AttachInternetGateway",
                 "ec2:AttachNetworkInterface",
                 "ec2:AttachVolume",
+                "ec2:AuthorizeSecurityGroupEgress",
+                "ec2:AuthorizeSecurityGroupIngress",
                 "ec2:CreateInternetGateway",
                 "ec2:CreateNatGateway",
                 "ec2:CreateNetworkAcl",
