@@ -193,3 +193,37 @@ information is available in the UI when inspecting the service.
 
 More logging from the HTTP routing mesh is available in the logs of the
 `ucp-controller` containers on your UCP controller nodes.
+
+## Migrating from experimental labels (upgrading from UCP 2.0)
+
+If you used the HTTP routing mesh in UCP 2.0, then your services using HRM will
+have an older style of labels. You will need to update these labels (using
+either the UCP UI or `docker service update`) to use HRM after
+upgrading from UCP 2.0.
+
+The labels have two changes:
+
+First, a route was previously in the format of `internal_port=external_route`
+or just `external_route`. Now the format is a comma separated list of
+`key=value` pairs.
+
+Second, if you have multiple routes to the same service, these were previously
+written as a comma separated list of the above. These are now separate labels,
+one per route, prefixed with `com.docker.ucp.mesh.http`.
+
+Examples of the experimental labels and using the `docker service update`
+command to update them are provided below (when updating a service called
+`mysvc`):
+
+* Example 1: one route with only one internal port:
+  * Experimental label: `http://example.com`
+  * New label:          `external_route=http://example.com`
+  * Update command:     `docker service update --label-add com.docker.ucp.mesh.http=http://example.com mysvc`
+* Example 2: one route with an explicit internal port:
+  * Experimental label: `8080=http://example.com`
+  * New label:          `external_route=http://example.com,internal_port=8080`
+  * Update command:     `docker service update --label-add com.docker.ucp.mesh.http=external_route=http://example.com,internal_port=8080 mysvc`
+* Example 3: two routes, each to a different internal port:
+  * Experimental label: `8080=http://foo.example.com,1234=http://bar.example.com`
+  * New label:          `external_route=http://foo.example.com,internal_port=8080` and `external_route=http://bar.example.com,internal_port=1234`
+  * Update command:     `docker service update --label-remove com.docker.ucp.mesh.http --label-add com.docker.ucp.mesh.http.foo=external_route=http://foo.example.com,internal_port=8080 --label-add com.docker.ucp.mesh.http.bar=external_route=http://bar.example.com,internal_port=1234 mysvc`
