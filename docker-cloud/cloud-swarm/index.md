@@ -144,7 +144,7 @@ To unregister a swarm from Docker Cloud:
 2. Click **Swarms** in the top navigation.
 3. Put your mouse cursor on the swarm you want to unregister.
 4. Click the trash can icon that appears.
-5. In the confirmation dialog that appears, click **Unregister**.
+5. In the confirmation dialog that appears, click **Remove**.
 
 Docker Cloud marks the swarm as `REMOVED` and removes the swarm from the list in the next few minutes.
 
