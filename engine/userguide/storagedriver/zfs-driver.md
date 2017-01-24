@@ -323,7 +323,7 @@ volumes.
 
 ## Limiting your container's writable storage quota
 
-If you want to use quota on a per-image/dataset basis, you can use
+If you want to implement a quota on a per-image/dataset basis, you can use
 the `--storage-opt` option.
 
     --storage-opt size=256M
