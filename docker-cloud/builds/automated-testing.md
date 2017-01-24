@@ -16,8 +16,10 @@ built images to your Docker Cloud repository, enable [Automated Builds](automate
 
 ## Set up automated test files
 
-To set up your automated tests, create a `docker-compose.test.yml` file which defines a `sut` service that lists the
-tests to be run. The `docker-compose.test.yml` file should be located in the same directory that contains the Dockerfile used to build the image.
+To set up your automated tests, create a `docker-compose.test.yml` file which
+defines a `sut` service that lists the tests to be run. The
+`docker-compose.test.yml` file should be located in the same directory that
+contains the Dockerfile used to build the image.
 
 For example:
 
@@ -35,7 +37,7 @@ is that `sut` is defined. Its return code determines if tests passed or not:
 tests **pass** if the `sut` service returns `0`, and **fail** otherwise.
 
 You can define more than one `docker-compose.test.yml` file if needed. Any file
-that ends in `.test.yml` is used for testing, and the tests run sequentially.
+that ends in `.test.yml` is used for testing, and the tests run sequentially. You can also use [custom build hooks](advanced.md#override-build-test-or-push-commands) to further customize your test behavior.
 
 > **Note**: If you enable Automated builds, they will also run any tests defined
 in the `test.yml` files.
