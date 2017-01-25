@@ -6,7 +6,6 @@ redirect_from:
 - /engine/articles/dockerfile_best-practices/
 - /docker-cloud/getting-started/intermediate/optimize-dockerfiles/
 - /docker-cloud/tutorials/optimize-dockerfiles/
-- /engine/userguide/eng-image/dockerfile_best-practices/
 title: Best practices for writing Dockerfiles
 ---
 
