@@ -32,9 +32,9 @@ production environment. Highlights [Compose Version 3 new features](/engine/gets
 </td></tr>
 
 <tr valign="top">
-<td width="50%">{% capture basics %}[Start the basic tutorial](/engine/getstarted/){: class="button darkblue-btn"}{% endcapture %}{{ basics | markdownify }}
+<td width="50%">{% capture basics %}[Start the basic tutorial](/engine/getstarted/){: class="button secondary-btn"}{% endcapture %}{{ basics | markdownify }}
 </td>
-<td width="50%">{% capture apps %}[Start the application tutorial](/engine/getstarted-voting-app/){: class="button darkblue-btn"}{% endcapture %}{{ apps | markdownify }}
+<td width="50%">{% capture apps %}[Start the application tutorial](/engine/getstarted-voting-app/){: class="button secondary-btn"}{% endcapture %}{{ apps | markdownify }}
 </td>
 </tr>
 </table>
