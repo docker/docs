@@ -237,7 +237,7 @@ assumes that the Docker daemon is in the `stopped` state.
     $ vgcreate docker /dev/xvdf
     ```
 
-5.  Create a thin pool named `thinpool`.
+5.  Create a logical volume named `thinpool` and `thinpoolmeta`.
 
     In this example, the data logical is 95% of the 'docker' volume group size.
     Leaving this free space allows for auto expanding of either the data or
