@@ -19,7 +19,7 @@ To upgrade, apply a new version of the AWS Cloudformation template that powers D
 
 New releases are announced on [Release Notes](release-notes.md) page.
 
-To initiate an update, use either the AWS Console of the AWS cli to initiate a stack update. Use the S3 template URL for the new release and complete the update wizard. This will initiate a rolling upgrade of the Docker swarm, and service state will be maintained during and after the upgrade. Appropriately scaled services should not experience downtime during an upgrade.
+To initiate an update, use either the AWS Console or the AWS cli to initiate a stack update. Use the S3 template URL for the new release and complete the update wizard. This will initiate a rolling upgrade of the Docker swarm, and service state will be maintained during and after the upgrade. Appropriately scaled services should not experience downtime during an upgrade.
 
 ![Upgrade in AWS console](img/cloudformation_update.png)
 
