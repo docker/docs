@@ -440,7 +440,7 @@ toc:
   - path: /engine/reference/commandline/cli/
     title: Use the Docker command line
   - path: /engine/reference/commandline/dockerd/
-    title: Daemon CLI reference
+    title: Daemon CLI reference (dockerd)
   - sectiontitle: Engine CLI reference
     section:
     - path: /engine/reference/commandline/docker/
