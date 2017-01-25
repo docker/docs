@@ -253,8 +253,8 @@ updates.
 - `delay`: The time to wait between updating a group of containers.
 - `failure_action`: What to do if an update fails. One of `continue` or `pause`
   (default: `pause`).
-- `monitor`: TODO
-- `max_failure_ratio`: TODO
+- `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
+- `max_failure_ratio`: Failure rate to tolerate during an update.
 
     update_config:
       parallelism: 2
