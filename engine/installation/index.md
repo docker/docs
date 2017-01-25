@@ -17,7 +17,7 @@ instructions are available for the following:
 * [Fedora](linux/fedora.md)
 * [Oracle Linux](linux/oracle.md)
 * [Red Hat Enterprise Linux](linux/rhel.md)
-* [openSUSE and SUSE Linux Enterprise](linux/SUSE.md)
+* [openSUSE and SUSE Linux Enterprise](linux/suse.md)
 * [Ubuntu](linux/ubuntulinux.md)
 * [Other Linux distributions](linux/other.md)
 

@@ -11,7 +11,7 @@
    - Build, then run your containers on a virtual host via [Docker Machine](machine/overview.md) as you develop.
 2. Configure [networking](engine/tutorials/networkingcontainers.md) and
    [storage](engine/tutorials/dockervolumes.md) for your solution, if needed.
-3. Upload builds to a registry ([ours](engine/tutorials/dockerrepos.md), [yours](/datacenter/dtr/2.0/index.md), or your cloud provider's), to collaborate with your team.
+3. Upload builds to a registry ([ours](/engine/getstarted/step_six.md), [yours](/datacenter/dtr/2.0/index.md), or your cloud provider's), to collaborate with your team.
 4. If you're gonna need to scale your solution across multiple hosts (VMs or physical machines), [plan
    for how you'll set up your Swarm cluster](engine/swarm/key-concepts.md) and [scale it to meet demand](engine/swarm/swarm-tutorial/index.md).
    - Note: Use [Universal Control Plane](/datacenter/ucp/1.1/overview.md) and you can manage your

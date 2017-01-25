@@ -51,8 +51,9 @@ driver for Oracle VirtualBox](drivers/virtualbox.md).) Note that you can run
 both HyperKit and Oracle VirtualBox on the same system. To learn more, see
 [Docker for Mac vs. Docker Toolbox](/docker-for-mac/docker-toolbox/).
 
-* Make sure you have <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">the latest VirtualBox</a> correctly installed on your system
-(either as part of an earlier Toolbox install, or manual install).
+* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"}
+  correctly installed on your system (either as part of an earlier Toolbox install,
+  or manual install).
 
 #### If you are using Docker Toolbox
 
@@ -60,23 +61,23 @@ Docker for Mac and Docker for Windows both require newer versions of their
 respective operating systems, so users with older OS versions must use Docker
 Toolbox.
 
-* If you are using Docker Toolbox on either Mac or an older version Windows system (without Hyper-V), you will use the `virtualbox` driver to create
-a local machine based on Oracle <a href= "https://www.virtualbox.org/"
-target="_blank">VirtualBox</a>. (See the [Docker Machine driver for Oracle
-VirtualBox](drivers/virtualbox.md) )
-<br />
-* If you are using Docker Toolbox on a Windows system that has Hyper-V but cannot run Docker for Windows (for example Windows 8 Pro), you must use the
-`hyperv` driver to create local machines. (See the [Docker Machine driver for
-Microsoft Hyper-V](drivers/hyper-v.md).)
-<br />
-* Make sure you have <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">the latest VirtualBox</a> correctly installed on your system. If
-you used <a href="https://www.docker.com/products/docker-toolbox"
-target="_blank">Toolbox</a> for <a
-href="/engine/installation/mac/" target="_blank">Mac</a>
-or <a href="/engine/installation/windows/"
-target="_blank">Windows</a> to install Docker Machine, VirtualBox is
-automatically installed.
-<br />
+* If you are using Docker Toolbox on either Mac or an older version Windows system
+  (without Hyper-V), you will use the `virtualbox` driver to create a local
+  machine based on Oracle [VirtualBox(https://www.virtualbox.org/){: target="_blank" class="_"}.
+  (See the [Docker Machine driver for Oracle VirtualBox](drivers/virtualbox.md).)
+
+* If you are using Docker Toolbox on a Windows system that has Hyper-V but cannot
+  run Docker for Windows (for example Windows 8 Pro), you must use the
+  `hyperv` driver to create local machines. (See the
+  [Docker Machine driver for Microsoft Hyper-V](drivers/hyper-v.md).)
+
+* Make sure you have [the latest VirtualBox](https://www.virtualbox.org/wiki/Downloads){: target="_blank" class="_"}
+  correctly installed on your system. If you used
+  [Toolbox]("https://www.docker.com/products/docker-toolbox"){: target="_blank" class="_"}
+  or [Docker for Windows](/docker-for-windows/index.md){: target="_blank" class="_"}
+  to install Docker Machine, VirtualBox is
+  automatically installed.
+
 * If you used the Quickstart Terminal to launch your first machine and set your terminal environment to point to it, a default machine was automatically
 created. If this is the case, you can still follow along with these steps, but
 create another machine and name it something other than "default" (e.g., staging
@@ -138,7 +139,7 @@ choose another name for this new machine.
             Docker is up and running!
             To see how to connect Docker to this machine, run: docker-machine env default
 
-      This command downloads a lightweight Linux distribution (<a href="https://github.com/boot2docker/boot2docker" target="_blank">boot2docker</a>) with the Docker daemon installed, and creates and starts a VirtualBox VM with Docker running.
+      This command downloads a lightweight Linux distribution ([boot2docker](https://github.com/boot2docker/boot2docker){: target="_blank" class="_"}) with the Docker daemon installed, and creates and starts a VirtualBox VM with Docker running.
 
 4. List available machines again to see your newly minted machine.
 
@@ -164,7 +165,7 @@ choose another name for this new machine.
 
       **Note**: If you are using `fish`, or a Windows shell such as
       Powershell/`cmd.exe` the above method will not work as described.
-      Instead, see <a href="/machine/reference/env/" target="_blank">the `env` command's documentation</a>
+      Instead, see [the `env` command's documentation](/machine/reference/env.md){: target="_blank" class="_"}
       to learn how to set the environment variables for your shell.
 
     This sets environment variables for the current shell that the Docker client will read which specify the TLS settings. You need to do this each time you open a new shell or restart your machine.
@@ -193,7 +194,7 @@ Run a container with `docker run` to verify your set up.
         $ docker-machine ip default
         192.168.99.100
 
-3. Run a webserver (<a href="https://www.nginx.com/" target="_blank">nginx</a>) in a container with the following command:
+3. Run a [Nginx](https://www.nginx.com/){: target="_blank" class="_"} webserver in a container with the following command:
 
         $ docker run -d -p 8000:80 nginx
 

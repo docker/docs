@@ -63,7 +63,7 @@ Release date: 10/27/2016
 - Fixed the shell container that runs on the managers, to remove a ssh host key that was accidentally added to the image.
 This could have led to a potential man in the middle (MITM) attack. The ssh host key is now generated on host startup, so that each host has its own key.
 - The SSH ELB for SSH'ing into the managers has been removed because it is no longer possible to SSH into the managers without getting a security warning
-- Each Manager can be SSH'd into by following our deploy [guide](../deploy)
+- Each Manager can be SSH'd into by following our deploy [guide](docker-for-aws/deploy.md)
 - Added new region us-east-2 (Ohio)
 - Fixed some bugs related to upgrading the swarm
 - SSH keypair is now a required field in CloudFormation

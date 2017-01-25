@@ -18,19 +18,19 @@ you can use it to setup a Swarm cluster on a cloud provider, or inside your
 company's data center.
 
 If this is the first time you are creating a Swarm cluster, you should first
-learn about Swarm and its requirements by [installing a Swarm for
-evaluation](install-w-machine.md) or [installing a Swarm for
-production](install-manual.md). If this is the first time you have used Machine,
-you should take some time to [understand Machine before
-continuing](/machine).
+learn about Swarm and its requirements by
+[installing a Swarm for evaluation](install-w-machine.md) or
+[installing a Swarm for production](install-manual.md). If this is the first
+time you have used Machine, you should take some time to
+[understand Machine before continuing](/machine).
 
 
 ## What you need
 
 If you are using macOS or Windows and have installed with Docker Toolbox, you
 should already have Machine installed. If you need to install, see the
-instructions for [macOS](/engine/installation/mac/) or
-[Windows](/engine/installation/mac/).
+instructions for [macOS](/docker-for-mac/) or
+[Windows](/docker-for-windows/).
 
 Machine supports installing on AWS, Digital Ocean, Google Cloud Platform, IBM
 Softlayer, Microsoft Azure and Hyper-V, OpenStack, Rackspace, VirtualBox, VMware
@@ -42,8 +42,8 @@ The Toolbox installation gives you VirtualBox and the `boot2docker.iso` image
 you need. It also gives you the ability provision on all the systems Machine
 supports.
 
-**Note**:These examples assume you are using macOS or Windows, if you like you can also [install Docker Machine directly on a Linux
-system](/machine/install-machine).
+**Note**:These examples assume you are using macOS or Windows, if you like you can also
+[install Docker Machine directly on a Linux system](/machine/install-machine).
 
 ## Provision a host to generate a Swarm token
 
@@ -138,7 +138,7 @@ eval "$(docker-machine env local)"
 Docker Machine provides a special `--swarm` flag with its `env` command to
 connect to Swarm nodes.
 
-```
+```bash
 docker-machine env --swarm HOST_NODE_NAME
 export DOCKER_TLS_VERIFY="1"
 export DOCKER_HOST="tcp://192.168.99.101:3376"
@@ -157,7 +157,7 @@ eval "$(docker-machine env --swarm swarm-manager)"
 
 Now, you can use the Docker CLI to query and interact with your cluster.
 
-```
+```bash
 docker info
 Containers: 2
 Images: 1
@@ -181,4 +181,4 @@ Name: swarm-manager
 * [Evaluate Swarm in a sandbox](install-w-machine.md)
 * [Build a Swarm cluster for production](install-manual.md)
 * [Swarm Discovery](discovery.md)
-* [Docker Machine](/machine) documentation
+* [Docker Machine](/machine/index.md) documentation

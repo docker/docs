@@ -46,7 +46,7 @@ Depending on your interest, the Docker documentation contains a wealth of inform
 
   <tr>
     <td class="tg-031e">How to set up an automated build on Docker Hub</td>
-    <td class="tg-031e"><a href="https://docs.docker.com/docker-hub/">Docker Hub documentation</a></td>
+    <td class="tg-031e"><a href="/docker-hub/">Docker Hub documentation</a></td>
   </tr>
   <tr>
     <td class="tg-031e">How to run a multi-container application with Compose</td>
