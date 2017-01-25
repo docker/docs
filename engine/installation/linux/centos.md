@@ -79,16 +79,16 @@ Docker from the repository.
     > which will almost certainly be an unstable one.
 
     ```bash
-    $ sudo yum-config-manager --set-enabled docker-testing
+    $ sudo yum-config-manager --enable docker-testing
     ```
 
     You can disable the `testing` repository by running the `yum-config-manager`
-    command with the `--set-disabled` flag. To re-enable it, use the
-    `--set-enabled` flag. The following command disables the `testing`
+    command with the `--disable` flag. To re-enable it, use the
+    `--enable` flag. The following command disables the `testing`
     repository.
 
     ```bash
-    $ sudo yum-config-manager --set-disabled docker-testing
+    $ sudo yum-config-manager --disable docker-testing
     ```
 
 #### Install Docker
