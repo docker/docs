@@ -78,7 +78,11 @@ To register an existing swarm in Docker Cloud:
 
     To register a swarm with an organization, prefix the new name with the organization name, for example `myorganization/myteamswarm`.
 
-The manager node pulls the `dockercloud/registration` container and runs it on the swarm. The swarm then appears in the **Swarms** screen in Docker Cloud.
+The manager node pulls the `dockercloud/registration` container which creates a
+global service called `dockercloud-server-proxy`. This service runs on _all_ of
+the swarm's manager nodes.
+
+The swarm then appears in the **Swarms** screen in Docker Cloud.
 
 ### Swarm Registration example
 
@@ -146,7 +150,7 @@ To unregister a swarm from Docker Cloud:
 4. Click the trash can icon that appears.
 5. In the confirmation dialog that appears, click **Remove**.
 
-Docker Cloud marks the swarm as `REMOVED` and removes the swarm from the list in the next few minutes.
+Docker Cloud marks the swarm as `REMOVED` and removes the swarm from the list in the next few minutes.  
 
 ## Reconnect a swarm
 
