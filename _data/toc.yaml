@@ -140,7 +140,7 @@ toc:
   - sectiontitle: Define and deploy your app
     section:
     - path: /engine/getstarted-voting-app/
-      title: Tour the voting app sample
+      title: Sample app overview
     - path: /engine/getstarted-voting-app/node-setup/
       title: Set up Dockerized machines
     - path: /engine/getstarted-voting-app/create-swarm/
