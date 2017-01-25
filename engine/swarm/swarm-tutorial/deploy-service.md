@@ -8,8 +8,8 @@ After you [create a swarm](create-swarm.md), you can deploy a service to the
 swarm. For this tutorial, you also [added worker nodes](add-nodes.md), but that
 is not a requirement to deploy a service.
 
-1. Open a terminal and ssh into the machine where you run your manager node. For
-example, the tutorial uses a machine named `manager1`.
+1.  Open a terminal and ssh into the machine where you run your manager node.
+    For example, the tutorial uses a machine named `manager1`.
 
 2.  Run the following command:
 
@@ -25,9 +25,9 @@ example, the tutorial uses a machine named `manager1`.
     * The arguments `alpine ping docker.com` define the service as an Alpine
     Linux container that executes the command `ping docker.com`.
 
-3. Run `docker service ls` to see the list of running services:
+3.  Run `docker service ls` to see the list of running services:
 
-    ```
+    ```bash
     $ docker service ls
 
     ID            NAME        SCALE  IMAGE   COMMAND

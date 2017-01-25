@@ -13,11 +13,11 @@ availability. `DRAIN` availability  prevents a node from receiving new tasks
 from the swarm manager. It also means the manager stops tasks running on the
 node and launches replica tasks on a node with `ACTIVE` availability.
 
-1. If you haven't already, open a terminal and ssh into the machine where you
-run your manager node. For example, the tutorial uses a machine named
-`manager1`.
+1.  If you haven't already, open a terminal and ssh into the machine where you
+    run your manager node. For example, the tutorial uses a machine named
+    `manager1`.
 
-2. Verify that all your nodes are actively available.
+2.  Verify that all your nodes are actively available.
 
     ```bash
     $ docker node ls
@@ -28,7 +28,7 @@ run your manager node. For example, the tutorial uses a machine named
     e216jshn25ckzbvmwlnh5jr3g *  manager1  Ready   Active        Leader
     ```
 
-3. If you aren't still running the `redis` service from the [rolling
+3.  If you aren't still running the `redis` service from the [rolling
 update](rolling-update.md) tutorial, start it now:
 
     ```bash
@@ -37,7 +37,7 @@ update](rolling-update.md) tutorial, start it now:
     c5uo6kdmzpon37mgj9mwglcfw
     ```
 
-4. Run `docker service ps redis` to see how the swarm manager assigned the
+4.  Run `docker service ps redis` to see how the swarm manager assigned the
 tasks to different nodes:
 
     ```bash
@@ -52,7 +52,7 @@ tasks to different nodes:
     In this case the swarm manager distributed one task to each node. You may
     see the tasks distributed differently among the nodes in your environment.
 
-5. Run `docker node update --availability drain <NODE-ID>` to drain a node that
+5.  Run `docker node update --availability drain <NODE-ID>` to drain a node that
 had a task assigned to it:
 
     ```bash
@@ -61,7 +61,7 @@ had a task assigned to it:
     worker1
     ```
 
-6. Inspect the node to check its availability:
+6.  Inspect the node to check its availability:
 
     ```bash
     $ docker node inspect --pretty worker1
@@ -76,7 +76,7 @@ had a task assigned to it:
 
     The drained node shows `Drain` for `AVAILABILITY`.
 
-7. Run `docker service ps redis` to see how the swarm manager updated the
+7.  Run `docker service ps redis` to see how the swarm manager updated the
 task assignments for the `redis` service:
 
     ```bash
@@ -93,7 +93,7 @@ task assignments for the `redis` service:
     with `Drain` availability and creating a new task on a node with `Active`
     availability.
 
-8. Run  `docker node update --availability active <NODE-ID>` to return the
+8.  Run  `docker node update --availability active <NODE-ID>` to return the
 drained node to an active state:
 
     ```bash
@@ -102,22 +102,22 @@ drained node to an active state:
     worker1
     ```
 
-9. Inspect the node to see the updated state:
+9.  Inspect the node to see the updated state:
 
-   ```bash
-   $ docker node inspect --pretty worker1
+    ```bash
+    $ docker node inspect --pretty worker1
 
-   ID:			38ciaotwjuritcdtn9npbnkuz
-   Hostname:		worker1
-   Status:
-    State:			Ready
-    Availability:		Active
-  ...snip...
-  ```
+    ID:			38ciaotwjuritcdtn9npbnkuz
+    Hostname:		worker1
+    Status:
+     State:			Ready
+     Availability:		Active
+    ...snip...
+    ```
 
-  When you set the node back to `Active` availability, it can receive new tasks:
+    When you set the node back to `Active` availability, it can receive new tasks:
 
-  * during a service update to scale up
-  * during a rolling update
-  * when you set another node to `Drain` availability
-  * when a task fails on another active node
+    * during a service update to scale up
+    * during a rolling update
+    * when you set another node to `Drain` availability
+    * when a task fails on another active node
