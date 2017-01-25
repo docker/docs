@@ -8,11 +8,12 @@ redirect_from:
 title: Manage data in containers
 ---
 
-So far you've been introduced to some [basic Docker
-concepts](usingdocker.md), seen how to work with [Docker
-images](dockerimages.md) as well as learned about [how to network your containers](networkingcontainers.md). In this
-section you're going to learn how you can manage data inside and between your
-Docker containers.
+So far you've been introduced to some
+[basic Docker concepts](/engine/getstarted/step_three.md), seen how to work with
+[Docker images](/engine/getstarted/step_four.md), and learned about
+[how to network your containers](/engine/tutorials/networkingcontainers.md).
+In this section you're going to learn how you can manage data inside and between
+your Docker containers.
 
 You're going to look at the two primary ways you can manage data with
 Docker Engine.
@@ -23,7 +24,8 @@ Docker Engine.
 ## Data volumes
 
 A *data volume* is a specially-designated directory within one or more
-containers that bypasses the [*Union File System*](../reference/glossary.md#union-file-system). Data volumes provide several useful features for persistent or shared data:
+containers that bypasses the [*Union File System*](/engine/reference/glossary.md#union-file-system).
+Data volumes provide several useful features for persistent or shared data:
 
 - Volumes are initialized when a container is created. If the container's
   base image contains data at the specified mount point, that existing data is
@@ -162,7 +164,7 @@ instruction does not support passing a `host-dir`, because built images
 ### Mount a shared-storage volume as a data volume
 
 In addition to mounting a host directory in your container, some Docker
-[volume plugins](../extend/plugins_volume.md) allow you to
+[volume plugins](/engine/extend/plugins_volume.md) allow you to
 provision and mount shared storage, such as iSCSI, NFS, or FC.
 
 A benefit of using shared volumes is that they are host-independent. This
@@ -204,7 +206,7 @@ $ docker run -d -P \
 ```
 
 A list of available plugins, including volume plugins, is available
-[here](../extend/legacy_plugins.md).
+[here](/engine/extend/legacy_plugins.md).
 
 ### Volume labels
 
@@ -275,7 +277,7 @@ from the `dbstore` container are visible.
 
 You can use multiple `--volumes-from` parameters to combine data volumes from
 several containers. To find detailed information about `--volumes-from` see the
-[Mount volumes from container](../reference/commandline/run.md#mount-volumes-from-container-volumes-from)
+[Mount volumes from container](/engine/reference/commandline/run.md#mount-volumes-from-container-volumes-from)
 in the `run` command reference.
 
 You can also extend the chain by mounting the volume that came from the
@@ -366,4 +368,4 @@ combine Docker with the services available on
 [Docker Hub](https://hub.docker.com) including Automated Builds and private
 repositories.
 
-Go to [Store images in Docker Hub](dockerrepos.md).
+Go to [Store images in Docker Hub](/engine/getstarted/step_six.md).

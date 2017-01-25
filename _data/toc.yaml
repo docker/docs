@@ -449,6 +449,8 @@ toc:
       title: docker attach
     - path: /engine/reference/commandline/build/
       title: docker build
+    - path: /engine/reference/commandline/checkpoint/
+      title: docker checkpoint
     - path: /engine/reference/commandline/commit/
       title: docker commit
     - sectiontitle: docker container *

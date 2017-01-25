@@ -99,9 +99,9 @@ instructions for enabling and configuring AppArmor or SELinux.
 
 ### Next steps
 
-- Continue to [Post-installation steps for Linux](linux-postinstall.md)
+- Continue to [Post-installation steps for Linux](/engine/installation/linux/linux-postinstall.md)
 
-- Continue with the [User Guide](../../userguide/index.md).
+- Continue with the [User Guide](/engine/userguide/index.md).
 
 ## Install client binaries on macOS
 
