@@ -24,7 +24,8 @@ version that "talks on its own" and requires fewer words to run.
 
 ## Step 1: Write a Dockerfile
 
-In this step, you use a text editor to write a short Dockerfile.  A Dockerfile
+In this step, you use a text editor to write a short
+[Dockerfile](/engine/reference/builder.md).  A Dockerfile
 is a recipe which describes the files, environment, and commands that make up an
 image. Your recipe is going to be very short.
 

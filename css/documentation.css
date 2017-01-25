@@ -137,13 +137,34 @@
 /* reset away from #008AB5 */
 
 #DocumentationText a.button {
-	color: #fff;
 }
 
 #DocumentationText .darkblue-btn {
     color: #ffffff;
     margin-top: 15px;
 }
+
+#DocumentationText .secondary-btn,
+   button .secondary-btn {
+     border: 2px solid #1488c6;
+     color: #1488c6;
+     background: white;
+     margin-top: 15px;
+     font-size: 14px;
+     padding: 12px 30px 12px 30px;
+     text-decoration: none;
+     font-family: Open Sans, sans-serif;
+     font-weight: 700;
+}
+
+#DocumentationText button.secondary-btn {
+    background: transparent;
+}
+#DocumentationText .secondary-btn:hover,
+   button .secondary-btn:hover {
+   opacity: .8;
+}
+
 #DocumentationText table {
     margin: 1.25rem 0;
     width: 100%;
