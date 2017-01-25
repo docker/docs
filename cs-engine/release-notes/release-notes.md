@@ -81,6 +81,19 @@ This release addresses the following issues:
 to connect to swarm-mode overlay network
 * Various bug fixes in swarm mode networking
 
+## CS Engine 1.11.2-cs7
+(24 Jan 2017)
+
+This release addresses the following issues:
+
+* [#26639](https://github.com/docker/docker/issues/26639) Resolves hostnames passed
+to the local volume driver for nfs mount options.
+* [26111](https://github.com/docker/docker/issues/26111) Fix issue with adding
+iptables rules due to xtables lock message change.
+* [#1572](github.com/docker/libnetwork/issues/1572) Fix daemon panic
+* [1130](https://github.com/docker/libnetwork/pull/1130) Fix IPAM out of sync
+issue on ungraceful shutdown.
+
 ## CS Engine 1.11.2-cs6
 (12 Jan 2017)
 
