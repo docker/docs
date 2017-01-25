@@ -9,12 +9,12 @@ instances of a service. In this part of the tutorial, you deploy a service based
 on the Redis 3.0.6 container image. Then you upgrade the service to use the
 Redis 3.0.7 container image using rolling updates.
 
-1. If you haven't already, open a terminal and ssh into the machine where you
-run your manager node. For example, the tutorial uses a machine named
-`manager1`.
+1.  If you haven't already, open a terminal and ssh into the machine where you
+    run your manager node. For example, the tutorial uses a machine named
+    `manager1`.
 
-2. Deploy Redis 3.0.6 to the swarm and configure the swarm with a 10 second
-update delay:
+2.  Deploy Redis 3.0.6 to the swarm and configure the swarm with a 10 second
+    update delay:
 
     ```bash
     $ docker service create \
@@ -44,7 +44,7 @@ update delay:
     `--update-failure-action` flag for `docker service create` or
     `docker service update`.
 
-3. Inspect the `redis` service:
+3.  Inspect the `redis` service:
 
     ```bash
     $ docker service inspect --pretty redis
@@ -64,7 +64,7 @@ update delay:
     Endpoint Mode:  vip
     ```
 
-4. Now you can update the container image for `redis`. The swarm  manager
+4.  Now you can update the container image for `redis`. The swarm  manager
 applies the update to nodes according to the `UpdateConfig` policy:
 
     ```bash
@@ -82,7 +82,7 @@ applies the update to nodes according to the `UpdateConfig` policy:
     * If, at any time during the update, a task returns `FAILED`, pause the
     update.
 
-5. Run `docker service inspect --pretty redis` to see the new image in the
+5.  Run `docker service inspect --pretty redis` to see the new image in the
 desired state:
 
     ```bash
@@ -127,7 +127,7 @@ desired state:
     To avoid repeating certain update failures, you may need to reconfigure the
     service by passing flags to `docker service update`.
 
-6. Run `docker service ps <SERVICE-ID>` to watch the rolling update:
+6.  Run `docker service ps <SERVICE-ID>` to watch the rolling update:
 
     ```bash
     $ docker service ps redis
