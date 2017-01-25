@@ -1,30 +1,34 @@
 ---
 description: overview of voting app example
 keywords: docker-stack.yml, stack deploy, compose, multi-container, services, swarm mode, cluster, voting app,
-title: Tour the voting app
+title: Sample app overview
 ---
 
-This example is built around a web-based voting application that collects,
-tallies, and returns the results of votes (for cats and dogs, or other choices
-you specify). The voting app includes several services, each one running in its
-own container. We'll deploy the app as a _stack_ to introduce some new concepts
-surfaced in [Compose Version 3](/compose/compose-file.md#version-3), and also
-use [swarm mode](/engine/swarm/index.md), which is cluster management and
-orchestration capability built into Docker Engine.
+This example is built around a web-based voting application
+that collects, tallies, and returns the results of votes
+(for cats and dogs, or other choices you specify). The voting
+app includes several services, each one running in its
+own container. We'll deploy the app as a _stack_ to introduce
+some new concepts surfaced in
+[Compose Version 3](/compose/compose-file.md#version-3), and
+also use [swarm mode](/engine/swarm/index.md), which is
+cluster management and orchestration capability built into
+Docker Engine.
 
 ## Got Docker?
 
-If you haven't yet downloaded Docker or installed it, go to [Get
-Docker](/engine/getstarted/step_one.md#step-1-get-docker) and grab Docker for
-your platform.  You can follow along and run this example using Docker for Mac,
-Docker for Windows or Docker for Linux.
+If you haven't yet downloaded Docker or installed it, go to
+[Get Docker](/engine/getstarted/step_one.md#step-1-get-docker)
+and grab Docker for your platform.  You can follow along and
+run this example using Docker for Mac, Docker for Windows or
+Docker for Linux.
 
-Once you have Docker installed, you can run `docker hello-world` or other
-commands described in the Get Started with Docker tutorial to [verify your
-installation](/engine/getstarted/step_one.md#step-3-verify-your-installation).
-If you are totally new to Docker, you might continue through the full [Get
-Started with Docker tutorial](/engine/getstarted/index.md) first, then come
-back.
+Once you have Docker installed, you can run `docker hello-world`
+or other commands described in the Get Started with Docker
+tutorial to [verify your installation](/engine/getstarted/step_one.md#step-3-verify-your-installation).
+If you are totally new to Docker, you might continue through
+the full [Get Started with Docker tutorial](/engine/getstarted/index.md)
+first, then come back.
 
 ## What you'll learn and do
 
@@ -41,10 +45,17 @@ the `docker stack deploy` command
 `vote` image to implement a poll on different choices
 * Use features new in Compose Version 3, highlighted in the sample app
 
-## Anatomy of the voting app
+## Services and images overview
 
-The voting app you are about to deploy is composed of several services:
+A service is a bit of executable code designed to accomplish
+a specific task. A service can run in one or more
+containers. Defining a service configuration for your app
+(above and beyond `docker run` commands) enables you to
+deploy it to a swarm and manage it as a distributed
+multi-container application.
 
+The voting app you are about to deploy is composed
+of several services, each based on an image:
 
 | Service        | Description | Base Image  |
 | ------------- |--------------| -----|
@@ -89,16 +100,37 @@ The `deploy` key specifies aspects of a swarm deployment, as described below in
 [Compose Version 3 features and
 compatibility](#compose-v3-features-and-compatibility).
 
-## docker-stack.yml deployment configuration
+## docker-stack.yml deployment configuration file
 
-We'll deploy the app using `docker-stack.yml`, which is a type of [Compose
+In addition to defining a set of build and run commands in a Dockerfile, you can
+define services in a [Compose file](/compose/compose-file.md), along with
+details about how and where those services will run.
+
+In the Getting Started with Docker tutorial, you wrote a
+[Dockerfile for the whalesay app](/engine/getstarted/step_four.md) then used
+it to build the image and run it in a container.
+
+For this tutorial, the Dockerfiles for our services are already written, the
+images are pre-built, and when we deploy, each service will run in a container
+(or more than one, for those that have replicas defined to scale the app).
+
+To understand the relationship between Compose files and Dockerfiles, take a
+quick look at the [source code for the voting app
+here](https://github.com/docker/example-voting-app). For example, the vote
+service is based on a Python image built using the [Dockerfile for
+`vote`](https://github.com/docker/example-voting-app/blob/master/vote/Dockerfile)
+and the vote result service is based on vote result service is based on a
+Node.js image built using the [Dockerfile for
+`vote_result`](https://github.com/docker/example-voting-app/blob/master/result/Dockerfile).
+
+We'll deploy this app using `docker-stack.yml`, which is a type of [Compose
 file](/compose/compose-file.md) new in Compose Version 3.  
 
-To follow along with the example, you need only have Docker running and the copy
-of `docker-stack.yml` we provide here. This file defines all the services shown
-in the [table above](#anatomy-of-the-voting-app), their base images,
-configuration details such as ports and networks, application dependencies, and
-the swarm configuration.
+To follow along with the example, you need only have Docker running and
+the copy of `docker-stack.yml` we provide here. This file defines all
+the services shown in the [table above](#services-and-images-overview),
+their base images, configuration details such as ports and
+networks, application dependencies, and the swarm configuration.
 
 ```
 version: "3"
