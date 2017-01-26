@@ -26,7 +26,7 @@ To add replicas to an existing DTR deployment:
 
     ```none
     docker run -it --rm \
-      docker/dtr:2.2.0-beta1 join \
+      {{ page.docker_image }} join \
       --ucp-node <ucp-node-name> \
       --ucp-insecure-tls
     ```
@@ -46,7 +46,7 @@ To remove a DTR replica from your deployment:
 
 ```none
 docker run -it --rm \
-  docker/dtr:2.2.0-beta1 remove \
+  {{ page.docker_image }} remove \
   --ucp-insecure-tls
 ```
 

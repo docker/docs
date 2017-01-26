@@ -36,11 +36,11 @@ Run the following command to install DTR:
 
 ```none
 # Pull the latest version of DTR
-$ docker pull docker/dtr:2.2.0-beta1
+$ docker pull {{ page.docker_image }}
 
 # Install DTR
 $ docker run -it --rm \
-  docker/dtr:2.2.0-beta1 install \
+  {{ page.docker_image }} install \
   --ucp-node <ucp-node-name> \
   --ucp-insecure-tls
 ```
@@ -110,7 +110,7 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command:
 
     ```none
     docker run -it --rm \
-      docker/dtr:2.2.0-beta1 join \
+      {{ page.docker_image }} join \
       --ucp-node <ucp-node-name> \
       --ucp-insecure-tls
     ```
