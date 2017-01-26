@@ -171,7 +171,7 @@ directory of one of the manager nodes to restore to a new swarm.
 
 You can monitor the health of manager nodes by querying the docker `nodes` API
 in JSON format through the `/nodes` HTTP endpoint. Refer to the
-[nodes API documentation](/engine/reference/api/docker_remote_api_v1.24.md#36-nodes)
+[nodes API documentation](/engine/api/v1.25/#tag/Node)
 for more information.
 
 From the command line, run `docker node inspect <id-node>` to query the nodes.

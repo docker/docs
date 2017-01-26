@@ -37,7 +37,7 @@ Release date: 11/08/2016
 - Docker Engine upgraded to Docker 1.12.3
 - Fixed the shell container that runs on the managers, to remove a ssh host key that was accidentally added to the image.
 This could have led to a potential man in the middle (MITM) attack. The ssh host key is now generated on host startup, so that each host has its own key.
-- The SSH ELB for SSH'ing into the managers has been removed because it is no longer possible to SSH into the managers without getting a security warning
+- The SSH ELB for connecting to the managers using SSH has been removed because it is no longer possible to SSH into the managers without getting a security warning
 - Multiple managers can be deployed
 - All container logs can be found in the `xxxxlog` storage account
 - You can connect to each manager using SSH by following our deploy [guide](deploy.md)
