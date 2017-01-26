@@ -36,16 +36,12 @@ To install Docker, you need the 64-bit version of one of these Debian versions:
 
 ### Recommended extra packages
 
-You need `curl` if you don't have it. Unless you have a strong reason not to,
-install the `linux-image-extra-*` packages, which allow Docker to use the `aufs`
-storage drivers. **This applies to all versions of Debian**.
+You need `curl` if you don't have it.
 
 ```bash
 $ sudo apt-get update
 
-$ sudo apt-get install curl \
-    linux-image-extra-$(uname -r) \
-    linux-image-extra-virtual
+$ sudo apt-get install curl
 ```
 
 ## Install Docker
