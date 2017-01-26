@@ -119,7 +119,7 @@ quick look at the [source code for the voting app
 here](https://github.com/docker/example-voting-app). For example, the vote
 service is based on a Python image built using the [Dockerfile for
 `vote`](https://github.com/docker/example-voting-app/blob/master/vote/Dockerfile)
-and the vote result service is based on vote result service is based on a
+and the vote result service is based on a
 Node.js image built using the [Dockerfile for
 `vote_result`](https://github.com/docker/example-voting-app/blob/master/result/Dockerfile).
 
