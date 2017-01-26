@@ -768,7 +768,7 @@ Specify logging options as key-value pairs. An example of `syslog` options:
 ### net
 
 > [Version 1 file format](compose-file.md#version-1) only. In version 2, use
-> [network_mode](compose-file.md#network_mode).
+> [network_mode](compose-file.md#networkmode).
 
 Network mode. Use the same values as the docker client `--net` parameter.
 The `container:...` form can take a service name instead of a container name or
@@ -962,7 +962,7 @@ Override the default labeling scheme for each container.
 
 Specify how long to wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whatever stop signal has been specified with
-[`stop_signal`](compose-file.md#stop_signal)), before sending SIGKILL. Specified
+[`stop_signal`](compose-file.md#stopsignal)), before sending SIGKILL. Specified
 as a [duration](compose-file.md#specifying-durations).
 
     stop_grace_period: 1s
