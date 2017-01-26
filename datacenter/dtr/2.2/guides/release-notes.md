@@ -10,6 +10,51 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](install/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.2.0 beta 2
+
+(25 Jan 2017)
+
+* Security scans
+  * After scanning an empty images, DTR now tells that the image is empty instead
+  of leaving the UI empty
+  * The UI now shows that an image was not scanned instead of saying it is empty
+  * When you disable automatic security updates, DTR no longer continues searching
+  for updates online
+
+* UI
+  * On the repositories list you can now click anywhere on the row to see the
+  repository details
+  * When you don't have permissions to see the repository details, the UI now
+  shows that you don't have permissions instead of saying it has no manifests
+
+* API
+  * The `docker/search` command was relaxed to return more results
+  * Webhooks on a manifest push now include data about the operating system and architecture
+  * Webhooks on a manifest delete now includes a unique id instead of a username
+  * Webhooks on a tag deletion now include data about the author
+  * Adding a duplicate webhook now returns HTTP 400 errors instead of 500
+  * Updating a repository now triggers a Webhooks
+  * Jobs are retried if the worker running them stops unexpectedly
+  * When a job runner worker reached its capacity it would stop accepting job
+  even after executing all the jobs allocated. This has been fixed
+  * The `imagescan/status` endpoint is now restricted to admin users
+  * Using the `imagescan/status` endpoint while the vulnerability database is
+  updating now returns HTTP 403 errors instead of 500
+
+* docker/dtr image
+  * The `docker/dtr install` command now shows all the nodes that are part of a
+  UCP cluster for you choose on which node to deploy DTR
+  * The install command was improved to avoid deploying DTR to a node where it
+  cannot run due to port collisions
+  * The `docker/dtr install --ucp-node` flag is now mandatory
+  * The install command no longer allows deploying replicas with duplica ids
+  * The upgrade command now validates if all tags were migrated to the latest
+  version before trying to migrate blob links
+
+
+
+
+
 ## DTR 2.2.0 beta 1
 
 (10 Jan 2017)
