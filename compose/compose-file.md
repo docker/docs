@@ -1291,13 +1291,22 @@ explanation of Compose's use of Docker networking features, see the
 
 Specify which driver should be used for this network.
 
-The default driver depends on how the Docker Engine you're using is configured,
-but in most instances it will be `bridge` on a single host and `overlay` on a
-Swarm.
+Docker provides some default network drivers for creating networks. The default
+driver depends on how the Docker Engine you are using is configured, but in most
+instances it will be `bridge` on a single host and `overlay` on a Swarm.
 
 The Docker Engine will return an error if the driver is not available.
 
     driver: overlay
+
+For examples of using the `overlay` driver with swarm mode, see [Overlay
+networking and swarm
+mode](../engine/userguide/networking/get-started-overlay.md#overlay-networking-and-swarm-mode)
+and [An overlay network with Docker Engine swarm
+mode](../engine/userguide/networking.md#an-overlay-network-with-docker-engine-swarm-mode).
+
+For an overview of container networking and more examples of network drivers, see [Default Networks](../engine/userguide/networking.md#default-networks) and [User-defined
+networks](/engine/userguide/networking.md#user-defined-networks) in the [Docker container networking](../engine/userguide/networking.md) guide.
 
 ### driver_opts
 
