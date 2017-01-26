@@ -35,7 +35,7 @@ RUN svn co https://github.com/docker/docker/$ENGINE_SVN_BRANCH/docs/extend md_so
 	&& wget -O md_source/engine/reference/run.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/run.md \
 	&& wget -O md_source/engine/reference/commandline/cli.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/commandline/cli.md \
 	&& wget -O md_source/engine/deprecated.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/deprecated.md \
-	&& svn co https://github.com/docker/distribution/$DISTRIBUTION_SVN_BRANCH/docs/spec md_source/registry/spec \
+	&& svn co https://github.com/docker/distribution/branches/$DISTRIBUTION_SVN_BRANCH/docs/spec md_source/registry/spec \
 	&& rm md_source/registry/spec/api.md.tmpl \
 	&& wget -O md_source/registry/configuration.md https://raw.githubusercontent.com/docker/distribution/$DISTRIBUTION_BRANCH/docs/configuration.md \
 	&& rm -rf md_source/apidocs/cloud-api-source \
