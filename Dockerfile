@@ -44,7 +44,7 @@ RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend 
  && rm -rf allv/tests \
  && wget -O allv/engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
  && jekyll build -s allv -d allvbuild \
- && rm -rf allv/apidocs/layouts \
+ && rm -rf allvbuild/apidocs/layouts \
  && find allvbuild -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
  && rm -rf allv
 
