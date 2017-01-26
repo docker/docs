@@ -25,11 +25,12 @@ makes the ownership of the Unix socket read/writable by the `docker` group.
 
 > **Warning**: The `docker` group grants privileges equivalent to the `root`
 > user. For details on how this impacts security in your system, see
-> [*Docker Daemon Attack Surface*](../../security/security.md#docker-daemon-attack-surface).
+> [*Docker Daemon Attack Surface*](/engine/security/security.md#docker-daemon-attack-surface).
 
 To create the `docker` group and add your user:
 
 1.  Create the `docker` group.
+
     ```bash
     $ sudo groupadd docker
     ```
@@ -72,7 +73,7 @@ $ sudo systemctl disable docker
 
 If you need to add an HTTP Proxy, set a different directory or partition for the
 Docker runtime files, or make other customizations, see
-[customize your systemd Docker daemon options](../../admin/systemd.md).
+[customize your systemd Docker daemon options](/engine/admin/systemd.md).
 
 ### `upstart`
 
@@ -92,9 +93,9 @@ $ sudo chkconfig docker on
 ## Use a different storage engine
 
 For information about the different storage engines, see
-[Storage drivers](../userguide/storagedriver/index.md). The default storage
-engine and the list of supported storage engines depend on your host's
-Linux distribution and available kernel drivers.
+[Storage drivers](/engine/userguide/storagedriver/imagesandcontainers.md).
+The default storage engine and the list of supported storage engines depend on
+your host's Linux distribution and available kernel drivers.
 
 ## Troubleshooting
 
@@ -111,7 +112,6 @@ Cannot connect to the Docker daemon. Is 'docker daemon' running on this host?
 To see which host your client is configured to connect to, check the value of
 the `DOCKER_HOST` variable in your environment.
 
-
 ```bash
 $ env | grep DOCKER_HOST
 ```
@@ -120,7 +120,6 @@ If this command returns a value, the Docker client is set to connect to a
 Docker daemon running on that host. If it is unset, the Docker client is set to
 connect to the Docker daemon running on the local host. If it is set in error,
 use the following command to unset it:
-
 
 ```bash
 $ unset DOCKER_HOST
@@ -214,6 +213,7 @@ at `/etc/docker/daemon.json`.
 
 2.  Add a `dns` key with one or more IP addresses as values. If the file has
     existing contents, you only need to add or edit the `dns` line.
+    
     ```json
     {
     	"dns": ["8.8.8.8", "8.8.4.4"]
@@ -291,7 +291,7 @@ To disable `dnsmasq` on RHEL, CentOS, or Fedora:
     ```
 
 2.  Configure the DNS servers manually using the
-    [Red Hat documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){ :target="_blank" class="_"}.
+    [Red Hat documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html){: target="_blank" class="_"}.
 
 ### Allow access to the remote API through a firewall
 
@@ -314,7 +314,7 @@ hosts, to prevent remote privilege-escalation attacks.
 
 To configure UFW and allow incoming connections on the Docker port:
 
-1.   Verify that UFW is enabled.
+1.  Verify that UFW is enabled.
 
     ```bash
     $ sudo ufw status
@@ -323,7 +323,7 @@ To configure UFW and allow incoming connections on the Docker port:
     If `ufw` is not enabled, the remaining steps will not be helpful.
 
 2.  Edit the UFW configuration file, which is usually `/etc/default/ufw` or
-`/etc/sysconfig/ufw`. Set the `DEFAULT_FORWARD_POLICY` policy to `ACCEPT`.
+    `/etc/sysconfig/ufw`. Set the `DEFAULT_FORWARD_POLICY` policy to `ACCEPT`.
 
     ```none
     DEFAULT_FORWARD_POLICY="ACCEPT"
@@ -341,6 +341,7 @@ To configure UFW and allow incoming connections on the Docker port:
     ```
 
 4.  Reload UFW.
+
     ```bash
     $ sudo ufw reload
     ```
@@ -377,8 +378,8 @@ memory and a 10% overall performance degradation, even if Docker is not running.
     $ sudo update-grub
     ```
 
-     If your GRUB configuration file has incorrect syntax, an error will occur.
-     In this case, steps 3 and 4.
+    If your GRUB configuration file has incorrect syntax, an error will occur.
+    In this case, steps 3 and 4.
 
 6.  Reboot your system. Memory and swap accounting are enabled and the warning
     does not occur.
@@ -402,4 +403,4 @@ use the `btrfs` storage engine on Oracle Linux 7.
 
 ## Next steps
 
-- Continue with the [User Guide](../../userguide/index.md).
+- Continue with the [User Guide](/engine/userguide/index.md).

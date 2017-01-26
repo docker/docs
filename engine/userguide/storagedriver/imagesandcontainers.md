@@ -4,6 +4,7 @@ keywords: container, storage, driver, AUFS, btfs, devicemapper,zvfs
 title: Understand images, containers, and storage drivers
 redirect_from:
 - /en/latest/terms/layer/
+- /engine/installation/userguide/storagedriver/
 ---
 
 To use storage drivers effectively, you must understand how Docker builds and

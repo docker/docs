@@ -159,11 +159,12 @@ updated. This feature is particularly important if you do use often-changing tag
 such as `latest`, because it ensures that all service tasks use the same version
 of the image.
 
-> **Note**: If [content trust](security/trust/content_trust.md) is enabled, the
-> client actually resolves the image's tag to a digest before contacting the
-> swarm manager, in order to verify that the image is signed. Thus, if you use
-> content trust, the swarm manager receives the request pre-resolved. In this
-> case, if the client cannot resolve the image to a digest, the request fails.
+> **Note**: If [content trust](/engine/security/trust/content_trust.md) is
+> enabled, the client actually resolves the image's tag to a digest before
+> contacting the swarm manager, in order to verify that the image is signed.
+> Thus, if you use content trust, the swarm manager receives the request
+> pre-resolved. In this case, if the client cannot resolve the image to a
+> digest, the request fails.
 {: id="image_resolution_with_trust" }
 
 If the manager is not able to resolve the tag to a digest, each worker
@@ -288,7 +289,7 @@ $ docker service create \
 Service constraints let you set criteria for a node to meet before the scheduler
 deploys a service to the node. You can apply constraints to the
 service based upon node attributes and metadata or engine metadata. For more
-information on constraints, refer to the `docker service create` [CLI  reference](../reference/commandline/service_create.md).
+information on constraints, refer to the `docker service create` [CLI reference](/engine/reference/commandline/service_create.md).
 
 ### Reserving memory or number of CPUs for a service
 
@@ -594,5 +595,5 @@ paths from the host is unnecessary. The main risks include the following:<br />
 ## Learn More
 
 * [Swarm administration guide](admin_guide.md)
-* [Docker Engine command line reference](../reference/commandline/index.md)
+* [Docker Engine command line reference](/engine/reference/commandline/docker.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)

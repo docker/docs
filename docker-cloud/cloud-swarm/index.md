@@ -78,7 +78,11 @@ To register an existing swarm in Docker Cloud:
 
     To register a swarm with an organization, prefix the new name with the organization name, for example `myorganization/myteamswarm`.
 
-The manager node pulls the `dockercloud/registration` container and runs it on the swarm. The swarm then appears in the **Swarms** screen in Docker Cloud.
+The manager node pulls the `dockercloud/registration` container which creates a
+global service called `dockercloud-server-proxy`. This service runs on _all_ of
+the swarm's manager nodes.
+
+The swarm then appears in the **Swarms** screen in Docker Cloud.
 
 ### Swarm Registration example
 
@@ -109,7 +113,7 @@ Swarms that are registered in Docker Cloud appear in the Swarms list. Each line 
 - **UNAVAILABLE**: Docker Cloud is not receiving any heartbeats from the swarm.
 - **REMOVED**: the swarm has been unregistered from Docker Cloud and will be removed from the list soon.
 
-> **Note**: [Removing a swarm](#unregister-a-swarm-from-Docker-cloud) only makes the swarm unavailable in Docker Cloud. It does not change the swarm itself or any processes running on the swarm.
+> **Note**: [Removing a swarm](#unregister-a-swarm-from-Docker-cloud) only removes the swarm from the interface in Docker Cloud. It does not change the swarm itself or any processes running on the swarm.
 
 ## Connect to a swarm through Docker Cloud
 
@@ -144,9 +148,9 @@ To unregister a swarm from Docker Cloud:
 2. Click **Swarms** in the top navigation.
 3. Put your mouse cursor on the swarm you want to unregister.
 4. Click the trash can icon that appears.
-5. In the confirmation dialog that appears, click **Unregister**.
+5. In the confirmation dialog that appears, click **Remove**.
 
-Docker Cloud marks the swarm as `REMOVED` and removes the swarm from the list in the next few minutes.
+Docker Cloud marks the swarm as `REMOVED` and removes the swarm from the list in the next few minutes.  
 
 ## Reconnect a swarm
 

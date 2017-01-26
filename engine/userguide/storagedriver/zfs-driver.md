@@ -320,3 +320,15 @@ performance. This is because they bypass the storage driver and do not incur
 any of the potential overheads introduced by thin provisioning and
 copy-on-write. For this reason, you should place heavy write workloads on data
 volumes.
+
+## Limiting your container's writable storage quota
+
+If you want to implement a quota on a per-image/dataset basis, you can use
+the `--storage-opt` option.
+
+    --storage-opt size=256M
+
+This limits the space your container can write to/change (implemented with the
+ZFS attribute `available`). This means that if you have an
+image that is 256 MB in size and you use the aforementioned option, you end up with a
+container of size 512 MB and 256 MB free.

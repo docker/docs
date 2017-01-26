@@ -8,12 +8,12 @@ title: Legacy container links
 
 The information in this section explains legacy container links within the Docker default `bridge` network which is created automatically when you install Docker.
 
-Before the [Docker networks feature](../index.md), you could use the
+Before the [Docker networks feature](/engine/userguide/networking/index.md), you could use the
 Docker link feature to allow containers to discover each other and securely
 transfer information about one container to another container. With the
 introduction of the Docker networks feature, you can still create links but they
 behave differently between default `bridge` network and
-[user defined networks](../work-with-networks.md#linking-containers-in-user-defined-networks)
+[user defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks)
 
 This section briefly discusses connecting via a network port and then goes into
 detail on container linking in default `bridge` network.
@@ -28,7 +28,7 @@ between containers in a more controlled way.
 
 ## Connect using network port mapping
 
-In [Run a simple application](../../../tutorials/usingdocker.md), you created a
+In [Run a simple application](/engine/getstarted/step_three.md), you created a
 container that ran a Python Flask application:
 
     $ docker run -d -P training/webapp python app.py
@@ -36,9 +36,9 @@ container that ran a Python Flask application:
 > **Note:**
 > Containers have an internal network and an IP address
 > (as we saw when we used the `docker inspect` command to show the container's
-> IP address in [Run a simple application](../../../tutorials/usingdocker.md) section).
+> IP address in [Run a simple application](/engine/getstarted/step_three.md) section).
 > Docker can have a variety of network configurations. You can see more
-> information on Docker networking [here](../index.md).
+> information on Docker networking [here](/engine/userguide/networking/index.md).
 
 When that container was created, the `-P` flag was used to automatically map
 any network port inside it to a random high port within an *ephemeral port
@@ -102,7 +102,7 @@ configurations. For example, if you've bound the container port to the
 
 > **Note**:
 > This section covers the legacy link feature in the default `bridge` network.
-> Please refer to [linking containers in user-defined networks](../work-with-networks.md#linking-containers-in-user-defined-networks)
+> Please refer to [linking containers in user-defined networks](/engine/userguide/networking/work-with-networks.md#linking-containers-in-user-defined-networks)
 > for more information on links in user-defined networks.
 
 Network port mappings are not the only way Docker containers can connect to one

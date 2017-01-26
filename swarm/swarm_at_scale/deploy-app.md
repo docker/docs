@@ -8,15 +8,15 @@ redirect_from:
 title: Deploy the application
 ---
 
-You've [deployed the load balancer, the discovery backend, and a Swarm
-cluster](deploy-infra.md) so now you can build and deploy the voting application
-itself. You do this by starting a number of "Dockerized applications" running in
-containers.
+You've
+[deployed the load balancer, the discovery backend, and a Swarm cluster](deploy-infra.md)
+so now you can build and deploy the voting application itself. You do this by
+starting a number of "Dockerized applications" running in containers.
 
 The diagram below shows the final application configuration including the overlay
 container network, `voteapp`.
 
-![](../images/final-result.png)
+![](/swarm/swarm_at_scale/images/final-result.png)
 
 In this procedure you will connect containers to this network. The `voteapp`
 network is available to all Docker hosts using the Consul discovery backend.
@@ -239,7 +239,7 @@ Now, you can test your application.
 
     You should see something similar to the following:
 
-    ![](../images/vote-app-test.png)
+    ![](/swarm/swarm_at_scale/images/vote-app-test.png)
 
 2. Click on one of the two voting options.
 3. Navigate to the `http://results.myenterprise.example.com` site to see the results.
@@ -247,7 +247,7 @@ Now, you can test your application.
 
     You'll see both sides change as you switch your vote.
 
-    ![](../images/votes.gif)
+    ![](/swarm/swarm_at_scale/images/votes.gif)
 
 ## Extra Credit: Deployment with Docker Compose
 
@@ -301,8 +301,8 @@ the containers at once. This extra credit
     service in the file.  This application relies on a volume and a network,
     declare those at the bottom of the file.
 
-3. Check your work against <a href="../docker-compose.yml" target="_blank">this
-result file</a>
+3. Check your work against
+   [this file](/swarm/swarm_at_scale/docker-compose.yml){: target="_blank" class="_"}.
 
 4. When you are satisfied, save the `docker-compose.yml` file to your system.
 

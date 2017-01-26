@@ -32,7 +32,7 @@ deployed.
 ![Visualizer web page](images/visualizer.png)
 
 This surfaces some configuration and characteristics from
-[docker-stack.yml](index#docker-stackyml), and you can see those strategies in
+[docker-stack.yml](index.md#docker-stackyml), and you can see those strategies in
 action here. For example:
 
 *   We have two nodes running: a `manager` and a `worker`.
