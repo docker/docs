@@ -83,6 +83,7 @@ Various container options that affect container domain name services.
      resolution request from the containers.
      These  <code>--dns</code> IP addresses are managed by the embedded DNS server and
      will not be updated in the container's <code>/etc/resolv.conf</code> file.
+    </p></td>
   </tr>
   <tr>
     <td><p>
