@@ -15,7 +15,10 @@ COPY . md_source
 # then nuke the md_source directory.
 
 ## Branch to pull from, per ref doc
+## To get master from svn the svn branch needs to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
+ENV ENGINE_SVN_BRANCH="trunk"
 ENV ENGINE_BRANCH="master"
+ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.5"
 ENV DISTRIBUTION_BRANCH="release/2.5"
 
 RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend md_source/engine/extend \
