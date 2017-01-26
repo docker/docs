@@ -772,7 +772,7 @@ If you want to go back to using Docker Toolbox, you have to disable the Hyper-V 
   walkthroughs and source code.
 
 * For a summary of Docker command line interface (CLI) commands, see the
-  [Docker CLI Reference Guide](/engine/reference/docker.md).
+  [Docker CLI Reference Guide](/engine/reference/commandline/docker.md).
 
 * Check out the blog post
   [Introducing Docker 1.13.0](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/).

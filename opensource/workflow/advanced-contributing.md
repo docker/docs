@@ -15,7 +15,7 @@ Your goal should be to understand the processes described.
 
 At this point, you should have read and worked through the earlier parts of
 the project contributor guide. You should also have
-<a href="make-a-contribution/" target="_blank"> made at least one project contribution</a>.
+[made at least one project contribution](make-a-contribution/){: target="_blank" class="_"}.
 
 ## Refactor or cleanup proposal
 
@@ -56,22 +56,21 @@ with someone on design work.
 
 The following provides greater detail on the process:
 
-1. Come up with an idea.
+1.  Come up with an idea.
 
     Ideas usually come from limitations users feel working with a product. So,
     take some time to really use Docker. Try it on different platforms; explore
     how it works with different web applications. Go to some community events
     and find out what other users want.
 
-2. Review existing issues and proposals to make sure no other user is proposing a similar idea.
+2.  Review existing issues and proposals to make sure no other user is proposing a similar idea.
 
-    The design proposals are <a
-    href="https://github.com/docker/docker/pulls?q=is%3Aopen+is%3Apr+label%
-    3Akind%2Fproposal" target="_blank">all online in our GitHub pull requests</a>.
+    The design proposals are
+    [all online in our GitHub pull requests](https://github.com/docker/docker/pulls?q=is%3Aopen+is%3Apr+label%3Akind%2Fproposal){: target="_blank" class="_"}
 
-3. Talk to the community about your idea.
+3.  Talk to the community about your idea.
 
-    We have lots of <a href="../../get-help/" target="_blank">community forums</a>
+    We have lots of [community forums](https://forums.docker.com){: target="_blank" class="_"}
     where you can get feedback on your idea. Float your idea in a forum or two
     to get some commentary going on it.
 
