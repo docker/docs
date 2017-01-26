@@ -54,12 +54,12 @@ To upgrade from the CLI, log into a UCP manager node using ssh, and run:
 
 ```
 # Get the latest version of UCP
-$ docker pull docker/ucp:2.1.0-beta1
+$ docker pull {{ page.docker_image }}
 
 $ docker run --rm -it \
   --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  docker/ucp:2.1.0-beta1 \
+  {{ page.docker_image }} \
   upgrade --interactive
 ```
 

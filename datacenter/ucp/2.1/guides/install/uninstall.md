@@ -25,7 +25,7 @@ To uninstall UCP, log in into a manager node using ssh, and run:
 $ docker run --rm -it \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --name ucp \
-  docker/ucp uninstall-ucp --interactive
+  {{ page.docker_image }} uninstall-ucp --interactive
 ```
 
 This runs the uninstall command in interactive mode, so that you are prompted

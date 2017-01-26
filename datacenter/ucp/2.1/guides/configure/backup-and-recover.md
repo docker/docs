@@ -40,7 +40,7 @@ The example below shows how to create a backup of a UCP controller node:
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  docker/ucp backup --interactive \
+  {{ page.docker_image }} backup --interactive \
   --passphrase "secret" > /tmp/backup.tar
 
 # Decrypt the backup and list its contents
@@ -55,7 +55,7 @@ backup:
 ```bash
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
-  docker/ucp restore < backup.tar
+  {{ page.docker_image }} restore < backup.tar
 ```
 
 The restore command may also be invoked in interactive mode:
@@ -64,7 +64,7 @@ The restore command may also be invoked in interactive mode:
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /path/to/backup.tar:/config/backup.tar \
-  docker/ucp restore -i
+  {{ page.docker_image }} restore -i
 ```
 
 ## Restore your cluster

@@ -99,6 +99,7 @@ defaults:
     values:
       ucp_version: "2.1"
       dtr_version: "2.2"
+      docker_image: "docker/dtr:2.2.0-beta2"
   -
     scope:
       path: "datacenter/dtr/2.1"
@@ -118,6 +119,7 @@ defaults:
     values:
       ucp_version: "2.1"
       dtr_version: "2.2"
+      docker_image: "docker/ucp:2.1.0-beta2"
   -
     scope:
       path: "datacenter/ucp/2.0"

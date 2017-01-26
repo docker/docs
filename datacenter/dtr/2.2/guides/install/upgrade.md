@@ -25,7 +25,7 @@ To upgrade DTR, **login with ssh** into a node that's part of the UCP cluster.
 Then pull the latest version of DTR:
 
 ```none
-$ docker pull docker/dtr:2.2.0-beta1
+$ docker pull {{ page.docker_image }}
 ```
 
 If the node you're upgrading doesn't have access to the internet, you can
@@ -36,7 +36,7 @@ Once you have the latest images on the node, run the upgrade command:
 
 ```none
 $ docker run -it --rm \
-  docker/dtr:2.2.0-beta1 upgrade \
+  {{ page.docker_image }} upgrade \
   --ucp-insecure-tls
 ```
 

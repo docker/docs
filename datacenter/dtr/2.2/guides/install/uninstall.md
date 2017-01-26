@@ -19,7 +19,7 @@ When your DTR deployment is down to a single replica, you can use the
 
 ```none
 docker run -it --rm \
-  docker/dtr:2.2.0-beta1 destroy \
+  {{ page.docker_image }} destroy \
   --ucp-insecure-tls
 ```
 
