@@ -113,7 +113,7 @@ Swarms that are registered in Docker Cloud appear in the Swarms list. Each line 
 - **UNAVAILABLE**: Docker Cloud is not receiving any heartbeats from the swarm.
 - **REMOVED**: the swarm has been unregistered from Docker Cloud and will be removed from the list soon.
 
-> **Note**: [Removing a swarm](#unregister-a-swarm-from-Docker-cloud) only makes the swarm unavailable in Docker Cloud. It does not change the swarm itself or any processes running on the swarm.
+> **Note**: [Removing a swarm](#unregister-a-swarm-from-Docker-cloud) only removes the swarm from the interface in Docker Cloud. It does not change the swarm itself or any processes running on the swarm.
 
 ## Connect to a swarm through Docker Cloud
 
