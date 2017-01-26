@@ -1091,7 +1091,7 @@ See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 
 > **Removed in [version 3](compose-file.md#version-3).** The best way to share a
 > volume between services is to use the top-level
-> [`volumes` option](compose-file.md#version-configuration-reference) to define
+> [`volumes` option](compose-file.md#volume-configuration-reference) to define
 > a named volume and reference it from each service's `volumes` list.
 
 Mount all of the volumes from another service or container, optionally
