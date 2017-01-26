@@ -16,8 +16,9 @@ To run through this tutorial, you will need:
 
 1.  A Docker Engine of version 1.13.0 or later, running in [swarm
     mode](/engine/swarm/swarm-mode.md). If you're not familiar with swarm mode,
-    you might want to read [Swarm mode key concepts ](key-concepts.md) and
-    [How services work](how-swarm-mode- works/services.md).
+    you might want to read
+    [Swarm mode key concepts ](/engine/swarm/how-swarm-mode-works/key-concepts.md)
+    and [How services work](/engine/swarm/how-swarm-mode-works/services.md).
 
     > **Note:** If you're trying things out on a local development environment,
     > you can put your engine into swarm mode with `docker swarm init`.
@@ -64,10 +65,10 @@ a throwaway registry, which you can discard afterward.
 
 ## Create the example application
 
-The app used in this guide is based on the hit counter app in the [Get started
-with Docker Compose](/compose/gettingstarted.md) guide. It consists of a Python
-app which maintains a counter in a Redis instance and increments the counter
-whenever you visit it.
+The app used in this guide is based on the hit counter app in the
+[Get started with Docker Compose](/compose/gettingstarted.md) guide. It consists
+of a Python app which maintains a counter in a Redis instance and increments the
+counter whenever you visit it.
 
 1.  Create a directory for the project:
 
@@ -113,7 +114,7 @@ whenever you visit it.
 
 5.  Create a file called `docker-compose.yml` and paste this in:
 
-    ```yaml
+    ```none
     version: '3'
 
     services:
@@ -142,7 +143,7 @@ whenever you visit it.
     Compose doesn't take advantage of swarm mode, and deploys everything to a
     single node. You can safely ignore this.
 
-    ```bash
+    ```none
     $ docker-compose up -d
 
     WARNING: The Docker Engine you're using is running in swarm mode.

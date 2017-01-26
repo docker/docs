@@ -25,7 +25,7 @@ title: Install Docker and run hello-world
 
 Docker for Mac is our newest offering for the Mac. It runs as a native Mac application and uses <a href="https://github.com/mist64/xhyve/" target="_blank">xhyve</a> to virtualize the Docker Engine environment and Linux kernel-specific features for the Docker daemon.
 
-<a class="button" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac</a>
+<a class="button darkblue-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac</a>
 
 **Requirements**
 
@@ -47,7 +47,7 @@ See [Docker Toolbox Overview](/toolbox/overview.md) for help on installing Docke
 
 Docker for Windows is our newest offering for PCs. It runs as a native Windows application and uses Hyper-V to virtualize the Docker Engine environment and Linux kernel-specific features for the Docker daemon.
 
-<a class="button" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows</a>
+<a class="button darkblue-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows</a>
 
 **Requirements**
 

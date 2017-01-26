@@ -8,30 +8,39 @@ title: Overview of Docker Hub
 
 [Docker Hub](https://hub.docker.com) is a cloud-based registry service which
 allows you to link to code repositories, build your images and test them, stores
-manually pushed images, and links to [Docker Cloud](/docker-cloud/) so you can deploy images to your
-hosts. It provides a centralized resource for container image discovery,
-distribution and change management, [user and team collaboration](orgs.md), and
-workflow automation throughout the development pipeline.
+manually pushed images, and links to [Docker Cloud](/docker-cloud/) so you can
+deploy images to your hosts. It provides a centralized resource for container
+image discovery, distribution and change management,
+[user and team collaboration](/docker-hub/orgs.md), and workflow automation
+throughout the development pipeline.
 
-Log in to Docker Hub and Docker Cloud using [your free Docker ID](accounts.md).
+Log in to Docker Hub and Docker Cloud using
+[your free Docker ID](/docker-hub/accounts.md).
 
-![Getting started with Docker Hub](images/getting-started.png)
+![Getting started with Docker Hub](/docker-hub/images/getting-started.png)
 
 Docker Hub provides the following major features:
 
-* [Image Repositories](repos.md): Find and pull images from community and official libraries, and manage, push to, and pull from private image libraries to which you have access.
-* [Automated Builds](builds.md): Automatically create new images when you make changes to a source code repository.
-* [Webhooks](webhooks.md): A feature of Automated Builds, Webhooks let you trigger actions after a successful push to a repository.
-* [Organizations](orgs.md): Create work groups to manage access to image repositories.
-* GitHub and Bitbucket Integration: Add the Hub and your Docker Images to your current workflows.
+* [Image Repositories](/docker-hub/repos.md): Find and pull images from
+  community and official libraries, and manage, push to, and pull from private
+  image libraries to which you have access.
+* [Automated Builds](/docker-hub/builds.md): Automatically create new images
+  when you make changes to a source code repository.
+* [Webhooks](/docker-hub/webhooks.md): A feature of Automated Builds, Webhooks
+  let you trigger actions after a successful push to a repository.
+* [Organizations](/docker-hub/orgs.md): Create work groups to manage access to
+  image repositories.
+* GitHub and Bitbucket Integration: Add the Hub and your Docker Images to your
+  current workflows.
 
 
 ## Create a Docker ID
 
 To explore Docker Hub, you'll need to create an account by following the
-directions in [Your Docker ID](accounts.md).
+directions in [Your Docker ID](/docker-hub/accounts.md).
 
-> **Note**: You can search for and pull Docker images from Hub without logging in, however to push images you must log in.
+> **Note**: You can search for and pull Docker images from Hub without logging
+> in, however to push images you must log in.
 
 Your Docker ID gives you one private Docker Hub repository for free. If you need
 more private repositories, you can upgrade from your free account to a paid
@@ -57,7 +66,7 @@ the repositories you can access and their status, view your "Dashboard" page on
 [Docker Hub](https://hub.docker.com).
 
 You can find more information on working with Docker images in the
-[Docker userguide](/engine/tutorials/dockerimages/).
+[Docker userguide](/engine/getstarted/step_four.md).
 
 ### Use Official Repositories
 
@@ -70,7 +79,10 @@ to building your applications and services.
 With Official Repositories you know you're using an optimized and
 up-to-date image that was built by experts to power your applications.
 
-> **Note:** If you would like to contribute an Official Repository for your organization or product, see the documentation on [Official Repositories on Docker Hub](official_repos.md) for more information.
+> **Note:** If you would like to contribute an Official Repository for your
+> organization or product, see the documentation on
+> [Official Repositories on Docker Hub](/docker-hub/official_repos.md) for more
+> information.
 
 
 ##  Work with Docker Hub image repositories
@@ -80,13 +92,19 @@ images.
 
 You can configure Docker Hub repositories in two ways:
 
-* [Repositories](repos.md), which allow you to push images from a local Docker daemon to Docker Hub, and
-* [Automated Builds](builds.md), which link to a source code repository and trigger an image rebuild process on Docker Hub when changes are detected in the source code.
+* [Repositories](/docker-hub/repos.md), which allow you to push images from a
+  local Docker daemon to Docker Hub, and
+* [Automated Builds](/docker-hub/builds.md), which link to a source code
+  repository and trigger an image rebuild process on Docker Hub when changes are
+  detected in the source code.
 
 You can create public repositories which can be accessed by any other Hub user,
 or you can create private repositories with limited access you control.
 
 ### Docker commands and Docker Hub
 
-Docker itself provides access to Docker Hub services via the [`docker search`](/engine/reference/commandline/search),
-[`pull`](/engine/reference/commandline/pull), [`login`](/engine/reference/commandline/login), and [`push`](/engine/reference/commandline/push) commands.
+Docker itself provides access to Docker Hub services via the
+[`docker search`](/engine/reference/commandline/search.md),
+[`pull`](/engine/reference/commandline/pull.md),
+[`login`](/engine/reference/commandline/login.md), and
+[`push`](/engine/reference/commandline/push.md) commands.

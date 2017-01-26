@@ -14,7 +14,10 @@ you'll need to define a volume.
 
 ### Data persistence
 
-In order to persist, data in Docker Cloud must be stored in a volume. The volume can be defined on the image (for example in the Dockerfile), or specified when you create a new service in the Docker Cloud web UI. Learn more about volumes in Docker Cloud [here](../../apps/volumes.md).
+In order to persist, data in Docker Cloud must be stored in a volume. The volume
+can be defined on the image (for example in the Dockerfile), or specified when
+you create a new service in the Docker Cloud web UI. Learn more about volumes in
+Docker Cloud [here](/docker-cloud/apps/volumes.md).
 
 #### Test for lack of persistence
 
@@ -23,7 +26,7 @@ If you `redeploy` the Redis service you created earlier, you'll see that the cou
 Let's try that. First, redeploy the redis service to reset the counter.
 
 ```bash
-$ docker-cloud service redeploy redis
+$ docker-cloud service redeploy redis --not-reuse-volumes
 ```
 
 Check the container status using the `container ps` command, and wait until the new container is running again. In the example below you can see the original container in the "Terminated" state, and the new container that is "Starting".
@@ -138,5 +141,14 @@ scale the service, view logs, set up a load balancer and a data back end, and
 set up a volume to save the data.
 
 There's lots more to learn about Docker Cloud, so check out [the rest of our documentation](/docker-cloud/), the [API and CLI Documentation](../../../apidocs/docker-cloud.md), and our [Knowledge Hub](https://success.docker.com/Cloud) and [Docker Cloud Forums](https://forums.docker.com/c/docker-cloud).
+
+You might also want to delete or remove all of your hello world Stacks, Services, and Nodes running in Docker Cloud. To clean up when you're finished with the tutorial:
+
+- Click **Stacks** in the left navigation, hover over the stack you created and click the selection box that appears, then click **Terminate**.
+- Once the Stack has terminated, click **Services** in the left navigation, hover over each service you created, click the selection box that appears, then click **Terminate**.
+- Click **Node Clusters** in the left navigation, hover over the node cluster you created, click the selection box that appears, then click **Terminate**.
+
+Objects (Stacks, Services, Node Clusters, and Containers and nodes) still appear
+in the list in Docker Cloud for about five minutes after they are terminated.
 
 Happy Docking!

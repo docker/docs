@@ -140,7 +140,7 @@ toc:
   - sectiontitle: Define and deploy your app
     section:
     - path: /engine/getstarted-voting-app/
-      title: Tour the voting app sample
+      title: Sample app overview
     - path: /engine/getstarted-voting-app/node-setup/
       title: Set up Dockerized machines
     - path: /engine/getstarted-voting-app/create-swarm/
@@ -150,7 +150,7 @@ toc:
     - path: /engine/getstarted-voting-app/test-drive/
       title: Try out the voting app
     - path: /engine/getstarted-voting-app/customize-app/
-      title: Customize the app and redploy
+      title: Customize the app and redeploy
   - sectiontitle: Learn by example
     section:
     - path: /engine/tutorials/networkingcontainers/
@@ -440,7 +440,7 @@ toc:
   - path: /engine/reference/commandline/cli/
     title: Use the Docker command line
   - path: /engine/reference/commandline/dockerd/
-    title: Daemon CLI reference
+    title: Daemon CLI reference (dockerd)
   - sectiontitle: Engine CLI reference
     section:
     - path: /engine/reference/commandline/docker/
@@ -449,6 +449,8 @@ toc:
       title: docker attach
     - path: /engine/reference/commandline/build/
       title: docker build
+    - path: /engine/reference/commandline/checkpoint/
+      title: docker checkpoint
     - path: /engine/reference/commandline/commit/
       title: docker commit
     - sectiontitle: docker container *

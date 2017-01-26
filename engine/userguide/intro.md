@@ -25,7 +25,7 @@ This guide is broken into major sections that take you through learning the basi
 Docker Engine offers a containerization platform to power your applications. To
 learn how to Dockerize applications and run them:
 
-Go to [Dockerizing Applications](../tutorials/dockerizing.md).
+Go to [Dockerizing Applications](/engine/getstarted/step_one.md).
 
 
 ## Working with containers
@@ -35,7 +35,7 @@ Go to [Dockerizing Applications](../tutorials/dockerizing.md).
 Once you get a grip on running your applications in Docker containers, you'll learn how to manage those containers. To find out
 about how to inspect, monitor and manage containers:
 
-Go to [Working with Containers](../tutorials/usingdocker.md).
+Go to [Working with Containers](/engine/getstarted/step_three.md).
 
 ## Working with Docker images
 
@@ -44,7 +44,7 @@ Go to [Working with Containers](../tutorials/usingdocker.md).
 Once you've learnt how to use Docker it's time to take the next step and
 learn how to build your own application images with Docker.
 
-Go to [Working with Docker Images](../tutorials/dockerimages.md).
+Go to [Working with Docker Images](/engine/getstarted/step_four.md).
 
 ## Networking containers
 
@@ -52,14 +52,14 @@ Until now we've seen how to build individual applications inside Docker
 containers. Now learn how to build whole application stacks with Docker
 networking.
 
-Go to [Networking Containers](../tutorials/networkingcontainers.md).
+Go to [Networking Containers](/engine/tutorials/networkingcontainers.md).
 
 ## Managing data in containers
 
 Now we know how to link Docker containers together the next step is
 learning how to manage data, volumes and mounts inside our containers.
 
-Go to [Managing Data in Containers](../tutorials/dockervolumes.md).
+Go to [Managing Data in Containers](/engine/tutorials/dockervolumes.md).
 
 ## Managing metadata (labels) for Docker objects
 
@@ -124,7 +124,7 @@ Go to [Docker Swarm user guide](/swarm/).
 * [Docker Hub](https://hub.docker.com)
 * [Docker blog](https://blog.docker.com/)
 * [Docker documentation](/)
-* [Docker Getting Started Guide](../getstarted/index.md)
+* [Docker Getting Started Guide](/engine/getstarted/index.md)
 * [Docker code on GitHub](https://github.com/docker/docker)
 * [Docker mailing
   list](https://groups.google.com/forum/#!forum/docker-user)

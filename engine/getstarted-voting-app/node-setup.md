@@ -66,7 +66,7 @@ worker    -        virtualbox   Running   tcp://192.168.99.101:2376           v1
 
 You now have two "Dockerized" machines, each running
 Docker Engine, accessible through the
-[Docker CLI](/engine/reference/commandline.md), and available
+[Docker CLI](/engine/reference/commandline/docker.md), and available
 to become swarm nodes.
 
 You can also get the IP address of a particular machine:

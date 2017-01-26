@@ -2,7 +2,7 @@
 title: Getting started with the Engine API
 ---
 
-To try out the Docker Engine API in development, [you first need to install Docker](https://docs.docker.com/engine/installation/).
+To try out the Docker Engine API in development, [you first need to install Docker](/engine/installation.md).
 
 Next, you need to install an SDK for the language you are using. There are official ones available for Python and Go, and a number of community maintained libraries for other languages. [Head to the SDKs page to find and install them.](sdks.md)
 

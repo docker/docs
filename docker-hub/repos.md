@@ -12,10 +12,10 @@ organization account.
 
 Alternatively, if the source code for your Docker image is on GitHub or
 Bitbucket, you can use an "Automated build" repository, which is built by the
-Docker Hub services. See the [automated builds documentation](builds.md) to read
+Docker Hub services. See the [automated builds documentation](/docker-hub/builds.md) to read
 about the extra functionality provided by those services.
 
-![repositories](images/repos.png)
+![repositories](/docker-hub/images/repos.png)
 
 ## Searching for images
 
@@ -59,7 +59,7 @@ Image sizes are the cumulative space taken up by the image and all its parent
 images. This is also the disk space used by the contents of the Tar file created
 when you `docker save` an image.
 
-![images/busybox-image-tags.png](images/busybox-image-tags.png)
+![images/busybox-image-tags.png](/docker-hub/images/busybox-image-tags.png)
 
 ## Creating a new repository on Docker Hub
 
@@ -68,7 +68,7 @@ Docker Hub." screen, from which you can click directly into "Create Repository".
 You can also use the "Create &#x25BC;" menu to "Create Repository".
 
 When creating a new repository, you can choose to put it in your Docker ID
-namespace, or that of any [organization](orgs.md) that you are in the "Owners"
+namespace, or that of any [organization](/docker-hub/orgs.md) that you are in the "Owners"
 team. The Repository Name will need to be unique in that namespace, can be two
 to 255 characters, and can only contain lowercase letters, numbers or `-` and
 `_`.
@@ -95,7 +95,7 @@ You can name your local images either when you build it, using
 by re-tagging an existing local image `docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`,
 or by using `docker commit <exiting-container> <hub-user>/<repo-name>[:<tag>]` to commit
 changes.
-See [Working with Docker images](/engine/tutorials/dockerimages/) for a detailed description.
+See [Working with Docker images](/engine/getstarted/step_four.md) for a detailed description.
 
 Now you can push this repository to the registry designated by its name or tag.
 
@@ -130,7 +130,7 @@ changing its status from private to public.
 
 You can also assign more granular collaborator rights ("Read", "Write", or
 "Admin") on Docker Hub by using organizations and teams. For more information
-see the [organizations documentation](orgs.md).
+see the [organizations documentation](/docker-hub/orgs.md).
 
 ## Private repositories
 
@@ -158,8 +158,8 @@ It is possible to give access to a private repository to those whom you
 designate (i.e., collaborators) from its "Settings" page. From there, you can
 also switch repository status (*public* to *private*, or vice-versa). You will
 need to have an available private repository slot open before you can do such a
-switch. If you don't have any available, you can always upgrade your [Docker
-Hub](https://hub.docker.com/account/billing-plans/) plan.
+switch. If you don't have any available, you can always upgrade your
+[Docker Hub](https://hub.docker.com/account/billing-plans/) plan.
 
 ## Webhooks
 
