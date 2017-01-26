@@ -319,7 +319,7 @@ toc:
       title: Link via an ambassador container
   - sectiontitle: Troubleshoot Docker Engine
     section:
-    - path: /engine/admin/troubleshooting_volume_errors.md
+    - path: /engine/admin/troubleshooting_volume_errors/
       title: Troubleshoot volume problems
   - sectiontitle: Manage a swarm
     section:
@@ -365,7 +365,7 @@ toc:
       title: Deploy services to a swarm
     - path: /engine/swarm/secrets/
       title: Manage sensitive data with Docker secrets
-    - path: /engine/swarm/swarm_manager_locking.md
+    - path: /engine/swarm/swarm_manager_locking/
       title: Lock your swarm
     - path: /engine/swarm/networking/
       title: Attach services to an overlay network
@@ -449,8 +449,18 @@ toc:
       title: docker attach
     - path: /engine/reference/commandline/build/
       title: docker build
-    - path: /engine/reference/commandline/checkpoint/
-      title: docker checkpoint
+    - sectiontitle: docker checkpoint *
+      section:
+      - path: /engine/reference/commandline/checkpoint/
+        title: docker checkpoint
+      - path: /engine/reference/commandline/checkpoint_create/
+        title: docker checkpoint create
+      - path: /engine/reference/commandline/checkpoint_create/
+        title: docker checkpoint create
+      - path: /engine/reference/commandline/checkpoint_ls/
+        title: docker checkpoint ls
+      - path: /engine/reference/commandline/checkpoint_rm/
+        title: docker checkpoint rm
     - path: /engine/reference/commandline/commit/
       title: docker commit
     - sectiontitle: docker container *
@@ -1152,7 +1162,7 @@ toc:
           - path: /datacenter/ucp/1.1/reference/join/
             title: join
           - path: /datacenter/ucp/1.1/reference/regen-certs/
-            title: regen-certs.md
+            title: regen-certs/
           - path: /datacenter/ucp/1.1/reference/restart/
             title: restart
           - path: /datacenter/ucp/1.1/reference/restore/

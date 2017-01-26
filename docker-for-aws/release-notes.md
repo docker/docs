@@ -21,7 +21,7 @@ Release date: 12/06/2016
 - New option to decide if you want to send container logs to CloudWatch. (previously it was always on)
 - SSH access has been added to the worker nodes
 - The Docker daemon no longer listens on port 2375
-- Added a `swarm-exec` to execute a docker command across all of the swarm nodes. See [Executing Docker commands in all swarm nodes](deploy.md#execute-docker-commands-in-all-swarm-nodes) for more details.
+- Added a `swarm-exec` to execute a docker command across all of the swarm nodes. See [Executing Docker commands in all swarm nodes](/docker-for-aws/deploy.md#execute-docker-commands-in-all-swarm-nodes) for more details.
 
 ## 1.13.0-rc2-beta12
 Release date: 11/23/2016
@@ -62,8 +62,8 @@ Release date: 10/27/2016
 - Docker Engine upgraded to Docker 1.12.3
 - Fixed the shell container that runs on the managers, to remove a ssh host key that was accidentally added to the image.
 This could have led to a potential man in the middle (MITM) attack. The ssh host key is now generated on host startup, so that each host has its own key.
-- The SSH ELB for SSH'ing into the managers has been removed because it is no longer possible to SSH into the managers without getting a security warning
-- Each Manager can be SSH'd into by following our deploy [guide](docker-for-aws/deploy.md)
+- The SSH ELB for connecting to the managers by SSH has been removed because it is no longer possible to SSH into the managers without getting a security warning
+- You can connect to each manager using SSH by following our deploy [guide](/docker-for-aws/deploy.md)
 - Added new region us-east-2 (Ohio)
 - Fixed some bugs related to upgrading the swarm
 - SSH keypair is now a required field in CloudFormation

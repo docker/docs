@@ -430,7 +430,7 @@ such as
 
 To activate bash completion, these files need to be copied or symlinked to your
 `bash_completion.d/` directory. For example, if you use
-[Homebrew](htt://brew.sh/):
+[Homebrew](http://brew.sh/):
 
 ```bash
 ln -s /Applications/Docker.app/Contents/Resources/etc/docker.bash-completion /usr/local/etc/bash_completion.d/docker

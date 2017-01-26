@@ -17,7 +17,7 @@ To run through this tutorial, you will need:
 1.  A Docker Engine of version 1.13.0 or later, running in [swarm
     mode](/engine/swarm/swarm-mode.md). If you're not familiar with swarm mode,
     you might want to read
-    [Swarm mode key concepts ](/engine/swarm/how-swarm-mode-works/key-concepts.md)
+    [Swarm mode key concepts](/engine/swarm/key-concepts.md)
     and [How services work](/engine/swarm/how-swarm-mode-works/services.md).
 
     > **Note:** If you're trying things out on a local development environment,

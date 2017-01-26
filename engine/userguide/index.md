@@ -13,7 +13,7 @@ This guide helps users learn how to use Docker Engine.
 - [Hello world in a container](/engine/getstarted/step_one.md)
 - [Build your own images](/engine/getstarted/step_four.md)
 - [Network containers](/engine/tutorials/networkingcontainers.md)
-- [Run a simple application](/engine/userguide/step_three.md)
+- [Run a simple application](/engine/getstarted/step_three.md)
 - [Manage data in containers](/engine/tutorials/dockervolumes.md)
 - [Store images on Docker Hub](/engine/getstarted/step_six.md)
 
