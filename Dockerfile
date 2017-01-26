@@ -45,8 +45,7 @@ RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend 
  && wget -O allv/engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
  && jekyll build -s allv -d allvbuild \
  && rm -rf allv/apidocs/layouts \
- && find allvbuild/engine/reference -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
- && find allvbuild/engine/extend -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
+ && find allvbuild -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
  && rm -rf allv
 
 # Serve the site, which is now all static HTML
