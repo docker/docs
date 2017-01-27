@@ -84,9 +84,7 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-beta-channels).
 <p />
 * **System Requirements**: Docker for Mac will launch only if all of these
   requirements are met.
-
   <p />
-
   - Mac must be a 2010 or newer model, with Intel's hardware support for memory
     management unit (MMU) virtualization; i.e., Extended Page Tables (EPT) and
     Unrestricted Mode.
