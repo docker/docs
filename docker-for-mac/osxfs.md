@@ -38,10 +38,19 @@ Docker user who started the containers.
 ### Namespaces
 
 Much of the OS X file system that is accessible to the user is also available to
-containers using the `-v` bind mount syntax. By default, you can share files in
-`/Users`, `/Volumes`, `/private`, and `/tmp` directly. To add or remove
-directory trees that are exported to Docker, use the **File sharing** tab in
-Docker preferences <img src="../images/whale-x.png"> -> **Preferences** ->
+containers using the `-v` bind mount syntax. For example, the command 
+
+`docker run -it -v ~/Desktop:/Desktop r-base bash`
+
+runs the Docker image called `r-base`, shares the Desktop of OSX in `/Desktop` and 
+starts bash. You can see the folder called Desktop inside the container such that
+
+`root@2h30fa0c600e:/# ls
+bin  boot  Desktop  dev  etc  home  lib  lib32	lib64  libx32  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var`
+
+and, by default, you can share files in `/Users`, `/Volumes`, `/private`, and `/tmp` 
+directly. To add or remove directory trees that are exported to Docker, use the 
+**File sharing** tab in Docker preferences <img src="../images/whale-x.png"> -> **Preferences** ->
 **File sharing**. (See [Preferences](index.md#preferences).) All other paths
 used in `-v` bind mounts are sourced from the Moby Linux VM running the Docker
 containers, so arguments such as `-v /var/run/docker.sock:/var/run/docker.sock`
