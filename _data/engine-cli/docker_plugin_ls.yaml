@@ -1,4 +1,5 @@
 command: docker plugin ls
+aliases: list
 short: List plugins
 long: List plugins
 usage: docker plugin ls [OPTIONS]

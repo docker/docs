@@ -1,4 +1,5 @@
 command: docker volume ls
+aliases: list
 short: List volumes
 long: |
   Lists all the volumes Docker knows about. You can filter using the `-f` or
