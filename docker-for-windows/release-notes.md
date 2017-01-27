@@ -258,6 +258,25 @@ We did not distribute a 1.12.4 stable release
 
 ## Beta Release Notes
 
+### Beta 39 Release Notes (2017-01-26 1.13.0-beta39)
+
+**Upgrades**
+
+- Linux kernel 4.9.5
+
+**New**
+
+- DNS forwarder ignores responses from malfunctioning servers
+- DNS forwarder send all queries in parallel, process results in order
+- DNS forwarder includes servers with zones in general searches
+- Significantly increased single-stream TCP throughput
+
+**Bug fixes and minor improvements**
+
+- Fix some timeout issues in port forwarding
+- Fix for swap not being mounted ([docker/for-win#403](https://github.com/docker/for-win/issues/403))
+- Fix aufs xattr delete issue ([docker/docker#30245](https://github.com/docker/docker/issues/30245))
+
 ### Beta 38 Release Notes (2017-01-20 1.13.0-beta38)
 
 **Upgrades**

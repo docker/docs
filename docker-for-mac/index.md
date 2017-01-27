@@ -71,36 +71,36 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-beta-channels).
   [Docker for Mac vs. Docker Toolbox](docker-toolbox.md) to understand the
   impact of this installation on your existing setup, how to set your environment
   for Docker for Mac, and how the two products can coexist.
-
+<p />
 * **Relationship to Docker Machine**: Installing Docker for Mac does not affect
   machines you created with Docker Machine. You'll get the option to copy
   containers and images from your local `default` machine (if one exists) to the
-  new Docker for Mac [HyperKit](https://github.com/docker/HyperKit/)"> VM. When
+  new Docker for Mac [HyperKit](https://github.com/docker/HyperKit/)" VM. When
   you are running Docker for Mac, you do not need Docker Machine nodes running
   at all locally (or anywhere else). With Docker for Mac, you have a new, native
   virtualization system running (HyperKit) which takes the place of the
   VirtualBox system. To learn more, see
   [Docker for Mac vs. Docker Toolbox](docker-toolbox.md).
-
+<p />
 * **System Requirements**: Docker for Mac will launch only if all of these
   requirements are met.
-
-	- Mac must be a 2010 or newer model, with Intel's hardware support for memory
+  <p />
+  - Mac must be a 2010 or newer model, with Intel's hardware support for memory
     management unit (MMU) virtualization; i.e., Extended Page Tables (EPT) and
     Unrestricted Mode.
-
+  <p />
   - OS X El Capitan 10.11 and newer macOS releases are supported. At a minimum,
     Docker for Mac requires macOS Yosemite 10.10.3 or newer, with the caveat
     that going forward 10.10.x is a use-at-your-own risk proposition.
-
+  <p />
   - Starting with Docker for Mac stable release 1.13 (upcoming), and concurrent
     Beta releases, we will no longer address issues specific to OS X Yosemite
     10.10. In future releases, Docker for Mac could stop working on OS X Yosemite
     10.10 due to the deprecated status of this OS X version. We recommend
     upgrading to the latest version of macOS.
-
+  <p />
   - At least 4GB of RAM
-
+  <p />
   - VirtualBox prior to version 4.3.30 must NOT be installed (it is incompatible
     with Docker for Mac)
 
@@ -213,8 +213,7 @@ docker-machine version 0.9.0-rc2, build 7b19591
     `docker rm -f webserver`. This will remove the container, but not the
     `nginx` image. You can list local images with `docker images`. You might
     want to keep some images around so that you don't have to pull them again
-    from Docker Hub. To remove an image you no longer need, use `docker rmi`
-    followed by an image ID or image name. For example, `docker rmi nginx`.
+    from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
 
 **Want more example applications?** - For more example walkthroughs that include
 setting up  services and databases in Docker Compose, see
@@ -305,6 +304,17 @@ lower (to `1`) if you want Docker for Mac to use less memory.
 
 You can specify the **storage location** of the Linux volume; i.e., where
 containers and images are stored.
+
+##### Disk image location (Beta)
+
+Starting with Beta 39, the labels on this dialog were updated as follows.
+
+*  **Storage location** is renamed to **Disk image location**
+*  **Change location** button is renamed to **move disk image**
+
+![Beta Advanced settings](images/settings-advanced-beta.png)
+
+
 
 
 ### HTTP proxy settings
@@ -456,13 +466,13 @@ options at the bottom of each docs page.
 
 ## Where to go next
 
-* Try out the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
+* Try out the tutorials and sample app walkthroughs at [Learn Docker](/learn.md), including:
 
-* Follow up by working through the voting app example to learn how to
-[define and deploy a Docker stack](/engine/getstarted-voting-app/index.md) to a
-[swarm](/engine/swarm/index.md). This example shows how to deploy multiple
-containers as services and use new
-[Compose Version 3](/compose/compose-file.md#version-3) features.
+  *  Learn Docker basics in [Getting Started with Docker](/engine/getstarted/index.md)
+
+  * Learn how to [define and deploy a Docker stack to a swarm](/engine/getstarted-voting-app/index.md)
+  (deploy multiple containers as services and use new
+    Compose Version 3 features)
 
 * Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example
   walkthroughs and source code.

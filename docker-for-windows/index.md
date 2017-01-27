@@ -334,8 +334,7 @@ The next few steps take you through some examples. These are just suggestions fo
     `docker rm -f webserver`. This will remove the container, but not the
     `nginx` image. You can list local images with `docker images`. You might
     want to keep some images around so that you don't have to pull them again
-    from Docker Hub. To remove an image you no longer need, use `docker rmi
-    <imageID>|<imageName>`. For example, `docker rmi nginx`.
+    from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
 
 **Want more example applications?** - For more example walkthroughs that include
 setting up services and databases with Docker Compose, see
@@ -760,19 +759,18 @@ If you want to go back to using Docker Toolbox, you have to disable the Hyper-V 
 
 ## Where to go next
 
-* Try out the [Getting Started with Docker](/engine/getstarted/index.md) tutorial.
+* Try out the tutorials and sample app walkthroughs at [Learn Docker](/learn.md), including:
 
-* Follow up by working through the voting app example to learn how to
-  [define and deploy a Docker stack](/engine/getstarted-voting-app/index.md) to a
-  [swarm](/engine/swarm/index.md). This example shows how to deploy multiple
-  containers as services and use new
-  [Compose Version 3](/compose/compose-file.md#version-3) features.
+  *  Learn Docker basics in [Getting Started with Docker](/engine/getstarted/index.md)
 
-* Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example
-  walkthroughs and source code.
+  * Learn how to [define and deploy a Docker stack to a swarm](/engine/getstarted-voting-app/index.md)
+  (deploy multiple containers as services and use new
+    Compose Version 3 features)
 
-* For a summary of Docker command line interface (CLI) commands, see the
-  [Docker CLI Reference Guide](/engine/reference/commandline/docker.md).
+* Dig in deeper with [Docker Labs](https://github.com/docker/labs/) example walkthroughs and source code.
+
+* For a summary of Docker command line interface (CLI) commands,
+see the [Docker CLI Reference Guide](/engine/reference/commandline/docker.md).
 
 * Check out the blog post
   [Introducing Docker 1.13.0](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/).
