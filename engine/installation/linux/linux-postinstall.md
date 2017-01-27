@@ -10,6 +10,8 @@ better with Docker.
 
 * [Manage Docker as a non-root user](#manage-docker-as-a-non-root-user)
 * [Configure Docker to start on boot](#configure-docker-to-start-on-boot)
+* [Use a different storage engine](#use-a-different-storage-engine)
+* [Enable experimental features](#enable-experimental-features)
 * [Allow access to the remote API through a firewall](#allow-access-to-the-remote-api-through-a-firewall)
 * [Troubleshooting](#troubleshooting)
 
@@ -96,6 +98,76 @@ For information about the different storage engines, see
 [Storage drivers](/engine/userguide/storagedriver/imagesandcontainers.md).
 The default storage engine and the list of supported storage engines depend on
 your host's Linux distribution and available kernel drivers.
+
+## Enable experimental features
+
+Some features of Docker are introduced as experimental features for one or more
+releases. Previously, you needed to download and install an
+**experimental build** to use these features. In Docker 1.13 and higher,
+experimental features are included in all stable Docker builds and packages,
+but disabled by default. To enable experimental features, start the Docker
+daemon (`dockerd`) with the `--experimental` flag. You can do this
+[temporarily](#temporarily-enable-experimental-features) or
+[permanently](#permanently-enable-experimental-features).
+
+> **Note**: Docker for Windows and Docker for Mac ship with experimental
+> features enabled by default. You can disable them in the Daemon preferences.
+> See the instructions for
+> [Windows](/docker-for-windows/index.md#experimenta-mode) or
+> [macOS](/docker-for-mac/index.md#experimental-mode).
+
+### Check whether experimental mode is enabled
+
+To check a running Docker daemon's configuration parameters, including whether
+experimental mode is enabled, use the `docker info` command.
+
+```bash
+$ docker info |grep Experimental
+
+Experimental: true
+```
+
+### Temporarily enable experimental features
+
+1.  Stop the Docker daemon using your operating system's commands, such as
+    `sudo service docker stop` or `sudo systemctl stop docker`.
+
+2.  Start the Docker daemon manually and add the `--experimental` flag:
+
+    ```bash
+    $ sudo /usr/bin/dockerd --experimental
+    ```
+
+The Docker daemon starts in the foreground. To stop it, use `Ctrl+C`.
+
+### Permanently enable experimental features
+
+> **Info**: The configuration details and usage for experimental features may
+> change due to user input. Some experimental features may be removed at a later
+> time. Experimental features do not have the same stability guarantees as
+> stable features. See the
+> [Experimental Features README](https://github.com/docker/docker/tree/master/experimental).
+
+1.  Edit the Docker daemon configuration file, which defaults to
+    `/etc/docker/daemon.json`.
+
+2.  Adhering to JSON syntax, add the key `experimental` with the value `true`.
+    The following example shows a very simple `daemon.json`, but yours may be
+    different. Be sure that all but the last key-value pairs have a comma at
+    the end.
+
+    ```json
+    {
+        "dns": ["8.8.8.8", "8.8.4.4"],
+        "experimental": true
+    }
+    ```
+
+    Save the file and exit.
+
+3.  Restart Docker using operating system commands, such as
+    `service docker restart` or `systemctl restart docker`. If the `daemon.json`
+    file has syntax errors, Docker will not start and an error will be logged.
 
 ## Troubleshooting
 
@@ -213,7 +285,7 @@ at `/etc/docker/daemon.json`.
 
 2.  Add a `dns` key with one or more IP addresses as values. If the file has
     existing contents, you only need to add or edit the `dns` line.
-    
+
     ```json
     {
     	"dns": ["8.8.8.8", "8.8.4.4"]
