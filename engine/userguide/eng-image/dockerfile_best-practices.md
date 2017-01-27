@@ -34,7 +34,10 @@ You can see many of these practices and recommendations in action in the [buildp
 The container produced by the image your `Dockerfile` defines should be as
 ephemeral as possible. By “ephemeral,” we mean that it can be stopped and
 destroyed and a new one built and put in place with an absolute minimum of
-set-up and configuration.
+set-up and configuration. You may want to take a look at the
+[Processes](https://12factor.net/processes) section of the 12 Factor app
+methodology to get a feel for the motivations of running containers in such a
+stateless fashion.
 
 ### Use a .dockerignore file
 
@@ -52,12 +55,26 @@ should avoid installing extra or unnecessary packages just because they
 might be “nice to have.” For example, you don’t need to include a text editor
 in a database image.
 
-### Run only one process per container
+### Each container should have only one concern
 
-In almost all cases, you should only run a single process in a single
-container. Decoupling applications into multiple containers makes it much
-easier to scale horizontally and reuse containers. If that service depends on
-another service, make use of [container linking](../../userguide/networking/default_network/dockerlinks.md).
+Decoupling applications into multiple containers makes it much easier to scale
+horizontally and reuse containers. For instance, a web application stack might
+consist of three separate containers, each with its own unique image, to manage
+the web application, database, and an in-memory cache in a decoupled manner.
+
+You may have heard that there should be "one process per container". While this
+mantra has good intentions, it is not necessarily true that there should be only
+one operating system process per container. In addition to the fact that
+containers can now be [spawned with an init process](https://docs.docker.com/engine/reference/run/#/specifying-an-init-process),
+some programs might spawn additional processes of their own accord. For
+instance, [Celery](http://www.celeryproject.org/) can spawn multiple worker
+processes, or [Apache](https://httpd.apache.org/) might create a process per
+request. While "one process per container" is frequently a good rule of thumb,
+it is not a hard and fast rule. Use your best judgment to keep containers as
+clean and modular as possible.
+
+If containers depend on each other, you can use [Docker container networks](https://docs.docker.com/engine/userguide/networking/)
+ to ensure that these containers can communicate.
 
 ### Minimize the number of layers
 
