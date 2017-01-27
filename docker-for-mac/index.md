@@ -307,15 +307,12 @@ containers and images are stored.
 
 ##### Disk image location (Beta)
 
-Starting with Beta 39, the labels on this dialog were updated as follows.
+Starting with Beta 39, _storage image_ is referred to as _disk image_, and is tracked by the app.  If you attempt to move the disk image to a location that already has one, you will get a prompt asking if you want to use the existing image or replace it. For Beta releases going forward, the labels on this dialog were updated as follows.
 
 *  **Storage location** is renamed to **Disk image location**
 *  **Change location** button is renamed to **move disk image**
 
 ![Beta Advanced settings](images/settings-advanced-beta.png)
-
-
-
 
 ### HTTP proxy settings
 
