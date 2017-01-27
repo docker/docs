@@ -19,13 +19,13 @@ https://www.github.com/docker/docker
 ### Attaching to a container
 
 In this example the top command is run inside a container, from an image called
-fedora, in detached mode. The ID from the container is passed into the **docker
-attach** command:
+fedora, in detached mode. The ID from the container is passed into the
+**docker container attach** command:
 
 ```bash
-$ ID=$(sudo docker run -d fedora /usr/bin/top -b)
+$ ID=$(sudo docker container run -d fedora /usr/bin/top -b)
 
-$ sudo docker attach $ID
+$ sudo docker container attach $ID
 top - 02:05:52 up  3:05,  0 users,  load average: 0.01, 0.02, 0.05
 Tasks:   1 total,   1 running,   0 sleeping,   0 stopped,   0 zombie
 Cpu(s):  0.1%us,  0.2%sy,  0.0%ni, 99.7%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st

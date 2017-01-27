@@ -27,7 +27,7 @@ $  export DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE="l7pEQcTKJjUHm6Lpe4"
 Then, when pushing a new tag the Docker client does not request these values but signs automatically:
 
 ```bash
-$  docker push docker/trusttest:latest
+$  docker image push docker/trusttest:latest
 The push refers to a repository [docker.io/docker/trusttest] (len: 1)
 a9539b34a6ab: Image already exists
 b3dbab3810fc: Image already exists
@@ -39,7 +39,7 @@ When working directly with the Notary client, it will use its [own set of enviro
 
 ## Building with content trust
 
-You can also build with content trust. Before running the `docker build` command, you should set the environment variable `DOCKER_CONTENT_TRUST` either manually or in a scripted fashion. Consider the simple Dockerfile below.
+You can also build with content trust. Before running the `docker image build` command, you should set the environment variable `DOCKER_CONTENT_TRUST` either manually or in a scripted fashion. Consider the simple Dockerfile below.
 
 ```Dockerfile
 FROM docker/trusttest:latest
@@ -51,7 +51,7 @@ The `FROM` tag is pulling a signed image. You cannot build an image that has a
 data exists for the tag `latest`, the following build should succeed:
 
 ```bash
-$  docker build -t docker/trusttest:testing .
+$  docker image build -t docker/trusttest:testing .
 Using default tag: latest
 latest: Pulling from docker/trusttest
 
@@ -63,7 +63,7 @@ Digest: sha256:d149ab53f871
 If content trust is enabled, building from a Dockerfile that relies on tag without trust data, causes the build command to fail:
 
 ```bash
-$  docker build -t docker/trusttest:testing .
+$  docker image build -t docker/trusttest:testing .
 unable to process Dockerfile: No trust data for notrust
 ```
 

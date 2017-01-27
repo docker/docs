@@ -167,7 +167,7 @@ the files to the `.docker` directory in your home directory -- and set the
 
 Docker will now connect securely by default:
 
-    $ docker ps
+    $ docker container ls
 
 ## Other modes
 

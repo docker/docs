@@ -82,7 +82,7 @@ While running the "migrator" image you need to expose your Docker host's data
 directory to the container. If you are using the default Docker data path, the
 command to run the container will look like this
 
-    $ sudo docker run --rm -v /var/lib/docker:/var/lib/docker docker/v1.10-migrator
+    $ sudo docker container run --rm -v /var/lib/docker:/var/lib/docker docker/v1.10-migrator
 
 If you use the `devicemapper` storage driver, you will need to include the
 `--privileged` option so that the container has access to your storage devices.
@@ -110,7 +110,7 @@ single 8GB general purpose SSD EBS volume. The Docker data directory
 
     2.0G    /var/lib/docker
 
-    $ time docker run --rm -v /var/lib/docker:/var/lib/docker docker/v1.10-migrator
+    $ time docker container run --rm -v /var/lib/docker:/var/lib/docker docker/v1.10-migrator
 
     Unable to find image 'docker/v1.10-migrator:latest' locally
     latest: Pulling from docker/v1.10-migrator
@@ -129,7 +129,7 @@ single 8GB general purpose SSD EBS volume. The Docker data directory
     user    0m0.046s
     sys     0m0.008s
 
-The Unix `time` command prepends the `docker run` command to produce timings
+The Unix `time` command prepends the `docker container run` command to produce timings
 for the operation. As can be seen, the overall time taken to migrate 7 images
 comprising 2GB of disk space took approximately 1 minute. However, this
 included the time taken to pull the `docker/v1.10-migrator` image
@@ -197,10 +197,10 @@ managed by the storage driver. On Linux-based Docker hosts this is usually
 located under `/var/lib/docker/`.
 
 The Docker client reports on image layers when instructed to pull and push
-images with `docker pull` and `docker push`. The command below pulls the
+images with `docker image pull` and `docker image push`. The command below pulls the
 `ubuntu:15.04` Docker image from Docker Hub.
 
-    $ docker pull ubuntu:15.04
+    $ docker image pull ubuntu:15.04
 
     15.04: Pulling from library/ubuntu
     1ba8ac955b97: Pull complete
@@ -224,7 +224,7 @@ with Docker version 1.10 and later. For example, the command below shows an
 image being pulled from Docker Hub, followed by a directory listing on a host
 running version 1.9.1 of the Docker Engine.
 
-    $  docker pull ubuntu:15.04
+    $  docker image pull ubuntu:15.04
 
     15.04: Pulling from library/ubuntu
     47984b517ca9: Pull complete
@@ -245,7 +245,7 @@ Notice how the four directories match up with the layer IDs of the downloaded
 image. Now compare this with the same operations performed on a host running
 version 1.10 of the Docker Engine.
 
-    $ docker pull ubuntu:15.04
+    $ docker image pull ubuntu:15.04
     15.04: Pulling from library/ubuntu
     1ba8ac955b97: Pull complete
     f157c4e5ede7: Pull complete
@@ -272,7 +272,7 @@ images will share any common image layers.
 
 You can illustrate this now for yourself. Starting with the `ubuntu:15.04`
 image that you just pulled, make a change to it, and build a new image based on
- the change. One way to do this is using a `Dockerfile` and the `docker build`
+ the change. One way to do this is using a `Dockerfile` and the `docker image build`
 command.
 
 1. In an empty directory, create a simple `Dockerfile` that starts with the
@@ -294,7 +294,7 @@ command.
 4. From a terminal in the same folder as your `Dockerfile`, run the following
    command:
 
-        $ docker build -t changed-ubuntu .
+        $ docker image build -t changed-ubuntu .
 
         Sending build context to Docker daemon 2.048 kB
         Step 1 : FROM ubuntu:15.04
@@ -306,7 +306,7 @@ command.
         Successfully built 94e6b7d2c720
 
     > **Note:** The period (.) at the end of the above command is important. It
-    >  tells the `docker build` command to use the current working directory as
+    >  tells the `docker image build` command to use the current working directory as
     >   its build context.
 
     The output above shows a new image with image ID `94e6b7d2c720`.
@@ -318,10 +318,10 @@ command.
         changed-ubuntu   latest   03b964f68d06   33 seconds ago    131.4 MB
         ubuntu           15.04    013f3d01d247   6 weeks ago       131.3 MB
 
-6. Run the `docker history` command to see which image layers were used to
+6. Run the `docker image history` command to see which image layers were used to
    create the new `changed-ubuntu` image.
 
-        $ docker history changed-ubuntu
+        $ docker image history changed-ubuntu
         IMAGE               CREATED              CREATED BY                                      SIZE        COMMENT
         94e6b7d2c720        2 minutes ago       /bin/sh -c echo "Hello world" > /tmp/newfile    12 B
         3f7bcee56709        6 weeks ago         /bin/sh -c #(nop) CMD ["/bin/bash"]             0 B
@@ -329,7 +329,7 @@ command.
         <missing>           6 weeks ago         /bin/sh -c echo '#!/bin/sh' > /usr/sbin/polic   701 B
         <missing>           6 weeks ago         /bin/sh -c #(nop) ADD file:8e4943cd86e9b2ca13   131.3 MB
 
-    The `docker history` output shows the new `94e6b7d2c720` image layer at the
+    The `docker image history` output shows the new `94e6b7d2c720` image layer at the
     top. You know that this is the new image layer added because it was created
      by the `echo "Hello world" > /tmp/newfile` command in your `Dockerfile`.
     The 4 image layers below it are the exact same image layers
@@ -339,7 +339,7 @@ command.
 > 1.10, image history data is no longer stored in a config file with each image
 > layer. It is now stored as a string of text in a single config file that
 > relates to the overall image. This can result in some image layers showing as
->  "missing" in the output of the `docker history` command. This is normal
+>  "missing" in the output of the `docker image history` command. This is normal
 >  behaviour and can be ignored.
 >
 > You may hear images like these referred to as *flat images*.
@@ -350,7 +350,7 @@ underlying layers with the `ubuntu:15.04` image.
 
 ![](images/saving-space.jpg)
 
-The `docker history` command also shows the size of each image layer. As you
+The `docker image history` command also shows the size of each image layer. As you
 can see, the `94e6b7d2c720` layer is only consuming 12 Bytes of disk space.
 This means that the `changed-ubuntu` image we just created is only consuming an
  additional 12 Bytes of disk space on the Docker host - all layers below the
@@ -409,36 +409,36 @@ in the container layer.
 Let's see what happens if we spin up 5 containers based on our `changed-ubuntu`
  image we built earlier:
 
-1. From a terminal on your Docker host, run the following `docker run` command
+1. From a terminal on your Docker host, run the following `docker container run` command
 5 times.
 
-        $ docker run -dit changed-ubuntu bash
+        $ docker container run -dit changed-ubuntu bash
 
         75bab0d54f3cf193cfdc3a86483466363f442fba30859f7dcd1b816b6ede82d4
 
-        $ docker run -dit changed-ubuntu bash
+        $ docker container run -dit changed-ubuntu bash
 
         9280e777d109e2eb4b13ab211553516124a3d4d4280a0edfc7abf75c59024d47
 
-        $ docker run -dit changed-ubuntu bash
+        $ docker container run -dit changed-ubuntu bash
 
         a651680bd6c2ef64902e154eeb8a064b85c9abf08ac46f922ad8dfc11bb5cd8a
 
-        $ docker run -dit changed-ubuntu bash
+        $ docker container run -dit changed-ubuntu bash
 
         8eb24b3b2d246f225b24f2fca39625aaad71689c392a7b552b78baf264647373
 
-        $ docker run -dit changed-ubuntu bash
+        $ docker container run -dit changed-ubuntu bash
 
         0ad25d06bdf6fca0dedc38301b2aff7478b3e1ce3d1acd676573bba57cb1cfef
 
     This launches 5 containers based on the `changed-ubuntu` image.  As each
 container is created, Docker adds a writable layer and assigns it a random
-UUID. This is the value returned from the `docker run` command.
+UUID. This is the value returned from the `docker container run` command.
 
-2. Run the `docker ps` command to verify the 5 containers are running.
+2. Run the `docker container ls` command to verify the 5 containers are running.
 
-        $ docker ps
+        $ docker container ls
         CONTAINER ID    IMAGE             COMMAND    CREATED              STATUS              PORTS    NAMES
         0ad25d06bdf6    changed-ubuntu    "bash"     About a minute ago   Up About a minute            stoic_ptolemy
         8eb24b3b2d24    changed-ubuntu    "bash"     About a minute ago   Up About a minute            pensive_bartik

@@ -21,17 +21,17 @@ Hub](https://hub.docker.com/_/couchbase/).
 Start Couchbase server:
 
 ```bash
-$ docker run -d --name db -p 8091-8093:8091-8093 -p 11210:11210 couchbase
+$ docker container run -d --name db -p 8091-8093:8091-8093 -p 11210:11210 couchbase
 ```
 
 The purpose of each port exposed is explained at [Couchbase Developer Portal -
 Network
 Configuration](http://developer.couchbase.com/documentation/server/4.1/install/install-ports.html).
 
-Logs can be seen using the `docker logs` command:
+Logs can be seen using the `docker container logs` command:
 
 ```bash
-$ docker logs db
+$ docker container logs db
 
 Starting Couchbase Server -- Web UI available at http://<ip>:8091
 ```
@@ -214,8 +214,8 @@ of the Couchbase Docker image.
 
 Run CBQ tool:
 
-```
-docker run -it --link db:db couchbase cbq --engine http://db:8093
+```bash
+docker container run -it --link db:db couchbase cbq --engine http://db:8093
 Couchbase query shell connected to http://db:8093/ . Type Ctrl-D to exit.
 cbq>
 ```

@@ -201,7 +201,7 @@ using the DNS name `my-web`:
 the busybox container:
 
     ```bash
-    $ docker exec -it my-busybox.1.1dok2cmx2mln5hbqve8ilnair /bin/sh
+    $ docker container exec -it my-busybox.1.1dok2cmx2mln5hbqve8ilnair /bin/sh
     ```
 
     You can deduce the container name as `<TASK-NAME>`+`<ID>`. Alternatively,

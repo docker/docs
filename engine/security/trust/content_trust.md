@@ -88,12 +88,12 @@ operate with content trust are:
 * `pull`
 * `run`
 
-For example, with content trust enabled a `docker pull someimage:latest` only
+For example, with content trust enabled a `docker image pull someimage:latest` only
 succeeds if `someimage:latest` is signed. However, an operation with an explicit
 content hash always succeeds as long as the hash exists:
 
 ```bash
-$ docker pull someimage@sha256:d149ab53f8718e987c3a3024bb8aa0e2caadf6c0328f1d9d850b2a2a67f2819a
+$ docker image pull someimage@sha256:d149ab53f8718e987c3a3024bb8aa0e2caadf6c0328f1d9d850b2a2a67f2819a
 ```
 
 Trust for an image tag is managed through the use of signing keys. A key set is
@@ -154,7 +154,7 @@ without content trust on an as-needed basis.
 
 Consider the following Dockerfile that uses an untrusted base image:
 
-```
+```bash
 $  cat Dockerfile
 FROM docker/trusttest:latest
 RUN echo
@@ -162,8 +162,8 @@ RUN echo
 
 In order to build a container successfully using this Dockerfile, one can do:
 
-```
-$  docker build --disable-content-trust -t <username>/nottrusttest:latest .
+```bash
+$  docker image build --disable-content-trust -t <username>/nottrusttest:latest .
 Sending build context to Docker daemon 42.84 MB
 ...
 Successfully built f21b872447dc
@@ -171,17 +171,17 @@ Successfully built f21b872447dc
 
 The same is true for all the other commands, such as `pull` and `push`:
 
-```
-$  docker pull --disable-content-trust docker/trusttest:latest
+```bash
+$  docker image pull --disable-content-trust docker/trusttest:latest
 ...
-$  docker push --disable-content-trust <username>/nottrusttest:latest
+$  docker image push --disable-content-trust <username>/nottrusttest:latest
 ...
 ```
 
 To invoke a command with content trust enabled regardless of whether or how the `DOCKER_CONTENT_TRUST` variable is set:
 
 ```bash
-$  docker build --disable-content-trust=false -t <username>/trusttest:testing .
+$  docker image build --disable-content-trust=false -t <username>/trusttest:testing .
 ```
 
 All of the trusted operations support the `--disable-content-trust` flag.
@@ -194,7 +194,7 @@ and push a tagged image. If this is the first time you have pushed an image
 using content trust on your system, the session looks like this:
 
 ```bash
-$ docker push <username>/trusttest:testing
+$ docker image push <username>/trusttest:testing
 The push refers to a repository [docker.io/<username>/trusttest] (len: 1)
 9a61b6b1315e: Image already exists
 902b87aaaec9: Image already exists
@@ -228,7 +228,7 @@ should be randomly generated and stored in a *password manager*.
 even if content trust is enabled and even if this is your first push.
 
 ```bash
-$ docker push <username>/trusttest
+$ docker image push <username>/trusttest
 The push refers to a repository [docker.io/<username>/trusttest] (len: 1)
 9a61b6b1315e: Image successfully pushed
 902b87aaaec9: Image successfully pushed
@@ -243,7 +243,7 @@ Once you have a root key on your system, subsequent images repositories
 you create can use that same root key:
 
 ```bash
-$ docker push docker.io/<username>/otherimage:latest
+$ docker image push docker.io/<username>/otherimage:latest
 The push refers to a repository [docker.io/<username>/otherimage] (len: 1)
 a9539b34a6ab: Image successfully pushed
 b3dbab3810fc: Image successfully pushed
@@ -262,11 +262,11 @@ these.
 ### Pull image content
 
 A common way to consume an image is to `pull` it. With content trust enabled, the Docker
-client only allows `docker pull` to retrieve signed images. Let's try to pull the image
+client only allows `docker image pull` to retrieve signed images. Let's try to pull the image
 you signed and pushed earlier:
 
-```
-$  docker pull <username>/trusttest:testing
+```bash
+$  docker image pull <username>/trusttest:testing
 Using default tag: latest
 Pull (1 of 1): <username>/trusttest:testing@sha256:d149ab53f871
 ...
@@ -277,7 +277,7 @@ In the following example, the command does not specify a tag, so the system uses
 the `latest` tag by default again and the `docker/trusttest:latest` tag is not signed.
 
 ```bash
-$ docker pull docker/trusttest
+$ docker image pull docker/trusttest
 Using default tag: latest
 no trust data available
 ```

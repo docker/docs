@@ -129,7 +129,7 @@ Now that everything is setup, you can go into your `trustsandbox` container and
 start testing Docker content trust.  From your host machine, obtain a shell
 in the `trustsandbox` container.
 
-    $ docker exec -it trustsandbox sh
+    $ docker container exec -it trustsandbox sh
     / #
 
 ### Test some trust operations
@@ -138,8 +138,8 @@ Now, you'll pull some images from within the `trustsandbox` container.
 
 1. Download a `docker` image to test with.
 
-        / # docker pull docker/trusttest
-        docker pull docker/trusttest
+        $ docker image pull docker/trusttest
+        docker image pull docker/trusttest
         Using default tag: latest
         latest: Pulling from docker/trusttest
 
@@ -150,22 +150,22 @@ Now, you'll pull some images from within the `trustsandbox` container.
 
 2. Tag it to be pushed to our sandbox registry:
 
-        / # docker tag docker/trusttest sandboxregistry:5000/test/trusttest:latest
+        $ docker image tag docker/trusttest sandboxregistry:5000/test/trusttest:latest
 
 3. Enable content trust.
 
-        / # export DOCKER_CONTENT_TRUST=1
+        $ export DOCKER_CONTENT_TRUST=1
 
 4. Identify the trust server.
 
-        / # export DOCKER_CONTENT_TRUST_SERVER=https://notaryserver:4443
+        $ export DOCKER_CONTENT_TRUST_SERVER=https://notaryserver:4443
 
     This step is only necessary because the sandbox is using its own server.
     Normally, if you are using the Docker Public Hub this step isn't necessary.
 
 5. Pull the test image.
 
-        / # docker pull sandboxregistry:5000/test/trusttest
+        $ docker image pull sandboxregistry:5000/test/trusttest
         Using default tag: latest
         Error: remote trust data does not exist for sandboxregistry:5000/test/trusttest: notaryserver:4443 does not have trust data for sandboxregistry:5000/test/trusttest
 
@@ -173,7 +173,7 @@ Now, you'll pull some images from within the `trustsandbox` container.
 
 6. Push and sign the trusted image.
 
-        / # docker push sandboxregistry:5000/test/trusttest:latest
+        $ docker image push sandboxregistry:5000/test/trusttest:latest
         The push refers to a repository [sandboxregistry:5000/test/trusttest]
         5f70bf18a086: Pushed
         c22f7bc058a9: Pushed
@@ -196,7 +196,7 @@ Now, you'll pull some images from within the `trustsandbox` container.
 
 7. Try pulling the image you just pushed:
 
-        / # docker pull sandboxregistry:5000/test/trusttest
+        $ docker image pull sandboxregistry:5000/test/trusttest
         Using default tag: latest
         Pull (1 of 1): sandboxregistry:5000/test/trusttest:latest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
         sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926: Pulling from test/trusttest
@@ -216,12 +216,12 @@ data. Then, you try and pull it.
 2. Open a new interactive terminal from your host, and obtain a shell into the
 `sandboxregistry` container.
 
-        $ docker exec -it sandboxregistry bash
+        $ docker container exec -it sandboxregistry bash
         root@65084fc6f047:/#
 
 3. List the layers for the `test/trusttest` image you pushed:
 
-        root@65084fc6f047:/# ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
+        $ ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
         total 12
         drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
         drwxr-xr-x 2 root root 4096 Jun 10 17:26 aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
@@ -229,17 +229,17 @@ data. Then, you try and pull it.
 
 4. Change into the registry storage for one of those layers (note that this is in a different directory)
 
-        root@65084fc6f047:/# cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
+        $ cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
 
 5. Add malicious data to one of the trusttest layers:
 
-        root@65084fc6f047:/# echo "Malicious data" > data
+        $ echo "Malicious data" > data
 
 6. Go back to your `trustsandbox` terminal.
 
 7. List the trusttest image.
 
-        / # docker images | grep trusttest
+        $ docker images | grep trusttest
         REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
         docker/trusttest                      latest              cc7629d1331a        11 months ago       5.025 MB
         sandboxregistry:5000/test/trusttest   latest              cc7629d1331a        11 months ago       5.025 MB
@@ -247,7 +247,7 @@ data. Then, you try and pull it.
 
 8. Remove the `trusttest:latest` image from our local cache.
 
-        / # docker rmi -f cc7629d1331a
+        $ docker container rmi -f cc7629d1331a
         Untagged: docker/trusttest:latest
         Untagged: sandboxregistry:5000/test/trusttest:latest
         Untagged: sandboxregistry:5000/test/trusttest@sha256:ebf59c538accdf160ef435f1a19938ab8c0d6bd96aef8d4ddd1b379edf15a926
@@ -261,7 +261,7 @@ data. Then, you try and pull it.
 
 8. Pull the image again.  This will download the image from the registry, because we don't have it cached.
 
-        / # docker pull sandboxregistry:5000/test/trusttest
+        $ docker image pull sandboxregistry:5000/test/trusttest
         Using default tag: latest
         Pull (1 of 1): sandboxregistry:5000/test/trusttest:latest@sha256:35d5bc26fd358da8320c137784fe590d8fcf9417263ef261653e8e1c7f15672e
         sha256:35d5bc26fd358da8320c137784fe590d8fcf9417263ef261653e8e1c7f15672e: Pulling from test/trusttest

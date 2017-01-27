@@ -65,8 +65,8 @@ To set `APT` to use packages from the Docker repository:
                    --keyserver hkp://ha.pool.sks-keyservers.net:80 \
                    --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
     ```
-    
-    If the above keyserver is not available, try `hkp://pgp.mit.edu:80` or 
+
+    If the above keyserver is not available, try `hkp://pgp.mit.edu:80` or
     `hkp://keyserver.ubuntu.com:80`.
 
 5.  Find the entry in the table below which corresponds to your Ubuntu version.
@@ -227,7 +227,7 @@ systems carefully.
     image.
 
     ```bash
-    $ sudo docker run hello-world
+    $ sudo docker container run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -324,7 +324,7 @@ To create the `docker` group and add your user:
 1.  Log into Ubuntu as a user with `sudo` privileges.
 
 2.  Create the `docker` group.
-    
+
     ```bash
     $ sudo groupadd docker
     ```
@@ -340,7 +340,7 @@ To create the `docker` group and add your user:
 5.  Verify that you can `docker` commands without `sudo`.
 
     ```bash
-    $ docker run hello-world
+    $ docker container run hello-world
     ```
 
 	  If this fails, you will see an error:
@@ -515,7 +515,7 @@ at `/etc/docker/daemon.json`.
 
 2.  Add a `dns` key with one or more IP addresses as values. If the file has
     existing contents, you only need to add or edit the `dns` line.
-    
+
     ```json
     {
     	"dns": ["8.8.8.8", "8.8.4.4"]
@@ -545,7 +545,7 @@ at `/etc/docker/daemon.json`.
     by pinging it.
 
     ```bash
-    $ docker run --rm -it alpine ping -c4 my_internal_host
+    $ docker container run --rm -it alpine ping -c4 my_internal_host
 
     PING google.com (192.168.1.2): 56 data bytes
     64 bytes from 192.168.1.2: seq=0 ttl=41 time=7.597 ms

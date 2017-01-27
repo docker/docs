@@ -28,7 +28,7 @@ When you start a container use the `--network` flag to connect it to a network.
 This adds the `busybox` container to the `mynet` network.
 
 ```bash
-$ docker run -itd --network=mynet busybox
+$ docker container run -itd --network=mynet busybox
 ```
 
 If you want to add a container to a network after the container is already

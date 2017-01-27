@@ -68,10 +68,10 @@ layer is the "lowerdir" in the overlay and read-only. The new directory for the
 
 ### Example: Image and container on-disk constructs (`overlay`)
 
-The following `docker pull` command shows a Docker host with downloading a
+The following `docker image pull` command shows a Docker host with downloading a
 Docker image comprising five layers.
 
-    $ sudo docker pull ubuntu
+    $ sudo docker image pull ubuntu
 
     Using default tag: latest
     latest: Pulling from library/ubuntu
@@ -164,11 +164,11 @@ While the `overlay` driver only works with a single lower OverlayFS layer and
 hence requires hard links for implementation of multi-layered images, the
 `overlay2` driver natively supports multiple lower OverlayFS layers (up to 128).
 
-Hence the `overlay2` driver offers better performance for layer-related docker commands (e.g. `docker build` and `docker commit`), and consumes fewer inodes than the `overlay` driver.
+Hence the `overlay2` driver offers better performance for layer-related docker commands (e.g. `docker image build` and `docker container commit`), and consumes fewer inodes than the `overlay` driver.
 
 ### Example: Image and container on-disk constructs (`overlay2`)
 
-After downloading a five-layer image using `docker pull ubuntu`, you can see
+After downloading a five-layer image using `docker image pull ubuntu`, you can see
 six directories under `/var/lib/docker/overlay2`.
 
     $ ls -l /var/lib/docker/overlay2

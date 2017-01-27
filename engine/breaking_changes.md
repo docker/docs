@@ -12,7 +12,7 @@ and interface stability is always a priority at Docker.
 In all cases, feature removal is communicated three releases
 in advance and documented as part of the [deprecated features](deprecated.md)
 page.
-  
+
 The following list compiles any updates to Docker Engine that created
 backwards-incompatibility for old versions of Docker tools.
 
@@ -30,7 +30,7 @@ Registry and Docker Content Trust:
 
 Registry 2.3 includes improvements to the image manifest that caused a
 breaking change. Images pushed by Engine 1.10 to a Registry 2.3 cannot be
-pulled by digest by older Engine versions. A `docker pull` that encounters this
+pulled by digest by older Engine versions. A `docker image pull` that encounters this
 situation returns the following error:
 
 ```none

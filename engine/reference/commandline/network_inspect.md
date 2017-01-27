@@ -15,10 +15,10 @@ https://www.github.com/docker/docker
 ## Exaples
 
 ```bash
-$ sudo docker run -itd --name=container1 busybox
+$ sudo docker container run -itd --name=container1 busybox
 f2870c98fd504370fb86e59f32cd0753b1ac9b69b7d80566ffc7192a82b3ed27
 
-$ sudo docker run -itd --name=container2 busybox
+$ sudo docker container run -itd --name=container2 busybox
 bda12f8922785d1f160be70736f26c1e331ab8aaf8ed8d56728508f2e2fd4727
 ```
 

@@ -29,7 +29,7 @@ Every installation of the Docker Engine automatically includes three default net
 
 The network named `bridge` is a special network. Unless you tell it otherwise, Docker always launches your containers in this network. Try this now:
 
-    $ docker run -itd --name=networktest ubuntu
+    $ docker container run -itd --name=networktest ubuntu
 
     74695c9cea6d9810718fddadc01a727a5dd3ce6a69d09752239736c030599741
 
@@ -139,7 +139,7 @@ can add containers to a network when you first run a container.
 
 Launch a container running a PostgreSQL database and pass it the `--net=my-bridge-network` flag to connect it to your new network:
 
-    $ docker run -d --net=my-bridge-network --name db training/postgres
+    $ docker container run -d --net=my-bridge-network --name db training/postgres
 
 If you inspect your `my-bridge-network` you'll see it has a container attached.
 You can also inspect your container to see where it is connected:
@@ -153,7 +153,7 @@ You can also inspect your container to see where it is connected:
 
 Now, go ahead and start your by now familiar web application. This time don't specify a network.
 
-    $ docker run -d --name web training/webapp python app.py
+    $ docker container run -d --name web training/webapp python app.py
 
 Which network is your `web` application running under? Inspect the application and you'll find it is running in the default `bridge` network.
 
@@ -174,7 +174,7 @@ Then, get the IP address of your `web`
 
 Now, open a shell to your running `db` container:
 
-    $ docker exec -it db bash
+    $ docker container exec -it db bash
 
     root@a205f0dd33b2:/# ping 172.17.0.2
     ping 172.17.0.2
@@ -191,7 +191,7 @@ Docker networking allows you to attach a container to as many networks as you li
 
 Open a shell into the `db` application again and try the ping command. This time just use the container name `web` rather than the IP Address.
 
-    $ docker exec -it db bash
+    $ docker container exec -it db bash
 
     root@a205f0dd33b2:/# ping web
     PING web (172.18.0.3) 56(84) bytes of data.

@@ -18,7 +18,7 @@ hosts.
 When you install Docker, it creates three networks automatically. You can list
 these networks using the `docker network ls` command:
 
-```
+```bash
 $ docker network ls
 
 NETWORK ID          NAME                DRIVER
@@ -32,12 +32,12 @@ you run a container you can use the `--network` flag to specify which network yo
 want to run a container on. These three networks are still available to you.
 
 The `bridge` network represents the `docker0` network present in all Docker
-installations. Unless you specify otherwise with the `docker run
+installations. Unless you specify otherwise with the `docker container run
 --network=<NETWORK>` option, the Docker daemon connects containers to this network
 by default. You can see this bridge as part of a host's network stack by using
 the `ifconfig` command on the host.
 
-```
+```bash
 $ ifconfig
 
 docker0   Link encap:Ethernet  HWaddr 02:42:47:bc:3a:eb
@@ -52,8 +52,8 @@ docker0   Link encap:Ethernet  HWaddr 02:42:47:bc:3a:eb
 
 The `none` network adds a container to a container-specific network stack. That container lacks a network interface. Attaching to such a container and looking at its stack you see this:
 
-```
-$ docker attach nonenetcontainer
+```bash
+$ docker container attach nonenetcontainer
 
 root@0cb243cd1293:/# cat /etc/hosts
 127.0.0.1	localhost
@@ -91,7 +91,7 @@ worth looking at the default `bridge` network a bit.
 The default `bridge` network is present on all Docker hosts. The `docker network inspect`
 command returns information about a network:
 
-```
+```bash
 $ docker network inspect bridge
 
 [
@@ -123,21 +123,21 @@ $ docker network inspect bridge
 ]
 ```
 The Engine automatically creates a `Subnet` and `Gateway` to the network.
-The `docker run` command automatically adds new containers to this network.
+The `docker container run` command automatically adds new containers to this network.
 
-```
-$ docker run -itd --name=container1 busybox
+```bash
+$ docker container run -itd --name=container1 busybox
 
 3386a527aa08b37ea9232cbcace2d2458d49f44bb05a6b775fba7ddd40d8f92c
 
-$ docker run -itd --name=container2 busybox
+$ docker container run -itd --name=container2 busybox
 
 94447ca479852d29aeddca75c28f7104df3c3196d7b6d83061879e339946805c
 ```
 
 Inspecting the `bridge` network again after starting two containers shows both newly launched containers in the network. Their ids show up in the "Containers" section of `docker network inspect`:
 
-```
+```none
 $ docker network inspect bridge
 
 {[
@@ -182,12 +182,12 @@ $ docker network inspect bridge
 ]
 ```
 
-The `docker network inspect` command above shows all the connected containers and their network resources on a given network. Containers in this default network are able to communicate with each other using IP addresses. Docker does not support automatic service discovery on the default bridge network. If you want to communicate with container names in this default bridge network, you must connect the containers via the legacy `docker run --link` option.
+The `docker network inspect` command above shows all the connected containers and their network resources on a given network. Containers in this default network are able to communicate with each other using IP addresses. Docker does not support automatic service discovery on the default bridge network. If you want to communicate with container names in this default bridge network, you must connect the containers via the legacy `docker container run --link` option.
 
 You can `attach` to a running `container` and investigate its configuration:
 
-```
-$ docker attach container1
+```bash
+$ docker container attach container1
 
 root@0cb243cd1293:/# ifconfig
 eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:02
@@ -212,7 +212,7 @@ lo        Link encap:Local Loopback
 Then use `ping` to send three ICMP requests and test the connectivity of the
 containers on this `bridge` network.
 
-```
+```bash
 root@0cb243cd1293:/# ping -w3 172.17.0.3
 
 PING 172.17.0.3 (172.17.0.3): 56 data bytes
@@ -227,7 +227,7 @@ round-trip min/avg/max = 0.074/0.083/0.096 ms
 
 Finally, use the `cat` command to check the `container1` network configuration:
 
-```
+```bash
 root@0cb243cd1293:/# cat /etc/hosts
 
 172.17.0.2	3386a527aa08
@@ -240,8 +240,8 @@ ff02::2	ip6-allrouters
 ```
 To detach from a `container1` and leave it running use `CTRL-p CTRL-q`.Then, attach to `container2` and repeat these three commands.
 
-```
-$ docker attach container2
+```bash
+$ docker container attach container2
 
 root@0cb243cd1293:/# ifconfig
 eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:03
@@ -282,7 +282,7 @@ ff02::1	ip6-allnodes
 ff02::2	ip6-allrouters
 ```
 
-The default `docker0` bridge network supports the use of port mapping and `docker run --link` to allow communications between containers in the `docker0` network. These techniques are cumbersome to set up and prone to error. While they are still available to you as techniques, it is better to avoid them and define your own bridge networks instead.
+The default `docker0` bridge network supports the use of port mapping and `docker container run --link` to allow communications between containers in the `docker0` network. These techniques are cumbersome to set up and prone to error. While they are still available to you as techniques, it is better to avoid them and define your own bridge networks instead.
 
 ## User-defined networks
 
@@ -345,10 +345,10 @@ c5ee82f76de3        isolated_nw         bridge
 
 ```
 
-After you create the network, you can launch containers on it using  the `docker run --network=<NETWORK>` option.
+After you create the network, you can launch containers on it using  the `docker container run --network=<NETWORK>` option.
 
 ```
-$ docker run --network=isolated_nw -itd --name=container3 busybox
+$ docker container run --network=isolated_nw -itd --name=container3 busybox
 
 8c1a0a5be480921d669a073393ade66a3fc49933f08bcc5515b37b8144f6d47c
 
@@ -452,7 +452,7 @@ $ docker service create --replicas 2 --network my-multi-host-network --name my-w
 ```
 
 Overlay networks for a swarm are not available to containers started with
-`docker run` that don't run as part of a swarm mode service. For more
+`docker container run` that don't run as part of a swarm mode service. For more
 information refer to [Docker swarm mode overlay network security model](overlay-security-model.md).
 
 See also [Attach services to an overlay network](../../swarm/networking.md).
@@ -529,7 +529,7 @@ provides complete isolation for the containers.
 
 Then, on each host, launch containers making sure to specify the network name.
 
-    $ docker run -itd --network=my-multi-host-network busybox
+    $ docker container run -itd --network=my-multi-host-network busybox
 
 Once connected, each container has access to all the containers in the network
 regardless of which Docker host the container was launched on.

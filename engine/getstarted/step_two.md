@@ -10,7 +10,7 @@ title: Learn about images and containers
 
 Docker Engine provides the core Docker technology that enables images and
 containers. As the last step in your installation, you ran the
-`docker run hello-world` command. The command you ran had three parts.
+`docker container run hello-world` command. The command you ran had three parts.
 
 ![Container Explainer](tutimg/container_explainer.png)
 

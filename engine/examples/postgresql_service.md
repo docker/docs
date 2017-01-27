@@ -75,13 +75,13 @@ CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main
 Build an image from the Dockerfile assign it a name.
 
 ```bash
-$ docker build -t eg_postgresql .
+$ docker image build -t eg_postgresql .
 ```
 
 Run the PostgreSQL server container (in the foreground):
 
 ```bash
-$ docker run --rm -P --name pg_test eg_postgresql
+$ docker container run --rm -P --name pg_test eg_postgresql
 ```
 
 There are 2 ways to connect to the PostgreSQL server. We can use [*Link
@@ -95,11 +95,11 @@ the container exits successfully.
 
 Containers can be linked to another container's ports directly using
 `-link remote_name:local_alias` in the client's
-`docker run`. This will set a number of environment
+`docker container run`. This will set a number of environment
 variables that can then be used to connect:
 
 ```bash
-$ docker run --rm -t -i --link pg_test:pg eg_postgresql bash
+$ docker container run --rm -t -i --link pg_test:pg eg_postgresql bash
 
 postgres@7ef98b1b7243:/$ psql -h $PG_PORT_5432_TCP_ADDR -p $PG_PORT_5432_TCP_PORT -d docker -U docker --password
 ```
@@ -107,12 +107,12 @@ postgres@7ef98b1b7243:/$ psql -h $PG_PORT_5432_TCP_ADDR -p $PG_PORT_5432_TCP_POR
 ### Connecting from your host system
 
 Assuming you have the postgresql-client installed, you can use the
-host-mapped port to test as well. You need to use `docker ps`
+host-mapped port to test as well. You need to use `docker container ls`
 to find out what local host port the container is mapped to
 first:
 
 ```bash
-$ docker ps
+$ docker container ls
 
 CONTAINER ID        IMAGE                  COMMAND                CREATED             STATUS              PORTS                                      NAMES
 5e24362f27f6        eg_postgresql:latest   /usr/lib/postgresql/   About an hour ago   Up About an hour    0.0.0.0:49153->5432/tcp                    pg_test
@@ -149,7 +149,7 @@ You can use the defined volumes to inspect the PostgreSQL log files and
 to backup your configuration and data:
 
 ```bash
-$ docker run --rm --volumes-from pg_test -t -i busybox sh
+$ docker container run --rm --volumes-from pg_test -t -i busybox sh
 
 / # ls
 bin      etc      lib      linuxrc  mnt      proc     run      sys      usr

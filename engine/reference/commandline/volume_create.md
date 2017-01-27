@@ -18,7 +18,7 @@ https://www.github.com/docker/docker
 
 $ docker volume create hello
 hello
-$ docker run -d -v hello:/world busybox ls /world
+$ docker container run -d -v hello:/world busybox ls /world
 
 The mount is created inside the container's `/src` directory. Docker doesn't
 not support relative paths for mount points inside the container.

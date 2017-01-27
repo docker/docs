@@ -5,10 +5,10 @@ makescript:
 	./parsedocs.sh > make_certs.sh
 
 build: clean makescript
-	docker build -t makecerts .
+	docker image build -t makecerts .
 
 cert: build
-	docker run --rm -it -v $(CURDIR):/data -e HOST=$(HOST) -e YOUR_PUBLIC_IP=$(shell ip a | grep "inet " | sed "s/.*inet \([0-9.]*\)\/.*/\1/" | xargs echo | sed "s/ /,IP:/g") makecerts
+	docker container run --rm -it -v $(CURDIR):/data -e HOST=$(HOST) -e YOUR_PUBLIC_IP=$(shell ip a | grep "inet " | sed "s/.*inet \([0-9.]*\)\/.*/\1/" | xargs echo | sed "s/ /,IP:/g") makecerts
 
 certs: cert
 

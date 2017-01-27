@@ -16,13 +16,13 @@ $ dockerd --log-driver=nats
 ```
 
 You can set the logging driver for a specific container by using the
-`--log-driver` option to `docker run`:
+`--log-driver` option to `docker container run`:
 
 ```bash
-$ docker run --log-driver=nats ...
+$ docker container run --log-driver=nats ...
 ```
 
-This log driver does not implement a reader so it is incompatible with `docker logs`.
+This log driver does not implement a reader so it is incompatible with `docker container logs`.
 
 ## nats options
 
@@ -49,7 +49,7 @@ Below is an example usage of the driver for sending logs to a node in a
 NATS cluster to the `docker.logs` subject:
 
 ```bash
-$ docker run --log-driver=nats \
+$ docker container run --log-driver=nats \
              --log-opt nats-subject=docker.logs \
              --log-opt nats-servers=nats://nats-node-1:4222,nats://nats-node-2:4222,nats://nats-node-3:4222 \
              your/application
@@ -60,7 +60,7 @@ subject in case subject it is left unspecified:
 
 ```bash
 {% raw %}
-$ docker run --log-driver nats \
+$ docker container run --log-driver nats \
              --log-opt tag="docker.{{.ID}}.{{.ImageName}}"
              your/application
 {% endraw %}
@@ -70,7 +70,7 @@ Secure connection to NATS using TLS can be customized by setting `tls://` scheme
 in the URI and absolute paths to the certs and key files:
 
 ```bash
-docker run --log-driver nats \
+$ docker container run --log-driver nats \
            --log-opt nats-tls-key=/srv/configs/certs/client-key.pem \
            --log-opt nats-tls-cert=/srv/configs/certs/client-cert.pem \
            --log-opt nats-tls-ca-cert=/srv/configs/certs/ca.pem \
@@ -81,8 +81,8 @@ docker run --log-driver nats \
 Skip verify is enabled by default, in order to deactivate we can specify `nats-tls-skip-verify`:
 
 ```bash
-  docker run --log-driver nats \
-             --log-opt nats-tls-skip-verify \
-             --log-opt nats-servers="tls://127.0.0.1:4223,tls://127.0.0.1:4222" \
-             your/application
+$ docker container run --log-driver nats \
+           --log-opt nats-tls-skip-verify \
+           --log-opt nats-servers="tls://127.0.0.1:4223,tls://127.0.0.1:4222" \
+           your/application
 ```

@@ -4,25 +4,28 @@ keywords: docker, logging
 title: View a container's logs
 ---
 
-The `docker logs` command shows information logged by a running container. The
+The `docker container logs` command shows information logged by a running container. The
 information that is logged and the format of the log depends almost entirely on
 the container's endpoint command.
 
-By default, `docker logs` shows the command's output just as it would appear if
+> **Note**: To see information about a service's logs, see
+> [`docker service logs`](engine/reference/commandline/service_logs.md).
+
+By default, `docker container logs` shows the command's output just as it would appear if
 you ran the command interactively in a terminal. UNIX and Linux commands
 typically open three I/O streams when they run, called `STDIN`, `STDOUT`, and
 `STDERR`. `STDIN` is the commmand's input stream, which may include input from
 the keyboard or input from another command. `STDOUT` is usually a command's
 normal output, and `STDERR` is typically used to output error messages. By
-default, `docker logs` shows the command's `STDOUT` and `STDERR`. To read more
+default, `docker container logs` shows the command's `STDOUT` and `STDERR`. To read more
 about I/O and Linux, see the
 [Linux Documentation Project article on I/O redirection](http://www.tldp.org/LDP/abs/html/io-redirection.html)
 
-In some cases, `docker logs` may not show useful information unless you take
+In some cases, `docker container logs` may not show useful information unless you take
 additional steps.
 
 - If you use a [logging driver](overview.md) which sends logs to a file, an
-  external host, a database, or another logging back-end, `docker logs` may not
+  external host, a database, or another logging back-end, `docker container logs` may not
   show useful information.
 
 - If your image runs a non-interactive process such as a web server or a
@@ -30,7 +33,7 @@ additional steps.
   and `STDERR`.
 
 In the first case, your logs are processed in other ways and you may choose not
-to use `docker logs`. In the second case, the official `nginx` image shows one
+to use `docker container logs`. In the second case, the official `nginx` image shows one
 workaround, and the official Apache `httpd` image shows another.
 
 The official `nginx` image creates a symbolic link from

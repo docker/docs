@@ -17,36 +17,38 @@ the second download of any package almost instant.
 
 Use the following Dockerfile:
 
-    #
-    # Build: docker build -t apt-cacher .
-    # Run: docker run -d -p 3142:3142 --name apt-cacher-run apt-cacher
-    #
-    # and then you can run containers with:
-    #   docker run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash
-    #
-    # Here, `dockerhost` is the IP address or FQDN of a host running the Docker daemon
-    # which acts as an APT proxy server.
-    FROM        ubuntu
-    MAINTAINER  SvenDowideit@docker.com
+```Dockerfile
+#
+# Build: docker image build -t apt-cacher .
+# Run: docker container run -d -p 3142:3142 --name apt-cacher-run apt-cacher
+#
+# and then you can run containers with:
+#   docker container run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash
+#
+# Here, `dockerhost` is the IP address or FQDN of a host running the Docker daemon
+# which acts as an APT proxy server.
+FROM        ubuntu
+MAINTAINER  SvenDowideit@docker.com
 
-    VOLUME      ["/var/cache/apt-cacher-ng"]
-    RUN     apt-get update && apt-get install -y apt-cacher-ng
+VOLUME      ["/var/cache/apt-cacher-ng"]
+RUN     apt-get update && apt-get install -y apt-cacher-ng
 
-    EXPOSE      3142
-    CMD     chmod 777 /var/cache/apt-cacher-ng && /etc/init.d/apt-cacher-ng start && tail -f /var/log/apt-cacher-ng/*
+EXPOSE      3142
+CMD     chmod 777 /var/cache/apt-cacher-ng && /etc/init.d/apt-cacher-ng start && tail -f /var/log/apt-cacher-ng/*
+```
 
 To build the image using:
 
-    $ docker build -t eg_apt_cacher_ng .
+    $ docker image build -t eg_apt_cacher_ng .
 
 Then run it, mapping the exposed port to one on the host
 
-    $ docker run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
+    $ docker container run -d -p 3142:3142 --name test_apt_cacher_ng eg_apt_cacher_ng
 
 To see the logfiles that are `tailed` in the default command, you can
 use:
 
-    $ docker logs -f test_apt_cacher_ng
+    $ docker container logs -f test_apt_cacher_ng
 
 To get your Debian-based containers to use the proxy, you have
 following options.  Note that you must replace `dockerhost` with the
@@ -69,12 +71,12 @@ a local version of a common base:
     RUN  echo 'Acquire::http { Proxy "http://dockerhost:3142"; };' >> /etc/apt/apt.conf.d/01proxy
     RUN apt-get update && apt-get install -y vim git
 
-    # docker build -t my_ubuntu .
+    # docker image build -t my_ubuntu .
 
 **Option 2** is good for testing, but will break other HTTP clients
 which obey `http_proxy`, such as `curl`, `wget` and others:
 
-    $ docker run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
+    $ docker container run --rm -t -i -e http_proxy=http://dockerhost:3142/ debian bash
 
 **Option 3** is the least portable, but there will be times when you
 might need to do it and you can do it from your `Dockerfile`
@@ -82,19 +84,19 @@ too.
 
 **Option 4** links Debian-containers to the proxy server using following command:
 
-    $ docker run -i -t --link test_apt_cacher_ng:apt_proxy -e http_proxy=http://apt_proxy:3142/ debian bash
+    $ docker container run -i -t --link test_apt_cacher_ng:apt_proxy -e http_proxy=http://apt_proxy:3142/ debian bash
 
 **Option 5** creates a custom network of APT proxy server and Debian-based containers:
 
     $ docker network create mynetwork
-    $ docker run -d -p 3142:3142 --network=mynetwork --name test_apt_cacher_ng eg_apt_cacher_ng
-    $ docker run --rm -it --network=mynetwork -e http_proxy=http://test_apt_cacher_ng:3142/ debian bash
+    $ docker container run -d -p 3142:3142 --network=mynetwork --name test_apt_cacher_ng eg_apt_cacher_ng
+    $ docker container run --rm -it --network=mynetwork -e http_proxy=http://test_apt_cacher_ng:3142/ debian bash
 
 Apt-cacher-ng has some tools that allow you to manage the repository,
 and they can be used by leveraging the `VOLUME`
 instruction, and the image we built to run the service:
 
-    $ docker run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
+    $ docker container run --rm -t -i --volumes-from test_apt_cacher_ng eg_apt_cacher_ng bash
 
     root@f38c87f2a42d:/# /usr/lib/apt-cacher-ng/distkill.pl
     Scanning /var/cache/apt-cacher-ng, please wait...
@@ -118,6 +120,6 @@ instruction, and the image we built to run the service:
 Finally, clean up after your test by stopping and removing the
 container, and then removing the image.
 
-    $ docker stop test_apt_cacher_ng
-    $ docker rm test_apt_cacher_ng
-    $ docker rmi eg_apt_cacher_ng
+    $ docker container stop test_apt_cacher_ng
+    $ docker container rm test_apt_cacher_ng
+    $ docker image rm eg_apt_cacher_ng

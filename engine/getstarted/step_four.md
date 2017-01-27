@@ -16,7 +16,7 @@ think of something to say and you didn't need to type as much to get `whalesay`
 to talk.
 
 ```bash
-docker run docker/whalesay cowsay boo-boo
+$ docker container run docker/whalesay cowsay boo-boo
 ```
 
 In this next section, you will improve the `whalesay` image by building a new
@@ -108,13 +108,13 @@ creating an image which runs on Linux.
 ## Step 2: Build an image from your Dockerfile
 
 While you are in the `mydockerbuild` directory, build the image using the
-`docker build` command. The `-t` parameter gives your image a tag, so you can
+`docker image build` command. The `-t` parameter gives your image a tag, so you can
 run it more easily later. Don't forget the `.` command, which tells the
-`docker build` command to look in the current directory for a file called
+`docker image build` command to look in the current directory for a file called
 `Dockerfile`. This command works the same in Linux, macOS, or Windows.
 
 ```bash
-$ docker build -t docker-whale .
+$ docker image build -t docker-whale .
 
 Sending build context to Docker daemon 2.048 kB
 ...snip...
@@ -128,7 +128,7 @@ build an image.
 
 ## Step 3: Learn about the build process
 
-The `docker build -t docker-whale .` command reads the `Dockerfile` in the
+The `docker image build -t docker-whale .` command reads the `Dockerfile` in the
 current directory and processes its instructions one by one to build an image
 called `docker-whale` on your local machine. The command takes about a minute
 and its output looks really long and complex. In this section, you learn what
@@ -269,11 +269,11 @@ Now you can verify that the new image is on your computer and you can run it.
     hello-world          latest       91c95931e552      5 weeks ago         910 B
     ```
 
-2.  Run your new image by typing `docker run docker-whale`.
+2.  Run your new image by typing `docker container run docker-whale`.
 
     ```bash
 
-    $ docker run docker-whale
+    $ docker container run docker-whale
 
      ______________________________________
     < You will be successful in your work. >

@@ -20,7 +20,7 @@ It is the API the Docker client uses to communicate with the Engine, so everythi
 
 The API can be accessed with any HTTP client, but we also provide [SDKs](sdks.md) in Python and Go to make it easier to use from programming languages.
 
-As an example, the `docker run` command can be easily implemented in various programming languages and by hitting the API directly with `curl`:
+As an example, the `docker container run` command can be easily implemented in various programming languages and by hitting the API directly with `curl`:
 
 <dl class="horizontal tabs" data-tab>
   <dd class="active"><a href="#tab-python" class="noanchor">Python</a></dd>

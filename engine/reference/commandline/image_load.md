@@ -22,7 +22,7 @@ $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 busybox             latest              769b9341d937        7 weeks ago         2.489 MB
 
-$ docker load --input fedora.tar
+$ docker image load --input fedora.tar
 
 # […]
 

@@ -19,7 +19,7 @@ https://www.github.com/docker/docker
 ### Build with PATH
 
 ```bash
-$ docker build .
+$ docker image build .
 
 Uploading context 10240 bytes
 Step 1/3 : FROM busybox
@@ -52,7 +52,7 @@ local directory get `tar`d and sent to the Docker daemon. The `PATH` specifies
 where to find the files for the "context" of the build on the Docker daemon.
 Remember that the daemon could be running on a remote machine and that no
 parsing of the Dockerfile happens at the client side (where you're running
-`docker build`). That means that *all* the files at `PATH` get sent, not just
+`docker image build`). That means that *all* the files at `PATH` get sent, not just
 the ones listed to [*ADD*](../builder.md#add) in the Dockerfile.
 
 The transfer of context from the local machine to the Docker daemon is what the
@@ -64,7 +64,7 @@ you must use `--rm=false`. This does not affect the build cache.
 ### Build with URL
 
 ```bash
-$ docker build github.com/creack/docker-firefox
+$ docker image build github.com/creack/docker-firefox
 ```
 
 This will clone the GitHub repository and use the cloned repository as context.
@@ -72,7 +72,7 @@ The Dockerfile at the root of the repository is used as Dockerfile. You can
 specify an arbitrary Git repository by using the `git://` or `git@` scheme.
 
 ```bash
-$ docker build -f ctx/Dockerfile http://server/ctx.tar.gz
+$ docker image build -f ctx/Dockerfile http://server/ctx.tar.gz
 
 Downloading context: http://server/ctx.tar.gz [===================>]    240 B/240 B
 Step 1/3 : FROM busybox
@@ -98,7 +98,7 @@ ctx/container.cfg /` operation works as expected.
 ### Build with -
 
 ```bash
-$ docker build - < Dockerfile
+$ docker image build - < Dockerfile
 ```
 
 This will read a Dockerfile from `STDIN` without context. Due to the lack of a
@@ -107,7 +107,7 @@ Since there is no context, a Dockerfile `ADD` only works if it refers to a
 remote URL.
 
 ```bash
-$ docker build - < context.tar.gz
+$ docker image build - < context.tar.gz
 ```
 
 This will build an image for a compressed context read from `STDIN`.  Supported
@@ -116,7 +116,7 @@ formats are: bzip2, gzip and xz.
 ### Usage of .dockerignore
 
 ```bash
-$ docker build .
+$ docker image build .
 
 Uploading context 18.829 MB
 Uploading context
@@ -127,7 +127,7 @@ Step 2/2 : CMD echo Hello world
  ---> 99cc1ad10469
 Successfully built 99cc1ad10469
 $ echo ".git" > .dockerignore
-$ docker build .
+$ docker image build .
 Uploading context  6.76 MB
 Uploading context
 Step 1/2 : FROM busybox
@@ -146,7 +146,7 @@ uploaded context. The builder reference contains detailed information on
 ### Tag image (-t)
 
 ```bash
-$ docker build -t vieux/apache:2.0 .
+$ docker image build -t vieux/apache:2.0 .
 ```
 
 This will build like the previous example, but it will then tag the resulting
@@ -160,20 +160,20 @@ For example, to tag an image both as `whenry/fedora-jboss:latest` and
 `whenry/fedora-jboss:v2.1`, use the following:
 
 ```bash
-$ docker build -t whenry/fedora-jboss:latest -t whenry/fedora-jboss:v2.1 .
+$ docker image build -t whenry/fedora-jboss:latest -t whenry/fedora-jboss:v2.1 .
 ```
 ### Specify Dockerfile (-f)
 
 ```bash
-$ docker build -f Dockerfile.debug .
+$ docker image build -f Dockerfile.debug .
 ```
 
 This will use a file called `Dockerfile.debug` for the build instructions
 instead of `Dockerfile`.
 
 ```bash
-$ docker build -f dockerfiles/Dockerfile.debug -t myapp_debug .
-$ docker build -f dockerfiles/Dockerfile.prod  -t myapp_prod .
+$ docker image build -f dockerfiles/Dockerfile.debug -t myapp_debug .
+$ docker image build -f dockerfiles/Dockerfile.prod  -t myapp_prod .
 ```
 
 The above commands will build the current build context (as specified by the
@@ -182,18 +182,18 @@ production version.
 
 ```bash
 $ cd /home/me/myapp/some/dir/really/deep
-$ docker build -f /home/me/myapp/dockerfiles/debug /home/me/myapp
-$ docker build -f ../../../../dockerfiles/debug /home/me/myapp
+$ docker image build -f /home/me/myapp/dockerfiles/debug /home/me/myapp
+$ docker image build -f ../../../../dockerfiles/debug /home/me/myapp
 ```
 
-These two `docker build` commands do the exact same thing. They both use the
+These two `docker image build` commands do the exact same thing. They both use the
 contents of the `debug` file instead of looking for a `Dockerfile` and will use
 `/home/me/myapp` as the root of the build context. Note that `debug` is in the
 directory structure of the build context, regardless of how you refer to it on
 the command line.
 
 > **Note:**
-> `docker build` will return a `no such file or directory` error if the
+> `docker image build` will return a `no such file or directory` error if the
 > file or directory does not exist in the uploaded context. This may
 > happen if there is no context, or if you specify a file that is
 > elsewhere on the Host system. The context is limited to the current
@@ -203,13 +203,13 @@ the command line.
 
 ### Optional parent cgroup (--cgroup-parent)
 
-When `docker build` is run with the `--cgroup-parent` option the containers
-used in the build will be run with the [corresponding `docker run`
+When `docker image build` is run with the `--cgroup-parent` option the containers
+used in the build will be run with the [corresponding `docker container run`
 flag](../run.md#specifying-custom-cgroups).
 
 ### Set ulimits in container (--ulimit)
 
-Using the `--ulimit` option with `docker build` will cause each build step's
+Using the `--ulimit` option with `docker image build` will cause each build step's
 container to be started using those [`--ulimit`
 flag values](./run.md#set-ulimits-in-container-ulimit).
 
@@ -225,7 +225,7 @@ files. The `ARG` instruction lets Dockerfile authors define values that users
 can set at build-time using the  `--build-arg` flag:
 
 ```bash
-$ docker build --build-arg HTTP_PROXY=http://10.20.30.2:1234 .
+$ docker image build --build-arg HTTP_PROXY=http://10.20.30.2:1234 .
 ```
 
 This flag allows you to pass the build-time variables that are

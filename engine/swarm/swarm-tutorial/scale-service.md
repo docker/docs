@@ -44,18 +44,18 @@ the swarm.
     running instances of Alpine Linux. The tasks are distributed between the
     three nodes of the swarm. One is running on `manager1`.
 
-4.  Run `docker ps` to see the containers running on the node where you're
+4.  Run `docker container ls` to see the containers running on the node where you're
     connected. The following example shows the tasks running on `manager1`:
 
     ```bash
-    $ docker ps
+    $ docker container ls
 
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
     528d68040f95        alpine:latest       "ping docker.com"   About a minute ago   Up About a minute                       helloworld.4.auky6trawmdlcne8ad8phb0f1
     ```
 
     If you want to see the containers running on other nodes, you can ssh into
-    those nodes and run the `docker ps` command.
+    those nodes and run the `docker container ls` command.
 
 ## What's next?
 

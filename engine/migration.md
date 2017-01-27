@@ -70,7 +70,7 @@ The migration tool can also be run as a Docker image. While running the migrator
 image you need to expose your Docker data directory to the container. If you use
 the default path then you would run:
 
-    $ docker run --rm -v /var/lib/docker:/var/lib/docker docker/v1.10-migrator
+    $ docker container run --rm -v /var/lib/docker:/var/lib/docker docker/v1.10-migrator
 
 If you use the
 devicemapper storage driver, you also need to pass the flag `--privileged` to

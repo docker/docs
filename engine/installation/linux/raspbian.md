@@ -85,7 +85,7 @@ Before installing Docker, make sure you have set your `APT` repository correctly
 
 4. Verify `docker` is installed correctly.
 
-        $ sudo docker run armhf/hello-world
+        $ sudo docker container run armhf/hello-world
 
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message. Then, it exits.

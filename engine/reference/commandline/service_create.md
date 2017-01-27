@@ -256,11 +256,11 @@ The following options can only be used for tmpfs mounts (`type=tmpfs`);
 #### Differences between "--mount" and "--volume"
 
 The `--mount` flag supports most options that are supported by the `-v`
-or `--volume` flag for `docker run`, with some important exceptions:
+or `--volume` flag for `docker container run`, with some important exceptions:
 
 - The `--mount` flag allows you to specify a volume driver and volume driver
     options *per volume*, without creating the volumes in advance. In contrast,
-    `docker run` allows you to specify a single volume driver which is shared
+    `docker container run` allows you to specify a single volume driver which is shared
     by all volumes, using the `--volume-driver` flag.
 
 - The `--mount` flag allows you to specify custom metadata ("labels") for a volume,
@@ -512,7 +512,7 @@ wo41w8hg8qan  hosttempl.1  busybox:latest@sha256:29f5d56d12684887bdfa50dcd29fc31
 $ docker inspect \
   --format="{{.Config.Hostname}}" \
   hosttempl.1.wo41w8hg8qanxwjwsg4kxpprj
-  
+
 x3ti0erg11rjpg64m75kej2mz-hosttempl
 {% endraw %}
 ```

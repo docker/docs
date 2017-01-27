@@ -41,7 +41,7 @@ If you don't already have a terminal open, open one now:
      Hub account name. You need to rename the image to
      `YOUR_DOCKERHUB_NAME/docker-whale`.
 
-6. Use `IMAGE ID` and the `docker tag` command to tag your `docker-whale` image.
+6. Use `IMAGE ID` and the `docker image tag` command to tag your `docker-whale` image.
 
     The command you type looks like this:
 
@@ -50,7 +50,7 @@ If you don't already have a terminal open, open one now:
     Of course, your account name will be your own. So, you type the command with
     your image's ID and your account name and press RETURN.
 
-		$ docker tag 7d9495d03763 maryatdocker/docker-whale:latest
+		$ docker image tag 7d9495d03763 maryatdocker/docker-whale:latest
 
 7. Type the `docker images` command again to see your newly tagged image.
 
@@ -76,9 +76,9 @@ If you don't already have a terminal open, open one now:
         Password:
         Login Succeeded
 
-9. Type the `docker push` command to push your image to your new repository.
+9. Type the `docker image push` command to push your image to your new repository.
 
-		$ docker push maryatdocker/docker-whale
+		$ docker image push maryatdocker/docker-whale
 			The push refers to a repository [maryatdocker/docker-whale] (len: 1)
 			7d9495d03763: Image already exists
 			c81071adeeb5: Image successfully pushed
@@ -120,25 +120,25 @@ from the hub &mdash; why would it? The two images are identical.
 
     To make a good test, you need to remove the `maryatdocker/docker-whale` and
    `docker-whale` images from your local system. Removing them forces the next
-   `docker pull` to get the image from your repository.
+   `docker image pull` to get the image from your repository.
 
-3. Use the `docker rmi` to remove the `maryatdocker/docker-whale` and `docker-whale`
+3. Use the `docker container rmi` to remove the `maryatdocker/docker-whale` and `docker-whale`
 images.
 
 	You can use an ID or the name to remove an image.
 
-		$ docker rmi -f 7d9495d03763
-		$ docker rmi -f docker-whale
+		$ docker image rm -f 7d9495d03763
+		$ docker image rm -f docker-whale
 
-4. Pull and load a new image from your repository using the `docker run` command.
+4. Pull and load a new image from your repository using the `docker container run` command.
 
     The command you type should include your username from Docker Hub.
 
-         docker run yourusername/docker-whale
+         docker container run yourusername/docker-whale
 
 	Since the image is no longer available on your local system, Docker downloads it.
 
-		$ docker run maryatdocker/docker-whale
+		$ docker container run maryatdocker/docker-whale
 		Unable to find image 'maryatdocker/docker-whale:latest' locally
 		latest: Pulling from maryatdocker/docker-whale
 		eb06e47a01d2: Pull complete

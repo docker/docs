@@ -19,7 +19,7 @@ https://www.github.com/docker/docker
 # EXAMPLES
 
 ```bash
-$ docker run -d fedora sleep 99
+$ docker container run -d fedora sleep 99
 
 079b83f558a2bc52ecad6b2a5de13622d584e6bb1aea058c11b36511e85e7622
 

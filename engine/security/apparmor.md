@@ -13,7 +13,7 @@ Docker automatically generates and loads a default profile for containers named
 `docker-default`. On Docker versions `1.13.0` and later, the Docker binary generates
 this profile in `tmpfs` and then loads it into the kernel. On Docker versions
 earlier than `1.13.0`, this profile is generated in `/etc/apparmor.d/docker`
-instead. 
+instead.
 
 > **Note:** This profile is used on containers, _not_ on the Docker Daemon.
 
@@ -35,7 +35,7 @@ override it with the `security-opt` option. For example, the following
 explicitly specifies the default policy:
 
 ```bash
-$ docker run --rm -it --security-opt apparmor=docker-default hello-world
+$ docker container run --rm -it --security-opt apparmor=docker-default hello-world
 ```
 
 ## Load and unload profiles
@@ -49,7 +49,7 @@ $ apparmor_parser -r -W /path/to/your_profile
 Then, run the custom profile with `--security-opt` like so:
 
 ```bash
-$ docker run --rm -it --security-opt apparmor=your_profile hello-world
+$ docker container run --rm -it --security-opt apparmor=your_profile hello-world
 ```
 
 To unload a profile from AppArmor:
@@ -169,14 +169,14 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
     To run nginx in detached mode:
 
     ```bash
-    $ docker run --security-opt "apparmor=docker-nginx" \
+    $ docker container run --security-opt "apparmor=docker-nginx" \
         -p 80:80 -d --name apparmor-nginx nginx
     ```
 
 4. Exec into the running container
 
     ```bash
-    $ docker exec -it apparmor-nginx bash
+    $ docker container exec -it apparmor-nginx bash
     ```
 
 5. Try some operations to test the profile.
@@ -214,7 +214,7 @@ regard to AppArmor.
 AppArmor sends quite verbose messaging to `dmesg`. Usually an AppArmor line
 looks like the following:
 
-```
+```none
 [ 5442.864673] audit: type=1400 audit(1453830992.845:37): apparmor="ALLOWED" operation="open" profile="/usr/bin/docker" name="/home/jessie/docker/man/man1/docker-attach.1" pid=10923 comm="docker" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
 ```
 
@@ -222,11 +222,11 @@ In the above example, you can see `profile=/usr/bin/docker`. This means the
 user has the `docker-engine` (Docker Engine Daemon) profile loaded.
 
 > **Note:** On version of Ubuntu > 14.04 this is all fine and well, but Trusty
-> users might run into some issues when trying to `docker exec`.
+> users might run into some issues when trying to `docker container exec`.
 
 Look at another log line:
 
-```
+```none
 [ 3256.689120] type=1400 audit(1405454041.341:73): apparmor="DENIED" operation="ptrace" profile="docker-default" pid=17651 comm="docker" requested_mask="receive" denied_mask="receive"
 ```
 

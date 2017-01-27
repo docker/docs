@@ -55,8 +55,8 @@ There is a CRUX image as part of the Docker "Official Library" of images.
 To use this image simply pull it or use it as part of your `FROM` line in
 your `Dockerfile(s)`.
 
-    $ docker pull crux
-    $ docker run -i -t crux
+    $ docker image pull crux
+    $ docker container run -i -t crux
 
 There are also user contributed [CRUX based image(s)](https://hub.docker.com/_/crux/) on the Docker Hub.
 

@@ -81,14 +81,14 @@ communicate in those cases where you _want_ them to provide each other services?
 The answer is the `--link=CONTAINER_NAME_or_ID:ALIAS` option, which was
 mentioned in the previous section because of its effect upon name services.  If
 the Docker daemon is running with both `--icc=false` and `--iptables=true`
-then, when it sees `docker run` invoked with the `--link=` option, the Docker
+then, when it sees `docker container run` invoked with the `--link=` option, the Docker
 server will insert a pair of `iptables` `ACCEPT` rules so that the new
 container can connect to the ports exposed by the other container -- the ports
 that it mentioned in the `EXPOSE` lines of its `Dockerfile`.
 
 > **Note**: The value `CONTAINER_NAME` in `--link=` must either be an
 auto-assigned Docker name like `stupefied_pare` or else the name you assigned
-with `--name=` when you ran `docker run`.  It cannot be a hostname, which Docker
+with `--name=` when you ran `docker container run`.  It cannot be a hostname, which Docker
 will not recognize in the context of the `--link=` option.
 
 You can run the `iptables` command on your Docker host to see whether the `FORWARD` chain has a default policy of `ACCEPT` or `DROP`:

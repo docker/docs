@@ -20,7 +20,7 @@ https://www.github.com/docker/docker
 
 To limit a container's cpu-shares to 512, first identify the container
 name or ID. You can use **docker ps** to find these values. You can also
-use the ID returned from the **docker run** command.  Then, do the following:
+use the ID returned from the **docker container run** command.  Then, do the following:
 
 ```bash
 $ docker container update --cpu-shares 512 abebf7571666
@@ -45,7 +45,7 @@ the container before updating kernel memory.
 For example, if you started a container with this command:
 
 ```bash
-$ docker run -dit --name test --kernel-memory 50M ubuntu bash
+$ docker container run -dit --name test --kernel-memory 50M ubuntu bash
 ```
 
 You can update kernel memory while the container is running:
@@ -57,7 +57,7 @@ $ docker container update --kernel-memory 80M test
 If you started a container *without* kernel memory initialized:
 
 ```bash
-$ docker run -dit --name test2 --memory 300M ubuntu bash
+$ docker container run -dit --name test2 --memory 300M ubuntu bash
 ```
 
 Update kernel memory of running container `test2` will fail. You need to stop

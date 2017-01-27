@@ -32,12 +32,12 @@ docker0         8000.3a1d7362b4ee       no              veth65f9
 
 If the `brctl` command is not installed on your Docker host, then on Ubuntu you should be able to run `sudo apt-get install bridge-utils` to install it.
 
-Finally, the `docker0` Ethernet bridge settings are used every time you create a new container.  Docker selects a free IP address from the range available on the bridge each time you `docker run` a new container, and configures the container's `eth0` interface with that IP address and the bridge's netmask.  The Docker host's own IP address on the bridge is used as the default gateway by which each container reaches the rest of the Internet.
+Finally, the `docker0` Ethernet bridge settings are used every time you create a new container.  Docker selects a free IP address from the range available on the bridge each time you `docker container run` a new container, and configures the container's `eth0` interface with that IP address and the bridge's netmask.  The Docker host's own IP address on the bridge is used as the default gateway by which each container reaches the rest of the Internet.
 
-```
+```bash
 # The network, as seen from a container
 
-$ docker run -i -t --rm base /bin/bash
+$ docker container run -i -t --rm base /bin/bash
 
 root@f38c87f2a42d:/# ip addr show eth0
 

@@ -196,19 +196,19 @@ $ notary key import delegation.key --role user
 
 where `delegation.key` is the file containing your PEM-encoded private key.
 
-After you have done so, running `docker push` on any repository that
+After you have done so, running `docker image push` on any repository that
 includes your key in the `targets/releases` delegation will automatically sign
 tags using this imported key.
 
-## `docker push` behavior
+## `docker image push` behavior
 
-When running `docker push` with Docker Content Trust, Docker Engine
+When running `docker image push` with Docker Content Trust, Docker Engine
 will attempt to sign and push with the `targets/releases` delegation if it exists.
 If it does not, the targets key will be used to sign the tag, if the key is available.
 
-## `docker pull` and `docker build` behavior
+## `docker image pull` and `docker image build` behavior
 
-When running `docker pull` or `docker build` with Docker Content Trust, Docker
+When running `docker image pull` or `docker image build` with Docker Content Trust, Docker
 Engine will pull tags only signed by the `targets/releases` delegation role or
 the legacy tags that were signed directly with the `targets` key.
 
