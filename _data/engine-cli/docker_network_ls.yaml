@@ -1,4 +1,5 @@
 command: docker network ls
+aliases: list
 short: List networks
 long: "Lists all the networks the Engine `daemon` knows about. This includes the\nnetworks
   that span across multiple hosts in a cluster, for example:\n\n```bash\n    $ docker

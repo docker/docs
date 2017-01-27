@@ -1,4 +1,5 @@
 command: docker node rm
+aliases: remove
 short: Remove one or more nodes from the swarm
 long: Remove one or more nodes from the swarm
 usage: docker node rm [OPTIONS] NODE [NODE...]

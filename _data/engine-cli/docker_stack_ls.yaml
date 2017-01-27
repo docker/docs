@@ -1,4 +1,5 @@
 command: docker stack ls
+aliases: list
 short: List stacks
 long: List stacks
 usage: docker stack ls

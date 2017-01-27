@@ -1,4 +1,5 @@
 command: docker node ls
+aliases: list
 short: List nodes in the swarm
 long: List nodes in the swarm
 usage: docker node ls [OPTIONS]

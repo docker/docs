@@ -1,4 +1,5 @@
 command: docker container ls
+aliases: ps, list
 short: List containers
 long: List containers
 usage: docker container ls [OPTIONS]
