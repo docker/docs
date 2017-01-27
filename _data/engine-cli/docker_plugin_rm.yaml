@@ -1,4 +1,5 @@
 command: docker plugin rm
+aliases: remove
 short: Remove one or more plugins
 long: Remove one or more plugins
 usage: docker plugin rm [OPTIONS] PLUGIN [PLUGIN...]

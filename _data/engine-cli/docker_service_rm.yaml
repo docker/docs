@@ -1,4 +1,5 @@
 command: docker service rm
+aliases: remove
 short: Remove one or more services
 long: Remove one or more services
 usage: docker service rm SERVICE [SERVICE...]

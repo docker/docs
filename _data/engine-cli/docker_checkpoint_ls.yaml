@@ -1,4 +1,5 @@
 command: docker checkpoint ls
+aliases: list
 short: List checkpoints for a container
 long: List checkpoints for a container
 usage: docker checkpoint ls [OPTIONS] CONTAINER
