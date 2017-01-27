@@ -6,6 +6,19 @@ redirect_from:
 - /engine/installation/azure/
 ---
 
+{% include d4a_buttons.md %}
+
+## Quickstart
+
+If your account has the [proper
+permissions](https://docs.docker.com/docker-for-azure/#/prerequisites), you can
+generate the [Service
+Principal](https://docs.docker.com/docker-for-azure/#/service-principal) and
+then use the following button to bootstrap Docker for Azure using Azure Resource
+Manager:
+
+{{azure_button_latest}}
+
 ## Prerequisites
 
 - Access to an Azure account with admin privileges
