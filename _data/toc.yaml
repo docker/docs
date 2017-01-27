@@ -1209,6 +1209,8 @@ toc:
         title: upgrade
     - path: /datacenter/ucp/2.1/guides/support/
       title: Get support
+    - path: /datacenter/ucp/2.1/guides/incompatibilities/
+      title: Breaking changes
     - path: /datacenter/ucp/2.1/guides/release-notes/
       title: Release Notes
   - sectiontitle: (BETA) Docker Trusted Registry 2.2
