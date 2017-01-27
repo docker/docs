@@ -73,6 +73,8 @@ toc:
       title: Scaling
     - path: /docker-for-aws/upgrade/
       title: Upgrading
+    - path: /docker-for-aws/deploy/
+      title: Deploy your app
     - path: /docker-for-aws/faqs/
       title: FAQs
     - path: /docker-for-aws/opensource/
@@ -85,6 +87,8 @@ toc:
       title: Setup & Prerequisites
     - path: /docker-for-azure/upgrade/
       title: Upgrading
+    - path: /docker-for-azure/deploy/
+      title: Deploy your app
     - path: /docker-for-azure/faqs/
       title: FAQs
     - path: /docker-for-azure/opensource/
