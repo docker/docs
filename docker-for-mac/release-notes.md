@@ -277,7 +277,7 @@ events or unexpected unmounts.
 
 **New**
 
-- More options when moving disk image
+- More options when moving disk image (see [Storage location](index.md#storage-location) under Advanced preference settings)
 - Filesharing and daemon table empty fields are editable
 - DNS forwarder ignores responses from malfunctioning servers ([docker/for-mac#1025](https://github.com/docker/for-mac/issues/1025))
 - DNS forwarder send all queries in parallel, process results in order
