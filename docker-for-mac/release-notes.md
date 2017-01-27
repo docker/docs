@@ -269,6 +269,30 @@ events or unexpected unmounts.
 
 ## Beta Release Notes
 
+### Beta 39 Release Notes (2017-01-26 1.13.0-beta39)
+
+**Upgrades**
+
+- Linux kernel 4.9.5
+
+**New**
+
+- More options when moving disk image
+- Filesharing and daemon table empty fields are editable
+- DNS forwarder ignores responses from malfunctioning servers ([docker/for-mac#1025](https://github.com/docker/for-mac/issues/1025))
+- DNS forwarder send all queries in parallel, process results in order
+- DNS forwarder includes servers with zones in general searches ([docker/for-mac#997](https://github.com/docker/for-mac/issues/997))
+- Parses aliases from /etc/hosts ([docker/for-mac#983](https://github.com/docker/for-mac/issues/983))
+- Can resolve DNS requests via servers listed in the /etc/resolver directory on the host
+
+**Bug fixes and minor improvements**
+
+- Fix bug where update window hides when app not focused
+- Limit vCPUs to 16 ([docker/for-mac#1144](https://github.com/docker/for-mac/issues/1144))
+- Fix for swap not being mounted
+- Fix aufs xattr delete issue ([docker/docker#30245](https://github.com/docker/docker/issues/30245))
+
+
 ### Beta 38 Release Notes (2017-01-20 1.13.0-beta38)
 
 **Upgrades**
