@@ -37,13 +37,15 @@ In this tutorial, you'll learn how to:
 * Use `docker machine` to create multiple virtual local hosts or
 dockerized cloud servers
 * Use `docker` commands to set up and run a swarm with manager and worker nodes
-* Deploy the `vote` app by feeding our example `docker-stack.yml` file to
+* Deploy the `vote` app services across the two nodes by feeding our example `docker-stack.yml` file to
 the `docker stack deploy` command
 * Test the app by voting for cats and dogs, and view the results
 * Use the `visualizer` to explore and understand the runtime app and services
 * Update the `docker-stack.yml` and redeploy the app using a different
 `vote` image to implement a poll on different choices
 * Use features new in Compose Version 3, highlighted in the sample app
+
+![voting app diagram](images/vote-app-diagram.png)
 
 ## Services and images overview
 
@@ -55,7 +57,7 @@ deploy it to a swarm and manage it as a distributed
 multi-container application.
 
 The voting app you are about to deploy is composed
-of several services, each based on an image:
+of several services, each based on an [image](/engine/reference/glossary.md#image):
 
 | Service        | Description | Base Image  |
 | ------------- |--------------| -----|
@@ -63,10 +65,10 @@ of several services, each based on an image:
 | `result`      | Displays the voting results via port 5001.  Viewable at `<manager-IP>:5001`     |  Based on a Node.js image, `dockersamples/examplevotingapp_result` |
 | `visualizer` | A web app that shows a map of the deployment of the various services across the available nodes via port `8080`. Viewable at `<manager-IP>:8080`  |  Based on a Node.js image, `dockersamples/visualizer` |
 | `redis` | Collects raw voting data and stores it in a key/value queue     |  Based on a `redis` image, `redis:alpine` |
-| `db` | A PostgreSQL service which provides permanent storage on a host volume     |  Based on a `postgres` image, `postgres:9.4` |
+| `db` | A PostgreSQL service which provides permanent storage on a host volume    |  Based on a `postgres` image, `postgres:9.4` |
 | `worker` | A background service that transfers votes from the queue to permanent storage     |  Based on a .NET image, `dockersamples/examplevotingapp_worker` |
 
-Each service will run in its own container. Using swarm mode,
+Each service will run in its own [container](/engine/reference/glossary.md#container). Using swarm mode,
 we can also scale the application to deploy replicas
 of containerized services distributed across multiple nodes.
 
