@@ -6,7 +6,7 @@
 
 - ucp-version: "2.1"
   tar-files:
-    - description: "UCP 2.1.0-beta12"
+    - description: "UCP 2.1.0-beta2"
       url: https://packages.docker.com/caas/ucp_images_2.1.0-beta2.tar.gz
     - description: "DTR 2.2.0-beta2"
       url: https://packages.docker.com/caas/dtr-2.2.0-beta2.tar.gz
