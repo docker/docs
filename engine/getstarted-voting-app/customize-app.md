@@ -87,7 +87,7 @@ networking.
 [Build your own image](/engine/getstarted/step_four.md) in Get Started with
 Docker and topics on images in [Learn by example](/engine/tutorials/index.md).
 
-* For more about `docker-stack.yml` and the `docker stack deploy` command,
+* For more about the `docker-stack.yml` and the `docker stack deploy` commands,
 see [deploy](/compose/compose-file.md#deploy) in the [Compose file
 reference](/compose/compose-file.md) and [`docker stack
 deploy`](/engine/reference/commandline/stack_deploy.md) in the Docker Engine
