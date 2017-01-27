@@ -136,6 +136,7 @@
 }
 /* reset away from #008AB5 */
 
+/* removed hard-coded color for button links pre new CSS from Design */
 #DocumentationText a.button {
 }
 
@@ -144,6 +145,7 @@
     margin-top: 15px;
 }
 
+/*  hard coded color and other settings pre new CSS from Design */
 #DocumentationText .secondary-btn,
    button .secondary-btn {
      border: 2px solid #1488c6;
@@ -163,6 +165,12 @@
 #DocumentationText .secondary-btn:hover,
    button .secondary-btn:hover {
    opacity: .8;
+}
+
+/* box shadow for docs home page workflow*/
+
+#DocumentationText .boxer
+{box-shadow: 2px 2px #888, -2px -2px #F4D03F, 0px 0px 5px 5px #F4D03F;
 }
 
 #DocumentationText table {
