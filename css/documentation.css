@@ -1,6 +1,43 @@
 /* FIXUP allcss.css */
 /* @media screen and (max-width: 1199px) */
 
+/*
+*
+* Tabs ***********************************************************************
+*
+*/
+
+.tabs {
+    border-bottom: 0;
+    padding: 10px 0px 0px 0px;
+}
+
+.tabs>li {
+    float: left;
+    list-style: none;
+}
+
+.tabs>li>a {
+    color: #fff;
+    line-height: 3;
+    border: 0;
+    border-radius: 0;
+    padding: 0 20px 0px 20px;
+    float: left;
+    opacity: .8;
+}
+
+.tabs>li.active>a, .tabs>li>a:hover {
+    color: #fff;
+    border-bottom: 4px solid #fff;
+    opacity: 1;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+
 .logo {
   margin-top: 1px !important;
   width: auto !important;
