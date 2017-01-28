@@ -192,19 +192,23 @@ ng\:form {
     </aside>
     <div class="dockercon16">
       <section class="title_section darkblue"> </section>
+			<div class="col-md-12" style="background-color: #254356">
+					<!-- tabs -->
+					<ul class="tabs">{% for section in site.data.toc.horizontalnav %}
+							<li id="{{ section.node }}"><a href="{{ section.path }}">{{ section.title }}</a></li>{% endfor %}
+					</ul>
+			</div>
       <div class="">
         <div class="container-fluid">
           <div class="row">
             <div class="col-xs-12 col-sm-3 col-md-2 col-xl-2 docsidebarnav_section">
-              <div class="region region-hero-sub">
-								{% if page.tree == false %}
-									<ul class="nav-sub"><li class="leaf"><a href="/">Back to the index</a></li></ul>
-								{% else %}
-									<ul class="nav-sub">
-									{% assign tree = site.data.toc.toc %}
-									{% include tree.html %}
-									</ul>
-								{% endif %}
+              <div class="region region-hero-sub"><ul class="nav-sub">
+                             {% if page.tree == false %}
+                                <li class="leaf"><a href="/">Back to the index</a></li>
+                             {% else %}
+								{% include treebuilder.html %}
+                             {% endif %}
+							</ul>           
               </div>
             </div>
             <div class="col-xs-12 col-sm-9 col-md-8 col-xl-9">
