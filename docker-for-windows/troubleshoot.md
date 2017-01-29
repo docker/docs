@@ -160,7 +160,7 @@ commands ultimately get passed to Unix commands inside a Unix based container
 (for example, a shell script passed to `/bin/sh`). If Windows style line endings
 are used, `docker run` will fail with syntax errors.
 
-For an example of this issue and the resolution, see this issue on GitHub: <a href="https://github.com/docker/docker/issues/24388" target="_blank">Docker RUN fails to execute shell script (https://github.com/docker/docker/issues/24388)</a>.
+For an example of this issue and the resolution, see this issue on GitHub: <a href="https://github.com/docker/docker/issues/24388">Docker RUN fails to execute shell script (https://github.com/docker/docker/issues/24388)</a>.
 
 ### Recreate or update your containers after Beta 18 upgrade
 
@@ -268,6 +268,53 @@ container on the native Docker daemon, an error occurs:
    See 'C:\Program Files\Docker\docker.exe run --help'.
    ```
 
+### Running Docker for Windows in nested virtualization scenarios
+
+Docker for Windows can run inside a Windows 10 virtual machine (VM) running on
+apps like Parallels or VMware Fusion on a Mac provided that the VM is properly
+configured. However, problems and intermittent failures may still occur due to
+the way these apps virtualize the hardware. For these reasons, _**Docker for
+Windows is not supported for nested virtualization scenarios**_. It
+might work in some cases, and not in others.
+
+The better solution is to run Docker for Windows natively on a Windows system
+(to work with Windows or Linux containers), or Docker for Mac on Mac
+to work with Linux containers.
+
+#### If you still want to use nested virtualization
+
+* Make sure your VMWare or Parallels has nested virtualization support enabled.
+The path in both apps should be similar, e.g., **Hardware -> CPU & Memory -> Advanced Options -> Enable nested virtualization**.
+
+* Configure your VM with at least 2 CPUs and sufficient memory (e.g., 6GB).
+
+* Make sure your system is more or less idle.
+
+* Make sure your Windows OS is up-to-date. There have been several issues with some insider builds.
+
+* The processor you have may also be relevant. For example, Westmere based
+Mac Pros have some additional hardware virtualization features over
+Nehalem based Mac Pros and so do newer generations of Intel processors.
+
+#### Typical failures we see with nested virtualization
+
+* Slow boot time of the Linux VM. If you look in the logs, you'll see
+some entries prefixed with `Moby`. On real hardware, it takes 5-10 seconds  to
+boot the Linux VM; roughly the time between the `Connected` log entry and the `*
+Starting Docker ... [ ok ]` log entry. If you boot the Linux VM inside a Window
+VM, this may take considerably longer. We have a timeout of 60s or so. If the VM
+hasn't started by that time, we retry. If the retry fails we print an error. You
+may be able to work around this by providing more resources to the Windows VM.
+
+* Sometimes the VM fails to boot when Linux tries to calibrate the
+time stamp counter (TSC). This process is quite timing sensitive and may fail
+when executed inside a VM which itself runs inside a VM. CPU utilization is also
+likely to be higher.
+
+#### Related issues
+
+Discussion thread on GitHub at [Docker for Windows issue 267](https://github.com/docker/for-win/issues/267)
+
 ### Networking issues
 
 Some users have reported problems connecting to Docker Hub on the Docker for Windows stable version. (See GitHub issue [22567](https://github.com/docker/docker/issues/22567).)
@@ -313,8 +360,10 @@ You might have stale NAT configurations on the system. You should remove them wi
 
 You might have stale Network Adapters on the system. You should remove them with the following commands on an elevated Powershell prompt:
 
+```
     PS C:\Users\jdoe> vmNetAdapter = Get-VMNetworkAdapter -ManagementOS -SwitchName DockerNAT
     Get-NetAdapter "vEthernet (DockerNAT)" | ? { $_.DeviceID -ne $vmNetAdapter.DeviceID } | Disable-NetAdapter -Confirm:$False -PassThru | Rename-NetAdapter -NewName "Broken Docker Adapter"
+```
 
 Then you can remove them manually via the `devmgmt.msc` (aka Device Manager).
 You should see them as disabled Hyper-V Virtual Ethernet Adapter under the
