@@ -167,12 +167,6 @@
    opacity: .8;
 }
 
-/* box shadow for docs home page workflow*/
-
-#DocumentationText .boxer
-{box-shadow: 2px 2px #888, -2px -2px #F4D03F, 0px 0px 5px 5px #F4D03F;
-}
-
 #DocumentationText table {
     margin: 1.25rem 0;
     width: 100%;
