@@ -148,9 +148,13 @@ Docker from the repository.
     $ sudo yum -y install docker-engine-<VERSION_STRING>
     ```
 
-    The Docker daemon starts automatically.
+4.  Start Docker.
 
-4.  Verify that `docker` is installed correctly by running the `hello-world`
+    ```bash
+    $ sudo systemctl docker start
+    ```
+
+5.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -192,9 +196,13 @@ need to download a new file each time you want to upgrade Docker.
     $ sudo yum install /path/to/package.rpm
     ```
 
-    The Docker daemon starts automatically.
+3.  Start Docker.
 
-3.  Verify that `docker` is installed correctly by running the `hello-world`
+    ```bash
+    $ sudo systemctl docker start
+    ```
+
+4.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
