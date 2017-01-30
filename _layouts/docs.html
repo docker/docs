@@ -206,7 +206,25 @@ ng\:form {
 								{% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
 								{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
               {% include read_time.html %}
-              {{ content }}
+
+<!-- Adds an inline TOC with every <h2> element, unless the page has `notoc` in the front-matter -->
+<!-- Don't change the indentation -->
+{% capture content_with_toc %}
+{% unless page.notoc %}
+<div id="inline_toc" markdown="1">
+
+* TOC
+{:toc}
+
+</div>
+{% endunless %}
+
+{{ content }}
+{% endcapture %}
+
+{{ content_with_toc | markdownify }}
+<!-- end special indentaiton-->
+
 							{% if page.noratings != true %}
 							<div style="text-align: center; margin-top: 50px">
 								<img src="/images/chat.png" alt="chat icon" style="margin-right: 10px">

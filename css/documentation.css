@@ -451,3 +451,23 @@ span.reading-time-label {
 img.with-border {
   border: 1px solid #eaeaea;
 }
+
+#markdown-toc {
+  background-color: #f5fdff;
+  border: 1px solid #2294ca;
+  padding: 10px;
+  font-size: 80%;
+  padding: 10px;
+  list-style-type: none;
+  width: 50%;
+  margin-left: 0;
+}
+
+#markdown-toc:before {
+  content: "On this page:";
+  font-weight: bold;
+  font-size: 120%;
+  color: #155A74;
+  display: block;
+  padding-bottom: 5px;
+}
