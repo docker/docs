@@ -1101,118 +1101,121 @@ toc:
       title: Universal Control Plane overview
     - path: /datacenter/ucp/2.1/guides/architecture/
       title: Architecture
-    - sectiontitle: Install UCP 2.1
+    - sectiontitle: Administration
       section:
-      - path: /datacenter/ucp/2.1/guides/install/system-requirements/
-        title: System requirements
-      - path: /datacenter/ucp/2.1/guides/install/plan-production-install/
-        title: Plan a production installation
-      - path: /datacenter/ucp/2.1/guides/install/
-        title: Install UCP for production
-      - path: /datacenter/ucp/2.1/guides/install/install-offline/
-        title: Install offline
-      - path: /datacenter/ucp/2.1/guides/install/license/
-        title: License UCP
-      - path: /datacenter/ucp/2.1/guides/install/scale-your-cluster/
-        title: Scale your cluster
-      - path: /datacenter/ucp/2.1/guides/install/upgrade/
-        title: Upgrade to UCP 2.1
-      - path: /datacenter/ucp/2.1/guides/install/uninstall/
-        title: Uninstall UCP
-    - sectiontitle: Access UCP
-      section:
-      - path: /datacenter/ucp/2.1/guides/access-ucp/
-        title: Web-based access
-      - path: /datacenter/ucp/2.1/guides/access-ucp/cli-based-access/
-        title: CLI-based access
-    - sectiontitle: Configure UCP 2.1
-      section:
-      - path: /datacenter/ucp/2.1/guides/configure/
-        title: Use externally-signed certificates
-      - path: /datacenter/ucp/2.1/guides/configure/configure-logs/
-        title: Configure UCP logging
-      - path: /datacenter/ucp/2.1/guides/configure/integrate-with-dtr/
-        title: Integrate with Docker Trusted Registry
-      - path: /datacenter/ucp/2.1/guides/configure/integrate-with-ldap/
-        title: Integrate with LDAP
-      - path: /datacenter/ucp/2.1/guides/configure/route-hostnames/
-        title: Route hostnames to services
-      - path: /datacenter/ucp/2.1/guides/configure/high-availability/
-        title: Set up high availability
-      - path: /datacenter/ucp/2.1/guides/configure/backup-and-recover/
+      - sectiontitle: Install
+        section:
+        - path: /datacenter/ucp/2.1/guides/admin/install/system-requirements/
+          title: System requirements
+        - path: /datacenter/ucp/2.1/guides/admin/install/plan-installation/
+          title: Plan your installation
+        - path: /datacenter/ucp/2.1/guides/admin/install/
+          title: Install
+        - path: /datacenter/ucp/2.1/guides/admin/install/install-offline/
+          title: Install offline
+        - path: /datacenter/ucp/2.1/guides/admin/install/uninstall/
+          title: Uninstall
+        - sectiontitle: Upgrade
+          section:
+          - path: /datacenter/ucp/2.1/guides/admin/upgrade/release-notes/
+            title: Release notes
+          - path: /datacenter/ucp/2.1/guides/admin/upgrade/incompatibilities-and-breaking-changes/
+            title: Incompatibilities and breaking changes
+          - path: /datacenter/ucp/2.1/guides/admin/upgrade/
+            title: Upgrade
+      - sectiontitle: Configure
+        section:
+        - path: /datacenter/ucp/2.1/guides/admin/configure/license/
+          title: License your installation
+        - path: /datacenter/ucp/2.1/guides/admin/configure/tls-certificates/
+          title: Use your own TLS certificates
+        - path: /datacenter/ucp/2.1/guides/admin/configure/scale-your-cluster/
+          title: Scale your cluster
+        - path: /datacenter/ucp/2.1/guides/admin/configure/set-up-high-availability/
+          title: Set up high availability
+        - path: /datacenter/ucp/2.1/guides/admin/configure/use-a-load-balancer/
+          title: Use a load balancer
+        - path: /datacenter/ucp/2.1/guides/admin/configure/add-labels-to-cluster-nodes/
+          title: Add labels to cluster nodes
+        - path: /datacenter/ucp/2.1/guides/admin/configure/store-logs-in-an-external-system/
+          title: Store logs in an external system
+        - path: /datacenter/ucp/2.1/guides/admin/configure/only-allow-running-signed-images/
+          title: Only allow running signed images
+        - path: /datacenter/ucp/2.1/guides/admin/configure/use-domain-names-to-access-services/
+          title: Use domain names to access services
+        - path: /datacenter/ucp/2.1/guides/admin/configure/external-auth/
+          title: Integrate with LDAP
+      - sectiontitle: Manage users
+        section:
+        - path: /datacenter/ucp/2.1/guides/admin/manage-users/
+          title: Authentication and authorization
+        - path: /datacenter/ucp/2.1/guides/admin/manage-users/create-and-manage-users/
+          title: Create and manage users
+        - path: /datacenter/ucp/2.1/guides/admin/manage-users/create-and-manage-teams/
+          title: Create and manage teams
+        - path: /datacenter/ucp/2.1/guides/admin/manage-users/permission-levels/
+          title: Permission levels
+      - sectiontitle: Monitor and troubleshoot
+        section:
+        - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/
+          title: Monitor the cluster status
+        - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+          title: Troubleshoot with logs
+        - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/
+          title: Troubleshoot configurations
+      - path: /datacenter/ucp/2.1/guides/admin/backups-and-disaster-recovery/
         title: Backups and disaster recovery
-    - sectiontitle: Monitor and troubleshoot
+      - sectiontitle: CLI reference
+        section:
+        - path: /datacenter/ucp/2.1/reference/cli/
+          title: docker/ucp overview
+        - path: /datacenter/ucp/2.1/reference/cli/backup/
+          title: backup
+        - path: /datacenter/ucp/2.1/reference/cli/dump-certs/
+          title: dump-certs
+        - path: /datacenter/ucp/2.1/reference/cli/fingerprint/
+          title: fingerprint
+        - path: /datacenter/ucp/2.1/reference/cli/id/
+          title: id
+        - path: /datacenter/ucp/2.1/reference/cli/images/
+          title: images
+        - path: /datacenter/ucp/2.1/reference/cli/install/
+          title: install
+        - path: /datacenter/ucp/2.1/reference/cli/restart/
+          title: restart
+        - path: /datacenter/ucp/2.1/reference/cli/restore/
+          title: restore
+        - path: /datacenter/ucp/2.1/reference/cli/stop/
+          title: stop
+        - path: /datacenter/ucp/2.1/reference/cli/support/
+          title: support
+        - path: /datacenter/ucp/2.1/reference/cli/uninstall-ucp/
+          title: uninstall-ucp
+        - path: /datacenter/ucp/2.1/reference/cli/upgrade/
+          title: upgrade
+    - sectiontitle: User guides
       section:
-      - path: /datacenter/ucp/2.1/guides/monitor-troubleshoot/
-        title: Monitor your cluster
-      - path: /datacenter/ucp/2.1/guides/monitor-troubleshoot/troubleshoot/
-        title: Troubleshoot your cluster
-      - path: /datacenter/ucp/2.1/guides/monitor-troubleshoot/troubleshoot-configurations/
-        title: Troubleshoot cluster configurations
-    - sectiontitle: User management
-      section:
-      - path: /datacenter/ucp/2.1/guides/user-management/
-        title: Authentication and authorization
-      - path: /datacenter/ucp/2.1/guides/user-management/create-and-manage-users/
-        title: Create and manage users
-      - path: /datacenter/ucp/2.1/guides/user-management/create-and-manage-teams/
-        title: Create and manage teams
-      - path: /datacenter/ucp/2.1/guides/user-management/permission-levels/
-        title: Permission levels
-    - sectiontitle: Applications
-      section:
-      - path: /datacenter/ucp/2.1/guides/applications/
-        title: Deploy an app from the UI
-      - path: /datacenter/ucp/2.1/guides/applications/deploy-app-cli/
-        title: Deploy an app from the CLI
-    - sectiontitle: Secrets management
-      section:
-      - path: /datacenter/ucp/2.1/guides/secrets/
-        title: Manage secrets
-      - path: /datacenter/ucp/2.1/guides/secrets/grant-revoke-access/
-        title: Grant access to secrets
-    - sectiontitle: Content trust
-      section:
-      - path: /datacenter/ucp/2.1/guides/content-trust/
-        title: Run only images you trust
-      - path: /datacenter/ucp/2.1/guides/content-trust/manage-trusted-repositories/
-        title: Manage trusted repositories
-      - path: /datacenter/ucp/2.1/guides/content-trust/continuous-integration/
-        title: Use trusted images for continuous integration
-    - sectiontitle: CLI reference
-      section:
-      - path: /datacenter/ucp/2.1/reference/cli/
-        title: docker/ucp overview
-      - path: /datacenter/ucp/2.1/reference/cli/backup/
-        title: backup
-      - path: /datacenter/ucp/2.1/reference/cli/dump-certs/
-        title: dump-certs
-      - path: /datacenter/ucp/2.1/reference/cli/fingerprint/
-        title: fingerprint
-      - path: /datacenter/ucp/2.1/reference/cli/id/
-        title: id
-      - path: /datacenter/ucp/2.1/reference/cli/images/
-        title: images
-      - path: /datacenter/ucp/2.1/reference/cli/install/
-        title: install
-      - path: /datacenter/ucp/2.1/reference/cli/restart/
-        title: restart
-      - path: /datacenter/ucp/2.1/reference/cli/restore/
-        title: restore
-      - path: /datacenter/ucp/2.1/reference/cli/stop/
-        title: stop
-      - path: /datacenter/ucp/2.1/reference/cli/support/
-        title: support
-      - path: /datacenter/ucp/2.1/reference/cli/uninstall-ucp/
-        title: uninstall-ucp
-      - path: /datacenter/ucp/2.1/reference/cli/upgrade/
-        title: upgrade
-    - path: /datacenter/ucp/2.1/guides/support/
-      title: Get support
-    - path: /datacenter/ucp/2.1/guides/incompatibilities/
-      title: Breaking changes
-    - path: /datacenter/ucp/2.1/guides/release-notes/
-      title: Release Notes
+      - sectiontitle: Access UCP
+        section:
+        - path: /datacenter/ucp/2.1/guides/user/access-ucp/
+          title: Web-based access
+        - path: /datacenter/ucp/2.1/guides/user/access-ucp/cli-based-access/
+          title: CLI-based access
+      - sectiontitle: Deploy an application
+        section:
+        - path: /datacenter/ucp/2.1/guides/user/applications/
+          title: Deploy an app from the UI
+        - path: /datacenter/ucp/2.1/guides/user/applications/deploy-app-cli/
+          title: Deploy an app from the CLI
+      - sectiontitle: Secrets
+        section:
+        - path: /datacenter/ucp/2.1/guides/user/secrets/
+          title: Manage secrets
+        - path: /datacenter/ucp/2.1/guides/user/secrets/grant-revoke-access/
+          title: Grant access to secrets
+
+
+
   - sectiontitle: (BETA) Docker Trusted Registry 2.2
     section:
     - path: /datacenter/dtr/2.2/guides/
