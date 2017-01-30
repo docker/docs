@@ -315,12 +315,6 @@ storage media such as solid state devices (SSD). However, if you only have a
 limited amount of SSD storage available it is recommended to place the ZIL on
 SSD.
 
-- **Use Data Volumes**. Data volumes provide the best and most predictable
-performance. This is because they bypass the storage driver and do not incur
-any of the potential overheads introduced by thin provisioning and
-copy-on-write. For this reason, you should place heavy write workloads on data
-volumes.
-
 ## Limiting your container's writable storage quota
 
 If you want to implement a quota on a per-image/dataset basis, you can use
