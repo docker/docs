@@ -41,18 +41,6 @@ manager nodes. The maximum advisable is having 7 manager nodes.
 After provisioning the new nodes, you can
 [add them to the cluster](../install/scale-your-cluster.md).
 
-## Load-balancing on UCP
-
-Docker UCP does not include a load balancer. You can configure your own
-load balancer to balance user requests across all manager nodes.
-[Learn more about the UCP reference architecture](https://www.docker.com/sites/default/files/RA_UCP%20Load%20Balancing-Feb%202016_0.pdf).
-
-Since Docker UCP uses mutual TLS, make sure you configure your load balancer to:
-
-* Load-balance TCP traffic on port 443,
-* Not terminate HTTPS connections,
-* Use the `/_ping` endpoint on each manager node, to check if the node
-is healthy and if it should remain on the load balancing pool or not.
 
 ## Where to go next
 
