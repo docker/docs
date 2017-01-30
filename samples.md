@@ -12,7 +12,7 @@ The following samples were developed by Docker and the Docker community.
 ## Tutorial labs
 
 Tutorial labs demonstrate how to develop and ship containerized applications, by
-walking through a sample that exhibits canonical practices. These labs are being
+walking through a sample that exhibits canonical practices. These labs are
 from the [Docker Labs repository]({{ labsbase }}).
 
 | Sample | Description |
