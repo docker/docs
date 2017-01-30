@@ -5,6 +5,7 @@ kramdown:
   html_to_native: true
   hard_wrap: false
   syntax_highlighter: rouge
+  toc_levels: 2..3
 incremental: true
 permalink: pretty
 safe: false
@@ -29,6 +30,8 @@ defaults:
       layout: docs
       defaultassignee: johndmulhausen
       enginebranch: 1.13.x
+      toc_min: 2
+      toc_max: 3
   - scope:
       path: "compose"
     values:
