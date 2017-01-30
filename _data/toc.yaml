@@ -1141,6 +1141,8 @@ toc:
           title: Store logs in an external system
         - path: /datacenter/ucp/2.1/guides/admin/configure/only-allow-running-signed-images/
           title: Only allow running signed images
+        - path: /datacenter/ucp/2.1/guides/admin/configure/restrict-services-to-worker-nodes/
+          title: Restrict services to worker nodes
         - path: /datacenter/ucp/2.1/guides/admin/configure/use-domain-names-to-access-services/
           title: Use domain names to access services
         - path: /datacenter/ucp/2.1/guides/admin/configure/external-auth/

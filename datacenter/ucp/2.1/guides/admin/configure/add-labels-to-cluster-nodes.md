@@ -22,7 +22,7 @@ service to be scheduled on nodes that have an SSD storage.
 
 ## Apply labels to a node
 
-Log in with administrator credentials in the UCP web UI, navigate to the
+Log in with administrator credentials in the **UCP web UI**, navigate to the
 **Nodes** page, and choose the node you want to apply labels to.
 
 Click the **Add label** button, and add one or more labels to the node.
