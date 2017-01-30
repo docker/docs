@@ -35,9 +35,25 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-beta-channels).
     <th style="font-size: x-large; font-family: arial">Beta channel</th>
   </tr>
   <tr valign="top">
-    <td width="50%">This installer is fully baked and tested, and comes with the latest GA version of Docker Engine. <br><br>This is the best channel to use if you want a reliable platform to work with. <br><br>These releases follow a version schedule with a longer lead time than the betas, synched with Docker Engine releases and hotfixes.<br><br>On the stable channel, you can select whether to send usage statistics and other data.
+    <td width="50%">This installer is fully baked and tested, and comes
+    with the latest GA version of Docker Engine along with <a
+    href="https://github.com/docker/docker/blob/master/experimental/README.md"> experimental features in Docker Engine</a>, which are enabled by
+    default and configurable on <a href="#daemon-experimental-mode">Docker Daemon preferences for experimental mode</a>. <br><br>This is the
+    best channel to use if you want a reliable platform to work with.
+    (Be sure to disable experimental features for apps in production.) <br><br>These releases follow a version schedule with a longer lead
+    time than the betas, synched with Docker Engine releases and
+    hotfixes.<br><br>On the stable channel, you can select whether to send usage
+    statistics and other data.
     </td>
-    <td width="50%">This installer offers cutting edge features and comes with the experimental version of Docker Engine, described in the <a href="https://github.com/docker/docker/tree/master/experimental">Docker Experimental Features README</a> on GitHub.<br><br>This is the best channel to use if you want to experiment with features under development, and can weather some instability and bugs. This channel is a continuation of the beta program, where you can provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month. <br><br>We collect usage data on betas across the board.</td>
+    <td width="50%">This installer provides the latest Beta release of
+    Docker for Mac, offers cutting edge features along with
+    <a href="https://github.com/docker/docker/blob/master/experimental/README.md"> experimental features in Docker Engine</a>, which are enabled by
+    default and configurable on <a href="#daemon-experimental-mode">Docker Daemon preferences for experimental mode</a>. <br><br>This is the
+    best channel to use if you want to experiment with features under development, and can weather some instability and bugs. This channel
+    is a continuation of the beta program, where you can provide feedback
+    as the apps evolve. Releases are typically more frequent than for
+    stable, often one or more per month. <br><br>We collect all usage
+    data on betas across the board.</td>
   </tr>
   <tr valign="top">
   <td width="50%">
@@ -323,6 +339,7 @@ containers.
 
 ![Proxies settings](/docker-for-mac/images/settings-proxies.png)
 
+<p id="daemon-experimental-mode" />
 ### Docker Daemon
 
 You can configure options on the Docker daemon that determine how your
@@ -341,13 +358,20 @@ some of the commmon settings to make it easier to configure them.
 
 #### Experimental mode
 
-By default, Docker for Mac Beta releases use the experimental version of Docker
-Engine, described in the
-[Docker Experimental Features README](https://github.com/docker/docker/tree/master/experimental)
-on GitHub. Starting with Beta 31, you can toggle **experimental mode** on and
-off. If you toggle it off, Docker for Mac Beta uses the current generally
-available release of Docker Engine, the same as Stable Docker for Mac versions
-uses.
+Starting with Stable 1.13.0 and Beta 31, both Docker for Mac Stable and Beta
+releases have experimental features enabled on Docker Engine, as described in
+the [Docker Experimental Features
+README](https://github.com/docker/docker/blob/master/experimental/README.md) on GitHub.
+
+Experimental features are not appropriate for production environments or
+workloads. They are meant to be sandbox experiments for new ideas. Some
+experimental features may become incorporated into upcoming stable releases, but
+others may be modified or pulled from subsquent Betas, and never released
+on Stable.
+
+On both Beta and Stable releases, you can toggle **experimental mode** on and
+off. If you toggle it off, Docker for Mac uses the current generally available
+release of Docker Engine.
 
 You can check whether you are running experimental mode or not by typing `docker
 version` on the command line. Experimental mode is listed under `Server` data.
