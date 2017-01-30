@@ -24,6 +24,32 @@ Manager:
 - Access to an Azure account with admin privileges
 - SSH key that you want to use when accessing your completed Docker install on Azure
 
+## Deploy Docker for Azure
+
+If you have not already done so, please install Docker for Mac. You can download
+installers from the stable or beta channel. For more about stable and beta
+channels, see the [FAQs](/docker-for-azure/faqs.md#stable-and-beta-channels).
+
+<table style="width:100%">
+  <tr>
+    <th style="font-size: x-large; font-family: arial">Stable channel</th>
+    <th style="font-size: x-large; font-family: arial">Beta channel</th>
+  </tr>
+  <tr valign="top">
+    <td width="50%">This deployment is fully baked and tested, and comes with the latest GA version of Docker Engine. <br><br>This is the best channel to use if you want a reliable platform to work with. <br><br>These releases follow a version schedule with a longer lead time than the betas, synched with Docker Engine releases and hotfixes.
+    </td>
+    <td width="50%">This deployment offers cutting edge features and comes with the experimental version of Docker Engine, described in the <a href="https://github.com/docker/docker/tree/master/experimental">Docker Experimental Features README</a> on GitHub.<br><br>This is the best channel to use if you want to experiment with features under development, and can weather some instability and bugs. This channel is a continuation of the beta program, where you can provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month. <br><br>We collect usage data on betas across the board.</td>
+  </tr>
+  <tr valign="top">
+  <td width="50%">
+  <a class="button darkblue-btn" href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fdownload.docker.com%2Fazure%2Fstable%2FDocker.tmpl" data-rel="Stable-1" target="blank" id="azure-deploy">Deploy Docker for Azure (stable)</a>
+  </td>
+  <td width="50%">
+  <a class="button darkblue-btn" href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fdownload.docker.com%2Fazure%2Fbeta%2FDocker.tmpl" data-rel="Beta-14" target="blank" id="azure-deploy">Deploy Docker for Azure (beta)</a>
+  </td>
+  </tr>
+</table>
+
 ## Configuration
 
 Docker for Azure is installed with an Azure template that configures Docker in swarm-mode, running on VMs backed by a custom VHD. There are two ways you can deploy Docker for Azure. You can use the Azure Portal (browser based), or use the Azure CLI. Both have the following configuration options.

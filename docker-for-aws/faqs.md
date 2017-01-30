@@ -4,11 +4,29 @@ keywords: aws faqs
 title: Docker for AWS Frequently asked questions (FAQ)
 ---
 
-## Can I use my own AMI?
+### Stable and beta channels
+
+Two different download channels are available for Docker for AWS:
+
+* The **stable channel** provides a general availability release-ready deployment
+  for a fully baked and tested, more reliable cluster. The stable version of Docker
+  for AWS comes with the latest released version of Docker Engine. The release
+  schedule is synched with Docker Engine releases and hotfixes. On the stable
+  channel, you can select whether to send usage statistics and other data.
+
+* The **beta channel** provides a deployment with new features we are working on,
+  but is not necessarily fully tested. It comes with the experimental version of
+  Docker Engine. Bugs, crashes and issues are more likely to occur with the beta
+  cluster, but you get a chance to preview new functionality, experiment, and provide
+  feedback as the deployment evolve. Releases are typically more frequent than for
+  stable, often one or more per month. Usage statistics and crash reports are sent
+  by default. You do not have the option to disable this on the beta channel.
+
+### Can I use my own AMI?
 
 No, at this time we only support the default Docker for AWS AMI.
 
-## How to use Docker for AWS with an AWS account in an EC2-Classic region.
+### How to use Docker for AWS with an AWS account in an EC2-Classic region.
 
 If you have an AWS account that was created before **December 4th, 2013** you have what is known as an **EC2-Classic** account on regions where you have previously deployed resources. **EC2-Classic** accounts don't have default VPC's or the associated subnets, etc. This causes a problem when using our CloudFormation template  because we are using the [Fn:GetAZs](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getavailabilityzones.html) function they provide to determine which availability zones you have access too. When used in a region where you have **EC2-Classic**, this function will return all availability zones for a region, even ones you don't have access too. When you have an **EC2-VPC** account, it will return only the availability zones you have access to.
 
@@ -39,27 +57,27 @@ There are a few work arounds that you can try to get Docker for AWS up and runni
 - https://aws.amazon.com/blogs/aws/amazon-ec2-update-virtual-private-clouds-for-everyone/
 
 
-## Can I use my existing VPC?
+### Can I use my existing VPC?
 
 Not at this time, but it is on our roadmap for future releases.
 
-## Which AWS regions will this work with.
+### Which AWS regions will this work with.
 
 Docker for AWS should work with all regions except for AWS China, which is a little different than the other regions.
 
-## How many Availability Zones does Docker for AWS use?
+### How many Availability Zones does Docker for AWS use?
 
 All of Amazons regions have at least 2 AZ's, and some have more. To make sure Docker for AWS works in all regions, only 2 AZ's are used even if more are available.
 
-## What do I do if I get "KeyPair error" on AWS?
+### What do I do if I get "KeyPair error" on AWS?
 As part of the prerequisites, you need to have an SSH key uploaded to the AWS region you are trying to deploy to.
 For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 
-## Where are my container logs?
+### Where are my container logs?
 
 All container logs are aggregated within [AWS CloudWatch](https://aws.amazon.com/cloudwatch/).
 
-## I have a problem/bug where do I report it?
+### I have a problem/bug where do I report it?
 
 Send an email to <docker-for-iaas@docker.com> or post to the [Docker for AWS](https://github.com/docker/for-aws) GitHub repositories.
 
@@ -77,11 +95,11 @@ Please provide this session ID to the maintainer debugging your issue.
 
 _Please note that your output will be slightly different from the above, depending on your swarm configuration_
 
-## Analytics
+### Analytics
 
 Docker for AWS sends anonymized minimal analytics to Docker (heartbeat). These analytics are used to monitor adoption and are critical to improve Docker for AWS.
 
-## How to run administrative commands?
+### How to run administrative commands?
 
 By default when you SSH into a manager, you will be logged in as the regular username: `docker` - It is possible however to run commands with elevated privileges by using `sudo`.
 For example to ping one of the nodes, after finding its IP via the Azure/AWS portal (e.g. 10.0.0.4), you could run:

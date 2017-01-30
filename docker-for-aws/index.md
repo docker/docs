@@ -32,6 +32,33 @@ use the following button to bootstrap Docker for AWS using CloudFormation:
 
 For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 
+
+## Deploy Docker for AWS
+
+If you have not already done so, please install Docker for Mac. You can download
+installers from the stable or beta channel. For more about stable and beta
+channels, see the [FAQs](/docker-for-aws/faqs.md#stable-and-beta-channels).
+
+<table style="width:100%">
+  <tr>
+    <th style="font-size: x-large; font-family: arial">Stable channel</th>
+    <th style="font-size: x-large; font-family: arial">Beta channel</th>
+  </tr>
+  <tr valign="top">
+    <td width="50%">This deployment is fully baked and tested, and comes with the latest GA version of Docker Engine. <br><br>This is the best channel to use if you want a reliable platform to work with. <br><br>These releases follow a version schedule with a longer lead time than the betas, synched with Docker Engine releases and hotfixes.
+    </td>
+    <td width="50%">This deployment offers cutting edge features and comes with the experimental version of Docker Engine, described in the <a href="https://github.com/docker/docker/tree/master/experimental">Docker Experimental Features README</a> on GitHub.<br><br>This is the best channel to use if you want to experiment with features under development, and can weather some instability and bugs. This channel is a continuation of the beta program, where you can provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month. <br><br>We collect usage data on betas across the board.</td>
+  </tr>
+  <tr valign="top">
+  <td width="50%">
+  <a class="button darkblue-btn" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/stable/Docker.tmpl" data-rel="Stable-1" target="blank" id="aws-deploy">Deploy Docker for AWS (stable)</a>
+  </td>
+  <td width="50%">
+  <a class="button darkblue-btn" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/beta/Docker.tmpl" data-rel="Beta-14" target="blank" id="aws-deploy">Deploy Docker for AWS (beta)</a>
+  </td>
+  </tr>
+</table>
+
 ## Configuration
 
 Docker for AWS is installed with a CloudFormation template that configures Docker in swarm-mode, running on instances backed custom AMIs. There are two ways you can deploy Docker for AWS. You can use the AWS Management Console (browser based), or use the AWS CLI. Both have the following configuration options.
