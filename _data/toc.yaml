@@ -1882,6 +1882,8 @@ manuals:
     title: Migrate from Boot2Docker to Machine
   - sectiontitle: Command line reference
     section:
+    - path: /machine/reference/
+      title: Reference overview
     - path: /machine/reference/active/
       title: active
     - path: /machine/reference/config/
@@ -1984,26 +1986,6 @@ manuals:
     title: Control startup order
   - path: /compose/faq/
     title: Frequently Asked Questions
-- sectiontitle: Docker Hub
-  section:
-  - path: /docker-hub/
-    title: Overview of Docker Hub
-  - path: /docker-hub/accounts/
-    title: Use Docker Hub with Docker ID
-  - path: /docker-hub/orgs/
-    title: Teams &amp; Organizations
-  - path: /docker-hub/repos/
-    title: Repositories on Docker Hub
-  - path: /docker-hub/builds/
-    title: Automated Builds
-  - path: /docker-hub/webhooks/
-    title: Webhooks for automated builds
-  - path: /docker-hub/bitbucket/
-    title: Automated Builds with Bitbucket
-  - path: /docker-hub/github/
-    title: Automated Builds from GitHub
-  - path: /docker-hub/official_repos/
-    title: Official Repositories on Docker Hub
 - sectiontitle: Docker ID
   section:
   - path: /docker-id/
@@ -2012,6 +1994,26 @@ manuals:
     title: API Reference
 - sectiontitle: Superseded products and tools
   section:
+  - sectiontitle: Docker Hub
+    section:
+    - path: /docker-hub/
+      title: Overview of Docker Hub
+    - path: /docker-hub/accounts/
+      title: Use Docker Hub with Docker ID
+    - path: /docker-hub/orgs/
+      title: Teams &amp; Organizations
+    - path: /docker-hub/repos/
+      title: Repositories on Docker Hub
+    - path: /docker-hub/builds/
+      title: Automated Builds
+    - path: /docker-hub/webhooks/
+      title: Webhooks for automated builds
+    - path: /docker-hub/bitbucket/
+      title: Automated Builds with Bitbucket
+    - path: /docker-hub/github/
+      title: Automated Builds from GitHub
+    - path: /docker-hub/official_repos/
+      title: Official Repositories on Docker Hub
   - sectiontitle: Docker Swarm
     section:
     - path: /swarm/overview/
