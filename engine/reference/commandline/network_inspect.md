@@ -12,7 +12,7 @@ https://www.github.com/docker/docker
 -->
 {% include cli.md %}
 
-## Exaples
+## Examples
 
 ```bash
 $ sudo docker run -itd --name=container1 busybox
