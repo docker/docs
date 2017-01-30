@@ -1157,6 +1157,8 @@ toc:
           title: Create and manage teams
         - path: /datacenter/ucp/2.1/guides/admin/manage-users/permission-levels/
           title: Permission levels
+        - path: /datacenter/ucp/2.1/guides/admin/manage-users/recover-a-user-password/
+          title: Recover a user password
       - sectiontitle: Monitor and troubleshoot
         section:
         - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/
