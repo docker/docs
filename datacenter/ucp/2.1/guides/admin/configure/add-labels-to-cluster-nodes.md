@@ -33,7 +33,7 @@ Once you're done, click **Save Changes**.
 
 You can also do this from the CLI by running:
 
-```non
+```none
 docker node update --label-add <key>=<value> <node-id>
 ```
 
