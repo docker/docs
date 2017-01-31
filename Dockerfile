@@ -17,13 +17,19 @@ RUN git clone https://www.github.com/docker/docker.github.io temp; \
 COPY . allv
 
 ## Branch to pull from, per ref doc
+## To get master from svn the svn branch needs to be 'trunk'. To get a branch from svn it needs to be 'branches/branchname'
+ENV ENGINE_SVN_BRANCH="trunk"
 ENV ENGINE_BRANCH="master"
+ENV DISTRIBUTION_SVN_BRANCH="branches/release/2.5"
 ENV DISTRIBUTION_BRANCH="release/2.5"
 
 # The statements below pull reference docs from upstream locations,
 # then build the whole site to static HTML using Jekyll
 
-RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend allv/engine/extend \
+RUN svn --non-interactive --trust-server-cert co https://github.com/docker/docker/$ENGINE_SVN_BRANCH/docs/ tmp_engine \
+ && mkdir allv/engine/extend \
+ && mv tmp_engine/extend/* allv/engine/extend \
+ && rm -rf tmp_engine \
  && wget -O allv/engine/api/v1.18.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.18.md \
  && wget -O allv/engine/api/v1.19.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.19.md \
  && wget -O allv/engine/api/v1.20.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.20.md \
@@ -37,7 +43,7 @@ RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend 
  && wget -O allv/engine/reference/run.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/run.md \
  && wget -O allv/engine/reference/commandline/cli.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/commandline/cli.md \
  && wget -O allv/engine/deprecated.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/deprecated.md \
- && svn co https://github.com/docker/distribution/branches/$DISTRIBUTION_BRANCH/docs/spec allv/registry/spec \
+ && svn --non-interactive --trust-server-cert co https://github.com/docker/distribution/$DISTRIBUTION_SVN_BRANCH/docs/spec allv/registry/spec \
  && wget -O allv/registry/configuration.md https://raw.githubusercontent.com/docker/distribution/$DISTRIBUTION_BRANCH/docs/configuration.md \
  && rm -rf allv/apidocs/cloud-api-source \
  && rm -rf allv/tests \
