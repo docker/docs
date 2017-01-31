@@ -16,9 +16,6 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn
 about both kinds of releases, and download stable and beta product installers at
 [Download Docker for Mac](index.md#download-docker-for-mac).
 
-* [Stable Release Notes](release-notes.md#stable-release-notes)
-* [Beta Release Notes](release-notes.md#beta-release-notes)
-
 ## Stable Release Notes
 
 ### Docker for Mac 1.13.0, 2017-01-19 (stable)
