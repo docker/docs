@@ -135,9 +135,6 @@
     color: #008AB5;
 }
 
-#RightColumnSection h5 {
-  color: #155A74;
-}
 /* reset away from #008AB5 */
 
 /* removed hard-coded color for button links pre new CSS from Design */
@@ -322,6 +319,12 @@ div.docsidebarnav_section.affix ul {
 
 #RightColumnSection {
   padding: 0 !important;
+}
+
+#RightColumnSection ul {
+  padding-top: 5px;
+  list-style: none;
+  margin-left: 0;
 }
 .advisory {
 color: #F04124;

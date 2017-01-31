@@ -201,7 +201,7 @@ ng\:form {
 							</ul>
               </div>
             </div>
-            <div {% if page.notoc %} class="col-xs-12 col-sm-9 col-md-10" {% else %} class="col-xs-12 col-sm-9 col-md-8 col-xl-9" {% endif %} >
+            <div class="col-xs-12 col-sm-9 col-md-8 col-xl-9">
               <section class="section" id="DocumentationText">
 								{% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
 								{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
@@ -270,7 +270,6 @@ ng\:form {
 						 }
 						 </script>
             </div>
-						{% if page.notoc != true %}
 						<div class="hidden-xs hidden-sm col-md-2 col-xl-1 right_column_section">
                 <section class="section" id="RightColumnSection">
 						    <span class="title_section">
@@ -282,17 +281,15 @@ ng\:form {
 								    <button type="submit" class="search-submit btn btn-default">Search</button>
 								  </form>
 						    </span>
-								<h5>Feedback?</h5>
 								<ul>
                 {% if edit_url != "" %}
-                  <li><a href="{{ edit_url }}">Edit this page on Github&nbsp;&#9998;</a></li>
+                  <li><a href="{{ edit_url }}">&#9998;&nbsp;Edit this page</a></li>
 								{% endif %}
-									<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge">Request docs changes</a></li>
-									<li><a href="https://www.docker.com/docker-support-services">Get support</a></li>
+									<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge">&#10003;&nbsp;Request docs changes</a></li>
+									<li><a href="https://www.docker.com/docker-support-services">&#x0003F;&nbsp;Get support</a></li>
 								</ul>
                 </section>
             </div>
-						{% endif %}<!-- end check for notoc != true -->
           </div>
         </div>
       </div>
