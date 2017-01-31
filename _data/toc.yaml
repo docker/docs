@@ -20,42 +20,10 @@ guides:
   section:
   - path: /engine/installation/
     title: Install Docker Engine
-  - sectiontitle: Docker for Mac
-    section:
-    - path: /docker-for-mac/
-      title: Getting Started
-    - path: /docker-for-mac/docker-toolbox/
-      title: Docker for Mac vs. Docker Toolbox
-    - path: /docker-for-mac/multi-arch/
-      title: Leveraging Multi-CPU Architecture Support
-    - path: /docker-for-mac/networking/
-      title: Networking
-    - path: /docker-for-mac/osxfs/
-      title: File system sharing
-    - path: /docker-for-mac/troubleshoot/
-      title: Logs and Troubleshooting
-    - path: /docker-for-mac/faqs/
-      title: FAQs
-    - path: /docker-for-mac/examples/
-      title: Example Applications
-    - path: /docker-for-mac/opensource/
-      title: Open Source Licensing
-    - path: /docker-for-mac/release-notes/
-      title: Release Notes
-  - sectiontitle: Docker for Windows
-    section:
-    - path: /docker-for-windows/
-      title: Getting Started
-    - path: /docker-for-windows/troubleshoot/
-      title: Logs and Troubleshooting
-    - path: /docker-for-windows/faqs/
-      title: FAQs
-    - path: /docker-for-windows/examples/
-      title: Example Applications
-    - path: /docker-for-windows/opensource/
-      title: Open Source Licensing
-    - path: /docker-for-windows/release-notes/
-      title: Release Notes
+  - path: /docker-for-mac/
+    title: Docker for Mac
+  - path: /docker-for-windows/
+    title: Docker for Windows
   - sectiontitle: Docker for Linux
     section:
     - path: /engine/installation/linux/ubuntu/
@@ -490,12 +458,14 @@ reference:
   title: Dockerfile reference
 - path: /compose/compose-file/
   title: Compose file reference
-- sectiontitle: Engine (docker) CLI reference
+- sectiontitle: Engine (docker) and Daemon (dockerd) CLI
   section:
   - path: /engine/reference/run/
     title: Docker run reference
   - path: /engine/reference/commandline/cli/
     title: Use the Docker command line
+  - path: /engine/reference/commandline/dockerd/
+    title: Daemon (dockerd) CLI reference
   - path: /engine/reference/commandline/docker/
     title: docker (base command)
   - path: /engine/reference/commandline/attach/
@@ -805,14 +775,14 @@ reference:
       title: docker volume rm
   - path: /engine/reference/commandline/wait/
     title: docker wait
-- path: /engine/reference/commandline/dockerd/
-  title: Daemon (dockerd) CLI reference
 - sectiontitle: Compose (docker-compose) CLI reference
   section:
   - path: /compose/reference/overview/
     title: Overview of docker-compose CLI
   - path: /compose/reference/envvars/
     title: CLI Environment Variables
+  - path: /compose/completion/
+    title: Command-line Completion
   - path: /compose/reference/build/
     title: build
   - path: /compose/reference/bundle/
@@ -859,9 +829,151 @@ reference:
     title: unpause
   - path: /compose/reference/up/
     title: up
-  - path: /compose/completion/
-    title: Command-line Completion
-- sectiontitle: Engine API reference
+- sectiontitle: Machine (docker-machine) CLI and drivers
+  section:
+  - sectiontitle: Machine (docker-machine) CLI reference
+    section:
+    - path: /machine/reference/
+      title: Machine CLI overview
+    - path: /machine/completion/
+      title: Machine command-line Completion
+    - path: /machine/reference/active/
+      title: active
+    - path: /machine/reference/config/
+      title: config
+    - path: /machine/reference/create/
+      title: create
+    - path: /machine/reference/env/
+      title: env
+    - path: /machine/reference/help/
+      title: help
+    - path: /machine/reference/inspect/
+      title: inspect
+    - path: /machine/reference/ip/
+      title: ip
+    - path: /machine/reference/kill/
+      title: kill
+    - path: /machine/reference/ls/
+      title: ls
+    - path: /machine/reference/provision/
+      title: provision
+    - path: /machine/reference/regenerate-certs/
+      title: regenerate-certs
+    - path: /machine/reference/restart/
+      title: restart
+    - path: /machine/reference/rm/
+      title: rm
+    - path: /machine/reference/scp/
+      title: scp
+    - path: /machine/reference/ssh/
+      title: ssh
+    - path: /machine/reference/start/
+      title: start
+    - path: /machine/reference/status/
+      title: status
+    - path: /machine/reference/stop/
+      title: stop
+    - path: /machine/reference/upgrade/
+      title: upgrade
+    - path: /machine/reference/url/
+      title: url
+  - sectiontitle: Machine drivers
+    section:
+    - path: /machine/drivers/os-base/
+      title: Driver options and operating system defaults
+    - path: /machine/drivers/aws/
+      title: Amazon Web Services
+    - path: /machine/drivers/digital-ocean/
+      title: Digital Ocean
+    - path: /machine/drivers/exoscale/
+      title: Exoscale
+    - path: /machine/drivers/generic/
+      title: Generic
+    - path: /machine/drivers/gce/
+      title: Google Compute Engine
+    - path: /machine/drivers/soft-layer/
+      title: IBM Softlayer
+    - path: /machine/drivers/azure/
+      title: Microsoft Azure
+    - path: /machine/drivers/hyper-v/
+      title: Microsoft Hyper-V
+    - path: /machine/drivers/openstack/
+      title: OpenStack
+    - path: /machine/drivers/virtualbox/
+      title: Oracle VirtualBox
+    - path: /machine/drivers/rackspace/
+      title: Rackspace
+    - path: /machine/drivers/vm-fusion/
+      title: VMware Fusion
+    - path: /machine/drivers/vm-cloud/
+      title: VMware vCloud Air
+    - path: /machine/drivers/vsphere/
+      title: VMware vSphere
+- sectiontitle: UCP tool (docker/ucp) CLI
+  section:
+  - sectiontitle: v2.0 reference
+    section:
+    - path: /datacenter/ucp/2.0/reference/cli/
+      title: docker/ucp overview
+    - path: /datacenter/ucp/2.0/reference/cli/backup/
+      title: backup
+    - path: /datacenter/ucp/2.0/reference/cli/dump-certs/
+      title: dump-certs
+    - path: /datacenter/ucp/2.0/reference/cli/fingerprint/
+      title: fingerprint
+    - path: /datacenter/ucp/2.0/reference/cli/id/
+      title: id
+    - path: /datacenter/ucp/2.0/reference/cli/images/
+      title: images
+    - path: /datacenter/ucp/2.0/reference/cli/install/
+      title: install
+    - path: /datacenter/ucp/2.0/reference/cli/restart/
+      title: restart
+    - path: /datacenter/ucp/2.0/reference/cli/restore/
+      title: restore
+    - path: /datacenter/ucp/2.0/reference/cli/stop/
+      title: stop
+    - path: /datacenter/ucp/2.0/reference/cli/support/
+      title: support
+    - path: /datacenter/ucp/2.0/reference/cli/uninstall-ucp/
+      title: uninstall-ucp
+    - path: /datacenter/ucp/2.0/reference/cli/upgrade/
+      title: upgrade
+  - sectiontitle: v1.1 reference
+    section:
+    - path: /datacenter/ucp/1.1/reference/backup/
+      title: backup
+    - path: /datacenter/ucp/1.1/reference/dump-certs/
+      title: dump-certs
+    - path: /datacenter/ucp/1.1/reference/engine-discovery/
+      title: engine-discovery
+    - path: /datacenter/ucp/1.1/reference/fingerprint/
+      title: fingerprint
+    - path: /datacenter/ucp/1.1/reference/help/
+      title: help
+    - path: /datacenter/ucp/1.1/reference/id/
+      title: id
+    - path: /datacenter/ucp/1.1/reference/images/
+      title: images
+    - path: /datacenter/ucp/1.1/reference/install/
+      title: install
+    - path: /datacenter/ucp/1.1/reference/join/
+      title: join
+    - path: /datacenter/ucp/1.1/reference/regen-certs/
+      title: regen-certs.md
+    - path: /datacenter/ucp/1.1/reference/restart/
+      title: restart
+    - path: /datacenter/ucp/1.1/reference/restore/
+      title: restore
+    - path: /datacenter/ucp/1.1/reference/stop/
+      title: stop
+    - path: /datacenter/ucp/1.1/reference/support/
+      title: support
+    - path: /datacenter/ucp/1.1/reference/uninstall/
+      title: uninstall
+    - path: /datacenter/ucp/1.1/reference/upgrade/
+      title: upgrade
+- sectiontitle: Engine API
   section:
   - path: /engine/api/
     title: Overview
@@ -897,6 +1009,93 @@ reference:
     title: Deprecated Engine Features
   - path: /engine/faq/
     title: FAQ
+- sectiontitle: Cloud API and stackfile
+  section:
+  - path: /apidocs/docker-cloud/
+    title: Docker Cloud API reference
+  - path: /docker-cloud/apps/stack-yaml-reference/
+    title: Stackfile reference
+- sectiontitle: Registry
+  section:
+  - path: /registry/spec/api/
+    title: Registry HTTP API V2
+  - sectiontitle: Registry image manifests
+    section:
+    - path: /registry/spec/manifest-v2-1/
+      title: Image Manifest V 2, Schema 1
+    - path: /registry/spec/manifest-v2-2/
+      title: Image Manifest V 2, Schema 2
+  - sectiontitle: Registry storage drivers
+    section:
+    - path: /registry/storage-drivers/
+      title: Storage Driver overview
+    - path: /registry/storage-drivers/oss/
+      title: Aliyun OSS storage driver
+    - path: /registry/storage-drivers/filesystem/
+      title: Filesystem storage driver
+    - path: /registry/storage-drivers/gcs/
+      title: GCS storage driver
+    - path: /registry/storage-drivers/inmemory/
+      title: In-memory storage driver
+    - path: /registry/storage-drivers/azure/
+      title: Microsoft Azure storage driver
+    - path: /registry/storage-drivers/s3/
+      title: S3 storage driver
+    - path: /registry/storage-drivers/swift/
+      title: Swift storage driver
+  - sectiontitle: Registry specifications
+    section:
+    - path: /registry/spec/auth/
+      title: Docker Registry Token Authentication
+    - path: /registry/spec/auth/jwt/
+      title: Token Authentication Implementation
+    - path: /registry/spec/auth/oauth/
+      title: Oauth2 Token Authentication
+    - path: /registry/spec/auth/scope/
+      title: Token Scope Documentation
+    - path: /registry/spec/auth/token/
+      title: Token Authentication Specification
+- sectiontitle: Trusted Registry (docker/dtr) CLI and API
+  section:
+  - sectiontitle: Trusted Registry (docker/dtr) CLI v2.1
+    section:
+    - path: /datacenter/dtr/2.1/reference/cli/
+      title: Overview
+    - path: /datacenter/dtr/2.1/reference/cli/backup/
+      title: backup
+    - path: /datacenter/dtr/2.1/reference/cli/dumpcerts/
+      title: dumpcerts
+    - path: /datacenter/dtr/2.1/reference/cli/images/
+      title: images
+    - path: /datacenter/dtr/2.1/reference/cli/install/
+      title: install
+    - path: /datacenter/dtr/2.1/reference/cli/join/
+      title: join
+    - path: /datacenter/dtr/2.1/reference/cli/reconfigure/
+      title: reconfigure
+    - path: /datacenter/dtr/2.1/reference/cli/remove/
+      title: remove
+    - path: /datacenter/dtr/2.1/reference/cli/restore/
+      title: restore
+    - path: /datacenter/dtr/2.1/reference/cli/upgrade/
+      title: upgrade
+  - sectiontitle: Trusted Registry APIs
+    section:
+    - path: /apidocs/overview/
+      title: Overview
+    - path: /datacenter/dtr/2.1/reference/api/
+      title: API v.2.1
+    - path: /apidocs/v2.0.1/
+      title: API v2.0.1
+    - path: /apidocs/v2.0.0/
+      title: API v2.0.0
+    - path: /apidocs/v1.4.0/
+      title: API v1.4.0
+    - path: /apidocs/v1.3.3/
+      title: API v1.3.3
+- path: /docker-id/api-reference/
+  title: Docker ID accounts API
+
 
 samples:
 - path: /samples/#tutorial-labs
@@ -925,6 +1124,38 @@ samples:
   title: WordPress
 
 manuals:
+- sectiontitle: Docker for Mac
+  section:
+  - path: /docker-for-mac/docker-toolbox/
+    title: Docker for Mac vs. Docker Toolbox
+  - path: /docker-for-mac/multi-arch/
+    title: Leveraging Multi-CPU Architecture Support
+  - path: /docker-for-mac/networking/
+    title: Networking
+  - path: /docker-for-mac/osxfs/
+    title: File system sharing
+  - path: /docker-for-mac/troubleshoot/
+    title: Logs and Troubleshooting
+  - path: /docker-for-mac/faqs/
+    title: FAQs
+  - path: /docker-for-mac/examples/
+    title: Example Applications
+  - path: /docker-for-mac/opensource/
+    title: Open Source Licensing
+  - path: /docker-for-mac/release-notes/
+    title: Release Notes
+- sectiontitle: Docker for Windows
+  section:
+  - path: /docker-for-windows/troubleshoot/
+    title: Logs and Troubleshooting
+  - path: /docker-for-windows/faqs/
+    title: FAQs
+  - path: /docker-for-windows/examples/
+    title: Example Applications
+  - path: /docker-for-windows/opensource/
+    title: Open Source Licensing
+  - path: /docker-for-windows/release-notes/
+    title: Release Notes
 - sectiontitle: CS Docker Engine
   section:
   - path: /cs-engine/install/
@@ -1023,34 +1254,6 @@ manuals:
         title: Manage trusted repositories
       - path: /datacenter/ucp/2.0/guides/content-trust/continuous-integration/
         title: Use trusted images for continuous integration
-    - sectiontitle: CLI reference
-      section:
-      - path: /datacenter/ucp/2.0/reference/cli/
-        title: docker/ucp overview
-      - path: /datacenter/ucp/2.0/reference/cli/backup/
-        title: backup
-      - path: /datacenter/ucp/2.0/reference/cli/dump-certs/
-        title: dump-certs
-      - path: /datacenter/ucp/2.0/reference/cli/fingerprint/
-        title: fingerprint
-      - path: /datacenter/ucp/2.0/reference/cli/id/
-        title: id
-      - path: /datacenter/ucp/2.0/reference/cli/images/
-        title: images
-      - path: /datacenter/ucp/2.0/reference/cli/install/
-        title: install
-      - path: /datacenter/ucp/2.0/reference/cli/restart/
-        title: restart
-      - path: /datacenter/ucp/2.0/reference/cli/restore/
-        title: restore
-      - path: /datacenter/ucp/2.0/reference/cli/stop/
-        title: stop
-      - path: /datacenter/ucp/2.0/reference/cli/support/
-        title: support
-      - path: /datacenter/ucp/2.0/reference/cli/uninstall-ucp/
-        title: uninstall-ucp
-      - path: /datacenter/ucp/2.0/reference/cli/upgrade/
-        title: upgrade
     - path: /datacenter/ucp/2.0/guides/support/
       title: Get support
     - path: /datacenter/ucp/2.0/guides/release-notes/
@@ -1119,32 +1322,6 @@ manuals:
         title: Push an image
       - path: /datacenter/dtr/2.1/guides/repos-and-images/delete-an-image/
         title: Delete an image
-    - sectiontitle: API and CLI reference
-      section:
-      - path: /datacenter/dtr/2.1/reference/api/
-        title: API reference
-      - sectiontitle: CLI reference
-        section:
-        - path: /datacenter/dtr/2.1/reference/cli/
-          title: Overview
-        - path: /datacenter/dtr/2.1/reference/cli/backup/
-          title: backup
-        - path: /datacenter/dtr/2.1/reference/cli/dumpcerts/
-          title: dumpcerts
-        - path: /datacenter/dtr/2.1/reference/cli/images/
-          title: images
-        - path: /datacenter/dtr/2.1/reference/cli/install/
-          title: install
-        - path: /datacenter/dtr/2.1/reference/cli/join/
-          title: join
-        - path: /datacenter/dtr/2.1/reference/cli/reconfigure/
-          title: reconfigure
-        - path: /datacenter/dtr/2.1/reference/cli/remove/
-          title: remove
-        - path: /datacenter/dtr/2.1/reference/cli/restore/
-          title: restore
-        - path: /datacenter/dtr/2.1/reference/cli/upgrade/
-          title: upgrade
     - path: /datacenter/dtr/2.1/guides/release-notes/
       title: Release notes
     - path: /datacenter/dtr/2.1/guides/support/
@@ -1177,40 +1354,6 @@ manuals:
           title: Upgrade UCP
         - path: /datacenter/ucp/1.1/installation/uninstall/
           title: Uninstall UCP
-        - sectiontitle: UCP tool reference
-          section:
-          - path: /datacenter/ucp/1.1/reference/backup/
-            title: backup
-          - path: /datacenter/ucp/1.1/reference/dump-certs/
-            title: dump-certs
-          - path: /datacenter/ucp/1.1/reference/engine-discovery/
-            title: engine-discovery
-          - path: /datacenter/ucp/1.1/reference/fingerprint/
-            title: fingerprint
-          - path: /datacenter/ucp/1.1/reference/help/
-            title: help
-          - path: /datacenter/ucp/1.1/reference/id/
-            title: id
-          - path: /datacenter/ucp/1.1/reference/images/
-            title: images
-          - path: /datacenter/ucp/1.1/reference/install/
-            title: install
-          - path: /datacenter/ucp/1.1/reference/join/
-            title: join
-          - path: /datacenter/ucp/1.1/reference/regen-certs/
-            title: regen-certs/
-          - path: /datacenter/ucp/1.1/reference/restart/
-            title: restart
-          - path: /datacenter/ucp/1.1/reference/restore/
-            title: restore
-          - path: /datacenter/ucp/1.1/reference/stop/
-            title: stop
-          - path: /datacenter/ucp/1.1/reference/support/
-            title: support
-          - path: /datacenter/ucp/1.1/reference/uninstall/
-            title: uninstall
-          - path: /datacenter/ucp/1.1/reference/upgrade/
-            title: upgrade
       - sectiontitle: Access UCP
         section:
         - path: /datacenter/ucp/1.1/access-ucp/web-based-access/
@@ -1357,18 +1500,6 @@ manuals:
           title: Push an image
         - path: /datacenter/dtr/2.0/repos-and-images/delete-an-image/
           title: Delete an image
-      - sectiontitle: DTR APIs
-        section:
-        - path: /apidocs/overview/
-          title: Overview
-        - path: /apidocs/v1.3.3/
-          title: v1.3.3 API
-        - path: /apidocs/v1.4.0/
-          title: v1.4.0 API
-        - path: /apidocs/v2.0.0/
-          title: v2.0.0 API
-        - path: /apidocs/v2.0.1/
-          title: v2.0.1 API
       - sectiontitle: Release notes
         section:
         - path: /datacenter/dtr/2.0/release-notes/
@@ -1447,8 +1578,6 @@ manuals:
       title: Service API Roles
     - path: /docker-cloud/apps/service-links/
       title: Service discovery and links
-    - path: /docker-cloud/apps/stack-yaml-reference/
-      title: Stack YAML reference
     - path: /docker-cloud/apps/triggers/
       title: Use triggers
     - path: /docker-cloud/apps/volumes/
@@ -1503,8 +1632,6 @@ manuals:
     title: The Docker Cloud CLI
   - path: /docker-cloud/docker-errors-faq/
     title: Known Issues in Docker Cloud
-  - path: /apidocs/docker-cloud/
-    title: API reference
   - path: /docker-cloud/release-notes/
     title: Release Notes
 - sectiontitle: Docker Store
@@ -1539,52 +1666,14 @@ manuals:
       title: Mirroring Docker Hub
     - path: /registry/recipes/osx-setup-guide/
       title: Running on macOS
-  - sectiontitle: Reference
-    section:
-    - path: /registry/spec/
-      title: Reference Overview
-    - path: /registry/spec/api/
-      title: HTTP API V2
-    - path: /registry/spec/manifest-v2-1/
-      title: Image Manifest V 2, Schema 1
-    - path: /registry/spec/manifest-v2-2/
-      title: Image Manifest V 2, Schema 2
     - path: /registry/garbage-collection/
       title: Garbage Collection
     - path: /registry/insecure/
       title: Testing an insecure registry
-    - path: /registry/deprecated/
-      title: Deprecated Features
-    - path: /registry/compatibility/
-      title: Compatibility
-    - path: /registry/spec/auth/
-      title: Docker Registry Token Authentication
-    - path: /registry/spec/auth/jwt/
-      title: Token Authentication Implementation
-    - path: /registry/spec/auth/oauth/
-      title: Oauth2 Token Authentication
-    - path: /registry/spec/auth/scope/
-      title: Token Scope Documentation
-    - path: /registry/spec/auth/token/
-      title: Token Authentication Specification
-    - sectiontitle: Storage Drivers
-      section:
-      - path: /registry/storage-drivers/
-        title: Storage Driver overview
-      - path: /registry/storage-drivers/oss/
-        title: Aliyun OSS storage driver
-      - path: /registry/storage-drivers/filesystem/
-        title: Filesystem storage driver
-      - path: /registry/storage-drivers/gcs/
-        title: GCS storage driver
-      - path: /registry/storage-drivers/inmemory/
-        title: In-memory storage driver
-      - path: /registry/storage-drivers/azure/
-        title: Microsoft Azure storage driver
-      - path: /registry/storage-drivers/s3/
-        title: S3 storage driver
-      - path: /registry/storage-drivers/swift/
-        title: Swift storage driver
+  - path: /registry/deprecated/
+    title: Deprecated Features
+  - path: /registry/compatibility/
+    title: Compatibility
   - path: /registry/help/
     title: Getting help
 - sectiontitle: Docker Notary
@@ -1597,7 +1686,9 @@ manuals:
     title: Understand the service architecture
   - path: /notary/running_a_service/
     title: Running a Notary service
-  - sectiontitle: Notary Configuration
+  - path: /notary/changelog/
+    title: Notary Changelog
+  - sectiontitle: Configuration files
     section:
     - path: /notary/reference/server-config/
       title: Server Configuration
@@ -1607,8 +1698,6 @@ manuals:
       title: Client Configuration
     - path: /notary/reference/common-configs/
       title: Common Server and Signer Configurations
-  - path: /notary/changelog/
-    title: Notary Changelog
 - sectiontitle: Docker Machine
   section:
   - path: /machine/overview/
@@ -1629,84 +1718,6 @@ manuals:
     title: Machine concepts and help
   - path: /machine/migrate-to-machine/
     title: Migrate from Boot2Docker to Machine
-  - sectiontitle: Command line reference
-    section:
-    - path: /machine/reference/
-      title: Reference overview
-    - path: /machine/reference/active/
-      title: active
-    - path: /machine/reference/config/
-      title: config
-    - path: /machine/reference/create/
-      title: create
-    - path: /machine/reference/env/
-      title: env
-    - path: /machine/reference/help/
-      title: help
-    - path: /machine/reference/inspect/
-      title: inspect
-    - path: /machine/reference/ip/
-      title: ip
-    - path: /machine/reference/kill/
-      title: kill
-    - path: /machine/reference/ls/
-      title: ls
-    - path: /machine/reference/provision/
-      title: provision
-    - path: /machine/reference/regenerate-certs/
-      title: regenerate-certs
-    - path: /machine/reference/restart/
-      title: restart
-    - path: /machine/reference/rm/
-      title: rm
-    - path: /machine/reference/scp/
-      title: scp
-    - path: /machine/reference/ssh/
-      title: ssh
-    - path: /machine/reference/start/
-      title: start
-    - path: /machine/reference/status/
-      title: status
-    - path: /machine/reference/stop/
-      title: stop
-    - path: /machine/reference/upgrade/
-      title: upgrade
-    - path: /machine/reference/url/
-      title: url
-  - sectiontitle: Drivers
-    section:
-    - path: /machine/drivers/os-base/
-      title: Driver options and operating system defaults
-    - path: /machine/drivers/aws/
-      title: Amazon Web Services
-    - path: /machine/drivers/digital-ocean/
-      title: Digital Ocean
-    - path: /machine/drivers/exoscale/
-      title: Exoscale
-    - path: /machine/drivers/generic/
-      title: Generic
-    - path: /machine/drivers/gce/
-      title: Google Compute Engine
-    - path: /machine/drivers/soft-layer/
-      title: IBM Softlayer
-    - path: /machine/drivers/azure/
-      title: Microsoft Azure
-    - path: /machine/drivers/hyper-v/
-      title: Microsoft Hyper-V
-    - path: /machine/drivers/openstack/
-      title: OpenStack
-    - path: /machine/drivers/virtualbox/
-      title: Oracle VirtualBox
-    - path: /machine/drivers/rackspace/
-      title: Rackspace
-    - path: /machine/drivers/vm-fusion/
-      title: VMware Fusion
-    - path: /machine/drivers/vm-cloud/
-      title: VMware vCloud Air
-    - path: /machine/drivers/vsphere/
-      title: VMware vSphere
-  - path: /machine/completion/
-    title: Command-line Completion
 - sectiontitle: Docker Compose
   section:
   - path: /compose/overview/
@@ -1735,12 +1746,8 @@ manuals:
     title: Control startup order
   - path: /compose/faq/
     title: Frequently Asked Questions
-- sectiontitle: Docker ID
-  section:
-  - path: /docker-id/
-    title: Docker ID accounts
-  - path: /docker-id/api-reference/
-    title: API Reference
+- title: Docker ID accounts
+  path: /docker-id/
 - sectiontitle: Superseded products and tools
   section:
   - sectiontitle: Docker Hub
