@@ -1,6 +1,73 @@
 command: docker container create
 short: Create a new container
-long: Create a new container
+long: "Creates a writeable container layer over the specified image and prepares it
+  for\nrunning the specified command. The container ID is then printed to STDOUT.
+  This\nis similar to **docker run -d** except the container is never started. You
+  can \nthen use the **docker start <container_id>** command to start the container
+  at\nany point.\n\nThe initial status of the container created with **docker create**
+  is 'created'.\n\n# OPTIONS \n\nThe `CONTAINER-DIR` must be an absolute path such
+  as `/src/docs`. The `HOST-DIR`\ncan be an absolute path or a `name` value. A `name`
+  value must start with an\nalphanumeric character, followed by `a-z0-9`, `_` (underscore),
+  `.` (period) or\n`-` (hyphen). An absolute path starts with a `/` (forward slash).\n\nIf
+  you supply a `HOST-DIR` that is an absolute path,  Docker bind-mounts to the\npath
+  you specify. If you supply a `name`, Docker creates a named volume by that\n`name`.
+  For example, you can specify either `/foo` or `foo` for a `HOST-DIR`\nvalue. If
+  you supply the `/foo` value, Docker creates a bind-mount. If you\nsupply the `foo`
+  specification, Docker creates a named volume.\n\nYou can specify multiple  **-v**
+  options to mount one or more mounts to a\ncontainer. To use these same mounts in
+  other containers, specify the\n**--volumes-from** option also.\n\nYou can add `:ro`
+  or `:rw` suffix to a volume to mount it  read-only or\nread-write mode, respectively.
+  By default, the volumes are mounted read-write.\nSee examples.\n\nLabeling systems
+  like SELinux require that proper labels are placed on volume\ncontent mounted into
+  a container. Without a label, the security system might\nprevent the processes running
+  inside the container from using the content. By\ndefault, Docker does not change
+  the labels set by the OS.\n\nTo change a label in the container context, you can
+  add either of two suffixes\n`:z` or `:Z` to the volume mount. These suffixes tell
+  Docker to relabel file\nobjects on the shared volumes. The `z` option tells Docker
+  that two containers\nshare the volume content. As a result, Docker labels the content
+  with a shared\ncontent label. Shared volume labels allow all containers to read/write
+  content.\nThe `Z` option tells Docker to label the content with a private unshared
+  label.\nOnly the current container can use a private volume.\n\nBy default bind
+  mounted volumes are `private`. That means any mounts done\ninside container will
+  not be visible on host and vice-a-versa. One can change\nthis behavior by specifying
+  a volume mount propagation property. Making a\nvolume `shared` mounts done under
+  that volume inside container will be\nvisible on host and vice-a-versa. Making a
+  volume `slave` enables only one\nway mount propagation and that is mounts done on
+  host under that volume\nwill be visible inside container but not the other way around.\n\nTo
+  control mount propagation property of volume one can use `:[r]shared`,\n`:[r]slave`
+  or `:[r]private` propagation flag. Propagation property can\nbe specified only for
+  bind mounted volumes and not for internal volumes or\nnamed volumes. For mount propagation
+  to work source mount point (mount point\nwhere source dir is mounted on) has to
+  have right propagation properties. For\nshared volumes, source mount point has to
+  be shared. And for slave volumes,\nsource mount has to be either shared or slave.\n\nUse
+  `df <source-dir>` to figure out the source mount and then use\n`findmnt -o TARGET,PROPAGATION
+  <source-mount-dir>` to figure out propagation\nproperties of source mount. If `findmnt`
+  utility is not available, then one\ncan look at mount entry for source mount point
+  in `/proc/self/mountinfo`. Look\nat `optional fields` and see if any propagaion
+  properties are specified.\n`shared:X` means mount is `shared`, `master:X` means
+  mount is `slave` and if\nnothing is there that means mount is `private`.\n\nTo change
+  propagation properties of a mount point use `mount` command. For\nexample, if one
+  wants to bind mount source directory `/foo` one can do\n`mount --bind /foo /foo`
+  and `mount --make-private --make-shared /foo`. This\nwill convert /foo into a `shared`
+  mount point. Alternatively one can directly\nchange propagation properties of source
+  mount. Say `/` is source mount for\n`/foo`, then use `mount --make-shared /` to
+  convert `/` into a `shared` mount.\n\n> **Note**:\n> When using systemd to manage
+  the Docker daemon's start and stop, in the systemd\n> unit file there is an option
+  to control mount propagation for the Docker daemon\n> itself, called `MountFlags`.
+  The value of this setting may cause Docker to not\n> see mount propagation changes
+  made on the mount point. For example, if this value\n> is `slave`, you may not be
+  able to use the `shared` or `rshared` propagation on\n> a volume.\n\n\nTo disable
+  automatic copying of data from the container path to the volume, use\nthe `nocopy`
+  flag. The `nocopy` flag can be set on bind mounts and named volumes.\n\n# EXAMPLES\n\n##
+  Specify isolation technology for container (--isolation)\n\nThis option is useful
+  in situations where you are running Docker containers on\nWindows. The `--isolation=<value>`
+  option sets a container's isolation\ntechnology. On Linux, the only supported is
+  the `default` option which uses\nLinux namespaces. On Microsoft Windows, you can
+  specify these values:\n\n* `default`: Use the value specified by the Docker daemon's
+  `--exec-opt` . If the `daemon` does not specify an isolation technology, Microsoft
+  Windows uses `process` as its default value.\n* `process`: Namespace isolation only.\n*
+  `hyperv`: Hyper-V hypervisor partition-based isolation.\n\nSpecifying the `--isolation`
+  flag without a value is the same as setting `--isolation=\"default\"`.\n"
 usage: docker container create [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker container
 plink: docker_container.yaml
@@ -140,9 +207,9 @@ options:
   default_value: "0"
   description: Maximum IOps limit for the system drive (Windows only)
 - option: ip
-  description: Container IPv4 address (e.g. 172.30.100.104)
+  description: IPv4 address (e.g., 172.30.100.104)
 - option: ip6
-  description: Container IPv6 address (e.g. 2001:db8::33)
+  description: IPv6 address (e.g., 2001:db8::33)
 - option: ipc
   description: IPC namespace to use
 - option: isolation
@@ -168,7 +235,7 @@ options:
   default_value: '[]'
   description: Log driver options
 - option: mac-address
-  description: Container MAC address (e.g. 92:d0:c6:0a:29:33)
+  description: Container MAC address (e.g., 92:d0:c6:0a:29:33)
 - option: memory
   shorthand: m
   description: Memory limit

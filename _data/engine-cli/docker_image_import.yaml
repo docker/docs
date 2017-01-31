@@ -1,6 +1,20 @@
 command: docker image import
 short: Import the contents from a tarball to create a filesystem image
-long: Import the contents from a tarball to create a filesystem image
+long: "Create a new filesystem image from the contents of a tarball (`.tar`,\n`.tar.gz`,
+  `.tgz`, `.bzip`, `.tar.xz`, `.txz`) into it, then optionally tag it.\n\n\n# EXAMPLES\n\n##
+  Import from a remote location\n\n    # docker image import http://example.com/exampleimage.tgz
+  example/imagerepo\n\n## Import from a local file\n\nImport to docker via pipe and
+  stdin:\n\n    # cat exampleimage.tgz | docker image import - example/imagelocal\n\nImport
+  with a commit message. \n\n    # cat exampleimage.tgz | docker image import --message
+  \"New image imported from tarball\" - exampleimagelocal:new\n\nImport to a Docker
+  image from a local file.\n\n    # docker image import /path/to/exampleimage.tgz
+  \n\n\n## Import from a local file and tag\n\nImport to docker via pipe and stdin:\n\n
+  \   # cat exampleimageV2.tgz | docker image import - example/imagelocal:V-2.0\n\n##
+  Import from a local directory\n\n    # tar -c . | docker image import - exampleimagedir\n\n##
+  Apply specified Dockerfile instructions while importing the image\nThis example
+  sets the docker image ENV variable DEBUG to true by default.\n\n    # tar -c . |
+  docker image import -c=\"ENV DEBUG true\" - exampleimagedir\n\n# See also\n**docker-export(1)**
+  to export the contents of a filesystem as a tar archive to STDOUT.\n"
 usage: docker image import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]
 pname: docker image
 plink: docker_image.yaml

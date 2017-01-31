@@ -28,21 +28,21 @@ long: "Creates a new network. The `DRIVER` accepts `bridge` or `overlay` which a
   -d overlay my-multihost-network\n```\n\nNetwork names must be unique. The Docker
   daemon attempts to identify naming\nconflicts but this is not guaranteed. It is
   the user's responsibility to avoid\nname conflicts.\n\n## Connect containers\n\nWhen
-  you start a container use the `--net` flag to connect it to a network.\nThis adds
-  the `busybox` container to the `mynet` network.\n\n```bash\n$ docker run -itd --net=mynet
-  busybox\n```\n\nIf you want to add a container to a network after the container
-  is already\nrunning use the `docker network connect` subcommand.\n\nYou can connect
-  multiple containers to the same network. Once connected, the\ncontainers can communicate
-  using only another container's IP address or name.\nFor `overlay` networks or custom
-  plugins that support multi-host connectivity,\ncontainers connected to the same
-  multi-host network but launched from different\nEngines can also communicate in
-  this way.\n\nYou can disconnect a container from a network using the `docker network\ndisconnect`
-  command.\n\n## Specifying advanced options\n\nWhen you create a network, Engine
-  creates a non-overlapping subnetwork for the\nnetwork by default. This subnetwork
-  is not a subdivision of an existing network.\nIt is purely for ip-addressing purposes.
-  You can override this default and\nspecify subnetwork values directly using the
-  `--subnet` option. On a\n`bridge` network you can only create a single subnet:\n\n```bash\n$
-  docker network create -d bridge --subnet=192.168.0.0/16 br0\n```\n\nAdditionally,
+  you start a container use the `--network` flag to connect it to a network.\nThis
+  adds the `busybox` container to the `mynet` network.\n\n```bash\n$ docker run -itd
+  --network=mynet busybox\n```\n\nIf you want to add a container to a network after
+  the container is already\nrunning use the `docker network connect` subcommand.\n\nYou
+  can connect multiple containers to the same network. Once connected, the\ncontainers
+  can communicate using only another container's IP address or name.\nFor `overlay`
+  networks or custom plugins that support multi-host connectivity,\ncontainers connected
+  to the same multi-host network but launched from different\nEngines can also communicate
+  in this way.\n\nYou can disconnect a container from a network using the `docker
+  network\ndisconnect` command.\n\n## Specifying advanced options\n\nWhen you create
+  a network, Engine creates a non-overlapping subnetwork for the\nnetwork by default.
+  This subnetwork is not a subdivision of an existing network.\nIt is purely for ip-addressing
+  purposes. You can override this default and\nspecify subnetwork values directly
+  using the `--subnet` option. On a\n`bridge` network you can only create a single
+  subnet:\n\n```bash\n$ docker network create -d bridge --subnet=192.168.0.0/16 br0\n```\n\nAdditionally,
   you also specify the `--gateway` `--ip-range` and `--aux-address`\noptions.\n\n```bash\n$
   docker network create \\\n  --driver=bridge \\\n  --subnet=172.28.0.0/16 \\\n  --ip-range=172.28.5.0/24
   \\\n  --gateway=172.28.5.254 \\\n  br0\n```\n\nIf you omit the `--gateway` flag

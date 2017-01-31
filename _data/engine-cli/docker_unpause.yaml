@@ -1,6 +1,7 @@
 command: docker unpause
 short: Unpause all processes within one or more containers
-long: Unpause all processes within one or more containers
+long: |
+  Alias for `docker container unpause`.
 usage: docker unpause CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml

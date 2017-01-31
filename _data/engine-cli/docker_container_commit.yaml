@@ -1,6 +1,22 @@
 command: docker container commit
 short: Create a new image from a container's changes
-long: Create a new image from a container's changes
+long: "Create a new image from an existing container specified by name or\ncontainer
+  ID.  The new image will contain the contents of the\ncontainer filesystem, *excluding*
+  any data volumes. Refer to **docker-tag(1)**\nfor more information about valid image
+  and tag names.\n\nWhile the `docker commit` command is a convenient way of extending
+  an\nexisting image, you should prefer the use of a Dockerfile and `docker\nbuild`
+  for generating images that you intend to share with other\npeople.\n\n# EXAMPLES\n\n##
+  Creating a new image from an existing container\nAn existing Fedora based container
+  has had Apache installed while running\nin interactive mode with the bash shell.
+  Apache is also running. To\ncreate a new image run `docker ps` to find the container's
+  ID and then run:\n\n    # docker commit -m=\"Added Apache to Fedora base image\"
+  \\\n      -a=\"A D Ministrator\" 98bd7fc99854 fedora/fedora_httpd:20\n\nNote that
+  only a-z0-9-_. are allowed when naming images from an \nexisting container.\n\n##
+  Apply specified Dockerfile instructions while committing the image\nIf an existing
+  container was created without the DEBUG environment\nvariable set to \"true\", you
+  can create a new image based on that\ncontainer by first getting the container's
+  ID with `docker ps` and\nthen running:\n\n    # docker container commit -c=\"ENV
+  DEBUG true\" 98bd7fc99854 debug-image\n"
 usage: docker container commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
 pname: docker container
 plink: docker_container.yaml
