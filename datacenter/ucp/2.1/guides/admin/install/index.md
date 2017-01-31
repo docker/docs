@@ -43,7 +43,7 @@ Docker UCP uses named volumes to persist data. If you want
 to customize the drivers used to manage these volumes, you can create the
 volumes before installing UCP. When you install UCP, the installer
 will notice that the volumes already exist, and will start using them.
-[Learn about the named volumes used by UCP](../architecture.md).
+[Learn about the named volumes used by UCP](../../architecture.md).
 
 If these volumes don't exist, they'll be automatically created when installing
 UCP.
@@ -74,7 +74,7 @@ To install UCP:
     This runs the install command in interactive mode, so that you're
     prompted for any necessary configuration values.
     To find what other options are available in the install command, check the
-    [reference documentation](../../reference/cli/install.md).
+    [reference documentation](../../../reference/cli/install.md).
 
 ## Step 5: License your installation
 
@@ -82,7 +82,7 @@ Now that UCP is installed, you need to license it. In your browser, navigate
 to the UCP web UI, login with your administrator credentials and upload your
 license.
 
-![](../images/install-production-1.png){: .with-border}
+![](../../images/install-production-1.png){: .with-border}
 
 If you're registered in the beta program and don't have a license yet, you
 can get it from your [Docker Store subscriptions](https://store.docker.com/?overlay=subscriptions).
@@ -97,16 +97,15 @@ To make your Docker swarm and UCP fault-tolerant and highly available, you can
 join more manager nodes to your it. Manager nodes are the nodes in the swarm
 that perform the orchestration and swarm management tasks, and dispatch tasks
 for worker nodes to execute.
-[Learn more about high-availability](../high-availability/index.md).
 
 To join manager nodes to the swarm, go to the **UCP web UI**, navigate to
 the **Resources** page, and go to the **Nodes** section.
 
-![](../images/install-production-2.png){: .with-border}
+![](../../images/install-production-2.png){: .with-border}
 
 Click the **Add Node button** to add a new node.
 
-![](../images/install-production-3.png){: .with-border}
+![](../../images/install-production-3.png){: .with-border}
 
 Check the 'Add node as a manager' to turn this node into a manager and replicate
 UCP for high-availability.
@@ -120,7 +119,7 @@ can reach it.
 For each manager node that you want to join to UCP, login into that
 node using ssh, and run the join command that is displayed on UCP.
 
-![](../images/install-production-4.png){: .with-border}
+![](../../images/install-production-4.png){: .with-border}
 
 After you run the join command in the node, the node starts being displayed
 in UCP.
@@ -136,5 +135,5 @@ option.
 
 ## Where to go next
 
-* [Use externally-signed certificates](../configure/index.md)
-* [Integrate with LDAP](../configure/integrate-with-ldap.md)
+* [Use your own TLS certificates](../configure/tls-certificates.md)
+* [Scale your cluster](../configure/scale-your-cluster.md)

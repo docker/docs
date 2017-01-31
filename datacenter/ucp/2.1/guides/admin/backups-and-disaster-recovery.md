@@ -7,7 +7,7 @@ title: Backups and disaster recovery
 
 When you decide to start using Docker Universal Control Plane on a production
 setting, you should
-[configure it for high availability](index.md).
+[configure it for high availability](configure/set-up-high-availability.md).
 
 The next step is creating a backup policy and disaster recovery plan.
 
@@ -115,5 +115,5 @@ UCP configuration data:
 
 ## Where to go next
 
-* [Set up high availability](index.md)
+* [Set up high availability](configure/set-up-high-availability.md)
 * [UCP architecture](../architecture.md)

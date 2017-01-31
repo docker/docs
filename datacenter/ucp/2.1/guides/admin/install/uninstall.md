@@ -5,7 +5,7 @@ title: Uninstall UCP
 ---
 
 Docker UCP is designed to scale as your applications grow in size and usage.
-You can [add and remove nodes](scale-your-cluster.md) from the cluster, to make
+You can [add and remove nodes](../configure/scale-your-cluster.md) from the cluster, to make
 it scale to your needs.
 
 You can also uninstall Docker Universal Control plane from your cluster. In this
@@ -30,9 +30,9 @@ $ docker run --rm -it \
 
 This runs the uninstall command in interactive mode, so that you are prompted
 for any necessary configuration values.
-[Check the reference documentation](../../reference/cli/index.md) to learn the options
+[Check the reference documentation](../../../reference/cli/index.md) to learn the options
 available in the `uninstall-ucp` command.
 
 ## Where to go next
 
-* [Scale your cluster](scale-your-cluster.md)
+* [Scale your cluster](../configure/scale-your-cluster.md)

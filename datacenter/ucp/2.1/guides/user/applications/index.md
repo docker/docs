@@ -14,7 +14,7 @@ application that allows users to vote on whether they prefer cats or dogs.
 In your browser, **log in** to UCP, and navigate to the **Applications** page.
 There, click the **Deploy compose.yml** button, to deploy a new application.
 
-![](../images/deploy-app-ui-1.png){: .with-border}
+![](../../images/deploy-app-ui-1.png){: .with-border}
 
 The application we're going to deploy is composed of several services:
 
@@ -131,12 +131,12 @@ clicking on the `visualizer` service, and scroll to the bottom of the detail pag
 You'll see a link to your UCP instance's URL that includes the published port
 of that service, which is 8080 in this case.
 
-![Screenshot of deployed service](../images/deployed_visualizer.png){: .with-border}
+![Screenshot of deployed service](../../images/deployed_visualizer.png){: .with-border}
 
 Visiting that URL accesses the running instance of the `visualizer` service in
 your browser, which shows a map of how this application was deployed:
 
-![Screenshot of visualizer](../images/deployed_visualizer_detail.png){: .with-border}
+![Screenshot of visualizer](../../images/deployed_visualizer_detail.png){: .with-border}
 
 Here you can see some of the characteristics of the deployment specification
 from the Compose file in play. For example, the manager node is running the

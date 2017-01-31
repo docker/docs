@@ -14,7 +14,7 @@ You can configure UCP for sending logs to a remote logging service:
 3. Set the information about your logging server, and click
 **Enable Remote Logging**
 
-![](../images/configure-logs-1.png){: .with-border}
+![](../../images/configure-logs-1.png){: .with-border}
 
 ## Example: Setting up an ELK stack
 
@@ -55,5 +55,4 @@ options that can accomplish this (e.g. Shield plug-in for Kibana)
 
 ## Where to go next
 
-* [Integrate with DTR](integrate-with-dtr.md)
-* [Set up high availability](../high-availability/index.md)
+* [Only allow running signed images](only-allow-running-signed-images.md)

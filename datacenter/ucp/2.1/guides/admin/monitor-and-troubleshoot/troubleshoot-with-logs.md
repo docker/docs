@@ -6,7 +6,7 @@ title: Troubleshoot your cluster
 
 If you detect problems in your UCP cluster, you can start your troubleshooting
 session by checking the logs of the
-[individual UCP components](../architecture.md). Only administrator users can
+[individual UCP components](../../architecture.md). Only administrator users can
 see information about UCP system containers.
 
 ## Check the logs from the UI
@@ -16,7 +16,7 @@ page of UCP. By default the UCP system containers are hidden. Click the
 **Show all containers** option for the UCP system containers to be listed as
 well.
 
-![](../images/troubleshoot-ucp-1.png){: .with-border}
+![](../../images/troubleshoot-ucp-1.png){: .with-border}
 
 You can click on a container to see more details like its configurations and
 logs.
@@ -31,7 +31,7 @@ specially useful if the UCP web application is not working.
 
     When using the Docker CLI client you need to authenticate using client
     certificates.
-    [Learn how to use client certificates](../access-ucp/cli-based-access.md).
+    [Learn how to use client certificates](../../user/access-ucp/cli-based-access.md).
 
     If your client certificate bundle is for a non-admin user, you won't have
     permissions to see the UCP system containers.
@@ -55,5 +55,4 @@ specially useful if the UCP web application is not working.
 
 ## Where to go next
 
-* [Monitor your cluster](index.md)
-* [Troubleshoot cluster configurations](troubleshoot-configurations.md)
+* [Troubleshoot configurations](troubleshoot-configurations.md)

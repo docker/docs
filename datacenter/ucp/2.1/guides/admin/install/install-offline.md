@@ -56,5 +56,5 @@ you can [install Docker UCP on that host](index.md).
 
 ## Where to go next
 
-* [Install UCP for production](index.md).
-* [UCP system requirements](system-requirements.md)
+* [Install UCP](index.md).
+* [System requirements](system-requirements.md)

@@ -13,11 +13,11 @@ A team defines the permissions users have for resources that have the label
 To create a new team, go to the **UCP web UI**, and navigate to the
 **Users & Teams** page.
 
-![](../images/create-and-manage-teams-1.png){: .with-border}
+![](../../images/create-and-manage-teams-1.png){: .with-border}
 
 Click the **Create** button to create a new team, and assign it a name.
 
-![](../images/create-and-manage-teams-2.png){: .with-border}
+![](../../images/create-and-manage-teams-2.png){: .with-border}
 
 ## Add users to a team
 
@@ -25,7 +25,7 @@ You can now add and remove users from the team.
 Navigate to the **Members** tab, and click the **Add User to Team** button.
 Then choose the list of users that you want to add to the team.
 
-![](../images/create-and-manage-teams-3.png){: .with-border}
+![](../../images/create-and-manage-teams-3.png){: .with-border}
 
 
 ## Manage team permissions
@@ -34,7 +34,7 @@ To manage the permissions of the team, click the **Permissions** tab.
 Here you can specify a list of labels and the permission level users will have
 for resources with those labels.
 
-![](../images/create-and-manage-teams-4.png){: .with-border}
+![](../../images/create-and-manage-teams-4.png){: .with-border}
 
 In the example above, members of the 'Operations' team have permissions to
 create and edit resources that have the labels

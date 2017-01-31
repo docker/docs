@@ -9,7 +9,7 @@ This page guides you in upgrading Docker Universal Control Plane (UCP) to
 version 2.1.
 
 Before upgrading to a new version of UCP, check the
-[release notes](../release-notes.md) for this version.
+[release notes](release-notes.md) for this version.
 There you'll find information about the new features, breaking changes, and
 other relevant information for upgrading to a particular version.
 
@@ -28,7 +28,7 @@ can lead to misconfigurations that are difficult to troubleshoot.
 Before starting an upgrade, make sure your cluster is healthy. If a problem
 occurs that will make it easier to find and troubleshoot any problems.
 
-Then, [create a backup](../high-availability/backups-and-disaster-recovery.md)
+Then, [create a backup](../backups-and-disaster-recovery.md)
 of your cluster. This will allow you to recover from an existing backup if
 something goes wrong during the upgrade process.
 
@@ -71,4 +71,4 @@ all the nodes managed by UCP are healthy.
 
 ## Where to go next
 
-* [UCP release notes](../release-notes.md)
+* [UCP release notes](release-notes.md)

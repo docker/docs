@@ -14,7 +14,7 @@ To configure UCP to authenticate users using an LDAP service, go to
 the **UCP web UI**, navigate to the **Settings** page, and click the **Auth**
 tab.
 
-![](../images/ldap-integration-1.png){: .with-border}
+![](../../../images/ldap-integration-1.png){: .with-border}
 
 Then configure your LDAP integration.
 

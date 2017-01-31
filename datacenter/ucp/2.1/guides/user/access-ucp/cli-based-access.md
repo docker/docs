@@ -29,7 +29,7 @@ controller node.
 To download a client certificate bundle, log into the **UCP web UI**, and
 navigate to your user **profile page**.
 
-![](../images/cli-based-access-1.png){: .with-border}
+![](../../images/cli-based-access-1.png){: .with-border}
 
 Click the **Create a Client Bundle** button, to download the certificate bundle.
 
@@ -84,4 +84,3 @@ $ curl -k -H "Authorization: Bearer $AUTHTOKEN" https://<ucp-ip>/api/clientbundl
 ## Where to go next
 
 * [Access the UCP web UI](index.md)
-* [Deploy an app from the CLI](../applications/deploy-app-cli.md)
