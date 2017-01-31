@@ -22,7 +22,7 @@ We are using the Apache License Version 2.0, see it here:
 [https://github.com/docker/docker/blob/master/LICENSE](
 https://github.com/docker/docker/blob/master/LICENSE)
 
-### Does Docker run on macOS or Windows?
+### Does Docker run on Linux, macOS or Windows?
 
 The Docker Engine client runs natively on Linux, macOS, and Windows. By default, these
 clients connect to a local Docker daemon running in a virtual environment managed
@@ -47,23 +47,23 @@ lightweight and perfect as a unit of software delivery.
 
 ### What does Docker technology add to just plain LXC?
 
-Docker technology is not a replacement for LXC. "LXC" refers to capabilities of
+Docker technology is not a replacement for [LXC](https://linuxcontainers.org/). "LXC" refers to capabilities of
 the Linux kernel (specifically namespaces and control groups) which allow
 sandboxing processes from one another, and controlling their resource
 allocations. On top of this low-level foundation of kernel features, Docker
 offers a high-level tool with several powerful functionalities:
 
  - *Portable deployment across machines.* Docker defines a format for bundling
- an application and all its dependencies into a single object which can be
- transferred to any Docker-enabled machine, and executed there with the
+ an application and all its dependencies into a single object (called a container) which can be
+ transferred to any Docker-enabled machine. This container cab be executed there with the
  guarantee that the execution environment exposed to the application will be the
- same. LXC implements process sandboxing, which is an important pre-requisite
- for portable deployment, but that alone is not enough for portable deployment.
+ same in development, tesing, and production. LXC implements process sandboxing, which is an important pre-requisite
+ for portable deployment, but not enough for portable deployment.
  If you sent me a copy of your application installed in a custom LXC
  configuration, it would almost certainly not run on my machine the way it does
- on yours, because it is tied to your machine's specific configuration:
- networking, storage, logging, distro, etc. Docker defines an abstraction for
- these machine-specific settings, so that the exact same Docker container can
+ on yours. The app you sent me is tied to your machine's specific configuration:
+ networking, storage, logging, etc. Docker defines an abstraction for
+ these machine-specific settings. The exact same Docker container can
  run - unchanged - on many different machines, with many different
  configurations.
 
