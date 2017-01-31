@@ -183,7 +183,7 @@ instruction creates a new layer in the image. Some examples of Dockerfile
 instructions are:
 
 * Specify the base image (`FROM`)
-* Specify the maintainer (`MAINTAINER`)
+* Specify image metadata (`LABEL`)
 * Run a command (`RUN`)
 * Add a file or directory (`ADD`)
 * Create an environment variable (`ENV`)
