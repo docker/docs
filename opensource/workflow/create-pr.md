@@ -31,11 +31,7 @@ Before you create a pull request, check your work.
 	All the tests should pass. If they don't, find out why and correct the
 	situation.
 
-4. Optionally, if modified the documentation, build the documentation:
-
-		$ make docs
-
-5. Commit and push any changes that result from your checks.
+4. Commit and push any changes that result from your checks.
 
 ## Rebase your branch
 
