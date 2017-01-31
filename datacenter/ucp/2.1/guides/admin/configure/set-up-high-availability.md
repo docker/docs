@@ -38,11 +38,8 @@ goes down.
 degradation, as changes to configurations need to be replicated across all
 manager nodes. The maximum advisable is having 7 manager nodes.
 
-After provisioning the new nodes, you can
-[add them to the cluster](../install/scale-your-cluster.md).
-
 
 ## Where to go next
 
-* [UCP architecture](../architecture.md)
-* [Scale your cluster](../install/scale-your-cluster.md)
+* [Scale your cluster](scale-your-cluster.md)
+* [Use a load balancer](use-a-load-balancer.md)

@@ -31,7 +31,7 @@ by Docker.
 When you deploy UCP, it starts running a globally scheduled service called
 `ucp-agent`. This service monitors the node where it is running and starts
 and stops UCP services, based on whether that node is a
-[manager or a worker node](https://docs.docker.com/engine/swarm/key-concepts/).
+[manager or a worker node](/engine/swarm/key-concepts.md).
 
 If the node is a:
 
@@ -130,11 +130,11 @@ UCP also exposes the standard Docker API, so you can continue using existing
 tools like the Docker CLI client. Since UCP secures your cluster with role-based
 access control, you need to configure your Docker CLI client and other client
 tools to authenticate your requests using
-[client certificates](access-ucp/cli-based-access.md) that you can download
+[client certificates](user/access-ucp/index.md) that you can download
 from your UCP profile page.
 
 
 ## Where to go next
 
-* [System requirements](install/index.md)
-* [Plan a production installation](install/plan-production-install.md)
+* [System requirements](admin/install/system-requirements.md)
+* [Plan your installation](admin/install/system-requirements.md)

@@ -29,7 +29,7 @@ visible to them and administrator users.
 For a team of users to be able to see and edit the same resources, the
 resources needs to have the `com.docker.ucp.access.label` label applied.
 
-![](../images/secure-your-infrastructure-1.svg)
+![](../../images/secure-your-infrastructure-1.svg)
 
 In the example above, we have two sets of containers. One set has all containers
 labeled with `com.docker.ucp.access.label=crm`, the other has all containers
@@ -38,7 +38,7 @@ labeled with `com.docker.ucp.access.label=billing`.
 You can now create different teams, and tune the permission level each
 team has for those containers.
 
-![](../images/secure-your-infrastructure-2.svg)
+![](../../images/secure-your-infrastructure-2.svg)
 
 As an example you can create three different teams:
 

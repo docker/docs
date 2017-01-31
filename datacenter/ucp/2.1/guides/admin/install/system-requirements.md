@@ -56,5 +56,5 @@ Docker Datacenter is a software subscription that includes 3 products:
 
 ## Where to go next
 
-* [UCP architecture](../architecture.md)
-* [Plan a production installation](plan-production-install.md)
+* [UCP architecture](../../architecture.md)
+* [Plan your installation](plan-installation.md)

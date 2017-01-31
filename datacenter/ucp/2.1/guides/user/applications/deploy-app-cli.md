@@ -152,7 +152,7 @@ As you saw earlier, a service called `visualizer` was deployed and published to
 port 8080. Visiting that port accesses the running instance of the `visualizer`
 service in your browser, which shows a map of how this application was deployed:
 
-![Screenshot of visualizer](../images/deployed_visualizer_detail.png){: .with-border}
+![Screenshot of visualizer](../../images/deployed_visualizer_detail.png){: .with-border}
 
 Here you can see some of the characteristics of the deployment specification
 from the Compose file in play. For example, the manager node is running the

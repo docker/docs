@@ -1125,9 +1125,9 @@ toc:
             title: Upgrade
       - sectiontitle: Configure
         section:
-        - path: /datacenter/ucp/2.1/guides/admin/configure/license/
+        - path: /datacenter/ucp/2.1/guides/admin/configure/license-your-installation/
           title: License your installation
-        - path: /datacenter/ucp/2.1/guides/admin/configure/tls-certificates/
+        - path: /datacenter/ucp/2.1/guides/admin/configure/use-your-own-tls-certificates/
           title: Use your own TLS certificates
         - path: /datacenter/ucp/2.1/guides/admin/configure/scale-your-cluster/
           title: Scale your cluster
@@ -1234,7 +1234,7 @@ toc:
         title: Install Docker Trusted Registry
       - path: /datacenter/dtr/2.2/guides/install/install-offline/
         title: Install offline
-      - path: /datacenter/dtr/2.2/guides/install/license/
+      - path: /datacenter/dtr/2.2/guides/install/license-your-installation/
         title: License your deployment
       - path: /datacenter/dtr/2.2/guides/install/scale-your-deployment/
         title: Scale your deployment

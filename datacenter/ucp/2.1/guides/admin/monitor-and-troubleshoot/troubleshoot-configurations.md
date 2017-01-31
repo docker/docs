@@ -24,7 +24,7 @@ $ sudo apt-get update && apt-get install curl jq
 ```
 
 1. Use a client bundle to authenticate your requests.
-[Learn more](../access-ucp/cli-based-access.md).
+[Learn more](../../user/access-ucp/cli-based-access.md).
 
 2. Use the REST API to access the cluster configurations.
 
@@ -73,5 +73,4 @@ To learn more about the `etcdctl` utility, check the
 
 ## Where to go next
 
-* [Monitor your cluster](index.md)
-* [Get support](../support.md)
+* [Get support](../../get-support.md)

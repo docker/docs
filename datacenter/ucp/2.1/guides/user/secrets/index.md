@@ -38,12 +38,12 @@ persist data. When the service stops, the data is lost.
 
 In the **UCP web UI**, navigate to **Resources**, and click **Secrets**.
 
-![](../images/manage-secrets-1.png){: .with-border}
+![](../../images/manage-secrets-1.png){: .with-border}
 
 Click **Create Secret** to create a new secret. Once you create the secret
 you won't be able to edit it or see the secret data again.
 
-![](../images/manage-secrets-2.png){: .with-border}
+![](../../images/manage-secrets-2.png){: .with-border}
 
 Assign a unique name to the service and set its value. You can optionally define
 a permission label so that other users have permission to use this secret.
@@ -60,7 +60,7 @@ that they're going to use to communicate with one another.
 Navigate to the **Networks** page, and create the `wordpress-network` with the
 default configurations.
 
-![](../images/manage-secrets-3.png){: .with-border}
+![](../../images/manage-secrets-3.png){: .with-border}
 
 Start by creating the MySQL service. Navigate to the **Services** page, click
 **Create Service**, and choose **Use Wizard**. Use the following configurations:
@@ -82,7 +82,7 @@ We also set the `MYSQL_ROOT_PASSWORD_FILE` environment variable to configure
 MySQL to use the content of the `/run/secrets/wordpress-password-v1` file as
 the root password.
 
-![](../images/manage-secrets-4.png){: .with-border}
+![](../../images/manage-secrets-4.png){: .with-border}
 
 Click the **Deploy Now** button to deploy the MySQL service.
 
@@ -105,12 +105,12 @@ port 8000 of the swarm routing mesh.
 
 Click the **Deploy Now** button to deploy the WordPress service.
 
-![](../images/manage-secrets-5.png){: .with-border}
+![](../../images/manage-secrets-5.png){: .with-border}
 
 Once you deploy this service, you'll be able to access it using the
 IP address of any node in your UCP cluster, on port 8000.
 
-![](../images/manage-secrets-6.png){: .with-border}
+![](../../images/manage-secrets-6.png){: .with-border}
 
 ## Update a secret
 
@@ -130,14 +130,14 @@ instead
 So let's rotate the secret we've created. Navigate to the **Secrets** screen
 and create a new service called `wordpress-password-v2`.
 
-![](../images/manage-secrets-7.png){: .with-border}
+![](../../images/manage-secrets-7.png){: .with-border}
 
 This example is simple and we know which services we need to update, but in the
 real world that might not always be the case.
 If you navigate to the secret `wordpress-password-v1` details page, you can
 see which services you need to update.
 
-![](../images/manage-secrets-8.png){: .with-border}
+![](../../images/manage-secrets-8.png){: .with-border}
 
 Start by updating the `wordpress-db` service to stop using the secret
 `wordpress-password-v1` and use the new version instead.
@@ -158,7 +158,7 @@ field with the default value, set it with `wordpress-password-v1`. This will mak
 the file with the content of `wordpress-password-v2` be mounted in
 `/run/secrets/wordpress-password-v1`.
 
-![](../images/manage-secrets-9.png){: .with-border}
+![](../../images/manage-secrets-9.png){: .with-border}
 
 Then do the same thing for the WordPress service. After this is done, the
 WordPress application is running and using the new password.

@@ -175,5 +175,4 @@ $ notary key import key.pem
 
 ## Where to go next
 
-* [Manage trusted repositories](manage-trusted-repositories.md)
-* [Get started with Notary](/notary/getting_started.md)
+* [Restrict services to worker nodes](restrict-services-to-worker-nodes.md)

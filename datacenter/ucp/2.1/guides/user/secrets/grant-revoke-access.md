@@ -13,7 +13,7 @@ As with most resources managed by UCP, the way to grant permission to a set
 of users to use a secret, is by applying the `com.docker.ucp.access.label` to
 the secret.
 
-![](../images/grant-access-secrets-1.png){: .with-border}
+![](../../images/grant-access-secrets-1.png){: .with-border}
 
 Users that are part of a team with access to that label will be able to see
 and use the secret.
@@ -27,12 +27,11 @@ This ensures that users can use a secret in their services without having
 permissions to attach to the container running the service and inspect the
 secret data.
 
-![](../images/grant-access-secrets-2.svg)
+![](../../images/grant-access-secrets-2.svg)
 
 To revoke access to a secret you can edit the secret to change the access label,
 or update the permissions a team has for a label.
 
 ## Where to go next
 
-* [Manage permissions](../user-management/index.md)
-* [Permission levels](user-management/permission-levels.md)
+* [Manage secrets](index.md)
