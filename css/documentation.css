@@ -131,8 +131,12 @@
     color: black;
 }
 #DocumentationText a,
-#TableOfContentsSection a {
+#RightColumnSection a {
     color: #008AB5;
+}
+
+#RightColumnSection h5 {
+  color: #155A74;
 }
 /* reset away from #008AB5 */
 
@@ -303,7 +307,7 @@ div.docsidebarnav_section.affix ul {
 }
 
 /* TableOfContents */
-.tableofcontents_section {
+.right_column_section {
   padding: 0;
 }
 .rating-msg {
@@ -316,55 +320,9 @@ div.docsidebarnav_section.affix ul {
   display: none !important;
 }
 
-#TableOfContents {
-  padding-top: 10px;
-}
-#TableOfContentsSection {
-  margin: 0;
+#RightColumnSection {
   padding: 0 !important;
-  background-color: #f5fdff;
 }
-
-#TableOfContents li a,
-#TableOfContentsSection .heading {
-  font-size: 14px;
-  font-style: normal;
-  margin: 0;
-  padding: 10px 15px;
-  display: block !important;
-  line-height: 15px;
-}
-#TableOfContentsSection .heading {
-  background-color: #6db9d1;
-  color: #ffffff;
-}
-#TableOfContentsSection ​#TableOfContents {
-  background-color: #F5FDFF;
-  margin: 0;
-  padding: 15px;
-}
-#TableOfContentsSection #TableOfContents ul {
-    list-style: none;
-    padding: 0;
-    left: 0;
-    padding: 0;
-    width: 100%;
-    text-align: left;
-    overflow: hidden;
-    margin-left: 0;
-    padding-left: 0.30rem;
-    font-size: 14px;
-}
-
-#TableOfContentsSection #TableOfContents > ul {
-  padding-left: 0;
-  list-style: none;
-}
-
-#TableOfContentsSection #TableOfContents > ul > li > ul {
-  padding-left: 0;
-}
-
 .advisory {
 color: #F04124;
     margin: -20px -20px 20px -20px;
