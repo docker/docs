@@ -1,6 +1,3 @@
----
-layout: null
----
 var metadata;
 var autoCompleteShowing = false;
 var displayingAutcompleteResults = new Array();

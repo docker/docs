@@ -194,8 +194,8 @@ ng\:form {
       <section class="title_section darkblue"> </section>
 			<div class="col-md-12" style="background-color: #254356">
 					<!-- tabs -->
-					<ul class="tabs">{% for section in site.data.toc.horizontalnav %}
-							<li id="{{ section.node }}"><a href="{{ section.path }}">{{ section.title }}</a></li>{% endfor %}
+					<ul class="tabs">
+						{% include treebuilder.html %}
 					</ul>
 			</div>
       <div class="">
@@ -206,7 +206,7 @@ ng\:form {
                              {% if page.tree == false %}
                                 <li class="leaf"><a href="/">Back to the index</a></li>
                              {% else %}
-								{% include treebuilder.html %}
+								{{ leftnav }}
                              {% endif %}
 							</ul>           
               </div>
