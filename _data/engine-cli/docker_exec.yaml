@@ -1,6 +1,7 @@
 command: docker exec
 short: Run a command in a running container
-long: Run a command in a running container
+long: |
+  Alias for `docker container exec`.
 usage: docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
 pname: docker
 plink: docker.yaml

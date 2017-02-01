@@ -1,6 +1,7 @@
 command: docker events
 short: Get real time events from the server
-long: Get real time events from the server
+long: |
+  Alias for `docker system events`.
 usage: docker events [OPTIONS]
 pname: docker
 plink: docker.yaml

@@ -1,6 +1,7 @@
 command: docker rmi
 short: Remove one or more images
-long: Remove one or more images
+long: |
+  Alias for `docker image rm`.
 usage: docker rmi [OPTIONS] IMAGE [IMAGE...]
 pname: docker
 plink: docker.yaml

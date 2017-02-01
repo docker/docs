@@ -1,6 +1,7 @@
 command: docker export
 short: Export a container's filesystem as a tar archive
-long: Export a container's filesystem as a tar archive
+long: |
+  Alias for `docker container export`.
 usage: docker export [OPTIONS] CONTAINER
 pname: docker
 plink: docker.yaml

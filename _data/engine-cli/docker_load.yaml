@@ -1,6 +1,7 @@
 command: docker load
 short: Load an image from a tar archive or STDIN
-long: Load an image from a tar archive or STDIN
+long: |
+  Alias for `docker image load`.
 usage: docker load [OPTIONS]
 pname: docker
 plink: docker.yaml

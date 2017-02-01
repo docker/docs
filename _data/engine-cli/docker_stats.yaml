@@ -1,6 +1,7 @@
 command: docker stats
 short: Display a live stream of container(s) resource usage statistics
-long: Display a live stream of container(s) resource usage statistics
+long: |
+  Alias for `docker container stats`.
 usage: docker stats [OPTIONS] [CONTAINER...]
 pname: docker
 plink: docker.yaml

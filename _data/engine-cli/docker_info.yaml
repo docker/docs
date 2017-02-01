@@ -1,6 +1,7 @@
 command: docker info
 short: Display system-wide information
-long: Display system-wide information
+long: |
+  Alias for `docker system info`.
 usage: docker info [OPTIONS]
 pname: docker
 plink: docker.yaml

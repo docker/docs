@@ -1,6 +1,7 @@
 command: docker history
 short: Show the history of an image
-long: Show the history of an image
+long: |
+  Alias for `docker image history`.
 usage: docker history [OPTIONS] IMAGE
 pname: docker
 plink: docker.yaml

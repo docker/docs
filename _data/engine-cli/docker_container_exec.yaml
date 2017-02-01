@@ -1,6 +1,18 @@
 command: docker container exec
 short: Run a command in a running container
-long: Run a command in a running container
+long: "Run a process in a running container.\n\nThe command started using `docker
+  exec` will only run while the container's primary\nprocess (`PID 1`) is running,
+  and will not be restarted if the container is restarted.\n\nIf the container is
+  paused, then the `docker exec` command will wait until the\ncontainer is unpaused,
+  and then run\n\n# CAPABILITIES\n\n`privileged` gives the process extended\n[Linux
+  capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html)\nwhen running
+  in a container. \n\nWithout this flag, the process run by `docker exec` in a running
+  container has\nthe same capabilities as the container, which may be limited. Set\n`--privileged`
+  to give all capabilities to the process.\n\n# USER\n`user` sets the username or
+  UID used and optionally the groupname or GID for the specified command.\n\n   The
+  followings examples are all valid:\n   --user [user | user:group | uid | uid:gid
+  | user:gid | uid:group ]\n\n   Without this argument the command will be run as
+  root in the container.\n"
 usage: docker container exec [OPTIONS] CONTAINER COMMAND [ARG...]
 pname: docker container
 plink: docker_container.yaml
