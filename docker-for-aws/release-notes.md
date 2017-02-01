@@ -9,7 +9,7 @@ title: Docker for AWS Release Notes
 ## 1.13.0-1
 Release date: 1/18/2017
 
-{{azure_button_latest}}
+{{aws_button_latest}}
 
 ### New
 - Docker Engine upgraded to [Docker 1.13.0](https://github.com/docker/docker/blob/master/CHANGELOG.md)
