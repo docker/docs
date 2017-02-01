@@ -680,7 +680,7 @@ toc:
     - path: /engine/reference/commandline/stop/
       title: docker stop
     - sectiontitle: docker swarm *
-      setcion:
+      section:
       - path: /engine/reference/commandline/swarm/
         title: docker swarm
       - path: /engine/reference/commandline/swarm_init/
