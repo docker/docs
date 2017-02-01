@@ -10,7 +10,7 @@ The best way to try Docker Datacenter for yourself is to get the [30-day
 trial available at the Docker Store](https://store.docker.com/bundles/docker-datacenter).
 
 Once you get your trial license, you can install Docker Datacenter in your
-Linux servers.Make sure all the hosts you want to manage in with Docker
+Linux servers. Make sure all the hosts you want to manage in with Docker
 Datacenter have a minimum of:
 
 * Linux kernel version 3.10 or higher
