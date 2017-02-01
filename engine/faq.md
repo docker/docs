@@ -39,9 +39,9 @@ Windows-based containers on a Windows virtual machine running on an macOS or Lin
 host. Docker Machine is not necessary if you run macOS 10.10.3 Yosemite, Windows
 Server 2016, or Windows 10.
 
-### How do containers compare to virtual machines (VMs)?
+### How do containers compare to virtual machines?
 
-They are complementary. VMs are best at providing extreme isolation (for example with hostile tenant applications where you need the ultimate break out prevention). Containers operate at the process level, which makes them very lightweight and perfect as a unit of software delivery. While VMs take minutes to boot, containers can often be started in less than a second. 
+Containers and virtual machines (VMs) are complementary. VMs excel at providing extreme isolation (for example with hostile tenant applications where you need the ultimate break out prevention). Containers operate at the process level, which makes them very lightweight and perfect as a unit of software delivery. While VMs take minutes to boot, containers can often be started in less than a second. 
 
 ### What does Docker technology add to just plain LXC?
 
