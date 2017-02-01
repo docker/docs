@@ -23,7 +23,7 @@ and grab Docker for your platform.  You can follow along and
 run this example using Docker for Mac, Docker for Windows or
 Docker for Linux.
 
-Once you have Docker installed, you can run `docker hello-world`
+Once you have Docker installed, you can run `docker run hello-world`
 or other commands described in the Get Started with Docker
 tutorial to [verify your installation](/engine/getstarted/step_one.md#step-3-verify-your-installation).
 If you are totally new to Docker, you might continue through
