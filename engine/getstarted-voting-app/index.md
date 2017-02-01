@@ -106,33 +106,27 @@ compatibility](#compose-v3-features-and-compatibility).
 
 In addition to defining a set of build and run commands in a Dockerfile, you can
 define services in a [Compose file](/compose/compose-file.md), along with
-details about how and where those services will run.
+details about how and where those services will run. You can use Compose files
+to kick off multiple Dockerfiles, or use Compose files independently of
+Dockerfiles.
 
 In the Getting Started with Docker tutorial, you wrote a
 [Dockerfile for the whalesay app](/engine/getstarted/step_four.md) then used
-it to build the image and run it in a container.
+it to build a single image and run it as a single container.
 
-For this tutorial, the Dockerfiles for our services are already written, the
-images are pre-built, and when we deploy, each service will run in a container
-(or more than one, for those that have replicas defined to scale the app).
+For this tutorial, the images are pre-built, and we will use `docker-stack.yml`
+(a Version 3 Compose file) instead of a Dockerfile
+to run the images. When we deploy, each image will run as a service in a
+container (or in multiple containers, for those that have replicas defined to
+scale the app).
 
-To understand the relationship between Compose files and Dockerfiles, take a
-quick look at the [source code for the voting app
-here](https://github.com/docker/example-voting-app). For example, the vote
-service is based on a Python image built using the [Dockerfile for
-`vote`](https://github.com/docker/example-voting-app/blob/master/vote/Dockerfile)
-and the vote result service is based on a
-Node.js image built using the [Dockerfile for
-`vote_result`](https://github.com/docker/example-voting-app/blob/master/result/Dockerfile).
-
-We'll deploy this app using `docker-stack.yml`, which is a type of [Compose
-file](/compose/compose-file.md) new in Compose Version 3.  
-
-To follow along with the example, you need only have Docker running and
-the copy of `docker-stack.yml` we provide here. This file defines all
-the services shown in the [table above](#services-and-images-overview),
-their base images, configuration details such as ports and
-networks, application dependencies, and the swarm configuration.
+To follow along with the example, you need only have Docker running and the copy
+of `docker-stack.yml` we provide
+[here](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml).
+This file defines all the services shown in the [table
+above](#services-and-images-overview), their base images, configuration details
+such as ports, networks, volumes, application dependencies, and the swarm
+configuration.
 
 ```
 version: "3"
@@ -239,7 +233,7 @@ deployment options that are new in Compose Version 3, and that we want to highli
 this walkthrough.
 
 - [docker-stack.yml](#docker-stackyml)
-  - [deploy key](#deploy-key)
+  - [deploy key and swarm mode](#deploy-key-and-swarm-mode)
 - [docker stack deploy command](#docker-stack-deploy-command)
 - [Docker stacks and services](#docker-stacks-and-services)
 
@@ -248,37 +242,30 @@ this walkthrough.
 `docker-stack.yml` is a new type of [Compose file](/compose/compose-file.md)
 only compatible with Compose Version 3.
 
-#### deploy key
+#### deploy key and swarm mode
 
-The `deploy` key allows you to specify various properties of a swarm deployment.
+The [deploy](/compose/compose-file.md#deploy) key allows you to specify various properties of a swarm deployment.
 
 For example, the voting app configuration uses this to create replicas of the
 `vote` and `result` services (2 containers of each will be deployed to the
 swarm).
 
 The voting app also uses the `deploy` key to constrain some services to run only
-on the manager node.
-
-For more about the `deploy key`, see [deploy](/compose/compose-file.md#deploy).
+on a manager node.
 
 ### docker stack deploy command
 
-`docker stack deploy` is the command we will use to deploy with
-`docker-stack.yml`.
+[docker stack deploy](/engine/reference/commandline/stack_deploy.md)
+is the command we will use to deploy with `docker-stack.yml`.
 
 * This command supports only `version: "3" ` Compose files.
 
-* It does not support the `build` key supported in Compose files, which
+* It does not support the `build` key supported in standard Compose files, which
 builds based on a Dockerfile. You need to use pre-built images
 with `docker stack deploy`.
 
-* It can take the place of running `docker compose up` to deploy
+* It can take the place of running `docker compose up` to run
 Version 3 compatible applications.
-
-See information about the [deploy](/compose/compose-file.md#deploy) key in the
-Compose file reference and [`docker stack
-deploy`](/engine/reference/commandline/stack_deploy.md) in the Docker Engine
-command line reference.
 
 ### Docker stacks and services
 
