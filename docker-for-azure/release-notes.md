@@ -9,7 +9,7 @@ title: Docker for Azure Release Notes
 ## 1.13.0-1
 Release date: 1/18/2017
 
-{{aws_button_latest}}
+{{azure_button_latest}}
 
 ### New
 
