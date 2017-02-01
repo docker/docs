@@ -27,6 +27,13 @@ version of Docker, remove it using the following command:
 $ sudo yum -y remove docker
 ```
 
+You may also have to remove the package `docker-selinux` which will conflict with
+the new official `docker-engine` package.  Remove it with the following command:
+
+```bash
+$ sudo yum -y remove docker-selinux
+```
+
 The contents of `/var/lib/docker` are not removed, so any images, containers,
 or volumes you created using the older version of Docker are preserved.
 
