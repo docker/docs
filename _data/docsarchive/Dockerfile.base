@@ -1,0 +1,78 @@
+FROM nginx:alpine
+
+# Jekyll version to install
+ENV JEKYLL_VERSION=3.3
+
+RUN apk add --no-cache \
+      build-base \
+      ca-certificates \
+      git \
+      libatomic \
+      libffi-dev \
+      libxml2 \
+      libxml2-dev \
+      libxslt \
+      libxslt-dev \
+      ncurses-terminfo \
+      ncurses-terminfo-base \
+      nodejs \
+      openssl \
+      readline \
+      readline-dev \
+      ruby \
+      ruby-dev \
+      ruby-io-console \
+      ruby-irb \
+      ruby-json \
+      ruby-rake \
+      subversion \
+      wget \
+      yaml \
+      yaml-dev \
+      zlib \
+      zlib-dev \
+ && update-ca-certificates \
+ && gem install --no-document \
+      \
+      # GitHub pages now only supports "kramdown" as Markdown processor,
+      # and "Rouge" for syntax highlighting
+      # see https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+      \
+      kramdown \
+#     maruku \
+#     redcarpet \
+#     rdiscount \
+#     RedCloth \
+      liquid \
+#     pygments.rb \
+      rouge \
+#     sass \
+      safe_yaml \
+      \
+      # Jekyll and Jekyll modules
+      # Jekyll is only used to as a static site generator.
+      # After the site is generated, the static files are
+      # served by NGINX.
+      \
+      jekyll:${JEKYLL_VERSION} \
+#     jekyll-archives \
+#     jekyll-asset \
+#     jekyll-feed \
+#     jekyll-last-modified-at \
+#     jekyll-minifier \
+#     jekyll-paginate \
+#     jekyll-sass-converter \
+      jekyll-seo-tag \
+      jekyll-sitemap \
+      jekyll-redirect-from \
+#     jekyll-watch \
+ && rm -rf /root/src /tmp/* /usr/share/man /var/cache/apk/* \
+ && apk del \
+      build-base \
+      libffi-dev \
+      libxml2-dev \
+      readline-dev \
+      ruby-dev \
+      yaml-dev \
+      zlib-dev \
+ && apk search --update

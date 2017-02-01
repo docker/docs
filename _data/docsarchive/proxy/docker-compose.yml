@@ -1,0 +1,49 @@
+version: "2.1"
+services:
+  main:
+    image: proxy
+    build: .
+    ports:
+     - "4000:80"
+    mem_limit: "25M"
+    restart: "always"
+  docs-current:
+    image: docs:latest
+    mem_limit: "25M"
+    restart: "always"
+  docs-archive-1-4:
+    extends:
+      service: docs-current
+    image: docs:v1.4
+  docs-archive-1-5:
+    extends:
+      service: docs-current
+    image: docs:v1.5
+  docs-archive-1-6:
+    extends:
+      service: docs-current
+    image: docs:v1.6
+  docs-archive-1-7:
+    extends:
+      service: docs-current
+    image: docs:v1.7
+  docs-archive-1-8:
+    extends:
+      service: docs-current
+    image: docs:v1.8
+  docs-archive-1-9:
+    extends:
+      service: docs-current
+    image: docs:v1.9
+  docs-archive-1-10:
+    extends:
+      service: docs-current
+    image: docs:v1.10
+  docs-archive-1-11:
+    extends:
+      service: docs-current
+    image: docs:v1.11
+  docs-archive-1-12:
+    extends:
+      service: docs-current
+    image: docs:v1.12
