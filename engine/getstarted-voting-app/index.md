@@ -269,10 +269,11 @@ Version 3 compatible applications.
 
 ### Docker stacks and services
 
-Taken together, these new Compose features and deployment options can help when
-mapping out distributed applications and clustering strategies. Rather than
-thinking about running individual containers, we can start to model deployments
-as Docker stacks and services.
+Taken together, these new options can help when you want to configure an app to
+run its component functions across multiple servers, and use swarm mode for load
+balancing and performance. Rather than thinking about running individual
+containers, we can start to model deployments as application stacks and
+services.
 
 ### Compose file reference
 
