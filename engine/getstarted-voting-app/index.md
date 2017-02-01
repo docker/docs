@@ -49,11 +49,11 @@ the `docker stack deploy` command
 
 ## Services and images overview
 
-A service is a bit of executable code designed to accomplish
+A [service](/engine/reference/glossary.md#service) is a bit of executable code designed to accomplish
 a specific task. A service can run in one or more
 containers. Defining a service configuration for your app
-(above and beyond `docker run` commands) enables you to
-deploy it to a swarm and manage it as a distributed
+(above and beyond `docker run` commands in a Dockerfile) enables you to
+deploy the app to a swarm and manage it as a distributed, 
 multi-container application.
 
 The voting app you are about to deploy is composed
