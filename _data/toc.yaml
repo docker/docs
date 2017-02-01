@@ -65,6 +65,8 @@ toc:
       title: Optional post-installation steps
   - sectiontitle: Docker for AWS
     section:
+    - path: /docker-for-aws/why/
+      title: Why Docker for AWS?
     - path: /docker-for-aws/
       title: Setup & Prerequisites
     - path: /docker-for-aws/iam-permissions/
@@ -83,6 +85,8 @@ toc:
       title: Release Notes
   - sectiontitle: Docker for Azure
     section:
+    - path: /docker-for-azure/why/
+      title: Why Docker for Azure?
     - path: /docker-for-azure/
       title: Setup & Prerequisites
     - path: /docker-for-azure/upgrade/
