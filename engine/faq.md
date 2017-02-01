@@ -41,9 +41,7 @@ Server 2016, or Windows 10.
 
 ### How do containers compare to virtual machines?
 
-They are complementary. VMs are best used to allocate chunks of hardware
-resources. Containers operate at the process level, which makes them very
-lightweight and perfect as a unit of software delivery.
+Containers and virtual machines (VMs) are complementary. VMs excel at providing extreme isolation (for example with hostile tenant applications where you need the ultimate break out prevention). Containers operate at the process level, which makes them very lightweight and perfect as a unit of software delivery. While VMs take minutes to boot, containers can often be started in less than a second. 
 
 ### What does Docker technology add to just plain LXC?
 
