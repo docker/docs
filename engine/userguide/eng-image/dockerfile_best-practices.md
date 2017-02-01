@@ -283,6 +283,19 @@ keep the image size down. Since the `RUN` statement starts with
 > **Note**: The official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/docker/docker/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105),
 > so explicit invocation is not required.
 
+#### Using pipes
+
+Where your `RUN` command depends on pipes, for example:
+
+
+	RUN wget -O - https://some.site | wc -l > /number
+
+Remember that Docker executes this with `/bin/sh -c` which considers the command successful if the last operation in the pipe is successful. In our example above this build step will succeed and result in a new image produced so long as `wc -l` succeeds, even if the `wget` fails.
+
+To instead fail on an error at any stage in the pipe, prepend `set -o pipefail &&` to ensure that an unexpected error prevents the build from inadvertently succeeding, for example:
+
+	RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
+
 ### CMD
 
 [Dockerfile reference for the CMD instruction](../../reference/builder.md#cmd)
