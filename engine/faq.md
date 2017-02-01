@@ -22,7 +22,7 @@ We are using the Apache License Version 2.0, see it here:
 [https://github.com/docker/docker/blob/master/LICENSE](
 https://github.com/docker/docker/blob/master/LICENSE)
 
-### Does Docker run on Linux, macOS or Windows?
+### Does Docker run on Linux, macOS, or Windows?
 
 The Docker Engine client runs natively on Linux, macOS, and Windows. By default, these
 clients connect to a local Docker daemon running in a virtual environment managed
@@ -54,11 +54,11 @@ allocations. On top of this low-level foundation of kernel features, Docker
 offers a high-level tool with several powerful functionalities:
 
  - *Portable deployment across machines.* Docker defines a format for bundling
- an application and all its dependencies into a single object (called a container) which can be
- transferred to any Docker-enabled machine. This container cab be executed there with the
+ an application and all its dependencies into a single object called a container. This container can be
+ transferred to any Docker-enabled machine. The container can be executed there with the
  guarantee that the execution environment exposed to the application will be the
  same in development, tesing, and production. LXC implements process sandboxing, which is an important pre-requisite
- for portable deployment, but not enough for portable deployment.
+ for portable deployment, but is not sufficient for portable deployment.
  If you sent me a copy of your application installed in a custom LXC
  configuration, it would almost certainly not run on my machine the way it does
  on yours. The app you sent me is tied to your machine's specific configuration:
