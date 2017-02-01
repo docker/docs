@@ -1207,9 +1207,11 @@ toc:
           title: CLI-based access
       - sectiontitle: Deploy an application
         section:
-        - path: /datacenter/ucp/2.1/guides/user/applications/deploy-a-service/
+        - path: /datacenter/ucp/2.1/guides/user/services/deploy-a-service/
           title: Deploy a service
-        - path: /datacenter/ucp/2.1/guides/user/applications/
+        - path: /datacenter/ucp/2.1/guides/user/services/use-hostnames-to-access-your-service/
+          title: Use hostnames to access your service
+        - path: /datacenter/ucp/2.1/guides/user/services/
           title: Deploy an app from the UI
         - path: /datacenter/ucp/2.1/guides/user/applications/deploy-app-cli/
           title: Deploy an app from the CLI

@@ -47,7 +47,7 @@
                             </g>
                         </g>
                         <g id="app" transform="translate(1.000000, 79.000000)">
-                            <rect id="Rectangle-138" fill="#439FD1" x="0" y="0" width="95" height="22" rx="2"></rect>
+                            <rect id="Rectangle-138" fill="#99EAE9" x="0" y="0" width="95" height="22" rx="2"></rect>
                             <text id="UCP-worker" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
                                 <tspan x="20.4755859" y="15">UCP worker</tspan>
                             </text>
@@ -73,7 +73,7 @@
                             </g>
                         </g>
                         <g id="app" transform="translate(1.000000, 79.000000)">
-                            <rect id="Rectangle-138" fill="#A1CFE8" x="0" y="0" width="95" height="22" rx="2"></rect>
+                            <rect id="Rectangle-138" fill="#99EAE9" x="0" y="0" width="95" height="22" rx="2"></rect>
                             <text id="UCP-worker" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
                                 <tspan x="20.4755859" y="15">UCP worker</tspan>
                             </text>
@@ -95,7 +95,7 @@
                             </g>
                         </g>
                         <g id="app" transform="translate(1.000000, 79.000000)">
-                            <rect id="Rectangle-138" fill="#A1CFE8" x="0" y="0" width="95" height="22" rx="2"></rect>
+                            <rect id="Rectangle-138" fill="#99EAE9" x="0" y="0" width="95" height="22" rx="2"></rect>
                             <text id="UCP-manager" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
                                 <tspan x="16.0297852" y="15">UCP manager</tspan>
                             </text>
@@ -115,7 +115,7 @@
                             </g>
                         </g>
                         <g id="app" transform="translate(1.000000, 79.000000)">
-                            <rect id="Rectangle-138" fill="#A1CFE8" x="0" y="0" width="95" height="22" rx="2"></rect>
+                            <rect id="Rectangle-138" fill="#99EAE9" x="0" y="0" width="95" height="22" rx="2"></rect>
                             <text id="UCP-manager" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
                                 <tspan x="16.0297852" y="15">UCP manager</tspan>
                             </text>
@@ -135,7 +135,7 @@
                             </g>
                         </g>
                         <g id="app" transform="translate(1.000000, 79.000000)">
-                            <rect id="Rectangle-138" fill="#A1CFE8" x="0" y="0" width="95" height="22" rx="2"></rect>
+                            <rect id="Rectangle-138" fill="#99EAE9" x="0" y="0" width="95" height="22" rx="2"></rect>
                             <text id="UCP-manager" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
                                 <tspan x="16.0297852" y="15">UCP manager</tspan>
                             </text>
