@@ -1,19 +1,19 @@
 horizontalnav:
-  - title: Guides
-    path: /
-    node: guides
-  - title: Product Manuals
-    path: /manuals/
-    node: manuals
-  - title: Glossary
-    path: /glossary/
-    node: glossary
-  - title: Reference
-    path: /reference/
-    node: reference
-  - title: Samples
-    path: /samples/
-    node: samples
+- title: Guides
+  path: /
+  node: guides
+- title: Product Manuals
+  path: /manuals/
+  node: manuals
+- title: Glossary
+  path: /glossary/
+  node: glossary
+- title: Reference
+  path: /reference/
+  node: reference
+- title: Samples
+  path: /samples/
+  node: samples
 
 guides:
 - sectiontitle: Get Docker
@@ -210,6 +210,14 @@ guides:
         title: IPv6 with Docker
   - path: /engine/userguide/labels-custom-metadata/
     title: Apply custom metadata
+  - path: /engine/migration/
+    title: Migrate to Engine 1.10
+  - path: /engine/breaking_changes/
+    title: Breaking changes
+  - path: /engine/deprecated/
+    title: Deprecated Engine Features
+  - path: /engine/faq/
+    title: FAQ
 - sectiontitle: Admin Guide
   section:
   - path: /engine/admin/
@@ -940,6 +948,8 @@ reference:
       title: upgrade
   - sectiontitle: v1.1 reference
     section:
+    - path: /datacenter/ucp/1.1/reference/
+      title: UCP Tool v1.1 overview
     - path: /datacenter/ucp/1.1/reference/backup/
       title: backup
     - path: /datacenter/ucp/1.1/reference/dump-certs/
@@ -982,10 +992,10 @@ reference:
     title: SDKs
   - path: /engine/api/v1.25/
     title: Reference
-  - sectiontitle: Version history
+  - sectiontitle: Previous API versions
     section:
     - path: /engine/api/version-history/
-      title: Overview
+      title: Version history overview
     - path: /engine/api/v1.24/
       title: v1.24 reference
     - path: /engine/api/v1.23/
@@ -1000,14 +1010,6 @@ reference:
       title: v1.19 reference
     - path: /engine/api/v1.18/
       title: v1.18 reference
-  - path: /engine/migration/
-    title: Migrate to Engine 1.10
-  - path: /engine/breaking_changes/
-    title: Breaking changes
-  - path: /engine/deprecated/
-    title: Deprecated Engine Features
-  - path: /engine/faq/
-    title: FAQ
 - sectiontitle: Cloud API and stackfile
   section:
   - path: /apidocs/docker-cloud/
@@ -1377,7 +1379,6 @@ manuals:
           title: Troubleshoot with logs
       - path: /datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/
         title: Backups and disaster recovery
-<<<<<<< HEAD
       - sectiontitle: CLI reference
         section:
         - path: /datacenter/dtr/2.2/reference/cli/
@@ -1425,33 +1426,6 @@ manuals:
     - path: /datacenter/dtr/2.2/reference/api/
       title: API reference
     - path: /datacenter/dtr/2.2/guides/support/
-=======
-    - sectiontitle: User management
-      section:
-      - path: /datacenter/dtr/2.1/guides/user-management/
-        title: Authentication and authorization
-      - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-users/
-        title: Create and manage users
-      - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-orgs/
-        title: Create and manage organizations
-      - path: /datacenter/dtr/2.1/guides/user-management/create-and-manage-teams/
-        title: Create and manage teams
-      - path: /datacenter/dtr/2.1/guides/user-management/permission-levels/
-        title: Permission levels
-    - sectiontitle: Repositories and images
-      section:
-      - path: /datacenter/dtr/2.1/guides/repos-and-images/
-        title: Configure your Docker Engine
-      - path: /datacenter/dtr/2.1/guides/repos-and-images/pull-an-image/
-        title: Pull an image
-      - path: /datacenter/dtr/2.1/guides/repos-and-images/push-an-image/
-        title: Push an image
-      - path: /datacenter/dtr/2.1/guides/repos-and-images/delete-an-image/
-        title: Delete an image
-    - path: /datacenter/dtr/2.1/guides/release-notes/
-      title: Release notes
-    - path: /datacenter/dtr/2.1/guides/support/
->>>>>>> Second pass at tabs org
       title: Get support
   - sectiontitle: Previous versions
     section:
@@ -1643,6 +1617,9 @@ manuals:
           title: Deploy an app from the UI
         - path: /datacenter/ucp/1.1/applications/deploy-app-cli/
           title: Deploy an app from the CLI
+      - path: /datacenter/ucp/1.1/reference/
+        title: UCP Tool reference
+        nosync: true
       - path: /datacenter/ucp/1.1/support/
         title: Get support
       - path: /datacenter/ucp/1.1/release_notes/
@@ -1839,6 +1816,9 @@ manuals:
           title: Trusted Registry release notes
         - path: /datacenter/dtr/2.0/release-notes/prior-release-notes/
           title: Prior Trusted Registry release notes
+      - path: /apidocs/v2.0.1/
+        title: Trusted Registry API v2.0.1 reference
+        nosync: true
       - path: /datacenter/dtr/2.0/support/
         title: Get support
 - sectiontitle: Docker Cloud
@@ -1961,6 +1941,12 @@ manuals:
       title: Using Docker Cloud on AWS
   - path: /docker-cloud/slack-integration/
     title: Docker Cloud notifications in Slack
+  - path: /apidocs/docker-cloud/
+    title: Docker Cloud API
+    nosync: true
+  - path: /docker-cloud/apps/stack-yaml-reference/
+    title: Stack file YAML reference
+    nosync: true
   - path: /docker-cloud/installing-cli/
     title: The Docker Cloud CLI
   - path: /docker-cloud/docker-errors-faq/
@@ -2077,10 +2063,21 @@ manuals:
     title: Link Environment Variables (deprecated)
   - path: /compose/startup-order/
     title: Control startup order
+  - path: /compose/reference/overview/
+    title: Compose CLI reference
+    nosync: true
+  - path: /compose/compose-file/
+    title: Compose file reference
+    nosync: true
   - path: /compose/faq/
     title: Frequently Asked Questions
-- title: Docker ID accounts
-  path: /docker-id/
+- sectiontitle: Docker ID
+  section:
+  - title: Docker ID accounts
+    path: /docker-id/
+  - title: Docker ID accounts API
+    path: /docker-id/api-reference/
+    nosync: true
 - sectiontitle: Superseded products and tools
   section:
   - sectiontitle: Docker Hub
