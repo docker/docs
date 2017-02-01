@@ -3,4 +3,4 @@
   {% assign tree = item.section %}{% include tree.html %}
 </ul>
 {% else %}
-    <li class="leaf"><a href="{{ item.path }}" class="{% if item.path == page.url %}active currentPage{% endif %}">{{ item.title }}</a></li>{% endif %}{% endif %}{% endfor %}
+    <li class="leaf"><a href="{{ item.path }}" class="{% if item.path == page.url and item.nosync != true %}active currentPage{% endif %}">{{ item.title }}</a></li>{% endif %}{% endif %}{% endfor %}
