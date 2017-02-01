@@ -62,7 +62,7 @@ manager and the worker.
 
 However, the PostgreSQL container (`vote_db`) and the
 visualizer (`vote_visualizer`) will still be running on the manager because of
-the `[node.role == manager]` constraints on the those services, which we
+the `[node.role == manager]` constraints on those services, which we
 did not change.
 
 ![New visualizer web page](images/visualizer-2.png)
