@@ -58,6 +58,16 @@
 
 {% endif %}
 
+{% if site.data[page.datafolder][page.datafile].pname != "docker" %}
+
+## Related commands
+
+| Command | Description |
+| ------- | ----------- |{% for command in site.data[page.datafolder][parentdatafile].cname %}{% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
+| [{{ command }}]({{ dataFileName | replace: "docker_","" }}/) | {{ site.data[page.datafolder][dataFileName].short }} |{% endfor %}
+
+{% endif %}
+
 {% if site.data[page.datafolder][page.datafile].long != site.data[page.datafolder][page.datafile].short %}
 
 ## Extended description
