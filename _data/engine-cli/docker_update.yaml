@@ -1,6 +1,7 @@
 command: docker update
 short: Update configuration of one or more containers
-long: Update configuration of one or more containers
+long: |
+  Alias for `docker container update`.
 usage: docker update [OPTIONS] CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml

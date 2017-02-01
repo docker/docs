@@ -1,6 +1,7 @@
 command: docker rm
 short: Remove one or more containers
-long: Remove one or more containers
+long: |
+  Alias for `docker container rm`.
 usage: docker rm [OPTIONS] CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml

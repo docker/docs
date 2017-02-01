@@ -1,6 +1,7 @@
 command: docker images
 short: List images
-long: List images
+long: |
+  Alias for `docker image ls`.
 usage: docker images [OPTIONS] [REPOSITORY[:TAG]]
 pname: docker
 plink: docker.yaml

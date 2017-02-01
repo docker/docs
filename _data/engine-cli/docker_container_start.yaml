@@ -1,6 +1,7 @@
 command: docker container start
 short: Start one or more stopped containers
-long: Start one or more stopped containers
+long: |
+  Start one or more containers.
 usage: docker container start [OPTIONS] CONTAINER [CONTAINER...]
 pname: docker container
 plink: docker_container.yaml

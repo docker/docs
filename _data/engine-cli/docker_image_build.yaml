@@ -1,6 +1,7 @@
 command: docker image build
 short: Build an image from a Dockerfile
-long: Build an image from a Dockerfile
+long: |
+  Alias for `docker build`.
 usage: docker image build [OPTIONS] PATH | URL | -
 pname: docker image
 plink: docker_image.yaml

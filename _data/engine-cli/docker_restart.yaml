@@ -1,6 +1,7 @@
 command: docker restart
 short: Restart one or more containers
-long: Restart one or more containers
+long: |
+  Alias for `docker container restart`.
 usage: docker restart [OPTIONS] CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml

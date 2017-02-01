@@ -1,6 +1,7 @@
 command: docker ps
 short: List containers
-long: List containers
+long: |
+  Alias for `docker container ls`.
 usage: docker ps [OPTIONS]
 pname: docker
 plink: docker.yaml
