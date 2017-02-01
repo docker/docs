@@ -47,7 +47,7 @@ $ docker service create --replicas 2 --network my-multi-host-network --name my-w
 
 Overlay networks for a swarm are not available to unmanaged containers. For more information refer to [Docker swarm mode overlay network security model](overlay-security-model.md).
 
-See also [Attach services to an overlay network](../../swarm/networking.md). 
+See also [Attach services to an overlay network](../../swarm/networking.md).
 
 ## Overlay networking with an external key-value store
 
@@ -105,7 +105,7 @@ key-value stores. This example uses Consul.
 
 4. Start a `progrium/consul` container running on the `mh-keystore` machine.
 
-		$  docker run -d \
+		$  docker container run -d \
 			-p "8500:8500" \
 			-h "consul" \
 			progrium/consul -server -bootstrap
@@ -114,9 +114,9 @@ key-value stores. This example uses Consul.
 	`mh-keystore` machine. The server is called `consul` and is
 	listening on port `8500`.
 
-5. Run the `docker ps` command to see the `consul` container.
+5. Run the `docker container ls` command to see the `consul` container.
 
-		$ docker ps
+		$ docker container ls
 
 		CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                                            NAMES
 		4d51392253b3        progrium/consul     "/bin/start -server -"   25 minutes ago      Up 25 minutes       53/tcp, 53/udp, 8300-8302/tcp, 0.0.0.0:8500->8500/tcp, 8400/tcp, 8301-8302/udp   admiring_panini
@@ -267,11 +267,11 @@ Once your network is created, you can start a container on any of the hosts and 
 
 2. Start an Nginx web server on the `mhs-demo0` instance.
 
-		$ docker run -itd --name=web --network=my-net --env="constraint:node==mhs-demo0" nginx
+		$ docker container run -itd --name=web --network=my-net --env="constraint:node==mhs-demo0" nginx
 
 4. Run a BusyBox instance on the `mhs-demo1` instance and get the contents of the Nginx server's home page.
 
-		$ docker run -it --rm --network=my-net --env="constraint:node==mhs-demo1" busybox wget -O- http://web
+		$ docker container run -it --rm --network=my-net --env="constraint:node==mhs-demo1" busybox wget -O- http://web
 
 		Unable to find image 'busybox:latest' locally
 		latest: Pulling from library/busybox
@@ -345,7 +345,7 @@ to have external connectivity outside of their cluster.
 
 2. Check the Nginx container's network interfaces.
 
-		$ docker exec web ip addr
+		$ docker container exec web ip addr
 
 		1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default
 		link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00

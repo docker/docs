@@ -113,7 +113,7 @@ docker network create -d macvlan  \
     -o parent=eth0 macnet32
 
 # Start a container and verify the address is 192.168.32.128
-docker run --net=macnet32 -it --rm alpine /bin/sh
+docker container run --net=macnet32 -it --rm alpine /bin/sh
 ```
 
 The network can then be deleted with:
@@ -158,8 +158,8 @@ docker network  create  -d macvlan \
     -o parent=eth0.50 macvlan50
 
 # In two separate terminals, start a Docker container and the containers can now ping one another.
-docker run --net=macvlan50 -it --name macvlan_test5 --rm alpine /bin/sh
-docker run --net=macvlan50 -it --name macvlan_test6 --rm alpine /bin/sh
+docker container run --net=macvlan50 -it --name macvlan_test5 --rm alpine /bin/sh
+docker container run --net=macvlan50 -it --name macvlan_test6 --rm alpine /bin/sh
 ```
 
 **Vlan ID 60**
@@ -175,8 +175,8 @@ docker network  create  -d macvlan \
     -o macvlan_mode=bridge macvlan60
 
 # In two separate terminals, start a Docker container and the containers can now ping one another.
-docker run --net=macvlan60 -it --name macvlan_test7 --rm alpine /bin/sh
-docker run --net=macvlan60 -it --name macvlan_test8 --rm alpine /bin/sh
+docker container run --net=macvlan60 -it --name macvlan_test7 --rm alpine /bin/sh
+docker container run --net=macvlan60 -it --name macvlan_test8 --rm alpine /bin/sh
 ```
 **Example:** Multi-Subnet Macvlan 802.1q Trunking
 
@@ -192,12 +192,12 @@ docker network create -d ipvlan \
      -o ipvlan_mode=l2 ipvlan210
 
 # Test 192.168.210.0/24 connectivity between containers
-docker run --net=ipvlan210 --ip=192.168.210.10 -itd alpine /bin/sh
-docker run --net=ipvlan210 --ip=192.168.210.9 -it --rm alpine ping -c 2 192.168.210.10
+docker container run --net=ipvlan210 --ip=192.168.210.10 -itd alpine /bin/sh
+docker container run --net=ipvlan210 --ip=192.168.210.9 -it --rm alpine ping -c 2 192.168.210.10
 
 # Test 192.168.212.0/24 connectivity between containers
-docker run --net=ipvlan210 --ip=192.168.212.10 -itd alpine /bin/sh
-docker run --net=ipvlan210 --ip=192.168.212.9 -it --rm alpine ping -c 2 192.168.212.10
+docker container run --net=ipvlan210 --ip=192.168.212.10 -itd alpine /bin/sh
+docker container run --net=ipvlan210 --ip=192.168.212.9 -it --rm alpine ping -c 2 192.168.212.10
 ```
 
 ## Dual Stack IPv4 IPv6 Macvlan Bridge Mode
@@ -214,24 +214,24 @@ docker network  create  -d macvlan \
      -o macvlan_mode=bridge macvlan216
 
 # Start a container on the first subnet 192.168.216.0/24
-docker run --net=macvlan216 --name=macnet216_test --ip=192.168.216.10 -itd alpine /bin/sh
+docker container run --net=macvlan216 --name=macnet216_test --ip=192.168.216.10 -itd alpine /bin/sh
 
 # Start a container on the second subnet 192.168.218.0/24
-docker run --net=macvlan216 --name=macnet216_test --ip=192.168.218.10 -itd alpine /bin/sh
+docker container run --net=macvlan216 --name=macnet216_test --ip=192.168.218.10 -itd alpine /bin/sh
 
 # Ping the first container started on the 192.168.216.0/24 subnet
-docker run --net=macvlan216 --ip=192.168.216.11 -it --rm alpine /bin/sh
+docker container run --net=macvlan216 --ip=192.168.216.11 -it --rm alpine /bin/sh
 ping 192.168.216.10
 
 # Ping the first container started on the 192.168.218.0/24 subnet
-docker run --net=macvlan216 --ip=192.168.218.11 -it --rm alpine /bin/sh
+docker container run --net=macvlan216 --ip=192.168.218.11 -it --rm alpine /bin/sh
 ping 192.168.218.10
 ```
 
 View the details of one of the containers:
 
 ```
-docker run --net=macvlan216 --ip=192.168.216.11 -it --rm alpine /bin/sh
+docker container run --net=macvlan216 --ip=192.168.216.11 -it --rm alpine /bin/sh
 
 root@526f3060d759:/# ip a show eth0
     eth0@if92: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UNKNOWN group default

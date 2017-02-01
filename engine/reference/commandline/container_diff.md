@@ -19,7 +19,7 @@ https://www.github.com/docker/docker
 Inspect the changes to an `nginx` container:
 
 ```bash
-$ docker diff 1fdfd1f54c1b
+$ docker container diff 1fdfd1f54c1b
 
 C /dev
 C /dev/console

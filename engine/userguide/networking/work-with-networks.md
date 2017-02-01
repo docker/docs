@@ -158,11 +158,11 @@ $ docker network inspect my-network
     }
 ]
 
-$ docker run -d -P --name redis --network my-network redis
+$ docker container run -d -P --name redis --network my-network redis
 
 bafb0c808c53104b2c90346f284bda33a69beadcab4fc83ab8f2c5a4410cd129
 
-$ docker ps
+$ docker container ls
 
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                        NAMES
 bafb0c808c53        redis               "/entrypoint.sh redis"   4 seconds ago       Up 3 seconds        172.23.0.1:32770->6379/tcp   redis
@@ -186,11 +186,11 @@ needed.
 1.  First, create and run two containers, `container1` and `container2`:
 
     ```bash
-    $ docker run -itd --name=container1 busybox
+    $ docker container run -itd --name=container1 busybox
 
     18c062ef45ac0c026ee48a83afa39d25635ee5f02b58de4abc8f467bcaa28731
 
-    $ docker run -itd --name=container2 busybox
+    $ docker container run -itd --name=container2 busybox
 
     498eaaaf328e1018042c04b2de04036fc04719a6e39a097a4f4866043a2c2152
     ```
@@ -247,11 +247,11 @@ needed.
     As a reminder, `container1` is only connected to the default `bridge` network.
 
 4.  Start a third container, but this time assign it an IP address using the
-    `--ip` flag and connect it to the `isolated_nw` network using the `docker run`
+    `--ip` flag and connect it to the `isolated_nw` network using the `docker container run`
     command's `--network` option:
 
     ```bash
-    $ docker run --network=isolated_nw --ip=172.25.3.3 -itd --name=container3 busybox
+    $ docker container run --network=isolated_nw --ip=172.25.3.3 -itd --name=container3 busybox
 
     467a7863c3f0277ef8e661b38427737f28099b61fa55622d6c30fb288d88c551
     ```
@@ -337,11 +337,11 @@ needed.
 
     eth1    Link encap:Ethernet  HWaddr 02:42:AC:15:00:02
 
-7.  Use the `docker attach` command to connect to the running `container2` and
+7.  Use the `docker container attach` command to connect to the running `container2` and
     examine its networking stack:
 
     ```bash
-    $ docker attach container2
+    $ docker container attach container2
     ```
 
     Use the `ifconfig` command to examine the container's networking stack. you
@@ -431,7 +431,7 @@ needed.
     to ping `container1` by IP address.
 
     ```bash
-    $ docker attach container3
+    $ docker container attach container3
 
     $ ping 172.17.0.2
     PING 172.17.0.2 (172.17.0.2): 56 data bytes
@@ -483,7 +483,7 @@ The following example briefly describes how to use `--link`.
     `container5` (which does not exist yet!) using the `--link` flag.
 
     ```bash
-    $ docker run --network=isolated_nw -itd --name=container4 --link container5:c5 busybox
+    $ docker container run --network=isolated_nw -itd --name=container4 --link container5:c5 busybox
 
     01b5df970834b77a9eadbaff39051f237957bd35c4c56f11193e0594cfd5117c
     ```
@@ -502,7 +502,7 @@ The following example briefly describes how to use `--link`.
     in an error. Attach to `container4` and try to ping either `container5` or `c5`:
 
     ```bash
-    $ docker attach container4
+    $ docker container attach container4
 
     $ ping container5
 
@@ -519,7 +519,7 @@ The following example briefly describes how to use `--link`.
     using the alias `c4`.
 
     ```bash
-    $ docker run --network=isolated_nw -itd --name=container5 --link container4:c4 busybox
+    $ docker container run --network=isolated_nw -itd --name=container5 --link container4:c4 busybox
 
     72eccf2208336f31e9e33ba327734125af00d1e1d2657878e2ee8154fbb23c7a
     ```
@@ -527,7 +527,7 @@ The following example briefly describes how to use `--link`.
     Now attach to `container4` and try to ping `c5` and `container5`.
 
     ```bash
-    $ docker attach container4
+    $ docker container attach container4
 
     / # ping -w 4 c5
     PING c5 (172.25.0.5): 56 data bytes
@@ -556,7 +556,7 @@ The following example briefly describes how to use `--link`.
 3.  Finally, attach to `container5` and verify that you can ping `container4`.
 
     ```bash
-    $ docker attach container5
+    $ docker container attach container5
 
     / # ping -w 4 c4
     PING c4 (172.25.0.4): 56 data bytes
@@ -615,7 +615,7 @@ The following example illustrates these points.
    try pinging container `container5` using alias `c5`:
 
     ```bash
-    $ docker attach container4
+    $ docker container attach container4
 
     / # ping -w 4 foo
     PING foo (172.26.0.3): 56 data bytes
@@ -651,7 +651,7 @@ The following example illustrates these points.
     ```
     $ docker network disconnect isolated_nw container5
 
-    $ docker attach container4
+    $ docker container attach container4
 
     / # ping -w 4 c5
     ping: bad address 'c5'
@@ -700,7 +700,7 @@ The following example illustrates this limitation.
     and give it the network alias `app`.
 
     ```bash
-    $ docker run --network=isolated_nw -itd --name=container6 --network-alias app busybox
+    $ docker container run --network=isolated_nw -itd --name=container6 --network-alias app busybox
 
     8ebe6767c1e0361f27433090060b33200aac054a68476c3be87ef4005eb1df17
     ```
@@ -709,7 +709,7 @@ The following example illustrates this limitation.
     network alias (`app`). Notice that the IP address is the same.
 
     ```bash
-    $ docker attach container4
+    $ docker container attach container4
 
     / # ping -w 4 app
     PING app (172.25.0.6): 56 data bytes
@@ -752,7 +752,7 @@ The following example illustrates this limitation.
     these networks) and `container5` (which is connected only to `isolated_nw`).
 
     ```bash
-    $ docker attach container4
+    $ docker container attach container4
 
     / # ping -w 4 scoped-app
     PING foo (172.26.0.5): 56 data bytes
@@ -769,7 +769,7 @@ The following example illustrates this limitation.
     Detach from `container4` and leave it running using `CTRL-p CTRL-q`.
 
     ```bash
-    $ docker attach container5
+    $ docker container attach container5
 
     / # ping -w 4 scoped-app
     ping: bad address 'scoped-app'
@@ -791,7 +791,7 @@ network. This example illustrates how this works.
     which is `app`.
 
     ```bash
-    $ docker run --network=isolated_nw -itd --name=container7 --network-alias app busybox
+    $ docker container run --network=isolated_nw -itd --name=container7 --network-alias app busybox
 
     3138c678c123b8799f4c7cc6a0cecc595acbdfa8bf81f621834103cd4f504554
     ```
@@ -809,7 +809,7 @@ network. This example illustrates how this works.
 2.  Start a continuous ping from `container4` to the `app` alias.
 
     ```bash
-    $ docker attach container4
+    $ docker container attach container4
 
     $ ping app
     PING app (172.25.0.6): 56 data bytes
@@ -824,7 +824,7 @@ network. This example illustrates how this works.
 
 3.  In another terminal, stop `container6`.
     ```bash
-    $ docker stop container6
+    $ docker container stop container6
     ```
 
     In the terminal attached to `container4`, observe the `ping` output.
@@ -851,7 +851,7 @@ network. This example illustrates how this works.
 5.  For one last test, restart `container6`.
 
     ```bash
-    $ docker start container6
+    $ docker container start container6
     ```
 
     In the terminal attached to `container4`, run the `ping` command again. It
@@ -859,7 +859,7 @@ network. This example illustrates how this works.
     several times, you will see responses from each of the containers.
 
     ```bash
-    $ docker attach container4
+    $ docker container attach container4
 
     $ ping app
     PING app (172.25.0.6): 56 data bytes
@@ -939,7 +939,7 @@ disconnect` command.
     which is on the `isolated_nw` network.
 
     ```bash
-    $ docker attach container2
+    $ docker container attach container2
 
     / # ifconfig
     eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:03  
@@ -984,9 +984,9 @@ disconnect` command.
 
 4.  Remove `container4`, `container5`, `container6`, and `container7`.
     ```bash
-    $ docker stop container4 container5 container6 container7
+    $ docker container stop container4 container5 container6 container7
 
-    $ docker rm container4 container5 container6 container7
+    $ docker container rm container4 container5 container6 container7
     ```
 
 ### Handling stale network endpoints
@@ -1005,15 +1005,15 @@ from the network forcibly (`docker network disconnect -f`). Now you can
 successfully connect the container to the network.
 
 ```bash
-$ docker run -d --name redis_db --network multihost redis
+$ docker container run -d --name redis_db --network multihost redis
 
 ERROR: Cannot start container bc0b19c089978f7845633027aa3435624ca3d12dd4f4f764b61eac4c0610f32e: container already connected to network multihost
 
-$ docker rm -f redis_db
+$ docker container rm -f redis_db
 
 $ docker network disconnect -f multihost redis_db
 
-$ docker run -d --name redis_db --network multihost redis
+$ docker container run -d --name redis_db --network multihost redis
 
 7d986da974aeea5e9f7aca7e510bdb216d58682faa83a9040c2f2adc0544795a
 ```

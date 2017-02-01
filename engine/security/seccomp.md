@@ -30,7 +30,7 @@ The default seccomp profile provides a sane default for running containers with
 seccomp and disables around 44 system calls out of 300+. It is moderately protective while providing wide application
 compatibility. The default Docker profile (found [here](https://github.com/docker/docker/blob/master/profiles/seccomp/default.json)) has a JSON layout in the following form:
 
-```json
+```none
 {
 	"defaultAction": "SCMP_ACT_ERRNO",
 	"archMap": [
@@ -99,8 +99,8 @@ When you run a container, it uses the default profile unless you override
 it with the `security-opt` option. For example, the following explicitly
 specifies the default policy:
 
-```
-$ docker run --rm -it --security-opt seccomp=/path/to/seccomp/profile.json hello-world
+```bash
+$ docker container run --rm -it --security-opt seccomp=/path/to/seccomp/profile.json hello-world
 ```
 
 ### Significant syscalls blocked by the default profile
@@ -170,7 +170,7 @@ the reason each syscall is blocked rather than white-listed.
 You can pass `unconfined` to run a container without the default seccomp
 profile.
 
-```
-$ docker run --rm -it --security-opt seccomp=unconfined debian:jessie \
+```bash
+$ docker container run --rm -it --security-opt seccomp=unconfined debian:jessie \
     unshare --map-root-user --user sh -c whoami
 ```

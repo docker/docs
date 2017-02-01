@@ -66,7 +66,7 @@ default route will be added on `eth0` in the container via the address specified
 by the daemon option `--default-gateway-v6` if present, otherwise via `fe80::1`:
 
 ```
-docker run -it ubuntu bash -c "ip -6 addr show dev eth0; ip -6 route show"
+docker container run -it ubuntu bash -c "ip -6 addr show dev eth0; ip -6 route show"
 
 15: eth0: <BROADCAST,UP,LOWER_UP> mtu 1500
    inet6 2001:db8:1:0:0:242:ac11:3/64 scope global

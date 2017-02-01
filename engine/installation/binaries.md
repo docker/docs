@@ -91,7 +91,7 @@ instructions for enabling and configuring AppArmor or SELinux.
     image.
 
     ```bash
-    $ sudo docker run hello-world
+    $ sudo docker container run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -169,8 +169,8 @@ You can install Docker from binaries on Windows Server 2016 or Windows 10.
     image.
 
 
-    ```none
-    docker run hello-world:nanoserver
+    ```bash
+    $ docker container run hello-world:nanoserver
     ```
 
     This command downloads a test image and runs it in a container. When the

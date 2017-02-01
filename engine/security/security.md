@@ -21,7 +21,7 @@ There are four major areas to consider when reviewing Docker security:
 
 Docker containers are very similar to LXC containers, and they have
 similar security features. When you start a container with
-`docker run`, behind the scenes Docker creates a set of namespaces and control
+`docker container run`, behind the scenes Docker creates a set of namespaces and control
 groups for the container.
 
 **Namespaces provide the first and most straightforward form of
@@ -114,8 +114,8 @@ certificates. You can also secure them with [HTTPS and
 certificates](https.md).
 
 The daemon is also potentially vulnerable to other inputs, such as image
-loading from either disk with 'docker load', or from the network with
-'docker pull'. As of Docker 1.3.2, images are now extracted in a chrooted
+loading from either disk with 'docker image load', or from the network with
+'docker image pull'. As of Docker 1.3.2, images are now extracted in a chrooted
 subprocess on Linux/Unix platforms, being the first-step in a wider effort
 toward privilege separation. As of Docker 1.10.0, all images are stored and
 accessed by the cryptographic checksums of their contents, limiting the

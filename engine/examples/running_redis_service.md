@@ -23,7 +23,7 @@ Next we build an image from our `Dockerfile`.
 Replace `<your username>` with your own user name.
 
 ```bash
-$ docker build -t <your username>/redis .
+$ docker image build -t <your username>/redis .
 ```
 
 ## Run the service
@@ -38,7 +38,7 @@ we're going to use a container link to provide access to our Redis
 database.
 
 ```bash
-$ docker run --name redis -d <your username>/redis
+$ docker container run --name redis -d <your username>/redis
 ```
 
 ## Create your web application container
@@ -50,7 +50,7 @@ created with an alias of `db`. This will create a secure tunnel to the
 container to only this container.
 
 ```bash
-$ docker run --link redis:db -i -t ubuntu:14.04 /bin/bash
+$ docker container run --link redis:db -i -t ubuntu:14.04 /bin/bash
 ```
 
 Once inside our freshly created container we need to install Redis to

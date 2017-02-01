@@ -15,7 +15,7 @@ trust makes use of five different types of keys:
 | timestamp        | This key allows Docker image repositories to have freshness security guarantees without requiring periodic content refreshes on the client's side. |
 | delegation       | Delegation keys are optional tagging keys and allow you to delegate signing image tags to other publishers without having to share your targets key. |
 
-When doing a `docker push` with Content Trust enabled for the first time, the
+When doing a `docker image push` with Content Trust enabled for the first time, the
 root, targets, snapshot, and timestamp keys are generated automatically for
 the image repository:
 

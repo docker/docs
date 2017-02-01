@@ -8,9 +8,9 @@ Next, you need to install an SDK for the language you are using. There are offic
 
 ## Running a container
 
-The most basic thing you can do with Docker is running a container. On the command line, you would use the `docker run` command, but this is just as easy to do from your own apps too.
+The most basic thing you can do with Docker is running a container. On the command line, you would use the `docker container run` command, but this is just as easy to do from your own apps too.
 
-This is the equivalent of doing `docker run alpine echo hello world`:
+This is the equivalent of doing `docker container run alpine echo hello world`:
 
 <dl class="horizontal tabs" data-tab >
   <dd class="active"><a href="#tab-run-python" class="noanchor">Python</a></dd>
@@ -94,7 +94,7 @@ hello world
 </section>
 </div>
 
-You can also run containers in the background, the equivalent of `docker run -d bfirsh/reticulate-splines`:
+You can also run containers in the background, the equivalent of `docker container run -d bfirsh/reticulate-splines`:
 
 <dl class="horizontal tabs" data-tab>
   <dd class="active"><a href="#tab-rundetach-python" class="noanchor">Python</a></dd>
@@ -409,7 +409,7 @@ $ curl --unix-socket /var/run/docker.sock http:/v1.24/images/json
 </section>
 </div>
 
-You can pull images, like `docker pull`:
+You can pull images, using `docker image pull`:
 
 <dl class="horizontal tabs" data-tab>
   <dd class="active"><a href="#tab-pullimages-python" class="noanchor">Python</a></dd>
@@ -531,7 +531,7 @@ func main() {
 </section>
 <section class="content" id="tab-commit-curl">
 {% highlight bash %}
-$ docker run -d alpine touch /helloworld
+$ docker container run -d alpine touch /helloworld
 0888269a9d584f0fa8fc96b3c0d8d57969ceea3a64acf47cd34eebb4744dbc52
 $ curl --unix-socket /var/run/docker.sock\
   -X POST "http:/v1.24/commit?container=0888269a9d&repo=helloworld"

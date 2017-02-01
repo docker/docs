@@ -9,7 +9,7 @@ keywords: "docker, daemon, configuration"
 By default, a container has no resource constraints and can use as much of a
 given resource as the host's kernel scheduler will allow. Docker provides ways
 to control how much memory, CPU, or block IO a container can use, setting runtime
-configuration flags of the `docker run` command. This section provides details
+configuration flags of the `docker container run` command. This section provides details
 on when you should set such limits and the possible implications of setting them.
 
 ## Memory
@@ -114,13 +114,13 @@ most 50% of the CPU every second.
 **Docker 1.13 and higher**:
 
 ```bash
-docker run -it --cpus=".5" ubuntu /bin/bash
+$ docker container run -it --cpus=".5" ubuntu /bin/bash
 ```
 
 **Docker 1.12 and lower**:
 
 ```bash
-$ docker run -it --cpu-period=100000 --cpu-quota=50000 ubuntu /bin/bash
+$ docker container run -it --cpu-period=100000 --cpu-quota=50000 ubuntu /bin/bash
 ```
 
 ### Configure the realtime scheduler
@@ -158,7 +158,7 @@ non-realtime tasks. To make this configuration permanent on systems which use
 #### Configure individual containers
 
 You can pass several flags to control a container's CPU priority when you
-start the container using `docker run`. Consult your operating system's
+start the container using `docker container run`. Consult your operating system's
 documentation or the `ulimit` command for information on appropriate values.
 
 | Option                    | Description                 |
@@ -171,7 +171,7 @@ The following example command sets each of these three flags on a `debian:jessie
 container.
 
 ```bash
-$ docker run --it --cpu-rt-runtime=95000 \
+$ docker container run --it --cpu-rt-runtime=95000 \
                   --ulimit rtprio=99 \
                   --cap-add=sys_nice \
                   debian:jessie

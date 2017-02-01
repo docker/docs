@@ -104,7 +104,7 @@ instructions in your `Dockerfile` executing each in the order specified.
 As each instruction is examined Docker will look for an existing image in its
 cache that it can reuse, rather than creating a new (duplicate) image.
 If you do not want to use the cache at all you can use the `--no-cache=true`
-option on the `docker build` command.
+option on the `docker image build` command.
 
 However, if you do let Docker use its cache then it is very important to
 understand when it will, and will not, find a matching image. The basic rules
@@ -297,7 +297,7 @@ recommended for any service-based image.
 In most other cases, `CMD` should be given an interactive shell, such as bash, python
 and perl. For example, `CMD ["perl", "-de0"]`, `CMD ["python"]`, or
 `CMD [“php”, “-a”]`. Using this form means that when you execute something like
-`docker run -it python`, you’ll get dropped into a usable shell, ready to go.
+`docker container run -it python`, you’ll get dropped into a usable shell, ready to go.
 `CMD` should rarely be used in the manner of `CMD [“param”, “param”]` in
 conjunction with [`ENTRYPOINT`](../../reference/builder.md#entrypoint), unless
 you and your expected users are already quite familiar with how `ENTRYPOINT`
@@ -313,7 +313,7 @@ your application. For example, an image containing the Apache web server would
 use `EXPOSE 80`, while an image containing MongoDB would use `EXPOSE 27017` and
 so on.
 
-For external access, your users can execute `docker run` with a flag indicating
+For external access, your users can execute `docker container run` with a flag indicating
 how to map the specified port to the port of their choice.
 For container linking, Docker provides environment variables for the path from
 the recipient container back to the source (ie, `MYSQL_PORT_3306_TCP`).
@@ -404,11 +404,11 @@ Let's start with an example of an image for the command line tool `s3cmd`:
 
 Now the image can be run like this to show the command's help:
 
-    $ docker run s3cmd
+    $ docker container run s3cmd
 
 Or using the right parameters to execute a command:
 
-    $ docker run s3cmd ls s3://mybucket
+    $ docker container run s3cmd ls s3://mybucket
 
 This is useful because the image name can double as a reference to the binary as
 shown in the command above.
@@ -455,15 +455,15 @@ This script allows the user to interact with Postgres in several ways.
 
 It can simply start Postgres:
 
-    $ docker run postgres
+    $ docker container run postgres
 
 Or, it can be used to run Postgres and pass parameters to the server:
 
-    $ docker run postgres postgres --help
+    $ docker container run postgres postgres --help
 
 Lastly, it could also be used to start a totally different tool, such as Bash:
 
-    $ docker run --rm -it postgres bash
+    $ docker container run --rm -it postgres bash
 
 ### VOLUME
 

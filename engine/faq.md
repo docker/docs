@@ -274,7 +274,7 @@ You have to tell Docker to talk to that machine. You can do this with the
 `docker-machine env` command. For example,
 
     $ eval "$(docker-machine env default)"
-    $ docker ps
+    $ docker container ls
 
 ### Where can I find more answers?
 

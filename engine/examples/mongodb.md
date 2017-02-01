@@ -113,12 +113,12 @@ Now save the file and let's build our image.
 
 With our `Dockerfile`, we can now build the MongoDB image using Docker. Unless
 experimenting, it is always a good practice to tag Docker images by passing the
-`--tag` option to `docker build` command.
+`--tag` option to `docker image build` command.
 
 ```dockerfile
-# Format: docker build --tag/-t <user-name>/<repository> .
+# Format: docker image build --tag/-t <user-name>/<repository> .
 # Example:
-$ docker build --tag my/repo .
+$ docker image build --tag my/repo .
 ```
 Once this command is issued, Docker will go through the `Dockerfile` and build
 the image. The final image will be tagged `my/repo`.
@@ -126,7 +126,7 @@ the image. The final image will be tagged `my/repo`.
 ## Pushing the MongoDB image to Docker Hub
 
 All Docker image repositories can be hosted and shared on
-[Docker Hub](https://hub.docker.com) with the `docker push` command. For this,
+[Docker Hub](https://hub.docker.com) with the `docker image push` command. For this,
 you need to be logged-in.
 
 ```bash
@@ -139,8 +139,8 @@ Username:
 
 ```bash
 # Push the image
-# Format: docker push <user-name>/<repository>
-$ docker push my/repo
+# Format: docker image push <user-name>/<repository>
+$ docker image push my/repo
 
 The push refers to a repository [my/repo] (len: 1)
 Sending image list
@@ -155,16 +155,16 @@ as daemon process(es).
 
 ```bash
 # Basic way
-# Usage: docker run --name <name for container> -d <user-name>/<repository>
-$ docker run -p 27017:27017 --name mongo_instance_001 -d my/repo
+# Usage: docker container run --name <name for container> -d <user-name>/<repository>
+$ docker container run -p 27017:27017 --name mongo_instance_001 -d my/repo
 
 # Dockerized MongoDB, lean and mean!
-# Usage: docker run --name <name for container> -d <user-name>/<repository> --noprealloc --smallfiles
-$ docker run -p 27017:27017 --name mongo_instance_001 -d my/repo --smallfiles
+# Usage: docker container run --name <name for container> -d <user-name>/<repository> --noprealloc --smallfiles
+$ docker container run -p 27017:27017 --name mongo_instance_001 -d my/repo --smallfiles
 
 # Checking out the logs of a MongoDB container
-# Usage: docker logs <name for container>
-$ docker logs mongo_instance_001
+# Usage: docker container logs <name for container>
+$ docker container logs mongo_instance_001
 
 # Playing with MongoDB
 # Usage: mongo --port <port you get from `docker ps`>
@@ -180,9 +180,9 @@ the exposed port to two different ports on the host
 
 ```bash
 # Start two containers and map the ports
-$ docker run -p 28001:27017 --name mongo_instance_001 -d my/repo
+$ docker container run -p 28001:27017 --name mongo_instance_001 -d my/repo
 
-$ docker run -p 28002:27017 --name mongo_instance_002 -d my/repo
+$ docker container run -p 28002:27017 --name mongo_instance_002 -d my/repo
 
 # Now you can connect to each MongoDB instance on the two ports
 $ mongo --port 28001

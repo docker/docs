@@ -43,11 +43,11 @@ Make sure Docker is running. On Docker for Mac and Docker for Windows, this is i
 
 1. Open a command-line terminal.
 
-2. Type the `docker run docker/whalesay cowsay boo` command and press RETURN.
+2. Type the `docker container run docker/whalesay cowsay boo` command and press RETURN.
 
     This command runs the **whalesay** image in a container. Your terminal should look like the following:
 
-        $ docker run docker/whalesay cowsay boo
+        $ docker container run docker/whalesay cowsay boo
         Unable to find image 'docker/whalesay:latest' locally
         latest: Pulling from docker/whalesay
         e9e06b06e14c: Pull complete
@@ -103,7 +103,7 @@ Make sure Docker is running. On Docker for Mac and Docker for Windows, this is i
     Try running the `whalesay` image again with a word or phrase. Try a long or
     short phrase.  Can you break the cow?
 
-        $ docker run docker/whalesay cowsay boo-boo
+        $ docker container run docker/whalesay cowsay boo-boo
          _________
         < boo-boo >
          ---------

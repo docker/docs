@@ -19,7 +19,7 @@ follows:
 
 
 ```bash
-$ sudo docker run \
+$ sudo docker container run \
   --volume=/:/rootfs:ro \
   --volume=/var/run:/var/run:rw \
   --volume=/sys:/sys:ro \

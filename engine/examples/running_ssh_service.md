@@ -32,16 +32,16 @@ CMD ["/usr/sbin/sshd", "-D"]
 Build the image using:
 
 ```bash
-$ docker build -t eg_sshd .
+$ docker image build -t eg_sshd .
 ```
 ## Run a `test_sshd` container
 
-Then run it. You can then use `docker port` to find out what host port
+Then run it. You can then use `docker container port` to find out what host port
 the container's port 22 is mapped to:
 
 ```bash
-$ docker run -d -P --name test_sshd eg_sshd
-$ docker port test_sshd 22
+$ docker container run -d -P --name test_sshd eg_sshd
+$ docker container port test_sshd 22
 
 0.0.0.0:49154
 ```
@@ -67,7 +67,7 @@ If you're setting values in the `Dockerfile` using `ENV`, you'll need to push th
 to a shell initialization file like the `/etc/profile` example in the `Dockerfile`
 above.
 
-If you need to pass`docker run -e ENV=value` values, you will need to write a
+If you need to pass `docker container run -e ENV=value` values, you will need to write a
 short script to do the same before you start `sshd -D` and then replace the
 `CMD` with that script.
 
@@ -77,7 +77,7 @@ Finally, clean up after your test by stopping and removing the
 container, and then removing the image.
 
 ```bash
-$ docker stop test_sshd
-$ docker rm test_sshd
-$ docker rmi eg_sshd
+$ docker container stop test_sshd
+$ docker container rm test_sshd
+$ docker image rm eg_sshd
 ```

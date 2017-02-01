@@ -59,7 +59,7 @@ for its configurable options, if applicable.
 
 | Driver      | Description                                                    |
 |-------------|----------------------------------------------------------------|
-| `none`      | No logs will be available for the container and `docker logs` will not return any output. |
+| `none`      | No logs will be available for the container and `docker container logs` will not return any output. |
 | `json-file` | The logs are formatted as JSON. The default logging driver for Docker. |
 | `syslog`    | Writes logging messages to the `syslog` facility. The `syslog` daemon must be running on the host machine. |
 | `journald`  | Writes log messages to `journald`. The `journald` daemon must be running on the host machine. |
@@ -73,7 +73,7 @@ for its configurable options, if applicable.
 
 ## Limitations of logging drivers
 
-- The `docker logs` command is not available for drivers other than `json-file`
+- The `docker container logs` command is not available for drivers other than `json-file`
   and `journald`.
 
 ## Examples
@@ -101,7 +101,7 @@ Next, run a container and specify values for the `labels` or `env`. For
 example, you might use this:
 
 ```bash
-$ docker run -dit --label production_status=testing -e os=ubuntu alpine sh
+$ docker container run -dit --label production_status=testing -e os=ubuntu alpine sh
 ```
 
 If the logging driver supports it, this adds additional fields to the logging
@@ -121,7 +121,7 @@ at start-up) or for an individual container at runtime. It has no options.
 This example starts an `alpine` container with the `none` log driver.
 
 ```bash
-$ docker run -it --log-driver none alpine ash
+$ docker container run -it --log-driver none alpine ash
 ```
 
 ## `json-file`
@@ -140,7 +140,7 @@ The `json-file` logging driver supports the following logging options:
 | `labels`   | Applies when starting the Docker daemon. A comma-separated list of logging-related labels this daemon will accept. Used for advanced [log tag options](log_tags.md).| `--log-opt labels=production_status,geo` |
 | `env`      | Applies when starting the Docker daemon. A comma-separated list of logging-related environment variables this daemon will accept. Used for advanced [log tag options](log_tags.md). | `--log-opt env=os,customer` |
 
-> **Note**: If `max-size` and `max-file` are set, `docker logs` only returns the
+> **Note**: If `max-size` and `max-file` are set, `docker container logs` only returns the
 > log lines from the newest log file.
 
 ### Examples
@@ -149,7 +149,7 @@ This example starts an `alpine` container which can have a maximum of 3 log
 files no larger than 10 megabytes each.
 
 ```bash
-$ docker run --it --log-opt max-size=10m --log-opt max-file=3 alpine ash
+$ docker container run --it --log-opt max-size=10m --log-opt max-file=3 alpine ash
 ```
 
 ## `syslog`
@@ -177,7 +177,7 @@ This example sends the container's logging output to a `syslog` remote server at
 `192.168.0.42` on port `123`, using the the `daemon` facility:
 
 ```bash
-$ docker run \
+$ docker container run \
          --log-driver=syslog \
          --log-opt syslog-address=tcp://192.168.0.42:123 \
          --log-opt syslog-facility=daemon \
@@ -188,7 +188,7 @@ This example connects to `syslog` using TCP+TLS transport and specifies the
 trust certificate, certificate, and key to use.
 
 ```bash
-$ docker run \
+$ docker container run \
          --log-driver=syslog \
          --log-opt syslog-address=tcp+tls://192.168.0.42:123 \
          --log-opt syslog-tls-ca-cert=syslog-tls-ca-cert=/etc/ca-certificates/custom/ca.pem \
@@ -215,7 +215,7 @@ driver, see [the journald logging driver](journald.md) reference documentation.
 ### Examples
 
 ```bash
-$ docker run \
+$ docker container run \
          --log-driver=journald \
          alpine ash
 ```
@@ -242,7 +242,7 @@ This example connects the container to the GELF server running at
 `192.168.0.42` on port `12201`.
 
 ```bash
-$ docker run -dit \
+$ docker container run -dit \
              --log-driver=gelf \
              --log-opt gelf-address=udp://192.168.0.42:12201 \
              alpine sh
@@ -272,7 +272,7 @@ of each message.
 
 ```bash
 {% raw %}
-$ docker run -dit \
+$ docker container run -dit \
              --log-driver=fluentd \
              --log-opt fluentd-address=localhost:24224 \
              --log-opt tag="docker.{{.Name}}" \
@@ -304,7 +304,7 @@ This exampe sends the logs to region `us-east-1` and uses the log group
 `myLogGroup`.
 
 ```bash
-$ docker run \
+$ docker container run \
          --log-driver=awslogs \
          --log-opt awslogs-region=us-east-1 \
          --log-opt awslogs-group=myLogGroup \
@@ -350,7 +350,7 @@ This examples sets several options for the `splunk` logging driver.
 
 ```bash
 {% raw %}
-$ docker run \
+$ docker container run \
        --log-driver=splunk \
        --log-opt splunk-token=176FCEBF-4CF5-4EDF-91BC-703796522D20 \
        --log-opt splunk-url=https://splunkhost:8088 \
@@ -379,7 +379,7 @@ accept any options.
 ### Examples
 
 ```bash
-$ docker run \
+$ docker container run \
          --logging-driver=etwlogs \
          alpine sh
 ```
@@ -409,7 +409,7 @@ variable, which will be incorporated into the logs if the Docker daemon was
 started with the appropriate `--log-opt` options.
 
 ```bash
-$ docker run --log-driver=gcplogs \
+$ docker container run --log-driver=gcplogs \
     --log-opt gcp-log-cmd=true \
     --env "TEST=false" \
     --label location=west \

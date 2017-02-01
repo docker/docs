@@ -28,7 +28,7 @@ using a process manager.
 
 When you have finished setting up your image and are happy with your
 running container, you can then attach a process manager to manage it.
-When you run `docker start -a`, Docker will automatically attach to the
+When you run `docker container start -a`, Docker will automatically attach to the
 running container, or start it if needed and forward all signals so that
 the process manager can detect when a container stops and correctly
 restart it.
@@ -53,7 +53,7 @@ a new service that will be started after the docker daemon service has started.
     stop on runlevel [!2345]
     respawn
     script
-      /usr/bin/docker start -a redis_server
+      /usr/bin/docker container start -a redis_server
     end script
 
 ### systemd
@@ -65,8 +65,8 @@ a new service that will be started after the docker daemon service has started.
 
     [Service]
     Restart=always
-    ExecStart=/usr/bin/docker start -a redis_server
-    ExecStop=/usr/bin/docker stop -t 2 redis_server
+    ExecStart=/usr/bin/docker container start -a redis_server
+    ExecStop=/usr/bin/docker container stop -t 2 redis_server
 
     [Install]
     WantedBy=default.target
@@ -76,16 +76,16 @@ in the `/etc/systemd/system` directory, e.g.
 `/etc/systemd/system/docker-redis_server.service`.
 
 If you need to pass options to the redis container (such as `--env`),
-then you'll need to use `docker run` rather than `docker start`. This will
+then you'll need to use `docker container run` rather than `docker container start`. This will
 create a new container every time the service is started, which will be stopped
 and removed when the service is stopped. Make sure you don't use "`-d`" for
 "detached mode". The command run from "`ExecStart`" needs to run in the foreground.
 
     [Service]
     ...
-    ExecStart=/usr/bin/docker run --env foo=bar --name redis_server redis
-    ExecStop=/usr/bin/docker stop -t 2 redis_server
-    ExecStopPost=/usr/bin/docker rm -f redis_server
+    ExecStart=/usr/bin/docker container run --env foo=bar --name redis_server redis
+    ExecStop=/usr/bin/docker container stop -t 2 redis_server
+    ExecStopPost=/usr/bin/docker container rm -f redis_server
     ...
 
 To start using the service, reload systemd and start the service:

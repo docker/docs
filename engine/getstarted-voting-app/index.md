@@ -52,7 +52,7 @@ the `docker stack deploy` command
 A service is a bit of executable code designed to accomplish
 a specific task. A service can run in one or more
 containers. Defining a service configuration for your app
-(above and beyond `docker run` commands) enables you to
+(above and beyond `docker container run` commands) enables you to
 deploy it to a swarm and manage it as a distributed
 multi-container application.
 
@@ -134,7 +134,7 @@ the services shown in the [table above](#services-and-images-overview),
 their base images, configuration details such as ports and
 networks, application dependencies, and the swarm configuration.
 
-```
+```none
 version: "3"
 services:
 

@@ -20,9 +20,9 @@ option to the Docker daemon:
     dockerd --log-driver=awslogs
 
 You can set the logging driver for a specific container by using the
-`--log-driver` option to `docker run`:
+`--log-driver` option to `docker container run`:
 
-    docker run --log-driver=awslogs ...
+    docker container run --log-driver=awslogs ...
 
 ## Amazon CloudWatch Logs options
 
@@ -35,7 +35,7 @@ the `awslogs-region` log option or the `AWS_REGION` environment variable to set
 the region.  By default, if your Docker daemon is running on an EC2 instance
 and no region is set, the driver uses the instance's region.
 
-    docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 ...
+    docker container run --log-driver=awslogs --log-opt awslogs-region=us-east-1 ...
 
 ### awslogs-group
 
@@ -44,7 +44,7 @@ You must specify a
 for the `awslogs` logging driver.  You can specify the log group with the
 `awslogs-group` log option:
 
-    docker run --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt awslogs-group=myLogGroup ...
+    docker container run --log-driver=awslogs --log-opt awslogs-region=us-east-1 --log-opt awslogs-group=myLogGroup ...
 
 ### awslogs-stream
 
@@ -60,7 +60,7 @@ specified, the container ID is used as the log stream.
 
 ### tag
 
-Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets template markup (e.g., `{% raw %}{{.ID}}{% endraw %}`, `{% raw %}{{.FullID}}{% endraw %}` or `{% raw %}{{.Name}}{% endraw %}` `{% raw %}docker.{{.ID}}{% endraw %}`). 
+Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets template markup (e.g., `{% raw %}{{.ID}}{% endraw %}`, `{% raw %}{{.FullID}}{% endraw %}` or `{% raw %}{{.Name}}{% endraw %}` `{% raw %}docker.{{.ID}}{% endraw %}`).
 See the [tag option documentation](log_tags.md) for details on all supported template substitutions.
 
 When both `awslogs-stream` and `tag` are specified, the value supplied for `awslogs-stream` will override the template specified with `tag`.

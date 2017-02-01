@@ -144,24 +144,24 @@ real-world example, continue to
      \_ redis.1.wrny5v4xyps6  redis:alpine  moby  Shutdown       Failed 2 minutes ago       "task: non-zero exit (1)"
     ```
 
-4.  Get the ID of the `redis` service task container using `docker ps` , so that
-    you can use `docker exec` to connect to the container and read the contents
+4.  Get the ID of the `redis` service task container using `docker container ls` , so that
+    you can use `docker container exec` to connect to the container and read the contents
     of the secret data file, which defaults to being readable by all and has the
     same name as the name of the secret. The first command below illustrates
     how to find the container ID, and the second and third commands use shell
     completion to do this automatically.
 
     ```bash
-    $ docker ps --filter name=redis -q
+    $ docker container ls --filter name=redis -q
 
     5cb1c2348a59
 
-    $ docker exec $(docker ps --filter name=redis -q) ls -l /run/secrets
+    $ docker container exec $(docker container ls --filter name=redis -q) ls -l /run/secrets
 
     total 4
     -r--r--r--    1 root     root            17 Dec 13 22:48 my_secret_data
 
-    $ docker exec $(docker ps --filter name=redis -q) cat /run/secrets/my_secret_data
+    $ docker container exec $(docker container ls --filter name=redis -q) cat /run/secrets/my_secret_data
 
     This is a secret
     ```
@@ -169,9 +169,9 @@ real-world example, continue to
 5.  Verify that the secret is **not** available if you commit the container.
 
     ```bash
-    $ docker commit $(docker ps --filter name=redis -q) committed_redis
+    $ docker container commit $(docker container ls --filter name=redis -q) committed_redis
 
-    $ docker run --rm -it committed_redis cat /run/secrets/my_secret_data
+    $ docker container run --rm -it committed_redis cat /run/secrets/my_secret_data
 
     cat: can't open '/run/secrets/my_secret_data': No such file or directory
     ```
@@ -204,7 +204,7 @@ real-world example, continue to
     `service update` command redeploys the service.
 
     ```bash
-    $ docker exec -it $(docker ps --filter name=redis -q) cat /run/secrets/my_secret_data
+    $ docker container exec -it $(docker container ls --filter name=redis -q) cat /run/secrets/my_secret_data
 
     cat: can't open '/run/secrets/my_secret_data': No such file or directory
     ```
@@ -577,7 +577,7 @@ line.
     - The secrets are each mounted in a `tmpfs` filesystem at
       `/run/secrets/mysql_password` and `/run/secrets/mysql_root_password`.
       They are never exposed as environment variables, nor can they be committed
-      to an image if the `docker commit` command is run. The `mysql_password`
+      to an image if the `docker container commit` command is run. The `mysql_password`
       secret is the one used the non-privileged WordPress container will use to
       connect to MySQL.
     - Sets the environment variables `MYSQL_PASSWORD_FILE` and
@@ -757,7 +757,7 @@ Docker.
     First, find the ID of the `mysql` container task.
 
     ```bash
-    $ docker ps --filter --name=mysql -q
+    $ docker container ls --filter --name=mysql -q
 
     c7705cf6176f
     ```
@@ -766,14 +766,14 @@ Docker.
     uses shell expansion to do it all in a single step.
 
     ```bash
-    $ docker exec <CONTAINER_ID> \
+    $ docker container exec <CONTAINER_ID> \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 
     **or**:
 
     ```bash
-    $ docker exec $(docker ps --filter --name=mysql -q) \
+    $ docker container exec $(docker container ls --filter --name=mysql -q) \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 

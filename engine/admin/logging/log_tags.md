@@ -11,7 +11,7 @@ container's log messages. By default, the system uses the first 12 characters of
 the container id. To override this behavior, specify a `tag` option:
 
 ```bash
-$ docker run --log-driver=fluentd --log-opt fluentd-address=myhost.local:24224 --log-opt tag="mailer"
+$ docker container run --log-driver=fluentd --log-opt fluentd-address=myhost.local:24224 --log-opt tag="mailer"
 ```
 
 Docker supports some special template markup you can use when specifying a tag's value:
@@ -36,7 +36,7 @@ Aug  7 18:33:19 HOSTNAME docker/hello-world/foobar/5790672ab6a0[9103]: Hello fro
 ```
 
 At startup time, the system sets the `container_name` field and {% raw %}`{{.Name}}`{% endraw %} in
-the tags. If you use `docker rename` to rename a container, the new name is not
+the tags. If you use `docker container rename` to rename a container, the new name is not
 reflected in the log messages. Instead, these messages continue to use the
 original container name.
 
@@ -49,7 +49,7 @@ command, you get the output that follows:
 
 ```bash
 {% raw %}
-$ docker run -it --rm \
+$ docker container run -it --rm \
     --log-driver syslog \
     --log-opt tag="{{ (.ExtraAttributes nil).SOME_ENV_VAR }}" \
     --log-opt env=SOME_ENV_VAR \

@@ -31,17 +31,17 @@ automatically rotate the keys every 12 hours.
 Because the overlay networks for swarm mode use encryption keys from the manager
 nodes to encrypt the gossip communications, only containers running as tasks in
 the swarm have access to the keys. Consequently, containers started outside of
-swarm mode using `docker run` (unmanaged containers) cannot attach to the
+swarm mode using `docker container run` (unmanaged containers) cannot attach to the
 overlay network.
 
 For example:
 
 ```bash
-$ docker run --network my-multi-host-network nginx
+$ docker container run --network my-multi-host-network nginx
 
 docker: Error response from daemon: swarm-scoped network
-(my-multi-host-network) is not compatible with `docker create` or `docker
-run`. This network can only be used by a docker service.
+(my-multi-host-network) is not compatible with `docker container create` or
+`docker container run`. This network can only be used by a docker service.
 ```
 
 To work around this situation, migrate the unmanaged containers to managed

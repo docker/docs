@@ -46,7 +46,7 @@ To create the `docker` group and add your user:
 4.  Verify that you can `docker` commands without `sudo`.
 
     ```bash
-    $ docker run hello-world
+    $ docker container run hello-world
     ```
 
     This command downloads a test image and runs it in a container. When the
@@ -213,7 +213,7 @@ at `/etc/docker/daemon.json`.
 
 2.  Add a `dns` key with one or more IP addresses as values. If the file has
     existing contents, you only need to add or edit the `dns` line.
-    
+
     ```json
     {
     	"dns": ["8.8.8.8", "8.8.4.4"]
@@ -236,14 +236,14 @@ at `/etc/docker/daemon.json`.
     image:
 
     ```bash
-    $ docker pull hello-world
+    $ docker image pull hello-world
     ```
 
 5.  If necessary, verify that Docker containers can resolve an internal hostname
     by pinging it.
 
     ```bash
-    $ docker run --rm -it alpine ping -c4 <my_internal_host>
+    $ docker container run --rm -it alpine ping -c4 <my_internal_host>
 
     PING google.com (192.168.1.2): 56 data bytes
     64 bytes from 192.168.1.2: seq=0 ttl=41 time=7.597 ms

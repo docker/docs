@@ -17,7 +17,7 @@ https://www.github.com/docker/docker
 ## Examples
 
 ```bash
-$ docker history fedora
+$ docker image history fedora
 
 IMAGE          CREATED          CREATED BY                                      SIZE                COMMENT
 105182bb5e8b   5 days ago       /bin/sh -c #(nop) ADD file:71356d2ad59aa3119d   372.7 MB
@@ -27,10 +27,10 @@ IMAGE          CREATED          CREATED BY                                      
 
 ### Display comments in the image history
 
-The `docker commit` command has a **-m** flag for adding comments to the image. These comments will be displayed in the image history.
+The `docker container commit` command has a **-m** flag for adding comments to the image. These comments will be displayed in the image history.
 
 ```bash
-$ sudo docker history docker:scm
+$ sudo docker image history docker:scm
 
 IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
 2ac9d1098bf1        3 months ago        /bin/bash                                       241.4 MB            Added Apache to Fedora base image

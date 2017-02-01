@@ -80,14 +80,14 @@ For full instructions on getting Docker for various Linux distributions, see [In
 
 1. Open a command-line terminal, and run some Docker commands to verify that Docker is working as expected.
 
-    Some good commands to try are `docker version` to check that you have the latest release installed and `docker ps` to see if you have any running containers. (Probably not, since you just started.)
+    Some good commands to try are `docker version` to check that you have the latest release installed and `docker container ls` to see if you have any running containers. (Probably not, since you just started.)
 
-2. Type the `docker run hello-world` command and press RETURN.
+2. Type the `docker container run hello-world` command and press RETURN.
 
     The command does some work for you, if everything runs well, the command's
     output looks like this:
 
-        $ docker run hello-world
+        $ docker container run hello-world
         Unable to find image 'hello-world:latest' locally
         latest: Pulling from library/hello-world
         535020c3e8ad: Pull complete
@@ -107,7 +107,7 @@ For full instructions on getting Docker for various Linux distributions, see [In
            to your terminal.
 
         To try something more ambitious, you can run an Ubuntu container with:
-        $ docker run -it ubuntu bash
+        $ docker container run -it ubuntu bash
 
         Share images, automate workflows, and more with a free Docker Hub account:
         https://hub.docker.com
@@ -115,20 +115,20 @@ For full instructions on getting Docker for various Linux distributions, see [In
         For more examples and ideas, visit:
         https://docs.docker.com/userguide/
 
-3. Run `docker ps -a` to show all containers on the system.
+3. Run `docker container ls -a` to show all containers on the system.
 
-        $ docker ps -a
+        $ docker container ls -a
 
         CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
         592376ff3eb8        hello-world         "/hello"            25 seconds ago      Exited (0) 24 seconds ago                       prickly_wozniak
 
-    You should see your `hello-world` container listed in the output for the `docker ps -a` command.
+    You should see your `hello-world` container listed in the output for the `docker container ls -a` command.
 
-    The command `docker ps` shows only currently running containers. Since `hello-world` already ran and exited, it wouldn't show up with a `docker ps`.
+    The command `docker container ls` shows only currently running containers. Since `hello-world` already ran and exited, it wouldn't show up with a `docker container ls`.
 
 ## Looking for troubleshooting help?
 
-Typically, the above steps work out-of-the-box, but some scenarios can cause problems. If your `docker run hello-world` didn't work and resulted in errors, check out [Troubleshooting](/toolbox/faqs/troubleshoot.md) for quick fixes to common problems.
+Typically, the above steps work out-of-the-box, but some scenarios can cause problems. If your `docker container run hello-world` didn't work and resulted in errors, check out [Troubleshooting](/toolbox/faqs/troubleshoot.md) for quick fixes to common problems.
 
 ## Where to go next
 

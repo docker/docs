@@ -222,12 +222,12 @@ on top of the image (using a UnionFS as we saw earlier) in which your applicatio
 runs.
 
 #### What happens when you run a container?
-When you use the `docker run` CLI command or the equivalent API, the Docker Engine
+When you use the `docker container run` CLI command or the equivalent API, the Docker Engine
 client instructs the Docker daemon to run a container. This example tells the
 Docker daemon to run a container using the `ubuntu` Docker image, to remain in
 the foreground in interactive mode (`-i`), and to run the `/bin/bash` command.
 
-    $ docker run -i -t ubuntu /bin/bash
+    $ docker container run -i -t ubuntu /bin/bash
 
 
 When you run this command, Docker Engine does the following:

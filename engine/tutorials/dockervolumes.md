@@ -44,12 +44,12 @@ referenced by a container.
 ### Adding a data volume
 
 You can add a data volume to a container using the `-v` flag with the
-`docker create` and `docker run` command. You can use the `-v` multiple times
+`docker container create` and `docker container run` command. You can use the `-v` multiple times
 to mount multiple data volumes. Now, mount a single volume in your web
 application container.
 
 ```bash
-$ docker run -d -P --name web -v /webapp training/webapp python app.py
+$ docker container run -d -P --name web -v /webapp training/webapp python app.py
 ```
 
 This will create a new volume inside a container at `/webapp`.
@@ -95,7 +95,7 @@ In addition to creating a volume using the `-v` flag you can also mount a
 directory from your Docker engine's host into a container.
 
 ```bash
-$ docker run -d -P --name web -v /src/webapp:/webapp training/webapp python app.py
+$ docker container run -d -P --name web -v /src/webapp:/webapp training/webapp python app.py
 ```
 
 This command mounts the host directory, `/src/webapp`, into the container at
@@ -107,7 +107,7 @@ consistent with the expected behavior of the `mount` command.
 The `container-dir` must always be an absolute path such as `/src/docs`.
 The `host-dir` can either be an absolute path or a `name` value. If you
 supply an absolute path for the `host-dir`, Docker bind-mounts to the path
-you specify. If you supply a `name`, Docker creates a named volume by that `name`.
+you specify. If you supply a `name`, docker container creates a named volume by that `name`.
 
 A `name` value must start with an alphanumeric character,
 followed by `a-z0-9`, `_` (underscore), `.` (period) or `-` (hyphen).
@@ -123,13 +123,13 @@ auto-share your `/Users` (macOS) or `C:\Users` (Windows) directory.  So, you can
 mount files or directories on macOS using.
 
 ```bash
-docker run -v /Users/<path>:/<container path> ...
+docker container run -v /Users/<path>:/<container path> ...
 ```
 
 On Windows, mount directories using:
 
 ```bash
-docker run -v //c/<path>:/<container path>
+docker container run -v //c/<path>:/<container path>
 ```
 
 All other paths come from your virtual machine's filesystem, so if you want
@@ -148,7 +148,7 @@ Docker volumes default to mount in read-write mode, but you can also set it to
 be mounted read-only.
 
 ```bash
-$ docker run -d -P --name web -v /src/webapp:/webapp:ro training/webapp python app.py
+$ docker container run -d -P --name web -v /src/webapp:/webapp:ro training/webapp python app.py
 ```
 
 Here you've mounted the same `/src/webapp` directory but you've added the `ro`
@@ -172,7 +172,7 @@ means that a volume can be made available on any host that a container is
 started on as long as it has access to the shared storage backend, and has
 the plugin installed.
 
-One way to use volume drivers is through the `docker run` command.
+One way to use volume drivers is through the `docker container run` command.
 Volume drivers create volumes by name, instead of by path like in
 the other examples.
 
@@ -184,7 +184,7 @@ If you do not want to install `flocker`, replace `flocker` with `local` in the e
 below to use the `local` driver.
 
 ```bash
-$ docker run -d -P \
+$ docker container run -d -P \
   --volume-driver=flocker \
   -v my-named-volume:/webapp \
   --name web training/webapp python app.py
@@ -200,7 +200,7 @@ pairs in the format `o=<key>=<value>`.
 ```bash
 $ docker volume create -d flocker --opt o=size=20GB my-named-volume
 
-$ docker run -d -P \
+$ docker container run -d -P \
   -v my-named-volume:/webapp \
   --name web training/webapp python app.py
 ```
@@ -229,7 +229,7 @@ The `-v` flag can also be used to mount a single file  - instead of *just*
 directories - from the host machine.
 
 ```bash
-$ docker run --rm -it -v ~/.bash_history:/root/.bash_history ubuntu /bin/bash
+$ docker container run --rm -it -v ~/.bash_history:/root/.bash_history ubuntu /bin/bash
 ```
 
 This will drop you into a bash shell in a new container, you will have your bash
@@ -255,19 +255,19 @@ While this container doesn't run an application, it reuses the `training/postgre
 image so that all containers are using layers in common, saving disk space.
 
 ```bash
-$ docker create -v /dbdata --name dbstore training/postgres /bin/true
+$ docker container create -v /dbdata --name dbstore training/postgres /bin/true
 ```
 
 You can then use the `--volumes-from` flag to mount the `/dbdata` volume in another container.
 
 ```bash
-$ docker run -d --volumes-from dbstore --name db1 training/postgres
+$ docker container run -d --volumes-from dbstore --name db1 training/postgres
 ```
 
 And another:
 
 ```bash
-$ docker run -d --volumes-from dbstore --name db2 training/postgres
+$ docker container run -d --volumes-from dbstore --name db2 training/postgres
 ```
 
 In this case, if the `postgres` image contained a directory called `/dbdata`
@@ -284,13 +284,13 @@ You can also extend the chain by mounting the volume that came from the
 `dbstore` container in yet another container via the `db1` or `db2` containers.
 
 ```bash
-$ docker run -d --name db3 --volumes-from db1 training/postgres
+$ docker container run -d --name db3 --volumes-from db1 training/postgres
 ```
 
 If you remove containers that mount volumes, including the initial `dbstore`
 container, or the subsequent containers `db1` and `db2`, the volumes will not
 be deleted.  To delete the volume from disk, you must explicitly call
-`docker rm -v` against the last container with a reference to the volume. This
+`docker container rm -v` against the last container with a reference to the volume. This
 allows you to upgrade, or effectively migrate data volumes between containers.
 
 > **Note:** Docker will not warn you when removing a container *without*
@@ -309,7 +309,7 @@ backups, restores or migrations.  You do this by using the
 like so:
 
 ```bash
-$ docker run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
+$ docker container run --rm --volumes-from dbstore -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /dbdata
 ```
 
 Here you've launched a new container and mounted the volume from the
@@ -323,13 +323,13 @@ You could then restore it to the same container, or another that you've made
 elsewhere. Create a new container.
 
 ```bash
-$ docker run -v /dbdata --name dbstore2 ubuntu /bin/bash
+$ docker container run -v /dbdata --name dbstore2 ubuntu /bin/bash
 ```
 
 Then un-tar the backup file in the new container`s data volume.
 
 ```bash
-$ docker run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
+$ docker container run --rm --volumes-from dbstore2 -v $(pwd):/backup ubuntu bash -c "cd /dbdata && tar xvf /backup/backup.tar --strip 1"
 ```
 
 You can use the techniques above to automate backup, migration and
@@ -344,7 +344,7 @@ source. When the container is deleted, you should instruct the Docker Engine dae
 to clean up anonymous volumes. To do this, use the `--rm` option, for example:
 
 ```bash
-$ docker run --rm -v /foo -v awesome:/bar busybox top
+$ docker container run --rm -v /foo -v awesome:/bar busybox top
 ```
 
 This command creates an anonymous `/foo` volume. When the container is removed,

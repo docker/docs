@@ -126,7 +126,7 @@ command=/bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFO
 You can now build the image using this command;
 
 ```bash
-$ docker build -t mysupervisord .
+$ docker image build -t mysupervisord .
 ```
 
 ## Running your Supervisor container
@@ -134,7 +134,7 @@ $ docker build -t mysupervisord .
 Once you have built your image you can launch a container from it.
 
 ```bash
-$ docker run -p 22 -p 80 -t -i mysupervisord
+$ docker container run -p 22 -p 80 -t -i mysupervisord
 2013-11-25 18:53:22,312 CRIT Supervisor running as root (no user in config file)
 2013-11-25 18:53:22,312 WARN Included extra file "/etc/supervisor/conf.d/supervisord.conf" during parsing
 2013-11-25 18:53:22,342 INFO supervisord started with pid 1
@@ -143,7 +143,7 @@ $ docker run -p 22 -p 80 -t -i mysupervisord
 ...
 ```
 
-You launched a new container interactively using the `docker run` command.
+You launched a new container interactively using the `docker container run` command.
 That container has run Supervisor and launched the SSH and Apache daemons with
 it. We've specified the `-p` flag to expose ports 22 and 80. From here we can
 now identify the exposed ports and connect to one or both of the SSH and Apache
