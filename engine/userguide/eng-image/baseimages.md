@@ -59,7 +59,7 @@ Assuming you built the "hello" executable example [from the Docker GitHub exampl
 
 NOTE: Because Docker for Mac and Docker for Windows use a Linux VM, you must compile this code using a Linux toolchain to end up with a Linux binary. Not to worry, you can quickly pull down a Linux image and a build environment and build within it:
 
-    $ docker run --rm -it -v $PWD:/build ubuntu:16:04
+    $ docker run --rm -it -v $PWD:/build ubuntu:16.04
     container# apt-get install build-essential
     container# cd /build
     container# gcc -o hello -static hello.c
