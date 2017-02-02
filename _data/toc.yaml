@@ -799,8 +799,16 @@ toc:
     title: Networking in Compose
   - path: /compose/production/
     title: Using Compose in Production
-  - path: /compose/compose-file/
-    title: Compose File Reference
+  - sectiontitle: Compose File Reference
+    section:
+    - path: /compose/compose-file/
+      title: Version 3 reference
+    - path: /compose/compose-file/compose-file-v2/
+      title: Version 2 reference
+    - path: /compose/compose-file/compose-file-v1/
+      title: Version 1 reference
+    - path: /compose/compose-file/compose-versioning/
+      title: About versions and upgrading
   - sectiontitle: Command-line Reference
     section:
     - path: /compose/reference/overview/
