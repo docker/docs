@@ -69,7 +69,6 @@ for its configurable options, if applicable.
 | `splunk`    | Writes log messages to `splunk` using the HTTP Event Collector.|
 | `etwlogs`   | Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms. |
 | `gcplogs`   | Writes log messages to Google Cloud Platform (GCP) Logging.    |
-| `nats`      | NATS logging driver for Docker. Publishes log entries to a NATS server.|
 
 ## Limitations of logging drivers
 
@@ -123,6 +122,13 @@ This example starts an `alpine` container with the `none` log driver.
 ```bash
 $ docker run -it --log-driver none alpine ash
 ```
+
+### Options for all drivers
+| Option            | Description | Example value |
+|-------------------|-------------|---------------|
+| `mode`            | Sets the logging mode, accepted values are `blocking` (default), and `non-blocking`. When `non-blocking` is set, if the log buffer fills up, log messages will be lost. How messages are dropped is left undefined. | `--log-opt mode=non-blocking`
+| `max-buffer-size` | Applicable only when `mode` is set to `non-blocking`, this sets the maxmimum size of the log buffer. Once this size is reach, log messages will be dropped. | `--log-opt max-buffer-size 5m`
+
 
 ## `json-file`
 
