@@ -6,6 +6,7 @@ redirect_from:
 - /installation/ubuntulinux/
 - /engine/installation/linux/ubuntulinux/
 title: Get Docker for Ubuntu
+toc_max: 5
 ---
 
 To get started with Docker on Ubuntu, make sure you
