@@ -207,6 +207,22 @@ To remove a team's access to the repository, click the **trashcan** icon next to
 | Read/write  | All of the above, plus start, stop, redeploy, and scale  |
 | Admin | All of the above plus, open a terminal window, terminate, update, and create |
 
+## Machine user accounts in organizations
+
+Your organization might find it useful to have a dedicated account that is used for programmatic or scripted access to your organization's resources using the [Docker Cloud APIs](/apidocs/docker-cloud/).
+
+> **Note**: While these accounts are sometimes called "robot" accounts or "bots", these users may not be _created_ using scripts.
+
+To create a "robot" or machine account for your organization:
+
+1. Create a new Docker ID for the machine user. Verify the email address associated with the user.
+2. If necessary, create a new Team for the machine user, and grant that team access to the required resources.
+
+    This method is recommended because it makes it easier for administrators to
+    understand the machine user's access, and modify it without affecting other
+    users' access.
+
+3. Add the machine user to the new Team.
 
 ## Modify a team
 
