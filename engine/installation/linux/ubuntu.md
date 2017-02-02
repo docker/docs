@@ -92,6 +92,7 @@ Docker from the repository.
     **Do not use these unstable repositories on production systems or for non-testing workloads.**
 
     ```bash
+    $ sudo apt-get install software-properties-common
     $ sudo add-apt-repository \
            "deb https://apt.dockerproject.org/repo/ \
            ubuntu-$(lsb_release -cs) \
