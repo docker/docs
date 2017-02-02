@@ -4,7 +4,7 @@ keywords: azure faqs
 title: Docker for Azure Frequently asked questions (FAQ)
 ---
 
-### Stable and beta channels
+## Stable and beta channels
 
 Two different download channels are available for Docker for Azure:
 
@@ -30,7 +30,7 @@ No, at this time we only support the default Docker for Azure VHD.
 
 Not at this time, but it is on our roadmap for future releases.
 
-### Which Azure regions will Docker for Azure work with.
+### Which Azure regions will Docker for Azure work with?
 
 Docker for Azure should work with all supported Azure Marketplace regions.
 
@@ -38,7 +38,7 @@ Docker for Azure should work with all supported Azure Marketplace regions.
 
 All container logs are aggregated within the `xxxxlog` storage account.
 
-### I have a problem/bug where do I report it?
+### Where do I report problems or bugs?
 
 Send an email to <docker-for-iaas@docker.com> or post to the [Docker for Azure](https://github.com/docker/for-azure) GitHub repositories.
 
@@ -60,7 +60,7 @@ _Please note that your output will be slightly different from the above, dependi
 
 Docker for Azure sends anonymized minimal analytics to Docker (heartbeat). These analytics are used to monitor adoption and are critical to improve Docker for Azure.
 
-### How to run administrative commands?
+### How do I run administrative commands?
 
 By default when you SSH into a manager, you will be logged in as the regular username: `docker` - It is possible however to run commands with elevated privileges by using `sudo`.
 For example to ping one of the nodes, after finding its IP via the Azure/Azure portal (e.g. 10.0.0.4), you could run:

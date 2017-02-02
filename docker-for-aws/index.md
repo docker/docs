@@ -51,10 +51,10 @@ channels, see the [FAQs](/docker-for-aws/faqs.md#stable-and-beta-channels).
   </tr>
   <tr valign="top">
   <td width="50%">
-  <a class="button darkblue-btn" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/stable/Docker.tmpl" data-rel="Stable-1" target="blank" id="aws-deploy">Deploy Docker for AWS (stable)</a>
+  <a class="button darkblue-btn" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/stable/Docker.tmpl" data-rel="Stable-1" target="blank" class="aws-deploy">Deploy Docker for AWS (stable)</a>
   </td>
   <td width="50%">
-  <a class="button darkblue-btn" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/beta/Docker.tmpl" data-rel="Beta-14" target="blank" id="aws-deploy">Deploy Docker for AWS (beta)</a>
+  <a class="button darkblue-btn" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/beta/Docker.tmpl" data-rel="Beta-14" target="blank" class="aws-deploy">Deploy Docker for AWS (beta)</a>
   </td>
   </tr>
 </table>

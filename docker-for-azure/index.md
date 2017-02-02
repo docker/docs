@@ -42,10 +42,10 @@ channels, see the [FAQs](/docker-for-azure/faqs.md#stable-and-beta-channels).
   </tr>
   <tr valign="top">
   <td width="50%">
-  <a class="button darkblue-btn" href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fdownload.docker.com%2Fazure%2Fstable%2FDocker.tmpl" data-rel="Stable-1" target="blank" id="azure-deploy">Deploy Docker for Azure (stable)</a>
+  <a class="button darkblue-btn" href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fdownload.docker.com%2Fazure%2Fstable%2FDocker.tmpl" data-rel="Stable-1" target="blank" class="azure-deploy">Deploy Docker for Azure (stable)</a>
   </td>
   <td width="50%">
-  <a class="button darkblue-btn" href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fdownload.docker.com%2Fazure%2Fbeta%2FDocker.tmpl" data-rel="Beta-14" target="blank" id="azure-deploy">Deploy Docker for Azure (beta)</a>
+  <a class="button darkblue-btn" href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fdownload.docker.com%2Fazure%2Fbeta%2FDocker.tmpl" data-rel="Beta-14" target="blank" class="azure-deploy">Deploy Docker for Azure (beta)</a>
   </td>
   </tr>
 </table>

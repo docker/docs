@@ -4,7 +4,7 @@ keywords: aws faqs
 title: Docker for AWS Frequently asked questions (FAQ)
 ---
 
-### Stable and beta channels
+## Stable and beta channels
 
 Two different download channels are available for Docker for AWS:
 
@@ -26,7 +26,7 @@ Two different download channels are available for Docker for AWS:
 
 No, at this time we only support the default Docker for AWS AMI.
 
-### How to use Docker for AWS with an AWS account in an EC2-Classic region.
+### How can I use Docker for AWS with an AWS account in an EC2-Classic region?
 
 If you have an AWS account that was created before **December 4th, 2013** you have what is known as an **EC2-Classic** account on regions where you have previously deployed resources. **EC2-Classic** accounts don't have default VPC's or the associated subnets, etc. This causes a problem when using our CloudFormation template  because we are using the [Fn:GetAZs](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getavailabilityzones.html) function they provide to determine which availability zones you have access too. When used in a region where you have **EC2-Classic**, this function will return all availability zones for a region, even ones you don't have access too. When you have an **EC2-VPC** account, it will return only the availability zones you have access to.
 
@@ -61,7 +61,7 @@ There are a few work arounds that you can try to get Docker for AWS up and runni
 
 Not at this time, but it is on our roadmap for future releases.
 
-### Which AWS regions will this work with.
+### Which AWS regions will this work with?
 
 Docker for AWS should work with all regions except for AWS China, which is a little different than the other regions.
 
@@ -69,7 +69,7 @@ Docker for AWS should work with all regions except for AWS China, which is a lit
 
 All of Amazons regions have at least 2 AZ's, and some have more. To make sure Docker for AWS works in all regions, only 2 AZ's are used even if more are available.
 
-### What do I do if I get "KeyPair error" on AWS?
+### What do I do if I get `KeyPair error` on AWS?
 As part of the prerequisites, you need to have an SSH key uploaded to the AWS region you are trying to deploy to.
 For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 
@@ -77,7 +77,7 @@ For more information about adding an SSH key pair to your account, please refer 
 
 All container logs are aggregated within [AWS CloudWatch](https://aws.amazon.com/cloudwatch/).
 
-### I have a problem/bug where do I report it?
+### Where do I report problems or bugs?
 
 Send an email to <docker-for-iaas@docker.com> or post to the [Docker for AWS](https://github.com/docker/for-aws) GitHub repositories.
 
@@ -99,7 +99,7 @@ _Please note that your output will be slightly different from the above, dependi
 
 Docker for AWS sends anonymized minimal analytics to Docker (heartbeat). These analytics are used to monitor adoption and are critical to improve Docker for AWS.
 
-### How to run administrative commands?
+### How do I run administrative commands?
 
 By default when you SSH into a manager, you will be logged in as the regular username: `docker` - It is possible however to run commands with elevated privileges by using `sudo`.
 For example to ping one of the nodes, after finding its IP via the Azure/AWS portal (e.g. 10.0.0.4), you could run:
