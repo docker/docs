@@ -201,12 +201,12 @@ ng\:form {
 							</ul>
               </div>
             </div>
-            <div {% if page.notoc %} class="col-xs-12 col-sm-9 col-md-10" {% else %} class="col-xs-12 col-sm-9 col-md-8 col-xl-9" {% endif %} >
+            <div class="col-xs-12 col-sm-9 col-md-8 col-xl-9">
               <section class="section" id="DocumentationText">
 								{% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
 								{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
               {% include read_time.html %}
-              {{ content }}
+							{{ content }}
 							{% if page.noratings != true %}
 							<div style="text-align: center; margin-top: 50px">
 								<img src="/images/chat.png" alt="chat icon" style="margin-right: 10px">
@@ -252,26 +252,34 @@ ng\:form {
 						 }
 						 </script>
             </div>
-						{% if page.notoc != true %}
-						<div class="hidden-xs hidden-sm col-md-2 col-xl-1 tableofcontents_section">
-                <section class="section" id="TableOfContentsSection">
+						<div class="hidden-xs hidden-sm col-md-2 col-xl-1 right_column_section">
+                <section class="section" id="RightColumnSection">
 						    <span class="title_section">
-								  <form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="/search/">
+									<div id="search-div">
+								  	<form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="/search/">
 											<input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="Search the docs" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
 											<div id="autocompleteContainer">
 			                	<div id="autocompleteResults"></div>
 			                </div>
-								    <button type="submit" class="search-submit btn btn-default">Search</button>
-								  </form>
+								      <button type="submit" class="search-submit btn btn-default">Search</button>
+								    </form>
+								  </div>
 						    </span>
-                {% if edit_url != "" %}
-                  <span><a href="{{ edit_url }}" class="button darkblue-btn nomunge" style="color:#FFFFFF; width:100%; margin: 0px;">Edit This Page</a></span>
-                {% endif %}
-                <nav id="TableOfContents">
-								</nav>
+								<div id="feedback-links">
+									<ul>
+										{% if edit_url != "" %}<li><a href="{{ edit_url }}">&#9998;&nbsp;Edit this page</a></li>{% endif %}
+  									<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge">&#10003;&nbsp;Request docs changes</a></li>
+  									<li><a href="https://www.docker.com/docker-support-services">&#x0003F;&nbsp;Get support</a></li>
+  								</ul>
+								</div>
+								{% unless page.notoc %}
+								{% assign my_min = page.toc_min | default: site.toc_min | default: 2 %}
+								{% assign my_max = page.toc_max | default: site.toc_max | default: 3 %}
+								{% assign my_name = page.url | default: "unnamed" %}
+								<div id="side-toc"><div id="side-toc-title">On this page:</div><div id="side-toc-contents">{% include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name %}</div></div>
+								{% endunless %}
                 </section>
             </div>
-						{% endif %}<!-- end check for notoc != true -->
           </div>
         </div>
       </div>

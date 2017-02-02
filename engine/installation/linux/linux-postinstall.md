@@ -8,11 +8,6 @@ title: Post-installation steps for Linux
 This section contains optional procedures for configuring Linux hosts to work
 better with Docker.
 
-* [Manage Docker as a non-root user](#manage-docker-as-a-non-root-user)
-* [Configure Docker to start on boot](#configure-docker-to-start-on-boot)
-* [Allow access to the remote API through a firewall](#allow-access-to-the-remote-api-through-a-firewall)
-* [Troubleshooting](#troubleshooting)
-
 ## Manage Docker as a non-root user
 
 The `docker` daemon binds to a Unix socket instead of a TCP port. By default
@@ -213,7 +208,7 @@ at `/etc/docker/daemon.json`.
 
 2.  Add a `dns` key with one or more IP addresses as values. If the file has
     existing contents, you only need to add or edit the `dns` line.
-    
+
     ```json
     {
     	"dns": ["8.8.8.8", "8.8.4.4"]
