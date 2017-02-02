@@ -1,6 +1,8 @@
 ---
 title: "Sorry, we can't find that page"
 noratings: true
+notoc: true
+tree: false
 ---
 
 <script language="JavaScript">

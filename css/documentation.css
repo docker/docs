@@ -457,3 +457,9 @@ img.with-border {
   color: #155A74;
   padding-bottom: 5px;
 }
+
+#site-generation {
+  font-size: 9px;
+  color: #999;
+  font-style: italic;
+}
