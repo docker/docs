@@ -27703,7 +27703,6 @@ ul,
 ol,
 dl {
     font-family: inherit;
-    font-size: 1rem;
     line-height: 1.6;
     list-style-position: outside;
     margin-bottom: 1.25rem
@@ -30054,8 +30053,6 @@ header .nav-global a.button:hover {
 }
 
 .nav-sub a {
-    font-size: 0.9375rem;
-    font-weight: 100;
     color: #fff;
     padding: 0.625rem 1.25rem;
     background: #1088b1;
