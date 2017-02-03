@@ -72,8 +72,9 @@ Note that access to Docker for Azure and Azure happens through a shell container
 
 
 ### What are the different Azure Regions?
-All regions can be found here: https://azure.microsoft.com/en-us/regions/
+All regions can be found here: [Microsoft Azure Regions](https://azure.microsoft.com/en-us/regions/)
 An exerpt of the above regions to use when you create your service principal are:
+
 ```
 australiaeast
 australiasoutheast
