@@ -309,8 +309,6 @@ $ docker inspect \
 
 This will give you the IP address of the container, for example:
 
-To get the IP address of a container use:
-
 ```bash
 {% raw %}
 $ docker inspect \
