@@ -34,13 +34,13 @@ forwards your commands directly to the Docker instances running in the swarm.
 
 6. Enter any additional provider-specific information, such as region.
 
-    > **Note**: SSH keys are usually tied to a specific region, so be sure you have appropriate SSH keys available on the region you select.
+    > **Note**: The SSH keys that appear in this wizard filtered by the region you select. Ensure that you have appropriate SSH keys available on the region you select.
 
 7. Choose how many swarm managers and swarm worker nodes to deploy.
 8. Select the instance sizes for the managers, and for the workers.
 9. Select the SSH key to use to connect to the nodes.
 
-    The list contains any SSH keys that your `dockercloud-user` has access to on your linked cloud services provider.
+    The list contains any SSH keys that you have access to on your linked cloud services provider. Select the one for which you have the private key locally.
 
 10. Click **Create**.
 
