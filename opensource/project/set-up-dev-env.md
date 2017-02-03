@@ -178,7 +178,8 @@ can take over 15 minutes to complete.
    background process. You'll find these options useful when debugging code
    development.
 
-   > **Note**: Use the following shorthand command to automate the build, install and run steps above.
+   > **Note**: The following command automates the `build`,
+   > `install`, and `run` steps above.
 
    ```none
    hack/make.sh binary install-binary run
