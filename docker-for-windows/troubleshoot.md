@@ -268,6 +268,71 @@ container on the native Docker daemon, an error occurs:
    See 'C:\Program Files\Docker\docker.exe run --help'.
    ```
 
+### Limitations of Windows containers for `localhost` and published ports
+
+Docker for Windows provides the option to switch Windows and Linux containers.
+If you are using Windows containers, keep in mind that there are some
+limitations with regard to networking due to the current implementation of
+Windows NAT (WinNAT). These limitations may potentially resolve as the Windows
+containers project evolves.
+
+One thing you may encounter rather immediately is that published ports on
+Windows containers do not do loopback to the local host. Instead, container
+endpoints are only reachable from the host using the container's IP and port.
+
+So, in a scenario where you use Docker to pull an image and run a webserver with
+a command like this:
+
+```
+docker run -d -p 80:80 --name webserver nginx  
+```
+
+Using `curl http://localhost`, or pointing your web browser at
+`http://localhost` will not display the `nginx` web page (as it would do with
+Linux containers).
+
+In order to reach a Windows container from the local host, you need to specify
+the IP address and port for the container that is running the service.
+
+You can get the container IP address by using [`docker inspect`](/engine/reference/commandline/inspect.md) with some
+`--format` options and the ID or name of the container. For the example above,
+the command would look like this, using the name we gave to the container
+(`webserver`) instead of the container ID:
+
+```bash
+{% raw %}
+$ docker inspect \
+  --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
+  webserver
+{% endraw %}
+```
+
+This will give you the IP address of the container, for example:
+
+To get the IP address of a container use:
+
+```bash
+{% raw %}
+$ docker inspect \
+  --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
+  webserver
+
+172.17.0.2
+{% endraw %}
+```
+
+Now you can connect to the webserver by using `http://172.17.0.2:80` (or simply
+`http://172.17.0.2`, since port `80` is the default HTTP port.)
+
+For more information, see:
+
+* Docker for Windows issue on GitHub: [Port binding does not work for locahost](https://github.com/docker/for-win/issues/458)
+
+* [Published Ports on Windows Containers Don't Do Loopback](https://blog.sixeyed.com/published-ports-on-windows-containers-dont-do-loopback/)
+
+* [Windows NAT capabilities and limitations](https://blogs.technet.microsoft.com/virtualization/2016/05/25/windows-nat-winnat-capabilities-and-limitations/)
+
+
 ### Running Docker for Windows in nested virtualization scenarios
 
 Docker for Windows can run inside a Windows 10 virtual machine (VM) running on

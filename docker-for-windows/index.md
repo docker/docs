@@ -119,14 +119,14 @@ guarantees (i.e., not officially supported). For more information, see
 
 Looking for information on using Windows containers?
 
+* [Switch between Windows and Linux containers](#switch-between-windows-and-linux-containers) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
+<p />
 * [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
 provides a tutorial on how to set up and run Windows containers on Windows 10 or
 with Windows Server 2016. It shows you how to use a MusicStore application with
 Windows containers.
 <p />
 * [Setup - Windows Server 2016 (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/Setup-Server2016.md) specifically describes environment setup.
-<p />
-* [Switch between Windows and Linux containers](#switch-between-windows-and-linux-containers) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
 <p />
 * Docker Container Platform for Windows Server 2016 [articles and blog posts](https://www.docker.com/microsoft/) on the Docker website
 
@@ -705,6 +705,9 @@ If you are interested in working with Windows containers, here are some guides t
   > **Disclaimer:** This lab is still in work, and is based off of the blog, but
   > you can test and leverage the example walkthroughs now, if you want to start
   > experimenting. Please checking back as the lab evolves.
+
+* This troubleshooting issue is useful for understanding how to connect to Windows containers from the local host:
+[Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)
 
 #### About the Docker Windows containers specific dialogs
 
