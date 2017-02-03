@@ -69,3 +69,34 @@ $ sudo ping 10.0.0.4
 ```
 
 Note that access to Docker for Azure and Azure happens through a shell container that itself runs on Docker.
+
+
+### What are the different Azure Regions?
+All regions can be found here: https://azure.microsoft.com/en-us/regions/
+An exerpt of the above regions to use when you create your service principal are:
+```
+australiaeast
+australiasoutheast
+brazilsouth
+canadacentral
+canadaeast
+centralindia
+centralus
+eastasia
+eastus
+eastus2
+japaneast
+japanwest
+northcentralus
+northeurope
+southcentralus
+southeastasia
+southindia
+uksouth
+ukwest
+westcentralus
+westeurope
+westindia
+westus
+westus2
+```

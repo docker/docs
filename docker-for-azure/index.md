@@ -10,7 +10,7 @@ redirect_from:
 
 ## Quickstart
 
-If your account has the [proper permissions](https://docs.docker.com/docker-for-azure/#/prerequisites), you can generate the [Service Principal](https://docs.docker.com/docker-for-azure/#/service-principal) and
+If your account has the [proper permissions](#prerequisites), you can generate the [Service Principal](#service-principal) and
 then use the below button from the stable or beta channel to bootstrap Docker for Azure using Azure Resource Manager. For more about stable and beta channels, see the [FAQs](/docker-for-azure/faqs.md#stable-and-beta-channels).
 
 <table style="width:100%">
@@ -81,7 +81,7 @@ If you have multiple Azure subscriptions, make sure you're creating the Service 
 
 * `sp-name` is the name of the authentication app that the script creates with Azure. The name is not important, simply choose something you'll recognize in the Azure portal. Example: `sp1`.
 * `rg-name` is the name of the new resource group that will be created to deploy the resources (VMs, networks, storage accounts) associated with the swarm. The Service Principal will be scoped to this resource group. Example: `swarm1`.
-* `rg-region` is the name of Azure's region/location where the resource group will be created. This needs to be one of the regions supported by Azure e.g. `westus`, `centralus`, `eastus`.
+* `rg-region` is the name of Azure's region/location where the resource group will be created. This needs to be one of the regions supported by Azure e.g. `westus`, `centralus`, `eastus`. See our [FAQs](/docker-for-azure/faqs.md#what-are-the-different-azure-regions) for a list of regions.
 
 While `rg-name` and `rg-region` are optional, it's highly recommended that you create the resource group up front and scope the service principal to that specific resource group.
 
