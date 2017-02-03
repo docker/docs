@@ -1,5 +1,5 @@
 ---
-title: All Page Links
+layout: null
 hide_from_sitemap: true
 layout: null
 ---
