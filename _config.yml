@@ -32,6 +32,7 @@ defaults:
       enginebranch: 1.13.x
       toc_min: 2
       toc_max: 3
+      tree: true
   - scope:
       path: "compose"
     values:
