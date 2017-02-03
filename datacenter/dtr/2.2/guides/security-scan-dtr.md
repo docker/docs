@@ -13,24 +13,24 @@ and an administrator configures it for your DTR instance. If you do not see
 security scan results available on your repositories, your organization may not
 have purchased the Security Scanning feature or it may be disabled.
 
-> **Tip**: Only users with write access to a repository can manually start a scan. Users with read-only access can view the scan results, but cannot start a new scan.
+> **Tip**: Only users with write access to a repository can manually start a
+scan. Users with read-only access can view the scan results, but cannot start
+a new scan.
 
 ## The Docker Security Scan process
 
-Scans run either on demand when a user clicks the **Start Scan** links or **Scan** button, or automatically on any `docker push` to the repository.
+Scans run either on demand when a user clicks the **Start Scan** links or
+**Scan** button, or automatically on any `docker push` to the repository.
 
 First the scanner performs a binary scan on each layer of the image, identifies
 the software components in each layer, and indexes the SHA of each component. A
 binary scan evaluates the components on a bit-by-bit level, so vulnerable
-components are discovered no matter what they're named, even if they're
-statically-linked, and regardless of if they're included on a distribution
-manifest.
+components are discovered no matter what they're named or statically-linked.
 
-The scan then compares the SHA of each component against the Common
-Vulnerabilities and Exposures (CVE®) database installed on your DTR instance.
-The CVE database is a "dictionary" of known information security
-vulnerabilities. When the CVE database is updated, the service reviews the
-indexed components for any that match newly discovered vulnerabilities.
+The scan then compares the SHA of each component against the US National
+Vulnerability Database that is installed on your DTR instance. when
+this database is updated, DTR reviews the indexed components for newly
+discovered vulnerabilities.
 
 Most scans complete within an hour, however larger repositories may take longer
 to scan depending on your system resources.
@@ -46,7 +46,7 @@ are reported in the repository's **Images** tab after the scan finishes.
 
 ## Manual scanning
 
-If your administrator enabled Docker Security Scanning but disabled automatic
+If your repository owner enabled Docker Security Scanning but disabled automatic
 scanning, you can manually start a scan for images in repositories to which you
 have `write` access.
 
@@ -57,7 +57,8 @@ To start a security scan:
 3. Locate the image tag that you want to scan.
 4. In the **Vulnerabilities** column, click **Start a scan**.
 
-DTR begins the scanning process. You may need to refresh the page to see the results once the scan is complete.
+DTR begins the scanning process. You may need to refresh the page to see the
+results once the scan is complete.
 
 ## Change the scanning mode
 
@@ -82,8 +83,13 @@ Once DTR has run a security scan for an image, you can view the results.
 The **Images** tab for each repository includes a summary of the most recent
 scan results for each image.
 
-- A green shield icon with a check mark indicates that the scan did not find any vulnerabilities.
-- A red or orange shield icon indicates that vulnerabilities were found, and the number of vulnerabilities is included on that same line.
+- A green shield icon with a check mark indicates that the scan did not find
+any vulnerabilities.
+- A red or orange shield icon indicates that vulnerabilities were found, and
+the number of vulnerabilities is included on that same line.
+
+If the vulnerability scan can't detect the version of a component, it reports
+the vulnerabilities for all versions of that component.
 
 From the **Images** tab you can click **View details** for a specific tag to see
 the full scan results. The top of the page also includes metadata about the
@@ -105,7 +111,9 @@ by the Dockerfile.
     > **Tip**: The layers view can be long, so be sure
     to scroll down if you don't immediately see the reported vulnerabilities.
 
-- The **Components** view lists the individual component libraries indexed by the scanning system, in order of severity and number of vulnerabilities found, most vulnerable first.
+- The **Components** view lists the individual component libraries indexed by
+the scanning system, in order of severity and number of vulnerabilities found,
+most vulnerable first.
 
     Click on an individual component to view details about the vulnerability it
     introduces, including a short summary and a link to the official CVE
