@@ -35,7 +35,6 @@ are created:
 
 | Name   | Type    | Description                                                                            |
 |:-------|:--------|:---------------------------------------------------------------------------------------|
-| dtr-br | bridge  | Allows DTR components on the same node to communicate with each other in a secure way  |
 | dtr-ol | overlay | Allows DTR components running on different nodes to communicate, to replicate DTR data |
 
 
@@ -43,15 +42,14 @@ are created:
 
 DTR uses these named volumes for persisting data:
 
-| Volume name                         | Description                                                                      |
-|:------------------------------------|:---------------------------------------------------------------------------------|
-| dtr-ca-&lt;replica_id&gt;           | Root key material for the DTR root CA that issues certificates                   |
-| dtr-etcd-&lt;replica_id&gt;         | DTR configuration data                                                           |
-| dtr-notary-&lt;replica_id&gt;       | Certificate and keys for the Notary components                                   |
-| dtr-postgres-&lt;replica_id&gt;     | DTR configuration data                                                           |
-| dtr-registry-&lt;replica_id&gt;     | Docker images data, if DTR is configured to store images on the local filesystem |
-| dtr-rethink-&lt;replica_id&gt;      | Repository metadata                                                              |
-| dtr-nfs-registry-&lt;replica_id&gt; | Docker images data, if DTR is configured to store images on NFS                  |
+| Volume name                           | Description                                                                      |
+|:--------------------------------------|:---------------------------------------------------------------------------------|
+| dtr-ca-&lt;replica_id&gt;             | Root key material for the DTR root CA that issues certificates                   |
+| dtr-notary-&lt;replica_id&gt;         | Certificate and keys for the Notary components                                   |
+| dtr-nautilus-store-&lt;replica_id&gt; | Vulnerability scans data                                                         |
+| dtr-registry-&lt;replica_id&gt;       | Docker images data, if DTR is configured to store images on the local filesystem |
+| dtr-rethink-&lt;replica_id&gt;        | Repository metadata                                                              |
+| dtr-nfs-registry-&lt;replica_id&gt;   | Docker images data, if DTR is configured to store images on NFS                  |
 
 You can customize the volume driver used for these volumes, by creating the
 volumes before installing DTR. During the installation, DTR checks which volumes
@@ -70,6 +68,7 @@ You can also configure DTR to use these storage backends:
 * NFS
 * Amazon S3
 * Cleversafe
+* Google Cloud Storage
 * OpenStack Swift
 * Microsoft Azure
 

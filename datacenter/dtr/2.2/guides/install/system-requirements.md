@@ -10,17 +10,17 @@ Before installing, be sure your infrastructure has these requirements.
 ## Software requirements
 
 You can only install DTR on a node that is being managed by Docker Universal
-Control Plane 2.1.
+Control Plane.
 
 ## Ports used
 
 When installing DTR on a node, make sure the following ports are open on that
 node:
 
-| Direction | Port | Purpose                               |
-|:---------:|:-----|:--------------------------------------|
-|    in     | 80   | Web app and API client access to DTR. |
-|    in     | 443  | Web app and API client access to DTR. |
+| Direction | Port    | Purpose                               |
+|:---------:|:--------|:--------------------------------------|
+|    in     | 80/tcp  | Web app and API client access to DTR. |
+|    in     | 443/tcp | Web app and API client access to DTR. |
 
 These ports are configurable when installing DTR.
 
