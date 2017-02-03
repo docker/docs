@@ -69,7 +69,7 @@ For example to ping one of the nodes, after finding its IP via the Azure/Azure p
 $ sudo ping 10.0.0.4
 ```
 
-Note that access to Docker for Azure and Azure happens through a shell container that itself runs on Docker.
+> **Note**: Access to Docker for Azure and Azure happens through a shell container that itself runs on Docker.
 
 
 ## What are the different Azure Regions?
