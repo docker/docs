@@ -195,17 +195,22 @@ ng\:form {
         <div class="container-fluid">
           <div class="row">
             <div class="col-xs-12 col-sm-3 col-md-2 col-xl-2 docsidebarnav_section">
-              <div class="region region-hero-sub"><ul class="nav-sub">
-								{% assign tree = site.data.toc.toc %}
-								{% include tree.html %}
-							</ul>
+              <div class="region region-hero-sub">
+								{% if page.tree == false %}
+									<ul class="nav-sub"><li class="leaf"><a href="/">Back to the index</a></li></ul>
+								{% else %}
+									<ul class="nav-sub">
+									{% assign tree = site.data.toc.toc %}
+									{% include tree.html %}
+									</ul>
+								{% endif %}
               </div>
             </div>
             <div class="col-xs-12 col-sm-9 col-md-8 col-xl-9">
               <section class="section" id="DocumentationText">
 								{% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
 								{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
-              {% include read_time.html %}
+              {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
 							{{ content }}
 							{% if page.noratings != true %}
 							<div style="text-align: center; margin-top: 50px">
@@ -391,6 +396,7 @@ background-image: linear-gradient(to bottom, #75ae4c, #99c47c);
         </div>
         <div class="footer-copyright">
           <p class="copyright">Copyright &copy; {{ 'now' | date: "%Y" }} Docker Inc. All rights reserved.</p>
+					<p id="site-generation">Site generated {{ site.time}}.</p>
         </div>
       </div>
     </div>
