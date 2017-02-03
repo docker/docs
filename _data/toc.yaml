@@ -1008,6 +1008,8 @@ manuals:
       title: Using Docker Cloud on AWS
   - title: Cloud API reference
     path: /apidocs/docker-cloud/
+  - title: Cloud stack file YAML reference
+    path: /docker-cloud/apps/stack-yaml-reference/
   - path: /docker-cloud/slack-integration/
     title: Docker Cloud notifications in Slack
   - path: /apidocs/docker-cloud/
