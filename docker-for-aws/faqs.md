@@ -22,11 +22,11 @@ Two different download channels are available for Docker for AWS:
   stable, often one or more per month. Usage statistics and crash reports are sent
   by default. You do not have the option to disable this on the beta channel.
 
-### Can I use my own AMI?
+## Can I use my own AMI?
 
 No, at this time we only support the default Docker for AWS AMI.
 
-### How can I use Docker for AWS with an AWS account in an EC2-Classic region?
+## How can I use Docker for AWS with an AWS account in an EC2-Classic region?
 
 If you have an AWS account that was created before **December 4th, 2013** you have what is known as an **EC2-Classic** account on regions where you have previously deployed resources. **EC2-Classic** accounts don't have default VPC's or the associated subnets, etc. This causes a problem when using our CloudFormation template  because we are using the [Fn:GetAZs](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getavailabilityzones.html) function they provide to determine which availability zones you have access too. When used in a region where you have **EC2-Classic**, this function will return all availability zones for a region, even ones you don't have access too. When you have an **EC2-VPC** account, it will return only the availability zones you have access to.
 
@@ -38,18 +38,18 @@ If you have an **EC2-Classic** account, and you don't have access to the `a` and
 
 There isn't anything we can do right now to fix this issue, we have contacted Amazon, and we are hoping they will be able to provide us with a way to determine if an account is either **EC2-Classic** or **EC2-VPC**, so we can act accordingly.
 
-#### How to tell if you have this issue.
+### How to tell if you have this issue.
 
 This AWS documentation page will describe how you can tell if you have EC2-Classic, EC2-VPC or both.  http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
 
-#### How to fix:
+### How to fix:
 There are a few work arounds that you can try to get Docker for AWS up and running for you.
 
 1. Use a region that doesn't have **EC2-Classic**. The most common region with this issue is `us-east-1`. So try another region, `us-west-1`, `us-west-2`, or the new `us-east-2`. These regions will more then likely be setup with **EC2-VPC** and you will not longer have this issue.
 2. Create an new AWS account, all new accounts will be setup using **EC2-VPC** and will not have this problem.
 3. You can try and contact AWS support to convert your **EC2-Classic** account to a **EC2-VPC** account. For more information checkout the following answer for **"Q. I really want a default VPC for my existing EC2 account. Is that possible?"** on https://aws.amazon.com/vpc/faqs/#Default_VPCs
 
-#### Helpful links:
+### Helpful links:
 - http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html
 - http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
 - http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html
@@ -57,27 +57,27 @@ There are a few work arounds that you can try to get Docker for AWS up and runni
 - https://aws.amazon.com/blogs/aws/amazon-ec2-update-virtual-private-clouds-for-everyone/
 
 
-### Can I use my existing VPC?
+## Can I use my existing VPC?
 
 Not at this time, but it is on our roadmap for future releases.
 
-### Which AWS regions will this work with?
+## Which AWS regions will this work with?
 
 Docker for AWS should work with all regions except for AWS China, which is a little different than the other regions.
 
-### How many Availability Zones does Docker for AWS use?
+## How many Availability Zones does Docker for AWS use?
 
 All of Amazons regions have at least 2 AZ's, and some have more. To make sure Docker for AWS works in all regions, only 2 AZ's are used even if more are available.
 
-### What do I do if I get `KeyPair error` on AWS?
+## What do I do if I get `KeyPair error` on AWS?
 As part of the prerequisites, you need to have an SSH key uploaded to the AWS region you are trying to deploy to.
 For more information about adding an SSH key pair to your account, please refer to the [Amazon EC2 Key Pairs docs](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 
-### Where are my container logs?
+## Where are my container logs?
 
 All container logs are aggregated within [AWS CloudWatch](https://aws.amazon.com/cloudwatch/).
 
-### Where do I report problems or bugs?
+## Where do I report problems or bugs?
 
 Send an email to <docker-for-iaas@docker.com> or post to the [Docker for AWS](https://github.com/docker/for-aws) GitHub repositories.
 
@@ -95,11 +95,11 @@ Please provide this session ID to the maintainer debugging your issue.
 
 _Please note that your output will be slightly different from the above, depending on your swarm configuration_
 
-### Analytics
+## Analytics
 
 Docker for AWS sends anonymized minimal analytics to Docker (heartbeat). These analytics are used to monitor adoption and are critical to improve Docker for AWS.
 
-### How do I run administrative commands?
+## How do I run administrative commands?
 
 By default when you SSH into a manager, you will be logged in as the regular username: `docker` - It is possible however to run commands with elevated privileges by using `sudo`.
 For example to ping one of the nodes, after finding its IP via the Azure/AWS portal (e.g. 10.0.0.4), you could run:
