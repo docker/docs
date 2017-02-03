@@ -1,7 +1,1 @@
-{% for item in tree %}{% if item.sectiontitle %}{% capture treeString %}{{ item.section | downcase }}{% endcapture %}{% capture pageURLString %}"{{ page.url }}"{% endcapture %}
-<li class="leaf {% if treeString contains pageURLString %}menu-open{% else %}menu-closed{% endif %}"><a href="javascript:void(0)" class="expand-menu "><span class="menu-icon" aria-hidden="true"></span>{{ item.sectiontitle }}</a>
-<ul class="nav-sub">
-  {% assign tree = item.section %}{% include tree.html %}
-</ul>
-{% else %}
-    <li class="leaf"><a href="{{ item.path }}" class="{% if item.path == page.url and item.nosync != true %}active currentPage{% endif %}">{{ item.title }}</a></li>{% endif %}{% endfor %}
+{% for item in tree %}{% if item.sectiontitle %}{% capture treeString %}{{ item.section | downcase }}{% endcapture %}{% capture pageURLString %}"{{ page.url }}"{% endcapture %}<li class="leaf {% if treeString contains pageURLString %}menu-open{% else %}menu-closed{% endif %}"><a href="javascript:void(0)" class="expand-menu "><span class="menu-icon" aria-hidden="true"></span>{{ item.sectiontitle }}</a><ul class="nav-sub">{% assign tree = item.section %}{% include tree.html %}</ul>{% else %}<li class="leaf"><a href="{{ item.path }}" class="{% if item.path == page.url and item.nosync != true %}active currentPage{% endif %}">{{ item.title }}</a></li>{% endif %}{% endfor %}

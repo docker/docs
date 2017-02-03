@@ -1,12 +1,14 @@
+{% assign topicFound="false" %}
 {% for section in site.data.toc.horizontalnav %}
-  {% assign topicFound="false" %}
   {% assign activeCSS = "" %}
-  {% assign tree = site.data.toc[section.node] %}
-  <!-- path comparison: item.path: {{ item.path }} == page.path: {{ page.url }} -->
-  {% capture thisSection %}{% include tree.html %}{% endcapture %}
-  {% if section.path == page.url or thisSection contains "active currentPage" %}
-    {% capture leftnav %}{{ thisSection }}{% endcapture %}
-    {% capture activeCSS %} class="active"{% endcapture %}
+  {% if topicFound=="false" %}
+    {% assign tree = site.data.toc[section.node] %}
+    {% capture thisSection %}{% include tree.html %}{% endcapture %}
+    {% if section.path == page.url or thisSection contains "active currentPage" %}
+      {% capture leftnav %}{{ thisSection }}{% endcapture %}
+      {% capture activeCSS %} class="active"{% endcapture %}
+      {% assign topicFound="true" %}
+    {% endif %}
   {% endif %}
   <li id="{{ section.node }}"{{ activeCSS }}><a href="{{ section.path }}">{{ section.title }}</a></li>
 {% endfor %}
