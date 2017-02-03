@@ -15,9 +15,9 @@ CS Docker Engine can be installed on the following operating systems:
 * SUSE Linux Enterprise 12
 
 
-## Install on CentOS 7.1/7.2 & RHEL 7.0/7.1/7.2 (YUM-based systems)
+## Install on CentOS 7.1/7.2 & RHEL 7.0/7.1/7.2/7.3 (YUM-based systems)
 
-This section explains how to install on CentOS 7.1/7.2 & RHEL 7.0/7.1/7.2. Only
+This section explains how to install on CentOS 7.1/7.2 & RHEL 7.0/7.1/7.2/7.3. Only
 these versions are supported. CentOS 7.0 is **not** supported. On RHEL,
 depending on your current level of updates, you may need to reboot your server
 to update its RHEL kernel.
