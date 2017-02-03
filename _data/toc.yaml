@@ -842,28 +842,30 @@ reference:
 samples:
 - path: /samples/#tutorial-labs
   title: Tutorial labs
-- path: /engine/examples/apt-cacher-ng/
-  title: apt-cacher-ng
-- path: /engine/examples/couchdb_data_volumes/
-  title: CouchDB
-- path: /engine/examples/couchbase/
-  title: Couchbase
-- path: /compose/django/
-  title: Django and PostgreSQL
-- path: /engine/examples/mongodb/
-  title: MongoDB
-- path: /engine/examples/postgresql_service/
-  title: PostgreSQL
-- path: /compose/rails/
-  title: Rails and PostgreSQL
-- path: /engine/examples/running_redis_service/
-  title: Redis
-- path: /engine/examples/running_riak_service/
-  title: Riak
-- path: /engine/examples/running_ssh_service/
-  title: SSHd
-- path: /compose/wordpress/
-  title: WordPress
+- sectiontitle: Sample applications
+  section:
+  - path: /engine/examples/apt-cacher-ng/
+    title: apt-cacher-ng
+  - path: /engine/examples/couchdb_data_volumes/
+    title: CouchDB
+  - path: /engine/examples/couchbase/
+    title: Couchbase
+  - path: /compose/django/
+    title: Django and PostgreSQL
+  - path: /engine/examples/mongodb/
+    title: MongoDB
+  - path: /engine/examples/postgresql_service/
+    title: PostgreSQL
+  - path: /compose/rails/
+    title: Rails and PostgreSQL
+  - path: /engine/examples/running_redis_service/
+    title: Redis
+  - path: /engine/examples/running_riak_service/
+    title: Riak
+  - path: /engine/examples/running_ssh_service/
+    title: SSHd
+  - path: /compose/wordpress/
+    title: WordPress
 
 manuals:
 - sectiontitle: Commercially Supported Docker Engine
