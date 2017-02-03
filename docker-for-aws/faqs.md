@@ -83,7 +83,7 @@ Send an email to <docker-for-iaas@docker.com> or post to the [Docker for AWS](ht
 
 In AWS, if your stack is misbehaving, please run the following diagnostic tool from one of the managers - this will collect your docker logs and send them to Docker:
 
-```
+```bash
 $ docker-diagnose
 OK hostname=manager1
 OK hostname=worker1
@@ -93,7 +93,7 @@ Your diagnostics session ID is 1234567890-xxxxxxxxxxxxxx
 Please provide this session ID to the maintainer debugging your issue.
 ```
 
-_Please note that your output will be slightly different from the above, depending on your swarm configuration_
+> **Note**: Your output will be slightly different from the above, depending on your swarm configuration.
 
 ## Analytics
 
@@ -103,8 +103,9 @@ Docker for AWS sends anonymized minimal analytics to Docker (heartbeat). These a
 
 By default when you SSH into a manager, you will be logged in as the regular username: `docker` - It is possible however to run commands with elevated privileges by using `sudo`.
 For example to ping one of the nodes, after finding its IP via the Azure/AWS portal (e.g. 10.0.0.4), you could run:
-```
+
+```bash
 $ sudo ping 10.0.0.4
 ```
 
-Note that access to Docker for AWS and Azure happens through a shell container that itself runs on Docker.
+> **Note**: Access to Docker for AWS and Azure happens through a shell container that itself runs on Docker.
