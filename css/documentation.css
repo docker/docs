@@ -500,3 +500,16 @@ img.with-border {
   color: #999;
   font-style: italic;
 }
+
+#top-nav {
+  float: left;
+}
+
+#start-tour {
+  float: right;
+  margin-top: 15px;
+  padding: 5px;
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #ccc;
+}
