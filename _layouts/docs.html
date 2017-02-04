@@ -74,6 +74,7 @@ ng\:form {
 <link rel="stylesheet" href="/css/p2p.css">
 <link rel="stylesheet" href="/css/mobile_responsive.css">
 <link rel="stylesheet" href="/css/temporary.css">
+<link rel="stylesheet" href="/css/hopscotch.css">
 <link rel="stylesheet" href="/css/documentation.css">
 <script async="" src="/js/modernizr.min.js"></script>
 <meta class="foundation-data-attribute-namespace">
@@ -191,26 +192,27 @@ ng\:form {
     </aside>
     <div class="dockercon16">
       <section class="title_section darkblue"> </section>
-			<div class="col-md-12" style="background-color: #254356">
+			<div id="top-nav-container" class="col-xs-12" style="background-color: #254356">
 					<!-- tabs -->
-					<ul class="tabs">
+					<ul id="top-nav" class="tabs col-xs-12 col-sm-10 col-md-10">
 						{% include treebuilder.html %}
 					</ul>
+					<div id="start-tour-container" class="hidden-xs col-sm-2 col-md-2"><div id="start-tour">Tour our new<br />navigation!</div></div>
 			</div>
-      <div class="">
+      <div class="" ng-non-bindable>
         <div class="container-fluid">
           <div class="row">
             <div class="col-xs-12 col-sm-3 col-md-2 col-xl-2 docsidebarnav_section">
-              <div class="region region-hero-sub"><ul class="nav-sub">
-                             {% if page.tree == false %}
-                                <li class="leaf"><a href="/">Back to the index</a></li>
-                             {% else %}
-								{{ leftnav }}
-                             {% endif %}
-							</ul>           
+              <div class="region region-hero-sub"><ul id="left-nav" class="nav-sub">
+               {% if page.tree == false %}
+                  <li class="leaf"><a href="/">Back to the index</a></li>
+               {% else %}
+								  {{ leftnav }}
+               {% endif %}
+							</ul>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-9 col-md-8 col-xl-9">
+            <div id="main-content" class="col-xs-12 col-sm-9 col-md-8 col-xl-9">
               <section class="section" id="DocumentationText">
 								{% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
 								{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
@@ -412,6 +414,8 @@ background-image: linear-gradient(to bottom, #75ae4c, #99c47c);
   <script async="" src="/js/menu.js"></script>
   <script async="" src="/js/app.js"></script>
   <script async="" src="/js/anchorlinks.js"></script>
+	<script src="/js/hopscotch.js"></script>
+	<script src="/js/my_first_tour.js"></script>
 </div>
 <div id="mktoStyleLoaded" style="display: none; border-top-color: rgb(18, 52, 86);"></div>
 <form class="ng-pristine ng-valid mktoForm mktoHasWidth mktoLayoutLeft" novalidate style="font-family: Helvetica, Arial, sans-serif; font-size: 13px; color: rgb(51, 51, 51); visibility: hidden; position: absolute; top: -500px; left: -1000px; width: 1602px;">
