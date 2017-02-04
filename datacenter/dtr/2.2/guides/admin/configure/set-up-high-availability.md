@@ -1,5 +1,5 @@
 ---
-title: Scale your deployment
+title: Set up high availability
 description: Lean how to scale Docker Trusted Registry by adding and removing replicas.
 keywords: docker, dtr, install, deploy
 ---
@@ -8,7 +8,7 @@ Docker Trusted Registry is designed to scale horizontally as your usage
 increases. You can add or remove replicas to make DTR scale to your needs
 or for high availability.
 
-To set up DTR for [high availability](../high-availability/index.md),
+To set up DTR for high availability,
 you can add more replicas to your DTR cluster. Adding more replicas allows you
 to load-balance requests across all replicas, and keep DTR working if a
 replica fails.
@@ -62,5 +62,4 @@ forget to remove this replica from the load balancing pool.
 
 ## Where to go next
 
-* [Install DTR](index.md)
-* [Uninstall DTR](uninstall.md)
+* [Set up vulnerability scans](set-up-vulnerability-scans.md)

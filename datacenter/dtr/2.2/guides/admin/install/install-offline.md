@@ -56,5 +56,5 @@ you can [install DTR on that host](index.md).
 
 ## Where to go next
 
-* [DTR architecture](../architecture.md)
+* [DTR architecture](../../architecture.md)
 * [Install DTR](index.md)

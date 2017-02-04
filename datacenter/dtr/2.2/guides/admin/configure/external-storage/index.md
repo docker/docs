@@ -5,8 +5,6 @@ keywords: docker, documentation, about, technology, understanding, configuration
 title: Configure DTR image storage
 ---
 
-<!-- TODO: review page for v2.2 -->
-
 After installing Docker Trusted Registry, one of your first tasks is to
 designate and configure the Trusted Registry storage backend. This document provides the following:
 
@@ -21,13 +19,12 @@ While there is a default storage backend, `filesystem`, the Trusted Registry off
 * Take advantage of other features that are critical to your organization
 
 At first, you might have explored Docker Trusted Registry and Docker Engine by
- [installing](../install/index.md)
+installing
 them on your system in order to familiarize yourself with them.
 However, for various reasons such as deployment purposes or continuous
 integration, it makes sense to think about your long term organization’s needs
 when selecting a storage backend. The Trusted Registry natively supports TLS and
-basic authentication. It also ships with a [notification system](/registry/notifications.md), calling webhooks in response to activity. The notification system also provides both extensive logging and
-reporting, which is useful for organizations that want to collect metrics.
+basic authentication.
 
 ## Understand the Trusted Registry storage backend
 
@@ -43,7 +40,6 @@ Additionally, the Trusted Registry supports these cloud-based storage drivers:
 * OpenStack **Swift**
 * Microsoft **Azure** Blob Storage
 
-<!--* **Rados**:  A driver storing objects in a Ceph Object Storage pool. -->
 
 ### Filesystem
 
@@ -126,17 +122,6 @@ Trusted Registry users to access, push, pull, and delete images.
 OpenStack Swift, also known as OpenStack Object Storage, is an open source
 object storage system that is licensed under the Apache 2.0 license. Refer to [Swift documentation](http://docs.openstack.org/developer/swift/) to get started.
 
-<!--
-### Ceph Rados
-
-**(Details are missing as this is currently being developed for DTR 1.4.3?)**
-
-Ceph implements distributed object storage. The object storage “product”,
-service or capabilities, consist of a Ceph Storage Cluster and a Ceph
-Object Gateway.
-
-For additional information see the Ceph documentation  [here](http://docs.ceph.com/docs/master/rados/) and [here](http://docs.ceph.com/docs/hammer/radosgw/).
--->
 
 ### Microsoft Azure
 
@@ -209,6 +194,6 @@ ensure your choices make sense.
 4. Save the YAML file and return to the UI.
 5. On the Storage screen, upload the file, review your changes, and click Save.
 
-## See also
+## Where to go next
 
-* [Use your own certificates](index.md)
+* [Set up high availability](../set-up-high-availability.md)

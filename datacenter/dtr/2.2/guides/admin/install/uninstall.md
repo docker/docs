@@ -8,7 +8,7 @@ Uninstalling DTR is a two-step process. You first scale your DTR deployment down
 to a single replica. Then you uninstall the last DTR replica, which permanently
 removes DTR and deletes all its data.
 
-Start by [scaling down your DTR deployment](scale-your-deployment.md) to a
+Start by [scaling down your DTR deployment](../configure/set-up-high-availability.md) to a
 single replica.
 
 When your DTR deployment is down to a single replica, you can use the
@@ -24,9 +24,9 @@ docker run -it --rm \
 ```
 
 To see what options are available in the destroy command, check the
-[destroy command reference documentation](../../reference/cli/destroy.md).
+[destroy command reference documentation](../../../reference/cli/destroy.md).
 
 ## Where to go next
 
-* [Scale your deployment](scale-your-deployment.md)
+* [Scale your deployment](../configure/set-up-high-availability.md)
 * [Install DTR](index.md)
