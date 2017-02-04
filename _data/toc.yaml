@@ -1018,69 +1018,53 @@ toc:
   - sectiontitle: Docker Trusted Registry
     section:
     - path: /datacenter/dtr/2.2/guides/
-      title: Docker Trusted Registry 2.2 overview
+      title: Docker Trusted Registry overview
     - path: /datacenter/dtr/2.2/guides/architecture/
       title: Architecture
-    - sectiontitle: Install DTR 2.2
+    - sectiontitle: Administration
       section:
-      - path: /datacenter/dtr/2.2/guides/install/system-requirements/
-        title: System requirements
-      - path: /datacenter/dtr/2.2/guides/install/
-        title: Install Docker Trusted Registry
-      - path: /datacenter/dtr/2.2/guides/install/install-offline/
-        title: Install offline
-      - path: /datacenter/dtr/2.2/guides/install/license-your-installation/
-        title: License your deployment
-      - path: /datacenter/dtr/2.2/guides/install/scale-your-deployment/
-        title: Scale your deployment
-      - path: /datacenter/dtr/2.2/guides/install/upgrade/
-        title: Upgrade
-      - path: /datacenter/dtr/2.2/guides/install/uninstall/
-        title: Uninstall
-    - sectiontitle: Configure DTR 2.2
-      section:
-      - path: /datacenter/dtr/2.2/guides/configure/tls-certs/
-        title: Set up TLS certificates for DTR
-      - path: /datacenter/dtr/2.2/guides/configure/auth-dtr/
-        title: Authentication and authorization in DTR
-      - path: /datacenter/dtr/2.2/guides/configure/configure-storage/
-        title: Configure DTR image storage
-      - path: /datacenter/dtr/2.2/guides/configure/use-nfs/
-        title: Use NFS
-      - path: /datacenter/dtr/2.2/guides/configure/high-availability/
-        title: Set up high availability
-      - path: /datacenter/dtr/2.2/guides/configure/setup-scanning-dtr/
-        title: Set up Docker Security Scanning
-      - path: /datacenter/dtr/2.2/guides/configure/backup-and-recovery/
-        title: DTR backups and recovery
-      - path: /datacenter/dtr/2.2/guides/user-management/create-and-manage-users/
-        title: Create and manage users
-      - path: /datacenter/dtr/2.2/guides/user-management/create-and-manage-orgs/
-        title: Create and manage organizations
-      - path: /datacenter/dtr/2.2/guides/user-management/create-and-manage-teams/
-        title: Create and manage teams
-      - path: /datacenter/dtr/2.2/guides/user-management/permission-levels/
-        title: Permission levels
-    - sectiontitle: Monitor and troubleshoot
-      section:
-      - path: /datacenter/dtr/2.2/guides/monitor-troubleshoot/
-        title: Monitor DTR
-      - path: /datacenter/dtr/2.2/guides/monitor-troubleshoot/troubleshoot/
-        title: Troubleshoot DTR
-    - path: /datacenter/dtr/2.2/guides/trust-dtr/
-      title: Configure your Docker Engine with DTR
-    - path: /datacenter/dtr/2.2/guides/work-images-dtr/
-      title: Work with images in DTR
-    - path: /datacenter/dtr/2.2/guides/cache-docker-images/
-      title: Cache Docker images
-    - path: /datacenter/dtr/2.2/guides/security-scan-dtr/
-      title: Docker Security Scanning in DTR
-    - path: /datacenter/dtr/2.2/guides/webhooks/
-      title: Create and manage webhooks
-    - sectiontitle: API and CLI reference
-      section:
-      - path: /datacenter/dtr/2.2/reference/api/
-        title: API reference
+      - sectiontitle: Install
+        section:
+        - path: /datacenter/dtr/2.2/guides/admin/install/system-requirements/
+          title: System requirements
+        - path: /datacenter/dtr/2.2/guides/admin/install/
+          title: Install
+        - path: /datacenter/dtr/2.2/guides/admin/install/install-offline/
+          title: Install offline
+        - path: /datacenter/dtr/2.2/guides/admin/install/uninstall/
+          title: Uninstall
+        - sectiontitle: Upgrade
+          section:
+          - path: /datacenter/dtr/2.2/guides/admin/upgrade/release-notes/
+            title: Release notes
+          - path: /datacenter/dtr/2.2/guides/admin/upgrade/
+            title: Upgrade
+      - sectiontitle: Configure
+        section:
+        - path: /datacenter/dtr/2.2/guides/admin/configure/license-your-installation/
+          title: License your installation
+        - path: /datacenter/dtr/2.2/guides/admin/configure/use-your-own-tls-certificates/
+          title: Use your own TLS certificates
+        - sectiontitle: External storage
+          section:
+          - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/
+            title: Overview
+          - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/nfs/
+            title: NFS
+        - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-high-availability/
+          title: Set up high availability
+        - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-vulnerability-scans/
+          title: Set up vulnerability scans
+        - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-a-cache/
+          title: Deploy a cache
+      - sectiontitle: Monitor and troubleshoot
+        section:
+        - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/
+          title: Monitor the cluster status
+        - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
+          title: Troubleshoot with logs
+      - path: /datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/
+        title: Backups and disaster recovery
       - sectiontitle: CLI reference
         section:
         - path: /datacenter/dtr/2.2/reference/cli/
@@ -1103,8 +1087,30 @@ toc:
           title: restore
         - path: /datacenter/dtr/2.2/reference/cli/upgrade/
           title: upgrade
-    - path: /datacenter/dtr/2.2/guides/release-notes/
-      title: Release notes
+    - sectiontitle: Manage users
+      section:
+      - path: /datacenter/dtr/2.2/guides/admin/manage-users/
+        title: Create and manage users
+      - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-users/
+        title: Create and manage users
+      - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-teams/
+        title: Create and manage teams
+      - path: /datacenter/dtr/2.2/guides/admin/manage-users/permission-levels/
+        title: Permission levels
+    - sectiontitle: User guides
+      section:
+      - sectiontitle: Access DTR
+        section:
+        - path: /datacenter/dtr/2.2/guides/user/access-dtr/
+          title: Configure your Docker CLI
+      - path: /datacenter/dtr/2.2/guides/user/repos-and-images/
+        title: Repos and images
+      - path: /datacenter/dtr/2.2/guides/user/create-and-manage-webhooks/
+        title: Create and manage webhooks
+      - path: /datacenter/dtr/2.2/guides/user/scan-your-images/
+        title: Scan your images
+    - path: /datacenter/dtr/2.2/reference/api/
+      title: API reference
     - path: /datacenter/dtr/2.2/guides/support/
       title: Get support
   - sectiontitle: Previous versions

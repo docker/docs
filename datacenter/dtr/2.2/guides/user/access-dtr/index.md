@@ -5,8 +5,6 @@ keywords: docker, registry, TLS, certificates
 title: Configure your Docker Engine with DTR
 ---
 
-<!-- TODO: review page for v2.2 -->
-
 By default Docker Engine uses TLS when pushing and pulling images to an
 image registry like Docker Trusted Registry.
 
@@ -109,4 +107,4 @@ docker login dtr.example.org
 
 ## Where to go next
 
-* [Pull an image from DTR](pull-an-image.md)
+* [Repositories and images](../repos-and-images.md)

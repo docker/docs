@@ -14,8 +14,7 @@ business peak hours to ensure the impact on your business is close to none.
 
 ## Step 1. Upgrade DTR to 2.1
 
-Make sure you're running DTR 2.1. If that's not the case, [upgrade your
-installation to the 2.1 version](/datacenter/dtr/2.1/install/upgrade/upgrade.md).
+Make sure you're running DTR 2.1. If that's not the case, [upgrade your installation to the 2.1 version](/datacenter/dtr/2.1/guides/install/upgrade/.md).
 
 ## Step 2. Upgrade DTR
 
@@ -30,7 +29,7 @@ $ docker pull {{ page.docker_image }}
 
 If the node you're upgrading doesn't have access to the internet, you can
 use a machine with internet connection to
-[pull all the DTR images](install-offline.md).
+[pull all the DTR images](../install/install-offline.md).
 
 Once you have the latest images on the node, run the upgrade command:
 
@@ -42,9 +41,8 @@ $ docker run -it --rm \
 
 By default the upgrade command runs in interactive mode and prompts you for
 any necessary information. You can also check the
-[reference documentation](../../reference/cli/index.md) for other existing flags.
+[reference documentation](../../../reference/cli/index.md) for other existing flags.
 
 ## Where to go next
 
-* [System requirements](system-requirements.md)
-* [Monitor DTR](..//monitor-troubleshoot/index.md)
+* [Release notes](release-notes.md)

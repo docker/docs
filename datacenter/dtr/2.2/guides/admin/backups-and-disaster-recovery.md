@@ -4,10 +4,8 @@ keywords: docker, registry, high-availability, backup, recovery
 title: DTR backups and recovery
 ---
 
-<!-- TODO: review page for v2.2 -->
-
 When you use Docker Trusted Registry on a production setting, you should first
-[configure it for high availability](index.md).
+configure it for high availability.
 
 The next step is creating a backup policy and disaster recovery plan.
 
@@ -126,5 +124,5 @@ Where:
 
 ## Where to go next
 
-* [Set up high availability](index.md)
+* [Set up high availability](configure/set-up-high-availability.md)
 * [DTR architecture](../architecture.md)

@@ -5,7 +5,6 @@ keywords: docker, documentation, about, technology, install, enterprise, hub, CS
 title: Set up TLS certificates for DTR
 ---
 
-<!-- TODO: review page for v2.2 -->
 
 By default the DTR services are exposed using HTTPS, to ensure all
 communications between clients and DTR is encrypted. Since DTR
@@ -22,7 +21,7 @@ To configure DTR to use your own certificates and keys, go to the
 **DTR web UI**, navigate to the **Settings** page, and scroll down to the
 **Domain** section.
 
-![](../images/use-your-certificates-1.png)
+![](../../images/use-your-certificates-1.png)
 
 
 Set the DTR domain name and upload the certificates and key:
@@ -39,10 +38,9 @@ Finally, click **Save** for the changes to take effect.
 
 If you're using certificates issued by a globally trusted certificate authority,
 any web browser or client tool should now trust DTR. If you're using an internal
-certificate authority, you'll need to [configure your system to trust that
-certificate authority](../repos-and-images/index.md).
+certificate authority, you'll need to configure your system to trust that
+certificate authority.
 
 ## Where to go next
 
-* [Configure your Docker Engine](../repos-and-images/index.md)
-* [Pull an image](../repos-and-images/pull-an-image.md)
+* [Set up external storage](external-storage/index.md)

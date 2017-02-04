@@ -4,8 +4,6 @@ keywords: docker, registry, security, permissions, users
 title: Authentication and authorization in DTR
 ---
 
-<!-- TODO: review page for v2.2 -->
-
 With DTR you get to control which users have access to your image repositories.
 
 By default, anonymous users can only pull images from public repositories.
@@ -44,7 +42,7 @@ An organization owns a set of repositories, and defines a set of teams. With
 teams you can define fine-grain permissions that a team of
 user has for a set of repositories.
 
-![](../images/authentication-authorization-1.svg)
+![](../../images/authentication-authorization-1.svg)
 
 In this example, the 'Whale' organization has three repositories and two teams:
 

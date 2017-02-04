@@ -19,12 +19,12 @@ infrastructure has all the [requirements DTR needs to run](system-requirements.m
 
 Since DTR requires Docker Universal Control Plane (UCP)
 to run, you need to install UCP on all the nodes where you plan to install DTR.
-[Learn how to install UCP](/datacenter/ucp/2.1/guides/installation/index.md).
+[Learn how to install UCP](/datacenter/ucp/2.1/guides/admin/install.md).
 
 DTR needs to be installed on a worker node that is being managed by UCP.
 You can't install DTR on a standalone Docker Engine.
 
-![](../images/install-dtr-0.png)
+![](../../images/install-dtr-0.png)
 
 
 ## Step 3. Install DTR
@@ -50,7 +50,7 @@ DTR. `--ucp-insecure-tls` tells the installer to trust the TLS certificates used
 by UCP.
 
 The install command has other flags for customizing DTR at install time.
-Check the [reference documentation to learn more](../../reference/cli/install.md).
+Check the [reference documentation to learn more](../../../reference/cli/install.md).
 
 ## Step 4. Check that DTR is running
 
@@ -58,37 +58,37 @@ In your browser, navigate to the Docker **Universal Control Plane**
 web UI, and navigate to the **Applications** screen. DTR should be listed
 as an application.
 
-![](../images/install-dtr-1.png)
+![](../../images/install-dtr-1.png)
 
 You can also access the **DTR web UI**, to make sure it is working. In your
 browser, navigate to the address were you installed DTR.
 
-![](../images/install-dtr-2.png)
+![](../../images/install-dtr-2.png)
 
 
 ## Step 5. Configure DTR
 
 After installing DTR, you should configure:
 
-  * The certificates used for TLS communication. [Learn more](../configure/index.md).
-  * The storage backend to store the Docker images. [Lean more](../configure/configure-storage.md).
+  * The certificates used for TLS communication. [Learn more](../configure/use-your-own-tls-certificates.md).
+  * The storage backend to store the Docker images. [Lean more](../configure/external-storage/index.md).
 
   To perform these configurations, navigate to the **Settings** page of DTR.
 
-  ![](../images/install-dtr-3.png)
+  ![](../../images/install-dtr-3.png)
 
 
 ## Step 6. Test pushing and pulling
 
 Now that you have a working installation of DTR, you should test that you can
 push and pull images to it.
-[Learn how to push and pull images](../repos-and-images/index.md).
+[Learn how to push and pull images](../../user/repos-and-images.md).
 
 ## Step 7. Join replicas to the cluster
 
 This step is optional.
 
-To set up DTR for [high availability](../high-availability/index.md),
+To set up DTR for high availability,
 you can add more replicas to your DTR cluster. Adding more replicas allows you
 to load-balance requests across all replicas, and keep DTR working if a
 replica fails.
@@ -121,9 +121,9 @@ To add replicas to a DTR cluster, use the `docker/dtr join` command:
     web UI, and navigate to the **Applications** screen. All replicas should
     be displayed.
 
-    ![](../images/install-dtr-4.png)
+    ![](../../images/install-dtr-4.png)
 
 ## See also
 
 * [Install DTR offline](install-offline.md)
-* [Upgrade DTR](upgrade.md)
+* [Upgrade DTR](../upgrade/index.md)
