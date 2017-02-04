@@ -8,6 +8,9 @@ title: Integrate with LDAP
 Docker UCP integrates with LDAP services, so that you can manage users from a
 single place.
 
+**Note:** When you switch from the built-in authentication to using LDAP
+authentication, all manually created users become inactive. Use the **Recovery admin username** and **Recovery admin password** fields to create a local user account that can be used to access UCP if the LDAP server becomes unreachable.
+
 ## Configure the LDAP integration
 
 To configure UCP to authenticate users using an LDAP service, go to
@@ -89,5 +92,3 @@ You can also manually synchronize users by clicking the **Sync Now** button.
 
 When a user is removed from LDAP, that user becomes inactive after the LDAP
 synchronization runs.
-Also, when you switch from the built-in authentication to using LDAP
-authentication, all manually created users become inactive.
