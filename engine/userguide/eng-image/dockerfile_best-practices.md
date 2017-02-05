@@ -285,16 +285,24 @@ keep the image size down. Since the `RUN` statement starts with
 
 #### Using pipes
 
-Where your `RUN` command depends on pipes, for example:
+Some `RUN` commands depend on the ability to pipe the output of one command into another, using the pipe character (`|`), as in the following example:
 
+```Dockerfile
+RUN wget -O - https://some.site | wc -l > /number
+```
 
-	RUN wget -O - https://some.site | wc -l > /number
+Docker executes these commands using the `/bin/sh -c` interpreter, which only evaluates the exit code of the last operation in the pipe to determine success. In the example above this build step succeeds and produces a new image so long as the `wc -l` command succeeds, even if the `wget` command fails.
 
-Remember that Docker executes this with `/bin/sh -c` which considers the command successful if the last operation in the pipe is successful. In our example above this build step will succeed and result in a new image produced so long as `wc -l` succeeds, even if the `wget` fails.
+If you want the command to fail due to an error at any stage in the pipe, prepend `set -o pipefail &&` to ensure that an unexpected error prevents the build from inadvertently succeeding, for example:
 
-To instead fail on an error at any stage in the pipe, prepend `set -o pipefail &&` to ensure that an unexpected error prevents the build from inadvertently succeeding, for example:
-
-	RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
+```Dockerfile
+RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
+```
+> **Note**: Not all shells support the `-o pipefail` option. In such cases (including `dash` which is the default shell on Debian-based images) consider using the *exec* form of `RUN` to explicitly choose a shell that does support it, for example:
+>
+```Dockerfile
+RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://some.site | wc -l > /number"]
+```
 
 ### CMD
 
