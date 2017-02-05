@@ -57,7 +57,7 @@ Docker from the repository.
 
 #### Set up the repository
 
-1.  Install the `dnf-plugins.core` package which provides the commands to manage
+1.  Install the `dnf-plugins-core` package which provides the commands to manage
     your DNF repositories from the command line.
 
     ```bash
@@ -152,7 +152,7 @@ Docker from the repository.
 4.  Start Docker.
 
     ```bash
-    $ sudo systemctl docker start
+    $ sudo systemctl start docker
     ```
 
 5.  Verify that `docker` is installed correctly by running the `hello-world`
