@@ -1,4 +1,4 @@
-FROM starefossen/github-pages
+FROM starefossen/github-pages:112
 
 ENV VERSIONS="v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12"
 
@@ -47,7 +47,8 @@ RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend 
  && jekyll build -s allv -d allvbuild \
  && rm -rf allvbuild/apidocs/layouts \
  && find allvbuild -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
- && rm -rf allv
+ && rm -rf allv \
+ && apt-get update \
+ && apt-get -y install nginx
 
-# Serve the site, which is now all static HTML
-CMD jekyll serve -s /usr/src/app/allvbuild --no-watch -H 0.0.0.0 -P 4000
+CMD echo "Server running at http://0.0.0.0:4000" && nginx -c /usr/src/app/allvbuild/nginx.conf
