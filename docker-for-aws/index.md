@@ -13,8 +13,9 @@ redirect_from:
 
 If your account [has the proper
 permissions](https://docs.docker.com/docker-for-aws/iam-permissions/), you can
-use the blow button from the stable or beta channel to bootstrap Docker for AWS using CloudFormation.For more about stable and beta
-channels, see the [FAQs](/docker-for-aws/faqs.md#stable-and-beta-channels).
+use the blue button from the stable or beta channel to bootstrap Docker for AWS
+using CloudFormation. For more about stable and beta channels, see the
+[FAQs](/docker-for-aws/faqs.md#stable-and-beta-channels).
 
 
 <table style="width:100%">
