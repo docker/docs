@@ -2,6 +2,7 @@
 description: Frequently asked questions
 keywords: azure faqs
 title: Docker for Azure Frequently asked questions (FAQ)
+toc_max: 2
 ---
 
 ## FAQ
@@ -39,9 +40,9 @@ Please provide this session ID to the maintainer debugging your issue.
 
 > **Note**: Your output will be slightly different from the above, depending on your swarm configuration.
 
-## Analytics
+## Metrics
 
-Docker for Azure sends anonymized minimal analytics to Docker (heartbeat). These analytics are used to monitor adoption and are critical to improve Docker for Azure.
+Docker for Azure sends anonymized minimal metrics to Docker (heartbeat). These metrics are used to monitor adoption and are critical to improve Docker for Azure.
 
 ## How do I run administrative commands?
 

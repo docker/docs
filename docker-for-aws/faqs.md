@@ -2,6 +2,7 @@
 description: Frequently asked questions
 keywords: aws faqs
 title: Docker for AWS Frequently asked questions (FAQ)
+toc_max: 2
 ---
 
 ## Stable and beta channels
@@ -38,11 +39,11 @@ If you have an **EC2-Classic** account, and you don't have access to the `a` and
 
 There isn't anything we can do right now to fix this issue, we have contacted Amazon, and we are hoping they will be able to provide us with a way to determine if an account is either **EC2-Classic** or **EC2-VPC**, so we can act accordingly.
 
-### How to tell if you have this issue.
+### How to tell if you are in the EC2-Classic region.
 
 This AWS documentation page will describe how you can tell if you have EC2-Classic, EC2-VPC or both.  http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
 
-### How to fix:
+### Possible fixes to the EC2-Classic region issue:
 There are a few work arounds that you can try to get Docker for AWS up and running for you.
 
 1. Use a region that doesn't have **EC2-Classic**. The most common region with this issue is `us-east-1`. So try another region, `us-west-1`, `us-west-2`, or the new `us-east-2`. These regions will more then likely be setup with **EC2-VPC** and you will not longer have this issue.
@@ -95,9 +96,9 @@ Please provide this session ID to the maintainer debugging your issue.
 
 > **Note**: Your output will be slightly different from the above, depending on your swarm configuration.
 
-## Analytics
+## Metrics
 
-Docker for AWS sends anonymized minimal analytics to Docker (heartbeat). These analytics are used to monitor adoption and are critical to improve Docker for AWS.
+Docker for AWS sends anonymized minimal metrics to Docker (heartbeat). These metrics are used to monitor adoption and are critical to improve Docker for AWS.
 
 ## How do I run administrative commands?
 
