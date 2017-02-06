@@ -400,15 +400,18 @@ PowerShell Module as follows.
     command to a `$PROFILE` by typing these commands at the PowerShell prompt.
 
     ```none
-    Install-Module -Scope CurrentUser posh-docker -Force
-    Add-Content $PROFILE "`nInstall-Module posh-docker"
+    if (-Not (Test-Path $PROFILE)) {
+        New-Item $PROFILE –Type File –Force
+    }
+    
+    Add-Content $PROFILE "`nImport-Module posh-docker"
     ```
 
     This creates a `$PROFILE` if one does not already exist, and adds this line
     into the file:
 
     ```none
-    Install-Module posh-docker
+    Import-Module posh-docker
     ```
 
     To check that the file was properly created, or simply edit it manually,
