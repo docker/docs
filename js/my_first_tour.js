@@ -19,22 +19,57 @@ var tour = {
       content: "Use the top navigation to discover the types of content available.",
       target: "top-nav",
       placement: "bottom",
+      arrowOffset: "center",
+      width: "300px",
       onShow: function () {
         // Show the arrow again
         $('.hopscotch-bubble-arrow-container').css('visibility', 'visible');
       }
     },
     {
+      title: "Guides",
+      content: "Use the <b>Guides</b> tab to learn how to install, configure, and manage Docker as a whole, or to view the docs archives for previous Docker versions.",
+      target: "guides",
+      placement: "bottom"
+    },
+    {
+      title: "Product Manuals",
+      content: "Use the <b>Product Manuals</b> tab to learn detailed information about a specific Docker product, such as Docker Cloud or UCP.",
+      target: "manuals",
+      placement: "bottom"
+    },
+    {
+      title: "Glossary",
+      content: "Use the <b>Glossary</b> tab to quickly define and learn about terminology specific to Docker.",
+      target: "glossary",
+      placement: "bottom"
+    },
+    {
+      title: "Reference",
+      content: "Use the <b>Reference</b> tab to go straight to reference information about Docker, such as API and CLI reference topics.",
+      target: "reference",
+      placement: "bottom"
+    },
+    {
+      title: "Samples",
+      content: "Use the <b>Samples</b> tab to learn about Docker using self-paced tutorials, labs, and sample Docker applications.",
+      target: "samples",
+      placement: "bottom"
+    },
+    {
       title: "Left Navigation",
       content: "Use the left navigation for a structured view of content within a top-level category.",
       target: "left-nav",
-      placement: "right"
+      placement: "right",
+      yOffset: "100px",
+      arrowOffset: "center",
     },
     {
       title: "Feedback Links",
       content: "Use the feedback links to edit the page, provide feedback, or find out how to get support.",
       target: "feedback-links",
       placement: "left",
+      arrowOffset: "center",
       multipage: "true",
       onNext: function() {
         window.location = "/learn/index.html";
@@ -44,7 +79,8 @@ var tour = {
       title: "In-page navigation",
       content: "Use the in-page navigation links to jump to specific areas within the page you are viewing.",
       target: "side-toc",
-      placement: "left"
+      placement: "left",
+      arrowOffset: "center"
     }
   ],
   showPrevButton: true,
@@ -58,7 +94,7 @@ var tour = {
   },
   onClose: function() {
     // Return them back where they came from if they end the tour early
-    if (hopscotch.getState() === "hello-hopscotch:4") {
+    if (hopscotch.getState() === "hello-hopscotch:9") {
       window.location = document.referrer;
     }
   }
@@ -70,6 +106,6 @@ $("#start-tour").click(function(){
 });
 
 // Resume tour if already in progress
-if (hopscotch.getState() === "hello-hopscotch:4") {
+if (hopscotch.getState() === "hello-hopscotch:9") {
   hopscotch.startTour(tour);
 }
