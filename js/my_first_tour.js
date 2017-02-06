@@ -29,32 +29,41 @@ var tour = {
     {
       title: "Guides",
       content: "Use the <b>Guides</b> tab to learn how to install, configure, and manage Docker as a whole, or to view the docs archives for previous Docker versions.",
-      target: "guides",
-      placement: "bottom"
+      target: "top-nav",
+      placement: "bottom",
+      width: "570px"
     },
     {
       title: "Product Manuals",
       content: "Use the <b>Product Manuals</b> tab to learn detailed information about a specific Docker product, such as Docker Cloud or UCP.",
-      target: "manuals",
-      placement: "bottom"
+      target: "top-nav",
+      placement: "bottom",
+      width: "570px",
+      arrowOffset: "140px"
     },
     {
       title: "Glossary",
       content: "Use the <b>Glossary</b> tab to quickly define and learn about terminology specific to Docker.",
-      target: "glossary",
-      placement: "bottom"
+      target: "top-nav",
+      placement: "bottom",
+      width: "570px",
+      arrowOffset: "280px"
     },
     {
       title: "Reference",
       content: "Use the <b>Reference</b> tab to go straight to reference information about Docker, such as API and CLI reference topics.",
-      target: "reference",
-      placement: "bottom"
+      target: "top-nav",
+      placement: "bottom",
+      width: "570px",
+      arrowOffset: "390px"
     },
     {
       title: "Samples",
       content: "Use the <b>Samples</b> tab to learn about Docker using self-paced tutorials, labs, and sample Docker applications.",
-      target: "samples",
-      placement: "bottom"
+      target: "top-nav",
+      placement: "bottom",
+      width: "570px",
+      arrowOffset: "490px"
     },
     {
       title: "Left Navigation",
