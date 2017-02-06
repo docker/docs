@@ -283,6 +283,39 @@ keep the image size down. Since the `RUN` statement starts with
 > **Note**: The official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/docker/docker/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105),
 > so explicit invocation is not required.
 
+#### Using pipes
+
+Some `RUN` commands depend on the ability to pipe the output of one command into another, using the pipe character (`|`), as in the following example:
+
+```Dockerfile
+RUN wget -O - https://some.site | wc -l > /number
+```
+
+Docker executes these commands using the `/bin/sh -c` interpreter, which
+only evaluates the exit code of the last operation in the pipe to determine
+success. In the example above this build step succeeds and produces a new
+image so long as the `wc -l` command succeeds, even if the `wget` command
+fails.
+
+If you want the command to fail due to an error at any stage in the pipe,
+prepend `set -o pipefail &&` to ensure that an unexpected error prevents
+the build from inadvertently succeeding. For example:
+
+```Dockerfile
+RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
+```
+
+> **Note**: Not all shells support the `-o pipefail` option. In such
+> cases (such as the `dash` shell, which is the default shell on
+> Debian-based images), consider using the *exec* form of `RUN`
+> to explicitly choose a shell that does support the `pipefail` option.
+> For example:
+>
+
+```Dockerfile
+RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://some.site | wc -l > /number"]
+```
+
 ### CMD
 
 [Dockerfile reference for the CMD instruction](../../reference/builder.md#cmd)
