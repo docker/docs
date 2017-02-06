@@ -1053,6 +1053,8 @@ toc:
             title: NFS
         - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-high-availability/
           title: Set up high availability
+        - path: /datacenter/dtr/2.2/guides/admin/configure/use-a-load-balancer/
+          title: Use a load balancer
         - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-vulnerability-scans/
           title: Set up vulnerability scans
         - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-a-cache/
