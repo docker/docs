@@ -20,7 +20,7 @@ var tour = {
       target: "top-nav",
       placement: "bottom",
       arrowOffset: "center",
-      width: "300px",
+      width: "570px",
       onShow: function () {
         // Show the arrow again
         $('.hopscotch-bubble-arrow-container').css('visibility', 'visible');
