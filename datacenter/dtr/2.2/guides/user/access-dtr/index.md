@@ -106,4 +106,4 @@ docker login dtr.example.org
 
 ## Where to go next
 
-* [Repositories and images](../repos-and-images.md)
+* [Use a cache](use-a-cache.md)

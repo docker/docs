@@ -1112,7 +1112,7 @@ toc:
         - path: /datacenter/dtr/2.2/guides/user/manage-images/
           title: Create a repository
         - path: /datacenter/dtr/2.2/guides/user/manage-images/pull-and-push-images/
-          title: Push and pull images
+          title: Pull and push images
         - path: /datacenter/dtr/2.2/guides/user/manage-images/delete-images/
           title: Delete images
         - path: /datacenter/dtr/2.2/guides/user/manage-images/scan-images-for-vulnerabilities/

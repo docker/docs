@@ -36,5 +36,5 @@ Docker Datacenter is a software subscription that includes 3 products:
 
 ## Where to go next
 
-* [DTR architecture](../architecture.md)
+* [DTR architecture](../../architecture.md)
 * [Install DTR](index.md)
