@@ -103,8 +103,8 @@ Docker from the repository.
     and remove the word `testing` from the appropriate line in the file.
     
     > **Note**: Sometimes, in a distribution like Linux Mint, you might have
-    > to change **ubuntu-$(lsb_release -cs)** to your parent Ubuntu distribution.
-    > example: If you are using **Linux Mint Rafaela**, you could type in **ubuntu-trusty**
+    > to change `ubuntu-$(lsb_release -cs)` to your parent Ubuntu distribution.
+    > example: If you are using `Linux Mint Rafaela`, you could type in `ubuntu-trusty`
 
 
 #### Install Docker
