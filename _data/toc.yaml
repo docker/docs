@@ -1059,6 +1059,16 @@ toc:
           title: Set up vulnerability scans
         - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-a-cache/
           title: Deploy a cache
+      - sectiontitle: Manage users
+        section:
+        - path: /datacenter/dtr/2.2/guides/admin/manage-users/
+          title: Create and manage users
+        - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-users/
+          title: Create and manage users
+        - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-teams/
+          title: Create and manage teams
+        - path: /datacenter/dtr/2.2/guides/admin/manage-users/permission-levels/
+          title: Permission levels
       - sectiontitle: Monitor and troubleshoot
         section:
         - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/
@@ -1089,16 +1099,6 @@ toc:
           title: restore
         - path: /datacenter/dtr/2.2/reference/cli/upgrade/
           title: upgrade
-    - sectiontitle: Manage users
-      section:
-      - path: /datacenter/dtr/2.2/guides/admin/manage-users/
-        title: Create and manage users
-      - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-users/
-        title: Create and manage users
-      - path: /datacenter/dtr/2.2/guides/admin/manage-users/create-and-manage-teams/
-        title: Create and manage teams
-      - path: /datacenter/dtr/2.2/guides/admin/manage-users/permission-levels/
-        title: Permission levels
     - sectiontitle: User guides
       section:
       - sectiontitle: Access DTR
