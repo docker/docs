@@ -1,8 +1,7 @@
 ---
-description: Learn how to configure your Docker Engine to push and pull images from
-  Docker Trusted Registry.
+title: Configure your Docker Engine
+description: Learn how to configure your Docker Engine to push and pull images from Docker Trusted Registry.
 keywords: docker, registry, TLS, certificates
-title: Configure your Docker Engine with DTR
 ---
 
 By default Docker Engine uses TLS when pushing and pulling images to an
