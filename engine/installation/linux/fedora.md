@@ -152,7 +152,7 @@ Docker from the repository.
 4.  Start Docker.
 
     ```bash
-    $ sudo systemctl start docker
+    $ sudo systemctl docker start
     ```
 
 5.  Verify that `docker` is installed correctly by running the `hello-world`
