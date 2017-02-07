@@ -290,13 +290,13 @@ Configures if and how to restart containers when they exit. Replaces
   specified as a [duration](compose-file.md#specifying-durations) (default:
   decide immediately).
 
-<!-- fix code block after list -->
-
+```
     restart_policy:
       condition: on-failure
       delay: 5s
       max_attempts: 3
       window: 120s
+```
 
 #### labels
 
