@@ -65,6 +65,7 @@ Docker from the repository.
 
     ```bash
     $ sudo apt-get install apt-transport-https \
+                           software-properties-common \
                            ca-certificates
     ```
 
