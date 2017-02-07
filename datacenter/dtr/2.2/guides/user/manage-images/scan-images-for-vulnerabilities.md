@@ -1,7 +1,7 @@
 ---
-description: Docker Security Scanning for Docker Trusted Registry.
-keywords: docker, registry, scanning, security scan, vulnerability, CVE
-title: Docker Security Scanning in DTR
+title: Scan images for vulnerabilities
+description: Learn how to scan your Docker images for vulnerabilities.
+keywords: docker, registry, scan, vulnerability
 ---
 
 Docker Trusted Registry can scan images in your repositories to verify that they
