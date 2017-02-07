@@ -1107,12 +1107,18 @@ toc:
           title: Configure your Docker Engine
         - path: /datacenter/dtr/2.2/guides/user/access-dtr/use-a-cache/
           title: Use a cache
-      - path: /datacenter/dtr/2.2/guides/user/repos-and-images/
-        title: Repos and images
+      - sectiontitle: Manage images
+        section:
+        - path: /datacenter/dtr/2.2/guides/user/manage-images/
+          title: Create a repository
+        - path: /datacenter/dtr/2.2/guides/user/manage-images/pull-and-push-images/
+          title: Push and pull images
+        - path: /datacenter/dtr/2.2/guides/user/manage-images/delete-images/
+          title: Delete images
+        - path: /datacenter/dtr/2.2/guides/user/manage-images/scan-images-for-vulnerabilities/
+          title: Scan images for vulnerabilities
       - path: /datacenter/dtr/2.2/guides/user/create-and-manage-webhooks/
         title: Create and manage webhooks
-      - path: /datacenter/dtr/2.2/guides/user/scan-your-images/
-        title: Scan your images
     - path: /datacenter/dtr/2.2/reference/api/
       title: API reference
     - path: /datacenter/dtr/2.2/guides/support/
