@@ -303,6 +303,7 @@ The `awslogs` supports the following options:
 | `awslogs-region`       | Sets the region where the logs are sent. If not set, the container's region is used. | `--log-opt awslogs-region=us-east-1` |
 | `awslogs-group`        | The log group to use for the logs. | `--log-opt awslogs-group=myLogGroup` |
 | `awslogs-stream`       | The log stream to use. If not specified, the container ID is used as the log stream. | `--log-opt awslogs-stream=myLogStream` |
+| `awslogs-create-group` | If the option is set to true, create the log group if the log group does not exist yet. | `--log-opt awslogs-create-group=true` |
 
 ### Examples
 
@@ -314,6 +315,7 @@ $ docker run \
          --log-driver=awslogs \
          --log-opt awslogs-region=us-east-1 \
          --log-opt awslogs-group=myLogGroup \
+         --log-opt awslogs-create-group=true \
          alpine sh
 ```
 
