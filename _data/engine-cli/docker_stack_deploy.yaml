@@ -1,4 +1,5 @@
 command: docker stack deploy
+aliases: up
 short: Deploy a new stack or update an existing stack
 long: Deploy a new stack or update an existing stack
 usage: docker stack deploy [OPTIONS] STACK

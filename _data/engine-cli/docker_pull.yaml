@@ -1,6 +1,7 @@
 command: docker pull
 short: Pull an image or a repository from a registry
-long: Pull an image or a repository from a registry
+long: |
+  Alias for `docker image pull`.
 usage: docker pull [OPTIONS] NAME[:TAG|@DIGEST]
 pname: docker
 plink: docker.yaml

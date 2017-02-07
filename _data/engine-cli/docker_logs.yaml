@@ -1,6 +1,7 @@
 command: docker logs
 short: Fetch the logs of a container
-long: Fetch the logs of a container
+long: |
+  Alias for `docker container logs`.
 usage: docker logs [OPTIONS] CONTAINER
 pname: docker
 plink: docker.yaml
@@ -13,7 +14,8 @@ options:
   default_value: "false"
   description: Follow log output
 - option: since
-  description: Show logs since timestamp
+  description: |
+    Show logs since timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
 - option: tail
   default_value: all
   description: Number of lines to show from the end of the logs

@@ -81,11 +81,12 @@ so this will reset this log view.
 
 ### Starting a terminal in a container
 
-The "Terminal" icon at the top of the container summary will `docker exec sh <your container>`.
+The "Terminal" icon at the top of the container summary will `docker exec -i -t <your container> sh`.
 This will allow you to make quick changes, or to debug a problem.
 
 > **Note**: Your exec'ed `sh` process will not have the same environment settings
-> as the main container process and its children.
+> as the main container process and its children. 
+> Get the environment commands for your shell: `docker-machine env default`.
 
 ### Managing Volumes
 

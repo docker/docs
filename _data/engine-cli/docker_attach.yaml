@@ -1,6 +1,8 @@
 command: docker attach
 short: Attach to a running container
-long: Attach to a running container
+long: |2
+
+  Alias for `docker container attach`.
 usage: docker attach [OPTIONS] CONTAINER
 pname: docker
 plink: docker.yaml

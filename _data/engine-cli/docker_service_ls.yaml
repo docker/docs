@@ -1,4 +1,5 @@
 command: docker service ls
+aliases: list
 short: List services
 long: List services
 usage: docker service ls [OPTIONS]

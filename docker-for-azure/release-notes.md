@@ -4,10 +4,12 @@ keywords: azure, microsoft, iaas, tutorial
 title: Docker for Azure Release Notes
 ---
 
+{% include d4a_buttons.md %}
+
 ## 1.13.0-1
 Release date: 1/18/2017
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fdownload.docker.com%2Fazure%2Fstable%2FDocker.tmpl" data-rel="Stable-1" target="_blank" class="_" id="azure-deploy">![Docker for Azure](http://azuredeploy.net/deploybutton.png)</a>
+{{azure_button_latest}}
 
 ### New
 

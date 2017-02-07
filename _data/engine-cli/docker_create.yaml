@@ -1,6 +1,7 @@
 command: docker create
 short: Create a new container
-long: Create a new container
+long: |
+  Alias for `docker container create`.
 usage: docker create [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker
 plink: docker.yaml
@@ -140,9 +141,9 @@ options:
   default_value: "0"
   description: Maximum IOps limit for the system drive (Windows only)
 - option: ip
-  description: Container IPv4 address (e.g. 172.30.100.104)
+  description: IPv4 address (e.g., 172.30.100.104)
 - option: ip6
-  description: Container IPv6 address (e.g. 2001:db8::33)
+  description: IPv6 address (e.g., 2001:db8::33)
 - option: ipc
   description: IPC namespace to use
 - option: isolation
@@ -168,7 +169,7 @@ options:
   default_value: '[]'
   description: Log driver options
 - option: mac-address
-  description: Container MAC address (e.g. 92:d0:c6:0a:29:33)
+  description: Container MAC address (e.g., 92:d0:c6:0a:29:33)
 - option: memory
   shorthand: m
   description: Memory limit

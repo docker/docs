@@ -16,9 +16,6 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn
 about both kinds of releases, and download stable and beta product installers at
 [Download Docker for Mac](index.md#download-docker-for-mac).
 
-* [Stable Release Notes](release-notes.md#stable-release-notes)
-* [Beta Release Notes](release-notes.md#beta-release-notes)
-
 ## Stable Release Notes
 
 ### Docker for Mac 1.13.0, 2017-01-19 (stable)
@@ -269,6 +266,27 @@ events or unexpected unmounts.
 
 ## Beta Release Notes
 
+### Beta 40 Release Notes (2017-01-31 1.13.1-beta40)
+
+**Upgrades**
+
+- [Docker 1.13.1-rc1](https://github.com/docker/docker/releases/tag/v1.13.1-rc1)
+- Linux kernel 4.9.6
+
+**New**
+
+- Allow to reset faulty `daemon.json` through a link in advanced subpanel
+- Add link to experimental features
+- Hide restart button in settings window
+- Increase the maximum number of vCPUs to 64
+
+**Bug fixes and minor improvements**
+
+- VPNKit: Avoid diagnostics to capture too much data
+- VPNKit: Fix a source of occasional packet loss (truncation) on the virtual ethernet link
+- HyperKit: Dump guest physical and linear address from VMCS when dumping state
+- HyperKit: Kernel boots with `panic=1` arg
+
 ### Beta 39 Release Notes (2017-01-26 1.13.0-beta39)
 
 **Upgrades**
@@ -277,7 +295,7 @@ events or unexpected unmounts.
 
 **New**
 
-- More options when moving disk image
+- More options when moving disk image (see [Storage location](index.md#storage-location) under Advanced preference settings)
 - Filesharing and daemon table empty fields are editable
 - DNS forwarder ignores responses from malfunctioning servers ([docker/for-mac#1025](https://github.com/docker/for-mac/issues/1025))
 - DNS forwarder send all queries in parallel, process results in order

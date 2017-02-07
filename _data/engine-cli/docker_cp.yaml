@@ -1,12 +1,7 @@
 command: docker cp
 short: Copy files/folders between a container and the local filesystem
-long: |-
-  Copy files/folders between a container and the local filesystem
-
-  Use '-' as the source to read a tar archive from stdin
-  and extract it to a directory destination in a container.
-  Use '-' as the destination to stream a tar archive of a
-  container source to stdout.
+long: |
+  Alias for `docker container cp`.
 usage: "docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-\n\tdocker cp [OPTIONS]
   SRC_PATH|- CONTAINER:DEST_PATH"
 pname: docker

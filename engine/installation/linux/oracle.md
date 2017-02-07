@@ -17,8 +17,7 @@ To get started with Docker on Oracle Linux, make sure you
 To install Docker, you need the 64-bit version of Oracle Linux 6 or 7.
 
 To use `btrfs`, you need to install the Unbreakable Enterprise Kernel (UEK)
-version 4.1.12 or higher. running the Unbreakable Enterprise Kernel Release 4
-(4.1.12) or higher. For Oracle Linux 6, you need to enable extra repositories
+version 4.1.12 or higher. For Oracle Linux 6, you need to enable extra repositories
 to install UEK4. See
 [Obtaining and installing the UEK packages](https://docs.oracle.com/cd/E37670_01/E37355/html/ol_obtain_uek.html){: target="_blank" class="_" }.
 
@@ -30,6 +29,13 @@ remove it using the following command:
 
 ```bash
 $ sudo yum -y remove docker
+```
+
+You may also have to remove the package `docker-engine-selinux` which conflicts with
+the official `docker-engine` package.  Remove it with the following command:
+
+```bash
+$ sudo yum -y remove docker-engine-selinux
 ```
 
 The contents of `/var/lib/docker` are not removed, so any images, containers,

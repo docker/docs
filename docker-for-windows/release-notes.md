@@ -16,10 +16,6 @@ Release notes for _stable_ and _beta_ releases are listed below. You can learn
 about both kinds of releases, and download stable and beta product installers at
 [Download Docker for Windows](index.md#download-docker-for-windows).
 
-* [Stable Release Notes](release-notes.md#stable-release-notes)
-* [Beta Release Notes](release-notes.md#beta-release-notes)
-* [Alpha Release Notes](release-notes.md#alpha-release-notes)
-
 ## Stable Release Notes
 
 ### Docker for Windows 1.13.0, 2017-01-19 (stable)
@@ -257,6 +253,23 @@ We did not distribute a 1.12.4 stable release
 * Docker Compose 1.8.0
 
 ## Beta Release Notes
+
+### Beta 40 Release Notes (2017-01-31 1.13.1-beta40)
+
+**Upgrades**
+
+- [Docker 1.13.1-rc1](https://github.com/docker/docker/releases/tag/v1.13.1-rc1)
+- Linux kernel 4.9.6
+
+**Bug fixes and minor improvements**
+
+- Fix startup error of `ObjectNotFound` in Set-VMFirmware
+- Add detailed logs when firewall is configured
+- Add a link to the Experimental Features documentation
+- Fixed the Copyright in About Dialog
+- VPNKit: Avoid diagnostics to capture too much data
+- VPNKit: fix a source of occasional packet loss (truncation) on the virtual ethernet link
+- Fix negotiation of TimeSync protocol version (via kernel update)
 
 ### Beta 39 Release Notes (2017-01-26 1.13.0-beta39)
 

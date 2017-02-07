@@ -131,11 +131,13 @@
     color: black;
 }
 #DocumentationText a,
-#TableOfContentsSection a {
+#RightColumnSection a {
     color: #008AB5;
 }
+
 /* reset away from #008AB5 */
 
+/* removed hard-coded color for button links pre new CSS from Design */
 #DocumentationText a.button {
 }
 
@@ -144,6 +146,7 @@
     margin-top: 15px;
 }
 
+/*  hard coded color and other settings pre new CSS from Design */
 #DocumentationText .secondary-btn,
    button .secondary-btn {
      border: 2px solid #1488c6;
@@ -216,7 +219,6 @@ div.docsidebarnav_section.affix ul {
     color: #fff;
     font-size: 13px;
     font-family: 'Geomanist Regular', sans-serif;
-    font-weight: 400;
     display: block;
     width: 100%;
 		padding: 16px 5px 16px 20px;
@@ -301,7 +303,7 @@ div.docsidebarnav_section.affix ul {
 }
 
 /* TableOfContents */
-.tableofcontents_section {
+.right_column_section {
   padding: 0;
 }
 .rating-msg {
@@ -314,55 +316,15 @@ div.docsidebarnav_section.affix ul {
   display: none !important;
 }
 
-#TableOfContents {
-  padding-top: 10px;
-}
-#TableOfContentsSection {
-  margin: 0;
+#RightColumnSection {
   padding: 0 !important;
-  background-color: #f5fdff;
 }
 
-#TableOfContents li a,
-#TableOfContentsSection .heading {
-  font-size: 14px;
-  font-style: normal;
-  margin: 0;
-  padding: 10px 15px;
-  display: block !important;
-  line-height: 15px;
-}
-#TableOfContentsSection .heading {
-  background-color: #6db9d1;
-  color: #ffffff;
-}
-#TableOfContentsSection ​#TableOfContents {
-  background-color: #F5FDFF;
-  margin: 0;
-  padding: 15px;
-}
-#TableOfContentsSection #TableOfContents ul {
-    list-style: none;
-    padding: 0;
-    left: 0;
-    padding: 0;
-    width: 100%;
-    text-align: left;
-    overflow: hidden;
-    margin-left: 0;
-    padding-left: 0.30rem;
-    font-size: 14px;
-}
-
-#TableOfContentsSection #TableOfContents > ul {
-  padding-left: 0;
+#RightColumnSection ul {
+  padding-top: 5px;
   list-style: none;
+  margin-left: 0;
 }
-
-#TableOfContentsSection #TableOfContents > ul > li > ul {
-  padding-left: 0;
-}
-
 .advisory {
 color: #F04124;
     margin: -20px -20px 20px -20px;
@@ -386,7 +348,6 @@ color: #F04124;
 }
 .search-form .algolia-autocomplete .search-field, #st-search-input {
   width: 100%;
-  border: 1px solid lightgray;
 }
 .search-form{
     max-width: 420px;
@@ -448,4 +409,56 @@ span.reading-time-label {
 
 img.with-border {
   border: 1px solid #eaeaea;
+}
+
+#search-div {
+  margin-top: 10px;
+  border: 1px solid #2294ca;
+}
+
+#side-toc {
+  background-color: #f5fdff;
+  border: 1px solid #2294ca;
+  padding: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+#feedback-links {
+  border: 1px solid #2294ca;
+  padding: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+#side-toc-contents,
+#feedback-links {
+  list-style-type: none;
+  font-size: 80%;
+}
+
+#side-toc-contents ul,
+#feedback-links ul {
+  margin-bottom: 0;
+}
+
+#side-toc-contents li {
+  padding-bottom: 7px;
+  padding-top: 7px;
+  line-height: 1!important;
+}
+#side-toc-contents ul ul li {
+  padding-left: 14px;
+}
+#side-toc-title {
+  font-weight: bolder;
+  font-size: 90%;
+  color: #155A74;
+  padding-bottom: 5px;
+}
+
+#site-generation {
+  font-size: 9px;
+  color: #999;
+  font-style: italic;
 }

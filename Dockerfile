@@ -1,6 +1,6 @@
 FROM starefossen/github-pages
 
-ENV VERSIONS="v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11"
+ENV VERSIONS="v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12"
 
 # Create archive; check out each version, create HTML, tweak links
 RUN git clone https://www.github.com/docker/docker.github.io temp; \

@@ -4,10 +4,12 @@ keywords: aws, amazon, iaas, release
 title: Docker for AWS Release Notes
 ---
 
+{% include d4a_buttons.md %}
+
 ## 1.13.0-1
 Release date: 1/18/2017
 
-<a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/stable/Docker.tmpl" data-rel="Stable-1" target="blank" id="aws-deploy">![Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)</a>
+{{aws_button_latest}}
 
 ### New
 - Docker Engine upgraded to [Docker 1.13.0](https://github.com/docker/docker/blob/master/CHANGELOG.md)

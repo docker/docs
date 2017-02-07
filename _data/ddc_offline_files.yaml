@@ -6,6 +6,8 @@
 
 - ucp-version: "2.0"
   tar-files:
+    - description: "UCP 2.0.2"
+      url: https://packages.docker.com/caas/ucp_images_2.0.2.tar.gz
     - description: "DTR 2.1.4"
       url: https://packages.docker.com/caas/dtr-2.1.4.tar.gz
     - description: "UCP 2.0.1, DTR 2.1.3"
@@ -20,6 +22,8 @@
       url: https://packages.docker.com/caas/ucp-2.0.0_dtr-2.1.0.tar.gz
 - ucp-version: "1.1"
   tar-files:
+    - description: "UCP 1.1.6"
+      url: https://packages.docker.com/caas/ucp_images_1.1.6.tar.gz
     - description: "UCP 1.1.5, DTR 2.0.4"
       url: https://packages.docker.com/caas/ucp-1.1.5_dtr-2.0.4.tar.gz
     - description: "UCP 1.1.4, DTR 2.0.4"

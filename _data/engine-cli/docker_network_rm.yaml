@@ -1,4 +1,5 @@
 command: docker network rm
+aliases: remove
 short: Remove one or more networks
 long: |
   Removes one or more networks by name or identifier. To remove a network,

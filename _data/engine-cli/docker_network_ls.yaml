@@ -1,12 +1,14 @@
 command: docker network ls
+aliases: list
 short: List networks
 long: "Lists all the networks the Engine `daemon` knows about. This includes the\nnetworks
   that span across multiple hosts in a cluster, for example:\n\n```bash\n    $ docker
-  network ls\n    NETWORK ID          NAME                DRIVER\n    7fca4eb8c647
-  \       bridge              bridge\n    9f904ee27bf5        none                null\n
-  \   cf03ee007fb4        host                host\n    78b03ee04fc4        multi-host
-  \         overlay\n```\n\nUse the `--no-trunc` option to display the full network
-  id:\n\n```bash\n$ docker network ls --no-trunc\nNETWORK ID                                                         NAME
+  network ls\n    NETWORK ID          NAME                DRIVER          SCOPE\n
+  \   7fca4eb8c647        bridge              bridge          local\n    9f904ee27bf5
+  \       none                null            local\n    cf03ee007fb4        host
+  \               host            local\n    78b03ee04fc4        multi-host          overlay
+  \        swarm\n```\n\nUse the `--no-trunc` option to display the full network id:\n\n```bash\n$
+  docker network ls --no-trunc\nNETWORK ID                                                         NAME
   \               DRIVER\n18a2866682b85619a026c81b98a5e375bd33e1b0936a26cc497c283d27bae9b3
   \  none                null                \nc288470c46f6c8949c5f7e5099b5b7947b07eabe8d9a27d79a9cbf111adcbf47
   \  host                host                \n7b369448dccbf865d397c8d2be0cda7cf7edc6b0945f77d2529912ae917a0185

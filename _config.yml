@@ -5,12 +5,13 @@ kramdown:
   html_to_native: true
   hard_wrap: false
   syntax_highlighter: rouge
+  toc_levels: 2..3
 incremental: true
 permalink: pretty
 safe: false
 lsi: false
 url: https://docs.docker.com
-keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11"]
+keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "v1.12"]
 
 gems:
   - jekyll-redirect-from
@@ -29,6 +30,9 @@ defaults:
       layout: docs
       defaultassignee: johndmulhausen
       enginebranch: 1.13.x
+      toc_min: 2
+      toc_max: 3
+      tree: true
   - scope:
       path: "compose"
     values:

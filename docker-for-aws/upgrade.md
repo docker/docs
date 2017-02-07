@@ -4,7 +4,7 @@ keywords: aws, amazon, iaas, tutorial
 title: Docker for AWS Upgrades
 ---
 
-To upgrade, apply a new version of the AWS Cloudformation template that powers Docker for Azure. Depending on changes in the next version, an upgrade involves:
+To upgrade, apply a new version of the AWS Cloudformation template that powers Docker for AWS. Depending on changes in the next version, an upgrade involves:
 
  * Changing the AMI backing manager and worker nodes (the Docker engine ships in the AMI)
  * Upgrading service containers

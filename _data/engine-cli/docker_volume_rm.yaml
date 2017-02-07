@@ -1,4 +1,5 @@
 command: docker volume rm
+aliases: remove
 short: Remove one or more volumes
 long: |2
 

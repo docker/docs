@@ -35,13 +35,11 @@ options:
 - option: health-cmd
   description: Command to run to check health
 - option: health-interval
-  default_value: none
   description: Time between running the check (ns|us|ms|s|m|h)
 - option: health-retries
   default_value: "0"
   description: Consecutive failures needed to report unhealthy
 - option: health-timeout
-  default_value: none
   description: Maximum time to allow one check to run (ns|us|ms|s|m|h)
 - option: host
   default_value: '[]'
@@ -80,7 +78,6 @@ options:
   shorthand: p
   description: Publish a port as a node port
 - option: replicas
-  default_value: none
   description: Number of tasks
 - option: reserve-cpu
   default_value: "0.000"
@@ -91,18 +88,14 @@ options:
 - option: restart-condition
   description: Restart when condition is met (none, on-failure, or any)
 - option: restart-delay
-  default_value: none
   description: Delay between restart attempts (ns|us|ms|s|m|h)
 - option: restart-max-attempts
-  default_value: none
   description: Maximum number of restarts before giving up
 - option: restart-window
-  default_value: none
   description: Window used to evaluate the restart policy (ns|us|ms|s|m|h)
 - option: secret
   description: Specify secrets to expose to the service
 - option: stop-grace-period
-  default_value: none
   description: |
     Time to wait before force killing a container (ns|us|ms|s|m|h)
 - option: tty
