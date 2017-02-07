@@ -28,14 +28,14 @@ var tour = {
     },
     {
       title: "Guides",
-      content: "Use the <b>Guides</b> tab to learn how to install, configure, and manage Docker as a whole, or to view the docs archives for previous Docker versions.",
+      content: "Use the <b>Guides</b> tab to learn how to install, configure, and manage Docker as a whole, or to view docs archives for previous Docker versions.",
       target: "top-nav",
       placement: "bottom",
       width: "570px"
     },
     {
       title: "Product Manuals",
-      content: "Use the <b>Product Manuals</b> tab to learn detailed information about a specific Docker product, such as Docker Cloud or UCP.",
+      content: "Use the <b>Product Manuals</b> tab to learn about a specific Docker product, such as Docker Cloud or UCP.",
       target: "top-nav",
       placement: "bottom",
       width: "570px",
@@ -43,7 +43,7 @@ var tour = {
     },
     {
       title: "Glossary",
-      content: "Use the <b>Glossary</b> tab to quickly define and learn about terminology specific to Docker.",
+      content: "Use the <b>Glossary</b> tab to learn terminology specific to Docker.",
       target: "top-nav",
       placement: "bottom",
       width: "570px",
@@ -51,7 +51,7 @@ var tour = {
     },
     {
       title: "Reference",
-      content: "Use the <b>Reference</b> tab to go straight to reference information about Docker, such as API and CLI reference topics.",
+      content: "Use the <b>Reference</b> tab to go to Docker reference information, such as API, CLI, and commands topics.",
       target: "top-nav",
       placement: "bottom",
       width: "570px",
@@ -59,7 +59,7 @@ var tour = {
     },
     {
       title: "Samples",
-      content: "Use the <b>Samples</b> tab to learn about Docker using self-paced tutorials, labs, and sample Docker applications.",
+      content: "Use the <b>Samples</b> tab to for self-paced tutorials, labs, and sample Docker applications.",
       target: "top-nav",
       placement: "bottom",
       width: "570px",
@@ -86,7 +86,7 @@ var tour = {
     },
     {
       title: "In-page navigation",
-      content: "Use the in-page navigation links to jump to specific areas within the page you are viewing.",
+      content: "Use the in-page navigation links to jump to topics on the page you are viewing.",
       target: "side-toc",
       placement: "left",
       arrowOffset: "center"
