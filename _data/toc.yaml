@@ -1104,7 +1104,9 @@ toc:
       - sectiontitle: Access DTR
         section:
         - path: /datacenter/dtr/2.2/guides/user/access-dtr/
-          title: Configure your Docker CLI
+          title: Configure your Docker Engine
+        - path: /datacenter/dtr/2.2/guides/user/access-dtr/use-a-cache/
+          title: Use a cache
       - path: /datacenter/dtr/2.2/guides/user/repos-and-images/
         title: Repos and images
       - path: /datacenter/dtr/2.2/guides/user/create-and-manage-webhooks/
