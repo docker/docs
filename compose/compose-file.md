@@ -256,11 +256,11 @@ updates.
 - `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
 - `max_failure_ratio`: Failure rate to tolerate during an update.
 
-<!-- fix code block after list -->
-
+```
     update_config:
       parallelism: 2
       delay: 10s
+```
 
 #### resources
 
