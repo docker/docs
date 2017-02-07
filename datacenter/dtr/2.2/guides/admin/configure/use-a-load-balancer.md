@@ -29,5 +29,5 @@ not
 
 ## Where to go next
 
-* [Backups and disaster recovery](backups-and-disaster-recovery.md)
-* [DTR architecture](../architecture.md)
+* [Backups and disaster recovery](../backups-and-disaster-recovery.md)
+* [DTR architecture](../../architecture.md)
