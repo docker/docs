@@ -5,16 +5,40 @@ keywords: docker, dtr, install, deploy
 ---
 
 Docker Trusted Registry is designed to scale horizontally as your usage
-increases. You can add or remove replicas to make DTR scale to your needs
-or for high availability.
+increases. You can add more replicas to make DTR scale to your demand and for
+high availability.
 
-To set up DTR for high availability,
-you can add more replicas to your DTR cluster. Adding more replicas allows you
-to load-balance requests across all replicas, and keep DTR working if a
-replica fails.
+All DTR replicas run the same set of services and changes to their configuration
+are automatically propagated to other replicas.
 
-For high-availability you should set 3, 5, or 7 DTR replicas. The nodes where
-you're going to install these replicas also need to be managed by UCP.
+![](../../images/set-up-high-availability-1.svg)
+
+To make DTR tolerant to failures, add additional replicas to the DTR cluster.
+
+| DTR replicas | Failures tolerated |
+|:------------:|:------------------:|
+|      1       |         0          |
+|      3       |         1          |
+|      5       |         2          |
+|      7       |         3          |
+
+
+When sizing your DTR installation for high-availability,
+follow these rules of thumb:
+
+* Don't create a DTR cluster with just two replicas. Your cluster
+won't tolerate any failures, and it's possible that you experience performance
+degradation.
+* When a replica fails, the number of failures tolerated by your cluster
+decreases. Don't leave that replica offline for long.
+* Adding too many replicas to the cluster might also lead to performance
+degradation, as data needs to be replicated across all replicas.
+
+To have high-availability on UCP and DTR, you need a minimum of:
+
+* 3 dedicated nodes to install UCP with high availability,
+* 3 dedicated nodes to install DTR with high availability,
+* As many nodes as you want for running your containers and applications.
 
 ## Join more DTR replicas
 

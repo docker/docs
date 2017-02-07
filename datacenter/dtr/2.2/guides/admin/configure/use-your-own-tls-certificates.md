@@ -1,8 +1,7 @@
 ---
-description: Trusted Registry configuration options
-keywords: docker, documentation, about, technology, install, enterprise, hub, CS engine,
-  Docker Trusted Registry, configure, storage, backend, drivers
-title: Set up TLS certificates for DTR
+title: Use your own TLS certificates
+description: Learn how to configure Docker Trusted Registry with your own TLS certificates.
+keywords: docker, dtr, tls
 ---
 
 
