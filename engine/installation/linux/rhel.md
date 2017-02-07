@@ -148,10 +148,23 @@ Docker from the repository.
     $ sudo yum -y install docker-engine-<VERSION_STRING>
     ```
 
-4.  Start Docker.
+4.  Start Docker and enable autostart on reboot
 
     ```bash
-    $ sudo systemctl docker start
+    $ sudo systemctl start docker
+    $ sudo systemctl enable docker
+    ```
+    If you are behind a proxy server, edit /etc/systemd/system/docker.service.d/http-proxy.conf to read:
+    ```bash
+    $ sudo mkdir -p /etc/systemd/system/docker.service.d
+    $ sudo vi /etc/systemd/system/docker.service.d/http-proxy.conf
+    $ sudo cat /etc/systemd/system/docker.service.d/http-proxy.conf   
+    [Service]
+    Environment="HTTP_PROXY=http://myproxy:3128"
+    Environment="HTTPS_PROXY=http://myproxy:3128"
+    
+    $ sudo systemctl daemon-reload
+    $ sudo systemctl restart docker
     ```
 
 5.  Verify that `docker` is installed correctly by running the `hello-world`
