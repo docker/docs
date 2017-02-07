@@ -24,7 +24,7 @@ to run, you need to install UCP on all the nodes where you plan to install DTR.
 DTR needs to be installed on a worker node that is being managed by UCP.
 You can't install DTR on a standalone Docker Engine.
 
-![](../../images/install-dtr-0.png)
+![](../../images/install-dtr-0.svg)
 
 
 ## Step 3. Install DTR

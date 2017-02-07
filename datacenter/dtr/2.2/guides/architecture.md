@@ -4,13 +4,25 @@ keywords: docker, registry, dtr, architecture
 title: DTR architecture
 ---
 
-Docker Trusted Registry (DTR) is a Dockerized application that runs on a Docker
-Universal Control Plane cluster.
+Docker Trusted Registry (DTR) is a containerized application that runs on a
+Docker Universal Control Plane cluster.
 
-![](images/architecture-1.png)
+![](images/architecture-1.svg)
 
+Once you have DTR deployed, you use your Docker CLI client to login, push, and
+pull images.
 
-## Containers
+## Under the hood
+
+For high-availability you can deploy multiple DTR replicas, one on each UCP
+worker node.
+
+![](images/architecture-2.svg)
+
+All DTR replicas run the same set of services and changes to their configuration
+are automatically propagated to other replicas.
+
+## DTR internal components
 
 When you install DTR on a node, the following containers are started:
 
@@ -28,7 +40,7 @@ When you install DTR on a node, the following containers are started:
 
 All these components are for internal use of DTR. Don't use them in your applications.
 
-## Networks
+## Networks used by DTR
 
 To allow containers to communicate, when installing DTR the following networks
 are created:
@@ -38,7 +50,7 @@ are created:
 | dtr-ol | overlay | Allows DTR components running on different nodes to communicate, to replicate DTR data |
 
 
-## Volumes
+## Volumes used by DTR
 
 DTR uses these named volumes for persisting data:
 
@@ -61,9 +73,12 @@ By default, the data for these volumes can be found at
 ## Image storage
 
 By default, Docker Trusted Registry stores images on the filesystem of the node
-where it is running.
+where it is running, but you should configure it to use a centralized storage
+backend.
 
-You can also configure DTR to use these storage backends:
+![](images/architecture-3.svg)
+
+DTR supports these storage backends:
 
 * NFS
 * Amazon S3
@@ -72,13 +87,14 @@ You can also configure DTR to use these storage backends:
 * OpenStack Swift
 * Microsoft Azure
 
-For highly available installations, you should use a cloud storage system
-instead of an NFS mount, since they usually have better performance.
+## How to interact with DTR
 
-## High-availability support
+DTR has a web UI where you can manage settings and user permissions.
 
-For load balancing and high-availability, you can install multiple replicas of
-DTR, and join them to create a cluster.
+![](images/architecture-4.svg)
+
+You can push and pull images using the standard Docker CLI client or other tools
+that can interact with a Docker registry.
 
 ## Where to go next
 

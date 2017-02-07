@@ -13,7 +13,7 @@ that allows them faster downloads.
 
 You start by deploying one or more DTR caches.
 
-![](images/cache-docker-images-1.svg)
+![](../../images/cache-docker-images-1.svg)
 
 Since caches have to contact DTR for authorizing user requests, and requests
 are chained from one cache to the next until the request reaches DTR, you
@@ -106,7 +106,7 @@ DTR interactive API documentation to use this API.
 
 In the DTR web UI, click the top-right menu, and choose **API docs**.
 
-![](images/cache-docker-images-2.png){: .with-border}
+![](../../images/cache-docker-images-2.png){: .with-border}
 
 Navigate to the `POST /api/v0/content_caches` line and click it to expand.
 In the **body** field include:
@@ -120,7 +120,7 @@ In the **body** field include:
 
 Click the **Try it out!** button to make the API call.
 
-![](images/cache-docker-images-3.png){: .with-border}
+![](../../images/cache-docker-images-3.png){: .with-border}
 
 DTR knows about the cache we've created, so we just need to configure our DTR
 user settings to start using that cache.
@@ -128,7 +128,7 @@ user settings to start using that cache.
 In the DTR web UI, navigate to your **user profile**, click the **Settings**
 tab, and change the **Content cache** settings to use the **region-us** cache.
 
-![](images/cache-docker-images-4.png){: .with-border}
+![](../../images/cache-docker-images-4.png){: .with-border}
 
 Now when you pull images, you'll be using the cache. To test this, try pulling
 an image from DTR. You can inspect the logs of the cache service, to validate

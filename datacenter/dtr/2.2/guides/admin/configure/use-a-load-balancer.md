@@ -7,7 +7,7 @@ keywords: docker, dtr, load balancer
 Once you’ve joined multiple DTR replicas nodes for high-availability, you can
 configure your own load balancer to balance user requests across all replicas.
 
-![](image)
+![](../../images/use-a-load-balancer-1.svg)
 
 
 This allows users to access DTR using a centralized domain name. If a replica
