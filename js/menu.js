@@ -44,7 +44,7 @@ function matches(inputTxt,searchTxt)
 function hookupTOCEvents()
 {
   // do after tree render
-  $('.expand-menu').on('mouseup touchend', function(elem) {
+  $('.expand-menu').on('click', function(elem) {
 //      menu = elem.currentTarget.nextElementSibling
     menu = elem.currentTarget.parentElement
     if (menu.classList.contains("menu-closed")) {
