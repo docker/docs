@@ -728,7 +728,7 @@ toc:
       - path: /engine/reference/commandline/volume_ls/
         title: docker volume ls
       - path: /engine/reference/commandline/volume_prune/
-        title: docker volume ls
+        title: docker volume prune
       - path: /engine/reference/commandline/volume_rm/
         title: docker volume rm
     - path: /engine/reference/commandline/wait/
