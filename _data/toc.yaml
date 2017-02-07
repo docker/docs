@@ -933,12 +933,14 @@ toc:
           title: Add labels to cluster nodes
         - path: /datacenter/ucp/2.1/guides/admin/configure/store-logs-in-an-external-system/
           title: Store logs in an external system
-        - path: /datacenter/ucp/2.1/guides/admin/configure/only-allow-running-signed-images/
-          title: Only allow running signed images
         - path: /datacenter/ucp/2.1/guides/admin/configure/restrict-services-to-worker-nodes/
           title: Restrict services to worker nodes
         - path: /datacenter/ucp/2.1/guides/admin/configure/use-domain-names-to-access-services/
           title: Use domain names to access services
+        - path: /datacenter/ucp/2.1/guides/admin/configure/only-allow-running-signed-images/
+          title: Only allow running signed images
+        - path: /datacenter/ucp/2.1/guides/admin/configure/use-trusted-images-for-ci/
+          title: Use trusted images for continuous integration
         - path: /datacenter/ucp/2.1/guides/admin/configure/external-auth/
           title: Integrate with LDAP
       - sectiontitle: Manage users
@@ -1007,7 +1009,7 @@ toc:
           title: Use hostnames to access your service
         - path: /datacenter/ucp/2.1/guides/user/services/
           title: Deploy an app from the UI
-        - path: /datacenter/ucp/2.1/guides/user/applications/deploy-app-cli/
+        - path: /datacenter/ucp/2.1/guides/user/services/deploy-app-cli/
           title: Deploy an app from the CLI
       - sectiontitle: Secrets
         section:
@@ -1015,6 +1017,8 @@ toc:
           title: Manage secrets
         - path: /datacenter/ucp/2.1/guides/user/secrets/grant-revoke-access/
           title: Grant access to secrets
+    - path: /datacenter/ucp/2.1/guides/get-support/
+      title: Get support
   - sectiontitle: Docker Trusted Registry
     section:
     - path: /datacenter/dtr/2.2/guides/
@@ -1117,6 +1121,8 @@ toc:
           title: Delete images
         - path: /datacenter/dtr/2.2/guides/user/manage-images/scan-images-for-vulnerabilities/
           title: Scan images for vulnerabilities
+        - path: /datacenter/dtr/2.2/guides/user/manage-images/manage-trusted-repositories/
+          title: Manage trusted repositories
       - path: /datacenter/dtr/2.2/guides/user/create-and-manage-webhooks/
         title: Create and manage webhooks
     - path: /datacenter/dtr/2.2/reference/api/
