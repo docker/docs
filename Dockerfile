@@ -2,6 +2,24 @@ FROM starefossen/github-pages:112
 
 ENV VERSIONS="v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12"
 
+ENV NGINX_VERSION 1.11.9-1~jessie
+
+## Branch to pull from, per ref doc
+ENV ENGINE_BRANCH="1.13.x"
+ENV DISTRIBUTION_BRANCH="release/2.5"
+
+RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
+	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
+	&& apt-get update \
+	&& apt-get install --no-install-recommends --no-install-suggests -y \
+						ca-certificates \
+						nginx=${NGINX_VERSION} \
+	&& rm -rf /var/lib/apt/lists/*
+
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+	&& ln -sf /dev/stderr /var/log/nginx/error.log
+
 # Create archive; check out each version, create HTML, tweak links
 RUN git clone https://www.github.com/docker/docker.github.io temp; \
  for VER in $VERSIONS; do \
@@ -15,10 +33,6 @@ RUN git clone https://www.github.com/docker/docker.github.io temp; \
 	rm -rf temp
 
 COPY . allv
-
-## Branch to pull from, per ref doc
-ENV ENGINE_BRANCH="1.13.x"
-ENV DISTRIBUTION_BRANCH="release/2.5"
 
 # The statements below pull reference docs from upstream locations,
 # then build the whole site to static HTML using Jekyll
@@ -46,9 +60,6 @@ RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend 
  && wget -O allv/engine/api/v1.26/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
  && jekyll build -s allv -d allvbuild \
  && rm -rf allvbuild/apidocs/layouts \
- && find allvbuild -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
- && rm -rf allv \
- && apt-get update \
- && apt-get -y install nginx
+ && find allvbuild -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g'
 
-CMD echo "Server running at http://0.0.0.0:4000" && nginx -c /usr/src/app/allvbuild/nginx.conf
+CMD echo "Server running at http://0.0.0.0:4000" && exec nginx -c /usr/src/app/allvbuild/nginx.conf
