@@ -58,6 +58,23 @@ specified, the container ID is used as the log stream.
 > at a time.  Using the same log stream for multiple containers concurrently
 > can cause reduced logging performance.
 
+### awslogs-create-group
+
+Log driver will return an error by default if the log group does not exist. However, you can set the
+`awslogs-create-group` to `true` to automatically create the log group as needed.
+The `awslogs-create-group` option defaults to `false`.
+
+```bash
+$ docker run --log-driver=awslogs \
+             --log-opt awslogs-region=us-east-1 \
+             --log-opt awslogs-group=myLogGroup \
+             --log-opt awslogs-create-group=true \
+             ...
+```
+
+> **Note:**
+> Your AWS IAM policy must include the `logs:CreateLogGroup` permission before you attempt to use `awslogs-create-group`.
+
 ### tag
 
 Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets template markup (e.g., `{% raw %}{{.ID}}{% endraw %}`, `{% raw %}{{.FullID}}{% endraw %}` or `{% raw %}{{.Name}}{% endraw %}` `{% raw %}docker.{{.ID}}{% endraw %}`). 
