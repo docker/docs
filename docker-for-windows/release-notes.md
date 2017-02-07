@@ -254,7 +254,20 @@ We did not distribute a 1.12.4 stable release
 
 ## Beta Release Notes
 
-### Beta 40 Release Notes (2017-01-31 1.13.1-beta40)
+### Beta 41 Release Notes (2017-02-07 1.13.1-rc2-beta41)
+
+**Upgrades**
+
+- Docker 1.13.1-rc2
+- [Docker Compose 1.11.0-rc1](https://github.com/docker/compose/releases/tag/1.11.0-rc1)
+- Linux kernel 4.9.8
+
+**Bug fixes and minor improvements**
+
+- VPNKit: set the Recursion Available bit on DNS responses from the cache
+- Don't use port 4222 inside the Linux VM
+
+### Beta 40 Release Notes (2017-01-31 1.13.1-rc1-beta40)
 
 **Upgrades**
 
