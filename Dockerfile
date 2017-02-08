@@ -21,52 +21,61 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 ENV ENGINE_BRANCH="1.13.x"
 ENV DISTRIBUTION_BRANCH="release/2.5"
 
-# Create archive; check out each version, create HTML, tweak links
+## At the end of each layer, everything we need to pass on to the next layer
+## should be in the "target" directory and we should have removed all temporary files
+
+# Copy master into target directory (skipping files / folders in .dockerignore)
+# These files represent the current docs
+COPY . target
+
+# Move built html into md_source directory so we can reuse the target directory
+# to hold the static output.
+# Pull reference docs from upstream locations, then build the master docs
+# into static HTML in the "target" directory using Jekyll
+# then nuke the md_source directory.
+
+RUN mv target md_source \
+	&& svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend md_source/engine/extend \
+	&& wget -O md_source/engine/api/v1.18.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.18.md \
+	&& wget -O md_source/engine/api/v1.19.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.19.md \
+	&& wget -O md_source/engine/api/v1.20.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.20.md \
+	&& wget -O md_source/engine/api/v1.21.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.21.md \
+	&& wget -O md_source/engine/api/v1.22.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.22.md \
+	&& wget -O md_source/engine/api/v1.23.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.23.md \
+	&& wget -O md_source/engine/api/v1.24.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.24.md \
+	&& wget -O md_source/engine/api/version-history.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/version-history.md \
+	&& wget -O md_source/engine/reference/glossary.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/glossary.md \
+	&& wget -O md_source/engine/reference/builder.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/builder.md \
+	&& wget -O md_source/engine/reference/run.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/run.md \
+	&& wget -O md_source/engine/reference/commandline/cli.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/commandline/cli.md \
+	&& wget -O md_source/engine/deprecated.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/deprecated.md \
+	&& svn co https://github.com/docker/distribution/branches/$DISTRIBUTION_BRANCH/docs/spec md_source/registry/spec \
+	&& rm md_source/registry/spec/api.md.tmpl \
+	&& wget -O md_source/registry/configuration.md https://raw.githubusercontent.com/docker/distribution/$DISTRIBUTION_BRANCH/docs/configuration.md \
+	&& rm -rf md_source/apidocs/cloud-api-source \
+	&& rm -rf md_source/tests \
+	&& wget -O md_source/engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
+	&& jekyll build -s md_source -d target \
+	&& rm -rf target/apidocs/layouts \
+	&& find target -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
+	&& rm -rf md_source
+
+# Create archive; check out each version, create HTML under target/$VER, tweak links
+# Nuke the archive_source directory. Only keep the target directory.
 
 ENV VERSIONS="v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12"
 
-RUN git clone https://www.github.com/docker/docker.github.io temp; \
+RUN git clone https://www.github.com/docker/docker.github.io archive_source; \
  for VER in $VERSIONS; do \
-		git --git-dir=./temp/.git --work-tree=./temp checkout ${VER} \
-		&& mkdir -p allvbuild/${VER} \
-		&& jekyll build -s temp -d allvbuild/${VER} \
-		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/'"$VER"'/#g' \
-		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/'"$VER"'/#g' \
-		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/'"$VER"'/#g'; \
+		git --git-dir=./archive_source/.git --work-tree=./archive_source checkout ${VER} \
+		&& mkdir -p target/${VER} \
+		&& jekyll build -s archive_source -d target/${VER} \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/'"$VER"'/#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/'"$VER"'/#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/'"$VER"'/#g'; \
 	done; \
-	rm -rf temp
+	rm -rf archive_source
 
-COPY . allv
+# Serve the site (target), which is now all static HTML
 
-# The statements below pull reference docs from upstream locations,
-# then build the whole site to static HTML using Jekyll
-
-RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend allv/engine/extend \
- && wget -O allv/engine/api/v1.18.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.18.md \
- && wget -O allv/engine/api/v1.19.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.19.md \
- && wget -O allv/engine/api/v1.20.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.20.md \
- && wget -O allv/engine/api/v1.21.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.21.md \
- && wget -O allv/engine/api/v1.22.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.22.md \
- && wget -O allv/engine/api/v1.23.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.23.md \
- && wget -O allv/engine/api/v1.24.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.24.md \
- && wget -O allv/engine/api/version-history.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/version-history.md \
- && wget -O allv/engine/reference/glossary.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/glossary.md \
- && wget -O allv/engine/reference/builder.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/builder.md \
- && wget -O allv/engine/reference/run.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/run.md \
- && wget -O allv/engine/reference/commandline/cli.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/commandline/cli.md \
- && wget -O allv/engine/deprecated.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/deprecated.md \
- && svn co https://github.com/docker/distribution/branches/$DISTRIBUTION_BRANCH/docs/spec allv/registry/spec \
- && rm allv/registry/spec/api.md.tmpl \
- && wget -O allv/registry/configuration.md https://raw.githubusercontent.com/docker/distribution/$DISTRIBUTION_BRANCH/docs/configuration.md \
- && rm -rf allv/apidocs/cloud-api-source \
- && rm -rf allv/tests \
- && wget -O allv/engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/v1.13.0/api/swagger.yaml \
- && wget -O allv/engine/api/v1.26/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
- && jekyll build -s allv -d allvbuild \
- && rm -rf allvbuild/apidocs/layouts \
- && find allvbuild -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
- && rm -rf allv
-
-# Serve the site, which is now all static HTML
-
-CMD echo "Server running at http://0.0.0.0:4000" && exec nginx -c /usr/src/app/allvbuild/nginx.conf
+CMD echo "Server running at http://0.0.0.0:4000" && exec nginx -c /usr/src/app/target/nginx.conf
