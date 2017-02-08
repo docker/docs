@@ -111,7 +111,7 @@ nodev   aufs
 This output indicates the system supports AUFS. If you get no output, your system does
 not support AUFS. To address this:
 
-- Upgrade your host system's kernel to 3.13 or higher. It is recommended to intall the
+- Upgrade your host system's kernel to 3.13 or higher. It is recommended to install the
   kernel headers when you upgrade.
 
 - **Ubuntu or Debian**: In addition to updating the kernel if necessary, install the
