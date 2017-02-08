@@ -16,14 +16,14 @@ docker run -it --rm docker/dtr \
 ## Description
 
 
-This command cleans up any data associated with a replica. It is useful for cleaning up garbage in case of failures or to uninstall DTR. For scaling down a cluster see the remove command.
+This command forcefully removes all containers and volumes associated with the given DTR replica without notifying the rest of the cluster. Use it on all replicas when you want to uninstall DTR.
 
 
 ## Options
 
 | Option                    | Description                |
 |:--------------------------|:---------------------------|
-|`--replica-id`|Assign an ID to the DTR replica. By default the ID is random|
+|`--replica-id`|The ID of the replica to destroy|
 |`--ucp-url`|The UCP URL including domain and port|
 |`--ucp-username`|The UCP administrator username|
 |`--ucp-password`|The UCP administrator password|

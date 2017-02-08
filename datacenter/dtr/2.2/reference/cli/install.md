@@ -24,7 +24,7 @@ command.
 
 Example usage:
 
-$ docker run -it --rm docker/dtr:2.2.0-tp2 install \
+$ docker run -it --rm docker/dtr:2.2.0 install \
 	--ucp-node <UCP_NODE_HOSTNAME> \
 	--ucp-insecure-tls
 
@@ -57,9 +57,9 @@ Note: We recommend --ucp-ca "$(cat ca.pem)" instead of --ucp-insecure-tls for a 
 |`--replica-id`|Assign an ID to the DTR replica. By default the ID is random|
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
 |`--ucp-insecure-tls`|Disable TLS verification for UCP|
-|`--ucp-node`|The hostname of the node to install DTR|
+|`--ucp-node`|The hostname of the target UCP node. Set to empty string or "_random_" to pick one at random.|
 |`--ucp-password`|The UCP administrator password|
 |`--ucp-url`|The UCP URL including domain and port|
 |`--ucp-username`|The UCP administrator username|
-|`--unsafe`|Allow DTR to be installed on a UCP manager node|
+|`--unsafe`|Allow DTR to be installed on any engine version|
 
