@@ -741,12 +741,14 @@ toc:
       title: Getting started
     - path: /engine/api/sdks/
       title: SDKs
-    - path: /engine/api/v1.25/
+    - path: /engine/api/v1.26/
       title: Reference
     - sectiontitle: Version history
       section:
       - path: /engine/api/version-history/
         title: Overview
+      - path: /engine/api/v1.25/
+        title: v1.25 reference
       - path: /engine/api/v1.24/
         title: v1.24 reference
       - path: /engine/api/v1.23/
