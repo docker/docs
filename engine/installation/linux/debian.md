@@ -36,16 +36,6 @@ Raspbian versions:
 - Enable the `backports` repository. See the
   [Debian documentation](https://backports.debian.org/Instructions/){: target="_blank" class"_"}.
 
-### Recommended extra packages
-
-You need `curl` if you don't have it.
-
-```bash
-$ sudo apt-get update
-
-$ sudo apt-get install curl
-```
-
 ## Install Docker
 
 You can install Docker in different ways, depending on your needs:
@@ -76,17 +66,21 @@ Docker from the repository.
     **Jessie or Stretch**:
 
     ```bash
-    $ sudo apt-get install apt-transport-https \
-                           ca-certificates \
-                           software-properties-common
+    $ sudo apt-get install -y --no-install-recommends
+         apt-transport-https \
+         ca-certificates \
+         curl \
+         software-properties-common
     ```
 
     **Wheezy**:
 
     ```bash
-    $ sudo apt-get install apt-transport-https \
-                           ca-certificates \
-                           python-software-properties
+    $ sudo apt-get install -y --no-install-recommends \
+         apt-transport-https \
+         ca-certificates \
+         curl \
+         python-software-properties
     ```
 
 2.  Add Docker's official GPG key:
@@ -94,8 +88,6 @@ Docker from the repository.
     ```bash
     $ curl -fsSL https://apt.dockerproject.org/gpg | sudo apt-key add -
     ```
-
-    > **Note**: The URL is correct, even for Linux distributions that use `APT`.
 
     Verify that the key ID is `58118E89F3A912897C070ADBF76221572C52609D`.
 
@@ -107,10 +99,10 @@ Docker from the repository.
       uid                  Docker Release Tool (releasedocker) <docker@docker.com>
     ```
 
-3.  Use the following command to set up the **stable** repository. To also
-    enable the **testing** repository, add the words `testing` after `main` on
-    the last line.
-    **Do not use these unstable repositories on production systems or for non-testing workloads.**
+3.  Use the following command to set up the **stable** repository.
+
+    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
+    > Debian distribution, such as `jessie`.
 
     - **Debian**:
 
@@ -124,14 +116,15 @@ Docker from the repository.
     - **Raspbian**:
 
       ```bash
-      $ sudo apt-add-repository \
-             "deb https://apt.dockerproject.org/repo \
-             raspbian-jessie \
+      $ sudo add-apt-repository \
+             "deb https://apt.dockerproject.org/repo/ \
+             raspbian-$(lsb_release -cs) \
              main"
       ```
 
-    To disable the `testing` repository, you can edit `/etc/apt/sources.list`
-    and remove the word `testing` from the appropriate line in the file.
+    To enable the `testing` repository, you can edit `/etc/apt/sources.list`
+    and add the word `testing` after `main` on the appropriate line of the file.
+    **Do not use these unstable repositories on production systems or for non-testing workloads.**
 
 #### Install Docker
 
