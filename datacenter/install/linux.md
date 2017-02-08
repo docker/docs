@@ -14,8 +14,8 @@ Linux servers. Make sure all the hosts you want to manage in with Docker
 Datacenter have a minimum of:
 
 * Linux kernel version 3.10 or higher
-* Docker Engine version 1.13.0 or higher
-* 2.00 GB of RAM
+* CS Docker Engine version 1.13.0 or higher
+* 4.00 GB of RAM
 * 3.00 GB of available disk space
 
 Also make sure the hosts are running one of these operating systems:
@@ -36,7 +36,7 @@ with Docker Datacenter.
 Log in into each host using ssh, and install CS Docker Engine:
 
 ```bash
-curl -SLf https://packages.docker.com/1.13/install.sh  | repo=testing sh
+curl -SLf https://packages.docker.com/1.13/install.sh  | sh
 ```
 
 [You can also install CS Docker Engine using a package manager](/cs-engine/1.13/index.md)
@@ -51,7 +51,7 @@ Use ssh to log in into the host where you want to install UCP and run:
 ```none
 docker run --rm -it --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  docker/ucp install \
+  {{ page.ucp_latest_image }} install \
   --host-address <node-ip-address> \
   --interactive
 ```
@@ -103,7 +103,7 @@ Use ssh to log in into the host where you already installed UCP, and run:
 
 ```none
 docker run -it --rm \
-  docker/dtr install \
+  {{ page.dtr_latest_image }} install \
   --ucp-node <node-hostname> \
   --ucp-insecure-tls
 ```
