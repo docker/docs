@@ -40,7 +40,11 @@ meets the prerequisites:
   [#3485](https://github.com/docker/docker/issues/3485),
   [#4568](https://github.com/docker/docker/issues/4568)).
 
-#### Enable AppArmor and SELinux when possible
+#### Secure your environment as much as possible
+
+##### OS considerations
+
+Enable SELinux or AppArmor if possible.
 
 It is recommended to use AppArmor or SELinux if your Linux distribution supports
 either of the two. This helps improve security and blocks certain
@@ -51,6 +55,14 @@ instructions for enabling and configuring AppArmor or SELinux.
 > If either of the security mechanisms is enabled, do not disable it as a
 > work-around to make Docker or its containers run. Instead, configure it
 > correctly to fix any problems.
+
+##### Docker daemon considerations
+
+- Enable `seccomp` security profiles if possible. See
+  [Enabling `seccomp` for Docker](/engine/security/seccomp.md).
+
+- Enable user namespaces if possible. See the
+  [Daemon user namespace options](/engine/reference/commandline/dockerd/#/daemon-user-namespace-options).
 
 ### Install static binaries
 
