@@ -40,8 +40,6 @@ production environment. Highlights [Compose Version 3 new features](/engine/gets
 </tr>
 </table>
 
-{% include content/typical_docker_workflow.md %}
-
 ## Components
 
 <section class="section projects_items_section GenericDev" style="margin-top:-150px; margin-bottom:-150px">
