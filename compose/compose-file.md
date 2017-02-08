@@ -256,9 +256,11 @@ updates.
 - `monitor`: Duration after each task update to monitor for failure `(ns|us|ms|s|m|h)` (default 0s).
 - `max_failure_ratio`: Failure rate to tolerate during an update.
 
+```
     update_config:
       parallelism: 2
       delay: 10s
+```
 
 #### resources
 
@@ -288,11 +290,13 @@ Configures if and how to restart containers when they exit. Replaces
   specified as a [duration](compose-file.md#specifying-durations) (default:
   decide immediately).
 
+```
     restart_policy:
       condition: on-failure
       delay: 5s
       max_attempts: 3
       window: 120s
+```
 
 #### labels
 
