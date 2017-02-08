@@ -863,6 +863,8 @@ toc:
       title: start
     - path: /compose/reference/stop/
       title: stop
+    - path: /compose/reference/top
+      title: top
     - path: /compose/reference/unpause/
       title: unpause
     - path: /compose/reference/up/
