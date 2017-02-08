@@ -52,7 +52,7 @@ toc:
     - path: /engine/installation/linux/fedora/
       title: Fedora
     - path: /engine/installation/linux/debian/
-      title: Debian
+      title: Debian or Raspbian
     - path: /engine/installation/linux/oracle/
       title: Oracle Linux
     - path: /engine/installation/linux/suse/

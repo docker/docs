@@ -1,9 +1,10 @@
 ---
 description: Instructions for installing Docker on Debian
-keywords: Docker, Docker documentation, requirements, apt, installation, debian, install, uninstall, upgrade, update
+keywords: Docker, Docker documentation, requirements, apt, installation, debian, raspbian, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/debian/
-title: Get Docker for Debian
+- /engine/installation/linux/raspbian/
+title: Get Docker for Debian or Raspbian
 ---
 
 To get started with Docker on Debian, make sure you
@@ -14,10 +15,11 @@ To get started with Docker on Debian, make sure you
 
 ### OS requirements
 
-To install Docker, you need the 64-bit version of one of these Debian versions:
+To install Docker, you need the 64-bit version of one of these Debian or
+Raspbian versions:
 
 - Stretch (testing)
-- Jessie 8.0 (LTS)
+- Jessie 8.0 (LTS) / Raspbian Jessie
 - Wheezy 7.7 (LTS)
 
 #### Extra steps for Wheezy 7.7
@@ -110,12 +112,23 @@ Docker from the repository.
     the last line.
     **Do not use these unstable repositories on production systems or for non-testing workloads.**
 
-    ```bash
-    $ sudo add-apt-repository \
-           "deb https://apt.dockerproject.org/repo/ \
-           debian-$(lsb_release -cs) \
-           main"
-    ```
+    - **Debian**:
+
+      ```bash
+      $ sudo add-apt-repository \
+             "deb https://apt.dockerproject.org/repo/ \
+             debian-$(lsb_release -cs) \
+             main"
+      ```
+
+    - **Raspbian**:
+
+      ```bash
+      $ sudo apt-add-repository \
+             "deb https://apt.dockerproject.org/repo \
+             raspbian-jessie \
+             main"
+      ```
 
     To disable the `testing` repository, you can edit `/etc/apt/sources.list`
     and remove the word `testing` from the appropriate line in the file.
@@ -166,7 +179,11 @@ Docker from the repository.
     $ sudo apt-get -y install docker-engine=<VERSION_STRING>
     ```
 
-    The Docker daemon starts automatically.
+    On Debian, the Docker daemon starts automatically. On Raspbian, start Docker:
+
+    ```bash
+    $ sudo service docker start
+    ```
 
 4.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
@@ -197,7 +214,7 @@ a new file each time you want to upgrade Docker.
 
 1.  Go to [https://apt.dockerproject.org/repo/pool/main/d/docker-engine/](https://apt.dockerproject.org/repo/pool/main/d/docker-engine/)
     and download the `.deb` file for the Docker version you want to install and
-    for your version of Debian.
+    for your version of Debian or Raspbian.
 
     > **Note**: To install a testing version, change the word `main` in the
     > URL to `testing`. Do not use unstable versions of Docker in production
@@ -210,7 +227,11 @@ a new file each time you want to upgrade Docker.
     $ sudo dpkg -i /path/to/package.deb
     ```
 
-    The Docker daemon starts automatically.
+    On Debian, the Docker daemon starts automatically. On Raspbian, start Docker:
+
+    ```bash
+    $ sudo service docker start
+    ```
 
 3.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
