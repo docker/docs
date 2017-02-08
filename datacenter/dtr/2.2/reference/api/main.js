@@ -25,7 +25,7 @@ $(function () {
           clientId: "your-client-id",
           clientSecret: "your-client-secret",
           realm: "your-realms",
-          appName: "your-app-name", 
+          appName: "your-app-name",
           scopeSeparator: ","
         });
       }

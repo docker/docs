@@ -38,6 +38,7 @@ After restoring, you can add more DTR replicas by using the the 'join' command.
 |`--dtr-key`|Use a PEM-encoded TLS private key for DTR. If not provided, one will be generated at install time.|
 |`--dtr-storage-volume`|Full path or volume name to store Docker images in the local filesystem|
 |`--enable-pprof`|Enables pprof profiling of the server|
+|`--extra-envs`|Environment variables or swarm constraints for DTR containers. Format var=val[&var=val]|
 |`--http-proxy`|The HTTP proxy used for outgoing requests|
 |`--https-proxy`|The HTTPS proxy used for outgoing requests|
 |`--hub-password`|Password to use when pulling images|
@@ -52,7 +53,7 @@ After restoring, you can add more DTR replicas by using the the 'join' command.
 |`--replica-id`|Assign an ID to the DTR replica. By default the ID is random|
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
 |`--ucp-insecure-tls`|Disable TLS verification for UCP|
-|`--ucp-node`|The hostname of the node to install DTR|
+|`--ucp-node`|The hostname of the target UCP node. Set to empty string or "_random_" to pick one at random.|
 |`--ucp-password`|The UCP administrator password|
 |`--ucp-url`|The UCP URL including domain and port|
 |`--ucp-username`|The UCP administrator username|

@@ -32,10 +32,10 @@ For setting DTR for high-availability, create 3, 5, or 7 replicas of DTR.
 |`--skip-network-test`|Don't test if overlay networks are working correctly between UCP nodes|
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
 |`--ucp-insecure-tls`|Disable TLS verification for UCP|
-|`--ucp-node`|The hostname of the node to install DTR|
+|`--ucp-node`|The hostname of the target UCP node. Set to empty string or "_random_" to pick one at random.|
 |`--ucp-password`|The UCP administrator password|
 |`--ucp-url`|The UCP URL including domain and port|
 |`--ucp-username`|The UCP administrator username|
-|`--unsafe`|Allow DTR to be installed on a UCP manager node|
+|`--unsafe`|Allow DTR to be installed on any engine version|
 |`--unsafe-join`|Perform the join despite the cluster containing unhealthy replicas.|
 

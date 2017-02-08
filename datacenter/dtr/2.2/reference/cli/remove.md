@@ -16,8 +16,7 @@ docker run -it --rm docker/dtr \
 ## Description
 
 
-This command removes a replica from a DTR deployment. All DTR containers and
-volumes are removed from the node.
+This command gracefully scales down your DTR cluster by removing exactly one replica. All other replicas must be healthy and will remain healthy after this operation.
 
 
 ## Options
@@ -28,7 +27,7 @@ volumes are removed from the node.
 |`--existing-replica-id`|The ID of an existing DTR replica|
 |`--hub-password`|Password to use when pulling images|
 |`--hub-username`|Username to use when pulling images|
-|`--replica-id`|Assign an ID to the DTR replica. By default the ID is random|
+|`--replica-id`|The ID of the replica you want to remove from the cluster|
 |`--ucp-ca`|Use a PEM-encoded TLS CA certificate for UCP|
 |`--ucp-insecure-tls`|Disable TLS verification for UCP|
 |`--ucp-password`|The UCP administrator password|
