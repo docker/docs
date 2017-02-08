@@ -90,7 +90,7 @@ Docker from the repository.
 2.  Add Docker's official GPG key:
 
     ```bash
-    $ curl -fsSL https://yum.dockerproject.org/gpg | sudo apt-key add -
+    $ curl -fsSL https://apt.dockerproject.org/gpg | sudo apt-key add -
     ```
 
     > **Note**: The URL is correct, even for Linux distributions that use `APT`.
