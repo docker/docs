@@ -2,8 +2,6 @@
 description: Release notes for Docker Universal Control Plane. Learn more about the
   changes introduced in the latest versions.
 keywords: Docker, UCP, Release notes, Versions
-redirect_from:
-- /ucp/release_notes/
 title: UCP release notes
 ---
 
