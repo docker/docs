@@ -1041,6 +1041,8 @@ toc:
           section:
           - path: /datacenter/dtr/2.2/guides/admin/upgrade/release-notes/
             title: Release notes
+          - path: /datacenter/dtr/2.2/guides/admin/upgrade/incompatibilities-and-breaking-changes/
+            title: Incompatibilities and breaking changes
           - path: /datacenter/dtr/2.2/guides/admin/upgrade/
             title: Upgrade
       - sectiontitle: Configure
