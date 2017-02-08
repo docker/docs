@@ -34,11 +34,15 @@ the DTR cluster.
 When sizing your DTR installation for high-availability,
 follow these rules of thumb:
 
-* Don't create a DTR cluster with just two replicas. Your cluster
-won't tolerate any failures, and it's possible that you experience performance
-degradation.
+* Don't create a DTR cluster with an even number replicas. Your cluster
+won't tolerate any failures if the cluster splits in half. This is
+very difficult to recover from.
 * When a replica fails, the number of failures tolerated by your cluster
 decreases. Don't leave that replica offline for long.
+* When you want to fix your DTR cluster, make certain that you remove any
+broken replicas before you try to add a new replica.  The DTR bootstrapper
+will try to prevent you from doing this, as it could lead to multiple
+failed nodes and failure of the entire DTR cluster.
 * Adding too many replicas to the cluster might also lead to performance
 degradation, as data needs to be replicated across all replicas.
 
@@ -63,6 +67,23 @@ To have high-availability on UCP and DTR, you need a minimum of:
 
 
 ![](../images/high-availability-2.png)
+
+## Storage considerations
+
+DTR does not provide clustering for the storage which underlies your image
+repositories.  In order for DTR to work correctly in HA mode, you will either
+need to use object storage or NFS.
+
+Supported object stores include:
+
+* AWS S3
+* Azure Cloud Storage
+* OpenStack Swift
+* Google Cloud Storage
+* S3 Compatible storage (Scality, Minio, etc.)
+
+Object storage can be configured directly through the Admin screen in the
+DTR UI, and NFS can be configured during installation through the CLI.
 
 ## Load balancing
 
