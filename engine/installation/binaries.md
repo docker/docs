@@ -8,8 +8,10 @@ title: Install Docker from binaries
 > a dynamically-linked Docker package for your Linux distribution.
 
 If you want to try Docker or use it in a testing environment, but you're not on
-a supported platform, you can try installing from static binaries.
-**This is strongly discouraged in production environments.**
+a supported platform, you can try installing from static binaries. If possible,
+you should use packages built for your operating system, and use your operating
+system's package management system to manage Docker installation and upgrades.
+Be aware that 32-bit static binary archives do not include the Docker daemon.
 
 Static binaries for the Docker daemon binary are only available for Linux (as
 `dockerd`) and Windows Server 2016 or Windows 10 (as `dockerd.exe`). Static
@@ -143,7 +145,7 @@ The macOS binary includes the Docker client only. It does not include the
     container runs, it prints an informational message and exits.
 
 
-## Install server and binaries on Windows
+## Install server and client binaries on Windows
 
 You can install Docker from binaries on Windows Server 2016 or Windows 10.
 
