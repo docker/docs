@@ -29,7 +29,7 @@ of Docker, remove it using the following command:
 $ sudo dnf -y remove docker
 ```
 
-You may also have to remove the package `docker-selinux` which conflicts with the 
+You may also have to remove the package `docker-selinux` which conflicts with the
 official `docker-engine` package. Remove it with the following command:
 
 ```bash
@@ -81,8 +81,8 @@ Docker from the repository.
 
 3.  **Optional**: Enable the **testing** repository. This repository is included
     in the `docker.repo` file above but is disabled by default. You can enable
-    it alongside the stable repository. Do not use unstable repositories on
-    on production systems or for non-testing workloads.
+    it alongside the stable repository. **Do not use unstable repositories on
+    on production systems or for non-testing workloads.**
 
     > **Warning**: If you have both stable and unstable repositories enabled,
     > updating without specifying a version in the `dnf install` or `dnf update`
