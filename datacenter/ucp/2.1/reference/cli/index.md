@@ -1,15 +1,30 @@
 ---
-title: docker/ucp overview
 description: Learn about the commands available in the docker/ucp image.
-keywords:
-- docker, ucp, cli, docker run --rm -it \
-        --name ucp \
-        -v /var/run/docker.sock:/var/run/docker.sock \
-        docker/ucp \
-
+keywords: docker, ucp, cli, ucp
+title: docker/ucp overview
 ---
 
-A new cli application
+This image has commands to install and manage
+Docker Universal Control Plane (UCP) on a Docker Engine.
+
+You can configure the commands using flags or environment variables. When using
+environment variables use the 'docker run -e VARIABLE_NAME' syntax to pass the
+value from your shell, or 'docker run -e VARIABLE_NAME=value' to specify the
+value explicitly on the command line.
+
+The container running this image needs to be named 'ucp' and bind-mount the
+Docker daemon socket. Below you can find an example of how to run this image.
+
+Additional help is available for each command with the '--help' flag.
+## Usage
+
+```bash
+docker run -it --rm \
+    --name ucp \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    docker/ucp \
+    command [command arguments]
+```
 
 ## Commands
 
