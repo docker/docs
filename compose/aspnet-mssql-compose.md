@@ -65,7 +65,7 @@ For this sample, we will create a sample `dotnet core web application` using the
 
     This script will restore the database after it starts up, and then will run the application. This allows some time for the SQL Server database image to start up.
 
-1. Create a `docker-compose.yml` file. Write the following in the file, and make sure to replace the password in the `SA_PASSWORD` environment variable under `db` below. This file will define the way the images will interact as micro-services. 
+1. Create a `docker-compose.yml` file. Write the following in the file, and make sure to replace the password in the `SA_PASSWORD` environment variable under `db` below. This file will define the way the images will interact as independent services. 
 
     >**Note**: SQL Server requires a secure password (Minimum length 8 characters, including uppercase and lowercase letters, base 10 digits and/or non-alphanumeric symbols).
 
