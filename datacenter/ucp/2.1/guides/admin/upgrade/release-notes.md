@@ -15,27 +15,29 @@ upgrade your installation to the latest release.
 (9 Feb 2017)
 
 This version of UCP extends the functionality provided by CS Docker Engine
-1.13.0. Before installing or upgrading this version, you need to install CS
-Docker Engine 1.13.1 in the nodes that you plan to manage with UCP.
+1.13. Before installing or upgrading this version, you need to install CS
+Docker Engine 1.13 in the nodes that you plan to manage with UCP.
 
 **New features**
 
 * Core
-  * You can now deploy an application stack composed of multiple services using
-  a compose file v3
-  * Support for managing secrets like passwords of private keys, and using them
-  when deploying services. You can configure who has access to configure secrets
-  and use them in their applications, without having to given them access to the
-  sensitive information directly
-  * Official support for routing hostnames to services. It now supports HTTPS
-  passthrough where the TLS termination is performed by your services. It also
-  supports Service Name Indication (SNI) extension of TLS
-  * Early access Windows Server support for worker nodes
-  * You can now see node metrics like disk and memory usage
-  * Added access control for volumes
+  * Support for managing secrets (e.g. sensitive information such as passwords
+  or private keys) and using them when deploying services. You can store secrets
+  securely on the cluster and configure who has access to them, all without having
+  to give users access to the sensitive information directly
+  * Support for Compose yml 3.1 to deploy stacks of services, networks, volumes,
+  and secrets.
+  * HTTP Routing Mesh now generally available. It now supports HTTPS passthrough
+  where the TLS termination is performed by your services, Service Name  Indication
+  (SNI) extension of TLS, multiple networks for app isolation, and Sticky Sessions
+  * Granular label-based access control for secrets and volumes
+  (NOTE: unlike other resources controlled via label-based access control, a
+  volume without a label is accessible by all UCP users with Restricted Control
+  or higher default permissions)
 
 * UI/UX
   * You can now view and manage application stacks directly from the UI
+  * You can now view cluster and node level resource usage metrics
   * When updating a service, the UI now shows more information about the service status
   * Rolling update for services now have `failure-action` which you can use to
   * Several improvements to service lifecycle management
@@ -48,36 +50,38 @@ Docker Engine 1.13.1 in the nodes that you plan to manage with UCP.
   * You can now customize session timeouts in the authentication settings page
   * Can now mount `tmpfs` or existing local volumes to a service when deploying
   services from the UI
-  * Added more tooltips to guide users
+  * Added more tooltips to guide users on the above features
 
-**Bug Fixes**
+**Bug fixes**
 
 * Core
-  * HTTP routing mesh can now be enabled or reconfigured when UCP is configured
-  to only run images signed by specific teams
-  * Fixed an error in which `_ping` calls were causing multiple TCP connections
-  to open up on the cluster
-  * Fixed an issue in which UCP install occasionally failed with the error
-  "failed to change temp password"
-  * Defining multiple HRM networks with overlapping subnets now correctly causes
-  the HTTP Routing Mesh `ucp-hrm` service to fail.
-  * Fixed an issue where multiple rapid updates of HTTP Routing Mesh configuration
-  would not register correctly
-  * With HTTP Routing Mesh, using the "default" backend option with an empty
-  external route now works correctly
-  * Volumes label-based access control now correctly supports volumes created
-  via the `mount` format flag
+    * HTTP routing mesh can now be enabled or reconfigured when UCP is configured
+    to only run images signed by specific teams
+    * Fixed an error in which `_ping` calls were causing multiple TCP connections
+    to open up on the cluster
+    * Fixed an issue in which UCP install occasionally failed with the error
+    "failed to change temp password"
+    * Fixed an issue where multiple rapid updates of HTTP Routing Mesh configuration
+    would not register correctly
+    * Demoting a manager while in HA configuration no longer causes the `ucp-auth-api`
+     container to provide errors
 
 * UI/UX
-  * When creating a user, pressing enter on keyboard no longer causes problems
-  * Fixed assorted icon and text visibility glitches
-  * Installing DTR no longer fails when "Enable scheduling on UCP controllers and
-  DTR nodes" is unchecked.
-  * Publishing a port to both TCP and UDP in a service via UI now works correctly
-  * Nodes now stay sorted after clicking a parameter to sort by in the Nodes screen
+    * When creating a user, pressing enter on keyboard no longer causes problems
+    * Fixed assorted icon and text visibility glitches
+    * Installing DTR no longer fails when "Enable scheduling on UCP controllers and
+    DTR nodes" is unchecked.
+    * Publishing a port to both TCP and UDP in a service via UI now works correctly
+
+**Known issues**
 
 
-**Version Compatibility**
+The `docker stats` command is sometimes wrongly reporting high CPU usage.
+Use the `top` command to confirm the real CPU usage of your node.
+[Learn more](https://github.com/docker/docker/issues/28941).
+
+
+**Version compatibility**
 
 UCP 2.1 requires minimum versions of the following Docker components:
 
