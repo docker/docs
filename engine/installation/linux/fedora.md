@@ -26,7 +26,7 @@ the package name `docker` instead of `docker-engine`. If you installed this vers
 of Docker, remove it using the following command:
 
 ```bash
-$ sudo dnf -y remove docker
+$ sudo dnf -y remove docker docker-common container-selinux
 ```
 
 You may also have to remove the package `docker-selinux` which conflicts with the
