@@ -4,7 +4,8 @@ description: Learn how to deploy Docker Datacenter with one click, using an Amaz
 keywords: docker, datacenter, install, orchestration, management
 ---
 
-{% assign template_url = "https://console.aws.amazon.com/cloudformation/home?#/stacks/new?templateURL=https://s3.amazonaws.com/packages.docker.com/caas/docker/docker_for_aws_ddc_2.1.0-beta1.json" %}
+{% assign launch_url = "https://console.aws.amazon.com/cloudformation/home?#/stacks/new?templateURL=" %}
+{% assign template_url = "https://s3.amazonaws.com/packages.docker.com/caas/docker/docker_for_aws_ddc_2.1.0.json" %}
 
 Docker Datacenter on Docker for AWS is a one-click deploy of highly-scalable
 Docker Datacenter (Universal Control Plane and Docker Trusted Registry) based
@@ -102,7 +103,7 @@ above configuration options.
 
 - Click on **Launch Stack** below. This link will take you to AWS cloudformation portal.
 
-	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)]({{ template_url }})
+	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)]({{ launch_url }}{{ template_url }})
 
 - Confirm your AWS Region that you'd like to launch this stack in (top right corner)
 - Provide the required parameters and click **Next** (see below)
@@ -152,9 +153,9 @@ stack outputs such as UCP and DTR URLs directly from CLI as follows:
 
 ## Software Versions
 
-- Docker Commercially Supported Engine: `1.12.3-cs4`
-- UCP: `2.0.1`
-- DTR: `2.1.0`
+- Docker Commercially Supported Engine: `1.13.1-cs1`
+- UCP: `2.1.0`
+- DTR: `2.2.0`
 
 ## System containers
 Each node will have a few system containers running on them to help run your swarm cluster. In order for everything to run smoothly, please keep those containers running, and don't make any changes. If you make any changes, we can't guarantee that Docker for AWS will work correctly.
@@ -311,15 +312,6 @@ provides multiple advantages to easily deploy and access your application.
       --label com.docker.ucp.mesh.http=8080=http://foo.example.com \
       ehazlett/docker-demo:dcus
     ```
-
-    > Note: There is currently a caveat with HRM and Docker Datacenter running on
-    AWS. Before enabling the feature, you need to create a new network named
-    `ucp-hrm`. Please go to **Resources** > **Networks** > **Create Network** and
-    use the below info before clicking **Create**. Once you create the network,
-    you can enable HRM.
-
-    ![create_ucp_hrm_network.png](../images/create_ucp_hrm.png)
-
 
 #### Non-Swarm Mode Container Based Applications
 
