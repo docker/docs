@@ -18,5 +18,5 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 
 (08 Feb 2017)
 
-Refer to the [detailed list](https://github.com/docker/docker/releases/tag/v1.13.0) of all
+Refer to the detailed lists [here](https://github.com/docker/docker/releases/tag/v1.13.0) and [here](https://github.com/docker/docker/releases/tag/v1.13.1) of all
 changes since the release of CS Engine 1.12.6-cs8.
