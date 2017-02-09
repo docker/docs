@@ -87,19 +87,18 @@ Docker from the repository.
       uid                  Docker Release Tool (releasedocker) <docker@docker.com>
     ```
 
-3.  Use the following command to set up the **stable** repository. To also
-    enable the **testing** repository, add the words `testing` after `main` on
-    the last line.
-    **Do not use these unstable repositories on production systems or for non-testing workloads.**
+3.  Use the following command to set up the **stable** repository.
 
     ```bash
-    $ sudo apt-get install software-properties-common
     $ sudo add-apt-repository \
            "deb https://apt.dockerproject.org/repo/ \
            ubuntu-$(lsb_release -cs) \
            main"
     ```
 
+    To also enable the **testing** repository, add the words `testing` after
+    `main` on the last line. **Do not use these unstable repositories on
+    production systems or for non-testing workloads.**
     To disable the `testing` repository, you can edit `/etc/apt/sources.list`
     and remove the word `testing` from the appropriate line in the file.
     
