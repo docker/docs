@@ -4,9 +4,11 @@ keywords: dotnet, .NET, Core, example, ASP.NET Core, SQL Server, mssql
 title: "Quickstart: Compose and ASP.NET Core with SQL Server"
 ---
 
-This quick-start guide demonstrates how to use Docker Compose to set up and run the sample ASP.NET Core application using the [ASP.NET Core Build image](https://hub.docker.com/r/microsoft/aspnetcore-build/) with the [SQL Server on Linux image](https://hub.docker.com/r/microsoft/mssql-server-linux/). You just need to have [Docker Engine](https://docs.docker.com/engine/installation/) and [Docker Compose](https://docs.docker.com/compose/install/) installed on your platform of choice.
+This quick-start guide demonstrates how to use Docker Engine on Linux and Docker Compose to set up and run the sample ASP.NET Core application using the [ASP.NET Core Build image](https://hub.docker.com/r/microsoft/aspnetcore-build/) with the [SQL Server on Linux image](https://hub.docker.com/r/microsoft/mssql-server-linux/). You just need to have [Docker Engine](https://docs.docker.com/engine/installation/) and [Docker Compose](https://docs.docker.com/compose/install/) installed on your platform of choice: Linux, Mac or Windows.
 
 For this sample, we will create a sample `dotnet core web application` using the `aspnetcore-build` Docker image. After that, we will create a `Dockerfile`, configure this app to use our SQL Server database and then create a `docker-compose.yml` that will define the behavior of all of these components.
+
+>**Note**: This sample is made for Docker Engine on Linux. For Windows Containers, please visit [Docker Labs for Windows Containers](https://github.com/docker/labs/tree/master/windows).
 
 # Create the Docker Compose application
 
