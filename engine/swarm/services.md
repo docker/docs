@@ -545,7 +545,7 @@ $ docker service create \
 For more information on how to create a volume, see the `volume create` [CLI reference](../reference/commandline/volume_create.md).
 
 The following method creates the volume at deployment time when the scheduler
-dispatches a task, just before the starting the container:
+dispatches a task, just before starting the container:
 
 ```bash
 $ docker service create \
