@@ -139,6 +139,6 @@ Ready! You now have a ASP.NET Core application running against SQL Server in Doc
 ## Further reading
 
 - [Build your app using SQL Server](https://www.microsoft.com/en-us/sql-server/developer-get-started/?utm_medium=Referral&utm_source=docs.docker.com)
-- [SQL Server on DockerHub](https://hub.docker.com/r/microsoft/mssql-server-linux/)
+- [SQL Server on Docker Hub](https://hub.docker.com/r/microsoft/mssql-server-linux/)
 - [ASP.NET Core](https://www.asp.net/core)
 - [ASP.NET Core Docker image](https://hub.docker.com/r/microsoft/aspnetcore/) on DockerHub
