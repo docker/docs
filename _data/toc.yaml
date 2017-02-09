@@ -863,7 +863,7 @@ toc:
     title: Frequently Asked Questions
 - sectiontitle: CS Docker Engine
   section:
-  - sectiontitle: 1.13 Beta
+  - sectiontitle: 1.13
     section:
     - path: /cs-engine/1.13/
       title: Install
