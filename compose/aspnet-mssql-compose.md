@@ -20,7 +20,7 @@ For this sample, we will create a sample `dotnet core web application` using the
     docker run -v /app:/app microsoft/aspnetcore-build:lts /bin/bash -c "cd app && dotnet new -t web"
     ``` 
 
-    >**Note**: If running in Docker for Windows, make sure to add the necessary `C:/` prefix to the host mapped folder.
+    >**Note**: If running in Docker for Windows, make sure to add the necessary `C:/` prefix to the host mapped folder and that you are running on Linux containers mode.
 
 1. Create a `Dockerfile` within the `/app` directory and add the following content:
 
