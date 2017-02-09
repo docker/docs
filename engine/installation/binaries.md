@@ -99,7 +99,6 @@ instructions for enabling and configuring AppArmor or SELinux.
 
     If you need to start the daemon with additional options, modify the above
     command accordingly.
->>>>>>> c02c644... Rewrite and reorganize Linux install instructions
 
 5.  Verify that Docker is installed correctly by running the `hello-world`
     image.
