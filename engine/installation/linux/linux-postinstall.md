@@ -379,23 +379,6 @@ memory and a 10% overall performance degradation, even if Docker is not running.
 6.  Reboot your system. Memory and swap accounting are enabled and the warning
     does not occur.
 
-
-### Troubleshooting Oracle Linux
-
-#### Docker unmounts `btrfs` filesystem on shutdown
-
-If you're running Docker using the `btrfs` storage engine and you stop the Docker
-service, it unmounts the `btrfs` filesystem during the shutdown process. Ensure
-that the filesystem is mounted properly before restarting the Docker service.
-
-On Oracle Linux 7, you can use a `systemd.mount` definition and modify the
-Docker `systemd.service` to depend on the `btrfs` mount defined in `systemd`.
-
-#### SElinux support on Oracle Linux 7
-
-SElinux must be set to `Permissive` or `Disabled` in `/etc/sysconfig/selinux` to
-use the `btrfs` storage engine on Oracle Linux 7.
-
 ## Next steps
 
 - Continue with the [User Guide](/engine/userguide/index.md).
