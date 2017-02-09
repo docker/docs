@@ -22,6 +22,28 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
+## CS Engine 1.12.6-cs8
+(8 Feb 2017)
+
+This release addresses the following issues:
+
+* Addresses performance issues introduced by external KV-Store access with the
+  `docker network ls` endpoint with large amounts of overlay networks and containers
+  attached to those networks
+
+* Addresses an inconsistent mac -> vtep binding issue when using overlay networks
+
+* Adds a new repository for RHEL 7.2 users, to deal with issues
+  users have encounted when installing the docker-engine-selinux package
+  on systems pinned to 7.2 packages that are older than those available in the
+  normal 7.2 install. This change relates to packaging changes for
+  [1.12.6-cs7](#cs-engine-1126-cs7).
+
+  Users experiencing issues installing the selinux package should switch to this
+  repository. See [install instructions](/cs-engine/install.md) for more details.
+  Only switch to this repository if you encounter problems installing the
+  selinux packages from the centos/7 repo.
+
 ## CS Engine 1.12.6-cs7
 (24 Jan 2017)
 
