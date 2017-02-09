@@ -21,6 +21,9 @@ version 4.1.12 or higher. For Oracle Linux 6, you need to enable extra repositor
 to install UEK4. See
 [Obtaining and installing the UEK packages](https://docs.oracle.com/cd/E37670_01/E37355/html/ol_obtain_uek.html){: target="_blank" class="_" }.
 
+The [OverlayFS2 storage driver](https://docs.docker.com/engine/userguide/storagedriver/overlayfs-driver/) is only supported
+when running the UEK4.
+
 ### Remove unofficial Docker packages
 
 Oracle's repositories may contain an older version of Docker, with the package name
