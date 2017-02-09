@@ -16,7 +16,7 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 
 ## CS Engine 1.13.0-cs1
 
-(10 Jan 2017)
+(08 Feb 2017)
 
-Refer to the [detailed list](https://github.com/docker/docker/releases/tag/v1.13.0-rc5) of all
-changes since the release of CS Engine 1.12.5-cs5.
+Refer to the [detailed list](https://github.com/docker/docker/releases/tag/v1.13.0) of all
+changes since the release of CS Engine 1.12.6-cs8.
