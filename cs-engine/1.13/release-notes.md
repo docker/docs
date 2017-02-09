@@ -14,7 +14,7 @@ back-ported fixes (security-related and priority defects) from the open source.
 It incorporates defect fixes that you can use in environments where new features
 cannot be adopted as quickly for consistency and compatibility reasons.
 
-## CS Engine 1.13.0-cs1
+## CS Engine 1.13.1-cs1
 
 (08 Feb 2017)
 
