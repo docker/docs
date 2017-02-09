@@ -124,7 +124,7 @@ Docker from the repository.
 
     To enable the `testing` repository, you can edit `/etc/apt/sources.list`
     and add the word `testing` after `main` on the appropriate line of the file.
-    **Do not use these unstable repositories on production systems or for non-testing workloads.**
+    **Do not use unstable repositories on production systems or for non-testing workloads.**
 
 #### Install Docker
 
