@@ -5,7 +5,6 @@ keywords: docker, datacenter, install, orchestration, management
 ---
 
 {% assign launch_url = "https://console.aws.amazon.com/cloudformation/home?#/stacks/new?templateURL=" %}
-
 {% assign template_url = "https://s3.amazonaws.com/packages.docker.com/caas/docker/docker_for_aws_ddc_2.1.0.json" %}
 
 Docker Datacenter on Docker for AWS is a one-click deploy of highly-scalable
@@ -104,7 +103,7 @@ above configuration options.
 
 - Click on **Launch Stack** below. This link will take you to AWS cloudformation portal.
 
-	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)]({{ launch_url }} {{ template_url }})
+	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)]({{ launch_url }}{{ template_url }})
 
 - Confirm your AWS Region that you'd like to launch this stack in (top right corner)
 - Provide the required parameters and click **Next** (see below)
