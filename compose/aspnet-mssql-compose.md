@@ -124,6 +124,8 @@ For this sample, we will create a sample `dotnet core web application` using the
     docker-compose build
     ```
 
+1. Make sure you allocate at least 4GB of memory to Docker Engine. Here is how to do it on [Docker for Mac](https://docs.docker.com/docker-for-mac/#/advanced) and [Docker for Windows](https://docs.docker.com/docker-for-windows/#/advanced). This is necessary to run the SQL Server on Linux container.
+
 1. Run the `docker-compose up` command. After a few seconds, you should be able to open [localhost:8000](http://localhost:8000) and see the ASP.NET core sample website. The application is listening on port 80 by default, but we mapped it to port 8000 in the `Dockerfile`.
 
     ```bash
