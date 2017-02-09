@@ -39,7 +39,7 @@ to update its RHEL kernel.
 4.  Add the Docker repository:
 
     ```bash
-    $ sudo yum-config-manager --add-repo https://packages.docker.com/1.13/yum/repo/testing/centos/7
+    $ sudo yum-config-manager --add-repo https://packages.docker.com/1.13/yum/repo/main/centos/7
     ```
 
     This adds the repository of the latest version of CS Docker Engine. You can
@@ -102,7 +102,7 @@ to the `docker` group.
 5.  Add the repository for the new version:
 
     ```bash
-    $ echo "deb https://packages.docker.com/1.13/apt/repo ubuntu-trusty testing" | sudo tee /etc/apt/sources.list.d/docker.list
+    $ echo "deb https://packages.docker.com/1.13/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
     ```
 
 6.  Run the following to install commercially supported Docker Engine and its
@@ -142,7 +142,7 @@ are available:
 3.  Add the Docker repository and public key:
 
     ```bash
-    $ sudo zypper ar -t YUM https://packages.docker.com/1.13/yum/repo/testing/opensuse/12.3 docker-1.13
+    $ sudo zypper ar -t YUM https://packages.docker.com/1.13/yum/repo/main/opensuse/12.3 docker-1.13
     $ sudo rpm --import 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e'
     ```
 
