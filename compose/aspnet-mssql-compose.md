@@ -134,7 +134,7 @@ For this sample, we will create a sample `dotnet core web application` using the
 
     Go ahead and try out the website! This sample will use the SQL Server database image in the back-end for authentication.
 
-Ready! You now have a ASP.NET Core application running against SQL Server in Docker Compose!
+Ready! You now have a ASP.NET Core application running against SQL Server in Docker Compose! This sample made use of some of the most popular Microsoft products for Linux. To learn more about Windows Containers, check out [Docker Labs for Windows Containers](https://github.com/docker/labs/tree/master/windows) to try out .NET Framework and more SQL Server tutorials.
 
 ## Further reading
 
