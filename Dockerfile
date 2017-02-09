@@ -79,4 +79,4 @@ RUN git clone https://www.github.com/docker/docker.github.io archive_source; \
 
 # Serve the site (target), which is now all static HTML
 
-CMD echo "Server running at http://0.0.0.0:4000" && exec nginx -c /usr/src/app/target/nginx.conf
+CMD echo "Docker docs are viewable at:" && echo "http://0.0.0.0:4000" && exec nginx -c /usr/src/app/target/nginx.conf
