@@ -50,8 +50,8 @@ to update its RHEL kernel.
     This adds the repository of the latest version of CS Docker Engine. You can
     customize the URL to install an older version.
 
-    > **Note**: For users on RHEL 7.2 who have issues with installing selinux,
-    > use the following command instead of the one above:
+    > **Note**: For users on RHEL 7.2 who have issues with installing the selinux
+    > policy, use the following command instead of the one above:
 
     ```bash
     $ sudo yum-config-manager --add-repo https://packages.docker.com/1.12/yum/repo/main/rhel/7.2
