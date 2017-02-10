@@ -1,18 +1,20 @@
 ---
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
-keywords: ectd, key, value, store, ucp
+keywords: ectd, rethinkdb, key, value, store, database, ucp
 title: Troubleshoot cluster configurations
 ---
 
 Docker UCP persists configuration data on an [etcd](https://coreos.com/etcd/)
-key-value store that is replicated on all controller nodes of
-the UCP cluster. This key-value store is for internal use only, and should not
-be used by other applications.
+key-value store and [RethinkDB](https://rethinkdb.com/) database that are
+replicated on all manager nodes of the UCP cluster. These data stores are for
+internal use only, and should not be used by other applications.
 
-This article shows how you can access the key-value store, for
+This article shows how you can access the key-value store and database, for
 troubleshooting configuration problems in your cluster.
 
-## Using the REST API
+## etcd Key-Value Store
+
+### Using the REST API
 
 In this example we'll be using `curl` for making requests to the key-value
 store REST API, and `jq` to process the responses.
@@ -43,14 +45,14 @@ To learn more about the key-value store rest API check the
 [etcd official documentation](https://coreos.com/etcd/docs/latest/).
 
 
-## Using a CLI client
+### Using a CLI client
 
 The containers running the key-value store, include `etcdctl`, a command line
 client for etcd. You can run it using the `docker exec` command.
 
-The examples below assume you are logged in with ssh into a UCP controller node.
+The examples below assume you are logged in with ssh into a UCP manager node.
 
-### Check the health of the etcd cluster
+#### Check the health of the etcd cluster
 
 ```bash
 $ docker exec -it ucp-kv etcdctl \
@@ -70,6 +72,44 @@ On failure the command exits with an error code, and no output.
 
 To learn more about the `etcdctl` utility, check the
 [etcd official documentation](https://coreos.com/etcd/docs/latest/).
+
+## RethinkDB Database
+
+User and organization data for Docker Datacenter is stored in a RetinkDB
+database which is replicated across all manager nodes in the UCP cluster.
+
+Replication and failover of this database is typically handled automatically by
+UCP's own configuration management processes, but detailed database status and
+manual reconfiguration of database replication is available through a command
+line tool available as part of UCP.
+
+The examples below assume you are logged in with ssh into a UCP manager node.
+
+### Check the status of the database
+
+```bash
+# NODE_ADDRESS will be the IP address of this Docker Swarm manager node
+NODE_ADDRESS=$(docker info --format '{{.Swarm.NodeAddr}}')
+# VERSION will be your most recent version of the docker/ucp-auth image
+VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
+# This command will output detailed status of all servers and database tables
+# in the RethinkDB cluster.
+docker run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 db-status
+```
+
+### Manually reconfigure database replication
+
+```bash
+# NODE_ADDRESS will be the IP address of this Docker Swarm manager node
+NODE_ADDRESS=$(docker info --format '{{.Swarm.NodeAddr}}')
+# NUM_MANAGERS will be the current number of manager nodes in the cluster
+NUM_MANAGERS=$(docker node ls --filter role=manager -q | wc -l)
+# VERSION will be your most recent version of the docker/ucp-auth image
+VERSION=$(docker image ls --format '{{.Tag}}' docker/ucp-auth | head -n 1)
+# This reconfigure-db command will repair the RethinkDB cluster to have a
+# number of replicas equal to the number of manager nodes in the cluster.
+docker run --rm -v ucp-auth-store-certs:/tls docker/ucp-auth:${VERSION} --db-addr=${NODE_ADDRESS}:12383 --debug reconfigure-db --num-replicas ${NUM_MANAGERS} --emergency-repair
+```
 
 ## Where to go next
 
