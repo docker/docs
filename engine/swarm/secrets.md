@@ -773,7 +773,7 @@ Docker.
     **or**:
 
     ```bash
-    $ docker exec $(docker ps --filter --name=mysql -q) \
+    $ docker exec $(docker ps --filter name=mysql -q) \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 
