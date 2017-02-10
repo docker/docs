@@ -913,7 +913,7 @@ Each of these is a single value, analogous to its
 
 > **Note:** The following options are only available for
 > [version 2](compose-versioning.md#version-2) and up:
-> * `oom_score_adj`
+>  `oom_score_adj`
 
 ## Specifying durations
 
