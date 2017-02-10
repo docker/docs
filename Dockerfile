@@ -43,7 +43,3 @@ RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend 
 	&& rm -rf target/apidocs/layouts \
 	&& find target -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
 	&& rm -rf md_source
-
-# Serve the site (target), which is now all static HTML
-
-CMD echo "Docker docs are viewable at:" && echo "http://0.0.0.0:4000" && exec nginx -c /usr/src/app/target/nginx.conf

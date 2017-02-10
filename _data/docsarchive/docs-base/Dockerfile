@@ -20,6 +20,8 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC64107
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
+COPY nginx.conf /etc/nginx/nginx.conf
+
 ## At the end of each layer, everything we need to pass on to the next layer
 ## should be in the "target" directory and we should have removed all temporary files
 
@@ -38,3 +40,12 @@ RUN git clone https://www.github.com/docker/docker.github.io archive_source; \
 		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/'"$VER"'/#g'; \
 	done; \
 	rm -rf archive_source
+
+# This index file gets overwritten, but it serves a sort-of useful purpose in
+# making the docs/docs-base image browsable:
+
+COPY index.html target
+
+# Serve the site (target), which is now all static HTML
+
+CMD echo "Docker docs are viewable at:" && echo "http://0.0.0.0:4000" && exec nginx
