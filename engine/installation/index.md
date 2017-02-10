@@ -32,15 +32,7 @@ Docker on a different Linux distribution, consider
 
 ## On Cloud
 
-We provide official Docker solutions for running on AWS and Azure. You can read
-up on what Docker for AWS and Docker for Azure have to offer you
-[here](/docker-for-aws/why/) and [here](/docker-for-azure/why/) respectively.
-
-* [Docker for AWS](/docker-for-aws/)
-* [Docker for Azure](/docker-for-azure/)
-
-We also provide guides for connecting the following cloud providers to your
-Docker Cloud account to automatically provision and manage your cloud instances.
+You can use Docker Cloud to automatically provision and manage your cloud instances.
 
 * [Amazon Web Services setup guide](/docker-cloud/infrastructure/link-aws.md)
 * [DigitalOcean setup guide](/docker-cloud/infrastructure/link-do.md)
@@ -48,6 +40,13 @@ Docker Cloud account to automatically provision and manage your cloud instances.
 * [Packet setup guide](/docker-cloud/infrastructure/link-packet.md)
 * [SoftLayer setup guide](/docker-cloud/infrastructure/link-softlayer.md)
 * [Use the Docker Cloud Agent to Bring your Own Host](/docker-cloud/infrastructure/byoh.md)
+
+We also provide official Docker solutions for running on AWS and Azure. You can read
+up on what Docker for AWS and Docker for Azure have to offer you
+[here](/docker-for-aws/why/) and [here](/docker-for-azure/why/) respectively.
+
+* [Docker for AWS](/docker-for-aws/)
+* [Docker for Azure](/docker-for-azure/)
 
 ## Prior releases
 
