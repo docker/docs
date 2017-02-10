@@ -71,7 +71,7 @@ This tells Docker to:
 * Set the default command for the container to `python app.py`
 
 For more information on how to write Dockerfiles, see the [Docker user
-guide](/engine/tutorials/dockerimages.md#building-an-image-from-a-dockerfile)
+guide](/engine/getstarted/step_four.md)
 and the [Dockerfile reference](/engine/reference/builder.md).
 
 

@@ -1088,7 +1088,7 @@ There are several things to note, depending on which
     For example, if you specify a mapping of `./foo:/data`, the `./foo` part
     will be passed straight to the volume driver without being expanded.
 
-See [Docker Volumes](/engine/userguide/dockervolumes.md) and
+See [Docker Volumes](/engine/tutorials/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
 
 ### volumes_from
