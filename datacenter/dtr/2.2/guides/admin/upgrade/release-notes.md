@@ -10,6 +10,18 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](index.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.2.1
+
+(9 Feb 2017)
+
+**Bugs fixed**
+
+* Webhooks triggered on a security scan now have information about vulnerabilities
+* The web UI now displays tag details and security scanning information for
+images pushed before the upgrade
+* When multiple tags shared the same manifest, the UI only displayed a single
+tag. This has been fixed
+
 ## DTR 2.2.0
 
 (9 Feb 2017)
