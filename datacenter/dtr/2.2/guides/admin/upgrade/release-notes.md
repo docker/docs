@@ -21,6 +21,8 @@ to upgrade your installation to the latest release.
 images pushed before the upgrade
 * When multiple tags shared the same manifest, the UI only displayed a single
 tag. This has been fixed
+* Fixed the UI not correctly showing the Dockerfile for tags in migrated
+repositories
 
 ## DTR 2.2.0
 
