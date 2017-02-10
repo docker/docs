@@ -18,6 +18,21 @@ about both kinds of releases, and download stable and beta product installers at
 
 ## Stable Release Notes
 
+### Docker for Mac 1.13.1, 2017-02-09 (stable)
+
+**Upgrades**
+
+- [Docker 1.13.1](https://github.com/docker/docker/releases/tag/v1.13.1)
+- [Docker Compose 1.11.1](https://github.com/docker/compose/releases/tag/1.11.1)
+- Linux kernel 4.9.8
+
+**Bug fixes and minor changes**
+
+- Add link to experimental features
+- New 1.13 cancellable operations should now be properly handled by the Docker for desktop
+- `daemon.json` should render nicely in the UI
+- Allow to reset faulty `daemon.json` through a link in advanced subpanel
+
 ### Docker for Mac 1.13.0, 2017-01-19 (stable)
 
 **Upgrades**
