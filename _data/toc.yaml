@@ -472,7 +472,6 @@ reference:
   nosync: true
 - title: Compose file reference
   path: /compose/compose-file/
-  nosync: true
 - title: Compose (docker-compose) CLI
   path: /compose/reference/overview/
   nosync: true
