@@ -30,7 +30,7 @@ about both kinds of releases, and download stable and beta product installers at
 
 - Add link to experimental features
 - New 1.13 cancellable operations should now be properly handled by the Docker for desktop
-- Daemon.json should render nicely in the UI
+- `daemon.json` should render nicely in the UI
 - Allow to reset faulty `daemon.json` through a link in advanced subpanel
 
 ### Docker for Mac 1.13.0, 2017-01-19 (stable)
