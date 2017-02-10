@@ -94,8 +94,8 @@ Docker from the repository.
 
 3.  **Optional**: Enable the **testing** repository. This repository is included
     in the `docker.repo` file above but is disabled by default. You can enable
-    it alongside the stable repository. Do not use unstable repositories on
-    on production systems or for non-testing workloads.
+    it alongside the stable repository. **Do not use unstable repositories on
+    on production systems or for non-testing workloads.**
 
     > **Warning**: If you have both stable and unstable repositories enabled,
     > installing or updating without specifying a version in the `yum install`
