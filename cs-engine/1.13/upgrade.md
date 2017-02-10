@@ -79,7 +79,7 @@ Use these instructions to upgrade YUM-based systems.
 1.  Add the Docker Engine repository.
 
     ```bash
-    $ sudo yum-config-manager --add-repo https://packages.docker.com/1.13/yum/repo/testing/centos/7
+    $ sudo yum-config-manager --add-repo https://packages.docker.com/1.13/yum/repo/main/centos/7
     ```
 
     This adds the repository of the latest version of CS Docker Engine. You can
@@ -104,7 +104,7 @@ Use these instructions to update APT-based systems.
 1.  Add the docker engine repository.
 
     ```bash
-    $ echo "deb https://packages.docker.com/1.13/apt/repo ubuntu-trusty testing" | sudo tee /etc/apt/sources.list.d/docker.list
+    $ echo "deb https://packages.docker.com/1.13/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
     ```
 
     This adds the repository of the latest version of CS Docker Engine for the
@@ -135,7 +135,7 @@ Use these instructions to update APT-based systems.
 1.  Add the docker engine repository.
 
     ```bash
-    $ sudo zypper ar -t YUM https://packages.docker.com/1.13/yum/repo/testing/opensuse/12.3 docker-1.13
+    $ sudo zypper ar -t YUM https://packages.docker.com/1.13/yum/repo/main/opensuse/12.3 docker-1.13
     ```
 
     This adds the repository of the latest version of CS Docker Engine. You
@@ -184,7 +184,7 @@ Use these instructions to upgrade YUM-based systems.
 4.  Add the repository for the new version and disable the old one.
 
     ```bash
-    $ sudo yum-config-manager --add-repo https://packages.docker.com/1.13/yum/repo/testing/centos/7
+    $ sudo yum-config-manager --add-repo https://packages.docker.com/1.13/yum/repo/main/centos/7
     $ sudo yum-config-manager --disable 'Docker_cs*'
     ```
 
