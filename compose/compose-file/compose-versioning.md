@@ -7,15 +7,16 @@ title: Compose file versions and upgrading
 The Compose file is a [YAML](http://yaml.org/) file defining services,
 networks, and volumes for a Docker application.
 
-Thes Compose file formats are now specified in these references, specific to each version.
+The Compose file formats are now specified in these references, specific to each version.
 
-- [Version 3](index.md) (most current, and recommended)
+| **Reference file**       | **What changed in this version** |
+|  -------------------     |    ------------------            |
+|[Version 3](index.md) (most current, and recommended) |[Version 3 updates](#version-3) |
+| [Version 2](compose-file-v2.md)  |[Version 2 updates](#version-2) |
+| [Version 1](compose-file-v1.md) | [Version 1 updates](#version-1) |
 
-- [Version 2](compose-file-v2.md)
-
-- [Version 1](compose-file-v1.md)
-
-The topics below explain the differences among the versions, Docker Engine compatibility, and how to upgrade.
+The topics below explain the differences among the versions, Docker Engine
+compatibility, and [how to upgrade](#upgrading).
 
 ## Compatibility matrix
 
@@ -146,9 +147,9 @@ A more extended example, defining volumes and networks:
 
 Several other options were added to support networking, such as:
 
-* aliases
+* [`aliases`](compose-file-v2.md#aliases)
 
-* The `depends_on` option can be used in place of links to indicate dependencies
+* The [`depends_on`](compose-file-v2.md#dependson) option can be used in place of links to indicate dependencies
 between services and startup order.
 
       version: '2'
@@ -163,9 +164,9 @@ between services and startup order.
         db:
           image: postgres
 
-* ipv4_address, ipv6_address
+* [`ipv4_address`, `ipv6_address`](compose-file-v2.md#ipv4address-ipv6address)
 
-[Variable substitution](compose-file-v2.md#variable-substitution) was added in Version 2.
+[Variable substitution](compose-file-v2.md#variable-substitution) also was added in Version 2.
 
 ### Version 2.1
 
