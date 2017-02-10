@@ -8,8 +8,9 @@ title: Compose file reference
 
 The Compose file is a [YAML](http://yaml.org/) file defining
 [services](compose-file.md#service-configuration-reference),
-[networks](compose-file.md#network-configuration-reference) and
-[volumes](compose-file.md#volume-configuration-reference).
+[networks](compose-file.md#network-configuration-reference),
+[volumes](compose-file.md#volume-configuration-reference), and
+[extra](compose-file.md#extra-configuration-reference) data.
 The default path for a Compose file is `./docker-compose.yml`.
 
 >**Tip:** You can use either a `.yml` or `.yaml` extension for this file. They both work.
@@ -1409,6 +1410,29 @@ refer to it within the Compose file:
         external:
           name: actual-name-of-network
 
+## Extra configuration reference
+
+Your [YAML](http://yaml.org/) file may contain a top-level key called `extra`.
+This merely serves as a place where you can define anchors that can be
+referenced in other parts of the file.  For example, it can help to factor out
+environment variables that are common to multiple services:
+
+    extra:
+      db_env: &db_env
+        PGUSER: postgres
+        PGDATABASE: postgres
+    services:
+      db:
+        environment: *db_env
+      ui:
+        environment:
+          <<: *db_env
+          PGHOST: db
+
+This example does not include all of the configuration for each of the services
+but you can see how this helps keep our configuration
+[DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) by not repeating
+the PGUSER and PGDATABASE values.
 
 ## Versioning
 
