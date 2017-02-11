@@ -66,7 +66,7 @@ Docker from the repository.
     **Jessie or Stretch**:
 
     ```bash
-    $ sudo apt-get install -y --no-install-recommends
+    $ sudo apt-get install -y --no-install-recommends \
          apt-transport-https \
          ca-certificates \
          curl \
