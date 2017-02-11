@@ -1,6 +1,6 @@
 # docs-base
 
-This is the source for docs/docs-base.
+This is the source for [docs/docker.github.io:docs-base](https://hub.docker.com/r/docs/docker.github.io/tags/).
 
 The docs-base Dockerfile includes:
 
