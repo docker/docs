@@ -20,8 +20,8 @@
 
 .tabs>li>a {
     color: #fff;
+    border-bottom: 4px solid #254356;
     line-height: 3;
-    border: 0;
     border-radius: 0;
     padding: 0 20px 0px 20px;
     float: left;
@@ -56,7 +56,6 @@
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
 }
-
 
 .logo {
   margin-top: 1px !important;
