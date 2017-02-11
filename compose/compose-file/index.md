@@ -528,7 +528,7 @@ indefinitely. Compose does not support circular references and `docker-compose`
 returns an error if it encounters one.
 
 For more on `extends`, see the
-[the extends documentation](extends.md#extending-services).
+[the extends documentation](../extends.md#extending-services).
 
 > **Note:** This option is not yet supported when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
