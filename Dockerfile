@@ -1,52 +1,51 @@
-FROM starefossen/github-pages
+FROM starefossen/github-pages:112
+
+# This is the source for docs/docs-base. Push to that location to ensure that
+# the production image gets your update :)
+
+# Install nginx
+
+ENV NGINX_VERSION 1.11.9-1~jessie
+
+RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
+	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
+	&& apt-get update \
+	&& apt-get install --no-install-recommends --no-install-suggests -y \
+						ca-certificates \
+						nginx=${NGINX_VERSION} \
+	&& rm -rf /var/lib/apt/lists/*
+
+# Forward nginx request and error logs to docker log collector
+
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+	&& ln -sf /dev/stderr /var/log/nginx/error.log
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+## At the end of each layer, everything we need to pass on to the next layer
+## should be in the "target" directory and we should have removed all temporary files
+
+# Create archive; check out each version, create HTML under target/$VER, tweak links
+# Nuke the archive_source directory. Only keep the target directory.
 
 ENV VERSIONS="v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12"
 
-# Create archive; check out each version, create HTML, tweak links
-RUN git clone https://www.github.com/docker/docker.github.io temp; \
+RUN git clone https://www.github.com/docker/docker.github.io archive_source; \
  for VER in $VERSIONS; do \
-		git --git-dir=./temp/.git --work-tree=./temp checkout ${VER} \
-		&& mkdir -p allvbuild/${VER} \
-		&& jekyll build -s temp -d allvbuild/${VER} \
-		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/'"$VER"'/#g' \
-		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/'"$VER"'/#g' \
-		&& find allvbuild/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/'"$VER"'/#g'; \
+		git --git-dir=./archive_source/.git --work-tree=./archive_source checkout ${VER} \
+		&& mkdir -p target/${VER} \
+		&& jekyll build -s archive_source -d target/${VER} \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/'"$VER"'/#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/'"$VER"'/#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/'"$VER"'/#g'; \
 	done; \
-	rm -rf temp
+	rm -rf archive_source
 
-COPY . allv
+# This index file gets overwritten, but it serves a sort-of useful purpose in
+# making the docs/docs-base image browsable:
 
-## Branch to pull from, per ref doc
-ENV ENGINE_BRANCH="1.13.x"
-ENV DISTRIBUTION_BRANCH="release/2.5"
+COPY index.html target
 
-# The statements below pull reference docs from upstream locations,
-# then build the whole site to static HTML using Jekyll
+# Serve the site (target), which is now all static HTML
 
-RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend allv/engine/extend \
- && wget -O allv/engine/api/v1.18.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.18.md \
- && wget -O allv/engine/api/v1.19.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.19.md \
- && wget -O allv/engine/api/v1.20.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.20.md \
- && wget -O allv/engine/api/v1.21.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.21.md \
- && wget -O allv/engine/api/v1.22.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.22.md \
- && wget -O allv/engine/api/v1.23.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.23.md \
- && wget -O allv/engine/api/v1.24.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.24.md \
- && wget -O allv/engine/api/version-history.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/version-history.md \
- && wget -O allv/engine/reference/glossary.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/glossary.md \
- && wget -O allv/engine/reference/builder.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/builder.md \
- && wget -O allv/engine/reference/run.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/run.md \
- && wget -O allv/engine/reference/commandline/cli.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/reference/commandline/cli.md \
- && wget -O allv/engine/deprecated.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/deprecated.md \
- && svn co https://github.com/docker/distribution/branches/$DISTRIBUTION_BRANCH/docs/spec allv/registry/spec \
- && rm allv/registry/spec/api.md.tmpl \
- && wget -O allv/registry/configuration.md https://raw.githubusercontent.com/docker/distribution/$DISTRIBUTION_BRANCH/docs/configuration.md \
- && rm -rf allv/apidocs/cloud-api-source \
- && rm -rf allv/tests \
- && wget -O allv/engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
- && jekyll build -s allv -d allvbuild \
- && rm -rf allvbuild/apidocs/layouts \
- && find allvbuild -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
- && rm -rf allv
-
-# Serve the site, which is now all static HTML
-CMD jekyll serve -s /usr/src/app/allvbuild --no-watch -H 0.0.0.0 -P 4000
+CMD echo "Docker docs are viewable at:" && echo "http://0.0.0.0:4000" && exec nginx

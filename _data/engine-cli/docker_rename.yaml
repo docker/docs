@@ -1,7 +1,0 @@
-command: docker rename
-short: Rename a container
-long: |
-  Alias for `docker container rename`.
-usage: docker rename CONTAINER NEW_NAME
-pname: docker
-plink: docker.yaml

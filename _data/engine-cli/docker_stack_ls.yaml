@@ -1,7 +1,0 @@
-command: docker stack ls
-aliases: list
-short: List stacks
-long: List stacks
-usage: docker stack ls
-pname: docker stack
-plink: docker_stack.yaml

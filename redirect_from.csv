@@ -1,5 +1,0 @@
----
-layout: null
----
-{% for page in site.pages %}{% for redirect in page.redirect_from %}{{ redirect }},{{ page.url }}
-{% endfor %}{% endfor %}
