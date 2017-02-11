@@ -1,8 +1,8 @@
-FROM docs/docs-base
+FROM docs/docker.github.io:docs-base
 
 # docs-base contains: GitHub Pages, nginx, and the docs archives, running on
-# Debian Jesse. See the Dockerfile for docs-base at:
-# _data/docsarchive/docs-base in the docs repo
+# Debian Jesse. See the contents of docs-base at:
+# https://github.com/docker/docker.github.io/tree/docs-base
 
 # Copy master into target directory (skipping files / folders in .dockerignore)
 # These files represent the current docs
