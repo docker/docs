@@ -70,7 +70,7 @@ Docker from the repository.
         ca-certificates \
         curl \
         software-properties-common
-        ```
+    ```
 
 2.  Add Docker's official GPG key:
 
