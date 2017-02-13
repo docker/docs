@@ -68,7 +68,6 @@ Docker from the repository.
         curl \
         apt-transport-https \
         ca-certificates \
-        curl \
         software-properties-common
         ```
 
