@@ -4,6 +4,8 @@ description: Learn how to manage your passwords, certificates, or other secrets 
 keywords: Docker, UCP, secrets, secrets management
 ---
 
+[![Secrets](../../images/secrets_video.png)](https://www.youtube.com/watch?v=8CaiJ9uZEk8 "Working with Secrets"){:target="_blank"}
+
 When deploying and orchestrating services, you often need to configure those
 services with sensitive information like passwords, TLS certificates, or
 private keys.
