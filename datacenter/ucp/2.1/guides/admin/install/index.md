@@ -135,5 +135,5 @@ option.
 
 ## Where to go next
 
-* [Use your own TLS certificates](../configure/tls-certificates.md)
+* [Use your own TLS certificates](../configure/use-your-own-tls-certificates.md)
 * [Scale your cluster](../configure/scale-your-cluster.md)
