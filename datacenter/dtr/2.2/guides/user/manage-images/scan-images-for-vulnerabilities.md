@@ -4,6 +4,8 @@ description: Learn how to scan your Docker images for vulnerabilities.
 keywords: docker, registry, scan, vulnerability
 ---
 
+[![Image Security Scanning](../../images/scanning_video.png)](https://www.youtube.com/watch?v=121poCB0Nn8 "Images Security Scanning"){:target="_blank"}
+
 Docker Trusted Registry can scan images in your repositories to verify that they
 are free from known security vulnerabilities or exposures, using Docker Security
 Scanning. The results of these scans are reported for each image tag.
