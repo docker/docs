@@ -101,8 +101,16 @@ to the `docker` group.
 
 5.  Add the repository for the new version:
 
+    for 14.04:
+
     ```bash
     $ echo "deb https://packages.docker.com/1.13/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
+    ```
+    
+    for 16.04:
+    
+    ```bash
+    $ echo "deb https://packages.docker.com/1.13/apt/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
     ```
 
 6.  Run the following to install commercially supported Docker Engine and its
