@@ -91,7 +91,7 @@ Docker from the repository.
 3.  Use the following command to set up the **stable** repository.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
-    > Debian distribution, such as `xenial`.
+    > Ubuntu distribution, such as `xenial`.
 
 
     ```bash
