@@ -57,4 +57,4 @@ action here. For example:
 
 ## What's next?
 
-In the next steps, we'll [customize the app](customize-app.md) and redploy it.
+In the next steps, we'll [customize the app](customize-app.md) and redeploy it.
