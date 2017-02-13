@@ -68,9 +68,8 @@ Docker from the repository.
         curl \
         apt-transport-https \
         ca-certificates \
-        curl \
         software-properties-common
-        ```
+    ```
 
 2.  Add Docker's official GPG key:
 
