@@ -255,6 +255,7 @@ If the swarm manager cannot resolve the image to a digest, all is not lost:
   - If this fails, the task fails to deploy and the manager tries again to deploy
     the task, possibly on a different worker node.
 
+{% if site.edge == true %}
 ### Control service scale and placement
 
 Swarm mode has two types of services, replicated and global. For replicated
@@ -301,6 +302,8 @@ additional placement preferences to further divide tasks over groups of nodes.
 For example, you can balance them over multiple racks within each datacenter.
 For more information on constraints, refer to the `docker service create`
 [CLI reference](/engine/reference/commandline/service_create.md).
+
+{% endif %}
 
 ### Reserving memory or number of CPUs for a service
 
@@ -571,7 +574,8 @@ $ docker service create \
 > with single quotes (`'`).
 >
 > For example, the `local` driver accepts mount options as a comma-separated
-> list in the `o` parameter. This example shows the correctly to escape the list.
+> list in the `o` parameter. This example shows the correcty to escape the list.
+>
 >     $ docker service create \
 >          --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
 >         --name myservice \

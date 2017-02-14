@@ -115,7 +115,7 @@ guides:
     - path: /toolbox/faqs/troubleshoot/
       title: Troubleshooting
   - path: /release-notes/
-    title: Docker Release Notes
+    title: Docker release notes
 - sectiontitle: Get Started
   section:
   - path: /learn/
