@@ -26,7 +26,8 @@ Free downloadables that help your device use Docker containers.
 
 | Tool | Description |
 | ---- | ----------- |
-| [Docker for Mac](/docker-for-mac/) and [Docker for Windows](/docker-for-windows) | Desktop installation packages that include everything a developer needs to create and test applications |
+| [Docker for Mac](/docker-for-mac/) | Docker desktop solution that includes everything a developer needs to create and test applications on a Mac |
+| [Docker for Windows](/docker-for-windows) | Docker desktop solution that includes everything a developer needs to create and test applications on a Windows system|
 | [Docker for Linux](/engine/installation/#on-linux) | Installation guides for running Docker on all supported Linux distros. |
 | [Docker Compose](/compose/) | Enables you to define, build, and run multi-container applications |
 | [Docker Notary](/notary/) | Allows the signing of container images to enable Docker Content Trust |
@@ -37,4 +38,4 @@ Free downloadables that help your device use Docker containers.
 
 * [Docker Hub](/docker-hub/) - Superseded by Docker Store and Docker Cloud
 * [Docker Swarm](/swarm/) - Functionality folded directly into native Docker, no longer a standalone tool
-* [Docker Toolbox](/toolbox/overview/) - Superseded by Docker for Mac/Windows
+* [Docker Toolbox](/toolbox/overview/) - Superseded by Docker for Mac and Windows
