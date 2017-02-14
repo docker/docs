@@ -54,6 +54,22 @@ platform.
 See also [Docker Cloud](#on-docker-cloud) for setup instructions for
 Digital Ocean, Packet, SoftLink, or Bring Your Own Cloud.
 
+## Time-based release schedule
+
+Starting with Docker 17.03, Docker uses semantic versioning and a time-based
+release schedule, outlined below. There may be times when exceptions need to be
+made, but this is the goal.
+
+- Ideally, a Docker CE release is published the first week of each month.
+  - In March, June, September, and December, the release will be published to the
+    **stable** channel.
+  - The rest of the time, this monthly release will be published to the **edge**
+    channel.
+- At the end of the month in March, June, September, and December, a Docker EE
+  release is published.
+
+{% include docker_schedule_matrix.md %}
+
 ### Prior releases
 
 Instructions for installing prior releases of Docker can be found in the
