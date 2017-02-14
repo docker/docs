@@ -64,7 +64,7 @@ options:
 - option: sig-proxy
   default_value: "true"
   description: Proxy all received signals to the process
-example: |-
+examples: |-
   ### Attach to and detach from a running container
 
   ```bash

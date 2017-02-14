@@ -19,7 +19,7 @@ long: |-
 usage: docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 pname: docker
 plink: docker.yaml
-example: |-
+examples: |-
   ### Tag an image referenced by ID
 
   To tag a local image with ID "0e5574283393" into the "fedora" repository with

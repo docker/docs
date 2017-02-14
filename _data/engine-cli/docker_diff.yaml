@@ -15,7 +15,7 @@ long: |-
 usage: docker diff CONTAINER
 pname: docker
 plink: docker.yaml
-example: |-
+examples: |-
   Inspect the changes to an `nginx` container:
 
   ```bash

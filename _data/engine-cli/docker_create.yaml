@@ -291,7 +291,7 @@ options:
 - option: workdir
   shorthand: w
   description: Working directory inside the container
-example: |-
+examples: |-
   ### Create and start a container
 
   ```bash

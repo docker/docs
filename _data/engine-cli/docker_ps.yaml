@@ -33,7 +33,7 @@ options:
   shorthand: s
   default_value: "false"
   description: Display total file sizes
-example: |-
+examples: |-
   ### Prevent truncating output
 
   Running `docker ps --no-trunc` showing 2 linked containers.

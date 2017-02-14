@@ -10,7 +10,7 @@ long: |-
 usage: docker unpause CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml
-example: |-
+examples: |-
   ```bash
   $ docker unpause my_container
   ```

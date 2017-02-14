@@ -4,7 +4,7 @@ long: List port mappings or a specific mapping for the container
 usage: docker port CONTAINER [PRIVATE_PORT[/PROTO]]
 pname: docker
 plink: docker.yaml
-example: |-
+examples: |-
   ### Show all mapped ports
 
   You can find out all the ports mapped by not specifying a `PRIVATE_PORT`, or

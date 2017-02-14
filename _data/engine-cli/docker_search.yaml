@@ -27,7 +27,7 @@ options:
   shorthand: s
   default_value: "0"
   description: Only displays with at least x stars
-example: "### Search images by name\n\nThis example displays images with a name containing
+examples: "### Search images by name\n\nThis example displays images with a name containing
   'busybox':\n\n```none\n$ docker search busybox\n\nNAME                             DESCRIPTION
   \                                    STARS     OFFICIAL   AUTOMATED\nbusybox                          Busybox
   base image.                             316       [OK]       \nprogrium/busybox

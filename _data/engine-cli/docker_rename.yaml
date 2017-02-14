@@ -4,7 +4,7 @@ long: The `docker rename` command renames a container.
 usage: docker rename CONTAINER NEW_NAME
 pname: docker
 plink: docker.yaml
-example: |-
+examples: |-
   ```bash
   $ docker rename my_container my_new_container
   ```

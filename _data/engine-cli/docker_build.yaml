@@ -184,7 +184,7 @@ options:
 - option: ulimit
   default_value: '[]'
   description: Ulimit options
-example: |-
+examples: |-
   ### Build with PATH
 
   ```bash

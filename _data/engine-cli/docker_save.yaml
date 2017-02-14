@@ -11,7 +11,7 @@ options:
 - option: output
   shorthand: o
   description: Write to a file, instead of STDOUT
-example: |-
+examples: |-
   ### Create a backup that can then be used with `docker load`.
 
   ```bash

@@ -300,7 +300,7 @@ options:
 - option: workdir
   shorthand: w
   description: Working directory inside the container
-example: |-
+examples: |-
   ### Assign name and allocate pseudo-TTY (--name, -it)
 
   ```bash

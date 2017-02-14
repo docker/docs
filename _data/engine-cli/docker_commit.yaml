@@ -36,7 +36,7 @@ options:
   shorthand: p
   default_value: "true"
   description: Pause container during commit
-example: |-
+examples: |-
   ### Commit a container
 
   ```bash

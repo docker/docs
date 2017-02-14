@@ -4,7 +4,7 @@ long: Log out from a Docker registry
 usage: docker logout [SERVER]
 pname: docker
 plink: docker.yaml
-example: |-
+examples: |-
   ```bash
   $ docker logout localhost:8080
   ```
