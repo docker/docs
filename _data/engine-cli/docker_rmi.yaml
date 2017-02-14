@@ -12,7 +12,7 @@ options:
 - option: no-prune
   default_value: "false"
   description: Do not delete untagged parents
-example: |-
+examples: |-
   You can remove an image using its short or long ID, its tag, or its digest. If
   an image has one or more tag referencing it, you must remove all of them before
   the image is removed. Digest references are removed automatically when an image

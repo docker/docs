@@ -24,7 +24,7 @@ options:
 - option: message
   shorthand: m
   description: Set commit message for imported image
-example: |-
+examples: |-
   ### Import from a remote location
 
   This will create a new untagged image.

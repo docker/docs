@@ -20,7 +20,7 @@ options:
   description: Display total file sizes if the type is container
 - option: type
   description: Return JSON for specified type
-example: |-
+examples: |-
   ### Get an instance's IP address
 
   For the most part, you can pick out any field from the JSON in a fairly

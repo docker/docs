@@ -19,7 +19,7 @@ options:
   shorthand: i
   default_value: "false"
   description: Attach container's STDIN
-example: |-
+examples: |-
   ```bash
   $ docker start my_container
   ```

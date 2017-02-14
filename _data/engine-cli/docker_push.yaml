@@ -25,7 +25,7 @@ options:
 - option: disable-content-trust
   default_value: "true"
   description: Skip image signing
-example: |-
+examples: |-
   ### Push a new image to a registry
 
   First save the new image by finding the container ID (using [`docker ps`](ps.md))

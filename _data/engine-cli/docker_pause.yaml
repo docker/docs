@@ -14,7 +14,7 @@ long: |-
 usage: docker pause CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml
-example: |-
+examples: |-
   ```bash
   $ docker pause my_container
   ```

@@ -17,7 +17,7 @@ options:
   shorthand: v
   default_value: "false"
   description: Remove the volumes associated with the container
-example: |-
+examples: |-
   ### Remove a container
 
   This will remove the container referenced under the link

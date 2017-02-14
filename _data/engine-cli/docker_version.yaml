@@ -13,7 +13,7 @@ options:
 - option: format
   shorthand: f
   description: Format the output using the given Go template
-example: |-
+examples: |-
   ### Default output
 
   ```bash

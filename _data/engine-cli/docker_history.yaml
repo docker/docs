@@ -16,7 +16,7 @@ options:
   shorthand: q
   default_value: "false"
   description: Only show numeric IDs
-example: |-
+examples: |-
   To see how the `docker:latest` image was built:
 
   ```bash

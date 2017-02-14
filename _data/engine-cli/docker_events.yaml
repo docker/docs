@@ -145,7 +145,7 @@ options:
   description: Show all events created since timestamp
 - option: until
   description: Stream events until this timestamp
-example: |-
+examples: |-
   ### Basic example
 
   You'll need two shells for this example.

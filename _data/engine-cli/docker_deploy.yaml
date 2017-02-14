@@ -15,7 +15,7 @@ options:
 - option: with-registry-auth
   default_value: "false"
   description: Send registry authentication details to Swarm agents
-example: |-
+examples: |-
   ### Compose file
 
   The `deploy` command supports compose file version `3.0` and above.

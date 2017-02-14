@@ -39,7 +39,7 @@ options:
   shorthand: q
   default_value: "false"
   description: Only show numeric IDs
-example: |-
+examples: |-
   ### List the most recently created images
 
   ```bash

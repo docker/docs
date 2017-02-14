@@ -25,7 +25,7 @@ options:
 - option: format
   shorthand: f
   description: Format the output using the given Go template
-example: |-
+examples: |-
   ### Show output
 
   The example below shows the output for a daemon running on Red Hat Enterprise Linux,

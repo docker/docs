@@ -15,7 +15,7 @@ options:
 - option: output
   shorthand: o
   description: Write to a file, instead of STDOUT
-example: |-
+examples: |-
   ch of these commands has the same result.
 
   ```bash

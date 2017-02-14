@@ -17,7 +17,7 @@ options:
 - option: no-stream
   default_value: "false"
   description: Disable streaming stats and only pull the first result
-example: |-
+examples: |-
   Running `docker stats` on all running containers against a Linux daemon.
 
   ```bash
