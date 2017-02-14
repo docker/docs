@@ -20,9 +20,9 @@ guides:
   section:
   - path: /engine/installation/
     title: Install Docker Engine
-  - path: /docker-for-mac/
+  - path: /docker-for-mac/install/
     title: Docker for Mac
-  - path: /docker-for-windows/
+  - path: /docker-for-windows/install/
     title: Docker for Windows
   - sectiontitle: Docker for Linux
     section:
@@ -1544,6 +1544,8 @@ manuals:
         title: Get support
 - sectiontitle: Docker for Mac
   section:
+  - path: /docker-for-mac/
+    title: Getting started
   - path: /docker-for-mac/docker-toolbox/
     title: Docker for Mac vs. Docker Toolbox
   - path: /docker-for-mac/multi-arch/
@@ -1556,20 +1558,18 @@ manuals:
     title: Logs and Troubleshooting
   - path: /docker-for-mac/faqs/
     title: FAQs
-  - path: /docker-for-mac/examples/
-    title: Example Applications
   - path: /docker-for-mac/opensource/
     title: Open Source Licensing
   - path: /docker-for-mac/release-notes/
     title: Release Notes
 - sectiontitle: Docker for Windows
   section:
+  - path: /docker-for-windows/
+    title: Getting started
   - path: /docker-for-windows/troubleshoot/
     title: Logs and Troubleshooting
   - path: /docker-for-windows/faqs/
     title: FAQs
-  - path: /docker-for-windows/examples/
-    title: Example Applications
   - path: /docker-for-windows/opensource/
     title: Open Source Licensing
   - path: /docker-for-windows/release-notes/

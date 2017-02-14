@@ -34,5 +34,5 @@ these to do builds `FROM`, so you can build new Multi-CPU architecture packages.
 
 Alternatively, you can bind mount in the `qemu` static binaries to any
 cross-architecture package, such as the semi-official ones using a script like
-this one https://github.com/justincormack/cross-docker. (See the README at the
+this one [https://github.com/justincormack/cross-docker](https://github.com/justincormack/cross-docker). (See the README at the
 given link for details on how to use the script.)
