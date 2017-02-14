@@ -638,7 +638,7 @@ In the example below, three services are provided (`web`, `worker`, and `db`), a
       worker:
         build: ./worker
         networks:
-        - legacy
+          - legacy
 
       db:
         image: mysql
