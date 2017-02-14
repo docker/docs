@@ -123,12 +123,13 @@ This example starts an `alpine` container with the `none` log driver.
 $ docker run -it --log-driver none alpine ash
 ```
 
+{% if site.edge == true %}
 ### Options for all drivers
 | Option            | Description | Example value |
 |-------------------|-------------|---------------|
 | `mode`            | Sets the logging mode, accepted values are `blocking` (default), and `non-blocking`. When `non-blocking` is set, if the log buffer fills up, log messages will be lost. How messages are dropped is left undefined. | `--log-opt mode=non-blocking`
 | `max-buffer-size` | Applicable only when `mode` is set to `non-blocking`, this sets the maxmimum size of the log buffer. Once this size is reach, log messages will be dropped. | `--log-opt max-buffer-size 5m`
-
+{% endif %}
 
 ## `json-file`
 
