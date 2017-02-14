@@ -1252,10 +1252,10 @@ refer to it within the Compose file:
 ## Compose documentation
 
 - [User guide](index.md)
-- [Installing Compose](install.md)
+- [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample app with swarm mode](/engine/getstarted-voting-app/)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
-- [Command line reference](./reference/index.md)
+- [Get started with Django](/compose/django/)
+- [Get started with Rails](/compose/rails/)
+- [Get started with WordPress](/compose/wordpress/)
+- [Command line reference](/compose/reference/)
