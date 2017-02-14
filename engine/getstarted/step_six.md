@@ -188,7 +188,7 @@ You've done a lot, you've done all of the following fundamental Docker tasks.
 * located an interesting image on Docker Hub
 * run the image on your own machine
 * modified an image to create your own and run it
-* create a Docker Hub account and repository
+* created a Docker Hub account and repository
 * pushed your image to Docker Hub for others to share
 
 <a href="https://twitter.com/intent/tweet?button_hashtag=dockerdocs&text=Just%20ran%20a%20container%20with%20an%20image%20I%20built.%20Find%20it%20on%20%23dockerhub.%20Build%20your%20own%3A%20http%3A%2F%2Fgoo.gl%2FMUi7cA" class="twitter-hashtag-button" data-size="large" data-related="docker" target="_blank">Tweet your accomplishment!</a>
