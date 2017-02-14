@@ -288,7 +288,17 @@ $ docker service create \
 Service constraints let you set criteria for a node to meet before the scheduler
 deploys a service to the node. You can apply constraints to the
 service based upon node attributes and metadata or engine metadata. For more
-information on constraints, refer to the `docker service create` [CLI  reference](../reference/commandline/service_create.md).
+information on constraints, refer to the `docker service create` [CLI reference](../reference/commandline/service_create.md).
+
+Use placement preferences to divide tasks evenly over different categories of
+nodes. An example of where this may be useful is balancing tasks between
+multiple datacenters or availability zones. In this case, you can use a
+placement preference to spread out tasks to multiple datacenters and make the
+service more resilient in the face of a localized outage. You can use
+additional placement preferences to further divide tasks over groups of nodes.
+For example, you can balance them over multiple racks within each datacenter.
+For more information on constraints, refer to the `docker service create` [CLI
+reference](../reference/commandline/service_create.md).
 
 ### Reserving memory or number of CPUs for a service
 
