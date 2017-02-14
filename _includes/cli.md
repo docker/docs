@@ -76,4 +76,12 @@
 
 {% endif %}
 
+{% if site.data[page.datafolder][page.datafile].examples %}
+
+## Examples
+
+{{ site.data[page.datafolder][page.datafile].examples }}
+
+{% endif %}
+
 {% endif %}
