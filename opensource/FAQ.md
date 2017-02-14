@@ -53,7 +53,7 @@ Set your local repo to track changes upstream, on the `docker` repository.
 ## How do I format my Go code
 
 Run `gofmt -s -w filename.go` on each changed file before committing your changes.
-Most editors have plug-ins that do the formatting automatically.
+Most [editors have plug-ins](https://github.com/golang/go/wiki/IDEsAndTextEditorPlugins) that do the formatting automatically.
 
 ## What is the pre-pull request checklist
 
@@ -112,7 +112,7 @@ Always rebase and squash your commits before making a pull request.
     If you run into trouble, `git --rebase abort` removes any changes and gets you
 back to where you started.
 
-4.  Squash the `pick` keyword with `squash` on all but the first commit.
+4.  Replace the `pick` keyword with `squash` on all but the first commit.
 
     ```
     pick 1a79f55 Tweak some of images
