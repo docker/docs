@@ -64,8 +64,7 @@ Docker from the repository.
 1.  Install packages to allow `apt` to use a repository over HTTPS:
 
     ```bash
-    $ sudo apt-get -y --no-install-recommends install \
-        curl \
+    $ sudo apt-get install -y --no-install-recommends \
         apt-transport-https \
         ca-certificates \
         curl \
