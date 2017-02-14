@@ -829,13 +829,12 @@ reference:
   path: /registry/spec/api/
   nosync: true
 - title: Trusted Registry API
-  path: /apidocs/overview/
+  path: /datacenter/dtr/2.2/reference/api/
+- title: Trusted Registry CLI
+  path: /datacenter/dtr/2.2/reference/cli/
   nosync: true
-- title: Trusted Registry (docker/dtr) CLI
-  path: /datacenter/dtr/2.1/reference/cli/
-  nosync: true
-- title: UCP Tool (docker/ucp) CLI
-  path: /datacenter/ucp/2.0/reference/cli/
+- title: Universal Control Plane CLI
+  path: /datacenter/ucp/2.1/reference/cli/
   nosync: true
 
 samples:
