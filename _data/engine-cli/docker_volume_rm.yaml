@@ -16,3 +16,4 @@ example: |2
 
   $ docker volume rm hello
   hello
+

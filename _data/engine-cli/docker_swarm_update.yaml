@@ -25,3 +25,4 @@ options:
 - option: task-history-limit
   default_value: "5"
   description: Task history retention limit
+

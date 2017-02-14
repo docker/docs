@@ -1,11 +1,11 @@
 command: docker logout
 short: Log out from a Docker registry
-long: "Log out of a Docker Registry located on the specified `SERVER`. You can\nspecify
-  a URL or a `hostname` for the `SERVER` value. If you do not specify a\n`SERVER`,
-  the command attempts to log you out of Docker's public registry\nlocated at `https://registry-1.docker.io/`
-  by default.  \n\n# EXAMPLES\n\n## Log out from a registry on your localhost\n\n
-  \   # docker logout localhost:8080\n\n# See also\n**docker-login(1)** to log in
-  to a Docker registry server.\n"
+long: Log out from a Docker registry
 usage: docker logout [SERVER]
 pname: docker
 plink: docker.yaml
+example: |-
+  ```bash
+  $ docker logout localhost:8080
+  ```
+

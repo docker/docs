@@ -10,3 +10,4 @@ options:
   shorthand: f
   default_value: "false"
   description: Force the removal of an active plugin
+

@@ -4,3 +4,4 @@ long: Promote one or more nodes to manager in the swarm
 usage: docker node promote NODE [NODE...]
 pname: docker node
 plink: docker_node.yaml
+

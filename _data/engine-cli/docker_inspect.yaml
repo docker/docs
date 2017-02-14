@@ -1,109 +1,12 @@
 command: docker inspect
 short: Return low-level information on Docker objects
-long: "This displays the low-level information on Docker object(s) (e.g. container,
-  \nimage, volume,network, node, service, or task) identified by name or ID. By default,\nthis
-  will render all results in a JSON array. If the container and image have\nthe same
-  name, this will return container JSON for unspecified type. If a format\nis specified,
-  the given template will be executed for each result.\n\n# EXAMPLES\n\nGet information
-  about an image when image name conflicts with the container name,\ne.g. both image
-  and container are named rhel7:\n\n    $ docker inspect --type=image rhel7\n    [\n
-  \   {\n     \"Id\": \"fe01a428b9d9de35d29531e9994157978e8c48fa693e1bf1d221dffbbb67b170\",\n
-  \    \"Parent\": \"10acc31def5d6f249b548e01e8ffbaccfd61af0240c17315a7ad393d022c5ca2\",\n
-  \    ....\n    }\n    ]\n\n## Getting information on a container\n\nTo get information
-  on a container use its ID or instance name:\n\n    $ docker inspect d2cc496561d6\n
-  \   [{\n    \"Id\": \"d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47\",\n
-  \   \"Created\": \"2015-06-08T16:18:02.505155285Z\",\n    \"Path\": \"bash\",\n
-  \   \"Args\": [],\n    \"State\": {\n        \"Running\": false,\n        \"Paused\":
-  false,\n        \"Restarting\": false,\n        \"OOMKilled\": false,\n        \"Dead\":
-  false,\n        \"Pid\": 0,\n        \"ExitCode\": 0,\n        \"Error\": \"\",\n
-  \       \"StartedAt\": \"2015-06-08T16:18:03.643865954Z\",\n        \"FinishedAt\":
-  \"2015-06-08T16:57:06.448552862Z\"\n    },\n    \"Image\": \"ded7cd95e059788f2586a51c275a4f151653779d6a7f4dad77c2bd34601d94e4\",\n
-  \   \"NetworkSettings\": {\n        \"Bridge\": \"\",\n        \"SandboxID\": \"6b4851d1903e16dd6a567bd526553a86664361f31036eaaa2f8454d6f4611f6f\",\n
-  \       \"HairpinMode\": false,\n        \"LinkLocalIPv6Address\": \"\",\n        \"LinkLocalIPv6PrefixLen\":
-  0,\n        \"Ports\": {},\n        \"SandboxKey\": \"/var/run/docker/netns/6b4851d1903e\",\n
-  \       \"SecondaryIPAddresses\": null,\n        \"SecondaryIPv6Addresses\": null,\n
-  \       \"EndpointID\": \"7587b82f0dada3656fda26588aee72630c6fab1536d36e394b2bfbcf898c971d\",\n
-  \       \"Gateway\": \"172.17.0.1\",\n        \"GlobalIPv6Address\": \"\",\n        \"GlobalIPv6PrefixLen\":
-  0,\n        \"IPAddress\": \"172.17.0.2\",\n        \"IPPrefixLen\": 16,\n        \"IPv6Gateway\":
-  \"\",\n        \"MacAddress\": \"02:42:ac:12:00:02\",\n        \"Networks\": {\n
-  \           \"bridge\": {\n                \"NetworkID\": \"7ea29fc1412292a2d7bba362f9253545fecdfa8ce9a6e37dd10ba8bee7129812\",\n
-  \               \"EndpointID\": \"7587b82f0dada3656fda26588aee72630c6fab1536d36e394b2bfbcf898c971d\",\n
-  \               \"Gateway\": \"172.17.0.1\",\n                \"IPAddress\": \"172.17.0.2\",\n
-  \               \"IPPrefixLen\": 16,\n                \"IPv6Gateway\": \"\",\n                \"GlobalIPv6Address\":
-  \"\",\n                \"GlobalIPv6PrefixLen\": 0,\n                \"MacAddress\":
-  \"02:42:ac:12:00:02\"\n            }\n        }\n\n    },\n    \"ResolvConfPath\":
-  \"/var/lib/docker/containers/d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47/resolv.conf\",\n
-  \   \"HostnamePath\": \"/var/lib/docker/containers/d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47/hostname\",\n
-  \   \"HostsPath\": \"/var/lib/docker/containers/d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47/hosts\",\n
-  \   \"LogPath\": \"/var/lib/docker/containers/d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47/d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47-json.log\",\n
-  \   \"Name\": \"/adoring_wozniak\",\n    \"RestartCount\": 0,\n    \"Driver\": \"devicemapper\",\n
-  \   \"MountLabel\": \"\",\n    \"ProcessLabel\": \"\",\n    \"Mounts\": [\n      {\n
-  \       \"Source\": \"/data\",\n        \"Destination\": \"/data\",\n        \"Mode\":
-  \"ro,Z\",\n        \"RW\": false\n\t\"Propagation\": \"\"\n      }\n    ],\n    \"AppArmorProfile\":
-  \"\",\n    \"ExecIDs\": null,\n    \"HostConfig\": {\n        \"Binds\": null,\n
-  \       \"ContainerIDFile\": \"\",\n        \"Memory\": 0,\n        \"MemorySwap\":
-  0,\n        \"CpuShares\": 0,\n        \"CpuPeriod\": 0,\n        \"CpusetCpus\":
-  \"\",\n        \"CpusetMems\": \"\",\n        \"CpuQuota\": 0,\n        \"BlkioWeight\":
-  0,\n        \"OomKillDisable\": false,\n        \"Privileged\": false,\n        \"PortBindings\":
-  {},\n        \"Links\": null,\n        \"PublishAllPorts\": false,\n        \"Dns\":
-  null,\n        \"DnsSearch\": null,\n        \"DnsOptions\": null,\n        \"ExtraHosts\":
-  null,\n        \"VolumesFrom\": null,\n        \"Devices\": [],\n        \"NetworkMode\":
-  \"bridge\",\n        \"IpcMode\": \"\",\n        \"PidMode\": \"\",\n        \"UTSMode\":
-  \"\",\n        \"CapAdd\": null,\n        \"CapDrop\": null,\n        \"RestartPolicy\":
-  {\n            \"Name\": \"no\",\n            \"MaximumRetryCount\": 0\n        },\n
-  \       \"SecurityOpt\": null,\n        \"ReadonlyRootfs\": false,\n        \"Ulimits\":
-  null,\n        \"LogConfig\": {\n            \"Type\": \"json-file\",\n            \"Config\":
-  {}\n        },\n        \"CgroupParent\": \"\"\n    },\n    \"GraphDriver\": {\n
-  \       \"Name\": \"devicemapper\",\n        \"Data\": {\n            \"DeviceId\":
-  \"5\",\n            \"DeviceName\": \"docker-253:1-2763198-d2cc496561d6d520cbc0236b4ba88c362c446a7619992123f11c809cded25b47\",\n
-  \           \"DeviceSize\": \"171798691840\"\n        }\n    },\n    \"Config\":
-  {\n        \"Hostname\": \"d2cc496561d6\",\n        \"Domainname\": \"\",\n        \"User\":
-  \"\",\n        \"AttachStdin\": true,\n        \"AttachStdout\": true,\n        \"AttachStderr\":
-  true,\n        \"ExposedPorts\": null,\n        \"Tty\": true,\n        \"OpenStdin\":
-  true,\n        \"StdinOnce\": true,\n        \"Env\": null,\n        \"Cmd\": [\n
-  \           \"bash\"\n        ],\n        \"Image\": \"fedora\",\n        \"Volumes\":
-  null,\n        \"VolumeDriver\": \"\",\n        \"WorkingDir\": \"\",\n        \"Entrypoint\":
-  null,\n        \"NetworkDisabled\": false,\n        \"MacAddress\": \"\",\n        \"OnBuild\":
-  null,\n        \"Labels\": {},\n        \"Memory\": 0,\n        \"MemorySwap\":
-  0,\n        \"CpuShares\": 0,\n        \"Cpuset\": \"\",\n        \"StopSignal\":
-  \"SIGTERM\"\n    }\n    }\n    ]\n## Getting the IP address of a container instance\n\nTo
-  get the IP address of a container use:\n\n    $ docker inspect --format='{{range
-  .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' d2cc496561d6\n    172.17.0.2\n\n##
-  Listing all port bindings\n\nOne can loop over arrays and maps in the results to
-  produce simple text\noutput:\n\n    $ docker inspect --format='{{range $p, $conf
-  := .NetworkSettings.Ports}} \\\n      {{$p}} -> {{(index $conf 0).HostPort}} {{end}}'
-  d2cc496561d6\n      80/tcp -> 80\n\nYou can get more information about how to write
-  a Go template from:\nhttps://golang.org/pkg/text/template/.\n\n## Getting size information
-  on a container\n\n    $ docker inspect -s d2cc496561d6\n    [\n    {\n    ....\n
-  \   \"SizeRw\": 0,\n    \"SizeRootFs\": 972,\n    ....\n    }\n    ]\n\n## Getting
-  information on an image\n\nUse an image's ID or name (e.g., repository/name[:tag])
-  to get information\nabout the image:\n\n    $ docker inspect ded7cd95e059\n    [{\n
-  \   \"Id\": \"ded7cd95e059788f2586a51c275a4f151653779d6a7f4dad77c2bd34601d94e4\",\n
-  \   \"Parent\": \"48ecf305d2cf7046c1f5f8fcbcd4994403173441d4a7f125b1bb0ceead9de731\",\n
-  \   \"Comment\": \"\",\n    \"Created\": \"2015-05-27T16:58:22.937503085Z\",\n    \"Container\":
-  \"76cf7f67d83a7a047454b33007d03e32a8f474ad332c3a03c94537edd22b312b\",\n    \"ContainerConfig\":
-  {\n        \"Hostname\": \"76cf7f67d83a\",\n        \"Domainname\": \"\",\n        \"User\":
-  \"\",\n        \"AttachStdin\": false,\n        \"AttachStdout\": false,\n        \"AttachStderr\":
-  false,\n        \"ExposedPorts\": null,\n        \"Tty\": false,\n        \"OpenStdin\":
-  false,\n        \"StdinOnce\": false,\n        \"Env\": null,\n        \"Cmd\":
-  [\n            \"/bin/sh\",\n            \"-c\",\n            \"#(nop) ADD file:4be46382bcf2b095fcb9fe8334206b584eff60bb3fad8178cbd97697fcb2ea83
-  in /\"\n        ],\n        \"Image\": \"48ecf305d2cf7046c1f5f8fcbcd4994403173441d4a7f125b1bb0ceead9de731\",\n
-  \       \"Volumes\": null,\n        \"VolumeDriver\": \"\",\n        \"WorkingDir\":
-  \"\",\n        \"Entrypoint\": null,\n        \"NetworkDisabled\": false,\n        \"MacAddress\":
-  \"\",\n        \"OnBuild\": null,\n        \"Labels\": {}\n    },\n    \"DockerVersion\":
-  \"1.6.0\",\n    \"Author\": \"Lokesh Mandvekar \\u003clsm5@fedoraproject.org\\u003e\",\n
-  \   \"Config\": {\n        \"Hostname\": \"76cf7f67d83a\",\n        \"Domainname\":
-  \"\",\n        \"User\": \"\",\n        \"AttachStdin\": false,\n        \"AttachStdout\":
-  false,\n        \"AttachStderr\": false,\n        \"ExposedPorts\": null,\n        \"Tty\":
-  false,\n        \"OpenStdin\": false,\n        \"StdinOnce\": false,\n        \"Env\":
-  null,\n        \"Cmd\": null,\n        \"Image\": \"48ecf305d2cf7046c1f5f8fcbcd4994403173441d4a7f125b1bb0ceead9de731\",\n
-  \       \"Volumes\": null,\n        \"VolumeDriver\": \"\",\n        \"WorkingDir\":
-  \"\",\n        \"Entrypoint\": null,\n        \"NetworkDisabled\": false,\n        \"MacAddress\":
-  \"\",\n        \"OnBuild\": null,\n        \"Labels\": {}\n    },\n    \"Architecture\":
-  \"amd64\",\n    \"Os\": \"linux\",\n    \"Size\": 186507296,\n    \"VirtualSize\":
-  186507296,\n    \"GraphDriver\": {\n        \"Name\": \"devicemapper\",\n        \"Data\":
-  {\n            \"DeviceId\": \"3\",\n            \"DeviceName\": \"docker-253:1-2763198-ded7cd95e059788f2586a51c275a4f151653779d6a7f4dad77c2bd34601d94e4\",\n
-  \           \"DeviceSize\": \"171798691840\"\n        }\n    }\n    }\n    ]\n"
+long: |-
+  By default, `docker inspect` will render all results in a JSON array. If the container and
+  image have the same name, this will return container JSON for unspecified type.
+  If a format is specified, the given template will be executed for each result.
+
+  Go's [text/template](http://golang.org/pkg/text/template/) package
+  describes all the details of the format.
 usage: docker inspect [OPTIONS] NAME|ID [NAME|ID...]
 pname: docker
 plink: docker.yaml
@@ -117,3 +20,79 @@ options:
   description: Display total file sizes if the type is container
 - option: type
   description: Return JSON for specified type
+example: |-
+  ### Get an instance's IP address
+
+  For the most part, you can pick out any field from the JSON in a fairly
+  straightforward manner.
+
+  ```bash
+  {% raw %}
+  $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $INSTANCE_ID
+  {% endraw %}
+  ```
+
+  ### Get an instance's MAC address
+
+  ```bash
+  {% raw %}
+  $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.MacAddress}}{{end}}' $INSTANCE_ID
+  {% endraw %}
+  ```
+
+  ### Get an instance's log path
+
+  ```bash
+  {% raw %}
+  $ docker inspect --format='{{.LogPath}}' $INSTANCE_ID
+  {% endraw %}
+  ```
+
+  ### Get an instance's image name
+
+  ```bash
+  {% raw %}
+  $ docker inspect --format='{{.Container.Spec.Image}}' $INSTANCE_ID
+  {% endraw %}
+  ```
+
+  ### List all port bindings
+
+  You can loop over arrays and maps in the results to produce simple text
+  output:
+
+  ```bash
+  {% raw %}
+  $ docker inspect --format='{{range $p, $conf := .NetworkSettings.Ports}} {{$p}} -> {{(index $conf 0).HostPort}} {{end}}' $INSTANCE_ID
+  {% endraw %}
+  ```
+
+  ### Find a specific port mapping
+
+  The `.Field` syntax doesn't work when the field name begins with a
+  number, but the template language's `index` function does. The
+  `.NetworkSettings.Ports` section contains a map of the internal port
+  mappings to a list of external address/port objects. To grab just the
+  numeric public port, you use `index` to find the specific port map, and
+  then `index` 0 contains the first object inside of that. Then we ask for
+  the `HostPort` field to get the public address.
+
+  ```bash
+  {% raw %}
+  $ docker inspect --format='{{(index (index .NetworkSettings.Ports "8787/tcp") 0).HostPort}}' $INSTANCE_ID
+  {% endraw %}
+  ```
+
+  ### Get a subsection in JSON format
+
+  If you request a field which is itself a structure containing other
+  fields, by default you get a Go-style dump of the inner values.
+  Docker adds a template function, `json`, which can be applied to get
+  results in JSON format.
+
+  ```bash
+  {% raw %}
+  $ docker inspect --format='{{json .Config}}' $INSTANCE_ID
+  {% endraw %}
+  ```
+
