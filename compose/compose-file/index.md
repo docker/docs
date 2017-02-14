@@ -803,7 +803,7 @@ In the example below, three services are provided (`web`, `worker`, and `db`), a
 
 Specify a static IP address for containers for this service when joining the network.
 
-The corresponding network configuration in the [top-level networks section](compose-file.md#network-configuration-reference) must have an `ipam` block with subnet and gateway configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](compose-file.md#enableipv6) option must be set.
+The corresponding network configuration in the [top-level networks section](compose-file.md#network-configuration-reference) must have an `ipam` block with subnet configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](compose-file.md#enableipv6) option must be set.
 
 An example:
 
@@ -825,10 +825,10 @@ An example:
         ipam:
           driver: default
           config:
-          - subnet: 172.16.238.0/24
-            gateway: 172.16.238.1
-          - subnet: 2001:3984:3989::/64
-            gateway: 2001:3984:3989::1
+          -
+            subnet: 172.16.238.0/24
+          -
+            subnet: 2001:3984:3989::/64
 
 #### link_local_ips
 
@@ -1173,10 +1173,6 @@ which is optional:
 -   `config`: A list with zero or more config blocks, each containing any of
     the following keys:
     - `subnet`: Subnet in CIDR format that represents a network segment
-    - `ip_range`: Range of IPs from which to allocate container IPs
-    - `gateway`: IPv4 or IPv6 gateway for the master subnet
-    - `aux_addresses`: Auxiliary IPv4 or IPv6 addresses used by Network driver,
-      as a mapping from hostname to IP
 
 A full example:
 
@@ -1184,12 +1180,6 @@ A full example:
       driver: default
       config:
         - subnet: 172.28.0.0/16
-          ip_range: 172.28.5.0/24
-          gateway: 172.28.5.254
-          aux_addresses:
-            host1: 172.28.1.5
-            host2: 172.28.1.6
-            host3: 172.28.1.7
 
 ### internal
 
