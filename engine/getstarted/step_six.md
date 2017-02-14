@@ -154,7 +154,7 @@ locally.
 		latest: Pulling from maryatdocker/docker-whale
 		eb06e47a01d2: Pull complete
 		c81071adeeb5: Pull complete
-    ...
+                ...
 		fb434121fc77: Already exists
 		Digest: sha256:ad89e88beb7dc73bf55d456e2c600e0a39dd6c9500d7cd8d1025626c4b985011
 		Status: Downloaded newer image for maryatdocker/docker-whale:latest
