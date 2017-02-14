@@ -850,6 +850,97 @@ port (a random host port will be chosen).
      - "127.0.0.1:5000-5010:5000-5010"
      - "6060:6060/udp"
 
+### secrets
+
+Grant access to secrets on a per-service basis using the per-service `secrets`
+configuration. Two different syntax variants are supported.
+
+> **Note**: The secret must already exist or be
+> [defined in the top-level `secrets` configuration](#secrets-configuration-reference)
+> of this stack file, or stack deployment will fail.
+
+#### Short syntax
+
+The short syntax variant only specifies the secret name. This grants the
+container access to the secret and mounts it at `/run/secrets/<secret_name>`
+within the container. The source name and destination mountpoint are both set
+to the secret name.
+
+> **Warning**: Due to a bug in Docker 1.13.1, using the short syntax currently
+> mounts the secret with permissions `000`, which means secrets defined using
+> the short syntax are unreadable within the container if the command does not
+> run as the `root` user. The workaround is to use the long syntax instead if
+> you use Docker 1.13.1 and the secret must be read by a non-`root` user.
+
+The following example uses the short syntax to grant the `redis` service
+access to the `my_secret` and `my_other_secret` secrets. The value of
+`my_secret` is set to the contents of the file `./my_secret.txt`, and
+`my_other_secret` is defined as an external resource, which means that it has
+already been defined in Docker, either by running the `docker secret create`
+command or by another stack deployment. If the external secret does not exist,
+the stack deployment fails with a `secret not found` error.
+
+```none
+version: "3.1"
+services:
+  redis:
+    image: redis:latest
+    deploy:
+      replicas: 1
+    secrets:
+      - my_secret
+      - my_other_secret
+secrets:
+  my_secret:
+    file: ./my_secret.txt
+  my_other_secret:
+    external: true
+```
+
+#### Long syntax
+
+The long syntax provides more granularity in how the secret is created within
+the service's task containers.
+
+- `source`: The name of the secret as it exists in Docker.
+- `target`: The name of the file that will be mounted in `/run/secrets/` in the
+  service's task containers. Defaults to `source` if not specified.
+- `uid` and `gid`: The numeric UID or GID which will own the file within
+  `/run/secrets/` in the service's task containers. Both default to `0` if not
+  specified.
+- `mode`: The permissions for the file that will be mounted in `/run/secrets/`
+  in the service's task containers, in octal notation. For instance, `0777`
+  represents world-readable. The default in Docker 1.13.1 is `0000`, but will
+  be `0444` in the future.
+
+The following example sets name of the `my_secret` to `redis_secret` within the
+container, sets the mode to `0440` (group-readable) and sets the user and group
+to `103`. The `redis` service does not have access to the `my_other_secret`
+secret.
+
+```none
+version: "3.1"
+services:
+  redis:
+    image: redis:latest
+    deploy:
+      replicas: 1
+    secrets:
+      - source: my_secret
+        target: redis_secret
+        uid: '103'
+        gid: '103'
+        mode: 0440
+secrets:
+  my_secret:
+    file: ./my_secret.txt
+  my_other_secret:
+    external: true
+```
+
+You can grant a service access to multiple secrets and you can mix long and
+short syntax. Defining a secret does not imply granting a service access to it.
+
 ### security_opt
 
 Override the default labeling scheme for each container.
@@ -1212,6 +1303,33 @@ refer to it within the Compose file:
       outside:
         external:
           name: actual-name-of-network
+
+## secrets configuration reference
+
+The top-level `secrets` declaration defines or references
+[secrets](/engine/swarm/secrets.md) which can be granted to the services in this
+stack. The source of the secret is either `file` or `external`.
+
+- `file`: The secret is created with the contents of the file at the specified
+  path.
+- `external`: If set to true, specifies that this secret has already been
+  created. Docker will not attempt to create it, and if it does not exist, a
+  `secret not found` error occurs.
+
+In this example, `my_first_secret` will be created (as
+`<stack_name>_my_first_secret)`when the stack is deployed,
+and `my_second_secret` already exists in Docker.
+
+```none
+secrets:
+  my_first_secret:
+    file: ./secret_data
+  my_second_secret
+    external: true
+```
+
+You still need to [grant access to the secrets](#secrets) to each service in the
+stack.
 
 ## Variable substitution
 
