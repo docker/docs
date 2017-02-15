@@ -275,8 +275,8 @@ used an older version, specifying the new one causes a cache bust of `apt-get
 update` and ensure the installation of the new version. Listing packages on
 each line can also prevent mistakes in package duplication.
 
-In addition, cleaning up the apt cache and removing `/var/lib/apt/lists` help
-keep the image size down. Since the `RUN` statement starts with
+In addition, cleaning up the apt cache and removing `/var/lib/apt/lists`
+reduce the image size. Since the `RUN` statement starts with
 `apt-get update`, the package cache will always be refreshed prior to
 `apt-get install`.
 
