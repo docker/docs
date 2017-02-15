@@ -140,7 +140,7 @@ seconds—the familiar refrain:
 
 Finally, you need to create the database. In another terminal, run:
 
-    docker-compose run web rails db:create
+    docker-compose run web rake db:create
 
 That's it. Your app should now be running on port 3000 on your Docker daemon. If you're using [Docker Machine](/machine/overview.md), then `docker-machine ip MACHINE_VM` returns the Docker host IP address.
 
