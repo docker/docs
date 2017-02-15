@@ -25,13 +25,16 @@ This example demonstrates how to dockerize an ASP.NET Core application.
 4. The `Dockerfile` assumes that your application is called `aspnetapp`. Change the `Dockerfile` to use the .dll file of your project.
 
   For Linux Containers:
+
   ```dockerfile
   FROM microsoft/aspnetcore:1.1
   WORKDIR /app
   COPY published ./
   ENTRYPOINT ["dotnet", "aspnetapp.dll"]
   ```
+
   For Windows Containers:
+
   ```dockerfile
   FROM microsoft/dotnet:1.1-runtime-nanoserver
   WORKDIR /app
@@ -39,20 +42,25 @@ This example demonstrates how to dockerize an ASP.NET Core application.
   COPY published ./
   ENTRYPOINT ["dotnet", "aspnetapp.dll"]
   ```
+
 5. To make your build context as small as possible add a [`.dockerignore` file](https://docs.docker.com/engine/reference/builder/#dockerignore-file) to your project folder and copy the following into it.
+
 ```dockerignore
 *
 !published
 ```
+
 > **Note:** If you are using Windows Containers on [Docker for Windows](https://docs.docker.com/docker-for-windows/) be sure to check that you are properly switched to Windows Containers. Do this by opening the system tray up arrow and right clicking on the Docker whale icon for a popup menu. In the popup menu make sure you select 'Switch to Windows Containers'. 
 
 ## Build and run the Docker image
 1. Open the command prompt and navigate to your project folder.
 2. Use the following commands to build and run your Docker image:
+
 ```console
 docker build -t aspnetapp .
 docker run -d -p 80:80 aspnetapp
 ```
+
 ## View your web page running from your container
 * If you are using a Linux container you can simply browse to http://localhost:80 to access your app in a web browser.
 * If you are using the Nano [Windows Container](https://docs.docker.com/docker-for-windows/) there is currently a bug that affects how [Windows 10 talks to Containers via "NAT"](https://github.com/Microsoft/Virtualization-Documentation/issues/181#issuecomment-252671828) (Network Address Translation). Today you must hit the IP of the container directly. You can get the IP address of your container with the following steps:
