@@ -5,6 +5,7 @@ redirect_from:
 - /docker-cloud/getting-started/python/7_scale_the_service/
 - /docker-cloud/getting-started/golang/7_scale_the_service/
 title: Scale the service
+notoc: true
 ---
 
 Right now, your service is running on a single container. That's great for now.
@@ -66,4 +67,6 @@ Hello Python Users!</br>Hostname: web-2</br>Counter: Redis Cache not found, coun
 
 Congratulations! You now have *two* containers running in your **web** service.
 
-Next: [View service logs](8_view_logs.md)
+## What's Next?
+
+[View service logs](8_view_logs.md)

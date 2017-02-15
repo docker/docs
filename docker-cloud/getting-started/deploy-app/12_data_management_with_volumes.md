@@ -12,14 +12,14 @@ the container crashed, the data would be lost. To save the data so it persists
 beyond the life of a container, or share data from one container to another,
 you'll need to define a volume.
 
-### Data persistence
+## Data persistence
 
 In order to persist, data in Docker Cloud must be stored in a volume. The volume
 can be defined on the image (for example in the Dockerfile), or specified when
 you create a new service in the Docker Cloud web UI. Learn more about volumes in
 Docker Cloud [here](/docker-cloud/apps/volumes.md).
 
-#### Test for lack of persistence
+### Test for lack of persistence
 
 If you `redeploy` the Redis service you created earlier, you'll see that the counter resets.
 
@@ -47,7 +47,7 @@ $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
 
 The Redis cache service redeployment caused the counter to reset.
 
-#### Enabling persistence
+### Enabling persistence
 
 The specific Redis image (*redis*) in this tutorial supports data persistence.
 This is not a common requirement for a Redis cache and it's not enabled by
@@ -108,14 +108,14 @@ $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io:80
 
 Congratulations! You've set up data persistence in Docker Cloud!
 
-### Sharing/reusing data volumes between services
+## Sharing/reusing data volumes between services
 
 A service's volume can be accessed by another service. To do this you use the `--volumes-from` flag when creating the new service.
 
 You might use this functionality to share data between two services, or to back
 up, restore, or migrate a volume to a local host or a cloud storage provider.
 
-### Download volume data for backup
+## Download volume data for backup
 
 In this next step, you'll download the `/data` volume from Redis to your local host using SCP (secure copy).
 
@@ -133,7 +133,7 @@ $ scp -r -P 2222 root@downloader-1.$DOCKER_ID_USER.svc.dockerapp.io:/data .
 
 You now have a backup copy of the Redis data on your local host machine!
 
-## Where to next?
+## What's Next?
 
 Congratulations! You've completed the tutorials! You can now push an image to
 Docker Cloud, deploy an app to your Cloud nodes, set environment variables,
