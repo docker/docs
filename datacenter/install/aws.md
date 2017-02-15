@@ -92,7 +92,7 @@ Docker Datacenter Password
 Docker Datacenter License in JSON format or an S3 URL to download it. You can
 get a trial license [here](https://store.docker.com/bundles/docker-datacenter)
 
-#### EnableSystemPrune
+**EnableSystemPrune**
 
 Enable if you want Docker for AWS to automatically cleanup unused space on your swarm nodes.
 
@@ -104,19 +104,16 @@ Pruning removes the following:
 - All dangling images
 - All unused networks
 
-#### EnableCloudWatchLogs
-Enable if you want Docker to send your container logs to CloudWatch. ("yes", "no") Defaults to yes.
-
-#### WorkerDiskSize
+**WorkerDiskSize**
 Size of Workers's ephemeral storage volume in GiB (20 - 1024).
 
-#### WorkerDiskType
+**WorkerDiskType**
 Worker ephemeral storage volume type ("standard", "gp2").
 
-#### ManagerDiskSize
+**ManagerDiskSize**
 Size of Manager's ephemeral storage volume in GiB (20 - 1024)
 
-#### ManagerDiskType
+**ManagerDiskType**
 Manager ephemeral storage volume type ("standard", "gp2")
 
 
