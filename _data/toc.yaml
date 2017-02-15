@@ -272,7 +272,7 @@ guides:
     title: Link via an ambassador container
 - sectiontitle: Troubleshoot Docker Engine
   section:
-  - path: /engine/admin/troubleshooting_volume_errors.md
+  - path: /engine/admin/troubleshooting_volume_errors/
     title: Troubleshoot volume problems
 - sectiontitle: Manage a swarm
   section:
@@ -318,7 +318,7 @@ guides:
     title: Deploy services to a swarm
   - path: /engine/swarm/secrets/
     title: Manage sensitive data with Docker secrets
-  - path: /engine/swarm/swarm_manager_locking.md
+  - path: /engine/swarm/swarm_manager_locking/
     title: Lock your swarm
   - path: /engine/swarm/networking/
     title: Attach services to an overlay network
@@ -460,6 +460,8 @@ guides:
     title: v1.10
   - path: /v1.11
     title: v1.11
+  - path: /v1.12
+    title: v1.12
 
 reference:
 - title: Dockerfile reference
@@ -472,10 +474,11 @@ reference:
   nosync: true
 - title: Compose file reference
   path: /compose/compose-file/
+  nosync: true
 - title: Compose (docker-compose) CLI
   path: /compose/reference/overview/
   nosync: true
-- title: Daemon (dockerd) CLI
+- title: Daemon CLI reference (dockerd)
   path: /engine/reference/commandline/dockerd/
 - title: Docker ID Accounts API
   path: /docker-id/api-reference/
@@ -488,12 +491,14 @@ reference:
     title: Getting started
   - path: /engine/api/sdks/
     title: SDKs
-  - path: /engine/api/v1.25/
-    title: API 1.25 Reference
+  - path: /engine/api/v1.26/
+    title: v1.26 Reference
   - sectiontitle: Previous API versions
     section:
     - path: /engine/api/version-history/
       title: Version history overview
+    - path: /engine/api/v1.25/
+      title: v1.25 reference
     - path: /engine/api/v1.24/
       title: v1.24 reference
     - path: /engine/api/v1.23/
@@ -520,6 +525,18 @@ reference:
     title: docker attach
   - path: /engine/reference/commandline/build/
     title: docker build
+  - sectiontitle: docker checkpoint *
+    section:
+    - path: /engine/reference/commandline/checkpoint/
+      title: docker checkpoint
+    - path: /engine/reference/commandline/checkpoint_create/
+      title: docker checkpoint create
+    - path: /engine/reference/commandline/checkpoint_create/
+      title: docker checkpoint create
+    - path: /engine/reference/commandline/checkpoint_ls/
+      title: docker checkpoint ls
+    - path: /engine/reference/commandline/checkpoint_rm/
+      title: docker checkpoint rm
   - path: /engine/reference/commandline/commit/
     title: docker commit
   - sectiontitle: docker container *
@@ -769,7 +786,7 @@ reference:
   - path: /engine/reference/commandline/stop/
     title: docker stop
   - sectiontitle: docker swarm *
-    setcion:
+    section:
     - path: /engine/reference/commandline/swarm/
       title: docker swarm
     - path: /engine/reference/commandline/swarm_init/
@@ -817,7 +834,7 @@ reference:
     - path: /engine/reference/commandline/volume_ls/
       title: docker volume ls
     - path: /engine/reference/commandline/volume_prune/
-      title: docker volume ls
+      title: docker volume prune
     - path: /engine/reference/commandline/volume_rm/
       title: docker volume rm
   - path: /engine/reference/commandline/wait/
@@ -1082,15 +1099,24 @@ manuals:
       title: start
     - path: /compose/reference/stop/
       title: stop
+    - path: /compose/reference/top/
+      title: top
     - path: /compose/reference/unpause/
       title: unpause
     - path: /compose/reference/up/
       title: up
-    - path: /compose/compose-file/
-      title: Compose file reference
-      nosync: true
-    - path: /compose/faq/
-      title: Frequently Asked Questions
+    - sectiontitle: Compose File Reference
+      section:
+      - path: /compose/compose-file/
+        title: Version 3
+      - path: /compose/compose-file/compose-file-v2/
+        title: Version 2
+      - path: /compose/compose-file/compose-file-v1/
+        title: Version 1
+      - path: /compose/compose-file/compose-versioning/
+        title: About versions and upgrading
+      - path: /compose/faq/
+        title: Frequently Asked Questions
   - path: /compose/bundles/
     title: Docker Stacks and Distributed Application Bundles
   - path: /compose/swarm/
@@ -1570,7 +1596,7 @@ manuals:
         - path: /datacenter/ucp/1.1/reference/join/
           title: join
         - path: /datacenter/ucp/1.1/reference/regen-certs/
-          title: regen-certs.md
+          title: regen-certs
         - path: /datacenter/ucp/1.1/reference/restart/
           title: restart
         - path: /datacenter/ucp/1.1/reference/restore/
