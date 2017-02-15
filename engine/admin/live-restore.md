@@ -70,9 +70,10 @@ You must restart Docker to flush the buffers.
 
 You can modify the kernel's buffer size by changing `/proc/sys/fs/pipe-max-size`.
 
-## Live restore and swarm mode
+## Live restore and swarm
 
-The live restore option is not compatible with Docker Engine swarm mode. When
-the Docker Engine runs in swarm mode, the orchestration feature manages tasks
-and keeps containers running according to a service specification.
+The live restore option is not compatible with Docker Engine swarm mode or
+standalone swarm. When the Docker Engine runs with swarm, the orchestration
+feature manages tasks and keeps containers running according to a service
+specification.
 
