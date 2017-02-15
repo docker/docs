@@ -48,26 +48,20 @@ Log in to Docker Cloud using your free [Docker ID](../docker-id/).
 
 <table class="tg">
   <tr>
-    <td class="bluebar" width="50%"><a href="getting-started/index.md">Tutorial: Getting Started</a></td>
-    <td class="bluebar" width="50%"><a href="getting-started/deploy-app/index.md">Tutorial: Deploy an App</a></td>
-  </tr>
-  <tr>
-    <td class="plain" width="50%"><p>Start here! Deploy your first node and service in Docker Cloud.</p></td>
-    <td class="plain" width="50%"><p>For more advanced beginners: deploy a simple app in Docker Cloud.</p></td>
-  </tr>
-  <tr>
-    <td class="bluebar" width="50%"><a href="apps/index.md">Manage Applications</a></td>
     <td class="bluebar" width="50%"><a href="builds/index.md">Manage Builds and Images</a></td>
+    <td class="bluebar" width="50%"><a href="infrastructure/index.md">Manage Infrastructure (Standard Mode)</a></td>
   </tr>
   <tr>
-    <td class="plain" width="50%"><p>Deploy services, stacks, and apps in Docker Cloud.</p></td>
-    <td class="plain" width="50%"><p>Build and test your code, build Docker images.</p></td>
+    <td class="plain" width="50%"><p>Build and test your code, build Docker images. Link Cloud repositories to your source code provider to automate building images and pushing them to Cloud. </p></td>
+    <td class="plain" width="50%"><p>Link to your hosts, upgrade the Docker Cloud agent, and manage container distribution. See the <a href="infrastructure/cloud-on-aws-faq.md">AWS FAQ</a> and <a href="infrastructure/cloud-on-packet.net-faq.md">Packet.net FAQ</a></p></td>
   </tr>
   <tr>
-    <td class="bluebar" colspan="2"><a href="infrastructure/index.md">Manage Infrastructure</a></td>
+    <td class="bluebar" width="50%"><a href="cloud-swarm/index.md">Manage Swarms (Beta Swarm Mode)</a></td>
+    <td class="bluebar" colspan="2"><a href="standard/index.md">Manage Nodes and Apps (Standard Mode)</a></td>
   </tr>
   <tr>
-    <td class="plain" colspan="2"><p>Learn how to link to your hosts, upgrade the Docker Cloud agent, and manage container distribution. See the <a href="infrastructure/cloud-on-aws-faq.md">AWS FAQ</a> and <a href="infrastructure/cloud-on-packet.net-faq.md">Packet.net FAQ</a></p></td>
+    <td class="plain" width="50%"><p>Provision swarms to popular cloud providers, register existing swarms, and use your Docker ID to authenticate and securely access personal or team swarms.</p></td>
+    <td class="plain" width="50%"><p>Deploy and manage nodes, services, and applications in Docker Cloud (Standard Mode).</p></td>
   </tr>
   <tr>
     <td class="bluebar" colspan="2"> <a href="/apidocs/docker-cloud/">API Docs</a> &nbsp;&nbsp; ● &nbsp;&nbsp; <a href="docker-errors-faq.md">Frequently Asked Questions</a> &nbsp;&nbsp; ● &nbsp;&nbsp; <a href="https://forums.docker.com/c/docker-cloud/release-notes">Release Notes</a></td>
