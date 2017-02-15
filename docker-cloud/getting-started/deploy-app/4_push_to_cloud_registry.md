@@ -5,6 +5,7 @@ redirect_from:
 - /docker-cloud/getting-started/python/4_push_to_cloud_registry/
 - /docker-cloud/getting-started/golang/4_push_to_cloud_registry/
 title: Push the image to Docker Cloud's registry
+notoc: true
 ---
 
 *Skip this step if you don't have Docker Engine installed locally.*
@@ -55,4 +56,6 @@ registry. Do this by logging in to [Docker Cloud](https://cloud.docker.com) and
 clicking  **Repositories** in the left navigation. Your image should appear in
 the repository list.
 
-Next: [Deploy the app as a Docker Cloud service](5_deploy_the_app_as_a_service.md).
+## What's next?
+
+[Deploy the app as a Docker Cloud service](5_deploy_the_app_as_a_service.md).

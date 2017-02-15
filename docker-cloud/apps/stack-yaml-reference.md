@@ -3,7 +3,7 @@ description: Stack YAML reference
 keywords: YAML, stack, reference
 redirect_from:
 - /docker-cloud/feature-reference/stack-yaml-reference/
-title: Stack file YAML reference
+title: Cloud stack file YAML reference
 ---
 
 A stack is a collection of services that make up an application in a specific environment. Learn more about stacks [here](stacks.md). A **stack file** is a file in YAML format that defines one or more services, similar to a `docker-compose.yml` file but with a few extensions. The default name for this file is `docker-cloud.yml`.
