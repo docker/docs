@@ -652,7 +652,7 @@ Each time a container updates existing data for the first time, the
 copies the data from the image snapshot to the container's snapshot. This
 process can have a noticeable impact on container performance.
 
-All copy-on-write operations have a 64KB granularity. As a results, updating
+All copy-on-write operations have a 64KB granularity. As a result, updating
 32KB of a 1GB file causes the driver to copy a single 64KB block into the
 container's snapshot. This has obvious performance advantages over file-level
 copy-on-write operations which would require copying the entire 1GB file into
