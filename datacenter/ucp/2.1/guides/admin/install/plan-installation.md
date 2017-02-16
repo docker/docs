@@ -53,7 +53,7 @@ cause poor performance or even failures.
 ## Load balancing strategy
 
 Docker UCP does not include a load balancer. You can configure your own
-load balancer to balance user requests across all controller nodes.
+load balancer to balance user requests across all manager nodes.
 
 If you plan on using a load balancer, you need to decide whether you are going
 to add the nodes to the load balancer using their IP address, or their FQDN.
@@ -83,10 +83,10 @@ need to have a certificate bundle that has:
 * A ca.pem file with the root CA public certificate,
 * A cert.pem file with the server certificate and any intermediate CA public
 certificates. This certificate should also have SANs for all addresses used to
-reach the UCP controller,
+reach the UCP manager,
 * A key.pem file with server private key.
 
-You can have a certificate for each controller, with a common SAN. As an
+You can have a certificate for each manager, with a common SAN. As an
 example, on a three node cluster you can have:
 
 * node1.company.example.org with SAN ucp.company.org
@@ -94,9 +94,9 @@ example, on a three node cluster you can have:
 * node3.company.example.org with SAN ucp.company.org
 
 Alternatively, you can also install UCP with a single externally-signed
-certificate for all controllers rather than one for each controller node.
+certificate for all managers rather than one for each manager node.
 In that case, the certificate files will automatically be copied to any new
-controller nodes joining the cluster or being promoted into controllers.
+manager nodes joining the cluster or being promoted into managers.
 
 ## Where to go next
 
