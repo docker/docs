@@ -271,7 +271,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
 9.  Modify the `thin_pool_autoextend_percent` for when thin pool autoextension occurs.
 
-    The value's setting is the perentage of space to increase the thin pool (100 =
+    The value's setting is the percentage of space to increase the thin pool (100 =
     disabled)
 
     ```none
