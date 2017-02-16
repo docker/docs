@@ -343,7 +343,7 @@ Simple example:
 
 > **Note:** `depends_on` will not wait for `db` and `redis` to be "ready" before
 > starting `web` - only until they have been started. If you need to wait
-> for a service to be ready, see [Controlling startup order](startup-order.md)
+> for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 > for more on this problem and strategies for solving it.
 
 A healthcheck indicates you want a dependency to wait
