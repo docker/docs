@@ -12,7 +12,7 @@ redirect_from:
 ## Quickstart
 
 If your account [has the proper
-permissions](https://docs.docker.com/docker-for-aws/iam-permissions/), you can
+permissions](/docker-for-aws/iam-permissions.md), you can
 use the blue button from the stable or beta channel to bootstrap Docker for AWS
 using CloudFormation. For more about stable and beta channels, see the
 [FAQs](/docker-for-aws/faqs.md#stable-and-beta-channels).
@@ -37,6 +37,67 @@ using CloudFormation. For more about stable and beta channels, see the
   </td>
   </tr>
 </table>
+
+## Deployment options
+
+There are two ways to deploy Docker for AWS, you can install inside of a pre-existing VPC, or you can have Docker for AWS create the VPC and everything that it needs. We recommend the second option, since it allows us to setup the environment the way in the best way possible. If you have to install in an existing VPC, that is fine, but it will require a little more work.
+
+### Create a new VPC
+This approach will create a new VPC, subnets, gateways and everything else that is needed in order to run Docker for AWS. It is the easiest way to get started, and requires the least amount of work.
+
+All you need to do it run the CloudFormation template, answer some questions, and you are good to go.
+
+### Install into an Existing VPC
+If you need to install Docker for AWS in a VPC that you have already setup, there are a few extra steps that you need to do before you can get started.
+
+1. Pick a VPC in a region you want to use.
+
+2. Make sure the selected VPC is setup with an Internet Gateway, Subnets, and Route Tables
+
+3. You need to have 3 different subnets, ideally each in their own availability zone. If you are running in a region where you only have 2 Availability Zones, you will need to add more than one subnet into one of the availability zones. For production deployments we recommend only deploying to regions that have 3 or more Availability Zones.
+
+4. When you launch the docker for AWS CloudFormation stack, make sure you use the one for existing VPC's. This template will prompt you for the VPC and subnets that you want to use for Docker for AWS.
+
+#### Subnet Note:
+If you are using the `10.0.0.0/16` CIDR in your VPC. When you create a docker network, you will need to make sure you pick a subnet (using `docker network create —subnet` option) that doesn't conflict with the `10.0.0.0` network.
+
+
+#### Recommended VPC and Subnet setup.
+
+##### VPC
+
+* **CIDR:** 172.31.0.0/16
+* **DNS hostnames:** yes
+* **DNS resolution:** yes
+* **DHCP Option Set:** DHCP Options (Below)
+
+##### Internet Gateway
+* **VPC:** VPC (above)
+
+##### DHCP Option Set
+
+* **domain-name:** ec2.internal
+* **domain-name-servers:** AmazonProvidedDNS
+
+##### Subnet1
+* **CIDR:** 172.31.16.0/20
+* **Auto-assign Public IP:** yes
+* **Availability-Zone:** A
+
+##### Subnet2
+* **CIDR:** 172.31.32.0/20
+* **Auto-assign Public IP:** yes
+* **Availability-Zone:** B
+
+##### Subnet3
+* **CIDR:** 172.31.0.0/20
+* **Auto-assign Public IP:** yes
+* **Availability-Zone:** C
+
+##### Route table
+* **Destination CIDR Block:** 0.0.0.0/0
+* **Subnets:** Subnet1, Subnet2, Subnet3
+
 
 ## Prerequisites
 
@@ -133,7 +194,7 @@ Elastic Load Balancers (ELBs) are set up to help with routing traffic to your sw
 
 Docker for AWS automatically configures logging to Cloudwatch for containers you run on Docker for AWS. A Log Group is created for each Docker for AWS install, and a log stream for each container.
 
-`docker logs` and `docker service logs` are not supported on Docker for AWS. Instead, you should check container in CloudWatch.
+`docker logs` and `docker service logs` are not supported on Docker for AWS when using Cloudwatch for logs. Instead, you should check container logs in CloudWatch.
 
 ## System containers
 
