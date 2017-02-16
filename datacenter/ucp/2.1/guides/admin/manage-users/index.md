@@ -25,7 +25,7 @@ manage permissions to enforce fine-grained access control. For that:
 ## Users and teams
 
 When users create services or networks with no label, those resources are only
-visible to them and administrator users.
+visible to them and administrative users.
 For a team of users to be able to see and edit the same resources, the
 resources needs to have the `com.docker.ucp.access.label` label applied.
 
