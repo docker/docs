@@ -1,6 +1,6 @@
 ---
 title: Product and tool manuals
-skip-right-nav: true
+notoc: true
 ---
 
 The Docker platform is comprised of a family of tools and products. After
