@@ -65,26 +65,3 @@
             </div>
         </div>
     </div>
-    <!-- nav-secondary -->
-    <nav class="nav-secondary-tabs" data-spy="affix" data-offset-top="410">
-        <div class="container-fluid">
-          <div class="search-form">
-              <form class="navbar-form navbar-left">
-                  <!-- <input type="text" class="form-control" id ="search" placeholder="Search Documentation"> -->
-                  <form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="/search/">
-                    <input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="Search the docs" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
-                    <div id="autocompleteContainer">
-                      <div id="autocompleteResults"></div>
-                    </div>
-                    <!-- <button type="submit" class="search-submit btn btn-default">Search</button> -->
-                  </form>
-          </div>
-            <div id="tabs">
-                <ul class="tabs nav navbar-nav">
-                  {% include treebuilder.html %}
-                </ul>
-            </div>
-
-        </div>
-    </nav>
-</header>

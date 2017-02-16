@@ -1,7 +1,7 @@
 ---
 description: Home page for Docker's documentation
-keywords: Docker, documentation, manual, guide, reference, api
-layout: landing
+keywords: Docker, documentation, manual, guide, reference, api, samples
+landing: true
 title: Docker Documentation
 notoc: true
 ---
@@ -148,5 +148,5 @@ production environment. Highlights [Compose Version 3 new features](/engine/gets
           </div>
           <!-- end component-container-->
       </div>
-  </div>                          
+  </div>
 </div>

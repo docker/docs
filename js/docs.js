@@ -4,22 +4,6 @@
  *
  */
 
-function swapStyleSheet(sheet) {
-    document.getElementById('pagestyle').setAttribute('href', sheet);
-}
-
-
-$('#switch-style').change(function() {
-
-    if ($(this).is(':checked')) {
-        swapStyleSheet('../css/main-alt.css');
-
-    } else {
-        swapStyleSheet('../css/main.css');
-
-    }
-});
-
 $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");

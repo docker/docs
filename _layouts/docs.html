@@ -59,6 +59,12 @@ div#autocompleteContainer {
 {% if site.GH_ENV == "gh_pages" %}<meta name="robots" content="noindex">{% endif %}
 <meta property="og:type" content="website">
 <meta property="og:updated_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}">
+<meta property="og:image" content="https://www.docker.com/sites/default/files/social/docker-facebook-share.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@docker_docs">
+<meta name="twitter:url" content="https://twitter.com/docker_docs">
+<meta name="twitter:title" content="{{ page.title }}">
+<meta name="twitter:image:src" content="https://www.docker.com/sites/default/files/social/docker-twitter-share.png">
 <meta property="article:published_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization{% endif %}">
@@ -72,10 +78,11 @@ div#autocompleteContainer {
 {% seo %}
 {% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
 </head>
-<body>
-	<header>
-		{% include header.html %}
-	</header>
+<body class="html front not-logged-in no-sidebars page-node page-node- page-node-1 node-type-front-page path-docker ng-scope short retina-display all_loaded" ng-app="Docker" ng-controller="DockerController" style="">
+		<header>
+			{% if page.landing == true %}{% include global-header.html %}{% endif %}
+			{% include header.html %}
+		</header>
 
 	<div id="wrapper">
 		<main class="main" id="page-content-wrapper">
@@ -117,6 +124,7 @@ div#autocompleteContainer {
 							</div>
 							{% endif %}
 						</section>
+
 						<script language="javascript">
 							var x = document.links.length;
 							var baseHref = document.getElementsByTagName('base')[0].href
@@ -142,17 +150,6 @@ div#autocompleteContainer {
 					<div id="sidebar-wrapper">
 						 <div class="toc-nav">
 						<section class="section" id="RightColumnSection">
-							<span class="title_section">
-										<div id="search-div">
-											<form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="/search/">
-												<input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="Search the docs" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
-												<div id="autocompleteContainer">
-													<div id="autocompleteResults"></div>
-												</div>
-												<button type="submit" class="search-submit btn btn-default">Search</button>
-											</form>
-										</div>
-									</span>
 							<div id="feedback-links">
 								<ul>
 									{% if edit_url != "" %}
@@ -161,6 +158,20 @@ div#autocompleteContainer {
 														class="nomunge">&#10003;&nbsp;Request docs changes</a></li>
 									<li><a href="https://www.docker.com/docker-support-services">&#x0003F;&nbsp;Get support</a></li>
 								</ul>
+							</div>
+							<div class="toggle-mode">
+							    <div class="icon">
+							        <i class="fa fa-sun-o" aria-hidden="true"></i>
+							    </div>
+							    <div class="toggle-switch">
+							      <label class="switch">
+										    <input type="checkbox" id="switch-style">
+										    <div class="slider round"></div>
+										</label>
+							    </div>
+							    <div class="icon">
+							        <i class="fa fa-moon-o" aria-hidden="true"></i>
+							    </div>
 							</div>
 							{% unless page.notoc %} {% assign my_min = page.toc_min | default: site.toc_min | default: 2 %} {% assign my_max = page.toc_max | default: site.toc_max | default: 3 %} {% assign my_name = page.url | default: "unnamed" %}
 							<div id="side-toc">
@@ -186,12 +197,10 @@ div#autocompleteContainer {
 <script>
 	hljs.initHighlightingOnLoad();
 </script>
-<!-- <script src="/js/alljs.js"></script> -->
-<!-- <script async="" src="/js/app.js"></script> -->
 <script async="" src="/js/anchorlinks.js"></script>
-<script async="" src="/js/jquery.js"></script>
-<script async="" src="/js/menu.js"></script>
+<script src="/js/jquery.js"></script>
+<script async="" defer src="/js/menu.js"></script>
 <script async="" src="/js/bootstrap.min.js"></script>
-<script async="" src="/js/docs.js"></script>
+<script async="" defer src="/js/docs.js"></script>
 </body>
 </html>

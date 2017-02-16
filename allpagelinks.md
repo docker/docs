@@ -1,10 +1,8 @@
 ---
-layout: null
 hide_from_sitemap: true
 layout: null
+title: All site links for docs.docker.com
 ---
-
-# All site links for `docs.docker.com`
 
 {% assign pages = site.pages | sort:"path" %}
 {% for page in pages %}
