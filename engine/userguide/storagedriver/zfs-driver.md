@@ -41,7 +41,7 @@ This simple relationship is shown in the diagram below.
 ![](images/zfs_clones.jpg)
 
 The solid line in the diagram shows the process flow for creating a clone. Step
- 1 creates a snapshot of the filesystem, and step two creates the clone from
+ 1 creates a snapshot of the filesystem, and step 2 creates the clone from
 the snapshot. The dashed line shows the relationship between the clone and the
 filesystem, via the snapshot. All three ZFS datasets draw space form the same
 underlying zpool.
