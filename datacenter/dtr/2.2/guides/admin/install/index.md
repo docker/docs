@@ -61,7 +61,7 @@ as an application.
 ![](../../images/install-dtr-1.png)
 
 You can also access the **DTR web UI**, to make sure it is working. In your
-browser, navigate to the address were you installed DTR.
+browser, navigate to the address where you installed DTR.
 
 ![](../../images/install-dtr-2.png)
 
