@@ -685,7 +685,7 @@ There are several other things that impact the performance of the
 One final point, data volumes provide the best and most predictable
 performance. This is because they bypass the storage driver and do not incur
 any of the potential overheads introduced by thin provisioning and
-copy-on-write. For this reason, you should to place heavy write workloads on
+copy-on-write. For this reason, you should place heavy write workloads on
 data volumes.
 
 ## Related Information
