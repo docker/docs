@@ -8,7 +8,8 @@ title: Create and manage teams
 You can extend the user's default permissions by granting them fine-grain
 permissions over resources. You do this by adding the user to a team.
 A team defines the permissions users have for resources that have the label
-`com.docker.ucp.access.label` applied to them.
+`com.docker.ucp.access.label` applied to them. Keep in mind that a label can
+be applied to multiple teams with different permission levels. 
 
 To create a new team, go to the **UCP web UI**, and navigate to the
 **Users & Teams** page.
