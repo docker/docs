@@ -10,7 +10,7 @@ solution from Docker. You install it on-premises or in your virtual private
 cloud, and it helps you manage your Docker cluster and applications from a
 single place.
 
-![](images/overview-1.png){: .with-border}
+![](../../../images/ucp.png){: .with-border}
 
 ## Centralized cluster management
 
@@ -21,7 +21,7 @@ by Docker to make it easier to manage your cluster from a centralized place.
 
 You can manage and monitor your container cluster using a graphical UI.
 
-![](images/overview-2.png){: .with-border}
+![](../../../images/try-ddc-2.png){: .with-border}
 
 Since UCP exposes the standard Docker API, you can continue using the tools
 you already know, including the Docker CLI client, to deploy and manage your
