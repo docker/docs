@@ -40,15 +40,15 @@ using CloudFormation. For more about stable and beta channels, see the
 
 ## Deployment options
 
-There are two ways to deploy Docker for AWS, you can install inside of a pre-existing VPC, or you can have Docker for AWS create the VPC and everything that it needs. We recommend the second option, since it allows us to setup the environment the way in the best way possible. If you have to install in an existing VPC, that is fine, but it will require a little more work.
+There are two ways to deploy Docker for AWS, you can install with a pre-existing VPC, or you can have Docker for AWS create the VPC and everything that it needs. We recommend the second option, since it allows us to setup the environment the way in the best way possible. If you have to install in an existing VPC, that is fine, but it will require a little more work.
 
 ### Create a new VPC
 This approach will create a new VPC, subnets, gateways and everything else that is needed in order to run Docker for AWS. It is the easiest way to get started, and requires the least amount of work.
 
 All you need to do it run the CloudFormation template, answer some questions, and you are good to go.
 
-### Install into an Existing VPC
-If you need to install Docker for AWS in a VPC that you have already setup, there are a few extra steps that you need to do before you can get started.
+### Install with an Existing VPC
+If you need to install Docker for AWS with a VPC that you have already setup, there are a few extra steps that you need to do before you can get started.
 
 1. Pick a VPC in a region you want to use.
 
