@@ -238,7 +238,7 @@ ff00::0	ip6-mcastprefix
 ff02::1	ip6-allnodes
 ff02::2	ip6-allrouters
 ```
-To detach from a `container1` and leave it running use `CTRL-p CTRL-q`.Then, attach to `container2` and repeat these three commands.
+To detach from a `container1` and leave it running use `CTRL-p CTRL-q`. Then, attach to `container2` and repeat these three commands.
 
 ```
 $ docker attach container2
