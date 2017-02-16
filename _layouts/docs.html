@@ -13,6 +13,8 @@
 {% endif %}
 {% endfor %}
 {% endif %}
+<!-- Logic for feedback CC'ing -->
+{% if page.assignee %}{% assign assignee=page.assignee%}{% else %}{% assign assignee=page.defaultassignee%}{% endif %}
 <!-- Logic for 'edit this button' -->
 {% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %}
 {% for entry in site.data.not_edited_here.overrides %}
@@ -226,7 +228,7 @@ ng\:form {
                 {% if edit_url != "" %}
 							    <a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}" class="nomunge">Edit this page</a> <span style="color:#D8E0E0">&#9679;</span>
                 {% endif %}
-								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge">Request docs changes</a> <span style="color:#D8E0E0">&#9679;</span>  <a href="https://www.docker.com/docker-support-services">Get support</a> <br />Rate this page:
+								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={{ assignee }}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }}), CC: @{{ assignee }}" class="nomunge">Request docs changes</a> <span style="color:#D8E0E0">&#9679;</span>  <a href="https://www.docker.com/docker-support-services">Get support</a> <br />Rate this page:
 								<div id="pd_rating_holder_8453675"></div>
 								<script type="text/javascript">
 								PDRTJS_settings_8453675 = {
@@ -280,7 +282,7 @@ ng\:form {
 								<div id="feedback-links">
 									<ul>
 										{% if edit_url != "" %}<li><a href="{{ edit_url }}">&#9998;&nbsp;Edit this page</a></li>{% endif %}
-  									<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})" class="nomunge">&#10003;&nbsp;Request docs changes</a></li>
+  									<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={{ assignee }}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }}), CC: @{{ assignee }}" class="nomunge">&#10003;&nbsp;Request docs changes</a></li>
   									<li><a href="https://www.docker.com/docker-support-services">&#x0003F;&nbsp;Get support</a></li>
   								</ul>
 								</div>
