@@ -14,27 +14,50 @@ The next step is creating a backup policy and disaster recovery plan.
 ## Backup policy
 
 As part of your backup policy you should regularly create backups of UCP.
-To create a backup of UCP, use the `docker/ucp backup` command. This creates
-a tar archive with the contents of the [volumes used by UCP](../architecture.md)
-to persist data, and streams it to stdout.
 
-You need to run the backup command on a UCP manager node. Since UCP stores
-the same data on all manager nodes, you only need to create a backup of a
-single node.
+To create a UCP backup, you may use the `{{ page.docker_image }} backup` command
+against a single UCP manager, according to the instructions in the next section.
+This command creates a tar archive with the contents of all the [volumes used by
+UCP](../architecture.md) to persist data and streams it to stdout.
+
+You only need to run the backup command on a single UCP manager node. Since UCP
+stores the same data on all manager nodes, you do not need to capture periodic
+backups from more than one manager node.
 
 To create a consistent backup, the backup command temporarily stops the UCP
 containers running on the node where the backup is being performed. User
-containers and services are not affected by this.
+resources, such as services, containers and stacks are not affected by this
+operation and will continue operating as expected. Any long-lasting `exec`,
+`logs`, `events` or `attach` operations against the affected manager node will
+be disconnected.
 
-To have minimal impact on your business, you should:
+Additionally, if UCP is not configured for high availability, you will be
+temporarily unable to:
+* Log in to the UCP Web UI
+* Perform CLI operations using existing client bundles
 
-* Schedule the backup to take place outside business hours.
+To minimize the impact of the backup policy on your business, you should:
 * Configure UCP for high availability. This allows load-balancing user requests
-across multiple UCP controller nodes.
+across multiple UCP manager nodes.
+* Schedule the backup to take place outside business hours.
 
 ## Backup command
 
-The example below shows how to create a backup of a UCP controller node:
+The example below shows how to create a backup of a UCP manager node and
+verify its contents:
+
+```bash
+# Create a backup, encrypt it, and store it on /tmp/backup.tar
+$ docker run --rm -i --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  {{ page.docker_image }} backup --interactive /tmp/backup.tar
+
+# Ensure the backup is a valid tar and list its contents
+$ tar --list /tmp/backup.tar
+```
+
+A backup file may optionally be encrypted using a passphrase, as in the
+following example:
 
 ```bash
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
@@ -47,10 +70,27 @@ $ docker run --rm -i --name ucp \
 $ gpg --decrypt /tmp/backup.tar | tar --list
 ```
 
-## Restore command
+## Restore your cluster
 
-The example below shows how to restore a UCP controller node from an existing
-backup:
+The restore command can be used to create a new UCP cluster from a backup file.
+After the restore operation is complete, the following data will be recovered
+from the backup file:
+* Users, Teams and Permissions.
+* All UCP Configuration options available under `Admin Settings`, such as the
+DDC Subscription license, scheduling options, Content Trust and authentication
+backends.
+
+There restore operation can be performed in any of three environments:
+* On a manager node of an existing swarm, which is not part of a UCP
+installation. In this case, a UCP cluster will be restored from the backup.
+* On a docker engine that is not participating in a swarm. In this case, a new
+swarm will be created and UCP will be restored on top
+
+In order to restore an existing UCP installation from a backup, you will need to
+first uninstall UCP from the cluster by using the `uninstall-ucp` command
+
+The example below shows how to restore a UCP cluster from an existing backup
+file:
 
 ```bash
 $ docker run --rm -i --name ucp \
@@ -58,48 +98,35 @@ $ docker run --rm -i --name ucp \
   {{ page.docker_image }} restore < backup.tar
 ```
 
-The restore command may also be invoked in interactive mode:
+If the backup file is encrypted with a passphrase, you will need to provide the
+passphrase to the restore operation:
+
+```bash
+$ docker run --rm -i --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock  \
+  {{ page.docker_image }} restore --passphrase "secret" < /tmp/backup.tar
+```
+
+The restore command may also be invoked in interactive mode, in which case the
+backup file should be mounted to the container rather than streamed through
+stdin:
 
 ```bash
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /path/to/backup.tar:/config/backup.tar \
+  -v /tmp/backup.tar:/config/backup.tar \
   {{ page.docker_image }} restore -i
 ```
 
-## Restore your cluster
+## Disaster Recovery
 
-The restore command can be used to create a new UCP cluster from a backup file.
-After the restore operation is complete, the following data will be copied from
-the backup file:
+In the event where half or more manager nodes are lost and cannot be recovered
+to a healthy state, the system is considered to have lost quorum and can only be
+restored through the following disaster recovery procedure. 
 
-* Users, Teams and Permissions.
-* Cluster Configuration, such as the default Controller Port or the KV store
-timeout.
-* DDC Subscription License.
-* Options on Scheduling, Content Trust, Authentication Methods and Reporting.
-
-The restore operation may be performed against any Docker Engine, regardless of
-swarm membership, as long as the target Engine is not already managed by a UCP
-installation. If the Docker Engine is already part of a swarm, that swarm and
-all deployed containers and services will be managed by UCP after the restore
-operation completes.
-
-As an example, if you have a cluster with three controller nodes, A, B, and C,
-and your most recent backup was of node A:
-
-1. Uninstall UCP from the swarm using the `uninstall-ucp` operation.
-2. Restore one of the swarm managers, such as node B, using the most recent
-   backup from node A.
-3. Wait for all nodes of the swarm to become healthy UCP nodes.
-
-You should now have your UCP cluster up and running.
-
-Additionally, in the event where half or more controller nodes are lost and
-cannot be recovered to a healthy state, the system can only be restored through
-the following disaster recovery procedure. It is important to note that this
-proceedure is not guaranteed to succeed with no loss of either swarm services or
-UCP configuration data:
+It is important to note that this proceedure is not guaranteed to succeed with
+no loss of running services or configuration data. To properly protect against
+manager failures, the system should be configured for [high availability](configure/set-up-high-availability.md).
 
 1. On one of the remaining manager nodes, perform `docker swarm init
    --force-new-cluster`. This will instantiate a new single-manager swarm by
