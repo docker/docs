@@ -1,31 +1,7 @@
 command: docker image tag
 short: Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
-long: "Assigns a new alias to an image in a registry. An alias refers to the\nentire
-  image name including the optional `TAG` after the ':'. \n\n# OPTIONS\n**NAME**\n
-  \  The image name which is made up of slash-separated name components, \n   optionally
-  prefixed by a registry hostname. The hostname must comply with \n   standard DNS
-  rules, but may not contain underscores. If a hostname is \n   present, it may optionally
-  be followed by a port number in the format \n   `:8080`. If not present, the command
-  uses Docker's public registry located at\n   `registry-1.docker.io` by default.
-  Name components may contain lowercase \n   letters, digits and separators. A separator
-  is defined as a period, one or\n   two underscores, or one or more dashes. A name
-  component may not start or end \n   with a separator.\n\n**TAG**\n   The tag assigned
-  to the image to version and distinguish images with the same\n   name. The tag name
-  must be valid ASCII and may contain lowercase and\n   uppercase letters, digits,
-  underscores, periods and hyphens. A tag name\n   may not start with a period or
-  a hyphen and may contain a maximum of 128\n   characters.\n\n# EXAMPLES\n\n## Tagging
-  an image referenced by ID\n\nTo tag a local image with ID \"0e5574283393\" into
-  the \"fedora\" repository with \n\"version1.0\":\n\n    docker image tag 0e5574283393
-  fedora/httpd:version1.0\n\n## Tagging an image referenced by Name\n\nTo tag a local
-  image with name \"httpd\" into the \"fedora\" repository with \n\"version1.0\":\n\n
-  \   docker image tag httpd fedora/httpd:version1.0\n\nNote that since the tag name
-  is not specified, the alias is created for an\nexisting local version `httpd:latest`.\n\n##
-  Tagging an image referenced by Name and Tag\n\nTo tag a local image with name \"httpd\"
-  and tag \"test\" into the \"fedora\"\nrepository with \"version1.0.test\":\n\n    docker
-  image tag httpd:test fedora/httpd:version1.0.test\n\n## Tagging an image for a private
-  repository\n\nTo push an image to a private registry and not the central Docker\nregistry
-  you must tag it with the registry hostname and port (if needed).\n\n    docker image
-  tag 0e5574283393 myregistryhost:5000/fedora/httpd:version1.0\n"
+long: Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
 usage: docker image tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 pname: docker image
 plink: docker_image.yaml
+

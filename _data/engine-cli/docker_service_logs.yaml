@@ -24,3 +24,4 @@ options:
   shorthand: t
   default_value: "false"
   description: Show timestamps
+
