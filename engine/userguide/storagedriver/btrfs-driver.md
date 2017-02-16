@@ -127,7 +127,7 @@ Writing a new file to a container invokes an allocate-on-demand operation to
 allocate new data block to the container's snapshot. The file is then written to
 this new space. The allocate-on-demand operation is native to all writes with
 Btrfs and is the same as writing new data to a subvolume. As a result, writing
-new files to a container's snapshot operate at native Btrfs speeds.
+new files to a container's snapshot operates at native Btrfs speeds.
 
 Updating an existing file in a container causes a copy-on-write operation
 (technically *redirect-on-write*). The driver leaves the original data and
