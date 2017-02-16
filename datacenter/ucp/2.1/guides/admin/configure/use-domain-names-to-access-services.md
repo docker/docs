@@ -192,4 +192,4 @@ If a service is not configured properly for use of the HTTP routing mesh, this
 information is available in the UI when inspecting the service.
 
 More logging from the HTTP routing mesh is available in the logs of the
-`ucp-controller` containers on your UCP controller nodes.
+`ucp-controller` containers on your UCP manager nodes.
