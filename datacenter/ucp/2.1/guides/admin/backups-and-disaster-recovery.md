@@ -15,20 +15,20 @@ The next step is creating a backup policy and disaster recovery plan.
 
 As part of your backup policy you should regularly create backups of UCP.
 
-To create a UCP backup, you may use the `{{ page.docker_image }} backup` command
-against a single UCP manager, according to the instructions in the next section.
-This command creates a tar archive with the contents of all the [volumes used by
-UCP](../architecture.md) to persist data and streams it to stdout.
+To create a UCP backup, you can run the `{{ page.docker_image }} backup` command
+on a single UCP manager. This command creates a tar archive with the
+contents of all the [volumes used by UCP](../architecture.md) to persist data
+and streams it to stdout.
 
 You only need to run the backup command on a single UCP manager node. Since UCP
-stores the same data on all manager nodes, you do not need to capture periodic
-backups from more than one manager node.
+stores the same data on all manager nodes, you only need to take periodic
+backups of a single manager node.
 
 To create a consistent backup, the backup command temporarily stops the UCP
 containers running on the node where the backup is being performed. User
 resources, such as services, containers and stacks are not affected by this
 operation and will continue operating as expected. Any long-lasting `exec`,
-`logs`, `events` or `attach` operations against the affected manager node will
+`logs`, `events` or `attach` operations on the affected manager node will
 be disconnected.
 
 Additionally, if UCP is not configured for high availability, you will be
@@ -50,10 +50,12 @@ verify its contents:
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  {{ page.docker_image }} backup --interactive /tmp/backup.tar
+  {{ page.docker_image }} backup --interactive > /tmp/backup.tar
 
 # Ensure the backup is a valid tar and list its contents
-$ tar --list /tmp/backup.tar
+# In a valid backup file, over 100 files should appear in the list
+# and the `./ucp-node-certs/key.pem` file should be present
+$ tar --list -f /tmp/backup.tar
 ```
 
 A backup file may optionally be encrypted using a passphrase, as in the
@@ -75,12 +77,12 @@ $ gpg --decrypt /tmp/backup.tar | tar --list
 The restore command can be used to create a new UCP cluster from a backup file.
 After the restore operation is complete, the following data will be recovered
 from the backup file:
-* Users, Teams and Permissions.
-* All UCP Configuration options available under `Admin Settings`, such as the
-DDC Subscription license, scheduling options, Content Trust and authentication
+* Users, teams and permissions.
+* All UCP configuration options available under `Admin Settings`, such as the
+DDC subscription license, scheduling options, Content Trust and authentication
 backends.
 
-There restore operation can be performed in any of three environments:
+There are two ways to restore a UCP cluster:
 * On a manager node of an existing swarm, which is not part of a UCP
 installation. In this case, a UCP cluster will be restored from the backup.
 * On a docker engine that is not participating in a swarm. In this case, a new
@@ -90,12 +92,12 @@ In order to restore an existing UCP installation from a backup, you will need to
 first uninstall UCP from the cluster by using the `uninstall-ucp` command
 
 The example below shows how to restore a UCP cluster from an existing backup
-file:
+file, presumed to be located at `/tmp/backup.tar`:
 
 ```bash
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
-  {{ page.docker_image }} restore < backup.tar
+  {{ page.docker_image }} restore < /tmp/backup.tar
 ```
 
 If the backup file is encrypted with a passphrase, you will need to provide the
@@ -118,27 +120,33 @@ $ docker run --rm -i --name ucp \
   {{ page.docker_image }} restore -i
 ```
 
-## Disaster Recovery
+## Disaster recovery
 
 In the event where half or more manager nodes are lost and cannot be recovered
 to a healthy state, the system is considered to have lost quorum and can only be
-restored through the following disaster recovery procedure. 
+restored through the following disaster recovery procedure.
 
 It is important to note that this proceedure is not guaranteed to succeed with
 no loss of running services or configuration data. To properly protect against
 manager failures, the system should be configured for [high availability](configure/set-up-high-availability.md).
 
 1. On one of the remaining manager nodes, perform `docker swarm init
-   --force-new-cluster`. This will instantiate a new single-manager swarm by
-   recovering as much state as possible from the existing manager. This is a
-   disruptive operation and any existing tasks will be either terminated or
-   suspended.
+   --force-new-cluster`. You may need to specify also need to specify an
+   `--advertise-addr` parameter which is equivalent to the `--host-address`
+   parameter of the `docker/ucp install` operation.  This will instantiate a new
+   single-manager swarm by recovering as much state as possible from the
+   existing manager. This is a disruptive operation and existing tasks may be
+   either terminated or suspended.
 2. Obtain a backup of one of the remaining manager nodes if one is not already
    available.
-3. Perform a restore operation on the recovered swarm manager node.
-4. For all other nodes of the cluster, perform a `docker swarm leave --force`
-   and then a `docker swarm join` operation with the cluster's new join-token.
-5. Wait for all nodes of the swarm to become healthy UCP nodes.
+3. If UCP is still installed on the cluster, uninstall UCP using the
+   `uninstall-ucp` command.
+4. Perform a restore operation on the recovered swarm manager node.
+5. Log in to UCP and browse to the nodes page, or use the CLI `docker node ls`
+   command. 
+6. If any nodes are listed as `down`, you'll have to manually [remove these
+   nodes](../configure/scale-your-cluster.md) from the cluster and then re-join
+   them using a `docker swarm join` operation with the cluster's new join-token.
 
 ## Where to go next
 
