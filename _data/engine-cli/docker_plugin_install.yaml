@@ -16,3 +16,4 @@ options:
 - option: grant-all-permissions
   default_value: "false"
   description: Grant all permissions necessary to run the plugin
+

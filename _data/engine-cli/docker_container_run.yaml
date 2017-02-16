@@ -1,7 +1,6 @@
 command: docker container run
 short: Run a command in a new container
-long: |
-  Alias for `docker run`.
+long: Run a command in a new container
 usage: docker container run [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker container
 plink: docker_container.yaml
@@ -70,6 +69,9 @@ options:
 - option: device
   default_value: '[]'
   description: Add a host device to the container
+- option: device-cgroup-rule
+  default_value: '[]'
+  description: Add a rule to the cgroup allowed devices list
 - option: device-read-bps
   default_value: '[]'
   description: Limit read rate (bytes per second) from a device
@@ -115,13 +117,13 @@ options:
 - option: health-cmd
   description: Command to run to check health
 - option: health-interval
-  default_value: "0"
+  default_value: 0s
   description: Time between running the check (ns|us|ms|s|m|h) (default 0s)
 - option: health-retries
   default_value: "0"
   description: Consecutive failures needed to report unhealthy
 - option: health-timeout
-  default_value: "0"
+  default_value: 0s
   description: |
     Maximum time to allow one check to run (ns|us|ms|s|m|h) (default 0s)
 - option: help
@@ -241,7 +243,8 @@ options:
   default_value: '[]'
   description: Security Options
 - option: shm-size
-  description: Size of /dev/shm, default value is 64MB
+  default_value: "0"
+  description: Size of /dev/shm
 - option: sig-proxy
   default_value: "true"
   description: Proxy received signals to the process
@@ -286,3 +289,4 @@ options:
 - option: workdir
   shorthand: w
   description: Working directory inside the container
+
