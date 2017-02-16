@@ -15,7 +15,7 @@ FAQs, technical support for various subscription levels, and more.
 **Q: How do I get the stable or beta version of Docker for Mac?**
 
 A: Use the download links for the channels given in the topic
-[Download Docker for Mac](index.md#download-docker-for-mac).
+[Download Docker for Mac](install.md#download-docker-for-mac).
 
 This topic also has more information about the two channels.
 
@@ -218,7 +218,8 @@ on Docker for Mac GitHub issues.
 
 Note that you need a Mac that supports hardware virtualization and can run at
 least macOS `10.10.3+` or `10.11` (macOS Yosemite or macOS El Capitan). See also
-"What to know before you install" in [Getting Started](index.md).
+[What to know before you install](install.md#what-to-know-before-you-install) in
+the install guide.
 
 ### Do I need to uninstall Docker Toolbox to use Docker for Mac?
 
