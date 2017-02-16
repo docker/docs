@@ -358,7 +358,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
 After you start the Docker daemon, ensure you monitor your thin pool and volume
 group free space. While the volume group will auto-extend, it can still fill
-up. To monitor logical volumes, use `lvs` without options or `lvs -a` to see tha
+up. To monitor logical volumes, use `lvs` without options or `lvs -a` to see the
 data and metadata sizes. To monitor volume group free space, use the `vgs` command.
 
 Logs can show the auto-extension of the thin pool when it hits the threshold, to
