@@ -4,6 +4,7 @@ keywords: mac, Multi-CPU architecture support
 redirect_from:
 - /mackit/multi-arch/
 title: Leveraging multi-CPU architecture support
+notoc: true
 ---
 
 Docker for Mac provides `binfmt_misc` multi architecture support, so you can run
