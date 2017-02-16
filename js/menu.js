@@ -25,11 +25,13 @@ function loadPage(url)
   window.location.replace(url);
   window.location.href = url;
 }
+
 $(document).on("keypress", function(event) {
     if (event.keyCode == 13) {
       if(autoCompleteShowing) event.preventDefault();
     }
 });
+
 function highlightMe(inputTxt,keyword)
 {
   inputTxt = String(inputTxt);

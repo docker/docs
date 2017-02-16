@@ -407,7 +407,7 @@ td, th {
   background-color: #FBFBFC;
   height: 100%;
   width: 270px;
-  padding: 15px 0 0; }
+  padding: 50px 0 0; }
 
 .toc-nav ul {
   list-style: none;
@@ -425,6 +425,9 @@ td, th {
   /*color: #0C5176;*/
   display: block;
   transition: 0.3s; }
+
+#side-toc-contents a {
+  padding-left: 0px; }
 
 .toc-nav a:hover, .offcanvas a:focus {
   color: #f1f1f1; }
@@ -445,7 +448,7 @@ td, th {
 .toggle-mode {
   float: left;
   width: 100%;
-  padding: 24px 0px 0px 0px; }
+  padding: 0px 0px 0px 40px; }
 
 .toggle-mode .icon {
   width: 25px;
