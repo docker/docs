@@ -4,14 +4,22 @@
 {% capture aws_blue_latest %}
 <a class="button darkblue-btn aws-deploy" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/stable/Docker.tmpl" data-rel="Stable-1" target="blank">Deploy Docker for AWS (stable)</a>
 {% endcapture %}
-{% capture aws_blue_beta %}
+{% capture aws_blue_edge %}
 <a class="button darkblue-btn aws-deploy" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/edge/Docker.tmpl" data-rel="Beta-14" target="blank">Deploy Docker for AWS (beta)</a>
+{% endcapture %}
+{% capture aws_blue_vpc_latest %}
+<a class="button darkblue-btn aws-deploy" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/stable/Docker-vpc.tmpl" data-rel="Stable-1" target="blank">Deploy Docker for AWS (stable)</a>
+<p>use your existing vpc</p>
+{% endcapture %}
+{% capture aws_blue_vpc_edge %}
+<a class="button darkblue-btn aws-deploy" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/edge/Docker-vpc.tmpl" data-rel="Beta-14" target="blank">Deploy Docker for AWS (beta)</a>
+<p>use your existing VPC</p>
 {% endcapture %}
 
 {% capture azure_blue_latest %}
 <a class="button darkblue-btn azure-deploy" href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fdownload.docker.com%2Fazure%2Fstable%2FDocker.tmpl" data-rel="Stable-1" target="blank">Deploy Docker for Azure (stable)</a>
 {% endcapture %}
-{% capture azure_blue_beta %}
+{% capture azure_blue_edge %}
 <a class="button darkblue-btn azure-deploy" href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fdownload.docker.com%2Fazure%2Fedge%2FDocker.tmpl" data-rel="Beta-14" target="blank">Deploy Docker for Azure (beta)</a>
 {% endcapture %}
 {% capture azure_button_latest %}

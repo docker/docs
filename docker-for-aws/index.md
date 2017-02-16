@@ -33,7 +33,15 @@ using CloudFormation. For more about stable and beta channels, see the
   {{aws_blue_latest}}
   </td>
   <td width="50%">
-  {{aws_blue_beta}}
+  {{aws_blue_edge}}
+  </td>
+  </tr>
+  <tr valign="top">
+  <td width="50%">
+  {{aws_blue_vpc_latest}}
+  </td>
+  <td width="50%">
+  {{aws_blue_vpc_edge}}
   </td>
   </tr>
 </table>
