@@ -420,7 +420,7 @@ diffs between image layers and containers. Docker 1.10 and later no longer
 matches image layer IDs with directory names in `/var/lib/docker`. However,
 there are two key directories. The `/var/lib/docker/devicemapper/mnt` directory
  contains the mount points for image and container layers. The
-`/var/lib/docker/devicemapper/metadata`directory contains one file for every
+`/var/lib/docker/devicemapper/metadata` directory contains one file for every
 image layer and container snapshot. The files contain metadata about each
 snapshot in JSON format.
 
@@ -576,7 +576,7 @@ disk partition.
 
     Your volume group may use a different name.
 
-2.  Extend the `data` logical volume(LV) `vg-docker/data`
+2.  Extend the `data` logical volume (LV) `vg-docker/data`
 
     ```bash
     $ sudo lvextend  -l+100%FREE -n vg-docker/data
