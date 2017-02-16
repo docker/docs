@@ -43,7 +43,7 @@ This simple relationship is shown in the diagram below.
 The solid line in the diagram shows the process flow for creating a clone. Step
  1 creates a snapshot of the filesystem, and step two creates the clone from
 the snapshot. The dashed line shows the relationship between the clone and the
-filesystem, via the snapshot. All three ZFS datasets draw space form the same
+filesystem, via the snapshot. All three ZFS datasets draw space from the same
 underlying zpool.
 
 On Docker hosts using the `zfs` storage driver, the base layer of an image is a
