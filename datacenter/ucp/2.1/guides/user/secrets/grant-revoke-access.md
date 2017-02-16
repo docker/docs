@@ -18,10 +18,9 @@ the secret.
 Users that are part of a team with access to that label will be able to see
 and use the secret.
 
-In this example, if Jenny is part of
-a team that has 'Restricted Control' over the `com.docker.ucp.access.label=blog`
-label, she will be able to use the secret in her services, as long as the
-service also has the same label.
+In this example, if Jenny is part of a team that has 'Restricted Control' over
+the `com.docker.ucp.access.label=blog` label, she will be able to use the
+secret in her services, as long as the service also has the same label.
 
 This ensures that users can use a secret in their services without having
 permissions to attach to the container running the service and inspect the
