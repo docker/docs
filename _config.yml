@@ -48,7 +48,7 @@ defaults:
   - scope:
       path: "docker-cloud"
     values:
-      assignee: "sanscontext"
+      assignee: "londoncalling"
   - scope:
       path: "docker-for-mac"
     values:
@@ -60,7 +60,7 @@ defaults:
   - scope:
       path: "docker-hub"
     values:
-      assignee: "sanscontext"
+      assignee: "johndmulhausen"
   - scope:
       path: "docker-store"
     values:
