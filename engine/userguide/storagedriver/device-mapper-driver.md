@@ -231,7 +231,7 @@ assumes that the Docker daemon is in the `stopped` state.
     $ pvcreate /dev/xvdf
     ```
 
-4.  Create a 'docker' volume group.
+4.  Create a `docker` volume group.
 
     ```bash
     $ vgcreate docker /dev/xvdf
@@ -260,7 +260,7 @@ assumes that the Docker daemon is in the `stopped` state.
     $ vi /etc/lvm/profile/docker-thinpool.profile
     ```
 
-8.  Specify 'thin_pool_autoextend_threshold' value.
+8.  Specify `thin_pool_autoextend_threshold` value.
 
     The value should be the percentage of space used before `lvm` attempts
     to autoextend the available space (100 = disabled).
