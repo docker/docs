@@ -9,10 +9,9 @@ $("#menu-toggle").click(function(e) {
         $("#wrapper").toggleClass("toggled");
     });
 
-var $body   = $(document.body);
 var navHeight = $('.navbar').outerHeight(true) + 10;
 
-$body.scrollspy({
+$(document.body).scrollspy({
 	target: '#leftCol',
 	offset: navHeight
 });
