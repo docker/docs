@@ -14,7 +14,7 @@ production-ready application.
 
 | Product | Description |
 | ------- | ----------- |
-| [Docker Cloud](/docker-cloud/overview) | Manages multi-container applications and host resources running on a cloud provider (such as Amazon Web Services) |
+| [Docker Cloud](/docker-cloud/) | Manages multi-container applications and host resources running on a cloud provider (such as Amazon Web Services) |
 | [Universal Control Plane (UCP)](/ucp/overview/) | Manages multi-container applications on a custom host installation (on-premise, on a cloud provider) |
 | [Docker Trusted Registry (DTR)](/docker-trusted-registry/) | Runs a private repository of container images and makes them available to a UCP instance |
 | [Docker Store](/docker-store/) | Public, Docker-hosted registry that distributes free and paid images from various publishers |
