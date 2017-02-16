@@ -492,7 +492,7 @@ will unset existing `DOCKER` environment variables you have set. For other shell
 
 ### Make sure Docker is running for webserver examples
 
-For the `hello-world-nginx` example and others, Docker for Windows must be running in order to get to the webserver on `http://localhost/`. Make sure that the Docker whale is showing in the menu bar, and that you run the Docker commands in a shell that is connected to the Docker for Windows Engine (not Engine from Toolbox). Otherwise, you might start the webserver container but get a "web page not available" error when you go to `docker`.  For more on distinguishing between the two environments, see "Running Docker for Windows and Docker Toolbox" in [Getting Started](index.md).
+For the `hello-world-nginx` example and others, Docker for Windows must be running in order to get to the webserver on `http://localhost/`. Make sure that the Docker whale is showing in the menu bar, and that you run the Docker commands in a shell that is connected to the Docker for Windows Engine (not Engine from Toolbox). Otherwise, you might start the webserver container but get a "web page not available" error when you go to `docker`.
 
 ### How to solve `port already allocated` errors
 

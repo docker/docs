@@ -56,9 +56,6 @@ function hookupTOCEvents()
     }
     return false;
   });
-  $(".currentPage").each(function(){
-    $(this).parentsUntil($('.docsidebarnav_section')).addClass("active").removeClass("menu-closed").addClass("menu-open");
-  });
   $(".left-off-canvas-menu").css("display","block");
   // console.log(metadata);
   $("#st-search-input").on('keyup change', function(e) {

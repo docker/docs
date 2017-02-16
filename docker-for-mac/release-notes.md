@@ -9,12 +9,12 @@ title: Docker for Mac release notes
 Here are the main improvements and issues per release, starting with the current
 release. The documentation is always updated for each release.
 
-For system requirements, please see the Getting Started topic on [What to know
-before you install](index.md#what-to-know-before-you-install).
+For system requirements, please see
+[What to know before you install](install.md#what-to-know-before-you-install).
 
 Release notes for _stable_ and _beta_ releases are listed below. You can learn
 about both kinds of releases, and download stable and beta product installers at
-[Download Docker for Mac](index.md#download-docker-for-mac).
+[Download Docker for Mac](install.md#download-docker-for-mac).
 
 ## Stable Release Notes
 
