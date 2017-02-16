@@ -10,8 +10,8 @@ Docker packages your app with its dependencies, freeing you from worrying about 
 system configuration, and making your app more portable.
 
 <table>
-<tr valign="top">
-<td width="50%">
+<tr>
+<td>
 {% capture basics %}
 ### Learn the basics of Docker
 
@@ -20,7 +20,7 @@ and pull Docker images, and run them as containers. This
 tutorial stops short of teaching you how to deploy applications.
 {% endcapture %}{{ basics | markdownify }}
 </td>
-<td width="50%">
+<td>
 
 {% capture apps %}
 ### Define and deploy applications
@@ -32,17 +32,17 @@ production environment. Highlights [Compose Version 3 new features](/engine/gets
 
 </td></tr>
 
-<tr valign="top">
-<td width="50%">{% capture basics %}[Start the basic tutorial](/engine/getstarted/){: class="button outline-btn"}{% endcapture %}{{ basics | markdownify }}
+<tr>
+<td>{% capture basics %}[Start the basic tutorial](/engine/getstarted/){: class="button primary-btn"}{% endcapture %}{{ basics | markdownify }}
 </td>
-<td width="50%">{% capture apps %}[Start the application tutorial](/engine/getstarted-voting-app/){: class="button outline-btn"}{% endcapture %}{{ apps | markdownify }}
+<td>{% capture apps %}[Start the application tutorial](/engine/getstarted-voting-app/){: class="button primary-btn"}{% endcapture %}{{ apps | markdownify }}
 </td>
 </tr>
 </table>
 
 ## Components
-
 <div class="block">
+  <h3 id="components">Components</h3>
   <div class="component-container">
       <div class="row">
           <div class="col-md-4">

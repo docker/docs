@@ -1,0 +1,111 @@
+/*
+*
+* this css will be integrated into master. for now testing.......
+*
+*/
+
+.search-form {
+    float: left;
+    width: 295px;
+    margin: 2px 0 0!important;
+}
+
+.form-control:focus {
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.search-banner {
+  width: 100%;
+  align: center;
+}
+.search-form .algolia-autocomplete {
+  width: 100%;
+  padding-right: 54px;
+}
+
+/*
+*
+* override google results.....
+*
+*/
+
+a.gs-title {
+    color: #2089C4!important;
+    text-decoration: none;
+}
+
+.gs-webResult div.gs-visibleUrl, .gs-imageResult div.gs-visibleUrl {
+    color: #82949E!important;
+}
+
+.gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
+    font-size: 14px!important;
+}
+
+span.reading-time {
+  font-style: italic;
+  font-size: 80%;
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #999;
+}
+
+span.reading-time-label {
+}
+
+img.with-border {
+  border: 1px solid #eaeaea;
+}
+
+div#autocompleteContainer {
+  border: 0!important;
+  margin: 0!important;
+}
+
+#side-toc {
+  border: 0;
+  padding: 20px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+#feedback-links {
+  border: 1px solid #2294ca;
+  padding: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+#side-toc-contents,
+#feedback-links {
+  list-style-type: none;
+  font-size: 80%;
+}
+
+#side-toc-contents ul,
+#feedback-links ul {
+  margin-bottom: 0;
+}
+
+#side-toc-contents li {
+  padding-bottom: 7px;
+  padding-top: 7px;
+  line-height: 1!important;
+}
+#side-toc-contents ul ul li {
+  padding-left: 14px;
+}
+#side-toc-title {
+  font-weight: bolder;
+  font-size: 90%;
+  color: #155A74;
+  padding-bottom: 5px;
+}
+
+#site-generation {
+  font-size: 9px;
+  color: #999;
+  font-style: italic;
+}
