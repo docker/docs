@@ -159,7 +159,7 @@ backup, include the `docker-compose.admin.yml` as well.
 
 ## Extending services
 
-> Up to version 2.1 , version 3 does not support `extends` yet.
+> Up to version 2.1 , version 3.x does not support `extends` yet.
 
 Docker Compose's `extends` keyword enables sharing of common configurations
 among different files, or even different projects entirely. Extending services
