@@ -95,14 +95,14 @@ Docker UCP uses these named volumes to persist data in all nodes where it runs:
 |:----------------------------|:-----------------------------------------------------------------------------------------|
 | ucp-auth-api-certs          | Certificate and keys for the authentication and authorization service                    |
 | ucp-auth-store-certs        | Certificate and keys for the authentication and authorization store                      |
-| ucp-auth-store-data         | Data of the authentication and authorization store, replicated across managers                                       
+| ucp-auth-store-data         | Data of the authentication and authorization store, replicated across managers           |
 | ucp-auth-worker-certs       | Certificate and keys for authentication worker                                           |
 | ucp-auth-worker-data        | Data of the authentication worker                                                        |
 | ucp-client-root-ca          | Root key material for the UCP root CA that issues client certificates                    |
 | ucp-cluster-root-ca         | Root key material for the UCP root CA that issues certificates for swarm members         |
 | ucp-controller-client-certs | Certificate and keys used by the UCP web server to communicate with other UCP components |
 | ucp-controller-server-certs | Certificate and keys for the UCP web server running in the node                          |
-| ucp-kv                      | UCP configuration data, replicated across managers.                                                                   |
+| ucp-kv                      | UCP configuration data, replicated across managers.                                      |
 | ucp-kv-certs                | Certificates and keys for the key-value store                                            |
 | ucp-metrics-data            | Monitoring data gathered by UCP                                                          |
 | ucp-metrics-inventory       | Configuration file used by the ucp-metrics service                                       |
