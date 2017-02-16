@@ -133,11 +133,11 @@ production environment. Highlights [Compose Version 3 new features](/engine/gets
 </li>
 <li>
 <div class="media_image">
-	<a href="/datacenter/ucp/2.0/guides/index.md"><img src="/images/icon-ucp@2X.png" alt="Docker Universal Control Plane"></a>
+	<a href="/datacenter/ucp/2.1/guides/index.md"><img src="/images/icon-ucp@2X.png" alt="Docker Universal Control Plane"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/datacenter/ucp/2.0/guides/index.md">Docker Universal Control Plane</a></h3>
+	<h3><a href="/datacenter/ucp/2.1/guides/index.md">Docker Universal Control Plane</a></h3>
 		<p>
     (UCP) Manage a cluster of on-premises Docker hosts as if they were a single machine.
     </p>
