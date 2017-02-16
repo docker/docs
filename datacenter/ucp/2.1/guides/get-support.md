@@ -26,7 +26,7 @@ support dump:
 2. On the top-right menu, **click your username**, and choose **Support Dump**.
    An archive will be downloaded by your browser after a brief time interval.
 
-If the User Interface is not accessible, you may perform the following number of
+If the user interface is not accessible, you may perform the following number of
 steps instead to obtain a single-node version of the support dump:
 
 1. Obtain direct CLI access to the docker daemon on a UCP manager node.
