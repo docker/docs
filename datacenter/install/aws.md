@@ -13,7 +13,7 @@ on Docker and AWS best-practices. It is based on
 [Docker for AWS](https://beta.docker.com/docs/) and currently should be used
 for evaluation purposes only.
 
-![ucp.png](../images/d4a_ddc_arch.png)
+![ddc_aws.svg](/images/ddc_aws.svg)
 
 ## How it Works
 
