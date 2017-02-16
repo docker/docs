@@ -227,6 +227,8 @@ several options have been removed:
     `deploy`. Note that `deploy` configuration only takes effect when using
     `docker stack deploy`, and is ignored by `docker-compose`.
 
+- `extends`: This option has been removed. You wont be able to use `extends` along version "3"
+
 ### Version 1 to 2.x
 
 In the majority of cases, moving from version 1 to 2 is a very simple process:
