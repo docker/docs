@@ -2,6 +2,11 @@
 title: Install CS Docker Engine 1.13
 description: Learn how to install the commercially supported version of Docker Engine.
 keywords: docker, engine, install
+redirect_from:
+- /docker-trusted-registry/install/engine-ami-launch/
+- /docker-trusted-registry/install/install-csengine/
+- /docker-trusted-registry/cs-engine/install/
+- /cs-engine/install/
 ---
 
 Follow these instructions to install CS Docker Engine, the commercially
