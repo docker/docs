@@ -13,11 +13,3 @@ https://www.github.com/docker/docker
 -->
 
 {% include cli.md %}
-
-## Examples
-
-### Removing an image
-
-Here is an example of removing an image:
-
-    $ docker image rm fedora/httpd
