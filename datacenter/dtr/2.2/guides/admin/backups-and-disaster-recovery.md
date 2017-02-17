@@ -120,48 +120,9 @@ The structure of the archive should look something like this:
 ```none
 dtr-backup-v2.2.1/
 dtr-backup-v2.2.1/rethink/
-dtr-backup-v2.2.1/rethink/events/
-dtr-backup-v2.2.1/rethink/events/0
-dtr-backup-v2.2.1/rethink/events/1
-dtr-backup-v2.2.1/rethink/events/2
-dtr-backup-v2.2.1/rethink/user_settings/
-dtr-backup-v2.2.1/rethink/webhooks/
 dtr-backup-v2.2.1/rethink/properties/
 dtr-backup-v2.2.1/rethink/properties/0
 ...
-dtr-backup-v2.2.1/rethink/properties/50
-dtr-backup-v2.2.1/rethink/properties/51
-dtr-backup-v2.2.1/rethink/properties/52
-dtr-backup-v2.2.1/rethink/repositories/
-dtr-backup-v2.2.1/rethink/repositories/0
-dtr-backup-v2.2.1/rethink/blobs/
-dtr-backup-v2.2.1/rethink/blobs/0
-dtr-backup-v2.2.1/rethink/blobs/1
-dtr-backup-v2.2.1/rethink/blobs/2
-dtr-backup-v2.2.1/rethink/blobs/3
-dtr-backup-v2.2.1/rethink/blobs/4
-dtr-backup-v2.2.1/rethink/blobs/5
-dtr-backup-v2.2.1/rethink/blobs/6
-dtr-backup-v2.2.1/rethink/manifests/
-dtr-backup-v2.2.1/rethink/manifests/0
-dtr-backup-v2.2.1/rethink/namespace_team_access/
-dtr-backup-v2.2.1/rethink/repository_team_access/
-dtr-backup-v2.2.1/rethink/tuf_files/
-dtr-backup-v2.2.1/rethink/layers/
-dtr-backup-v2.2.1/rethink/tags/
-dtr-backup-v2.2.1/rethink/tags/0
-dtr-backup-v2.2.1/rethink/private_keys/
-dtr-backup-v2.2.1/rethink/blob_repository/
-dtr-backup-v2.2.1/rethink/blob_repository/0
-dtr-backup-v2.2.1/rethink/blob_repository/1
-dtr-backup-v2.2.1/rethink/blob_repository/2
-dtr-backup-v2.2.1/rethink/blob_repository/3
-dtr-backup-v2.2.1/rethink/blob_repository/4
-dtr-backup-v2.2.1/rethink/blob_repository/5
-dtr-backup-v2.2.1/rethink/blob_repository/6
-dtr-backup-v2.2.1/rethink/content_caches/
-dtr-backup-v2.2.1/rethink/client_tokens/
-dtr-backup-v2.2.1/rethink/client_tokens/0
 ```
 
 To really test that the backup works, you must make a copy of your UCP cluster
@@ -173,8 +134,8 @@ see.
 
 You can restore a DTR node from a backup using the `restore` command.
 
-Note that backups are tied to specific DTR versions and work
-best with those DTR versions. You can backup/restore across patch versions
+Note that backups are tied to specific DTR versions and are guaranteed to work
+only with those DTR versions. You can backup/restore across patch versions
 at your own risk, but not across minor versions as those require more complex
 migrations.
 
