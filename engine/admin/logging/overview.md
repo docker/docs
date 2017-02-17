@@ -281,7 +281,7 @@ $ docker run -dit \
 ```
 
 For detailed information on working with the `fluentd` logging driver, see
-[the fluentd logging driver](fluentd.md)
+[the fluentd logging driver](fluentd.md).
 
 
 ## `awslogs`
@@ -417,7 +417,7 @@ $ docker run --log-driver=gcplogs \
 ```
 
 For detailed information about working with the Google Cloud logging driver, see
-the [Google Cloud Logging driver](gcplogs.md). reference documentation.
+the [Google Cloud Logging driver](gcplogs.md) reference documentation.
 
 ## NATS logging options
 
