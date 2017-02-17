@@ -1105,18 +1105,18 @@ manuals:
       title: unpause
     - path: /compose/reference/up/
       title: up
-    - sectiontitle: Compose File Reference
-      section:
-      - path: /compose/compose-file/
-        title: Version 3
-      - path: /compose/compose-file/compose-file-v2/
-        title: Version 2
-      - path: /compose/compose-file/compose-file-v1/
-        title: Version 1
-      - path: /compose/compose-file/compose-versioning/
-        title: About versions and upgrading
-      - path: /compose/faq/
-        title: Frequently Asked Questions
+  - sectiontitle: Compose File Reference
+    section:
+    - path: /compose/compose-file/
+      title: Version 3
+    - path: /compose/compose-file/compose-file-v2/
+      title: Version 2
+    - path: /compose/compose-file/compose-file-v1/
+      title: Version 1
+    - path: /compose/compose-file/compose-versioning/
+      title: About versions and upgrading
+    - path: /compose/faq/
+      title: Frequently Asked Questions
   - path: /compose/bundles/
     title: Docker Stacks and Distributed Application Bundles
   - path: /compose/swarm/
