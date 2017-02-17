@@ -18,7 +18,7 @@ For this sample, we will create a sample `dotnet core web application` using the
 
 1. Within your directory, use the `aspnetcore-build` Docker image to generate a sample web application within the container and into your host machine under the `/app` directory:
 
-        docker run -v /app:/app --workdir /app microsoft/aspnetcore-build:lts dotnet new -t web
+        docker run -v ${PWD}:/app --workdir /app microsoft/aspnetcore-build:lts dotnet new -t web
 
     >**Note**: If running in Docker for Windows, make sure to add the necessary `C:/` prefix to the host mapped folder and that you are running on Linux containers mode.
 
