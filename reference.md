@@ -1,6 +1,6 @@
 ---
 title: Reference documentation
-skip-right-nav: true
+notoc: true
 ---
 
 This section includes the reference documentation for the Docker platform's

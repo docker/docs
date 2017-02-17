@@ -128,6 +128,7 @@ $ docker service create \
 ### Create a docker service with specific hostname (--hostname)
 
 This option sets the docker service containers hostname to a specific string. For example:
+
 ```bash
 $ docker service create \
   --name redis \

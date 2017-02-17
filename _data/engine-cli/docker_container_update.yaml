@@ -1,50 +1,6 @@
 command: docker container update
 short: Update configuration of one or more containers
-long: "The **docker container update** command dynamically updates container configuration.\nYou
-  can use this command to prevent containers from consuming too many \nresources from
-  their Docker host.  With a single command, you can place \nlimits on a single container
-  or on many. To specify more than one container,\nprovide space-separated list of
-  container names or IDs.\n\nWith the exception of the **--kernel-memory** option,
-  you can specify these\noptions on a running or a stopped container. On kernel version
-  older than\n4.6, You can only update **--kernel-memory** on a stopped container
-  or on\na running container with kernel memory initialized.\n\n# OPTIONS\n\n## kernel-memory\n\nKernel
-  memory limit (format: `<number>[<unit>]`, where unit = b, k, m or g)\n\nNote that
-  on kernel version older than 4.6, you can not update kernel memory on\na running
-  container if the container is started without kernel memory initialized,\nin this
-  case, it can only be updated after it's stopped. The new setting takes\neffect when
-  the container is started.\n\n## memory\n\nMemory limit (format: <number><optional
-  unit>, where unit = b, k, m or g)\n\nNote that the memory should be smaller than
-  the already set swap memory limit.\nIf you want update a memory limit bigger than
-  the already set swap memory limit,\nyou should update swap memory limit at the same
-  time. If you don't set swap memory \nlimit on docker create/run but only memory
-  limit, the swap memory is double\nthe memory limit.\n\n# EXAMPLES\n\nThe following
-  sections illustrate ways to use this command.\n\n### Update a container's cpu-shares\n\nTo
-  limit a container's cpu-shares to 512, first identify the container\nname or ID.
-  You can use **docker ps** to find these values. You can also\nuse the ID returned
-  from the **docker run** command.  Then, do the following:\n\n```bash\n$ docker container
-  update --cpu-shares 512 abebf7571666\n```\n\n### Update a container with cpu-shares
-  and memory\n\nTo update multiple resource configurations for multiple containers:\n\n```bash\n$
-  docker container update --cpu-shares 512 -m 300M abebf7571666 hopeful_morse\n```\n\n###
-  Update a container's kernel memory constraints\n\nYou can update a container's kernel
-  memory limit using the **--kernel-memory**\noption. On kernel version older than
-  4.6, this option can be updated on a\nrunning container only if the container was
-  started with **--kernel-memory**.\nIf the container was started *without* **--kernel-memory**
-  you need to stop\nthe container before updating kernel memory.\n\nFor example, if
-  you started a container with this command:\n\n```bash\n$ docker run -dit --name
-  test --kernel-memory 50M ubuntu bash\n```\n\nYou can update kernel memory while
-  the container is running:\n\n```bash\n$ docker container update --kernel-memory
-  80M test\n```\n\nIf you started a container *without* kernel memory initialized:\n\n```bash\n$
-  docker run -dit --name test2 --memory 300M ubuntu bash\n```\n\nUpdate kernel memory
-  of running container `test2` will fail. You need to stop\nthe container before updating
-  the **--kernel-memory** setting. The next time you\nstart it, the container uses
-  the new value.\n\nKernel version newer than (include) 4.6 does not have this limitation,
-  you\ncan use `--kernel-memory` the same way as other options.\n\n### Update a container's
-  restart policy\n\nYou can change a container's restart policy on a running container.
-  The new\nrestart policy takes effect instantly after you run `docker container update`
-  on a\ncontainer.\n\nTo update restart policy for one or more containers:\n\n```bash\n$
-  docker container update --restart=on-failure:3 abebf7571666 hopeful_morse\n```\n\nNote
-  that if the container is started with \"--rm\" flag, you cannot update the restart\npolicy
-  for it. The `AutoRemove` and `RestartPolicy` are mutually exclusive for the\ncontainer.\n"
+long: Update configuration of one or more containers
 usage: docker container update [OPTIONS] CONTAINER [CONTAINER...]
 pname: docker container
 plink: docker_container.yaml
@@ -85,3 +41,4 @@ options:
     Swap limit equal to memory plus swap: '-1' to enable unlimited swap
 - option: restart
   description: Restart policy to apply when a container exits
+

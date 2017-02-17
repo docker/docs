@@ -34,7 +34,7 @@ When installing UCP on a host, make sure the following ports are open:
 | controllers, nodes |    in     | TCP 443  (configurable) | Web app and CLI client access to UCP.                                      |
 | controllers, nodes |    in     | TCP 2375                | Heartbeat for nodes, to ensure they are running.                           |
 | controllers        |    in     | TCP 2376 (configurable) | Swarm manager accepts requests from UCP controller.                        |
-| controllers, nodes |  in, out  | TCP + UDP 4789          | Overlay networking.                                                        |
+| controllers, nodes |  in, out  | UDP 4789                | Overlay networking.                                                        |
 | controllers, nodes |  in, out  | TCP + UDP 7946          | Overlay networking.                                                        |
 | controllers, nodes |    in     | TCP 12376               | Proxy for TLS, provides access to UCP, Swarm, and Engine.                  |
 | controller         |    in     | TCP 12379               | Internal node configuration, cluster configuration, and HA.                |

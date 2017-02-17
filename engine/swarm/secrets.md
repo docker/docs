@@ -744,7 +744,7 @@ Docker.
     Even though the MySQL service has access to both the old and new secrets
     now, the MySQL password for the WordPress user has not yet been changed.
 
-    > **Note**: This example does not rottate the MySQL `root` password.
+    > **Note**: This example does not rotate the MySQL `root` password.
 
 3.  Now, change the MySQL password for the `wordpress` user using the
     `mysqladmin` CLI. This command reads the old and new password from the files
@@ -773,7 +773,7 @@ Docker.
     **or**:
 
     ```bash
-    $ docker exec $(docker ps --filter --name=mysql -q) \
+    $ docker exec $(docker ps --filter name=mysql -q) \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 

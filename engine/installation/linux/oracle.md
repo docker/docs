@@ -31,6 +31,13 @@ remove it using the following command:
 $ sudo yum -y remove docker
 ```
 
+You may also have to remove the package `docker-engine-selinux` which conflicts with
+the official `docker-engine` package.  Remove it with the following command:
+
+```bash
+$ sudo yum -y remove docker-engine-selinux
+```
+
 The contents of `/var/lib/docker` are not removed, so any images, containers,
 or volumes you created using the older version of Docker are preserved.
 
@@ -87,8 +94,8 @@ Docker from the repository.
 
 3.  **Optional**: Enable the **testing** repository. This repository is included
     in the `docker.repo` file above but is disabled by default. You can enable
-    it alongside the stable repository. Do not use unstable repositories on
-    on production systems or for non-testing workloads.
+    it alongside the stable repository. **Do not use unstable repositories on
+    on production systems or for non-testing workloads.**
 
     > **Warning**: If you have both stable and unstable repositories enabled,
     > installing or updating without specifying a version in the `yum install`

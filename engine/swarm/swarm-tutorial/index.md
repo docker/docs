@@ -105,16 +105,16 @@ If you are using Docker Machine, you can get the manager IP with either
 
 The tutorial uses `manager1` : `192.168.99.100`.
 
-### Open ports between the hosts
+### Open protocols and ports between the hosts
 
 The following ports must be available. On some systems, these ports are open by default.
 
 * **TCP port 2377** for cluster management communications
 * **TCP** and **UDP port 7946** for communication among nodes
-* **TCP** and **UDP port 4789** for overlay network traffic
+* **UDP port 4789** for overlay network traffic
 
 If you are planning on creating an overlay network with encryption (`--opt encrypted`),
-you will also need to ensure port 50 (ESP) is open.
+you will also need to ensure **ip protocol 50** (**ESP**) traffic is allowed.
 
 ## What's next?
 
