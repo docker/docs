@@ -33,6 +33,16 @@ for any necessary configuration values.
 [Check the reference documentation](../../../reference/cli/index.md) to learn the options
 available in the `uninstall-ucp` command.
 
+## Swarm mode CA
+
+After uninstalling UCP, the nodes in your cluster will still be in swarm mode, but you cannot
+join new nodes until you reinstall UCP, because swarm mode was relying on UCP to provide the
+CA certificates that allow nodes in the cluster to identify each other. Additionally, since
+swarm mode is no longer controlling its own certificates, if the certificates expire after 
+you uninstall UCP the nodes in the cluster will not be able to communicate at all. To fix this,
+either reinstall UCP before the certificates expire or disable swarm mode by running
+`docker swarm leave --force` on every node.
+
 ## Where to go next
 
 * [Scale your cluster](../configure/scale-your-cluster.md)
