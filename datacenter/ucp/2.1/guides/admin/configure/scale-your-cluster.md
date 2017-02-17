@@ -61,7 +61,31 @@ you want to join to the cluster, and **run the command** on that host.
 After you run the join command in the node, the node starts being displayed
 in UCP.
 
-## Pause, drain, and remove nodes
+## Remove nodes from the cluster
+
+1. If the target node is a manager, you will need to first demote the node into
+   a worker before proceeding with the removal:
+   * From the UCP web UI, navigate to the **Resources** section and then go to
+   the **Nodes** page. Select the node you wish to remove and switch its role
+   to **Worker**, wait until the operation is completed and confirm that the
+   node is no longer a manager.
+   * From the CLI, perform `docker node ls` and identify the nodeID or hostname
+   of the target node. Then, run `docker node demote <nodeID or hostname>`.
+
+2. If the status of the worker node is `Ready`, you'll need to manually force
+   the node to leave the swarm. To do this, connect to the target node through
+   SSH and run `docker swarm leave --force` directly against the local docker
+   engine. Warning: do not perform this step if the node is still a manager, as
+   that may cause loss of quorum.
+
+3. Now that the status of the node is reported as `Down`, you may remove the
+   node:
+	* From the UCP web UI, browse to the **Nodes** page, select the node and
+	click on the **Remove Node** button. You will need to click on the button
+	again within 5 seconds to confirm the operation.
+	* From the CLI, perform `docker node rm <nodeID or hostname>`
+
+## Pause and drain nodes
 
 Once a node is part of the cluster you can change its role making a manager
 node into a worker and vice versa. You can also configure the node availability
