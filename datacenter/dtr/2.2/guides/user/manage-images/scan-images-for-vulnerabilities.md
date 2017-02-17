@@ -13,7 +13,8 @@ Scanning. The results of these scans are reported for each image tag.
 Docker Security Scanning is available as an add-on to Docker Trusted Registry,
 and an administrator configures it for your DTR instance. If you do not see
 security scan results available on your repositories, your organization may not
-have purchased the Security Scanning feature or it may be disabled.
+have purchased the Security Scanning feature or it may be disabled. See [Set up
+Security Scanning in DTR](../../admin/configure/set-up-vulnerability-scans.md) for more details.
 
 > **Tip**: Only users with write access to a repository can manually start a
 scan. Users with read-only access can view the scan results, but cannot start
@@ -21,18 +22,26 @@ a new scan.
 
 ## The Docker Security Scan process
 
-Scans run either on demand when a user clicks the **Start Scan** links or
-**Scan** button, or automatically on any `docker push` to the repository.
+Scans run either on demand when a user clicks the **Start a Scan** links or
+**Scan** button (see [Manual scanning](#manual-scanning) below), or automatically 
+on any `docker push` to the repository.
 
 First the scanner performs a binary scan on each layer of the image, identifies
-the software components in each layer, and indexes the SHA of each component. A
-binary scan evaluates the components on a bit-by-bit level, so vulnerable
-components are discovered no matter what they're named or statically-linked.
+the software components in each layer, and indexes the SHA of each component in a
+bill-of-materials. A binary scan evaluates the components on a bit-by-bit level, 
+so vulnerable components are discovered even if they are statically-linked or 
+under a different name.
+
+[//]: # (Placeholder for DSS workflow. @sarahpark is working on the diagram.)
 
 The scan then compares the SHA of each component against the US National
-Vulnerability Database that is installed on your DTR instance. when
+Vulnerability Database that is installed on your DTR instance. When
 this database is updated, DTR reviews the indexed components for newly
 discovered vulnerabilities.
+
+If you have subscribed to a webhook (see [Manage webhooks](../create-and-manage-webhooks.md))
+for scan completed/scan failed, then you will received the results of the scan
+as a json to the specified endpoint.
 
 Most scans complete within an hour, however larger repositories may take longer
 to scan depending on your system resources.
@@ -58,8 +67,15 @@ To start a security scan:
 2. Click the **Images** tab.
 3. Locate the image tag that you want to scan.
 4. In the **Vulnerabilities** column, click **Start a scan**.
+![](../../images/scanning-images-1.png){: .with-border}
 
-DTR begins the scanning process. You may need to refresh the page to see the
+You can also start a scan from the image details screen:
+
+1. Click **View Details** on the desired image tag.
+2. Click **Scan** on the right-hand side, above the layers table.
+![](../../images/scanning-images-2.png){: .with-border}
+
+DTR begins the scanning process. You will need to refresh the page to see the
 results once the scan is complete.
 
 ## Change the scanning mode
@@ -77,6 +93,7 @@ To change the repository scanning mode:
 1. Navigate to the repository, and click the **Settings** tab.
 2. Scroll down to the **Image scanning** section.
 3. Select the desired scanning mode.
+![](../../images/security-scanning-setup-5.png){: .with-border}
 
 ## View security scan results
 
@@ -85,6 +102,7 @@ Once DTR has run a security scan for an image, you can view the results.
 The **Images** tab for each repository includes a summary of the most recent
 scan results for each image.
 
+![](../../images/scanning-images-4.png){: .with-border}
 - A green shield icon with a check mark indicates that the scan did not find
 any vulnerabilities.
 - A red or orange shield icon indicates that vulnerabilities were found, and
@@ -113,6 +131,8 @@ by the Dockerfile.
     > **Tip**: The layers view can be long, so be sure
     to scroll down if you don't immediately see the reported vulnerabilities.
 
+   ![](../../images/scanning-images-5.png){: .with-border}
+
 - The **Components** view lists the individual component libraries indexed by
 the scanning system, in order of severity and number of vulnerabilities found,
 most vulnerable first.
@@ -123,6 +143,7 @@ most vulnerable first.
     the scan report provides details on each one. The component details also
     include the license type used by the component, and the filepath to the
     component in the image.
+![](../../images/scanning-images-6.png){: .with-border}
 
 ### What do I do next?
 
