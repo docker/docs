@@ -11,7 +11,8 @@ redirect_from:
 ## Quickstart
 
 If your account has the [proper permissions](#prerequisites), you can generate the [Service Principal](#service-principal) and
-then use the below button from the stable channel to bootstrap Docker for Azure using Azure Resource Manager.
+then use the below button from the stable or beta channel to bootstrap Docker for Azure using Azure Resource Manager. 
+For more about stable and beta channels, see the [FAQs](/docker-for-azure/faqs.md#stable-and-beta-channels)
 
 <table style="width:100%">
   <tr>
