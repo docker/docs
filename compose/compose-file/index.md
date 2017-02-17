@@ -343,7 +343,7 @@ Simple example:
 
 > **Note:** `depends_on` will not wait for `db` and `redis` to be "ready" before
 > starting `web` - only until they have been started. If you need to wait
-> for a service to be ready, see [Controlling startup order](startup-order.md)
+> for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 > for more on this problem and strategies for solving it.
 
 A healthcheck indicates you want a dependency to wait
@@ -500,40 +500,6 @@ accessible to linked services. Only the internal port can be specified.
     expose:
      - "3000"
      - "8000"
-
-### extends
-
-Extend another service, in the current file or another, optionally overriding
-configuration.
-
-You can use `extends` on any service together with other configuration keys.
-The `extends` value must be a dictionary defined with a required `service`
-and an optional `file` key.
-
-    extends:
-      file: common.yml
-      service: webapp
-
-The `service` the name of the service being extended, for example
-`web` or `database`. The `file` is the location of a Compose configuration
-file defining that service.
-
-If you omit the `file` Compose looks for the service configuration in the
-current file. The `file` value can be an absolute or relative path. If you
-specify a relative path, Compose treats it as relative to the location of the
-current file.
-
-You can extend a service that itself extends another. You can extend
-indefinitely. Compose does not support circular references and `docker-compose`
-returns an error if it encounters one.
-
-For more on `extends`, see the
-[the extends documentation](extends.md#extending-services).
-
-> **Note:** This option is not yet supported when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file. Use `docker-compose config` to generate a
-> configuration with all `extends` options resolved, and deploy from that.
 
 ### external_links
 
@@ -803,7 +769,7 @@ In the example below, three services are provided (`web`, `worker`, and `db`), a
 
 Specify a static IP address for containers for this service when joining the network.
 
-The corresponding network configuration in the [top-level networks section](compose-file.md#network-configuration-reference) must have an `ipam` block with subnet and gateway configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](compose-file.md#enableipv6) option must be set.
+The corresponding network configuration in the [top-level networks section](compose-file.md#network-configuration-reference) must have an `ipam` block with subnet configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](compose-file.md#enableipv6) option must be set.
 
 An example:
 
@@ -825,10 +791,10 @@ An example:
         ipam:
           driver: default
           config:
-          - subnet: 172.16.238.0/24
-            gateway: 172.16.238.1
-          - subnet: 2001:3984:3989::/64
-            gateway: 2001:3984:3989::1
+          -
+            subnet: 172.16.238.0/24
+          -
+            subnet: 2001:3984:3989::/64
 
 #### link_local_ips
 
@@ -964,7 +930,7 @@ more information.
 
 > **Note:** The top-level
 > [`volumes` option](compose-file.md#volume-configuration-reference) defines
-> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlir versions of the Compose file format.
+> a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format.
 
 Mount paths or named volumes, optionally specifying a path on the host machine
 (`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
@@ -1173,10 +1139,6 @@ which is optional:
 -   `config`: A list with zero or more config blocks, each containing any of
     the following keys:
     - `subnet`: Subnet in CIDR format that represents a network segment
-    - `ip_range`: Range of IPs from which to allocate container IPs
-    - `gateway`: IPv4 or IPv6 gateway for the master subnet
-    - `aux_addresses`: Auxiliary IPv4 or IPv6 addresses used by Network driver,
-      as a mapping from hostname to IP
 
 A full example:
 
@@ -1184,12 +1146,6 @@ A full example:
       driver: default
       config:
         - subnet: 172.28.0.0/16
-          ip_range: 172.28.5.0/24
-          gateway: 172.28.5.254
-          aux_addresses:
-            host1: 172.28.1.5
-            host2: 172.28.1.6
-            host3: 172.28.1.7
 
 ### internal
 
@@ -1262,10 +1218,10 @@ refer to it within the Compose file:
 ## Compose documentation
 
 - [User guide](index.md)
-- [Installing Compose](install.md)
+- [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample app with swarm mode](/engine/getstarted-voting-app/)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
-- [Command line reference](./reference/index.md)
+- [Get started with Django](/compose/django/)
+- [Get started with Rails](/compose/rails/)
+- [Get started with WordPress](/compose/wordpress/)
+- [Command line reference](/compose/reference/)

@@ -2,6 +2,7 @@
 description: Docker's use of Open Source
 keywords: docker, opensource
 title: Open source components and licensing
+notoc: true
 ---
 
 Docker Desktop Editions are built using open source software. For

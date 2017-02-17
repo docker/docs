@@ -8,7 +8,7 @@ This Quickstart guide will show you how to use Docker Compose to set up and run 
 
 ### Define the project
 
-Start by setting up the three files you'll need to build the app. First, since
+Start by setting up the four files you'll need to build the app. First, since
 your app is going to run inside a Docker container containing all of its
 dependencies, you'll need to define exactly what needs to be included in the
 container. This is done using a file called `Dockerfile`. To begin with, the
@@ -61,7 +61,7 @@ to link them together and expose the web app's port.
 
 ### Build the project
 
-With those three files in place, you can now generate the Rails skeleton app
+With those four files in place, you can now generate the Rails skeleton app
 using `docker-compose run`:
 
     docker-compose run web rails new . --force --database=postgresql --skip-bundle
@@ -140,7 +140,7 @@ seconds—the familiar refrain:
 
 Finally, you need to create the database. In another terminal, run:
 
-    docker-compose run web rails db:create
+    docker-compose run web rake db:create
 
 That's it. Your app should now be running on port 3000 on your Docker daemon. If you're using [Docker Machine](/machine/overview.md), then `docker-machine ip MACHINE_VM` returns the Docker host IP address.
 

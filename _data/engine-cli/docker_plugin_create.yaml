@@ -10,3 +10,4 @@ options:
 - option: compress
   default_value: "false"
   description: Compress the context using gzip
+

@@ -25,7 +25,7 @@ Also make sure the hosts are running one of these operating systems:
 * Ubuntu 14.04 LTS or 16.04 LTS
 * SUSE Linux Enterprise 12
 
-[Learn more about the Docker Datacenter system requirements](../ucp/2.1/guides/install/system-requirements.md)
+[Learn more about the Docker Datacenter system requirements](../ucp/2.1/guides/admin/install/system-requirements.md)
 
 
 ### Step 2: Install CS Docker Engine
@@ -114,5 +114,5 @@ by UCP.
 
 ## Where to go next
 
-* [Deploy an application](../ucp/2.1/guides/applications/index.md)
-* [Considerations for high availability](../ucp/2.1/guides/configure/high-availability.md)
+* [Scale your UCP cluster](../ucp/2.1/guides/admin/configure/scale-your-cluster.md)
+* [Deploy an application](../ucp/2.1/guides/user/services/index.md)

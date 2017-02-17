@@ -68,8 +68,8 @@ Docker from the repository.
     ```
 
 2.  **Optional**: Enable the **testing** repository. You can enable it alongside
-    the stable repository. Do not use unstable repositories on on production
-    systems or for non-testing workloads.
+    the stable repository. **Do not use unstable repositories on on production
+    systems or for non-testing workloads.**
 
     > **Warning**: If you have both stable and unstable repositories enabled,
     > updating without specifying a version in the `zypper install` or

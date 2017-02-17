@@ -13,7 +13,7 @@ on Docker and AWS best-practices. It is based on
 [Docker for AWS](https://beta.docker.com/docs/) and currently should be used
 for evaluation purposes only.
 
-![ucp.png](../images/d4a_ddc_arch.png)
+![ddc_aws.svg](/images/ddc_aws.svg)
 
 ## How it Works
 
@@ -92,6 +92,34 @@ Docker Datacenter Password
 Docker Datacenter License in JSON format or an S3 URL to download it. You can
 get a trial license [here](https://store.docker.com/bundles/docker-datacenter)
 
+#### EnableSystemPrune
+
+Enable if you want Docker for AWS to automatically cleanup unused space on your swarm nodes.
+
+When enabled, `docker system prune` will run staggered every day, starting at 1:42AM UTC on both workers and managers. The prune times are staggered slightly so that not all nodes will be pruned at the same time. This limits resource spikes on the swarm.
+
+Pruning removes the following:
+- All stopped containers
+- All volumes not used by at least one container
+- All dangling images
+- All unused networks
+
+#### EnableCloudWatchLogs
+Enable if you want Docker to send your container logs to CloudWatch. ("yes", "no") Defaults to yes.
+
+#### WorkerDiskSize
+Size of Workers's ephemeral storage volume in GiB (20 - 1024).
+
+#### WorkerDiskType
+Worker ephemeral storage volume type ("standard", "gp2").
+
+#### ManagerDiskSize
+Size of Manager's ephemeral storage volume in GiB (20 - 1024)
+
+#### ManagerDiskType
+Manager ephemeral storage volume type ("standard", "gp2")
+
+
 
 ## Installation
 
@@ -134,6 +162,11 @@ run the command directly using it.
   ParameterKey=ManagerSize,ParameterValue=<MANAGER_SIZE> \
   ParameterKey=DDCUsernameSet,ParameterValue=<DDC_USERNAME> \
   ParameterKey=DDCPasswordSet,ParameterValue=<DDC_PASSWORD> \
+  ParameterKey=EnableSystemPrune,ParameterValue=<YES OR NO> \
+  ParameterKey=ManagerDiskSize,ParameterValue=<MANAGERS_DISK_SIZE> \
+  ParameterKey=ManagerDiskType,ParameterValue=<MANAGERS_DISK_TYPE> \
+  ParameterKey=WorkerDiskSize,ParameterValue=<WORKERS_DISK_SIZE> \
+  ParameterKey=WorkerDiskType,ParameterValue=<WORKERS_DISK_TYPE> \
   ParameterKey=License,ParameterValue=<YOUR_DDC_LICENSE_S3_URL> \
   --template-url "{{ template_url }}"
   ```

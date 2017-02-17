@@ -9,14 +9,29 @@ title: Docker for Windows Release notes
 Here are the main improvements and issues per release, starting with the current
 release. The documentation is always updated for each release.
 
-For system requirements, please see the Getting Started topic on [What to know
-before you install](index.md#what-to-know-before-you-install).
+For system requirements, please see 
+[What to know before you install](install.md#what-to-know-before-you-install).
 
 Release notes for _stable_ and _beta_ releases are listed below. You can learn
 about both kinds of releases, and download stable and beta product installers at
-[Download Docker for Windows](index.md#download-docker-for-windows).
+[Download Docker for Windows](install.md#download-docker-for-windows).
 
 ## Stable Release Notes
+
+### Docker for Windows 1.13.1, 2017-02-09 (stable)
+
+**Upgrades**
+
+- [Docker 1.13.1](https://github.com/docker/docker/releases/tag/v1.13.1)
+- [Docker Compose 1.11.1](https://github.com/docker/compose/releases/tag/1.11.1)
+- Linux kernel 4.9.8
+
+**Bug fixes and minor changes**
+
+- Add link to experimental features
+- New 1.13 cancellable operations should now be properly handled by the Docker for desktop
+- Various typos fixes
+- Fix in Hyper-V VM setup (should fix `ObjectNotFound` errors)
 
 ### Docker for Windows 1.13.0, 2017-01-19 (stable)
 

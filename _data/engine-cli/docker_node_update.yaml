@@ -15,3 +15,4 @@ options:
   description: Remove a node label if exists
 - option: role
   description: Role of the node (worker/manager)
+

@@ -50,8 +50,8 @@ For more information on configuring Swarm for TLS, see the [Overview Docker Swar
 ### Network access control
 
 Production networks are complex, and usually locked down so that only allowed
-traffic can flow on the network. The list below shows the network ports that
-the different components of a Swam cluster listen on. You should use these to
+traffic can flow on the network. The list below shows the network ports and protocols
+that the different components of a Swam cluster listen on. You should use these to
 configure your firewalls and other network access control lists.
 
 - **Swarm manager.**
@@ -72,6 +72,7 @@ configure your firewalls and other network access control lists.
     - **Inbound 7946/udp** Allows for discovering other container networks.
     - **Inbound `<store-port>`/tcp** Network key-value store service port.
     - **4789/udp** For the container overlay network.
+    - **ESP packets** For encrypted overlay networks.
 
 
 If your firewalls and other network devices are connection state aware, they

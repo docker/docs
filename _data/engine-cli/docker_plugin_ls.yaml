@@ -6,6 +6,9 @@ usage: docker plugin ls [OPTIONS]
 pname: docker plugin
 plink: docker_plugin.yaml
 options:
+- option: filter
+  shorthand: f
+  description: Provide filter values (e.g. 'enabled=true')
 - option: format
   description: Pretty-print plugins using a Go template
 - option: no-trunc
@@ -15,3 +18,4 @@ options:
   shorthand: q
   default_value: "false"
   description: Only display plugin IDs
+
