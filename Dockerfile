@@ -8,4 +8,4 @@ ONBUILD RUN git checkout v1.12
 
 ONBUILD COPY . /usr/src/app
 
-CMD bundle exec jekyll serve -d /_site --watch -H 0.0.0.0 -P 4000
+CMD bundle update && bundle exec jekyll serve -d /_site --watch -H 0.0.0.0 -P 4000
