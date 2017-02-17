@@ -33,10 +33,12 @@ be disconnected.
 
 Additionally, if UCP is not configured for high availability, you will be
 temporarily unable to:
+
 * Log in to the UCP Web UI
 * Perform CLI operations using existing client bundles
 
 To minimize the impact of the backup policy on your business, you should:
+
 * Configure UCP for high availability. This allows load-balancing user requests
 across multiple UCP manager nodes.
 * Schedule the backup to take place outside business hours.
@@ -46,7 +48,7 @@ across multiple UCP manager nodes.
 The example below shows how to create a backup of a UCP manager node and
 verify its contents:
 
-```bash
+```none
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
@@ -61,7 +63,7 @@ $ tar --list -f /tmp/backup.tar
 A backup file may optionally be encrypted using a passphrase, as in the
 following example:
 
-```bash
+```none
 # Create a backup, encrypt it, and store it on /tmp/backup.tar
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
@@ -77,12 +79,14 @@ $ gpg --decrypt /tmp/backup.tar | tar --list
 The restore command can be used to create a new UCP cluster from a backup file.
 After the restore operation is complete, the following data will be recovered
 from the backup file:
+
 * Users, teams and permissions.
 * All UCP configuration options available under `Admin Settings`, such as the
 DDC subscription license, scheduling options, Content Trust and authentication
 backends.
 
 There are two ways to restore a UCP cluster:
+
 * On a manager node of an existing swarm, which is not part of a UCP
 installation. In this case, a UCP cluster will be restored from the backup.
 * On a docker engine that is not participating in a swarm. In this case, a new
@@ -94,7 +98,7 @@ first uninstall UCP from the cluster by using the `uninstall-ucp` command
 The example below shows how to restore a UCP cluster from an existing backup
 file, presumed to be located at `/tmp/backup.tar`:
 
-```bash
+```none
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
   {{ page.docker_image }} restore < /tmp/backup.tar
@@ -103,7 +107,7 @@ $ docker run --rm -i --name ucp \
 If the backup file is encrypted with a passphrase, you will need to provide the
 passphrase to the restore operation:
 
-```bash
+```none
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock  \
   {{ page.docker_image }} restore --passphrase "secret" < /tmp/backup.tar
@@ -113,7 +117,7 @@ The restore command may also be invoked in interactive mode, in which case the
 backup file should be mounted to the container rather than streamed through
 stdin:
 
-```bash
+```none
 $ docker run --rm -i --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /tmp/backup.tar:/config/backup.tar \
