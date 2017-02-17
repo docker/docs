@@ -4,7 +4,7 @@ keywords: docker, documentation, about, technology, understanding, enterprise, h
 redirect_from:
 - /docker-trusted-registry/cse-prior-release-notes/
 - /docker-trusted-registry/cs-engine/release-notes/prior-release-notes/
-- - /cs-engine/release-notes/prior-release-notes/
+- /cs-engine/release-notes/prior-release-notes/
 title: Release notes archive for Commercially Supported Docker Engine.
 ---
 
