@@ -135,6 +135,7 @@ defaults:
       hide_from_sitemap: true
       ucp_version: "2.0"
       dtr_version: "2.1"
+      docker_image: "docker/ucp:2.0.3"
   -
     scope:
       path: "datacenter/ucp/1.1"
