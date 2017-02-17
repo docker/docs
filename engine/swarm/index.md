@@ -40,7 +40,7 @@ run. When you scale up or down, the swarm manager automatically adapts by
 adding or removing tasks to maintain the desired state.
 
 * **Desired state reconciliation:** The swarm manager node constantly monitors
-the cluster state and reconciles any differences between the actual state your
+the cluster state and reconciles any differences between the actual state and your
 expressed desired state. For example, if you set up a service to run 10
 replicas of a container, and a worker machine hosting two of those replicas
 crashes, the manager will create two new replicas to replace the replicas that
