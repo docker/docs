@@ -12,13 +12,13 @@ For this sample, we will create a sample `dotnet core web application` using the
 
 # Create the Docker Compose application
 
-1. Create an empty directory named `/app` under the root and navigate into it.
+1. Create a directory called `/app` under root.
 
     This directory will be the context of your docker-compose project. For [Docker for Windows](https://docs.docker.com/docker-for-windows/#/shared-drives) and [Docker for Mac](https://docs.docker.com/docker-for-mac/#/file-sharing), you have to set up file sharing for the volume that you need to map. 
 
 1. Within your directory, use the `aspnetcore-build` Docker image to generate a sample web application within the container and into your host machine under the `/app` directory:
 
-        docker run -v /app:/app microsoft/aspnetcore-build:lts /bin/bash -c "cd app && dotnet new -t web"
+        docker run -v /app:/app --workdir /app microsoft/aspnetcore-build:lts dotnet new -t web
 
     >**Note**: If running in Docker for Windows, make sure to add the necessary `C:/` prefix to the host mapped folder and that you are running on Linux containers mode.
 
@@ -33,7 +33,7 @@ For this sample, we will create a sample `dotnet core web application` using the
         RUN chmod +x ./entrypoint.sh
         CMD /bin/bash ./entrypoint.sh
 
-    This file defines how to build the web app image. It will use the [microsoft/dotnet](https://hub.docker.com/r/microsoft/dotnet/), map the volume with the generated code, restore the dependencies, build the project and expose port 80. After that, it will call an `entrypoint` script that we will create in the next step.
+    This file defines how to build the web app image. It will use the [microsoft/aspnetcore-build](https://hub.docker.com/r/microsoft/aspnetcore-build/), map the volume with the generated code, restore the dependencies, build the project and expose port 80. After that, it will call an `entrypoint` script that we will create in the next step.
 
 1. The previous `Dockerfile` makes use of an entrypoint to your webapp Docker image. Create this script in a file called `entrypoint.sh` and paste the contents below.
 
