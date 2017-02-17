@@ -39,17 +39,21 @@ command creates a backup of DTR:
 
 * Configurations,
 * Repository metadata,
+* Access control,
+* Notary data,
+* Scan results,
 * Certificates and keys used by DTR.
 
-These files are added to a tar archive, and the result is streamed to stdout.
+This data is added to a tar archive, and the result is streamed to stdout. This
+is done while DTR is running without shutting down any containers.
 
 Things DTR's backup command doesn't back up:
 
-* The image scanning database (if using image scanning)
+* The vulnerability database (if using image scanning)
 * Image contents
 * Users, orgs, teams
 
-There is no way to back up the image scanning database. You can re-download it
+There is no way to back up the vulnerability database. You can re-download it
 after restoring or re-apply your offline tar update if offline.
 
 The backup command does not create a backup of Docker images. You should
