@@ -197,6 +197,9 @@ it in as an environment variable using the same approach as for the backup comma
 $ read -sp 'ucp password: ' PASS; UCP_PASSWORD=$PASS docker run -i --rm -e UCP_PASSWORD docker/dtr restore ...
 ```
 
+After you successfully restore DTR, you can join new replicas the same way you
+would after a fresh installation.
+
 ## Where to go next
 
 * [Set up high availability](configure/set-up-high-availability.md)
