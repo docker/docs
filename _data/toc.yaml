@@ -1183,6 +1183,8 @@ manuals:
           title: Use a load balancer
         - path: /datacenter/ucp/2.1/guides/admin/configure/add-labels-to-cluster-nodes/
           title: Add labels to cluster nodes
+        - path: /datacenter/ucp/2.1/guides/admin/configure/add-sans-to-cluster/
+          title: Add SANs to cluster certificates
         - path: /datacenter/ucp/2.1/guides/admin/configure/store-logs-in-an-external-system/
           title: Store logs in an external system
         - path: /datacenter/ucp/2.1/guides/admin/configure/restrict-services-to-worker-nodes/
