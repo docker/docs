@@ -48,7 +48,7 @@ This approach will create a new VPC, subnets, gateways and everything else that 
 All you need to do it run the CloudFormation template, answer some questions, and you are good to go.
 
 ### Install with an Existing VPC
-If you need to install Docker for AWS with a VPC that you have already setup, there are a few extra steps that you need to do before you can get started.
+If you need to install Docker for AWS with a VPC that you have already setup, there are a few extra steps that you need to do before you can get started. See [recommended VPC and Subnet setup](faqs.md#recommended-vpc-and-subnet-setup) for more details.
 
 1. Pick a VPC in a region you want to use.
 
@@ -57,47 +57,6 @@ If you need to install Docker for AWS with a VPC that you have already setup, th
 3. You need to have 3 different subnets, ideally each in their own availability zone. If you are running in a region where you only have 2 Availability Zones, you will need to add more than one subnet into one of the availability zones. For production deployments we recommend only deploying to regions that have 3 or more Availability Zones.
 
 4. When you launch the docker for AWS CloudFormation stack, make sure you use the one for existing VPC's. This template will prompt you for the VPC and subnets that you want to use for Docker for AWS.
-
-#### Subnet Note:
-If you are using the `10.0.0.0/16` CIDR in your VPC. When you create a docker network, you will need to make sure you pick a subnet (using `docker network create —subnet` option) that doesn't conflict with the `10.0.0.0` network.
-
-
-#### Recommended VPC and Subnet setup.
-
-##### VPC
-
-* **CIDR:** 172.31.0.0/16
-* **DNS hostnames:** yes
-* **DNS resolution:** yes
-* **DHCP Option Set:** DHCP Options (Below)
-
-##### Internet Gateway
-* **VPC:** VPC (above)
-
-##### DHCP Option Set
-
-* **domain-name:** ec2.internal
-* **domain-name-servers:** AmazonProvidedDNS
-
-##### Subnet1
-* **CIDR:** 172.31.16.0/20
-* **Auto-assign Public IP:** yes
-* **Availability-Zone:** A
-
-##### Subnet2
-* **CIDR:** 172.31.32.0/20
-* **Auto-assign Public IP:** yes
-* **Availability-Zone:** B
-
-##### Subnet3
-* **CIDR:** 172.31.0.0/20
-* **Auto-assign Public IP:** yes
-* **Availability-Zone:** C
-
-##### Route table
-* **Destination CIDR Block:** 0.0.0.0/0
-* **Subnets:** Subnet1, Subnet2, Subnet3
-
 
 ## Prerequisites
 
