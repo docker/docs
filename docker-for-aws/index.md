@@ -38,7 +38,6 @@ using CloudFormation. For more about stable and beta channels, see the
   </tr>
   <tr valign="top">
   <td width="50%">
-  {{aws_blue_vpc_latest}}
   </td>
   <td width="50%">
   {{aws_blue_vpc_edge}}
