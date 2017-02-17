@@ -501,40 +501,6 @@ accessible to linked services. Only the internal port can be specified.
      - "3000"
      - "8000"
 
-### extends
-
-Extend another service, in the current file or another, optionally overriding
-configuration.
-
-You can use `extends` on any service together with other configuration keys.
-The `extends` value must be a dictionary defined with a required `service`
-and an optional `file` key.
-
-    extends:
-      file: common.yml
-      service: webapp
-
-The `service` the name of the service being extended, for example
-`web` or `database`. The `file` is the location of a Compose configuration
-file defining that service.
-
-If you omit the `file` Compose looks for the service configuration in the
-current file. The `file` value can be an absolute or relative path. If you
-specify a relative path, Compose treats it as relative to the location of the
-current file.
-
-You can extend a service that itself extends another. You can extend
-indefinitely. Compose does not support circular references and `docker-compose`
-returns an error if it encounters one.
-
-For more on `extends`, see the
-[the extends documentation](../extends.md#extending-services).
-
-> **Note:** This option is not yet supported when
-> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
-> with a (version 3) Compose file. Use `docker-compose config` to generate a
-> configuration with all `extends` options resolved, and deploy from that.
-
 ### external_links
 
 Link to containers started outside this `docker-compose.yml` or even outside
