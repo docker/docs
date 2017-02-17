@@ -156,6 +156,7 @@ Linux:
    [SuSE](installation/linux/suse.md), and many others.
 
 Microsoft Windows:
+
  - Windows Server 2016
  - Windows 10
 
