@@ -4,13 +4,10 @@ keywords: docker, registry, high-availability, backup, recovery
 title: DTR backups and recovery
 ---
 
-DTR relies on consensus to operate and if it loses consensus permanently
-and the replica that failed can't be brought back to life, the only
-option is to restore from backups. This is why it's very important to perform
-periodic backups. Note that backups are tied to specific DTR versions and work
-best with those DTR versions. You can backup/restore across patch versions
-at your own risk, but not across minor versions as those require more complex
-migrations.
+DTR replicas rely on having a majority available at any given time for writes to
+succeed. Therefore if a majority of replicas are permanently lost, the only way
+to restore DTR to a working state is to recover from backups. This is why it's
+very important to perform periodic backups.
 
 ## DTR data persistence
 
@@ -118,6 +115,55 @@ of the tar file created:
 $ tar -tf /tmp/backup.tar
 ```
 
+The structure of the archive should look something like this:
+
+```none
+dtr-backup-v2.2.1/
+dtr-backup-v2.2.1/rethink/
+dtr-backup-v2.2.1/rethink/events/
+dtr-backup-v2.2.1/rethink/events/0
+dtr-backup-v2.2.1/rethink/events/1
+dtr-backup-v2.2.1/rethink/events/2
+dtr-backup-v2.2.1/rethink/user_settings/
+dtr-backup-v2.2.1/rethink/webhooks/
+dtr-backup-v2.2.1/rethink/properties/
+dtr-backup-v2.2.1/rethink/properties/0
+...
+dtr-backup-v2.2.1/rethink/properties/50
+dtr-backup-v2.2.1/rethink/properties/51
+dtr-backup-v2.2.1/rethink/properties/52
+dtr-backup-v2.2.1/rethink/repositories/
+dtr-backup-v2.2.1/rethink/repositories/0
+dtr-backup-v2.2.1/rethink/blobs/
+dtr-backup-v2.2.1/rethink/blobs/0
+dtr-backup-v2.2.1/rethink/blobs/1
+dtr-backup-v2.2.1/rethink/blobs/2
+dtr-backup-v2.2.1/rethink/blobs/3
+dtr-backup-v2.2.1/rethink/blobs/4
+dtr-backup-v2.2.1/rethink/blobs/5
+dtr-backup-v2.2.1/rethink/blobs/6
+dtr-backup-v2.2.1/rethink/manifests/
+dtr-backup-v2.2.1/rethink/manifests/0
+dtr-backup-v2.2.1/rethink/namespace_team_access/
+dtr-backup-v2.2.1/rethink/repository_team_access/
+dtr-backup-v2.2.1/rethink/tuf_files/
+dtr-backup-v2.2.1/rethink/layers/
+dtr-backup-v2.2.1/rethink/tags/
+dtr-backup-v2.2.1/rethink/tags/0
+dtr-backup-v2.2.1/rethink/private_keys/
+dtr-backup-v2.2.1/rethink/blob_repository/
+dtr-backup-v2.2.1/rethink/blob_repository/0
+dtr-backup-v2.2.1/rethink/blob_repository/1
+dtr-backup-v2.2.1/rethink/blob_repository/2
+dtr-backup-v2.2.1/rethink/blob_repository/3
+dtr-backup-v2.2.1/rethink/blob_repository/4
+dtr-backup-v2.2.1/rethink/blob_repository/5
+dtr-backup-v2.2.1/rethink/blob_repository/6
+dtr-backup-v2.2.1/rethink/content_caches/
+dtr-backup-v2.2.1/rethink/client_tokens/
+dtr-backup-v2.2.1/rethink/client_tokens/0
+```
+
 To really test that the backup works, you must make a copy of your UCP cluster
 by backing it up and restoring it onto separate machines. Then you can restore
 DTR there from your backup and verify that it has all the data you expect to
@@ -127,6 +173,11 @@ see.
 
 You can restore a DTR node from a backup using the `restore` command.
 
+Note that backups are tied to specific DTR versions and work
+best with those DTR versions. You can backup/restore across patch versions
+at your own risk, but not across minor versions as those require more complex
+migrations.
+
 Before restoring DTR, make sure that you are restoring it on the same UCP
 cluster or you've also restored UCP using its restore command. DTR does not
 manage users, orgs or teams so if you try to
@@ -135,13 +186,14 @@ repositories will be associated with users that don't exist and it will appear
 as if the restore operation didn't work.
 
 Note that to restore DTR, you must first remove any left over containers from
-the previous installation.
+the previous installation. To do this, see the [uninstall
+documentation](../install/uninstall.md).
 
 The restore command performs a fresh installation of DTR, and reconfigures it with
-the configuration created during a backup. The command starts by installing DTR,
-restores the configurations from the
-backup and then restores the repository metadata. All install time flags are the same
-for restore and apply the same way they would to a new installation.
+the configuration created during a backup. The command starts by installing DTR.
+Then it restores the configurations from the backup and then restores the
+repository metadata. Finally, it applies all of the configs specified as flags to
+the restore command.
 
 After restoring DTR, you must make sure that it's configured to use the same
 storage backend where it can find the image data. If the image data was backed
