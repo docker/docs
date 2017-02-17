@@ -9,7 +9,7 @@ Docker UCP is designed for scaling horizontally as your applications grow in
 size and usage. You can add or remove nodes from the UCP cluster to make it
 scale to your needs.
 
-![](../../images/scale-your-cluster-1.svg)
+![](../../images/scale-your-cluster-0.svg)
 
 Since UCP leverages the clustering functionality provided by Docker Engine,
 you use the [docker swarm join](/engine/swarm/swarm-tutorial/add-nodes.md)
@@ -47,7 +47,7 @@ the **Resources** page, and go to the **Nodes** section.
 
 Click the **Add Node button** to add a new node.
 
-![](../../images/scale-your-cluster-2.png){: .with-border}
+![](../../../../../images/try-ddc-3.png){: .with-border}
 
 Check the 'Add node as a manager' option if you want to add the node as manager.
 Also, set the 'Use a custom listen address' option to specify the IP of the
