@@ -4,6 +4,8 @@ keywords: fig, composition, compose version 1, docker
 redirect_from:
 - /compose/yml
 title: Compose file version 1 reference
+toc_max: 4
+toc_min: 1
 ---
 
 These topics describe version 1 of the Compose file format. This is the oldest
