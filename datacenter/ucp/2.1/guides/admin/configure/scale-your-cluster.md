@@ -56,7 +56,7 @@ host that you'll be joining to the cluster.
 Then you can copy the command displayed, use ssh to **log into the host** that
 you want to join to the cluster, and **run the command** on that host.
 
-![](../../images/scale-your-cluster-3.png){: .with-border}
+![](../../images/scale-your-cluster-2.png){: .with-border}
 
 After you run the join command in the node, the node starts being displayed
 in UCP.
@@ -72,7 +72,7 @@ so that it is:
 * Drained: the node won't receive new tasks. Existing tasks are stopped and
 replica tasks are launched in active nodes.
 
-![](../../images/scale-your-cluster-4.png){: .with-border}
+![](../../images/scale-your-cluster-3.png){: .with-border}
 
 If you're load-balancing user requests to UCP across multiple manager nodes,
 when demoting those nodes into workers, don't forget to remove them from your
