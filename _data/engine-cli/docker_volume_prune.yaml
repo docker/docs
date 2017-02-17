@@ -9,3 +9,4 @@ options:
   shorthand: f
   default_value: "false"
   description: Do not prompt for confirmation
+

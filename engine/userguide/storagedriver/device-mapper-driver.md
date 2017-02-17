@@ -231,7 +231,7 @@ assumes that the Docker daemon is in the `stopped` state.
     $ pvcreate /dev/xvdf
     ```
 
-4.  Create a 'docker' volume group.
+4.  Create a `docker` volume group.
 
     ```bash
     $ vgcreate docker /dev/xvdf
@@ -260,7 +260,7 @@ assumes that the Docker daemon is in the `stopped` state.
     $ vi /etc/lvm/profile/docker-thinpool.profile
     ```
 
-8.  Specify 'thin_pool_autoextend_threshold' value.
+8.  Specify `thin_pool_autoextend_threshold` value.
 
     The value should be the percentage of space used before `lvm` attempts
     to autoextend the available space (100 = disabled).
@@ -271,7 +271,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
 9.  Modify the `thin_pool_autoextend_percent` for when thin pool autoextension occurs.
 
-    The value's setting is the perentage of space to increase the thin pool (100 =
+    The value's setting is the percentage of space to increase the thin pool (100 =
     disabled)
 
     ```none
@@ -358,7 +358,7 @@ assumes that the Docker daemon is in the `stopped` state.
 
 After you start the Docker daemon, ensure you monitor your thin pool and volume
 group free space. While the volume group will auto-extend, it can still fill
-up. To monitor logical volumes, use `lvs` without options or `lvs -a` to see tha
+up. To monitor logical volumes, use `lvs` without options or `lvs -a` to see the
 data and metadata sizes. To monitor volume group free space, use the `vgs` command.
 
 Logs can show the auto-extension of the thin pool when it hits the threshold, to
@@ -420,7 +420,7 @@ diffs between image layers and containers. Docker 1.10 and later no longer
 matches image layer IDs with directory names in `/var/lib/docker`. However,
 there are two key directories. The `/var/lib/docker/devicemapper/mnt` directory
  contains the mount points for image and container layers. The
-`/var/lib/docker/devicemapper/metadata`directory contains one file for every
+`/var/lib/docker/devicemapper/metadata` directory contains one file for every
 image layer and container snapshot. The files contain metadata about each
 snapshot in JSON format.
 
@@ -576,7 +576,7 @@ disk partition.
 
     Your volume group may use a different name.
 
-2.  Extend the `data` logical volume(LV) `vg-docker/data`
+2.  Extend the `data` logical volume (LV) `vg-docker/data`
 
     ```bash
     $ sudo lvextend  -l+100%FREE -n vg-docker/data
@@ -652,7 +652,7 @@ Each time a container updates existing data for the first time, the
 copies the data from the image snapshot to the container's snapshot. This
 process can have a noticeable impact on container performance.
 
-All copy-on-write operations have a 64KB granularity. As a results, updating
+All copy-on-write operations have a 64KB granularity. As a result, updating
 32KB of a 1GB file causes the driver to copy a single 64KB block into the
 container's snapshot. This has obvious performance advantages over file-level
 copy-on-write operations which would require copying the entire 1GB file into
@@ -685,7 +685,7 @@ There are several other things that impact the performance of the
 One final point, data volumes provide the best and most predictable
 performance. This is because they bypass the storage driver and do not incur
 any of the potential overheads introduced by thin provisioning and
-copy-on-write. For this reason, you should to place heavy write workloads on
+copy-on-write. For this reason, you should place heavy write workloads on
 data volumes.
 
 ## Related Information

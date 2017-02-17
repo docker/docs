@@ -5,3 +5,4 @@ long: List stacks
 usage: docker stack ls
 pname: docker stack
 plink: docker_stack.yaml
+

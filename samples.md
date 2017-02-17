@@ -1,6 +1,6 @@
 ---
 title: Samples
-skip-right-nav: true
+notoc: true
 ---
 
 ## Docker samples

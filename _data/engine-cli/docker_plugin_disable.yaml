@@ -9,3 +9,4 @@ options:
   shorthand: f
   default_value: "false"
   description: Force the disable of an active plugin
+

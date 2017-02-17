@@ -11,3 +11,4 @@ options:
 - option: pretty
   default_value: "false"
   description: Print the information in a human friendly format.
+
