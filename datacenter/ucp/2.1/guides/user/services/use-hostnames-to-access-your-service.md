@@ -12,18 +12,26 @@ cluster.
 ![](../../images/use-hostnames-to-access-your-service-1.svg)
 
 UCP takes this one step further and allows you to configure your HTTP or HTTPS
-services to make them available using hostnames.
+services to make them available using hostnames while sharing the same port.
+This simplifies configuration, with each service specifies the hostname or
+hostnames that it handles, giving your team fewer places to configure common
+options for routing.
+
 In this example we're going to deploy an NGINX service and make it available
-with the hostname `app.ucp.example.com`.
+with the hostname `app.ucp.example.com`. This guide uses the UCP web UI. The
+same functionality is [provided via the Docker CLI and API using
+labels](hrm-labels.md).
+
+## Configuring a service for the HTTP routing mesh using the UCP web UI
 
 Start by making sure that the
-[HTTP routing mesh service is enabled](../../admin/configure/use-domain-names-to-access-services.md)
-and you have access to the `ucp-hrm` network.
+[HTTP routing mesh service is enabled](../../admin/configure/use-domain-names-to-access-services.md),
+you have access to the `ucp-hrm` network, and that DNS records are configured.
 If you don't have administrator credentials, ask your system administrator to
 enable the HTTP routing mesh, and grant you access to the `ucp-hrm` network.
 
 Log in the **UCP web UI**, navigate to the **Services** page, and click
-**Create a service**. Then create an NGIN service with the following
+**Create a service**. Then create an NGINX service with the following
 configurations:
 
 | Field             | Value               |
@@ -31,6 +39,8 @@ configurations:
 | Service name      | nginx               |
 | Image name        | nginx               |
 | Internal port     | 80                  |
+| Protocol          | tcp                 |
+| Publish Mode      | ingress             |
 | Public port       | 8000                |
 | External scheme   | http://             |
 | Routing mesh host | app.ucp.example.com |
@@ -65,3 +75,9 @@ Now when you access `http://app.ucp.example.com` from your browser, you'll see
 the default NGINX page.
 
 ![](../../images/use-hostnames-to-access-your-service-5.png){: .with-border}
+
+## Next Steps
+
+Once you have configured the HTTP routing mesh with a simple service, you may
+want to explore other configuration options, including configuration using the
+Docker CLI or advanced options.
