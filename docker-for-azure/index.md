@@ -17,6 +17,7 @@ For more about stable and beta channels, see the [FAQs](/docker-for-azure/faqs.m
 <table style="width:100%">
   <tr>
     <th style="font-size: x-large; font-family: arial">Stable channel</th>
+    <th style="font-size: x-large; font-family: arial">Beta channel</th>
   </tr>
   <tr valign="top">
     <td width="50%">This deployment is fully baked and tested, and comes with the latest GA version of Docker Engine. <br><br>This is the best channel to use if you want a reliable platform to work with. <br><br>These releases follow a version schedule with a longer lead time than the betas, synched with Docker Engine releases and hotfixes.

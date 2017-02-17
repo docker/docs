@@ -8,12 +8,10 @@
 <a class="button darkblue-btn aws-deploy" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/edge/Docker.tmpl" data-rel="Beta-18" target="blank">Deploy Docker for AWS (beta)</a>
 {% endcapture %}
 {% capture aws_blue_vpc_latest %}
-<a class="button darkblue-btn aws-deploy" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/stable/Docker-no-vpc.tmpl" data-rel="Stable-1" target="blank">Deploy Docker for AWS (stable)</a>
-<p>uses your existing vpc</p>
+<a class="button darkblue-btn aws-deploy" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/stable/Docker-no-vpc.tmpl" data-rel="Stable-1" target="blank">Deploy Docker for AWS (stable)<br/><small>uses your existing VPC</small></a>
 {% endcapture %}
 {% capture aws_blue_vpc_edge %}
-<a class="button darkblue-btn aws-deploy" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/edge/Docker-no-vpc.tmpl" data-rel="Beta-18" target="blank">Deploy Docker for AWS (beta)</a>
-<p>uses your existing VPC</p>
+<a class="button darkblue-btn aws-deploy" href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=Docker&templateURL=https://editions-us-east-1.s3.amazonaws.com/aws/edge/Docker-no-vpc.tmpl" data-rel="Beta-18" target="blank">Deploy Docker for AWS (beta)<br/><small>uses your existing VPC</small></a>
 {% endcapture %}
 
 {% capture azure_blue_latest %}
