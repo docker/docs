@@ -40,7 +40,12 @@ using CloudFormation. For more about stable and beta channels, see the
 
 ## Deployment options
 
-There are two ways to deploy Docker for AWS, you can install with a pre-existing VPC, or you can have Docker for AWS create the VPC and everything that it needs. We recommend the second option, since it allows us to setup the environment the way in the best way possible. If you have to install in an existing VPC, that is fine, but it will require a little more work.
+There are two ways to deploy Docker for AWS:
+
+- With a pre-existing VPC
+- With a new VPC created by Docker
+
+We recommend having Docker for AWS create the VPC since it allows Docker to optimize the environment. Installing in an existing VPC requires more work.
 
 ### Create a new VPC
 This approach will create a new VPC, subnets, gateways and everything else that is needed in order to run Docker for AWS. It is the easiest way to get started, and requires the least amount of work.
@@ -48,15 +53,15 @@ This approach will create a new VPC, subnets, gateways and everything else that 
 All you need to do it run the CloudFormation template, answer some questions, and you are good to go.
 
 ### Install with an Existing VPC
-If you need to install Docker for AWS with a VPC that you have already setup, there are a few extra steps that you need to do before you can get started. See [recommended VPC and Subnet setup](faqs.md#recommended-vpc-and-subnet-setup) for more details.
+If you need to install Docker for AWS with an existing VPC, you need to do a few preliminary steps. See [recommended VPC and Subnet setup](faqs.md#recommended-vpc-and-subnet-setup) for more details.
 
 1. Pick a VPC in a region you want to use.
 
 2. Make sure the selected VPC is setup with an Internet Gateway, Subnets, and Route Tables
 
-3. You need to have 3 different subnets, ideally each in their own availability zone. If you are running in a region where you only have 2 Availability Zones, you will need to add more than one subnet into one of the availability zones. For production deployments we recommend only deploying to regions that have 3 or more Availability Zones.
+3. You need to have three different subnets, ideally each in their own availability zone. If you are running in a region with only two Availability Zones, you will need to add more than one subnet into one of the availability zones. For production deployments we recommend only deploying to regions that have three or more Availability Zones.
 
-4. When you launch the docker for AWS CloudFormation stack, make sure you use the one for existing VPC's. This template will prompt you for the VPC and subnets that you want to use for Docker for AWS.
+4. When you launch the docker for AWS CloudFormation stack, make sure you use the one for existing VPCs. This template will prompt you for the VPC and subnets that you want to use for Docker for AWS.
 
 ## Prerequisites
 
@@ -153,7 +158,7 @@ Elastic Load Balancers (ELBs) are set up to help with routing traffic to your sw
 
 Docker for AWS automatically configures logging to Cloudwatch for containers you run on Docker for AWS. A Log Group is created for each Docker for AWS install, and a log stream for each container.
 
-`docker logs` and `docker service logs` are not supported on Docker for AWS when using Cloudwatch for logs. Instead, you should check container logs in CloudWatch.
+The `docker logs` and `docker service logs` commands are not supported on Docker for AWS when using Cloudwatch for logs. Instead, check container logs in CloudWatch.
 
 ## System containers
 

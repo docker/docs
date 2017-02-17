@@ -46,10 +46,10 @@ This AWS documentation page will describe how you can tell if you have EC2-Class
 ### Possible fixes to the EC2-Classic region issue:
 There are a few work arounds that you can try to get Docker for AWS up and running for you.
 
-1. Create your own VPC and see [installing Docker for AWS with a pre-existing VPC](index.md#install-with-an-existing-vpc).
+1. Create your own VPC, then [install Docker for AWS with a pre-existing VPC](index.md#install-with-an-existing-vpc).
 2. Use a region that doesn't have **EC2-Classic**. The most common region with this issue is `us-east-1`. So try another region, `us-west-1`, `us-west-2`, or the new `us-east-2`. These regions will more then likely be setup with **EC2-VPC** and you will not longer have this issue.
 3. Create an new AWS account, all new accounts will be setup using **EC2-VPC** and will not have this problem.
-4. You can try and contact AWS support to convert your **EC2-Classic** account to a **EC2-VPC** account. For more information checkout the following answer for **"Q. I really want a default VPC for my existing EC2 account. Is that possible?"** on https://aws.amazon.com/vpc/faqs/#Default_VPCs
+4. Contact AWS support to convert your **EC2-Classic** account to a **EC2-VPC** account. For more information checkout the following answer for **"Q. I really want a default VPC for my existing EC2 account. Is that possible?"** on https://aws.amazon.com/vpc/faqs/#Default_VPCs
 
 ### Helpful links:
 - http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html
@@ -61,45 +61,45 @@ There are a few work arounds that you can try to get Docker for AWS up and runni
 
 ## Can I use my existing VPC?
 
-Yes, see [installing Docker for AWS with a pre-existing VPC](index.md#install-with-an-existing-vpc) for more info.
+Yes, see [install Docker for AWS with a pre-existing VPC](index.md#install-with-an-existing-vpc) for more info.
 
-## Recommended VPC and Subnet setup
+## Recommended VPC and subnet setup
 
 #### VPC
 
 * **CIDR:** 172.31.0.0/16
 * **DNS hostnames:** yes
 * **DNS resolution:** yes
-* **DHCP Option Set:** DHCP Options (Below)
+* **DHCP option set:** DHCP Options (Below)
 
-#### Internet Gateway
+#### Internet gateway
 * **VPC:** VPC (above)
 
-#### DHCP Option Set
+#### DHCP option set
 
 * **domain-name:** ec2.internal
 * **domain-name-servers:** AmazonProvidedDNS
 
 #### Subnet1
 * **CIDR:** 172.31.16.0/20
-* **Auto-assign Public IP:** yes
+* **Auto-assign public IP:** yes
 * **Availability-Zone:** A
 
 #### Subnet2
 * **CIDR:** 172.31.32.0/20
-* **Auto-assign Public IP:** yes
+* **Auto-assign public IP:** yes
 * **Availability-Zone:** B
 
 #### Subnet3
 * **CIDR:** 172.31.0.0/20
-* **Auto-assign Public IP:** yes
+* **Auto-assign public IP:** yes
 * **Availability-Zone:** C
 
 #### Route table
-* **Destination CIDR Block:** 0.0.0.0/0
+* **Destination CIDR block:** 0.0.0.0/0
 * **Subnets:** Subnet1, Subnet2, Subnet3
 
-##### Subnet Note:
+##### Subnet note:
 If you are using the `10.0.0.0/16` CIDR in your VPC. When you create a docker network, you will need to make sure you pick a subnet (using `docker network create —subnet` option) that doesn't conflict with the `10.0.0.0` network.
 
 ## Which AWS regions will this work with?

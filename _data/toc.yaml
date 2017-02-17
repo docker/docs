@@ -61,7 +61,7 @@ guides:
     - path: /docker-for-aws/deploy/
       title: Deploy your app
     - path: /docker-for-aws/persistent-data-volumes/
-      title: Persistent Data Volumes
+      title: Persistent data volumes
     - path: /docker-for-aws/faqs/
       title: FAQs
     - path: /docker-for-aws/opensource/
@@ -79,7 +79,7 @@ guides:
     - path: /docker-for-azure/deploy/
       title: Deploy your app
     - path: /docker-for-azure/persistent-data-volumes/
-      title: Persistent Data Volumes
+      title: Persistent data volumes
     - path: /docker-for-azure/faqs/
       title: FAQs
     - path: /docker-for-azure/opensource/
