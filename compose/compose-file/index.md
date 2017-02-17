@@ -5,6 +5,8 @@ redirect_from:
 - /compose/yml
 - /compose/compose-file-v3.md
 title: Compose file version 3 reference
+toc_max: 4
+toc_min: 1
 ---
 
 These topics describe version 3 of the Compose file format. This is the newest
@@ -34,8 +36,8 @@ As with `docker run`, options specified in the Dockerfile (e.g., `CMD`,
 specify them again in `docker-compose.yml`.
 
 You can use environment variables in configuration values with a Bash-like
-`${VARIABLE}` syntax - see [variable
-substitution](compose-file.md#variable-substitution) for full details.
+`${VARIABLE}` syntax - see
+[variable substitution](#variable-substitution) for full details.
 
 This section contains a list of all configuration options supported by a service
 definition in version 3.
@@ -263,7 +265,7 @@ resources:
 #### restart_policy
 
 Configures if and how to restart containers when they exit. Replaces
-[`restart`](compose-file.md#restart).
+[`restart`](compose-file-v2.md#cpushares-cpuquota-cpuset-domainname-hostname-ipc-macaddress-memlimit-memswaplimit-oomscoreadj-privileged-readonly-restart-shmsize-stdinopen-tty-user-workingdir).
 
 - `condition`: One of `none`, `on-failure` or `any` (default: `any`).
 - `delay`: How long to wait between restart attempts, specified as a
