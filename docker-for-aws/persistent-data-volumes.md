@@ -10,7 +10,7 @@ Cloudstor a volume plugin managed by Docker. It comes pre-installed and pre-conf
 
 ## Use Cloudstor
 
-After creating a swarm on Docker for AWS and SSHing into any of the managers, verify that Cloudstor is already installed and configured for the stack/resource group:
+After creating a swarm on Docker for AWS and connecting to any manager using SSH, verify that Cloudstor is already installed and configured for the stack/resource group:
 
 ```bash
 $ docker plugin ls

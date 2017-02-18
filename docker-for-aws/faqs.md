@@ -108,7 +108,7 @@ Docker for AWS should work with all regions except for AWS China, which is a lit
 
 ## How many Availability Zones does Docker for AWS use?
 
-Docker for AWS will dynamically decide the correct amount of Availability Zone's to use based on the region. In regions that support it, we will use 3 Availability Zones, and 2 for the rest of the regions. We recommend running production workloads only in regions that have at least 3 Availability Zones.
+Docker for AWS determines the correct amount of Availability Zone's to use based on the region. In regions that support it, we will use 3 Availability Zones, and 2 for the rest of the regions. We recommend running production workloads only in regions that have at least 3 Availability Zones.
 
 ## What do I do if I get `KeyPair error` on AWS?
 As part of the prerequisites, you need to have an SSH key uploaded to the AWS region you are trying to deploy to.

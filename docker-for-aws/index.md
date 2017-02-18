@@ -45,12 +45,12 @@ There are two ways to deploy Docker for AWS:
 - With a pre-existing VPC
 - With a new VPC created by Docker
 
-We recommend having Docker for AWS create the VPC since it allows Docker to optimize the environment. Installing in an existing VPC requires more work.
+We recommend allowing Docker for AWS to create the VPC since it allows Docker to optimize the environment. Installing in an existing VPC requires more work.
 
 ### Create a new VPC
-This approach will create a new VPC, subnets, gateways and everything else that is needed in order to run Docker for AWS. It is the easiest way to get started, and requires the least amount of work.
+This approach creates a new VPC, subnets, gateways and everything else needed in order to run Docker for AWS. It is the easiest way to get started, and requires the least amount of work.
 
-All you need to do it run the CloudFormation template, answer some questions, and you are good to go.
+All you need to do is run the CloudFormation template, answer some questions, and you are good to go.
 
 ### Install with an Existing VPC
 If you need to install Docker for AWS with an existing VPC, you need to do a few preliminary steps. See [recommended VPC and Subnet setup](faqs.md#recommended-vpc-and-subnet-setup) for more details.
