@@ -32,7 +32,7 @@ You can set up GC if you're an admin by hitting "Settings" in the UI then
 choosing "Garbage Collection".  By default, GC will be disabled, showing this
 screen:
 
-![](../../images/garbage-collection-1.png)
+![](../../images/garbage-collection-1.png){: .with-border}
 
 Here you can configure GC to run **until it's done** or **with a timeout**.
 The timeout ensures that your registry will be in read-only mode for a maximum
@@ -42,7 +42,7 @@ Select an option (either "Until done" or "For N minutes") and you'll have the
 option to configure GC to run via a cron job, with several default crons
 provided:
 
-![](../../images/garbage-collection-2.png)
+![](../../images/garbage-collection-2.png){: .with-border}
 
 You can also choose "Do not repeat" to disable the cron schedule entirely.
 
@@ -54,7 +54,7 @@ the schedule ("Save") or save the schedule *and* start GC immediately ("Save
 
 When GC runs the garbage collection settings page looks as follows:
 
-![](../../images/garbage-collection-3.png)
+![](../../images/garbage-collection-3.png){: .with-border}
 
 Note the global banner visible to all users, ensuring everyone knows that GC is
 running.
