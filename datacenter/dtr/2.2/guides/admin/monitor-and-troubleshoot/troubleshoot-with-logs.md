@@ -4,7 +4,7 @@ keywords: docker, registry, monitor, troubleshoot
 title: Troubleshoot Docker Trusted Registry
 ---
 
-## Troubleshooting overlay networks
+## Troubleshoot overlay networks
 
 High availability in DTR depends on having overlay networking working in UCP.
 To manually test that overlay networking is working in UCP run the following
@@ -20,7 +20,7 @@ You can also use any images that contain `sh` and `ping` for this test.
 
 If the second command succeeds, overlay networking is working.
 
-## Accessing rethinkdb directly
+## Access rethinkdb directly
 
 You can connect directly to the rethinkdb data store internal to DTR for
 troubleshooting. To do this, you can use this custom rethinkdb debugging
@@ -40,7 +40,7 @@ syntax](https://www.rethinkdb.com/docs/guide/javascript/) to execute rethinkdb q
 > r.db('dtr2').table('repositories')
 ```
 
-## Recovering from a lost replica
+## Recover from a lost replica
 
 When one of DTR's replicas is lost, the UI will start showing a warning that
 looks something like the following:
@@ -56,6 +56,8 @@ desired number of replicas. In this example you would run the following
 commands (and follow the prompts for the UCP connection parameters):
 
 ```none
-$ docker run --rm -it docker/dtr remove --ucp-insecure-tls --replica-id 59e4e9b0a254 --existing-replica-id 000000000000
-$ docker run --rm -it docker/dtr join --ucp-insecure-tls --existing-replica-id 000000000000
+$ docker run --rm -it docker/dtr remove \
+  --ucp-insecure-tls --replica-id 59e4e9b0a254 --existing-replica-id 000000000000
+$ docker run --rm -it docker/dtr join \
+  --ucp-insecure-tls --existing-replica-id 000000000000
 ```
