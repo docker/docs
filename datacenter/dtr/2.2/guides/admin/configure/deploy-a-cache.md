@@ -1,31 +1,50 @@
 ---
-title: Cache Docker images
-description: Learn how to configure DTR to have caching and making pulls faster.
+title: Configure your Docker Content Cache
+description: Learn how to configure DTR to have image caching and pull images faster.
 keywords: docker, registry, dtr, cache
 ---
 
-You can configure DTR to have multiple caches. Users can then configure their
-DTR user accounts to specify which cache to pull from. This way users can
-pull Docker images from a cache that is geographically closer to them or
-that allows them faster downloads.
+## What is Docker Content Cache
 
-## How DTR caches works
+Docker Content Cache is a service that is deployed separately from DTR, and
+can be configured to securely cache images from DTR. Users can configure
+their DTR user accounts to specify which cache to pull from. Then, when a
+user pulls from DTR, they will be redirected to pull from their chosen
+Content Cache. By deploying caches geographically closer to remote offices
+and low connectivity areas, users can benefit from faster pulls.
 
-You start by deploying one or more DTR caches.
+## Authentication and Freshness
+
+Pulling from Content Cache still enforces authentication, ensuring that
+images users don't have access to on DTR remain protected on the cache.
+In addition, pulling by tag still guarantees freshness of the image as DTR
+remains the source of truth for image manifests, avoiding problems with
+stale images.
+
+## Cache Chaining
+
+Here is an example of a DTR deployed with several Docker Content Caches.
 
 ![](../../images/cache-docker-images-1.svg)
 
-Since caches have to contact DTR for authorizing user requests, and requests
-are chained from one cache to the next until the request reaches DTR, you
-should avoid creating cache trees that have more than two levels. This can
-make the image pull slower than having no cache at all.
+Content Caches can be a cache for DTR and other caches, allowing for
+chained cache topologies like the one you see above.
 
-After you've deployed the caches, users can configure which cache to
-pull from on their DTR user profile page. This allows users to choose which
-cache to use for faster image pulls.
+When a user pulls from DTR, the request is redirected to a specific cache,
+and then the image is pulled through a route connected through its
+intermediaries, caching the image at each hop. Requests for the same image
+that redirect to a different cache but shares intermediate caches now
+benefit from warm caches.
 
-In this example, users can go to their DTR profile page, and configure their
-user account to use the US cache. Then, when using the
+However, there are caveats associated with this. You should avoid creating
+a topology that has chained caches of more than two levels as the total
+round trip time between the caches may become higher than the time saved
+from caching the image.
+
+## How it works
+
+After you've deployed the caches, user can configure which cache to
+pull from on their DTR user settings page. Then, when using the
 `docker pull <dtr-url>/<org>/<repository>` command to pull an image, the
 following happens:
 
@@ -33,25 +52,117 @@ following happens:
 request
 2. The Docker client requests the image manifest to DTR. This ensures that
 users will always pull the correct image, and not an outdated version
-3. The Docker client requests the layer blobs to DTR, which redirects the
-request to the cache configured by the user
+3. The Docker client requests the layer blobs to DTR, which becomes signed
+and redirected to the cache configured by the user
 4. If the blob exists on the cache it is sent to the user. Otherwise, the cache
 pulls it from DTR and sends it to the user
 
 When a user pushes an image, that image is only available in DTR. A cache
 will only store the image when a user tries to pull the image using that cache.
 
+## Configure the cache
 
-## Deploy a DTR cache
+Docker Content Cache is based on Docker Registry, and uses the same configuration
+file format.
+[Learn more about the configuration options](/registry/configuration.md).
 
-You can deploy a DTR cache on any host that has Docker installed. The only
-requirements are that:
+The DTR cache extends the Docker Registry configuration file format by
+introducing a new middleware called `downstream` that has three configuration
+options: `blobttl`, `upstreams`, and `cas`:
+
+```none
+# Settings that you would include in a
+# Docker Registry configuration file followed by
+
+middleware:
+  registry:
+      - name: downstream
+        options:
+          blobttl: 24h
+          upstreams:
+            - originhost: <Externally-reachable address for the origin registry>
+              upstreamhosts:
+                - <Externally-reachable address for upstream content cache A>
+                - <Externally-reachable address for upstream content cache B>
+          cas:
+            - <Absolute path to upstream content cache A certificate>
+            - <Absolute path to upstream content cache B certificate>
+```
+
+Below you can find the description for each Content Cache parameter.
+
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Required</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>
+      <code>blobttl</code>
+    </td>
+    <td>
+      no
+    </td>
+    <td>
+The TTL for blobs in the cache. This field takes a positive integer and an optional suffix indicating the unit of time. If
+this field is configured, "storage.delete.enabled" must be configured to true. Possible units are:
+      <ul>
+        <li><code>ns</code> (nanoseconds)</li>
+        <li><code>us</code> (microseconds)</li>
+        <li><code>ms</code> (milliseconds)</li>
+        <li><code>s</code> (seconds)</li>
+        <li><code>m</code> (minutes)</li>
+        <li><code>h</code> (hours)</li>
+      </ul>
+    If you omit the suffix, the system interprets the value as nanoseconds.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>cas</code>
+    </td>
+    <td>
+      no
+    </td>
+    <td>
+      A list of absolute paths to PEM-encoded CA certificates of upstream registries.
+    </td>
+  </tr>
+<tr>
+  <td>
+    <code>originhost</code>
+  </td>
+  <td>
+    yes
+  </td>
+  <td>
+      An externally-reachable address for the origin registry, as a fully qualified URL.
+  </td>
+</tr>
+<tr>
+  <td>
+    <code>upstreamhosts</code>
+  </td>
+  <td>
+    no
+  </td>
+  <td>
+    A list of externally-reachable addresses for upstream registries for cache chaining. If more than one host is specified, pulls from upstream content caches will be done in round-robin order.
+  </td>
+</tr>
+</table>
+
+## Deploying a simple Docker Content Cache
+
+You can deploy a Docker Content Cache on any host that has Docker installed.
+The only requirements are that:
 
 * Users need to have access to both DTR and the cache
 * The cache needs access to DTR
 
-Log into the host using ssh, and create a `config.yml` file with the following
-content:
+On the host where the cache will be deployed, create a `config.yml` file with
+the following content:
 
 ```
 version: 0.1
@@ -122,11 +233,11 @@ Click the **Try it out!** button to make the API call.
 
 ![](../../images/cache-docker-images-3.png){: .with-border}
 
-DTR knows about the cache we've created, so we just need to configure our DTR
-user settings to start using that cache.
+Now that DTR knows about the cache we've created, we just need to configure
+our DTR user settings to start using that cache.
 
 In the DTR web UI, navigate to your **user profile**, click the **Settings**
-tab, and change the **Content cache** settings to use the **region-us** cache.
+tab, and change the **Content Cache** settings to use the **region-us** cache.
 
 ![](../../images/cache-docker-images-4.png){: .with-border}
 
@@ -140,96 +251,135 @@ In the host where you've deployed the `region-us` cache, run:
 docker logs content-cache
 ```
 
+## Deploying a Docker Content Cache with TLS
 
-## Configure the cache
+In the previous step, we deployed Content Cache without TLS. While this is
+useful for testing, in production we will want to encrypt our connections with
+TLS.
 
-The DTR cache is based on Docker Registry, and uses the same configuration
-file format.
-[Learn more about the configuration options](/registry/configuration.md).
+### Configuring TLS
 
-The DTR cache extends the Docker Registry configuration file format by
-introducing a new middleware called `downstream` that has three configuration
-options: `blobttl`, `upstreams`, and `cas`:
+The configuration options for TLS is same as Docker Registry. [Learn more from
+the registry TLS docs](/registry/configuration.md#tls).
 
-```none
-# Settings that you would include in a
-# Docker Registry configuration file followed by
+Following the same instructions as the simple deployment, create a `config.yml`
+file with the following contents:
 
+```
+version: 0.1
+storage:
+  delete:
+    enabled: true
+  filesystem:
+    rootdirectory: /var/lib/registry
+http:
+  addr: :5000
+  tls:
+    certificate: /certs/content-cache-ca.pem
+    key: /certs/content-cache-key.pem
 middleware:
   registry:
       - name: downstream
         options:
           blobttl: 24h
           upstreams:
-            - originhost: <Externally-reachable address for the origin registry>
-              upstreamhosts:
-                - <Externally-reachable address for upstream content cache A>
-                - <Externally-reachable address for upstream content cache B>
+            - originhost: https://<dtr-url>
           cas:
-            - <Absolute path to upstream content cache A certificate>
-            - <Absolute path to upstream content cache B certificate>
+            - /certs/dtr-ca.pem
 ```
 
-Below you can find the description for each DTR cache-specific parameter.
+And assuming that you have a certificate at `/certs/content-cache.crt` and key
+at `/certs/content-cache.key` mounted on the Content Cache container, it will
+be now serving only HTTPS requests.
 
-<table>
-  <tr>
-    <th>Parameter</th>
-    <th>Required</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>
-      <code>blobttl</code>
-    </td>
-    <td>
-      no
-    </td>
-    <td>
-The TTL for blobs in the cache. This field takes a positive integer and an optional suffix indicating the unit of time. If
-this field is configured, "storage.delete.enabled" must be configured to true. Possible units are:
-      <ul>
-        <li><code>ns</code> (nanoseconds)</li>
-        <li><code>us</code> (microseconds)</li>
-        <li><code>ms</code> (milliseconds)</li>
-        <li><code>s</code> (seconds)</li>
-        <li><code>m</code> (minutes)</li>
-        <li><code>h</code> (hours)</li>
-      </ul>
-    If you omit the suffix, the system interprets the value as nanoseconds.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code>cas</code>
-    </td>
-    <td>
-      no
-    </td>
-    <td>
-      A list of absolute paths to PEM-encoded CA certificates of upstream registries.
-    </td>
-  </tr>
-<tr>
-  <td>
-    <code>originhost</code>
-  </td>
-  <td>
-    yes
-  </td>
-  <td>
-      An externally-reachable address for the origin registry, as a fully qualified URL.
-  </td>
-</tr>
-<tr>
-  <td>
-    <code>upstreamhosts</code>
-  </td>
-  <td>
-    no
-  </td>
-  <td>
-    A list of externally-reachable addresses for upstream registries for cache chaining. If more than one host is specified, pulls from upstream content caches will be done in round-robin order.
-  </td>
-</tr>
-</table>
+### Let's Encrypt
+
+Content Cache also supports using Let's Encrypt to automatically obtain a
+browser-trusted certificate.  For more information on Let's Encrypt, see
+[https://letsencrypt.org/how-it-works/](https://letsencrypt.org/how-it-works/)
+and the relevant section of the [registry configuration](/registry/configuration.md#letsencrypt).
+
+### Alternatives
+
+While rarely advisable, you may want to use self-signed certificates instead,
+or use your Content Cache in an insecure fashion. You will find instructions
+[here](/registry/insecure.md).
+
+## Deploying a chained Docker Content Caches with TLS
+
+If you have geographically distributed set of users, you can consider chaining
+Content Caches to increase pull speeds. There's no golden rule in deploying
+a Content Cache for any use case, so it's always best to benchmark the pull
+times in order to figure out the right configuration.
+
+> **Warning**: Too many levels of chaining may end up hurting your pull time
+if the round trip times add up to more than the time you saved by caching.
+
+### Configuring chaining
+
+When deploying each Content Cache, you have to configure it considering the
+next hop in the overall topology. In this example, we will deploy two Content
+Caches; `san-francisco` and `los-angeles`. `san-francisco` will be pulling
+directly from DTR, and `los-angeles` will pull from `san-francisco`.
+
+### Deploying `san-francisco`
+
+Following the same instructions as the simple deployment, create a `config.yml`
+file with the following contents:
+
+```
+version: 0.1
+storage:
+  delete:
+    enabled: true
+  filesystem:
+    rootdirectory: /var/lib/registry
+http:
+  addr: :5000
+  tls:
+    certificate: /certs/san-francisco-ca.pem
+    key: /certs/san-francisco-key.pem
+middleware:
+  registry:
+      - name: downstream
+        options:
+          blobttl: 24h
+          upstreams:
+            - originhost: https://<dtr-url>
+          cas:
+            - /certs/dtr-ca.pem
+```
+
+### Deploying `los-angeles`
+
+Following the same instructions as the simple deployment, create a `config.yml`
+file with the following contents:
+
+```
+version: 0.1
+storage:
+  delete:
+    enabled: true
+  filesystem:
+    rootdirectory: /var/lib/registry
+http:
+  addr: :5000
+  tls:
+    certificate: /certs/los-angeles-ca.pem
+    key: /certs/los-angeles-key.pem
+middleware:
+  registry:
+      - name: downstream
+        options:
+          blobttl: 24h
+          upstreams:
+            - originhost: https://<dtr-url>
+              upstreamhosts:
+                - https://<san-francisco-url>
+          cas:
+            - /certs/san-francisco-ca.pem
+```
+
+> **Gotcha**: Since `los-angeles` Content Cache does not need to talk to
+DTR directly, it only has to trust the CA certificates of its next hop,
+i.e. `san-francisco` Content Cache's CA certificate.
