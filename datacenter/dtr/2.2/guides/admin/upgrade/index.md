@@ -9,27 +9,31 @@ guarantees while upgrading between versions. We never support downgrading. We
 support upgrades according to the following rules:
 
 * When upgrading from one patch version to another you can skip patch versions
-  because no data migraiton is done for patch versions. Ex:
-    * 2.2.0 -> 2.2.1 OK
-    * 2.2.0 -> 2.2.2 OK
-    * 2.2.2 -> 2.2.1 NOT OK (no downgrade)
+  because no data migraiton is done for patch versions.
 * When upgrading between minor versions, you can't skip versions, but you can
   upgrade from any patch versions of the previous minor version to any patch
-  version of the current minor version. Ex:
-    * 2.1.0 -> 2.2.0 OK
-    * 2.1.1 -> 2.2.0 OK
-    * 2.1.2 -> 2.2.2 OK
-    * 2.0.1 -> 2.2.0 NOT OK (no skipping minor versions)
-    * 2.2.0 -> 2.1.0 NOT OK (no downgrade)
+  version of the current minor version.
 * When upgrading between major versions you also have to upgrade one major
   version at a time, but you have to upgrade to the earliest available minor
   version. We also strongly recommend upgrading to the latest minor/patch
-  version for your major version first. Ex.
-    * 1.4.3 -> 2.0.0 OK
-    * 1.4.3 -> 2.0.3 OK
-    * 1.4.1 -> 2.0.3 NOT RECOMMENDED
-    * 1.4.3 -> 2.1.0 NOT OK (no skipping minor versions)
-    * 2.0.0 -> 1.4.3 NOT OK (no downgrade)
+  version for your major version first.
+
+|From| To| Description| Supported|
+|:----|:---|:------------|----------|
+| 2.2.0 | 2.2.1 | patch upgrade | yes |
+| 2.2.0 | 2.2.2 | skip patch version | yes |
+| 2.2.2 | 2.2.1 | patch downgrade | no |
+| 2.1.0 | 2.2.0 | minor upgrade | yes |
+| 2.1.1 | 2.2.0 | minor upgrade | yes |
+| 2.1.2 | 2.2.2 | minor upgrade | yes |
+| 2.0.1 | 2.2.0 | skip minor version | no |
+| 2.2.0 | 2.1.0 | minor downgrade | no |
+| 1.4.3 | 2.0.0 | major upgrade | yes |
+| 1.4.3 | 2.0.3 | major upgrade | yes |
+| 1.4.3 | 3.0.0 | skip major version | no |
+| 1.4.1 | 2.0.3 | major upgrade from an old version | no |
+| 1.4.3 | 2.1.0 | major upgrade skipping minor version | no |
+| 2.0.0 | 1.4.3 | major downgrade | no |
 
 There may be at most a few seconds of interruption during the upgrade of a
 DTR cluster. Schedule the upgrade to take place outside business peak hours
