@@ -4,7 +4,7 @@ keywords: docker, registry, monitor, troubleshoot
 title: Troubleshoot Docker Trusted Registry
 ---
 
-<!-- TODO: review page for v2.2 -->
+## Troubleshooting overlay networks
 
 High availability in DTR depends on having overlay networking working in UCP.
 To manually test that overlay networking is working in UCP run the following
@@ -20,45 +20,20 @@ You can also use any images that contain `sh` and `ping` for this test.
 
 If the second command succeeds, overlay networking is working.
 
-## DTR doesn't come up after a Docker restart
+## Accessing rethinkdb directly
 
-This is a known issue with Docker restart policies when DTR is running on the same
-machine as a UCP controller. If this happens, you can simply restart the DTR replica
-from the UCP UI under "Applications". The best workaround right now is to not run
-DTR on the same node as a UCP controller.
+To perform operations against rethinkdb directly, one may use the following
+custom rethinkdb debugging tool. It connects to one of your rethinkdb servers as
+indicated by `$REPLICA_ID` and presents you with an interactive prompt for
+running rethinkdb queries. It must be run on the same machine as the replica
+it's connecting to.
 
-## Etcd refuses to start after a Docker restart
-
-If you see the following log message in etcd's logs after a DTR restart it means that
-your DTR replicas are on machines that don't have their clocks synchronized. Etcd requires
-synchronized clocks to function correctly.
-
-```
-2016-04-27 17:56:34.086748 W | rafthttp: the clock difference against peer aa4fdaf4c562342d is too high [8.484795885s > 1s]
+```none
+$ docker run --rm -it --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.2.0 $REPLICA_ID
 ```
 
-## Accessing the RethinkDB Admin UI
+You can use javascript syntax to execute rethinkdb queries like so:
 
- > Warning: This command will expose your database to the internet with no authentication. Use with caution.
-
-Run this on the UCP node that has a DTR replica with the given replica id:
-
-```
-docker run --rm -it --net dtr-br -p 9999:8080 svendowideit/ambassador dtr-rethinkdb-$REPLICA_ID 8080
-```
-
-Options to make this more secure:
-
-* Use `-p 127.0.0.1:9999:8080` to expose the admin UI only to localhost
-* Use an SSH tunnel in combination with exposing the port only to localhost
-* Use a firewall to limit which IPs are allowed to connect
-* Use a second proxy with TLS and basic auth to provide secure access over the Internet
-
-## Accessing etcd directly
-
-You can execute etcd commands on a UCP node hosting a DTR replica using etcdctl
-via the following docker command:
-
-```
-docker run --rm -v dtr-ca-$REPLICA_ID:/ca --net dtr-br -it --entrypoint /etcdctl docker/dtr-etcd:v2.2.4 --endpoint https://dtr-etcd-$REPLICA_ID.dtr-br:2379 --ca-file /ca/etcd/cert.pem --key-file /ca/etcd-client/key.pem --cert-file /ca/etcd-client/cert.pem
+```none
+> r.db('dtr2').table('repositories')
 ```
