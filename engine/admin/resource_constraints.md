@@ -97,7 +97,7 @@ and higher, you can also configure the
 
 The CFS is the Linux kernel CPU scheduler for normal Linux processes. Several
 runtime flags allow you to configure the amount of access to CPU resources your
-container has. When you use these settings, Docker modifies the settings for the
+container has. When you use these settings, Docker modifies the settings for 
 the container's cgroup on the host machine.
 
 | Option                | Description                 |
