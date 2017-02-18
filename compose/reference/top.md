@@ -2,6 +2,7 @@
 description: Displays the running processes.
 keywords: fig, composition, compose, docker, orchestration, cli, top
 title: docker-compose top
+notoc: true
 ---
 
 ```none

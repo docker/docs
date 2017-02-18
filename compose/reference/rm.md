@@ -2,6 +2,7 @@
 description: Removes stopped service containers.
 keywords: fig, composition, compose, docker, orchestration, cli,  rm
 title: docker-compose rm
+notoc: true
 ---
 
 ```
