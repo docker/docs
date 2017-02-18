@@ -1,0 +1,18 @@
+command: docker plugin upgrade
+short: Upgrade an existing plugin
+long: Upgrade an existing plugin
+usage: docker plugin upgrade [OPTIONS] PLUGIN [REMOTE]
+pname: docker plugin
+plink: docker_plugin.yaml
+options:
+- option: disable-content-trust
+  default_value: "true"
+  description: Skip image verification
+- option: grant-all-permissions
+  default_value: "false"
+  description: Grant all permissions necessary to run the plugin
+- option: skip-remote-check
+  default_value: "false"
+  description: |
+    Do not check if specified remote plugin matches existing plugin image
+

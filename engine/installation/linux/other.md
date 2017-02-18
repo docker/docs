@@ -10,7 +10,6 @@ distributions. These instructions are not regularly tested. Consider
 - [Installation on Arch Linux](/engine/installation/linux/archlinux.md)
 - [Installation on CRUX Linux](/engine/installation/linux/cruxlinux.md)
 - [Installation on Gentoo Linux](/engine/installation/linux/gentoolinux.md)
-- [Installation on Raspbian Linux](/engine/installation/linux/raspbian.md)
 
 ## Next steps
 

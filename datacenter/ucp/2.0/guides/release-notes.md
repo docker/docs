@@ -3,12 +3,46 @@ description: Release notes for Docker Universal Control Plane. Learn more about 
   changes introduced in the latest versions.
 keywords: Docker, UCP, Release notes, Versions
 title: UCP release notes
+redirect_from:
+- /ucp/release_notes/
 ---
 
 Here you can learn about new features, bug fixes, breaking changes and
 known issues for the latest UCP version.
 You can then use [the upgrade instructions](installation/upgrade.md), to
 upgrade your installation to the latest release.
+
+## Version 2.0.3
+
+(8 Feb 2017)
+
+**Bug Fixes**
+
+* Core
+  * Label-based access control now supported for volumes. Unlike other
+    resources controlled via label-based access control, a volume without a
+    label is accessible by all UCP users with Restricted Control or higher
+    default permissions.)
+  * Demoting a manager while in HA configuration no longer causes the `ucp-auth-api`
+  container to provide errors
+  * Improved the performance of joining new nodes or promoting nodes to UCP managers
+  * LDAP integration now supports iterating through group members to avoid
+  exceeding LDAP length limits
+  * UCP now detects if Docker is accessible on ports 2375-2376, and warns you to
+  reconfigure Docker Engine if that's the case
+
+* UI/UX
+  * The users page now allows filtering by active, inactive, and admin users
+  * Settings page now shows a list with the latest UCP versions that you can upgrade to
+  * Improved behavior of upgrading from the web UI to make it more consistent
+  with the behavior of upgrading through the CLI
+  * UI now correctly displays environment variables with values containing `=`
+
+* docker/ucp image
+  * Fixed a problem that caused the upgrade command to fail when upgrading a
+cluster using the HTTP routing mesh
+
+
 
 ## Version 2.0.2
 
@@ -29,7 +63,7 @@ could be used to perform unauthorized actions on the cluster
 These issues affect UCP version 2.0.1 and 2.0.0. They were discovered by our
 development team during internal testing.
 
-We've revised our guidelines on access control permissions as well. Read the 
+We've revised our guidelines on access control permissions as well. Read the
 [permissions levels section](user-management/permission-levels.md) for more details.
 
 **Features**

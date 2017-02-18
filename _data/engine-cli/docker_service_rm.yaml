@@ -5,3 +5,4 @@ long: Remove one or more services
 usage: docker service rm SERVICE [SERVICE...]
 pname: docker service
 plink: docker_service.yaml
+
