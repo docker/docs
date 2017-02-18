@@ -37,3 +37,23 @@ You can use javascript syntax to execute rethinkdb queries like so:
 ```none
 > r.db('dtr2').table('repositories')
 ```
+
+## Recovering from a lost replica
+
+When one of DTR's replicas is lost, the UI will start showing a warning that
+looks something like the following:
+
+```none
+Warning: The following replicas are unhealthy: 59e4e9b0a254; Reasons: Replica reported health too long ago: 2017-02-18T01:11:20Z; Replicas 000000000000, 563f02aba617 are still healthy.
+```
+
+To remedy this situation, you need to use the `remove` command to tell
+the cluster that the lost replica should be treated as permanently removed.
+After that you can use the `join` command to grow your cluster back to the
+desired number of replicas. In this example you would run the following
+commands (and follow the prompts for the UCP connection parameters):
+
+```none
+$ docker run --rm -it docker/dtr remove --ucp-insecure-tls --replica-id 59e4e9b0a254 --existing-replica-id 000000000000
+$ docker run --rm -it docker/dtr join --ucp-insecure-tls --existing-replica-id 000000000000
+```
