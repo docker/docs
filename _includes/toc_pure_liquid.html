@@ -45,7 +45,7 @@
         {% assign html_id = _idWorkspace[1] %}
 
         {% capture _hAttrToStrip %}{{ headerLevel }} id="{{ html_id }}">{% endcapture %}
-        {% assign header = _workspace[0] | replace: _hAttrToStrip, '' %}
+        {% assign header = _workspace[0] | replace: _hAttrToStrip, '' | remove_first: "1>" %}
 
         {% assign space = '' %}
         {% for i in (1..indentAmount) %}
