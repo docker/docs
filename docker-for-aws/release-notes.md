@@ -27,6 +27,21 @@ Release date: 01/18/2017
 
 ## Beta Channel
 
+### 1.13.1-beta18
+Release date: 02/16/2017
+
+**New**
+
+- Docker Engine upgraded to [Docker 1.13.1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Added a second CloudFormation template that allows you to [install Docker for AWS into a pre-existing VPC](index.md#install-into-an-existing-vpc).
+- Added Swarm wide support for [persistent storage volumes](persistent-data-volumes.md)
+- Added the following engine labels
+    - **os** (linux)
+    - **region** (us-east-1, etc)
+    - **availability_zone** (us-east-1a, etc)
+    - **instance_type** (t2.micro, etc)
+    - **node_type** (worker, manager)
+
 ### 1.13.1-rc2-beta17
 Release date: 02/07/2017
 
