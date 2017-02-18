@@ -26,7 +26,7 @@ The following examples show how to create swarm services that require data persi
 
 ```bash
 docker service create --replicas 5 --name ping1 \
-    --mount type=volume,volume-driver=docker4x/cloudstor:aws-v1.13.1-beta18,source=sharedvol1,destination=/shareddata \
+    --mount type=volume,volume-driver=docker4x/cloudstor:azure-v1.13.1-beta18,source=sharedvol1,destination=/shareddata \
     alpine ping docker.com
 ```
 
