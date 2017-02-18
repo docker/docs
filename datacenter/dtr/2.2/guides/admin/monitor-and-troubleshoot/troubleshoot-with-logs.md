@@ -22,8 +22,9 @@ If the second command succeeds, overlay networking is working.
 
 ## Accessing rethinkdb directly
 
-To perform operations against rethinkdb directly, one may use the following
-custom rethinkdb debugging tool. It connects to one of your rethinkdb servers as
+You can connect directly to the rethinkdb data store internal to DTR for
+troubleshooting. To do this, you can use this custom rethinkdb debugging
+tool. It connects to one of your rethinkdb servers as
 indicated by `$REPLICA_ID` and presents you with an interactive prompt for
 running rethinkdb queries. It must be run on the same machine as the replica
 it's connecting to.
@@ -32,7 +33,8 @@ it's connecting to.
 $ docker run --rm -it --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.2.0 $REPLICA_ID
 ```
 
-You can use javascript syntax to execute rethinkdb queries like so:
+You can use [javascript
+syntax](https://www.rethinkdb.com/docs/guide/javascript/) to execute rethinkdb queries like so:
 
 ```none
 > r.db('dtr2').table('repositories')
