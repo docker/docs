@@ -2,6 +2,7 @@
 description: docker-compose help
 keywords: fig, composition, compose, docker, orchestration, cli, help
 title: docker-compose help
+notoc: true
 ---
 
 ```
