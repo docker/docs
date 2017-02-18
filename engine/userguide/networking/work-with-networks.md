@@ -983,6 +983,7 @@ disconnect` command.
     ```
 
 4.  Remove `container4`, `container5`, `container6`, and `container7`.
+    
     ```bash
     $ docker stop container4 container5 container6 container7
 
@@ -1056,6 +1057,7 @@ remove a network. If a network has connected endpoints, an error occurs.
     ```
 
 3.  Remove the `isolated_nw` network.
+
     ```bash
     $ docker network rm isolated_nw
     ```
