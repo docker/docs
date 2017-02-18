@@ -1323,6 +1323,8 @@ manuals:
           title: Set up vulnerability scans
         - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-a-cache/
           title: Deploy a cache
+        - path: /datacenter/dtr/2.2/guides/admin/configure/garbage-collection/
+          title: Garbage collection
       - sectiontitle: Manage users
         section:
         - path: /datacenter/dtr/2.2/guides/admin/manage-users/
