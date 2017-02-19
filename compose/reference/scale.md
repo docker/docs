@@ -2,6 +2,7 @@
 description: Sets the number of containers to run for a service.
 keywords: fig, composition, compose, docker, orchestration, cli,  scale
 title: docker-compose scale
+notoc: true
 ---
 
 ```
