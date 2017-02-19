@@ -2,6 +2,7 @@
 description: Receive real time events from containers.
 keywords: fig, composition, compose, docker, orchestration, cli, events
 title: docker-compose events
+notoc: true
 ---
 
 ```
