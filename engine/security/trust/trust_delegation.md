@@ -45,7 +45,7 @@ Your collaborator needs to generate a private key (either RSA or ECDSA)
 and give you the public key so that you can add it to the `targets/releases`
 delegation.
 
-The easiest way to for them to generate these keys is with OpenSSL.
+The easiest way for them to generate these keys is with OpenSSL.
 Here is an example of how to generate a 2048-bit RSA portion key (all RSA keys
 must be at least 2048 bits):
 
