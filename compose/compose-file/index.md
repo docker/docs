@@ -47,8 +47,8 @@ definition in version 3.
 Configuration options that are applied at build time.
 
 `build` can be specified either as a string containing a path to the build
-context, or an object with the path specified under [context](compose-file.md#context) and
-optionally [dockerfile](compose-file.md#dockerfile) and [args](compose-file.md#args).
+context, or an object with the path specified under [context](#context) and
+optionally [dockerfile](#dockerfile) and [args](#args).
 
     build: ./dir
 
@@ -269,11 +269,11 @@ Configures if and how to restart containers when they exit. Replaces
 
 - `condition`: One of `none`, `on-failure` or `any` (default: `any`).
 - `delay`: How long to wait between restart attempts, specified as a
-  [duration](compose-file.md#specifying-durations) (default: 0).
+  [duration](#specifying-durations) (default: 0).
 - `max_attempts`: How many times to attempt to restart a container before giving
   up (default: never give up).
 - `window`: How long to wait before deciding if a restart has succeeded,
-  specified as a [duration](compose-file.md#specifying-durations) (default:
+  specified as a [duration](#specifying-durations) (default:
   decide immediately).
 
 ```
@@ -461,9 +461,9 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
     # Set Rails/Rack environment
     RACK_ENV=development
 
-> **Note:** If your service specifies a [build](compose-file.md#build) option, variables
+> **Note:** If your service specifies a [build](#build) option, variables
 > defined in environment files will _not_ be automatically visible during the
-> build. Use the [args](compose-file.md#args) sub-option of `build` to define build-time
+> build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
 
 The value of `VAL` is used as is and not modified at all. For example if the value is
@@ -489,9 +489,9 @@ machine Compose is running on, which can be helpful for secret or host-specific 
       - SHOW=true
       - SESSION_SECRET
 
-> **Note:** If your service specifies a [build](compose-file.md#build) option, variables
+> **Note:** If your service specifies a [build](#build) option, variables
 > defined in `environment` will _not_ be automatically visible during the
-> build. Use the [args](compose-file.md#args) sub-option of `build` to define build-time
+> build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
 
 ### expose
@@ -563,7 +563,7 @@ used.
 
 ### healthcheck
 
-> [Version 2.1 file format](compose-file.md#version-21) and up.
+> [Version 2.1 file format](compose-versioning.md#version-21) and up.
 
 Configure a check that's run to determine whether or not containers for this
 service are "healthy". See the docs for the
@@ -577,7 +577,7 @@ for details on how healthchecks work.
       retries: 3
 
 `interval` and `timeout` are specified as
-[durations](compose-file.md#specifying-durations).
+[durations](#specifying-durations).
 
 `test` must be either a string or a list. If it's a list, the first item must be
 either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
@@ -608,7 +608,7 @@ a partial image ID.
     image: a4bc65fd
 
 If the image does not exist, Compose attempts to pull it, unless you have also
-specified [build](compose-file.md#build), in which case it builds it using the specified
+specified [build](#build), in which case it builds it using the specified
 options and tags it with the specified tag.
 
 ### isolation
@@ -650,9 +650,9 @@ Containers for the linked service will be reachable at a hostname identical to
 the alias, or the service name if no alias was specified.
 
 Links also express dependency between services in the same way as
-[depends_on](compose-file.md#dependson), so they determine the order of service startup.
+[depends_on](#dependson), so they determine the order of service startup.
 
-> **Note:** If you define both links and [networks](compose-file.md#networks), services with
+> **Note:** If you define both links and [networks](#networks), services with
 > links between them must share at least one network in common in order to
 > communicate.
 
@@ -709,7 +709,7 @@ the special form `service:[service name]`.
 ### networks
 
 Networks to join, referencing entries under the
-[top-level `networks` key](compose-file.md#network-configuration-reference).
+[top-level `networks` key](#network-configuration-reference).
 
     services:
       some-service:
@@ -771,7 +771,7 @@ In the example below, three services are provided (`web`, `worker`, and `db`), a
 
 Specify a static IP address for containers for this service when joining the network.
 
-The corresponding network configuration in the [top-level networks section](compose-file.md#network-configuration-reference) must have an `ipam` block with subnet configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](compose-file.md#enableipv6) option must be set.
+The corresponding network configuration in the [top-level networks section](#network-configuration-reference) must have an `ipam` block with subnet configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set.
 
 An example:
 
@@ -866,8 +866,8 @@ Override the default labeling scheme for each container.
 
 Specify how long to wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whatever stop signal has been specified with
-[`stop_signal`](compose-file.md#stopsignal)), before sending SIGKILL. Specified
-as a [duration](compose-file.md#specifying-durations).
+[`stop_signal`](#stopsignal)), before sending SIGKILL. Specified
+as a [duration](#specifying-durations).
 
     stop_grace_period: 1s
     stop_grace_period: 1m30s
@@ -931,7 +931,7 @@ more information.
 ### volumes, volume\_driver
 
 > **Note:** The top-level
-> [`volumes` option](compose-file.md#volume-configuration-reference) defines
+> [`volumes` option](#volume-configuration-reference) defines
 > a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format.
 
 Mount paths or named volumes, optionally specifying a path on the host machine
@@ -984,7 +984,7 @@ See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 ## Specifying durations
 
 Some configuration options, such as the `interval` and `timeout` sub-options for
-[`healthcheck`](compose-file.md#healthcheck), accept a duration as a string in a
+[`healthcheck`](#healthcheck), accept a duration as a string in a
 format that looks like this:
 
     2.5s
