@@ -219,7 +219,7 @@ client recognizes this is your first push and:
  - requests a passphrase for the root key
  - generates a root key in the `~/.docker/trust` directory
  - requests a passphrase for the repository key
- - generates a repository key for in the `~/.docker/trust` directory
+ - generates a repository key in the `~/.docker/trust` directory
 
 The passphrase you chose for both the root key and your repository key-pair
 should be randomly generated and stored in a *password manager*.
