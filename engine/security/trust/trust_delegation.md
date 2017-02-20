@@ -34,7 +34,7 @@ available on your path
 
 For more detailed information about how to use Notary outside of the default
 Docker Content Trust use cases, please refer to the
-[the Notary CLI documentation](/notary/getting_started.md).
+[Notary CLI documentation](/notary/getting_started.md).
 
 Note that when publishing and listing delegation changes using the Notary client,
 your Docker Hub credentials are required.
