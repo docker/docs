@@ -10,7 +10,7 @@ canonical source of a trusted image tag.
 Using this delegation allows you to collaborate with other publishers without
 sharing your repository key (a combination of your targets and snapshot keys -
 please see "[Manage keys for content trust](trust_key_mng.md)" for more information).
-A collaborator can keep their own delegation key private.
+Collaborators can keep their own delegation keys private.
 
 The `targets/releases` delegation is currently an optional feature - in order
 to set up delegations, you must use the Notary CLI:
@@ -141,7 +141,7 @@ IDs to collaborators yourself should you need to remove a collaborator.
 
 ## Removing a delegation key from an existing repository
 
-To revoke a collaborator's permission to sign tags for your image repository, you must
+To revoke collaborators' permission to sign tags for your image repository, you must
 know the IDs of their keys, because you need to remove their keys from the
 `targets/releases` delegation.
 
