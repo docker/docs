@@ -48,7 +48,7 @@ All the Docker trust keys are stored encrypted using the passphrase you provide
 on creation. Even so, you should still take care of the location where you back them up.
 Good practice is to create two encrypted USB keys.
 
-It is very important that you backup your keys to a safe, secure location. Loss
+It is very important that you back up your keys to a safe, secure location. Loss
 of the repository key is recoverable; loss of the root key is not.
 
 The Docker client stores the keys in the `~/.docker/trust/private` directory.
