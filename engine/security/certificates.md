@@ -67,7 +67,7 @@ key and then use the key to create the certificate.
 
 ## Troubleshooting tips
 
-The Docker daemon interprets ``.crt` files as CA certificates and `.cert` files
+The Docker daemon interprets `.crt` files as CA certificates and `.cert` files
 as client certificates. If a CA certificate is accidentally given the extension
 `.cert` instead of the correct `.crt` extension, the Docker daemon logs the
 following error message:
