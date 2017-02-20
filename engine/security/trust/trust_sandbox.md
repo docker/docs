@@ -69,7 +69,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
         $ mkdir trustsandbox
         $ cd trustsandbox
 
-2. Create a filed called `docker-compose.yml` with your favorite editor.  For example, using vim:
+2. Create a file called `docker-compose.yml` with your favorite editor.  For example, using vim:
 
         $ touch docker-compose.yml
         $ vim docker-compose.yml
