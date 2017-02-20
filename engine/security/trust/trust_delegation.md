@@ -115,7 +115,7 @@ supports reading only from `targets/releases`.
 
 It also adds the collaborator's public key to the delegation, enabling them to sign
 the `targets/releases` delegation so long as they have the private key corresponding
-to this public key.  The `--all-paths` flags tells Notary not to restrict the tag
+to this public key.  The `--all-paths` flag tells Notary not to restrict the tag
 names that can be signed into `targets/releases`, which we highly recommend for
 `targets/releases`.
 
