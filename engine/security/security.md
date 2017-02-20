@@ -114,8 +114,8 @@ certificates. You can also secure them with [HTTPS and
 certificates](https.md).
 
 The daemon is also potentially vulnerable to other inputs, such as image
-loading from either disk with 'docker load', or from the network with
-'docker pull'. As of Docker 1.3.2, images are now extracted in a chrooted
+loading from either disk with `docker load`, or from the network with
+`docker pull`. As of Docker 1.3.2, images are now extracted in a chrooted
 subprocess on Linux/Unix platforms, being the first-step in a wider effort
 toward privilege separation. As of Docker 1.10.0, all images are stored and
 accessed by the cryptographic checksums of their contents, limiting the
