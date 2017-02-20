@@ -9,7 +9,7 @@ canonical source of a trusted image tag.
 
 Using this delegation allows you to collaborate with other publishers without
 sharing your repository key (a combination of your targets and snapshot keys -
-please see "[Manage keys for content trust](trust_key_mng.md)" for more information).
+please see [Manage keys for content trust](trust_key_mng.md) for more information).
 A collaborator can keep their own delegation key private.
 
 The `targets/releases` delegation is currently an optional feature - in order
