@@ -211,7 +211,7 @@ What happens when data is corrupted and you try to pull it when trust is
 enabled? In this section, you go into the `sandboxregistry` and tamper with some
 data. Then, you try and pull it.
 
-1. Leave the `trustsandbox` shell and and container running.
+1. Leave the `trustsandbox` shell and container running.
 
 2. Open a new interactive terminal from your host, and obtain a shell into the
 `sandboxregistry` container.
