@@ -70,4 +70,4 @@ add it back again.
 
 ## Where to go next
 
-* [Configure where images are stored](configure-storage.md)
+* [Configure where images are stored](../)
