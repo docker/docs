@@ -231,13 +231,13 @@ data. Then, you try and pull it.
 
         root@65084fc6f047:/# cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
 
-5. Add malicious data to one of the trusttest layers:
+5. Add malicious data to one of the `trusttest` layers:
 
         root@65084fc6f047:/# echo "Malicious data" > data
 
 6. Go back to your `trustsandbox` terminal.
 
-7. List the trusttest image.
+7. List the `trusttest` image.
 
         / # docker images | grep trusttest
         REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
