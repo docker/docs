@@ -105,6 +105,7 @@ configurations:
 | Image name           | wordpress:latest                                              |
 | Published ports      | target: 80, ingress:8000                                      |
 | Attached network     | wordpress-network                                             |
+| Secret               | wordpress-password-v1              						   |
 | Environment variable | WORDPRESS_DB_HOST=wordpress-db:3306                           |
 | Environment variable | WORDPRESS_DB_PASSWORD_FILE=/run/secrets/wordpress-password-v1 |
 
