@@ -1336,6 +1336,8 @@ manuals:
             title: Chain multiple caches
         - path: /datacenter/dtr/2.2/guides/admin/configure/garbage-collection/
           title: Garbage collection
+        - path: /datacenter/dtr/2.2/guides/admin/configure/jobrunner/
+          title: Jobrunner
       - sectiontitle: Manage users
         section:
         - path: /datacenter/dtr/2.2/guides/admin/manage-users/
