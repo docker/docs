@@ -83,7 +83,7 @@ content that they already downloaded:
 Warning: potential malicious behavior - trust data has insufficient signatures for remote repository docker.io/my/image: valid signatures did not meet threshold
 ```
 
-To correct this, they need to download a new image tag with that is signed with
+To correct this, they need to download a new image tag that is signed with
 the new key.
 
 ## Related information
