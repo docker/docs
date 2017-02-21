@@ -3,7 +3,7 @@ description: Your Docker subscription gives you access to prioritized support. Y
   can file tickets via email, your the support portal.
 keywords: Docker, support, help
 title: Get support
-product_name: ucp
+product_name: Universal Control Plane
 product_version: 2.0
 ---
 

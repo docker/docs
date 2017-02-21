@@ -222,22 +222,25 @@ ng\:form {
 						{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
               {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
 					  </div>
-					  <div class="col-sm-3">
+					  <div class="col-sm-3" style="display: table; table-layout: fixed;">
 						{% if page.product_version %}
-							<div class="btn-group pull-right">
+						<div style="display:table-cell; vertical-align:middle; text-align:center;">
+							<div class="btn-group">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<span class="fa fa-tags"></span> {{ page.product_version }} <span class="caret"></span>
+									{{ page.product_name }} {{ page.product_version }} <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu">
-									{% for v in page.version_info %}
+								<ul class="dropdown-menu dropdown-menu-right">
+									{% assign sorted_version_info = (page.version_info | sort: 'product_version') %}
+									{% for v in sorted_version_info %}
 										{% if v.product_version == page.product_version %}
-											<li><a href="#">{{ v.product_version }}</a></li>
+											<li><a href="#"><b>{{ page.product_name }} {{ v.product_version }}</b></a></li>
 										{% else %}
-											<li><a href="{{ v.version_url }}">{{ v.product_version }}</a></li>
+											<li><a href="{{ v.version_url }}">{{ page.product_name }} {{ v.product_version }}</a></li>
 										{% endif %}
 									{% endfor %}
 								</ul>
 							</div>
+						</div>
 						{% endif %}
 					  </div>
 				  </div>

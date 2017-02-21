@@ -191,6 +191,10 @@
     color: #008AB5;
 }
 
+#DocumentationText .dropdown-menu>li>a {
+	color: #333 !important;
+}
+
 /* reset away from #008AB5 */
 
 /* removed hard-coded color for button links pre new CSS from Design */
