@@ -173,7 +173,7 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
         -p 80:80 -d --name apparmor-nginx nginx
     ```
 
-4. Exec into the running container
+4. Exec into the running container.
 
     ```bash
     $ docker exec -it apparmor-nginx bash
