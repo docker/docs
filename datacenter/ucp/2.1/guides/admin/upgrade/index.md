@@ -50,27 +50,6 @@ Starting with the manager nodes, and then worker nodes:
 
 You can upgrade UCP from the web UI or the CLI.
 
-### Using the CLI to perform an upgrade
-
-To upgrade from the CLI, log into a UCP manager node using ssh, and run:
-
-```
-# Get the latest version of UCP
-$ docker pull {{ page.docker_image }}
-
-$ docker run --rm -it \
-  --name ucp \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  {{ page.docker_image }} \
-  upgrade --interactive
-```
-
-This runs the upgrade command in interactive mode, so that you are prompted
-for any necessary configuration values.
-
-Once the upgrade finishes, navigate to the **UCP web UI** and make sure that
-all the nodes managed by UCP are healthy.
-
 ### Using the UI to perform an upgrade
 
 When an upgrade is available for a UCP installation, a banner will be shown.
@@ -95,6 +74,27 @@ During the upgrade the UI will be unavailable and it is recommended to wait
 until completion before continuing to interact with it.  Upon upgrade
 completion, the user will see a notification that a newer version of the UI
 is available and a browser refresh is required to see the latest UI.
+
+### Using the CLI to perform an upgrade
+
+To upgrade from the CLI, log into a UCP manager node using ssh, and run:
+
+```
+# Get the latest version of UCP
+$ docker pull {{ page.docker_image }}
+
+$ docker run --rm -it \
+  --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  {{ page.docker_image }} \
+  upgrade --interactive
+```
+
+This runs the upgrade command in interactive mode, so that you are prompted
+for any necessary configuration values.
+
+Once the upgrade finishes, navigate to the **UCP web UI** and make sure that
+all the nodes managed by UCP are healthy.
 
 ![](../../images/upgrade-ucp-4.png)
 
