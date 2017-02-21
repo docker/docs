@@ -37,9 +37,11 @@ With the above example, you can make sure that the volume is indeed shared by lo
 ### Use a unique volume per task:
 
 ```bash
+{% raw %}
 docker service create --replicas 5 --name ping2 \
     --mount type=volume,volume-driver=docker4x/cloudstor:aws-v1.13.1-beta18,source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata \
     alpine ping docker.com
+{% endraw %}
 ```
 
 Here the templatized notation is used to indicate to Docker Swarm that a unique volume be created and mounted for each replica/task of the service `ping2`. After initial creation of the volumes corresponding to the tasks they are attached to (in the nodes the tasks are scheduled in), if a task is rescheduled on a different node, Docker Swarm will interact with the Cloudstor plugin to create and mount the volume corresponding to the task on the node the task got scheduled on. It's highly recommended that you use the `.Task.Slot` template to make sure task N always gets access to vol N no matter which node it is executing on/scheduled to.
@@ -55,7 +57,9 @@ You can use `docker volume ls` to enumerate all volumes created on a node includ
 If you want a higher level of IO performance like the maxIO mode for EFS, a perfmode parameter can be specified as volume-opt:
 
 ```bash
+{% raw %}
 docker service create --replicas 5 --name ping3 \
     --mount type=volume,volume-driver=docker4x/cloudstor:aws-v1.13.1-beta18,source={{.Service.Name}}-{{.Task.Slot}}-vol5,destination=/mydata,volume-opt=perfmode=maxio \
     alpine ping docker.com
+{% endraw %}
 ```
