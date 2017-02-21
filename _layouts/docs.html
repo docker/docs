@@ -217,20 +217,26 @@ ng\:form {
             <div id="main-content" class="col-xs-12 col-sm-9 col-md-8 col-xl-9">
               <section class="section" id="DocumentationText">
 				  <div class="row">
-					  <div class="col-sm-9">
+					  <div class="
+						{% if page.product_version %}
+							col-sm-8
+						{% else %}
+							col-sm-12
+						{% endif %}
+					  ">
 						  {% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
 						{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
               {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
 					  </div>
-					  <div class="col-sm-3" style="display: table; table-layout: fixed;">
-						{% if page.product_version %}
+					{% if page.product_version %}
+					  <div class="col-sm-4" style="display: table; table-layout: fixed;">
 						<div style="display:table-cell; vertical-align:middle; text-align:center;">
 							<div class="btn-group">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									{{ page.product_name }} {{ page.product_version }} <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu dropdown-menu-right">
-									{% assign sorted_version_info = (page.version_info | sort: 'product_version') %}
+									{% assign sorted_version_info = (page.version_info | sort: 'product_version') | reverse %}
 									{% for v in sorted_version_info %}
 										{% if v.product_version == page.product_version %}
 											<li><a href="#"><b>{{ page.product_name }} {{ v.product_version }}</b></a></li>
@@ -241,8 +247,8 @@ ng\:form {
 								</ul>
 							</div>
 						</div>
-						{% endif %}
 					  </div>
+					{% endif %}
 				  </div>
 							{{ content }}
 							{% if page.noratings != true %}
