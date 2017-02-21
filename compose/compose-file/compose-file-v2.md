@@ -913,9 +913,6 @@ Each of these is a single value, analogous to its
     stdin_open: true
     tty: true
 
-> **Note:** The following options are only available for
-> [version 2](compose-versioning.md#version-2) and up:
->  `oom_score_adj`
 
 ## Specifying durations
 
