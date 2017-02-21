@@ -6,12 +6,19 @@ title: Configure DTR image storage
 ---
 
 After installing Docker Trusted Registry, one of your first tasks is to
-designate and configure the Trusted Registry storage backend. This document provides the following:
+designate and configure the Trusted Registry storage backend.  This document
+provides the following:
 
 * Information describing your storage backend options.
 * Configuration steps using either the Trusted Registry UI or a YAML file.
 
-While there is a default storage backend, `filesystem`, the Trusted Registry offers other options that are cloud-based. This flexibility to configure to a different storage backend allows you to:
+The default storage backend, `filesystem`, stores and serves images from the
+*local* filesystem.  In a HA setup this fails, as each node can only access its
+own files.
+
+DTR allows you to confiugure your image storage via distributed stores, such as
+Amazon S3, NFS, or Google Cloud Storage. This flexibility to configure to a
+different storage backend allows you to:
 
 * Scale your Trusted Registry
 * Leverage storage redundancy
@@ -19,8 +26,7 @@ While there is a default storage backend, `filesystem`, the Trusted Registry off
 * Take advantage of other features that are critical to your organization
 
 At first, you might have explored Docker Trusted Registry and Docker Engine by
-installing
-them on your system in order to familiarize yourself with them.
+installing them on your system in order to familiarize yourself with them.
 However, for various reasons such as deployment purposes or continuous
 integration, it makes sense to think about your long term organization’s needs
 when selecting a storage backend. The Trusted Registry natively supports TLS and
@@ -28,94 +34,44 @@ basic authentication.
 
 ## Understand the Trusted Registry storage backend
 
-By default, your Trusted Registry data resides as a data volume on the host
-`filesystem`. This is where your repositories and images are stored. This
-storage driver is the local posix `filesystem` and is configured to use a
-directory tree in the local filesystem. It's suitable for development or small
-deployments. The `filesystem` can be located on the same computer as the Trusted Registry, or on a separate system.
+Your Trusted Registry data (images etc.) are stored using the configured
+**storage driver** within DTR's settings.  This defaults to the local
+filesystem which uses your OS' posix operations to store and serve images.
 
 Additionally, the Trusted Registry supports these cloud-based storage drivers:
 
-* Amazon Simple Storage Solution **S3**
+* Amazon Simple Storage Solution **S3** (and S3-compatible servers)
 * OpenStack **Swift**
 * Microsoft **Azure** Blob Storage
-
+* **Google Cloud** Storage
 
 ### Filesystem
 
-If you select `filesystem`, then the Trusted Registry uses the local disk to
-store registry files. This backend has a single, required `rootdirectory`
-parameter which specifies a subdirectory of `/var/local/dtr/imagestorage` in
-which all registry files are stored. The default value of `/local` means the
-files are stored in `/var/local/dtr/image-storage/local`.
+The `filesystem` driver operates on the host's local filesystem.  In HA
+environments this needs to be shared via NFS, otherwise each node in your setup
+will only be able to see their own local data.  For more information on
+configuring NFS [see the NFS docs](/datacenter/dtr/2.2/guides/admin/
+configure/external-storage/nfs/).
 
-The Trusted Registry stores all its data at this location, so ensure there is
-adequate space available. To do so, you can run the following commands:
+By default, docker creates a volume named `dtr-registry-${replica-id}` which is
+used to host your data.  You can supply a different volume name or directory
+when installing or reconfiguring docker to change where DTR stores your data
+locally.
 
-* To analyze the disk usage: `docker exec -it <container_name> bash` then run `df -h`.
-* To see the file size of your containers, use the `-s` argument of `docker ps -s`.
+When using your local filesystem (or NFS) to serve images ensure there is enough
+available space, otherwise pushes will begin to fail.
+
+You can see the total space used locally by running `du -hs "path-to-volume"`.
+The path to the docker volume can be found by running `docker volume ls` to list
+volumes and `docker volume inspect dtr-registry-$replicaId` to show the path.
 
 ### Amazon S3
 
-S3 stores data as objects within “buckets” where you read, write, and delete
-objects in that container. It too, has a `rootdirectory` parameter. If you select this option, there will be some tasks that you need to first perform [on AWS](https://aws.amazon.com/s3/getting-started/).
+DTR supports AWS S3 plus other file servers that are S3 compatible, such as
+Minio.  For more information on configuring S3 or a compatible backend see the
+[S3 configuration guide](
+/datacenter/dtr/2.2/guides/admin/configure/external-storage/s3/).
 
-1. You must create an S3 bucket, and write down its name and the AWS zone it
-runs on.
-2. Determine write permissions for your bucket.
-3. S3 flavor comes with DEBUG=false by default. If you need to debug, then you need to add `-e DEBUG=True`.
-4. Specify an AWS region, which is dependent on your S3 location, for example, use `-e AWS_REGION=”eu-west-1”`.
-5. Ensure your host time is correct. If your host clock is still running on the main computer, but not on the docker host virtual machine, then you will have
-time differences. This may cause an issue if you try to authenticate with Amazon
-web services.
-6. You will also need your AWS access key and secret key. Learn [more about it ](http://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html) here.
-
-Conversely, you can further limit what users access in the Trusted Registry when you use AW to host your Trusted Registry. Instead of using the UI to enter information, you can create an [IAM user policy](http://docs.aws.amazon.com/AmazonS3/latest/dev/example-policies-s3.html) which is a JSON description of the effects, actions, and resources available to
-a user. The advantage of using this method instead of configuring through the Trusted Registry UI is that you can restrict what users can access. You apply the policy as part of the process of installing the Trusted Registry on AW. To set a policy through the AWS command line, save the policy into a file,
-for example `TrustedRegistryUserPerms.json`, and pass it to the
-put-user-policy AWS command:
-
-```
-$ aws iam put-user-policy --user-name MyUser --policy-name TrustedRegistryUserPerms --policy-document file://C:\Temp\TrustedRegistryUserPerms.json
-```
-
-You can also set a policy through your AWS console. For more information about
-setting IAM policies using the command line or the console, review the AWS
-[Overview of IAM Policies](http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) article or visit the console Policies page.
-
-The following example describes the minimum permissions set which allows
-Trusted Registry users to access, push, pull, and delete images.
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": "s3:ListAllMyBuckets",
-            "Resource": "arn:aws:s3:::*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:ListBucket",
-                "s3:GetBucketLocation"
-            ],
-            "Resource": "arn:aws:s3:::<INSERT YOUR BUCKET HERE>"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:PutObject",
-                "s3:GetObject",
-                "s3:DeleteObject"
-            ],
-            "Resource": "arn:aws:s3:::<INSERT YOUR BUCKET HERE>/*"
-        }
-    ]
-}
-
-```
 
 ### OpenStack Swift
 

@@ -1316,6 +1316,8 @@ manuals:
           section:
           - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/
             title: Overview
+          - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/s3/
+            title: S3
           - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/nfs/
             title: NFS
         - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-high-availability/
