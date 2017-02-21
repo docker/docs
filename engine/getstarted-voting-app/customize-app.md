@@ -72,7 +72,6 @@ did not change.
 * [Introducing Docker 1.13.0](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/) blog post
 from [Docker Core Engineering](https://blog.docker.com/author/core_eng/)
 
-
 * A deeper dive voting app walkthrough is available on
 [Docker Labs](https://github.com/docker/labs/) as [Deploying an app to a Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md).
 The lab walkthrough provides more technical detail on deployment configuration,
@@ -88,10 +87,13 @@ networking.
 Docker and topics on images in [Learn by example](/engine/tutorials/index.md).
 
 * For more about the `docker-stack.yml` and the `docker stack deploy` commands,
-see [deploy](/compose/compose-file.md#deploy) in the [Compose file
-reference](/compose/compose-file.md) and [`docker stack
-deploy`](/engine/reference/commandline/stack_deploy.md) in the Docker Engine
-command line reference.
+see [deploy](/compose/compose-file.md#deploy) in the Compose file reference and
+[`docker stack deploy`](/engine/reference/commandline/stack_deploy.md)
+in the Docker Engine command line reference.
 
-* To learn more about swarm mode, start with the
+* To learn about all new features in Compose, see
+[Compose file version 3 reference](/compose/compose-file/index.md) and
+[Compose file versions and upgrading](/compose/compose-file/compose-versioning.md)
+
+* For more about swarm mode, start with the
 [Swarm mode overview](/engine/swarm/index.md).
