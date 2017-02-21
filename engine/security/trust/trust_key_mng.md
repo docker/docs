@@ -38,7 +38,7 @@ repositories created with newer versions of Docker.
 
 The passphrases you chose for both the root key and your repository key should
 be randomly generated and stored in a password manager.  Having the repository key
-allow users to sign image tags on a repository. Passphrases are used to encrypt
+allows users to sign image tags on a repository. Passphrases are used to encrypt
 your keys at rest and ensures that a lost laptop or an unintended backup doesn't
 put the private key material at risk.
 
