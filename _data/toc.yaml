@@ -1202,12 +1202,18 @@ manuals:
           title: Restrict services to worker nodes
         - path: /datacenter/ucp/2.1/guides/admin/configure/use-domain-names-to-access-services/
           title: Use domain names to access services
-        - path: /datacenter/ucp/2.1/guides/admin/configure/only-allow-running-signed-images/
-          title: Only allow running signed images
-        - path: /datacenter/ucp/2.1/guides/admin/configure/use-trusted-images-for-ci/
-          title: Use trusted images for continuous integration
         - path: /datacenter/ucp/2.1/guides/admin/configure/external-auth/
           title: Integrate with LDAP
+        - sectiontitle: Content trust
+          section:
+          - path: /datacenter/ucp/2.1/guides/admin/configure/content-trust/
+            title: Only allow running signed images
+          - path: /datacenter/ucp/2.1/guides/admin/configure/content-trust/admin_tasks/
+            title: Configure the UCP and DTR servers for content trust
+          - path: /datacenter/ucp/2.1/guides/admin/configure/content-trust/client_configuration/
+            title: Configure the Docker client to sign images
+          - path: /datacenter/ucp/2.1/guides/admin/configure/use-trusted-images-for-ci/
+            title: Use trusted images for continuous integration
       - sectiontitle: Manage users
         section:
         - path: /datacenter/ucp/2.1/guides/admin/manage-users/

@@ -55,4 +55,4 @@ options that can accomplish this (e.g. Shield plug-in for Kibana)
 
 ## Where to go next
 
-* [Only allow running signed images](only-allow-running-signed-images.md)
+* [Require all images to be signed](content-trust.md)
