@@ -1072,6 +1072,29 @@ There are several things to note, depending on which
 See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
 
+### domainname, hostname, ipc, mac\_address, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
+
+Each of these is a single value, analogous to its
+[docker run](/engine/reference/run.md) counterpart.
+
+    user: postgresql
+    working_dir: /code
+
+    domainname: foo.com
+    hostname: foo
+    ipc: host
+    mac_address: 02:42:ac:11:65:43
+
+    privileged: true
+
+    restart: always
+
+    read_only: true
+    shm_size: 64M
+    stdin_open: true
+    tty: true
+
+
 ## Specifying durations
 
 Some configuration options, such as the `interval` and `timeout` sub-options for
