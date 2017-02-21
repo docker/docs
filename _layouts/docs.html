@@ -216,9 +216,31 @@ ng\:form {
             </div>
             <div id="main-content" class="col-xs-12 col-sm-9 col-md-8 col-xl-9">
               <section class="section" id="DocumentationText">
-								{% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
-								{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
+				  <div class="row">
+					  <div class="col-sm-9">
+						  {% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
+						{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
               {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
+					  </div>
+					  <div class="col-sm-3">
+						{% if page.product_version %}
+							<div class="btn-group pull-right">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="fa fa-tags"></span> {{ page.product_version }} <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									{% for v in page.version_info %}
+										{% if v.product_version == page.product_version %}
+											<li><a href="#">{{ v.product_version }}</a></li>
+										{% else %}
+											<li><a href="{{ v.version_url }}">{{ v.product_version }}</a></li>
+										{% endif %}
+									{% endfor %}
+								</ul>
+							</div>
+						{% endif %}
+					  </div>
+				  </div>
 							{{ content }}
 							{% if page.noratings != true %}
 							<div style="text-align: center; margin-top: 50px">
@@ -423,6 +445,7 @@ background-image: linear-gradient(to bottom, #75ae4c, #99c47c);
   <script src="/js/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
   <script src="/js/alljs.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
   <script async="" src="/js/menu.js"></script>
   <script async="" src="/js/app.js"></script>
   <script async="" src="/js/anchorlinks.js"></script>
