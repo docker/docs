@@ -4,60 +4,85 @@ keywords: docker, registry, monitor, troubleshoot
 title: Troubleshoot Docker Trusted Registry
 ---
 
+This guide contains tips and tricks for troubleshooting DTR problems.
+
 ## Troubleshoot overlay networks
 
 High availability in DTR depends on having overlay networking working in UCP.
-To manually test that overlay networking is working in UCP run the following
-commands on two different UCP machines.
+One way to test if overlay networks are working correctly you can deploy
+containers in different nodes, that are attached to the same overlay network
+and see if they can ping one another.
+
+Use SSH to log into a UCP node, and run:
 
 ```none
-docker run -it --rm --net dtr-ol --name overlay-test1 --entrypoint sh docker/dtr
-docker run -it --rm --net dtr-ol --name overlay-test2 --entrypoint ping docker/dtr -c 3 overlay-test1
+docker run -it --rm \
+  --net dtr-ol --name overlay-test1 \
+  --entrypoint sh docker/dtr
 ```
 
-You can create new overlay network for this test with `docker network create -d overaly network-name`.
-You can also use any images that contain `sh` and `ping` for this test.
-
-If the second command succeeds, overlay networking is working.
-
-## Access rethinkdb directly
-
-You can connect directly to the rethinkdb data store internal to DTR for
-troubleshooting. To do this, you can use this custom rethinkdb debugging
-tool. It connects to one of your rethinkdb servers as
-indicated by `$REPLICA_ID` and presents you with an interactive prompt for
-running rethinkdb queries. It must be run on the same machine as the replica
-it's connecting to.
+Then use SSH to log into another UCP node and run:
 
 ```none
-$ docker run --rm -it --net dtr-ol -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.2.0 $REPLICA_ID
+docker run -it --rm \
+  --net dtr-ol --name overlay-test2 \
+  --entrypoint ping docker/dtr -c 3 overlay-test1
 ```
 
-You can use [javascript
-syntax](https://www.rethinkdb.com/docs/guide/javascript/) to execute rethinkdb queries like so:
+If the second command succeeds, it means that overlay networking is working
+correctly.
+
+You can run this test with any overlay network, and any Docker image that has
+`sh` and `ping`.
+
+
+## Access RethinkDB directly
+
+DTR uses RethinkDB for persisting data and replicating it across replicas.
+It might be helpful to connect directly to the RethinkDB instance running on a
+DTR replica to check the DTR internal state.
+
+Use SSH to log into a node that is running a DTR replica, and run the following
+command, replacing `$REPLICA_ID` by the id of the DTR replica running on that
+node:
+
+```none
+docker run -it --rm \
+  --net dtr-ol \
+  -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.2.0 \
+  $REPLICA_ID
+```
+
+This starts an interactive prompt where you can run RethinkDB queries like:
 
 ```none
 > r.db('dtr2').table('repositories')
 ```
 
-## Recover from a lost replica
+[Learn more about RethinkDB queries](https://www.rethinkdb.com/docs/guide/javascript/).
 
-When one of DTR's replicas is lost, the UI will start showing a warning that
-looks something like the following:
+## Recover from an unhealthy replica
+
+When a DTR replica is unhealthy or down, the DTR web UI displays a warning:
 
 ```none
 Warning: The following replicas are unhealthy: 59e4e9b0a254; Reasons: Replica reported health too long ago: 2017-02-18T01:11:20Z; Replicas 000000000000, 563f02aba617 are still healthy.
 ```
 
-To remedy this situation, you need to use the `remove` command to tell
-the cluster that the lost replica should be treated as permanently removed.
-After that you can use the `join` command to grow your cluster back to the
-desired number of replicas. In this example you would run the following
-commands (and follow the prompts for the UCP connection parameters):
+To fix this, you should remove the unhealthy replica from the DTR cluster,
+and join a new one. Start by running:
 
 ```none
-$ docker run --rm -it docker/dtr remove \
-  --ucp-insecure-tls --replica-id 59e4e9b0a254 --existing-replica-id 000000000000
-$ docker run --rm -it docker/dtr join \
-  --ucp-insecure-tls --existing-replica-id 000000000000
+docker run -it --rm \
+  {{ page.docker_image }} remove \
+  --ucp-insecure-tls
+```
+
+And then:
+
+```none
+docker run -it --rm \
+  {{ page.docker_image }} join \
+  --ucp-node <ucp-node-name> \
+  --ucp-insecure-tls
 ```
