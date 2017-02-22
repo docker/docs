@@ -141,11 +141,11 @@ IDs to collaborators yourself should you need to remove a collaborator.
 
 ## Removing a delegation key from an existing repository
 
-To revoke collaborators' permission to sign tags for your image repository, you must
-know the IDs of their keys, because you need to remove their keys from the
-`targets/releases` delegation.
+To revoke a collaborator's ability to sign tags for your image repository, you
+need to remove their keys from the `targets/releases` delegation. To do this,
+you need the IDs of their keys.
 
-```
+```bash
 $ notary delegation remove docker.io/<username>/<imagename> targets/releases 729c7094a8210fd1e780e7b17b7bb55c9a28a48b871b07f65d97baf93898523a
 
 Removal of delegation role targets/releases with keys [729c7094a8210fd1e780e7b17b7bb55c9a28a48b871b07f65d97baf93898523a], to repository "docker.io/<username>/<imagename>" staged for next publish.
