@@ -8,9 +8,9 @@ Docker Engine supports the usage of the `targets/releases` delegation as the
 canonical source of a trusted image tag.
 
 Using this delegation allows you to collaborate with other publishers without
-sharing your repository key (a combination of your targets and snapshot keys -
-please see [Manage keys for content trust](trust_key_mng.md) for more information).
-A collaborator can keep their own delegation key private.
+sharing your repository key, which is a combination of your targets and snapshot keys.
+See [Manage keys for content trust](trust_key_mng.md) for more information).
+Collaborators can keep their own delegation keys private.
 
 The `targets/releases` delegation is currently an optional feature - in order
 to set up delegations, you must use the Notary CLI:
@@ -141,11 +141,11 @@ IDs to collaborators yourself should you need to remove a collaborator.
 
 ## Removing a delegation key from an existing repository
 
-To revoke a collaborator's permission to sign tags for your image repository, you must
-know the IDs of their keys, because you need to remove their keys from the
-`targets/releases` delegation.
+To revoke a collaborator's ability to sign tags for your image repository, you
+need to remove their keys from the `targets/releases` delegation. To do this,
+you need the IDs of their keys.
 
-```
+```bash
 $ notary delegation remove docker.io/<username>/<imagename> targets/releases 729c7094a8210fd1e780e7b17b7bb55c9a28a48b871b07f65d97baf93898523a
 
 Removal of delegation role targets/releases with keys [729c7094a8210fd1e780e7b17b7bb55c9a28a48b871b07f65d97baf93898523a], to repository "docker.io/<username>/<imagename>" staged for next publish.
