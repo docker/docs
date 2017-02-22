@@ -909,9 +909,13 @@ the service's task containers.
   `/run/secrets/` in the service's task containers. Both default to `0` if not
   specified.
 - `mode`: The permissions for the file that will be mounted in `/run/secrets/`
-  in the service's task containers, in octal notation. For instance, `0777`
+  in the service's task containers, in octal notation. For instance, `0444`
   represents world-readable. The default in Docker 1.13.1 is `0000`, but will
-  be `0444` in the future.
+  be `0444` in the future. Secrets cannot be writable, but the executable bit
+  can be set. If you aren't familiar with UNIX file permission modes, you
+  may find this
+  [permissions calculator](http://permissions-calculator.org/){: target="_blank" class="_" }
+  useful.
 
 The following example sets name of the `my_secret` to `redis_secret` within the
 container, sets the mode to `0440` (group-readable) and sets the user and group
