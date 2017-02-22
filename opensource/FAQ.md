@@ -63,7 +63,7 @@ Most [editors have plug-ins](https://github.com/golang/go/wiki/IDEsAndTextEditor
 * Squash your commits into logical units of work using
   `git rebase -i` and `git push -f`.
 
-* If your code requires a change to tests or documentation, include code,test,
+* If your code requires a change to tests or documentation, include code, test,
 and documentation changes in the same commit as your code; this ensures a
 revert would remove all traces of the feature or fix.
 
