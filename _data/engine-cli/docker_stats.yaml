@@ -104,7 +104,7 @@ examples: |-
 
   ```bash
   {% raw %}
-  $ docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}"
+  $ docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"
 
   CONTAINER           CPU %               PRIV WORKING SET
   1285939c1fd3        0.07%               796 KiB / 64 MiB
