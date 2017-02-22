@@ -14,11 +14,10 @@ To get started with Docker on Oracle Linux, make sure you
 
 ### OS requirements
 
-To install Docker, you need the 64-bit version of Oracle Linux 6 or 7.
+To install Docker, you need the 64-bit version of Oracle Linux 6 or 7 running the
+Unbreakable Enterprise Kernel Release 4 (4.1.12) or higher.
 
-Oracle recommends using the Unbreakable Enterprise Kernel (UEK)
-version 4.1.12 or higher. For Oracle Linux 6, you need to enable extra repositories
-to install UEK4. See
+For Oracle Linux 6, you need to enable extra repositories to install UEK4. See
 [Obtaining and installing the UEK packages](https://docs.oracle.com/cd/E37670_01/E37355/html/ol_obtain_uek.html){: target="_blank" class="_" }.
 
 The [OverlayFS2 storage driver](https://docs.docker.com/engine/userguide/storagedriver/overlayfs-driver/) is only supported
@@ -26,8 +25,8 @@ when running the UEK4.
 
 ### Remove unofficial Docker packages
 
-Oracle's repositories may contain an older version of Docker, with the package name
-`docker` instead of `docker-engine`. If you installed this version of Docker,
+Oracle's repositories used to contain an older version of Docker with the package name
+`docker` instead of `docker-engine`. If you still have this version of Docker installed,
 remove it using the following command:
 
 ```bash
@@ -54,7 +53,7 @@ or volumes you created using the older version of Docker are preserved.
 
 You can install Docker in different ways, depending on your needs:
 
-- Most users
+- Users who do not require Docker support from Oracle
   [set up the official Docker repositories](#install-using-the-repository) and
   install from them, for ease of installation and upgrade tasks. This is the
   recommended approach.
@@ -62,10 +61,10 @@ You can install Docker in different ways, depending on your needs:
 - Some users download the RPM package and install it manually and manage
   upgrades completely manually.
 
-- Some users cannot use third-party repositories, and must rely on
-  the version of Docker in the Oracle repositories. This version of Docker may
-  be out of date. Those users should consult the [Oracle Linux Docker User's Guide](http://docs.oracle.com/cd/E52668_01/E75728/html/index.html) and not
-  follow these procedures.
+- Some users cannot use third-party repositories or who wish to receive Docker support
+  from Oracle must rely on the version of Docker in the Oracle repositories.
+  This version of Docker may be out of date. Those users should consult the Oracle
+  Linux Docker User's Guide and not follow these procedures.
 
 ### Install using the repository
 
@@ -131,24 +130,24 @@ Docker from the repository.
     ```bash
     $ sudo yum makecache fast
     ```
-   
+
 2.  Install the latest version of Docker, or go to the next step to install a
     specific version.
 
     ```bash
     $ sudo yum -y install docker-engine
     ```
-    
+
     If this is the first time you are installing a package from
     the Docker repositories, the GPG key and fingerprint will be shown and
     automatically accepted.
-    
-    If you do not want to automatically accept the GPG key, remove the `-y` 
+
+    If you do not want to automatically accept the GPG key, remove the `-y`
     parameter so that yum prompts you to accept the GPG manually.
-    
+
     Ensure the GPG details match the following:
-    
-    ```
+
+    ```none
     Retrieving key from https://yum.dockerproject.org/gpg
     Importing GPG key 0x2C52609D:
     Userid     : "Docker Release Tool (releasedocker) <docker@docker.com>"
@@ -181,14 +180,14 @@ Docker from the repository.
     The contents of the list depend upon which repositories you have enabled,
     and will be specific to your version of Oracle Linux (indicated by the
     `.el7` suffix on the version, in this example). Choose a specific version to
-    install. The second column is the version string. 
-    
-    The third column is the repository name, which indicates which repository the 
+    install. The second column is the version string.
+
+    The third column is the repository name, which indicates which repository the
     package is from and by extension extension its stability level. Oracle ships
     the `docker-engine` in its addon repository so you may also see that repository
     in this column if you have it enabled.
-    
-    To install a specific version, append the version string to the package name 
+
+    To install a specific version, append the version string to the package name
     and separate them by a hyphen
     (`-`):
 
@@ -229,9 +228,9 @@ users to run Docker commands and for other optional configuration steps.
 
 #### Upgrade Docker
 
-To upgrade Docker, run `sudo yum update docker-engine` to upgrade to the latest available
-version. If you would prefer to upgrade to a specific version, first run 
-`sudo yum makecache fast`, then follow the [installation instructions](#install-docker), 
+To upgrade Docker, either run `sudo yum update docker-engine` to upgrade to the latest available
+version or if you would prefer to upgrade to a specific version, first run
+`sudo yum makecache fast`, then follow the [installation instructions](#install-docker),
 choosing the new version you want to install.
 
 ### Install from a package
@@ -309,11 +308,11 @@ instead of `yum -y install`, and pointing to the new file.
     $ sudo rm -rf /var/lib/docker
     ```
 
-    > **Note**: If you are using the `btrfs` graph driver, you will need to manually 
+    > **Note**: If you are using the `btrfs` graph driver, you will need to manually
     > remove any subvolumes that were created by the Docker Engine before removing the
     > rest of the data.
-    > Review the [Oracle Linux 7 Administrator Guide](http://docs.oracle.com/cd/E52668_01/E54669/html/ol7-use-case3-btrfs.html) 
-    > for more information on how to remove btrfs subvolumes or see the output of 
+    > Review the [Oracle Linux 7 Administrator Guide](http://docs.oracle.com/cd/E52668_01/E54669/html/ol7-use-case3-btrfs.html)
+    > for more information on how to remove btrfs subvolumes or see the output of
     > `man btrfs-subvolume` for information on removing `btrfs` subvolumes.
 
 You must delete any edited configuration files manually.
