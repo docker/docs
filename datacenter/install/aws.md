@@ -339,7 +339,7 @@ provides multiple advantages to easily deploy and access your application.
     docker service create -p 8080 \
       --network ucp-hrm \
       --name demo-hrm-app \
-      --label com.docker.ucp.mesh.http=8080=http://foo.example.com \
+      --label com.docker.ucp.mesh.http.8080=external_route=http://foo.example.com,internal_port=8080 \
       ehazlett/docker-demo:dcus
     ```
 
