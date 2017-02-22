@@ -175,7 +175,7 @@ services:
     depends_on:
       - db
     deploy:
-      replicas: 2
+      replicas: 1
       update_config:
         parallelism: 2
         delay: 10s
@@ -196,6 +196,8 @@ services:
         delay: 10s
         max_attempts: 3
         window: 120s
+      placement:
+        constraints: [node.role == manager]
 
   visualizer:
     image: dockersamples/visualizer:stable

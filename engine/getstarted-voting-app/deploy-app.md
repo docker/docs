@@ -79,12 +79,12 @@ We'll deploy the application from the manager.
     ```
     docker@manager:~$ docker stack services vote
     ID            NAME             MODE        REPLICAS  IMAGE
-    0y3q6lgc0drn  vote_result      replicated  2/2       dockersamples/examplevotingapp_result:before
-    fvsaqvuec4yw  vote_redis       replicated  2/2       redis:alpine
-    igev2xk5s3zo  vote_worker      replicated  1/1       dockersamples/examplevotingapp_worker:latest
-    vpfjr9b0qc01  vote_visualizer  replicated  1/1       dockersamples/visualizer:stable
-    wctxjnwl22k4  vote_vote        replicated  2/2       dockersamples/examplevotingapp_vote:before
-    zp0zyvgaguox  vote_db          replicated  1/1       postgres:9.4
+    1zkatkq7sf8n  vote_result      replicated  1/1       dockersamples/examplevotingapp_result:after
+    hphnxyt93h42  vote_redis       replicated  2/2       redis:alpine
+    jd0wafumrcil  vote_vote        replicated  2/2       dockersamples/examplevotingapp_vote:after
+    msief4cqme29  vote_visualizer  replicated  1/1       dockersamples/visualizer:stable
+    qa6y8sfmtjoz  vote_db          replicated  1/1       postgres:9.4
+    w04bh1vumnep  vote_worker      replicated  1/1       dockersamples/examplevotingapp_worker:latest
     ```
 
 ## What's next?
