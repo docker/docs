@@ -53,7 +53,7 @@ or volumes you created using the older version of Docker are preserved.
 
 You can install Docker in different ways, depending on your needs:
 
-- Users who do not require Docker support from Oracle
+- Users who do not require Docker support from Oracle can
   [set up the official Docker repositories](#install-using-the-repository) and
   install from them, for ease of installation and upgrade tasks. This is the
   recommended approach.
