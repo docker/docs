@@ -4,61 +4,85 @@ keywords: docker, registry, monitor, troubleshoot
 title: Troubleshoot Docker Trusted Registry
 ---
 
-<!-- TODO: review page for v2.2 -->
+This guide contains tips and tricks for troubleshooting DTR problems.
+
+## Troubleshoot overlay networks
 
 High availability in DTR depends on having overlay networking working in UCP.
-To manually test that overlay networking is working in UCP run the following
-commands on two different UCP machines.
+One way to test if overlay networks are working correctly you can deploy
+containers in different nodes, that are attached to the same overlay network
+and see if they can ping one another.
+
+Use SSH to log into a UCP node, and run:
 
 ```none
-docker run -it --rm --net dtr-ol --name overlay-test1 --entrypoint sh docker/dtr
-docker run -it --rm --net dtr-ol --name overlay-test2 --entrypoint ping docker/dtr -c 3 overlay-test1
+docker run -it --rm \
+  --net dtr-ol --name overlay-test1 \
+  --entrypoint sh docker/dtr
 ```
 
-You can create new overlay network for this test with `docker network create -d overaly network-name`.
-You can also use any images that contain `sh` and `ping` for this test.
+Then use SSH to log into another UCP node and run:
 
-If the second command succeeds, overlay networking is working.
-
-## DTR doesn't come up after a Docker restart
-
-This is a known issue with Docker restart policies when DTR is running on the same
-machine as a UCP controller. If this happens, you can simply restart the DTR replica
-from the UCP UI under "Applications". The best workaround right now is to not run
-DTR on the same node as a UCP controller.
-
-## Etcd refuses to start after a Docker restart
-
-If you see the following log message in etcd's logs after a DTR restart it means that
-your DTR replicas are on machines that don't have their clocks synchronized. Etcd requires
-synchronized clocks to function correctly.
-
-```
-2016-04-27 17:56:34.086748 W | rafthttp: the clock difference against peer aa4fdaf4c562342d is too high [8.484795885s > 1s]
+```none
+docker run -it --rm \
+  --net dtr-ol --name overlay-test2 \
+  --entrypoint ping docker/dtr -c 3 overlay-test1
 ```
 
-## Accessing the RethinkDB Admin UI
+If the second command succeeds, it means that overlay networking is working
+correctly.
 
- > Warning: This command will expose your database to the internet with no authentication. Use with caution.
+You can run this test with any overlay network, and any Docker image that has
+`sh` and `ping`.
 
-Run this on the UCP node that has a DTR replica with the given replica id:
 
+## Access RethinkDB directly
+
+DTR uses RethinkDB for persisting data and replicating it across replicas.
+It might be helpful to connect directly to the RethinkDB instance running on a
+DTR replica to check the DTR internal state.
+
+Use SSH to log into a node that is running a DTR replica, and run the following
+command, replacing `$REPLICA_ID` by the id of the DTR replica running on that
+node:
+
+```none
+docker run -it --rm \
+  --net dtr-ol \
+  -v dtr-ca-$REPLICA_ID:/ca dockerhubenterprise/rethinkcli:v2.2.0 \
+  $REPLICA_ID
 ```
-docker run --rm -it --net dtr-br -p 9999:8080 svendowideit/ambassador dtr-rethinkdb-$REPLICA_ID 8080
+
+This starts an interactive prompt where you can run RethinkDB queries like:
+
+```none
+> r.db('dtr2').table('repositories')
 ```
 
-Options to make this more secure:
+[Learn more about RethinkDB queries](https://www.rethinkdb.com/docs/guide/javascript/).
 
-* Use `-p 127.0.0.1:9999:8080` to expose the admin UI only to localhost
-* Use an SSH tunnel in combination with exposing the port only to localhost
-* Use a firewall to limit which IPs are allowed to connect
-* Use a second proxy with TLS and basic auth to provide secure access over the Internet
+## Recover from an unhealthy replica
 
-## Accessing etcd directly
+When a DTR replica is unhealthy or down, the DTR web UI displays a warning:
 
-You can execute etcd commands on a UCP node hosting a DTR replica using etcdctl
-via the following docker command:
-
+```none
+Warning: The following replicas are unhealthy: 59e4e9b0a254; Reasons: Replica reported health too long ago: 2017-02-18T01:11:20Z; Replicas 000000000000, 563f02aba617 are still healthy.
 ```
-docker run --rm -v dtr-ca-$REPLICA_ID:/ca --net dtr-br -it --entrypoint /etcdctl docker/dtr-etcd:v2.2.4 --endpoint https://dtr-etcd-$REPLICA_ID.dtr-br:2379 --ca-file /ca/etcd/cert.pem --key-file /ca/etcd-client/key.pem --cert-file /ca/etcd-client/cert.pem
+
+To fix this, you should remove the unhealthy replica from the DTR cluster,
+and join a new one. Start by running:
+
+```none
+docker run -it --rm \
+  {{ page.docker_image }} remove \
+  --ucp-insecure-tls
+```
+
+And then:
+
+```none
+docker run -it --rm \
+  {{ page.docker_image }} join \
+  --ucp-node <ucp-node-name> \
+  --ucp-insecure-tls
 ```
