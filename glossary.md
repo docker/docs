@@ -2,12 +2,23 @@
 title: "Docker Glossary"
 description: "Glossary of terms used around Docker"
 keywords: "glossary, docker, terms, definitions"
-skip-right-nav: true
+notoc: true
 ---
-{% for entry in site.data.glossary.glossary %}
-## {{ entry.term }}
+<!--
+To edit/add/remove glossary entries, visit the YAML file at:
+https://github.com/docker/docker.github.io/blob/master/_data/glossary.yaml
 
-{{ entry.def }}
+To get a specific entry while writing a page in the docs, enter Liquid text
+like so:
+{{ site.data.glossary["aufs"] }}
+-->
 
-<span id="related-{{ forloop.index }}" style="display:none" class="relatedGlossary">{{ entry.term }}</span>
+{% for entry in site.data.glossary %}{% assign newEntry="true" %}
+
+## {{ entry[0] }}
+
+{{ entry[1] }}
+
+<span class="relatedGlossaryText" style="display:none">{{ entry[0] }}</span>
+
 {% endfor %}
