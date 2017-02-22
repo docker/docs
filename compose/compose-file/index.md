@@ -1223,7 +1223,7 @@ conflicting with those used by other software.
 
 The top-level `networks` key lets you specify networks to be created. For a full
 explanation of Compose's use of Docker networking features, see the
-[Networking guide](networking.md).
+[Networking guide](../networking.md).
 
 ### driver
 
