@@ -67,14 +67,14 @@ NOTE: Because Docker for Mac and Docker for Windows use a Linux VM, you must com
 Then you can run it (on Linux, Mac, or Windows) using: `docker run --rm hello`
 
 This example creates the hello-world image used in the tutorials.
-If you want to test it out, you can clone [the image repo](https://github.com/docker-library/hello-world)
+If you want to test it out, you can clone [the image repo](https://github.com/docker-library/hello-world).
 
 
 ## More resources
 
-There are lots more resources available to help you write your 'Dockerfile`.
+There are lots more resources available to help you write your `Dockerfile`.
 
 * There's a [complete guide to all the instructions](../../reference/builder.md) available for use in a `Dockerfile` in the reference section.
 * To help you write a clear, readable, maintainable `Dockerfile`, we've also
-written a [`Dockerfile` Best Practices guide](dockerfile_best-practices.md).
+written a [`Dockerfile` best practices guide](dockerfile_best-practices.md).
 * If your goal is to create a new Official Repository, be sure to read up on Docker's [Official Repositories](/docker-hub/official_repos/).
