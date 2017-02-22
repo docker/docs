@@ -81,8 +81,8 @@ command and it will resume from where it left off.
 
 ## Patch upgrade
 
-A patch upgrade changes only the DTR containers and it should be a relatively
-safe operation. The command is the same as for a minor upgrade.
+A patch upgrade changes only the DTR containers and it's always safer than a minor
+upgrade. The command is the same as for a minor upgrade.
 
 ## Where to go next
 
