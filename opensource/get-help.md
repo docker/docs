@@ -69,7 +69,7 @@ platforms.
 Using Webchat from Freenode.net is a quick and easy way to get chatting. To
 register:
 
-1.  In your browser open <a href="https://webchat.freenode.net" target="_blank">https://webchat.freenode.net</a>
+1.  In your browser open <a href="https://webchat.freenode.net" target="_blank">https://webchat.freenode.net</a>.
 
     ![Login to webchat screen](images/irc_connect.png)
 
@@ -127,7 +127,7 @@ command line bar:
 
     Your nickname is now registered to chat on freenode.net.
 
-[Jump ahead to tips to join a docker channel and start chatting](get-help.md#tips)
+[Jump ahead to tips to join a docker channel and start chatting](get-help.md#tips).
 
 ## IRCCloud
 
@@ -147,7 +147,7 @@ form. People who have already registered with IRCCloud can select the "sign in
 here" link. Additionally, people who are already registered with IRCCloud may
 have a cookie stored on their web browser that enables a quick start "let's go"
 link to be shown instead of the above form. In this case just select the
-"let's go" link and [jump ahead to start chatting](get-help.md#start-chatting)
+"let's go" link and [jump ahead to start chatting](get-help.md#start-chatting).
 
 3.  After entering your email address in the form, check your email for an invite
 from IRCCloud and follow the instructions provided in the email.
