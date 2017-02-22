@@ -8,8 +8,8 @@ Docker Engine supports the usage of the `targets/releases` delegation as the
 canonical source of a trusted image tag.
 
 Using this delegation allows you to collaborate with other publishers without
-sharing your repository key (a combination of your targets and snapshot keys -
-please see "[Manage keys for content trust](trust_key_mng.md)" for more information).
+sharing your repository key, which is a combination of your targets and snapshot keys.
+See [Manage keys for content trust](trust_key_mng.md) for more information).
 Collaborators can keep their own delegation keys private.
 
 The `targets/releases` delegation is currently an optional feature - in order
@@ -34,7 +34,7 @@ available on your path
 
 For more detailed information about how to use Notary outside of the default
 Docker Content Trust use cases, please refer to the
-[the Notary CLI documentation](/notary/getting_started.md).
+[Notary CLI documentation](/notary/getting_started.md).
 
 Note that when publishing and listing delegation changes using the Notary client,
 your Docker Hub credentials are required.
@@ -45,7 +45,7 @@ Your collaborator needs to generate a private key (either RSA or ECDSA)
 and give you the public key so that you can add it to the `targets/releases`
 delegation.
 
-The easiest way to for them to generate these keys is with OpenSSL.
+The easiest way for them to generate these keys is with OpenSSL.
 Here is an example of how to generate a 2048-bit RSA portion key (all RSA keys
 must be at least 2048 bits):
 
@@ -115,7 +115,7 @@ supports reading only from `targets/releases`.
 
 It also adds the collaborator's public key to the delegation, enabling them to sign
 the `targets/releases` delegation so long as they have the private key corresponding
-to this public key.  The `--all-paths` flags tells Notary not to restrict the tag
+to this public key.  The `--all-paths` flag tells Notary not to restrict the tag
 names that can be signed into `targets/releases`, which we highly recommend for
 `targets/releases`.
 

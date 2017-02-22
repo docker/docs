@@ -69,7 +69,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
         $ mkdir trustsandbox
         $ cd trustsandbox
 
-2. Create a filed called `docker-compose.yml` with your favorite editor.  For example, using vim:
+2. Create a file called `docker-compose.yml` with your favorite editor.  For example, using vim:
 
         $ touch docker-compose.yml
         $ vim docker-compose.yml
@@ -211,7 +211,7 @@ What happens when data is corrupted and you try to pull it when trust is
 enabled? In this section, you go into the `sandboxregistry` and tamper with some
 data. Then, you try and pull it.
 
-1. Leave the `trustsandbox` shell and and container running.
+1. Leave the `trustsandbox` shell and container running.
 
 2. Open a new interactive terminal from your host, and obtain a shell into the
 `sandboxregistry` container.
@@ -231,13 +231,13 @@ data. Then, you try and pull it.
 
         root@65084fc6f047:/# cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
 
-5. Add malicious data to one of the trusttest layers:
+5. Add malicious data to one of the `trusttest` layers:
 
         root@65084fc6f047:/# echo "Malicious data" > data
 
 6. Go back to your `trustsandbox` terminal.
 
-7. List the trusttest image.
+7. List the `trusttest` image.
 
         / # docker images | grep trusttest
         REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE

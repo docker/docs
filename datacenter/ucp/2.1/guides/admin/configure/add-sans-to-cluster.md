@@ -37,17 +37,19 @@ that join the cluster.
 
 You can also do this from the CLI by first running:
 
-```none
+```bash
+{% raw %}
 $ docker node inspect --format '{{ index .Spec.Labels "com.docker.ucp.SANs" }}' <node-id>
 default-cs,127.0.0.1,172.17.0.1
+{% endraw %}
 ```
 
 This will get the current set of SANs for the given manager node. Append your
 desired SAN to this list (e.g. `default-cs,127.0.0.1,172.17.0.1,example.com`)
 and then run:
 
-```none
-docker node update --label-add com.docker.ucp.SANs=<SANs-list> <node-id>
+```bash
+$ docker node update --label-add com.docker.ucp.SANs=<SANs-list> <node-id>
 ```
 
 `<SANs-list>` is the list of SANs with your new SAN appended at the end. As in

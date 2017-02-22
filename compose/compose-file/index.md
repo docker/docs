@@ -47,8 +47,8 @@ definition in version 3.
 Configuration options that are applied at build time.
 
 `build` can be specified either as a string containing a path to the build
-context, or an object with the path specified under [context](compose-file.md#context) and
-optionally [dockerfile](compose-file.md#dockerfile) and [args](compose-file.md#args).
+context, or an object with the path specified under [context](#context) and
+optionally [dockerfile](#dockerfile) and [args](#args).
 
     build: ./dir
 
@@ -269,11 +269,11 @@ Configures if and how to restart containers when they exit. Replaces
 
 - `condition`: One of `none`, `on-failure` or `any` (default: `any`).
 - `delay`: How long to wait between restart attempts, specified as a
-  [duration](compose-file.md#specifying-durations) (default: 0).
+  [duration](#specifying-durations) (default: 0).
 - `max_attempts`: How many times to attempt to restart a container before giving
   up (default: never give up).
 - `window`: How long to wait before deciding if a restart has succeeded,
-  specified as a [duration](compose-file.md#specifying-durations) (default:
+  specified as a [duration](#specifying-durations) (default:
   decide immediately).
 
 ```
@@ -461,9 +461,9 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
     # Set Rails/Rack environment
     RACK_ENV=development
 
-> **Note:** If your service specifies a [build](compose-file.md#build) option, variables
+> **Note:** If your service specifies a [build](#build) option, variables
 > defined in environment files will _not_ be automatically visible during the
-> build. Use the [args](compose-file.md#args) sub-option of `build` to define build-time
+> build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
 
 The value of `VAL` is used as is and not modified at all. For example if the value is
@@ -489,9 +489,9 @@ machine Compose is running on, which can be helpful for secret or host-specific 
       - SHOW=true
       - SESSION_SECRET
 
-> **Note:** If your service specifies a [build](compose-file.md#build) option, variables
+> **Note:** If your service specifies a [build](#build) option, variables
 > defined in `environment` will _not_ be automatically visible during the
-> build. Use the [args](compose-file.md#args) sub-option of `build` to define build-time
+> build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
 
 ### expose
@@ -563,7 +563,7 @@ used.
 
 ### healthcheck
 
-> [Version 2.1 file format](compose-file.md#version-21) and up.
+> [Version 2.1 file format](compose-versioning.md#version-21) and up.
 
 Configure a check that's run to determine whether or not containers for this
 service are "healthy". See the docs for the
@@ -577,7 +577,7 @@ for details on how healthchecks work.
       retries: 3
 
 `interval` and `timeout` are specified as
-[durations](compose-file.md#specifying-durations).
+[durations](#specifying-durations).
 
 `test` must be either a string or a list. If it's a list, the first item must be
 either `NONE`, `CMD` or `CMD-SHELL`. If it's a string, it's equivalent to
@@ -608,7 +608,7 @@ a partial image ID.
     image: a4bc65fd
 
 If the image does not exist, Compose attempts to pull it, unless you have also
-specified [build](compose-file.md#build), in which case it builds it using the specified
+specified [build](#build), in which case it builds it using the specified
 options and tags it with the specified tag.
 
 ### isolation
@@ -650,9 +650,9 @@ Containers for the linked service will be reachable at a hostname identical to
 the alias, or the service name if no alias was specified.
 
 Links also express dependency between services in the same way as
-[depends_on](compose-file.md#dependson), so they determine the order of service startup.
+[depends_on](#dependson), so they determine the order of service startup.
 
-> **Note:** If you define both links and [networks](compose-file.md#networks), services with
+> **Note:** If you define both links and [networks](#networks), services with
 > links between them must share at least one network in common in order to
 > communicate.
 
@@ -709,7 +709,7 @@ the special form `service:[service name]`.
 ### networks
 
 Networks to join, referencing entries under the
-[top-level `networks` key](compose-file.md#network-configuration-reference).
+[top-level `networks` key](#network-configuration-reference).
 
     services:
       some-service:
@@ -771,7 +771,7 @@ In the example below, three services are provided (`web`, `worker`, and `db`), a
 
 Specify a static IP address for containers for this service when joining the network.
 
-The corresponding network configuration in the [top-level networks section](compose-file.md#network-configuration-reference) must have an `ipam` block with subnet configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](compose-file.md#enableipv6) option must be set.
+The corresponding network configuration in the [top-level networks section](#network-configuration-reference) must have an `ipam` block with subnet configurations covering each static address. If IPv6 addressing is desired, the [`enable_ipv6`](#enableipv6) option must be set.
 
 An example:
 
@@ -850,6 +850,97 @@ port (a random host port will be chosen).
      - "127.0.0.1:5000-5010:5000-5010"
      - "6060:6060/udp"
 
+### secrets
+
+Grant access to secrets on a per-service basis using the per-service `secrets`
+configuration. Two different syntax variants are supported.
+
+> **Note**: The secret must already exist or be
+> [defined in the top-level `secrets` configuration](#secrets-configuration-reference)
+> of this stack file, or stack deployment will fail.
+
+#### Short syntax
+
+The short syntax variant only specifies the secret name. This grants the
+container access to the secret and mounts it at `/run/secrets/<secret_name>`
+within the container. The source name and destination mountpoint are both set
+to the secret name.
+
+> **Warning**: Due to a bug in Docker 1.13.1, using the short syntax currently
+> mounts the secret with permissions `000`, which means secrets defined using
+> the short syntax are unreadable within the container if the command does not
+> run as the `root` user. The workaround is to use the long syntax instead if
+> you use Docker 1.13.1 and the secret must be read by a non-`root` user.
+
+The following example uses the short syntax to grant the `redis` service
+access to the `my_secret` and `my_other_secret` secrets. The value of
+`my_secret` is set to the contents of the file `./my_secret.txt`, and
+`my_other_secret` is defined as an external resource, which means that it has
+already been defined in Docker, either by running the `docker secret create`
+command or by another stack deployment. If the external secret does not exist,
+the stack deployment fails with a `secret not found` error.
+
+```none
+version: "3.1"
+services:
+  redis:
+    image: redis:latest
+    deploy:
+      replicas: 1
+    secrets:
+      - my_secret
+      - my_other_secret
+secrets:
+  my_secret:
+    file: ./my_secret.txt
+  my_other_secret:
+    external: true
+```
+
+#### Long syntax
+
+The long syntax provides more granularity in how the secret is created within
+the service's task containers.
+
+- `source`: The name of the secret as it exists in Docker.
+- `target`: The name of the file that will be mounted in `/run/secrets/` in the
+  service's task containers. Defaults to `source` if not specified.
+- `uid` and `gid`: The numeric UID or GID which will own the file within
+  `/run/secrets/` in the service's task containers. Both default to `0` if not
+  specified.
+- `mode`: The permissions for the file that will be mounted in `/run/secrets/`
+  in the service's task containers, in octal notation. For instance, `0777`
+  represents world-readable. The default in Docker 1.13.1 is `0000`, but will
+  be `0444` in the future.
+
+The following example sets name of the `my_secret` to `redis_secret` within the
+container, sets the mode to `0440` (group-readable) and sets the user and group
+to `103`. The `redis` service does not have access to the `my_other_secret`
+secret.
+
+```none
+version: "3.1"
+services:
+  redis:
+    image: redis:latest
+    deploy:
+      replicas: 1
+    secrets:
+      - source: my_secret
+        target: redis_secret
+        uid: '103'
+        gid: '103'
+        mode: 0440
+secrets:
+  my_secret:
+    file: ./my_secret.txt
+  my_other_secret:
+    external: true
+```
+
+You can grant a service access to multiple secrets and you can mix long and
+short syntax. Defining a secret does not imply granting a service access to it.
+
 ### security_opt
 
 Override the default labeling scheme for each container.
@@ -866,8 +957,8 @@ Override the default labeling scheme for each container.
 
 Specify how long to wait when attempting to stop a container if it doesn't
 handle SIGTERM (or whatever stop signal has been specified with
-[`stop_signal`](compose-file.md#stopsignal)), before sending SIGKILL. Specified
-as a [duration](compose-file.md#specifying-durations).
+[`stop_signal`](#stopsignal)), before sending SIGKILL. Specified
+as a [duration](#specifying-durations).
 
     stop_grace_period: 1s
     stop_grace_period: 1m30s
@@ -931,7 +1022,7 @@ more information.
 ### volumes, volume\_driver
 
 > **Note:** The top-level
-> [`volumes` option](compose-file.md#volume-configuration-reference) defines
+> [`volumes` option](#volume-configuration-reference) defines
 > a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format.
 
 Mount paths or named volumes, optionally specifying a path on the host machine
@@ -984,7 +1075,7 @@ See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 ## Specifying durations
 
 Some configuration options, such as the `interval` and `timeout` sub-options for
-[`healthcheck`](compose-file.md#healthcheck), accept a duration as a string in a
+[`healthcheck`](#healthcheck), accept a duration as a string in a
 format that looks like this:
 
     2.5s
@@ -1212,6 +1303,33 @@ refer to it within the Compose file:
       outside:
         external:
           name: actual-name-of-network
+
+## secrets configuration reference
+
+The top-level `secrets` declaration defines or references
+[secrets](/engine/swarm/secrets.md) which can be granted to the services in this
+stack. The source of the secret is either `file` or `external`.
+
+- `file`: The secret is created with the contents of the file at the specified
+  path.
+- `external`: If set to true, specifies that this secret has already been
+  created. Docker will not attempt to create it, and if it does not exist, a
+  `secret not found` error occurs.
+
+In this example, `my_first_secret` will be created (as
+`<stack_name>_my_first_secret)`when the stack is deployed,
+and `my_second_secret` already exists in Docker.
+
+```none
+secrets:
+  my_first_secret:
+    file: ./secret_data
+  my_second_secret
+    external: true
+```
+
+You still need to [grant access to the secrets](#secrets) to each service in the
+stack.
 
 ## Variable substitution
 

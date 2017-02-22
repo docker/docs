@@ -6,7 +6,7 @@ title: Deploying Notary Server with Compose
 
 The easiest way to deploy Notary Server is by using Docker Compose. To follow the procedure on this page, you must have already [installed Docker Compose](/compose/install.md).
 
-1. Clone the Notary repository
+1. Clone the Notary repository.
 
         git clone git@github.com:docker/notary.git
 
