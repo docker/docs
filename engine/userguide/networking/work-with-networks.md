@@ -17,9 +17,9 @@ available through the Docker Engine CLI. These commands are:
 
 While not required, it is a good idea to read [Understanding Docker
 network](index.md) before trying the examples in this section. The
-examples for the rely on a `bridge` network so that you can try them
-immediately.  If you would prefer to experiment with an `overlay` network see
-the [Getting started with multi-host networks](get-started-overlay.md) instead.
+examples use the default `bridge` network so that you can try them
+immediately. To experiment with an `overlay` network, check out
+the [Getting started with multi-host networks](get-started-overlay.md) guide instead.
 
 ## Create networks
 
