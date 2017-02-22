@@ -106,7 +106,7 @@ examples: |-
   {% raw %}
   $ docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"
 
-  CONTAINER              CPU %               PRIV WORKING SET
+  NAME                   CPU %               PRIV WORKING SET
   fervent_panini         0.07%               796 KiB / 64 MiB
   ecstatic_kilby         0.07%               2.746 MiB / 64 MiB
   quizzical_nobel        0.03%               4.583 MiB / 64 MiB
