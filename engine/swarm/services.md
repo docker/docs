@@ -554,19 +554,19 @@ $ docker service create \
   <IMAGE>
 ```
  
->**Important note:** If your volume driver accepts a comma separated list as option
-it is required to escape the value from the outer CSV parser. To escape a `volume-opt`
-it is placed in double quotes and to avoid automatic escaping of these quotes the hole
-mount parameter value has to be surrounded by single quotes. 
-> A common example is the `local` driver which accepts mount options as comma separated
-list in the `o` parameter. For example with some nfs parameters it has to look like this:
+> **Important:** If your volume driver accepts a comma-separated list as an option,
+> you must escape the value from the outer CSV parser. To escape a `volume-opt`,
+> surround it with double quotes (`"`) and surround the entire mount parameter
+> with single quotes (`'`).
+> 
+> For example, the `local` driver accepts mount options as a comma-separated
+> list in the `o` parameter. This example shows the correcty to escape the list.
+> 
+>     $ docker service create \
+>          --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
+>         --name myservice \
+>         <IMAGE>
 
-```bash
-$ docker service create \
-  --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
-  --name myservice \
-  <IMAGE>
-```
 
 * Bind mounts are file system paths from the host where the scheduler deploys
 the container for the task. Docker mounts the path into the container. The
