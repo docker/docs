@@ -6,8 +6,8 @@ title: Docker Documentation
 notoc: true
 ---
 
-Docker packages your app with its dependencies, freeing you from worrying about your
-system configuration, and making your app more portable.
+Docker packages your app with its dependencies, freeing you from worrying about
+your system configuration, and making your app more portable.
 
 <table>
 <tr valign="top">
@@ -15,9 +15,9 @@ system configuration, and making your app more portable.
 {% capture basics %}
 ### Learn the basics of Docker
 
-The basic tutorial introduces Docker concepts, tools, and commands. The examples show you how to build, push,
-and pull Docker images, and run them as containers. This
-tutorial stops short of teaching you how to deploy applications.
+The basic tutorial introduces Docker concepts, tools, and commands. The examples
+show you how to build, push, and pull Docker images, and run them as containers.
+This tutorial stops short of teaching you how to deploy applications.
 {% endcapture %}{{ basics | markdownify }}
 </td>
 <td width="50%">
@@ -25,9 +25,10 @@ tutorial stops short of teaching you how to deploy applications.
 {% capture apps %}
 ### Define and deploy applications
 
-The define-and-deploy tutorial shows how to relate
-containers to each other and define them as services in an application that is ready to deploy at scale in a
-production environment. Highlights [Compose Version 3 new features](/engine/getstarted-voting-app/index.md#compose-version-3-features-and-compatibility) and swarm mode.
+The define-and-deploy tutorial shows how to relate containers to each other and
+define them as services in an application that is ready to deploy at scale in a
+production environment. Highlights Compose Version 3 new features and swarm
+mode.
 {% endcapture %}{{ apps | markdownify }}
 
 </td></tr>
