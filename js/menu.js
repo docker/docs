@@ -1,4 +1,6 @@
+// structure that includes every page's title, url, description, and keywords
 var metadata;
+// search autocomplete vars
 var autoCompleteShowing = false;
 var displayingAutcompleteResults = new Array();
 var autoCompleteShowingID = 0;
@@ -9,6 +11,17 @@ var scoreForTitleMatch = 10;
 var scoreForURLMatch = 5;
 var scoreForKeywordMatch = 3;
 var scoreForDescriptionMatch = 1
+
+function glossaryCheck() {
+  if (window.location.href.indexOf("/glossary/") > -1)
+  {
+    // you're viewing the glossary; load related topics for each entry
+    $(".relatedGlossary").each(function(){
+      console.log(this);
+    });
+  }
+}
+
 function addResult(topic, matchesTitle, matchesDescription, matchesURL, matchesKeywords)
 {
   var matchScore = (matchesTitle * scoreForTitleMatch) + (matchesDescription * scoreForDescriptionMatch) + (matchesURL * scoreForURLMatch) + (matchesKeywords * scoreForKeywordMatch);
@@ -195,5 +208,6 @@ jQuery(document).ready(function(){
     $.getJSON( "/metadata.txt", function( data ) {
       metadata = data;
       hookupTOCEvents();
+      glossaryCheck();
     });
 });
