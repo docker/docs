@@ -45,6 +45,7 @@ Set your local repo to track changes upstream, on the `docker` repository.
     ```
 
 2.  Add a remote called `upstream` that points to `docker/docker`.
+    
     ```
     $ git remote add upstream https://github.com/docker/docker.git
     ```
