@@ -65,7 +65,7 @@ beta channels, see the
 > - Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education
 >   (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please
 >   see
->   [What to know before you install](/docker-for-windows/index.md#what-to-know-before-you-install)
+>   [What to know before you install](/docker-for-windows/#what-to-know-before-you-install)
 >   for a full list of prerequisites.
 >
 > - You can switch between beta and stable versions, but you must have only one
