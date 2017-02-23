@@ -148,6 +148,8 @@ guides:
       title: Try out the voting app
     - path: /engine/getstarted-voting-app/customize-app/
       title: Customize the app and redeploy
+    - path: /engine/getstarted-voting-app/cleanup/
+      title: Graceful shutdown, reboot, and clean-up
   - sectiontitle: Learn by example
     section:
     - path: /engine/tutorials/networkingcontainers/
