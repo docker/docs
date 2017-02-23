@@ -17,7 +17,11 @@ Docker is a full development platform for creating containerized apps, and
 Docker for Windows is the best way to get started with Docker on Windows
 systems.
 
-> **Got Docker for Windows?** If you have not yet installed Docker for Windows, please see [Install Docker for Windows](install.md) for an explanation of stable and beta channels, download and install information.
+> **Got Docker for Windows?** If you have not yet installed Docker for Windows, please see [Install Docker for Windows](install.md) for an explanation of stable
+and beta channels, download and install information and system requirements. The
+topic [What to know before you
+install](install.md#what-to-know-before-you-install) is now in that section.
+{: id="what-to-know-before-you-install" }
 
 ## Check versions of Docker Engine, Compose, and Machine
 
