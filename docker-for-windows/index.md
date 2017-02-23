@@ -262,7 +262,7 @@ PowerShell Module as follows.
     if (-Not (Test-Path $PROFILE)) {
         New-Item $PROFILE –Type File –Force
     }
-    
+
     Add-Content $PROFILE "`nImport-Module posh-docker"
     ```
 
@@ -326,12 +326,9 @@ perform a factory reset.
   diagnostics, crash reports, and usage data. This information can help Docker
   improve the application and get more context for troubleshooting problems.
 
-  Uncheck any of the options to opt out and prevent auto-send of data. Docker
-  may prompt for more information in some cases, even with auto-send enabled.
-  Also, you can enable or disable these auto-reporting settings with one click
-  on the information popup when you first start Docker.
-
-  ![Startup information](/docker-for-windows/images/win-install-success-popup.png)
+  Uncheck any of the options to opt out and prevent auto-send of
+  data. Docker may prompt for more information in some cases,
+  even with auto-send enabled.
 
 ### Shared Drives
 
@@ -530,9 +527,11 @@ Linux VM.
 
 ### Switch between Windows and Linux containers
 
-Starting with Beta 26 and Stable 1.13.0, you can select which daemon (Linux or Windows) the Docker
+You can select which daemon (Linux or Windows) the Docker
 CLI talks to. Select **Switch to Windows containers** to toggle to Windows
 containers. Select **Switch to Linux containers**.
+
+![Windows-Linux container types switch](images/config-popup-win-linux-switch.png)
 
 Microsoft Developer Network has preliminary/draft information on Windows
 containers
@@ -605,11 +604,20 @@ forum](https://forums.docker.com/c/docker-for-windows).
 To report bugs or problems, log on to [Docker for Windows issues on
 GitHub](https://github.com/docker/for-win/issues), where you can review
 community reported issues, and file new ones. As a part of reporting issues on
-GitHub, we can help you troubleshoot the log data. See the [Diagnose and
-Feedback](#diagnose-and-feedback) topic below.
+GitHub, we can help you troubleshoot the log data. See the
+[Diagnose and Feedback](#diagnose-and-feedback) topic below.
 
 To give feedback on the documentation or update it yourself, use the Feedback
 options at the bottom of each docs page.
+
+### Docker Store
+
+Choose **Docker Store** from the Docker for Windows menu
+to get to the Docker app downloads site.
+[Docker store](https://store.docker.com/) is a
+component of the next-generation Docker Hub, and the best place
+to find compliant, trusted commercial and free software
+distributed as Docker Images.
 
 ### Diagnose and Feedback
 

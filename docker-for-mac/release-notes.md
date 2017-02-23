@@ -281,6 +281,26 @@ events or unexpected unmounts.
 
 ## Beta Release Notes
 
+### Docker Community Edition 17.03.0 Release Notes (2017-02-22 17.03.0-ce-rc1-mac1)
+
+**New**
+
+- Introduce Docker Community Edition
+- Integration with Docker Cloud to control remote Swarms from the local CLI and view your repositories. This feature will be rolled out to all users progressively
+- Docker will now use keychain access to secure your IDs
+
+**Upgrades**
+
+- Docker 17.03.0-ce-rc1
+- Linux Kernel 4.9.11
+
+**Bug fixes and minor changes**
+
+- VPNKit: fixed unmarshalling of DNS packets containing pointers to pointers to labels
+- osxfs: catch EPERM when reading extended attributes of non-files
+- Added `page_poison=1` to boot args
+- Added a new disk flushing option
+
 ### Beta 41 Release Notes (2017-02-07-2017-1.13.1-rc2-beta41)
 
 **Upgrades**

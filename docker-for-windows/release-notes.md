@@ -9,7 +9,7 @@ title: Docker for Windows Release notes
 Here are the main improvements and issues per release, starting with the current
 release. The documentation is always updated for each release.
 
-For system requirements, please see 
+For system requirements, please see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
 Release notes for _stable_ and _beta_ releases are listed below. You can learn
@@ -268,6 +268,27 @@ We did not distribute a 1.12.4 stable release
 * Docker Compose 1.8.0
 
 ## Beta Release Notes
+
+### Docker Community Edition 17.03.0 Release Notes (2017-02-22 17.03.0-ce-rc1)
+
+**New**
+
+- Introduce Docker Community Edition
+- Integration with Docker Cloud: control remote Swarms from the local CLI and view your repositories. This feature will be rolled out to all users progressively.
+
+**Upgrades**
+
+- Docker 17.03.0-ce-rc1
+- Linux Kernel 4.9.11
+
+**Upgrades**
+
+- VPNKit: Fixed unmarshalling of DNS packets containing pointers to pointers to labels
+- Match Hyper-V Integration Services by ID, not name
+- Don't consume 100% CPU when the service is stopped
+- Log the diagnostic ID when uploading
+- Improved Firewall handling: stop listing the rules since it can take a lot of time
+- Don't rollback to the previous engine when the desired engine fails to start
 
 ### Beta 41 Release Notes (2017-02-07 1.13.1-rc2-beta41)
 
