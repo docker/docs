@@ -218,6 +218,9 @@ ng\:form {
               <section class="section" id="DocumentationText">
 								{% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
 								{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
+
+								{% if page.previewflag %}<blockquote style="border-left: 6px solid #2ECC71; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.previewdocs.texts[page.previewflag] | markdownify }}</blockquote>{% endif %}
+
               {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
 							{{ content }}
 							{% if page.noratings != true %}
