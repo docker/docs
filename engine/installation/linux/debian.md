@@ -20,7 +20,6 @@ Raspbian versions:
 
 - Stretch (testing)
 - Jessie 8.0 (LTS) / Raspbian Jessie
-- Wheezy 7.7 (LTS)
 
 #### Extra steps for Wheezy 7.7
 
