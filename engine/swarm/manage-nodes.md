@@ -42,7 +42,7 @@ The `MANAGER STATUS` column shows node participation in the Raft consensus:
 management.
 * `Leader` means the node is the primary manager node that makes all swarm
 management and orchestration decisions for the swarm.
-* `Reachable` means the node is a manager node is participating in the Raft
+* `Reachable` means the node is a manager node participating in the Raft
 consensus. If the leader node becomes unavailable, the node is eligible for
 election as the new leader.
 * `Unavailable` means the node is a manager that is not able to communicate with
