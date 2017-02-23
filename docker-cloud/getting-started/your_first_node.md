@@ -5,7 +5,6 @@ redirect_from:
 - /docker-cloud/getting-started/beginner/your_first_node/
 - /docker-cloud/getting-started/beginner/deploy_first_node/
 title: Deploy your first node
-notoc: true
 ---
 
 In this step you'll create your first node (inside a node cluster) on Docker Cloud.

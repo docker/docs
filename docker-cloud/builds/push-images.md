@@ -5,7 +5,6 @@ redirect_from:
 - /docker-cloud/getting-started/intermediate/pushing-images-to-dockercloud/
 - /docker-cloud/tutorials/pushing-images-to-dockercloud/
 title: Push images to Docker Cloud
-notoc: true
 ---
 
 Docker Cloud uses Docker Hub as its native registry for storing both public and

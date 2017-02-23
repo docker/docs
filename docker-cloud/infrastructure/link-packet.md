@@ -5,7 +5,6 @@ redirect_from:
 - /docker-cloud/getting-started/beginner/link-packet/
 - /docker-cloud/getting-started/link-packet/
 title: Link a Packet account
-notoc: true
 ---
 
 You can register your [Packet](https://www.packet.net/promo/docker-cloud/) account credentials in your Docker Cloud account to deploy **nodes** and **node clusters** using Docker Cloud's Dashboard, API, and CLI. Your Packet API key is required so Docker Cloud can interact with Packet on your behalf to create and manage your **nodes** (Packet devices).

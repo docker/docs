@@ -76,6 +76,4 @@ Look in the quickstart's Dockerfile.
 ENV NAME World
 ```
 
-## What's Next?
-
 Next, we'll try [Scaling the service](7_scale_the_service.md).

@@ -190,8 +190,6 @@ To remove a team's access to the repository, click the **trashcan** icon next to
 
 | Permission level | Access |
 | ------------- | ------------- |
-| **Swarms**  (Beta)| |
-| Admin | View swarms, manage swarms, add users |
 | **Repositories** | |
 | Read | Pull |
 | Read/Write | Pull, push |

@@ -2,7 +2,6 @@
 description: Manage network in Docker Cloud
 keywords: nodes, hosts, infrastructure, Cloud
 title: Docker Cloud infrastructure overview
-notoc: true
 ---
 
 Docker Cloud uses an agent and system containers to deploy and manage nodes (hosts) on your behalf. All nodes accessible to your account are connected by an overlay or mesh network, regardless of host or cloud service provider.
