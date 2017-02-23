@@ -18,16 +18,15 @@ This is an example button to deploy our <a href="https://github.com/docker/docke
 
 <a href="https://cloud.docker.com/stack/deploy/?repo=https://github.com/docker/dockercloud-quickstart-python" target="_blank"><img src="https://files.cloud.docker.com/images/deploy-to-dockercloud.svg"></a>
 
-The button redirects the user to the **Launch new Stack** wizard, with the stack
-definition already filled with the contents of any of the following files (which
-are fetched in the order shown) from the repository (taking into account branch
-and relative path):
+The button redirects the user to the **Launch new Stack** wizard, with the stack definition already filled with the contents of any of the following files (which are fetched in the order shown) from the repository (taking into account branch and relative path):
 
 * `docker-cloud.yml`
 * `docker-compose.yml`
 * `fig.yml`
 
 The user can still modify the stack definition before deployment.
+
+
 
 ## Adding the 'Deploy to Docker Cloud' button in GitHub
 

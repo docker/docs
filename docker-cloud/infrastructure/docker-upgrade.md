@@ -30,6 +30,6 @@ upgrade is automatically restarted, regardless of the
 restarted.
 
 
-## Upgrading nodes using the API and CLI
+# Upgrading nodes using the API and CLI
 
 See our [API and CLI documentation](/apidocs/docker-cloud.md#upgrade-docker-daemon34) for more information on how to upgrade nodes with our API, SDKs and the CLI.

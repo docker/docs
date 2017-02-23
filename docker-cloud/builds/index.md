@@ -1,8 +1,8 @@
 ---
 description: Manage Builds and Images in Docker Cloud
 keywords: builds, images, Cloud
-title: Builds and images overview
 notoc: true
+title: Builds and images overview
 ---
 
 Docker Cloud provides a hosted registry service where you can create
@@ -23,4 +23,4 @@ running services when a build passes its tests.
 * [Automated repository tests](automated-testing.md)
 * [Advanced options for Autobuild and Autotest](advanced.md)
 
-![Docker Cloud repository General view](images/repo-general.png)
+![a Docker Cloud repository's General view](images/repo-general.png)
