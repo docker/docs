@@ -80,7 +80,7 @@ Windows](index.md#use-docker-for-mac-or-docker-for-windows) with Swarm.
 
     ```
 
-    The `*` next to the node id indicates that you're currently connected on
+    The `*` next to the node ID indicates that you're currently connected on
     this node.
 
     Docker Engine swarm mode automatically names the node for the machine host
