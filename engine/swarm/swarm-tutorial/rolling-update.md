@@ -78,7 +78,7 @@ applies the update to nodes according to the `UpdateConfig` policy:
     * Schedule update for the stopped task.
     * Start the container for the updated task.
     * If the update to a task returns `RUNNING`, wait for the
-    specified delay period then stop the next task.
+    specified delay period then start the next task.
     * If, at any time during the update, a task returns `FAILED`, pause the
     update.
 
