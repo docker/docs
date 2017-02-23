@@ -128,11 +128,11 @@ above configuration options.
 
 - Click on **Launch Stack** below. This link will take you to AWS cloudformation portal.
 
-	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)]({{ launch_url }}{{ template_url }})
+	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)]({{ launch_url }}{{ template_url }}){: .with-border}
 
 - Confirm your AWS Region that you'd like to launch this stack in (top right corner)
 - Provide the required parameters and click **Next** (see below)
-![console_installation.png](../images/console_installation.png)
+![console_installation.png](../images/console_installation.png){: .with-border}
 - **Confirm** and **Launch**
 - Once the stack is successfully created (it does take between 10-15 mins), click on **Output** tab to see the URLs of UCP and DTR.
 
@@ -214,15 +214,16 @@ which is a highly optimized AMI built specifically for running Docker on AWS
 Once the stack is successfully created, you can access UCP and DTR URLs in the
 output tab as follows:
 
-![insecure.png](../images/output.png)
+![insecure.png](../images/output.png){: .with-border}
 
 When accessing UCP and DTR, log in using the username and password that you
 provided when you launched the cloudformation stack. You should see the below
 landing pages:
 
 
-![ucp.png](../images/ucp.png)
-![dtr.png](../images/dtr.png)
+![ucp.png](../images/ucp.png){: .with-border}
+
+![dtr.png](../images/dtr.png){: .with-border}
 
 > Note: During the installation process, a self-signed certificate is generated
 for both UCP and DTR. You can replace these certificates with your own
@@ -302,11 +303,11 @@ provides multiple advantages to easily deploy and access your application.
     ```
     b. Notice the updated ELB configuration:
 
-    ![elb_listeners_update.png](../images/elb_listeners_update.png)
+    ![elb_listeners_update.png](../images/elb_listeners_update.png){: .with-border}
 
     c. Access your application using **DefaultExternalTarget** DNS and published port:
 
-    ![app.png](../images/app.png)
+    ![app.png](../images/app.png){: .with-border}
 
 
 2.  **Swarm Mode Routing Mesh**
@@ -382,12 +383,12 @@ created when filling out the CloudFormation template for Docker for AWS.
 Once you find it, click the checkbox, next to the name. Then Click on the
 "Edit" button on the lower detail pane.
 
-![console_installation.png](../images/autoscale_update.png)
+![console_installation.png](../images/autoscale_update.png){: .with-border}
 
 Change the "Desired" field to the size of the worker pool that you would like,
 and hit "Save".
 
-![console_installation.png](../images/autoscale_save.png)
+![console_installation.png](../images/autoscale_save.png){: .with-border}
 
 This will take a few minutes and add the new workers to your swarm
 automatically. To lower the number of workers back down, you just need to
@@ -399,7 +400,7 @@ Go to the CloudFormation management page, and click the checkbox next to the
 stack you want to update. Then Click on the action button at the top, and
 select "Update Stack".
 
-![console_installation.png](../images/cloudformation_update.png)
+![console_installation.png](../images/cloudformation_update.png){: .with-border}
 
 Pick "Use current template", and then click "Next". Fill out the same parameters
 you have specified before, but this time, change your worker count to the new
