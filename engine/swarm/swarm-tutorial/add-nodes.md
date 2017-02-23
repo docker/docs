@@ -2,6 +2,7 @@
 description: Add nodes to the swarm
 keywords: tutorial, cluster management, swarm
 title: Add nodes to the swarm
+notoc: true
 ---
 
 Once you've [created a swarm](create-swarm.md) with a manager node, you're ready
@@ -39,7 +40,7 @@ to add worker nodes.
     worker node. This tutorial uses the name `worker2`.
 
 4.  Run the command produced by the `docker swarm init` output from the
-    [Create a swarm](create-swarm.md) tutorial step to create a second worker 
+    [Create a swarm](create-swarm.md) tutorial step to create a second worker
     node joined to the existing swarm:
 
     ```bash
