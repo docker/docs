@@ -14,14 +14,14 @@ Overview](/machine/overview.md) to learn more.) We'll also verify the setup, and
 run some basic commmands to interact with the machines.
 
 >**Note:** If you are using Docker for Windows, you will not be able to
-follow along with this machine setup part of the tutorial because it relies on
+follow along with this machine setup part of the tutorial because it describes
 using the Docker Machine legacy `virtualbox` driver, which is not compatible
-with Docker for Windows.  (See [What to know before you
+with Docker for Windows Hyper-V. (See [What to know before you
 install](/docker-for-windows/install.md#what-to-know-before-you-install)).
-However, if you set up your Dockerized instances in the cloud, you can follow
+However, you can set up your Dockerized machines in the cloud, and follow
 the rest of the steps to create a swarm and deploy this sample app. You can use
-[Docker Cloud](/docker-cloud/index.md) or you can [use Docker Machine to
-provision hosts on your cloud provider](/machine/get-started-cloud.md).
+[Docker Cloud](/docker-cloud/index.md) or [use Docker Machine to
+provision hosts on your cloud provider](/machine/get-started-cloud.md). Once you have your cloud machines set up, skip directly to the next step, where we [create a swarm](create-swarm.md) across the two nodes.
 
 ## Create manager and worker machines
 
@@ -161,4 +161,5 @@ We'll use this method later in the example.
 
 ## What's next?
 
-In the next step, we'll [create a swarm](create-swarm.md) across these two Docker machines.
+In the next step, we'll [create a swarm](create-swarm.md) across these two
+Docker machines.
