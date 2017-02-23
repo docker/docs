@@ -87,6 +87,18 @@ or `worker2` in our example). After you create the nodes, you can run all
 swarm commands as shown from the Mac terminal or Windows PowerShell with
 Docker for Mac or Docker for Windows running.
 
+
+>**Note:** If you are using Docker for Windows, you will not be able to
+use Docker Machine to create nodes locally because that worklfow relies on using
+a legacy `virtualbox` driver, which is not compatible with Docker for Windows.
+(See [What to know before you
+install](/docker-for-windows/install.md#what-to-know-before-you-install)).
+However, if you set up your Dockerized instances in the cloud, you can follow
+the rest of the steps to create a swarm and deploy this sample app. There are a
+few ways to do this. You can use [Docker Cloud](/docker-cloud/index.md) or you
+can [use Docker Machine to provision hosts on your cloud
+provider](/machine/get-started-cloud.md).
+
 ### The IP address of the manager machine
 
 The IP address must be assigned to a network interface available to the host

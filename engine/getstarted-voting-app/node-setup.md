@@ -13,6 +13,16 @@ virtual machines on a single system. (See [Docker Machine
 Overview](/machine/overview.md) to learn more.) We'll also verify the setup, and
 run some basic commmands to interact with the machines.
 
+>**Note:** If you are using Docker for Windows, you will not be able to
+follow along with this machine setup part of the tutorial because it relies on
+using the Docker Machine legacy `virtualbox` driver, which is not compatible
+with Docker for Windows.  (See [What to know before you
+install](/docker-for-windows/install.md#what-to-know-before-you-install)).
+However, if you set up your Dockerized instances in the cloud, you can follow
+the rest of the steps to create a swarm and deploy this sample app. You can use
+[Docker Cloud](/docker-cloud/index.md) or you can [use Docker Machine to
+provision hosts on your cloud provider](/machine/get-started-cloud.md).
+
 ## Create manager and worker machines
 
 The Docker Machine command to create a local virtual machine is:
