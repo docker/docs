@@ -92,7 +92,7 @@ At this point, the app is back up. The web pages you looked at in the [test driv
 terminal window to do other work. However, for the voting app tutorial we never
 explicitly set docker-machine environment variables, since we immediately `ssh`
 directly into the `manager` and `worker` and run all of our swarm commands on
-those nodes. So you can ignore docker-machine caveats about setting environment
+those nodes. So you can ignore `docker-machine` caveats about setting environment
 variables in this context.
 
 ## Removing the machines
