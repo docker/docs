@@ -2,6 +2,7 @@
 description: Initialize the swarm
 keywords: tutorial, cluster management, swarm mode
 title: Create a swarm
+notoc: true
 ---
 
 After you complete the [tutorial setup](index.md) steps, you're ready

@@ -2,6 +2,7 @@
 description: Getting Started tutorial for Docker Engine swarm mode
 keywords: tutorial, cluster management, swarm mode
 title: Getting started with swarm mode
+toc_max: 4
 ---
 
 This tutorial introduces you to the features of Docker Engine Swarm mode. You
