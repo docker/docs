@@ -31,7 +31,7 @@ the full [Get Started with Docker tutorial](/engine/getstarted/index.md)
 first, then come back.
 
 >**Note:** If you are using Docker for Windows, you will not be able to
-follow along with the [machine setup](node-setup.md) part of this tutorial because it relies on a legacy driver that is incompatible with Docker for Windows. However, you can use a cloud setup instead, as described in the relevant steps.
+follow the [machine setup](node-setup.md) part of this tutorial because it describes a legacy driver that is incompatible with Docker for Windows. However, you can use a cloud setup instead, as described in the relevant steps.
 
 ## What you'll learn and do
 
