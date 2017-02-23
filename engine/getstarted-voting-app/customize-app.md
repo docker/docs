@@ -4,7 +4,6 @@ keywords: multi-container, services, swarm mode, cluster, voting app, docker-sta
 title: Customize the app and redeploy
 ---
 
-
 In this step, we'll make a simple change to the application and redeploy it.
 We'll change the focus of the poll from Cats or Dogs to .NET or Java.
 
@@ -93,7 +92,11 @@ in the Docker Engine command line reference.
 
 * To learn about all new features in Compose, see
 [Compose file version 3 reference](/compose/compose-file/index.md) and
-[Compose file versions and upgrading](/compose/compose-file/compose-versioning.md)
+[Compose file versions and upgrading](/compose/compose-file/compose-versioning.md).
 
 * For more about swarm mode, start with the
 [Swarm mode overview](/engine/swarm/index.md).
+
+## What's next?
+
+* To learn about shutting down the sample app and cleaning up, see [Graceful shutdown, reboot, and clean-up](cleanup.md).
