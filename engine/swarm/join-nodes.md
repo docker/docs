@@ -61,7 +61,7 @@ The `docker swarm join` command does the following:
 from the scheduler.
 * extends the `ingress` overlay network to the current node.
 
-### Join as a manager node
+## Join as a manager node
 
 When you run `docker swarm join` and pass the manager token, the Docker Engine
 switches into swarm mode the same as for workers. Manager nodes also participate
