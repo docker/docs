@@ -43,3 +43,9 @@ production environment. Highlights Compose Version 3 new features and swarm mode
 </td>
 </tr>
 </table>
+
+ ## Books
+ 
+  <a href="https://www.packtpub.com/networking-and-servers/docker-high-performance">Docker High Performance</a> by Allan Espinosa. Packt (Jan 2016)
+
+ <a href="https://www.packtpub.com/networking-and-servers/learning-docker-networking">Learning Docker Networking</a> by Rajdeep Dua, Vaibhav Kohli and Santosh Kumar Kondur. Packt (Feb 2016)
