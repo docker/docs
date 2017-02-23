@@ -216,9 +216,40 @@ ng\:form {
             </div>
             <div id="main-content" class="col-xs-12 col-sm-9 col-md-8 col-xl-9">
               <section class="section" id="DocumentationText">
-								{% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
-								{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
+				  <div class="row">
+					  <div class="
+						{% if page.product_version %}
+							col-sm-8
+						{% else %}
+							col-sm-12
+						{% endif %}
+					  ">
+						  {% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
+						{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
               {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
+					  </div>
+					{% if page.product_version %}
+					  <div class="col-sm-4" style="display: table; table-layout: fixed;">
+						<div style="display:table-cell; vertical-align:middle; text-align:center;">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{ page.product_name }} {{ page.product_version }} <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu dropdown-menu-right">
+									{% assign sorted_version_info = (page.version_info | sort: 'product_version') | reverse %}
+									{% for v in sorted_version_info %}
+										{% if v.product_version == page.product_version %}
+											<li><a href="#"><b>{{ page.product_name }} {{ v.product_version }}</b></a></li>
+										{% else %}
+											<li><a href="{{ v.version_url }}">{{ page.product_name }} {{ v.product_version }}</a></li>
+										{% endif %}
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+					  </div>
+					{% endif %}
+				  </div>
 							{{ content }}
 							{% if page.noratings != true %}
 							<div style="text-align: center; margin-top: 50px">
@@ -423,6 +454,7 @@ background-image: linear-gradient(to bottom, #75ae4c, #99c47c);
   <script src="/js/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
   <script src="/js/alljs.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
   <script async="" src="/js/menu.js"></script>
   <script async="" src="/js/app.js"></script>
   <script async="" src="/js/anchorlinks.js"></script>

@@ -104,6 +104,8 @@ defaults:
     scope:
       path: "datacenter/dtr/2.2"
     values:
+      product_name: "Trusted Registry"
+      product_version: "2.2"
       ucp_version: "2.1"
       dtr_version: "2.2"
       docker_image: "docker/dtr:2.2.1"
@@ -111,6 +113,8 @@ defaults:
     scope:
       path: "datacenter/dtr/2.1"
     values:
+      product_name: "Trusted Registry"
+      product_version: "2.1"
       hide_from_sitemap: true
       ucp_version: "2.0"
       dtr_version: "2.1"
@@ -118,6 +122,8 @@ defaults:
     scope:
       path: "datacenter/dtr/2.0"
     values:
+      product_name: "Trusted Registry"
+      product_version: "2.0"
       hide_from_sitemap: true
       ucp_version: "1.1"
       dtr_version: "2.0"
@@ -125,6 +131,8 @@ defaults:
     scope:
       path: "datacenter/ucp/2.1"
     values:
+      product_name: "Universal Control Plane"
+      product_version: "2.1"
       ucp_version: "2.1"
       dtr_version: "2.2"
       docker_image: "docker/ucp:2.1.0"
@@ -132,6 +140,8 @@ defaults:
     scope:
       path: "datacenter/ucp/2.0"
     values:
+      product_name: "Universal Control Plane"
+      product_version: "2.0"
       hide_from_sitemap: true
       ucp_version: "2.0"
       dtr_version: "2.1"
@@ -139,6 +149,8 @@ defaults:
     scope:
       path: "datacenter/ucp/1.1"
     values:
+      product_name: "Universal Control Plane"
+      product_version: "1.1"
       hide_from_sitemap: true
       ucp_version: "1.1"
       dtr_version: "2.0"
