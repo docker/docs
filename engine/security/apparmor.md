@@ -155,48 +155,48 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 1. Save the custom profile to disk in the
 `/etc/apparmor.d/containers/docker-nginx` file.
 
-    The file path in this example is not a requirement. In production, you could
-    use another.
+   The file path in this example is not a requirement. In production, you could
+   use another.
 
 2. Load the profile.
 
-    ```bash
-    $ sudo apparmor_parser -r -W /etc/apparmor.d/containers/docker-nginx
-    ```
+   ```bash
+   $ sudo apparmor_parser -r -W /etc/apparmor.d/containers/docker-nginx
+   ```
 
 3. Run a container with the profile.
 
-    To run nginx in detached mode:
+   To run nginx in detached mode:
 
-    ```bash
-    $ docker run --security-opt "apparmor=docker-nginx" \
+   ```bash
+   $ docker run --security-opt "apparmor=docker-nginx" \
         -p 80:80 -d --name apparmor-nginx nginx
-    ```
+   ```
 
 4. Exec into the running container.
 
-    ```bash
-    $ docker exec -it apparmor-nginx bash
-    ```
+   ```bash
+   $ docker exec -it apparmor-nginx bash
+   ```
 
 5. Try some operations to test the profile.
 
-    ```bash
-    root@6da5a2a930b9:~# ping 8.8.8.8
-    ping: Lacking privilege for raw socket.
+   ```bash
+   root@6da5a2a930b9:~# ping 8.8.8.8
+   ping: Lacking privilege for raw socket.
 
-    root@6da5a2a930b9:/# top
-    bash: /usr/bin/top: Permission denied
+   root@6da5a2a930b9:/# top
+   bash: /usr/bin/top: Permission denied
 
-    root@6da5a2a930b9:~# touch ~/thing
-    touch: cannot touch 'thing': Permission denied
+   root@6da5a2a930b9:~# touch ~/thing
+   touch: cannot touch 'thing': Permission denied
 
-    root@6da5a2a930b9:/# sh
-    bash: /bin/sh: Permission denied
+   root@6da5a2a930b9:/# sh
+   bash: /bin/sh: Permission denied
 
-    root@6da5a2a930b9:/# dash
-    bash: /bin/dash: Permission denied
-    ```
+   root@6da5a2a930b9:/# dash
+   bash: /bin/dash: Permission denied
+   ```
 
 
 Congrats! You just deployed a container secured with a custom apparmor profile!
