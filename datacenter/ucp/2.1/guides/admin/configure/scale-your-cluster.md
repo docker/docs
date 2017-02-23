@@ -9,7 +9,7 @@ Docker UCP is designed for scaling horizontally as your applications grow in
 size and usage. You can add or remove nodes from the UCP cluster to make it
 scale to your needs.
 
-![](../../images/scale-your-cluster-1.svg)
+![](../../images/scale-your-cluster-0.svg)
 
 Since UCP leverages the clustering functionality provided by Docker Engine,
 you use the [docker swarm join](/engine/swarm/swarm-tutorial/add-nodes.md)
@@ -47,7 +47,7 @@ the **Resources** page, and go to the **Nodes** section.
 
 Click the **Add Node button** to add a new node.
 
-![](../../images/scale-your-cluster-2.png){: .with-border}
+![](../../../../../images/try-ddc-3.png){: .with-border}
 
 Check the 'Add node as a manager' option if you want to add the node as manager.
 Also, set the 'Use a custom listen address' option to specify the IP of the
@@ -56,7 +56,7 @@ host that you'll be joining to the cluster.
 Then you can copy the command displayed, use ssh to **log into the host** that
 you want to join to the cluster, and **run the command** on that host.
 
-![](../../images/scale-your-cluster-3.png){: .with-border}
+![](../../images/scale-your-cluster-2.png){: .with-border}
 
 After you run the join command in the node, the node starts being displayed
 in UCP.
@@ -96,7 +96,7 @@ so that it is:
 * Drained: the node won't receive new tasks. Existing tasks are stopped and
 replica tasks are launched in active nodes.
 
-![](../../images/scale-your-cluster-4.png){: .with-border}
+![](../../images/scale-your-cluster-3.png){: .with-border}
 
 If you're load-balancing user requests to UCP across multiple manager nodes,
 when demoting those nodes into workers, don't forget to remove them from your

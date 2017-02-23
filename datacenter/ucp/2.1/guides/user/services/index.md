@@ -7,12 +7,12 @@ title: Deploy an app from the UI
 
 With Docker Universal Control Plane you can deploy applications from the UI
 using `docker-compose.yml` files. In this example, we're going to deploy an
-application that allows users to vote on whether they prefer cats or dogs.
+application that allows users to vote on whether they prefer cats or dogs. 😺 🐶
 
 ## Deploy voting application
 
-In your browser, **log in** to UCP, and navigate to the **Applications** page.
-There, click the **Deploy compose.yml** button, to deploy a new application.
+In your browser, **log in** to UCP, and navigate to the **Stacks & Applications** page.
+There, click the **Deploy** button, to deploy a new application.
 
 ![](../../images/deploy-app-ui-1.png){: .with-border}
 
@@ -25,7 +25,7 @@ The application we're going to deploy is composed of several services:
 * `db`: A PostgreSQL service which provides permanent storage on a host volume
 * `worker`: A background service that transfers votes from the queue to permanent storage
 
-Click **Services** and paste the following YAML into the **DOCKER-COMPOSE.YML**
+Click **Deploy** and paste the following YAML into the **APPLICATION DEFINITION**
 field.
 
 ```none
@@ -125,7 +125,7 @@ documentation](http://docker-docs-vnext-compose.netlify.com/compose/compose-file
 Give the application a name (such as "VotingApp," used here), and click
 **Create**.
 
-Once UCP deploys the application, click on **Services** on the left navigation,
+Once UCP deploys the application, click on **VotingApp** or go to **Services** on the left navigation,
 to see the details of the services you have deployed across your nodes. Try
 clicking on the `visualizer` service, and scroll to the bottom of the detail page.
 You'll see a link to your UCP instance's URL that includes the published port

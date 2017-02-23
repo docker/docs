@@ -7,7 +7,7 @@ title: Web-based access
 Docker Universal Control Plane allows you to manage your cluster in a visual
 way, from your browser.
 
-![](../../images/web-based-access-1.png){: .with-border}
+![](../../../../../images/ucp.png){: .with-border}
 
 
 Docker UCP secures your cluster with role-based access control. From the
