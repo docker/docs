@@ -126,6 +126,20 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
+      <td>GleSYS Internet Services</td>
+      <td>
+        <a href="https://github.com/glesys/docker-machine-driver-glesys">
+          https://github.com/glesys/docker-machine-driver-glesys
+        </a>
+      </td>
+      <td>
+        <a href="https://github.com/glesys">GleSYS</a>
+      </td>
+      <td>
+        <a href="mailto:support@glesys.com">support@glesys.com</a>
+      </td>
+    </tr>
+    <tr>
       <td>GoDaddy Cloud Servers</td>
       <td>
         <a href=
