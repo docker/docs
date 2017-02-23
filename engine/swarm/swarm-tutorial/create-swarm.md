@@ -24,7 +24,7 @@ machines.
 
     >**Note:** If you are using Docker for Mac or Docker for Windows to test
 single-node swarm, simply run `docker swarm init` with no arguments. There is no
-need to specify ` --advertise-addr` in this case. To learn more, see the topic
+need to specify `--advertise-addr` in this case. To learn more, see the topic
 on how to [Use Docker for Mac or Docker for
 Windows](index.md#use-docker-for-mac-or-docker-for-windows) with Swarm.
 
