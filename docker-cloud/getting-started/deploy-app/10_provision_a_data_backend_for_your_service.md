@@ -15,8 +15,6 @@ until now. In this step you'll add a data backend that your service will use. In
 this specific tutorial we'll use a Redis cache, but most concepts apply to any
 data backend.
 
-## Provision the service
-
 The first step is to provision the data service itself. Run this command to
 create and run the Redis service using the <a href="https://github.com/docker-library/redis/" target ="_blank">redis</a>
 image:
@@ -39,7 +37,7 @@ web                  bf644f91  ▶ Running         my-username/python-quickstart
 lb                   2f0d4b38  ▶ Running         dockercloud/haproxy:latest                     25 minutes ago
 ```
 
-## Link the web service to the redis service
+### Link the web service to the redis service
 
 Next, we'll set up the link between the `redis` service and the `web` service.
 
@@ -65,7 +63,5 @@ Hello World</br>Hostname: web-5</br>Counter: 4%
 $ curl lb-1.$DOCKER_ID_USER.cont.dockerapp.io
 Hello World</br>Hostname: web-3</br>Counter: 5%
 ```
-
-## What's Next?
 
 Next, we'll look at [Stackfiles for your service](11_service_stacks.md)

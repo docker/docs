@@ -9,7 +9,7 @@ repositories and manually [push images](push-images.md) using `docker push`, or
 you can link to a source code provider and use [automated builds](automated-build.md) to build the images for you. These repositories
 can be either public or private.
 
-![Docker Cloud repository General view](images/repo-general.png)
+![a Docker Cloud repository's General view](images/repo-general.png)
 
 Additionally, you can access your Docker Hub repositories and automated builds
 from within Docker Cloud.
