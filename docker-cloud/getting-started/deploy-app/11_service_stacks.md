@@ -4,22 +4,13 @@ keywords: Python, service, stack
 redirect_from:
 - /docker-cloud/getting-started/python/11_service_stacks/
 title: Stackfiles for your service
-notoc: true
 ---
 
-A stack is a logical grouping of related services that are usually deployed
-together and require each other to work as intended. If you are familiar with
-*fig* or *Docker Compose* then you should feel right at home with **stacks**.
-You can learn more about stacks [here](../../apps/stacks.md).
+A stack is a logical grouping of related services that are usually deployed together and require each other to work as intended. If you are familiar with *fig* or *Docker Compose* then you should feel right at home with **stacks**. You can learn more about stacks [here](../../apps/stacks.md).
 
-Stack files are YAML files, and you can learn more about the available syntax
-[here](../../apps/stack-yaml-reference.md). You can also interact with stacks
-using the [stack commands in our API](/apidocs/docker-cloud.md#stacks).
+Stack files are YAML files, and you can learn more about the available syntax [here](../../apps/stack-yaml-reference.md). You can also interact with stacks using the [stack commands in our API](/apidocs/docker-cloud.md#stacks).
 
-## Service definitions in the stack file
-
-The services that you created in this tutorial form a stack with three services:
-the load-balancer, the web application and the redis cache.
+The services that you created in this tutorial form a stack with three services: the load-balancer, the web application and the redis cache.
 
 Look at the file called `docker-cloud.yml` in your quickstart to see the stack
 file that defines the three services (lb, web, redis) you created in the
@@ -57,15 +48,13 @@ redis:
     - REDIS_APPENDFSYNC=always
 ```
 
-You can use this stack file to quickly deploy this cluster of three services to
-another set of nodes. You can also edit the file to change the configuration.
+You can use this stack file to quickly deploy this cluster of three services to another set of nodes. You can also edit the file to change the configuration.
 
-## Run a stack
+### Run a stack
 
 To create the services in a stack file you use the simple `stack up` command.
 
-You can run this in the path containing your stackfile (docker-cloud.yml), like
-so:
+You can run this in the path containing your stackfile (docker-cloud.yml), like so:
 
 ```bash
 $ docker-cloud stack up
@@ -76,7 +65,5 @@ Or you can specify the YML file to use and its location:
 ```bash
 $ docker-cloud up -f /usr/dockercloud/quickstart-python/docker-cloud.yml
 ```
-
-## What's Next?
 
 Next, we'll do some [Data management with Volumes](12_data_management_with_volumes.md)

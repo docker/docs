@@ -4,7 +4,6 @@ keywords: API, Services, roles
 redirect_from:
 - /docker-cloud/feature-reference/api-roles/
 title: Service API roles
-notoc: true
 ---
 
 You can configure a service so that it can access the Docker Cloud API. When you

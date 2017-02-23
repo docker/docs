@@ -1,5 +1,4 @@
 ---
-previewflag: cloud-swarm
 description: Link your Amazon Web Services account
 keywords: AWS, Cloud, link
 title: Link to Amazon Web Services to create Swarms
@@ -87,15 +86,11 @@ Cloud to connect the account.
 
 You're now ready to deploy a swarm!
 
-## Where to go next
-
-For next steps, see [create a new swarm in Docker Cloud](create-cloud-swarm.md).
-
-You can get an overivew of topics on [swarms in Docker Cloud](index.md).
-
 <!-- TODO: Commenting out until this replaces the existing ../infrastructure/link-aws file.
 
 ## What's next?
 
 You're ready to start using AWS as the infrastructure provider for swarms in
 Docker Cloud! If you came here from the tutorial, click here to [continue the tutorial and deploy your first node](/docker-cloud/getting-started/your_first_node.md).-->
+
+&nbsp;

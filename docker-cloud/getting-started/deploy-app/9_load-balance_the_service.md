@@ -5,7 +5,6 @@ redirect_from:
 - /docker-cloud/getting-started/python/9_load-balance_the_service/
 - /docker-cloud/getting-started/golang/9_load-balance_the_service/
 title: Load-balance the service
-notoc: true
 ---
 
 To load-balance your application, you need to deploy a load-balancing service.
@@ -76,6 +75,4 @@ Hello Friendly Users!</br>Hostname: web-2</br>Counter: Redis Cache not found, co
 
 You can learn more about *dockercloud/haproxy*, our free open source HAProxy image <a href="https://github.com/docker/dockercloud-haproxy" target="_blank">here</a>.
 
-## What's Next?
-
-[Provision a data backend for your service](10_provision_a_data_backend_for_your_service.md)
+Next: [Provision a data backend for your service](10_provision_a_data_backend_for_your_service.md)

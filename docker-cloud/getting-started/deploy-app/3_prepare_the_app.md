@@ -5,7 +5,6 @@ redirect_from:
 - /docker-cloud/getting-started/python/3_prepare_the_app/
 - /docker-cloud/getting-started/golang/3_prepare_the_app/
 title: Prepare the application
-notoc: true
 ---
 
 In this step, you will prepare a simple application that can be deployed.
@@ -44,7 +43,5 @@ $ docker build --tag quickstart-python .
 ```bash
 $ docker build --tag quickstart-go .
 ```
-
-## What's next?
 
 Next, we [Push the Docker image to Docker Cloud's Registry](4_push_to_cloud_registry.md).

@@ -3,7 +3,6 @@ description: 'Getting Started with Docker Cloud: Setting up a node using a hoste
   cloud provider or your own nodes, deploying a service and clustering.'
 keywords: one, two, three
 title: Getting started with Docker Cloud
-notoc: true
 ---
 
 If you're completely new to Docker Cloud, start here!
