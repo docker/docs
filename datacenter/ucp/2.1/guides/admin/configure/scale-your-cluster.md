@@ -102,25 +102,20 @@ If you're load-balancing user requests to UCP across multiple manager nodes,
 when demoting those nodes into workers, don't forget to remove them from your
 load-balancing pool.
 
-## Scaling your cluster through the CLI
+## Scale your cluster from the CLI
 
 You can also use the command line to do all of the above operations. To get the
 join token, run the following command on a manager node:
 
-```
+```none
 $ docker swarm join-token worker
-To add a worker to this swarm, run the following command:
-
-    docker swarm join \
-    --token SWMTKN-1-2o5ra9t7022neymg4u15f3jjfh0qh3yof817nunoioxa9i7lsp-dkmt01ebwp2m0wce1u31h6lmj \
-    192.168.99.100:2377
 ```
 
-If you want to add a new manager node instead of a worker node, use 
+If you want to add a new manager node instead of a worker node, use
 `docker swarm join-token manager` instead. If you want to use a custom listen
 address, add the `--listen-addr` arg:
 
-```
+```none
 docker swarm join \
     --token SWMTKN-1-2o5ra9t7022neymg4u15f3jjfh0qh3yof817nunoioxa9i7lsp-dkmt01ebwp2m0wce1u31h6lmj \
     --listen-addr 234.234.234.234 \
@@ -129,11 +124,8 @@ docker swarm join \
 
 Once your node is added, you can see it by running `docker node ls` on a manager:
 
-```
+```none
 $ docker node ls
-ID                           HOSTNAME         STATUS  AVAILABILITY  MANAGER STATUS
-r4u0bm36y5wlvld56v1dlmlpd *  node1            Ready   Active        Leader
-wetlc9rtzo3dgb7waxu6wq2bh    node2            Ready   Active
 ```
 
 To change the node's availability, use:
@@ -147,7 +139,7 @@ You can set the availability to `active`, `pause`, or `drain`.
 To remove the node, use:
 
 ```
-$ docker node rm node2
+$ docker node rm <node-hostname>
 ```
 
 ## Where to go next
