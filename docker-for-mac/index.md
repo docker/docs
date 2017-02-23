@@ -118,12 +118,7 @@ can set the following runtime options.
   diagnostics, crash reports, and usage data. This information can help Docker
   improve the application and get more context for troubleshooting problems.
   Uncheck this to opt out and prevent auto-send of data. Docker may prompt for
-  more information in some cases, even with auto-send enabled. Also, you can
-  enable or disable these auto-reporting settings with one click on the
-  information popup when you first start Docker.
-
-  ![Startup information](/docker-for-mac/images/mac-install-success-docker-wait.png)
-
+  more information in some cases, even with auto-send enabled.
 
 ### File sharing
 
@@ -332,13 +327,23 @@ forum](https://forums.docker.com/c/docker-for-mac).
 
 To report bugs or problems, log on to [Docker for Mac issues on
 GitHub](https://github.com/docker/for-mac/issues), where you can review
-community reported issues, and file new ones. See
-[Diagnose problems, send feedback, and create GitHub issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
+community reported issues, and file new ones. See [Diagnose problems, send
+feedback, and create GitHub
+issues](troubleshoot.md#diagnose-problems-send-feedback-and-create-github-issues).
 As a part of reporting issues on GitHub, we can help you troubleshoot the log
 data.
 
 To give us feedback on the documentation or update it yourself, use the Feedback
 options at the bottom of each docs page.
+
+## Docker Store
+
+Choose **Docker Store** from the Docker for Mac menu
+to get to the Docker app downloads site.
+[Docker store](https://store.docker.com/) is a
+component of the next-generation Docker Hub, and the best place
+to find compliant, trusted commercial and free software
+distributed as Docker Images.
 
 ## Where to go next
 

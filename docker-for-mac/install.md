@@ -138,10 +138,10 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-beta-channels).
 	  ![Whale in menu bar](/docker-for-mac/images/whale-in-menu-bar.png)
 
 	  If you just installed the app, you also get a success message with suggested
-    next steps and a link to this documentation. Click the whale ![whale](/docker-for-mac/images/whale-x.png))
+    next steps and a link to this documentation. Click the whale (![whale](/docker-for-mac/images/whale-x.png))
     in the status bar to dismiss this popup.
 
-	  ![Docker success](images/mac-install-success-docker-ps.png)
+	  ![Startup information](/docker-for-mac/images/mac-install-success-docker-cloud.png)
 
 3.  Click the whale (![whale-x](images/whale-x.png)) to get Preferences and
     other options.

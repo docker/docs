@@ -142,7 +142,7 @@ The whale in the status bar indicates that Docker is running, and accessible fro
 
 If you just installed the app, you also get a popup success message with suggested next steps, and a link to this documentation.
 
-![Install success](/docker-for-windows/images/win-install-success-popup.png)
+![Startup information](/docker-for-windows/images/win-install-success-popup-cloud.png)
 
 When initialization is complete, select **About Docker** from the notification area icon to verify that you have the latest version.
 
