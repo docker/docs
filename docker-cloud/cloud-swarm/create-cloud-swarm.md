@@ -1,13 +1,9 @@
 ---
+previewflag: cloud-swarm
 description: Create new swarms in Docker Cloud
 keywords: swarm mode, swarms, create swarm, Cloud
 title: Create a new swarm in Docker Cloud
 ---
-
-<b>Note</b>: All Swarm management features in Docker Cloud are free while in Beta.
-{: style="text-align:center" }
-
---------
 
 You can now create _new_ Docker Swarms from within Docker Cloud as well as
 register existing swarms.
@@ -24,7 +20,7 @@ forwards your commands directly to the Docker instances running in the swarm.
 
 > **Note**: To create a swarm, you need to give Docker Cloud permission to deploy swarm nodes on your behalf in your cloud services provider account. See the [AWS with swarm instructions](link-aws-swarm.md) to learn more.
 
-1. If necessary, log in to Docker Cloud and switch to Swarm mode.
+1. If necessary, log in to Docker Cloud and switch to Swarm Mode.
 2. Click Swarms in the top navigation.
 3. Click **Create**.
 4. Enter a name for the new swarm.
@@ -47,3 +43,14 @@ forwards your commands directly to the Docker instances running in the swarm.
 Docker Cloud connects to your AWS account, deploys Docker for AWS instances, forms a Swarm, and joins the instances to it.
 
 > **Note**: At this time, you cannot dissolve swarms or delete swarm nodes from within Docker Cloud - you can only unregister the swarm from the Docker Cloud UI. To delete the swarm and its members, log in to your AWS account and delete them manually.
+
+## Where to go next
+
+Learn how to [connect to a swarm through Docker Cloud](connect-to-swarm.md).
+
+Learn how to [register existing swarms](register-swarms.md).
+
+You can get an overivew of topics on [swarms in Docker Cloud](index.md).
+
+To find out more about Docker swarm in general, see the Docker engine
+[Swarm Mode overview](/engine/swarm/).

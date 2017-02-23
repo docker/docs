@@ -70,4 +70,6 @@ Hello World!</br>Hostname: web-1</br>Counter: Redis Cache not found, counter dis
 
 **CONGRATULATIONS!** You've deployed your first service using Docker Cloud.
 
-Next: [Define environment variables](6_define_environment_variables.md).
+## What's Next?
+
+[Define environment variables](6_define_environment_variables.md).

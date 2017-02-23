@@ -125,6 +125,6 @@ You probably don't need the `hello-world` container to run for very long after y
 
 Both terminated Services and Node Clusters remain in the UI for about five minutes. After that time, they no longer appear.
 
-### What's next?
+## What's next?
 
 Learn more about [scaling your service](../apps/service-scaling.md), or check out some of our other [Deploy an app tutorial](deploy-app/index.md).
