@@ -59,15 +59,15 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-beta-channels).
 >**Important Notes**:
 >
 > - Docker for Mac requires OS X El Capitan 10.11 or newer macOS release running on a 2010 or
->   newer Mac, with Intel's  hardware support for MMU virtualization. The app will run on 10.10.3 Yosemite, but with limited support. Please see
->   [What to know before you install](index.md#what-to-know-before-you-install)
->   for a full explanation and list of prerequisites.
+   newer Mac, with Intel's  hardware support for MMU virtualization. The app will run on 10.10.3 Yosemite, but with limited support. Please see
+   [What to know before you install](#what-to-know-before-you-install)
+   for a full explanation and list of prerequisites.
 >
 > - You can switch between beta and stable versions, but you must have only one
->   app installed at a time. Also, you will need to save images and export
->   containers you want to keep before uninstalling the current version before
->   installing another. For more about this, see the
->   [FAQs about beta and stable channels](faqs.md#stable-and-beta-channels).
+   app installed at a time. Also, you will need to save images and export
+   containers you want to keep before uninstalling the current version before
+   installing another. For more about this, see the
+   [FAQs about beta and stable channels](faqs.md#stable-and-beta-channels).
 
 ##  What to know before you install
 
