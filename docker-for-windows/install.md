@@ -21,8 +21,8 @@ beta channels, see the
 
 <table style="width:100%">
   <tr>
-    <th style="font-size: x-large; font-family: arial">Stable channel</th>
-    <th style="font-size: x-large; font-family: arial">Beta channel</th>
+    <th>Stable channel</th>
+    <th>Beta channel</th>
   </tr>
   <tr valign="top">
     <td width="50%">This installer is fully baked and tested, and comes

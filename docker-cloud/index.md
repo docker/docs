@@ -12,27 +12,6 @@ redirect_from:
 - /engine/installation/rackspace/
 - /engine/installation/joyent/
 ---
-<style type="text/css">
-.tg td {
-  width="50%";padding:10px 5px;border:none;overflow:hidden;word-break:normal; margin-bottom: .5rem;
-}
-#DocumentationText .bluebar {
-  width="50%";font-size:20px;font-weight:bold;background-color:#1488C6;color:#ffffff;text-align:center;vertical-align:top;
-}
-#DocumentationText .bluebar a{
-  color:#ffffff;font-weight:normal;text-decoration: underline;
-}
-#DocumentationText .plain p{
-  font-weight:normal;margin-bottom: 0.5rem
-}
-.plain p{
-  width="50%";vertical-align:top;
-}
-.whale a img
-{
-  float:right;
-}
-</style>
 
 <center>
 <div class="whale"><a href="https://cloud.docker.com/" target="_blank" class="_"><img src="images/Docker-Cloud-Blue.svg" height="150" width="150" fill="#1488C6" alt="Docker Cloud logo" title="Let's go! Click to go to Docker Cloud." float="right"></a></div>
