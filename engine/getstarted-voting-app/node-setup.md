@@ -52,7 +52,7 @@ docker-machine create --driver virtualbox HOST-NAME
 
 ```
 docker-machine create -d hyperv --hyperv-virtual-switch "NETWORK-SWITCH"
-MACHINE-NAME`
+MACHINE-NAME
 ```
 
 This must be done in an elevated PowerShell, using a custom-created external network switch. See [Hyper-V example](/machine/drivers/hyper-v#example).
