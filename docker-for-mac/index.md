@@ -18,9 +18,10 @@ Docker is a full development platform for creating containerized apps, and
 Docker for Mac is the best way to get started with Docker on a Mac.
 
 > **Got Docker for Mac?** If you have not yet installed Docker for Mac, please see [Install Docker for Mac](install.md) for an explanation of stable and beta
-channels, download and install information, and system requirements. The topic
-[What to know before you install](install.md#what-to-know-before-you-install) is
-now in that section.
+channels, system requirements, and download/install information.
+>
+**Looking for system requirements?** Check out
+[What to know before you install](install.md#what-to-know-before-you-install), which has moved to the new install topic.
 {: id="what-to-know-before-you-install" }
 
 ## Check versions of Docker Engine, Compose, and Machine
