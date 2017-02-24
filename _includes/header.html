@@ -12,8 +12,7 @@
 
           <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
               <div class="search-form" id="search-div">
-                  <form class="navbar-form navbar-left">
-                      <!-- <input type="text" class="form-control" id ="search" placeholder="Search Documentation"> -->
+                  <form>
                       <form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="/search/">
   											<input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="Search the docs" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
   											<div id="autocompleteContainer">
@@ -35,8 +34,9 @@
                                         Docker 1.13 <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu">
-                          <li><a href="#">Docker 1.12</a></li>
-                          <li><a href="#">Docker 1.11</a></li>
+                        {% for item in site.data.docsarchive.docker-compose %}
+                        <li><a href="/{{ item[0] }}/">Docker {{ item[0] }}</a></li>
+                        {% endfor %}
                       </ul>
                   </div>
               </div>
