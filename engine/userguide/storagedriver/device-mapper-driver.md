@@ -328,7 +328,9 @@ assumes that the Docker daemon is in the `stopped` state.
     --storage-opt=dm.use_deferred_deletion=true
     ```
 
-    You can also set them for startup in the `/etc/docker/daemon.json` configuration, for example:
+    You can also set them for startup in the
+    [daemon configuration file](/engine/reference/commandline/dockerd/#daemon-configuration-file),
+    which defaults to `/etc/docker/daemon.json` configuration, for example:
 
     ```none
     {
