@@ -26,7 +26,7 @@
 
 <!-- End of logic for 'edit this button' -->
 <!DOCTYPE html>
-<html class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms no-csstransforms3d csstransitions fontface no-generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths retina-display is_not_retina chrome version webkit" lang="en">
+<html lang="en">
 <head>
 <base href="{{ basehref }}"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,18 +37,6 @@
 }
 ng\:form {
 	display: block;
-}
-div#autocompleteContainer {
-    background: #fff;
-    border: 1px solid #ccc;
-    /* float: left; */
-    padding: 21px 0 30px 0;
-    margin: 10px 0 0 0;
-    position: absolute;
-		-webkit-transition: all 0.5s;
-  	-moz-transition: all 0.5s;
-  	-o-transition: all 0.5s;
-  	transition: all 0.5s;
 }
 </style>
 <script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=k6svi4faiclrdpi5eax4n23dzy"></script>
@@ -74,30 +62,31 @@ div#autocompleteContainer {
 <!-- <link rel="stylesheet" href="/css/documentation.css"> -->
 <link rel="stylesheet" href="/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/main.css">
+<link id="pagestyle" rel="stylesheet" href="/css/style.css">
 <!-- temp css will be removed -->
 <link rel="stylesheet" href="/css/temp.css">
 {% seo %}
 {% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
 </head>
-<body class="html front not-logged-in no-sidebars page-node page-node- page-node-1 node-type-front-page path-docker ng-scope short retina-display all_loaded" ng-app="Docker" ng-controller="DockerController" style="">
-		<header>
-			{% if page.landing == true %}{% include global-header.html %}{% endif %}
-			{% include header.html %}
-		</header>
+<body ng-app="Docker" ng-controller="DockerController">
+	<header>
+		{% if page.landing == true %}{% include global-header.html %}{% endif %}
+		{% if page.landing != true %}{% include header.html %}{% endif %}
+	</header>
 
-	<div id="wrapper">
+	<div id="wrapper" class="toggled">
 		<main class="main" id="page-content-wrapper">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-sm-3 col-md-2 sidebar collapse">
+					<div class="col-sm-3 col-md-3 sidebar{% if page.landing == true %}-home{%else%} col-sm-2 col-md-2{% endif %} collapse">
 						{% include side-menu.html %}
 					</div>
-					<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 content">
+
+					<div class="{% if page.landing == true %}col-sm-9 col-md-9 main-content{%else%}col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 content{% endif %}">
 						<section class="section" id="DocumentationText">
 							{% if page.title %}
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
-							<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %} {{ content }} {% if page.noratings != true %}
+							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %} {{ content }} {% if page.noratings != true %}
 							<div style="text-align: center; margin-top: 50px">
 								<img src="/images/chat.png" alt="chat icon" style="margin-right: 10px">
 								<b>Feedback?</b> Suggestions? Can't find something in the docs?<br/> {% if edit_url != "" %}
@@ -148,32 +137,31 @@ div#autocompleteContainer {
 							}
 						</script>
 					</div>
-
-					<div id="sidebar-wrapper">
+					<div id="{% if page.landing == true %}sidebar-wrapper-home{%else%}sidebar-wrapper{% endif %}">
 						 <div class="toc-nav">
 						<section class="section" id="RightColumnSection">
 							<div id="feedback-links">
 								<ul>
 									{% if edit_url != "" %}
-									<li><a href="{{ edit_url }}">&#9998;&nbsp;Edit this page</a></li>{% endif %}
+									<li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>{% endif %}
 									<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
-														class="nomunge">&#10003;&nbsp;Request docs changes</a></li>
-									<li><a href="https://www.docker.com/docker-support-services">&#x0003F;&nbsp;Get support</a></li>
+														class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
+									<li><a href="https://www.docker.com/docker-support-services"><i class="fa fa-question" aria-hidden="true"></i> Get support</a></li>
+									<li><div class="toggle-mode">
+									    <div class="icon">
+									        <i class="fa fa-sun-o" aria-hidden="true"></i>
+									    </div>
+									    <div class="toggle-switch">
+									      <label class="switch">
+									          <input type="checkbox" id="switch-style">
+									          <div class="slider round"></div>
+									      </label>
+									    </div>
+									    <div class="icon">
+									        <i class="fa fa-moon-o" aria-hidden="true"></i>
+									    </div>
+									</div></li>
 								</ul>
-							</div>
-							<div class="toggle-mode">
-							    <div class="icon">
-							        <i class="fa fa-sun-o" aria-hidden="true"></i>
-							    </div>
-							    <div class="toggle-switch">
-							      <label class="switch">
-										    <input type="checkbox" id="switch-style">
-										    <div class="slider round"></div>
-										</label>
-							    </div>
-							    <div class="icon">
-							        <i class="fa fa-moon-o" aria-hidden="true"></i>
-							    </div>
 							</div>
 							{% unless page.notoc %} {% assign my_min = page.toc_min | default: site.toc_min | default: 2 %} {% assign my_max = page.toc_max | default: site.toc_max | default: 3 %} {% assign my_name = page.url | default: "unnamed" %}
 							<div id="side-toc">
@@ -199,10 +187,10 @@ div#autocompleteContainer {
 <script>
 	hljs.initHighlightingOnLoad();
 </script>
-<script async="" src="/js/anchorlinks.js"></script>
+<script src="/js/anchorlinks.js"></script>
+<script defer src="/js/menu.js"></script>
 <script src="/js/jquery.js"></script>
-<script async="" defer src="/js/menu.js"></script>
-<script async="" src="/js/bootstrap.min.js"></script>
-<script async="" defer src="/js/docs.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script defer src="/js/docs.js"></script>
 </body>
 </html>

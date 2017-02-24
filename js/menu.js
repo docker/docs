@@ -36,7 +36,7 @@ function highlightMe(inputTxt,keyword)
 {
   inputTxt = String(inputTxt);
   simpletext = new RegExp("(" + keyword + ")","gi");
-  return inputTxt.replace(simpletext, "<span style='background-color:yellow'>$1</span>")
+  return inputTxt.replace(simpletext, "<span>$1</span>")
 }
 function matches(inputTxt,searchTxt)
 {

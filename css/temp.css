@@ -3,26 +3,49 @@
 * this css will be integrated into master. for now testing.......
 *
 */
-
-.search-form {
-    float: left;
-    width: 295px;
-    margin: 2px 0 0!important;
+.alert-info {
+    border: 0;
+    border-radius: 0;
+    color: #31708f;
+    background-color: #3F51B5!important;
+    border-color: #bce8f1;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 0;
 }
 
-.form-control:focus {
-    outline: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+.alert-info ul {
+  list-style-type: none;
 }
-.search-banner {
-  width: 100%;
-  align: center;
+
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fffdfd;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+    margin: 10px 15px 0 0;
 }
-.search-form .algolia-autocomplete {
-  width: 100%;
-  padding-right: 54px;
+/*
+*
+* toc  **********************************************************
+*
+*/
+div#side-toc-title {
+    font-weight: bold;
+    margin: 0 0 10px 13px;
 }
+.offcanvas a:focus, .toc-nav a:hover {
+    color: opacity: .8;
+}
+/*
+*
+*   MOBILE VIEWS
+*
+*/
 
 /*
 *
@@ -43,67 +66,22 @@ a.gs-title {
     font-size: 14px!important;
 }
 
-span.reading-time {
-  font-style: italic;
-  font-size: 80%;
-  display: block;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  color: #999;
-}
-
-span.reading-time-label {
-}
-
 img.with-border {
   border: 1px solid #eaeaea;
 }
 
-div#autocompleteContainer {
-  border: 0!important;
-  margin: 0!important;
+.cse input.gsc-search-button:focus,
+input.gsc-search-button:focus {
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
+  -webkit-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
+  -moz-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.5);
 }
 
-#side-toc {
-  border: 0;
-  padding: 20px;
-  margin-top: 20px;
-  width: 100%;
-}
-
-#feedback-links {
-  margin-top: 20px;
-  width: 100%;
-}
-
-#side-toc-contents,
-#feedback-links {
-  list-style-type: none;
-  font-size: 80%;
-}
-
-#side-toc-contents ul,
-#feedback-links ul {
-  margin-bottom: 0;
-}
-
-#side-toc-contents li {
-  padding-bottom: 7px;
-  padding-top: 7px;
-  line-height: 1!important;
-}
-#side-toc-contents ul ul li {
-  padding-left: 14px;
-}
-#side-toc-title {
-  font-weight: bolder;
-  font-size: 90%;
-  color: #155A74;
-  padding-bottom: 5px;
-}
-
-#site-generation {
-  font-size: 9px;
-  color: #999;
-  font-style: italic;
+.cse .gsc-search-button input.gsc-search-button-v2,
+input.gsc-search-button-v2 {
+  width: 13px;
+  height: 13px;
+  padding: 6px 27px;
+  min-width: 13px;
+  margin-top: 2px;
 }
