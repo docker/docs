@@ -19,7 +19,7 @@ To shut down the voting app, simply stop the machines on which it is running. If
     manager   -        virtualbox   Running   tcp://192.168.99.100:2376           v1.13.1   
     worker    -        virtualbox   Running   tcp://192.168.99.101:2376           v1.13.1   
     ```
-2.  Use `docker-machine stop` to stop each machine, beginning with the worker.
+2.  Use `docker-machine stop` to shut down each machine, beginning with the worker.
 
     ```
     $ docker-machine stop worker
