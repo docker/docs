@@ -18,16 +18,17 @@ run some basic commmands to interact with the machines.
 [Docker Machine](/machine/get-started.md) (`docker-machine`), which
 comes auto-installed with both Docker for Mac and Docker for Windows.
 
-* **VirtualBox driver on Docker for Mac** - On Docker for Mac, you'll use `docker-machine` with
-the `virtualbox` driver to create machines. If you had a legacy installation
-of Docker Toolbox, you already have Oracle VirtualBox installed as part of
-that. If you started fresh with Docker for Mac, then you need to install
-VirtualBox independently. We recommend doing this rather than using the Toolbox
-installer because it can [conflict](/docker-for-mac/docker-toolbox.md) with
-Docker for Mac. You can [download VirtualBox
-here](https://www.virtualbox.org/wiki/Downloads). Click the link for `OS X
-hosts`, click the `.dmg` intaller, and follow the instructions to install. You
-do not need to start it, as we are simply using the driver.
+* **VirtualBox driver on Docker for Mac** - On Docker for Mac, you'll
+use `docker-machine` with the `virtualbox` driver to create machines. If you had
+a legacy installation of Docker Toolbox, you already have Oracle VirtualBox
+installed as part of that. If you started fresh with Docker for Mac, then you
+need to install VirtualBox independently. We recommend doing this rather than
+using the Toolbox installer because it can
+[conflict](/docker-for-mac/docker-toolbox.md) with Docker for Mac. You can
+[download VirtualBox for `OS X hosts`
+here](https://www.virtualbox.org/wiki/Downloads), and follow install
+instructions. You do not need to start VirtualBox. The `docker-machine create`
+command will call it via the driver.
 
 * **Hyper-V driver on Docker for Windows** - On Docker for Windows, you
 will use `docker-machine` with the [`Hyper-V`](/machine/drivers/hyper-v/) driver
