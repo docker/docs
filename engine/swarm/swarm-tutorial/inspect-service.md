@@ -2,6 +2,7 @@
 description: Inspect the application
 keywords: tutorial, cluster management, swarm mode
 title: Inspect a service on the swarm
+notoc: true
 ---
 
 When you have [deployed a service](deploy-service.md) to your swarm, you can use

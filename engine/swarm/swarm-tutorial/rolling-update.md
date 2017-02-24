@@ -2,6 +2,7 @@
 description: Apply rolling updates to a service on the swarm
 keywords: tutorial, cluster management, swarm, service, rolling-update
 title: Apply rolling updates to a service
+notoc: true
 ---
 
 In a previous step of the tutorial, you [scaled](scale-service.md) the number of
@@ -144,5 +145,7 @@ Redis 3.0.7 container image using rolling updates.
     Before Swarm updates all of the tasks, you can see that some are running
     `redis:3.0.6` while others are running `redis:3.0.7`. The output above shows
     the state once the rolling updates are done.
+
+## What's next?
 
 Next, learn about how to [drain a node](drain-node.md) in the swarm.
