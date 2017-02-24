@@ -224,6 +224,10 @@ assumes that the Docker daemon is in the `stopped` state.
 
     The `thin-provisioning-tools` package allows you to activate and manage your
     pool.
+    
+    ```bash
+    $ sudo yum install -y lvm2
+    ```
 
 3.  Create a physical volume replacing `/dev/xvdf` with your block device.
 
