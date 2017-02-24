@@ -11,7 +11,7 @@ deploy the voting application to the swarm you just created.
 
 The `docker-stack.yml` file must be located on a manager for the swarm where you want to deploy the application stack.
 
-1.  Get `docker-stack.yml` either from the [source code in the lab](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml) or by copying it from the example given [here](https://docs.docker.com/engine/getstarted-voting-app/#/docker-stackyml-deployment-configuration-file).
+1.  Get `docker-stack.yml` either from the [source code in the lab](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml) or by copying it from the example given [here](index.md#docker-stackyml-deployment-configuration-file).
 
     If you prefer to download the file directly from our GitHub
     repository rather than copy it from the documentation, you can use a tool like `curl`. This command downloads the raw file to the current directory on your local host. You can copy-paste it into your shell if you have `curl`:
