@@ -9,27 +9,54 @@ for the swarm nodes. You could create these Docker hosts on different physical
 machines, virtual machines, or cloud providers.
 
 For this example, we use [Docker Machine](/machine/get-started.md) to create two
-virtual machines on a single system. (See [Docker Machine
-Overview](/machine/overview.md) to learn more.) We'll also verify the setup, and
+virtual machines on a single system. We'll also verify the setup, and
 run some basic commmands to interact with the machines.
 
->**Note:** If you are using Docker for Windows, you will not be able to
-follow along with this machine setup part of the tutorial because it describes
-using the Docker Machine legacy `virtualbox` driver, which is not compatible
-with Docker for Windows Hyper-V. (See [What to know before you
-install](/docker-for-windows/install.md#what-to-know-before-you-install)).
-However, you can set up your Dockerized machines in the cloud, and follow
-the rest of the steps to create a swarm and deploy this sample app. You can use
-[Docker Cloud](/docker-cloud/index.md) or [use Docker Machine to
-provision hosts on your cloud provider](/machine/get-started-cloud.md). Once you have your cloud machines set up, skip directly to the next step, where we [create a swarm](create-swarm.md) across the two nodes.
+## Prerequisites
+
+* **Docker Machine** - These steps rely on use of
+[Docker Machine](/machine/get-started.md) (`docker-machine`), which
+comes auto-installed with both Docker for Mac and Docker for Windows.
+
+* **VirtualBox driver on Docker for Mac** - On Docker for Mac, you'll use `docker-machine` with
+the `virtualbox` driver to create machines. If you had a legacy installation
+of Docker Toolbox, you already have Oracle VirtualBox installed as part of
+that. If you started fresh with Docker for Mac, then you need to install
+VirtualBox independently. We recommend doing this rather than using the Toolbox
+installer because it can [conflict](/docker-for-mac/docker-toolbox.md) with
+Docker for Mac. You can [download VirtualBox
+here](https://www.virtualbox.org/wiki/Downloads). Click the link for `OS X
+hosts`, click the `.dmg` intaller, and follow the instructions to install. You
+do not need to start it, as we are simply using the driver.
+
+* **Hyper-V driver on Docker for Windows** - On Docker for Windows, you
+will use `docker-machine` with the [`Hyper-V`](/machine/drivers/hyper-v/) driver
+to create machines. You will need to follow the instructions in the [Hyper-V
+example](/machine/drivers/hyper-v#example) reference topic to set up a new
+external network switch (a one-time task), reboot, and then
+[create the machines (nodes)](/machine/drivers/hyper-v.md#create-the-nodes-with-docker-machine-and-the-microsoft-hyper-v-driver)
+in an elevated PowerShell per those instructions.
+
+### Commands to create machines
+
+The Docker Machine commands to create local virtual machines on Mac and Windows are are as follows. The rest of the `docker-machine` commands are the same on both.
+
+#### Mac
+
+```
+docker-machine create --driver virtualbox HOST-NAME
+```
+
+#### Windows
+
+```
+docker-machine create -d hyperv --hyperv-virtual-switch "NETWORK-SWITCH"
+MACHINE-NAME`
+```
+
+This must be done in an elevated PowerShell, using a custom-created external network switch. See [Hyper-V example](/machine/drivers/hyper-v#example).
 
 ## Create manager and worker machines
-
-The Docker Machine command to create a local virtual machine is:
-
-```
-docker-machine create --driver virtualbox <HOSTNAME>
-```
 
 Create two machines and name them to anticipate what their roles will be in the swarm:
 
@@ -37,7 +64,7 @@ Create two machines and name them to anticipate what their roles will be in the 
 
 * worker
 
-Here is an example of creating the `manager`. Create this one, then do the same for `worker`.
+Here is an example of creating the `manager` on Docker for Mac. Create this one, then do the same for `worker`.
 
 ```
 $  docker-machine create --driver virtualbox manager

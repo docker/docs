@@ -67,7 +67,7 @@ single-node and multi-node swarm scenarios on Linux machines.
 #### Use Docker for Mac or Docker for Windows
 
 Alternatively, install the latest [Docker for Mac](/docker-for-mac/index.md) or
-[Docker for Windows](/docker-for-windows/index.md) application on a one
+[Docker for Windows](/docker-for-windows/index.md) application on one
 computer. You can test both single-node and multi-node swarm from this computer,
 but you will need to use Docker Machine to test the multi-node scenarios.
 
@@ -87,18 +87,6 @@ _not_ participating in the swarm (i.e., it will not be `manager1`, `worker1`,
 or `worker2` in our example). After you create the nodes, you can run all
 swarm commands as shown from the Mac terminal or Windows PowerShell with
 Docker for Mac or Docker for Windows running.
-
-
->**Note:** If you are using Docker for Windows, you will not be able to
-use Docker Machine to create nodes locally because that worklfow relies on using
-a legacy `virtualbox` driver, which is not compatible with Docker for Windows.
-(See [What to know before you
-install](/docker-for-windows/install.md#what-to-know-before-you-install)).
-However, if you set up your Dockerized instances in the cloud, you can follow
-the rest of the steps to create a swarm and deploy this sample app. There are a
-few ways to do this. You can use [Docker Cloud](/docker-cloud/index.md) or you
-can [use Docker Machine to provision hosts on your cloud
-provider](/machine/get-started-cloud.md).
 
 ### The IP address of the manager machine
 

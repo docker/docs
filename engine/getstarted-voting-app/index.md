@@ -17,21 +17,17 @@ Docker Engine.
 
 ## Got Docker?
 
-If you haven't yet downloaded Docker or installed it, go to
-[Get Docker](/engine/getstarted/step_one.md#step-1-get-docker)
-and grab Docker for your platform.  You can follow along and
-run this example using Docker for Mac, Docker for Windows or
-Docker for Linux.
+If you haven't yet downloaded Docker or installed it, go to [Get
+Docker](/engine/getstarted/step_one.md#step-1-get-docker) and grab Docker for
+your platform.  You can follow along and run this example using Docker for Mac,
+Docker for Windows or Docker for Linux.
 
-Once you have Docker installed, you can run `docker run hello-world`
-or other commands described in the Get Started with Docker
-tutorial to [verify your installation](/engine/getstarted/step_one.md#step-3-verify-your-installation).
-If you are totally new to Docker, you might continue through
-the full [Get Started with Docker tutorial](/engine/getstarted/index.md)
-first, then come back.
-
->**Note:** If you are using Docker for Windows, you will not be able to
-follow the [machine setup](node-setup.md) part of this tutorial because it describes a legacy driver that is incompatible with Docker for Windows. However, you can use a cloud setup instead, as described in the relevant steps.
+Once you have Docker installed, you can run `docker run hello-world` or other
+commands described in the Get Started with Docker tutorial to [verify your
+installation](/engine/getstarted/step_one.md#step-3-verify-your-installation).
+If you are totally new to Docker, you might continue through the full [Get
+Started with Docker tutorial](/engine/getstarted/index.md) first, then come
+back.
 
 ## What you'll learn and do
 
