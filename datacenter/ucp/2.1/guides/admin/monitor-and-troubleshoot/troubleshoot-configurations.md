@@ -1,64 +1,26 @@
 ---
+title: Troubleshoot cluster configurations
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
 keywords: ectd, rethinkdb, key, value, store, database, ucp
-title: Troubleshoot cluster configurations
 ---
 
-This article describes how to troubleshoot a UCP cluster. When experiencing
-unexpected behavior, we highly recommend that you follow these steps before
-attempting any disruptive operations:
+UCP automatically tries to heal itself by monitoring it's internal
+components and trying to bring them to an healthy state.
 
-1. Obtain a [support dump](../../get-support.md) of the cluster, so that the
-   original failure you are experiencing is isolated before any subsequent
-   operations are performed.
-2. Make sure that the failure you are experiencing is not an expected
-   [UCP node state](./troubleshoot-node-messages.md).
-3. Set the cluster-wide log severity level to `DEBUG`. This is an operation that
-   will temporarily restart all UCP system components and will introduce a small
-   downtime window to the UCP interface. You can configure this by logging in to
-   UCP as an Admin user, navigating to the **Admin Settings** section, selecting
-   the **Logs** tab, and setting the **Log Severity Level** to `DEBUG`. After
-   that, wait until the UCP web UI is responsive again.
-4. Obtain a new [support dump](./../../get-support.md) of the cluster which will
-   now include debug-level logs.
-5. Depending on the problem you are experiencing, it's more likely that you'll
-   find related messages in the logs of specific components on manager nodes: 
-
-	* If the problem occurs after a node was added or removed, review the logs
-	of the `ucp-reconcile` container.
-	* If the problem occurs in the normal state of the system, review the logs
-	of the `ucp-controller` container.
-	* If you are able to visit the UCP web UI but unable to log in, review the
-	logs of the `ucp-auth-api` and `ucp-auth-store` containers.
-
-
-## Troubleshooting individual UCP components
-
-This section describes how to troubleshoot individual UCP components. This is
-typically not required, as UCP uses a node reconciler to bring nodes to a
-healthy state. In most cases, if a single UCP component is persistently in a
+In most cases, if a single UCP component is persistently in a
 failed state, you should be able to restore the cluster to a healthy state by
-[removing the node from the cluster and joining
-again](../configure/scale-your-cluster.md). However, you may wish to inspect the
-logs of 
+removing the unhealthy node from the cluster and joining it again.
+[Lean how to remove and join modes](../configure/scale-your-cluster.md).
 
-As an admin user, you're able to view the logs of individual UCP containers.
-You can [learn more about the UCP architecture](../../architecture.md)
+## Troubleshoot the etcd key-value store
 
-It's normal for the `ucp-reconcile` container to be in a stopped state. This
-container is only started when the `ucp-agent` detects that a node needs to transition
-to a different state, and it is responsible for creating and removing
-containers, issuing certificates and pulling missing images. 
-
-Docker UCP persists configuration data on an [etcd](https://coreos.com/etcd/)
+UCP persists configuration data on an [etcd](https://coreos.com/etcd/)
 key-value store and [RethinkDB](https://rethinkdb.com/) database that are
 replicated on all manager nodes of the UCP cluster. These data stores are for
-internal use only, and should not be used by other applications. 
+internal use only, and should not be used by other applications.
 
-### Troubleshooting the etcd Key-Value Store 
-
-#### Using the RESTful HTTP API
-In this example we'll be using `curl` for making requests to the key-value
+### With the HTTP API
+In this example we'll use `curl` for making requests to the key-value
 store REST API, and `jq` to process the responses.
 
 You can install these tools on a Ubuntu distribution by running:
@@ -86,7 +48,7 @@ $ curl -s \
 To learn more about the key-value store REST API check the
 [etcd official documentation](https://coreos.com/etcd/docs/latest/).
 
-#### Using a CLI client
+### With the CLI client
 
 The containers running the key-value store, include `etcdctl`, a command line
 client for etcd. You can run it using the `docker exec` command.
