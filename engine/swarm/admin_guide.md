@@ -276,7 +276,7 @@ To restore, see [Restore from a backup](#restore-from-a-backup).
 ### Restore from a backup
 
 After backing up the swarm as described in
-[Backing up the swarm](#back-up-the-swarm), use the following procedure to
+[Back up the swarm](#back-up-the-swarm), use the following procedure to
 restore the data to a new swarm.
 
 1.  Shut down Docker on the target host machine where the swarm will be restored.
