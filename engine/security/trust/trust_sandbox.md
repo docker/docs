@@ -227,7 +227,7 @@ data. Then, you try and pull it.
         drwxr-xr-x 2 root root 4096 Jun 10 17:26 aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
         drwxr-xr-x 2 root root 4096 Jun 10 17:26 cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
 
-4. Change into the registry storage for one of those layers (note that this is in a different directory)
+4. Change into the registry storage for one of those layers (note that this is in a different directory):
 
         root@65084fc6f047:/# cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
 
