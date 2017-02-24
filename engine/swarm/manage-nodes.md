@@ -29,7 +29,7 @@ ehkv3bcimagdese79dn78otj5 *  node-1    Ready   Active        Leader
 The `AVAILABILITY` column shows whether or not the scheduler can assign tasks to
 the node:
 
-* `Active` means that the scheduler can assign tasks to a node.
+* `Active` means that the scheduler can assign tasks to the node.
 * `Pause` means the scheduler doesn't assign new tasks to the node, but existing
 tasks remain running.
 * `Drain` means the scheduler doesn't assign new tasks to the node. The
