@@ -2,6 +2,7 @@
 description: Scale the service running in the swarm
 keywords: tutorial, cluster management, swarm mode, scale
 title: Scale the service in the swarm
+notoc: true
 ---
 
 Once you have [deployed a service](deploy-service.md) to a swarm, you are ready

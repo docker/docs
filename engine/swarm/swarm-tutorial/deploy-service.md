@@ -2,6 +2,7 @@
 description: Deploy a service to the swarm
 keywords: tutorial, cluster management, swarm mode
 title: Deploy a service to the swarm
+notoc: true
 ---
 
 After you [create a swarm](create-swarm.md), you can deploy a service to the
