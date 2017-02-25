@@ -26,9 +26,9 @@ To shut down the voting app, simply stop the machines on which it is running. If
     Stopping "worker"...
     Machine "worker" was stopped.
 
-    $ docker-machine stop worker
-    Stopping "worker"...
-    Machine "worker" was stopped.
+    $ docker-machine stop manager
+    Stopping "manager"...
+    Machine "manager" was stopped.
     ```
 
 ## Restarting the voting app
