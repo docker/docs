@@ -901,8 +901,8 @@ manuals:
       title: Release notes
   - sectiontitle: 1.12
     section:
-    - path: /cs-engine/1.12/install/
-      title: Install CS Docker Engine
+    - path: /cs-engine/1.12/
+      title: Install
     - path: /cs-engine/1.12/upgrade/
       title: Upgrade
     - sectiontitle: Release notes
