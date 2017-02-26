@@ -88,13 +88,6 @@ start them per your cloud setup.
 
 At this point, the app is back up. The web pages you looked at in the [test drive](test-drive.md) should be available, and you could experiment, modify the app, and [redeploy](customize-app.md).
 
->**Tip:** If you set `docker-machine` environment variables to talk to a particular Docker machine, you'll need to unset them or simply open a new
-terminal window to do other work. However, for the voting app tutorial we never
-explicitly set `docker-machine` environment variables, since we immediately `ssh`
-directly into the `manager` and `worker` and run all of our swarm commands on
-those nodes. So you can ignore `docker-machine` caveats about setting environment
-variables in this context.
-
 ## Removing the machines
 
 If you prefer to remove your local machines altogether, use `docker-machine rm`
