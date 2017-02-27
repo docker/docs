@@ -15,7 +15,7 @@ html {
 
 body {
     background-color: #192837;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 14px;
     line-height: 24px;
     color: #e4e4e4;
@@ -121,7 +121,7 @@ h6 {
 
 p {
     color: #d3d4d4;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 14px;
     line-height: 24px;
     margin: 10px 0 20px 0;
@@ -246,7 +246,7 @@ img {
     margin-bottom: 15px;
     font-size: 18px;
     font-weight: 200;
-    font-family: Open Sans;
+    font-family: "Open Sans", sans-serif;
     line-height: 30px;
 }
 
@@ -1497,7 +1497,7 @@ ul.autocompleteList {
 }
 
 .autocompleteList li {
-    ccolor: #b4c3d2;
+    color: #b4c3d2;
     padding: 5px 0 7px 0;
 }
 
@@ -1648,7 +1648,7 @@ footer {
 }
 
 .footer-copyright p {
-    font-family: "Open Sans";
+    font-family: "Open Sans", sans-serif;
     font-size: 12px;
     line-height: 17px;
     color: #637986;
