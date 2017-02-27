@@ -1219,6 +1219,8 @@ manuals:
         section:
         - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/
           title: Monitor the cluster status
+        - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-node-messages/
+          title: Troubleshoot node messages
         - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
           title: Troubleshoot with logs
         - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/
