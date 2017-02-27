@@ -66,7 +66,7 @@ The following provides greater detail on the process:
 2.  Review existing issues and proposals to make sure no other user is proposing a similar idea.
 
     The design proposals are
-    [all online in our GitHub pull requests](https://github.com/docker/docker/pulls?q=is%3Aopen+is%3Apr+label%3Akind%2Fproposal){: target="_blank" class="_"}
+    [all online in our GitHub pull requests](https://github.com/docker/docker/pulls?q=is%3Aopen+is%3Apr+label%3Akind%2Fproposal){: target="_blank" class="_"}.
 
 3.  Talk to the community about your idea.
 
@@ -143,6 +143,7 @@ Design proposal discussions can span days, weeks, and longer. The number of comm
 In that situation, following the discussion flow and the decisions reached is crucial.
 
 Making a pull request with a design proposal simplifies this process:
+
 * you can leave comments on specific design proposal line
 * replies around line are easy to track
 * as a proposal changes and is updated, pages reset as line items resolve
