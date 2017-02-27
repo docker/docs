@@ -65,7 +65,7 @@ program code and documentation code.
 * Include documentation changes in the same commit so that a revert would
   remove all traces of the feature or fix.
 
-* Reference each issue in your pull request description (`#XXXX`)
+* Reference each issue in your pull request description (`#XXXX`).
 
 ## Respond to pull requests reviews
 
