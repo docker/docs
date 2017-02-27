@@ -4,35 +4,57 @@ keywords: Docker, Docker documentation, requirements, apt, installation, suse, o
 redirect_from:
 - /engine/installation/SUSE/
 - /engine/installation/linux/SUSE/
-title: Get Docker for OpenSUSE and SLES
+title: Get Docker for and SLES
 ---
 
-To get started with Docker on OpenSUSE or SLES, make sure you
+To get started with Docker on SUSE Linux Enterprise Server (SLES), make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
 
 ## Prerequisites
 
+### Docker EE URL
+
+To install Docker Enterprise Edition (Docker EE), you need to know the Docker EE
+repository URL associated with your trial or subscription. To get this information:
+
+- Go to [https://store.docker.com/?overlay=subscriptions](https://store.docker.com/?overlay=subscriptions).
+- Choose **Get Details** / **Setup Instructions** within the
+  **Docker Enterprise Edition for SUSE Linux Enterprise Server** section.
+- Copy the URL from the field labeled
+  **Copy and paste this URL to download your Edition**.
+
+Use this URL when you see the placeholder text `<DOCKER-EE-URL>`.
+
+To learn more about Docker EE, see
+[Docker Enterprise Edition](https://www.docker.com/enterprise-edition/){: target="_blank" class="_" }.
+
+Docker Community Edition (Docker CE) is not supported on SLES.
+
 ### OS requirements
 
-To install Docker, you need the 64-bit version one of the following:
+To install Docker, you need the 64-bit version of SLES 12.x.
 
-- OpenSUSE Leap 42.x
-- SLES 12.x
+### Uninstall old versions
 
-### Remove unofficial Docker packages
-
-OpenSUSE's operating system repositories contain an older version of Docker,
-with the package name `docker` instead of `docker-engine`. If you installed this
-version of Docker on OpenSUSE or on SLES by using the OpenSUSE repositories,
-remove it using the following command:
+Older versions of Docker were called `docker` or `docker-engine`. If these are
+installed, uninstall them, along with associated dependencies.
 
 ```bash
-$ sudo zypper rm docker
+$ sudo zypper rm docker docker-engine
 ```
 
-The contents of `/var/lib/docker` are not removed, so any images, containers,
-or volumes you created using the older version of Docker are preserved.
+If removal of the `docker-engine` package fails, use the following command
+instead:
+
+```bash
+$ sudo rpm -e docker-engine
+```
+
+It's OK if `zypper` reports that none of these packages are installed.
+
+The contents of `/var/lib/docker/`, including images, containers, volumes, and
+networks, are preserved. The Docker EE package is now called `docker-ee`.
 
 ## Install Docker
 
@@ -44,53 +66,29 @@ You can install Docker in different ways, depending on your needs:
   recommended approach.
 
 - Some users download the RPM package and install it manually and manage
-  upgrades completely manually.
-
-- Some users cannot use third-party repositories, and must rely on the version
-  of Docker in the OpenSUSE or SLES repositories. This version of Docker may be
-  out of date. Those users should consult the OpenSuSE or SLES documentation and
-  not follow these procedures.
+  upgrades completely manually. This is useful in situations such as installing
+  Docker on air-gapped systems with no access to the internet.
 
 ### Install using the repository
 
 Before you install Docker for the first time on a new host machine, you need to
-set up the Docker repository. Afterward, you can install, update, or downgrade
-Docker from the repository.
+set up the Docker repository. Afterward, you can install and update Docker from
+the repository.
 
 #### Set up the repository
 
-1.  Use the following command to set up the **stable** repository:
+Use the following command to set up the **stable** repository, using the
+Docker EE repository URL you located in the [prerequisites](#prerequisites).
 
-    ```bash
-    $ sudo zypper addrepo \
-        https://yum.dockerproject.org/repo/main/opensuse/13.2/ \
-        docker-main
-    ```
+{% assign minor-version = "17.03" %}
 
-2.  **Optional**: Enable the **testing** repository. You can enable it alongside
-    the stable repository. **Do not use unstable repositories on on production
-    systems or for non-testing workloads.**
+```bash
+$ sudo zypper addrepo \
+    <DOCKER-EE-URL>/stable-{{ minor-version }} \
+    docker-ee-stable
+```
 
-    > **Warning**: If you have both stable and unstable repositories enabled,
-    > updating without specifying a version in the `zypper install` or
-    > `zypper update` command will always install the highest possible version,
-    > which will almost certainly be an unstable one.
-
-
-    ```bash
-    $ sudo zypper addrepo \
-        https://yum.dockerproject.org/repo/testing/opensuse/13.2/ \
-        docker-testing
-    ```
-
-    You can disable a repository at any time by running the `zypper rmrepo`
-    command. The following command disables the `testing` repository.
-
-    ```bash
-    $ sudo zypper removerepo docker-testing
-    ```
-
-#### Install Docker
+#### Install Docker EE
 
 1.  Update the `zypper` package index.
 
@@ -101,27 +99,14 @@ Docker from the repository.
     If this is the first time you have refreshed the package index since adding
     the Docker repositories, you will be prompted to accept the GPG key, and
     the key's fingerprint will be shown. Verify that the fingerprint matches
-    `58118E89F3A912897C070ADBF76221572C52609D` and if so, accept the key.
+    `77FE DA13 1A83 1D29 A418  D3E8 99E5 FF2E 7668 2BC9` and if so, accept the
+    key.
 
-2.  Install the latest version of Docker, or go to the next step to install a
+2.  Install the latest version of Docker EE, or go to the next step to install a
     specific version.
 
     ```bash
-    $ sudo zypper install docker-engine
-    ```
-
-    > **Warning**: If you have both stable and unstable repositories enabled,
-    > installing or updating Docker without specifying a version in the
-    > `zypper install` or `zypper update` command will always install the highest
-    > available version, which will almost certainly be an unstable one.
-
-    The RPM will install, but you will receive the following error during the
-    post-installation procedure, because Docker cannot start the service
-    automatically:
-
-    ```none
-    Additional rpm output:
-    /var/tmp/rpm-tmp.YGySzA: line 1: fg: no job control
+    $ sudo zypper install docker-ee
     ```
 
     Start Docker:
@@ -136,36 +121,25 @@ Docker from the repository.
     source packages, omit the `-t package` flag from the command.
 
     ```bash
-    $ zypper search -s --match-exact -t package docker-engine
+    $ zypper search -s --match-exact -t package docker-ee
 
       Loading repository data...
       Reading installed packages...
 
       S | Name          | Type    | Version                               | Arch   | Repository    
       --+---------------+---------+---------------------------------------+--------+---------------
-        | docker-engine | package | 1.13.0-1                              | x86_64 | docker-main
-        | docker-engine | package | 1.12.6-1                              | x86_64 | docker-main   
-        | docker-engine | package | 1.12.5-1                              | x86_64 | docker-main   
+        | docker-ee     | package | {{ minor-version }}-1                 | x86_64 | docker-ee-stable
     ```
 
     The contents of the list depend upon which repositories you have enabled.
-    Choose a specific version to
-    install. The third column is the version string. The fifth column is the
-    repository name, which indicates which repository the package is from and by
-    extension its stability level. To install a specific version, append the
-    version string to the package name and separate them by a hyphen (`-`):
+    Choose a specific version to install. The third column is the version
+    string. The fifth column is the repository name, which indicates which
+    repository the package is from and by extension its stability level. To
+    install a specific version, append the version string to the package name
+    and separate them by a hyphen (`-`):
 
     ```bash
-    $ sudo zypper install docker-engine-<VERSION_STRING>
-    ```
-
-    The RPM will install, but you will receive the following error during the
-    post-installation procedure, because Docker cannot start the service
-    automatically:
-
-    ```none
-    Additional rpm output:
-    /var/tmp/rpm-tmp.YGySzA: line 1: fg: no job control
+    $ sudo zypper install docker-ee-<VERSION_STRING>
     ```
 
     Start Docker:
@@ -174,7 +148,7 @@ Docker from the repository.
     $ sudo service docker start
     ```
 
-4.  Verify that `docker` is installed correctly by running the `hello-world`
+4.  Verify that Docker EE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -184,43 +158,39 @@ Docker from the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker is installed and running. You need to use `sudo` to run Docker commands.
-Continue to [Linux postinstall](linux-postinstall.md) to allow non-privileged
-users to run Docker commands and for other optional configuration steps.
+Docker EE is installed and running. You need to use `sudo` to run Docker
+commands. Continue to [Linux postinstall](linux-postinstall.md) to allow
+non-privileged users to run Docker commands and for other optional configuration
+steps.
 
-#### Upgrade Docker
+#### Upgrade Docker EE
 
-To upgrade Docker, first run `sudo zypper refresh`, then follow the
+To upgrade Docker EE, first run `sudo zypper refresh`, then follow the
 [installation instructions](#install-docker), choosing the new version you want
 to install.
 
 ### Install from a package
 
-If you cannot use Docker's repository to install Docker, you can download the
-`.rpm` file for your release and install it manually. You will need to download
-a new file each time you want to upgrade Docker.
+If you cannot use the official Docker repository to install Docker, you can
+download the `.rpm` file for your release and install it manually. You will
+need to download a new file each time you want to upgrade Docker.
 
-1.  Go to [https://yum.dockerproject.org/repo/main/opensuse/13.2/Packages/](https://yum.dockerproject.org/repo/main/opensuse/13.2/Packages/)
-    and download the `.rpm` file for the Docker version you want to install.
+1.  Go to the Docker EE repository URL associated with your
+    trial or subscription in your browser. Go to
+    `x86_64/stable-{{ minor-version }}` and download the `.rpm` file for the
+    Docker version you want to install.
 
-    > **Note**: To install a testing version, change the word `main` in the
-    > URL to `testing`. Do not use unstable versions of Docker in production
-    > or for non-testing workloads.
+2.  Import Docker's official GPG key:
 
-2.  Install Docker, changing the path below to the path where you downloaded
+    ```bash
+    $ sudo rpm --import <DOCKER-EE-URL>/gpg
+    ```
+
+3.  Install Docker EE, changing the path below to the path where you downloaded
     the Docker package.
 
     ```bash
-    $ sudo yum -y install /path/to/package.rpm
-    ```
-
-    The RPM will install, but you will receive the following error during the
-    post-installation procedure, because Docker cannot start the service
-    automatically:
-
-    ```none
-    Additional rpm output:
-    /var/tmp/rpm-tmp.YGySzA: line 1: fg: no job control
+    $ sudo zypper install /path/to/package.rpm
     ```
 
     Start Docker:
@@ -229,7 +199,7 @@ a new file each time you want to upgrade Docker.
     $ sudo service docker start
     ```
 
-3.  Verify that `docker` is installed correctly by running the `hello-world`
+4.  Verify that Docker EE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -239,24 +209,23 @@ a new file each time you want to upgrade Docker.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker is installed and running. You need to use `sudo` to run Docker commands.
-Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
-non-privileged users to run Docker commands and for other optional configuration
-steps.
+Docker EE is installed and running. You need to use `sudo` to run Docker
+commands. Continue to [Post-installation steps for Linux](linux-postinstall.md)
+to allow non-privileged users to run Docker commands and for other optional
+configuration steps.
 
-#### Upgrade Docker
+#### Upgrade Docker EE
 
-To upgrade Docker, download the newer package file and repeat the
+To upgrade Docker EE, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `zypper update`
 instead of `zypper install`, and pointing to the new file.
 
 ## Uninstall Docker
 
-1.  Uninstallation using `zypper rm` fails. Uninstall the Docker package using
-    the following command:
+1.  Uninstall the Docker EE package using the following command.
 
     ```bash
-    $ sudo rpm -e --noscripts docker-engine
+    $ sudo zypper rm docker-ee
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host

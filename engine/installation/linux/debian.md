@@ -1,10 +1,10 @@
 ---
 description: Instructions for installing Docker on Debian
-keywords: Docker, Docker documentation, requirements, apt, installation, debian, raspbian, install, uninstall, upgrade, update
+keywords: Docker, Docker documentation, requirements, apt, installation, debian, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/debian/
 - /engine/installation/linux/raspbian/
-title: Get Docker for Debian or Raspbian
+title: Get Docker for Debian
 ---
 
 To get started with Docker on Debian, make sure you
@@ -12,6 +12,12 @@ To get started with Docker on Debian, make sure you
 [install Docker](#install-docker).
 
 ## Prerequisites
+
+### Docker EE customers
+
+Docker EE is not supported on Debian. For a list of supported operating systems
+and distributions for different Docker editions, see
+[Docker variants](/engine/installation/#docker-variants).
 
 ### OS requirements
 
@@ -22,7 +28,21 @@ Raspbian versions:
 - Jessie 8.0 (LTS) / Raspbian Jessie
 - Wheezy 7.7 (LTS)
 
-#### Extra steps for Wheezy 7.7
+### Uninstall old versions
+
+Older versions of Docker were called `docker` or `docker-engine`. If these are
+installed, uninstall them:
+
+```bash
+$ sudo apt-get remove docker docker-engine
+```
+
+It's OK if `apt-get` reports that none of these packages are installed.
+
+The contents of `/var/lib/docker/`, including images, containers, volumes, and
+networks, are preserved. The Docker CE package is now called `docker-ce`.
+
+### Extra steps for Wheezy 7.7
 
 - You need at least version 3.10 of the Linux kernel. Debian Wheezy ships with
   version 3.2, so you may need to
@@ -36,9 +56,9 @@ Raspbian versions:
 - Enable the `backports` repository. See the
   [Debian documentation](https://backports.debian.org/Instructions/){: target="_blank" class"_"}.
 
-## Install Docker
+## Install Docker CE
 
-You can install Docker in different ways, depending on your needs:
+You can install Docker CE in different ways, depending on your needs:
 
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
@@ -46,27 +66,25 @@ You can install Docker in different ways, depending on your needs:
   recommended approach.
 
 - Some users download the DEB package and install it manually and manage
-  upgrades completely manually.
-
-- Some users cannot use the official Docker repositories, and must rely on
-  the version of Docker that comes with their operating system. This version of
-  Docker may be out of date. Those users should consult their operating system
-  documentation and not follow these procedures.
+  upgrades completely manually. This is useful in situations such as installing
+  Docker on air-gapped systems with no access to the internet.
 
 ### Install using the repository
 
-Before you install Docker for the first time on a new host machine, you need to
-set up the Docker repository. Afterward, you can install, update, or downgrade
-Docker from the repository.
+Before you install Docker CE for the first time on a new host machine, you need
+to set up the Docker repository. Afterward, you can install and update Docker
+from the repository.
 
 #### Set up the repository
+
+{% assign download-url-base = "https://download.docker.com/linux/debian" %}
 
 1.  Install packages to allow `apt` to use a repository over HTTPS:
 
     **Jessie or Stretch**:
 
     ```bash
-    $ sudo apt-get install -y --no-install-recommends \
+    $ sudo apt-get install \
          apt-transport-https \
          ca-certificates \
          curl \
@@ -76,7 +94,7 @@ Docker from the repository.
     **Wheezy**:
 
     ```bash
-    $ sudo apt-get install -y --no-install-recommends \
+    $ sudo apt-get install \
          apt-transport-https \
          ca-certificates \
          curl \
@@ -86,47 +104,38 @@ Docker from the repository.
 2.  Add Docker's official GPG key:
 
     ```bash
-    $ curl -fsSL https://apt.dockerproject.org/gpg | sudo apt-key add -
+    $ curl -fsSL {{ download-url-base}}/gpg | sudo apt-key add -
     ```
 
-    Verify that the key ID is `58118E89F3A912897C070ADBF76221572C52609D`.
+    Verify that the key ID is `9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88`.
 
     ```bash
-    $ sudo apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
+    $ sudo apt-key fingerprint 0EBFCD88
 
-      pub   4096R/2C52609D 2015-07-14
-            Key fingerprint = 5811 8E89 F3A9 1289 7C07  0ADB F762 2157 2C52 609D
-      uid                  Docker Release Tool (releasedocker) <docker@docker.com>
+    pub   4096R/0EBFCD88 2017-02-22
+          Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+    uid                  Docker Release (CE deb) <docker@docker.com>
+    sub   4096R/F273FCD8 2017-02-22
     ```
 
 3.  Use the following command to set up the **stable** repository.
 
+    To add the **edge** repository, add `edge` after `stable` on the last line of
+    the command. For information about **stable** and **edge** builds, see
+    [Docker variants](/engine/installation/#docker-variants).
+
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
     > Debian distribution, such as `jessie`.
 
-    - **Debian**:
 
-      ```bash
-      $ sudo add-apt-repository \
-             "deb https://apt.dockerproject.org/repo/ \
-             debian-$(lsb_release -cs) \
-             main"
-      ```
+    ```bash
+    $ sudo add-apt-repository \
+       "deb [arch=amd64] {{ download-url-base }} \
+       $(lsb_release -cs) \
+       stable"
+    ```
 
-    - **Raspbian**:
-
-      ```bash
-      $ sudo add-apt-repository \
-             "deb https://apt.dockerproject.org/repo/ \
-             raspbian-$(lsb_release -cs) \
-             main"
-      ```
-
-    To enable the `testing` repository, you can edit `/etc/apt/sources.list`
-    and add the word `testing` after `main` on the appropriate line of the file.
-    **Do not use unstable repositories on production systems or for non-testing workloads.**
-
-#### Install Docker
+#### Install Docker CE
 
 1.  Update the `apt` package index.
 
@@ -140,24 +149,22 @@ Docker from the repository.
     Use this command to install the latest version of Docker:
 
     ```bash
-    $ sudo apt-get -y install docker-engine
+    $ sudo apt-get install docker-ce
     ```
 
-    > **Warning**: If you have both stable and unstable repositories enabled,
-    > updating to the latest version of Docker by not specifying a version in
-    > the `apt-get install` or `apt-get update` command will always install the
-    > highest possible version, which will almost certainly be an unstable one.
+    > **Warning**: If you have multiple Docker repositories enabled, installing
+    > or updating without specifying a version in the `apt-get install` or
+    > `apt-get update` command will always install the highest possible version,
+    > which may not be appropriate for your stability needs.
 
 3.  On production systems, you should install a specific version of Docker
     instead of always using the latest. This output is truncated. List the
     available versions:
 
     ```bash
-    $ apt-cache madison docker-engine
-    docker-engine | 1.13.0-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
-    docker-engine | 1.12.3-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
-    docker-engine | 1.12.2-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
-    docker-engine | 1.12.1-0~stretch | https://apt.dockerproject.org/repo debian-stretch/main amd64 Packages
+    $ apt-cache madison docker-ce
+
+    docker-ce | 17.03.0~ce-0~debian-jessie | {{ download-url-base}} jessie/stable amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled,
@@ -169,16 +176,12 @@ Docker from the repository.
     version string to the package name and separate them by an equals sign (`=`):
 
     ```bash
-    $ sudo apt-get -y install docker-engine=<VERSION_STRING>
+    $ sudo apt-get install docker-ce=<VERSION_STRING>
     ```
 
-    On Debian, the Docker daemon starts automatically. On Raspbian, start Docker:
+    The Docker daemon starts automatically.
 
-    ```bash
-    $ sudo service docker start
-    ```
-
-4.  Verify that `docker` is installed correctly by running the `hello-world`
+4.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -188,12 +191,12 @@ Docker from the repository.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker is installed and running. You need to use `sudo` to run Docker commands.
-Continue to [Linux postinstall](linux-postinstall.md) to allow
+Docker CE is installed and running. You need to use `sudo` to run Docker
+commands. Continue to [Linux postinstall](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
 
-#### Upgrade Docker
+#### Upgrade Docker CE
 
 To upgrade Docker, first run `sudo apt-get update`, then follow the
 [installation instructions](#install-docker), choosing the new version you want
@@ -201,32 +204,27 @@ to install.
 
 ### Install from a package
 
-If you cannot use Docker's repository to install Docker, you can download the
+If you cannot use Docker's repository to install Docker CE, you can download the
 `.deb` file for your release and install it manually. You will need to download
 a new file each time you want to upgrade Docker.
 
-1.  Go to [https://apt.dockerproject.org/repo/pool/main/d/docker-engine/](https://apt.dockerproject.org/repo/pool/main/d/docker-engine/)
+1.  Go to [{{ download-url-base }}/pool/stable/amd64/]({{ download-url-base }}/pool/stable/amd64/)
     and download the `.deb` file for the Docker version you want to install and
-    for your version of Debian or Raspbian.
+    for your version of Debian.
 
-    > **Note**: To install a testing version, change the word `main` in the
-    > URL to `testing`. Do not use unstable versions of Docker in production
-    > or for non-testing workloads.
+    > **Note**: To install an **edge**  package, change the word
+    > `stable` in the > URL to `edge`.
 
-2.  Install Docker, changing the path below to the path where you downloaded
+2.  Install Docker CE, changing the path below to the path where you downloaded
     the Docker package.
 
     ```bash
     $ sudo dpkg -i /path/to/package.deb
     ```
 
-    On Debian, the Docker daemon starts automatically. On Raspbian, start Docker:
+    The Docker daemon starts automatically.
 
-    ```bash
-    $ sudo service docker start
-    ```
-
-3.  Verify that `docker` is installed correctly by running the `hello-world`
+3.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -236,10 +234,10 @@ a new file each time you want to upgrade Docker.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker is installed and running. You need to use `sudo` to run Docker commands.
-Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
-non-privileged users to run Docker commands and for other optional configuration
-steps.
+Docker CE is installed and running. You need to use `sudo` to run Docker
+commands. Continue to [Post-installation steps for Linux](linux-postinstall.md)
+to allow non-privileged users to run Docker commands and for other optional
+configuration steps.
 
 #### Upgrade Docker
 
@@ -251,7 +249,7 @@ To upgrade Docker, download the newer package file and repeat the
 1.  Uninstall the Docker package:
 
     ```bash
-    $ sudo apt-get purge docker-engine
+    $ sudo apt-get purge docker-ce
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
