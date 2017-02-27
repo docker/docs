@@ -90,7 +90,7 @@ You create and manage PRs on GitHub:
     ![Latest commits](images/latest_commits.png)
 
 
-2. Click "Compare & pull request."
+2. Click "Compare & pull request".
 
     The system displays the pull request dialog.
 
