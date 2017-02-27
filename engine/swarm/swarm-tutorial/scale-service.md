@@ -55,7 +55,7 @@ the swarm.
     528d68040f95        alpine:latest       "ping docker.com"   About a minute ago   Up About a minute                       helloworld.4.auky6trawmdlcne8ad8phb0f1
     ```
 
-    If you want to see the containers running on other nodes, you can ssh into
+    If you want to see the containers running on other nodes, ssh into
     those nodes and run the `docker ps` command.
 
 ## What's next?
