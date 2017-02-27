@@ -91,7 +91,7 @@ hour. To run the test suite, do the following:
 
     It can take approximate one hour to run all the tests. The time depends
     on your host performance. The default timeout is 60 minutes, which is
-    defined in hack/make.sh(${TIMEOUT:=60m}). You can modify the timeout
+    defined in `hack/make.sh`(`${TIMEOUT:=60m}`). You can modify the timeout
     value on the basis of your host performance. When they complete
     successfully, you see the output concludes with something like this:
 
