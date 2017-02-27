@@ -137,6 +137,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 											<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
 																class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
 											<li><a href="https://www.docker.com/docker-support-services"><i class="fa fa-question" aria-hidden="true"></i> Get support</a></li>
+<!-- day/night switch
 											<li>
 												<div class="toggle-mode">
 													<div class="icon">
@@ -152,7 +153,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 														<i class="fa fa-moon-o" aria-hidden="true"></i>
 													</div>
 												</div>
-											</li>
+											</li> -->
 										</ul>
 									</div>
 									{% unless page.notoc %} {% assign my_min = page.toc_min | default: site.toc_min | default: 2 %} {% assign my_max = page.toc_max | default: site.toc_max | default: 3 %} {% assign my_name = page.url | default: "unnamed" %}
