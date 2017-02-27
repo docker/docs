@@ -11,7 +11,7 @@ time to do everything.
 
 Choose to contribute testing if you want to improve Docker software and
 processes. Testing is a good choice for contributors that have experience
-software testing, usability testing, or who are otherwise great at spotting
+in software testing, usability testing, or who are otherwise great at spotting
 problems.
 
 # What can you contribute to testing?
