@@ -242,7 +242,7 @@ make any changes, just run these commands again.
 
 The Docker documentation source files are in a centralized repository at
 [https://github.com/docker/docker.github.io](https://github.com/docker/docker.github.io). The content is
-written using extended Markdown, which you can edit in a plain text editor such
+written using extended Markdown, which you can edit in a plain text editor such as 
 Atom or Notepad. The docs are built using [Jekyll](https://jekyllrb.com/).
 
 Most documentation is developed in the centralized repository. The exceptions are
