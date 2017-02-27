@@ -56,6 +56,7 @@ you can [install DTR on that host](index.md).
 ### Preventing outgoing connections
 
 DTR makes outgoing connections to:
+
 * report analytics,
 * check for new versions,
 * check online licenses,
