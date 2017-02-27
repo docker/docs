@@ -18,8 +18,8 @@ problems.
 
 * Write a blog about <a href="http://www.appneta.com/blog/automated-testing-with-docker/" target="_blank">how your company uses Docker its test infrastructure</a>.
 * Take <a href="http://ows.io/tj/w88v3siv" target="_blank">an online usability test</a> or create a usability test about Docker.
-* Test one of<a href="https://github.com/docker-library/official-images/issues"> Docker's official images</a>
-* Test the Docker documentation
+* Test one of<a href="https://github.com/docker-library/official-images/issues"> Docker's official images</a>.
+* Test the Docker documentation.
 
 
 # Test the Docker documentation
