@@ -440,10 +440,8 @@ guides:
     title: Where to chat or get help
   - path: /opensource/doc-style/
     title: Style guide for Docker documentation
-- sectiontitle: Docs archive
-  section:
-  - path: /docsarchive/
-    title: View the docs archives
+- path: /docsarchive/
+  title: View the docs archives
 
 reference:
 - title: Dockerfile reference
