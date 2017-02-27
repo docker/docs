@@ -23,6 +23,11 @@ The docs for `v1.4` will then be viewable at `http://localhost:4000`.
 
 ### {{ item[0] }}
 
-Docs for {{ item[0] }} are accessible at [/{{ item[0] }}/](/{{ item[0] }}/).
+Docs for {{ item[0] }} are accessible at [/{{ item[0] }}/](/{{ item[0] }}/), or
+run:
+
+```
+docker run -p 4000:4000 docs/docker.github.io:{{ item[0] }}
+```
 
 {% endfor %}
