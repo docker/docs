@@ -219,8 +219,7 @@ volumes:
 
 ## Docker stacks and services
 
-To deploy the voting app, we will run the `docker stack deploy` command with
-this `docker-stack.yml` file to pull the referenced images and launch the
+To deploy the voting app, we will run the `docker stack deploy -c docker-stack.yml new-stack-name` command with this file and a new stack name provided to pull the referenced images and launch the
 services in a swarm.  This allows us to run the application across multiple
 servers, and use swarm mode for load balancing and performance. Rather than
 thinking about running individual containers, we can start to model deployments
