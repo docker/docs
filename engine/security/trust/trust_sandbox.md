@@ -275,7 +275,7 @@ data. Then, you try and pull it.
 
 ## More play in the sandbox
 
-Now, that you have a full Docker content trust sandbox on your local system,
+Now, you have a full Docker content trust sandbox on your local system,
 feel free to play with it and see how it behaves. If you find any security
 issues with Docker, feel free to send us an email at <security@docker.com>.
 
