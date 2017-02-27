@@ -1,98 +1,85 @@
 <!-- relative link basehrefs -->
-{% if page.path contains "index.md" %}
-{% capture basehref %}{{ page.url }}{% endcapture %}
-{% else %}
-{% assign crumbs = page.url | split: '/' %}
-{% assign stoppingpoint = crumbs | size | minus: 1 %}
-{% for crumb in crumbs %}
-{% if forloop.index == stoppingpoint %}
-{% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %}
-{% break %}
-{% else %}
-{% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %}
-{% endif %}
-{% endfor %}
-{% endif %}
+{% if page.path contains "index.md" %} {% capture basehref %}{{ page.url }}{% endcapture %} {% else %} {% assign crumbs = page.url | split: '/' %} {% assign stoppingpoint = crumbs | size | minus: 1 %} {% for crumb in crumbs %} {% if forloop.index == stoppingpoint
+%} {% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %} {% break %} {% else %} {% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %} {% endif %} {% endfor %} {% endif %}
 <!-- Logic for feedback CC'ing -->
 {% if page.assignee %}{% assign assignee=page.assignee%}{% else %}{% assign assignee=page.defaultassignee%}{% endif %}
 <!-- Logic for 'edit this button' -->
-{% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %}
-{% for entry in site.data.not_edited_here.overrides %}
-	{% if page.url contains entry.path %}
-    {% if entry.source %}{% assign edit_url = entry.source %}{% else %}{% assign edit_url = "" %}{% endif %}
-		{% break %}
-	{% endif %}
-{% endfor %}
+{% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %} {% for entry in site.data.not_edited_here.overrides %} {% if page.url contains entry.path %} {% if entry.source %}{% assign edit_url = entry.source %}{%
+else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %}
 
 <!-- End of logic for 'edit this button' -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<base href="{{ basehref }}"/>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style type="text/css">
-@charset "UTF-8";
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
-	display: none !important;
-}
-ng\:form {
-	display: block;
-}
-</style>
-<script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=k6svi4faiclrdpi5eax4n23dzy"></script>
-<script type="text/javascript">
+	<base href="{{ basehref }}" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		@charset "UTF-8";
+		[ng\:cloak],
+		[ng-cloak],
+		[data-ng-cloak],
+		[x-ng-cloak],
+		.ng-cloak,
+		.x-ng-cloak,
+		.ng-hide:not(.ng-hide-animate) {
+			display: none !important;
+		}
+
+		ng\:form {
+			display: block;
+		}
+	</style>
+	<script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=k6svi4faiclrdpi5eax4n23dzy"></script>
+	<script type="text/javascript">
   !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
   analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
   analytics.page();
-  }}();
-</script>
-{% if site.GH_ENV == "gh_pages" %}<meta name="robots" content="noindex">{% endif %}
-<meta property="og:type" content="website">
-<meta property="og:updated_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}">
-<meta property="og:image" content="https://www.docker.com/sites/default/files/social/docker-facebook-share.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@docker_docs">
-<meta name="twitter:url" content="https://twitter.com/docker_docs">
-<meta name="twitter:title" content="{{ page.title }}">
-<meta name="twitter:image:src" content="https://www.docker.com/sites/default/files/social/docker-twitter-share.png">
-<meta property="article:published_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization{% endif %}">
-<!-- <link rel="manifest" href="/favicons/manifest.json"> -->
-<!-- <link rel="stylesheet" href="/css/documentation.css"> -->
-<link rel="stylesheet" href="/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link id="pagestyle" rel="stylesheet" href="/css/style.css">
-<!-- temp css will be removed -->
-<link rel="stylesheet" href="/css/temp.css">
-{% seo %}
-{% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
+	</script>
+	{% if site.GH_ENV == "gh_pages" %}
+	<meta name="robots" content="noindex">{% endif %}
+	<meta property="og:type" content="website">
+	<meta property="og:updated_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}">
+	<meta property="og:image" content="https://www.docker.com/sites/default/files/social/docker-facebook-share.png">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@docker_docs">
+	<meta name="twitter:url" content="https://twitter.com/docker_docs">
+	<meta name="twitter:title" content="{{ page.title }}">
+	<meta name="twitter:image:src" content="https://www.docker.com/sites/default/files/social/docker-twitter-share.png">
+	<meta property="article:published_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization{% endif %}">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link id="pagestyle" rel="stylesheet" href="/css/style.css">
+	<!-- temp css will be removed -->
+	<link rel="stylesheet" href="/css/temp.css"> {% seo %} {% if page.hide_from_sitemap %}
+	<meta name="robots" content="noindex" />{% endif %}
 </head>
+
 <body ng-app="Docker" ng-controller="DockerController">
 	<header>
-		{% if page.landing == true %}{% include global-header.html %}{% endif %}
-		{% if page.landing != true %}{% include header.html %}{% endif %}
+		{% if page.landing == true %}{% include global-header.html %}{% endif %} {% if page.landing != true %}{% include header.html %}{% endif %}
 	</header>
 
-	<div id="wrapper" class="toggled">
-		<main class="main" id="page-content-wrapper">
+	<div class="{% if page.landing == true %}wrapper landing{%else%}wrapper right-open{% endif %}">
+		<main class="main page-content">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-sm-3 col-md-3 sidebar{% if page.landing == true %}-home{%else%} col-sm-2 col-md-2{% endif %} collapse">
+					<div class="col-sm-2 col-md-2 sidebar{% if page.landing == true %}-home{%else%}{% endif %}">
 						{% include side-menu.html %}
 					</div>
-
-					<div class="{% if page.landing == true %}col-sm-9 col-md-9 main-content{%else%}col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 content{% endif %}">
-						<section class="section" id="DocumentationText">
+					<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 {% if page.landing == true %}main-content{%else%}content{% endif %}">
+						<section class="section">
 							{% if page.title %}
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
 							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %} {{ content }} {% if page.noratings != true %}
 							<div style="text-align: center; margin-top: 50px">
-								<img src="/images/chat.png" alt="chat icon" style="margin-right: 10px">
+								<img src="/images/chat.png" alt="chat icon">
 								<b>Feedback?</b> Suggestions? Can't find something in the docs?<br/> {% if edit_url != "" %}
-								<a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}" class="nomunge">Edit this page</a> <span style="color:#D8E0E0">&#9679;</span> {% endif %}
+								<a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}" class="nomunge">Edit this page</a> <span>&#9679;</span> {% endif %}
 								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
-												class="nomunge">Request docs changes</a> <span style="color:#D8E0E0">&#9679;</span> <a href="https://www.docker.com/docker-support-services">Get support</a> <br />Rate this page:
+												class="nomunge">Request docs changes</a> <span>&#9679;</span> <a href="https://www.docker.com/docker-support-services">Get support</a> <br />Rate this page:
 								<div id="pd_rating_holder_8453675"></div>
 								<script type="text/javascript">
 									PDRTJS_settings_8453675 = {
@@ -115,7 +102,6 @@ ng\:form {
 							</div>
 							{% endif %}
 						</section>
-
 						<script language="javascript">
 							var x = document.links.length;
 							var baseHref = document.getElementsByTagName('base')[0].href
@@ -137,60 +123,60 @@ ng\:form {
 							}
 						</script>
 					</div>
-					<div id="{% if page.landing == true %}sidebar-wrapper-home{%else%}sidebar-wrapper{% endif %}">
-						 <div class="toc-nav">
-						<section class="section" id="RightColumnSection">
-							<div id="feedback-links">
-								<ul>
-									{% if edit_url != "" %}
-									<li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>{% endif %}
-									<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
-														class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
-									<li><a href="https://www.docker.com/docker-support-services"><i class="fa fa-question" aria-hidden="true"></i> Get support</a></li>
-									<li><div class="toggle-mode">
-									    <div class="icon">
-									        <i class="fa fa-sun-o" aria-hidden="true"></i>
-									    </div>
-									    <div class="toggle-switch">
-									      <label class="switch">
-									          <input type="checkbox" id="switch-style">
-									          <div class="slider round"></div>
-									      </label>
-									    </div>
-									    <div class="icon">
-									        <i class="fa fa-moon-o" aria-hidden="true"></i>
-									    </div>
-									</div></li>
-								</ul>
-							</div>
-							{% unless page.notoc %} {% assign my_min = page.toc_min | default: site.toc_min | default: 2 %} {% assign my_max = page.toc_max | default: site.toc_max | default: 3 %} {% assign my_name = page.url | default: "unnamed" %}
-							<div id="side-toc">
-								<div id="side-toc-title">On this page:</div>
-								<div id="side-toc-contents">{% include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name %}</div>
-							</div>
-							{% endunless %}
-						</section>
+						<div class="toc-nav">
+						<div id="{% if page.landing == true %}sidebar-wrapper-home{%else%}sidebar-wrapper{% endif %}" class="{% if page.landing == true %} affix-top{%else%}sidebar-wrapper{% endif %}" {% if page.landing == true %} data-spy="affix" data-offset-top="490">{%else%}{% endif %}
+							<div class="toc-nav">
+									<div class="feedback-links">
+										<ul>
+											{% if edit_url != "" %}
+											<li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>{% endif %}
+											<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
+																class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
+											<li><a href="https://www.docker.com/docker-support-services"><i class="fa fa-question" aria-hidden="true"></i> Get support</a></li>
+											<li>
+												<div class="toggle-mode">
+													<div class="icon">
+														<i class="fa fa-sun-o" aria-hidden="true"></i>
+													</div>
+													<div class="toggle-switch">
+														<label class="switch">
+															<input type="checkbox" id="switch-style">
+															<div class="slider round"></div>
+													</label>
+													</div>
+													<div class="icon">
+														<i class="fa fa-moon-o" aria-hidden="true"></i>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									{% unless page.notoc %} {% assign my_min = page.toc_min | default: site.toc_min | default: 2 %} {% assign my_max = page.toc_max | default: site.toc_max | default: 3 %} {% assign my_name = page.url | default: "unnamed" %}
+										<div id="side-toc-title">On this page:</div>
+										{% include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name %}
+									</div>
+									{% endunless %}
+						</div>
 					</div>
+
 				</div>
 			</div>
-			</div>
-
+		</main>
 	</div>
-	</main>
 
-	</div>
-<footer class="footer">
-	{% include footer.html %}
-</footer>
-<link rel="stylesheet" href="/css/github.css">
-<script src="/js/highlight.pack.js"></script>
-<script>
-	hljs.initHighlightingOnLoad();
-</script>
-<script src="/js/anchorlinks.js"></script>
-<script defer src="/js/menu.js"></script>
-<script src="/js/jquery.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script defer src="/js/docs.js"></script>
+	<footer class="footer">
+		{% include footer.html %}
+	</footer>
+	<link rel="stylesheet" href="/css/github.css">
+	<script src="/js/highlight.pack.js"></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+	</script>
+	<!-- <script src="/js/anchorlinks.js"></script> -->
+	<script defer src="/js/menu.js"></script>
+	<script src="/js/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script defer src="/js/docs.js"></script>
 </body>
+
 </html>

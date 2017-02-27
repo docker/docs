@@ -1,4 +1,4 @@
-<div class="nav-sidebar navbar-collapse collapse">
+{% if page.landing == true %}<div class="nav-sidebar navbar-collapse collapse affix" data-spy="affix" data-offset-top="490">{%else%}<div class="nav-sidebar navbar-collapse collapse">{% endif %}
     <ul class="nav navbar-collapse" id="stacked-menu">
       {{ leftnav }}
     </ul>
