@@ -27,7 +27,7 @@ because the key is propagated to it over mutual TLS.
 
 ## Initialize a swarm with autolocking enabled
 
-When you initialize a new swarm, you you can use the `--autolock` flag to
+When you initialize a new swarm, you can use the `--autolock` flag to
 enable autolocking of swarm manager nodes when Docker restarts.
 
 ```bash
