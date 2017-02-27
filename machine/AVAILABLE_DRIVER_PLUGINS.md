@@ -76,7 +76,7 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
         "https://github.com/Arubacloud/docker-machine-driver-arubacloud">https://github.com/Arubacloud/docker-machine-driver-arubacloud</a>
       </td>
       <td>
-        <a href="">Aruba Cloud SDK</a>
+        <a href="https://github.com/nicolaeusebi">Nicola Eusebi</a>
       </td>
       <td>
         <a href="mailto:cloudsdk@staff.aruba.it">cloudsdk@staff.aruba.it</a>
