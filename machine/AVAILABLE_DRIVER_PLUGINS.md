@@ -76,10 +76,10 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
         "https://github.com/Arubacloud/docker-machine-driver-arubacloud">https://github.com/Arubacloud/docker-machine-driver-arubacloud</a>
       </td>
       <td>
-        <a href="https://github.com/jeffellin">Nicola Eusebi</a>
+        <a href="">Aruba Cloud SDK</a>
       </td>
       <td>
-        <a href="mailto:acf@ellin.com">n.eusebi@fastcode.it</a>
+        <a href="mailto:cloudsdk@staff.aruba.it">cloudsdk@staff.aruba.it</a>
       </td>
     </tr>
     <tr>
