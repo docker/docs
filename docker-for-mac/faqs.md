@@ -51,10 +51,10 @@ leveraging beta features that aren't in stable yet. Just keep this in mind as
 you create and work with beta containers, perhaps in the spirit of a playground
 space where you are prepared to troubleshoot or start over.
 
-<font color="#CC3366">To safely switch between beta and stable versions be sure
+To safely switch between beta and stable versions be sure
 to save images and export the containers you need, then uninstall the current
 version before installing another. The workflow is described in more detail
-below.</font><br>
+below.<br>
 
 Do the following each time:
 
