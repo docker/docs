@@ -26,13 +26,17 @@ services.
 
 If a service is defined in both files Compose merges the configurations using
 the rules described in [Adding and overriding
-configuration](extends.md#adding-and-overriding-configuration).
+configuration](extends.md#adding-and-overriding-configuration). You can turn off
+the automatic use of `docker-compose.override.yml` with command-line option
+`--ignore-override`.
 
 To use multiple override files, or an override file with a different name, you
 can use the `-f` option to specify the list of files. Compose merges files in
 the order they're specified on the command line. See the [`docker-compose`
 command reference](./reference/overview.md) for more information about
-using `-f`.
+using `-f`. When using the `-f` option, the use of `--ignore-override` will
+have no effect as the full list of used files is whatever you define with the `-f`
+option.
 
 When you use multiple configuration files, you must make sure all paths in the
 files are relative to the base Compose file (the first Compose file specified
