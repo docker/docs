@@ -4,7 +4,7 @@ keywords: Kitematic, open source, contribute, contributor, tour, development
 title: Develop in Kitematic (work on an issue)
 ---
 
-For this tutorial, we will work on issue <a href="https://github.com/docker/kitematic/issues/1191" target="_blank"> #1191</a> which is a request to display the container id in Kitematic for easy identification. (Currently, Kitematic shows the container name but not the id.)
+For this tutorial, we will work on issue <a href="https://github.com/docker/kitematic/issues/1191" target="_blank"> #1191</a> which is a request to display the container ID in Kitematic for easy identification. (Currently, Kitematic shows the container name but not the ID.)
 
 To do this, edit the container `General Settings` layout.
 
@@ -19,7 +19,7 @@ To do this, edit the container `General Settings` layout.
     ```
 
 
-3.  Above this code we will create a javascript variable that will allow us to display  our container id:
+3.  Above this code we will create a javascript variable that will allow us to display our container ID:
 
     ```
     let shortId = (
