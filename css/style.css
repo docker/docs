@@ -350,7 +350,7 @@ input[type=text], .nav-secondary-tabs.affix input[type=text] {
 
 /*
 *
-* Butons ***********************************************************************
+* Buttons ***********************************************************************
 *
 */
 
@@ -1087,6 +1087,16 @@ input:checked+.slider:before {
     width: 250px;
 }
 
+/* polldaddy */
+#rating_info_8453675
+{
+  display: none !important;
+}
+.rating-msg
+{
+  font: inherit !important;
+  color: inherit !important;
+}
 
 /*
 *
