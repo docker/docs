@@ -672,7 +672,7 @@ and (max-device-width : 1024px)  {
 */
 
 section.section {
-    max-width: 960px;
+    max-width: 980px;
 }
 
 .main-content {
@@ -799,7 +799,7 @@ i.fa.fa-question {
 .toc-nav ul {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 50px 0 0;
     width: 300px;
 }
 
@@ -1152,12 +1152,17 @@ input:checked+.slider:before {
     box-shadow: none;
     color: #fff;
     border-radius: 0;
-    /*-webkit-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;*/
-    padding: 0px 0 0 40px;
-    width: 235px;
+    transition: all 0.2s ease;
+    padding: 0px 0 0 35px;
+    width: 245px;
+}
+
+.nav-secondary-tabs .search-form input[type=search]:focus {
+  background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat;
+  background-position: 10px 9px;
 }
 
 .nav-secondary-tabs.affix input[type=search], input[type=text] {
@@ -1165,10 +1170,10 @@ input:checked+.slider:before {
     background-position: 10px 9px;
     border: 0;
     box-shadow: none;
-    /*-webkit-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;*/
+    transition: all 0.2s ease;
 }
 
 .nav-secondary input[type=search] {
@@ -1176,13 +1181,13 @@ input:checked+.slider:before {
     background-position: 10px 9px;
     border: 0;
     box-shadow: none;
-    padding: 0px 0 0 40px;
+    padding: 0px 0 0 35px;
     border-radius: 0;
     color: #fff;
-    /*-webkit-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;*/
+    transition: all 0.2s ease;
 }
 
 .nav-secondary .search-form input[type=search]:focus {
@@ -1414,7 +1419,7 @@ pre {
 code {
     padding: 3px 7px;
     font-size: 90%;
-    color: #0c5176;
+    color: #0c5176!important;
     background-color: rgba(12, 81, 118, 0.1);
     border-radius: 2px;
 }
