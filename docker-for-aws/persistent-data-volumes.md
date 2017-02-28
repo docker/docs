@@ -13,9 +13,11 @@ Cloudstor a volume plugin managed by Docker. It comes pre-installed and pre-conf
 After creating a swarm on Docker for AWS and connecting to any manager using SSH, verify that Cloudstor is already installed and configured for the stack/resource group:
 
 ```bash
+{% raw %}
 $ docker plugin ls
 ID                  NAME                        DESCRIPTION                       ENABLED
 f416c95c0dcc        docker4x/cloudstor:aws-v1.13.1-beta18   cloud storage plugin for Docker   true
+{% endraw %}
 ```
 
 **Note**: Make note of the plugin tag name, because it will change between versions, and yours may be different then listed here.
@@ -25,9 +27,11 @@ The following examples show how to create swarm services that require data persi
 ### Share the same volume between tasks:
 
 ```bash
+{% raw %}
 docker service create --replicas 5 --name ping1 \
     --mount type=volume,volume-driver=docker4x/cloudstor:aws-v1.13.1-beta18,source=sharedvol1,destination=/shareddata \
     alpine ping docker.com
+{% endraw %}
 ```
 
 Here all replicas/tasks of the service `ping1` share the same persistent volume `sharedvol1` mounted at `/shareddata` path within the container. Docker Swarm takes care of interacting with the Cloudstor plugin to make sure the common backing store is mounted on all nodes in the swarm where tasks of the service are scheduled. Each task needs to make sure they don't write concurrently on the same file at the same time and cause corruptions since the volume is shared.
