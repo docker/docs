@@ -162,7 +162,7 @@ p.p2 {
   }
   .HolyGrail-content {
     flex: 1;
-    padding: 50px 15px 80px 15px;
+    padding: 60px 15px 80px 15px;
   }
   .HolyGrail-nav, .HolyGrail-toc {
     flex: 0 0 20em;
@@ -799,7 +799,7 @@ i.fa.fa-question {
 .toc-nav ul {
     list-style: none;
     margin: 0;
-    padding: 0 50px 0 0;
+    padding: 0 60px 0 0;
     width: 300px;
 }
 
