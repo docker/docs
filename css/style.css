@@ -1326,11 +1326,11 @@ i.fa.fa-indent, i.fa.fa-outdent {
 }
 
 .component-full {
-    padding: 15px 0 20px 20px;
+    padding: 10px 0 10px 20px;
     float: left;
     width: 100%;
     min-height: 120px;
-    margin: 20px 0 0;
+    margin: 15px 0 0;
 }
 
 .component, .component-full {
@@ -1352,14 +1352,13 @@ i.fa.fa-indent, i.fa.fa-outdent {
 }
 
 .component img, .component-full-icon img {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
 }
 
 .component-icon {
-    width: 50px;
     margin: 0 auto;
-    padding: 0 0 10px;
+    width: 70px;
 }
 
 .component-full-copy {
@@ -1436,8 +1435,9 @@ code {
 
 .block {
     float: left;
-    padding: 18px 22px 0 15px;
+    padding: 0px 20px 20px 16px;
     max-width: 960px;
+    width: 460px;
 }
 /*
   *
@@ -1761,6 +1761,21 @@ footer {
     .block {
         float: left;
         padding: 5px 30px 5px 15px;
+    }
+    .component-full {
+        padding: 10px 13px 10px 16px;
+        float: left;
+        width: 335px;
+        min-height: 120px;
+        margin: 15px 0 0;
+        text-align: center;
+    }
+    .component-full {
+        padding: 10px 0 10px 20px;
+        width: 94%;
+    }
+    .component-full-copy {
+        width: 100%;
     }
 }
 
