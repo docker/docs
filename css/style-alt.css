@@ -962,6 +962,17 @@ div#PDRTJS_8453675_msg,div#PDRTJS_8453675_msg_1 {
     color: #fff!important;
 }
 
+/* polldaddy */
+#rating_info_8453675
+{
+  display: none;
+}
+.rating-msg
+{
+  font: inherit !important;
+  color: inherit !important;
+}
+
 /*
 *
 * Controls ***********************************************************************
