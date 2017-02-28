@@ -19,6 +19,7 @@ body {
     font-size: 14px;
     line-height: 24px;
     color: #445D6E;
+    overflow-x: hidden;
 }
 
 
@@ -152,7 +153,7 @@ p.p2 {
 }
 
 .HolyGrail-content {
-    padding: 60px 20px 50px 20px;
+    padding: 60px 69px 50px 20px;
 }
 
 @media (min-width: 768px) {
@@ -162,7 +163,7 @@ p.p2 {
   }
   .HolyGrail-content {
     flex: 1;
-    padding: 60px 15px 80px 15px;
+    padding: 60px 0 80px 15px;
   }
   .HolyGrail-nav, .HolyGrail-toc {
     flex: 0 0 20em;
@@ -175,11 +176,12 @@ p.p2 {
 */
 
 .header {
-    animation: gradientswitch 50s infinite;
-    -webkit-animation: gradientswitch 50 sinfinite;
+    animation: gradientswitch 45s infinite;
+    -webkit-animation: gradientswitch 45 sinfinite;
     height: 500px;
     position: relative;
     z-index: 1;
+    overflow: hidden;
 }
 
 @keyframes gradientswitch
@@ -530,7 +532,7 @@ img {
 .nav-secondary-tabs.affix {
     background: #0C5176;
     box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
-    height: 55px;
+    max-height: 55px;
     top: 0;
     position: fixed;
     z-index: 100;
@@ -684,7 +686,8 @@ section.section {
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
     .content {
-        padding: 55px 30px 20px 32px;
+        padding: 55px 35px 20px 20px;
+        width: 320px;
     }
 }
 .wrapper {
@@ -1157,7 +1160,7 @@ input:checked+.slider:before {
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
     padding: 0px 0 0 35px;
-    width: 245px;
+    width: 235px;
 }
 
 .nav-secondary-tabs .search-form input[type=search]:focus {
