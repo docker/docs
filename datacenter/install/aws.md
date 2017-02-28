@@ -7,11 +7,10 @@ keywords: docker, datacenter, install, orchestration, management
 {% assign launch_url = "https://console.aws.amazon.com/cloudformation/home?#/stacks/new?templateURL=" %}
 {% assign template_url = "https://s3.amazonaws.com/packages.docker.com/caas/docker/docker_for_aws_ddc_2.1.0.json" %}
 
-Docker Datacenter on Docker for AWS is a one-click deploy of highly-scalable
-Docker Datacenter (Universal Control Plane and Docker Trusted Registry) based
-on Docker and AWS best-practices. It is based on
-[Docker for AWS](https://beta.docker.com/docs/) and currently should be used
-for evaluation purposes only.
+Docker Datacenter on Docker for Amazon AWS is an one-click deployment of DDC on
+AWS. It deploys multiple nodes with Docker CS Engine, and then installs
+highly available versions of Universal Control Plane and Docker Trusted
+Registry.
 
 ![ddc_aws.svg](/images/ddc_aws.svg)
 
