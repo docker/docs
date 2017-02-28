@@ -173,7 +173,7 @@ kitematic/
     |  |--MyComponent.react.js
 ```
 
-The `components` folder is where the layout files are, the `stores` represent the application logic and `actions` are the dispatcher for actions taken within the `components`.
+The `components` folder is where the layout files are, the `stores` represent the application logic, and `actions` are the dispatcher for actions taken within the `components`.
 
 ## Where to go next
 
