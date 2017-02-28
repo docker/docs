@@ -10,6 +10,37 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](index.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.2.2
+
+(27 Feb 2017)
+
+**New features**
+
+* The web UI now displays a banner to administrators when a tag migration job
+is running
+
+  ![](../../images/release-notes-1.png)
+
+**General improvements**
+
+* Upgraded DTR security scanner
+* Security scanner now generates less verbose logs
+* Made `docker/dtr join` more resilient when using an NFS storage backend
+* Made tag migrations more stable
+* Made updates to the vulnerability database more stable
+
+**Bugs fixed**
+
+* Fixed a problem when trying to use Scality as storage backend. This problem
+affected DTR 2.2.0 and 2.2.1
+* You can now use the web UI to create and manage teams that have slashes in
+their name
+* Fixed an issue causing RethinkDB to not start due to DNS errors when
+the RethinkDB containers were not restarted at the same time
+* The web UI now shows the security scanning button if the vulnerability database
+or security scanner have been updated
+
+
 ## DTR 2.2.1
 
 (9 Feb 2017)
