@@ -703,6 +703,7 @@ section.section {
     padding: 20px 0 0;
     right: 250px;
     overflow-y: auto;
+    overflow-x: hidden;
     margin-right: -250px;
     width: 0;
     transition: all 0.5s ease;
