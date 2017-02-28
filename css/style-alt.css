@@ -1516,7 +1516,15 @@ div#autocompleteResults span {
   background-color: rgba(64, 62, 162, 0.61);
   color: #b7a4de;
 }
-
+.autocompleteTitle
+{
+  font-weight: bold;
+  font-size: large;
+}
+.autocompleteUrl, .autocompleteKeywords, .autocompleteDescription {
+  font-size: xx-small;
+  line-height: normal;
+}
 
 /*
 *
