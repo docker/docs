@@ -61,19 +61,16 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	<meta name="robots" content="noindex" />{% endif %}
 </head>
 
-<body ng-app="Docker" ng-controller="DockerController">
+<body ng-app="Docker" ng-controller="DockerController" class="HolyGrail">
 	<header>
 		{% if page.landing == true %}{% include global-header.html %}{% endif %} {% if page.landing != true %}{% include header.html %}{% endif %}
 	</header>
 
-	<div class="{% if page.landing == true %}wrapper landing{%else%}wrapper right-open{% endif %}">
-		<main class="main page-content">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-sm-2 col-md-2 sidebar{% if page.landing == true %}-home{%else%}{% endif %}">
-						{% include side-menu.html %}
-					</div>
-					<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 {% if page.landing == true %}main-content{%else%}content{% endif %}">
+	<div class="{% if page.landing == true %}wrapper{%else%}wrapper right-open{% endif %}">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="HolyGrail-body">
+					<main class="HolyGrail-content {% if page.landing == true %}main-content{%else%}content{% endif %}">
 						<section class="section">
 							{% if page.title %}
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
@@ -106,7 +103,49 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 							</div>
 							{% endif %}
 						</section>
-						<script language="javascript">
+					</main>
+					<nav class="HolyGrail-nav">
+						<div class="sidebar{% if page.landing == true %}-home{%else%}{% endif %}">
+						{% include side-menu.html %}
+						</div>
+					</nav>
+					<div class="HolyGrail-toc">
+							<div id="{% if page.landing == true %}sidebar-wrapper-home{%else%}sidebar-wrapper{% endif %}" class="{% if page.landing == true %} affix-top{%else%}sidebar-wrapper toc-nav{% endif %}" {% if page.landing == true %} data-spy="affix" data-offset-top="490">{%else%}{% endif %}
+							<div class="toc-nav">
+								<div class="feedback-links">
+									<ul>
+										{% if edit_url != "" %}
+										<li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>{% endif %}
+										<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
+															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
+										<li><a href="https://www.docker.com/docker-support-services"><i class="fa fa-question" aria-hidden="true"></i> Get support</a></li>
+										<!-- day/night switch
+										<li>
+											<div class="toggle-mode">
+												<div class="icon">
+													<i class="fa fa-sun-o" aria-hidden="true"></i>
+												</div>
+												<div class="toggle-switch">
+													<label class="switch">
+														<input type="checkbox" id="switch-style">
+														<div class="slider round"></div>
+												</label>
+												</div>
+												<div class="icon">
+													<i class="fa fa-moon-o" aria-hidden="true"></i>
+												</div>
+											</div>
+										</li> -->
+									</ul>
+								</div>
+								{% unless page.notoc %} {% assign my_min = page.toc_min | default: site.toc_min | default: 2 %} {% assign my_max = page.toc_max | default: site.toc_max | default: 3 %} {% assign my_name = page.url | default: "unnamed" %}
+									<div id="side-toc-title">On this page:</div>
+									{% include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name %}
+								</div>
+								{% endunless %}
+						</div>
+					</div>
+					<script language="javascript">
 							var x = document.links.length;
 							var baseHref = document.getElementsByTagName('base')[0].href
 							for (i = 0; i < x; i++) {
@@ -126,58 +165,23 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 								}
 							}
 						</script>
-						<script language="javascript">
-						// ensure that the left nav visibly displays the current topic
-						var current = document.getElementsByClassName("active currentPage");
-						if (current) {
-							var container = document.getElementsByClassName("col-sm-2 col-md-2 sidebar");
+					<script language="javascript">
+					// ensure that the left nav visibly displays the current topic
+					var current = document.getElementsByClassName("active currentPage");
+					if (current) {
+							var container = document.getElementsByClassName("sidebar");
 							if (container) {
 								current[0].scrollIntoView(true);
 								container[0].scrollTop -= 150;
 							}
 						}
-						</script>
-					</div>
-						<div class="toc-nav">
-						<div id="{% if page.landing == true %}sidebar-wrapper-home{%else%}sidebar-wrapper{% endif %}" class="{% if page.landing == true %} affix-top{%else%}sidebar-wrapper{% endif %}" {% if page.landing == true %} data-spy="affix" data-offset-top="490">{%else%}{% endif %}
-							<div class="toc-nav">
-									<div class="feedback-links">
-										<ul>
-											{% if edit_url != "" %}
-											<li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>{% endif %}
-											<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
-																class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
-											<li><a href="https://www.docker.com/docker-support-services"><i class="fa fa-question" aria-hidden="true"></i> Get support</a></li>
-											<!-- day/night switch
-											<li>
-												<div class="toggle-mode">
-													<div class="icon">
-														<i class="fa fa-sun-o" aria-hidden="true"></i>
-													</div>
-													<div class="toggle-switch">
-														<label class="switch">
-															<input type="checkbox" id="switch-style">
-															<div class="slider round"></div>
-													</label>
-													</div>
-													<div class="icon">
-														<i class="fa fa-moon-o" aria-hidden="true"></i>
-													</div>
-												</div>
-											</li> -->
-										</ul>
-									</div>
-									{% unless page.notoc %} {% assign my_min = page.toc_min | default: site.toc_min | default: 2 %} {% assign my_max = page.toc_max | default: site.toc_max | default: 3 %} {% assign my_name = page.url | default: "unnamed" %}
-										<div id="side-toc-title">On this page:</div>
-										{% include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name %}
-									</div>
-									{% endunless %}
-						</div>
-					</div>
+					</script>
+
+
 
 				</div>
 			</div>
-		</main>
+		</div>
 	</div>
 
 	<footer class="footer">
