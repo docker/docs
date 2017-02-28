@@ -183,7 +183,7 @@ domains should be redirected to it. For example, a website that has been
 renamed might use this functionality. The following labels accomplish this for
 `new.example.com` and `old.example.com`
 
-* `com.docker.ucp.mesh.http.1=external_route=http://old.example.com.com,redirect=http://new.example.com`
+* `com.docker.ucp.mesh.http.1=external_route=http://old.example.com,redirect=http://new.example.com`
 * `com.docker.ucp.mesh.http.2=external_route=http://new.example.com`
 
 ## Troubleshoot
