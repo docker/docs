@@ -50,12 +50,12 @@ beta channels, see the
   </tr>
   <tr valign="top">
   <td width="50%">
-  <a class="button darkblue-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (stable)</a><br><br>
-  <a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: InstallDocker.msi SHA256</font></a>
+  <a class="button primary-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (stable)</a><br><br>
+  <a class="text-link"  href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum">Download checksum: InstallDocker.msi SHA256</a>
   </td>
   <td width="50%">
-  <a class="button darkblue-btn" href="https://download.docker.com/win/beta/InstallDocker.msi">Get Docker for Windows (beta)</a><br><br>
-  <a href="https://download.docker.com/win/beta/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: InstallDocker.msi SHA256</font></a>
+  <a class="button primary-btn" href="https://download.docker.com/win/beta/InstallDocker.msi">Get Docker for Windows (beta)</a><br><br>
+  <a class="text-link" href="https://download.docker.com/win/beta/InstallDocker.msi.sha256sum">Download checksum: InstallDocker.msi SHA256</a>
   </td>
   </tr>
 </table>
