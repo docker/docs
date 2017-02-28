@@ -64,7 +64,7 @@ hour. To run the test suite, do the following:
 
 1.  Open a terminal on your local host.
 
-2.  Change to the root your Docker repository.
+2.  Change to the root of your Docker repository.
 
     ```bash
     $ cd docker-fork
