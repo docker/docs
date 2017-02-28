@@ -101,10 +101,10 @@ p {
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
     h1 {
-        font-size: 26px;
+        font-size: 24px;
     }
     h2 {
-        font-size: 22px;
+        font-size: 20px;
     }
     h3 {
         font-size: 18px;
@@ -556,19 +556,19 @@ img {
   width: 260px;
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+/*@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
   .sidebar-home {
     display: none;
   }
-}
+}*/
 
-@media only screen
+/*@media only screen
 and (min-device-width : 768px)
 and (max-device-width : 1024px)  {
   .sidebar-home {
     display: none;
   }
-}
+}*/
 
 .sidebar-home .affix {
     background-color: #FBFBFC;
@@ -688,7 +688,7 @@ section.section {
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
     .content {
         padding: 55px 35px 20px 20px;
-        width: 320px;
+        max-width: 390px;
     }
 }
 .wrapper {
@@ -1313,7 +1313,7 @@ i.fa.fa-indent, i.fa.fa-outdent {
 
 .component-container {
     padding: 0;
-    margin: 0;
+    margin: 0 0 50px;
     width: 100%;
 }
 
@@ -1334,7 +1334,8 @@ i.fa.fa-indent, i.fa.fa-outdent {
 }
 
 .component, .component-full {
-    border: 1px solid rgba(204, 204, 204, 0.46);
+    background: #FBFBFC;
+    /*border: 1px solid rgba(204, 204, 204, 0.46);*/
 }
 
 .component-full-icon {
@@ -1532,7 +1533,9 @@ div#autocompleteResults span {
 }
 
 .text-link {
-    padding: 5px;
+    color: #969696;
+    padding: 10px 0 0 2px;
+    float: left;
 }
 
 #feedback {
@@ -1710,6 +1713,75 @@ footer {
     }
 }
 
+
+/*
+*
+* small displays  **********************************************************
+*
+*/
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .HolyGrail-content {
+        padding: 0px 23px 50px 27px;
+    }
+    .h1, .h2, .h3, h1, h2, h3 {
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
+    .nav-secondary-tabs.affix {
+        background: #0C5176;
+        box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+        top: 0;
+        position: fixed;
+        z-index: 100;
+        height: 55px;
+    }
+    .navbar-nav {
+        margin: 0 -15px;
+    }
+    .tabs {
+        padding: 0px 0px 0 15px;
+        float: none;
+        width: auto;
+    }
+    .tabs li a {
+        color: #fff;
+        padding: 15px 6px 10px 5px;
+        float: left;
+        opacity: 0.7;
+        font-weight: 600;
+        font-size: 12px;
+    }
+    .search-form, .ctrl-right {
+        display: none;
+    }
+    .main-content {
+        padding: 0px 5px 25px 20px;
+    }
+    .block {
+        float: left;
+        padding: 5px 30px 5px 15px;
+    }
+}
+
+/*
+*
+* medium displays  **********************************************************
+*
+*/
+
+@media (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu .dropdown-header, .navbar-nav .open .dropdown-menu>li>a {
+        background: red;
+    }
+    .sidebar-home {
+        background-color: #FBFBFC;
+        border-right: 1px solid rgba(204, 204, 204, 0.29);
+        width: 210px;
+    }
+}
+
+
 /*
 *
 * Bootstrap Overrides : super embarrassing  ***********************************************************************
@@ -1747,6 +1819,7 @@ footer {
     padding: 5px 15px;
     display: block;
 }
+
 .btn-default:hover {
     color: #fff!important;
     background-color: transparent!important;
@@ -1756,15 +1829,15 @@ footer {
 }
 
 .btn-group.open .dropdown-toggle {
-    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
-    box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
     background: trr;
     background: transparent;
     color: #fff;
     box-shadow: none;
 }
 
-.btn-default:focus,.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+.btn-default:focus, .btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
     color: #fff!important;
     background-color: transparent!important;
     border-color: none!important;

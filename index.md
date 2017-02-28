@@ -10,7 +10,7 @@ Docker packages your app with its dependencies, freeing you from worrying about 
 system configuration, and making your app more portable.
 
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-6 block">
 {% capture basics %}
 ### Learn the basics of Docker
 
@@ -21,7 +21,7 @@ tutorial stops short of teaching you how to deploy applications.
 {% capture basics %}[Start the basic tutorial](/engine/getstarted/){: class="button outline-btn"}{% endcapture %}{{ basics | markdownify }}
 </div>
 
-<div class="col-md-6">
+<div class="col-md-6 block">
 {% capture apps %}
 ### Define and deploy applications
 
