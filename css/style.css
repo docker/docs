@@ -552,6 +552,7 @@ img {
   padding: 0;
   overflow-x: hidden;
   overflow-y: auto;
+  min-height: 1000px;
   width: 260px;
 }
 
@@ -692,10 +693,6 @@ section.section {
 }
 .wrapper {
     min-height: 1000px;
-}
-
-#sidebar-wrapper-home #feedback-links {
-    margin: 10px 0 10px 0;
 }
 
 #sidebar-wrapper {
@@ -1072,6 +1069,14 @@ input:checked+.slider:before {
     margin: 40px 0 10px 0;
     padding: 20px 20px 10px 0;
     width: 220px;
+}
+
+#sidebar-wrapper-home .feedback-links {
+    margin: 10px 0 10px 0;
+}
+
+#sidebar-wrapper-home.affix .feedback-links {
+    margin: 50px 0 10px 0;
 }
 
 /* polldaddy */
