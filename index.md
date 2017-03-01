@@ -67,20 +67,22 @@ production environment. Highlights [Compose Version 3 new features](/engine/gets
         </div>
         <!--components-full-width-->
         <div class="col-md-12">
-            <!--engine-->
+            <!--editions-->
             <div class="component-full">
                 <div class="component-full-icon">
-                    <img src="../images/engine_48.svg" alt="Docker Engine">
+                    <img src="../images/engine_48.svg" alt="Docker Editions">
                 </div>
                 <div class="component-full-copy">
-                    <h3 id="docker-engine"><a href="engine/installation/">Docker Engine</a></h3>
-                    <p>Create Docker images and run Docker containers. As of v1.12.0, Engine includes <a href="/#">swarm mode</a> container orchestration features.</p>
+                    <h3 id="docker-engine"><a href="engine/installation/">Docker Editions</a></h3>
+                    <p>Get started with containers quickly with Docker Community edition (Docker CE)
+                       or Docker Enterprise Edition (Docker EE).</p>
+		            <p>Editions are available for desktops, servers, or cloud providers.</p>
                 </div>
             </div>
             <!--cloud-->
             <div class="component-full">
                 <div class="component-full-icon">
-                    <img src="../images/cloud_48.svg" alt="Docker Engine">
+                    <img src="../images/cloud_48.svg" alt="Docker Cloud">
                 </div>
                 <div class="component-full-copy">
                     <h3 id="docker-cloud"><a href="/#">Docker Cloud</a></h3>
