@@ -148,7 +148,7 @@ p.p2 {
   }
   .HolyGrail-content {
     flex: 1;
-    padding: 60px 0 80px 15px;
+    padding: 60px 20px 50px 20px;
   }
   .HolyGrail-nav, .HolyGrail-toc {
     flex: 0 0 20em;
@@ -611,6 +611,7 @@ img {
     cursor: default;
     color: #2089C4;
     border-left: 4px solid #21cbc9;
+    font-weight: 600;
 }
 
 .nav-sidebar ul li li a {
@@ -1419,7 +1420,7 @@ div#autocompleteResults {
     padding: 20px 55px 15px 15px;
     margin: 10px 0 0 0;
     position: absolute;
-    width: 800px;
+    max-width: 600px;
 }
 
 ul.autocompleteList {
@@ -1663,7 +1664,7 @@ footer {
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
     .HolyGrail-content {
-        padding: 50px 23px 50px 27px;
+        padding: 10px 15px 50px 15px;
     }
     .h1, .h2, .h3, h1, h2, h3 {
         margin-top: 10px;
@@ -1681,6 +1682,31 @@ footer {
     h4 {
         font-size: 16px;
     }
+    .nav-secondary {
+        background: #192837;
+        box-shadow: 0;
+        border-bottom: 1px solid #3a546d;
+    }
+    .nav-sidebar ul li a.active,
+    .nav-sidebar.nav>li>a:focus {
+        cursor: default;
+        border-left: 4px solid #21cbc9;
+        font-weight: 600;
+    }
+    .sidebar ul li a,
+    .nav-sidebar ul li a.active {
+        color: #ffffff;
+    }
+    .nav-secondary .search-form {
+        width: 92%;
+        margin: 10px 10px 0 -11px;
+    }
+    .nav-secondary .search-form input[type=search]:focus {
+        background: rgb(29, 60, 76) url("/images/search.png") no-repeat;
+        background-position: 10px 9px;
+        box-shadow: none;
+        color: #fff;
+    }
     .nav-secondary-tabs.affix {
         background: #0C5176;
         box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
@@ -1689,24 +1715,25 @@ footer {
         z-index: 100;
         height: 55px;
     }
+
+    .sidebar {
+        background: #15212e;
+        padding-top: 140px;
+    }
     .navbar-nav {
         margin: 0 -15px;
     }
     .tabs {
-        padding: 0px 0px 0 15px;
-        float: none;
+        padding: 00;
         width: auto;
     }
     .tabs li a {
         color: #fff;
-        padding: 15px 6px 10px 5px;
+        padding: 15px 3px 10px 8px;
         float: left;
         opacity: 0.7;
         font-weight: 600;
-        font-size: 12px;
-    }
-    .search-form, .ctrl-right {
-        display: none;
+        font-size: 11px;
     }
     .main-content {
         padding: 0px 5px 25px 20px;
@@ -1754,6 +1781,18 @@ footer {
         float: none;
         padding-bottom: 6px;
         margin: 0;
+    }
+    div#autocompleteResults,
+    .ctrl-right {/** temporarily hide **/
+        display: none;
+    }
+    div#autocompleteResults {
+        background: #f6fcff;
+        border: 1px solid #eee;
+        padding: 20px 10px 20px 0px;
+        margin: 10px 0 0 -4px;
+        position: absolute;
+        width: 320px;
     }
 }
 
