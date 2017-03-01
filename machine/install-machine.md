@@ -25,14 +25,14 @@ docker/machine release page</a> on GitHub.
     If you are running on **macOS**:
 
     ```console
-    $ curl -L https://github.com/docker/machine/releases/download/v0.9.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
+    $ curl -L https://github.com/docker/machine/releases/download/v0.10.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
     chmod +x /usr/local/bin/docker-machine
     ```
 
     If you are running on **Linux**:
 
     ```console
-    $ curl -L https://github.com/docker/machine/releases/download/v0.9.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
+    $ curl -L https://github.com/docker/machine/releases/download/v0.10.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
       chmod +x /tmp/docker-machine &&
       sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
     ```
@@ -41,7 +41,7 @@ docker/machine release page</a> on GitHub.
 
     ```console
     $ if [[ ! -d "$HOME/bin" ]]; then mkdir -p "$HOME/bin"; fi && \
-  curl -L https://github.com/docker/machine/releases/download/v0.9.0/docker-machine-Windows-x86_64.exe > "$HOME/bin/docker-machine.exe" && \
+  curl -L https://github.com/docker/machine/releases/download/v0.10.0/docker-machine-Windows-x86_64.exe > "$HOME/bin/docker-machine.exe" && \
   chmod +x "$HOME/bin/docker-machine.exe"
     ```
 
@@ -50,7 +50,7 @@ docker/machine release page</a> on GitHub.
 3.  Check the installation by displaying the Machine version:
 
         $ docker-machine version
-        docker-machine version 0.8.2, build e18a919
+        docker-machine version 0.10.0, build 76ed2a6
 
 ## Installing bash completion scripts
 
