@@ -159,7 +159,7 @@ you installed Docker, you may already have this file.
 7. Verify that the `docker` daemon is running as specified with the `ps` command.
 
     ```bash
-    $ ps aux | grep docker | grep -v grep
+    $ ps aux | grep [d]ocker
     ```
 
 ### Logs
@@ -277,7 +277,7 @@ To configure Docker options:
 9.  Verify that the `docker` daemon is running as specified with the `ps` command.
 
     ```bash
-    $ ps aux | grep docker | grep -v grep
+    $ ps aux | grep [d]ocker
     ```
 
 ### Logs
