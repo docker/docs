@@ -17,7 +17,7 @@ To get started with Docker on OpenSUSE or SLES, make sure you
 
 To install Docker, you need the 64-bit version one of the following:
 
-- OpenSuSE Leap 42.x
+- OpenSUSE Leap 42.x
 - SLES 12.x
 
 ### Remove unofficial Docker packages
