@@ -624,6 +624,8 @@ component of the next-generation Docker Hub, and the best place
 to find compliant, trusted commercial and free software
 distributed as Docker Images.
 
+![Docker Store](images/docker-store.png)
+
 ### Diagnose and Feedback
 
 If you encounter problems for which you do not find solutions in this documentation, searching [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) already filed by other users, or on the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data.

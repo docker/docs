@@ -96,8 +96,12 @@ docker-machine version 0.9.0, build 15fd4c7
 
 ## Preferences
 
-Choose ![whale-x](/docker-for-mac/images/whale-x.png) --> **Preferences** from the menu bar. You
-can set the following runtime options.
+Choose ![whale-x](/docker-for-mac/images/whale-x.png) --> **Preferences** from
+the menu bar.
+
+![Docker context menu](images/menu-prefs-selected.png)
+
+You can set the following runtime options.
 
 ### General
 
@@ -348,6 +352,8 @@ to get to the Docker app downloads site.
 component of the next-generation Docker Hub, and the best place
 to find compliant, trusted commercial and free software
 distributed as Docker Images.
+
+![Docker Store](images/docker-store.png)
 
 ## Where to go next
 
