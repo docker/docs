@@ -136,23 +136,23 @@ You have three options:
     docker-compose down
     ```
 
-2.  Use Jekyll directly. 
+2.  Use Jekyll directly.
 
     a. Clone this repo by running:
 
        ```bash
        git clone https://github.com/docker/docker.github.io.git
        ```
- 
+
     b. Install Ruby 2.3 or later as described in [Installing Ruby]
     (https://www.ruby-lang.org/en/documentation/installation/).
-    
+
     c. Install Bundler:
 
        ```bash
        gem install bundler
        ```
-       
+
     d. If you use Ubuntu, install packages required for the Nokogiri HTML
        parser:
 
@@ -165,7 +165,7 @@ You have three options:
        ```bash
        bundle install
        ```
-    
+
        >**Note**: You may have to install some packages manually.   
 
     f. Change the directory to `docker.github.io`.
@@ -203,12 +203,43 @@ guidance about grammar, syntax, formatting, styling, language, or tone. If
 something isn't clear in the guide, please submit an issue to let us know or
 submit a pull request to help us improve it.
 
-### Generate the man pages
+### Per-page front-matter
 
-For information on generating man pages (short for manual page), see the README.md
-document in [the man page directory](https://github.com/docker/docker/tree/master/man)
-in this project.
+The front-matter of a given page is in a section at the top of the Markdown
+file that starts and ends with three hyphens. It includes YAML content. The
+following keys are supported. The title, description, and keywords are required.
+
+| Key                    | Required  | Description                             |
+|------------------------|-----------|-----------------------------------------|
+| title                  | yes       | The page title. This is added to the HTML output as a `<h1>` level header. |
+| description            | yes       | A sentence that describes the page contents. This is added to the HTML metadata. |
+| keywords               | yes       | A comma-separated list of keywords. These are added to the HTML metadata. |
+| redirect_from          | no        | A YAML list of pages which should redirect to THIS page. At build time, each page listed here is created as a HTML stub containing a 302 redirect to this page. |
+| notoc                  | no        | Either `true` or `false`. If `true`, no in-page TOC is generated for the HTML output of this page. Defaults to `false`. Appropriate for some landing pages that have no in-page headings.|
+| toc_min                | no        | Ignored if `notoc` is set to `true`. The minimum heading level included in the in-page TOC. Defaults to `2`, to show `<h2>` headings as the minimum. |
+| toc_max                | no        | Ignored if `notoc` is set to `false`. The maximum heading level included in the in-page TOC. Defaults to `3`, to show `<h3>` headings. Set to the same as `toc_min` to only show `toc_min` level of headings. |
+| tree                   | no        | Either `true` or `false`. Set to `false` to disable the left-hand site-wide navigation for this page. Appropriate for some pages like the search page or the 404 page. |
+| no_ratings             | no        | Either `true` or `false`. Set to `true` to disable the page-ratings applet for this page. Defaults to `false`. |
+
+The following is an example of valid (but contrived) page metadata. The order of
+the metadata elements in the front-matter is not important.
+
+```liquid
+---
+description: Instructions for installing Docker on Ubuntu
+keywords: requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
+redirect_from:
+- /engine/installation/ubuntulinux/
+- /installation/ubuntulinux/
+- /engine/installation/linux/ubuntulinux/
+title: Get Docker for Ubuntu
+toc_min: 1
+toc_max: 6
+tree: false
+no_ratings: true
+---
+```
 
 ## Copyright and license
 
-Code and documentation copyright 2016 Docker, inc, released under the Apache 2.0 license.
+Code and documentation copyright 2017 Docker, inc, released under the Apache 2.0 license.

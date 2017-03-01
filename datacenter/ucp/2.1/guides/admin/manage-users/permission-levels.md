@@ -1,6 +1,6 @@
 ---
-description: Learn about the permission levels available in Docker Universal Control
-  Plane.
+description: Learn about the permission levels available in Docker Universal
+  Control Plane.
 keywords: authorization, authentication, users, teams, UCP
 title: Permission levels
 ---
@@ -34,13 +34,11 @@ access to full control over the resources.
 | `Restricted Control`     | The user can view and edit volumes, networks, and images. They can create containers, but can't see other users containers, run `docker exec`, or run containers that require privileged access to the host. |
 | `Full Control`           | The user can view and edit volumes, networks, and images, They can create containers without any restriction, but can't see other users containers.                                                          |
 
-When a user only has a default permission assigned, only them and admin
-users can see the containers they deploy in the cluster.
+If a user has Restricted Control or Full Control default permissions, they can create resources without labels, and only the user and Admins can see and access the resources. Default permissions also affect ability for a user to access things that can't have labels, images and nodes.  
 
 ## Team permission levels
 
-Teams allow you to define fine-grain permissions to services, containers, and
-networks that have the label `com.docker.ucp.access.label` applied to them.
+Teams and labels give the administrator fine-grained control over permissions. Each team can have multiple labels. Each label has a key of `com.docker.ucp.access.label`. The label is then applied to the containers, services, networks, secrets and volumes. Labels are not currently available for nodes and images. DTR has its own permissions.
 
 There are four permission levels:
 
@@ -55,3 +53,4 @@ There are four permission levels:
 
 * [Create and manage users](create-and-manage-users.md)
 * [Create and manage teams](create-and-manage-teams.md)
+* [Docker Reference Architecture: Securing Docker Datacenter and Security Best Practices](https://success.docker.com/KBase/Docker_Reference_Architecture%3A_Securing_Docker_Datacenter_and_Security_Best_Practices)

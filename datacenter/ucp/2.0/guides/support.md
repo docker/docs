@@ -15,10 +15,26 @@ If you need help, you can file a ticket via:
 
 Be sure to use your company email when filing tickets.
 
-## Download a support dump
+Docker Support engineers may ask you to provide a UCP support dump, which is an
+archive that contains UCP system logs and diagnostic information. To obtain a
+support dump:
 
-Docker Support engineers may ask you to provide a UCP support dump. For this:
+## From the UI
 
-1. Log into UCP with an administrator account.
-
+1. Log into the UCP UI with an administrator account.
 2. On the top-right menu, **click your username**, and choose **Support Dump**.
+
+![](images/get-support-1.png){: .with-border}
+
+## From the CLI
+
+To get the support dump from the CLI, use SSH to log into a UCP manager node
+and run:
+
+```none
+docker run --rm \
+  --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  {{ page.docker_image }} \
+  support > docker-support.tgz
+```

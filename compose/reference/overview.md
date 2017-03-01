@@ -4,6 +4,7 @@ keywords: fig, composition, compose, docker, orchestration, cli,  docker-compose
 redirect_from:
 - /compose/reference/docker-compose/
 title: Overview of docker-compose CLI
+notoc: true
 ---
 
 This page provides the usage information for the `docker-compose` Command.

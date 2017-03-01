@@ -49,7 +49,16 @@ Where the `--ucp-node` is the hostname of the UCP node where you want to deploy
 DTR. `--ucp-insecure-tls` tells the installer to trust the TLS certificates used
 by UCP.
 
-The install command has other flags for customizing DTR at install time.
+By default the install command runs in interactive mode and prompts for
+additional information like:
+
+* DTR external url: the url clients use to read DTR. If you're using a load
+balancer for DTR, this is the IP address or DNS name of the load balancer
+* UCP url: the url clients use to reach UCP
+* UCP username and password: administrator credentials for UCP
+
+You can also provide this information to the installer command so that it
+runs without prompting.
 Check the [reference documentation to learn more](../../../reference/cli/install.md).
 
 ## Step 4. Check that DTR is running

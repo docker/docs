@@ -2,6 +2,7 @@
 description: Compose CLI reference
 keywords: fig, composition, compose, docker, orchestration, cli,  reference
 title: Compose command-line reference
+notoc: true
 ---
 
 The following pages describe the usage information for the [docker-compose](overview.md) subcommands. You can also see this information by running `docker-compose [SUBCOMMAND] --help` from the command line.

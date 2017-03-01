@@ -2,6 +2,7 @@
 description: Pauses running containers for a service.
 keywords: fig, composition, compose, docker, orchestration, cli, pause
 title: docker-compose pause
+notoc: true
 ---
 
 ```

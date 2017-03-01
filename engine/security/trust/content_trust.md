@@ -66,7 +66,7 @@ the unsigned version of an image before officially signing it.
 Image consumers can enable content trust to ensure that images they use were
 signed. If a consumer enables content trust, they can only pull, run, or build
 with trusted images. Enabling content trust is like wearing a pair of
-rose-colored glasses. Consumers "see" only signed images tags and the less
+rose-colored glasses. Consumers "see" only signed image tags and the less
 desirable, unsigned image tags are "invisible" to them.
 
 ![Trust view](images/trust_view.png)
@@ -219,7 +219,7 @@ client recognizes this is your first push and:
  - requests a passphrase for the root key
  - generates a root key in the `~/.docker/trust` directory
  - requests a passphrase for the repository key
- - generates a repository key for in the `~/.docker/trust` directory
+ - generates a repository key in the `~/.docker/trust` directory
 
 The passphrase you chose for both the root key and your repository key-pair
 should be randomly generated and stored in a *password manager*.

@@ -2,6 +2,7 @@
 description: Declare default environment variables in a file
 keywords: fig, composition, compose, docker, orchestration, environment, env file
 title: Declare default environment variables in file
+notoc: true
 ---
 
 Compose supports declaring default environment variables in an environment

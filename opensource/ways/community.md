@@ -36,10 +36,10 @@ open user questions</a> on the Docker project.
 
 Docker contributors are people like you contributing to Docker open source.
 Contributors may need help with IRC, Go programming, Markdown, or with other
-aspects of contributing. To help Docker contributors:
+aspects of contributing. To help Docker contributors, visit:
 
 * the <a href="https://gitter.im/docker/docker" target="_blank">Docker Gitter IM
 </a> room
 * the <a href="https://groups.google.com/forum/#!forum/docker-dev"
-target="_blank">docker-dev</a>  Google group
+target="_blank">docker-dev</a> Google group
 * the `#docker-dev` channel on Freenode IRC

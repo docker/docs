@@ -82,4 +82,4 @@ You can also demote a manager node to a worker node. See
 ## Learn More
 
 * Read about how swarm mode [services](services.md) work.
-* Learn how [PKI](pki.md) works in swarm mode
+* Learn how [PKI](pki.md) works in swarm mode.

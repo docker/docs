@@ -6,7 +6,7 @@ title: Docker for AWS IAM permissions
 
 The following IAM permissions are required to use Docker for AWS.
 
-Before you deploy Docker for AWS, your account needs these permissions for the stack to deploy correctly. 
+Before you deploy Docker for AWS, your account needs these permissions for the stack to deploy correctly.
 If you create and use an IAM role with these permissions for creating the stack, CloudFormation will use the role's permissions instead of your own, using the AWS CloudFormation Service Role feature.
 
 This feature is called [AWS CloudFormation Service Role](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-servicerole.html?icmpid=docs_cfn_console)
@@ -114,6 +114,7 @@ follow the link for more information.
                 "ec2:DisassociateRouteTable",
                 "ec2:GetConsoleOutput",
                 "ec2:GetConsoleScreenshot",
+                "ec2:ModifyNetworkInterfaceAttribute",
                 "ec2:ModifyVpcAttribute",
                 "ec2:RebootInstances",
                 "ec2:ReleaseAddress",
@@ -305,6 +306,16 @@ follow the link for more information.
                 "elasticloadbalancing:SetRulePriorities",
                 "elasticloadbalancing:SetSecurityGroups",
                 "elasticloadbalancing:SetSubnets"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "Stmt1487169681000",
+            "Effect": "Allow",
+            "Action": [
+                "elasticfilesystem:*"
             ],
             "Resource": [
                 "*"

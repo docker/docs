@@ -29,7 +29,7 @@ Delegation keys are optional, and not generated as part of the normal `docker`
 workflow.  They need to be
 [manually generated and added to the repository](trust_delegation.md#generating-delegation-keys).
 
-Note: Prior to Docker Engine 1.11, the snapshot key was also generated and stored
+**Note:** Prior to Docker Engine 1.11, the snapshot key was also generated and stored
 locally client-side. [Use the Notary CLI to manage your snapshot key locally
 again](/notary/advanced_usage.md#rotate-keys) for
 repositories created with newer versions of Docker.
@@ -38,7 +38,7 @@ repositories created with newer versions of Docker.
 
 The passphrases you chose for both the root key and your repository key should
 be randomly generated and stored in a password manager.  Having the repository key
-allow users to sign image tags on a repository. Passphrases are used to encrypt
+allows users to sign image tags on a repository. Passphrases are used to encrypt
 your keys at rest and ensures that a lost laptop or an unintended backup doesn't
 put the private key material at risk.
 
@@ -48,7 +48,7 @@ All the Docker trust keys are stored encrypted using the passphrase you provide
 on creation. Even so, you should still take care of the location where you back them up.
 Good practice is to create two encrypted USB keys.
 
-It is very important that you backup your keys to a safe, secure location. Loss
+It is very important that you back up your keys to a safe, secure location. Loss
 of the repository key is recoverable; loss of the root key is not.
 
 The Docker client stores the keys in the `~/.docker/trust/private` directory.
@@ -83,7 +83,7 @@ content that they already downloaded:
 Warning: potential malicious behavior - trust data has insufficient signatures for remote repository docker.io/my/image: valid signatures did not meet threshold
 ```
 
-To correct this, they need to download a new image tag with that is signed with
+To correct this, they need to download a new image tag that is signed with
 the new key.
 
 ## Related information

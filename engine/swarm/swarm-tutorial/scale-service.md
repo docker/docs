@@ -2,6 +2,7 @@
 description: Scale the service running in the swarm
 keywords: tutorial, cluster management, swarm mode, scale
 title: Scale the service in the swarm
+notoc: true
 ---
 
 Once you have [deployed a service](deploy-service.md) to a swarm, you are ready
@@ -54,7 +55,7 @@ the swarm.
     528d68040f95        alpine:latest       "ping docker.com"   About a minute ago   Up About a minute                       helloworld.4.auky6trawmdlcne8ad8phb0f1
     ```
 
-    If you want to see the containers running on other nodes, you can ssh into
+    If you want to see the containers running on other nodes, ssh into
     those nodes and run the `docker ps` command.
 
 ## What's next?

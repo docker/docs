@@ -275,10 +275,10 @@ used an older version, specifying the new one causes a cache bust of `apt-get
 update` and ensure the installation of the new version. Listing packages on
 each line can also prevent mistakes in package duplication.
 
-In addition, cleaning up the apt cache and removing `/var/lib/apt/lists` helps
-keep the image size down. Since the `RUN` statement starts with
-`apt-get update`, the package cache will always be refreshed prior to
-`apt-get install`.
+In addition, when you clean up the apt cache by removing `/var/lib/apt/lists`
+reduces the image size, since the apt cache is not stored in a layer. Since the
+`RUN` statement starts with `apt-get update`, the package cache will always be
+refreshed prior to `apt-get install`.
 
 > **Note**: The official Debian and Ubuntu images [automatically run `apt-get clean`](https://github.com/docker/docker/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105),
 > so explicit invocation is not required.

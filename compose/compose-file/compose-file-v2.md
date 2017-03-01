@@ -4,6 +4,8 @@ keywords: fig, composition, compose version 3, docker
 redirect_from:
 - /compose/yml
 title: Compose file version 2 reference
+toc_max: 4
+toc_min: 1
 ---
 
 These topics describe version 2 of the Compose file format.
@@ -911,9 +913,6 @@ Each of these is a single value, analogous to its
     stdin_open: true
     tty: true
 
-> **Note:** The following options are only available for
-> [version 2](compose-versioning.md#version-2) and up:
->  `oom_score_adj`
 
 ## Specifying durations
 
