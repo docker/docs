@@ -183,7 +183,7 @@ domains should be redirected to it. For example, a website that has been
 renamed might use this functionality. The following labels accomplish this for
 `new.example.com` and `old.example.com`
 
-* `com.docker.ucp.mesh.http.1=external_route=http://old.example.com.com,redirect=http://new.example.com`
+* `com.docker.ucp.mesh.http.1=external_route=http://old.example.com,redirect=http://new.example.com`
 * `com.docker.ucp.mesh.http.2=external_route=http://new.example.com`
 
 ## Troubleshoot
@@ -192,4 +192,4 @@ If a service is not configured properly for use of the HTTP routing mesh, this
 information is available in the UI when inspecting the service.
 
 More logging from the HTTP routing mesh is available in the logs of the
-`ucp-controller` containers on your UCP controller nodes.
+`ucp-controller` containers on your UCP manager nodes.

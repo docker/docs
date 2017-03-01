@@ -61,15 +61,15 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-beta-channels).
 >**Important Notes**:
 >
 > - Docker for Mac requires OS X El Capitan 10.11 or newer macOS release running on a 2010 or
->   newer Mac, with Intel's  hardware support for MMU virtualization. The app will run on 10.10.3 Yosemite, but with limited support. Please see
->   [What to know before you install](index.md#what-to-know-before-you-install)
->   for a full explanation and list of prerequisites.
+   newer Mac, with Intel's  hardware support for MMU virtualization. The app will run on 10.10.3 Yosemite, but with limited support. Please see
+   [What to know before you install](#what-to-know-before-you-install)
+   for a full explanation and list of prerequisites.
 >
 > - You can switch between beta and stable versions, but you must have only one
->   app installed at a time. Also, you will need to save images and export
->   containers you want to keep before uninstalling the current version before
->   installing another. For more about this, see the
->   [FAQs about beta and stable channels](faqs.md#stable-and-beta-channels).
+   app installed at a time. Also, you will need to save images and export
+   containers you want to keep before uninstalling the current version before
+   installing another. For more about this, see the
+   [FAQs about beta and stable channels](faqs.md#stable-and-beta-channels).
 
 ##  What to know before you install
 
@@ -140,10 +140,10 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-beta-channels).
 	  ![Whale in menu bar](/docker-for-mac/images/whale-in-menu-bar.png)
 
 	  If you just installed the app, you also get a success message with suggested
-    next steps and a link to this documentation. Click the whale ![whale](/docker-for-mac/images/whale-x.png))
+    next steps and a link to this documentation. Click the whale (![whale](/docker-for-mac/images/whale-x.png))
     in the status bar to dismiss this popup.
 
-	  ![Docker success](images/mac-install-success-docker-ps.png)
+	  ![Startup information](/docker-for-mac/images/mac-install-success-docker-cloud.png)
 
 3.  Click the whale (![whale-x](images/whale-x.png)) to get Preferences and
     other options.

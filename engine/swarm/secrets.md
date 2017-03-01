@@ -757,7 +757,7 @@ Docker.
     First, find the ID of the `mysql` container task.
 
     ```bash
-    $ docker ps --filter --name=mysql -q
+    $ docker ps --filter name=mysql -q
 
     c7705cf6176f
     ```

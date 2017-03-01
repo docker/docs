@@ -2,6 +2,7 @@
 description: Pulls service images.
 keywords: fig, composition, compose, docker, orchestration, cli,  pull
 title: docker-compose pull
+notoc: true
 ---
 
 ```

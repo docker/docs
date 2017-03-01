@@ -54,6 +54,14 @@ Docker Datacenter is a software subscription that includes 3 products:
 
 [Learn more about the maintenance lifecycle for these products](http://success.docker.com/Get_Help/Compatibility_Matrix_and_Maintenance_Lifecycle).
 
+## Version compatibility
+
+UCP 2.1 requires minimum versions of the following Docker components:
+
+- Docker Engine 1.13.0
+- Docker Remote API 1.25
+- Compose 1.9
+
 ## Where to go next
 
 * [UCP architecture](../../architecture.md)

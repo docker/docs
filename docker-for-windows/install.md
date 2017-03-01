@@ -65,7 +65,7 @@ beta channels, see the
 > - Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education
 >   (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please
 >   see
->   [What to know before you install](/docker-for-windows/index.md#what-to-know-before-you-install)
+>   [What to know before you install](/docker-for-windows/#what-to-know-before-you-install)
 >   for a full list of prerequisites.
 >
 > - You can switch between beta and stable versions, but you must have only one
@@ -109,7 +109,7 @@ guarantees (i.e., not officially supported). For more information, see
 
 Looking for information on using Windows containers?
 
-* [Switch between Windows and Linux containers](#switch-between-windows-and-linux-containers) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
+* [Switch between Windows and Linux containers](/docker-for-windows/index.md#switch-between-windows-and-linux-containers) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
 <p />
 * [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
 provides a tutorial on how to set up and run Windows containers on Windows 10 or
@@ -142,7 +142,7 @@ The whale in the status bar indicates that Docker is running, and accessible fro
 
 If you just installed the app, you also get a popup success message with suggested next steps, and a link to this documentation.
 
-![Install success](/docker-for-windows/images/win-install-success-popup.png)
+![Startup information](/docker-for-windows/images/win-install-success-popup-cloud.png)
 
 When initialization is complete, select **About Docker** from the notification area icon to verify that you have the latest version.
 

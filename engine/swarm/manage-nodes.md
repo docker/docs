@@ -29,26 +29,26 @@ ehkv3bcimagdese79dn78otj5 *  node-1    Ready   Active        Leader
 The `AVAILABILITY` column shows whether or not the scheduler can assign tasks to
 the node:
 
-* `Active` means that the scheduler can assign tasks to a node.
+* `Active` means that the scheduler can assign tasks to the node.
 * `Pause` means the scheduler doesn't assign new tasks to the node, but existing
-tasks remain running.
+  tasks remain running.
 * `Drain` means the scheduler doesn't assign new tasks to the node. The
-scheduler shuts down any existing tasks and schedules them on an available
-node.
+   scheduler shuts down any existing tasks and schedules them on an available
+   node.
 
 The `MANAGER STATUS` column shows node participation in the Raft consensus:
 
 * No value indicates a worker node that does not participate in swarm
-management.
+  management.
 * `Leader` means the node is the primary manager node that makes all swarm
-management and orchestration decisions for the swarm.
-* `Reachable` means the node is a manager node is participating in the Raft
-consensus. If the leader node becomes unavailable, the node is eligible for
-election as the new leader.
+  management and orchestration decisions for the swarm.
+* `Reachable` means the node is a manager node participating in the Raft
+  consensus quorum. If the leader node becomes unavailable, the node is eligible for
+  election as the new leader.
 * `Unavailable` means the node is a manager that is not able to communicate with
-other managers. If a manager node becomes unavailable, you should either join a
-new manager node to the swarm or promote a worker node to be a
-manager.
+  other managers. If a manager node becomes unavailable, you should either join a
+  new manager node to the swarm or promote a worker node to be a
+  manager.
 
 For more information on swarm administration refer to the [Swarm administration guide](admin_guide.md).
 
@@ -59,7 +59,7 @@ details for an individual node. The output defaults to JSON format, but you can
 pass the `--pretty` flag to print the results in human-readable format. For example:
 
 ```bash
-docker node inspect self --pretty
+$ docker node inspect self --pretty
 
 ID:                     ehkv3bcimagdese79dn78otj5
 Hostname:               node-1
@@ -96,7 +96,7 @@ You can modify node attributes as follows:
 Changing node availability lets you:
 
 * drain a manager node so that only performs swarm management tasks and is
-unavailable for task assignment.
+  unavailable for task assignment.
 * drain a node so you can take it down for maintenance.
 * pause a node so it is unavailable to receive new tasks.
 * restore unavailable or paused nodes available status.
@@ -157,9 +157,9 @@ You can promote a worker node to the manager role. This is useful when a
 manager node becomes unavailable or if you want to take a manager offline for
 maintenance. Similarly, you can demote a manager node to the worker role.
 
->**Note: Maintaining a quorum** Regardless of your reason to promote or demote
-a node, you must always maintain a quorum of manager nodes in the
-swarm. For more information refer to the [Swarm administration guide](admin_guide.md).
+> **Note: Maintaining a quorum** Regardless of your reason to promote or demote
+> a node, you must always maintain a quorum of manager nodes in the
+> swarm. For more information refer to the [Swarm administration guide](admin_guide.md).
 
 To promote a node or set of nodes, run `docker node promote` from a manager
 node:
@@ -214,9 +214,7 @@ manager node to remove the node from the node list.
 For instance:
 
 ```bash
-docker node rm node-2
-
-node-2
+$ docker node rm node-2
 ```
 
 ## Learn More

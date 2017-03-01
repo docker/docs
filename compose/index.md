@@ -2,6 +2,7 @@
 description: Introduction and Overview of Compose
 keywords: documentation, docs,  docker, compose, orchestration,  containers
 title: Docker Compose
+notoc: true
 ---
 
 Compose is a tool for defining and running multi-container Docker applications. To learn more about Compose refer to the following documentation:

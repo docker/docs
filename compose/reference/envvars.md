@@ -2,6 +2,7 @@
 description: Compose CLI environment variables
 keywords: fig, composition, compose, docker, orchestration, cli, reference
 title: Compose CLI environment variables
+notoc: true
 ---
 
 Several environment variables are available for you to configure the Docker Compose command-line behaviour.

@@ -4,6 +4,8 @@ keywords: fig, composition, compose version 1, docker
 redirect_from:
 - /compose/yml
 title: Compose file version 1 reference
+toc_max: 4
+toc_min: 1
 ---
 
 These topics describe version 1 of the Compose file format. This is the oldest
@@ -473,7 +475,7 @@ is specified, then read-write will be used.
      - service_name
      - service_name:ro
 
-### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, oom_score_adj, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
+### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.

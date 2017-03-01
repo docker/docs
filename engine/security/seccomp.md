@@ -28,7 +28,7 @@ CONFIG_SECCOMP=y
 
 The default seccomp profile provides a sane default for running containers with
 seccomp and disables around 44 system calls out of 300+. It is moderately protective while providing wide application
-compatibility. The default Docker profile (found [here](https://github.com/docker/docker/blob/master/profiles/seccomp/default.json)) has a JSON layout in the following form:
+compatibility. The [default Docker profile](https://github.com/docker/docker/blob/master/profiles/seccomp/default.json) has a JSON layout in the following form:
 
 ```json
 {
@@ -114,12 +114,12 @@ the reason each syscall is blocked rather than white-listed.
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------|
 | `acct`              | Accounting syscall which could let containers disable their own resource limits or process accounting. Also gated by `CAP_SYS_PACCT`. |
 | `add_key`           | Prevent containers from using the kernel keyring, which is not namespaced.                                   |
-| `adjtimex`          | Similar to `clock_settime` and `settimeofday`, time/date is not namespaced.  Also gated by `CAP_SYS_TIME`    |
+| `adjtimex`          | Similar to `clock_settime` and `settimeofday`, time/date is not namespaced.  Also gated by `CAP_SYS_TIME`.   |
 | `bpf`               | Deny loading potentially persistent bpf programs into kernel, already gated by `CAP_SYS_ADMIN`.              |
 | `clock_adjtime`     | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.                                                   |
 | `clock_settime`     | Time/date is not namespaced. Also gated by `CAP_SYS_TIME`.                                                   |
 | `clone`             | Deny cloning new namespaces. Also gated by `CAP_SYS_ADMIN` for CLONE_* flags, except `CLONE_USERNS`.         |
-| `create_module`     | Deny manipulation and functions on kernel modules. Obsolete. Also gated by `CAP_SYS_MODULE`                  |
+| `create_module`     | Deny manipulation and functions on kernel modules. Obsolete. Also gated by `CAP_SYS_MODULE`.                 |
 | `delete_module`     | Deny manipulation and functions on kernel modules. Also gated by `CAP_SYS_MODULE`.                           |
 | `finit_module`      | Deny manipulation and functions on kernel modules. Also gated by `CAP_SYS_MODULE`.                           |
 | `get_kernel_syms`   | Deny retrieval of exported kernel and module symbols. Obsolete.                                              |

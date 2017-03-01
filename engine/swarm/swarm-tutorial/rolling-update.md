@@ -2,6 +2,7 @@
 description: Apply rolling updates to a service on the swarm
 keywords: tutorial, cluster management, swarm, service, rolling-update
 title: Apply rolling updates to a service
+notoc: true
 ---
 
 In a previous step of the tutorial, you [scaled](scale-service.md) the number of
@@ -65,7 +66,7 @@ Redis 3.0.7 container image using rolling updates.
     ```
 
 4.  Now you can update the container image for `redis`. The swarm  manager
-applies the update to nodes according to the `UpdateConfig` policy:
+    applies the update to nodes according to the `UpdateConfig` policy:
 
     ```bash
     $ docker service update --image redis:3.0.7 redis
@@ -78,12 +79,12 @@ applies the update to nodes according to the `UpdateConfig` policy:
     * Schedule update for the stopped task.
     * Start the container for the updated task.
     * If the update to a task returns `RUNNING`, wait for the
-    specified delay period then stop the next task.
+      specified delay period then start the next task.
     * If, at any time during the update, a task returns `FAILED`, pause the
-    update.
+      update.
 
 5.  Run `docker service inspect --pretty redis` to see the new image in the
-desired state:
+    desired state:
 
     ```bash
     $ docker service inspect --pretty redis
@@ -144,5 +145,7 @@ desired state:
     Before Swarm updates all of the tasks, you can see that some are running
     `redis:3.0.6` while others are running `redis:3.0.7`. The output above shows
     the state once the rolling updates are done.
+
+## What's next?
 
 Next, learn about how to [drain a node](drain-node.md) in the swarm.

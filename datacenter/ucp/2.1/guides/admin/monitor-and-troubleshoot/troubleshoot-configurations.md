@@ -1,22 +1,26 @@
 ---
+title: Troubleshoot cluster configurations
 description: Learn how to troubleshoot your Docker Universal Control Plane cluster.
 keywords: ectd, rethinkdb, key, value, store, database, ucp
-title: Troubleshoot cluster configurations
 ---
 
-Docker UCP persists configuration data on an [etcd](https://coreos.com/etcd/)
+UCP automatically tries to heal itself by monitoring it's internal
+components and trying to bring them to an healthy state.
+
+In most cases, if a single UCP component is persistently in a
+failed state, you should be able to restore the cluster to a healthy state by
+removing the unhealthy node from the cluster and joining it again.
+[Lean how to remove and join modes](../configure/scale-your-cluster.md).
+
+## Troubleshoot the etcd key-value store
+
+UCP persists configuration data on an [etcd](https://coreos.com/etcd/)
 key-value store and [RethinkDB](https://rethinkdb.com/) database that are
 replicated on all manager nodes of the UCP cluster. These data stores are for
 internal use only, and should not be used by other applications.
 
-This article shows how you can access the key-value store and database, for
-troubleshooting configuration problems in your cluster.
-
-## etcd Key-Value Store
-
-### Using the REST API
-
-In this example we'll be using `curl` for making requests to the key-value
+### With the HTTP API
+In this example we'll use `curl` for making requests to the key-value
 store REST API, and `jq` to process the responses.
 
 You can install these tools on a Ubuntu distribution by running:
@@ -41,18 +45,15 @@ $ curl -s \
     ${KV_URL}/v2/keys | jq "."
 ```
 
-To learn more about the key-value store rest API check the
+To learn more about the key-value store REST API check the
 [etcd official documentation](https://coreos.com/etcd/docs/latest/).
 
-
-### Using a CLI client
+### With the CLI client
 
 The containers running the key-value store, include `etcdctl`, a command line
 client for etcd. You can run it using the `docker exec` command.
 
 The examples below assume you are logged in with ssh into a UCP manager node.
-
-#### Check the health of the etcd cluster
 
 ```bash
 $ docker exec -it ucp-kv etcdctl \

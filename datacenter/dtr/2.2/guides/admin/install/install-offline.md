@@ -53,6 +53,17 @@ For each machine where you want to install DTR:
 Now that the offline hosts have all the images needed to install DTR,
 you can [install DTR on that host](index.md).
 
+### Preventing outgoing connections
+
+DTR makes outgoing connections to:
+
+* report analytics,
+* check for new versions,
+* check online licenses,
+* update the vulnerability scanning database
+
+All of these uses of online connections are optional. You can choose to
+disable or not use any or all of these features on the admin settings page.
 
 ## Where to go next
 

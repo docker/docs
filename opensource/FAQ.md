@@ -44,8 +44,8 @@ Set your local repo to track changes upstream, on the `docker` repository.
     $ cd docker-fork
     ```
 
-2.  Add a remote called `upstream` that points to `docker/docker`
-
+2.  Add a remote called `upstream` that points to `docker/docker`.
+    
     ```
     $ git remote add upstream https://github.com/docker/docker.git
     ```
@@ -63,7 +63,7 @@ Most [editors have plug-ins](https://github.com/golang/go/wiki/IDEsAndTextEditor
 * Squash your commits into logical units of work using
   `git rebase -i` and `git push -f`.
 
-* If your code requires a change to tests or documentation, include code,test,
+* If your code requires a change to tests or documentation, include code, test,
 and documentation changes in the same commit as your code; this ensures a
 revert would remove all traces of the feature or fix.
 

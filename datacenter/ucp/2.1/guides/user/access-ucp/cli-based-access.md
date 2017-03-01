@@ -22,7 +22,7 @@ There are two different types of client certificates:
 * Admin user certificate bundles: allow running docker commands on the
 Docker Engine of any node,
 * User certificate bundles: only allow running docker commands through a UCP
-controller node.
+manager node.
 
 ## Download client certificates
 

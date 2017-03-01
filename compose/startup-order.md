@@ -2,6 +2,7 @@
 description: How to control service startup order in Docker Compose
 keywords: documentation, docs,  docker, compose, startup, order
 title: Controlling startup order in Compose
+notoc: true
 ---
 
 You can control the order of service startup with the

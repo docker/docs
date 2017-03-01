@@ -2,10 +2,6 @@
 description: Learn how to install, configure, and use Docker Trusted Registry.
 keywords: docker, registry, repository, images
 title: Docker Trusted Registry 2.2 overview
-redirect_from:
-- /docker-hub-enterprise/
-- /docker-trusted-registry/overview/
-- /docker-trusted-registry/
 ---
 
 Docker Trusted Registry (DTR) is the enterprise-grade image storage solution
@@ -14,27 +10,44 @@ and manage the Docker images you use in your applications.
 
 ## Image management
 
-Docker Trusted Registry can be installed on-premises, or on a virtual private
+DTR can be installed on-premises, or on a virtual private
 cloud. And with it, you can store your Docker images securely, behind your
 firewall.
 
-![](images/overview-1.png)
-
 You can use DTR as part of your continuous integration, and continuous
-delivery processes to build, run, and ship your applications.
+delivery processes to build, ship and run your applications.
 
+DTR has a web based user interface that allows authorized users in your
+organization to browse docker images. It provides information about
+who pushed what image at what time. It even allows you to see what dockerfile
+lines were used to produce the image and, if security scanning is enabled, to
+see a list of all of the software installed in your images.
 
-## Built-in security and access control
+## Built-in access control
 
 DTR uses the same authentication mechanism as Docker Universal Control Plane.
-It has a built-in authentication mechanism, and also integrates with LDAP
-and Active Directory. It also supports Role Based Access Control (RBAC).
+Users can be managed manually or syched from LDAP or Active Directory. DTR
+uses [Role Based Access Control](admin/manage-users/index.md) (RBAC) to allow you to implement fine-grained
+access control policies for who has access to your Docker images.
 
-This allows you to implement fine-grain access control policies on who has
-access to your Docker images.
+## Security scanning
 
-![](images/overview-2.png)
+DTR has a built in security scanner that can be used to discover what versions
+of software are used in your images. It scans each layer and aggregates the
+results to give you a complete picture of what you are shipping as a part of
+your stack. Most importantly, it co-relates this information with a
+vulnerability database that is kept up to date through [periodic
+updates](admin/configure/set-up-vulnerability-scans.md). This
+gives you [unprecedented insight into your exposure to known security
+threats](user/manage-images/scan-images-for-vulnerabilities.md).
 
+## Image signing
+
+DTR ships with [Notary](../../../notary/getting_started/)
+built in so that you can use
+[Docker Content Trust](../../../engine/security/trust/content_trust/) to sign
+and verify images. For more information about managing Notary data in DTR see
+the [DTR-specific notary documentation](user/manage-images/manage-trusted-repositories.md).
 
 ## Where to go next
 

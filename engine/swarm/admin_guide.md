@@ -235,7 +235,7 @@ Node node9 removed from swarm
 
 Before you forcefully remove a manager node, you must first demote it to the
 worker role. Make sure that you always have an odd number of manager nodes if
-you demote or remove a manager
+you demote or remove a manager.
 
 ## Back up the swarm
 
@@ -276,7 +276,7 @@ To restore, see [Restore from a backup](#restore-from-a-backup).
 ### Restore from a backup
 
 After backing up the swarm as described in
-[Backing up the swarm](#backing-up-the-swarm), use the following procedure to
+[Back up the swarm](#back-up-the-swarm), use the following procedure to
 restore the data to a new swarm.
 
 1.  Shut down Docker on the target host machine where the swarm will be restored.
@@ -292,7 +292,7 @@ restore the data to a new swarm.
     > encryption keys at this time.
     >
     > In the case of a swarm with auto-lock enabled, the unlock key is also the
-    > same as on the the old swarm, and the unlock key will be needed to
+    > same as on the old swarm, and the unlock key will be needed to
     > restore.
 
 5.  Start Docker on the new node. Unlock the swarm if necessary. Re-initialize

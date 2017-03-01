@@ -16,6 +16,7 @@ keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "
 gems:
   - jekyll-redirect-from
   - jekyll-seo-tag
+  - jekyll-relative-links
 
 webrick:
   headers:
@@ -98,14 +99,14 @@ defaults:
       path: "datacenter"
     values:
       ucp_latest_image: "docker/ucp:2.1.0"
-      dtr_latest_image: "docker/dtr:2.2.0"
+      dtr_latest_image: "docker/dtr:2.2.2"
   -
     scope:
       path: "datacenter/dtr/2.2"
     values:
       ucp_version: "2.1"
       dtr_version: "2.2"
-      docker_image: "docker/dtr:2.2.1"
+      docker_image: "docker/dtr:2.2.2"
   -
     scope:
       path: "datacenter/dtr/2.1"
@@ -134,6 +135,7 @@ defaults:
       hide_from_sitemap: true
       ucp_version: "2.0"
       dtr_version: "2.1"
+      docker_image: "docker/ucp:2.0.3"
   -
     scope:
       path: "datacenter/ucp/1.1"

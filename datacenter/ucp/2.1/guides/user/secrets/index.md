@@ -48,7 +48,9 @@ you won't be able to edit it or see the secret data again.
 ![](../../images/manage-secrets-2.png){: .with-border}
 
 Assign a unique name to the service and set its value. You can optionally define
-a permission label so that other users have permission to use this secret.
+a permission label so that other users have permission to use this secret. Also
+note that a service and secret must have the same permission label (or both
+must have no permission label at all) in order to be used together.
 
 In this example our secret is named `wordpress-password-v1`, to make it easier
 to track which version of the password our services are using.
@@ -67,13 +69,18 @@ default configurations.
 Start by creating the MySQL service. Navigate to the **Services** page, click
 **Create Service**, and choose **Use Wizard**. Use the following configurations:
 
-| Field                | Value                                                       |
-|:---------------------|:------------------------------------------------------------|
-| Service name         | wordpress-db                                                |
-| Image name           | mysql:5.7                                                   |
-| Attached network     | wordpress-network                                           |
-| Secret               | wordpress-password-v1                                       |
-| Environment variable | MYSQL_ROOT_PASSWORD_FILE=/run/secrets/wordpress-password-v1 |
+| Field                      | Value                              |
+|:---------------------------|:-----------------------------------|
+| Service name               | wordpress-db                       |
+| Image name                 | mysql:5.7                          |
+| Attached network           | wordpress-network                  |
+| Secret                     | wordpress-password-v1              |
+| Environment variable name  | MYSQL_ROOT_PASSWORD_FILE           |
+| Environment variable value | /run/secrets/wordpress-password-v1 |
+
+Remember, if you specified a permission label on the secret, you must also set
+the same permission label on this service. If the secret does not have a
+permission label, then this service must also not have a permission label.
 
 This creates a MySQL service that's attached to the `wordpress-network` network,
 and that uses the `wordpress-password-v1`, which by default will create a file
@@ -98,6 +105,7 @@ configurations:
 | Image name           | wordpress:latest                                              |
 | Published ports      | target: 80, ingress:8000                                      |
 | Attached network     | wordpress-network                                             |
+| Secret               | wordpress-password-v1              						   |
 | Environment variable | WORDPRESS_DB_HOST=wordpress-db:3306                           |
 | Environment variable | WORDPRESS_DB_PASSWORD_FILE=/run/secrets/wordpress-password-v1 |
 

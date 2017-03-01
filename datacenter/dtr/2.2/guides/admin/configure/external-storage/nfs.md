@@ -4,8 +4,6 @@ description: Learn how to integrate Docker Trusted Registry with NFS
 keywords: registry, dtr, storage, nfs
 ---
 
-<!-- TODO: review page for v2.2 -->
-
 You can configure DTR to store Docker images in an NFS directory.
 
 Before installing or configuring DTR to use an NFS directory, make sure that:
@@ -70,4 +68,4 @@ add it back again.
 
 ## Where to go next
 
-* [Configure where images are stored](configure-storage.md)
+* [Configure where images are stored](index.md)

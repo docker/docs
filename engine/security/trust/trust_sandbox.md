@@ -69,7 +69,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
         $ mkdir trustsandbox
         $ cd trustsandbox
 
-2. Create a filed called `docker-compose.yml` with your favorite editor.  For example, using vim:
+2. Create a file called `docker-compose.yml` with your favorite editor.  For example, using vim:
 
         $ touch docker-compose.yml
         $ vim docker-compose.yml
@@ -211,7 +211,7 @@ What happens when data is corrupted and you try to pull it when trust is
 enabled? In this section, you go into the `sandboxregistry` and tamper with some
 data. Then, you try and pull it.
 
-1. Leave the `trustsandbox` shell and and container running.
+1. Leave the `trustsandbox` shell and container running.
 
 2. Open a new interactive terminal from your host, and obtain a shell into the
 `sandboxregistry` container.
@@ -227,17 +227,17 @@ data. Then, you try and pull it.
         drwxr-xr-x 2 root root 4096 Jun 10 17:26 aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
         drwxr-xr-x 2 root root 4096 Jun 10 17:26 cc7629d1331a7362b5e5126beb5bf15ca0bf67eb41eab994c719a45de53255cd
 
-4. Change into the registry storage for one of those layers (note that this is in a different directory)
+4. Change into the registry storage for one of those layers (note that this is in a different directory):
 
         root@65084fc6f047:/# cd /var/lib/registry/docker/registry/v2/blobs/sha256/aa/aac0c133338db2b18ff054943cee3267fe50c75cdee969aed88b1992539ed042
 
-5. Add malicious data to one of the trusttest layers:
+5. Add malicious data to one of the `trusttest` layers:
 
         root@65084fc6f047:/# echo "Malicious data" > data
 
 6. Go back to your `trustsandbox` terminal.
 
-7. List the trusttest image.
+7. List the `trusttest` image.
 
         / # docker images | grep trusttest
         REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
@@ -275,7 +275,7 @@ data. Then, you try and pull it.
 
 ## More play in the sandbox
 
-Now, that you have a full Docker content trust sandbox on your local system,
+Now, you have a full Docker content trust sandbox on your local system,
 feel free to play with it and see how it behaves. If you find any security
 issues with Docker, feel free to send us an email at <security@docker.com>.
 

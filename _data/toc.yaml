@@ -60,6 +60,8 @@ guides:
       title: Upgrading
     - path: /docker-for-aws/deploy/
       title: Deploy your app
+    - path: /docker-for-aws/persistent-data-volumes/
+      title: Persistent data volumes
     - path: /docker-for-aws/faqs/
       title: FAQs
     - path: /docker-for-aws/opensource/
@@ -76,6 +78,8 @@ guides:
       title: Upgrading
     - path: /docker-for-azure/deploy/
       title: Deploy your app
+    - path: /docker-for-azure/persistent-data-volumes/
+      title: Persistent data volumes
     - path: /docker-for-azure/faqs/
       title: FAQs
     - path: /docker-for-azure/opensource/
@@ -144,6 +148,8 @@ guides:
       title: Try out the voting app
     - path: /engine/getstarted-voting-app/customize-app/
       title: Customize the app and redeploy
+    - path: /engine/getstarted-voting-app/cleanup/
+      title: Graceful shutdown, reboot, and clean-up
   - sectiontitle: Learn by example
     section:
     - path: /engine/tutorials/networkingcontainers/
@@ -875,8 +881,8 @@ manuals:
       title: Release notes
   - sectiontitle: 1.12
     section:
-    - path: /cs-engine/1.12/install/
-      title: Install CS Docker Engine
+    - path: /cs-engine/1.12/
+      title: Install
     - path: /cs-engine/1.12/upgrade/
       title: Upgrade
     - sectiontitle: Release notes
@@ -1085,18 +1091,18 @@ manuals:
       title: unpause
     - path: /compose/reference/up/
       title: up
-    - sectiontitle: Compose File Reference
-      section:
-      - path: /compose/compose-file/
-        title: Version 3
-      - path: /compose/compose-file/compose-file-v2/
-        title: Version 2
-      - path: /compose/compose-file/compose-file-v1/
-        title: Version 1
-      - path: /compose/compose-file/compose-versioning/
-        title: About versions and upgrading
-      - path: /compose/faq/
-        title: Frequently Asked Questions
+  - sectiontitle: Compose File Reference
+    section:
+    - path: /compose/compose-file/
+      title: Version 3
+    - path: /compose/compose-file/compose-file-v2/
+      title: Version 2
+    - path: /compose/compose-file/compose-file-v1/
+      title: Version 1
+    - path: /compose/compose-file/compose-versioning/
+      title: About versions and upgrading
+    - path: /compose/faq/
+      title: Frequently Asked Questions
   - path: /compose/bundles/
     title: Docker Stacks and Distributed Application Bundles
   - path: /compose/swarm/
@@ -1163,6 +1169,8 @@ manuals:
           title: Use a load balancer
         - path: /datacenter/ucp/2.1/guides/admin/configure/add-labels-to-cluster-nodes/
           title: Add labels to cluster nodes
+        - path: /datacenter/ucp/2.1/guides/admin/configure/add-sans-to-cluster/
+          title: Add SANs to cluster certificates
         - path: /datacenter/ucp/2.1/guides/admin/configure/store-logs-in-an-external-system/
           title: Store logs in an external system
         - path: /datacenter/ucp/2.1/guides/admin/configure/restrict-services-to-worker-nodes/
@@ -1191,6 +1199,8 @@ manuals:
         section:
         - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/
           title: Monitor the cluster status
+        - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-node-messages/
+          title: Troubleshoot node messages
         - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
           title: Troubleshoot with logs
         - path: /datacenter/ucp/2.1/guides/admin/monitor-and-troubleshoot/troubleshoot-configurations/
@@ -1297,6 +1307,8 @@ manuals:
           title: Set up vulnerability scans
         - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-a-cache/
           title: Deploy a cache
+        - path: /datacenter/dtr/2.2/guides/admin/configure/garbage-collection/
+          title: Garbage collection
       - sectiontitle: Manage users
         section:
         - path: /datacenter/dtr/2.2/guides/admin/manage-users/
