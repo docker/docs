@@ -22,6 +22,12 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
+## CS Engine 1.12.6-cs9
+(28 Feb 2017)
+
+* Fixes an issue causing containerd to deadlock [#336](github.com/docker/containerd/pull/336)
+* Fixes an issue where encrypted overlay networks stop working [#30727](github.com/docker/docker/issues/30727)
+
 ## CS Engine 1.12.6-cs8
 (8 Feb 2017)
 
