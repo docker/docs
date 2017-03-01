@@ -30,7 +30,7 @@ function highlightRightNav(heading)
           $(this).addClass("active");
           $("#sidebar-wrapper").animate({
             scrollTop: $("#sidebar-wrapper").scrollTop() + $(this).position().top - 200
-          },10);
+          },100);
           //document.getElementById("sidebar-wrapper").scrollTop = this.getBoundingClientRect().top - 200;
         } else {
           $(this).removeClass("active");
