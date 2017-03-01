@@ -48,12 +48,12 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-beta-channels).
   <td width="50%">
   <a class="button primary-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac (stable)</a><br><br>
 
-  <a class="button outline-btn" href="https://download.docker.com/mac/stable/Docker.dmg.sha256sum">Download checksum: Docker.dmg SHA256</a>
+  <a class="text-link" href="https://download.docker.com/mac/stable/Docker.dmg.sha256sum">Download checksum: Docker.dmg SHA256</a>
   </td>
   <td width="50%">
   <a class="button primary-btn" href="https://download.docker.com/mac/beta/Docker.dmg">Get Docker for Mac (beta)</a><br><br>
 
-  <a class="button outline-btn" href="https://download.docker.com/mac/beta/Docker.dmg.sha256sum">Download checksum: Docker.dmg SHA256</a>
+  <a class="text-link" href="https://download.docker.com/mac/beta/Docker.dmg.sha256sum">Download checksum: Docker.dmg SHA256</a>
   </td>
   </tr>
 </table>

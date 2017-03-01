@@ -61,7 +61,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	<meta name="robots" content="noindex" />{% endif %}
 </head>
 
-<body ng-app="Docker" ng-controller="DockerController" class="HolyGrail">
+<body ng-app="Docker" ng-controller="DockerController" class="colums">
 	<header>
 		{% if page.landing == true %}{% include global-header.html %}{% endif %} {% if page.landing != true %}{% include header.html %}{% endif %}
 	</header>
@@ -69,8 +69,8 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	<div class="{% if page.landing == true %}wrapper{%else%}wrapper right-open{% endif %}">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="HolyGrail-body">
-					<main class="HolyGrail-content {% if page.landing == true %}main-content{%else%}content{% endif %}">
+				<div class="col-body">
+					<main class="col-content {% if page.landing == true %}main-content{%else%}content{% endif %}">
 						<section class="section">
 							{% if page.title %}
 							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
@@ -104,12 +104,12 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 							{% endif %}
 						</section>
 					</main>
-					<nav class="HolyGrail-nav">
+					<nav class="col-nav">
 						<div class="sidebar{% if page.landing == true %}-home{%else%}{% endif %}">
 						{% include side-menu.html %}
 						</div>
 					</nav>
-					<div class="HolyGrail-toc">
+					<div class="col-toc">
 							<div id="{% if page.landing == true %}sidebar-wrapper-home{%else%}sidebar-wrapper{% endif %}" class="{% if page.landing == true %} affix-top{%else%}sidebar-wrapper toc-nav{% endif %}" {% if page.landing == true %} data-spy="affix" data-offset-top="490">{%else%}{% endif %}
 							<div class="toc-nav">
 								<div class="feedback-links">
