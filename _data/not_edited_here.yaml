@@ -16,15 +16,15 @@ overrides:
 
 - path: /engine/deprecated.md
   description: Docker Engine deprecation reference
-  source: https://github.com/docker/docker/tree/1.13.x/docs/deprecated.md
+  source: https://github.com/docker/docker/tree/17.03.x/docs/deprecated.md
 
 - path: /engine/extend/
   description: References for Docker Engine plugin system
-  source: https://github.com/docker/docker/tree/1.13.x/docs/extend/
+  source: https://github.com/docker/docker/tree/17.03.x/docs/extend/
 
 - path: /engine/reference/
   description: Docker Engine CLI and API references
-  source: https://github.com/docker/docker/tree/1.13.x/docs/reference/
+  source: https://github.com/docker/docker/tree/17.03.x/docs/reference/
 
 - path: /notary/reference/
   description: Reference docs for Docker Notary
