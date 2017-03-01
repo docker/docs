@@ -19,7 +19,7 @@ To get started, you will need to install Node.js v4.2.1. Using Node Version Mana
 ### Windows:
 
 1.  Download <a href="https://github.com/coreybutler/nvm-windows/releases/"
-target="_blank"> latest release </a>
+target="_blank">latest release</a>.
 
 2.  Follow the installer steps to get NVM installed. Please note, you need to
 uninstall any existing versions of node.js before installing NVM for Windows;
@@ -29,7 +29,7 @@ the above installer link will have an uninstaller available.
 
 ### macOS/Linux:
 
-1.  Open a terminal window
+1.  Open a terminal window.
 
 2.  Copy and paste the following install script:
 
@@ -39,9 +39,9 @@ the above installer link will have an uninstaller available.
 
 3.  To activate nvm, close the terminal window and re-open a new one.
 
-    (Alternatively, you can source nvm from your current shell with the command `. ~/.nvm/nvm.sh` )
+    (Alternatively, you can source nvm from your current shell with the command `. ~/.nvm/nvm.sh`.)
 
-(To learn more about working with NVM, see <a href="https://github.com/creationix/nvm" target="_blank">macOS/Linux official nvm repo</a>, <a href="https://github.com/coreybutler/nvm-windows" target="_blank">Windows official nvm repo</a>, and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-with-nvm-node-version-manager-on-a-vps" target="_blank">How To Install Node.js with NVM ON A VPS</a>)
+(To learn more about working with NVM, see <a href="https://github.com/creationix/nvm" target="_blank">macOS/Linux official nvm repo</a>, <a href="https://github.com/coreybutler/nvm-windows" target="_blank">Windows official nvm repo</a>, and <a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-with-nvm-node-version-manager-on-a-vps" target="_blank">How To Install Node.js with NVM ON A VPS</a>.)
 
 ## Install Node.js
 
