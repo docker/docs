@@ -26,7 +26,7 @@ Runs a one-time command against a service. For example, the following command st
 
     docker-compose run web bash
 
-Commands you use with `run` start in new containers with the configuration defined by the service's configuration. This means that the resulting container has the same volumes, links, etc., as defined in the configuration file. However, there are two important differences.
+Commands you use with `run` start in new containers with configuration defined by that of the service, including volumes, links, and other details. However, there are two important differences.
 
 First, the command passed by `run` overrides the command defined in the service configuration. For example, if the  `web` service configuration is started with `bash`, then `docker-compose run web python app.py` overrides it with `python app.py`.
 
