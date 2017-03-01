@@ -95,24 +95,9 @@ p {
 
 /*
 *
-* mobile type ******************************************************************
+* other type ******************************************************************
 *
 */
-
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-    h1 {
-        font-size: 24px;
-    }
-    h2 {
-        font-size: 20px;
-    }
-    h3 {
-        font-size: 18px;
-    }
-    h4 {
-        font-size: 16px;
-    }
-}
 
 p.p2 {
     font-size: 16px;
@@ -546,37 +531,16 @@ img {
 .sidebar-home {
   background-color: #FBFBFC;
   border-right: 1px solid rgba(204, 204, 204, 0.29);
-  bottom: 0;
-  left: 0;
-  display: block;
-  padding: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  /*min-height: 1000px;*/
+  height: 100%;
   width: 260px;
 }
-
-/*@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-  .sidebar-home {
-    display: none;
-  }
-}*/
-
-/*@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)  {
-  .sidebar-home {
-    display: none;
-  }
-}*/
 
 .sidebar-home .affix {
     background-color: #FBFBFC;
     border-right: 1px solid rgba(204, 204, 204, 0.29);
     top: 55px;
-    bottom: 0;
-    left: 0;
-    display: block;
     overflow-x: hidden;
     overflow-y: auto;
     padding-bottom: 100px;
@@ -601,10 +565,6 @@ and (max-device-width : 1024px)  {
         padding-bottom: 100px;
         width: 260px;
     }
-}
-
-.collapse.in {
-    transition: all 0.2s ease;
 }
 
 /*
@@ -670,11 +630,11 @@ and (max-device-width : 1024px)  {
 
 /*
 *
-* NAV SIDEBAR ***********************************************************************
+* content ***********************************************************************
 *
 */
 
-section.section {
+.content {
     max-width: 980px;
 }
 
@@ -683,7 +643,11 @@ section.section {
     max-width: 940px;
 }
 
-/*.content {}*/
+/*
+*
+* sidebar ***********************************************************************
+*
+*/
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
     .content {
@@ -716,6 +680,7 @@ section.section {
     height: 100%;
     right: 0;
     top: 500px;
+    width: 260px;
 }
 
 @media (min-device-width: 320px) and (max-device-width: 480px) {
@@ -730,8 +695,8 @@ section.section {
 }
 
 .wrapper.right-open #sidebar-wrapper {
-    /*padding: 40px 0 0 10px;*/
-    width: 250px;
+    /*padding: 17px 0 100px 0;*/
+    width: 260px;
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
@@ -1436,8 +1401,7 @@ code {
 .block {
     float: left;
     padding: 0px 20px 20px 16px;
-    max-width: 960px;
-    width: 460px;
+    min-width: 360px;
 }
 /*
   *
@@ -1690,29 +1654,6 @@ footer {
   margin-bottom: 20px!important;
 }
 
-/* Portrait and Landscape */
-
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-    .top_footer {
-        padding: 15px 0 0;
-        margin-bottom: 50px;
-    }
-    .footer_links {
-        padding: 10px 0;
-    }
-    button.outline-btn {
-        margin: 20px 0 0 2px;
-    }
-    .footer_sub_nav {
-        float: left;
-    }
-    .footer_sub_nav ul li {
-        float: none;
-        padding-bottom: 6px;
-        margin: 0;
-    }
-}
-
 
 /*
 *
@@ -1722,11 +1663,23 @@ footer {
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
     .HolyGrail-content {
-        padding: 0px 23px 50px 27px;
+        padding: 50px 23px 50px 27px;
     }
     .h1, .h2, .h3, h1, h2, h3 {
         margin-top: 10px;
         margin-bottom: 0px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    h2 {
+        font-size: 20px;
+    }
+    h3 {
+        font-size: 18px;
+    }
+    h4 {
+        font-size: 16px;
     }
     .nav-secondary-tabs.affix {
         background: #0C5176;
@@ -1761,6 +1714,7 @@ footer {
     .block {
         float: left;
         padding: 5px 30px 5px 15px;
+        width: 380px;
     }
     .component-full {
         padding: 10px 13px 10px 16px;
@@ -1776,6 +1730,30 @@ footer {
     }
     .component-full-copy {
         width: 100%;
+    }
+    #sidebar-wrapper-home {
+      display: none;
+    }
+    footer {
+      text-align: center;
+    }
+    .top_footer {
+        padding: 15px 0 0;
+        margin-bottom: 50px;
+    }
+    .footer_links {
+        padding: 10px 0;
+    }
+    button.outline-btn {
+        margin: 20px 0 0 2px;
+    }
+    .footer_sub_nav {
+        float: none;;
+    }
+    .footer_sub_nav ul li {
+        float: none;
+        padding-bottom: 6px;
+        margin: 0;
     }
 }
 
