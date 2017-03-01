@@ -80,7 +80,7 @@ Docker from the repository.
     Verify that the key ID is `58118E89F3A912897C070ADBF76221572C52609D`.
 
     ```bash
-    $ apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
+    $ sudo apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
 
       pub   4096R/2C52609D 2015-07-14
             Key fingerprint = 5811 8E89 F3A9 1289 7C07  0ADB F762 2157 2C52 609D
