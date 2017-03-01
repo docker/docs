@@ -45,9 +45,10 @@ to update its RHEL kernel.
     $ sudo rpm --import "https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"
     ```
 
-    Note: if the key server above does not respond, you can try one of these:
-       - pgp.mit.edu
-       - keyserver.ubuntu.com
+    > **Note**: If the key server above does not respond, you can try one of these:
+    >
+    >  - pgp.mit.edu
+    >  - keyserver.ubuntu.com
 
 2.  Install yum-utils if necessary:
 
