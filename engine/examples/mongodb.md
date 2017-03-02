@@ -52,13 +52,6 @@ We will build our image using the latest version of Ubuntu from the
 FROM       ubuntu:latest
 ```
 
-Continuing, we will declare the `MAINTAINER` of the `Dockerfile`:
-
-```dockerfile
-# Format: MAINTAINER Name <email@addr.ess>
-MAINTAINER M.Y. Name <myname@addr.ess>
-```
-
 > **Note:** Although Ubuntu systems have MongoDB packages, they are likely to
 > be outdated. Therefore in this example, we will use the official MongoDB
 > packages.
