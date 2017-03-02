@@ -8,6 +8,9 @@
 code {
   white-space: nowrap !important;
 }
+pre {
+  white-space: pre-wrap !important;
+}
 
 .toc-nav
 {
