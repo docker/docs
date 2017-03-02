@@ -46,13 +46,15 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
   </tr>
   <tr valign="top">
   <td width="50%">
-  <a class="button darkblue-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac (Stable)</a><br><br>
-  <a href="https://download.docker.com/mac/stable/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: Docker.dmg SHA256</font></a>
+  <a class="button outline-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac (Stable)</a>
   </td>
   <td width="50%">
-  <a class="button darkblue-btn" href="https://download.docker.com/mac/beta/Docker.dmg">Get Docker for Mac (Edge)</a><br><br>
-  <a href="https://download.docker.com/mac/beta/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: Docker.dmg SHA256</font></a>
+  <a class="button outline-btn" href="https://download.docker.com/mac/beta/Docker.dmg">Get Docker for Mac (Edge)</a>
   </td>
+  </tr>
+  <tr>
+  <td><a href="https://download.docker.com/mac/stable/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: Docker.dmg SHA256</font></a></td>
+  <td><a href="https://download.docker.com/mac/beta/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: Docker.dmg SHA256</font></a></td>
   </tr>
 </table>
 
