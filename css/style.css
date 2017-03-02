@@ -1396,13 +1396,22 @@ div#autocompleteResults span {
 
 /** these are bootstarp overrides :/   */
 
-.dropdown-btn {
+.nav-secondary-tabs .dropdown-btn {
+    background: transparent;
+    color: #fff;
+    padding: 6px 12px;
+    margin-top: 7px;
+    border: 0;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.nav-secondary .dropdown-btn {
     background: transparent;
     color: rgb(182, 202, 214);
     padding: 6px 12px;
     margin-top: 7px;
     font-weight: 400;
-    background-image: none;
     border: 0;
     font-size: 12px;
     font-weight: 600;
