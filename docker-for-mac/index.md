@@ -366,14 +366,14 @@ create one.
 
 ![Docker Cloud sign-in](images/menu-cloud-sign-in.png)
 
-Then use the Docker for Mac menu to create, view, or navigate directly to
-your Cloud resources:
+Then use the Docker for Mac menu to create, view, or navigate directly to your
+Cloud resources, including **organizations**, **repositories**, and **swarms**.
 
-* Organizations
-* Repositories
-* Swarms
+Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 
-Check out the [Docker Cloud topics](/docker-cloud/index.md) to learn more.
+* [Organizations and Teams in Docker Cloud](/docker-cloud/orgs/index.md)
+* [Builds and Images](/docker-cloud/builds/index.md)
+* [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md)
 
 ## Where to go next
 
