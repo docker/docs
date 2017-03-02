@@ -4,25 +4,6 @@ var sidebarBottom = sidebarObj.getBoundingClientRect().bottom;
 var footerTop = document.getElementsByClassName("footer")[0].getBoundingClientRect().top;
 var headerOffset = document.getElementsByClassName("container-fluid")[0].getBoundingClientRect().bottom;
 
-var x = document.links.length;
-var baseHref = document.getElementsByTagName('base')[0].href
-for (i = 0; i < x; i++) {
-  var munged = false;
-  var thisHREF = document.links[i].href;
-  var originalURL = "{{ page.url }}";
-  if (thisHREF.indexOf(baseHref + "#") > -1) {
-    // hash fix
-    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
-    thisHREF = originalURL + thisHREF.replace(baseHref, "");
-    //console.log('AFTER: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
-  }
-  if ((thisHREF.indexOf(window.location.hostname) > -1 || thisHREF.indexOf('http') == -1) && document.links[i].className.indexOf("nomunge") < 0) {
-    munged = true;
-    thisHREF = thisHREF.replace(".md", "/").replace("/index/", "/");
-    document.links[i].setAttribute('href', thisHREF);
-  }
-}
-
 // ensure that the left nav visibly displays the current topic
 var current = document.getElementsByClassName("active currentPage");
 if (current[0]) {
