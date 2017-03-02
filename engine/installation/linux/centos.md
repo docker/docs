@@ -19,7 +19,7 @@ repository URL associated with your trial or subscription. To get this informati
 
 - Go to [https://store.docker.com/?overlay=subscriptions](https://store.docker.com/?overlay=subscriptions).
 - Choose **Get Details** / **Setup Instructions** within the
-  **Docker Enterprise Edition for Ubuntu** section.
+  **Docker Enterprise Edition for CentOS** section.
 - Copy the URL from the field labeled
   **Copy and paste this URL to download your Edition**.
 
