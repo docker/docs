@@ -166,9 +166,21 @@ if (readCookie("night") == "true") {
 $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $(".wrapper").toggleClass("right-open");
-        $(".sidebar, sidebar-home").toggleClass("hidden-sm");
-        $(".sidebar, sidebar-home").toggleClass("hidden-xs");
     });
+$(".navbar-toggle").click(function(){
+  $(".sidebar, .sidebar-home").each(function(){
+    if($(this).hasClass("hidden-sm")) {
+      $(this).removeClass("hidden-sm");
+    } else {
+      $(this).addClass("hidden-sm");
+    }
+    if($(this).hasClass("hidden-xs")) {
+      $(this).removeClass("hidden-xs");
+    } else {
+      $(this).addClass("hidden-xs");
+    }
+  });
+});
 
 var navHeight = $('.navbar').outerHeight(true) + 80;
 
