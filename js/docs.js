@@ -166,6 +166,8 @@ if (readCookie("night") == "true") {
 $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $(".wrapper").toggleClass("right-open");
+        $(".sidebar, sidebar-home").toggleClass("hidden-sm");
+        $(".sidebar, sidebar-home").toggleClass("hidden-xs");
     });
 
 var navHeight = $('.navbar').outerHeight(true) + 80;
