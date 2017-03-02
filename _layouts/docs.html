@@ -109,7 +109,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 						</section>
 					</main>
 					<nav class="col-nav">
-						<div class="sidebar{% if page.landing == true %}-home{%else%}{% endif %}">
+						<div class="sidebar{% if page.landing == true %}-home{%else%}{% endif %} hidden-sm hidden-xs">
 						{% include side-menu.html %}
 						</div>
 					</nav>
