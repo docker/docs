@@ -3,7 +3,6 @@ description: Instructions for installing Docker on OpenSUSE and SLES
 keywords: Docker, Docker documentation, requirements, apt, installation, suse, opensuse, sles, rpm, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/SUSE/
-- /engine/installation/linux/SUSE/
 title: Get Docker for and SLES
 ---
 
