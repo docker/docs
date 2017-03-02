@@ -11,13 +11,7 @@ minimal system requirements for [Docker for Mac](/docker-for-mac/index.md).
 
 If you have not done so already, download the installer here:
 
-<table style="width:50%; border: 0">
-  <tr valign="top">
-    <td width="100%" style="font-size: medium; font-family: arial;  text-align: center; background-color: #F9FAFB">
-    <a class="button darkblue-btn" href="https://download.docker.com/mac/stable/DockerToolbox.pkg">Get Docker Toolbox for Mac</a>
-    </td>
-  </tr>
-</table>
+[Get Docker Toolbox for Mac](https://download.docker.com/mac/stable/DockerToolbox.pkg){: class="button outline-btn" }
 
 ## What you get and how it works
 
