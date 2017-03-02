@@ -404,6 +404,10 @@ a.button.outline-btn {
     margin: 0;
 }
 
+.darkblue-btn {
+  background-color: #0C5176;
+}
+
 .outline-btn:hover,
 .primary-btn:hover,
 .secondary-btn:hover {
@@ -1758,11 +1762,11 @@ footer {
 
 
 /* Landscape */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
+@media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
   and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) { 
+  and (orientation: landscape) {
     .nav-secondary,
     .nav-secondary-tabs.affix {
         height: 155px;
