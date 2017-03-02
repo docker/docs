@@ -28,7 +28,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Create archive; check out each version, create HTML under target/$VER, tweak links
 # Nuke the archive_source directory. Only keep the target directory.
 
-ENV VERSIONS="v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12"
+ENV VERSIONS="v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12 v1.13"
 
 RUN git clone https://www.github.com/docker/docker.github.io archive_source; \
  for VER in $VERSIONS; do \
