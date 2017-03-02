@@ -1,438 +1,172 @@
 <!-- relative link basehrefs -->
-{% if page.path contains "index.md" %}
-{% capture basehref %}{{ page.url }}{% endcapture %}
-{% else %}
-{% assign crumbs = page.url | split: '/' %}
-{% assign stoppingpoint = crumbs | size | minus: 1 %}
-{% for crumb in crumbs %}
-{% if forloop.index == stoppingpoint %}
-{% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %}
-{% break %}
-{% else %}
-{% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %}
-{% endif %}
-{% endfor %}
-{% endif %}
+{% if page.path contains "index.md" %} {% capture basehref %}{{ page.url }}{% endcapture %} {% else %} {% assign crumbs = page.url | split: '/' %} {% assign stoppingpoint = crumbs | size | minus: 1 %} {% for crumb in crumbs %} {% if forloop.index == stoppingpoint
+%} {% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %} {% break %} {% else %} {% capture basehref %}{{basehref}}{{ crumb }}/{% endcapture %} {% endif %} {% endfor %} {% endif %}
 <!-- Logic for feedback CC'ing -->
 {% if page.assignee %}{% assign assignee=page.assignee%}{% else %}{% assign assignee=page.defaultassignee%}{% endif %}
 <!-- Logic for 'edit this button' -->
-{% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %}
-{% for entry in site.data.not_edited_here.overrides %}
-	{% if page.url contains entry.path %}
-    {% if entry.source %}{% assign edit_url = entry.source %}{% else %}{% assign edit_url = "" %}{% endif %}
-		{% break %}
-	{% endif %}
-{% endfor %}
+{% assign edit_url = "https://github.com/docker/docker.github.io/edit/master/" | append: page.path %} {% for entry in site.data.not_edited_here.overrides %} {% if page.url contains entry.path %} {% if entry.source %}{% assign edit_url = entry.source %}{%
+else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %}
 
 <!-- End of logic for 'edit this button' -->
 <!DOCTYPE html>
-<html class="js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms no-csstransforms3d csstransitions fontface no-generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths retina-display is_not_retina chrome version webkit" lang="en">
+<html lang="en">
+
 <head>
-<base href="{{ basehref }}"/>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style type="text/css">
-@charset "UTF-8";
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
-	display: none !important;
-}
-ng\:form {
-	display: block;
-}
-</style>
-{% if page.url contains "/datacenter/" %}<script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=k6svi4faiclrdpi5eax4n23dzy"></script>{% endif %}
-<script type="text/javascript">
-  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
-  analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
-  analytics.page();
-  }}();
-</script>
-{% if site.GH_ENV == "gh_pages" %}<meta name="robots" content="noindex">{% endif %}
-<meta property="og:type" content="website">
-<meta property="og:updated_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}">
-<meta property="og:image" content="https://www.docker.com/sites/default/files/social/docker-facebook-share.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@docker_docs">
-<meta name="twitter:url" content="https://twitter.com/docker_docs">
-<meta name="twitter:title" content="{{ page.title }}">
-<meta name="twitter:image:src" content="https://www.docker.com/sites/default/files/social/docker-twitter-share.png">
-<meta property="article:published_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization{% endif %}">
-<link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
-<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="/favicons/manifest.json">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="/css/allcss.css">
-<link rel="stylesheet" href="/css/app2.css">
-<link rel="stylesheet" href="/css/responsive.css">
-<link rel="stylesheet" href="/css/p2p.css">
-<link rel="stylesheet" href="/css/mobile_responsive.css">
-<link rel="stylesheet" href="/css/temporary.css">
-<link rel="stylesheet" href="/css/hopscotch.css">
-<link rel="stylesheet" href="/css/documentation.css">
-<script async="" src="/js/modernizr.min.js"></script>
-<meta class="foundation-data-attribute-namespace">
-<meta class="foundation-mq-xxlarge">
-<meta class="foundation-mq-xlarge-only">
-<meta class="foundation-mq-xlarge">
-<meta class="foundation-mq-large-only">
-<meta class="foundation-mq-large">
-<meta class="foundation-mq-medium-only">
-<meta class="foundation-mq-medium">
-<meta class="foundation-mq-small-only">
-<meta class="foundation-mq-small">
-<style></style>
-<meta class="foundation-mq-topbar">
-<link id="mktoForms2BaseStyle" rel="stylesheet" type="text/css" href="/css/forms2.css">
-<link id="mktoForms2ThemeStyle" rel="stylesheet" type="text/css" href="/css/forms2-theme-simple.css">
-{% seo %}
-{% if page.hide_from_sitemap %}<meta name="robots" content="noindex" />{% endif %}
+	<base href="{{ basehref }}" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+		@charset "UTF-8";
+		[ng\:cloak],
+		[ng-cloak],
+		[data-ng-cloak],
+		[x-ng-cloak],
+		.ng-cloak,
+		.x-ng-cloak,
+		.ng-hide:not(.ng-hide-animate) {
+			display: none !important;
+		}
+
+		ng\:form {
+			display: block;
+		}
+	</style>
+	<script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=k6svi4faiclrdpi5eax4n23dzy"></script>
+	<script type="text/javascript">
+	  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+	  analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
+	  analytics.page();
+	  }}();
+	</script>
+	{% if site.GH_ENV == "gh_pages" %}
+	<meta name="robots" content="noindex">{% endif %}
+	<meta property="og:type" content="website"/>
+	<meta property="og:updated_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
+	<meta property="og:image" itemprop="image primaryImageOfPage" content="/images/docs@2x.png"/>
+	<meta name="twitter:card" content="summary"/>
+	<meta name="twitter:domain" content="docs.docker.com"/>
+	<meta name="twitter:site" content="@docker_docs"/>
+	<meta name="twitter:url" content="https://twitter.com/docker_docs"/>
+	<meta name="twitter:title" itemprop="title name" content="{{ page.title }}"/>
+	<meta name="twitter:description" property="og:description" itemprop="description" content="{{ content | strip_html | truncatewords: 30}}" />
+	<meta name="twitter:image:src" content="/images/docs@2x.png"/>
+	<meta name="twitter:image:alt" content="Docker Documentation"/>
+	<meta property="article:published_time" content="{% if page.date %}{{ page.date | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}"/>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization{% endif %}">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link id="pagestyle" rel="stylesheet" href="/css/style.css">
+
+	<!-- Go get "Open Sans" font from Google -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<!-- temp css will be removed -->
+	<link rel="stylesheet" href="/css/temp.css"> {% seo %} {% if page.hide_from_sitemap %}
+	<meta name="robots" content="noindex" />{% endif %}
 </head>
-<body class="html front not-logged-in no-sidebars page-node page-node- page-node-1 node-type-front-page path-docker ng-scope short retina-display all_loaded" ng-app="Docker" ng-controller="DockerController" style="">
-<div class="off-canvas-wrap" data-offcanvas="" style="min-height: 548px;">
-  <div class="inner-wrap"> <a class="left-off-canvas-toggle" href="/#">
-    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve">
-      <path fill="#fff" d="M30.583,9.328c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
-		c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,7.966,30.583,8.576,30.583,9.328L30.583,9.328z"></path>
-      <path fill="#fff" d="M30.583,17.09c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
-		c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,15.728,30.583,16.338,30.583,17.09L30.583,17.09z"></path>
-      <path fill="#fff" d="M30.583,24.387c0,0.752-0.539,1.362-1.203,1.362H5.113c-0.664,0-1.203-0.61-1.203-1.362l0,0
-		c0-0.752,0.539-1.362,1.203-1.362H29.38C30.045,23.025,30.583,23.635,30.583,24.387L30.583,24.387z"></path>
-    </svg>
-    </a>
-    <header class="main-header">
-      <div class="top-right-bg"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-2"> <a href="https://dockercon.smarteventscloud.com/portal/newreg.ww"><img class="logo" src="/images/dockercon-17.png"></a> </div>
-          <div class="col-xs-10">
-            <ul class="nav-global">
-              <li class="first leaf menu-mlid-603"><a href="/" target="_blank">Docs</a></li>
-              <li class="leaf menu-mlid-1997"><a href="https://www.docker.com/community/events">Events</a></li>
-              <li class="leaf menu-mlid-1998"><a href="https://www.docker.com/docker-community">Community</a></li>
-              <li class="leaf menu-mlid-1999"><a href="https://www.docker.com/docker-support-services">Support</a></li>
-              <li class="leaf menu-mlid-402"><a href="https://training.docker.com/" target="_blank">Training</a></li>
-              <li class="leaf menu-mlid-2000"><a href="https://www.docker.com/partners/partner-program">Partners</a></li>
-              <li class="leaf menu-mlid-602"><a href="https://blog.docker.com/" target="_blank">Blog</a></li>
-              <li class="leaf menu-mlid-2001"><a href="https://id.docker.com/login/" target="_blank">Log-In</a></li>
-              <li class="last leaf menu-mlid-2002"><a href="https://cloud.docker.com/" target="_blank">Sign-up</a></li>
-            </ul>
-            <ul class="nav-main">
-              <li class="first leaf menu-mlid-398"><a href="https://www.docker.com/what-docker">What is Docker?</a></li>
-              <li class="expanded menu-mlid-1059 has-submenu"><a href="https://www.docker.com/enterprise">Solutions</a>
-                <ul class="nav-main">
-                  <li class="first leaf menu-mlid-1064"><a href="https://www.docker.com/enterprise">Solutions</a></li>
-                  <li class="leaf menu-mlid-2365"><a href="https://www.docker.com/enterprise">Overview</a></li>
-                  <li class="collapsed menu-mlid-993"><a href="https://www.docker.com/use-cases">Use Cases</a></li>
-                  <li class="leaf menu-mlid-1034"><a href="https://www.docker.com/customers">Customers</a></li>
-                  <li class="leaf menu-mlid-1587"><a href="https://www.docker.com/industry-government">For Government</a></li>
-                  <li class="last collapsed menu-mlid-985"><a href="https://www.docker.com/products/resources">Resources</a></li>
-                </ul>
-              </li>
-              <li class="leaf menu-mlid-954"><a href="https://www.docker.com/products/overview">Get Docker</a></li>
-              <li class="leaf menu-mlid-1055"><a href="https://www.docker.com/pricing">Pricing</a></li>
-              <li class="leaf menu-mlid-2005 double-navstyle secondlast"><a href="https://www.docker.com/technologies/overview">Open Source</a></li>
-              <li class="last expanded menu-mlid-397 has-submenu"><a href="https://www.docker.com/company">Company</a>
-                <ul class="nav-main">
-                  <li class="first leaf menu-mlid-698"><a href="https://www.docker.com/company">Company</a></li>
-                  <li class="leaf menu-mlid-2366"><a href="https://www.docker.com/company">Overview</a></li>
-                  <li class="leaf menu-mlid-622"><a href="https://www.docker.com/careers">Careers</a></li>
-                  <li class="last leaf menu-mlid-1086"><a href="https://www.docker.com/company/news-and-press">News &amp; Press</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </header>
-    <aside class="left-off-canvas-menu">
-      <ul class="off-canvas-list">
-        <li class="first leaf menu-mlid-398"><a href="https://www.docker.com/what-docker">What is Docker?</a></li>
-        <li class="expanded menu-mlid-1059 has-submenu"><a href="https://www.docker.com/enterprise">Solutions</a>
-          <ul class="left-submenu">
-            <li class="back"><a href="/#">Back</a></li>
-            <li class="first leaf menu-mlid-1064"><a href="https://www.docker.com/enterprise">Solutions</a></li>
-            <li class="leaf menu-mlid-2365"><a href="https://www.docker.com/enterprise">Overview</a></li>
-            <li class="collapsed menu-mlid-993"><a href="https://www.docker.com/use-cases">Use Cases</a></li>
-            <li class="leaf menu-mlid-1034"><a href="https://www.docker.com/customers">Customers</a></li>
-            <li class="leaf menu-mlid-1587"><a href="https://www.docker.com/industry-government">For Government</a></li>
-            <li class="last collapsed menu-mlid-985"><a href="https://www.docker.com/products/resources">Resources</a></li>
-          </ul>
-        </li>
-        <li class="leaf menu-mlid-954"><a href="https://www.docker.com/products/overview">Get Docker</a></li>
-        <li class="leaf menu-mlid-1055"><a href="https://www.docker.com/pricing">Pricing</a></li>
-        <li class="leaf menu-mlid-2005 double-navstyle secondlast"><a href="https://www.docker.com/technologies/overview">Open Source</a></li>
-        <li class="last expanded menu-mlid-397 has-submenu"><a href="https://www.docker.com/company">Company</a>
-          <ul class="left-submenu">
-            <li class="back"><a href="/#">Back</a></li>
-            <li class="first leaf menu-mlid-698"><a href="https://www.docker.com/company">Company</a></li>
-            <li class="leaf menu-mlid-2366"><a href="https://www.docker.com/company">Overview</a></li>
-            <li class="leaf menu-mlid-622"><a href="https://www.docker.com/careers">Careers</a></li>
-            <li class="last leaf menu-mlid-1086"><a href="https://www.docker.com/company/news-and-press">News &amp; Press</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav-global-off-canvas">
-        <li class="first leaf menu-mlid-603"><a href="/" target="_blank">Docs</a></li>
-        <li class="leaf menu-mlid-1997"><a href="https://www.docker.com/community/events">Events</a></li>
-        <li class="leaf menu-mlid-1998"><a href="https://www.docker.com/docker-community">Community</a></li>
-        <li class="leaf menu-mlid-1999"><a href="https://www.docker.com/docker-support-services">Support</a></li>
-        <li class="leaf menu-mlid-402"><a href="https://training.docker.com/" target="_blank">Training</a></li>
-        <li class="leaf menu-mlid-2000"><a href="https://www.docker.com/partners/partner-program">Partners</a></li>
-        <li class="leaf menu-mlid-602"><a href="https://blog.docker.com/" target="_blank">Blog</a></li>
-        <li class="leaf menu-mlid-2001"><a href="https://id.docker.com/login/" target="_blank">Log-In</a></li>
-        <li class="last leaf menu-mlid-2002"><a href="https://cloud.docker.com/" target="_blank">Sign-up</a></li>
-      </ul>
-    </aside>
-    <div class="dockercon16">
-      <section class="title_section darkblue"> </section>
-			<div id="top-nav-container" class="col-xs-12" style="background-color: #254356">
-					<!-- tabs -->
-					<ul id="top-nav" class="tabs col-xs-12 col-sm-10 col-md-10">
-						{% include treebuilder.html %}
-					</ul>
-					<div id="start-tour-container" class="hidden-xs col-sm-2 col-md-2"><div id="start-tour">Tour our new<br />navigation!</div></div>
-			</div>
-      <div class="" ng-non-bindable>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-xs-12 col-sm-3 col-md-2 col-xl-2 docsidebarnav_section">
-              <div class="region region-hero-sub"><ul id="left-nav" class="nav-sub">
-               {% if page.tree == false %}
-                  <li class="leaf"><a href="/">Back to the index</a></li>
-               {% else %}
-								  {{ leftnav }}
-               {% endif %}
-							</ul>
-              </div>
-            </div>
-            <div id="main-content" class="col-xs-12 col-sm-9 col-md-8 col-xl-9">
-              <section class="section" id="DocumentationText">
-								{% if page.title %}<h1>{{ page.title }}</h1>{% endif %}
-								{% if page.advisory %}<blockquote style="border-left: 6px solid #FFD601; background: -webkit-gradient(linear, left top, left bottom, from(#FBFCFC), to(#EBEDEF));">{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %}
-              {% unless page.tree == false %}{% include read_time.html %}{% endunless %}
-							{{ content }}
-							{% if page.noratings != true %}
+
+<body ng-app="Docker" ng-controller="DockerController" class="colums">
+	<header>
+		{% if page.landing == true %}{% include global-header.html %}{% endif %} {% if page.landing != true %}{% include header.html %}{% endif %}
+	</header>
+
+	<div class="{% if page.landing == true %}wrapper{%else%}wrapper right-open{% endif %}">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-body">
+					<main class="col-content {% if page.landing == true %}main-content{%else%}content{% endif %}">
+						<section class="section">
+							{% if page.title %}
+							<h1>{{ page.title }}</h1>{% endif %} {% if page.advisory %}
+							<blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>{% endif %} {% unless page.tree == false %}{% include read_time.html %}{% endunless %} {{ content }} {% if page.noratings != true %}
 							<div style="text-align: center; margin-top: 50px">
-								<img src="/images/chat.png" alt="chat icon" style="margin-right: 10px">
-								<b>Feedback?</b> Suggestions? Can't find something in the docs?<br/>
-                {% if edit_url != "" %}
-							    <a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}" class="nomunge">Edit this page</a> <span style="color:#D8E0E0">&#9679;</span>
-                {% endif %}
-								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={{ assignee }}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }}), CC: @{{ assignee }}" class="nomunge">Request docs changes</a> <span style="color:#D8E0E0">&#9679;</span>  <a href="https://www.docker.com/docker-support-services">Get support</a> <br />Rate this page:
+								<img src="/images/chat.png" alt="chat icon" style="display:inline">
+								<b>Feedback?</b> Suggestions? Can't find something in the docs?<br/> {% if edit_url != "" %}
+								<a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}" class="nomunge">Edit this page</a> <span>&#9679;</span> {% endif %}
+								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
+												class="nomunge">Request docs changes</a> <span>&#9679;</span> <a href="https://www.docker.com/docker-support-services">Get support</a> <br />
 								<div id="pd_rating_holder_8453675"></div>
 								<script type="text/javascript">
-								PDRTJS_settings_8453675 = {
-								"id" : "8453675",
-								"unique_id" : "{{ page.path }}",
-								"title" : "{{ page.title }}",
-								"permalink" : "https://github.com/docker/docker.github.io/blob/master/{{ page.path }}"
-								};
-								(function(d,c,j){if(!document.getElementById(j)){var pd=d.createElement(c),s;pd.id=j;pd.src=('https:'==document.location.protocol)?'https://polldaddy.com/js/rating/rating.js':'http://i0.poll.fm/js/rating/rating.js';s=document.getElementsByTagName(c)[0];s.parentNode.insertBefore(pd,s);}}(document,'script','pd-rating-js'));
+									PDRTJS_settings_8453675 = {
+										"id": "8453675",
+										"unique_id": "{{ page.path }}",
+										"title": "{{ page.title }}",
+										"permalink": "https://github.com/docker/docker.github.io/blob/master/{{ page.path }}"
+									};
+									(function(d, c, j) {
+										if (!document.getElementById(j)) {
+											var pd = d.createElement(c),
+												s;
+											pd.id = j;
+											pd.src = ('https:' == document.location.protocol) ? 'https://polldaddy.com/js/rating/rating.js' : 'http://i0.poll.fm/js/rating/rating.js';
+											s = document.getElementsByTagName(c)[0];
+											s.parentNode.insertBefore(pd, s);
+										}
+									}(document, 'script', 'pd-rating-js'));
 								</script>
 							</div>
 							{% endif %}
-			       </section>
-
-						 <script language="javascript">
-						 var x = document.links.length;
-						 var baseHref = document.getElementsByTagName('base')[0].href
-						 for (i = 0; i < x; i++) {
-							 var munged = false;
-						   var thisHREF = document.links[i].href;
-							 var originalURL = "{{ page.url }}";
-							 if (thisHREF.indexOf(baseHref + "#") > -1)
-							 {
-								 // hash fix
-								 //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
-								 thisHREF = originalURL + thisHREF.replace(baseHref,"");
-								 //console.log('AFTER: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
-							 }
-						   if ((thisHREF.indexOf(window.location.hostname) > -1 || thisHREF.indexOf('http') == -1) && document.links[i].className.indexOf("nomunge")<0)
-							 {
-								munged = true;
-								thisHREF = thisHREF.replace(".md","/").replace("/index/","/");
-								document.links[i].setAttribute('href', thisHREF);
-							 }
-						 }
-						 </script>
-            </div>
-						<div class="hidden-xs hidden-sm col-md-2 col-xl-1 right_column_section">
-                <section class="section" id="RightColumnSection">
-						    <span class="title_section">
-									<div id="search-div">
-								  	<form class="search-form form-inline ng-pristine ng-valid" id="searchForm" action="/search/">
-											<input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="Search the docs" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
-											<div id="autocompleteContainer">
-			                	<div id="autocompleteResults"></div>
-			                </div>
-								      <button type="submit" class="search-submit btn btn-default">Search</button>
-								    </form>
-								  </div>
-						    </span>
-								<div id="feedback-links">
+						</section>
+					</main>
+					<nav class="col-nav">
+						<div class="sidebar{% if page.landing == true %}-home{%else%}{% endif %} hidden-sm hidden-xs">
+						{% include side-menu.html %}
+						</div>
+					</nav>
+					<div class="col-toc">
+							<div id="{% if page.landing == true %}sidebar-wrapper-home{%else%}sidebar-wrapper{% endif %}" class="{% if page.landing == true %} affix-top{%else%}sidebar-wrapper toc-nav{% endif %}" {% if page.landing == true %} data-spy="affix" data-offset-top="490"{% endif %}>
+							<div class="toc-nav">
+								<div class="feedback-links">
 									<ul>
-										{% if edit_url != "" %}<li><a href="{{ edit_url }}">&#9998;&nbsp;Edit this page</a></li>{% endif %}
-  									<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={{ assignee }}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }}), CC: @{{ assignee }}" class="nomunge">&#10003;&nbsp;Request docs changes</a></li>
-  									<li><a href="https://www.docker.com/docker-support-services">&#x0003F;&nbsp;Get support</a></li>
-  								</ul>
+										{% if edit_url != "" %}
+										<li><a href="{{ edit_url }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit this page</a></li>{% endif %}
+										<li><a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
+															class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request docs changes</a></li>
+										<li><a href="https://www.docker.com/docker-support-services"><i class="fa fa-question" aria-hidden="true"></i> Get support</a></li>
+										<!-- day/night switch
+										<li>
+											<div class="toggle-mode">
+												<div class="icon">
+													<i class="fa fa-sun-o" aria-hidden="true"></i>
+												</div>
+												<div class="toggle-switch">
+													<label class="switch">
+														<input type="checkbox" id="switch-style">
+														<div class="slider round"></div>
+												</label>
+												</div>
+												<div class="icon">
+													<i class="fa fa-moon-o" aria-hidden="true"></i>
+												</div>
+											</div>
+										</li> -->
+									</ul>
 								</div>
-								{% unless page.notoc %}
-								{% assign my_min = page.toc_min | default: site.toc_min | default: 2 %}
-								{% assign my_max = page.toc_max | default: site.toc_max | default: 3 %}
-								{% assign my_name = page.url | default: "unnamed" %}
-								{% if my_min < 2 %}
-									{% comment %}
-										the 'content' variable doesn't include the <h1> by default
-										so if we request the h1 heading to be in the in-page TOC,
-										append it to the content before we pass it to the TOC generator
-									{% endcomment %}
-									{% assign my_content = "<h1>" | append: page.title | append: "</h1>" | append: content %}
-								{% else %}
-									{% assign my_content = content %}
-								{% endif %}
-								<div id="side-toc"><div id="side-toc-title">On this page:</div><div id="side-toc-contents">{% include toc_pure_liquid.html html=my_content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name %}</div></div>
+								{% unless page.notoc %} {% assign my_min = page.toc_min | default: site.toc_min | default: 2 %} {% assign my_max = page.toc_max | default: site.toc_max | default: 3 %} {% assign my_name = page.url | default: "unnamed" %}
+									<div id="side-toc-title">On this page:</div>
+									{% include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name %}
+								</div>
 								{% endunless %}
-                </section>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="exit-off-canvas"><i class="footer_mobypadding"> </i></a> </div>
-  </div>
-  <div class="moby_footer"> <i class="bar"></i> <i class="moby"></i> </div>
-  <footer class="main_footer">
-    <div class="container">
-      <div class="top_footer">
-        <div class="row">
-          <div class="col-xs-12 col-sm-5 col-md-5 col-sm-push-3 col-md-push-3">
-            <h6>Connect</h6>
-            <p>Subscribe to our newsletter</p>
-            <div class=" newsletter">
-              <script src="/js/forms2.min.js"></script>
-              <form id="mktoForm_1038" class="ng-pristine ng-valid mktoForm mktoHasWidth mktoLayoutLeft" novalidate style="font-family: Helvetica, Arial, sans-serif; font-size: 13px; color: rgb(51, 51, 51); width: 271px;">
-                <style type="text/css">
-.mktoForm .mktoButtonWrap.mktoSimple .mktoButton {
-color:#fff;
-border:1px solid #75ae4c;
-padding:0.4em 1em;
-font-size:1em;
-background-color:#99c47c;
-background-image: -webkit-gradient(linear, left top, left bottom, from(#99c47c), to(#75ae4c));
-background-image: -webkit-linear-gradient(top, #99c47c, #75ae4c);
-background-image: -moz-linear-gradient(top, #99c47c, #75ae4c);
-background-image: linear-gradient(to bottom, #99c47c, #75ae4c);
-}
-.mktoForm .mktoButtonWrap.mktoSimple .mktoButton:hover {
-border:1px solid #447f19;
-}
-.mktoForm .mktoButtonWrap.mktoSimple .mktoButton:focus {
-outline:none;
-border:1px solid #447f19;
-}
-.mktoForm .mktoButtonWrap.mktoSimple .mktoButton:active{
-background-color:#75ae4c;
-background-image: -webkit-gradient(linear, left top, left bottom, from(#75ae4c), to(#99c47c));
-background-image: -webkit-linear-gradient(top, #75ae4c, #99c47c);
-background-image: -moz-linear-gradient(top, #75ae4c, #99c47c);
-background-image: linear-gradient(to bottom, #75ae4c, #99c47c);
-}
-</style>
-  </form>
-              <script>
-							MktoForms2.loadForm("//app-sj05.marketo.com", "929-FJL-178", 1038, function(form) {
-								form.onSuccess(function(values, followUpUrl) {
-									location.href = "https://www.docker.com/thank-you-subscribing-docker-weekly";
-									return false;
-								});
-							});
-							MktoForms2.whenReady(function(form){
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-							});
-						</script>
-            </div>
-            <ul class="social-icons">
-              <li class="facebook"><a target="_blank" href="https://www.facebook.com/docker.run">facebook</a></li>
-              <li class="google"><a target="_blank" href="https://plus.google.com/u/0/communities/108146856671494713993">google-plus</a></li>
-              <li class="github"><a target="_blank" href="https://github.com/docker/docker">github</a></li>
-              <li class="linkedin"><a target="_blank" href="https://www.linkedin.com/company/docker">linkedin</a></li>
-              <li class="youtube"><a target="_blank" href="https://www.youtube.com/user/dockerrun">youtube</a></li>
-              <li class="reddit"><a target="_blank" href="https://www.reddit.com/r/docker">reddit</a></li>
-              <li class="twitter"><a target="_blank" href="https://twitter.com/docker">twitter</a></li>
-              <li class="slideshare"><a target="_blank" href="http://www.slideshare.net/docker">slideshare</a></li>
-            </ul>
-          </div>
-          <div class="col-xs-6 col-sm-3 col-md-3 col-sm-pull-5 col-md-pull-5 sm-margin-top-40">
-            <h6>Docker</h6>
-            <ul class="menu">
-              <li class="first leaf menu-mlid-1487"><a href="/engine/getstarted/" target="_blank">Get Started</a></li>
-              <li class="leaf menu-mlid-1488"><a href="/" target="_blank">Docs</a></li>
-              <li class="leaf menu-mlid-1490"><a href="https://blog.docker.com/" target="_blank">Blog</a></li>
-              <li class="leaf menu-mlid-1491"><a href="https://training.docker.com/" target="_blank">Training</a></li>
-              <li class="last leaf menu-mlid-1492"><a href="https://www.docker.com/open-source">Open Source</a></li>
-            </ul>
-          </div>
-          <div class="col-xs-6 col-sm-4 col-md-4 sm-margin-top-40">
-            <h6>Related Links</h6>
-            <ul id="cp_links">
-              <li><a href="https://www.docker.com/cp/container-management-deployment">Container Management Deployment</a></li>
-              <li><a href="https://www.docker.com/cp/docker-and-aws">Docker And Aws</a></li>
-              <li><a href="https://www.docker.com/cp/container-management-orchestration">Container Management Orchestration</a></li>
-              <li><a href="https://www.docker.com/cp/docker-and-kubernetes">Docker And Kubernetes</a></li>
-              <li><a href="https://www.docker.com/cp/container-orchestration-engines">Container Orchestration Engines</a></li>
-            </ul>
-            <div id="block-block-5" class="block block-block"> </div>
-          </div>
-        </div>
-      </div>
-      <div class="bottom_footer">
-        <div class="footer-nav">
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-5 col-md-push-7">
-              <nav class="primary-footer-sub-nav">
-                <ul>
-                  <li><a href="https://www.docker.com/products/docker-hub">Hub</a></li>
-                  <li><a href="https://status.docker.com/">Status</a></li>
-                  <li><a href="https://www.docker.com/docker-security">Security</a></li>
-                  <li><a href="https://www.docker.com/legal">Legal</a></li>
-                  <li><a href="https://goto.docker.com/sales-inquiry.html">Contact</a></li>
-                </ul>
-              </nav>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-7 col-md-pull-5">
-              <p>Build, Ship, Run. An open platform for distributed applications for developers and sysadmins</p>
-            </div>
-          </div>
-        </div>
-        <div class="footer-copyright">
-          <p class="copyright">Copyright &copy; {{ 'now' | date: "%Y" }} Docker Inc. All rights reserved.</p>
-					<p id="site-generation">Site generated {{ site.time}}.</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <link rel="stylesheet" href="/css/github.css">
-  <script src="/js/highlight.pack.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-  <script src="/js/alljs.js"></script>
-  <script async="" src="/js/menu.js"></script>
-  <script async="" src="/js/app.js"></script>
-  <script async="" src="/js/anchorlinks.js"></script>
-	<script src="/js/hopscotch.js"></script>
-	<script src="/js/my_first_tour.js"></script>
-</div>
-<div id="mktoStyleLoaded" style="display: none; border-top-color: rgb(18, 52, 86);"></div>
-<form class="ng-pristine ng-valid mktoForm mktoHasWidth mktoLayoutLeft" novalidate style="font-family: Helvetica, Arial, sans-serif; font-size: 13px; color: rgb(51, 51, 51); visibility: hidden; position: absolute; top: -500px; left: -1000px; width: 1602px;">
-</form>
-<iframe name="mktoFormsXDIframe0.4071891359139037" id="MktoForms2XDIframe" src="/js/XDFrame.html" style="display: none;"></iframe>
-<script aria-hidden="true" type="application/x-lastpass" id="hiddenlpsubmitdiv" style="display: none;"></script><script>try{(function() { for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){ var lastpass_f = document.forms[lastpass_iter]; if(typeof(lastpass_f.lpsubmitorig2)=="undefined"){ lastpass_f.lpsubmitorig2 = lastpass_f.submit; if (typeof(lastpass_f.lpsubmitorig2)=='object'){ continue;}lastpass_f.submit = function(){ var form=this; var customEvent = document.createEvent("Event"); customEvent.initEvent("lpCustomEvent", true, true); var d = document.getElementById("hiddenlpsubmitdiv"); if (d) {for(var i = 0; i < document.forms.length; i++){ if(document.forms[i]==form){ if (typeof(d.innerText) != 'undefined') { d.innerText=i.toString(); } else { d.textContent=i.toString(); } } } d.dispatchEvent(customEvent); }form.lpsubmitorig2(); } } }})()}catch(e){}</script>
+	<footer class="footer">
+		{% include footer.html %}
+	</footer>
+	<link rel="stylesheet" href="/css/github.css">
+	<script src="/js/highlight.pack.js"></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+	</script>
+	<!-- <script src="/js/anchorlinks.js"></script> -->
+	<script defer src="/js/menu.js"></script>
+	<script src="/js/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script defer src="/js/docs.js"></script>
 </body>
+
 </html>

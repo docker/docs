@@ -4,8 +4,7 @@ description: Learn how to deploy Docker Datacenter with one click, using an Amaz
 keywords: docker, datacenter, install, orchestration, management
 ---
 
-{% assign launch_url = "https://console.aws.amazon.com/cloudformation/home?#/stacks/new?templateURL=" %}
-{% assign template_url = "https://s3.amazonaws.com/packages.docker.com/caas/docker/docker_for_aws_ddc_2.1.0.json" %}
+{% assign launch_url = "https://aws.amazon.com/marketplace/pp/B06XCFDF9K" %}
 
 Docker Datacenter on Docker for Amazon AWS is an one-click deployment of DDC on
 AWS. It deploys multiple nodes with Docker CS Engine, and then installs
@@ -119,63 +118,20 @@ Manager ephemeral storage volume type ("standard", "gp2")
 
 ## Installation
 
-There are two ways you can deploy Docker Datacenter on Docker for AWS. You can
-use the AWS Management Console (browser based), or the AWS CLI. Both have the
-above configuration options.
+To deploy Docker Datacenter on Docker for AWS, you will
+use the AWS Management Console (browser based), using the above configuration options.
 
-**1) AWS Management Console**
+**AWS Management Console**
 
 - Click on **Launch Stack** below. This link will take you to AWS cloudformation portal.
 
-	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)]({{ launch_url }}{{ template_url }}){: .with-border}
+	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)]({{ launch_url }}){: .with-border}
 
 - Confirm your AWS Region that you'd like to launch this stack in (top right corner)
 - Provide the required parameters and click **Next** (see below)
 ![console_installation.png](../images/console_installation.png){: .with-border}
 - **Confirm** and **Launch**
 - Once the stack is successfully created (it does take between 10-15 mins), click on **Output** tab to see the URLs of UCP and DTR.
-
-**2) AWS CLI**
-
-
-- Upload your Docker Datacenter license to an S3 bucket.
-- Run the following Docker container that uses `aws-cli` to launch the
-Cloudformation stack. Alternatively, if you have `aws-cli` installed you can
-run the command directly using it.
-
-  ```
-  docker run --env AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> \
-  --env AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> \
-  --env AWS_DEFAULT_REGION=<AWS_REGION> \
-  garland/aws-cli-docker aws cloudformation create-stack \
-  --stack-name <STACK_NAME> \
-  --capabilities CAPABILITY_IAM \
-  --parameters \
-  ParameterKey=KeyName,ParameterValue=<SSH_KEY_NAME> \
-  ParameterKey=InstanceType,ParameterValue=<INSTANCE_TYPE> \
-  ParameterKey=ManagerInstanceType,ParameterValue=<INSTANCE_TYPE> \
-  ParameterKey=ClusterSize,ParameterValue=<CLUSTER_SIZE> \
-  ParameterKey=ManagerSize,ParameterValue=<MANAGER_SIZE> \
-  ParameterKey=DDCUsernameSet,ParameterValue=<DDC_USERNAME> \
-  ParameterKey=DDCPasswordSet,ParameterValue=<DDC_PASSWORD> \
-  ParameterKey=EnableSystemPrune,ParameterValue=<YES OR NO> \
-  ParameterKey=ManagerDiskSize,ParameterValue=<MANAGERS_DISK_SIZE> \
-  ParameterKey=ManagerDiskType,ParameterValue=<MANAGERS_DISK_TYPE> \
-  ParameterKey=WorkerDiskSize,ParameterValue=<WORKERS_DISK_SIZE> \
-  ParameterKey=WorkerDiskType,ParameterValue=<WORKERS_DISK_TYPE> \
-  ParameterKey=License,ParameterValue=<YOUR_DDC_LICENSE_S3_URL> \
-  --template-url "{{ template_url }}"
-  ```
-
-- Once successfully created ( it does take between 10-15 mins), you can get
-stack outputs such as UCP and DTR URLs directly from CLI as follows:
-
-  ```
-  docker run --env AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> \
-  --env AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> \
-  --env AWS_DEFAULT_REGION=<AWS_REGION> \
-  garland/aws-cli-docker aws cloudformation describe-stacks --stack-name <STACK_NAME>
-  ```
 
 - To fully automate installs, you can use the [AWS Cloudformation API](http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/Welcome.html)
 

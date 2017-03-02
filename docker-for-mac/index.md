@@ -96,8 +96,12 @@ docker-machine version 0.9.0, build 15fd4c7
 
 ## Preferences
 
-Choose ![whale-x](/docker-for-mac/images/whale-x.png) --> **Preferences** from the menu bar. You
-can set the following runtime options.
+Choose ![whale-x](/docker-for-mac/images/whale-x.png) --> **Preferences** from
+the menu bar.
+
+![Docker context menu](images/menu-prefs-selected.png)
+
+You can set the following runtime options.
 
 ### General
 
@@ -348,6 +352,28 @@ to get to the Docker app downloads site.
 component of the next-generation Docker Hub, and the best place
 to find compliant, trusted commercial and free software
 distributed as Docker Images.
+
+![Docker Store](images/docker-store.png)
+
+## Docker Cloud
+
+You can access your Docker Cloud account from within Docker for Mac.
+
+![Docker Cloud](images/docker-cloud.png)
+
+From the Docker for Mac menu, sign in to Docker Cloud with your Docker ID, or
+create one.
+
+![Docker Cloud sign-in](images/menu-cloud-sign-in.png)
+
+Then use the Docker for Mac menu to create, view, or navigate directly to
+your Cloud resources:
+
+* Organizations
+* Repositories
+* Swarms
+
+Check out the [Docker Cloud topics](/docker-cloud/index.md) to learn more.
 
 ## Where to go next
 

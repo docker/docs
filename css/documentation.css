@@ -20,8 +20,8 @@
 
 .tabs>li>a {
     color: #fff;
-    border-bottom: 4px solid #254356;
     line-height: 3;
+    border: 0;
     border-radius: 0;
     padding: 0 20px 0px 20px;
     float: left;
@@ -481,8 +481,6 @@ img.with-border {
 }
 
 #feedback-links {
-  border: 1px solid #2294ca;
-  padding: 10px;
   margin-top: 20px;
   width: 100%;
 }

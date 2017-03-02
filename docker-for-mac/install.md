@@ -15,13 +15,13 @@ to the tutorials at [Learn Docker](/learn.md).
 ## Download Docker for Mac
 
 If you have not already done so, please install Docker for Mac. You can download
-installers from the stable or beta channel. For more about stable and beta
-channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-beta-channels).
+installers from the Stable or beta channel. For more about Stable and Edge
+channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
 
 <table style="width:100%">
   <tr>
     <th style="font-size: x-large; font-family: arial">Stable channel</th>
-    <th style="font-size: x-large; font-family: arial">Beta channel</th>
+    <th style="font-size: x-large; font-family: arial">Edge channel</th>
   </tr>
   <tr valign="top">
     <td width="50%">This installer is fully baked and tested, and comes
@@ -30,27 +30,27 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-beta-channels).
     default and configurable on <a href="index#daemon-experimental-mode">Docker Daemon preferences for experimental mode</a>. <br><br>This is the
     best channel to use if you want a reliable platform to work with.
     (Be sure to disable experimental features for apps in production.) <br><br>These releases follow a version schedule with a longer lead
-    time than the betas, synched with Docker Engine releases and
-    hotfixes.<br><br>On the stable channel, you can select whether to send usage
+    time than the Edge releases, synched with Docker Engine releases and
+    hotfixes.<br><br>On the Stable channel, you can select whether to send usage
     statistics and other data.
     </td>
-    <td width="50%">This installer provides the latest Beta release of
+    <td width="50%">This installer provides the latest Edge release of
     Docker for Mac, offers cutting edge features along with
     <a href="https://github.com/docker/docker/blob/master/experimental/README.md"> experimental features in Docker Engine</a>, which are enabled by
     default and configurable on <a href="index#daemon-experimental-mode">Docker Daemon preferences for experimental mode</a>. <br><br>This is the
     best channel to use if you want to experiment with features under development, and can weather some instability and bugs. This channel
-    is a continuation of the beta program, where you can provide feedback
+    is a continuation of the Edge program, where you can provide feedback
     as the apps evolve. Releases are typically more frequent than for
-    stable, often one or more per month. <br><br>We collect all usage
-    data on betas across the board.</td>
+    Stable, often one or more per month. <br><br>We collect all usage
+    data on Edge releases across the board.</td>
   </tr>
   <tr valign="top">
   <td width="50%">
-  <a class="button darkblue-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac (stable)</a><br><br>
+  <a class="button darkblue-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac (Stable)</a><br><br>
   <a href="https://download.docker.com/mac/stable/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: Docker.dmg SHA256</font></a>
   </td>
   <td width="50%">
-  <a class="button darkblue-btn" href="https://download.docker.com/mac/beta/Docker.dmg">Get Docker for Mac (beta)</a><br><br>
+  <a class="button darkblue-btn" href="https://download.docker.com/mac/beta/Docker.dmg">Get Docker for Mac (Edge)</a><br><br>
   <a href="https://download.docker.com/mac/beta/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: Docker.dmg SHA256</font></a>
   </td>
   </tr>
@@ -63,11 +63,11 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-beta-channels).
    [What to know before you install](#what-to-know-before-you-install)
    for a full explanation and list of prerequisites.
 >
-> - You can switch between beta and stable versions, but you must have only one
+> - You can switch between Edge and Stable versions, but you must have only one
    app installed at a time. Also, you will need to save images and export
    containers you want to keep before uninstalling the current version before
    installing another. For more about this, see the
-   [FAQs about beta and stable channels](faqs.md#stable-and-beta-channels).
+   [FAQs about Stable and Edge channels](faqs.md#stable-and-edge-channels).
 
 ##  What to know before you install
 
@@ -98,8 +98,8 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-beta-channels).
     Docker for Mac requires macOS Yosemite 10.10.3 or newer, with the caveat
     that going forward 10.10.x is a use-at-your-own risk proposition.
   <p />
-  - Starting with Docker for Mac stable release 1.13 (upcoming), and concurrent
-    Beta releases, we will no longer address issues specific to OS X Yosemite
+  - Starting with Docker for Mac Stable release 1.13 (upcoming), and concurrent
+    Edge releases, we will no longer address issues specific to OS X Yosemite
     10.10. In future releases, Docker for Mac could stop working on OS X Yosemite
     10.10 due to the deprecated status of this OS X version. We recommend
     upgrading to the latest version of macOS.
@@ -163,6 +163,6 @@ workarounds, how to run and submit diagnostics, and submit issues.
 
 * [FAQs](faqs.md) provides answers to frequently asked questions.
 
-* [Release Notes](release-notes.md) lists component updates, new features, and improvements associated with Stable and Beta releases.
+* [Release Notes](release-notes.md) lists component updates, new features, and improvements associated with Stable and Edge releases.
 
 * [Learn Docker](/learn.md) provides general Docker tutorials.

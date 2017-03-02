@@ -18,6 +18,28 @@ about both kinds of releases, and download stable and beta product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.03.0, 2017-03-02 (stable)
+
+**New**
+
+- Renamed to Docker Community Edition
+- Integration with Docker Cloud: control remote Swarms from the local CLI and view your repositories. This feature is going to be rolled out to all users progressively
+- Docker will now securely store your IDs in the macOS keychain
+
+**Upgrades**
+
+- [Docker 17.03.0-ce](https://github.com/docker/docker/releases/tag/v17.03.0-ce)
+- [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
+- [Docker Compose 1.11.2](https://github.com/docker/compose/releases/tag/1.11.2)
+- Linux Kernel 4.9.11
+
+**Bug fixes and minor changes**
+
+- VPNKit: fixed unmarshalling of DNS packets containing pointers to pointers to labels
+- osxfs: catch EPERM when reading extended attributes of non-files
+- Added `page_poison=1` to boot args
+- Added a new disk flushing option
+
 ### Docker for Mac 1.13.1, 2017-02-09 (stable)
 
 **Upgrades**
@@ -279,9 +301,31 @@ events or unexpected unmounts.
 * Docker Machine 0.8.0
 * Docker Compose 1.8.0
 
-## Beta Release Notes
+## Edge Release Notes
 
-### Docker Community Edition 17.03.0 Release Notes (2017-02-22 17.03.0-ce-rc1-mac1)
+### Docker Community Edition 17.03.0 Release Notes (2017-03-02 17.03.0-ce-mac1)
+
+**New**
+
+- Renamed to Docker Community Edition
+- Integration with Docker Cloud: control remote Swarms from the local CLI and view your repositories. This feature is going to be rolled out to all users progressively
+- Docker will now securely store your IDs in the macOS keychain
+
+**Upgrades**
+
+- [Docker 17.03.0-ce](https://github.com/docker/docker/releases/tag/v17.03.0-ce)
+- [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
+- [Docker Compose 1.11.2](https://github.com/docker/compose/releases/tag/1.11.2)
+- Linux Kernel 4.9.11
+
+**Bug fixes and minor changes**
+
+- VPNKit: fixed unmarshalling of DNS packets containing pointers to pointers to labels
+- osxfs: catch EPERM when reading extended attributes of non-files
+- Added `page_poison=1` to boot args
+- Added a new disk flushing option
+
+### Docker Community Edition 17.03.0 RC1 Release Notes (2017-02-22 17.03.0-ce-rc1-mac1)
 
 **New**
 

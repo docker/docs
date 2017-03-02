@@ -51,8 +51,7 @@ To create the `docker` group and add your user:
 
 Most current Linux distributions (RHEL, CentOS, Fedora, Ubuntu 16.04 and higher)
 use [`systemd`](#systemd) to manage which services start when the system boots.
-Ubuntu 14.10 and below use [`upstart`](#upstart). Oracle Linux 6 uses
-`chkconfig`.
+Ubuntu 14.10 and below use [`upstart`](#upstart).
 
 ### `systemd`
 

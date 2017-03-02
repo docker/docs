@@ -18,6 +18,29 @@ about both kinds of releases, and download stable and beta product installers at
 
 ## Stable Release Notes
 
+### Docker Community Edition 17.03.0, 2017-03-02 (stable)
+
+**New**
+
+- Renamed to Docker Community Edition
+- Integration with Docker Cloud: control remote Swarms from the local CLI and view your repositories. This feature is going to be rolled out to all users progressively
+
+**Upgrades**
+
+- [Docker 17.03.0-ce](https://github.com/docker/docker/releases/tag/v17.03.0-ce)
+- [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
+- [Docker Compose 1.11.2](https://github.com/docker/compose/releases/tag/1.11.2)
+- Linux Kernel 4.9.11
+
+**Bug fixes and minor changes**
+
+- VPNKit: fixed unmarshalling of DNS packets containing pointers to pointers to labels
+- Match Hyper-V Integration Services by ID, not name
+- Don't consume 100% CPU when the service is stopped
+- Log the diagnostic id when uploading
+- Improved Firewall handling: stop listing the rules since it can take a lot of time
+- Don't rollback to the previous engine when the desired engine fails to start
+
 ### Docker for Windows 1.13.1, 2017-02-09 (stable)
 
 **Upgrades**
@@ -267,7 +290,30 @@ We did not distribute a 1.12.4 stable release
 * Docker Machine 0.8.0
 * Docker Compose 1.8.0
 
-## Beta Release Notes
+## Edge Release Notes
+
+### Docker Community Edition 17.03.0 Release Notes (2017-03-02 17.03.0-ce-win1)
+
+**New**
+
+- Renamed to Docker Community Edition
+- Integration with Docker Cloud: control remote Swarms from the local CLI and view your repositories. This feature is going to be rolled out to all users progressively
+
+**Upgrades**
+
+- [Docker 17.03.0-ce](https://github.com/docker/docker/releases/tag/v17.03.0-ce)
+- [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
+- [Docker Compose 1.11.2](https://github.com/docker/compose/releases/tag/1.11.2)
+- Linux Kernel 4.9.11
+
+**Bug fixes and minor changes**
+
+- VPNKit: fixed unmarshalling of DNS packets containing pointers to pointers to labels
+- Match Hyper-V Integration Services by ID, not name
+- Don't consume 100% CPU when the service is stopped
+- Log the diagnostic id when uploading
+- Improved Firewall handling: stop listing the rules since it can take a lot of time
+- Don't rollback to the previous engine when the desired engine fails to start
 
 ### Docker Community Edition 17.03.0 Release Notes (2017-02-22 17.03.0-ce-rc1)
 
@@ -281,7 +327,7 @@ We did not distribute a 1.12.4 stable release
 - Docker 17.03.0-ce-rc1
 - Linux Kernel 4.9.11
 
-**Upgrades**
+**Bug fixes and minor changes**
 
 - VPNKit: Fixed unmarshalling of DNS packets containing pointers to pointers to labels
 - Match Hyper-V Integration Services by ID, not name
