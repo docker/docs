@@ -160,12 +160,11 @@ p {
 */
 
 .header {
-    animation: gradientswitch 45s infinite;
-    -webkit-animation: gradientswitch 45 sinfinite;
+    animation: gradientswitch 50s infinite;
+    -webkit-animation: gradientswitch 50 sinfinite;
     height: 500px;
     position: relative;
     z-index: 1;
-    /*overflow: hidden;*/
 }
 
 @keyframes gradientswitch {
