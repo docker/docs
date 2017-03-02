@@ -1,4 +1,4 @@
-name: Docker
+name: Docker Documentation
 markdown: kramdown
 kramdown:
   input: GFM
