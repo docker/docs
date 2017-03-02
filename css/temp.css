@@ -1,8 +1,14 @@
+
+
 /*
 *
 * this css will be integrated into master. for now testing.......
 *
 */
+code {
+  white-space: nowrap !important;
+}
+
 .toc-nav
 {
   padding-bottom: 50px !important;
