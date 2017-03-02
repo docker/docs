@@ -650,11 +650,11 @@ a.button.outline-btn {
 
 .content,
 .main-content {
-    max-width: 860px;
+    max-width: 920px;
 }
 
 .main-content {
-    padding: 15px 15px 25px 21px;
+    padding: 10px 15px 25px 10px;
 }
 
 
@@ -1179,20 +1179,21 @@ i.fa.fa-outdent {
 }
 
 .component {
-    padding: 35px 20px;
+    padding: 25px 25px;
     text-align: center;
     margin: 0 8px 15px;
     float: left;
     height: 250px;
-    width: 250px;
+    min-width: 240px;
 }
 
 .component-full {
-    padding: 10px 0 10px 20px;
+    padding: 5px 0 10px 20px;
     float: left;
     width: 100%;
-    min-height: 120px;
-    margin: 15px 0 0;
+    min-height: 100px;
+    max-width: 750px;
+    margin: 0px 0 15px 8px;
 }
 
 .component,
@@ -1310,9 +1311,9 @@ code {
 }
 
 .block {
-    float: left;
-    padding: 0px 20px 20px 16px;
-    min-width: 280px;
+    // float: left;
+    padding: 0px 15px 0 16px;
+    min-width: 255px;
 }
 
 
@@ -1791,14 +1792,6 @@ footer {
         /** temporarily hide **/
         // display: none;
     }
-    .component {
-        // padding: 9px 140px 20px;
-        text-align: center;
-        margin: 0 8px 15px;
-        float: left;
-        height: 100%;
-        width: 97%;
-    }
     // .sidebar {
     //     width: 200px;
     // }
@@ -1815,10 +1808,10 @@ footer {
         float: right;
         padding: 5px 16px 0;
     }
-    .content, .main-content {
-        max-width: 365px;
-        margin: 0 auto;
-    }
+    // .content, .main-content {
+    //     max-width: 365px;
+    //     margin: 0 auto;
+    // }
 }
 
 /*
