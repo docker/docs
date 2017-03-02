@@ -2,6 +2,7 @@
 description: Manage your Docker Cloud Applications
 keywords: applications, reference, Cloud
 title: Applications in Docker Cloud
+notoc: true
 ---
 
 Applications in Docker Cloud are usually several Services linked together using

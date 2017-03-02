@@ -64,7 +64,6 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 	<link rel="stylesheet" href="/css/temp.css"> {% seo %} {% if page.hide_from_sitemap %}
 	<meta name="robots" content="noindex" />{% endif %}
 </head>
-
 <body ng-app="Docker" ng-controller="DockerController" class="colums">
 	<header>
 		{% if page.landing == true %}{% include global-header.html %}{% endif %} {% if page.landing != true %}{% include header.html %}{% endif %}
