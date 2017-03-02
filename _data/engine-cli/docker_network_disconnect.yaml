@@ -1,11 +1,6 @@
 command: docker network disconnect
 short: Disconnect a container from a network
-long: |
-  Disconnects a container from a network.
-
-  ```bash
-  $ docker network disconnect multi-host-network container1
-  ```
+long: Disconnect a container from a network
 usage: docker network disconnect [OPTIONS] NETWORK CONTAINER
 pname: docker network
 plink: docker_network.yaml
@@ -14,3 +9,4 @@ options:
   shorthand: f
   default_value: "false"
   description: Force the container to disconnect from a network
+

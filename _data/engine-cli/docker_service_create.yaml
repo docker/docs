@@ -21,6 +21,7 @@ options:
   default_value: '[]'
   description: Set custom DNS search domains
 - option: endpoint-mode
+  default_value: vip
   description: Endpoint mode (vip or dnsrr)
 - option: env
   shorthand: e
@@ -35,13 +36,11 @@ options:
 - option: health-cmd
   description: Command to run to check health
 - option: health-interval
-  default_value: none
   description: Time between running the check (ns|us|ms|s|m|h)
 - option: health-retries
   default_value: "0"
   description: Consecutive failures needed to report unhealthy
 - option: health-timeout
-  default_value: none
   description: Maximum time to allow one check to run (ns|us|ms|s|m|h)
 - option: host
   default_value: '[]'
@@ -56,7 +55,7 @@ options:
   default_value: "0.000"
   description: Limit CPUs
 - option: limit-memory
-  default_value: 0 B
+  default_value: "0"
   description: Limit Memory
 - option: log-driver
   description: Logging driver for service
@@ -79,30 +78,28 @@ options:
 - option: publish
   shorthand: p
   description: Publish a port as a node port
+- option: read-only
+  default_value: "false"
+  description: Mount the container's root filesystem as read only
 - option: replicas
-  default_value: none
   description: Number of tasks
 - option: reserve-cpu
   default_value: "0.000"
   description: Reserve CPUs
 - option: reserve-memory
-  default_value: 0 B
+  default_value: "0"
   description: Reserve Memory
 - option: restart-condition
   description: Restart when condition is met (none, on-failure, or any)
 - option: restart-delay
-  default_value: none
   description: Delay between restart attempts (ns|us|ms|s|m|h)
 - option: restart-max-attempts
-  default_value: none
   description: Maximum number of restarts before giving up
 - option: restart-window
-  default_value: none
   description: Window used to evaluate the restart policy (ns|us|ms|s|m|h)
 - option: secret
   description: Specify secrets to expose to the service
 - option: stop-grace-period
-  default_value: none
   description: |
     Time to wait before force killing a container (ns|us|ms|s|m|h)
 - option: tty
@@ -110,7 +107,7 @@ options:
   default_value: "false"
   description: Allocate a pseudo-TTY
 - option: update-delay
-  default_value: "0"
+  default_value: 0s
   description: Delay between updates (ns|us|ms|s|m|h) (default 0s)
 - option: update-failure-action
   default_value: pause
@@ -119,7 +116,7 @@ options:
   default_value: "0"
   description: Failure rate to tolerate during an update
 - option: update-monitor
-  default_value: "0"
+  default_value: 0s
   description: |
     Duration after each task update to monitor for failure (ns|us|ms|s|m|h) (default 0s)
 - option: update-parallelism
@@ -135,3 +132,4 @@ options:
 - option: workdir
   shorthand: w
   description: Working directory inside the container
+

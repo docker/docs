@@ -2,6 +2,7 @@
 description: Microsoft Hyper-V driver for machine
 keywords: machine, Microsoft Hyper-V, driver
 title: Microsoft Hyper-V
+toc_max: 4
 ---
 
 Creates a Boot2Docker virtual machine locally on your Windows machine
@@ -66,7 +67,7 @@ Select the Virtual Switch Manager on the left-side **Actions** panel.
 
 ![Hyper-V manager](../img/hyperv-manager.png)
 
-Set up a new external network switch to use instad of DockerNAT network switch (for Moby), which is set up by default when you install Docker for Windows. (Or if you already have another network switch set up, you can use that one.)
+Set up a new external network switch to use instead of DockerNAT network switch (for Moby), which is set up by default when you install Docker for Windows. (Or if you already have another network switch set up, you can use that one.)
 
 For this example, we created a virtual switch called `Primary Virtual Switch`.
 

@@ -27,14 +27,14 @@ Control Panel and pass that to `docker-machine create` with the `--digitalocean-
 -   `--digitalocean-ssh-port`: SSH port.
 -   `--digitalocean-ssh-key-fingerprint`: Use an existing SSH key instead of creating a new one, see [SSH keys](https://developers.digitalocean.com/documentation/v2/#ssh-keys).
 
-The DigitalOcean driver will use `ubuntu-15-10-x64` as the default image.
+The DigitalOcean driver will use `ubuntu-16-04-x64` as the default image.
 
 ####  Environment variables and default values
 
 | CLI option                          | Environment variable              | Default            |
 | ----------------------------------- | --------------------------------- | ------------------ |
 | **`--digitalocean-access-token`**   | `DIGITALOCEAN_ACCESS_TOKEN`       | -                  |
-| `--digitalocean-image`              | `DIGITALOCEAN_IMAGE`              | `ubuntu-15-10-x64` |
+| `--digitalocean-image`              | `DIGITALOCEAN_IMAGE`              | `ubuntu-16-04-x64` |
 | `--digitalocean-region`             | `DIGITALOCEAN_REGION`             | `nyc3`             |
 | `--digitalocean-size`               | `DIGITALOCEAN_SIZE`               | `512mb`            |
 | `--digitalocean-ipv6`               | `DIGITALOCEAN_IPV6`               | `false`            |

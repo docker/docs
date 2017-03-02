@@ -59,7 +59,7 @@ images cannot be implemented as multiple OverlayFS layers. Instead, each image
 layer is implemented as its own directory under `/var/lib/docker/overlay`.  Hard
 links are then used as a space-efficient way to reference data shared with lower
 layers. As of Docker 1.10, image layer IDs no longer correspond to directory
-names in `/var/lib/docker/`
+names in `/var/lib/docker/`.
 
 To create a container, the `overlay` driver combines the directory representing
  the image's top layer plus a new directory for the container. The image's top
@@ -314,7 +314,7 @@ The following procedure shows you how to configure your Docker host to use
 OverlayFS. The procedure assumes that the Docker daemon is in a stopped state.
 
 > **Caution:** If you have already run the Docker daemon on your Docker host
-> and have images you want to keep, `push` them Docker Hub or your private
+> and have images you want to keep, `push` them to Docker Hub or your private
 > Docker Trusted Registry before attempting this procedure.
 
 1. If it is running, stop the Docker `daemon`.

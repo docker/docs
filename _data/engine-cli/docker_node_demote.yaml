@@ -4,3 +4,4 @@ long: Demote one or more nodes from manager in the swarm
 usage: docker node demote NODE [NODE...]
 pname: docker node
 plink: docker_node.yaml
+

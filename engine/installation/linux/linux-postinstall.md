@@ -8,11 +8,6 @@ title: Post-installation steps for Linux
 This section contains optional procedures for configuring Linux hosts to work
 better with Docker.
 
-* [Manage Docker as a non-root user](#manage-docker-as-a-non-root-user)
-* [Configure Docker to start on boot](#configure-docker-to-start-on-boot)
-* [Allow access to the remote API through a firewall](#allow-access-to-the-remote-api-through-a-firewall)
-* [Troubleshooting](#troubleshooting)
-
 ## Manage Docker as a non-root user
 
 The `docker` daemon binds to a Unix socket instead of a TCP port. By default
@@ -213,7 +208,7 @@ at `/etc/docker/daemon.json`.
 
 2.  Add a `dns` key with one or more IP addresses as values. If the file has
     existing contents, you only need to add or edit the `dns` line.
-    
+
     ```json
     {
     	"dns": ["8.8.8.8", "8.8.4.4"]
@@ -383,23 +378,6 @@ memory and a 10% overall performance degradation, even if Docker is not running.
 
 6.  Reboot your system. Memory and swap accounting are enabled and the warning
     does not occur.
-
-
-### Troubleshooting Oracle Linux
-
-#### Docker unmounts `btrfs` filesystem on shutdown
-
-If you're running Docker using the `btrfs` storage engine and you stop the Docker
-service, it unmounts the `btrfs` filesystem during the shutdown process. Ensure
-that the filesystem is mounted properly before restarting the Docker service.
-
-On Oracle Linux 7, you can use a `systemd.mount` definition and modify the
-Docker `systemd.service` to depend on the `btrfs` mount defined in `systemd`.
-
-#### SElinux support on Oracle Linux 7
-
-SElinux must be set to `Permissive` or `Disabled` in `/etc/sysconfig/selinux` to
-use the `btrfs` storage engine on Oracle Linux 7.
 
 ## Next steps
 

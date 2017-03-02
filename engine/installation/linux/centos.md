@@ -23,7 +23,14 @@ the package name `docker` instead of `docker-engine`. If you installed this
 version of Docker, remove it using the following command:
 
 ```bash
-$ sudo yum -y remove docker
+$ sudo yum -y remove docker docker-common container-selinux
+```
+
+You may also have to remove the package `docker-selinux` which conflicts with
+the official `docker-engine` package.  Remove it with the following command:
+
+```bash
+$ sudo yum -y remove docker-selinux
 ```
 
 The contents of `/var/lib/docker` are not removed, so any images, containers,
@@ -70,8 +77,8 @@ Docker from the repository.
 
 3.  **Optional**: Enable the **testing** repository. This repository is included
     in the `docker.repo` file above but is disabled by default. You can enable
-    it alongside the stable repository. Do not use unstable repositories on
-    on production systems or for non-testing workloads.
+    it alongside the stable repository. **Do not use unstable repositories on
+    on production systems or for non-testing workloads.**
 
     > **Warning**: If you have both stable and unstable repositories enabled,
     > installing or updating without specifying a version in the `yum install`
@@ -145,9 +152,13 @@ Docker from the repository.
     $ sudo yum -y install docker-engine-<VERSION_STRING>
     ```
 
-    The Docker daemon starts automatically.
+4.  Start Docker.
 
-4.  Verify that `docker` is installed correctly by running the `hello-world`
+    ```bash
+    $ sudo systemctl start docker
+    ```
+
+5.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -188,9 +199,13 @@ a new file each time you want to upgrade Docker.
     $ sudo yum -y install /path/to/package.rpm
     ```
 
-    The Docker daemon starts automatically.
+3.  Start Docker.
 
-3.  Verify that `docker` is installed correctly by running the `hello-world`
+    ```bash
+    $ sudo systemctl start docker
+    ```
+
+4.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash

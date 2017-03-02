@@ -17,148 +17,14 @@ Docker is a full development platform for creating containerized apps, and
 Docker for Windows is the best way to get started with Docker on Windows
 systems.
 
->**Already have Docker for Windows?** If you already have Docker for Windows installed, and are ready to get started, skip down to [Step 3. Check versions of
-Docker Engine, Compose, and
-Machine](#step-3-check-versions-of-docker-engine-compose-and-machine) to work
-through the rest of the Docker for Windows tour, or jump over to getting started tutorials at [Learn Docker](/learn.md).
-
-## Download Docker for Windows
-
-If you have not already done so, please install Docker for Windows. You can
-download installers from the stable or beta channel.  For more about stable and
-beta channels, see the
-[FAQs](/docker-for-windows/faqs.md#questions-about-stable-and-beta-channels).
-
-<table style="width:100%">
-  <tr>
-    <th style="font-size: x-large; font-family: arial">Stable channel</th>
-    <th style="font-size: x-large; font-family: arial">Beta channel</th>
-  </tr>
-  <tr valign="top">
-    <td width="50%">This installer is fully baked and tested, and comes
-    with the latest GA version of Docker Engine along with
-    <a href="https://github.com/docker/docker/blob/master/experimental/README.md"> experimental features in Docker Engine</a>, which are enabled
-    by default and configurable on
-    <a href="#daemon-experimental-mode">Docker Daemon settings for
-    experimental mode</a>. <br><br>This is the best channel to use if
-    you want a reliable platform to work with. (Be sure to disable
-    experimental features for apps in production.) <br><br>These releases follow a version schedule with a longer lead time than the betas,
-    synched with Docker Engine releases and hotfixes.<br><br>On the
-    stable channel, you can select whether to send usage statistics
-    and other data.
-    </td>
-    <td width="50%">This installer provides the latest Beta release of
-    Docker for Windows, offers cutting edge features along with <a href="https://github.com/docker/docker/blob/master/experimental/README.md"> experimental features in Docker Engine</a>, which are enabled
-    by default and configurable on <a href="#daemon-experimental-mode">
-    Docker Daemon settings for experimental mode</a>. <br><br>This is
-    the best channel to use if you want to experiment with features
-    under development, and can weather some instability and bugs. This
-    channel is a continuation of the beta program, where you can
-    provide feedback as the apps evolve. Releases are typically more
-    frequent than for stable, often one or more per month. <br><br>
-    We collect all usage data on betas across the board.</td>
-  </tr>
-  <tr valign="top">
-  <td width="50%">
-  <a class="button darkblue-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (stable)</a><br><br>
-  <a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: InstallDocker.msi SHA256</font></a>
-  </td>
-  <td width="50%">
-  <a class="button darkblue-btn" href="https://download.docker.com/win/beta/InstallDocker.msi">Get Docker for Windows (beta)</a><br><br>
-  <a href="https://download.docker.com/win/beta/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: InstallDocker.msi SHA256</font></a>
-  </td>
-  </tr>
-</table>
-
->**Important Notes:**
+> **Got Docker for Windows?** If you have not yet installed Docker for Windows, please see [Install Docker for Windows](install.md) for an explanation of stable
+and beta channels, system requirements, and download/install information.
 >
-> - Docker for Windows requires 64bit Windows 10 Pro, Enterprise and Education
->   (1511 November update, Build 10586 or later) and Microsoft Hyper-V. Please
->   see
->   [What to know before you install](/docker-for-windows/index.md#what-to-know-before-you-install)
->   for a full list of prerequisites.
->
-> - You can switch between beta and stable versions, but you must have only one
->   app installed at a time. Also, you will need to save images and export
->   containers you want to keep before uninstalling the current version before
->   installing another. For more about this, see the
->   [FAQs about beta and stable channels](/docker-for-windows/faqs.md#questions-about-stable-and-beta-channels).
+**Looking for system requirements?** Check out
+[What to know before you install](install.md#what-to-know-before-you-install), which has moved to the new install topic.
+{: id="what-to-know-before-you-install" }
 
-##  What to know before you install
-
-* **README FIRST for Docker Toolbox and Docker Machine users**: Docker for Windows requires Microsoft Hyper-V to run. After Hyper-V is enabled,
-VirtualBox will no longer work, but any VirtualBox VM images will remain.
-VirtualBox VMs created with `docker-machine` (including the `default` one
-typically created during Toolbox install) will no longer start. These VMs cannot
-be used side-by-side with Docker for Windows. However, you can still use
-`docker-machine` to manage remote VMs.
-<p />
-* The current version of Docker for Windows runs on 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later). In the future we will support more versions of Windows 10.
-<p />
-* Containers and images created with Docker for Windows are shared between all user accounts on machines where it is installed. This is because all
-Windows accounts will use the same VM to build and run containers. In the
-future, Docker for Windows will better isolate user content.
-<p />
-* The Hyper-V package must be enabled for Docker for Windows to work. The Docker for Windows installer will enable it for you, if needed. (This requires a
-reboot). If your system does not satisfy these requirements, you can install
-[Docker Toolbox](/toolbox/overview.md), which uses Oracle Virtual Box instead of
-Hyper-V.
-<p />
-* Virtualization must be enabled. Typically, virtualization is enabled by default. (Note that this is different from having Hyper-V enabled.) For more
-detail see [Virtualization must be
-enabled](troubleshoot.md#virtualization-must-be-enabled) in Troubleshooting.
-<p />
-* Nested virtualization scenarios, such as running Docker for Windows
-on a VMWare or Parallels instance, might work, but come with no
-guarantees (i.e., not officially supported). For more information, see
-[Running Docker for Windows in nested virtualization scenarios](troubleshoot.md#running-docker-for-windows-in-nested-virtualization-scenarios)
-<p />
-* **What the Docker for Windows install includes**: The installation provides [Docker Engine](/engine/userguide/intro.md), Docker CLI client, [Docker Compose](/compose/overview.md), and [Docker Machine](/machine/overview.md).
-
-### About Windows containers and Windows Server 2016
-
-Looking for information on using Windows containers?
-
-* [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
-provides a tutorial on how to set up and run Windows containers on Windows 10 or
-with Windows Server 2016. It shows you how to use a MusicStore application with
-Windows containers.
-<p />
-* [Setup - Windows Server 2016 (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/Setup-Server2016.md) specifically describes environment setup.
-<p />
-* [Switch between Windows and Linux containers](#switch-between-windows-and-linux-containers) describes the Linux / Windows containers toggle in Docker for Windows and points you to the tutorial mentioned above.
-<p />
-* Docker Container Platform for Windows Server 2016 [articles and blog posts](https://www.docker.com/microsoft/) on the Docker website
-
-## Step 1. Install Docker for Windows
-
-1. Double-click `InstallDocker.msi` to run the installer.
-
-    If you haven't already downloaded the installer (`InstallDocker.msi`), you can get it [**here**](https://download.docker.com/win/stable/InstallDocker.msi). It typically downloads to your `Downloads folder`, or you can run it from the recent downloads bar at the bottom of your web browser.
-
-2. Follow the install wizard to accept the license, authorize the installer, and proceed with the install.
-
-    You will be asked to authorize `Docker.app` with your system password during the install process. Privileged access is needed to install networking components, links to the Docker apps, and manage the Hyper-V VMs.
-
-3. Click **Finish** on the setup complete dialog to launch Docker.
-
-    ![Install complete>](/docker-for-windows/images/installer-finishes.png)
-
-## Step 2. Start Docker for Windows
-
-When the installation finishes, Docker starts automatically.
-
-The whale in the status bar indicates that Docker is running, and accessible from a terminal.
-
-If you just installed the app, you also get a popup success message with suggested next steps, and a link to this documentation.
-
-![Install success](/docker-for-windows/images/win-install-success-popup.png)
-
-When initialization is complete, select **About Docker** from the notification area icon to verify that you have the latest version.
-
-Congratulations! You are up and running with Docker for Windows.
-
-## Step 3. Check versions of Docker Engine, Compose, and Machine
+## Check versions of Docker Engine, Compose, and Machine
 
 Start your favorite shell (`cmd.exe`, PowerShell, or other) to check your versions of `docker` and `docker-compose`, and verify the installation.
 
@@ -171,7 +37,7 @@ Start your favorite shell (`cmd.exe`, PowerShell, or other) to check your versio
       PS C:\Users\jdoe> docker-machine --version
       docker-machine version 0.8.0, build b85aac1
 
-## Step 4. Explore the application and run examples
+## Explore the application and run examples
 
 The next few steps take you through some examples. These are just suggestions for ways to experiment with Docker on your system, check version information, and make sure `docker` commands are working properly.
 
@@ -358,9 +224,7 @@ The next few steps take you through some examples. These are just suggestions fo
     want to keep some images around so that you don't have to pull them again
     from Docker Hub. To remove an image you no longer need, use `docker rmi` followed by an image ID or image name. For example, `docker rmi nginx`.
 
-**Want more example applications?** - For more example walkthroughs that include
-setting up services and databases with Docker Compose, see
-[Example Applications](/docker-for-windows/examples.md).
+**Want more example applications?** [Learn Docker](/learn.md) is a great place to start.
 
 ## Set up tab completion in PowerShell
 
@@ -400,15 +264,18 @@ PowerShell Module as follows.
     command to a `$PROFILE` by typing these commands at the PowerShell prompt.
 
     ```none
-    Install-Module -Scope CurrentUser posh-docker -Force
-    Add-Content $PROFILE "`nInstall-Module posh-docker"
+    if (-Not (Test-Path $PROFILE)) {
+        New-Item $PROFILE –Type File –Force
+    }
+
+    Add-Content $PROFILE "`nImport-Module posh-docker"
     ```
 
     This creates a `$PROFILE` if one does not already exist, and adds this line
     into the file:
 
     ```none
-    Install-Module posh-docker
+    Import-Module posh-docker
     ```
 
     To check that the file was properly created, or simply edit it manually,
@@ -464,12 +331,9 @@ perform a factory reset.
   diagnostics, crash reports, and usage data. This information can help Docker
   improve the application and get more context for troubleshooting problems.
 
-  Uncheck any of the options to opt out and prevent auto-send of data. Docker
-  may prompt for more information in some cases, even with auto-send enabled.
-  Also, you can enable or disable these auto-reporting settings with one click
-  on the information popup when you first start Docker.
-
-  ![Startup information](/docker-for-windows/images/win-install-success-popup.png)
+  Uncheck any of the options to opt out and prevent auto-send of
+  data. Docker may prompt for more information in some cases,
+  even with auto-send enabled.
 
 ### Shared Drives
 
@@ -668,9 +532,11 @@ Linux VM.
 
 ### Switch between Windows and Linux containers
 
-Starting with Beta 26 and Stable 1.13.0, you can select which daemon (Linux or Windows) the Docker
+You can select which daemon (Linux or Windows) the Docker
 CLI talks to. Select **Switch to Windows containers** to toggle to Windows
 containers. Select **Switch to Linux containers**.
+
+![Windows-Linux container types switch](images/config-popup-win-linux-switch.png)
 
 Microsoft Developer Network has preliminary/draft information on Windows
 containers
@@ -706,6 +572,9 @@ If you are interested in working with Windows containers, here are some guides t
   > you can test and leverage the example walkthroughs now, if you want to start
   > experimenting. Please checking back as the lab evolves.
 
+* This troubleshooting issue is useful for understanding how to connect to Windows containers from the local host:
+[Limitations of Windows containers for `localhost` and published ports](troubleshoot.md#limitations-of-windows-containers-for-localhost-and-published-ports)
+
 #### About the Docker Windows containers specific dialogs
 
 When you switch to Windows containers, the Settings panel updates to show only
@@ -740,11 +609,20 @@ forum](https://forums.docker.com/c/docker-for-windows).
 To report bugs or problems, log on to [Docker for Windows issues on
 GitHub](https://github.com/docker/for-win/issues), where you can review
 community reported issues, and file new ones. As a part of reporting issues on
-GitHub, we can help you troubleshoot the log data. See the [Diagnose and
-Feedback](#diagnose-and-feedback) topic below.
+GitHub, we can help you troubleshoot the log data. See the
+[Diagnose and Feedback](#diagnose-and-feedback) topic below.
 
 To give feedback on the documentation or update it yourself, use the Feedback
 options at the bottom of each docs page.
+
+### Docker Store
+
+Choose **Docker Store** from the Docker for Windows menu
+to get to the Docker app downloads site.
+[Docker store](https://store.docker.com/) is a
+component of the next-generation Docker Hub, and the best place
+to find compliant, trusted commercial and free software
+distributed as Docker Images.
 
 ### Diagnose and Feedback
 

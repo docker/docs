@@ -3,10 +3,11 @@ description: Home page for Docker's documentation
 keywords: Docker, documentation, manual, guide, reference, api
 layout: docs
 title: Docker Documentation
+notoc: true
 ---
 
-Docker packages your app with its dependencies, freeing you from worrying about your
-system configuration, and making your app more portable.
+Docker packages your app with its dependencies, freeing you from worrying about
+your system configuration, and making your app more portable.
 
 <table>
 <tr valign="top">
@@ -14,9 +15,9 @@ system configuration, and making your app more portable.
 {% capture basics %}
 ### Learn the basics of Docker
 
-The basic tutorial introduces Docker concepts, tools, and commands. The examples show you how to build, push,
-and pull Docker images, and run them as containers. This
-tutorial stops short of teaching you how to deploy applications.
+The basic tutorial introduces Docker concepts, tools, and commands. The examples
+show you how to build, push, and pull Docker images, and run them as containers.
+This tutorial stops short of teaching you how to deploy applications.
 {% endcapture %}{{ basics | markdownify }}
 </td>
 <td width="50%">
@@ -24,9 +25,10 @@ tutorial stops short of teaching you how to deploy applications.
 {% capture apps %}
 ### Define and deploy applications
 
-The define-and-deploy tutorial shows how to relate
-containers to each other and define them as services in an application that is ready to deploy at scale in a
-production environment. Highlights [Compose Version 3 new features](/engine/getstarted-voting-app/index.md#compose-version-3-features-and-compatibility) and swarm mode.
+The define-and-deploy tutorial shows how to relate containers to each other and
+define them as services in an application that is ready to deploy at scale in a
+production environment. Highlights Compose Version 3 new features and swarm
+mode.
 {% endcapture %}{{ apps | markdownify }}
 
 </td></tr>
@@ -38,8 +40,6 @@ production environment. Highlights [Compose Version 3 new features](/engine/gets
 </td>
 </tr>
 </table>
-
-{% include content/typical_docker_workflow.md %}
 
 ## Components
 
@@ -122,11 +122,11 @@ production environment. Highlights [Compose Version 3 new features](/engine/gets
 </li>
 <li>
 <div class="media_image">
-	<a href="/datacenter/dtr/2.1/guides/index.md"><img src="/images/icon-registry@2X.png" alt="Docker Trusted Registry"></a>
+	<a href="/datacenter/dtr/2.2/guides/"><img src="/images/icon-registry@2X.png" alt="Docker Trusted Registry"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/datacenter/dtr/2.1/guides/index.md">Docker Trusted Registry</a></h3>
+	<h3><a href="/datacenter/dtr/2.2/guides/">Docker Trusted Registry</a></h3>
 		<p>
     (DTR) stores and signs your images.</p>
 	</div>
@@ -134,11 +134,11 @@ production environment. Highlights [Compose Version 3 new features](/engine/gets
 </li>
 <li>
 <div class="media_image">
-	<a href="/datacenter/ucp/2.0/guides/index.md"><img src="/images/icon-ucp@2X.png" alt="Docker Universal Control Plane"></a>
+	<a href="/datacenter/ucp/2.1/guides/index.md"><img src="/images/icon-ucp@2X.png" alt="Docker Universal Control Plane"></a>
 </div>
 	<div class="media_content">
 	<div data-mh="mh_docker_projects">
-	<h3><a href="/datacenter/ucp/2.0/guides/index.md">Docker Universal Control Plane</a></h3>
+	<h3><a href="/datacenter/ucp/2.1/guides/index.md">Docker Universal Control Plane</a></h3>
 		<p>
     (UCP) Manage a cluster of on-premises Docker hosts as if they were a single machine.
     </p>

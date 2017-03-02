@@ -1,20 +1,6 @@
 command: docker volume
 short: Manage volumes
-long: |
-  The `docker volume` command has subcommands for managing data volumes. A data
-  volume is a specially-designated directory that by-passes storage driver
-  management.
-
-  Data volumes persist data independent of a container's life cycle. When you
-  delete a container, the Engine daemon does not delete any data volumes. You can
-  share volumes across multiple containers. Moreover, you can share data volumes
-  with other computing resources in your system.
-
-  To see help for a subcommand, use:
-
-      docker volume CMD help
-
-  For full details on using docker volume visit Docker's online documentation.
+long: Manage volumes
 usage: docker volume COMMAND
 pname: docker
 plink: docker.yaml
@@ -30,3 +16,4 @@ clink:
 - docker_volume_ls.yaml
 - docker_volume_prune.yaml
 - docker_volume_rm.yaml
+

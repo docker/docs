@@ -8,7 +8,10 @@ options:
 - option: filter
   shorthand: f
   description: Filter output based on conditions provided
+- option: format
+  description: Pretty-print services using a Go template
 - option: quiet
   shorthand: q
   default_value: "false"
   description: Only display IDs
+

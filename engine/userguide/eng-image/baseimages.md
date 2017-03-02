@@ -59,22 +59,22 @@ Assuming you built the "hello" executable example [from the Docker GitHub exampl
 
 NOTE: Because Docker for Mac and Docker for Windows use a Linux VM, you must compile this code using a Linux toolchain to end up with a Linux binary. Not to worry, you can quickly pull down a Linux image and a build environment and build within it:
 
-    $ docker run --rm -it -v $PWD:/build ubuntu:16:04
-    container# apt-get install build-essential
+    $ docker run --rm -it -v $PWD:/build ubuntu:16.04
+    container# apt-get update && apt-get install build-essential
     container# cd /build
-    container# gcc -o hello -static hello.c
+    container# gcc -o hello -static -nostartfiles hello.c
 
-Then you can run it (on Linux, Mac, or Windows) using: `docker run hello`
+Then you can run it (on Linux, Mac, or Windows) using: `docker run --rm hello`
 
 This example creates the hello-world image used in the tutorials.
-If you want to test it out, you can clone [the image repo](https://github.com/docker-library/hello-world)
+If you want to test it out, you can clone [the image repo](https://github.com/docker-library/hello-world).
 
 
 ## More resources
 
-There are lots more resources available to help you write your 'Dockerfile`.
+There are lots more resources available to help you write your `Dockerfile`.
 
 * There's a [complete guide to all the instructions](../../reference/builder.md) available for use in a `Dockerfile` in the reference section.
 * To help you write a clear, readable, maintainable `Dockerfile`, we've also
-written a [`Dockerfile` Best Practices guide](dockerfile_best-practices.md).
+written a [`Dockerfile` best practices guide](dockerfile_best-practices.md).
 * If your goal is to create a new Official Repository, be sure to read up on Docker's [Official Repositories](/docker-hub/official_repos/).

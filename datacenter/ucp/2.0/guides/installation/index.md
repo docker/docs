@@ -91,7 +91,7 @@ If you don't have a license yet, [learn how to get a free trial license](license
 Skip this step if you don't want UCP to be highly available.
 
 To make your Docker swarm and UCP fault-tolerant and highly available, you can
-join more manager nodes to your it. Manager nodes are the nodes in the swarm
+join more manager nodes to it. Manager nodes are the nodes in the swarm
 that perform the orchestration and swarm management tasks, and dispatch tasks
 for worker nodes to execute.
 [Learn more about high-availability](../high-availability/index.md).

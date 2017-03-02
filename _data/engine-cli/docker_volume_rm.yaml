@@ -12,7 +12,8 @@ options:
   shorthand: f
   default_value: "false"
   description: Force the removal of one or more volumes
-example: |2
+examples: |2
 
   $ docker volume rm hello
   hello
+

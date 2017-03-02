@@ -1,0 +1,14 @@
+{% assign topicFound="false" %}
+{% for section in site.data.toc.horizontalnav %}
+  {% assign activeCSS = "" %}
+  {% if topicFound=="false" %}
+    {% assign tree = site.data.toc[section.node] %}
+    {% capture thisSection %}{% include tree.html %}{% endcapture %}
+    {% if section.path == page.url or thisSection contains "active currentPage" %}
+      {% capture leftnav %}{{ thisSection }}{% endcapture %}
+      {% capture activeCSS %} class="active"{% endcapture %}
+      {% assign topicFound="true" %}
+    {% endif %}
+  {% endif %}
+  <li id="{{ section.node }}"{{ activeCSS }}><a href="{{ section.path }}">{{ section.title }}</a></li>
+{% endfor %}

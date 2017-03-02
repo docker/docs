@@ -9,17 +9,29 @@ title: Docker for Mac release notes
 Here are the main improvements and issues per release, starting with the current
 release. The documentation is always updated for each release.
 
-For system requirements, please see the Getting Started topic on [What to know
-before you install](index.md#what-to-know-before-you-install).
+For system requirements, please see
+[What to know before you install](install.md#what-to-know-before-you-install).
 
 Release notes for _stable_ and _beta_ releases are listed below. You can learn
 about both kinds of releases, and download stable and beta product installers at
-[Download Docker for Mac](index.md#download-docker-for-mac).
-
-* [Stable Release Notes](release-notes.md#stable-release-notes)
-* [Beta Release Notes](release-notes.md#beta-release-notes)
+[Download Docker for Mac](install.md#download-docker-for-mac).
 
 ## Stable Release Notes
+
+### Docker for Mac 1.13.1, 2017-02-09 (stable)
+
+**Upgrades**
+
+- [Docker 1.13.1](https://github.com/docker/docker/releases/tag/v1.13.1)
+- [Docker Compose 1.11.1](https://github.com/docker/compose/releases/tag/1.11.1)
+- Linux kernel 4.9.8
+
+**Bug fixes and minor changes**
+
+- Add link to experimental features
+- New 1.13 cancellable operations should now be properly handled by the Docker for desktop
+- `daemon.json` should render nicely in the UI
+- Allow to reset faulty `daemon.json` through a link in advanced subpanel
 
 ### Docker for Mac 1.13.0, 2017-01-19 (stable)
 
@@ -268,6 +280,60 @@ events or unexpected unmounts.
 * Docker Compose 1.8.0
 
 ## Beta Release Notes
+
+### Docker Community Edition 17.03.0 Release Notes (2017-02-22 17.03.0-ce-rc1-mac1)
+
+**New**
+
+- Introduce Docker Community Edition
+- Integration with Docker Cloud to control remote Swarms from the local CLI and view your repositories. This feature will be rolled out to all users progressively
+- Docker will now use keychain access to secure your IDs
+
+**Upgrades**
+
+- Docker 17.03.0-ce-rc1
+- Linux Kernel 4.9.11
+
+**Bug fixes and minor changes**
+
+- VPNKit: fixed unmarshalling of DNS packets containing pointers to pointers to labels
+- osxfs: catch EPERM when reading extended attributes of non-files
+- Added `page_poison=1` to boot args
+- Added a new disk flushing option
+
+### Beta 41 Release Notes (2017-02-07-2017-1.13.1-rc2-beta41)
+
+**Upgrades**
+
+- Docker 1.13.1-rc2
+- [Docker Compose 1.11.0-rc1](https://github.com/docker/compose/releases/tag/1.11.0-rc1)
+- Linux kernel 4.9.8
+
+**Bug fixes and minor improvements**
+
+- VPNKit: set the Recursion Available bit on DNS responses from the cache
+- Don’t use port 4222 inside the Linux VM
+
+### Beta 40 Release Notes (2017-01-31 1.13.1-rc1-beta40)
+
+**Upgrades**
+
+- [Docker 1.13.1-rc1](https://github.com/docker/docker/releases/tag/v1.13.1-rc1)
+- Linux kernel 4.9.6
+
+**New**
+
+- Allow to reset faulty `daemon.json` through a link in advanced subpanel
+- Add link to experimental features
+- Hide restart button in settings window
+- Increase the maximum number of vCPUs to 64
+
+**Bug fixes and minor improvements**
+
+- VPNKit: Avoid diagnostics to capture too much data
+- VPNKit: Fix a source of occasional packet loss (truncation) on the virtual ethernet link
+- HyperKit: Dump guest physical and linear address from VMCS when dumping state
+- HyperKit: Kernel boots with `panic=1` arg
 
 ### Beta 39 Release Notes (2017-01-26 1.13.0-beta39)
 

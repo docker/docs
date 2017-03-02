@@ -212,7 +212,7 @@ If not, the command will print `kern.hv_support: 0`.
 See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
 in the Apple documentation, and Docker for Mac system requirements in [What to
-know before you install](index.md#what-to-know-before-you-install).
+know before you install](install.md#what-to-know-before-you-install).
 
 
 ### Workarounds for common problems

@@ -17,3 +17,4 @@ options:
   shorthand: v
   default_value: "false"
   description: Remove the volumes associated with the container
+

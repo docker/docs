@@ -37,7 +37,7 @@ Logging Driver: json-file
 When you start a container, you can configure it to use a different logging
 driver than the Docker daemon's default. If the logging driver has configurable
 options, you can set them using one or more instances of the
-`--log-opt <NAME>-<VALUE>` flag. Even if the container uses the default logging
+`--log-opt <NAME>=<VALUE>` flag. Even if the container uses the default logging
 driver, it can use different configurable options.
 
 To find the current logging driver for a running container, if the daemon
@@ -160,7 +160,7 @@ The following logging options are supported for the `syslog` logging driver:
 
 | Option               | Description              | Example value                             |
 |----------------------|--------------------------|-------------------------------------------|
-| `syslog-address`     | The address of an external `syslog` server. The URI specifier may be `[tcp|udp|tcp+tls]://host:port`, `unix://path`, or `unixgram://path`. If the transport is `tcp`, `udp`, or `tcp+tls`, the default port is `514`.| `--log-opt syslog-address=tcp+tls://192.168.1.3:514`, `--log-opt syslog-address=///tmp/syslog.sock` |
+| `syslog-address`     | The address of an external `syslog` server. The URI specifier may be `[tcp|udp|tcp+tls]://host:port`, `unix://path`, or `unixgram://path`. If the transport is `tcp`, `udp`, or `tcp+tls`, the default port is `514`.| `--log-opt syslog-address=tcp+tls://192.168.1.3:514`, `--log-opt syslog-address=unix:///tmp/syslog.sock` |
 | `syslog-facility`    | The `syslog` facility to use. Can be the number or name for any valid `syslog` facility. See the [syslog documentation](https://tools.ietf.org/html/rfc5424#section-6.2.1). | `--log-opt syslog-facility=daemon` |
 | `syslog-tls-ca-cert` | The absolute path to the trust certificates signed by the CA. **Ignored if the address protocol is not `tcp+tls`.** | `--log-opt syslog-tls-ca-cert=/etc/ca-certificates/custom/ca.pem` |
 | `syslog-tls-cert`    | The absolute path to the TLS certificate file. **Ignored if the address protocol is not `tcp+tls`**. | `--log-opt syslog-tls-cert=/etc/ca-certificates/custom/cert.pem` |
@@ -281,7 +281,7 @@ $ docker run -dit \
 ```
 
 For detailed information on working with the `fluentd` logging driver, see
-[the fluentd logging driver](fluentd.md)
+[the fluentd logging driver](fluentd.md).
 
 
 ## `awslogs`
@@ -417,7 +417,7 @@ $ docker run --log-driver=gcplogs \
 ```
 
 For detailed information about working with the Google Cloud logging driver, see
-the [Google Cloud Logging driver](gcplogs.md). reference documentation.
+the [Google Cloud Logging driver](gcplogs.md) reference documentation.
 
 ## NATS logging options
 

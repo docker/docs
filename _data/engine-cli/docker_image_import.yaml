@@ -12,3 +12,4 @@ options:
 - option: message
   shorthand: m
   description: Set commit message for imported image
+

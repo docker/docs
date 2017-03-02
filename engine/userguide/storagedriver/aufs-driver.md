@@ -111,7 +111,7 @@ nodev   aufs
 This output indicates the system supports AUFS. If you get no output, your system does
 not support AUFS. To address this:
 
-- Upgrade your host system's kernel to 3.13 or higher. It is recommended to intall the
+- Upgrade your host system's kernel to 3.13 or higher. It is recommended to install the
   kernel headers when you upgrade.
 
 - **Ubuntu or Debian**: In addition to updating the kernel if necessary, install the
@@ -176,7 +176,7 @@ The `/var/lib/docker/aufs/layers/` directory contains metadata about how image
 layers are stacked. This directory contains one file for every image or
 container layer on the Docker host (though file names no longer match image
 layer IDs). Inside each file are the names of the directories that exist below
-it in the stack
+it in the stack.
 
 The command below shows the contents of a metadata file in
 `/var/lib/docker/aufs/layers/` that lists the three directories that are
@@ -213,7 +213,7 @@ longer correspond to directory names. However, the containers thin writable
 layer still exists here and is stacked by AUFS as the top writable layer
 and is where all changes to the container are stored. The directory exists even
  if the container is stopped. This means that restarting a container will not
-lose changes made to it. Once a container is deleted, it's thin writable layer
+lose changes made to it. Once a container is deleted, its thin writable layer
 in this directory is deleted.
 
 ## AUFS and Docker performance

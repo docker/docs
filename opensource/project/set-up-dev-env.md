@@ -178,6 +178,13 @@ can take over 15 minutes to complete.
    background process. You'll find these options useful when debugging code
    development.
 
+   > **Note**: The following command automates the `build`,
+   > `install`, and `run` steps above.
+
+   ```none
+   hack/make.sh binary install-binary run
+   ```
+
 9. Inside your container, check your Docker version.
 
    ```none

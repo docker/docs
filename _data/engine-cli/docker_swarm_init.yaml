@@ -11,6 +11,9 @@ options:
   default_value: "false"
   description: |
     Enable manager autolocking (requiring an unlock key to start a stopped manager)
+- option: availability
+  default_value: active
+  description: Availability of the node (active/pause/drain)
 - option: cert-expiry
   default_value: 2160h0m0s
   description: Validity period for node certificates (ns|us|ms|s|m|h)
@@ -34,3 +37,4 @@ options:
 - option: task-history-limit
   default_value: "5"
   description: Task history retention limit
+

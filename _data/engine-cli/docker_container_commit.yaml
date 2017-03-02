@@ -19,3 +19,4 @@ options:
   shorthand: p
   default_value: "true"
   description: Pause container during commit
+

@@ -94,7 +94,7 @@ container. Note that this is what you have to do even on Linux if the container
 is on an overlay network, not a bridge network, as these are not routed.
 
 The command to run the `nginx` webserver shown in [Getting
-Started](index.md#explore) is an example of this.
+Started](index.md#explore-the-application-and-run-examples) is an example of this.
 
 ```shell
 docker run -d -p 80:80 --name webserver nginx
@@ -112,7 +112,7 @@ container to random ports on the host.
 
 		docker run -d -P --name webserver nginx
 
-See the [run commmand](/engine/reference/commandline/run.md) for more details on
+See the [run command](/engine/reference/commandline/run.md) for more details on
 publish options used with `docker run`.
 
 #### A view into implementation

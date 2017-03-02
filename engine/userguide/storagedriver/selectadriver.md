@@ -67,8 +67,8 @@ backing filesystem:
 
 |Storage driver |Commonly used on |Disabled on                                         |
 |---------------|-----------------|----------------------------------------------------|
-|`overlay`      |`ext4` `xfs`     |`btrfs` `aufs` `overlay` `overlay2` `zfs` `eCryptfs`|
-|`overlay2`     |`ext4` `xfs`     |`btrfs` `aufs` `overlay` `overlay2` `zfs` `eCryptfs`|
+|`overlay`      |`ext4` `xfs`     |`btrfs` `aufs` `overlay` `zfs` `eCryptfs`|
+|`overlay2`     |`ext4` `xfs`     |`btrfs` `aufs` `overlay` `zfs` `eCryptfs`|
 |`aufs`         |`ext4` `xfs`     |`btrfs` `aufs` `eCryptfs`                           |
 |`btrfs`        |`btrfs` _only_   |   N/A                                              |
 |`devicemapper` |`direct-lvm`     |   N/A                                              |

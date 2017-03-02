@@ -8,8 +8,10 @@ title: Install Docker from binaries
 > a dynamically-linked Docker package for your Linux distribution.
 
 If you want to try Docker or use it in a testing environment, but you're not on
-a supported platform, you can try installing from static binaries.
-**This is strongly discouraged in production environments.**
+a supported platform, you can try installing from static binaries. If possible,
+you should use packages built for your operating system, and use your operating
+system's package management system to manage Docker installation and upgrades.
+Be aware that 32-bit static binary archives do not include the Docker daemon.
 
 Static binaries for the Docker daemon binary are only available for Linux (as
 `dockerd`) and Windows Server 2016 or Windows 10 (as `dockerd.exe`). Static
@@ -38,7 +40,11 @@ meets the prerequisites:
   [#3485](https://github.com/docker/docker/issues/3485),
   [#4568](https://github.com/docker/docker/issues/4568)).
 
-#### Enable AppArmor and SELinux when possible
+#### Secure your environment as much as possible
+
+##### OS considerations
+
+Enable SELinux or AppArmor if possible.
 
 It is recommended to use AppArmor or SELinux if your Linux distribution supports
 either of the two. This helps improve security and blocks certain
@@ -49,6 +55,14 @@ instructions for enabling and configuring AppArmor or SELinux.
 > If either of the security mechanisms is enabled, do not disable it as a
 > work-around to make Docker or its containers run. Instead, configure it
 > correctly to fix any problems.
+
+##### Docker daemon considerations
+
+- Enable `seccomp` security profiles if possible. See
+  [Enabling `seccomp` for Docker](/engine/security/seccomp.md).
+
+- Enable user namespaces if possible. See the
+  [Daemon user namespace options](/engine/reference/commandline/dockerd/#/daemon-user-namespace-options).
 
 ### Install static binaries
 
@@ -85,7 +99,6 @@ instructions for enabling and configuring AppArmor or SELinux.
 
     If you need to start the daemon with additional options, modify the above
     command accordingly.
->>>>>>> c02c644... Rewrite and reorganize Linux install instructions
 
 5.  Verify that Docker is installed correctly by running the `hello-world`
     image.
@@ -143,7 +156,7 @@ The macOS binary includes the Docker client only. It does not include the
     container runs, it prints an informational message and exits.
 
 
-## Install server and binaries on Windows
+## Install server and client binaries on Windows
 
 You can install Docker from binaries on Windows Server 2016 or Windows 10.
 

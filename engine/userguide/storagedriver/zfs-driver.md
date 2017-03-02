@@ -41,9 +41,9 @@ This simple relationship is shown in the diagram below.
 ![](images/zfs_clones.jpg)
 
 The solid line in the diagram shows the process flow for creating a clone. Step
- 1 creates a snapshot of the filesystem, and step two creates the clone from
+ 1 creates a snapshot of the filesystem, and step 2 creates the clone from
 the snapshot. The dashed line shows the relationship between the clone and the
-filesystem, via the snapshot. All three ZFS datasets draw space form the same
+filesystem, via the snapshot. All three ZFS datasets draw space from the same
 underlying zpool.
 
 On Docker hosts using the `zfs` storage driver, the base layer of an image is a
@@ -247,7 +247,7 @@ Once ZFS is installed and loaded, you're ready to configure ZFS for Docker.
     The procedure for starting the Docker daemon may differ depending on the
     Linux distribution you are using. It is possible to force the Docker daemon
     to start with the `zfs` storage driver by passing the
-    `--storage-driver=zfs`flag to the `dockerd` command, or to the
+    `--storage-driver=zfs` flag to the `dockerd` command, or to the
     `DOCKER_OPTS` line in the Docker config file.
 
 6. Verify that the daemon is using the `zfs` storage driver.
@@ -314,12 +314,6 @@ The following generic performance best practices also apply to ZFS.
 storage media such as solid state devices (SSD). However, if you only have a
 limited amount of SSD storage available it is recommended to place the ZIL on
 SSD.
-
-- **Use Data Volumes**. Data volumes provide the best and most predictable
-performance. This is because they bypass the storage driver and do not incur
-any of the potential overheads introduced by thin provisioning and
-copy-on-write. For this reason, you should place heavy write workloads on data
-volumes.
 
 ## Limiting your container's writable storage quota
 

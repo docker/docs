@@ -64,7 +64,7 @@ hour. To run the test suite, do the following:
 
 1.  Open a terminal on your local host.
 
-2.  Change to the root your Docker repository.
+2.  Change to the root of your Docker repository.
 
     ```bash
     $ cd docker-fork
@@ -91,7 +91,7 @@ hour. To run the test suite, do the following:
 
     It can take approximate one hour to run all the tests. The time depends
     on your host performance. The default timeout is 60 minutes, which is
-    defined in hack/make.sh(${TIMEOUT:=60m}). You can modify the timeout
+    defined in `hack/make.sh`(`${TIMEOUT:=60m}`). You can modify the timeout
     value on the basis of your host performance. When they complete
     successfully, you see the output concludes with something like this:
 
@@ -242,7 +242,7 @@ make any changes, just run these commands again.
 
 The Docker documentation source files are in a centralized repository at
 [https://github.com/docker/docker.github.io](https://github.com/docker/docker.github.io). The content is
-written using extended Markdown, which you can edit in a plain text editor such
+written using extended Markdown, which you can edit in a plain text editor such as 
 Atom or Notepad. The docs are built using [Jekyll](https://jekyllrb.com/).
 
 Most documentation is developed in the centralized repository. The exceptions are

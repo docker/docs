@@ -1,9 +1,10 @@
 ---
 description: Instructions for installing Docker on Debian
-keywords: Docker, Docker documentation, requirements, apt, installation, debian, install, uninstall, upgrade, update
+keywords: Docker, Docker documentation, requirements, apt, installation, debian, raspbian, install, uninstall, upgrade, update
 redirect_from:
 - /engine/installation/debian/
-title: Get Docker for Debian
+- /engine/installation/linux/raspbian/
+title: Get Docker for Debian or Raspbian
 ---
 
 To get started with Docker on Debian, make sure you
@@ -14,10 +15,11 @@ To get started with Docker on Debian, make sure you
 
 ### OS requirements
 
-To install Docker, you need the 64-bit version of one of these Debian versions:
+To install Docker, you need the 64-bit version of one of these Debian or
+Raspbian versions:
 
 - Stretch (testing)
-- Jessie 8.0 (LTS)
+- Jessie 8.0 (LTS) / Raspbian Jessie
 - Wheezy 7.7 (LTS)
 
 #### Extra steps for Wheezy 7.7
@@ -33,16 +35,6 @@ To install Docker, you need the 64-bit version of one of these Debian versions:
 
 - Enable the `backports` repository. See the
   [Debian documentation](https://backports.debian.org/Instructions/){: target="_blank" class"_"}.
-
-### Recommended extra packages
-
-You need `curl` if you don't have it.
-
-```bash
-$ sudo apt-get update
-
-$ sudo apt-get install curl
-```
 
 ## Install Docker
 
@@ -74,51 +66,65 @@ Docker from the repository.
     **Jessie or Stretch**:
 
     ```bash
-    $ sudo apt-get install apt-transport-https \
-                           ca-certificates \
-                           software-properties-common
+    $ sudo apt-get install -y --no-install-recommends \
+         apt-transport-https \
+         ca-certificates \
+         curl \
+         software-properties-common
     ```
 
     **Wheezy**:
 
     ```bash
-    $ sudo apt-get install apt-transport-https \
-                           ca-certificates \
-                           python-software-properties
+    $ sudo apt-get install -y --no-install-recommends \
+         apt-transport-https \
+         ca-certificates \
+         curl \
+         python-software-properties
     ```
 
 2.  Add Docker's official GPG key:
 
     ```bash
-    $ curl -fsSL https://yum.dockerproject.org/gpg | sudo apt-key add -
+    $ curl -fsSL https://apt.dockerproject.org/gpg | sudo apt-key add -
     ```
-
-    > **Note**: The URL is correct, even for Linux distributions that use `APT`.
 
     Verify that the key ID is `58118E89F3A912897C070ADBF76221572C52609D`.
 
     ```bash
-    $ apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
+    $ sudo apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
 
       pub   4096R/2C52609D 2015-07-14
             Key fingerprint = 5811 8E89 F3A9 1289 7C07  0ADB F762 2157 2C52 609D
       uid                  Docker Release Tool (releasedocker) <docker@docker.com>
     ```
 
-3.  Use the following command to set up the **stable** repository. To also
-    enable the **testing** repository, add the words `testing` after `main` on
-    the last line.
-    **Do not use these unstable repositories on production systems or for non-testing workloads.**
+3.  Use the following command to set up the **stable** repository.
 
-    ```bash
-    $ sudo add-apt-repository \
-           "deb https://apt.dockerproject.org/repo/ \
-           debian-$(lsb_release -cs) \
-           main"
-    ```
+    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
+    > Debian distribution, such as `jessie`.
 
-    To disable the `testing` repository, you can edit `/etc/apt/sources.list`
-    and remove the word `testing` from the appropriate line in the file.
+    - **Debian**:
+
+      ```bash
+      $ sudo add-apt-repository \
+             "deb https://apt.dockerproject.org/repo/ \
+             debian-$(lsb_release -cs) \
+             main"
+      ```
+
+    - **Raspbian**:
+
+      ```bash
+      $ sudo add-apt-repository \
+             "deb https://apt.dockerproject.org/repo/ \
+             raspbian-$(lsb_release -cs) \
+             main"
+      ```
+
+    To enable the `testing` repository, you can edit `/etc/apt/sources.list`
+    and add the word `testing` after `main` on the appropriate line of the file.
+    **Do not use unstable repositories on production systems or for non-testing workloads.**
 
 #### Install Docker
 
@@ -166,7 +172,11 @@ Docker from the repository.
     $ sudo apt-get -y install docker-engine=<VERSION_STRING>
     ```
 
-    The Docker daemon starts automatically.
+    On Debian, the Docker daemon starts automatically. On Raspbian, start Docker:
+
+    ```bash
+    $ sudo service docker start
+    ```
 
 4.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
@@ -197,7 +207,7 @@ a new file each time you want to upgrade Docker.
 
 1.  Go to [https://apt.dockerproject.org/repo/pool/main/d/docker-engine/](https://apt.dockerproject.org/repo/pool/main/d/docker-engine/)
     and download the `.deb` file for the Docker version you want to install and
-    for your version of Debian.
+    for your version of Debian or Raspbian.
 
     > **Note**: To install a testing version, change the word `main` in the
     > URL to `testing`. Do not use unstable versions of Docker in production
@@ -210,7 +220,11 @@ a new file each time you want to upgrade Docker.
     $ sudo dpkg -i /path/to/package.deb
     ```
 
-    The Docker daemon starts automatically.
+    On Debian, the Docker daemon starts automatically. On Raspbian, start Docker:
+
+    ```bash
+    $ sudo service docker start
+    ```
 
 3.  Verify that `docker` is installed correctly by running the `hello-world`
     image.

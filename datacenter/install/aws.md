@@ -4,13 +4,15 @@ description: Learn how to deploy Docker Datacenter with one click, using an Amaz
 keywords: docker, datacenter, install, orchestration, management
 ---
 
-Docker Datacenter on Docker for AWS is a one-click deploy of highly-scalable
-Docker Datacenter (Universal Control Plane and Docker Trusted Registry) based
-on Docker and AWS best-practices. It is based on
-[Docker for AWS](https://beta.docker.com/docs/) and currently should be used
-for evaluation purposes only.
+{% assign launch_url = "https://console.aws.amazon.com/cloudformation/home?#/stacks/new?templateURL=" %}
+{% assign template_url = "https://s3.amazonaws.com/packages.docker.com/caas/docker/docker_for_aws_ddc_2.1.0.json" %}
 
-![ucp.png](../images/d4a_ddc_arch.png)
+Docker Datacenter on Docker for Amazon AWS is an one-click deployment of DDC on
+AWS. It deploys multiple nodes with Docker CS Engine, and then installs
+highly available versions of Universal Control Plane and Docker Trusted
+Registry.
+
+![ddc_aws.svg](/images/ddc_aws.svg)
 
 ## How it Works
 
@@ -89,6 +91,31 @@ Docker Datacenter Password
 Docker Datacenter License in JSON format or an S3 URL to download it. You can
 get a trial license [here](https://store.docker.com/bundles/docker-datacenter)
 
+**EnableSystemPrune**
+
+Enable if you want Docker for AWS to automatically cleanup unused space on your swarm nodes.
+
+When enabled, `docker system prune` will run staggered every day, starting at 1:42AM UTC on both workers and managers. The prune times are staggered slightly so that not all nodes will be pruned at the same time. This limits resource spikes on the swarm.
+
+Pruning removes the following:
+- All stopped containers
+- All volumes not used by at least one container
+- All dangling images
+- All unused networks
+
+**WorkerDiskSize**
+Size of Workers's ephemeral storage volume in GiB (20 - 1024).
+
+**WorkerDiskType**
+Worker ephemeral storage volume type ("standard", "gp2").
+
+**ManagerDiskSize**
+Size of Manager's ephemeral storage volume in GiB (20 - 1024)
+
+**ManagerDiskType**
+Manager ephemeral storage volume type ("standard", "gp2")
+
+
 
 ## Installation
 
@@ -100,11 +127,11 @@ above configuration options.
 
 - Click on **Launch Stack** below. This link will take you to AWS cloudformation portal.
 
-	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=DockerDatacenter&templateURL=https://s3-us-west-2.amazonaws.com/ddc-on-aws-public/aws/aws-v1.12.3-cs4-beta12-ddc.json)
+	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)]({{ launch_url }}{{ template_url }}){: .with-border}
 
 - Confirm your AWS Region that you'd like to launch this stack in (top right corner)
 - Provide the required parameters and click **Next** (see below)
-![console_installation.png](../images/console_installation.png)
+![console_installation.png](../images/console_installation.png){: .with-border}
 - **Confirm** and **Launch**
 - Once the stack is successfully created (it does take between 10-15 mins), click on **Output** tab to see the URLs of UCP and DTR.
 
@@ -131,8 +158,13 @@ run the command directly using it.
   ParameterKey=ManagerSize,ParameterValue=<MANAGER_SIZE> \
   ParameterKey=DDCUsernameSet,ParameterValue=<DDC_USERNAME> \
   ParameterKey=DDCPasswordSet,ParameterValue=<DDC_PASSWORD> \
+  ParameterKey=EnableSystemPrune,ParameterValue=<YES OR NO> \
+  ParameterKey=ManagerDiskSize,ParameterValue=<MANAGERS_DISK_SIZE> \
+  ParameterKey=ManagerDiskType,ParameterValue=<MANAGERS_DISK_TYPE> \
+  ParameterKey=WorkerDiskSize,ParameterValue=<WORKERS_DISK_SIZE> \
+  ParameterKey=WorkerDiskType,ParameterValue=<WORKERS_DISK_TYPE> \
   ParameterKey=License,ParameterValue=<YOUR_DDC_LICENSE_S3_URL> \
-  --template-url https://s3-us-west-2.amazonaws.com/ddc-on-aws-public/aws/aws-v1.12.3-cs4-beta12-ddc.json
+  --template-url "{{ template_url }}"
   ```
 
 - Once successfully created ( it does take between 10-15 mins), you can get
@@ -150,9 +182,9 @@ stack outputs such as UCP and DTR URLs directly from CLI as follows:
 
 ## Software Versions
 
-- Docker Commercially Supported Engine: `1.12.3-cs4`
-- UCP: `2.0.1`
-- DTR: `2.1.0`
+- Docker Commercially Supported Engine: `1.13.1-cs1`
+- UCP: `2.1.0`
+- DTR: `2.2.0`
 
 ## System containers
 Each node will have a few system containers running on them to help run your swarm cluster. In order for everything to run smoothly, please keep those containers running, and don't make any changes. If you make any changes, we can't guarantee that Docker for AWS will work correctly.
@@ -181,15 +213,16 @@ which is a highly optimized AMI built specifically for running Docker on AWS
 Once the stack is successfully created, you can access UCP and DTR URLs in the
 output tab as follows:
 
-![insecure.png](../images/output.png)
+![insecure.png](../images/output.png){: .with-border}
 
 When accessing UCP and DTR, log in using the username and password that you
 provided when you launched the cloudformation stack. You should see the below
 landing pages:
 
 
-![ucp.png](../images/ucp.png)
-![dtr.png](../images/dtr.png)
+![ucp.png](../images/ucp.png){: .with-border}
+
+![dtr.png](../images/dtr.png){: .with-border}
 
 > Note: During the installation process, a self-signed certificate is generated
 for both UCP and DTR. You can replace these certificates with your own
@@ -269,11 +302,11 @@ provides multiple advantages to easily deploy and access your application.
     ```
     b. Notice the updated ELB configuration:
 
-    ![elb_listeners_update.png](../images/elb_listeners_update.png)
+    ![elb_listeners_update.png](../images/elb_listeners_update.png){: .with-border}
 
     c. Access your application using **DefaultExternalTarget** DNS and published port:
 
-    ![app.png](../images/app.png)
+    ![app.png](../images/app.png){: .with-border}
 
 
 2.  **Swarm Mode Routing Mesh**
@@ -306,18 +339,9 @@ provides multiple advantages to easily deploy and access your application.
     docker service create -p 8080 \
       --network ucp-hrm \
       --name demo-hrm-app \
-      --label com.docker.ucp.mesh.http=8080=http://foo.example.com \
+      --label com.docker.ucp.mesh.http.8080=external_route=http://foo.example.com,internal_port=8080 \
       ehazlett/docker-demo:dcus
     ```
-
-    > Note: There is currently a caveat with HRM and Docker Datacenter running on
-    AWS. Before enabling the feature, you need to create a new network named
-    `ucp-hrm`. Please go to **Resources** > **Networks** > **Create Network** and
-    use the below info before clicking **Create**. Once you create the network,
-    you can enable HRM.
-
-    ![create_ucp_hrm_network.png](../images/create_ucp_hrm.png)
-
 
 #### Non-Swarm Mode Container Based Applications
 
@@ -358,12 +382,12 @@ created when filling out the CloudFormation template for Docker for AWS.
 Once you find it, click the checkbox, next to the name. Then Click on the
 "Edit" button on the lower detail pane.
 
-![console_installation.png](../images/autoscale_update.png)
+![console_installation.png](../images/autoscale_update.png){: .with-border}
 
 Change the "Desired" field to the size of the worker pool that you would like,
 and hit "Save".
 
-![console_installation.png](../images/autoscale_save.png)
+![console_installation.png](../images/autoscale_save.png){: .with-border}
 
 This will take a few minutes and add the new workers to your swarm
 automatically. To lower the number of workers back down, you just need to
@@ -375,7 +399,7 @@ Go to the CloudFormation management page, and click the checkbox next to the
 stack you want to update. Then Click on the action button at the top, and
 select "Update Stack".
 
-![console_installation.png](../images/cloudformation_update.png)
+![console_installation.png](../images/cloudformation_update.png){: .with-border}
 
 Pick "Use current template", and then click "Next". Fill out the same parameters
 you have specified before, but this time, change your worker count to the new

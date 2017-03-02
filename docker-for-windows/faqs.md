@@ -13,7 +13,7 @@ technical support for various subscription levels, and more.
 **Q: How do I get the stable or beta version of Docker for Windows?**
 
 A: Use the download links for the channels given in the topic
-[Download Docker for Windows](/docker-for-windows/index.md#download-docker-for-windows).
+[Download Docker for Windows](/docker-for-windows/install.md#download-docker-for-windows).
 
 This topic also has more information about the two channels.
 
@@ -168,10 +168,9 @@ For more about sharing local drives with containers using Docker for Windows,
 see [Shared Drives](/docker-for-windows/index.md#shared-drives) in the Getting
 Started topic.
 
-To learn more about using Docker for Windows and Docker Machine, see [What to
-know before you install](index.md#what-to-know-before-you-install) in the
-Getting Started topic. For more about Docker Machine itself, see [What is Docker
-Machine?](/machine/overview.md#what-is-docker-machine)
+To learn more about using Docker for Windows and Docker Machine, see
+[What to know before you install](install.md#what-to-know-before-you-install) in the Getting Started topic. For more about Docker Machine itself, see
+[What is Docker Machine?](/machine/overview.md#what-is-docker-machine)
 
 ### How do I run Windows containers on Docker on Windows Server 2016?
 

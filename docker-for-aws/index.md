@@ -7,6 +7,68 @@ redirect_from:
 - /engine/installation/amazon/
 ---
 
+{% include d4a_buttons.md %}
+
+## Quickstart
+
+If your account [has the proper
+permissions](/docker-for-aws/iam-permissions.md), you can
+use the blue button from the stable or beta channel to bootstrap Docker for AWS
+using CloudFormation. For more about stable and beta channels, see the
+[FAQs](/docker-for-aws/faqs.md#stable-and-beta-channels).
+
+
+<table style="width:100%">
+  <tr>
+    <th style="font-size: x-large; font-family: arial">Stable channel</th>
+    <th style="font-size: x-large; font-family: arial">Beta channel</th>
+  </tr>
+  <tr valign="top">
+    <td width="50%">This deployment is fully baked and tested, and comes with the latest GA version of Docker Engine. <br><br>This is the best channel to use if you want a reliable platform to work with. <br><br>These releases follow a version schedule with a longer lead time than the betas, synched with Docker Engine releases and hotfixes.
+    </td>
+    <td width="50%">This deployment offers cutting edge features and comes with the experimental version of Docker Engine, described in the <a href="https://github.com/docker/docker/tree/master/experimental">Docker Experimental Features README</a> on GitHub.<br><br>This is the best channel to use if you want to experiment with features under development, and can weather some instability and bugs. This channel is a continuation of the beta program, where you can provide feedback as the apps evolve. Releases are typically more frequent than for stable, often one or more per month. <br><br>We collect usage data on betas across the board.</td>
+  </tr>
+  <tr valign="top">
+  <td width="50%">
+  {{aws_blue_latest}}
+  </td>
+  <td width="50%">
+  {{aws_blue_edge}}
+  </td>
+  </tr>
+  <tr valign="top">
+  <td width="50%">
+  </td>
+  <td width="50%">
+  {{aws_blue_vpc_edge}}
+  </td>
+  </tr>
+</table>
+
+## Deployment options
+
+There are two ways to deploy Docker for AWS:
+
+- With a pre-existing VPC
+- With a new VPC created by Docker
+
+We recommend allowing Docker for AWS to create the VPC since it allows Docker to optimize the environment. Installing in an existing VPC requires more work.
+
+### Create a new VPC
+This approach creates a new VPC, subnets, gateways and everything else needed in order to run Docker for AWS. It is the easiest way to get started, and requires the least amount of work.
+
+All you need to do is run the CloudFormation template, answer some questions, and you are good to go.
+
+### Install with an Existing VPC
+If you need to install Docker for AWS with an existing VPC, you need to do a few preliminary steps. See [recommended VPC and Subnet setup](faqs.md#recommended-vpc-and-subnet-setup) for more details.
+
+1. Pick a VPC in a region you want to use.
+
+2. Make sure the selected VPC is setup with an Internet Gateway, Subnets, and Route Tables
+
+3. You need to have three different subnets, ideally each in their own availability zone. If you are running in a region with only two Availability Zones, you will need to add more than one subnet into one of the availability zones. For production deployments we recommend only deploying to regions that have three or more Availability Zones.
+
+4. When you launch the docker for AWS CloudFormation stack, make sure you use the one for existing VPCs. This template will prompt you for the VPC and subnets that you want to use for Docker for AWS.
 
 ## Prerequisites
 
@@ -103,7 +165,7 @@ Elastic Load Balancers (ELBs) are set up to help with routing traffic to your sw
 
 Docker for AWS automatically configures logging to Cloudwatch for containers you run on Docker for AWS. A Log Group is created for each Docker for AWS install, and a log stream for each container.
 
-`docker logs` and `docker service logs` are not supported on Docker for AWS. Instead, you should check container in CloudWatch.
+The `docker logs` and `docker service logs` commands are not supported on Docker for AWS when using Cloudwatch for logs. Instead, check container logs in CloudWatch.
 
 ## System containers
 

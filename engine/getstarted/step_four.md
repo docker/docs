@@ -155,7 +155,7 @@ each message means.
     was created by this step. Each line in a Dockerfile corresponds to a layer
     in the image. Your ID will be different.
 
-3.  Docker starts up temporary container running the `whalesay` image (the
+3.  Docker starts up a temporary container running the `whalesay` image (the
     `Running in` line below). In the temporary container, Docker runs the next
     command in the Dockerfile, which is the `RUN` command, which installs the
     `fortune` command. This generates a lot of lines of output, just like you

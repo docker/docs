@@ -11,24 +11,11 @@ for managing the swarm and storing the swarm state. It is important to
 understand some key features of manager nodes in order to properly deploy and
 maintain the swarm.
 
-This article covers the following swarm administration tasks:
-
-* [Using a static IP for manager node advertise address](#use-a-static-ip-for-manager-node-advertise-address)
-* [Adding manager nodes for fault tolerance](#add-manager-nodes-for-fault-tolerance)
-* [Distributing manager nodes](#distribute-manager-nodes)
-* [Running manager-only nodes](#run-manager-only-nodes)
-* [Backing up the swarm state](#back-up-the-swarm-state)
-* [Monitoring the swarm health](#monitor-swarm-health)
-* [Troubleshooting a manager node](#troubleshoot-a-manager-node)
-* [Forcefully removing a node](#force-remove-a-node)
-* [Recovering from disaster](#recover-from-disaster)
-* [Forcing the swarm to rebalance](#forcing-the-swarm-to-rebalance)
-
 Refer to [How nodes work](/engine/swarm/how-swarm-mode-works/nodes.md)
 for a brief overview of Docker Swarm mode and the difference between manager and
 worker nodes.
 
-## Operating manager nodes in a swarm
+## Operate manager nodes in a swarm
 
 Swarm manager nodes use the [Raft Consensus Algorithm](/engine/swarm/raft.md) to manage the
 swarm state. You only need to understand some general concepts of Raft in
@@ -45,7 +32,7 @@ Raft requires a majority of managers, also called the quorum, to agree on
 proposed updates to the swarm, such as node additions or removals. Membership
 operations are subject to the same constraints as state replication.
 
-### Maintaining the quorum of managers
+### Maintain the quorum of managers
 
 If the swarm loses the quorum of managers, the swarm cannot perform management
 tasks. If your swarm has multiple managers, always have more than two. In order
@@ -63,7 +50,7 @@ updated.
 See [Recovering from losing the quorum](#recovering-from-losing-the-quorum) for
 troubleshooting steps if you do lose the quorum of managers.
 
-## Use a static IP for manager node advertise address
+## Configure the manager to advertise on a static IP address
 
 When initiating a swarm, you have to specify the `--advertise-addr` flag to
 advertise your address to other manager nodes in the swarm. For more
@@ -107,7 +94,7 @@ While it is possible to scale a swarm down to a single manager node, it is
 impossible to demote the last manager node. This ensures you maintain access to
 the swarm and that the swarm can still process requests. Scaling down to a
 single manager is an unsafe operation and is not recommended. If
-the last node leaves the swarm unexpetedly during the demote operation, the
+the last node leaves the swarm unexpectedly during the demote operation, the
 swarm will become unavailable until you reboot the node or restart with
 `--force-new-cluster`.
 
@@ -115,7 +102,7 @@ You manage swarm membership with the `docker swarm` and `docker node`
 subsystems. Refer to [Add nodes to a swarm](/engine/swarm/join-nodes.md) for more information
 on how to add worker nodes and promote a worker node to be a manager.
 
-## Distribute manager nodes
+### Distribute manager nodes
 
 In addition to maintaining an odd number of manager nodes, pay attention to
 datacenter topology when placing managers. For optimal fault-tolerance, distribute
@@ -131,7 +118,7 @@ available to process requests and rebalance workloads.
 | 7                   |                  3-2-2                 |
 | 9                   |                  3-3-3                 |
 
-## Run manager-only nodes
+### Run manager-only nodes
 
 By default manager nodes also act as a worker nodes. This means the scheduler
 can assign tasks to a manager node. For small and non-critical swarms
@@ -154,18 +141,15 @@ When you drain a node, the scheduler reassigns any tasks running on the node to
 other available worker nodes in the swarm. It also prevents the scheduler from
 assigning tasks to the node.
 
-## Back up the swarm state
+## Add worker nodes for load balancing
 
-Docker manager nodes store the swarm state and manager logs in the following
-directory:
-
-```bash
-/var/lib/docker/swarm/raft
-```
-
-Back up the `raft` data directory often so that you can use it in case of
-[disaster recovery](#recover-from-disaster). Then you can take the `raft`
-directory of one of the manager nodes to restore to a new swarm.
+[Add nodes to the swarm](/engine/swarm/join-nodes.md) to balance your swarm's
+load. Replicated service tasks will be distributed across the swarm as evenly as
+possible over time, as long as the worker nodes are matched to the requirements
+of the services. When limiting a service to run on only specific types of nodes,
+such as nodes with a specific number of CPUs or amount of memory, remember that
+worker nodes that do not meet these requirements will not be able to run these
+tasks.
 
 ## Monitor swarm health
 
@@ -232,12 +216,14 @@ To cleanly re-join a manager node to a cluster:
 For more information on joining a manager node to a swarm, refer to
 [Join nodes to a swarm](/engine/swarm/join-nodes.md).
 
-## Force remove a node
+## Forcibly remove a node
 
-In most cases, you should shut down a node before removing it from a swarm with the `docker node rm` command. If a node becomes unreachable, unresponsive, or compromised you can forcefully remove the node without shutting it down by passing the `--force` flag. For instance, if `node9` becomes compromised:
+In most cases, you should shut down a node before removing it from a swarm with
+the `docker node rm` command. If a node becomes unreachable, unresponsive, or
+compromised you can forcefully remove the node without shutting it down by
+passing the `--force` flag. For instance, if `node9` becomes compromised:
 
-<!-- bash hint breaks block quote -->
-```
+```none
 $ docker node rm node9
 
 Error response from daemon: rpc error: code = 9 desc = node node9 is not down and can't be removed
@@ -249,9 +235,88 @@ Node node9 removed from swarm
 
 Before you forcefully remove a manager node, you must first demote it to the
 worker role. Make sure that you always have an odd number of manager nodes if
-you demote or remove a manager
+you demote or remove a manager.
+
+## Back up the swarm
+
+Docker manager nodes store the swarm state and manager logs in the
+`/var/lib/docker/swarm/` directory. In 1.13 and higher, this data includes the
+keys used to encrypt the Raft logs. Without these keys, you will not be able
+to restore the swarm.
+
+You can back up the swarm using any manager. Use the following procedure.
+
+1.  If the swarm has auto-lock enabled, you will need the unlock key in order
+    to restore the swarm from backup. Retrieve the unlock key if necessary and
+    store it in a safe location. If you are unsure, read
+    [Lock your swarm to protect its encryption key](/engine/swarm/swarm_manager_locking.md).
+
+2.  Stop Docker on the manager before backing up the data, so that no data is
+    being changed during the backup. It is possible to take a backup while the
+    manager is running (a "hot" backup), but this is not recommended and your
+    results will be less predictable when restoring. While the manager is down,
+    other nodes will continue generating swarm data that will not be part of
+    this backup.
+
+    > **Note**: Be sure to maintain the quorum of swarm managers. During the
+    > time that a manager is shut down, your swarm is more vulnerable to
+    > losing the quorum if further nodes are lost. The number of managers you
+    > run is a trade-off. If you regularly take down managers to do backups,
+    > consider running a 5-manager swarm, so that you can lose an additional
+    > manager while the backup is running, without disrupting your services.
+
+3.  Back up the entire `/var/lib/docker/swarm` directory.
+
+4.  Restart the manager.
+
+To restore, see [Restore from a backup](#restore-from-a-backup).
 
 ## Recover from disaster
+
+### Restore from a backup
+
+After backing up the swarm as described in
+[Back up the swarm](#back-up-the-swarm), use the following procedure to
+restore the data to a new swarm.
+
+1.  Shut down Docker on the target host machine where the swarm will be restored.
+
+3.  Remove the contents of the `/var/lib/docker/swarm` directory on the new
+    swarm.
+
+4.  Restore the `/var/lib/docker/swarm` directory with the contents of the
+    backup.
+
+    > **Note**: The new node will use the same encryption key for on-disk
+    > storage as the old one. It is not possible to change the on-disk storage
+    > encryption keys at this time.
+    >
+    > In the case of a swarm with auto-lock enabled, the unlock key is also the
+    > same as on the old swarm, and the unlock key will be needed to
+    > restore.
+
+5.  Start Docker on the new node. Unlock the swarm if necessary. Re-initialize
+    the swarm using the following command, so that this node does not attempt
+    to connect to nodes that were part of the old swarm, and presumably no
+    longer exist.
+
+    ```bash
+    $ docker swarm init --force-new-cluster
+    ```
+
+6.  Verify that the state of the swarm is as expected. This may include
+    application-specific tests or simply checking the output of
+    `docker service ls` to be sure that all expected services are present.
+
+7.  If you use auto-lock,
+    [rotate the unlock key](/engine/swarm/swarm_manager_locking.md#rotate-the-unlock-key).
+
+8.  Add manager and worker nodes to bring your new swarm up to operating
+    capacity.
+
+9.  Reinstate your previous backup regimen on the new swarm.
+
+### Recover from losing the quorum
 
 Swarm is resilient to failures and the swarm can recover from any number
 of temporary node failures (machine reboots or crash with restart) or other
@@ -268,8 +333,6 @@ operational and in communication with each other. In other words, the swarm can
 tolerate up to `(N-1)/2` permanent failures beyond which requests involving
 swarm management cannot be processed. These types of failures include data
 corruption or hardware failures.
-
-### Recovering from losing the quorum
 
 If you lose the quorum of managers, you cannot administer the swarm. If you have
 lost the quorum and you attempt to perform any management operation on the swarm,
@@ -300,7 +363,7 @@ re-add  manager nodes to achieve your previous task distribution and ensure that
 you have enough managers to maintain high availability and prevent losing the
 quorum.
 
-## Forcing the swarm to rebalance
+## Force the swarm to rebalance
 
 Generally, you do not need to force the swarm to rebalance its tasks. When you
 add a new node to a swarm, or a node reconnects to the swarm after a

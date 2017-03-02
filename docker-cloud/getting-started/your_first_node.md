@@ -11,13 +11,13 @@ In this step you'll create your first node (inside a node cluster) on Docker Clo
 
 After you link your Docker Cloud account with your hosts (either your own hosts or one or more cloud providers), the next step is to launch your first node.
 
-When launching a node you'll actually be creating a _node clusters_. Node clusters are groups of nodes of the same type and from the same cloud provider, and they allow you to scale the infrastructure by provisioning more nodes with a drag of a slider.
+When launching a node you'll actually be creating a _node cluster_. Node clusters are groups of nodes of the same type and from the same cloud provider, and they allow you to scale the infrastructure by provisioning more nodes with a drag of a slider.
 
  To start, go to the **Nodes** section and click **Create**.
 
 ![](images/first_node.png)
 
-Enter the information for each node:
+Enter the following:
 
   -   **Name**: name for the node cluster. This can contain alphanumeric characters, dashes and underscores.
   -   **Deploy tags**: (optional) these are used to limit what can be deployed on the specific cluster. Read more about deployment tags [here](../apps/deploy-tags.md).

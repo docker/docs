@@ -41,3 +41,4 @@ options:
     Swap limit equal to memory plus swap: '-1' to enable unlimited swap
 - option: restart
   description: Restart policy to apply when a container exits
+

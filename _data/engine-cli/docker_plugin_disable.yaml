@@ -1,6 +1,12 @@
 command: docker plugin disable
 short: Disable a plugin
 long: Disable a plugin
-usage: docker plugin disable PLUGIN
+usage: docker plugin disable [OPTIONS] PLUGIN
 pname: docker plugin
 plink: docker_plugin.yaml
+options:
+- option: force
+  shorthand: f
+  default_value: "false"
+  description: Force the disable of an active plugin
+

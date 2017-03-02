@@ -5,16 +5,18 @@ kramdown:
   html_to_native: true
   hard_wrap: false
   syntax_highlighter: rouge
+  toc_levels: 2..3
 incremental: true
 permalink: pretty
 safe: false
 lsi: false
 url: https://docs.docker.com
-keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11"]
+keep_files: ["v1.4", "v1.5", "v1.6", "v1.7", "v1.8", "v1.9", "v1.10", "v1.11", "v1.12"]
 
 gems:
   - jekyll-redirect-from
   - jekyll-seo-tag
+  - jekyll-relative-links
 
 webrick:
   headers:
@@ -29,6 +31,9 @@ defaults:
       layout: docs
       defaultassignee: johndmulhausen
       enginebranch: 1.13.x
+      toc_min: 2
+      toc_max: 3
+      tree: true
   - scope:
       path: "compose"
     values:
@@ -44,7 +49,7 @@ defaults:
   - scope:
       path: "docker-cloud"
     values:
-      assignee: "sanscontext"
+      assignee: "londoncalling"
   - scope:
       path: "docker-for-mac"
     values:
@@ -56,7 +61,7 @@ defaults:
   - scope:
       path: "docker-hub"
     values:
-      assignee: "sanscontext"
+      assignee: "johndmulhausen"
   - scope:
       path: "docker-store"
     values:
@@ -91,8 +96,22 @@ defaults:
       assignee: "londoncalling"
   -
     scope:
+      path: "datacenter"
+    values:
+      ucp_latest_image: "docker/ucp:2.1.0"
+      dtr_latest_image: "docker/dtr:2.2.2"
+  -
+    scope:
+      path: "datacenter/dtr/2.2"
+    values:
+      ucp_version: "2.1"
+      dtr_version: "2.2"
+      docker_image: "docker/dtr:2.2.2"
+  -
+    scope:
       path: "datacenter/dtr/2.1"
     values:
+      hide_from_sitemap: true
       ucp_version: "2.0"
       dtr_version: "2.1"
   -
@@ -104,10 +123,19 @@ defaults:
       dtr_version: "2.0"
   -
     scope:
+      path: "datacenter/ucp/2.1"
+    values:
+      ucp_version: "2.1"
+      dtr_version: "2.2"
+      docker_image: "docker/ucp:2.1.0"
+  -
+    scope:
       path: "datacenter/ucp/2.0"
     values:
+      hide_from_sitemap: true
       ucp_version: "2.0"
       dtr_version: "2.1"
+      docker_image: "docker/ucp:2.0.3"
   -
     scope:
       path: "datacenter/ucp/1.1"

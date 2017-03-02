@@ -151,6 +151,8 @@ containers](../engine/tutorials/dockervolumes.md).
 
    The number should increment.
 
+>**Tip:** You can list local images with `docker image ls` and inspect them with `docker inspect <tag or id>`. Listing images at this point should return `redis` and `web`.
+
 
 ## Step 5: Update the application
 

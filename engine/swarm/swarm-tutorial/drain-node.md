@@ -2,6 +2,7 @@
 description: Drain nodes on the swarm
 keywords: tutorial, cluster management, swarm, service, drain
 title: Drain a node on the swarm
+notoc: true
 ---
 
 In earlier steps of the tutorial, all the nodes have been running with `ACTIVE`
@@ -121,3 +122,7 @@ drained node to an active state:
     * during a rolling update
     * when you set another node to `Drain` availability
     * when a task fails on another active node
+
+## What's next?
+
+Learn how to [use a swarm mode routing mesh](/engine/swarm/ingress.md).

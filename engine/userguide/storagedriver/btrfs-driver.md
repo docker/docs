@@ -17,7 +17,7 @@ copy-on-write, and snapshotting.
 This article refers to Docker's Btrfs storage driver as `btrfs` and the overall
  Btrfs Filesystem as Btrfs.
 
->**Note**: The [Commercially Supported Docker Engine (CS-Engine)](https://www.docker.com/compatibility-maintenance) does not currently support the `btrfs` storage driver.
+> **Note:** The [Commercially Supported Docker Engine (CS-Engine)](https://www.docker.com/compatibility-maintenance) does not currently support the `btrfs` storage driver.
 
 ## The future of Btrfs
 
@@ -102,7 +102,7 @@ that as Btrfs filesystem objects and not as individual mounts.
 
 Because Btrfs works at the filesystem level and not the block level, each image
 and container layer can be browsed in the filesystem using normal Unix
-commands. The example below shows a truncated output of an `ls -l` command an
+commands. The example below shows a truncated output of an `ls -l` command for an
 image layer:
 
     $ ls -l /var/lib/docker/btrfs/subvolumes/0a17decee4139b0de68478f149cc16346f5e711c5ae3bb969895f22dd6723751/
@@ -127,7 +127,7 @@ Writing a new file to a container invokes an allocate-on-demand operation to
 allocate new data block to the container's snapshot. The file is then written to
 this new space. The allocate-on-demand operation is native to all writes with
 Btrfs and is the same as writing new data to a subvolume. As a result, writing
-new files to a container's snapshot operate at native Btrfs speeds.
+new files to a container's snapshot operates at native Btrfs speeds.
 
 Updating an existing file in a container causes a copy-on-write operation
 (technically *redirect-on-write*). The driver leaves the original data and
@@ -194,7 +194,7 @@ multiple devices to the `mkfs.btrfs` command creates a pool across all of those
     Be sure to substitute `/dev/xvdb` with the appropriate device(s) on your
     system.
 
-    > **Warning**: Take note of the warning about Btrfs being experimental. As
+    > **Warning:** Take note of the warning about Btrfs being experimental. As
     noted earlier, Btrfs is not currently recommended for production deployments
     unless you already have extensive experience.
 

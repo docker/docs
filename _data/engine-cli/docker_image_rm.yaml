@@ -13,3 +13,4 @@ options:
 - option: no-prune
   default_value: "false"
   description: Do not delete untagged parents
+

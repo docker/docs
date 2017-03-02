@@ -26,7 +26,14 @@ the package name `docker` instead of `docker-engine`. If you installed this vers
 of Docker, remove it using the following command:
 
 ```bash
-$ sudo dnf -y remove docker
+$ sudo dnf -y remove docker docker-common container-selinux
+```
+
+You may also have to remove the package `docker-selinux` which conflicts with the
+official `docker-engine` package. Remove it with the following command:
+
+```bash
+$ sudo dnf -y remove docker-selinux
 ```
 
 The contents of `/var/lib/docker` are not removed, so any images, containers,
@@ -57,7 +64,7 @@ Docker from the repository.
 
 #### Set up the repository
 
-1.  Install the `dnf-plugins.core` package which provides the commands to manage
+1.  Install the `dnf-plugins-core` package which provides the commands to manage
     your DNF repositories from the command line.
 
     ```bash
@@ -74,8 +81,8 @@ Docker from the repository.
 
 3.  **Optional**: Enable the **testing** repository. This repository is included
     in the `docker.repo` file above but is disabled by default. You can enable
-    it alongside the stable repository. Do not use unstable repositories on
-    on production systems or for non-testing workloads.
+    it alongside the stable repository. **Do not use unstable repositories on
+    on production systems or for non-testing workloads.**
 
     > **Warning**: If you have both stable and unstable repositories enabled,
     > updating without specifying a version in the `dnf install` or `dnf update`
@@ -149,9 +156,13 @@ Docker from the repository.
     $ sudo dnf -y install docker-engine-<VERSION_STRING>
     ```
 
-    The Docker daemon starts automatically.
+4.  Start Docker.
 
-4.  Verify that `docker` is installed correctly by running the `hello-world`
+    ```bash
+    $ sudo systemctl start docker
+    ```
+
+5.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -192,9 +203,13 @@ a new file each time you want to upgrade Docker.
     $ sudo dnf -y install /path/to/package.rpm
     ```
 
-    The Docker daemon starts automatically.
+3.  Start Docker.
 
-3.  Verify that `docker` is installed correctly by running the `hello-world`
+    ```bash
+    $ sudo systemctl start docker
+    ```
+
+4.  Verify that `docker` is installed correctly by running the `hello-world`
     image.
 
     ```bash

@@ -16,7 +16,7 @@ introduced in Docker 1.12 and Docker Compose 1.8, alongside the concept of
 swarm mode, and Nodes and Services in the Engine API.
 
 A Dockerfile can be built into an image, and containers can be created from
-that image. Similarly, a docker-compose.yml can be built into a **distributed
+that image. Similarly, a `docker-compose.yml` can be built into a **distributed
 application bundle**, and **stacks** can be created from that bundle. In that
 sense, the bundle is a multi-services distributable image format.
 
@@ -200,3 +200,9 @@ A service has the following fields:
 
 > **Note:** Some configuration options are not yet supported in the DAB format,
 > including volume mounts.
+
+## Related topics
+
+* [docker stack deploy] (/engine/reference/commandline/stack_deploy/) command
+
+* [deploy](/compose/compose-file/index.md#deploy) option in [Compose files](/compose/compose-file/index.md]]

@@ -7,8 +7,12 @@ plink: docker_swarm.yaml
 options:
 - option: advertise-addr
   description: 'Advertised address (format: <ip|interface>[:port])'
+- option: availability
+  default_value: active
+  description: Availability of the node (active/pause/drain)
 - option: listen-addr
   default_value: 0.0.0.0:2377
   description: 'Listen address (format: <ip|interface>[:port])'
 - option: token
   description: Token for entry into the swarm
+

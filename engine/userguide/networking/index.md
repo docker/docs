@@ -238,7 +238,7 @@ ff00::0	ip6-mcastprefix
 ff02::1	ip6-allnodes
 ff02::2	ip6-allrouters
 ```
-To detach from a `container1` and leave it running use `CTRL-p CTRL-q`.Then, attach to `container2` and repeat these three commands.
+To detach from a `container1` and leave it running use `CTRL-p CTRL-q`. Then, attach to `container2` and repeat these three commands.
 
 ```
 $ docker attach container2
@@ -405,7 +405,7 @@ in two different circumstances:
 - When you initialize or join a swarm, Docker creates the `docker_gwbridge` network and
   uses it for communication among swarm nodes on different hosts.
 
-- When none of a container's networks can provide external connectivity, Docker connect
+- When none of a container's networks can provide external connectivity, Docker connects
   the container to the `docker_gwbridge` network in addition to the container's other
   networks, so that the container can connect to external networks or other swarm nodes.
 
@@ -555,7 +555,7 @@ built-in network drivers. For example:
 
     $ docker network create --driver weave mynet
 
-You can inspect it, add containers to and from it, and so forth. Of course,
+You can inspect it, add containers to and delete from it, and so forth. Of course,
 different plugins may make use of different technologies or frameworks. Custom
 networks can include features not present in Docker's default networks. For more
 information on writing plugins, see [Extending Docker](../../extend/legacy_plugins.md) and

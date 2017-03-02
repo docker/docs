@@ -82,7 +82,7 @@ Use these links to read about specific commands, or continue to the
 
 - [`docker secret create`](../reference/commandline/secret_create.md)
 - [`docker secret inspect`](../reference/commandline/secret_inspect.md)
-- [`docker service ls`](../reference/commandline/secret_ls.md)
+- [`docker secret ls`](../reference/commandline/secret_ls.md)
 - [`docker secret rm`](../reference/commandline/secret_rm.md)
 - [`--secret`](../reference/commandline/service_create.md#create-a-service-with-secrets) flag for `docker service create`
 - [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#adding-and-removing-secrets) flags for `docker service update`
@@ -744,7 +744,7 @@ Docker.
     Even though the MySQL service has access to both the old and new secrets
     now, the MySQL password for the WordPress user has not yet been changed.
 
-    > **Note**: This example does not rottate the MySQL `root` password.
+    > **Note**: This example does not rotate the MySQL `root` password.
 
 3.  Now, change the MySQL password for the `wordpress` user using the
     `mysqladmin` CLI. This command reads the old and new password from the files
@@ -757,7 +757,7 @@ Docker.
     First, find the ID of the `mysql` container task.
 
     ```bash
-    $ docker ps --filter --name=mysql -q
+    $ docker ps --filter name=mysql -q
 
     c7705cf6176f
     ```
@@ -773,7 +773,7 @@ Docker.
     **or**:
 
     ```bash
-    $ docker exec $(docker ps --filter --name=mysql -q) \
+    $ docker exec $(docker ps --filter name=mysql -q) \
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 

@@ -5,10 +5,6 @@ usage: docker stack ps [OPTIONS] STACK
 pname: docker stack
 plink: docker_stack.yaml
 options:
-- option: all
-  shorthand: a
-  default_value: "false"
-  description: Display all tasks
 - option: filter
   shorthand: f
   description: Filter output based on conditions provided
@@ -18,3 +14,4 @@ options:
 - option: no-trunc
   default_value: "false"
   description: Do not truncate output
+

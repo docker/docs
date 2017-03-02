@@ -82,19 +82,20 @@ the state of all goroutines and threads within the daemon.
 
 ## Ubuntu
 
-As of `14.04`, Ubuntu uses Upstart as a process manager. By default, Upstart
-jobs are located in  `/etc/init` and the `docker` Upstart job can be found at
-`/etc/init/docker.conf`.
+Ubuntu 16.04 and newer use `systemd` as the init system. Ubuntu 14.04 uses `upstart`.
+Use the appropriate command below to check whether Docker is running:
 
-After successfully [installing Docker for
-Ubuntu](../installation/linux/ubuntulinux.md), you can check the running status
-using Upstart in this way:
+| Init system  | Command                     |
+|--------------|-----------------------------|
+| `systemd`    | `sudo systemctl is-active ` |
+| `upstart`    | `sudo status docker`        |
+
+You can also use Docker itself to check whether Docker is running:
 
 ```bash
-$ sudo status docker
-
-docker start/running, process 989
+$ docker info
 ```
+
 
 ### Running Docker
 

@@ -4,3 +4,4 @@ long: Scale one or multiple replicated services
 usage: docker service scale SERVICE=REPLICAS [SERVICE=REPLICAS...]
 pname: docker service
 plink: docker_service.yaml
+

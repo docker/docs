@@ -71,7 +71,8 @@ options:
   default_value: '[]'
   description: Security options
 - option: shm-size
-  description: Size of /dev/shm, default value is 64MB
+  default_value: "0"
+  description: Size of /dev/shm
 - option: squash
   default_value: "false"
   description: Squash newly built layers into a single new layer
@@ -82,3 +83,4 @@ options:
 - option: ulimit
   default_value: '[]'
   description: Ulimit options
+

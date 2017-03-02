@@ -13,18 +13,3 @@ https://www.github.com/docker/docker
 -->
 
 {% include cli.md %}
-
-## Examples
-
-    $ docker run --name ubuntu_bash --rm -i -t ubuntu bash
-
-This will create a container named `ubuntu_bash` and start a Bash session.
-
-    $ docker exec -d ubuntu_bash touch /tmp/execWorks
-
-This will create a new file `/tmp/execWorks` inside the running container
-`ubuntu_bash`, in the background.
-
-    $ docker exec -it ubuntu_bash bash
-
-This will create a new Bash session in the container `ubuntu_bash`.

@@ -4,6 +4,7 @@ keywords: fig, composition, compose, docker, orchestration, cli,  docker-compose
 redirect_from:
 - /compose/reference/docker-compose/
 title: Overview of docker-compose CLI
+notoc: true
 ---
 
 This page provides the usage information for the `docker-compose` Command.
@@ -14,7 +15,7 @@ command line.
 Define and run multi-container applications with Docker.
 
 Usage:
-  docker-compose [-f=<arg>...] [options] [COMMAND] [ARGS...]
+  docker-compose [-f <arg>...] [options] [COMMAND] [ARGS...]
   docker-compose -h|--help
 
 Options:
@@ -35,23 +36,27 @@ Options:
 
 Commands:
   build              Build or rebuild services
+  bundle             Generate a Docker bundle from the Compose file
   config             Validate and view the compose file
   create             Create services
   down               Stop and remove containers, networks, images, and volumes
   events             Receive real time events from containers
+  exec               Execute a command in a running container
   help               Get help on a command
   kill               Kill containers
   logs               View output from containers
   pause              Pause services
   port               Print the public port for a port binding
   ps                 List containers
-  pull               Pulls service images
+  pull               Pull service images
+  push               Push service images
   restart            Restart services
   rm                 Remove stopped containers
   run                Run a one-off command
   scale              Set number of containers for a service
   start              Start services
   stop               Stop services
+  top                Display the running processes
   unpause            Unpause services
   up                 Create and start containers
   version            Show the Docker-Compose version information

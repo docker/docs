@@ -1,6 +1,11 @@
 command: docker plugin push
 short: Push a plugin to a registry
 long: Push a plugin to a registry
-usage: docker plugin push PLUGIN[:TAG]
+usage: docker plugin push [OPTIONS] PLUGIN[:TAG]
 pname: docker plugin
 plink: docker_plugin.yaml
+options:
+- option: disable-content-trust
+  default_value: "true"
+  description: Skip image signing
+

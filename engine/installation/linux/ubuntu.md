@@ -22,16 +22,16 @@ To install Docker, you need the 64-bit version of one of these Ubuntu versions:
 - Xenial 16.04 (LTS)
 - Trusty 14.04 (LTS)
 
-### Recommended extra packages
+### Recommended extra packages for Trusty 14.04
 
-You need `curl` if you don't have it. Unless you have a strong reason not to,
-install the `linux-image-extra-*` packages, which allow Docker to use the `aufs`
-storage drivers. **This applies to all versions of Ubuntu**.
+Unless you have a strong reason not to, install the
+`linux-image-extra-*` packages, which allow Docker to use the `aufs` storage
+drivers.
 
 ```bash
 $ sudo apt-get update
 
-$ sudo apt-get install curl \
+$ sudo apt-get install -y --no-install-recommends \
     linux-image-extra-$(uname -r) \
     linux-image-extra-virtual
 ```
@@ -64,32 +64,34 @@ Docker from the repository.
 1.  Install packages to allow `apt` to use a repository over HTTPS:
 
     ```bash
-    $ sudo apt-get install apt-transport-https \
-                           ca-certificates
+    $ sudo apt-get install -y --no-install-recommends \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        software-properties-common
     ```
 
 2.  Add Docker's official GPG key:
 
     ```bash
-    $ curl -fsSL https://yum.dockerproject.org/gpg | sudo apt-key add -
+    $ curl -fsSL https://apt.dockerproject.org/gpg | sudo apt-key add -
     ```
-
-    > **Note**: The URL is correct, even for Linux distributions that use `APT`.
 
     Verify that the key ID is `58118E89F3A912897C070ADBF76221572C52609D`.
 
     ```bash
-    $ apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
+    $ sudo apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
 
       pub   4096R/2C52609D 2015-07-14
             Key fingerprint = 5811 8E89 F3A9 1289 7C07  0ADB F762 2157 2C52 609D
       uid                  Docker Release Tool (releasedocker) <docker@docker.com>
     ```
 
-3.  Use the following command to set up the **stable** repository. To also
-    enable the **testing** repository, add the words `testing` after `main` on
-    the last line.
-    **Do not use these unstable repositories on production systems or for non-testing workloads.**
+3.  Use the following command to set up the **stable** repository.
+
+    > **Note**: The `lsb_release -cs` sub-command below returns the name of your
+    > Ubuntu distribution, such as `xenial`.
+
 
     ```bash
     $ sudo add-apt-repository \
@@ -98,8 +100,13 @@ Docker from the repository.
            main"
     ```
 
-    To disable the `testing` repository, you can edit `/etc/apt/sources.list`
-    and remove the word `testing` from the appropriate line in the file.
+    To enable the `testing` repository, you can edit `/etc/apt/sources.list`
+    and add the word `testing` after `main` on the appropriate line of the file.
+    **Do not use unstable repositories on production systems or for non-testing workloads.**
+
+    > **Note**: Sometimes, in a distribution like Linux Mint, you might have
+    > to change `ubuntu-$(lsb_release -cs)` to your parent Ubuntu distribution.
+    > example: If you are using `Linux Mint Rafaela`, you could type in `ubuntu-trusty`
 
 #### Install Docker
 
@@ -130,10 +137,10 @@ Docker from the repository.
     ```bash
     $ apt-cache madison docker-engine
 
-    docker-engine | 1.13.0-0~xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
-    docker-engine | 1.12.3-0~xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
-    docker-engine | 1.12.2-0~xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
-    docker-engine | 1.12.1-0~xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
+    docker-engine | 1.13.0-0~ubuntu-xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
+    docker-engine | 1.12.6-0~ubuntu-xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
+    docker-engine | 1.12.5-0~ubuntu-xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
+    docker-engine | 1.12.4-0~ubuntu-xenial | https://apt.dockerproject.org/repo ubuntu-xenial/main amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled,

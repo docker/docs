@@ -9,18 +9,29 @@ title: Docker for Windows Release notes
 Here are the main improvements and issues per release, starting with the current
 release. The documentation is always updated for each release.
 
-For system requirements, please see the Getting Started topic on [What to know
-before you install](index.md#what-to-know-before-you-install).
+For system requirements, please see
+[What to know before you install](install.md#what-to-know-before-you-install).
 
 Release notes for _stable_ and _beta_ releases are listed below. You can learn
 about both kinds of releases, and download stable and beta product installers at
-[Download Docker for Windows](index.md#download-docker-for-windows).
-
-* [Stable Release Notes](release-notes.md#stable-release-notes)
-* [Beta Release Notes](release-notes.md#beta-release-notes)
-* [Alpha Release Notes](release-notes.md#alpha-release-notes)
+[Download Docker for Windows](install.md#download-docker-for-windows).
 
 ## Stable Release Notes
+
+### Docker for Windows 1.13.1, 2017-02-09 (stable)
+
+**Upgrades**
+
+- [Docker 1.13.1](https://github.com/docker/docker/releases/tag/v1.13.1)
+- [Docker Compose 1.11.1](https://github.com/docker/compose/releases/tag/1.11.1)
+- Linux kernel 4.9.8
+
+**Bug fixes and minor changes**
+
+- Add link to experimental features
+- New 1.13 cancellable operations should now be properly handled by the Docker for desktop
+- Various typos fixes
+- Fix in Hyper-V VM setup (should fix `ObjectNotFound` errors)
 
 ### Docker for Windows 1.13.0, 2017-01-19 (stable)
 
@@ -257,6 +268,57 @@ We did not distribute a 1.12.4 stable release
 * Docker Compose 1.8.0
 
 ## Beta Release Notes
+
+### Docker Community Edition 17.03.0 Release Notes (2017-02-22 17.03.0-ce-rc1)
+
+**New**
+
+- Introduce Docker Community Edition
+- Integration with Docker Cloud: control remote Swarms from the local CLI and view your repositories. This feature will be rolled out to all users progressively.
+
+**Upgrades**
+
+- Docker 17.03.0-ce-rc1
+- Linux Kernel 4.9.11
+
+**Upgrades**
+
+- VPNKit: Fixed unmarshalling of DNS packets containing pointers to pointers to labels
+- Match Hyper-V Integration Services by ID, not name
+- Don't consume 100% CPU when the service is stopped
+- Log the diagnostic ID when uploading
+- Improved Firewall handling: stop listing the rules since it can take a lot of time
+- Don't rollback to the previous engine when the desired engine fails to start
+
+### Beta 41 Release Notes (2017-02-07 1.13.1-rc2-beta41)
+
+**Upgrades**
+
+- Docker 1.13.1-rc2
+- [Docker Compose 1.11.0-rc1](https://github.com/docker/compose/releases/tag/1.11.0-rc1)
+- Linux kernel 4.9.8
+
+**Bug fixes and minor improvements**
+
+- VPNKit: set the Recursion Available bit on DNS responses from the cache
+- Don't use port 4222 inside the Linux VM
+
+### Beta 40 Release Notes (2017-01-31 1.13.1-rc1-beta40)
+
+**Upgrades**
+
+- [Docker 1.13.1-rc1](https://github.com/docker/docker/releases/tag/v1.13.1-rc1)
+- Linux kernel 4.9.6
+
+**Bug fixes and minor improvements**
+
+- Fix startup error of `ObjectNotFound` in Set-VMFirmware
+- Add detailed logs when firewall is configured
+- Add a link to the Experimental Features documentation
+- Fixed the Copyright in About Dialog
+- VPNKit: Avoid diagnostics to capture too much data
+- VPNKit: fix a source of occasional packet loss (truncation) on the virtual ethernet link
+- Fix negotiation of TimeSync protocol version (via kernel update)
 
 ### Beta 39 Release Notes (2017-01-26 1.13.0-beta39)
 

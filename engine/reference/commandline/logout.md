@@ -11,11 +11,3 @@ here, you'll need to find the string by searching this repo:
 https://www.github.com/docker/docker
 -->
 {% include cli.md %}
-
-## Examples
-
-### Log out from a registry on your localhost
-
-```bash
-$ docker logout localhost:8080
-```

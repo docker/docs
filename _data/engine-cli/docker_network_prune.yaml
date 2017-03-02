@@ -5,7 +5,10 @@ usage: docker network prune [OPTIONS]
 pname: docker network
 plink: docker_network.yaml
 options:
+- option: filter
+  description: Provide filter values (e.g. 'until=<timestamp>')
 - option: force
   shorthand: f
   default_value: "false"
   description: Do not prompt for confirmation
+

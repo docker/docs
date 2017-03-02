@@ -53,8 +53,4 @@ Once you've cleaned up your commits:
 
 Congratulations! You've created your first pull request to Kitematic!
 
-The next step in this process is to participate your PR's review. To learn more, and try another development exercise, see [where to learn more](next_steps.md) .
-
-<!-- The next step in the process for this PR is learn how to <a href="http://docs.docker.com/project/review-pr/"
-target=_blank">participate in your PR's
-review </a>. -->
+The next step in this process is to participate in your PR's review. To learn more, and try another development exercise, see [where to learn more](next_steps.md).

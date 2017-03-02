@@ -13,3 +13,4 @@ options:
 - option: sig-proxy
   default_value: "true"
   description: Proxy all received signals to the process
+

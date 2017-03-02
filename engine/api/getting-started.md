@@ -544,4 +544,4 @@ $ curl --unix-socket /var/run/docker.sock\
 
  - [Full documentation for the Python SDK.](https://docker-py.readthedocs.io)
  - [Full documentation for the Go SDK.](https://godoc.org/github.com/docker/docker/client)
- - [Full documentation for the HTTP API.](/engine/api/v1.25/)
+ - [Full documentation for the HTTP API.](/engine/api/v1.26/)

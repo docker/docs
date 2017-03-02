@@ -14,3 +14,4 @@ options:
 - option: no-stream
   default_value: "false"
   description: Disable streaming stats and only pull the first result
+

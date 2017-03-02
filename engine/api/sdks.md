@@ -40,6 +40,7 @@ There a number of community supported libraries available for other languages. T
 
 | Language      | Library |
 | ------------- |---------|
+| C             | [libdocker](https://github.com/danielsuo/libdocker) |
 | C#            | [Docker.DotNet](https://github.com/ahmetalpbalkan/Docker.DotNet) |
 | C++           | [lasote/docker_client](https://github.com/lasote/docker_client) |
 | Dart          | [bwu_docker](https://github.com/bwu-dart/bwu_docker) |

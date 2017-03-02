@@ -51,8 +51,6 @@ Follow the <a href="/engine/installation/" target="_blank">official installatio
 
     Go to Docker Cloud and navigate to the **Repositories** tab and confirm that your image appears in this list.
 
-> **Note**: If you're a member of any organizations that are using Docker
-> Cloud, you might need to select the organization name or your username from
-> the dropdown menu see other repositories.
-
-![](images/private_image.png)
+>**Note**: If you're a member of any organizations that are using Docker
+> Cloud, you might need to switch to the organization account namespace using the
+> account menu at the upper right to see other repositories.

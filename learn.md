@@ -25,7 +25,7 @@ tutorial stops short of teaching you how to deploy applications.
 
 The define-and-deploy tutorial shows how to relate
 containers to each other and define them as services in an application that is ready to deploy at scale in a
-production environment. Highlights [Compose Version 3 new features](/engine/getstarted-voting-app/index.md#compose-version-3-features-and-compatibility) and swarm mode.
+production environment. Highlights Compose Version 3 new features and swarm mode.
 {% endcapture %}{{ apps | markdownify }}
 
 </td></tr>

@@ -4,8 +4,20 @@
 
 # Used by _includes/components/ddc_url_list.html
 
+- ucp-version: "2.1"
+  tar-files:
+    - description: "UCP 2.1.0"
+      url: https://packages.docker.com/caas/ucp_images_2.1.0.tar.gz
+    - description: "DTR 2.2.2"
+      url: https://packages.docker.com/caas/dtr-2.2.2.tar.gz
+    - description: "DTR 2.2.1"
+      url: https://packages.docker.com/caas/dtr-2.2.1.tar.gz
+    - description: "DTR 2.2.0"
+      url: https://packages.docker.com/caas/dtr-2.2.0.tar.gz
 - ucp-version: "2.0"
   tar-files:
+    - description: "UCP 2.0.3"
+      url: https://packages.docker.com/caas/ucp_images_2.0.3.tar.gz
     - description: "UCP 2.0.2"
       url: https://packages.docker.com/caas/ucp_images_2.0.2.tar.gz
     - description: "DTR 2.1.4"

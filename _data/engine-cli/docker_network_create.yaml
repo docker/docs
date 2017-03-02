@@ -1,63 +1,6 @@
 command: docker network create
 short: Create a network
-long: "Creates a new network. The `DRIVER` accepts `bridge` or `overlay` which are
-  the\nbuilt-in network drivers. If you have installed a third party or your own custom\nnetwork
-  driver you can specify that `DRIVER` here also. If you don't specify the\n`--driver`
-  option, the command automatically creates a `bridge` network for you.\nWhen you
-  install Docker Engine it creates a `bridge` network automatically. This\nnetwork
-  corresponds to the `docker0` bridge that Engine has traditionally relied\non. When
-  launch a new container with  `docker run` it automatically connects to\nthis bridge
-  network. You cannot remove this default bridge network but you can\ncreate new ones
-  using the `network create` command.\n\n```bash\n$ docker network create -d bridge
-  my-bridge-network\n```\n\nBridge networks are isolated networks on a single Engine
-  installation. If you\nwant to create a network that spans multiple Docker hosts
-  each running an\nEngine, you must create an `overlay` network. Unlike `bridge` networks
-  overlay\nnetworks require some pre-existing conditions before you can create one.
-  These\nconditions are:\n\n* Access to a key-value store. Engine supports Consul,
-  Etcd, and Zookeeper (Distributed store) key-value stores.\n* A cluster of hosts
-  with connectivity to the key-value store.\n* A properly configured Engine `daemon`
-  on each host in the cluster.\n\nThe `dockerd` options that support the `overlay`
-  network are:\n\n* `--cluster-store`\n* `--cluster-store-opt`\n* `--cluster-advertise`\n\nTo
-  read more about these options and how to configure them, see [\"*Get started\nwith
-  multi-host\nnetwork*\"](https://docs.docker.com/engine/userguide/networking/get-started-overlay/).\n\nIt
-  is also a good idea, though not required, that you install Docker Swarm on to\nmanage
-  the cluster that makes up your network. Swarm provides sophisticated\ndiscovery
-  and server management that can assist your implementation.\n\nOnce you have prepared
-  the `overlay` network prerequisites you simply choose a\nDocker host in the cluster
-  and issue the following to create the network:\n\n```bash\n$ docker network create
-  -d overlay my-multihost-network\n```\n\nNetwork names must be unique. The Docker
-  daemon attempts to identify naming\nconflicts but this is not guaranteed. It is
-  the user's responsibility to avoid\nname conflicts.\n\n## Connect containers\n\nWhen
-  you start a container use the `--net` flag to connect it to a network.\nThis adds
-  the `busybox` container to the `mynet` network.\n\n```bash\n$ docker run -itd --net=mynet
-  busybox\n```\n\nIf you want to add a container to a network after the container
-  is already\nrunning use the `docker network connect` subcommand.\n\nYou can connect
-  multiple containers to the same network. Once connected, the\ncontainers can communicate
-  using only another container's IP address or name.\nFor `overlay` networks or custom
-  plugins that support multi-host connectivity,\ncontainers connected to the same
-  multi-host network but launched from different\nEngines can also communicate in
-  this way.\n\nYou can disconnect a container from a network using the `docker network\ndisconnect`
-  command.\n\n## Specifying advanced options\n\nWhen you create a network, Engine
-  creates a non-overlapping subnetwork for the\nnetwork by default. This subnetwork
-  is not a subdivision of an existing network.\nIt is purely for ip-addressing purposes.
-  You can override this default and\nspecify subnetwork values directly using the
-  `--subnet` option. On a\n`bridge` network you can only create a single subnet:\n\n```bash\n$
-  docker network create -d bridge --subnet=192.168.0.0/16 br0\n```\n\nAdditionally,
-  you also specify the `--gateway` `--ip-range` and `--aux-address`\noptions.\n\n```bash\n$
-  docker network create \\\n  --driver=bridge \\\n  --subnet=172.28.0.0/16 \\\n  --ip-range=172.28.5.0/24
-  \\\n  --gateway=172.28.5.254 \\\n  br0\n```\n\nIf you omit the `--gateway` flag
-  the Engine selects one for you from inside a\npreferred pool. For `overlay` networks
-  and for network driver plugins that\nsupport it you can create multiple subnetworks.\n\n```bash\n$
-  docker network create -d overlay \\\n  --subnet=192.168.0.0/16 \\\n  --subnet=192.170.0.0/16
-  \\\n  --gateway=192.168.0.100 \\ \n  --gateway=192.170.0.100 \\\n  --ip-range=192.168.1.0/24
-  \\\n  --aux-address=\"my-router=192.168.1.5\" --aux-address=\"my-switch=192.168.1.6\"
-  \\\n  --aux-address=\"my-printer=192.170.1.5\" --aux-address=\"my-nas=192.170.1.6\"
-  \\\n  my-multihost-network\n```\n\nBe sure that your subnetworks do not overlap.
-  If they do, the network create\nfails and Engine returns an error.\n\n### Network
-  internal mode\n\nBy default, when you connect a container to an `overlay` network,
-  Docker also\nconnects a bridge network to it to provide external connectivity. If
-  you want\nto create an externally isolated `overlay` network, you can specify the\n`--internal`
-  option.\n"
+long: Create a network
 usage: docker network create [OPTIONS] NETWORK
 pname: docker network
 plink: docker_network.yaml
@@ -100,3 +43,4 @@ options:
 - option: subnet
   default_value: '[]'
   description: Subnet in CIDR format that represents a network segment
+

@@ -63,6 +63,9 @@ options:
 - option: device
   default_value: '[]'
   description: Add a host device to the container
+- option: device-cgroup-rule
+  default_value: '[]'
+  description: Add a rule to the cgroup allowed devices list
 - option: device-read-bps
   default_value: '[]'
   description: Limit read rate (bytes per second) from a device
@@ -108,13 +111,13 @@ options:
 - option: health-cmd
   description: Command to run to check health
 - option: health-interval
-  default_value: "0"
+  default_value: 0s
   description: Time between running the check (ns|us|ms|s|m|h) (default 0s)
 - option: health-retries
   default_value: "0"
   description: Consecutive failures needed to report unhealthy
 - option: health-timeout
-  default_value: "0"
+  default_value: 0s
   description: |
     Maximum time to allow one check to run (ns|us|ms|s|m|h) (default 0s)
 - option: help
@@ -140,9 +143,9 @@ options:
   default_value: "0"
   description: Maximum IOps limit for the system drive (Windows only)
 - option: ip
-  description: Container IPv4 address (e.g. 172.30.100.104)
+  description: IPv4 address (e.g., 172.30.100.104)
 - option: ip6
-  description: Container IPv6 address (e.g. 2001:db8::33)
+  description: IPv6 address (e.g., 2001:db8::33)
 - option: ipc
   description: IPC namespace to use
 - option: isolation
@@ -168,7 +171,7 @@ options:
   default_value: '[]'
   description: Log driver options
 - option: mac-address
-  description: Container MAC address (e.g. 92:d0:c6:0a:29:33)
+  description: Container MAC address (e.g., 92:d0:c6:0a:29:33)
 - option: memory
   shorthand: m
   description: Memory limit
@@ -234,7 +237,8 @@ options:
   default_value: '[]'
   description: Security Options
 - option: shm-size
-  description: Size of /dev/shm, default value is 64MB
+  default_value: "0"
+  description: Size of /dev/shm
 - option: stop-signal
   default_value: SIGTERM
   description: Signal to stop a container, SIGTERM by default
@@ -276,3 +280,4 @@ options:
 - option: workdir
   shorthand: w
   description: Working directory inside the container
+

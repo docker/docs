@@ -16,3 +16,4 @@ options:
   shorthand: L
   default_value: "false"
   description: Always follow symbol link in SRC_PATH
+

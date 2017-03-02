@@ -5,9 +5,15 @@ usage: docker plugin install [OPTIONS] PLUGIN [KEY=VALUE...]
 pname: docker plugin
 plink: docker_plugin.yaml
 options:
+- option: alias
+  description: Local name for plugin
 - option: disable
   default_value: "false"
   description: Do not enable the plugin on install
+- option: disable-content-trust
+  default_value: "true"
+  description: Skip image verification
 - option: grant-all-permissions
   default_value: "false"
   description: Grant all permissions necessary to run the plugin
+

@@ -101,7 +101,7 @@ aggregate store.
           @type forward
         </source>
 
-        <match docker.**>
+        <match *>
           @type stdout
         </match>
 

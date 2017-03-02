@@ -99,7 +99,7 @@ Now, we'll add our Docker machines to a [swarm](/engine/swarm/index.md).
 
 ### List the nodes in the swarm
 
-Log into the manager and run `docker node ls`.
+Log into the manager (e.g., `docker-machine ssh manager`) and run `docker node ls`.
 
 ```
   docker@manager:~$ docker node ls

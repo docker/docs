@@ -1,17 +1,7 @@
 command: docker top
 short: Display the running processes of a container
-long: |
-  Display the running process of the container. ps-OPTION can be any of the options you would pass to a Linux ps command.
-
-  All displayed information is from host's point of view.
-
-  # EXAMPLES
-
-  Run **docker top** with the ps option of -x:
-
-      $ docker top 8601afda2b -x
-      PID      TTY       STAT       TIME         COMMAND
-      16623    ?         Ss         0:00         sleep 99999
+long: Display the running processes of a container
 usage: docker top CONTAINER [ps OPTIONS]
 pname: docker
 plink: docker.yaml
+
