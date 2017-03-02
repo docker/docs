@@ -28,14 +28,16 @@ and beta channels, system requirements, and download/install information.
 
 Start your favorite shell (`cmd.exe`, PowerShell, or other) to check your versions of `docker` and `docker-compose`, and verify the installation.
 
-      PS C:\Users\jdoe> docker --version
-      Docker version 1.12.0, build 8eab29e, experimental
+```none
+PS C:\Users\Docker> docker --version
+Docker version 17.03.0-ce, build 60ccb22
 
-      PS C:\Users\jdoe> docker-compose --version
-      docker-compose version 1.8.0, build d988a55
+PS C:\Users\Docker> docker-compose --version
+docker-compose version 1.11.2, build dfed245
 
-      PS C:\Users\jdoe> docker-machine --version
-      docker-machine version 0.8.0, build b85aac1
+PS C:\Users\Docker> docker-machine --version
+docker-machine version 0.10.0, build 76ed2a6
+```
 
 ## Explore the application and run examples
 
@@ -56,21 +58,21 @@ The next few steps take you through some examples. These are just suggestions fo
     Here is an example of command output for  `docker version`.
 
     ```none
-    PS C:\Users\jdoe> docker version
+    PS C:\Users\Docker> docker version
     Client:
-    Version:      1.13.0-rc3
-    API version:  1.25
-    Go version:   go1.7.3
-    Git commit:   4d92237
-    Built:        Tue Dec  6 01:15:44 2016
+    Version:      17.03.0-ce
+    API version:  1.26
+    Go version:   go1.7.5
+    Git commit:   60ccb22
+    Built:        Thu Feb 23 10:40:59 2017
     OS/Arch:      windows/amd64
 
     Server:
-    Version:      1.13.0-rc3
-    API version:  1.25 (minimum version 1.12)
-    Go version:   go1.7.3
-    Git commit:   4d92237
-    Built:        Tue Dec  6 01:15:44 2016
+    Version:      17.03.0-ce
+    API version:  1.26 (minimum version 1.12)
+    Go version:   go1.7.5
+    Git commit:   3a232c8
+    Built:        Tue Feb 28 07:52:04 2017
     OS/Arch:      linux/amd64
     Experimental: true
     ```
@@ -78,51 +80,51 @@ The next few steps take you through some examples. These are just suggestions fo
     Here is an example of command output for  `docker info`.
 
     ```none
-    PS C:\Users\jdoe> docker info
+    PS C:\Users\Docker> docker info
     Containers: 0
-    Running: 0
-    Paused: 0
-    Stopped: 0
+     Running: 0
+     Paused: 0
+     Stopped: 0
     Images: 0
-    Server Version: 1.13.0-rc3
+    Server Version: 17.03.0-ce
     Storage Driver: overlay2
-      Backing Filesystem: extfs
-      Supports d_type: true
-      Native Overlay Diff: true
+     Backing Filesystem: extfs
+     Supports d_type: true
+     Native Overlay Diff: true
     Logging Driver: json-file
     Cgroup Driver: cgroupfs
     Plugins:
-      Volume: local
-      Network: bridge host macvlan null overlay
+     Volume: local
+     Network: bridge host ipvlan macvlan null overlay
     Swarm: inactive
     Runtimes: runc
     Default Runtime: runc
     Init Binary: docker-init
-    containerd version: 03e5862ec0d8d3b3f750e19fca3ee367e13c090e
-    runc version: 51371867a01c467f08af739783b8beafc154c4d7
+    containerd version: 977c511eda0925a723debdc94d09459af49d082a
+    runc version: a01dafd48bc1c7cc12bdb01206f9fea7dd6feb70
     init version: 949e6fa
     Security Options:
-      seccomp
-        Profile: default
-    Kernel Version: 4.8.12-moby
-    Operating System: Alpine Linux v3.4
+     seccomp
+      Profile: default
+    Kernel Version: 4.9.12-moby
+    Operating System: Alpine Linux v3.5
     OSType: linux
     Architecture: x86_64
     CPUs: 2
     Total Memory: 1.934 GiB
     Name: moby
-    ID: EODE:VBXI:Y4EL:JXRJ:STRS:HCAI:LDLF:P4KW:B5XU:QPNE:LKTM:RG32
+    ID: BM4O:645U:LUS6:OGMD:O6WH:JINS:K7VF:OVDZ:7NE4:ZVJT:PSMQ:5UA6
     Docker Root Dir: /var/lib/docker
     Debug Mode (client): false
     Debug Mode (server): true
-      File Descriptors: 13
-      Goroutines: 21
-      System Time: 2016-12-07T19:02:41.3287973Z
-      EventsListeners: 0
+     File Descriptors: 13
+     Goroutines: 21
+     System Time: 2017-03-02T16:59:13.417299Z
+     EventsListeners: 0
     Registry: https://index.docker.io/v1/
     Experimental: true
     Insecure Registries:
-      127.0.0.0/8
+     127.0.0.0/8
     Live Restore Enabled: false
     ```
 
