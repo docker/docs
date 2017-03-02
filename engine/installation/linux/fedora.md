@@ -78,7 +78,7 @@ the repository.
     ```bash
     $ sudo dnf config-manager \
         --add-repo \
-        {{ download-url-base }}/docker-ce.repo
+        {{ download-url-base }}/docker.repo
     ```
 
 3.  **Optional**: Enable the **edge** repository. This repository is included

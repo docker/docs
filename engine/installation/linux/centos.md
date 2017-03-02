@@ -92,7 +92,7 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        {{ download-url-base }}/docker-ce.repo
+        {{ download-url-base }}/docker.repo
     ```
 
 3.  **Optional**: Enable the **edge** repository. This repository is included
