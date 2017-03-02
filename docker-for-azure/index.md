@@ -78,7 +78,7 @@ AD App Secret:   <secret>
 AD Tenant ID:   <tenant-id>
 ```
 
-If you have multiple Azure subscriptions, make sure you're creating the Service Principal with subscription ID that you shared with Docker when signing up for the edge.
+If you have multiple Azure subscriptions, make sure you're creating the Service Principal with subscription ID that you will be using to deploy Docker for Azure.
 
 * `sp-name` is the name of the authentication app that the script creates with Azure. The name is not important, simply choose something you'll recognize in the Azure portal. Example: `sp1`.
 * `rg-name` is the name of the new resource group that will be created to deploy the resources (VMs, networks, storage accounts) associated with the swarm. The Service Principal will be scoped to this resource group. Example: `swarm1`.
