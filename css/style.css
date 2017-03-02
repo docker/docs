@@ -216,6 +216,12 @@ p {
     }
 }
 
+.fan {
+    background: linear-gradient(-120deg, rgba(245, 33, 33, 0) 87%, rgba(255, 255, 255, 0.08) 15%), linear-gradient(-110deg, rgba(27, 0, 255, 0) 85%, rgba(255, 255, 255, 0.08) 15%), linear-gradient(-103deg, rgba(255, 33, 33, 0) 84%, rgba(255, 255, 255, 0.08) 15%), radial-gradient(circle, rgba(0, 135, 201, 0) 0%, rgba(0, 135, 201, 0) 100%);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
 
 /*
 *
@@ -1025,7 +1031,6 @@ input:checked+.slider:before {
 .search-form {
     float: left;
     margin: 10px 15px 0 0px;
-    // width: 235px;
 }
 
 .nav-secondary .search-form {
@@ -1036,10 +1041,6 @@ input:checked+.slider:before {
 
 .nav-secondary-tabs .search-form {
     margin: 5px 10px 5px 0;
-}
-
-.nav-secondary-tabs.affix .search-form {
-    margin: 5px 10px 0 0;
 }
 
 .nav-secondary-tabs .search-form input[type=search] {
@@ -1474,9 +1475,7 @@ div#autocompleteResults span {
 
 footer {
     background: #fff;
-    /*box-shadow: 0 0 12px 7px rgba(255, 255, 255, 0.68), 0 4px 8px 3px rgb(255, 255, 255);*/
     position: relative;
-    // z-index: 99999;
 }
 
 .top_footer {
@@ -1688,7 +1687,7 @@ footer {
     }
     .tabs li a {
         color: #fff;
-        padding: 13px 5px 8px 7px;
+        padding: 13px 5px 8px 5px;
         float: left;
         opacity: 0.7;
         font-size: 12px;
@@ -1713,7 +1712,7 @@ footer {
         margin: 15px 0 0;
         text-align: center;
     }
-    .component-full {
+    .component-full-icon {
         float: none;
     }
     .component-full-copy {
@@ -1765,6 +1764,16 @@ footer {
     // }
 }
 
+/* Landscape */
+// @media only screen 
+//   and (min-device-width: 320px) 
+//   and (max-device-width: 480px)
+//   and (-webkit-min-device-pixel-ratio: 2)
+//   and (orientation: landscape) {
+//     .nav-secondary-tabs.affix {
+//         height: 107px;
+//     }
+// }
 
 /*
 *
@@ -1777,11 +1786,6 @@ footer {
     .navbar-nav .open .dropdown-menu>li>a {
         background: red;
     }
-    // .sidebar-home {
-    //     background-color: #FBFBFC;
-    //     border-right: 1px solid rgba(204, 204, 204, 0.29);
-    //     width: 210px;
-    // }
     .ctrl-right {
         float: right;
         padding: 5px 16px 0;
