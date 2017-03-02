@@ -26,3 +26,7 @@
 {% capture azure_blue_edge %}
 <a class="button darkblue-btn azure-deploy" href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fdownload.docker.com%2Fazure%2Fedge%2FDocker.tmpl" data-rel="{{ d4a_edge }}" target="blank">Deploy Docker Community Edition (CE) for Azure (edge)</a>
 {% endcapture %}
+
+{% capture azure_button_latest %}
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fdownload.docker.com%2Fazure%2Fstable%2FDocker.tmpl" data-rel="Stable-2" target="_blank" class="azure-deploy">![Docker for Azure](http://azuredeploy.net/deploybutton.png)</a>
+{% endcapture %}
