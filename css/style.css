@@ -1190,10 +1190,10 @@ i.fa.fa-outdent {
 .component-full {
     padding: 5px 0 10px 20px;
     float: left;
-    width: 100%;
     min-height: 100px;
-    max-width: 750px;
-    margin: 0px 0 15px 8px;
+    max-width: 752px;
+    margin: 0px 0 15px 9px;
+    width: 100%;
 }
 
 .component,

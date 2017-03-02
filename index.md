@@ -10,7 +10,7 @@ Docker packages your app with its dependencies, freeing you from worrying about
 your system configuration, and making your app more portable.
 
 <div class="row">
-<div class="col-sm-12 col-md-12 col-lg-6 block">
+<div class="col-sm-12 col-md-12 col-lg-6">
 {% capture basics %}
 ### Learn the basics of Docker
 
