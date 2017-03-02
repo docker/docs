@@ -4,6 +4,8 @@ keywords: azure persistent data volumes
 title: Docker for Azure persistent data volumes
 ---
 
+{% include d4a_buttons.md %}
+
 ## What is Cloudstor?
 
 Cloudstor a volume plugin managed by Docker. It comes pre-installed and pre-configured in swarms deployed on Docker for Azure. Swarm tasks use a volume created through Cloudstor to mount a persistent data volume that stays attached to the swarm tasks no matter which swarm node they get scheduled or migrated to. Cloudstor relies on shared storage infrastructure provided by Azure to allow swarm tasks to create/mount their persistent volumes on any node in the swarm. In a future release we will introduce support for direct attached storage to satisfy very low latency/high IOPs requirements.
@@ -15,7 +17,7 @@ After creating a swarm on Docker for Azure and connecting to any manager using S
 ```bash
 $ docker plugin ls
 ID                  NAME                        DESCRIPTION                       ENABLED
-f416c95c0dcc        docker4x/cloudstor:azure-v1.13.1-beta18   cloud storage plugin for Docker   true
+f416c95c0dcc        docker4x/cloudstor:azure-v{{ edition_version }}   cloud storage plugin for Docker   true
 ```
 
 **Note**: Make note of the plugin tag name, because it will change between versions, and yours may be different then listed here.
@@ -26,7 +28,7 @@ The following examples show how to create swarm services that require data persi
 
 ```bash
 docker service create --replicas 5 --name ping1 \
-    --mount type=volume,volume-driver=docker4x/cloudstor:azure-v1.13.1-beta18,source=sharedvol1,destination=/shareddata \
+    --mount type=volume,volume-driver=docker4x/cloudstor:azure-v{{ edition_version }},source=sharedvol1,destination=/shareddata \
     alpine ping docker.com
 ```
 
@@ -39,7 +41,7 @@ With the above example, you can make sure that the volume is indeed shared by lo
 ```bash
 {% raw %}
 docker service create --replicas 5 --name ping2 \
-    --mount type=volume,volume-driver=docker4x/cloudstor:azure-v1.13.1-beta18,source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata \
+    --mount type=volume,volume-driver=docker4x/cloudstor:azure-v{{ edition_version }},source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata \
     alpine ping docker.com
 {% endraw %}
 ```

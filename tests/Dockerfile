@@ -1,5 +1,4 @@
 FROM golang:1.7.3-alpine
-MAINTAINER Adrien Duermael <adrien@docker.com>
 
 COPY src /go/src
 WORKDIR /go/src/validator

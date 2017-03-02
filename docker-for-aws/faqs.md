@@ -5,7 +5,7 @@ title: Docker for AWS Frequently asked questions (FAQ)
 toc_max: 2
 ---
 
-## Stable and beta channels
+## Stable and edge channels
 
 Two different download channels are available for Docker for AWS:
 
@@ -15,13 +15,13 @@ Two different download channels are available for Docker for AWS:
   schedule is synched with Docker Engine releases and hotfixes. On the stable
   channel, you can select whether to send usage statistics and other data.
 
-* The **beta channel** provides a deployment with new features we are working on,
+* The **edge channel** provides a deployment with new features we are working on,
   but is not necessarily fully tested. It comes with the experimental version of
-  Docker Engine. Bugs, crashes and issues are more likely to occur with the beta
+  Docker Engine. Bugs, crashes and issues are more likely to occur with the edge
   cluster, but you get a chance to preview new functionality, experiment, and provide
   feedback as the deployment evolve. Releases are typically more frequent than for
   stable, often one or more per month. Usage statistics and crash reports are sent
-  by default. You do not have the option to disable this on the beta channel.
+  by default. You do not have the option to disable this on the edge channel.
 
 ## Can I use my own AMI?
 

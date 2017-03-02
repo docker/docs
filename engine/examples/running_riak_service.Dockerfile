@@ -4,7 +4,6 @@
 
 # Use the Ubuntu base image provided by dotCloud
 FROM ubuntu:trusty
-MAINTAINER Hector Castro hector@basho.com
 
 # Install Riak repository before we do apt-get update, so that update happens
 # in a single step

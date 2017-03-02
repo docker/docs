@@ -8,48 +8,48 @@ title: Frequently asked questions (FAQ)
 Knowledge Hub](http://success.docker.com/) for knowledge base articles, FAQs,
 technical support for various subscription levels, and more.
 
-### Questions about stable and beta channels
+### Questions about Stable and Edge channels
 
-**Q: How do I get the stable or beta version of Docker for Windows?**
+**Q: How do I get the Stable or Edge version of Docker for Windows?**
 
 A: Use the download links for the channels given in the topic
 [Download Docker for Windows](/docker-for-windows/install.md#download-docker-for-windows).
 
 This topic also has more information about the two channels.
 
-**Q: What is the difference between the stable and beta versions of Docker for Windows?**
+**Q: What is the difference between the Stable and Edge versions of Docker for Windows?**
 
 A: Two different download channels are available for Docker for Windows:
 
-* The **stable channel** provides a general availability release-ready installer
-  for a fully baked and tested, more reliable app. The stable version of Docker
+* The **Stable channel** provides a general availability release-ready installer
+  for a fully baked and tested, more reliable app. The Stable version of Docker
   for Windows comes with the latest released version of Docker Engine. The
   release schedule is synched with Docker Engine releases and hotfixes.  On the
-  stable channel, you can select whether to send usage statistics and other data.
+  Stable channel, you can select whether to send usage statistics and other data.
 
-* The **beta channel** provides an installer with new features we are working on,
+* The **Edge channel** provides an installer with new features we are working on,
   but is not necessarily fully tested. It comes with the experimental version of
-  Docker Engine. Bugs, crashes and issues are more likely to occur with the beta
+  Docker Engine. Bugs, crashes and issues are more likely to occur with the Edge
   app, but you get a chance to preview new functionality, experiment, and provide
   feedback as the apps evolve. Releases are typically more frequent than for
-  stable, often one or more per month. Usage statistics and crash reports are
-  sent by default. You do not have the option to disable this on the beta channel.
+  Stable, often one or more per month. Usage statistics and crash reports are
+  sent by default. You do not have the option to disable this on the Edge channel.
 
-**Q: Can I switch back and forth between stable and beta versions of Docker for Windows?**
+**Q: Can I switch back and forth between Stable and Edge versions of Docker for Windows?**
 
-A: Yes, you can switch between versions to try out the betas to see what's new,
-then go back to stable for other work. However, **you can have only one app
-installed at a time**. Switching back and forth between stable and beta apps can
-destabilize your development environment, particularly in cases where you
-switch from a newer (beta) channel to older (stable).
+A: Yes, you can switch between versions to try out the Edge release to see
+what's new, then go back to Stable for other work. However, **you can have only
+one app installed at a time**. Switching back and forth between Stable and Edge
+apps can destabilize your development environment, particularly in cases where
+you switch from a newer (Edge) channel to older (Stable).
 
-For example, containers created with a newer beta version of Docker for Windows
-may not work after you switch back to stable because they may have been created
-leveraging beta features that aren't in stable yet. Just keep this in mind as
-you create and work with beta containers, perhaps in the spirit of a playground
+For example, containers created with a newer Edge version of Docker for Windows
+may not work after you switch back to Stable because they may have been created
+leveraging Edge features that aren't in Stable yet. Just keep this in mind as
+you create and work with Edge containers, perhaps in the spirit of a playground
 space where you are prepared to troubleshoot or start over.
 
-<font color="#CC3366">To safely switch between beta and stable versions be sure
+<font color="#CC3366">To safely switch between Edge and Stable versions be sure
 to save images and export the containers you need, then uninstall the current
 version before installing another. The workflow is described in more detail
 below.</font><br>
@@ -64,9 +64,9 @@ Do the following each time:
     [export](/engine/reference/commandline/export.md) in the Docker Engine command
     line reference.)
 
-3.  Uninstall the current app (whether stable or beta).
+3.  Uninstall the current app (whether Stable or Edge).
 
-4.  Install a different version of the app (stable or beta).
+4.  Install a different version of the app (Stable or Edge).
 
 ### What kind of feedback are we looking for?
 
@@ -140,16 +140,22 @@ To learn more about the reasons for this limitation, see the following discussio
 
 ### How do I add custom CA certificates?
 
-Starting with Docker for Windows 1.12.1, 2016-09-16 (stable) and Beta 26 (2016-09-14 1.12.1-beta26), all trusted CAs (root or intermediate) are supported. Docker recognizes certs stored under Trust Root Certification Authorities or Intermediate Certification Authorities.
+Starting with Docker for Windows 1.12.1, 2016-09-16 (Stable) and Beta 26
+(2016-09-14 1.12.1-beta26), all trusted CAs (root or intermediate) are
+supported. Docker recognizes certs stored under Trust Root Certification
+Authorities or Intermediate Certification Authorities.
 
-Docker for Windows creates a certificate bundle of all user-trusted CAs based on the Windows certificate store, and appends it to Moby trusted certificates. So if an enterprise SSL certificate is trusted by the user on the host, it will be trusted by Docker for Windows.
+Docker for Windows creates a certificate bundle of all user-trusted CAs based on
+the Windows certificate store, and appends it to Moby trusted certificates. So
+if an enterprise SSL certificate is trusted by the user on the host, it will be
+trusted by Docker for Windows.
 
-To learn more, see the GitHub issue
-[Allow user to add custom Certificate Authorities ](https://github.com/docker/for-win/issues/48).
+To learn more, see the GitHub issue [Allow user to add custom Certificate
+Authorities ](https://github.com/docker/for-win/issues/48).
 
 ### Why does Docker for Windows sometimes lose network connectivity (e.g., `push`/`pull` doesn't work)?
 
-Networking is not yet fully stable across network changes and system sleep
+Networking is not yet fully Stable across network changes and system sleep
 cycles. Exit and start Docker to restore connectivity.
 
 ### Can I use VirtualBox alongside Docker 4 Windows?

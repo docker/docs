@@ -247,7 +247,7 @@ updates.
 
 Configures resource constraints. This replaces the older resource constraint
 options in Compose files prior to version 3 (`cpu_shares`, `cpu_quota`,
-`cpuset`, `mem_limit`, `memswap_limit`).
+`cpuset`, `mem_limit`, `memswap_limit`, `mem_swappiness`).
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
