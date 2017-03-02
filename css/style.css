@@ -423,6 +423,23 @@ a.button.outline-btn {
     color: #1488C6;
 }
 
+/*
+*
+* tables  *********************************************************************
+*
+*/
+
+
+th, td.th {
+  font-weight: bold;
+}
+
+.content table {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
 
 /*
 *
