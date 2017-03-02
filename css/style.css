@@ -220,6 +220,7 @@ p {
     position: absolute;
     height: 100%;
     width: 100%;
+    z-index: -1;
 }
 
 /*
@@ -464,36 +465,15 @@ a.button.outline-btn {
     padding: 5px 0 0 20px;
 }
 
-.nav-toggle {
-    background: red;
+.nav-primary a {
+    color: #fff;
 }
 
-// @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-//     .nav-primary {
-//         background: #000;
-//         padding: 5px 12px;
-//         position: absolute;
-//         width: 100%;
-//         z-index: 9999;
-//     }
-//     .primary {
-//         padding: 20px 0 0;
-//         text-align: center;
-//     }
-//     .user-nav {
-//         padding: 5px 0 0;
-//         text-align: center;
-//     }
-//     .navbar-default .navbar-nav .open .dropdown-menu>li>a {
-//         /** todo remove this **/
-//         color: #fff;
-//         text-align: center;
-//     }
-//     .navbar-default .navbar-toggle, .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-//         background: transparent;
-//         border: 0;
-//     }
-// }
+.sidebar-toggle {
+    margin: 4px 0 0 0;
+    float: right;
+    padding: 16px 15px 0 0;
+}
 
 /*
 *
@@ -1338,7 +1318,7 @@ code {
 .block {
     float: left;
     padding: 0px 20px 20px 16px;
-    min-width: 360px;
+    min-width: 280px;
 }
 
 
@@ -1664,11 +1644,14 @@ footer {
     }
     .nav-secondary input[type=search],
     .nav-secondary-tabs .search-form input[type=search] {
-        width: 260px;
+        // width: 260px;
+    }
+    .nav-secondary-tabs .search-form {
+        width: 240px;
     }
     .nav-secondary .search-form input[type=search]:focus {
         // background: rgb(29, 60, 76) url("/images/search.png") no-repeat;
-        background: rgba(0, 0, 0, 0.17) url(/images/search.png) no-repeat;
+        background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat;
         background-position: 10px 9px;
         box-shadow: none;
         color: #fff;
@@ -1689,15 +1672,17 @@ footer {
         display: none;
     }
     .tabs {
-        margin: 0 auto;
-        width: 100%;
+        float: left;
+        margin: 0px 0 0 -12px;
+        width: 315px;
     }
     .tabs li a {
-        color: #fff;
         padding: 13px 5px 8px 5px;
-        float: left;
-        opacity: 0.7;
+        opacity: 0.5;
         font-size: 11px;
+    }
+    .tabs li a:hover {
+        background: transparent;
     }
     .content {
         padding: 10px 20px 20px 15px;
@@ -1795,6 +1780,7 @@ footer {
 @media (max-width: 768px) {
     .nav-secondary .search-form {
         margin: 14px 10px 5px 0;
+        width: 240px;
     }
     #sidebar-wrapper {
         width: 200px;
@@ -1820,15 +1806,19 @@ footer {
     .col-nav, .col-toc {/* adjust flex on rescale **/
         flex: 0;
     }
-    // .wrapper.right-open #sidebar-wrapper {
-    //     width: 210px;
-    // }
+    .wrapper.right-open #sidebar-wrapper {
+        width: 210px;
+    }
     .toc-nav ul {
         padding: 0 100px 0 0;
     }
     .ctrl-right {
         float: right;
         padding: 5px 16px 0;
+    }
+    .content, .main-content {
+        max-width: 365px;
+        margin: 0 auto;
     }
 }
 
@@ -1848,6 +1838,12 @@ footer {
 *
 */
 
+
+.navbar-toggle {
+    padding: 0;
+    margin: 0;
+}
+
 @media (max-width: 767px) {
     .navbar-nav .open .dropdown-menu .dropdown-header,
     .navbar-nav .open .dropdown-menu>li>a {
@@ -1857,9 +1853,6 @@ footer {
     }
 }
 
-.navbar-nav>li>a {
-    color: #fff !important;
-}
 
 .navbar-collapse,
 .navbar-form {

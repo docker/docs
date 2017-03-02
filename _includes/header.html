@@ -1,4 +1,5 @@
 <nav class="nav-secondary navbar navbar-fixed-top">
+    <div class="fan"></div>
     <div class="container-fluid">
         <!-- <div class="ctrl-left">
         <a href="javascript:void(0)" id="menu-toggle-left"><i class="fa fa-outdent" aria-hidden="true"></i></a>
@@ -17,12 +18,14 @@
                         <!-- <button type="submit" class="search-submit btn btn-default">Search</button> -->
                     </form>
             </div>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+            <div class="sidebar-toggle">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
             <div id="tabs">
                 <ul class="tabs nav navbar-nav">
                     {% include treebuilder.html %}
