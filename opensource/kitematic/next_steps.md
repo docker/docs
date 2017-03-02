@@ -30,8 +30,8 @@ As an exercise, implement the code changes needed to display the current contain
 To learn more about contributing to Docker open source projects, see:
 
 * <a href="/opensource/project/who-written-for/" target="_blank">
- README First</a>
+ README first</a>
 
-* <a href="/opensource/code/" target="_blank"> Quick Start contribution </a>
+* <a href="/opensource/code/" target="_blank"> Quick start contribution </a>
 
 * <a href="/opensource/workflow/make-a-contribution/" target="_blank"> Understand how to contribute </a>
