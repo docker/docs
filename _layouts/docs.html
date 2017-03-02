@@ -149,40 +149,6 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 								{% endunless %}
 						</div>
 					</div>
-					<script language="javascript">
-							var x = document.links.length;
-							var baseHref = document.getElementsByTagName('base')[0].href
-							for (i = 0; i < x; i++) {
-								var munged = false;
-								var thisHREF = document.links[i].href;
-								var originalURL = "{{ page.url }}";
-								if (thisHREF.indexOf(baseHref + "#") > -1) {
-									// hash fix
-									//console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
-									thisHREF = originalURL + thisHREF.replace(baseHref, "");
-									//console.log('AFTER: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
-								}
-								if ((thisHREF.indexOf(window.location.hostname) > -1 || thisHREF.indexOf('http') == -1) && document.links[i].className.indexOf("nomunge") < 0) {
-									munged = true;
-									thisHREF = thisHREF.replace(".md", "/").replace("/index/", "/");
-									document.links[i].setAttribute('href', thisHREF);
-								}
-							}
-						</script>
-					<script language="javascript">
-					// ensure that the left nav visibly displays the current topic
-					var current = document.getElementsByClassName("active currentPage");
-					if (current[0]) {
-							var container = document.getElementsByClassName("sidebar");
-							if (container[0]) {
-								current[0].scrollIntoView(true);
-								container[0].scrollTop -= 150;
-							}
-						}
-					</script>
-
-
-
 				</div>
 			</div>
 		</div>

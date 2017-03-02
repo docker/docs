@@ -1,9 +1,42 @@
 // Right nav highlighting
+var sidebarBottom = document.getElementsByClassName("sidebar")[0].getBoundingClientRect().bottom;
+var footerTop = document.getElementsByClassName("footer")[0].getBoundingClientRect().top;
+var headerOffset = document.getElementsByClassName("container-fluid")[0].getBoundingClientRect().bottom;
+
+var x = document.links.length;
+var baseHref = document.getElementsByTagName('base')[0].href
+for (i = 0; i < x; i++) {
+  var munged = false;
+  var thisHREF = document.links[i].href;
+  var originalURL = "{{ page.url }}";
+  if (thisHREF.indexOf(baseHref + "#") > -1) {
+    // hash fix
+    //console.log('BEFORE: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
+    thisHREF = originalURL + thisHREF.replace(baseHref, "");
+    //console.log('AFTER: base:',baseHref,'thisHREF:',thisHREF,'originalURL:',originalURL);
+  }
+  if ((thisHREF.indexOf(window.location.hostname) > -1 || thisHREF.indexOf('http') == -1) && document.links[i].className.indexOf("nomunge") < 0) {
+    munged = true;
+    thisHREF = thisHREF.replace(".md", "/").replace("/index/", "/");
+    document.links[i].setAttribute('href', thisHREF);
+  }
+}
+
+// ensure that the left nav visibly displays the current topic
+var current = document.getElementsByClassName("active currentPage");
+if (current[0]) {
+    var container = document.getElementsByClassName("sidebar");
+    if (container[0]) {
+      current[0].scrollIntoView(true);
+      container[0].scrollTop -= 150;
+    }
+  }
+
 function highlightRightNav(heading)
 {
   if (heading == "title")
   {
-    history.pushState({},"Top of page on " + document.location.pathname,document.location.protocol +"//"+ document.location.hostname + (location.port ? ':'+location.port: '') + document.location.pathname);
+    history.replaceState({},"Top of page on " + document.location.pathname,document.location.protocol +"//"+ document.location.hostname + (location.port ? ':'+location.port: '') + document.location.pathname);
     $("#my_toc a").each(function(){
       $(this).removeClass("active");
     });
@@ -26,10 +59,11 @@ function highlightRightNav(heading)
         //console.log("right-nav",this.href);
         if (this.href==targetAnchorHREF)
         {
-          history.pushState({},this.innerText,targetAnchorHREF);
+          history.replaceState({},this.innerText,targetAnchorHREF);
           $(this).addClass("active");
+          var sidebarOffset = (sidebarBottom > 200) ? 200 : headerOffset - 20;
           $("#sidebar-wrapper").animate({
-            scrollTop: $("#sidebar-wrapper").scrollTop() + $(this).position().top - 200
+            scrollTop: $("#sidebar-wrapper").scrollTop() + $(this).position().top - sidebarOffset
           },100);
           //document.getElementById("sidebar-wrapper").scrollTop = this.getBoundingClientRect().top - 200;
         } else {
@@ -39,8 +73,25 @@ function highlightRightNav(heading)
     }
   }
 }
+function checkNavSizes()
+{
+  sidebarBottom = document.getElementsByClassName("sidebar")[0].getBoundingClientRect().bottom;
+  footerTop = document.getElementsByClassName("footer")[0].getBoundingClientRect().top;
+  headerOffset = document.getElementsByClassName("container-fluid")[0].getBoundingClientRect().bottom;
+  if (footerTop < sidebarBottom || (sidebarBottom < footerTop && sidebarBottom < $(window).height()))
+  {
+    // the footer is overlapping the sidebar
+    document.getElementsByClassName("sidebar")[0].style.height = (footerTop - headerOffset) + "px";
+    document.getElementsByClassName("toc-nav")[0].style.height = (footerTop) + "px";
+    highlightRightNav(currentHeading);
+  }
+}
+$(window).resize(function() {
+  checkNavSizes();
+});
 var currentHeading = "";
 $(window).scroll(function(){
+  checkNavSizes();
   var headingPositions = new Array();
   $("h1, h2, h3, h4, h5, h6").each(function(){
     if (this.id == "") this.id="title";
