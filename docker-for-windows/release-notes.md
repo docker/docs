@@ -23,23 +23,33 @@ about both kinds of releases, and download stable and beta product installers at
 **New**
 
 - Renamed to Docker Community Edition
-- Integration with Docker Cloud: control remote Swarms from the local CLI and view your repositories. This feature is going to be rolled out to all users progressively
+- Integration with Docker Cloud: control remote Swarms from the local CLI and view your repositories. This feature is going to be rolled out to all users
+progressively
 
 **Upgrades**
 
 - [Docker 17.03.0-ce](https://github.com/docker/docker/releases/tag/v17.03.0-ce)
-- [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
 - [Docker Compose 1.11.2](https://github.com/docker/compose/releases/tag/1.11.2)
-- Linux Kernel 4.9.11
+- [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
+- Linux kernel 4.9.12
 
 **Bug fixes and minor changes**
 
-- VPNKit: fixed unmarshalling of DNS packets containing pointers to pointers to labels
 - Match Hyper-V Integration Services by ID, not name
 - Don't consume 100% CPU when the service is stopped
 - Log the diagnostic id when uploading
 - Improved Firewall handling: stop listing the rules since it can take a lot of time
 - Don't rollback to the previous engine when the desired engine fails to start
+- Don't use port 4222 inside the Linux VM
+- Fix startup error of ObjectNotFound in Set-VMFirmware
+- Add detailed logs when firewall is configured
+- Add a link to the Experimental Features documentation
+- Fixed the Copyright in About Dialog
+- VPNKit: fix unmarshalling of DNS packets containing pointers to pointers to labels
+- VPNKit: set the Recursion Available bit on DNS responses from the cache
+- VPNKit: Avoid diagnostics to capture too much data
+- VPNKit: fix a source of occasional packet loss (truncation) on the virtual ethernet link
+- Fix negotiation of TimeSync protocol version (via kernel update)
 
 ### Docker for Windows 1.13.1, 2017-02-09 (stable)
 
@@ -302,13 +312,13 @@ We did not distribute a 1.12.4 stable release
 **Upgrades**
 
 - [Docker 17.03.0-ce](https://github.com/docker/docker/releases/tag/v17.03.0-ce)
-- [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
 - [Docker Compose 1.11.2](https://github.com/docker/compose/releases/tag/1.11.2)
-- Linux Kernel 4.9.11
+- [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
+- Linux Kernel 4.9.12
 
 **Bug fixes and minor changes**
 
-- VPNKit: fixed unmarshalling of DNS packets containing pointers to pointers to labels
+- VPNKit: fix unmarshalling of DNS packets containing pointers to pointers to labels
 - Match Hyper-V Integration Services by ID, not name
 - Don't consume 100% CPU when the service is stopped
 - Log the diagnostic id when uploading

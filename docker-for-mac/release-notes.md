@@ -29,16 +29,37 @@ about both kinds of releases, and download stable and beta product installers at
 **Upgrades**
 
 - [Docker 17.03.0-ce](https://github.com/docker/docker/releases/tag/v17.03.0-ce)
-- [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
 - [Docker Compose 1.11.2](https://github.com/docker/compose/releases/tag/1.11.2)
-- Linux Kernel 4.9.11
+- [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
+- Linux kernel 4.9.12
 
 **Bug fixes and minor changes**
 
-- VPNKit: fixed unmarshalling of DNS packets containing pointers to pointers to labels
+- Allow to reset faulty daemon.json through a link in advanced subpanel
+- More options when moving disk image
+- Add link to experimental features
+- Filesharing and daemon table empty fields are editable
+- Hide restart button in settings window
+- Fix bug where update window hides when app not focused
+- Don't use port 4222 inside the Linux VM
+- Add page_poison=1 to boot args
+- Add a new disk flushing option
+- DNS forwarder ignores responses from malfunctioning servers (docker/for-mac#1025)
+- DNS forwarder send all queries in parallel, process results in order
+- DNS forwarder includes servers with zones in general searches (docker/for-mac#997)
+- Parses aliases from /etc/hosts (docker/for-mac#983)
+- Can resolve DNS requests via servers listed in the /etc/resolver directory on the host
+- Limit vCPUs to 64
+- Fix for swap not being mounted
+- Fix aufs xattr delete issue (docker/docker#30245)
 - osxfs: catch EPERM when reading extended attributes of non-files
-- Added `page_poison=1` to boot args
-- Added a new disk flushing option
+- VPNKit: fix unmarshalling of DNS packets containing pointers to pointers to labels
+- VPNKit: set the Recursion Available bit on DNS responses from the cache
+- VPNKit: Avoid diagnostics to capture too much data
+- VPNKit: Fix a source of occasional packet loss (truncation) on the virtual ethernet link
+- HyperKit: Dump guest physical and linear address from VMCS when dumping state
+- HyperKit: Kernel boots with panic=1 arg
+
 
 ### Docker for Mac 1.13.1, 2017-02-09 (stable)
 
@@ -314,16 +335,16 @@ events or unexpected unmounts.
 **Upgrades**
 
 - [Docker 17.03.0-ce](https://github.com/docker/docker/releases/tag/v17.03.0-ce)
-- [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
 - [Docker Compose 1.11.2](https://github.com/docker/compose/releases/tag/1.11.2)
-- Linux Kernel 4.9.11
+- [Docker Machine 0.10.0](https://github.com/docker/machine/releases/tag/v0.10.0)
+- Linux Kernel 4.9.12
 
 **Bug fixes and minor changes**
 
-- VPNKit: fixed unmarshalling of DNS packets containing pointers to pointers to labels
+- VPNKit: fix unmarshalling of DNS packets containing pointers to pointers to labels
 - osxfs: catch EPERM when reading extended attributes of non-files
-- Added `page_poison=1` to boot args
-- Added a new disk flushing option
+- Add page_poison=1 to boot args
+- Add a new disk flushing option
 
 ### Docker Community Edition 17.03.0 RC1 Release Notes (2017-02-22 17.03.0-ce-rc1-mac1)
 
