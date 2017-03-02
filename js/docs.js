@@ -81,8 +81,10 @@ function checkNavSizes()
   if (footerTop < sidebarBottom || (sidebarBottom < footerTop && sidebarBottom < $(window).height()))
   {
     // the footer is overlapping the sidebar
-    document.getElementsByClassName("sidebar")[0].style.height = (footerTop - headerOffset) + "px";
-    document.getElementsByClassName("toc-nav")[0].style.height = (footerTop) + "px";
+    var sidebarHeight = ((footerTop - headerOffset) < $(window).height()) ? (footerTop - headerOffset) : $(window).height();
+    var tocNavHeight = (footerTop < $(window).height()) ? footerTop : $(window).height();
+    document.getElementsByClassName("sidebar")[0].style.height = sidebarHeight + "px";
+    document.getElementsByClassName("toc-nav")[0].style.height = footerTop + "px";
     highlightRightNav(currentHeading);
   }
 }
@@ -142,46 +144,7 @@ function readCookie(name) {
 function eraseCookie(name) {
     createCookie(name,"",-1);
 }
-if (readCookie("night") == "true") {
-  document.getElementById('pagestyle').setAttribute('href', '/css/style-alt.css');
-  $('#switch-style').prop('checked', true);
-} else {
-  document.getElementById('pagestyle').setAttribute('href', '/css/style.css');
-  $('#switch-style').prop('checked', false);
-}
-
-
 /*
- *
- * swapStyleSheet*********************************************************************
- *
- */
-
-// Cookie functions
-function createCookie(name,value,days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + value + expires + "; path=/";
-}
-
-function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
-
-function eraseCookie(name) {
-    createCookie(name,"",-1);
-}
 if (readCookie("night") == "true") {
   document.getElementById('pagestyle').setAttribute('href', '/css/style-alt.css');
   $('#switch-style').prop('checked', true);
@@ -189,6 +152,9 @@ if (readCookie("night") == "true") {
   document.getElementById('pagestyle').setAttribute('href', '/css/style.css');
   $('#switch-style').prop('checked', false);
 }
+*/
+
+
 /*
  *
  * toggle menu *********************************************************************
