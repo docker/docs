@@ -53,13 +53,18 @@ The `docker-stack.yml` file must be located on a manager for the swarm where you
 
 We'll deploy the application from the manager.
 
-1.  Deploy the application stack based on the `.yml` using the command `docker stack deploy` as follows.
+1.  Deploy the application stack based on the `.yml` using the command
+[`docker stack deploy`](/engine/reference/commandline/stack_deploy.md) as follows.
 
     ```
     docker stack deploy --compose-file docker-stack.yml vote
     ```
 
-    Here is an example of the command and the output.
+    * The `--compose-file` option specifies the path to our stack file. In this case, we assume it's in the current directory so we simply name the stack file: `docker-stack.yml`.
+
+    * For the example, we name this app `vote`, but we could name it anything we want.
+
+      Here is an example of the command and the output.
 
     ```
     docker@manager:~$ docker stack deploy --compose-file docker-stack.yml vote
