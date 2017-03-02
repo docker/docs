@@ -71,7 +71,7 @@ Four different options affect container domain name services.
     <code>--dns=IP_ADDRESS...</code>
     </p></td>
     <td><p>
-     Sets the IP addresses added as <code>server</code> lines to the container's
+     Sets the IP addresses added as <code>nameserver</code> lines to the container's
      <code>/etc/resolv.conf</code> file.  Processes in the container, when
      confronted with a hostname not in <code>/etc/hosts</code>, will connect to
      these IP addresses on port 53 looking for name resolution services.     </p></td>
