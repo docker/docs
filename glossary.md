@@ -19,6 +19,4 @@ like so:
 
 {{ entry[1] }}
 
-<span class="relatedGlossaryText" style="display:none">{{ entry[0] }}</span>
-
 {% endfor %}
