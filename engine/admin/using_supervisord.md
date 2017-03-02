@@ -28,7 +28,6 @@ Let's start by creating a basic `Dockerfile` for our new image.
 
 ```Dockerfile
 FROM ubuntu:16.04
-MAINTAINER examples@docker.com
 ```
 
 ## Installing Supervisor
@@ -98,7 +97,6 @@ Your completed Dockerfile now looks like this:
 
 ```Dockerfile
 FROM ubuntu:16.04
-MAINTAINER examples@docker.com
 
 RUN apt-get update && apt-get install -y openssh-server apache2 supervisor
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
