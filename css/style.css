@@ -56,7 +56,6 @@ h5,
 h6 {
     color: #254356;
     font-family: Geomanist Book;
-    clear: both;
 }
 
 h1 {
@@ -405,14 +404,6 @@ a.button.outline-btn {
     margin: 0;
 }
 
-.darkblue-btn {
-  background-color: #0C5176;
-  padding: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-right: 20px;
-}
-
 .outline-btn:hover,
 .primary-btn:hover,
 .secondary-btn:hover {
@@ -421,22 +412,6 @@ a.button.outline-btn {
 
 .outline-btn:hover {
     color: #1488C6;
-}
-
-/*
-*
-* tables  *********************************************************************
-*
-*/
-
-
-th, td.th {
-  font-weight: bold;
-}
-
-.content table {
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 
