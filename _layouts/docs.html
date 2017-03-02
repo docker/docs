@@ -168,9 +168,9 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 					<script language="javascript">
 					// ensure that the left nav visibly displays the current topic
 					var current = document.getElementsByClassName("active currentPage");
-					if (current) {
+					if (current[0]) {
 							var container = document.getElementsByClassName("sidebar");
-							if (container) {
+							if (container[0]) {
 								current[0].scrollIntoView(true);
 								container[0].scrollTop -= 150;
 							}
