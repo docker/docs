@@ -12,7 +12,7 @@ various APIs, CLIs, and file formats.
 |:-------------------------------------------------------|:----------------------------------------------------------------|
 | [Dockerfile](/engine/reference/builder/)               | Defines the contents and startup behavior of a single container |
 | [Compose file](/compose/compose-file/)                 | Defines a multi-container application                           |
-| [Stack file](/docker-cloud/apps/stack-yaml-reference/) | Defines a multi-container application for Docker Cloud          |
+| [Docker Cloud Stack file](/docker-cloud/apps/stack-yaml-reference/) | Defines a multi-container application for Docker Cloud          |
 
 
 ## Command-line interfaces (CLIs)
