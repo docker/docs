@@ -668,13 +668,13 @@ a.button.outline-btn {
 *
 */
 
-.content {
-    max-width: 980px;
+.content,
+.main-content {
+    max-width: 860px;
 }
 
 .main-content {
     padding: 15px 15px 25px 21px;
-    max-width: 960px;
 }
 
 
@@ -685,7 +685,7 @@ a.button.outline-btn {
 */
 
 .wrapper {
-    min-height: 1000px;
+    min-height: 500px;
 }
 
 #sidebar-wrapper {
