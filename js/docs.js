@@ -1,5 +1,6 @@
 // Right nav highlighting
-var sidebarBottom = document.getElementsByClassName("sidebar")[0].getBoundingClientRect().bottom;
+var sidebarObj = (document.getElementsByClassName("sidebar")[0]) ? document.getElementsByClassName("sidebar")[0] : document.getElementsByClassName("sidebar-home")[0]
+var sidebarBottom = sidebarObj.getBoundingClientRect().bottom;
 var footerTop = document.getElementsByClassName("footer")[0].getBoundingClientRect().top;
 var headerOffset = document.getElementsByClassName("container-fluid")[0].getBoundingClientRect().bottom;
 
@@ -25,8 +26,7 @@ for (i = 0; i < x; i++) {
 // ensure that the left nav visibly displays the current topic
 var current = document.getElementsByClassName("active currentPage");
 if (current[0]) {
-    var container = document.getElementsByClassName("sidebar");
-    if (container[0]) {
+    if (sidebarObj) {
       current[0].scrollIntoView(true);
       container[0].scrollTop -= 150;
     }
@@ -75,7 +75,7 @@ function highlightRightNav(heading)
 }
 function checkNavSizes()
 {
-  sidebarBottom = document.getElementsByClassName("sidebar")[0].getBoundingClientRect().bottom;
+  sidebarBottom = sidebarObj.getBoundingClientRect().bottom;
   footerTop = document.getElementsByClassName("footer")[0].getBoundingClientRect().top;
   headerOffset = document.getElementsByClassName("container-fluid")[0].getBoundingClientRect().bottom;
   if (footerTop < sidebarBottom || (sidebarBottom < footerTop && sidebarBottom < $(window).height()))
