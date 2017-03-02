@@ -61,7 +61,7 @@ creating an image which runs on Linux.
     **Windows**:
 
     ```none
-    C:\> notepad Dockerfile
+    C:\> notepad Dockerfile.
     ```
 
 4.  Add a `FROM` statement by copying the following line into the file:
