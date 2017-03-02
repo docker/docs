@@ -10,7 +10,7 @@
 | [Oracle Linux](/engine/installation/linux/oracle.md)                                                 | {{ green-check }} |                   |
 | [SUSE Linux Enterprise Server](/engine/installation/linux/suse.md)                                   | {{ green-check }} |                   |
 | [Microsoft Windows Server 2016](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/quick-start-windows-server){: target="_blank" class="_" } | {{ green-check }} |   |
-| [Microsoft Windows 10](/docker-for-windows/))                                                        |                   | {{ green-check }} |
+| [Microsoft Windows 10](/docker-for-windows/)                                                         |                   | {{ green-check }} |
 | [macOS](/docker-for-mac/)                                                                            |                   | {{ green-check }} |
 | [Microsoft Azure](/docker-for-azure/)                                                                | {{ green-check }} | {{ green-check }} |
 | [Amazon Web Services](/docker-for-aws/)                                                              | {{ green-check }} | {{ green-check }} |
