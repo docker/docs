@@ -5,12 +5,6 @@
 * this css will be integrated into master. for now testing.......
 *
 */
-code {
-  white-space: nowrap !important;
-}
-pre {
-  white-space: pre-wrap !important;
-}
 
 .toc-nav
 {
