@@ -99,3 +99,43 @@ input.gsc-search-button-v2 {
   min-width: 13px;
   margin-top: 2px;
 }
+
+/* CTA button for downloads and stuff */
+
+.darkblue-btn,
+.cta-btn  {
+  background-color: #1488C6;
+  padding: 12px 15px 10px 15px;
+  margin: 20px 20px 20px 0;
+  display: inline-block;
+}
+
+/* In case you want a row of them */
+
+.darkblue-btn.right,
+.cta-btn.right {
+  margin: 20px 0 20px 20px;
+}
+
+/* Make table headings  bold, give tables some breathing room */
+
+th, td.th {
+  font-weight: bold;
+}
+
+.content table {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Without this, if the CTA button is used right before a header,
+   the header is on the same line */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    clear: both;
+}
