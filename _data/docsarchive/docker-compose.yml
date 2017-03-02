@@ -1,3 +1,7 @@
+v1.13:
+  image: docs/docker.github.io:v1.12
+  ports:
+    - "4113:4000"
 v1.12:
   image: docs/docker.github.io:v1.12
   ports:

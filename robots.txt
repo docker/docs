@@ -10,6 +10,7 @@ Disallow: /v1.9/
 Disallow: /v1.10/
 Disallow: /v1.11/
 Disallow: /v1.12/
+Disallow: /v1.13/
 
 # Docker Datacenter archives
 Disallow: /datacenter/dtr/2.1
