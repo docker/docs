@@ -7,13 +7,13 @@ title: Manage keys for content trust
 Trust for an image tag is managed through the use of keys. Docker's content
 trust makes use of five different types of keys:
 
-| Key                 | Description                                                                                                                                                                                                                                                                                                                                                                         |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| root key         | Root of content trust for an image tag. When content trust is enabled, you create the root key once. Also known as the offline key, because it should be kept offline. |
-| targets          | This key allows you to sign image tags, to manage delegations including delegated keys or permitted delegation paths. Also known as the repository key, since this key determines what tags can be signed into an image repository. |
-| snapshot         | This key signs the current collection of image tags, preventing mix and match attacks.
-| timestamp        | This key allows Docker image repositories to have freshness security guarantees without requiring periodic content refreshes on the client's side. |
-| delegation       | Delegation keys are optional tagging keys and allow you to delegate signing image tags to other publishers without having to share your targets key. |
+| Key        | Description |                                                                                                                                                                                                                         
+|:-----------|:----------- |
+| root key   | Root of content trust for an image tag. When content trust is enabled, you create the root key once. Also known as the offline key, because it should be kept offline. |
+| targets    | This key allows you to sign image tags, to manage delegations including delegated keys or permitted delegation paths. Also known as the repository key, since this key determines what tags can be signed into an image repository. |
+| snapshot   | This key signs the current collection of image tags, preventing mix and match attacks. |                                                                                                                                         
+| timestamp  | This key allows Docker image repositories to have freshness security guarantees without requiring periodic content refreshes on the client's side. |
+| delegation | Delegation keys are optional tagging keys and allow you to delegate signing image tags to other publishers without having to share your targets key. |
 
 When doing a `docker push` with Content Trust enabled for the first time, the
 root, targets, snapshot, and timestamp keys are generated automatically for
@@ -37,9 +37,9 @@ repositories created with newer versions of Docker.
 ## Choosing a passphrase
 
 The passphrases you chose for both the root key and your repository key should
-be randomly generated and stored in a password manager.  Having the repository key
+be randomly generated and stored in a password manager. Having the repository key
 allows users to sign image tags on a repository. Passphrases are used to encrypt
-your keys at rest and ensures that a lost laptop or an unintended backup doesn't
+your keys at rest and ensure that a lost laptop or an unintended backup doesn't
 put the private key material at risk.
 
 ## Back up your keys

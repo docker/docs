@@ -12,6 +12,12 @@ To get started with Docker on Fedora, make sure you
 
 ## Prerequisites
 
+### Docker EE customers
+
+Docker EE is not supported on Fedora. For a list of supported operating systems
+and distributions for different Docker editions, see
+[Docker variants](/engine/installation/#docker-variants).
+
 ### OS requirements
 
 To install Docker, you need the 64-bit version of one of these Fedora versions:
@@ -19,29 +25,27 @@ To install Docker, you need the 64-bit version of one of these Fedora versions:
 - 24
 - 25
 
-### Remove unofficial Docker packages
+### Uninstall old versions
 
-Fedora's operating system repositories contain an older version of Docker, with
-the package name `docker` instead of `docker-engine`. If you installed this version
-of Docker, remove it using the following command:
-
-```bash
-$ sudo dnf -y remove docker docker-common container-selinux
-```
-
-You may also have to remove the package `docker-selinux` which conflicts with the
-official `docker-engine` package. Remove it with the following command:
+Older versions of Docker were called `docker` or `docker-engine`. If these are
+installed, uninstall them, along with associated dependencies.
 
 ```bash
-$ sudo dnf -y remove docker-selinux
+$ sudo dnf remove docker \
+                  docker-common \
+                  container-selinux \
+                  docker-selinux \
+                  docker-engine
 ```
 
-The contents of `/var/lib/docker` are not removed, so any images, containers,
-or volumes you created using the older version of Docker are preserved.
+It's OK if `dnf` reports that none of these packages are installed.
 
-## Install Docker
+The contents of `/var/lib/docker/`, including images, containers, volumes, and
+networks, are preserved. The Docker CE package is now called `docker-ce`.
 
-You can install Docker in different ways, depending on your needs:
+## Install Docker CE
+
+You can install Docker CE in different ways, depending on your needs:
 
 - Most users
   [set up Docker's repositories](#install-using-the-repository) and install
@@ -49,20 +53,18 @@ You can install Docker in different ways, depending on your needs:
   recommended approach.
 
 - Some users download the RPM package and install it manually and manage
-  upgrades completely manually.
-
-- Some users cannot use third-party repositories, and must rely on the version
-  of Docker in the Fedora repositories. This version of Docker may be out of
-  date. Those users should consult the Fedora documentation and not follow these
-  procedures.
+  upgrades completely manually. This is useful in situations such as installing
+  Docker on air-gapped systems with no access to the internet.
 
 ### Install using the repository
 
 Before you install Docker for the first time on a new host machine, you need to
-set up the Docker repository. Afterward, you can install, update, or downgrade
-Docker from the repository.
+set up the Docker repository. Afterward, you can install and update Docker from
+the repository.
 
 #### Set up the repository
+
+{% assign download-url-base = "https://download.docker.com/linux/fedora" %}
 
 1.  Install the `dnf-plugins-core` package which provides the commands to manage
     your DNF repositories from the command line.
@@ -76,33 +78,29 @@ Docker from the repository.
     ```bash
     $ sudo dnf config-manager \
         --add-repo \
-        https://docs.docker.com/engine/installation/linux/repo_files/fedora/docker.repo
+        {{ download-url-base }}/docker-ce.repo
     ```
 
-3.  **Optional**: Enable the **testing** repository. This repository is included
+3.  **Optional**: Enable the **edge** repository. This repository is included
     in the `docker.repo` file above but is disabled by default. You can enable
-    it alongside the stable repository. **Do not use unstable repositories on
-    on production systems or for non-testing workloads.**
+    it alongside the stable repository. For information about **stable** and
+    **edge** builds, see
+    [Docker variants](/engine/installation/#docker-variants).
 
-    > **Warning**: If you have both stable and unstable repositories enabled,
-    > updating without specifying a version in the `dnf install` or `dnf update`
-    > command will always install the highest possible version, which will
-    > almost certainly be an unstable one.
 
     ```bash
-    $ sudo dnf config-manager --set-enabled docker-testing
+    $ sudo dnf config-manager --enable docker-ce-edge
     ```
 
-    You can disable the `testing` repository by running the `dnf config-manager`
-    command with the `--set-disabled` flag. To re-enable it, use the
-    `--set-enabled` flag The following command disables the `testing`
-    repository.
+    You can disable the **edge** repository by running the `dnf config-manager`
+    command with the `--disable` flag. To re-enable it, use the
+    `--enable` flag. The following command disables the **edge** repository.
 
     ```bash
-    $ sudo dnf config-manager --set-disabled docker-testing
+    $ sudo dnf config-manager --disable docker-ce-edge
     ```
 
-#### Install Docker
+#### Install Docker CE
 
 1.  Update the `dnf` package index.
 
@@ -113,35 +111,33 @@ Docker from the repository.
     If this is the first time you have refreshed the package index since adding
     the Docker repositories, you will be prompted to accept the GPG key, and
     the key's fingerprint will be shown. Verify that the fingerprint matches
-    `58118E89F3A912897C070ADBF76221572C52609D` and if so, accept the key.
+    `060A 61C5 1B55 8A7F 742B  77AA C52F EB6B 621E 9F35` and if so, accept the
+    key.
 
 2.  Install the latest version of Docker, or go to the next step to install a
     specific version.
 
     ```bash
-    $ sudo dnf -y install docker-engine
+    $ sudo dnf install docker-ce
     ```
 
-    > **Warning**: If you have both stable and unstable repositories enabled,
-    > installing or updating without specifying a version in the `dnf install`
-    > or `dnf update` command will always install the highest possible version,
-    > which will almost certainly be an unstable one.
+    > **Warning**: If you have multiple Docker repositories enabled, installing
+    > or updating without specifying a version in the `dnf install` or
+    > `dnf update` command will always install the highest possible version,
+    > which may not be appropriate for your stability needs.
 
 3.  On production systems, you should install a specific version of Docker
-    instead of always using the latest. List the available versions.
-    This example uses the `sort -r` command to sort the results by version
-    number, highest to lowest, and is truncated.
+    instead of always using the latest. List the available versions. This
+    example uses the `sort -r` command to sort the results by version number,
+    highest to lowest, and is truncated.
 
-    > **Note**: This `dnf list` command only shows binary packages. To show
+    > **Note**: This `yum list` command only shows binary packages. To show
     > source packages as well, omit the `.x86_64` from the package name.
 
     ```bash
-    $ dnf list docker-engine.x86_64  --showduplicates |sort -r
+    $ dnf list docker-ce.x86_64  --showduplicates |sort -r
 
-    docker-engine.x86_64  1.13.0-1.fc24                               docker-main
-    docker-engine.x86_64  1.12.5-1.fc24                               docker-main   
-    docker-engine.x86_64  1.12.4-1.fc24                               docker-main   
-    docker-engine.x86_64  1.12.3-1.fc24                               docker-main   
+    docker-ce.x86_64  17.03.0.fc24                               docker-ce-stable  
     ```
 
     The contents of the list depend upon which repositories are enabled, and
@@ -153,7 +149,7 @@ Docker from the repository.
     string to the package name and separate them by a hyphen (`-`):
 
     ```bash
-    $ sudo dnf -y install docker-engine-<VERSION_STRING>
+    $ sudo dnf -y install docker-ce-<VERSION>
     ```
 
 4.  Start Docker.
@@ -162,7 +158,7 @@ Docker from the repository.
     $ sudo systemctl start docker
     ```
 
-5.  Verify that `docker` is installed correctly by running the `hello-world`
+5.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -176,7 +172,7 @@ Docker is installed and running. You need to use `sudo` to run Docker commands.
 Continue to [Linux postinstall](linux-postinstall.md) to allow non-privileged
 users to run Docker commands and for other optional configuration steps.
 
-#### Upgrade Docker
+#### Upgrade Docker CE
 
 To upgrade Docker, first run `sudo dnf makecache fast`, then follow the
 [installation instructions](#install-docker), choosing the new version you want
@@ -188,13 +184,11 @@ If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You will need to download
 a new file each time you want to upgrade Docker.
 
-1.  Go to [https://yum.dockerproject.org/repo/main/fedora/](https://yum.dockerproject.org/repo/main/fedora/)
-    and choose the subdirectory for your Fedora version. Download the `.rpm`
-    file for the Docker version you want to install.
+1.  Go to [{{ download-url-base }}/7/x86_64/stable/]({{ download-url-base }}/7/x86_64/stable/)
+    and download the `.rpm` file for the Docker version you want to install.
 
-    > **Note**: To install a testing version, change the word `main` in the
-    > URL to `testing`. Do not use unstable versions of Docker in production
-    > or for non-testing workloads.
+    > **Note**: To install an **edge**  package, change the word
+    > `stable` in the > URL to `edge`.
 
 2.  Install Docker, changing the path below to the path where you downloaded
     the Docker package.
@@ -209,7 +203,7 @@ a new file each time you want to upgrade Docker.
     $ sudo systemctl start docker
     ```
 
-4.  Verify that `docker` is installed correctly by running the `hello-world`
+4.  Verify that Docker CE is installed correctly by running the `hello-world`
     image.
 
     ```bash
@@ -219,7 +213,7 @@ a new file each time you want to upgrade Docker.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints an informational message and exits.
 
-Docker is installed and running. You need to use `sudo` to run Docker commands.
+Docker CE is installed and running. You need to use `sudo` to run Docker commands.
 Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
 non-privileged users to run Docker commands and for other optional configuration
 steps.
@@ -230,13 +224,12 @@ To upgrade Docker, download the newer package file and repeat the
 [installation procedure](#install-from-a-package), using `dnf -y upgrade`
 instead of `dnf -y install`, and pointing to the new file.
 
-
 ## Uninstall Docker
 
 1.  Uninstall the Docker package:
 
     ```bash
-    $ sudo dnf -y remove docker-engine
+    $ sudo dnf remove docker-ce
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host

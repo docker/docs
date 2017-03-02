@@ -6,7 +6,6 @@
 #	docker run -t -i --rm -e http_proxy http://dockerhost:3142/ debian bash
 #
 FROM		ubuntu
-MAINTAINER	SvenDowideit@docker.com
 
 VOLUME		["/var/cache/apt-cacher-ng"]
 RUN		apt-get update && apt-get install -y apt-cacher-ng

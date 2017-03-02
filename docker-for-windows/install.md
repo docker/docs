@@ -1,6 +1,6 @@
 ---
 description: How to install Docker for Windows
-keywords: windows, beta, alpha, install, download
+keywords: windows, beta, edge, alpha, install, download
 title: Install Docker for Windows
 ---
 
@@ -15,14 +15,14 @@ over to the tutorials at [Learn Docker](/learn.md).
 ## Download Docker for Windows
 
 If you have not already done so, please install Docker for Windows. You can
-download installers from the stable or beta channel.  For more about stable and
-beta channels, see the
-[FAQs](/docker-for-windows/faqs.md#questions-about-stable-and-beta-channels).
+download installers from the Stable or Edge channel.  For more about Stable and
+Edge channels, see the
+[FAQs](/docker-for-windows/faqs.md#questions-about-stable-and-edge-channels).
 
 <table style="width:100%">
   <tr>
-    <th>Stable channel</th>
-    <th>Beta channel</th>
+    <th style="font-size: x-large; font-family: arial">Stable channel</th>
+    <th style="font-size: x-large; font-family: arial">Edge channel</th>
   </tr>
   <tr valign="top">
     <td width="50%">This installer is fully baked and tested, and comes
@@ -32,30 +32,30 @@ beta channels, see the
     <a href="index#daemon-experimental-mode">Docker Daemon settings for
     experimental mode</a>. <br><br>This is the best channel to use if
     you want a reliable platform to work with. (Be sure to disable
-    experimental features for apps in production.) <br><br>These releases follow a version schedule with a longer lead time than the betas,
+    experimental features for apps in production.) <br><br>These releases follow a version schedule with a longer lead time than the Edge releases,
     synched with Docker Engine releases and hotfixes.<br><br>On the
-    stable channel, you can select whether to send usage statistics
+    Stable channel, you can select whether to send usage statistics
     and other data.
     </td>
-    <td width="50%">This installer provides the latest Beta release of
+    <td width="50%">This installer provides the latest Edge release of
     Docker for Windows, offers cutting edge features along with <a href="https://github.com/docker/docker/blob/master/experimental/README.md"> experimental features in Docker Engine</a>, which are enabled
     by default and configurable on <a href="index#daemon-experimental-mode">
     Docker Daemon settings for experimental mode</a>. <br><br>This is
     the best channel to use if you want to experiment with features
     under development, and can weather some instability and bugs. This
-    channel is a continuation of the beta program, where you can
+    channel is a continuation of the Edge program, where you can
     provide feedback as the apps evolve. Releases are typically more
-    frequent than for stable, often one or more per month. <br><br>
-    We collect all usage data on betas across the board.</td>
+    frequent than for Stable, often one or more per month. <br><br>
+    We collect all usage data on Edge releases across the board.</td>
   </tr>
   <tr valign="top">
   <td width="50%">
-  <a class="button primary-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (stable)</a><br><br>
-  <a class="text-link"  href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum">Download checksum: InstallDocker.msi SHA256</a>
+  <a class="button darkblue-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (Stable)</a><br><br>
+  <a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: InstallDocker.msi SHA256</font></a>
   </td>
   <td width="50%">
-  <a class="button primary-btn" href="https://download.docker.com/win/beta/InstallDocker.msi">Get Docker for Windows (beta)</a><br><br>
-  <a class="text-link" href="https://download.docker.com/win/beta/InstallDocker.msi.sha256sum">Download checksum: InstallDocker.msi SHA256</a>
+  <a class="button darkblue-btn" href="https://download.docker.com/win/beta/InstallDocker.msi">Get Docker for Windows (Edge)</a><br><br>
+  <a href="https://download.docker.com/win/beta/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: InstallDocker.msi SHA256</font></a>
   </td>
   </tr>
 </table>
@@ -68,11 +68,11 @@ beta channels, see the
 >   [What to know before you install](/docker-for-windows/#what-to-know-before-you-install)
 >   for a full list of prerequisites.
 >
-> - You can switch between beta and stable versions, but you must have only one
+> - You can switch between Edge and Stable versions, but you must have only one
 >   app installed at a time. Also, you will need to save images and export
 >   containers you want to keep before uninstalling the current version before
 >   installing another. For more about this, see the
->   [FAQs about beta and stable channels](/docker-for-windows/faqs.md#questions-about-stable-and-beta-channels).
+>   [FAQs about Stable and Edge channels](/docker-for-windows/faqs.md#questions-about-stable-and-edge-channels).
 
 ##  What to know before you install
 
@@ -159,6 +159,6 @@ workarounds, how to run and submit diagnostics, and submit issues.
 
 * [FAQs](faqs.md) provides answers to frequently asked questions.
 
-* [Release Notes](release-notes.md) lists component updates, new features, and improvements associated with Stable and Beta releases.
+* [Release Notes](release-notes.md) lists component updates, new features, and improvements associated with Stable and Edge releases.
 
 * [Learn Docker](/learn.md) provides general Docker tutorials.

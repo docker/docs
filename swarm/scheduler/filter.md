@@ -138,22 +138,17 @@ Again, you'll avoid flash drives.
 $ mkdir sinatra
 $ cd sinatra
 $ echo "FROM ubuntu:14.04" > Dockerfile
-$ echo "MAINTAINER Kate Smith <ksmith@example.com>" >> Dockerfile
 $ echo "RUN apt-get update && apt-get install -y ruby ruby-dev" >> Dockerfile
 $ echo "RUN gem install sinatra" >> Dockerfile
 $ docker build --build-arg=constraint:storage==disk -t ouruser/sinatra:v2 .
 Sending build context to Docker daemon 2.048 kB
 Step 1 : FROM ubuntu:14.04
  ---> a5a467fddcb8
-Step 2 : MAINTAINER Kate Smith <ksmith@example.com>
- ---> Running in 49e97019dcb8
- ---> de8670dcf80e
-Removing intermediate container 49e97019dcb8
-Step 3 : RUN apt-get update && apt-get install -y ruby ruby-dev
+Step 2 : RUN apt-get update && apt-get install -y ruby ruby-dev
  ---> Running in 26c9fbc55aeb
  ---> 30681ef95fff
 Removing intermediate container 26c9fbc55aeb
-Step 4 : RUN gem install sinatra
+Step 3 : RUN gem install sinatra
  ---> Running in 68671d4a17b0
  ---> cd70495a1514
 Removing intermediate container 68671d4a17b0

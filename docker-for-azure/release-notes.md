@@ -1,6 +1,6 @@
 ---
 description: Release notes
-keywords: azure, microsoft, iaas, tutorial
+keywords: azure, microsoft, iaas, tutorial, edge, stable
 title: Docker for Azure Release Notes
 ---
 
@@ -8,10 +8,17 @@ title: Docker for Azure Release Notes
 
 ## Stable Channel
 
-### 1.13.1-2 (stable)
+### 17.03.0 CE
 Release date: 02/08/2017
 
-{{azure_button_latest}}
+{{azure_blue_latest}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+
+### 1.13.1-2
+Release date: 02/08/2017
 
 **New**
 
@@ -28,7 +35,16 @@ Release date: 1/18/2017
 - Added support to scale the number of nodes in manager and worker vm scale sets through Azure UI/CLI for managing the number of nodes in a scale set
 - Improved logging and remote diagnostics mechanisms for system containers
 
-## Beta Channel
+## Edge Channel
+
+### 17.03.0-edge CE
+Release date: 03/01/2017
+
+{{azure_blue_edge}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.1-beta18
 Release date: 02/16/2017

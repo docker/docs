@@ -219,12 +219,13 @@ volumes:
 
 ## Docker stacks and services
 
-To deploy the voting app, we will run the `docker stack deploy` command with
-this `docker-stack.yml` file to pull the referenced images and launch the
-services in a swarm.  This allows us to run the application across multiple
-servers, and use swarm mode for load balancing and performance. Rather than
-thinking about running individual containers, we can start to model deployments
-as application stacks and services.
+To deploy the voting app, we will run the [`docker stack
+deploy`](/engine/reference/commandline/stack_deploy.md) command with appropriate
+options using this `docker-stack.yml` file to pull the referenced images and
+launch the services in a swarm.  This allows us to run the application across
+multiple servers, and use swarm mode for load balancing and performance. Rather
+than thinking about running individual containers, we can start to model
+deployments as application stacks and services.
 
 If you are interested in learning more about new Compose version 3.x features, Docker Engine 1.13.x, and swarm mode integration, check out the [list of resources](customize-app.md#resources) at the end of this tutorial.
 
