@@ -355,6 +355,26 @@ distributed as Docker Images.
 
 ![Docker Store](images/docker-store.png)
 
+## Docker Cloud
+
+You can access your Docker Cloud account from within Docker for Mac.
+
+![Docker Cloud](images/docker-cloud.png)
+
+From the Docker for Mac menu, sign in to Docker Cloud with your Docker ID, or
+create one.
+
+![Docker Cloud sign-in](images/menu-cloud-sign-in.png)
+
+Then use the Docker for Mac menu to create, view, or navigate directly to
+your Cloud resources:
+
+* Organizations
+* Repositories
+* Swarms
+
+Check out the [Docker Cloud topics](/docker-cloud/index.md) to learn more.
+
 ## Where to go next
 
 * Try out the tutorials and sample app walkthroughs at [Learn Docker](/learn.md), including:
