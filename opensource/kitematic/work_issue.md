@@ -59,7 +59,7 @@ To do this, edit the container `General Settings` layout.
 
     *Note that the container ID in Kitematic matches the ID shown as output to the `docker ps` command.*
 
-6.  You can close the Kitematic application now, and kill the running process in the terminal via CTRL+c.
+6.  You can close the Kitematic application now, and kill the running process in the terminal via Ctrl+C.
 
 7.  Stage your changes by adding them.
 
