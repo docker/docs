@@ -79,12 +79,12 @@ the repository.
 
 1.  Remove any existing Docker repositories from `/etc/yum.repos.d/`.
 
-2.  Store your EE repository URL in `/etc/yum/vars/dockersuburl`. Replace
+2.  Store your EE repository URL in `/etc/yum/vars/dockerurl`. Replace
     `<DOCKER-EE-URL>` with the URL you noted down in the
     [prerequisites](#prerequisites).
 
     ```bash
-    $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockersuburl'
+    $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockerurl'
     ```
 
 3.  Install `yum-utils`, which provides the `yum-config-manager` utility:
