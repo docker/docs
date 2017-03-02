@@ -122,7 +122,7 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
     [prerequisites](#prerequisites).
 
     ```bash
-    $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockersuburl'
+    $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockerurl'
     ```
 
 3.  Install `yum-utils`, which provides the `yum-config-manager` utility:
