@@ -79,12 +79,12 @@ the repository.
 
 2.  Store two `yum` variables in `/etc/yum/vars/`.
 
-    - Store your EE repository URL in `/etc/yum/vars/dockerurl`. Replace
+    - Store your EE repository URL in `/etc/yum/vars/dockersuburl`. Replace
       `<DOCKER-EE-URL>` with the URL you noted down in the
       [prerequisites](#prerequisites).
 
       ```bash
-      $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockerurl'
+      $ sudo sh -c 'echo "<DOCKER-EE-URL>" > /etc/yum/vars/dockersuburl'
       ```
 
     - Store your RHEL version string in `/etc/yum/vars/dockerosversion`.
