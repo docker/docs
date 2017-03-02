@@ -80,12 +80,14 @@ function checkNavSizes()
   headerOffset = document.getElementsByClassName("container-fluid")[0].getBoundingClientRect().bottom;
   if (footerTop < sidebarBottom || (sidebarBottom < footerTop && sidebarBottom < $(window).height()))
   {
+
     // the footer is overlapping the sidebar
-    var sidebarHeight = ((footerTop - headerOffset) < $(window).height()) ? (footerTop - headerOffset) : $(window).height();
+    var sidebarHeight = (footerTop < $(window).height()) ? footerTop : $(window).height();
     var tocNavHeight = (footerTop < $(window).height()) ? footerTop : $(window).height();
     sidebarObj.style.height = sidebarHeight + "px";
-    document.getElementsByClassName("toc-nav")[0].style.height = footerTop + "px";
-    highlightRightNav(currentHeading);
+    document.getElementsByClassName("toc-nav")[0].style.height = tocNavHeight + "px";
+    $(sidebarObj).clearQueue().finish();
+    setTimeout(highlightRightNav(currentHeading),1);
   }
 }
 $(window).resize(function() {
