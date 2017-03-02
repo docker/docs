@@ -1674,7 +1674,7 @@ footer {
     .tabs {
         float: left;
         margin: 0px 0 0 -12px;
-        width: 315px;
+        width: 360px
     }
     .tabs li a {
         padding: 13px 5px 8px 5px;
@@ -1852,7 +1852,6 @@ footer {
         text-align: center;
     }
 }
-
 
 .navbar-collapse,
 .navbar-form {
