@@ -767,11 +767,6 @@ i.fa.fa-question {
     width: 200px;
 }
 
-
-/*.toc-nav {
-    padding: 10px 10px 30px 20px;
-}*/
-
 .toc-nav ul {
     list-style: none;
     margin: 0;
@@ -911,9 +906,9 @@ input:checked+.slider:before {
 
 .tabs li a {
     color: #fff;
-    padding: 17px 20px 11px;
+    padding: 17px 15px 11px;
     float: left;
-    opacity: 0.7;
+    opacity: 0.8;
     font-weight: 600;
 }
 
@@ -924,10 +919,9 @@ input:checked+.slider:before {
 
 .tabs li.active a {
     background: transparent !important;
-    color: #fff4;
+    color: #fff;
     cursor: default;
     border-bottom: 4px solid #fff;
-    opacity: 1;
 }
 
 
@@ -1684,12 +1678,12 @@ footer {
     }
     .tabs {
         float: left;
-        margin: 0px 0 0 -12px;
+        margin: 0px 0 0 -10px;
         width: 360px
     }
     .tabs li a {
         padding: 13px 5px 8px 5px;
-        opacity: 0.5;
+        opacity: 1;
         font-size: 11px;
     }
     .tabs li a:hover {
