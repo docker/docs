@@ -1,6 +1,4 @@
-// structure that includes every page's title, url, description, and keywords
 var metadata;
-// search autocomplete vars
 var autoCompleteShowing = false;
 var displayingAutcompleteResults = new Array();
 var autoCompleteShowingID = 0;
@@ -11,57 +9,6 @@ var scoreForTitleMatch = 10;
 var scoreForURLMatch = 5;
 var scoreForKeywordMatch = 3;
 var scoreForDescriptionMatch = 1
-
-function makeSafeForCSS(name) {
-    return name.replace(/[^a-z0-9]/g, function(s) {
-        var c = s.charCodeAt(0);
-        if (c == 32) return '-';
-        if (c >= 65 && c <= 90) return '_' + s.toLowerCase();
-        return '__' + ('000' + c.toString(16)).slice(-4);
-    });
-}
-
-function showRelated(term)
-{
-  $("#button-"+term).css("display","none");
-  $("#topics-"+term).css("display","block");
-}
-
-function drawRelated(liArray,term)
-{
-    var output = new Array();
-    output.push('<a href="javascript:showRelated(\'' + makeSafeForCSS(term) + '\')" id="button-'+ makeSafeForCSS(term) +'" class="button darkblue-btn">Related topics...</a>');
-    output.push('<ul id="topics-' + makeSafeForCSS(term) + '" style="display:none">');
-    for(i=0;i<liArray.length;i++) output.push(liArray[i]);
-    output.push('</ul>')
-    return output.join('\n');
-}
-
-function glossaryCheck() {
-  if (window.location.href.indexOf("/glossary/") > -1)
-  {
-    console.log(metadata);
-    // you're viewing the glossary; load related topics for each entry
-    $(".relatedGlossaryText").each(function(){
-      var output = new Array();
-      var thisTerm = this.innerText.toLowerCase();
-      for(i=0;i<metadata.pages.length;i++)
-      {
-        if(metadata.pages[i].keywords) {
-          if(metadata.pages[i].keywords.toLowerCase().indexOf(thisTerm) > -1)
-          {
-              output.push('<li><a href="' + metadata.pages[i].url + '">' + metadata.pages[i].title + '</a></li>');
-          }
-        }
-      }
-      if(output.length > 0)
-      {
-        $(this).after(drawRelated(output,this.innerText));
-      }
-    });
-  }
-}
-
 function addResult(topic, matchesTitle, matchesDescription, matchesURL, matchesKeywords)
 {
   var matchScore = (matchesTitle * scoreForTitleMatch) + (matchesDescription * scoreForDescriptionMatch) + (matchesURL * scoreForURLMatch) + (matchesKeywords * scoreForKeywordMatch);
@@ -78,16 +25,18 @@ function loadPage(url)
   window.location.replace(url);
   window.location.href = url;
 }
+
 $(document).on("keypress", function(event) {
     if (event.keyCode == 13) {
       if(autoCompleteShowing) event.preventDefault();
     }
 });
+
 function highlightMe(inputTxt,keyword)
 {
   inputTxt = String(inputTxt);
   simpletext = new RegExp("(" + keyword + ")","gi");
-  return inputTxt.replace(simpletext, "<span style='background-color:yellow'>$1</span>")
+  return inputTxt.replace(simpletext, "<span>$1</span>")
 }
 function matches(inputTxt,searchTxt)
 {
@@ -248,6 +197,5 @@ jQuery(document).ready(function(){
     $.getJSON( "/metadata.txt", function( data ) {
       metadata = data;
       hookupTOCEvents();
-      glossaryCheck();
     });
 });
