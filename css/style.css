@@ -153,24 +153,6 @@ p {
     }
 }
 
-// @media (min-width: 767px) {
-//     .col-body {
-//         flex-direction: row;
-//         flex: 1;
-//     }
-//     .col-content {
-//         flex: 1;
-//         padding: 60px 20px 50px 20px;
-//     }
-//     .col-nav,
-//     .col-toc {
-//         flex: 0 0 10em;
-//     }
-//     .sidebar {
-//         width: 180px;
-//     }
-// }
-
 /*
 *
 * Header ***********************************************************************
@@ -188,40 +170,49 @@ p {
 
 @keyframes gradientswitch {
     0% {
-        background: #1488C6;
+        background: #0087C9;
     }
-    25% {
-        background: #0C5176;
+    16% {
+        background: #EF4A53;
     }
-    50% {
-        background: #BB4258;
+    32% {
+        background: #FFB463;
     }
-    75% {
-        background: #0C5176;
+    49% {
+        background: #33D5D4;
+    }
+    65% {
+        background: #254356;
+    }
+    81% {
+        background :#5B4097
     }
     100% {
-        background: #1488C6;
+        background: #0087C9
     }
 }
 
-@-webkit-keyframes gradientswitch
-/* Safari and Chrome - necessary duplicate */
-
-{
+@-webkit-keyframes gradientswitch {
     0% {
-        background: #1488C6;
+        background: #0087C9;
     }
-    25% {
-        background: #0C5176;
+    16% {
+        background: #EF4A53;
     }
-    50% {
-        background: #BB4258;
+    32% {
+        background: #FFB463;
     }
-    75% {
-        background: #0C5176;
+    49% {
+        background: #33D5D4;
+    }
+    65% {
+        background: #254356;
+    }
+    81% {
+        background :#5B4097
     }
     100% {
-        background: #1488C6;
+        background: #0087C9
     }
 }
 
@@ -446,7 +437,7 @@ a.button.outline-btn {
 *
 */
 
-img {
+.content img {
     display: block;
     max-width: 100%;
     height: auto;
@@ -466,6 +457,10 @@ img {
 
 .primary {
     padding: 5px 0 0 20px;
+}
+
+.nav-toggle {
+    background: red;
 }
 
 // @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
@@ -516,7 +511,8 @@ img {
 .nav-secondary {
     background: #0C5176;
     box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
-    min-height: 55px;
+    height: 55px;
+    overflow: hidden;
 }
 
 .nav .collapse .in {
@@ -537,14 +533,12 @@ img {
     position: absolute;
     width: 100%;
     z-index: 10;
-    transition: all 0.1s ease;
-    // overflow: hidden;
+    // transition: all 0.1s ease;
 }
 
 .nav-secondary-tabs.affix {
     background: #0C5176;
     box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
-    // max-height: 55px;
     top: 0;
     position: fixed;
     z-index: 100;
@@ -684,13 +678,6 @@ img {
 * sidebar ***********************************************************************
 *
 */
-
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-    .content {
-        padding: 10px 20px 20px 20px;
-        min-width: 390px;
-    }
-}
 
 .wrapper {
     min-height: 1000px;
@@ -956,115 +943,6 @@ input:checked+.slider:before {
     cursor: default;
     border-bottom: 4px solid #fff;
     opacity: 1;
-}
-
-.tabs dd,
-.tabs .tab-title {
-    float: left;
-    list-style: none;
-    margin-bottom: 0 !important;
-    position: relative
-}
-
-.tabs dd>a,
-.tabs .tab-title>a {
-    display: block;
-    background-color: #EFEFEF;
-    color: #222;
-    font-family: 'Geomanist Book', sans-serif;
-    font-size: 1rem;
-    padding: 1rem 2rem
-}
-
-.tabs dd>a:hover,
-.tabs .tab-title>a:hover {
-    background-color: #e1e1e1
-}
-
-.tabs dd.active a,
-.tabs .tab-title.active a {
-    background-color: #fff;
-    color: #222
-}
-
-.tabs.radius dd:first-child a,
-.tabs.radius .tab:first-child a {
-    -webkit-border-bottom-left-radius: 5px;
-    -webkit-border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px
-}
-
-.tabs.radius dd:last-child a,
-.tabs.radius .tab:last-child a {
-    -webkit-border-bottom-right-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px
-}
-
-.tabs.vertical dd,
-.tabs.vertical .tab-title {
-    position: inherit;
-    float: none;
-    display: block;
-    top: auto
-}
-
-.tabs-content {
-    margin-bottom: 1.5rem;
-    width: 100%
-}
-
-.tabs-content:before,
-.tabs-content:after {
-    content: " ";
-    display: table
-}
-
-.tabs-content:after {
-    clear: both
-}
-
-.tabs-content>.content {
-    display: none;
-    float: left;
-    padding: 0.9375rem 0;
-    width: 100%
-}
-
-.tabs-content>.content.active {
-    display: block;
-    float: none
-}
-
-.tabs-content>.content.contained {
-    padding: 0.9375rem
-}
-
-.tabs-content.vertical {
-    display: block
-}
-
-.tabs-content.vertical>.content {
-    padding: 0 0.9375rem
-}
-
-@media only screen and (min-width: 40.0625em) {
-    .tabs.vertical {
-        float: left;
-        margin: 0;
-        margin-bottom: 1.25rem !important;
-        max-width: 20%;
-        width: 20%
-    }
-    .tabs-content.vertical {
-        float: left;
-        margin-left: -1px;
-        max-width: 80%;
-        padding-left: 1rem;
-        width: 80%
-    }
 }
 
 
@@ -1744,8 +1622,6 @@ footer {
     }
     .nav-secondary {
         background: #192837;
-        box-shadow: 0;
-        border-bottom: 1px solid #3a546d;
         height: 145px;
     }
     .sidebar{
@@ -1808,7 +1684,6 @@ footer {
     }
     .tabs {
         height: 50px;
-        padding-left: 9px;
         width: auto;
     }
     .tabs li a {
@@ -1817,6 +1692,10 @@ footer {
         float: left;
         opacity: 0.7;
         font-size: 12px;
+    }
+    .content {
+        padding: 10px 10px 20px 15px;
+        min-width: 390px;
     }
     .main-content {
         padding: 0px 5px 25px 20px;
