@@ -11,7 +11,7 @@ title: Docker for Azure Release Notes
 ### 17.03.0 CE
 Release date: 02/08/2017
 
-{{azure_button_latest}}
+{{azure_blue_latest}}
 
 **New**
 
@@ -37,10 +37,10 @@ Release date: 1/18/2017
 
 ## Edge Channel
 
-### 17.03.0-edge1 CE
+### 17.03.0-edge CE
 Release date: 03/01/2017
 
-{{azure_button_edge}}
+{{azure_blue_edge}}
 
 **New**
 

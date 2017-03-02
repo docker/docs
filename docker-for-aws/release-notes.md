@@ -11,7 +11,7 @@ title: Docker for AWS Release Notes
 ### 17.03.0 CE
 Release date: 03/01/2017
 
-{{aws_button_latest}}
+{{aws_blue_latest}}
 
 **New**
 
@@ -34,10 +34,10 @@ Release date: 01/18/2017
 
 ## Edge Channel
 
-### 17.03.0-edge1 CE
+### 17.03.0-edge CE
 Release date: 03/01/2017
 
-{{aws_button_edge}}
+{{aws_blue_edge}}
 
 **New**
 
