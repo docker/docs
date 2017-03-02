@@ -27,7 +27,6 @@ Use the following Dockerfile:
     # Here, `dockerhost` is the IP address or FQDN of a host running the Docker daemon
     # which acts as an APT proxy server.
     FROM        ubuntu
-    MAINTAINER  SvenDowideit@docker.com
 
     VOLUME      ["/var/cache/apt-cacher-ng"]
     RUN     apt-get update && apt-get install -y apt-cacher-ng

@@ -297,7 +297,6 @@ command=/bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFO
 #
 
 FROM ubuntu
-MAINTAINER SvenDowideit@docker.com
 
 # Add the PostgreSQL PGP key to verify their Debian packages.
 # It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
