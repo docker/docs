@@ -517,7 +517,7 @@ a.button.outline-btn {
     background: #0C5176;
     box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
     height: 55px;
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 .nav .collapse .in {
@@ -570,7 +570,7 @@ a.button.outline-btn {
     overflow-x: hidden;
     overflow-y: auto;
     padding-bottom: 100px;
-    min-width: 260px;
+    width: 260px;
 }
 
 
@@ -931,7 +931,7 @@ input:checked+.slider:before {
 
 .tabs li a {
     color: #fff;
-    padding: 16px 20px 11px;
+    padding: 17px 20px 11px;
     float: left;
     opacity: 0.7;
     font-weight: 600;
@@ -1034,12 +1034,13 @@ input:checked+.slider:before {
 
 .nav-secondary .search-form {
     float: left;
-    width: 235px;
+    width: 200px;
     margin: 10px 5px 0 10px;
 }
 
 .nav-secondary-tabs .search-form {
     margin: 5px 10px 5px 0;
+    width: 245px;
 }
 
 .nav-secondary-tabs .search-form input[type=search] {
@@ -1054,7 +1055,7 @@ input:checked+.slider:before {
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
     padding: 0px 0 0 35px;
-    width: 235px;
+    width: 100%;
 }
 
 .nav-secondary-tabs .search-form input[type=search]:focus {
@@ -1079,9 +1080,9 @@ input[type=text] {
     background-position: 10px 9px;
     border: 0;
     box-shadow: none;
-    padding: 0px 0 0 35px;
     border-radius: 0;
     color: #fff;
+    padding: 0px 0 0 35px;
 }
 
 .nav-secondary .search-form input[type=search]:focus {
@@ -1628,7 +1629,7 @@ footer {
         // background: #192837;
         animation: gradientswitch 150s infinite;
         -webkit-animation: gradientswitch 150 sinfinite;
-        height: 145px;
+        height: 142px;
         overflow: visible;
     }
     .sidebar{
@@ -1666,13 +1667,14 @@ footer {
         width: 260px;
     }
     .nav-secondary .search-form input[type=search]:focus {
-        background: rgb(29, 60, 76) url("/images/search.png") no-repeat;
+        // background: rgb(29, 60, 76) url("/images/search.png") no-repeat;
+        background: rgba(0, 0, 0, 0.17) url(/images/search.png) no-repeat;
         background-position: 10px 9px;
         box-shadow: none;
         color: #fff;
     }
     .nav-secondary-tabs {
-        height: 108px;
+        height: 104px;
     }
     .nav-secondary-tabs.affix {
         background: #192837;
@@ -1680,7 +1682,7 @@ footer {
         top: 0;
         position: fixed;
         z-index: 100;
-        height: 106px;
+        height: 105px;
     }
     #sidebar-wrapper-home,
     #sidebar-wrapper-home.affix {
@@ -1688,20 +1690,21 @@ footer {
     }
     .tabs {
         margin: 0 auto;
+        width: 100%;
     }
     .tabs li a {
         color: #fff;
         padding: 13px 5px 8px 5px;
         float: left;
         opacity: 0.7;
-        font-size: 12px;
+        font-size: 11px;
     }
     .content {
         padding: 10px 20px 20px 15px;
         max-width: 390px;
     }
     .main-content {
-        padding: 0px 5px 25px 20px;
+        padding: 0px 15px 25px 20px;
     }
     .block {
         float: left;
@@ -1768,6 +1771,7 @@ footer {
     // }
 }
 
+
 /* Landscape */
 @media only screen 
   and (min-device-width: 375px) 
@@ -1779,17 +1783,6 @@ footer {
         height: 155px;
     }
 }
-
-/* Landscape */
-// @media only screen 
-//   and (min-device-width: 320px) 
-//   and (max-device-width: 480px)
-//   and (-webkit-min-device-pixel-ratio: 2)
-//   and (orientation: landscape) {
-//     .nav-secondary-tabs.affix {
-//         height: 107px;
-//     }
-// }
 
 /*
 *
@@ -1803,7 +1796,6 @@ footer {
     .nav-secondary .search-form {
         margin: 14px 10px 5px 0;
     }
-    // .sidebar-home {}
     #sidebar-wrapper {
         width: 200px;
     }
@@ -1815,7 +1807,7 @@ footer {
         // display: none;
     }
     .component {
-        padding: 9px 140px 20px;
+        // padding: 9px 140px 20px;
         text-align: center;
         margin: 0 8px 15px;
         float: left;
@@ -1840,10 +1832,19 @@ footer {
     }
 }
 
+/*
+*
+* random sections -> add all other vendor overrides here  ***********************************
+*
+*/
+
+#resources_container {
+    max-width: 830px;
+}
 
 /*
 *
-* Bootstrap Overrides : super embarrassing  ***********************************************************************
+* Bootstrap Overrides ***********************************************************************
 *
 */
 

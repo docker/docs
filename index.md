@@ -48,16 +48,16 @@ mode.
             </div>
             <div class="component">
                 <div class="component-icon">
-                    <a href="docker-for-mac/"> <img src="../images/windows_48.svg" alt="Docker for Mac"> </a>
+                    <a href="docker-for-windows/"> <img src="../images/windows_48.svg" alt="Docker for Windows"> </a>
                 </div>
-                <h3 id="docker-for-windows"><a href="/#docker-for-windows">Docker for Windows</a></h3>
+                <h3 id="docker-for-windows"><a href="docker-for-windows/">Docker for Windows</a></h3>
                 <p>A native Windows application which delivers all Docker tools to your Windows computer.</p>
             </div>
             <div class="component">
                 <div class="component-icon">
-                    <a href="docker-for-mac/"> <img src="../images/linux_48.svg" alt="Docker for Mac"> </a>
+                    <a href="/engine/installation/linux/ubuntu/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>
                 </div>
-                <h3 id="docker-for-linux"><a href="/#docker-for-linux">Docker for Linux</a></h3>
+                <h3 id="docker-for-linux"><a href="/engine/installation/linux/ubuntu/">Docker for Linux</a></h3>
                 <p>Install Docker on a computer which already has a Linux distribution installed.</p>
             </div>
         <!--components-full-width-->
@@ -80,7 +80,7 @@ mode.
                     <img src="../images/cloud_48.svg" alt="Docker Cloud">
                 </div>
                 <div class="component-full-copy">
-                    <h3 id="docker-cloud"><a href="/#">Docker Cloud</a></h3>
+                    <h3 id="docker-cloud"><a href="docker-cloud/">Docker Cloud</a></h3>
                     <p>A hosted service for building, testing, and deploying Docker images to your hosts.</p>
                 </div>
             </div>
