@@ -33,12 +33,12 @@ production environment. Highlights Compose Version 3 new features and swarm mode
 <tr valign="top">
 <td width="50%">
 {% capture basics %}
-[Start the basic tutorial](/engine/getstarted/){: class="button secondary-btn"}
+[Start the basic tutorial](/engine/getstarted/){: class="button primary-btn"}
 {% endcapture %}{{ basics | markdownify }}
 </td>
 <td width="50%">
 {% capture apps %}
-[Start the application tutorial](/engine/getstarted-voting-app/){: class="button secondary-btn"}
+[Start the application tutorial](/engine/getstarted-voting-app/){: class="button primary-btn"}
 {% endcapture %}{{ apps | markdownify }}
 </td>
 </tr>

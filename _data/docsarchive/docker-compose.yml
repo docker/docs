@@ -1,36 +1,36 @@
-v1.4:
-  image: docs/docker.github.io:v1.4
-  ports:
-    - "4014:4000"
-v1.5:
-  image: docs/docker.github.io:v1.5
-  ports:
-    - "4015:4000"
-v1.6:
-  image: docs/docker.github.io:v1.6
-  ports:
-    - "4016:4000"
-v1.7:
-  image: docs/docker.github.io:v1.7
-  ports:
-    - "4017:4000"
-v1.8:
-  image: docs/docker.github.io:v1.8
-  ports:
-    - "4018:4000"
-v1.9:
-  image: docs/docker.github.io:v1.9
-  ports:
-    - "4019:4000"
-v1.10:
-  image: docs/docker.github.io:v1.10
-  ports:
-    - "4110:4000"
-v1.11:
-  image: docs/docker.github.io:v1.11
-  ports:
-    - "4111:4000"
 v1.12:
   image: docs/docker.github.io:v1.12
   ports:
     - "4112:4000"
+v1.11:
+  image: docs/docker.github.io:v1.11
+  ports:
+    - "4111:4000"
+v1.10:
+  image: docs/docker.github.io:v1.10
+  ports:
+    - "4110:4000"
+v1.9:
+  image: docs/docker.github.io:v1.9
+  ports:
+    - "4019:4000"
+v1.8:
+  image: docs/docker.github.io:v1.8
+  ports:
+    - "4018:4000"
+v1.7:
+  image: docs/docker.github.io:v1.7
+  ports:
+    - "4017:4000"
+v1.6:
+  image: docs/docker.github.io:v1.6
+  ports:
+    - "4016:4000"
+v1.5:
+  image: docs/docker.github.io:v1.5
+  ports:
+    - "4015:4000"
+v1.4:
+  image: docs/docker.github.io:v1.4
+  ports:
+    - "4014:4000"

@@ -19,7 +19,7 @@ guides:
 - sectiontitle: Get Docker
   section:
   - path: /engine/installation/
-    title: Install Docker Engine
+    title: Install Docker
   - path: /docker-for-mac/install/
     title: Docker for Mac
   - path: /docker-for-windows/install/
@@ -35,11 +35,11 @@ guides:
     - path: /engine/installation/linux/fedora/
       title: Fedora
     - path: /engine/installation/linux/debian/
-      title: Debian or Raspbian
+      title: Debian
     - path: /engine/installation/linux/oracle/
       title: Oracle Linux
     - path: /engine/installation/linux/suse/
-      title: OpenSuSE and SuSE Linux Enterprise
+      title: SuSE Linux Enterprise
     - path: /engine/installation/linux/other/
       title: Other Linux distributions
     - path: /engine/installation/binaries/
@@ -446,28 +446,8 @@ guides:
     title: Where to chat or get help
   - path: /opensource/doc-style/
     title: Style guide for Docker documentation
-- sectiontitle: Docs archive
-  section:
-  - path: /docsarchive/
-    title: View the docs archives
-  - path: /v1.4
-    title: v1.4
-  - path: /v1.5
-    title: v1.5
-  - path: /v1.6
-    title: v1.6
-  - path: /v1.7
-    title: v1.7
-  - path: /v1.8
-    title: v1.8
-  - path: /v1.9
-    title: v1.9
-  - path: /v1.10
-    title: v1.10
-  - path: /v1.11
-    title: v1.11
-  - path: /v1.12
-    title: v1.12
+- path: /docsarchive/
+  title: View the docs archives
 
 reference:
 - title: Dockerfile reference
@@ -889,6 +869,13 @@ samples:
     title: WordPress
 
 manuals:
+- sectiontitle: Docker Enterprise Edition
+  section:
+  - path: /enterprise/
+    title: About Docker EE
+  - path: /engine/installation/
+    title: Install Docker EE
+    nosync: true
 - sectiontitle: Commercially Supported Docker Engine
   section:
   - sectiontitle: 1.13

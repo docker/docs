@@ -624,6 +624,28 @@ component of the next-generation Docker Hub, and the best place
 to find compliant, trusted commercial and free software
 distributed as Docker Images.
 
+![Docker Store](images/docker-store.png)
+
+### Docker Cloud
+
+You can access your Docker Cloud account from within Docker for Windows.
+
+![Docker Cloud](images/docker-cloud.png)
+
+From the Docker for Windows menu, sign in to Docker Cloud with your Docker ID,
+or create one.
+
+![Docker Cloud sign-in](images/docker-cloud-menu.png)
+
+Then use the Docker for Windows menu to create, view, or navigate directly to
+your Cloud resources:
+
+* Organizations
+* Repositories
+* Swarms
+
+Check out the [Docker Cloud topics](/docker-cloud/index.md) to learn more.
+
 ### Diagnose and Feedback
 
 If you encounter problems for which you do not find solutions in this documentation, searching [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) already filed by other users, or on the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data.

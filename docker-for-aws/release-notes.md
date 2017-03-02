@@ -1,6 +1,6 @@
 ---
 description: Release notes
-keywords: aws, amazon, iaas, release
+keywords: aws, amazon, iaas, release, edge, stable
 title: Docker for AWS Release Notes
 ---
 
@@ -8,16 +8,23 @@ title: Docker for AWS Release Notes
 
 ## Stable Channel
 
-### 1.13.1-2 (stable)
-Release date: 02/08/2017
+### 17.03.0 CE
+Release date: 03/01/2017
 
-{{aws_button_latest}}
+{{aws_blue_latest}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+
+### 1.13.1-2
+Release date: 02/08/2017
 
 **New**
 
 - Docker Engine upgraded to [Docker 1.13.1](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
-### 1.13.0-1 (stable)
+### 1.13.0-1
 Release date: 01/18/2017
 
 **New**
@@ -25,7 +32,16 @@ Release date: 01/18/2017
 - Docker Engine upgraded to [Docker 1.13.0](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 - Change ELB health check from TCP to HTTP
 
-## Beta Channel
+## Edge Channel
+
+### 17.03.0-edge CE
+Release date: 03/01/2017
+
+{{aws_blue_edge}}
+
+**New**
+
+- Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 
 ### 1.13.1-beta18
 Release date: 02/16/2017

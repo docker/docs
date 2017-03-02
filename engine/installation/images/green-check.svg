@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Round Check</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="System" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Round-Check">
+            <polygon id="Icon-Bounds" points="0 0 24 0 24 24 0 24"></polygon>
+            <circle id="Oval" fill="#00CBCA" cx="12" cy="12" r="11"></circle>
+            <polygon id="Combined-Shape" fill="#FBFBFC" points="7.04599508 11 5 13.1940611 10.1213203 17.9711941 18.9711941 9.12132034 16.8498737 7 10.0492724 13.8006014"></polygon>
+        </g>
+    </g>
+</svg>

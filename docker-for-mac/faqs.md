@@ -10,51 +10,51 @@ title: Frequently asked questions (FAQ)
 [Docker Knowledge Hub](http://success.docker.com/) for knowledge base articles,
 FAQs, technical support for various subscription levels, and more.
 
-### Stable and beta channels
+### Stable and Edge channels
 
-**Q: How do I get the stable or beta version of Docker for Mac?**
+**Q: How do I get the Stable or Edge version of Docker for Mac?**
 
 A: Use the download links for the channels given in the topic
 [Download Docker for Mac](install.md#download-docker-for-mac).
 
 This topic also has more information about the two channels.
 
-**Q: What is the difference between the stable and beta versions of Docker for Mac?**
+**Q: What is the difference between the Stable and Edge versions of Docker for Mac?**
 
 A: Two different download channels are available for Docker for Mac:
 
-* The **stable channel** provides a general availability release-ready installer
-  for a fully baked and tested, more reliable app. The stable version of Docker
+* The **Stable channel** provides a general availability release-ready installer
+  for a fully baked and tested, more reliable app. The Stable version of Docker
   for Mac comes with the latest released version of Docker Engine. The release
-  schedule is synched with Docker Engine releases and hotfixes. On the stable
+  schedule is synched with Docker Engine releases and hotfixes. On the Stable
   channel, you can select whether to send usage statistics and other data.
 
-* The **beta channel** provides an installer with new features we are working on,
+* The **Edge channel** provides an installer with new features we are working on,
   but is not necessarily fully tested. It comes with the experimental version of
-  Docker Engine. Bugs, crashes and issues are more likely to occur with the beta
+  Docker Engine. Bugs, crashes and issues are more likely to occur with the Edge
   app, but you get a chance to preview new functionality, experiment, and provide
   feedback as the apps evolve. Releases are typically more frequent than for
-  stable, often one or more per month. Usage statistics and crash reports are sent
-  by default. You do not have the option to disable this on the beta channel.
+  Stable, often one or more per month. Usage statistics and crash reports are sent
+  by default. You do not have the option to disable this on the Edge channel.
 
-**Q: Can I switch back and forth between stable and beta versions of Docker for Mac?**
+**Q: Can I switch back and forth between Stable and Edge versions of Docker for Mac?**
 
-A: Yes, you can switch between versions to try out the betas to see what's new,
-then go back to stable for other work. However, **you can have only one app
-installed at a time**. Switching back and forth between stable and beta apps can
+A: Yes, you can switch between versions to try out the Edge releases to see what's new,
+then go back to Stable for other work. However, **you can have only one app
+installed at a time**. Switching back and forth between Stable and Edge apps can
 destabilize your development environment, particularly in cases where you switch
-from a newer (beta) channel to older (stable).
+from a newer (Edge) channel to older (Stable).
 
-For example, containers created with a newer beta version of Docker for Mac may
-not work after you switch back to stable because they may have been created
-leveraging beta features that aren't in stable yet. Just keep this in mind as
-you create and work with beta containers, perhaps in the spirit of a playground
+For example, containers created with a newer Edge version of Docker for Mac may
+not work after you switch back to Stable because they may have been created
+leveraging Edge features that aren't in Stable yet. Just keep this in mind as
+you create and work with Edge containers, perhaps in the spirit of a playground
 space where you are prepared to troubleshoot or start over.
 
-<font color="#CC3366">To safely switch between beta and stable versions be sure
+<font color="#CC3366">To safely switch between Edge and Stable versions be sure
 to save images and export the containers you need, then uninstall the current
 version before installing another. The workflow is described in more detail
-below.</font><br>
+below.<br>
 
 Do the following each time:
 
@@ -66,9 +66,9 @@ Do the following each time:
     [export](/engine/reference/commandline/export.md) in the Docker Engine
     command line reference.)
 
-3.  Uninstall the current app (whether stable or beta).
+3.  Uninstall the current app (whether Stable or Edge).
 
-4.  Install a different version of the app (stable or beta).
+4.  Install a different version of the app (Stable or Edge).
 
 ### What is Docker.app?
 
@@ -106,26 +106,29 @@ response.
 
 ### Can I use Docker for Mac with new swarm mode?
 
-Yes, you can use Docker for Mac to test single-node features of
-[swarm mode](/engine/swarm/index.md) introduced with Docker Engine 1.12,
-including initializing a swarm with a single node, creating services, and scaling
+Yes, you can use Docker for Mac to test single-node features of [swarm
+mode](/engine/swarm/index.md) introduced with Docker Engine 1.12, including
+initializing a swarm with a single node, creating services, and scaling
 services. Docker “Moby” on Hyperkit will serve as the single swarm node. You can
 also use Docker Machine, which comes with Docker for Mac, to create and
-experiment a multi-node swarm. Check out the tutorial at
-[Get started with swarm mode](/engine/swarm/swarm-tutorial/index.md).
+experiment a multi-node swarm. Check out the tutorial at [Get started with swarm
+mode](/engine/swarm/swarm-tutorial/index.md).
 
 ### How do I connect to the remote Docker Engine API?
 
-You might need to provide the location of the Engine API for Docker clients and development tools.
+You might need to provide the location of the Engine API for Docker clients and
+development tools.
 
-On Docker for Mac, clients can connect to the Docker Engine through a Unix socket: `unix:///var/run/docker.sock`.
+On Docker for Mac, clients can connect to the Docker Engine through a Unix
+socket: `unix:///var/run/docker.sock`.
 
 See also [Docker Engine API](/engine/api.md) and Docker for Mac forums topic
-[Using pycharm Docker plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617).
+[Using pycharm Docker
+plugin..](https://forums.docker.com/t/using-pycharm-docker-plugin-with-docker-beta/8617).
 
-If you are working with applications like
-[Apache Maven](https://maven.apache.org/) that expect settings for `DOCKER_HOST`
-and `DOCKER_CERT_PATH` environment variables, specify these to connect to Docker
+If you are working with applications like [Apache
+Maven](https://maven.apache.org/) that expect settings for `DOCKER_HOST` and
+`DOCKER_CERT_PATH` environment variables, specify these to connect to Docker
 instances through Unix sockets. For example:
 
 ```bash
@@ -239,14 +242,15 @@ to talk to Docker for Mac. The same applies to `docker-compose`.
 
 You might decide that you do not need Toolbox now that you have Docker for Mac,
 and want to uninstall it. For details on how to perform a clean uninstall of
-Toolbox on the Mac, see
-[How to uninstall Toolbox](/toolbox/toolbox_install_mac.md#how-to-uninstall-toolbox)
-in the Toolbox Mac topics.
+Toolbox on the Mac, see [How to uninstall
+Toolbox](/toolbox/toolbox_install_mac.md#how-to-uninstall-toolbox) in the
+Toolbox Mac topics.
 
 ### What is HyperKit?
 
 HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS 10.10
-Yosemite and higher. It runs entirely in userspace and has no other dependencies.
+Yosemite and higher. It runs entirely in userspace and has no other
+dependencies.
 
 We use HyperKit to eliminate the need for other VM products, such as Oracle
 Virtualbox or VMWare Fusion.
