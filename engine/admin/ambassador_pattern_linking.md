@@ -144,7 +144,6 @@ case `192.168.1.52:6379`.
     # use alpine because its a minimal image with a package manager.
     # prettymuch all that is needed is a container that has a functioning env and socat (or equivalent)
     FROM	alpine:3.2
-    MAINTAINER	SvenDowideit@home.org.au
 
     RUN apk update && \
     	apk add socat && \

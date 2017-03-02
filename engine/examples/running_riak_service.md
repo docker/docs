@@ -23,7 +23,6 @@ of. We'll use [Ubuntu](https://hub.docker.com/_/ubuntu/) (tag:
 
     # Use the Ubuntu base image provided by dotCloud
     FROM ubuntu:trusty
-    MAINTAINER Hector Castro hector@basho.com
 
 After that, we install the curl which is used to download the repository setup
 script and we download the setup script and run it.
