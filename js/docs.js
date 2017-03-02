@@ -28,7 +28,7 @@ var current = document.getElementsByClassName("active currentPage");
 if (current[0]) {
     if (sidebarObj) {
       current[0].scrollIntoView(true);
-      container[0].scrollTop -= 150;
+      sidebarObj.scrollTop -= 150;
     }
   }
 
@@ -83,7 +83,7 @@ function checkNavSizes()
     // the footer is overlapping the sidebar
     var sidebarHeight = ((footerTop - headerOffset) < $(window).height()) ? (footerTop - headerOffset) : $(window).height();
     var tocNavHeight = (footerTop < $(window).height()) ? footerTop : $(window).height();
-    document.getElementsByClassName("sidebar")[0].style.height = sidebarHeight + "px";
+    sidebarObj.style.height = sidebarHeight + "px";
     document.getElementsByClassName("toc-nav")[0].style.height = footerTop + "px";
     highlightRightNav(currentHeading);
   }
