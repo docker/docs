@@ -27,19 +27,19 @@ Log in to Docker Cloud using your free [Docker ID](../docker-id/).
 
 <table class="tg">
   <tr>
-    <td class="bluebar" width="50%"><a href="builds/index.md">Manage Builds and Images</a></td>
-    <td class="bluebar" width="50%"><a href="infrastructure/index.md">Manage Infrastructure (Standard Mode)</a></td>
+    <td class="bluebar" width="50%"><a href="builds/index.md"><b>Manage Builds and Images</b></a></td>
+    <td class="bluebar" width="50%"><a href="cloud-swarm/index.md"><b>Manage Swarms (Beta Swarm Mode)</b></a></td>
   </tr>
   <tr>
     <td class="plain" width="50%"><p>Build and test your code, build Docker images. Link Cloud repositories to your source code provider to automate building images and pushing them to Cloud. </p></td>
-    <td class="plain" width="50%"><p>Link to your hosts, upgrade the Docker Cloud agent, and manage container distribution. See the <a href="infrastructure/cloud-on-aws-faq.md">AWS FAQ</a> and <a href="infrastructure/cloud-on-packet.net-faq.md">Packet.net FAQ</a></p></td>
-  </tr>
-  <tr>
-    <td class="bluebar" width="50%"><a href="cloud-swarm/index.md">Manage Swarms (Beta Swarm Mode)</a></td>
-    <td class="bluebar" colspan="2"><a href="standard/index.md">Manage Nodes and Apps (Standard Mode)</a></td>
-  </tr>
-  <tr>
     <td class="plain" width="50%"><p>Provision swarms to popular cloud providers, register existing swarms, and use your Docker ID to authenticate and securely access personal or team swarms.</p></td>
+  </tr>
+  <tr>
+    <td class="bluebar" width="50%"><a href="infrastructure/index.md"><b>Manage Infrastructure (Standard Mode)</b></a></td>
+    <td class="bluebar" colspan="2"><a href="standard/index.md"><b>Manage Nodes and Apps (Standard Mode)</b></a></td>
+  </tr>
+  <tr>
+    <td class="plain" width="50%"><p>Link to your hosts, upgrade the Docker Cloud agent, and manage container distribution. See the <a href="infrastructure/cloud-on-aws-faq.md">AWS FAQ</a> and <a href="infrastructure/cloud-on-packet.net-faq.md">Packet.net FAQ</a></p></td>
     <td class="plain" width="50%"><p>Deploy and manage nodes, services, and applications in Docker Cloud (Standard Mode).</p></td>
   </tr>
   <tr>
@@ -59,7 +59,17 @@ them to a repository.
 
 ![](images/cloud-build.png)
 
-### Infrastructure management
+### Swarm Management (Beta Swarm Mode)
+
+With [Beta Swarm Mode](/docker-cloud/cloud-swarm/index.md), you can create new
+swarms from within Docker Cloud, register existing swarms to Docker Cloud, or
+provision swarms to your cloud providers. Your Docker ID authenticates and
+securely accesses personal or team swarms. Docker Cloud allows you to connect
+your local Docker Engine to any swarm you have access to in Docker Cloud.
+
+![](images//Beta-Swarm-Mode-List-View.png)
+
+### Infrastructure management (Standard Mode)
 
 Before you can do anything with your images, you need somewhere to run them.
 Docker Cloud allows you to link to your infrastructure or cloud services
@@ -68,7 +78,7 @@ up, you can deploy images directly from Docker Cloud repositories.
 
 ![](images/cloud-clusters.png)
 
-### Services, Stacks, and Applications
+### Services, Stacks, and Applications (Standard Mode)
 
 Images are just one layer in containerized applications. Once you've built an
 image, you can use it to deploy services (which are composed of one or more
