@@ -978,7 +978,7 @@ input:checked+.slider:before {
 
 .ctrl-right {
     float: right;
-    padding: 5px 16px 0;
+    padding: 5px 0 0;
 }
 
 .ctrl-right .btn-group {
@@ -1398,12 +1398,14 @@ div#autocompleteResults span {
 
 .dropdown-btn {
     background: transparent;
-    color: #fff;
+    color: rgb(182, 202, 214);
     padding: 6px 12px;
     margin-top: 7px;
     font-weight: 400;
     background-image: none;
     border: 0;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .dropdown-header {
@@ -1748,12 +1750,6 @@ footer {
         position: absolute;
         width: 320px;
     }
-    .ctrl-right {
-        display: none;
-    }
-    // button.navbar-toggle.collapsed {
-    //     margin: 15px 15px 0 0;
-    // }
 }
 
 
