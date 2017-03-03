@@ -12,7 +12,7 @@ redirect_from:
 ## Docker Enterprise Edition (EE) for AWS
 This deployment is fully baked and tested, and comes with the latest Enterprise Edition version of Docker. <br/>This release is maintained and receives <strong>security and critical bugfixes for one year</strong>.
 
-<a class="button darkblue-btn" href="https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description" target="_blank">Deploy Docker Enterprise Edition (EE) for AWS</a>
+<a class="button outline-btn" href="https://store.docker.com/editions/enterprise/docker-ee-aws?tab=description" target="_blank">Deploy Docker Enterprise Edition (EE) for AWS</a>
 
 
 ## Docker Community Edition (CE) for AWS
@@ -40,12 +40,6 @@ using CloudFormation. For more about stable and edge channels, see the
   </td>
   <td width="50%">
   {{aws_blue_edge}}
-  </td>
-  </tr>
-  <tr valign="top">
-  <td width="50%">
-  </td>
-  <td width="50%">
   {{aws_blue_vpc_edge}}
   </td>
   </tr>
