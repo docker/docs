@@ -149,7 +149,7 @@ This example starts an `alpine` container which can have a maximum of 3 log
 files no larger than 10 megabytes each.
 
 ```bash
-$ docker run --it --log-opt max-size=10m --log-opt max-file=3 alpine ash
+$ docker run -it --log-opt max-size=10m --log-opt max-file=3 alpine ash
 ```
 
 ## `syslog`
