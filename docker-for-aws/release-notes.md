@@ -16,6 +16,8 @@ Release date: 03/01/2017
 **New**
 
 - Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Added r4 EC2 instance types
+- Added `ELBDNSZoneID` output to make it easier to interact with Route53
 
 ### 1.13.1-2
 Release date: 02/08/2017
@@ -42,6 +44,8 @@ Release date: 03/01/2017
 **New**
 
 - Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
+- Added r4 EC2 instance types
+- Added `ELBDNSZoneID` output to make it easier to interact with Route53
 
 ### 1.13.1-beta18
 Release date: 02/16/2017
