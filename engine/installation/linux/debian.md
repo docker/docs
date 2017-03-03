@@ -168,7 +168,7 @@ from the repository.
     ```
 
     The contents of the list depend upon which repositories are enabled,
-    and will be specific to your version of Debian (indicated by the `stretch`
+    and will be specific to your version of Debian (indicated by the `jessie`
     suffix on the version, in this example). Choose a specific version to
     install. The second column is the version string. The third column is the
     repository name, which indicates which repository the package is from and
@@ -213,7 +213,7 @@ a new file each time you want to upgrade Docker.
     for your version of Debian.
 
     > **Note**: To install an **edge**  package, change the word
-    > `stable` in the > URL to `edge`.
+    > `stable` in the URL to `edge`.
 
 2.  Install Docker CE, changing the path below to the path where you downloaded
     the Docker package.
