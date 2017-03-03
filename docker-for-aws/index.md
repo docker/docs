@@ -43,9 +43,6 @@ using CloudFormation. For more about stable and edge channels, see the
   {{aws_blue_vpc_edge}}
   </td>
   </tr>
-  <tr valign="top">
-  </td>
-  </tr>
 </table>
 
 ### Deployment options
