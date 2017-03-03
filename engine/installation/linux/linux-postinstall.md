@@ -202,7 +202,7 @@ at `/etc/docker/daemon.json`.
     configuration.
 
     ```bash
-    sudo nano /etc/docker/daemon.json
+    $ sudo nano /etc/docker/daemon.json
     ```
 
 2.  Add a `dns` key with one or more IP addresses as values. If the file has
@@ -328,7 +328,7 @@ To configure UFW and allow incoming connections on the Docker port:
 3.  If you need to enable access to the Docker Remote API from external hosts
     and understand the security implications (see the section before this
     procedure), then configure UFW to allow incoming connections on the Docker port,
-    which is 2375 if you do not use TLS, and 2376 if you do.
+    which is `2375` if you do not use TLS, and `2376` if you do.
 
     ```bash
     $ sudo ufw allow 2376/tcp
@@ -373,7 +373,7 @@ memory and a 10% overall performance degradation, even if Docker is not running.
     ```
 
     If your GRUB configuration file has incorrect syntax, an error will occur.
-    In this case, steps 3 and 4.
+    In this case, repeat steps 3 and 4.
 
 6.  Reboot your system. Memory and swap accounting are enabled and the warning
     does not occur.
