@@ -132,7 +132,7 @@ locally.
     the one below.
 
     ```bash
-    $ docker image remove 7d9495d03763
+    $ docker image remove 7d9495d03763 -f
     ```
 
 4.  When you use `docker run` it automatically downloads (pulls) images that
