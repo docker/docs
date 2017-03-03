@@ -234,7 +234,7 @@ To sync your repository:
     This command applies all the commits from the upstream master to your local
     master.
 
-8.  Check the status of your local branch.
+8. Check the status of your local branch.
 
         $ git status
         On branch master
@@ -266,10 +266,10 @@ To sync your repository:
         Switched to a new branch '11038-fix-rhel-link'
 
     Your branch should be up-to-date with the `upstream/master`. Why? Because you
-    branched off a freshly synced master.  Let's check this anyway in the next
+    branched off a freshly synced master. Let's check this anyway in the next
     step.
 
-9. Rebase your branch from upstream/master.
+9. Rebase your branch from `upstream/master`.
 
         $ git rebase upstream/master
         Current branch 11038-fix-rhel-link is up to date.
@@ -282,5 +282,5 @@ To sync your repository:
 ## Where to go next
 
 At this point, you know what you want to work on and you have a branch to do
-your work in.  Go onto the next section to learn [how to work on your
+your work in. Go onto the next section to learn [how to work on your
 changes](work-issue.md).
