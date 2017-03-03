@@ -13,6 +13,7 @@ Release date: 03/01/2017
 
 {{aws_blue_latest}}
 
+
 **New**
 
 - Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
@@ -41,11 +42,13 @@ Release date: 03/01/2017
 
 {{aws_blue_edge}}
 
+
 **New**
 
 - Docker Engine upgraded to [Docker 17.03.0 CE](https://github.com/docker/docker/blob/master/CHANGELOG.md)
 - Added r4 EC2 instance types
 - Added `ELBDNSZoneID` output to make it easier to interact with Route53
+- Added alias to `Cloudstor` plugin to make it easier on upgrades.
 
 ### 1.13.1-beta18
 Release date: 02/16/2017
