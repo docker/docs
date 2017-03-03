@@ -94,23 +94,6 @@ input.gsc-search-button-v2 {
   margin-top: 2px;
 }
 
-/* CTA button for downloads and stuff */
-
-.darkblue-btn,
-.cta-btn  {
-  background-color: #1488C6;
-  padding: 12px 15px 10px 15px;
-  margin: 20px 20px 20px 0;
-  display: inline-block;
-}
-
-/* In case you want a row of them */
-
-.darkblue-btn.right,
-.cta-btn.right {
-  margin: 20px 0 20px 20px;
-}
-
 /* Make table headings  bold, give tables some breathing room */
 
 th, td.th {
@@ -132,4 +115,9 @@ h4,
 h5,
 h6 {
     clear: both;
+}
+
+/* This needs some space at the bottom */
+.button.outline-btn {
+  margin-bottom: 20px;
 }

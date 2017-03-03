@@ -11,7 +11,7 @@ redirect_from:
 ## Docker Enterprise Edition (EE) for Azure
 This deployment is fully baked and tested, and comes with the latest Enterprise Edition version of Docker. <br/>This release is maintained and receives <strong>security and critical bugfixes for one year</strong>.
 
-<a class="button darkblue-btn" href="https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description" target="_blank">Deploy Docker Enterprise Edition (EE) for Azure</a>
+<a class="button outline-btn" href="https://store.docker.com/editions/enterprise/docker-ee-azure?tab=description" target="_blank">Deploy Docker Enterprise Edition (EE) for Azure</a>
 
 
 ## Docker Community Edition (CE) for Azure
@@ -19,7 +19,7 @@ This deployment is fully baked and tested, and comes with the latest Enterprise 
 ### Quickstart
 
 If your account has the [proper permissions](#prerequisites), you can generate the [Service Principal](#service-principal) and
-then choose from the stable or edge channel to bootstrap Docker for Azure using Azure Resource Manager. 
+then choose from the stable or edge channel to bootstrap Docker for Azure using Azure Resource Manager.
 For more about stable and edge channels, see the [FAQs](/docker-for-azure/faqs.md#stable-and-edge-channels)
 <table style="width:100%">
   <tr>

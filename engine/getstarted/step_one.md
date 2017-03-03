@@ -23,11 +23,13 @@ title: Install Docker and run hello-world
 
 ### Docker for Mac
 
-Docker for Mac is our newest offering for the Mac. It runs as a native Mac application and uses <a href="https://github.com/mist64/xhyve/" target="_blank">xhyve</a> to virtualize the Docker Engine environment and Linux kernel-specific features for the Docker daemon.
+Docker for Mac is our newest offering for the Mac. It runs as a native Mac application and uses
+[xhyve](https://github.com/mist64/xhyve/){: target="_blank" class="_" } to virtualize
+the Docker Engine environment and Linux kernel-specific features for the Docker daemon.
 
-<a class="button darkblue-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac</a>
+<a class="button outline-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac</a>
 
-**Requirements**
+#### Requirements
 
 - Mac must be a 2010 or newer model, with Intel's hardware support for memory management unit (MMU) virtualization; i.e., Extended Page Tables (EPT)
 
@@ -39,7 +41,9 @@ Docker for Mac is our newest offering for the Mac. It runs as a native Mac appli
 
 #### Docker Toolbox for the Mac
 
-If you have an earlier Mac that doesn't meet the Docker for Mac prerequisites, <a href="https://www.docker.com/products/docker-toolbox" target="_blank">get Docker Toolbox</a> for the Mac.
+If you have an earlier Mac that doesn't meet the Docker for Mac prerequisites,
+[get Docker Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" class="_" }
+for the Mac.
 
 See [Docker Toolbox Overview](/toolbox/overview.md) for help on installing Docker with Toolbox.
 
@@ -47,9 +51,9 @@ See [Docker Toolbox Overview](/toolbox/overview.md) for help on installing Docke
 
 Docker for Windows is our newest offering for PCs. It runs as a native Windows application and uses Hyper-V to virtualize the Docker Engine environment and Linux kernel-specific features for the Docker daemon.
 
-<a class="button darkblue-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows</a>
+<a class="button outline-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows</a>
 
-**Requirements**
+#### Requirements
 
 * 64bit Windows 10 Pro, Enterprise and Education (1511 November update, Build 10586 or later). In the future we will support more versions of Windows 10.
 
@@ -57,7 +61,8 @@ Docker for Windows is our newest offering for PCs. It runs as a native Windows a
 
 #### Docker Toolbox for Windows
 
-If you have an earlier Windows system that doesn't meet the Docker for Windows prerequisites, <a href="https://www.docker.com/products/docker-toolbox" target="_blank">get Docker Toolbox</a>.
+If you have an earlier Windows system that doesn't meet the Docker for Windows prerequisites,
+[get Docker Toolbox](https://www.docker.com/products/docker-toolbox){: target="_blank" class="_" }.
 
 See [Docker Toolbox Overview](/toolbox/overview.md) for help on installing Docker with Toolbox.
 

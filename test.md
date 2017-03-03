@@ -158,11 +158,11 @@ Some tables in markdown and html.
   </tr>
   <tr valign="top">
   <td width="50%">
-  <a class="button darkblue-btn" href="/">Go to the docs!</a><br><br>
+  <a class="button outline-btn" href="/">Go to the docs!</a><br><br>
   <a href="/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a>
   </td>
   <td width="50%">
-  <a class="button darkblue-btn" href="/">Go to the docs!</a><br><br>
+  <a class="button outline-btn" href="/">Go to the docs!</a><br><br>
   <a href="/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a>
   </td>
   </tr>
