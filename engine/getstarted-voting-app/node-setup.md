@@ -43,7 +43,7 @@ in an elevated PowerShell per those instructions.
 ### Commands to create machines
 
 The Docker Machine commands to create local virtual machines on Mac and Windows
-are are as follows.
+are as follows.
 
 #### Mac
 
