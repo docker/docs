@@ -27,13 +27,13 @@ Go back to `docker-stack.yml` and replace the `before` tags on both the `vote` a
 
 Run the same deploy command again to run the app with the new configuration.
 
-```
+```none
 docker stack deploy --compose-file docker-stack.yml vote
 ```
 
 The output will look similar to this:
 
-```
+```none
 docker@manager:~$ docker stack deploy --compose-file docker-stack.yml vote
 Updating service vote_redis (id: md73fohylg8q85aryz07852o0)
 Updating service vote_db (id: gny9ieqxancnufrg1oeazz9gq)

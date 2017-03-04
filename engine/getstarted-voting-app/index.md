@@ -112,110 +112,19 @@ In the Getting Started with Docker tutorial, you wrote a
 it to build a single image and run it as a single container.
 
 For this tutorial, the images are pre-built, and we will use `docker-stack.yml`
-(a Version 3 Compose file) instead of a Dockerfile
-to run the images. When we deploy, each image will run as a service in a
-container (or in multiple containers, for those that have replicas defined to
-scale the app). This example relies on Compose version 3, which is designed to be compatible with Docker Engine swarm mode.
+(a Version 3 Compose file) instead of a Dockerfile to run the images. When we
+deploy, each image will run as a service in a container (or in multiple
+containers, for those that have replicas defined to scale the app). This example
+relies on Compose version 3, which is designed to be compatible with Docker
+Engine swarm mode.
 
 To follow along with the example, you need only have Docker running and the copy
 of `docker-stack.yml` we provide
-[here](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml).
+[**here**](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml).
 This file defines all the services shown in the
 [table above](#services-and-images-overview), their base images,
 configuration details such as ports, networks, volumes,
 application dependencies, and the swarm configuration.
-
-```
-version: "3"
-services:
-
-  redis:
-    image: redis:alpine
-    ports:
-      - "6379"
-    networks:
-      - frontend
-    deploy:
-      replicas: 2
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-  db:
-    image: postgres:9.4
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    networks:
-      - backend
-    deploy:
-      placement:
-        constraints: [node.role == manager]
-  vote:
-    image: dockersamples/examplevotingapp_vote:before
-    ports:
-      - 5000:80
-    networks:
-      - frontend
-    depends_on:
-      - redis
-    deploy:
-      replicas: 2
-      update_config:
-        parallelism: 2
-      restart_policy:
-        condition: on-failure
-  result:
-    image: dockersamples/examplevotingapp_result:before
-    ports:
-      - 5001:80
-    networks:
-      - backend
-    depends_on:
-      - db
-    deploy:
-      replicas: 1
-      update_config:
-        parallelism: 2
-        delay: 10s
-      restart_policy:
-        condition: on-failure
-
-  worker:
-    image: dockersamples/examplevotingapp_worker
-    networks:
-      - frontend
-      - backend
-    deploy:
-      mode: replicated
-      replicas: 1
-      labels: [APP=VOTING]
-      restart_policy:
-        condition: on-failure
-        delay: 10s
-        max_attempts: 3
-        window: 120s
-      placement:
-        constraints: [node.role == manager]
-
-  visualizer:
-    image: dockersamples/visualizer:stable
-    ports:
-      - "8080:8080"
-    stop_grace_period: 1m30s
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    deploy:
-      placement:
-        constraints: [node.role == manager]
-
-networks:
-  frontend:
-  backend:
-
-volumes:
-  db-data:
-```
 
 ## Docker stacks and services
 
