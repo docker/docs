@@ -12,7 +12,7 @@ Windows](/docker-for-windows/index.md) app.
 
 If you have not done so already, download the installer here:
 
-[Get Docker Toolbox for Windows](href="https://download.docker.com/win/stable/DockerToolbox.exe"){: class="button outline-btn" }
+[Get Docker Toolbox for Windows](https://download.docker.com/win/stable/DockerToolbox.exe){: class="button outline-btn" }
 
 ## What you get and how it works
 
