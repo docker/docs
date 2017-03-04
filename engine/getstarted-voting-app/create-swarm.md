@@ -10,7 +10,7 @@ Now, we'll add our Docker machines to a [swarm](/engine/swarm/index.md).
 
 1.  Log into the manager.
 
-    ```
+    ```none
     $ docker-machine ssh manager
                             ##         .
                       ## ## ##        ==
@@ -40,14 +40,14 @@ Now, we'll add our Docker machines to a [swarm](/engine/swarm/index.md).
 
     The command to initialize a swarm is:
 
-    ```
+    ```none
     docker swarm init --advertise-addr <MANAGER-IP>
     ```
 
-    Use the IP address of the manager. (See [Verify machines are running and get IP addresses](node-setup.md#verify-machines-are-running-and-get-ip-addresses)).
+    >**Tip**: To get the IP address of the manager, use a terminal window
+    that is not `ssh`'ed into a virtual machine (or exit out of a current one), and type either `docker-machine ip manager` or `docker-machine ls`. Look back at [Verify machines are running and get IP addresses](node-setup.md#verify-machines-are-running-and-get-ip-addresses)) for examples.
 
-
-    ```
+    ```none
     docker@manager:~$ docker swarm init --advertise-addr 192.168.99.100
     Swarm initialized: current node (2tjrasfqfu945b7n4753374sw) is now a manager.
 
@@ -64,7 +64,7 @@ Now, we'll add our Docker machines to a [swarm](/engine/swarm/index.md).
 
 1.  Log into the worker machine.
 
-    ```
+    ```none
     $ docker-machine ssh worker
                             ##         .
                       ## ## ##        ==
@@ -88,7 +88,7 @@ Now, we'll add our Docker machines to a [swarm](/engine/swarm/index.md).
 
 2.  On the worker, run the `join` command given as the output of the `swarm init` command you ran on the manager.
 
-    ```
+    ```none
     docker@worker:~$ docker swarm join \
     >     --token SWMTKN-1-144pfsupfo25h43zzr6b6bghjson8uedxjsndo5vuehqlyarsk-9k4q84axm008whv9zl4a8m8ct \
     >     192.168.99.100:2377
@@ -101,7 +101,7 @@ Now, we'll add our Docker machines to a [swarm](/engine/swarm/index.md).
 
 Log into the manager (e.g., `docker-machine ssh manager`) and run `docker node ls`.
 
-```
+```none
   docker@manager:~$ docker node ls
 ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
 2tjrasfqfu945b7n4753374sw *  manager   Ready   Active        Leader
