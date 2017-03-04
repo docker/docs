@@ -13,7 +13,7 @@ To shut down the voting app, simply stop the machines on which it is running. If
 
 1.  Open a terminal window and run `docker-machine ls` to list the current machines.
 
-    ```
+    ```none
     $ docker-machine ls
     NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER    ERRORS
     manager   -        virtualbox   Running   tcp://192.168.99.100:2376           v1.13.1   
@@ -21,7 +21,7 @@ To shut down the voting app, simply stop the machines on which it is running. If
     ```
 2.  Use `docker-machine stop` to shut down each machine, beginning with the worker.
 
-    ```
+    ```none
     $ docker-machine stop worker
     Stopping "worker"...
     Machine "worker" was stopped.
@@ -42,7 +42,7 @@ start them per your cloud setup.
 
 1.  Open a terminal window and list the machines.
 
-    ```
+    ```none
     $ docker-machine ls
     NAME      ACTIVE   DRIVER       STATE     URL   SWARM   DOCKER    ERRORS
     manager   -        virtualbox   Stopped                 Unknown   
@@ -51,7 +51,7 @@ start them per your cloud setup.
 
 3.  Run `docker-machine start` to start each machine, beginning with the manager.
 
-    ```
+    ```none
     $ docker-machine start manager
     Starting "manager"...
     (manager) Check network to re-create if needed...
@@ -73,7 +73,7 @@ start them per your cloud setup.
 
 3.  Run the following commands to log into the manager and see if the swarm is up.
 
-    ```
+    ```none
     docker-machine ssh manager
 
     docker@manager:~$ docker stack services vote
@@ -93,7 +93,7 @@ At this point, the app is back up. The web pages you looked at in the [test driv
 If you prefer to remove your local machines altogether, use `docker-machine rm`
 to do so. (Or, `docker-machine rm -f` will force-remove running machines.)
 
-```
+```none
 $ docker-machine rm worker
 About to remove worker
 WARNING: This action will delete both local reference and remote instance.
