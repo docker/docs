@@ -47,13 +47,13 @@ are are as follows.
 
 #### Mac
 
-```
+```none
 docker-machine create --driver virtualbox HOST-NAME
 ```
 
 #### Windows
 
-```
+```none
 docker-machine create -d hyperv --hyperv-virtual-switch "NETWORK-SWITCH"
 MACHINE-NAME
 ```
@@ -70,7 +70,7 @@ Create two machines and name them to anticipate what their roles will be in the 
 
 Here is an example of creating the `manager` on Docker for Mac. Create this one, then do the same for `worker`.
 
-```
+```none
 $  docker-machine create --driver virtualbox manager
 Running pre-create checks...
 Creating machine...
@@ -98,7 +98,7 @@ To see how to connect your Docker Client to the Docker Engine running on this vi
 Use `docker-machine ls` to verify that the machines are
 running and to get their IP addresses.
 
-```
+```none
 $ docker-machine ls
 NAME       ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
 manager   *        virtualbox   Running   tcp://192.168.99.100:2376           v1.13.0-rc6
@@ -112,7 +112,7 @@ to become swarm nodes.
 
 You can also get the IP address of a particular machine:
 
-```
+```none
 $ docker-machine ip manager
 192.168.99.100
 ```
@@ -138,7 +138,7 @@ example, we'll set up a shell to talk to our manager machine.
 
 1.  Run `docker-machine env manager` to get environment variables for the manager.
 
-    ```
+    ```none
     $ docker-machine env manager
     export DOCKER_TLS_VERIFY="1"
     export DOCKER_HOST="tcp://192.168.99.100:2376"
@@ -153,13 +153,13 @@ example, we'll set up a shell to talk to our manager machine.
 
     On Mac:
 
-    ```
+    ```none
     $ eval $(docker-machine env manager)
     ```
 
     On Windows PowerShell:
 
-    ```
+    ```none
     & docker-machine.exe env manager | Invoke-Expression
     ```
 
@@ -169,7 +169,7 @@ Mac and Windows.
 
 3.  Run `docker-machine ls` again.
 
-    ```
+    ```none
     $ docker-machine ls
     NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
     manager   *        virtualbox   Running   tcp://192.168.99.100:2376           v1.13.0-rc6   
@@ -190,7 +190,7 @@ open.
 Alternatively, you can use the command `docker-machine ssh <MACHINE-NAME>` to
 log into a machine.
 
-```
+```none
 $ docker-machine ssh manager
                         ##         .
                   ## ## ##        ==

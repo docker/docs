@@ -11,19 +11,9 @@ deploy the voting application to the swarm you just created.
 
 The `docker-stack.yml` file must be located on a manager for the swarm where you want to deploy the application stack.
 
-1.  Get `docker-stack.yml` either from the [source code in the lab](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml) or by copying it from the example given [here](index.md#docker-stackyml-deployment-configuration-file).
+1.  [**Get the `docker-stack.yml`file**](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml) from the source code in the lab.
 
-    If you prefer to download the file directly from our GitHub
-    repository rather than copy it from the documentation, you can use a tool like `curl`. This command downloads the raw file to the current directory on your local host. You can copy-paste it into your shell if you have `curl`:
-
-    ```
-     curl -o docker-stack.yml https://raw.githubusercontent.com/docker/example-voting-app/master/docker-stack.yml
-    ```
-
-    >**Tips:**
-    >
-    *  To get the URL for the raw file on GitHub, either use the link in the example command above, or go to the file on GitHub [here](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml), then click **Raw** in the upper right.
-    *  You might already have `curl` installed. If not, you can [get curl here](https://curl.haxx.se/).
+    Copy-and-paste the contents of that file into a file of the same name on your host.
 
 2.  Copy `docker-stack.yml` from your host machine onto the manager.
 
@@ -42,12 +32,10 @@ The `docker-stack.yml` file must be located on a manager for the swarm where you
 
 4.  Check to make sure that the `.yml` file is there, using `ls`.
 
-    ```
+    ```none
     docker@manager:~$ ls /home/docker/
     docker-stack.yml
     ```
-
-    You can use `vi` or `cat` to inspect the file.
 
 ## Deploy the app
 
@@ -56,7 +44,7 @@ We'll deploy the application from the manager.
 1.  Deploy the application stack based on the `.yml` using the command
 [`docker stack deploy`](/engine/reference/commandline/stack_deploy.md) as follows.
 
-    ```
+    ```none
     docker stack deploy --compose-file docker-stack.yml vote
     ```
 
@@ -66,7 +54,7 @@ We'll deploy the application from the manager.
 
       Here is an example of the command and the output.
 
-    ```
+    ```none
     docker@manager:~$ docker stack deploy --compose-file docker-stack.yml vote
     Creating network vote_default
     Creating network vote_backend
@@ -81,7 +69,7 @@ We'll deploy the application from the manager.
 
 2.  Verify that the stack deployed as expected with `docker stack services <APP-NAME>`.
 
-    ```
+    ```none
     docker@manager:~$ docker stack services vote
     ID            NAME             MODE        REPLICAS  IMAGE
     1zkatkq7sf8n  vote_result      replicated  1/1       dockersamples/examplevotingapp_result:after

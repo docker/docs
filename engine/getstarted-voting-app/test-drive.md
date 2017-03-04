@@ -24,6 +24,12 @@ Now, go to `MANAGER-IP:5001` in a web browser to view the voting results tally, 
 
 ![Results web page](images/vote-results.png)
 
+>**Tip**: To get the IP address of the manager, open a terminal window that
+is not `ssh`'ed into a virtual machine (or exit out of a current one), and
+type either `docker-machine ip manager` or `docker-machine ls`. Look back at
+[Verify machines are running and get IP addresses](node-setup.md#verify-machines-are-running-and-get-ip-addresses)) for
+examples.
+
 ## Use the visualizer to monitor the app
 
 Go to `<MANAGER-IP:>8080` to get a visual map of how the application is
@@ -39,11 +45,11 @@ action here. For example:
 
 *   The manager node is running the PostgreSQL container, as configured by setting `[node.role == manager]` as a constraint in the deploy key for the `db` service. This service must be constrained to run on the manager in order to work properly.
 
-  ![db manager constraint in yml](images/db-manager-constraint.png)
+    ![node role manager](images/db-manager-constraint.png)
 
 *   The manager node is also running the visualizer itself, as configured by setting `[node.role == manager]` as a constraint in the deploy key for the `visualizer` service. This service must be constrained to run on the manager in order to work properly. If you remove the constraint, and it ends up on a worker, the web page display will be blank.
 
-  ![visualizer manager constraint in yml](images/visualizer-manager-constraint.png)
+    ![visualizer role manager](images/visualizer-manager-constraint.png)
 
 *   Two of the services are replicated:
 
@@ -53,8 +59,7 @@ action here. For example:
     Both of these services are configured as `replicas: 2` under
     the `deploy` key. In the current state of this app (shown in the visualizer), one of each of these containers is running on a manager and on a worker. However, since neither are explicitly constrained to either node in `docker-stack.yml`, all or some of these services could be running on either node, depending on workload and re-balancing choices we've left to the swarm orchestration.
 
-    ![replicas in yml](images/replicas-constraint.png)
-
+    ![replicas](images/replicas-constraint.png)
 
 ## What's next?
 
