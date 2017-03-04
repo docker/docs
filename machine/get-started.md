@@ -23,9 +23,9 @@ The new solutions come with their own native virtualization solutions rather
 than Oracle VirtualBox, so keep the following considerations in mind when using
 Machine to create local VMs.
 
-* **Docker for Mac** - You can use `docker-machine --create` with the `virtualbox` driver to create additional local machines.
+* **Docker for Mac** - You can use `docker-machine create` with the `virtualbox` driver to create additional local machines.
 
-* **Docker for Windows** - You can use `docker-machine --create` with the `hyperv` driver to create additional local machines.
+* **Docker for Windows** - You can use `docker-machine create` with the `hyperv` driver to create additional local machines.
 
 #### If you are using Docker for Windows
 
