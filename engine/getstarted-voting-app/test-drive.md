@@ -12,7 +12,7 @@ worker nodes, containers and services on a visualizer.
 
 ## Vote for cats and dogs
 
-Go to `<MANAGER-IP:>5000` in a web browser to view the voting page from a user perspective.
+Go to `<MANAGER-IP>:5000` in a web browser to view the voting page from a user perspective.
 
 ![Voting web page](images/vote.png)
 
@@ -20,7 +20,7 @@ Click on either cats or dogs to vote.
 
 ## View the results tally
 
-Now, go to `MANAGER-IP:5001` in a web browser to view the voting results tally, as one might do in the role of poll coordinator. The tally is shown by percentage in the current configuration of the app.
+Now, go to `<MANAGER-IP>:5001` in a web browser to view the voting results tally, as one might do in the role of poll coordinator. The tally is shown by percentage in the current configuration of the app.
 
 ![Results web page](images/vote-results.png)
 
@@ -32,7 +32,7 @@ examples.
 
 ## Use the visualizer to monitor the app
 
-Go to `<MANAGER-IP:>8080` to get a visual map of how the application is
+Go to `<MANAGER-IP>:8080` to get a visual map of how the application is
 deployed.
 
 ![Visualizer web page](images/visualizer.png)
