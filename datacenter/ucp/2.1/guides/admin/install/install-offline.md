@@ -11,7 +11,12 @@ whether that host has access to the internet or not.
 The only difference when installing on an offline host,
 is that instead of pulling the UCP images from Docker Hub, you use a
 computer that is connected to the internet to download a single package with
-all the images. Then you copy that package to the host where you’ll install UCP.
+all the images. Then you copy that package to the host where you’ll install UCP. The offline installation process only works if one of the following is true:
+
+* All of the cluster nodes (managers and workers alike) have internet access to Docker Hub
+* None of the cluster (managers and workers alike) have internet access to Docker Hub
+
+If the managers have access to Docker Hub while the workers do not, installation will fail.
 
 ## Versions available
 
@@ -51,7 +56,7 @@ For each machine that you want to manage with UCP:
 ## Install UCP
 
 Now that the offline hosts have all the images needed to install UCP,
-you can [install Docker UCP on that host](index.md).
+you can [install Docker UCP on that host](index.md). 
 
 
 ## Where to go next
