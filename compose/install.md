@@ -54,7 +54,7 @@ To install Compose, do the following:
     ```bash
     $ docker-compose --version
 
-    docker-compose version: 1.11.1
+    docker-compose version: 1.11.2
     ```
 
 ## Alternative install options
@@ -80,7 +80,7 @@ Compose can also be run inside a container, from a small bash script wrapper.
 To install compose as a container run:
 
 ```bash
-$ curl -L https://github.com/docker/compose/releases/download/1.11.1/run.sh > /usr/local/bin/docker-compose
+$ curl -L https://github.com/docker/compose/releases/download/1.11.2/run.sh > /usr/local/bin/docker-compose
 $ chmod +x /usr/local/bin/docker-compose
 ```
 
