@@ -43,7 +43,7 @@ time such as newest and oldest.
 ## Understand the issue types
 To help you identify the different types of issues, our maintainers
 assign labels to issues. Labels are color-coded and help you categorize
-and filter issues. There are four labels categories; kind, area,
+and filter issues. There are four labels categories: kind, area,
 experience, and priority. You can filter using one or more labels. The
 kind and experience labels are useful for new contributors.
 
