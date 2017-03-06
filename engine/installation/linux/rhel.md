@@ -73,7 +73,7 @@ Docker from the repository.
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        https://docs.docker.com/engine/installation/linux/repo_files/centos/docker.repo
+        https://docs.docker.com/v1.13/engine/installation/linux/repo_files/centos/docker.repo
     ```
 
     > **Note**: The link above is correct for RHEL as well as CentOS.
