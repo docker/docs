@@ -89,7 +89,7 @@ Docker from the repository.
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        https://docs.docker.com/engine/installation/linux/repo_files/oracle/docker-ol7.repo
+        https://docs.docker.com/v1.13/engine/installation/linux/repo_files/oracle/docker-ol7.repo
     ```
 
     **Oracle Linux 6**:
@@ -97,7 +97,7 @@ Docker from the repository.
     ```bash
     $ sudo yum-config-manager \
         --add-repo \
-        https://docs.docker.com/engine/installation/linux/repo_files/oracle/docker-ol6.repo
+        https://docs.docker.com/v1.13/engine/installation/linux/repo_files/oracle/docker-ol6.repo
     ```
 
 3.  **Optional**: Enable the **testing** repository. This repository is included
