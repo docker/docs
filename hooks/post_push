@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+# If this is an archive branch (like v1.4 or v1.11),
+# build and push the docs-base branch at the end of
+# a successful build of the branch
+
+if [[ $SOURCE_BRANCH == ^v1\.[0-9]+$ ]]; then
+  git checkout docs-base
+  docker build -t docs/docker.github.io:docs-base .
+  docker push docs/docker.github.io:docs-base
+fi
