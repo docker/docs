@@ -12,8 +12,9 @@ release. The documentation is always updated for each release.
 For system requirements, please see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
-Release notes for _stable_ and _beta_ releases are listed below. You can learn
-about both kinds of releases, and download stable and beta product installers at
+Release notes for _stable_ and _edge_ releases are listed below. (Starting with
+the CE release model, `beta` releases are called `edge` releases.) You can learn
+about both kinds of releases, and download stable and edge product installers at
 [Download Docker for Windows](install.md#download-docker-for-windows).
 
 ## Stable Release Notes
