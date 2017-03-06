@@ -108,7 +108,7 @@ else %}{% assign edit_url = "" %}{% endif %} {% break %} {% endif %} {% endfor %
 						  <div style="text-align: center; margin-top: 50px">
 								<img src="/images/chat.png" alt="chat icon" style="display:inline">
 								<b>Feedback?</b> Suggestions? Can't find something in the docs?<br/> {% if edit_url != "" %}
-								<a href="https://github.com/docker/docker.github.io/edit/master/{{ page.path }}" class="nomunge">Edit this page</a> <span>&#9679;</span> {% endif %}
+								<a href="{{ edit_url }}">Edit this page</a> <span>&#9679;</span> {% endif %}
 								<a href="https://github.com/docker/docker.github.io/issues/new?title=Feedback for: {{ page.path }}&assignee={% if page.assignee %}{{ page.assignee }}{% else %}{{ page.defaultassignee }}{% endif %}&body=File: [{{ page.path }}](https://docs.docker.com{{ page.url }})"
 												class="nomunge">Request docs changes</a> <span>&#9679;</span> <a href="https://www.docker.com/docker-support-services">Get support</a> <br />
 								<div id="pd_rating_holder_8453675"></div>
