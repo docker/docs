@@ -7,7 +7,7 @@ FROM starefossen/github-pages:112
 
 ENV NGINX_VERSION 1.11.9-1~jessie
 
-RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
 	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
 	&& apt-get update \
 	&& apt-get install --no-install-recommends --no-install-suggests -y \
