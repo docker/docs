@@ -22,6 +22,11 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 These notes refer to the current and immediately prior releases of the
 CS Engine. For notes on older versions, see the [CS Engine prior release notes archive](prior-release-notes.md).
 
+## CS Engine 1.12.6-cs10
+(6 Mar 2017)
+
+* Fix concurrency issue in libnetwork
+
 ## CS Engine 1.12.6-cs9
 (28 Feb 2017)
 
