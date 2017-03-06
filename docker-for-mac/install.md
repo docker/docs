@@ -8,9 +8,12 @@ The Docker for Mac install package includes everything you need to run Docker on
 a Mac. This topic describes pre-install considerations, and how to download and
 install Docker for Mac.
 
-> **Already have Docker for Mac?** If you already have Docker for Mac installed, and are ready to get started, skip to [Getting started](index.md) to
-work through the rest of the Docker for Mac tour and information, or jump over
-to the tutorials at [Learn Docker](/learn.md).
+> **Already have Docker for Mac?** If you already have
+Docker for Mac installed, and are ready to get started, skip to
+[Get started with Docker for Mac](index.md) for a quick tour of
+the command line, preferences, and tools.
+>
+>**Looking for Release Notes?** [Get release notes for all versions here](release-notes.md).
 
 ## Download Docker for Mac
 
@@ -129,8 +132,8 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
 2.  Double-click `Docker.app` to start Docker.
 
 	  ![Docker app in Hockeyapp](/docker-for-mac/images/docker-app-in-apps.png
-	  
-	  You will be asked to authorize `Docker.app` with your system password after you launch it. 
+
+	  You will be asked to authorize `Docker.app` with your system password after you launch it.
 	  Privileged access is needed to install networking components and links to the Docker apps.
 
 	  The whale in the top status bar indicates that Docker is running, and accessible from a terminal.
