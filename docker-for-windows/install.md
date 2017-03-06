@@ -8,9 +8,13 @@ The Docker for Windows install package includes everything you need to run
 Docker on a Windows system. This topic describes pre-install considerations, and
 how to download and install Docker for Windows.
 
-> **Already have Docker for Windows?** If you already have Docker for Windows installed, and are ready to get started, skip to [Getting started](index.md) to
-work through the rest of the Docker for Windows tour and information, or jump
-over to the tutorials at [Learn Docker](/learn.md).
+> **Already have Docker for Windows?** If you already have Docker for
+Windows installed, and are ready to get started, skip to
+[Get started with Docker for Windows](index.md) for a quick tour of
+the command line, settings, and tools.
+>
+>**Looking for Release Notes?** [Get release notes for all
+versions here](release-notes.md).
 
 ## Download Docker for Windows
 

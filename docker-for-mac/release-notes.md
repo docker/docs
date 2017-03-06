@@ -12,13 +12,25 @@ release. The documentation is always updated for each release.
 For system requirements, please see
 [What to know before you install](install.md#what-to-know-before-you-install).
 
-Release notes for _stable_ and _beta_ releases are listed below. You can learn
-about both kinds of releases, and download stable and beta product installers at
+Release notes for _stable_ and _edge_ releases are listed below. (Starting with
+the CE release model, `beta` releases are called `edge` releases.) You can learn
+about both kinds of releases, and download stable and edge product installers at
 [Download Docker for Mac](install.md#download-docker-for-mac).
 
 ## Stable Release Notes
 
-### Docker Community Edition 17.03.0, 2017-03-02 (stable)
+### Docker Community Edition 17.03.0-ce-mac2, 2017-03-06 (stable)
+
+**Hotfixes**
+
+- Set the ethernet MTU to 1500 to prevent a hyperkit crash
+- Fix docker build on private images
+
+**Upgrades**
+
+- [Docker Credential Helpers 0.4.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.4.2)
+
+### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02 (stable)
 
 **New**
 
@@ -50,16 +62,15 @@ about both kinds of releases, and download stable and beta product installers at
 - Parses aliases from /etc/hosts (docker/for-mac#983)
 - Can resolve DNS requests via servers listed in the /etc/resolver directory on the host
 - Limit vCPUs to 64
-- Fix for swap not being mounted
-- Fix aufs xattr delete issue (docker/docker#30245)
-- osxfs: catch EPERM when reading extended attributes of non-files
-- VPNKit: fix unmarshalling of DNS packets containing pointers to pointers to labels
-- VPNKit: set the Recursion Available bit on DNS responses from the cache
+- Fixed for swap not being mounted
+- Fixed aufs xattr delete issue (docker/docker#30245)
+- osxfs: Catch EPERM when reading extended attributes of non-files
+- VPNKit: Fixed unmarshalling of DNS packets containing pointers to pointers to labels
+- VPNKit: Set the Recursion Available bit on DNS responses from the cache
 - VPNKit: Avoid diagnostics to capture too much data
-- VPNKit: Fix a source of occasional packet loss (truncation) on the virtual ethernet link
+- VPNKit: Fixed a source of occasional packet loss (truncation) on the virtual ethernet link
 - HyperKit: Dump guest physical and linear address from VMCS when dumping state
 - HyperKit: Kernel boots with panic=1 arg
-
 
 ### Docker for Mac 1.13.1, 2017-02-09 (stable)
 
@@ -324,7 +335,18 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
-### Docker Community Edition 17.03.0 Release Notes (2017-03-02 17.03.0-ce-mac1)
+### Docker Community Edition 17.03.0-ce-mac2, 2017-03-06 (edge)
+
+**Hotfixes**
+
+- Set the ethernet MTU to 1500 to prevent a hyperkit crash
+- Fix docker build on private images
+
+**Upgrades**
+
+- [Docker Credential Helpers 0.4.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.4.2)
+
+### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02 (edge)
 
 **New**
 
