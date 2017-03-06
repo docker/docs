@@ -59,6 +59,8 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 
 #### 2. Set up a new external network switch
 
+_If you already have a external network switch you can skip this setup and use that one._
+
 Make sure you have Ethernet connectivity while you are doing this.
 
 Open the **Hyper-V Manager**. (On Windows 10, just search for the Hyper-V Manager in the search field in the lower left search field.)
