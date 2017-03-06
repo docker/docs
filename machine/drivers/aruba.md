@@ -224,7 +224,7 @@ Dashboard url is different depending on the selected endpoint:
 
 
 
-![alt tag](img/cloudpanel.PNG)
+![alt tag](https://github.com/Arubacloud/docker-machine-driver-arubacloud/blob/master/img/cloudpanel.PNG)
 
 ####View instance list
 
