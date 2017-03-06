@@ -47,15 +47,15 @@ Updating service vote_visualizer (id: ya2vt9z2b4to248tccjjeqitw)
 
 Take the app for another test drive.
 
-You'll see the new voting choices for Java and .NET at `<MANAGER-IP:>5000`.
+You'll see the new voting choices for Java and .NET at `<MANAGER-IP>:5000`.
 
 ![New voting page](images/vote-2.png)
 
-And the related results at `<MANAGER-IP:>5001`.
+And the related results at `<MANAGER-IP>:5001`.
 
 ![New results page](images/vote-results-2.png)
 
-The visualizer at  `<MANAGER-IP:>8080` will show some differences, such as
+The visualizer at  `<MANAGER-IP>:8080` will show some differences, such as
 updates to the containers, and some services might have moved between the
 manager and the worker.
 
