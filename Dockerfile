@@ -30,9 +30,12 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ENV VERSIONS="v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12 v1.13"
 
-RUN git clone https://www.github.com/docker/docker.github.io archive_source; \
+## Use shallow clone and shallow check-outs to only get the tip of each branch
+
+RUN git clone --depth 1 https://www.github.com/docker/docker.github.io archive_source; \
  for VER in $VERSIONS; do \
-		git --git-dir=./archive_source/.git --work-tree=./archive_source checkout ${VER} \
+    git --git-dir=./archive_source/.git --work-tree=./archive_source fetch origin ${VER}:${VER} --depth 1 \
+		&& git --git-dir=./archive_source/.git --work-tree=./archive_source checkout ${VER} \
 		&& mkdir -p target/${VER} \
 		&& jekyll build -s archive_source -d target/${VER} \
 		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/'"$VER"'/#g' \
