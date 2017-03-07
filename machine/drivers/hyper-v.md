@@ -57,9 +57,9 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 
   Hyper-V is automatically enabled on a Docker for Windows install. To enable it manually, see [instructions on how to manually enable Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install) on the Microsoft developer network.
 
-#### 2. Set up a new external network switch
+#### 2. Set up a new external network switch (Optional)
 
-_If you already have a external network switch you can skip this setup and use that one._
+> Note: If you already have a external network switch you can skip this setup and use that one._
 
 Make sure you have Ethernet connectivity while you are doing this.
 
