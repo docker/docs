@@ -351,3 +351,16 @@ table.table tr td img {
 /* over-ride the prettyPrint colouring */
 
 .str, .atv { color: #48484C; }
+
+div.archive-admonition {
+  text-align: center;
+  background-color: #ffffb3;
+  color: #999;
+  padding-bottom: 2px;
+  padding-top: 10px;
+}
+
+div.archive-admonition a {
+  color: darkblue;
+  text-decoration: underline !important;
+}
