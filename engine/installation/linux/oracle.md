@@ -45,10 +45,8 @@ installed, uninstall them, along with associated dependencies.
 
 ```bash
 $ sudo yum remove docker \
-                  docker-common \
-                  container-selinux \
-                  docker-selinux \
                   docker-engine
+                  docker-engine-selinux \
 ```
 
 It's OK if `yum` reports that none of these packages are installed.
