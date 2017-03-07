@@ -125,14 +125,14 @@ locally.
     In the next step, you will remove both versions of the `docker-whale` image
     from your local system. They share the same ID. Make a note of it.
 
-3.  Use the `docker image rm`  command to remove the images. You can refer
+3.  Use the `docker rmi`  command to remove the images. You can refer
     to an image by its ID or its name. Since they share an ID, if you wanted to
     keep one of them, you'd need to refer to the other one by name. For this
     example, use the ID to remove both of them. Your ID will be different from
     the one below.
 
     ```bash
-    $ docker image rm -f 7d9495d03763
+    $ docker rmi -f 7d9495d03763
     ```
 
 4.  When you use `docker run` it automatically downloads (pulls) images that
