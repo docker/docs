@@ -59,7 +59,7 @@ Hyper-V](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick
 
 #### 2. Set up a new external network switch (Optional)
 
-> Note: If you already have a external network switch you can skip this setup and use that one._
+> **Note**: If you already have a external network switch you can skip this setup and use that one.
 
 Make sure you have Ethernet connectivity while you are doing this.
 
