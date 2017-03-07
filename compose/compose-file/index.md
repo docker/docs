@@ -348,6 +348,10 @@ Simple example:
 > for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 > for more on this problem and strategies for solving it.
 
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
+
 A healthcheck indicates you want a dependency to wait
 for another container to be "healthy" (i.e. its healthcheck advertises a
 successful state) before starting.
