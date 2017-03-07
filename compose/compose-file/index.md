@@ -348,33 +348,10 @@ Simple example:
 > for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 > for more on this problem and strategies for solving it.
 
-A healthcheck indicates you want a dependency to wait
-for another container to be "healthy" (i.e. its healthcheck advertises a
-successful state) before starting.
+> **Note:** This option is ignored when
+> [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+> with a (version 3) Compose file.
 
-Example:
-
-    version: '2.1'
-    services:
-      web:
-        build: .
-        depends_on:
-          db:
-            condition: service_healthy
-          redis:
-            condition: service_started
-      redis:
-        image: redis
-      db:
-        image: redis
-        healthcheck:
-          test: "exit 0"
-
-In the above example, Compose will wait for the `redis` service to be started
-(legacy behavior) and the `db` service to be healthy before starting `web`.
-
-See the [healthcheck section](#healthcheck) for complementary
-information.
 
 ### dns
 
