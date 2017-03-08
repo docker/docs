@@ -102,7 +102,7 @@ The `depends_on` key allows you to specify that a service is only
 deployed after another service. In our example, `vote` only deploys
 after `redis`.
 
-The `deploy` key specifies aspects of a swarm deployment. For example, in this configuration we create _replicas_ of the `vote` and `result` services (2 containers of each will be deployed to the swarm), and we constrain some services (`db` and `visualizer`) to run only on a `manager` node.
+The `deploy` key specifies aspects of a swarm deployment. For example, in this configuration we create _replicas_ of the `vote` service (2 containers for `vote` will be deployed to the swarm). The `result` service, not shown in the file snip-it above, will also have 2 replicas. Additionally, we will use the `deploy` key to constrain some other services (`db` and `visualizer`) to run only on a `manager` node.
 
 ### docker-stack.yml deployment configuration file
 
