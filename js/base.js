@@ -99,3 +99,8 @@ function getCookie(cname) {
   }
   return "";
 }
+
+var data = $.getJSON( "/js/archives.json");
+$.each(data, function (key, value) {
+  alert(value.name);
+});
