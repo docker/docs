@@ -91,7 +91,7 @@ to update its RHEL kernel.
           The second column represents the version.
 
       2.  Install a specific version by adding the version after `docker-engine`,
-          separeated by a hyphen (`-`):
+          separated by a hyphen (`-`):
 
           ```bash
           $ sudo yum install docker-engine-<version>
@@ -195,7 +195,7 @@ to update its RHEL kernel.
           The second column represents the version.
 
       2.  Install a specific version by adding the version after `docker-engine`,
-          separeated by an equals sign (`=`):
+          separated by an equals sign (`=`):
 
           ```bash
           $ sudo apt-get install docker-engine=<version>
@@ -265,7 +265,7 @@ to update its RHEL kernel.
           The third column is the version string.
 
       2.  Install a specific version by adding the version after `docker-engine`,
-          separeated by a hyphen (`-`):
+          separated by a hyphen (`-`):
 
           ```bash
           $ sudo zypper install docker-engine-<version>
