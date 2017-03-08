@@ -33,16 +33,7 @@
             </div>
             <div class="ctrl-right">
                 <a href="javascript:void(0)" id="menu-toggle"><i class="fa fa-indent" aria-hidden="true"></i></a>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Docker 17.03 (current) <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        {% for item in site.data.docsarchive.docker-compose %}
-                        <li><a href="/{{ item[0] }}/">Docker {{ item[0] }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
+                {% include archive-list.html %}
             </div>
         </div>
     </div>
