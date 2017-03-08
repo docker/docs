@@ -83,7 +83,7 @@ Docker EE repository URL you located in the [prerequisites](#prerequisites).
 
 ```bash
 $ sudo zypper addrepo \
-    <DOCKER-EE-URL>/stable-{{ minor-version }} \
+    <DOCKER-EE-URL>/12.3/x86_64/stable-{{ minor-version }} \
     docker-ee-stable
 ```
 
@@ -176,8 +176,8 @@ need to download a new file each time you want to upgrade Docker.
 
 1.  Go to the Docker EE repository URL associated with your
     trial or subscription in your browser. Go to
-    `x86_64/stable-{{ minor-version }}` and download the `.rpm` file for the
-    Docker version you want to install.
+    `12.3/x86_64/stable-{{ minor-version }}` and download the `.rpm` file for
+    the Docker version you want to install.
 
 2.  Import Docker's official GPG key:
 
