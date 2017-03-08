@@ -5,7 +5,7 @@
 - archive:
   name: v1.13
   image: docs/docker.github.io:v1.13
-- archive: \
+- archive:
   name: v1.12
   image: docs/docker.github.io:v1.12
 - archive:
