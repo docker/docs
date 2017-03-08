@@ -100,12 +100,6 @@ p {
     margin: 10px 0 0;
 }
 
-p:after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
 
 /*
 *
