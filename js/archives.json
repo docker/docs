@@ -1,4 +1,4 @@
 ---
 layout: null
 ---
-{{ site.data.docsarchive.archives }}
+{{ site.data.docsarchive.archives | jsonify }}
