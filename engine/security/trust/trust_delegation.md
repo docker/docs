@@ -74,7 +74,7 @@ can self-sign the certificate (in this example, creating a certificate that is
 valid for 1 year):
 
 ```
-$ openssl x509 -req -days 365 -in delegation.csr -signkey delegation.key -out delegation.crt
+$ openssl x509 -req -sha256 -days 365 -in delegation.csr -signkey delegation.key -out delegation.crt
 ```
 
 Then they need to give you `delegation.crt`, whether it is self-signed or signed
