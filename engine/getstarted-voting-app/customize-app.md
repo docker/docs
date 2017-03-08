@@ -16,7 +16,7 @@ the application available as built images. So, all you need to do is reconfigure
 
 ## Update docker-stack.yml to reference new images
 
-Go back to `docker-stack.yml` and replace the `before` tags on both the `vote` and `result` images to reference `after` tags.
+Go back to `docker-stack.yml` and replace the `before` tags on both the `vote` and `result` images to reference `after` tags. These new image tags will call different versions of the images.
 
 ![before tags for vote and result in yml](images/customize-before.png)
 
