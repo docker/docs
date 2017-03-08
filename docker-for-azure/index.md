@@ -69,7 +69,7 @@ The number of workers you want in your swarm (1-100).
 #### Service Principal
 
 A [Service Principal](https://azure.microsoft.com/en-us/documentation/articles/active-directory-application-objects/)
-is required to set up Docker for Azure. The Service Principal invokes Azure APIs as you scale the number of nodes up
+is required to set up Docker for Azure. The Service Principal is used to invoke Azure APIs as you scale the number of nodes up
 and down or deploy apps on your swarm that require configuration of the Azure Load Balancer. Docker provides a
 containerized helper-script called `docker4x/create-sp-azure` to help you create the Service Principal.
 
