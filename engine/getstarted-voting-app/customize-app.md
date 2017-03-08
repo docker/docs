@@ -97,6 +97,8 @@ in the Docker Engine command line reference.
 * For more about swarm mode, start with the
 [Swarm mode overview](/engine/swarm/index.md).
 
+* For information about Docker CE and Docker EE, see [Docker Community Edition](https://www.docker.com/community-edition) and [Docker Enterprise Edition](https://www.docker.com/enterprise-edition).
+
 ## What's next?
 
 * To learn about shutting down the sample app and cleaning up, see [Graceful shutdown, reboot, and clean-up](cleanup.md).

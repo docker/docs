@@ -123,7 +123,7 @@ You will need the IP address of the manager for a later step.
 
 There are a few ways to interact with these machines directly on the command
 line or programatically. We'll cover two methods for managing the machines
-directly from the command line:
+directly from the command line. We will use the second of these two methods for the tutorial (`docker ssh`), but it is worth learning both if you have time.
 
 * [Manage the machines from a pre-configured shell](#manage-the-machines-from-a-pre-configured-shell)
 
