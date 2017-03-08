@@ -71,7 +71,7 @@ The number of workers you want in your swarm (1-100).
 A [Service Principal](https://azure.microsoft.com/en-us/documentation/articles/active-directory-application-objects/)
 is required to set up Docker for Azure. The Service Principal is used to invoke Azure APIs as you scale the number of nodes up
 and down or deploy apps on your swarm that require configuration of the Azure Load Balancer. Docker provides a
-containerized helper-script called `docker4x/create-sp-azure` to help you create the Service Principal.
+containerized helper script called `docker4x/create-sp-azure` to help you create the Service Principal.
 
 1.  Download the latest version of `docker4x/create-sp-azure` to your local environment:
    
@@ -115,7 +115,7 @@ If the script fails, your Azure user account may not have sufficient privileges.
 When setting up the ARM template, you will be prompted for the App ID (a UUID) and the app secret. If you are
 deploying Docker Community Edition for Azure and specified the resource group name and location parameters,
 choose the option to deploy the template into an **existing resource group** and pass the same name and
-region/location that you used when running the `create-sp-azure` helper-script.
+region/location that you used when running the `create-sp-azure` helper script.
 
 <img src="img/service-principal.png" />
 
