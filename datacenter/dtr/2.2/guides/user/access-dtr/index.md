@@ -27,13 +27,26 @@ system to trust that certificate.
 
 In your browser navigate to `https://<dtr-url>/ca` to download the TLS
 certificate used by DTR. Then
-[add that certificate to the macOS trust store](https://support.apple.com/kb/PH18677?locale=en_US).
+[add that certificate to macOS Keychain](https://support.apple.com/kb/PH20129).
+
+After adding the CA certificate to Keychain, restart Docker for Mac.
 
 ### Windows
 
 In your browser navigate to `https://<dtr-url>/ca` to download the TLS
-certificate used by DTR. Then
-[add that certificate to the Windows trust store](https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx).
+certificate used by DTR. Open Windows Explorer, right-click the
+file you've downloaded, and choose **Install certificate**.
+
+Then, select the following options:
+
+* Store location: local machine
+* Check 'place all certificates in the following store'
+* Click 'Browser', and select 'Trusted Root Certificate Authorities'
+* Click 'Finish'
+
+[Learn more about managing TLS certificates](https://technet.microsoft.com/en-us/library/cc754841(v=ws.11).aspx).
+
+After adding the CA certificate to Windows, restart Docker for Windows.
 
 
 ### Ubuntu/ Debian
@@ -95,7 +108,7 @@ $ sudo /bin/systemctl restart docker.service
     sudo /etc/init.d/docker restart
     ```
 
-## Login into DTR
+## Log into DTR
 
 To validate that your Docker daemon trusts DTR, trying authenticating against
 DTR.

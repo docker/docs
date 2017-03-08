@@ -55,4 +55,4 @@ options that can accomplish this (e.g. Shield plug-in for Kibana)
 
 ## Where to go next
 
-* [Require all images to be signed](content-trust.md)
+* [Require all images to be signed](restrict-services-to-worker-nodes.md)
