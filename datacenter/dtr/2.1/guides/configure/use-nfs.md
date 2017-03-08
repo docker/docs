@@ -20,7 +20,7 @@ directories exported by your NFS server:
 showmount -e <nfsserver>
 ```
 
-You should also try yo mount one of the exported directories:
+You should also try to mount one of the exported directories:
 
 ```bash
 mkdir /tmp/mydir && sudo mount -t nfs <nfs server>:<directory>
