@@ -513,7 +513,7 @@ The following example briefly describes how to use `--link`.
     ping: bad address 'c5'
 
     ```
-    Detach from `container3` and leave it running using `CTRL-p CTRL-q`.
+    Detach from `container4` and leave it running using `CTRL-p CTRL-q`.
 
 2.  Create another container named `container5`, and link it to `container4`
     using the alias `c4`.
