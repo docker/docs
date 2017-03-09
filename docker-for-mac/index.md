@@ -9,6 +9,7 @@ redirect_from:
 - /docker-for-mac/started/
 - /installation/mac/
 - /engine/installation/mac/
+- /docker-for-mac/index/
 title: Get started with Docker for Mac
 ---
 
