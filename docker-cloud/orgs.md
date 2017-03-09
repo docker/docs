@@ -184,9 +184,9 @@ To remove a team's access to the repository, click the **trashcan** icon next to
 * **No access**: no access at all. The resource is not visible to members of this team.
 * **Read only**: users can view the resource and its configuration, but cannot perform actions on the resource.
 * **Read and Write**: users can view *and change* the resource and its configuration.
-* **Admin**: users can view, and edit the resource and its configuration, and can create or delete new instances of the resource*.
+* **Admin**: users can view, and edit the resource and its configuration, and can create or delete new instances of the resource.
 
-> **Note&#42;**: Only users who are members of the `Owners` team can create _new_ repositories.
+> **Note**: Only users who are members of the `Owners` team can create _new_ repositories.
 
 | Permission level | Access |
 | ------------- | ------------- |
