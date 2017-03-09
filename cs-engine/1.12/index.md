@@ -99,7 +99,7 @@ to update its RHEL kernel.
 
     By default, the `devicemapper` graph driver does not come pre-configured in
     a production-ready state. Follow the documented step by step instructions to
-    [configure devicemapper with direct-lvm for production](../../engine/userguide/storagedriver/device-mapper-driver/#/for-a-direct-lvm-mode-configuration)
+    [configure devicemapper with direct-lvm for production](../../engine/userguide/storagedriver/device-mapper-driver/#configure-direct-lvm-mode-for-production)
     to achieve the best performance and reliability for your environment.
 
 6.  Configure the Docker daemon to start automatically when the system starts,
