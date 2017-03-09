@@ -9,6 +9,7 @@ redirect_from:
 - /docker-for-windows/started/
 - /installation/windows/
 - /engine/installation/windows/
+- /docker-for-windows/index/
 title: Get started with Docker for Windows
 ---
 Welcome to Docker for Windows!
