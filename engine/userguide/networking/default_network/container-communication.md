@@ -47,9 +47,9 @@ Docker will never make changes to your system `iptables` rules if you set
 `--iptables=false` when the daemon starts.  Otherwise the Docker server will
 append forwarding rules to the `DOCKER` filter chain.
 
-Docker will not delete or modify any pre-existing rules from the `DOCKER` filter
-chain. This allows the user to create in advance any rules required to further
-restrict access to the containers.
+Docker will flush any pre-existing rules from the `DOCKER` and `DOCKER-ISOLATION`
+filter chains, if they exist. For this reason, any rules needed to further
+restrict access to containers need to be added after Docker has started.
 
 Docker's forward rules permit all external source IPs by default. To allow only
 a specific IP or network to access the containers, insert a negated rule at the
