@@ -611,7 +611,7 @@ The following example illustrates these points.
     $ docker network connect --link container4:bar local_alias container5
     ```
 
-3. Attach to `container3` and try to ping `container4` using alias `foo`, then
+3. Attach to `container4` and try to ping `container4` (yes, the same one) using alias `foo`, then
    try pinging container `container5` using alias `c5`:
 
     ```bash
