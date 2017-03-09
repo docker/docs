@@ -24,14 +24,14 @@ new image.
 
     ```bash
     $ docker images
-    
+
     REPOSITORY           TAG          IMAGE ID            CREATED             SIZE
     docker-whale         latest       7d9495d03763        38 minutes ago      273.7 MB
     <none>               <none>       5dac217f722c        45 minutes ago      273.7 MB
     docker/whalesay      latest       fb434121fc77        4 hours ago         247 MB
     hello-world          latest       91c95931e552        5 weeks ago         910 B
     ```
-    
+
 5.  Find the image ID for the `docker-whale` image, in the second column. In this example,
     the id is `7d9495d03763`, but yours will be different.
 
@@ -48,16 +48,16 @@ new image.
     ![Docker tag command](tutimg/tagger.png)
 
     Make sure to use your own Docker Hub account name.
-    
+
     ```bash
     $ docker tag 7d9495d03763 maryatdocker/docker-whale:latest
     ```
-    
+
 7.  Run `docker images` again to verify that the `docker-whale` image has been tagged.
 
     ```bash
     $ docker images
-	
+
     REPOSITORY                  TAG       IMAGE ID        CREATED          SIZE
     maryatdocker/docker-whale   latest    7d9495d03763    5 minutes ago    273.7 MB
     docker-whale                latest    7d9495d03763    2 hours ago      273.7 MB
@@ -65,16 +65,16 @@ new image.
     docker/whalesay             latest    fb434121fc77    5 hours ago      247 MB
     hello-world                 latest    91c95931e552    5 weeks ago      910 B
     ```
-    
+
     The same image ID actually now exists in two different repositories.
 
 8.  Before you can push the image to Docker Hub, you need to log in, using
     the `docker login` command. The command doesn't take any parameters,
     but prompts you for the username and password, as below:
-    
+
     ```bash
     $ docker login
-    
+
         Username: *****
         Password: *****
         Login Succeeded
@@ -86,7 +86,7 @@ new image.
 
     ```bash
     $ docker push maryatdocker/docker-whale
-    
+
     The push refers to a repository [maryatdocker/docker-whale] (len: 1)
     7d9495d03763: Image already exists
     ...
@@ -97,7 +97,7 @@ new image.
 10. Go back to the Docker Hub website to see the newly-pushed image.
 
     ![Docker tag command](tutimg/new_image.png)
-    
+
 
 ## Step 2: Pull your new image
 
@@ -113,7 +113,7 @@ locally.
 
     ```bash
 		$ docker images
-    
+
 		REPOSITORY                  TAG       IMAGE ID        CREATED          SIZE
 		maryatdocker/docker-whale   latest    7d9495d03763    5 minutes ago    273.7 MB
 		docker-whale                latest    7d9495d03763    2 hours ago      273.7 MB
@@ -121,19 +121,21 @@ locally.
 		docker/whalesay             latest    fb434121fc77    5 hours ago      247 MB
 		hello-world                 latest    91c95931e552    5 weeks ago      910 B
     ```
-    
+
     In the next step, you will remove both versions of the `docker-whale` image
     from your local system. They share the same ID. Make a note of it.
 
-3.  Use the `docker image rm`  command to remove the images. You can refer
+3.  Use the `docker rmi`  command to remove the images. You can refer
     to an image by its ID or its name. Since they share an ID, if you wanted to
     keep one of them, you'd need to refer to the other one by name. For this
     example, use the ID to remove both of them. Your ID will be different from
     the one below.
 
     ```bash
-    $ docker image rm -f 7d9495d03763
+    $ docker rmi -f 7d9495d03763
     ```
+
+    >**Tip:** You can also remove an image with `docker image rm -f` followed by image ID or name in a similar fashion.
 
 4.  When you use `docker run` it automatically downloads (pulls) images that
     don't yet exist locally, creates a container, and starts it. Use the
@@ -149,7 +151,7 @@ locally.
 
     ```bash
 		$ docker run maryatdocker/docker-whale
-    
+
 		Unable to find image 'maryatdocker/docker-whale:latest' locally
 		latest: Pulling from maryatdocker/docker-whale
 		eb06e47a01d2: Pull complete
