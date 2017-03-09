@@ -913,6 +913,7 @@ Each of these is a single value, analogous to its
     stdin_open: true
     tty: true
 
+{: id="orig-resources" }
 
 ## Specifying durations
 

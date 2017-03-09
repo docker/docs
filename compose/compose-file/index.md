@@ -265,7 +265,7 @@ resources:
 #### restart_policy
 
 Configures if and how to restart containers when they exit. Replaces
-[`restart`](compose-file-v2.md#cpushares-cpuquota-cpuset-domainname-hostname-ipc-macaddress-memlimit-memswaplimit-oomscoreadj-privileged-readonly-restart-shmsize-stdinopen-tty-user-workingdir).
+[`restart`](compose-file-v2.md#orig-resources).
 
 - `condition`: One of `none`, `on-failure` or `any` (default: `any`).
 - `delay`: How long to wait between restart attempts, specified as a
