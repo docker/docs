@@ -70,6 +70,20 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
+      <td>Aruba Cloud</td>
+      <td>
+        <a href=
+        "https://github.com/Arubacloud/docker-machine-driver-arubacloud">https://github.com/Arubacloud/docker-machine-driver-arubacloud</a>
+      </td>
+      <td>
+        <a href="https://github.com/nicolaeusebi">Nicola Eusebi</a>
+        <a href="https://github.com/Arubacloud">Aruba Cloud</a>
+      </td>
+      <td>
+        <a href="mailto:cloudsdk@staff.aruba.it">cloudsdk@staff.aruba.it</a>
+      </td>
+    </tr>
+    <tr>
       <td>BrightBox</td>
       <td>
         <a href=
