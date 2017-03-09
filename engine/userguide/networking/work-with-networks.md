@@ -686,7 +686,7 @@ Environment variable injection is static in nature and environment variables
 cannot be changed after a container is started. The legacy `--link` flag shares
 all environment variables to the linked container, but the `docker network` command
 has no equivalent. When you connect to a network using `docker network`, no
-environment variables can be dynamically among containers.
+environment variables can be dynamically shared among containers.
 
 #### Understanding network-scoped aliases
 
