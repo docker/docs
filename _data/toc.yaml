@@ -1933,8 +1933,6 @@ manuals:
       title: Driver options and operating system defaults
     - path: /machine/drivers/aws/
       title: Amazon Web Services
-    - path: /machine/drivers/aruba/
-      title: Aruba Cloud
     - path: /machine/drivers/digital-ocean/
       title: Digital Ocean
     - path: /machine/drivers/exoscale/
