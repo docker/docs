@@ -26,8 +26,6 @@ You can also view scan results for Official Images on Docker Hub if you are logg
 
 ## Opt in to Docker Security Scanning
 
-> **Note**: Docker Hub can display Security Scan results for organizations and teams, however Security Scanning can only be enabled on Docker Cloud individual accounts at this time.
-
 To opt in:
 
 1. Log in to Docker Cloud or Docker Hub.

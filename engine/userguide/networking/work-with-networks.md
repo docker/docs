@@ -513,7 +513,7 @@ The following example briefly describes how to use `--link`.
     ping: bad address 'c5'
 
     ```
-    Detach from `container3` and leave it running using `CTRL-p CTRL-q`.
+    Detach from `container4` and leave it running using `CTRL-p CTRL-q`.
 
 2.  Create another container named `container5`, and link it to `container4`
     using the alias `c4`.
@@ -611,7 +611,7 @@ The following example illustrates these points.
     $ docker network connect --link container4:bar local_alias container5
     ```
 
-3. Attach to `container3` and try to ping `container4` using alias `foo`, then
+3. Attach to `container4` and try to ping `container4` (yes, the same one) using alias `foo`, then
    try pinging container `container5` using alias `c5`:
 
     ```bash
@@ -686,7 +686,7 @@ Environment variable injection is static in nature and environment variables
 cannot be changed after a container is started. The legacy `--link` flag shares
 all environment variables to the linked container, but the `docker network` command
 has no equivalent. When you connect a container to a network using `docker network`, no
-environment variables can be dynamically among containers.
+environment variables can be dynamically shared among containers.
 
 #### Understanding network-scoped aliases
 

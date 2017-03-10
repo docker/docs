@@ -325,7 +325,7 @@ Discovered by Eric Windisch of the Docker Security Team.
 
 The 1.6.1 release also marks preventative additions to the AppArmor policy.
 Recently, several CVEs against the kernel have been reported whereby mount
-namespaces could be circumvented through the use of the sys_mount syscall from
+namespaces could be circumvented through the use of the `sys_mount` syscall from
 inside of an unprivileged Docker container. In all reported cases, the
 AppArmor policy included in libcontainer and shipped with Docker has been
 sufficient to deflect these attacks. However, we have deemed it prudent to
