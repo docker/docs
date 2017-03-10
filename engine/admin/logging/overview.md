@@ -69,7 +69,6 @@ for its configurable options, if applicable.
 | `splunk`    | Writes log messages to `splunk` using the HTTP Event Collector.|
 | `etwlogs`   | Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms. |
 | `gcplogs`   | Writes log messages to Google Cloud Platform (GCP) Logging.    |
-| `nats`      | NATS logging driver for Docker. Publishes log entries to a NATS server.|
 
 ## Limitations of logging drivers
 
@@ -418,23 +417,3 @@ $ docker run --log-driver=gcplogs \
 
 For detailed information about working with the Google Cloud logging driver, see
 the [Google Cloud Logging driver](gcplogs.md) reference documentation.
-
-## NATS logging options
-
-The NATS logging driver supports the following options:
-
-```none
---log-opt labels=<label1>,<label2>
---log-opt env=<envvar1>,<envvar2>
---log-opt tag=<tag>
---log-opt nats-servers="<comma separated list of nats servers uris>"
---log-opt nats-max-reconnect="<max attempts to connect to a server>"
---log-opt nats-subject="<subject where logs are sent>"
---log-opt nats-tls-ca-cert="<absolute path to cert>"
---log-opt nats-tls-cert="<absolute path to cert>"
---log-opt nats-tls-key="<absolute path to cert>"
---log-opt nats-tls-skip-verify="<value>"
-```
-
-For detailed information, see [the NATS logging driver](nats.md) reference
-documentation.
