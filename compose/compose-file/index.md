@@ -505,21 +505,23 @@ accessible to linked services. Only the internal port can be specified.
 
 ### external_links
 
-Link to containers started outside this `docker-compose.yml` or even outside
-of Compose, especially for containers that provide shared or common services.
-`external_links` follow semantics similar to `links` when specifying both the
-container name and the link alias (`CONTAINER:ALIAS`).
+Link to containers started outside this `docker-compose.yml` or even outside of
+Compose, especially for containers that provide shared or common services.
+`external_links` follow semantics similar to the legacy option `links` when
+specifying both the container name and the link alias (`CONTAINER:ALIAS`).
 
     external_links:
      - redis_1
      - project_db_1:mysql
      - project_db_1:postgresql
 
-> **Note:** If you're using the [version 2 or above file format](compose-versioning.md#version-2), the
+> **Notes:**
+>
+>* If you're using the [version 2 or above file format](compose-versioning.md#version-2), the
 > externally-created containers must be connected to at least one of the same
-> networks as the service which is linking to them. Starting with Version 2, links are a legacy option. We recommend using networks instead. See [Version 2 file format](compose-versioning.md#version-2).
-
-> **Note:** This option is ignored when
+> networks as the service which is linking to them. Starting with Version 2, [links](compose-file-v2#links) are a legacy option. We recommend using [networks](#networks) instead.
+>
+>* This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -652,11 +654,13 @@ the alias, or the service name if no alias was specified.
 Links also express dependency between services in the same way as
 [depends_on](#dependson), so they determine the order of service startup.
 
-> **Note:** If you define both links and [networks](#networks), services with
+> **Notes:**
+>
+> * If you define both links and [networks](#networks), services with
 > links between them must share at least one network in common in order to
 > communicate.
-
-> **Note:** This option is ignored when
+>
+> *  This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
