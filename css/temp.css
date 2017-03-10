@@ -121,3 +121,9 @@ h6 {
 .button.outline-btn {
   margin-bottom: 20px;
 }
+/* Clearfix of floated elements within p tags */
+p:after {
+	content: "";
+	clear: both;
+	display: table;
+}

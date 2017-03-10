@@ -60,6 +60,8 @@ Now, we'll add our Docker machines to a [swarm](/engine/swarm/index.md).
     To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
     ```
 
+    >**Tip:** The next step is to log into the worker machine. You can either open a new shell, or exit out of the manager in the current shell by typing `exit`.
+
 ### Add a worker node to the swarm
 
 1.  Log into the worker machine.

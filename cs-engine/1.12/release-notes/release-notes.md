@@ -45,7 +45,7 @@ This release addresses the following issues:
 * Addresses an inconsistent mac -> vtep binding issue when using overlay networks
 
 * Adds a new repository for RHEL 7.2 users, to deal with issues
-  users have encounted when installing the docker-engine-selinux package
+  users have encountered when installing the docker-engine-selinux package
   on systems pinned to 7.2 packages that are older than those available in the
   normal 7.2 install. This change relates to packaging changes for
   [1.12.6-cs7](#cs-engine-1126-cs7).
@@ -79,7 +79,7 @@ changes since the release of CS Engine 1.12.5-cs5.
 (21 Dec 2016)
 
 Refer to the [detailed list](https://github.com/docker/docker/releases/tag/v1.12.5) of all
-changes since the release of CS Engine 1.12.3-cs4
+changes since the release of CS Engine 1.12.3-cs4.
 
 ## CS Engine 1.12.3-cs4
 (11 Nov 2016)
@@ -107,7 +107,7 @@ changes since the release of CS Engine 1.12.1-cs1.
 (20 Sep 2016)
 
 Refer to the [detailed list](https://github.com/docker/docker/releases) of all
-changes since the release of CS Engine 1.11.2-cs5
+changes since the release of CS Engine 1.11.2-cs5.
 
 This release addresses the following issues:
 
@@ -150,7 +150,7 @@ This release addresses the following issues:
 ## CS Engine 1.11.2-cs4
 (16 Aug 2016)
 
-This releases addresses the following issues:
+This release addresses the following issues:
 
 * Change systemd kill mode to `process` so systemd only stops the docker daemon
 [#21933](https://github.com/docker/docker/issues/21933)

@@ -21,6 +21,7 @@ Follow the <a href="/engine/installation/" target="_blank">official installatio
 1. In a terminal window, set the environment variable **DOCKER_ID_USER** as *your username* in Docker Cloud.
 
     This allows you to copy and paste the commands directly from this tutorial.
+    
     ```
     $ export DOCKER_ID_USER="username"
     ```
@@ -29,6 +30,7 @@ Follow the <a href="/engine/installation/" target="_blank">official installatio
     this tutorial to replace `DOCKER_ID_USER` with your Docker Cloud username.
 
 2. Log in to Docker Cloud using the `docker login` command.
+    
     ```
     $ docker login
     ```
@@ -39,11 +41,13 @@ Follow the <a href="/engine/installation/" target="_blank">official installatio
 3. Tag your image using `docker tag`.
 
     In the example below replace `my_image` with your image's name, and `DOCKER_ID_USER` with your Docker Cloud username if needed.
+    
     ```
     $ docker tag my_image $DOCKER_ID_USER/my_image
     ```
 
 4. Push your image to Docker Hub using `docker push` (making the same replacements as in the previous step).
+    
     ```
     $ docker push $DOCKER_ID_USER/my_image
     ```
