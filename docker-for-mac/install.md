@@ -128,7 +128,7 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
 
 2.  Double-click `Docker.app` to start Docker.
 
-	  ![Docker app in Hockeyapp](/docker-for-mac/images/docker-app-in-apps.png
+	  ![Docker app in Hockeyapp](/docker-for-mac/images/docker-app-in-apps.png)
 
 	  You will be asked to authorize `Docker.app` with your system password after you launch it.
 	  Privileged access is needed to install networking components and links to the Docker apps.
