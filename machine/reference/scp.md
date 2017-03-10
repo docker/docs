@@ -29,3 +29,19 @@ Just like how `scp` has a `-r` flag for copying files recursively,
 
 In the case of transferring files from machine to machine, they go through the
 local host's filesystem first (using `scp`'s `-3` flag).
+
+When transferring large files or updating directories with lots of files,
+the `-d` flag (for delta) is useful... It uses `rsync`.
+
+When synching directories and not just files, best way to avoid rsync surprises
+is to use trailing slashes on source and destination.
+
+Example:
+
+```none
+$ mkdir -p bar
+$ touch bar/baz
+$ docker-machine scp -r -d bar/ dev:/home/docker/bar/
+$ docker-machine ssh dev ls bar
+baz
+```
