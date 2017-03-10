@@ -55,10 +55,7 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
   <a class="button outline-btn" href="https://download.docker.com/mac/beta/Docker.dmg">Get Docker for Mac (Edge)</a>
   </td>
   </tr>
-  <tr>
-  <td><a href="https://download.docker.com/mac/stable/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: Docker.dmg SHA256</font></a></td>
-  <td><a href="https://download.docker.com/mac/beta/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: Docker.dmg SHA256</font></a></td>
-  </tr>
+
 </table>
 
 >**Important Notes**:

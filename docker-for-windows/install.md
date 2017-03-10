@@ -60,10 +60,6 @@ Edge channels, see the
   <a class="button outline-btn" href="https://download.docker.com/win/beta/InstallDocker.msi">Get Docker for Windows (Edge)</a>
   </td>
   </tr>
-  <tr>
-  <td><a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: InstallDocker.msi SHA256</font></a></td>
-  <td><a href="https://download.docker.com/win/beta/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Download checksum: InstallDocker.msi SHA256</font></a></td>
-  </tr>
 </table>
 
 >**Important Notes:**
