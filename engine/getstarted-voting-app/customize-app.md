@@ -22,7 +22,6 @@ Go back to `docker-stack.yml` and replace the `before` tags on both the `vote` a
 
 ![after tags for vote and result in yml](images/customize-after.png)
 
-
 ## Redeploy
 
 Run the same deploy command again to run the app with the new configuration.
