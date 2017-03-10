@@ -56,7 +56,7 @@ As an example, the `docker run` command can be easily implemented in various pro
   		panic(err)
   	}
 
-  	_, err = cli.ImagePull(ctx, "alpine", types.ImagePullOptions{})
+  	_, err = cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
   	if err != nil {
   		panic(err)
   	}
