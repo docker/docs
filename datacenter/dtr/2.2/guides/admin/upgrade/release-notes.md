@@ -20,8 +20,8 @@ to upgrade your installation to the latest release.
 
 **General improvements**
 
-* Several improvements to `docker/dtr` to make it more resilient
-* Improved `docker/dtr` to better detect port conflicts when installing or joining DTR replicas
+* Several improvements to the installer to make it more resilient
+* Improved the installer to better detect port conflicts when installing or joining DTR replicas
 * Security scans can now be cancelled
 * Fixed memory leaks in the DTR API server and Registry
 * DTR job logs are now stored in the DTR datastore but also sent to Docker Engine
