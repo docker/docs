@@ -89,6 +89,8 @@ eastus
 eastus2
 japaneast
 japanwest
+koreacentral
+koreasouth
 northcentralus
 northeurope
 southcentralus
@@ -96,6 +98,8 @@ southeastasia
 southindia
 uksouth
 ukwest
+usgovvirginia
+usgoviowa
 westcentralus
 westeurope
 westindia
