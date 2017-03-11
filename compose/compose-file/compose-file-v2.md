@@ -534,7 +534,7 @@ Links also express dependency between services in the same way as
 
 > **Note:** If you define both links and [networks](#networks), services with
 > links between them must share at least one network in common in order to
-> communicate. We recommend using networks instead. See [Version 2 file format](#version-2).
+> communicate. We recommend using networks instead.
 
 ### logging
 
