@@ -10,6 +10,63 @@ known issues for the latest UCP version.
 You can then use [the upgrade instructions](index.md), to
 upgrade your installation to the latest release.
 
+
+## Version 2.1.1
+
+(14 Mar 2017)
+
+**New features**
+
+* Core
+  * Administrators can now configure the frequency with which UCP polls metrics.
+  Use `docker service update --env-add METRICS_SCRAPE_INTERVAL=10m ucp-agent`,
+  and the frequency can be in s/m/h/d.
+  * Administrators can now configure the frequency with which UCP gathers disk usage data.
+  Use `docker service update --env-add METRICS_DISK_USAGE_INTERVAL=12h ucp-agent`,
+  and the frequency can be in s/m/h/d.
+  * Support for syncing users and teams from multiple LDAP servers/domains
+  (e.g. a separate server to use for `dc=domain2,dc=example,dc=com`)
+  * Support for limiting the number of maximum concurrent login sessions any
+  user may have
+
+**Bug fixes**
+
+* Core
+  * Fixed an issue in which UCP manager would panic and be unable to return
+  the right system status after the cluster became unhealthy
+  * `ucp-hrm` container now provides debug logs through `stdout`
+  * HTTP Routing Mesh now checks to ensure an ingress port is not already
+  in use by UCP or DTR before becoming active
+  * Fixed an issue in which UCP did not use swarm-mode node IDs, preventing
+  usage of node constraints and other features when using cloned VMs as UCP nodes
+  * Fixed an issue in which certain Docker API 1.26 commands were not correctly supported
+  * Disk usage metrics no longer display 0% when using devicemapper filesystem
+  * Disk usage metrics are now collected every 2 hours by default, and can be tunned
+  * Fixed an issue causing Content Trust enforcement to ignore an optional `tag` for
+  `/images/create`, causing some signed content to not run correctly
+  * LDAP sync logs now take up less disk space on manager nodes
+  * UCP support dumps are now correctly compressed to take up less disk space,
+  and provide information on HTTP Routing Mesh and metrics
+* docker/ucp image
+    * UCP install now correctly fails and presents an error when trying to
+    specify `host-address` to an existing swarm-mode cluster
+    * Clarified upgrade message to make it clear that the upgrade command now
+    works at once for the entire cluster rather than needing to be run on every
+    node
+* UI/UX
+    * UI now displays a warning if there is significant latency or network issues
+    in communications between UCP manager nodes
+    * UI no longer incorrectly displays 'No Services' while still loading the
+    Services tab
+    * UI no longer displays errors when global tasks are removed due to node
+    constraints
+    * UI now displays a warning when underlying engines in the swarm-mode
+    cluster are running different versions
+    * UI now displays an error when 'Load Image' command fails
+    * 'KV Store Timeout' option now displays correct units (milliseconds)
+    * Dashboard now correctly displays errors when metrics are unavailable
+    * The DTR deployment page now validates if a DTR replica ID is valid or not
+
 ## Version 2.1.0
 
 (9 Feb 2017)
