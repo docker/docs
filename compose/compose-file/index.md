@@ -836,7 +836,11 @@ containers in the bare-metal machine's namespace and vise-versa.
 
 ### ports
 
-Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
+Expose ports.
+
+#### Short syntax
+
+Either specify both ports (`HOST:CONTAINER`), or just the container
 port (a random host port will be chosen).
 
 > **Note:** When mapping ports in the `HOST:CONTAINER` format, you may experience
@@ -853,6 +857,28 @@ port (a random host port will be chosen).
      - "127.0.0.1:8001:8001"
      - "127.0.0.1:5000-5010:5000-5010"
      - "6060:6060/udp"
+
+#### Long syntax
+
+The long form syntax allows the configuration of additional fields that can't be
+expressed in the short form.
+
+- `target`: the publicly exposed port
+- `published`: the port inside the container
+- `protocol`: the port protocol (`tcp` or `udp`)
+- `mode`: `host` for publishing a host port on each node, or `ingress` for a swarm
+   mode port which will be load balanced.
+
+```none
+ports:
+  - target: 8080
+    published: 80
+    protocol: tcp
+    mode: host
+
+```
+
+> **Note:** The long syntax is new in v3.2
 
 ### secrets
 
