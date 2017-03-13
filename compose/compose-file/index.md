@@ -348,6 +348,8 @@ Simple example:
 > for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 > for more on this problem and strategies for solving it.
 
+> **NOTE:** version 3 no longer supports the `condition` form of `depends_on`
+
 > **Note:** This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
