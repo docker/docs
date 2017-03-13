@@ -253,7 +253,7 @@ provides multiple advantages to easily deploy and access your application.
     a. Creating a service with a published port `8080` using CLI:
 
     ```
-    $ docker service create --name demo -p 8080:8080 ehazlett/docker-demo:dcus
+    $ docker service create --name demo -p 8080:8080 ehazlett/docker-demo:latest
     	6s09w6gxxfz7mkce9ybl6x3cr
     ```
     b. Notice the updated ELB configuration:
