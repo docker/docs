@@ -48,7 +48,7 @@ are as follows.
 #### Mac
 
 ```none
-docker-machine create --driver virtualbox HOST-NAME
+docker-machine create --driver virtualbox MACHINE-NAME
 ```
 
 #### Windows
