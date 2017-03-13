@@ -329,7 +329,8 @@ Keep reading for more information and use cases for each of these methods.
 
 #### Publish a service's ports using the routing mesh
 
-To publish a service's ports externally to the swarm, use the `--publish <TARGET-PORT>:<SERVICE-PORT>` flag. The swarm
+To publish a service's ports externally to the swarm, use the
+`--publish <TARGET-PORT>:<SERVICE-PORT>` flag. The swarm
 makes the service accessible at the target port **on every swarm node**. If an
 external host connects to that port on any swarm node, the routing mesh routes
 it to a task. The external host does not need to know the IP addresses or
@@ -542,7 +543,8 @@ $ docker service create \
   <IMAGE>
 ```
 
-For more information on how to create a volume, see the `volume create` [CLI reference](../reference/commandline/volume_create.md).
+For more information on how to create a volume, see the `volume create`
+[CLI reference](../reference/commandline/volume_create.md).
 
 The following method creates the volume at deployment time when the scheduler
 dispatches a task, just before starting the container:
