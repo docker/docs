@@ -427,7 +427,7 @@ For example, if you set your proxy settings to `http://proxy.example.com`, Docke
 When you start a container, you will see that your proxy settings propagate into the containers. For example:
 
 ```powershell
-PS C:\Users\jdoe> docker run -it alpine env
+PS C:\Users\jdoe> docker run alpine env
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=b7edf988b2b5
 TERM=xterm
