@@ -44,7 +44,7 @@ at any time.
 ### Convert a user to an Organization
 
 Individual user accounts can be converted to organizations if needed. You will
-no longer be able to log in to the account, email addresses, linked source
+no longer be able to log in to the account; email addresses, linked source
 repositories and collaborators will be removed. Automated builds will be
 migrated. **Account conversion cannot be undone.**
 
