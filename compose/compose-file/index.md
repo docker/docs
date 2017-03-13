@@ -1054,7 +1054,7 @@ more information.
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
-### volumes, volume\_driver
+### volumes
 
 > **Note:** The top-level
 > [`volumes` option](#volume-configuration-reference) defines
@@ -1062,10 +1062,8 @@ more information.
 
 Mount paths or named volumes, optionally specifying a path on the host machine
 (`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
-For [version 2 files](compose-versioning.md#version-2), named volumes need to be specified with the
+Named volumes must be defined in the
 [top-level `volumes` key](#volume-configuration-reference).
-When using [version 1](compose-versioning.md#version-1), the Docker Engine will create the named
-volume automatically if it doesn't exist.
 
 You can mount a relative path on the host, which will expand relative to
 the directory of the Compose configuration file being used. Relative paths
@@ -1087,22 +1085,7 @@ should always begin with `.` or `..`.
       # Named volume
       - datavolume:/var/lib/mysql
 
-If you do not use a host path, you may specify a `volume_driver`.
 
-    volume_driver: mydriver
-
-There are several things to note, depending on which
-[Compose file version](compose-versioning.md#versioning) you're using:
-
--   `volume_driver` is not supported at all in
-    [version 3](compose-versioning.md#version-3). Instead of setting the volume driver
-    on the service, define a volume using the
-    [top-level `volumes` option](#volume-configuration-reference)
-    and specify the driver there.
-
--   No path expansion will be done if you have also specified a `volume_driver`.
-    For example, if you specify a mapping of `./foo:/data`, the `./foo` part
-    will be passed straight to the volume driver without being expanded.
 
 See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
