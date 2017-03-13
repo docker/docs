@@ -1060,10 +1060,13 @@ more information.
 > [`volumes` option](#volume-configuration-reference) defines
 > a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format.
 
-Mount paths or named volumes, optionally specifying a path on the host machine
-(`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
-Named volumes must be defined in the
+Mount host paths or named volumes. Named volumes must be defined in the
 [top-level `volumes` key](#volume-configuration-reference).
+
+#### Short syntax
+
+Optionally specify a path on the host machine
+(`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
 
 You can mount a relative path on the host, which will expand relative to
 the directory of the Compose configuration file being used. Relative paths
@@ -1086,6 +1089,37 @@ should always begin with `.` or `..`.
       - datavolume:/var/lib/mysql
 
 
+#### Long syntax
+
+The long form syntax allows the configuration of additional fields that can't be
+expressed in the short form.
+
+- `type`: the mount type `volume` or `bind`
+- `source`: the source of the mount, a path on the host for a bind mount, or the
+  name of a volume defined in the
+  [top-level `volumes` key](#volume-configuration-reference)
+- `target`: the path in the container where the volume will be mounted
+- `read_only`: flag to set the volume as read-only
+- `bind`: configure additional bind options
+  - `propagation`: the propagation mode used for the bind
+- `volume`: configure additional volume options
+  - `nocopy`: flag to disable copying of data from a container when a volume is
+    created
+
+
+```none
+volumes:
+  - type: volume
+    source: mydata
+    target: /data
+    volume:
+      nocopy: true
+  - type: bind
+    source: ./static
+    target: /opt/app/static
+```
+
+> **Note:** The long syntax is new in v3.2
 
 See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
