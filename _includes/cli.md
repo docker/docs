@@ -14,7 +14,7 @@
 
 ## Usage
 
-```shell
+```none
 {{ site.data[page.datafolder][page.datafile].usage | replace: tabChar,"" | strip }}{% if site.data[page.datafolder][page.datafile].cname %} COMMAND{% endif %}
 ```
 
@@ -39,7 +39,7 @@
 
 {% endif %}
 
-{% if site.data[page.datafolder][page.datafile].pname and site.data[page.datafolder][page.datafile].pname != page.datafile %}
+{% unless site.data[page.datafolder][page.datafile].pname == page.datafile %}
 
 ## Parent command
 
@@ -56,9 +56,9 @@
 | ------- | ----------- |
 | [{{ site.data[page.datafolder][page.datafile].pname }}]({{ parentfile }}) | {{ parentDesc }}|
 
-{% endif %}
+{% endunless %}
 
-{% if site.data[page.datafolder][page.datafile].pname != "docker" %}
+{% unless site.data[page.datafolder][page.datafile].pname == "docker" or site.data[page.datafolder][page.datafile].pname == "dockerd" %}
 
 ## Related commands
 
@@ -66,15 +66,15 @@
 | ------- | ----------- |{% for command in site.data[page.datafolder][parentdatafile].cname %}{% capture dataFileName %}{{ command | strip | replace: " ","_" }}{% endcapture %}
 | [{{ command }}]({{ dataFileName | replace: "docker_","" }}/) | {{ site.data[page.datafolder][dataFileName].short }} |{% endfor %}
 
-{% endif %}
+{% endunless %}
 
-{% if site.data[page.datafolder][page.datafile].long != site.data[page.datafolder][page.datafile].short %}
+{% unless site.data[page.datafolder][page.datafile].long == site.data[page.datafolder][page.datafile].short %}
 
 ## Extended description
 
 {{ site.data[page.datafolder][page.datafile].long }}
 
-{% endif %}
+{% endunless %}
 
 {% if site.data[page.datafolder][page.datafile].examples %}
 
