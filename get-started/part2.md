@@ -21,15 +21,16 @@ after doing that, you can expect that the build of your app defined in this
 ### `Dockerfile`
 
 Create an empty directory and put this file in it, with the name `Dockerfile`.
+Take note of the comments that explain each statement.
 
 ```
-# Using official python runtime base image
+# Use an official Python runtime as a base image
 FROM python:2.7-slim
 
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the host machine directoy's contents to /app in the container
+# Copy the host machine's current directory contents to /app in the container
 ADD . /app
 
 # Install any needed packages specified in requirements.txt
@@ -46,11 +47,15 @@ CMD ["python", "app.py"]
 ```
 
 This `Dockerfile` refers to a couple of things we haven't created yet, namely
-`app.py` and `requirements.txt`. Let's get those in place next.
+`app.py` and `requirements.txt`. Let's get those in place next. 
 
 ## The app itself
 
 Grab these two files and place them in the same folder as `Dockerfile`.
+This completes our app, which as you can see is quite simple. When the above
+`Dockerfile` is built into an image, `app.py` and `requirements.txt` will be
+present because of that `Dockerfile`'s `ADD` command, and the output from
+`app.py` will be accessible over HTTP thanks to the `EXPOSE` command.
 
 ### `requirements.txt`
 
@@ -102,9 +107,9 @@ container ID, which is like the process ID for a running executable.
 ## Build the App
 
 That's it! You don't need Python or anything in `requirements.txt` on your
-system, nor will running this app install them. It doesn't seem like you've
-really set up an environment with Python and Flask, but you have. Let's build
-and run your app and prove it.
+system, nor will building or running this app install them. It doesn't seem
+like you've really set up an environment with Python and Flask, but you
+have.
 
 Here's what `ls` should show:
 
@@ -120,9 +125,7 @@ tag using `-t` so it has a friendly name.
 docker build -t friendlyhello .
 ```
 
-In the output spew you can see everything defined in the `Dockerfile` happening.
-Where is your built image? It's in your machine's local Docker image registry.
-Check it out:
+Where is your built image? It's in your machine's local Docker image registry:
 
 ```shell
 $ docker images
@@ -143,7 +146,7 @@ You should see a notice that Python is serving your app at `http://0.0.0.0:80`.
 But that message coming from inside the container, which doesn't know you
 actually want to access your app at: `http://localhost:4000`. Go there, and
 you'll see the "Hello World" text, the container ID, and the Redis error
-message, all printed out in beautiful Times New Roman.
+message.
 
 Hit `CTRL+C` in your terminal to quit.
 
@@ -153,8 +156,10 @@ Now let's run the app in the background, in detached mode:
 docker run -d -p 4000:80 friendlyhello
 ```
 
-You get a hash ID of the container instance and then are kicked back to your
-terminal. Your app is running in the background. Let's see it with `docker ps`:
+You get the long container ID for your app and then are kicked back to your
+terminal. Your app is running in the background. You can also see the 
+abbreviated container ID with `docker ps` (and both work interchangeably when
+running commands):
 
 ```shell
 $ docker ps
@@ -162,9 +167,9 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 1fa4ab2cf395        friendlyhello       "python app.py"     28 seconds ago      Up 25 seconds
 ```
 
-You'll see that `CONTAINER ID` matches what's on `http://localhost:4000`, if you
-refresh the browser page. Now use `docker stop` to end the process, using
-`CONTAINER ID`, like so:
+You'll see that `CONTAINER ID` matches what's on `http://localhost:4000`.
+
+Now use `docker stop` to end the process, using `CONTAINER ID`, like so:
 
 ```shell
 docker stop 1fa4ab2cf395
@@ -172,15 +177,19 @@ docker stop 1fa4ab2cf395
 
 ## Share your image
 
+To demonstrate the portability of what we just created, let's upload our
+build and run it somewhere else.
+
 Sign up for a Docker account at [cloud.docker.com](https://cloud.docker.com/).
 Make note of your username. We're going to use it to upload our build to Docker
 Store and make it retrievable from anywhere.
 
-Docker Store is a public registry, and a registry is a collection of
-repositories. A repository is a collection of tagged images like a GitHub
-repository, except the code is already built.
+A registry is a collection of repositories, and the `docker` CLI is preconfigured to
+use Docker's public registry by default. A repository is a collection of tagged images,
+sort of like a GitHub repository, except the code is already built. An account on a
+registry can create many repositories. 
 
-Log in your local machine to Docker Store.
+Log in your local machine.
 
 ```shell
 docker login
@@ -201,12 +210,11 @@ Upload this image:
 docker push YOURUSERNAME/YOURREPO:ARBITRARYTAG
 ```
 
-Once complete, the results of this upload are [publicly available
-on Docker Hub](https://store.docker.com/). From now on, you can use `docker run`
-on any machine with the fully qualified tag:
+Once complete, the results of this upload are publicly available. From now on, you
+can use `docker run` and run your app on any machine with this command:
 
 ```shell
-docker run YOURUSERNAME/YOURREPO:ARBITRARYTAG
+docker run -p 80:80 YOURUSERNAME/YOURREPO:ARBITRARYTAG
 ```
 
 > Note: If you don't specify the `:ARBITRARYTAG` portion of these commands,
@@ -218,11 +226,13 @@ and all the dependencies from `requirements.txt`, and runs your code. It all
 travels together in a neat little package, and the host machine doesn't have to
 install anything but Docker to run it.
 
+## Conclusion of part one
+
 That's all for this page. You can continue to the next phase where we link up
-Redis to our web page so that counter works. Or, if you want a quick recap
+Redis to our web page so that the counter works. Or, if you want a quick recap
 first, scroll down for the [cheat sheet](#cheat-sheet).
 
-[On to "Getting Started, Part 3: Stateful, Multi-container Applications" >>](part3.md){: class="button outline-btn"}
+[Continue to "Getting Started, Part 3: Multi-container Applications" >>](part3.md){: class="button outline-btn"}
 
 ## Cheat sheet
 
