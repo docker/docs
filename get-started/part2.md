@@ -230,7 +230,8 @@ Here's [a terminal recording of everything that we did on this page](https://asc
 
 <script type="text/javascript" src="https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g.js" id="asciicast-blkah0l4ds33tbe06y4vkme6g" async></script>
 
-And here is a list of basic commands from this page that deal with our same
+Here is a list of the basic commands from this page, and some related ones if 
+you'd like to explore a bit before moving on.
 
 ```shell
 docker build -t friendlyname . #Create image using this directory's Dockerfile
