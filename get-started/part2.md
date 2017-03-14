@@ -135,7 +135,7 @@ friendlyhello         latest              326387cea398        47 seconds ago    
 
 ## Run the app
 
-Run the app, mapping our machine's port 4000 to the container's exposed port 80
+Run the app, mapping your machine's port 4000 to the container's `EXPOSE`d port 80
 using `-p`:
 
 ```shell
