@@ -1,13 +1,15 @@
 ---
-description: Docker Trusted Registry release notes
-keywords: docker trusted registry, whats new, release notes
 title: DTR 2.2 release notes
+description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry {{ page.dtr_version }}
+keywords: docker trusted registry, whats new, release notes
+redirect_from:
+  - /datacenter/ucp/2.1/guides/admin/upgrade/release-notes/
 ---
 
 Here you can learn about new features, bug fixes, breaking changes and
 known issues for each DTR version.
 
-You can then use [the upgrade instructions](index.md),
+You can then use [the upgrade instructions](../admin/upgrade.md),
 to upgrade your installation to the latest release.
 
 ## DTR 2.2.3
@@ -40,7 +42,7 @@ displayed for images that had never been scanned
 * The web UI now displays a banner to administrators when a tag migration job
 is running
 
-  ![](../../images/release-notes-1.png)
+  ![](../images/release-notes-1.png)
 
 **General improvements**
 
