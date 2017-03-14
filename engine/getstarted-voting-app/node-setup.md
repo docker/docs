@@ -31,7 +31,9 @@ using the Toolbox installer because it can
 here](https://www.virtualbox.org/wiki/Downloads), and follow install
 instructions. You do not need to start VirtualBox. The `docker-machine create`
 command will call it via the driver.
+
 <p />
+
 * **Hyper-V driver on Docker for Windows** - On Docker for Windows, you
 will use `docker-machine` with the [`Hyper-V`](/machine/drivers/hyper-v/) driver
 to create machines. You will need to follow the instructions in the [Hyper-V
@@ -39,6 +41,14 @@ example](/machine/drivers/hyper-v#example) reference topic to set up a new
 external network switch (a one-time task), reboot, and then
 [create the machines (nodes)](/machine/drivers/hyper-v.md#create-the-nodes-with-docker-machine-and-the-microsoft-hyper-v-driver)
 in an elevated PowerShell per those instructions.
+
+* **Virtualbox on Docker for Windows 7** - IF you are using Windows 7 (which does not include Hyper-V), you can use the same approach applied to Mac. Download Virtualbox from Oracle and execute the same commands applied to Mac machines. For example, to create a new local virtual machine in Windows 7 once Virtualbox has been downloaded and installed you can execute the next command:
+
+```none
+docker-machine create --driver virtualbox MACHINE-NAME
+```
+
+<p />
 
 ### Commands to create machines
 
