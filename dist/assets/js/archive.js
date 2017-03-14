@@ -1,6 +1,6 @@
 /* Obly run this if we are online*/
 if (window.navigator.onLine) {
-  var dockerVersion = '1.7';
+  var dockerVersion = '1.8';
   /* This JSON file contains a current list of all docs versions of Docker */
   $.getJSON("https://docs.docker.com/js/archives.json", function(result){
     var outerDivStart = '<div style="padding-top: 10px; padding-bottom: 10px; min-height: 34px; border: 1px solid #A3733F; background-color: #FFE1C0; color: #A3733F"><div class="container"><div style="text-align: center"><span id="archive-list">This is <b><a href="https://docs.docker.com/docsarchive/" style="color: #A3733F; text-decoration: underline !important">archived documentation</a></b> for Docker&nbsp;' + dockerVersion + '. Go to the <a style="color: #A3733F; text-decoration: underline !important" href="https://docs.docker.com/">latest docs</a> or a different version:&nbsp;&nbsp;</span>' +
