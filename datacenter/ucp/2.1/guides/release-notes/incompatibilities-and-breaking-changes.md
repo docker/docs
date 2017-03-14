@@ -3,7 +3,7 @@ title: Incompatibilities and breaking changes
 description: Learn about the incompatibilities and breaking changes introduced by Universal Control Plane version {{ page.ucp_version }}
 keywords: docker, ucp, upgrade, incompatibilities
 redirect_from:
-  - /datacenter/ucp/2.1/guides/admin/upgrade/incompatibilities-and-breaking-changes/
+- /datacenter/ucp/2.1/guides/admin/upgrade/incompatibilities-and-breaking-changes/
 ---
 
 This is the list of incompatibilities introduced by Universal Control Plane
