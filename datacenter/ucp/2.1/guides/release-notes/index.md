@@ -1,13 +1,15 @@
 ---
+title: UCP 2.1 release notes
 description: Release notes for Docker Universal Control Plane. Learn more about the
   changes introduced in the latest versions.
-keywords: Docker, UCP, Release notes, Versions
-title: UCP 2.1 release notes
+keywords: Docker, UCP, release notes
+redirect_from:
+  - /datacenter/ucp/2.1/guides/admin/upgrade/release-notes/
 ---
 
 Here you can learn about new features, bug fixes, breaking changes and
 known issues for the latest UCP version.
-You can then use [the upgrade instructions](index.md), to
+You can then use [the upgrade instructions](../admin/upgrade.md), to
 upgrade your installation to the latest release.
 
 

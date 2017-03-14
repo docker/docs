@@ -1278,9 +1278,9 @@ manuals:
           title: Grant access to secrets
     - sectiontitle: Release notes
       section:
-      - path: /datacenter/ucp/2.1/guides/admin/upgrade/release-notes/
+      - path: /datacenter/ucp/2.1/guides/release-notes/
         title: Release notes
-      - path: /datacenter/ucp/2.1/guides/admin/upgrade/incompatibilities-and-breaking-changes/
+      - path: /datacenter/ucp/2.1/guides/release-notes/incompatibilities-and-breaking-changes/
         title: Incompatibilities and breaking changes
     - path: /datacenter/ucp/2.1/guides/get-support/
       title: Get support
