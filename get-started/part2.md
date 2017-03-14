@@ -107,9 +107,9 @@ container ID, which is like the process ID for a running executable.
 ## Build the App
 
 That's it! You don't need Python or anything in `requirements.txt` on your
-system, nor will building or running this app install them. It doesn't seem
-like you've really set up an environment with Python and Flask, but you
-have.
+system, nor will building or running this app install them on your system. It
+doesn't seem like you've really set up an environment with Python and Flask, but
+you have.
 
 Here's what `ls` should show:
 
