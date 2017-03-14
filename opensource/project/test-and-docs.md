@@ -1,6 +1,6 @@
 ---
 description: Describes Docker's testing infrastructure
-keywords: make test, make docs, Go tests, gofmt, contributing,  running tests
+keywords: make test, make docs, Go tests, gofmt, contributing, running tests
 title: Run tests and test documentation
 ---
 
@@ -31,7 +31,7 @@ target="_blank">go test help</a>.
 
 You are responsible for _unit testing_ your contribution when you add new or
 change existing Docker code. A unit test is a piece of code that invokes a
-single, small piece of code ( _unit of work_ ) to verify the unit works as
+single, small piece of code (_unit of work_) to verify the unit works as
 expected.
 
 Depending on your contribution, you may need to add _integration tests_. These
@@ -48,7 +48,7 @@ change an existing one.
 ## Run tests on your local host
 
 Before submitting a pull request with a code change, you should run the entire
-Docker Engine test suite.  The `Makefile` contains a target for the entire test
+Docker Engine test suite. The `Makefile` contains a target for the entire test
 suite, named `test`. Also, it contains several targets for
 testing:
 
@@ -91,7 +91,7 @@ hour. To run the test suite, do the following:
 
     It can take approximate one hour to run all the tests. The time depends
     on your host performance. The default timeout is 60 minutes, which is
-    defined in `hack/make.sh`(`${TIMEOUT:=60m}`). You can modify the timeout
+    defined in `hack/make.sh` (`${TIMEOUT:=60m}`). You can modify the timeout
     value on the basis of your host performance. When they complete
     successfully, you see the output concludes with something like this:
 
@@ -185,9 +185,9 @@ root@5f8630b873fe:/go/src/github.com/docker/docker# TESTFLAGS='-check.f TestBuil
 ## Test the Windows binary against a Linux daemon
 
 This explains how to test the Windows binary on a Windows machine set up as a
-development environment.  The tests will be run against a docker daemon
-running on a remote Linux machine. You'll use  **Git Bash** that came with the
-Git for Windows installation.  **Git Bash**, just as it sounds, allows you to
+development environment. The tests will be run against a docker daemon
+running on a remote Linux machine. You'll use **Git Bash** that came with the
+Git for Windows installation. **Git Bash**, just as it sounds, allows you to
 run a Bash terminal on Windows.
 
 1.  If you don't have one open already, start a Git Bash terminal.
