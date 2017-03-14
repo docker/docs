@@ -182,12 +182,12 @@ build and run it somewhere else.
 
 Sign up for a Docker account at [cloud.docker.com](https://cloud.docker.com/).
 Make note of your username. We're going to use it to upload our build to Docker
-Store and make it retrievable from anywhere.
+and make it retrievable from anywhere.
 
-A registry is a collection of repositories, and the `docker` CLI is preconfigured to
-use Docker's public registry by default. A repository is a collection of tagged images,
+A registry is a collection of repositories, and a repository is a collection of images,
 sort of like a GitHub repository, except the code is already built. An account on a
-registry can create many repositories. 
+registry can create many repositories. The `docker` CLI is preconfigured to
+use Docker's public registry by default.
 
 Log in your local machine.
 
@@ -198,26 +198,27 @@ docker login
 Now, let's publish your image. The notation for associating a local image with a
 repository on a registry, is `username/repository:tag`. The `:tag` is optional,
 but recommended; it's the mechnism that registries use to give Docker images a
-version. So, putting all that together:
+version. So, putting all that together, enter your username, and repo
+and tag names, so your existing image will upload to your desired destination:
 
 ```shell
-docker tag friendlyhello YOURUSERNAME/YOURREPO:ARBITRARYTAG
+docker tag friendlyhello username/repository:tag
 ```
 
-Upload this image:
+Upload your tagged image:
 
 ```shell
-docker push YOURUSERNAME/YOURREPO:ARBITRARYTAG
+docker push username/repository:tag
 ```
 
 Once complete, the results of this upload are publicly available. From now on, you
 can use `docker run` and run your app on any machine with this command:
 
 ```shell
-docker run -p 80:80 YOURUSERNAME/YOURREPO:ARBITRARYTAG
+docker run -p 80:80 username/repository:tag
 ```
 
-> Note: If you don't specify the `:ARBITRARYTAG` portion of these commands,
+> Note: If you don't specify the `:tag` portion of these commands,
   the tag of `:latest` will be assumed, both when you build and when you run
   images.
 
