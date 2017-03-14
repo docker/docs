@@ -93,6 +93,21 @@ your host's Linux distribution and available kernel drivers.
 
 ## Troubleshooting
 
+### Kernel compatibility
+
+Docker will not run correctly if your kernel is older than version 3.10 or if it
+is missing some modules. To check kernel compatibility, you can download and
+run the [`check-compatibility.sh`](https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh)
+script.
+
+```bash
+$ curl https://raw.githubusercontent.com/docker/docker/master/contrib/check-config.sh > check-config.sh
+
+$ bash ./check-config.sh
+```
+
+The script will only work on Linux, not macOS.
+
 ### `Cannot connect to the Docker daemon`
 
 If you see an error such as the following, your Docker client may be configured
