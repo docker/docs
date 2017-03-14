@@ -4,4 +4,3 @@ source "https://rubygems.org"
 # Please ensure, before upgrading, that this version exists as a tag in starefossen/github-pages here:
 # https://hub.docker.com/r/starefossen/github-pages/tags/
 gem "github-pages", "112"
-gem "jekyll-include-cache"
