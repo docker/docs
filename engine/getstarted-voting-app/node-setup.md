@@ -10,7 +10,7 @@ machines, virtual machines, or cloud providers.
 
 For this example, we use [Docker Machine](/machine/get-started.md) to create two
 virtual machines on a single system. We'll also verify the setup, and
-run some basic commmands to interact with the machines.
+run some basic commands to interact with the machines.
 
 ## Prerequisites
 
