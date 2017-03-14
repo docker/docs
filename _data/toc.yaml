@@ -446,28 +446,6 @@ guides:
     title: Where to chat or get help
   - path: /opensource/doc-style/
     title: Style guide for Docker documentation
-- sectiontitle: Docs archive
-  section:
-  - path: /docsarchive/
-    title: View the docs archives
-  - path: /v1.4
-    title: v1.4
-  - path: /v1.5
-    title: v1.5
-  - path: /v1.6
-    title: v1.6
-  - path: /v1.7
-    title: v1.7
-  - path: /v1.8
-    title: v1.8
-  - path: /v1.9
-    title: v1.9
-  - path: /v1.10
-    title: v1.10
-  - path: /v1.11
-    title: v1.11
-  - path: /v1.12
-    title: v1.12
 
 reference:
 - title: Dockerfile reference
