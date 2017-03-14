@@ -7,10 +7,12 @@
     <meta name="keywords" content="[support, community, users, irc]">
     <title>Support the community </title>
     <link rel="shortcut icon" href="../../../images/favicon.png" type="image/png">
-    <link rel="stylesheet" href="../../../dist/assets/css/app.css" />
+    <link rel="stylesheet" href="/dist/assets/css/bootstrap-custom.css"/>
+<link rel="stylesheet" href="/dist/assets/css/app.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.6/animate.min.css">
     <link rel="stylesheet" href="../../../css/custom.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/dist/assets/js/bootstrap-3.0.3.min.js"></script>
     <script src="../../../dist/assets/js/modernizr.js"></script>
 </head>
 <body>
@@ -2695,7 +2697,7 @@
     <section data-accordion>
       
         <article data-accordion>
-          <button data-control> Docs archive</button>
+          <button style="visibility: hidden" data-control> Docs archive</button>
           <div data-content>
             
               
@@ -3131,11 +3133,11 @@ $(document).ready(function() {
 </script>
 
 
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WLGFZV"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-WLGFZV');</script>
+<script src="/dist/assets/js/archive.js"></script>
+<script type="text/javascript">
+ 	  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+ 	  analytics.load("IWj9D0UpZHZdZUZX9jl98PcpBFWBnBMy");
+ 	  analytics.page();
+ 	  }}();
+ 	</script>
 
