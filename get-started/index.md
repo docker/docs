@@ -30,10 +30,43 @@ installed.
 
 [Install Docker](/engine/installation/index.md){: class="button darkblue-btn"}
 
-## Let's go!
+## A brief history of containers
 
-If you understand that container images package application code and their
-dependencies all together in a portable deliverable, and your environment has
-Docker installed, let's move on!
+A container image is a lightweight,
+stand-alone, executable package of a piece of software that includes everything
+needed to run it: code, runtime, system tools, system libraries, settings. 
 
-[On to "Getting Started, Part 2: Creating and Building Your App" >>](part2.md){: class="button darkblue-btn"}
+A container is a runtime instance of an image -- what the image becomes in
+memory when actually executed. 
+
+A container image is like the disk image of a virtual machine, but without an OS.
+That's because containers run apps natively on the host machine's kernel. They
+don't need to have the performance characteristics of virtual machines that only
+get virtual access to host resources -- containers can get native access.
+
+Consider this diagram comparing the two:
+
+![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png)
+
+Virtual machines run guest operating systems -- note the OS layer in each box. This
+is resource intensive, and the resulting disk image is an entangelment of OS 
+settings, and system-installed dependencies, and OS security patches, all bundled
+into large multi-gigabyte files.
+
+![Container stack example](https://www.docker.com/sites/default/files/Container%402x.png)
+
+Containers can share a single kernel, and the only information packaged in a 
+container image is the executable and its package dependencies, which never need
+to be installed on the host system. These processes run like native processes, and
+you can manage them individually by running commands like `docker ps` -- just like
+you would run `ps` on Linux to see any other active executable.
+
+## Conclusion
+
+The unit of scale being an individual, portable executable means that CI/CD can push
+updates to one part of a distributed application, system dependencies aren't a thing
+you worry about, resource density is increased, and orchestrating scaling behavior
+is a matter of spinning up new executables, not new VM hosts. We'll be learning about
+all of those things, but first let's learn to walk.
+
+[On to "Getting Started, Part 2: Creating and Building Your App" >>](part2.md){: class="button outline-btn"}
