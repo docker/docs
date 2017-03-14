@@ -26,7 +26,7 @@ image you'll use in the rest of this getting started.
 
     ![Browse Docker Hub](tutimg/image_found.png)
 
-3. Click on the **docker/whalesay** image in the results.
+3. Click on the **docker/whalesay** image in the results. You'll find it about halfway down.
 
     The browser displays the repository for the **whalesay** image.
 
