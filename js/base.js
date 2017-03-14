@@ -6,7 +6,7 @@ $(document).ready(function ()
     var dockerVersion = '1.5';
     /* This JSON file contains a current list of all docs versions of Docker */
     $.getJSON("https://docs.docker.com/js/archives.json", function(result){
-      var outerDivStart = '<div class="row" style="padding-top: 10px; padding-bottom: 10px; min-height: 34px; border: 1px solid #A3733F; background-color: #FFE1C0; color: #A3733F"><div class="textcenter"><span id="archive-list">This is <b><a href="https://docs.docker.com/docsarchive/" style="color: #A3733F; text-decoration: underline !important">archived documentation</a></b> for Docker&nbsp;' + dockerVersion + '. Go to the <a style="color: #A3733F; text-decoration: underline !important" href="https://docs.docker.com/">latest docs</a> or a different version:&nbsp;&nbsp;</span>' +
+      var outerDivStart = '<div class="row" style="padding-top: 10px; padding-bottom: 10px; min-height: 34px; background-color: #FFD2A1; color: #254356"><div class="textcenter"><span id="archive-list">This is <b><a href="https://docs.docker.com/docsarchive/" style="color: #254356; text-decoration: underline !important">archived documentation</a></b> for Docker&nbsp;' + dockerVersion + '. Go to the <a style="color: #254356; text-decoration: underline !important" href="https://docs.docker.com/">latest docs</a> or a different version:&nbsp;&nbsp;</span>' +
                                  '<span style="z-index: 1001" class="dropdown">';
       var listStart = '<ul class="dropdown-menu" role="menu" aria-labelledby="archive-menu">';
       var listEnd = '</ul>';
@@ -18,7 +18,7 @@ $(document).ready(function ()
         // If this archive has current = true, and we don't already have a button
         if ( field.current && buttonCode == null ) {
           // Get the button code
-          buttonCode = '<button id="archive-menu" data-toggle="dropdown" class="btn dropdown-toggle" style="border: 1px solid #A3733F; background-color: #fff; color: #A3733F;">' + prettyName + '&nbsp;(current) &nbsp;<span class="caret"></span></button>';
+          buttonCode = '<button id="archive-menu" data-toggle="dropdown" class="btn dropdown-toggle" style="border: 1px solid #82949E; background-color: #FBFBFC; color: #254356;">' + prettyName + '&nbsp;(current) &nbsp;<span class="caret"></span></button>';
           // The link is different for the current release
           listItems.push('<li role="presentation"><a role="menuitem" tabindex="-1" href="https://docs.docker.com/">' + prettyName + '</a></li>');
         } else {
