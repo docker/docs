@@ -218,17 +218,19 @@ and all the dependencies from `requirements.txt`, and runs your code. It all
 travels together in a neat little package, and the host machine doesn't have to
 install anything but Docker to run it.
 
-You're ready for the next step! Or, look below for a cheat sheet.
+That's all for this page. You can continue to the next phase where we link up
+Redis to our web page so that counter works. Or, if you want a quick recap
+first, scroll down for the [cheat sheet](#cheat-sheet).
 
 [On to "Getting Started, Part 3: Stateful, Multi-container Applications" >>](part3.md){: class="button outline-btn"}
 
 ## Cheat sheet
 
-Here's a terminal recording of everything that we did on this page.
+Here's [a terminal recording of everything that we did on this page](https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g).
 
-<script type="text/javascript" src="https://asciinema.org/a/107054.js" id="asciicast-107054" async></script>
+<script type="text/javascript" src="https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g.js" id="asciicast-blkah0l4ds33tbe06y4vkme6g" async></script>
 
-And here is a list of basic commands from this page.
+And here is a list of basic commands from this page that deal with our same
 
 ```shell
 docker build -t friendlyname . #Create image using this directory's Dockerfile
