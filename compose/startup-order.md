@@ -53,7 +53,7 @@ script:
     check. For example, you might want to wait until Postgres is definitely
     ready to accept commands:
 
-        #!/bin/bash
+        #!/bin/sh
         # wait-for-postgres.sh
 
         set -e
