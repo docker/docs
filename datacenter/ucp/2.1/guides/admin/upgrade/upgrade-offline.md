@@ -1,22 +1,17 @@
 ---
-description: Learn how to install Docker Universal Control Plane. on a machine with
+description: Learn how to upgrade Docker Universal Control Plane. on a machine with
   no internet access.
-keywords: docker, ucp, install, offline
-title: Install UCP offline
+keywords: docker, ucp, upgrade, offline
+title: Upgrade UCP offline
 ---
 
-The procedure to install Docker Universal Control Plane on a host is the same,
+The procedure to upgrade Docker Universal Control Plane on a host is the same,
 whether that host has access to the internet or not.
 
-The only difference when installing on an offline host,
+The only difference when upgrading on an offline host,
 is that instead of pulling the UCP images from Docker Hub, you use a
 computer that is connected to the internet to download a single package with
-all the images. Then you copy that package to the host where you’ll install UCP. The offline installation process only works if one of the following is true:
-
-* All of the cluster nodes (managers and workers alike) have internet access to Docker Hub
-* None of the cluster (managers and workers alike) have internet access to Docker Hub
-
-If the managers have access to Docker Hub while the workers do not, installation will fail.
+all the images. Then you copy that package to the host where you’ll upgrade UCP.
 
 ## Versions available
 
@@ -32,7 +27,7 @@ $ wget <package-url> -O docker-datacenter.tar.gz
 ```
 
 Now that you have the package in your local machine, you can transfer it to
-the machines where you want to install UCP.
+the machines where you want to upgrade UCP.
 
 For each machine that you want to manage with UCP:
 
@@ -53,13 +48,13 @@ For each machine that you want to manage with UCP:
     $ docker load < docker-datacenter.tar.gz
     ```
 
-## Install UCP
+## Upgrade UCP
 
-Now that the offline hosts have all the images needed to install UCP,
-you can [install Docker UCP on that host](index.md). 
+Now that the offline hosts have all the images needed to upgrade UCP,
+you can [upgrade Docker UCP](index.md).
 
 
 ## Where to go next
 
-* [Install UCP](index.md).
-* [System requirements](system-requirements.md)
+* [Upgrade UCP](index.md)
+* [Release Notes](release-notes.md)

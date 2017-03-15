@@ -1172,14 +1172,16 @@ manuals:
           title: Install offline
         - path: /datacenter/ucp/2.1/guides/admin/install/uninstall/
           title: Uninstall
-        - sectiontitle: Upgrade
-          section:
-          - path: /datacenter/ucp/2.1/guides/admin/upgrade/release-notes/
-            title: Release notes
-          - path: /datacenter/ucp/2.1/guides/admin/upgrade/incompatibilities-and-breaking-changes/
-            title: Incompatibilities and breaking changes
-          - path: /datacenter/ucp/2.1/guides/admin/upgrade/
-            title: Upgrade
+      - sectiontitle: Upgrade
+        section:
+        - path: /datacenter/ucp/2.1/guides/admin/upgrade/release-notes/
+          title: Release notes
+        - path: /datacenter/ucp/2.1/guides/admin/upgrade/incompatibilities-and-breaking-changes/
+          title: Incompatibilities and breaking changes
+        - path: /datacenter/ucp/2.1/guides/admin/upgrade/
+          title: Upgrade
+        - path: /datacenter/ucp/2.1/guides/admin/upgrade/upgrade-offline/
+          title: Upgrade offline
       - sectiontitle: Configure
         section:
         - path: /datacenter/ucp/2.1/guides/admin/configure/license-your-installation/
