@@ -1206,9 +1206,15 @@ conflicting with those used by other software.
 
 ## Network configuration reference
 
-The top-level `networks` key lets you specify networks to be created. For a full
-explanation of Compose's use of Docker networking features, see the
-[Networking guide](../networking.md).
+The top-level `networks` key lets you specify networks to be created.
+
+* For a full explanation of Compose's use of Docker networking features and all
+network driver options, see the [Networking guide](../networking.md).
+
+* For [Docker Labs](https://github.com/docker/labs/blob/master/README.md)
+tutorials on networking, start with [Designing Scalable, Portable Docker
+Container
+Networks](https://github.com/docker/labs/blob/master/networking/README.md)
 
 ### driver
 
@@ -1221,6 +1227,26 @@ Swarm.
 The Docker Engine will return an error if the driver is not available.
 
     driver: overlay
+
+#### bridge
+
+Docker defaults to using a `bridge` network on a single host. For examples of
+how to work with bridge networks, see the Docker Labs tutorial on [Bridge
+networking](https://github.com/docker/labs/blob/master/networking/A2-bridge-networking.md).
+
+#### overlay
+
+The `overlay` driver creates a named network across multiple nodes in a
+[swarm](/engine/swarm/).
+
+* For a working example of how to build and use an
+`overlay` network with a service in swarm mode, see the Docker Labs tutorial on
+[Overlay networking and service
+discovery](https://github.com/docker/labs/blob/master/networking/A3-overlay-networking.md).
+
+* For an in-depth look at how it works under the hood, see the
+networking concepts lab on the [Overlay Driver Network
+Architecture](https://github.com/docker/labs/blob/master/networking/concepts/06-overlay-networks.md).
 
 ### driver_opts
 
