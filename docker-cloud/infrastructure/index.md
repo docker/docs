@@ -18,7 +18,7 @@ If you are using [Bring Your Own Host](byoh.md), Docker Cloud provides a script 
 - installs the Docker Cloud Agent on the host
 - downloads and installs the latest Docker CS Engine version and the AUFS storage driver
 - sets up TLS certificates and the Docker security configuration
-- registers the host with Docker Cloud under your user account.
+- registers the host with Docker Cloud under your user account
 
 Once this connection is established, the Docker Cloud Agent manages the node and performs updates when the user requests them, and can also create and maintain a reverse tunnel to Docker Cloud if firewall restrictions prevent a direct connection.
 
@@ -44,8 +44,8 @@ Docker Cloud uses system containers to do the following:
 - Set up a secure overlay network between all nodes using Weave
 - Create a stream of Docker events from nodes to Docker Cloud
 - Synchronize node clocks
-- Rotate container logs when they exceed 10 MB.
-- Remove `Terminated` images (images not used by a container for 30 minutes).
+- Rotate container logs when they exceed 10 MB
+- Remove `Terminated` images (images not used by a container for 30 minutes)
 
   > **Note**: If this is not sufficient for your needs, you can add a logging container to your services. In future versions of Docker Cloud, you will be able to add a logging driver.
 
@@ -63,7 +63,6 @@ The pages in this section explain how to link Docker Cloud to your infrastructur
 * [SSH into a Docker Cloud-managed node](ssh-into-a-node.md)
 * Read more about [Deployment strategies](deployment-strategies.md)
 * Learn how to [Upgrade Docker Engine on a node](docker-upgrade.md)
-
 * [Use the Docker Cloud Agent to Bring your Own Host](byoh.md)
 * [Link to Amazon Web Services hosts](link-aws.md)
     * [Using Docker Cloud on AWS FAQ](cloud-on-aws-faq.md)
