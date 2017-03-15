@@ -18,6 +18,13 @@ COPY . md_source
 ENV ENGINE_BRANCH="17.03.x"
 ENV DISTRIBUTION_BRANCH="release/2.5"
 
+## Get files from upstream sources and put them in the right places
+## Run bundle update against the gemfile
+## Build the HTML output
+## Remove some cruft
+## Clean up some URLs
+## Remove temporary content
+
 RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend md_source/engine/extend \
 	&& wget -O md_source/engine/api/v1.18.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.18.md \
 	&& wget -O md_source/engine/api/v1.19.md https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/docs/api/v1.19.md \
@@ -39,6 +46,7 @@ RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend 
 	&& rm -rf md_source/tests \
   && wget -O md_source/engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/v1.13.0/api/swagger.yaml \
   && wget -O md_source/engine/api/v1.26/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
+	&& bundle install --gemfile=./md_source/Gemfile \
 	&& jekyll build -s md_source -d target \
 	&& rm -rf target/apidocs/layouts \
 	&& find target -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
