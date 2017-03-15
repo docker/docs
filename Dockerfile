@@ -31,12 +31,17 @@ COPY nginx.conf /etc/nginx/nginx.conf
 ENV VERSIONS="v1.4 v1.5 v1.6 v1.7 v1.8 v1.9 v1.10 v1.11 v1.12 v1.13"
 
 ## Use shallow clone and shallow check-outs to only get the tip of each branch
+## Updates the bundle based on that branch's Gemfile
+## Builds the HTML output using Jekyll
+## Cleans up some links
+## Cleans up temporary directory
 
 RUN git clone --depth 1 https://www.github.com/docker/docker.github.io archive_source; \
   for VER in $VERSIONS; do \
     git --git-dir=./archive_source/.git --work-tree=./archive_source fetch origin ${VER}:${VER} --depth 1 \
     && git --git-dir=./archive_source/.git --work-tree=./archive_source checkout ${VER} \
     && mkdir -p target/${VER} \
+		&& bundle install --gemfile=./archive_source/Gemfile \
     && jekyll build -s archive_source -d target/${VER} \
     && find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/'"$VER"'/#g' \
     && find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/'"$VER"'/#g' \
