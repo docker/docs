@@ -89,16 +89,18 @@ of a Dockerfile to specify the images. When we deploy, each image will run as a
 service in a container (or in multiple containers, for those that have replicas
 defined to scale the app).
 
-To follow along, you need only have Docker running and a [copy of
-the `docker-stack.yml` file provided
-**here**](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml).
+To follow along, you need only have Docker running and a copy of the
+`docker-stack.yml`
+file that we provide.
 
 This file defines all the services we want to use along with details about how
 and where those services will run; their base images, configuration
 details such as ports, networks, volumes, application dependencies, and the
 swarm configuration.
 
-Here is an example of one of the services fully defined:
+This **example snip-it** taken from our `docker-stack.yml` shows one of the
+services fully defined. (The full file is
+[**here**](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml).)
 
 ```
 vote:

@@ -16,6 +16,21 @@ For a Compose/Docker Engine compatibility matrix, and detailed guidelines on
 versions and upgrading, see
 [Compose file versions and upgrading](compose-versioning.md).
 
+## Compose file structure and examples
+
+The topics on this reference page are organized alphabetically by top-level key
+to reflect the structure of the Compose file itself. Top-level keys that define
+a section in the configuration file such as `build`, `deploy`, `depends_on`,
+`networks`, and so on, are listed with the options that support them as
+sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the Compose file.
+
+Example snip-its of how to define particular options are included on this
+reference page, but we suggest also taking a look at some samples that include
+full Compose files. A good place to start are the [sample
+applications](samples.md#sample-applications) in [Docker
+Labs](https://github.com/docker/labs/) and the [voting app sample
+walk-through](/engine/getstarted-voting-app/index.md).
+
 ## Service configuration reference
 
 The Compose file is a [YAML](http://yaml.org/) file defining
