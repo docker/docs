@@ -48,8 +48,8 @@ Some Lorem ipsum text with formatting and styling.
 
 ### Heading 3
 
-> **Note**: This is the lowest heading included in the right-nav.
-> To include more heading levels, set `toc_max: 4` in the page-s front-matter.
+> **Note**: This is the lowest heading included in the right-nav, by default.
+> To include more heading levels, set `toc_max: 4` in the page's front-matter.
 > You can go all the way to 6.
 
 A selection of lists, ordered and unordered, with indented sub elements.
