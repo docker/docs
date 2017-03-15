@@ -12,7 +12,7 @@ to upgrade your installation to the latest release.
 
 ## DTR 2.2.3
 
-(27 Feb 2017)
+(10 Mar 2017)
 
 **New features**
 
@@ -23,13 +23,13 @@ to upgrade your installation to the latest release.
 * Several improvements to the installer to make it more resilient
 * Improved the installer to better detect port conflicts when installing or joining DTR replicas
 * Security scans can now be cancelled
-* Fixed memory leaks in the DTR API server and Registry
 * DTR job logs are now stored in the DTR datastore but also sent to Docker Engine
 
 **Bugs fixed**
 
 * Fixed an issue introduced in 2.2.2 that caused the scanning button to not be
 displayed for images that had never been scanned
+* Fixed memory leaks in the DTR API server and Registry
 
 ## DTR 2.2.2
 
