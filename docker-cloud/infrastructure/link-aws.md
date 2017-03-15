@@ -15,7 +15,7 @@ Previously, we recommended that you create a service user that Docker Cloud woul
 
 Create an access control policy that will grant specific privileges to Docker Cloud so it can provision EC2 resources on your behalf. 
 
-1.  Go to the AWS IAM panel at <a href="https://console.aws.amazon.com/iam/home#policies" target ="_blank">https://console.aws.amazon.com/iam/home#policies</a>
+1.  Go to the AWS IAM panel at <a href="https://console.aws.amazon.com/iam/home#policies" target ="_blank">https://console.aws.amazon.com/iam/home#policies</a>.
 2.  Click **Create Policy**.
 3.  On the next screen click **Create Your Own Policy**.
 4.  Name the policy `dockercloud-policy` and paste the following text in the space provided for **Policy Document**.
@@ -42,7 +42,8 @@ Create an access control policy that will grant specific privileges to Docker Cl
 
     `iam:ListInstanceProfiles` allows the user to retrieve instance profiles to apply to your nodes.
 
-    > **Note**: You cannot use an instance profile that has more permissions than the IAM user you are using with Docker Cloud. If you do that, you will get an "unauthorized operation" error. You can fix this issue by adding the `"Action":"iam:PassRole"` permission to the policy for the service user. You can read more about this <a href="http://blogs.aws.amazon.com/security/post/Tx3M0IFB5XBOCQX/Granting-Permission-to-Launch-EC2-Instances-with-IAM-Roles-PassRole-Permission" target="_blank">here</a>
+    > **Note**: You cannot use an instance profile that has more permissions than the IAM user you are using with Docker Cloud. If you do that, you will get an "unauthorized operation" error. You can fix this issue by adding the `"Action":"iam:PassRole"` permission to the policy for the service user. You can read more about this <a href="http://blogs.aws.amazon.com/security/post/Tx3M0IFB5XBOCQX/Granting-Permission-to-Launch-EC2-Instances-with-IAM-Roles-PassRole-Permission" target="_blank">here</a>.
+    
 6.  Click **Validate Policy**.
 7.  If the validation is successful click **Create Policy**.
 
@@ -78,7 +79,7 @@ You can use the following `dockercloud-policy` to limit Docker Cloud to a specif
 ```
 
 ## Create a dockercloud-role role
-1. Go to the AWS IAM Role creation panel at  <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>
+1. Go to the AWS IAM Role creation panel at <a href="https://console.aws.amazon.com/iam/home#roles">https://console.aws.amazon.com/iam/home#roles</a>.
 2. Give the new role a name, such as `dockercloud-role`.
 
     > **Note**: You must use one role per Docker Cloud account namespace, so if you will be using nodes from a single AWS account for multiple Docker Cloud accounts, you should add an identifying the namespace to the end of the name. For example, you might have `dockercloud-role-moby` and `dockercloud-role-teamawesome`.
@@ -105,7 +106,7 @@ You can use the following `dockercloud-policy` to limit Docker Cloud to a specif
 
 ## Add AWS account credentials
 
-Once you've created the a `dockercloud-policy`, attached it to a
+Once you've created a `dockercloud-policy`, attached it to a
 `dockercloud-role`, and have the role's Role ARN, go back to Docker Cloud to connect the account.
 
 1. In Docker Cloud, click **Cloud settings** at the lower left.
@@ -122,4 +123,4 @@ Once you've created the a `dockercloud-policy`, attached it to a
 ## What's next?
 
 You're ready to start using AWS as the infrastructure provider
-for Docker Cloud! If you came here from the tutorial, click here to [continue the tutorial and deploy your first node](../getting-started/your_first_node.md).
+for Docker Cloud! If you came here from the tutorial, [continue the tutorial and deploy your first node](../getting-started/your_first_node.md).
