@@ -20,7 +20,7 @@ image you'll use in the rest of this getting started.
     ![Browse Docker Hub](tutimg/browse_and_search.png)
 
 	The Docker Hub contains images from individuals like you and official images
-	from organizations like RedHat, IBM, Google, and a whole lot more.
+	from organizations like RedHat, IBM, Google, Microsoft, and a whole lot more.
 
 2. Enter the word `whalesay` in the search bar.
 
