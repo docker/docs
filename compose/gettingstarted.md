@@ -211,4 +211,4 @@ At this point, you have seen the basics of how Compose works.
 - Next, try the quick start guide for [Django](django.md),
   [Rails](rails.md), or [WordPress](wordpress.md).
 - [Explore the full list of Compose commands](./reference/index.md)
-- [Compose configuration file reference](compose-file.md)
+- [Compose configuration file reference](compose-file/index.md)
