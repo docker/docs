@@ -48,7 +48,7 @@ to update its RHEL kernel.
     $ sudo rpm --import "https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"
     ```
 
-    > **Note:** If the key server above does not respond, you can try one of these:
+    > **Note**: If the key server above does not respond, you can try one of these:
     >
     >   - pgp.mit.edu
     >   - keyserver.ubuntu.com
@@ -156,7 +156,7 @@ to update its RHEL kernel.
     $ curl -fsSL 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add -
     ```
 
-    > **Note:** If the key server above does not respond, you can try one of these:
+    > **Note**: If the key server above does not respond, you can try one of these:
     >
     >   - pgp.mit.edu
     >   - keyserver.ubuntu.com
@@ -237,7 +237,7 @@ to update its RHEL kernel.
     This adds the repository of the latest version of CS Docker Engine. You can
     customize the URL to install an older version.
 
-    > **Note:** If the key server above does not respond, you can try one of these:
+    > **Note**: If the key server above does not respond, you can try one of these:
     >
     >   - pgp.mit.edu
     >   - keyserver.ubuntu.com

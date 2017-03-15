@@ -21,7 +21,7 @@ The Version 1 Compose file is a [YAML](http://yaml.org/) file that defines [serv
 
 The default path for a Compose file is `./docker-compose.yml`.
 
->**Tip:** You can use either a `.yml` or `.yaml` extension for this file. They both work.
+>**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
 
 A service definition contains configuration which will be applied to each
 container started for that service, much like passing command-line parameters to
@@ -79,7 +79,7 @@ See `man 7 capabilities` for a full list.
       - NET_ADMIN
       - SYS_ADMIN
 
-> **Note:** These options are ignored when
+> **Note**: These options are ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -153,7 +153,7 @@ The entrypoint can also be a list, in a manner similar to
         - memory_limit=-1
         - vendor/bin/phpunit
 
-> **Note:** Setting `entrypoint` will both override any default entrypoint set
+> **Note**: Setting `entrypoint` will both override any default entrypoint set
 > on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
 > clear out any default command on the image - meaning that if there's a `CMD`
 > instruction in the Dockerfile, it will be ignored.
@@ -180,7 +180,7 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
     # Set Rails/Rack environment
     RACK_ENV=development
 
-> **Note:** If your service specifies a [build](#build) option, variables
+> **Note**: If your service specifies a [build](#build) option, variables
 > defined in environment files will _not_ be automatically visible during the
 > build.
 
@@ -207,7 +207,7 @@ machine Compose is running on, which can be helpful for secret or host-specific 
       - SHOW=true
       - SESSION_SECRET
 
-> **Note:** If your service specifies a [build](#build) option, variables
+> **Note**: If your service specifies a [build](#build) option, variables
 > defined in `environment` will _not_ be automatically visible during the
 > build.
 
@@ -325,7 +325,7 @@ the alias, or the service name if no alias was specified.
 Links also express dependency between services in the same way as
 [depends_on](#dependson), so they determine the order of service startup.
 
-> **Note:** If you define both links and [networks](#networks), services with
+> **Note**: If you define both links and [networks](#networks), services with
 > links between them must share at least one network in common in order to
 > communicate.
 
@@ -376,7 +376,7 @@ containers in the bare-metal machine's namespace and vise-versa.
 Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
 port (a random host port will be chosen).
 
-> **Note:** When mapping ports in the `HOST:CONTAINER` format, you may experience
+> **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
 > erroneous results when using a container port lower than 60, because YAML will
 > parse numbers in the format `xx:yy` as sexagesimal (base 60). For this reason,
 > we recommend always explicitly specifying your port mappings as strings.

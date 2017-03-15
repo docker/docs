@@ -56,7 +56,7 @@ to link them together and expose the web app's port.
         depends_on:
           - db
 
->**Tip:** You can use either a `.yml` or `.yaml` extension for this file.
+>**Tip**: You can use either a `.yml` or `.yaml` extension for this file.
 
 
 ### Build the project

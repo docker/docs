@@ -32,7 +32,7 @@ command,  `docker-machine`, to create and attach to a
 small Linux VM on your machine. This VM hosts Docker Engine
 for you on your Windows system.
 
->**Tip:** One of the advantages of the newer
+>**Tip**: One of the advantages of the newer
 [Docker for
 Windows](/docker-for-windows/index.md) solution is that
 it uses native virtualization and does not require
@@ -225,7 +225,7 @@ To uninstall Toolbox on Windows, do the following:
 
 3. Uninstall Docker Toolbox using Window's standard process for uninstalling programs through the control panel.
 
-    >**Note:** This process does not remove the `docker-install.exe` file. You must delete that file yourself.
+    >**Note**: This process does not remove the `docker-install.exe` file. You must delete that file yourself.
 
 5. Optionally, remove the
 `C:\Users\<your-user>\.docker` directory.

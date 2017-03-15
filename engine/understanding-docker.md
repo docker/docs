@@ -51,7 +51,7 @@ underlying API and CLI.
 The daemon creates and manages Docker _objects_, such as images, containers,
 networks, and data volumes.
 
-> **Note:** Docker is licensed under the open source Apache 2.0 license.
+> **Note**: Docker is licensed under the open source Apache 2.0 license.
 
 ## What can I use Docker for?
 
@@ -174,7 +174,7 @@ images of your own as the basis for a new image, for example if you have a base
 Apache image you could use this as the base of all your web application images. The
 base image is defined using the `FROM` keyword in the dockerfile.
 
-> **Note:** [Docker Hub](https://hub.docker.com) is a public registry and stores
+> **Note**: [Docker Hub](https://hub.docker.com) is a public registry and stores
 images.
 
 The docker image is built from the base image using a simple, descriptive

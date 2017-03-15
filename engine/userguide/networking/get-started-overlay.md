@@ -67,7 +67,7 @@ illustrate how they are integrated. You'll use Machine to create both the
 key-value store server and the host cluster. This example creates a swarm
 cluster.
 
->**Note:** Docker Engine running in swarm mode is not compatible with networking
+>**Note**: Docker Engine running in swarm mode is not compatible with networking
 with an external key-value store.
 
 ### Prerequisites

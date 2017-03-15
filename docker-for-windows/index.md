@@ -129,7 +129,7 @@ The next few steps take you through some examples. These are just suggestions fo
     Live Restore Enabled: false
     ```
 
-    >**Note:** The outputs above are examples. Your output for commands like
+    >**Note**: The outputs above are examples. Your output for commands like
     > `docker version` and `docker info` will vary depending on your product
     > versions (e.g., as you install newer versions).
 
@@ -298,7 +298,7 @@ When Docker is running, the Docker whale is displayed. By default, the Docker
 whale icon is placed in the Notifications area. If it is hidden, click the up
 arrow on the taskbar to show it.
 
->**Tip:** You can pin the whale outside of the notification box so that it is
+>**Tip**: You can pin the whale outside of the notification box so that it is
 always visible on the taskbar. To do this, drag-and-drop the whale icon. Or,
 right-click an empty porition of the taskbar, select Settings, and choose
 display options through taskbar settings for notifications.
@@ -354,7 +354,7 @@ here. If you run `docker` commands and tasks under a different username than the
 one used here to set up sharing, your containers will not have permissions to
 access the mounted volumes.
 
-> **Tip:** Shared drives are only required for volume mounting
+> **Tip**: Shared drives are only required for volume mounting
 > [Linux containers](#switch-between-windows-and-linux-containers), and not for
 > Windows containers. For Linux containers, you need to share the drive where
 > your project is located (i.e., where the Dockerfile and volume are located).
@@ -366,7 +366,7 @@ See also
 [Verify domain user has permissions for shared drives](troubleshoot.md#verify-domain-user-has-permissions-for-shared-drives-volumes)
 in Troubleshooting.
 
-> **Note:** You can share local drives with your _containers_ but not with
+> **Note**: You can share local drives with your _containers_ but not with
 > Docker Machine nodes. See
 > [Can I share local drives and filesystem with my Docker Machine VMs?](faqs.md#can-i-share-local-drives-and-filesystem-with-my-docker-machine-vms)
 > in the FAQs.
@@ -407,7 +407,7 @@ You can configure Docker for Windows networking to work on a virtual private net
 
 ![Network settings](/docker-for-windows/images/settings-network.png)
 
-> **Note:** Some users reported problems connecting to Docker Hub on Docker for
+> **Note**: Some users reported problems connecting to Docker Hub on Docker for
 > Windows stable version. This would manifest as an error when trying to run
 > `docker` commands that pull images from Docker Hub that are not already
 > downloaded, such as a first time run of `docker run hello-world`. If you

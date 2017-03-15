@@ -17,6 +17,11 @@ culpa qui officia deserunt mollit anim id est laborum.
 
 ## Heading 2
 
+> **Note**: This is the highest heading included in the right-nav.
+> To include more heading levels, set `toc_min: 1` in the page-s front-matter.
+> You can go all the way to 6, but if `toc_min` is geater than `toc_max` then
+> no headings will show.
+
 Text with various styles, basic markdown formatting. You should **not** see a single line comment below this line.
 
 <!-- This is a comment. You should not see it rendered in the page. -->
@@ -42,6 +47,10 @@ Some Lorem ipsum text with formatting and styling.
 
 
 ### Heading 3
+
+> **Note**: This is the lowest heading included in the right-nav, by default.
+> To include more heading levels, set `toc_max: 4` in the page's front-matter.
+> You can go all the way to 6.
 
 A selection of lists, ordered and unordered, with indented sub elements.
 
@@ -134,8 +143,6 @@ tempor incididunt ut labore et dolore magna aliqua.
 
 #### Heading 4
 
-> **Note**: This is the lowest heading included in the right-nav.
-
 Some tables in markdown and html.
 
 | Permission level | Access |
@@ -145,23 +152,28 @@ Some tables in markdown and html.
 | Read/Write | Pull, push |
 | Admin | All of the above, plus update description, create and delete |
 
+If you need block-level HTML within your table cells, such as multiple
+paragraphs, lists, sub-tables, etc, then you need to make a HTML table.
+This is also the case if you need to use rowspans or colspans. Try to avoid
+setting styles directly on your tables! If you set the width on a `<td>`, you
+only need to do it on the first one. If you have a `<th>`, set it there.
 
-<table style="width:100%">
+<table>
   <tr>
-    <th style="font-size: x-large; font-family: arial">Left channel</th>
-    <th style="font-size: x-large; font-family: arial">Right channel</th>
+    <th "width="50%">Left channel</th>
+    <th>Right channel</th>
   </tr>
-  <tr valign="top">
-    <td width="50%">This is some test text. <br><br>This is more text on a new line. <br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  <tr>
+    <td>This is some test text. <br><br>This is more text on a new line. <br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </td>
-    <td width="50%">This is some more text about the right hand side. There is a <a href="https://github.com/docker/docker/tree/master/experimental" target="_blank">link here to the Docker Experimental Features README</a> on GitHub.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+    <td>This is some more text about the right hand side. There is a <a href="https://github.com/docker/docker/tree/master/experimental" target="_blank" class="_">link here to the Docker Experimental Features README</a> on GitHub.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
   </tr>
-  <tr valign="top">
-  <td width="50%">
+  <tr>
+  <td>
   <a class="button outline-btn" href="/">Go to the docs!</a><br><br>
   <a href="/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a>
   </td>
-  <td width="50%">
+  <td>
   <a class="button outline-btn" href="/">Go to the docs!</a><br><br>
   <a href="/"><font color="#BDBDBD" size="-1">It is dark here. You are likely to be eaten by a grue.</font></a>
   </td>
@@ -170,13 +182,16 @@ Some tables in markdown and html.
 
 ##### Heading 5
 
-This heading is not included in the right-nav.
+This heading is not included in the right-nav. To include it set `toc_max: 5` in
+the page's front-matter.
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 ###### Heading 6?!
 
-This heading is not included in the right-nav.
+This heading is not included in the right-nav. To include it set `toc_max: 6` in
+the page's front-matter.
+
 Probably not the most useful thing, but nice to know it exists.
 
 ## Some code block samples
@@ -354,3 +369,30 @@ authorizedkeys:
   volumes:
     /root:/user:rw
 ```
+
+## Admonitions
+
+> **Note**: This is a note.
+
+> **Info**: This is an info.
+
+> **Tip**: This is a tip.
+
+> **Warning**: This is a warning.
+
+> **Caution**: This is a caution.
+
+> **Note**: One line of note text
+> another line of note text
+
+> **Note**: This is a note with a list and a table in it.
+>
+> - List item 1
+> - List item 2
+>
+> |Table column 1 | Table column 2 |
+> |---------------|----------------|
+> | Row 1 column 1 | Row 2 column 2 |
+> | Row 2 column 1 | Row 2 column 2 |
+>
+> And another sentence to top it all off.

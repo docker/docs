@@ -56,6 +56,6 @@ Here is an example event message:
 A client can parse this message string to get both the log message, as well as its
 context information. Note that the time stamp is also available within the ETW event.
 
-> **Note:**  This ETW provider emits only a message string, and not a specially
+> **Note**:  This ETW provider emits only a message string, and not a specially
 > structured ETW event. Therefore, it is not required to register a manifest file
 > with the system to read and interpret its ETW events.

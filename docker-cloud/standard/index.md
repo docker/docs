@@ -14,5 +14,5 @@ nodes, services, and applications in Docker Cloud.
 
 * [Cloud stack file YAML reference](/docker-cloud/apps/stack-yaml-reference.md)
 
-> **Note:** These workflows and references do not apply
+> **Note**: These workflows and references do not apply
 to [Swarm Mode](/docker-cloud/cloud-swarm/index.md) Beta.

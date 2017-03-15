@@ -10,7 +10,7 @@ In this example, we are going to learn how to build a Docker image with
 MongoDB pre-installed.  We'll also see how to `push` that image to the
 [Docker Hub registry](https://hub.docker.com) and share it with others!
 
-> **Note:** This guide will show the mechanics of building a MongoDB container, but
+> **Note**: This guide will show the mechanics of building a MongoDB container, but
 you will probably want to use the official image on [Docker Hub]( https://hub.docker.com/_/mongo/)
 
 Using Docker and containers for deploying [MongoDB](https://www.mongodb.org/)
@@ -20,7 +20,7 @@ instances will bring several benefits, such as:
  - Ready to run and start working within milliseconds;
  - Based on globally accessible and shareable images.
 
-> **Note:** If you do **_not_** like `sudo`, you might want to check out
+> **Note**: If you do **_not_** like `sudo`, you might want to check out
 [*Giving non-root access*](../installation/binaries.md#giving-non-root-access).
 
 ## Creating a Dockerfile for MongoDB
@@ -40,7 +40,7 @@ Although optional, it is handy to have comments at the beginning of a
     # http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 ```
 
-> **Tip:** `Dockerfile`s are flexible. However, they need to follow a certain
+> **Tip**: `Dockerfile`s are flexible. However, they need to follow a certain
 format. The first item to be defined is the name of an image, which becomes
 the *parent* of your *Dockerized MongoDB* image.
 
@@ -52,7 +52,7 @@ We will build our image using the latest version of Ubuntu from the
 FROM       ubuntu:latest
 ```
 
-> **Note:** Although Ubuntu systems have MongoDB packages, they are likely to
+> **Note**: Although Ubuntu systems have MongoDB packages, they are likely to
 > be outdated. Therefore in this example, we will use the official MongoDB
 > packages.
 
@@ -73,7 +73,7 @@ After this initial preparation we can update our packages and install MongoDB.
 RUN apt-get update && apt-get install -y mongodb-org
 ```
 
-> **Tip:** You can install a specific version of MongoDB by using a list of required packages with versions, e.g.:
+> **Tip**: You can install a specific version of MongoDB by using a list of required packages with versions, e.g.:
 ```dockerfile
 RUN apt-get update && apt-get install -y mongodb-org=3.0.1 mongodb-org-server=3.0.1 mongodb-org-shell=3.0.1 mongodb-org-mongos=3.0.1 mongodb-org-tools=3.0.1
 ```
@@ -100,7 +100,7 @@ ENTRYPOINT ["/usr/bin/mongod"]
 
 Now save the file and let's build our image.
 
-> **Note:**  The full version of this `Dockerfile` can be found [here](https://github.com/docker/docker.github.io/blob/master/engine/examples/mongodb/Dockerfile).
+> **Note**:  The full version of this `Dockerfile` can be found [here](https://github.com/docker/docker.github.io/blob/master/engine/examples/mongodb/Dockerfile).
 
 ## Building the MongoDB Docker image
 
@@ -168,7 +168,7 @@ $ mongo --port 27017
 $ mongo --port 27017 --host 192.168.59.103
 ```
 
-> **Tip:** If you want to run two containers on the same engine, then you will need to map
+> **Tip**: If you want to run two containers on the same engine, then you will need to map
 the exposed port to two different ports on the host
 
 ```bash
