@@ -31,12 +31,11 @@ In the case of transferring files from machine to machine, they go through the
 local host's filesystem first (using `scp`'s `-3` flag).
 
 When transferring large files or updating directories with lots of files,
-the `-d` flag (for delta) is useful... It uses `rsync`.
+you can use the `-d` flag, which uses `rsync` to transfer deltas instead of
+transferring all of the files.
 
-When synching directories and not just files, best way to avoid rsync surprises
-is to use trailing slashes on source and destination.
-
-Example:
+When transferring directories and not just files, avoid rsync surprises
+by using trailing slashes on both the source and destination. For example:
 
 ```none
 $ mkdir -p bar
