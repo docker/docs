@@ -1170,16 +1170,10 @@ manuals:
           title: Install
         - path: /datacenter/ucp/2.1/guides/admin/install/install-offline/
           title: Install offline
+        - path: /datacenter/ucp/2.1/guides/admin/upgrade/
+          title: Upgrade
         - path: /datacenter/ucp/2.1/guides/admin/install/uninstall/
           title: Uninstall
-        - sectiontitle: Upgrade
-          section:
-          - path: /datacenter/ucp/2.1/guides/admin/upgrade/release-notes/
-            title: Release notes
-          - path: /datacenter/ucp/2.1/guides/admin/upgrade/incompatibilities-and-breaking-changes/
-            title: Incompatibilities and breaking changes
-          - path: /datacenter/ucp/2.1/guides/admin/upgrade/
-            title: Upgrade
       - sectiontitle: Configure
         section:
         - path: /datacenter/ucp/2.1/guides/admin/configure/license-your-installation/
@@ -1282,6 +1276,12 @@ manuals:
           title: Manage secrets
         - path: /datacenter/ucp/2.1/guides/user/secrets/grant-revoke-access/
           title: Grant access to secrets
+    - sectiontitle: Release notes
+      section:
+      - path: /datacenter/ucp/2.1/guides/release-notes/
+        title: Release notes
+      - path: /datacenter/ucp/2.1/guides/release-notes/incompatibilities-and-breaking-changes/
+        title: Incompatibilities and breaking changes
     - path: /datacenter/ucp/2.1/guides/get-support/
       title: Get support
   - sectiontitle: Docker Trusted Registry
@@ -1300,16 +1300,10 @@ manuals:
           title: Install
         - path: /datacenter/dtr/2.2/guides/admin/install/install-offline/
           title: Install offline
+        - path: /datacenter/dtr/2.2/guides/admin/upgrade/
+          title: Upgrade
         - path: /datacenter/dtr/2.2/guides/admin/install/uninstall/
           title: Uninstall
-        - sectiontitle: Upgrade
-          section:
-          - path: /datacenter/dtr/2.2/guides/admin/upgrade/release-notes/
-            title: Release notes
-          - path: /datacenter/dtr/2.2/guides/admin/upgrade/incompatibilities-and-breaking-changes/
-            title: Incompatibilities and breaking changes
-          - path: /datacenter/dtr/2.2/guides/admin/upgrade/
-            title: Upgrade
       - sectiontitle: Configure
         section:
         - path: /datacenter/dtr/2.2/guides/admin/configure/license-your-installation/
@@ -1404,6 +1398,12 @@ manuals:
         title: Create and manage webhooks
     - path: /datacenter/dtr/2.2/reference/api/
       title: API reference
+    - sectiontitle: Release notes
+      section:
+      - path: /datacenter/dtr/2.2/guides/release-notes/
+        title: Release notes
+      - path: /datacenter/dtr/2.2/guides/release-notes/incompatibilities-and-breaking-changes/
+        title: Incompatibilities and breaking changes
     - path: /datacenter/dtr/2.2/guides/support/
       title: Get support
   - sectiontitle: Previous versions
