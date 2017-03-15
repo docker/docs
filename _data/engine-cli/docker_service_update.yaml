@@ -1,6 +1,15 @@
 command: docker service update
 short: Update a service
-long: Update a service
+long: |-
+  Updates a service as described by the specified parameters. This command has to be run targeting a manager node.
+  The parameters are the same as [`docker service create`](service_create.md). Please look at the description there
+  for further information.
+
+  Normally, updating a service will only cause the service's tasks to be replaced with new ones if a change to the
+  service requires recreating the tasks for it to take effect. For example, only changing the
+  `--update-parallelism` setting will not recreate the tasks, because the individual tasks are not affected by this
+  setting. However, the `--force` flag will cause the tasks to be recreated anyway. This can be used to perform a
+  rolling restart without any changes to the service parameters.
 usage: docker service update [OPTIONS] SERVICE
 pname: docker service
 plink: docker_service.yaml
@@ -38,7 +47,6 @@ options:
   default_value: '[]'
   description: Remove a DNS search domain
 - option: endpoint-mode
-  default_value: vip
   description: Endpoint mode (vip or dnsrr)
 - option: env-add
   default_value: '[]'
@@ -85,7 +93,7 @@ options:
   default_value: "0.000"
   description: Limit CPUs
 - option: limit-memory
-  default_value: "0"
+  default_value: 0 B
   description: Limit Memory
 - option: log-driver
   description: Logging driver for service
@@ -104,16 +112,13 @@ options:
   description: Add or update a published port
 - option: publish-rm
   description: Remove a published port by its target port
-- option: read-only
-  default_value: "false"
-  description: Mount the container's root filesystem as read only
 - option: replicas
   description: Number of tasks
 - option: reserve-cpu
   default_value: "0.000"
   description: Reserve CPUs
 - option: reserve-memory
-  default_value: "0"
+  default_value: 0 B
   description: Reserve Memory
 - option: restart-condition
   description: Restart when condition is met (none, on-failure, or any)
@@ -164,4 +169,45 @@ options:
 - option: workdir
   shorthand: w
   description: Working directory inside the container
+examples: "### Update a service\n\n```bash\n$ docker service update --limit-cpu 2
+  redis\n```\n\n### Perform a rolling restart with no parameter changes\n\n```bash\n$
+  docker service update --force --update-parallelism 1 --update-delay 30s redis\n```\n\nIn
+  this example, the `--force` flag causes the service's tasks to be shut down\nand
+  replaced with new ones even though none of the other parameters would\nnormally
+  cause that to happen. The `--update-parallelism 1` setting ensures\nthat only one
+  task is replaced at a time (this is the default behavior). The\n`--update-delay
+  30s` setting introduces a 30 second delay between tasks, so\nthat the rolling restart
+  happens gradually.\n\n### Add or remove mounts\n\nUse the `--mount-add` or `--mount-rm`
+  options add or remove a service's bind-mounts\nor volumes.\n\nThe following example
+  creates a service which mounts the `test-data` volume to\n`/somewhere`. The next
+  step updates the service to also mount the `other-volume`\nvolume to `/somewhere-else`volume,
+  The last step unmounts the `/somewhere` mount\npoint, effectively removing the `test-data`
+  volume. Each command returns the\nservice name.\n\n- The `--mount-add` flag takes
+  the same parameters as the `--mount` flag on\n  `service create`. Refer to the [volumes
+  and\n  bind-mounts](service_create.md#volumes-and-bind-mounts-mount) section in
+  the\n  `service create` reference for details.\n\n- The `--mount-rm` flag takes
+  the `target` path of the mount.\n\n```bash\n$ docker service create \\\n    --name=myservice
+  \\\n    --mount \\\n      type=volume,source=test-data,target=/somewhere \\\n    nginx:alpine
+  \\\n    myservice\n\nmyservice\n\n$ docker service update \\\n    --mount-add \\\n
+  \     type=volume,source=other-volume,target=/somewhere-else \\\n    myservice\n\nmyservice\n\n$
+  docker service update --mount-rm /somewhere myservice\n\nmyservice\n```\n\n### Rolling
+  back to the previous version of a service \n\nUse the `--rollback` option to roll
+  back to the previous version of the service. \n\nThis will revert the service to
+  the configuration that was in place before the most recent `docker service update`
+  command.\n\nThe following example updates the number of replicas for the service
+  from 4 to 5, and then rolls back to the previous configuration.\n\n```bash\n$ docker
+  service update --replicas=5 web\n\nweb\n\n$ docker service ls\n\nID            NAME
+  \ MODE        REPLICAS  IMAGE\n80bvrzp6vxf3  web   replicated  0/5       nginx:alpine\n\n```\nRoll
+  back the `web` service... \n\n```bash\n$ docker service update --rollback web\n\nweb\n\n$
+  docker service ls\n\nID            NAME  MODE        REPLICAS  IMAGE\n80bvrzp6vxf3
+  \ web   replicated  0/4       nginx:alpine\n\n```\n\nOther options can be combined
+  with `--rollback` as well, for example, `--update-delay 0s` to execute the rollback
+  without a delay between tasks:\n\n```bash\n$ docker service update \\\n  --rollback
+  \\\n  --update-delay 0s\n  web\n\nweb\n\n```\n\n### Add or remove secrets\n\nUse
+  the `--secret-add` or `--secret-rm` options add or remove a service's\nsecrets.\n\nThe
+  following example adds a secret named `ssh-2` and removes `ssh-1`:\n\n```bash\n$
+  docker service update \\\n    --secret-add source=ssh-2,target=ssh-2 \\\n    --secret-rm
+  ssh-1 \\\n    myservice\n```\n\n### Update services using templates\n\nSome flags
+  of `service update` support the use of templating.\nSee [`service create`](./service_create.md#templating)
+  for the reference."
 
