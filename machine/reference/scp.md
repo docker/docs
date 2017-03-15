@@ -32,6 +32,21 @@ Just like how `scp` has a `-r` flag for copying files recursively,
 In the case of transferring files from machine to machine,
 they go through the local host's filesystem first (using `scp`'s `-3` flag).
 
+When transferring large files or updating directories with lots of files,
+you can use the `-d` flag, which uses `rsync` to transfer deltas instead of
+transferring all of the files.
+
+When transferring directories and not just files, avoid rsync surprises
+by using trailing slashes on both the source and destination. For example:
+
+```none
+$ mkdir -p bar
+$ touch bar/baz
+$ docker-machine scp -r -d bar/ dev:/home/docker/bar/
+$ docker-machine ssh dev ls bar
+baz
+```
+
 ## Specifying file paths for remote deployments
 
 When you copy files to a remote server with `docker-machine scp` for app
@@ -68,4 +83,4 @@ And we can try it out like so:
 ```none
 $ eval $(docker-machine env MACHINE-NAME)
 $ docker-compose run webapp
-```
+
