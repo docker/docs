@@ -15,7 +15,7 @@ this profile in `tmpfs` and then loads it into the kernel. On Docker versions
 earlier than `1.13.0`, this profile is generated in `/etc/apparmor.d/docker`
 instead. 
 
-> **Note:** This profile is used on containers, _not_ on the Docker Daemon.
+> **Note**: This profile is used on containers, _not_ on the Docker Daemon.
 
 A profile for the Docker Engine daemon exists but it is not currently installed
 with the `deb` packages. If you are interested in the source for the daemon
@@ -221,7 +221,7 @@ looks like the following:
 In the above example, you can see `profile=/usr/bin/docker`. This means the
 user has the `docker-engine` (Docker Engine Daemon) profile loaded.
 
-> **Note:** On version of Ubuntu > 14.04 this is all fine and well, but Trusty
+> **Note**: On version of Ubuntu > 14.04 this is all fine and well, but Trusty
 > users might run into some issues when trying to `docker exec`.
 
 Look at another log line:

@@ -17,7 +17,7 @@ copy-on-write, and snapshotting.
 This article refers to Docker's Btrfs storage driver as `btrfs` and the overall
  Btrfs Filesystem as Btrfs.
 
-> **Note:** The [Commercially Supported Docker Engine (CS-Engine)](https://www.docker.com/compatibility-maintenance) does not currently support the `btrfs` storage driver.
+> **Note**: The [Commercially Supported Docker Engine (CS-Engine)](https://www.docker.com/compatibility-maintenance) does not currently support the `btrfs` storage driver.
 
 ## The future of Btrfs
 
@@ -194,7 +194,7 @@ multiple devices to the `mkfs.btrfs` command creates a pool across all of those
     Be sure to substitute `/dev/xvdb` with the appropriate device(s) on your
     system.
 
-    > **Warning:** Take note of the warning about Btrfs being experimental. As
+    > **Warning**: Take note of the warning about Btrfs being experimental. As
     noted earlier, Btrfs is not currently recommended for production deployments
     unless you already have extensive experience.
 

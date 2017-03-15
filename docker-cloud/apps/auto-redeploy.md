@@ -10,7 +10,7 @@ Docker Cloud's **Autoredeploy** feature allows a service that uses an image
 stored in Docker Hub to automatically redeploy whenever a new image is pushed or
 built.
 
-> **Note:** To enable autoredeploy on an image stored in a third party registry,
+> **Note**: To enable autoredeploy on an image stored in a third party registry,
 > you will need to use [redeploy triggers](triggers.md) instead.
 
 

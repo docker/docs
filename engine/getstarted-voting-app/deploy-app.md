@@ -15,7 +15,7 @@ The `docker-stack.yml` file must be located on a manager for the swarm where you
 
     Copy-and-paste the contents of that file into a file of the same name on your host.
 
-    >**Tip:** To avoid text encoding errors from a direct file download, especially on Windows, create the file directly in a Linux environment on your local machine and copy-paste the raw text from the original `docker-stack.yml`. A file downloaded on a Windows system might include `^M` line endings, which will prevent the app from running in the Docker Linux based environment.
+    >**Tip**: To avoid text encoding errors from a direct file download, especially on Windows, create the file directly in a Linux environment on your local machine and copy-paste the raw text from the original `docker-stack.yml`. A file downloaded on a Windows system might include `^M` line endings, which will prevent the app from running in the Docker Linux based environment.
 
 2.  Copy `docker-stack.yml` from your host machine onto the manager.
 

@@ -492,7 +492,7 @@ The following example briefly describes how to use `--link`.
     `container5` is created, `container4` will be able to resolve the name `c5` to
     `container5`'s IP address.
 
-    >**Note:** Any link between containers created with *legacy link* is static in
+    >**Note**: Any link between containers created with *legacy link* is static in
     nature and hard-binds the container with the alias. It does not tolerate
     linked container restarts. The new *link* functionality in user defined
     networks supports dynamic links between containers, and tolerates restarts and

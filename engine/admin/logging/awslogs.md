@@ -53,7 +53,7 @@ To configure which
 should be used, you can specify the `awslogs-stream` log option.  If not
 specified, the container ID is used as the log stream.
 
-> **Note:**
+> **Note**:
 > Log streams within a given log group should only be used by one container
 > at a time.  Using the same log stream for multiple containers concurrently
 > can cause reduced logging performance.

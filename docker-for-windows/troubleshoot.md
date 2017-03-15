@@ -71,7 +71,7 @@ Drives** and share the drive that contains the Dockerfile and volume.
 
 ### Verify domain user has permissions for shared drives (volumes)
 
->**Tip:** Shared drives are only required for volume mounting [Linux
+>**Tip**: Shared drives are only required for volume mounting [Linux
 containers](index.md#switch-between-windows-and-linux-containers),
 not Windows containers.
 
@@ -211,7 +211,7 @@ To fix existing containers, follow these steps.
 
 3. Start Docker.
 
-	> **Note:**  Be sure to quit and then restart Docker for Windows before attempting to start containers.
+	> **Note**:  Be sure to quit and then restart Docker for Windows before attempting to start containers.
 
 4.  Try to start the container again:
 

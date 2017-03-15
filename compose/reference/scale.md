@@ -15,7 +15,7 @@ Numbers are specified as arguments in the form `service=num`. For example:
 
     docker-compose scale web=2 worker=3
 
->**Tip:** Alternatively, in
+>**Tip**: Alternatively, in
 [Compose file version 3.x](/compose/compose-file/index.md), you can specify
 [`replicas`](/compose/compose-file/index.md#replicas)
 under [`deploy`](/compose/compose-file/index.md#deploy) as part of the

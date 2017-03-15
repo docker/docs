@@ -54,7 +54,7 @@ $ docker run -d -P --name web -v /webapp training/webapp python app.py
 
 This will create a new volume inside a container at `/webapp`.
 
-> **Note:**
+> **Note**:
 > You can also use the `VOLUME` instruction in a `Dockerfile` to add one or
 > more new volumes to any container created from that image.
 
@@ -236,7 +236,7 @@ This will drop you into a bash shell in a new container, you will have your bash
 history from the host and when you exit the container, the host will have the
 history of the commands typed while in the container.
 
-> **Note:**
+> **Note**:
 > Many tools used to edit files including `vi` and `sed --in-place` may result
 > in an inode change. Since Docker v1.1.0, this will produce an error such as
 > "*sed: cannot rename ./sedKdJ9Dy: Device or resource busy*". In the case where
@@ -293,7 +293,7 @@ be deleted.  To delete the volume from disk, you must explicitly call
 `docker rm -v` against the last container with a reference to the volume. This
 allows you to upgrade, or effectively migrate data volumes between containers.
 
-> **Note:** Docker will not warn you when removing a container *without*
+> **Note**: Docker will not warn you when removing a container *without*
 > providing the `-v` option to delete its volumes. If you remove containers
 > without using the `-v` option, you may end up with "dangling" volumes;
 > volumes that are no longer referenced by a container.

@@ -102,7 +102,7 @@ as a bootable ISO, is a free download, and works well with VirtualBox.
   Once you've downloaded the tool, add the ISO to the Boot2Docker VM IDE bus.
   You might need to create the bus before you can add the ISO.
 
-  > **Note:**
+  > **Note**:
   > It's important that you choose a partitioning tool that is available as an ISO so
   > that the Boot2Docker VM can be booted with it.
 
