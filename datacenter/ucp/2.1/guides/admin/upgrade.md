@@ -1,15 +1,15 @@
 ---
+title: Upgrade to UCP 2.1
 description: Learn how to upgrade Docker Universal Control Plane with minimal impact
   to your users.
 keywords: Docker, UCP, upgrade, update
-title: Upgrade to UCP 2.1
 ---
 
 This page guides you in upgrading Docker Universal Control Plane (UCP) to
 version 2.1.
 
 Before upgrading to a new version of UCP, check the
-[release notes](release-notes.md) for this version.
+[release notes](../release-notes/index.md) for this version.
 There you'll find information about the new features, breaking changes, and
 other relevant information for upgrading to a particular version.
 
@@ -28,7 +28,7 @@ can lead to misconfigurations that are difficult to troubleshoot.
 Before starting an upgrade, make sure your cluster is healthy. If a problem
 occurs that will make it easier to find and troubleshoot any problems.
 
-Then, [create a backup](../backups-and-disaster-recovery.md)
+Then, [create a backup](backups-and-disaster-recovery.md)
 of your cluster. This will allow you to recover from an existing backup if
 something goes wrong during the upgrade process.
 
@@ -54,13 +54,13 @@ You can upgrade UCP from the web UI or the CLI.
 
 When an upgrade is available for a UCP installation, a banner will be shown.
 
-![](../../images/upgrade-ucp-1.png){: .with-border}
+![](../images/upgrade-ucp-1.png){: .with-border}
 
 Clicking this message takes an admin user directly to the upgrade process.
 It can be found under the **Cluster Configuration** tab of the **Admin
  Settings** section.
 
-![](../../images/upgrade-ucp-2.png){: .with-border}
+![](../images/upgrade-ucp-2.png){: .with-border}
 
 Select a version to upgrade to using the **Available UCP Versions** dropdown,
 then click to upgrade.
@@ -68,7 +68,7 @@ then click to upgrade.
 Before the upgrade happens, a confirmation dialog along with important
 information regarding cluster and UI availability will be displayed.
 
-![](../../images/upgrade-ucp-3.png){: .with-border}
+![](../images/upgrade-ucp-3.png){: .with-border}
 
 During the upgrade the UI will be unavailable and it is recommended to wait
 until completion before continuing to interact with it.  Upon upgrade
@@ -96,8 +96,8 @@ for any necessary configuration values.
 Once the upgrade finishes, navigate to the **UCP web UI** and make sure that
 all the nodes managed by UCP are healthy.
 
-![](../../images/upgrade-ucp-4.png)
+![](../images/upgrade-ucp-4.png)
 
 ## Where to go next
 
-* [UCP release notes](release-notes.md)
+* [UCP release notes](../release-notes/index.md)
