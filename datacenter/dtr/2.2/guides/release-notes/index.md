@@ -3,7 +3,7 @@ title: DTR 2.2 release notes
 description: Learn about the new features, bug fixes, and breaking changes for Docker Trusted Registry {{ page.dtr_version }}
 keywords: docker trusted registry, whats new, release notes
 redirect_from:
-- /datacenter/ucp/2.1/guides/admin/upgrade/release-notes/
+- /datacenter/dtr/2.2/guides/admin/upgrade/release-notes/
 ---
 
 Here you can learn about new features, bug fixes, breaking changes and
@@ -32,6 +32,7 @@ to upgrade your installation to the latest release.
 
 * Fixed an issue introduced in 2.2.2 that caused the scanning button to not be
 displayed for images that had never been scanned
+* Fixed memory leaks in the DTR API server and Registry
 
 ## DTR 2.2.2
 
