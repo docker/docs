@@ -81,7 +81,7 @@ $ docker service create \
   nginx
 ```
 
->**Note:** You have to create the network before you can attach a service to it.
+>**Note**: You have to create the network before you can attach a service to it.
 
 The containers for the tasks in the service can connect to one another on the
 overlay network. The swarm extends the network to all the nodes with `Running`
@@ -220,7 +220,7 @@ the busybox container:
     Address 1: 10.0.9.2 ip-10-0-9-2.us-west-2.compute.internal
     ```
 
-    >**Note:** the examples here use `nslookup`, but you can use `dig` or any
+    >**Note**: the examples here use `nslookup`, but you can use `dig` or any
     available DNS query tool.
 
 5.  From inside the busybox container, query the DNS using a special query

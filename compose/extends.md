@@ -167,7 +167,7 @@ is useful if you have several services that reuse a common set of configuration
 options. Using `extends` you can define a common set of service options in one
 place and refer to it from anywhere.
 
-> **Note:** `links`, `volumes_from`, and `depends_on` are never shared between
+> **Note**: `links`, `volumes_from`, and `depends_on` are never shared between
 > services using `extends`. These exceptions exist to avoid
 > implicit dependencies&mdash;you always define `links` and `volumes_from`
 > locally. This ensures dependencies between services are clearly visible when
@@ -284,7 +284,7 @@ replaces the old value.
     # result
     command: python otherapp.py
 
-> **Note:** In the case of `build` and `image`, when using
+> **Note**: In the case of `build` and `image`, when using
 > [version 1 of the Compose file format](compose-file.md#version-1), using one
 > option in the local service causes Compose to discard the other option if it
 > was defined in the original service.

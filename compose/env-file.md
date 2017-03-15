@@ -35,7 +35,7 @@ variables](reference/envvars.md):
 - `DOCKER_HOST`
 - `DOCKER_TLS_VERIFY`
 
-> **Note:** Values present in the environment at runtime will always override
+> **Note**: Values present in the environment at runtime will always override
 > those defined inside the `.env` file. Similarly, values passed via
 > command-line arguments take precedence as well.
 

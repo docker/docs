@@ -4,7 +4,7 @@ keywords: documentation, docs, docker, compose, orchestration, containers, netwo
 title: Networking in Compose
 ---
 
-> **Note:** This document only applies if you're using [version 2 or higher of the Compose file format](compose-file.md#versioning). Networking features are not supported for version 1 (legacy) Compose files.
+> **Note**: This document only applies if you're using [version 2 or higher of the Compose file format](compose-file.md#versioning). Networking features are not supported for version 1 (legacy) Compose files.
 
 By default Compose sets up a single
 [network](/engine/reference/commandline/network_create/) for your app. Each
@@ -12,7 +12,7 @@ container for a service joins the default network and is both *reachable* by
 other containers on that network, and *discoverable* by them at a hostname
 identical to the container name.
 
-> **Note:** Your app's network is given a name based on the "project name",
+> **Note**: Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
 > project name with either the [`--project-name`
 > flag](reference/overview.md) or the [`COMPOSE_PROJECT_NAME` environment

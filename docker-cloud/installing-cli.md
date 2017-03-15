@@ -69,7 +69,7 @@ Once Homebrew is installed, open Terminal and run the following command:
 $ brew install docker-cloud
 ```
 
-> **Note:** You can also use [pip](https://pip.pypa.io/en/stable/) to install on macOS, but we suggest Homebrew since it is a package manager designed for the
+> **Note**: You can also use [pip](https://pip.pypa.io/en/stable/) to install on macOS, but we suggest Homebrew since it is a package manager designed for the
 Mac.
 
 #### Validate the installation

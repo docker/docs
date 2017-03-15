@@ -72,7 +72,7 @@ send this signal is using the `kill` command on Linux systems. For example,
 `kill -USR1 <daemon-pid>` sends the `SIGUSR1` signal to the daemon process,
 causing the stack dump to be added to the daemon log.
 
-> **Note:** The log level setting of the daemon must be at least "info" level and above for
+> **Note**: The log level setting of the daemon must be at least "info" level and above for
 the stack trace to be saved to the logfile. By default the daemon's log level is set to
 "info".
 

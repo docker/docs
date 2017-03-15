@@ -204,7 +204,7 @@ mode uses block devices to create the thin pool. The following procedure shows
 you how to configure a Docker host to use the `devicemapper` storage driver in
 a `direct-lvm` configuration.
 
-> **Caution:** If you have already run the Docker daemon on your Docker host
+> **Caution**: If you have already run the Docker daemon on your Docker host
 > and have images you want to keep, `push` them to Docker Hub or your private
 > Docker Trusted Registry before attempting this procedure.
 

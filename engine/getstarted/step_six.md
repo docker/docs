@@ -135,7 +135,7 @@ locally.
     $ docker rmi -f 7d9495d03763
     ```
 
-    >**Tip:** You can also remove an image with `docker image rm -f` followed by image ID or name in a similar fashion.
+    >**Tip**: You can also remove an image with `docker image rm -f` followed by image ID or name in a similar fashion.
 
 4.  When you use `docker run` it automatically downloads (pulls) images that
     don't yet exist locally, creates a container, and starts it. Use the

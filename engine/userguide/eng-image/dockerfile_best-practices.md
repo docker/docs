@@ -515,7 +515,7 @@ If a service can run without privileges, use `USER` to change to a non-root
 user. Start by creating the user and group in the `Dockerfile` with something
 like `RUN groupadd -r postgres && useradd -r -g postgres postgres`.
 
-> **Note:** Users and groups in an image get a non-deterministic
+> **Note**: Users and groups in an image get a non-deterministic
 > UID/GID in that the “next” UID/GID gets assigned regardless of image
 > rebuilds. So, if it’s critical, you should assign an explicit UID/GID.
 
