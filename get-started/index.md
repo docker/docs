@@ -11,12 +11,12 @@ Docker](#WHYDOCKER) before we begin.
 In this tutorial, you will:
 
 1. Get set up and oriented, on this page.
-2. [Create a "Hello World" application that identifies its environment](part2.md)
-3. [Hook up a visitor counter](part3.md)
-4. [Configure persistent data for our application](part4.md)
-5. [Set up a scalable cluster in production](part5.md)
-6. [Configure load-balancing and SSL](part6.md)
-7. [Learn next steps](part7.md)
+2. [Build and run our first app](part2.md)
+3. [Turn our app into a scaling service](part3.md)
+4. [Span our service across multiple machines](part4.md)
+5. [Add a visitor counter that persists data](part5.md)
+6. [Add SSL using Let's Encrypt and haproxy](part6.md)
+7. [Conclusion, and next steps](part7.md)
 
 The application itself is very simple so that you are not too distracted by
 what the code is doing. After all, the value of Docker is in how it can build,
@@ -30,43 +30,61 @@ installed.
 
 [Install Docker](/engine/installation/index.md){: class="button darkblue-btn"}
 
-## A brief history of containers
+You should be able to run `docker run hello-world` and see a response like this:
 
-A container image is a lightweight,
-stand-alone, executable package of a piece of software that includes everything
-needed to run it: code, runtime, system tools, system libraries, settings. 
+```
+$ docker run hello-world
 
-A container is a runtime instance of an image -- what the image becomes in
-memory when actually executed. 
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
 
-A container image is like the disk image of a virtual machine, but without an OS.
-That's because containers run apps natively on the host machine's kernel. They
-don't need to have the performance characteristics of virtual machines that only
-get virtual access to host resources -- containers can get native access.
+To generate this message, Docker took the following steps:
+...(snipped)...
+```
 
-Consider this diagram comparing the two:
+## A brief explanation of containers
+
+An **image** is a lightweight, stand-alone, executable package that includes
+everything needed to run a piece of software, including the code, a runtime,
+libraries, environment variables, and config files.
+
+A **container** is a runtime instance of an image -- what the image becomes in
+memory when actually executed. It runs completely isolated from the host
+environment by default, only accessing host files and ports if configured to
+do so.
+
+Containers run apps natively on the host machine's kernel. They have better
+performance characteristics than virtual machines that only get virtual access
+to host resources through a hypervisor. Containers can get native access, each
+one running in a discrete process, taking no more memory than any other
+executable.
+
+## Containers vs. virtual machines
+
+Consider this diagram comparing virtual machines to containers:
 
 ![Virtual machine stack example](https://www.docker.com/sites/default/files/VM%402x.png)
 
-Virtual machines run guest operating systems -- note the OS layer in each box. This
-is resource intensive, and the resulting disk image is an entangelment of OS 
-settings, and system-installed dependencies, and OS security patches, all bundled
-into large multi-gigabyte files.
+Virtual machines run guest operating systems -- note the OS layer in each box.
+This is resource intensive, and the resulting disk image and appication state is
+an entangelment of OS settings, system-installed dependencies, OS security
+patches, and other easy-to-lose, hard-to-replicate ephemera.
 
 ![Container stack example](https://www.docker.com/sites/default/files/Container%402x.png)
 
-Containers can share a single kernel, and the only information packaged in a 
+Containers can share a single kernel, and the only information packaged in a
 container image is the executable and its package dependencies, which never need
-to be installed on the host system. These processes run like native processes, and
-you can manage them individually by running commands like `docker ps` -- just like
-you would run `ps` on Linux to see any other active executable.
+to be installed on the host system. These processes run like native processes,
+and you can manage them individually by running commands like `docker ps` --
+just like you would run `ps` on Linux to see any other active executable.
 
 ## Conclusion
 
-The unit of scale being an individual, portable executable means that CI/CD can push
-updates to one part of a distributed application, system dependencies aren't a thing
-you worry about, resource density is increased, and orchestrating scaling behavior
-is a matter of spinning up new executables, not new VM hosts. We'll be learning about
-all of those things, but first let's learn to walk.
+The unit of scale being an individual, portable executable has vast
+implications. It means that CI/CD can push updates to one part of a distributed
+application, system dependencies aren't a thing you worry about, resource
+density is increased, and orchestrating scaling behavior is a matter of spinning
+up new executables, not new VM hosts. We'll be learning about all of those
+things, but first let's learn to walk.
 
-[On to "Getting Started, Part 2: Creating and Building Your App" >>](part2.md){: class="button outline-btn"}
+[On to Part 2 >>](part2.md){: class="button outline-btn"}

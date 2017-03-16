@@ -1,14 +1,46 @@
 ---
-title: "Getting Started, Part 2: Creating and Building Your App"
+title: "Getting Started, Part 2: Containers"
 ---
 
-In the past, if you were to start writing a Python app, your first order of
-business was to install a Python runtime onto your machine. With Docker, your
-app, its dependencies, and the runtime, are all built together into an image.
+## Prerequisites
 
-These builds are configured with something called a `Dockerfile`.
+- [Install Docker](/engine/installation/).
+- Read the orientation in [Part 1](index.md).
+- Give your environment a quick test run to make sure you're all set up:
 
-## Your first Dockerfile
+  ```
+  docker run hello-world
+  ```
+
+## Introduction
+
+It's time to begin building an app the Docker way. We'll start at the bottom of
+the hierarchy of such an app, which is a container, which we cover on this page.
+Above this level is a service, which defines how containers behave in
+production, covered in [Part 3](part3.md). Finally, at the top level is the
+stack, defining the interactions of all the services, covered in
+[Part 4](part4.md).
+
+- Stack
+- Services
+- **Container** (you are here)
+
+## Your new development environment
+
+In the past, if you were to start writing a Python app, your first
+order of business was to install a Python runtime onto your machine. But,
+that creates a situation where the environment on your machine has to be just
+so in order for your app to run as expected; ditto for the server that runs
+your app.
+
+With Docker, you can just grab a portable Python runtime as an image, no
+installation necessary. Then, your build can include the base Python image
+right alongside your app code, ensuring that your app, its dependencies, and the
+runtime, all travel together.
+
+These portable images are defined by something called a `Dockerfile`.
+
+## Define a container with a `Dockerfile`
 
 `Dockerfile` will define what goes on in the environment inside your
 container. Access to resources like networking interfaces and disk drives is
@@ -30,7 +62,7 @@ FROM python:2.7-slim
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the host machine's current directory contents to /app in the container
+# Copy the current directory contents into the container at /app
 ADD . /app
 
 # Install any needed packages specified in requirements.txt
@@ -47,7 +79,7 @@ CMD ["python", "app.py"]
 ```
 
 This `Dockerfile` refers to a couple of things we haven't created yet, namely
-`app.py` and `requirements.txt`. Let's get those in place next. 
+`app.py` and `requirements.txt`. Let's get those in place next.
 
 ## The app itself
 
@@ -77,7 +109,6 @@ redis = Redis(host="redis", db=0)
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def hello():
     try:
@@ -90,16 +121,16 @@ def hello():
            "<b>Visits:</b> {visits}"
     return html.format(name=os.getenv('NAME', "world"), hostname=socket.gethostname(), visits=visits)
 
-
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=80)
 ```
 
 Now we see that `pip install requirements.txt` installs the Flask and Redis
-libraries, and the app prints the environment variable of `NAME`, as well as the
-output of a call to `socket.gethostname()`. Finally, because Redis isn't running
-(as we've only installed the Python library, and not Redis itself), we should
-expect that the attempt to use it here will fail and produce the error message.
+libraries for Python, and the app prints the environment variable `NAME`, as
+well as the output of a call to `socket.gethostname()`. Finally, because Redis
+isn't running (as we've only installed the Python library, and not Redis
+itself), we should expect that the attempt to use it here will fail and produce
+the error message.
 
 > *Note*: Accessing the name of the host when inside a container retrieves the
 container ID, which is like the process ID for a running executable.
@@ -107,7 +138,7 @@ container ID, which is like the process ID for a running executable.
 ## Build the App
 
 That's it! You don't need Python or anything in `requirements.txt` on your
-system, nor will building or running this app install them on your system. It
+system, nor will building or running this image install them on your system. It
 doesn't seem like you've really set up an environment with Python and Flask, but
 you have.
 
@@ -129,8 +160,9 @@ Where is your built image? It's in your machine's local Docker image registry:
 
 ```shell
 $ docker images
-REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
-friendlyhello         latest              326387cea398        47 seconds ago      192.1 MB
+
+REPOSITORY            TAG                 IMAGE ID
+friendlyhello         latest              326387cea398
 ```
 
 ## Run the app
@@ -143,10 +175,15 @@ docker run -p 4000:80 friendlyhello
 ```
 
 You should see a notice that Python is serving your app at `http://0.0.0.0:80`.
-But that message coming from inside the container, which doesn't know you
-actually want to access your app at: `http://localhost:4000`. Go there, and
-you'll see the "Hello World" text, the container ID, and the Redis error
-message.
+But that message coming from inside the container, which doesn't know you mapped
+port 80 of that container to 4000, making the correct URL
+`http://localhost:4000`. Go there, and you'll see the "Hello World" text, the
+container ID, and the Redis error message.
+
+> **Note**: This port remapping of `4000:80` is to demonstrate the difference
+between what you `EXPOSE` within the `Dockerfile`, and what you `publish` using
+`docker run -p`. In later steps, we'll just map port 80 on the host to port 80
+in the container and use `http://localhost`.
 
 Hit `CTRL+C` in your terminal to quit.
 
@@ -157,19 +194,19 @@ docker run -d -p 4000:80 friendlyhello
 ```
 
 You get the long container ID for your app and then are kicked back to your
-terminal. Your app is running in the background. You can also see the 
+terminal. Your container is running in the background. You can also see the
 abbreviated container ID with `docker ps` (and both work interchangeably when
 running commands):
 
 ```shell
 $ docker ps
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS
-1fa4ab2cf395        friendlyhello       "python app.py"     28 seconds ago      Up 25 seconds
+CONTAINER ID        IMAGE               COMMAND             CREATED
+1fa4ab2cf395        friendlyhello       "python app.py"     28 seconds ago
 ```
 
 You'll see that `CONTAINER ID` matches what's on `http://localhost:4000`.
 
-Now use `docker stop` to end the process, using `CONTAINER ID`, like so:
+Now use `docker stop` to end the process, using the `CONTAINER ID`, like so:
 
 ```shell
 docker stop 1fa4ab2cf395
@@ -177,17 +214,22 @@ docker stop 1fa4ab2cf395
 
 ## Share your image
 
-To demonstrate the portability of what we just created, let's upload our
-build and run it somewhere else.
+To demonstrate the portability of what we just created, let's upload our build
+and run it somewhere else. After all, you'll need to learn how to push to
+registries to make deployment of containers actually happen.
 
-Sign up for a Docker account at [cloud.docker.com](https://cloud.docker.com/).
-Make note of your username. We're going to use it to upload our build to Docker
-and make it retrievable from anywhere.
+A registry is a collection of repositories, and a repository is a collection of
+images -- sort of like a GitHub repository, except the code is already built. An
+account on a registry can create many repositories. The `docker` CLI is
+preconfigured to use Docker's public registry by default.
 
-A registry is a collection of repositories, and a repository is a collection of images,
-sort of like a GitHub repository, except the code is already built. An account on a
-registry can create many repositories. The `docker` CLI is preconfigured to
-use Docker's public registry by default.
+> **Note**: We'll be using Docker's public registry here just because it's free
+and pre-configured, but there are many public ones to choose from, and you can
+even set up your own private registry using [Docker Trusted
+Registry](/datacenter/dtr/2.2/guides/).
+
+If you don't have a Docker account, sign up for one at
+[cloud.docker.com](https://cloud.docker.com/). Make note of your username.
 
 Log in your local machine.
 
@@ -195,9 +237,9 @@ Log in your local machine.
 docker login
 ```
 
-Now, let's publish your image. The notation for associating a local image with a
+Now, publish your image. The notation for associating a local image with a
 repository on a registry, is `username/repository:tag`. The `:tag` is optional,
-but recommended; it's the mechnism that registries use to give Docker images a
+but recommended; it's the mechanism that registries use to give Docker images a
 version. So, putting all that together, enter your username, and repo
 and tag names, so your existing image will upload to your desired destination:
 
@@ -211,11 +253,11 @@ Upload your tagged image:
 docker push username/repository:tag
 ```
 
-Once complete, the results of this upload are publicly available. From now on, you
-can use `docker run` and run your app on any machine with this command:
+Once complete, the results of this upload are publicly available. From now on,
+you can use `docker run` and run your app on any machine with this command:
 
 ```shell
-docker run -p 80:80 username/repository:tag
+docker run -p 4000:80 username/repository:tag
 ```
 
 > Note: If you don't specify the `:tag` portion of these commands,
@@ -229,19 +271,18 @@ install anything but Docker to run it.
 
 ## Conclusion of part one
 
-That's all for this page. You can continue to the next phase where we link up
-Redis to our web page so that the counter works. Or, if you want a quick recap
-first, scroll down for the [cheat sheet](#cheat-sheet).
+That's all for this page. In the next section, we will learn how to scale our
+application by running this container in a **service**.
 
-[Continue to "Getting Started, Part 3: Multi-container Applications" >>](part3.md){: class="button outline-btn"}
+[Continue to Part 3 >>](part3.md){: class="button outline-btn"}
 
-## Cheat sheet
+## Recap and cheat sheet (optional)
 
 Here's [a terminal recording of everything that we did on this page](https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g).
 
 <script type="text/javascript" src="https://asciinema.org/a/blkah0l4ds33tbe06y4vkme6g.js" id="asciicast-blkah0l4ds33tbe06y4vkme6g" async></script>
 
-Here is a list of the basic commands from this page, and some related ones if 
+Here is a list of the basic commands from this page, and some related ones if
 you'd like to explore a bit before moving on.
 
 ```shell
