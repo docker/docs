@@ -46,7 +46,7 @@ different nodes. For more information, refer to
 The `--subnet` flag specifies the subnet for use with the overlay network. When
 you don't specify a subnet, the swarm manager automatically chooses a subnet and
 assigns it to the network. On some older kernels, including kernel 3.10,
-automatically assigned adresses may overlap with another subnet in your
+automatically assigned addresses may overlap with another subnet in your
 infrastructure. Such overlaps can cause connectivity issues or failures with containers connected to the network.
 
 Before you attach a service to the network, the network only extends to manager
