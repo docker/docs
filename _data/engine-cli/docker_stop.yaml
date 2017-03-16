@@ -1,8 +1,6 @@
 command: docker stop
 short: Stop one or more running containers
-long: |-
-  The main process inside the container will receive `SIGTERM`, and after a grace
-  period, `SIGKILL`.
+long: Stop one or more running containers
 usage: docker stop [OPTIONS] CONTAINER [CONTAINER...]
 pname: docker
 plink: docker.yaml
@@ -11,8 +9,4 @@ options:
   shorthand: t
   default_value: "10"
   description: Seconds to wait for stop before killing it
-examples: |-
-  ```bash
-  $ docker stop my_container
-  ```
 

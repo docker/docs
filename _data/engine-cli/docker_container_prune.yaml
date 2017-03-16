@@ -5,8 +5,6 @@ usage: docker container prune [OPTIONS]
 pname: docker container
 plink: docker_container.yaml
 options:
-- option: filter
-  description: Provide filter values (e.g. 'until=<timestamp>')
 - option: force
   shorthand: f
   default_value: "false"

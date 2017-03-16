@@ -38,7 +38,6 @@ options:
   default_value: '[]'
   description: Remove a DNS search domain
 - option: endpoint-mode
-  default_value: vip
   description: Endpoint mode (vip or dnsrr)
 - option: env-add
   default_value: '[]'
@@ -85,7 +84,7 @@ options:
   default_value: "0.000"
   description: Limit CPUs
 - option: limit-memory
-  default_value: "0"
+  default_value: 0 B
   description: Limit Memory
 - option: log-driver
   description: Logging driver for service
@@ -104,16 +103,13 @@ options:
   description: Add or update a published port
 - option: publish-rm
   description: Remove a published port by its target port
-- option: read-only
-  default_value: "false"
-  description: Mount the container's root filesystem as read only
 - option: replicas
   description: Number of tasks
 - option: reserve-cpu
   default_value: "0.000"
   description: Reserve CPUs
 - option: reserve-memory
-  default_value: "0"
+  default_value: 0 B
   description: Reserve Memory
 - option: restart-condition
   description: Restart when condition is met (none, on-failure, or any)

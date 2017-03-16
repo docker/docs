@@ -1,17 +1,6 @@
 command: docker create
 short: Create a new container
-long: |-
-  The `docker create` command creates a writeable container layer over the
-  specified image and prepares it for running the specified command.  The
-  container ID is then printed to `STDOUT`.  This is similar to `docker run -d`
-  except the container is never started.  You can then use the
-  `docker start <container_id>` command to start the container at any point.
-
-  This is useful when you want to set up a container configuration ahead of time
-  so that it is ready to start when you need it. The initial status of the
-  new container is `created`.
-
-  Please see the [run command](run.md) section and the [Docker run reference](../run.md) for more details.
+long: Create a new container
 usage: docker create [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker
 plink: docker.yaml
@@ -74,9 +63,6 @@ options:
 - option: device
   default_value: '[]'
   description: Add a host device to the container
-- option: device-cgroup-rule
-  default_value: '[]'
-  description: Add a rule to the cgroup allowed devices list
 - option: device-read-bps
   default_value: '[]'
   description: Limit read rate (bytes per second) from a device
@@ -154,9 +140,9 @@ options:
   default_value: "0"
   description: Maximum IOps limit for the system drive (Windows only)
 - option: ip
-  description: IPv4 address (e.g., 172.30.100.104)
+  description: Container IPv4 address (e.g. 172.30.100.104)
 - option: ip6
-  description: IPv6 address (e.g., 2001:db8::33)
+  description: Container IPv6 address (e.g. 2001:db8::33)
 - option: ipc
   description: IPC namespace to use
 - option: isolation
@@ -182,7 +168,7 @@ options:
   default_value: '[]'
   description: Log driver options
 - option: mac-address
-  description: Container MAC address (e.g., 92:d0:c6:0a:29:33)
+  description: Container MAC address (e.g. 92:d0:c6:0a:29:33)
 - option: memory
   shorthand: m
   description: Memory limit
@@ -248,8 +234,7 @@ options:
   default_value: '[]'
   description: Security Options
 - option: shm-size
-  default_value: "0"
-  description: Size of /dev/shm
+  description: Size of /dev/shm, default value is 64MB
 - option: stop-signal
   default_value: SIGTERM
   description: Signal to stop a container, SIGTERM by default
@@ -291,89 +276,4 @@ options:
 - option: workdir
   shorthand: w
   description: Working directory inside the container
-examples: |-
-  ### Create and start a container
-
-  ```bash
-  $ docker create -t -i fedora bash
-
-  6d8af538ec541dd581ebc2a24153a28329acb5268abe5ef868c1f1a261221752
-
-  $ docker start -a -i 6d8af538ec5
-
-  bash-4.2#
-  ```
-
-  ### Initialize volumes
-
-  As of v1.4.0 container volumes are initialized during the `docker create` phase
-  (i.e., `docker run` too). For example, this allows you to `create` the `data`
-  volume container, and then use it from another container:
-
-  ```bash
-  $ docker create -v /data --name data ubuntu
-
-  240633dfbb98128fa77473d3d9018f6123b99c454b3251427ae190a7d951ad57
-
-  $ docker run --rm --volumes-from data ubuntu ls -la /data
-
-  total 8
-  drwxr-xr-x  2 root root 4096 Dec  5 04:10 .
-  drwxr-xr-x 48 root root 4096 Dec  5 04:11 ..
-  ```
-
-  Similarly, `create` a host directory bind mounted volume container, which can
-  then be used from the subsequent container:
-
-  ```bash
-  $ docker create -v /home/docker:/docker --name docker ubuntu
-
-  9aa88c08f319cd1e4515c3c46b0de7cc9aa75e878357b1e96f91e2c773029f03
-
-  $ docker run --rm --volumes-from docker ubuntu ls -la /docker
-
-  total 20
-  drwxr-sr-x  5 1000 staff  180 Dec  5 04:00 .
-  drwxr-xr-x 48 root root  4096 Dec  5 04:13 ..
-  -rw-rw-r--  1 1000 staff 3833 Dec  5 04:01 .ash_history
-  -rw-r--r--  1 1000 staff  446 Nov 28 11:51 .ashrc
-  -rw-r--r--  1 1000 staff   25 Dec  5 04:00 .gitconfig
-  drwxr-sr-x  3 1000 staff   60 Dec  1 03:28 .local
-  -rw-r--r--  1 1000 staff  920 Nov 28 11:51 .profile
-  drwx--S---  2 1000 staff  460 Dec  5 00:51 .ssh
-  drwxr-xr-x 32 1000 staff 1140 Dec  5 04:01 docker
-  ```
-
-
-  Set storage driver options per container.
-
-  ```bash
-  $ docker create -it --storage-opt size=120G fedora /bin/bash
-  ```
-
-  This (size) will allow to set the container rootfs size to 120G at creation time.
-  This option is only available for the `devicemapper`, `btrfs`, `overlay2`,
-  `windowsfilter` and `zfs` graph drivers.
-  For the `devicemapper`, `btrfs`, `windowsfilter` and `zfs` graph drivers,
-  user cannot pass a size less than the Default BaseFS Size.
-  For the `overlay2` storage driver, the size option is only available if the
-  backing fs is `xfs` and mounted with the `pquota` mount option.
-  Under these conditions, user can pass any size less then the backing fs size.
-
-  ### Specify isolation technology for container (--isolation)
-
-  This option is useful in situations where you are running Docker containers on
-  Windows. The `--isolation=<value>` option sets a container's isolation
-  technology. On Linux, the only supported is the `default` option which uses
-  Linux namespaces. On Microsoft Windows, you can specify these values:
-
-
-  | Value     | Description                                                                                                                                                   |
-  |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-  | `default` | Use the value specified by the Docker daemon's `--exec-opt` . If the `daemon` does not specify an isolation technology, Microsoft Windows uses `process` as its default value if the
-  daemon is running on Windows server, or `hyperv` if running on Windows client.  |
-  | `process` | Namespace isolation only.                                                                                                                                     |
-  | `hyperv`   | Hyper-V hypervisor partition-based isolation.                                                                                                                  |
-
-  Specifying the `--isolation` flag without a value is the same as setting `--isolation="default"`.
 
