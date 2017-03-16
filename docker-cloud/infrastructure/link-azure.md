@@ -22,11 +22,11 @@ You'll see the following screen:
 
 First, click **Download management certificate** to download the public certificate generated for your Docker Cloud account.
 
-Then, in another tab go to the Azure Portal at [https://manage.windowsazure.com/](https://manage.windowsazure.com/)
+Then, in another tab go to the Azure Portal at [https://manage.windowsazure.com/](https://manage.windowsazure.com/).
 
 > **Note**: At this time, you must use the old Azure portal to upload management certificates.
 
-Scroll to the bottom of the left navigation bar and click **Settings**.  In the page that loads, click the **Management certificates** tab, then click **Upload** near the bottom of the screen:
+Scroll to the bottom of the left navigation bar and click **Settings**. In the page that loads, click the **Management certificates** tab, then click **Upload** near the bottom of the screen:
 
 ![](images/azure-portal-subscriptions.png)
 
