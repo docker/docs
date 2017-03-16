@@ -1,7 +1,7 @@
 command: docker service ps
-short: List the tasks of one or more services
-long: List the tasks of one or more services
-usage: docker service ps [OPTIONS] SERVICE [SERVICE...]
+short: List the tasks of a service
+long: List the tasks of a service
+usage: docker service ps [OPTIONS] SERVICE
 pname: docker service
 plink: docker_service.yaml
 options:

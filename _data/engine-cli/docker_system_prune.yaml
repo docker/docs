@@ -9,8 +9,6 @@ options:
   shorthand: a
   default_value: "false"
   description: Remove all unused images not just dangling ones
-- option: filter
-  description: Provide filter values (e.g. 'until=<timestamp>')
 - option: force
   shorthand: f
   default_value: "false"
