@@ -49,9 +49,6 @@ cannot be adopted as quickly for consistency and compatibility reasons.
 ### Swarm Mode
 
 * Shutdown leaks an error when the container was never started [#31279](https://github.com/docker/docker/pull/31279)
-
-### Swarm Mode
-
 * Fix possibility of tasks getting stuck in the "NEW" state during a leader failover [docker/swarmkit#1938](https://github.com/docker/swarmkit/pull/1938)
 * Fix extraneous task creations for global services that led to confusing replica counts in `docker service ls` [docker/swarmkit#1957](https://github.com/docker/swarmkit/pull/1957)
 * Fix problem that made rolling updates slow when `task-history-limit` was set to 1 [docker/swarmkit#1948](https://github.com/docker/swarmkit/pull/1948)
