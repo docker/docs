@@ -19,4 +19,5 @@ wrappedNode(label: 'linux && x86_64') {
   sh "docker run --rm --volumes-from docs-${JOB_BASE_NAME}-${BUILD_NUMBER} -v `pwd`:/docs tests:${JOB_BASE_NAME}-${BUILD_NUMBER}"
   sh "docker rm -fv docs-${JOB_BASE_NAME}-${BUILD_NUMBER}"
   sh "docker rmi docs:${JOB_BASE_NAME}-${BUILD_NUMBER} tests:${JOB_BASE_NAME}-${BUILD_NUMBER}"
+  deleteDir()
 }
