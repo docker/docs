@@ -13,6 +13,26 @@ known issues for each DTR version.
 You can then use [the upgrade instructions](install/upgrade.md),
 to upgrade your installation to the latest release.
 
+## DTR 2.1.5
+
+(17 March 2017)
+
+**Bug fixes**
+
+* Fix memory leaks in the DTR API and Registry containers. Severity: high
+* Fixed an issue causing RethinkDB to not start due to DNS errors when
+the RethinkDB containers were not restarted at the same time. Severity: high
+* The UI seemed to load indefinitely when viewing V1 manifests that didn't
+include a 'size' property. To fix this, manifests without this field are no
+longer displayed to the user. Severity: medium
+* If you're using NFS as a storage backend, DTR had a chance of hanging when
+reconfiguring or upgrading. This has now been fixed. Severity: medium
+* When `--dtr-external-url` was set with uppercase letters, users would not be
+able to log into DTR. This is now fixed. Severity: low
+* The Users page was always showing a form to create new users. Now this form
+only shows after clicking the 'New user' button. Severity: low
+
+
 ## DTR 2.1.4
 
 (17 Jan 2017)
