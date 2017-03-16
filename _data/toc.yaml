@@ -1195,9 +1195,9 @@ manuals:
         - path: /datacenter/ucp/2.1/guides/admin/configure/restrict-services-to-worker-nodes/
           title: Restrict services to worker nodes
         - path: /datacenter/ucp/2.1/guides/admin/configure/use-domain-names-to-access-services/
-          title: Run only the images you trust
-        - path: /datacenter/ucp/2.1/guides/admin/configure/run-only-the-images-you-trust/
           title: Use domain names to access services
+        - path: /datacenter/ucp/2.1/guides/admin/configure/run-only-the-images-you-trust/
+          title: Run only the images you trust
         - path: /datacenter/ucp/2.1/guides/admin/configure/external-auth/
           title: Integrate with LDAP
       - sectiontitle: Manage users
