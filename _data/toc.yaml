@@ -74,6 +74,8 @@ guides:
       title: Why Docker for Azure?
     - path: /docker-for-azure/
       title: Setup & Prerequisites
+    - path: /docker-for-azure/deploy/
+      title: Deploy applications
     - path: /docker-for-azure/upgrade/
       title: Upgrading
     - path: /docker-for-azure/deploy/
