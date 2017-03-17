@@ -139,5 +139,15 @@ force the previous change to be overwritten.
 
 ## How do I update vendor package from upstream ?
 
-You will need the [vndr](https://github.com/LK4D4/vndr) vendoring tool. If you use the development container this is already preinstalled.
-For example to update `github.com/gorilla/mux`. Edit the package version in  vendor.conf  located in the docker source root folder and run `vndr github.com/gorilla/mux`
+1.  If you are not using the development container, download the
+    [vndr](https://github.com/LK4D4/vndr) vendoring tool. The `vndr`
+    tool is included in the development container.
+    
+2.  Edit the package version in `vendor.conf` to use the package you want to use, such as
+    `github.com/gorilla/mux`.
+    
+3.  Run `vndr <package-name>`. For example:
+
+    ```bash
+    vndr github.com/gorilla/mux
+    ```
