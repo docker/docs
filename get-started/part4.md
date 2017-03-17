@@ -26,7 +26,63 @@ concept of a "host" changes from a single virtual or physical machine, to a
 swarm. And, "a single virtual or physical machine" is not referred to as a host,
 it's called a node -- or, a computing resource inside your cluster.
 
-## Before we get started: signup and configuration
+{% capture local-instructions %}
+We now have two VMs created, named `myvm1` and `myvm2`. These
+machines are running boot2docker, a light-weight Linux distribution, as an
+operating system.
+
+Finally, you'll assemble these machines into a swarm. The first one will act as
+the manager, which executes `docker` commands and authenticates workers to join
+the swarm, and the second VM will act as a worker.
+
+You can send a single command to one of your VMs using `docker-machine ssh`. In
+this case, we're telling `myvm1` to become a swarm manager with
+`docker swarm init`:
+
+```node
+$ docker-machine ssh myvm1 "docker swarm init"
+Swarm initialized: current node <node ID> is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+  docker swarm join \
+  --token <token> \
+  <ip>:<port>
+```
+
+As you can see, the response to `docker swarm init` contains a pre-configured
+`docker swarm join` command for you to run on any nodes you want to add. This
+command will join `myvm2` to your new swarm as a worker. Copy this command,
+and send it to `myvm2`:
+
+```
+$ docker-machine ssh myvm2 "docker swarm join \
+--token <token> \
+<ip>:<port>"
+
+This node joined a swarm as a worker.
+```
+
+> **Note**: You can also run `docker-machine ssh myvm2` with no command attached
+to open a terminal session on that VM. Type `exit` when you're ready to return
+to the host shell prompt.
+
+Congratulations, you created your first swarm!
+
+Here are some commands you might like to run to interact with your swarm a bit:
+
+```
+docker-machine ssh myvm1 "docker node ls" # list the nodes in your swarm
+docker-machine ssh myvm1 "docker node inspect <node ID>" # inspect a node
+docker-machine ssh myvm1 "docker swarm join-token -q worker" # view join token
+docker-machine ssh myvm2 "docker swarm leave" # make the worker leave the swarm
+docker-machine stop $(docker-machine ls -q) # stop all running VMs
+docker-machine rm $(docker-machine ls -q) # destroy all VMs
+```
+{% endcapture %}
+
+{% capture aws %}
+#### Amazon Web Services with Docker Cloud
 
 The easiest way to demonstrate all this is to use Docker Cloud, which manages
 clusters that you run on popular cloud providers, like Heroku, Amazon Web
@@ -108,6 +164,56 @@ into a swarm.
 5.  Now, click **Services** in the left navigation, then the **Create** button,
     then the **globe icon**.
 6.  Search Docker Hub for the image you uploaded
+{% endcapture %}
 
+{% capture local %}
+#### VMs running on your local machine (Mac, Linux, Windows 7 and 8)
+
+(Virtualbox stuff)
+
+{{ local-instructions | markdownify }}
+{% endcapture %}
+
+{% capture localwin %}
+#### VMs running on your local machine (Windows)
+
+Set up a virtual switch for your VMs to use, so they will be able to connect
+to each other.
+
+1. Launch Hyper-V Manager
+2. Click **Virtual Switch Manager** in the right-hand menu
+3. Click **Create Virtual Switch** of type **External**
+4. Give it the name `myswitch`, and check the box to share your host machine's
+   active network adapter
+
+Now, create a couple of virtual machines using our node management tool,
+`docker-machine`:
+
+```none
+$ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1
+$ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
+```
+
+{{ local-instructions | markdownify}}
+{% endcapture %}
+
+## Set up your swarm
+
+A swarm is made up of multiple nodes, which can be either physical or virtual
+machines. The basic concept is simple enough: run `docker swarm init` to make
+your current machine a manager node, and run `docker swarm join` on other
+machines to have them join the swarm as a worker. Choose a tab below to see how
+this plays out in various contexts.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#aws">Amazon Web Services</a></li>
+  <li><a data-toggle="tab" href="#local">Local VMs (Mac, Linux, Windows 7 and 8)</a></li>
+  <li><a data-toggle="tab" href="#localwin">Local VMs (Windows 10/Hyper-V)</a></li>
+</ul>
+<div class="tab-content">
+  <div id="aws" class="tab-pane fade active in">{{ aws | markdownify }}</div>
+  <div id="local" class="tab-pane fade">{{ local | markdownify }}</div>
+  <div id="localwin" class="tab-pane fade">{{ localwin | markdownify }}</div>
+</div>
 
 [On to next >>](part5.md){: class="button darkblue-btn"}
