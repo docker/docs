@@ -240,6 +240,25 @@ no_ratings: true
 ---
 ```
 
+### Creating tabs
+
+The use of tabs, as on pages like https://docs.docker.com/engine/api/, requires
+the use of HTML. The tabs use Bootstrap CSS/JS, so refer to those docs for more
+advanced usage. For a basic horizontal tab set, copy/paste starting from this 
+basic code and implement from there. Keep an eye on those `#id` references as
+you go. 
+
+```
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#tab1">TAB 1 HEADER</a></li>
+  <li><a data-toggle="tab" href="#tab2">TAB 2 HEADER</a></li>
+</ul>
+<div class="tab-content">
+  <div id="tab1" class="tab-pane fade in active">TAB 1 CONTENT</div>
+  <div id="tab2" class="tab-pane fade">TAB 2 CONTENT</div>
+</div>
+```
+
 ## Copyright and license
 
 Code and documentation copyright 2017 Docker, inc, released under the Apache 2.0 license.
