@@ -17,6 +17,47 @@ upgrade your installation to the latest release.
 
 (14 Mar 2017)
 
+**Known issues**
+
+If you are currently running UCP 2.1.0 and previously customized the sessions
+lifetime parameter in the Authentication settings UI, upgrading to UCP 2.1.1 may
+cause users to not be able to log into UCP and DTR. This is caused by a faulty
+default value which sets maximum concurrent user sessions to zero.
+
+You can either wait for UCP 2.1.2 to be released so that the problem is
+automatically fixed, or upgrade to 2.1.1, and use the following steps to fix
+the problem.
+
+Star by getting the current configuration for user sessions by running:
+
+```bash
+curl -u admin "https://$UCP_HOST/enzi/v0/config/sessions"
+```
+
+The command will prompt for the `admin` user's password and then return
+the current sessions config which should look something like:
+
+```json
+{
+  "lifetimeHours": 72,
+  "renewalThresholdHours": 24,
+  "perUserLimit": 0
+}
+```
+
+If `perUserLimit` is set to `0`, you need to set it to a value between 1 and 100.
+The recommended value is 5. You should also customize the command below with
+the `lifetimeHours` and `perUserLimit` values returned by the first command.
+
+```bash
+curl -u admin "https://$UCP_HOST/enzi/v0/config/sessions" \
+  -X PUT \
+  -H 'Content-Type: application/json' \
+  -d '{"lifetimeHours": 72, "renewalThresholdHours": 24, "perUserLimit": 5}'
+```
+
+You'll now be able to log into UCP and DTR.
+
 **New features**
 
 * Core
