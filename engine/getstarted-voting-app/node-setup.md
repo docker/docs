@@ -32,7 +32,9 @@ using the Toolbox installer because it can
 here](https://www.virtualbox.org/wiki/Downloads), and follow install
 instructions. You do not need to start VirtualBox. The `docker-machine create`
 command will call it via the driver.
+
 <p />
+
 * **Hyper-V driver on Docker for Windows** - On [Docker for Windows](docker-for-windows/index.md), you
 will use `docker-machine` with the [`Hyper-V`](/machine/drivers/hyper-v/) driver
 to create machines. You will need to follow the instructions in the [Hyper-V
@@ -42,6 +44,7 @@ external network switch (a one-time task), reboot, and then
 in an elevated PowerShell per those instructions.
 
 <p />
+
 * **Docker Toolbox and VirtualBox driver on Windows 7 or 8** - Docker for Windows requires Windows 10 Pro (see system requirements [What to know before
 you  install](/docker-for-windows/install.md#what-to-know-before-you-install)).
 If your system is running an earlier version of Windows, you can run Docker by
