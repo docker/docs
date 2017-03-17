@@ -27,17 +27,13 @@ swarm. And, "a single virtual or physical machine" is not referred to as a host,
 it's called a node -- or, a computing resource inside your cluster.
 
 {% capture local-instructions %}
-We now have two VMs created, named `myvm1` and `myvm2`. These
-machines are running boot2docker, a light-weight Linux distribution, as an
-operating system.
+We now have two VMs created, named `myvm1` and `myvm2`. The first one will act
+as the manager, which executes `docker` commands and authenticates workers to
+join the swarm, and the second will be a worker.
 
-Finally, you'll assemble these machines into a swarm. The first one will act as
-the manager, which executes `docker` commands and authenticates workers to join
-the swarm, and the second VM will act as a worker.
-
-You can send a single command to one of your VMs using `docker-machine ssh`. In
-this case, we're telling `myvm1` to become a swarm manager with
-`docker swarm init`:
+You can send commands to your VMs using `docker-machine ssh`. Instruct `myvm1`
+to become a swarm manager with `docker swarm init` and you'll see output like
+this:
 
 ```node
 $ docker-machine ssh myvm1 "docker swarm init"
@@ -50,10 +46,19 @@ To add a worker to this swarm, run the following command:
   <ip>:<port>
 ```
 
+> **Note**: Getting an error about needing to use `--advertise-addr`? Copy the
+> IP address for `myvm1` by running `docker-machine ls`, then, run
+> `docker swarm join` command again, using the IP and specifying port `2377` for
+> `--advertise-addr`. For example:
+>
+> `docker-machine ssh myvm1 "docker swarm join --advertise-addr 192.168.99.100:2377"`
+>
+>
+
 As you can see, the response to `docker swarm init` contains a pre-configured
-`docker swarm join` command for you to run on any nodes you want to add. This
-command will join `myvm2` to your new swarm as a worker. Copy this command,
-and send it to `myvm2`:
+`docker swarm join` command for you to run on any nodes you want to add. Copy
+this command, and send it to `myvm2` via `docker-machine ssh` to have `myvm2`
+join your new swarm as a worker:
 
 ```
 $ docker-machine ssh myvm2 "docker swarm join \
@@ -72,113 +77,42 @@ Congratulations, you created your first swarm!
 Here are some commands you might like to run to interact with your swarm a bit:
 
 ```
-docker-machine ssh myvm1 "docker node ls" # list the nodes in your swarm
-docker-machine ssh myvm1 "docker node inspect <node ID>" # inspect a node
-docker-machine ssh myvm1 "docker swarm join-token -q worker" # view join token
-docker-machine ssh myvm2 "docker swarm leave" # make the worker leave the swarm
-docker-machine stop $(docker-machine ls -q) # stop all running VMs
-docker-machine rm $(docker-machine ls -q) # destroy all VMs
+docker-machine env myvm1                # View basic information about your node
+docker-machine ssh myvm1 "docker node ls"         # List the nodes in your swarm
+docker-machine ssh myvm1 "docker node inspect <node ID>"        # Inspect a node
+docker-machine ssh myvm1 "docker swarm join-token -q worker"   # View join token
+docker-machine ssh myvm1   # Open an SSH session with the VM; type "exit" to end
+docker-machine ssh myvm2 "docker swarm leave"  # Make the worker leave the swarm
+docker-machine stop $(docker-machine ls -q)               # Stop all running VMs
+docker-machine rm $(docker-machine ls -q) # Delete all VMs and their disk images
 ```
 {% endcapture %}
 
-{% capture aws %}
-#### Amazon Web Services with Docker Cloud
-
-The easiest way to demonstrate all this is to use Docker Cloud, which manages
-clusters that you run on popular cloud providers, like Heroku, Amazon Web
-Services (AWS), and so on. Because AWS has a free tier of service, which lets
-you provision low-resource virtual machines for free, we're going to use that
-to learn these concepts. We're also not going to be using any of Docker Cloud's
-paid features, so let's dive in and deploy something!
-
-### Sign up for AWS, and configure it
-
-All we have to do to let Docker Cloud manage nodes for us on free-tier AWS is
-create a service policy that grants certain permissions, and apply that to an
-identity called a "role," using AWS's Identity and Access Management (IAM) tool.
-
--   Go to [aws.amazon.com](https://aws.amazon.com) and sign up for an account. It's free.
--   Go to [the IAM panel](https://console.aws.amazon.com/iam/home#policies)
--   Click **Create Policy**, then **Create Your Own Policy**.
--   Name the policy `dockercloud-policy` and paste the following text in the
-    space provided for **Policy Document**, then click **Create Policy**.
-
-    ```json
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Action": [
-            "ec2:*",
-            "iam:ListInstanceProfiles"
-          ],
-          "Effect": "Allow",
-          "Resource": "*"
-        }
-      ]
-    }
-    ```
--   Now [create a role](https://console.aws.amazon.com/iam/home#roles) with a name
-    of your choice.
--   Select **Role for Cross-Account Access**, and in the submenu that opens select **Allows IAM users from a 3rd party AWS account to access this account**.
--   In the **Account ID** field, enter the ID for the Docker Cloud service: `689684103426`.
--   In the **External ID** field, enter your Docker Cloud username.
--   On the next screen, select the `dockercloud-policy` you created to attach to the role.
--   On next page review your entries and copy the full **Role ARN** string. The
-    ARN string should look something like `arn:aws:iam::123456789123:role/dockercloud-role`. You'll use the ARN in the next step.
--   Finally, click **Create Role**.
-
-And you've done it! Your AWS account will allow Docker Cloud to control
-virtual machines, if we configure Docker Cloud to use the role you've created.
-So, let's do that now.
-
-> Note: If you had any trouble along the way, there are more detailed
-  [instructions in the Docker Cloud docs](/docker-cloud/infrastructure/link-aws.md).
-  If you'd like to use a cloud provider besides AWS, check out
-  [the list](/docker-cloud/infrastructure/index.md). We're just using AWS here
-  because you don't have to pay.
-
-### Configure Docker Cloud to manage to your AWS instances
-
-- Go to [cloud.docker.com](http://cloud.docker.com) and sign in with the
-  same Docker ID you used in [part 2](/getting-started/part2.md).
-- Click **Settings**, and in the Cloud Providers section, click the plug icon.
-- Enter the Role ARN string you copied earlier, e.g. `arn:aws:iam::123456789123:role/dockercloud-role`.
-- Click **Save**.
-
-And now, Docker Cloud can create and manage instances for you, and turn them
-into a swarm.
-
-## Creating your first Swarm cluster
-
-1.  Go back to Docker Cloud by visiting [cloud.docker.com](https://cloud.docker.com).
-2.  Click **Node Clusters** in the left navigation, then click the **Create** button.
-    This pulls up a form where you can create our cluster.
-3.  Leave everything default, except:
-    - Name: Give your cluster a name
-    - Region: Select a region that's close to you
-    - Provider: Set to "Amazon Web Services"
-    - Type/Size: Select the `t2.nano` option as that is free-tier
-4.  Launch the cluster by clicking **Launch node cluster**; this will spin
-    up a free-tier Amazon instance.
-5.  Now, click **Services** in the left navigation, then the **Create** button,
-    then the **globe icon**.
-6.  Search Docker Hub for the image you uploaded
-{% endcapture %}
-
 {% capture local %}
-#### VMs running on your local machine (Mac, Linux, Windows 7 and 8)
+#### VMs on your local machine (Mac, Linux, Windows 7 and 8)
 
-(Virtualbox stuff)
+First, you'll need a hypervisor that can create VMs, so [install
+VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your machine's OS.
+
+> **Note**: If you're on a Windows system that has Hyper-V installed, such as
+Windows 10, there is no need for this step and you should use Hyper-V instead.
+View the instructions for Hyper-V systems by clicking the Hyper-V tab above.
+
+Now, create a couple of VMs using `docker-machine`, using the VirtualBox driver:
+
+```none
+$ docker-machine create --driver virtualbox myvm1
+$ docker-machine create --driver virtualbox myvm2
+```
 
 {{ local-instructions | markdownify }}
 {% endcapture %}
 
 {% capture localwin %}
-#### VMs running on your local machine (Windows)
+#### VMs on your local machine (Windows 10)
 
-Set up a virtual switch for your VMs to use, so they will be able to connect
-to each other.
+First, quickly create a virtual switch for your VMs to share, so they will be
+able to connect to each other.
 
 1. Launch Hyper-V Manager
 2. Click **Virtual Switch Manager** in the right-hand menu
@@ -206,13 +140,11 @@ machines to have them join the swarm as a worker. Choose a tab below to see how
 this plays out in various contexts.
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#aws">Amazon Web Services</a></li>
-  <li><a data-toggle="tab" href="#local">Local VMs (Mac, Linux, Windows 7 and 8)</a></li>
+  <li class="active"><a data-toggle="tab" href="#local">Local VMs (Mac, Linux, Windows 7 and 8)</a></li>
   <li><a data-toggle="tab" href="#localwin">Local VMs (Windows 10/Hyper-V)</a></li>
 </ul>
 <div class="tab-content">
-  <div id="aws" class="tab-pane fade active in">{{ aws | markdownify }}</div>
-  <div id="local" class="tab-pane fade">{{ local | markdownify }}</div>
+  <div id="local" class="tab-pane fade in active">{{ local | markdownify }}</div>
   <div id="localwin" class="tab-pane fade">{{ localwin | markdownify }}</div>
 </div>
 

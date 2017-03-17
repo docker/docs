@@ -48,8 +48,6 @@ platform -- just write a `docker-compose.yml` file.
 A `docker-compose.yml` file is a YAML markup file thatdefines how Docker
 containers should behave in production.
 
-Save this `docker-compose.yml` file:
-
 ### `docker-compose.yml`
 
 Save this file as `docker-compose.yml` wherever you want. Be sure you have
@@ -92,7 +90,8 @@ This `docker-compose.yml` file tells Docker to do the following:
 
 ## Run your new load-balanced app
 
-Now let's run it:
+Now let's run it. You have to give our app a name; here it is set to
+`getstartedlab` :
 
 ```
 docker stack deploy -c docker-compose.yml getstartedlab
@@ -104,13 +103,14 @@ See a list of the five containers you just launched:
 docker stack ps getstartedlab
 ```
 
-You can run `curl http://localhost` several times in a row, or go to that URL
-in your browser and hit refresh a few times. Either way, you'll see the
-container ID randomly change, demonstrating the load-balancing.
+You can run `curl http://localhost` several times in a row, or go to that URL in
+your browser and hit refresh a few times. Either way, you'll see the container
+ID randomly change, demonstrating the load-balancing; with each request, one of
+the five replicas is chosen at random to respond.
 
 ## Scale the app
 
-You can scale this by changing the `replicas` value in `docker-compose.yml`,
+You can scale the app by changing the `replicas` value in `docker-compose.yml`,
 saving the change, and re-running the `docker stack deploy` command:
 
 ```
@@ -118,9 +118,7 @@ docker stack deploy -c docker-compose.yml getstartedlab
 ```
 
 Docker will do an in-place update, no need to tear the stack down first or kill
-any containers. The redeployed containers will all use the service configuration
-and load-balance, stay within their resource limits, and restart in the event of
-a failure.
+any containers.
 
 ### Take down the app
 
@@ -130,23 +128,33 @@ Take the app down with `docker stack rm`:
 docker stack rm getstartedlab
 ```
 
-It's as easy as that to stand up and scale your app with Docker. But we're still
-only running on one node, and still only running one image. Still, you've taken
-a huge step.
+It's as easy as that to stand up and scale your app with Docker. You've taken
+a huge step towards learning how to run containers in production. Up next,
+you will learn how to run this app on a cluster of machines.
 
-> Note: Compose files like this are actually how applications are defined with
-Docker, and can be uploaded to run your app on cloud providers using [Docker
-Cloud](/docker-cloud/), or on any hardware or cloud provider you choose with our
-Docker-platform-in-a-box, [Datacenter](/datacenter/), featuring Docker
+> Note: Compose files like this are used to define applications with Docker, and
+can be uploaded to cloud providers using [Docker Cloud](/docker-cloud/), or on
+any hardware or cloud provider you choose with our Docker-platform-in-a-box,
+[Datacenter](https://www.docker.com/enterprise-edition), featuring Docker
 Enterprise Edition.
+
+[On to "Part 4" >>](part4.md){: class="button outline-btn"}
 
 ## Recap and cheat sheet (optional)
 
-To recap, while running `docker run` is simple enough, the true implementation
+To recap, while typing `docker run` is simple enough, the true implementation
 of a container in production is running it as a service. Services codify a
 container's behavior in a Compose file, and this file can be used to scale,
 limit, and redeploy our app. Changes to the service can be applied in place, as
 it runs, using the same command that launched the service:
 `docker stack deploy`.
 
-[On to "Part 4" >>](part4.md){: class="button outline-btn"}
+Some commands to explore at this stage:
+
+```
+docker stack ls              # List all running applications on this Docker host
+docker stack deploy -c <composefile> <appname>  # Run the specified Compose file
+docker stack services <appname>       # List the services associated with an app
+docker stack ps <appname>   # List the running containers associated with an app
+docker stack rm <appname>                             # Tear down an application
+```
