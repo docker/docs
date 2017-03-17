@@ -19,8 +19,8 @@ Docker Engine.
 
 If you haven't yet downloaded Docker or installed it, go to [Get
 Docker](/engine/getstarted/step_one.md#step-1-get-docker) and grab Docker for
-your platform.  You can follow along and run this example using [Docker for Mac](/docker-for-mac/index.md),
-[Docker for Windows](/docker-for-windows/index.md), or [Docker for Linux](/installation/linux/index.md).
+your platform.  You can follow along and run this example using [Docker for Mac](/docker-for-mac/install.md),
+[Docker for Windows](/docker-for-windows/install.md), [Docker Toolbox](/toolbox/overview.md), or [Docker for Linux](/installation/linux/index.md).
 
 If you are totally new to Docker, you might want to work through the [Get
 Started with Docker tutorial](/engine/getstarted/index.md) first, then come
