@@ -54,7 +54,7 @@ $ ip addr show bridge0
 
 # Tell Docker about it and restart (on Ubuntu)
 
-$ echo 'DOCKER_OPTS="-b=bridge0"' >> /etc/default/docker
+$ echo 'DOCKER_OPTS="--bridge=bridge0"' >> /etc/default/docker
 
 $ sudo service docker start
 
