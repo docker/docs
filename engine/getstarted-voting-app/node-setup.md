@@ -40,15 +40,14 @@ example](/machine/drivers/hyper-v#example) reference topic to set up a new
 external network switch (a one-time task), reboot, and then
 [create the machines (nodes)](/machine/drivers/hyper-v.md#create-the-nodes-with-docker-machine-and-the-microsoft-hyper-v-driver)
 in an elevated PowerShell per those instructions.
-<p />
-* **Docker Toolbox and VirtualBox driver on Windows 7 or 8** - Docker for Windows requires Windows 10 Pro (see system requirements [What to know
-before you
-install](/docker-for-windows/install.md#what-to-know-before-you-install)). If
-your system is running an earlier version of Windows, you can run Docker by
-installing [Docker Toolbox](/toolbox/toolbox_install_windows.md), which includes
-`docker-machine` and Oracle VirtualBox. You'll use the `virtualbox` driver
-to create machines.
 
+<p />
+* **Docker Toolbox and VirtualBox driver on Windows 7 or 8** - Docker for Windows requires Windows 10 Pro (see system requirements [What to know before
+you  install](/docker-for-windows/install.md#what-to-know-before-you-install)).
+If your system is running an earlier version of Windows, you can run Docker by
+installing [Docker Toolbox](/toolbox/toolbox_install_windows.md), which includes
+`docker-machine` and Oracle VirtualBox. You'll use the `virtualbox` driver to
+create machines.
 
 ### Commands to create machines
 
@@ -63,12 +62,13 @@ docker-machine create --driver virtualbox MACHINE-NAME
 
 #### Windows (Running Docker for Windows)
 
+This must be done in an elevated PowerShell, using a custom-created external
+network switch. See [Hyper-V example](/machine/drivers/hyper-v#example).
+
 ```none
 docker-machine create -d hyperv --hyperv-virtual-switch "NETWORK-SWITCH"
 MACHINE-NAME
 ```
-
-This must be done in an elevated PowerShell, using a custom-created external network switch. See [Hyper-V example](/machine/drivers/hyper-v#example).
 
 #### Windows 7 or 8 (Running Docker Toolbox)
 
@@ -78,13 +78,15 @@ docker-machine create --driver virtualbox MACHINE-NAME
 
 ## Create manager and worker machines
 
-Create two machines and name them to anticipate what their roles will be in the swarm:
+Create two machines and name them to anticipate what their roles will be in the
+swarm:
 
 * manager
 
 * worker
 
-Here is an example of creating the `manager` on Docker for Mac. Create this one, then do the same for `worker`.
+Here is an example of creating the `manager` on Docker for Mac. Create this one,
+then do the same for `worker`.
 
 ```none
 $  docker-machine create --driver virtualbox manager
