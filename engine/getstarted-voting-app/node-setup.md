@@ -16,11 +16,12 @@ run some basic commands to interact with the machines.
 
 * **Docker Machine** - These steps rely on use of
 [Docker Machine](/machine/get-started.md) (`docker-machine`), which
-comes auto-installed with both Docker for Mac and Docker for Windows.
+comes auto-installed with both Docker for Mac and Docker for Windows. It is also
+available with [Docker Toolbox](/toolbox/overview.md), a good solution especially for earlier Windows operating systems, as described below.
 
 <p />
 
-* **VirtualBox driver on Docker for Mac** - On Docker for Mac, you'll
+* **VirtualBox driver on Docker for Mac** - On [Docker for Mac](docker-for-mac/index.md), you'll
 use `docker-machine` with the `virtualbox` driver to create machines. If you had
 a legacy installation of Docker Toolbox, you already have Oracle VirtualBox
 installed as part of that. If you started fresh with Docker for Mac, then you
@@ -32,13 +33,22 @@ here](https://www.virtualbox.org/wiki/Downloads), and follow install
 instructions. You do not need to start VirtualBox. The `docker-machine create`
 command will call it via the driver.
 <p />
-* **Hyper-V driver on Docker for Windows** - On Docker for Windows, you
+* **Hyper-V driver on Docker for Windows** - On [Docker for Windows](docker-for-windows/index.md), you
 will use `docker-machine` with the [`Hyper-V`](/machine/drivers/hyper-v/) driver
 to create machines. You will need to follow the instructions in the [Hyper-V
 example](/machine/drivers/hyper-v#example) reference topic to set up a new
 external network switch (a one-time task), reboot, and then
 [create the machines (nodes)](/machine/drivers/hyper-v.md#create-the-nodes-with-docker-machine-and-the-microsoft-hyper-v-driver)
 in an elevated PowerShell per those instructions.
+<p />
+* **Docker Toolbox and VirtualBox driver on Windows 7 or 8** - Docker for Windows requires Windows 10 Pro (see system requirements [What to know
+before you
+install](/docker-for-windows/install.md#what-to-know-before-you-install)). If
+your system is running an earlier version of Windows, you can run Docker by
+installing [Docker Toolbox](/toolbox/toolbox_install_windows.md), which includes
+`docker-machine` and Oracle VirtualBox. You'll use the `virtualbox` driver
+to create machines.
+
 
 ### Commands to create machines
 
@@ -51,7 +61,7 @@ are as follows.
 docker-machine create --driver virtualbox MACHINE-NAME
 ```
 
-#### Windows
+#### Windows (Running Docker for Windows)
 
 ```none
 docker-machine create -d hyperv --hyperv-virtual-switch "NETWORK-SWITCH"
@@ -59,6 +69,12 @@ MACHINE-NAME
 ```
 
 This must be done in an elevated PowerShell, using a custom-created external network switch. See [Hyper-V example](/machine/drivers/hyper-v#example).
+
+#### Windows 7 or 8 (Running Docker Toolbox)
+
+```none
+docker-machine create --driver virtualbox MACHINE-NAME
+```
 
 ## Create manager and worker machines
 
