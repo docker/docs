@@ -45,6 +45,16 @@ Some Lorem ipsum text with formatting and styling.
 
 **Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt** ut labore `et dolore magna aliqua`. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo _consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore_ eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt _**in culpa quiofficia deserunt mollit anim id est laborum.**_
 
+And here are some tabs: 
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#tab1">TAB 1 HEADER</a></li>
+  <li><a data-toggle="tab" href="#tab2">TAB 2 HEADER</a></li>
+</ul>
+<div class="tab-content">
+  <div id="tab1" class="tab-pane fade in active">TAB 1 CONTENT</div>
+  <div id="tab2" class="tab-pane fade">TAB 2 CONTENT</div>
+</div>
 
 ### Heading 3
 
