@@ -245,8 +245,8 @@ no_ratings: true
 The use of tabs, as on pages like https://docs.docker.com/engine/api/, requires
 the use of HTML. The tabs use Bootstrap CSS/JS, so refer to those docs for more
 advanced usage. For a basic horizontal tab set, copy/paste starting from this 
-basic code and implement from there. Keep an eye on those `#id` references as
-you go. 
+code and implement from there. Keep an eye on those `href="#id"` and `id="id"`
+references as you rename, add, and remove tabs.
 
 ```
 <ul class="nav nav-tabs">
