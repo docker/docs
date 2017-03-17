@@ -12,7 +12,7 @@ to deploy **nodes** using Docker Cloud's
 Dashboard, API, or CLI. Docker Cloud uses your SoftLayer username and API key to interact with SoftLayer on your behalf to create and manage your **nodes** (virtual servers).
 
 Although any SoftLayer account with the right privileges will work, we
-recommend creating a new **dockercloud-user** user. If you have already created a service user, or do not wish to do so, continue to [Add SoftLayer Account Credentials](link-softlayer.md#add-softlayer-account-credentials)
+recommend creating a new **dockercloud-user** user. If you have already created a service user, or do not wish to do so, continue to [Add SoftLayer Account Credentials](link-softlayer.md#add-softlayer-account-credentials).
 
 ### Create dockercloud-user in SoftLayer
 
