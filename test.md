@@ -45,7 +45,7 @@ Some Lorem ipsum text with formatting and styling.
 
 **Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt** ut labore `et dolore magna aliqua`. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo _consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore_ eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt _**in culpa quiofficia deserunt mollit anim id est laborum.**_
 
-And here are some tabs: 
+And here are some tabs:
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#tab1">TAB 1 HEADER</a></li>
@@ -406,3 +406,15 @@ authorizedkeys:
 > | Row 2 column 1 | Row 2 column 2 |
 >
 > And another sentence to top it all off.
+
+## Linking
+
+- [a normal link](https://docker.com/)
+
+- <a href="https://docker.com/">an HTML link</a>
+
+- A link to a Github PR in `docker/docker`: {% include github-pr.md pr=28199 %}
+
+- A link to a Github PR in `docker/docker.github.io`: {% include github-pr.md repo=docker.github.io pr=9999 %}
+
+(you can also specify `org=foo` to use a Github organization other than Docker). 
