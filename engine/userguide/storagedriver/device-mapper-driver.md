@@ -325,6 +325,10 @@ assumes that the Docker daemon is in the `stopped` state.
     There are two ways to do this. You can set options on the command line if
     you start the daemon there:
 
+    > **Note**: The deferred deletion option, `dm.use_deferred_deletion=true`, is not yet supported
+    > on CentOS, RHEL, or Ubuntu 14.04 when using the default kernel.  Support was added in the
+    > upstream kernel version 3.18.
+
     ```none
     --storage-driver=devicemapper \
     --storage-opt=dm.thinpooldev=/dev/mapper/docker-thinpool \
@@ -346,9 +350,6 @@ assumes that the Docker daemon is in the `stopped` state.
        ]
     }
     ```
-
-    > **Note**: Always set both `dm.use_deferred_removal=true` and `dm.use_deferred_deletion=true`
-    > to prevent unintentionally leaking mount points.
 
 15. If using systemd and modifying the daemon configuration via unit or drop-in file, reload systemd to scan for changes.
 
