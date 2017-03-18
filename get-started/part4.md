@@ -1,33 +1,66 @@
 ---
-title: "Getting Started, Part 4: Scaling Your App on a Cluster"
+title: "Getting Started, Part 4: Swarms"
 ---
 
-In [Getting Started, Part 3: Stateful, Multi-container Applications](part3.md),
-we figured out how to relate containers to each other. We organized an
-application into two simple services -- a frontend and a backend -- and defined
-how they are linked together.
+<ul class="pagination">
+  <li><a href="index.md">Part 1</a></li>
+  <li><a href="part2.md">Part 2</a></li>
+  <li><a href="part3.md">Part 3</a></li>
+  <li class="active"><a href="part4.md">Part 4</a></li>
+  <li><a href="part5.md">Part 5</a></li>
+  <li><a href="part6.md">Part 6</a></li>
+  <li><a href="part7.md">Part 7</a></li>
+</ul>
 
-In Part 4, we are going to take this application, which all ran on one **host**
-(a virtual or physical machine), and deploy it onto a cluster of hosts, just
-like we would in production.
+## Prerequisites
+
+- [Install Docker](/engine/installation/).
+- Read the orientation in [Part 1](index.md).
+- Learn how to create containers in [Part 2](part2.md).
+- Make sure you have pushed the container you created to a registry, as
+  instructed; we'll be using it here.
+- Ensure your image is working by
+  running this and visiting `http://localhost/` (slotting in your info for
+  `username`, `repo`, and `tag`):
+
+  ```
+  docker run -p 80:80 username/repo:tag
+  ```
+- Have a copy of your `docker-compose.yml` from [Part 3](part3.md) handy.
+
+## Introduction
+
+In [Part 3](part3.md), you took an app you wrote in part 2, and defined how it
+should run in production, scaling it up 5x.
+
+In Part 4, you deploy this application onto a cluster, running it on multiple
+machines, thus taking advantage of the extra capacity. 
 
 ## Understanding Swarm clusters
 
-Up until now you have been using Docker in a single-host mode on your local
-machine, which allows the client, which is the command-line interface (CLI), to
-make assumptions about how to operate. Namely, the client assumes that the
-Docker Daemon is running on the same host as the client. Single-host operations
-could also be done on remote machines with your client.
+A swarm is a group of machines that are running Docker and have been joined into
+a cluster. After that has happened, you continue to run the Docker commands
+you're used to, but now they are executed on a cluster by a **swarm manager**.
 
-But Docker also can be switched into "swarm mode." A swarm is a group of hosts
-that are running Docker and have been joined into a cluster. After that has
-happened, you continue to run the Docker commands you're used to, but now the
-concept of a "host" changes from a single virtual or physical machine, to a
-swarm. And, "a single virtual or physical machine" is not referred to as a host,
-it's called a node -- or, a computing resource inside your cluster.
+Swarm managers can use several strategies to run the containers you ask it to,
+such as "emptiest node" -- which fills the least utilized machines with
+containers. Or "global", which ensures that each machine gets exactly one
+instance of the specified container. You instruct the swarm manager to use these
+strategies in the Compose file, just like the one you have already been using.
+
+Swarm managers are the only machines in a swarm that can execute your commands,
+or authorize other machines to join the swarm as **workers**. Workers are just
+there to provide capacity and do not have the authority to tell any other
+machine what it can and can't do.
+
+Up until now you have been using Docker in a single-host mode on your local
+machine. But Docker also can be switched into **swarm mode**, and that's what
+enables the use of swarms. Enabling swarm mode instantly makes the current
+machine a swarm manager. From then on, Docker will run the commands you execute
+on the swarm that your machine manages, rather than just on itself.
 
 {% capture local-instructions %}
-We now have two VMs created, named `myvm1` and `myvm2`. The first one will act
+You now have two VMs created, named `myvm1` and `myvm2`. The first one will act
 as the manager, which executes `docker` commands and authenticates workers to
 join the swarm, and the second will be a worker.
 
@@ -47,13 +80,12 @@ To add a worker to this swarm, run the following command:
 ```
 
 > **Note**: Getting an error about needing to use `--advertise-addr`? Copy the
-> IP address for `myvm1` by running `docker-machine ls`, then, run
-> `docker swarm join` command again, using the IP and specifying port `2377` for
-> `--advertise-addr`. For example:
+> IP address for `myvm1` by running `docker-machine ls`, then run the
+> `docker swarm join` command again, using that IP and specifying port `2377`
+> (the port for swarm joins) with `--advertise-addr`. For example:
 >
 > `docker-machine ssh myvm1 "docker swarm join --advertise-addr 192.168.99.100:2377"`
->
->
+
 
 As you can see, the response to `docker swarm init` contains a pre-configured
 `docker swarm join` command for you to run on any nodes you want to add. Copy
@@ -68,24 +100,13 @@ $ docker-machine ssh myvm2 "docker swarm join \
 This node joined a swarm as a worker.
 ```
 
+Congratulations, you have created your first swarm.
+
 > **Note**: You can also run `docker-machine ssh myvm2` with no command attached
 to open a terminal session on that VM. Type `exit` when you're ready to return
-to the host shell prompt.
+to the host shell prompt. It may be easier to paste the join command in that
+way.
 
-Congratulations, you created your first swarm!
-
-Here are some commands you might like to run to interact with your swarm a bit:
-
-```
-docker-machine env myvm1                # View basic information about your node
-docker-machine ssh myvm1 "docker node ls"         # List the nodes in your swarm
-docker-machine ssh myvm1 "docker node inspect <node ID>"        # Inspect a node
-docker-machine ssh myvm1 "docker swarm join-token -q worker"   # View join token
-docker-machine ssh myvm1   # Open an SSH session with the VM; type "exit" to end
-docker-machine ssh myvm2 "docker swarm leave"  # Make the worker leave the swarm
-docker-machine stop $(docker-machine ls -q)               # Stop all running VMs
-docker-machine rm $(docker-machine ls -q) # Delete all VMs and their disk images
-```
 {% endcapture %}
 
 {% capture local %}
@@ -134,10 +155,10 @@ $ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
 ## Set up your swarm
 
 A swarm is made up of multiple nodes, which can be either physical or virtual
-machines. The basic concept is simple enough: run `docker swarm init` to make
-your current machine a manager node, and run `docker swarm join` on other
-machines to have them join the swarm as a worker. Choose a tab below to see how
-this plays out in various contexts.
+machines. The basic concept is simple enough: run `docker swarm init` to enable
+swarm mode and your current machine a manager, then run `docker swarm join`
+on other machines to have them join the swarm as a worker. Choose a tab below to
+see how this plays out in various contexts.
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#local">Local VMs (Mac, Linux, Windows 7 and 8)</a></li>
@@ -148,4 +169,78 @@ this plays out in various contexts.
   <div id="localwin" class="tab-pane fade">{{ localwin | markdownify }}</div>
 </div>
 
-[On to next >>](part5.md){: class="button darkblue-btn"}
+## Deploy your app on a cluster
+
+The hard part is over. Now you just repeat the process you used in [part
+3](part3.md) to deploy on your new swarm. Just remember that only swarm managers
+like `myvm1` execute Docker commands; workers are just for capacity.
+
+Copy the file `docker-compose.yml` you created in part 3 to the swarm manager
+`myvm1`'s home directory (alias: `~`) by using the `docker-machine scp` command:
+
+```
+docker-machine scp docker-compose.yml myvm1:~
+```
+
+Now have `myvm1` use its powers as a swarm manager to deploy your app, by sending
+the same `docker stack deploy` command you used in part 3 to `myvm1` using
+`docker-machine ssh`:
+
+```
+docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
+```
+
+And that's it, the app is deployed on a cluster.
+
+Wrap all the commands you used in part 3 in a call to `docker-machine ssh`, and
+they'll all work as you'd expect. Only this time, you'll see that the containers
+have been distributed between both `myvm1` and `myvm2`.
+
+```
+$ docker-machine ssh myvm1 "docker stack ps getstartedlab"
+
+ID            NAME        IMAGE              NODE   DESIRED STATE
+jq2g3qp8nzwx  test_web.1  username/repo:tag  myvm1  Running
+88wgshobzoxl  test_web.2  username/repo:tag  myvm2  Running
+vbb1qbkb0o2z  test_web.3  username/repo:tag  myvm2  Running
+ghii74p9budx  test_web.4  username/repo:tag  myvm1  Running
+0prmarhavs87  test_web.5  username/repo:tag  myvm2  Running
+```
+
+You can access your app from the IP address of either `myvm1` or `myvm2`. The
+network you created is shared between them and load-balancing. Run
+`docker-machine ls` to get your VMs' IP addresses and visit either of them on a
+browser, hitting refresh (or just `curl` them). You'll see five possible
+container IDs all cycling by randomly, demonstrating the load-balancing.
+
+From here you can do everything you learned about in part 3: scale the app by
+changing the `docker-compose.yml` file and running `docker stack deploy` again,
+tear down the stack with `docker stack rm`, etc. You can also join any machine,
+physical or virtual, to this swarm, using the same `docker swarm join` command
+you used on `myvm2`, and capacity will be added to your cluster.
+
+[On to next >>](part5.md){: class="button outline-btn"}
+
+## Recap and cheat sheet (optional)
+
+In part 4 you learned what a swarm is, how nodes in swarms can be managers or
+workers, created a swarm, and deployed an application on it. You saw that the
+core Docker commands didn't change from part 3, they just had to be targeted
+to run on a swarm master. You also saw the power of Docker's networking in
+action, which kept load-balancing requests across containers, even though they
+were running on different machines.
+
+Here are some commands you might like to run to interact with your swarm a bit:
+
+```
+docker-machine env myvm1                # View basic information about your node
+docker-machine ssh myvm1 "docker node ls"         # List the nodes in your swarm
+docker-machine ssh myvm1 "docker node inspect <node ID>"        # Inspect a node
+docker-machine ssh myvm1 "docker swarm join-token -q worker"   # View join token
+docker-machine ssh myvm1   # Open an SSH session with the VM; type "exit" to end
+docker-machine ssh myvm2 "docker swarm leave"  # Make the worker leave the swarm
+docker-machine stop $(docker-machine ls -q)               # Stop all running VMs
+docker-machine rm $(docker-machine ls -q) # Delete all VMs and their disk images
+docker-machine scp docker-compose.yml myvm1:~     # Copy file to node's home dir
+docker-machine ssh myvm1 "docker stack deploy -c <file> <app>"   # Deploy an app
+```

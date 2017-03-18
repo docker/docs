@@ -2,13 +2,19 @@
 title: "Getting Started, Part 1: Orientation and Setup"
 ---
 
-## Orientation
+<ul class="pagination">
+  <li class="active"><a href="index.md">Part 1</a></li>
+  <li><a href="part2.md">Part 2</a></li>
+  <li><a href="part3.md">Part 3</a></li>
+  <li><a href="part4.md">Part 4</a></li>
+  <li><a href="part5.md">Part 5</a></li>
+  <li><a href="part6.md">Part 6</a></li>
+  <li><a href="part7.md">Part 7</a></li>
+</ul>
 
-While we'll define concepts along the way, it is good for you to
-understand [what Docker is](#WHATDOCKER) and [why you would use
-Docker](#WHYDOCKER) before we begin.
+Welcome! We are excited you want to learn how to use Docker.
 
-In this tutorial, you will:
+In this seven-part tutorial, you will:
 
 1. Get set up and oriented, on this page.
 2. [Build and run our first app](part2.md)
@@ -23,24 +29,19 @@ what the code is doing. After all, the value of Docker is in how it can build,
 ship, and run applications; it's totally agnostic as to what your application
 actually does.
 
-## Setup
+## Prerequisites
 
-Before we get started, make sure your system has the latest version of Docker
-installed.
+While we'll define concepts along the way, it is good for you to understand
+[what Docker is](https://www.docker.com/what-docker) and [why you would use
+Docker](https://www.docker.com/use-cases) before we begin.
 
-[Install Docker](/engine/installation/index.md){: class="button darkblue-btn"}
+We also need to assume you understand a few concepts before we continue:
 
-You should be able to run `docker run hello-world` and see a response like this:
-
-```
-$ docker run hello-world
-
-Hello from Docker!
-This message shows that your installation appears to be working correctly.
-
-To generate this message, Docker took the following steps:
-...(snipped)...
-```
+- IP Addresses and Ports
+- Virtual Machines
+- Editing configuration files
+- Basic familiarity with the ideas of code dependencies and building
+- Machine resource usage terms, like CPU percentages, RAM use in bytes, etc.
 
 ## A brief explanation of containers
 
@@ -77,6 +78,27 @@ container image is the executable and its package dependencies, which never need
 to be installed on the host system. These processes run like native processes,
 and you can manage them individually by running commands like `docker ps` --
 just like you would run `ps` on Linux to see any other active executable.
+
+## Setup
+
+Before we get started, make sure your system has the latest version of Docker
+installed.
+
+[Install Docker](/engine/installation/index.md){: class="button darkblue-btn"}
+
+You should be able to run `docker run hello-world` and see a response like this:
+
+```
+$ docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+...(snipped)...
+```
+
+If you see a message like the one above, you're ready to begin the journey.
 
 ## Conclusion
 
