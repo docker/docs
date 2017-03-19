@@ -15,7 +15,7 @@ image you'll use in the rest of this getting started.
 
 ## Step 1: Locate the whalesay image
 
-1. Open your browser and [browse the Docker Hub](https://hub.docker.com/?utm_source=getting_started_guide&utm_medium=embedded_MacOSX&utm_campaign=find_whalesay).
+1. Open your browser and [browse the Docker Store](https://store.docker.com/?utm_source=getting_started_guide&utm_medium=embedded_MacOSX&utm_campaign=find_whalesay).
 
     ![Browse Docker Hub](tutimg/browse_and_search.png)
 
