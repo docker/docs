@@ -1,5 +1,22 @@
 ---
 title: "Get Started, Part 1: Orientation and Setup"
+redirect_from:
+- /engine/getstarted/
+- /learn/
+- /engine/getstarted/step_one/
+- /engine/getstarted/step_two/
+- /engine/getstarted/step_three/
+- /engine/getstarted/step_four/
+- /engine/getstarted/step_five/
+- /engine/getstarted/step_six/
+- /engine/getstarted/last_page/
+- /engine/getstarted-voting-app/
+- /engine/getstarted-voting-app/node-setup/
+- /engine/getstarted-voting-app/create-swarm/
+- /engine/getstarted-voting-app/deploy-app/
+- /engine/getstarted-voting-app/test-drive/
+- /engine/getstarted-voting-app/customize-app/
+- /engine/getstarted-voting-app/cleanup/
 ---
 
 <ul class="pagination">

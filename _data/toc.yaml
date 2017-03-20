@@ -114,42 +114,22 @@ guides:
     title: Docker Release Notes
 - sectiontitle: Get Started
   section:
-  - path: /learn/
-    title: Learn Docker
-  - sectiontitle: Docker basics
+  - sectiontitle: "Get started with Docker"
     section:
-    - path: /engine/getstarted/
-      title: Get Started with Docker
-    - path: /engine/getstarted/step_one/
-      title: Install Docker and run hello-world
-    - path: /engine/getstarted/step_two/
-      title: Understand images &amp; containers
-    - path: /engine/getstarted/step_three/
-      title: Find &amp; run the whalesay image
-    - path: /engine/getstarted/step_four/
-      title: Build your own image
-    - path: /engine/getstarted/step_five/
-      title: Create a Docker Hub account &amp; repository
-    - path: /engine/getstarted/step_six/
-      title: Tag, push, &amp; pull your image
-    - path: /engine/getstarted/last_page/
-      title: Learning more
-  - sectiontitle: Define and deploy your app
-    section:
-    - path: /engine/getstarted-voting-app/
-      title: Sample app overview
-    - path: /engine/getstarted-voting-app/node-setup/
-      title: Set up Dockerized machines
-    - path: /engine/getstarted-voting-app/create-swarm/
-      title: Create a swarm
-    - path: /engine/getstarted-voting-app/deploy-app/
-      title: Deploy the app
-    - path: /engine/getstarted-voting-app/test-drive/
-      title: Try out the voting app
-    - path: /engine/getstarted-voting-app/customize-app/
-      title: Customize the app and redeploy
-    - path: /engine/getstarted-voting-app/cleanup/
-      title: Graceful shutdown, reboot, and clean-up
+    - title: "Part 1: Orientation and Setup"
+      path: /get-started/
+    - title: "Part 2: Containers"
+      path: /get-started/part2/
+    - title: "Part 3: Services"
+      path: /get-started/part3/
+    - title: "Part 4: Swarms"
+      path: /get-started/part4/
+    - title: "Part 5: Stacks"
+      path: /get-started/part5/
+    - title: "Part 6: SSL and Secrets"
+      path: /get-started/part6/
+    - title: "Part 7: Deploy to production"
+      path: /get-started/part7/
   - sectiontitle: Learn by example
     section:
     - path: /engine/tutorials/networkingcontainers/
