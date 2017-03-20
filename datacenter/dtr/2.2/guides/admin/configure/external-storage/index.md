@@ -5,151 +5,70 @@ keywords: docker, documentation, about, technology, understanding, configuration
 title: Configure DTR image storage
 ---
 
-After installing Docker Trusted Registry, one of your first tasks is to
-designate and configure the Trusted Registry storage backend.  This document
-provides the following:
+By default DTR uses the local filesystem of the node where it is running to
+store your Docker images. You can configure DTR to use an external storage
+backend, for improved performance or high availability.
 
-* Information describing your storage backend options.
-* Configuration steps using either the Trusted Registry UI or a YAML file.
+![architecture diagram](../../../images/configure-external-storage-1.svg)
 
-The default storage backend, `filesystem`, stores and serves images from the
-*local* filesystem.  In a HA setup this fails, as each node can only access its
-own files.
+If your DTR deployment only has a single replica, you can continue using the
+local filesystem to store your Docker images. If your DTR deployment has
+multiple replicas, for high availability, you need to ensure all replicas are
+using the same storage backend. When a user pulls an image, the node serving
+the request needs to have access to that image.
 
-DTR allows you to confiugure your image storage via distributed stores, such as
-Amazon S3, NFS, or Google Cloud Storage. This flexibility to configure to a
-different storage backend allows you to:
+DTR supports these storage systems:
 
-* Scale your Trusted Registry
-* Leverage storage redundancy
-* Store your images anywhere in the cloud
-* Take advantage of other features that are critical to your organization
+* Local filesystem
+* NFS
+* Amazon S3 or compatible
+* Google Cloud Storage
+* Microsoft Azure Blob storage
+* OpenStack Swift
 
-At first, you might have explored Docker Trusted Registry and Docker Engine by
-installing them on your system in order to familiarize yourself with them.
-However, for various reasons such as deployment purposes or continuous
-integration, it makes sense to think about your long term organization’s needs
-when selecting a storage backend. The Trusted Registry natively supports TLS and
-basic authentication.
+To configure the storage backend, you can log into the **DTR web UI**
+as an administrator user, navigate to the **Settings** page, and choose
+**Storage**.
 
-## Understand the Trusted Registry storage backend
+![dtr settings](../../../images/configure-external-storage-2.png){: .with-border}
 
-Your Trusted Registry data (images etc.) are stored using the configured
-**storage driver** within DTR's settings.  This defaults to the local
-filesystem which uses your OS' posix operations to store and serve images.
+The storage configuration page in the DTR web UI has options for the most
+common configuration options, but you can also upload a yaml configuration file.
 
-Additionally, the Trusted Registry supports these cloud-based storage drivers:
+The format of this configuration file is similar to the one used by
+[Docker Registry](/registry/configuration.md).
 
-* Amazon Simple Storage Solution **S3** (and S3-compatible servers)
-* OpenStack **Swift**
-* Microsoft **Azure** Blob Storage
-* **Google Cloud** Storage
+## Local filesystem
 
-### Filesystem
+By default, DTR creates a volume names `dtr-registry-<replica-id>` to store
+your images using the local filesystem. You can customize the name and path of
+the volume used by DTR, using the `docker/dtr reconfigure --dtr-storage-volume`
+option.
 
-The `filesystem` driver operates on the host's local filesystem.  In HA
-environments this needs to be shared via NFS, otherwise each node in your setup
-will only be able to see their own local data.  For more information on
-configuring NFS [see the NFS docs](/datacenter/dtr/2.2/guides/admin/
-configure/external-storage/nfs/).
+If you're deploying DTR with high-availability, you need to use NFS or any other
+centralized storage backend so that all your DTR replicas have access to the
+same images.
 
-By default, docker creates a volume named `dtr-registry-${replica-id}` which is
-used to host your data.  You can supply a different volume name or directory
-when installing or reconfiguring docker to change where DTR stores your data
-locally.
+To check how much space your images are taking in the local filesystem, you
+can ssh into the node where DTR is deployed and run:
 
-When using your local filesystem (or NFS) to serve images ensure there is enough
-available space, otherwise pushes will begin to fail.
+```
+# Find the path to the volume
+docker volume inspect dtr-registry-<replica-id>
 
-You can see the total space used locally by running `du -hs "path-to-volume"`.
-The path to the docker volume can be found by running `docker volume ls` to list
-volumes and `docker volume inspect dtr-registry-$replicaId` to show the path.
+# Check the disk usage
+du -hs <path-to-volume>
+```
 
-### Amazon S3
+## NFS
 
-DTR supports AWS S3 plus other file servers that are S3 compatible, such as
-Minio.  For more information on configuring S3 or a compatible backend see the
-[S3 configuration guide](
-/datacenter/dtr/2.2/guides/admin/configure/external-storage/s3/).
+You can configure your DTR replicas to store images on a NFS partition, so that
+all replicas can share the same storage backend.
+
+[Learn how to configure DTR with NFS](nfs.md).
 
 
-### OpenStack Swift
+## Amazon S3
 
-OpenStack Swift, also known as OpenStack Object Storage, is an open source
-object storage system that is licensed under the Apache 2.0 license. Refer to [Swift documentation](http://docs.openstack.org/developer/swift/) to get started.
-
-
-### Microsoft Azure
-
-This storage backend uses Microsoft’s Azure Blob storage. Data is stored within
-a paid Windows Azure storage account. Refer to Microsoft's Azure
-[documentation](https://azure.microsoft.com/en-us/services/storage/) which
-explains how to set up your Storage account.
-
-## Configure your Trusted Registry storage backend
-
-Once you select your driver, you need to configure it through the UI or use a
-YAML file (which is discussed further in this document.)
-
-1. From the main Trusted Registry screen, navigate to Settings > Storage.
-2. Under Storage Backend, use the drop down menu to select your storage. The screen refreshes to reflect your option.
-3. Enter your configuration settings. If you're not sure what a particular parameter does, then find your driver from the following headings so that you can see a detailed explanation.
-4. Click Save. The Trusted Registry restarts so that your changes take effect.
-
->**Note**: Changing your storage backend requires you to restart the Trusted Registry.
-
-See the [Registry configuration](/registry/configuration.md)
-documentation for the full options specific to each driver. Storage drivers can
-be customized through the [Docker Registry storage driver
-API](/registry/storage-drivers/index.md#storage-driver-api).
-
-
-### Filesystem settings
-
-The [filesystem storage backend](/registry/configuration.md#filesystem)
-has only one setting, the "Storage directory".
-
-### S3 settings
-
-If you select the [S3 storage backend](/registry/configuration.md#s3), then you
-need to set  "AWS region", "Bucket name", "Access Key", and "Secret Key".
-
-### Azure settings
-
-Set the "Account name", "Account key", "Container", and "Realm" on the [Azure storage backend](/registry/configuration.md#azure) page.
-
-### Openstack Swift settings
-
-View the [Openstack Swift settings](/registry/configuration.md#openstack-swift)
-documentation so that you can set up your storage settings: authurl, username,
-password, container, tenant, tenantid, domain, domainid, insecureskipverify,
-region, chunksize, and prefix.
-
-## Configure using a YAML file
-
-If the previous quick setup options are not sufficient to configure your
-Registry options, you can upload a YAML file. The schema of this file is
-identical to that used by the [Registry](/registry/configuration.md).
-
-There are several benefits to using a YAML file as it can provide an
-additional level of granularity in defining your storage backend. Advantages
-include:
-
-* Overriding specific configuration options.
-* Overriding the entire configuration file.
-* Selecting from the entire list of configuration options.
-
-**To configure**:
-
-1. Navigate to the Trusted Registry UI > Settings > Storage.
-2. Select Download to get the text based file. It contains a minimum amount
-of information and you're going to need additional data based on your driver and
-business requirements.
-3. Go [here](/registry/configuration.md#list-of-configuration-options") to see the open source YAML file. Copy the sections you need and paste into your `storage.yml` file. Note that some settings may contradict others, so
-ensure your choices make sense.
-4. Save the YAML file and return to the UI.
-5. On the Storage screen, upload the file, review your changes, and click Save.
-
-## Where to go next
-
-* [Set up high availability](../set-up-high-availability.md)
+DTR supports AWS3 or other storage systems that are S3-compatible like Minio.
+[Learn how to configure DTR with Amazon S3](s3.md).
