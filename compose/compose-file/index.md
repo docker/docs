@@ -1391,7 +1391,7 @@ stack.
 
 ## Compose documentation
 
-- [User guide](index.md)
+- [User guide](/compose/index.md)
 - [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample app with swarm mode](/engine/getstarted-voting-app/)
