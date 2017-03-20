@@ -17,6 +17,7 @@ redirect_from:
 - /engine/getstarted-voting-app/test-drive/
 - /engine/getstarted-voting-app/customize-app/
 - /engine/getstarted-voting-app/cleanup/
+<<<<<<< HEAD
 - /mac/started/
 - /windows/started/
 - /linux/started/
@@ -42,6 +43,8 @@ redirect_from:
 - /windows/step_three/
 - /linux/step_three/
 - /engine/tutorials/usingdocker/
+=======
+>>>>>>> TOC/redirect implementation
 ---
 
 {% include_relative nav.html selected="1" %}
