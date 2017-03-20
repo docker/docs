@@ -14,12 +14,9 @@ for the bash and zsh shell.
 Make sure bash completion is installed. If you use a current Linux in a non-minimal installation, bash completion should be available.
 On a Mac, install with `brew install bash-completion`
 
-Place the completion scripts in `/etc/bash_completion.d/` (`` `brew --prefix`/etc/bash_completion.d/`` on a Mac), using e.g.
+Place the completion script in `/etc/bash_completion.d/` (`` remove `brew --prefix`/etc/bash_completion.d/`` on a Linux), using e.g.
 
-    files=(docker-machine docker-machine-wrapper docker-machine-prompt)
-    for f in "${files[@]}"; do
-      curl -L https://raw.githubusercontent.com/docker/machine/v$(docker-machine --version | tr -ds ',' ' ' | awk 'NR==1{print $(3)}')/contrib/completion/bash/$f.bash > `brew --prefix`/etc/bash_completion.d/$f
-    done
+    curl -L https://raw.githubusercontent.com/docker/docker/master/contrib/completion/bash/docker > `brew --prefix`/etc/bash_completion.d/docker
 
 Completion will be available upon next login.
 
@@ -29,7 +26,7 @@ Completion will be available upon next login.
 Place the completion scripts in your `/path/to/zsh/completion`, using e.g. `~/.zsh/completion/`
 
     mkdir -p ~/.zsh/completion
-    curl -L https://raw.githubusercontent.com/docker/machine/v$(docker-machine --version | tr -ds ',' ' ' | awk 'NR==1{print $(3)}')/contrib/completion/zsh/_docker-machine > ~/.zsh/completion/_docker-machine
+    curl -L https://raw.githubusercontent.com/docker/docker/master/contrib/completion/zsh/_docker > ~/.zsh/completion/_docker-machine
 
 Include the directory in your `$fpath`, e.g. by adding in `~/.zshrc`
 
