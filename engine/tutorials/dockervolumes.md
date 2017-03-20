@@ -36,8 +36,8 @@ Data volumes provide several useful features for persistent or shared data:
 - Changes to a data volume will not be included when you update an image.
 - Data volumes persist even if the container itself is deleted.
 
-Data volumes are designed to persist data, independent of the container's life
-cycle. Docker therefore *never* automatically deletes volumes when you remove
+Data volumes are designed to persist data, independent of the container's lifecycle. 
+Docker therefore *never* automatically deletes volumes when you remove
 a container, nor will it "garbage collect" volumes that are no longer
 referenced by a container.
 
