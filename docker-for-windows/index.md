@@ -466,7 +466,7 @@ in the [Docker Experimental Features README](https://github.com/docker/docker/bl
 Experimental features are not appropriate for production environments or
 workloads. They are meant to be sandbox experiments for new ideas. Some
 experimental features may become incorporated into upcoming stable releases, but
-others may be modified or pulled from subsquent Betas, and never released
+others may be modified or pulled from subsequent Betas, and never released
 on Stable.
 
 On both Beta and Stable releases, you can toggle **experimental mode** on and
