@@ -1172,6 +1172,8 @@ manuals:
           title: Install offline
         - path: /datacenter/ucp/2.1/guides/admin/upgrade/
           title: Upgrade
+        - path: /datacenter/ucp/2.1/guides/admin/upgrade-offline/
+          title: Upgrade offline
         - path: /datacenter/ucp/2.1/guides/admin/install/uninstall/
           title: Uninstall
       - sectiontitle: Configure
