@@ -8,7 +8,7 @@ redirect_from:
 title: Use the Docker Cloud Agent
 ---
 
-Docker Cloud allows you to use any Linux host ("bring your own host") as a node which you can then use to deploy containers. To do this, you install the **Docker Cloud Agent** on your Linux host so that Docker Cloud can remotely manage it.
+Docker Cloud allows you to use any Linux host ("bring your own host") as a node which you can then use to deploy containers. To do this, you must install the **Docker Cloud Agent** on your Linux host so that Docker Cloud can remotely manage it.
 
 > **Note**: The Docker Cloud Agent only supports x64 architecture at this time. 
 
@@ -51,7 +51,7 @@ CLI.
 To generate the command with the token, run:
 
 ```
-	$ docker-cloud node byo
+$ docker-cloud node byo
 ```
 
 The command outputs the following, including the installation command instructions and the associated registration token.
@@ -126,7 +126,7 @@ installed, `apt-get` removes the older `docker` installation, then installs the
 `docker` binary that is bundled with `dockercloud-agent`. The installation
 script also tries to install the kernel headers required for `AUFS` support.
 
-> **Note**: If you remove, upgrade, or install over the version of Docker Engine bundled with the Docker Cloud Agent, your nodes may not maintain a connection  with Docker Cloud correctly. You will have to reinstall a compatible Engine version (currently version 1.11.2-cs5). Contact Docker Support for more information.
+> **Note**: If you remove, upgrade, or install over the version of Docker Engine bundled with the Docker Cloud Agent, your nodes may not maintain a connection with Docker Cloud correctly. You will have to reinstall a compatible Engine version (currently version 1.11.2-cs5). Contact Docker Support for more information.
 
 * If you were already using the `AUFS` storage driver before installing `dockercloud-agent`, your existing containers and images appear automatically once installation finishes.
 * If you were using `devicemapper` or any other storage driver, and the `AUFS` driver installs successfully you will not be able to use your existing containers and images. You can check if the installation succeeded by running `docker info | grep Storage`.
