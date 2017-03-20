@@ -144,7 +144,8 @@ Some tables in markdown and html.
 
 | Permission level | Access        |
 | ---------------- | ------------- |
-| **Bold** or _italic_ within a table cell | |
+| **Bold** or _italic_ within a table cell. Next cell is empty on purpose. | |
+|                  | Previous cell is empty. A `--flag` in mono text. |
 | Read             | Pull |
 | Read/Write       | Pull, push |
 | Admin            | All of the above, plus update description, create and delete |
@@ -165,7 +166,7 @@ only need to do it on the first one. If you have a `<th>`, set it there.
     <th>Right channel</th>
   </tr>
   <tr>
-    <td>This is some test text. <br><br>This is more text on a new line. <br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    <td>This is some test text. <br><br>This is more **text** on a new line. <br><br>Lorem ipsum dolor `sit amet` (you can mix Markdown into the HTML table), consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </td>
     <td>This is some more text about the right hand side. There is a <a href="https://github.com/docker/docker/tree/master/experimental" target="_blank" class="_">link here to the Docker Experimental Features README</a> on GitHub.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
   </tr>
@@ -270,7 +271,7 @@ break the Markdown block up. This example does it with Markdown. You can't have 
 break the Markdown block up.
 {: style="column-count: 3 "}
 
-## Admonitions
+## Admonitions (notes)
 
 > **Note**: This is a note.
 
