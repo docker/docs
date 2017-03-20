@@ -1372,7 +1372,7 @@ manuals:
         section:
         - path: /datacenter/dtr/2.2/guides/user/access-dtr/
           title: Configure your Docker Engine
-        - path: /datacenter/dtr/2.2/guides/user/access-dtr/configure-your-notary-client.md
+        - path: /datacenter/dtr/2.2/guides/user/access-dtr/configure-your-notary-client/
           title: Configure your Notary client
         - path: /datacenter/dtr/2.2/guides/user/access-dtr/use-a-cache/
           title: Use a cache
