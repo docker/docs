@@ -1,5 +1,5 @@
 ---
-title: "Get Started, Part 6: Data storage" 
+title: "Get Started, Part 6: SSL and Secrets" 
 ---
 
 <ul class="pagination">
@@ -12,12 +12,7 @@ title: "Get Started, Part 6: Data storage"
   <li><a href="part7.md">Part 7</a></li>
 </ul>
 
-- Visualizing Swarm with UCP
-  - Mention Cloud
-- Deploying to AWS using Docker for AWS
-  - Free tier setup
-- Take node down, see drain handling
-- Rolling update
+Options (volumes, plugins)
 
 End!
 

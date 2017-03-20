@@ -130,20 +130,87 @@ Now let's a service that *does* involve a dependency: the Redis service that
 will provide a visitor counter.
 
 
-## Creating a dependency
-
-Linking services together in a stack requires only a few characters of text in
-the Compose file but the implications are powerful. Once two services are
-linked, they will always be spun up in the correct order so that the dependency
-does not break.
+## Persisting data
 
 Go through the same workflow once more. Save this new `docker-compose.yml` file,
-upload it to `myvm1`, and re-run `docker stack deploy`.
+which finally adds a Redis service.
 
 ```
+version: "3"
+services:
+  web:
+    image: johndmulhausen/get-started:part1
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+    ports:
+      - "80:80"
+    networks:
+      - webnet
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - webnet
+  redis:
+    image: redis
+    ports:
+      - "6379:6739"
+    volumes:
+      - ./data:/data
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - webnet
+networks:
+  webnet:
 ```
 
+Redis has an official image in the Docker library and has been granted the short
+image name of just `redis`, so no `username/repo` notation here. The Redis port,
+6379, is exposed from the container to the host and from the host to the world,
+so you can actually enter the manager's IP and port 6379 into Redis Desktop
+Manager and manage this Redis instance, if you so choose.
 
-End!
+Most importantly, there are a couple of things in the `redis` specification that
+make data persist between deployments of this stack:
+
+- `redis` always runs on the manager, so it's always using the same filesystem.
+- `redis` accesses an arbitrary file in the host's file system as `/data` inside
+  the container, which is where Redis stores data.
+
+Together, this is creating a "source of truth" in your host's physical
+filesystem for the Redis data. Without this, Redis would store its data in
+`/data` inside the container's filesystem, which would get wiped out if that
+container were ever redeployed.
+
+> **Note**: Be careful when using the host filesystem to store data; hosts can
+be ephemeral, just like containers, especially when using VMs. Another option is
+to use a storage driver and store data on an external cloud service.
+
+To deploy your new Redis-using stack, create `./data` on the manager, copy over
+the new `docker-compose.yml` file with `docker-machine scp`, and run `docker
+stack deploy` one more time.
+
+```
+$ docker-machine ssh myvm1 "mkdir ./data"
+$ docker-machine scp compose-file.yml myvm1:~
+$ docker-machine ssh myvm1 "docker stack deploy -c docker-compose.yml getstartedlab"
+```
+
+Check the results on http://localhost and you'll see that a visitor counter is
+now live and storing information on Redis.
 
 [On to Part 6 >>](part6.md){: class="button outline-btn"}
