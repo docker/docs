@@ -18,7 +18,7 @@ For this sample, we will create a sample `dotnet core web application` using the
 
 1. Within your directory, use the `aspnetcore-build` Docker image to generate a sample web application within the container and into your host machine under the `/app` directory:
 
-        docker run -v ${PWD}:/app --workdir /app microsoft/aspnetcore-build:lts dotnet new -t web
+        docker run -v ${PWD}:/app --workdir /app microsoft/aspnetcore-build:lts dotnet new mvc --auth Individual
 
     >**Note**: If running in Docker for Windows, make sure to add the necessary `C:/` prefix to the host mapped folder and that you are running on Linux containers mode.
 
@@ -56,7 +56,7 @@ For this sample, we will create a sample `dotnet core web application` using the
 
 1. Create a `docker-compose.yml` file. Write the following in the file, and make sure to replace the password in the `SA_PASSWORD` environment variable under `db` below. This file will define the way the images will interact as independent services. 
 
-    >**Note**: SQL Server requires a secure password (Minimum length 8 characters, including uppercase and lowercase letters, base 10 digits and/or non-alphanumeric symbols).
+    >**Note**: The SQL Server container requires a secure password to startup: Minimum length 8 characters, including uppercase and lowercase letters, base 10 digits and/or non-alphanumeric symbols.
 
         version: '3'
 
