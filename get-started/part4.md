@@ -1,5 +1,5 @@
 ---
-title: "Getting Started, Part 4: Swarms"
+title: "Get Started, Part 4: Swarms"
 ---
 
 <ul class="pagination">
@@ -30,11 +30,11 @@ title: "Getting Started, Part 4: Swarms"
 
 ## Introduction
 
-In [Part 3](part3.md), you took an app you wrote in part 2, and defined how it
-should run in production, scaling it up 5x.
+In [part 3](part3.md), you took an app you wrote in [part 2](part2.md), and
+defined how it should run in production, scaling it up 5x.
 
-In Part 4, you deploy this application onto a cluster, running it on multiple
-machines, thus taking advantage of the extra capacity. 
+Here in part 4, you deploy this application onto a cluster, running it on multiple
+machines, thus taking advantage of the extra capacity.
 
 ## Understanding Swarm clusters
 
@@ -42,11 +42,11 @@ A swarm is a group of machines that are running Docker and have been joined into
 a cluster. After that has happened, you continue to run the Docker commands
 you're used to, but now they are executed on a cluster by a **swarm manager**.
 
-Swarm managers can use several strategies to run the containers you ask it to,
-such as "emptiest node" -- which fills the least utilized machines with
-containers. Or "global", which ensures that each machine gets exactly one
-instance of the specified container. You instruct the swarm manager to use these
-strategies in the Compose file, just like the one you have already been using.
+Swarm managers can use several strategies to run containers, such as "emptiest
+node" -- which fills the least utilized machines with containers. Or "global",
+which ensures that each machine gets exactly one instance of the specified
+container. You instruct the swarm manager to use these strategies in the Compose
+file, just like the one you have already been using.
 
 Swarm managers are the only machines in a swarm that can execute your commands,
 or authorize other machines to join the swarm as **workers**. Workers are just
@@ -57,7 +57,7 @@ Up until now you have been using Docker in a single-host mode on your local
 machine. But Docker also can be switched into **swarm mode**, and that's what
 enables the use of swarms. Enabling swarm mode instantly makes the current
 machine a swarm manager. From then on, Docker will run the commands you execute
-on the swarm that your machine manages, rather than just on itself.
+on the swarm you're managing, rather than just on the current machine.
 
 {% capture local-instructions %}
 You now have two VMs created, named `myvm1` and `myvm2`. The first one will act
@@ -156,9 +156,9 @@ $ docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm2
 
 A swarm is made up of multiple nodes, which can be either physical or virtual
 machines. The basic concept is simple enough: run `docker swarm init` to enable
-swarm mode and your current machine a manager, then run `docker swarm join`
-on other machines to have them join the swarm as a worker. Choose a tab below to
-see how this plays out in various contexts.
+swarm mode and make your current machine a swarm manager, then run
+`docker swarm join` on other machines to have them join the swarm as a worker.
+Choose a tab below to see how this plays out in various contexts.
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#local">Local VMs (Mac, Linux, Windows 7 and 8)</a></li>
@@ -239,6 +239,8 @@ docker-machine ssh myvm1 "docker node inspect <node ID>"        # Inspect a node
 docker-machine ssh myvm1 "docker swarm join-token -q worker"   # View join token
 docker-machine ssh myvm1   # Open an SSH session with the VM; type "exit" to end
 docker-machine ssh myvm2 "docker swarm leave"  # Make the worker leave the swarm
+docker-machien ssh myvm1 "docker swarm leave -f" # Make master leave, kill swarm
+docker-machine start myvm1            # Start a VM that is currently not running
 docker-machine stop $(docker-machine ls -q)               # Stop all running VMs
 docker-machine rm $(docker-machine ls -q) # Delete all VMs and their disk images
 docker-machine scp docker-compose.yml myvm1:~     # Copy file to node's home dir

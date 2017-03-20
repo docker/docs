@@ -1,5 +1,5 @@
 ---
-title: "Getting Started, Part 2: Containers"
+title: "Get Started, Part 2: Containers"
 ---
 
 <ul class="pagination">

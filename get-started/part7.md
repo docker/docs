@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Docker - Part 7"
+title: "Get Started, Part 7: Deploy to production"
 ---
 
 <ul class="pagination">
@@ -12,11 +12,6 @@ title: "Getting Started with Docker - Part 7"
   <li class="active"><a href="part7.md">Part 7</a></li>
 </ul>
 
-- Visualizing Swarm with UCP
-  - Mention Cloud
-- Deploying to AWS using Docker for AWS
-  - Free tier setup
-- Take node down, see drain handling
-- Rolling update
+DDC, Cloud
 
 End!

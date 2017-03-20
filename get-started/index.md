@@ -1,5 +1,5 @@
 ---
-title: "Getting Started, Part 1: Orientation and Setup"
+title: "Get Started, Part 1: Orientation and Setup"
 ---
 
 <ul class="pagination">

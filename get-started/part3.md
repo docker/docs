@@ -1,5 +1,5 @@
 ---
-title: "Getting Started, Part 3: Services"
+title: "Get Started, Part 3: Services"
 ---
 
 <ul class="pagination">

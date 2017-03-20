@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Docker - Part 6"
+title: "Get Started, Part 6: Data storage" 
 ---
 
 <ul class="pagination">
