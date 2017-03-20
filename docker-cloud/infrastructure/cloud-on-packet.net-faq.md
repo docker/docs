@@ -14,7 +14,7 @@ Docker Cloud creates a project named "Docker Cloud" which contains all the devic
 
 Device storage is organized as follows:
 
-- Type 1 devices have a RAID 1 of two SSD drives mounted in `/`
+- Type 1 devices have a RAID 1 of two SSD drives mounted in `/`.
 - Type 3 devices also have a RAID 1 of two SSD drives mounted in `/`, and also offer two NVMe drives without being mounted. Docker Cloud mounts a RAID 1 in `/var/lib/docker`.
 
 An SSH keypair named `dockercloud-<uuid>` is created if no key is found in your account.
