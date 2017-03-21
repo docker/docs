@@ -340,7 +340,7 @@ command.
 > layer. It is now stored as a string of text in a single config file that
 > relates to the overall image. This can result in some image layers showing as
 >  "missing" in the output of the `docker history` command. This is normal
->  behaviour and can be ignored.
+>  behavior and can be ignored.
 >
 > You may hear images like these referred to as *flat images*.
 

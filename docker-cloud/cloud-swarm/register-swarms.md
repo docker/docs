@@ -78,7 +78,7 @@ Swarms that are registered in Docker Cloud appear in the Swarms list. Each line 
 
 <!-- TODO - **DEPLOYING**: Docker Cloud is provisioning the nodes of this swarm. -->
 - **DEPLOYED**: the swarm is sending heartbeat pings to Docker Cloud, and Cloud can contact it to run a health check.
-- **UNREACHABLE**: the swarm is sending heartbeart pings, but Docker Cloud cannot contact the swarm.
+- **UNREACHABLE**: the swarm is sending heartbeat pings, but Docker Cloud cannot contact the swarm.
 - **UNAVAILABLE**: Docker Cloud is not receiving any heartbeats from the swarm.
 - **REMOVED**: the swarm has been unregistered from Docker Cloud and will be removed from the list soon.
 

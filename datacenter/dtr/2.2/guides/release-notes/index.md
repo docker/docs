@@ -24,7 +24,7 @@ to upgrade your installation to the latest release.
 
 * Several improvements to the installer to make it more resilient
 * Improved the installer to better detect port conflicts when installing or joining DTR replicas
-* Security scans can now be cancelled
+* Security scans can now be canceled
 * DTR job logs are now stored in the DTR datastore but also sent to Docker Engine
 
 **Bugs fixed**

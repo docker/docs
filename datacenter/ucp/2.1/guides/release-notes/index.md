@@ -28,7 +28,7 @@ You can either wait for UCP 2.1.2 to be released so that the problem is
 automatically fixed, or upgrade to 2.1.1, and use the following steps to fix
 the problem.
 
-Star by getting the current configuration for user sessions by running:
+Start by getting the current configuration for user sessions by running:
 
 ```bash
 curl -u admin "https://$UCP_HOST/enzi/v0/config/sessions"
