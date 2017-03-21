@@ -35,7 +35,7 @@ In this case, the only member is the "jenkins" user.
 The signing policy implementation uses the certificates issued in user client bundles
 to connect a signature to a user. Using an incognito browser window (or otherwise),
 log in to the "jenkins" user account you created earlier. Download a client bundle for
-this user. It is also recommeneded to change the description associated with the public
+this user. It is also recommended to change the description associated with the public
 key stored in UCP such that you can identify in the future which key is being used for
 signing.
 

@@ -57,7 +57,7 @@ browsers and client tools already trust.
 
 If you want to use your own certificates:
 
-1. Log into the host where you intend to instal UCP.
+1. Log into the host where you intend to install UCP.
 
 2. Create a volume with the name `ucp-controller-server-certs`.
 

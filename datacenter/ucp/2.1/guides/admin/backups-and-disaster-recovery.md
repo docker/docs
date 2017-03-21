@@ -130,7 +130,7 @@ In the event where half or more manager nodes are lost and cannot be recovered
 to a healthy state, the system is considered to have lost quorum and can only be
 restored through the following disaster recovery procedure.
 
-It is important to note that this proceedure is not guaranteed to succeed with
+It is important to note that this procedure is not guaranteed to succeed with
 no loss of running services or configuration data. To properly protect against
 manager failures, the system should be configured for [high availability](configure/set-up-high-availability.md).
 
