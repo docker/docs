@@ -24,7 +24,7 @@ do not have `systemctl`, use the `service` command.
   ```
 
 - **`service`**:
-  
+
   ```bash
   $ sudo service docker start
   ```
@@ -55,7 +55,7 @@ To accomplish this, set the following flags in the `daemon.json` file:
 ```none
 {
     "graph": "/mnt/docker-data",
-    "storage-drivers": "overlay"
+    "storage-driver": "overlay"
 }
 ```
 
