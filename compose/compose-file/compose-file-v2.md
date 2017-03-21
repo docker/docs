@@ -207,7 +207,7 @@ Simple example:
 
 > **Note**: `depends_on` will not wait for `db` and `redis` to be "ready" before
 > starting `web` - only until they have been started. If you need to wait
-> for a service to be ready, see [Controlling startup order](startup-order.md)
+> for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 > for more on this problem and strategies for solving it.
 
 > **[Version 2.1](#version-21) file format only.**
@@ -383,7 +383,7 @@ indefinitely. Compose does not support circular references and `docker-compose`
 returns an error if it encounters one.
 
 For more on `extends`, see the
-[the extends documentation](extends.md#extending-services).
+[the extends documentation](/compose/extends.md#extending-services).
 
 ### external_links
 
@@ -538,7 +538,7 @@ Links also express dependency between services in the same way as
 
 ### logging
 
-> [Version 2 file format](compose-versioning.md#version-2) and up. Used instead of version 1  
+> [Version 2 file format](compose-versioning.md#version-2) and up. Used instead of version 1
 > options for [log_driver](#log_driver) and [log_opt](#log_opt).
 
 Logging configuration for the service.
@@ -1170,10 +1170,10 @@ refer to it within the Compose file:
 
 ## Compose documentation
 
-- [User guide](index.md)
-- [Installing Compose](install.md)
+- [User guide](/compose/index.md)
+- [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
-- [Command line reference](./reference/index.md)
+- [Get started with Django](/compose/django/)
+- [Get started with Rails](/compose/rails/)
+- [Get started with WordPress](/compose/wordpress/)
+- [Command line reference](/compose/reference/)
