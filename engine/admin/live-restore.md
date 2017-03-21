@@ -11,7 +11,7 @@ option helps reduce container downtime due to daemon crashes, planned outages,
 or upgrades.
 
 > **Note**: Live restore is not supported on Windows containers, but it does work
-for Linux containers running on Windows.
+for Linux containers running on Docker for Windows.
 
 ## Enable the live restore option
 
