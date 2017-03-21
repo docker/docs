@@ -13,7 +13,7 @@ This page describes how to create a service on Docker Cloud.
 
 A service is a group of containers of the same **image:tag**. Services make it simple to scale your application. With Docker Cloud, you simply drag a slider to change the number of containers in a service.
 
-Before you can deploy a service in Docker Cloud, you must have at least one node deployed. If you haven't done this yet [follow the tutorial to deploy a node ](your_first_node.md).
+Before you can deploy a service in Docker Cloud, you must have at least one node deployed. If you haven't done this yet [follow the tutorial to deploy a node](your_first_node.md).
 
 When you create a service in the Docker Cloud web interface, a wizard walks you through configuring the service in three steps.
 
@@ -21,7 +21,7 @@ When you create a service in the Docker Cloud web interface, a wizard walks you 
 1. **Configure the Service** From here, give the service a name, set the initial number of containers, expose/publish ports, modify the run command or entrypoint, set memory and CPU limits.
 1. **Set Environment variables** Set the edit environment variables and link your service to other existing services in Docker Cloud.
 
-> **Note**:In this Quickstart tutorial we won't be working with environment variables or connecting [data volumes](../apps/volumes.md), but these are also available as optional steps in the wizard.
+> **Note**: In this Quickstart tutorial we won't be working with environment variables or connecting [data volumes](../apps/volumes.md), but these are also available as optional steps in the wizard.
 
 ## Select a Service Image
 
@@ -29,7 +29,7 @@ From any page on Docker Cloud, click the **Services** section, then click **Crea
 
 ![](images/create-first-service.png)
 
-For the purposes of this tutorial, click the rocket icon and look for the  **Miscellaneous** section.
+For the purposes of this tutorial, click the rocket icon and look for the **Miscellaneous** section.
 
 You will see an image called `dockercloud/hello-world`.
 ![](images/first-service-wizard.png)
@@ -67,7 +67,7 @@ Next, Cloud sends you to the Service's detailed view. The detailed view contains
   - **Endpoints**: shows a list of available service and container endpoints.
   - **Triggers**: allows you to set triggers that perform automatic actions such as scaling a node or redeploying an image when the source updates.
   - **Links**: lists the links between services. For this tutorial this section will be empty.
-  - **Volumes**: lists the volumes attached to the service to store data.  For this tutorial this section will be empty.
+  - **Volumes**: lists the volumes attached to the service to store data. For this tutorial this section will be empty.
   - **Environment Variables**: lists the environment variables for the service.
 
 Two additional tabs of information are available for each service:
