@@ -238,6 +238,34 @@ Here are some tabs:
 
 You need to adjust the IDs and HREFs to match your use case.
 
+If you have Markdown inside the content of the `<div>`, you need to capture it, then
+print it and run it through the `markdownify` Liquid filter. Here's a demo:
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#tab3">TAB 1 HEADER</a></li>
+  <li><a data-toggle="tab" href="#tab4">TAB 2 HEADER</a></li>
+</ul>
+<div class="tab-content">
+<div id="tab3" class="tab-pane fade in active">
+{% capture tab3-content %}
+#### A Markdown header
+
+- list item 1
+- list item 2
+{% endcapture %}
+{{ tab3-content | markdownify }}
+</div>
+<div id="tab4" class="tab-pane fade">
+{% capture tab4-content %}
+#### Another Markdown header
+
+- list item 3
+- list item 4
+{% endcapture %}
+{{ tab4-content | markdownify }}
+</div>
+</div>
+
 ### Cards
 
 In a Bootstrap row, your columns need to add up to 12. Here are three cards in
