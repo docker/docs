@@ -160,13 +160,17 @@ This is also the case if you need to use rowspans or colspans. Try to avoid
 setting styles directly on your tables! If you set the width on a `<td>`, you
 only need to do it on the first one. If you have a `<th>`, set it there.
 
+> **Note**: If you need to have **markdown** in a **HTML** table, you need to
+> capture the table and then filter it through `markdownify`. See [tabs](#tabs)
+> for an example. Here, I avoid that by using HTML throughout.
+
 <table>
   <tr>
     <th width="50%">Left channel</th>
     <th>Right channel</th>
   </tr>
   <tr>
-    <td>This is some test text. <br><br>This is more **text** on a new line. <br><br>Lorem ipsum dolor `sit amet` (you can mix Markdown into the HTML table), consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  <td>This is some test text. <br><br>This is more <b>text</b> on a new line. <br><br>Lorem ipsum dolor <tt>sit amet</tt>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     </td>
     <td>This is some more text about the right hand side. There is a <a href="https://github.com/docker/docker/tree/master/experimental" target="_blank" class="_">link here to the Docker Experimental Features README</a> on GitHub.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
   </tr>
