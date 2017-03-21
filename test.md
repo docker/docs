@@ -200,6 +200,8 @@ page or displaying content as "cards".
 ## Jekyll / Liquid tricks
 
 This paragraph is centered and colored green by setting CSS directly on the element.
+**Even though you can do this and it's sometimes the right way to go, remember that if
+we re-skin the site, any inline styles will need to be dealt with manually!**
 {: style="text-align:center; color: green" }
 
 {% assign my-text="foo" %}
@@ -209,6 +211,15 @@ This will be effective for the rest of this file unless the token is reset.
 
 {% capture my-other-text %}foo{% endcapture %}
 Here is another way: {{ my-other-text }}
+
+You can nest captures within each other to represent more complex logic with Liquid.
+
+### Liquid variable scope
+
+- Things set in the top level of `_config.yml` are available as site variables, like `{{ site.debug }}`.
+- Things set in the page's metadata, either via the defaults in `_config.yml` or per page, are available as page variables, like `{{ page.title }}`.
+- In-line variables set via `assign` or `capture` are available for the remainder of the page after they are set.
+- If you include a file, you can pass key-value pairs at the same time. These are available as include variables, like `{{ include.toc_min }}`.
 
 ## Bootstrap and CSS tricks
 
@@ -230,15 +241,16 @@ You need to adjust the IDs and HREFs to match your use case.
 ### Cards
 
 In a Bootstrap row, your columns need to add up to 12. Here are three cards in
-a row. You need a couple `<br />`s to clear the row before.<br /><br />
+a row, each of which takes up 1/3 (4/12) of the row. You need a couple `<br />`s
+to clear the row before.<br /><br />
 
 
 <div class="row">
-  <div class="panel col-xs-12 col-md-3">This will take up 1/3 of the row unless the screen is small,
+  <div class="panel col-xs-12 col-md-4">This will take up 1/3 of the row unless the screen is small,
 then it will take up the whole row.</div>
-  <div class="panel col-xs-12 col-md-3">This will take up 1/3 of the row unless the screen is small,
+  <div class="panel col-xs-12 col-md-4">This will take up 1/3 of the row unless the screen is small,
 then it will take up the whole row.</div>
-  <div class="panel col-xs-12 col-md-3">This will take up 1/3 of the row unless the screen is small,
+  <div class="panel col-xs-12 col-md-4">This will take up 1/3 of the row unless the screen is small,
 then it will take up the whole row.</div>
 </div>
 
@@ -291,8 +303,8 @@ break the Markdown block up.
 > - List item 1
 > - List item 2
 >
-> |Table column 1 | Table column 2 |
-> |---------------|----------------|
+> |Table column 1  | Table column 2 |
+> |----------------|----------------|
 > | Row 1 column 1 | Row 2 column 2 |
 > | Row 2 column 1 | Row 2 column 2 |
 >
