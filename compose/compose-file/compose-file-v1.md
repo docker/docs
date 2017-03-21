@@ -247,7 +247,7 @@ indefinitely. Compose does not support circular references and `docker-compose`
 returns an error if it encounters one.
 
 For more on `extends`, see the
-[the extends documentation](extends.md#extending-services).
+[the extends documentation](/compose/extends.md#extending-services).
 
 ### external_links
 
@@ -505,10 +505,10 @@ Each of these is a single value, analogous to its
 
 ## Compose documentation
 
-- [User guide](index.md)
-- [Installing Compose](install.md)
+- [User guide](/compose/index.md)
+- [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
-- [Command line reference](./reference/index.md)
+- [Get started with Django](/compose/django/)
+- [Get started with Rails](/compose/rails/)
+- [Get started with WordPress](/compose/wordpress/)
+- [Command line reference](/compose/reference/)
