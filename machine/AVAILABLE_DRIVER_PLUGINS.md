@@ -126,6 +126,19 @@ with Docker Inc.  Use 3rd party plugins at your own risk.
       </td>
     </tr>
     <tr>
+      <td>cloud.ca</td>
+      <td>
+        <a href=
+        "https://github.com/cloud-ca/docker-machine-driver-cloudca">https://github.com/cloud-ca/docker-machine-driver-cloudca</a>
+      </td>
+      <td>
+        <a href="https://github.com/cloud-ca">cloud.ca</a>
+      </td>
+      <td>
+        <a href="mailto:cloudmc@cloudops.com">cloudmc@cloudops.com</a>
+      </td>
+    </tr>
+    <tr>
       <td>Docker-In-Docker</td>
       <td>
         <a href=
