@@ -12,7 +12,7 @@ This section answers frequently asked questions about using Docker Cloud with Am
 
 To validate your AWS Security Credentials, Docker Cloud tries to dry-run an instance on every region. Credentials are marked as valid if the operation succeeds at least in one of the regions. If you get the following message `Invalid AWS credentials or insufficient EC2 permissions` follow these steps to troubleshoot it:
 
-1. <a href="https://aws.amazon.com/cli/" target="_blank">Download AWS CLI</a>
+1. <a href="https://aws.amazon.com/cli/" target="_blank">Download AWS CLI</a>.
 2. <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html" target="_blank">Configure the CLI</a> with your security credentials.
 2.  Run the following command:
 
@@ -28,7 +28,7 @@ A client error (DryRunOperation) occurred when calling the RunInstances operatio
 
 ## "AWS returned an error: unauthorized operation" using instance profiles to deploy node clusters
 
-This error occurs when you are using an instance profile that has more permissions than the IAM user you are using with Docker Cloud. You can fix this by adding the `"Action":"iam:PassRole"` permission to the IAM policy for the `dockercloud` service user. You can read more about this <a href="http://blogs.aws.amazon.com/security/post/Tx3M0IFB5XBOCQX/Granting-Permission-to-Launch-EC2-Instances-with-IAM-Roles-PassRole-Permission" target="_blank">here</a>
+This error occurs when you are using an instance profile that has more permissions than the IAM user you are using with Docker Cloud. You can fix this by adding the `"Action":"iam:PassRole"` permission to the IAM policy for the `dockercloud` service user. You can read more about this <a href="http://blogs.aws.amazon.com/security/post/Tx3M0IFB5XBOCQX/Granting-Permission-to-Launch-EC2-Instances-with-IAM-Roles-PassRole-Permission" target="_blank">here</a>.
 
 ## What objects does Docker Cloud create in my EC2 account?
 
