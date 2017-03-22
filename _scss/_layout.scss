@@ -1,0 +1,132 @@
+/*
+*
+* layout
+*
+*/
+
+.columns,
+.col-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.col-nav {
+    order: -1;
+}
+
+.col-content {
+    // padding: 60px 69px 50px 20px;
+}
+
+
+.col-body {
+    flex-direction: row;
+    flex: 1;
+    min-height: 555px;
+}
+.col-content {
+    flex: 1;
+}
+.col-nav,
+.col-toc {
+    flex: 0 0 0;
+}
+
+.col-toc-hidden {
+    display: none;
+    // transition: all 0.5s ease;
+}
+
+
+@media only screen and (min-width: 1000px) {
+    .col-nav,
+    .col-toc {
+        flex: 0 0 17em;
+    }
+}
+
+/*
+*
+* sidebar ***********************************************************************
+*
+*/
+
+#sidebar-wrapper {
+    background-color: $bg-sidebar;
+    border-left: 1px solid rgba(204, 204, 204, 0.29);
+    height: 100%;
+    position: fixed;
+    padding: 70px 0 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-right: -250px;
+    width: 0;
+}
+
+#sidebar-right {
+    background-color: $bg-sidebar;
+    border-left: 1px solid rgba(204, 204, 204, 0.29);
+    height: 100%;
+    padding-top: 20px;
+    width: 255px;
+    // position: absolute;
+}
+
+#sidebar-right.affix {
+    top: 10px;
+    position: fixed;
+}
+
+.wrapper.right-open #sidebar-wrapper {
+    width: 250px;
+}
+
+
+.wrapper.right-open .page-content {
+    padding-right: 190px;
+    background-color: purple;
+}
+
+/*
+* Sidebar
+*/
+
+.sidebar-home {
+    background-color: $bg-sidebar;
+    border-right: 1px solid rgba(204, 204, 204, 0.29);
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+    width: 250px;
+    padding-top: 20px;
+}
+
+.sidebar-home .affix {
+    background-color: $bg-sidebar;
+    border-right: 1px solid rgba(204, 204, 204, 0.29);
+    top: 70px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 100px;
+    height: 100%;
+    width: 250px;
+}
+
+
+/*.sidebar-home .affix {}*/
+
+.sidebar,.sidebar.affix  {
+    background-color: $bg-sidebar;
+    border-right: 1px solid rgba(204,204,204,0.29);
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    display: block;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 20px 10px 100px 0;
+    position: fixed;
+    height: 100% !important;
+    width: 250px;
+}
