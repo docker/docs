@@ -123,6 +123,13 @@ This example starts an `alpine` container with the `none` log driver.
 $ docker run -it --log-driver none alpine ash
 ```
 
+### Options for all drivers
+| Option            | Description | Example value |
+|-------------------|-------------|---------------|
+| `mode`            | Sets the logging mode, accepted values are `blocking` (default), and `non-blocking`. When `non-blocking` is set, if the log buffer fills up, log messages will be lost. How messages are dropped is left undefined. | `--log-opt mode=non-blocking`
+| `max-buffer-size` | Applicable only when `mode` is set to `non-blocking`, this sets the maxmimum size of the log buffer. Once this size is reach, log messages will be dropped. | `--log-opt max-buffer-size 5m`
+
+
 ## `json-file`
 
 `json-file` is the default logging driver, and returns logging output in JSON
@@ -296,6 +303,7 @@ The `awslogs` supports the following options:
 | `awslogs-region`       | Sets the region where the logs are sent. If not set, the container's region is used. | `--log-opt awslogs-region=us-east-1` |
 | `awslogs-group`        | The log group to use for the logs. | `--log-opt awslogs-group=myLogGroup` |
 | `awslogs-stream`       | The log stream to use. If not specified, the container ID is used as the log stream. | `--log-opt awslogs-stream=myLogStream` |
+| `awslogs-create-group` | If the option is set to true, create the log group if the log group does not exist yet. | `--log-opt awslogs-create-group=true` |
 
 ### Examples
 
@@ -307,6 +315,7 @@ $ docker run \
          --log-driver=awslogs \
          --log-opt awslogs-region=us-east-1 \
          --log-opt awslogs-group=myLogGroup \
+         --log-opt awslogs-create-group=true \
          alpine sh
 ```
 
