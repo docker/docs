@@ -303,6 +303,18 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.03.1 Release Notes (2017-03-21 17.03.1-ce-win3)
+
+**Upgrades**
+
+- [Docker 17.03.1-ce-rc1](https://github.com/docker/docker/releases/tag/v17.03.1-ce-rc1)
+- [Docker Credential Helpers 0.5.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.0)
+- Linux Kernel 4.9.14
+
+**Bug fixes and minor changes**
+
+- VPNKit: capture up to 64KiB of NTP traffic for diagnostics, better handling of DNS
+
 ### Docker Community Edition 17.03.0 Release Notes (2017-03-02 17.03.0-ce-win1)
 
 **New**
