@@ -12,7 +12,7 @@ Docker Cloud now allows you to connect to clusters of Docker Engines running in 
 The current release of Docker Cloud automatically opts in new users to Beta
 Swarm Mode.
 
-> **Note:** All Swarm management features in Docker Cloud are free while in Beta.
+> **Note**: All Swarm management features in Docker Cloud are free while in Beta.
 
 ### New to Docker Cloud?
 

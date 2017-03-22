@@ -122,7 +122,7 @@ The network can then be deleted with:
 docker network rm <network_name or id>
 ```
 
-- **Note:** In Macvlan you are not able to ping or communicate with the default namespace IP address. For example, if you create a container and try to ping the Docker host's `eth0` it will **not** work. That traffic is explicitly filtered by the kernel modules themselves to offer additional provider isolation and security.
+- **Note**: In Macvlan you are not able to ping or communicate with the default namespace IP address. For example, if you create a container and try to ping the Docker host's `eth0` it will **not** work. That traffic is explicitly filtered by the kernel modules themselves to offer additional provider isolation and security.
 
 For more on Docker networking commands see [Working with Docker network commands](/engine/userguide/networking/work-with-networks/)
 

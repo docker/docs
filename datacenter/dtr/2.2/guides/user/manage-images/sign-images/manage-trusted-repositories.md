@@ -1,20 +1,48 @@
 ---
-description: Learn how to use the Notary CLI client to manage trusted repositories
-keywords: dtr, trust, notary, registry, security
 title: Manage trusted repositories
+description: Learn how to use the Notary CLI client to manage trusted repositories
+keywords: dtr, trust, notary, security
+redirect_from:
+  - /datacenter/dtr/2.2/guides/user/manage-images/manage-trusted-repositories/
 ---
 
-Once you install the Notary CLI client, you can use it to manage your signing
-keys, authorize other team members to sign images, and rotate the keys if
-a private key has been compromised.
+Once you
+[configure the Notary CLI client](../../access-dtr/configure-your-notary-client.md),
+you can use it to manage your private keys, list trust data from any repository
+you have access to, authorize other team members to sign images, and rotate
+keys if a private key has been compromised.
 
-When using the Notary CLI client you need to specify where is Notary server
-you want to communicate with, and where to store the private keys and cache for
-the CLI client.
+## List trust data
 
-```bash
-# Create an alias to always have the notary client talking to the right server
-$ alias notary="notary -s https://<dtr_url> -d ~/.docker/trust"
+List the trust data for a repository by running:
+
+```none
+$ notary list <dtr_url>/<account>/<repository>
+```
+
+You can get one of the following errors, or a list with the images that have
+been signed:
+
+| Message                                     | Description                                                                                                      |
+|:--------------------------------------------|:-----------------------------------------------------------------------------------------------------------------|
+| `fatal: client is offline`                  | Either the repository server can't be reached, or your Notary CLI client is misconfigured                        |
+| `fatal: <dtr_url> does not have trust data` | There's no trust data for the repository. Either run `notary init` or sign and push an image to that repository. |
+| `No targets present in this repository`     | The repository has been initialized, but doesn't contain any signed images                                       |
+
+## Initialize trust for a repository
+
+There's two ways to initialize trust data for a repository. You can either
+sign and push an image to that repository:
+
+```none
+export DOCKER_CONTENT_TRUST=1
+docker push <dtr_url>/<account>/<repository>
+```
+
+or
+
+```
+notary init --publish <dtr_url>/<account>/<repository>
 ```
 
 ## Manage staged changes
@@ -61,7 +89,7 @@ list all the keys managed by the Notary CLI client, run:
 $ notary key list
 ```
 
-To chance the passphrase used to encrypt one of the keys, run:
+To change the passphrase used to encrypt one of the keys, run:
 
 ```bash
 $ notary key passwd <key_id>
@@ -122,5 +150,5 @@ directory where your private keys are stored, with the `-d` flag.
 
 ## Where to go next
 
-* [Run only the images you trust](index.md)
-* [Get started with Notary](/notary/getting_started.md)
+* [Learn more about Notary](/notary/advanced_usage.md)
+* [Notary architecture](/notary/service_architecture.md)

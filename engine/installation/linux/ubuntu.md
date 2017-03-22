@@ -8,6 +8,8 @@ redirect_from:
 title: Get Docker for Ubuntu
 ---
 
+{% assign minor-version = "17.03" %}
+
 To get started with Docker on Ubuntu, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
@@ -222,8 +224,6 @@ The procedure for setting up the repository is different for [Docker CE](#docker
     instead of always using the latest. This output is truncated. List the
     available versions. For Docker EE customers, use `docker-ee` where you see
     `docker-ce`.
-
-    {% assign minor-version = "17.03" %}
 
     ```bash
     $ apt-cache madison docker-ce

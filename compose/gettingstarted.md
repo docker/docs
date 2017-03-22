@@ -103,7 +103,7 @@ The `redis` service uses a public
 [Redis](https://registry.hub.docker.com/_/redis/) image pulled from the Docker
 Hub registry.
 
->**Tip:** If your project is outside of the `Users` directory (`cd ~`), then you
+>**Tip**: If your project is outside of the `Users` directory (`cd ~`), then you
 need to share the drive or location of the Dockerfile and volume you are using.
 If you get runtime errors indicating an application file is not found, a volume
 mount is denied, or a service cannot start, try enabling file or drive sharing.
@@ -151,7 +151,7 @@ containers](../engine/tutorials/dockervolumes.md).
 
    The number should increment.
 
->**Tip:** You can list local images with `docker image ls` and inspect them with `docker inspect <tag or id>`. Listing images at this point should return `redis` and `web`.
+>**Tip**: You can list local images with `docker image ls` and inspect them with `docker inspect <tag or id>`. Listing images at this point should return `redis` and `web`.
 
 
 ## Step 5: Update the application
@@ -211,4 +211,4 @@ At this point, you have seen the basics of how Compose works.
 - Next, try the quick start guide for [Django](django.md),
   [Rails](rails.md), or [WordPress](wordpress.md).
 - [Explore the full list of Compose commands](./reference/index.md)
-- [Compose configuration file reference](compose-file.md)
+- [Compose configuration file reference](compose-file/index.md)

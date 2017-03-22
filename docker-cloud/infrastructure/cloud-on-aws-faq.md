@@ -12,7 +12,7 @@ This section answers frequently asked questions about using Docker Cloud with Am
 
 To validate your AWS Security Credentials, Docker Cloud tries to dry-run an instance on every region. Credentials are marked as valid if the operation succeeds at least in one of the regions. If you get the following message `Invalid AWS credentials or insufficient EC2 permissions` follow these steps to troubleshoot it:
 
-1. <a href="https://aws.amazon.com/cli/" target="_blank">Download AWS CLI</a>
+1. <a href="https://aws.amazon.com/cli/" target="_blank">Download AWS CLI</a>.
 2. <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html" target="_blank">Configure the CLI</a> with your security credentials.
 2.  Run the following command:
 
@@ -28,7 +28,7 @@ A client error (DryRunOperation) occurred when calling the RunInstances operatio
 
 ## "AWS returned an error: unauthorized operation" using instance profiles to deploy node clusters
 
-This error occurs when you are using an instance profile that has more permissions than the IAM user you are using with Docker Cloud. You can fix this by adding the `"Action":"iam:PassRole"` permission to the IAM policy for the `dockercloud` service user. You can read more about this <a href="http://blogs.aws.amazon.com/security/post/Tx3M0IFB5XBOCQX/Granting-Permission-to-Launch-EC2-Instances-with-IAM-Roles-PassRole-Permission" target="_blank">here</a>
+This error occurs when you are using an instance profile that has more permissions than the IAM user you are using with Docker Cloud. You can fix this by adding the `"Action":"iam:PassRole"` permission to the IAM policy for the `dockercloud` service user. You can read more about this <a href="http://blogs.aws.amazon.com/security/post/Tx3M0IFB5XBOCQX/Granting-Permission-to-Launch-EC2-Instances-with-IAM-Roles-PassRole-Permission" target="_blank">here</a>.
 
 ## What objects does Docker Cloud create in my EC2 account?
 
@@ -37,7 +37,7 @@ If you decide to let Docker Cloud create elements for you, it creates:
 - A VPC with the tag name `dc-vpc` and CIDR range `10.78.0.0/16`.
 - A set of subnets if there are no subnets already created in the VPC. Docker Cloud creates a subnet in every Availability Zone (AZ) possible, and leaves enough CIDR space for the user to create customized subnets. Every subnet created is tagged with `dc-subnet`.
 - An internet gateway named `dc-gateway` attached to the VPC.
-- A route table name `dc-route-table` in the VPC, associating the subnet with the gateway.
+- A route table named `dc-route-table` in the VPC, associating the subnet with the gateway.
 
 ## How can I customize VPC/IAM elements in Docker Cloud through the AWS dashboard?
 
@@ -47,7 +47,7 @@ above through the AWS API or the dashboard.
 In the launch node cluster view, you can choose:
 
 - VPC dropdown:
-    1. `Auto` - Delegates creation of the VPC to Docker Cloud .
+    1. `Auto` - Delegates creation of the VPC to Docker Cloud.
     2. `vpc-XXXX (dc-vpc)` - Docker Cloud's default VPC. This only appears if you have already deployed nodes to that region. Note that you can choose subnets and security groups with the VPC. See "Which objects does Docker Cloud create in my EC2 account" for detailed info.
     3. `vpc-XXXX` - You can select one of the VPCs already created by you. If you tag name them, it will be displayed too.
 - Subnets dropdown:
@@ -144,7 +144,7 @@ you manually remove it.
 
 ## How do I SSH into a node?
 
-Use the instructions [here](ssh-into-a-node.md) to  access your nodes over SSH.
+Use the instructions [here](ssh-into-a-node.md) to access your nodes over SSH.
 If you chose a custom security group, remember to open port 22.
 
 ## How do I back up my Docker container volumes to AWS S3?

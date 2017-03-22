@@ -12,7 +12,7 @@ If a user deploys a malicious service that can affect the node where it
 is running, they won't be able to affect other nodes in the cluster, or
 any cluster management functionality.
 
-To restrict users from deploying to manager nodes, log in with adminstrator
+To restrict users from deploying to manager nodes, log in with administrator
 credentials to the **UCP web UI**, navigate to the **Admin Settings**
 page, and choose **Scheduler**.
 

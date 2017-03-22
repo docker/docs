@@ -133,7 +133,7 @@ want to rename it.
 
 ### Adding Environment variables
 
-Many images use environment variables to let you customise them. The "General"
+Many images use environment variables to let you customize them. The "General"
 "Settings" tab allows you to add and modify the environment variables used to
 start a container.
 

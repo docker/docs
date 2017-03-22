@@ -20,7 +20,11 @@ Click on either cats or dogs to vote.
 
 ## View the results tally
 
-Now, go to `<MANAGER-IP>:5001` in a web browser to view the voting results tally, as one might do in the role of poll coordinator. The tally is shown by percentage in the current configuration of the app.
+Now, go to `<MANAGER-IP>:5001` in a web browser to view the voting results
+tally, as one might do in the role of poll coordinator. The tally is shown by
+percentage in the current configuration of the app. (The voting app sample
+accepts only one vote per client, so you won't be able to see your multiple
+votes.)
 
 ![Results web page](images/vote-results.png)
 
@@ -53,8 +57,8 @@ action here. For example:
 
 *   Two of the services are replicated:
 
-    *   `vote` (represented in the visulizer by `vote_vote`)
-    *   `redis` (represented in the visulizer by `vote_redis`)
+    *   `vote` (represented in the visualizer by `vote_vote`)
+    *   `redis` (represented in the visualizer by `vote_redis`)
 
     Both of these services are configured as `replicas: 2` under
     the `deploy` key. In the current state of this app (shown in the visualizer), one of each of these containers is running on a manager and on a worker. However, since neither are explicitly constrained to either node in `docker-stack.yml`, all or some of these services could be running on either node, depending on workload and re-balancing choices we've left to the swarm orchestration.

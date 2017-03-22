@@ -1170,16 +1170,12 @@ manuals:
           title: Install
         - path: /datacenter/ucp/2.1/guides/admin/install/install-offline/
           title: Install offline
+        - path: /datacenter/ucp/2.1/guides/admin/upgrade/
+          title: Upgrade
+        - path: /datacenter/ucp/2.1/guides/admin/upgrade-offline/
+          title: Upgrade offline
         - path: /datacenter/ucp/2.1/guides/admin/install/uninstall/
           title: Uninstall
-        - sectiontitle: Upgrade
-          section:
-          - path: /datacenter/ucp/2.1/guides/admin/upgrade/release-notes/
-            title: Release notes
-          - path: /datacenter/ucp/2.1/guides/admin/upgrade/incompatibilities-and-breaking-changes/
-            title: Incompatibilities and breaking changes
-          - path: /datacenter/ucp/2.1/guides/admin/upgrade/
-            title: Upgrade
       - sectiontitle: Configure
         section:
         - path: /datacenter/ucp/2.1/guides/admin/configure/license-your-installation/
@@ -1202,10 +1198,8 @@ manuals:
           title: Restrict services to worker nodes
         - path: /datacenter/ucp/2.1/guides/admin/configure/use-domain-names-to-access-services/
           title: Use domain names to access services
-        - path: /datacenter/ucp/2.1/guides/admin/configure/only-allow-running-signed-images/
-          title: Only allow running signed images
-        - path: /datacenter/ucp/2.1/guides/admin/configure/use-trusted-images-for-ci/
-          title: Use trusted images for continuous integration
+        - path: /datacenter/ucp/2.1/guides/admin/configure/run-only-the-images-you-trust/
+          title: Run only the images you trust
         - path: /datacenter/ucp/2.1/guides/admin/configure/external-auth/
           title: Integrate with LDAP
       - sectiontitle: Manage users
@@ -1272,8 +1266,8 @@ manuals:
         section:
         - path: /datacenter/ucp/2.1/guides/user/services/deploy-a-service/
           title: Deploy a service
-        - path: /datacenter/ucp/2.1/guides/user/services/use-hostnames-to-access-your-service/
-          title: Use hostnames to access your service
+        - path: /datacenter/ucp/2.1/guides/user/services/use-domain-names-to-access-services/
+          title: Use domain names to access services
         - path: /datacenter/ucp/2.1/guides/user/services/
           title: Deploy an app from the UI
         - path: /datacenter/ucp/2.1/guides/user/services/deploy-app-cli/
@@ -1284,6 +1278,12 @@ manuals:
           title: Manage secrets
         - path: /datacenter/ucp/2.1/guides/user/secrets/grant-revoke-access/
           title: Grant access to secrets
+    - sectiontitle: Release notes
+      section:
+      - path: /datacenter/ucp/2.1/guides/release-notes/
+        title: Release notes
+      - path: /datacenter/ucp/2.1/guides/release-notes/incompatibilities-and-breaking-changes/
+        title: Incompatibilities and breaking changes
     - path: /datacenter/ucp/2.1/guides/get-support/
       title: Get support
   - sectiontitle: Docker Trusted Registry
@@ -1302,16 +1302,10 @@ manuals:
           title: Install
         - path: /datacenter/dtr/2.2/guides/admin/install/install-offline/
           title: Install offline
+        - path: /datacenter/dtr/2.2/guides/admin/upgrade/
+          title: Upgrade
         - path: /datacenter/dtr/2.2/guides/admin/install/uninstall/
           title: Uninstall
-        - sectiontitle: Upgrade
-          section:
-          - path: /datacenter/dtr/2.2/guides/admin/upgrade/release-notes/
-            title: Release notes
-          - path: /datacenter/dtr/2.2/guides/admin/upgrade/incompatibilities-and-breaking-changes/
-            title: Incompatibilities and breaking changes
-          - path: /datacenter/dtr/2.2/guides/admin/upgrade/
-            title: Upgrade
       - sectiontitle: Configure
         section:
         - path: /datacenter/dtr/2.2/guides/admin/configure/license-your-installation/
@@ -1322,6 +1316,8 @@ manuals:
           section:
           - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/
             title: Overview
+          - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/s3/
+            title: S3
           - path: /datacenter/dtr/2.2/guides/admin/configure/external-storage/nfs/
             title: NFS
         - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-high-availability/
@@ -1380,6 +1376,8 @@ manuals:
         section:
         - path: /datacenter/dtr/2.2/guides/user/access-dtr/
           title: Configure your Docker Engine
+        - path: /datacenter/dtr/2.2/guides/user/access-dtr/configure-your-notary-client/
+          title: Configure your Notary client
         - path: /datacenter/dtr/2.2/guides/user/access-dtr/use-a-cache/
           title: Use a cache
       - sectiontitle: Manage images
@@ -1392,12 +1390,24 @@ manuals:
           title: Delete images
         - path: /datacenter/dtr/2.2/guides/user/manage-images/scan-images-for-vulnerabilities/
           title: Scan images for vulnerabilities
-        - path: /datacenter/dtr/2.2/guides/user/manage-images/manage-trusted-repositories/
-          title: Manage trusted repositories
+        - sectiontitle: Sign images
+          section:
+          - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/
+            title: Sign an image
+          - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/delegate-image-signing/
+            title: Delegate image signing
+          - path: /datacenter/dtr/2.2/guides/user/manage-images/sign-images/manage-trusted-repositories/
+            title: Manage trusted repositories
       - path: /datacenter/dtr/2.2/guides/user/create-and-manage-webhooks/
         title: Create and manage webhooks
     - path: /datacenter/dtr/2.2/reference/api/
       title: API reference
+    - sectiontitle: Release notes
+      section:
+      - path: /datacenter/dtr/2.2/guides/release-notes/
+        title: Release notes
+      - path: /datacenter/dtr/2.2/guides/release-notes/incompatibilities-and-breaking-changes/
+        title: Incompatibilities and breaking changes
     - path: /datacenter/dtr/2.2/guides/support/
       title: Get support
   - sectiontitle: Previous versions

@@ -48,9 +48,10 @@ to update its RHEL kernel.
     $ sudo rpm --import "https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"
     ```
 
-    Note: if the key server above does not respond, you can try one of these:
-       - pgp.mit.edu
-       - keyserver.ubuntu.com
+    > **Note**: If the key server above does not respond, you can try one of these:
+    >
+    >   - pgp.mit.edu
+    >   - keyserver.ubuntu.com
 
 2.  Install yum-utils if necessary:
 
@@ -91,7 +92,7 @@ to update its RHEL kernel.
           The second column represents the version.
 
       2.  Install a specific version by adding the version after `docker-engine`,
-          separeated by a hyphen (`-`):
+          separated by a hyphen (`-`):
 
           ```bash
           $ sudo yum install docker-engine-<version>
@@ -101,7 +102,7 @@ to update its RHEL kernel.
 
     By default, the `devicemapper` graph driver does not come pre-configured in
     a production-ready state. Follow the documented step by step instructions to
-    [configure devicemapper with direct-lvm for production](../../engine/userguide/storagedriver/device-mapper-driver/#/for-a-direct-lvm-mode-configuration)
+    [configure devicemapper with direct-lvm for production](/engine/userguide/storagedriver/device-mapper-driver/#configure-direct-lvm-mode-for-production)
     to achieve the best performance and reliability for your environment.
 
 6.  Configure the Docker daemon to start automatically when the system starts,
@@ -155,9 +156,10 @@ to update its RHEL kernel.
     $ curl -fsSL 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add -
     ```
 
-    Note: if the key server above does not respond, you can try one of these:
-       - pgp.mit.edu
-       - keyserver.ubuntu.com
+    > **Note**: If the key server above does not respond, you can try one of these:
+    >
+    >   - pgp.mit.edu
+    >   - keyserver.ubuntu.com
 
 3.  Add the repository. In the  command below, the `lsb_release -cs` sub-command
     returns the name of your Ubuntu version, like `xenial` or `trusty`.
@@ -195,7 +197,7 @@ to update its RHEL kernel.
           The second column represents the version.
 
       2.  Install a specific version by adding the version after `docker-engine`,
-          separeated by an equals sign (`=`):
+          separated by an equals sign (`=`):
 
           ```bash
           $ sudo apt-get install docker-engine=<version>
@@ -235,9 +237,10 @@ to update its RHEL kernel.
     This adds the repository of the latest version of CS Docker Engine. You can
     customize the URL to install an older version.
 
-    Note: if the key server above does not respond, you can try one of these:
-       - pgp.mit.edu
-       - keyserver.ubuntu.com
+    > **Note**: If the key server above does not respond, you can try one of these:
+    >
+    >   - pgp.mit.edu
+    >   - keyserver.ubuntu.com
 
 3.  Install CS Docker Engine.
 
@@ -265,7 +268,7 @@ to update its RHEL kernel.
           The third column is the version string.
 
       2.  Install a specific version by adding the version after `docker-engine`,
-          separeated by a hyphen (`-`):
+          separated by a hyphen (`-`):
 
           ```bash
           $ sudo zypper install docker-engine-<version>

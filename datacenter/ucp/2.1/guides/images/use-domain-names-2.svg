@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="740px" height="250px" viewBox="0 0 740 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
-    <title>use-hostnames-1</title>
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>use-domain-names-2</title>
     <desc>Created with Sketch.</desc>
     <defs>
         <circle id="path-1" cx="4" cy="4" r="4"></circle>
@@ -31,7 +31,7 @@
         </mask>
     </defs>
     <g id="ucp-diagrams" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="use-hostnames-1">
+        <g id="use-domain-names-2">
             <g id="nodes" transform="translate(108.000000, 104.000000)">
                 <g id="workers" transform="translate(321.000000, 0.000000)">
                     <g id="node-1" transform="translate(107.000000, 0.000000)">
@@ -40,7 +40,7 @@
                         </text>
                         <g id="node">
                             <g id="node-label">
-                                <rect id="Rectangle-127" fill="#445D6E" x="0" y="0" width="71" height="21.2904762" rx="2"></rect>
+                                <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#445D6E"></path>
                                 <text id="worker-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
                                     <tspan x="6" y="14">worker node</tspan>
                                 </text>
@@ -48,14 +48,14 @@
                         </g>
                         <g id="app" transform="translate(1.000000, 79.000000)">
                             <rect id="Rectangle-138" fill="#439FD1" x="0" y="0" width="95" height="22" rx="2"></rect>
-                            <text id="UCP-worker" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                <tspan x="20.4755859" y="15">UCP worker</tspan>
+                            <text id="UCP" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="38.1953125" y="15">UCP </tspan>
                             </text>
                         </g>
                         <g id="app-copy" transform="translate(1.000000, 56.000000)">
                             <rect id="Rectangle-138" fill="#FFB463" x="0" y="0" width="95" height="22" rx="2"></rect>
-                            <text id="nginx" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                <tspan x="35.2387695" y="15">nginx</tspan>
+                            <text id="wordpress:8000" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="10.5390625" y="15">wordpress:8000</tspan>
                             </text>
                         </g>
                         <rect id="node-border" stroke="#445D6E" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
@@ -66,7 +66,7 @@
                         </text>
                         <g id="node">
                             <g id="node-label">
-                                <rect id="Rectangle-127" fill="#E0E4E7" x="0" y="0" width="71" height="21.2904762" rx="2"></rect>
+                                <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#E0E4E7"></path>
                                 <text id="worker-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
                                     <tspan x="6" y="14">worker node</tspan>
                                 </text>
@@ -74,8 +74,8 @@
                         </g>
                         <g id="app" transform="translate(1.000000, 79.000000)">
                             <rect id="Rectangle-138" fill="#A1CFE8" x="0" y="0" width="95" height="22" rx="2"></rect>
-                            <text id="UCP-worker" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                <tspan x="20.4755859" y="15">UCP worker</tspan>
+                            <text id="UCP" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="38.1953125" y="15">UCP</tspan>
                             </text>
                         </g>
                         <rect id="node-border" stroke="#E0E4E7" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
@@ -88,7 +88,7 @@
                         </text>
                         <g id="node">
                             <g id="node-label">
-                                <rect id="Rectangle-127" fill="#E0E4E7" x="0" y="0" width="71" height="21.2904762" rx="2"></rect>
+                                <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#E0E4E7"></path>
                                 <text id="manager-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
                                     <tspan x="6" y="14">manager node</tspan>
                                 </text>
@@ -96,8 +96,8 @@
                         </g>
                         <g id="app" transform="translate(1.000000, 79.000000)">
                             <rect id="Rectangle-138" fill="#A1CFE8" x="0" y="0" width="95" height="22" rx="2"></rect>
-                            <text id="UCP-manager" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                <tspan x="16.0297852" y="15">UCP manager</tspan>
+                            <text id="UCP" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="38.1953125" y="15">UCP</tspan>
                             </text>
                         </g>
                         <rect id="node-border" stroke="#E0E4E7" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
@@ -108,7 +108,7 @@
                         </text>
                         <g id="node">
                             <g id="node-label">
-                                <rect id="Rectangle-127" fill="#E0E4E7" x="0" y="0" width="71" height="21.2904762" rx="2"></rect>
+                                <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#E0E4E7"></path>
                                 <text id="manager-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
                                     <tspan x="6" y="14">manager node</tspan>
                                 </text>
@@ -116,8 +116,8 @@
                         </g>
                         <g id="app" transform="translate(1.000000, 79.000000)">
                             <rect id="Rectangle-138" fill="#A1CFE8" x="0" y="0" width="95" height="22" rx="2"></rect>
-                            <text id="UCP-manager" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                <tspan x="16.0297852" y="15">UCP manager</tspan>
+                            <text id="UCP" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="38.1953125" y="15">UCP</tspan>
                             </text>
                         </g>
                         <rect id="node-border" stroke="#E0E4E7" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
@@ -128,7 +128,7 @@
                         </text>
                         <g id="node">
                             <g id="node-label">
-                                <rect id="Rectangle-127" fill="#E0E4E7" x="0" y="0" width="71" height="21.2904762" rx="2"></rect>
+                                <path d="M0,2.00295631 C0,0.896754086 0.897702336,0 1.99174577,0 L71,0 L71,10.6452381 C71,16.5244408 66.2312425,21.2904762 60.3513837,21.2904762 L0,21.2904762 L0,2.00295631 Z" id="Rectangle-127" fill="#E0E4E7"></path>
                                 <text id="manager-node" font-family="OpenSans, Open Sans" font-size="8" font-weight="normal" fill="#FFFFFF">
                                     <tspan x="6" y="14">manager node</tspan>
                                 </text>
@@ -136,8 +136,8 @@
                         </g>
                         <g id="app" transform="translate(1.000000, 79.000000)">
                             <rect id="Rectangle-138" fill="#A1CFE8" x="0" y="0" width="95" height="22" rx="2"></rect>
-                            <text id="UCP-manager" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                                <tspan x="16.0297852" y="15">UCP manager</tspan>
+                            <text id="UCP" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                                <tspan x="38.1953125" y="15">UCP</tspan>
                             </text>
                         </g>
                         <rect id="node-border" stroke="#E0E4E7" stroke-width="2" x="0" y="0" width="97" height="102" rx="2"></rect>
@@ -147,8 +147,8 @@
             <g id="load-balancer" transform="translate(107.000000, 59.000000)">
                 <g id="lb">
                     <rect id="Rectangle-138" fill="#445D6E" x="0" y="0" width="527" height="22" rx="2"></rect>
-                    <text id="swarm-routing-mesh" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
-                        <tspan x="214.819415" y="15">swarm routing mesh</tspan>
+                    <text id="HTTP-routing-mesh" font-family="OpenSans, Open Sans" font-size="10" font-weight="normal" fill="#FFFFFF">
+                        <tspan x="218.33504" y="15">HTTP routing mesh</tspan>
                     </text>
                 </g>
                 <g id="arrow-copy-2" transform="translate(477.500000, 32.500000) scale(1, -1) rotate(-90.000000) translate(-477.500000, -32.500000) translate(465.500000, 28.500000)">
@@ -187,7 +187,12 @@
                     </g>
                 </g>
             </g>
-            <path d="M370,31 C373.59125,31 376.5,28.083125 376.5,24.5 C376.5,20.90875 373.59125,18 370,18 C366.40875,18 363.5,20.90875 363.5,24.5 C363.5,28.083125 366.40875,31 370,31 L370,31 Z M370,34.25 C365.669375,34.25 357,36.419375 357,40.75 L357,44 L383,44 L383,40.75 C383,36.419375 374.330625,34.25 370,34.25 L370,34.25 Z" id="Shape" fill="#82949E"></path>
+            <g id="user" transform="translate(306.000000, 4.000000)" fill="#82949E">
+                <text id="wordpress.example.or" font-family="OpenSans-Semibold, Open Sans" font-size="10" font-weight="500">
+                    <tspan x="0.0424804688" y="42">wordpress.example.org:80</tspan>
+                </text>
+                <path d="M64,13 C67.59125,13 70.5,10.083125 70.5,6.5 C70.5,2.90875 67.59125,0 64,0 C60.40875,0 57.5,2.90875 57.5,6.5 C57.5,10.083125 60.40875,13 64,13 L64,13 Z M64,16.25 C59.669375,16.25 51,18.419375 51,22.75 L51,26 L77,26 L77,22.75 C77,18.419375 68.330625,16.25 64,16.25 L64,16.25 Z" id="Shape"></path>
+            </g>
         </g>
     </g>
 </svg>

@@ -31,7 +31,7 @@ Docker Machine command,  `docker-machine`,  to create and
 attach to a small Linux VM on your machine. This VM hosts
 Docker Engine for you on your Mac.
 
->**Tip:** One of the advantages of the newer
+>**Tip**: One of the advantages of the newer
 [Docker for Mac](/docker-for-mac/index.md) solution is that
 it uses native virtualization and does not require
 VirtualBox to run Docker.

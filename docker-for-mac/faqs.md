@@ -54,7 +54,7 @@ space where you are prepared to troubleshoot or start over.
 <font color="#CC3366">To safely switch between Edge and Stable versions be sure
 to save images and export the containers you need, then uninstall the current
 version before installing another. The workflow is described in more detail
-below.<br>
+below.</font><br>
 
 Do the following each time:
 

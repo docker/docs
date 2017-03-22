@@ -41,6 +41,8 @@ To create a machine instance, specify `--driver google`, the project id and the 
     -   `--google-disk-size`: The disk size of instance.
     -   `--google-disk-type`: The disk type of instance.
     -   `--google-address`: Instance's static external IP (name or IP).
+    -   `--google-network`: Specify network in which to provision vm.
+    -   `--google-subnetwork`: Specify subnetwork in which to provision vm.
     -   `--google-preemptible`: Instance preemptibility.
     -   `--google-tags`: Instance tags (comma-separated).
     -   `--google-use-internal-ip`: When this option is used during create it will make docker-machine use internal rather than public NATed IPs. The flag is persistent in the sense that a machine created with it retains the IP. It's useful for managing docker machines from another machine on the same network e.g. while deploying swarm.
@@ -80,6 +82,8 @@ For example, to create an instance from the latest Ubuntu 16 LTS image, specify
 | `--google-disk-size`       | `GOOGLE_DISK_SIZE`       | `10`                                 |
 | `--google-disk-type`       | `GOOGLE_DISK_TYPE`       | `pd-standard`                        |
 | `--google-address`         | `GOOGLE_ADDRESS`         | -                                    |
+| `--google-network`         | `GOOGLE_NETWORK`         | `default`                            |
+| `--google-subnetwork`      | `GOOGLE_SUBNETWORK`      | -                                    |
 | `--google-preemptible`     | `GOOGLE_PREEMPTIBLE`     | -                                    |
 | `--google-tags`            | `GOOGLE_TAGS`            | -                                    |
 | `--google-use-internal-ip` | `GOOGLE_USE_INTERNAL_IP` | -                                    |

@@ -305,7 +305,7 @@ command.
         Removing intermediate container d14acd6fad4e
         Successfully built 94e6b7d2c720
 
-    > **Note:** The period (.) at the end of the above command is important. It
+    > **Note**: The period (.) at the end of the above command is important. It
     >  tells the `docker build` command to use the current working directory as
     >   its build context.
 
@@ -335,12 +335,12 @@ command.
     The 4 image layers below it are the exact same image layers
     that make up the `ubuntu:15.04` image.
 
-> **Note:** Under the content addressable storage model introduced with Docker
+> **Note**: Under the content addressable storage model introduced with Docker
 > 1.10, image history data is no longer stored in a config file with each image
 > layer. It is now stored as a string of text in a single config file that
 > relates to the overall image. This can result in some image layers showing as
 >  "missing" in the output of the `docker history` command. This is normal
->  behaviour and can be ignored.
+>  behavior and can be ignored.
 >
 > You may hear images like these referred to as *flat images*.
 

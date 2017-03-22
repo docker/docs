@@ -70,16 +70,14 @@ examples: |-
   * label (`label=<key>` or `label=<key>=<value>`)
   * name (container's name)
   * exited (int - the code of exited containers. Only useful with `--all`)
-  * status (created|restarting|running|removing|paused|exited|dead)
+  * status (`created|restarting|running|removing|paused|exited|dead`)
   * ancestor (`<image-name>[:<tag>]`,  `<image id>` or `<image@digest>`) - filters containers that were created from the given image or a descendant.
   * before (container's id or name) - filters containers created before given id or name
   * since (container's id or name) - filters containers created since given id or name
-  * isolation (default|process|hyperv)   (Windows daemon only)
+  * isolation (`default|process|hyperv`)   (Windows daemon only)
   * volume (volume name or mount point) - filters containers that mount volumes.
   * network (network id or name) - filters containers connected to the provided network
   * health (starting|healthy|unhealthy|none) - filters containers based on healthcheck status
-  * publish=(container's published port) - filters published ports by containers
-  * expose=(container's exposed port) - filters exposed ports by containers
 
   #### label
 
@@ -284,7 +282,6 @@ examples: |-
   a volume mounted in a specific path:
 
   ```bash
-  {% raw %}
   $ docker ps --filter volume=remote-volume --format "table {{.ID}}\t{{.Mounts}}"
   CONTAINER ID        MOUNTS
   9c3527ed70ce        remote-volume
@@ -292,7 +289,6 @@ examples: |-
   $ docker ps --filter volume=/data --format "table {{.ID}}\t{{.Mounts}}"
   CONTAINER ID        MOUNTS
   9c3527ed70ce        remote-volume
-  {% endraw %}
   ```
 
   #### network
@@ -318,9 +314,7 @@ examples: |-
   the network id as a filter;
 
   ```bash
-  {% raw %}
   $ docker network inspect --format "{{.ID}}" net1
-  {% endraw %}
 
   8c0b4110ae930dbe26b258de9bc34a03f98056ed6f27f991d32919bfe401d7c5
 
@@ -354,6 +348,7 @@ examples: |-
   ```
 
   The following filter matches all containers that have exposed TCP port in the range of `8000-8080`:
+
   ```bash
   $ docker ps --filter expose=8000-8080/tcp
 
@@ -362,6 +357,7 @@ examples: |-
   ```
 
   The following filter matches all containers that have exposed UDP port `80`:
+
   ```bash
   $ docker ps --filter publish=80/udp
 
@@ -387,7 +383,7 @@ examples: |-
   `.Size`       | Container disk size.
   `.Names`      | Container names.
   `.Labels`     | All labels assigned to the container.
-  `.Label`      | Value of a specific label for this container. For example `'{% raw %}{{.Label "com.docker.swarm.cpu"}}{% endraw %}'`
+  `.Label`      | Value of a specific label for this container. For example `'{{.Label "com.docker.swarm.cpu"}}'`
   `.Mounts`     | Names of the volumes mounted in this container.
   `.Networks`   | Names of the networks attached to this container.
 
@@ -399,9 +395,7 @@ examples: |-
   `Command` entries separated by a colon for all running containers:
 
   ```bash
-  {% raw %}
   $ docker ps --format "{{.ID}}: {{.Command}}"
-  {% endraw %}
 
   a87ecb4f327c: /bin/sh -c #(nop) MA
   01946d9d34d8: /bin/sh -c #(nop) MA
@@ -412,9 +406,7 @@ examples: |-
   To list all running containers with their labels in a table format you can use:
 
   ```bash
-  {% raw %}
   $ docker ps --format "table {{.ID}}\t{{.Labels}}"
-  {% endraw %}
 
   CONTAINER ID        LABELS
   a87ecb4f327c        com.docker.swarm.node=ubuntu,com.docker.swarm.storage=ssd

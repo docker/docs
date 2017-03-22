@@ -1,13 +1,11 @@
 ---
-title: Deploy DDC on Amazon AWS
-description: Learn how to deploy Docker Datacenter with one click, using an Amazon AWS CloudFormation template
+title: Deploy Docker Enterprise Edition on AWS (Standard/Advanced)
+description: Learn how to deploy Docker EE for AWS (Standard/Advanced) with one click, using an Amazon AWS CloudFormation template
 keywords: docker, datacenter, install, orchestration, management
 ---
 
-{% assign launch_url = "https://aws.amazon.com/marketplace/pp/B06XCFDF9K" %}
-
-Docker Datacenter on Docker for Amazon AWS is an one-click deployment of DDC on
-AWS. It deploys multiple nodes with Docker CS Engine, and then installs
+Docker EE on AWS (Standard/Advanced) is an one-click deployment on
+AWS. It deploys multiple nodes with Docker Enterprise Edition, and then installs
 highly available versions of Universal Control Plane and Docker Trusted
 Registry.
 
@@ -114,36 +112,14 @@ Size of Manager's ephemeral storage volume in GiB (20 - 1024)
 **ManagerDiskType**
 Manager ephemeral storage volume type ("standard", "gp2")
 
-
-
-## Installation
-
-To deploy Docker Datacenter on Docker for AWS, you will
-use the AWS Management Console (browser based), using the above configuration options.
-
-**AWS Management Console**
-
-- Click on **Launch Stack** below. This link will take you to AWS cloudformation portal.
-
-	[![Docker Datacenter on Docker for AWS](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)]({{ launch_url }}){: .with-border}
-
-- Confirm your AWS Region that you'd like to launch this stack in (top right corner)
-- Provide the required parameters and click **Next** (see below)
-![console_installation.png](../images/console_installation.png){: .with-border}
-- **Confirm** and **Launch**
-- Once the stack is successfully created (it does take between 10-15 mins), click on **Output** tab to see the URLs of UCP and DTR.
-
-- To fully automate installs, you can use the [AWS Cloudformation API](http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/Welcome.html)
-
-
 ## Software Versions
 
-- Docker Commercially Supported Engine: `1.13.1-cs1`
 - UCP: `2.1.0`
 - DTR: `2.2.0`
+- Docker Enterprise Edition 17.03
 
 ## System containers
-Each node will have a few system containers running on them to help run your swarm cluster. In order for everything to run smoothly, please keep those containers running, and don't make any changes. If you make any changes, we can't guarantee that Docker for AWS will work correctly.
+Each node will have a few system containers running on them to help run your swarm cluster. In order for everything to run smoothly, please keep those containers running, and don't make any changes. If you make any changes, we can't guarantee that Docker EE for AWS will work correctly.
 
 ## Supported Regions
 
@@ -161,10 +137,10 @@ Each node will have a few system containers running on them to help run your swa
 - us-west-2
 
 ## AMIs
-Docker Datacenter on Docker for AWS currently only supports our custom AMI,
+Docker Enterprise Edition for AWS currently only supports our custom AMI,
 which is a highly optimized AMI built specifically for running Docker on AWS
 
-## Accessing Docker Datacenter
+## Accessing Docker EE for AWS (Standard/Advanced)
 
 Once the stack is successfully created, you can access UCP and DTR URLs in the
 output tab as follows:
@@ -230,7 +206,7 @@ Once you download the bundle and load it, run the following command:
 
 8.  Now you may access UCP and DTR with your own custom DNS names
 
-## Deploy and Access Your Applications on Docker Datacenter
+## Deploy and Access Your Applications on Docker Enterprise Edition
 
 Now that you have configured your custom DNS for both UCP and DTR, you can
 start deploying your applications via CLI (with the client bundle) or via the
@@ -253,7 +229,7 @@ provides multiple advantages to easily deploy and access your application.
     a. Creating a service with a published port `8080` using CLI:
 
     ```
-    $ docker service create --name demo -p 8080:8080 ehazlett/docker-demo:dcus
+    $ docker service create --name demo -p 8080:8080 ehazlett/docker-demo:latest
     	6s09w6gxxfz7mkce9ybl6x3cr
     ```
     b. Notice the updated ELB configuration:

@@ -30,7 +30,7 @@ forwards your commands directly to the Docker instances running in the swarm.
 
 6. Enter any additional provider-specific information, such as region.
 
-    > **Note**: The SSH keys that appear in this wizard filtered by the region you select. Ensure that you have appropriate SSH keys available on the region you select.
+    > **Note**: The SSH keys that appear in this wizard are filtered by the region you select. Ensure that you have appropriate SSH keys available on the region you select.
 
 7. Choose how many swarm managers and swarm worker nodes to deploy.
 8. Select the instance sizes for the managers, and for the workers.

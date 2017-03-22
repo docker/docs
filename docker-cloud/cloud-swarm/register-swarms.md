@@ -25,17 +25,17 @@ To register an existing swarm in Docker Cloud:
 1. Log in to Docker Cloud if necessary.
 2. If necessary, click the **Swarm Mode** toggle to activate the Swarm Mode interface.
 3. Click **Swarms** in the top navigation.
-4. Click **Bring your own swarm**
+4. Click **Bring your own swarm**.
 5. Select the whole command displayed in the dialog, and copy it to your clipboard.
 6. In terminal or another shell, connect to the Docker Engine running in the swarm's manager node using SSH.
 7. Paste the command you copied into the terminal session connected to the manager node.
-8.  When prompted, log in using your Docker ID and password.
+8. When prompted, log in using your Docker ID and password.
 
     The registration process uses your Docker ID to determine which namespaces you have access to<!--are allowed to register the swarm under TODO:CLOUD-4079 -->. Once you log in, the CLI lists these namespaces to help you with the next step.
 
 9.  Enter a name, with a namespace before the name if needed, and press Enter.
 
-    If you do not enter a name, the swarm is registered to your Docker ID account using the swarm ID, which the long string displayed before the shell prompt. For example, the prompt might look like this:
+    If you do not enter a name, the swarm is registered to your Docker ID account using the swarm ID, which is the long string displayed before the shell prompt. For example, the prompt might look like this:
 
     ```none
     Enter a name for the new cluster [mydockerid/5rdshkgzn1sw016zimgckzx3j]:
@@ -78,7 +78,7 @@ Swarms that are registered in Docker Cloud appear in the Swarms list. Each line 
 
 <!-- TODO - **DEPLOYING**: Docker Cloud is provisioning the nodes of this swarm. -->
 - **DEPLOYED**: the swarm is sending heartbeat pings to Docker Cloud, and Cloud can contact it to run a health check.
-- **UNREACHABLE**: the swarm is sending heartbeart pings, but Docker Cloud cannot contact the swarm.
+- **UNREACHABLE**: the swarm is sending heartbeat pings, but Docker Cloud cannot contact the swarm.
 - **UNAVAILABLE**: Docker Cloud is not receiving any heartbeats from the swarm.
 - **REMOVED**: the swarm has been unregistered from Docker Cloud and will be removed from the list soon.
 

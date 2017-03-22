@@ -38,4 +38,4 @@ if you're looking to help fix specific issues around VM provisioning.
 ## View All Issues
 
 For a full list of Kitematic bugs or issues see our <a href="https://github.com/kitematic/kitematic/issues?q=is%3Aopen+is%3Aissue+label%3Abug">existing GitHub
-issues</a> labelled as `bug`.
+issues</a> labeled as `bug`.

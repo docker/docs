@@ -56,6 +56,6 @@ There a number of community supported libraries available for other languages. T
 | PHP           | [Docker-PHP](https://github.com/docker-php/docker-php) |
 | Ruby          | [docker-api](https://github.com/swipely/docker-api) |
 | Rust          | [docker-rust](https://github.com/abh1nav/docker-rust) |
-| Rust          | [shiplist](https://github.com/softprops/shiplift) |
+| Rust          | [shiplift](https://github.com/softprops/shiplift) |
 | Scala         | [tugboat](https://github.com/softprops/tugboat) |
 | Scala         | [reactive-docker](https://github.com/almoehi/reactive-docker) |

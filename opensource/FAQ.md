@@ -45,7 +45,7 @@ Set your local repo to track changes upstream, on the `docker` repository.
     ```
 
 2.  Add a remote called `upstream` that points to `docker/docker`.
-    
+
     ```
     $ git remote add upstream https://github.com/docker/docker.git
     ```
@@ -135,4 +135,19 @@ force the previous change to be overwritten.
 
     ```
     $ git push -f origin my-keen-feature
+    ```
+
+## How do I update vendor package from upstream ?
+
+1.  If you are not using the development container, download the
+    [vndr](https://github.com/LK4D4/vndr) vendoring tool. The `vndr`
+    tool is included in the development container.
+    
+2.  Edit the package version in `vendor.conf` to use the package you want to use, such as
+    `github.com/gorilla/mux`.
+    
+3.  Run `vndr <package-name>`. For example:
+
+    ```bash
+    vndr github.com/gorilla/mux
     ```

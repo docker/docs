@@ -82,38 +82,24 @@
                         <!-- <button type="submit" class="search-submit btn btn-default">Search</button> -->
                     </form>
                   </div>
-                  <div class="sidebar-toggle">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-8 col-md-6 col-lg-7>
-                    <div id="tabs">
-                        <!-- <ul class="tabs nav navbar-nav navbar-collapse collapse navbar-left"> -->
-                        <ul class="tabs">
-                            {% include treebuilder.html %}
-                        </ul>
-                    </div>
-                <div class="col-xs-12 col-sm-1 col-md-3 col-lg-3">
-                    <div class="ctrl-right hidden-xs">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Docker 17.03 (current) <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                {% for item in site.data.docsarchive.docker-compose %}
-                                <li><a href="/{{ item[0] }}/">Docker {{ item[0] }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                </div>
+            </div>
+            <div class="sidebar-toggle">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="tabs">
+                <!-- <ul class="tabs nav navbar-nav navbar-collapse collapse navbar-left"> -->
+                <ul class="tabs nav navbar-nav navbar-collapse navbar-left">
+                  {% include treebuilder.html %}
+                </ul>
+            </div>
+            <div class="ctrl-right">
+              {% include archive-list.html %}
             </div>
         </div>
-    </nav>
-</div>
+     </div>
+ </nav>

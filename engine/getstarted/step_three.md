@@ -15,27 +15,16 @@ image you'll use in the rest of this getting started.
 
 ## Step 1: Locate the whalesay image
 
-1. Open your browser and [browse the Docker Hub](https://hub.docker.com/?utm_source=getting_started_guide&utm_medium=embedded_MacOSX&utm_campaign=find_whalesay).
+1. Open your browser and [browse the Docker Store](https://store.docker.com/community/images/docker/whalesay) to
+   see the **whalesay** image.
 
-    ![Browse Docker Hub](tutimg/browse_and_search.png)
-
-	The Docker Hub contains images from individuals like you and official images
-	from organizations like RedHat, IBM, Google, and a whole lot more.
-
-2. Enter the word `whalesay` in the search bar.
-
-    ![Browse Docker Hub](tutimg/image_found.png)
-
-3. Click on the **docker/whalesay** image in the results.
-
-    The browser displays the repository for the **whalesay** image.
-
-    ![Browse Docker Hub](tutimg/whale_repo.png)
-
-	  Each image repository contains information about an image. It should
-    include information such as what kind of software the image contains and
-    how to use it. You may notice that the **whalesay** image is based on a
-    Linux distribution called Ubuntu. In the next step, you run the **whalesay** image on your machine.
+   The Docker Store contains images from individuals like you and official images
+   from organizations like RedHat, IBM, Google, Microsoft, and a whole lot more.
+   Each image repository contains information about an image. It should
+   include information such as what kind of software the image contains and
+   how to use it. You may notice that the **whalesay** image is based on a
+   Linux distribution called Ubuntu. In the next step, you run the **whalesay**
+   image on your machine.
 
 ## Step 2: Run the whalesay image
 

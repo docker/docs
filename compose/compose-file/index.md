@@ -16,6 +16,21 @@ For a Compose/Docker Engine compatibility matrix, and detailed guidelines on
 versions and upgrading, see
 [Compose file versions and upgrading](compose-versioning.md).
 
+## Compose file structure and examples
+
+The topics on this reference page are organized alphabetically by top-level key
+to reflect the structure of the Compose file itself. Top-level keys that define
+a section in the configuration file such as `build`, `deploy`, `depends_on`,
+`networks`, and so on, are listed with the options that support them as
+sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the Compose file.
+
+Example snip-its of how to define particular options are included on this
+reference page, but we suggest also taking a look at some samples that include
+full Compose files. A good place to start are the [sample
+applications](samples.md#sample-applications) in [Docker
+Labs](https://github.com/docker/labs/) and the [voting app sample
+walk-through](/engine/getstarted-voting-app/index.md).
+
 ## Service configuration reference
 
 The Compose file is a [YAML](http://yaml.org/) file defining
@@ -24,7 +39,7 @@ The Compose file is a [YAML](http://yaml.org/) file defining
 [volumes](#volume-configuration-reference).
 The default path for a Compose file is `./docker-compose.yml`.
 
->**Tip:** You can use either a `.yml` or `.yaml` extension for this file. They both work.
+>**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
 
 A service definition contains configuration which will be applied to each
 container started for that service, much like passing command-line parameters to
@@ -66,7 +81,7 @@ with the `webapp` and optional `tag` specified in `image`:
 
 This will result in an image named `webapp` and tagged `tag`, built from `./dir`.
 
-> **Note:** This option is ignored when
+> **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file. The `docker stack` command accepts only pre-built images.
 
@@ -144,7 +159,7 @@ See `man 7 capabilities` for a full list.
       - NET_ADMIN
       - SYS_ADMIN
 
-> **Note:** These options are ignored when
+> **Note**: These options are ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -165,7 +180,7 @@ Specify an optional parent cgroup for the container.
 
     cgroup_parent: m-executor-abcd
 
-> **Note:** This option is ignored when
+> **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -265,7 +280,7 @@ resources:
 #### restart_policy
 
 Configures if and how to restart containers when they exit. Replaces
-[`restart`](compose-file-v2.md#cpushares-cpuquota-cpuset-domainname-hostname-ipc-macaddress-memlimit-memswaplimit-oomscoreadj-privileged-readonly-restart-shmsize-stdinopen-tty-user-workingdir).
+[`restart`](compose-file-v2.md#orig-resources).
 
 - `condition`: One of `none`, `on-failure` or `any` (default: `any`).
 - `delay`: How long to wait between restart attempts, specified as a
@@ -314,7 +329,7 @@ client create option.
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
 
-> **Note:** This option is ignored when
+> **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -343,38 +358,19 @@ Simple example:
       db:
         image: postgres
 
-> **Note:** `depends_on` will not wait for `db` and `redis` to be "ready" before
-> starting `web` - only until they have been started. If you need to wait
-> for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
-> for more on this problem and strategies for solving it.
+> **Note**: There are several things to be aware of when using `depends_on`:
+>
+> - `depends_on` will not wait for `db` and `redis` to be "ready" before
+>   starting `web` - only until they have been started. If you need to wait
+>   for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
+>   for more on this problem and strategies for solving it.
+>
+> - Version 3 no longer supports the `condition` form of `depends_on`.
+>
+> - The `depends_on` option is ignored when
+>   [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
+>   with a version 3 Compose file.
 
-A healthcheck indicates you want a dependency to wait
-for another container to be "healthy" (i.e. its healthcheck advertises a
-successful state) before starting.
-
-Example:
-
-    version: '2.1'
-    services:
-      web:
-        build: .
-        depends_on:
-          db:
-            condition: service_healthy
-          redis:
-            condition: service_started
-      redis:
-        image: redis
-      db:
-        image: redis
-        healthcheck:
-          test: "exit 0"
-
-In the above example, Compose will wait for the `redis` service to be started
-(legacy behavior) and the `db` service to be healthy before starting `web`.
-
-See the [healthcheck section](#healthcheck) for complementary
-information.
 
 ### dns
 
@@ -385,7 +381,7 @@ Custom DNS servers. Can be a single value or a list.
       - 8.8.8.8
       - 9.9.9.9
 
-> **Note:** This option is ignored when
+> **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -398,7 +394,7 @@ Custom DNS search domains. Can be a single value or a list.
       - dc1.example.com
       - dc2.example.com
 
-> **Note:** This option is ignored when
+> **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -413,7 +409,7 @@ Mount a temporary file system inside the container. Can be a single value or a l
       - /run
       - /tmp
 
-> **Note:** This option is ignored when
+> **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -434,7 +430,7 @@ The entrypoint can also be a list, in a manner similar to
         - memory_limit=-1
         - vendor/bin/phpunit
 
-> **Note:** Setting `entrypoint` will both override any default entrypoint set
+> **Note**: Setting `entrypoint` will both override any default entrypoint set
 > on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
 > clear out any default command on the image - meaning that if there's a `CMD`
 > instruction in the Dockerfile, it will be ignored.
@@ -461,7 +457,7 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
     # Set Rails/Rack environment
     RACK_ENV=development
 
-> **Note:** If your service specifies a [build](#build) option, variables
+> **Note**: If your service specifies a [build](#build) option, variables
 > defined in environment files will _not_ be automatically visible during the
 > build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
@@ -489,7 +485,7 @@ machine Compose is running on, which can be helpful for secret or host-specific 
       - SHOW=true
       - SESSION_SECRET
 
-> **Note:** If your service specifies a [build](#build) option, variables
+> **Note**: If your service specifies a [build](#build) option, variables
 > defined in `environment` will _not_ be automatically visible during the
 > build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
@@ -505,21 +501,23 @@ accessible to linked services. Only the internal port can be specified.
 
 ### external_links
 
-Link to containers started outside this `docker-compose.yml` or even outside
-of Compose, especially for containers that provide shared or common services.
-`external_links` follow semantics similar to `links` when specifying both the
-container name and the link alias (`CONTAINER:ALIAS`).
+Link to containers started outside this `docker-compose.yml` or even outside of
+Compose, especially for containers that provide shared or common services.
+`external_links` follow semantics similar to the legacy option `links` when
+specifying both the container name and the link alias (`CONTAINER:ALIAS`).
 
     external_links:
      - redis_1
      - project_db_1:mysql
      - project_db_1:postgresql
 
-> **Note:** If you're using the [version 2 or above file format](compose-versioning.md#version-2), the
+> **Notes:**
+>
+>* If you're using the [version 2 or above file format](compose-versioning.md#version-2), the
 > externally-created containers must be connected to at least one of the same
-> networks as the service which is linking to them. Starting with Version 2, links are a legacy option. We recommend using networks instead. See [Version 2 file format](compose-versioning.md#version-2).
-
-> **Note:** This option is ignored when
+> networks as the service which is linking to them. Starting with Version 2, [links](compose-file-v2#links) are a legacy option. We recommend using [networks](#networks) instead.
+>
+>* This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -652,11 +650,13 @@ the alias, or the service name if no alias was specified.
 Links also express dependency between services in the same way as
 [depends_on](#dependson), so they determine the order of service startup.
 
-> **Note:** If you define both links and [networks](#networks), services with
+> **Notes:**
+>
+> * If you define both links and [networks](#networks), services with
 > links between them must share at least one network in common in order to
 > communicate.
-
-> **Note:** This option is ignored when
+>
+> *  This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -679,7 +679,7 @@ The default value is json-file.
     driver: "syslog"
     driver: "none"
 
-> **Note:** Only the `json-file` and `journald` drivers make the logs available directly from
+> **Note**: Only the `json-file` and `journald` drivers make the logs available directly from
 > `docker-compose up` and `docker-compose logs`. Using any other driver will not
 > print any logs.
 
@@ -702,7 +702,7 @@ the special form `service:[service name]`.
     network_mode: "service:[service name]"
     network_mode: "container:[container name/id]"
 
-> **Note:** This option is ignored when
+> **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -835,7 +835,7 @@ containers in the bare-metal machine's namespace and vise-versa.
 Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
 port (a random host port will be chosen).
 
-> **Note:** When mapping ports in the `HOST:CONTAINER` format, you may experience
+> **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
 > erroneous results when using a container port lower than 60, because YAML will
 > parse numbers in the format `xx:yy` as sexagesimal (base 60). For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
@@ -954,7 +954,7 @@ Override the default labeling scheme for each container.
       - label:user:USER
       - label:role:ROLE
 
-> **Note:** This option is ignored when
+> **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -979,7 +979,7 @@ SIGTERM. Setting an alternative signal using `stop_signal` will cause
 
     stop_signal: SIGUSR1
 
-> **Note:** This option is ignored when
+> **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -996,7 +996,7 @@ dictionary.
       - net.core.somaxconn=1024
       - net.ipv4.tcp_syncookies=0
 
-> **Note:** This option is ignored when
+> **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
@@ -1020,13 +1020,13 @@ Disables the user namespace for this service, if Docker daemon is configured wit
 See [dockerd](/engine/reference/commandline/dockerd.md#disable-user-namespace-for-a-container) for
 more information.
 
-> **Note:** This option is ignored when
+> **Note**: This option is ignored when
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
 ### volumes, volume\_driver
 
-> **Note:** The top-level
+> **Note**: The top-level
 > [`volumes` option](#volume-configuration-reference) defines
 > a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format.
 
@@ -1221,9 +1221,15 @@ conflicting with those used by other software.
 
 ## Network configuration reference
 
-The top-level `networks` key lets you specify networks to be created. For a full
-explanation of Compose's use of Docker networking features, see the
-[Networking guide](../networking.md).
+The top-level `networks` key lets you specify networks to be created.
+
+* For a full explanation of Compose's use of Docker networking features and all
+network driver options, see the [Networking guide](../networking.md).
+
+* For [Docker Labs](https://github.com/docker/labs/blob/master/README.md)
+tutorials on networking, start with [Designing Scalable, Portable Docker
+Container
+Networks](https://github.com/docker/labs/blob/master/networking/README.md)
 
 ### driver
 
@@ -1236,6 +1242,26 @@ Swarm.
 The Docker Engine will return an error if the driver is not available.
 
     driver: overlay
+
+#### bridge
+
+Docker defaults to using a `bridge` network on a single host. For examples of
+how to work with bridge networks, see the Docker Labs tutorial on [Bridge
+networking](https://github.com/docker/labs/blob/master/networking/A2-bridge-networking.md).
+
+#### overlay
+
+The `overlay` driver creates a named network across multiple nodes in a
+[swarm](/engine/swarm/).
+
+* For a working example of how to build and use an
+`overlay` network with a service in swarm mode, see the Docker Labs tutorial on
+[Overlay networking and service
+discovery](https://github.com/docker/labs/blob/master/networking/A3-overlay-networking.md).
+
+* For an in-depth look at how it works under the hood, see the
+networking concepts lab on the [Overlay Driver Network
+Architecture](https://github.com/docker/labs/blob/master/networking/concepts/06-overlay-networks.md).
 
 ### driver_opts
 
@@ -1365,7 +1391,7 @@ stack.
 
 ## Compose documentation
 
-- [User guide](index.md)
+- [User guide](/compose/index.md)
 - [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample app with swarm mode](/engine/getstarted-voting-app/)

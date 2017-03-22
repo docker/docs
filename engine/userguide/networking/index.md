@@ -466,7 +466,7 @@ version of the Engine, you must install and configure your chosen key-value
 store service. The Docker hosts that you intend to network and the service must
 be able to communicate.
 
->**Note:** Docker Engine running in swarm mode is not compatible with networking
+>**Note**: Docker Engine running in swarm mode is not compatible with networking
 with an external key-value store.
 
 ![Key-value store](images/key_value.png)

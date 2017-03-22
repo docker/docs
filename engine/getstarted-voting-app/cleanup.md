@@ -4,12 +4,16 @@ keywords: voting app, docker-machine
 title: Graceful shutdown, reboot, and clean-up
 ---
 
-
-The voting app will continue to run on the swarm while the `manager` and `worker` machines are running, unless you explicitly stop it.
+The voting app will continue to run on the swarm while the `manager` and
+`worker` machines are running, unless you explicitly stop it. The following
+topics explain how to stop and start the app, remove the app but keep the swarm,
+or remove the machines entirely.
 
 ## Stopping the voting app
 
-To shut down the voting app, simply stop the machines on which it is running. If you are using local hosts, follow the steps below. If you are using cloud hosts, stop them per your cloud setup.
+To shut down the voting app, simply stop the machines on which it is running. If
+you are using local hosts, follow the steps below. If you are using cloud hosts,
+stop them per your cloud setup.
 
 1.  Open a terminal window and run `docker-machine ls` to list the current machines.
 
@@ -88,10 +92,61 @@ start them per your cloud setup.
 
 At this point, the app is back up. The web pages you looked at in the [test drive](test-drive.md) should be available, and you could experiment, modify the app, and [redeploy](customize-app.md).
 
+## Removing the voting app
+
+To remove the application, but keep the swarm running, do the following:
+
+1.  Log into the manager with `docker-machine ssh manager`.
+
+2.  Run `docker stack rm [APP-NAME]`, e.g., `docker stack rm vote`:
+
+    ```none
+    docker@manager:~$ docker stack rm vote
+    Removing service vote_db
+    Removing service vote_redis
+    Removing service vote_worker
+    Removing service vote_vote
+    Removing service vote_result
+    Removing service vote_visualizer
+    Removing network vote_backend
+    Removing network vote_frontend
+    Removing network vote_default
+    docker@manager:~$ docker stack services vote
+    Nothing found in stack: vote
+    docker@manager:~$ docker node ls
+    ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+    1q0nmgrvbfk9kwj3r9lo85l94 *  manager   Ready   Active        Leader
+    a4zgsyk5upjfc4g6dv89seq69    worker    Ready   Active        
+    ```
+
+    This removes the voting application and all its services from both manager and worker nodes.
+
+3.  Run `docker stack services vote` to verify that the application was removed.
+
+    ```none
+    docker@manager:~$ docker stack services vote
+    Nothing found in stack: vote
+    ```
+
+4.  Run `docker node ls` to verify that the swarm is still active on both nodes.
+
+    ```none
+    docker@manager:~$ docker node ls
+    ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+    1q0nmgrvbfk9kwj3r9lo85l94 *  manager   Ready   Active        Leader
+    a4zgsyk5upjfc4g6dv89seq69    worker    Ready   Active      
+    ```
+
+    You can re-use the [swarm](/engine/swarm/how-swarm-mode-works/nodes.md) in a
+number of ways, such as redeploy this or another application, try a simple use
+case to [deploy a single service to a swarm](/engine/swarm/services.md), or
+[explore or reconfigure the swarm](/engine/swarm/manage-nodes.md).
+
 ## Removing the machines
 
-If you prefer to remove your local machines altogether, use `docker-machine rm`
-to do so. (Or, `docker-machine rm -f` will force-remove running machines.)
+If you don't need this swarm anymore and prefer to remove your local machines
+altogether, use `docker-machine rm` to do so. (Or, `docker-machine rm -f` will
+force-remove running machines.)
 
 ```none
 $ docker-machine rm worker

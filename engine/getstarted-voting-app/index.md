@@ -19,15 +19,12 @@ Docker Engine.
 
 If you haven't yet downloaded Docker or installed it, go to [Get
 Docker](/engine/getstarted/step_one.md#step-1-get-docker) and grab Docker for
-your platform.  You can follow along and run this example using Docker for Mac,
-Docker for Windows or Docker for Linux.
+your platform.  You can follow along and run this example using [Docker for Mac](/docker-for-mac/install.md),
+[Docker for Windows](/docker-for-windows/install.md), [Docker Toolbox](/toolbox/overview.md), or [Docker for Linux](/installation/linux/index.md).
 
-Once you have Docker installed, you can run `docker run hello-world` or other
-commands described in the Get Started with Docker tutorial to [verify your
-installation](/engine/getstarted/step_one.md#step-3-verify-your-installation).
-If you are totally new to Docker, you might continue through the full [Get
+If you are totally new to Docker, you might want to work through the [Get
 Started with Docker tutorial](/engine/getstarted/index.md) first, then come
-back.
+back here.
 
 ## What you'll learn and do
 
@@ -44,34 +41,66 @@ the `docker stack deploy` command
 `vote` image to implement a poll on different choices
 * Use features new in Compose Version 3, highlighted in the sample app
 
+## Preview of voting app stack and how it works
+
+These next few topics provide a quick tour of the services, deployment configuration, files, and commands we will use.
+
+This diagram represents the application stack at runtime. It shows
+dependencies among the services, and a potential division of services between
+the manager and worker nodes in a swarm. As you'll discover in the tutorial,
+some services are constrained to always run on a manager node, while others can
+run on either a manager or workers, at the discretion of swarm load balancing.
+
 ![voting app diagram](images/vote-app-diagram.png)
 
-## Services and images overview
+### Services and images overview
 
-A [service](/engine/reference/glossary.md#service) is a bit of executable code designed to accomplish
-a specific task. A service can run in one or more
-containers. Defining a service configuration for your app
-(above and beyond `docker run` commands in a Dockerfile) enables you to
-deploy the app to a swarm and manage it as a distributed,
-multi-container application.
+A [service](/engine/reference/glossary.md#service) is a bit of executable code
+designed to accomplish a specific task. A service can run in one or more
+containers. Defining a service configuration for your app (above and beyond
+`docker run` commands in a Dockerfile) enables you to deploy the app to a swarm
+and manage it as a distributed, multi-container application.
 
-The voting app you are about to deploy is composed
-of several services, each based on an [image](/engine/reference/glossary.md#image):
+The voting app you are about to deploy is made up of several services, each
+based on an [image](/engine/reference/glossary.md#image) that the app will pull
+from [Docker Hub](/engine/reference/glossary.md#docker-hub) at runtime:
 
-| Service        | Description | Base Image  |
+| Service        | Description | Base Image on Docker Hub |
 | ------------- |--------------| -----|
-| `vote`      | Presents the voting interface via port `5000`. Viewable at `<manager-IP>:5000` | Based on a Python image, `dockersamples/examplevotingapp_vote` |
-| `result`      | Displays the voting results via port 5001.  Viewable at `<manager-IP>:5001`     |  Based on a Node.js image, `dockersamples/examplevotingapp_result` |
-| `visualizer` | A web app that shows a map of the deployment of the various services across the available nodes via port `8080`. Viewable at `<manager-IP>:8080`  |  Based on a Node.js image, `dockersamples/visualizer` |
-| `redis` | Collects raw voting data and stores it in a key/value queue     |  Based on a `redis` image, `redis:alpine` |
-| `db` | A PostgreSQL service which provides permanent storage on a host volume    |  Based on a `postgres` image, `postgres:9.4` |
-| `worker` | A background service that transfers votes from the queue to permanent storage     |  Based on a .NET image, `dockersamples/examplevotingapp_worker` |
+| `vote`      | Displays the web page where you cast your vote at `<manager-IP>:5000` | Based on a Python image, [dockersamples/examplevotingapp_vote](https://hub.docker.com/r/dockersamples/examplevotingapp_vote/) |
+| `result`      | Shows the voting results in a web browser at `<manager-IP>:5001`     |  Based on a Node.js image, [dockersamples/examplevotingapp_result](https://hub.docker.com/r/dockersamples/examplevotingapp_result/) |
+| `visualizer` | Shows a realtime map of services deployed across the available nodes, viewable at `<manager-IP>:8080`  |  Based on a Node.js image, [dockersamples/visualizer](https://hub.docker.com/r/dockersamples/visualizer/) |
+| `redis` | Collects raw voting data and stores it in a key/value queue     |  Based on the Alpine version of the official `redis` image, [redis:alpine](https://hub.docker.com/_/redis/) |
+| `db` | A PostgreSQL service which provides permanent storage on a host volume    |  Based on the official `postgres` image, [postgres:9.4](https://hub.docker.com/_/postgres/) |
+| `worker` | A background service that transfers votes from the queue to permanent storage     |  Based on a .NET image, [dockersamples/examplevotingapp_worker](https://hub.docker.com/r/dockersamples/examplevotingapp_worker/) |
 
 Each service will run in its own [container](/engine/reference/glossary.md#container). Using swarm mode,
 we can also scale the application to deploy replicas
 of containerized services distributed across multiple nodes.
 
-Here is an example of one of the services fully defined:
+### docker-stack.yml deployment configuration file
+
+In the Getting Started with Docker tutorial, you wrote a
+[Dockerfile for the whalesay app](/engine/getstarted/step_four.md) then used
+it to build a single image and run it as a single container.
+
+For this tutorial, the images are pre-built, and we use a _stack file_ instead
+of a Dockerfile to specify the images. When we deploy, each image will run as a
+service in a container (or in multiple containers, for those that have replicas
+defined to scale the app).
+
+To follow along, you need only have Docker running and a copy of the
+`docker-stack.yml`
+file that we provide.
+
+This file defines all the services we want to use along with details about how
+and where those services will run; their base images, configuration
+details such as ports, networks, volumes, application dependencies, and the
+swarm configuration.
+
+This **example snip-it** taken from our `docker-stack.yml` shows one of the
+services fully defined. (The full file is
+[**here**](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml).)
 
 ```
 vote:
@@ -90,54 +119,40 @@ vote:
       condition: on-failure
 ```
 
-The `image` key defines which image the service will use. The `vote` service
-uses `dockersamples/examplevotingapp_vote:before`.
+* The **image** key defines which image the service will use. The `vote` service
+uses `dockersamples/examplevotingapp_vote:before`. This specifies the path to
+the image on Docker Hub (as shown in the table above), and an [image
+tag](/engine/reference/commandline/tag.md), `before` to indicate the version of
+the image we want to start with. In the second part of the tutorial, we will
+edit this file to call a different verson of this image with an `after` tag.
 
-The `depends_on` key allows you to specify that a service is only
+* The **depends_on** key allows you to specify that a service is only
 deployed after another service. In our example, `vote` only deploys
 after `redis`.
 
-The `deploy` key specifies aspects of a swarm deployment. For example, in this configuration we create _replicas_ of the `vote` and `result` services (2 containers of each will be deployed to the swarm), and we constrain some services (`db` and `visualizer`) to run only on a `manager` node.
+* The **deploy** key specifies aspects of a swarm deployment. For example,
+in this configuration we create _replicas_ of the `vote` service (2 containers
+for `vote` will be deployed to the swarm). The `result` service, not shown in
+the file snip-it above, will also have 2 replicas. Additionally, we will use the
+`deploy` key to constrain some other services (`db` and `visualizer`) to run
+only on a manager node.
 
-## docker-stack.yml deployment configuration file
 
-In addition to defining a set of build and run commands in a Dockerfile, you can
-define services in a [Compose file](/compose/compose-file.md), along with
-details about how and where those services will run. You can use Compose files
-to kick off multiple Dockerfiles, or use Compose files independently of
-Dockerfiles.
-
-In the Getting Started with Docker tutorial, you wrote a
-[Dockerfile for the whalesay app](/engine/getstarted/step_four.md) then used
-it to build a single image and run it as a single container.
-
-For this tutorial, the images are pre-built, and we will use `docker-stack.yml`
-(a Version 3 Compose file) instead of a Dockerfile to run the images. When we
-deploy, each image will run as a service in a container (or in multiple
-containers, for those that have replicas defined to scale the app). This example
-relies on Compose version 3, which is designed to be compatible with Docker
-Engine swarm mode.
-
-To follow along with the example, you need only have Docker running and the copy
-of `docker-stack.yml` we provide
-[**here**](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml).
-This file defines all the services shown in the
-[table above](#services-and-images-overview), their base images,
-configuration details such as ports, networks, volumes,
-application dependencies, and the swarm configuration.
-
-## Docker stacks and services
+### docker stack deploy command
 
 To deploy the voting app, we will run the [`docker stack
 deploy`](/engine/reference/commandline/stack_deploy.md) command with appropriate
-options using this `docker-stack.yml` file to pull the referenced images and
-launch the services in a swarm.  This allows us to run the application across
-multiple servers, and use swarm mode for load balancing and performance. Rather
-than thinking about running individual containers, we can start to model
-deployments as application stacks and services.
+options, using the configuration in our `docker-stack.yml` file to pull the
+referenced images and launch the services in a swarm.
 
-If you are interested in learning more about new Compose version 3.x features, Docker Engine 1.13.x, and swarm mode integration, check out the [list of resources](customize-app.md#resources) at the end of this tutorial.
+### Where to learn more
+
+If you are interested in reading more about Compose version 3.x, stack files,
+Docker Engine 1.13.x, swarm mode integration, Docker CE, or Docker EE, jump
+to the [list of resources](customize-app.md#resources) at the end of this
+tutorial.
 
 ## What's next?
 
-In the next step, we'll [set up two Dockerized hosts](node-setup.md).
+Ready to get started? In the next step, we'll [set up two Dockerized
+hosts](node-setup.md).
