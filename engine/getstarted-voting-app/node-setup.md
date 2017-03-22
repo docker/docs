@@ -122,8 +122,8 @@ running and to get their IP addresses.
 ```none
 $ docker-machine ls
 NAME       ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER        ERRORS
-manager   *        virtualbox   Running   tcp://192.168.99.100:2376           v1.13.0-rc6
-worker    -        virtualbox   Running   tcp://192.168.99.101:2376           v1.13.0-rc6
+manager   *        virtualbox   Running   tcp://192.168.99.100:2376           v17.03.0-ce
+worker    -        virtualbox   Running   tcp://192.168.99.101:2376           v17.03.0-ce
 ```
 
 You now have two "Dockerized" machines, each running
