@@ -89,7 +89,7 @@ list all the keys managed by the Notary CLI client, run:
 $ notary key list
 ```
 
-To chance the passphrase used to encrypt one of the keys, run:
+To change the passphrase used to encrypt one of the keys, run:
 
 ```bash
 $ notary key passwd <key_id>
