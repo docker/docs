@@ -335,7 +335,7 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
-### Docker Community Edition 17.03.1-ce-mac3, 2017-03-21 (edge)
+### Docker Community Edition 17.03.1-ce-mac3, 2017-03-22 (edge)
 
 **Upgrades**
 

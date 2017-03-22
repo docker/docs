@@ -303,7 +303,7 @@ We did not distribute a 1.12.4 stable release
 
 ## Edge Release Notes
 
-### Docker Community Edition 17.03.1 Release Notes (2017-03-21 17.03.1-ce-win3)
+### Docker Community Edition 17.03.1 Release Notes (2017-03-22 17.03.1-ce-win3)
 
 **Upgrades**
 
