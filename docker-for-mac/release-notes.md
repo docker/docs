@@ -335,6 +335,23 @@ events or unexpected unmounts.
 
 ## Edge Release Notes
 
+### Docker Community Edition 17.03.1-ce-mac3, 2017-03-21 (edge)
+
+**Upgrades**
+
+- [Docker 17.03.1-ce-rc1](https://github.com/docker/docker/releases/tag/v17.03.1-ce-rc1)
+- [Docker Credential Helpers 0.5.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.5.0)
+- Linux Kernel 4.9.14
+
+**Bug fixes and minor changes**
+
+- Use `fsync` rather than `fcntl`(`F_FULLFSYNC`)
+- Update max-connections to 2000 ([docker/for-mac#1374](https://github.com/docker/for-mac/issues/1374) and [docker/for-mac#1132](https://github.com/docker/for-mac/issues/1132))
+- VPNKit: capture up to 64KiB of NTP traffic for diagnostics, better handling of DNS
+- UI: fix edge cases which crash the application
+- Qcow: numerous bugfixes
+- osxfs: buffer readdir
+
 ### Docker Community Edition 17.03.0-ce-mac2, 2017-03-06 (edge)
 
 **Hotfixes**
