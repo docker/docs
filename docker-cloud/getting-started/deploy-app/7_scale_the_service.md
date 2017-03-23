@@ -26,7 +26,7 @@ $ docker-cloud service scale web 2
 
 In this example, you can see we're scaling the service called `web` to `2` containers.
 
-Run `service ps` again, and you should see now see your service scaling:
+Run `service ps` again, and you should now see your service scaling:
 
 ```none
 $ docker-cloud service ps
