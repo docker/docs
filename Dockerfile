@@ -38,7 +38,8 @@ RUN svn co https://github.com/docker/docker/branches/$ENGINE_BRANCH/docs/extend 
 	&& rm -rf md_source/apidocs/cloud-api-source \
 	&& rm -rf md_source/tests \
   && wget -O md_source/engine/api/v1.25/swagger.yaml https://raw.githubusercontent.com/docker/docker/v1.13.0/api/swagger.yaml \
-  && wget -O md_source/engine/api/v1.26/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
+  && wget -O md_source/engine/api/v1.26/swagger.yaml https://raw.githubusercontent.com/docker/docker/v17.03.0-ce/api/swagger.yaml \
+  && wget -O md_source/engine/api/v1.27/swagger.yaml https://raw.githubusercontent.com/docker/docker/$ENGINE_BRANCH/api/swagger.yaml \
 	&& jekyll build -s md_source -d target \
 	&& rm -rf target/apidocs/layouts \
 	&& find target -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \

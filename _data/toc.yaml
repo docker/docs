@@ -478,11 +478,13 @@ reference:
   - path: /engine/api/sdks/
     title: SDKs
   - path: /engine/api/v1.26/
-    title: v1.26 Reference
+    title: v1.27 Reference
   - sectiontitle: Previous API versions
     section:
     - path: /engine/api/version-history/
       title: Version history overview
+    - path: /engine/api/v1.26/
+      title: v1.26 reference
     - path: /engine/api/v1.25/
       title: v1.25 reference
     - path: /engine/api/v1.24/
