@@ -82,7 +82,6 @@ section.section {
     height: 100%;
     padding-top: 20px;
     width: 255px;
-    // position: absolute;
 }
 
 #sidebar-right.affix {
@@ -91,7 +90,7 @@ section.section {
 }
 
 .wrapper.right-open #sidebar-wrapper {
-    width: 250px;
+    width: 255px;
 }
 
 
@@ -117,7 +116,7 @@ section.section {
 .sidebar-home .affix {
     background-color: $bg-sidebar;
     border-right: 1px solid rgba(204, 204, 204, 0.29);
-    top: 70px;
+    top: 55px;
     overflow-x: hidden;
     overflow-y: auto;
     padding-bottom: 100px;

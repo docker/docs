@@ -64,13 +64,11 @@ i.fa.fa-outdent {
 *
 */
 
-.nav-secondary-tabs .search-form {
-    width: 81%;
-}
 
 .search-form {
     float: left;
     margin: 10px 15px 0 15px!important;
+    width: 210px;
     & input[type=text] {
         background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat;
         background-position: 10px 9px;
@@ -96,6 +94,10 @@ i.fa.fa-outdent {
     transition: all 0.2s ease;
     padding: 0px 0 0 35px;
     width: 100%;
+}
+
+.nav-secondary-tabs .search-form {
+    width: 81%;
 }
 
 .search-form input[type=text]:focus {
