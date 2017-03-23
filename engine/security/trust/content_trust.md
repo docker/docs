@@ -267,7 +267,6 @@ you signed and pushed earlier:
 
 ```
 $  docker pull <username>/trusttest:testing
-Using default tag: latest
 Pull (1 of 1): <username>/trusttest:testing@sha256:d149ab53f871
 ...
 Tagging <username>/trusttest@sha256:d149ab53f871 as docker/trusttest:testing
