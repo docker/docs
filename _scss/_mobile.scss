@@ -11,7 +11,8 @@
     .hero-text,
     .banner,
     .ctrl-right,
-    ul.primary.nav.navbar-nav {
+    ul.primary.nav.navbar-nav,
+    .search-form {
         display: none;
     }
     .header,
@@ -19,7 +20,8 @@
         height: 55px;
     }
     .tabs li a {
-        // padding: 20px 10px 11px;
+        font-size: 13px;
+        padding: 19px 10px 11px;
     }
     h1,
     h2,
