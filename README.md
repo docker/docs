@@ -18,7 +18,7 @@ don't see something that should be in the docs, or you see something incorrect
 or confusing in the docs.
 
 - If your problem is a general question about how to configure or use Docker,
-  consider asking a question on [https://forums.docker.com](https://forums.docker.com) instead.
+  ask in [https://forums.docker.com](https://forums.docker.com) instead.
 
 - If you have an idea for a new feature or behavior change in a specific aspect
   of Docker, or have found a bug in part of Docker, please file that issue in
