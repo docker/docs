@@ -29,7 +29,7 @@ $ cd dockercloud-quickstart-go
 
 ## Build the application
 
-*Skip the following step if you don't have Docker Engine installed locally*
+*Skip the following step if you don't have Docker Engine installed locally.*
 
 Next, we have to build this application to create an image. Run the following command to build the app. This creates a Docker image and tags it with whatever follows the word `tag`. Tag the image either `quickstart-python` or `quickstart-go` depending on which quickstart you are using.
 
