@@ -209,57 +209,25 @@ body.night {
     }
 }
 
-// .header {
-//     animation: gradientswitch-night 80s infinite;
-//     -webkit-animation: gradientswitch-night 80 sinfinite;
-//     height: $global-header-height;
-//     position: relative;
-//     z-index: 1;
-//     transition: all 0.5s;
-// }
-// @keyframes gradientswitch-night {
-//     0% {
-//         background: #101c29;
-//     }
-//     16% {
-//         background: #EF4A53;
-//     }
-//     32% {
-//         background: #FFB463;
-//     }
-//     49% {
-//         background: #33D5D4;
-//     }
-//     65% {
-//         background: #254356;
-//     }
-//     81% {
-//         background: #5B4097
-//     }
-//     100% {
-//         background: #101c29
-//     }
-// }
-// @-webkit-keyframes gradientswitch-night {
-//     0% {
-//         background: #101c29;
-//     }
-//     16% {
-//         background: #EF4A53;
-//     }
-//     32% {
-//         background: #FFB463;
-//     }
-//     49% {
-//         background: #33D5D4;
-//     }
-//     65% {
-//         background: #254356;
-//     }
-//     81% {
-//         background: #5B4097
-//     }
-//     100% {
-//         background: #101c29
-//     }
-// }
+/*
+*
+* night mode components
+*
+*/
+
+body.night {
+    /* accordion */
+    .panel-default {
+        border-color: #374656;
+        >.panel-heading {
+            color: #333;
+            background-color: #101c29;
+            border-color: #ddd;
+        }
+    }
+    .panel-body {
+        padding: 15px;
+        background: rgb(35, 54, 72);
+        color: #bcbfc3;
+    }
+}
