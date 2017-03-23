@@ -53,7 +53,7 @@ $ docker push $DOCKER_ID_USER/quickstart-go
 
 After the push command completes, verify that the image is now in Docker Cloud's
 registry. Do this by logging in to [Docker Cloud](https://cloud.docker.com) and
-clicking  **Repositories** in the left navigation. Your image should appear in
+clicking **Repositories** in the left navigation. Your image should appear in
 the repository list.
 
 ## What's next?
