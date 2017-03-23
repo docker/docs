@@ -111,11 +111,11 @@ building. Review the staged site and amend your commit if necessary. Reviewers
 will also check the staged site before merging the PR, to protect the integrity
 of [https://docs.docker.com/](https://docs.docker.com/).
 
-## Staging locally
+## Staging the docs
 
 You have three options:
 
-1.  Clone this repo and run our staging container:
+1.  On your local machine, clone this repo and run our staging container:
 
     ```bash
     git clone https://github.com/docker/docker.github.io.git
@@ -136,7 +136,7 @@ You have three options:
     docker-compose down
     ```
 
-2.  Use Jekyll directly.
+2.  Install Jekyll and GitHub Pages on your local machine.
 
     a. Clone this repo by running:
 
