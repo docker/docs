@@ -45,6 +45,7 @@ Commands:
   events             Receive real time events from containers
   exec               Execute a command in a running container
   help               Get help on a command
+  images             List images
   kill               Kill containers
   logs               View output from containers
   pause              Pause services
