@@ -27,7 +27,7 @@ $ docker-cloud service run \
 --name redis \
 redis
 ```
-**--env REDIS_PASS="password"** defines an environment variable that sets the password for Redis. Because we are not publishing any ports for this service only services **linked** to your *Redis service* will be able to connect to it.
+**--env REDIS_PASS="password"** defines an environment variable that sets the password for Redis. Because we are not publishing any ports for this service, only services **linked** to your *Redis service* will be able to connect to it.
 
 Use `docker-cloud service ps` to check if your new redis service is *running*. This might take a minute or two.
 
@@ -49,7 +49,7 @@ $ docker-cloud service set --link redis:redis --redeploy web
 
 In this command, we're creating a link from the `web` service (specified at the end of the command) to the `redis` service, and naming the link `redis`.
 
-Next, visit or `curl` the load balanced web endpoint again. You'll notice that the web service now counts of the number of visits to the web service. This  uses the Redis data backend, and is synchronized between all of the service's containers.
+Next, visit or `curl` the load balanced web endpoint again. You'll notice that the web service now counts of the number of visits to the web service. This uses the Redis data backend, and is synchronized between all of the service's containers.
 
 If you're using curl, you should see the counter incrementing like this:
 
@@ -68,4 +68,4 @@ Hello World</br>Hostname: web-3</br>Counter: 5%
 
 ## What's Next?
 
-Next, we'll look at [Stackfiles for your service](11_service_stacks.md)
+Next, we'll look at [Stackfiles for your service](11_service_stacks.md).
