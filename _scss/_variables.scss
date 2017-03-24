@@ -1,7 +1,7 @@
 
 /*
 *
-* variables global +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+* global +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 *
 */
 
@@ -24,7 +24,7 @@ $clear: 0;
 
 /*
 *
-* variables standard mode
+* standard mode
 *
 */
 
@@ -40,6 +40,8 @@ $bg-secondary: #0C5176;
 
 $bg-sidebar: #FBFBFC;
 
+$bdr-sidebar: rgba(204, 204, 204, 0.29);
+
 $primary-links: #2089C4;
 
 $slider-bg: #c3e4f7;
@@ -51,7 +53,7 @@ $code-blocks: rgba(12, 81, 118, 0.1);
 
 /*
 *
-* variables night mode
+* night mode
 *
 */
 
@@ -74,6 +76,3 @@ $primary-links-night: rgba(255, 255, 255, 0.75);
 $bg-footer-night: #000;
 
 $bg-search-results-night: rgba(10, 10, 10, 0.95);
-
-
-
