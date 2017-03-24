@@ -1,5 +1,5 @@
 ---
-title: Deploy Docker Enterprise Edition on AWS (Standard/Advanced)
+title: Deploy Docker Enterprise Edition (Standard/Advanced) on AWS Marketplace
 description: Learn how to deploy Docker EE for AWS (Standard/Advanced) with one click, using an Amazon AWS CloudFormation template
 keywords: docker, datacenter, install, orchestration, management
 ---
@@ -114,8 +114,8 @@ Manager ephemeral storage volume type ("standard", "gp2")
 
 ## Software Versions
 
-- UCP: `2.1.0`
-- DTR: `2.2.0`
+- UCP: `2.1.1`
+- DTR: `2.2.3`
 - Docker Enterprise Edition 17.03
 
 ## System containers
