@@ -132,6 +132,18 @@ at build time is the value in the environment where Compose is running.
 > **Note**: YAML boolean values (`true`, `false`, `yes`, `no`, `on`, `off`) must
 > be enclosed in quotes, so that the parser interprets them as strings.
 
+#### cache_from
+
+> **Note:** This option is new in v3.2
+
+A list of images that the engine will use for cache resolution.
+
+    build:
+      context: .
+      cache_from:
+        - alpine:latest
+        - corp/web_app:3.14
+
 ### cap_add, cap_drop
 
 Add or drop container capabilities.
