@@ -205,6 +205,7 @@ div#autocompleteResults {
     margin: 10px 0 0 0;
     position: absolute;
     max-width: 600px;
+    z-index: 9999;
 }
 
 ul.autocompleteList {

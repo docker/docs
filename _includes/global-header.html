@@ -72,7 +72,7 @@
     <nav class="nav-secondary-tabs" data-spy="affix" data-offset-top="490">
         <div class="container-fluid-fluid">
             <div class="row">
-                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
                   <div class="search-form">
                     <form class="search form-inline ng-pristine ng-valid" id="searchForm" action="/search/">
                         <input class="search-field form-control ds-input" id="st-search-input" value="" name="q" placeholder="Search the docs" type="search" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
@@ -82,15 +82,16 @@
                         <!-- <button type="submit" class="search-submit btn btn-default">Search</button> -->
                     </form>
                   </div>
+                <div class="sidebar-toggle">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
             </div>
-            <div class="sidebar-toggle">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
+
             <div id="tabs">
                 <!-- <ul class="tabs nav navbar-nav navbar-collapse collapse navbar-left"> -->
                 <ul class="tabs nav navbar-nav navbar-collapse navbar-left">

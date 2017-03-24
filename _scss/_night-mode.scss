@@ -23,6 +23,13 @@ body.night {
     .toc-nav i.fa {
         color: $primary-links-night;
     }
+    // i.fa.fa-moon-o {
+    //     color: #1aa2a1!important;
+    // }
+    ol,
+    ul {
+        color: #c7c9ca;
+    }
     .header {
         background-color: #101c29!important;
         animation: none!important;
@@ -40,20 +47,17 @@ body.night {
         color: #fff;
     }
     .nav-secondary-tabs .search-form input[type=search] {
-        background: rgb(60, 70, 80) url(/images/search.png) no-repeat;
+        background: rgba(16, 28, 41, 0.6) url(/images/search.png) no-repeat;
+        background-position: 10px 9px;
+    }
+    .nav-secondary-tabs .search-form input[type=search]:focus {
+        background: rgba(255,255,255,0.17) url(/images/search.png) no-repeat;
         background-position: 10px 9px;
     }
     .nav-secondary .search-form input[type=search]:focus {
         background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat!important;
         background-position: 10px 9px!important;
     }
-    // .nav-secondary .search-form input[type=search]:focus {
-    //     background: rgb(78, 76, 76) url(/images/search.png) no-repeat;
-    //     background-position: 10px 9px;
-    //     border: 1px solid #9E9E9E;
-    //     box-shadow: none;
-    //     color: #fff;
-    // }
     .sidebar-home,
     .sidebar,
     #sidebar-wrapper,
@@ -86,7 +90,7 @@ body.night {
         border: 1px solid #192837;
     }
     .slider:before {
-        background-color: rgba(16, 28, 41, 0.98);
+        background-color: rgb(26, 162, 161);
     }
     ul {
         color: $body-text-night;
@@ -114,7 +118,7 @@ body.night {
         color: #f3f3f3;
         word-break: break-all;
         word-wrap: break-word;
-        background-color: #1f3341 !important;
+        background-color: rgba(0, 0, 0, 0.71) !important;
         border: 1px solid $black;
         border-radius: 4px;
     }
@@ -123,7 +127,7 @@ body.night {
         font-size: 90%;
         color: #ffffff!important;
         border-radius: 2px;
-        background: rgb(67, 71, 74) !important;
+        background: transparent !important;
     }
     .nav-secondary .dropdown-btn {
         color: #6e6f6f;
@@ -195,6 +199,29 @@ body.night {
         display: block;
         color: #bfabe5;
     }
+    /** for google results styles - forgive us css gods **/
+    .gsc-control-cse {
+        border-color: #192837!important;
+        background-color: #192837!important;
+    }
+    .gsc-webResult.gsc-result, .gsc-results .gsc-imageResult {
+        border-color: #192837!important;
+        background-color: #192837!important;
+    }
+    .gsc-webResult.gsc-result:hover, .gsc-imageResult:hover {
+        border-color: #25374a!important;
+        background-color: #192837!important;
+    }
+    a.gs-title {
+        color: #cccccc !important;
+        text-decoration: none;
+    }
+    .gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
+        color: #a8b0b7!important;
+    }
+    .gs-webResult.gs-result a.gs-title:link, .gs-webResult.gs-result a.gs-title:link b, .gs-imageResult a.gs-title:link, .gs-imageResult a.gs-title:link b {
+        color: #a9e4ff!important;
+    }
     .component {
         background: #101c29;
     }
@@ -218,7 +245,7 @@ body.night {
 
 /*
 *
-* night mode components
+* night mode component overrides
 *
 */
 
@@ -236,5 +263,13 @@ body.night {
         padding: 15px;
         background: rgb(35, 54, 72);
         color: #bcbfc3;
+    }
+    /** tabs **/
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+        color: #fff;
+        cursor: default;
+        background-color: #4e6071;
+        border: 1px solid transparent;
+        border-bottom-color: transparent;
     }
 }
