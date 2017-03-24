@@ -728,6 +728,15 @@ container and the host operating system the PID address space.  Containers
 launched with this flag will be able to access and manipulate other
 containers in the bare-metal machine's namespace and vise-versa.
 
+### pids_limit
+
+> [Added in version 2.1 file format](#version-21).
+
+Tunes a container's PIDs limit. Set to `-1` for unlimited PIDs.
+
+    pids_limit: 10
+
+
 ### ports
 
 Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
