@@ -249,6 +249,13 @@ Custom DNS servers. Can be a single value or a list.
       - 8.8.8.8
       - 9.9.9.9
 
+### dns_opt
+
+List of custom DNS options to be added to the container's `resolv.conf` file.
+
+    dns_opt:
+      - use-vc
+      - no-tld-query
 
 ### dns_search
 
