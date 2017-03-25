@@ -72,7 +72,6 @@ queried, and it takes the form:
   },
   // other fields
 }
-}
 ```
 
 Health statuses for the replicas is available in the `"replica_health"` object.
@@ -85,183 +84,235 @@ requires admin credentials, means it is not particularly appropriate for load
 balance checks. Use `/health` instead for those kinds of checks.
 
 
-## Load-Balancing Configuration Examples
+## Configuration examples
 
-Below are sample **nginx**, **haproxy**, and **AWS Elastic Loadbalancer** configuration files that you can use to set up your DTR external load-balancer.
+Use the following examples to configure your load balancer for DTR.
 
-1. NGINX
-
-	Here is a sample NGINX config. You need to replace the DTR_REPLICA_IPs with your DTR replica IPs. Also if you use non-standard HTTP/HTTPS ports, you need to use those instead. 
-	
-	```
-	user  nginx;
-	worker_processes  1;
-	
-	error_log  /var/log/nginx/error.log warn;
-	pid        /var/run/nginx.pid;
-	
-	events {
-	    worker_connections  1024;
-	}
-	
-	stream {
-	    upstream dtr_80 {
-	        server <DTR_REPLICA_1_IP>:80  max_fails=2 fail_timeout=30s;
-	        server <DTR_REPLICA_2_IP>:80  max_fails=2 fail_timeout=30s;
-	        server <DTR_REPLICA_N_IP>:80   max_fails=2 fail_timeout=30s;
-	    }
-	    upstream dtr_443 {
-	        server <DTR_REPLICA_1_IP>:443 max_fails=2 fail_timeout=30s;
-	        server <DTR_REPLICA_2_IP>:443 max_fails=2 fail_timeout=30s;
-	        server <DTR_REPLICA_N_IP>:443  max_fails=2 fail_timeout=30s;
-	    }
-	    server {
-	        listen 443;
-	        proxy_pass dtr_443;
-	    }
-	
-	    server {
-	        listen 80;
-	        proxy_pass dtr_80;
-	    }
-	}
-	```
-	
-	You can easily launch NGINX as a container on your designated LB machine using the following command. This assumes that you have `nginx.conf` in current directory. 
-	
-	```
-	docker run -d -p 80:80 -p 443:443 --restart=unless-stopped --name dtr-lb -v ${PWD}/nginx.conf:/etc/nginx/nginx.conf:ro nginx:stable-alpine
-	```
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#nginx" data-group="nginx">NGINX</a></li>
+  <li><a data-toggle="tab" href="#haproxy" data-group="haproxy">HAProxy</a></li>
+  <li><a data-toggle="tab" href="#aws">AWS LB</a></li>
+</ul>
+<div class="tab-content">
+  <div id="nginx" class="tab-pane fade in active">
+  {% highlight nginx %}
 
 
-2. HAPROXY
+user  nginx;
+worker_processes  1;
 
-	Here is a sample HAProxy config. You need to change the DTR_REPLICA_IPs and the DTR_FQDN. Also if you use non-standard HTTP/HTTPS ports, you need to use those instead.
-	
-	
-	```
-	global
-	    log /dev/log    local0
-	    log /dev/log    local1 notice
-	
-	defaults
-	        mode    tcp
-	        option  dontlognull
-	        timeout connect 5000
-	        timeout client 50000
-	        timeout server 50000
-	### frontends
-	# Optional HAProxy Stats Page accessible at http://<host-ip>:8181/haproxy?stats
-	frontend dtr_stats
-	        mode http
-	        bind 0.0.0.0:8181
-	        default_backend dtr_stats
-	frontend dtr_80
-	        mode tcp
-	        bind 0.0.0.0:80
-	        default_backend dtr_upstream_servers_80
-	frontend dtr_443
-	        mode tcp
-	        bind 0.0.0.0:443
-	        default_backend dtr_upstream_servers_443
-	### backends
-	backend dtr_stats
-	        mode http
-	        option httplog
-	        stats enable
-	        stats admin if TRUE
-	        stats refresh 5m
-	backend dtr_upstream_servers_80
-	        mode tcp
-	        option httpchk GET /health HTTP/1.1\r\nHost:\ <DTR_FQDN>
-	        server node01 <DTR_REPLICA_1_IP>:80 check weight 100
-	        server node02 <DTR_REPLICA_2_IP>:80 check weight 100
-	        server node03 <DTR_REPLICA_N_IP>:80 check weight 100
-	backend dtr_upstream_servers_443
-	        mode tcp
-	        option httpchk GET /health HTTP/1.1\r\nHost:\ <DTR_FQDN>
-	        server node01 <DTR_REPLICA_1_IP>:443 weight 100 check check-ssl verify none
-	        server node02 <DTR_REPLICA_2_IP>:443 weight 100 check check-ssl verify none
-	        server node03 <DTR_REPLICA_N_IP>:443 weight 100 check check-ssl verify none
-	```
-	
-	You can easily launch HAProxy as a container on your designated LB machine using the following command. This assumes that you have `haproxy.cfg` in current directory.
-	
-	
-	```
-	docker run -d -p 443:443 -p 80:80 -p 8181:8181 --restart=unless-stopped --name dtr-lb -v ${PWD}/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro haproxy:1.7-alpine haproxy -d -f /usr/local/etc/haproxy/haproxy.cfg
-	```
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
 
-3. AWS ELB
+events {
+    worker_connections  1024;
+}
 
-	Here is a sample configuration for DTR's ELB. You can use aws cli or Console when configuring the ELB.
-	
-	```
-	{
-	            "Subnets": [
-	                "subnet-XXXXXXXX",
-	                "subnet-YYYYYYYY",
-	                "subnet-ZZZZZZZZ"
-	            ],
-	            "CanonicalHostedZoneNameID": "XXXXXXXXXXX",
-	            "CanonicalHostedZoneName": "XXXXXXXXX.us-west-XXX.elb.amazonaws.com",
-	            "ListenerDescriptions": [
-	                {
-	                    "Listener": {
-	                        "InstancePort": 443,
-	                        "LoadBalancerPort": 443,
-	                        "Protocol": "TCP",
-	                        "InstanceProtocol": "TCP"
-	                    },
-	                    "PolicyNames": []
-	                }
-	            ],
-	            "HealthCheck": {
-	                "HealthyThreshold": 2,
-	                "Interval": 10,
-	                "Target": "HTTPS:443/health",
-	                "Timeout": 2,
-	                "UnhealthyThreshold": 4
-	            },
-	            "VPCId": "vpc-XXXXXX",
-	            "BackendServerDescriptions": [],
-	            "Instances": [
-	                {
-	                    "InstanceId": "i-XXXXXXXXX"
-	                },
-	                {
-	                    "InstanceId": "i-XXXXXXXXX"
-	                },
-	                {
-	                    "InstanceId": "i-XXXXXXXXX"
-	                }
-	            ],
-	            "DNSName": "XXXXXXXXXXXX.us-west-2.elb.amazonaws.com",
-	            "SecurityGroups": [
-	                "sg-XXXXXXXXX"
-	            ],
-	            "Policies": {
-	                "LBCookieStickinessPolicies": [],
-	                "AppCookieStickinessPolicies": [],
-	                "OtherPolicies": []
-	            },
-	            "LoadBalancerName": "ELB-DTR",
-	            "CreatedTime": "2017-02-13T21:40:15.400Z",
-	            "AvailabilityZones": [
-	                "us-west-2c",
-	                "us-west-2a",
-	                "us-west-2b"
-	            ],
-	            "Scheme": "internet-facing",
-	            "SourceSecurityGroup": {
-	                "OwnerAlias": "XXXXXXXXXXXX",
-	                "GroupName":  "XXXXXXXXXXXX"
-	            }
-	        },
-	        
-	```
+stream {
+    upstream dtr_80 {
+        server <DTR_REPLICA_1_IP>:80  max_fails=2 fail_timeout=30s;
+        server <DTR_REPLICA_2_IP>:80  max_fails=2 fail_timeout=30s;
+        server <DTR_REPLICA_N_IP>:80   max_fails=2 fail_timeout=30s;
+    }
+    upstream dtr_443 {
+        server <DTR_REPLICA_1_IP>:443 max_fails=2 fail_timeout=30s;
+        server <DTR_REPLICA_2_IP>:443 max_fails=2 fail_timeout=30s;
+        server <DTR_REPLICA_N_IP>:443  max_fails=2 fail_timeout=30s;
+    }
+    server {
+        listen 443;
+        proxy_pass dtr_443;
+    }
+
+    server {
+        listen 80;
+        proxy_pass dtr_80;
+    }
+}
+
+
+  {% endhighlight %}
+  </div>
+  <div id="haproxy" class="tab-pane fade">
+  {% highlight none %}    
+
+
+global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+
+defaults
+        mode    tcp
+        option  dontlognull
+        timeout connect 5000
+        timeout client 50000
+        timeout server 50000
+### frontends
+# Optional HAProxy Stats Page accessible at http://<host-ip>:8181/haproxy?stats
+frontend dtr_stats
+        mode http
+        bind 0.0.0.0:8181
+        default_backend dtr_stats
+frontend dtr_80
+        mode tcp
+        bind 0.0.0.0:80
+        default_backend dtr_upstream_servers_80
+frontend dtr_443
+        mode tcp
+        bind 0.0.0.0:443
+        default_backend dtr_upstream_servers_443
+### backends
+backend dtr_stats
+        mode http
+        option httplog
+        stats enable
+        stats admin if TRUE
+        stats refresh 5m
+backend dtr_upstream_servers_80
+        mode tcp
+        option httpchk GET /health HTTP/1.1\r\nHost:\ <DTR_FQDN>
+        server node01 <DTR_REPLICA_1_IP>:80 check weight 100
+        server node02 <DTR_REPLICA_2_IP>:80 check weight 100
+        server node03 <DTR_REPLICA_N_IP>:80 check weight 100
+backend dtr_upstream_servers_443
+        mode tcp
+        option httpchk GET /health HTTP/1.1\r\nHost:\ <DTR_FQDN>
+        server node01 <DTR_REPLICA_1_IP>:443 weight 100 check check-ssl verify none
+        server node02 <DTR_REPLICA_2_IP>:443 weight 100 check check-ssl verify none
+        server node03 <DTR_REPLICA_N_IP>:443 weight 100 check check-ssl verify none
+
+
+  {% endhighlight %}
+  </div>
+  <div id="aws" class="tab-pane fade">
+  {% highlight json %}  
+
+
+{
+    "Subnets": [
+        "subnet-XXXXXXXX",
+        "subnet-YYYYYYYY",
+        "subnet-ZZZZZZZZ"
+    ],
+    "CanonicalHostedZoneNameID": "XXXXXXXXXXX",
+    "CanonicalHostedZoneName": "XXXXXXXXX.us-west-XXX.elb.amazonaws.com",
+    "ListenerDescriptions": [
+        {
+            "Listener": {
+                "InstancePort": 443,
+                "LoadBalancerPort": 443,
+                "Protocol": "TCP",
+                "InstanceProtocol": "TCP"
+            },
+            "PolicyNames": []
+        }
+    ],
+    "HealthCheck": {
+        "HealthyThreshold": 2,
+        "Interval": 10,
+        "Target": "HTTPS:443/health",
+        "Timeout": 2,
+        "UnhealthyThreshold": 4
+    },
+    "VPCId": "vpc-XXXXXX",
+    "BackendServerDescriptions": [],
+    "Instances": [
+        {
+            "InstanceId": "i-XXXXXXXXX"
+        },
+        {
+            "InstanceId": "i-XXXXXXXXX"
+        },
+        {
+            "InstanceId": "i-XXXXXXXXX"
+        }
+    ],
+    "DNSName": "XXXXXXXXXXXX.us-west-2.elb.amazonaws.com",
+    "SecurityGroups": [
+        "sg-XXXXXXXXX"
+    ],
+    "Policies": {
+        "LBCookieStickinessPolicies": [],
+        "AppCookieStickinessPolicies": [],
+        "OtherPolicies": []
+    },
+    "LoadBalancerName": "ELB-DTR",
+    "CreatedTime": "2017-02-13T21:40:15.400Z",
+    "AvailabilityZones": [
+        "us-west-2c",
+        "us-west-2a",
+        "us-west-2b"
+    ],
+    "Scheme": "internet-facing",
+    "SourceSecurityGroup": {
+        "OwnerAlias": "XXXXXXXXXXXX",
+        "GroupName":  "XXXXXXXXXXXX"
+    }
+}
+
+
+  {% endhighlight %}
+  </div>
+</div>
+
+
+You can deploy your load balancer using:
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#nginx-2" data-group="nginx">NGINX</a></li>
+  <li><a data-toggle="tab" href="#haproxy-2" data-group="haproxy">HAProxy</a></li>
+</ul>
+<div class="tab-content">
+  <div id="nginx-2" class="tab-pane fade in active">
+  {% highlight none %}
+
+# Create the nginx.conf file, then
+# deploy the load balancer
+
+docker run --detach \
+  --name dtr-lb \
+  --restart=unless-stopped \
+  --publish 80:80 \
+  --publish 443:443 \
+  --volume ${PWD}/nginx.conf:/etc/nginx/nginx.conf:ro \
+  nginx:stable-alpine
+
+  {% endhighlight %}
+  </div>
+  <div id="haproxy-2" class="tab-pane fade">
+  {% highlight none %}
+
+# Create the haproxy.cfg file, then
+# deploy the load balancer
+
+docker run --detach \
+  --name dtr-lb \
+  --publish 443:443 \
+  --publish 80:80 \
+  --publish 8181:8181 \
+  --restart=unless-stopped \
+  --volume ${PWD}/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro \
+  haproxy:1.7-alpine haproxy -d -f /usr/local/etc/haproxy/haproxy.cfg
+
+  {% endhighlight %}
+  </div>
+</div>
 
 ## Where to go next
 
 * [Backups and disaster recovery](../backups-and-disaster-recovery.md)
 * [DTR architecture](../../architecture.md)
+
+
+<script>
+// sync tabs for the same language, so you only have to click once.
+
+// jquery is only loaded at the footer, so we can't rely on it for the
+// page load event
+window.onload = function() {
+  $('.nav-tabs > li > a').click(function(e) {
+    var group = $(this).attr('data-group');
+    $('.nav-tabs > li > a[data-group="'+ group +'"]').tab('show');
+  })
+};
+</script>
