@@ -22,14 +22,120 @@ The topics on this reference page are organized alphabetically by top-level key
 to reflect the structure of the Compose file itself. Top-level keys that define
 a section in the configuration file such as `build`, `deploy`, `depends_on`,
 `networks`, and so on, are listed with the options that support them as
-sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the Compose file.
+sub-topics. This maps to the `<key>: <option>: <value>` indent structure of the
+Compose file.
 
-Example snip-its of how to define particular options are included on this
-reference page, but we suggest also taking a look at some samples that include
-full Compose files. A good place to start are the [sample
-applications](samples.md#sample-applications) in [Docker
-Labs](https://github.com/docker/labs/) and the [voting app sample
-walk-through](/engine/getstarted-voting-app/index.md).
+The best way to quickly grok the layout and syntax of a Compose file is to look
+at files for [sample applications](samples.md). A good place to start is the
+version 3 Compose stack file we use for the voting app sample to illustrate
+multi-container apps, service definitions, swarm mode, the `deploy` key, and the
+`docker stack deploy` command. Click to show/hide the example file below. This
+file is fully explained in the [voting app sample
+tutorial](/engine/getstarted-voting-app/index.md).
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title" id="collapsible-group-item-3"> <a class="" role="button" data-toggle="collapse" data-parent="#accordion" href="/components/#collapseThree" aria-expanded="true" aria-controls="collapseThree"> Example Compose file version 3 </a> </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="true">
+      <div class="panel-body">
+      <pre><code>
+      version: "3"
+      services:
+
+        redis:
+          image: redis:alpine
+          ports:
+            - "6379"
+          networks:
+            - frontend
+          deploy:
+            replicas: 2
+            update_config:
+              parallelism: 2
+              delay: 10s
+            restart_policy:
+              condition: on-failure
+        db:
+          image: postgres:9.4
+          volumes:
+            - db-data:/var/lib/postgresql/data
+          networks:
+            - backend
+          deploy:
+            placement:
+              constraints: [node.role == manager]
+        vote:
+          image: dockersamples/examplevotingapp_vote:before
+          ports:
+            - 5000:80
+          networks:
+            - frontend
+          depends_on:
+            - redis
+          deploy:
+            replicas: 2
+            update_config:
+              parallelism: 2
+            restart_policy:
+              condition: on-failure
+        result:
+          image: dockersamples/examplevotingapp_result:before
+          ports:
+            - 5001:80
+          networks:
+            - backend
+          depends_on:
+            - db
+          deploy:
+            replicas: 1
+            update_config:
+              parallelism: 2
+              delay: 10s
+            restart_policy:
+              condition: on-failure
+
+        worker:
+          image: dockersamples/examplevotingapp_worker
+          networks:
+            - frontend
+            - backend
+          deploy:
+            mode: replicated
+            replicas: 1
+            labels: [APP=VOTING]
+            restart_policy:
+              condition: on-failure
+              delay: 10s
+              max_attempts: 3
+              window: 120s
+            placement:
+              constraints: [node.role == manager]
+
+        visualizer:
+          image: dockersamples/visualizer:stable
+          ports:
+            - "8080:8080"
+          stop_grace_period: 1m30s
+          volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+          deploy:
+            placement:
+              constraints: [node.role == manager]
+
+      networks:
+        frontend:
+        backend:
+
+      volumes:
+        db-data:
+    </code></pre>
+      </div>
+    </div>
+  </div>
+</div>
 
 ## Service configuration reference
 
