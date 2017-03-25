@@ -6,6 +6,8 @@ redirect_from:
 title: Get Docker for CentOS
 ---
 
+{% assign minor-version = "17.03" %}
+
 To get started with Docker on CentOS, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
@@ -32,7 +34,6 @@ To learn more about Docker EE, see
 ### OS requirements
 
 To install Docker, you need the 64-bit version of CentOS 7.
-
 
 ### Uninstall old versions
 
@@ -87,7 +88,9 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
     $ sudo yum install -y yum-utils
     ```
 
-2.  Use the following command to set up the **stable** repository:
+2.  Use the following command to set up the **stable** repository. You always
+    need the **stable** repository, even if you want to install **edge** builds
+    as well.
 
     ```bash
     $ sudo yum-config-manager \
@@ -178,8 +181,6 @@ Repository set-up instructions are different for [Docker CE](#docker-ce) and
     > **Note**: This `yum list` command only shows binary packages. To show
     > source packages as well, omit the `.x86_64` from the package name.
 
-    {% assign minor-version = "17.03" %}
-
     ```bash
     $ yum list docker-ce.x86_64  --showduplicates |sort -r
 
@@ -238,9 +239,8 @@ a new file each time you want to upgrade Docker.
       and download the `.rpm` file for the Docker version you want to install.
 
       > **Note**: To install an **edge**  package, change the word
-      > `stable` in the > URL to `edge`. For information about **stable** and
-      > **edge** builds, see
-      > [Docker variants](/engine/installation/#docker-variants).
+      > `stable` in the > URL to `edge`.
+      > [Learn about **stable** and **edge** channels](/engine/installation/).
 
     - **Docker EE**: Go to the Docker EE repository URL associated with your
       trial or subscription in your browser. Go to
