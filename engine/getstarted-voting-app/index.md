@@ -124,7 +124,7 @@ uses `dockersamples/examplevotingapp_vote:before`. This specifies the path to
 the image on Docker Hub (as shown in the table above), and an [image
 tag](/engine/reference/commandline/tag.md), `before` to indicate the version of
 the image we want to start with. In the second part of the tutorial, we will
-edit this file to call a different verson of this image with an `after` tag.
+edit this file to call a different version of this image with an `after` tag.
 
 * The **depends_on** key allows you to specify that a service is only
 deployed after another service. In our example, `vote` only deploys
