@@ -38,9 +38,38 @@ RUN git clone --depth 1 https://www.github.com/docker/docker.github.io archive_s
     && git --git-dir=./archive_source/.git --work-tree=./archive_source checkout ${VER} \
     && mkdir -p target/${VER} \
     && jekyll build -s archive_source -d target/${VER} \
-    && find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/'"$VER"'/#g' \
-    && find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/'"$VER"'/#g' \
-    && find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/'"$VER"'/#g'; \
+		# Replace / rewrite some URLs so that links in the archive go to the correct
+	  # location. Note that the order in which these replacements are done is
+	  # important. Changing the order may result in replacements being done
+		# multiple times.
+		# First, remove the domain from URLs that include the domain
+		&& BASEURL="$VER/" \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="http://docs-stage.docker.com/#href="/#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="https://docs-stage.docker.com/#src="/#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="https://docs.docker.com/#href="/#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="https://docs.docker.com/#src="/#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="http://docs.docker.com/#href="/#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="http://docs.docker.com/#src="/#g' \
+		\
+		# Substitute https:// for schema-less resources (src="//analytics.google.com")
+		# We're replacing them to prevent them being seen as absolute paths below
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="//#href="https://#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="//#src="https://#g' \
+		\
+		# And some archive versions already have URLs starting with '/version/'
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/'"$BASEURL"'#href="/#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/'"$BASEURL"'#src="/#g' \
+		\
+		# Archived versions 1.7 and under use some absolute links, and v1.10 uses
+		# "relative" links to sources (href="./css/"). Remove those to make them
+		# work :)
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="\./#href="/#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="\./#src="/#g' \
+		\
+		# Create permalinks for archived versions
+		\
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#href="/#href="/'"$BASEURL"'#g' \
+		&& find target/${VER} -type f -name '*.html' -print0 | xargs -0 sed -i 's#src="/#src="/'"$BASEURL"'#g'; \
   done; \
   rm -rf archive_source
 
