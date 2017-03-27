@@ -6,6 +6,7 @@ redirect_from:
 - /windows/last_page/
 - /linux/last_page/
 title: Learn more
+notoc: true
 ---
 
 This getting started provided very basic essentials for using Docker on Mac, Windows, and Linux. If you want to learn more with regard to end-to-end development, start with the full install instructions and feature overviews, then follow up with more advanced tutorials and user guides.
