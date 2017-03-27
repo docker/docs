@@ -276,9 +276,12 @@ a new file each time you want to upgrade Docker.
 1.  This step is different for Docker CE and Docker EE.
 
     - **Docker CE**: Go to
-      [{{ download-url-base }}/pool/stable-{{ minor-version }}/amd64/]({{ download-url-base }}/pool/stable-{{ minor-version }}/amd64/)
-      and download the `.deb` file for the Docker version you want to install and
-      for your version of Ubuntu.
+      [{{ download-url-base }}/dists/]({{ download-url-base }}/dists/)
+      and navigate to the subdirectory for your ubuntu version, channel,
+      and architecture within the `pool` directory. For example, for
+      `xenial` version, `stable` channel, `amd64` architecture, navigate
+      to {{ download-url-base }}/dists/xenial/pool/stable/amd64/ and
+      download the `.deb` package for the Docker version you want.
 
       > **Note**: To install an **edge**  package, change the word
       > `stable` in the > URL to `edge`. For information about **stable** and
@@ -286,8 +289,10 @@ a new file each time you want to upgrade Docker.
       > [Docker variants](/engine/installation/#docker-variants).
 
     - **Docker EE**: Go to the Docker EE repository URL associated with your
-      trial or subscription in your browser. Go to `x86_64/stable` and download
-      the `.rpm` file for the Docker version you want to install.
+      trial or subscription in your browser. Navigate to the subdirectory
+      for your ubuntu version, release channel, and architecture within
+      the `pool` directory and download the `.deb` package for the Docker
+      version you want to install.
 
 2.  Install Docker, changing the path below to the path where you downloaded
     the Docker package.
