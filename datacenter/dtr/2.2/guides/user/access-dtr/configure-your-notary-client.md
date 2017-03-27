@@ -28,7 +28,7 @@ latest version](https://github.com/docker/notary/releases). As an example:
 
 ```bash
 # Get the latest binary
-curl <download-url> -o notary
+curl -L <download-url> -o notary
 
 # Make it executable
 chmod +x notary
