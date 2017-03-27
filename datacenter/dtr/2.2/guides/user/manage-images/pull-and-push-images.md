@@ -39,7 +39,7 @@ Before you can push an image to DTR you need to [create a repository](index.md)
 to store the image. In this example the full name of our repository is
 `dtr.company.org/dave.lauper/golang`.
 
-## Tag the image
+### Tag the image
 
 In this example we'll pull the Golang image from Docker Hub and tag with with
 the full DTR and repository name. A tag defines where the image was pulled
@@ -53,7 +53,7 @@ $ docker pull golang:1.7
 $ docker tag golang:1.7 dtr.company.org/dave.lauper/golang:1.7
 ```
 
-## Push the image
+### Push the image
 
 Now that you have tagged the image, you only need to authenticate and push the
 image to DTR.
