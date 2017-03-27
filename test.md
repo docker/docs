@@ -190,22 +190,29 @@ only need to do it on the first one. If you have a `<th>`, set it there.
 
 Here is the sample code for a single-cell table masquerading as a box. There are other ways to create a box (*e.g.*, with an HTML "box" element) but this works for our purposes.
 
-1. Lorem ipsum dolor sit amet, wisi viverra voluptas cras, vestibulum ligula molestie sagittis quis, nulla elementum id. Scelerisque tempus at consectetuer, neque nascetur erat pharetra rhoncus.
-2. Ut ridiculus congue pretium phasellus nulla arcu, litora quis. Facilisi habitasse a mollis dui accumsan egestas, massa ut vestibulum est sit ut, maecenas dolore rutrum vestibulum aenean fermentum, dolor posuere lectus, sit id vel erat penatibus wisi odio.
-3. Scelerisque nec fusce, orci risus, viverra vel nunc, non nulla vel integer praesent non, gravida in vestibulum. Turpis id ac, et dolor pede lectus volutpat nonummy elit, sed semper justo eget elementum, quisque non id duis lacus donec lorem, sit volutpat curabitur sed est.
-<table border="1px solid" style="background-color:#F5F5F5; border-color:#DCDCDC; margin-left:3%;">
-<tr>
-<td>
-<ol>
-<li> This is step one.
-<li> This is step two.
-<li> This is step three.
-</ol>
-</td>
-</tr>
-</table>
+1.  Lorem ipsum dolor sit amet, wisi viverra voluptas cras, vestibulum ligula
+    molestie sagittis quis, nulla elementum id. Scelerisque tempus at consectetuer, neque nascetur erat pharetra rhoncus.
+2.  Ut ridiculus congue pretium phasellus nulla arcu, litora quis. Facilisi
+    habitasse a mollis dui accumsan egestas, massa ut vestibulum est sit ut,
+    maecenas dolore rutrum vestibulum aenean fermentum, dolor posuere lectus,
+    sit id vel erat penatibus wisi odio.
+3.  Scelerisque nec fusce, orci risus, viverra vel nunc, non nulla vel integer
+    praesent non, gravida in vestibulum. Turpis id ac, et dolor pede lectus volutpat nonummy elit, sed semper justo eget elementum, quisque non id duis lacus donec lorem, sit volutpat curabitur sed est.
 
-4. Amet lobortis wisi est quis consequat ac, elit ac et nec eu ante elit, massa lorem donec felis.
+    <table border="1px solid" style="background-color:#F5F5F5; border-color:#DCDCDC; margin-left:3%;">
+    <tr>
+    <td>
+    <ol>
+    <li> This is step one.
+    <li> This is step two.
+    <li> This is step three.
+    </ol>
+    </td>
+    </tr>
+    </table>
+
+4.  Amet lobortis wisi est quis consequat ac, elit ac et nec eu ante elit,
+    massa lorem donec felis.
 
 ## Mixing Markdown and HTML
 
@@ -532,10 +539,12 @@ authorizedkeys:
 ## Reference
 
 ### HTML and CSS
+
 - [W3C School HTML](http://www.w3schools.com/html/default.asp)
 - [W3C School CSS](http://www.w3schools.com/css/default.asp)
 
 ### Colors
+
 - [HTML color codes](http://htmlcolorcodes.com/)
 - [Color table](https://msdn.microsoft.com/en-us/library/ms531197.aspx)
 - [ColorPick Eyedropper extension](https://chrome.google.com/webstore/detail/colorpick-eyedropper/ohcpnigalekghcmgcdcenkpelffpdolg)
