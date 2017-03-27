@@ -285,7 +285,7 @@ a new file each time you want to upgrade Docker.
 
     - **Docker EE**: Go to the Docker EE repository URL associated with your
       trial or subscription in your browser. Go to `x86_64/stable-{{ minor-version }}` and download
-      the `.rpm` file for the Docker version you want to install.
+      the `.deb` file for the Docker version you want to install.
 
 2.  Install Docker, changing the path below to the path where you downloaded
     the Docker package.
