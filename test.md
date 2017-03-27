@@ -204,6 +204,7 @@ Here is the sample code for a single-cell table masquerading as a box. There are
 </td>
 </tr>
 </table>
+
 4. Amet lobortis wisi est quis consequat ac, elit ac et nec eu ante elit, massa lorem donec felis.
 
 ## Mixing Markdown and HTML
