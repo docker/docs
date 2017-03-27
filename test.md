@@ -199,7 +199,7 @@ Here is the sample code for a single-cell table masquerading as a box. There are
 3.  Scelerisque nec fusce, orci risus, viverra vel nunc, non nulla vel integer
     praesent non, gravida in vestibulum. Turpis id ac, et dolor pede lectus volutpat nonummy elit, sed semper justo eget elementum, quisque non id duis lacus donec lorem, sit volutpat curabitur sed est.
 
-    <table border="1px solid" style="background-color:#F5F5F5; border-color:#DCDCDC; margin-left:3%;">
+    {% capture my-table %}<table border="1px solid" style="background-color:#F5F5F5; border-color:#DCDCDC; margin-left:3%;">
     <tr>
     <td>
     <ol>
@@ -209,7 +209,7 @@ Here is the sample code for a single-cell table masquerading as a box. There are
     </ol>
     </td>
     </tr>
-    </table>
+    </table>{% end-capture %}{{ my-table | markdownify}}
 
 4.  Amet lobortis wisi est quis consequat ac, elit ac et nec eu ante elit,
     massa lorem donec felis.
