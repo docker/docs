@@ -61,7 +61,7 @@ unstable on machine reboot.
 
 If the whole swarm restarts and every manager node subsequently gets a new IP
 address, there is no way for any node to contact an existing manager. Therefore
-the swarm is hung while nodes to contact one another at their old IP addresses.
+the swarm is hung while nodes try to contact one another at their old IP addresses.
 
 Dynamic IP addresses are OK for worker nodes.
 
