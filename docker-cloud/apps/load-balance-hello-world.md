@@ -27,7 +27,7 @@ First, deploy a node cluster of 4 nodes.
 
 3. Click **Create**.
 
-4. Enter a name for the node cluster, select the **Provider**, **Region**,  **Type/Size**.
+4. Enter a name for the node cluster, select the **Provider**, **Region**, and **Type/Size**.
 
 5. Add a **deployment tag** of `web`. (This is used to make sure the right services are deployed to the correct nodes.)
 
@@ -111,9 +111,9 @@ We verified that the web service is working, so now we'll set up the load balanc
 
 4. Click the **dockercloud/haproxy** image.
 
-5. On the next screen, set the **service name** to `lb`
+5. On the next screen, set the **service name** to `lb`.
 
-    Leave the tag, deployment strategy and number of containers at their default values.
+    Leave the tag, deployment strategy, and number of containers at their default values.
 
     ![](images/lbd-lb-conf.png)
 
@@ -123,7 +123,7 @@ We verified that the web service is working, so now we'll set up the load balanc
 
     When you assign the service an API role, it passes a `DOCKERCLOUD_AUTH`
     environment variable to the service's containers, which allows them to query
-    Docker Cloud's API on your behalf. You can [read more about API Roles here](../apps/api-roles.md)
+    Docker Cloud's API on your behalf. You can [read more about API Roles here](../apps/api-roles.md).
 
     The **dockercloud/haproxy** image uses the API to check how many containers
     are in the `web` service we launched earlier. **HAproxy** then uses this
@@ -195,5 +195,5 @@ load balance your load balancer. To learn more, read up on [service
 links](service-links.md).
 
 You can try this by pointing your web browser to
-*servicename.username.svc.dockerapp.io* or  using *dig* or *nslookup* to see how
+*servicename.username.svc.dockerapp.io* or using *dig* or *nslookup* to see how
 the service endpoint resolves.
