@@ -52,7 +52,7 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
   <a class="button outline-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac (Stable)</a>
   </td>
   <td width="50%">
-  <a class="button outline-btn" href="https://download.docker.com/mac/beta/Docker.dmg">Get Docker for Mac (Edge)</a>
+  <a class="button outline-btn" href="https://download.docker.com/mac/edge/Docker.dmg">Get Docker for Mac (Edge)</a>
   </td>
   </tr>
 

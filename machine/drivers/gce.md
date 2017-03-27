@@ -32,22 +32,22 @@ To create a machine instance, specify `--driver google`, the project id and the 
 
 ### Options
 
-    -   `--google-project`: **required** The id of your project to use when launching the instance.
-    -   `--google-zone`: The zone to launch the instance.
-    -   `--google-machine-type`: The type of instance.
-    -   `--google-machine-image`: The absolute URL to a base VM image to instantiate.
-    -   `--google-username`: The username to use for the instance.
-    -   `--google-scopes`: The scopes for OAuth 2.0 to Access Google APIs. See [Google Compute Engine Doc](https://cloud.google.com/storage/docs/authentication).
-    -   `--google-disk-size`: The disk size of instance.
-    -   `--google-disk-type`: The disk type of instance.
-    -   `--google-address`: Instance's static external IP (name or IP).
-    -   `--google-network`: Specify network in which to provision vm.
-    -   `--google-subnetwork`: Specify subnetwork in which to provision vm.
-    -   `--google-preemptible`: Instance preemptibility.
-    -   `--google-tags`: Instance tags (comma-separated).
-    -   `--google-use-internal-ip`: When this option is used during create it will make docker-machine use internal rather than public NATed IPs. The flag is persistent in the sense that a machine created with it retains the IP. It's useful for managing docker machines from another machine on the same network e.g. while deploying swarm.
-    -   `--google-use-internal-ip-only`: When this option is used during create, the new VM will not be assigned a public IP address. This is useful only when the host running `docker-machine` is located inside the Google Cloud infrastructure; otherwise, `docker-machine` can't reach the VM to provision the Docker daemon. The presence of this flag implies `--google-use-internal-ip`.
-    -   `--google-use-existing`: Don't create a new VM, use an existing one. This is useful when you'd like to provision Docker on a VM you created yourself, maybe because it uses create options not supported by this driver.
+ -   `--google-project`: **required** The id of your project to use when launching the instance.
+ -   `--google-zone`: The zone to launch the instance.
+ -   `--google-machine-type`: The type of instance.
+ -   `--google-machine-image`: The absolute URL to a base VM image to instantiate.
+ -   `--google-username`: The username to use for the instance.
+ -   `--google-scopes`: The scopes for OAuth 2.0 to Access Google APIs. See [Google Compute Engine Doc](https://cloud.google.com/storage/docs/authentication).
+ -   `--google-disk-size`: The disk size of instance.
+ -   `--google-disk-type`: The disk type of instance.
+ -   `--google-address`: Instance's static external IP (name or IP).
+ -   `--google-network`: Specify network in which to provision vm.
+ -   `--google-subnetwork`: Specify subnetwork in which to provision vm.
+ -   `--google-preemptible`: Instance preemptibility.
+ -   `--google-tags`: Instance tags (comma-separated).
+ -   `--google-use-internal-ip`: When this option is used during create it will make docker-machine use internal rather than public NATed IPs. The flag is persistent in the sense that a machine created with it retains the IP. It's useful for managing docker machines from another machine on the same network e.g. while deploying swarm.
+ -   `--google-use-internal-ip-only`: When this option is used during create, the new VM will not be assigned a public IP address. This is useful only when the host running `docker-machine` is located inside the Google Cloud infrastructure; otherwise, `docker-machine` can't reach the VM to provision the Docker daemon. The presence of this flag implies `--google-use-internal-ip`.
+ -   `--google-use-existing`: Don't create a new VM, use an existing one. This is useful when you'd like to provision Docker on a VM you created yourself, maybe because it uses create options not supported by this driver.
 
 The GCE driver will use the `ubuntu-1510-wily-v20151114` instance image unless otherwise specified. To obtain a
 list of image URLs run:

@@ -1326,8 +1326,14 @@ manuals:
           title: Use a load balancer
         - path: /datacenter/dtr/2.2/guides/admin/configure/set-up-vulnerability-scans/
           title: Set up vulnerability scans
-        - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-a-cache/
-          title: Deploy a cache
+        - sectiontitle: Deploy caches
+          section:
+          - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/
+            title: Overview
+          - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/tls/
+            title: Deploy caches with TLS
+          - path: /datacenter/dtr/2.2/guides/admin/configure/deploy-caches/chaining/
+            title: Chain multiple caches
         - path: /datacenter/dtr/2.2/guides/admin/configure/garbage-collection/
           title: Garbage collection
       - sectiontitle: Manage users
@@ -1346,6 +1352,8 @@ manuals:
           title: Monitor the cluster status
         - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-with-logs/
           title: Troubleshoot with logs
+        - path: /datacenter/dtr/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-batch-jobs/
+          title: Troubleshoot batch jobs
       - path: /datacenter/dtr/2.2/guides/admin/backups-and-disaster-recovery/
         title: Backups and disaster recovery
       - sectiontitle: CLI reference

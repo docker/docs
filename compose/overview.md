@@ -96,7 +96,7 @@ the old container to the new container. This process ensures that any data
 you've created in volumes isn't lost.
 
 If you use `docker-compose` on a Windows machine, see
-[Environmentvariables](reference/envvars.md) and adjust the necessary environment
+[Environment variables](reference/envvars.md) and adjust the necessary environment
 variables for you specific needs.
 
 

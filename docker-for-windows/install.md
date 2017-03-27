@@ -57,7 +57,7 @@ Edge channels, see the
   <a class="button outline-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (Stable)</a>
   </td>
   <td width="50%">
-  <a class="button outline-btn" href="https://download.docker.com/win/beta/InstallDocker.msi">Get Docker for Windows (Edge)</a>
+  <a class="button outline-btn" href="https://download.docker.com/win/edge/InstallDocker.msi">Get Docker for Windows (Edge)</a>
   </td>
   </tr>
 </table>

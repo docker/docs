@@ -12,32 +12,73 @@ your system configuration, and making your app more portable.
 <div class="row">
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 {% capture basics %}
-### Learn the basics of Docker
+### Learn Docker basics
 
-The basic tutorial introduces Docker concepts, tools, and commands. The examples
-show you how to build, push, and pull Docker images, and run them as containers.
-This tutorial stops short of teaching you how to deploy applications.
+Get started learning Docker concepts, tools, and commands. The examples show you
+how to build, push, and pull Docker images, and run them as containers. This
+tutorial stops short of teaching you how to deploy applications.
 {% endcapture %}{{ basics | markdownify }}
 {% capture basics %}[Start the basic tutorial](/engine/getstarted/){: class="button outline-btn"}{% endcapture %}{{ basics | markdownify }}
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
 {% capture apps %}
-### Define and deploy applications
+### Define and deploy apps in Swarm Mode
 
-The define-and-deploy tutorial shows how to relate containers to each other and
-define them as services in an application that is ready to deploy at scale in a
-production environment. Highlights Compose Version 3 new features and swarm
-mode.
+Learn how to relate containers to each other, define them as services, and
+configure an application stack ready to deploy at scale in a production
+environment. Highlights Compose Version 3 new features and swarm mode.
 {% endcapture %}{{ apps | markdownify }}
 {% capture apps %}[Start the application tutorial](/engine/getstarted-voting-app/){: class="button outline-btn"}{% endcapture %}{{ apps | markdownify }}
 </div>
 </div>
 
-
-## Components
+## Products
 
 <div class="component-container">
+    <!--start real row-->
+    <div class="row">
+    <!--organic row 1-->
+    <!--cloud-->
+        <div class="col-sm-4 col-md-12 col-lg-3 block">
+            <div class="component">
+                <div class="component-icon">
+                    <a href="docker-cloud/"> <img src="../images/cloud_48.svg" alt="Docker Cloud"> </a>
+                </div>
+                <h3 id="docker-cloud"><a href="docker-cloud/">Docker Cloud</a></h3>
+                <p>A hosted service for building, testing, and deploying Docker images to your hosts.</p>
+            </div>
+        </div>
+    <!--UCP-->
+        <div class="col-sm-4 col-md-12 col-lg-3 block">
+            <div class="component">
+                <div class="component-icon">
+                    <a href="datacenter/ucp/2.1/guides/"> <img src="../images/UCP_48.svg" alt="Docker Universal Control Plane"> </a>
+                </div>
+                <h3 id="ucp"><a href="datacenter/ucp/2.1/guides/">Docker Universal Control Plane</a></h3>
+                <p>(UCP) Manage a cluster of on-premise Docker hosts like a single machine with this enterprise product.</p>
+            </div>
+        </div>
+        <!--DTR-->
+            <div class="col-sm-4 col-md-12 col-lg-3 block">
+                <div class="component">
+                    <div class="component-icon">
+                        <a href="datacenter/dtr/2.2/guides/"> <img src="../images/dtr_48.svg" alt="Docker Trusted Registry"> </a>
+                    </div>
+                    <h3 id="dtr"><a href="datacenter/dtr/2.2/guides/">Docker Trusted Registry</a></h3>
+                    <p>(DTR) An enterprise image storage solution you can install behind a firewall to manage images and access.</p>
+            </div>
+        </div>
+    <!-- end real row-->
+    </div>
+<!-- end component-container 1-->
+</div>
+
+## Tools
+
+<!--component-container 2-->
+<div class="component-container">
+    <!--start real row-->
     <div class="row">
         <div class="col-sm-4 col-md-12 col-lg-4 block">
             <div class="component">
@@ -60,88 +101,44 @@ mode.
         <div class="col-sm-4 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
-                    <a href="/engine/installation/linux/ubuntu/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>
+                    <a href="engine/installation/linux/ubuntu/"> <img src="../images/linux_48.svg" alt="Docker for Linux"> </a>
                 </div>
-                <h3 id="docker-for-linux"><a href="/engine/installation/linux/ubuntu/">Docker for Linux</a></h3>
+                <h3 id="docker-for-linux"><a href="engine/installation/linux/ubuntu/">Docker for Linux</a></h3>
                 <p>Install Docker on a computer which already has a Linux distribution installed.</p>
             </div>
         </div>
-        <!--components-full-width-->
-        <div class="col-md-12">
-            <!--editions-->
-            <div class="component-full">
-                <div class="component-full-icon">
-                    <img src="../images/engine_48.svg" alt="Docker Editions">
+    <!--organic row 2-->
+    <!--editions-->
+        <div class="col-sm-4 col-md-12 col-lg-3 block">
+            <div class="component">
+                <div class="component-icon">
+                    <a href="engine/installation/"> <img src="../images/apple_48.svg" alt="Docker Editions"> </a>
                 </div>
-                <div class="component-full-copy">
-                    <h3 id="docker-engine"><a href="engine/installation/">Docker Editions</a></h3>
-                    <p>Get started with containers quickly with Docker Community edition (Docker CE)
-                       or Docker Enterprise Edition (Docker EE).</p>
-		            <p>Editions are available for desktops, servers, or cloud providers.</p>
-                </div>
+                <h3 id="editions"><a href="engine/installation/">Docker Editions</a></h3>
+                <p>Platform matrix and superset of installers for Docker for desktops, servers, or cloud providers.</p>
             </div>
-            <!--cloud-->
-            <div class="component-full">
-                <div class="component-full-icon">
-                    <img src="../images/cloud_48.svg" alt="Docker Cloud">
-                </div>
-                <div class="component-full-copy">
-                    <h3 id="docker-cloud"><a href="docker-cloud/">Docker Cloud</a></h3>
-                    <p>A hosted service for building, testing, and deploying Docker images to your hosts.</p>
-                </div>
-            </div>
-            <!--UCP-->
-            <div class="component-full">
-                <div class="component-full-icon">
-                    <img src="../images/UCP_48.svg" alt="Docker Universal Control Plane">
-                </div>
-                <div class="component-full-copy">
-                    <h3 id="docker-cloud"><a href="datacenter/ucp/1.1/overview/">Docker Universal Control Plane</a></h3>
-                    <p>(UCP) Manage a cluster of on-premises Docker hosts as if they were a single machine.</p>
-                </div>
-            </div>
-            <!--compose-->
-            <div class="component-full">
-                <div class="component-full-icon">
-                    <img src="../images/compose_48.svg" alt="Docker Compose">
-                </div>
-                <div class="component-full-copy">
-                    <h3 id="docker-cloud"><a href="compose/overview/">Docker Compose</a></h3>
-                    <p>Define applications built using multiple containers.</p>
-                </div>
-            </div>
-            <!--hub-->
-            <!-- <div class="component-full">
-                <div class="component-full-icon">
-                    <img src="../images/hub_48.svg" alt="Docker Hub">
-                </div>
-                <div class="component-full-copy">
-                    <h3 id="docker-cloud"><a href="docker-hub/overview/">Docker Hub</a></h3>
-                    <p>A hosted registry service for managing and building images.</p>
-                </div>
-            </div> -->
-            <!--dtr-->
-            <div class="component-full">
-                <div class="component-full-icon">
-                    <img src="../images/dtr_48.svg" alt="Docker Trusted Registry">
-                </div>
-                <div class="component-full-copy">
-                    <h3 id="docker-cloud"><a href="docker-trusted-registry/">Docker Trusted Registry</a></h3>
-                    <p>(DTR) stores and signs your images.</p>
-                </div>
-            </div>
-            <!--machine-->
-            <div class="component-full">
-                <div class="component-full-icon">
-                    <img src="../images/machine_48.svg" alt="Docker Machine">
-                </div>
-                <div class="component-full-copy">
-                    <h3 id="docker-cloud"><a href="machine/install-machine/">Docker Machine</a></h3>
-                    <p>Automate container provisioning on your network or in the cloud. Available for Windows, macOS, or Linux.</p>
-                </div>
-            </div>
-            <!-- end col-12-->
         </div>
-        <!-- end component-container-->
+        <!--compose-->
+            <div class="col-sm-4 col-md-12 col-lg-3 block">
+                <div class="component">
+                    <div class="component-icon">
+                        <a href="compose/overview/"> <img src="../images/compose_48.svg" alt="Docker Compose"> </a>
+                    </div>
+                    <h3 id="compose"><a href="compose/overview/">Docker Compose</a></h3>
+                    <p>Define application stacks built using multiple containers, services, and swarm configurations.</p>
+            </div>
+        </div>
+        <!--machine-->
+            <div class="col-sm-4 col-md-12 col-lg-3 block">
+                <div class="component">
+                    <div class="component-icon">
+                        <a href="machine/overview/"> <img src="../images/machine_48.svg" alt="Docker Trusted Registry"> </a>
+                    </div>
+                    <h3 id="machine"><a href="machine/overview/">Docker Machine</a></h3>
+                    <p>Automate container provisioning on your network or in the cloud. Available for Windows, macOS, or Linux.</p>
+            </div>
+        </div>
+    <!-- end real row-->
     </div>
+<!-- end component-container 2-->
 </div>

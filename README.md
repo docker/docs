@@ -1,7 +1,7 @@
 # Docs @ Docker
 
-Welcome to the repo for our documentation. This is the source for the URL
-served at [https://docs.docker.com/](https://docs.docker.com/).
+Welcome to the repo for our documentation. This is the source for
+[https://docs.docker.com/](https://docs.docker.com/).
 
 Feel free to send us pull requests and file issues. Our docs are completely
 open source and we deeply appreciate contributions from our community!
@@ -9,7 +9,8 @@ open source and we deeply appreciate contributions from our community!
 ## Providing feedback
 
 We really want your feedback, and we've made it easy. You can edit, rate, or
-file an issue at the bottom of every page on [https://docs.docker.com/](https://docs.docker.com/).
+file an issue at the bottom of every page on
+[https://docs.docker.com/](https://docs.docker.com/).
 
 **Please only file issues about the documentation in this repository.** One way
 to think about this is that you should file a bug here if your issue is that you
@@ -17,7 +18,7 @@ don't see something that should be in the docs, or you see something incorrect
 or confusing in the docs.
 
 - If your problem is a general question about how to configure or use Docker,
-  consider asking a question on [https://forums.docker.com](https://forums.docker.com) instead.
+  ask in [https://forums.docker.com](https://forums.docker.com) instead.
 
 - If you have an idea for a new feature or behavior change in a specific aspect
   of Docker, or have found a bug in part of Docker, please file that issue in
@@ -111,11 +112,11 @@ building. Review the staged site and amend your commit if necessary. Reviewers
 will also check the staged site before merging the PR, to protect the integrity
 of [https://docs.docker.com/](https://docs.docker.com/).
 
-## Staging locally
+## Staging the docs
 
 You have three options:
 
-1.  Clone this repo and run our staging container:
+1.  On your local machine, clone this repo and run our staging container:
 
     ```bash
     git clone https://github.com/docker/docker.github.io.git
@@ -136,7 +137,7 @@ You have three options:
     docker-compose down
     ```
 
-2.  Use Jekyll directly.
+2.  Install Jekyll and GitHub Pages on your local machine.
 
     a. Clone this repo by running:
 
@@ -244,7 +245,7 @@ no_ratings: true
 
 The use of tabs, as on pages like https://docs.docker.com/engine/api/, requires
 the use of HTML. The tabs use Bootstrap CSS/JS, so refer to those docs for more
-advanced usage. For a basic horizontal tab set, copy/paste starting from this 
+advanced usage. For a basic horizontal tab set, copy/paste starting from this
 code and implement from there. Keep an eye on those `href="#id"` and `id="id"`
 references as you rename, add, and remove tabs.
 
