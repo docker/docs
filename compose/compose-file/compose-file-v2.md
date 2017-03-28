@@ -249,6 +249,13 @@ Custom DNS servers. Can be a single value or a list.
       - 8.8.8.8
       - 9.9.9.9
 
+### dns_opt
+
+List of custom DNS options to be added to the container's `resolv.conf` file.
+
+    dns_opt:
+      - use-vc
+      - no-tld-query
 
 ### dns_search
 
@@ -721,6 +728,15 @@ container and the host operating system the PID address space.  Containers
 launched with this flag will be able to access and manipulate other
 containers in the bare-metal machine's namespace and vise-versa.
 
+### pids_limit
+
+> [Added in version 2.1 file format](#version-21).
+
+Tunes a container's PIDs limit. Set to `-1` for unlimited PIDs.
+
+    pids_limit: 10
+
+
 ### ports
 
 Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
@@ -883,7 +899,7 @@ then read-write will be used.
 >     - container_name
 >     - container_name:rw
 
-### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, oom_score_adj, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
+### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_score_adj, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
@@ -902,6 +918,7 @@ Each of these is a single value, analogous to its
 
     mem_limit: 1000000000
     memswap_limit: 2000000000
+    mem_reservation: 512m
     privileged: true
 
     oom_score_adj: 500

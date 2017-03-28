@@ -7,12 +7,13 @@ notoc: true
 ---
 
 ```
-Usage: build [options] [SERVICE...]
+Usage: build [options] [--build-arg key=val...] [SERVICE...]
 
 Options:
---force-rm  Always remove intermediate containers.
---no-cache  Do not use cache when building the image.
---pull      Always attempt to pull a newer version of the image.
+    --force-rm              Always remove intermediate containers.
+    --no-cache              Do not use cache when building the image.
+    --pull                  Always attempt to pull a newer version of the image.
+    --build-arg key=val     Set build-time variables for one service.
 ```
 
 Services are built once and then tagged as `project_service`, e.g.,

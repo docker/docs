@@ -9,7 +9,8 @@ notoc: true
 Usage: pull [options] [SERVICE...]
 
 Options:
---ignore-pull-failures  Pull what it can and ignores images with pull failures.
+    --ignore-pull-failures  Pull what it can and ignores images with pull failures.
+    --parallel              Pull multiple images in parallel.
 ```
 
 Pulls service images.
