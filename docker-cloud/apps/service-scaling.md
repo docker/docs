@@ -106,7 +106,7 @@ PATCH /api/app/v1/service/(uuid)/ HTTP/1.1
 	 "target_num_containers": 2
 }
 ```
-See the [scale a service API documentation](/apidocs/docker-cloud.md#scale-a-service)
+See the [scale a service API documentation](/apidocs/docker-cloud.md#scale-a-service).
 
 ### Scaling a running service using the CLI
 
@@ -116,7 +116,7 @@ You can also scale an already running service using the CLI:
 $ docker-cloud service scale (uuid or name) 2
 ```
 
-See the [scale a service CLI documentation](/apidocs/docker-cloud.md#scale-a-service)
+See the [scale a service CLI documentation](/apidocs/docker-cloud.md#scale-a-service).
 
 ## Sequential deployment and scaling
 
