@@ -30,8 +30,8 @@ CS Engine. For notes on older versions, see the [CS Engine prior release notes a
 ## CS Engine 1.12.6-cs9
 (28 Feb 2017)
 
-* Fixes an issue causing containerd to deadlock [#336](github.com/docker/containerd/pull/336)
-* Fixes an issue where encrypted overlay networks stop working [#30727](github.com/docker/docker/issues/30727)
+* Fixes an issue causing containerd to deadlock [#336](https://github.com/docker/containerd/pull/336)
+* Fixes an issue where encrypted overlay networks stop working [#30727](https://github.com/docker/docker/issues/30727)
 
 ## CS Engine 1.12.6-cs8
 (8 Feb 2017)
