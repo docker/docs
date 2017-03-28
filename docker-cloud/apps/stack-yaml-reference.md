@@ -221,7 +221,7 @@ ports:
 
 ## privileged
 
-Whether to start the containers with Docker Engine's privileged flag set or not (default: false).
+Whether to start the containers with Docker Engine's privileged flag set or not (default: `false`).
 
 ```yml
 privileged: true
@@ -268,7 +268,7 @@ tags:
 ```
 
 ## target_num_containers
-The number of containers to run for this service (default: 1).
+The number of containers to run for this service (default: `1`).
 
 ```yml
 target_num_containers: 3
