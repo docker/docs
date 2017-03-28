@@ -477,7 +477,7 @@ reference:
     title: Getting started
   - path: /engine/api/sdks/
     title: SDKs
-  - path: /engine/api/v1.26/
+  - path: /engine/api/v1.27/
     title: v1.27 Reference
   - sectiontitle: Previous API versions
     section:
