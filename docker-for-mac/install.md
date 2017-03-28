@@ -117,7 +117,7 @@ explanation and list of prerequisites.
   - At least 4GB of RAM
   <p />
   - VirtualBox prior to version 4.3.30 must NOT be installed (it is incompatible
-    with Docker for Mac). If you have a newer version of VirtualBox installed, it's fine, and it might come in handy later.
+    with Docker for Mac). If you have a newer version of VirtualBox installed, it's fine.
 
   > **Note**: If your system does not satisfy these requirements, you can
   > install [Docker Toolbox](/toolbox/overview.md), which uses Oracle VirtualBox
@@ -134,7 +134,7 @@ explanation and list of prerequisites.
 
 	  ![Install Docker app](/docker-for-mac/images/docker-app-drag.png)
 
-2.  Double-click `Docker.app` to start Docker.
+2.  Double-click `Docker.app` in the Applications folder to start Docker.  (In the example below, the Applications folder is in "grid" view mode.)
 
 	  ![Docker app in Hockeyapp](/docker-for-mac/images/docker-app-in-apps.png)
 
