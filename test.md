@@ -200,7 +200,8 @@ Here is the sample code for a single-cell table masquerading as a box. There are
     praesent non, gravida in vestibulum. Turpis id ac, et dolor pede lectus volutpat nonummy elit,
     sed semper justo eget elementum, quisque non id duis lacus donec lorem, sit volutpat curabitur sed est.
 
-     {% capture my-div %}<div style="border: background-color:#F5F5F5; 1px solid #DCDCDC; border-color:#DCDCDC;">
+     {% capture my-div %}
+     <div style="background-color:#F5F5F5; border: 1px solid #DCDCDC;">
      
      - This is step 1
      
@@ -208,7 +209,9 @@ Here is the sample code for a single-cell table masquerading as a box. There are
      
      - This is step 3
      
-     </div>{% endcapture %}{{ my-div | markdownify }}
+     </div>
+     {% endcapture %}
+     {{ my-div | markdownify }}
 
 4.  Amet lobortis wisi est quis consequat ac, elit ac et nec eu ante elit,
     massa lorem donec felis.
