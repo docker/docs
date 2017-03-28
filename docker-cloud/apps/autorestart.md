@@ -38,7 +38,7 @@ Autorestart is set to `OFF` by default, which means that autorestart is *deactiv
 ### Using the API and CLI
 
 You can set the **Autorestart** option when launching a service through the
-API and through the CLI.  Autorestart is set to `OFF` by default. 
+API and through the CLI. Autorestart is set to `OFF` by default. 
 
 #### Set autorestart using the API
 
@@ -60,7 +60,7 @@ See our [API documentation](/apidocs/docker-cloud.md) for more information.
 
 ## Enabling autorestart on an already deployed service
 
-You can  activate or deactivate **Autorestart** on a service after it has been deployed by editing the service.
+You can activate or deactivate **Autorestart** on a service after it has been deployed by editing the service.
 
 1. Go to the service detail page.
 2. Click **Edit**.
