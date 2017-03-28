@@ -27,7 +27,7 @@ Docker Cloud supports two types of triggers:
 
 ## Create a trigger
 
-1. Click the name of the service you want to create a trigger for
+1. Click the name of the service you want to create a trigger for.
 2. Go to the detail page and scroll down to the **Triggers** section.
 
     ![](images/triggers-tab-blank.png)
