@@ -603,21 +603,6 @@ because they do not apply to Windows containers:
   * [Network](#network)
   * [Advanced (CPU and Memory configuration)](#advanced)
 
-### Giving feedback and getting help
-
-To get help from the community, review current user topics, join or start a
-discussion, log on to our [Docker for Windows
-forum](https://forums.docker.com/c/docker-for-windows).
-
-To report bugs or problems, log on to [Docker for Windows issues on
-GitHub](https://github.com/docker/for-win/issues), where you can review
-community reported issues, and file new ones. As a part of reporting issues on
-GitHub, we can help you troubleshoot the log data. See the
-[Diagnose and Feedback](#diagnose-and-feedback) topic below.
-
-To give feedback on the documentation or update it yourself, use the Feedback
-options at the bottom of each docs page.
-
 ### Docker Store
 
 Choose **Docker Store** from the Docker for Windows menu
@@ -649,9 +634,29 @@ Check out these [Docker Cloud topics](/docker-cloud/index.md) to learn more:
 * [Builds and Images](/docker-cloud/builds/index.md)
 * [Swarms in Docker Cloud](/docker-cloud/cloud-swarm/index.md)
 
+### Giving feedback and getting help
+
+To get help from the community, review current user topics, join or start a
+discussion, log on to our [Docker for Windows
+forum](https://forums.docker.com/c/docker-for-windows).
+
+To report bugs or problems, log on to [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues), where you can review
+community reported issues, and file new ones. As a part of reporting issues on
+GitHub, we can help you troubleshoot the log data. See the
+[Diagnose and Feedback](#diagnose-and-feedback) topic below.
+
+To give feedback on the documentation or update it yourself, use the Feedback
+options at the bottom of each docs page.
+
 ### Diagnose and Feedback
 
-If you encounter problems for which you do not find solutions in this documentation, searching [Docker for Windows issues on GitHub](https://github.com/docker/for-win/issues) already filed by other users, or on the [Docker for Windows forum](https://forums.docker.com/c/docker-for-windows), we can help you troubleshoot the log data.
+If you encounter problems for which you do not find solutions in this
+documentation, searching [Docker for Windows issues on
+GitHub](https://github.com/docker/for-win/issues) already filed by other users,
+or on the [Docker for Windows
+forum](https://forums.docker.com/c/docker-for-windows), we can help you
+troubleshoot the log data.
 
 Select **Upload a diagnostic**.
 
