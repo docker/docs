@@ -701,6 +701,8 @@ reference:
       title: docker plugin rm
     - path: /engine/reference/commandline/plugin_set/
       title: docker plugin set
+    - path: /engine/reference/commandline/plugin_upgrade/
+      title: docker plugin upgrade
   - path: /engine/reference/commandline/port/
     title: docker port
   - path: /engine/reference/commandline/ps/
