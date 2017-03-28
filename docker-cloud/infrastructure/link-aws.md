@@ -86,7 +86,7 @@ You can use the following `dockercloud-policy` to limit Docker Cloud to a specif
 
 3.  Select **Role for Cross-Account Access**, and in the submenu that opens select **Allows IAM users from a 3rd party AWS account to access this account**.
 
-    ![](images/aws-iam-role-2.png)
+    ![](images/aws-iam-role-1.png)
 
 4. In the **Account ID** field, enter the ID for the Docker Cloud service: `689684103426`.
 5. In the **External ID** field, enter your Docker Cloud username.
