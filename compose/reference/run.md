@@ -6,21 +6,24 @@ notoc: true
 ---
 
 ```
-Usage: run [options] [-e KEY=VAL...] SERVICE [COMMAND] [ARGS...]
+Usage: run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] SERVICE [COMMAND] [ARGS...]
 
 Options:
--d                    Detached mode: Run container in the background, print
+    -d                    Detached mode: Run container in the background, print
                           new container name.
---name NAME           Assign a name to the container
---entrypoint CMD      Override the entrypoint of the image.
--e KEY=VAL            Set an environment variable (can be used multiple times)
--u, --user=""         Run as specified username or uid
---no-deps             Don't start linked services.
---rm                  Remove container after run. Ignored in detached mode.
--p, --publish=[]      Publish a container's port(s) to the host
---service-ports       Run command with the service's ports enabled and mapped to the host.
--T                    Disable pseudo-tty allocation. By default `docker-compose run` allocates a TTY.
--w, --workdir=""      Working directory inside the container
+    --name NAME           Assign a name to the container
+    --entrypoint CMD      Override the entrypoint of the image.
+    -e KEY=VAL            Set an environment variable (can be used multiple times)
+    -u, --user=""         Run as specified username or uid
+    --no-deps             Don't start linked services.
+    --rm                  Remove container after run. Ignored in detached mode.
+    -p, --publish=[]      Publish a container's port(s) to the host
+    --service-ports       Run command with the service's ports enabled and mapped
+                          to the host.
+    -v, --volume=[]       Bind mount a volume (default [])
+    -T                    Disable pseudo-tty allocation. By default `docker-compose run`
+                          allocates a TTY.
+    -w, --workdir=""      Working directory inside the container
 ```
 
 Runs a one-time command against a service. For example, the following command starts the `web` service and runs `bash` as its command.
