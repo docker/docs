@@ -9,7 +9,7 @@ guarantees while upgrading between versions. We never support downgrading. We
 support upgrades according to the following rules:
 
 * When upgrading from one patch version to another you can skip patch versions
-  because no data migraiton is done for patch versions.
+  because no data migration is done for patch versions.
 * When upgrading between minor versions, you can't skip versions, but you can
   upgrade from any patch versions of the previous minor version to any patch
   version of the current minor version.
