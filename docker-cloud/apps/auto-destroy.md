@@ -6,7 +6,7 @@ redirect_from:
 title: Destroy containers automatically
 ---
 
-When enabled on a service, **Autodestroy**  automatically terminates containers
+When enabled on a service, **Autodestroy** automatically terminates containers
 when they stop. **This destroys all data in the container on stop.** This is
 useful for one-time actions that store their results in an external system.
 
