@@ -40,7 +40,7 @@ environment. Highlights Compose Version 3 new features and swarm mode.
     <div class="row">
     <!--organic row 1-->
     <!--cloud-->
-        <div class="col-sm-4 col-md-12 col-lg-3 block">
+        <div class="col-sm-4 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="docker-cloud/"> <img src="../images/cloud_48.svg" alt="Docker Cloud"> </a>
@@ -50,7 +50,7 @@ environment. Highlights Compose Version 3 new features and swarm mode.
             </div>
         </div>
     <!--UCP-->
-        <div class="col-sm-4 col-md-12 col-lg-3 block">
+        <div class="col-sm-4 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="datacenter/ucp/2.1/guides/"> <img src="../images/UCP_48.svg" alt="Docker Universal Control Plane"> </a>
@@ -60,7 +60,7 @@ environment. Highlights Compose Version 3 new features and swarm mode.
             </div>
         </div>
         <!--DTR-->
-            <div class="col-sm-4 col-md-12 col-lg-3 block">
+            <div class="col-sm-4 col-md-12 col-lg-4 block">
                 <div class="component">
                     <div class="component-icon">
                         <a href="datacenter/dtr/2.2/guides/"> <img src="../images/dtr_48.svg" alt="Docker Trusted Registry"> </a>
@@ -109,7 +109,7 @@ environment. Highlights Compose Version 3 new features and swarm mode.
         </div>
     <!--organic row 2-->
     <!--editions-->
-        <div class="col-sm-4 col-md-12 col-lg-3 block">
+        <div class="col-sm-4 col-md-12 col-lg-4 block">
             <div class="component">
                 <div class="component-icon">
                     <a href="engine/installation/"> <img src="../images/apple_48.svg" alt="Docker Editions"> </a>
@@ -119,7 +119,7 @@ environment. Highlights Compose Version 3 new features and swarm mode.
             </div>
         </div>
         <!--compose-->
-            <div class="col-sm-4 col-md-12 col-lg-3 block">
+            <div class="col-sm-4 col-md-12 col-lg-4 block">
                 <div class="component">
                     <div class="component-icon">
                         <a href="compose/overview/"> <img src="../images/compose_48.svg" alt="Docker Compose"> </a>
@@ -129,7 +129,7 @@ environment. Highlights Compose Version 3 new features and swarm mode.
             </div>
         </div>
         <!--machine-->
-            <div class="col-sm-4 col-md-12 col-lg-3 block">
+            <div class="col-sm-4 col-md-12 col-lg-4 block">
                 <div class="component">
                     <div class="component-icon">
                         <a href="machine/overview/"> <img src="../images/machine_48.svg" alt="Docker Trusted Registry"> </a>

@@ -23,6 +23,16 @@
         font-size: 13px;
         padding: 19px 10px 11px;
     }
+    .sidebar-home,
+    .sidebar-home.affix,
+    .sidebar,
+    .sidebar.affix {
+        position: absolute;
+        width: 100%;
+        height: 500px;
+        overflow: scroll;
+
+    }
     h1,
     h2,
     h3 {
@@ -42,6 +52,9 @@
     h4 {
         font-size: 16px;
     }
+    // .block {
+    //     text-align: center;
+    // }
   }
 
 
@@ -63,7 +76,7 @@
         height: 100px;
     }
     .tabs {
-        padding: 0 0 0 29px;
+        padding: 0 0 0 10px;
     }
     .tabs li a {
         font-size: 13px;
@@ -226,10 +239,10 @@
     }
     .nav-secondary {
         background: $black;
-        height: 55px;
+        // height: 55px;
     }
     .content {
-        padding: 60px 20px;
+        padding: 120px 20px;
     }
     .main-content {
         padding: 0px 10px;
