@@ -17,10 +17,8 @@ After creating a swarm on Docker for AWS and connecting to any manager using SSH
 ```bash
 $ docker plugin ls
 ID                  NAME                        DESCRIPTION                       ENABLED
-f416c95c0dcc        docker4x/cloudstor:aws-v{{ edition_version }}   cloud storage plugin for Docker   true
+f416c95c0dcc        cloudstor:aws               cloud storage plugin for Docker   true
 ```
-
-**Note**: Make note of the plugin tag name, because it will change between versions, and yours may be different then listed here.
 
 The following examples show how to create swarm services that require data persistence using the --mount flag and specifying Cloudstor as the driver.
 
@@ -28,7 +26,7 @@ The following examples show how to create swarm services that require data persi
 
 ```bash
 docker service create --replicas 5 --name ping1 \
-    --mount type=volume,volume-driver=docker4x/cloudstor:aws-v{{ edition_version }},source=sharedvol1,destination=/shareddata \
+    --mount type=volume,volume-driver=cloudstor:aws,source=sharedvol1,destination=/shareddata \
     alpine ping docker.com
 ```
 
@@ -41,7 +39,7 @@ With the above example, you can make sure that the volume is indeed shared by lo
 ```bash
 {% raw %}
 docker service create --replicas 5 --name ping2 \
-    --mount type=volume,volume-driver=docker4x/cloudstor:aws-v{{ edition_version }},source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata \
+    --mount type=volume,volume-driver=cloudstor:aws,source={{.Service.Name}}-{{.Task.Slot}}-vol,destination=/mydata \
     alpine ping docker.com
 {% endraw %}
 ```
