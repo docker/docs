@@ -55,7 +55,7 @@ A single node is considered a node cluster with a size of 1. Because of this, yo
 
 1. Click **Node clusters** in the left navigation menu.
 2. Click **Create**.
-2. In the **Deploy tags** field, enter the tags to assign to the cluster and all
+3. In the **Deploy tags** field, enter the tags to assign to the cluster and all
 of its member nodes.
 
     ![](images/nodecluster-wizard-tags.png)
@@ -72,7 +72,6 @@ of its member nodes.
 To change the tags on an existing node or node cluster:
 
 1. Go to the node or node cluster's detail page.
-
 2. Click the tags below the node or node cluster status line to edit them.
 
     ![](images/node-detail-tags.png)
@@ -87,7 +86,7 @@ To change the tags on an existing node or node cluster:
 
 ## Add tags to a service at launch
 
-To use deploy a service to a specific node using tags, you must first specify one or more tags on the service. If you don't add any tags to a service, the service is deployed to all available nodes.
+To deploy a service to a specific node using tags, you must first specify one or more tags on the service. If you don't add any tags to a service, the service is deployed to all available nodes.
 
 1. Use the **Create new service** wizard to start a new service.
 
@@ -102,7 +101,6 @@ To use deploy a service to a specific node using tags, you must first specify on
 You can add or remove tags on a running service from the service's detail view.
 
 1. From the service detail view, click **Edit**.
-
 2. Select tags from the **deployment constraints** list to add to this service. Only tags that already exist on your nodes appear in the list.
 
     ![](images/service-wizard-tags.png)
