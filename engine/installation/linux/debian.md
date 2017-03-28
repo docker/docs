@@ -136,6 +136,16 @@ from the repository.
        $(lsb_release -cs) \
        stable"
     ```
+4.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
+    repository that does not exist. You need to comment out this repository or
+    running `apt-get update` will fail. Edit `/etc/apt/sources.list`. Find the
+    line like the following, and comment it out or remove it:
+    
+    ```none
+    deb-src [arch=amd64] https://download.docker.com/linux/debian wheezy stable
+    ```
+    
+    Save and exit the file.
 
     [Learn about **stable** and **edge** channels](/engine/installation/).
 
