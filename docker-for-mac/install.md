@@ -49,10 +49,10 @@ channels, see the [FAQs](/docker-for-mac/faqs.md#stable-and-edge-channels).
   </tr>
   <tr valign="top">
   <td width="50%">
-  <a class="button outline-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac (Stable)</a>
+  <a class="button outline-btn" href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac (Stable)</a><br><a href="https://download.docker.com/mac/stable/Docker.dmg.sha256sum"><font color="#BDBDBD" size="-1">Checksum: Docker.dmg SHA256</font></a>
   </td>
   <td width="50%">
-  <a class="button outline-btn" href="https://download.docker.com/mac/beta/Docker.dmg">Get Docker for Mac (Edge)</a>
+  <a class="button outline-btn" href="https://download.docker.com/mac/edge/Docker.dmg">Get Docker for Mac (Edge)</a>
   </td>
   </tr>
 

@@ -183,7 +183,7 @@ To fix existing containers, follow these steps.
 
 3. Start Docker.
 
-	> **Note:**  Be sure to quit and then restart Docker for Mac before attempting to start containers.
+	> **Note**:  Be sure to quit and then restart Docker for Mac before attempting to start containers.
 
 4. Try to start the container again:
 

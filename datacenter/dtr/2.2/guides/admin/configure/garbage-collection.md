@@ -1,6 +1,6 @@
 ---
 description: Configure garbage collection in Docker Trusted Registry
-keyworkds: docker, registry, garbage collection, gc, space, disk space
+keywords: docker, registry, garbage collection, gc, space, disk space
 title: Docker Trusted Registry 2.2 Garbage Collection
 ---
 
@@ -21,7 +21,7 @@ UTC time (unless the system time is mounted), therefore remember that the cron
 schedule will run based off of UTC time when configuring.
 
 GC puts DTR into read only mode; pulls succeed while pushes fail.  Pushing an
-image while GC runs may lead to undefined behaviour and data loss, therefore
+image while GC runs may lead to undefined behavior and data loss, therefore
 this is disabled for safety.  For this reason it's generally best practice to
 ensure GC runs in the early morning on a Saturday or Sunday night.
 

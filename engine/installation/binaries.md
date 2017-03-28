@@ -169,7 +169,7 @@ You can install Docker from binaries on Windows Server 2016 or Windows 10.
 1.  Use the following PowerShell commands to install and start Docker:
 
     ```none
-    Invoke-WebRequest https://get.docker.com/builds/Windows/x86_64/docker-1.13.0.zip -UseBasicParsing -OutFile docker.zip
+    Invoke-WebRequest https://get.docker.com/builds/Windows/x86_64/docker-17.03.0-ce.zip -UseBasicParsing -OutFile docker.zip
     Expand-Archive docker.zip -DestinationPath $Env:ProgramFiles
     Remove-Item -Force docker.zip
 

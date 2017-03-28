@@ -20,7 +20,7 @@ To run through this tutorial, you will need:
     [Swarm mode key concepts](/engine/swarm/key-concepts.md)
     and [How services work](/engine/swarm/how-swarm-mode-works/services.md).
 
-    > **Note:** If you're trying things out on a local development environment,
+    > **Note**: If you're trying things out on a local development environment,
     > you can put your engine into swarm mode with `docker swarm init`.
     >
     > If you've already got a multi-node swarm running, keep in mind that all

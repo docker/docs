@@ -6,6 +6,8 @@ redirect_from:
 title: Get Docker for and SLES
 ---
 
+{% assign minor-version = "17.03" %}
+
 To get started with Docker on SUSE Linux Enterprise Server (SLES), make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
@@ -78,8 +80,6 @@ the repository.
 
 Use the following command to set up the **stable** repository, using the
 Docker EE repository URL you located in the [prerequisites](#prerequisites).
-
-{% assign minor-version = "17.03" %}
 
 ```bash
 $ sudo zypper addrepo \

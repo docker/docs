@@ -47,7 +47,7 @@ script:
           db:
             image: postgres
 
-    >**Tip:** There are limitations to this first solution; e.g., it doesn't verify when a specific service is really ready. If you add more arguments to the command, you'll need to use the `bash shift` command with a loop, as shown in the next example.
+    >**Tip**: There are limitations to this first solution; e.g., it doesn't verify when a specific service is really ready. If you add more arguments to the command, you'll need to use the `bash shift` command with a loop, as shown in the next example.
 
 -   Alternatively, write your own wrapper script to perform a more application-specific health
     check. For example, you might want to wait until Postgres is definitely

@@ -16,6 +16,7 @@ The following pages describe the usage information for the [docker-compose](over
 * [events](events.md)
 * [exec](exec.md)
 * [help](help.md)
+* [images](images.md)
 * [kill](kill.md)
 * [logs](logs.md)
 * [pause](pause.md)

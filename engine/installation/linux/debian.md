@@ -7,6 +7,8 @@ redirect_from:
 title: Get Docker for Debian
 ---
 
+{% assign minor-version = "17.03" %}
+
 To get started with Docker on Debian, make sure you
 [meet the prerequisites](#prerequisites), then
 [install Docker](#install-docker).
@@ -118,15 +120,15 @@ from the repository.
     sub   4096R/F273FCD8 2017-02-22
     ```
 
-3.  Use the following command to set up the **stable** repository.
-
-    To add the **edge** repository, add `edge` after `stable` on the last line of
-    the command. For information about **stable** and **edge** builds, see
-    [Docker variants](/engine/installation/#docker-variants).
+3.  Use the following command to set up the **stable** repository. You always
+    need the **stable** repository, even if you want to install **edge** builds
+    as well.
 
     > **Note**: The `lsb_release -cs` sub-command below returns the name of your
     > Debian distribution, such as `jessie`.
 
+    To also add the **edge** repository, add `edge` after `stable` on the last
+    line of the command.
 
     ```bash
     $ sudo add-apt-repository \
@@ -134,6 +136,18 @@ from the repository.
        $(lsb_release -cs) \
        stable"
     ```
+4.  **Wheezy only**: The version of `add-apt-repository` on Wheezy adds a `deb-src`
+    repository that does not exist. You need to comment out this repository or
+    running `apt-get update` will fail. Edit `/etc/apt/sources.list`. Find the
+    line like the following, and comment it out or remove it:
+    
+    ```none
+    deb-src [arch=amd64] https://download.docker.com/linux/debian wheezy stable
+    ```
+    
+    Save and exit the file.
+
+    [Learn about **stable** and **edge** channels](/engine/installation/).
 
 #### Install Docker CE
 
@@ -164,7 +178,7 @@ from the repository.
     ```bash
     $ apt-cache madison docker-ce
 
-    docker-ce | 17.03.0~ce-0~debian-jessie | {{ download-url-base}} jessie/stable amd64 Packages
+    docker-ce | {{ minor-version }}.0~ce-0~debian-jessie | {{ download-url-base}} jessie/stable amd64 Packages
     ```
 
     The contents of the list depend upon which repositories are enabled,
@@ -208,12 +222,14 @@ If you cannot use Docker's repository to install Docker CE, you can download the
 `.deb` file for your release and install it manually. You will need to download
 a new file each time you want to upgrade Docker.
 
-1.  Go to [{{ download-url-base }}/pool/stable/amd64/]({{ download-url-base }}/pool/stable/amd64/)
-    and download the `.deb` file for the Docker version you want to install and
-    for your version of Debian.
+1.  Go to [{{ download-url-base }}/dists//]({{ download-url-base }}/dists/),
+    choose your Ubuntu version, browse to `stable/pool/stable/amd64/`, and
+    download the `.deb` file for the Docker version you want to install and for
+    your version of Debian.
 
     > **Note**: To install an **edge**  package, change the word
-    > `stable` in the URL to `edge`.
+    > `stable` in the  URL to `edge`.
+    > [Learn about **stable** and **edge** channels](/engine/installation/).
 
 2.  Install Docker CE, changing the path below to the path where you downloaded
     the Docker package.

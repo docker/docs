@@ -8,7 +8,7 @@ redirect_from:
 title: SSH into a Docker Cloud-managed node
 ---
 
-You can use add a public SSH key to the *authorized_keys* file in each of your nodes so you can access Docker Cloud provisioned nodes. The quickest way to do this is to run our **<a href="https://hub.docker.com/r/dockercloud/authorizedkeys" target="_blank">dockercloud/authorizedkeys</a>)** container image.
+You can add a public SSH key to the *authorized_keys* file in each of your nodes so you can access Docker Cloud provisioned nodes. The quickest way to do this is to run our **<a href="https://hub.docker.com/r/dockercloud/authorizedkeys" target="_blank">dockercloud/authorizedkeys</a>)** container image.
 
 ## Create pair of keys
 
@@ -73,7 +73,7 @@ From the stack page, click **Create and deploy**.
 The service runs, copies your public key to all of your nodes, then terminates
 and automatically destroys the container.
 
-> **Note**: the default configuration of this service copies the public key you enter to ALL of your existing nodes.
+> **Note**: The default configuration of this service copies the public key you enter to ALL of your existing nodes.
 
 ### SSH into Docker Cloud node
 

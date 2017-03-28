@@ -18,7 +18,7 @@ Compose to set up and run WordPress. Before starting, you'll need to have
     This project directory will contain a `docker-compose.yml` file which will
     be complete in itself for a good starter wordpress project.
 
-    >**Tip:** You can use either a `.yml` or `.yaml` extension for this file. They both work.
+    >**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
 
 2. Change directories into your project directory.
 

@@ -74,7 +74,7 @@ $ sudo ping 10.0.0.4
 
 ## What are the different Azure Regions?
 All regions can be found here: [Microsoft Azure Regions](https://azure.microsoft.com/en-us/regions/)
-An exerpt of the above regions to use when you create your service principal are:
+An excerpt of the above regions to use when you create your service principal are:
 
 ```none
 australiaeast
@@ -89,6 +89,8 @@ eastus
 eastus2
 japaneast
 japanwest
+koreacentral
+koreasouth
 northcentralus
 northeurope
 southcentralus
@@ -96,6 +98,8 @@ southeastasia
 southindia
 uksouth
 ukwest
+usgovvirginia
+usgoviowa
 westcentralus
 westeurope
 westindia

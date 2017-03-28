@@ -109,7 +109,7 @@ experiment with a multi-node swarm. Check out the tutorial at
 
 You might need to provide the location of the Engine API for Docker clients and development tools.
 
-On Docker for Windows, clients can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL: `http://localhost:2375`.
+On Docker for Windows, clients can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL: `tcp://localhost:2375`.
 
 This sets `DOCKER_HOST` and `DOCKER_CERT_PATH` environment variables to the given values (for the named pipe or TCP socket, whichever you use).
 

@@ -13,7 +13,7 @@ service distributes new containers when scaling.
 ## Set a deployment distribution strategy
 
 You can set the deployment strategy when creating a service, either through the
-Docker Cloud web UI, or when using the API or CLI. You can also specify a
+Docker Cloud web UI, or using the API or CLI. You can also specify a
 deployment strategy in the [stack file](../apps/stack-yaml-reference.md) used to
 define a [service stack](../apps/stacks.md).
 
@@ -25,7 +25,7 @@ This is the default strategy, and is commonly used to balance the total load of
 all services across all nodes.
 
 A service configured to deploy using the `EMPTIEST_NODE` strategy deploys its
-containers to the nodes (that match its [deploy tags](../apps/deploy-tags.md)
+containers to the nodes that match its [deploy tags](../apps/deploy-tags.md)
 with the **fewest total containers** at the time of each container's deployment,
 regardless of the service.
 

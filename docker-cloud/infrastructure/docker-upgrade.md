@@ -15,9 +15,7 @@ Instead, we allow you to choose when you want to upgrade so you can plan for pot
 
 ## Upgrading Docker Engine in a node
 
-Before you upgrade your nodes,
-
-Go to the detail page of the node that you want to upgrade. On the left side you will see a **Docker Info** section that lists the currently installed version of Docker Engine.
+Before you upgrade your nodes, go to the detail page of the node that you want to upgrade. On the left side you will see a **Docker Info** section that lists the currently installed version of Docker Engine.
 
 If a new version is available, you'll see an up-arrow icon, and a **New Docker version available** message above the current version line. Click the up-arrow
 icon to start the upgrade process.

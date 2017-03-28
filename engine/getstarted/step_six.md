@@ -32,7 +32,7 @@ new image.
     hello-world          latest       91c95931e552        5 weeks ago         910 B
     ```
 
-5.  Find the image ID for the `docker-whale` image, in the second column. In this example,
+5.  Find the image ID for the `docker-whale` image, in the third column. In this example,
     the id is `7d9495d03763`, but yours will be different.
 
     > **Note**: Currently, the repository shows the repo name `docker-whale`
@@ -135,7 +135,7 @@ locally.
     $ docker rmi -f 7d9495d03763
     ```
 
-    >**Tip:** You can also remove an image with `docker image rm -f` followed by image ID or name in a similar fashion.
+    >**Tip**: You can also remove an image with `docker image rm -f` followed by image ID or name in a similar fashion.
 
 4.  When you use `docker run` it automatically downloads (pulls) images that
     don't yet exist locally, creates a container, and starts it. Use the

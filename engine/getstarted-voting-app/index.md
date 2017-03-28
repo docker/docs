@@ -19,8 +19,8 @@ Docker Engine.
 
 If you haven't yet downloaded Docker or installed it, go to [Get
 Docker](/engine/getstarted/step_one.md#step-1-get-docker) and grab Docker for
-your platform.  You can follow along and run this example using [Docker for Mac](/docker-for-mac/index.md),
-[Docker for Windows](/docker-for-windows/index.md), or [Docker for Linux](/installation/linux/index.md).
+your platform.  You can follow along and run this example using [Docker for Mac](/docker-for-mac/install.md),
+[Docker for Windows](/docker-for-windows/install.md), [Docker Toolbox](/toolbox/overview.md), or [Docker for Linux](/installation/linux/index.md).
 
 If you are totally new to Docker, you might want to work through the [Get
 Started with Docker tutorial](/engine/getstarted/index.md) first, then come
@@ -89,16 +89,18 @@ of a Dockerfile to specify the images. When we deploy, each image will run as a
 service in a container (or in multiple containers, for those that have replicas
 defined to scale the app).
 
-To follow along, you need only have Docker running and a [copy of
-the `docker-stack.yml` file provided
-**here**](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml).
+To follow along, you need only have Docker running and a copy of the
+`docker-stack.yml`
+file that we provide.
 
 This file defines all the services we want to use along with details about how
 and where those services will run; their base images, configuration
 details such as ports, networks, volumes, application dependencies, and the
 swarm configuration.
 
-Here is an example of one of the services fully defined:
+This **example snip-it** taken from our `docker-stack.yml` shows one of the
+services fully defined. (The full file is
+[**here**](https://github.com/docker/example-voting-app/blob/master/docker-stack.yml).)
 
 ```
 vote:
@@ -122,7 +124,7 @@ uses `dockersamples/examplevotingapp_vote:before`. This specifies the path to
 the image on Docker Hub (as shown in the table above), and an [image
 tag](/engine/reference/commandline/tag.md), `before` to indicate the version of
 the image we want to start with. In the second part of the tutorial, we will
-edit this file to call a different verson of this image with an `after` tag.
+edit this file to call a different version of this image with an `after` tag.
 
 * The **depends_on** key allows you to specify that a service is only
 deployed after another service. In our example, `vote` only deploys

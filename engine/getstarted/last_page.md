@@ -6,6 +6,7 @@ redirect_from:
 - /windows/last_page/
 - /linux/last_page/
 title: Learn more
+notoc: true
 ---
 
 This getting started provided very basic essentials for using Docker on Mac, Windows, and Linux. If you want to learn more with regard to end-to-end development, start with the full install instructions and feature overviews, then follow up with more advanced tutorials and user guides.
@@ -21,7 +22,7 @@ Depending on your interest, the Docker documentation contains a wealth of inform
   </tr>
   <tr>
     <td class="tg-031e">Tutorials and sample app walkthroughs</td>
-    <td class="tg-031e"><a href="/engine/getstarted-voting-app/">Define and deploy a multi-container app</a>. A logical next step after completing the Getting Started example, this tutorial walks you through using a Docker stack file to define a set of services and deploy them to a swarm.</td>
+    <td class="tg-031e"><a href="/engine/getstarted-voting-app/">Define and deploy a multi-container app</a>. A logical next step after completing the Getting Started example, this tutorial walks you through using a Docker stack file to define a set of services and deploy them to a swarm. A swarm is a cluster of Docker engines, or nodes, where you deploy services.</td>
   </tr>
   <tr>
     <td class="tg-031e">More about Docker for Mac, features, examples, FAQs, relationship to Docker Machine and Docker Toolbox, and how this fits in the Docker ecosystem</td>

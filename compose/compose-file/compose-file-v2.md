@@ -22,7 +22,7 @@ The Compose file is a [YAML](http://yaml.org/) file defining
 [volumes](#volume-configuration-reference).
 The default path for a Compose file is `./docker-compose.yml`.
 
->**Tip:** You can use either a `.yml` or `.yaml` extension for this file. They both work.
+>**Tip**: You can use either a `.yml` or `.yaml` extension for this file. They both work.
 
 A [container](/engine/reference/glossary.md#container) definition contains configuration which will be applied to each
 container started for that service, much like passing command-line parameters to
@@ -205,9 +205,9 @@ Simple example:
       db:
         image: postgres
 
-> **Note:** `depends_on` will not wait for `db` and `redis` to be "ready" before
+> **Note**: `depends_on` will not wait for `db` and `redis` to be "ready" before
 > starting `web` - only until they have been started. If you need to wait
-> for a service to be ready, see [Controlling startup order](startup-order.md)
+> for a service to be ready, see [Controlling startup order](/compose/startup-order.md)
 > for more on this problem and strategies for solving it.
 
 > **[Version 2.1](#version-21) file format only.**
@@ -249,6 +249,13 @@ Custom DNS servers. Can be a single value or a list.
       - 8.8.8.8
       - 9.9.9.9
 
+### dns_opt
+
+List of custom DNS options to be added to the container's `resolv.conf` file.
+
+    dns_opt:
+      - use-vc
+      - no-tld-query
 
 ### dns_search
 
@@ -287,7 +294,7 @@ The entrypoint can also be a list, in a manner similar to
         - memory_limit=-1
         - vendor/bin/phpunit
 
-> **Note:** Setting `entrypoint` will both override any default entrypoint set
+> **Note**: Setting `entrypoint` will both override any default entrypoint set
 > on the service's image with the `ENTRYPOINT` Dockerfile instruction, *and*
 > clear out any default command on the image - meaning that if there's a `CMD`
 > instruction in the Dockerfile, it will be ignored.
@@ -314,7 +321,7 @@ beginning with `#` (i.e. comments) are ignored, as are blank lines.
     # Set Rails/Rack environment
     RACK_ENV=development
 
-> **Note:** If your service specifies a [build](#build) option, variables
+> **Note**: If your service specifies a [build](#build) option, variables
 > defined in environment files will _not_ be automatically visible during the
 > build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
@@ -342,7 +349,7 @@ machine Compose is running on, which can be helpful for secret or host-specific 
       - SHOW=true
       - SESSION_SECRET
 
-> **Note:** If your service specifies a [build](#build) option, variables
+> **Note**: If your service specifies a [build](#build) option, variables
 > defined in `environment` will _not_ be automatically visible during the
 > build. Use the [args](#args) sub-option of `build` to define build-time
 > environment variables.
@@ -383,7 +390,7 @@ indefinitely. Compose does not support circular references and `docker-compose`
 returns an error if it encounters one.
 
 For more on `extends`, see the
-[the extends documentation](extends.md#extending-services).
+[the extends documentation](/compose/extends.md#extending-services).
 
 ### external_links
 
@@ -397,7 +404,7 @@ container name and the link alias (`CONTAINER:ALIAS`).
      - project_db_1:mysql
      - project_db_1:postgresql
 
-> **Note:** For version 2 file format, the
+> **Note**: For version 2 file format, the
 > externally-created containers must be connected to at least one of the same
 > networks as the service which is linking to them.
 
@@ -532,13 +539,13 @@ the alias, or the service name if no alias was specified.
 Links also express dependency between services in the same way as
 [depends_on](#dependson), so they determine the order of service startup.
 
-> **Note:** If you define both links and [networks](#networks), services with
+> **Note**: If you define both links and [networks](#networks), services with
 > links between them must share at least one network in common in order to
-> communicate. We recommend using networks instead. See [Version 2 file format](#version-2).
+> communicate. We recommend using networks instead.
 
 ### logging
 
-> [Version 2 file format](compose-versioning.md#version-2) and up. Used instead of version 1  
+> [Version 2 file format](compose-versioning.md#version-2) and up. Used instead of version 1
 > options for [log_driver](#log_driver) and [log_opt](#log_opt).
 
 Logging configuration for the service.
@@ -558,7 +565,7 @@ The default value is json-file.
     driver: "syslog"
     driver: "none"
 
-> **Note:** Only the `json-file` and `journald` drivers make the logs available directly from
+> **Note**: Only the `json-file` and `journald` drivers make the logs available directly from
 > `docker-compose up` and `docker-compose logs`. Using any other driver will not
 > print any logs.
 
@@ -721,12 +728,21 @@ container and the host operating system the PID address space.  Containers
 launched with this flag will be able to access and manipulate other
 containers in the bare-metal machine's namespace and vise-versa.
 
+### pids_limit
+
+> [Added in version 2.1 file format](#version-21).
+
+Tunes a container's PIDs limit. Set to `-1` for unlimited PIDs.
+
+    pids_limit: 10
+
+
 ### ports
 
 Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
 port (a random host port will be chosen).
 
-> **Note:** When mapping ports in the `HOST:CONTAINER` format, you may experience
+> **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
 > erroneous results when using a container port lower than 60, because YAML will
 > parse numbers in the format `xx:yy` as sexagesimal (base 60). For this reason,
 > we recommend always explicitly specifying your port mappings as strings.
@@ -874,7 +890,7 @@ then read-write will be used.
      - container:container_name
      - container:container_name:rw
 
-> **Note:** The `container:...` formats are only supported in the
+> **Note**: The `container:...` formats are only supported in the
 > [version 2 file format](#version-2). In [version 1](compose-versioning.md#version-1), you can use
 > container names without marking them as such:
 >
@@ -883,7 +899,7 @@ then read-write will be used.
 >     - container_name
 >     - container_name:rw
 
-### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, oom_score_adj, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
+### cpu\_shares, cpu\_quota, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_score_adj, privileged, read\_only, restart, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
 [docker run](/engine/reference/run.md) counterpart.
@@ -902,6 +918,7 @@ Each of these is a single value, analogous to its
 
     mem_limit: 1000000000
     memswap_limit: 2000000000
+    mem_reservation: 512m
     privileged: true
 
     oom_score_adj: 500
@@ -1170,10 +1187,10 @@ refer to it within the Compose file:
 
 ## Compose documentation
 
-- [User guide](index.md)
-- [Installing Compose](install.md)
+- [User guide](/compose/index.md)
+- [Installing Compose](/compose/install/)
 - [Compose file versions and upgrading](compose-versioning.md)
-- [Get started with Django](django.md)
-- [Get started with Rails](rails.md)
-- [Get started with WordPress](wordpress.md)
-- [Command line reference](./reference/index.md)
+- [Get started with Django](/compose/django/)
+- [Get started with Rails](/compose/rails/)
+- [Get started with WordPress](/compose/wordpress/)
+- [Command line reference](/compose/reference/)

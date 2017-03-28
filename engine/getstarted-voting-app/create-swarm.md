@@ -30,10 +30,6 @@ Now, we'll add our Docker machines to a [swarm](/engine/swarm/index.md).
 
     Boot2Docker version 1.13.0-rc7, build HEAD : b2cde29 - Sat Jan 14 00:29:39 UTC 2017
     Docker version 1.13.0-rc7, build 48a9e53
-    docker@manager:~$ ls
-    log.log
-    docker@manager:~$ docker swarm init --advertise-addr 192.168.99.100
-    Swarm initialized: current node (2tjrasfqfu945b7n4753374sw) is now a manager.
     ```
 
 2.  Initialize a swarm.
@@ -60,7 +56,7 @@ Now, we'll add our Docker machines to a [swarm](/engine/swarm/index.md).
     To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
     ```
 
-    >**Tip:** The next step is to log into the worker machine. You can either open a new shell, or exit out of the manager in the current shell by typing `exit`.
+    >**Tip**: The next step is to log into the worker machine. You can either open a new shell, or exit out of the manager in the current shell by typing `exit`.
 
 ### Add a worker node to the swarm
 
