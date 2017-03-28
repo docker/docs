@@ -288,7 +288,7 @@ PowerShell Module as follows.
     Notepad $PROFILE
     ```
 
-Now, when you press tab after typing the first few letters, Docker commands such
+Open a new PowerShell session. Now, when you press tab after typing the first few letters, Docker commands such
 as `start`, `stop`, `run`, and their options, along with container and image
 names should now auto-complete.
 
