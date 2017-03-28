@@ -938,7 +938,11 @@ containers in the bare-metal machine's namespace and vise-versa.
 
 ### ports
 
-Expose ports. Either specify both ports (`HOST:CONTAINER`), or just the container
+Expose ports.
+
+#### Short syntax
+
+Either specify both ports (`HOST:CONTAINER`), or just the container
 port (a random host port will be chosen).
 
 > **Note**: When mapping ports in the `HOST:CONTAINER` format, you may experience
@@ -955,6 +959,28 @@ port (a random host port will be chosen).
      - "127.0.0.1:8001:8001"
      - "127.0.0.1:5000-5010:5000-5010"
      - "6060:6060/udp"
+
+#### Long syntax
+
+The long form syntax allows the configuration of additional fields that can't be
+expressed in the short form.
+
+- `target`: the publicly exposed port
+- `published`: the port inside the container
+- `protocol`: the port protocol (`tcp` or `udp`)
+- `mode`: `host` for publishing a host port on each node, or `ingress` for a swarm
+   mode port which will be load balanced.
+
+```none
+ports:
+  - target: 8080
+    published: 80
+    protocol: tcp
+    mode: host
+
+```
+
+> **Note:** The long syntax is new in v3.2
 
 ### secrets
 
@@ -1130,18 +1156,19 @@ more information.
 > [deploying a stack in swarm mode](/engine/reference/commandline/stack_deploy.md)
 > with a (version 3) Compose file.
 
-### volumes, volume\_driver
+### volumes
 
 > **Note**: The top-level
 > [`volumes` option](#volume-configuration-reference) defines
 > a named volume and references it from each service's `volumes` list. This replaces `volumes_from` in earlier versions of the Compose file format.
 
-Mount paths or named volumes, optionally specifying a path on the host machine
-(`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
-For [version 2 files](compose-versioning.md#version-2), named volumes need to be specified with the
+Mount host paths or named volumes. Named volumes must be defined in the
 [top-level `volumes` key](#volume-configuration-reference).
-When using [version 1](compose-versioning.md#version-1), the Docker Engine will create the named
-volume automatically if it doesn't exist.
+
+#### Short syntax
+
+Optionally specify a path on the host machine
+(`HOST:CONTAINER`), or an access mode (`HOST:CONTAINER:ro`).
 
 You can mount a relative path on the host, which will expand relative to
 the directory of the Compose configuration file being used. Relative paths
@@ -1163,22 +1190,38 @@ should always begin with `.` or `..`.
       # Named volume
       - datavolume:/var/lib/mysql
 
-If you do not use a host path, you may specify a `volume_driver`.
 
-    volume_driver: mydriver
+#### Long syntax
 
-There are several things to note, depending on which
-[Compose file version](compose-versioning.md#versioning) you're using:
+The long form syntax allows the configuration of additional fields that can't be
+expressed in the short form.
 
--   `volume_driver` is not supported at all in
-    [version 3](compose-versioning.md#version-3). Instead of setting the volume driver
-    on the service, define a volume using the
-    [top-level `volumes` option](#volume-configuration-reference)
-    and specify the driver there.
+- `type`: the mount type `volume` or `bind`
+- `source`: the source of the mount, a path on the host for a bind mount, or the
+  name of a volume defined in the
+  [top-level `volumes` key](#volume-configuration-reference)
+- `target`: the path in the container where the volume will be mounted
+- `read_only`: flag to set the volume as read-only
+- `bind`: configure additional bind options
+  - `propagation`: the propagation mode used for the bind
+- `volume`: configure additional volume options
+  - `nocopy`: flag to disable copying of data from a container when a volume is
+    created
 
--   No path expansion will be done if you have also specified a `volume_driver`.
-    For example, if you specify a mapping of `./foo:/data`, the `./foo` part
-    will be passed straight to the volume driver without being expanded.
+
+```none
+volumes:
+  - type: volume
+    source: mydata
+    target: /data
+    volume:
+      nocopy: true
+  - type: bind
+    source: ./static
+    target: /opt/app/static
+```
+
+> **Note:** The long syntax is new in v3.2
 
 See [Docker Volumes](/engine/userguide/dockervolumes.md) and
 [Volume Plugins](/engine/extend/plugins_volume.md) for more information.
