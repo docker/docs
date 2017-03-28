@@ -54,7 +54,7 @@ Edge channels, see the
   </tr>
   <tr valign="top">
   <td width="50%">
-  <a class="button outline-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (Stable)</a>
+  <a class="button outline-btn" href="https://download.docker.com/win/stable/InstallDocker.msi">Get Docker for Windows (Stable)</a><br><a href="https://download.docker.com/win/stable/InstallDocker.msi.sha256sum"><font color="#BDBDBD" size="-1">Checksum: InstallDocker.msi SHA256</font></a>
   </td>
   <td width="50%">
   <a class="button outline-btn" href="https://download.docker.com/win/edge/InstallDocker.msi">Get Docker for Windows (Edge)</a>
