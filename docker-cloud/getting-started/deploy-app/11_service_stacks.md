@@ -19,7 +19,7 @@ using the [stack commands in our API](/apidocs/docker-cloud.md#stacks).
 ## Service definitions in the stack file
 
 The services that you created in this tutorial form a stack with three services:
-the load-balancer, the web application and the redis cache.
+the load-balancer, the web application, and the redis cache.
 
 Look at the file called `docker-cloud.yml` in your quickstart to see the stack
 file that defines the three services (lb, web, redis) you created in the
@@ -79,4 +79,4 @@ $ docker-cloud up -f /usr/dockercloud/quickstart-python/docker-cloud.yml
 
 ## What's Next?
 
-Next, we'll do some [Data management with Volumes](12_data_management_with_volumes.md)
+Next, we'll do some [Data management with Volumes](12_data_management_with_volumes.md).
