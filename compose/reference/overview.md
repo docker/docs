@@ -33,6 +33,8 @@ Options:
   --skip-hostname-check       Don't check the daemon's hostname against the name specified
                               in the client certificate (for example if your docker host
                               is an IP address)
+  --project-directory PATH    Specify an alternate working directory
+                              (default: the path of the compose file)
 
 Commands:
   build              Build or rebuild services
@@ -43,6 +45,7 @@ Commands:
   events             Receive real time events from containers
   exec               Execute a command in a running container
   help               Get help on a command
+  images             List images
   kill               Kill containers
   logs               View output from containers
   pause              Pause services
