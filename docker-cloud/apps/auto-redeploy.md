@@ -50,7 +50,7 @@ You can activate or deactivate **autoredeploy** on a service after it has been 
 
 1. Click into the service detail page.
 2. Click **Edit**.
-3. Change the **autoredeploy** setting on the form to `true`
+3. Change the **autoredeploy** setting on the form to `true`.
 4. Click **Save changes**.
 
 
