@@ -67,7 +67,7 @@ i.fa.fa-outdent {
 
 .search-form {
     float: left;
-    margin: 10px 15px 0 15px!important;
+    margin: 10px 15px 0 0px!important;
     width: 210px;
     & input[type=text] {
         background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat;
@@ -187,7 +187,6 @@ input[type=text] {
     opacity: 1;
 }
 
-
 /*
   *
   * autocompleteResults  **********************************************************
@@ -204,7 +203,7 @@ div#autocompleteResults {
     padding: 20px 55px 15px 15px;
     margin: 10px 0 0 0;
     position: absolute;
-    max-width: 600px;
+    width: 600px!important;
     z-index: 9999;
 }
 
@@ -225,3 +224,21 @@ div#autocompleteResults span {
     font-weight: bold;
     font-size: large;
 }
+
+
+/*
+  *
+  * google-Results  **********************************************************
+  *
+  */
+
+
+// .cse .gsc-search-button input.gsc-search-button-v2, input.gsc-search-button-v2,input.gsc-search-button {
+//     width: auto!important
+//     height: auto!important;
+// }
+
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+    display: none!important;
+}
+
