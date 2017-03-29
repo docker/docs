@@ -166,11 +166,13 @@ section.section {
     height: 100%;
     padding-top: 20px;
     width: 255px;
+    min-height: 800px;
 }
 
 #sidebar-right.affix {
     top: 10px;
     position: fixed;
+    min-height: 800px;
 }
 
 .wrapper.right-open #sidebar-wrapper {
@@ -192,6 +194,7 @@ section.section {
     border-right: 1px solid rgba(204, 204, 204, 0.29);
     overflow-x: hidden;
     overflow-y: auto;
+    min-height: 800px;
     height: 100%;
     width: 270px;
     padding-top: 20px;
