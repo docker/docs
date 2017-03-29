@@ -91,6 +91,3 @@ program code and documentation code.
 
 * After a merge, [a master build](https://master.dockerproject.org/) is
   available almost immediately.
-
-* If you made a documentation change, you can see it at
-  [docs.master.dockerproject.org](http://docs.master.dockerproject.org/).
