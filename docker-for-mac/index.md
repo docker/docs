@@ -104,6 +104,8 @@ the menu bar.
 
 You can set the following runtime options.
 
+>**Note:** The above example shows a user signed in for integrated Docker Cloud access. This is currently available only on the [Edge channel](install.md#download-docker-for-mac). To learn more about the feature, see [Docker Cloud (Edge feature)](#docker-cloud-edge-feature).
+
 ### General
 
 ![Preferences](/docker-for-mac/images/settings.png)
@@ -356,9 +358,11 @@ distributed as Docker Images.
 
 ![Docker Store](images/docker-store.png)
 
-## Docker Cloud
+## Docker Cloud (Edge feature)
 
-You can access your Docker Cloud account from within Docker for Mac.
+>**Note:** Integrated Docker Cloud access is currently available only on the [Edge channel](install.md#download-docker-for-mac). On stable, you'll need to log onto [Docker Cloud](https://cloud.docker.com/) independently for now.
+
+You can access your [Docker Cloud](https://cloud.docker.com/) account from within Docker for Mac.
 
 ![Docker Cloud](images/docker-cloud.png)
 
