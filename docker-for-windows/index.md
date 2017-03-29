@@ -311,6 +311,8 @@ To get a popup menu with application options, right-click the whale:
 
 ![Docker for Windows popup menu](/docker-for-windows/images/config-popup-menu-win.png)
 
+>**Note:** The above example shows a user signed in for integrated Docker Cloud access. This is currently available only on the [Edge channel](install.md#download-docker-for-windows). To learn more about the feature, see [Docker Cloud (Edge feature)](#docker-cloud-edge-feature).
+
 The **Settings** dialogs provide options to allow Docker auto-start,
 automatically check for updates, share local drives with Docker containers,
 enable VPN compatibility, manage CPUs and memory Docker uses, restart Docker, or
@@ -614,11 +616,13 @@ distributed as Docker Images.
 
 ![Docker Store](images/docker-store.png)
 
-### Docker Cloud
+### Docker Cloud (Edge feature)
 
-You can access your Docker Cloud account from within Docker for Windows.
+You can access your [Docker Cloud](https://cloud.docker.com/) account from within Docker for Windows.
 
 ![Docker Cloud](images/docker-cloud.png)
+
+>**Note:** Integrated Docker Cloud access is currently available only on the [Edge channel](install.md#download-docker-for-windows).  On stable, you'll need to log onto [Docker Cloud](https://cloud.docker.com/) independently for now.
 
 From the Docker for Windows menu, sign in to Docker Cloud with your Docker ID,
 or create one.
