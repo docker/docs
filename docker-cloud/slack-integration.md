@@ -6,7 +6,7 @@ redirect_from:
 title: Set up Docker Cloud notifications in Slack
 ---
 
-Docker Cloud can integrate with your **Slack** team to provide notifications about stacks, services, containers and nodes.
+Docker Cloud can integrate with your **Slack** team to provide notifications about stacks, services, containers, and nodes.
 
 ## Set up a Slack integration
 
